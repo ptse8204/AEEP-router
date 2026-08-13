@@ -14,7 +14,7 @@ AEEP feasibility + economic policy
      selected route
           │
    ┌──────┼────────┬────────┬───────────┐
- Python  CLI      HTTP     MCP       delegate
+ Python  CLI      HTTP     MCP     host/delegate
                                       │
                               browser/model/GUI host
 ```
@@ -86,6 +86,10 @@ The modern path mirrors protocol version, method, tool name, and schema-authoriz
 
 Represents an execution surface owned by the host agent: browser, GUI, computer-use, model reasoning, or an unavailable native tool. AEEP returns instructions and a decision ID; the host reports the outcome later. To prevent arbitrary history injection, external reports are accepted only for the selected, feasible delegate and only once per decision/executor pair. Trusted out-of-band measurement uses `ActionProfiler` instead.
 
+### Host subscription
+
+`host` formalizes current-agent execution without calling a model API. It references a user-owned `SubscriptionResource`, returns `HOST_SELECTED`, and consumes provider-local `subscription_units`. Quota pressure changes the preference score or rejects an exhausted resource; it is never converted into a public cash value.
+
 ## Persistence
 
 SQLite provides a zero-service local deployment. Decisions and receipts are stored as validated JSON plus indexed lookup columns. The store can be replaced later by an interface-backed service.
@@ -105,15 +109,18 @@ All call the same service methods to prevent behavioral drift. Runtime approval 
 
 Cold-start manifests contain priors, not truth. `Router.benchmark` executes feasible alternatives sequentially and produces comparable observed receipts. Sequential execution reduces contention bias; explicit confirmation, normal hard constraints, and approval ceilings remain in force. Delegates and non-idempotent routes are skipped by default. Benchmarking is deliberately outside the model-facing tool surface so an agent cannot silently multiply paid calls.
 
+## Economic interoperability
+
+Versioned capabilities define what is offered; expiring quotes define price; signed receipts and validation results define delivery evidence. Local/remote registries load only providers relevant to the requested capability. Provider claims remain priors, while measured or attested observations drive reputation.
+
+Payment adapters sit behind an operator budget and a separate financial approval. The OSS ledger records reservation/capture/refund events but does not hold funds, create accounts, or clear between providers.
+
 ## Future extension points
 
-1. Async live quote adapters.
-2. Capability registry and semantic versioning.
-3. Confidence intervals and contextual bandit routing.
-4. x402/MPP/payment adapters.
-5. Signed receipts and provider reputation.
-6. Workflow-level optimization across action DAGs.
-7. Sandboxed hosted executors.
-8. Organization policy and private catalogs.
-9. Counterfactual profiler that recognizes waste in completed traces.
-10. Richer OpenTelemetry semantic events, exporters, and trace-to-action correlation.
+1. Confidence intervals and contextual bandit routing.
+2. Workflow-level optimization across action DAGs.
+3. Sandboxed hosted executors.
+4. Organization policy services and private catalogs.
+5. Public-key identity and cross-organization attestation.
+6. Hosted marketplace accounts, custody, payouts, and fraud controls.
+7. Richer OpenTelemetry semantic events, exporters, and trace-to-action correlation.

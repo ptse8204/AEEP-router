@@ -20,7 +20,7 @@ def _init(tmp_path: Path) -> Path:
 
 def test_version_list_policies_show_and_dry_run(tmp_path):
     manifest = _init(tmp_path)
-    assert runner.invoke(app, ["version"]).stdout.strip() == "0.1.0"
+    assert runner.invoke(app, ["version"]).stdout.strip() == "0.2.0"
 
     listed = runner.invoke(app, ["list", "-m", str(manifest), "--compact"])
     assert listed.exit_code == 0
@@ -275,5 +275,6 @@ def test_force_executor_and_benchmark_cli(tmp_path):
     )
     assert benchmarked.exit_code == 0, benchmarked.output
     payload = json.loads(benchmarked.stdout)
-    assert len(payload["entries"]) == 2
-    assert all(item["receipt_id"] for item in payload["entries"])
+    assert len(payload["entries"]) == 3
+    assert payload["entries"][2]["skipped_reason"]
+    assert all(item["receipt_id"] for item in payload["entries"][:2])

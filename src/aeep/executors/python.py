@@ -7,7 +7,7 @@ import importlib
 import inspect
 import time
 from collections.abc import Callable
-from typing import Any
+from typing import Any, cast
 
 import psutil
 
@@ -29,7 +29,7 @@ def load_callable(path: str) -> Callable[..., Any]:
         raise ConfigurationError(f"cannot import Python callable {path!r}: {exc}") from exc
     if not callable(value):
         raise ConfigurationError(f"configured object {path!r} is not callable")
-    return value
+    return cast(Callable[..., Any], value)
 
 
 class PythonExecutor(BaseExecutor):

@@ -1,0 +1,236 @@
+{
+  "$defs": {
+    "CounterfactualAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "executor_kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "estimated_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "estimated_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Score"
+        },
+        "estimated_cash_saving_usd": {
+          "default": 0.0,
+          "title": "Estimated Cash Saving Usd",
+          "type": "number"
+        },
+        "estimated_latency_saving_ms": {
+          "default": 0.0,
+          "title": "Estimated Latency Saving Ms",
+          "type": "number"
+        },
+        "conserves_subscription_units": {
+          "default": 0.0,
+          "title": "Conserves Subscription Units",
+          "type": "number"
+        }
+      },
+      "required": [
+        "executor_id",
+        "executor_kind",
+        "estimated_resources"
+      ],
+      "title": "CounterfactualAlternative",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "receipt_id": {
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "selected_executor_id": {
+      "title": "Selected Executor Id",
+      "type": "string"
+    },
+    "actual_resources": {
+      "$ref": "#/$defs/ResourceVector"
+    },
+    "alternatives": {
+      "items": {
+        "$ref": "#/$defs/CounterfactualAlternative"
+      },
+      "title": "Alternatives",
+      "type": "array"
+    },
+    "best_alternative_executor_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Best Alternative Executor Id"
+    },
+    "potential_cash_saving_usd": {
+      "default": 0.0,
+      "title": "Potential Cash Saving Usd",
+      "type": "number"
+    },
+    "potential_cash_saving_percent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Potential Cash Saving Percent"
+    },
+    "avoidable_subscription_units": {
+      "default": 0.0,
+      "title": "Avoidable Subscription Units",
+      "type": "number"
+    },
+    "subscription_pressure": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/QuotaState"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "explanation": {
+      "default": "",
+      "title": "Explanation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "decision_id",
+    "selected_executor_id",
+    "actual_resources"
+  ],
+  "title": "CounterfactualReport",
+  "type": "object"
+}

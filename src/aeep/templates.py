@@ -88,9 +88,6 @@ def extract_path(data: Any, path: str | None) -> Any:
         parts = [part.replace("~1", "/").replace("~0", "~") for part in normalized.split("/")]
         current = data
         for part in parts:
-            if isinstance(current, list):
-                current = current[int(part)]
-            else:
-                current = current[part]
+            current = current[int(part)] if isinstance(current, list) else current[part]
         return current
     return get_path(data, normalized)

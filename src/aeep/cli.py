@@ -28,6 +28,7 @@ from .models import (
     ActionRequest,
     ExecutionStatus,
     ExternalOutcomeReport,
+    QuoteRequest,
     ResourceVector,
     SideEffect,
 )
@@ -41,7 +42,9 @@ app = typer.Typer(
     pretty_exceptions_enable=False,
 )
 tools_app = typer.Typer(help="Export AEEP as native tools for agent providers.")
+import_app = typer.Typer(help="Import existing CLI, MCP, or OpenAPI capabilities.")
 app.add_typer(tools_app, name="tools")
+app.add_typer(import_app, name="import")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -220,7 +223,7 @@ def doctor(
                 key = "command" if transport == "stdio" else "url"
                 ok = isinstance(spec.config.get(key), str)
                 detail = f"{transport} {key} configured" if ok else f"missing config.{key}"
-            elif spec.kind.value == "delegate":
+            elif spec.kind.value in {"delegate", "host"}:
                 ok = isinstance(spec.config.get("instructions"), str)
                 detail = "instructions configured" if ok else "missing config.instructions"
             checks.append({"executor_id": spec.id, "kind": spec.kind.value, "ok": ok, "detail": detail})
@@ -282,6 +285,220 @@ def policies(
             _run(router.close())
 
 
+@app.command()
+def metrics(
+    limit: int = typer.Option(10_000, "--limit", min=1, max=10_000),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Summarize execution savings and subscription capacity conserved."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(router.metrics(limit=limit), compact=compact)
+    except AEEPError as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command()
+def quote(
+    capability: str = typer.Argument(...),
+    input_value: str = typer.Option("{}", "--input", "-i", help="JSON, @file, or -."),
+    executor_id: list[str] | None = typer.Option(None, "--executor-id"),
+    policy: str = typer.Option("balanced", "--policy", "-p"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Request bounded static/provider quotes without accepting payment."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        request = QuoteRequest(
+            action=ActionRequest(
+                capability=capability,
+                input=_mapping(input_value, name="input"),
+                policy=policy,
+            ),
+            executor_ids=executor_id,
+        )
+        _emit({"quotes": [item.model_dump(mode="json") for item in router.quotes(request)]}, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("accept-quote")
+def accept_quote(
+    quote_id: str = typer.Argument(...),
+    action_id: str = typer.Argument(...),
+    max_amount_usd: float | None = typer.Option(None, "--max-amount-usd", min=0),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Explicitly accept one stored quote; this is not exposed as a model tool."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(
+            router.accept_quote(
+                quote_id,
+                action_id=action_id,
+                max_amount_usd=max_amount_usd,
+            ),
+            compact=compact,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("sign-receipt")
+def sign_receipt(
+    receipt_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Sign a persisted receipt with the operator-configured local identity."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(router.signed_receipt(receipt_id), compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command()
+def counterfactual(
+    receipt_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Show feasible routes that could have avoided observed cost or scarcity."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(router.counterfactual(receipt_id), compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command()
+def reputation(
+    provider_id: str = typer.Argument(...),
+    capability: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Aggregate measured or verified outcomes; provider claims are excluded."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(router.reputation(provider_id, capability), compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("reserve-payment")
+def reserve_payment(
+    quote_id: str = typer.Argument(...),
+    action_id: str = typer.Argument(...),
+    approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    human_approved: bool = typer.Option(False, "--human-approved"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Reserve funds under the operator budget and financial approval ceiling."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        result = _run(
+            _await_and_close(
+                router,
+                router.reserve_quote_payment(
+                    quote_id,
+                    action_id=action_id,
+                    approved_side_effect=approve,
+                    human_approved=human_approved,
+                ),
+            )
+        )
+        router = None
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("capture-payment")
+def capture_payment(
+    reservation_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Capture a previously approved reservation after delivery."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        result = _run(_await_and_close(router, router.capture_payment(reservation_id)))
+        router = None
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("refund-payment")
+def refund_payment(
+    capture_id: str = typer.Argument(...),
+    amount_usd: float = typer.Argument(..., min=0),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Refund a captured payment through the configured adapter."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        result = _run(
+            _await_and_close(router, router.refund_payment(capture_id, amount_usd))
+        )
+        router = None
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
 # Typer does not provide reusable option groups, so route/run deliberately mirror
 # the same core options. Stable names matter for agent skills and shell scripts.
 @app.command()
@@ -322,7 +539,8 @@ def route(
             max_side_effect=max_side_effect,
         )
         router = Router.from_manifest(manifest)
-        decision = router.route(request)
+        decision = _run(_await_and_close(router, router.route_with_discovery(request)))
+        router = None
         _emit(decision, compact=compact)
         if decision.selected_executor_id is None:
             raise typer.Exit(code=3)
@@ -493,13 +711,19 @@ def history(
     try:
         router = Router.from_manifest(manifest)
         if receipts:
-            values = router.store.list_receipts(
+            receipt_values = router.store.list_receipts(
                 limit=limit, executor_id=executor_id, capability=capability
             )
-            _emit({"receipts": [item.model_dump(mode="json") for item in values]}, compact=compact)
+            _emit(
+                {"receipts": [item.model_dump(mode="json") for item in receipt_values]},
+                compact=compact,
+            )
         else:
-            values = router.store.list_decisions(limit=limit)
-            _emit({"decisions": [item.model_dump(mode="json") for item in values]}, compact=compact)
+            decision_values = router.store.list_decisions(limit=limit)
+            _emit(
+                {"decisions": [item.model_dump(mode="json") for item in decision_values]},
+                compact=compact,
+            )
     except AEEPError as exc:
         _fail(exc, compact=compact)
     finally:
@@ -575,7 +799,7 @@ def record(
 
 @app.command("tool-call")
 def tool_call(
-    name: str = typer.Argument(..., help="One of the four exported AEEP tool names."),
+    name: str = typer.Argument(..., help="One of the exported AEEP tool names."),
     arguments: str = typer.Option("{}", "--arguments", "-a", help="JSON/YAML object, @file, or -."),
     approve: SideEffect = typer.Option(
         SideEffect.READ,
@@ -626,11 +850,117 @@ def tools_export(
     ),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
-    """Export the four AEEP agent tools in a provider-native declaration format."""
+    """Export the AEEP agent tools in a provider-native declaration format."""
 
     try:
         _emit({"tools": export_tools(format)}, compact=compact)  # type: ignore[arg-type]
     except ValueError as exc:
+        _fail(exc, compact=compact)
+
+
+@app.command()
+def publish(
+    provider_id: str = typer.Option(..., "--provider-id"),
+    name: str = typer.Option(..., "--name"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    output: Path | None = typer.Option(None, "--output", "-o"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Generate a local provider descriptor; network publication is registry-specific."""
+
+    from .sdk import provider_from_manifest
+
+    try:
+        parsed, _ = load_manifest(manifest)
+        descriptor = provider_from_manifest(parsed, provider_id=provider_id, name=name)
+        if output is not None:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(descriptor.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        _emit(descriptor, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@import_app.command("cli")
+def import_cli_command(
+    provider_id: str = typer.Option(..., "--provider-id"),
+    capability: str = typer.Option(..., "--capability"),
+    argv: str = typer.Option(..., "--argv", help="JSON argv array; shell strings are rejected."),
+    input_schema: str | None = typer.Option(None, "--input-schema"),
+    output_schema: str | None = typer.Option(None, "--output-schema"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Create a provider descriptor for an argv-only JSON-stdin command."""
+
+    from .sdk import import_cli
+
+    try:
+        argv_value = _read_data(argv, default=[])
+        if not isinstance(argv_value, list) or not all(
+            isinstance(item, str) for item in argv_value
+        ):
+            raise typer.BadParameter("--argv must be a JSON string array")
+        descriptor = import_cli(
+            provider_id=provider_id,
+            capability_name=capability,
+            argv=argv_value,
+            input_schema=_mapping(input_schema, name="input-schema") if input_schema else None,
+            output_schema=_mapping(output_schema, name="output-schema") if output_schema else None,
+        )
+        _emit(descriptor, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@import_app.command("mcp")
+def import_mcp_command(
+    provider_id: str = typer.Option(..., "--provider-id"),
+    capability: str = typer.Option(..., "--capability"),
+    tool: str = typer.Option(..., "--tool"),
+    transport: str = typer.Option("stdio", "--transport"),
+    endpoint: str = typer.Option(..., "--endpoint"),
+    input_schema: str | None = typer.Option(None, "--input-schema"),
+    output_schema: str | None = typer.Option(None, "--output-schema"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Create a provider descriptor for one reviewed MCP tool."""
+
+    from .sdk import import_mcp
+
+    try:
+        if transport not in {"stdio", "http", "streamable_http", "streamable-http"}:
+            raise typer.BadParameter("transport must be stdio or streamable HTTP")
+        descriptor = import_mcp(
+            provider_id=provider_id,
+            capability_name=capability,
+            tool=tool,
+            transport=transport,
+            endpoint=endpoint,
+            input_schema=_mapping(input_schema, name="input-schema") if input_schema else None,
+            output_schema=_mapping(output_schema, name="output-schema") if output_schema else None,
+        )
+        _emit(descriptor, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@import_app.command("openapi")
+def import_openapi_command(
+    path: Path = typer.Argument(...),
+    provider_id: str = typer.Option(..., "--provider-id"),
+    base_url: str | None = typer.Option(None, "--base-url"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Create HTTP executor descriptors from an OpenAPI document."""
+
+    from .sdk import import_openapi
+
+    try:
+        _emit(
+            import_openapi(path, provider_id=provider_id, base_url=base_url),
+            compact=compact,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
 
 

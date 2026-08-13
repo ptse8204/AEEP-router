@@ -62,28 +62,27 @@ class HTTPExecutor(BaseExecutor):
                 timeout=timeout,
                 follow_redirects=follow_redirects,
                 trust_env=bool(config.get("trust_proxy_env", False)),
-            ) as client:
-                async with client.stream(
-                    method,
-                    url,
-                    headers=headers,
-                    params=params,
-                    json=json_body,
-                    content=content,
-                ) as response:
-                    chunks: list[bytes] = []
-                    total = 0
-                    async for chunk in response.aiter_bytes():
-                        total += len(chunk)
-                        if total > max_response_bytes:
-                            raise ConfigurationError(
-                                "HTTP response exceeds configured max_response_bytes"
-                            )
-                        chunks.append(chunk)
-                    body = b"".join(chunks)
-                    status_code = response.status_code
-                    content_type = response.headers.get("content-type", "")
-                    cost_header = response.headers.get(str(config.get("cost_header", ""))) if config.get("trust_cost_header") else None
+            ) as client, client.stream(
+                method,
+                url,
+                headers=headers,
+                params=params,
+                json=json_body,
+                content=content,
+            ) as response:
+                chunks: list[bytes] = []
+                total = 0
+                async for chunk in response.aiter_bytes():
+                    total += len(chunk)
+                    if total > max_response_bytes:
+                        raise ConfigurationError(
+                            "HTTP response exceeds configured max_response_bytes"
+                        )
+                    chunks.append(chunk)
+                body = b"".join(chunks)
+                status_code = response.status_code
+                content_type = response.headers.get("content-type", "")
+                cost_header = response.headers.get(str(config.get("cost_header", ""))) if config.get("trust_cost_header") else None
             elapsed_ms = (time.perf_counter() - started) * 1000.0
             resources = ResourceVector(
                 monetary_usd=(
@@ -143,7 +142,7 @@ class HTTPExecutor(BaseExecutor):
                 error_type="TimeoutError",
                 error_message=f"HTTP request exceeded {timeout:g} seconds",
             )
-        except (httpx.TimeoutException,) as exc:
+        except httpx.TimeoutException as exc:
             elapsed_ms = (time.perf_counter() - started) * 1000.0
             return RawExecution(
                 status=ExecutionStatus.TIMEOUT,

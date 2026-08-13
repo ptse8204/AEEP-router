@@ -249,6 +249,13 @@
           ],
           "default": null,
           "title": "Traceparent"
+        },
+        "subscription_quotas": {
+          "additionalProperties": {
+            "$ref": "#/$defs/SubscriptionQuota"
+          },
+          "title": "Subscription Quotas",
+          "type": "object"
         }
       },
       "title": "ActionContext",
@@ -323,6 +330,29 @@
         },
         "estimate": {
           "$ref": "#/$defs/RouteEstimate"
+        },
+        "resource_pool": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Pool"
+        },
+        "subscription_quota": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SubscriptionQuota"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "score": {
           "anyOf": [
@@ -462,6 +492,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -530,6 +561,12 @@
           "default": 0.25,
           "minimum": 0.0,
           "title": "Compute",
+          "type": "number"
+        },
+        "subscription": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Subscription",
           "type": "number"
         },
         "reliability": {
@@ -603,6 +640,13 @@
           "title": "Resource Scarcity Multiplier",
           "type": "number"
         },
+        "subscription_scarcity_multiplier": {
+          "default": 1.0,
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "title": "Subscription Scarcity Multiplier",
+          "type": "number"
+        },
         "prefer_local_bonus": {
           "default": 0.05,
           "maximum": 1.0,
@@ -618,6 +662,31 @@
       },
       "title": "PolicyConfig",
       "type": "object"
+    },
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
     },
     "ReferenceScales": {
       "additionalProperties": false,
@@ -738,6 +807,13 @@
           "minimum": 0,
           "title": "Output Tokens",
           "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
         }
       },
       "title": "ResourceVector",
@@ -807,6 +883,11 @@
         "compute": {
           "default": 0.0,
           "title": "Compute",
+          "type": "number"
+        },
+        "subscription": {
+          "default": 0.0,
+          "title": "Subscription",
           "type": "number"
         },
         "reliability": {
@@ -898,6 +979,41 @@
       ],
       "title": "SideEffect",
       "type": "string"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
     }
   },
   "additionalProperties": false,

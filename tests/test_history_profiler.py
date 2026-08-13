@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 
-import pytest
+from conftest import manifest_with, python_spec
 
 from aeep.estimator import HistoricalEstimator
 from aeep.models import (
@@ -11,12 +11,9 @@ from aeep.models import (
     ExecutionStatus,
     ExecutorKind,
     ResourceVector,
-    RouteEstimate,
 )
 from aeep.profiler import ActionProfiler, approximate_tokens
 from aeep.router import Router
-
-from conftest import manifest_with, python_spec
 
 
 def test_token_estimate_is_stable():

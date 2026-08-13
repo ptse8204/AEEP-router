@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Any, Iterator
+from typing import Any
 
-try:
-    from opentelemetry import trace
-    from opentelemetry.trace import Span
-except ImportError:  # pragma: no cover - opentelemetry-api is a declared dependency
-    trace = None
-    Span = Any  # type: ignore[misc,assignment]
+from opentelemetry import trace
+from opentelemetry.trace import Span
 
 
 def _safe_attribute(value: Any) -> str | bool | int | float | None:
@@ -21,10 +18,7 @@ def _safe_attribute(value: Any) -> str | bool | int | float | None:
 
 @contextmanager
 def start_span(name: str, attributes: dict[str, Any] | None = None) -> Iterator[Span | None]:
-    if trace is None:
-        yield None
-        return
-    tracer = trace.get_tracer("aeep", "0.1.0")
+    tracer = trace.get_tracer("aeep", "0.2.0")
     with tracer.start_as_current_span(name) as span:
         for key, value in (attributes or {}).items():
             safe = _safe_attribute(value)

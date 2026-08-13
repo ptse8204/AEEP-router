@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
-
 from .models import (
     EstimateSource,
     ExecutionReceipt,
@@ -24,7 +22,12 @@ class HistoricalEstimator:
         receipts = [
             receipt
             for receipt in self.store.receipts_for_executor(spec.id, limit=200)
-            if receipt.status not in {ExecutionStatus.DELEGATED, ExecutionStatus.UNKNOWN}
+            if receipt.status
+            not in {
+                ExecutionStatus.DELEGATED,
+                ExecutionStatus.HOST_SELECTED,
+                ExecutionStatus.UNKNOWN,
+            }
         ]
         if not receipts:
             return spec.estimate.model_copy(deep=True)
@@ -52,7 +55,9 @@ class HistoricalEstimator:
         resource = receipts[0].actual_resources
         success_ewma = (
             1.0
-            if receipts[0].status == ExecutionStatus.SUCCESS and receipts[0].output_valid is not False
+            if receipts[0].status == ExecutionStatus.SUCCESS
+            and receipts[0].output_valid is not False
+            and receipts[0].task_valid is not False
             else 0.0
         )
         valid_samples: list[bool] = []
@@ -62,7 +67,9 @@ class HistoricalEstimator:
             resource = _blend_resources(resource, receipt.actual_resources, alpha)
             succeeded = (
                 1.0
-                if receipt.status == ExecutionStatus.SUCCESS and receipt.output_valid is not False
+                if receipt.status == ExecutionStatus.SUCCESS
+                and receipt.output_valid is not False
+                and receipt.task_valid is not False
                 else 0.0
             )
             success_ewma = _blend(success_ewma, succeeded, alpha)
@@ -98,5 +105,5 @@ def _blend_resources(
     values: dict[str, float | int] = {}
     for field in ResourceVector.model_fields:
         value = _blend(float(getattr(a, field)), float(getattr(b, field)), weight_b)
-        values[field] = int(round(value)) if field in integer_fields else value
-    return ResourceVector(**values)
+        values[field] = round(value) if field in integer_fields else value
+    return ResourceVector.model_validate(values)

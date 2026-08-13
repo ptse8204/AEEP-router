@@ -1,15 +1,12 @@
 from __future__ import annotations
 
-import os
-
 import pytest
+from conftest import python_spec
 
 from aeep.config import load_manifest, write_default_manifest
 from aeep.errors import ConfigurationError, InputValidationError
 from aeep.registry import Registry, validate_json
 from aeep.templates import extract_path, render, render_string
-
-from conftest import python_spec
 
 
 def test_template_preserves_full_placeholder_type(monkeypatch):

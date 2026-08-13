@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 
 import pytest
+from conftest import manifest_with, python_spec
 
 from aeep.errors import ApprovalRequired, NoRouteError
 from aeep.models import (
@@ -18,8 +19,6 @@ from aeep.models import (
     SideEffect,
 )
 from aeep.router import Router
-
-from conftest import manifest_with, python_spec
 
 
 @pytest.mark.asyncio

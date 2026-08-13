@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — 2026-08-12
+
+- subscription resources, explicit quota pressure, host executors, and BYOS skills/examples;
+- versioned capabilities, quotes and acceptance, signed receipts, validators, and trust observations;
+- local/remote provider registries with lazy capability discovery and measured reputation;
+- counterfactual reports and subscription-aware economic metrics;
+- payment adapter, agent budget, reservation/capture/refund, and local ledger contracts;
+- provider SDK plus CLI, MCP, and OpenAPI importers and local descriptor publication;
+- six shared MCP/CLI/provider tools, with financial operations kept outside model control.
+
 ## 0.1.0 — 2026-08-10
 
 Initial working alpha:

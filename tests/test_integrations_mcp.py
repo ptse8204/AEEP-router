@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import asyncio
-import json
 import os
 import sys
 from pathlib import Path
@@ -28,7 +27,7 @@ from aeep.router import Router
 )
 def test_tool_schema_exports(format, key):
     tools = export_tools(format)
-    assert len(tools) == 4
+    assert len(tools) == 6
     assert key in tools[0]
 
 
@@ -63,7 +62,7 @@ def test_protocol_modern_discover_and_list(tmp_path):
                 "params": {"_meta": meta},
             }
         )
-        assert len(listed["result"]["tools"]) == 4
+        assert len(listed["result"]["tools"]) == 6
         assert listed["result"]["resultType"] == "complete"
         assert listed["result"]["ttlMs"] > 0
         assert listed["result"]["cacheScope"] == "private"
@@ -128,9 +127,9 @@ def test_execute_tool_schema_does_not_expose_self_approval_controls():
 
 @pytest.mark.asyncio
 async def test_model_arguments_cannot_self_approve_write(text_schema, stats_schema):
-    from aeep.models import ActionConstraints, PolicyConfig, SideEffect
-
     from conftest import manifest_with, python_spec
+
+    from aeep.models import ActionConstraints, PolicyConfig, SideEffect
 
     writer = python_spec(
         "writer",

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import sys
 import textwrap
 import threading
@@ -9,11 +8,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 import pytest
+from conftest import manifest_with
 from fastapi.testclient import TestClient
 
 from aeep.config import write_default_manifest
-from aeep.executors.mcp import _extract_result, _usage_from_meta
 from aeep.errors import ProtocolError
+from aeep.executors.mcp import _extract_result, _usage_from_meta
 from aeep.mcp.client import LEGACY_VERSION, MODERN_VERSION, MCPHTTPClient, MCPStdioClient
 from aeep.mcp.headers import encode_header_value, tool_header_bindings
 from aeep.mcp.server import create_http_app
@@ -27,9 +27,6 @@ from aeep.models import (
     SideEffect,
 )
 from aeep.router import Router
-
-from conftest import manifest_with
-
 
 INPUT = {
     "type": "object",
@@ -134,7 +131,7 @@ class _MCPHandler(BaseHTTPRequestHandler):
     oversized = False
     last_headers: dict[str, str] = {}
 
-    def do_POST(self):  # noqa: N802
+    def do_POST(self):
         length = int(self.headers.get("content-length", "0"))
         message = json.loads(self.rfile.read(length) or b"{}")
         method = message.get("method")
@@ -325,7 +322,7 @@ def test_create_http_app_auth_and_modern_header_validation(tmp_path):
         )
         assert response.status_code == 200
         result = response.json()["result"]
-        assert len(result["tools"]) == 4
+        assert len(result["tools"]) == 6
         assert result["resultType"] == "complete"
         assert result["ttlMs"] > 0
 

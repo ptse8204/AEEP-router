@@ -12,13 +12,24 @@ from aeep.integrations import export_tools
 from aeep.models import (
     ActionRequest,
     BenchmarkResult,
+    CapabilityDefinition,
+    CounterfactualReport,
+    EconomicMetrics,
     ExecutionReceipt,
     ExecutorSpec,
     ExternalOutcomeReport,
     Manifest,
+    Observation,
+    PaymentReservation,
     PolicyConfig,
+    ProviderDescriptor,
+    Quote,
+    QuoteAcceptance,
+    QuoteRequest,
     ResourceVector,
     RouteDecision,
+    SignedExecutionReceipt,
+    SubscriptionResource,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,13 +38,24 @@ SCHEMA_DIR = ROOT / "schemas"
 MODEL_FILES = {
     "action-request.schema.json": ActionRequest,
     "benchmark-result.schema.json": BenchmarkResult,
+    "capability-definition.schema.json": CapabilityDefinition,
+    "counterfactual-report.schema.json": CounterfactualReport,
+    "economic-metrics.schema.json": EconomicMetrics,
     "execution-receipt.schema.json": ExecutionReceipt,
     "executor-spec.schema.json": ExecutorSpec,
     "external-outcome-report.schema.json": ExternalOutcomeReport,
     "manifest.schema.json": Manifest,
+    "observation.schema.json": Observation,
+    "payment-reservation.schema.json": PaymentReservation,
     "policy.schema.json": PolicyConfig,
+    "provider-descriptor.schema.json": ProviderDescriptor,
+    "quote.schema.json": Quote,
+    "quote-acceptance.schema.json": QuoteAcceptance,
+    "quote-request.schema.json": QuoteRequest,
     "resource-vector.schema.json": ResourceVector,
     "route-decision.schema.json": RouteDecision,
+    "signed-execution-receipt.schema.json": SignedExecutionReceipt,
+    "subscription-resource.schema.json": SubscriptionResource,
 }
 
 TOOL_FILES = {

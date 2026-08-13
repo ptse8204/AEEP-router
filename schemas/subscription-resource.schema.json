@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
+    "SubscriptionAccess": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "host",
+          "enum": [
+            "host",
+            "cli",
+            "mcp"
+          ],
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "title": "SubscriptionAccess",
+      "type": "object"
+    },
+    "SubscriptionCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "reasoning": {
+          "default": false,
+          "title": "Reasoning",
+          "type": "boolean"
+        },
+        "coding": {
+          "default": false,
+          "title": "Coding",
+          "type": "boolean"
+        },
+        "browser": {
+          "default": false,
+          "title": "Browser",
+          "type": "boolean"
+        },
+        "computer_use": {
+          "default": false,
+          "title": "Computer Use",
+          "type": "boolean"
+        },
+        "custom": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Custom",
+          "type": "array"
+        }
+      },
+      "title": "SubscriptionCapabilities",
+      "type": "object"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A resource the user already owns; it is never represented as money.",
+  "properties": {
+    "id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "const": "subscription",
+      "default": "subscription",
+      "title": "Kind",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "product": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Product",
+      "type": "string"
+    },
+    "access": {
+      "$ref": "#/$defs/SubscriptionAccess"
+    },
+    "quota": {
+      "$ref": "#/$defs/SubscriptionQuota"
+    },
+    "capabilities": {
+      "$ref": "#/$defs/SubscriptionCapabilities"
+    }
+  },
+  "required": [
+    "id",
+    "provider",
+    "product"
+  ],
+  "title": "SubscriptionResource",
+  "type": "object"
+}

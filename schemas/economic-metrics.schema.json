@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "decisions": {
+      "default": 0,
+      "title": "Decisions",
+      "type": "integer"
+    },
+    "successful_actions": {
+      "default": 0,
+      "title": "Successful Actions",
+      "type": "integer"
+    },
+    "failed_actions": {
+      "default": 0,
+      "title": "Failed Actions",
+      "type": "integer"
+    },
+    "model_actions_avoided": {
+      "default": 0,
+      "title": "Model Actions Avoided",
+      "type": "integer"
+    },
+    "model_turns_avoided": {
+      "default": 0,
+      "title": "Model Turns Avoided",
+      "type": "integer"
+    },
+    "context_tokens_avoided": {
+      "default": 0,
+      "title": "Context Tokens Avoided",
+      "type": "integer"
+    },
+    "subscription_capacity_conserved": {
+      "default": 0.0,
+      "title": "Subscription Capacity Conserved",
+      "type": "number"
+    },
+    "local_cpu_ms_consumed": {
+      "default": 0.0,
+      "title": "Local Cpu Ms Consumed",
+      "type": "number"
+    },
+    "api_money_spent_usd": {
+      "default": 0.0,
+      "title": "Api Money Spent Usd",
+      "type": "number"
+    },
+    "wall_clock_time_saved_ms": {
+      "default": 0.0,
+      "title": "Wall Clock Time Saved Ms",
+      "type": "number"
+    },
+    "browser_actions_avoided": {
+      "default": 0,
+      "title": "Browser Actions Avoided",
+      "type": "integer"
+    },
+    "mcp_calls_avoided": {
+      "default": 0,
+      "title": "Mcp Calls Avoided",
+      "type": "integer"
+    },
+    "cli_substitutions": {
+      "default": 0,
+      "title": "Cli Substitutions",
+      "type": "integer"
+    },
+    "total_money_spent_usd": {
+      "default": 0.0,
+      "title": "Total Money Spent Usd",
+      "type": "number"
+    },
+    "cost_per_successful_action_usd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Per Successful Action Usd"
+    }
+  },
+  "title": "EconomicMetrics",
+  "type": "object"
+}

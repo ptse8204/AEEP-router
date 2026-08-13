@@ -8,7 +8,7 @@ AEEP answers a question most agent runtimes do not currently ask:
 
 It is not an API marketplace, model router, or MCP gateway by itself. It is the decision and measurement layer that can sit above all three.
 
-> Project status: **working alpha**. The CLI, Python API, SQLite receipt learning, local Python/command executors, bounded HTTP executor, dual-era MCP client/server (stateless `2026-07-28` plus legacy initialized MCP), delegated host-agent route, provider tool exports, hard safety gates, conservative fallback, route calibration, privacy-preserving persistence, examples, and test suite are implemented. Interfaces may still change before `1.0`.
+> Project status: **working 0.2 alpha**. Local routing, subscription-aware host execution, capability quotes, validators, signed receipts, lazy provider discovery, counterfactual profiling, payment/budget interfaces, provider importers, and the test suite are implemented. Hosted marketplace accounts, custody, payouts, fraud systems, and clearing remain separate services.
 
 ## Why this exists
 
@@ -238,12 +238,21 @@ Controls what enters SQLite. Full action input and context are redacted by defau
 ## Manifest example
 
 ```yaml
-version: "0.1"
+version: "0.2"
 database: .aeep/aeep.db
 default_policy: balanced
 persistence:
   store_action_inputs: false
   store_action_context: false
+
+resources:
+  - id: openai.chatgpt
+    kind: subscription
+    provider: openai
+    product: chatgpt
+    access: {mode: host}
+    quota: {state: normal, confidence: 0.7, source: user}
+    capabilities: {reasoning: true, coding: true, browser: true}
 
 policies:
   constrained_laptop:
@@ -333,7 +342,8 @@ executors:
 
   - id: host.browser-current-branch
     capability: github.current_branch
-    kind: delegate
+    kind: host
+    resource_pool: openai.chatgpt
     description: Use the host agent's existing browser state.
     input_schema:
       type: object
@@ -345,6 +355,7 @@ executors:
       resources:
         latency_ms: 6000
         context_tokens: 3000
+        subscription_units: 1
       success_probability: 0.90
       quality_score: 0.92
       risk_score: 0.08
@@ -419,7 +430,7 @@ aeep run github.issue.create \
   --approve write
 ```
 
-Executors not marked `safe_to_auto_execute` require the separate `--approve-unsafe-executor` flag. Delegates only return a plan; the host runtime remains responsible for its own approval controls.
+Executors not marked `safe_to_auto_execute` require the separate `--approve-unsafe-executor` flag. Host/delegate routes only return a plan; the host runtime remains responsible for its own approval controls.
 
 ## Calibration and counterfactual comparison
 
@@ -436,12 +447,16 @@ This command can incur API charges and disclose the same input to multiple provi
 
 ## Agent integration
 
-AEEP exposes the same four operations everywhere:
+AEEP exposes the same six operations everywhere:
 
 1. `aeep_list_capabilities`
 2. `aeep_route_action`
 3. `aeep_execute_action`
 4. `aeep_record_outcome`
+5. `aeep_request_quotes`
+6. `aeep_get_metrics`
+
+Quote acceptance and every payment operation remain operator-only CLI/embedded APIs and are intentionally absent from model-facing schemas.
 
 ### MCP: ChatGPT/Codex, Claude, OpenClaw, and other clients
 
@@ -514,7 +529,7 @@ This is useful for agents that can run a CLI but do not expose a local MCP clien
 
 ### Agent Skills / `SKILL.md`
 
-A ready-to-copy skill is included at [`skills/aeep-router/SKILL.md`](skills/aeep-router/SKILL.md). It teaches an agent when to inspect routes, when to execute, how to pass quota state, and how to report browser/computer-use outcomes.
+A tiny BYOS skill is included at [`skills/aeep-minimal/SKILL.md`](skills/aeep-minimal/SKILL.md); the fuller reference skill remains at [`skills/aeep-router/SKILL.md`](skills/aeep-router/SKILL.md). Installation paths for Codex/ChatGPT and Claude Code are in [`docs/BYOS.md`](docs/BYOS.md).
 
 The skill invokes `python -m aeep` rather than relying on shell-specific aliases. It can be adapted to OpenAI/Codex skills, Claude Skills, and OpenClaw skills.
 
@@ -534,7 +549,7 @@ async def main() -> None:
             policy="balanced",
         )
 
-        decision = router.route(request)
+        decision = await router.route_with_discovery(request)
         print(decision.selected_executor_id)
 
         outcome = await router.execute(decision)
@@ -562,7 +577,7 @@ with ActionProfiler(
     store=router.store,
     capability="browser.read_price",
     executor_id="host.browser",
-    executor_kind=ExecutorKind.DELEGATE,
+    executor_kind=ExecutorKind.HOST,
 ) as profile:
     value = host_agent_reads_page()
     profile.add_tokens(input_tokens=1200, output_tokens=90)
@@ -577,14 +592,24 @@ aeep init                 create a runnable manifest
 aeep doctor               validate manifest/database/integrations
 aeep list                 list capabilities and executors
 aeep policies             show effective policies
+aeep metrics              aggregate savings and conserved subscription capacity
 aeep route                rank without execution
 aeep run                  route + execute + validate + persist
+aeep quote                request expiring provider quotes
+aeep accept-quote         operator-only quote acceptance
+aeep reserve-payment      budget and financial-approval gated reservation
+aeep capture-payment      capture after validated delivery
+aeep refund-payment       refund a prior capture
 aeep benchmark            sequentially calibrate feasible alternatives
+aeep counterfactual       compare an observed action with feasible alternatives
+aeep reputation           aggregate measured/verified provider outcomes
 aeep history              list decisions or receipts
 aeep show                 fetch one decision/receipt
 aeep record               report delegated execution outcome
 aeep tool-call            invoke one AEEP agent tool over JSON
 aeep tools export         emit provider-native tool declarations
+aeep import               build descriptors from CLI, MCP, or OpenAPI
+aeep publish              generate a local provider descriptor
 aeep serve                run stdio or HTTP MCP server
 ```
 
@@ -650,13 +675,13 @@ AEEP deliberately does not collapse every resource into one public token:
 
 Instead, AEEP standardizes raw measurements and offers private policy weights and shadow prices. A future marketplace can quote ordinary money or closed-loop credits without changing the routing protocol.
 
-## What is intentionally not in `0.1`
+## What remains outside the OSS `0.2` package
 
-- A global capability marketplace or payment settlement.
-- Live x402/MPP payment adapters.
+- Hosted buyer/provider accounts, custody, payouts, fraud systems, and public marketplace operations.
+- Rail-specific x402/MPP network credentials and settlement logic; callback adapters are provided.
 - Automatic semantic matching of unrelated tool schemas.
 - A hosted arbitrary-code execution platform.
-- Centralized reputation or attestation.
+- Centralized reputation aggregation or global PKI; local measured reputation and explicit trust/attestation schemas are provided.
 - A guarantee that a provider's declared estimate is truthful.
 
 The repository is structured so these can be separate adapters/services rather than hard-coded into the open protocol.
@@ -672,15 +697,21 @@ src/aeep/
 ├── router.py              selection, execution, benchmark, fallback, receipts
 ├── store.py               redacted SQLite persistence
 ├── profiler.py            external action profiling
+├── discovery.py           local/remote provider discovery
+├── economics.py           quotes and signing
+├── payments.py            budgets and payment adapters
+├── sdk.py                 provider decorator/import/publish helpers
+├── validators.py          schema/task/quality validation
 ├── executors/
 │   ├── python.py
 │   ├── command.py
 │   ├── http.py
 │   ├── mcp.py
+│   ├── host.py
 │   └── delegate.py
 ├── mcp/
 │   ├── client.py          stdio + HTTP, modern + legacy
-│   └── server.py          four AEEP tools
+│   └── server.py          six AEEP tools
 ├── integrations/
 │   └── tool_schemas.py    OpenAI/Anthropic/DeepSeek/Z.AI/MCP exports
 └── cli.py

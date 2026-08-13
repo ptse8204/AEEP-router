@@ -156,6 +156,7 @@
         "failed",
         "timeout",
         "rejected",
+        "host_selected",
         "delegated",
         "unknown"
       ],
@@ -168,6 +169,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -236,6 +238,13 @@
           "minimum": 0,
           "title": "Output Tokens",
           "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
         }
       },
       "title": "ResourceVector",
@@ -305,6 +314,11 @@
         "compute": {
           "default": 0.0,
           "title": "Compute",
+          "type": "number"
+        },
+        "subscription": {
+          "default": 0.0,
+          "title": "Subscription",
           "type": "number"
         },
         "reliability": {

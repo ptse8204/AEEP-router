@@ -15,13 +15,16 @@ from __future__ import annotations
 import asyncio
 import json
 import sys
-from collections.abc import Mapping
+from collections.abc import AsyncIterator, Mapping
 from contextlib import asynccontextmanager
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from fastapi import Request as _FastAPIRequest
 
 from ..errors import AEEPError, ApprovalRequired, ProtocolError
 from ..integrations import export_tools
-from ..models import ActionRequest, ExternalOutcomeReport, ResourceVector, SideEffect
+from ..models import ActionRequest, ExternalOutcomeReport, QuoteRequest, ResourceVector, SideEffect
 from ..router import Router
 from ..version import __version__
 from .client import LEGACY_VERSION, MODERN_VERSION, UNSUPPORTED_PROTOCOL_VERSION
@@ -126,7 +129,9 @@ class AEEPToolService:
                 }
                 return _tool_result(payload)
             if name == "aeep_route_action":
-                decision = self.router.route(_action_from_arguments(arguments))
+                decision = await self.router.route_with_discovery(
+                    _action_from_arguments(arguments)
+                )
                 return _tool_result(decision.model_dump(mode="json"))
             if name == "aeep_execute_action":
                 request = _action_from_arguments(arguments)
@@ -148,6 +153,18 @@ class AEEPToolService:
                     receipt.model_dump(mode="json"),
                     usage=receipt.actual_resources,
                 )
+            if name == "aeep_request_quotes":
+                quote_request = QuoteRequest(
+                    action=_action_from_arguments(arguments),
+                    executor_ids=arguments.get("executor_ids"),
+                )
+                quotes = self.router.quotes(quote_request)
+                return _tool_result(
+                    {"quotes": [quote.model_dump(mode="json") for quote in quotes]}
+                )
+            if name == "aeep_get_metrics":
+                metrics = self.router.metrics(limit=int(arguments.get("limit", 10_000)))
+                return _tool_result(metrics.model_dump(mode="json"))
             return _tool_result({"error": f"unknown tool {name!r}"}, is_error=True)
         except ApprovalRequired as exc:
             return _tool_result(
@@ -340,7 +357,7 @@ def create_http_app(
     bearer_token: str | None = None,
     approved_side_effect: SideEffect = SideEffect.READ,
     allow_unsafe_executor: bool = False,
-):
+) -> Any:
     """Create an optional FastAPI app without making FastAPI a base dependency."""
 
     try:
@@ -364,7 +381,7 @@ def create_http_app(
     protocol = MCPProtocolApp(service)
 
     @asynccontextmanager
-    async def lifespan(_app: Any):
+    async def lifespan(_app: Any) -> AsyncIterator[None]:
         try:
             yield
         finally:
@@ -381,7 +398,7 @@ def create_http_app(
         message: dict[str, Any],
         request: _FastAPIRequest,
         authorization: str | None = Header(default=None),
-    ):
+    ) -> Any:
         if bearer_token:
             expected = f"Bearer {bearer_token}"
             if authorization != expected:

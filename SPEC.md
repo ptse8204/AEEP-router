@@ -1,4 +1,4 @@
-# AEEP 0.1 protocol specification
+# AEEP 0.2 protocol specification
 
 AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
 
@@ -16,22 +16,24 @@ A conforming implementation can:
 6. Record actual execution receipts.
 7. Update future estimates from observed outcomes without treating provider claims as observations.
 8. Calibrate safe alternatives sequentially without weakening routing constraints.
+9. Represent host-owned subscription resources without converting them into money.
+10. Exchange capabilities, quotes, receipts, observations, and payment lifecycle events.
 
 ## 2. Non-goals
 
-AEEP 0.1 does not define:
+AEEP 0.2 does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;
 - transport framing beyond the included adapters;
-- money transmission or settlement;
+- custody, payout, or rail-specific settlement;
 - a transferable token;
-- identity, OAuth, attestation, or global trust;
+- identity, OAuth, or global trust infrastructure;
 - public marketplace governance.
 
 ## 3. Capability
 
-A `capability` is a stable semantic action name such as `text.stats`, `github.issue.create`, or `weather.current`.
+A `capability` is a stable semantic action name such as `text.stats`, `github.issue.create`, or the versioned `weather.current@1`. Shared network definitions use a namespace, name, input/output schemas, side-effect class, and version.
 
 An operator MUST only register executors under the same capability when they consider their input/output contracts equivalent enough for the application. Capability names SHOULD be namespaced in shared ecosystems.
 
@@ -58,7 +60,7 @@ An executor declares:
 
 - unique `id`;
 - `capability`;
-- kind: `python`, `command`, `http`, `mcp`, or `delegate`;
+- kind: `python`, `command`, `http`, `mcp`, `host`, or legacy `delegate`;
 - input and optional output JSON Schema;
 - cold-start `RouteEstimate`;
 - side effect level;
@@ -83,8 +85,9 @@ Provider-declared estimates MUST be treated as priors, not verified observations
 - `context_tokens`
 - `input_tokens`
 - `output_tokens`
+- `subscription_units`
 
-Implementations MUST NOT silently represent one provider's model token as another provider's token. Conversion through a caller's private shadow price is permitted, but the raw fields MUST remain available.
+Implementations MUST NOT silently represent one provider's model token or subscription unit as another provider's. `subscription_units` are provider-local capacity measurements, not money or transferable credits. Conversion through a caller's private shadow price is permitted, but the raw fields MUST remain available.
 
 ## 7. RouteEstimate
 
@@ -122,7 +125,7 @@ Every rejection MUST include a machine-readable candidate entry and human-readab
 
 Only feasible routes are ranked.
 
-The reference implementation computes burden components for monetary cost, latency, compute pressure, unreliability, low quality, risk, and locality. Resource and monetary burden are adjusted by expected attempts using `1 / P(success)`.
+The reference implementation computes burden components for monetary cost, latency, compute pressure, subscription pressure, unreliability, low quality, risk, and locality. Resource and monetary burden are adjusted by expected attempts using `1 / P(success)`. Subscription pressure remains a separate score component and MUST NOT be published as an exchange rate.
 
 A custom implementation MAY use a different ranking algorithm if it:
 
@@ -147,7 +150,7 @@ none < read < write < destructive < financial
 
 An adapter returns a `RawExecution` with status, output, actual resources, bounded diagnostics, and metadata.
 
-If an output schema exists, a successful transport result MUST be validated. Transport success and output validity MUST remain distinct in the receipt.
+If an output schema exists, a successful transport result MUST be validated. Transport success, execution success, schema validity, task validity, and quality MUST remain distinct in the receipt. Schema, exact-match, range, state-transition, callback, downstream, optional LLM, and optional human validators use the same result envelope.
 
 ## 12. Fallback
 
@@ -165,16 +168,17 @@ A receipt records:
 - start/end timestamps;
 - estimate used for the decision;
 - observed resource vector;
-- output validity;
+- transport/execution/schema/task validity and quality;
+- validation results;
 - bounded error data;
 - trace ID;
 - adapter metadata.
 
-A delegated placeholder receipt MUST NOT be treated as a failed observation. The later externally reported receipt is the observed result.
+A host/delegated placeholder receipt MUST NOT be treated as a failed observation. The later externally reported receipt is the observed result and MUST apply only to the selected feasible host/delegate exactly once.
 
 ## 14. Historical learning
 
-The reference estimator blends static priors with an exponentially weighted history. Invalid outputs count against successful completion. Delegated and unknown placeholder statuses are ignored.
+The reference estimator blends static priors with an exponentially weighted history. Invalid outputs count against successful completion. Host-selected, delegated, and unknown placeholder statuses are ignored.
 
 Implementations SHOULD expose sample size and estimate source. They MUST avoid presenting learned estimates as exact guarantees. Externally reported outcomes are untrusted input unless authenticated or attested and MAY be excluded from shared reputation.
 
@@ -194,8 +198,12 @@ The reference server exposes:
 - `aeep_route_action`
 - `aeep_execute_action`
 - `aeep_record_outcome`
+- `aeep_request_quotes`
+- `aeep_get_metrics`
 
 Provider-specific declaration shapes are projections of the same JSON contracts.
+
+Quote acceptance, payment authorization, reservation, capture, refund, and benchmarking MUST NOT be exposed as unrestricted model tools.
 
 ## 18. MCP transport
 
@@ -207,13 +215,45 @@ For `2026-07-28`:
 - HTTP requests MUST carry the same protocol version in `MCP-Protocol-Version`;
 - HTTP requests MUST mirror the JSON-RPC method in `Mcp-Method`; tool calls MUST mirror the tool name in `Mcp-Name`;
 - a client SHOULD use `server/discover` for stdio version negotiation and MAY cache discovery/list results according to `ttlMs` and `cacheScope`;
-- every successful result MUST include `resultType`; the reference implementation emits `complete` and rejects `input_required` because multi-round tool continuation is outside `0.1`;
+- every successful result MUST include `resultType`; the reference implementation emits `complete` and rejects `input_required` because multi-round tool continuation is outside `0.2`;
 - when a tool schema declares `x-mcp-header`, only statically reachable primitive string, integer, or boolean parameters are projected into `Mcp-Param-*` headers. Header names are case-insensitively unique, values use the MCP encoding rules, and header/body disagreement MUST fail closed.
 
 MCP stdio and HTTP messages MUST be bounded. Remote MCP HTTP targets MUST pass the same network/SSRF policy as ordinary HTTP executors; the reference client disables redirects and ambient proxy inheritance by default.
 
 AEEP-specific usage can be returned under `_meta["org.aeep/usage"]` as a `ResourceVector` object. A client MUST treat unrecognized metadata as optional.
 
-## 19. Versioning
+## 19. Subscription resources and hosts
 
-The manifest/spec version is `0.1`. Backward-incompatible object changes require a new version. New optional resource dimensions or metadata MAY be added without invalidating older clients when unknown fields are handled at a negotiated boundary.
+A `SubscriptionResource` identifies a provider/product, host/CLI/MCP access mode, capabilities, and quota state. Valid quota states are `abundant`, `normal`, `tight`, `critical`, `exhausted`, and `unknown`, with confidence and source. An exhausted resource MUST be infeasible. Runtime quota data MAY override a manifest prior. Implementations MUST NOT scrape undocumented consumer billing dashboards or convert quota into cash.
+
+A `host` executor references one subscription resource. Selection returns `HOST_SELECTED`; AEEP does not call a model API. The current host performs the bounded action and reports one terminal outcome.
+
+## 20. Quotes and signed receipts
+
+A `QuoteRequest` identifies an action and optional executor set. A `Quote` identifies provider, executor, capability, cash amount, estimate, terms, expiry, and optional signature. A `QuoteAcceptance` binds an action to one unexpired amount. Acceptance MUST NOT silently exceed an operator maximum.
+
+The reference local signer uses an explicit `hmac-sha256` envelope and secret environment variable. It provides tamper evidence inside a shared trust domain; it MUST NOT be represented as public-key provider identity or global attestation.
+
+## 21. Provider discovery and trust
+
+A `ProviderDescriptor` supplies versioned capability definitions and executor descriptors. Local and reviewed remote registries MAY be combined. Discovery SHOULD be capability-scoped and lazy so irrelevant schemas are not exposed to the model. Remote registries MUST use bounded responses and the ordinary HTTPS, allowlist, DNS/IP, redirect, and proxy policy.
+
+Provider descriptors and declared estimates are claims. Reputation MUST use measured, verified, or attested `Observation` objects and MUST exclude untrusted/self-asserted claims from observed statistics.
+
+## 22. Counterfactual profiling
+
+A counterfactual report compares an observed receipt only with routes that were feasible in its original decision. Cash savings and subscription capacity conservation remain separate fields; subscription units MUST NOT be labeled as currency.
+
+## 23. Payments, budgets, and ledger events
+
+The OSS protocol defines a rail-neutral `PaymentAdapter`, `AgentBudget`, `AuthorizationPolicy`, `PaymentReservation`, `PaymentCapture`, `PaymentRefund`, and append-only ledger event shape. Financial reservations require an operator-controlled `financial` ceiling and any configured human approval. Model arguments MUST NOT raise either ceiling.
+
+Free, prepaid, invoice, x402, MPP, and enterprise rails MAY implement the adapter. AEEP does not define custody, provider accounts, payouts, fraud systems, or clearing operations.
+
+## 24. Provider supply
+
+Provider descriptors MAY be generated from decorated Python callables or imported from reviewed argv-only CLI, MCP, or OpenAPI definitions. CLI imports MUST use argv and MUST NOT introduce shell interpolation. Imported writes MUST default to non-automatic execution.
+
+## 25. Versioning
+
+The manifest/spec version is `0.2`; `0.1` and `0.15` manifests remain loadable. Backward-incompatible object changes require a new version. New optional resource dimensions or metadata MAY be added without invalidating older clients when unknown fields are handled at a negotiated boundary.

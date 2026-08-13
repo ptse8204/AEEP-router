@@ -40,7 +40,7 @@ def test_cli_tools_and_tool_call(tmp_path):
     assert runner.invoke(app, ["init", str(manifest)]).exit_code == 0
     result = runner.invoke(app, ["tools", "export", "anthropic", "--compact"])
     assert result.exit_code == 0
-    assert len(json.loads(result.stdout)["tools"]) == 4
+    assert len(json.loads(result.stdout)["tools"]) == 6
 
     result = runner.invoke(
         app,

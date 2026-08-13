@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import signal
 import time
+from contextlib import suppress
 from dataclasses import dataclass
 from typing import Any
 
@@ -52,10 +54,8 @@ async def _monitor_process(pid: int, stop: asyncio.Event, interval: float = 0.01
         except psutil.Error:
             pass
         last = now
-        try:
+        with suppress(TimeoutError):
             await asyncio.wait_for(stop.wait(), timeout=interval)
-        except TimeoutError:
-            pass
     return metrics
 
 
@@ -109,7 +109,13 @@ class CommandExecutor(BaseExecutor):
         )
         stdin_template = config.get("stdin")
         stdin_bytes = None
-        if stdin_template is not None:
+        if config.get("stdin_json", False):
+            stdin_bytes = json.dumps(
+                context.request.input,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        elif stdin_template is not None:
             stdin_value = render(stdin_template, values)
             stdin_bytes = str(stdin_value).encode("utf-8")
 
@@ -154,20 +160,16 @@ class CommandExecutor(BaseExecutor):
         except TimeoutError:
             timed_out = True
             if os.name == "posix":
-                try:
+                with suppress(ProcessLookupError):
                     os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
             else:  # pragma: no cover
                 process.terminate()
             try:
                 await asyncio.wait_for(process.wait(), timeout=2.0)
             except TimeoutError:
                 if os.name == "posix":
-                    try:
+                    with suppress(ProcessLookupError):
                         os.killpg(process.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass
                 else:  # pragma: no cover
                     process.kill()
                 await process.wait()

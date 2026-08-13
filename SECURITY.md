@@ -73,6 +73,29 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 
 `aeep_record_outcome` changes future estimates. Treat access to it as write access to routing policy. Authenticate remote callers, rate-limit reports, preserve provenance, and do not merge unauthenticated reports into shared reputation. The reference implementation accepts an external report only for the selected feasible delegate and only once per decision/executor pair, but a compromised authorized caller can still fabricate that one report. Use `ActionProfiler` for trusted operator-owned measurement outside the delegate flow.
 
+Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The built-in HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system.
+
+## Subscription resources
+
+- Treat quota state as private routing data, not currency or transferable value.
+- Prefer explicit user/host/official signals; do not scrape undocumented billing dashboards.
+- A host selection does not grant the host new permissions. Keep its normal approval UI and sandbox enabled.
+- Authenticate host outcome reporting and accept only the selected route once.
+
+## Registries and imported providers
+
+- Review local registry files as control-plane configuration.
+- Remote registries use bounded HTTPS requests, no redirects, no ambient proxies, and the same DNS/IP/allowlist controls as HTTP execution.
+- Imported OpenAPI writes are unsafe for automatic execution by default.
+- CLI import accepts argv arrays and JSON stdin only; shell interpolation remains unsupported.
+
+## Payments and budgets
+
+- Quote retrieval is read-only; acceptance and payment operations are not model tools.
+- Require the separate `financial` runtime ceiling plus configured human approval.
+- Treat the local prepaid adapter and ledger as reference orchestration, not custody or accounting software.
+- Rail callbacks for x402, MPP, invoice, or enterprise settlement must authenticate counterparties, enforce idempotency, and reconcile independently.
+
 ## Benchmarking
 
 `aeep benchmark` executes more than one feasible route. Even read-only routes can incur fees, consume quota, or disclose the same input to several providers. The CLI requires explicit confirmation, keeps hard constraints active, and skips non-idempotent/delegated routes by default. Do not expose benchmark invocation as an unrestricted model tool.

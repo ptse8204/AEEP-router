@@ -13,7 +13,6 @@ from .models import (
     PolicyConfig,
     ReferenceScales,
     ShadowPrices,
-    SideEffect,
 )
 
 
@@ -29,9 +28,10 @@ def builtin_policies() -> dict[str, PolicyConfig]:
                 "cash cost, latency, compute pressure, reliability, quality, and risk."
             ),
             weights=MetricWeights(
-                monetary=0.30,
-                latency=0.25,
-                compute=0.25,
+                monetary=0.25,
+                latency=0.20,
+                compute=0.20,
+                subscription=0.15,
                 reliability=0.10,
                 quality=0.05,
                 risk=0.05,
@@ -42,9 +42,10 @@ def builtin_policies() -> dict[str, PolicyConfig]:
             name="cheapest",
             description="Minimize expected economic cost while retaining reliability gates.",
             weights=MetricWeights(
-                monetary=0.70,
+                monetary=0.60,
                 latency=0.08,
                 compute=0.10,
+                subscription=0.10,
                 reliability=0.07,
                 quality=0.025,
                 risk=0.025,
@@ -58,6 +59,7 @@ def builtin_policies() -> dict[str, PolicyConfig]:
                 monetary=0.08,
                 latency=0.70,
                 compute=0.08,
+                subscription=0.08,
                 reliability=0.08,
                 quality=0.03,
                 risk=0.03,
@@ -70,7 +72,8 @@ def builtin_policies() -> dict[str, PolicyConfig]:
             weights=MetricWeights(
                 monetary=0.10,
                 latency=0.10,
-                compute=0.60,
+                compute=0.45,
+                subscription=0.15,
                 reliability=0.10,
                 quality=0.05,
                 risk=0.05,
@@ -85,6 +88,7 @@ def builtin_policies() -> dict[str, PolicyConfig]:
                 monetary=0.10,
                 latency=0.10,
                 compute=0.10,
+                subscription=0.10,
                 reliability=0.40,
                 quality=0.20,
                 risk=0.10,
@@ -120,6 +124,11 @@ def _strictest_max(a: float | int | None, b: float | int | None) -> float | int 
     if b is None:
         return a
     return min(a, b)
+
+
+def _strictest_int_max(a: int | None, b: int | None) -> int | None:
+    value = _strictest_max(a, b)
+    return int(value) if value is not None else None
 
 
 def _strictest_min(a: float, b: float) -> float:
@@ -182,10 +191,10 @@ def merge_constraints(
         max_gpu_ms=_strictest_max(
             policy_constraints.max_gpu_ms, request_constraints.max_gpu_ms
         ),
-        max_network_bytes=_strictest_max(
+        max_network_bytes=_strictest_int_max(
             policy_constraints.max_network_bytes, request_constraints.max_network_bytes
         ),
-        max_context_tokens=_strictest_max(
+        max_context_tokens=_strictest_int_max(
             policy_constraints.max_context_tokens, request_constraints.max_context_tokens
         ),
         min_success_probability=_strictest_min(
@@ -226,6 +235,7 @@ def policy_from_weights(
     monetary: float,
     latency: float,
     compute: float,
+    subscription: float = 0.0,
     reliability: float = 0.10,
     quality: float = 0.05,
     risk: float = 0.05,
@@ -240,6 +250,7 @@ def policy_from_weights(
             monetary=monetary,
             latency=latency,
             compute=compute,
+            subscription=subscription,
             reliability=reliability,
             quality=quality,
             risk=risk,

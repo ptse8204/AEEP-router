@@ -4,7 +4,7 @@
       "type": "function",
       "function": {
         "name": "aeep_list_capabilities",
-        "description": "List semantic capabilities and their available CLI, Python, HTTP, MCP, or host-delegated executors before choosing an action.",
+        "description": "List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choosing an action.",
         "parameters": {
           "type": "object",
           "properties": {},
@@ -164,6 +164,10 @@
                 "output_tokens": {
                   "type": "integer",
                   "minimum": 0
+                },
+                "subscription_units": {
+                  "type": "number",
+                  "minimum": 0
                 }
               },
               "additionalProperties": false
@@ -173,6 +177,26 @@
                 "boolean",
                 "null"
               ]
+            },
+            "task_valid": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "quality_score": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "validation_results": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
             },
             "error_message": {
               "type": [
@@ -190,6 +214,72 @@
             "executor_id",
             "status"
           ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_request_quotes",
+        "description": "Request expiring execution quotes for compatible routes without accepting or paying for one. Quote acceptance and financial approval remain operator-only.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "capability": {
+              "type": "string",
+              "description": "Stable semantic action name, for example text.stats or github.issue.create."
+            },
+            "input": {
+              "type": "object",
+              "description": "JSON input passed to the selected executor.",
+              "additionalProperties": true
+            },
+            "policy": {
+              "type": "string",
+              "default": "balanced",
+              "description": "Routing policy name: balanced, cheapest, fastest, resource_saver, reliable, or a manifest policy."
+            },
+            "constraints": {
+              "type": "object",
+              "description": "Optional hard budget, latency, compute, privacy, and safety constraints.",
+              "additionalProperties": true
+            },
+            "context": {
+              "type": "object",
+              "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
+              "additionalProperties": true
+            },
+            "executor_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "capability",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_get_metrics",
+        "description": "Read private aggregate savings, substitutions, resource use, and subscription capacity conserved from local AEEP history.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            }
+          },
           "additionalProperties": false
         }
       }

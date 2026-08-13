@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Any, Iterable
+from collections.abc import Iterable
+from typing import Any
 
-from jsonschema import ValidationError
 from jsonschema.validators import validator_for
 
 from .errors import ConfigurationError, InputValidationError
@@ -47,6 +47,9 @@ class Registry:
             return self._by_id[executor_id]
         except KeyError as exc:
             raise ConfigurationError(f"unknown executor {executor_id!r}") from exc
+
+    def contains(self, executor_id: str) -> bool:
+        return executor_id in self._by_id
 
     def find(self, capability: str, *, include_disabled: bool = False) -> list[ExecutorSpec]:
         return [

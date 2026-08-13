@@ -6,7 +6,7 @@ import json
 import time
 from contextlib import AbstractContextManager
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, Literal
 
 import psutil
 
@@ -77,7 +77,7 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
         self._rss_start: float | None = None
         self.receipt: ExecutionReceipt | None = None
 
-    def __enter__(self) -> "ActionProfiler":
+    def __enter__(self) -> ActionProfiler:
         process = psutil.Process()
         times = process.cpu_times()
         self._started_at = datetime.now(UTC)
@@ -112,7 +112,7 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
         self.error_message = message
         self.output_valid = False
 
-    def __exit__(self, exc_type: object, exc: object, traceback: object) -> bool:
+    def __exit__(self, exc_type: object, exc: object, traceback: object) -> Literal[False]:
         assert self._started_at is not None
         assert self._start_perf is not None
         assert self._cpu_start is not None
@@ -144,6 +144,10 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
             ended_at=ended_at,
             estimated=self.estimated,
             actual_resources=self.resources,
+            transport_success=self.status == ExecutionStatus.SUCCESS,
+            execution_success=self.status == ExecutionStatus.SUCCESS,
+            schema_valid=self.output_valid,
+            task_valid=self.output_valid,
             output_valid=self.output_valid,
             error_type=type(exc).__name__ if exc is not None else None,
             error_message=self.error_message,

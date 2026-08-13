@@ -17,6 +17,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -95,6 +96,13 @@
           "minimum": 0,
           "title": "Output Tokens",
           "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
         }
       },
       "title": "ResourceVector",
@@ -158,6 +166,43 @@
       ],
       "title": "SideEffect",
       "type": "string"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationSpec",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -245,6 +290,39 @@
         "type": "string"
       },
       "title": "Tags",
+      "type": "array"
+    },
+    "resource_pool": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resource Pool"
+    },
+    "provider_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Id"
+    },
+    "validators": {
+      "items": {
+        "$ref": "#/$defs/ValidationSpec"
+      },
+      "title": "Validators",
       "type": "array"
     },
     "config": {

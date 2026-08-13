@@ -14,20 +14,29 @@ execution control plane.
 
 from __future__ import annotations
 
-from collections.abc import Iterable
-from datetime import UTC, datetime
+import math
+import os
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
 from .config import load_manifest
+from .discovery import CompositeProviderRegistry
+from .economics import HMACSigner, QuoteService
 from .errors import (
     ApprovalRequired,
     ConfigurationError,
-    ExecutionFailed,
     NoRouteError,
 )
 from .estimator import HistoricalEstimator
-from .executors import CommandExecutor, DelegateExecutor, HTTPExecutor, MCPExecutor, PythonExecutor
+from .executors import (
+    CommandExecutor,
+    DelegateExecutor,
+    HostExecutor,
+    HTTPExecutor,
+    MCPExecutor,
+    PythonExecutor,
+)
 from .executors.base import BaseExecutor, ExecutionContext
 from .models import (
     ActionConstraints,
@@ -36,31 +45,52 @@ from .models import (
     BenchmarkEntry,
     BenchmarkResult,
     CandidateScore,
+    CounterfactualAlternative,
+    CounterfactualReport,
+    EconomicMetrics,
+    EstimateSource,
     ExecutionOutcome,
     ExecutionReceipt,
     ExecutionStatus,
-    EstimateSource,
     ExecutorKind,
+    ExecutorSpec,
     ExternalOutcomeReport,
     Manifest,
+    Observation,
+    PaymentCapture,
+    PaymentRefund,
+    PaymentReservation,
+    PolicyConfig,
+    ProviderDescriptor,
+    ProviderReputation,
+    Quote,
+    QuoteAcceptance,
+    QuoteRequest,
     RouteDecision,
     RouteEstimate,
     SideEffect,
+    SignedExecutionReceipt,
+    SubscriptionQuota,
+    TrustLevel,
+    ValidationKind,
+    ValidationResult,
     utc_now,
 )
+from .payments import BudgetManager, PaymentAdapter, PrepaidBalanceAdapter
 from .policy import builtin_policies, policy_with_constraints, resolve_policy
 from .registry import Registry, validate_json
 from .runtime import detect_compute_availability
 from .scoring import score_candidate
 from .store import ReceiptStore
 from .telemetry import start_span, trace_id_from_span
-
+from .validators import ValidationContext, ValidatorCallback, run_validators
 
 _EXECUTOR_TYPES: dict[ExecutorKind, type[BaseExecutor]] = {
     ExecutorKind.COMMAND: CommandExecutor,
     ExecutorKind.PYTHON: PythonExecutor,
     ExecutorKind.HTTP: HTTPExecutor,
     ExecutorKind.MCP: MCPExecutor,
+    ExecutorKind.HOST: HostExecutor,
     ExecutorKind.DELEGATE: DelegateExecutor,
 }
 
@@ -78,6 +108,9 @@ class Router:
         *,
         manifest_path: str | Path | None = None,
         store: ReceiptStore | None = None,
+        validator_callbacks: Mapping[str, ValidatorCallback] | None = None,
+        signer: HMACSigner | None = None,
+        payment_adapter: PaymentAdapter | None = None,
     ) -> None:
         normalized = manifest.model_copy(deep=True)
         policies = builtin_policies()
@@ -90,21 +123,46 @@ class Router:
         self.manifest = normalized
         self.manifest_path = Path(manifest_path).resolve() if manifest_path else None
         self.registry = Registry(normalized.executors)
+        self.resources = {resource.id: resource for resource in normalized.resources}
+        self.provider_registry = CompositeProviderRegistry(normalized.registries)
+        self.providers: dict[str, ProviderDescriptor] = {}
         self.store = store or ReceiptStore(normalized.database)
         self.estimator = HistoricalEstimator(self.store)
+        self.validator_callbacks = dict(validator_callbacks or {})
+        self.quote_service = QuoteService(self.registry, signer=signer)
+        self.signer = signer
+        self.budget_manager = (
+            BudgetManager(
+                normalized.budget,
+                self.store,
+                payment_adapter
+                or PrepaidBalanceAdapter(normalized.budget.prepaid_balance_usd),
+            )
+            if normalized.budget is not None
+            else None
+        )
         self._executors: dict[ExecutorKind, BaseExecutor] = {}
         self._closed = False
 
     @classmethod
-    def from_manifest(cls, path: str | Path | None = None) -> "Router":
+    def from_manifest(cls, path: str | Path | None = None) -> Router:
         manifest, manifest_path = load_manifest(path)
-        return cls(manifest, manifest_path=manifest_path)
+        signer = None
+        if manifest.signing is not None:
+            secret = os.getenv(manifest.signing.secret_env)
+            if secret is None:
+                raise ConfigurationError(
+                    f"required signing secret environment variable "
+                    f"{manifest.signing.secret_env!r} is not set"
+                )
+            signer = HMACSigner(secret.encode("utf-8"), key_id=manifest.signing.key_id)
+        return cls(manifest, manifest_path=manifest_path, signer=signer)
 
     def _ensure_open(self) -> None:
         if self._closed:
             raise ConfigurationError("router is closed")
 
-    def _policy_for(self, request: ActionRequest):
+    def _policy_for(self, request: ActionRequest) -> PolicyConfig:
         policy_name = request.policy or self.manifest.default_policy
         policy = resolve_policy(policy_name, self.manifest.policies)
         return policy_with_constraints(policy, request.constraints)
@@ -137,6 +195,42 @@ class Router:
             )
         self.store.save_decision(stored)
 
+    def _observe_receipt(self, spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
+        if receipt.status in {
+            ExecutionStatus.DELEGATED,
+            ExecutionStatus.HOST_SELECTED,
+            ExecutionStatus.UNKNOWN,
+        }:
+            return
+        self.store.save_observation(
+            Observation(
+                observation_id=f"obs_{receipt.receipt_id}",
+                provider_id=spec.provider_id or "local",
+                executor_id=spec.id,
+                capability=receipt.capability,
+                receipt_id=receipt.receipt_id,
+                resources=receipt.actual_resources,
+                transport_success=receipt.transport_success,
+                execution_success=receipt.execution_success,
+                schema_valid=receipt.schema_valid,
+                task_valid=receipt.task_valid,
+                quality_score=receipt.quality_score,
+                trust=TrustLevel.OBSERVED,
+                observed_at=receipt.ended_at,
+            )
+        )
+
+    def _subscription_quota(
+        self, spec: ExecutorSpec, context: ActionContext
+    ) -> SubscriptionQuota | None:
+        if not spec.resource_pool:
+            return None
+        override = context.subscription_quotas.get(spec.resource_pool)
+        if override is not None:
+            return override
+        resource = self.resources.get(spec.resource_pool)
+        return resource.quota if resource is not None else None
+
     def route(self, request: ActionRequest | dict[str, Any]) -> RouteDecision:
         """Validate, filter, rank, explain, and persist an action decision."""
 
@@ -153,7 +247,15 @@ class Router:
         candidates: list[CandidateScore] = []
         for spec in compatible:
             estimate = self.estimator.estimate(spec, policy)
-            candidates.append(score_candidate(spec, estimate, policy, request_model.context))
+            candidates.append(
+                score_candidate(
+                    spec,
+                    estimate,
+                    policy,
+                    request_model.context,
+                    self._subscription_quota(spec, request_model.context),
+                )
+            )
 
         # Preserve input-contract failures in the explanation so an agent can fix
         # its action instead of receiving a vague "no route" result.
@@ -165,6 +267,8 @@ class Router:
                     feasible=False,
                     rejection_reasons=[error],
                     estimate=spec.estimate.model_copy(deep=True),
+                    resource_pool=spec.resource_pool,
+                    subscription_quota=self._subscription_quota(spec, request_model.context),
                 )
             )
 
@@ -211,6 +315,28 @@ class Router:
         self._persist_decision(decision)
         return decision
 
+    async def discover(self, capability: str) -> list[ProviderDescriptor]:
+        """Load only providers relevant to one requested capability."""
+
+        self._ensure_open()
+        providers = await self.provider_registry.discover(capability)
+        for provider in providers:
+            self.providers.setdefault(provider.provider_id, provider)
+            for spec in provider.executors:
+                if not self.registry.contains(spec.id):
+                    self.registry.register(spec)
+        return providers
+
+    async def route_with_discovery(
+        self, request: ActionRequest | dict[str, Any]
+    ) -> RouteDecision:
+        request_model = (
+            request if isinstance(request, ActionRequest) else ActionRequest.model_validate(request)
+        )
+        if not self.registry.find(request_model.capability):
+            await self.discover(request_model.capability)
+        return self.route(request_model)
+
     async def benchmark(
         self,
         request: ActionRequest | dict[str, Any],
@@ -233,7 +359,7 @@ class Router:
         request_model = (
             request if isinstance(request, ActionRequest) else ActionRequest.model_validate(request)
         )
-        route_decision = self.route(request_model)
+        route_decision = await self.route_with_discovery(request_model)
         candidates = self._candidate_order(route_decision)
         if not candidates:
             raise NoRouteError(route_decision.explanation)
@@ -261,7 +387,7 @@ class Router:
                 executor_kind=spec.kind,
                 estimated=candidate.estimate,
             )
-            if spec.kind == ExecutorKind.DELEGATE and not include_delegates:
+            if spec.kind in {ExecutorKind.DELEGATE, ExecutorKind.HOST} and not include_delegates:
                 entry.skipped_reason = "delegated routes are excluded unless explicitly requested"
                 result.entries.append(entry)
                 continue
@@ -269,7 +395,10 @@ class Router:
                 entry.skipped_reason = "non-idempotent route excluded from benchmark"
                 result.entries.append(entry)
                 continue
-            if spec.side_effect.rank > approved_side_effect.rank and spec.kind != ExecutorKind.DELEGATE:
+            if (
+                spec.side_effect.rank > approved_side_effect.rank
+                and spec.kind not in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
+            ):
                 entry.skipped_reason = (
                     f"requires {spec.side_effect.value} approval; ceiling is "
                     f"{approved_side_effect.value}"
@@ -278,7 +407,7 @@ class Router:
                 continue
             if (
                 not spec.safe_to_auto_execute
-                and spec.kind != ExecutorKind.DELEGATE
+                and spec.kind not in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
                 and not allow_unsafe_executor
             ):
                 entry.skipped_reason = "executor is not approved as safe_to_auto_execute"
@@ -303,7 +432,10 @@ class Router:
                     entry.actual_resources = receipt.actual_resources
                     entry.output_valid = receipt.output_valid
                     entry.error_message = receipt.error_message
-                    if receipt.status != ExecutionStatus.DELEGATED:
+                    if receipt.status not in {
+                        ExecutionStatus.DELEGATED,
+                        ExecutionStatus.HOST_SELECTED,
+                    }:
                         successful = outcome.ok and receipt.output_valid is not False
                         observed = RouteEstimate(
                             resources=receipt.actual_resources,
@@ -319,6 +451,7 @@ class Router:
                             observed,
                             relaxed_policy,
                             route_decision.action.context,
+                            self._subscription_quota(spec, route_decision.action.context),
                         )
                         entry.actual_score = actual_candidate.score
             except Exception as exc:  # one bad integration must not abort calibration
@@ -328,7 +461,14 @@ class Router:
             result.entries.append(entry)
 
         ranked = [entry for entry in result.entries if entry.actual_score is not None]
-        ranked.sort(key=lambda entry: (entry.actual_score.total, entry.executor_id))
+        ranked.sort(
+            key=lambda entry: (
+                entry.actual_score.total
+                if entry.actual_score is not None
+                else float("inf"),
+                entry.executor_id,
+            )
+        )
         for rank, entry in enumerate(ranked, start=1):
             entry.actual_rank = rank
         return result
@@ -393,11 +533,13 @@ class Router:
         if isinstance(request_or_decision, RouteDecision):
             decision = request_or_decision
         elif isinstance(request_or_decision, ActionRequest):
-            decision = self.route(request_or_decision)
+            decision = await self.route_with_discovery(request_or_decision)
         elif "decision_id" in request_or_decision and "action" in request_or_decision:
             decision = RouteDecision.model_validate(request_or_decision)
         else:
-            decision = self.route(ActionRequest.model_validate(request_or_decision))
+            decision = await self.route_with_discovery(
+                ActionRequest.model_validate(request_or_decision)
+            )
 
         if decision.action.input.get("__aeep_redacted__") is True:
             raise ConfigurationError(
@@ -423,7 +565,10 @@ class Router:
 
         for attempt_number, candidate in enumerate(candidates[:max_attempts], start=1):
             spec = self.registry.get(candidate.executor_id)
-            if spec.side_effect.rank > approved_side_effect.rank and spec.kind != ExecutorKind.DELEGATE:
+            if (
+                spec.side_effect.rank > approved_side_effect.rank
+                and spec.kind not in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
+            ):
                 raise ApprovalRequired(
                     f"executor {spec.id!r} requires {spec.side_effect.value!r} approval; "
                     f"approved level is {approved_side_effect.value!r}",
@@ -432,7 +577,7 @@ class Router:
                 )
             if (
                 not spec.safe_to_auto_execute
-                and spec.kind != ExecutorKind.DELEGATE
+                and spec.kind not in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
                 and not allow_unsafe_executor
             ):
                 raise ApprovalRequired(
@@ -464,18 +609,63 @@ class Router:
                     )
                 )
                 output_valid: bool | None = None
+                task_valid: bool | None = None
+                validation_results: list[ValidationResult] = []
                 error_type = raw.error_type
                 error_message = raw.error_message
                 if raw.status == ExecutionStatus.SUCCESS and spec.output_schema is not None:
                     try:
                         validate_json(raw.output, spec.output_schema, label=f"output from {spec.id}")
                         output_valid = True
+                        validation_results.append(
+                            ValidationResult(
+                                kind=ValidationKind.SCHEMA,
+                                valid=True,
+                                quality_score=1.0,
+                                trust=TrustLevel.OBSERVED,
+                            )
+                        )
                     except Exception as exc:
                         output_valid = False
+                        validation_results.append(
+                            ValidationResult(
+                                kind=ValidationKind.SCHEMA,
+                                valid=False,
+                                quality_score=0.0,
+                                detail=str(exc),
+                                trust=TrustLevel.OBSERVED,
+                            )
+                        )
                         error_type = type(exc).__name__
                         error_message = str(exc)
                 elif raw.status == ExecutionStatus.SUCCESS:
                     output_valid = None
+                if raw.status == ExecutionStatus.SUCCESS and output_valid is not False:
+                    additional_results = await run_validators(
+                        spec.validators,
+                        ValidationContext(input=decision.action.input, output=raw.output),
+                        self.validator_callbacks,
+                    )
+                    validation_results.extend(additional_results)
+                    if spec.validators:
+                        task_valid = all(
+                            result.valid is True
+                            for validator, result in zip(
+                                spec.validators, additional_results, strict=True
+                            )
+                            if validator.required
+                        )
+                        if not task_valid:
+                            error_type = "TaskValidationError"
+                            error_message = "; ".join(
+                                result.detail or f"{result.kind.value} validation failed"
+                                for validator, result in zip(
+                                    spec.validators, additional_results, strict=True
+                                )
+                                if validator.required and result.valid is not True
+                            )
+                    else:
+                        task_valid = output_valid
 
                 ended_at = utc_now()
                 receipt = ExecutionReceipt(
@@ -490,6 +680,38 @@ class Router:
                     ended_at=ended_at,
                     estimated=estimate,
                     actual_resources=raw.resources,
+                    transport_success=raw.status in {
+                        ExecutionStatus.SUCCESS,
+                        ExecutionStatus.DELEGATED,
+                        ExecutionStatus.HOST_SELECTED,
+                    },
+                    execution_success=(
+                        True if raw.status == ExecutionStatus.SUCCESS else None
+                    ),
+                    schema_valid=output_valid,
+                    task_valid=task_valid,
+                    quality_score=(
+                        sum(
+                            result.quality_score
+                            for result in validation_results
+                            if result.quality_score is not None
+                        )
+                        / len(
+                            [
+                                result
+                                for result in validation_results
+                                if result.quality_score is not None
+                            ]
+                        )
+                        if any(
+                            result.quality_score is not None
+                            for result in validation_results
+                        )
+                        else estimate.quality_score
+                        if raw.status == ExecutionStatus.SUCCESS and task_valid is not False
+                        else None
+                    ),
+                    validation_results=validation_results,
                     output_valid=output_valid,
                     error_type=error_type,
                     error_message=error_message,
@@ -508,10 +730,11 @@ class Router:
                     },
                 )
                 self.store.save_receipt(receipt)
+                self._observe_receipt(spec, receipt)
                 attempts.append(receipt)
                 last_output = raw.output
 
-            if raw.status == ExecutionStatus.DELEGATED:
+            if raw.status in {ExecutionStatus.DELEGATED, ExecutionStatus.HOST_SELECTED}:
                 instructions = raw.metadata.get("instructions")
                 if isinstance(raw.output, dict):
                     report = raw.output.get("report_outcome")
@@ -519,7 +742,7 @@ class Router:
                         report["decision_id"] = decision.decision_id
                 return ExecutionOutcome(
                     ok=True,
-                    status=ExecutionStatus.DELEGATED,
+                    status=raw.status,
                     output=raw.output,
                     decision=decision,
                     receipts=attempts,
@@ -528,7 +751,11 @@ class Router:
                     ),
                 )
 
-            success = raw.status == ExecutionStatus.SUCCESS and output_valid is not False
+            success = (
+                raw.status == ExecutionStatus.SUCCESS
+                and output_valid is not False
+                and task_valid is not False
+            )
             if success:
                 return ExecutionOutcome(
                     ok=True,
@@ -542,7 +769,11 @@ class Router:
                 break
             if not self._can_fallback(
                 status=raw.status,
-                output_valid=output_valid,
+                output_valid=(
+                    False
+                    if output_valid is False or task_valid is False
+                    else task_valid
+                ),
                 idempotent=spec.idempotent,
                 allow_non_idempotent=fallback.allow_non_idempotent,
                 retry_timeouts=fallback.retry_timeouts,
@@ -555,7 +786,10 @@ class Router:
             final_status = (
                 ExecutionStatus.FAILED
                 if last_receipt.status == ExecutionStatus.SUCCESS
-                and last_receipt.output_valid is False
+                and (
+                    last_receipt.task_valid is False
+                    or last_receipt.output_valid is False
+                )
                 else last_receipt.status
             )
         else:
@@ -590,9 +824,9 @@ class Router:
         if decision is None:
             raise ConfigurationError(f"unknown decision {report_model.decision_id!r}")
         spec = self.registry.get(report_model.executor_id)
-        if spec.kind != ExecutorKind.DELEGATE:
+        if spec.kind not in {ExecutorKind.DELEGATE, ExecutorKind.HOST}:
             raise ConfigurationError(
-                "external outcome reports are only accepted for delegate executors"
+                "external outcome reports are only accepted for delegate or host executors"
             )
         if spec.id != decision.selected_executor_id:
             raise ConfigurationError(
@@ -639,14 +873,33 @@ class Router:
             ended_at=ended,
             estimated=candidate.estimate,
             actual_resources=report_model.actual_resources,
+            transport_success=True,
+            execution_success=report_model.status == ExecutionStatus.SUCCESS,
+            schema_valid=report_model.output_valid,
+            task_valid=(
+                report_model.task_valid
+                if report_model.task_valid is not None
+                else report_model.output_valid
+            ),
+            quality_score=(
+                report_model.quality_score
+                if report_model.quality_score is not None
+                else candidate.estimate.quality_score
+                if report_model.status == ExecutionStatus.SUCCESS
+                and report_model.task_valid is not False
+                and report_model.output_valid is not False
+                else None
+            ),
+            validation_results=report_model.validation_results,
             output_valid=report_model.output_valid,
             error_message=report_model.error_message,
             metadata={**report_model.metadata, "externally_reported": True},
         )
         self.store.save_external_receipt_once(receipt)
+        self._observe_receipt(spec, receipt)
         return receipt
 
-    def register(self, spec) -> None:
+    def register(self, spec: ExecutorSpec) -> None:
         """Register an executor dynamically for embedded-agent use."""
 
         self._ensure_open()
@@ -668,6 +921,296 @@ class Router:
             for name, policy in sorted(self.manifest.policies.items())
         ]
 
+    def quotes(self, request: QuoteRequest | dict[str, Any]) -> list[Quote]:
+        self._ensure_open()
+        model = request if isinstance(request, QuoteRequest) else QuoteRequest.model_validate(request)
+        compatible, _ = self.registry.compatible(model.action.capability, model.action.input)
+        compatible_ids = {spec.id for spec in compatible}
+        requested_ids = set(model.executor_ids or compatible_ids) & compatible_ids
+        filtered = model.model_copy(update={"executor_ids": sorted(requested_ids)})
+        quotes = self.quote_service.quote(filtered)
+        for quote in quotes:
+            self.store.save_quote(quote)
+        return quotes
+
+    def accept_quote(
+        self,
+        quote_id: str,
+        *,
+        action_id: str,
+        max_amount_usd: float | None = None,
+    ) -> QuoteAcceptance:
+        self._ensure_open()
+        quote = self.store.get_quote(quote_id)
+        if quote is None:
+            raise ConfigurationError(f"unknown quote {quote_id!r}")
+        acceptance = self.quote_service.accept(
+            quote,
+            action_id=action_id,
+            max_amount_usd=max_amount_usd,
+        )
+        self.store.save_quote_acceptance(acceptance)
+        return acceptance
+
+    def signed_receipt(self, receipt_id: str) -> SignedExecutionReceipt:
+        self._ensure_open()
+        if self.signer is None:
+            raise ConfigurationError("receipt signing is not configured")
+        receipt = self.store.get_receipt(receipt_id)
+        if receipt is None:
+            raise ConfigurationError(f"unknown receipt {receipt_id!r}")
+        return self.signer.sign_receipt(receipt)
+
+    def record_observation(self, observation: Observation | dict[str, Any]) -> Observation:
+        self._ensure_open()
+        model = (
+            observation
+            if isinstance(observation, Observation)
+            else Observation.model_validate(observation)
+        )
+        if model.trust == TrustLevel.ATTESTED:
+            if self.signer is None or model.attestation is None:
+                raise ConfigurationError("attested observation requires a configured verifier")
+            unsigned = model.model_copy(update={"attestation": None})
+            if not self.signer.verify(unsigned, model.attestation):
+                raise ConfigurationError("observation attestation is invalid")
+        self.store.save_observation(model)
+        return model
+
+    def reputation(self, provider_id: str, capability: str) -> ProviderReputation:
+        self._ensure_open()
+        observations = [
+            observation
+            for observation in self.store.list_observations(
+                provider_id=provider_id,
+                capability=capability,
+            )
+            if observation.trust
+            in {TrustLevel.OBSERVED, TrustLevel.VERIFIED, TrustLevel.ATTESTED}
+        ]
+        if not observations:
+            return ProviderReputation(provider_id=provider_id, capability=capability)
+        latencies = sorted(item.resources.latency_ms for item in observations)
+        costs = [item.resources.monetary_usd for item in observations]
+        successes = [item.execution_success for item in observations if item.execution_success is not None]
+        validity = [item.task_valid for item in observations if item.task_valid is not None]
+        qualities = [item.quality_score for item in observations if item.quality_score is not None]
+        return ProviderReputation(
+            provider_id=provider_id,
+            capability=capability,
+            executions=len(observations),
+            success_rate=(sum(bool(value) for value in successes) / len(successes) if successes else None),
+            task_valid_rate=(sum(bool(value) for value in validity) / len(validity) if validity else None),
+            quality_score=(sum(qualities) / len(qualities) if qualities else None),
+            latency_p50_ms=latencies[(len(latencies) - 1) // 2],
+            latency_p95_ms=latencies[max(0, math.ceil(len(latencies) * 0.95) - 1)],
+            actual_cost_mean_usd=sum(costs) / len(costs),
+        )
+
+    async def reserve_quote_payment(
+        self,
+        quote_id: str,
+        *,
+        action_id: str,
+        approved_side_effect: SideEffect = SideEffect.READ,
+        human_approved: bool = False,
+    ) -> PaymentReservation:
+        self._ensure_open()
+        if self.budget_manager is None:
+            raise ConfigurationError("agent budget is not configured")
+        quote = self.store.get_quote(quote_id)
+        if quote is None:
+            raise ConfigurationError(f"unknown quote {quote_id!r}")
+        return await self.budget_manager.reserve(
+            quote,
+            action_id=action_id,
+            approved_side_effect=approved_side_effect,
+            human_approved=human_approved,
+        )
+
+    async def capture_payment(self, reservation_id: str) -> PaymentCapture:
+        self._ensure_open()
+        if self.budget_manager is None:
+            raise ConfigurationError("agent budget is not configured")
+        return await self.budget_manager.capture(reservation_id)
+
+    async def refund_payment(self, capture_id: str, amount_usd: float) -> PaymentRefund:
+        self._ensure_open()
+        if self.budget_manager is None:
+            raise ConfigurationError("agent budget is not configured")
+        return await self.budget_manager.refund(capture_id, amount_usd)
+
+    def metrics(self, *, limit: int = 10_000) -> EconomicMetrics:
+        """Aggregate private economic savings without pricing subscription quota."""
+
+        self._ensure_open()
+        decisions = self.store.list_decisions(limit=limit)
+        receipts = self.store.list_receipts(limit=limit)
+        final_receipts: dict[str, ExecutionReceipt] = {}
+        for receipt in reversed(receipts):
+            if receipt.status not in {
+                ExecutionStatus.DELEGATED,
+                ExecutionStatus.HOST_SELECTED,
+                ExecutionStatus.UNKNOWN,
+            }:
+                final_receipts[receipt.decision_id] = receipt
+
+        result = EconomicMetrics(decisions=len(decisions))
+        for decision in decisions:
+            selected_id = decision.selected_executor_id
+            if selected_id is None:
+                continue
+            selected_spec = self.registry.get(selected_id)
+            feasible = [candidate for candidate in decision.candidates if candidate.feasible]
+            host_candidates = [
+                candidate
+                for candidate in feasible
+                if self.registry.get(candidate.executor_id).kind == ExecutorKind.HOST
+            ]
+            if selected_spec.kind != ExecutorKind.HOST and host_candidates:
+                result.model_actions_avoided += 1
+                result.model_turns_avoided += 1
+                result.context_tokens_avoided += max(
+                    candidate.estimate.resources.context_tokens
+                    + candidate.estimate.resources.input_tokens
+                    + candidate.estimate.resources.output_tokens
+                    for candidate in host_candidates
+                )
+                result.subscription_capacity_conserved += max(
+                    candidate.estimate.resources.subscription_units
+                    for candidate in host_candidates
+                )
+            if selected_spec.kind == ExecutorKind.COMMAND and any(
+                self.registry.get(candidate.executor_id).kind
+                in {ExecutorKind.HOST, ExecutorKind.MCP}
+                for candidate in feasible
+            ):
+                result.cli_substitutions += 1
+            if selected_spec.kind != ExecutorKind.MCP and any(
+                self.registry.get(candidate.executor_id).kind == ExecutorKind.MCP
+                for candidate in feasible
+            ):
+                result.mcp_calls_avoided += 1
+            if "browser" not in selected_spec.tags and any(
+                "browser" in self.registry.get(candidate.executor_id).tags
+                for candidate in feasible
+            ):
+                result.browser_actions_avoided += 1
+
+            final_receipt = final_receipts.get(decision.decision_id)
+            if final_receipt is None:
+                continue
+            if (
+                final_receipt.status == ExecutionStatus.SUCCESS
+                and final_receipt.task_valid is not False
+            ):
+                result.successful_actions += 1
+            else:
+                result.failed_actions += 1
+            result.total_money_spent_usd += final_receipt.actual_resources.monetary_usd
+            if selected_spec.locality.value in {"in_process", "local"}:
+                result.local_cpu_ms_consumed += final_receipt.actual_resources.cpu_ms
+            if selected_spec.kind in {ExecutorKind.HTTP, ExecutorKind.MCP}:
+                result.api_money_spent_usd += final_receipt.actual_resources.monetary_usd
+            alternatives = [
+                candidate.estimate.resources.latency_ms
+                for candidate in feasible
+                if candidate.executor_id != selected_id
+            ]
+            if alternatives:
+                result.wall_clock_time_saved_ms += max(
+                    0.0, min(alternatives) - final_receipt.actual_resources.latency_ms
+                )
+        if result.successful_actions:
+            result.cost_per_successful_action_usd = (
+                result.total_money_spent_usd / result.successful_actions
+            )
+        return result
+
+    def counterfactual(self, receipt_id: str) -> CounterfactualReport:
+        """Compare an observed attempt with feasible alternatives from its decision."""
+
+        self._ensure_open()
+        receipt = self.store.get_receipt(receipt_id)
+        if receipt is None:
+            raise ConfigurationError(f"unknown receipt {receipt_id!r}")
+        decision = self.store.get_decision(receipt.decision_id)
+        if decision is None:
+            raise ConfigurationError(f"decision {receipt.decision_id!r} is unavailable")
+        selected = next(
+            (
+                candidate
+                for candidate in decision.candidates
+                if candidate.executor_id == receipt.executor_id
+            ),
+            None,
+        )
+        selected_units = (
+            selected.estimate.resources.subscription_units if selected is not None else 0.0
+        )
+        alternatives: list[CounterfactualAlternative] = []
+        for candidate in decision.candidates:
+            if not candidate.feasible or candidate.executor_id == receipt.executor_id:
+                continue
+            spec = self.registry.get(candidate.executor_id)
+            alternatives.append(
+                CounterfactualAlternative(
+                    executor_id=spec.id,
+                    executor_kind=spec.kind,
+                    estimated_resources=candidate.estimate.resources,
+                    estimated_score=(candidate.score.total if candidate.score else None),
+                    estimated_cash_saving_usd=max(
+                        0.0,
+                        receipt.actual_resources.monetary_usd
+                        - candidate.estimate.resources.monetary_usd,
+                    ),
+                    estimated_latency_saving_ms=max(
+                        0.0,
+                        receipt.actual_resources.latency_ms
+                        - candidate.estimate.resources.latency_ms,
+                    ),
+                    conserves_subscription_units=(
+                        selected_units if spec.kind != ExecutorKind.HOST else 0.0
+                    ),
+                )
+            )
+        alternatives.sort(
+            key=lambda item: (
+                item.estimated_score
+                if item.estimated_score is not None
+                else float("inf"),
+                item.executor_id,
+            )
+        )
+        best = alternatives[0] if alternatives else None
+        saving = best.estimated_cash_saving_usd if best else 0.0
+        percent = (
+            saving / receipt.actual_resources.monetary_usd * 100.0
+            if receipt.actual_resources.monetary_usd > 0
+            else None
+        )
+        quota = selected.subscription_quota if selected is not None else None
+        avoidable_units = best.conserves_subscription_units if best else 0.0
+        explanation = (
+            f"Alternative {best.executor_id!r} could save approximately "
+            f"${saving:.6f} and {avoidable_units:g} provider-local subscription unit(s)."
+            if best
+            else "No other feasible route was present in the original decision."
+        )
+        return CounterfactualReport(
+            receipt_id=receipt.receipt_id,
+            decision_id=decision.decision_id,
+            selected_executor_id=receipt.executor_id,
+            actual_resources=receipt.actual_resources,
+            alternatives=alternatives,
+            best_alternative_executor_id=best.executor_id if best else None,
+            potential_cash_saving_usd=saving,
+            potential_cash_saving_percent=percent,
+            avoidable_subscription_units=avoidable_units,
+            subscription_pressure=quota.state if quota is not None else None,
+            explanation=explanation,
+        )
+
     async def close(self) -> None:
         if self._closed:
             return
@@ -677,7 +1220,7 @@ class Router:
         self._executors.clear()
         self.store.close()
 
-    async def __aenter__(self) -> "Router":
+    async def __aenter__(self) -> Router:
         self._ensure_open()
         return self
 

@@ -36,6 +36,7 @@ class ExecutorKind(StrEnum):
     PYTHON = "python"
     HTTP = "http"
     MCP = "mcp"
+    HOST = "host"
     DELEGATE = "delegate"
 
 
@@ -76,6 +77,7 @@ class ExecutionStatus(StrEnum):
     FAILED = "failed"
     TIMEOUT = "timeout"
     REJECTED = "rejected"
+    HOST_SELECTED = "host_selected"
     DELEGATED = "delegated"
     UNKNOWN = "unknown"
 
@@ -86,6 +88,123 @@ class EstimateSource(StrEnum):
     BLENDED = "blended"
     QUOTE = "quote"
     OBSERVED = "observed"
+
+
+class QuotaState(StrEnum):
+    """Private opportunity-cost signal for a non-transferable subscription."""
+
+    ABUNDANT = "abundant"
+    NORMAL = "normal"
+    TIGHT = "tight"
+    CRITICAL = "critical"
+    EXHAUSTED = "exhausted"
+    UNKNOWN = "unknown"
+
+    @property
+    def pressure(self) -> float:
+        return {
+            QuotaState.ABUNDANT: 0.10,
+            QuotaState.NORMAL: 0.50,
+            QuotaState.TIGHT: 2.0,
+            QuotaState.CRITICAL: 8.0,
+            QuotaState.EXHAUSTED: float("inf"),
+            QuotaState.UNKNOWN: 1.0,
+        }[self]
+
+
+class QuotaSource(StrEnum):
+    USER = "user"
+    HOST = "host"
+    OFFICIAL_CLI = "official_cli"
+    RATE_LIMIT = "rate_limit"
+    HEURISTIC = "heuristic"
+    OBSERVED = "observed"
+
+
+class TrustLevel(StrEnum):
+    UNTRUSTED = "untrusted"
+    SELF_ASSERTED = "self_asserted"
+    OBSERVED = "observed"
+    VERIFIED = "verified"
+    ATTESTED = "attested"
+
+
+class ValidationKind(StrEnum):
+    SCHEMA = "schema"
+    EXACT_MATCH = "exact_match"
+    RANGE = "range"
+    STATE_TRANSITION = "state_transition"
+    CALLBACK = "callback"
+    DOWNSTREAM = "downstream"
+    LLM = "llm"
+    HUMAN = "human"
+
+
+class SubscriptionQuota(StrictModel):
+    state: QuotaState = QuotaState.UNKNOWN
+    reset_at: datetime | None = None
+    confidence: float = Field(default=0.5, ge=0.0, le=1.0)
+    source: QuotaSource = QuotaSource.USER
+
+
+class SubscriptionAccess(StrictModel):
+    mode: Literal["host", "cli", "mcp"] = "host"
+
+
+class SubscriptionCapabilities(StrictModel):
+    reasoning: bool = False
+    coding: bool = False
+    browser: bool = False
+    computer_use: bool = False
+    custom: list[str] = Field(default_factory=list)
+
+
+class SubscriptionResource(StrictModel):
+    """A resource the user already owns; it is never represented as money."""
+
+    id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
+    kind: Literal["subscription"] = "subscription"
+    provider: str = Field(min_length=1, max_length=100)
+    product: str = Field(min_length=1, max_length=100)
+    access: SubscriptionAccess = Field(default_factory=SubscriptionAccess)
+    quota: SubscriptionQuota = Field(default_factory=SubscriptionQuota)
+    capabilities: SubscriptionCapabilities = Field(default_factory=SubscriptionCapabilities)
+
+
+class CapabilityDefinition(StrictModel):
+    namespace: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]*$")
+    name: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]*$")
+    version: str = Field(default="1", pattern=r"^[0-9]+(?:\.[0-9]+){0,2}$")
+    description: str = Field(min_length=1, max_length=4000)
+    input_schema: dict[str, Any] = Field(
+        default_factory=lambda: {"type": "object", "additionalProperties": True}
+    )
+    output_schema: dict[str, Any] | None = None
+    side_effect: SideEffect = SideEffect.READ
+
+    @property
+    def capability(self) -> str:
+        return f"{self.namespace}.{self.name}@{self.version}"
+
+
+class ValidationSpec(StrictModel):
+    kind: ValidationKind
+    config: dict[str, Any] = Field(default_factory=dict)
+    required: bool = True
+
+
+class ValidationResult(StrictModel):
+    kind: ValidationKind
+    valid: bool | None = None
+    quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    detail: str = Field(default="", max_length=4096)
+    trust: TrustLevel = TrustLevel.OBSERVED
+
+
+class SignatureEnvelope(StrictModel):
+    algorithm: Literal["hmac-sha256"] = "hmac-sha256"
+    key_id: str = Field(min_length=1, max_length=200)
+    value: str = Field(pattern=r"^[A-Za-z0-9_-]+$")
 
 
 class ResourceVector(StrictModel):
@@ -106,8 +225,13 @@ class ResourceVector(StrictModel):
     context_tokens: int = Field(default=0, ge=0)
     input_tokens: int = Field(default=0, ge=0)
     output_tokens: int = Field(default=0, ge=0)
+    subscription_units: float = Field(
+        default=0.0,
+        ge=0.0,
+        description="Provider-local capacity units; not cash and not transferable.",
+    )
 
-    def plus(self, other: "ResourceVector") -> "ResourceVector":
+    def plus(self, other: ResourceVector) -> ResourceVector:
         return ResourceVector(
             **{
                 field: getattr(self, field) + getattr(other, field)
@@ -115,13 +239,13 @@ class ResourceVector(StrictModel):
             }
         )
 
-    def scale(self, factor: float) -> "ResourceVector":
+    def scale(self, factor: float) -> ResourceVector:
         values: dict[str, float | int] = {}
         integer_fields = {"network_bytes", "context_tokens", "input_tokens", "output_tokens"}
         for field in type(self).model_fields:
             value = getattr(self, field) * factor
-            values[field] = int(round(value)) if field in integer_fields else float(value)
-        return ResourceVector(**values)
+            values[field] = round(value) if field in integer_fields else float(value)
+        return ResourceVector.model_validate(values)
 
 
 class RouteEstimate(StrictModel):
@@ -156,6 +280,7 @@ class ActionContext(StrictModel):
     compute: ComputeAvailability = Field(default_factory=ComputeAvailability)
     labels: dict[str, str] = Field(default_factory=dict)
     traceparent: str | None = None
+    subscription_quotas: dict[str, SubscriptionQuota] = Field(default_factory=dict)
 
 
 class ActionConstraints(StrictModel):
@@ -189,6 +314,95 @@ class ActionRequest(StrictModel):
     idempotency_key: str | None = Field(default=None, max_length=256)
 
 
+class QuoteRequest(StrictModel):
+    quote_request_id: str = Field(default_factory=lambda: new_id("qreq"))
+    action: ActionRequest
+    executor_ids: list[str] | None = None
+    created_at: datetime = Field(default_factory=utc_now)
+
+
+class Quote(StrictModel):
+    quote_id: str = Field(default_factory=lambda: new_id("quote"))
+    quote_request_id: str
+    provider_id: str
+    executor_id: str
+    capability: str
+    monetary_usd: float = Field(ge=0.0)
+    estimate: RouteEstimate
+    expires_at: datetime
+    terms: dict[str, Any] = Field(default_factory=dict)
+    signature: SignatureEnvelope | None = None
+
+
+class QuoteAcceptance(StrictModel):
+    acceptance_id: str = Field(default_factory=lambda: new_id("accept"))
+    quote_id: str
+    action_id: str
+    accepted_amount_usd: float = Field(ge=0.0)
+    accepted_at: datetime = Field(default_factory=utc_now)
+    signature: SignatureEnvelope | None = None
+
+
+class PaymentState(StrEnum):
+    RESERVED = "reserved"
+    CAPTURED = "captured"
+    RELEASED = "released"
+    REFUNDED = "refunded"
+    FAILED = "failed"
+
+
+class AuthorizationPolicy(StrictModel):
+    auto_approve_under_usd: float = Field(default=0.0, ge=0.0)
+    financial_actions_require_human: bool = True
+    preserve_subscriptions: list[str] = Field(default_factory=list)
+    prefer_local_within_percent: float = Field(default=0.0, ge=0.0, le=100.0)
+
+
+class AgentBudget(StrictModel):
+    budget_id: str = "default"
+    daily_marketplace_limit_usd: float = Field(default=0.0, ge=0.0)
+    max_per_action_usd: float = Field(default=0.0, ge=0.0)
+    prepaid_balance_usd: float = Field(default=0.0, ge=0.0)
+    authorization: AuthorizationPolicy = Field(default_factory=AuthorizationPolicy)
+
+
+class PaymentReservation(StrictModel):
+    reservation_id: str = Field(default_factory=lambda: new_id("reserve"))
+    quote_id: str
+    action_id: str
+    adapter: str
+    amount_usd: float = Field(ge=0.0)
+    state: PaymentState = PaymentState.RESERVED
+    created_at: datetime = Field(default_factory=utc_now)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class PaymentCapture(StrictModel):
+    capture_id: str = Field(default_factory=lambda: new_id("capture"))
+    reservation_id: str
+    amount_usd: float = Field(ge=0.0)
+    captured_at: datetime = Field(default_factory=utc_now)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class PaymentRefund(StrictModel):
+    refund_id: str = Field(default_factory=lambda: new_id("refund"))
+    capture_id: str
+    amount_usd: float = Field(ge=0.0)
+    refunded_at: datetime = Field(default_factory=utc_now)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class LedgerEvent(StrictModel):
+    event_id: str = Field(default_factory=lambda: new_id("ledger"))
+    event_type: Literal["reserve", "capture", "release", "refund"]
+    amount_usd: float = Field(ge=0.0)
+    action_id: str
+    reference_id: str
+    occurred_at: datetime = Field(default_factory=utc_now)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
 class ExecutorSpec(StrictModel):
     id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
     capability: str = Field(min_length=1, max_length=200)
@@ -207,15 +421,22 @@ class ExecutorSpec(StrictModel):
     safe_to_auto_execute: bool = True
     enabled: bool = True
     tags: list[str] = Field(default_factory=list)
+    resource_pool: str | None = Field(default=None, max_length=200)
+    provider_id: str | None = Field(default=None, max_length=200)
+    validators: list[ValidationSpec] = Field(default_factory=list)
     config: dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="after")
-    def validate_network_locality(self) -> "ExecutorSpec":
+    def validate_network_locality(self) -> ExecutorSpec:
         if self.locality == Locality.INTERNET and not self.requires_network:
             self.requires_network = True
-        if self.kind == ExecutorKind.DELEGATE and self.safe_to_auto_execute:
-            # Delegates are plans for the host agent; AEEP cannot enforce their execution.
+        if self.kind in {ExecutorKind.DELEGATE, ExecutorKind.HOST} and self.safe_to_auto_execute:
+            # Host/delegate routes are plans; AEEP cannot enforce their execution.
             self.safe_to_auto_execute = False
+        if self.kind == ExecutorKind.HOST and not self.resource_pool:
+            raise ValueError("host executors require resource_pool")
+        if self.kind == ExecutorKind.HOST and self.estimate.resources.subscription_units == 0:
+            self.estimate.resources.subscription_units = 1.0
         return self
 
 
@@ -223,12 +444,13 @@ class MetricWeights(StrictModel):
     monetary: float = Field(default=0.30, ge=0.0)
     latency: float = Field(default=0.25, ge=0.0)
     compute: float = Field(default=0.25, ge=0.0)
+    subscription: float = Field(default=0.0, ge=0.0)
     reliability: float = Field(default=0.10, ge=0.0)
     quality: float = Field(default=0.05, ge=0.0)
     risk: float = Field(default=0.05, ge=0.0)
 
     @model_validator(mode="after")
-    def nonzero(self) -> "MetricWeights":
+    def nonzero(self) -> MetricWeights:
         if sum(getattr(self, field) for field in type(self).model_fields) <= 0:
             raise ValueError("at least one policy weight must be positive")
         return self
@@ -288,6 +510,7 @@ class PolicyConfig(StrictModel):
     history_weight: float = Field(default=0.70, ge=0.0, le=1.0)
     history_prior_samples: int = Field(default=5, ge=1, le=1000)
     resource_scarcity_multiplier: float = Field(default=2.0, ge=0.0, le=100.0)
+    subscription_scarcity_multiplier: float = Field(default=1.0, ge=0.0, le=100.0)
     prefer_local_bonus: float = Field(default=0.05, ge=0.0, le=1.0)
     deterministic_tie_break: bool = True
 
@@ -305,12 +528,22 @@ class PersistenceConfig(StrictModel):
     store_action_context: bool = False
 
 
+class SigningConfig(StrictModel):
+    key_id: str = Field(min_length=1, max_length=200)
+    secret_env: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
+
+
 class Manifest(StrictModel):
-    version: Literal["0.1"] = "0.1"
+    version: Literal["0.1", "0.15", "0.2"] = "0.2"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)
+    signing: SigningConfig | None = None
+    budget: AgentBudget | None = None
     policies: dict[str, PolicyConfig] = Field(default_factory=dict)
+    capabilities: list[CapabilityDefinition] = Field(default_factory=list)
+    resources: list[SubscriptionResource] = Field(default_factory=list)
+    registries: list[RegistryConfig] = Field(default_factory=list)
     executors: list[ExecutorSpec] = Field(default_factory=list)
 
     @field_validator("executors")
@@ -322,13 +555,42 @@ class Manifest(StrictModel):
             raise ValueError(f"duplicate executor ids: {', '.join(duplicates)}")
         return executors
 
+    @field_validator("resources")
+    @classmethod
+    def unique_resource_ids(
+        cls, resources: list[SubscriptionResource]
+    ) -> list[SubscriptionResource]:
+        ids = [resource.id for resource in resources]
+        duplicates = sorted({item for item in ids if ids.count(item) > 1})
+        if duplicates:
+            raise ValueError(f"duplicate resource ids: {', '.join(duplicates)}")
+        return resources
+
+    @field_validator("capabilities")
+    @classmethod
+    def unique_capability_ids(
+        cls, capabilities: list[CapabilityDefinition]
+    ) -> list[CapabilityDefinition]:
+        ids = [definition.capability for definition in capabilities]
+        duplicates = sorted({item for item in ids if ids.count(item) > 1})
+        if duplicates:
+            raise ValueError(f"duplicate capability definitions: {', '.join(duplicates)}")
+        return capabilities
+
     @model_validator(mode="after")
-    def ensure_policy_names(self) -> "Manifest":
+    def ensure_policy_names(self) -> Manifest:
         for key, policy in self.policies.items():
             if policy.name != key:
                 policy.name = key
         # Built-in policies are merged by the config loader/Router after model
         # validation, so a manifest may define only its custom policies here.
+        resource_ids = {resource.id for resource in self.resources}
+        for executor in self.executors:
+            if executor.resource_pool and executor.resource_pool not in resource_ids:
+                raise ValueError(
+                    f"executor {executor.id!r} references unknown resource_pool "
+                    f"{executor.resource_pool!r}"
+                )
         return self
 
 
@@ -336,6 +598,7 @@ class ScoreBreakdown(StrictModel):
     monetary: float = 0.0
     latency: float = 0.0
     compute: float = 0.0
+    subscription: float = 0.0
     reliability: float = 0.0
     quality: float = 0.0
     risk: float = 0.0
@@ -348,6 +611,8 @@ class CandidateScore(StrictModel):
     feasible: bool
     rejection_reasons: list[str] = Field(default_factory=list)
     estimate: RouteEstimate
+    resource_pool: str | None = None
+    subscription_quota: SubscriptionQuota | None = None
     score: ScoreBreakdown | None = None
     rank: int | None = None
 
@@ -375,6 +640,12 @@ class ExecutionReceipt(StrictModel):
     ended_at: datetime = Field(default_factory=utc_now)
     estimated: RouteEstimate
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
+    transport_success: bool | None = None
+    execution_success: bool | None = None
+    schema_valid: bool | None = None
+    task_valid: bool | None = None
+    quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    validation_results: list[ValidationResult] = Field(default_factory=list)
     output_valid: bool | None = None
     error_type: str | None = None
     error_message: str | None = None
@@ -401,6 +672,9 @@ class ExternalOutcomeReport(StrictModel):
     status: ExecutionStatus
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
     output_valid: bool | None = None
+    task_valid: bool | None = None
+    quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    validation_results: list[ValidationResult] = Field(default_factory=list)
     error_message: str | None = Field(default=None, max_length=16_384)
     metadata: dict[str, Any] = Field(default_factory=dict)
     started_at: datetime | None = None
@@ -409,14 +683,99 @@ class ExternalOutcomeReport(StrictModel):
     @field_validator("status")
     @classmethod
     def terminal_status(cls, value: ExecutionStatus) -> ExecutionStatus:
-        if value in {ExecutionStatus.DELEGATED, ExecutionStatus.UNKNOWN}:
+        if value in {
+            ExecutionStatus.DELEGATED,
+            ExecutionStatus.HOST_SELECTED,
+            ExecutionStatus.UNKNOWN,
+        }:
             raise ValueError("external outcome status must be final")
         return value
 
     @model_validator(mode="after")
-    def consistent_validity(self) -> "ExternalOutcomeReport":
+    def consistent_validity(self) -> ExternalOutcomeReport:
         if self.status != ExecutionStatus.SUCCESS and self.output_valid is True:
             raise ValueError("a non-success external outcome cannot declare output_valid=true")
+        if self.status != ExecutionStatus.SUCCESS and self.task_valid is True:
+            raise ValueError("a non-success external outcome cannot declare task_valid=true")
+        return self
+
+
+class SignedExecutionReceipt(StrictModel):
+    receipt: ExecutionReceipt
+    signature: SignatureEnvelope
+
+
+class Observation(StrictModel):
+    observation_id: str = Field(default_factory=lambda: new_id("obs"))
+    provider_id: str | None = None
+    executor_id: str
+    capability: str
+    receipt_id: str | None = None
+    resources: ResourceVector = Field(default_factory=ResourceVector)
+    transport_success: bool | None = None
+    execution_success: bool | None = None
+    schema_valid: bool | None = None
+    task_valid: bool | None = None
+    quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    trust: TrustLevel = TrustLevel.UNTRUSTED
+    observed_at: datetime = Field(default_factory=utc_now)
+    attestation: SignatureEnvelope | None = None
+
+
+class ProviderReputation(StrictModel):
+    provider_id: str
+    capability: str
+    executions: int = 0
+    success_rate: float | None = Field(default=None, ge=0.0, le=1.0)
+    task_valid_rate: float | None = Field(default=None, ge=0.0, le=1.0)
+    quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    latency_p50_ms: float | None = Field(default=None, ge=0.0)
+    latency_p95_ms: float | None = Field(default=None, ge=0.0)
+    actual_cost_mean_usd: float | None = Field(default=None, ge=0.0)
+    trust_floor: TrustLevel = TrustLevel.OBSERVED
+
+
+class ProviderDescriptor(StrictModel):
+    provider_id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
+    name: str = Field(min_length=1, max_length=200)
+    capabilities: list[CapabilityDefinition] = Field(default_factory=list)
+    executors: list[ExecutorSpec] = Field(default_factory=list)
+    quote_endpoint: str | None = None
+    health_endpoint: str | None = None
+    signing_key_id: str | None = None
+    trust: TrustLevel = TrustLevel.SELF_ASSERTED
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def bind_provider(self) -> ProviderDescriptor:
+        for executor in self.executors:
+            if executor.provider_id is None:
+                executor.provider_id = self.provider_id
+            elif executor.provider_id != self.provider_id:
+                raise ValueError(
+                    f"executor {executor.id!r} provider_id does not match descriptor"
+                )
+        return self
+
+
+class RegistryConfig(StrictModel):
+    id: str = Field(min_length=1, max_length=200)
+    kind: Literal["local", "remote"]
+    path: str | None = None
+    url: str | None = None
+    enabled: bool = True
+    allowed_hosts: list[str] | None = None
+    allow_private_networks: bool = False
+    allow_insecure_http: bool = False
+    timeout_seconds: float = Field(default=10.0, gt=0.0, le=120.0)
+    max_response_bytes: int = Field(default=1_000_000, ge=1024, le=10_000_000)
+
+    @model_validator(mode="after")
+    def required_location(self) -> RegistryConfig:
+        if self.kind == "local" and not self.path:
+            raise ValueError("local registry requires path")
+        if self.kind == "remote" and not self.url:
+            raise ValueError("remote registry requires url")
         return self
 
 
@@ -446,6 +805,48 @@ class BenchmarkResult(StrictModel):
     route_decision_id: str
     entries: list[BenchmarkEntry] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=utc_now)
+
+
+class EconomicMetrics(StrictModel):
+    decisions: int = 0
+    successful_actions: int = 0
+    failed_actions: int = 0
+    model_actions_avoided: int = 0
+    model_turns_avoided: int = 0
+    context_tokens_avoided: int = 0
+    subscription_capacity_conserved: float = 0.0
+    local_cpu_ms_consumed: float = 0.0
+    api_money_spent_usd: float = 0.0
+    wall_clock_time_saved_ms: float = 0.0
+    browser_actions_avoided: int = 0
+    mcp_calls_avoided: int = 0
+    cli_substitutions: int = 0
+    total_money_spent_usd: float = 0.0
+    cost_per_successful_action_usd: float | None = None
+
+
+class CounterfactualAlternative(StrictModel):
+    executor_id: str
+    executor_kind: ExecutorKind
+    estimated_resources: ResourceVector
+    estimated_score: float | None = None
+    estimated_cash_saving_usd: float = 0.0
+    estimated_latency_saving_ms: float = 0.0
+    conserves_subscription_units: float = 0.0
+
+
+class CounterfactualReport(StrictModel):
+    receipt_id: str
+    decision_id: str
+    selected_executor_id: str
+    actual_resources: ResourceVector
+    alternatives: list[CounterfactualAlternative] = Field(default_factory=list)
+    best_alternative_executor_id: str | None = None
+    potential_cash_saving_usd: float = 0.0
+    potential_cash_saving_percent: float | None = None
+    avoidable_subscription_units: float = 0.0
+    subscription_pressure: QuotaState | None = None
+    explanation: str = ""
 
 
 class RawExecution(StrictModel):

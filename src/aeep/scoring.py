@@ -14,6 +14,7 @@ from .models import (
     PolicyConfig,
     RouteEstimate,
     ScoreBreakdown,
+    SubscriptionQuota,
 )
 
 
@@ -41,6 +42,7 @@ def rejection_reasons(
     estimate: RouteEstimate,
     policy: PolicyConfig,
     context: ActionContext,
+    subscription_quota: SubscriptionQuota | None = None,
 ) -> list[str]:
     c = policy.constraints
     r = estimate.resources
@@ -103,6 +105,8 @@ def rejection_reasons(
         and not bool(spec.config.get("accepts_restricted_data", False))
     ):
         reasons.append("restricted data cannot be sent to this remote executor")
+    if subscription_quota is not None and not math.isfinite(subscription_quota.state.pressure):
+        reasons.append(f"subscription resource {spec.resource_pool!r} is exhausted")
 
     available = context.compute
     if (
@@ -163,14 +167,17 @@ def score_candidate(
     estimate: RouteEstimate,
     policy: PolicyConfig,
     context: ActionContext,
+    subscription_quota: SubscriptionQuota | None = None,
 ) -> CandidateScore:
-    reasons = rejection_reasons(spec, estimate, policy, context)
+    reasons = rejection_reasons(spec, estimate, policy, context, subscription_quota)
     if reasons:
         return CandidateScore(
             executor_id=spec.id,
             feasible=False,
             rejection_reasons=reasons,
             estimate=estimate,
+            resource_pool=spec.resource_pool,
+            subscription_quota=subscription_quota,
         )
 
     p_success = max(estimate.success_probability, 0.001)
@@ -185,6 +192,17 @@ def score_candidate(
         policy.references.latency_ms,
     )
     compute = _compute_burden(estimate, policy, context) * expected_multiplier
+    subscription = 0.0
+    if subscription_quota is not None and estimate.resources.subscription_units:
+        confidence = subscription_quota.confidence
+        effective_pressure = (
+            confidence * subscription_quota.state.pressure + (1.0 - confidence)
+        )
+        subscription = math.log1p(
+            estimate.resources.subscription_units
+            * effective_pressure
+            * policy.subscription_scarcity_multiplier
+        ) * expected_multiplier
     reliability = -math.log(p_success)
     quality = 1.0 - estimate.quality_score
     risk = estimate.risk_score
@@ -199,6 +217,7 @@ def score_candidate(
         weights["monetary"] * money
         + weights["latency"] * latency
         + weights["compute"] * compute
+        + weights["subscription"] * subscription
         + weights["reliability"] * reliability
         + weights["quality"] * quality
         + weights["risk"] * risk
@@ -208,6 +227,7 @@ def score_candidate(
         monetary=weights["monetary"] * money,
         latency=weights["latency"] * latency,
         compute=weights["compute"] * compute,
+        subscription=weights["subscription"] * subscription,
         reliability=weights["reliability"] * reliability,
         quality=weights["quality"] * quality,
         risk=weights["risk"] * risk,
@@ -218,5 +238,7 @@ def score_candidate(
         executor_id=spec.id,
         feasible=True,
         estimate=estimate,
+        resource_pool=spec.resource_pool,
+        subscription_quota=subscription_quota,
         score=breakdown,
     )

@@ -4,11 +4,21 @@ from __future__ import annotations
 
 import sqlite3
 import threading
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from .errors import ConfigurationError
-from .models import ExecutionReceipt, RouteDecision
+from .models import (
+    ExecutionReceipt,
+    LedgerEvent,
+    Observation,
+    PaymentCapture,
+    PaymentRefund,
+    PaymentReservation,
+    Quote,
+    QuoteAcceptance,
+    RouteDecision,
+)
 
 
 class ReceiptStore:
@@ -68,6 +78,40 @@ class ReceiptStore:
                     receipt_id TEXT NOT NULL UNIQUE,
                     PRIMARY KEY (decision_id, executor_id)
                 );
+
+                CREATE TABLE IF NOT EXISTS quotes (
+                    quote_id TEXT PRIMARY KEY,
+                    expires_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS quote_acceptances (
+                    acceptance_id TEXT PRIMARY KEY,
+                    quote_id TEXT NOT NULL UNIQUE,
+                    accepted_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS payment_objects (
+                    object_id TEXT PRIMARY KEY,
+                    object_type TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS ledger_events (
+                    event_id TEXT PRIMARY KEY,
+                    event_type TEXT NOT NULL,
+                    occurred_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_ledger_occurred
+                    ON ledger_events(occurred_at DESC);
+                CREATE TABLE IF NOT EXISTS observations (
+                    observation_id TEXT PRIMARY KEY,
+                    provider_id TEXT,
+                    capability TEXT NOT NULL,
+                    observed_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_observations_provider_capability
+                    ON observations(provider_id, capability, observed_at DESC);
                 """
             )
 
@@ -202,6 +246,126 @@ class ReceiptStore:
             ).fetchall()
         return [RouteDecision.model_validate_json(row[0]) for row in rows]
 
+    def save_quote(self, quote: Quote) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                "INSERT OR REPLACE INTO quotes (quote_id, expires_at, payload_json) VALUES (?, ?, ?)",
+                (quote.quote_id, quote.expires_at.isoformat(), quote.model_dump_json()),
+            )
+
+    def get_quote(self, quote_id: str) -> Quote | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM quotes WHERE quote_id = ?", (quote_id,)
+            ).fetchone()
+        return Quote.model_validate_json(row[0]) if row else None
+
+    def save_quote_acceptance(self, acceptance: QuoteAcceptance) -> None:
+        try:
+            with self._lock, self._connection:
+                self._connection.execute(
+                    """
+                    INSERT INTO quote_acceptances
+                        (acceptance_id, quote_id, accepted_at, payload_json)
+                    VALUES (?, ?, ?, ?)
+                    """,
+                    (
+                        acceptance.acceptance_id,
+                        acceptance.quote_id,
+                        acceptance.accepted_at.isoformat(),
+                        acceptance.model_dump_json(),
+                    ),
+                )
+        except sqlite3.IntegrityError as exc:
+            raise ConfigurationError(f"quote {acceptance.quote_id!r} was already accepted") from exc
+
+    def save_payment_object(
+        self, value: PaymentReservation | PaymentCapture | PaymentRefund
+    ) -> None:
+        object_id = value.reservation_id if isinstance(value, PaymentReservation) else value.capture_id if isinstance(value, PaymentCapture) else value.refund_id
+        with self._lock, self._connection:
+            self._connection.execute(
+                "INSERT OR REPLACE INTO payment_objects (object_id, object_type, payload_json) VALUES (?, ?, ?)",
+                (object_id, type(value).__name__, value.model_dump_json()),
+            )
+
+    def get_payment_reservation(self, reservation_id: str) -> PaymentReservation | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM payment_objects WHERE object_id = ? AND object_type = ?",
+                (reservation_id, "PaymentReservation"),
+            ).fetchone()
+        return PaymentReservation.model_validate_json(row[0]) if row else None
+
+    def get_payment_capture(self, capture_id: str) -> PaymentCapture | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM payment_objects WHERE object_id = ? AND object_type = ?",
+                (capture_id, "PaymentCapture"),
+            ).fetchone()
+        return PaymentCapture.model_validate_json(row[0]) if row else None
+
+    def save_ledger_event(self, event: LedgerEvent) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                "INSERT INTO ledger_events (event_id, event_type, occurred_at, payload_json) VALUES (?, ?, ?, ?)",
+                (
+                    event.event_id,
+                    event.event_type,
+                    event.occurred_at.isoformat(),
+                    event.model_dump_json(),
+                ),
+            )
+
+    def list_ledger_events(self, *, limit: int = 10_000) -> list[LedgerEvent]:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM ledger_events ORDER BY occurred_at DESC LIMIT ?",
+                (max(1, min(limit, 10_000)),),
+            ).fetchall()
+        return [LedgerEvent.model_validate_json(row[0]) for row in rows]
+
+    def save_observation(self, observation: Observation) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT OR REPLACE INTO observations
+                    (observation_id, provider_id, capability, observed_at, payload_json)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    observation.observation_id,
+                    observation.provider_id,
+                    observation.capability,
+                    observation.observed_at.isoformat(),
+                    observation.model_dump_json(),
+                ),
+            )
+
+    def list_observations(
+        self,
+        *,
+        provider_id: str | None = None,
+        capability: str | None = None,
+        limit: int = 10_000,
+    ) -> list[Observation]:
+        clauses: list[str] = []
+        parameters: list[object] = []
+        if provider_id is not None:
+            clauses.append("provider_id = ?")
+            parameters.append(provider_id)
+        if capability is not None:
+            clauses.append("capability = ?")
+            parameters.append(capability)
+        where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+        parameters.append(max(1, min(limit, 10_000)))
+        with self._lock:
+            rows = self._connection.execute(
+                f"SELECT payload_json FROM observations {where} ORDER BY observed_at DESC LIMIT ?",
+                parameters,
+            ).fetchall()
+        return [Observation.model_validate_json(row[0]) for row in rows]
+
     def save_receipts(self, receipts: Iterable[ExecutionReceipt]) -> None:
         for receipt in receipts:
             self.save_receipt(receipt)
@@ -210,7 +374,7 @@ class ReceiptStore:
         with self._lock:
             self._connection.close()
 
-    def __enter__(self) -> "ReceiptStore":
+    def __enter__(self) -> ReceiptStore:
         return self
 
     def __exit__(self, *_: object) -> None:

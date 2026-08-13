@@ -198,6 +198,127 @@
       "title": "ActionConstraints",
       "type": "object"
     },
+    "AgentBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "budget_id": {
+          "default": "default",
+          "title": "Budget Id",
+          "type": "string"
+        },
+        "daily_marketplace_limit_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Daily Marketplace Limit Usd",
+          "type": "number"
+        },
+        "max_per_action_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Max Per Action Usd",
+          "type": "number"
+        },
+        "prepaid_balance_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Prepaid Balance Usd",
+          "type": "number"
+        },
+        "authorization": {
+          "$ref": "#/$defs/AuthorizationPolicy"
+        }
+      },
+      "title": "AgentBudget",
+      "type": "object"
+    },
+    "AuthorizationPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "auto_approve_under_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Auto Approve Under Usd",
+          "type": "number"
+        },
+        "financial_actions_require_human": {
+          "default": true,
+          "title": "Financial Actions Require Human",
+          "type": "boolean"
+        },
+        "preserve_subscriptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preserve Subscriptions",
+          "type": "array"
+        },
+        "prefer_local_within_percent": {
+          "default": 0.0,
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "title": "Prefer Local Within Percent",
+          "type": "number"
+        }
+      },
+      "title": "AuthorizationPolicy",
+      "type": "object"
+    },
+    "CapabilityDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Namespace",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "default": "1",
+          "pattern": "^[0-9]+(?:\\.[0-9]+){0,2}$",
+          "title": "Version",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "output_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema"
+        },
+        "side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        }
+      },
+      "required": [
+        "namespace",
+        "name",
+        "description"
+      ],
+      "title": "CapabilityDefinition",
+      "type": "object"
+    },
     "EstimateSource": {
       "enum": [
         "static",
@@ -215,6 +336,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -308,6 +430,39 @@
           "title": "Tags",
           "type": "array"
         },
+        "resource_pool": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Pool"
+        },
+        "provider_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Id"
+        },
+        "validators": {
+          "items": {
+            "$ref": "#/$defs/ValidationSpec"
+          },
+          "title": "Validators",
+          "type": "array"
+        },
         "config": {
           "additionalProperties": true,
           "title": "Config",
@@ -386,6 +541,12 @@
           "default": 0.25,
           "minimum": 0.0,
           "title": "Compute",
+          "type": "number"
+        },
+        "subscription": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Subscription",
           "type": "number"
         },
         "reliability": {
@@ -477,6 +638,13 @@
           "title": "Resource Scarcity Multiplier",
           "type": "number"
         },
+        "subscription_scarcity_multiplier": {
+          "default": 1.0,
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "title": "Subscription Scarcity Multiplier",
+          "type": "number"
+        },
         "prefer_local_bonus": {
           "default": 0.05,
           "maximum": 1.0,
@@ -492,6 +660,31 @@
       },
       "title": "PolicyConfig",
       "type": "object"
+    },
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
     },
     "ReferenceScales": {
       "additionalProperties": false,
@@ -547,6 +740,99 @@
         }
       },
       "title": "ReferenceScales",
+      "type": "object"
+    },
+    "RegistryConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "local",
+            "remote"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "allowed_hosts": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Hosts"
+        },
+        "allow_private_networks": {
+          "default": false,
+          "title": "Allow Private Networks",
+          "type": "boolean"
+        },
+        "allow_insecure_http": {
+          "default": false,
+          "title": "Allow Insecure Http",
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "default": 10.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 120.0,
+          "title": "Timeout Seconds",
+          "type": "number"
+        },
+        "max_response_bytes": {
+          "default": 1000000,
+          "maximum": 10000000,
+          "minimum": 1024,
+          "title": "Max Response Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "kind"
+      ],
+      "title": "RegistryConfig",
       "type": "object"
     },
     "ResourceVector": {
@@ -612,6 +898,13 @@
           "minimum": 0,
           "title": "Output Tokens",
           "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
         }
       },
       "title": "ResourceVector",
@@ -725,13 +1018,209 @@
       ],
       "title": "SideEffect",
       "type": "string"
+    },
+    "SigningConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "secret_env": {
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+          "title": "Secret Env",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "secret_env"
+      ],
+      "title": "SigningConfig",
+      "type": "object"
+    },
+    "SubscriptionAccess": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "host",
+          "enum": [
+            "host",
+            "cli",
+            "mcp"
+          ],
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "title": "SubscriptionAccess",
+      "type": "object"
+    },
+    "SubscriptionCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "reasoning": {
+          "default": false,
+          "title": "Reasoning",
+          "type": "boolean"
+        },
+        "coding": {
+          "default": false,
+          "title": "Coding",
+          "type": "boolean"
+        },
+        "browser": {
+          "default": false,
+          "title": "Browser",
+          "type": "boolean"
+        },
+        "computer_use": {
+          "default": false,
+          "title": "Computer Use",
+          "type": "boolean"
+        },
+        "custom": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Custom",
+          "type": "array"
+        }
+      },
+      "title": "SubscriptionCapabilities",
+      "type": "object"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
+    },
+    "SubscriptionResource": {
+      "additionalProperties": false,
+      "description": "A resource the user already owns; it is never represented as money.",
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "subscription",
+          "default": "subscription",
+          "title": "Kind",
+          "type": "string"
+        },
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "product": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Product",
+          "type": "string"
+        },
+        "access": {
+          "$ref": "#/$defs/SubscriptionAccess"
+        },
+        "quota": {
+          "$ref": "#/$defs/SubscriptionQuota"
+        },
+        "capabilities": {
+          "$ref": "#/$defs/SubscriptionCapabilities"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "product"
+      ],
+      "title": "SubscriptionResource",
+      "type": "object"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationSpec",
+      "type": "object"
     }
   },
   "additionalProperties": false,
   "properties": {
     "version": {
-      "const": "0.1",
-      "default": "0.1",
+      "default": "0.2",
+      "enum": [
+        "0.1",
+        "0.15",
+        "0.2"
+      ],
       "title": "Version",
       "type": "string"
     },
@@ -748,12 +1237,55 @@
     "persistence": {
       "$ref": "#/$defs/PersistenceConfig"
     },
+    "signing": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SigningConfig"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "budget": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AgentBudget"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
     "policies": {
       "additionalProperties": {
         "$ref": "#/$defs/PolicyConfig"
       },
       "title": "Policies",
       "type": "object"
+    },
+    "capabilities": {
+      "items": {
+        "$ref": "#/$defs/CapabilityDefinition"
+      },
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "resources": {
+      "items": {
+        "$ref": "#/$defs/SubscriptionResource"
+      },
+      "title": "Resources",
+      "type": "array"
+    },
+    "registries": {
+      "items": {
+        "$ref": "#/$defs/RegistryConfig"
+      },
+      "title": "Registries",
+      "type": "array"
     },
     "executors": {
       "items": {

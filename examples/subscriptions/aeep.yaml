@@ -1,0 +1,64 @@
+version: "0.2"
+database: .aeep/aeep.db
+default_policy: balanced
+
+resources:
+  - id: anthropic.claude
+    kind: subscription
+    provider: anthropic
+    product: claude
+    access: {mode: host}
+    quota: {state: normal, confidence: 0.8, source: user}
+    capabilities: {reasoning: true, coding: true}
+
+executors:
+  - id: local.text-stats
+    capability: text.stats
+    kind: python
+    description: Deterministic local implementation.
+    input_schema: &input
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema: &output
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources: {latency_ms: 2, cpu_ms: 1, peak_memory_mb: 32}
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.001
+      confidence: 0.9
+    side_effect: none
+    locality: in_process
+    config: {callable: aeep.examples.tools:text_stats}
+
+  - id: host.claude-text-stats
+    capability: text.stats
+    kind: host
+    resource_pool: anthropic.claude
+    description: Use the current Claude subscription without an API key.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources:
+        latency_ms: 2500
+        context_tokens: 800
+        subscription_units: 1
+      success_probability: 0.95
+      quality_score: 0.98
+      risk_score: 0.02
+      confidence: 0.6
+    side_effect: none
+    locality: local
+    tags: [model]
+    config:
+      instructions: >-
+        Count the characters, whitespace-separated words, and lines in
+        {input.text}; return only the three integer fields.

@@ -70,12 +70,17 @@ def load_manifest(path: str | Path | None = None) -> tuple[Manifest, Path]:
             cwd_path = Path(cwd).expanduser()
             if not cwd_path.is_absolute():
                 executor.config["cwd"] = str((manifest_path.parent / cwd_path).resolve())
+    for registry in manifest.registries:
+        if registry.kind == "local" and registry.path:
+            registry_path = Path(registry.path).expanduser()
+            if not registry_path.is_absolute():
+                registry.path = str((manifest_path.parent / registry_path).resolve())
     return manifest, manifest_path
 
 
 def default_manifest_dict() -> dict[str, Any]:
     return {
-        "version": "0.1",
+        "version": "0.2",
         "database": ".aeep/aeep.db",
         "default_policy": "balanced",
         "persistence": {
@@ -83,6 +88,17 @@ def default_manifest_dict() -> dict[str, Any]:
             "store_action_context": False,
         },
         "policies": {},
+        "resources": [
+            {
+                "id": "host.subscription",
+                "kind": "subscription",
+                "provider": "current-host",
+                "product": "current-agent",
+                "access": {"mode": "host"},
+                "quota": {"state": "unknown", "confidence": 0.5, "source": "user"},
+                "capabilities": {"reasoning": True, "coding": True},
+            }
+        ],
         "executors": [
             {
                 "id": "builtin.text-stats",
@@ -163,6 +179,45 @@ def default_manifest_dict() -> dict[str, Any]:
                     "argv": [sys.executable, "-m", "aeep.examples.text_stats_cli", "{input.text}"],
                     "output": {"type": "json"},
                     "timeout_seconds": 10,
+                },
+            },
+            {
+                "id": "host.text-stats",
+                "capability": "text.stats",
+                "kind": "host",
+                "description": "Let the current subscribed agent host perform the action.",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {"text": {"type": "string"}},
+                    "required": ["text"],
+                    "additionalProperties": False,
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "characters": {"type": "integer"},
+                        "words": {"type": "integer"},
+                        "lines": {"type": "integer"},
+                    },
+                    "required": ["characters", "words", "lines"],
+                    "additionalProperties": False,
+                },
+                "estimate": {
+                    "resources": {
+                        "latency_ms": 2500,
+                        "context_tokens": 1000,
+                        "subscription_units": 1,
+                    },
+                    "success_probability": 0.9,
+                    "quality_score": 0.95,
+                    "risk_score": 0.05,
+                    "confidence": 0.4,
+                },
+                "side_effect": "none",
+                "locality": "local",
+                "resource_pool": "host.subscription",
+                "config": {
+                    "instructions": "Count the characters, words, and lines in {input.text}."
                 },
             },
         ],

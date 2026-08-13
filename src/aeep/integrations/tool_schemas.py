@@ -51,7 +51,7 @@ _BASE_TOOLS: list[dict[str, Any]] = [
         "name": "aeep_list_capabilities",
         "description": (
             "List semantic capabilities and their available CLI, Python, HTTP, MCP, or "
-            "host-delegated executors before choosing an action."
+            "host executors before choosing an action."
         ),
         "schema": {
             "type": "object",
@@ -124,10 +124,14 @@ _BASE_TOOLS: list[dict[str, Any]] = [
                         "context_tokens": {"type": "integer", "minimum": 0},
                         "input_tokens": {"type": "integer", "minimum": 0},
                         "output_tokens": {"type": "integer", "minimum": 0},
+                        "subscription_units": {"type": "number", "minimum": 0},
                     },
                     "additionalProperties": False,
                 },
                 "output_valid": {"type": ["boolean", "null"]},
+                "task_valid": {"type": ["boolean", "null"]},
+                "quality_score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+                "validation_results": {"type": "array", "items": {"type": "object"}},
                 "error_message": {"type": ["string", "null"]},
                 "metadata": {"type": "object", "additionalProperties": True},
             },
@@ -135,6 +139,38 @@ _BASE_TOOLS: list[dict[str, Any]] = [
             "additionalProperties": False,
         },
         "annotations": {"readOnlyHint": False, "idempotentHint": False},
+    },
+    {
+        "name": "aeep_request_quotes",
+        "description": (
+            "Request expiring execution quotes for compatible routes without accepting or paying "
+            "for one. Quote acceptance and financial approval remain operator-only."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                **deepcopy(_ACTION_PROPERTIES),
+                "executor_ids": {"type": "array", "items": {"type": "string"}},
+            },
+            "required": ["capability", "input"],
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
+    },
+    {
+        "name": "aeep_get_metrics",
+        "description": (
+            "Read private aggregate savings, substitutions, resource use, and subscription "
+            "capacity conserved from local AEEP history."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                "limit": {"type": "integer", "minimum": 1, "maximum": 10000, "default": 10000}
+            },
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
     },
 ]
 

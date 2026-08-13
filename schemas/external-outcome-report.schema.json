@@ -6,6 +6,7 @@
         "failed",
         "timeout",
         "rejected",
+        "host_selected",
         "delegated",
         "unknown"
       ],
@@ -75,9 +76,90 @@
           "minimum": 0,
           "title": "Output Tokens",
           "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
         }
       },
       "title": "ResourceVector",
+      "type": "object"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid"
+        },
+        "quality_score": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Score"
+        },
+        "detail": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Detail",
+          "type": "string"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "observed"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationResult",
       "type": "object"
     }
   },
@@ -108,6 +190,39 @@
       ],
       "default": null,
       "title": "Output Valid"
+    },
+    "task_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Task Valid"
+    },
+    "quality_score": {
+      "anyOf": [
+        {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quality Score"
+    },
+    "validation_results": {
+      "items": {
+        "$ref": "#/$defs/ValidationResult"
+      },
+      "title": "Validation Results",
+      "type": "array"
     },
     "error_message": {
       "anyOf": [

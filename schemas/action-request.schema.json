@@ -249,6 +249,13 @@
           ],
           "default": null,
           "title": "Traceparent"
+        },
+        "subscription_quotas": {
+          "additionalProperties": {
+            "$ref": "#/$defs/SubscriptionQuota"
+          },
+          "title": "Subscription Quotas",
+          "type": "object"
         }
       },
       "title": "ActionContext",
@@ -349,6 +356,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -364,6 +372,31 @@
       "title": "Locality",
       "type": "string"
     },
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
     "SideEffect": {
       "enum": [
         "none",
@@ -374,6 +407,41 @@
       ],
       "title": "SideEffect",
       "type": "string"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
     }
   },
   "additionalProperties": false,

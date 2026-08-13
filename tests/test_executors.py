@@ -3,10 +3,11 @@ from __future__ import annotations
 import json
 import sys
 import threading
-from pathlib import Path
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
 import pytest
+from conftest import manifest_with
 
 from aeep.models import (
     ActionRequest,
@@ -18,8 +19,6 @@ from aeep.models import (
     SideEffect,
 )
 from aeep.router import Router
-
-from conftest import manifest_with
 
 
 @pytest.mark.asyncio
@@ -68,7 +67,7 @@ async def test_command_shell_rejected(text_schema):
 
 
 class _Handler(BaseHTTPRequestHandler):
-    def do_POST(self):  # noqa: N802
+    def do_POST(self):
         length = int(self.headers.get("content-length", "0"))
         data = json.loads(self.rfile.read(length) or b"{}")
         text = data["text"]

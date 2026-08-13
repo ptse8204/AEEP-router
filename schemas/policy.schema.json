@@ -204,6 +204,7 @@
         "python",
         "http",
         "mcp",
+        "host",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -262,6 +263,12 @@
           "default": 0.25,
           "minimum": 0.0,
           "title": "Compute",
+          "type": "number"
+        },
+        "subscription": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Subscription",
           "type": "number"
         },
         "reliability": {
@@ -450,6 +457,13 @@
       "maximum": 100.0,
       "minimum": 0.0,
       "title": "Resource Scarcity Multiplier",
+      "type": "number"
+    },
+    "subscription_scarcity_multiplier": {
+      "default": 1.0,
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Subscription Scarcity Multiplier",
       "type": "number"
     },
     "prefer_local_bonus": {

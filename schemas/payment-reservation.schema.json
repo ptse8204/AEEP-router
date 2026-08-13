@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "PaymentState": {
+      "enum": [
+        "reserved",
+        "captured",
+        "released",
+        "refunded",
+        "failed"
+      ],
+      "title": "PaymentState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reservation_id": {
+      "title": "Reservation Id",
+      "type": "string"
+    },
+    "quote_id": {
+      "title": "Quote Id",
+      "type": "string"
+    },
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "adapter": {
+      "title": "Adapter",
+      "type": "string"
+    },
+    "amount_usd": {
+      "minimum": 0.0,
+      "title": "Amount Usd",
+      "type": "number"
+    },
+    "state": {
+      "$ref": "#/$defs/PaymentState",
+      "default": "reserved"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    }
+  },
+  "required": [
+    "quote_id",
+    "action_id",
+    "adapter",
+    "amount_usd"
+  ],
+  "title": "PaymentReservation",
+  "type": "object"
+}

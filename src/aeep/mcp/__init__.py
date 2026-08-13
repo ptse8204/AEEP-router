@@ -8,7 +8,7 @@ from .client import LEGACY_VERSION, MODERN_VERSION, MCPHTTPClient, MCPStdioClien
 
 __all__ = [
     "LEGACY_VERSION",
+    "MODERN_VERSION",
     "MCPHTTPClient",
     "MCPStdioClient",
-    "MODERN_VERSION",
 ]

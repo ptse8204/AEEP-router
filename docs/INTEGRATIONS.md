@@ -1,11 +1,15 @@
 # Agent integration guide
 
-AEEP deliberately exposes the same four operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP deliberately exposes the same six operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
 - `aeep_execute_action`
 - `aeep_record_outcome`
+- `aeep_request_quotes`
+- `aeep_get_metrics`
+
+Financial acceptance, reservations, captures, and refunds are operator-only and are not model tools.
 
 This keeps the routing contract stable even when an agent host changes. The host remains responsible for its own sandbox and approval UI; AEEP independently enforces manifest constraints and its operator-configured execution ceiling.
 
