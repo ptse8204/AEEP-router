@@ -60,6 +60,10 @@ class PythonExecutor(BaseExecutor):
                 if inspect.iscoroutinefunction(function):
                     return await function(context.request.input)
                 return await asyncio.to_thread(function, context.request.input)
+            if mode == "request":
+                if inspect.iscoroutinefunction(function):
+                    return await function(context.request)
+                return await asyncio.to_thread(function, context.request)
             raise ConfigurationError(f"unsupported Python argument_mode {mode!r}")
 
         try:
@@ -87,13 +91,7 @@ class PythonExecutor(BaseExecutor):
             latency_ms=elapsed * 1000.0,
             cpu_ms=max(
                 0.0,
-                (
-                    cpu_after.user
-                    + cpu_after.system
-                    - cpu_before.user
-                    - cpu_before.system
-                )
-                * 1000.0,
+                (cpu_after.user + cpu_after.system - cpu_before.user - cpu_before.system) * 1000.0,
             ),
             memory_mb_seconds=incremental_memory * elapsed,
             peak_memory_mb=incremental_memory,

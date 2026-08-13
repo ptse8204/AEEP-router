@@ -171,10 +171,27 @@ class SubscriptionResource(StrictModel):
     capabilities: SubscriptionCapabilities = Field(default_factory=SubscriptionCapabilities)
 
 
+class QuotaObservation(StrictModel):
+    observation_id: str = Field(default_factory=lambda: new_id("quota"))
+    resource_id: str = Field(min_length=1, max_length=200)
+    quota: SubscriptionQuota
+    observed_at: datetime = Field(default_factory=utc_now)
+    note: str | None = Field(default=None, max_length=1000)
+
+
 class CapabilityDefinition(StrictModel):
     namespace: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]*$")
     name: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]*$")
     version: str = Field(default="1", pattern=r"^[0-9]+(?:\.[0-9]+){0,2}$")
+    authority: str | None = Field(
+        default=None,
+        max_length=500,
+        description="Domain, URI, or organization responsible for the canonical contract.",
+    )
+    owner: str | None = Field(default=None, max_length=200)
+    status: Literal["active", "deprecated"] = "active"
+    replaced_by: str | None = Field(default=None, max_length=200)
+    compatible_versions: list[str] = Field(default_factory=list)
     description: str = Field(min_length=1, max_length=4000)
     input_schema: dict[str, Any] = Field(
         default_factory=lambda: {"type": "object", "additionalProperties": True}
@@ -185,6 +202,14 @@ class CapabilityDefinition(StrictModel):
     @property
     def capability(self) -> str:
         return f"{self.namespace}.{self.name}@{self.version}"
+
+    @model_validator(mode="after")
+    def valid_lifecycle(self) -> CapabilityDefinition:
+        if self.status == "active" and self.replaced_by is not None:
+            raise ValueError("only deprecated capabilities can declare replaced_by")
+        if self.replaced_by == self.capability:
+            raise ValueError("capability cannot replace itself")
+        return self
 
 
 class ValidationSpec(StrictModel):
@@ -312,6 +337,16 @@ class ActionRequest(StrictModel):
     constraints: ActionConstraints = Field(default_factory=ActionConstraints)
     context: ActionContext = Field(default_factory=ActionContext)
     idempotency_key: str | None = Field(default=None, max_length=256)
+
+
+class ActionFeatures(StrictModel):
+    """Non-payload characteristics used to condition historical estimates."""
+
+    input_bytes: int = Field(ge=0)
+    input_items: int = Field(ge=0)
+    text_characters: int = Field(ge=0)
+    max_depth: int = Field(ge=0)
+    size_bucket: str = Field(pattern=r"^(empty|2\^[0-9]+)$")
 
 
 class QuoteRequest(StrictModel):
@@ -511,6 +546,12 @@ class PolicyConfig(StrictModel):
     history_prior_samples: int = Field(default=5, ge=1, le=1000)
     resource_scarcity_multiplier: float = Field(default=2.0, ge=0.0, le=100.0)
     subscription_scarcity_multiplier: float = Field(default=1.0, ge=0.0, le=100.0)
+    uncertainty_penalty: float = Field(
+        default=0.10,
+        ge=0.0,
+        le=10.0,
+        description="Added score burden at zero estimate confidence.",
+    )
     prefer_local_bonus: float = Field(default=0.05, ge=0.0, le=1.0)
     deterministic_tie_break: bool = True
 
@@ -602,6 +643,7 @@ class ScoreBreakdown(StrictModel):
     reliability: float = 0.0
     quality: float = 0.0
     risk: float = 0.0
+    uncertainty: float = 0.0
     locality_adjustment: float = 0.0
     total: float = 0.0
 
@@ -623,6 +665,7 @@ class RouteDecision(StrictModel):
     policy: PolicyConfig
     selected_executor_id: str | None = None
     candidates: list[CandidateScore] = Field(default_factory=list)
+    action_features: ActionFeatures | None = None
     created_at: datetime = Field(default_factory=utc_now)
     explanation: str = ""
 
@@ -639,6 +682,7 @@ class ExecutionReceipt(StrictModel):
     started_at: datetime = Field(default_factory=utc_now)
     ended_at: datetime = Field(default_factory=utc_now)
     estimated: RouteEstimate
+    action_features: ActionFeatures | None = None
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
     transport_success: bool | None = None
     execution_success: bool | None = None
@@ -666,6 +710,41 @@ class ExecutionOutcome(StrictModel):
     delegated_instructions: str | None = None
 
 
+class CompactAlternative(StrictModel):
+    executor_id: str
+    kind: ExecutorKind
+    score: float
+    delta: float = Field(ge=0.0)
+
+
+class CompactRouteDecision(StrictModel):
+    decision_id: str
+    action_id: str
+    capability: str
+    selected: str | None = None
+    reason: str
+    alternatives: list[CompactAlternative] = Field(default_factory=list)
+    rejected: int = 0
+
+
+class CompactReceipt(StrictModel):
+    receipt_id: str
+    executor_id: str
+    status: ExecutionStatus
+    resources: ResourceVector
+    valid: bool | None = None
+    error: str | None = None
+
+
+class CompactExecutionOutcome(StrictModel):
+    ok: bool
+    status: ExecutionStatus
+    output: Any = None
+    decision: CompactRouteDecision
+    receipts: list[CompactReceipt] = Field(default_factory=list)
+    instructions: str | None = None
+
+
 class ExternalOutcomeReport(StrictModel):
     decision_id: str
     executor_id: str
@@ -675,6 +754,7 @@ class ExternalOutcomeReport(StrictModel):
     task_valid: bool | None = None
     quality_score: float | None = Field(default=None, ge=0.0, le=1.0)
     validation_results: list[ValidationResult] = Field(default_factory=list)
+    quota_observation: SubscriptionQuota | None = None
     error_message: str | None = Field(default=None, max_length=16_384)
     metadata: dict[str, Any] = Field(default_factory=dict)
     started_at: datetime | None = None
@@ -722,6 +802,49 @@ class Observation(StrictModel):
     attestation: SignatureEnvelope | None = None
 
 
+class TraceCallKind(StrEnum):
+    MODEL = "model"
+    TOOL = "tool"
+    BROWSER = "browser"
+    COMMAND = "command"
+    MCP = "mcp"
+    HTTP = "http"
+    UNKNOWN = "unknown"
+
+
+class TraceCall(StrictModel):
+    trace_id: str | None = None
+    span_id: str | None = None
+    name: str
+    capability: str | None = None
+    executor_id: str | None = None
+    kind: TraceCallKind = TraceCallKind.UNKNOWN
+    provider: str | None = None
+    model: str | None = None
+    status: Literal["success", "failed", "unknown"] = "unknown"
+    retries: int = Field(default=0, ge=0)
+    resources: ResourceVector = Field(default_factory=ResourceVector)
+
+
+class PassiveRecommendation(StrictModel):
+    capability: str
+    observed_kind: TraceCallKind
+    recommended_executor_id: str
+    estimated_cash_saving_usd: float = Field(default=0.0, ge=0.0)
+    estimated_latency_saving_ms: float = Field(default=0.0, ge=0.0)
+    reason: str
+
+
+class TraceProfileReport(StrictModel):
+    calls: list[TraceCall] = Field(default_factory=list)
+    total_resources: ResourceVector = Field(default_factory=ResourceVector)
+    retries: int = Field(default=0, ge=0)
+    failures: int = Field(default=0, ge=0)
+    unmapped_calls: int = Field(default=0, ge=0)
+    recommendations: list[PassiveRecommendation] = Field(default_factory=list)
+    recorded_receipt_ids: list[str] = Field(default_factory=list)
+
+
 class ProviderReputation(StrictModel):
     provider_id: str
     capability: str
@@ -752,9 +875,7 @@ class ProviderDescriptor(StrictModel):
             if executor.provider_id is None:
                 executor.provider_id = self.provider_id
             elif executor.provider_id != self.provider_id:
-                raise ValueError(
-                    f"executor {executor.id!r} provider_id does not match descriptor"
-                )
+                raise ValueError(f"executor {executor.id!r} provider_id does not match descriptor")
         return self
 
 
@@ -777,8 +898,6 @@ class RegistryConfig(StrictModel):
         if self.kind == "remote" and not self.url:
             raise ValueError("remote registry requires url")
         return self
-
-
 
 
 class BenchmarkEntry(StrictModel):

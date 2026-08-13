@@ -10,29 +10,35 @@ Use AEEP at the bounded-action level. Do not send an open-ended objective such a
 
 ## Workflow
 
-1. Discover available capabilities when uncertain:
+1. Search capabilities progressively when uncertain:
 
 ```bash
-python -m aeep list --compact
+python -m aeep search "current git branch" --compact
 ```
 
-2. Route before executing when the task is expensive, risky, novel, or has several alternatives:
+2. Check named subscription pressure when a host route may be used:
 
 ```bash
-python -m aeep route CAPABILITY --input '@input.json' --compact
+python -m aeep subscriptions status --compact
 ```
 
-3. Inspect `selected_executor_id`, all `rejection_reasons`, estimates, and score components.
-
-4. Execute only when the selected route and side effect are appropriate:
+3. Route before executing when the task is expensive, risky, novel, or has several alternatives. Use the semantic compact response, not the full audit object:
 
 ```bash
-python -m aeep run CAPABILITY --input '@input.json' --compact
+python -m aeep route CAPABILITY --input '@input.json' --agent --compact
 ```
 
-5. Never add `--approve write`, `destructive`, `financial`, or `--approve-unsafe-executor` unless the user/operator explicitly approved the action and the manifest policy also allows it. A model tool call never counts as that approval.
+4. Inspect the selected route and concise reason. Use `aeep inspect DECISION_ID` only when detailed constraints, candidates, or scores are needed.
 
-6. For low quota or constrained hardware, pass current context:
+5. Execute only when the selected route and side effect are appropriate:
+
+```bash
+python -m aeep run CAPABILITY --input '@input.json' --agent --compact
+```
+
+6. Never add `--approve write`, `destructive`, `financial`, or `--approve-unsafe-executor` unless the user/operator explicitly approved the action and the manifest policy also allows it. A model tool call never counts as that approval.
+
+7. For constrained hardware, pass current context. For persistent host pressure, report the named resource separately with `aeep quota observe`:
 
 ```bash
 python -m aeep route CAPABILITY \
@@ -42,18 +48,25 @@ python -m aeep route CAPABILITY \
   --compact
 ```
 
-7. When AEEP selects a `delegate` route, follow its instructions using the host's browser/computer-use/model tools. Then report actual outcome:
+8. When AEEP selects a `host` or `delegate` route, follow its instructions using the named subscription/browser/computer-use/model resource. Then report actual outcome and subscription use:
 
 ```bash
 python -m aeep record DECISION_ID EXECUTOR_ID success \
   --resources '{"latency_ms":1200,"input_tokens":800,"output_tokens":100,"context_tokens":1600}' \
+  --quota-state normal \
   --output-valid \
   --compact
 ```
 
+After an official throttle or reset signal:
+
+```bash
+python -m aeep quota observe RESOURCE_ID tight --source rate_limit --compact
+```
+
 Report failures and timeouts too; otherwise future routing remains biased by static priors. Report only the selected delegated executor and submit one final outcome for that decision/executor pair. Use `ActionProfiler` rather than fabricating a delegate report for unrelated work.
 
-8. Use route calibration only after explicit operator confirmation because it executes several alternatives and may incur charges or disclose input to multiple providers:
+9. Use route calibration only after explicit operator confirmation because it executes several alternatives and may incur charges or disclose input to multiple providers:
 
 ```bash
 python -m aeep benchmark CAPABILITY \

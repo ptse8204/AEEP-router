@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 import threading
 from collections.abc import Iterable
@@ -15,6 +16,7 @@ from .models import (
     PaymentCapture,
     PaymentRefund,
     PaymentReservation,
+    QuotaObservation,
     Quote,
     QuoteAcceptance,
     RouteDecision,
@@ -112,8 +114,114 @@ class ReceiptStore:
                 );
                 CREATE INDEX IF NOT EXISTS idx_observations_provider_capability
                     ON observations(provider_id, capability, observed_at DESC);
+                CREATE TABLE IF NOT EXISTS idempotency_records (
+                    idempotency_key TEXT PRIMARY KEY,
+                    request_hash TEXT NOT NULL,
+                    state TEXT NOT NULL,
+                    decision_id TEXT,
+                    status TEXT,
+                    receipt_ids_json TEXT NOT NULL DEFAULT '[]'
+                );
+                CREATE TABLE IF NOT EXISTS quota_observations (
+                    observation_id TEXT PRIMARY KEY,
+                    resource_id TEXT NOT NULL,
+                    observed_at TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_quota_resource_observed
+                    ON quota_observations(resource_id, observed_at DESC);
                 """
             )
+
+    def claim_idempotency(self, key: str, request_hash: str) -> dict[str, object] | None:
+        """Claim a key atomically; return its existing record on duplicate."""
+
+        # ponytail: pending records fail closed after a crash; add expiring leases
+        # when multi-process recovery is required.
+
+        try:
+            with self._lock, self._connection:
+                self._connection.execute(
+                    """
+                    INSERT INTO idempotency_records (idempotency_key, request_hash, state)
+                    VALUES (?, ?, 'pending')
+                    """,
+                    (key, request_hash),
+                )
+            return None
+        except sqlite3.IntegrityError:
+            with self._lock:
+                row = self._connection.execute(
+                    """
+                    SELECT request_hash, state, decision_id, status, receipt_ids_json
+                    FROM idempotency_records WHERE idempotency_key = ?
+                    """,
+                    (key,),
+                ).fetchone()
+            if row is None:  # pragma: no cover - protected by the unique constraint
+                raise ConfigurationError("idempotency record disappeared during lookup") from None
+            if row["request_hash"] != request_hash:
+                raise ConfigurationError(
+                    f"idempotency key {key!r} was already used for a different action"
+                ) from None
+            return {
+                "state": row["state"],
+                "decision_id": row["decision_id"],
+                "status": row["status"],
+                "receipt_ids": json.loads(row["receipt_ids_json"]),
+            }
+
+    def complete_idempotency(
+        self,
+        key: str,
+        *,
+        decision_id: str,
+        status: str,
+        receipt_ids: list[str],
+    ) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                UPDATE idempotency_records
+                SET state = 'complete', decision_id = ?, status = ?, receipt_ids_json = ?
+                WHERE idempotency_key = ? AND state = 'pending'
+                """,
+                (decision_id, status, json.dumps(receipt_ids), key),
+            )
+
+    def abandon_idempotency(self, key: str) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                "DELETE FROM idempotency_records WHERE idempotency_key = ? AND state = 'pending'",
+                (key,),
+            )
+
+    def save_quota_observation(self, observation: QuotaObservation) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO quota_observations
+                    (observation_id, resource_id, observed_at, payload_json)
+                VALUES (?, ?, ?, ?)
+                """,
+                (
+                    observation.observation_id,
+                    observation.resource_id,
+                    observation.observed_at.isoformat(),
+                    observation.model_dump_json(),
+                ),
+            )
+
+    def latest_quota_observation(self, resource_id: str) -> QuotaObservation | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT payload_json FROM quota_observations
+                WHERE resource_id = ? ORDER BY observed_at DESC LIMIT 1
+                """,
+                (resource_id,),
+            ).fetchone()
+        return QuotaObservation.model_validate_json(row[0]) if row else None
 
     def save_decision(self, decision: RouteDecision) -> None:
         with self._lock, self._connection:
@@ -233,7 +341,9 @@ class ReceiptStore:
             ).fetchall()
         return [ExecutionReceipt.model_validate_json(row[0]) for row in rows]
 
-    def receipts_for_executor(self, executor_id: str, *, limit: int = 200) -> list[ExecutionReceipt]:
+    def receipts_for_executor(
+        self, executor_id: str, *, limit: int = 200
+    ) -> list[ExecutionReceipt]:
         receipts = self.list_receipts(limit=limit, executor_id=executor_id)
         receipts.reverse()
         return receipts
@@ -282,7 +392,13 @@ class ReceiptStore:
     def save_payment_object(
         self, value: PaymentReservation | PaymentCapture | PaymentRefund
     ) -> None:
-        object_id = value.reservation_id if isinstance(value, PaymentReservation) else value.capture_id if isinstance(value, PaymentCapture) else value.refund_id
+        object_id = (
+            value.reservation_id
+            if isinstance(value, PaymentReservation)
+            else value.capture_id
+            if isinstance(value, PaymentCapture)
+            else value.refund_id
+        )
         with self._lock, self._connection:
             self._connection.execute(
                 "INSERT OR REPLACE INTO payment_objects (object_id, object_type, payload_json) VALUES (?, ?, ?)",

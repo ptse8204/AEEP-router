@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- compact agent decisions, paginated capability search, and detailed inspection by ID;
+- confidence-aware scoring, zero-capacity GPU enforcement, input-conditioned history, and atomic idempotency;
+- OpenTelemetry trace ingestion plus OpenAI and Anthropic SDK instrumentation;
+- runtime subscription quota observations and packaged skill installation;
+- MCP server discovery import and a real GitHub default-branch routing example;
+- full Apache-2.0 license text and Ruff/mypy cross-platform CI checks.
+
 ## 0.2.0 — 2026-08-12
 
 - subscription resources, explicit quota pressure, host executors, and BYOS skills/examples;

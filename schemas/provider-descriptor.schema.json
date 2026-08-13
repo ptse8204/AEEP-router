@@ -19,6 +19,62 @@
           "title": "Version",
           "type": "string"
         },
+        "authority": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Domain, URI, or organization responsible for the canonical contract.",
+          "title": "Authority"
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Owner"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "deprecated"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "replaced_by": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaced By"
+        },
+        "compatible_versions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compatible Versions",
+          "type": "array"
+        },
         "description": {
           "maxLength": 4000,
           "minLength": 1,

@@ -58,6 +58,7 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 - Define explicit policies for writes/destructive/financial actions.
 - Require a separate operator-controlled runtime approval. Model/MCP/function-call arguments cannot raise that ceiling.
 - Use idempotency keys at the downstream service when possible.
+- AEEP binds a key to one capability/input hash and fails closed on mismatches or unfinished prior claims. Protect the receipt database from deletion or tampering.
 - Never opt into non-idempotent fallback without understanding duplicate-action risk.
 
 ## Secrets
@@ -74,6 +75,8 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 `aeep_record_outcome` changes future estimates. Treat access to it as write access to routing policy. Authenticate remote callers, rate-limit reports, preserve provenance, and do not merge unauthenticated reports into shared reputation. The reference implementation accepts an external report only for the selected feasible delegate and only once per decision/executor pair, but a compromised authorized caller can still fabricate that one report. Use `ActionProfiler` for trusted operator-owned measurement outside the delegate flow.
 
 Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The built-in HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system.
+
+Imported traces and SDK measurements also influence local history. Treat trace files and instrumented client access as trusted measurement inputs. The built-in instrumentation stores resource metadata and identifiers, not action payloads or model outputs; trace attributes can still contain sensitive data and should be filtered at the telemetry collector.
 
 ## Subscription resources
 

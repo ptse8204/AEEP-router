@@ -5,7 +5,33 @@
       "description": "List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choosing an action.",
       "inputSchema": {
         "type": "object",
-        "properties": {},
+        "properties": {
+          "query": {
+            "type": "string",
+            "default": ""
+          },
+          "prefix": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "cursor": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "include_executors": {
+            "type": "boolean",
+            "default": false
+          }
+        },
         "additionalProperties": false
       },
       "annotations": {
@@ -42,6 +68,19 @@
             "type": "object",
             "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
             "additionalProperties": true
+          },
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Stable key that prevents duplicate execution of the same action."
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "compact",
+              "full"
+            ],
+            "default": "compact"
           }
         },
         "required": [
@@ -85,10 +124,23 @@
             "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
             "additionalProperties": true
           },
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Stable key that prevents duplicate execution of the same action."
+          },
           "dry_run": {
             "type": "boolean",
             "default": false,
             "description": "Return the route decision without invoking the executor."
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "compact",
+              "full"
+            ],
+            "default": "compact"
           }
         },
         "required": [
@@ -199,6 +251,52 @@
               "type": "object"
             }
           },
+          "quota_observation": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "abundant",
+                  "normal",
+                  "tight",
+                  "critical",
+                  "exhausted",
+                  "unknown"
+                ]
+              },
+              "reset_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "source": {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "host",
+                  "official_cli",
+                  "rate_limit",
+                  "heuristic",
+                  "observed"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "additionalProperties": false
+          },
           "error_message": {
             "type": [
               "string",
@@ -251,6 +349,11 @@
             "type": "object",
             "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
             "additionalProperties": true
+          },
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Stable key that prevents duplicate execution of the same action."
           },
           "executor_ids": {
             "type": "array",

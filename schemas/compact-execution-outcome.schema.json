@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "CompactAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "delta": {
+          "minimum": 0.0,
+          "title": "Delta",
+          "type": "number"
+        }
+      },
+      "required": [
+        "executor_id",
+        "kind",
+        "score",
+        "delta"
+      ],
+      "title": "CompactAlternative",
+      "type": "object"
+    },
+    "CompactReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "receipt_id": {
+          "title": "Receipt Id",
+          "type": "string"
+        },
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ExecutionStatus"
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        }
+      },
+      "required": [
+        "receipt_id",
+        "executor_id",
+        "status",
+        "resources"
+      ],
+      "title": "CompactReceipt",
+      "type": "object"
+    },
+    "CompactRouteDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "decision_id": {
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "selected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "alternatives": {
+          "items": {
+            "$ref": "#/$defs/CompactAlternative"
+          },
+          "title": "Alternatives",
+          "type": "array"
+        },
+        "rejected": {
+          "default": 0,
+          "title": "Rejected",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "decision_id",
+        "action_id",
+        "capability",
+        "reason"
+      ],
+      "title": "CompactRouteDecision",
+      "type": "object"
+    },
+    "ExecutionStatus": {
+      "enum": [
+        "success",
+        "failed",
+        "timeout",
+        "rejected",
+        "host_selected",
+        "delegated",
+        "unknown"
+      ],
+      "title": "ExecutionStatus",
+      "type": "string"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "ok": {
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "#/$defs/ExecutionStatus"
+    },
+    "output": {
+      "default": null,
+      "title": "Output"
+    },
+    "decision": {
+      "$ref": "#/$defs/CompactRouteDecision"
+    },
+    "receipts": {
+      "items": {
+        "$ref": "#/$defs/CompactReceipt"
+      },
+      "title": "Receipts",
+      "type": "array"
+    },
+    "instructions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Instructions"
+    }
+  },
+  "required": [
+    "ok",
+    "status",
+    "decision"
+  ],
+  "title": "CompactExecutionOutcome",
+  "type": "object"
+}

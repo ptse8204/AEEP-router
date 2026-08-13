@@ -261,6 +261,46 @@
       "title": "ActionContext",
       "type": "object"
     },
+    "ActionFeatures": {
+      "additionalProperties": false,
+      "description": "Non-payload characteristics used to condition historical estimates.",
+      "properties": {
+        "input_bytes": {
+          "minimum": 0,
+          "title": "Input Bytes",
+          "type": "integer"
+        },
+        "input_items": {
+          "minimum": 0,
+          "title": "Input Items",
+          "type": "integer"
+        },
+        "text_characters": {
+          "minimum": 0,
+          "title": "Text Characters",
+          "type": "integer"
+        },
+        "max_depth": {
+          "minimum": 0,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "size_bucket": {
+          "pattern": "^(empty|2\\^[0-9]+)$",
+          "title": "Size Bucket",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_bytes",
+        "input_items",
+        "text_characters",
+        "max_depth",
+        "size_bucket"
+      ],
+      "title": "ActionFeatures",
+      "type": "object"
+    },
     "ActionRequest": {
       "additionalProperties": false,
       "properties": {
@@ -647,6 +687,14 @@
           "title": "Subscription Scarcity Multiplier",
           "type": "number"
         },
+        "uncertainty_penalty": {
+          "default": 0.1,
+          "description": "Added score burden at zero estimate confidence.",
+          "maximum": 10.0,
+          "minimum": 0.0,
+          "title": "Uncertainty Penalty",
+          "type": "number"
+        },
         "prefer_local_bonus": {
           "default": 0.05,
           "maximum": 1.0,
@@ -905,6 +953,11 @@
           "title": "Risk",
           "type": "number"
         },
+        "uncertainty": {
+          "default": 0.0,
+          "title": "Uncertainty",
+          "type": "number"
+        },
         "locality_adjustment": {
           "default": 0.0,
           "title": "Locality Adjustment",
@@ -1046,6 +1099,17 @@
       },
       "title": "Candidates",
       "type": "array"
+    },
+    "action_features": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActionFeatures"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "created_at": {
       "format": "date-time",

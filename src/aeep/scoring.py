@@ -72,9 +72,7 @@ def rejection_reasons(
             f"{c.min_success_probability:.3f}"
         )
     if estimate.quality_score < c.min_quality_score:
-        reasons.append(
-            f"quality {estimate.quality_score:.3f} is below {c.min_quality_score:.3f}"
-        )
+        reasons.append(f"quality {estimate.quality_score:.3f} is below {c.min_quality_score:.3f}")
     if estimate.risk_score > c.max_risk_score:
         reasons.append(f"risk {estimate.risk_score:.3f} exceeds {c.max_risk_score:.3f}")
     if spec.side_effect.rank > c.max_side_effect.rank:
@@ -111,7 +109,8 @@ def rejection_reasons(
     available = context.compute
     if (
         available.context_tokens_remaining is not None
-        and (r.context_tokens + r.input_tokens + r.output_tokens) > available.context_tokens_remaining
+        and (r.context_tokens + r.input_tokens + r.output_tokens)
+        > available.context_tokens_remaining
     ):
         reasons.append("estimated context usage exceeds remaining context budget")
     if (
@@ -124,6 +123,8 @@ def rejection_reasons(
         and r.peak_memory_mb > available.available_memory_mb
     ):
         reasons.append("estimated peak memory exceeds currently available memory")
+    if available.available_gpu_ms is not None and r.gpu_ms > available.available_gpu_ms:
+        reasons.append("estimated GPU usage exceeds currently available GPU capacity")
 
     return reasons
 
@@ -195,17 +196,19 @@ def score_candidate(
     subscription = 0.0
     if subscription_quota is not None and estimate.resources.subscription_units:
         confidence = subscription_quota.confidence
-        effective_pressure = (
-            confidence * subscription_quota.state.pressure + (1.0 - confidence)
+        effective_pressure = confidence * subscription_quota.state.pressure + (1.0 - confidence)
+        subscription = (
+            math.log1p(
+                estimate.resources.subscription_units
+                * effective_pressure
+                * policy.subscription_scarcity_multiplier
+            )
+            * expected_multiplier
         )
-        subscription = math.log1p(
-            estimate.resources.subscription_units
-            * effective_pressure
-            * policy.subscription_scarcity_multiplier
-        ) * expected_multiplier
     reliability = -math.log(p_success)
     quality = 1.0 - estimate.quality_score
     risk = estimate.risk_score
+    uncertainty = (1.0 - estimate.confidence) * policy.uncertainty_penalty
 
     locality_adjustment = 0.0
     if spec.locality in {Locality.IN_PROCESS, Locality.LOCAL}:
@@ -221,6 +224,7 @@ def score_candidate(
         + weights["reliability"] * reliability
         + weights["quality"] * quality
         + weights["risk"] * risk
+        + uncertainty
         + locality_adjustment
     )
     breakdown = ScoreBreakdown(
@@ -231,6 +235,7 @@ def score_candidate(
         reliability=weights["reliability"] * reliability,
         quality=weights["quality"] * quality,
         risk=weights["risk"] * risk,
+        uncertainty=uncertainty,
         locality_adjustment=locality_adjustment,
         total=total,
     )

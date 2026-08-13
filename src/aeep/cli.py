@@ -12,13 +12,14 @@ import json
 import os
 import shutil
 import sys
+import sysconfig
 from pathlib import Path
 from typing import Any
 
 import typer
 import yaml
 
-from .config import load_manifest, write_default_manifest
+from .config import find_manifest, load_manifest, write_default_manifest
 from .errors import AEEPError, ApprovalRequired, ConfigurationError
 from .executors.python import load_callable
 from .integrations import export_tools
@@ -28,9 +29,13 @@ from .models import (
     ActionRequest,
     ExecutionStatus,
     ExternalOutcomeReport,
+    QuotaSource,
+    QuotaState,
     QuoteRequest,
     ResourceVector,
     SideEffect,
+    SubscriptionQuota,
+    SubscriptionResource,
 )
 from .router import Router
 from .version import __version__
@@ -43,8 +48,16 @@ app = typer.Typer(
 )
 tools_app = typer.Typer(help="Export AEEP as native tools for agent providers.")
 import_app = typer.Typer(help="Import existing CLI, MCP, or OpenAPI capabilities.")
+subscriptions_app = typer.Typer(help="Manage user-owned model and tool subscriptions.")
+quota_app = typer.Typer(help="Set or observe subscription quota pressure.")
+skill_app = typer.Typer(help="Install the packaged AEEP skill into an agent host.")
+ingest_app = typer.Typer(help="Ingest traces from existing agent runtimes.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
+app.add_typer(subscriptions_app, name="subscriptions")
+app.add_typer(quota_app, name="quota")
+app.add_typer(skill_app, name="skill")
+app.add_typer(ingest_app, name="ingest")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -151,11 +164,35 @@ async def _await_and_close(router: Router, awaitable: Any) -> Any:
 def _fail(exc: Exception, *, compact: bool = False) -> None:
     payload: dict[str, Any] = {"ok": False, "error": str(exc), "error_type": type(exc).__name__}
     if isinstance(exc, ApprovalRequired):
-        payload.update(
-            {"executor_id": exc.executor_id, "required_level": exc.required_level}
-        )
+        payload.update({"executor_id": exc.executor_id, "required_level": exc.required_level})
     _emit(payload, compact=compact)
     raise typer.Exit(code=2)
+
+
+def _manifest_document(path: Path | None) -> tuple[Path, dict[str, Any]]:
+    manifest_path = find_manifest(path)
+    value = yaml.safe_load(manifest_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(value, dict):
+        raise ConfigurationError("manifest root must be a mapping")
+    return manifest_path, value
+
+
+def _write_manifest_document(path: Path, value: dict[str, Any]) -> None:
+    path.write_text(
+        yaml.safe_dump(value, sort_keys=False, allow_unicode=True),
+        encoding="utf-8",
+    )
+
+
+def _packaged_skill() -> Path:
+    candidates = [
+        Path(__file__).resolve().parents[2] / "skills" / "aeep-minimal",
+        Path(sysconfig.get_path("data")) / "share" / "aeep" / "skills" / "aeep-minimal",
+    ]
+    for candidate in candidates:
+        if (candidate / "SKILL.md").is_file():
+            return candidate
+    raise ConfigurationError("packaged AEEP skill was not found; reinstall the distribution")
 
 
 @app.command()
@@ -180,8 +217,8 @@ def init(
                 "manifest": str(created),
                 "next": [
                     "aeep doctor",
-                    "aeep route text.stats --input '{\"text\":\"hello world\"}'",
-                    "aeep run text.stats --input '{\"text\":\"hello world\"}'",
+                    'aeep route text.stats --input \'{"text":"hello world"}\'',
+                    'aeep run text.stats --input \'{"text":"hello world"}\'',
                 ],
             }
         )
@@ -226,7 +263,9 @@ def doctor(
             elif spec.kind.value in {"delegate", "host"}:
                 ok = isinstance(spec.config.get("instructions"), str)
                 detail = "instructions configured" if ok else "missing config.instructions"
-            checks.append({"executor_id": spec.id, "kind": spec.kind.value, "ok": ok, "detail": detail})
+            checks.append(
+                {"executor_id": spec.id, "kind": spec.kind.value, "ok": ok, "detail": detail}
+            )
 
         # Opening the router verifies the database path and all model-level constraints.
         router = Router(parsed, manifest_path=manifest_path)
@@ -238,7 +277,9 @@ def doctor(
                 "version": __version__,
                 "manifest": str(manifest_path),
                 "database": parsed.database,
-                "capabilities": sorted({item.capability for item in parsed.executors if item.enabled}),
+                "capabilities": sorted(
+                    {item.capability for item in parsed.executors if item.enabled}
+                ),
                 "checks": checks,
             },
             compact=compact,
@@ -251,6 +292,10 @@ def doctor(
 
 @app.command("list")
 def list_capabilities(
+    prefix: str | None = typer.Option(None, "--prefix"),
+    limit: int = typer.Option(20, "--limit", min=1, max=100),
+    cursor: int = typer.Option(0, "--cursor", min=0),
+    details: bool = typer.Option(True, "--details/--summary"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -259,12 +304,233 @@ def list_capabilities(
     router: Router | None = None
     try:
         router = Router.from_manifest(manifest)
-        _emit({"capabilities": router.list_capabilities()}, compact=compact)
+        _emit(
+            router.search_capabilities(
+                prefix=prefix,
+                limit=limit,
+                cursor=cursor,
+                include_executors=details,
+            ),
+            compact=compact,
+        )
     except AEEPError as exc:
         _fail(exc, compact=compact)
     finally:
         if router is not None:
             _run(router.close())
+
+
+@app.command()
+def search(
+    query: str = typer.Argument(""),
+    prefix: str | None = typer.Option(None, "--prefix"),
+    limit: int = typer.Option(20, "--limit", min=1, max=100),
+    cursor: int = typer.Option(0, "--cursor", min=0),
+    details: bool = typer.Option(False, "--details"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Search capabilities without loading every executor into the response."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit(
+            router.search_capabilities(
+                query,
+                prefix=prefix,
+                limit=limit,
+                cursor=cursor,
+                include_executors=details,
+            ),
+            compact=compact,
+        )
+    except AEEPError as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@subscriptions_app.command("add")
+def subscriptions_add(
+    resource_id: str = typer.Argument(...),
+    provider: str = typer.Option(..., "--provider"),
+    product: str = typer.Option(..., "--product"),
+    access: str = typer.Option("host", "--access"),
+    state: QuotaState = typer.Option(QuotaState.UNKNOWN, "--state"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Add a named commercial or local subscription resource."""
+
+    try:
+        resource = SubscriptionResource.model_validate(
+            {
+                "id": resource_id,
+                "provider": provider,
+                "product": product,
+                "access": {"mode": access},
+                "quota": {"state": state.value, "source": "user"},
+            }
+        )
+        manifest_path, document = _manifest_document(manifest)
+        resources = document.setdefault("resources", [])
+        if not isinstance(resources, list):
+            raise ConfigurationError("manifest resources must be a list")
+        if any(isinstance(item, dict) and item.get("id") == resource_id for item in resources):
+            raise ConfigurationError(f"subscription resource {resource_id!r} already exists")
+        resources.append(resource.model_dump(mode="json"))
+        _write_manifest_document(manifest_path, document)
+        _emit({"ok": True, "manifest": str(manifest_path), "resource": resource}, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@subscriptions_app.command("status")
+def subscriptions_status(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Show subscription products and their effective quota pressure."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        _emit({"subscriptions": router.subscription_status()}, compact=compact)
+    except AEEPError as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@quota_app.command("set")
+def quota_set(
+    resource_id: str = typer.Argument(...),
+    state: QuotaState = typer.Argument(...),
+    reset_at: str | None = typer.Option(None, "--reset-at"),
+    confidence: float = typer.Option(1.0, "--confidence", min=0.0, max=1.0),
+    source: QuotaSource = typer.Option(QuotaSource.USER, "--source"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Set the manifest's cold-start quota state."""
+
+    try:
+        quota = SubscriptionQuota.model_validate(
+            {
+                "state": state.value,
+                "reset_at": reset_at,
+                "confidence": confidence,
+                "source": source.value,
+            }
+        )
+        manifest_path, document = _manifest_document(manifest)
+        resources = document.get("resources", [])
+        target = next(
+            (
+                item
+                for item in resources
+                if isinstance(item, dict) and item.get("id") == resource_id
+            ),
+            None,
+        )
+        if target is None:
+            raise ConfigurationError(f"unknown subscription resource {resource_id!r}")
+        target["quota"] = quota.model_dump(mode="json")
+        _write_manifest_document(manifest_path, document)
+        _emit({"ok": True, "resource_id": resource_id, "quota": quota}, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@quota_app.command("observe")
+def quota_observe(
+    resource_id: str = typer.Argument(...),
+    state: QuotaState = typer.Argument(...),
+    reset_at: str | None = typer.Option(None, "--reset-at"),
+    confidence: float = typer.Option(1.0, "--confidence", min=0.0, max=1.0),
+    source: QuotaSource = typer.Option(QuotaSource.OBSERVED, "--source"),
+    note: str | None = typer.Option(None, "--note"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Record a runtime quota signal without rewriting the manifest."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        observation = router.observe_quota(
+            resource_id,
+            {
+                "state": state.value,
+                "reset_at": reset_at,
+                "confidence": confidence,
+                "source": source.value,
+            },
+            note=note,
+        )
+        _emit(observation, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@ingest_app.command("otel")
+def ingest_otel(
+    path: Path = typer.Argument(..., exists=True, dir_okay=False),
+    record: bool = typer.Option(True, "--record/--no-record"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Reconstruct model, tool, browser, CLI, MCP, and HTTP calls from OTLP JSON."""
+
+    from .instrumentation import TraceIngestor
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        ingestor = TraceIngestor(router.registry)
+        report = ingestor.load(path)
+        if record:
+            ingestor.record(report, router.store)
+        _emit(report, compact=compact)
+    except (AEEPError, ValueError, OSError, json.JSONDecodeError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@skill_app.command("install")
+def skill_install(
+    host: str = typer.Argument(..., help="codex, claude, or openclaw"),
+    target: Path | None = typer.Option(None, "--target", help="Override installation path."),
+    force: bool = typer.Option(False, "--force"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Install the subscription-aware skill included in the wheel."""
+
+    defaults = {
+        "codex": Path(os.getenv("CODEX_HOME", Path.home() / ".codex")) / "skills" / "aeep",
+        "claude": Path.home() / ".claude" / "skills" / "aeep",
+        "openclaw": Path.home() / ".openclaw" / "skills" / "aeep",
+    }
+    try:
+        if host not in defaults:
+            raise ConfigurationError("host must be codex, claude, or openclaw")
+        destination = (target or defaults[host]).expanduser()
+        if destination.exists() and not force:
+            raise ConfigurationError(
+                f"refusing to overwrite existing skill {destination}; pass --force"
+            )
+        shutil.copytree(_packaged_skill(), destination, dirs_exist_ok=force)
+        _emit({"ok": True, "host": host, "skill": str(destination)}, compact=compact)
+    except (AEEPError, OSError) as exc:
+        _fail(exc, compact=compact)
 
 
 @app.command()
@@ -326,7 +592,10 @@ def quote(
             ),
             executor_ids=executor_id,
         )
-        _emit({"quotes": [item.model_dump(mode="json") for item in router.quotes(request)]}, compact=compact)
+        _emit(
+            {"quotes": [item.model_dump(mode="json") for item in router.quotes(request)]},
+            compact=compact,
+        )
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
     finally:
@@ -487,9 +756,7 @@ def refund_payment(
     router: Router | None = None
     try:
         router = Router.from_manifest(manifest)
-        result = _run(
-            _await_and_close(router, router.refund_payment(capture_id, amount_usd))
-        )
+        result = _run(_await_and_close(router, router.refund_payment(capture_id, amount_usd)))
         router = None
         _emit(result, compact=compact)
     except (AEEPError, ValueError, OSError) as exc:
@@ -506,7 +773,9 @@ def route(
     capability: str = typer.Argument(...),
     input_value: str = typer.Option("{}", "--input", "-i", help="JSON, @file, or - for stdin."),
     policy: str = typer.Option("balanced", "--policy", "-p"),
-    constraints: str | None = typer.Option(None, "--constraints", help="JSON/YAML object or @file."),
+    constraints: str | None = typer.Option(
+        None, "--constraints", help="JSON/YAML object or @file."
+    ),
     context: str | None = typer.Option(None, "--context", help="JSON/YAML action context."),
     max_cost_usd: float | None = typer.Option(None, "--max-cost-usd"),
     max_latency_ms: float | None = typer.Option(None, "--max-latency-ms"),
@@ -514,9 +783,12 @@ def route(
     max_peak_memory_mb: float | None = typer.Option(None, "--max-peak-memory-mb"),
     no_network: bool = typer.Option(False, "--no-network"),
     require_local: bool = typer.Option(False, "--require-local"),
-    executor_id: str | None = typer.Option(None, "--executor-id", help="Force one reviewed executor."),
+    executor_id: str | None = typer.Option(
+        None, "--executor-id", help="Force one reviewed executor."
+    ),
     max_side_effect: SideEffect | None = typer.Option(None, "--max-side-effect"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    agent_view: bool = typer.Option(False, "--agent", help="Return the compact agent view."),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     """Rank execution alternatives without invoking one."""
@@ -540,8 +812,9 @@ def route(
         )
         router = Router.from_manifest(manifest)
         decision = _run(_await_and_close(router, router.route_with_discovery(request)))
+        rendered = router.compact_decision(decision) if agent_view else decision
         router = None
-        _emit(decision, compact=compact)
+        _emit(rendered, compact=compact)
         if decision.selected_executor_id is None:
             raise typer.Exit(code=3)
     except typer.Exit:
@@ -566,12 +839,18 @@ def run(
     max_peak_memory_mb: float | None = typer.Option(None, "--max-peak-memory-mb"),
     no_network: bool = typer.Option(False, "--no-network"),
     require_local: bool = typer.Option(False, "--require-local"),
-    executor_id: str | None = typer.Option(None, "--executor-id", help="Force one reviewed executor."),
+    executor_id: str | None = typer.Option(
+        None, "--executor-id", help="Force one reviewed executor."
+    ),
     max_side_effect: SideEffect | None = typer.Option(None, "--max-side-effect"),
-    approve: SideEffect = typer.Option(SideEffect.READ, "--approve", help="Runtime approval ceiling."),
+    approve: SideEffect = typer.Option(
+        SideEffect.READ, "--approve", help="Runtime approval ceiling."
+    ),
     approve_unsafe_executor: bool = typer.Option(False, "--approve-unsafe-executor"),
     dry_run: bool = typer.Option(False, "--dry-run"),
+    idempotency_key: str | None = typer.Option(None, "--idempotency-key"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    agent_view: bool = typer.Option(False, "--agent", help="Return the compact agent view."),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     """Route, invoke, validate, persist a receipt, and safely fall back."""
@@ -593,6 +872,7 @@ def run(
             executor_id=executor_id,
             max_side_effect=max_side_effect,
         )
+        request.idempotency_key = idempotency_key
         router = Router.from_manifest(manifest)
         outcome = _run(
             _await_and_close(
@@ -605,8 +885,9 @@ def run(
                 ),
             )
         )
+        rendered = router.compact_outcome(outcome) if agent_view else outcome
         router = None
-        _emit(outcome, compact=compact)
+        _emit(rendered, compact=compact)
         if not outcome.ok:
             raise typer.Exit(code=4)
     except typer.Exit:
@@ -767,6 +1048,10 @@ def record(
     status: ExecutionStatus = typer.Argument(...),
     resources: str | None = typer.Option(None, "--resources", help="JSON/YAML ResourceVector."),
     output_valid: bool | None = typer.Option(None, "--output-valid/--output-invalid"),
+    task_valid: bool | None = typer.Option(None, "--task-valid/--task-invalid"),
+    quality_score: float | None = typer.Option(None, "--quality-score", min=0.0, max=1.0),
+    quota_state: QuotaState | None = typer.Option(None, "--quota-state"),
+    quota_reset_at: str | None = typer.Option(None, "--quota-reset-at"),
     error_message: str | None = typer.Option(None, "--error-message"),
     metadata: str | None = typer.Option(None, "--metadata"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
@@ -780,10 +1065,22 @@ def record(
             decision_id=decision_id,
             executor_id=executor_id,
             status=status,
-            actual_resources=ResourceVector.model_validate(
-                _mapping(resources, name="resources")
-            ),
+            actual_resources=ResourceVector.model_validate(_mapping(resources, name="resources")),
             output_valid=output_valid,
+            task_valid=task_valid,
+            quality_score=quality_score,
+            quota_observation=(
+                SubscriptionQuota.model_validate(
+                    {
+                        "state": quota_state.value,
+                        "reset_at": quota_reset_at,
+                        "confidence": 1,
+                        "source": QuotaSource.HOST.value,
+                    }
+                )
+                if quota_state is not None
+                else None
+            ),
             error_message=error_message,
             metadata=_mapping(metadata, name="metadata"),
         )
@@ -944,11 +1241,49 @@ def import_mcp_command(
         _fail(exc, compact=compact)
 
 
+@import_app.command("mcp-server")
+def import_mcp_server_command(
+    provider_id: str = typer.Option(..., "--provider-id"),
+    transport: str = typer.Option("stdio", "--transport"),
+    endpoint: str = typer.Option(..., "--endpoint"),
+    args: str = typer.Option("[]", "--args", help="JSON argv tail for stdio."),
+    capability_prefix: str | None = typer.Option(None, "--capability-prefix"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Inspect an MCP server and import every advertised tool."""
+
+    from .sdk import import_mcp_server
+
+    try:
+        args_value = _read_data(args, default=[])
+        if not isinstance(args_value, list) or not all(
+            isinstance(item, str) for item in args_value
+        ):
+            raise typer.BadParameter("--args must be a JSON string array")
+        descriptor = _run(
+            import_mcp_server(
+                provider_id=provider_id,
+                transport=transport,
+                endpoint=endpoint,
+                args=args_value,
+                capability_prefix=capability_prefix,
+            )
+        )
+        _emit(descriptor, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
 @import_app.command("openapi")
 def import_openapi_command(
     path: Path = typer.Argument(...),
     provider_id: str = typer.Option(..., "--provider-id"),
     base_url: str | None = typer.Option(None, "--base-url"),
+    capability_map: str | None = typer.Option(
+        None,
+        "--capability-map",
+        help="JSON object mapping operationId to canonical capability@version.",
+    ),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     """Create HTTP executor descriptors from an OpenAPI document."""
@@ -957,7 +1292,19 @@ def import_openapi_command(
 
     try:
         _emit(
-            import_openapi(path, provider_id=provider_id, base_url=base_url),
+            import_openapi(
+                path,
+                provider_id=provider_id,
+                base_url=base_url,
+                capability_map=(
+                    {
+                        str(key): str(value)
+                        for key, value in _mapping(capability_map, name="capability-map").items()
+                    }
+                    if capability_map
+                    else None
+                ),
+            ),
             compact=compact,
         )
     except (AEEPError, ValueError, OSError) as exc:

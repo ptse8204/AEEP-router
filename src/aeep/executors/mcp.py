@@ -11,7 +11,7 @@ from ..errors import ConfigurationError, ProtocolError
 from ..mcp.client import MCPHTTPClient, MCPResponse, MCPStdioClient
 from ..models import ExecutionStatus, RawExecution, ResourceVector
 from ..profiler import approximate_tokens
-from ..templates import render
+from ..templates import extract_path, render
 from .base import BaseExecutor, ExecutionContext
 from .network import validate_http_url
 
@@ -27,7 +27,11 @@ def _extract_result(result: dict[str, Any], *, parse_json_text: bool) -> Any:
     content = result.get("content", [])
     if not isinstance(content, list):
         return content
-    texts = [item.get("text", "") for item in content if isinstance(item, dict) and item.get("type") == "text"]
+    texts = [
+        item.get("text", "")
+        for item in content
+        if isinstance(item, dict) and item.get("type") == "text"
+    ]
     if not texts:
         return content
     joined = "\n".join(texts)
@@ -155,13 +159,21 @@ class MCPExecutor(BaseExecutor):
             if list_response is not None:
                 request_bytes += list_response.request_bytes
                 response_bytes += list_response.response_bytes
-            call = await client.call_tool(tool_name, arguments, tool_schema=tool_schema)
+            call = await client.call_tool(
+                tool_name,
+                arguments,
+                tool_schema=tool_schema,
+                metadata=(
+                    {"org.aeep/idempotencyKey": context.request.idempotency_key}
+                    if context.request.idempotency_key
+                    and config.get("propagate_idempotency_key", True)
+                    else None
+                ),
+            )
             request_bytes += call.request_bytes
             response_bytes += call.response_bytes
             elapsed_ms = (time.perf_counter() - started) * 1000.0
-            usage = _usage_from_meta(
-                call.result, context.estimate.resources.monetary_usd
-            )
+            usage = _usage_from_meta(call.result, context.estimate.resources.monetary_usd)
             usage.latency_ms = elapsed_ms
             is_http = isinstance(client, MCPHTTPClient)
             if is_http:
@@ -170,6 +182,7 @@ class MCPExecutor(BaseExecutor):
                 call.result,
                 parse_json_text=bool(config.get("parse_json_text", True)),
             )
+            output = extract_path(output, config.get("output", {}).get("path"))
             schema_context = approximate_tokens(tool_schema)
             usage.context_tokens += schema_context + approximate_tokens(output)
             metadata = {

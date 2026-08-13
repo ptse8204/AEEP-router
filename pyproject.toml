@@ -9,6 +9,7 @@ description = "Economic profiling and policy-based routing for agent actions acr
 readme = "README.md"
 requires-python = ">=3.11"
 license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "AEEP contributors" }]
 keywords = ["agents", "mcp", "routing", "observability", "cli", "tool-use"]
 classifiers = [
@@ -51,6 +52,17 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 aeep = ["py.typed"]
+
+[tool.setuptools.data-files]
+"share/aeep/skills/aeep-minimal" = ["skills/aeep-minimal/SKILL.md"]
+"share/aeep/skills/aeep-minimal/agents" = ["skills/aeep-minimal/agents/openai.yaml"]
+"share/aeep/skills/aeep-router" = ["skills/aeep-router/SKILL.md"]
+"share/aeep/skills/aeep-router/scripts" = ["skills/aeep-router/scripts/route.sh"]
+"share/aeep/docs" = ["docs/*.md"]
+"share/aeep/schemas" = ["schemas/*.json"]
+"share/aeep/examples/quickstart" = ["examples/quickstart/*.md", "examples/quickstart/*.py", "examples/quickstart/*.yaml"]
+"share/aeep/examples/subscriptions" = ["examples/subscriptions/*.md", "examples/subscriptions/*.yaml"]
+"share/aeep/examples/github" = ["examples/github/*.md", "examples/github/*.yaml"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

@@ -1,5 +1,6 @@
 """AEEP: economic profiling and policy-based routing for agent actions."""
 
+from .instrumentation import TraceIngestor, instrument_anthropic, instrument_openai
 from .models import (
     ActionConstraints,
     ActionContext,
@@ -50,7 +51,10 @@ __all__ = [
     "RouteDecision",
     "Router",
     "SubscriptionResource",
+    "TraceIngestor",
     "__version__",
     "capability",
     "executor_from_callable",
+    "instrument_anthropic",
+    "instrument_openai",
 ]

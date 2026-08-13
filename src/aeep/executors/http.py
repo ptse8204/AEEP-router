@@ -43,6 +43,8 @@ class HTTPExecutor(BaseExecutor):
             str(key): str(value)
             for key, value in render(headers_template, values, allow_env=True).items()
         }
+        if context.request.idempotency_key and config.get("propagate_idempotency_key", True):
+            headers.setdefault("Idempotency-Key", context.request.idempotency_key)
         params = render(config.get("query", {}), values)
         json_body = render(config.get("json"), values) if "json" in config else None
         content = render(config.get("body"), values) if "body" in config else None
@@ -58,18 +60,21 @@ class HTTPExecutor(BaseExecutor):
             request_bytes += len(content.encode("utf-8"))
 
         try:
-            async with httpx.AsyncClient(
-                timeout=timeout,
-                follow_redirects=follow_redirects,
-                trust_env=bool(config.get("trust_proxy_env", False)),
-            ) as client, client.stream(
-                method,
-                url,
-                headers=headers,
-                params=params,
-                json=json_body,
-                content=content,
-            ) as response:
+            async with (
+                httpx.AsyncClient(
+                    timeout=timeout,
+                    follow_redirects=follow_redirects,
+                    trust_env=bool(config.get("trust_proxy_env", False)),
+                ) as client,
+                client.stream(
+                    method,
+                    url,
+                    headers=headers,
+                    params=params,
+                    json=json_body,
+                    content=content,
+                ) as response,
+            ):
                 chunks: list[bytes] = []
                 total = 0
                 async for chunk in response.aiter_bytes():
@@ -82,7 +87,11 @@ class HTTPExecutor(BaseExecutor):
                 body = b"".join(chunks)
                 status_code = response.status_code
                 content_type = response.headers.get("content-type", "")
-                cost_header = response.headers.get(str(config.get("cost_header", ""))) if config.get("trust_cost_header") else None
+                cost_header = (
+                    response.headers.get(str(config.get("cost_header", "")))
+                    if config.get("trust_cost_header")
+                    else None
+                )
             elapsed_ms = (time.perf_counter() - started) * 1000.0
             resources = ResourceVector(
                 monetary_usd=(

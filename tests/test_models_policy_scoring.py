@@ -100,12 +100,42 @@ def test_context_quota_rejects_total_model_tokens():
     estimate = RouteEstimate(
         resources=ResourceVector(context_tokens=500, input_tokens=700, output_tokens=100)
     )
-    context = ActionContext(
-        compute=ComputeAvailability(context_tokens_remaining=1000)
-    )
+    context = ActionContext(compute=ComputeAvailability(context_tokens_remaining=1000))
     result = score_candidate(executor, estimate, PolicyConfig(), context)
     assert not result.feasible
     assert any("context" in reason for reason in result.rejection_reasons)
+
+
+def test_zero_gpu_capacity_is_a_hard_rejection():
+    result = score_candidate(
+        spec(),
+        RouteEstimate(resources=ResourceVector(gpu_ms=1)),
+        PolicyConfig(),
+        ActionContext(compute=ComputeAvailability(available_gpu_ms=0)),
+    )
+    assert not result.feasible
+    assert any("GPU capacity" in reason for reason in result.rejection_reasons)
+
+
+def test_low_confidence_estimate_has_uncertainty_burden():
+    executor = spec()
+    policy = PolicyConfig(uncertainty_penalty=0.5)
+    certain = score_candidate(
+        executor,
+        RouteEstimate(confidence=1),
+        policy,
+        ActionContext(),
+    )
+    uncertain = score_candidate(
+        executor,
+        RouteEstimate(confidence=0),
+        policy,
+        ActionContext(),
+    )
+    assert certain.score is not None
+    assert uncertain.score is not None
+    assert uncertain.score.total == pytest.approx(certain.score.total + 0.5)
+    assert uncertain.score.uncertainty == 0.5
 
 
 def test_custom_weights_constructor():
@@ -117,9 +147,7 @@ def test_custom_weights_constructor():
 
 def test_allowed_executor_ids_are_hard_constraints():
     executor = spec()
-    policy = PolicyConfig(
-        constraints=ActionConstraints(allowed_executor_ids=["another-executor"])
-    )
+    policy = PolicyConfig(constraints=ActionConstraints(allowed_executor_ids=["another-executor"]))
     result = score_candidate(executor, RouteEstimate(), policy, ActionContext())
     assert not result.feasible
     assert any("allowed id set" in reason for reason in result.rejection_reasons)

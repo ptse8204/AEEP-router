@@ -44,6 +44,11 @@ _ACTION_PROPERTIES: dict[str, Any] = {
         "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
         "additionalProperties": True,
     },
+    "idempotency_key": {
+        "type": "string",
+        "maxLength": 256,
+        "description": "Stable key that prevents duplicate execution of the same action.",
+    },
 }
 
 _BASE_TOOLS: list[dict[str, Any]] = [
@@ -55,7 +60,13 @@ _BASE_TOOLS: list[dict[str, Any]] = [
         ),
         "schema": {
             "type": "object",
-            "properties": {},
+            "properties": {
+                "query": {"type": "string", "default": ""},
+                "prefix": {"type": ["string", "null"]},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 20},
+                "cursor": {"type": "integer", "minimum": 0, "default": 0},
+                "include_executors": {"type": "boolean", "default": False},
+            },
             "additionalProperties": False,
         },
         "annotations": {"readOnlyHint": True, "idempotentHint": True},
@@ -68,7 +79,14 @@ _BASE_TOOLS: list[dict[str, Any]] = [
         ),
         "schema": {
             "type": "object",
-            "properties": deepcopy(_ACTION_PROPERTIES),
+            "properties": {
+                **deepcopy(_ACTION_PROPERTIES),
+                "detail": {
+                    "type": "string",
+                    "enum": ["compact", "full"],
+                    "default": "compact",
+                },
+            },
             "required": ["capability", "input"],
             "additionalProperties": False,
         },
@@ -89,6 +107,11 @@ _BASE_TOOLS: list[dict[str, Any]] = [
                     "type": "boolean",
                     "default": False,
                     "description": "Return the route decision without invoking the executor.",
+                },
+                "detail": {
+                    "type": "string",
+                    "enum": ["compact", "full"],
+                    "default": "compact",
                 },
             },
             "required": ["capability", "input"],
@@ -132,6 +155,37 @@ _BASE_TOOLS: list[dict[str, Any]] = [
                 "task_valid": {"type": ["boolean", "null"]},
                 "quality_score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
                 "validation_results": {"type": "array", "items": {"type": "object"}},
+                "quota_observation": {
+                    "type": ["object", "null"],
+                    "properties": {
+                        "state": {
+                            "type": "string",
+                            "enum": [
+                                "abundant",
+                                "normal",
+                                "tight",
+                                "critical",
+                                "exhausted",
+                                "unknown",
+                            ],
+                        },
+                        "reset_at": {"type": ["string", "null"], "format": "date-time"},
+                        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                        "source": {
+                            "type": "string",
+                            "enum": [
+                                "user",
+                                "host",
+                                "official_cli",
+                                "rate_limit",
+                                "heuristic",
+                                "observed",
+                            ],
+                        },
+                    },
+                    "required": ["state"],
+                    "additionalProperties": False,
+                },
                 "error_message": {"type": ["string", "null"]},
                 "metadata": {"type": "object", "additionalProperties": True},
             },

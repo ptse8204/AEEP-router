@@ -1,0 +1,288 @@
+{
+  "$defs": {
+    "PassiveRecommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "observed_kind": {
+          "$ref": "#/$defs/TraceCallKind"
+        },
+        "recommended_executor_id": {
+          "title": "Recommended Executor Id",
+          "type": "string"
+        },
+        "estimated_cash_saving_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Estimated Cash Saving Usd",
+          "type": "number"
+        },
+        "estimated_latency_saving_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Estimated Latency Saving Ms",
+          "type": "number"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "capability",
+        "observed_kind",
+        "recommended_executor_id",
+        "reason"
+      ],
+      "title": "PassiveRecommendation",
+      "type": "object"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "TraceCall": {
+      "additionalProperties": false,
+      "properties": {
+        "trace_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trace Id"
+        },
+        "span_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Span Id"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "capability": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capability"
+        },
+        "executor_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executor Id"
+        },
+        "kind": {
+          "$ref": "#/$defs/TraceCallKind",
+          "default": "unknown"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "success",
+            "failed",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "retries": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Retries",
+          "type": "integer"
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "TraceCall",
+      "type": "object"
+    },
+    "TraceCallKind": {
+      "enum": [
+        "model",
+        "tool",
+        "browser",
+        "command",
+        "mcp",
+        "http",
+        "unknown"
+      ],
+      "title": "TraceCallKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "calls": {
+      "items": {
+        "$ref": "#/$defs/TraceCall"
+      },
+      "title": "Calls",
+      "type": "array"
+    },
+    "total_resources": {
+      "$ref": "#/$defs/ResourceVector"
+    },
+    "retries": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Retries",
+      "type": "integer"
+    },
+    "failures": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Failures",
+      "type": "integer"
+    },
+    "unmapped_calls": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Unmapped Calls",
+      "type": "integer"
+    },
+    "recommendations": {
+      "items": {
+        "$ref": "#/$defs/PassiveRecommendation"
+      },
+      "title": "Recommendations",
+      "type": "array"
+    },
+    "recorded_receipt_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Recorded Receipt Ids",
+      "type": "array"
+    }
+  },
+  "title": "TraceProfileReport",
+  "type": "object"
+}

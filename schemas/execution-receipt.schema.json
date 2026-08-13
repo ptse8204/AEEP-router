@@ -1,5 +1,45 @@
 {
   "$defs": {
+    "ActionFeatures": {
+      "additionalProperties": false,
+      "description": "Non-payload characteristics used to condition historical estimates.",
+      "properties": {
+        "input_bytes": {
+          "minimum": 0,
+          "title": "Input Bytes",
+          "type": "integer"
+        },
+        "input_items": {
+          "minimum": 0,
+          "title": "Input Items",
+          "type": "integer"
+        },
+        "text_characters": {
+          "minimum": 0,
+          "title": "Text Characters",
+          "type": "integer"
+        },
+        "max_depth": {
+          "minimum": 0,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "size_bucket": {
+          "pattern": "^(empty|2\\^[0-9]+)$",
+          "title": "Size Bucket",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_bytes",
+        "input_items",
+        "text_characters",
+        "max_depth",
+        "size_bucket"
+      ],
+      "title": "ActionFeatures",
+      "type": "object"
+    },
     "EstimateSource": {
       "enum": [
         "static",
@@ -280,6 +320,17 @@
     },
     "estimated": {
       "$ref": "#/$defs/RouteEstimate"
+    },
+    "action_features": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActionFeatures"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "actual_resources": {
       "$ref": "#/$defs/ResourceVector"

@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "CompactAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "delta": {
+          "minimum": 0.0,
+          "title": "Delta",
+          "type": "number"
+        }
+      },
+      "required": [
+        "executor_id",
+        "kind",
+        "score",
+        "delta"
+      ],
+      "title": "CompactAlternative",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "selected": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "alternatives": {
+      "items": {
+        "$ref": "#/$defs/CompactAlternative"
+      },
+      "title": "Alternatives",
+      "type": "array"
+    },
+    "rejected": {
+      "default": 0,
+      "title": "Rejected",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "decision_id",
+    "action_id",
+    "capability",
+    "reason"
+  ],
+  "title": "CompactRouteDecision",
+  "type": "object"
+}

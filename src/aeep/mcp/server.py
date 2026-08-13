@@ -77,6 +77,8 @@ def _action_from_arguments(arguments: dict[str, Any]) -> ActionRequest:
         value["constraints"] = arguments["constraints"]
     if "context" in arguments:
         value["context"] = arguments["context"]
+    if "idempotency_key" in arguments:
+        value["idempotency_key"] = arguments["idempotency_key"]
     return ActionRequest.model_validate(value)
 
 
@@ -123,16 +125,22 @@ class AEEPToolService:
     async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
             if name == "aeep_list_capabilities":
-                payload = {
-                    "capabilities": self.router.list_capabilities(),
-                    "policies": self.router.list_policies(),
-                }
+                payload = self.router.search_capabilities(
+                    str(arguments.get("query", "")),
+                    prefix=arguments.get("prefix"),
+                    limit=int(arguments.get("limit", 20)),
+                    cursor=int(arguments.get("cursor", 0)),
+                    include_executors=bool(arguments.get("include_executors", False)),
+                )
                 return _tool_result(payload)
             if name == "aeep_route_action":
-                decision = await self.router.route_with_discovery(
-                    _action_from_arguments(arguments)
+                decision = await self.router.route_with_discovery(_action_from_arguments(arguments))
+                route_payload = (
+                    decision
+                    if arguments.get("detail") == "full"
+                    else self.router.compact_decision(decision)
                 )
-                return _tool_result(decision.model_dump(mode="json"))
+                return _tool_result(route_payload.model_dump(mode="json"))
             if name == "aeep_execute_action":
                 request = _action_from_arguments(arguments)
                 outcome = await self.router.execute(
@@ -141,8 +149,13 @@ class AEEPToolService:
                     allow_unsafe_executor=self.allow_unsafe_executor,
                     dry_run=bool(arguments.get("dry_run", False)),
                 )
+                execution_payload = (
+                    outcome
+                    if arguments.get("detail") == "full"
+                    else self.router.compact_outcome(outcome)
+                )
                 return _tool_result(
-                    outcome.model_dump(mode="json"),
+                    execution_payload.model_dump(mode="json"),
                     is_error=not outcome.ok,
                     usage=_sum_receipt_usage(outcome.receipts),
                 )
@@ -159,9 +172,7 @@ class AEEPToolService:
                     executor_ids=arguments.get("executor_ids"),
                 )
                 quotes = self.router.quotes(quote_request)
-                return _tool_result(
-                    {"quotes": [quote.model_dump(mode="json") for quote in quotes]}
-                )
+                return _tool_result({"quotes": [quote.model_dump(mode="json") for quote in quotes]})
             if name == "aeep_get_metrics":
                 metrics = self.router.metrics(limit=int(arguments.get("limit", 10_000)))
                 return _tool_result(metrics.model_dump(mode="json"))

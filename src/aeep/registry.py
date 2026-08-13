@@ -58,7 +58,9 @@ class Registry:
             if include_disabled or executor.enabled
         ]
 
-    def compatible(self, capability: str, input_value: dict[str, Any]) -> tuple[list[ExecutorSpec], dict[str, str]]:
+    def compatible(
+        self, capability: str, input_value: dict[str, Any]
+    ) -> tuple[list[ExecutorSpec], dict[str, str]]:
         compatible: list[ExecutorSpec] = []
         errors: dict[str, str] = {}
         for executor in self.find(capability):
@@ -105,3 +107,54 @@ class Registry:
             }
             for capability in self.capabilities()
         ]
+
+    def search(
+        self,
+        query: str = "",
+        *,
+        prefix: str | None = None,
+        limit: int = 20,
+        cursor: int = 0,
+        include_executors: bool = False,
+    ) -> dict[str, Any]:
+        terms = query.casefold().split()
+        matches: list[dict[str, Any]] = []
+        for capability in self.capabilities():
+            if prefix is not None and not capability.startswith(prefix):
+                continue
+            executors = self.find(capability)
+            haystack = " ".join(
+                [
+                    capability,
+                    *(item.id for item in executors),
+                    *(item.description for item in executors),
+                ]
+            ).casefold()
+            if any(term not in haystack for term in terms):
+                continue
+            item: dict[str, Any] = {
+                "capability": capability,
+                "executor_count": len(executors),
+                "kinds": sorted({executor.kind.value for executor in executors}),
+            }
+            if include_executors:
+                item["executors"] = [
+                    {
+                        "id": executor.id,
+                        "kind": executor.kind.value,
+                        "description": executor.description,
+                        "side_effect": executor.side_effect.value,
+                        "locality": executor.locality.value,
+                    }
+                    for executor in executors
+                ]
+            matches.append(item)
+        start = max(0, cursor)
+        page_size = max(1, min(limit, 100))
+        page = matches[start : start + page_size]
+        next_cursor = start + len(page) if start + len(page) < len(matches) else None
+        return {
+            "capabilities": page,
+            "next_cursor": next_cursor,
+            "total": len(matches),
+        }

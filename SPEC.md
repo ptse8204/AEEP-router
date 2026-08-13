@@ -103,6 +103,8 @@ A route estimate contains:
 
 Probability and scores are in `[0,1]`.
 
+The reference scorer applies a configurable penalty to low-confidence estimates. Confidence is not an observation and MUST NOT bypass hard constraints.
+
 ## 8. Feasibility
 
 A route MUST be rejected when it violates an effective hard constraint. The effective constraint is the strictest combination of manifest policy and request constraint; a request MUST NOT weaken operator guardrails.
@@ -118,6 +120,8 @@ Constraint classes include:
 - data residency;
 - restricted-data handling;
 - currently remaining monetary/context/memory capacity.
+
+An explicitly supplied available resource capacity, including zero GPU capacity, MUST reject a route whose estimate exceeds it.
 
 Every rejection MUST include a machine-readable candidate entry and human-readable reason.
 
@@ -158,6 +162,8 @@ Fallback MAY proceed to the next ranked feasible route after clear failure, time
 
 Fallback MUST NOT automatically retry a non-idempotent action unless explicitly enabled. A timeout is ambiguous for remote side effects.
 
+When an `idempotency_key` is present, the reference implementation atomically claims it against a hash of the capability and canonical input. Reuse with different input MUST fail closed. Completed duplicate calls return the stored receipt set without re-execution; action output is unavailable because outputs are not persisted by default. HTTP, command, and MCP adapters propagate the key without shell interpolation.
+
 ## 13. ExecutionReceipt
 
 A receipt records:
@@ -178,7 +184,7 @@ A host/delegated placeholder receipt MUST NOT be treated as a failed observation
 
 ## 14. Historical learning
 
-The reference estimator blends static priors with an exponentially weighted history. Invalid outputs count against successful completion. Host-selected, delegated, and unknown placeholder statuses are ignored.
+The reference estimator blends static priors with an exponentially weighted history conditioned on a privacy-preserving input-size bucket. Invalid outputs count against successful completion. Host-selected, delegated, and unknown placeholder statuses are ignored.
 
 Implementations SHOULD expose sample size and estimate source. They MUST avoid presenting learned estimates as exact guarantees. Externally reported outcomes are untrusted input unless authenticated or attested and MAY be excluded from shared reputation.
 
@@ -202,6 +208,8 @@ The reference server exposes:
 - `aeep_get_metrics`
 
 Provider-specific declaration shapes are projections of the same JSON contracts.
+
+Capability listing MUST support progressive disclosure. The reference tools accept search, prefix, pagination, and detail controls. Route and execute tools return compact decision/outcome objects by default; full decisions remain available through explicit detail or inspection.
 
 Quote acceptance, payment authorization, reservation, capture, refund, and benchmarking MUST NOT be exposed as unrestricted model tools.
 
@@ -227,6 +235,8 @@ AEEP-specific usage can be returned under `_meta["org.aeep/usage"]` as a `Resour
 A `SubscriptionResource` identifies a provider/product, host/CLI/MCP access mode, capabilities, and quota state. Valid quota states are `abundant`, `normal`, `tight`, `critical`, `exhausted`, and `unknown`, with confidence and source. An exhausted resource MUST be infeasible. Runtime quota data MAY override a manifest prior. Implementations MUST NOT scrape undocumented consumer billing dashboards or convert quota into cash.
 
 A `host` executor references one subscription resource. Selection returns `HOST_SELECTED`; AEEP does not call a model API. The current host performs the bounded action and reports one terminal outcome.
+
+Runtime `QuotaObservation` records override manifest priors until replaced. A terminal selected-host outcome MAY include one quota observation for its own resource.
 
 ## 20. Quotes and signed receipts
 
@@ -254,6 +264,14 @@ Free, prepaid, invoice, x402, MPP, and enterprise rails MAY implement the adapte
 
 Provider descriptors MAY be generated from decorated Python callables or imported from reviewed argv-only CLI, MCP, or OpenAPI definitions. CLI imports MUST use argv and MUST NOT introduce shell interpolation. Imported writes MUST default to non-automatic execution.
 
-## 25. Versioning
+An MCP server importer MAY inspect `tools/list` and generate reviewed local descriptors. OpenAPI importers SHOULD accept an explicit operation-to-capability map; generated names are provider-local and do not establish semantic equivalence.
+
+## 25. Existing-agent profiling
+
+The reference trace ingestor accepts OTLP JSON, plain span JSON, and JSON Lines. It reconstructs model, tool, browser, command, HTTP, and MCP calls from standard or AEEP attributes, retaining resource totals and retry/failure counts without persisting payloads or outputs. Recommendations MUST be limited to explicitly registered equivalent capabilities.
+
+OpenAI and Anthropic SDK wrappers record latency, usage, outcome, and optionally operator-supplied monetary calculation. Unavailable provider billing is recorded as unknown, not inferred from a static price table.
+
+## 26. Versioning
 
 The manifest/spec version is `0.2`; `0.1` and `0.15` manifests remain loadable. Backward-incompatible object changes require a new version. New optional resource dimensions or metadata MAY be added without invalidating older clients when unknown fields are handled at a negotiated boundary.

@@ -1,0 +1,156 @@
+version: "0.2"
+database: .aeep/aeep.db
+default_policy: balanced
+
+capabilities:
+  - namespace: github.repository
+    name: default-branch
+    version: "1"
+    description: Return the repository's default branch name.
+    input_schema: &input
+      type: object
+      properties:
+        repository: {type: string}
+        owner: {type: string}
+        name: {type: string}
+      required: [repository, owner, name]
+      additionalProperties: false
+    output_schema: &output {type: string, minLength: 1}
+    side_effect: read
+
+resources:
+  - id: openai.chatgpt-plus
+    kind: subscription
+    provider: openai
+    product: chatgpt-plus
+    access: {mode: host}
+    quota: {state: normal, confidence: 0.8, source: user}
+    capabilities: {reasoning: true, browser: true}
+  - id: anthropic.claude-max
+    kind: subscription
+    provider: anthropic
+    product: claude-max
+    access: {mode: host}
+    quota: {state: tight, confidence: 0.8, source: user}
+    capabilities: {reasoning: true, coding: true, browser: true}
+
+executors:
+  - id: github.local-git-default-branch
+    capability: github.repository.default-branch@1
+    kind: command
+    description: Read origin/HEAD from the existing local Git checkout.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 20, cpu_ms: 5, peak_memory_mb: 12}
+      success_probability: 0.995
+      quality_score: 1
+      risk_score: 0.005
+      confidence: 0.9
+    side_effect: read
+    locality: local
+    config:
+      argv: [git, -C, "{input.repository}", symbolic-ref, --short, refs/remotes/origin/HEAD]
+      output:
+        type: regex
+        pattern: "(?:.*/)?([^/\\n]+)$"
+        group: 1
+      timeout_seconds: 5
+
+  - id: github.rest-default-branch
+    capability: github.repository.default-branch@1
+    kind: http
+    description: Read default_branch from the public GitHub REST API.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 350, network_bytes: 5000, context_tokens: 40}
+      success_probability: 0.99
+      quality_score: 1
+      risk_score: 0.02
+      confidence: 0.8
+    side_effect: read
+    locality: internet
+    requires_network: true
+    data_residency: [US]
+    config:
+      url: "https://api.github.com/repos/{input.owner}/{input.name}"
+      method: GET
+      allowed_hosts: [api.github.com]
+      output: {type: json, path: default_branch}
+
+  - id: github.mcp-default-branch
+    capability: github.repository.default-branch@1
+    kind: mcp
+    description: Query a reviewed GitHub MCP server.
+    enabled: false
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 500, network_bytes: 3000, context_tokens: 600}
+      success_probability: 0.98
+      quality_score: 1
+      risk_score: 0.03
+      confidence: 0.5
+    side_effect: read
+    locality: local
+    config:
+      transport: stdio
+      command: github-mcp-server
+      args: [stdio]
+      tool: get_repository
+      arguments: {owner: "{input.owner}", repo: "{input.name}"}
+      output: {path: default_branch}
+
+  - id: host.chatgpt-default-branch
+    capability: github.repository.default-branch@1
+    kind: host
+    resource_pool: openai.chatgpt-plus
+    description: Use the current ChatGPT/Codex host and its GitHub access.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 2500, context_tokens: 800, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.98
+      risk_score: 0.04
+      confidence: 0.6
+    side_effect: read
+    locality: local
+    config:
+      instructions: Return the default branch for {input.owner}/{input.name} as a string.
+
+  - id: host.claude-default-branch
+    capability: github.repository.default-branch@1
+    kind: host
+    resource_pool: anthropic.claude-max
+    description: Use the current Claude host and its GitHub access.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 2500, context_tokens: 800, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.98
+      risk_score: 0.04
+      confidence: 0.6
+    side_effect: read
+    locality: local
+    config:
+      instructions: Return the default branch for {input.owner}/{input.name} as a string.
+
+  - id: browser.github-default-branch
+    capability: github.repository.default-branch@1
+    kind: delegate
+    description: Read the branch selector from an already-open GitHub repository page.
+    input_schema: *input
+    output_schema: *output
+    estimate:
+      resources: {latency_ms: 5000, context_tokens: 1800}
+      success_probability: 0.9
+      quality_score: 0.95
+      risk_score: 0.08
+      confidence: 0.4
+    side_effect: read
+    locality: local
+    config:
+      instructions: Open {input.owner}/{input.name}, read its default branch, and return the branch name as a string without changing page state.

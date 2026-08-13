@@ -12,6 +12,8 @@ from urllib.parse import urljoin
 import yaml
 
 from .errors import ConfigurationError
+from .executors.network import validate_http_url
+from .mcp.client import MCPHTTPClient, MCPStdioClient
 from .models import (
     CapabilityDefinition,
     ExecutorKind,
@@ -40,8 +42,7 @@ def capability(
     def decorate(function: Callable[..., Any]) -> Callable[..., Any]:
         function.__aeep_spec__ = {  # type: ignore[attr-defined]
             "capability": name,
-            "input_schema": input_schema
-            or {"type": "object", "additionalProperties": True},
+            "input_schema": input_schema or {"type": "object", "additionalProperties": True},
             "output_schema": output_schema,
             "description": description or (function.__doc__ or function.__name__).strip(),
             "estimate": estimate or RouteEstimate(),
@@ -52,7 +53,9 @@ def capability(
     return decorate
 
 
-def executor_from_callable(function: Callable[..., Any], *, executor_id: str | None = None) -> ExecutorSpec:
+def executor_from_callable(
+    function: Callable[..., Any], *, executor_id: str | None = None
+) -> ExecutorSpec:
     metadata = getattr(function, "__aeep_spec__", None)
     if not isinstance(metadata, dict):
         raise ConfigurationError("callable is not decorated with @aeep.capability")
@@ -89,6 +92,8 @@ def provider_from_manifest(
                 namespace=namespace if dot else provider_id.lower().replace(":", "-"),
                 name=capability_name if dot else semantic,
                 version=version if separator else "1",
+                authority=provider_id,
+                owner=provider_id,
                 description=executor.description,
                 input_schema=executor.input_schema,
                 output_schema=executor.output_schema,
@@ -187,11 +192,79 @@ def import_mcp(
     return ProviderDescriptor(provider_id=provider_id, name=provider_id, executors=[spec])
 
 
+async def import_mcp_server(
+    *,
+    provider_id: str,
+    transport: str,
+    endpoint: str,
+    args: list[str] | None = None,
+    capability_prefix: str | None = None,
+) -> ProviderDescriptor:
+    """Inspect one reviewed MCP endpoint and import all advertised tools."""
+
+    if transport == "stdio":
+        client: MCPStdioClient | MCPHTTPClient = MCPStdioClient(
+            command=endpoint,
+            args=args or [],
+        )
+    elif transport in {"http", "streamable_http", "streamable-http"}:
+        await validate_http_url(endpoint, {}, label="MCP import")
+        client = MCPHTTPClient(url=endpoint)
+    else:
+        raise ConfigurationError("MCP transport must be stdio or streamable HTTP")
+    try:
+        response = await client.list_tools()
+    finally:
+        await client.close()
+    tools = response.result.get("tools", [])
+    prefix = re.sub(r"[^a-z0-9.-]+", "-", (capability_prefix or provider_id).lower()).strip("-.")
+    if not prefix:
+        raise ConfigurationError("capability prefix must contain a letter or number")
+    descriptors = [
+        import_mcp(
+            provider_id=provider_id,
+            capability_name=(
+                f"{prefix}.{re.sub(r'[^a-z0-9.-]+', '-', str(tool['name']).lower())}@1"
+            ),
+            tool=str(tool["name"]),
+            transport=transport,
+            endpoint=endpoint,
+            input_schema=(
+                tool.get("inputSchema") if isinstance(tool.get("inputSchema"), dict) else None
+            ),
+        )
+        for tool in tools
+        if isinstance(tool, dict) and isinstance(tool.get("name"), str)
+    ]
+    executors = [executor for descriptor in descriptors for executor in descriptor.executors]
+    definitions = [
+        CapabilityDefinition(
+            namespace=executor.capability.rsplit(".", 1)[0],
+            name=executor.capability.rsplit(".", 1)[1].removesuffix("@1"),
+            authority=provider_id,
+            owner=provider_id,
+            description=executor.description,
+            input_schema=executor.input_schema,
+            output_schema=executor.output_schema,
+            side_effect=executor.side_effect,
+        )
+        for executor in executors
+    ]
+    return ProviderDescriptor(
+        provider_id=provider_id,
+        name=provider_id,
+        capabilities=definitions,
+        executors=executors,
+        metadata={"mcp_tool_count": len(executors)},
+    )
+
+
 def import_openapi(
     path: str | Path,
     *,
     provider_id: str,
     base_url: str | None = None,
+    capability_map: dict[str, str] | None = None,
 ) -> ProviderDescriptor:
     source = Path(path)
     try:
@@ -218,29 +291,53 @@ def import_openapi(
             operation = path_item.get(method)
             if not isinstance(operation, dict):
                 continue
-            operation_id = str(operation.get("operationId") or f"{method}.{route_path.strip('/').replace('/', '.')}")
-            semantic = f"{provider_id}.{operation_id}@1".lower().replace("_", "-")
+            operation_id = str(
+                operation.get("operationId")
+                or f"{method}.{route_path.strip('/').replace('/', '.')}"
+            )
+            semantic = (capability_map or {}).get(
+                operation_id,
+                f"{provider_id}.{operation_id}@1".lower().replace("_", "-"),
+            )
+            if "@" not in semantic:
+                raise ConfigurationError(
+                    f"mapped capability for {operation_id!r} must include a version"
+                )
+            if "." not in semantic.rpartition("@")[0]:
+                raise ConfigurationError(
+                    f"mapped capability for {operation_id!r} must include a namespace"
+                )
             request_body = operation.get("requestBody", {})
             content = request_body.get("content", {}) if isinstance(request_body, dict) else {}
             json_content = content.get("application/json", {}) if isinstance(content, dict) else {}
             input_schema = json_content.get("schema") if isinstance(json_content, dict) else None
             responses = operation.get("responses", {})
-            response = next(
-                (
-                    value
-                    for key, value in responses.items()
-                    if str(key).startswith("2") and isinstance(value, dict)
-                ),
-                {},
-            ) if isinstance(responses, dict) else {}
+            response = (
+                next(
+                    (
+                        value
+                        for key, value in responses.items()
+                        if str(key).startswith("2") and isinstance(value, dict)
+                    ),
+                    {},
+                )
+                if isinstance(responses, dict)
+                else {}
+            )
             response_content = response.get("content", {}) if isinstance(response, dict) else {}
-            response_json = response_content.get("application/json", {}) if isinstance(response_content, dict) else {}
+            response_json = (
+                response_content.get("application/json", {})
+                if isinstance(response_content, dict)
+                else {}
+            )
             output_schema = response_json.get("schema") if isinstance(response_json, dict) else None
             executor = ExecutorSpec(
                 id=f"{provider_id}.http.{operation_id}",
                 capability=semantic,
                 kind=ExecutorKind.HTTP,
-                description=str(operation.get("summary") or operation.get("description") or operation_id),
+                description=str(
+                    operation.get("summary") or operation.get("description") or operation_id
+                ),
                 input_schema=input_schema or {"type": "object", "additionalProperties": True},
                 output_schema=output_schema,
                 estimate=RouteEstimate(
@@ -267,11 +364,15 @@ def import_openapi(
                 },
             )
             executors.append(executor)
-            namespace, _, name = semantic.removesuffix("@1").rpartition(".")
+            unversioned, _, capability_version = semantic.rpartition("@")
+            namespace, _, name = unversioned.rpartition(".")
             definitions.append(
                 CapabilityDefinition(
                     namespace=namespace,
                     name=name,
+                    version=capability_version,
+                    authority=root_url,
+                    owner=provider_id,
                     description=executor.description,
                     input_schema=executor.input_schema,
                     output_schema=executor.output_schema,

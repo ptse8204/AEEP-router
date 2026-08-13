@@ -28,7 +28,9 @@ class _ProcessMetrics:
     memory_mb_seconds: float = 0.0
 
 
-async def _monitor_process(pid: int, stop: asyncio.Event, interval: float = 0.01) -> _ProcessMetrics:
+async def _monitor_process(
+    pid: int, stop: asyncio.Event, interval: float = 0.01
+) -> _ProcessMetrics:
     metrics = _ProcessMetrics()
     last = time.perf_counter()
     try:
@@ -88,7 +90,9 @@ class CommandExecutor(BaseExecutor):
             )
         argv_template = config.get("argv")
         if not isinstance(argv_template, list) or not argv_template:
-            raise ConfigurationError(f"command executor {context.spec.id} requires non-empty config.argv")
+            raise ConfigurationError(
+                f"command executor {context.spec.id} requires non-empty config.argv"
+            )
         values = {"input": context.request.input, "action": context.request.model_dump(mode="json")}
         argv = render(argv_template, values)
         if not all(isinstance(item, (str, int, float)) for item in argv):
@@ -97,7 +101,9 @@ class CommandExecutor(BaseExecutor):
         timeout = float(config.get("timeout_seconds", 60.0))
         max_output = int(config.get("max_output_bytes", 1_000_000))
         cwd = config.get("cwd")
-        environment = dict(os.environ) if config.get("inherit_env", False) else _minimal_environment()
+        environment = (
+            dict(os.environ) if config.get("inherit_env", False) else _minimal_environment()
+        )
         configured_env = config.get("env", {})
         if not isinstance(configured_env, dict):
             raise ConfigurationError("command config.env must be a mapping")
@@ -107,6 +113,8 @@ class CommandExecutor(BaseExecutor):
                 for key, value in render(configured_env, values, allow_env=True).items()
             }
         )
+        if context.request.idempotency_key and config.get("propagate_idempotency_key", True):
+            environment["AEEP_IDEMPOTENCY_KEY"] = context.request.idempotency_key
         stdin_template = config.get("stdin")
         stdin_bytes = None
         if config.get("stdin_json", False):
@@ -129,7 +137,9 @@ class CommandExecutor(BaseExecutor):
         try:
             process = await asyncio.create_subprocess_exec(
                 *argv,
-                stdin=asyncio.subprocess.PIPE if stdin_bytes is not None else asyncio.subprocess.DEVNULL,
+                stdin=asyncio.subprocess.PIPE
+                if stdin_bytes is not None
+                else asyncio.subprocess.DEVNULL,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
                 cwd=cwd,

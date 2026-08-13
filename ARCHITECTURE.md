@@ -58,7 +58,7 @@ The bonus is intentionally small and never bypasses hard constraints.
 
 ## Static priors and observations
 
-Cold-start estimates come from executor configuration. Real receipts are blended using sample-aware history. A provider's advertised number remains a prior; it is not copied into observed performance.
+Cold-start estimates come from executor configuration. Real receipts are blended using sample-aware history and the action's privacy-preserving input-size bucket. A provider's advertised number remains a prior; it is not copied into observed performance. Low-confidence estimates carry a configurable uncertainty burden.
 
 A production network can replace the local EWMA with confidence intervals, task-conditioned models, quantile latency, drift detection, and signed attestations without changing the core objects.
 
@@ -96,6 +96,8 @@ SQLite provides a zero-service local deployment. Decisions and receipts are stor
 
 Action input and context are redacted from persisted decisions by default, and outputs are not persisted by default. The live decision returned to the invoking process still contains the request needed for immediate execution. Stored redacted decisions are intentionally non-replayable. This limits accidental sensitive-data retention and keeps the receipt database focused on economics.
 
+Idempotency records atomically bind a caller key to a canonical action hash and its receipt IDs. Replays avoid execution and return those receipts, but cannot reconstruct output unless an operator later enables a separate output store.
+
 ## Agent interfaces
 
 - Python API for embedded runtimes.
@@ -103,7 +105,11 @@ Action input and context are redacted from persisted decisions by default, and o
 - MCP server for standard tool clients.
 - Native tool schema exports for providers whose application owns the function-call loop.
 
-All call the same service methods to prevent behavioral drift. Runtime approval ceilings are process/operator configuration and are not exposed as model-controlled function arguments.
+All call the same service methods to prevent behavioral drift. Model tools use paginated capability search and compact route/run envelopes by default; complete decisions remain queryable by ID. Runtime approval ceilings are process/operator configuration and are not exposed as model-controlled function arguments.
+
+## Existing-agent instrumentation
+
+OpenAI and Anthropic clients can be wrapped at their normal `create` calls without adding those SDKs as dependencies. The wrapper records usage, timing, and terminal status but never prompts or outputs. The trace ingestor accepts OTLP JSON or JSON Lines, reconstructs common call types, and compares only capabilities the operator has explicitly registered. This is passive profiling, not semantic equivalence inference.
 
 ## Calibration
 

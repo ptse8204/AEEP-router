@@ -110,9 +110,7 @@ class MCPStdioClient:
         # cold, or dependency-heavy runtimes. A too-aggressive discovery probe
         # silently downgrades a modern server to the legacy handshake. Keep the
         # probe bounded, but give a local process a realistic startup window.
-        self.discovery_timeout = max(
-            0.1, min(float(discovery_timeout), float(timeout))
-        )
+        self.discovery_timeout = max(0.1, min(float(discovery_timeout), float(timeout)))
         self.max_message_bytes = max(1024, int(max_message_bytes))
         self.process: asyncio.subprocess.Process | None = None
         self.protocol_version: str | None = None
@@ -144,7 +142,11 @@ class MCPStdioClient:
             self.stderr_tail.append(line[-4096:].decode("utf-8", errors="replace").rstrip())
 
     async def connect(self) -> None:
-        if self.protocol_version is not None and self.process is not None and self.process.returncode is None:
+        if (
+            self.protocol_version is not None
+            and self.process is not None
+            and self.process.returncode is None
+        ):
             return
         await self._start()
         discover = {
@@ -154,9 +156,7 @@ class MCPStdioClient:
             "params": {"_meta": _modern_meta()},
         }
         try:
-            response, _, _ = await self._exchange(
-                discover, timeout=self.discovery_timeout
-            )
+            response, _, _ = await self._exchange(discover, timeout=self.discovery_timeout)
         except (TimeoutError, ProtocolError):
             await self._restart()
             await self._legacy_initialize()
@@ -224,7 +224,9 @@ class MCPStdioClient:
         assert self.process is not None
         if self.process.stdin is None or self.process.stdout is None:
             raise ProtocolError("MCP stdio process is missing pipes")
-        payload = json.dumps(message, separators=(",", ":"), ensure_ascii=False).encode("utf-8") + b"\n"
+        payload = (
+            json.dumps(message, separators=(",", ":"), ensure_ascii=False).encode("utf-8") + b"\n"
+        )
         if len(payload) > self.max_message_bytes:
             raise ProtocolError("MCP stdio request exceeds configured message limit")
         self.process.stdin.write(payload)
@@ -256,7 +258,14 @@ class MCPStdioClient:
             request_id = self._allocate_id()
             request_params = dict(params)
             if self.protocol_version == MODERN_VERSION:
-                request_params["_meta"] = _modern_meta()
+                request_params["_meta"] = {
+                    **(
+                        request_params.get("_meta", {})
+                        if isinstance(request_params.get("_meta"), dict)
+                        else {}
+                    ),
+                    **_modern_meta(),
+                }
             message = {
                 "jsonrpc": "2.0",
                 "id": request_id,
@@ -298,9 +307,13 @@ class MCPStdioClient:
         arguments: dict[str, Any],
         *,
         tool_schema: dict[str, Any] | None = None,
+        metadata: dict[str, Any] | None = None,
     ) -> MCPResponse:
         del tool_schema  # x-mcp-header only applies to Streamable HTTP.
-        return await self._request("tools/call", {"name": name, "arguments": arguments})
+        params: dict[str, Any] = {"name": name, "arguments": arguments}
+        if metadata:
+            params["_meta"] = metadata
+        return await self._request("tools/call", params)
 
     async def _restart(self) -> None:
         await self.close()
@@ -383,7 +396,9 @@ class MCPHTTPClient:
         if extra_headers:
             headers.update(extra_headers)
 
-        async with self._client.stream("POST", self.url, content=payload, headers=headers) as response:
+        async with self._client.stream(
+            "POST", self.url, content=payload, headers=headers
+        ) as response:
             response_headers = httpx.Headers(response.headers)
             status_code = response.status_code
             content_type = response.headers.get("content-type", "")
@@ -505,7 +520,14 @@ class MCPHTTPClient:
             await self.connect()
             request_params = dict(params)
             if self.protocol_version == MODERN_VERSION:
-                request_params["_meta"] = _modern_meta()
+                request_params["_meta"] = {
+                    **(
+                        request_params.get("_meta", {})
+                        if isinstance(request_params.get("_meta"), dict)
+                        else {}
+                    ),
+                    **_modern_meta(),
+                }
             request_id = self._allocate_id()
             message = {
                 "jsonrpc": "2.0",
@@ -567,13 +589,17 @@ class MCPHTTPClient:
         arguments: dict[str, Any],
         *,
         tool_schema: dict[str, Any] | None = None,
+        metadata: dict[str, Any] | None = None,
     ) -> MCPResponse:
         schema = tool_schema or self._tool_schemas.get(name)
         headers = tool_parameter_headers(schema, arguments) if schema is not None else {}
+        params: dict[str, Any] = {"name": name, "arguments": arguments}
+        if metadata:
+            params["_meta"] = metadata
         try:
             return await self._request(
                 "tools/call",
-                {"name": name, "arguments": arguments},
+                params,
                 name=name,
                 extra_headers=headers,
             )
@@ -589,7 +615,7 @@ class MCPHTTPClient:
                 raise ProtocolError(f"MCP tool {name!r} disappeared after schema refresh") from exc
             return await self._request(
                 "tools/call",
-                {"name": name, "arguments": arguments},
+                params,
                 name=name,
                 extra_headers=tool_parameter_headers(refreshed, arguments),
             )

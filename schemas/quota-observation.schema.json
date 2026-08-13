@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observation_id": {
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "resource_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "quota": {
+      "$ref": "#/$defs/SubscriptionQuota"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    }
+  },
+  "required": [
+    "resource_id",
+    "quota"
+  ],
+  "title": "QuotaObservation",
+  "type": "object"
+}

@@ -10,9 +10,12 @@ from typing import Any
 
 from aeep.integrations import export_tools
 from aeep.models import (
+    ActionFeatures,
     ActionRequest,
     BenchmarkResult,
     CapabilityDefinition,
+    CompactExecutionOutcome,
+    CompactRouteDecision,
     CounterfactualReport,
     EconomicMetrics,
     ExecutionReceipt,
@@ -23,6 +26,7 @@ from aeep.models import (
     PaymentReservation,
     PolicyConfig,
     ProviderDescriptor,
+    QuotaObservation,
     Quote,
     QuoteAcceptance,
     QuoteRequest,
@@ -30,15 +34,19 @@ from aeep.models import (
     RouteDecision,
     SignedExecutionReceipt,
     SubscriptionResource,
+    TraceProfileReport,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "action-features.schema.json": ActionFeatures,
     "action-request.schema.json": ActionRequest,
     "benchmark-result.schema.json": BenchmarkResult,
     "capability-definition.schema.json": CapabilityDefinition,
+    "compact-execution-outcome.schema.json": CompactExecutionOutcome,
+    "compact-route-decision.schema.json": CompactRouteDecision,
     "counterfactual-report.schema.json": CounterfactualReport,
     "economic-metrics.schema.json": EconomicMetrics,
     "execution-receipt.schema.json": ExecutionReceipt,
@@ -52,10 +60,12 @@ MODEL_FILES = {
     "quote.schema.json": Quote,
     "quote-acceptance.schema.json": QuoteAcceptance,
     "quote-request.schema.json": QuoteRequest,
+    "quota-observation.schema.json": QuotaObservation,
     "resource-vector.schema.json": ResourceVector,
     "route-decision.schema.json": RouteDecision,
     "signed-execution-receipt.schema.json": SignedExecutionReceipt,
     "subscription-resource.schema.json": SubscriptionResource,
+    "trace-profile-report.schema.json": TraceProfileReport,
 }
 
 TOOL_FILES = {

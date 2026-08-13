@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
+import json
+import math
+from typing import Any
+
 from .models import (
+    ActionFeatures,
     EstimateSource,
     ExecutionReceipt,
     ExecutionStatus,
@@ -18,7 +23,12 @@ class HistoricalEstimator:
     def __init__(self, store: ReceiptStore) -> None:
         self.store = store
 
-    def estimate(self, spec: ExecutorSpec, policy: PolicyConfig) -> RouteEstimate:
+    def estimate(
+        self,
+        spec: ExecutorSpec,
+        policy: PolicyConfig,
+        features: ActionFeatures | None = None,
+    ) -> RouteEstimate:
         receipts = [
             receipt
             for receipt in self.store.receipts_for_executor(spec.id, limit=200)
@@ -28,10 +38,17 @@ class HistoricalEstimator:
                 ExecutionStatus.HOST_SELECTED,
                 ExecutionStatus.UNKNOWN,
             }
+            and (
+                features is None
+                or (
+                    receipt.action_features is not None
+                    and receipt.action_features.size_bucket == features.size_bucket
+                )
+            )
         ]
         if not receipts:
             return spec.estimate.model_copy(deep=True)
-        historical = self._historical(receipts, spec.estimate)
+        historical = _historical(receipts, spec.estimate)
         sample_factor = len(receipts) / (len(receipts) + policy.history_prior_samples)
         blend = policy.history_weight * sample_factor
         return RouteEstimate(
@@ -46,50 +63,85 @@ class HistoricalEstimator:
             sample_size=len(receipts),
         )
 
-    @staticmethod
-    def _historical(
-        receipts: list[ExecutionReceipt],
-        prior: RouteEstimate,
-    ) -> RouteEstimate:
-        alpha = 0.30
-        resource = receipts[0].actual_resources
-        success_ewma = (
+
+def action_features(value: dict[str, Any]) -> ActionFeatures:
+    """Extract bounded, non-content features suitable for persisted learning."""
+
+    encoded = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    item_count = 0
+    text_characters = 0
+    max_depth = 0
+    stack: list[tuple[Any, int]] = [(value, 0)]
+    while stack:
+        current, depth = stack.pop()
+        max_depth = max(max_depth, depth)
+        if isinstance(current, dict):
+            item_count += len(current)
+            stack.extend((item, depth + 1) for item in current.values())
+        elif isinstance(current, list):
+            item_count += len(current)
+            stack.extend((item, depth + 1) for item in current)
+        elif isinstance(current, str):
+            text_characters += len(current)
+    byte_count = len(encoded)
+    bucket = "empty" if byte_count == 0 else f"2^{int(math.log2(byte_count))}"
+    return ActionFeatures(
+        input_bytes=byte_count,
+        input_items=item_count,
+        text_characters=text_characters,
+        max_depth=max_depth,
+        size_bucket=bucket,
+    )
+
+
+def _historical(
+    receipts: list[ExecutionReceipt],
+    prior: RouteEstimate,
+) -> RouteEstimate:
+    alpha = 0.30
+    resource = receipts[0].actual_resources
+    success_ewma = (
+        1.0
+        if receipts[0].status == ExecutionStatus.SUCCESS
+        and receipts[0].output_valid is not False
+        and receipts[0].task_valid is not False
+        else 0.0
+    )
+    valid_samples: list[bool] = []
+    if receipts[0].output_valid is not None:
+        valid_samples.append(receipts[0].output_valid)
+    for receipt in receipts[1:]:
+        resource = _blend_resources(resource, receipt.actual_resources, alpha)
+        succeeded = (
             1.0
-            if receipts[0].status == ExecutionStatus.SUCCESS
-            and receipts[0].output_valid is not False
-            and receipts[0].task_valid is not False
+            if receipt.status == ExecutionStatus.SUCCESS
+            and receipt.output_valid is not False
+            and receipt.task_valid is not False
             else 0.0
         )
-        valid_samples: list[bool] = []
-        if receipts[0].output_valid is not None:
-            valid_samples.append(receipts[0].output_valid)
-        for receipt in receipts[1:]:
-            resource = _blend_resources(resource, receipt.actual_resources, alpha)
-            succeeded = (
-                1.0
-                if receipt.status == ExecutionStatus.SUCCESS
-                and receipt.output_valid is not False
-                and receipt.task_valid is not False
-                else 0.0
-            )
-            success_ewma = _blend(success_ewma, succeeded, alpha)
-            if receipt.output_valid is not None:
-                valid_samples.append(receipt.output_valid)
-        quality = (
-            sum(1.0 for value in valid_samples if value) / len(valid_samples)
-            if valid_samples
-            else prior.quality_score
-        )
-        failure_rate = 1.0 - success_ewma
-        return RouteEstimate(
-            resources=resource,
-            success_probability=max(0.001, min(1.0, success_ewma)),
-            quality_score=max(0.0, min(1.0, quality)),
-            risk_score=max(prior.risk_score, min(1.0, failure_rate * 0.5)),
-            confidence=min(1.0, len(receipts) / 20.0),
-            source=EstimateSource.HISTORICAL,
-            sample_size=len(receipts),
-        )
+        success_ewma = _blend(success_ewma, succeeded, alpha)
+        if receipt.output_valid is not None:
+            valid_samples.append(receipt.output_valid)
+    quality = (
+        sum(1.0 for value in valid_samples if value) / len(valid_samples)
+        if valid_samples
+        else prior.quality_score
+    )
+    failure_rate = 1.0 - success_ewma
+    return RouteEstimate(
+        resources=resource,
+        success_probability=max(0.001, min(1.0, success_ewma)),
+        quality_score=max(0.0, min(1.0, quality)),
+        risk_score=max(prior.risk_score, min(1.0, failure_rate * 0.5)),
+        confidence=min(1.0, len(receipts) / 20.0),
+        source=EstimateSource.HISTORICAL,
+        sample_size=len(receipts),
+    )
 
 
 def _blend(a: float, b: float, weight_b: float) -> float:

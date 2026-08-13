@@ -33,10 +33,17 @@ Want to see the choice without running anything?
 aeep route text.stats --input '{"text":"hello world"}'
 ```
 
+For the smaller response intended for an agent:
+
+```bash
+aeep route text.stats --input '{"text":"hello world"}' --agent
+```
+
 Useful commands:
 
 ```bash
-aeep list       # available actions and routes
+aeep search     # find an action without loading the whole catalog
+aeep list       # browse available actions
 aeep route      # choose a route without running it
 aeep run        # choose and execute a route
 aeep history    # recent decisions and receipts
@@ -55,6 +62,23 @@ aeep route text.stats \
 ```
 
 See [the subscription example](examples/subscriptions/README.md) to change the available quota and watch the selected route change.
+
+Manage named subscriptions and quota signals:
+
+```bash
+aeep subscriptions status --manifest examples/subscriptions/aeep.yaml
+aeep quota observe claude-max tight --manifest examples/subscriptions/aeep.yaml
+```
+
+## Try a real action
+
+Route the current repository's default branch across local Git, GitHub HTTP, MCP, host subscription, and browser options:
+
+```bash
+aeep run github.repository.default-branch@1 \
+  --manifest examples/github/aeep.yaml \
+  --input '{"repository":".","owner":"ptse8204","name":"AEEP-router"}'
+```
 
 ## Use it from Python
 
@@ -89,6 +113,18 @@ python3 -m aeep serve \
 ```
 
 Add that command to your MCP client. Setup notes for Codex, Claude, and other clients are in [Integration guides](docs/INTEGRATIONS.md) and [Bring Your Own Subscription](docs/BYOS.md).
+
+Install the bundled minimal skill after a normal wheel install:
+
+```bash
+aeep skill install codex
+```
+
+Profile an existing OpenTelemetry trace without storing prompts or outputs:
+
+```bash
+aeep ingest otel trace.json
+```
 
 ## What AEEP gives you
 

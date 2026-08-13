@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 
 from conftest import manifest_with, python_spec
 
-from aeep.estimator import HistoricalEstimator
+from aeep.estimator import HistoricalEstimator, action_features
 from aeep.models import (
     ActionRequest,
     ExecutionReceipt,
@@ -32,6 +32,7 @@ def test_action_profiler_records_external_work():
     assert profile.receipt.actual_resources.monetary_usd == 0.02
     assert profile.receipt.actual_resources.input_tokens == 100
     import asyncio
+
     asyncio.run(router.close())
 
 
@@ -65,10 +66,13 @@ def test_history_blends_observed_success_and_ignores_delegated():
     )
     router.store.save_receipt(delegated)
     router.store.save_receipt(success)
-    estimate = HistoricalEstimator(router.store).estimate(executor, router._policy_for(ActionRequest(capability="text.stats")))
+    estimate = HistoricalEstimator(router.store).estimate(
+        executor, router._policy_for(ActionRequest(capability="text.stats"))
+    )
     assert estimate.sample_size == 1
     assert estimate.resources.latency_ms < 100
     import asyncio
+
     asyncio.run(router.close())
 
 
@@ -96,4 +100,38 @@ def test_invalid_output_counts_against_success_probability():
     estimate = HistoricalEstimator(router.store).estimate(executor, policy)
     assert estimate.success_probability < executor.estimate.success_probability
     import asyncio
+
+    asyncio.run(router.close())
+
+
+def test_history_is_conditioned_on_input_size_bucket():
+    executor = python_spec("x", "aeep.examples.tools:text_stats", latency_ms=100)
+    router = Router(manifest_with(executor))
+    now = datetime.now(UTC)
+    for value, latency in [({"text": "x"}, 5), ({"text": "x" * 10_000}, 50_000)]:
+        router.store.save_receipt(
+            ExecutionReceipt(
+                decision_id=f"d{latency}",
+                action_id=f"a{latency}",
+                capability="text.stats",
+                executor_id="x",
+                executor_kind=ExecutorKind.PYTHON,
+                status=ExecutionStatus.SUCCESS,
+                started_at=now,
+                ended_at=now,
+                estimated=executor.estimate,
+                action_features=action_features(value),
+                actual_resources=ResourceVector(latency_ms=latency),
+                output_valid=True,
+            )
+        )
+    estimate = HistoricalEstimator(router.store).estimate(
+        executor,
+        router._policy_for(ActionRequest(capability="text.stats")),
+        action_features({"text": "x"}),
+    )
+    assert estimate.sample_size == 1
+    assert estimate.resources.latency_ms < 100
+    import asyncio
+
     asyncio.run(router.close())

@@ -13,6 +13,31 @@
       "title": "ExecutionStatus",
       "type": "string"
     },
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
     "ResourceVector": {
       "additionalProperties": false,
       "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
@@ -86,6 +111,41 @@
         }
       },
       "title": "ResourceVector",
+      "type": "object"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        }
+      },
+      "title": "SubscriptionQuota",
       "type": "object"
     },
     "TrustLevel": {
@@ -223,6 +283,17 @@
       },
       "title": "Validation Results",
       "type": "array"
+    },
+    "quota_observation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SubscriptionQuota"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "error_message": {
       "anyOf": [
