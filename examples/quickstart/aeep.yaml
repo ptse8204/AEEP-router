@@ -1,0 +1,98 @@
+version: "0.1"
+database: .aeep/aeep.db
+default_policy: balanced
+
+policies:
+  quota_saver:
+    description: Conserve model context and local memory when an agent is near a quota.
+    weights:
+      monetary: 0.10
+      latency: 0.10
+      compute: 0.60
+      reliability: 0.10
+      quality: 0.05
+      risk: 0.05
+    resource_scarcity_multiplier: 5.0
+    constraints:
+      max_side_effect: read
+      min_success_probability: 0.80
+
+executors:
+  - id: python.text-stats
+    capability: text.stats
+    kind: python
+    description: Deterministic in-process implementation.
+    input_schema: &text_input
+      type: object
+      properties:
+        text: {type: string}
+      required: [text]
+      additionalProperties: false
+    output_schema: &stats_output
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources:
+        latency_ms: 2
+        cpu_ms: 1
+        peak_memory_mb: 32
+      success_probability: 0.999
+      quality_score: 1.0
+      risk_score: 0.001
+      confidence: 0.9
+    side_effect: none
+    locality: in_process
+    config:
+      callable: aeep.examples.tools:text_stats
+
+  - id: cli.text-stats
+    capability: text.stats
+    kind: command
+    description: Same semantic action through a process boundary.
+    input_schema: *text_input
+    output_schema: *stats_output
+    estimate:
+      resources:
+        latency_ms: 40
+        cpu_ms: 15
+        memory_mb_seconds: 2
+        peak_memory_mb: 48
+      success_probability: 0.995
+      quality_score: 1.0
+      risk_score: 0.005
+      confidence: 0.8
+    side_effect: none
+    locality: local
+    config:
+      argv: [python, -m, aeep.examples.text_stats_cli, "{input.text}"]
+      output: {type: json}
+      timeout_seconds: 10
+
+  - id: host.browser-text-stats
+    capability: text.stats
+    kind: delegate
+    description: Let the host agent count through its current UI/model state.
+    input_schema: *text_input
+    output_schema: *stats_output
+    estimate:
+      resources:
+        latency_ms: 2500
+        context_tokens: 1000
+        input_tokens: 500
+        output_tokens: 60
+      success_probability: 0.90
+      quality_score: 0.95
+      risk_score: 0.05
+      confidence: 0.3
+    side_effect: none
+    locality: local
+    config:
+      instructions: >-
+        Count characters, whitespace-separated words, and lines in the supplied
+        text using the host agent. Return a JSON object with characters, words,
+        and lines, then report actual token/latency use to AEEP.

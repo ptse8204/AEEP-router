@@ -1,0 +1,383 @@
+{
+  "$defs": {
+    "BenchmarkEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "executor_kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "decision_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decision Id"
+        },
+        "receipt_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receipt Id"
+        },
+        "ok": {
+          "default": false,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExecutionStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "estimated": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RouteEstimate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "actual_resources": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceVector"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "output_valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Valid"
+        },
+        "actual_score": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ScoreBreakdown"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "actual_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Rank"
+        },
+        "skipped_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Skipped Reason"
+        },
+        "error_message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Message"
+        }
+      },
+      "required": [
+        "executor_id",
+        "executor_kind"
+      ],
+      "title": "BenchmarkEntry",
+      "type": "object"
+    },
+    "EstimateSource": {
+      "enum": [
+        "static",
+        "historical",
+        "blended",
+        "quote",
+        "observed"
+      ],
+      "title": "EstimateSource",
+      "type": "string"
+    },
+    "ExecutionStatus": {
+      "enum": [
+        "success",
+        "failed",
+        "timeout",
+        "rejected",
+        "delegated",
+        "unknown"
+      ],
+      "title": "ExecutionStatus",
+      "type": "string"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "RouteEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "success_probability": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.001,
+          "title": "Success Probability",
+          "type": "number"
+        },
+        "quality_score": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Quality Score",
+          "type": "number"
+        },
+        "risk_score": {
+          "default": 0.05,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Risk Score",
+          "type": "number"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/EstimateSource",
+          "default": "static"
+        },
+        "sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Sample Size",
+          "type": "integer"
+        }
+      },
+      "title": "RouteEstimate",
+      "type": "object"
+    },
+    "ScoreBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "monetary": {
+          "default": 0.0,
+          "title": "Monetary",
+          "type": "number"
+        },
+        "latency": {
+          "default": 0.0,
+          "title": "Latency",
+          "type": "number"
+        },
+        "compute": {
+          "default": 0.0,
+          "title": "Compute",
+          "type": "number"
+        },
+        "reliability": {
+          "default": 0.0,
+          "title": "Reliability",
+          "type": "number"
+        },
+        "quality": {
+          "default": 0.0,
+          "title": "Quality",
+          "type": "number"
+        },
+        "risk": {
+          "default": 0.0,
+          "title": "Risk",
+          "type": "number"
+        },
+        "locality_adjustment": {
+          "default": 0.0,
+          "title": "Locality Adjustment",
+          "type": "number"
+        },
+        "total": {
+          "default": 0.0,
+          "title": "Total",
+          "type": "number"
+        }
+      },
+      "title": "ScoreBreakdown",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "benchmark_id": {
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "policy": {
+      "title": "Policy",
+      "type": "string"
+    },
+    "route_decision_id": {
+      "title": "Route Decision Id",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "capability",
+    "policy",
+    "route_decision_id"
+  ],
+  "title": "BenchmarkResult",
+  "type": "object"
+}

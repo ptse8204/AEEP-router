@@ -1,0 +1,264 @@
+{
+  "$defs": {
+    "EstimateSource": {
+      "enum": [
+        "static",
+        "historical",
+        "blended",
+        "quote",
+        "observed"
+      ],
+      "title": "EstimateSource",
+      "type": "string"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "Locality": {
+      "enum": [
+        "in_process",
+        "local",
+        "lan",
+        "internet"
+      ],
+      "title": "Locality",
+      "type": "string"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "RouteEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "success_probability": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.001,
+          "title": "Success Probability",
+          "type": "number"
+        },
+        "quality_score": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Quality Score",
+          "type": "number"
+        },
+        "risk_score": {
+          "default": 0.05,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Risk Score",
+          "type": "number"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/EstimateSource",
+          "default": "static"
+        },
+        "sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Sample Size",
+          "type": "integer"
+        }
+      },
+      "title": "RouteEstimate",
+      "type": "object"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Capability",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/ExecutorKind"
+    },
+    "description": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "input_schema": {
+      "additionalProperties": true,
+      "title": "Input Schema",
+      "type": "object"
+    },
+    "output_schema": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Schema"
+    },
+    "estimate": {
+      "$ref": "#/$defs/RouteEstimate"
+    },
+    "side_effect": {
+      "$ref": "#/$defs/SideEffect",
+      "default": "read"
+    },
+    "locality": {
+      "$ref": "#/$defs/Locality",
+      "default": "local"
+    },
+    "requires_network": {
+      "default": false,
+      "title": "Requires Network",
+      "type": "boolean"
+    },
+    "data_residency": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Data Residency",
+      "type": "array"
+    },
+    "idempotent": {
+      "default": true,
+      "title": "Idempotent",
+      "type": "boolean"
+    },
+    "safe_to_auto_execute": {
+      "default": true,
+      "title": "Safe To Auto Execute",
+      "type": "boolean"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "config": {
+      "additionalProperties": true,
+      "title": "Config",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "capability",
+    "kind",
+    "description"
+  ],
+  "title": "ExecutorSpec",
+  "type": "object"
+}

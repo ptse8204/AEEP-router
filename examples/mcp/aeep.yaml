@@ -1,0 +1,41 @@
+version: "0.1"
+database: .aeep/aeep.db
+default_policy: balanced
+executors:
+  - id: example.mcp-text-stats
+    capability: text.stats
+    kind: mcp
+    description: Call the example text_stats MCP tool over stdio.
+    input_schema:
+      type: object
+      properties:
+        text: {type: string}
+      required: [text]
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources:
+        monetary_usd: 0.001
+        latency_ms: 80
+        context_tokens: 150
+      success_probability: 0.99
+      quality_score: 1.0
+      risk_score: 0.01
+    side_effect: none
+    locality: local
+    config:
+      transport: stdio
+      command: python
+      args: [text_stats_server.py]
+      cwd: .
+      tool: text_stats
+      arguments:
+        text: "{input.text}"
+      timeout_seconds: 10

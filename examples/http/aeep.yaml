@@ -1,0 +1,45 @@
+version: "0.1"
+database: .aeep/aeep.db
+default_policy: balanced
+executors:
+  - id: example.http-text-stats
+    capability: text.stats
+    kind: http
+    description: Call the local example HTTP API.
+    input_schema:
+      type: object
+      properties:
+        text: {type: string}
+      required: [text]
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources:
+        monetary_usd: 0.002
+        latency_ms: 100
+        network_bytes: 500
+      success_probability: 0.99
+      quality_score: 1.0
+      risk_score: 0.01
+    side_effect: none
+    locality: lan
+    requires_network: true
+    config:
+      url: http://127.0.0.1:8787/stats
+      method: POST
+      json:
+        text: "{input.text}"
+      allowed_hosts: [127.0.0.1]
+      allow_private_networks: true
+      output:
+        type: json
+        path: data
+      cost_header: X-AEEP-Cost-USD
+      trust_cost_header: true

@@ -1,0 +1,470 @@
+{
+  "$defs": {
+    "ActionConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cost Usd"
+        },
+        "max_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Latency Ms"
+        },
+        "max_cpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cpu Ms"
+        },
+        "max_memory_mb_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Memory Mb Seconds"
+        },
+        "max_peak_memory_mb": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Peak Memory Mb"
+        },
+        "max_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Gpu Ms"
+        },
+        "max_network_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Network Bytes"
+        },
+        "max_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Context Tokens"
+        },
+        "min_success_probability": {
+          "default": 0.7,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Success Probability",
+          "type": "number"
+        },
+        "min_quality_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Quality Score",
+          "type": "number"
+        },
+        "max_risk_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Max Risk Score",
+          "type": "number"
+        },
+        "max_side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "allow_network": {
+          "default": true,
+          "title": "Allow Network",
+          "type": "boolean"
+        },
+        "require_local": {
+          "default": false,
+          "title": "Require Local",
+          "type": "boolean"
+        },
+        "allowed_executor_kinds": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ExecutorKind"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Kinds"
+        },
+        "allowed_executor_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Ids"
+        },
+        "denied_executor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Denied Executor Ids",
+          "type": "array"
+        },
+        "allowed_data_residency": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Data Residency"
+        }
+      },
+      "title": "ActionConstraints",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "FallbackConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "max_attempts": {
+          "default": 3,
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "retry_timeouts": {
+          "default": true,
+          "title": "Retry Timeouts",
+          "type": "boolean"
+        },
+        "retry_validation_failures": {
+          "default": true,
+          "title": "Retry Validation Failures",
+          "type": "boolean"
+        },
+        "allow_non_idempotent": {
+          "default": false,
+          "title": "Allow Non Idempotent",
+          "type": "boolean"
+        }
+      },
+      "title": "FallbackConfig",
+      "type": "object"
+    },
+    "MetricWeights": {
+      "additionalProperties": false,
+      "properties": {
+        "monetary": {
+          "default": 0.3,
+          "minimum": 0.0,
+          "title": "Monetary",
+          "type": "number"
+        },
+        "latency": {
+          "default": 0.25,
+          "minimum": 0.0,
+          "title": "Latency",
+          "type": "number"
+        },
+        "compute": {
+          "default": 0.25,
+          "minimum": 0.0,
+          "title": "Compute",
+          "type": "number"
+        },
+        "reliability": {
+          "default": 0.1,
+          "minimum": 0.0,
+          "title": "Reliability",
+          "type": "number"
+        },
+        "quality": {
+          "default": 0.05,
+          "minimum": 0.0,
+          "title": "Quality",
+          "type": "number"
+        },
+        "risk": {
+          "default": 0.05,
+          "minimum": 0.0,
+          "title": "Risk",
+          "type": "number"
+        }
+      },
+      "title": "MetricWeights",
+      "type": "object"
+    },
+    "ReferenceScales": {
+      "additionalProperties": false,
+      "description": "A score of roughly one means one reference unit of burden.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.05,
+          "exclusiveMinimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 2000.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 1000.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 256.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 512.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 1000.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 1000000,
+          "exclusiveMinimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 8000,
+          "exclusiveMinimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        }
+      },
+      "title": "ReferenceScales",
+      "type": "object"
+    },
+    "ShadowPrices": {
+      "additionalProperties": false,
+      "description": "Optional local economic values for scarce non-cash resources.\n\nValues are USD per unit. They are additive to reported monetary cost and are\nuseful for subscription quotas or expensive local compute. Defaults are zero\nso AEEP does not pretend different providers' tokens are fungible.",
+      "properties": {
+        "cpu_ms_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms Usd",
+          "type": "number"
+        },
+        "memory_mb_second_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Second Usd",
+          "type": "number"
+        },
+        "gpu_ms_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms Usd",
+          "type": "number"
+        },
+        "network_byte_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Network Byte Usd",
+          "type": "number"
+        },
+        "context_token_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Context Token Usd",
+          "type": "number"
+        },
+        "input_token_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Input Token Usd",
+          "type": "number"
+        },
+        "output_token_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Output Token Usd",
+          "type": "number"
+        }
+      },
+      "title": "ShadowPrices",
+      "type": "object"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "default": "balanced",
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "Balance expected cash cost, latency, and compute pressure.",
+      "title": "Description",
+      "type": "string"
+    },
+    "weights": {
+      "$ref": "#/$defs/MetricWeights"
+    },
+    "references": {
+      "$ref": "#/$defs/ReferenceScales"
+    },
+    "shadow_prices": {
+      "$ref": "#/$defs/ShadowPrices"
+    },
+    "constraints": {
+      "$ref": "#/$defs/ActionConstraints"
+    },
+    "fallback": {
+      "$ref": "#/$defs/FallbackConfig"
+    },
+    "history_weight": {
+      "default": 0.7,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "History Weight",
+      "type": "number"
+    },
+    "history_prior_samples": {
+      "default": 5,
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "History Prior Samples",
+      "type": "integer"
+    },
+    "resource_scarcity_multiplier": {
+      "default": 2.0,
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Resource Scarcity Multiplier",
+      "type": "number"
+    },
+    "prefer_local_bonus": {
+      "default": 0.05,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Prefer Local Bonus",
+      "type": "number"
+    },
+    "deterministic_tie_break": {
+      "default": true,
+      "title": "Deterministic Tie Break",
+      "type": "boolean"
+    }
+  },
+  "title": "PolicyConfig",
+  "type": "object"
+}

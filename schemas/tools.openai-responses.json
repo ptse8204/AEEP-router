@@ -1,0 +1,190 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "name": "aeep_list_capabilities",
+      "description": "List semantic capabilities and their available CLI, Python, HTTP, MCP, or host-delegated executors before choosing an action.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "aeep_route_action",
+      "description": "Profile and rank feasible execution routes for an agent action without executing it. Returns estimates, hard-constraint rejections, score components, and the selected route.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "Stable semantic action name, for example text.stats or github.issue.create."
+          },
+          "input": {
+            "type": "object",
+            "description": "JSON input passed to the selected executor.",
+            "additionalProperties": true
+          },
+          "policy": {
+            "type": "string",
+            "default": "balanced",
+            "description": "Routing policy name: balanced, cheapest, fastest, resource_saver, reliable, or a manifest policy."
+          },
+          "constraints": {
+            "type": "object",
+            "description": "Optional hard budget, latency, compute, privacy, and safety constraints.",
+            "additionalProperties": true
+          },
+          "context": {
+            "type": "object",
+            "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "capability",
+          "input"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "aeep_execute_action",
+      "description": "Route and execute an agent action within the operator-configured server approval ceiling. AEEP applies hard constraints first, then balances cost, latency, compute pressure, reliability, quality, and risk. Returns execution receipts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "Stable semantic action name, for example text.stats or github.issue.create."
+          },
+          "input": {
+            "type": "object",
+            "description": "JSON input passed to the selected executor.",
+            "additionalProperties": true
+          },
+          "policy": {
+            "type": "string",
+            "default": "balanced",
+            "description": "Routing policy name: balanced, cheapest, fastest, resource_saver, reliable, or a manifest policy."
+          },
+          "constraints": {
+            "type": "object",
+            "description": "Optional hard budget, latency, compute, privacy, and safety constraints.",
+            "additionalProperties": true
+          },
+          "context": {
+            "type": "object",
+            "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "default": false,
+            "description": "Return the route decision without invoking the executor."
+          }
+        },
+        "required": [
+          "capability",
+          "input"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "aeep_record_outcome",
+      "description": "Report the observed result of a browser, computer-use, model, or other host-delegated route so future decisions learn its actual cost, latency, compute use, and reliability.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "decision_id": {
+            "type": "string"
+          },
+          "executor_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "failed",
+              "timeout",
+              "rejected"
+            ]
+          },
+          "actual_resources": {
+            "type": "object",
+            "properties": {
+              "monetary_usd": {
+                "type": "number",
+                "minimum": 0
+              },
+              "latency_ms": {
+                "type": "number",
+                "minimum": 0
+              },
+              "cpu_ms": {
+                "type": "number",
+                "minimum": 0
+              },
+              "memory_mb_seconds": {
+                "type": "number",
+                "minimum": 0
+              },
+              "peak_memory_mb": {
+                "type": "number",
+                "minimum": 0
+              },
+              "gpu_ms": {
+                "type": "number",
+                "minimum": 0
+              },
+              "network_bytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "context_tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "input_tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "output_tokens": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          },
+          "output_valid": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "error_message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "decision_id",
+          "executor_id",
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

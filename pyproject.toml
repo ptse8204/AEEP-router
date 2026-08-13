@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aeep-agent-router"
+version = "0.1.0"
+description = "Economic profiling and policy-based routing for agent actions across CLI, HTTP, MCP, and local functions."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "AEEP contributors" }]
+keywords = ["agents", "mcp", "routing", "observability", "cli", "tool-use"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "httpx>=0.27,<1",
+  "jsonschema>=4.22,<5",
+  "opentelemetry-api>=1.25,<2",
+  "psutil>=5.9,<8",
+  "pydantic>=2.8,<3",
+  "PyYAML>=6,<7",
+  "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+http-server = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+dev = [
+  "coverage[toml]>=7.6,<8",
+  "pytest>=8.2,<10",
+  "pytest-asyncio>=0.24,<2",
+  "ruff>=0.9,<1",
+  "mypy>=1.13,<2",
+  "build>=1.2,<2",
+]
+
+[project.scripts]
+aeep = "aeep.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+aeep = ["py.typed"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["aeep"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF", "SIM", "ASYNC"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["aeep"]
+warn_unused_ignores = true

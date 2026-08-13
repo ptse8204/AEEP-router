@@ -1,0 +1,426 @@
+{
+  "$defs": {
+    "ActionConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cost Usd"
+        },
+        "max_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Latency Ms"
+        },
+        "max_cpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cpu Ms"
+        },
+        "max_memory_mb_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Memory Mb Seconds"
+        },
+        "max_peak_memory_mb": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Peak Memory Mb"
+        },
+        "max_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Gpu Ms"
+        },
+        "max_network_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Network Bytes"
+        },
+        "max_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Context Tokens"
+        },
+        "min_success_probability": {
+          "default": 0.7,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Success Probability",
+          "type": "number"
+        },
+        "min_quality_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Quality Score",
+          "type": "number"
+        },
+        "max_risk_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Max Risk Score",
+          "type": "number"
+        },
+        "max_side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "allow_network": {
+          "default": true,
+          "title": "Allow Network",
+          "type": "boolean"
+        },
+        "require_local": {
+          "default": false,
+          "title": "Require Local",
+          "type": "boolean"
+        },
+        "allowed_executor_kinds": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ExecutorKind"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Kinds"
+        },
+        "allowed_executor_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Ids"
+        },
+        "denied_executor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Denied Executor Ids",
+          "type": "array"
+        },
+        "allowed_data_residency": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Data Residency"
+        }
+      },
+      "title": "ActionConstraints",
+      "type": "object"
+    },
+    "ActionContext": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sensitivity": {
+          "$ref": "#/$defs/DataSensitivity",
+          "default": "internal"
+        },
+        "state_locality": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Locality"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preferred_region": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preferred Region"
+        },
+        "compute": {
+          "$ref": "#/$defs/ComputeAvailability"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Labels",
+          "type": "object"
+        },
+        "traceparent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Traceparent"
+        }
+      },
+      "title": "ActionContext",
+      "type": "object"
+    },
+    "ComputeAvailability": {
+      "additionalProperties": false,
+      "description": "Resources available to the caller at routing time.\n\nThese values are optional because agents often know context-window or quota\nheadroom that the local process cannot detect.",
+      "properties": {
+        "available_memory_mb": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Memory Mb"
+        },
+        "available_cpu_fraction": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 1.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Cpu Fraction"
+        },
+        "available_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Gpu Ms"
+        },
+        "context_tokens_remaining": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Tokens Remaining"
+        },
+        "monetary_budget_remaining_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Monetary Budget Remaining Usd"
+        },
+        "network_metered": {
+          "default": false,
+          "title": "Network Metered",
+          "type": "boolean"
+        }
+      },
+      "title": "ComputeAvailability",
+      "type": "object"
+    },
+    "DataSensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ],
+      "title": "DataSensitivity",
+      "type": "string"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "Locality": {
+      "enum": [
+        "in_process",
+        "local",
+        "lan",
+        "internet"
+      ],
+      "title": "Locality",
+      "type": "string"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Capability",
+      "type": "string"
+    },
+    "input": {
+      "additionalProperties": true,
+      "title": "Input",
+      "type": "object"
+    },
+    "policy": {
+      "default": "balanced",
+      "title": "Policy",
+      "type": "string"
+    },
+    "constraints": {
+      "$ref": "#/$defs/ActionConstraints"
+    },
+    "context": {
+      "$ref": "#/$defs/ActionContext"
+    },
+    "idempotency_key": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Idempotency Key"
+    }
+  },
+  "required": [
+    "capability"
+  ],
+  "title": "ActionRequest",
+  "type": "object"
+}

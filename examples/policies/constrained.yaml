@@ -1,0 +1,42 @@
+# Copy under `policies:` in an AEEP manifest.
+constrained:
+  description: A practical example for a low-memory, metered, nearly out-of-context agent.
+  weights:
+    monetary: 0.20
+    latency: 0.10
+    compute: 0.50
+    reliability: 0.10
+    quality: 0.05
+    risk: 0.05
+  references:
+    monetary_usd: 0.02
+    latency_ms: 1000
+    cpu_ms: 500
+    memory_mb_seconds: 128
+    peak_memory_mb: 256
+    gpu_ms: 500
+    network_bytes: 250000
+    context_tokens: 2000
+  shadow_prices:
+    context_token_usd: 0.00001
+    input_token_usd: 0.000005
+    output_token_usd: 0.000015
+    network_byte_usd: 0.000000001
+  constraints:
+    max_cost_usd: 0.10
+    max_latency_ms: 10000
+    max_peak_memory_mb: 1024
+    max_context_tokens: 6000
+    min_success_probability: 0.85
+    min_quality_score: 0.80
+    max_risk_score: 0.25
+    max_side_effect: read
+  fallback:
+    enabled: true
+    max_attempts: 2
+    retry_timeouts: true
+    retry_validation_failures: true
+    allow_non_idempotent: false
+  history_weight: 0.75
+  history_prior_samples: 5
+  resource_scarcity_multiplier: 5.0
