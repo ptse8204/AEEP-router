@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aeep-agent-router"
-version = "0.2.0"
+version = "0.3.0"
 description = "Economic profiling and policy-based routing for agent actions across CLI, HTTP, MCP, and local functions."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -63,6 +63,7 @@ aeep = ["py.typed"]
 "share/aeep/examples/quickstart" = ["examples/quickstart/*.md", "examples/quickstart/*.py", "examples/quickstart/*.yaml"]
 "share/aeep/examples/subscriptions" = ["examples/subscriptions/*.md", "examples/subscriptions/*.yaml"]
 "share/aeep/examples/github" = ["examples/github/*.md", "examples/github/*.yaml"]
+"share/aeep/examples/proof" = ["examples/proof/*.json", "examples/proof/*.md", "examples/proof/*.yaml"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

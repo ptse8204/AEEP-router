@@ -244,6 +244,52 @@ async def test_mcp_server_import_discovers_tools(tmp_path):
     assert {executor.kind for executor in descriptor.executors} == {ExecutorKind.MCP}
 
 
+@pytest.mark.asyncio
+async def test_mcp_server_import_resolves_auth_only_for_inspection(monkeypatch):
+    import aeep.sdk as sdk
+
+    captured = {}
+
+    async def allow_url(*_args, **_kwargs):
+        return None
+
+    class FakeClient:
+        def __init__(self, **kwargs):
+            captured.update(kwargs)
+
+        async def list_tools(self):
+            return SimpleNamespace(
+                result={
+                    "tools": [
+                        {
+                            "name": "read_rows",
+                            "inputSchema": {"type": "object"},
+                        }
+                    ]
+                }
+            )
+
+        async def close(self):
+            return None
+
+    monkeypatch.setenv("PIPEDREAM_TOKEN", "resolved-secret")
+    monkeypatch.setattr(sdk, "validate_http_url", allow_url)
+    monkeypatch.setattr(sdk, "MCPHTTPClient", FakeClient)
+    descriptor = await sdk.import_mcp_server(
+        provider_id="pipedream-test",
+        transport="http",
+        endpoint="https://remote.mcp.pipedream.net/v3",
+        headers={"Authorization": "Bearer ${ENV:PIPEDREAM_TOKEN}"},
+        credential_scope_id="pipedream:test-user",
+        protocol_mode="modern",
+    )
+    assert captured["headers"] == {"Authorization": "Bearer resolved-secret"}
+    assert descriptor.executors[0].config["headers"] == {
+        "Authorization": "Bearer ${ENV:PIPEDREAM_TOKEN}"
+    }
+    assert "resolved-secret" not in descriptor.model_dump_json()
+
+
 def test_openapi_import_maps_operation_to_canonical_capability(tmp_path):
     from aeep.sdk import import_openapi
 

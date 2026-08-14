@@ -19,8 +19,10 @@ from .models import (
     QuotaObservation,
     Quote,
     QuoteAcceptance,
+    RateCardSnapshot,
     RouteDecision,
 )
+from .qualification import QualificationReport, RouteCandidate
 
 
 class ReceiptStore:
@@ -130,8 +132,152 @@ class ReceiptStore:
                 );
                 CREATE INDEX IF NOT EXISTS idx_quota_resource_observed
                     ON quota_observations(resource_id, observed_at DESC);
+                CREATE TABLE IF NOT EXISTS route_candidates (
+                    executor_id TEXT PRIMARY KEY,
+                    source_id TEXT NOT NULL,
+                    fingerprint TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS qualification_reports (
+                    report_id TEXT PRIMARY KEY,
+                    candidate_id TEXT NOT NULL,
+                    fingerprint TEXT NOT NULL,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS rate_card_snapshots (
+                    snapshot_id TEXT PRIMARY KEY,
+                    payload_json TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS workflow_checkpoints (
+                    workflow_id TEXT PRIMARY KEY,
+                    workflow_hash TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    waiting_step_id TEXT,
+                    waiting_decision_id TEXT
+                );
                 """
             )
+
+    def save_route_candidate(self, candidate: RouteCandidate) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO route_candidates
+                    (executor_id, source_id, fingerprint, status, payload_json)
+                VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(executor_id) DO UPDATE SET
+                    source_id = excluded.source_id,
+                    fingerprint = excluded.fingerprint,
+                    status = excluded.status,
+                    payload_json = excluded.payload_json
+                """,
+                (
+                    candidate.executor_id,
+                    candidate.source_id,
+                    candidate.behavior_fingerprint,
+                    candidate.status.value,
+                    candidate.model_dump_json(),
+                ),
+            )
+
+    def get_route_candidate(self, executor_id: str) -> RouteCandidate | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM route_candidates WHERE executor_id = ?",
+                (executor_id,),
+            ).fetchone()
+        return RouteCandidate.model_validate_json(row[0]) if row else None
+
+    def list_route_candidates(self) -> list[RouteCandidate]:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM route_candidates ORDER BY executor_id"
+            ).fetchall()
+        return [RouteCandidate.model_validate_json(row[0]) for row in rows]
+
+    def save_qualification_report(self, report: QualificationReport) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO qualification_reports
+                    (report_id, candidate_id, fingerprint, payload_json)
+                VALUES (?, ?, ?, ?)
+                """,
+                (
+                    report.report_id,
+                    report.candidate_id,
+                    report.behavior_fingerprint,
+                    report.model_dump_json(),
+                ),
+            )
+
+    def get_qualification_report(self, report_id: str) -> QualificationReport | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM qualification_reports WHERE report_id = ?",
+                (report_id,),
+            ).fetchone()
+        return QualificationReport.model_validate_json(row[0]) if row else None
+
+    def save_rate_card_snapshot(self, snapshot: RateCardSnapshot) -> None:
+        if snapshot.snapshot_id is None:  # pragma: no cover - model validator derives it
+            raise ConfigurationError("rate-card snapshot has no digest")
+        with self._lock, self._connection:
+            row = self._connection.execute(
+                "SELECT payload_json FROM rate_card_snapshots WHERE snapshot_id = ?",
+                (snapshot.snapshot_id,),
+            ).fetchone()
+            payload = snapshot.model_dump_json()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("immutable rate-card snapshot digest collision")
+            self._connection.execute(
+                "INSERT OR IGNORE INTO rate_card_snapshots (snapshot_id, payload_json) VALUES (?, ?)",
+                (snapshot.snapshot_id, payload),
+            )
+
+    def get_rate_card_snapshot(self, snapshot_id: str) -> RateCardSnapshot | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM rate_card_snapshots WHERE snapshot_id = ?",
+                (snapshot_id,),
+            ).fetchone()
+        return RateCardSnapshot.model_validate_json(row[0]) if row else None
+
+    def save_workflow_checkpoint(
+        self,
+        *,
+        workflow_id: str,
+        workflow_hash: str,
+        status: str,
+        waiting_step_id: str | None = None,
+        waiting_decision_id: str | None = None,
+    ) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO workflow_checkpoints
+                    (workflow_id, workflow_hash, status, waiting_step_id, waiting_decision_id)
+                VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(workflow_id) DO UPDATE SET
+                    workflow_hash = excluded.workflow_hash,
+                    status = excluded.status,
+                    waiting_step_id = excluded.waiting_step_id,
+                    waiting_decision_id = excluded.waiting_decision_id
+                """,
+                (workflow_id, workflow_hash, status, waiting_step_id, waiting_decision_id),
+            )
+
+    def get_workflow_checkpoint(self, workflow_id: str) -> dict[str, str | None] | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT workflow_hash, status, waiting_step_id, waiting_decision_id
+                FROM workflow_checkpoints WHERE workflow_id = ?
+                """,
+                (workflow_id,),
+            ).fetchone()
+        return dict(row) if row else None
 
     def claim_idempotency(self, key: str, request_hash: str) -> dict[str, object] | None:
         """Claim a key atomically; return its existing record on duplicate."""
@@ -144,7 +290,7 @@ class ReceiptStore:
                 self._connection.execute(
                     """
                     INSERT INTO idempotency_records (idempotency_key, request_hash, state)
-                    VALUES (?, ?, 'pending')
+                    VALUES (?, ?, 'claimed')
                     """,
                     (key, request_hash),
                 )
@@ -184,7 +330,7 @@ class ReceiptStore:
                 """
                 UPDATE idempotency_records
                 SET state = 'complete', decision_id = ?, status = ?, receipt_ids_json = ?
-                WHERE idempotency_key = ? AND state = 'pending'
+                WHERE idempotency_key = ? AND state IN ('claimed', 'executing')
                 """,
                 (decision_id, status, json.dumps(receipt_ids), key),
             )
@@ -192,7 +338,29 @@ class ReceiptStore:
     def abandon_idempotency(self, key: str) -> None:
         with self._lock, self._connection:
             self._connection.execute(
-                "DELETE FROM idempotency_records WHERE idempotency_key = ? AND state = 'pending'",
+                "DELETE FROM idempotency_records WHERE idempotency_key = ? AND state = 'claimed'",
+                (key,),
+            )
+
+    def mark_idempotency_executing(self, key: str) -> None:
+        with self._lock, self._connection:
+            cursor = self._connection.execute(
+                """
+                UPDATE idempotency_records SET state = 'executing'
+                WHERE idempotency_key = ? AND state = 'claimed'
+                """,
+                (key,),
+            )
+            if cursor.rowcount != 1:
+                raise ConfigurationError("idempotency claim is not executable")
+
+    def mark_idempotency_indeterminate(self, key: str) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                UPDATE idempotency_records SET state = 'indeterminate'
+                WHERE idempotency_key = ? AND state = 'executing'
+                """,
                 (key,),
             )
 

@@ -1,0 +1,1327 @@
+{
+  "$defs": {
+    "BenchmarkCondition": {
+      "enum": [
+        "process-cold",
+        "router-warm"
+      ],
+      "title": "BenchmarkCondition",
+      "type": "string"
+    },
+    "BenchmarkDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "baseline_route_id": {
+          "title": "Baseline Route Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "paired_trials": {
+          "title": "Paired Trials",
+          "type": "integer"
+        },
+        "median_wall_time_delta_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Median Wall Time Delta Ms"
+        },
+        "bootstrap_low_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bootstrap Low Ms"
+        },
+        "bootstrap_high_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bootstrap High Ms"
+        }
+      },
+      "required": [
+        "route_id",
+        "baseline_route_id",
+        "condition",
+        "paired_trials",
+        "median_wall_time_delta_ms",
+        "bootstrap_low_ms",
+        "bootstrap_high_ms"
+      ],
+      "title": "BenchmarkDelta",
+      "type": "object"
+    },
+    "BenchmarkOracle": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "repetition": {
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "selected_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Id"
+        },
+        "policy_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Policy Route Id"
+        },
+        "cash_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cash Route Id"
+        },
+        "token_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Token Route Id"
+        },
+        "latency_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Route Id"
+        },
+        "selected_within_10_percent": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Within 10 Percent"
+        }
+      },
+      "required": [
+        "case_id",
+        "condition",
+        "repetition"
+      ],
+      "title": "BenchmarkOracle",
+      "type": "object"
+    },
+    "BenchmarkPhase": {
+      "enum": [
+        "setup",
+        "qualification",
+        "measurement",
+        "holdout"
+      ],
+      "title": "BenchmarkPhase",
+      "type": "string"
+    },
+    "BenchmarkSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "trials": {
+          "title": "Trials",
+          "type": "integer"
+        },
+        "attempted": {
+          "title": "Attempted",
+          "type": "integer"
+        },
+        "completed": {
+          "title": "Completed",
+          "type": "integer"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "integer"
+        },
+        "success_rate": {
+          "title": "Success Rate",
+          "type": "number"
+        },
+        "success_wilson_low": {
+          "title": "Success Wilson Low",
+          "type": "number"
+        },
+        "success_wilson_high": {
+          "title": "Success Wilson High",
+          "type": "number"
+        },
+        "median_wall_time_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Median Wall Time Ms"
+        },
+        "p95_wall_time_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "P95 Wall Time Ms"
+        },
+        "mad_wall_time_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mad Wall Time Ms"
+        },
+        "operation_count": {
+          "title": "Operation Count",
+          "type": "integer"
+        },
+        "retry_fallback_count": {
+          "title": "Retry Fallback Count",
+          "type": "integer"
+        },
+        "intervention_count": {
+          "title": "Intervention Count",
+          "type": "integer"
+        },
+        "warm_cache_evidence_coverage": {
+          "title": "Warm Cache Evidence Coverage",
+          "type": "string"
+        },
+        "cash_evidence_coverage": {
+          "title": "Cash Evidence Coverage",
+          "type": "string"
+        },
+        "subscription_evidence_coverage": {
+          "title": "Subscription Evidence Coverage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "route_id",
+        "condition",
+        "trials",
+        "attempted",
+        "completed",
+        "valid",
+        "success_rate",
+        "success_wilson_low",
+        "success_wilson_high",
+        "median_wall_time_ms",
+        "p95_wall_time_ms",
+        "mad_wall_time_ms",
+        "operation_count",
+        "retry_fallback_count",
+        "intervention_count",
+        "warm_cache_evidence_coverage",
+        "cash_evidence_coverage",
+        "subscription_evidence_coverage"
+      ],
+      "title": "BenchmarkSummary",
+      "type": "object"
+    },
+    "BenchmarkTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "trial_id": {
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "suite_id": {
+          "title": "Suite Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "route_fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Route Fingerprint"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "repetition": {
+          "minimum": 0,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "phase": {
+          "$ref": "#/$defs/BenchmarkPhase"
+        },
+        "state": {
+          "pattern": "^(running|complete|failed|skipped)$",
+          "title": "State",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "ok": {
+          "default": false,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExecutionStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "wall_time_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wall Time Ms"
+        },
+        "actual_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "accounting": {
+          "$ref": "#/$defs/ResourceAccounting"
+        },
+        "model_usage_complete": {
+          "default": false,
+          "title": "Model Usage Complete",
+          "type": "boolean"
+        },
+        "counterfactual_costs": {
+          "items": {
+            "$ref": "#/$defs/CounterfactualCashCost"
+          },
+          "title": "Counterfactual Costs",
+          "type": "array"
+        },
+        "receipt_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receipt Ids",
+          "type": "array"
+        },
+        "operation_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Operation Count",
+          "type": "integer"
+        },
+        "retry_fallback_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Retry Fallback Count",
+          "type": "integer"
+        },
+        "intervention_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Intervention Count",
+          "type": "integer"
+        },
+        "cache_hit_verified": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cache Hit Verified"
+        },
+        "policy_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Policy Score"
+        },
+        "error_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Type"
+        },
+        "error_message": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Message"
+        }
+      },
+      "required": [
+        "trial_id",
+        "run_id",
+        "suite_id",
+        "case_id",
+        "route_id",
+        "condition",
+        "repetition",
+        "phase",
+        "state"
+      ],
+      "title": "BenchmarkTrial",
+      "type": "object"
+    },
+    "CashAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "components": {
+          "items": {
+            "$ref": "#/$defs/CashEvidence"
+          },
+          "title": "Components",
+          "type": "array"
+        }
+      },
+      "title": "CashAccounting",
+      "type": "object"
+    },
+    "CashClassification": {
+      "enum": [
+        "verified",
+        "billing_reconciled",
+        "pinned_rate_billable_usage",
+        "estimated",
+        "unavailable"
+      ],
+      "title": "CashClassification",
+      "type": "string"
+    },
+    "CashEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "charge_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Charge Id",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/CashClassification",
+          "default": "unavailable"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "billing_record_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Record Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        },
+        "applied_rate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applied Rate Ids",
+          "type": "array"
+        },
+        "applied_meter_quantities": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Applied Meter Quantities",
+          "type": "object"
+        }
+      },
+      "required": [
+        "charge_id"
+      ],
+      "title": "CashEvidence",
+      "type": "object"
+    },
+    "CounterfactualCashCost": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "basis": {
+          "const": "api_equivalent",
+          "default": "api_equivalent",
+          "title": "Basis",
+          "type": "string"
+        },
+        "rate_snapshot_id": {
+          "title": "Rate Snapshot Id",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "usage_fingerprint": {
+          "title": "Usage Fingerprint",
+          "type": "string"
+        },
+        "applied_rate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applied Rate Ids",
+          "type": "array"
+        },
+        "applied_meter_quantities": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Applied Meter Quantities",
+          "type": "object"
+        },
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        }
+      },
+      "required": [
+        "rate_snapshot_id",
+        "provider",
+        "model",
+        "usage_fingerprint"
+      ],
+      "title": "CounterfactualCashCost",
+      "type": "object"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "billing_record",
+        "local_meter",
+        "priced_measured_billable_usage",
+        "confirmed_no_incremental_charge",
+        "provider_report",
+        "pinned_rate_table",
+        "operator_report",
+        "static_estimate",
+        "legacy_unspecified",
+        "unavailable"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "ExecutionStatus": {
+      "enum": [
+        "success",
+        "failed",
+        "timeout",
+        "rejected",
+        "host_selected",
+        "delegated",
+        "unknown"
+      ],
+      "title": "ExecutionStatus",
+      "type": "string"
+    },
+    "MeasurementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource",
+          "default": "unavailable"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "title": "MeasurementEvidence",
+      "type": "object"
+    },
+    "ModelAccessChannel": {
+      "enum": [
+        "api",
+        "subscription",
+        "purchased_credit",
+        "mixed",
+        "unknown"
+      ],
+      "title": "ModelAccessChannel",
+      "type": "string"
+    },
+    "ModelTokenUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "access_channel": {
+          "$ref": "#/$defs/ModelAccessChannel",
+          "default": "unknown"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "required": [
+        "provider",
+        "model"
+      ],
+      "title": "ModelTokenUsage",
+      "type": "object"
+    },
+    "ResourceAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "cash": {
+          "$ref": "#/$defs/CashAccounting"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
+        },
+        "model_usage": {
+          "items": {
+            "$ref": "#/$defs/ModelTokenUsage"
+          },
+          "title": "Model Usage",
+          "type": "array"
+        },
+        "tool_footprint": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolFootprint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ResourceAccounting",
+      "type": "object"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "SubscriptionCharge": {
+      "enum": [
+        "included",
+        "paid",
+        "mixed",
+        "unknown"
+      ],
+      "title": "SubscriptionCharge",
+      "type": "string"
+    },
+    "SubscriptionConservation": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "resource_pool": {
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "measured_trials": {
+          "title": "Measured Trials",
+          "type": "integer"
+        },
+        "total_trials": {
+          "title": "Total Trials",
+          "type": "integer"
+        },
+        "median_consumed": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Median Consumed"
+        }
+      },
+      "required": [
+        "route_id",
+        "condition",
+        "resource_pool",
+        "unit",
+        "measured_trials",
+        "total_trials",
+        "median_consumed"
+      ],
+      "title": "SubscriptionConservation",
+      "type": "object"
+    },
+    "SubscriptionUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "consumed": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consumed"
+        },
+        "source": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "included_or_paid": {
+          "$ref": "#/$defs/SubscriptionCharge",
+          "default": "unknown"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        }
+      },
+      "required": [
+        "provider",
+        "resource_pool"
+      ],
+      "title": "SubscriptionUsage",
+      "type": "object"
+    },
+    "ToolFootprint": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Bytes",
+          "type": "integer"
+        },
+        "schema_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Approx Tokens",
+          "type": "integer"
+        },
+        "raw_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Bytes",
+          "type": "integer"
+        },
+        "raw_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Approx Tokens",
+          "type": "integer"
+        },
+        "filtered_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Bytes",
+          "type": "integer"
+        },
+        "filtered_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Approx Tokens",
+          "type": "integer"
+        },
+        "exposed_to_model": {
+          "default": false,
+          "title": "Exposed To Model",
+          "type": "boolean"
+        }
+      },
+      "title": "ToolFootprint",
+      "type": "object"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "suite_id": {
+      "title": "Suite Id",
+      "type": "string"
+    },
+    "domain": {
+      "title": "Domain",
+      "type": "string"
+    },
+    "deterministic_tools_available": {
+      "title": "Deterministic Tools Available",
+      "type": "boolean"
+    },
+    "pricing_snapshot_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pricing Snapshot Ids",
+      "type": "array"
+    },
+    "frozen_holdout_decisions": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Frozen Holdout Decisions",
+      "type": "object"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "summaries": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkSummary"
+      },
+      "title": "Summaries",
+      "type": "array"
+    },
+    "baseline_deltas": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkDelta"
+      },
+      "title": "Baseline Deltas",
+      "type": "array"
+    },
+    "oracles": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkOracle"
+      },
+      "title": "Oracles",
+      "type": "array"
+    },
+    "subscription_conservation": {
+      "items": {
+        "$ref": "#/$defs/SubscriptionConservation"
+      },
+      "title": "Subscription Conservation",
+      "type": "array"
+    }
+  },
+  "required": [
+    "run_id",
+    "suite_id",
+    "domain",
+    "deterministic_tools_available",
+    "pricing_snapshot_ids",
+    "frozen_holdout_decisions",
+    "trials",
+    "summaries",
+    "baseline_deltas",
+    "oracles",
+    "subscription_conservation"
+  ],
+  "title": "BenchmarkCampaignReport",
+  "type": "object"
+}

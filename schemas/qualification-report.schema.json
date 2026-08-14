@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "QualificationCondition": {
+      "enum": [
+        "process-cold",
+        "router-warm"
+      ],
+      "title": "QualificationCondition",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "behavior_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Behavior Fingerprint",
+      "type": "string"
+    },
+    "static_checks": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Static Checks",
+      "type": "object"
+    },
+    "dynamic_cases": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Dynamic Cases",
+      "type": "integer"
+    },
+    "passed_cases": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Passed Cases",
+      "type": "integer"
+    },
+    "repetitions": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Repetitions",
+      "type": "integer"
+    },
+    "conditions": {
+      "items": {
+        "$ref": "#/$defs/QualificationCondition"
+      },
+      "title": "Conditions",
+      "type": "array"
+    },
+    "dynamic_runs": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Dynamic Runs",
+      "type": "integer"
+    },
+    "passed_runs": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Passed Runs",
+      "type": "integer"
+    },
+    "passed": {
+      "default": false,
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "behavior_fingerprint",
+    "static_checks"
+  ],
+  "title": "QualificationReport",
+  "type": "object"
+}

@@ -51,6 +51,16 @@ class Registry:
     def contains(self, executor_id: str) -> bool:
         return executor_id in self._by_id
 
+    def replace(self, executor: ExecutorSpec) -> None:
+        existing = self._by_id.get(executor.id)
+        if existing is not None:
+            self._by_capability[existing.capability] = [
+                item for item in self._by_capability[existing.capability] if item.id != executor.id
+            ]
+        self._by_id[executor.id] = executor
+        self._by_capability[executor.capability].append(executor)
+        self._by_capability[executor.capability].sort(key=lambda item: item.id)
+
     def find(self, capability: str, *, include_disabled: bool = False) -> list[ExecutorSpec]:
         return [
             executor

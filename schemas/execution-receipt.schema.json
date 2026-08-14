@@ -40,6 +40,186 @@
       "title": "ActionFeatures",
       "type": "object"
     },
+    "CashAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "components": {
+          "items": {
+            "$ref": "#/$defs/CashEvidence"
+          },
+          "title": "Components",
+          "type": "array"
+        }
+      },
+      "title": "CashAccounting",
+      "type": "object"
+    },
+    "CashClassification": {
+      "enum": [
+        "verified",
+        "billing_reconciled",
+        "pinned_rate_billable_usage",
+        "estimated",
+        "unavailable"
+      ],
+      "title": "CashClassification",
+      "type": "string"
+    },
+    "CashEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Usd"
+        },
+        "upper_bound_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Bound Usd"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "title": "CashEstimate",
+      "type": "object"
+    },
+    "CashEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "charge_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Charge Id",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/CashClassification",
+          "default": "unavailable"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "billing_record_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Record Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        },
+        "applied_rate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applied Rate Ids",
+          "type": "array"
+        },
+        "applied_meter_quantities": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Applied Meter Quantities",
+          "type": "object"
+        }
+      },
+      "required": [
+        "charge_id"
+      ],
+      "title": "CashEvidence",
+      "type": "object"
+    },
     "EstimateSource": {
       "enum": [
         "static",
@@ -49,6 +229,32 @@
         "observed"
       ],
       "title": "EstimateSource",
+      "type": "string"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "billing_record",
+        "local_meter",
+        "priced_measured_billable_usage",
+        "confirmed_no_incremental_charge",
+        "provider_report",
+        "pinned_rate_table",
+        "operator_report",
+        "static_estimate",
+        "legacy_unspecified",
+        "unavailable"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
       "type": "string"
     },
     "ExecutionStatus": {
@@ -75,6 +281,183 @@
       ],
       "title": "ExecutorKind",
       "type": "string"
+    },
+    "MeasurementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource",
+          "default": "unavailable"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "title": "MeasurementEvidence",
+      "type": "object"
+    },
+    "ModelAccessChannel": {
+      "enum": [
+        "api",
+        "subscription",
+        "purchased_credit",
+        "mixed",
+        "unknown"
+      ],
+      "title": "ModelAccessChannel",
+      "type": "string"
+    },
+    "ModelTokenUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "access_channel": {
+          "$ref": "#/$defs/ModelAccessChannel",
+          "default": "unknown"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "required": [
+        "provider",
+        "model"
+      ],
+      "title": "ModelTokenUsage",
+      "type": "object"
+    },
+    "ResourceAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "cash": {
+          "$ref": "#/$defs/CashAccounting"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
+        },
+        "model_usage": {
+          "items": {
+            "$ref": "#/$defs/ModelTokenUsage"
+          },
+          "title": "Model Usage",
+          "type": "array"
+        },
+        "tool_footprint": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolFootprint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ResourceAccounting",
+      "type": "object"
     },
     "ResourceVector": {
       "additionalProperties": false,
@@ -134,6 +517,12 @@
           "title": "Input Tokens",
           "type": "integer"
         },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
         "output_tokens": {
           "default": 0,
           "minimum": 0,
@@ -156,6 +545,16 @@
       "properties": {
         "resources": {
           "$ref": "#/$defs/ResourceVector"
+        },
+        "cash": {
+          "$ref": "#/$defs/CashEstimate"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
         },
         "success_probability": {
           "default": 0.95,
@@ -197,6 +596,144 @@
         }
       },
       "title": "RouteEstimate",
+      "type": "object"
+    },
+    "SubscriptionCharge": {
+      "enum": [
+        "included",
+        "paid",
+        "mixed",
+        "unknown"
+      ],
+      "title": "SubscriptionCharge",
+      "type": "string"
+    },
+    "SubscriptionUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "consumed": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consumed"
+        },
+        "source": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "included_or_paid": {
+          "$ref": "#/$defs/SubscriptionCharge",
+          "default": "unknown"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        }
+      },
+      "required": [
+        "provider",
+        "resource_pool"
+      ],
+      "title": "SubscriptionUsage",
+      "type": "object"
+    },
+    "ToolFootprint": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Bytes",
+          "type": "integer"
+        },
+        "schema_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Approx Tokens",
+          "type": "integer"
+        },
+        "raw_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Bytes",
+          "type": "integer"
+        },
+        "raw_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Approx Tokens",
+          "type": "integer"
+        },
+        "filtered_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Bytes",
+          "type": "integer"
+        },
+        "filtered_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Approx Tokens",
+          "type": "integer"
+        },
+        "exposed_to_model": {
+          "default": false,
+          "title": "Exposed To Model",
+          "type": "boolean"
+        }
+      },
+      "title": "ToolFootprint",
       "type": "object"
     },
     "TrustLevel": {
@@ -334,6 +871,9 @@
     },
     "actual_resources": {
       "$ref": "#/$defs/ResourceVector"
+    },
+    "accounting": {
+      "$ref": "#/$defs/ResourceAccounting"
     },
     "transport_success": {
       "anyOf": [

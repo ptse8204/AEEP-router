@@ -34,7 +34,11 @@ class LocalProviderRegistry:
         self.path = Path(path)
 
     async def discover(self, capability: str) -> list[ProviderDescriptor]:
-        paths = sorted(self.path.glob("*.json")) + sorted(self.path.glob("*.yaml")) if self.path.is_dir() else [self.path]
+        paths = (
+            sorted(self.path.glob("*.json")) + sorted(self.path.glob("*.yaml"))
+            if self.path.is_dir()
+            else [self.path]
+        )
         found: list[ProviderDescriptor] = []
         for path in paths:
             try:
@@ -43,9 +47,9 @@ class LocalProviderRegistry:
             except (OSError, json.JSONDecodeError, yaml.YAMLError) as exc:
                 raise ConfigurationError(f"cannot read provider registry {path}: {exc}") from exc
             for provider in _descriptors(value):
-                if any(definition.capability == capability for definition in provider.capabilities) or any(
-                    executor.capability == capability for executor in provider.executors
-                ):
+                if any(
+                    definition.capability == capability for definition in provider.capabilities
+                ) or any(executor.capability == capability for executor in provider.executors):
                     found.append(provider)
         return found
 
@@ -61,13 +65,14 @@ class RemoteProviderRegistry:
         network_config = self.config.model_dump(mode="python", exclude_none=True)
         await validate_http_url(url, network_config, label="registry")
         try:
-            async with httpx.AsyncClient(
-                timeout=self.config.timeout_seconds,
-                follow_redirects=False,
-                trust_env=False,
-            ) as client, client.stream(
-                "GET", url, headers={"accept": "application/json"}
-            ) as response:
+            async with (
+                httpx.AsyncClient(
+                    timeout=self.config.timeout_seconds,
+                    follow_redirects=False,
+                    trust_env=False,
+                ) as client,
+                client.stream("GET", url, headers={"accept": "application/json"}) as response,
+            ):
                 response.raise_for_status()
                 chunks: list[bytes] = []
                 total = 0
@@ -95,5 +100,8 @@ class CompositeProviderRegistry:
         providers: dict[str, ProviderDescriptor] = {}
         for registry in self.registries:
             for provider in await registry.discover(capability):
-                providers.setdefault(provider.provider_id, provider)
+                previous = providers.get(provider.provider_id)
+                if previous is not None:
+                    raise ProtocolError(f"provider id collision for {provider.provider_id!r}")
+                providers[provider.provider_id] = provider
         return [providers[key] for key in sorted(providers)]

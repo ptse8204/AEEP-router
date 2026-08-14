@@ -33,6 +33,17 @@ def _canonical(value: BaseModel | dict[str, Any]) -> bytes:
     ).encode("utf-8")
 
 
+def _legacy_receipt_payload(receipt: ExecutionReceipt) -> dict[str, Any]:
+    payload = receipt.model_dump(mode="json")
+    payload.pop("accounting", None)
+    payload.get("actual_resources", {}).pop("cached_input_tokens", None)
+    estimated = payload.get("estimated", {})
+    estimated.pop("cash", None)
+    estimated.pop("subscription_usage", None)
+    estimated.get("resources", {}).pop("cached_input_tokens", None)
+    return payload
+
+
 class HMACSigner:
     """Minimal local signer; the algorithm is explicit so it is not mistaken for PKI."""
 
@@ -53,10 +64,19 @@ class HMACSigner:
         return hmac.compare_digest(self.sign(value).value, signature.value)
 
     def sign_receipt(self, receipt: ExecutionReceipt) -> SignedExecutionReceipt:
-        return SignedExecutionReceipt(receipt=receipt, signature=self.sign(receipt))
+        return SignedExecutionReceipt(
+            receipt=receipt,
+            signature=self.sign(receipt),
+            canonical_version=2,
+        )
 
     def verify_receipt(self, signed: SignedExecutionReceipt) -> bool:
-        return self.verify(signed.receipt, signed.signature)
+        payload: BaseModel | dict[str, Any] = (
+            signed.receipt
+            if signed.canonical_version == 2
+            else _legacy_receipt_payload(signed.receipt)
+        )
+        return self.verify(payload, signed.signature)
 
 
 class QuoteService:

@@ -6,7 +6,7 @@ AEEP compares available routes—local Python, command-line tools, HTTP APIs, MC
 
 It rejects routes that break your limits before scoring the rest.
 
-> **Status:** AEEP 0.2 is working alpha software. Use it locally and review your policies before production use.
+> **Status:** AEEP 0.3 is working alpha software. Imported routes fail closed; review qualification evidence and policies before production use.
 
 ## Quick start
 
@@ -49,6 +49,9 @@ aeep run        # choose and execute a route
 aeep history    # recent decisions and receipts
 aeep metrics    # cost, time, and quota totals
 aeep doctor     # check your configuration
+aeep candidate  # qualify and activate imported routes
+aeep workflow   # run a caller-authored action DAG
+aeep campaign   # run an isolated repeated benchmark suite
 ```
 
 ## Try subscription-aware routing
@@ -130,7 +133,8 @@ aeep ingest otel trace.json
 
 - One action name across Python, CLI, HTTP, MCP, and host-controlled routes.
 - Hard limits for money, latency, network access, privacy, resources, and side effects.
-- Subscription quota treated separately from cash cost.
+- Actual cash, subscription quota, API-equivalent counterfactuals, and private policy valuations kept in separate ledgers.
+- Isolated repeated campaigns with immutable pricing snapshots and `aeep campaign prove` release-gate evaluation.
 - Output validation and receipts showing estimated versus actual use.
 - Safe fallback when another route fails.
 - Quotes, budgets, payments, provider discovery, and signed receipts when needed.
@@ -143,6 +147,8 @@ Commands use argument arrays, not shell interpolation. Requests cannot loosen ma
 - [Protocol specification](SPEC.md)
 - [Architecture](ARCHITECTURE.md)
 - [Security](SECURITY.md)
+- [Economic accounting](docs/ACCOUNTING.md)
+- [0.3 proof harness and controlled campaign](examples/proof/README.md)
 - [Economic network features](docs/ECONOMIC_NETWORK.md)
 - [Changelog](CHANGELOG.md)
 

@@ -10,6 +10,15 @@ from ..errors import ExecutorError
 from ..templates import extract_path
 
 
+def _matches_jsonl(record: dict[str, Any], matches: dict[str, Any]) -> bool:
+    try:
+        return all(
+            extract_path(record, str(path)) == expected for path, expected in matches.items()
+        )
+    except (KeyError, IndexError, TypeError):
+        return False
+
+
 def _coerce(value: str, kind: str) -> Any:
     if kind == "string":
         return value
@@ -41,6 +50,19 @@ def parse_output(text: str, config: dict[str, Any] | None = None) -> Any:
             result = json.loads(prepared)
         elif output_type == "lines":
             result = prepared.splitlines()
+        elif output_type == "jsonl":
+            records = [json.loads(line) for line in prepared.splitlines() if line.strip()]
+            matches = options.get("match", {})
+            if not isinstance(matches, dict):
+                raise ExecutorError("jsonl output match must be an object")
+            selected = [
+                record
+                for record in records
+                if isinstance(record, dict) and _matches_jsonl(record, matches)
+            ]
+            if not selected:
+                raise ExecutorError("executor JSONL output did not contain a matching record")
+            result = selected[-1]
         elif output_type == "regex":
             pattern = str(options["pattern"])
             match = re.search(pattern, prepared, flags=re.MULTILINE | re.DOTALL)
@@ -57,7 +79,8 @@ def parse_output(text: str, config: dict[str, Any] | None = None) -> Any:
                 result = _coerce(match.group(group), str(options.get("coerce", "string")))
         else:
             raise ExecutorError(f"unsupported output parser type {output_type!r}")
-        return extract_path(result, options.get("path"))
+        result = extract_path(result, options.get("path"))
+        return json.loads(result) if options.get("decode_json") else result
     except ExecutorError:
         raise
     except (KeyError, ValueError, TypeError, json.JSONDecodeError) as exc:

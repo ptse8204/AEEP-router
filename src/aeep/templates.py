@@ -73,10 +73,7 @@ def render(value: Any, values: dict[str, Any], *, allow_env: bool = False) -> An
     if isinstance(value, tuple):
         return tuple(render(item, values, allow_env=allow_env) for item in value)
     if isinstance(value, dict):
-        return {
-            str(key): render(item, values, allow_env=allow_env)
-            for key, item in value.items()
-        }
+        return {str(key): render(item, values, allow_env=allow_env) for key, item in value.items()}
     return value
 
 

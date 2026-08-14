@@ -409,6 +409,53 @@
       ],
       "title": "SideEffect",
       "type": "string"
+    },
+    "SubscriptionPolicyRule": {
+      "additionalProperties": false,
+      "properties": {
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "pressure_weight": {
+          "default": 1.0,
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "title": "Pressure Weight",
+          "type": "number"
+        },
+        "policy_value_usd_per_unit": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Policy Value Usd Per Unit"
+        }
+      },
+      "required": [
+        "resource_pool"
+      ],
+      "title": "SubscriptionPolicyRule",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -465,6 +512,13 @@
       "minimum": 0.0,
       "title": "Subscription Scarcity Multiplier",
       "type": "number"
+    },
+    "subscription_rules": {
+      "items": {
+        "$ref": "#/$defs/SubscriptionPolicyRule"
+      },
+      "title": "Subscription Rules",
+      "type": "array"
     },
     "uncertainty_penalty": {
       "default": 0.1,

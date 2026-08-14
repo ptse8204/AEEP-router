@@ -32,10 +32,7 @@ async def resolved_addresses(
 
 def is_local_hostname(hostname: str) -> bool:
     normalized = hostname.rstrip(".").lower()
-    return (
-        normalized in {"localhost", "127.0.0.1", "::1"}
-        or normalized.endswith(".localhost")
-    )
+    return normalized in {"localhost", "127.0.0.1", "::1"} or normalized.endswith(".localhost")
 
 
 async def validate_http_url(url: str, config: dict[str, Any], *, label: str = "HTTP") -> None:

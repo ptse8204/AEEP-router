@@ -76,9 +76,7 @@ class PrepaidBalanceAdapter:
         return reservation
 
     async def capture(self, reservation: PaymentReservation) -> PaymentCapture:
-        amount = self.reserved.pop(
-            reservation.reservation_id, Decimal(str(reservation.amount_usd))
-        )
+        amount = self.reserved.pop(reservation.reservation_id, Decimal(str(reservation.amount_usd)))
         if amount > self.balance:
             raise ConfigurationError("insufficient prepaid balance")
         self.balance -= amount
@@ -196,8 +194,7 @@ class BudgetManager:
         outstanding = sum(
             event.amount_usd
             for event in events
-            if event.event_type == "reserve"
-            and event.reference_id not in captured_reservations
+            if event.event_type == "reserve" and event.reference_id not in captured_reservations
         )
         captured = sum(event.amount_usd for event in events if event.event_type == "capture")
         refunded = sum(event.amount_usd for event in events if event.event_type == "refund")

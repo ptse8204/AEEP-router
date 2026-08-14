@@ -20,11 +20,13 @@ def _init(tmp_path: Path) -> Path:
 
 def test_version_list_policies_show_and_dry_run(tmp_path):
     manifest = _init(tmp_path)
-    assert runner.invoke(app, ["version"]).stdout.strip() == "0.2.0"
+    assert runner.invoke(app, ["version"]).stdout.strip() == "0.3.0"
 
     listed = runner.invoke(app, ["list", "-m", str(manifest), "--compact"])
     assert listed.exit_code == 0
-    assert listed.stdout and json.loads(listed.stdout)["capabilities"][0]["capability"] == "text.stats"
+    assert (
+        listed.stdout and json.loads(listed.stdout)["capabilities"][0]["capability"] == "text.stats"
+    )
 
     policies = runner.invoke(app, ["policies", "-m", str(manifest), "--compact"])
     assert policies.exit_code == 0
@@ -124,9 +126,7 @@ def test_init_overwrite_doctor_failure_and_serve_guards(tmp_path, monkeypatch):
     assert doctor.exit_code == 1
     assert json.loads(doctor.stdout)["ok"] is False
 
-    invalid_transport = runner.invoke(
-        app, ["serve", "--transport", "bogus", "-m", str(manifest)]
-    )
+    invalid_transport = runner.invoke(app, ["serve", "--transport", "bogus", "-m", str(manifest)])
     assert invalid_transport.exit_code != 0
 
     monkeypatch.delenv("AEEP_BEARER_TOKEN", raising=False)
@@ -214,7 +214,7 @@ def test_delegate_record_cli(tmp_path):
     assert record.exit_code == 0, record.output
     receipt = json.loads(record.stdout)
     assert receipt["metadata"]["externally_reported"] is True
-    assert receipt["metadata"]["host"] == "test"
+    assert "host" not in receipt["metadata"]
 
     history = runner.invoke(
         app,
@@ -278,3 +278,50 @@ def test_force_executor_and_benchmark_cli(tmp_path):
     assert len(payload["entries"]) == 3
     assert payload["entries"][2]["skipped_reason"]
     assert all(item["receipt_id"] for item in payload["entries"][:2])
+
+
+def test_candidate_ingest_is_operator_only_and_inert(tmp_path):
+    manifest = _init(tmp_path)
+    imported = runner.invoke(
+        app,
+        [
+            "import",
+            "mcp",
+            "--provider-id",
+            "demo",
+            "--capability",
+            "demo.fetch@1",
+            "--tool",
+            "fetch",
+            "--endpoint",
+            "/usr/bin/false",
+            "--protocol-mode",
+            "legacy",
+            "--compact",
+        ],
+    )
+    assert imported.exit_code == 0, imported.output
+    descriptor = tmp_path / "descriptor.json"
+    descriptor.write_text(imported.stdout, encoding="utf-8")
+    ingested = runner.invoke(
+        app,
+        [
+            "candidate",
+            "ingest",
+            f"@{descriptor}",
+            "--source-id",
+            "test:demo",
+            "-m",
+            str(manifest),
+            "--compact",
+        ],
+    )
+    assert ingested.exit_code == 0, ingested.output
+    candidate = json.loads(ingested.stdout)[0]
+    assert candidate["status"] == "candidate"
+    assert candidate["spec"]["enabled"] is False
+    assert candidate["spec"]["config"]["protocol_mode"] == "legacy"
+
+    status = runner.invoke(app, ["candidate", "status", "-m", str(manifest), "--compact"])
+    assert status.exit_code == 0
+    assert len(json.loads(status.stdout)) == 1

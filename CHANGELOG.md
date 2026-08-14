@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.3.0 — 2026-08-13
+
+- evidence-aware cash, provider-local subscription, model-token, counterfactual, and policy-valuation ledgers;
+- immutable, scope-checked Decimal rate-card snapshots, explicit derived revaluation, and bounded Codex JSONL usage capture;
+- exact Codex cache-write metering and pinned official `gpt-5.6-sol` API-equivalent proof campaigns for local-data and GitHub domains;
+- inert imported candidates with fingerprint-bound qualification, activation, drift suspension, and execution-time revalidation;
+- isolated repeated benchmark campaigns with cache-hit-qualified warm statistics, and caller-authored workflow DAG execution with WAITING/resume;
+- indeterminate post-invocation idempotency, sanitized persistence, and stricter MCP protocol/cache/credential boundaries;
+- compatibility for 0.1, 0.15, and 0.2 manifests and versioned signed receipt envelopes.
+
 - compact agent decisions, paginated capability search, and detailed inspection by ID;
 - confidence-aware scoring, zero-capacity GPU enforcement, input-conditioned history, and atomic idempotency;
 - OpenTelemetry trace ingestion plus OpenAI and Anthropic SDK instrumentation;

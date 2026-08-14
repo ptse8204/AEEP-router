@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "CounterfactualCashCost": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "basis": {
+          "const": "api_equivalent",
+          "default": "api_equivalent",
+          "title": "Basis",
+          "type": "string"
+        },
+        "rate_snapshot_id": {
+          "title": "Rate Snapshot Id",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "usage_fingerprint": {
+          "title": "Usage Fingerprint",
+          "type": "string"
+        },
+        "applied_rate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applied Rate Ids",
+          "type": "array"
+        },
+        "applied_meter_quantities": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Applied Meter Quantities",
+          "type": "object"
+        },
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        }
+      },
+      "required": [
+        "rate_snapshot_id",
+        "provider",
+        "model",
+        "usage_fingerprint"
+      ],
+      "title": "CounterfactualCashCost",
+      "type": "object"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.3",
+      "default": "0.3",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revaluation_id": {
+      "title": "Revaluation Id",
+      "type": "string"
+    },
+    "source_run_id": {
+      "title": "Source Run Id",
+      "type": "string"
+    },
+    "source_report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Report Sha256",
+      "type": "string"
+    },
+    "pricing_snapshot_id": {
+      "pattern": "^rate_[a-f0-9]{64}$",
+      "title": "Pricing Snapshot Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "trial_values": {
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/$defs/CounterfactualCashCost"
+        },
+        "type": "array"
+      },
+      "title": "Trial Values",
+      "type": "object"
+    }
+  },
+  "required": [
+    "revaluation_id",
+    "source_run_id",
+    "source_report_sha256",
+    "pricing_snapshot_id",
+    "trial_values"
+  ],
+  "title": "BenchmarkRevaluationReport",
+  "type": "object"
+}

@@ -1,0 +1,300 @@
+{
+  "$defs": {
+    "RateCardRate": {
+      "additionalProperties": false,
+      "properties": {
+        "rate_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Rate Id",
+          "type": "string"
+        },
+        "rate_type": {
+          "$ref": "#/$defs/RateType"
+        },
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Meter",
+          "type": "string"
+        },
+        "input_unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Input Unit",
+          "type": "string"
+        },
+        "output_unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Output Unit",
+          "type": "string"
+        },
+        "unit_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Unit Quantity"
+        },
+        "rate_amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Rate Amount"
+        },
+        "service_tier": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Service Tier"
+        },
+        "region": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Region"
+        },
+        "tool_name": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Name"
+        },
+        "long_context_min": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Long Context Min"
+        },
+        "long_context_max": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Long Context Max"
+        },
+        "multiplier": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Multiplier"
+        },
+        "rule": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule"
+        }
+      },
+      "required": [
+        "rate_id",
+        "rate_type",
+        "meter",
+        "input_unit",
+        "output_unit",
+        "unit_quantity",
+        "rate_amount"
+      ],
+      "title": "RateCardRate",
+      "type": "object"
+    },
+    "RateType": {
+      "enum": [
+        "input_token",
+        "cached_input_token",
+        "output_token",
+        "cache_write_token",
+        "tool_call",
+        "subscription_unit",
+        "other"
+      ],
+      "title": "RateType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "default": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "snapshot_id": {
+      "anyOf": [
+        {
+          "pattern": "^rate_[A-Fa-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Snapshot Id"
+    },
+    "provider": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "product": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Product",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "effective_until": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Until"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "source_uri": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Source Uri",
+      "type": "string"
+    },
+    "source_published_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Published At"
+    },
+    "source_content_sha256": {
+      "pattern": "^[A-Fa-f0-9]{64}$",
+      "title": "Source Content Sha256",
+      "type": "string"
+    },
+    "currency": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Z]{3}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Currency"
+    },
+    "rates": {
+      "items": {
+        "$ref": "#/$defs/RateCardRate"
+      },
+      "minItems": 1,
+      "title": "Rates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "provider",
+    "product",
+    "model",
+    "effective_from",
+    "source_uri",
+    "source_content_sha256",
+    "rates"
+  ],
+  "title": "RateCardSnapshot",
+  "type": "object"
+}

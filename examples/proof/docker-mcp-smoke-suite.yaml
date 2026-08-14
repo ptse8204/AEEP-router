@@ -1,0 +1,21 @@
+schema_version: "0.3"
+suite_id: aeep-03-docker-mcp-smoke-v1
+domain: controlled-mcp-supply
+deterministic_tools_available: true
+seed: 30303
+repetitions: 20
+baseline_route_id: mcp
+routes:
+  - route_id: mcp
+    executor_id: docker.aeep-lab.mcp.fetch
+conditions: [process-cold, router-warm]
+cases:
+  - case_id: fetch-example
+    split: holdout
+    action:
+      capability: web.fetch@1
+      input: {url: https://example.com, max_length: 500}
+    validators:
+      - kind: exact_match
+        config:
+          expected: "Contents of https://example.com/:\n<p>Example Domain</p>\n# Example Domain\n\nThis domain is for use in documentation examples without needing permission. Avoid use in operations.\n\nLearn more\n\n"

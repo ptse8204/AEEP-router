@@ -74,13 +74,13 @@ Uses `create_subprocess_exec`, never a shell. It offers process isolation, timeo
 
 ### HTTP
 
-Uses bounded streaming and conservative target validation. It is appropriate for ordinary REST APIs and can learn monetary cost from a trusted response header.
+Uses bounded streaming and conservative target validation. It is appropriate for ordinary REST APIs. Provider cost headers remain claims unless reconciled by trusted accounting evidence.
 
 ### MCP
 
-Discovers the configured tool, measures schema/context overhead, invokes it over stdio or Streamable HTTP, reads optional AEEP usage metadata, and caches discovery/tool schemas according to protocol hints. The client probes modern stateless MCP first and falls back to the legacy initialize lifecycle where required.
+Discovers the configured tool, measures schema/context overhead, invokes it over stdio or Streamable HTTP, reads optional AEEP usage claims, and caches discovery/tool schemas according to protocol hints and credential scope. Protocol mode can be pinned; automatic legacy fallback requires an unambiguous method-not-found response.
 
-The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP accepts only complete single-round tool results in `0.1`; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
+The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP 0.3 accepts only complete single-round tool results; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
 
 ### Delegate
 
@@ -115,6 +115,16 @@ OpenAI and Anthropic clients can be wrapped at their normal `create` calls witho
 
 Cold-start manifests contain priors, not truth. `Router.benchmark` executes feasible alternatives sequentially and produces comparable observed receipts. Sequential execution reduces contention bias; explicit confirmation, normal hard constraints, and approval ceilings remain in force. Delegates and non-idempotent routes are skipped by default. Benchmarking is deliberately outside the model-facing tool surface so an agent cannot silently multiply paid calls.
 
+## Qualification and workflows
+
+External supply is persisted separately from the runtime Registry. Discovery creates disabled candidates; qualification and activation are explicit operator transitions bound to a canonical behavior fingerprint. The Registry contains only trusted manifest routes and active, fingerprint-matching candidates. `Router.execute` rechecks current policy, capability, active state, and fingerprint at the invocation boundary.
+
+Workflow execution is an additive SDK/CLI layer above the existing action router. The caller supplies the DAG. Steps are routed just in time and reuse approvals, fallback, validation, receipts, idempotency, and observation. Inputs and intermediate outputs stay in memory; checkpoints contain only hashes, status, and selected IDs.
+
+## Economic accounting
+
+`ResourceVector` remains the raw compatibility vector. `ResourceAccounting` is the authoritative evidence sidecar. Cash evidence, pool-local subscription usage, measured model usage, and tool footprint remain separable. Rate-card and benchmark stores are immutable/isolated from production history. Counterfactual and private policy valuations are report/scoring views, not execution charges.
+
 ## Economic interoperability
 
 Versioned capabilities define what is offered; expiring quotes define price; signed receipts and validation results define delivery evidence. Local/remote registries load only providers relevant to the requested capability. Provider claims remain priors, while measured or attested observations drive reputation.
@@ -124,7 +134,7 @@ Payment adapters sit behind an operator budget and a separate financial approval
 ## Future extension points
 
 1. Confidence intervals and contextual bandit routing.
-2. Workflow-level optimization across action DAGs.
+2. Learned goal decomposition and persistent result caching.
 3. Sandboxed hosted executors.
 4. Organization policy services and private catalogs.
 5. Public-key identity and cross-organization attestation.

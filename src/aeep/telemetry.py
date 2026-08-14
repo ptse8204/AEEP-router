@@ -18,7 +18,7 @@ def _safe_attribute(value: Any) -> str | bool | int | float | None:
 
 @contextmanager
 def start_span(name: str, attributes: dict[str, Any] | None = None) -> Iterator[Span | None]:
-    tracer = trace.get_tracer("aeep", "0.2.0")
+    tracer = trace.get_tracer("aeep", "0.3.0")
     with tracer.start_as_current_span(name) as span:
         for key, value in (attributes or {}).items():
             safe = _safe_attribute(value)

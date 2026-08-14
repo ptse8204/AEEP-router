@@ -32,7 +32,10 @@ def test_output_parsers_and_coercions():
         },
     )
     assert named == {"count": 42, "enabled": True}
-    assert parse_output("value=2.5", {"type": "regex", "pattern": r"value=(\S+)", "coerce": "number"}) == 2.5
+    assert (
+        parse_output("value=2.5", {"type": "regex", "pattern": r"value=(\S+)", "coerce": "number"})
+        == 2.5
+    )
     with pytest.raises(ExecutorError):
         parse_output("x", {"type": "regex", "pattern": r"(nope)"})
     with pytest.raises(ExecutorError):

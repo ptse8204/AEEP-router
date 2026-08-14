@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 
 import pytest
 from typer.testing import CliRunner
@@ -38,6 +39,7 @@ from aeep.payments import (
     PrepaidBalanceAdapter,
     X402PaymentAdapter,
 )
+from aeep.qualification import QualificationCase, RouteLifecycle
 from aeep.registry import Registry
 from aeep.router import Router
 from aeep.sdk import (
@@ -109,6 +111,24 @@ def _spec(
     )
 
 
+def _command_spec(executor_id: str) -> ExecutorSpec:
+    return _spec(executor_id).model_copy(
+        update={
+            "kind": ExecutorKind.COMMAND,
+            "config": {
+                "argv": [
+                    sys.executable,
+                    "-m",
+                    "aeep.examples.text_stats_cli",
+                    "{input.text}",
+                ],
+                "output": {"type": "json"},
+                "inherit_env": False,
+            },
+        }
+    )
+
+
 def _subscription(state: QuotaState = QuotaState.ABUNDANT) -> SubscriptionResource:
     return SubscriptionResource(
         id="anthropic.claude",
@@ -164,9 +184,7 @@ async def test_host_selected_outcome_metrics_counterfactual_and_reputation():
     router = Router(
         Manifest(database=":memory:", resources=[_subscription()], executors=[host, local])
     )
-    outcome = await router.execute(
-        ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    outcome = await router.execute(ActionRequest(capability="text.stats", input={"text": "abc"}))
     assert outcome.status == ExecutionStatus.HOST_SELECTED
     assert outcome.output["status"] == "HOST_SELECTED"
     receipt = router.record_external_outcome(
@@ -206,9 +224,7 @@ async def test_task_validator_is_distinct_and_can_fail_execution():
         ],
     )
     router = Router(Manifest(database=":memory:", executors=[spec]))
-    outcome = await router.execute(
-        ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    outcome = await router.execute(ActionRequest(capability="text.stats", input={"text": "abc"}))
     assert not outcome.ok
     receipt = outcome.receipts[0]
     assert receipt.transport_success is True
@@ -223,9 +239,7 @@ def test_quotes_acceptance_and_signed_receipts_are_tamper_evident():
     signer = HMACSigner(b"x" * 32, key_id="provider-key")
     registry = Registry([_spec("local")])
     service = QuoteService(registry, signer=signer)
-    request = QuoteRequest(
-        action=ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     quote = service.quote(request)[0]
     assert quote.signature is not None
     acceptance = service.accept(quote, action_id=request.action.action_id)
@@ -238,7 +252,13 @@ def test_quotes_acceptance_and_signed_receipts_are_tamper_evident():
 @pytest.mark.asyncio
 async def test_local_registry_discovers_only_requested_capability(tmp_path):
     descriptor = provider_from_manifest(
-        Manifest(database=":memory:", executors=[_spec("remote.local")]),
+        Manifest(
+            database=":memory:",
+            executors=[
+                _command_spec("remote.local"),
+                _spec("remote.unrelated").model_copy(update={"capability": "other.action@1"}),
+            ],
+        ),
         provider_id="provider-a",
         name="Provider A",
     )
@@ -253,8 +273,78 @@ async def test_local_registry_discovers_only_requested_capability(tmp_path):
     decision = await router.route_with_discovery(
         ActionRequest(capability="text.stats", input={"text": "abc"})
     )
+    assert decision.selected_executor_id is None
+    assert [item.executor_id for item in router.candidate_status()] == ["remote.local"]
+    assert router.candidate_status()[0].status.value == "candidate"
+    report = await router.qualify_candidate(
+        "remote.local",
+        side_effect=SideEffect.NONE,
+        idempotent=True,
+        safe_to_auto_execute=True,
+        cases=[
+            QualificationCase(
+                input={"text": "abc"},
+                expected_output={"characters": 3, "words": 1, "lines": 1},
+            )
+        ],
+    )
+    assert report.passed
+    router.activate_candidate("remote.local")
+    decision = router.route(ActionRequest(capability="text.stats", input={"text": "abc"}))
     assert decision.selected_executor_id == "remote.local"
     assert list(router.providers) == ["provider-a"]
+    await router.close()
+
+
+@pytest.mark.asyncio
+async def test_discovery_ignores_estimate_drift_but_suspends_behavior_drift():
+    route = _command_spec("remote.local")
+    descriptor = provider_from_manifest(
+        Manifest(database=":memory:", executors=[route]),
+        provider_id="provider-a",
+        name="Provider A",
+    )
+
+    class ProviderSequence:
+        current = descriptor
+
+        async def discover(self, _capability):
+            return [self.current]
+
+    provider = ProviderSequence()
+    router = Router(Manifest(database=":memory:"))
+    router.provider_registry = provider
+    await router.discover("text.stats")
+    await router.qualify_candidate(
+        "remote.local",
+        side_effect=SideEffect.NONE,
+        idempotent=True,
+        safe_to_auto_execute=True,
+        cases=[
+            QualificationCase(
+                input={"text": "abc"},
+                expected_output={"characters": 3, "words": 1, "lines": 1},
+            )
+        ],
+    )
+    router.activate_candidate("remote.local")
+
+    estimate_only = descriptor.model_copy(deep=True)
+    estimate_only.executors[0].description = "new catalog description"
+    estimate_only.executors[0].estimate.resources.latency_ms = 999
+    provider.current = estimate_only
+    await router.discover("text.stats")
+    assert router.candidate_status()[0].status == RouteLifecycle.ACTIVE
+
+    behavior_change = estimate_only.model_copy(deep=True)
+    behavior_change.executors[0].config["argv"] = [
+        *behavior_change.executors[0].config["argv"],
+        "--drift",
+    ]
+    provider.current = behavior_change
+    await router.discover("text.stats")
+    assert router.candidate_status()[0].status == RouteLifecycle.SUSPENDED
+    assert router.registry.find("text.stats") == []
     await router.close()
 
 
@@ -277,9 +367,7 @@ async def test_budget_reserve_capture_and_refund():
             executors=[spec],
         )
     )
-    request = QuoteRequest(
-        action=ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     quote = router.quotes(request)[0]
     reservation = await router.reserve_quote_payment(
         quote.quote_id,
@@ -313,8 +401,19 @@ def test_sdk_importers_generate_safe_provider_descriptors(tmp_path):
         tool="echo",
         transport="stdio",
         endpoint="python",
+        protocol_mode="legacy",
     )
     assert mcp.executors[0].kind == ExecutorKind.MCP
+    assert mcp.executors[0].config["protocol_mode"] == "legacy"
+    with pytest.raises(ConfigurationError, match="credential_scope_id"):
+        import_mcp(
+            provider_id="demo",
+            capability_name="demo.echo@1",
+            tool="echo",
+            transport="http",
+            endpoint="https://example.com/mcp",
+            headers={"Authorization": "${ENV:DEMO_TOKEN}"},
+        )
 
     openapi_path = tmp_path / "openapi.yaml"
     openapi_path.write_text(
@@ -381,9 +480,7 @@ async def test_all_validator_modes_and_callback_trust():
 @pytest.mark.asyncio
 async def test_payment_adapters_cover_free_prepaid_invoice_and_callback_rails():
     registry = Registry([_spec("paid")])
-    request = QuoteRequest(
-        action=ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     paid_quote = QuoteService(registry).quote(request)[0]
     paid_quote.monetary_usd = 0.25
 
@@ -434,9 +531,7 @@ async def test_budget_rejects_missing_financial_and_human_approval():
             executors=[spec],
         )
     )
-    request = QuoteRequest(
-        action=ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     quote = router.quotes(request)[0]
     with pytest.raises(ApprovalRequired, match="financial approval"):
         await router.reserve_quote_payment(quote.quote_id, action_id="act")
@@ -452,12 +547,8 @@ async def test_budget_rejects_missing_financial_and_human_approval():
 @pytest.mark.asyncio
 async def test_router_signs_receipt_and_rejects_bad_attestation():
     signer = HMACSigner(b"s" * 32, key_id="local")
-    router = Router(
-        Manifest(database=":memory:", executors=[_spec("local")]), signer=signer
-    )
-    outcome = await router.execute(
-        ActionRequest(capability="text.stats", input={"text": "abc"})
-    )
+    router = Router(Manifest(database=":memory:", executors=[_spec("local")]), signer=signer)
+    outcome = await router.execute(ActionRequest(capability="text.stats", input={"text": "abc"}))
     signed = router.signed_receipt(outcome.receipts[0].receipt_id)
     assert signer.verify_receipt(signed)
     signed.receipt.actual_resources.latency_ms += 1
@@ -484,13 +575,17 @@ def test_sdk_decorator_and_import_errors(tmp_path):
         executor_from_callable(lambda: None)
     with pytest.raises(ConfigurationError, match="non-empty argv"):
         import_cli(provider_id="demo", capability_name="demo.x@1", argv=[])
-    assert import_mcp(
-        provider_id="demo",
-        capability_name="demo.x@1",
-        tool="x",
-        transport="http",
-        endpoint="https://example.com/mcp",
-    ).executors[0].requires_network
+    assert (
+        import_mcp(
+            provider_id="demo",
+            capability_name="demo.x@1",
+            tool="x",
+            transport="http",
+            endpoint="https://example.com/mcp",
+        )
+        .executors[0]
+        .requires_network
+    )
     invalid = tmp_path / "invalid.yaml"
     invalid.write_text("openapi: 3.1.0\n", encoding="utf-8")
     with pytest.raises(ConfigurationError, match="paths"):

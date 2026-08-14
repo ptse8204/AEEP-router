@@ -1,0 +1,22 @@
+schema_version: "0.3"
+suite_id: aeep-03-github-live-structured-v1
+domain: github-live-structured
+deterministic_tools_available: true
+seed: 30304
+repetitions: 20
+baseline_route_id: direct-api
+routes:
+  - route_id: direct-api
+    executor_id: github.rest-default-branch
+  - route_id: hybrid
+    executor_id: hybrid.local-git-default-branch
+conditions: [process-cold, router-warm]
+cases:
+  - case_id: github-default-branch
+    split: holdout
+    action:
+      capability: github.repository.default-branch@1
+      input: {repository: ., owner: ptse8204, name: AEEP-router}
+    validators:
+      - kind: exact_match
+        config: {expected: main}

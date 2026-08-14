@@ -11,8 +11,11 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
+import signal
 import warnings
 from collections import deque
+from contextlib import suppress
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -77,9 +80,24 @@ def _error_from_response(
     )
 
 
+def _validate_response_envelope(response: dict[str, Any], request_id: int | str) -> None:
+    if response.get("jsonrpc") != "2.0":
+        raise ProtocolError("MCP response must declare jsonrpc=2.0")
+    if response.get("id") != request_id:
+        raise ProtocolError("MCP response id does not match request")
+    has_result = "result" in response
+    has_error = "error" in response
+    if has_result == has_error:
+        raise ProtocolError("MCP response must contain exactly one of result or error")
+    if has_result and not isinstance(response["result"], dict):
+        raise ProtocolError("MCP response result must be an object")
+    if has_error and not isinstance(response["error"], dict):
+        raise ProtocolError("MCP response error must be an object")
+
+
 def _validate_complete_result(result: dict[str, Any], method: str, version: str) -> None:
-    # Earlier revisions omitted resultType; modern clients are required to treat
-    # omission by older servers as an ordinary complete result.
+    if version == MODERN_VERSION and "resultType" not in result:
+        raise ProtocolError(f"MCP {method} omitted required resultType")
     result_type = result.get("resultType", "complete")
     if result_type == "input_required":
         raise ProtocolError(
@@ -100,6 +118,7 @@ class MCPStdioClient:
         timeout: float = 30.0,
         discovery_timeout: float = 5.0,
         max_message_bytes: int = 2_000_000,
+        protocol_mode: str = "auto",
     ) -> None:
         self.command = command
         self.args = list(args or [])
@@ -112,6 +131,9 @@ class MCPStdioClient:
         # probe bounded, but give a local process a realistic startup window.
         self.discovery_timeout = max(0.1, min(float(discovery_timeout), float(timeout)))
         self.max_message_bytes = max(1024, int(max_message_bytes))
+        if protocol_mode not in {"auto", "modern", "legacy"}:
+            raise ValueError("protocol_mode must be auto, modern, or legacy")
+        self.protocol_mode = protocol_mode
         self.process: asyncio.subprocess.Process | None = None
         self.protocol_version: str | None = None
         self._next_id = 1
@@ -130,6 +152,8 @@ class MCPStdioClient:
             stderr=asyncio.subprocess.PIPE,
             cwd=self.cwd,
             env=self.env,
+            start_new_session=os.name == "posix",
+            limit=self.max_message_bytes + 1,
         )
         self._stderr_task = asyncio.create_task(self._drain_stderr())
 
@@ -149,21 +173,22 @@ class MCPStdioClient:
         ):
             return
         await self._start()
+        if self.protocol_mode == "legacy":
+            await self._legacy_initialize()
+            return
+        discover_id = self._allocate_id()
         discover = {
             "jsonrpc": "2.0",
-            "id": self._allocate_id(),
+            "id": discover_id,
             "method": "server/discover",
             "params": {"_meta": _modern_meta()},
         }
-        try:
-            response, _, _ = await self._exchange(discover, timeout=self.discovery_timeout)
-        except (TimeoutError, ProtocolError):
-            await self._restart()
-            await self._legacy_initialize()
-            return
+        response, _, _ = await self._exchange(discover, timeout=self.discovery_timeout)
+        _validate_response_envelope(response, discover_id)
 
         result = response.get("result")
         if isinstance(result, dict) and isinstance(result.get("supportedVersions"), list):
+            _validate_complete_result(result, "server/discover", MODERN_VERSION)
             versions = [str(item) for item in result["supportedVersions"]]
             if MODERN_VERSION not in versions:
                 raise ProtocolError(
@@ -187,15 +212,16 @@ class MCPStdioClient:
                 data=data,
             )
 
-        # A legacy stdio server may return any implementation-defined error to a
-        # pre-initialize probe. The specification therefore requires era fallback
-        # not to be keyed to one particular error code.
-        await self._legacy_initialize()
+        if self.protocol_mode == "auto" and isinstance(error, dict) and error.get("code") == -32601:
+            await self._legacy_initialize()
+            return
+        raise ProtocolError("MCP modern discovery did not return a supported protocol")
 
     async def _legacy_initialize(self) -> None:
+        request_id = self._allocate_id()
         request = {
             "jsonrpc": "2.0",
-            "id": self._allocate_id(),
+            "id": request_id,
             "method": "initialize",
             "params": {
                 "protocolVersion": LEGACY_VERSION,
@@ -204,6 +230,7 @@ class MCPStdioClient:
             },
         }
         response, _, _ = await self._exchange(request)
+        _validate_response_envelope(response, request_id)
         error = _error_from_response(response, "initialize")
         if error:
             raise error
@@ -231,10 +258,17 @@ class MCPStdioClient:
             raise ProtocolError("MCP stdio request exceeds configured message limit")
         self.process.stdin.write(payload)
         await self.process.stdin.drain()
+        loop = asyncio.get_running_loop()
+        deadline = loop.time() + (timeout or self.timeout)
+        ignored = 0
         while True:
-            line = await asyncio.wait_for(
-                self.process.stdout.readline(), timeout=timeout or self.timeout
-            )
+            remaining = deadline - loop.time()
+            if remaining <= 0:
+                raise TimeoutError("MCP stdio response deadline exceeded")
+            try:
+                line = await asyncio.wait_for(self.process.stdout.readline(), timeout=remaining)
+            except (ValueError, asyncio.LimitOverrunError) as exc:
+                raise ProtocolError("MCP stdio response exceeds configured message limit") from exc
             if not line:
                 detail = "; ".join(self.stderr_tail)
                 raise ProtocolError(
@@ -251,6 +285,9 @@ class MCPStdioClient:
             if response.get("id") == message.get("id"):
                 return response, len(payload), len(line)
             # Ignore notifications and responses to cancelled/previous requests.
+            ignored += 1
+            if ignored > 100:
+                raise ProtocolError("MCP stdio response exceeded ignored-message limit")
 
     async def _request(self, method: str, params: dict[str, Any]) -> MCPResponse:
         async with self._lock:
@@ -273,6 +310,7 @@ class MCPStdioClient:
                 "params": request_params,
             }
             response, request_bytes, response_bytes = await self._exchange(message)
+            _validate_response_envelope(response, request_id)
             error = _error_from_response(response, method)
             if error:
                 raise error
@@ -330,11 +368,19 @@ class MCPStdioClient:
             try:
                 await asyncio.wait_for(process.wait(), timeout=2.0)
             except TimeoutError:
-                process.terminate()
+                if os.name == "posix":
+                    with suppress(ProcessLookupError):
+                        os.killpg(process.pid, signal.SIGTERM)
+                else:  # pragma: no cover - Windows CI covers this branch
+                    process.terminate()
                 try:
                     await asyncio.wait_for(process.wait(), timeout=1.0)
                 except TimeoutError:
-                    process.kill()
+                    if os.name == "posix":
+                        with suppress(ProcessLookupError):
+                            os.killpg(process.pid, signal.SIGKILL)
+                    else:  # pragma: no cover
+                        process.kill()
                     await process.wait()
         if self._stderr_task is not None:
             self._stderr_task.cancel()
@@ -350,12 +396,18 @@ class MCPHTTPClient:
         headers: dict[str, str] | None = None,
         timeout: float = 30.0,
         max_response_bytes: int = 2_000_000,
+        max_request_bytes: int = 2_000_000,
         trust_env: bool = False,
+        protocol_mode: str = "auto",
     ) -> None:
         self.url = url
         self.headers = dict(headers or {})
         self.timeout = timeout
         self.max_response_bytes = max(1024, int(max_response_bytes))
+        self.max_request_bytes = max(1024, int(max_request_bytes))
+        if protocol_mode not in {"auto", "modern", "legacy"}:
+            raise ValueError("protocol_mode must be auto, modern, or legacy")
+        self.protocol_mode = protocol_mode
         self.protocol_version: str | None = None
         self.session_id: str | None = None
         self._next_id = 1
@@ -381,6 +433,8 @@ class MCPHTTPClient:
         extra_headers: dict[str, str] | None = None,
     ) -> tuple[dict[str, Any], int, int, httpx.Headers, int]:
         payload = json.dumps(message, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        if len(payload) > self.max_request_bytes:
+            raise ProtocolError("MCP HTTP request exceeds configured size limit")
         headers = {
             "Accept": "application/json, text/event-stream",
             "Content-Type": "application/json",
@@ -414,11 +468,15 @@ class MCPHTTPClient:
                 chunks.append(chunk)
             body = b"".join(chunks)
 
+        if status_code in {202, 204} and not body and "id" not in message:
+            return {}, len(payload), 0, response_headers, status_code
         if status_code in {202, 204} and not body:
-            return {"jsonrpc": "2.0", "result": {}}, len(payload), 0, response_headers, status_code
+            raise ProtocolError("MCP request returned an empty response", status_code=status_code)
         if status_code >= 400 and not body:
             raise ProtocolError(f"MCP HTTP returned {status_code}", status_code=status_code)
 
+        if "application/json" not in content_type and "text/event-stream" not in content_type:
+            raise ProtocolError("MCP HTTP response has an unsupported content type")
         text = body.decode("utf-8", errors="strict")
         try:
             if "text/event-stream" in content_type:
@@ -437,6 +495,9 @@ class MCPHTTPClient:
     async def connect(self) -> None:
         if self.protocol_version is not None:
             return
+        if self.protocol_mode == "legacy":
+            await self._legacy_initialize()
+            return
         request_id = self._allocate_id()
         discover = {
             "jsonrpc": "2.0",
@@ -445,8 +506,10 @@ class MCPHTTPClient:
             "params": {"_meta": _modern_meta()},
         }
         response, _, _, _, status = await self._post(discover, method="server/discover")
+        _validate_response_envelope(response, request_id)
         result = response.get("result")
         if isinstance(result, dict) and isinstance(result.get("supportedVersions"), list):
+            _validate_complete_result(result, "server/discover", MODERN_VERSION)
             versions = [str(item) for item in result["supportedVersions"]]
             if MODERN_VERSION not in versions:
                 raise ProtocolError(
@@ -485,7 +548,10 @@ class MCPHTTPClient:
             if status not in {200, 400, 404, 405}:
                 raise _error_from_response(response, "server/discover", status_code=status)  # type: ignore[misc]
 
-        await self._legacy_initialize()
+        if self.protocol_mode == "auto" and isinstance(error, dict) and error.get("code") == -32601:
+            await self._legacy_initialize()
+            return
+        raise ProtocolError("MCP modern discovery did not return a supported protocol")
 
     async def _legacy_initialize(self) -> None:
         self.protocol_version = LEGACY_VERSION
@@ -501,6 +567,7 @@ class MCPHTTPClient:
             },
         }
         response, _, _, headers, status = await self._post(initialize, method="initialize")
+        _validate_response_envelope(response, init_id)
         error = _error_from_response(response, "initialize", status_code=status)
         if error:
             raise error
@@ -541,6 +608,7 @@ class MCPHTTPClient:
                 name=name,
                 extra_headers=extra_headers,
             )
+            _validate_response_envelope(response, request_id)
             error = _error_from_response(response, method, status_code=status)
             if error:
                 raise error
@@ -596,29 +664,12 @@ class MCPHTTPClient:
         params: dict[str, Any] = {"name": name, "arguments": arguments}
         if metadata:
             params["_meta"] = metadata
-        try:
-            return await self._request(
-                "tools/call",
-                params,
-                name=name,
-                extra_headers=headers,
-            )
-        except ProtocolError as exc:
-            if exc.code != -32020:
-                raise
-            # Header mismatch can mean the cached tool schema changed. Refresh
-            # once and retry with headers derived from the current schema.
-            listed = await self.list_tools()
-            del listed
-            refreshed = self._tool_schemas.get(name)
-            if refreshed is None:
-                raise ProtocolError(f"MCP tool {name!r} disappeared after schema refresh") from exc
-            return await self._request(
-                "tools/call",
-                params,
-                name=name,
-                extra_headers=tool_parameter_headers(refreshed, arguments),
-            )
+        return await self._request(
+            "tools/call",
+            params,
+            name=name,
+            extra_headers=headers,
+        )
 
     async def close(self) -> None:
         await self._client.aclose()

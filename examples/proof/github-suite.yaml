@@ -1,0 +1,60 @@
+schema_version: "0.3"
+suite_id: aeep-03-hermetic-github-v1
+domain: github
+deterministic_tools_available: true
+seed: 30302
+repetitions: 20
+baseline_route_id: full-agent
+routes:
+  - route_id: full-agent
+    executor_id: fixture.codex-github-default-branch
+    provider: fixture
+    model: codex-fixture
+    access_channel: subscription
+    counterfactual_rate_snapshot_id: rate_77080f3f1ec2e5cdc6a0f57aae82610764567b0ce6b1d5fc993aee691cb4986b
+    subscription_rate_snapshot_id: rate_9f7444ff69c3ee5e06426a8bef5f76c4da60ab7473e4f4046032b7728176ee83
+    subscription_resource_pool: fixture:subscription
+    subscription_unit: fixture_credit
+  - route_id: hybrid
+    executor_id: hybrid.local-git-default-branch
+conditions: [process-cold, router-warm]
+pricing_snapshots:
+  - schema_version: "1"
+    snapshot_id: rate_77080f3f1ec2e5cdc6a0f57aae82610764567b0ce6b1d5fc993aee691cb4986b
+    provider: fixture
+    product: fixture-api
+    model: codex-fixture
+    effective_from: 2026-08-13T00:00:00Z
+    retrieved_at: 2026-08-13T00:00:00Z
+    source_uri: urn:aeep:fixture-rate-card
+    source_content_sha256: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    currency: USD
+    rates:
+      - {rate_id: input, rate_type: input_token, meter: input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000, rate_amount: 0.01}
+      - {rate_id: cached, rate_type: cached_input_token, meter: cached_input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000, rate_amount: 0.002}
+      - {rate_id: output, rate_type: output_token, meter: output_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000, rate_amount: 0.03}
+  - schema_version: "1"
+    snapshot_id: rate_9f7444ff69c3ee5e06426a8bef5f76c4da60ab7473e4f4046032b7728176ee83
+    provider: fixture
+    product: fixture-subscription
+    model: codex-fixture
+    effective_from: 2026-08-13T00:00:00Z
+    retrieved_at: 2026-08-13T00:00:00Z
+    source_uri: urn:aeep:fixture-rate-card
+    source_content_sha256: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rates:
+      - {rate_id: credit-input, rate_type: subscription_unit, meter: input_tokens, input_unit: token, output_unit: fixture_credit, unit_quantity: 1000, rate_amount: 1}
+      - {rate_id: credit-output, rate_type: subscription_unit, meter: output_tokens, input_unit: token, output_unit: fixture_credit, unit_quantity: 1000, rate_amount: 1}
+cases:
+  - &github_case
+    case_id: github-qualification
+    split: qualification
+    action:
+      capability: github.repository.default-branch@1
+      input: {repository: ., owner: ptse8204, name: AEEP-router}
+    validators:
+      - kind: exact_match
+        config: {expected: main}
+  - <<: *github_case
+    case_id: github-holdout
+    split: holdout

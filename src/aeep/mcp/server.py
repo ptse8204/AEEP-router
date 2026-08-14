@@ -13,7 +13,9 @@ on stderr so agent harnesses can safely parse the protocol stream.
 from __future__ import annotations
 
 import asyncio
+import hmac
 import json
+import os
 import sys
 from collections.abc import AsyncIterator, Mapping
 from contextlib import asynccontextmanager
@@ -97,6 +99,16 @@ def _request_version(params: Mapping[str, Any]) -> str | None:
         return None
     value = meta.get("io.modelcontextprotocol/protocolVersion")
     return str(value) if isinstance(value, str) else None
+
+
+def _valid_modern_meta(params: Mapping[str, Any]) -> bool:
+    meta = params.get("_meta")
+    return (
+        isinstance(meta, Mapping)
+        and meta.get("io.modelcontextprotocol/protocolVersion") == MODERN_VERSION
+        and isinstance(meta.get("io.modelcontextprotocol/clientInfo"), Mapping)
+        and isinstance(meta.get("io.modelcontextprotocol/clientCapabilities"), Mapping)
+    )
 
 
 def _tool_by_name(tools: list[dict[str, Any]], name: str) -> dict[str, Any] | None:
@@ -236,6 +248,8 @@ class MCPProtocolApp:
 
         version = _request_version(params)
         modern = method == "server/discover" or version == MODERN_VERSION
+        if modern and not _valid_modern_meta(params):
+            return self._error(request_id, -32600, "Modern request metadata is incomplete")
 
         if method == "server/discover":
             return self._result(
@@ -335,13 +349,18 @@ async def serve_stdio(
         )
     )
     max_bytes = max(1024, int(max_message_bytes))
+    saved_stdout = os.dup(sys.stdout.fileno())
+    protocol_stream = os.fdopen(os.dup(saved_stdout), "w", buffering=1, encoding="utf-8")
+    os.dup2(sys.stderr.fileno(), sys.stdout.fileno())
     try:
         while True:
-            line = await asyncio.to_thread(sys.stdin.buffer.readline)
+            line = await asyncio.to_thread(sys.stdin.buffer.readline, max_bytes + 1)
             if not line:
                 break
             try:
                 if len(line) > max_bytes:
+                    while line and not line.endswith(b"\n"):
+                        line = await asyncio.to_thread(sys.stdin.buffer.readline, max_bytes + 1)
                     raise ValueError("message exceeds configured size limit")
                 message = json.loads(line)
                 if not isinstance(message, dict):
@@ -356,9 +375,11 @@ async def serve_stdio(
                     separators=(",", ":"),
                     default=_json_default,
                 )
-                sys.stdout.write(payload + "\n")
-                sys.stdout.flush()
+                protocol_stream.write(payload + "\n")
     finally:
+        os.dup2(saved_stdout, sys.stdout.fileno())
+        os.close(saved_stdout)
+        protocol_stream.close()
         await router.close()
 
 
@@ -368,6 +389,8 @@ def create_http_app(
     bearer_token: str | None = None,
     approved_side_effect: SideEffect = SideEffect.READ,
     allow_unsafe_executor: bool = False,
+    max_body_bytes: int = 2_000_000,
+    allowed_origins: set[str] | None = None,
 ) -> Any:
     """Create an optional FastAPI app without making FastAPI a base dependency."""
 
@@ -406,14 +429,29 @@ def create_http_app(
 
     @app.post("/mcp")
     async def mcp_endpoint(
-        message: dict[str, Any],
         request: _FastAPIRequest,
         authorization: str | None = Header(default=None),
     ) -> Any:
         if bearer_token:
             expected = f"Bearer {bearer_token}"
-            if authorization != expected:
+            if authorization is None or not hmac.compare_digest(authorization, expected):
                 raise HTTPException(status_code=401, detail="invalid bearer token")
+        origin = request.headers.get("origin")
+        if origin is not None and origin not in (allowed_origins or set()):
+            raise HTTPException(status_code=403, detail="origin is not allowed")
+        if "application/json" not in request.headers.get("content-type", ""):
+            raise HTTPException(status_code=415, detail="application/json is required")
+        body = bytearray()
+        async for chunk in request.stream():
+            if len(body) + len(chunk) > max(1024, max_body_bytes):
+                raise HTTPException(status_code=413, detail="request body too large")
+            body.extend(chunk)
+        try:
+            message = json.loads(bytes(body))
+        except json.JSONDecodeError as exc:
+            raise HTTPException(status_code=400, detail="invalid JSON") from exc
+        if not isinstance(message, dict):
+            raise HTTPException(status_code=400, detail="JSON-RPC message must be an object")
 
         method = message.get("method")
         params = message.get("params", {})

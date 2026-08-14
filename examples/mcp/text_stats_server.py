@@ -35,6 +35,7 @@ def handle(message: dict[str, Any]) -> dict[str, Any] | None:
         return response(
             request_id,
             {
+                "resultType": "complete",
                 "supportedVersions": [MODERN, LEGACY],
                 "serverInfo": {"name": "example-text-stats", "version": "0.1"},
                 "capabilities": {"tools": {"listChanged": False}},
@@ -50,7 +51,7 @@ def handle(message: dict[str, Any]) -> dict[str, Any] | None:
             },
         )
     if method == "tools/list":
-        return response(request_id, {"tools": [TOOL]})
+        return response(request_id, {"resultType": "complete", "tools": [TOOL]})
     if method == "tools/call" and params.get("name") == "text_stats":
         text = str(params.get("arguments", {}).get("text", ""))
         output = {
@@ -61,6 +62,7 @@ def handle(message: dict[str, Any]) -> dict[str, Any] | None:
         return response(
             request_id,
             {
+                "resultType": "complete",
                 "content": [{"type": "text", "text": json.dumps(output)}],
                 "structuredContent": output,
                 "isError": False,

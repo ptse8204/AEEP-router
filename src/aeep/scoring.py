@@ -15,6 +15,7 @@ from .models import (
     RouteEstimate,
     ScoreBreakdown,
     SubscriptionQuota,
+    SubscriptionUsage,
 )
 
 
@@ -22,12 +23,11 @@ def _over(value: float, reference: float) -> float:
     return math.log1p(max(0.0, value) / reference)
 
 
-def _effective_money(estimate: RouteEstimate, policy: PolicyConfig) -> float:
+def policy_valuation_amount(estimate: RouteEstimate, policy: PolicyConfig) -> float:
     resources = estimate.resources
     prices = policy.shadow_prices
     return (
-        resources.monetary_usd
-        + resources.cpu_ms * prices.cpu_ms_usd
+        resources.cpu_ms * prices.cpu_ms_usd
         + resources.memory_mb_seconds * prices.memory_mb_second_usd
         + resources.gpu_ms * prices.gpu_ms_usd
         + resources.network_bytes * prices.network_byte_usd
@@ -35,6 +35,113 @@ def _effective_money(estimate: RouteEstimate, policy: PolicyConfig) -> float:
         + resources.input_tokens * prices.input_token_usd
         + resources.output_tokens * prices.output_token_usd
     )
+
+
+def _cash_amount(estimate: RouteEstimate) -> float | None:
+    return float(estimate.cash.amount_usd) if estimate.cash.amount_usd is not None else None
+
+
+def _cash_upper_bound(estimate: RouteEstimate) -> float | None:
+    return (
+        float(estimate.cash.upper_bound_usd) if estimate.cash.upper_bound_usd is not None else None
+    )
+
+
+def _subscription_units(spec: ExecutorSpec, estimate: RouteEstimate) -> float:
+    if spec.resource_pool:
+        entries = [
+            item
+            for item in estimate.subscription_usage
+            if item.resource_pool == spec.resource_pool and item.consumed is not None
+        ]
+        if len(entries) == 1:
+            return float(entries[0].consumed or 0)
+    return estimate.resources.subscription_units
+
+
+def subscription_score_components(
+    *,
+    resource_pool: str,
+    unit: str,
+    units: float,
+    policy: PolicyConfig,
+    quota: SubscriptionQuota | None,
+    success_probability: float,
+) -> tuple[float, float]:
+    """Return dimensionless pressure and private USD policy value for one pool."""
+
+    current = quota or SubscriptionQuota(unit=unit)
+    if current.remaining_units is not None:
+        remaining = float(current.remaining_units)
+        pressure = units / remaining if remaining else float("inf")
+    elif current.allowance_units is not None:
+        allowance = float(current.allowance_units)
+        pressure = units / allowance if allowance else float("inf")
+    else:
+        pressure = units * current.state.pressure
+    rule = next(
+        (
+            item
+            for item in policy.subscription_rules
+            if item.resource_pool == resource_pool and item.unit == unit
+        ),
+        None,
+    )
+    pool_weight = rule.pressure_weight if rule else 1.0
+    confidence_uncertainty = 1.0 - current.confidence
+    burden = math.log1p(
+        pressure * policy.subscription_scarcity_multiplier * pool_weight + confidence_uncertainty
+    ) / max(success_probability, 0.001)
+    value = (
+        units * float(rule.policy_value_usd_per_unit)
+        if rule and rule.policy_value_usd_per_unit is not None
+        else 0.0
+    )
+    return burden, value
+
+
+def add_subscription_vector(
+    breakdown: ScoreBreakdown,
+    estimate: RouteEstimate,
+    policy: PolicyConfig,
+    usage: list[SubscriptionUsage],
+    quotas: dict[tuple[str, str], SubscriptionQuota | None],
+) -> ScoreBreakdown:
+    """Add provider-local pool burdens to an already aggregate plan score."""
+
+    known = [item for item in usage if item.consumed is not None]
+    if not known:
+        return breakdown
+    burdens: list[float] = []
+    private_value = 0.0
+    for item in known:
+        burden, value = subscription_score_components(
+            resource_pool=item.resource_pool,
+            unit=item.unit,
+            units=float(item.consumed or 0),
+            policy=policy,
+            quota=quotas.get((item.resource_pool, item.unit)),
+            success_probability=estimate.success_probability,
+        )
+        burdens.append(burden)
+        private_value += value
+    weights = policy.weights.normalized()
+    subscription = weights["subscription"] * max(burdens, default=0.0)
+    base_value = policy_valuation_amount(estimate, policy)
+    expected_multiplier = 1.0 / max(estimate.success_probability, 0.001)
+    prior_policy_value = weights["monetary"] * _over(
+        base_value * expected_multiplier, policy.references.monetary_usd
+    )
+    policy_value = weights["monetary"] * _over(
+        (base_value + private_value) * expected_multiplier,
+        policy.references.monetary_usd,
+    )
+    updated = breakdown.model_copy(deep=True)
+    updated.subscription = subscription
+    updated.policy_valuation += policy_value - prior_policy_value
+    updated.monetary += policy_value - prior_policy_value
+    updated.total += subscription + policy_value - prior_policy_value
+    return updated
 
 
 def rejection_reasons(
@@ -49,7 +156,6 @@ def rejection_reasons(
     reasons: list[str] = []
 
     checks: list[tuple[float | int | None, float | int, str]] = [
-        (c.max_cost_usd, _effective_money(estimate, policy), "cost"),
         (c.max_latency_ms, r.latency_ms, "latency"),
         (c.max_cpu_ms, r.cpu_ms, "CPU"),
         (c.max_memory_mb_seconds, r.memory_mb_seconds, "memory-time"),
@@ -65,6 +171,13 @@ def rejection_reasons(
     for maximum, actual, label in checks:
         if maximum is not None and actual > maximum:
             reasons.append(f"estimated {label} {actual:g} exceeds maximum {maximum:g}")
+
+    cash_upper = _cash_upper_bound(estimate)
+    if c.max_cost_usd is not None:
+        if cash_upper is None:
+            reasons.append("estimated cash upper bound is unavailable under a finite cost limit")
+        elif cash_upper > c.max_cost_usd:
+            reasons.append(f"estimated cost {cash_upper:g} exceeds maximum {c.max_cost_usd:g}")
 
     if estimate.success_probability < c.min_success_probability:
         reasons.append(
@@ -105,6 +218,18 @@ def rejection_reasons(
         reasons.append("restricted data cannot be sent to this remote executor")
     if subscription_quota is not None and not math.isfinite(subscription_quota.state.pressure):
         reasons.append(f"subscription resource {spec.resource_pool!r} is exhausted")
+    units = _subscription_units(spec, estimate)
+    if (
+        subscription_quota is not None
+        and subscription_quota.remaining_units is not None
+        and units > float(subscription_quota.remaining_units)
+    ):
+        reasons.append(f"subscription resource {spec.resource_pool!r} has insufficient units")
+    if subscription_quota is not None and any(
+        item.resource_pool == spec.resource_pool and item.unit != subscription_quota.unit
+        for item in estimate.subscription_usage
+    ):
+        reasons.append(f"subscription resource {spec.resource_pool!r} unit does not match quota")
 
     available = context.compute
     if (
@@ -113,11 +238,11 @@ def rejection_reasons(
         > available.context_tokens_remaining
     ):
         reasons.append("estimated context usage exceeds remaining context budget")
-    if (
-        available.monetary_budget_remaining_usd is not None
-        and _effective_money(estimate, policy) > available.monetary_budget_remaining_usd
-    ):
-        reasons.append("estimated cost exceeds remaining monetary budget")
+    if available.monetary_budget_remaining_usd is not None:
+        if cash_upper is None:
+            reasons.append("estimated cash upper bound is unavailable under remaining budget")
+        elif cash_upper > available.monetary_budget_remaining_usd:
+            reasons.append("estimated cost exceeds remaining monetary budget")
     if (
         available.available_memory_mb is not None
         and r.peak_memory_mb > available.available_memory_mb
@@ -184,31 +309,39 @@ def score_candidate(
     p_success = max(estimate.success_probability, 0.001)
     expected_multiplier = 1.0 / p_success
     weights = policy.weights.normalized()
-    money = _over(
-        _effective_money(estimate, policy) * expected_multiplier,
+    cash_amount = _cash_amount(estimate)
+    cash = _over(
+        (cash_amount or 0.0) * expected_multiplier,
         policy.references.monetary_usd,
     )
+    policy_value_amount = policy_valuation_amount(estimate, policy)
     latency = _over(
         estimate.resources.latency_ms * expected_multiplier,
         policy.references.latency_ms,
     )
     compute = _compute_burden(estimate, policy, context) * expected_multiplier
     subscription = 0.0
-    if subscription_quota is not None and estimate.resources.subscription_units:
-        confidence = subscription_quota.confidence
-        effective_pressure = confidence * subscription_quota.state.pressure + (1.0 - confidence)
-        subscription = (
-            math.log1p(
-                estimate.resources.subscription_units
-                * effective_pressure
-                * policy.subscription_scarcity_multiplier
-            )
-            * expected_multiplier
+    if subscription_quota is not None and _subscription_units(spec, estimate):
+        units = _subscription_units(spec, estimate)
+        unit = subscription_quota.unit
+        subscription, subscription_policy_value = subscription_score_components(
+            resource_pool=spec.resource_pool or "",
+            unit=unit,
+            units=units,
+            policy=policy,
+            quota=subscription_quota,
+            success_probability=estimate.success_probability,
         )
+        policy_value_amount += subscription_policy_value
+    policy_value = _over(
+        policy_value_amount * expected_multiplier,
+        policy.references.monetary_usd,
+    )
     reliability = -math.log(p_success)
     quality = 1.0 - estimate.quality_score
     risk = estimate.risk_score
     uncertainty = (1.0 - estimate.confidence) * policy.uncertainty_penalty
+    cash_uncertainty = policy.uncertainty_penalty if cash_amount is None else 0.0
 
     locality_adjustment = 0.0
     if spec.locality in {Locality.IN_PROCESS, Locality.LOCAL}:
@@ -217,7 +350,7 @@ def score_candidate(
         locality_adjustment -= policy.prefer_local_bonus
 
     total = (
-        weights["monetary"] * money
+        weights["monetary"] * (cash + policy_value)
         + weights["latency"] * latency
         + weights["compute"] * compute
         + weights["subscription"] * subscription
@@ -225,10 +358,13 @@ def score_candidate(
         + weights["quality"] * quality
         + weights["risk"] * risk
         + uncertainty
+        + cash_uncertainty
         + locality_adjustment
     )
     breakdown = ScoreBreakdown(
-        monetary=weights["monetary"] * money,
+        monetary=weights["monetary"] * (cash + policy_value),
+        cash=weights["monetary"] * cash,
+        policy_valuation=weights["monetary"] * policy_value,
         latency=weights["latency"] * latency,
         compute=weights["compute"] * compute,
         subscription=weights["subscription"] * subscription,
@@ -236,6 +372,7 @@ def score_candidate(
         quality=weights["quality"] * quality,
         risk=weights["risk"] * risk,
         uncertainty=uncertainty,
+        cash_uncertainty=cash_uncertainty,
         locality_adjustment=locality_adjustment,
         total=total,
     )

@@ -177,9 +177,7 @@ def merge_constraints(
         max_latency_ms=_strictest_max(
             policy_constraints.max_latency_ms, request_constraints.max_latency_ms
         ),
-        max_cpu_ms=_strictest_max(
-            policy_constraints.max_cpu_ms, request_constraints.max_cpu_ms
-        ),
+        max_cpu_ms=_strictest_max(policy_constraints.max_cpu_ms, request_constraints.max_cpu_ms),
         max_memory_mb_seconds=_strictest_max(
             policy_constraints.max_memory_mb_seconds,
             request_constraints.max_memory_mb_seconds,
@@ -188,9 +186,7 @@ def merge_constraints(
             policy_constraints.max_peak_memory_mb,
             request_constraints.max_peak_memory_mb,
         ),
-        max_gpu_ms=_strictest_max(
-            policy_constraints.max_gpu_ms, request_constraints.max_gpu_ms
-        ),
+        max_gpu_ms=_strictest_max(policy_constraints.max_gpu_ms, request_constraints.max_gpu_ms),
         max_network_bytes=_strictest_int_max(
             policy_constraints.max_network_bytes, request_constraints.max_network_bytes
         ),
@@ -205,9 +201,7 @@ def merge_constraints(
             policy_constraints.min_quality_score,
             request_constraints.min_quality_score,
         ),
-        max_risk_score=min(
-            policy_constraints.max_risk_score, request_constraints.max_risk_score
-        ),
+        max_risk_score=min(policy_constraints.max_risk_score, request_constraints.max_risk_score),
         max_side_effect=max_side_effect,
         allow_network=policy_constraints.allow_network and request_constraints.allow_network,
         require_local=policy_constraints.require_local or request_constraints.require_local,

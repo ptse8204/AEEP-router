@@ -4,17 +4,31 @@ from __future__ import annotations
 
 import json
 import time
+from decimal import Decimal
 from typing import Any
 from urllib.parse import urlparse
 
 import httpx
 
 from ..errors import ConfigurationError
-from ..models import ExecutionStatus, RawExecution, ResourceVector
+from ..models import (
+    CashAccounting,
+    CashClassification,
+    CashEvidence,
+    EvidenceSource,
+    EvidenceStatus,
+    ExecutionStatus,
+    MeasurementEvidence,
+    RawExecution,
+    ResourceAccounting,
+    ResourceVector,
+    TrustLevel,
+)
 from ..profiler import approximate_tokens
 from ..templates import extract_path, render
 from .base import BaseExecutor, ExecutionContext
 from .network import validate_http_url
+from .parsing import parse_output
 
 
 class HTTPExecutor(BaseExecutor):
@@ -32,7 +46,7 @@ class HTTPExecutor(BaseExecutor):
                 status=ExecutionStatus.REJECTED,
                 error_type=type(exc).__name__,
                 error_message=str(exc),
-                resources=ResourceVector(monetary_usd=context.estimate.resources.monetary_usd),
+                resources=ResourceVector(),
             )
 
         method = str(config.get("method", "GET")).upper()
@@ -49,6 +63,7 @@ class HTTPExecutor(BaseExecutor):
         json_body = render(config.get("json"), values) if "json" in config else None
         content = render(config.get("body"), values) if "body" in config else None
         timeout = float(config.get("timeout_seconds", 30.0))
+        max_request_bytes = int(config.get("max_request_bytes", 2_000_000))
         max_response_bytes = int(config.get("max_response_bytes", 2_000_000))
         follow_redirects = bool(config.get("follow_redirects", False))
         started = time.perf_counter()
@@ -58,6 +73,13 @@ class HTTPExecutor(BaseExecutor):
         if content is not None:
             content = str(content)
             request_bytes += len(content.encode("utf-8"))
+        if request_bytes > max_request_bytes:
+            return RawExecution(
+                status=ExecutionStatus.REJECTED,
+                resources=ResourceVector(),
+                error_type="ConfigurationError",
+                error_message="HTTP request exceeds configured max_request_bytes",
+            )
 
         try:
             async with (
@@ -94,11 +116,6 @@ class HTTPExecutor(BaseExecutor):
                 )
             elapsed_ms = (time.perf_counter() - started) * 1000.0
             resources = ResourceVector(
-                monetary_usd=(
-                    float(cost_header)
-                    if cost_header is not None
-                    else context.estimate.resources.monetary_usd
-                ),
                 latency_ms=elapsed_ms,
                 network_bytes=request_bytes + total,
                 context_tokens=approximate_tokens(body.decode("utf-8", errors="replace")),
@@ -124,19 +141,41 @@ class HTTPExecutor(BaseExecutor):
                     metadata=metadata,
                 )
             text = body.decode(response.encoding or "utf-8", errors="replace")
-            output_type = str(config.get("output", {}).get("type", "auto"))
+            output_config = config.get("output", {})
+            output_type = str(output_config.get("type", "auto"))
             if output_type == "json" or (output_type == "auto" and "json" in content_type):
                 output: Any = json.loads(text)
             elif output_type in {"text", "auto"}:
-                output = text.strip() if config.get("output", {}).get("strip", True) else text
+                output = text.strip() if output_config.get("strip", True) else text
             else:
-                raise ConfigurationError(f"unsupported HTTP output type {output_type!r}")
-            output = extract_path(output, config.get("output", {}).get("path"))
+                output = parse_output(text, output_config)
+            if output_type in {"json", "text", "auto"}:
+                output = extract_path(output, output_config.get("path"))
             resources.context_tokens = approximate_tokens(output)
+            accounting = ResourceAccounting()
+            if cost_header is not None:
+                try:
+                    component = CashEvidence(
+                        charge_id=f"provider-header:{context.spec.id}",
+                        amount=Decimal(str(cost_header)),
+                        classification=CashClassification.ESTIMATED,
+                        evidence=MeasurementEvidence(
+                            status=EvidenceStatus.PARTIAL,
+                            source=EvidenceSource.PROVIDER_REPORT,
+                            trust=TrustLevel.SELF_ASSERTED,
+                        ),
+                    )
+                    accounting.cash = CashAccounting(
+                        status=EvidenceStatus.PARTIAL,
+                        components=[component],
+                    )
+                except Exception:
+                    pass
             return RawExecution(
                 status=ExecutionStatus.SUCCESS,
                 output=output,
                 resources=resources,
+                accounting=accounting,
                 metadata=metadata,
             )
         except TimeoutError:
@@ -144,7 +183,6 @@ class HTTPExecutor(BaseExecutor):
             return RawExecution(
                 status=ExecutionStatus.TIMEOUT,
                 resources=ResourceVector(
-                    monetary_usd=context.estimate.resources.monetary_usd,
                     latency_ms=elapsed_ms,
                     network_bytes=request_bytes,
                 ),
@@ -156,7 +194,6 @@ class HTTPExecutor(BaseExecutor):
             return RawExecution(
                 status=ExecutionStatus.TIMEOUT,
                 resources=ResourceVector(
-                    monetary_usd=context.estimate.resources.monetary_usd,
                     latency_ms=elapsed_ms,
                     network_bytes=request_bytes,
                 ),
@@ -168,7 +205,6 @@ class HTTPExecutor(BaseExecutor):
             return RawExecution(
                 status=ExecutionStatus.FAILED,
                 resources=ResourceVector(
-                    monetary_usd=context.estimate.resources.monetary_usd,
                     latency_ms=elapsed_ms,
                     network_bytes=request_bytes,
                 ),

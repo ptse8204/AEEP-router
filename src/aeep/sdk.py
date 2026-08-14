@@ -7,7 +7,7 @@ import re
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import yaml
 
@@ -26,6 +26,7 @@ from .models import (
     SideEffect,
     TrustLevel,
 )
+from .templates import render
 
 
 def capability(
@@ -144,6 +145,9 @@ def import_cli(
         ),
         side_effect=SideEffect.READ,
         locality=Locality.LOCAL,
+        idempotent=False,
+        safe_to_auto_execute=False,
+        enabled=False,
         provider_id=provider_id,
         config={"argv": argv, "stdin_json": True, "output": {"type": "json"}},
     )
@@ -157,20 +161,35 @@ def import_mcp(
     tool: str,
     transport: str,
     endpoint: str,
+    args: list[str] | None = None,
+    headers: dict[str, str] | None = None,
+    credential_scope_id: str | None = None,
+    protocol_mode: str = "auto",
     input_schema: dict[str, Any] | None = None,
     output_schema: dict[str, Any] | None = None,
 ) -> ProviderDescriptor:
+    if protocol_mode not in {"auto", "modern", "legacy"}:
+        raise ConfigurationError("MCP protocol mode must be auto, modern, or legacy")
     config: dict[str, Any] = {
         "transport": transport,
         "tool": tool,
         "arguments": "{input}",
+        "protocol_mode": protocol_mode,
     }
     locality = Locality.LOCAL
     requires_network = False
     if transport == "stdio":
         config["command"] = endpoint
+        config["args"] = list(args or [])
     else:
+        if headers and not credential_scope_id:
+            raise ConfigurationError("MCP HTTP headers require a credential_scope_id")
         config["url"] = endpoint
+        if hostname := urlparse(endpoint).hostname:
+            config["allowed_hosts"] = [hostname]
+        config["headers"] = dict(headers or {})
+        if credential_scope_id:
+            config["credential_scope_id"] = credential_scope_id
         locality = Locality.INTERNET
         requires_network = True
     spec = ExecutorSpec(
@@ -187,6 +206,9 @@ def import_mcp(
         provider_id=provider_id,
         locality=locality,
         requires_network=requires_network,
+        idempotent=False,
+        safe_to_auto_execute=False,
+        enabled=False,
         config=config,
     )
     return ProviderDescriptor(provider_id=provider_id, name=provider_id, executors=[spec])
@@ -198,7 +220,10 @@ async def import_mcp_server(
     transport: str,
     endpoint: str,
     args: list[str] | None = None,
+    headers: dict[str, str] | None = None,
+    credential_scope_id: str | None = None,
     capability_prefix: str | None = None,
+    protocol_mode: str = "auto",
 ) -> ProviderDescriptor:
     """Inspect one reviewed MCP endpoint and import all advertised tools."""
 
@@ -206,10 +231,21 @@ async def import_mcp_server(
         client: MCPStdioClient | MCPHTTPClient = MCPStdioClient(
             command=endpoint,
             args=args or [],
+            protocol_mode=protocol_mode,
         )
     elif transport in {"http", "streamable_http", "streamable-http"}:
-        await validate_http_url(endpoint, {}, label="MCP import")
-        client = MCPHTTPClient(url=endpoint)
+        hostname = urlparse(endpoint).hostname
+        await validate_http_url(
+            endpoint,
+            {"allowed_hosts": [hostname]} if hostname else {},
+            label="MCP import",
+        )
+        resolved_headers = render(headers or {}, {}, allow_env=True)
+        client = MCPHTTPClient(
+            url=endpoint,
+            headers={str(key): str(value) for key, value in resolved_headers.items()},
+            protocol_mode=protocol_mode,
+        )
     else:
         raise ConfigurationError("MCP transport must be stdio or streamable HTTP")
     try:
@@ -229,6 +265,10 @@ async def import_mcp_server(
             tool=str(tool["name"]),
             transport=transport,
             endpoint=endpoint,
+            args=args,
+            headers=headers,
+            credential_scope_id=credential_scope_id,
+            protocol_mode=protocol_mode,
             input_schema=(
                 tool.get("inputSchema") if isinstance(tool.get("inputSchema"), dict) else None
             ),
@@ -282,6 +322,9 @@ def import_openapi(
     )
     if not isinstance(root_url, str):
         raise ConfigurationError("OpenAPI importer requires a base URL")
+    root_hostname = urlparse(root_url).hostname
+    if not root_hostname:
+        raise ConfigurationError("OpenAPI base URL requires a hostname")
     executors: list[ExecutorSpec] = []
     definitions: list[CapabilityDefinition] = []
     for route_path, path_item in sorted(document["paths"].items()):
@@ -344,8 +387,16 @@ def import_openapi(
                     resources=ResourceVector(latency_ms=1000, network_bytes=2000),
                     confidence=0.2,
                 ),
-                side_effect=SideEffect.READ if method == "get" else SideEffect.WRITE,
-                safe_to_auto_execute=method == "get",
+                side_effect=(
+                    SideEffect.READ
+                    if method == "get"
+                    else SideEffect.DESTRUCTIVE
+                    if method == "delete"
+                    else SideEffect.WRITE
+                ),
+                idempotent=False,
+                safe_to_auto_execute=False,
+                enabled=False,
                 provider_id=provider_id,
                 locality=Locality.INTERNET,
                 requires_network=True,
@@ -359,6 +410,7 @@ def import_openapi(
                         ),
                     ),
                     "method": method.upper(),
+                    "allowed_hosts": [root_hostname],
                     **({"query": "{input}"} if method == "get" else {"json": "{input}"}),
                     "output": {"type": "json"},
                 },

@@ -90,7 +90,12 @@ def test_protocol_legacy_initialize(tmp_path):
             }
         )
         assert response["result"]["protocolVersion"] == LEGACY_VERSION
-        assert await app.handle({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}) is None
+        assert (
+            await app.handle(
+                {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
+            )
+            is None
+        )
         await router.close()
 
     asyncio.run(exercise())

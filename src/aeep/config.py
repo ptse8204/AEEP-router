@@ -80,7 +80,7 @@ def load_manifest(path: str | Path | None = None) -> tuple[Manifest, Path]:
 
 def default_manifest_dict() -> dict[str, Any]:
     return {
-        "version": "0.2",
+        "version": "0.3",
         "database": ".aeep/aeep.db",
         "default_policy": "balanced",
         "persistence": {

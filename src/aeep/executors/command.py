@@ -13,8 +13,15 @@ from typing import Any
 
 import psutil
 
+from ..codex_capture import parse_codex_jsonl
 from ..errors import ConfigurationError
-from ..models import ExecutionStatus, RawExecution, ResourceVector
+from ..models import (
+    ExecutionStatus,
+    ModelAccessChannel,
+    RawExecution,
+    ResourceAccounting,
+    ResourceVector,
+)
 from ..profiler import approximate_tokens
 from ..templates import render
 from .base import BaseExecutor, ExecutionContext
@@ -77,7 +84,7 @@ async def _read_limited(stream: asyncio.StreamReader | None, limit: int) -> tupl
 
 
 def _minimal_environment() -> dict[str, str]:
-    names = ["PATH", "HOME", "USERPROFILE", "TMPDIR", "TEMP", "TMP", "SYSTEMROOT"]
+    names = ["PATH", "TMPDIR", "TEMP", "TMP", "SYSTEMROOT"]
     return {name: os.environ[name] for name in names if name in os.environ}
 
 
@@ -126,6 +133,14 @@ class CommandExecutor(BaseExecutor):
         elif stdin_template is not None:
             stdin_value = render(stdin_template, values)
             stdin_bytes = str(stdin_value).encode("utf-8")
+        max_stdin = int(config.get("max_stdin_bytes", 1_000_000))
+        if stdin_bytes is not None and len(stdin_bytes) > max_stdin:
+            return RawExecution(
+                status=ExecutionStatus.REJECTED,
+                resources=ResourceVector(),
+                error_type="ConfigurationError",
+                error_message="command input exceeds configured max_stdin_bytes",
+            )
 
         kwargs: dict[str, Any] = {}
         if os.name == "posix":
@@ -151,7 +166,7 @@ class CommandExecutor(BaseExecutor):
                 status=ExecutionStatus.FAILED,
                 error_type=type(exc).__name__,
                 error_message=str(exc),
-                resources=ResourceVector(monetary_usd=context.estimate.resources.monetary_usd),
+                resources=ResourceVector(),
                 metadata={"argv": argv[:1]},
             )
 
@@ -193,7 +208,6 @@ class CommandExecutor(BaseExecutor):
         stdout = stdout_data.decode("utf-8", errors="replace")
         stderr = stderr_data.decode("utf-8", errors="replace")
         actual = ResourceVector(
-            monetary_usd=context.estimate.resources.monetary_usd,
             latency_ms=elapsed_ms,
             cpu_ms=metrics.cpu_ms,
             memory_mb_seconds=metrics.memory_mb_seconds,
@@ -229,6 +243,37 @@ class CommandExecutor(BaseExecutor):
                 error_message=f"command exited with status {process.returncode}",
                 metadata=metadata,
             )
+        accounting = ResourceAccounting()
+        capture = config.get("usage_capture")
+        if capture is not None:
+            if not isinstance(capture, dict) or capture.get("type") != "codex_jsonl":
+                raise ConfigurationError("command usage_capture must declare type=codex_jsonl")
+            model = capture.get("model")
+            if not isinstance(model, str) or not model:
+                raise ConfigurationError("Codex JSONL capture requires a model")
+            try:
+                accounting.model_usage.append(
+                    parse_codex_jsonl(
+                        stdout.splitlines(),
+                        provider=str(capture.get("provider", "openai")),
+                        model=model,
+                        access_channel=ModelAccessChannel(
+                            str(capture.get("access_channel", "subscription"))
+                        ),
+                        max_bytes=max_output,
+                    )
+                )
+            except Exception as exc:
+                return RawExecution(
+                    status=ExecutionStatus.FAILED,
+                    stdout=stdout,
+                    stderr=stderr,
+                    exit_code=process.returncode,
+                    resources=actual,
+                    error_type=type(exc).__name__,
+                    error_message="command usage capture failed",
+                    metadata=metadata,
+                )
         try:
             output = parse_output(stdout, config.get("output"))
         except Exception as exc:
@@ -250,5 +295,6 @@ class CommandExecutor(BaseExecutor):
             stderr=stderr,
             exit_code=process.returncode,
             resources=actual,
+            accounting=accounting,
             metadata=metadata,
         )

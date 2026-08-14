@@ -1,0 +1,85 @@
+{
+  "provider_id": "docker.aeep-lab",
+  "name": "Pinned Docker aeep-lab profile",
+  "capabilities": [
+    {
+      "namespace": "web",
+      "name": "fetch",
+      "version": "1",
+      "authority": "docker:mcp/fetch",
+      "owner": "modelcontextprotocol",
+      "description": "Fetch one reviewed public URL and return bounded text.",
+      "input_schema": {
+        "description": "Parameters for fetching a URL.",
+        "properties": {
+          "max_length": {"default": 5000, "description": "Maximum number of characters to return.", "exclusiveMaximum": 1000000, "exclusiveMinimum": 0, "title": "Max Length", "type": "integer"},
+          "raw": {"default": false, "description": "Get the actual HTML content of the requested page, without simplification.", "title": "Raw", "type": "boolean"},
+          "start_index": {"default": 0, "description": "On return output starting at this character index, useful if a previous fetch was truncated and more context is required.", "minimum": 0, "title": "Start Index", "type": "integer"},
+          "url": {"description": "URL to fetch", "format": "uri", "minLength": 1, "title": "Url", "type": "string"}
+        },
+        "required": ["url"],
+        "title": "Fetch",
+        "type": "object"
+      },
+      "output_schema": {"type": "string"},
+      "side_effect": "read"
+    }
+  ],
+  "executors": [
+    {
+      "id": "docker.aeep-lab.mcp.fetch",
+      "provider_id": "docker.aeep-lab",
+      "capability": "web.fetch@1",
+      "kind": "mcp",
+      "description": "Pinned Docker MCP fetch tool in the aeep-lab profile.",
+      "input_schema": {
+        "description": "Parameters for fetching a URL.",
+        "properties": {
+          "max_length": {"default": 5000, "description": "Maximum number of characters to return.", "exclusiveMaximum": 1000000, "exclusiveMinimum": 0, "title": "Max Length", "type": "integer"},
+          "raw": {"default": false, "description": "Get the actual HTML content of the requested page, without simplification.", "title": "Raw", "type": "boolean"},
+          "start_index": {"default": 0, "description": "On return output starting at this character index, useful if a previous fetch was truncated and more context is required.", "minimum": 0, "title": "Start Index", "type": "integer"},
+          "url": {"description": "URL to fetch", "format": "uri", "minLength": 1, "title": "Url", "type": "string"}
+        },
+        "required": ["url"],
+        "title": "Fetch",
+        "type": "object"
+      },
+      "output_schema": {"type": "string"},
+      "estimate": {
+        "resources": {"monetary_usd": 0, "latency_ms": 900, "network_bytes": 20000, "context_tokens": 500},
+        "success_probability": 0.98,
+        "quality_score": 1,
+        "risk_score": 0.03,
+        "confidence": 0.8
+      },
+      "side_effect": "read",
+      "locality": "internet",
+      "requires_network": true,
+      "idempotent": false,
+      "safe_to_auto_execute": false,
+      "enabled": false,
+      "config": {
+        "transport": "stdio",
+        "command": "/usr/local/bin/docker",
+        "args": ["mcp", "gateway", "run", "--profile", "aeep-lab", "--verify-signatures"],
+        "tool": "fetch",
+        "arguments": "{input}",
+        "parse_json_text": false,
+        "protocol_mode": "legacy",
+        "inherit_env": false,
+        "timeout_seconds": 30,
+        "max_message_bytes": 2000000,
+        "image_digest": "sha256:1a7a0996a565a0b8ca5c41b42830d4e5f334d33f851596bbd9debb2beedb22d3",
+        "profile": "aeep-lab",
+        "gateway_version": "0.43.3"
+      }
+    }
+  ],
+  "trust": "self_asserted",
+  "metadata": {
+    "catalog": "mcp/docker-mcp-catalog:latest",
+    "docker_desktop": "4.84.0",
+    "dynamic_tools": false,
+    "signature_verification": true
+  }
+}

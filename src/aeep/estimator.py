@@ -4,17 +4,23 @@ from __future__ import annotations
 
 import json
 import math
+from decimal import Decimal
 from typing import Any
 
 from .models import (
     ActionFeatures,
+    CashEstimate,
     EstimateSource,
+    EvidenceSource,
+    EvidenceStatus,
     ExecutionReceipt,
     ExecutionStatus,
     ExecutorSpec,
+    MeasurementEvidence,
     PolicyConfig,
     ResourceVector,
     RouteEstimate,
+    TrustLevel,
 )
 from .store import ReceiptStore
 
@@ -53,6 +59,12 @@ class HistoricalEstimator:
         blend = policy.history_weight * sample_factor
         return RouteEstimate(
             resources=_blend_resources(spec.estimate.resources, historical.resources, blend),
+            cash=_blend_cash(spec.estimate.cash, historical.cash, blend),
+            subscription_usage=(
+                historical.subscription_usage
+                if historical.subscription_usage
+                else spec.estimate.subscription_usage
+            ),
             success_probability=_blend(
                 spec.estimate.success_probability, historical.success_probability, blend
             ),
@@ -104,7 +116,7 @@ def _historical(
     prior: RouteEstimate,
 ) -> RouteEstimate:
     alpha = 0.30
-    resource = receipts[0].actual_resources
+    resource = _eligible_resources(receipts[0], prior.resources)
     success_ewma = (
         1.0
         if receipts[0].status == ExecutionStatus.SUCCESS
@@ -116,7 +128,7 @@ def _historical(
     if receipts[0].output_valid is not None:
         valid_samples.append(receipts[0].output_valid)
     for receipt in receipts[1:]:
-        resource = _blend_resources(resource, receipt.actual_resources, alpha)
+        resource = _blend_resources(resource, _eligible_resources(receipt, resource), alpha)
         succeeded = (
             1.0
             if receipt.status == ExecutionStatus.SUCCESS
@@ -133,8 +145,29 @@ def _historical(
         else prior.quality_score
     )
     failure_rate = 1.0 - success_ewma
+    actual_cash: list[Decimal] = []
+    for receipt in receipts:
+        amount = receipt.accounting.cash.actual_cash_cost("USD")
+        if amount is not None:
+            actual_cash.append(amount)
+    historical_cash = prior.cash
+    if actual_cash:
+        value = actual_cash[0]
+        for item in actual_cash[1:]:
+            value = value * Decimal(str(1 - alpha)) + item * Decimal(str(alpha))
+        historical_cash = CashEstimate(
+            amount_usd=value,
+            upper_bound_usd=max(actual_cash),
+            evidence=MeasurementEvidence(
+                status=EvidenceStatus.COMPLETE,
+                source=EvidenceSource.LOCAL_METER,
+                trust=TrustLevel.OBSERVED,
+            ),
+        )
     return RouteEstimate(
         resources=resource,
+        cash=historical_cash,
+        subscription_usage=prior.subscription_usage,
         success_probability=max(0.001, min(1.0, success_ewma)),
         quality_score=max(0.0, min(1.0, quality)),
         risk_score=max(prior.risk_score, min(1.0, failure_rate * 0.5)),
@@ -153,9 +186,50 @@ def _blend_resources(
     b: ResourceVector,
     weight_b: float,
 ) -> ResourceVector:
-    integer_fields = {"network_bytes", "context_tokens", "input_tokens", "output_tokens"}
+    integer_fields = {
+        "network_bytes",
+        "context_tokens",
+        "input_tokens",
+        "cached_input_tokens",
+        "output_tokens",
+    }
     values: dict[str, float | int] = {}
     for field in ResourceVector.model_fields:
         value = _blend(float(getattr(a, field)), float(getattr(b, field)), weight_b)
         values[field] = round(value) if field in integer_fields else value
     return ResourceVector.model_validate(values)
+
+
+def _eligible_resources(receipt: ExecutionReceipt, fallback: ResourceVector) -> ResourceVector:
+    """Legacy cash/quota mirrors are not observations without authoritative evidence."""
+
+    values = receipt.actual_resources.model_dump()
+    actual_cash = receipt.accounting.cash.actual_cash_cost("USD")
+    values["monetary_usd"] = (
+        float(actual_cash) if actual_cash is not None else fallback.monetary_usd
+    )
+    known_usage = [
+        item.consumed
+        for item in receipt.accounting.subscription_usage
+        if item.consumed is not None
+        and item.source.trust in {TrustLevel.OBSERVED, TrustLevel.VERIFIED, TrustLevel.ATTESTED}
+        and item.source.source != EvidenceSource.PROVIDER_REPORT
+    ]
+    values["subscription_units"] = (
+        float(known_usage[0]) if len(known_usage) == 1 else fallback.subscription_units
+    )
+    return ResourceVector.model_validate(values)
+
+
+def _blend_cash(a: CashEstimate, b: CashEstimate, weight_b: float) -> CashEstimate:
+    if b.amount_usd is None:
+        return a.model_copy(deep=True)
+    if a.amount_usd is None:
+        return b.model_copy(deep=True)
+    amount = Decimal(str(_blend(float(a.amount_usd), float(b.amount_usd), weight_b)))
+    bounds = [item for item in (a.upper_bound_usd, b.upper_bound_usd) if item is not None]
+    return CashEstimate(
+        amount_usd=amount,
+        upper_bound_usd=max(bounds) if bounds else amount,
+        evidence=b.evidence,
+    )

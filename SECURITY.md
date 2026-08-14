@@ -91,6 +91,16 @@ Imported traces and SDK measurements also influence local history. Treat trace f
 - Remote registries use bounded HTTPS requests, no redirects, no ambient proxies, and the same DNS/IP/allowlist controls as HTTP execution.
 - Imported OpenAPI writes are unsafe for automatic execution by default.
 - CLI import accepts argv arrays and JSON stdin only; shell interpolation remains unsupported.
+- Discovery/import never activates a route. Qualification is read-only in 0.3, fingerprint-bound, and followed by a separate operator activation.
+- Endpoint, argv, MCP tool/schema/protocol, image, or version drift suspends an active imported route.
+
+## Economic evidence
+
+- Treat provider usage metadata and model-facing outcome values as claims, not observations or billing evidence.
+- Persist bounded evidence identifiers/digests, never invoices, account identifiers, credentials, or raw provider payloads.
+- Unknown cash is not zero. Confirmed zero cash does not erase subscription or model-resource pressure.
+- API-equivalent counterfactuals and policy valuations never enter cash totals, budget checks, payment ledgers, or cash-savings claims.
+- Pin rate-card content and retain applied meters/rates; never silently reprice historical campaigns.
 
 ## Payments and budgets
 

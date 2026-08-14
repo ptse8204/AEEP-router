@@ -1,4 +1,4 @@
-# AEEP 0.2 protocol specification
+# AEEP 0.3 protocol specification
 
 AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
 
@@ -21,7 +21,7 @@ A conforming implementation can:
 
 ## 2. Non-goals
 
-AEEP 0.2 does not define:
+AEEP 0.3 does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;
@@ -84,8 +84,13 @@ Provider-declared estimates MUST be treated as priors, not verified observations
 - `network_bytes`
 - `context_tokens`
 - `input_tokens`
+- `cached_input_tokens`
 - `output_tokens`
 - `subscription_units`
+
+Typed `ModelTokenUsage` evidence additionally records
+`cache_write_input_tokens` so cache reads, writes, and uncached input can be
+priced without double counting.
 
 Implementations MUST NOT silently represent one provider's model token or subscription unit as another provider's. `subscription_units` are provider-local capacity measurements, not money or transferable credits. Conversion through a caller's private shadow price is permitted, but the raw fields MUST remain available.
 
@@ -129,7 +134,7 @@ Every rejection MUST include a machine-readable candidate entry and human-readab
 
 Only feasible routes are ranked.
 
-The reference implementation computes burden components for monetary cost, latency, compute pressure, subscription pressure, unreliability, low quality, risk, and locality. Resource and monetary burden are adjusted by expected attempts using `1 / P(success)`. Subscription pressure remains a separate score component and MUST NOT be published as an exchange rate.
+The reference implementation computes separate burden components for attributable cash, private policy valuation, latency, compute pressure, subscription pressure, unreliability, low quality, risk, and locality. Burden is adjusted by expected attempts using `1 / P(success)`. Subscription pressure remains a separate score component and MUST NOT be published as an exchange rate. API-equivalent counterfactuals are never scorer inputs.
 
 A custom implementation MAY use a different ranking algorithm if it:
 
@@ -223,7 +228,7 @@ For `2026-07-28`:
 - HTTP requests MUST carry the same protocol version in `MCP-Protocol-Version`;
 - HTTP requests MUST mirror the JSON-RPC method in `Mcp-Method`; tool calls MUST mirror the tool name in `Mcp-Name`;
 - a client SHOULD use `server/discover` for stdio version negotiation and MAY cache discovery/list results according to `ttlMs` and `cacheScope`;
-- every successful result MUST include `resultType`; the reference implementation emits `complete` and rejects `input_required` because multi-round tool continuation is outside `0.2`;
+- every successful result MUST include `resultType`; the reference implementation emits `complete` and rejects `input_required` because multi-round tool continuation is outside `0.3`;
 - when a tool schema declares `x-mcp-header`, only statically reachable primitive string, integer, or boolean parameters are projected into `Mcp-Param-*` headers. Header names are case-insensitively unique, values use the MCP encoding rules, and header/body disagreement MUST fail closed.
 
 MCP stdio and HTTP messages MUST be bounded. Remote MCP HTTP targets MUST pass the same network/SSRF policy as ordinary HTTP executors; the reference client disables redirects and ambient proxy inheritance by default.
@@ -274,4 +279,24 @@ OpenAI and Anthropic SDK wrappers record latency, usage, outcome, and optionally
 
 ## 26. Versioning
 
-The manifest/spec version is `0.2`; `0.1` and `0.15` manifests remain loadable. Backward-incompatible object changes require a new version. New optional resource dimensions or metadata MAY be added without invalidating older clients when unknown fields are handled at a negotiated boundary.
+The manifest/spec version is `0.3`; `0.1`, `0.15`, and `0.2` manifests remain loadable. Backward-incompatible object changes require a new version. New optional resource dimensions or metadata MAY be added without invalidating older clients when unknown fields are handled at a negotiated boundary.
+
+## 27. Economic evidence
+
+Actual cash, provider-local subscription usage, API-equivalent counterfactuals, and policy valuations are non-interchangeable ledgers. Missing cash evidence is unavailable, never zero. A zero cash total requires complete verified or billing-reconciled evidence. Counterfactual and policy values MUST NOT enter actual-cash totals, cash constraints, or public cash-savings claims.
+
+`ResourceVector.monetary_usd` and `subscription_units` remain compatibility mirrors. New implementations MUST inspect `ResourceAccounting` before interpreting either mirror. Model-facing outcome reports are self-asserted and cannot create verified accounting evidence.
+
+## 28. Rate cards
+
+Rate cards are canonical, content-addressed snapshots. Calculations use decimal arithmetic and retain snapshot, meter, and applied-rate identifiers. Historical reports retain the original snapshot and value; revaluation creates a derived report. Applying an API tariff to a subscription-backed model route creates an API-equivalent counterfactual, not actual cash.
+
+## 29. Qualification lifecycle
+
+Imported and discovered routes enter as inert candidates. Qualification binds reviewed schemas, adapter identity, validators, side effects, idempotency, safety properties, and dynamic cases to an exact behavior fingerprint. Qualification never activates. Execution requires an active local record with the same fingerprint; drift suspends the route before another invocation.
+
+## 30. Workflows and campaigns
+
+Workflow requests contain caller-authored bounded DAGs. Every step uses the ordinary route/execute enforcement path. Bindings are RFC 6901 JSON Pointers and replace existing input slots only. Workflow accounting includes every retry and fallback, groups subscription usage by pool and unit, and never sums parallel wall time or memory peaks.
+
+Repeated benchmark campaigns use an isolated database, immutable suite inputs and rate snapshots, deterministic route order, distinct cold/warm conditions, and raw trial retention without action inputs or outputs. Qualification, activation, workflow resume, campaign execution, and accounting trust elevation remain outside model-facing tools.

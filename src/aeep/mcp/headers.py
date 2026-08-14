@@ -30,7 +30,9 @@ class ToolHeaderBinding:
 def encode_header_value(value: str) -> str:
     """Encode an MCP mirrored value using the required Base64 sentinel when needed."""
 
-    is_visible_ascii = all(character == "\t" or 0x20 <= ord(character) <= 0x7E for character in value)
+    is_visible_ascii = all(
+        character == "\t" or 0x20 <= ord(character) <= 0x7E for character in value
+    )
     needs_encoding = (
         not is_visible_ascii
         or value != value.strip(" \t")
@@ -83,7 +85,11 @@ def _walk_valid_properties(
         property_path = (*path, property_name)
         annotation = property_schema.get("x-mcp-header")
         if annotation is not None:
-            if not isinstance(annotation, str) or not annotation or not _TCHAR.fullmatch(annotation):
+            if (
+                not isinstance(annotation, str)
+                or not annotation
+                or not _TCHAR.fullmatch(annotation)
+            ):
                 raise ProtocolError("invalid x-mcp-header name")
             value_type = property_schema.get("type")
             if value_type not in {"string", "integer", "boolean"}:
@@ -135,9 +141,7 @@ def _value_at_path(arguments: Mapping[str, Any], path: tuple[str, ...]) -> tuple
     return True, current
 
 
-def tool_parameter_headers(
-    tool: Mapping[str, Any], arguments: Mapping[str, Any]
-) -> dict[str, str]:
+def tool_parameter_headers(tool: Mapping[str, Any], arguments: Mapping[str, Any]) -> dict[str, str]:
     headers: dict[str, str] = {}
     for binding in tool_header_bindings(tool):
         present, value = _value_at_path(arguments, binding.path)

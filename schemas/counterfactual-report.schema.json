@@ -49,6 +49,16 @@
       "title": "CounterfactualAlternative",
       "type": "object"
     },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
     "ExecutorKind": {
       "enum": [
         "command",
@@ -130,6 +140,12 @@
           "default": 0,
           "minimum": 0,
           "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
           "type": "integer"
         },
         "output_tokens": {
@@ -218,6 +234,26 @@
         }
       ],
       "default": null
+    },
+    "actual_cash_comparison": {
+      "$ref": "#/$defs/EvidenceStatus",
+      "default": "unavailable"
+    },
+    "actual_cash_saving_usd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actual Cash Saving Usd"
     },
     "explanation": {
       "default": "",

@@ -52,12 +52,18 @@ subscriptions_app = typer.Typer(help="Manage user-owned model and tool subscript
 quota_app = typer.Typer(help="Set or observe subscription quota pressure.")
 skill_app = typer.Typer(help="Install the packaged AEEP skill into an agent host.")
 ingest_app = typer.Typer(help="Ingest traces from existing agent runtimes.")
+candidate_app = typer.Typer(help="Qualify and activate inert imported routes.")
+workflow_app = typer.Typer(help="Run caller-authored bounded workflows.")
+campaign_app = typer.Typer(help="Run isolated repeated benchmark campaigns.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
 app.add_typer(quota_app, name="quota")
 app.add_typer(skill_app, name="skill")
 app.add_typer(ingest_app, name="ingest")
+app.add_typer(candidate_app, name="candidate")
+app.add_typer(workflow_app, name="workflow")
+app.add_typer(campaign_app, name="campaign")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -357,6 +363,7 @@ def subscriptions_add(
     resource_id: str = typer.Argument(...),
     provider: str = typer.Option(..., "--provider"),
     product: str = typer.Option(..., "--product"),
+    unit: str = typer.Option("provider_unit", "--unit"),
     access: str = typer.Option("host", "--access"),
     state: QuotaState = typer.Option(QuotaState.UNKNOWN, "--state"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
@@ -370,6 +377,7 @@ def subscriptions_add(
                 "id": resource_id,
                 "provider": provider,
                 "product": product,
+                "unit": unit,
                 "access": {"mode": access},
                 "quota": {"state": state.value, "source": "user"},
             }
@@ -412,6 +420,8 @@ def quota_set(
     reset_at: str | None = typer.Option(None, "--reset-at"),
     confidence: float = typer.Option(1.0, "--confidence", min=0.0, max=1.0),
     source: QuotaSource = typer.Option(QuotaSource.USER, "--source"),
+    allowance_units: float | None = typer.Option(None, "--allowance-units", min=0),
+    remaining_units: float | None = typer.Option(None, "--remaining-units", min=0),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -424,6 +434,8 @@ def quota_set(
                 "reset_at": reset_at,
                 "confidence": confidence,
                 "source": source.value,
+                "allowance_units": allowance_units,
+                "remaining_units": remaining_units,
             }
         )
         manifest_path, document = _manifest_document(manifest)
@@ -453,6 +465,8 @@ def quota_observe(
     confidence: float = typer.Option(1.0, "--confidence", min=0.0, max=1.0),
     source: QuotaSource = typer.Option(QuotaSource.OBSERVED, "--source"),
     note: str | None = typer.Option(None, "--note"),
+    allowance_units: float | None = typer.Option(None, "--allowance-units", min=0),
+    remaining_units: float | None = typer.Option(None, "--remaining-units", min=0),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -468,6 +482,8 @@ def quota_observe(
                 "reset_at": reset_at,
                 "confidence": confidence,
                 "source": source.value,
+                "allowance_units": allowance_units,
+                "remaining_units": remaining_units,
             },
             note=note,
         )
@@ -1216,6 +1232,10 @@ def import_mcp_command(
     tool: str = typer.Option(..., "--tool"),
     transport: str = typer.Option("stdio", "--transport"),
     endpoint: str = typer.Option(..., "--endpoint"),
+    args: str = typer.Option("[]", "--args", help="JSON argv tail for stdio."),
+    headers: str | None = typer.Option(None, "--headers", help="JSON header templates."),
+    credential_scope_id: str | None = typer.Option(None, "--credential-scope-id"),
+    protocol_mode: str = typer.Option("auto", "--protocol-mode"),
     input_schema: str | None = typer.Option(None, "--input-schema"),
     output_schema: str | None = typer.Option(None, "--output-schema"),
     compact: bool = typer.Option(False, "--compact"),
@@ -1227,12 +1247,27 @@ def import_mcp_command(
     try:
         if transport not in {"stdio", "http", "streamable_http", "streamable-http"}:
             raise typer.BadParameter("transport must be stdio or streamable HTTP")
+        args_value = _read_data(args, default=[])
+        if not isinstance(args_value, list) or not all(
+            isinstance(item, str) for item in args_value
+        ):
+            raise typer.BadParameter("--args must be a JSON string array")
+        if protocol_mode not in {"auto", "modern", "legacy"}:
+            raise typer.BadParameter("--protocol-mode must be auto, modern, or legacy")
         descriptor = import_mcp(
             provider_id=provider_id,
             capability_name=capability,
             tool=tool,
             transport=transport,
             endpoint=endpoint,
+            args=args_value,
+            headers=(
+                {str(key): str(value) for key, value in _mapping(headers, name="headers").items()}
+                if headers
+                else None
+            ),
+            credential_scope_id=credential_scope_id,
+            protocol_mode=protocol_mode,
             input_schema=_mapping(input_schema, name="input-schema") if input_schema else None,
             output_schema=_mapping(output_schema, name="output-schema") if output_schema else None,
         )
@@ -1248,6 +1283,9 @@ def import_mcp_server_command(
     endpoint: str = typer.Option(..., "--endpoint"),
     args: str = typer.Option("[]", "--args", help="JSON argv tail for stdio."),
     capability_prefix: str | None = typer.Option(None, "--capability-prefix"),
+    headers: str | None = typer.Option(None, "--headers", help="JSON header templates."),
+    credential_scope_id: str | None = typer.Option(None, "--credential-scope-id"),
+    protocol_mode: str = typer.Option("auto", "--protocol-mode"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     """Inspect an MCP server and import every advertised tool."""
@@ -1260,13 +1298,25 @@ def import_mcp_server_command(
             isinstance(item, str) for item in args_value
         ):
             raise typer.BadParameter("--args must be a JSON string array")
+        if protocol_mode not in {"auto", "modern", "legacy"}:
+            raise typer.BadParameter("--protocol-mode must be auto, modern, or legacy")
         descriptor = _run(
             import_mcp_server(
                 provider_id=provider_id,
                 transport=transport,
                 endpoint=endpoint,
                 args=args_value,
+                headers=(
+                    {
+                        str(key): str(value)
+                        for key, value in _mapping(headers, name="headers").items()
+                    }
+                    if headers
+                    else None
+                ),
+                credential_scope_id=credential_scope_id,
                 capability_prefix=capability_prefix,
+                protocol_mode=protocol_mode,
             )
         )
         _emit(descriptor, compact=compact)
@@ -1307,6 +1357,307 @@ def import_openapi_command(
             ),
             compact=compact,
         )
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@candidate_app.command("status")
+def candidate_status(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(
+            [item.model_dump(mode="json") for item in router.candidate_status()],
+            compact=compact,
+        )
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command("ingest")
+def candidate_ingest(
+    descriptor: str = typer.Argument(..., help="ProviderDescriptor JSON/YAML or @file"),
+    source_id: str = typer.Option(..., "--source-id"),
+    capability: str | None = typer.Option(None, "--capability"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Persist imported provider routes as inert candidates."""
+
+    from .models import ProviderDescriptor
+
+    router = Router.from_manifest(manifest)
+    try:
+        provider = ProviderDescriptor.model_validate(_read_data(descriptor, default={}))
+        candidates = [
+            router.ingest_candidate(spec, source_id=source_id)
+            for spec in provider.executors
+            if capability is None or spec.capability == capability
+        ]
+        if not candidates:
+            raise typer.BadParameter("descriptor contains no matching executors")
+        _emit([item.model_dump(mode="json") for item in candidates], compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command("qualify")
+def candidate_qualify(
+    executor_id: str,
+    side_effect: SideEffect = typer.Option(SideEffect.READ, "--side-effect"),
+    idempotent: bool = typer.Option(False, "--idempotent"),
+    safe_to_auto_execute: bool = typer.Option(False, "--safe-to-auto-execute"),
+    cases: str | None = typer.Option(None, "--cases", help="JSON/YAML list or @file"),
+    repetitions: int = typer.Option(1, "--repetitions", min=1, max=1000),
+    conditions: str = typer.Option(
+        "process-cold", "--conditions", help="Comma-separated process-cold,router-warm"
+    ),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    from .qualification import QualificationCase, QualificationCondition
+
+    parsed = _read_data(cases, default=[])
+    if not isinstance(parsed, list):
+        raise typer.BadParameter("cases must be a list")
+    router = Router.from_manifest(manifest)
+    try:
+        result = _run(
+            _await_and_close(
+                router,
+                router.qualify_candidate(
+                    executor_id,
+                    side_effect=side_effect,
+                    idempotent=idempotent,
+                    safe_to_auto_execute=safe_to_auto_execute,
+                    cases=[QualificationCase.model_validate(item) for item in parsed],
+                    repetitions=repetitions,
+                    conditions=[
+                        QualificationCondition(item.strip())
+                        for item in conditions.split(",")
+                        if item.strip()
+                    ],
+                ),
+            )
+        )
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@candidate_app.command("activate")
+def candidate_activate(
+    executor_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(router.activate_candidate(executor_id), compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command("suspend")
+def candidate_suspend(
+    executor_id: str,
+    reason: str = typer.Option(..., "--reason"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(router.suspend_candidate(executor_id, reason=reason), compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@workflow_app.command("run")
+def workflow_run(
+    request: str = typer.Argument(..., help="Workflow JSON/YAML or @file"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    approve_unsafe_executor: bool = typer.Option(False, "--approve-unsafe-executor"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    from .workflow import WorkflowRequest
+
+    router = Router.from_manifest(manifest)
+    try:
+        result = _run(
+            _await_and_close(
+                router,
+                router.execute_workflow(
+                    WorkflowRequest.model_validate(_read_data(request, default={})),
+                    approved_side_effect=approve,
+                    allow_unsafe_executor=approve_unsafe_executor,
+                ),
+            )
+        )
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@workflow_app.command("resume")
+def workflow_resume(
+    request: str = typer.Argument(..., help="Original workflow JSON/YAML or @file"),
+    waiting: str = typer.Argument(..., help="WAITING outcome JSON/YAML or @file"),
+    step_id: str = typer.Option(..., "--step-id"),
+    output: str = typer.Option(..., "--output", help="Validated output JSON/YAML or @file"),
+    accounting: str | None = typer.Option(
+        None, "--accounting", help="Trusted ResourceAccounting JSON/YAML or @file"
+    ),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    from .models import ResourceAccounting
+    from .workflow import WorkflowExecutionOutcome, WorkflowRequest
+
+    router = Router.from_manifest(manifest)
+    try:
+        result = _run(
+            _await_and_close(
+                router,
+                router.resume_workflow(
+                    WorkflowRequest.model_validate(_read_data(request, default={})),
+                    WorkflowExecutionOutcome.model_validate(_read_data(waiting, default={})),
+                    step_id=step_id,
+                    output=_read_data(output, default=None),
+                    actual_accounting=(
+                        ResourceAccounting.model_validate(_read_data(accounting, default={}))
+                        if accounting is not None
+                        else None
+                    ),
+                    approved_side_effect=approve,
+                ),
+            )
+        )
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@campaign_app.command("run")
+def campaign_run(
+    suite: str = typer.Argument(..., help="Benchmark suite JSON/YAML or @file"),
+    database: Path = typer.Option(Path(".aeep/benchmarks.db"), "--database"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    output: Path | None = typer.Option(None, "--output", "-o"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    from .benchmarking import BenchmarkRunner, BenchmarkSuite, format_campaign_report
+    from .store import ReceiptStore
+
+    source = Router.from_manifest(manifest)
+    snapshot = source.manifest.model_copy(deep=True)
+    snapshot.database = ":memory:"
+    candidates = source.store.list_route_candidates()
+    candidate_ids = {candidate.executor_id for candidate in candidates}
+    reports = [
+        report
+        for candidate in candidates
+        if candidate.qualification_report_id is not None
+        and (report := source.store.get_qualification_report(candidate.qualification_report_id))
+        is not None
+    ]
+    snapshot.executors = [
+        spec.model_copy(deep=True) for spec in source.registry.all() if spec.id not in candidate_ids
+    ]
+    _run(source.close())
+
+    def isolated_router() -> Router:
+        store = ReceiptStore(":memory:")
+        for candidate in candidates:
+            store.save_route_candidate(candidate)
+        for report in reports:
+            store.save_qualification_report(report)
+        return Router(snapshot, store=store)
+
+    runner = BenchmarkRunner(isolated_router, database)
+    try:
+        report = _run(runner.run(BenchmarkSuite.model_validate(_read_data(suite, default={}))))
+        if output is not None:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(report.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        if compact:
+            _emit(report, compact=True)
+        else:
+            typer.echo(format_campaign_report(report))
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@campaign_app.command("prove")
+def campaign_prove(
+    reports: str | None = typer.Argument(None, help="BenchmarkCampaignReport list or @file"),
+    report_file: list[Path] = typer.Option(
+        [], "--report-file", help="Repeat for individual campaign report files."
+    ),
+    baseline_route: list[str] = typer.Option(..., "--baseline-route"),
+    hybrid_route: str = typer.Option(..., "--hybrid-route"),
+    output: Path | None = typer.Option(None, "--output", "-o"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Evaluate the locked 0.3 release thresholds without filling missing evidence."""
+
+    from .benchmarking import (
+        BenchmarkCampaignReport,
+        evaluate_release_proof,
+    )
+
+    try:
+        values = _read_data(reports, default=[])
+        if not isinstance(values, list):
+            raise typer.BadParameter("reports must be a list")
+        values.extend(_read_data(f"@{path}", default={}) for path in report_file)
+        if not values:
+            raise typer.BadParameter("at least one campaign report is required")
+        result = evaluate_release_proof(
+            [BenchmarkCampaignReport.model_validate(item) for item in values],
+            baseline_route_ids=baseline_route,
+            hybrid_route_id=hybrid_route,
+        )
+        if output is not None:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(result.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@campaign_app.command("revalue")
+def campaign_revalue(
+    report: str = typer.Argument(..., help="BenchmarkCampaignReport JSON/YAML or @file"),
+    snapshot: str = typer.Argument(..., help="RateCardSnapshot JSON/YAML or @file"),
+    output: Path | None = typer.Option(None, "--output", "-o"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Create a separate API-equivalent report under an immutable rate card."""
+
+    from .benchmarking import BenchmarkCampaignReport, revalue_campaign
+    from .models import RateCardSnapshot
+
+    try:
+        result = revalue_campaign(
+            BenchmarkCampaignReport.model_validate(_read_data(report, default={})),
+            RateCardSnapshot.model_validate(_read_data(snapshot, default={})),
+        )
+        if output is not None:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(result.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        _emit(result, compact=compact)
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
 

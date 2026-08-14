@@ -1,0 +1,23 @@
+workflow_id: github-mcp-hybrid-v2
+input:
+  readme_url: https://raw.githubusercontent.com/ptse8204/AEEP-router/main/README.md
+constraints:
+  max_side_effect: read
+  allow_network: true
+budget: {}
+steps:
+  - step_id: fetch
+    action:
+      capability: web.fetch@1
+      input: {url: "", raw: true, max_length: 20000}
+    bindings:
+      - {target_path: /url, source_path: /readme_url}
+  - step_id: parse
+    depends_on: [fetch]
+    action:
+      capability: markdown.parse-title@1
+      input: {text: ""}
+    bindings:
+      - {target_path: /text, source_step_id: fetch, source_path: ""}
+outputs:
+  - {name: title, step_id: parse, path: ""}

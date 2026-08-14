@@ -87,7 +87,6 @@ class PythonExecutor(BaseExecutor):
         rss_after = process.memory_info().rss / (1024 * 1024)
         incremental_memory = max(0.0, rss_after - rss_before)
         resources = ResourceVector(
-            monetary_usd=context.estimate.resources.monetary_usd,
             latency_ms=elapsed * 1000.0,
             cpu_ms=max(
                 0.0,

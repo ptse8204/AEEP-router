@@ -118,7 +118,9 @@ async def test_non_idempotent_failure_does_not_fallback(text_schema, stats_schem
         output_schema=stats_schema,
         side_effect=SideEffect.WRITE,
     )
-    custom = PolicyConfig(name="write", constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))
+    custom = PolicyConfig(
+        name="write", constraints=ActionConstraints(max_side_effect=SideEffect.WRITE)
+    )
     router = Router(manifest_with(broken, good, policies={"write": custom}))
     request = ActionRequest(
         capability="text.stats",
@@ -141,7 +143,9 @@ async def test_runtime_approval_is_separate_from_policy(text_schema, stats_schem
         output_schema=stats_schema,
         side_effect=SideEffect.WRITE,
     )
-    custom = PolicyConfig(name="write", constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))
+    custom = PolicyConfig(
+        name="write", constraints=ActionConstraints(max_side_effect=SideEffect.WRITE)
+    )
     router = Router(manifest_with(write, policies={"write": custom}))
     request = ActionRequest(
         capability="text.stats",
@@ -197,7 +201,9 @@ async def test_delegate_returns_plan_and_can_be_recorded():
         config={"instructions": "Open {input.url} and return its title."},
     )
     router = Router(manifest_with(delegate))
-    outcome = await router.execute(ActionRequest(capability="page.read", input={"url": "https://example.com"}))
+    outcome = await router.execute(
+        ActionRequest(capability="page.read", input={"url": "https://example.com"})
+    )
     assert outcome.status == ExecutionStatus.DELEGATED
     assert "example.com" in (outcome.delegated_instructions or "")
     receipt = router.record_external_outcome(
@@ -345,9 +351,7 @@ async def test_external_outcome_can_only_report_selected_delegate_once(text_sche
         with pytest.raises(ConfigurationError, match="not the selected route"):
             router.record_external_outcome({**report, "executor_id": "other"})
 
-        text_decision = router.route(
-            ActionRequest(capability="text.stats", input={"text": "x"})
-        )
+        text_decision = router.route(ActionRequest(capability="text.stats", input={"text": "x"}))
         with pytest.raises(ConfigurationError, match="only accepted for delegate"):
             router.record_external_outcome(
                 {

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import inspect
+import math
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 from typing import Any, Protocol
@@ -76,7 +77,11 @@ class RangeValidator:
 
     async def validate(self, context: ValidationContext) -> ValidationResult:
         actual = extract_path(context.output, self.path)
-        valid = isinstance(actual, (int, float)) and not isinstance(actual, bool)
+        valid = (
+            isinstance(actual, (int, float))
+            and not isinstance(actual, bool)
+            and math.isfinite(actual)
+        )
         if valid and self.minimum is not None:
             valid = actual >= self.minimum
         if valid and self.maximum is not None:
@@ -97,7 +102,9 @@ class StateTransitionValidator:
         before_path: str,
         after_path: str,
     ) -> None:
-        self.transitions = {str(key): {str(item) for item in values} for key, values in transitions.items()}
+        self.transitions = {
+            str(key): {str(item) for item in values} for key, values in transitions.items()
+        }
         self.before_path = before_path
         self.after_path = after_path
 
@@ -198,7 +205,17 @@ async def run_validators(
     context: ValidationContext,
     callbacks: Mapping[str, ValidatorCallback],
 ) -> list[ValidationResult]:
-    return [
-        await validator_from_spec(spec, callbacks).validate(context)
-        for spec in specs
-    ]
+    results: list[ValidationResult] = []
+    for spec in specs:
+        try:
+            results.append(await validator_from_spec(spec, callbacks).validate(context))
+        except Exception as exc:
+            results.append(
+                ValidationResult(
+                    kind=spec.kind,
+                    valid=False,
+                    quality_score=0.0,
+                    detail=f"validator failed: {type(exc).__name__}",
+                )
+            )
+    return results

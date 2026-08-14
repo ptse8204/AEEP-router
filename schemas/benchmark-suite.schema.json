@@ -1,0 +1,1334 @@
+{
+  "$defs": {
+    "ActionConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cost Usd"
+        },
+        "max_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Latency Ms"
+        },
+        "max_cpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cpu Ms"
+        },
+        "max_memory_mb_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Memory Mb Seconds"
+        },
+        "max_peak_memory_mb": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Peak Memory Mb"
+        },
+        "max_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Gpu Ms"
+        },
+        "max_network_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Network Bytes"
+        },
+        "max_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Context Tokens"
+        },
+        "min_success_probability": {
+          "default": 0.7,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Success Probability",
+          "type": "number"
+        },
+        "min_quality_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Quality Score",
+          "type": "number"
+        },
+        "max_risk_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Max Risk Score",
+          "type": "number"
+        },
+        "max_side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "allow_network": {
+          "default": true,
+          "title": "Allow Network",
+          "type": "boolean"
+        },
+        "require_local": {
+          "default": false,
+          "title": "Require Local",
+          "type": "boolean"
+        },
+        "allowed_executor_kinds": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ExecutorKind"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Kinds"
+        },
+        "allowed_executor_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Ids"
+        },
+        "denied_executor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Denied Executor Ids",
+          "type": "array"
+        },
+        "allowed_data_residency": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Data Residency"
+        }
+      },
+      "title": "ActionConstraints",
+      "type": "object"
+    },
+    "ActionContext": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sensitivity": {
+          "$ref": "#/$defs/DataSensitivity",
+          "default": "internal"
+        },
+        "state_locality": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Locality"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preferred_region": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preferred Region"
+        },
+        "compute": {
+          "$ref": "#/$defs/ComputeAvailability"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Labels",
+          "type": "object"
+        },
+        "traceparent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Traceparent"
+        },
+        "subscription_quotas": {
+          "additionalProperties": {
+            "$ref": "#/$defs/SubscriptionQuota"
+          },
+          "title": "Subscription Quotas",
+          "type": "object"
+        }
+      },
+      "title": "ActionContext",
+      "type": "object"
+    },
+    "ActionRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "capability": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Capability",
+          "type": "string"
+        },
+        "input": {
+          "additionalProperties": true,
+          "title": "Input",
+          "type": "object"
+        },
+        "policy": {
+          "default": "balanced",
+          "title": "Policy",
+          "type": "string"
+        },
+        "constraints": {
+          "$ref": "#/$defs/ActionConstraints"
+        },
+        "context": {
+          "$ref": "#/$defs/ActionContext"
+        },
+        "idempotency_key": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Idempotency Key"
+        }
+      },
+      "required": [
+        "capability"
+      ],
+      "title": "ActionRequest",
+      "type": "object"
+    },
+    "BenchmarkCase": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "split": {
+          "$ref": "#/$defs/BenchmarkSplit"
+        },
+        "action": {
+          "$ref": "#/$defs/ActionRequest"
+        },
+        "validators": {
+          "items": {
+            "$ref": "#/$defs/ValidationSpec"
+          },
+          "title": "Validators",
+          "type": "array"
+        }
+      },
+      "required": [
+        "case_id",
+        "split",
+        "action"
+      ],
+      "title": "BenchmarkCase",
+      "type": "object"
+    },
+    "BenchmarkCondition": {
+      "enum": [
+        "process-cold",
+        "router-warm"
+      ],
+      "title": "BenchmarkCondition",
+      "type": "string"
+    },
+    "BenchmarkRoute": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Route Id",
+          "type": "string"
+        },
+        "executor_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executor Id"
+        },
+        "workflow": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkflowRequest"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "access_channel": {
+          "$ref": "#/$defs/ModelAccessChannel",
+          "default": "unknown"
+        },
+        "actual_rate_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Rate Snapshot Id"
+        },
+        "counterfactual_rate_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Counterfactual Rate Snapshot Id"
+        },
+        "subscription_rate_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subscription Rate Snapshot Id"
+        },
+        "subscription_resource_pool": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subscription Resource Pool"
+        },
+        "subscription_unit": {
+          "default": "provider_unit",
+          "title": "Subscription Unit",
+          "type": "string"
+        },
+        "validation_output_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Validation Output Path"
+        }
+      },
+      "required": [
+        "route_id"
+      ],
+      "title": "BenchmarkRoute",
+      "type": "object"
+    },
+    "BenchmarkSplit": {
+      "enum": [
+        "qualification",
+        "training",
+        "holdout"
+      ],
+      "title": "BenchmarkSplit",
+      "type": "string"
+    },
+    "ComputeAvailability": {
+      "additionalProperties": false,
+      "description": "Resources available to the caller at routing time.\n\nThese values are optional because agents often know context-window or quota\nheadroom that the local process cannot detect.",
+      "properties": {
+        "available_memory_mb": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Memory Mb"
+        },
+        "available_cpu_fraction": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 1.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Cpu Fraction"
+        },
+        "available_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available Gpu Ms"
+        },
+        "context_tokens_remaining": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Tokens Remaining"
+        },
+        "monetary_budget_remaining_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Monetary Budget Remaining Usd"
+        },
+        "network_metered": {
+          "default": false,
+          "title": "Network Metered",
+          "type": "boolean"
+        }
+      },
+      "title": "ComputeAvailability",
+      "type": "object"
+    },
+    "DataSensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ],
+      "title": "DataSensitivity",
+      "type": "string"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "Locality": {
+      "enum": [
+        "in_process",
+        "local",
+        "lan",
+        "internet"
+      ],
+      "title": "Locality",
+      "type": "string"
+    },
+    "ModelAccessChannel": {
+      "enum": [
+        "api",
+        "subscription",
+        "purchased_credit",
+        "mixed",
+        "unknown"
+      ],
+      "title": "ModelAccessChannel",
+      "type": "string"
+    },
+    "QuotaSource": {
+      "enum": [
+        "user",
+        "host",
+        "official_cli",
+        "rate_limit",
+        "heuristic",
+        "observed"
+      ],
+      "title": "QuotaSource",
+      "type": "string"
+    },
+    "QuotaState": {
+      "description": "Private opportunity-cost signal for a non-transferable subscription.",
+      "enum": [
+        "abundant",
+        "normal",
+        "tight",
+        "critical",
+        "exhausted",
+        "unknown"
+      ],
+      "title": "QuotaState",
+      "type": "string"
+    },
+    "RateCardRate": {
+      "additionalProperties": false,
+      "properties": {
+        "rate_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Rate Id",
+          "type": "string"
+        },
+        "rate_type": {
+          "$ref": "#/$defs/RateType"
+        },
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Meter",
+          "type": "string"
+        },
+        "input_unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Input Unit",
+          "type": "string"
+        },
+        "output_unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Output Unit",
+          "type": "string"
+        },
+        "unit_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Unit Quantity"
+        },
+        "rate_amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Rate Amount"
+        },
+        "service_tier": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Service Tier"
+        },
+        "region": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Region"
+        },
+        "tool_name": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Name"
+        },
+        "long_context_min": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Long Context Min"
+        },
+        "long_context_max": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Long Context Max"
+        },
+        "multiplier": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Multiplier"
+        },
+        "rule": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule"
+        }
+      },
+      "required": [
+        "rate_id",
+        "rate_type",
+        "meter",
+        "input_unit",
+        "output_unit",
+        "unit_quantity",
+        "rate_amount"
+      ],
+      "title": "RateCardRate",
+      "type": "object"
+    },
+    "RateCardSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1",
+          "default": "1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "anyOf": [
+            {
+              "pattern": "^rate_[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Snapshot Id"
+        },
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "product": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Product",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "effective_until": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Until"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "source_published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Published At"
+        },
+        "source_content_sha256": {
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "title": "Source Content Sha256",
+          "type": "string"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Z]{3}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "rates": {
+          "items": {
+            "$ref": "#/$defs/RateCardRate"
+          },
+          "minItems": 1,
+          "title": "Rates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider",
+        "product",
+        "model",
+        "effective_from",
+        "source_uri",
+        "source_content_sha256",
+        "rates"
+      ],
+      "title": "RateCardSnapshot",
+      "type": "object"
+    },
+    "RateType": {
+      "enum": [
+        "input_token",
+        "cached_input_token",
+        "output_token",
+        "cache_write_token",
+        "tool_call",
+        "subscription_unit",
+        "other"
+      ],
+      "title": "RateType",
+      "type": "string"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    },
+    "SubscriptionQuota": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/QuotaState",
+          "default": "unknown"
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reset At"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/QuotaSource",
+          "default": "user"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "allowance_units": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowance Units"
+        },
+        "remaining_units": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remaining Units"
+        }
+      },
+      "title": "SubscriptionQuota",
+      "type": "object"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationSpec",
+      "type": "object"
+    },
+    "WorkflowBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cash Usd"
+        }
+      },
+      "title": "WorkflowBudget",
+      "type": "object"
+    },
+    "WorkflowInputBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "target_path": {
+          "title": "Target Path",
+          "type": "string"
+        },
+        "source_step_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Step Id"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_path",
+        "source_path"
+      ],
+      "title": "WorkflowInputBinding",
+      "type": "object"
+    },
+    "WorkflowOutputProjection": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "step_id",
+        "path"
+      ],
+      "title": "WorkflowOutputProjection",
+      "type": "object"
+    },
+    "WorkflowRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "workflow_id": {
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Workflow Id",
+          "type": "string"
+        },
+        "input": {
+          "additionalProperties": true,
+          "title": "Input",
+          "type": "object"
+        },
+        "constraints": {
+          "$ref": "#/$defs/ActionConstraints"
+        },
+        "budget": {
+          "$ref": "#/$defs/WorkflowBudget"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/WorkflowStep"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Steps",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/WorkflowOutputProjection"
+          },
+          "title": "Outputs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "workflow_id",
+        "steps"
+      ],
+      "title": "WorkflowRequest",
+      "type": "object"
+    },
+    "WorkflowStep": {
+      "additionalProperties": false,
+      "properties": {
+        "step_id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Step Id",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/$defs/ActionRequest"
+        },
+        "depends_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/WorkflowInputBinding"
+          },
+          "title": "Bindings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "step_id",
+        "action"
+      ],
+      "title": "WorkflowStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.3",
+      "default": "0.3",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "suite_id": {
+      "title": "Suite Id",
+      "type": "string"
+    },
+    "domain": {
+      "default": "unspecified",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Domain",
+      "type": "string"
+    },
+    "deterministic_tools_available": {
+      "default": false,
+      "title": "Deterministic Tools Available",
+      "type": "boolean"
+    },
+    "seed": {
+      "default": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "repetitions": {
+      "default": 30,
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "Repetitions",
+      "type": "integer"
+    },
+    "routes": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkRoute"
+      },
+      "minItems": 1,
+      "title": "Routes",
+      "type": "array"
+    },
+    "conditions": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkCondition"
+      },
+      "title": "Conditions",
+      "type": "array"
+    },
+    "pricing_snapshots": {
+      "items": {
+        "$ref": "#/$defs/RateCardSnapshot"
+      },
+      "title": "Pricing Snapshots",
+      "type": "array"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkCase"
+      },
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    },
+    "baseline_route_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baseline Route Id"
+    },
+    "acknowledge_cash_risk": {
+      "default": false,
+      "title": "Acknowledge Cash Risk",
+      "type": "boolean"
+    },
+    "max_total_cash_usd": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Total Cash Usd"
+    },
+    "allow_zero_subscription_weight": {
+      "default": false,
+      "title": "Allow Zero Subscription Weight",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "routes",
+    "cases"
+  ],
+  "title": "BenchmarkSuite",
+  "type": "object"
+}

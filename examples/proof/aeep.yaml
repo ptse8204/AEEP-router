@@ -1,0 +1,335 @@
+version: "0.3"
+database: .aeep/proof.db
+default_policy: balanced
+
+resources:
+  - id: openai:chatgpt:agentic
+    provider: openai
+    product: chatgpt-codex
+    unit: codex_credit
+    access: {mode: cli}
+    quota: {state: unknown, confidence: 0, source: host}
+    capabilities: {reasoning: true, coding: true}
+
+  - id: fixture:subscription
+    provider: fixture
+    product: hermetic-agent
+    unit: fixture_credit
+    access: {mode: cli}
+    quota:
+      state: normal
+      confidence: 1
+      source: user
+      allowance_units: 10000
+      remaining_units: 10000
+    capabilities: {reasoning: true, coding: true}
+
+executors:
+  - id: live.codex-text-stats
+    provider_id: openai
+    resource_pool: openai:chatgpt:agentic
+    capability: text.stats@1
+    kind: command
+    description: Subscription-backed Codex baseline with terminal JSONL usage capture.
+    input_schema:
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 5000, input_tokens: 20000, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.95
+      risk_score: 0.01
+      confidence: 0.5
+    side_effect: none
+    locality: local
+    config:
+      argv:
+        - codex
+        - exec
+        - --ephemeral
+        - --json
+        - --model
+        - gpt-5.6-sol
+        - --sandbox
+        - read-only
+        - --skip-git-repo-check
+        - "Do not use tools. Count only the exact text between the markers, excluding the markers. Return only compact JSON with integer keys characters, words, lines. <text>{input.text}</text>"
+      output:
+        type: jsonl
+        match: {type: item.completed, item.type: agent_message}
+        path: item.text
+        decode_json: true
+      usage_capture:
+        type: codex_jsonl
+        provider: openai
+        model: gpt-5.6-sol
+        access_channel: subscription
+      timeout_seconds: 120
+      max_output_bytes: 2000000
+
+  - id: live.codex-github-default-branch
+    provider_id: openai
+    resource_pool: openai:chatgpt:agentic
+    capability: github.repository.default-branch@1
+    kind: command
+    description: Subscription-backed Codex Git baseline with terminal JSONL usage capture.
+    input_schema:
+      type: object
+      properties:
+        repository: {type: string}
+        owner: {type: string}
+        name: {type: string}
+      required: [repository, owner, name]
+      additionalProperties: false
+    output_schema: {type: string, minLength: 1}
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 10000, input_tokens: 25000, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.95
+      risk_score: 0.01
+      confidence: 0.5
+    side_effect: read
+    locality: local
+    config:
+      argv:
+        - codex
+        - exec
+        - --ephemeral
+        - --json
+        - --model
+        - gpt-5.6-sol
+        - --sandbox
+        - read-only
+        - --cd
+        - "{input.repository}"
+        - "Inspect only the local Git repository. Determine its default remote branch. Return only a JSON string containing the branch name, with no explanation."
+      output:
+        type: jsonl
+        match: {type: item.completed, item.type: agent_message}
+        path: item.text
+        decode_json: true
+      usage_capture:
+        type: codex_jsonl
+        provider: openai
+        model: gpt-5.6-sol
+        access_channel: subscription
+      timeout_seconds: 120
+      max_output_bytes: 2000000
+
+  - id: fixture.codex-text-stats
+    provider_id: fixture
+    resource_pool: fixture:subscription
+    capability: text.stats@1
+    kind: command
+    description: Hermetic JSONL full-agent fixture; not live proof evidence.
+    input_schema: &text_input
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema: &stats_output
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources:
+        monetary_usd: 0
+        latency_ms: 70
+        context_tokens: 1320
+        subscription_units: 1.32
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.01
+      confidence: 1
+    side_effect: none
+    locality: local
+    config:
+      argv: [python3, -m, aeep.examples.proof_cli, text-stats, "{input.text}"]
+      output: &codex_output
+        type: jsonl
+        match: {type: item.completed, item.type: agent_message}
+        path: item.text
+        decode_json: true
+      usage_capture:
+        type: codex_jsonl
+        provider: fixture
+        model: codex-fixture
+        access_channel: subscription
+      timeout_seconds: 10
+
+  - id: hybrid.local-text-stats
+    capability: text.stats@1
+    kind: python
+    description: Deterministic local implementation selected by AEEP.
+    input_schema: *text_input
+    output_schema: *stats_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 2, cpu_ms: 1, peak_memory_mb: 16}
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.001
+      confidence: 1
+    side_effect: none
+    locality: in_process
+    config: {callable: aeep.examples.tools:text_stats}
+
+  - id: fixture.codex-github-default-branch
+    provider_id: fixture
+    resource_pool: fixture:subscription
+    capability: github.repository.default-branch@1
+    kind: command
+    description: Hermetic JSONL GitHub full-agent fixture; not live proof evidence.
+    input_schema: &github_input
+      type: object
+      properties:
+        repository: {type: string}
+        owner: {type: string}
+        name: {type: string}
+      required: [repository, owner, name]
+      additionalProperties: false
+    output_schema: &branch_output {type: string, minLength: 1}
+    estimate:
+      resources:
+        monetary_usd: 0
+        latency_ms: 70
+        context_tokens: 1680
+        subscription_units: 1.68
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.01
+      confidence: 1
+    side_effect: read
+    locality: local
+    config:
+      argv: [python3, -m, aeep.examples.proof_cli, github-default-branch]
+      output: *codex_output
+      usage_capture:
+        type: codex_jsonl
+        provider: fixture
+        model: codex-fixture
+        access_channel: subscription
+      timeout_seconds: 10
+
+  - id: hybrid.local-git-default-branch
+    capability: github.repository.default-branch@1
+    kind: command
+    description: Read the default remote branch from the local checkout.
+    input_schema: *github_input
+    output_schema: *branch_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 15, cpu_ms: 5, peak_memory_mb: 12}
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.001
+      confidence: 1
+    side_effect: read
+    locality: local
+    config:
+      argv:
+        [git, -C, "{input.repository}", symbolic-ref, --short, refs/remotes/origin/HEAD]
+      output:
+        type: regex
+        pattern: "(?:.*/)?([^/\\n]+)$"
+        group: 1
+      timeout_seconds: 5
+
+  - id: github.rest-default-branch
+    capability: github.repository.default-branch@1
+    kind: http
+    description: Read the public GitHub repository metadata API.
+    input_schema: *github_input
+    output_schema: *branch_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 300, network_bytes: 5000}
+      success_probability: 0.99
+      quality_score: 1
+      risk_score: 0.02
+      confidence: 0.9
+    side_effect: read
+    locality: internet
+    requires_network: true
+    data_residency: [US]
+    config:
+      url: "https://api.github.com/repos/{input.owner}/{input.name}"
+      method: GET
+      allowed_hosts: [api.github.com]
+      output: {type: json, path: default_branch}
+
+  - id: local.parse-github-default-branch
+    capability: github.parse-default-branch@1
+    kind: python
+    description: Parse GitHub JSON from Docker fetch's bounded text envelope.
+    input_schema:
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema: *branch_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 2, cpu_ms: 1}
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.001
+      confidence: 1
+    side_effect: none
+    locality: in_process
+    config: {callable: aeep.examples.tools:github_default_branch_from_fetch}
+
+  - id: github.raw-readme-title
+    capability: github.repository.readme-title@1
+    kind: http
+    description: Read the public repository README title from GitHub's raw content host.
+    input_schema:
+      type: object
+      properties: {}
+      additionalProperties: false
+    output_schema: *branch_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 250, network_bytes: 5000}
+      success_probability: 0.99
+      quality_score: 1
+      risk_score: 0.02
+      confidence: 0.9
+    side_effect: read
+    locality: internet
+    requires_network: true
+    data_residency: [US]
+    config:
+      url: https://raw.githubusercontent.com/ptse8204/AEEP-router/main/README.md
+      method: GET
+      allowed_hosts: [raw.githubusercontent.com]
+      output: {type: regex, pattern: "^#\\s+(.+?)\\s*$", group: 1}
+
+  - id: local.parse-markdown-title
+    capability: markdown.parse-title@1
+    kind: python
+    description: Extract the first Markdown H1 from Docker fetch's bounded response.
+    input_schema:
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema: *branch_output
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 2, cpu_ms: 1}
+      success_probability: 0.999
+      quality_score: 1
+      risk_score: 0.001
+      confidence: 1
+    side_effect: none
+    locality: in_process
+    config: {callable: aeep.examples.tools:markdown_title_from_fetch}

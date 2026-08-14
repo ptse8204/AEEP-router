@@ -1,0 +1,46 @@
+schema_version: "0.3"
+suite_id: aeep-03-live-codex-github-v1
+domain: github
+deterministic_tools_available: true
+seed: 30312
+repetitions: 20
+baseline_route_id: full-agent
+routes:
+  - route_id: full-agent
+    executor_id: live.codex-github-default-branch
+    provider: openai
+    model: gpt-5.6-sol
+    access_channel: subscription
+    counterfactual_rate_snapshot_id: rate_2f06095335dacbc99820add2e4924d3c3e40a0f3642c914d26c5b71771c9a43c
+  - route_id: hybrid
+    executor_id: hybrid.local-git-default-branch
+conditions: [process-cold, router-warm]
+pricing_snapshots:
+  - schema_version: "1"
+    snapshot_id: rate_2f06095335dacbc99820add2e4924d3c3e40a0f3642c914d26c5b71771c9a43c
+    provider: openai
+    product: api-standard
+    model: gpt-5.6-sol
+    effective_from: 2026-08-14T04:21:37Z
+    retrieved_at: 2026-08-14T04:21:37Z
+    source_uri: https://developers.openai.com/api/docs/models/gpt-5.6-sol.md
+    source_content_sha256: 124cce0f52e97d87bca8d5c383dc9912bdfbcd8b5c3b54a7f209dc8383f9a4ad
+    currency: USD
+    rates:
+      - {rate_id: standard-short-input, rate_type: input_token, meter: input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 5, long_context_max: 272000}
+      - {rate_id: standard-short-cached-input, rate_type: cached_input_token, meter: cached_input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 0.5, long_context_max: 272000}
+      - {rate_id: standard-short-cache-write, rate_type: cache_write_token, meter: cache_write_input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 6.25, long_context_max: 272000}
+      - {rate_id: standard-short-output, rate_type: output_token, meter: output_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 30, long_context_max: 272000}
+      - {rate_id: standard-long-input, rate_type: input_token, meter: input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 10, long_context_min: 272001}
+      - {rate_id: standard-long-cached-input, rate_type: cached_input_token, meter: cached_input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 1, long_context_min: 272001}
+      - {rate_id: standard-long-cache-write, rate_type: cache_write_token, meter: cache_write_input_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 12.5, long_context_min: 272001}
+      - {rate_id: standard-long-output, rate_type: output_token, meter: output_tokens, input_unit: token, output_unit: USD, unit_quantity: 1000000, rate_amount: 45, long_context_min: 272001}
+cases:
+  - case_id: github-holdout
+    split: holdout
+    action:
+      capability: github.repository.default-branch@1
+      input: {repository: ., owner: ptse8204, name: AEEP-router}
+    validators:
+      - kind: exact_match
+        config: {expected: main}

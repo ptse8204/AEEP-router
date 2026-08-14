@@ -41,7 +41,9 @@ async def test_command_executor_argv_no_shell(text_schema, stats_schema):
         },
     )
     router = Router(manifest_with(executor))
-    outcome = await router.execute(ActionRequest(capability="text.stats", input={"text": "one two"}))
+    outcome = await router.execute(
+        ActionRequest(capability="text.stats", input={"text": "one two"})
+    )
     assert outcome.ok
     assert outcome.output["words"] == 2
     assert outcome.receipts[0].actual_resources.latency_ms > 0
@@ -66,12 +68,46 @@ async def test_command_shell_rejected(text_schema):
     await router.close()
 
 
+@pytest.mark.asyncio
+async def test_command_input_is_bounded_before_process_launch(text_schema):
+    executor = ExecutorSpec(
+        id="bounded",
+        capability="text.stats",
+        kind=ExecutorKind.COMMAND,
+        description="bounded",
+        input_schema=text_schema,
+        side_effect=SideEffect.NONE,
+        config={
+            "argv": [sys.executable, "-c", "raise SystemExit(99)"],
+            "stdin_json": True,
+            "max_stdin_bytes": 2,
+        },
+    )
+    router = Router(manifest_with(executor))
+    outcome = await router.execute(
+        ActionRequest(capability="text.stats", input={"text": "too large"})
+    )
+    assert not outcome.ok
+    assert outcome.receipts[0].error_message == "command input exceeds configured max_stdin_bytes"
+    await router.close()
+
+
 class _Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        body = b"# AEEP Agent Router\n\nBody\n"
+        self.send_response(200)
+        self.send_header("content-type", "text/plain")
+        self.send_header("content-length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_POST(self):
         length = int(self.headers.get("content-length", "0"))
         data = json.loads(self.rfile.read(length) or b"{}")
         text = data["text"]
-        body = json.dumps({"result": {"characters": len(text), "words": len(text.split()), "lines": 1}}).encode()
+        body = json.dumps(
+            {"result": {"characters": len(text), "words": len(text.split()), "lines": 1}}
+        ).encode()
         self.send_response(200)
         self.send_header("content-type", "application/json")
         self.send_header("content-length", str(len(body)))
@@ -109,10 +145,44 @@ async def test_http_executor_local_allowlisted(text_schema, stats_schema):
             },
         )
         router = Router(manifest_with(executor))
-        outcome = await router.execute(ActionRequest(capability="text.stats", input={"text": "a b c"}))
+        outcome = await router.execute(
+            ActionRequest(capability="text.stats", input={"text": "a b c"})
+        )
         assert outcome.ok
         assert outcome.output["words"] == 3
         assert outcome.receipts[0].actual_resources.network_bytes > 0
+        await router.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.asyncio
+async def test_http_executor_reuses_bounded_output_parsers():
+    server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        executor = ExecutorSpec(
+            id="http-regex",
+            capability="markdown.title",
+            kind=ExecutorKind.HTTP,
+            description="http regex",
+            output_schema={"type": "string"},
+            side_effect=SideEffect.READ,
+            locality=Locality.LAN,
+            requires_network=True,
+            config={
+                "url": f"http://127.0.0.1:{server.server_port}/README.md",
+                "allowed_hosts": ["127.0.0.1"],
+                "allow_private_networks": True,
+                "output": {"type": "regex", "pattern": r"^#\s+(.+?)\s*$", "group": 1},
+            },
+        )
+        router = Router(manifest_with(executor))
+        outcome = await router.execute(ActionRequest(capability="markdown.title"))
+        assert outcome.ok
+        assert outcome.output == "AEEP Agent Router"
         await router.close()
     finally:
         server.shutdown()
