@@ -14,7 +14,7 @@ from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
 from statistics import median
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
 from pydantic import Field, model_validator
 
@@ -31,6 +31,9 @@ from .models import (
     CashAccounting,
     CashEstimate,
     CounterfactualCashCost,
+    CurrencyAmount,
+    EconomicEvidenceLevel,
+    EconomicStrictModel,
     EstimateSource,
     EvidenceSource,
     EvidenceStatus,
@@ -40,6 +43,7 @@ from .models import (
     Locality,
     MeasurementEvidence,
     ModelAccessChannel,
+    NonNegativeDecimal,
     RateCardSnapshot,
     RateType,
     ResourceAccounting,
@@ -49,6 +53,7 @@ from .models import (
     StrictModel,
     SubscriptionUsage,
     TrustLevel,
+    UtcDateTime,
     ValidationSpec,
     new_id,
     utc_now,
@@ -270,6 +275,751 @@ class ReleaseGate(StrictModel):
 class ReleaseProofReport(StrictModel):
     passed: bool
     gates: list[ReleaseGate]
+
+
+class EconomicBenchmarkRouteType(StrEnum):
+    """Transport or funding shape measured by an AEEP 0.4 proof trial."""
+
+    LOCAL_PYTHON = "local-python"
+    LOCAL_CLI = "local-cli"
+    DIRECT_HTTP = "direct-http"
+    LOCAL_MCP = "local-mcp"
+    USAGE_PRICED_PROVIDER = "usage-priced-provider"
+    SUBSCRIPTION_BASELINE = "subscription-baseline"
+    HYBRID = "aeep-hybrid"
+
+
+class EconomicBenchmarkTrial(EconomicStrictModel):
+    """Sanitized measured economics for one existing benchmark trial."""
+
+    schema_version: Literal["0.4"] = "0.4"
+    trial_id: str = Field(min_length=1, max_length=300)
+    case_id: str = Field(min_length=1, max_length=200)
+    route_id: str = Field(min_length=1, max_length=200)
+    route_type: EconomicBenchmarkRouteType
+    condition: BenchmarkCondition
+    split: BenchmarkSplit
+    repetition: int = Field(ge=0)
+    task_valid: bool
+    selected_by_aeep: bool = False
+    prepared_id: str | None = Field(default=None, max_length=200)
+    quote_id: str | None = Field(default=None, max_length=200)
+    settlement_id: str | None = Field(default=None, max_length=200)
+    charge_id: str | None = Field(default=None, max_length=200)
+    expected_cash: CurrencyAmount | None = None
+    maximum_cash: CurrencyAmount | None = None
+    reserved_cash: CurrencyAmount | None = None
+    captured_cash: CurrencyAmount | None = None
+    released_cash: CurrencyAmount | None = None
+    cash_evidence_level: EconomicEvidenceLevel = EconomicEvidenceLevel.UNKNOWN
+    preparation_latency_ms: NonNegativeDecimal
+    quote_latency_ms: NonNegativeDecimal
+    execution_latency_ms: NonNegativeDecimal
+    settlement_latency_ms: NonNegativeDecimal
+    total_wall_time_ms: NonNegativeDecimal
+    input_tokens: int = Field(default=0, ge=0)
+    output_tokens: int = Field(default=0, ge=0)
+    cached_tokens: int = Field(default=0, ge=0)
+    tool_schema_tokens: int = Field(default=0, ge=0)
+    tool_result_tokens: int = Field(default=0, ge=0)
+    model_usage_complete: bool = False
+    local_resources_complete: bool = False
+    synthetic_usage: bool = False
+    cpu_ms: NonNegativeDecimal = Decimal(0)
+    peak_memory_mb: NonNegativeDecimal = Decimal(0)
+    network_bytes: int = Field(default=0, ge=0)
+    retry_count: int = Field(default=0, ge=0)
+    fallback_count: int = Field(default=0, ge=0)
+    quote_failure_codes: tuple[str, ...] = ()
+    settlement_failure_code: str | None = Field(default=None, max_length=100)
+    indeterminate: bool = False
+
+    @model_validator(mode="after")
+    def valid_economic_chain(self) -> EconomicBenchmarkTrial:
+        amounts = [
+            amount
+            for amount in (
+                self.expected_cash,
+                self.maximum_cash,
+                self.reserved_cash,
+                self.captured_cash,
+                self.released_cash,
+            )
+            if amount is not None
+        ]
+        if len({amount.currency for amount in amounts}) > 1:
+            raise ValueError("benchmark economic amounts must use one currency")
+        if (
+            self.expected_cash is not None
+            and self.maximum_cash is not None
+            and self.expected_cash.amount > self.maximum_cash.amount
+        ):
+            raise ValueError("benchmark expected cash cannot exceed maximum cash")
+        if (
+            self.reserved_cash is not None
+            and self.maximum_cash is not None
+            and self.reserved_cash.amount > self.maximum_cash.amount
+        ):
+            raise ValueError("benchmark reservation cannot exceed the signed maximum")
+        if (
+            any(
+                amount is not None
+                for amount in (self.reserved_cash, self.captured_cash, self.released_cash)
+            )
+            and self.maximum_cash is None
+        ):
+            raise ValueError("benchmark settlement evidence requires a signed maximum")
+        if self.captured_cash is not None:
+            if self.reserved_cash is None:
+                raise ValueError("benchmark captured cash requires a reservation")
+            if (
+                self.maximum_cash is not None
+                and self.captured_cash.amount > self.maximum_cash.amount
+            ):
+                raise ValueError("benchmark captured cash cannot exceed the signed maximum")
+            if self.captured_cash.amount > self.reserved_cash.amount:
+                raise ValueError("benchmark captured cash cannot exceed its reservation")
+        if self.released_cash is not None and self.reserved_cash is None:
+            raise ValueError("benchmark released cash requires a reservation")
+        if self.captured_cash is not None and self.released_cash is not None:
+            assert self.reserved_cash is not None
+            accounted = self.captured_cash.amount + self.released_cash.amount
+            if accounted > self.reserved_cash.amount:
+                raise ValueError("benchmark capture plus release exceeds its reservation")
+            if (
+                self.settlement_id is not None
+                and not self.indeterminate
+                and accounted != self.reserved_cash.amount
+            ):
+                raise ValueError("completed benchmark settlement must release its remainder")
+        if self.captured_cash is not None:
+            if self.settlement_id is None:
+                raise ValueError("captured benchmark cash requires a settlement receipt")
+            if not self.cash_evidence_level.is_payment_evidence:
+                raise ValueError("captured benchmark cash requires settlement evidence")
+        if self.cash_evidence_level is EconomicEvidenceLevel.UNKNOWN and amounts:
+            raise ValueError("unknown benchmark cash cannot carry an amount")
+        if self.indeterminate and self.settlement_failure_code is None:
+            raise ValueError("indeterminate benchmark trials require a settlement failure code")
+        measured = (
+            self.preparation_latency_ms
+            + self.quote_latency_ms
+            + self.execution_latency_ms
+            + self.settlement_latency_ms
+        )
+        if self.total_wall_time_ms < measured:
+            raise ValueError("benchmark total time cannot be shorter than its measured stages")
+        return self
+
+
+class EconomicWorkflowProofTrial(EconomicStrictModel):
+    """Measured proof for one caller-authored prepared economic workflow.
+
+    Workflow trials are kept outside the single-action route oracle because a
+    multi-step DAG is not an interchangeable route for one bounded action.
+    """
+
+    schema_version: Literal["0.4"] = "0.4"
+    workflow_id: str = Field(min_length=1, max_length=200)
+    condition: BenchmarkCondition
+    split: BenchmarkSplit
+    repetition: int = Field(ge=0)
+    task_valid: bool
+    dependency_binding_verified: bool
+    step_count: int = Field(ge=2, le=64)
+    prepared_step_count: int = Field(ge=0, le=64)
+    quoted_step_count: int = Field(ge=0, le=64)
+    settled_step_count: int = Field(ge=0, le=64)
+    dependency_input_bytes: int = Field(ge=0)
+    expected_cash: CurrencyAmount
+    maximum_cash: CurrencyAmount
+    reserved_cash: CurrencyAmount
+    captured_cash: CurrencyAmount
+    released_cash: CurrencyAmount
+    cash_evidence_level: EconomicEvidenceLevel
+    preparation_latency_ms: NonNegativeDecimal
+    quote_latency_ms: NonNegativeDecimal
+    execution_latency_ms: NonNegativeDecimal
+    settlement_latency_ms: NonNegativeDecimal
+    total_wall_time_ms: NonNegativeDecimal
+
+    @model_validator(mode="after")
+    def valid_workflow_evidence(self) -> EconomicWorkflowProofTrial:
+        if self.prepared_step_count != self.step_count:
+            raise ValueError("workflow proof must prepare every executed step")
+        if self.quoted_step_count > self.prepared_step_count:
+            raise ValueError("workflow proof cannot quote more steps than it prepares")
+        if self.settled_step_count > self.quoted_step_count:
+            raise ValueError("workflow proof cannot settle more steps than it quotes")
+        amounts = (
+            self.expected_cash,
+            self.maximum_cash,
+            self.reserved_cash,
+            self.captured_cash,
+            self.released_cash,
+        )
+        if len({amount.currency for amount in amounts}) != 1:
+            raise ValueError("workflow proof amounts must use one currency")
+        if self.expected_cash.amount > self.maximum_cash.amount:
+            raise ValueError("workflow expected cash cannot exceed its maximum")
+        if self.reserved_cash.amount > self.maximum_cash.amount:
+            raise ValueError("workflow reservation cannot exceed its maximum")
+        if self.captured_cash.amount > self.reserved_cash.amount:
+            raise ValueError("workflow capture cannot exceed its reservation")
+        if self.captured_cash.amount + self.released_cash.amount != self.reserved_cash.amount:
+            raise ValueError("workflow settlement must release the reservation remainder")
+        if self.settled_step_count and not self.cash_evidence_level.is_payment_evidence:
+            raise ValueError("settled workflow proof requires payment evidence")
+        measured = (
+            self.preparation_latency_ms
+            + self.quote_latency_ms
+            + self.execution_latency_ms
+            + self.settlement_latency_ms
+        )
+        if self.total_wall_time_ms < measured:
+            raise ValueError("workflow total time cannot be shorter than its measured stages")
+        return self
+
+
+class EconomicBenchmarkOracle(EconomicStrictModel):
+    """Cheapest task-valid route with authoritative actual-cash evidence."""
+
+    case_id: str
+    condition: BenchmarkCondition
+    repetition: int = Field(ge=0)
+    selected_route_id: str | None = None
+    oracle_route_id: str | None = None
+    selected_captured_cash: CurrencyAmount | None = None
+    oracle_captured_cash: CurrencyAmount | None = None
+    distance_from_oracle_percent: NonNegativeDecimal | None = None
+    selected_within_10_percent: bool | None = None
+    eligible_route_ids: tuple[str, ...] = ()
+
+
+class EconomicProofCampaignReport(EconomicStrictModel):
+    """AEEP 0.4 proof report that leaves the frozen 0.3 campaign schema intact."""
+
+    schema_version: Literal["0.4"] = "0.4"
+    campaign_id: str = Field(min_length=1, max_length=200)
+    domain: str = Field(min_length=1, max_length=200)
+    settlement_currency: str = Field(pattern=r"^[A-Z]{3}$")
+    repetitions: int = Field(ge=1)
+    generated_at: UtcDateTime
+    trials: tuple[EconomicBenchmarkTrial, ...]
+    workflow_trials: tuple[EconomicWorkflowProofTrial, ...] = ()
+    hybrid_training_observations: int = Field(default=0, ge=0)
+    oracles: tuple[EconomicBenchmarkOracle, ...] = ()
+    gates: tuple[ReleaseGate, ...] = ()
+
+    @model_validator(mode="after")
+    def valid_report(self) -> EconomicProofCampaignReport:
+        if self.generated_at.tzinfo is None or self.generated_at.utcoffset() is None:
+            raise ValueError("economic proof generated_at must be timezone-aware")
+        trial_ids = [trial.trial_id for trial in self.trials]
+        if len(trial_ids) != len(set(trial_ids)):
+            raise ValueError("economic proof trial IDs must be unique")
+        for trial in self.trials:
+            for amount in (
+                trial.expected_cash,
+                trial.maximum_cash,
+                trial.reserved_cash,
+                trial.captured_cash,
+                trial.released_cash,
+            ):
+                if amount is not None and amount.currency != self.settlement_currency:
+                    raise ValueError("economic proof amount uses another settlement currency")
+        workflow_ids = [workflow_trial.workflow_id for workflow_trial in self.workflow_trials]
+        if len(workflow_ids) != len(set(workflow_ids)):
+            raise ValueError("economic workflow proof IDs must be unique")
+        for workflow_trial in self.workflow_trials:
+            for amount in (
+                workflow_trial.expected_cash,
+                workflow_trial.maximum_cash,
+                workflow_trial.reserved_cash,
+                workflow_trial.captured_cash,
+                workflow_trial.released_cash,
+            ):
+                if amount.currency != self.settlement_currency:
+                    raise ValueError("economic workflow proof uses another settlement currency")
+        return self
+
+
+def economic_settlement_oracles(
+    trials: Iterable[EconomicBenchmarkTrial],
+) -> tuple[EconomicBenchmarkOracle, ...]:
+    """Compare AEEP with settled paid or authoritatively confirmed-free routes."""
+
+    groups: dict[
+        tuple[str, BenchmarkCondition, int], list[EconomicBenchmarkTrial]
+    ] = {}
+    for trial in trials:
+        if trial.split is not BenchmarkSplit.HOLDOUT:
+            continue
+        groups.setdefault((trial.case_id, trial.condition, trial.repetition), []).append(trial)
+    oracles: list[EconomicBenchmarkOracle] = []
+    for (case_id, condition, repetition), items in sorted(groups.items()):
+        selected_items = [item for item in items if item.selected_by_aeep]
+        if len(selected_items) > 1:
+            raise ConfigurationError("economic proof group has multiple AEEP selections")
+        selected = selected_items[0] if selected_items else None
+        eligible = [item for item in items if _authoritative_actual_cash(item) is not None]
+        oracle = (
+            min(
+                eligible,
+                key=lambda item: (
+                    cast(CurrencyAmount, _authoritative_actual_cash(item)).amount,
+                    item.route_id,
+                ),
+            )
+            if eligible
+            else None
+        )
+        selected_amount = (
+            _authoritative_actual_cash(selected)
+            if selected is not None
+            else None
+        )
+        oracle_amount = _authoritative_actual_cash(oracle) if oracle is not None else None
+        distance: Decimal | None = None
+        within: bool | None = None
+        if selected_amount is not None and oracle_amount is not None:
+            if selected_amount.currency != oracle_amount.currency:
+                raise ConfigurationError("economic oracle routes use different currencies")
+            if oracle_amount.amount == 0:
+                within = selected_amount.amount == 0
+                distance = Decimal(0) if within else None
+            else:
+                distance = (
+                    (selected_amount.amount - oracle_amount.amount)
+                    / oracle_amount.amount
+                    * Decimal(100)
+                )
+                within = distance <= Decimal(10)
+        oracles.append(
+            EconomicBenchmarkOracle(
+                case_id=case_id,
+                condition=condition,
+                repetition=repetition,
+                selected_route_id=selected.route_id if selected is not None else None,
+                oracle_route_id=oracle.route_id if oracle is not None else None,
+                selected_captured_cash=selected_amount,
+                oracle_captured_cash=oracle_amount,
+                distance_from_oracle_percent=distance,
+                selected_within_10_percent=within,
+                eligible_route_ids=tuple(sorted(item.route_id for item in eligible)),
+            )
+        )
+    return tuple(oracles)
+
+
+def _authoritative_actual_cash(
+    trial: EconomicBenchmarkTrial,
+) -> CurrencyAmount | None:
+    if not trial.task_valid or trial.indeterminate:
+        return None
+    if (
+        trial.settlement_id is not None
+        and trial.captured_cash is not None
+        and trial.cash_evidence_level.is_payment_evidence
+    ):
+        return trial.captured_cash
+    if (
+        trial.cash_evidence_level is EconomicEvidenceLevel.OPERATOR_ATTESTED
+        and trial.expected_cash is not None
+        and trial.maximum_cash is not None
+        and trial.expected_cash.amount == 0
+        and trial.maximum_cash.amount == 0
+        and trial.expected_cash.currency == trial.maximum_cash.currency
+        and trial.reserved_cash is None
+        and trial.captured_cash is None
+        and trial.released_cash is None
+    ):
+        return trial.maximum_cash
+    return None
+
+
+def evaluate_economic_proof(report: EconomicProofCampaignReport) -> ReleaseProofReport:
+    """Evaluate economic gates using settlement records only."""
+
+    completed_paid = [
+        trial
+        for trial in report.trials
+        if trial.task_valid
+        and not trial.indeterminate
+        and any(
+            amount is not None and amount.amount > 0
+            for amount in (trial.expected_cash, trial.maximum_cash, trial.captured_cash)
+        )
+    ]
+    paid_with_evidence = [
+        trial
+        for trial in completed_paid
+        if trial.prepared_id is not None
+        and trial.quote_id is not None
+        and trial.settlement_id is not None
+        and trial.maximum_cash is not None
+        and trial.reserved_cash is not None
+        and trial.captured_cash is not None
+        and trial.released_cash is not None
+        and trial.cash_evidence_level.is_payment_evidence
+    ]
+    overcaptures = [
+        trial
+        for trial in report.trials
+        if trial.captured_cash is not None
+        and trial.maximum_cash is not None
+        and trial.captured_cash.amount > trial.maximum_cash.amount
+    ]
+    partial_releases = [
+        trial
+        for trial in report.trials
+        if trial.reserved_cash is not None
+        and trial.captured_cash is not None
+        and trial.released_cash is not None
+        and trial.captured_cash.amount < trial.reserved_cash.amount
+        and trial.captured_cash.amount + trial.released_cash.amount
+        == trial.reserved_cash.amount
+    ]
+    unknown = [
+        trial
+        for trial in report.trials
+        if trial.cash_evidence_level is EconomicEvidenceLevel.UNKNOWN
+    ]
+    unknown_clean = [
+        trial
+        for trial in unknown
+        if all(
+            amount is None
+            for amount in (
+                trial.expected_cash,
+                trial.maximum_cash,
+                trial.reserved_cash,
+                trial.captured_cash,
+                trial.released_cash,
+            )
+        )
+    ]
+    oracle_values = [
+        oracle.selected_within_10_percent
+        for oracle in report.oracles
+        if oracle.selected_within_10_percent is not None
+    ]
+    oracle_fraction = (
+        sum(oracle_values) / len(oracle_values) if oracle_values else 0.0
+    )
+    gates = [
+        ReleaseGate(
+            name="zero-overcapture",
+            passed=not overcaptures and bool(report.trials),
+            detail=f"{len(overcaptures)} overcapture incident(s)",
+        ),
+        ReleaseGate(
+            name="paid-settlement-evidence",
+            passed=bool(completed_paid) and len(paid_with_evidence) == len(completed_paid),
+            detail=(
+                f"{len(paid_with_evidence)}/{len(completed_paid)} paid completed trial(s) "
+                "have quote, reservation, capture, and release evidence"
+            ),
+        ),
+        ReleaseGate(
+            name="partial-capture-release",
+            passed=bool(partial_releases),
+            detail=f"{len(partial_releases)} partial settlement(s) released the remainder",
+        ),
+        ReleaseGate(
+            name="unknown-remains-unknown",
+            passed=bool(unknown) and len(unknown_clean) == len(unknown),
+            detail=f"{len(unknown_clean)}/{len(unknown)} unknown-cash trial(s) retained no amount",
+        ),
+        ReleaseGate(
+            name="settlement-oracle",
+            passed=bool(oracle_values) and oracle_fraction >= 0.80,
+            detail=(
+                f"{sum(oracle_values)}/{len(oracle_values)} measured AEEP selection(s) "
+                "were within 10% of the cheapest successful authoritatively costed route"
+            ),
+        ),
+    ]
+    valid_workflows = [
+        trial
+        for trial in report.workflow_trials
+        if trial.task_valid
+        and trial.dependency_binding_verified
+        and trial.prepared_step_count == trial.step_count
+        and trial.settled_step_count > 0
+        and trial.cash_evidence_level.is_payment_evidence
+    ]
+    gates.append(
+        ReleaseGate(
+            name="prepared-hybrid-workflow",
+            passed=bool(report.workflow_trials)
+            and len(valid_workflows) == len(report.workflow_trials),
+            detail=(
+                f"{len(valid_workflows)}/{len(report.workflow_trials)} hybrid workflow "
+                "trial(s) bound real dependency inputs and carried settlement evidence"
+            ),
+        )
+    )
+    return ReleaseProofReport(passed=all(gate.passed for gate in gates), gates=gates)
+
+
+def finalize_economic_proof(
+    report: EconomicProofCampaignReport,
+) -> EconomicProofCampaignReport:
+    """Derive oracles and gates without changing measured trial evidence."""
+
+    oracles = economic_settlement_oracles(report.trials)
+    with_oracles = report.model_copy(update={"oracles": oracles})
+    proof = evaluate_economic_proof(with_oracles)
+    return with_oracles.model_copy(update={"gates": tuple(proof.gates)})
+
+
+def format_economic_proof_report(report: EconomicProofCampaignReport) -> str:
+    """Render a compact report without turning unknown cash into zero."""
+
+    conditions = ", ".join(sorted({trial.condition.value for trial in report.trials}))
+    splits = ", ".join(sorted({trial.split.value for trial in report.trials}))
+    route_types = ", ".join(sorted({trial.route_type.value for trial in report.trials}))
+    lines = [
+        f"# AEEP 0.4 economic evidence proof: {report.campaign_id}",
+        "",
+        f"Domain: {report.domain}",
+        f"Repetitions: {report.repetitions}",
+        f"Conditions: {conditions}",
+        f"Splits: {splits}",
+        f"Route types: {route_types}",
+        f"Hybrid qualification/training observations: {report.hybrid_training_observations}",
+        "",
+        "The JSON artifact is authoritative for per-trial token, resource, failure, "
+        "and timing dimensions. `unknown` is never rendered as zero.",
+        "",
+        "## Route summary",
+        "",
+        "| Route | Type | Trials | Valid | Median total ms | Median actual cash | "
+        "Settlement evidence | Quote failures | Settlement failures | Indeterminate |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    grouped: dict[str, list[EconomicBenchmarkTrial]] = {}
+    for trial in report.trials:
+        grouped.setdefault(trial.route_id, []).append(trial)
+    for route_id, trials in sorted(grouped.items()):
+        actual_cash = [
+            amount
+            for trial in trials
+            if (amount := _authoritative_actual_cash(trial)) is not None
+        ]
+        settled = [
+            trial
+            for trial in trials
+            if trial.settlement_id is not None
+            and trial.cash_evidence_level.is_payment_evidence
+        ]
+        quote_failures = sum(len(trial.quote_failure_codes) for trial in trials)
+        settlement_failures = sum(
+            trial.settlement_failure_code is not None for trial in trials
+        )
+        lines.append(
+            "| "
+            + " | ".join(
+                (
+                    route_id,
+                    trials[0].route_type.value,
+                    str(len(trials)),
+                    str(sum(trial.task_valid for trial in trials)),
+                    _median_decimal_text(trial.total_wall_time_ms for trial in trials),
+                    _median_currency_text(actual_cash),
+                    f"{len(settled)}/{len(trials)}",
+                    str(quote_failures),
+                    str(settlement_failures),
+                    str(sum(trial.indeterminate for trial in trials)),
+                )
+            )
+            + " |"
+        )
+    lines.extend(
+        (
+            "",
+            "## Measured trials",
+            "",
+            "| Route | Split / condition / repetition | Valid | Expected | Maximum | "
+            "Reserved | Captured | Released | Evidence | "
+            "Prep / quote / execute / settle / total ms |",
+            "|---|---|---:|---:|---:|---:|---:|---:|---|---:|",
+        )
+    )
+    for trial in sorted(report.trials, key=lambda item: item.trial_id):
+        timing = " / ".join(
+            format(value, "f")
+            for value in (
+                trial.preparation_latency_ms,
+                trial.quote_latency_ms,
+                trial.execution_latency_ms,
+                trial.settlement_latency_ms,
+                trial.total_wall_time_ms,
+            )
+        )
+        lines.append(
+            "| "
+            + " | ".join(
+                (
+                    trial.route_id,
+                    f"{trial.split.value} / {trial.condition.value} / {trial.repetition}",
+                    "yes" if trial.task_valid else "no",
+                    _economic_amount_text(trial.expected_cash),
+                    _economic_amount_text(trial.maximum_cash),
+                    _economic_amount_text(trial.reserved_cash),
+                    _economic_amount_text(trial.captured_cash),
+                    _economic_amount_text(trial.released_cash),
+                    trial.cash_evidence_level.value,
+                    timing,
+                )
+            )
+            + " |"
+        )
+    if report.workflow_trials:
+        lines.extend(
+            (
+                "",
+                "## Prepared hybrid workflow proof",
+                "",
+                "These multi-step DAG measurements are not included in the single-action "
+                "route oracle.",
+                "",
+                "| Workflow | Split / condition / repetition | Steps prepared | Quotes | "
+                "Settlements | Dependency bytes | Valid | Expected | Maximum | Reserved | "
+                "Captured | Released | Evidence | Prep / quote / execute / settle / total ms |",
+                "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|",
+            )
+        )
+        for workflow_trial in sorted(
+            report.workflow_trials, key=lambda item: item.workflow_id
+        ):
+            timing = " / ".join(
+                format(value, "f")
+                for value in (
+                    workflow_trial.preparation_latency_ms,
+                    workflow_trial.quote_latency_ms,
+                    workflow_trial.execution_latency_ms,
+                    workflow_trial.settlement_latency_ms,
+                    workflow_trial.total_wall_time_ms,
+                )
+            )
+            lines.append(
+                "| "
+                + " | ".join(
+                    (
+                        workflow_trial.workflow_id,
+                        f"{workflow_trial.split.value} / {workflow_trial.condition.value} / "
+                        f"{workflow_trial.repetition}",
+                        f"{workflow_trial.prepared_step_count}/{workflow_trial.step_count}",
+                        str(workflow_trial.quoted_step_count),
+                        str(workflow_trial.settled_step_count),
+                        str(workflow_trial.dependency_input_bytes),
+                        "yes" if workflow_trial.task_valid else "no",
+                        _economic_amount_text(workflow_trial.expected_cash),
+                        _economic_amount_text(workflow_trial.maximum_cash),
+                        _economic_amount_text(workflow_trial.reserved_cash),
+                        _economic_amount_text(workflow_trial.captured_cash),
+                        _economic_amount_text(workflow_trial.released_cash),
+                        workflow_trial.cash_evidence_level.value,
+                        timing,
+                    )
+                )
+                + " |"
+            )
+    lines.extend(("", "## Authoritatively costed oracle", ""))
+    for oracle in report.oracles:
+        distance = (
+            f"{oracle.distance_from_oracle_percent:f}%"
+            if oracle.distance_from_oracle_percent is not None
+            else "not within 10% (the oracle actual cash is zero)"
+            if oracle.selected_within_10_percent is False
+            and oracle.oracle_captured_cash is not None
+            and oracle.oracle_captured_cash.amount == 0
+            else "unavailable"
+        )
+        lines.append(
+            f"- {oracle.case_id} {oracle.condition} repetition {oracle.repetition}: "
+            f"AEEP {oracle.selected_route_id or 'unavailable'}; cheapest successful "
+            f"{oracle.oracle_route_id or 'unavailable'}; distance {distance}."
+        )
+    lines.extend(("", "## Economic gates", ""))
+    for gate in report.gates:
+        lines.append(f"- {'PASS' if gate.passed else 'FAIL'} — {gate.name}: {gate.detail}")
+    hybrid = [trial for trial in report.trials if trial.selected_by_aeep]
+    valid_baselines = [
+        trial
+        for trial in report.trials
+        if not trial.selected_by_aeep and trial.task_valid and not trial.indeterminate
+    ]
+    lines.extend(("", "## Initial engineering targets", ""))
+    if hybrid and valid_baselines:
+        hybrid_success = Decimal(sum(trial.task_valid for trial in hybrid)) / Decimal(len(hybrid))
+        baseline_groups: dict[str, list[EconomicBenchmarkTrial]] = {}
+        for trial in valid_baselines:
+            baseline_groups.setdefault(trial.route_id, []).append(trial)
+        strongest_success = max(
+            Decimal(sum(item.task_valid for item in values)) / Decimal(len(values))
+            for values in baseline_groups.values()
+        )
+        lines.append(
+            f"- {'PASS' if hybrid_success >= strongest_success else 'FAIL'} — task-valid "
+            f"success: AEEP {hybrid_success * 100:f}% versus strongest measured baseline "
+            f"{strongest_success * 100:f}%."
+        )
+        hybrid_time = median(trial.total_wall_time_ms for trial in hybrid)
+        fastest_baseline = min(
+            median(item.total_wall_time_ms for item in values)
+            for values in baseline_groups.values()
+        )
+        reduction = (
+            (fastest_baseline - hybrid_time) / fastest_baseline * Decimal(100)
+            if fastest_baseline > 0
+            else None
+        )
+        if reduction is not None:
+            reduction = reduction.quantize(Decimal("0.000001"))
+        lines.append(
+            "- "
+            + (
+                f"{'PASS' if reduction is not None and reduction >= 15 else 'FAIL'} — "
+                f"deterministic-domain total-time target: AEEP median {hybrid_time:f} ms, "
+                f"fastest measured baseline {fastest_baseline:f} ms, "
+                f"reduction {reduction:f}%."
+                if reduction is not None
+                else "NOT EVALUATED — deterministic-domain total-time target has a zero-time "
+                "baseline."
+            )
+        )
+    else:
+        lines.append("- NOT EVALUATED — task-valid success and time targets lack paired routes.")
+    complete_model_trials = [trial for trial in report.trials if trial.model_usage_complete]
+    lines.append(
+        "- NOT EVALUATED — two-domain 20% model-token target: this local campaign covers "
+        f"one domain and {len(complete_model_trials)} trial(s) with complete model-usage "
+        "measurement; synthetic subscription usage is excluded from claims."
+    )
+    return "\n".join(lines) + "\n"
+
+
+def _economic_amount_text(amount: CurrencyAmount | None) -> str:
+    return "unknown" if amount is None else f"{amount.currency} {amount.amount:f}"
+
+
+def _median_decimal_text(values: Iterable[Decimal]) -> str:
+    measured = list(values)
+    return "unknown" if not measured else f"{median(measured):f}"
+
+
+def _median_currency_text(values: Iterable[CurrencyAmount]) -> str:
+    measured = list(values)
+    if not measured:
+        return "unknown"
+    currencies = {item.currency for item in measured}
+    if len(currencies) != 1:
+        raise ConfigurationError("economic proof summary cannot combine currencies")
+    amount = median(item.amount for item in measured)
+    return f"{measured[0].currency} {amount:f}"
 
 
 def _benchmark_route_candidates(
@@ -1321,6 +2071,29 @@ def _eligible_measurements(trials: list[BenchmarkTrial]) -> list[BenchmarkTrial]
     ]
 
 
+def _heldout_policy_oracle_values(report: BenchmarkCampaignReport) -> list[bool]:
+    groups: dict[tuple[str, BenchmarkCondition, int], list[BenchmarkTrial]] = {}
+    for trial in _eligible_measurements(report.trials):
+        if trial.phase == BenchmarkPhase.HOLDOUT:
+            groups.setdefault((trial.case_id, trial.condition, trial.repetition), []).append(trial)
+
+    values: list[bool] = []
+    for (case_id, _condition, _repetition), trials in groups.items():
+        selected_route = report.frozen_holdout_decisions.get(case_id)
+        selected = [trial for trial in trials if trial.route_id == selected_route]
+        policy = [trial for trial in trials if trial.valid is True and trial.policy_score is not None]
+        if len(selected) != 1 or selected[0].valid is not True or not policy:
+            values.append(False)
+            continue
+        oracle_score = min(trial.policy_score for trial in policy if trial.policy_score is not None)
+        selected_score = selected[0].policy_score
+        values.append(
+            selected_score is not None
+            and (selected_score == 0 if oracle_score == 0 else selected_score <= 1.10 * oracle_score)
+        )
+    return values
+
+
 def evaluate_release_proof(
     reports: list[BenchmarkCampaignReport],
     *,
@@ -1370,12 +2143,7 @@ def evaluate_release_proof(
                 and median(hybrid_times) <= 0.85 * median(baseline_times)
             )
         exact_activation &= all(trial.route_fingerprint for trial in measured)
-    heldout = [
-        oracle.selected_within_10_percent
-        for report in reports
-        for oracle in report.oracles
-        if oracle.selected_within_10_percent is not None
-    ]
+    heldout = [value for report in reports for value in _heldout_policy_oracle_values(report)]
     oracle_ok = bool(heldout) and sum(heldout) / len(heldout) >= 0.80
     gates = [
         ReleaseGate(

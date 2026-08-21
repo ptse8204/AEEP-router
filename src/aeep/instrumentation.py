@@ -4,23 +4,34 @@ from __future__ import annotations
 
 import inspect
 import json
+import math
 import time
 from collections.abc import Awaitable, Callable
 from datetime import timedelta
+from decimal import Decimal
 from pathlib import Path
 from typing import Any, Literal
 
 from .models import (
+    CashAccounting,
+    CashClassification,
+    CashEvidence,
     EstimateSource,
+    EvidenceSource,
+    EvidenceStatus,
     ExecutionReceipt,
     ExecutionStatus,
     ExecutorKind,
+    ExecutorSpec,
+    MeasurementEvidence,
     PassiveRecommendation,
+    ResourceAccounting,
     ResourceVector,
     RouteEstimate,
     TraceCall,
     TraceCallKind,
     TraceProfileReport,
+    TrustLevel,
     new_id,
     utc_now,
 )
@@ -28,6 +39,43 @@ from .registry import Registry
 from .store import ReceiptStore
 
 CostCalculator = Callable[[str | None, int, int], float]
+
+
+def _optional_number(attributes: dict[str, Any], *names: str) -> float | None:
+    for name in names:
+        if name not in attributes:
+            continue
+        value = attributes[name]
+        if isinstance(value, bool):
+            return None
+        try:
+            parsed = float(value) if isinstance(value, str | int | float) else math.nan
+        except ValueError:
+            return None
+        return parsed if math.isfinite(parsed) and parsed >= 0 else None
+    return None
+
+
+def _reported_cash(amount: float | None, charge_id: str) -> ResourceAccounting:
+    if amount is None:
+        return ResourceAccounting()
+    return ResourceAccounting(
+        cash=CashAccounting(
+            status=EvidenceStatus.PARTIAL,
+            components=[
+                CashEvidence(
+                    charge_id=charge_id,
+                    amount=Decimal(str(amount)),
+                    classification=CashClassification.ESTIMATED,
+                    evidence=MeasurementEvidence(
+                        status=EvidenceStatus.PARTIAL,
+                        source=EvidenceSource.OPERATOR_REPORT,
+                        trust=TrustLevel.OBSERVED,
+                    ),
+                )
+            ],
+        )
+    )
 
 
 def _value(value: Any) -> Any:
@@ -197,6 +245,30 @@ class TraceIngestor:
             ),
             None,
         )
+        cash = _optional_number(
+            attributes,
+            "aeep.resource.monetary_usd",
+            "gen_ai.usage.cost",
+            "llm.usage.cost",
+        )
+        resource_values: dict[str, float | int] = {
+            "latency_ms": _duration_ms(span, attributes),
+            "cpu_ms": _number(attributes, "aeep.resource.cpu_ms", "process.cpu.time_ms"),
+            "memory_mb_seconds": _number(attributes, "aeep.resource.memory_mb_seconds"),
+            "peak_memory_mb": _number(attributes, "aeep.resource.peak_memory_mb"),
+            "gpu_ms": _number(attributes, "aeep.resource.gpu_ms"),
+            "network_bytes": int(
+                _number(attributes, "aeep.resource.network_bytes")
+                or _number(attributes, "http.request.body.size")
+                + _number(attributes, "http.response.body.size")
+            ),
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "context_tokens": int(_number(attributes, "aeep.resource.context_tokens")),
+            "subscription_units": _number(attributes, "aeep.resource.subscription_units"),
+        }
+        if cash is not None:
+            resource_values["monetary_usd"] = cash
         return TraceCall(
             trace_id=span.get("traceId") or span.get("trace_id"),
             span_id=span.get("spanId") or span.get("span_id"),
@@ -216,28 +288,7 @@ class TraceIngestor:
             retries=int(
                 _number(attributes, "retry.count", "gen_ai.request.retry_count", "http.retry_count")
             ),
-            resources=ResourceVector(
-                monetary_usd=_number(
-                    attributes,
-                    "aeep.resource.monetary_usd",
-                    "gen_ai.usage.cost",
-                    "llm.usage.cost",
-                ),
-                latency_ms=_duration_ms(span, attributes),
-                cpu_ms=_number(attributes, "aeep.resource.cpu_ms", "process.cpu.time_ms"),
-                memory_mb_seconds=_number(attributes, "aeep.resource.memory_mb_seconds"),
-                peak_memory_mb=_number(attributes, "aeep.resource.peak_memory_mb"),
-                gpu_ms=_number(attributes, "aeep.resource.gpu_ms"),
-                network_bytes=int(
-                    _number(attributes, "aeep.resource.network_bytes")
-                    or _number(attributes, "http.request.body.size")
-                    + _number(attributes, "http.response.body.size")
-                ),
-                input_tokens=input_tokens,
-                output_tokens=output_tokens,
-                context_tokens=int(_number(attributes, "aeep.resource.context_tokens")),
-                subscription_units=_number(attributes, "aeep.resource.subscription_units"),
-            ),
+            resources=ResourceVector.model_validate(resource_values),
         )
 
     def _recommend(self, calls: list[TraceCall]) -> list[PassiveRecommendation]:
@@ -247,40 +298,72 @@ class TraceIngestor:
         for call in calls:
             if call.capability is None:
                 continue
+            call_cash = (
+                call.resources.monetary_usd
+                if "monetary_usd" in call.resources.model_fields_set
+                else None
+            )
+
+            def candidate_cash(spec: ExecutorSpec) -> float | None:
+                amount = spec.estimate.cash.amount_usd
+                if amount is None:
+                    amount = spec.estimate.cash.upper_bound_usd
+                return float(amount) if amount is not None else None
+
+            def improves(
+                spec: ExecutorSpec,
+                current_cash: float | None = call_cash,
+                current_latency: float = call.resources.latency_ms,
+            ) -> bool:
+                cash = candidate_cash(spec)
+                cash_no_worse = (
+                    current_cash is None or cash is None or cash <= current_cash
+                )
+                cash_better = (
+                    current_cash is not None and cash is not None and cash < current_cash
+                )
+                latency = spec.estimate.resources.latency_ms
+                return cash_no_worse and latency <= current_latency and (
+                    cash_better or latency < current_latency
+                )
+
             candidates = [
                 spec
                 for spec in self.registry.find(call.capability)
-                if spec.estimate.resources.monetary_usd <= call.resources.monetary_usd
-                and spec.estimate.resources.latency_ms <= call.resources.latency_ms
-                and (
-                    spec.estimate.resources.monetary_usd < call.resources.monetary_usd
-                    or spec.estimate.resources.latency_ms < call.resources.latency_ms
-                )
+                if improves(spec)
             ]
             if not candidates:
                 continue
             best = min(
                 candidates,
                 key=lambda spec: (
-                    spec.estimate.resources.monetary_usd,
+                    candidate_cash(spec) if candidate_cash(spec) is not None else math.inf,
                     spec.estimate.resources.latency_ms,
                     spec.id,
                 ),
+            )
+            best_cash = candidate_cash(best)
+            cash_comparable = call_cash is not None and best_cash is not None
+            cash_saving = (
+                max(0.0, call_cash - best_cash)
+                if call_cash is not None and best_cash is not None
+                else None
             )
             recommendations.append(
                 PassiveRecommendation(
                     capability=call.capability,
                     observed_kind=call.kind,
                     recommended_executor_id=best.id,
-                    estimated_cash_saving_usd=max(
-                        0.0,
-                        call.resources.monetary_usd - best.estimate.resources.monetary_usd,
-                    ),
+                    estimated_cash_saving_usd=cash_saving,
                     estimated_latency_saving_ms=max(
                         0.0,
                         call.resources.latency_ms - best.estimate.resources.latency_ms,
                     ),
-                    reason="registered route is no worse on estimated cash and latency",
+                    reason=(
+                        "registered route is no worse on evidenced estimated cash and latency"
+                        if cash_comparable
+                        else "cash comparison unavailable; registered route has lower estimated latency"
+                    ),
                 )
             )
         return recommendations
@@ -309,7 +392,14 @@ class TraceIngestor:
                 continue
             ended_at = utc_now()
             started_at = ended_at - timedelta(milliseconds=call.resources.latency_ms)
+            receipt_id = new_id("rcpt")
+            reported_cash = (
+                call.resources.monetary_usd
+                if "monetary_usd" in call.resources.model_fields_set
+                else None
+            )
             receipt = ExecutionReceipt(
+                receipt_id=receipt_id,
                 decision_id=new_id("trace_dec"),
                 action_id=new_id("trace_act"),
                 capability=call.capability,
@@ -321,6 +411,7 @@ class TraceIngestor:
                 ended_at=ended_at,
                 estimated=RouteEstimate(source=EstimateSource.OBSERVED, confidence=0),
                 actual_resources=call.resources,
+                accounting=_reported_cash(reported_cash, f"trace:{receipt_id}"),
                 transport_success=True if call.status == "success" else None,
                 execution_success=True
                 if call.status == "success"
@@ -432,14 +523,23 @@ class _InstrumentedProxy:
         input_tokens = int(_get(usage, "input_tokens", _get(usage, "prompt_tokens", 0)) or 0)
         output_tokens = int(_get(usage, "output_tokens", _get(usage, "completion_tokens", 0)) or 0)
         actual_model = str(_get(response, "model", model) or model or "unknown")
-        monetary = (
-            max(0.0, self._cost_calculator(actual_model, input_tokens, output_tokens))
-            if self._cost_calculator is not None
-            else 0.0
-        )
+        monetary: float | None = None
+        if self._cost_calculator is not None:
+            calculated = self._cost_calculator(actual_model, input_tokens, output_tokens)
+            if math.isfinite(calculated) and calculated >= 0:
+                monetary = calculated
         ended_at = utc_now()
         status = ExecutionStatus.SUCCESS if error is None else ExecutionStatus.FAILED
+        receipt_id = new_id("rcpt")
+        resource_values: dict[str, float | int] = {
+            "latency_ms": max(0.0, (time.perf_counter() - started) * 1000.0),
+            "input_tokens": max(0, input_tokens),
+            "output_tokens": max(0, output_tokens),
+        }
+        if monetary is not None:
+            resource_values["monetary_usd"] = monetary
         receipt = ExecutionReceipt(
+            receipt_id=receipt_id,
             decision_id=new_id("sdk_dec"),
             action_id=new_id("sdk_act"),
             capability=self._capability,
@@ -449,12 +549,8 @@ class _InstrumentedProxy:
             started_at=started_at,
             ended_at=ended_at,
             estimated=RouteEstimate(source=EstimateSource.STATIC, confidence=0.0),
-            actual_resources=ResourceVector(
-                monetary_usd=monetary,
-                latency_ms=max(0.0, (time.perf_counter() - started) * 1000.0),
-                input_tokens=max(0, input_tokens),
-                output_tokens=max(0, output_tokens),
-            ),
+            actual_resources=ResourceVector.model_validate(resource_values),
+            accounting=_reported_cash(monetary, f"calculator:{receipt_id}"),
             transport_success=error is None,
             execution_success=error is None,
             task_valid=None,
@@ -464,7 +560,8 @@ class _InstrumentedProxy:
             metadata={
                 "instrumentation": f"{self._provider}-sdk",
                 "model": actual_model,
-                "cost_observed": self._cost_calculator is not None,
+                "cost_observed": False,
+                "cost_calculated": monetary is not None,
                 "payload_stored": False,
                 "output_stored": False,
             },

@@ -1,6 +1,34 @@
 # Changelog
 
-## Unreleased
+## Unreleased — 0.4.0
+
+- request-bound, Ed25519-signed capability offers and bounded quotes with exact
+  action, capability, executor, fingerprint, nonce, currency, terms, and expiry
+  binding;
+- explicit prepared routing that keeps ordinary `route()` offline, applies hard
+  constraints before a bounded top-K quote fan-out, and persists sanitized,
+  single-use decisions;
+- caller-authored workflow integration that quotes only dependency-resolved
+  inputs, prepares safe ready steps concurrently, checks settled cash plus wave
+  maxima against the workflow budget, and cancels uninvoked over-budget work;
+- Decimal/currency-safe maximum reservation, partial settlement, unused release,
+  refunds, reconciliation, dispute, and indeterminate crash-recovery records;
+- explicit immutable cash-authorization bases for signed quotes, published
+  offers, and pinned rate cards; anonymous static priors remain non-authorizing;
+- immutable SQLite economic evidence, transactional schema migration, replay
+  tracking, atomic prepared claims, and concurrent budget reservations;
+- provider usage statements, settlement receipts, market aggregates, and an
+  evidence hierarchy that keeps unknown cash distinct from confirmed zero;
+- nullable passive/counterfactual cash savings: `null` now means either side
+  lacks eligible evidence, while numeric zero means a known comparison found no
+  saving;
+- operator-gated remote quote networking with host allowlists, SSRF/DNS checks,
+  bounded bodies, no redirects, no ambient proxies, and declared disclosure only;
+- a deterministic local reference provider/market, provider SDK helpers,
+  operator CLI surfaces, generated 0.4 schemas, and settlement-backed proof
+  assets;
+- compatibility for 0.1 through 0.3 manifests, legacy quotes and receipts, and
+  legacy full-capture payment adapters.
 
 ## 0.3.0 — 2026-08-13
 

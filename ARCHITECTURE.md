@@ -80,7 +80,7 @@ Uses bounded streaming and conservative target validation. It is appropriate for
 
 Discovers the configured tool, measures schema/context overhead, invokes it over stdio or Streamable HTTP, reads optional AEEP usage claims, and caches discovery/tool schemas according to protocol hints and credential scope. Protocol mode can be pinned; automatic legacy fallback requires an unambiguous method-not-found response.
 
-The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP 0.3 accepts only complete single-round tool results; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
+The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP accepts only complete single-round tool results; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
 
 ### Delegate
 
@@ -127,16 +127,190 @@ Workflow execution is an additive SDK/CLI layer above the existing action router
 
 ## Economic interoperability
 
-Versioned capabilities define what is offered; expiring quotes define price; signed receipts and validation results define delivery evidence. Local/remote registries load only providers relevant to the requested capability. Provider claims remain priors, while measured or attested observations drive reputation.
+Versioned capabilities define what is offered; expiring quotes bound price;
+settlement and validation results provide distinct delivery/economic evidence.
+Local/remote registries load only providers relevant to the requested
+capability. Provider claims remain priors, while measured or attested
+observations drive reputation.
 
-Payment adapters sit behind an operator budget and a separate financial approval. The OSS ledger records reservation/capture/refund events but does not hold funds, create accounts, or clear between providers.
+Payment adapters sit behind an operator budget and a separate financial
+approval. The OSS ledger records reservation, capture, release, refund, and
+reconciliation events but does not hold funds, create accounts, pay providers,
+or clear between providers.
+
+## Prepared economic routing
+
+Prepared routing is explicit so ordinary `route()` remains offline. It has two
+durable halves separated by a caller-controlled boundary:
+
+```text
+prepare_route(action)                 execute_prepared(prepared_id)
+        │                                        │
+active exact routes                  atomic single-use claim
+        │                                        │
+non-price hard constraints           expiry/policy/route/key revalidation
+        │                                        │
+local shortlist + top-K quotes       reserve immutable authorized maximum
+        │                                        │
+quote verification + cash limits     persist INVOKING, then invoke once
+        │                                        │
+final score + sanitized record       usage + settlement + accounting
+```
+
+The action digest binds canonical input without persisting it. The effective
+policy digest makes material policy drift detectable. The behavior fingerprint
+makes executor drift detectable. Quote acquisition only replaces the cash
+estimate; it cannot change qualification, quality, reliability, or safety.
+
+### Static-price route
+
+```text
+Caller          Router          Registry/Policy       Store
+  | prepare       |                    |                 |
+  |-------------->| exact active route |                 |
+  |               |------------------->|                 |
+  |               | offer/pinned-rate cash; no remote call|
+  |               | hard cash check + score              |
+  |               |-------------------- prepared ------->|
+  |<--------------| decision                              |
+```
+
+A verified fixed offer may avoid a live request when policy allows its maximum.
+A static prior remains non-binding and cannot silently satisfy a policy that
+requires a signed quote.
+
+A paid prepared decision carries exactly one immutable authorization basis:
+`SIGNED_QUOTE`, `PUBLISHED_OFFER`, or `PINNED_RATE_CARD`. Quote and offer bases
+bind their immutable record ID. A pinned rate-card basis additionally binds the
+snapshot, exact rate IDs, and bounded native quantities used for the maximum.
+An anonymous static prior can rank a route but cannot authorize nonzero cash.
+
+### Dynamic-price route
+
+```text
+Caller       Router      Qualified shortlist     Quote providers       Store
+  | prepare    |                 |                    |                  |
+  |----------->| non-price hard filtering            |                  |
+  |            |---- rank/select top K ------------->|                  |
+  |            |======== concurrent bounded quotes ==>|                  |
+  |            | verify trust/binding/nonce/expiry    |                  |
+  |            | maximum for feasibility; expected for rank             |
+  |            |---------------- sanitized decision + evidence -------->|
+  |<-----------|                                                         |
+```
+
+Provider endpoints need both trust-store authorization and local network
+allowlisting. Request disclosure contains only operator-declared bounded
+features; the action payload remains local.
+
+### Prepared execution
+
+```text
+Caller       Router/Store      Payment adapter       Executor       Accounting
+  | execute       |                   |                 |               |
+  |-------------->| claim + revalidate|                 |               |
+  |               | reserve authorized maximum -------->|               |
+  |               |<---------------- reservation -------|               |
+  |               | persist RESERVED then INVOKING      |               |
+  |               |------------------------------------>| invoke once   |
+  |               |<------- result/local usage/provider statement ------|
+  |               | persist SETTLING; settle actual ---->|               |
+  |               |<---- capture + release receipt ------|               |
+  |               |---------------- authoritative cash ---------------->|
+  |<--------------| receipt                                               |
+```
+
+External execution and payment calls cannot share a SQLite transaction. State
+is therefore persisted before and after each external boundary.
+
+### Partial capture
+
+```text
+signed maximum USD 0.0050
+          |
+          v
+reservation USD 0.0050
+          |
+actual billable usage USD 0.0038
+          |
+          +--> capture USD 0.0038
+          `--> release USD 0.0012
+```
+
+The settlement invariant is enforced by typed Decimal/currency models and the
+adapter/store state machine; a provider assertion above the maximum opens a
+dispute and never authorizes overcapture.
+
+### Indeterminate execution
+
+```text
+INVOKING -- timeout/unknown external outcome --> INDETERMINATE
+    |                                             |
+    | no blind non-idempotent retry               +--> operator evidence
+    |                                             +--> payment lookup
+    `---------------------------------------------+--> usage/billing lookup
+                                                      |
+                                            SETTLED or DISPUTED
+```
+
+Unknown outcome and unknown billing remain explicit. The reservation remains
+outstanding until the signed policy and available evidence permit settlement or
+release.
+
+### Crash recovery
+
+```text
+process crash after invoke
+          |
+          v
+scan durable RESERVED/INVOKING/AWAITING_USAGE/SETTLING/INDETERMINATE
+          |
+          +--> inspect attempt/provider receipt (never invoke again)
+          +--> inspect adapter idempotency/settlement
+          +--> resume settlement or release only
+          `--> leave unresolved state INDETERMINATE
+```
+
+### Workflow step routing
+
+```text
+ready DAG step -> bind real upstream inputs -> prepare -> reserve -> execute -> settle
+       |                                                            |
+       +-- independent ready steps may prepare concurrently --------+
+       +-- skipped branch releases an existing safe reservation
+       `-- fallback gets a fresh input-bound quote after prior settlement
+```
+
+The current router prepares only a dependency-resolved wave. It may prepare
+independent read-only steps concurrently, while any wave containing a potentially
+consequential, delegated, hosted, or exclusive-resource route is serialized
+before quote acquisition. Prior settled actual cash plus every prepared maximum
+must fit the workflow budget; otherwise the still-uninvoked prepared decisions
+are cancelled before reservation. Future steps are not quoted against guessed
+payloads. The router executes each selected prepared ID at most once and does not
+reserve every possible fallback in advance. The current workflow implementation
+stops after a selected prepared step fails or becomes uncertain; a caller that
+is allowed to recover must first settle or reconcile that attempt and explicitly
+prepare a fresh fallback action.
+
+## Economic persistence
+
+SQLite `user_version` migrations preserve the legacy tables and add normalized
+0.4 trust keys, offers, quote requests, bounded quotes, nonce uses, prepared
+decisions/transitions, reservations, usage, settlements, reconciliations,
+aggregates, disputes, and evidence links. Canonical signed payloads are
+immutable: identical inserts are idempotent and altered ID reuse fails.
+Prepared claims, nonce consumption, and budget reservation use transactional
+compare-and-set operations so concurrent workers cannot execute twice or
+over-reserve.
 
 ## Future extension points
 
 1. Confidence intervals and contextual bandit routing.
-2. Learned goal decomposition and persistent result caching.
+2. Result caching within explicit bounded actions.
 3. Sandboxed hosted executors.
 4. Organization policy services and private catalogs.
-5. Public-key identity and cross-organization attestation.
+5. Federated provider identity and aggregate-trust governance beyond the local
+   Ed25519 trust store.
 6. Hosted marketplace accounts, custody, payouts, and fraud controls.
 7. Richer OpenTelemetry semantic events, exporters, and trace-to-action correlation.

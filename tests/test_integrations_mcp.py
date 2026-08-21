@@ -6,11 +6,13 @@ import sys
 from pathlib import Path
 
 import pytest
+from jsonschema import Draft202012Validator
 
 from aeep.config import write_default_manifest
 from aeep.integrations import export_tools
 from aeep.mcp.client import LEGACY_VERSION, MODERN_VERSION, MCPStdioClient
 from aeep.mcp.server import AEEPToolService, MCPProtocolApp
+from aeep.models import ExternalOutcomeReport
 from aeep.router import Router
 
 
@@ -27,8 +29,39 @@ from aeep.router import Router
 )
 def test_tool_schema_exports(format, key):
     tools = export_tools(format)
-    assert len(tools) == 6
+    assert len(tools) == 9
     assert key in tools[0]
+
+
+def test_record_outcome_schema_matches_runtime_report() -> None:
+    schema = next(
+        item["inputSchema"]
+        for item in export_tools("mcp")
+        if item["name"] == "aeep_record_outcome"
+    )
+    report = ExternalOutcomeReport.model_validate(
+        {
+            "decision_id": "decision-1",
+            "executor_id": "executor-1",
+            "status": "success",
+            "actual_resources": {"cached_input_tokens": 7},
+            "validation_results": [{"kind": "schema", "valid": True}],
+            "quota_observation": {
+                "state": "tight",
+                "unit": "request",
+                "allowance_units": "100",
+                "remaining_units": "10",
+            },
+            "started_at": "2026-08-14T12:00:00Z",
+            "ended_at": "2026-08-14T12:00:01Z",
+        }
+    ).model_dump(mode="json")
+    validator = Draft202012Validator(schema)
+
+    assert set(schema["properties"]) == set(ExternalOutcomeReport.model_fields)
+    assert not list(validator.iter_errors(report))
+    assert list(validator.iter_errors({**report, "validation_results": [{}]}))
+    assert list(validator.iter_errors({**report, "status": "host_selected"}))
 
 
 def test_protocol_modern_discover_and_list(tmp_path):
@@ -62,7 +95,7 @@ def test_protocol_modern_discover_and_list(tmp_path):
                 "params": {"_meta": meta},
             }
         )
-        assert len(listed["result"]["tools"]) == 6
+        assert len(listed["result"]["tools"]) == 9
         assert listed["result"]["resultType"] == "complete"
         assert listed["result"]["ttlMs"] > 0
         assert listed["result"]["cacheScope"] == "private"
@@ -168,3 +201,78 @@ async def test_model_arguments_cannot_self_approve_write(text_schema, stats_sche
     ).call("aeep_execute_action", arguments)
     assert approved["isError"] is False
     await router.close()
+
+
+@pytest.mark.asyncio
+async def test_economic_mcp_surface_is_read_only_sanitized_and_listed():
+    from types import SimpleNamespace
+    from typing import Any, cast
+
+    class Record:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def model_dump(self, *, mode):
+            assert mode == "json"
+            return self.payload
+
+    class Store:
+        def get_prepared_decision(self, prepared_id):
+            return Record(
+                {
+                    "prepared_id": prepared_id,
+                    "state": "PREPARED",
+                    "disclosed_quote_features": {
+                        "input_bytes": 12,
+                        "access_token": "must-not-leak",
+                    },
+                    "input": {"resume": "must-not-leak"},
+                }
+            )
+
+        def get_bounded_quote(self, quote_id):
+            return Record(
+                {
+                    "quote_id": quote_id,
+                    "maximum_amount": {"amount": "0.0050", "currency": "USD"},
+                    "evidence_level": "SIGNED_QUOTE",
+                    "authorization": "must-not-leak",
+                }
+            )
+
+        def get_settlement_receipt(self, settlement_id):
+            return Record(
+                {
+                    "settlement_id": settlement_id,
+                    "captured_amount": {"amount": "0.0038", "currency": "USD"},
+                    "released_amount": {"amount": "0.0012", "currency": "USD"},
+                    "external_reference": "must-not-leak",
+                }
+            )
+
+    router = cast(Any, SimpleNamespace(store=Store()))
+    service = AEEPToolService(router)
+    listed = {tool["name"]: tool for tool in service.list_tools()}
+    safe_names = {
+        "aeep_show_prepared_decision",
+        "aeep_show_quote",
+        "aeep_show_settlement",
+    }
+    assert safe_names <= listed.keys()
+    assert all(listed[name]["annotations"] == {"readOnlyHint": True, "idempotentHint": True} for name in safe_names)
+
+    prepared = await service.call(
+        "aeep_show_prepared_decision", {"prepared_id": "prepared-1"}
+    )
+    quote = await service.call("aeep_show_quote", {"quote_id": "quote-1"})
+    settlement = await service.call(
+        "aeep_show_settlement", {"settlement_id": "settlement-1"}
+    )
+    assert prepared["structuredContent"]["disclosed_quote_features"] == {"input_bytes": 12}
+    assert quote["structuredContent"]["maximum_amount"]["amount"] == "0.0050"
+    assert settlement["structuredContent"]["released_amount"]["amount"] == "0.0012"
+    assert "must-not-leak" not in str((prepared, quote, settlement))
+
+    hidden = await service.call("aeep_prepare_route", {})
+    assert hidden["isError"] is True
+    assert "aeep_prepare_route" not in listed

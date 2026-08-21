@@ -15,10 +15,17 @@
           "type": "string"
         },
         "estimated_cash_saving_usd": {
-          "default": 0.0,
-          "minimum": 0.0,
-          "title": "Estimated Cash Saving Usd",
-          "type": "number"
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cash Saving Usd"
         },
         "estimated_latency_saving_ms": {
           "default": 0.0,

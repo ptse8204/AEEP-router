@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "PricingDisputeStatus": {
+      "enum": [
+        "OPEN",
+        "RESOLVED",
+        "REJECTED"
+      ],
+      "title": "PricingDisputeStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "dispute_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Dispute Id",
+      "type": "string"
+    },
+    "prepared_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Prepared Id",
+      "type": "string"
+    },
+    "quote_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Quote Id",
+      "type": "string"
+    },
+    "usage_statement_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Usage Statement Id"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "quoted_maximum": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "provider_claimed_amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "status": {
+      "$ref": "#/$defs/PricingDisputeStatus",
+      "default": "OPEN"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "resolved_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolved At"
+    }
+  },
+  "required": [
+    "dispute_id",
+    "prepared_id",
+    "quote_id",
+    "provider_id",
+    "quoted_maximum",
+    "provider_claimed_amount",
+    "reason"
+  ],
+  "title": "PricingDispute",
+  "type": "object"
+}

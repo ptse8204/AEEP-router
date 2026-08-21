@@ -3,20 +3,30 @@
 from __future__ import annotations
 
 import json
+import math
 import time
 from contextlib import AbstractContextManager
 from datetime import UTC, datetime
+from decimal import Decimal
 from typing import Any, Literal
 
 import psutil
 
 from .models import (
+    CashAccounting,
+    CashClassification,
+    CashEvidence,
     EstimateSource,
+    EvidenceSource,
+    EvidenceStatus,
     ExecutionReceipt,
     ExecutionStatus,
     ExecutorKind,
+    MeasurementEvidence,
+    ResourceAccounting,
     ResourceVector,
     RouteEstimate,
+    TrustLevel,
     new_id,
 )
 from .store import ReceiptStore
@@ -68,6 +78,7 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
         self.estimated = estimated or RouteEstimate(source=EstimateSource.STATIC)
         self.metadata = dict(metadata or {})
         self.resources = ResourceVector()
+        self._reported_cash: Decimal | None = None
         self.status: ExecutionStatus | None = None
         self.output_valid: bool | None = None
         self.error_message: str | None = None
@@ -87,7 +98,13 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
         return self
 
     def add_cost(self, usd: float) -> None:
-        self.resources.monetary_usd += max(0.0, usd)
+        """Retain a legacy reported cost without promoting it to settlement evidence."""
+
+        if isinstance(usd, bool) or not math.isfinite(usd) or usd < 0:
+            raise ValueError("reported cost must be finite and non-negative")
+        current = self._reported_cash if self._reported_cash is not None else Decimal(0)
+        self._reported_cash = current + Decimal(str(usd))
+        self.resources.monetary_usd = float(self._reported_cash)
 
     def add_tokens(
         self,
@@ -133,7 +150,30 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
             self.output_valid = False
         elif self.status is None:
             self.status = ExecutionStatus.SUCCESS
+        receipt_id = new_id("rcpt")
+        accounting = ResourceAccounting()
+        if self._reported_cash is not None:
+            accounting = ResourceAccounting(
+                cash=CashAccounting(
+                    status=EvidenceStatus.PARTIAL,
+                    components=[
+                        CashEvidence(
+                            charge_id=f"profile:{self.decision_id}:{self.executor_id}",
+                            amount=self._reported_cash,
+                            classification=CashClassification.ESTIMATED,
+                            evidence=MeasurementEvidence(
+                                status=EvidenceStatus.PARTIAL,
+                                source=EvidenceSource.OPERATOR_REPORT,
+                                trust=TrustLevel.OBSERVED,
+                                evidence_id=receipt_id,
+                                observed_at=ended_at,
+                            ),
+                        )
+                    ],
+                )
+            )
         self.receipt = ExecutionReceipt(
+            receipt_id=receipt_id,
             decision_id=self.decision_id,
             action_id=self.action_id,
             capability=self.capability,
@@ -144,6 +184,7 @@ class ActionProfiler(AbstractContextManager["ActionProfiler"]):
             ended_at=ended_at,
             estimated=self.estimated,
             actual_resources=self.resources,
+            accounting=accounting,
             transport_success=self.status == ExecutionStatus.SUCCESS,
             execution_success=self.status == ExecutionStatus.SUCCESS,
             schema_valid=self.output_valid,

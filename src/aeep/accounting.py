@@ -5,28 +5,451 @@ from __future__ import annotations
 import hashlib
 import json
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
+from datetime import datetime
 from decimal import Decimal
 
 from .models import (
+    BillingReconciliation,
+    BoundedQuote,
+    CapabilityOffer,
     CashAccounting,
     CashClassification,
+    CashEstimate,
     CashEvidence,
     CounterfactualCashCost,
+    EconomicEvidenceLevel,
     EvidenceSource,
     EvidenceStatus,
     ExecutionReceipt,
+    MarketAggregate,
     MeasurementEvidence,
     ModelAccessChannel,
     ModelTokenUsage,
     RateCardRate,
     RateCardSnapshot,
     RateType,
+    RefundReceiptV2,
     ResourceAccounting,
+    SettlementReceipt,
+    SettlementStatus,
     SubscriptionCharge,
     SubscriptionUsage,
     TrustLevel,
+    UsageStatement,
 )
+
+
+def _economic_evidence(
+    level: EconomicEvidenceLevel,
+    record_id: str,
+    *,
+    source: EvidenceSource,
+    observed_at: datetime,
+    status: EvidenceStatus = EvidenceStatus.COMPLETE,
+    trust: TrustLevel = TrustLevel.VERIFIED,
+) -> MeasurementEvidence:
+    """Map v0.4 evidence onto the legacy accounting envelope without inflating trust."""
+
+    return MeasurementEvidence(
+        status=status,
+        source=source,
+        trust=trust,
+        evidence_id=record_id,
+        source_reference=f"economic-evidence:{level.value}",
+        observed_at=observed_at,
+    )
+
+
+def cash_estimate_from_offer(
+    offer: CapabilityOffer,
+    meter_quantities: Mapping[str, Decimal | int | str] | None = None,
+) -> CashEstimate:
+    """Convert a verified published offer into a USD prior, never a binding quote."""
+
+    if offer.settlement_currency != "USD":
+        raise ValueError("legacy cash estimates only support USD")
+    quantities = meter_quantities or {}
+    expected = Decimal(0)
+    maximum = Decimal(0)
+    expected_known = True
+    maximum_known = True
+    for rule in offer.pricing_rules:
+        if rule.per_unit_amount is None:
+            amount = rule.evaluate().amount
+            expected += amount
+            maximum += amount
+            continue
+        quantity = quantities.get(rule.meter or "")
+        if quantity is None:
+            expected_known = False
+            if rule.maximum_amount is None:
+                maximum_known = False
+            else:
+                maximum += rule.maximum_amount.amount
+            continue
+        amount = rule.evaluate(quantity).amount
+        expected += amount
+        maximum += amount
+    if maximum_known and offer.fixed_attempt_fee is not None:
+        # A failed attempt is an alternative billing outcome, not an amount to
+        # add to the successful-use rules.  The reusable offer therefore binds
+        # the larger of its request charge and fixed failure fee.
+        maximum = max(maximum, offer.fixed_attempt_fee.amount)
+    return CashEstimate(
+        amount_usd=expected if expected_known else None,
+        upper_bound_usd=maximum if maximum_known else None,
+        evidence=_economic_evidence(
+            EconomicEvidenceLevel.PUBLISHED_OFFER,
+            offer.offer_id,
+            source=EvidenceSource.PROVIDER_REPORT,
+            observed_at=offer.issued_at,
+        ),
+    )
+
+
+def cash_estimate_from_quote(quote: BoundedQuote) -> CashEstimate:
+    """Convert a verified request-bound quote into expected and maximum USD cash."""
+
+    if quote.maximum_amount.currency != "USD":
+        raise ValueError("legacy cash estimates only support USD")
+    return CashEstimate(
+        amount_usd=(quote.expected_amount.amount if quote.expected_amount is not None else None),
+        upper_bound_usd=quote.maximum_amount.amount,
+        evidence=_economic_evidence(
+            EconomicEvidenceLevel.SIGNED_QUOTE,
+            quote.quote_id,
+            source=EvidenceSource.PROVIDER_REPORT,
+            observed_at=quote.issued_at,
+        ),
+    )
+
+
+def cash_estimate_from_market_aggregate(aggregate: MarketAggregate) -> CashEstimate:
+    """Use a verified aggregate as a prior; p95 is not a contractual upper bound."""
+
+    amount = aggregate.actual_cost_p50
+    if any(
+        value is not None and value.currency != "USD"
+        for value in (aggregate.actual_cost_p50, aggregate.actual_cost_p95)
+    ):
+        raise ValueError("legacy cash estimates only support USD")
+    return CashEstimate(
+        amount_usd=amount.amount if amount is not None else None,
+        upper_bound_usd=None,
+        evidence=_economic_evidence(
+            EconomicEvidenceLevel.STATIC_PRIOR,
+            aggregate.aggregate_id,
+            source=EvidenceSource.PROVIDER_REPORT,
+            observed_at=aggregate.generated_at,
+        ),
+    )
+
+
+def _cash_status(components: list[CashEvidence]) -> EvidenceStatus:
+    if not components:
+        return EvidenceStatus.UNAVAILABLE
+    authoritative = {CashClassification.VERIFIED, CashClassification.BILLING_RECONCILED}
+    groups = {
+        charge_id: [item for item in components if item.charge_id == charge_id]
+        for charge_id in {item.charge_id for item in components}
+    }
+    if all(
+        any(item.amount is not None and item.classification in authoritative for item in group)
+        for group in groups.values()
+    ):
+        return EvidenceStatus.COMPLETE
+    return EvidenceStatus.PARTIAL
+
+
+def _merge_cash(prior: CashAccounting | None, component: CashEvidence) -> CashAccounting:
+    existing = list(prior.components) if prior is not None else []
+    evidence_id = component.evidence.evidence_id
+    for item in existing:
+        if evidence_id is not None and item.evidence.evidence_id == evidence_id:
+            if item != component:
+                raise ValueError(f"conflicting economic evidence ID {evidence_id!r}")
+            return CashAccounting(status=_cash_status(existing), components=existing)
+    # Newer evidence comes first so the legacy resolver returns the strongest
+    # matching stage while retaining earlier stages for audit.
+    components = [component, *existing]
+    return CashAccounting(status=_cash_status(components), components=components)
+
+
+def cash_accounting_from_usage_statement(
+    statement: UsageStatement,
+    *,
+    charge_id: str,
+    prior: CashAccounting | None = None,
+) -> CashAccounting:
+    """Record a signed provider assertion without treating it as payment evidence."""
+
+    claimed = statement.provider_calculated_amount
+    component = CashEvidence(
+        charge_id=charge_id,
+        amount=claimed.amount if claimed is not None else None,
+        currency=claimed.currency if claimed is not None else "USD",
+        classification=(
+            CashClassification.ESTIMATED
+            if claimed is not None
+            else CashClassification.UNAVAILABLE
+        ),
+        evidence=_economic_evidence(
+            EconomicEvidenceLevel.SIGNED_USAGE_STATEMENT,
+            statement.usage_statement_id,
+            source=EvidenceSource.PROVIDER_REPORT,
+            observed_at=statement.issued_at,
+            status=EvidenceStatus.PARTIAL,
+        ),
+    )
+    return _merge_cash(prior, component)
+
+
+def cash_accounting_from_settlement(
+    settlement: SettlementReceipt,
+    *,
+    prior: CashAccounting | None = None,
+) -> CashAccounting:
+    """Record captured cash; incomplete settlements remain partial and non-authoritative."""
+
+    final = settlement.status in {
+        SettlementStatus.COMPLETED,
+        SettlementStatus.SETTLED,
+        SettlementStatus.RELEASED,
+    }
+    verified = final and settlement.evidence_level.is_payment_evidence
+    component = CashEvidence(
+        charge_id=settlement.charge_id,
+        amount=settlement.captured_amount.amount,
+        currency=settlement.captured_amount.currency,
+        classification=(
+            CashClassification.VERIFIED if verified else CashClassification.ESTIMATED
+        ),
+        evidence=_economic_evidence(
+            settlement.evidence_level,
+            settlement.settlement_id,
+            source=(
+                EvidenceSource.BILLING_RECORD if verified else EvidenceSource.OPERATOR_REPORT
+            ),
+            observed_at=settlement.settled_at,
+            status=EvidenceStatus.COMPLETE if verified else EvidenceStatus.PARTIAL,
+            trust=TrustLevel.VERIFIED if verified else TrustLevel.OBSERVED,
+        ),
+        billing_record_id=settlement.settlement_id,
+    )
+    return _merge_cash(prior, component)
+
+
+def cash_accounting_from_reconciliation(
+    reconciliation: BillingReconciliation,
+    *,
+    charge_id: str,
+    prior: CashAccounting | None = None,
+) -> CashAccounting:
+    """Upgrade matching payment evidence; unresolved discrepancies stay non-authoritative."""
+
+    reconciled = reconciliation.status.is_billing_reconciled
+    component = CashEvidence(
+        charge_id=charge_id,
+        amount=reconciliation.billed_amount.amount,
+        currency=reconciliation.billed_amount.currency,
+        classification=(
+            CashClassification.BILLING_RECONCILED
+            if reconciled
+            else CashClassification.ESTIMATED
+        ),
+        evidence=_economic_evidence(
+            (
+                EconomicEvidenceLevel.BILLING_RECONCILED
+                if reconciled
+                else EconomicEvidenceLevel.UNKNOWN
+            ),
+            reconciliation.reconciliation_id,
+            source=(
+                EvidenceSource.BILLING_RECORD
+                if reconciled
+                else EvidenceSource.OPERATOR_REPORT
+            ),
+            observed_at=reconciliation.reconciled_at,
+            status=EvidenceStatus.COMPLETE if reconciled else EvidenceStatus.PARTIAL,
+            trust=TrustLevel.VERIFIED if reconciled else TrustLevel.OBSERVED,
+        ),
+        billing_record_id=reconciliation.reconciliation_id,
+    )
+    return _merge_cash(prior, component)
+
+
+def _conflicting_report_cash(
+    settlement: SettlementReceipt,
+    *,
+    reason: str,
+) -> CashAccounting:
+    """Fail closed when supposedly linked immutable payment records disagree."""
+
+    return CashAccounting(
+        status=EvidenceStatus.CONFLICT,
+        components=[
+            CashEvidence(
+                charge_id=settlement.charge_id,
+                amount=None,
+                currency=settlement.captured_amount.currency,
+                classification=CashClassification.UNAVAILABLE,
+                evidence=MeasurementEvidence(
+                    status=EvidenceStatus.CONFLICT,
+                    source=EvidenceSource.BILLING_RECORD,
+                    trust=TrustLevel.VERIFIED,
+                    evidence_id=settlement.settlement_id,
+                    source_reference=reason,
+                    observed_at=settlement.settled_at,
+                ),
+            )
+        ],
+    )
+
+
+def cash_accounting_for_reporting(
+    settlement: SettlementReceipt,
+    *,
+    reconciliations: Iterable[BillingReconciliation] = (),
+    refunds: Iterable[RefundReceiptV2] = (),
+) -> CashAccounting:
+    """Resolve immutable paid-cash evidence into one non-persisted net charge.
+
+    Settlement is the payment baseline.  The latest eligible reconciliation may
+    replace that baseline, and completed V2 refunds are then deducted exactly
+    once by immutable refund ID.  Historical receipts and evidence records stay
+    untouched; this view exists only for totals and other operator reporting.
+    """
+
+    settled = cash_accounting_from_settlement(settlement)
+    if settled.actual_cash_cost(settlement.captured_amount.currency) is None:
+        return settled
+
+    eligible = [
+        item
+        for item in reconciliations
+        if item.settlement_id == settlement.settlement_id
+        and item.status.is_billing_reconciled
+        and item.expected_amount == settlement.captured_amount
+        and (
+            item.invoice_reference is not None
+            or item.billing_record_reference is not None
+            or item.evidence_digest is not None
+        )
+    ]
+    reconciliation = max(
+        eligible,
+        key=lambda item: (item.reconciled_at, item.reconciliation_id),
+        default=None,
+    )
+    amount = (
+        reconciliation.billed_amount.amount
+        if reconciliation is not None
+        else settlement.captured_amount.amount
+    )
+    currency = (
+        reconciliation.billed_amount.currency
+        if reconciliation is not None
+        else settlement.captured_amount.currency
+    )
+    if currency != settlement.captured_amount.currency:
+        return _conflicting_report_cash(
+            settlement,
+            reason="reconciliation currency conflicts with settlement",
+        )
+
+    unique_refunds: dict[str, RefundReceiptV2] = {}
+    for refund in refunds:
+        previous = unique_refunds.get(refund.refund_id)
+        if previous is not None:
+            if previous != refund:
+                return _conflicting_report_cash(
+                    settlement,
+                    reason="refund ID conflicts with immutable refund evidence",
+                )
+            continue
+        if (
+            refund.settlement_id != settlement.settlement_id
+            or refund.charge_id != settlement.charge_id
+            or refund.amount.currency != currency
+        ):
+            return _conflicting_report_cash(
+                settlement,
+                reason="refund binding conflicts with settlement",
+            )
+        unique_refunds[refund.refund_id] = refund
+
+    refunded = sum(
+        (item.amount.amount for item in unique_refunds.values()),
+        Decimal(0),
+    )
+    if refunded > amount:
+        return _conflicting_report_cash(
+            settlement,
+            reason="refund evidence exceeds the authoritative charge",
+        )
+    if reconciliation is None and not unique_refunds:
+        return settled
+    if reconciliation is not None and not unique_refunds:
+        return cash_accounting_from_reconciliation(
+            reconciliation,
+            charge_id=settlement.charge_id,
+            prior=settled,
+        )
+
+    refund_payload = [
+        {
+            "refund_id": item.refund_id,
+            "amount": str(item.amount.amount),
+            "currency": item.amount.currency,
+        }
+        for item in sorted(unique_refunds.values(), key=lambda item: item.refund_id)
+    ]
+    digest = hashlib.sha256(
+        json.dumps(refund_payload, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    evidence_level = (
+        reconciliation.status.economic_evidence_level
+        if reconciliation is not None
+        else settlement.evidence_level
+    )
+    observed_at = max(
+        [
+            settlement.settled_at,
+            *(item.refunded_at for item in unique_refunds.values()),
+            *(
+                [reconciliation.reconciled_at]
+                if reconciliation is not None
+                else []
+            ),
+        ]
+    )
+    return CashAccounting(
+        status=EvidenceStatus.COMPLETE,
+        components=[
+            CashEvidence(
+                charge_id=settlement.charge_id,
+                amount=amount - refunded,
+                currency=currency,
+                classification=(
+                    CashClassification.BILLING_RECONCILED
+                    if reconciliation is not None
+                    else CashClassification.VERIFIED
+                ),
+                evidence=_economic_evidence(
+                    evidence_level,
+                    f"net_{digest}",
+                    source=EvidenceSource.BILLING_RECORD,
+                    observed_at=observed_at,
+                ),
+                billing_record_id=(
+                    reconciliation.reconciliation_id
+                    if reconciliation is not None
+                    else settlement.settlement_id
+                ),
+            )
+        ],
+    )
 
 
 def usage_fingerprint(usage: ModelTokenUsage) -> str:
@@ -419,5 +842,7 @@ def aggregate_accounting(
 
 
 def mirror_actual_cash(accounting: ResourceAccounting) -> float:
+    """Return the legacy numeric mirror; never use it for routing or savings claims."""
+
     actual = accounting.cash.actual_cash_cost("USD")
     return float(actual) if actual is not None else 0.0

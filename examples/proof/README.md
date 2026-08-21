@@ -1,8 +1,10 @@
-# AEEP 0.3 proof assets
+# AEEP 0.4 proof assets
 
-These assets exercise the 0.3 qualification, accounting, campaign, workflow,
-and release-gate paths. The `fixture.*` routes are hermetic harness tests and
-must never be described as live model evidence.
+These assets preserve the qualification, accounting, campaign, workflow, and
+release-gate paths introduced before 0.4. The `fixture.*` routes are hermetic
+harness tests and must never be described as live model evidence. The 0.4
+economic-settlement campaign is documented separately under
+`examples/economic_evidence/`.
 
 The controlled MCP supply is the Docker `fetch` image pinned in
 `docker-fetch-provider.json`. The operator profile is named `aeep-lab`, has
@@ -106,3 +108,6 @@ aeep campaign prove \
 The locked correctness, token, time, policy-oracle, activation, and ledger
 separation gates pass for these two campaigns. This is not an actual-cash claim
 and does not replace a separately authorized API-key campaign.
+`aeep campaign prove` writes the requested proof artifact and exits with status
+4 when any locked gate fails, so CI must inspect the command status as well as
+retain the report.

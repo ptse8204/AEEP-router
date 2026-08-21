@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "BillingTrigger": {
+      "enum": [
+        "ON_SUCCESS",
+        "ON_ATTEMPT",
+        "ON_ACCEPTED_RESULT",
+        "ON_PROVIDER_START",
+        "MANUAL_RECONCILIATION"
+      ],
+      "title": "BillingTrigger",
+      "type": "string"
+    },
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "FailureChargePolicy": {
+      "enum": [
+        "NO_CHARGE",
+        "CHARGE_ACTUAL_USAGE",
+        "CHARGE_FIXED_ATTEMPT_FEE",
+        "CHARGE_MAXIMUM",
+        "MANUAL_RECONCILIATION"
+      ],
+      "title": "FailureChargePolicy",
+      "type": "string"
+    },
+    "MeterQuantity": {
+      "additionalProperties": false,
+      "properties": {
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Meter",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Unit",
+          "type": "string"
+        },
+        "quantity": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quantity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "meter",
+        "unit",
+        "quantity"
+      ],
+      "title": "MeterQuantity",
+      "type": "object"
+    },
+    "RetryChargePolicy": {
+      "enum": [
+        "EACH_ATTEMPT",
+        "FIRST_ATTEMPT_ONLY",
+        "SUCCESSFUL_ATTEMPT_ONLY",
+        "MANUAL_RECONCILIATION"
+      ],
+      "title": "RetryChargePolicy",
+      "type": "string"
+    },
+    "SignatureAlgorithm": {
+      "enum": [
+        "hmac-sha256",
+        "ed25519"
+      ],
+      "title": "SignatureAlgorithm",
+      "type": "string"
+    },
+    "SignatureEnvelopeV2": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/$defs/SignatureAlgorithm"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Value",
+          "type": "string"
+        },
+        "canonicalization_version": {
+          "const": "aeep-canonical-json-v1",
+          "default": "aeep-canonical-json-v1",
+          "title": "Canonicalization Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "SignatureEnvelopeV2",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "quote_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Quote Id",
+      "type": "string"
+    },
+    "quote_request_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Quote Request Id",
+      "type": "string"
+    },
+    "offer_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Offer Id"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 3,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+      "title": "Capability",
+      "type": "string"
+    },
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "action_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "nonce": {
+      "maxLength": 256,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Nonce",
+      "type": "string"
+    },
+    "expected_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "maximum_amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "estimated_meters": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MeterQuantity"
+      },
+      "title": "Estimated Meters",
+      "type": "array"
+    },
+    "billing_trigger": {
+      "$ref": "#/$defs/BillingTrigger"
+    },
+    "failure_charge_policy": {
+      "$ref": "#/$defs/FailureChargePolicy"
+    },
+    "retry_charge_policy": {
+      "$ref": "#/$defs/RetryChargePolicy"
+    },
+    "fixed_attempt_fee": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "terms_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Terms Digest",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "signature": {
+      "$ref": "#/$defs/SignatureEnvelopeV2"
+    },
+    "evidence_level": {
+      "const": "SIGNED_QUOTE",
+      "default": "SIGNED_QUOTE",
+      "title": "Evidence Level",
+      "type": "string"
+    }
+  },
+  "required": [
+    "quote_id",
+    "quote_request_id",
+    "provider_id",
+    "capability",
+    "executor_id",
+    "executor_fingerprint",
+    "action_digest",
+    "nonce",
+    "maximum_amount",
+    "billing_trigger",
+    "failure_charge_policy",
+    "retry_charge_policy",
+    "terms_digest",
+    "issued_at",
+    "expires_at",
+    "signature"
+  ],
+  "title": "BoundedQuote",
+  "type": "object"
+}

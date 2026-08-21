@@ -6,6 +6,7 @@ from pathlib import Path
 import yaml
 from typer.testing import CliRunner
 
+from aeep import __version__
 from aeep.cli import app
 
 runner = CliRunner()
@@ -20,7 +21,7 @@ def _init(tmp_path: Path) -> Path:
 
 def test_version_list_policies_show_and_dry_run(tmp_path):
     manifest = _init(tmp_path)
-    assert runner.invoke(app, ["version"]).stdout.strip() == "0.3.0"
+    assert runner.invoke(app, ["version"]).stdout.strip() == __version__
 
     listed = runner.invoke(app, ["list", "-m", str(manifest), "--compact"])
     assert listed.exit_code == 0

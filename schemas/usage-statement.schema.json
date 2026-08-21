@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "MeterQuantity": {
+      "additionalProperties": false,
+      "properties": {
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Meter",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Unit",
+          "type": "string"
+        },
+        "quantity": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quantity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "meter",
+        "unit",
+        "quantity"
+      ],
+      "title": "MeterQuantity",
+      "type": "object"
+    },
+    "ProviderExecutionStatus": {
+      "enum": [
+        "SUCCESS",
+        "FAILED",
+        "TIMEOUT",
+        "REJECTED",
+        "INDETERMINATE"
+      ],
+      "title": "ProviderExecutionStatus",
+      "type": "string"
+    },
+    "SignatureAlgorithm": {
+      "enum": [
+        "hmac-sha256",
+        "ed25519"
+      ],
+      "title": "SignatureAlgorithm",
+      "type": "string"
+    },
+    "SignatureEnvelopeV2": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/$defs/SignatureAlgorithm"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Value",
+          "type": "string"
+        },
+        "canonicalization_version": {
+          "const": "aeep-canonical-json-v1",
+          "default": "aeep-canonical-json-v1",
+          "title": "Canonicalization Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "SignatureEnvelopeV2",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "usage_statement_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Usage Statement Id",
+      "type": "string"
+    },
+    "quote_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Quote Id",
+      "type": "string"
+    },
+    "prepared_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Prepared Id",
+      "type": "string"
+    },
+    "action_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "execution_status": {
+      "$ref": "#/$defs/ProviderExecutionStatus"
+    },
+    "meters": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MeterQuantity"
+      },
+      "title": "Meters",
+      "type": "array"
+    },
+    "provider_calculated_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "started_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Started At"
+    },
+    "completed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Completed At"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "signature": {
+      "$ref": "#/$defs/SignatureEnvelopeV2"
+    },
+    "evidence_level": {
+      "const": "SIGNED_USAGE_STATEMENT",
+      "default": "SIGNED_USAGE_STATEMENT",
+      "title": "Evidence Level",
+      "type": "string"
+    }
+  },
+  "required": [
+    "usage_statement_id",
+    "quote_id",
+    "prepared_id",
+    "action_id",
+    "attempt_id",
+    "provider_id",
+    "executor_id",
+    "executor_fingerprint",
+    "execution_status",
+    "issued_at",
+    "signature"
+  ],
+  "title": "UsageStatement",
+  "type": "object"
+}

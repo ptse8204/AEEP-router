@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "PricingRoundingMode": {
+      "enum": [
+        "ROUND_UP",
+        "ROUND_DOWN",
+        "ROUND_CEILING",
+        "ROUND_FLOOR",
+        "ROUND_HALF_UP",
+        "ROUND_HALF_EVEN"
+      ],
+      "title": "PricingRoundingMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "rule_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "meter": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Meter"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "fixed_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "per_unit_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "free_quantity": {
+      "anyOf": [
+        {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Free Quantity"
+    },
+    "minimum_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "maximum_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rounding_mode": {
+      "$ref": "#/$defs/PricingRoundingMode",
+      "default": "ROUND_CEILING"
+    },
+    "quantity_increment": {
+      "anyOf": [
+        {
+          "pattern": "^(?:0\\.[0-9]*[1-9][0-9]*|[1-9][0-9]*(?:\\.[0-9]+)?)$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantity Increment"
+    }
+  },
+  "required": [
+    "rule_id"
+  ],
+  "title": "PricingRule",
+  "type": "object"
+}

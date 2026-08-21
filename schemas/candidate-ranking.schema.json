@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "EconomicEvidenceLevel": {
+      "enum": [
+        "UNKNOWN",
+        "STATIC_PRIOR",
+        "PUBLISHED_OFFER",
+        "SIGNED_QUOTE",
+        "SIGNED_USAGE_STATEMENT",
+        "PAYMENT_SETTLEMENT",
+        "BILLING_RECONCILED",
+        "OPERATOR_ATTESTED"
+      ],
+      "title": "EconomicEvidenceLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "rank": {
+      "minimum": 1,
+      "title": "Rank",
+      "type": "integer"
+    },
+    "score": {
+      "anyOf": [
+        {
+          "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Score"
+    },
+    "quote_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quote Id"
+    },
+    "expected_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "maximum_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "evidence_level": {
+      "$ref": "#/$defs/EconomicEvidenceLevel",
+      "default": "UNKNOWN"
+    },
+    "explanation": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Explanation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "executor_id",
+    "executor_fingerprint",
+    "rank"
+  ],
+  "title": "CandidateRanking",
+  "type": "object"
+}

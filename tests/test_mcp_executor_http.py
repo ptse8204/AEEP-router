@@ -309,6 +309,8 @@ async def test_mcp_executor_http_and_sse():
             config={
                 "transport": "http",
                 "url": url,
+                "allowed_hosts": ["127.0.0.1"],
+                "allow_private_networks": True,
                 "tool": "text_stats",
                 "arguments": {"text": "{input.text}"},
             },
@@ -422,9 +424,50 @@ def test_create_http_app_auth_and_modern_header_validation(tmp_path):
         response = client.post("/mcp", json=message, headers=_modern_headers("tools/list"))
         assert response.status_code == 200
         result = response.json()["result"]
-        assert len(result["tools"]) == 6
+        assert len(result["tools"]) == 9
         assert result["resultType"] == "complete"
         assert result["ttlMs"] > 0
+        assert {
+            "aeep_show_prepared_decision",
+            "aeep_show_quote",
+            "aeep_show_settlement",
+        } <= {tool["name"] for tool in result["tools"]}
+
+        hidden_call = {
+            "jsonrpc": "2.0",
+            "id": 2,
+            "method": "tools/call",
+            "params": {
+                "name": "aeep_prepare_route",
+                "arguments": {},
+                "_meta": _modern_meta(),
+            },
+        }
+        hidden_response = client.post(
+            "/mcp",
+            json=hidden_call,
+            headers=_modern_headers("tools/call", name="aeep_prepare_route"),
+        )
+        assert hidden_response.status_code == 200
+        assert hidden_response.json()["error"]["code"] == -32602
+
+        read_call = {
+            "jsonrpc": "2.0",
+            "id": 3,
+            "method": "tools/call",
+            "params": {
+                "name": "aeep_show_quote",
+                "arguments": {"quote_id": "missing-quote"},
+                "_meta": _modern_meta(),
+            },
+        }
+        read_response = client.post(
+            "/mcp",
+            json=read_call,
+            headers=_modern_headers("tools/call", name="aeep_show_quote"),
+        )
+        assert read_response.status_code == 200
+        assert read_response.json()["result"]["isError"] is True
 
         mismatch = client.post("/mcp", json=message, headers=_modern_headers("tools/call"))
         assert mismatch.status_code == 400

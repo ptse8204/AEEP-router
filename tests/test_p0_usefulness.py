@@ -240,8 +240,28 @@ async def test_mcp_server_import_discovers_tools(tmp_path):
         args=["-m", "aeep", "serve", "--transport", "stdio", "-m", str(manifest)],
         capability_prefix="imported",
     )
-    assert len(descriptor.executors) == 6
+    assert {executor.config["tool"] for executor in descriptor.executors} == {
+        "aeep_execute_action",
+        "aeep_get_metrics",
+        "aeep_list_capabilities",
+        "aeep_record_outcome",
+        "aeep_request_quotes",
+        "aeep_route_action",
+        "aeep_show_prepared_decision",
+        "aeep_show_quote",
+        "aeep_show_settlement",
+    }
     assert {executor.kind for executor in descriptor.executors} == {ExecutorKind.MCP}
+    inspection_tools = {
+        "aeep_show_prepared_decision",
+        "aeep_show_quote",
+        "aeep_show_settlement",
+    }
+    assert all(
+        not executor.enabled and not executor.safe_to_auto_execute
+        for executor in descriptor.executors
+        if executor.config["tool"] in inspection_tools
+    )
 
 
 @pytest.mark.asyncio

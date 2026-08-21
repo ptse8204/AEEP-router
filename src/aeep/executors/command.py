@@ -6,6 +6,7 @@ import asyncio
 import json
 import os
 import signal
+import sys
 import time
 from contextlib import suppress
 from dataclasses import dataclass
@@ -184,7 +185,7 @@ class CommandExecutor(BaseExecutor):
             await asyncio.wait_for(process.wait(), timeout=timeout)
         except TimeoutError:
             timed_out = True
-            if os.name == "posix":
+            if sys.platform != "win32":
                 with suppress(ProcessLookupError):
                     os.killpg(process.pid, signal.SIGTERM)
             else:  # pragma: no cover
@@ -192,7 +193,7 @@ class CommandExecutor(BaseExecutor):
             try:
                 await asyncio.wait_for(process.wait(), timeout=2.0)
             except TimeoutError:
-                if os.name == "posix":
+                if sys.platform != "win32":
                     with suppress(ProcessLookupError):
                         os.killpg(process.pid, signal.SIGKILL)
                 else:  # pragma: no cover

@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "enabled": {
+      "default": false,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "maximum_age_seconds": {
+      "default": 86400,
+      "maximum": 2592000,
+      "minimum": 1,
+      "title": "Maximum Age Seconds",
+      "type": "integer"
+    },
+    "minimum_sample_size": {
+      "default": 20,
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Minimum Sample Size",
+      "type": "integer"
+    },
+    "minimum_settlement_verified_fraction": {
+      "default": "0.80",
+      "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Minimum Settlement Verified Fraction",
+      "type": "string"
+    }
+  },
+  "title": "MarketAggregatesConfig",
+  "type": "object"
+}

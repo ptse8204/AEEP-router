@@ -37,7 +37,39 @@ HEADER_MISMATCH = -32020
 _SERVER_INFO_KEY = "io.modelcontextprotocol/serverInfo"
 _INSTRUCTIONS = (
     "Use aeep_route_action to inspect alternatives and aeep_execute_action to execute. "
-    "Report a selected host-delegated route exactly once with aeep_record_outcome."
+    "Report a selected host-delegated route exactly once with aeep_record_outcome. "
+    "Economic evidence tools are read-only inspection operations; they cannot approve or settle."
+)
+
+_PRIVATE_ECONOMIC_FIELDS = frozenset(
+    {
+        "access_token",
+        "api_key",
+        "action_input",
+        "action_output",
+        "authorization",
+        "billing_record_reference",
+        "client_secret",
+        "cookie",
+        "credential",
+        "credentials",
+        "external_reference",
+        "input",
+        "invoice_reference",
+        "output",
+        "password",
+        "payload",
+        "private_key",
+        "raw_input",
+        "raw_output",
+        "refresh_token",
+        "secret",
+        "secret_key",
+        "source_reference",
+        "token",
+        "uri",
+        "url",
+    }
 )
 
 
@@ -67,6 +99,27 @@ def _tool_result(
     if usage is not None:
         result["_meta"] = {"org.aeep/usage": usage.model_dump(mode="json")}
     return result
+
+
+def _economic_record_view(record: Any) -> dict[str, Any]:
+    """Return an economic record without payloads, secrets, or external references."""
+
+    def scrub(value: Any) -> Any:
+        if isinstance(value, dict):
+            return {
+                key: scrub(item)
+                for key, item in value.items()
+                if key.lower() not in _PRIVATE_ECONOMIC_FIELDS
+            }
+        if isinstance(value, list):
+            return [scrub(item) for item in value]
+        return value
+
+    payload = record.model_dump(mode="json")
+    sanitized = scrub(payload)
+    if not isinstance(sanitized, dict):  # pragma: no cover - Pydantic model invariant
+        raise TypeError("economic record must serialize as an object")
+    return sanitized
 
 
 def _action_from_arguments(arguments: dict[str, Any]) -> ActionRequest:
@@ -188,6 +241,33 @@ class AEEPToolService:
             if name == "aeep_get_metrics":
                 metrics = self.router.metrics(limit=int(arguments.get("limit", 10_000)))
                 return _tool_result(metrics.model_dump(mode="json"))
+            if name == "aeep_show_prepared_decision":
+                prepared_id = str(arguments["prepared_id"])
+                prepared = self.router.store.get_prepared_decision(prepared_id)
+                if prepared is None:
+                    return _tool_result(
+                        {"error": f"prepared decision {prepared_id!r} was not found"},
+                        is_error=True,
+                    )
+                return _tool_result(_economic_record_view(prepared))
+            if name == "aeep_show_quote":
+                quote_id = str(arguments["quote_id"])
+                quote = self.router.store.get_bounded_quote(quote_id)
+                if quote is None:
+                    return _tool_result(
+                        {"error": f"bounded quote {quote_id!r} was not found"},
+                        is_error=True,
+                    )
+                return _tool_result(_economic_record_view(quote))
+            if name == "aeep_show_settlement":
+                settlement_id = str(arguments["settlement_id"])
+                settlement = self.router.store.get_settlement_receipt(settlement_id)
+                if settlement is None:
+                    return _tool_result(
+                        {"error": f"settlement {settlement_id!r} was not found"},
+                        is_error=True,
+                    )
+                return _tool_result(_economic_record_view(settlement))
             return _tool_result({"error": f"unknown tool {name!r}"}, is_error=True)
         except ApprovalRequired as exc:
             return _tool_result(

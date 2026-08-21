@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "SignatureAlgorithm": {
+      "enum": [
+        "hmac-sha256",
+        "ed25519"
+      ],
+      "title": "SignatureAlgorithm",
+      "type": "string"
+    },
+    "SignatureEnvelopeV2": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/$defs/SignatureAlgorithm"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Value",
+          "type": "string"
+        },
+        "canonicalization_version": {
+          "const": "aeep-canonical-json-v1",
+          "default": "aeep-canonical-json-v1",
+          "title": "Canonicalization Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "SignatureEnvelopeV2",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "refund_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Refund Id",
+      "type": "string"
+    },
+    "settlement_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Settlement Id",
+      "type": "string"
+    },
+    "charge_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Charge Id",
+      "type": "string"
+    },
+    "amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "refunded_at": {
+      "format": "date-time",
+      "title": "Refunded At",
+      "type": "string"
+    },
+    "external_reference": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Reference"
+    },
+    "signature": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SignatureEnvelopeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "refund_id",
+    "settlement_id",
+    "charge_id",
+    "amount",
+    "reason",
+    "idempotency_key",
+    "refunded_at"
+  ],
+  "title": "RefundReceiptV2",
+  "type": "object"
+}

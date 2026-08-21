@@ -5,10 +5,12 @@ import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 import pytest
 from conftest import manifest_with
 
+from aeep.executors import ExecutionContext, HTTPExecutor
 from aeep.models import (
     ActionRequest,
     ExecutorKind,
@@ -155,6 +157,108 @@ async def test_http_executor_local_allowlisted(text_schema, stats_schema):
     finally:
         server.shutdown()
         server.server_close()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("body_field", ["json", "body"])
+async def test_http_executor_renders_prepared_execution_ids(body_field):
+    received: dict[str, object] = {}
+
+    class Handler(BaseHTTPRequestHandler):
+        def do_POST(self):
+            length = int(self.headers.get("content-length", "0"))
+            received["query"] = parse_qs(urlparse(self.path).query)
+            received["body"] = self.rfile.read(length).decode()
+            body = json.dumps(
+                {
+                    "output": "ok",
+                    "usage_statement": {"usage_statement_id": "usage-1"},
+                }
+            ).encode()
+            self.send_response(200)
+            self.send_header("content-type", "application/json")
+            self.send_header("content-length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
+        def log_message(self, *_):
+            return
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        identifiers = {
+            "prepared_id": "prepared-1",
+            "quote_id": "quote-1",
+            "attempt_id": "attempt-1",
+        }
+        template = {key: f"{{{key}}}" for key in identifiers}
+        config = {
+            "url": f"http://127.0.0.1:{server.server_port}/execute",
+            "method": "POST",
+            "query": template,
+            "allowed_hosts": ["127.0.0.1"],
+            "allow_private_networks": True,
+            "output": {"type": "json", "path": "output"},
+        }
+        config[body_field] = template if body_field == "json" else "{prepared_id}"
+        spec = ExecutorSpec(
+            id=f"http-{body_field}",
+            capability="prepared.http@1",
+            kind=ExecutorKind.HTTP,
+            description="prepared HTTP binding",
+            input_schema={"type": "object"},
+            side_effect=SideEffect.NONE,
+            locality=Locality.LAN,
+            requires_network=True,
+            config=config,
+        )
+        request = ActionRequest(capability=spec.capability, input={})
+        context = ExecutionContext(
+            request=request,
+            spec=spec,
+            estimate=spec.estimate,
+            attempt=1,
+            **identifiers,
+        )
+
+        raw = await HTTPExecutor().execute(context)
+
+        assert raw.status.value == "success"
+        assert raw.output == "ok"
+        assert raw.metadata["_economic_usage_statement"] == {
+            "usage_statement_id": "usage-1"
+        }
+        assert received["query"] == {key: [value] for key, value in identifiers.items()}
+        assert received["body"] == (
+            json.dumps(identifiers, separators=(",", ":"))
+            if body_field == "json"
+            else identifiers["prepared_id"]
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_execution_context_prepared_ids_default_to_none(text_schema):
+    spec = ExecutorSpec(
+        id="python",
+        capability="text.stats",
+        kind=ExecutorKind.PYTHON,
+        description="python",
+        input_schema=text_schema,
+        side_effect=SideEffect.NONE,
+        config={"callable": "aeep.examples.tools:text_stats"},
+    )
+    context = ExecutionContext(
+        request=ActionRequest(capability=spec.capability, input={"text": "x"}),
+        spec=spec,
+        estimate=spec.estimate,
+        attempt=1,
+    )
+
+    assert (context.prepared_id, context.quote_id, context.attempt_id) == (None, None, None)
 
 
 @pytest.mark.asyncio

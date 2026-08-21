@@ -1,0 +1,30 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "allowed_quote_hosts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Quote Hosts",
+      "type": "array"
+    },
+    "allow_private_addresses": {
+      "default": false,
+      "title": "Allow Private Addresses",
+      "type": "boolean"
+    },
+    "allow_redirects": {
+      "default": false,
+      "title": "Allow Redirects",
+      "type": "boolean"
+    },
+    "trust_environment_proxy": {
+      "default": false,
+      "title": "Trust Environment Proxy",
+      "type": "boolean"
+    }
+  },
+  "title": "EconomicNetworkConfig",
+  "type": "object"
+}

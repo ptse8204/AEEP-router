@@ -309,9 +309,10 @@ def score_candidate(
     p_success = max(estimate.success_probability, 0.001)
     expected_multiplier = 1.0 / p_success
     weights = policy.weights.normalized()
-    cash_amount = _cash_amount(estimate)
+    expected_cash = _cash_amount(estimate)
+    cash_amount = expected_cash if expected_cash is not None else _cash_upper_bound(estimate)
     cash = _over(
-        (cash_amount or 0.0) * expected_multiplier,
+        (cash_amount if cash_amount is not None else 0.0) * expected_multiplier,
         policy.references.monetary_usd,
     )
     policy_value_amount = policy_valuation_amount(estimate, policy)

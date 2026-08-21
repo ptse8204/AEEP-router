@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "AuthorizationMeterQuantity": {
+      "additionalProperties": false,
+      "description": "One pinned rate-card rate and the bounded native quantity it prices.",
+      "properties": {
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Meter",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Unit",
+          "type": "string"
+        },
+        "quantity": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quantity",
+          "type": "string"
+        },
+        "rate_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Rate Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "meter",
+        "unit",
+        "quantity",
+        "rate_id"
+      ],
+      "title": "AuthorizationMeterQuantity",
+      "type": "object"
+    },
+    "EconomicEvidenceLevel": {
+      "enum": [
+        "UNKNOWN",
+        "STATIC_PRIOR",
+        "PUBLISHED_OFFER",
+        "SIGNED_QUOTE",
+        "SIGNED_USAGE_STATEMENT",
+        "PAYMENT_SETTLEMENT",
+        "BILLING_RECONCILED",
+        "OPERATOR_ATTESTED"
+      ],
+      "title": "EconomicEvidenceLevel",
+      "type": "string"
+    },
+    "PinnedRateCardAuthorizationConfig": {
+      "additionalProperties": false,
+      "description": "Operator-pinned, unconditional rate selection for one exact executor.",
+      "properties": {
+        "rate_card_snapshot_id": {
+          "pattern": "^rate_[a-f0-9]{64}$",
+          "title": "Rate Card Snapshot Id",
+          "type": "string"
+        },
+        "meter_quantities": {
+          "items": {
+            "$ref": "#/$defs/AuthorizationMeterQuantity"
+          },
+          "minItems": 1,
+          "title": "Meter Quantities",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rate_card_snapshot_id",
+        "meter_quantities"
+      ],
+      "title": "PinnedRateCardAuthorizationConfig",
+      "type": "object"
+    },
+    "QuoteFailurePolicy": {
+      "enum": [
+        "REQUIRE_BINDING_QUOTE",
+        "ALLOW_VERIFIED_OFFER",
+        "ALLOW_STATIC_PRIOR",
+        "TREAT_AS_UNAVAILABLE"
+      ],
+      "title": "QuoteFailurePolicy",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "require_binding_quote_for_paid_routes": {
+      "default": true,
+      "title": "Require Binding Quote For Paid Routes",
+      "type": "boolean"
+    },
+    "allow_verified_static_offer": {
+      "default": true,
+      "title": "Allow Verified Static Offer",
+      "type": "boolean"
+    },
+    "allow_static_prior": {
+      "default": false,
+      "title": "Allow Static Prior",
+      "type": "boolean"
+    },
+    "minimum_evidence_level": {
+      "$ref": "#/$defs/EconomicEvidenceLevel",
+      "default": "SIGNED_QUOTE"
+    },
+    "quote_failure_policy": {
+      "$ref": "#/$defs/QuoteFailurePolicy",
+      "default": "REQUIRE_BINDING_QUOTE"
+    },
+    "pinned_rate_cards": {
+      "additionalProperties": {
+        "$ref": "#/$defs/PinnedRateCardAuthorizationConfig"
+      },
+      "title": "Pinned Rate Cards",
+      "type": "object"
+    }
+  },
+  "title": "EconomicRequirementsConfig",
+  "type": "object"
+}

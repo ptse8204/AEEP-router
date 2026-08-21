@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "AuthorizationMeterQuantity": {
+      "additionalProperties": false,
+      "description": "One pinned rate-card rate and the bounded native quantity it prices.",
+      "properties": {
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Meter",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Unit",
+          "type": "string"
+        },
+        "quantity": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quantity",
+          "type": "string"
+        },
+        "rate_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Rate Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "meter",
+        "unit",
+        "quantity",
+        "rate_id"
+      ],
+      "title": "AuthorizationMeterQuantity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Operator-pinned, unconditional rate selection for one exact executor.",
+  "properties": {
+    "rate_card_snapshot_id": {
+      "pattern": "^rate_[a-f0-9]{64}$",
+      "title": "Rate Card Snapshot Id",
+      "type": "string"
+    },
+    "meter_quantities": {
+      "items": {
+        "$ref": "#/$defs/AuthorizationMeterQuantity"
+      },
+      "minItems": 1,
+      "title": "Meter Quantities",
+      "type": "array"
+    }
+  },
+  "required": [
+    "rate_card_snapshot_id",
+    "meter_quantities"
+  ],
+  "title": "PinnedRateCardAuthorizationConfig",
+  "type": "object"
+}

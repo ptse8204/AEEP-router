@@ -1,0 +1,52 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Id"
+    },
+    "code": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Z0-9_]+$",
+      "title": "Code",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "executor_id",
+    "code",
+    "reason"
+  ],
+  "title": "QuoteFailure",
+  "type": "object"
+}

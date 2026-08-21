@@ -14,6 +14,9 @@ class ExecutionContext:
     spec: ExecutorSpec
     estimate: RouteEstimate
     attempt: int
+    prepared_id: str | None = None
+    quote_id: str | None = None
+    attempt_id: str | None = None
 
 
 class BaseExecutor(ABC):

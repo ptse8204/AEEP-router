@@ -242,9 +242,16 @@
       "type": "number"
     },
     "api_money_spent_usd": {
-      "default": 0.0,
-      "title": "Api Money Spent Usd",
-      "type": "number"
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Api Money Spent Usd"
     },
     "wall_clock_time_saved_ms": {
       "default": 0.0,
@@ -267,9 +274,16 @@
       "type": "integer"
     },
     "total_money_spent_usd": {
-      "default": 0.0,
-      "title": "Total Money Spent Usd",
-      "type": "number"
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Total Money Spent Usd"
     },
     "cost_per_successful_action_usd": {
       "anyOf": [

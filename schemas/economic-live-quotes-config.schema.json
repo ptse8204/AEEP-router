@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "enabled": {
+      "default": false,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "top_k": {
+      "default": 3,
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Top K",
+      "type": "integer"
+    },
+    "per_provider_timeout_seconds": {
+      "default": 2.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 60.0,
+      "title": "Per Provider Timeout Seconds",
+      "type": "number"
+    },
+    "total_timeout_seconds": {
+      "default": 4.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 120.0,
+      "title": "Total Timeout Seconds",
+      "type": "number"
+    },
+    "maximum_response_bytes": {
+      "default": 262144,
+      "maximum": 10000000,
+      "minimum": 1024,
+      "title": "Maximum Response Bytes",
+      "type": "integer"
+    },
+    "maximum_clock_skew_seconds": {
+      "default": 30,
+      "maximum": 300,
+      "minimum": 0,
+      "title": "Maximum Clock Skew Seconds",
+      "type": "integer"
+    },
+    "maximum_quote_ttl_seconds": {
+      "default": 600,
+      "maximum": 86400,
+      "minimum": 1,
+      "title": "Maximum Quote Ttl Seconds",
+      "type": "integer"
+    }
+  },
+  "title": "EconomicLiveQuotesConfig",
+  "type": "object"
+}

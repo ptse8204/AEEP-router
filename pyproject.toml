@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aeep-agent-router"
-version = "0.3.0"
+version = "0.4.0"
 description = "Economic profiling and policy-based routing for agent actions across CLI, HTTP, MCP, and local functions."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -21,6 +21,7 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+  "cryptography>=43,<47",
   "httpx>=0.27,<1",
   "jsonschema>=4.22,<5",
   "opentelemetry-api>=1.25,<2",
@@ -64,6 +65,8 @@ aeep = ["py.typed"]
 "share/aeep/examples/subscriptions" = ["examples/subscriptions/*.md", "examples/subscriptions/*.yaml"]
 "share/aeep/examples/github" = ["examples/github/*.md", "examples/github/*.yaml"]
 "share/aeep/examples/proof" = ["examples/proof/*.json", "examples/proof/*.md", "examples/proof/*.yaml"]
+"share/aeep/examples/economic_market" = ["examples/economic_market/*.json", "examples/economic_market/*.md", "examples/economic_market/*.py", "examples/economic_market/*.yaml"]
+"share/aeep/examples/economic_evidence" = ["examples/economic_evidence/*.json", "examples/economic_evidence/*.md", "examples/economic_evidence/*.py", "examples/economic_evidence/*.yaml"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

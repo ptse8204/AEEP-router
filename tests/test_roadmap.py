@@ -129,6 +129,16 @@ def _command_spec(executor_id: str) -> ExecutorSpec:
     )
 
 
+def _with_static_cash(spec: ExecutorSpec, amount_usd: float) -> ExecutorSpec:
+    payload = spec.estimate.model_dump(mode="python", exclude={"cash"})
+    payload["resources"] = {
+        **spec.estimate.resources.model_dump(mode="python"),
+        "monetary_usd": amount_usd,
+    }
+    spec.estimate = RouteEstimate.model_validate(payload)
+    return spec
+
+
 def _subscription(state: QuotaState = QuotaState.ABUNDANT) -> SubscriptionResource:
     return SubscriptionResource(
         id="anthropic.claude",
@@ -237,7 +247,7 @@ async def test_task_validator_is_distinct_and_can_fail_execution():
 
 def test_quotes_acceptance_and_signed_receipts_are_tamper_evident():
     signer = HMACSigner(b"x" * 32, key_id="provider-key")
-    registry = Registry([_spec("local")])
+    registry = Registry([_with_static_cash(_spec("local"), 0)])
     service = QuoteService(registry, signer=signer)
     request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     quote = service.quote(request)[0]
@@ -350,8 +360,7 @@ async def test_discovery_ignores_estimate_drift_but_suspends_behavior_drift():
 
 @pytest.mark.asyncio
 async def test_budget_reserve_capture_and_refund():
-    spec = _spec("paid")
-    spec.estimate.resources.monetary_usd = 0.25
+    spec = _with_static_cash(_spec("paid"), 0.25)
     router = Router(
         Manifest(
             database=":memory:",
@@ -479,10 +488,9 @@ async def test_all_validator_modes_and_callback_trust():
 
 @pytest.mark.asyncio
 async def test_payment_adapters_cover_free_prepaid_invoice_and_callback_rails():
-    registry = Registry([_spec("paid")])
+    registry = Registry([_with_static_cash(_spec("paid"), 0.25)])
     request = QuoteRequest(action=ActionRequest(capability="text.stats", input={"text": "abc"}))
     paid_quote = QuoteService(registry).quote(request)[0]
-    paid_quote.monetary_usd = 0.25
 
     free_quote = paid_quote.model_copy(update={"monetary_usd": 0.0})
     free = FreePaymentAdapter()
@@ -517,8 +525,7 @@ async def test_payment_adapters_cover_free_prepaid_invoice_and_callback_rails():
 
 @pytest.mark.asyncio
 async def test_budget_rejects_missing_financial_and_human_approval():
-    spec = _spec("paid")
-    spec.estimate.resources.monetary_usd = 0.25
+    spec = _with_static_cash(_spec("paid"), 0.25)
     router = Router(
         Manifest(
             database=":memory:",

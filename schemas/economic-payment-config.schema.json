@@ -1,0 +1,20 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "adapter": {
+      "default": "free",
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Adapter",
+      "type": "string"
+    },
+    "unlimited_budget": {
+      "default": false,
+      "title": "Unlimited Budget",
+      "type": "boolean"
+    }
+  },
+  "title": "EconomicPaymentConfig",
+  "type": "object"
+}

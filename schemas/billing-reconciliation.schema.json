@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "ReconciliationStatus": {
+      "enum": [
+        "MATCHED",
+        "UNDERCHARGED",
+        "OVERCHARGED",
+        "MISSING_BILLING_RECORD",
+        "PENDING",
+        "DISPUTED",
+        "RESOLVED"
+      ],
+      "title": "ReconciliationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "reconciliation_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Reconciliation Id",
+      "type": "string"
+    },
+    "settlement_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Settlement Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "invoice_reference": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Invoice Reference"
+    },
+    "billing_record_reference": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Billing Record Reference"
+    },
+    "expected_amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "billed_amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "discrepancy": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "status": {
+      "$ref": "#/$defs/ReconciliationStatus"
+    },
+    "evidence_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Digest"
+    },
+    "reconciled_at": {
+      "format": "date-time",
+      "title": "Reconciled At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reconciliation_id",
+    "settlement_id",
+    "provider_id",
+    "expected_amount",
+    "billed_amount",
+    "discrepancy",
+    "status",
+    "reconciled_at"
+  ],
+  "title": "BillingReconciliation",
+  "type": "object"
+}

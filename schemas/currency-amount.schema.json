@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Amount",
+      "type": "string"
+    },
+    "currency": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "currency"
+  ],
+  "title": "CurrencyAmount",
+  "type": "object"
+}

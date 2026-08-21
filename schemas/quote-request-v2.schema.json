@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "ActionFeatures": {
+      "additionalProperties": false,
+      "description": "Non-payload characteristics used to condition historical estimates.",
+      "properties": {
+        "input_bytes": {
+          "minimum": 0,
+          "title": "Input Bytes",
+          "type": "integer"
+        },
+        "input_items": {
+          "minimum": 0,
+          "title": "Input Items",
+          "type": "integer"
+        },
+        "text_characters": {
+          "minimum": 0,
+          "title": "Text Characters",
+          "type": "integer"
+        },
+        "max_depth": {
+          "minimum": 0,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "size_bucket": {
+          "pattern": "^(empty|2\\^[0-9]+)$",
+          "title": "Size Bucket",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_bytes",
+        "input_items",
+        "text_characters",
+        "max_depth",
+        "size_bucket"
+      ],
+      "title": "ActionFeatures",
+      "type": "object"
+    },
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "quote_request_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Quote Request Id",
+      "type": "string"
+    },
+    "action_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 3,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+      "title": "Capability",
+      "type": "string"
+    },
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "action_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "input_features": {
+      "$ref": "#/$defs/ActionFeatures"
+    },
+    "disclosed_quote_features": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Disclosed Quote Features",
+      "type": "object"
+    },
+    "desired_currency": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Desired Currency",
+      "type": "string"
+    },
+    "maximum_acceptable_amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "nonce": {
+      "maxLength": 256,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Nonce",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "quote_request_id",
+    "action_id",
+    "capability",
+    "executor_id",
+    "executor_fingerprint",
+    "action_digest",
+    "input_features",
+    "desired_currency",
+    "nonce",
+    "created_at",
+    "expires_at"
+  ],
+  "title": "QuoteRequestV2",
+  "type": "object"
+}

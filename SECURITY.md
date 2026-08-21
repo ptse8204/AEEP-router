@@ -74,7 +74,7 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 
 `aeep_record_outcome` changes future estimates. Treat access to it as write access to routing policy. Authenticate remote callers, rate-limit reports, preserve provenance, and do not merge unauthenticated reports into shared reputation. The reference implementation accepts an external report only for the selected feasible delegate and only once per decision/executor pair, but a compromised authorized caller can still fabricate that one report. Use `ActionProfiler` for trusted operator-owned measurement outside the delegate flow.
 
-Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The built-in HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system.
+Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The compatibility HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system. Cross-provider 0.4 economic evidence uses locally trusted Ed25519 keys bound to provider identity, capability, validity period, revocation metadata, and approved quote hosts.
 
 Imported traces and SDK measurements also influence local history. Treat trace files and instrumented client access as trusted measurement inputs. The built-in instrumentation stores resource metadata and identifiers, not action payloads or model outputs; trace attributes can still contain sensitive data and should be filtered at the telemetry collector.
 
@@ -91,7 +91,8 @@ Imported traces and SDK measurements also influence local history. Treat trace f
 - Remote registries use bounded HTTPS requests, no redirects, no ambient proxies, and the same DNS/IP/allowlist controls as HTTP execution.
 - Imported OpenAPI writes are unsafe for automatic execution by default.
 - CLI import accepts argv arrays and JSON stdin only; shell interpolation remains unsupported.
-- Discovery/import never activates a route. Qualification is read-only in 0.3, fingerprint-bound, and followed by a separate operator activation.
+- Discovery/import never activates a route. Qualification is read-only,
+  fingerprint-bound, and followed by a separate operator activation.
 - Endpoint, argv, MCP tool/schema/protocol, image, or version drift suspends an active imported route.
 
 ## Economic evidence
@@ -101,6 +102,9 @@ Imported traces and SDK measurements also influence local history. Treat trace f
 - Unknown cash is not zero. Confirmed zero cash does not erase subscription or model-resource pressure.
 - API-equivalent counterfactuals and policy valuations never enter cash totals, budget checks, payment ledgers, or cash-savings claims.
 - Pin rate-card content and retain applied meters/rates; never silently reprice historical campaigns.
+- Capability offers and market aggregates cannot qualify or activate a route.
+- A provider signature proves who asserted a statement, not whether its meters,
+  result, or billing claim is truthful.
 
 ## Payments and budgets
 
@@ -108,6 +112,40 @@ Imported traces and SDK measurements also influence local history. Treat trace f
 - Require the separate `financial` runtime ceiling plus configured human approval.
 - Treat the local prepaid adapter and ledger as reference orchestration, not custody or accounting software.
 - Rail callbacks for x402, MPP, invoice, or enterprise settlement must authenticate counterparties, enforce idempotency, and reconcile independently.
+- Use the immutable quote, offer, or pinned-rate-card maximum for reservation
+  and budget feasibility. Never capture above it, even when a provider reports
+  more. An anonymous static prior cannot authorize nonzero cash.
+- Outstanding and indeterminate reservations reduce available budget. Treat the
+  local adapter as orchestration evidence, not a bank or general ledger.
+
+## Economic evidence threat model
+
+| Threat | Required mitigation |
+|---|---|
+| Quote/offer tampering | Canonicalize once, verify Ed25519 before use, and bind provider, capability, executor, fingerprint, action digest, terms, currency, billing policy, fixed attempt fee when selected, amount, and expiry. |
+| Replay or nonce reuse | Use high-entropy request nonces, persist accepted use atomically, reject reuse across quotes/actions, and make prepared decisions single-use. |
+| Expired/future-dated evidence | Enforce bounded quote TTL, clock-skew limits, offer/key validity, and recheck immediately before execution. |
+| Binding-to-static downgrade | Configure explicit failure behavior; a failed live quote must not silently become a static prior or zero. Label every evidence source, require one matching `SIGNED_QUOTE`, `PUBLISHED_OFFER`, or `PINNED_RATE_CARD` authorization for nonzero cash, and bind exact rates/quantities for a rate card. |
+| Provider/key impersonation | Trust keys locally, bind each key to one provider/capability/host, allowlist algorithms, and reject keys supplied only by the quote response. |
+| Signing-key compromise | Support validity bounds, revocation, retained historical metadata, and verified rotation from an already trusted key; revoke prepared but unexecuted work. |
+| Malicious endpoint/SSRF | Require operator-configured endpoints and exact hosts; use HTTPS by default; revalidate DNS and block private, loopback, link-local, metadata, multicast, reserved, and other non-public IPs unless narrowly enabled. |
+| Cross-provider source confusion | Dispatch by the operator-configured executor-to-quote-source mapping; never let a provider response select another executor's client or endpoint. |
+| DNS rebinding | Resolve and validate before each connection and enforce network-layer egress policy in production; application checks cannot remove the final DNS/connect race. |
+| Redirect abuse | Disable redirects. If a future adapter permits them, revalidate every target and strip authorization across origins. |
+| Proxy credential leakage | Disable ambient proxy inheritance and use explicit sanitized headers only. |
+| Oversized/malformed response | Bound request/response bytes and concurrency, require JSON content type/UTF-8/object shape, apply per-provider and total deadlines, and return sanitized structured errors. |
+| Raw-input disclosure | Send only operator-declared bounded primitive features; deny prompts, resumes, secrets, personal data, file contents, secret URLs, and arbitrary free-form strings by default. Never log or persist raw quote input. |
+| Meter manipulation/under-reporting | Keep local and provider meters separate, retain native units and task-valid observations, and do not treat provider usage as payment evidence. |
+| Missing/invalid usage after invocation | Preserve the reservation and mark the decision indeterminate when signed policy cannot determine billing. Never turn missing usage into zero or retry the action. Accepted-result billing requires both a bound local task-valid receipt and signed provider evidence; provider-start billing requires explicit start evidence. |
+| Over-reporting/overcapture | Enforce `captured <= reserved <= immutable authorized maximum`; retain the provider statement, cap capture, and open a dispute/reconciliation record. |
+| Duplicate capture/release/refund | Use immutable operation IDs, transactionally stored idempotency keys, compare retry payloads, and reject conflicting reuse or illegal terminal transitions. |
+| Crash-window double execution | Persist `INVOKING` before the external call; recovery inspects attempt/payment state and resumes settlement only. Never re-execute a consequential action from recovery. |
+| Currency confusion | One configured settlement currency per router; strict uppercase codes and Decimal values; reject mismatch and perform no implicit FX. |
+| Aggregate privacy leakage | Bucket inputs, enforce minimum cohorts and retention, include only settled task-valid runs, and omit action IDs/digests, inputs, and outputs. |
+| Market-data poisoning/collusion | Verify aggregate signatures/scope/freshness/coverage, treat aggregates as priors only, require local qualification/quality evidence, and prefer local settlement/reconciliation. |
+| Marketplace activation | Discovery, offers, quotes, and aggregates never qualify or activate a route. Operator qualification and activation remain separate. |
+| Billing discrepancy | Link one charge across quote, usage, settlement, and reconciliation without summing stages; preserve differences and require operator resolution for disputes. |
+| Approval laundering | Economic evidence and model arguments cannot raise side-effect or financial ceilings. Consequential execution requires independent approval. |
 
 ## Benchmarking
 

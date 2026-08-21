@@ -13,6 +13,7 @@ import asyncio
 import json
 import os
 import signal
+import sys
 import warnings
 from collections import deque
 from contextlib import suppress
@@ -368,7 +369,7 @@ class MCPStdioClient:
             try:
                 await asyncio.wait_for(process.wait(), timeout=2.0)
             except TimeoutError:
-                if os.name == "posix":
+                if sys.platform != "win32":
                     with suppress(ProcessLookupError):
                         os.killpg(process.pid, signal.SIGTERM)
                 else:  # pragma: no cover - Windows CI covers this branch
@@ -376,7 +377,7 @@ class MCPStdioClient:
                 try:
                     await asyncio.wait_for(process.wait(), timeout=1.0)
                 except TimeoutError:
-                    if os.name == "posix":
+                    if sys.platform != "win32":
                         with suppress(ProcessLookupError):
                             os.killpg(process.pid, signal.SIGKILL)
                     else:  # pragma: no cover

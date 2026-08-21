@@ -30,6 +30,7 @@ jobs:
       - run: ruff check .
       - run: mypy src
       - run: python scripts/generate_schemas.py --check
+      - run: python examples/economic_evidence/campaign.py --repetitions 30 --check --require-gates
       - run: coverage run -m pytest
       - run: coverage report -m
       - run: python -m build

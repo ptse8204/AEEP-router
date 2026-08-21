@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "PreparedDecisionState": {
+      "enum": [
+        "PREPARED",
+        "RESERVED",
+        "INVOKING",
+        "AWAITING_USAGE",
+        "SETTLING",
+        "SETTLED",
+        "RELEASED",
+        "INDETERMINATE",
+        "DISPUTED",
+        "EXPIRED",
+        "CANCELLED"
+      ],
+      "title": "PreparedDecisionState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "transition_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Transition Id",
+      "type": "string"
+    },
+    "prepared_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Prepared Id",
+      "type": "string"
+    },
+    "from_state": {
+      "$ref": "#/$defs/PreparedDecisionState"
+    },
+    "to_state": {
+      "$ref": "#/$defs/PreparedDecisionState"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    }
+  },
+  "required": [
+    "prepared_id",
+    "from_state",
+    "to_state"
+  ],
+  "title": "PreparedRouteTransition",
+  "type": "object"
+}

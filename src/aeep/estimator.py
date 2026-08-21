@@ -157,9 +157,14 @@ def _historical(
             value = value * Decimal(str(1 - alpha)) + item * Decimal(str(alpha))
         historical_cash = CashEstimate(
             amount_usd=value,
-            upper_bound_usd=max(actual_cash),
+            # Historical maxima are priors, not contractual authorization bounds.
+            upper_bound_usd=None,
             evidence=MeasurementEvidence(
-                status=EvidenceStatus.COMPLETE,
+                status=(
+                    EvidenceStatus.COMPLETE
+                    if len(actual_cash) == len(receipts)
+                    else EvidenceStatus.PARTIAL
+                ),
                 source=EvidenceSource.LOCAL_METER,
                 trust=TrustLevel.OBSERVED,
             ),
@@ -228,8 +233,9 @@ def _blend_cash(a: CashEstimate, b: CashEstimate, weight_b: float) -> CashEstima
         return b.model_copy(deep=True)
     amount = Decimal(str(_blend(float(a.amount_usd), float(b.amount_usd), weight_b)))
     bounds = [item for item in (a.upper_bound_usd, b.upper_bound_usd) if item is not None]
+    upper = max(bounds) if bounds and max(bounds) >= amount else None
     return CashEstimate(
         amount_usd=amount,
-        upper_bound_usd=max(bounds) if bounds else amount,
+        upper_bound_usd=upper,
         evidence=b.evidence,
     )

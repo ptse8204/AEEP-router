@@ -2,31 +2,328 @@
 
 from __future__ import annotations
 
+import inspect
 import json
 import re
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable, Mapping, Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar
 from urllib.parse import urljoin, urlparse
 
 import yaml
 
+from .economic.canonical import canonical_payload
+from .economic.signing import Signer
 from .errors import ConfigurationError
-from .executors.network import validate_http_url
+from .executors.network import is_local_hostname, validate_http_url
 from .mcp.client import MCPHTTPClient, MCPStdioClient
 from .models import (
+    BoundedQuote,
     CapabilityDefinition,
+    CapabilityOffer,
     ExecutorKind,
     ExecutorSpec,
     Locality,
     Manifest,
     ProviderDescriptor,
+    QuoteRequestV2,
     ResourceVector,
     RouteEstimate,
     SideEffect,
     TrustLevel,
+    UsageStatement,
 )
 from .templates import render
+
+QuoteHandlerResult = BoundedQuote | Mapping[str, Any]
+QuoteHandler = Callable[
+    [QuoteRequestV2],
+    QuoteHandlerResult | Awaitable[QuoteHandlerResult],
+]
+UsageHandlerResult = UsageStatement | Mapping[str, Any]
+UsageHandler = Callable[
+    [QuoteRequestV2, BoundedQuote, str, str],
+    UsageHandlerResult | Awaitable[UsageHandlerResult],
+]
+
+_HandlerResult = TypeVar("_HandlerResult", QuoteHandlerResult, UsageHandlerResult)
+_EconomicRecord = TypeVar("_EconomicRecord", CapabilityOffer, BoundedQuote, UsageStatement)
+_RouteKey = tuple[str, str, str]
+
+
+async def _handler_result(
+    value: _HandlerResult | Awaitable[_HandlerResult],
+) -> _HandlerResult:
+    return await value if inspect.isawaitable(value) else value
+
+
+class EconomicProvider:
+    """Small provider-side helper for signed AEEP 0.4 economic evidence."""
+
+    def __init__(self, provider_id: str, signer: Signer) -> None:
+        if not provider_id:
+            raise ConfigurationError("provider_id must not be empty")
+        self.provider_id = provider_id
+        self.signer = signer
+        self._placeholder_signature = signer.sign(b"")
+        self._offers: dict[str, CapabilityOffer] = {}
+        self._quote_handlers: dict[_RouteKey, QuoteHandler] = {}
+        self._usage_handlers: dict[_RouteKey, UsageHandler] = {}
+        self._quote_requests: dict[str, QuoteRequestV2] = {}
+        self._quote_ids_by_request: dict[str, str] = {}
+        self._quotes: dict[str, BoundedQuote] = {}
+        self._usage_ids_by_attempt: dict[tuple[str, str, str], str] = {}
+        self._usage_statements: dict[str, UsageStatement] = {}
+
+    @staticmethod
+    def _route_key(value: CapabilityOffer | QuoteRequestV2 | BoundedQuote) -> _RouteKey:
+        return (value.capability, value.executor_id, value.executor_fingerprint)
+
+    def _sign_mapping(
+        self,
+        model: type[_EconomicRecord],
+        value: Mapping[str, Any],
+    ) -> _EconomicRecord:
+        payload = dict(value)
+        if payload.get("signature") is not None:
+            raise ConfigurationError("unsigned economic record must omit signature")
+        payload.pop("signature", None)
+        payload.setdefault("provider_id", self.provider_id)
+        candidate = model.model_validate(
+            {**payload, "signature": self._placeholder_signature}
+        )
+        if candidate.provider_id != self.provider_id:
+            raise ConfigurationError("economic record provider does not match provider SDK")
+        return candidate.model_copy(
+            update={"signature": self.signer.sign(canonical_payload(candidate))}
+        )
+
+    def _require_own_signature(
+        self,
+        value: CapabilityOffer | BoundedQuote | UsageStatement,
+    ) -> None:
+        if value.provider_id != self.provider_id:
+            raise ConfigurationError("economic record provider does not match provider SDK")
+        if self.signer.sign(canonical_payload(value)) != value.signature:
+            raise ConfigurationError("economic record is not signed by the configured signer")
+
+    def sign_offer(self, value: Mapping[str, Any]) -> CapabilityOffer:
+        """Validate and sign an unsigned capability-offer mapping."""
+
+        return self._sign_mapping(CapabilityOffer, value)
+
+    def sign_quote(self, value: Mapping[str, Any]) -> BoundedQuote:
+        """Validate and sign an unsigned bounded-quote mapping."""
+
+        return self._sign_mapping(BoundedQuote, value)
+
+    def sign_usage(self, value: Mapping[str, Any]) -> UsageStatement:
+        """Validate and sign an unsigned provider-usage mapping."""
+
+        return self._sign_mapping(UsageStatement, value)
+
+    def register_offer(
+        self,
+        value: CapabilityOffer | Mapping[str, Any],
+    ) -> CapabilityOffer:
+        """Register one signed offer idempotently; altered ID reuse fails closed."""
+
+        offer = (
+            value
+            if isinstance(value, CapabilityOffer)
+            else CapabilityOffer.model_validate(value)
+            if value.get("signature") is not None
+            else self.sign_offer(value)
+        )
+        self._require_own_signature(offer)
+        previous = self._offers.get(offer.offer_id)
+        if previous is not None:
+            if previous != offer:
+                raise ConfigurationError("offer ID is already registered with different content")
+            return previous
+        self._offers[offer.offer_id] = offer
+        return offer
+
+    def get_offers(
+        self,
+        capability: str | None = None,
+        executor_ids: Sequence[str] | None = None,
+    ) -> tuple[CapabilityOffer, ...]:
+        """Return registered offers in stable ID order with optional exact filters."""
+
+        requested = set(executor_ids) if executor_ids is not None else None
+        return tuple(
+            offer
+            for offer in sorted(self._offers.values(), key=lambda item: item.offer_id)
+            if (capability is None or offer.capability == capability)
+            and (requested is None or offer.executor_id in requested)
+        )
+
+    def _require_known_route(self, route: _RouteKey) -> None:
+        if not any(self._route_key(offer) == route for offer in self._offers.values()):
+            raise ConfigurationError("economic handler route has no registered offer")
+
+    def register_quote_handler(
+        self,
+        capability: str,
+        executor_id: str,
+        executor_fingerprint: str,
+        handler: QuoteHandler,
+    ) -> None:
+        route = (capability, executor_id, executor_fingerprint)
+        self._require_known_route(route)
+        previous = self._quote_handlers.get(route)
+        if previous is not None and previous is not handler:
+            raise ConfigurationError("quote handler route is already registered")
+        self._quote_handlers[route] = handler
+
+    def register_usage_handler(
+        self,
+        capability: str,
+        executor_id: str,
+        executor_fingerprint: str,
+        handler: UsageHandler,
+    ) -> None:
+        route = (capability, executor_id, executor_fingerprint)
+        self._require_known_route(route)
+        previous = self._usage_handlers.get(route)
+        if previous is not None and previous is not handler:
+            raise ConfigurationError("usage handler route is already registered")
+        self._usage_handlers[route] = handler
+
+    def _validate_quote(self, quote: BoundedQuote, request: QuoteRequestV2) -> None:
+        bindings = (
+            (quote.provider_id, self.provider_id, "provider"),
+            (quote.quote_request_id, request.quote_request_id, "quote request"),
+            (quote.capability, request.capability, "capability"),
+            (quote.executor_id, request.executor_id, "executor"),
+            (quote.executor_fingerprint, request.executor_fingerprint, "executor fingerprint"),
+            (quote.action_digest, request.action_digest, "action digest"),
+            (quote.nonce, request.nonce, "nonce"),
+            (quote.maximum_amount.currency, request.desired_currency, "currency"),
+        )
+        for actual, expected, label in bindings:
+            if actual != expected:
+                raise ConfigurationError(f"quote {label} does not match request")
+        maximum = request.maximum_acceptable_amount
+        if maximum is not None and quote.maximum_amount.amount > maximum.amount:
+            raise ConfigurationError("quote exceeds requested maximum acceptable amount")
+        if quote.offer_id is not None:
+            offer = self._offers.get(quote.offer_id)
+            if offer is None or self._route_key(offer) != self._route_key(quote):
+                raise ConfigurationError("quote references an unknown or mismatched offer")
+            offer_bindings: tuple[tuple[object, object, str], ...] = (
+                (quote.terms_digest, offer.terms_digest, "terms"),
+                (quote.billing_trigger, offer.billing_trigger, "billing trigger"),
+                (
+                    quote.failure_charge_policy,
+                    offer.failure_charge_policy,
+                    "failure charge policy",
+                ),
+                (quote.retry_charge_policy, offer.retry_charge_policy, "retry charge policy"),
+                (quote.fixed_attempt_fee, offer.fixed_attempt_fee, "fixed attempt fee"),
+                (quote.maximum_amount.currency, offer.settlement_currency, "offer currency"),
+            )
+            for offer_actual, offer_expected, offer_label in offer_bindings:
+                if offer_actual != offer_expected:
+                    raise ConfigurationError(
+                        f"quote {offer_label} does not match offer"
+                    )
+
+    async def process_quote(self, request: QuoteRequestV2) -> BoundedQuote:
+        """Invoke the exact-route handler and return its bound signed quote."""
+
+        previous_request = self._quote_requests.get(request.quote_request_id)
+        if previous_request is not None:
+            if previous_request != request:
+                raise ConfigurationError(
+                    "quote request ID is already registered with different content"
+                )
+            return self._quotes[self._quote_ids_by_request[request.quote_request_id]]
+
+        route = self._route_key(request)
+        handler = self._quote_handlers.get(route)
+        if handler is None:
+            raise ConfigurationError("no quote handler is registered for the exact route")
+        raw = await _handler_result(handler(request))
+        quote = raw if isinstance(raw, BoundedQuote) else self.sign_quote(raw)
+        self._require_own_signature(quote)
+        self._validate_quote(quote, request)
+        previous_quote = self._quotes.get(quote.quote_id)
+        if previous_quote is not None and previous_quote != quote:
+            raise ConfigurationError("quote ID is already registered with different content")
+        self._quotes.setdefault(quote.quote_id, quote)
+        self._quote_requests[request.quote_request_id] = request
+        self._quote_ids_by_request[request.quote_request_id] = quote.quote_id
+        return self._quotes[quote.quote_id]
+
+    def _validate_usage(
+        self,
+        usage: UsageStatement,
+        request: QuoteRequestV2,
+        quote: BoundedQuote,
+        prepared_id: str,
+        attempt_id: str,
+    ) -> None:
+        bindings = (
+            (usage.provider_id, self.provider_id, "provider"),
+            (usage.quote_id, quote.quote_id, "quote"),
+            (usage.prepared_id, prepared_id, "prepared decision"),
+            (usage.action_id, request.action_id, "action"),
+            (usage.attempt_id, attempt_id, "attempt"),
+            (usage.executor_id, quote.executor_id, "executor"),
+            (usage.executor_fingerprint, quote.executor_fingerprint, "executor fingerprint"),
+        )
+        for actual, expected, label in bindings:
+            if actual != expected:
+                raise ConfigurationError(f"usage {label} does not match issued quote")
+        amount = usage.provider_calculated_amount
+        if amount is not None and amount.currency != quote.maximum_amount.currency:
+            raise ConfigurationError("usage currency does not match issued quote")
+
+    async def process_usage(
+        self,
+        quote_id: str,
+        *,
+        prepared_id: str,
+        attempt_id: str,
+    ) -> UsageStatement:
+        """Invoke the usage handler for an issued quote without inventing evidence."""
+
+        attempt_key = (quote_id, prepared_id, attempt_id)
+        previous_id = self._usage_ids_by_attempt.get(attempt_key)
+        if previous_id is not None:
+            return self._usage_statements[previous_id]
+        quote = self._quotes.get(quote_id)
+        if quote is None:
+            raise ConfigurationError("usage references an unknown issued quote")
+        request = self._quote_requests[quote.quote_request_id]
+        handler = self._usage_handlers.get(self._route_key(quote))
+        if handler is None:
+            raise ConfigurationError("no usage handler is registered for the exact route")
+        raw = await _handler_result(handler(request, quote, prepared_id, attempt_id))
+        if not isinstance(raw, UsageStatement):
+            missing = {
+                "execution_status",
+                "meters",
+                "provider_calculated_amount",
+            } - raw.keys()
+            if missing:
+                raise ConfigurationError(
+                    "usage handler must explicitly provide execution status, meters, "
+                    "and provider-calculated amount"
+                )
+        usage = raw if isinstance(raw, UsageStatement) else self.sign_usage(raw)
+        self._require_own_signature(usage)
+        self._validate_usage(usage, request, quote, prepared_id, attempt_id)
+        previous_usage = self._usage_statements.get(usage.usage_statement_id)
+        if previous_usage is not None and previous_usage != usage:
+            raise ConfigurationError(
+                "usage statement ID is already registered with different content"
+            )
+        self._usage_statements.setdefault(usage.usage_statement_id, usage)
+        self._usage_ids_by_attempt[attempt_key] = usage.usage_statement_id
+        return self._usage_statements[usage.usage_statement_id]
 
 
 def capability(
@@ -168,6 +465,8 @@ def import_mcp(
     input_schema: dict[str, Any] | None = None,
     output_schema: dict[str, Any] | None = None,
 ) -> ProviderDescriptor:
+    if transport not in {"stdio", "http"}:
+        raise ConfigurationError("MCP transport must be stdio or http")
     if protocol_mode not in {"auto", "modern", "legacy"}:
         raise ConfigurationError("MCP protocol mode must be auto, modern, or legacy")
     config: dict[str, Any] = {
@@ -187,6 +486,8 @@ def import_mcp(
         config["url"] = endpoint
         if hostname := urlparse(endpoint).hostname:
             config["allowed_hosts"] = [hostname]
+            if is_local_hostname(hostname):
+                config["allow_private_networks"] = True
         config["headers"] = dict(headers or {})
         if credential_scope_id:
             config["credential_scope_id"] = credential_scope_id
@@ -235,9 +536,12 @@ async def import_mcp_server(
         )
     elif transport in {"http", "streamable_http", "streamable-http"}:
         hostname = urlparse(endpoint).hostname
+        network_config: dict[str, Any] = {"allowed_hosts": [hostname]} if hostname else {}
+        if hostname and is_local_hostname(hostname):
+            network_config["allow_private_networks"] = True
         await validate_http_url(
             endpoint,
-            {"allowed_hosts": [hostname]} if hostname else {},
+            network_config,
             label="MCP import",
         )
         resolved_headers = render(headers or {}, {}, allow_env=True)
@@ -263,7 +567,9 @@ async def import_mcp_server(
                 f"{prefix}.{re.sub(r'[^a-z0-9.-]+', '-', str(tool['name']).lower())}@1"
             ),
             tool=str(tool["name"]),
-            transport=transport,
+            transport=(
+                "http" if transport in {"streamable_http", "streamable-http"} else transport
+            ),
             endpoint=endpoint,
             args=args,
             headers=headers,

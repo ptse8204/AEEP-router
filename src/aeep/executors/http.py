@@ -59,9 +59,15 @@ class HTTPExecutor(BaseExecutor):
         }
         if context.request.idempotency_key and config.get("propagate_idempotency_key", True):
             headers.setdefault("Idempotency-Key", context.request.idempotency_key)
-        params = render(config.get("query", {}), values)
-        json_body = render(config.get("json"), values) if "json" in config else None
-        content = render(config.get("body"), values) if "body" in config else None
+        request_values = {
+            **values,
+            "prepared_id": context.prepared_id,
+            "quote_id": context.quote_id,
+            "attempt_id": context.attempt_id,
+        }
+        params = render(config.get("query", {}), request_values)
+        json_body = render(config.get("json"), request_values) if "json" in config else None
+        content = render(config.get("body"), request_values) if "body" in config else None
         timeout = float(config.get("timeout_seconds", 30.0))
         max_request_bytes = int(config.get("max_request_bytes", 2_000_000))
         max_response_bytes = int(config.get("max_response_bytes", 2_000_000))
@@ -149,6 +155,16 @@ class HTTPExecutor(BaseExecutor):
                 output = text.strip() if output_config.get("strip", True) else text
             else:
                 output = parse_output(text, output_config)
+            if (
+                context.prepared_id is not None
+                and context.quote_id is not None
+                and context.attempt_id is not None
+                and isinstance(output, dict)
+                and isinstance(output.get("usage_statement"), dict)
+            ):
+                # Process-local only; Router verifies the signature/bindings and
+                # the receipt metadata sanitizer never persists this raw object.
+                metadata["_economic_usage_statement"] = output["usage_statement"]
             if output_type in {"json", "text", "auto"}:
                 output = extract_path(output, output_config.get("path"))
             resources.context_tokens = approximate_tokens(output)

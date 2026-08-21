@@ -1,0 +1,186 @@
+{
+  "$defs": {
+    "AuthorizationKind": {
+      "description": "Immutable economic basis for a maximum cash authorization.",
+      "enum": [
+        "SIGNED_QUOTE",
+        "PUBLISHED_OFFER",
+        "PINNED_RATE_CARD"
+      ],
+      "title": "AuthorizationKind",
+      "type": "string"
+    },
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "PaymentReservationState": {
+      "enum": [
+        "RESERVED",
+        "SETTLING",
+        "SETTLED",
+        "RELEASED",
+        "INDETERMINATE",
+        "DISPUTED"
+      ],
+      "title": "PaymentReservationState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "reservation_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Reservation Id",
+      "type": "string"
+    },
+    "charge_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Charge Id",
+      "type": "string"
+    },
+    "prepared_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Prepared Id",
+      "type": "string"
+    },
+    "quote_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quote Id"
+    },
+    "authorization_kind": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AuthorizationKind"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "authorization_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorization Id"
+    },
+    "action_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "maximum_amount": {
+      "$ref": "#/$defs/CurrencyAmount"
+    },
+    "adapter": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Adapter",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/PaymentReservationState",
+      "default": "RESERVED"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "indeterminate_reason": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Indeterminate Reason"
+    }
+  },
+  "required": [
+    "charge_id",
+    "prepared_id",
+    "action_id",
+    "attempt_id",
+    "maximum_amount",
+    "adapter",
+    "idempotency_key"
+  ],
+  "title": "PaymentReservationV2",
+  "type": "object"
+}

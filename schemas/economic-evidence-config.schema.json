@@ -1,0 +1,314 @@
+{
+  "$defs": {
+    "AuthorizationMeterQuantity": {
+      "additionalProperties": false,
+      "description": "One pinned rate-card rate and the bounded native quantity it prices.",
+      "properties": {
+        "meter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Meter",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Unit",
+          "type": "string"
+        },
+        "quantity": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quantity",
+          "type": "string"
+        },
+        "rate_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Rate Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "meter",
+        "unit",
+        "quantity",
+        "rate_id"
+      ],
+      "title": "AuthorizationMeterQuantity",
+      "type": "object"
+    },
+    "EconomicEvidenceLevel": {
+      "enum": [
+        "UNKNOWN",
+        "STATIC_PRIOR",
+        "PUBLISHED_OFFER",
+        "SIGNED_QUOTE",
+        "SIGNED_USAGE_STATEMENT",
+        "PAYMENT_SETTLEMENT",
+        "BILLING_RECONCILED",
+        "OPERATOR_ATTESTED"
+      ],
+      "title": "EconomicEvidenceLevel",
+      "type": "string"
+    },
+    "EconomicLiveQuotesConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "top_k": {
+          "default": 3,
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Top K",
+          "type": "integer"
+        },
+        "per_provider_timeout_seconds": {
+          "default": 2.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 60.0,
+          "title": "Per Provider Timeout Seconds",
+          "type": "number"
+        },
+        "total_timeout_seconds": {
+          "default": 4.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 120.0,
+          "title": "Total Timeout Seconds",
+          "type": "number"
+        },
+        "maximum_response_bytes": {
+          "default": 262144,
+          "maximum": 10000000,
+          "minimum": 1024,
+          "title": "Maximum Response Bytes",
+          "type": "integer"
+        },
+        "maximum_clock_skew_seconds": {
+          "default": 30,
+          "maximum": 300,
+          "minimum": 0,
+          "title": "Maximum Clock Skew Seconds",
+          "type": "integer"
+        },
+        "maximum_quote_ttl_seconds": {
+          "default": 600,
+          "maximum": 86400,
+          "minimum": 1,
+          "title": "Maximum Quote Ttl Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "EconomicLiveQuotesConfig",
+      "type": "object"
+    },
+    "EconomicNetworkConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_quote_hosts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Quote Hosts",
+          "type": "array"
+        },
+        "allow_private_addresses": {
+          "default": false,
+          "title": "Allow Private Addresses",
+          "type": "boolean"
+        },
+        "allow_redirects": {
+          "default": false,
+          "title": "Allow Redirects",
+          "type": "boolean"
+        },
+        "trust_environment_proxy": {
+          "default": false,
+          "title": "Trust Environment Proxy",
+          "type": "boolean"
+        }
+      },
+      "title": "EconomicNetworkConfig",
+      "type": "object"
+    },
+    "EconomicPaymentConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter": {
+          "default": "free",
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Adapter",
+          "type": "string"
+        },
+        "unlimited_budget": {
+          "default": false,
+          "title": "Unlimited Budget",
+          "type": "boolean"
+        }
+      },
+      "title": "EconomicPaymentConfig",
+      "type": "object"
+    },
+    "EconomicRequirementsConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "require_binding_quote_for_paid_routes": {
+          "default": true,
+          "title": "Require Binding Quote For Paid Routes",
+          "type": "boolean"
+        },
+        "allow_verified_static_offer": {
+          "default": true,
+          "title": "Allow Verified Static Offer",
+          "type": "boolean"
+        },
+        "allow_static_prior": {
+          "default": false,
+          "title": "Allow Static Prior",
+          "type": "boolean"
+        },
+        "minimum_evidence_level": {
+          "$ref": "#/$defs/EconomicEvidenceLevel",
+          "default": "SIGNED_QUOTE"
+        },
+        "quote_failure_policy": {
+          "$ref": "#/$defs/QuoteFailurePolicy",
+          "default": "REQUIRE_BINDING_QUOTE"
+        },
+        "pinned_rate_cards": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PinnedRateCardAuthorizationConfig"
+          },
+          "title": "Pinned Rate Cards",
+          "type": "object"
+        }
+      },
+      "title": "EconomicRequirementsConfig",
+      "type": "object"
+    },
+    "EconomicTrustStoreConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "default": "~/.config/aeep/provider-keys.json",
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "title": "EconomicTrustStoreConfig",
+      "type": "object"
+    },
+    "MarketAggregatesConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "maximum_age_seconds": {
+          "default": 86400,
+          "maximum": 2592000,
+          "minimum": 1,
+          "title": "Maximum Age Seconds",
+          "type": "integer"
+        },
+        "minimum_sample_size": {
+          "default": 20,
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Minimum Sample Size",
+          "type": "integer"
+        },
+        "minimum_settlement_verified_fraction": {
+          "default": "0.80",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Minimum Settlement Verified Fraction",
+          "type": "string"
+        }
+      },
+      "title": "MarketAggregatesConfig",
+      "type": "object"
+    },
+    "PinnedRateCardAuthorizationConfig": {
+      "additionalProperties": false,
+      "description": "Operator-pinned, unconditional rate selection for one exact executor.",
+      "properties": {
+        "rate_card_snapshot_id": {
+          "pattern": "^rate_[a-f0-9]{64}$",
+          "title": "Rate Card Snapshot Id",
+          "type": "string"
+        },
+        "meter_quantities": {
+          "items": {
+            "$ref": "#/$defs/AuthorizationMeterQuantity"
+          },
+          "minItems": 1,
+          "title": "Meter Quantities",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rate_card_snapshot_id",
+        "meter_quantities"
+      ],
+      "title": "PinnedRateCardAuthorizationConfig",
+      "type": "object"
+    },
+    "QuoteFailurePolicy": {
+      "enum": [
+        "REQUIRE_BINDING_QUOTE",
+        "ALLOW_VERIFIED_OFFER",
+        "ALLOW_STATIC_PRIOR",
+        "TREAT_AS_UNAVAILABLE"
+      ],
+      "title": "QuoteFailurePolicy",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "enabled": {
+      "default": false,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "settlement_currency": {
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "title": "Settlement Currency",
+      "type": "string"
+    },
+    "live_quotes": {
+      "$ref": "#/$defs/EconomicLiveQuotesConfig"
+    },
+    "requirements": {
+      "$ref": "#/$defs/EconomicRequirementsConfig"
+    },
+    "market_aggregates": {
+      "$ref": "#/$defs/MarketAggregatesConfig"
+    },
+    "network": {
+      "$ref": "#/$defs/EconomicNetworkConfig"
+    },
+    "trust_store": {
+      "$ref": "#/$defs/EconomicTrustStoreConfig"
+    },
+    "payment": {
+      "$ref": "#/$defs/EconomicPaymentConfig"
+    }
+  },
+  "title": "EconomicEvidenceConfig",
+  "type": "object"
+}

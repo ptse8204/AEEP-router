@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "meter": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "title": "Meter",
+      "type": "string"
+    },
+    "unit": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_.-]*$",
+      "title": "Unit",
+      "type": "string"
+    },
+    "quantity": {
+      "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Quantity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "meter",
+    "unit",
+    "quantity"
+  ],
+  "title": "MeterQuantity",
+  "type": "object"
+}

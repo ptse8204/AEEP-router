@@ -146,6 +146,8 @@ def behavior_fingerprint(spec: ExecutorSpec) -> str:
         ExecutorKind.HOST: {"instructions"},
         ExecutorKind.DELEGATE: {"instructions"},
     }[spec.kind]
+    # Quote endpoints and disclosure rules affect both data flow and charges.
+    config_keys.add("economic")
     payload: dict[str, Any] = {
         "id": spec.id,
         "provider_id": spec.provider_id,

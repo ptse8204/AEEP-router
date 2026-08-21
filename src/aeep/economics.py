@@ -90,12 +90,18 @@ class QuoteService:
         for spec in self.registry.find(request.action.capability):
             if requested_ids and spec.id not in requested_ids:
                 continue
+            estimated_cash = spec.estimate.cash.amount_usd
+            if estimated_cash is None:
+                # The legacy Quote model cannot represent unknown cash. Omitting the
+                # route is safer than turning ResourceVector's compatibility zero
+                # into a payment authorization.
+                continue
             quote = Quote(
                 quote_request_id=request.quote_request_id,
                 provider_id=spec.provider_id or "local",
                 executor_id=spec.id,
                 capability=spec.capability,
-                monetary_usd=spec.estimate.resources.monetary_usd,
+                monetary_usd=float(estimated_cash),
                 estimate=spec.estimate.model_copy(deep=True),
                 expires_at=datetime.now(UTC) + timedelta(seconds=max(1, ttl_seconds)),
                 terms={"currency": "USD", "source": "static-prior"},

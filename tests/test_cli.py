@@ -40,7 +40,17 @@ def test_cli_tools_and_tool_call(tmp_path):
     assert runner.invoke(app, ["init", str(manifest)]).exit_code == 0
     result = runner.invoke(app, ["tools", "export", "anthropic", "--compact"])
     assert result.exit_code == 0
-    assert len(json.loads(result.stdout)["tools"]) == 6
+    assert {tool["name"] for tool in json.loads(result.stdout)["tools"]} == {
+        "aeep_execute_action",
+        "aeep_get_metrics",
+        "aeep_list_capabilities",
+        "aeep_record_outcome",
+        "aeep_request_quotes",
+        "aeep_route_action",
+        "aeep_show_prepared_decision",
+        "aeep_show_quote",
+        "aeep_show_settlement",
+    }
 
     result = runner.invoke(
         app,

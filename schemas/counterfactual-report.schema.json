@@ -26,9 +26,16 @@
           "title": "Estimated Score"
         },
         "estimated_cash_saving_usd": {
-          "default": 0.0,
-          "title": "Estimated Cash Saving Usd",
-          "type": "number"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cash Saving Usd"
         },
         "estimated_latency_saving_ms": {
           "default": 0.0,
@@ -203,9 +210,16 @@
       "title": "Best Alternative Executor Id"
     },
     "potential_cash_saving_usd": {
-      "default": 0.0,
-      "title": "Potential Cash Saving Usd",
-      "type": "number"
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Potential Cash Saving Usd"
     },
     "potential_cash_saving_percent": {
       "anyOf": [

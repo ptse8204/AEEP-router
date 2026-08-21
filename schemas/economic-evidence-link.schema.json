@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "EconomicEvidenceLevel": {
+      "enum": [
+        "UNKNOWN",
+        "STATIC_PRIOR",
+        "PUBLISHED_OFFER",
+        "SIGNED_QUOTE",
+        "SIGNED_USAGE_STATEMENT",
+        "PAYMENT_SETTLEMENT",
+        "BILLING_RECONCILED",
+        "OPERATOR_ATTESTED"
+      ],
+      "title": "EconomicEvidenceLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "link_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Link Id",
+      "type": "string"
+    },
+    "charge_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Charge Id",
+      "type": "string"
+    },
+    "evidence_level": {
+      "$ref": "#/$defs/EconomicEvidenceLevel"
+    },
+    "evidence_type": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z0-9_.-]+$",
+      "title": "Evidence Type",
+      "type": "string"
+    },
+    "evidence_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "payload_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Payload Digest",
+      "type": "string"
+    },
+    "authoritative": {
+      "default": false,
+      "title": "Authoritative",
+      "type": "boolean"
+    },
+    "supersedes_link_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Link Id"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "link_id",
+    "charge_id",
+    "evidence_level",
+    "evidence_type",
+    "evidence_id",
+    "payload_digest"
+  ],
+  "title": "EconomicEvidenceLink",
+  "type": "object"
+}

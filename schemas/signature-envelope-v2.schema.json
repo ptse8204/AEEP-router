@@ -1,0 +1,45 @@
+{
+  "$defs": {
+    "SignatureAlgorithm": {
+      "enum": [
+        "hmac-sha256",
+        "ed25519"
+      ],
+      "title": "SignatureAlgorithm",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "$ref": "#/$defs/SignatureAlgorithm"
+    },
+    "key_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Key Id",
+      "type": "string"
+    },
+    "value": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Value",
+      "type": "string"
+    },
+    "canonicalization_version": {
+      "const": "aeep-canonical-json-v1",
+      "default": "aeep-canonical-json-v1",
+      "title": "Canonicalization Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "algorithm",
+    "key_id",
+    "value"
+  ],
+  "title": "SignatureEnvelopeV2",
+  "type": "object"
+}

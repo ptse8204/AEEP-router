@@ -13,6 +13,7 @@ import os
 import shutil
 import sys
 import sysconfig
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -27,12 +28,20 @@ from .models import (
     ActionConstraints,
     ActionContext,
     ActionRequest,
+    BoundedQuote,
+    CapabilityOffer,
+    ExecutionOutcome,
     ExecutionStatus,
     ExternalOutcomeReport,
+    MarketAggregate,
+    PaymentReservationState,
+    PreparedRouteDecision,
     QuotaSource,
     QuotaState,
+    QuoteFailurePolicy,
     QuoteRequest,
     ResourceVector,
+    SettlementReceipt,
     SideEffect,
     SubscriptionQuota,
     SubscriptionResource,
@@ -55,6 +64,10 @@ ingest_app = typer.Typer(help="Ingest traces from existing agent runtimes.")
 candidate_app = typer.Typer(help="Qualify and activate inert imported routes.")
 workflow_app = typer.Typer(help="Run caller-authored bounded workflows.")
 campaign_app = typer.Typer(help="Run isolated repeated benchmark campaigns.")
+offer_app = typer.Typer(help="Inspect and import signed capability offers.")
+economic_app = typer.Typer(help="Prepare routes and inspect economic evidence.")
+settlement_app = typer.Typer(help="Inspect and reconcile settlement evidence.")
+market_app = typer.Typer(help="Run the local reference economic market.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
@@ -64,6 +77,10 @@ app.add_typer(ingest_app, name="ingest")
 app.add_typer(candidate_app, name="candidate")
 app.add_typer(workflow_app, name="workflow")
 app.add_typer(campaign_app, name="campaign")
+app.add_typer(offer_app, name="offer")
+app.add_typer(economic_app, name="economic")
+app.add_typer(settlement_app, name="settlement")
+app.add_typer(market_app, name="market")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -78,6 +95,162 @@ def _emit(value: Any, *, compact: bool = False) -> None:
         default=str,
     )
     typer.echo(text)
+
+
+def _economic_emit(
+    value: Any,
+    *,
+    json_output: bool,
+    title: str,
+    fields: list[tuple[str, Any]],
+) -> None:
+    """Render new operator commands as prose unless JSON was requested."""
+
+    if json_output:
+        _emit(value)
+        return
+    typer.echo(title)
+    for label, item in fields:
+        if item is None:
+            rendered = "unknown"
+        elif isinstance(item, list | tuple):
+            rendered = ", ".join(str(part) for part in item) or "none"
+        else:
+            rendered = str(item)
+        typer.echo(f"{label}: {rendered}")
+
+
+def _economic_fail(exc: Exception, *, json_output: bool) -> None:
+    if json_output:
+        _fail(exc, compact=True)
+    typer.echo(f"AEEP economic error: {exc}", err=True)
+    raise typer.Exit(code=2)
+
+
+def _trust_verifier(router: Router) -> Any:
+    """Load only operator-trusted keys, retaining database copies for audit."""
+
+    from .economic import merge_trusted_provider_keys
+    from .economic.trust import TrustStore, TrustStoreVerifier
+
+    configured_path = Path(router.manifest.economic_evidence.trust_store.path).expanduser()
+    configured_keys = (
+        TrustStore.load(configured_path).list_keys() if configured_path.is_file() else []
+    )
+    stored_keys = router.store.list_provider_signing_keys()
+    trust = merge_trusted_provider_keys(configured_keys, stored_keys)
+    if not trust.list_keys():
+        raise ConfigurationError(
+            f"no trusted provider keys are configured at {configured_path} or in the database"
+        )
+    return TrustStoreVerifier(trust)
+
+
+def _verify_offer(router: Router, offer: CapabilityOffer) -> dict[str, Any]:
+    from .economic.canonical import canonical_payload
+
+    now = datetime.now(UTC)
+    status = router.store.capability_offer_status(offer.offer_id)
+    signature = _trust_verifier(router).verify(
+        canonical_payload(offer),
+        offer.signature,
+        offer.provider_id,
+        capability=offer.capability,
+    )
+    active = offer.valid_at(now) and (status is None or status["status"] != "revoked")
+    return {
+        "ok": signature.valid and active,
+        "offer_id": offer.offer_id,
+        "provider_id": offer.provider_id,
+        "signature_valid": signature.valid,
+        "signature_reason": signature.reason,
+        "active": active,
+        "expires_at": offer.valid_until.isoformat(),
+        "evidence_level": "PUBLISHED_OFFER",
+    }
+
+
+def _verify_quote(router: Router, quote: BoundedQuote) -> dict[str, Any]:
+    from .economic.canonical import canonical_payload
+
+    request = router.store.get_quote_request_v2(quote.quote_request_id)
+    if request is None:
+        raise ConfigurationError("the quote's bound request is not stored")
+    verification = _trust_verifier(router).verify(
+        canonical_payload(quote),
+        quote.signature,
+        quote.provider_id,
+        capability=quote.capability,
+    )
+    binding_valid = False
+    binding_reason = "signature verification failed"
+    if verification.valid:
+        try:
+            quote.validate_binding(
+                request,
+                at=datetime.now(UTC),
+                maximum_ttl_seconds=(
+                    router.manifest.economic_evidence.live_quotes.maximum_quote_ttl_seconds
+                ),
+            )
+            binding_valid = True
+            binding_reason = "quote binding verified"
+        except ValueError as exc:
+            binding_reason = str(exc)
+    return {
+        "ok": verification.valid and binding_valid,
+        "quote_id": quote.quote_id,
+        "provider_id": quote.provider_id,
+        "signature_valid": verification.valid,
+        "signature_reason": verification.reason,
+        "binding_valid": binding_valid,
+        "binding_reason": binding_reason,
+        "nonce_used": router.store.quote_nonce_was_used(quote.nonce),
+        "expires_at": quote.expires_at.isoformat(),
+        "evidence_level": quote.evidence_level.value,
+    }
+
+
+def _verify_market_aggregate(
+    router: Router, aggregate: MarketAggregate
+) -> dict[str, Any]:
+    """Verify a market prior without treating it as qualification evidence."""
+
+    from .economic.canonical import canonical_payload
+
+    verifier = _trust_verifier(router)
+    payload = canonical_payload(aggregate)
+    current = verifier.verify(
+        payload,
+        aggregate.signature,
+        aggregate.provider_id,
+        capability=aggregate.capability,
+    )
+    historical = verifier.verify(
+        payload,
+        aggregate.signature,
+        aggregate.provider_id,
+        capability=aggregate.capability,
+        signed_at=aggregate.generated_at,
+        allow_historical=True,
+    )
+    now = datetime.now(UTC)
+    fresh = aggregate.fresh_at(now)
+    return {
+        "ok": current.valid and historical.valid and fresh,
+        "aggregate_id": aggregate.aggregate_id,
+        "provider_id": aggregate.provider_id,
+        "signature_valid": current.valid,
+        "signature_reason": current.reason,
+        "historical_signature_valid": historical.valid,
+        "historical_signature_reason": historical.reason,
+        "fresh": fresh,
+        "expires_at": aggregate.expires_at.isoformat(),
+        "evidence_level": "STATIC_PRIOR",
+        "binding": False,
+        "qualification_evidence": False,
+        "activation_evidence": False,
+    }
 
 
 def _read_data(value: str | None, *, default: Any) -> Any:
@@ -617,6 +790,1379 @@ def quote(
     finally:
         if router is not None:
             _run(router.close())
+
+
+@offer_app.command("list")
+def offer_list(
+    capability: str | None = typer.Option(None, "--capability"),
+    provider_id: str | None = typer.Option(None, "--provider-id"),
+    include_revoked: bool = typer.Option(False, "--include-revoked"),
+    limit: int = typer.Option(100, "--limit", min=1, max=1_000),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List immutable signed offers without exposing action data."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        offers = router.store.list_capability_offers(
+            capability=capability,
+            provider_id=provider_id,
+            include_revoked=include_revoked,
+            limit=limit,
+        )
+        now = datetime.now(UTC)
+        values = [
+            {
+                "offer_id": item.offer_id,
+                "provider_id": item.provider_id,
+                "capability": item.capability,
+                "executor_id": item.executor_id,
+                "currency": item.settlement_currency,
+                "valid_until": item.valid_until.isoformat(),
+                "status": (
+                    "expired"
+                    if not item.valid_at(now)
+                    else (router.store.capability_offer_status(item.offer_id) or {}).get(
+                        "status", "active"
+                    )
+                ),
+                "evidence_level": "PUBLISHED_OFFER",
+            }
+            for item in offers
+        ]
+        _economic_emit(
+            {"offers": values},
+            json_output=json_output,
+            title="Capability offers",
+            fields=[
+                (
+                    str(item["offer_id"]),
+                    f"{item['capability']} via {item['provider_id']} "
+                    f"({item['status']}, expires {item['valid_until']})",
+                )
+                for item in values
+            ]
+            or [("offers", "none")],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@offer_app.command("show")
+def offer_show(
+    offer_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show one offer and its local lifecycle state."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        offer = router.store.get_capability_offer(offer_id, include_revoked=True)
+        if offer is None:
+            raise ConfigurationError("capability offer was not found")
+        status = router.store.capability_offer_status(offer_id) or {"status": "active"}
+        if not offer.valid_at(datetime.now(UTC)) and status["status"] == "active":
+            status = {**status, "status": "expired"}
+        value = {
+            "offer": offer.model_dump(mode="json"),
+            "status": status,
+            "evidence_level": "PUBLISHED_OFFER",
+        }
+        fixed_attempt_fee = (
+            f"{offer.fixed_attempt_fee.currency} {offer.fixed_attempt_fee.amount}"
+            if offer.fixed_attempt_fee is not None
+            else None
+        )
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Capability offer {offer.offer_id}",
+            fields=[
+                ("provider", offer.provider_id),
+                ("capability", offer.capability),
+                ("executor", offer.executor_id),
+                ("fingerprint", offer.executor_fingerprint),
+                ("currency", offer.settlement_currency),
+                ("billing trigger", offer.billing_trigger.value),
+                ("failure policy", offer.failure_charge_policy.value),
+                ("retry policy", offer.retry_charge_policy.value),
+                ("fixed attempt fee", fixed_attempt_fee),
+                ("status", status["status"]),
+                ("expires", offer.valid_until.isoformat()),
+                ("evidence", "PUBLISHED_OFFER"),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@offer_app.command("import")
+def offer_import(
+    path: Path = typer.Argument(..., exists=True, dir_okay=False),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Verify and import an immutable offer from a local JSON or YAML file."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        offer = CapabilityOffer.model_validate(_read_data(f"@{path}", default={}))
+        result = _verify_offer(router, offer)
+        if not result["ok"]:
+            reason = (
+                result["signature_reason"]
+                if not result["signature_valid"]
+                else "offer is expired or revoked"
+            )
+            raise ConfigurationError(
+                f"offer verification failed: {reason}"
+            )
+        verifier = _trust_verifier(router)
+        trusted_key = verifier.store.get(offer.provider_id, offer.signature.key_id)
+        if trusted_key is None:  # pragma: no cover - successful verification requires it
+            raise ConfigurationError("verified provider key disappeared")
+        router.store.save_provider_signing_key(trusted_key)
+        router.store.save_capability_offer(offer)
+        _economic_emit(
+            result,
+            json_output=json_output,
+            title=f"Imported capability offer {offer.offer_id}",
+            fields=[
+                ("provider", offer.provider_id),
+                ("capability", offer.capability),
+                ("signature", result["signature_reason"]),
+                ("expires", result["expires_at"]),
+                ("evidence", result["evidence_level"]),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@offer_app.command("verify")
+def offer_verify(
+    offer_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Verify an offer against the operator trust store and current lifecycle."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        offer = router.store.get_capability_offer(offer_id, include_revoked=True)
+        if offer is None:
+            raise ConfigurationError("capability offer was not found")
+        result = _verify_offer(router, offer)
+        _economic_emit(
+            result,
+            json_output=json_output,
+            title=f"Offer verification {offer_id}",
+            fields=[
+                ("valid", result["ok"]),
+                ("signature", result["signature_reason"]),
+                ("active", result["active"]),
+                ("expires", result["expires_at"]),
+                ("evidence", result["evidence_level"]),
+            ],
+        )
+        if not result["ok"]:
+            raise typer.Exit(code=1)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("quote-show")
+def economic_quote_show(
+    quote_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show a bounded quote without exposing its source action payload."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        quote_value = router.store.get_bounded_quote(quote_id)
+        if quote_value is None:
+            raise ConfigurationError("bounded quote was not found")
+        expected = quote_value.expected_amount
+        maximum = quote_value.maximum_amount
+        _economic_emit(
+            quote_value,
+            json_output=json_output,
+            title=f"Bounded quote {quote_value.quote_id}",
+            fields=[
+                ("provider", quote_value.provider_id),
+                ("capability", quote_value.capability),
+                ("executor", quote_value.executor_id),
+                (
+                    "expected",
+                    f"{expected.currency} {expected.amount}" if expected is not None else None,
+                ),
+                ("maximum", f"{maximum.currency} {maximum.amount}"),
+                ("expires", quote_value.expires_at.isoformat()),
+                ("evidence", quote_value.evidence_level.value),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("quote-verify")
+def economic_quote_verify(
+    quote_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Verify signature, request binding, expiry, and local nonce state."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        quote_value = router.store.get_bounded_quote(quote_id)
+        if quote_value is None:
+            raise ConfigurationError("bounded quote was not found")
+        result = _verify_quote(router, quote_value)
+        _economic_emit(
+            result,
+            json_output=json_output,
+            title=f"Quote verification {quote_id}",
+            fields=[
+                ("valid", result["ok"]),
+                ("signature", result["signature_reason"]),
+                ("binding", result["binding_reason"]),
+                ("nonce already used", result["nonce_used"]),
+                ("expires", result["expires_at"]),
+                ("evidence", result["evidence_level"]),
+            ],
+        )
+        if not result["ok"]:
+            raise typer.Exit(code=1)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+def _prepared_request(
+    *,
+    capability: str,
+    request_document: str | None,
+    input_value: str,
+    policy: str,
+    constraints: str | None,
+    context: str | None,
+    max_cost_usd: float | None,
+    no_network: bool,
+    require_local: bool,
+    executor_id: str | None,
+    max_side_effect: SideEffect | None,
+) -> ActionRequest:
+    if request_document is not None:
+        try:
+            request = ActionRequest.model_validate(_read_data(request_document, default={}))
+        except (ValueError, typer.BadParameter) as exc:
+            raise typer.BadParameter("--request must contain a valid ActionRequest") from exc
+        if request.capability != capability:
+            raise typer.BadParameter("--request capability does not match the command argument")
+        return request
+    return _request(
+        capability=capability,
+        input_value=input_value,
+        policy=policy,
+        constraints_value=constraints,
+        context_value=context,
+        max_cost_usd=max_cost_usd,
+        max_latency_ms=None,
+        max_context_tokens=None,
+        max_peak_memory_mb=None,
+        no_network=no_network,
+        require_local=require_local,
+        executor_id=executor_id,
+        max_side_effect=max_side_effect,
+    )
+
+
+@economic_app.command("prepare")
+def economic_prepare(
+    capability: str = typer.Argument(...),
+    request_document: str | None = typer.Option(
+        None,
+        "--request",
+        help="Full ActionRequest JSON/YAML or @file; replaces other action options.",
+    ),
+    input_value: str = typer.Option("{}", "--input", "-i", help="JSON, @file, or -."),
+    policy: str = typer.Option("balanced", "--policy", "-p"),
+    constraints: str | None = typer.Option(None, "--constraints"),
+    context: str | None = typer.Option(None, "--context"),
+    max_cost_usd: float | None = typer.Option(None, "--max-cost-usd", min=0),
+    no_network: bool = typer.Option(False, "--no-network"),
+    require_local: bool = typer.Option(False, "--require-local"),
+    executor_id: str | None = typer.Option(None, "--executor-id"),
+    max_side_effect: SideEffect | None = typer.Option(None, "--max-side-effect"),
+    quote_policy: QuoteFailurePolicy | None = typer.Option(None, "--quote-policy"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Prepare, quote when required, and persist one immutable route decision."""
+
+    router: Router | None = None
+    try:
+        request = _prepared_request(
+            capability=capability,
+            request_document=request_document,
+            input_value=input_value,
+            policy=policy,
+            constraints=constraints,
+            context=context,
+            max_cost_usd=max_cost_usd,
+            no_network=no_network,
+            require_local=require_local,
+            executor_id=executor_id,
+            max_side_effect=max_side_effect,
+        )
+        router = Router.from_manifest(manifest)
+        prepared = _run(
+            _await_and_close(
+                router,
+                router.prepare_route(request, quote_policy=quote_policy),
+            )
+        )
+        router = None
+        selected = next(
+            (
+                item
+                for item in prepared.candidate_rankings
+                if item.executor_id == prepared.selected_executor_id
+            ),
+            None,
+        )
+        maximum = prepared.maximum_cash_authorization
+        prepared_value = {
+            **prepared.model_dump(mode="json"),
+            "feasible": prepared.feasible,
+        }
+        _economic_emit(
+            prepared_value,
+            json_output=json_output,
+            title=f"Prepared route {prepared.prepared_id}",
+            fields=[
+                ("feasible", prepared.feasible),
+                ("executor", prepared.selected_executor_id),
+                (
+                    "expected",
+                    (
+                        f"{selected.expected_amount.currency} "
+                        f"{selected.expected_amount.amount}"
+                        if selected is not None and selected.expected_amount is not None
+                        else None
+                    ),
+                ),
+                (
+                    "maximum",
+                    f"{maximum.currency} {maximum.amount}" if maximum is not None else None,
+                ),
+                ("quote", prepared.selected_quote_id),
+                ("expires", prepared.expires_at.isoformat()),
+                (
+                    "rejected",
+                    [
+                        f"{item.executor_id}: {', '.join(item.reasons)}"
+                        for item in prepared.rejected_candidates
+                    ]
+                    or ["none"],
+                ),
+            ],
+        )
+        if not prepared.feasible:
+            raise typer.Exit(code=3)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("quote-request")
+def economic_quote_request(
+    capability: str = typer.Argument(...),
+    request_document: str | None = typer.Option(
+        None,
+        "--request",
+        help="Full ActionRequest JSON/YAML or @file; replaces other action options.",
+    ),
+    input_value: str = typer.Option("{}", "--input", "-i", help="JSON, @file, or -."),
+    policy: str = typer.Option("balanced", "--policy", "-p"),
+    constraints: str | None = typer.Option(None, "--constraints"),
+    context: str | None = typer.Option(None, "--context"),
+    max_cost_usd: float | None = typer.Option(None, "--max-cost-usd", min=0),
+    no_network: bool = typer.Option(False, "--no-network"),
+    require_local: bool = typer.Option(False, "--require-local"),
+    executor_id: str | None = typer.Option(None, "--executor-id"),
+    max_side_effect: SideEffect | None = typer.Option(None, "--max-side-effect"),
+    quote_policy: QuoteFailurePolicy | None = typer.Option(None, "--quote-policy"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Request bounded quotes through prepared routing's qualified top-K shortlist."""
+
+    router: Router | None = None
+    try:
+        request = _prepared_request(
+            capability=capability,
+            request_document=request_document,
+            input_value=input_value,
+            policy=policy,
+            constraints=constraints,
+            context=context,
+            max_cost_usd=max_cost_usd,
+            no_network=no_network,
+            require_local=require_local,
+            executor_id=executor_id,
+            max_side_effect=max_side_effect,
+        )
+        active_router = Router.from_manifest(manifest)
+        router = active_router
+
+        async def prepare_and_close() -> tuple[Any, list[BoundedQuote]]:
+            try:
+                prepared = await active_router.prepare_route(
+                    request, quote_policy=quote_policy
+                )
+                quotes = [
+                    quote
+                    for quote_id in prepared.quote_ids
+                    if (quote := active_router.store.get_bounded_quote(quote_id)) is not None
+                ]
+                return prepared, quotes
+            finally:
+                await active_router.close()
+
+        prepared, quotes = _run(prepare_and_close())
+        router = None
+        value = {
+            "prepared_id": prepared.prepared_id,
+            "feasible": prepared.feasible,
+            "quotes": [item.model_dump(mode="json") for item in quotes],
+            "quote_failures": [
+                item.model_dump(mode="json") for item in prepared.quote_failures
+            ],
+            "rejected_candidates": [
+                item.model_dump(mode="json") for item in prepared.rejected_candidates
+            ],
+        }
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Quote request for {capability}",
+            fields=[
+                ("prepared decision", prepared.prepared_id),
+                ("feasible", prepared.feasible),
+                ("quotes", [item.quote_id for item in quotes] or ["none"]),
+                (
+                    "failures",
+                    [
+                        f"{item.executor_id}: {item.code} {item.reason}"
+                        for item in prepared.quote_failures
+                    ]
+                    or ["none"],
+                ),
+            ],
+        )
+        if not prepared.feasible:
+            raise typer.Exit(code=3)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("prepared-cancel")
+def economic_prepared_cancel(
+    prepared_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Cancel before invocation, releasing any existing reservation."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        prepared = _run(_await_and_close(router, router.cancel_prepared(prepared_id)))
+        router = None
+        _economic_emit(
+            prepared,
+            json_output=json_output,
+            title=f"Cancelled prepared route {prepared_id}",
+            fields=[("state", prepared.state.value), ("executor", prepared.selected_executor_id)],
+        )
+    except RuntimeError:
+        _economic_fail(
+            ConfigurationError(
+                "prepared cancellation did not complete; inspect the decision before retrying"
+            ),
+            json_output=json_output,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@app.command("run-prepared")
+def run_prepared(
+    prepared_id: str = typer.Argument(...),
+    request_document: str = typer.Option(
+        ...,
+        "--request",
+        help=(
+            "Original ActionRequest JSON/YAML or @file; action_id may be omitted but cannot "
+            "conflict. Input stays local and is not persisted by prepared routing."
+        ),
+    ),
+    approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    approve_payment: bool = typer.Option(False, "--approve-payment"),
+    human_approved: bool = typer.Option(False, "--human-approved"),
+    allow_unsafe_executor: bool = typer.Option(False, "--allow-unsafe-executor"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Execute one immutable prepared route after rechecking its original action."""
+
+    router: Router | None = None
+    try:
+        active_router = Router.from_manifest(manifest)
+        router = active_router
+        prepared = active_router.get_prepared_decision(prepared_id)
+        try:
+            request_value = _read_data(request_document, default={})
+            if not isinstance(request_value, dict):
+                raise ValueError("ActionRequest document must be an object")
+            supplied_action_id = request_value.get("action_id")
+            if supplied_action_id is not None and supplied_action_id != prepared.action_id:
+                raise ConfigurationError(
+                    "resupplied ActionRequest action_id does not match the prepared decision"
+                )
+            request = ActionRequest.model_validate(
+                {**request_value, "action_id": prepared.action_id}
+            )
+        except ConfigurationError:
+            raise
+        except (ValueError, typer.BadParameter) as exc:
+            raise typer.BadParameter("--request must contain a valid ActionRequest") from exc
+
+        async def execute_and_collect() -> tuple[
+            ExecutionOutcome,
+            PreparedRouteDecision,
+            list[SettlementReceipt],
+        ]:
+            try:
+                outcome = await active_router.execute_prepared(
+                    prepared_id,
+                    request=request,
+                    approved_side_effect=approve,
+                    payment_approved=approve_payment,
+                    human_approved=human_approved,
+                    allow_unsafe_executor=allow_unsafe_executor,
+                )
+                final_prepared = active_router.get_prepared_decision(prepared_id)
+                settlements = active_router.store.list_settlement_receipts(
+                    prepared_id=prepared_id
+                )
+                return outcome, final_prepared, settlements
+            finally:
+                await active_router.close()
+
+        outcome, final_prepared, settlements = _run(execute_and_collect())
+        router = None
+        selected = next(
+            (
+                item
+                for item in prepared.candidate_rankings
+                if item.executor_id == prepared.selected_executor_id
+            ),
+            None,
+        )
+        maximum = prepared.maximum_cash_authorization
+        if selected is None or maximum is None:
+            raise ConfigurationError("executed prepared route is missing economic evidence")
+        currency = maximum.currency
+        receipt_values = []
+        for receipt in outcome.receipts:
+            actual_cash = receipt.accounting.cash.actual_cash_cost(currency)
+            receipt_values.append(
+                {
+                    "receipt_id": receipt.receipt_id,
+                    "executor_id": receipt.executor_id,
+                    "status": receipt.status.value,
+                    "task_valid": receipt.task_valid,
+                    "quality_score": receipt.quality_score,
+                    "started_at": receipt.started_at.isoformat(),
+                    "ended_at": receipt.ended_at.isoformat(),
+                    "actual_resources": receipt.actual_resources.model_dump(
+                        mode="json", exclude={"monetary_usd"}
+                    ),
+                    "actual_cash": (
+                        {"amount": str(actual_cash), "currency": currency}
+                        if actual_cash is not None
+                        else None
+                    ),
+                    "cash_evidence_status": receipt.accounting.cash.status.value,
+                }
+            )
+        settlement_values = [
+            {
+                "settlement_id": item.settlement_id,
+                "status": item.status.value,
+                "reserved_amount": item.reserved_amount.model_dump(mode="json"),
+                "captured_amount": item.captured_amount.model_dump(mode="json"),
+                "released_amount": item.released_amount.model_dump(mode="json"),
+                "evidence_level": item.evidence_level.value,
+                "settled_at": item.settled_at.isoformat(),
+            }
+            for item in settlements
+        ]
+        evidence = (
+            [item.evidence_level.value for item in settlements]
+            or [
+                str(
+                    receipt.metadata.get(
+                        "cash_evidence_level", selected.evidence_level.value
+                    )
+                )
+                for receipt in outcome.receipts
+            ]
+            or [selected.evidence_level.value]
+        )
+        captured = settlements[0].captured_amount if len(settlements) == 1 else None
+        released = settlements[0].released_amount if len(settlements) == 1 else None
+        value = {
+            "ok": outcome.ok,
+            "status": outcome.status.value,
+            "prepared_id": prepared_id,
+            "prepared_state": final_prepared.state.value,
+            "executor_id": prepared.selected_executor_id,
+            "expected_amount": (
+                selected.expected_amount.model_dump(mode="json")
+                if selected.expected_amount is not None
+                else None
+            ),
+            "maximum_amount": maximum.model_dump(mode="json"),
+            "receipts": receipt_values,
+            "settlements": settlement_values,
+            "economic_evidence": evidence,
+            "output_omitted": True,
+        }
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Prepared execution {prepared_id}",
+            fields=[
+                ("status", outcome.status.value),
+                ("prepared state", final_prepared.state.value),
+                ("executor", prepared.selected_executor_id),
+                (
+                    "expected",
+                    (
+                        f"{selected.expected_amount.currency} "
+                        f"{selected.expected_amount.amount}"
+                        if selected.expected_amount is not None
+                        else None
+                    ),
+                ),
+                (
+                    "maximum",
+                    f"{maximum.currency} {maximum.amount}",
+                ),
+                (
+                    "captured",
+                    f"{captured.currency} {captured.amount}" if captured is not None else None,
+                ),
+                (
+                    "released",
+                    f"{released.currency} {released.amount}" if released is not None else None,
+                ),
+                ("evidence", evidence),
+                ("receipt", [item.receipt_id for item in outcome.receipts]),
+                ("result payload", "omitted"),
+            ],
+        )
+        if not outcome.ok:
+            raise typer.Exit(code=4)
+    except typer.Exit:
+        raise
+    except RuntimeError:
+        _economic_fail(
+            ConfigurationError(
+                "prepared execution did not complete; inspect the prepared decision and run "
+                "economic recovery"
+            ),
+            json_output=json_output,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@settlement_app.command("list")
+def settlement_list(
+    prepared_id: str | None = typer.Option(None, "--prepared-id"),
+    limit: int = typer.Option(100, "--limit", min=1, max=1_000),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List settlement receipts with captured and released amounts."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        receipts = router.store.list_settlement_receipts(
+            prepared_id=prepared_id,
+            limit=limit,
+        )
+        values = [
+            item.model_dump(mode="json", exclude={"external_reference"})
+            for item in receipts
+        ]
+        _economic_emit(
+            {"settlements": values},
+            json_output=json_output,
+            title="Settlement receipts",
+            fields=[
+                (
+                    item.settlement_id,
+                    f"{item.status.value}: captured {item.captured_amount.currency} "
+                    f"{item.captured_amount.amount}; released "
+                    f"{item.released_amount.amount}; evidence {item.evidence_level.value}",
+                )
+                for item in receipts
+            ]
+            or [("settlements", "none")],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@settlement_app.command("show")
+def settlement_show(
+    settlement_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show one immutable settlement and reconciliation history."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        receipt = router.store.get_settlement_receipt(settlement_id)
+        if receipt is None:
+            raise ConfigurationError("settlement receipt was not found")
+        reconciliations = router.store.list_billing_reconciliations(
+            settlement_id=settlement_id
+        )
+        value = {
+            "settlement": receipt.model_dump(mode="json", exclude={"external_reference"}),
+            "reconciliations": [
+                item.model_dump(
+                    mode="json",
+                    exclude={
+                        "invoice_reference",
+                        "billing_record_reference",
+                        "evidence_digest",
+                    },
+                )
+                for item in reconciliations
+            ],
+        }
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Settlement {settlement_id}",
+            fields=[
+                (
+                    "reserved",
+                    f"{receipt.reserved_amount.currency} {receipt.reserved_amount.amount}",
+                ),
+                ("captured", receipt.captured_amount.amount),
+                ("released", receipt.released_amount.amount),
+                ("status", receipt.status.value),
+                ("evidence", receipt.evidence_level.value),
+                (
+                    "reconciliation",
+                    [item.status.value for item in reconciliations] or ["none"],
+                ),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@settlement_app.command("reconcile")
+def settlement_reconcile(
+    settlement_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Ask the configured payment rail to reconcile one stored settlement."""
+
+    router: Router | None = None
+    try:
+        active_router = Router.from_manifest(manifest)
+        router = active_router
+        if active_router.store.get_settlement_receipt(settlement_id) is None:
+            raise ConfigurationError("settlement receipt was not found")
+        if active_router.budget_manager is None:
+            raise ConfigurationError("billing reconciliation requires a configured payment adapter")
+        reconciliation = _run(
+            _await_and_close(
+                active_router,
+                active_router.budget_manager.reconcile_v2(
+                    settlement_id,
+                    idempotency_key=f"cli-reconcile:{settlement_id}",
+                ),
+            )
+        )
+        router = None
+        evidence_level = reconciliation.status.economic_evidence_level.value
+        value = {
+            "reconciliation": reconciliation.model_dump(
+                mode="json",
+                exclude={
+                    "invoice_reference",
+                    "billing_record_reference",
+                    "evidence_digest",
+                },
+            ),
+            "evidence_level": evidence_level,
+        }
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Billing reconciliation {reconciliation.reconciliation_id}",
+            fields=[
+                ("settlement", reconciliation.settlement_id),
+                ("status", reconciliation.status.value),
+                (
+                    "expected",
+                    f"{reconciliation.expected_amount.currency} "
+                    f"{reconciliation.expected_amount.amount}",
+                ),
+                ("billed", reconciliation.billed_amount.amount),
+                ("discrepancy", reconciliation.discrepancy.amount),
+                ("evidence", evidence_level),
+            ],
+        )
+    except RuntimeError:
+        _economic_fail(
+            ConfigurationError(
+                "billing reconciliation did not complete; retry with the same settlement ID"
+            ),
+            json_output=json_output,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("prepared-show")
+def economic_prepared_show(
+    prepared_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show a sanitized prepared route decision and its transitions."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        prepared = router.get_prepared_decision(prepared_id)
+        transitions = router.store.list_prepared_transitions(prepared_id)
+        value = {
+            "prepared": prepared.model_dump(mode="json"),
+            "transitions": [item.model_dump(mode="json") for item in transitions],
+        }
+        expected = next(
+            (
+                item.expected_amount
+                for item in prepared.candidate_rankings
+                if item.executor_id == prepared.selected_executor_id
+            ),
+            None,
+        )
+        maximum = prepared.maximum_cash_authorization
+        rejections = [
+            f"{item.executor_id}: {', '.join(item.reasons)}"
+            for item in prepared.rejected_candidates
+        ]
+        failures = [
+            f"{item.executor_id}: {item.code} {item.reason}"
+            for item in prepared.quote_failures
+        ]
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title=f"Prepared route {prepared.prepared_id}",
+            fields=[
+                ("state", prepared.state.value),
+                ("feasible", prepared.feasible),
+                ("executor", prepared.selected_executor_id),
+                (
+                    "expected",
+                    f"{expected.currency} {expected.amount}" if expected is not None else None,
+                ),
+                (
+                    "maximum",
+                    f"{maximum.currency} {maximum.amount}" if maximum is not None else None,
+                ),
+                ("quote", prepared.selected_quote_id),
+                ("expires", prepared.expires_at.isoformat()),
+                ("rejected", rejections or ["none"]),
+                ("quote failures", failures or ["none"]),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("doctor")
+def economic_doctor(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Report whether economic networking, trust, storage, and payment are configured."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        config = router.manifest.economic_evidence
+        configured_path = Path(config.trust_store.path).expanduser()
+        stored_keys = len(router.store.list_provider_signing_keys())
+        trust_available = configured_path.is_file() or stored_keys > 0
+        recoverable = router.store.recoverable_prepared_decisions()
+        pending_refunds = router.store.pending_refund_authorizations_v2()
+        pending_payment_intents = sum(
+            router.store.payment_reservation_operation_intent(item.reservation_id) is not None
+            for item in router.store.list_payment_reservations_v2(limit=1_000)
+            if item.state
+            in {
+                PaymentReservationState.SETTLING,
+                PaymentReservationState.INDETERMINATE,
+            }
+        )
+        checks = {
+            "enabled": config.enabled,
+            "live_quotes_enabled": config.live_quotes.enabled,
+            "allowed_quote_hosts": list(config.network.allowed_quote_hosts),
+            "trust_store_path": str(configured_path),
+            "trust_available": trust_available,
+            "stored_trusted_keys": stored_keys,
+            "payment_adapter": config.payment.adapter,
+            "settlement_currency": config.settlement_currency,
+            "recoverable_prepared_decisions": len(recoverable),
+            "pending_payment_operation_intents": pending_payment_intents,
+            "pending_refund_authorizations": len(pending_refunds),
+            "remote_networking_default": "disabled" if not config.enabled else "enabled",
+        }
+        _economic_emit(
+            checks,
+            json_output=json_output,
+            title="Economic evidence doctor",
+            fields=[(key.replace("_", " "), value) for key, value in checks.items()],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@economic_app.command("recover")
+def economic_recover(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Resume idempotent settlement for incomplete decisions without re-executing."""
+
+    router: Router | None = None
+    try:
+        active_router = Router.from_manifest(manifest)
+        router = active_router
+
+        async def recover_and_collect() -> tuple[dict[str, object], int, int]:
+            try:
+                report = await active_router.economic_recover()
+                pending_refunds = len(
+                    active_router.store.pending_refund_authorizations_v2()
+                )
+                pending_payment_intents = sum(
+                    active_router.store.payment_reservation_operation_intent(
+                        item.reservation_id
+                    )
+                    is not None
+                    for item in active_router.store.list_payment_reservations_v2(
+                        limit=1_000
+                    )
+                    if item.state
+                    in {
+                        PaymentReservationState.SETTLING,
+                        PaymentReservationState.INDETERMINATE,
+                    }
+                )
+                return report, pending_refunds, pending_payment_intents
+            finally:
+                await active_router.close()
+
+        report, pending_refunds, pending_payment_intents = _run(recover_and_collect())
+        router = None
+        raw_items = report.get("items", [])
+        items = [
+            {
+                "prepared_id": str(item.get("prepared_id", "")),
+                "result": str(item.get("result", "unresolved")),
+            }
+            for item in raw_items
+            if isinstance(item, dict)
+        ]
+        value = {
+            "scanned": int(report.get("scanned", 0)),
+            "settled": int(report.get("settled", 0)),
+            "released": int(report.get("released", 0)),
+            "unresolved": int(report.get("unresolved", 0)),
+            "pending_payment_operation_intents": pending_payment_intents,
+            "pending_refund_authorizations": pending_refunds,
+            "items": items,
+        }
+        _economic_emit(
+            value,
+            json_output=json_output,
+            title="Economic recovery",
+            fields=[
+                ("scanned", value["scanned"]),
+                ("settled", value["settled"]),
+                ("released", value["released"]),
+                ("unresolved", value["unresolved"]),
+                (
+                    "pending payment operation intents",
+                    value["pending_payment_operation_intents"],
+                ),
+                (
+                    "pending refund authorizations",
+                    value["pending_refund_authorizations"],
+                ),
+                (
+                    "decisions",
+                    [f"{item['prepared_id']}: {item['result']}" for item in items]
+                    or ["none"],
+                ),
+            ],
+        )
+    except RuntimeError:
+        _economic_fail(
+            ConfigurationError("economic recovery did not complete; retry with the same store"),
+            json_output=json_output,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@market_app.command("aggregate-import")
+def market_aggregate_import(
+    path: Path = typer.Argument(..., exists=True, file_okay=True, dir_okay=False),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Verify and import one bounded local JSON aggregate envelope."""
+
+    from .economic import MarketAggregateImporter
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        if path.stat().st_size > 262_144:
+            raise ConfigurationError("aggregate response exceeds its configured size limit")
+        payload = path.read_bytes()
+        verifier = _trust_verifier(router)
+        aggregates = MarketAggregateImporter(
+            router.store,
+            verifier,
+        ).import_response(payload)
+        for aggregate in aggregates:
+            trusted_key = verifier.store.get(
+                aggregate.provider_id,
+                aggregate.signature.key_id,
+            )
+            if trusted_key is None:  # pragma: no cover - importer verified this key
+                raise ConfigurationError("verified provider key disappeared")
+            router.store.save_provider_signing_key(trusted_key)
+        values = [
+            {
+                "aggregate_id": item.aggregate_id,
+                "provider_id": item.provider_id,
+                "capability": item.capability,
+                "executor_id": item.executor_id,
+                "executor_fingerprint": item.executor_fingerprint,
+                "sample_size": item.sample_size,
+                "expires_at": item.expires_at.isoformat(),
+                "evidence_level": "STATIC_PRIOR",
+            }
+            for item in aggregates
+        ]
+        _economic_emit(
+            {
+                "count": len(values),
+                "aggregates": values,
+                "qualification_evidence": False,
+                "activation_evidence": False,
+            },
+            json_output=json_output,
+            title="Imported market aggregates",
+            fields=[
+                ("count", len(values)),
+                (
+                    "aggregates",
+                    [f"{item['aggregate_id']}: {item['capability']}" for item in values]
+                    or ["none"],
+                ),
+                ("evidence", "STATIC_PRIOR"),
+                ("qualification evidence", False),
+                ("activation evidence", False),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@market_app.command("aggregate-list")
+def market_aggregate_list(
+    capability: str | None = typer.Option(None, "--capability"),
+    limit: int = typer.Option(100, "--limit", min=1, max=1_000),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List stored privacy-safe market priors without fetching the network."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        aggregates = router.store.list_market_aggregates(
+            capability=capability,
+            limit=limit,
+        )
+        _economic_emit(
+            {
+                "aggregates": [item.model_dump(mode="json") for item in aggregates],
+                "evidence_level": "STATIC_PRIOR",
+                "qualification_evidence": False,
+                "activation_evidence": False,
+            },
+            json_output=json_output,
+            title="Market aggregates",
+            fields=[
+                (
+                    item.aggregate_id,
+                    f"{item.capability} via {item.provider_id}; "
+                    f"samples {item.sample_size}; expires {item.expires_at.isoformat()}",
+                )
+                for item in aggregates
+            ]
+            or [("aggregates", "none")],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@market_app.command("aggregate-show")
+def market_aggregate_show(
+    aggregate_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show one stored market prior and its exact fingerprint binding."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        aggregate = router.store.get_market_aggregate(aggregate_id)
+        if aggregate is None:
+            raise ConfigurationError("market aggregate was not found")
+        p50 = aggregate.actual_cost_p50
+        p95 = aggregate.actual_cost_p95
+        _economic_emit(
+            {
+                "aggregate": aggregate.model_dump(mode="json"),
+                "evidence_level": "STATIC_PRIOR",
+                "binding": False,
+                "qualification_evidence": False,
+                "activation_evidence": False,
+            },
+            json_output=json_output,
+            title=f"Market aggregate {aggregate.aggregate_id}",
+            fields=[
+                ("provider", aggregate.provider_id),
+                ("capability", aggregate.capability),
+                ("executor", aggregate.executor_id),
+                ("fingerprint", aggregate.executor_fingerprint),
+                ("input bucket", aggregate.input_bucket),
+                ("sample size", aggregate.sample_size),
+                (
+                    "actual cost p50",
+                    f"{p50.currency} {p50.amount}" if p50 is not None else None,
+                ),
+                (
+                    "actual cost p95",
+                    f"{p95.currency} {p95.amount}" if p95 is not None else None,
+                ),
+                ("expires", aggregate.expires_at.isoformat()),
+                ("evidence", "STATIC_PRIOR"),
+                ("binding", False),
+                ("qualification evidence", False),
+                ("activation evidence", False),
+            ],
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@market_app.command("aggregate-verify")
+def market_aggregate_verify(
+    aggregate_id: str = typer.Argument(...),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Verify one aggregate's signature, key trust, and current freshness."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        aggregate = router.store.get_market_aggregate(aggregate_id)
+        if aggregate is None:
+            raise ConfigurationError("market aggregate was not found")
+        result = _verify_market_aggregate(router, aggregate)
+        _economic_emit(
+            result,
+            json_output=json_output,
+            title=f"Market aggregate verification {aggregate.aggregate_id}",
+            fields=[
+                ("valid", result["ok"]),
+                ("signature", result["signature_reason"]),
+                ("historical signature", result["historical_signature_reason"]),
+                ("fresh", result["fresh"]),
+                ("expires", result["expires_at"]),
+                ("evidence", result["evidence_level"]),
+                ("qualification evidence", False),
+                ("activation evidence", False),
+            ],
+        )
+        if not result["ok"]:
+            raise typer.Exit(code=1)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _economic_fail(exc, json_output=json_output)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@market_app.command("serve")
+def market_serve(
+    host: str = typer.Option("127.0.0.1", "--host"),
+    port: int = typer.Option(8787, "--port", min=1, max=65_535),
+    token_env: str = typer.Option("AEEP_REFERENCE_MARKET_TOKEN", "--token-env"),
+) -> None:
+    """Run the deterministic local reference market/provider service."""
+
+    token = os.getenv(token_env)
+    if host not in {"127.0.0.1", "localhost", "::1"} and not token:
+        raise typer.BadParameter(
+            f"refusing non-loopback market binding without bearer token in {token_env}"
+        )
+    try:
+        import uvicorn
+
+        from .market_server import (
+            ReferenceMarket,
+            create_app,
+            reference_executor_spec,
+        )
+    except ImportError as exc:
+        raise typer.BadParameter(
+            "market serving requires the http-server optional dependency"
+        ) from exc
+    advertised_host = host if host in {"127.0.0.1", "localhost", "::1"} else "127.0.0.1"
+    url_host = (
+        f"[{advertised_host}]"
+        if ":" in advertised_host and not advertised_host.startswith("[")
+        else advertised_host
+    )
+    executor = reference_executor_spec(
+        base_url=f"http://{url_host}:{port}",
+        auth_token_env=token_env if token else None,
+    )
+    market = ReferenceMarket(executor_spec=executor)
+    uvicorn.run(
+        create_app(market=market, bearer_token=token),
+        host=host,
+        port=port,
+        log_level="info",
+    )
 
 
 @app.command("accept-quote")
@@ -1487,6 +3033,8 @@ def workflow_run(
     request: str = typer.Argument(..., help="Workflow JSON/YAML or @file"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    approve_payment: bool = typer.Option(False, "--approve-payment"),
+    human_approved: bool = typer.Option(False, "--human-approved"),
     approve_unsafe_executor: bool = typer.Option(False, "--approve-unsafe-executor"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -1500,6 +3048,8 @@ def workflow_run(
                 router.execute_workflow(
                     WorkflowRequest.model_validate(_read_data(request, default={})),
                     approved_side_effect=approve,
+                    payment_approved=approve_payment,
+                    human_approved=human_approved,
                     allow_unsafe_executor=approve_unsafe_executor,
                 ),
             )
@@ -1520,6 +3070,9 @@ def workflow_resume(
     ),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     approve: SideEffect = typer.Option(SideEffect.READ, "--approve"),
+    approve_payment: bool = typer.Option(False, "--approve-payment"),
+    human_approved: bool = typer.Option(False, "--human-approved"),
+    approve_unsafe_executor: bool = typer.Option(False, "--approve-unsafe-executor"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     from .models import ResourceAccounting
@@ -1541,6 +3094,9 @@ def workflow_resume(
                         else None
                     ),
                     approved_side_effect=approve,
+                    payment_approved=approve_payment,
+                    human_approved=human_approved,
+                    allow_unsafe_executor=approve_unsafe_executor,
                 ),
             )
         )
@@ -1610,7 +3166,7 @@ def campaign_prove(
     output: Path | None = typer.Option(None, "--output", "-o"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
-    """Evaluate the locked 0.3 release thresholds without filling missing evidence."""
+    """Evaluate release proof thresholds without filling missing economic evidence."""
 
     from .benchmarking import (
         BenchmarkCampaignReport,
@@ -1633,6 +3189,10 @@ def campaign_prove(
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_text(result.model_dump_json(indent=2) + "\n", encoding="utf-8")
         _emit(result, compact=compact)
+        if not result.passed:
+            raise typer.Exit(code=4)
+    except typer.Exit:
+        raise
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
 

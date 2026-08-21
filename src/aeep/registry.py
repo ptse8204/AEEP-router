@@ -12,19 +12,66 @@ from .errors import ConfigurationError, InputValidationError
 from .models import ExecutorSpec
 
 
+def _declared_property_names(schema: Any) -> set[str]:
+    """Return schema-authored property names without consulting instance data."""
+
+    names: set[str] = set()
+    pending: list[Any] = [schema]
+    seen: set[int] = set()
+    while pending:
+        current = pending.pop()
+        if not isinstance(current, (dict, list, tuple)) or id(current) in seen:
+            continue
+        seen.add(id(current))
+        if isinstance(current, dict):
+            properties = current.get("properties")
+            if isinstance(properties, dict):
+                names.update(str(name) for name in properties)
+            pending.extend(current.values())
+        else:
+            pending.extend(current)
+    return names
+
+
+def _safe_validation_fragment(error: Any, schema: dict[str, Any]) -> str:
+    """Describe a validation failure without reflecting input or output values."""
+
+    declared = _declared_property_names(schema)
+    location = "$"
+    for part in error.absolute_path:
+        if isinstance(part, int):
+            location += f"[{part}]"
+        elif isinstance(part, str) and part in declared:
+            location += f".{part}"
+        else:
+            # Dynamic object keys come from the payload and may themselves be
+            # confidential. Preserve the structural location without echoing
+            # the key.
+            location += ".*"
+    validator = error.validator
+    keyword = (
+        validator
+        if isinstance(validator, str)
+        and validator
+        and all(character.isalnum() or character in "_-$" for character in validator)
+        else "unknown"
+    )
+    return f"{location}: violates JSON Schema {keyword!r} constraint"
+
+
 def validate_json(instance: Any, schema: dict[str, Any], *, label: str) -> None:
     try:
         validator_cls = validator_for(schema)
         validator_cls.check_schema(schema)
         validator = validator_cls(schema)
-        errors = sorted(validator.iter_errors(instance), key=lambda error: list(error.path))
+        errors = sorted(
+            validator.iter_errors(instance),
+            key=lambda error: tuple(str(part) for part in error.path),
+        )
     except Exception as exc:
         raise ConfigurationError(f"invalid JSON Schema for {label}: {exc}") from exc
     if errors:
-        fragments: list[str] = []
-        for error in errors[:5]:
-            location = ".".join(str(part) for part in error.absolute_path) or "$"
-            fragments.append(f"{location}: {error.message}")
+        fragments = [_safe_validation_fragment(error, schema) for error in errors[:5]]
         raise InputValidationError(f"{label} validation failed: {'; '.join(fragments)}")
 
 

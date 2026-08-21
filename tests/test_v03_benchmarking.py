@@ -631,6 +631,7 @@ def test_release_proof_enforces_all_locked_numeric_thresholds():
             "ok": True,
             "valid": True,
             "wall_time_ms": wall,
+            "policy_score": 1.0 if route_id == "hybrid" else 1.05,
             "accounting": ResourceAccounting(
                 model_usage=[
                     ModelTokenUsage(
@@ -658,7 +659,7 @@ def test_release_proof_enforces_all_locked_numeric_thresholds():
                     "domain": domain,
                     "deterministic_tools_available": True,
                     "pricing_snapshot_ids": [],
-                    "frozen_holdout_decisions": {"case": "hybrid-executor"},
+                    "frozen_holdout_decisions": {"case": "hybrid"},
                     "trials": trials,
                     "summaries": [],
                     "baseline_deltas": [],
@@ -684,3 +685,14 @@ def test_release_proof_enforces_all_locked_numeric_thresholds():
     )
     assert proof.passed
     assert all(gate.passed for gate in proof.gates)
+
+    forged = [
+        report.model_copy(update={"frozen_holdout_decisions": {"case": "hybrid-executor"}})
+        for report in reports
+    ]
+    forged_proof = evaluate_release_proof(
+        forged,
+        baseline_route_ids=["baseline"],
+        hybrid_route_id="hybrid",
+    )
+    assert not next(gate for gate in forged_proof.gates if gate.name == "policy-oracle").passed

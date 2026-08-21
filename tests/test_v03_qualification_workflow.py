@@ -164,6 +164,20 @@ def test_static_qualification_covers_every_external_adapter_boundary():
     assert not static_qualification_checks(templated)["adapter_config"]
 
 
+def test_behavior_fingerprint_binds_economic_endpoint_and_disclosure():
+    first = spec("economic")
+    first.config["economic"] = {
+        "quote_endpoint": "https://provider.example/v1/quotes",
+        "quote_disclosure": {
+            "fields": [{"source": "action_features.input_bytes", "name": "input_bytes"}]
+        },
+    }
+    changed = first.model_copy(deep=True)
+    changed.config["economic"]["quote_endpoint"] = "https://other.example/v1/quotes"
+
+    assert behavior_fingerprint(first) != behavior_fingerprint(changed)
+
+
 @pytest.mark.asyncio
 async def test_candidate_requires_qualification_activation_and_suspends_on_drift():
     router = Router(Manifest(database=":memory:"))

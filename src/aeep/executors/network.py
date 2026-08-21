@@ -56,10 +56,13 @@ async def validate_http_url(url: str, config: dict[str, Any], *, label: str = "H
             raise ConfigurationError(f"rendered {label} host {hostname!r} is not allowlisted")
 
     local = is_local_hostname(hostname)
-    if parsed.scheme != "https" and not local and not config.get("allow_insecure_http", False):
+    private_allowed = bool(config.get("allow_private_networks", False))
+    if (
+        parsed.scheme != "https"
+        and not config.get("allow_insecure_http", False)
+        and not (local and private_allowed)
+    ):
         raise ConfigurationError(f"remote {label} executors require HTTPS by default")
-    if local or config.get("allow_private_networks", False):
-        return
 
     try:
         addresses = await resolved_addresses(hostname)
@@ -67,13 +70,10 @@ async def validate_http_url(url: str, config: dict[str, Any], *, label: str = "H
         raise ExecutorError(f"cannot resolve {label} host {hostname!r}: {exc}") from exc
     if not addresses:
         raise ExecutorError(f"cannot resolve {label} host {hostname!r}")
-    if any(
-        address.is_private
-        or address.is_loopback
-        or address.is_link_local
+    if not private_allowed and any(
+        not address.is_global
         or address.is_multicast
-        or address.is_reserved
-        or address.is_unspecified
+        or getattr(address, "is_site_local", False)
         for address in addresses
     ):
         raise ConfigurationError(

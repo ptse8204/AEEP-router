@@ -6,7 +6,7 @@ AEEP compares available routes—local Python, command-line tools, HTTP APIs, MC
 
 It rejects routes that break your limits before scoring the rest.
 
-> **Status:** AEEP 0.3 is working alpha software. Imported routes fail closed; review qualification evidence and policies before production use.
+> **Status:** AEEP 0.4 is working alpha software. Imported routes fail closed; remote economic networking is disabled by default. Review qualification, trust, payment, and recovery policy before production use.
 
 ## Quick start
 
@@ -105,6 +105,99 @@ async def main():
 asyncio.run(main())
 ```
 
+## Prepare a route with economic evidence
+
+Ordinary `route()` remains deterministic and network-free. Use the explicit
+prepared API when a paid/dynamic route needs a request-bound quote:
+
+```python
+prepared = await router.prepare_route(action_request)
+if not prepared.feasible:
+    for rejected in prepared.rejected_candidates:
+        print(rejected.executor_id, rejected.reasons)
+else:
+    selected = next(
+        item
+        for item in prepared.candidate_rankings
+        if item.executor_id == prepared.selected_executor_id
+    )
+    print("expected", selected.expected_amount)
+    print("maximum", prepared.maximum_cash_authorization)
+    outcome = await router.execute_prepared(
+        prepared.prepared_id,
+        payment_approved=True,
+        human_approved=True,
+    )
+    print(outcome.receipts)
+```
+
+Preparation quotes only a bounded shortlist after qualification and non-price
+hard constraints. Execution rechecks route, policy, fingerprint, authorization,
+key, budget, idempotency, and approval; reserves the immutable quote, offer, or
+pinned-rate-card maximum; captures actual cost; and releases the remainder.
+Anonymous static priors cannot authorize nonzero cash. Provider economic
+evidence never qualifies or activates a route and cannot grant approval.
+
+## Try the local economic evidence service
+
+The deterministic loopback service needs no external key or payment rail:
+
+```bash
+pip install -e '.[http-server]'
+aeep market serve
+```
+
+The repository includes this bounded request in
+`examples/economic_market/action.json`:
+
+```json
+{
+  "action_id": "action-reference-cli-1",
+  "capability": "text.statistics@1",
+  "input": {"text": "one two\nthree"},
+  "policy": "balanced",
+  "constraints": {"max_cost_usd": 0.01},
+  "idempotency_key": "economic-reference-cli-1"
+}
+```
+
+In another terminal, prepare and execute the exact same request. Substitute the
+IDs printed by each JSON response:
+
+```bash
+aeep economic prepare text.statistics@1 \
+  --request @examples/economic_market/action.json \
+  --manifest examples/economic_market/aeep.yaml \
+  --json
+aeep run-prepared PREPARED_ID \
+  --request @examples/economic_market/action.json \
+  --approve-payment \
+  --manifest examples/economic_market/aeep.yaml \
+  --json
+aeep settlement show SETTLEMENT_ID \
+  --manifest examples/economic_market/aeep.yaml \
+  --json
+```
+
+The deterministic result is:
+
+```text
+expected: USD 0.0012
+maximum/reserved: USD 0.0030
+captured: USD 0.0012
+released: USD 0.0018
+cash evidence: PAYMENT_SETTLEMENT
+```
+
+The reference service's deterministic private key is public test material and
+the local prepaid adapter does not move real money. The CLI does not persist or
+print the action result payload in its economic records. See
+[the local market example](examples/economic_market/README.md).
+
+The 0.4 router is USD-only because existing policy/budget/history fields are
+USD-denominated. Economic protocol models retain explicit currency codes for
+future interoperability, but AEEP performs no FX or implicit conversion.
+
 ## Connect an AI client
 
 Run AEEP as a local MCP server:
@@ -137,7 +230,9 @@ aeep ingest otel trace.json
 - Isolated repeated campaigns with immutable pricing snapshots and `aeep campaign prove` release-gate evaluation.
 - Output validation and receipts showing estimated versus actual use.
 - Safe fallback when another route fails.
-- Quotes, budgets, payments, provider discovery, and signed receipts when needed.
+- Signed offers and request-bound quotes, prepared decisions, partial
+  settlement, reconciliation, and evidence-safe reporting when explicitly
+  enabled.
 
 Commands use argument arrays, not shell interpolation. Requests cannot loosen manifest policy. Writes and payments require operator approval. Inputs and outputs are not stored by default.
 
@@ -148,8 +243,13 @@ Commands use argument arrays, not shell interpolation. Requests cannot loosen ma
 - [Architecture](ARCHITECTURE.md)
 - [Security](SECURITY.md)
 - [Economic accounting](docs/ACCOUNTING.md)
-- [0.3 proof harness and controlled campaign](examples/proof/README.md)
+- [0.4 proof harness and controlled campaigns](examples/proof/README.md)
+- [0.4 economic evidence proof campaign](examples/economic_evidence/README.md)
 - [Economic network features](docs/ECONOMIC_NETWORK.md)
+- [Economic operator guide](docs/ECONOMIC_OPERATOR_GUIDE.md)
+- [Provider integration guide](docs/PROVIDER_INTEGRATION.md)
+- [0.4 migration guide](docs/MIGRATION_0.4.md)
+- [Economic threat model](docs/THREAT_MODEL.md)
 - [Changelog](CHANGELOG.md)
 
 ## Development

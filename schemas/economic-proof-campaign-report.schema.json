@@ -1,0 +1,724 @@
+{
+  "$defs": {
+    "BenchmarkCondition": {
+      "enum": [
+        "process-cold",
+        "router-warm"
+      ],
+      "title": "BenchmarkCondition",
+      "type": "string"
+    },
+    "BenchmarkSplit": {
+      "enum": [
+        "qualification",
+        "training",
+        "holdout"
+      ],
+      "title": "BenchmarkSplit",
+      "type": "string"
+    },
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "EconomicBenchmarkOracle": {
+      "additionalProperties": false,
+      "description": "Cheapest task-valid route with authoritative actual-cash evidence.",
+      "properties": {
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "repetition": {
+          "minimum": 0,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "selected_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Id"
+        },
+        "oracle_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Oracle Route Id"
+        },
+        "selected_captured_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "oracle_captured_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "distance_from_oracle_percent": {
+          "anyOf": [
+            {
+              "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance From Oracle Percent"
+        },
+        "selected_within_10_percent": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Within 10 Percent"
+        },
+        "eligible_route_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Eligible Route Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "case_id",
+        "condition",
+        "repetition"
+      ],
+      "title": "EconomicBenchmarkOracle",
+      "type": "object"
+    },
+    "EconomicBenchmarkRouteType": {
+      "description": "Transport or funding shape measured by an AEEP 0.4 proof trial.",
+      "enum": [
+        "local-python",
+        "local-cli",
+        "direct-http",
+        "local-mcp",
+        "usage-priced-provider",
+        "subscription-baseline",
+        "aeep-hybrid"
+      ],
+      "title": "EconomicBenchmarkRouteType",
+      "type": "string"
+    },
+    "EconomicBenchmarkTrial": {
+      "additionalProperties": false,
+      "description": "Sanitized measured economics for one existing benchmark trial.",
+      "properties": {
+        "schema_version": {
+          "const": "0.4",
+          "default": "0.4",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trial_id": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Route Id",
+          "type": "string"
+        },
+        "route_type": {
+          "$ref": "#/$defs/EconomicBenchmarkRouteType"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "split": {
+          "$ref": "#/$defs/BenchmarkSplit"
+        },
+        "repetition": {
+          "minimum": 0,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "task_valid": {
+          "title": "Task Valid",
+          "type": "boolean"
+        },
+        "selected_by_aeep": {
+          "default": false,
+          "title": "Selected By Aeep",
+          "type": "boolean"
+        },
+        "prepared_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prepared Id"
+        },
+        "quote_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Id"
+        },
+        "settlement_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Settlement Id"
+        },
+        "charge_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge Id"
+        },
+        "expected_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "maximum_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reserved_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "captured_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "released_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "cash_evidence_level": {
+          "$ref": "#/$defs/EconomicEvidenceLevel",
+          "default": "UNKNOWN"
+        },
+        "preparation_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Preparation Latency Ms",
+          "type": "string"
+        },
+        "quote_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quote Latency Ms",
+          "type": "string"
+        },
+        "execution_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Execution Latency Ms",
+          "type": "string"
+        },
+        "settlement_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Settlement Latency Ms",
+          "type": "string"
+        },
+        "total_wall_time_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Total Wall Time Ms",
+          "type": "string"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "cached_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Tokens",
+          "type": "integer"
+        },
+        "tool_schema_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Tool Schema Tokens",
+          "type": "integer"
+        },
+        "tool_result_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Tool Result Tokens",
+          "type": "integer"
+        },
+        "model_usage_complete": {
+          "default": false,
+          "title": "Model Usage Complete",
+          "type": "boolean"
+        },
+        "local_resources_complete": {
+          "default": false,
+          "title": "Local Resources Complete",
+          "type": "boolean"
+        },
+        "synthetic_usage": {
+          "default": false,
+          "title": "Synthetic Usage",
+          "type": "boolean"
+        },
+        "cpu_ms": {
+          "default": "0",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Cpu Ms",
+          "type": "string"
+        },
+        "peak_memory_mb": {
+          "default": "0",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Peak Memory Mb",
+          "type": "string"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "retry_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Retry Count",
+          "type": "integer"
+        },
+        "fallback_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Fallback Count",
+          "type": "integer"
+        },
+        "quote_failure_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Quote Failure Codes",
+          "type": "array"
+        },
+        "settlement_failure_code": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Settlement Failure Code"
+        },
+        "indeterminate": {
+          "default": false,
+          "title": "Indeterminate",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "trial_id",
+        "case_id",
+        "route_id",
+        "route_type",
+        "condition",
+        "split",
+        "repetition",
+        "task_valid",
+        "preparation_latency_ms",
+        "quote_latency_ms",
+        "execution_latency_ms",
+        "settlement_latency_ms",
+        "total_wall_time_ms"
+      ],
+      "title": "EconomicBenchmarkTrial",
+      "type": "object"
+    },
+    "EconomicEvidenceLevel": {
+      "enum": [
+        "UNKNOWN",
+        "STATIC_PRIOR",
+        "PUBLISHED_OFFER",
+        "SIGNED_QUOTE",
+        "SIGNED_USAGE_STATEMENT",
+        "PAYMENT_SETTLEMENT",
+        "BILLING_RECONCILED",
+        "OPERATOR_ATTESTED"
+      ],
+      "title": "EconomicEvidenceLevel",
+      "type": "string"
+    },
+    "EconomicWorkflowProofTrial": {
+      "additionalProperties": false,
+      "description": "Measured proof for one caller-authored prepared economic workflow.\n\nWorkflow trials are kept outside the single-action route oracle because a\nmulti-step DAG is not an interchangeable route for one bounded action.",
+      "properties": {
+        "schema_version": {
+          "const": "0.4",
+          "default": "0.4",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "workflow_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Workflow Id",
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/$defs/BenchmarkCondition"
+        },
+        "split": {
+          "$ref": "#/$defs/BenchmarkSplit"
+        },
+        "repetition": {
+          "minimum": 0,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "task_valid": {
+          "title": "Task Valid",
+          "type": "boolean"
+        },
+        "dependency_binding_verified": {
+          "title": "Dependency Binding Verified",
+          "type": "boolean"
+        },
+        "step_count": {
+          "maximum": 64,
+          "minimum": 2,
+          "title": "Step Count",
+          "type": "integer"
+        },
+        "prepared_step_count": {
+          "maximum": 64,
+          "minimum": 0,
+          "title": "Prepared Step Count",
+          "type": "integer"
+        },
+        "quoted_step_count": {
+          "maximum": 64,
+          "minimum": 0,
+          "title": "Quoted Step Count",
+          "type": "integer"
+        },
+        "settled_step_count": {
+          "maximum": 64,
+          "minimum": 0,
+          "title": "Settled Step Count",
+          "type": "integer"
+        },
+        "dependency_input_bytes": {
+          "minimum": 0,
+          "title": "Dependency Input Bytes",
+          "type": "integer"
+        },
+        "expected_cash": {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        "maximum_cash": {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        "reserved_cash": {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        "captured_cash": {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        "released_cash": {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        "cash_evidence_level": {
+          "$ref": "#/$defs/EconomicEvidenceLevel"
+        },
+        "preparation_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Preparation Latency Ms",
+          "type": "string"
+        },
+        "quote_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Quote Latency Ms",
+          "type": "string"
+        },
+        "execution_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Execution Latency Ms",
+          "type": "string"
+        },
+        "settlement_latency_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Settlement Latency Ms",
+          "type": "string"
+        },
+        "total_wall_time_ms": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Total Wall Time Ms",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workflow_id",
+        "condition",
+        "split",
+        "repetition",
+        "task_valid",
+        "dependency_binding_verified",
+        "step_count",
+        "prepared_step_count",
+        "quoted_step_count",
+        "settled_step_count",
+        "dependency_input_bytes",
+        "expected_cash",
+        "maximum_cash",
+        "reserved_cash",
+        "captured_cash",
+        "released_cash",
+        "cash_evidence_level",
+        "preparation_latency_ms",
+        "quote_latency_ms",
+        "execution_latency_ms",
+        "settlement_latency_ms",
+        "total_wall_time_ms"
+      ],
+      "title": "EconomicWorkflowProofTrial",
+      "type": "object"
+    },
+    "ReleaseGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ReleaseGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "AEEP 0.4 proof report that leaves the frozen 0.3 campaign schema intact.",
+  "properties": {
+    "schema_version": {
+      "const": "0.4",
+      "default": "0.4",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "domain": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Domain",
+      "type": "string"
+    },
+    "settlement_currency": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Settlement Currency",
+      "type": "string"
+    },
+    "repetitions": {
+      "minimum": 1,
+      "title": "Repetitions",
+      "type": "integer"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/EconomicBenchmarkTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "workflow_trials": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EconomicWorkflowProofTrial"
+      },
+      "title": "Workflow Trials",
+      "type": "array"
+    },
+    "hybrid_training_observations": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Hybrid Training Observations",
+      "type": "integer"
+    },
+    "oracles": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EconomicBenchmarkOracle"
+      },
+      "title": "Oracles",
+      "type": "array"
+    },
+    "gates": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReleaseGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "domain",
+    "settlement_currency",
+    "repetitions",
+    "generated_at",
+    "trials"
+  ],
+  "title": "EconomicProofCampaignReport",
+  "type": "object"
+}

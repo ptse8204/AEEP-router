@@ -116,7 +116,9 @@ class StateTransitionValidator:
             kind=ValidationKind.STATE_TRANSITION,
             valid=valid,
             quality_score=1.0 if valid else 0.0,
-            detail=f"{before} -> {after}",
+            detail=(
+                "allowed state transition" if valid else "state transition is not allowed"
+            ),
         )
 
 

@@ -10,6 +10,8 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import Any, Literal
 
+from ..models import ExternalOutcomeReport
+
 ToolFormat = Literal[
     "mcp",
     "openai-responses",
@@ -17,6 +19,14 @@ ToolFormat = Literal[
     "anthropic",
     "deepseek",
     "zai",
+]
+
+_EXTERNAL_OUTCOME_SCHEMA = ExternalOutcomeReport.model_json_schema()
+_EXTERNAL_OUTCOME_SCHEMA["$defs"]["ExecutionStatus"]["enum"] = [
+    "success",
+    "failed",
+    "timeout",
+    "rejected",
 ]
 
 _ACTION_PROPERTIES: dict[str, Any] = {
@@ -125,80 +135,14 @@ _BASE_TOOLS: list[dict[str, Any]] = [
             "Report the observed result of a browser, computer-use, model, or other host-delegated "
             "route so future decisions learn its actual cost, latency, compute use, and reliability."
         ),
-        "schema": {
-            "type": "object",
-            "properties": {
-                "decision_id": {"type": "string"},
-                "executor_id": {"type": "string"},
-                "status": {
-                    "type": "string",
-                    "enum": ["success", "failed", "timeout", "rejected"],
-                },
-                "actual_resources": {
-                    "type": "object",
-                    "properties": {
-                        "monetary_usd": {"type": "number", "minimum": 0},
-                        "latency_ms": {"type": "number", "minimum": 0},
-                        "cpu_ms": {"type": "number", "minimum": 0},
-                        "memory_mb_seconds": {"type": "number", "minimum": 0},
-                        "peak_memory_mb": {"type": "number", "minimum": 0},
-                        "gpu_ms": {"type": "number", "minimum": 0},
-                        "network_bytes": {"type": "integer", "minimum": 0},
-                        "context_tokens": {"type": "integer", "minimum": 0},
-                        "input_tokens": {"type": "integer", "minimum": 0},
-                        "output_tokens": {"type": "integer", "minimum": 0},
-                        "subscription_units": {"type": "number", "minimum": 0},
-                    },
-                    "additionalProperties": False,
-                },
-                "output_valid": {"type": ["boolean", "null"]},
-                "task_valid": {"type": ["boolean", "null"]},
-                "quality_score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
-                "validation_results": {"type": "array", "items": {"type": "object"}},
-                "quota_observation": {
-                    "type": ["object", "null"],
-                    "properties": {
-                        "state": {
-                            "type": "string",
-                            "enum": [
-                                "abundant",
-                                "normal",
-                                "tight",
-                                "critical",
-                                "exhausted",
-                                "unknown",
-                            ],
-                        },
-                        "reset_at": {"type": ["string", "null"], "format": "date-time"},
-                        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-                        "source": {
-                            "type": "string",
-                            "enum": [
-                                "user",
-                                "host",
-                                "official_cli",
-                                "rate_limit",
-                                "heuristic",
-                                "observed",
-                            ],
-                        },
-                    },
-                    "required": ["state"],
-                    "additionalProperties": False,
-                },
-                "error_message": {"type": ["string", "null"]},
-                "metadata": {"type": "object", "additionalProperties": True},
-            },
-            "required": ["decision_id", "executor_id", "status"],
-            "additionalProperties": False,
-        },
+        "schema": _EXTERNAL_OUTCOME_SCHEMA,
         "annotations": {"readOnlyHint": False, "idempotentHint": False},
     },
     {
         "name": "aeep_request_quotes",
         "description": (
-            "Request expiring execution quotes for compatible routes without accepting or paying "
-            "for one. Quote acceptance and financial approval remain operator-only."
+            "Read expiring legacy compatibility estimates derived from local static route data. "
+            "This operation is non-binding and performs no remote quote network calls."
         ),
         "schema": {
             "type": "object",
@@ -222,6 +166,54 @@ _BASE_TOOLS: list[dict[str, Any]] = [
             "properties": {
                 "limit": {"type": "integer", "minimum": 1, "maximum": 10000, "default": 10000}
             },
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
+    },
+    {
+        "name": "aeep_show_prepared_decision",
+        "description": (
+            "Read a persisted, sanitized prepared-route decision. This never prepares or "
+            "executes a route and never contacts a quote provider."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                "prepared_id": {"type": "string", "minLength": 1, "maxLength": 200}
+            },
+            "required": ["prepared_id"],
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
+    },
+    {
+        "name": "aeep_show_quote",
+        "description": (
+            "Read a persisted, sanitized bounded quote, including its evidence level, "
+            "maximum amount, expiry, and signature metadata."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                "quote_id": {"type": "string", "minLength": 1, "maxLength": 200}
+            },
+            "required": ["quote_id"],
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
+    },
+    {
+        "name": "aeep_show_settlement",
+        "description": (
+            "Read a persisted, sanitized settlement receipt, including reserved, "
+            "captured, and released amounts and its evidence level."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                "settlement_id": {"type": "string", "minLength": 1, "maxLength": 200}
+            },
+            "required": ["settlement_id"],
             "additionalProperties": False,
         },
         "annotations": {"readOnlyHint": True, "idempotentHint": True},
