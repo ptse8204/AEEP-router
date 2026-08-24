@@ -1,0 +1,193 @@
+{
+  "schema_version": "0.5",
+  "campaign_id": "aeep-v05-deepseek-harness-live-comparison",
+  "generated_at": "2026-08-24T21:22:30Z",
+  "synthetic": true,
+  "harness_version": "0.1.1-rc.2",
+  "mcp_client_version": "0.1.0-rc.8",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "read_only": true,
+  "pilot_sessions_excluded": 3,
+  "imported_plugin_candidates": 18,
+  "active_plugin_candidates_after": 0,
+  "plugin_capability_discovered": true,
+  "plugin_route_selected": true,
+  "plugin_route_estimate_available": true,
+  "plugin_token_estimate_status": "unavailable",
+  "trials": [
+    {
+      "schema_version": "0.5",
+      "trial_id": "direct-1",
+      "task_id": "text-stats-1",
+      "arm": "DIRECT_MODEL",
+      "correct": true,
+      "model_calls": 1,
+      "tool_calls": 0,
+      "receipt_id": null,
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 1,
+        "input_tokens": 569,
+        "output_tokens": 131,
+        "cache_read_tokens": 10880,
+        "cache_write_tokens": 0,
+        "total_tokens": 11580
+      }
+    },
+    {
+      "schema_version": "0.5",
+      "trial_id": "direct-2",
+      "task_id": "text-stats-2",
+      "arm": "DIRECT_MODEL",
+      "correct": false,
+      "model_calls": 1,
+      "tool_calls": 0,
+      "receipt_id": null,
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 1,
+        "input_tokens": 567,
+        "output_tokens": 102,
+        "cache_read_tokens": 10880,
+        "cache_write_tokens": 0,
+        "total_tokens": 11549
+      }
+    },
+    {
+      "schema_version": "0.5",
+      "trial_id": "direct-3",
+      "task_id": "text-stats-3",
+      "arm": "DIRECT_MODEL",
+      "correct": true,
+      "model_calls": 1,
+      "tool_calls": 0,
+      "receipt_id": null,
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 1,
+        "input_tokens": 568,
+        "output_tokens": 155,
+        "cache_read_tokens": 10880,
+        "cache_write_tokens": 0,
+        "total_tokens": 11603
+      }
+    },
+    {
+      "schema_version": "0.5",
+      "trial_id": "aeep-1",
+      "task_id": "text-stats-1",
+      "arm": "AEEP_ROUTED",
+      "correct": true,
+      "model_calls": 2,
+      "tool_calls": 1,
+      "receipt_id": "rcpt_54eb87701aab4182b77e0a3fb372ced6",
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 2,
+        "input_tokens": 1116,
+        "output_tokens": 134,
+        "cache_read_tokens": 22400,
+        "cache_write_tokens": 0,
+        "total_tokens": 23650
+      }
+    },
+    {
+      "schema_version": "0.5",
+      "trial_id": "aeep-2",
+      "task_id": "text-stats-2",
+      "arm": "AEEP_ROUTED",
+      "correct": true,
+      "model_calls": 2,
+      "tool_calls": 1,
+      "receipt_id": "rcpt_6fb8b23ffdfc42e5b29d1ebd76c1336c",
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 2,
+        "input_tokens": 1150,
+        "output_tokens": 178,
+        "cache_read_tokens": 22400,
+        "cache_write_tokens": 0,
+        "total_tokens": 23728
+      }
+    },
+    {
+      "schema_version": "0.5",
+      "trial_id": "aeep-3",
+      "task_id": "text-stats-3",
+      "arm": "AEEP_ROUTED",
+      "correct": true,
+      "model_calls": 2,
+      "tool_calls": 1,
+      "receipt_id": "rcpt_9a6ad2b648004fcc8112f16b91098846",
+      "usage": {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "model_calls": 2,
+        "input_tokens": 1155,
+        "output_tokens": 181,
+        "cache_read_tokens": 22400,
+        "cache_write_tokens": 0,
+        "total_tokens": 23736
+      }
+    }
+  ],
+  "direct_total_tokens": 34732,
+  "aeep_total_tokens": 71114,
+  "tokens_saved_by_aeep": -36382,
+  "savings_percent": "-104.7507",
+  "direct_correct": 2,
+  "aeep_correct": 3,
+  "gates": [
+    {
+      "name": "read-only-synthetic-workspace",
+      "passed": true,
+      "detail": "All measured sessions used AEEP-dsh-test, Read Only, DeepSeek-V4-Flash, and low reasoning."
+    },
+    {
+      "name": "three-fresh-sessions-per-arm",
+      "passed": true,
+      "detail": "Three pilot sessions were excluded; the measured comparison used six fresh sessions."
+    },
+    {
+      "name": "one-aeep-call-and-receipt-per-routed-trial",
+      "passed": true,
+      "detail": "Each routed task made one successful AEEP tool call and produced one execution receipt."
+    },
+    {
+      "name": "fixture-correctness-not-regressed",
+      "passed": true,
+      "detail": "Direct model counting was correct for 2/3 tasks; deterministic AEEP text.stats was correct for 3/3."
+    },
+    {
+      "name": "plugin-discovery-and-routing-observed",
+      "passed": true,
+      "detail": "The prior approved live proof discovered the qualified coding-tools read-file capability and selected its MCP route."
+    },
+    {
+      "name": "route-estimates-not-overstated",
+      "passed": true,
+      "detail": "AEEP estimated plugin latency/network burden, but plugin token dimensions remained zero/unavailable rather than fabricated."
+    },
+    {
+      "name": "provider-usage-accounted-exactly",
+      "passed": true,
+      "detail": "Exact provider usage buckets were summed from successful DSH assistant-message usage records."
+    },
+    {
+      "name": "no-false-savings-claim",
+      "passed": true,
+      "detail": "AEEP used 36,382 more tokens (104.7507% overhead) in this small tool-call workload; the report records negative savings."
+    },
+    {
+      "name": "community-routes-remain-suspended",
+      "passed": true,
+      "detail": "All 18 imported community plugin candidates were suspended after the comparison."
+    }
+  ]
+}

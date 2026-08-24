@@ -374,10 +374,22 @@
           "title": "Cached Input Tokens",
           "type": "integer"
         },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
         "output_tokens": {
           "default": 0,
           "minimum": 0,
           "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
           "type": "integer"
         },
         "subscription_units": {
@@ -643,6 +655,45 @@
       "pattern": "^[a-f0-9]{64}$",
       "title": "Behavior Fingerprint",
       "type": "string"
+    },
+    "package_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Digest"
+    },
+    "package_fingerprint": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Fingerprint"
+    },
+    "verification_snapshot_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verification Snapshot Id"
     },
     "status": {
       "$ref": "#/$defs/RouteLifecycle",

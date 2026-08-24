@@ -1,6 +1,6 @@
 # Provider economic evidence integration
 
-A provider can publish AEEP 0.4 economic evidence without adopting AEEP route
+A provider can publish AEEP 0.5 economic evidence without adopting AEEP route
 qualification, scoring, payment custody, or the complete router. The protocol is
 transport-neutral and works behind HTTP, MCP, a CLI broker, or a hosted-agent
 gateway.
@@ -8,7 +8,7 @@ gateway.
 The Python helper currently ships in the main distribution, but it does not
 instantiate the router or require provider-side route policy. It is not yet a
 separately published minimal provider package. Non-Python or dependency-minimal
-providers may implement the generated 0.4 schemas, canonicalization vectors,
+providers may implement the generated 0.5 schemas, RFC 8785 vectors,
 and Ed25519 envelopes directly.
 
 ## Provider responsibilities
@@ -229,7 +229,7 @@ the buyer's validation evidence.
 ## Compatibility and conformance
 
 - Keep legacy HMAC only for local/shared-secret compatibility.
-- Do not redefine an old quote or receipt schema; use `schema_version: "0.4"`.
+- Do not redefine an old quote or receipt schema; issue new records with `schema_version: "0.5"` and RFC 8785 signatures.
 - Serialize money and meter quantities as decimal strings.
 - Make identical retries idempotent and reject altered ID reuse.
 - Test every signed field for tampering, expiry, wrong provider/fingerprint,

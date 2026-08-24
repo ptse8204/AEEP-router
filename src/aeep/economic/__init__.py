@@ -1,4 +1,4 @@
-"""AEEP 0.4 economic evidence primitives."""
+"""AEEP 0.5 economic evidence primitives."""
 
 from .aggregates import (
     MarketAggregateImporter,

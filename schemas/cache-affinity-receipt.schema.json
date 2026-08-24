@@ -1,0 +1,120 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "predicted_warm_probability": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Predicted Warm Probability",
+      "type": "number"
+    },
+    "predicted_common_prefix_tokens": {
+      "minimum": 0,
+      "title": "Predicted Common Prefix Tokens",
+      "type": "integer"
+    },
+    "predicted_eligible_cached_tokens": {
+      "minimum": 0,
+      "title": "Predicted Eligible Cached Tokens",
+      "type": "integer"
+    },
+    "predicted_cache_read_tokens": {
+      "minimum": 0,
+      "title": "Predicted Cache Read Tokens",
+      "type": "integer"
+    },
+    "predicted_cache_write_tokens": {
+      "minimum": 0,
+      "title": "Predicted Cache Write Tokens",
+      "type": "integer"
+    },
+    "actual_input_tokens": {
+      "minimum": 0,
+      "title": "Actual Input Tokens",
+      "type": "integer"
+    },
+    "actual_cached_input_tokens": {
+      "minimum": 0,
+      "title": "Actual Cached Input Tokens",
+      "type": "integer"
+    },
+    "actual_cache_write_tokens": {
+      "minimum": 0,
+      "title": "Actual Cache Write Tokens",
+      "type": "integer"
+    },
+    "actual_output_tokens": {
+      "minimum": 0,
+      "title": "Actual Output Tokens",
+      "type": "integer"
+    },
+    "actual_reasoning_output_tokens": {
+      "minimum": 0,
+      "title": "Actual Reasoning Output Tokens",
+      "type": "integer"
+    },
+    "cache_hit_rate": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cache Hit Rate"
+    },
+    "cache_scope_key_hmac": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Cache Scope Key Hmac",
+      "type": "string"
+    },
+    "stable_prefix_digest_hmac": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Stable Prefix Digest Hmac",
+      "type": "string"
+    },
+    "context_compaction_events": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Context Compaction Events",
+      "type": "integer"
+    },
+    "context_reset_reason": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Context Reset Reason"
+    },
+    "warm_state_reused": {
+      "title": "Warm State Reused",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "predicted_warm_probability",
+    "predicted_common_prefix_tokens",
+    "predicted_eligible_cached_tokens",
+    "predicted_cache_read_tokens",
+    "predicted_cache_write_tokens",
+    "actual_input_tokens",
+    "actual_cached_input_tokens",
+    "actual_cache_write_tokens",
+    "actual_output_tokens",
+    "actual_reasoning_output_tokens",
+    "cache_scope_key_hmac",
+    "stable_prefix_digest_hmac",
+    "warm_state_reused"
+  ],
+  "title": "CacheAffinityReceipt",
+  "type": "object"
+}

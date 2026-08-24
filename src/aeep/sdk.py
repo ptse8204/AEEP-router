@@ -58,7 +58,7 @@ async def _handler_result(
 
 
 class EconomicProvider:
-    """Small provider-side helper for signed AEEP 0.4 economic evidence."""
+    """Small provider-side helper for signed AEEP 0.5 economic evidence."""
 
     def __init__(self, provider_id: str, signer: Signer) -> None:
         if not provider_id:

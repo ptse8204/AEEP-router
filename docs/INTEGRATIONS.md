@@ -1,6 +1,6 @@
 # Agent integration guide
 
-AEEP 0.4.0 deliberately exposes the same nine operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP 0.5.0 deliberately exposes the same nine operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
@@ -12,7 +12,7 @@ AEEP 0.4.0 deliberately exposes the same nine operations across MCP, provider-na
 - `aeep_show_quote`
 - `aeep_show_settlement`
 
-The three economic inspection tools read already-persisted, sanitized records. They do not contact providers, prepare or execute routes, reserve or settle funds, reconcile billing, mutate trust, recover attempts, activate routes, or run benchmarks. The legacy `aeep_request_quotes` operation remains a local static-estimate lookup; it does not invoke the AEEP 0.4 remote quote client.
+The three economic inspection tools read already-persisted, sanitized records. They do not contact providers, prepare or execute routes, reserve or settle funds, reconcile billing, mutate trust, recover attempts, activate routes, or run benchmarks. The legacy `aeep_request_quotes` operation remains a local static-estimate lookup; it does not invoke the AEEP 0.5 remote quote client.
 
 Financial acceptance, reservations, captures, releases, refunds, and reconciliation are operator-only and are not model tools. Raw action input, output, credentials, and external billing references are not returned by the economic inspection tools.
 

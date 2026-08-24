@@ -1,0 +1,1868 @@
+{
+  "$defs": {
+    "ArtifactCompression": {
+      "enum": [
+        "none",
+        "gzip"
+      ],
+      "title": "ArtifactCompression",
+      "type": "string"
+    },
+    "ArtifactLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "uri": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uri"
+        },
+        "oci": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Oci"
+        }
+      },
+      "title": "ArtifactLocation",
+      "type": "object"
+    },
+    "ArtifactPurpose": {
+      "enum": [
+        "executable",
+        "schema",
+        "qualification",
+        "benchmark",
+        "comparison",
+        "rate_card",
+        "compatibility",
+        "smoke_fixture",
+        "other"
+      ],
+      "title": "ArtifactPurpose",
+      "type": "string"
+    },
+    "ArtifactReference": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "media_type": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 52428800,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "location": {
+          "$ref": "#/$defs/ArtifactLocation"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "compression": {
+          "$ref": "#/$defs/ArtifactCompression",
+          "default": "none"
+        },
+        "purpose": {
+          "$ref": "#/$defs/ArtifactPurpose",
+          "default": "other"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "digest",
+        "media_type",
+        "size_bytes",
+        "location"
+      ],
+      "title": "ArtifactReference",
+      "type": "object"
+    },
+    "CapabilityDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Namespace",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "default": "1",
+          "pattern": "^[0-9]+(?:\\.[0-9]+){0,2}$",
+          "title": "Version",
+          "type": "string"
+        },
+        "authority": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Domain, URI, or organization responsible for the canonical contract.",
+          "title": "Authority"
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Owner"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "deprecated"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "replaced_by": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Replaced By"
+        },
+        "compatible_versions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compatible Versions",
+          "type": "array"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "output_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema"
+        },
+        "side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        }
+      },
+      "required": [
+        "namespace",
+        "name",
+        "description"
+      ],
+      "title": "CapabilityDefinition",
+      "type": "object"
+    },
+    "CashEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Usd"
+        },
+        "upper_bound_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Bound Usd"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "title": "CashEstimate",
+      "type": "object"
+    },
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    },
+    "EstimateSource": {
+      "enum": [
+        "static",
+        "historical",
+        "blended",
+        "quote",
+        "observed"
+      ],
+      "title": "EstimateSource",
+      "type": "string"
+    },
+    "EvidenceAttestation": {
+      "additionalProperties": false,
+      "properties": {
+        "attestation_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Attestation Id",
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "ed25519",
+          "default": "ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "evidence_producer",
+            "independent_verifier"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "payload_type": {
+          "const": "application/vnd.aeep.evidence-attestation+json;version=1",
+          "default": "application/vnd.aeep.evidence-attestation+json;version=1",
+          "title": "Payload Type",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Signature",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attestation_id",
+        "key_id",
+        "role",
+        "digest",
+        "signature",
+        "issued_at"
+      ],
+      "title": "EvidenceAttestation",
+      "type": "object"
+    },
+    "EvidenceProducer": {
+      "additionalProperties": false,
+      "properties": {
+        "producer_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Producer Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/TrustedKeyRole"
+        },
+        "key_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key Id"
+        }
+      },
+      "required": [
+        "producer_id",
+        "role"
+      ],
+      "title": "EvidenceProducer",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "evidence_type": {
+          "$ref": "#/$defs/EvidenceType"
+        },
+        "artifact_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "subject": {
+          "$ref": "#/$defs/EvidenceSubject"
+        },
+        "producer": {
+          "$ref": "#/$defs/EvidenceProducer"
+        },
+        "trust_claim": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "validity": {
+          "$ref": "#/$defs/EvidenceValidity"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "summary_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary Digest"
+        },
+        "attestations": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceAttestation"
+          },
+          "title": "Attestations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "evidence_type",
+        "artifact_id",
+        "subject",
+        "producer",
+        "validity"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "billing_record",
+        "local_meter",
+        "priced_measured_billable_usage",
+        "confirmed_no_incremental_charge",
+        "provider_report",
+        "pinned_rate_table",
+        "operator_report",
+        "static_estimate",
+        "legacy_unspecified",
+        "unavailable"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "EvidenceSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Route Id",
+          "type": "string"
+        },
+        "capability": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "route_fingerprint": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Route Fingerprint",
+          "type": "string"
+        },
+        "workload_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Workload Digest"
+        },
+        "executor_artifact_digests": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Executor Artifact Digests",
+          "type": "array"
+        },
+        "model_identity": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Identity"
+        },
+        "protocol_identity": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Protocol Identity"
+        },
+        "environment_class": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Environment Class"
+        }
+      },
+      "required": [
+        "route_id",
+        "capability",
+        "route_fingerprint"
+      ],
+      "title": "EvidenceSubject",
+      "type": "object"
+    },
+    "EvidenceType": {
+      "enum": [
+        "qualification_report",
+        "benchmark_campaign",
+        "comparison_report",
+        "rate_card_snapshot",
+        "compatibility_report",
+        "revocation_statement"
+      ],
+      "title": "EvidenceType",
+      "type": "string"
+    },
+    "EvidenceValidity": {
+      "additionalProperties": false,
+      "properties": {
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "not_before": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Not Before"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        }
+      },
+      "required": [
+        "issued_at"
+      ],
+      "title": "EvidenceValidity",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "JsonValue": {},
+    "Locality": {
+      "enum": [
+        "in_process",
+        "local",
+        "lan",
+        "internet"
+      ],
+      "title": "Locality",
+      "type": "string"
+    },
+    "MeasurementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource",
+          "default": "unavailable"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "title": "MeasurementEvidence",
+      "type": "object"
+    },
+    "ProviderCompatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "aeep_min": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "title": "Aeep Min",
+          "type": "string"
+        },
+        "aeep_max_exclusive": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aeep Max Exclusive"
+        },
+        "python": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Python"
+        },
+        "platforms": {
+          "default": [
+            "any"
+          ],
+          "items": {
+            "enum": [
+              "linux",
+              "macos",
+              "windows",
+              "any"
+            ],
+            "type": "string"
+          },
+          "title": "Platforms",
+          "type": "array"
+        },
+        "protocols": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Protocols",
+          "type": "array"
+        }
+      },
+      "required": [
+        "aeep_min"
+      ],
+      "title": "ProviderCompatibility",
+      "type": "object"
+    },
+    "ProviderIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "provider_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "display_name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Display Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "publisher": {
+          "$ref": "#/$defs/PublisherIdentity"
+        },
+        "homepage": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Homepage"
+        },
+        "source_repository": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Repository"
+        },
+        "keys": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ProviderPublicKey"
+          },
+          "title": "Keys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider_id",
+        "display_name",
+        "publisher"
+      ],
+      "title": "ProviderIdentity",
+      "type": "object"
+    },
+    "ProviderPackageIntegrity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization": {
+          "const": "RFC8785",
+          "default": "RFC8785",
+          "title": "Canonicalization",
+          "type": "string"
+        },
+        "digest_algorithm": {
+          "const": "sha256",
+          "default": "sha256",
+          "title": "Digest Algorithm",
+          "type": "string"
+        },
+        "payload_scope": {
+          "const": "apiVersion+kind+metadata+spec",
+          "default": "apiVersion+kind+metadata+spec",
+          "title": "Payload Scope",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "digest"
+      ],
+      "title": "ProviderPackageIntegrity",
+      "type": "object"
+    },
+    "ProviderPackageMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "package_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Package Id",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$",
+          "title": "Version",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 64,
+          "title": "Labels",
+          "type": "object"
+        }
+      },
+      "required": [
+        "package_id",
+        "version",
+        "issued_at"
+      ],
+      "title": "ProviderPackageMetadata",
+      "type": "object"
+    },
+    "ProviderPackageSignature": {
+      "additionalProperties": false,
+      "properties": {
+        "signature_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Signature Id",
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "ed25519",
+          "default": "ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "role": {
+          "const": "package_publisher",
+          "default": "package_publisher",
+          "title": "Role",
+          "type": "string"
+        },
+        "payload_type": {
+          "const": "application/vnd.aeep.provider-package-digest+json;version=1",
+          "default": "application/vnd.aeep.provider-package-digest+json;version=1",
+          "title": "Payload Type",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Signature",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature_id",
+        "key_id",
+        "digest",
+        "signature",
+        "issued_at"
+      ],
+      "title": "ProviderPackageSignature",
+      "type": "object"
+    },
+    "ProviderPackageSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/ProviderIdentity"
+        },
+        "compatibility": {
+          "$ref": "#/$defs/ProviderCompatibility"
+        },
+        "capabilities": {
+          "items": {
+            "$ref": "#/$defs/CapabilityDefinition"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/$defs/PublishedProviderRoute"
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "title": "Routes",
+          "type": "array"
+        },
+        "artifacts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ArtifactReference"
+          },
+          "maxItems": 2048,
+          "title": "Artifacts",
+          "type": "array"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "maxItems": 2048,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "smoke_tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SmokeTestDefinition"
+          },
+          "maxItems": 512,
+          "title": "Smoke Tests",
+          "type": "array"
+        },
+        "extensions": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "maxProperties": 64,
+          "title": "Extensions",
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider",
+        "compatibility",
+        "capabilities",
+        "routes"
+      ],
+      "title": "ProviderPackageSpec",
+      "type": "object"
+    },
+    "ProviderPublicKey": {
+      "additionalProperties": false,
+      "properties": {
+        "key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "ed25519",
+          "default": "ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "public_key": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Public Key",
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/$defs/TrustedKeyRole"
+          },
+          "minItems": 1,
+          "title": "Roles",
+          "type": "array"
+        },
+        "valid_from": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid From"
+        },
+        "valid_until": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid Until"
+        },
+        "revocation_hint": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revocation Hint"
+        }
+      },
+      "required": [
+        "key_id",
+        "public_key",
+        "roles"
+      ],
+      "title": "ProviderPublicKey",
+      "type": "object"
+    },
+    "PublishedExecutor": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "locality": {
+          "$ref": "#/$defs/Locality",
+          "default": "local"
+        },
+        "requires_network": {
+          "default": false,
+          "title": "Requires Network",
+          "type": "boolean"
+        },
+        "data_residency": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Data Residency",
+          "type": "array"
+        },
+        "idempotent": {
+          "default": false,
+          "title": "Idempotent",
+          "type": "boolean"
+        },
+        "resource_pool": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Pool"
+        },
+        "validators": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ValidationSpec"
+          },
+          "title": "Validators",
+          "type": "array"
+        },
+        "config": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Config",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "description"
+      ],
+      "title": "PublishedExecutor",
+      "type": "object"
+    },
+    "PublishedProviderRoute": {
+      "additionalProperties": false,
+      "properties": {
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Route Id",
+          "type": "string"
+        },
+        "capability": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "output_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema"
+        },
+        "executor": {
+          "$ref": "#/$defs/PublishedExecutor"
+        },
+        "declared_fingerprint": {
+          "$ref": "#/$defs/RouteFingerprint"
+        },
+        "artifact_bindings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Artifact Bindings",
+          "type": "array"
+        },
+        "static_estimate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RouteEstimate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "route_id",
+        "capability",
+        "input_schema",
+        "executor",
+        "declared_fingerprint"
+      ],
+      "title": "PublishedProviderRoute",
+      "type": "object"
+    },
+    "PublisherIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "contact": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contact"
+        }
+      },
+      "required": [
+        "name",
+        "subject"
+      ],
+      "title": "PublisherIdentity",
+      "type": "object"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "RouteEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "cash": {
+          "$ref": "#/$defs/CashEstimate"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
+        },
+        "success_probability": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.001,
+          "title": "Success Probability",
+          "type": "number"
+        },
+        "quality_score": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Quality Score",
+          "type": "number"
+        },
+        "risk_score": {
+          "default": 0.05,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Risk Score",
+          "type": "number"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/EstimateSource",
+          "default": "static"
+        },
+        "sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Sample Size",
+          "type": "integer"
+        }
+      },
+      "title": "RouteEstimate",
+      "type": "object"
+    },
+    "RouteFingerprint": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "aeep-route-v1",
+          "default": "aeep-route-v1",
+          "title": "Profile",
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "sha256",
+          "default": "sha256",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "value": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "RouteFingerprint",
+      "type": "object"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    },
+    "SmokeTestDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "smoke_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Smoke Id",
+          "type": "string"
+        },
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "title": "Route Id",
+          "type": "string"
+        },
+        "mode": {
+          "default": "cold",
+          "enum": [
+            "cold",
+            "warm",
+            "cold_then_warm"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "safety": {
+          "default": "read_only",
+          "enum": [
+            "read_only",
+            "dry_run",
+            "sandbox"
+          ],
+          "title": "Safety",
+          "type": "string"
+        },
+        "input": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Input",
+          "type": "object"
+        },
+        "expected": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Expected",
+          "type": "object"
+        },
+        "timeout_ms": {
+          "maximum": 300000,
+          "minimum": 1,
+          "title": "Timeout Ms",
+          "type": "integer"
+        },
+        "max_executions": {
+          "default": 1,
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Max Executions",
+          "type": "integer"
+        },
+        "max_cash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "max_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Tokens"
+        }
+      },
+      "required": [
+        "smoke_id",
+        "route_id",
+        "input",
+        "timeout_ms"
+      ],
+      "title": "SmokeTestDefinition",
+      "type": "object"
+    },
+    "SubscriptionCharge": {
+      "enum": [
+        "included",
+        "paid",
+        "mixed",
+        "unknown"
+      ],
+      "title": "SubscriptionCharge",
+      "type": "string"
+    },
+    "SubscriptionUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "consumed": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consumed"
+        },
+        "source": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "included_or_paid": {
+          "$ref": "#/$defs/SubscriptionCharge",
+          "default": "unknown"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        }
+      },
+      "required": [
+        "provider",
+        "resource_pool"
+      ],
+      "title": "SubscriptionUsage",
+      "type": "object"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    },
+    "TrustedKeyRole": {
+      "enum": [
+        "provider_record",
+        "package_publisher",
+        "evidence_producer",
+        "independent_verifier",
+        "registry"
+      ],
+      "title": "TrustedKeyRole",
+      "type": "string"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "aeep.dev/v0.5",
+      "default": "aeep.dev/v0.5",
+      "title": "Apiversion",
+      "type": "string"
+    },
+    "kind": {
+      "const": "ProviderPackage",
+      "default": "ProviderPackage",
+      "title": "Kind",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/ProviderPackageMetadata"
+    },
+    "spec": {
+      "$ref": "#/$defs/ProviderPackageSpec"
+    },
+    "integrity": {
+      "$ref": "#/$defs/ProviderPackageIntegrity"
+    },
+    "signatures": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProviderPackageSignature"
+      },
+      "maxItems": 32,
+      "title": "Signatures",
+      "type": "array"
+    }
+  },
+  "required": [
+    "metadata",
+    "spec",
+    "integrity"
+  ],
+  "title": "ProviderPackage",
+  "type": "object"
+}

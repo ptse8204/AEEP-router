@@ -73,6 +73,68 @@
       "title": "Passed",
       "type": "boolean"
     },
+    "qualification_method": {
+      "default": "local_campaign",
+      "enum": [
+        "local_campaign",
+        "evidence_reuse",
+        "operator_attestation"
+      ],
+      "title": "Qualification Method",
+      "type": "string"
+    },
+    "source_evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Evidence Ids",
+      "type": "array"
+    },
+    "smoke_report_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Smoke Report Ids",
+      "type": "array"
+    },
+    "effective_trust": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Trust"
+    },
+    "valid_until": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid Until"
+    },
+    "environment_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Environment Digest"
+    },
     "created_at": {
       "format": "date-time",
       "title": "Created At",

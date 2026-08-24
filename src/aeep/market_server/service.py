@@ -1,4 +1,4 @@
-"""Deterministic local reference market for AEEP 0.4 economic evidence."""
+"""Deterministic local reference market for AEEP 0.5 economic evidence."""
 
 from __future__ import annotations
 
@@ -68,7 +68,7 @@ TERMS_DIGEST = (
 )
 
 _REFERENCE_PRIVATE_KEY = hashlib.sha256(
-    b"AEEP 0.4 deterministic reference key; tests and local examples only"
+    b"AEEP 0.5 deterministic reference key; tests and local examples only"
 ).digest()
 _FIXED_FEE = Decimal("0.0010")
 _PER_KIB = Decimal("0.0002")
@@ -188,7 +188,7 @@ def reference_executor_spec(
         id=EXECUTOR_ID,
         capability=CAPABILITY,
         kind=resolved_kind,
-        description="Deterministic AEEP 0.4 text-statistics reference provider.",
+        description="Deterministic AEEP 0.5 text-statistics reference provider.",
         input_schema=_TEXT_INPUT_SCHEMA,
         output_schema=_TEXT_STATISTICS_SCHEMA,
         estimate=RouteEstimate(
@@ -456,7 +456,7 @@ class ReferenceMarket:
 
     def _build_offer(self) -> CapabilityOffer:
         fields: dict[str, Any] = {
-            "schema_version": "0.4",
+            "schema_version": "0.5",
             "offer_id": "offer_reference_text_statistics_v1",
             "provider_id": PROVIDER_ID,
             "capability": CAPABILITY,
@@ -588,7 +588,7 @@ class ReferenceMarket:
             quote = self._signed_record(
                 BoundedQuote,
                 {
-                    "schema_version": "0.4",
+                    "schema_version": "0.5",
                     "quote_id": _record_id("quote", request_digest),
                     "quote_request_id": request.quote_request_id,
                     "offer_id": self.offer.offer_id,
@@ -681,7 +681,7 @@ class ReferenceMarket:
             statement = self._signed_record(
                 UsageStatement,
                 {
-                    "schema_version": "0.4",
+                    "schema_version": "0.5",
                     "usage_statement_id": _record_id(
                         "usage",
                         request.quote_id,
@@ -849,7 +849,7 @@ class ReferenceMarket:
                 aggregate = self._signed_record(
                     MarketAggregate,
                     {
-                        "schema_version": "0.4",
+                        "schema_version": "0.5",
                         "aggregate_id": _record_id(
                             "aggregate",
                             self.executor_fingerprint,
@@ -991,7 +991,7 @@ def create_app(
 
     globals()["_FastAPIRequest"] = Request
     service = market or ReferenceMarket()
-    app = FastAPI(title="AEEP Local Economic Evidence Market", version="0.4")
+    app = FastAPI(title="AEEP Local Economic Evidence Market", version="0.5")
 
     def require_authorization(request: _FastAPIRequest) -> None:
         if bearer_token is None and authorize is None:
@@ -1057,14 +1057,14 @@ def create_app(
         return {
             "ok": True,
             "service": "aeep-reference-market",
-            "schema_version": "0.4",
+            "schema_version": "0.5",
             "reference_only": True,
             "unauthenticated_evidence_ingestion": allow_unauthenticated_evidence,
         }
 
     @app.get("/.well-known/aeep-keys.json")
     async def keys() -> dict[str, Any]:
-        return {"schema_version": "0.4", "keys": [_model_json(service.trusted_key)]}
+        return {"schema_version": "0.5", "keys": [_model_json(service.trusted_key)]}
 
     @app.get("/v1/offers")
     async def offers(

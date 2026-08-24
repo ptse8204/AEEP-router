@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "ArtifactStatus": {
+      "enum": [
+        "pending",
+        "verified",
+        "missing",
+        "digest_mismatch",
+        "size_mismatch",
+        "blocked",
+        "parse_failed"
+      ],
+      "title": "ArtifactStatus",
+      "type": "string"
+    },
+    "EvidenceAcceptanceStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "accepted_as_prior",
+        "rejected",
+        "stale",
+        "superseded"
+      ],
+      "title": "EvidenceAcceptanceStatus",
+      "type": "string"
+    },
+    "FingerprintStatus": {
+      "enum": [
+        "pending",
+        "matched",
+        "mismatched",
+        "unavailable"
+      ],
+      "title": "FingerprintStatus",
+      "type": "string"
+    },
+    "PackageIntegrityStatus": {
+      "enum": [
+        "pending",
+        "verified",
+        "failed"
+      ],
+      "title": "PackageIntegrityStatus",
+      "type": "string"
+    },
+    "SmokeStatus": {
+      "enum": [
+        "not_required",
+        "pending",
+        "passed",
+        "failed",
+        "blocked",
+        "expired"
+      ],
+      "title": "SmokeStatus",
+      "type": "string"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "snapshot_id": {
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "package_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Package Digest",
+      "type": "string"
+    },
+    "route_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Route Fingerprint",
+      "type": "string"
+    },
+    "integrity_status": {
+      "$ref": "#/$defs/PackageIntegrityStatus"
+    },
+    "identity_trust": {
+      "$ref": "#/$defs/TrustLevel"
+    },
+    "fingerprint_status": {
+      "$ref": "#/$defs/FingerprintStatus"
+    },
+    "artifact_status": {
+      "$ref": "#/$defs/ArtifactStatus"
+    },
+    "evidence_status": {
+      "$ref": "#/$defs/EvidenceAcceptanceStatus"
+    },
+    "smoke_status": {
+      "$ref": "#/$defs/SmokeStatus"
+    },
+    "blocking_reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocking Reasons",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "snapshot_id",
+    "candidate_id",
+    "package_digest",
+    "route_fingerprint",
+    "integrity_status",
+    "identity_trust",
+    "fingerprint_status",
+    "artifact_status",
+    "evidence_status",
+    "smoke_status",
+    "created_at"
+  ],
+  "title": "CandidateVerificationSnapshot",
+  "type": "object"
+}

@@ -1,0 +1,46 @@
+{
+  "captcha_bypasses": 0,
+  "credentials_or_real_pii": 0,
+  "duplicate_submissions": 0,
+  "gates": [
+    {
+      "detail": "every synthetic submit has a durable approval record",
+      "name": "zero-unapproved-submissions",
+      "passed": true
+    },
+    {
+      "detail": "30 postings canonicalized to 27 unique jobs before submission",
+      "name": "zero-duplicate-submissions",
+      "passed": true
+    },
+    {
+      "detail": "2 referenced fact(s) are approved",
+      "name": "zero-unsupported-resume-facts",
+      "passed": true
+    },
+    {
+      "detail": "synthetic timeout was reconciled without a second submit",
+      "name": "indeterminate-reconciled-before-retry",
+      "passed": true
+    },
+    {
+      "detail": "81 receipt(s)",
+      "name": "one-receipt-per-execution",
+      "passed": true
+    },
+    {
+      "detail": "30 postings, three fake ATS families, and three duplicate canonical IDs",
+      "name": "all-synthetic-postings-and-form-families-covered",
+      "passed": true
+    },
+    {
+      "detail": "in-memory executors used pseudonymous IDs; no network, CAPTCHA, email, credential, or real PII",
+      "name": "zero-real-writes-captcha-email-or-pii",
+      "passed": true
+    }
+  ],
+  "real_external_writes": 0,
+  "synthetic": true,
+  "unapproved_emails": 0,
+  "unsupported_resume_facts": 0
+}

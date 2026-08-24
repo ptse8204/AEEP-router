@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "CurrencyAmount": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "CurrencyAmount",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "comparison_id": {
+      "title": "Comparison Id",
+      "type": "string"
+    },
+    "workload_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Workload Digest",
+      "type": "string"
+    },
+    "candidate_route_id": {
+      "title": "Candidate Route Id",
+      "type": "string"
+    },
+    "candidate_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Candidate Fingerprint",
+      "type": "string"
+    },
+    "baseline_route_id": {
+      "title": "Baseline Route Id",
+      "type": "string"
+    },
+    "baseline_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Baseline Fingerprint",
+      "type": "string"
+    },
+    "paired_trials": {
+      "minimum": 1,
+      "title": "Paired Trials",
+      "type": "integer"
+    },
+    "candidate_tokens": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Candidate Tokens",
+      "type": "object"
+    },
+    "baseline_tokens": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Baseline Tokens",
+      "type": "object"
+    },
+    "candidate_actual_cash": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "baseline_actual_cash": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "candidate_api_equivalent": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "baseline_api_equivalent": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CurrencyAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rate_card_snapshot_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rate Card Snapshot Id"
+    },
+    "candidate_latency_ms": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Candidate Latency Ms"
+    },
+    "baseline_latency_ms": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baseline Latency Ms"
+    }
+  },
+  "required": [
+    "comparison_id",
+    "workload_digest",
+    "candidate_route_id",
+    "candidate_fingerprint",
+    "baseline_route_id",
+    "baseline_fingerprint",
+    "paired_trials",
+    "candidate_tokens",
+    "baseline_tokens"
+  ],
+  "title": "ComparativeMeasurement",
+  "type": "object"
+}

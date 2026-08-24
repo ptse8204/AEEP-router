@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "ApprovalSource": {
+      "enum": [
+        "embedded_caller",
+        "cli_operator",
+        "host_operator"
+      ],
+      "title": "ApprovalSource",
+      "type": "string"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "0.5",
+      "enum": [
+        "0.4",
+        "0.5"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "approval_id": {
+      "title": "Approval Id",
+      "type": "string"
+    },
+    "action_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "prepared_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prepared Id"
+    },
+    "attempt_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attempt Id"
+    },
+    "granted_side_effect": {
+      "$ref": "#/$defs/SideEffect"
+    },
+    "payment_approved": {
+      "default": false,
+      "title": "Payment Approved",
+      "type": "boolean"
+    },
+    "human_approved": {
+      "default": false,
+      "title": "Human Approved",
+      "type": "boolean"
+    },
+    "source": {
+      "$ref": "#/$defs/ApprovalSource"
+    },
+    "granted_at": {
+      "format": "date-time",
+      "title": "Granted At",
+      "type": "string"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    }
+  },
+  "required": [
+    "action_digest",
+    "policy_digest",
+    "granted_side_effect",
+    "source"
+  ],
+  "title": "ActionApprovalRecord",
+  "type": "object"
+}

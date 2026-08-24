@@ -1,0 +1,78 @@
+{
+  "$defs": {
+    "ResumeRewriteRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_id": {
+          "title": "Fact Id",
+          "type": "string"
+        },
+        "focus": {
+          "maxLength": 500,
+          "title": "Focus",
+          "type": "string"
+        },
+        "max_words": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Max Words",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fact_id",
+        "focus",
+        "max_words"
+      ],
+      "title": "ResumeRewriteRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5",
+      "default": "0.5",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "job_id": {
+      "title": "Job Id",
+      "type": "string"
+    },
+    "source_commit": {
+      "title": "Source Commit",
+      "type": "string"
+    },
+    "emphasize_fact_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Emphasize Fact Ids",
+      "type": "array"
+    },
+    "omit_fact_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Omit Fact Ids",
+      "type": "array"
+    },
+    "rewrite_requests": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ResumeRewriteRequest"
+      },
+      "title": "Rewrite Requests",
+      "type": "array"
+    }
+  },
+  "required": [
+    "job_id",
+    "source_commit"
+  ],
+  "title": "ResumePlan",
+  "type": "object"
+}

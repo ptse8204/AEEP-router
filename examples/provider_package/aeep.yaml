@@ -1,0 +1,10 @@
+version: "0.5"
+database: ".aeep/provider-package-demo.db"
+provider_packages:
+  artifact_root: ".aeep/provider-artifacts"
+  allow_remote_artifacts: false
+  allow_self_asserted_priors: true
+  require_local_smoke: true
+economic_evidence:
+  trust_store:
+    path: "examples/provider_package/trusted-keys.json"

@@ -6,7 +6,7 @@ AEEP compares available routes—local Python, command-line tools, HTTP APIs, MC
 
 It rejects routes that break your limits before scoring the rest.
 
-> **Status:** AEEP 0.4 is working alpha software. Imported routes fail closed; remote economic networking is disabled by default. Review qualification, trust, payment, and recovery policy before production use.
+> **Status:** AEEP 0.5 is working alpha software. Signed provider packages still ingest inert; remote artifacts and economic networking are disabled by default. Review qualification, trust, payment, approval, and recovery policy before production use.
 
 ## Quick start
 
@@ -104,6 +104,21 @@ async def main():
 
 asyncio.run(main())
 ```
+
+## Verify a provider package without executing it
+
+```bash
+aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml
+aeep candidate ingest examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml
+aeep candidate inspect fixture.command.text-statistics -m examples/provider_package/aeep.yaml
+aeep candidate smoke fixture.command.text-statistics -m examples/provider_package/aeep.yaml
+aeep candidate qualify fixture.command.text-statistics --reuse-evidence -m examples/provider_package/aeep.yaml
+aeep candidate activate fixture.command.text-statistics -m examples/provider_package/aeep.yaml
+```
+
+Package and artifact signatures, exact fingerprints, evidence, and smoke results
+are independent gates. Ingest never runs or activates imported code. New 0.5
+records use RFC 8785; legacy signatures are historical/recovery-only.
 
 ## Prepare a route with economic evidence
 
@@ -244,7 +259,13 @@ Commands use argument arrays, not shell interpolation. Requests cannot loosen ma
 - [Security](SECURITY.md)
 - [Economic accounting](docs/ACCOUNTING.md)
 - [0.4 proof harness and controlled campaigns](examples/proof/README.md)
-- [0.4 economic evidence proof campaign](examples/economic_evidence/README.md)
+- [0.5 economic evidence proof campaign](examples/economic_evidence/README.md)
+- [Provider packages](docs/PROVIDER_PACKAGES.md)
+- [Migration to 0.5](docs/MIGRATION_0.5.md)
+- [Evidence reuse](docs/EVIDENCE_REUSE.md)
+- [Cache affinity](docs/CACHE_AFFINITY.md)
+- [DSH proof](docs/DSH_VALIDATION.md)
+- [Job sandbox](docs/JOB_APPLICATION_DEMO.md)
 - [Economic network features](docs/ECONOMIC_NETWORK.md)
 - [Economic operator guide](docs/ECONOMIC_OPERATOR_GUIDE.md)
 - [Provider integration guide](docs/PROVIDER_INTEGRATION.md)

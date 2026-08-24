@@ -1,4 +1,4 @@
-# AEEP 0.4 proof assets
+# AEEP 0.5 proof assets
 
 These assets preserve the qualification, accounting, campaign, workflow, and
 release-gate paths introduced before 0.4. The `fixture.*` routes are hermetic

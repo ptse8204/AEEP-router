@@ -1,1 +1,1 @@
-"""Deterministic AEEP 0.4 economic-evidence proof campaign."""
+"""Deterministic AEEP 0.5 economic-evidence proof campaign."""

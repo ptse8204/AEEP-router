@@ -29,8 +29,11 @@
       "type": "string"
     },
     "canonicalization_version": {
-      "const": "aeep-canonical-json-v1",
-      "default": "aeep-canonical-json-v1",
+      "default": "rfc8785-jcs-v1",
+      "enum": [
+        "aeep-canonical-json-v1",
+        "rfc8785-jcs-v1"
+      ],
       "title": "Canonicalization Version",
       "type": "string"
     }

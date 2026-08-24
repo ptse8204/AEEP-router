@@ -1,4 +1,4 @@
-# AEEP 0.4 protocol specification
+# AEEP 0.5 protocol specification
 
 AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
 
@@ -25,7 +25,7 @@ A conforming implementation can:
 
 ## 2. Non-goals
 
-AEEP 0.4 does not define:
+AEEP 0.5 does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;
@@ -294,8 +294,9 @@ OpenAI and Anthropic SDK wrappers record latency, usage, outcome, and optionally
 
 ## 26. Versioning
 
-The current manifest/spec version is `0.4`; `0.1`, `0.15`, `0.2`, and `0.3`
-manifests remain loadable. New economic schemas use `schema_version: "0.4"`;
+The current manifest/spec version is `0.5`; `0.1`, `0.15`, `0.2`, `0.3`, and
+`0.4` manifests remain loadable. New economic schemas use `schema_version:
+"0.5"`;
 older schemas are not silently redefined. Backward-incompatible object changes
 require a new version. New optional resource dimensions or metadata MAY be added
 without invalidating older clients when unknown fields are handled at a
@@ -678,8 +679,8 @@ require atomic operations so concurrent workers cannot execute or overspend.
 Only action digests and approved quote features are stored by default.
 
 SQLite schema upgrades MUST be versioned, idempotent, transactional where
-supported, safe after interruption, and tested from a 0.3 database. Existing
-0.1-0.3 manifests, route behavior, static quote readers, receipts, and payment
+supported, safe after interruption, and tested from realistic prior databases. Existing
+0.1-0.4 manifests, route behavior, static quote readers, receipts, and payment
 adapters remain supported through documented compatibility paths. Economic
 networking remains opt-in, and existing offline `route()` behavior does not
 acquire quotes.
@@ -688,3 +689,68 @@ Legacy 0.4 records that already contain a quote ID but predate explicit
 authorization fields MAY be read as `SIGNED_QUOTE` with that same ID. This is a
 representation migration only: it MUST NOT upgrade a static prior, offer, or
 unidentified amount into binding quote evidence.
+
+## 45. Provider packages
+
+`aeep-provider.yaml` uses `apiVersion: aeep.dev/v0.5` and `kind:
+ProviderPackage`. It publishes provider identity, exact capability contracts,
+inert routes, content-addressed artifacts, evidence subjects, and bounded smoke
+definitions. It MUST NOT contain an activation or approval control.
+
+The signed payload contains exactly `apiVersion`, `kind`, `metadata`, and
+`spec`, encoded with RFC 8785. Ed25519 signs a domain-separated SHA-256 digest.
+Package integrity and local identity trust are separate results; an embedded
+unknown key provides at most `self_asserted` trust.
+
+Ingest MUST bound and strictly parse YAML, reject duplicate keys and aliases,
+recompute every package and route digest, hash artifacts before parsing, and
+atomically persist only inert candidates. It MUST NOT execute, authenticate,
+install, qualify, activate, or raise an approval ceiling.
+
+## 46. Canonicalization transition
+
+New 0.5 economic, package, and evidence signatures use `rfc8785-jcs-v1` with
+purpose-specific domain separation. The 0.4 `aeep-canonical-json-v1` profile is
+historical-only: it may verify reporting history and settle/reconcile an attempt
+durably invoked before the 0.5 cutover, but it MUST NOT authorize new live work.
+Historical payloads and digests are never rewritten.
+
+## 47. Portable evidence and smoke
+
+Evidence binds an artifact digest to an exact route fingerprint, capability,
+workload, producer, validity, and applicable environment. Publisher package
+signatures and independent evidence attestations are distinct. Acceptance is
+per metric; external evidence remains a prior and MUST NOT be stored as a local
+observation.
+
+Verified or attested correctness/compatibility evidence plus a current safe
+local smoke MAY qualify a read-only idempotent route. Smoke runs only after an
+operator command, performs at most one cold and one warm execution, uses no
+fallback, and never activates. Self-asserted evidence cannot qualify by default.
+
+## 48. Cache affinity
+
+Cache affinity is optional soft-ranking context. Hard feasibility always uses
+the cold estimate. Stored identifiers are keyed local HMAC digests; raw prompts,
+messages, resumes, job data, reasoning, and tool output MUST NOT enter the cache
+store. Receipts retain predicted warmth and actual cache-read/write token
+dimensions without double counting.
+
+## 49. Registry discovery
+
+Registry adapters return bounded metadata and provider-package locations only.
+They MUST NOT install, start, execute, qualify, activate, or grant trust. Registry
+verification labels, image provenance, usage counts, and popularity remain
+metadata until local policy recognizes a specific signer and role.
+
+## 50. Durable approvals and proof campaigns
+
+Every consequential invocation records an immutable approval bound to the
+action/policy digest, prepared attempt, granted side-effect ceiling, payment
+approval, source, and validity. Package, provider, registry, model, and workflow
+data cannot create or raise this record.
+
+The deterministic DSH and job-application campaigns are validation clients of
+the Router. They do not add planner semantics. Default and CI campaigns use only
+synthetic routes, identities, mail, browser/form behavior, and resume facts; no
+real submission, email send, CAPTCHA bypass, or credential is permitted.

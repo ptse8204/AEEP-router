@@ -484,7 +484,7 @@ def _prepared_session(
     if workflow:
         executors.insert(0, _workflow_local_spec())
     manifest = Manifest(
-        version="0.4",
+        version="0.5",
         database=database,
         executors=executors,
         budget=AgentBudget(

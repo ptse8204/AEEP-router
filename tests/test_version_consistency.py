@@ -56,7 +56,9 @@ def test_package_and_documentation_versions_are_consistent():
         schema = json.loads(
             (ROOT / "schemas" / f"{schema_name}.schema.json").read_text(encoding="utf-8")
         )
-        assert schema["properties"]["schema_version"]["const"] == protocol_version
+        version_schema = schema["properties"]["schema_version"]
+        assert version_schema["default"] == protocol_version
+        assert version_schema["enum"] == ["0.4", "0.5"]
 
     proof = json.loads(
         (ROOT / "examples" / "economic_evidence" / "report.json").read_text(
@@ -72,8 +74,7 @@ def test_package_and_documentation_versions_are_consistent():
 
 
 def test_legacy_manifest_versions_remain_supported():
-    versions = ("0.1", "0.15", "0.2", "0.3")
+    versions = ("0.1", "0.15", "0.2", "0.3", "0.4")
     assert tuple(Manifest.model_validate({"version": version}).version for version in versions) == versions
-    assert Manifest.model_validate({"version": "0.4"}).version == "0.4"
-    assert Manifest().version == "0.4"
-    assert default_manifest_dict()["version"] == "0.4"
+    assert Manifest().version == "0.5"
+    assert default_manifest_dict()["version"] == "0.5"

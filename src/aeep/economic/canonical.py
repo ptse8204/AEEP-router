@@ -10,11 +10,26 @@ from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Any, Literal
+from typing import Any, Literal, TypeAlias
 
+import rfc8785
 from pydantic import BaseModel
 
-CANONICALIZATION_VERSION: Literal["aeep-canonical-json-v1"] = "aeep-canonical-json-v1"
+LEGACY_CANONICALIZATION_VERSION: Literal["aeep-canonical-json-v1"] = (
+    "aeep-canonical-json-v1"
+)
+JCS_CANONICALIZATION_VERSION: Literal["rfc8785-jcs-v1"] = "rfc8785-jcs-v1"
+CanonicalizationVersion: TypeAlias = Literal[
+    "aeep-canonical-json-v1",
+    "rfc8785-jcs-v1",
+]
+CANONICALIZATION_VERSION: CanonicalizationVersion = JCS_CANONICALIZATION_VERSION
+SUPPORTED_CANONICALIZATION_VERSIONS = frozenset(
+    {LEGACY_CANONICALIZATION_VERSION, JCS_CANONICALIZATION_VERSION}
+)
+
+_ECONOMIC_RECORD_DOMAIN = b"aeep-economic-record-v2\0"
+_ACTION_BINDING_DOMAIN = b"aeep-action-binding-v2\0"
 
 
 def _decimal_text(value: Decimal) -> str:
@@ -81,6 +96,37 @@ def _normalize(value: Any) -> Any:
     raise TypeError(f"unsupported canonical economic JSON value: {type(value).__name__}")
 
 
+def _json_value(value: Any) -> Any:
+    """Return strict JSON values suitable for RFC 8785 canonicalization."""
+
+    if value is None or isinstance(value, bool | int | str):
+        return value
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            raise ValueError("RFC 8785 canonical JSON rejects non-finite numbers")
+        return 0 if value == 0 else value
+    if isinstance(value, Decimal):
+        return _decimal_text(value)
+    if isinstance(value, datetime):
+        return _datetime_text(value)
+    if isinstance(value, Enum):
+        return _json_value(value.value)
+    if isinstance(value, BaseModel):
+        return _json_value(value.model_dump(mode="json", by_alias=True))
+    if isinstance(value, Mapping):
+        normalized: dict[str, Any] = {}
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise TypeError("RFC 8785 canonical JSON object keys must be strings")
+            if key in normalized:
+                raise ValueError("RFC 8785 canonical JSON contains a duplicate object key")
+            normalized[key] = _json_value(item)
+        return normalized
+    if isinstance(value, Sequence) and not isinstance(value, bytes | bytearray):
+        return [_json_value(item) for item in value]
+    raise TypeError(f"unsupported RFC 8785 JSON value: {type(value).__name__}")
+
+
 def _normalize_action_value(value: Any) -> Any:
     """Canonicalize legacy action/policy data while permitting finite JSON floats.
 
@@ -123,13 +169,49 @@ def _normalize_action_value(value: Any) -> Any:
     raise TypeError(f"unsupported canonical action JSON value: {type(value).__name__}")
 
 
-def canonical_payload(value: BaseModel | Mapping[str, Any]) -> bytes:
+def _declared_canonicalization(
+    value: BaseModel | Mapping[str, Any],
+) -> CanonicalizationVersion:
+    signature = getattr(value, "signature", None)
+    if signature is None and isinstance(value, Mapping):
+        signature = value.get("signature")
+    declared = (
+        getattr(signature, "canonicalization_version", None)
+        if signature is not None
+        else None
+    )
+    if declared is None and isinstance(signature, Mapping):
+        declared = signature.get("canonicalization_version")
+    if declared == LEGACY_CANONICALIZATION_VERSION:
+        return LEGACY_CANONICALIZATION_VERSION
+    if declared == JCS_CANONICALIZATION_VERSION:
+        return JCS_CANONICALIZATION_VERSION
+
+    schema_version = getattr(value, "schema_version", None)
+    if schema_version is None and isinstance(value, Mapping):
+        schema_version = value.get("schema_version")
+    return (
+        LEGACY_CANONICALIZATION_VERSION
+        if schema_version == "0.4"
+        else JCS_CANONICALIZATION_VERSION
+    )
+
+
+def canonical_payload(
+    value: BaseModel | Mapping[str, Any],
+    *,
+    version: CanonicalizationVersion | None = None,
+) -> bytes:
     """Return the signed bytes for a record, excluding its root signature field.
 
     All model fields, including explicit ``null`` optionals, are retained. The
     canonicalization version is part of the signed bytes and the signature
     envelope records the same version.
     """
+
+    selected = version or _declared_canonicalization(value)
+    if selected not in SUPPORTED_CANONICALIZATION_VERSIONS:
+        raise ValueError(f"unsupported canonicalization version {selected!r}")
 
     if isinstance(value, BaseModel):
         payload: Mapping[str, Any] = value.model_dump(
@@ -140,9 +222,14 @@ def canonical_payload(value: BaseModel | Mapping[str, Any]) -> bytes:
     else:
         payload = {key: item for key, item in value.items() if key != "signature"}
     envelope = {
-        "canonicalization_version": CANONICALIZATION_VERSION,
+        "canonicalization_version": selected,
         "payload": payload,
     }
+    if selected == JCS_CANONICALIZATION_VERSION:
+        try:
+            return _ECONOMIC_RECORD_DOMAIN + rfc8785.dumps(_json_value(envelope))
+        except rfc8785.CanonicalizationError as exc:
+            raise ValueError(f"RFC 8785 canonicalization failed: {exc}") from exc
     return json.dumps(
         _normalize(envelope),
         ensure_ascii=False,
@@ -152,20 +239,47 @@ def canonical_payload(value: BaseModel | Mapping[str, Any]) -> bytes:
     ).encode("utf-8")
 
 
-def canonical_digest(value: BaseModel | Mapping[str, Any]) -> str:
+def canonical_digest(
+    value: BaseModel | Mapping[str, Any],
+    *,
+    version: CanonicalizationVersion | None = None,
+) -> str:
     """Return a tagged SHA-256 digest of a canonical economic record."""
 
-    return f"sha256:{hashlib.sha256(canonical_payload(value)).hexdigest()}"
+    return f"sha256:{hashlib.sha256(canonical_payload(value, version=version)).hexdigest()}"
 
 
-def canonical_action_digest(value: BaseModel | Mapping[str, Any]) -> str:
+def payload_matches_canonicalization(
+    payload: bytes,
+    version: CanonicalizationVersion,
+) -> bool:
+    return (
+        payload.startswith(_ECONOMIC_RECORD_DOMAIN)
+        if version == JCS_CANONICALIZATION_VERSION
+        else not payload.startswith(_ECONOMIC_RECORD_DOMAIN)
+    )
+
+
+def canonical_action_digest(
+    value: BaseModel | Mapping[str, Any],
+    *,
+    version: CanonicalizationVersion = JCS_CANONICALIZATION_VERSION,
+) -> str:
     """Return a tagged digest for finite legacy action or effective-policy data."""
 
     envelope = {
-        "canonicalization_version": CANONICALIZATION_VERSION,
+        "canonicalization_version": version,
         "purpose": "action-binding",
         "payload": value,
     }
+    if version == JCS_CANONICALIZATION_VERSION:
+        try:
+            payload = _ACTION_BINDING_DOMAIN + rfc8785.dumps(_json_value(envelope))
+        except rfc8785.CanonicalizationError as exc:
+            raise ValueError(f"RFC 8785 action canonicalization failed: {exc}") from exc
+        return f"sha256:{hashlib.sha256(payload).hexdigest()}"
+    if version != LEGACY_CANONICALIZATION_VERSION:
+        raise ValueError(f"unsupported canonicalization version {version!r}")
     payload = json.dumps(
         _normalize_action_value(envelope),
         ensure_ascii=False,

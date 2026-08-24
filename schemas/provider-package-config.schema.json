@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "artifact_root": {
+      "default": ".aeep/artifacts",
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Artifact Root",
+      "type": "string"
+    },
+    "maximum_artifact_bytes": {
+      "default": 52428800,
+      "maximum": 52428800,
+      "minimum": 1,
+      "title": "Maximum Artifact Bytes",
+      "type": "integer"
+    },
+    "allow_remote_artifacts": {
+      "default": false,
+      "title": "Allow Remote Artifacts",
+      "type": "boolean"
+    },
+    "allowed_artifact_hosts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Artifact Hosts",
+      "type": "array"
+    },
+    "allow_private_addresses": {
+      "default": false,
+      "title": "Allow Private Addresses",
+      "type": "boolean"
+    },
+    "allow_self_asserted_priors": {
+      "default": true,
+      "title": "Allow Self Asserted Priors",
+      "type": "boolean"
+    },
+    "require_local_smoke": {
+      "default": true,
+      "title": "Require Local Smoke",
+      "type": "boolean"
+    }
+  },
+  "title": "ProviderPackageConfig",
+  "type": "object"
+}

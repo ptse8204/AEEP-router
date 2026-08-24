@@ -15,14 +15,20 @@ from aeep.benchmarking import (
     EconomicProofCampaignReport,
     ReleaseProofReport,
 )
+from aeep.discovery import RegistryCandidate
 from aeep.integrations import export_tools
 from aeep.models import (
+    ActionApprovalRecord,
     ActionFeatures,
     ActionRequest,
     AuthorizationMeterQuantity,
     BenchmarkResult,
     BillingReconciliation,
     BoundedQuote,
+    CacheAffinityEstimate,
+    CacheAffinityObservation,
+    CacheAffinityReceipt,
+    CacheRoutingContext,
     CandidateRanking,
     CapabilityDefinition,
     CapabilityOffer,
@@ -56,6 +62,7 @@ from aeep.models import (
     PricingDispute,
     PricingRule,
     ProviderDescriptor,
+    ProviderPackageConfig,
     QuotaObservation,
     Quote,
     QuoteAcceptance,
@@ -76,6 +83,20 @@ from aeep.models import (
     TraceProfileReport,
     UsageStatement,
 )
+from aeep.proofs import (
+    DSHLiveComparisonReport,
+    DSHLiveProofReport,
+    DSHProofReport,
+    JobProofReport,
+    ResumePlan,
+)
+from aeep.provider_package import (
+    CandidateVerificationSnapshot,
+    ComparativeMeasurement,
+    EvidenceAcceptance,
+    ProviderPackage,
+    SmokeTestReport,
+)
 from aeep.qualification import QualificationReport, RouteCandidate
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 
@@ -84,6 +105,7 @@ SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
     "action-features.schema.json": ActionFeatures,
+    "action-approval-record.schema.json": ActionApprovalRecord,
     "action-request.schema.json": ActionRequest,
     "authorization-meter-quantity.schema.json": AuthorizationMeterQuantity,
     "benchmark-result.schema.json": BenchmarkResult,
@@ -94,6 +116,10 @@ MODEL_FILES = {
     "release-proof-report.schema.json": ReleaseProofReport,
     "billing-reconciliation.schema.json": BillingReconciliation,
     "bounded-quote.schema.json": BoundedQuote,
+    "cache-routing-context.schema.json": CacheRoutingContext,
+    "cache-affinity-estimate.schema.json": CacheAffinityEstimate,
+    "cache-affinity-receipt.schema.json": CacheAffinityReceipt,
+    "cache-affinity-observation.schema.json": CacheAffinityObservation,
     "candidate-ranking.schema.json": CandidateRanking,
     "cash-accounting.schema.json": CashAccounting,
     "capability-definition.schema.json": CapabilityDefinition,
@@ -127,6 +153,18 @@ MODEL_FILES = {
     "pricing-dispute.schema.json": PricingDispute,
     "pricing-rule.schema.json": PricingRule,
     "provider-descriptor.schema.json": ProviderDescriptor,
+    "provider-package-config.schema.json": ProviderPackageConfig,
+    "aeep-provider.schema.json": ProviderPackage,
+    "evidence-acceptance.schema.json": EvidenceAcceptance,
+    "candidate-verification-snapshot.schema.json": CandidateVerificationSnapshot,
+    "smoke-test-report.schema.json": SmokeTestReport,
+    "comparative-measurement.schema.json": ComparativeMeasurement,
+    "registry-candidate.schema.json": RegistryCandidate,
+    "dsh-proof-report.schema.json": DSHProofReport,
+    "dsh-live-proof-report.schema.json": DSHLiveProofReport,
+    "dsh-live-comparison-report.schema.json": DSHLiveComparisonReport,
+    "job-proof-report.schema.json": JobProofReport,
+    "resume-plan.schema.json": ResumePlan,
     "quote.schema.json": Quote,
     "quote-acceptance.schema.json": QuoteAcceptance,
     "quote-failure.schema.json": QuoteFailure,

@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "EvidenceAcceptanceStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "accepted_as_prior",
+        "rejected",
+        "stale",
+        "superseded"
+      ],
+      "title": "EvidenceAcceptanceStatus",
+      "type": "string"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_id": {
+      "title": "Acceptance Id",
+      "type": "string"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "package_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Package Digest",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "metric": {
+      "title": "Metric",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/EvidenceAcceptanceStatus"
+    },
+    "reason_code": {
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "applicability": {
+      "title": "Applicability",
+      "type": "string"
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Confidence"
+    },
+    "effective_trust": {
+      "$ref": "#/$defs/TrustLevel"
+    },
+    "evaluated_at": {
+      "format": "date-time",
+      "title": "Evaluated At",
+      "type": "string"
+    },
+    "rate_card_snapshot_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rate Card Snapshot Id"
+    }
+  },
+  "required": [
+    "acceptance_id",
+    "evidence_id",
+    "package_digest",
+    "candidate_id",
+    "metric",
+    "status",
+    "reason_code",
+    "applicability",
+    "confidence",
+    "effective_trust",
+    "evaluated_at"
+  ],
+  "title": "EvidenceAcceptance",
+  "type": "object"
+}

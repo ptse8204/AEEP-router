@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aeep-agent-router"
-version = "0.4.0"
+version = "0.5.0"
 description = "Economic profiling and policy-based routing for agent actions across CLI, HTTP, MCP, and local functions."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -28,6 +28,7 @@ dependencies = [
   "psutil>=5.9,<8",
   "pydantic>=2.8,<3",
   "PyYAML>=6,<7",
+  "rfc8785>=0.1.4,<0.2",
   "typer>=0.12,<1",
 ]
 
@@ -67,6 +68,12 @@ aeep = ["py.typed"]
 "share/aeep/examples/proof" = ["examples/proof/*.json", "examples/proof/*.md", "examples/proof/*.yaml"]
 "share/aeep/examples/economic_market" = ["examples/economic_market/*.json", "examples/economic_market/*.md", "examples/economic_market/*.py", "examples/economic_market/*.yaml"]
 "share/aeep/examples/economic_evidence" = ["examples/economic_evidence/*.json", "examples/economic_evidence/*.md", "examples/economic_evidence/*.py", "examples/economic_evidence/*.yaml"]
+"share/aeep/examples/dsh_campaign" = ["examples/dsh_campaign/*.md", "examples/dsh_campaign/*.py"]
+"share/aeep/examples/dsh_campaign/reports" = ["examples/dsh_campaign/reports/*.json", "examples/dsh_campaign/reports/*.md"]
+"share/aeep/examples/job_application" = ["examples/job_application/*.md", "examples/job_application/*.py"]
+"share/aeep/examples/job_application/reports" = ["examples/job_application/reports/*.json", "examples/job_application/reports/*.md"]
+"share/aeep/examples/provider_package" = ["examples/provider_package/*.json", "examples/provider_package/*.md", "examples/provider_package/*.py", "examples/provider_package/*.yaml"]
+"share/aeep/examples/provider_package/evidence" = ["examples/provider_package/evidence/*.json"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

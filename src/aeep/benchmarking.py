@@ -33,6 +33,7 @@ from .models import (
     CounterfactualCashCost,
     CurrencyAmount,
     EconomicEvidenceLevel,
+    EconomicSchemaVersion,
     EconomicStrictModel,
     EstimateSource,
     EvidenceSource,
@@ -278,7 +279,7 @@ class ReleaseProofReport(StrictModel):
 
 
 class EconomicBenchmarkRouteType(StrEnum):
-    """Transport or funding shape measured by an AEEP 0.4 proof trial."""
+    """Transport or funding shape measured by an AEEP 0.5 proof trial."""
 
     LOCAL_PYTHON = "local-python"
     LOCAL_CLI = "local-cli"
@@ -292,7 +293,7 @@ class EconomicBenchmarkRouteType(StrEnum):
 class EconomicBenchmarkTrial(EconomicStrictModel):
     """Sanitized measured economics for one existing benchmark trial."""
 
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     trial_id: str = Field(min_length=1, max_length=300)
     case_id: str = Field(min_length=1, max_length=200)
     route_id: str = Field(min_length=1, max_length=200)
@@ -419,7 +420,7 @@ class EconomicWorkflowProofTrial(EconomicStrictModel):
     multi-step DAG is not an interchangeable route for one bounded action.
     """
 
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     workflow_id: str = Field(min_length=1, max_length=200)
     condition: BenchmarkCondition
     split: BenchmarkSplit
@@ -497,9 +498,9 @@ class EconomicBenchmarkOracle(EconomicStrictModel):
 
 
 class EconomicProofCampaignReport(EconomicStrictModel):
-    """AEEP 0.4 proof report that leaves the frozen 0.3 campaign schema intact."""
+    """AEEP 0.5 proof report that leaves the frozen 0.3 campaign schema intact."""
 
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     campaign_id: str = Field(min_length=1, max_length=200)
     domain: str = Field(min_length=1, max_length=200)
     settlement_currency: str = Field(pattern=r"^[A-Z]{3}$")
@@ -781,7 +782,7 @@ def format_economic_proof_report(report: EconomicProofCampaignReport) -> str:
     splits = ", ".join(sorted({trial.split.value for trial in report.trials}))
     route_types = ", ".join(sorted({trial.route_type.value for trial in report.trials}))
     lines = [
-        f"# AEEP 0.4 economic evidence proof: {report.campaign_id}",
+        f"# AEEP 0.5 economic evidence proof: {report.campaign_id}",
         "",
         f"Domain: {report.domain}",
         f"Repetitions: {report.repetitions}",

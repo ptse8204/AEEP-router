@@ -198,6 +198,65 @@
       "title": "ActionConstraints",
       "type": "object"
     },
+    "CacheAffinityPolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "half_life_seconds": {
+          "default": 3600,
+          "exclusiveMinimum": 0,
+          "maximum": 2592000,
+          "title": "Half Life Seconds",
+          "type": "number"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "CacheAffinityPolicyConfig",
+      "type": "object"
+    },
+    "EvidenceReusePolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "EvidenceReusePolicyConfig",
+      "type": "object"
+    },
     "ExecutorKind": {
       "enum": [
         "command",
@@ -519,6 +578,12 @@
       },
       "title": "Subscription Rules",
       "type": "array"
+    },
+    "cache_affinity": {
+      "$ref": "#/$defs/CacheAffinityPolicyConfig"
+    },
+    "evidence_reuse": {
+      "$ref": "#/$defs/EvidenceReusePolicyConfig"
     },
     "uncertainty_penalty": {
       "default": 0.1,

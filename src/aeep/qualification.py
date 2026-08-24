@@ -7,7 +7,7 @@ import json
 import os
 from datetime import datetime
 from enum import StrEnum
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlparse
 
 from jsonschema import Draft202012Validator
@@ -36,6 +36,12 @@ class RouteCandidate(StrictModel):
     provider_id: str | None = None
     capability: str
     behavior_fingerprint: str = Field(pattern=r"^[a-f0-9]{64}$")
+    package_digest: str | None = Field(default=None, pattern=r"^sha256:[a-f0-9]{64}$")
+    package_fingerprint: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
+    verification_snapshot_id: str | None = Field(default=None, max_length=200)
     status: RouteLifecycle = RouteLifecycle.CANDIDATE
     spec: ExecutorSpec
     qualification_report_id: str | None = None
@@ -63,6 +69,17 @@ class QualificationReport(StrictModel):
     dynamic_runs: int = Field(default=0, ge=0)
     passed_runs: int = Field(default=0, ge=0)
     passed: bool = False
+    qualification_method: Literal[
+        "local_campaign", "evidence_reuse", "operator_attestation"
+    ] = "local_campaign"
+    source_evidence_ids: list[str] = Field(default_factory=list)
+    smoke_report_ids: list[str] = Field(default_factory=list)
+    effective_trust: str | None = None
+    valid_until: datetime | None = None
+    environment_digest: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
     created_at: datetime = Field(default_factory=utc_now)
 
 

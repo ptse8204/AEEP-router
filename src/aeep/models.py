@@ -57,7 +57,7 @@ class StrictModel(BaseModel):
 
 
 class EconomicStrictModel(StrictModel):
-    """Immutable base for canonical AEEP 0.4 economic records."""
+    """Immutable base for canonical AEEP economic records."""
 
     model_config = ConfigDict(frozen=True, validate_default=True)
 
@@ -587,7 +587,9 @@ class ResourceVector(StrictModel):
     context_tokens: int = Field(default=0, ge=0)
     input_tokens: int = Field(default=0, ge=0)
     cached_input_tokens: int = Field(default=0, ge=0)
+    cache_write_input_tokens: int = Field(default=0, ge=0)
     output_tokens: int = Field(default=0, ge=0)
+    reasoning_output_tokens: int = Field(default=0, ge=0)
     subscription_units: float = Field(
         default=0.0,
         ge=0.0,
@@ -609,7 +611,9 @@ class ResourceVector(StrictModel):
             "context_tokens",
             "input_tokens",
             "cached_input_tokens",
+            "cache_write_input_tokens",
             "output_tokens",
+            "reasoning_output_tokens",
         }
         for field in type(self).model_fields:
             value = getattr(self, field) * factor
@@ -669,6 +673,123 @@ class ComputeAvailability(StrictModel):
     network_metered: bool = False
 
 
+class CacheRoutingContext(StrictModel):
+    cache_scope_key_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    provider: str = Field(min_length=1, max_length=100)
+    model: str = Field(min_length=1, max_length=200)
+    integration_adapter: str = Field(min_length=1, max_length=200)
+    route_id: str = Field(min_length=1, max_length=200)
+    stable_prefix_digest_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    previous_state_digest_hmac: str | None = Field(
+        default=None,
+        pattern=r"^[a-f0-9]{64}$",
+    )
+    common_prefix_tokens_estimate: int = Field(default=0, ge=0)
+    eligible_cached_tokens_estimate: int = Field(default=0, ge=0)
+    recent_cache_read_tokens: int = Field(default=0, ge=0)
+    recent_cache_write_tokens: int = Field(default=0, ge=0)
+    recent_cache_miss_tokens: int = Field(default=0, ge=0)
+    observed_hits: int = Field(default=0, ge=0)
+    observed_attempts: int = Field(default=0, ge=0)
+    last_seen_at: datetime | None = None
+    compaction_generation: int = Field(default=0, ge=0)
+    context_reset_reason: str | None = Field(default=None, max_length=200)
+
+    @model_validator(mode="after")
+    def valid_cache_counts(self) -> CacheRoutingContext:
+        if self.observed_hits > self.observed_attempts:
+            raise ValueError("cache hits cannot exceed cache attempts")
+        if self.last_seen_at is not None and (
+            self.last_seen_at.tzinfo is None or self.last_seen_at.utcoffset() is None
+        ):
+            raise ValueError("cache last_seen_at must be timezone-aware")
+        return self
+
+
+class CacheAffinityEstimate(StrictModel):
+    warm_probability: float = Field(ge=0, le=1)
+    identity_match: float = Field(ge=0, le=1)
+    prefix_match: float = Field(ge=0, le=1)
+    freshness_decay: float = Field(ge=0, le=1)
+    continuity_probability: float = Field(ge=0, le=1)
+    observed_reliability: float = Field(ge=0, le=1)
+    cold_resources: ResourceVector
+    warm_resources: ResourceVector
+    expected_resources: ResourceVector
+
+
+class CacheAffinityReceipt(StrictModel):
+    predicted_warm_probability: float = Field(ge=0, le=1)
+    predicted_common_prefix_tokens: int = Field(ge=0)
+    predicted_eligible_cached_tokens: int = Field(ge=0)
+    predicted_cache_read_tokens: int = Field(ge=0)
+    predicted_cache_write_tokens: int = Field(ge=0)
+    actual_input_tokens: int = Field(ge=0)
+    actual_cached_input_tokens: int = Field(ge=0)
+    actual_cache_write_tokens: int = Field(ge=0)
+    actual_output_tokens: int = Field(ge=0)
+    actual_reasoning_output_tokens: int = Field(ge=0)
+    cache_hit_rate: float | None = Field(default=None, ge=0, le=1)
+    cache_scope_key_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    stable_prefix_digest_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    context_compaction_events: int = Field(default=0, ge=0)
+    context_reset_reason: str | None = Field(default=None, max_length=200)
+    warm_state_reused: bool
+
+
+class CacheAffinityObservation(StrictModel):
+    observation_id: str = Field(default_factory=lambda: new_id("cache"))
+    scope_key_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    route_id: str = Field(min_length=1, max_length=200)
+    stable_prefix_digest_hmac: str = Field(pattern=r"^[a-f0-9]{64}$")
+    state_digest_hmac: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    cache_hit: bool
+    cached_input_tokens: int = Field(ge=0)
+    cache_write_input_tokens: int = Field(ge=0)
+    observed_at: datetime = Field(default_factory=utc_now)
+
+
+class CacheAffinityPolicyConfig(StrictModel):
+    enabled: bool = False
+    half_life_seconds: float = Field(default=3600, gt=0, le=2_592_000)
+    max_shared_weight: float = Field(default=0.85, ge=0, le=1)
+    shared_prior_samples: int = Field(default=5, ge=1, le=1000)
+
+
+class EvidenceReusePolicyConfig(StrictModel):
+    enabled: bool = True
+    max_shared_weight: float = Field(default=0.85, ge=0, le=1)
+    shared_prior_samples: int = Field(default=5, ge=1, le=1000)
+
+
+class ApprovalSource(StrEnum):
+    EMBEDDED_CALLER = "embedded_caller"
+    CLI_OPERATOR = "cli_operator"
+    HOST_OPERATOR = "host_operator"
+
+
+class ActionApprovalRecord(EconomicStrictModel):
+    schema_version: EconomicSchemaVersion = "0.5"
+    approval_id: str = Field(default_factory=lambda: new_id("approval"))
+    action_digest: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
+    policy_digest: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
+    prepared_id: str | None = Field(default=None, max_length=200)
+    attempt_id: str | None = Field(default=None, max_length=200)
+    granted_side_effect: SideEffect
+    payment_approved: bool = False
+    human_approved: bool = False
+    source: ApprovalSource
+    granted_at: datetime = Field(default_factory=utc_now)
+    expires_at: datetime | None = None
+    reason: str | None = Field(default=None, max_length=1000)
+
+    @model_validator(mode="after")
+    def valid_approval(self) -> ActionApprovalRecord:
+        if self.expires_at is not None and self.expires_at <= self.granted_at:
+            raise ValueError("approval expiry must follow grant time")
+        return self
+
+
 class ActionContext(StrictModel):
     data_sensitivity: DataSensitivity = DataSensitivity.INTERNAL
     state_locality: Locality | None = None
@@ -677,6 +798,7 @@ class ActionContext(StrictModel):
     labels: dict[str, str] = Field(default_factory=dict)
     traceparent: str | None = None
     subscription_quotas: dict[str, SubscriptionQuota] = Field(default_factory=dict)
+    cache_affinity: CacheRoutingContext | None = None
 
 
 class ActionConstraints(StrictModel):
@@ -818,6 +940,7 @@ PositiveDecimal = Annotated[
 ]
 UtcDateTime = Annotated[datetime, AfterValidator(_aware_utc)]
 JsonPrimitive: TypeAlias = str | int | bool | None
+EconomicSchemaVersion: TypeAlias = Literal["0.4", "0.5"]
 
 
 class SignatureAlgorithm(StrEnum):
@@ -825,11 +948,21 @@ class SignatureAlgorithm(StrEnum):
     ED25519 = "ed25519"
 
 
+class TrustedKeyRole(StrEnum):
+    PROVIDER_RECORD = "provider_record"
+    PACKAGE_PUBLISHER = "package_publisher"
+    EVIDENCE_PRODUCER = "evidence_producer"
+    INDEPENDENT_VERIFIER = "independent_verifier"
+    REGISTRY = "registry"
+
+
 class SignatureEnvelopeV2(EconomicStrictModel):
     algorithm: SignatureAlgorithm
     key_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     value: str = Field(min_length=1, max_length=4096, pattern=r"^[A-Za-z0-9_-]+$")
-    canonicalization_version: Literal["aeep-canonical-json-v1"] = "aeep-canonical-json-v1"
+    canonicalization_version: Literal[
+        "aeep-canonical-json-v1", "rfc8785-jcs-v1"
+    ] = "rfc8785-jcs-v1"
 
 
 class EconomicEvidenceLevel(StrEnum):
@@ -1059,7 +1192,7 @@ def _unique_meters(values: tuple[MeterQuantity, ...]) -> tuple[MeterQuantity, ..
 
 
 class CapabilityOffer(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     offer_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     provider_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     capability: str = Field(min_length=3, max_length=200, pattern=_CAPABILITY_PATTERN)
@@ -1115,7 +1248,7 @@ class CapabilityOffer(EconomicStrictModel):
 
 
 class QuoteRequestV2(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     quote_request_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     action_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     capability: str = Field(min_length=3, max_length=200, pattern=_CAPABILITY_PATTERN)
@@ -1164,7 +1297,7 @@ class QuoteRequestV2(EconomicStrictModel):
 
 
 class BoundedQuote(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     quote_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     quote_request_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     offer_id: str | None = Field(default=None, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1374,7 +1507,7 @@ class QuoteFailure(EconomicStrictModel):
 
 
 class PreparedRouteDecision(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     prepared_id: str = Field(
         default_factory=lambda: new_id("prepared"),
         min_length=1,
@@ -1551,7 +1684,7 @@ class PreparedRouteDecision(EconomicStrictModel):
 
 
 class PreparedRouteTransition(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     transition_id: str = Field(
         default_factory=lambda: new_id("transition"),
         min_length=1,
@@ -1591,7 +1724,7 @@ class PaymentReservationState(StrEnum):
 
 
 class PaymentReservationV2(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     reservation_id: str = Field(
         default_factory=lambda: new_id("reserve"),
         min_length=1,
@@ -1647,7 +1780,7 @@ class PaymentReservationV2(EconomicStrictModel):
 
 
 class SettlementEvidence(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     charge_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     evidence_level: EconomicEvidenceLevel = EconomicEvidenceLevel.UNKNOWN
     usage_statement_id: str | None = Field(
@@ -1662,7 +1795,7 @@ class SettlementEvidence(EconomicStrictModel):
 
 
 class UsageStatement(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     usage_statement_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     quote_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     prepared_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1712,7 +1845,7 @@ class SettlementStatus(StrEnum):
 
 
 class SettlementReceipt(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     settlement_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     charge_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     prepared_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1784,7 +1917,7 @@ class SettlementReceipt(EconomicStrictModel):
 
 
 class RefundReceiptV2(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     refund_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     settlement_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     charge_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1824,7 +1957,7 @@ class ReconciliationStatus(StrEnum):
 
 
 class BillingReconciliation(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     reconciliation_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     settlement_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     provider_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1853,7 +1986,7 @@ class BillingReconciliation(EconomicStrictModel):
 
 
 class MarketAggregate(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     aggregate_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     capability: str = Field(min_length=3, max_length=200, pattern=_CAPABILITY_PATTERN)
     provider_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1922,7 +2055,7 @@ class PricingDisputeStatus(StrEnum):
 
 
 class PricingDispute(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     dispute_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     prepared_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     quote_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
@@ -1954,7 +2087,7 @@ class PricingDispute(EconomicStrictModel):
 
 
 class EconomicEvidenceLink(EconomicStrictModel):
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: EconomicSchemaVersion = "0.5"
     link_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     charge_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     evidence_level: EconomicEvidenceLevel
@@ -2182,6 +2315,10 @@ class PolicyConfig(StrictModel):
     resource_scarcity_multiplier: float = Field(default=2.0, ge=0.0, le=100.0)
     subscription_scarcity_multiplier: float = Field(default=1.0, ge=0.0, le=100.0)
     subscription_rules: list[SubscriptionPolicyRule] = Field(default_factory=list)
+    cache_affinity: CacheAffinityPolicyConfig = Field(default_factory=CacheAffinityPolicyConfig)
+    evidence_reuse: EvidenceReusePolicyConfig = Field(
+        default_factory=EvidenceReusePolicyConfig
+    )
     uncertainty_penalty: float = Field(
         default=0.10,
         ge=0.0,
@@ -2556,7 +2693,7 @@ class EconomicEvidenceConfig(StrictModel):
     def valid_activation(self) -> EconomicEvidenceConfig:
         if self.enabled and self.settlement_currency != "USD":
             raise ValueError(
-                "AEEP 0.4 routing budgets are USD-denominated; non-USD economic routing "
+                "AEEP 0.5 routing budgets are USD-denominated; non-USD economic routing "
                 "requires explicit currency-tagged policy support"
             )
         if not self.enabled and (self.live_quotes.enabled or self.market_aggregates.enabled):
@@ -2570,14 +2707,39 @@ class EconomicEvidenceConfig(StrictModel):
         return self
 
 
+class ProviderPackageConfig(StrictModel):
+    artifact_root: str = Field(default=".aeep/artifacts", min_length=1, max_length=2000)
+    maximum_artifact_bytes: int = Field(default=52_428_800, ge=1, le=52_428_800)
+    allow_remote_artifacts: bool = False
+    allowed_artifact_hosts: tuple[str, ...] = ()
+    allow_private_addresses: bool = False
+    allow_self_asserted_priors: bool = True
+    require_local_smoke: bool = True
+
+    @field_validator("allowed_artifact_hosts")
+    @classmethod
+    def exact_artifact_hosts(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        normalized = tuple(_exact_quote_host(value) for value in values)
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("allowed artifact hosts cannot contain duplicates")
+        return normalized
+
+    @model_validator(mode="after")
+    def valid_remote_policy(self) -> ProviderPackageConfig:
+        if self.allow_remote_artifacts and not self.allowed_artifact_hosts:
+            raise ValueError("remote artifacts require at least one exact allowed host")
+        return self
+
+
 class Manifest(StrictModel):
-    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4"] = "0.4"
+    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5"] = "0.5"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)
     signing: SigningConfig | None = None
     budget: AgentBudget | None = None
     economic_evidence: EconomicEvidenceConfig = Field(default_factory=EconomicEvidenceConfig)
+    provider_packages: ProviderPackageConfig = Field(default_factory=ProviderPackageConfig)
     policies: dict[str, PolicyConfig] = Field(default_factory=dict)
     capabilities: list[CapabilityDefinition] = Field(default_factory=list)
     resources: list[SubscriptionResource] = Field(default_factory=list)
@@ -2655,6 +2817,7 @@ class CandidateScore(StrictModel):
     estimate: RouteEstimate
     resource_pool: str | None = None
     subscription_quota: SubscriptionQuota | None = None
+    cache_affinity: CacheAffinityEstimate | None = None
     score: ScoreBreakdown | None = None
     rank: int | None = None
 
@@ -2685,6 +2848,8 @@ class ExecutionReceipt(StrictModel):
     action_features: ActionFeatures | None = None
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
     accounting: ResourceAccounting = Field(default_factory=ResourceAccounting)
+    cache_affinity: CacheAffinityReceipt | None = None
+    approval_id: str | None = Field(default=None, max_length=200)
     transport_success: bool | None = None
     execution_success: bool | None = None
     schema_valid: bool | None = None

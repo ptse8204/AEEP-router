@@ -1,4 +1,4 @@
-# AEEP 0.4 deterministic economic-evidence proof
+# AEEP 0.5 deterministic economic-evidence proof
 
 This campaign extends AEEP's benchmark evidence with the real prepared-routing path. The paid
 trials call `Router.prepare_route()`, reserve the signed maximum, call
@@ -48,7 +48,7 @@ condition/repetition cases. A separate two-step prepared workflow trial is repor
 - The two-step prepared workflow proof passed 1/1: both real dependency inputs were bound before
   preparation, and its paid step retained quote, reservation, settlement, capture, and release
   evidence.
-- The hybrid median total time was 11.2256875 ms versus 0.032354 ms for the fastest measured
+- The hybrid median total time was 12.301000 ms versus 0.0326665 ms for the fastest measured
   baseline, so the 15% time-reduction target failed. No timing improvement is claimed.
 - The two-domain 20% model-token target was not evaluated: this local campaign has one domain
   and no complete live subscription-model usage evidence.

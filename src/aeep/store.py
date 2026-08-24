@@ -15,6 +15,7 @@ from typing import TypedDict, TypeVar
 
 from pydantic import BaseModel
 
+from .discovery import RegistryCandidate
 from .economic.canonical import canonical_digest, canonical_payload
 from .economic.trust import (
     TrustedKeyStatus,
@@ -24,9 +25,11 @@ from .economic.trust import (
 )
 from .errors import ConfigurationError
 from .models import (
+    ActionApprovalRecord,
     AuthorizationKind,
     BillingReconciliation,
     BoundedQuote,
+    CacheAffinityObservation,
     CapabilityOffer,
     CurrencyAmount,
     EconomicEvidenceLink,
@@ -55,9 +58,20 @@ from .models import (
     SettlementStatus,
     UsageStatement,
 )
+from .provider_package import (
+    ArtifactReference,
+    ArtifactVerificationResult,
+    CandidateVerificationSnapshot,
+    EvidenceAcceptance,
+    EvidenceReference,
+    PackageVerificationResult,
+    ProviderPackage,
+    SignatureVerificationResult,
+    SmokeTestReport,
+)
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 3
+LATEST_DATABASE_SCHEMA = 4
 
 _LEGACY_SCHEMA: tuple[str, ...] = (
     """
@@ -633,6 +647,190 @@ _PREPARED_ACTION_IDEMPOTENCY_SCHEMA: tuple[str, ...] = (
     """,
 )
 
+_V05_SCHEMA: tuple[str, ...] = (
+    """
+    CREATE TABLE IF NOT EXISTS protocol_cutovers (
+        name TEXT PRIMARY KEY,
+        occurred_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS provider_packages (
+        package_digest TEXT PRIMARY KEY,
+        package_id TEXT NOT NULL,
+        package_version TEXT NOT NULL,
+        provider_id TEXT NOT NULL,
+        source_id TEXT NOT NULL,
+        imported_at TEXT NOT NULL,
+        integrity_status TEXT NOT NULL,
+        effective_identity_trust TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_provider_packages_identity
+    ON provider_packages(provider_id, package_id, package_version)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS provider_package_signatures (
+        package_digest TEXT NOT NULL,
+        signature_id TEXT NOT NULL,
+        key_id TEXT NOT NULL,
+        role TEXT NOT NULL,
+        status TEXT NOT NULL,
+        effective_trust TEXT NOT NULL,
+        verified_at TEXT NOT NULL,
+        failure_code TEXT,
+        payload_json TEXT NOT NULL,
+        PRIMARY KEY(package_digest, signature_id),
+        FOREIGN KEY(package_digest) REFERENCES provider_packages(package_digest)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS content_artifacts (
+        artifact_digest TEXT PRIMARY KEY,
+        media_type TEXT NOT NULL,
+        size_bytes INTEGER NOT NULL,
+        cas_path TEXT NOT NULL,
+        source_kind TEXT NOT NULL,
+        verified_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS provider_package_artifacts (
+        package_digest TEXT NOT NULL,
+        artifact_id TEXT NOT NULL,
+        artifact_digest TEXT NOT NULL,
+        required INTEGER NOT NULL CHECK(required IN (0, 1)),
+        status TEXT NOT NULL,
+        failure_code TEXT,
+        payload_json TEXT NOT NULL,
+        PRIMARY KEY(package_digest, artifact_id),
+        FOREIGN KEY(package_digest) REFERENCES provider_packages(package_digest)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS evidence_records (
+        package_digest TEXT NOT NULL,
+        evidence_id TEXT NOT NULL,
+        artifact_digest TEXT NOT NULL,
+        evidence_type TEXT NOT NULL,
+        route_id TEXT NOT NULL,
+        route_fingerprint TEXT NOT NULL,
+        workload_digest TEXT,
+        producer_id TEXT NOT NULL,
+        declared_trust TEXT NOT NULL,
+        effective_trust TEXT NOT NULL,
+        valid_from TEXT NOT NULL,
+        expires_at TEXT,
+        payload_json TEXT NOT NULL,
+        PRIMARY KEY(package_digest, evidence_id),
+        FOREIGN KEY(package_digest) REFERENCES provider_packages(package_digest),
+        FOREIGN KEY(artifact_digest) REFERENCES content_artifacts(artifact_digest)
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_evidence_records_route
+    ON evidence_records(route_id, route_fingerprint, evidence_type)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS evidence_acceptances (
+        acceptance_id TEXT PRIMARY KEY,
+        package_digest TEXT NOT NULL,
+        evidence_id TEXT NOT NULL,
+        executor_id TEXT NOT NULL,
+        metric TEXT NOT NULL,
+        status TEXT NOT NULL,
+        reason_code TEXT NOT NULL,
+        applicability TEXT NOT NULL,
+        confidence TEXT NOT NULL,
+        effective_trust TEXT NOT NULL,
+        evaluated_at TEXT NOT NULL,
+        rate_card_snapshot_id TEXT,
+        payload_json TEXT NOT NULL,
+        FOREIGN KEY(package_digest, evidence_id)
+            REFERENCES evidence_records(package_digest, evidence_id)
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_evidence_acceptances_candidate
+    ON evidence_acceptances(executor_id, metric, status)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS smoke_test_reports (
+        smoke_report_id TEXT PRIMARY KEY,
+        executor_id TEXT NOT NULL,
+        route_fingerprint TEXT NOT NULL,
+        status TEXT NOT NULL,
+        finished_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_smoke_reports_candidate
+    ON smoke_test_reports(executor_id, route_fingerprint, finished_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS candidate_verification_snapshots (
+        snapshot_id TEXT PRIMARY KEY,
+        executor_id TEXT NOT NULL,
+        package_digest TEXT NOT NULL,
+        route_fingerprint TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        FOREIGN KEY(package_digest) REFERENCES provider_packages(package_digest)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS provider_package_audit_events (
+        event_id TEXT PRIMARY KEY,
+        package_digest TEXT,
+        executor_id TEXT,
+        event_type TEXT NOT NULL,
+        reason_code TEXT,
+        occurred_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS cache_affinity_observations (
+        observation_id TEXT PRIMARY KEY,
+        scope_key_hmac TEXT NOT NULL,
+        route_id TEXT NOT NULL,
+        observed_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_cache_affinity_scope
+    ON cache_affinity_observations(scope_key_hmac, route_id, observed_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS registry_candidates (
+        registry_candidate_id TEXT PRIMARY KEY,
+        adapter_id TEXT NOT NULL,
+        retrieved_at TEXT NOT NULL,
+        raw_metadata_digest TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_registry_candidates_adapter
+    ON registry_candidates(adapter_id, retrieved_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS action_approval_records (
+        approval_id TEXT PRIMARY KEY,
+        action_digest TEXT NOT NULL,
+        prepared_id TEXT,
+        attempt_id TEXT,
+        granted_at TEXT NOT NULL,
+        expires_at TEXT,
+        payload_json TEXT NOT NULL
+    )
+    """,
+)
+
 
 def _table_columns(
     connection: sqlite3.Connection, table: str
@@ -648,6 +846,26 @@ def _add_column_if_missing(
 ) -> None:
     if column not in _table_columns(connection, table):
         connection.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
+
+
+def _migrate_v3_to_v4(connection: sqlite3.Connection) -> None:
+    for statement in _V05_SCHEMA:
+        connection.execute(statement)
+    _add_column_if_missing(connection, "route_candidates", "package_digest", "TEXT")
+    _add_column_if_missing(connection, "route_candidates", "package_fingerprint", "TEXT")
+    _add_column_if_missing(
+        connection,
+        "route_candidates",
+        "verification_snapshot_id",
+        "TEXT",
+    )
+    connection.execute(
+        """
+        INSERT OR IGNORE INTO protocol_cutovers(name, occurred_at)
+        VALUES ('rfc8785_live_cutover', ?)
+        """,
+        (datetime.now(UTC).isoformat(),),
+    )
 
 
 def _migrate_v1_to_v2(connection: sqlite3.Connection) -> None:
@@ -923,6 +1141,9 @@ class ReceiptStore:
                     for statement in _PREPARED_ACTION_IDEMPOTENCY_SCHEMA:
                         self._connection.execute(statement)
                     version = 3
+                if version < 4:
+                    _migrate_v3_to_v4(self._connection)
+                    version = 4
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -4889,17 +5110,696 @@ class ReceiptStore:
             "result_ids": json.loads(row["receipt_ids_json"]),
         }
 
-    def save_route_candidate(self, candidate: RouteCandidate) -> None:
+    def protocol_cutover(self, name: str) -> datetime | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT occurred_at FROM protocol_cutovers WHERE name = ?",
+                (name,),
+            ).fetchone()
+        return datetime.fromisoformat(row[0]) if row else None
+
+    def save_action_approval(self, approval: ActionApprovalRecord) -> None:
+        payload = approval.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM action_approval_records WHERE approval_id = ?",
+                (approval.approval_id,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("approval ID conflicts with prior content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO action_approval_records(
+                    approval_id, action_digest, prepared_id, attempt_id,
+                    granted_at, expires_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    approval.approval_id,
+                    approval.action_digest,
+                    approval.prepared_id,
+                    approval.attempt_id,
+                    approval.granted_at.isoformat(),
+                    approval.expires_at.isoformat() if approval.expires_at else None,
+                    payload,
+                ),
+            )
+
+    def get_action_approval(self, approval_id: str) -> ActionApprovalRecord | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM action_approval_records WHERE approval_id = ?",
+                (approval_id,),
+            ).fetchone()
+        return ActionApprovalRecord.model_validate_json(row[0]) if row else None
+
+    def save_provider_package_ingest(
+        self,
+        package: ProviderPackage,
+        verification: PackageVerificationResult,
+        *,
+        source_id: str,
+        imported_at: datetime,
+        content_artifacts: list[tuple[ArtifactReference, str, str]],
+        artifact_results: list[tuple[ArtifactReference, ArtifactVerificationResult]],
+        evidence_records: list[tuple[EvidenceReference, str, str]],
+        acceptances: list[EvidenceAcceptance],
+        candidates: list[RouteCandidate],
+        snapshots: list[CandidateVerificationSnapshot],
+    ) -> None:
+        """Atomically publish a fully evaluated package ingest into trusted state."""
+
+        package_payload = package.model_dump_json(by_alias=True)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM provider_packages WHERE package_digest = ?",
+                (verification.package_digest,),
+            ).fetchone()
+            if row is not None and row[0] != package_payload:
+                raise ConfigurationError("provider package digest collides with different content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO provider_packages(
+                    package_digest, package_id, package_version, provider_id, source_id,
+                    imported_at, integrity_status, effective_identity_trust, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    verification.package_digest,
+                    package.metadata.package_id,
+                    package.metadata.version,
+                    package.spec.provider.provider_id,
+                    source_id,
+                    imported_at.isoformat(),
+                    verification.integrity_status.value,
+                    verification.effective_identity_trust.value,
+                    package_payload,
+                ),
+            )
+            for signature_result in verification.signatures:
+                self._save_package_signature_locked(
+                    connection,
+                    verification.package_digest,
+                    signature_result,
+                    imported_at,
+                )
+
+            for reference, cas_path, source_kind in content_artifacts:
+                existing = connection.execute(
+                    """
+                    SELECT media_type, size_bytes, cas_path FROM content_artifacts
+                    WHERE artifact_digest = ?
+                    """,
+                    (reference.digest,),
+                ).fetchone()
+                expected = (reference.media_type, reference.size_bytes, cas_path)
+                if existing is not None and tuple(existing) != expected:
+                    raise ConfigurationError(
+                        "content artifact digest collides with different metadata"
+                    )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO content_artifacts(
+                        artifact_digest, media_type, size_bytes, cas_path,
+                        source_kind, verified_at
+                    ) VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        reference.digest,
+                        reference.media_type,
+                        reference.size_bytes,
+                        cas_path,
+                        source_kind,
+                        imported_at.isoformat(),
+                    ),
+                )
+            for reference, artifact_result in artifact_results:
+                connection.execute(
+                    """
+                    INSERT INTO provider_package_artifacts(
+                        package_digest, artifact_id, artifact_digest, required, status,
+                        failure_code, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(package_digest, artifact_id) DO UPDATE SET
+                        status = excluded.status,
+                        failure_code = excluded.failure_code,
+                        payload_json = excluded.payload_json
+                    """,
+                    (
+                        verification.package_digest,
+                        reference.artifact_id,
+                        reference.digest,
+                        int(reference.required),
+                        artifact_result.status.value,
+                        artifact_result.failure_code,
+                        artifact_result.model_dump_json(),
+                    ),
+                )
+            for evidence, artifact_digest, effective_trust in evidence_records:
+                payload = evidence.model_dump_json()
+                existing = connection.execute(
+                    """
+                    SELECT payload_json FROM evidence_records
+                    WHERE package_digest = ? AND evidence_id = ?
+                    """,
+                    (verification.package_digest, evidence.evidence_id),
+                ).fetchone()
+                if existing is not None and existing[0] != payload:
+                    raise ConfigurationError("evidence identity collides with different content")
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO evidence_records(
+                        package_digest, evidence_id, artifact_digest, evidence_type, route_id,
+                        route_fingerprint, workload_digest, producer_id, declared_trust,
+                        effective_trust, valid_from, expires_at, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        verification.package_digest,
+                        evidence.evidence_id,
+                        artifact_digest,
+                        evidence.evidence_type.value,
+                        evidence.subject.route_id,
+                        evidence.subject.route_fingerprint,
+                        evidence.subject.workload_digest,
+                        evidence.producer.producer_id,
+                        evidence.trust_claim.value,
+                        effective_trust,
+                        (evidence.validity.not_before or evidence.validity.issued_at).isoformat(),
+                        (
+                            evidence.validity.expires_at.isoformat()
+                            if evidence.validity.expires_at is not None
+                            else None
+                        ),
+                        payload,
+                    ),
+                )
+            for acceptance in acceptances:
+                payload = acceptance.model_dump_json()
+                existing = connection.execute(
+                    "SELECT payload_json FROM evidence_acceptances WHERE acceptance_id = ?",
+                    (acceptance.acceptance_id,),
+                ).fetchone()
+                if existing is not None and existing[0] != payload:
+                    raise ConfigurationError(
+                        "evidence acceptance ID conflicts with prior content"
+                    )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO evidence_acceptances(
+                        acceptance_id, package_digest, evidence_id, executor_id, metric,
+                        status, reason_code, applicability, confidence, effective_trust,
+                        evaluated_at, rate_card_snapshot_id, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        acceptance.acceptance_id,
+                        acceptance.package_digest,
+                        acceptance.evidence_id,
+                        acceptance.candidate_id,
+                        acceptance.metric,
+                        acceptance.status.value,
+                        acceptance.reason_code,
+                        acceptance.applicability,
+                        str(acceptance.confidence),
+                        acceptance.effective_trust.value,
+                        acceptance.evaluated_at.isoformat(),
+                        acceptance.rate_card_snapshot_id,
+                        payload,
+                    ),
+                )
+            for snapshot in snapshots:
+                payload = snapshot.model_dump_json()
+                existing = connection.execute(
+                    """
+                    SELECT payload_json FROM candidate_verification_snapshots
+                    WHERE snapshot_id = ?
+                    """,
+                    (snapshot.snapshot_id,),
+                ).fetchone()
+                if existing is not None and existing[0] != payload:
+                    raise ConfigurationError(
+                        "verification snapshot ID conflicts with prior content"
+                    )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO candidate_verification_snapshots(
+                        snapshot_id, executor_id, package_digest, route_fingerprint,
+                        created_at, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        snapshot.snapshot_id,
+                        snapshot.candidate_id,
+                        snapshot.package_digest,
+                        snapshot.route_fingerprint,
+                        snapshot.created_at.isoformat(),
+                        payload,
+                    ),
+                )
+            for candidate in candidates:
+                connection.execute(
+                    """
+                    INSERT INTO route_candidates(
+                        executor_id, source_id, fingerprint, status, package_digest,
+                        package_fingerprint, verification_snapshot_id, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(executor_id) DO UPDATE SET
+                        source_id = excluded.source_id,
+                        fingerprint = excluded.fingerprint,
+                        status = excluded.status,
+                        package_digest = excluded.package_digest,
+                        package_fingerprint = excluded.package_fingerprint,
+                        verification_snapshot_id = excluded.verification_snapshot_id,
+                        payload_json = excluded.payload_json
+                    """,
+                    (
+                        candidate.executor_id,
+                        candidate.source_id,
+                        candidate.behavior_fingerprint,
+                        candidate.status.value,
+                        candidate.package_digest,
+                        candidate.package_fingerprint,
+                        candidate.verification_snapshot_id,
+                        candidate.model_dump_json(),
+                    ),
+                )
+
+    def save_provider_package_audit_event(
+        self,
+        *,
+        event_id: str,
+        event_type: str,
+        occurred_at: datetime,
+        package_digest: str | None = None,
+        executor_id: str | None = None,
+        reason_code: str | None = None,
+    ) -> None:
+        payload = json.dumps(
+            {
+                "event_id": event_id,
+                "event_type": event_type,
+                "package_digest": package_digest,
+                "executor_id": executor_id,
+                "reason_code": reason_code,
+                "occurred_at": occurred_at.isoformat(),
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
         with self._lock, self._connection:
             self._connection.execute(
                 """
-                INSERT INTO route_candidates
-                    (executor_id, source_id, fingerprint, status, payload_json)
-                VALUES (?, ?, ?, ?, ?)
-                ON CONFLICT(executor_id) DO UPDATE SET
-                    source_id = excluded.source_id,
-                    fingerprint = excluded.fingerprint,
+                INSERT OR IGNORE INTO provider_package_audit_events(
+                    event_id, package_digest, executor_id, event_type,
+                    reason_code, occurred_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    event_id,
+                    package_digest,
+                    executor_id,
+                    event_type,
+                    reason_code,
+                    occurred_at.isoformat(),
+                    payload,
+                ),
+            )
+
+    def save_provider_package(
+        self,
+        package: ProviderPackage,
+        verification: PackageVerificationResult,
+        *,
+        source_id: str,
+        imported_at: datetime,
+    ) -> ProviderPackage:
+        payload = package.model_dump_json(by_alias=True)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM provider_packages WHERE package_digest = ?",
+                (verification.package_digest,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("provider package digest collides with different content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO provider_packages(
+                    package_digest, package_id, package_version, provider_id, source_id,
+                    imported_at, integrity_status, effective_identity_trust, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    verification.package_digest,
+                    package.metadata.package_id,
+                    package.metadata.version,
+                    package.spec.provider.provider_id,
+                    source_id,
+                    imported_at.isoformat(),
+                    verification.integrity_status.value,
+                    verification.effective_identity_trust.value,
+                    payload,
+                ),
+            )
+            for result in verification.signatures:
+                self._save_package_signature_locked(
+                    connection,
+                    verification.package_digest,
+                    result,
+                    imported_at,
+                )
+        return package
+
+    @staticmethod
+    def _save_package_signature_locked(
+        connection: sqlite3.Connection,
+        package_digest: str,
+        result: SignatureVerificationResult,
+        verified_at: datetime,
+    ) -> None:
+        payload = result.model_dump_json()
+        row = connection.execute(
+            """
+            SELECT payload_json FROM provider_package_signatures
+            WHERE package_digest = ? AND signature_id = ?
+            """,
+            (package_digest, result.signature_id),
+        ).fetchone()
+        if row is not None and row[0] != payload:
+            raise ConfigurationError("package signature verification conflicts with prior result")
+        connection.execute(
+            """
+            INSERT OR IGNORE INTO provider_package_signatures(
+                package_digest, signature_id, key_id, role, status, effective_trust,
+                verified_at, failure_code, payload_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                package_digest,
+                result.signature_id,
+                result.key_id,
+                "package_publisher",
+                result.status.value,
+                result.effective_trust.value,
+                verified_at.isoformat(),
+                result.failure_code,
+                payload,
+            ),
+        )
+
+    def get_provider_package(self, package_digest: str) -> ProviderPackage | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM provider_packages WHERE package_digest = ?",
+                (package_digest,),
+            ).fetchone()
+        return ProviderPackage.model_validate_json(row[0]) if row else None
+
+    def save_content_artifact(
+        self,
+        reference: ArtifactReference,
+        *,
+        cas_path: str,
+        source_kind: str,
+        verified_at: datetime,
+    ) -> None:
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                """
+                SELECT media_type, size_bytes, cas_path FROM content_artifacts
+                WHERE artifact_digest = ?
+                """,
+                (reference.digest,),
+            ).fetchone()
+            expected = (reference.media_type, reference.size_bytes, cas_path)
+            if row is not None and tuple(row) != expected:
+                raise ConfigurationError("content artifact digest collides with different metadata")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO content_artifacts(
+                    artifact_digest, media_type, size_bytes, cas_path, source_kind, verified_at
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    reference.digest,
+                    reference.media_type,
+                    reference.size_bytes,
+                    cas_path,
+                    source_kind,
+                    verified_at.isoformat(),
+                ),
+            )
+
+    def save_package_artifact_result(
+        self,
+        package_digest: str,
+        reference: ArtifactReference,
+        result: ArtifactVerificationResult,
+    ) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO provider_package_artifacts(
+                    package_digest, artifact_id, artifact_digest, required, status,
+                    failure_code, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(package_digest, artifact_id) DO UPDATE SET
                     status = excluded.status,
+                    failure_code = excluded.failure_code,
+                    payload_json = excluded.payload_json
+                """,
+                (
+                    package_digest,
+                    reference.artifact_id,
+                    reference.digest,
+                    int(reference.required),
+                    result.status.value,
+                    result.failure_code,
+                    result.model_dump_json(),
+                ),
+            )
+
+    def save_evidence_record(
+        self,
+        package_digest: str,
+        evidence: EvidenceReference,
+        *,
+        artifact_digest: str,
+        effective_trust: str,
+    ) -> None:
+        payload = evidence.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                """
+                SELECT payload_json FROM evidence_records
+                WHERE package_digest = ? AND evidence_id = ?
+                """,
+                (package_digest, evidence.evidence_id),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("evidence identity collides with different content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO evidence_records(
+                    package_digest, evidence_id, artifact_digest, evidence_type, route_id,
+                    route_fingerprint, workload_digest, producer_id, declared_trust,
+                    effective_trust, valid_from, expires_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    package_digest,
+                    evidence.evidence_id,
+                    artifact_digest,
+                    evidence.evidence_type.value,
+                    evidence.subject.route_id,
+                    evidence.subject.route_fingerprint,
+                    evidence.subject.workload_digest,
+                    evidence.producer.producer_id,
+                    evidence.trust_claim.value,
+                    effective_trust,
+                    (evidence.validity.not_before or evidence.validity.issued_at).isoformat(),
+                    (
+                        evidence.validity.expires_at.isoformat()
+                        if evidence.validity.expires_at is not None
+                        else None
+                    ),
+                    payload,
+                ),
+            )
+
+    def save_evidence_acceptance(self, acceptance: EvidenceAcceptance) -> None:
+        payload = acceptance.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM evidence_acceptances WHERE acceptance_id = ?",
+                (acceptance.acceptance_id,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("evidence acceptance ID conflicts with prior content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO evidence_acceptances(
+                    acceptance_id, package_digest, evidence_id, executor_id, metric, status,
+                    reason_code, applicability, confidence, effective_trust, evaluated_at,
+                    rate_card_snapshot_id, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    acceptance.acceptance_id,
+                    acceptance.package_digest,
+                    acceptance.evidence_id,
+                    acceptance.candidate_id,
+                    acceptance.metric,
+                    acceptance.status.value,
+                    acceptance.reason_code,
+                    acceptance.applicability,
+                    str(acceptance.confidence),
+                    acceptance.effective_trust.value,
+                    acceptance.evaluated_at.isoformat(),
+                    acceptance.rate_card_snapshot_id,
+                    payload,
+                ),
+            )
+
+    def list_evidence_acceptances(self, executor_id: str) -> list[EvidenceAcceptance]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT payload_json FROM evidence_acceptances
+                WHERE executor_id = ? ORDER BY evaluated_at, acceptance_id
+                """,
+                (executor_id,),
+            ).fetchall()
+        return [EvidenceAcceptance.model_validate_json(row[0]) for row in rows]
+
+    def get_evidence_acceptance(self, acceptance_id: str) -> EvidenceAcceptance | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM evidence_acceptances WHERE acceptance_id = ?",
+                (acceptance_id,),
+            ).fetchone()
+        return EvidenceAcceptance.model_validate_json(row[0]) if row else None
+
+    def list_evidence_records(self, executor_id: str) -> list[EvidenceReference]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT payload_json FROM evidence_records
+                WHERE route_id = ? ORDER BY evidence_type, evidence_id
+                """,
+                (executor_id,),
+            ).fetchall()
+        return [EvidenceReference.model_validate_json(row[0]) for row in rows]
+
+    def get_evidence_record(self, evidence_id: str) -> EvidenceReference | None:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM evidence_records WHERE evidence_id = ?",
+                (evidence_id,),
+            ).fetchall()
+        if len(rows) > 1:
+            raise ConfigurationError("evidence ID is ambiguous across package revisions")
+        return EvidenceReference.model_validate_json(rows[0][0]) if rows else None
+
+    def list_evidence_artifact_paths(self, evidence_type: str) -> list[Path]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT DISTINCT content_artifacts.cas_path
+                FROM evidence_records
+                JOIN content_artifacts
+                  ON content_artifacts.artifact_digest = evidence_records.artifact_digest
+                WHERE evidence_records.evidence_type = ?
+                ORDER BY content_artifacts.cas_path
+                """,
+                (evidence_type,),
+            ).fetchall()
+        return [Path(row[0]) for row in rows]
+
+    def save_smoke_test_report(self, report: SmokeTestReport) -> None:
+        payload = report.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM smoke_test_reports WHERE smoke_report_id = ?",
+                (report.smoke_report_id,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("smoke report ID conflicts with prior content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO smoke_test_reports(
+                    smoke_report_id, executor_id, route_fingerprint, status,
+                    finished_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    report.smoke_report_id,
+                    report.candidate_id,
+                    report.route_fingerprint,
+                    report.status.value,
+                    report.finished_at.isoformat(),
+                    payload,
+                ),
+            )
+
+    def save_smoke_candidate_result(
+        self,
+        reports: tuple[SmokeTestReport, ...],
+        snapshot: CandidateVerificationSnapshot,
+        candidate: RouteCandidate,
+    ) -> None:
+        with self._immediate_transaction() as connection:
+            for report in reports:
+                payload = report.model_dump_json()
+                row = connection.execute(
+                    "SELECT payload_json FROM smoke_test_reports WHERE smoke_report_id = ?",
+                    (report.smoke_report_id,),
+                ).fetchone()
+                if row is not None and row[0] != payload:
+                    raise ConfigurationError("smoke report ID conflicts with prior content")
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO smoke_test_reports(
+                        smoke_report_id, executor_id, route_fingerprint, status,
+                        finished_at, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        report.smoke_report_id,
+                        report.candidate_id,
+                        report.route_fingerprint,
+                        report.status.value,
+                        report.finished_at.isoformat(),
+                        payload,
+                    ),
+                )
+            snapshot_payload = snapshot.model_dump_json()
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO candidate_verification_snapshots(
+                    snapshot_id, executor_id, package_digest, route_fingerprint,
+                    created_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    snapshot.snapshot_id,
+                    snapshot.candidate_id,
+                    snapshot.package_digest,
+                    snapshot.route_fingerprint,
+                    snapshot.created_at.isoformat(),
+                    snapshot_payload,
+                ),
+            )
+            connection.execute(
+                """
+                INSERT INTO route_candidates(
+                    executor_id, source_id, fingerprint, status, package_digest,
+                    package_fingerprint, verification_snapshot_id, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(executor_id) DO UPDATE SET
+                    status = excluded.status,
+                    fingerprint = excluded.fingerprint,
+                    verification_snapshot_id = excluded.verification_snapshot_id,
                     payload_json = excluded.payload_json
                 """,
                 (
@@ -4907,6 +5807,95 @@ class ReceiptStore:
                     candidate.source_id,
                     candidate.behavior_fingerprint,
                     candidate.status.value,
+                    candidate.package_digest,
+                    candidate.package_fingerprint,
+                    candidate.verification_snapshot_id,
+                    candidate.model_dump_json(),
+                ),
+            )
+
+    def latest_smoke_test_report(self, executor_id: str) -> SmokeTestReport | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT payload_json FROM smoke_test_reports
+                WHERE executor_id = ? ORDER BY finished_at DESC, smoke_report_id DESC LIMIT 1
+                """,
+                (executor_id,),
+            ).fetchone()
+        return SmokeTestReport.model_validate_json(row[0]) if row else None
+
+    def save_candidate_verification_snapshot(
+        self,
+        snapshot: CandidateVerificationSnapshot,
+    ) -> None:
+        payload = snapshot.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                """
+                SELECT payload_json FROM candidate_verification_snapshots
+                WHERE snapshot_id = ?
+                """,
+                (snapshot.snapshot_id,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("verification snapshot ID conflicts with prior content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO candidate_verification_snapshots(
+                    snapshot_id, executor_id, package_digest, route_fingerprint,
+                    created_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    snapshot.snapshot_id,
+                    snapshot.candidate_id,
+                    snapshot.package_digest,
+                    snapshot.route_fingerprint,
+                    snapshot.created_at.isoformat(),
+                    payload,
+                ),
+            )
+
+    def get_candidate_verification_snapshot(
+        self,
+        snapshot_id: str,
+    ) -> CandidateVerificationSnapshot | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT payload_json FROM candidate_verification_snapshots
+                WHERE snapshot_id = ?
+                """,
+                (snapshot_id,),
+            ).fetchone()
+        return CandidateVerificationSnapshot.model_validate_json(row[0]) if row else None
+
+    def save_route_candidate(self, candidate: RouteCandidate) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO route_candidates
+                    (executor_id, source_id, fingerprint, status, package_digest,
+                     package_fingerprint, verification_snapshot_id, payload_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(executor_id) DO UPDATE SET
+                    source_id = excluded.source_id,
+                    fingerprint = excluded.fingerprint,
+                    status = excluded.status,
+                    package_digest = excluded.package_digest,
+                    package_fingerprint = excluded.package_fingerprint,
+                    verification_snapshot_id = excluded.verification_snapshot_id,
+                    payload_json = excluded.payload_json
+                """,
+                (
+                    candidate.executor_id,
+                    candidate.source_id,
+                    candidate.behavior_fingerprint,
+                    candidate.status.value,
+                    candidate.package_digest,
+                    candidate.package_fingerprint,
+                    candidate.verification_snapshot_id,
                     candidate.model_dump_json(),
                 ),
             )
@@ -5120,6 +6109,87 @@ class ReceiptStore:
                 (resource_id,),
             ).fetchone()
         return QuotaObservation.model_validate_json(row[0]) if row else None
+
+    def save_cache_affinity_observation(
+        self,
+        observation: CacheAffinityObservation,
+    ) -> None:
+        payload = observation.model_dump_json()
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                """
+                SELECT payload_json FROM cache_affinity_observations
+                WHERE observation_id = ?
+                """,
+                (observation.observation_id,),
+            ).fetchone()
+            if row is not None and row[0] != payload:
+                raise ConfigurationError("cache observation ID conflicts with prior content")
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO cache_affinity_observations(
+                    observation_id, scope_key_hmac, route_id, observed_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    observation.observation_id,
+                    observation.scope_key_hmac,
+                    observation.route_id,
+                    observation.observed_at.isoformat(),
+                    payload,
+                ),
+            )
+
+    def latest_cache_affinity_observation(
+        self,
+        scope_key_hmac: str,
+        route_id: str,
+    ) -> CacheAffinityObservation | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT payload_json FROM cache_affinity_observations
+                WHERE scope_key_hmac = ? AND route_id = ?
+                ORDER BY observed_at DESC, observation_id DESC LIMIT 1
+                """,
+                (scope_key_hmac, route_id),
+            ).fetchone()
+        return CacheAffinityObservation.model_validate_json(row[0]) if row else None
+
+    def save_registry_candidate(self, candidate: RegistryCandidate) -> None:
+        payload = candidate.model_dump_json()
+        with self._lock, self._connection:
+            self._connection.execute(
+                """
+                INSERT INTO registry_candidates(
+                    registry_candidate_id, adapter_id, retrieved_at,
+                    raw_metadata_digest, payload_json
+                ) VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(registry_candidate_id) DO UPDATE SET
+                    adapter_id = excluded.adapter_id,
+                    retrieved_at = excluded.retrieved_at,
+                    raw_metadata_digest = excluded.raw_metadata_digest,
+                    payload_json = excluded.payload_json
+                """,
+                (
+                    candidate.registry_candidate_id,
+                    candidate.adapter_id,
+                    candidate.retrieved_at.isoformat(),
+                    candidate.raw_metadata_digest,
+                    payload,
+                ),
+            )
+
+    def get_registry_candidate(self, candidate_id: str) -> RegistryCandidate | None:
+        with self._lock:
+            row = self._connection.execute(
+                """
+                SELECT payload_json FROM registry_candidates
+                WHERE registry_candidate_id = ?
+                """,
+                (candidate_id,),
+            ).fetchone()
+        return RegistryCandidate.model_validate_json(row[0]) if row else None
 
     def save_decision(self, decision: RouteDecision) -> None:
         with self._lock, self._connection:

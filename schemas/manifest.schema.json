@@ -303,6 +303,39 @@
       "title": "AuthorizationPolicy",
       "type": "object"
     },
+    "CacheAffinityPolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "half_life_seconds": {
+          "default": 3600,
+          "exclusiveMinimum": 0,
+          "maximum": 2592000,
+          "title": "Half Life Seconds",
+          "type": "number"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "CacheAffinityPolicyConfig",
+      "type": "object"
+    },
     "CapabilityDefinition": {
       "additionalProperties": false,
       "properties": {
@@ -674,6 +707,32 @@
       ],
       "title": "EstimateSource",
       "type": "string"
+    },
+    "EvidenceReusePolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "EvidenceReusePolicyConfig",
+      "type": "object"
     },
     "EvidenceSource": {
       "enum": [
@@ -1151,6 +1210,12 @@
           "title": "Subscription Rules",
           "type": "array"
         },
+        "cache_affinity": {
+          "$ref": "#/$defs/CacheAffinityPolicyConfig"
+        },
+        "evidence_reuse": {
+          "$ref": "#/$defs/EvidenceReusePolicyConfig"
+        },
         "uncertainty_penalty": {
           "default": 0.1,
           "description": "Added score burden at zero estimate confidence.",
@@ -1173,6 +1238,55 @@
         }
       },
       "title": "PolicyConfig",
+      "type": "object"
+    },
+    "ProviderPackageConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_root": {
+          "default": ".aeep/artifacts",
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Artifact Root",
+          "type": "string"
+        },
+        "maximum_artifact_bytes": {
+          "default": 52428800,
+          "maximum": 52428800,
+          "minimum": 1,
+          "title": "Maximum Artifact Bytes",
+          "type": "integer"
+        },
+        "allow_remote_artifacts": {
+          "default": false,
+          "title": "Allow Remote Artifacts",
+          "type": "boolean"
+        },
+        "allowed_artifact_hosts": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Artifact Hosts",
+          "type": "array"
+        },
+        "allow_private_addresses": {
+          "default": false,
+          "title": "Allow Private Addresses",
+          "type": "boolean"
+        },
+        "allow_self_asserted_priors": {
+          "default": true,
+          "title": "Allow Self Asserted Priors",
+          "type": "boolean"
+        },
+        "require_local_smoke": {
+          "default": true,
+          "title": "Require Local Smoke",
+          "type": "boolean"
+        }
+      },
+      "title": "ProviderPackageConfig",
       "type": "object"
     },
     "QuotaSource": {
@@ -1423,10 +1537,22 @@
           "title": "Cached Input Tokens",
           "type": "integer"
         },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
         "output_tokens": {
           "default": 0,
           "minimum": 0,
           "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
           "type": "integer"
         },
         "subscription_units": {
@@ -1951,13 +2077,14 @@
   "additionalProperties": false,
   "properties": {
     "version": {
-      "default": "0.4",
+      "default": "0.5",
       "enum": [
         "0.1",
         "0.15",
         "0.2",
         "0.3",
-        "0.4"
+        "0.4",
+        "0.5"
       ],
       "title": "Version",
       "type": "string"
@@ -1999,6 +2126,9 @@
     },
     "economic_evidence": {
       "$ref": "#/$defs/EconomicEvidenceConfig"
+    },
+    "provider_packages": {
+      "$ref": "#/$defs/ProviderPackageConfig"
     },
     "policies": {
       "additionalProperties": {

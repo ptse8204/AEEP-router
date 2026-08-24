@@ -1,6 +1,6 @@
 # AEEP economic accounting
 
-AEEP 0.4 keeps resource dimensions and their evidence separate. It does not
+AEEP 0.5 keeps resource dimensions and their evidence separate. It does not
 produce one universal dollar score.
 
 | Ledger | What it records | Routing | Cash claim |

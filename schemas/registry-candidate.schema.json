@@ -1,0 +1,165 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "PackageLocatorKind": {
+      "enum": [
+        "local",
+        "https",
+        "repository"
+      ],
+      "title": "PackageLocatorKind",
+      "type": "string"
+    },
+    "ProviderPackageLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/PackageLocatorKind"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "subdirectory": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subdirectory"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "ProviderPackageLocator",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "registry_candidate_id": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Registry Candidate Id",
+      "type": "string"
+    },
+    "adapter_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Adapter Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "maxLength": 4096,
+      "title": "Description",
+      "type": "string"
+    },
+    "version": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Version"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Tags",
+      "type": "array"
+    },
+    "source_repository": {
+      "anyOf": [
+        {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Repository"
+    },
+    "package_locator": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ProviderPackageLocator"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "remote_endpoint": {
+      "anyOf": [
+        {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Remote Endpoint"
+    },
+    "provenance": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Provenance",
+      "type": "object"
+    },
+    "marketplace_labels": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Marketplace Labels",
+      "type": "object"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "raw_metadata_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Raw Metadata Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "registry_candidate_id",
+    "adapter_id",
+    "name",
+    "retrieved_at",
+    "raw_metadata_digest"
+  ],
+  "title": "RegistryCandidate",
+  "type": "object"
+}

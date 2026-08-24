@@ -16,7 +16,11 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 )
 
 from ..models import SignatureAlgorithm, SignatureEnvelopeV2
-from .canonical import CANONICALIZATION_VERSION
+from .canonical import (
+    CANONICALIZATION_VERSION,
+    SUPPORTED_CANONICALIZATION_VERSIONS,
+    CanonicalizationVersion,
+)
 
 ED25519_ALGORITHM = SignatureAlgorithm.ED25519
 HMAC_SHA256_ALGORITHM = SignatureAlgorithm.HMAC_SHA256
@@ -86,13 +90,20 @@ class HMACSignerV1:
 
     algorithm = HMAC_SHA256_ALGORITHM
 
-    def __init__(self, key: bytes, *, key_id: str) -> None:
+    def __init__(
+        self,
+        key: bytes,
+        *,
+        key_id: str,
+        canonicalization_version: CanonicalizationVersion = CANONICALIZATION_VERSION,
+    ) -> None:
         if len(key) < 32:
             raise ValueError("HMAC signing key must contain at least 32 bytes")
         if not key_id:
             raise ValueError("key_id must not be empty")
         self._key = key
         self.key_id = key_id
+        self.canonicalization_version = canonicalization_version
 
     def sign(self, payload: bytes) -> SignatureEnvelopeV2:
         digest = hmac.new(self._key, payload, hashlib.sha256).digest()
@@ -100,17 +111,18 @@ class HMACSignerV1:
             algorithm=self.algorithm,
             key_id=self.key_id,
             value=encode_base64url(digest),
-            canonicalization_version=CANONICALIZATION_VERSION,
+            canonicalization_version=self.canonicalization_version,
         )
 
     def verify(self, payload: bytes, signature: SignatureEnvelopeV2) -> bool:
         if (
             signature.algorithm != self.algorithm
             or signature.key_id != self.key_id
-            or signature.canonicalization_version != CANONICALIZATION_VERSION
+            or signature.canonicalization_version not in SUPPORTED_CANONICALIZATION_VERSIONS
         ):
             return False
-        return hmac.compare_digest(self.sign(payload).value, signature.value)
+        digest = hmac.new(self._key, payload, hashlib.sha256).digest()
+        return hmac.compare_digest(encode_base64url(digest), signature.value)
 
 
 class Ed25519Signer:
@@ -118,19 +130,45 @@ class Ed25519Signer:
 
     algorithm = ED25519_ALGORITHM
 
-    def __init__(self, private_key: Ed25519PrivateKey, *, key_id: str) -> None:
+    def __init__(
+        self,
+        private_key: Ed25519PrivateKey,
+        *,
+        key_id: str,
+        canonicalization_version: CanonicalizationVersion = CANONICALIZATION_VERSION,
+    ) -> None:
         if not key_id:
             raise ValueError("key_id must not be empty")
         self._private_key = private_key
         self.key_id = key_id
+        self.canonicalization_version = canonicalization_version
 
     @classmethod
-    def generate(cls, *, key_id: str) -> Ed25519Signer:
-        return cls(Ed25519PrivateKey.generate(), key_id=key_id)
+    def generate(
+        cls,
+        *,
+        key_id: str,
+        canonicalization_version: CanonicalizationVersion = CANONICALIZATION_VERSION,
+    ) -> Ed25519Signer:
+        return cls(
+            Ed25519PrivateKey.generate(),
+            key_id=key_id,
+            canonicalization_version=canonicalization_version,
+        )
 
     @classmethod
-    def from_private_bytes(cls, private_key: bytes, *, key_id: str) -> Ed25519Signer:
-        return cls(Ed25519PrivateKey.from_private_bytes(private_key), key_id=key_id)
+    def from_private_bytes(
+        cls,
+        private_key: bytes,
+        *,
+        key_id: str,
+        canonicalization_version: CanonicalizationVersion = CANONICALIZATION_VERSION,
+    ) -> Ed25519Signer:
+        return cls(
+            Ed25519PrivateKey.from_private_bytes(private_key),
+            key_id=key_id,
+            canonicalization_version=canonicalization_version,
+        )
 
     @property
     def public_key(self) -> Ed25519PublicKey:
@@ -157,7 +195,7 @@ class Ed25519Signer:
             algorithm=self.algorithm,
             key_id=self.key_id,
             value=encode_base64url(self._private_key.sign(payload)),
-            canonicalization_version=CANONICALIZATION_VERSION,
+            canonicalization_version=self.canonicalization_version,
         )
 
 
@@ -170,7 +208,7 @@ def verify_ed25519(
 
     if (
         signature.algorithm != ED25519_ALGORITHM
-        or signature.canonicalization_version != CANONICALIZATION_VERSION
+        or signature.canonicalization_version not in SUPPORTED_CANONICALIZATION_VERSIONS
     ):
         return False
     try:

@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "DSHLiveComparisonArm": {
+      "enum": [
+        "DIRECT_MODEL",
+        "AEEP_ROUTED"
+      ],
+      "title": "DSHLiveComparisonArm",
+      "type": "string"
+    },
+    "DSHLiveComparisonTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.5",
+          "default": "0.5",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trial_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "task_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Task Id",
+          "type": "string"
+        },
+        "arm": {
+          "$ref": "#/$defs/DSHLiveComparisonArm"
+        },
+        "correct": {
+          "title": "Correct",
+          "type": "boolean"
+        },
+        "model_calls": {
+          "minimum": 1,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "tool_calls": {
+          "minimum": 0,
+          "title": "Tool Calls",
+          "type": "integer"
+        },
+        "receipt_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receipt Id"
+        },
+        "usage": {
+          "$ref": "#/$defs/DSHLiveUsage"
+        }
+      },
+      "required": [
+        "trial_id",
+        "task_id",
+        "arm",
+        "correct",
+        "model_calls",
+        "tool_calls",
+        "usage"
+      ],
+      "title": "DSHLiveComparisonTrial",
+      "type": "object"
+    },
+    "DSHLiveUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "model_calls": {
+          "minimum": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "cache_read_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Tokens",
+          "type": "integer"
+        },
+        "cache_write_tokens": {
+          "minimum": 0,
+          "title": "Cache Write Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "model_calls",
+        "input_tokens",
+        "output_tokens",
+        "cache_read_tokens",
+        "cache_write_tokens",
+        "total_tokens"
+      ],
+      "title": "DSHLiveUsage",
+      "type": "object"
+    },
+    "ProofGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ProofGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5",
+      "default": "0.5",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "harness_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Harness Version",
+      "type": "string"
+    },
+    "mcp_client_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Mcp Client Version",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "reasoning_effort": {
+      "const": "low",
+      "title": "Reasoning Effort",
+      "type": "string"
+    },
+    "read_only": {
+      "const": true,
+      "default": true,
+      "title": "Read Only",
+      "type": "boolean"
+    },
+    "pilot_sessions_excluded": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Pilot Sessions Excluded",
+      "type": "integer"
+    },
+    "imported_plugin_candidates": {
+      "minimum": 0,
+      "title": "Imported Plugin Candidates",
+      "type": "integer"
+    },
+    "active_plugin_candidates_after": {
+      "minimum": 0,
+      "title": "Active Plugin Candidates After",
+      "type": "integer"
+    },
+    "plugin_capability_discovered": {
+      "title": "Plugin Capability Discovered",
+      "type": "boolean"
+    },
+    "plugin_route_selected": {
+      "title": "Plugin Route Selected",
+      "type": "boolean"
+    },
+    "plugin_route_estimate_available": {
+      "title": "Plugin Route Estimate Available",
+      "type": "boolean"
+    },
+    "plugin_token_estimate_status": {
+      "enum": [
+        "measured",
+        "estimated",
+        "unavailable"
+      ],
+      "title": "Plugin Token Estimate Status",
+      "type": "string"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/DSHLiveComparisonTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "direct_total_tokens": {
+      "minimum": 0,
+      "title": "Direct Total Tokens",
+      "type": "integer"
+    },
+    "aeep_total_tokens": {
+      "minimum": 0,
+      "title": "Aeep Total Tokens",
+      "type": "integer"
+    },
+    "tokens_saved_by_aeep": {
+      "title": "Tokens Saved By Aeep",
+      "type": "integer"
+    },
+    "savings_percent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Savings Percent"
+    },
+    "direct_correct": {
+      "minimum": 0,
+      "title": "Direct Correct",
+      "type": "integer"
+    },
+    "aeep_correct": {
+      "minimum": 0,
+      "title": "Aeep Correct",
+      "type": "integer"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/ProofGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "generated_at",
+    "harness_version",
+    "mcp_client_version",
+    "model",
+    "reasoning_effort",
+    "imported_plugin_candidates",
+    "active_plugin_candidates_after",
+    "plugin_capability_discovered",
+    "plugin_route_selected",
+    "plugin_route_estimate_available",
+    "plugin_token_estimate_status",
+    "trials",
+    "direct_total_tokens",
+    "aeep_total_tokens",
+    "tokens_saved_by_aeep",
+    "savings_percent",
+    "direct_correct",
+    "aeep_correct",
+    "gates"
+  ],
+  "title": "DSHLiveComparisonReport",
+  "type": "object"
+}

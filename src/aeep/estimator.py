@@ -22,6 +22,7 @@ from .models import (
     RouteEstimate,
     TrustLevel,
 )
+from .provider_package import EvidenceAcceptanceStatus
 from .store import ReceiptStore
 
 
@@ -35,6 +36,7 @@ class HistoricalEstimator:
         policy: PolicyConfig,
         features: ActionFeatures | None = None,
     ) -> RouteEstimate:
+        base = _shared_prior(self.store, spec, policy)
         receipts = [
             receipt
             for receipt in self.store.receipts_for_executor(spec.id, limit=200)
@@ -53,13 +55,13 @@ class HistoricalEstimator:
             )
         ]
         if not receipts:
-            return spec.estimate.model_copy(deep=True)
-        historical = _historical(receipts, spec.estimate)
+            return base
+        historical = _historical(receipts, base)
         sample_factor = len(receipts) / (len(receipts) + policy.history_prior_samples)
         blend = policy.history_weight * sample_factor
         return RouteEstimate(
-            resources=_blend_resources(spec.estimate.resources, historical.resources, blend),
-            cash=_blend_cash(spec.estimate.cash, historical.cash, blend),
+            resources=_blend_resources(base.resources, historical.resources, blend),
+            cash=_blend_cash(base.cash, historical.cash, blend),
             subscription_usage=(
                 historical.subscription_usage
                 if historical.subscription_usage
@@ -70,10 +72,155 @@ class HistoricalEstimator:
             ),
             quality_score=_blend(spec.estimate.quality_score, historical.quality_score, blend),
             risk_score=_blend(spec.estimate.risk_score, historical.risk_score, blend),
-            confidence=min(1.0, _blend(spec.estimate.confidence, historical.confidence, blend)),
+            confidence=min(1.0, _blend(base.confidence, historical.confidence, blend)),
             source=EstimateSource.BLENDED,
             sample_size=len(receipts),
         )
+
+
+def _shared_prior(store: ReceiptStore, spec: ExecutorSpec, policy: PolicyConfig) -> RouteEstimate:
+    base = spec.estimate.model_copy(deep=True)
+    if not policy.evidence_reuse.enabled:
+        return base
+    evidence = {item.evidence_id: item for item in store.list_evidence_records(spec.id)}
+    accepted = [
+        item
+        for item in store.list_evidence_acceptances(spec.id)
+        if item.status
+        in {
+            EvidenceAcceptanceStatus.ACCEPTED,
+            EvidenceAcceptanceStatus.ACCEPTED_AS_PRIOR,
+        }
+    ]
+    latest = {item.metric: item for item in accepted}
+    maximum_sample = 0
+    for metric, acceptance in latest.items():
+        record = evidence.get(acceptance.evidence_id)
+        if record is None or record.summary is None:
+            continue
+        summary = record.summary
+        sample_size = _integer_value(summary.get("sample_size")) or _summary_trials(summary)
+        maximum_sample = max(maximum_sample, sample_size)
+        weight = min(
+            policy.evidence_reuse.max_shared_weight,
+            float(acceptance.confidence)
+            * sample_size
+            / (sample_size + policy.evidence_reuse.shared_prior_samples),
+        )
+        if weight <= 0:
+            continue
+        if metric == "latency":
+            latency = _summary_median(summary.get("latency"), "median_ms", "end_to_end_ms")
+            if latency is not None:
+                base.resources.latency_ms = _blend(
+                    base.resources.latency_ms,
+                    latency,
+                    weight,
+                )
+        elif metric == "tokens":
+            tokens = summary.get("tokens")
+            if isinstance(tokens, dict):
+                for field in (
+                    "input_tokens",
+                    "cached_input_tokens",
+                    "cache_write_input_tokens",
+                    "output_tokens",
+                    "reasoning_output_tokens",
+                ):
+                    value = _summary_median(tokens.get(field), "median")
+                    if value is not None:
+                        setattr(
+                            base.resources,
+                            field,
+                            round(_blend(float(getattr(base.resources, field)), value, weight)),
+                        )
+        elif metric == "correctness":
+            success = summary.get("success")
+            if isinstance(success, dict):
+                rate = _number_value(success.get("success_rate"))
+                trials = _integer_value(success.get("trials"))
+                successes = _integer_value(success.get("successes"))
+                if rate is None and trials and successes is not None:
+                    rate = successes / trials
+                if rate is not None:
+                    base.success_probability = min(
+                        1.0,
+                        max(0.001, _blend(base.success_probability, rate, weight)),
+                    )
+                quality = _number_value(success.get("quality_median"))
+                if quality is not None:
+                    base.quality_score = min(
+                        1.0,
+                        max(0.0, _blend(base.quality_score, quality, weight)),
+                    )
+        elif metric == "cost":
+            cost = summary.get("cost")
+            if isinstance(cost, dict):
+                amount = _summary_median(
+                    cost.get("actual_cash"),
+                    "median",
+                    "actual_cash_usd",
+                )
+                if amount is None:
+                    amount = _number_value(cost.get("actual_cash_usd"))
+                if amount is not None and amount >= 0:
+                    base.cash = CashEstimate(
+                        amount_usd=Decimal(str(_blend(
+                            float(base.cash.amount_usd or Decimal(0)),
+                            amount,
+                            weight,
+                        ))),
+                        upper_bound_usd=base.cash.upper_bound_usd,
+                        evidence=MeasurementEvidence(
+                            status=EvidenceStatus.COMPLETE,
+                            source=EvidenceSource.STATIC_ESTIMATE,
+                            trust=acceptance.effective_trust,
+                            evidence_id=acceptance.evidence_id,
+                            observed_at=acceptance.evaluated_at,
+                        ),
+                    )
+        base.confidence = min(1.0, _blend(base.confidence, float(acceptance.confidence), weight))
+    if latest:
+        base.source = EstimateSource.BLENDED
+        base.sample_size = maximum_sample
+    return base
+
+
+def _number_value(value: Any) -> float | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if math.isfinite(parsed) else None
+
+
+def _integer_value(value: Any) -> int:
+    parsed = _number_value(value)
+    return int(parsed) if parsed is not None and parsed >= 0 else 0
+
+
+def _summary_trials(summary: dict[str, Any]) -> int:
+    success = summary.get("success")
+    return _integer_value(success.get("trials")) if isinstance(success, dict) else 0
+
+
+def _summary_median(value: Any, *keys: str) -> float | None:
+    direct = _number_value(value)
+    if direct is not None:
+        return direct
+    if not isinstance(value, dict):
+        return None
+    for key in keys:
+        parsed = _number_value(value.get(key))
+        if parsed is not None:
+            return parsed
+    for nested in value.values():
+        parsed = _summary_median(nested, *keys)
+        if parsed is not None:
+            return parsed
+    return None
 
 
 def action_features(value: dict[str, Any]) -> ActionFeatures:

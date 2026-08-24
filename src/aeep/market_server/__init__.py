@@ -1,4 +1,4 @@
-"""Local AEEP 0.4 reference provider and economic evidence market."""
+"""Local AEEP 0.5 reference provider and economic evidence market."""
 
 from .service import (
     CAPABILITY,

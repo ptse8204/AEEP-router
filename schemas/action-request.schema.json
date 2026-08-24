@@ -256,9 +256,156 @@
           },
           "title": "Subscription Quotas",
           "type": "object"
+        },
+        "cache_affinity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CacheRoutingContext"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "ActionContext",
+      "type": "object"
+    },
+    "CacheRoutingContext": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_scope_key_hmac": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Cache Scope Key Hmac",
+          "type": "string"
+        },
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "integration_adapter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Integration Adapter",
+          "type": "string"
+        },
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Route Id",
+          "type": "string"
+        },
+        "stable_prefix_digest_hmac": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Stable Prefix Digest Hmac",
+          "type": "string"
+        },
+        "previous_state_digest_hmac": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous State Digest Hmac"
+        },
+        "common_prefix_tokens_estimate": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Common Prefix Tokens Estimate",
+          "type": "integer"
+        },
+        "eligible_cached_tokens_estimate": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Eligible Cached Tokens Estimate",
+          "type": "integer"
+        },
+        "recent_cache_read_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Read Tokens",
+          "type": "integer"
+        },
+        "recent_cache_write_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Write Tokens",
+          "type": "integer"
+        },
+        "recent_cache_miss_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Miss Tokens",
+          "type": "integer"
+        },
+        "observed_hits": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Observed Hits",
+          "type": "integer"
+        },
+        "observed_attempts": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Observed Attempts",
+          "type": "integer"
+        },
+        "last_seen_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen At"
+        },
+        "compaction_generation": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Compaction Generation",
+          "type": "integer"
+        },
+        "context_reset_reason": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Reset Reason"
+        }
+      },
+      "required": [
+        "cache_scope_key_hmac",
+        "provider",
+        "model",
+        "integration_adapter",
+        "route_id",
+        "stable_prefix_digest_hmac"
+      ],
+      "title": "CacheRoutingContext",
       "type": "object"
     },
     "ComputeAvailability": {

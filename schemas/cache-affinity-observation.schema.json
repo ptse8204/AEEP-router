@@ -1,0 +1,67 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "observation_id": {
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "scope_key_hmac": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Key Hmac",
+      "type": "string"
+    },
+    "route_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Route Id",
+      "type": "string"
+    },
+    "stable_prefix_digest_hmac": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Stable Prefix Digest Hmac",
+      "type": "string"
+    },
+    "state_digest_hmac": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "State Digest Hmac"
+    },
+    "cache_hit": {
+      "title": "Cache Hit",
+      "type": "boolean"
+    },
+    "cached_input_tokens": {
+      "minimum": 0,
+      "title": "Cached Input Tokens",
+      "type": "integer"
+    },
+    "cache_write_input_tokens": {
+      "minimum": 0,
+      "title": "Cache Write Input Tokens",
+      "type": "integer"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scope_key_hmac",
+    "route_id",
+    "stable_prefix_digest_hmac",
+    "cache_hit",
+    "cached_input_tokens",
+    "cache_write_input_tokens"
+  ],
+  "title": "CacheAffinityObservation",
+  "type": "object"
+}

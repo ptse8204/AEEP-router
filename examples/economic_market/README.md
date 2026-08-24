@@ -1,6 +1,6 @@
 # Local economic evidence reference service
 
-This service demonstrates AEEP 0.4 offers, request-bound quotes, provider usage,
+This service demonstrates AEEP 0.5 offers, request-bound quotes, provider usage,
 billing reconciliation, and privacy-safe aggregates. It is an in-memory local
 example: its deterministic private key is public test material and must never be
 used for production trust or payment.

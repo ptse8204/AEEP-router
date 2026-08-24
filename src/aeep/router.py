@@ -28,7 +28,7 @@ from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
 from threading import RLock
-from typing import Any
+from typing import Any, Literal
 
 from .accounting import (
     aggregate_accounting,
@@ -39,6 +39,8 @@ from .accounting import (
     cash_estimate_from_quote,
     mirror_actual_cash,
 )
+from .artifact_store import ContentArtifactStore
+from .cache_affinity import estimate_cache_affinity
 from .config import load_manifest
 from .discovery import CompositeProviderRegistry
 from .economic.aggregates import MarketAggregateSelector
@@ -86,14 +88,19 @@ from .executors import (
 )
 from .executors.base import BaseExecutor, ExecutionContext
 from .models import (
+    ActionApprovalRecord,
     ActionConstraints,
     ActionContext,
     ActionRequest,
+    ApprovalSource,
     AuthorizationKind,
     BenchmarkEntry,
     BenchmarkResult,
     BillingTrigger,
     BoundedQuote,
+    CacheAffinityEstimate,
+    CacheAffinityObservation,
+    CacheAffinityReceipt,
     CandidateRanking,
     CandidateScore,
     CapabilityOffer,
@@ -175,6 +182,17 @@ from .payments import (
     billable_amount_for_terms,
 )
 from .policy import builtin_policies, merge_constraints, policy_with_constraints, resolve_policy
+from .provider_ingest import ProviderPackageIngestor
+from .provider_package import (
+    ArtifactStatus,
+    EvidenceAcceptanceStatus,
+    FingerprintStatus,
+    PackageIntegrityStatus,
+    SmokeStatus,
+    SmokeTestReport,
+    portable_route_fingerprint,
+    runtime_route_identity_matches,
+)
 from .qualification import (
     QualificationCase,
     QualificationCondition,
@@ -207,6 +225,13 @@ _EXECUTOR_TYPES: dict[ExecutorKind, type[BaseExecutor]] = {
     ExecutorKind.HOST: HostExecutor,
     ExecutorKind.DELEGATE: DelegateExecutor,
 }
+
+
+def _provider_artifact_root(value: str, manifest_path: Path | None) -> Path:
+    root = Path(value).expanduser()
+    if not root.is_absolute() and manifest_path is not None:
+        root = manifest_path.parent / root
+    return root
 
 
 class Router:
@@ -293,25 +318,22 @@ class Router:
         configured_keys = (
             economic_verifier.store.list_keys() if economic_verifier is not None else []
         )
+        if economic_verifier is None:
+            configured_path = Path(normalized.economic_evidence.trust_store.path).expanduser()
+            if configured_path.is_file():
+                trust_path = configured_path
+                try:
+                    configured_keys = TrustStore.load(configured_path).list_keys()
+                except (OSError, ValueError) as exc:
+                    raise ConfigurationError(
+                        "operator trust store is not readable or valid"
+                    ) from exc
         if (
             normalized.economic_evidence.live_quotes.enabled
             or normalized.economic_evidence.market_aggregates.enabled
         ):
             if economic_verifier is not None:
                 configured_keys = economic_verifier.store.list_keys()
-            else:
-                configured_path = Path(normalized.economic_evidence.trust_store.path).expanduser()
-                trust_path = configured_path
-                try:
-                    configured_keys = (
-                        TrustStore.load(configured_path).list_keys()
-                        if configured_path.is_file()
-                        else []
-                    )
-                except (OSError, ValueError) as exc:
-                    raise ConfigurationError(
-                        "enabled live quotes require a readable, valid operator trust store"
-                    ) from exc
             try:
                 merged_trust = merge_trusted_provider_keys(
                     configured_keys,
@@ -743,6 +765,98 @@ class Router:
             )
         return values
 
+    def _cache_adjusted_estimate(
+        self,
+        spec: ExecutorSpec,
+        estimate: RouteEstimate,
+        policy: PolicyConfig,
+        context: ActionContext,
+    ) -> tuple[RouteEstimate, CacheAffinityEstimate | None]:
+        cache = context.cache_affinity
+        if (
+            not policy.cache_affinity.enabled
+            or cache is None
+            or cache.route_id != spec.id
+            or cache.provider != (spec.provider_id or "local")
+        ):
+            return estimate, None
+        config = spec.config.get("cache_affinity")
+        if not isinstance(config, Mapping) or not isinstance(
+            config.get("warm_resources"), Mapping
+        ):
+            return estimate, None
+        try:
+            warm = ResourceVector.model_validate(config["warm_resources"])
+        except ValueError as exc:
+            raise ConfigurationError(
+                f"executor {spec.id!r} cache warm_resources are invalid"
+            ) from exc
+        latest = self.store.latest_cache_affinity_observation(
+            cache.cache_scope_key_hmac,
+            spec.id,
+        )
+        affinity = estimate_cache_affinity(
+            cache,
+            cold_resources=estimate.resources,
+            warm_resources=warm,
+            latest=latest,
+            half_life_seconds=policy.cache_affinity.half_life_seconds,
+            at=self._economic_now(),
+        )
+        adjusted = estimate.model_copy(deep=True)
+        adjusted.resources = affinity.expected_resources
+        adjusted.source = EstimateSource.BLENDED
+        return adjusted, affinity
+
+    def _cache_receipt(
+        self,
+        affinity: CacheAffinityEstimate | None,
+        context: ActionContext,
+        resources: ResourceVector,
+    ) -> CacheAffinityReceipt | None:
+        cache = context.cache_affinity
+        if affinity is None or cache is None:
+            return None
+        total_input = resources.input_tokens
+        hit_rate = (
+            resources.cached_input_tokens / total_input if total_input else None
+        )
+        receipt = CacheAffinityReceipt(
+            predicted_warm_probability=affinity.warm_probability,
+            predicted_common_prefix_tokens=cache.common_prefix_tokens_estimate,
+            predicted_eligible_cached_tokens=cache.eligible_cached_tokens_estimate,
+            predicted_cache_read_tokens=round(
+                affinity.warm_probability * cache.eligible_cached_tokens_estimate
+            ),
+            predicted_cache_write_tokens=round(
+                (1 - affinity.warm_probability) * cache.eligible_cached_tokens_estimate
+            ),
+            actual_input_tokens=resources.input_tokens,
+            actual_cached_input_tokens=resources.cached_input_tokens,
+            actual_cache_write_tokens=resources.cache_write_input_tokens,
+            actual_output_tokens=resources.output_tokens,
+            actual_reasoning_output_tokens=resources.reasoning_output_tokens,
+            cache_hit_rate=hit_rate,
+            cache_scope_key_hmac=cache.cache_scope_key_hmac,
+            stable_prefix_digest_hmac=cache.stable_prefix_digest_hmac,
+            context_compaction_events=cache.compaction_generation,
+            context_reset_reason=cache.context_reset_reason,
+            warm_state_reused=resources.cached_input_tokens > 0,
+        )
+        self.store.save_cache_affinity_observation(
+            CacheAffinityObservation(
+                scope_key_hmac=cache.cache_scope_key_hmac,
+                route_id=cache.route_id,
+                stable_prefix_digest_hmac=cache.stable_prefix_digest_hmac,
+                state_digest_hmac=cache.previous_state_digest_hmac,
+                cache_hit=receipt.warm_state_reused,
+                cached_input_tokens=resources.cached_input_tokens,
+                cache_write_input_tokens=resources.cache_write_input_tokens,
+                observed_at=self._economic_now(),
+            )
+        )
+        return receipt
+
     def route(self, request: ActionRequest | dict[str, Any]) -> RouteDecision:
         """Validate, filter, rank, explain, and persist an action decision."""
 
@@ -759,16 +873,32 @@ class Router:
 
         candidates: list[CandidateScore] = []
         for spec in compatible:
-            estimate = self.estimator.estimate(spec, policy, features)
-            candidates.append(
-                score_candidate(
-                    spec,
-                    estimate,
-                    policy,
-                    request_model.context,
-                    self._subscription_quota(spec, request_model.context),
-                )
+            cold_estimate = self.estimator.estimate(spec, policy, features)
+            cold = score_candidate(
+                spec,
+                cold_estimate,
+                policy,
+                request_model.context,
+                self._subscription_quota(spec, request_model.context),
             )
+            if not cold.feasible:
+                candidates.append(cold)
+                continue
+            estimate, affinity = self._cache_adjusted_estimate(
+                spec,
+                cold_estimate,
+                policy,
+                request_model.context,
+            )
+            scored = score_candidate(
+                spec,
+                estimate,
+                policy,
+                request_model.context,
+                self._subscription_quota(spec, request_model.context),
+            )
+            scored.cache_affinity = affinity
+            candidates.append(scored)
 
         # Preserve input-contract failures in the explanation so an agent can fix
         # its action instead of receiving a vague "no route" result.
@@ -1040,7 +1170,24 @@ class Router:
             except NoRouteError as exc:
                 rejected_reasons[spec.id] = [str(exc)]
                 continue
-            estimate = self.estimator.estimate(spec, policy, features)
+            cold_estimate = self.estimator.estimate(spec, policy, features)
+            cold = score_candidate(
+                spec,
+                cold_estimate,
+                non_price_policy,
+                non_price_context,
+                self._subscription_quota(spec, request_model.context),
+            )
+            if not cold.feasible:
+                rejected_reasons[spec.id] = list(cold.rejection_reasons)
+                estimates[spec.id] = cold_estimate
+                continue
+            estimate, affinity = self._cache_adjusted_estimate(
+                spec,
+                cold_estimate,
+                policy,
+                request_model.context,
+            )
             estimates[spec.id] = estimate
             initial = score_candidate(
                 spec,
@@ -1049,6 +1196,7 @@ class Router:
                 non_price_context,
                 self._subscription_quota(spec, request_model.context),
             )
+            initial.cache_affinity = affinity
             if initial.feasible and initial.score is not None:
                 initial_scores[spec.id] = initial
             else:
@@ -1657,7 +1805,7 @@ class Router:
             ):
                 rejected_reasons[executor_id] = [
                     "fallback evidence is not request-bound and cannot authorize prepared paid "
-                    "execution in AEEP 0.4"
+                    "execution in AEEP 0.5"
                 ]
                 continue
             if (
@@ -2646,6 +2794,7 @@ class Router:
         spec: ExecutorSpec,
         attempt_id: str,
         charge_id: str,
+        approval_id: str | None = None,
     ) -> tuple[ExecutionOutcome, ExecutionReceipt, object | None]:
         """Invoke exactly the prepared route once and return unpersisted evidence."""
 
@@ -2757,6 +2906,11 @@ class Router:
                 action_features=decision.action_features,
                 actual_resources=raw.resources,
                 accounting=raw.accounting,
+                cache_affinity=self._cache_receipt(
+                    candidate.cache_affinity,
+                    decision.action.context,
+                    raw.resources,
+                ),
                 transport_success=raw.status is ExecutionStatus.SUCCESS,
                 execution_success=(True if raw.status is ExecutionStatus.SUCCESS else None),
                 schema_valid=output_valid,
@@ -2787,6 +2941,7 @@ class Router:
                     "attempt_id": attempt_id,
                     "charge_id": charge_id,
                 },
+                approval_id=approval_id,
             )
         success = (
             raw.status is ExecutionStatus.SUCCESS
@@ -2825,6 +2980,21 @@ class Router:
                 allow_unsafe_executor=allow_unsafe_executor,
                 invocation_marker=invocation_marker,
             )
+        except ConfigurationError as exc:
+            if "legacy canonicalization is historical-only" in str(exc):
+                current = self.store.get_prepared_decision(prepared_id)
+                if current is not None and current.state is PreparedDecisionState.PREPARED:
+                    self.store.save_prepared_transition(
+                        PreparedRouteTransition(
+                            prepared_id=prepared_id,
+                            from_state=PreparedDecisionState.PREPARED,
+                            to_state=PreparedDecisionState.CANCELLED,
+                            occurred_at=self._economic_now(),
+                            reason="legacy authorization cannot start after RFC 8785 cutover",
+                        )
+                    )
+                    self._prepared_contexts.pop(prepared_id, None)
+            raise
         except Exception:
             if invocation_marker[0]:
                 with suppress(Exception):
@@ -3014,6 +3184,25 @@ class Router:
         idempotency_key = context.request.idempotency_key
         attempt_id = new_id("attempt")
         charge_id = f"charge_{hashlib.sha256(prepared_id.encode()).hexdigest()}"
+        approval_id: str | None = None
+        if (
+            spec.side_effect.rank > SideEffect.READ.rank
+            or payment_approved
+            or human_approved
+        ):
+            approval = ActionApprovalRecord(
+                action_digest=prepared.action_digest,
+                policy_digest=prepared.effective_policy_digest,
+                prepared_id=prepared_id,
+                attempt_id=attempt_id,
+                granted_side_effect=approved_side_effect,
+                payment_approved=payment_approved,
+                human_approved=human_approved,
+                source=ApprovalSource.EMBEDDED_CALLER,
+                granted_at=self._economic_now(),
+            )
+            self.store.save_action_approval(approval)
+            approval_id = approval.approval_id
         reservation: PaymentReservationV2 | None = None
         prepared_claimed = False
         invocation_started = False
@@ -3184,6 +3373,7 @@ class Router:
                 spec=spec,
                 attempt_id=attempt_id,
                 charge_id=charge_id,
+                approval_id=approval_id,
             )
             # Persist a sanitized local execution fact before any usage parsing or
             # payment call. Recovery may enrich this receipt, but must never need
@@ -4152,6 +4342,356 @@ class Router:
                     self.ingest_candidate(spec, source_id=f"discovery:{provider.provider_id}")
         return providers
 
+    async def ingest_provider_package(
+        self,
+        path: str | Path,
+        *,
+        source_id: str | None = None,
+        allow_remote_artifacts: bool | None = None,
+    ) -> tuple[RouteCandidate, ...]:
+        """Verify one v0.5 package and atomically persist inert candidates."""
+
+        self._ensure_open()
+        config = self.manifest.provider_packages
+        ingestor = self._provider_package_ingestor()
+        return await ingestor.ingest(
+            path,
+            source_id=source_id,
+            allow_remote_artifacts=(
+                config.allow_remote_artifacts
+                if allow_remote_artifacts is None
+                else allow_remote_artifacts and config.allow_remote_artifacts
+            ),
+            allowed_artifact_hosts=config.allowed_artifact_hosts,
+            allow_private_networks=config.allow_private_addresses,
+            allow_self_asserted_priors=config.allow_self_asserted_priors,
+            forbidden_executor_ids=frozenset(
+                item.id for item in self.registry.all(include_disabled=True)
+            ),
+        )
+
+    def _provider_package_ingestor(self) -> ProviderPackageIngestor:
+        config = self.manifest.provider_packages
+        artifact_root = _provider_artifact_root(
+            config.artifact_root,
+            self.manifest_path,
+        )
+        verifier = self._refresh_economic_verifier()
+        trust = verifier.store if verifier is not None else TrustStore()
+        return ProviderPackageIngestor(
+            self.store,
+            ContentArtifactStore(
+                artifact_root,
+                maximum_bytes=config.maximum_artifact_bytes,
+            ),
+            trust,
+            clock=self._economic_now,
+        )
+
+    def inspect_candidate(self, executor_id: str) -> dict[str, Any]:
+        candidate = self.store.get_route_candidate(executor_id)
+        if candidate is None:
+            raise ConfigurationError(f"unknown candidate {executor_id!r}")
+        snapshot = (
+            self.store.get_candidate_verification_snapshot(
+                candidate.verification_snapshot_id
+            )
+            if candidate.verification_snapshot_id is not None
+            else None
+        )
+        package = (
+            self.store.get_provider_package(candidate.package_digest)
+            if candidate.package_digest is not None
+            else None
+        )
+        evidence = self.store.list_evidence_records(executor_id)
+        acceptances = self.store.list_evidence_acceptances(executor_id)
+        smoke = self.store.latest_smoke_test_report(executor_id)
+        next_command = (
+            f"aeep candidate activate {executor_id}"
+            if candidate.status is RouteLifecycle.QUALIFIED
+            else f"aeep candidate smoke {executor_id}"
+            if package is not None and (smoke is None or smoke.status is not SmokeStatus.PASSED)
+            else f"aeep candidate qualify {executor_id} --reuse-evidence"
+            if package is not None
+            else f"aeep candidate qualify {executor_id} --cases @cases.yaml"
+        )
+        return {
+            "candidate": candidate.model_dump(mode="json"),
+            "package": (
+                {
+                    "package_id": package.metadata.package_id,
+                    "version": package.metadata.version,
+                    "digest": candidate.package_digest,
+                }
+                if package is not None
+                else None
+            ),
+            "verification": snapshot.model_dump(mode="json") if snapshot else None,
+            "evidence": [item.model_dump(mode="json") for item in evidence],
+            "acceptances": [item.model_dump(mode="json") for item in acceptances],
+            "smoke": smoke.model_dump(mode="json") if smoke else None,
+            "next": next_command,
+        }
+
+    async def refresh_candidate(self, executor_id: str) -> RouteCandidate:
+        candidate = self.store.get_route_candidate(executor_id)
+        if candidate is None:
+            raise ConfigurationError(f"unknown candidate {executor_id!r}")
+        if not candidate.source_id.startswith("package-file:"):
+            raise ConfigurationError("candidate refresh requires a local package-file source")
+        path = candidate.source_id.removeprefix("package-file:")
+        refreshed = await self.ingest_provider_package(path, source_id=candidate.source_id)
+        return next(item for item in refreshed if item.executor_id == executor_id)
+
+    async def smoke_candidate(self, executor_id: str) -> tuple[SmokeTestReport, ...]:
+        candidate = self.store.get_route_candidate(executor_id)
+        if candidate is None or candidate.package_digest is None:
+            raise ConfigurationError("smoke requires a provider-package candidate")
+        if candidate.status not in {RouteLifecycle.CANDIDATE, RouteLifecycle.SUSPENDED}:
+            raise ConfigurationError("smoke requires a non-active candidate")
+        snapshot = self.store.get_candidate_verification_snapshot(
+            candidate.verification_snapshot_id or ""
+        )
+        package = self.store.get_provider_package(candidate.package_digest)
+        if snapshot is None or package is None:
+            raise ConfigurationError("candidate package verification is unavailable")
+        if (
+            snapshot.integrity_status is not PackageIntegrityStatus.VERIFIED
+            or snapshot.fingerprint_status is not FingerprintStatus.MATCHED
+            or snapshot.artifact_status is not ArtifactStatus.VERIFIED
+        ):
+            raise ConfigurationError("candidate verification blocks smoke execution")
+        definition = next(
+            (item for item in package.spec.smoke_tests if item.route_id == executor_id),
+            None,
+        )
+        if definition is None:
+            raise ConfigurationError("candidate package does not define a smoke test")
+        route = next(item for item in package.spec.routes if item.route_id == executor_id)
+        if route.executor.side_effect.rank > SideEffect.READ.rank or not route.executor.idempotent:
+            raise ConfigurationError("automatic smoke is restricted to read-only idempotent routes")
+        if portable_route_fingerprint(route, package.spec.provider.provider_id) != (
+            candidate.package_fingerprint
+        ):
+            self.suspend_candidate(executor_id, reason="package fingerprint drift before smoke")
+            raise ConfigurationError("candidate package fingerprint changed before smoke")
+
+        spec = route.executor_spec(package.spec.provider.provider_id)
+        if not runtime_route_identity_matches(route, spec):
+            self.suspend_candidate(executor_id, reason="runtime executable identity mismatch")
+            raise ConfigurationError("candidate runtime executable identity does not match")
+        spec.side_effect = route.executor.side_effect
+        spec.idempotent = route.executor.idempotent
+        spec.safe_to_auto_execute = True
+        require_static_qualification(spec)
+        modes: tuple[Literal["cold", "warm"], ...]
+        if definition.mode == "cold_then_warm":
+            modes = ("cold", "warm")
+        elif definition.mode == "warm":
+            modes = ("warm",)
+        else:
+            modes = ("cold",)
+        modes = modes[: definition.max_executions]
+        reports: list[SmokeTestReport] = []
+        shared_executor: BaseExecutor | None = None
+        all_passed = True
+        try:
+            for index, mode in enumerate(modes, start=1):
+                started = self._economic_now()
+                executor = (
+                    _EXECUTOR_TYPES[spec.kind]()
+                    if mode == "cold"
+                    else shared_executor or _EXECUTOR_TYPES[spec.kind]()
+                )
+                if definition.mode == "cold_then_warm" and shared_executor is None:
+                    shared_executor = executor
+                request = ActionRequest(
+                    action_id=f"smoke_{definition.smoke_id}_{index}",
+                    capability=spec.capability,
+                    input=dict(definition.input),
+                )
+                validate_json(request.input, spec.input_schema, label="smoke input")
+                raw = await executor.execute(
+                    ExecutionContext(
+                        request=request,
+                        spec=spec,
+                        estimate=spec.estimate,
+                        attempt=1,
+                    )
+                )
+                output_valid: bool | None = None
+                if raw.status is ExecutionStatus.SUCCESS and spec.output_schema is not None:
+                    try:
+                        validate_json(raw.output, spec.output_schema, label="smoke output")
+                        output_valid = True
+                    except Exception:
+                        output_valid = False
+                validation_results = await run_validators(
+                    spec.validators,
+                    ValidationContext(input=request.input, output=raw.output),
+                    self.validator_callbacks,
+                )
+                task_valid = all(item.valid is True for item in validation_results)
+                ended = self._economic_now()
+                cash = raw.accounting.cash.actual_cash_cost(
+                    self.manifest.economic_evidence.settlement_currency
+                )
+                tokens = raw.resources.input_tokens + raw.resources.output_tokens
+                passed = (
+                    raw.status is ExecutionStatus.SUCCESS
+                    and output_valid is not False
+                    and task_valid
+                    and (ended - started).total_seconds() * 1000 <= definition.timeout_ms
+                    and (definition.max_tokens is None or tokens <= definition.max_tokens)
+                    and (
+                        definition.max_cash is None
+                        or (
+                            cash is not None
+                            and definition.max_cash.currency
+                            == self.manifest.economic_evidence.settlement_currency
+                            and cash <= definition.max_cash.amount
+                        )
+                    )
+                )
+                receipt = ExecutionReceipt(
+                    decision_id=f"smoke:{definition.smoke_id}",
+                    action_id=request.action_id,
+                    capability=spec.capability,
+                    executor_id=spec.id,
+                    executor_kind=spec.kind,
+                    status=raw.status,
+                    attempt=index,
+                    started_at=started,
+                    ended_at=ended,
+                    estimated=spec.estimate,
+                    action_features=action_features(request.input),
+                    actual_resources=raw.resources,
+                    accounting=raw.accounting,
+                    transport_success=raw.status is ExecutionStatus.SUCCESS,
+                    execution_success=raw.status is ExecutionStatus.SUCCESS,
+                    schema_valid=output_valid,
+                    task_valid=task_valid,
+                    validation_results=validation_results,
+                    output_valid=output_valid,
+                    metadata={"smoke_definition_id": definition.smoke_id},
+                )
+                self._save_receipt(receipt)
+                report = SmokeTestReport(
+                    smoke_report_id=new_id("smoke"),
+                    candidate_id=executor_id,
+                    route_fingerprint=candidate.package_fingerprint,
+                    smoke_definition_id=definition.smoke_id,
+                    environment_digest=deterministic_digest(
+                        {
+                            "os": os.name,
+                            "executor_kind": spec.kind.value,
+                            "runtime": spec.config.get("executable_identity"),
+                        }
+                    ),
+                    mode=mode,
+                    status=(SmokeStatus.PASSED if passed else SmokeStatus.FAILED),
+                    started_at=started,
+                    finished_at=ended,
+                    execution_receipt_id=receipt.receipt_id,
+                    failure_code=(None if passed else "smoke_failed"),
+                )
+                reports.append(report)
+                all_passed &= passed
+                if mode == "cold" and shared_executor is not executor:
+                    await executor.close()
+        finally:
+            if shared_executor is not None:
+                await shared_executor.close()
+
+        updated_snapshot = snapshot.model_copy(
+            update={
+                "snapshot_id": new_id("verify"),
+                "smoke_status": SmokeStatus.PASSED if all_passed else SmokeStatus.FAILED,
+                "blocking_reasons": (
+                    tuple(item for item in snapshot.blocking_reasons if item != "smoke_required")
+                    if all_passed
+                    else (*snapshot.blocking_reasons, "smoke_failed")
+                ),
+                "created_at": self._economic_now(),
+            }
+        )
+        candidate.verification_snapshot_id = updated_snapshot.snapshot_id
+        candidate.updated_at = self._economic_now()
+        if not all_passed:
+            candidate.status = RouteLifecycle.SUSPENDED
+            candidate.reason = "smoke failed"
+        self.store.save_smoke_candidate_result(tuple(reports), updated_snapshot, candidate)
+        return tuple(reports)
+
+    def qualify_candidate_from_evidence(self, executor_id: str) -> QualificationReport:
+        candidate = self.store.get_route_candidate(executor_id)
+        if candidate is None or candidate.package_digest is None:
+            raise ConfigurationError("evidence reuse requires a provider-package candidate")
+        if candidate.status is RouteLifecycle.ACTIVE:
+            raise ConfigurationError("suspend an active route before requalification")
+        package = self.store.get_provider_package(candidate.package_digest)
+        snapshot = self.store.get_candidate_verification_snapshot(
+            candidate.verification_snapshot_id or ""
+        )
+        smoke = self.store.latest_smoke_test_report(executor_id)
+        if package is None or snapshot is None or smoke is None:
+            raise ConfigurationError("candidate package/smoke evidence is incomplete")
+        correctness = [
+            item
+            for item in self.store.list_evidence_acceptances(executor_id)
+            if item.metric == "correctness"
+            and item.status is EvidenceAcceptanceStatus.ACCEPTED
+            and item.effective_trust in {TrustLevel.VERIFIED, TrustLevel.ATTESTED}
+        ]
+        if (
+            snapshot.integrity_status is not PackageIntegrityStatus.VERIFIED
+            or snapshot.fingerprint_status is not FingerprintStatus.MATCHED
+            or snapshot.artifact_status is not ArtifactStatus.VERIFIED
+            or smoke.status is not SmokeStatus.PASSED
+            or smoke.route_fingerprint != candidate.package_fingerprint
+            or not correctness
+        ):
+            raise ConfigurationError("trusted exact evidence plus current smoke is required")
+        route = next(item for item in package.spec.routes if item.route_id == executor_id)
+        if route.executor.side_effect.rank > SideEffect.READ.rank or not route.executor.idempotent:
+            raise ConfigurationError("evidence-assisted qualification is read-only/idempotent")
+        spec = route.executor_spec(package.spec.provider.provider_id)
+        spec.side_effect = route.executor.side_effect
+        spec.idempotent = True
+        spec.safe_to_auto_execute = True
+        checks = require_static_qualification(spec)
+        fingerprint = behavior_fingerprint(spec)
+        report = QualificationReport(
+            candidate_id=candidate.candidate_id,
+            behavior_fingerprint=fingerprint,
+            static_checks=checks,
+            dynamic_cases=1,
+            passed_cases=1,
+            repetitions=1,
+            dynamic_runs=1,
+            passed_runs=1,
+            passed=True,
+            qualification_method="evidence_reuse",
+            source_evidence_ids=sorted({item.evidence_id for item in correctness}),
+            smoke_report_ids=[smoke.smoke_report_id],
+            effective_trust=(
+                TrustLevel.ATTESTED.value
+                if any(item.effective_trust is TrustLevel.ATTESTED for item in correctness)
+                else TrustLevel.VERIFIED.value
+            ),
+            environment_digest=smoke.environment_digest,
+        )
+        self.store.save_qualification_report(report)
+        candidate.spec = spec
+        candidate.behavior_fingerprint = fingerprint
+        candidate.status = RouteLifecycle.QUALIFIED
+        candidate.qualification_report_id = report.report_id
+        candidate.reason = None
+        candidate.updated_at = self._economic_now()
+        self.store.save_route_candidate(candidate)
+        return report
+
     def ingest_candidate(self, spec: ExecutorSpec, *, source_id: str) -> RouteCandidate:
         """Store an external claim without exposing it to routing or model tools."""
 
@@ -4352,6 +4892,37 @@ class Router:
                 raise ConfigurationError(
                     "qualification evidence does not match candidate fingerprint"
                 )
+            if candidate.package_digest is not None:
+                package = self.store.get_provider_package(candidate.package_digest)
+                snapshot = self.store.get_candidate_verification_snapshot(
+                    candidate.verification_snapshot_id or ""
+                )
+                smoke = self.store.latest_smoke_test_report(executor_id)
+                if package is None or snapshot is None:
+                    raise ConfigurationError("provider-package verification is unavailable")
+                current = self._provider_package_ingestor().verify_package(package)
+                if (
+                    current.integrity_status is not PackageIntegrityStatus.VERIFIED
+                    or snapshot.integrity_status is not PackageIntegrityStatus.VERIFIED
+                    or snapshot.fingerprint_status is not FingerprintStatus.MATCHED
+                    or snapshot.artifact_status is not ArtifactStatus.VERIFIED
+                    or (
+                        self.manifest.provider_packages.require_local_smoke
+                        and (smoke is None or smoke.status is not SmokeStatus.PASSED)
+                    )
+                ):
+                    raise ConfigurationError(
+                        "current package trust, artifacts, fingerprint, and smoke are required"
+                    )
+                if report.qualification_method == "evidence_reuse" and not any(
+                    item.metric == "correctness"
+                    and item.status is EvidenceAcceptanceStatus.ACCEPTED
+                    and item.effective_trust in {TrustLevel.VERIFIED, TrustLevel.ATTESTED}
+                    for item in self.store.list_evidence_acceptances(executor_id)
+                ):
+                    raise ConfigurationError(
+                        "evidence-assisted activation requires current trusted correctness evidence"
+                    )
             candidate.status = RouteLifecycle.ACTIVE
             candidate.spec.enabled = True
             candidate.updated_at = utc_now()
@@ -4402,6 +4973,25 @@ class Router:
             raise NoRouteError(
                 f"route {spec.id!r} is not active for its exact fingerprint; reroute"
             )
+        if candidate.package_digest is not None:
+            package = self.store.get_provider_package(candidate.package_digest)
+            if package is None:
+                self.suspend_candidate(spec.id, reason="provider package is unavailable")
+                raise NoRouteError("provider package is unavailable; route suspended")
+            route = next(
+                (item for item in package.spec.routes if item.route_id == spec.id),
+                None,
+            )
+            current = self._provider_package_ingestor().verify_package(package)
+            if (
+                route is None
+                or current.integrity_status is not PackageIntegrityStatus.VERIFIED
+                or portable_route_fingerprint(route, package.spec.provider.provider_id)
+                != candidate.package_fingerprint
+                or not runtime_route_identity_matches(route, spec)
+            ):
+                self.suspend_candidate(spec.id, reason="package trust/fingerprint drift")
+                raise NoRouteError("provider package trust or fingerprint drift; route suspended")
 
     async def route_with_discovery(self, request: ActionRequest | dict[str, Any]) -> RouteDecision:
         request_model = (
@@ -4773,6 +5363,23 @@ class Router:
                 )
 
             estimate = candidate.estimate
+            approval_id: str | None = None
+            if spec.side_effect.rank > SideEffect.READ.rank:
+                approval = ActionApprovalRecord(
+                    action_digest=deterministic_digest(
+                        {
+                            "capability": decision.action.capability,
+                            "input": decision.action.input,
+                        }
+                    ),
+                    policy_digest=self._effective_policy_digest(current_policy),
+                    attempt_id=f"attempt-{attempt_number}",
+                    granted_side_effect=approved_side_effect,
+                    source=ApprovalSource.EMBEDDED_CALLER,
+                    granted_at=self._economic_now(),
+                )
+                self.store.save_action_approval(approval)
+                approval_id = approval.approval_id
             started_at = utc_now()
             with start_span(
                 "aeep.execute",
@@ -4880,6 +5487,11 @@ class Router:
                     action_features=decision.action_features,
                     actual_resources=raw.resources,
                     accounting=raw.accounting,
+                    cache_affinity=self._cache_receipt(
+                        candidate.cache_affinity,
+                        decision.action.context,
+                        raw.resources,
+                    ),
                     transport_success=raw.status
                     in {
                         ExecutionStatus.SUCCESS,
@@ -4913,6 +5525,7 @@ class Router:
                     error_message=error_message,
                     trace_id=trace_id_from_span(span),
                     metadata={**raw.metadata, "exit_code": raw.exit_code},
+                    approval_id=approval_id,
                 )
                 self._save_receipt(receipt)
                 self._observe_receipt(spec, receipt)
@@ -5068,6 +5681,11 @@ class Router:
             action_features=decision.action_features,
             actual_resources=report_model.actual_resources,
             accounting=_trusted_accounting or ResourceAccounting(),
+            cache_affinity=self._cache_receipt(
+                candidate.cache_affinity,
+                decision.action.context,
+                report_model.actual_resources,
+            ),
             transport_success=True,
             execution_success=report_model.status == ExecutionStatus.SUCCESS,
             schema_valid=report_model.output_valid,

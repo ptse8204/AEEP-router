@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.5",
+  "keys": [
+    {
+      "provider_id": "fixture.provider",
+      "key_id": "fixture-publisher",
+      "algorithm": "ed25519",
+      "public_key": "A6EHv_POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg",
+      "valid_from": "2026-08-21T00:00:00Z",
+      "valid_until": "2027-08-21T00:00:00Z",
+      "revoked_at": null,
+      "status": "active",
+      "allowed_capabilities": [
+        "text.statistics@1"
+      ],
+      "allowed_quote_hosts": [],
+      "roles": [
+        "package_publisher"
+      ],
+      "allowed_package_ids": [
+        "fixture.provider.package"
+      ],
+      "trust": "verified",
+      "rotation_from_key_id": null,
+      "rotation_signed_at": null,
+      "rotation_signature": null
+    },
+    {
+      "provider_id": "fixture.verifier",
+      "key_id": "fixture-verifier",
+      "algorithm": "ed25519",
+      "public_key": "cSZR9FC6BbY4mLme9fe6RWMujiUn9_cVzWcexAJMxR4",
+      "valid_from": "2026-08-21T00:00:00Z",
+      "valid_until": "2027-08-21T00:00:00Z",
+      "revoked_at": null,
+      "status": "active",
+      "allowed_capabilities": [
+        "text.statistics@1"
+      ],
+      "allowed_quote_hosts": [],
+      "roles": [
+        "independent_verifier"
+      ],
+      "allowed_package_ids": [],
+      "trust": "attested",
+      "rotation_from_key_id": null,
+      "rotation_signed_at": null,
+      "rotation_signature": null
+    }
+  ]
+}

@@ -47,8 +47,11 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "0.4",
-      "default": "0.4",
+      "default": "0.5",
+      "enum": [
+        "0.4",
+        "0.5"
+      ],
       "title": "Schema Version",
       "type": "string"
     },

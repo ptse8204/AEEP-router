@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.5",
+  "campaign_id": "aeep-v05-deepseek-harness-live",
+  "generated_at": "2026-08-24T11:27:00Z",
+  "synthetic": true,
+  "harness_version": "0.1.0-rc.7",
+  "fixture_digest_before": "sha256:9b3f1fb1fbf770f73e6fe5ae4faa4110671a6c66f7a7cdf7623357dca062c990",
+  "fixture_digest_after": "sha256:9b3f1fb1fbf770f73e6fe5ae4faa4110671a6c66f7a7cdf7623357dca062c990",
+  "qualification_executions": 1,
+  "active_community_routes_during": 1,
+  "active_community_routes_after": 0,
+  "persisted_sensitive_matches": 0,
+  "dsh_usage_imported_into_aeep": false,
+  "turns": [
+    {
+      "turn": 1,
+      "session": "primary",
+      "expected_tool": "mcp__aeep__aeep_list_capabilities",
+      "observed_tool": "mcp__aeep__aeep_list_capabilities",
+      "tool_calls": 1,
+      "tool_succeeded": 1,
+      "tool_failed": 0,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 0,
+      "aeep_receipt_ids": [],
+      "verification_receipt_hash": "sha256:24806959baca48ce4af8bbeb8078bde453d2a8a4bef345c0115a9b270df2bf45",
+      "assertion_code": "capabilities_discovered",
+      "assertion_passed": true,
+      "result_digest": null
+    },
+    {
+      "turn": 2,
+      "session": "primary",
+      "expected_tool": "mcp__aeep__aeep_execute_action",
+      "observed_tool": "mcp__aeep__aeep_execute_action",
+      "tool_calls": 1,
+      "tool_succeeded": 1,
+      "tool_failed": 0,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 1,
+      "aeep_receipt_ids": ["rcpt_5a07faa178ef467387106677d1de96ad"],
+      "verification_receipt_hash": "sha256:a7827e7e4454eac5ec0c3ca3b130c3191cf978b9187825b96fb45b7faf03062b",
+      "assertion_code": "text_stats_correct",
+      "assertion_passed": true,
+      "result_digest": null
+    },
+    {
+      "turn": 3,
+      "session": "primary",
+      "expected_tool": "mcp__aeep__aeep_route_action",
+      "observed_tool": "mcp__aeep__aeep_route_action",
+      "tool_calls": 1,
+      "tool_succeeded": 1,
+      "tool_failed": 0,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 0,
+      "aeep_receipt_ids": [],
+      "verification_receipt_hash": "sha256:511db83e2fff28bd6bb9f66ca9fef1aa8b6d876e2217ea3c0f93fbc877050d5c",
+      "assertion_code": "read_route_selected",
+      "assertion_passed": true,
+      "result_digest": null
+    },
+    {
+      "turn": 4,
+      "session": "primary",
+      "expected_tool": "mcp__aeep__aeep_execute_action",
+      "observed_tool": "mcp__aeep__aeep_execute_action",
+      "tool_calls": 1,
+      "tool_succeeded": 1,
+      "tool_failed": 0,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 1,
+      "aeep_receipt_ids": ["rcpt_80cbba1f11aa4054b197133351360f4e"],
+      "verification_receipt_hash": "sha256:4e1bb85decc3c8682084ed692f731c6e6bb0eb01255a8f1bfdfcc1a2cffd90b1",
+      "assertion_code": "read_output_digest_matched",
+      "assertion_passed": true,
+      "result_digest": "sha256:f7881fd4df3425ff5bf14d0b7bdb9b6ce1f0cea888d8162c8ee8646bdc76f2fb"
+    },
+    {
+      "turn": 5,
+      "session": "fresh",
+      "expected_tool": "mcp__aeep__aeep_execute_action",
+      "observed_tool": "mcp__aeep__aeep_execute_action",
+      "tool_calls": 1,
+      "tool_succeeded": 1,
+      "tool_failed": 0,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 1,
+      "aeep_receipt_ids": ["rcpt_26a38c1cd1864820b3eb3f011d1c6b8f"],
+      "verification_receipt_hash": "sha256:d73efe56327bf8608ec8f1628814f0a33088f26d7d5cc56aae7b5685656c4ac1",
+      "assertion_code": "repeat_read_output_digest_matched",
+      "assertion_passed": true,
+      "result_digest": "sha256:f7881fd4df3425ff5bf14d0b7bdb9b6ce1f0cea888d8162c8ee8646bdc76f2fb"
+    },
+    {
+      "turn": 6,
+      "session": "fresh",
+      "expected_tool": "mcp__aeep__aeep_execute_action",
+      "observed_tool": "mcp__aeep__aeep_execute_action",
+      "tool_calls": 1,
+      "tool_succeeded": 0,
+      "tool_failed": 1,
+      "tool_unresolved": 0,
+      "expected_aeep_receipts": 0,
+      "aeep_receipt_ids": [],
+      "verification_receipt_hash": "sha256:0b72f3598ece59abe80cf70ce2093cde6f5451e329df31f61e655f49dc8a761e",
+      "assertion_code": "inactive_route_blocked",
+      "assertion_passed": true,
+      "result_digest": null
+    }
+  ],
+  "usage": {
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "model_calls": 12,
+    "input_tokens": 20514,
+    "output_tokens": 920,
+    "cache_read_tokens": 127488,
+    "cache_write_tokens": 0,
+    "total_tokens": 148922
+  },
+  "gates": [
+    {
+      "name": "six-bounded-turns",
+      "passed": true,
+      "detail": "The approved six-turn plan completed across one primary and one fresh Harness session."
+    },
+    {
+      "name": "exactly-one-tool-per-turn",
+      "passed": true,
+      "detail": "Each DSH verification receipt records one resolved top-level tool call and no nested call or retry."
+    },
+    {
+      "name": "three-aeep-execution-receipts",
+      "passed": true,
+      "detail": "The AEEP ledger contains exactly the planned text.stats receipt and two read-file receipts."
+    },
+    {
+      "name": "inactive-write-failed-closed",
+      "passed": true,
+      "detail": "The inactive apply-patch capability raised NoRouteError before provider execution and created no file."
+    },
+    {
+      "name": "isolated-read-only-workspace",
+      "passed": true,
+      "detail": "The provider was bounded to a separate AEEP-dsh-test workspace whose directory and fixture were read-only."
+    },
+    {
+      "name": "fixture-unchanged",
+      "passed": true,
+      "detail": "The fixture SHA-256 was identical before and after both reads."
+    },
+    {
+      "name": "no-sensitive-aeep-persistence",
+      "passed": true,
+      "detail": "The synthetic sentinel had zero matches in the AEEP SQLite database; receipt payloads contain no action input or output body."
+    },
+    {
+      "name": "dsh-usage-not-imported",
+      "passed": true,
+      "detail": "Provider-reported DSH token buckets are reported separately and were not written as AEEP observations."
+    },
+    {
+      "name": "community-route-suspended",
+      "passed": true,
+      "detail": "The only temporarily active community route was suspended after the proof; all 18 imported candidates are now suspended."
+    }
+  ]
+}

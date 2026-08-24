@@ -1,6 +1,6 @@
 # Economic evidence exchange
 
-AEEP 0.4 adds provider-neutral economic evidence. It is not a cryptocurrency,
+AEEP 0.5 adds portable signed provider evidence while retaining provider-neutral economics. It is not a cryptocurrency,
 blockchain, transferable token, public storefront, payment custodian, provider
 payout service, or autonomous tool marketplace.
 
@@ -121,7 +121,7 @@ The roadmap deliberately separates protocol evidence from financial products:
   accounts, clearing, payouts, fraud controls, disputes, and governance, if a
   separate service is justified.
 - **Later — Optional transferable marketplace credits:** only after explicit
-  legal, security, governance, and product design. AEEP 0.4 makes no promise to
+  legal, security, governance, and product design. AEEP 0.5 makes no promise to
   create them.
 
 See [Operator guide](ECONOMIC_OPERATOR_GUIDE.md), [Provider integration](PROVIDER_INTEGRATION.md),

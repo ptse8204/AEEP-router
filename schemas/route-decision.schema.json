@@ -256,6 +256,17 @@
           },
           "title": "Subscription Quotas",
           "type": "object"
+        },
+        "cache_affinity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CacheRoutingContext"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "ActionContext",
@@ -350,6 +361,238 @@
       "title": "ActionRequest",
       "type": "object"
     },
+    "CacheAffinityEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "warm_probability": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Warm Probability",
+          "type": "number"
+        },
+        "identity_match": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Identity Match",
+          "type": "number"
+        },
+        "prefix_match": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Prefix Match",
+          "type": "number"
+        },
+        "freshness_decay": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Freshness Decay",
+          "type": "number"
+        },
+        "continuity_probability": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Continuity Probability",
+          "type": "number"
+        },
+        "observed_reliability": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Observed Reliability",
+          "type": "number"
+        },
+        "cold_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "warm_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "expected_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        }
+      },
+      "required": [
+        "warm_probability",
+        "identity_match",
+        "prefix_match",
+        "freshness_decay",
+        "continuity_probability",
+        "observed_reliability",
+        "cold_resources",
+        "warm_resources",
+        "expected_resources"
+      ],
+      "title": "CacheAffinityEstimate",
+      "type": "object"
+    },
+    "CacheAffinityPolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "half_life_seconds": {
+          "default": 3600,
+          "exclusiveMinimum": 0,
+          "maximum": 2592000,
+          "title": "Half Life Seconds",
+          "type": "number"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "CacheAffinityPolicyConfig",
+      "type": "object"
+    },
+    "CacheRoutingContext": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_scope_key_hmac": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Cache Scope Key Hmac",
+          "type": "string"
+        },
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "integration_adapter": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Integration Adapter",
+          "type": "string"
+        },
+        "route_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Route Id",
+          "type": "string"
+        },
+        "stable_prefix_digest_hmac": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Stable Prefix Digest Hmac",
+          "type": "string"
+        },
+        "previous_state_digest_hmac": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous State Digest Hmac"
+        },
+        "common_prefix_tokens_estimate": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Common Prefix Tokens Estimate",
+          "type": "integer"
+        },
+        "eligible_cached_tokens_estimate": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Eligible Cached Tokens Estimate",
+          "type": "integer"
+        },
+        "recent_cache_read_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Read Tokens",
+          "type": "integer"
+        },
+        "recent_cache_write_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Write Tokens",
+          "type": "integer"
+        },
+        "recent_cache_miss_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Recent Cache Miss Tokens",
+          "type": "integer"
+        },
+        "observed_hits": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Observed Hits",
+          "type": "integer"
+        },
+        "observed_attempts": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Observed Attempts",
+          "type": "integer"
+        },
+        "last_seen_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen At"
+        },
+        "compaction_generation": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Compaction Generation",
+          "type": "integer"
+        },
+        "context_reset_reason": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Reset Reason"
+        }
+      },
+      "required": [
+        "cache_scope_key_hmac",
+        "provider",
+        "model",
+        "integration_adapter",
+        "route_id",
+        "stable_prefix_digest_hmac"
+      ],
+      "title": "CacheRoutingContext",
+      "type": "object"
+    },
     "CandidateScore": {
       "additionalProperties": false,
       "properties": {
@@ -387,6 +630,17 @@
           "anyOf": [
             {
               "$ref": "#/$defs/SubscriptionQuota"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "cache_affinity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CacheAffinityEstimate"
             },
             {
               "type": "null"
@@ -569,6 +823,32 @@
       ],
       "title": "EstimateSource",
       "type": "string"
+    },
+    "EvidenceReusePolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "max_shared_weight": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Shared Weight",
+          "type": "number"
+        },
+        "shared_prior_samples": {
+          "default": 5,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Shared Prior Samples",
+          "type": "integer"
+        }
+      },
+      "title": "EvidenceReusePolicyConfig",
+      "type": "object"
     },
     "EvidenceSource": {
       "enum": [
@@ -835,6 +1115,12 @@
           "title": "Subscription Rules",
           "type": "array"
         },
+        "cache_affinity": {
+          "$ref": "#/$defs/CacheAffinityPolicyConfig"
+        },
+        "evidence_reuse": {
+          "$ref": "#/$defs/EvidenceReusePolicyConfig"
+        },
         "uncertainty_penalty": {
           "default": 0.1,
           "description": "Added score burden at zero estimate confidence.",
@@ -1004,10 +1290,22 @@
           "title": "Cached Input Tokens",
           "type": "integer"
         },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
         "output_tokens": {
           "default": 0,
           "minimum": 0,
           "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
           "type": "integer"
         },
         "subscription_units": {

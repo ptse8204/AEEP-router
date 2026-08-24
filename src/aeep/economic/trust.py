@@ -14,8 +14,19 @@ from typing import Literal
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from pydantic import ConfigDict, Field, field_validator, model_validator
 
-from ..models import SignatureAlgorithm, SignatureEnvelopeV2, StrictModel
-from .canonical import CANONICALIZATION_VERSION, canonical_payload
+from ..models import (
+    SignatureAlgorithm,
+    SignatureEnvelopeV2,
+    StrictModel,
+    TrustedKeyRole,
+    TrustLevel,
+)
+from .canonical import (
+    JCS_CANONICALIZATION_VERSION,
+    SUPPORTED_CANONICALIZATION_VERSIONS,
+    canonical_payload,
+    payload_matches_canonicalization,
+)
 from .signing import (
     ALLOWED_SIGNATURE_ALGORITHMS,
     ED25519_ALGORITHM,
@@ -71,6 +82,9 @@ class TrustedProviderKey(StrictModel):
     status: TrustedKeyStatus = TrustedKeyStatus.ACTIVE
     allowed_capabilities: tuple[str, ...] = Field(min_length=1)
     allowed_quote_hosts: tuple[str, ...] = ()
+    roles: tuple[TrustedKeyRole, ...] = (TrustedKeyRole.PROVIDER_RECORD,)
+    allowed_package_ids: tuple[str, ...] = ()
+    trust: TrustLevel = TrustLevel.VERIFIED
     rotation_from_key_id: str | None = Field(
         default=None,
         min_length=1,
@@ -102,6 +116,13 @@ class TrustedProviderKey(StrictModel):
             raise ValueError("allowed_quote_hosts cannot contain duplicates")
         return normalized
 
+    @field_validator("roles", "allowed_package_ids")
+    @classmethod
+    def unique_scopes(cls, values: tuple[object, ...]) -> tuple[object, ...]:
+        if len(set(values)) != len(values):
+            raise ValueError("trusted key roles/package scopes cannot contain duplicates")
+        return values
+
     @model_validator(mode="after")
     def valid_key(self) -> TrustedProviderKey:
         if self.valid_until <= self.valid_from:
@@ -126,6 +147,8 @@ class TrustedProviderKey(StrictModel):
             and len(decode_base64url(self.public_key)) != 32
         ):
             raise ValueError("Ed25519 public keys must contain exactly 32 bytes")
+        if self.trust not in {TrustLevel.VERIFIED, TrustLevel.ATTESTED}:
+            raise ValueError("trusted provider keys require verified or attested trust")
         return self
 
     def permits_capability(self, capability: str) -> bool:
@@ -134,6 +157,12 @@ class TrustedProviderKey(StrictModel):
     def permits_quote_host(self, host: str) -> bool:
         return _host(host) in self.allowed_quote_hosts
 
+    def permits_role(self, role: TrustedKeyRole) -> bool:
+        return role in self.roles
+
+    def permits_package(self, package_id: str) -> bool:
+        return not self.allowed_package_ids or package_id in self.allowed_package_ids
+
     def rotation_payload(self) -> bytes:
         return canonical_payload(self.model_dump(mode="python", exclude={"rotation_signature"}))
 
@@ -141,7 +170,7 @@ class TrustedProviderKey(StrictModel):
 class TrustStoreDocument(StrictModel):
     model_config = ConfigDict(extra="forbid", frozen=True, allow_inf_nan=False)
 
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: Literal["0.4", "0.5"] = "0.5"
     keys: tuple[TrustedProviderKey, ...] = ()
 
 
@@ -213,6 +242,14 @@ class TrustStore:
             raise ValueError("rotated key cannot expand operator-trusted capabilities")
         if not set(key.allowed_quote_hosts).issubset(predecessor.allowed_quote_hosts):
             raise ValueError("rotated key cannot expand operator-trusted quote hosts")
+        if not set(key.roles).issubset(predecessor.roles):
+            raise ValueError("rotated key cannot expand operator-trusted roles")
+        if predecessor.allowed_package_ids and not set(key.allowed_package_ids).issubset(
+            predecessor.allowed_package_ids
+        ):
+            raise ValueError("rotated key cannot expand operator-trusted package IDs")
+        if key.trust is not predecessor.trust:
+            raise ValueError("rotated key cannot change operator-assigned trust")
         result = TrustStoreVerifier(self, clock=lambda: now).verify(
             key.rotation_payload(),
             signature,
@@ -298,8 +335,26 @@ class TrustStoreVerifier:
         }
         if algorithm not in ALLOWED_SIGNATURE_ALGORITHMS:
             return VerificationResult(False, "signature algorithm is not allowed", **common)
-        if signature.canonicalization_version != CANONICALIZATION_VERSION:
+        if signature.canonicalization_version not in SUPPORTED_CANONICALIZATION_VERSIONS:
             return VerificationResult(False, "canonicalization version is not supported", **common)
+        if not payload_matches_canonicalization(
+            payload,
+            signature.canonicalization_version,
+        ):
+            return VerificationResult(
+                False,
+                "payload bytes do not match the declared canonicalization",
+                **common,
+            )
+        if (
+            not allow_historical
+            and signature.canonicalization_version != JCS_CANONICALIZATION_VERSION
+        ):
+            return VerificationResult(
+                False,
+                "legacy canonicalization is historical-only in AEEP 0.5",
+                **common,
+            )
         key = self.store.get(expected_provider_id, signature.key_id)
         if key is None:
             providers = self.store.providers_for_key_id(signature.key_id)

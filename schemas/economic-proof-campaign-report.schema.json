@@ -143,7 +143,7 @@
       "type": "object"
     },
     "EconomicBenchmarkRouteType": {
-      "description": "Transport or funding shape measured by an AEEP 0.4 proof trial.",
+      "description": "Transport or funding shape measured by an AEEP 0.5 proof trial.",
       "enum": [
         "local-python",
         "local-cli",
@@ -161,8 +161,11 @@
       "description": "Sanitized measured economics for one existing benchmark trial.",
       "properties": {
         "schema_version": {
-          "const": "0.4",
-          "default": "0.4",
+          "default": "0.5",
+          "enum": [
+            "0.4",
+            "0.5"
+          ],
           "title": "Schema Version",
           "type": "string"
         },
@@ -482,8 +485,11 @@
       "description": "Measured proof for one caller-authored prepared economic workflow.\n\nWorkflow trials are kept outside the single-action route oracle because a\nmulti-step DAG is not an interchangeable route for one bounded action.",
       "properties": {
         "schema_version": {
-          "const": "0.4",
-          "default": "0.4",
+          "default": "0.5",
+          "enum": [
+            "0.4",
+            "0.5"
+          ],
           "title": "Schema Version",
           "type": "string"
         },
@@ -638,11 +644,14 @@
     }
   },
   "additionalProperties": false,
-  "description": "AEEP 0.4 proof report that leaves the frozen 0.3 campaign schema intact.",
+  "description": "AEEP 0.5 proof report that leaves the frozen 0.3 campaign schema intact.",
   "properties": {
     "schema_version": {
-      "const": "0.4",
-      "default": "0.4",
+      "default": "0.5",
+      "enum": [
+        "0.4",
+        "0.5"
+      ],
       "title": "Schema Version",
       "type": "string"
     },

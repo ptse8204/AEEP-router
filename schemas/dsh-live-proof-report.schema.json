@@ -1,0 +1,307 @@
+{
+  "$defs": {
+    "DSHLiveTurn": {
+      "additionalProperties": false,
+      "properties": {
+        "turn": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Turn",
+          "type": "integer"
+        },
+        "session": {
+          "enum": [
+            "primary",
+            "fresh"
+          ],
+          "title": "Session",
+          "type": "string"
+        },
+        "expected_tool": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Expected Tool",
+          "type": "string"
+        },
+        "observed_tool": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Observed Tool",
+          "type": "string"
+        },
+        "tool_calls": {
+          "minimum": 0,
+          "title": "Tool Calls",
+          "type": "integer"
+        },
+        "tool_succeeded": {
+          "minimum": 0,
+          "title": "Tool Succeeded",
+          "type": "integer"
+        },
+        "tool_failed": {
+          "minimum": 0,
+          "title": "Tool Failed",
+          "type": "integer"
+        },
+        "tool_unresolved": {
+          "minimum": 0,
+          "title": "Tool Unresolved",
+          "type": "integer"
+        },
+        "expected_aeep_receipts": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Expected Aeep Receipts",
+          "type": "integer"
+        },
+        "aeep_receipt_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Aeep Receipt Ids",
+          "type": "array"
+        },
+        "verification_receipt_hash": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Verification Receipt Hash",
+          "type": "string"
+        },
+        "assertion_code": {
+          "enum": [
+            "capabilities_discovered",
+            "text_stats_correct",
+            "read_route_selected",
+            "read_output_digest_matched",
+            "repeat_read_output_digest_matched",
+            "inactive_route_blocked"
+          ],
+          "title": "Assertion Code",
+          "type": "string"
+        },
+        "assertion_passed": {
+          "title": "Assertion Passed",
+          "type": "boolean"
+        },
+        "result_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result Digest"
+        }
+      },
+      "required": [
+        "turn",
+        "session",
+        "expected_tool",
+        "observed_tool",
+        "tool_calls",
+        "tool_succeeded",
+        "tool_failed",
+        "tool_unresolved",
+        "expected_aeep_receipts",
+        "verification_receipt_hash",
+        "assertion_code",
+        "assertion_passed"
+      ],
+      "title": "DSHLiveTurn",
+      "type": "object"
+    },
+    "DSHLiveUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "model_calls": {
+          "minimum": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "cache_read_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Tokens",
+          "type": "integer"
+        },
+        "cache_write_tokens": {
+          "minimum": 0,
+          "title": "Cache Write Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "model_calls",
+        "input_tokens",
+        "output_tokens",
+        "cache_read_tokens",
+        "cache_write_tokens",
+        "total_tokens"
+      ],
+      "title": "DSHLiveUsage",
+      "type": "object"
+    },
+    "ProofGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ProofGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5",
+      "default": "0.5",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "harness_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Harness Version",
+      "type": "string"
+    },
+    "fixture_digest_before": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Fixture Digest Before",
+      "type": "string"
+    },
+    "fixture_digest_after": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Fixture Digest After",
+      "type": "string"
+    },
+    "qualification_executions": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Qualification Executions",
+      "type": "integer"
+    },
+    "active_community_routes_during": {
+      "minimum": 0,
+      "title": "Active Community Routes During",
+      "type": "integer"
+    },
+    "active_community_routes_after": {
+      "minimum": 0,
+      "title": "Active Community Routes After",
+      "type": "integer"
+    },
+    "persisted_sensitive_matches": {
+      "minimum": 0,
+      "title": "Persisted Sensitive Matches",
+      "type": "integer"
+    },
+    "dsh_usage_imported_into_aeep": {
+      "const": false,
+      "default": false,
+      "title": "Dsh Usage Imported Into Aeep",
+      "type": "boolean"
+    },
+    "turns": {
+      "items": {
+        "$ref": "#/$defs/DSHLiveTurn"
+      },
+      "title": "Turns",
+      "type": "array"
+    },
+    "usage": {
+      "$ref": "#/$defs/DSHLiveUsage"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/ProofGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "generated_at",
+    "harness_version",
+    "fixture_digest_before",
+    "fixture_digest_after",
+    "qualification_executions",
+    "active_community_routes_during",
+    "active_community_routes_after",
+    "persisted_sensitive_matches",
+    "turns",
+    "usage",
+    "gates"
+  ],
+  "title": "DSHLiveProofReport",
+  "type": "object"
+}

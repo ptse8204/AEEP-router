@@ -1,6 +1,6 @@
 # Economic evidence operator guide
 
-This guide enables AEEP 0.4 economic evidence for already qualified and active
+This guide enables AEEP 0.5 economic evidence for already qualified and active
 routes. It does not qualify routes, grant approval, move real money, or turn a
 provider quote into permission to execute.
 

@@ -131,7 +131,7 @@ def test_health_keys_and_signed_offer() -> None:
     assert client.get("/health").json() == {
         "ok": True,
         "service": "aeep-reference-market",
-        "schema_version": "0.4",
+        "schema_version": "0.5",
         "reference_only": True,
         "unauthenticated_evidence_ingestion": False,
     }

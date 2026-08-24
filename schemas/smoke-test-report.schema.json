@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "SmokeStatus": {
+      "enum": [
+        "not_required",
+        "pending",
+        "passed",
+        "failed",
+        "blocked",
+        "expired"
+      ],
+      "title": "SmokeStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "smoke_report_id": {
+      "title": "Smoke Report Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "route_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Route Fingerprint",
+      "type": "string"
+    },
+    "smoke_definition_id": {
+      "title": "Smoke Definition Id",
+      "type": "string"
+    },
+    "environment_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Environment Digest",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "cold",
+        "warm"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/SmokeStatus"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "execution_receipt_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Execution Receipt Id"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Code"
+    }
+  },
+  "required": [
+    "smoke_report_id",
+    "candidate_id",
+    "route_fingerprint",
+    "smoke_definition_id",
+    "environment_digest",
+    "mode",
+    "status",
+    "started_at",
+    "finished_at"
+  ],
+  "title": "SmokeTestReport",
+  "type": "object"
+}

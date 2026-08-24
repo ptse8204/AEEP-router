@@ -192,7 +192,7 @@ class EnterprisePaymentAdapter(CallbackPaymentAdapter):
 
 
 class PaymentAdapterV2(Protocol):
-    """Exact-money payment rail used by prepared AEEP 0.4 execution."""
+    """Exact-money payment rail used by prepared AEEP execution."""
 
     name: str
     settlement_currency: str

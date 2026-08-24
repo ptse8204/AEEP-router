@@ -1,7 +1,19 @@
 # Changelog
 
-## Unreleased — 0.4.0
+## Unreleased — 0.5.0
 
+- native `aeep.dev/v0.5` provider packages with bounded strict YAML, RFC 8785
+  digests, role-scoped Ed25519 signatures, portable route fingerprints, and
+  zero-execution inert ingest;
+- immutable local/opt-in-HTTPS artifact CAS, independent evidence attestations,
+  per-metric acceptance, bounded smoke qualification, refresh, and explicit
+  activation/revocation gates;
+- immediate live-authorization cutoff for legacy canonical signatures while
+  retaining historical audit and pre-cutover settlement recovery;
+- privacy-preserving cache-affinity soft ranking, cache-read/write/reasoning
+  resource dimensions, registry metadata adapters, and durable action approvals;
+- deterministic DSH and job-application sandbox proofs with no live credentials,
+  real external writes, duplicate submissions, or unsupported resume facts;
 - request-bound, Ed25519-signed capability offers and bounded quotes with exact
   action, capability, executor, fingerprint, nonce, currency, terms, and expiry
   binding;
@@ -25,9 +37,9 @@
 - operator-gated remote quote networking with host allowlists, SSRF/DNS checks,
   bounded bodies, no redirects, no ambient proxies, and declared disclosure only;
 - a deterministic local reference provider/market, provider SDK helpers,
-  operator CLI surfaces, generated 0.4 schemas, and settlement-backed proof
+  operator CLI surfaces, generated 0.5 schemas, and settlement-backed proof
   assets;
-- compatibility for 0.1 through 0.3 manifests, legacy quotes and receipts, and
+- compatibility for 0.1 through 0.4 manifests, legacy quotes and receipts, and
   legacy full-capture payment adapters.
 
 ## 0.3.0 — 2026-08-13

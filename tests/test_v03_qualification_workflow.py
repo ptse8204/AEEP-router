@@ -102,7 +102,7 @@ def test_static_qualification_covers_every_external_adapter_boundary():
             "kind": ExecutorKind.COMMAND,
             "side_effect": SideEffect.READ,
             "config": {
-                "argv": ["/usr/bin/tool", "{input.value}"],
+                "argv": [sys.executable, "{input.value}"],
                 "env": {"API_TOKEN": "${ENV:LAB_TOKEN}"},
             },
         }

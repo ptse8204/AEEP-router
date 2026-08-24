@@ -62,6 +62,9 @@ quota_app = typer.Typer(help="Set or observe subscription quota pressure.")
 skill_app = typer.Typer(help="Install the packaged AEEP skill into an agent host.")
 ingest_app = typer.Typer(help="Ingest traces from existing agent runtimes.")
 candidate_app = typer.Typer(help="Qualify and activate inert imported routes.")
+provider_app = typer.Typer(help="Validate, digest, verify, and sign provider packages.")
+evidence_app = typer.Typer(help="Inspect accepted portable provider evidence.")
+registry_app = typer.Typer(help="Search bounded provider-package registry metadata.")
 workflow_app = typer.Typer(help="Run caller-authored bounded workflows.")
 campaign_app = typer.Typer(help="Run isolated repeated benchmark campaigns.")
 offer_app = typer.Typer(help="Inspect and import signed capability offers.")
@@ -75,6 +78,9 @@ app.add_typer(quota_app, name="quota")
 app.add_typer(skill_app, name="skill")
 app.add_typer(ingest_app, name="ingest")
 app.add_typer(candidate_app, name="candidate")
+app.add_typer(provider_app, name="provider")
+app.add_typer(evidence_app, name="evidence")
+app.add_typer(registry_app, name="registry")
 app.add_typer(workflow_app, name="workflow")
 app.add_typer(campaign_app, name="campaign")
 app.add_typer(offer_app, name="offer")
@@ -1794,6 +1800,16 @@ def economic_doctor(
                 PaymentReservationState.INDETERMINATE,
             }
         )
+        legacy_signed_records = sum(
+            item.signature.canonicalization_version == "aeep-canonical-json-v1"
+            for item in router.store.list_capability_offers(limit=10_000)
+        ) + sum(
+            item.signature.canonicalization_version == "aeep-canonical-json-v1"
+            for item in router.store.list_bounded_quotes(limit=10_000)
+        ) + sum(
+            item.signature.canonicalization_version == "aeep-canonical-json-v1"
+            for item in router.store.list_market_aggregates(limit=10_000)
+        )
         checks = {
             "enabled": config.enabled,
             "live_quotes_enabled": config.live_quotes.enabled,
@@ -1806,6 +1822,10 @@ def economic_doctor(
             "recoverable_prepared_decisions": len(recoverable),
             "pending_payment_operation_intents": pending_payment_intents,
             "pending_refund_authorizations": len(pending_refunds),
+            "rfc8785_live_cutover_at": router.store.protocol_cutover(
+                "rfc8785_live_cutover"
+            ),
+            "legacy_historical_only_records": legacy_signed_records,
             "remote_networking_default": "disabled" if not config.enabled else "enabled",
         }
         _economic_emit(
@@ -2907,6 +2927,149 @@ def import_openapi_command(
         _fail(exc, compact=compact)
 
 
+@provider_app.command("validate")
+def provider_validate(
+    path: Path,
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Validate one strict v0.5 package without resolving artifacts or executing."""
+
+    from .provider_package import load_provider_package
+
+    try:
+        package, _ = load_provider_package(path)
+        _emit(
+            {
+                "ok": True,
+                "package_id": package.metadata.package_id,
+                "version": package.metadata.version,
+                "provider_id": package.spec.provider.provider_id,
+                "routes": len(package.spec.routes),
+                "artifacts": len(package.spec.artifacts),
+            },
+            compact=compact,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@provider_app.command("digest")
+def provider_digest(
+    path: Path,
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Recompute the RFC 8785 package digest without executing provider code."""
+
+    from .provider_package import load_provider_package, provider_package_digest
+
+    try:
+        package, _ = load_provider_package(path)
+        actual = provider_package_digest(package)
+        _emit(
+            {
+                "ok": actual == package.integrity.digest,
+                "declared_digest": package.integrity.digest,
+                "computed_digest": actual,
+            },
+            compact=compact,
+        )
+        if actual != package.integrity.digest:
+            raise typer.Exit(code=2)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@provider_app.command("verify")
+def provider_verify(
+    path: Path,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Verify package signatures and derive local identity trust without ingesting."""
+
+    from .artifact_store import ContentArtifactStore
+    from .economic.trust import TrustStore
+    from .provider_ingest import ProviderPackageIngestor
+    from .provider_package import load_provider_package
+
+    router = Router.from_manifest(manifest)
+    try:
+        package, _ = load_provider_package(path)
+        try:
+            trust = _trust_verifier(router).store
+        except ConfigurationError:
+            trust = TrustStore()
+        verification = ProviderPackageIngestor(
+            router.store,
+            ContentArtifactStore(router.manifest.provider_packages.artifact_root),
+            trust,
+        ).verify_package(package)
+        _emit(verification, compact=compact)
+        if verification.integrity_status.value != "verified":
+            raise typer.Exit(code=2)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@provider_app.command("sign")
+def provider_sign(
+    path: Path,
+    private_key_file: Path = typer.Option(..., "--private-key-file"),
+    key_id: str = typer.Option(..., "--key-id"),
+    signature_id: str | None = typer.Option(None, "--signature-id"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Sign one package using private key bytes read only from a protected file."""
+
+    from .economic.signing import Ed25519Signer, decode_base64url
+    from .provider_package import (
+        load_provider_package,
+        sign_provider_package,
+        write_provider_package,
+    )
+
+    try:
+        package, _ = load_provider_package(path)
+        if os.name == "posix" and private_key_file.stat().st_mode & 0o077:
+            raise ConfigurationError(
+                "private key file must not be readable or writable by group/other"
+            )
+        encoded = private_key_file.read_bytes()
+        if len(encoded) == 32:
+            private_key = encoded
+        else:
+            text = encoded.decode("utf-8").strip()
+            private_key = (
+                bytes.fromhex(text)
+                if len(text) == 64 and all(character in "0123456789abcdefABCDEF" for character in text)
+                else decode_base64url(text)
+            )
+        if len(private_key) != 32:
+            raise ConfigurationError("Ed25519 private key file must contain exactly 32 bytes")
+        signed = sign_provider_package(
+            package,
+            Ed25519Signer.from_private_bytes(private_key, key_id=key_id),
+            signature_id=(signature_id or key_id),
+        )
+        write_provider_package(signed, path)
+        _emit(
+            {
+                "ok": True,
+                "package_digest": signed.integrity.digest,
+                "signature_id": signature_id or key_id,
+            },
+            compact=compact,
+        )
+    except (AEEPError, UnicodeDecodeError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
 @candidate_app.command("status")
 def candidate_status(
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
@@ -2924,11 +3087,45 @@ def candidate_status(
         _run(router.close())
 
 
+@candidate_app.command("inspect")
+def candidate_inspect(
+    executor_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(router.inspect_candidate(executor_id), compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command("smoke")
+def candidate_smoke(
+    executor_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        result = _run(_await_and_close(router, router.smoke_candidate(executor_id)))
+        _emit([item.model_dump(mode="json") for item in result], compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
 @candidate_app.command("ingest")
 def candidate_ingest(
-    descriptor: str = typer.Argument(..., help="ProviderDescriptor JSON/YAML or @file"),
-    source_id: str = typer.Option(..., "--source-id"),
+    descriptor: str = typer.Argument(
+        ...,
+        help="aeep-provider.yaml/directory or legacy ProviderDescriptor JSON/YAML/@file",
+    ),
+    source_id: str | None = typer.Option(None, "--source-id"),
     capability: str | None = typer.Option(None, "--capability"),
+    offline: bool = typer.Option(False, "--offline"),
+    allow_remote_artifacts: bool = typer.Option(False, "--allow-remote-artifacts"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -2938,12 +3135,29 @@ def candidate_ingest(
 
     router = Router.from_manifest(manifest)
     try:
-        provider = ProviderDescriptor.model_validate(_read_data(descriptor, default={}))
-        candidates = [
-            router.ingest_candidate(spec, source_id=source_id)
-            for spec in provider.executors
-            if capability is None or spec.capability == capability
-        ]
+        candidate_path = Path(descriptor[1:] if descriptor.startswith("@") else descriptor)
+        is_package = candidate_path.is_dir() or candidate_path.name == "aeep-provider.yaml"
+        if is_package:
+            candidates = list(
+                _run(
+                    router.ingest_provider_package(
+                        candidate_path,
+                        source_id=source_id,
+                        allow_remote_artifacts=(allow_remote_artifacts and not offline),
+                    )
+                )
+            )
+            if capability is not None:
+                candidates = [item for item in candidates if item.capability == capability]
+        else:
+            if source_id is None:
+                raise typer.BadParameter("legacy descriptor ingest requires --source-id")
+            provider = ProviderDescriptor.model_validate(_read_data(descriptor, default={}))
+            candidates = [
+                router.ingest_candidate(spec, source_id=source_id)
+                for spec in provider.executors
+                if capability is None or spec.capability == capability
+            ]
         if not candidates:
             raise typer.BadParameter("descriptor contains no matching executors")
         _emit([item.model_dump(mode="json") for item in candidates], compact=compact)
@@ -2964,6 +3178,7 @@ def candidate_qualify(
     conditions: str = typer.Option(
         "process-cold", "--conditions", help="Comma-separated process-cold,router-warm"
     ),
+    reuse_evidence: bool = typer.Option(False, "--reuse-evidence"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -2974,27 +3189,32 @@ def candidate_qualify(
         raise typer.BadParameter("cases must be a list")
     router = Router.from_manifest(manifest)
     try:
-        result = _run(
-            _await_and_close(
-                router,
-                router.qualify_candidate(
-                    executor_id,
-                    side_effect=side_effect,
-                    idempotent=idempotent,
-                    safe_to_auto_execute=safe_to_auto_execute,
-                    cases=[QualificationCase.model_validate(item) for item in parsed],
-                    repetitions=repetitions,
-                    conditions=[
-                        QualificationCondition(item.strip())
-                        for item in conditions.split(",")
-                        if item.strip()
-                    ],
-                ),
+        if reuse_evidence:
+            result = router.qualify_candidate_from_evidence(executor_id)
+        else:
+            result = _run(
+                _await_and_close(
+                    router,
+                    router.qualify_candidate(
+                        executor_id,
+                        side_effect=side_effect,
+                        idempotent=idempotent,
+                        safe_to_auto_execute=safe_to_auto_execute,
+                        cases=[QualificationCase.model_validate(item) for item in parsed],
+                        repetitions=repetitions,
+                        conditions=[
+                            QualificationCondition(item.strip())
+                            for item in conditions.split(",")
+                            if item.strip()
+                        ],
+                    ),
+                )
             )
-        )
         _emit(result, compact=compact)
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
 
 
 @candidate_app.command("activate")
@@ -3022,6 +3242,172 @@ def candidate_suspend(
     router = Router.from_manifest(manifest)
     try:
         _emit(router.suspend_candidate(executor_id, reason=reason), compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command("refresh")
+def candidate_refresh(
+    executor_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        result = _run(_await_and_close(router, router.refresh_candidate(executor_id)))
+        _emit(result, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@evidence_app.command("list")
+def evidence_list(
+    route: str = typer.Option(..., "--route"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(
+            {
+                "records": router.store.list_evidence_records(route),
+                "acceptances": router.store.list_evidence_acceptances(route),
+            },
+            compact=compact,
+        )
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@evidence_app.command("show")
+def evidence_show(
+    evidence_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        item = router.store.get_evidence_record(evidence_id)
+        if item is None:
+            raise ConfigurationError(f"unknown evidence {evidence_id!r}")
+        _emit(item, compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@evidence_app.command("explain")
+def evidence_explain(
+    route: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(router.inspect_candidate(route), compact=compact)
+    except (AEEPError, ValueError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@evidence_app.command("revalue")
+def evidence_revalue(
+    rate_card: str = typer.Option(..., "--rate-card"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Revalue accepted benchmark usage without rewriting historical resources."""
+
+    import gzip
+
+    from .benchmarking import BenchmarkCampaignReport, revalue_campaign
+
+    router = Router.from_manifest(manifest)
+    try:
+        snapshot = router.store.get_rate_card_snapshot(rate_card)
+        if snapshot is None:
+            raise ConfigurationError(f"unknown rate-card snapshot {rate_card!r}")
+        reports = []
+        for path in router.store.list_evidence_artifact_paths("benchmark_campaign"):
+            payload = path.read_bytes()
+            if payload.startswith(b"\x1f\x8b"):
+                payload = gzip.decompress(payload)
+            campaign = BenchmarkCampaignReport.model_validate_json(payload)
+            reports.append(revalue_campaign(campaign, snapshot))
+        _emit(reports, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@registry_app.command("search")
+def registry_search(
+    query: str,
+    registry: str = typer.Option("mcp", "--registry"),
+    fixture: Path | None = typer.Option(None, "--fixture"),
+    catalog: str | None = typer.Option(None, "--catalog"),
+    token_env: str | None = typer.Option(None, "--token-env"),
+    limit: int = typer.Option(20, "--limit", min=1, max=100),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    from .discovery import (
+        DockerCatalogAdapter,
+        FixtureRegistryAdapter,
+        MCPCommunityRegistryAdapter,
+        PackageRegistryAdapter,
+        RegistryQuery,
+        SmitheryRegistryAdapter,
+    )
+
+    router = Router.from_manifest(manifest)
+    try:
+        adapter: PackageRegistryAdapter
+        if registry == "fixture":
+            if fixture is None:
+                raise typer.BadParameter("fixture registry requires --fixture")
+            adapter = FixtureRegistryAdapter(fixture)
+        elif registry == "mcp":
+            adapter = MCPCommunityRegistryAdapter()
+        elif registry == "docker":
+            if catalog is None:
+                raise typer.BadParameter("Docker registry requires --catalog")
+            adapter = DockerCatalogAdapter(catalog)
+        elif registry == "smithery":
+            if token_env is None:
+                raise typer.BadParameter("Smithery registry requires --token-env")
+            adapter = SmitheryRegistryAdapter(token_env=token_env)
+        else:
+            raise typer.BadParameter("registry must be fixture, mcp, docker, or smithery")
+        results = _run(adapter.search(RegistryQuery(query=query, limit=limit)))
+        for item in results:
+            router.store.save_registry_candidate(item)
+        _emit(results, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@registry_app.command("inspect")
+def registry_inspect(
+    candidate_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    router = Router.from_manifest(manifest)
+    try:
+        candidate = router.store.get_registry_candidate(candidate_id)
+        if candidate is None:
+            raise ConfigurationError(f"unknown registry result {candidate_id!r}")
+        _emit(candidate, compact=compact)
     except (AEEPError, ValueError) as exc:
         _fail(exc, compact=compact)
     finally:

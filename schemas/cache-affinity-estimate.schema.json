@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "warm_probability": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Warm Probability",
+      "type": "number"
+    },
+    "identity_match": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Identity Match",
+      "type": "number"
+    },
+    "prefix_match": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Prefix Match",
+      "type": "number"
+    },
+    "freshness_decay": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Freshness Decay",
+      "type": "number"
+    },
+    "continuity_probability": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Continuity Probability",
+      "type": "number"
+    },
+    "observed_reliability": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Observed Reliability",
+      "type": "number"
+    },
+    "cold_resources": {
+      "$ref": "#/$defs/ResourceVector"
+    },
+    "warm_resources": {
+      "$ref": "#/$defs/ResourceVector"
+    },
+    "expected_resources": {
+      "$ref": "#/$defs/ResourceVector"
+    }
+  },
+  "required": [
+    "warm_probability",
+    "identity_match",
+    "prefix_match",
+    "freshness_decay",
+    "continuity_probability",
+    "observed_reliability",
+    "cold_resources",
+    "warm_resources",
+    "expected_resources"
+  ],
+  "title": "CacheAffinityEstimate",
+  "type": "object"
+}

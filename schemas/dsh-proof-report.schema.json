@@ -1,0 +1,279 @@
+{
+  "$defs": {
+    "DSHCampaignArm": {
+      "enum": [
+        "DSH_SUGGESTED",
+        "AEEP_STATIC",
+        "AEEP_SHARED",
+        "AEEP_ADAPTIVE"
+      ],
+      "title": "DSHCampaignArm",
+      "type": "string"
+    },
+    "DSHProofTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.5",
+          "default": "0.5",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trial_id": {
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "arm": {
+          "$ref": "#/$defs/DSHCampaignArm"
+        },
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "workload_id": {
+          "default": "default",
+          "title": "Workload Id",
+          "type": "string"
+        },
+        "selected_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Selected Route Id"
+        },
+        "terminal_route_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Terminal Route Id"
+        },
+        "oracle_route_id": {
+          "title": "Oracle Route Id",
+          "type": "string"
+        },
+        "feasible": {
+          "title": "Feasible",
+          "type": "boolean"
+        },
+        "task_valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Valid"
+        },
+        "receipt_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receipt Id"
+        },
+        "receipt_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Receipt Ids",
+          "type": "array"
+        },
+        "fallback_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Fallback Count",
+          "type": "integer"
+        },
+        "shared_trials_reused": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Shared Trials Reused",
+          "type": "integer"
+        },
+        "smoke_executions": {
+          "default": 0,
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Smoke Executions",
+          "type": "integer"
+        },
+        "warm_probability": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Warm Probability"
+        },
+        "actual_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Cash Usd"
+        },
+        "actual_input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Input Tokens"
+        },
+        "actual_cached_input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Cached Input Tokens"
+        },
+        "actual_output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Output Tokens"
+        }
+      },
+      "required": [
+        "trial_id",
+        "arm",
+        "capability",
+        "selected_route_id",
+        "oracle_route_id",
+        "feasible",
+        "task_valid"
+      ],
+      "title": "DSHProofTrial",
+      "type": "object"
+    },
+    "ProofGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ProofGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5",
+      "default": "0.5",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/DSHProofTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/ProofGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "generated_at",
+    "trials",
+    "gates"
+  ],
+  "title": "DSHProofReport",
+  "type": "object"
+}

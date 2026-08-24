@@ -314,3 +314,32 @@ over-reserve.
    Ed25519 trust store.
 6. Hosted marketplace accounts, custody, payouts, and fraud controls.
 7. Richer OpenTelemetry semantic events, exporters, and trace-to-action correlation.
+
+## Provider-package supply chain (0.5)
+
+```text
+aeep-provider.yaml
+  -> bounded strict YAML
+  -> RFC 8785 digest + publisher signature/trust
+  -> portable route fingerprint
+  -> local/HTTPS artifact hash -> immutable CAS
+  -> independent evidence attestation + per-metric acceptance
+  -> atomic package/evidence/snapshot + inert CANDIDATE
+  -> operator smoke (one cold, optional warm)
+  -> evidence-assisted QUALIFIED
+  -> explicit ACTIVE
+```
+
+Package parsing/signing is isolated from artifact resolution; artifact bytes are
+finalized in CAS before one SQLite transaction publishes trusted metadata.
+External evidence feeds the existing estimator as a prior. It does not enter
+the observations table and does not create a second scorer.
+
+New v0.5 signatures use RFC 8785. Verification dispatches on the signed profile;
+legacy signatures are historical/recovery-only. Database schema v4 records the
+cutover, package revisions, artifacts, evidence decisions, smoke results, cache
+observations, registry metadata, and durable approvals.
+
+Cache affinity follows the same hard/soft split as every other routing signal:
+cold resources decide feasibility, while a privacy-safe warm expectation may
+change the score of an already feasible route.

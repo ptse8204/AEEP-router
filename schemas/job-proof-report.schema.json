@@ -1,0 +1,229 @@
+{
+  "$defs": {
+    "ApplicationAttemptState": {
+      "enum": [
+        "DISCOVERED",
+        "SHORTLISTED",
+        "RESUME_PREPARED",
+        "FORM_INSPECTED",
+        "DRAFT_FILLED",
+        "WAITING_FOR_APPROVAL",
+        "SUBMITTING",
+        "SUCCEEDED",
+        "FAILED",
+        "INDETERMINATE",
+        "RECONCILED"
+      ],
+      "title": "ApplicationAttemptState",
+      "type": "string"
+    },
+    "ExecutionStatus": {
+      "enum": [
+        "success",
+        "failed",
+        "timeout",
+        "rejected",
+        "host_selected",
+        "delegated",
+        "unknown"
+      ],
+      "title": "ExecutionStatus",
+      "type": "string"
+    },
+    "JobApplicationAttempt": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.5",
+          "default": "0.5",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "attempt_id": {
+          "title": "Attempt Id",
+          "type": "string"
+        },
+        "job_id_hmac": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Job Id Hmac",
+          "type": "string"
+        },
+        "resume_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Resume Digest",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/ApplicationAttemptState"
+        },
+        "approval_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approval Id"
+        },
+        "receipt_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Receipt Ids",
+          "type": "array"
+        },
+        "reconciled_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reconciled At"
+        }
+      },
+      "required": [
+        "attempt_id",
+        "job_id_hmac",
+        "resume_digest",
+        "idempotency_key",
+        "state"
+      ],
+      "title": "JobApplicationAttempt",
+      "type": "object"
+    },
+    "ProofGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ProofGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5",
+      "default": "0.5",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "postings": {
+      "minimum": 1,
+      "title": "Postings",
+      "type": "integer"
+    },
+    "unique_canonical_jobs": {
+      "minimum": 1,
+      "title": "Unique Canonical Jobs",
+      "type": "integer"
+    },
+    "duplicate_postings": {
+      "minimum": 0,
+      "title": "Duplicate Postings",
+      "type": "integer"
+    },
+    "form_families": {
+      "minimum": 1,
+      "title": "Form Families",
+      "type": "integer"
+    },
+    "form_family_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Form Family Ids",
+      "type": "array"
+    },
+    "attempts": {
+      "items": {
+        "$ref": "#/$defs/JobApplicationAttempt"
+      },
+      "title": "Attempts",
+      "type": "array"
+    },
+    "supported_fact_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supported Fact Ids",
+      "type": "array"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/ProofGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    },
+    "execution_statuses": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ExecutionStatus"
+      },
+      "title": "Execution Statuses",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "generated_at",
+    "postings",
+    "unique_canonical_jobs",
+    "duplicate_postings",
+    "form_families",
+    "form_family_ids",
+    "attempts",
+    "supported_fact_ids",
+    "gates"
+  ],
+  "title": "JobProofReport",
+  "type": "object"
+}

@@ -94,6 +94,36 @@ Imported traces and SDK measurements also influence local history. Treat trace f
 - Discovery/import never activates a route. Qualification is read-only,
   fingerprint-bound, and followed by a separate operator activation.
 - Endpoint, argv, MCP tool/schema/protocol, image, or version drift suspends an active imported route.
+- Provider-package ingest accepts only bounded strict YAML and executes zero
+  provider code. Package signatures prove provenance; separate evidence
+  attestations prove only their exact artifact/subject claim.
+- Local artifact paths cannot be absolute, traverse, or use symlinks. Accepted
+  bytes are hashed and copied to immutable CAS before parsing.
+- Remote artifacts are disabled by default, HTTPS-only, exact-host allowlisted,
+  byte/decompression bounded, and connected to a validated resolved address
+  while retaining original TLS SNI.
+- Registry labels and container provenance never grant qualification, economic
+  trust, activation, or approval.
+
+## RFC 8785 cutover
+
+AEEP 0.5 issues only RFC 8785 signatures. Legacy canonicalization is accepted
+for historical audit and for settlement/reconciliation of an attempt durably
+invoked before the cutover. It cannot authorize new preparation, reservation,
+invocation, evidence use, aggregate scoring, or key rotation. Do not rewrite or
+re-sign historical records in place.
+
+## Cache affinity and approvals
+
+Cache scope, prefix, and state identities are local keyed HMACs. Never persist
+raw prompts, email, job postings, resumes, reasoning, or tool output as cache
+identity. Warm estimates affect soft scoring only; cold values remain hard
+limits.
+
+Consequential execution writes an immutable approval record bound to the exact
+action/policy/attempt. Model/package/registry input cannot create or raise an
+approval. A timeout remains indeterminate and cannot be retried merely because
+an approval exists.
 
 ## Economic evidence
 
