@@ -38,7 +38,7 @@ async def async_text_stats(text: str) -> dict[str, int]:
 
 
 def slow_text_stats(text: str) -> dict[str, int]:
-    time.sleep(0.04)
+    time.sleep(0.25)
     return text_stats(text)
 
 

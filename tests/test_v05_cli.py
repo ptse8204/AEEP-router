@@ -13,18 +13,16 @@ RUNNER = CliRunner()
 def manifest(tmp_path: Path, fixture: Path) -> Path:
     path = tmp_path / "aeep.yaml"
     path.write_text(
-        "\n".join(
-            (
-                'version: "0.5"',
-                f'database: "{tmp_path / "aeep.db"}"',
-                "provider_packages:",
-                f'  artifact_root: "{tmp_path / "artifacts"}"',
-                "economic_evidence:",
-                "  trust_store:",
-                f'    path: "{fixture / "trusted-keys.json"}"',
-            )
-        )
-        + "\n",
+        json.dumps(
+            {
+                "version": "0.5",
+                "database": str(tmp_path / "aeep.db"),
+                "provider_packages": {"artifact_root": str(tmp_path / "artifacts")},
+                "economic_evidence": {
+                    "trust_store": {"path": str(fixture / "trusted-keys.json")}
+                },
+            }
+        ),
         encoding="utf-8",
     )
     return path

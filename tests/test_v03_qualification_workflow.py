@@ -153,7 +153,7 @@ def test_static_qualification_covers_every_external_adapter_boundary():
             "kind": ExecutorKind.MCP,
             "config": {
                 "transport": "stdio",
-                "command": "/usr/bin/docker",
+                "command": sys.executable,
                 "args": ["mcp", "gateway", "run"],
                 "env": {"TOKEN": "env:LAB_TOKEN"},
             },
