@@ -29,10 +29,19 @@ wrapper.
   explicit activation.
 - Economic routing with hard limits, approvals, usage receipts, and recovery.
 
-In one bounded GPT-5.6 Terra Medium test, 20 direct Codex turns used 287,104
-provider tokens. AEEP selected an exact-compatible local route for the same 20
-actions, so no model call was needed. This result applies to that deterministic
-action—not every workload. [Read the report](reports/v06/codex/campaign.md).
+## Measured result
+
+| 20 matched actions | Direct Codex | AEEP route |
+|---|---:|---:|
+| Exact results | 20/20 | 20/20 |
+| Provider input + output tokens | 287,104 | 0 |
+| Median input + output per action | 14,356.5 | 0 |
+| Median latency | 5,976.5 ms | 6.48 ms |
+
+GPT-5.6 Terra Medium, fixed seed, identical `text.stats@1` inputs and output
+oracle. Median paired token reduction was 14,356.5 (95% CI: 14,349–14,363).
+AEEP avoided the model call because an exact-compatible local route existed;
+this is not a claim about every workload. [Full report](reports/v06/codex/campaign.md).
 
 ## Quick start
 
