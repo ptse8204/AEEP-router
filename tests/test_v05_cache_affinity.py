@@ -69,6 +69,19 @@ def test_warm_probability_and_usage_normalization() -> None:
 
     assert 0 < estimate.warm_probability < 1
     assert 100 < estimate.expected_resources.latency_ms < 1000
+    compacted = estimate_cache_affinity(
+        context.model_copy(update={"compaction_generation": 1}),
+        cold_resources=ResourceVector(latency_ms=1000, input_tokens=1000),
+        warm_resources=ResourceVector(
+            latency_ms=100,
+            input_tokens=1000,
+            cached_input_tokens=800,
+        ),
+        latest=latest,
+        at=NOW,
+    )
+    assert compacted.warm_probability == 0
+    assert compacted.expected_resources.latency_ms == 1000
     usage = normalize_cache_usage(
         {
             "usage": {

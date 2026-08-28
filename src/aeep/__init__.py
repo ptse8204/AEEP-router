@@ -66,6 +66,7 @@ from .models import (
     EconomicRequirementsConfig,
     EconomicStrictModel,
     EconomicTrustStoreConfig,
+    EstimateUncertainty,
     ExecutionOutcome,
     ExecutionReceipt,
     ExecutorSpec,
@@ -103,6 +104,8 @@ from .models import (
     ResourceAccounting,
     RetryChargePolicy,
     RouteDecision,
+    RouteDisposition,
+    RoutingAbstentionConfig,
     SettlementEvidence,
     SettlementReceipt,
     SettlementStatus,
@@ -126,11 +129,15 @@ from .payments import (
 from .proofs import (
     DSHLiveComparisonReport,
     DSHLiveProofReport,
+    DSHPluginCampaignReport,
     DSHProofReport,
     JobProofReport,
     ResumePlan,
+    RoutingValueReport,
+    RoutingValueTrial,
 )
 from .provider_ingest import ProviderPackageIngestor
+from .provider_operations import SQLiteProviderOperationStore
 from .provider_package import (
     ArtifactReference,
     CandidateVerificationSnapshot,
@@ -140,6 +147,7 @@ from .provider_package import (
     EvidenceReference,
     EvidenceSubject,
     PackageVerificationResult,
+    ProviderDiscoveryDocument,
     ProviderIdentity,
     ProviderPackage,
     ProviderPackageMetadata,
@@ -150,7 +158,13 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 from .router import Router
-from .sdk import EconomicProvider, capability, executor_from_callable
+from .sdk import (
+    EconomicProvider,
+    build_provider_package,
+    capability,
+    executor_from_callable,
+    export_evidence_artifact,
+)
 from .version import __version__
 from .workflow import WorkflowExecutionOutcome, WorkflowRequest
 
@@ -190,6 +204,7 @@ __all__ = [
     "CurrencyAmount",
     "DSHLiveComparisonReport",
     "DSHLiveProofReport",
+    "DSHPluginCampaignReport",
     "DSHProofReport",
     "EconomicBenchmarkOracle",
     "EconomicBenchmarkRouteType",
@@ -207,6 +222,7 @@ __all__ = [
     "EconomicStrictModel",
     "EconomicTrustStoreConfig",
     "EconomicWorkflowProofTrial",
+    "EstimateUncertainty",
     "EvidenceAcceptance",
     "EvidenceAttestation",
     "EvidenceReference",
@@ -240,6 +256,7 @@ __all__ = [
     "PricingRoundingMode",
     "PricingRule",
     "ProviderDescriptor",
+    "ProviderDiscoveryDocument",
     "ProviderExecutionStatus",
     "ProviderIdentity",
     "ProviderPackage",
@@ -269,7 +286,12 @@ __all__ = [
     "RetryChargePolicy",
     "RouteCandidate",
     "RouteDecision",
+    "RouteDisposition",
     "Router",
+    "RoutingAbstentionConfig",
+    "RoutingValueReport",
+    "RoutingValueTrial",
+    "SQLiteProviderOperationStore",
     "SettlementEvidence",
     "SettlementReceipt",
     "SettlementStatus",
@@ -287,6 +309,7 @@ __all__ = [
     "__version__",
     "billable_amount_for_execution",
     "billable_amount_for_terms",
+    "build_provider_package",
     "cache_hmac",
     "capability",
     "cash_accounting_for_reporting",
@@ -301,6 +324,7 @@ __all__ = [
     "evaluate_economic_proof",
     "evaluate_release_proof",
     "executor_from_callable",
+    "export_evidence_artifact",
     "finalize_economic_proof",
     "format_economic_proof_report",
     "instrument_anthropic",

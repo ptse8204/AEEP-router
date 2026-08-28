@@ -1,4 +1,4 @@
-# AEEP 0.5 provider and economic evidence threat model
+# AEEP 0.6 provider and economic evidence threat model
 
 This document scopes the new economic evidence path. It complements
 `SECURITY.md`; it is not a penetration-test report or a production certification.

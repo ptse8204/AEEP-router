@@ -1,4 +1,4 @@
-# AEEP 0.5 provider trust
+# AEEP 0.6 provider trust
 
 Cryptographic integrity and effective identity trust are separate. An embedded
 key can prove that one package revision is internally consistent, but it is only

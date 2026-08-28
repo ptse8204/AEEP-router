@@ -29,7 +29,7 @@ from aeep.router import Router
 )
 def test_tool_schema_exports(format, key):
     tools = export_tools(format)
-    assert len(tools) == 9
+    assert len(tools) == 10
     assert key in tools[0]
 
 
@@ -95,7 +95,7 @@ def test_protocol_modern_discover_and_list(tmp_path):
                 "params": {"_meta": meta},
             }
         )
-        assert len(listed["result"]["tools"]) == 9
+        assert len(listed["result"]["tools"]) == 10
         assert listed["result"]["resultType"] == "complete"
         assert listed["result"]["ttlMs"] > 0
         assert listed["result"]["cacheScope"] == "private"

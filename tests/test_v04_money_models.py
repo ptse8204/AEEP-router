@@ -218,9 +218,9 @@ def test_economic_config_is_offline_and_fail_closed_by_default() -> None:
     assert EconomicEvidenceConfig.model_validate_json(config.model_dump_json()) == config
 
 
-def test_manifest_defaults_to_v05_with_economic_networking_disabled() -> None:
+def test_manifest_defaults_to_v06_with_economic_networking_disabled() -> None:
     manifest = Manifest()
-    assert manifest.version == "0.5"
+    assert manifest.version == "0.6"
     assert manifest.economic_evidence == EconomicEvidenceConfig()
 
 

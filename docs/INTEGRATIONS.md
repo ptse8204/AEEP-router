@@ -1,22 +1,32 @@
 # Agent integration guide
 
-AEEP 0.5.0 deliberately exposes the same nine operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP 0.6 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
 - `aeep_execute_action`
 - `aeep_record_outcome`
-- `aeep_request_quotes`
+- `aeep_estimate_route_prices`
+- `aeep_request_quotes` (deprecated alias)
 - `aeep_get_metrics`
 - `aeep_show_prepared_decision`
 - `aeep_show_quote`
 - `aeep_show_settlement`
 
-The three economic inspection tools read already-persisted, sanitized records. They do not contact providers, prepare or execute routes, reserve or settle funds, reconcile billing, mutate trust, recover attempts, activate routes, or run benchmarks. The legacy `aeep_request_quotes` operation remains a local static-estimate lookup; it does not invoke the AEEP 0.5 remote quote client.
+The three economic inspection tools read already-persisted, sanitized records. They do not contact providers, prepare or execute routes, reserve or settle funds, reconcile billing, mutate trust, recover attempts, activate routes, or run benchmarks. `aeep_estimate_route_prices` and its legacy `aeep_request_quotes` alias are local, non-binding estimate lookups; neither invokes the remote quote client.
 
 Financial acceptance, reservations, captures, releases, refunds, and reconciliation are operator-only and are not model tools. Raw action input, output, credentials, and external billing references are not returned by the economic inspection tools.
 
 This keeps the routing contract stable even when an agent host changes. The host remains responsible for its own sandbox and approval UI; AEEP independently enforces manifest constraints and its operator-configured execution ceiling.
+
+For DeepSeek Harness, prefer `integrations/dsh-aeep-router/`. That Cordis plugin
+accepts an exact `/aeep` capability envelope and routes it before the model call
+through one persistent, bounded JSONL `aeep host-bridge`. The model sees only
+the configured canonical tool; AEEP and hidden implementation schemas are not
+model input. A rejected preflight makes no model call, and a bridge failure
+during a routed action fails that action closed. Ordinary model routing may keep
+its operator baseline. Installation into a running Harness and any live
+campaign are separate operator-approved steps.
 
 ## Start a local MCP server
 

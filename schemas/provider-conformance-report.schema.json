@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "ProviderConformanceCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "title": "Check Id",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "passed",
+        "detail"
+      ],
+      "title": "ProviderConformanceCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "profile": {
+      "default": "aeep-provider-conformance-v1",
+      "title": "Profile",
+      "type": "string"
+    },
+    "package_digest": {
+      "title": "Package Digest",
+      "type": "string"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ProviderConformanceCheck"
+      },
+      "minItems": 1,
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "package_digest",
+    "passed",
+    "checks"
+  ],
+  "title": "ProviderConformanceReport",
+  "type": "object"
+}

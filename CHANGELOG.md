@@ -1,6 +1,42 @@
 # Changelog
 
-## Unreleased — 0.5.0
+## Unreleased — 0.6.0
+
+- deterministic empirical p50/p95 resource estimates, observed cash p95, Wilson
+  reliability lower bounds, and quality lower bounds after five exact-cohort
+  samples; distributions never become payment authorization;
+- explicit `SELECTED`/`BYPASS_ROUTER` decisions with routing overhead, feasible
+  operator baseline, net-benefit threshold, and signed-delta routing-value
+  report contracts that retain negative outcomes;
+- v0.6 provider packages with explicit evidence authority/cohort declarations,
+  a signed `/.well-known/aeep-provider.json` document, provider conformance CLI,
+  SDK package/evidence builders, and durable SQLite provider idempotency records;
+- isolated Python callable execution using an argv-only subprocess, bounded JSON
+  pipes, timeout termination, and optional POSIX CPU/memory limits; packaged
+  Python routes always use it;
+- unambiguous `aeep_estimate_route_prices` model tool; the older
+  `aeep_request_quotes` name remains a deprecated non-binding alias.
+- pre-model DSH `/aeep` routing with empty default tool exposure, exact live
+  schema pins, guarded hidden implementations, one explicit web-result adapter,
+  persistent JSONL host bridge, route-pressure correlation, and a two-arm
+  30-pair campaign contract whose savings claim requires a positive 95% interval.
+- reproducible GPT-5.6 Terra Medium Codex comparison: 20 matched direct/AEEP
+  pairs passed exact correctness and receipt gates; the compatible local AEEP
+  route avoided 287,104 measured provider tokens without claiming a universal
+  savings rate.
+
+## 0.5.1 — 2026-08-26
+
+- exact `aeep-evidence-cohort-v1` binding for every new receipt and observation;
+  legacy or fingerprint-mismatched rows cannot affect live estimates;
+- host-native DeepSeek Harness adapter for model and tool routing without
+  exposing AEEP control schemas to the model;
+- corrected three-arm, 30-case DSH campaign plan with fixed paired ordering,
+  separate pilot accounting, and an explicit approval gate before live use;
+- SQLite schema v5 migration for immutable receipt/observation fingerprint and
+  cohort provenance.
+
+## 0.5.0 — 2026-08-24
 
 - native `aeep.dev/v0.5` provider packages with bounded strict YAML, RFC 8785
   digests, role-scoped Ed25519 signatures, portable route fingerprints, and

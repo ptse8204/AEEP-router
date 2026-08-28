@@ -45,7 +45,13 @@ from ..models import (
     RouteEstimate,
     SideEffect,
     StrictModel,
+    TrustedKeyRole,
     UsageStatement,
+)
+from ..provider_package import (
+    ProviderDiscoveryDocument,
+    ProviderPublicKey,
+    sign_provider_discovery,
 )
 from ..qualification import behavior_fingerprint
 
@@ -440,6 +446,38 @@ class ReferenceMarket:
             allowed_capabilities=(CAPABILITY,),
             allowed_quote_hosts=("localhost", "127.0.0.1"),
         )
+
+    def discovery_document(self) -> ProviderDiscoveryDocument:
+        valid_from = datetime(2024, 1, 1, tzinfo=UTC)
+        valid_until = datetime(2100, 1, 1, tzinfo=UTC)
+        unsigned = ProviderDiscoveryDocument(
+            provider_id=PROVIDER_ID,
+            organization="AEEP deterministic reference provider",
+            protocol_versions=("aeep.dev/v0.5", "aeep.dev/v0.6"),
+            endpoints={
+                "offers": f"{REFERENCE_BASE_URL}/v1/offers",
+                "quotes": f"{REFERENCE_BASE_URL}/v1/quotes",
+                "execute": f"{REFERENCE_BASE_URL}/v1/execute",
+                "usage": f"{REFERENCE_BASE_URL}/v1/usage-statements",
+                "reconciliation": f"{REFERENCE_BASE_URL}/v1/reconciliations",
+            },
+            capabilities=(CAPABILITY,),
+            executor_fingerprints={EXECUTOR_ID: self.executor_fingerprint},
+            signing_keys=(
+                ProviderPublicKey(
+                    key_id=self.signer.key_id,
+                    public_key=self.signer.public_key_base64url(),
+                    roles=(TrustedKeyRole.PROVIDER_RECORD,),
+                    valid_from=valid_from,
+                    valid_until=valid_until,
+                ),
+            ),
+            auth_schemes=("bearer",),
+            valid_from=valid_from,
+            valid_until=valid_until,
+            integrity_digest="sha256:" + "0" * 64,
+        )
+        return sign_provider_discovery(unsigned, self.signer)
 
     def _signed_record(
         self,
@@ -991,7 +1029,7 @@ def create_app(
 
     globals()["_FastAPIRequest"] = Request
     service = market or ReferenceMarket()
-    app = FastAPI(title="AEEP Local Economic Evidence Market", version="0.5")
+    app = FastAPI(title="AEEP Local Economic Evidence Market", version="0.6")
 
     def require_authorization(request: _FastAPIRequest) -> None:
         if bearer_token is None and authorize is None:
@@ -1065,6 +1103,10 @@ def create_app(
     @app.get("/.well-known/aeep-keys.json")
     async def keys() -> dict[str, Any]:
         return {"schema_version": "0.5", "keys": [_model_json(service.trusted_key)]}
+
+    @app.get("/.well-known/aeep-provider.json")
+    async def provider_discovery() -> dict[str, Any]:
+        return _model_json(service.discovery_document())
 
     @app.get("/v1/offers")
     async def offers(

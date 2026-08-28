@@ -107,6 +107,21 @@
           "default": null,
           "title": "Selected"
         },
+        "disposition": {
+          "$ref": "#/$defs/RouteDisposition",
+          "default": "SELECTED"
+        },
+        "bypass_reason": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RouteBypassReason"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "reason": {
           "title": "Reason",
           "type": "string"
@@ -250,6 +265,23 @@
       },
       "title": "ResourceVector",
       "type": "object"
+    },
+    "RouteBypassReason": {
+      "enum": [
+        "only_one_feasible_route",
+        "pinned_executor",
+        "optimization_value_below_overhead"
+      ],
+      "title": "RouteBypassReason",
+      "type": "string"
+    },
+    "RouteDisposition": {
+      "enum": [
+        "SELECTED",
+        "BYPASS_ROUTER"
+      ],
+      "title": "RouteDisposition",
+      "type": "string"
     }
   },
   "additionalProperties": false,

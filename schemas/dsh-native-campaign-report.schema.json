@@ -1,0 +1,358 @@
+{
+  "$defs": {
+    "DSHLiveUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "model_calls": {
+          "minimum": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "cache_read_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Tokens",
+          "type": "integer"
+        },
+        "cache_write_tokens": {
+          "minimum": 0,
+          "title": "Cache Write Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "model_calls",
+        "input_tokens",
+        "output_tokens",
+        "cache_read_tokens",
+        "cache_write_tokens",
+        "total_tokens"
+      ],
+      "title": "DSHLiveUsage",
+      "type": "object"
+    },
+    "DSHNativeCampaignArm": {
+      "enum": [
+        "DSH_DIRECT",
+        "AEEP_MODEL_FACING_MCP",
+        "AEEP_HOST_NATIVE"
+      ],
+      "title": "DSHNativeCampaignArm",
+      "type": "string"
+    },
+    "DSHNativeCampaignTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.5.1",
+          "default": "0.5.1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trial_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "structured_extraction",
+            "classification",
+            "code_comprehension",
+            "deterministic_file_text",
+            "bounded_summarization"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "condition": {
+          "enum": [
+            "cold",
+            "warm",
+            "cache_eviction",
+            "compaction",
+            "provider_switch",
+            "tool_switch"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "arm": {
+          "$ref": "#/$defs/DSHNativeCampaignArm"
+        },
+        "correct": {
+          "title": "Correct",
+          "type": "boolean"
+        },
+        "provider_calls": {
+          "minimum": 0,
+          "title": "Provider Calls",
+          "type": "integer"
+        },
+        "tool_calls": {
+          "minimum": 0,
+          "title": "Tool Calls",
+          "type": "integer"
+        },
+        "aeep_mcp_calls": {
+          "minimum": 0,
+          "title": "Aeep Mcp Calls",
+          "type": "integer"
+        },
+        "aeep_cli_calls": {
+          "minimum": 0,
+          "title": "Aeep Cli Calls",
+          "type": "integer"
+        },
+        "routing_overhead_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Routing Overhead Ms"
+        },
+        "end_to_end_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "End To End Latency Ms"
+        },
+        "selected_executor_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Executor Id"
+        },
+        "receipt_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receipt Id"
+        },
+        "prediction_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prediction Error"
+        },
+        "usage": {
+          "$ref": "#/$defs/DSHLiveUsage"
+        }
+      },
+      "required": [
+        "trial_id",
+        "case_id",
+        "category",
+        "condition",
+        "arm",
+        "correct",
+        "provider_calls",
+        "tool_calls",
+        "aeep_mcp_calls",
+        "aeep_cli_calls",
+        "routing_overhead_ms",
+        "end_to_end_latency_ms",
+        "usage"
+      ],
+      "title": "DSHNativeCampaignTrial",
+      "type": "object"
+    },
+    "ProofGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "ProofGate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.5.1",
+      "default": "0.5.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "campaign_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "harness_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Harness Version",
+      "type": "string"
+    },
+    "native_plugin_version": {
+      "const": "0.5.1",
+      "default": "0.5.1",
+      "title": "Native Plugin Version",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "reasoning_effort": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Reasoning Effort",
+      "type": "string"
+    },
+    "pilot_cases_excluded": {
+      "const": 5,
+      "default": 5,
+      "title": "Pilot Cases Excluded",
+      "type": "integer"
+    },
+    "approval_reference": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Approval Reference",
+      "type": "string"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/DSHNativeCampaignTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "projected_provider_calls_max": {
+      "minimum": 0,
+      "title": "Projected Provider Calls Max",
+      "type": "integer"
+    },
+    "projected_total_tokens_max": {
+      "minimum": 0,
+      "title": "Projected Total Tokens Max",
+      "type": "integer"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/ProofGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "generated_at",
+    "harness_version",
+    "model",
+    "reasoning_effort",
+    "approval_reference",
+    "trials",
+    "projected_provider_calls_max",
+    "projected_total_tokens_max",
+    "gates"
+  ],
+  "title": "DSHNativeCampaignReport",
+  "type": "object"
+}

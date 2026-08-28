@@ -1,4 +1,4 @@
-"""Strict AEEP v0.5 provider-package parsing, signing, and fingerprints."""
+"""Strict AEEP provider-package parsing, signing, and fingerprints."""
 
 from __future__ import annotations
 
@@ -14,6 +14,7 @@ from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
 from typing import Any, Literal
+from urllib.parse import urlparse
 
 import rfc8785
 import yaml
@@ -37,12 +38,14 @@ from .models import (
     ValidationSpec,
 )
 
-PROVIDER_PACKAGE_API_VERSION = "aeep.dev/v0.5"
+PROVIDER_PACKAGE_API_VERSION = "aeep.dev/v0.6"
+SUPPORTED_PROVIDER_PACKAGE_API_VERSIONS = ("aeep.dev/v0.5", "aeep.dev/v0.6")
 PROVIDER_PACKAGE_KIND = "ProviderPackage"
 PROVIDER_PACKAGE_CANONICALIZATION = "RFC8785"
 PROVIDER_PACKAGE_DIGEST_DOMAIN = b"aeep-provider-package-digest-v1\0"
 EVIDENCE_ATTESTATION_DOMAIN = b"aeep-evidence-attestation-v1\0"
 ROUTE_FINGERPRINT_DOMAIN = b"aeep-route-v1\0"
+PROVIDER_DISCOVERY_DOMAIN = b"aeep-provider-discovery-v1\0"
 MAXIMUM_MANIFEST_BYTES = 1_048_576
 MAXIMUM_MANIFEST_DEPTH = 32
 MAXIMUM_MANIFEST_NODES = 100_000
@@ -69,6 +72,14 @@ class EvidenceType(StrEnum):
     RATE_CARD_SNAPSHOT = "rate_card_snapshot"
     COMPATIBILITY_REPORT = "compatibility_report"
     REVOCATION_STATEMENT = "revocation_statement"
+
+
+class EvidenceAuthorityClass(StrEnum):
+    PROVIDER_SELF_ATTESTED = "provider_self_attested"
+    DISTRIBUTOR_ATTESTED = "distributor_attested"
+    INDEPENDENT_LAB = "independent_lab"
+    ORGANIZATION_ADMIN = "organization_admin"
+    LOCAL_OPERATOR = "local_operator"
 
 
 class ArtifactCompression(StrEnum):
@@ -252,6 +263,9 @@ class PublishedProviderRoute(ProviderPackageModel):
 
     def executor_spec(self, provider_id: str) -> ExecutorSpec:
         config = dict(self.executor.config)
+        if self.executor.kind is ExecutorKind.PYTHON:
+            config["isolation"] = "subprocess"
+            config.setdefault("inherit_env", False)
         argv = config.get("argv")
         if (
             self.executor.kind is ExecutorKind.COMMAND
@@ -318,6 +332,33 @@ class EvidenceSubject(ProviderPackageModel):
     environment_class: str | None = Field(default=None, max_length=200)
 
 
+class EvidenceCohortDeclaration(ProviderPackageModel):
+    profile: Literal["aeep-evidence-cohort-v1"] = "aeep-evidence-cohort-v1"
+    provider_version: str | None = Field(default=None, max_length=200)
+    model_version: str | None = Field(default=None, max_length=200)
+    region: str | None = Field(default=None, max_length=100)
+    account_tier: str | None = Field(default=None, max_length=100)
+    adapter_type: str = Field(min_length=1, max_length=100)
+    adapter_version: str | None = Field(default=None, max_length=100)
+    action_feature_profile: str = Field(min_length=1, max_length=200)
+    validator_digest: str = Field(pattern=_DIGEST_PATTERN)
+    cache_namespace: str | None = Field(default=None, max_length=200)
+    period_start: datetime
+    period_end: datetime
+    economic_evidence_level: str = Field(min_length=1, max_length=100)
+
+    @model_validator(mode="after")
+    def valid_period(self) -> EvidenceCohortDeclaration:
+        if any(
+            value.tzinfo is None or value.utcoffset() is None
+            for value in (self.period_start, self.period_end)
+        ):
+            raise ValueError("evidence cohort period must be timezone-aware")
+        if self.period_end <= self.period_start:
+            raise ValueError("evidence cohort period_end must follow period_start")
+        return self
+
+
 class EvidenceProducer(ProviderPackageModel):
     producer_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     role: TrustedKeyRole
@@ -371,6 +412,8 @@ class EvidenceReference(ProviderPackageModel):
     artifact_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
     subject: EvidenceSubject
     producer: EvidenceProducer
+    authority_class: EvidenceAuthorityClass | None = None
+    cohort: EvidenceCohortDeclaration | None = None
     trust_claim: TrustLevel = TrustLevel.UNTRUSTED
     validity: EvidenceValidity
     summary: dict[str, JsonValue] | None = None
@@ -475,8 +518,8 @@ class ProviderPackageSignature(ProviderPackageModel):
 
 
 class ProviderPackage(ProviderPackageModel):
-    api_version: Literal["aeep.dev/v0.5"] = Field(
-        default="aeep.dev/v0.5", alias="apiVersion"
+    api_version: Literal["aeep.dev/v0.5", "aeep.dev/v0.6"] = Field(
+        default="aeep.dev/v0.6", alias="apiVersion"
     )
     kind: Literal["ProviderPackage"] = "ProviderPackage"
     metadata: ProviderPackageMetadata
@@ -493,6 +536,11 @@ class ProviderPackage(ProviderPackageModel):
             raise ValueError("provider package signature digest does not match integrity digest")
         if any(item.issued_at < self.metadata.issued_at for item in self.signatures):
             raise ValueError("provider package cannot be signed before it is issued")
+        if self.api_version == "aeep.dev/v0.6" and any(
+            item.authority_class is None or item.cohort is None
+            for item in self.spec.evidence
+        ):
+            raise ValueError("v0.6 evidence requires authority_class and cohort")
         return self
 
 
@@ -583,6 +631,71 @@ class ComparativeMeasurement(ProviderPackageModel):
     rate_card_snapshot_id: str | None = None
     candidate_latency_ms: Decimal | None = Field(default=None, ge=0)
     baseline_latency_ms: Decimal | None = Field(default=None, ge=0)
+
+
+class ProviderDiscoverySignature(ProviderPackageModel):
+    algorithm: Literal["ed25519"] = "ed25519"
+    key_id: str = Field(min_length=1, max_length=256)
+    digest: str = Field(pattern=_DIGEST_PATTERN)
+    signature: str = Field(pattern=r"^[A-Za-z0-9_-]+$")
+
+
+class ProviderDiscoveryDocument(ProviderPackageModel):
+    api_version: Literal["aeep.dev/v0.6"] = Field(
+        default="aeep.dev/v0.6", alias="apiVersion"
+    )
+    kind: Literal["ProviderDiscovery"] = "ProviderDiscovery"
+    provider_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)
+    organization: str = Field(min_length=1, max_length=500)
+    protocol_versions: tuple[str, ...] = Field(min_length=1, max_length=16)
+    endpoints: dict[str, str] = Field(default_factory=dict, max_length=16)
+    capabilities: tuple[str, ...] = Field(max_length=1024)
+    executor_fingerprints: dict[str, str] = Field(default_factory=dict, max_length=1024)
+    signing_keys: tuple[ProviderPublicKey, ...] = Field(min_length=1, max_length=32)
+    auth_schemes: tuple[str, ...] = ()
+    artifact_digest: str | None = Field(default=None, pattern=_DIGEST_PATTERN)
+    sbom_digest: str | None = Field(default=None, pattern=_DIGEST_PATTERN)
+    conformance_digest: str | None = Field(default=None, pattern=_DIGEST_PATTERN)
+    valid_from: datetime
+    valid_until: datetime
+    integrity_digest: str = Field(pattern=_DIGEST_PATTERN)
+    signature: ProviderDiscoverySignature | None = None
+
+    @model_validator(mode="after")
+    def valid_discovery(self) -> ProviderDiscoveryDocument:
+        if any(
+            value.tzinfo is None or value.utcoffset() is None
+            for value in (self.valid_from, self.valid_until)
+        ):
+            raise ValueError("provider discovery timestamps must be timezone-aware")
+        if self.valid_until <= self.valid_from:
+            raise ValueError("provider discovery validity window is invalid")
+        if any(not key or not value for key, value in self.endpoints.items()):
+            raise ValueError("provider discovery endpoints must be named URLs")
+        if any(not _valid_discovery_endpoint(value) for value in self.endpoints.values()):
+            raise ValueError("provider discovery endpoints require HTTPS or loopback HTTP")
+        if any(not re.fullmatch(_DIGEST_PATTERN, value)
+               for value in self.executor_fingerprints.values()):
+            raise ValueError("provider discovery executor fingerprints are invalid")
+        return self
+
+
+def _valid_discovery_endpoint(value: str) -> bool:
+    try:
+        parsed = urlparse(value)
+        _ = parsed.port
+    except ValueError:
+        return False
+    return bool(
+        parsed.hostname
+        and parsed.username is None
+        and parsed.password is None
+        and not parsed.fragment
+        and (
+            parsed.scheme == "https"
+            or (parsed.scheme == "http" and parsed.hostname == "127.0.0.1")
+        )
+    )
 
 
 class _StrictLoader(yaml.SafeLoader):
@@ -693,6 +806,15 @@ def provider_package_payload(package: ProviderPackage) -> bytes:
         by_alias=True,
         include={"api_version", "kind", "metadata", "spec"},
     )
+    # v0.5 signatures predate additive runtime uncertainty fields.
+    if package.api_version == "aeep.dev/v0.5":
+        for route in value["spec"]["routes"]:
+            estimate = route.get("static_estimate")
+            if isinstance(estimate, dict):
+                estimate.pop("uncertainty", None)
+        for evidence in value["spec"]["evidence"]:
+            evidence.pop("authority_class", None)
+            evidence.pop("cohort", None)
     try:
         return rfc8785.dumps(value)
     except rfc8785.CanonicalizationError as exc:
@@ -803,6 +925,66 @@ def sign_provider_package(
             "signatures": (*signatures, signature),
         }
     )
+
+
+def provider_discovery_payload(document: ProviderDiscoveryDocument) -> bytes:
+    value = document.model_dump(
+        mode="json",
+        by_alias=True,
+        exclude={"integrity_digest", "signature"},
+    )
+    try:
+        return rfc8785.dumps(value)
+    except rfc8785.CanonicalizationError as exc:
+        raise ConfigurationError(f"provider discovery canonicalization failed: {exc}") from exc
+
+
+def provider_discovery_digest(document: ProviderDiscoveryDocument) -> str:
+    return f"sha256:{hashlib.sha256(provider_discovery_payload(document)).hexdigest()}"
+
+
+def sign_provider_discovery(
+    document: ProviderDiscoveryDocument,
+    signer: Ed25519Signer,
+) -> ProviderDiscoveryDocument:
+    digest = provider_discovery_digest(document)
+    envelope = signer.sign(
+        PROVIDER_DISCOVERY_DOMAIN + bytes.fromhex(digest.removeprefix("sha256:"))
+    )
+    return document.model_copy(
+        update={
+            "integrity_digest": digest,
+            "signature": ProviderDiscoverySignature(
+                key_id=envelope.key_id,
+                digest=digest,
+                signature=envelope.value,
+            ),
+        }
+    )
+
+
+def verify_provider_discovery(
+    document: ProviderDiscoveryDocument,
+    public_key: str,
+) -> bool:
+    signature = document.signature
+    digest = provider_discovery_digest(document)
+    if signature is None or signature.digest != digest or document.integrity_digest != digest:
+        return False
+    declared = next(
+        (key for key in document.signing_keys if key.key_id == signature.key_id),
+        None,
+    )
+    if declared is None or declared.public_key != public_key:
+        return False
+    try:
+        Ed25519PublicKey.from_public_bytes(decode_base64url(public_key)).verify(
+            decode_base64url(signature.signature),
+            PROVIDER_DISCOVERY_DOMAIN + bytes.fromhex(digest.removeprefix("sha256:")),
+        )
+    except (InvalidSignature, ValueError):
+        return False
+    return True
 
 
 def verify_embedded_package_signature(

@@ -16,7 +16,7 @@ from aeep.accounting import (
     subscription_model_accounting,
 )
 from aeep.economics import QuoteService
-from aeep.estimator import HistoricalEstimator
+from aeep.estimator import HistoricalEstimator, evidence_cohort_digest
 from aeep.instrumentation import TraceIngestor
 from aeep.models import (
     ActionContext,
@@ -593,6 +593,7 @@ def test_historical_actuals_do_not_become_contractual_bounds() -> None:
     store = ReceiptStore(":memory:")
     executor = spec()
     paid = cash_accounting_from_settlement(settlement())
+    fingerprint, cohort = evidence_cohort_digest(executor, None)
     store.save_receipt(
         ExecutionReceipt(
             decision_id="decision-1",
@@ -602,6 +603,8 @@ def test_historical_actuals_do_not_become_contractual_bounds() -> None:
             executor_kind=executor.kind,
             status=ExecutionStatus.SUCCESS,
             estimated=executor.estimate,
+            executor_fingerprint=fingerprint,
+            cohort_digest=cohort,
             accounting=ResourceAccounting(cash=paid),
         )
     )
@@ -614,6 +617,8 @@ def test_historical_actuals_do_not_become_contractual_bounds() -> None:
             executor_kind=executor.kind,
             status=ExecutionStatus.SUCCESS,
             estimated=executor.estimate,
+            executor_fingerprint=fingerprint,
+            cohort_digest=cohort,
         )
     )
 

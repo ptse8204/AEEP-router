@@ -314,6 +314,93 @@
       "title": "EstimateSource",
       "type": "string"
     },
+    "EstimateUncertainty": {
+      "additionalProperties": false,
+      "description": "Empirical bounds from one exact evidence cohort; never authorization.",
+      "properties": {
+        "profile": {
+          "const": "aeep-estimate-uncertainty-v1",
+          "default": "aeep-estimate-uncertainty-v1",
+          "title": "Profile",
+          "type": "string"
+        },
+        "method": {
+          "const": "empirical-nearest-rank-wilson-v1",
+          "default": "empirical-nearest-rank-wilson-v1",
+          "title": "Method",
+          "type": "string"
+        },
+        "sample_size": {
+          "minimum": 5,
+          "title": "Sample Size",
+          "type": "integer"
+        },
+        "cohort_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Cohort Digest",
+          "type": "string"
+        },
+        "resources_p50": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "resources_p95": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "cash_p95_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Observed p95 only; never a payment authorization maximum.",
+          "title": "Cash P95 Usd"
+        },
+        "success_lower_bound": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Success Lower Bound",
+          "type": "number"
+        },
+        "quality_sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Quality Sample Size",
+          "type": "integer"
+        },
+        "quality_lower_bound": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Lower Bound"
+        }
+      },
+      "required": [
+        "sample_size",
+        "cohort_digest",
+        "resources_p50",
+        "resources_p95",
+        "success_lower_bound"
+      ],
+      "title": "EstimateUncertainty",
+      "type": "object"
+    },
     "EvidenceAttestation": {
       "additionalProperties": false,
       "properties": {
@@ -376,6 +463,149 @@
       "title": "EvidenceAttestation",
       "type": "object"
     },
+    "EvidenceAuthorityClass": {
+      "enum": [
+        "provider_self_attested",
+        "distributor_attested",
+        "independent_lab",
+        "organization_admin",
+        "local_operator"
+      ],
+      "title": "EvidenceAuthorityClass",
+      "type": "string"
+    },
+    "EvidenceCohortDeclaration": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "aeep-evidence-cohort-v1",
+          "default": "aeep-evidence-cohort-v1",
+          "title": "Profile",
+          "type": "string"
+        },
+        "provider_version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Version"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Version"
+        },
+        "region": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Region"
+        },
+        "account_tier": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Account Tier"
+        },
+        "adapter_type": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Adapter Type",
+          "type": "string"
+        },
+        "adapter_version": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adapter Version"
+        },
+        "action_feature_profile": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Action Feature Profile",
+          "type": "string"
+        },
+        "validator_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Validator Digest",
+          "type": "string"
+        },
+        "cache_namespace": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cache Namespace"
+        },
+        "period_start": {
+          "format": "date-time",
+          "title": "Period Start",
+          "type": "string"
+        },
+        "period_end": {
+          "format": "date-time",
+          "title": "Period End",
+          "type": "string"
+        },
+        "economic_evidence_level": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Economic Evidence Level",
+          "type": "string"
+        }
+      },
+      "required": [
+        "adapter_type",
+        "action_feature_profile",
+        "validator_digest",
+        "period_start",
+        "period_end",
+        "economic_evidence_level"
+      ],
+      "title": "EvidenceCohortDeclaration",
+      "type": "object"
+    },
     "EvidenceProducer": {
       "additionalProperties": false,
       "properties": {
@@ -436,6 +666,28 @@
         },
         "producer": {
           "$ref": "#/$defs/EvidenceProducer"
+        },
+        "authority_class": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceAuthorityClass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "cohort": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceCohortDeclaration"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "trust_claim": {
           "$ref": "#/$defs/TrustLevel",
@@ -1534,6 +1786,17 @@
           "minimum": 0,
           "title": "Sample Size",
           "type": "integer"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EstimateUncertainty"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "RouteEstimate",
@@ -1828,8 +2091,11 @@
   "additionalProperties": false,
   "properties": {
     "apiVersion": {
-      "const": "aeep.dev/v0.5",
-      "default": "aeep.dev/v0.5",
+      "default": "aeep.dev/v0.6",
+      "enum": [
+        "aeep.dev/v0.5",
+        "aeep.dev/v0.6"
+      ],
       "title": "Apiversion",
       "type": "string"
     },

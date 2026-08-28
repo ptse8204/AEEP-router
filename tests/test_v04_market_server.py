@@ -45,6 +45,7 @@ from aeep.models import (
     SideEffect,
     UsageStatement,
 )
+from aeep.provider_package import ProviderDiscoveryDocument, verify_provider_discovery
 from aeep.qualification import RouteCandidate, RouteLifecycle, behavior_fingerprint
 from aeep.router import Router
 from aeep.store import ReceiptStore
@@ -139,6 +140,16 @@ def test_health_keys_and_signed_offer() -> None:
     key = TrustedProviderKey.model_validate(key_document["keys"][0])
     assert key.provider_id == PROVIDER_ID
     assert key.public_key == market.signer.public_key_base64url()
+    discovery = ProviderDiscoveryDocument.model_validate(
+        client.get("/.well-known/aeep-provider.json").json()
+    )
+    assert discovery.provider_id == PROVIDER_ID
+    assert verify_provider_discovery(discovery, market.signer.public_key_base64url())
+    assert not verify_provider_discovery(discovery, "AA")
+    invalid_discovery = discovery.model_dump(mode="json", by_alias=True)
+    invalid_discovery["endpoints"]["offers"] = "http://127.0.0.1.evil.test/offers"
+    with pytest.raises(ValueError, match="HTTPS or loopback"):
+        ProviderDiscoveryDocument.model_validate(invalid_discovery)
 
     response = client.get("/v1/offers", params={"capability": CAPABILITY})
     assert response.status_code == 200

@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "ProviderDiscoverySignature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "ed25519",
+          "default": "ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Signature",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key_id",
+        "digest",
+        "signature"
+      ],
+      "title": "ProviderDiscoverySignature",
+      "type": "object"
+    },
+    "ProviderPublicKey": {
+      "additionalProperties": false,
+      "properties": {
+        "key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "ed25519",
+          "default": "ed25519",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "public_key": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Public Key",
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/$defs/TrustedKeyRole"
+          },
+          "minItems": 1,
+          "title": "Roles",
+          "type": "array"
+        },
+        "valid_from": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid From"
+        },
+        "valid_until": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid Until"
+        },
+        "revocation_hint": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revocation Hint"
+        }
+      },
+      "required": [
+        "key_id",
+        "public_key",
+        "roles"
+      ],
+      "title": "ProviderPublicKey",
+      "type": "object"
+    },
+    "TrustedKeyRole": {
+      "enum": [
+        "provider_record",
+        "package_publisher",
+        "evidence_producer",
+        "independent_verifier",
+        "registry"
+      ],
+      "title": "TrustedKeyRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "aeep.dev/v0.6",
+      "default": "aeep.dev/v0.6",
+      "title": "Apiversion",
+      "type": "string"
+    },
+    "kind": {
+      "const": "ProviderDiscovery",
+      "default": "ProviderDiscovery",
+      "title": "Kind",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:/-]+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "organization": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Organization",
+      "type": "string"
+    },
+    "protocol_versions": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "title": "Protocol Versions",
+      "type": "array"
+    },
+    "endpoints": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 16,
+      "title": "Endpoints",
+      "type": "object"
+    },
+    "capabilities": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1024,
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "executor_fingerprints": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 1024,
+      "title": "Executor Fingerprints",
+      "type": "object"
+    },
+    "signing_keys": {
+      "items": {
+        "$ref": "#/$defs/ProviderPublicKey"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "title": "Signing Keys",
+      "type": "array"
+    },
+    "auth_schemes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Auth Schemes",
+      "type": "array"
+    },
+    "artifact_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Artifact Digest"
+    },
+    "sbom_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sbom Digest"
+    },
+    "conformance_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conformance Digest"
+    },
+    "valid_from": {
+      "format": "date-time",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    },
+    "integrity_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Integrity Digest",
+      "type": "string"
+    },
+    "signature": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ProviderDiscoverySignature"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "provider_id",
+    "organization",
+    "protocol_versions",
+    "capabilities",
+    "signing_keys",
+    "valid_from",
+    "valid_until",
+    "integrity_digest"
+  ],
+  "title": "ProviderDiscoveryDocument",
+  "type": "object"
+}

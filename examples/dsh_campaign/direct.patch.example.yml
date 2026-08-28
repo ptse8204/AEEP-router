@@ -1,0 +1,12 @@
+- id: session-title-llm
+  disabled: true
+- id: headless-runner
+  disabled: true
+- insert:
+    - id: aeep-dsh-fixture-tools
+      name: aeep-dsh-fixture-tools
+    - id: aeep-headless-runner
+      name: aeep-dsh-fixture-tools/headless
+      inject: [headlessStartup]
+      config:
+        task: !!js ctx.headlessStartup.task

@@ -18,15 +18,16 @@ def test_package_and_documentation_versions_are_consistent():
     assert project_version == __version__
 
     protocol_version = project_version.rsplit(".", 1)[0]
+    economic_protocol_version = "0.5"
     markers = {
         "README.md": f"**Status:** AEEP {protocol_version}",
         "SPEC.md": f"# AEEP {protocol_version} protocol specification",
-        "docs/ACCOUNTING.md": f"AEEP {protocol_version} keeps",
+        "docs/ACCOUNTING.md": f"AEEP {economic_protocol_version} keeps",
         "examples/economic_evidence/README.md": (
-            f"# AEEP {protocol_version} deterministic economic-evidence proof"
+            f"# AEEP {economic_protocol_version} deterministic economic-evidence proof"
         ),
         "examples/economic_evidence/report.md": (
-            f"# AEEP {protocol_version} economic evidence proof"
+            f"# AEEP {economic_protocol_version} economic evidence proof"
         ),
         "examples/proof/README.md": f"# AEEP {protocol_version} proof assets",
     }
@@ -57,7 +58,7 @@ def test_package_and_documentation_versions_are_consistent():
             (ROOT / "schemas" / f"{schema_name}.schema.json").read_text(encoding="utf-8")
         )
         version_schema = schema["properties"]["schema_version"]
-        assert version_schema["default"] == protocol_version
+        assert version_schema["default"] == economic_protocol_version
         assert version_schema["enum"] == ["0.4", "0.5"]
 
     proof = json.loads(
@@ -65,7 +66,7 @@ def test_package_and_documentation_versions_are_consistent():
             encoding="utf-8"
         )
     )
-    assert proof["schema_version"] == protocol_version
+    assert proof["schema_version"] == economic_protocol_version
 
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     match = re.search(r"^## Unreleased — (\d+\.\d+\.\d+)$", changelog, re.MULTILINE)
@@ -74,7 +75,7 @@ def test_package_and_documentation_versions_are_consistent():
 
 
 def test_legacy_manifest_versions_remain_supported():
-    versions = ("0.1", "0.15", "0.2", "0.3", "0.4")
+    versions = ("0.1", "0.15", "0.2", "0.3", "0.4", "0.5")
     assert tuple(Manifest.model_validate({"version": version}).version for version in versions) == versions
-    assert Manifest().version == "0.5"
-    assert default_manifest_dict()["version"] == "0.5"
+    assert Manifest().version == "0.6"
+    assert default_manifest_dict()["version"] == "0.6"

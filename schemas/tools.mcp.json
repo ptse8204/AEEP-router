@@ -569,8 +569,61 @@
       }
     },
     {
+      "name": "aeep_estimate_route_prices",
+      "description": "Read non-binding price estimates derived from local route data. This operation is non-binding and performs no remote quote network calls.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "Stable semantic action name, for example text.stats or github.issue.create."
+          },
+          "input": {
+            "type": "object",
+            "description": "JSON input passed to the selected executor.",
+            "additionalProperties": true
+          },
+          "policy": {
+            "type": "string",
+            "default": "balanced",
+            "description": "Routing policy name: balanced, cheapest, fastest, resource_saver, reliable, or a manifest policy."
+          },
+          "constraints": {
+            "type": "object",
+            "description": "Optional hard budget, latency, compute, privacy, and safety constraints.",
+            "additionalProperties": true
+          },
+          "context": {
+            "type": "object",
+            "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
+            "additionalProperties": true
+          },
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Stable key that prevents duplicate execution of the same action."
+          },
+          "executor_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "capability",
+          "input"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true
+      }
+    },
+    {
       "name": "aeep_request_quotes",
-      "description": "Read expiring legacy compatibility estimates derived from local static route data. This operation is non-binding and performs no remote quote network calls.",
+      "description": "Deprecated alias for aeep_estimate_route_prices. Returns local, non-binding estimates and performs no remote quote network calls.",
       "inputSchema": {
         "type": "object",
         "properties": {

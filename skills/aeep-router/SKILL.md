@@ -28,7 +28,10 @@ python -m aeep subscriptions status --compact
 python -m aeep route CAPABILITY --input '@input.json' --agent --compact
 ```
 
-4. Inspect the selected route and concise reason. Use `aeep inspect DECISION_ID` only when detailed constraints, candidates, or scores are needed.
+4. Inspect the selected route and concise reason. `BYPASS_ROUTER` retains an
+   already-feasible operator baseline; it never means bypassing hard policy.
+   Use `aeep inspect DECISION_ID` only when detailed constraints, candidates,
+   or scores are needed.
 
 5. Execute only when the selected route and side effect are appropriate:
 

@@ -1,0 +1,43 @@
+{
+  "harness_version": "0.1.1-rc.2",
+  "model": "deepseek-v4-flash",
+  "settings": {
+    "reasoning_effort": "low"
+  },
+  "plugins": [
+    "aeep-dsh-fixture-tools@0.6.0",
+    "aeep-dsh-router@0.6.0"
+  ],
+  "cases": [
+    {
+      "case_id": "web-title",
+      "capability": "web.page.read@1",
+      "input": {"fixtureId": "web-title"},
+      "prompt": "Call web_fetch exactly once with {\"fixtureId\":\"web-title\"}. Return only the page title.",
+      "expected": "Harbor Atlas",
+      "expected_tool": "web_fetch",
+      "native_patch": "/absolute/path/to/native-web.patch.yml",
+      "manifest": "/absolute/path/to/aeep-dsh-campaign.yaml"
+    },
+    {
+      "case_id": "github-version",
+      "capability": "github.file.read@1",
+      "input": {"fixtureId": "github-version"},
+      "prompt": "Call github_file_read exactly once with {\"fixtureId\":\"github-version\"}. Return only the version value.",
+      "expected": "0.6.0",
+      "expected_tool": "github_file_read",
+      "native_patch": "/absolute/path/to/native-github.patch.yml",
+      "manifest": "/absolute/path/to/aeep-dsh-campaign.yaml"
+    },
+    {
+      "case_id": "document-retention",
+      "capability": "document.text.extract@1",
+      "input": {"fixtureId": "document-retention"},
+      "prompt": "Call document_text_extract exactly once with {\"fixtureId\":\"document-retention\"}. Return only the retention period.",
+      "expected": "30-days",
+      "expected_tool": "document_text_extract",
+      "native_patch": "/absolute/path/to/native-document.patch.yml",
+      "manifest": "/absolute/path/to/aeep-dsh-campaign.yaml"
+    }
+  ]
+}

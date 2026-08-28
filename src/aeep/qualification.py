@@ -104,7 +104,19 @@ def behavior_fingerprint(spec: ExecutorSpec) -> str:
             "propagate_idempotency_key",
             "stdin",
         },
-        ExecutorKind.PYTHON: {"callable", "argument_mode", "timeout_seconds"},
+        ExecutorKind.PYTHON: {
+            "callable",
+            "argument_mode",
+            "timeout_seconds",
+            "isolation",
+            "cpu_limit_seconds",
+            "memory_limit_mb",
+            "max_output_bytes",
+            "max_stdin_bytes",
+            "inherit_env",
+            "env",
+            "cwd",
+        },
         ExecutorKind.HTTP: {
             "url",
             "method",
@@ -160,9 +172,30 @@ def behavior_fingerprint(spec: ExecutorSpec) -> str:
             "propagate_idempotency_key",
             "subscription_unit",
         },
-        ExecutorKind.HOST: {"instructions"},
+        ExecutorKind.HOST: {
+            "instructions",
+            "provider",
+            "model",
+            "integration_adapter",
+            "region",
+            "account_tier",
+            "tool",
+            "tool_schema_digest",
+        },
         ExecutorKind.DELEGATE: {"instructions"},
     }[spec.kind]
+    config_keys.update(
+        {
+            "provider",
+            "provider_version",
+            "model",
+            "model_version",
+            "integration_adapter",
+            "integration_adapter_version",
+            "region",
+            "account_tier",
+        }
+    )
     # Quote endpoints and disclosure rules affect both data flow and charges.
     config_keys.add("economic")
     payload: dict[str, Any] = {
@@ -223,6 +256,17 @@ def static_qualification_checks(spec: ExecutorSpec) -> dict[str, bool]:
             and not config.get("inherit_env")
             and isinstance(config.get("env", {}), dict)
             and (config.get("cwd") is None or isinstance(config.get("cwd"), str))
+        )
+        secrets = _references_only(config.get("env", {}))
+        bounds = _positive_limits(
+            config, ("timeout_seconds", "max_output_bytes", "max_stdin_bytes")
+        )
+    elif spec.kind == ExecutorKind.PYTHON:
+        adapter = (
+            isinstance(config.get("callable"), str)
+            and config.get("isolation") == "subprocess"
+            and not config.get("inherit_env")
+            and isinstance(config.get("env", {}), dict)
         )
         secrets = _references_only(config.get("env", {}))
         bounds = _positive_limits(

@@ -139,10 +139,27 @@ _BASE_TOOLS: list[dict[str, Any]] = [
         "annotations": {"readOnlyHint": False, "idempotentHint": False},
     },
     {
+        "name": "aeep_estimate_route_prices",
+        "description": (
+            "Read non-binding price estimates derived from local route data. "
+            "This operation is non-binding and performs no remote quote network calls."
+        ),
+        "schema": {
+            "type": "object",
+            "properties": {
+                **deepcopy(_ACTION_PROPERTIES),
+                "executor_ids": {"type": "array", "items": {"type": "string"}},
+            },
+            "required": ["capability", "input"],
+            "additionalProperties": False,
+        },
+        "annotations": {"readOnlyHint": True, "idempotentHint": True},
+    },
+    {
         "name": "aeep_request_quotes",
         "description": (
-            "Read expiring legacy compatibility estimates derived from local static route data. "
-            "This operation is non-binding and performs no remote quote network calls."
+            "Deprecated alias for aeep_estimate_route_prices. Returns local, non-binding "
+            "estimates and performs no remote quote network calls."
         ),
         "schema": {
             "type": "object",

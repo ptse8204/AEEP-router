@@ -242,6 +242,7 @@ async def test_mcp_server_import_discovers_tools(tmp_path):
     )
     assert {executor.config["tool"] for executor in descriptor.executors} == {
         "aeep_execute_action",
+        "aeep_estimate_route_prices",
         "aeep_get_metrics",
         "aeep_list_capabilities",
         "aeep_record_outcome",

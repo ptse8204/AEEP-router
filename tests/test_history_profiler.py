@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 
 from conftest import manifest_with, python_spec
 
-from aeep.estimator import HistoricalEstimator, action_features
+from aeep.estimator import HistoricalEstimator, action_features, evidence_cohort_digest
 from aeep.models import (
     ActionRequest,
     ExecutionReceipt,
@@ -14,6 +14,15 @@ from aeep.models import (
 )
 from aeep.profiler import ActionProfiler, approximate_tokens
 from aeep.router import Router
+
+
+def cohort_receipt(executor, **values):
+    receipt = ExecutionReceipt(**values)
+    receipt.executor_fingerprint, receipt.cohort_digest = evidence_cohort_digest(
+        executor,
+        receipt.action_features,
+    )
+    return receipt
 
 
 def test_token_estimate_is_stable():
@@ -40,7 +49,8 @@ def test_history_blends_observed_success_and_ignores_delegated():
     executor = python_spec("x", "aeep.examples.tools:text_stats", latency_ms=100)
     router = Router(manifest_with(executor))
     now = datetime.now(UTC)
-    delegated = ExecutionReceipt(
+    delegated = cohort_receipt(
+        executor,
         decision_id="d",
         action_id="a",
         capability="text.stats",
@@ -51,7 +61,8 @@ def test_history_blends_observed_success_and_ignores_delegated():
         ended_at=now,
         estimated=executor.estimate,
     )
-    success = ExecutionReceipt(
+    success = cohort_receipt(
+        executor,
         decision_id="d2",
         action_id="a2",
         capability="text.stats",
@@ -76,13 +87,52 @@ def test_history_blends_observed_success_and_ignores_delegated():
     asyncio.run(router.close())
 
 
+def test_history_keeps_all_token_dimensions_integral():
+    executor = python_spec("x", "aeep.examples.tools:text_stats")
+    router = Router(manifest_with(executor))
+    now = datetime.now(UTC)
+    router.store.save_receipt(
+        cohort_receipt(
+            executor,
+            decision_id="d-token",
+            action_id="a-token",
+            capability="text.stats",
+            executor_id="x",
+            executor_kind=ExecutorKind.PYTHON,
+            status=ExecutionStatus.SUCCESS,
+            started_at=now,
+            ended_at=now,
+            estimated=executor.estimate,
+            actual_resources=ResourceVector(
+                input_tokens=118,
+                cached_input_tokens=7424,
+                cache_write_input_tokens=7,
+                output_tokens=419,
+                reasoning_output_tokens=404,
+            ),
+            output_valid=True,
+        )
+    )
+
+    resources = HistoricalEstimator(router.store).estimate(
+        executor, router._policy_for(ActionRequest(capability="text.stats"))
+    ).resources
+
+    assert isinstance(resources.cache_write_input_tokens, int)
+    assert isinstance(resources.reasoning_output_tokens, int)
+    import asyncio
+
+    asyncio.run(router.close())
+
+
 def test_invalid_output_counts_against_success_probability():
     executor = python_spec("x", "aeep.examples.tools:text_stats")
     router = Router(manifest_with(executor))
     now = datetime.now(UTC)
     for index in range(5):
         router.store.save_receipt(
-            ExecutionReceipt(
+            cohort_receipt(
+                executor,
                 decision_id=f"d{index}",
                 action_id=f"a{index}",
                 capability="text.stats",
@@ -99,6 +149,13 @@ def test_invalid_output_counts_against_success_probability():
     policy = router._policy_for(ActionRequest(capability="text.stats"))
     estimate = HistoricalEstimator(router.store).estimate(executor, policy)
     assert estimate.success_probability < executor.estimate.success_probability
+    assert estimate.uncertainty is not None
+    assert estimate.uncertainty.sample_size == 5
+    assert estimate.uncertainty.resources_p95.latency_ms == 10
+    assert estimate.uncertainty.success_lower_bound == 0
+    assert estimate.uncertainty.cash_p95_usd is None
+    assert estimate.uncertainty.quality_sample_size == 0
+    assert estimate.uncertainty.quality_lower_bound is None
     import asyncio
 
     asyncio.run(router.close())
@@ -110,7 +167,8 @@ def test_history_is_conditioned_on_input_size_bucket():
     now = datetime.now(UTC)
     for value, latency in [({"text": "x"}, 5), ({"text": "x" * 10_000}, 50_000)]:
         router.store.save_receipt(
-            ExecutionReceipt(
+            cohort_receipt(
+                executor,
                 decision_id=f"d{latency}",
                 action_id=f"a{latency}",
                 capability="text.stats",
@@ -132,6 +190,44 @@ def test_history_is_conditioned_on_input_size_bucket():
     )
     assert estimate.sample_size == 1
     assert estimate.resources.latency_ms < 100
+    import asyncio
+
+    asyncio.run(router.close())
+
+
+def test_history_never_crosses_executor_fingerprint() -> None:
+    original = python_spec("x", "aeep.examples.tools:text_stats", latency_ms=100)
+    changed = original.model_copy(deep=True)
+    changed.config["callable"] = "aeep.examples.tools:count_words"
+    router = Router(manifest_with(original))
+    features = action_features({"text": "x"})
+    now = datetime.now(UTC)
+    router.store.save_receipt(
+        cohort_receipt(
+            original,
+            decision_id="d",
+            action_id="a",
+            capability=original.capability,
+            executor_id=original.id,
+            executor_kind=original.kind,
+            status=ExecutionStatus.SUCCESS,
+            started_at=now,
+            ended_at=now,
+            estimated=original.estimate,
+            action_features=features,
+            actual_resources=ResourceVector(latency_ms=1),
+            output_valid=True,
+        )
+    )
+
+    estimate = HistoricalEstimator(router.store).estimate(
+        changed,
+        router._policy_for(ActionRequest(capability="text.stats")),
+        features,
+    )
+
+    assert estimate.sample_size == 0
+    assert estimate.resources.latency_ms == changed.estimate.resources.latency_ms
     import asyncio
 
     asyncio.run(router.close())

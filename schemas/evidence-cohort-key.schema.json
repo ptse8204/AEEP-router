@@ -1,0 +1,192 @@
+{
+  "additionalProperties": false,
+  "description": "Sanitized runtime identity for evidence used by live routing.",
+  "properties": {
+    "profile": {
+      "const": "aeep-evidence-cohort-v1",
+      "default": "aeep-evidence-cohort-v1",
+      "title": "Profile",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Capability",
+      "type": "string"
+    },
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "provider_version": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Version"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model"
+    },
+    "model_version": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Version"
+    },
+    "integration_adapter": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Integration Adapter",
+      "type": "string"
+    },
+    "integration_adapter_version": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Integration Adapter Version"
+    },
+    "region": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Region"
+    },
+    "account_tier": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Account Tier"
+    },
+    "action_size_bucket": {
+      "pattern": "^(unknown|empty|2\\^[0-9]+)$",
+      "title": "Action Size Bucket",
+      "type": "string"
+    },
+    "validator_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Validator Digest",
+      "type": "string"
+    },
+    "cache_namespace": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cache Namespace"
+    },
+    "cache_profile": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cache Profile"
+    },
+    "evidence_period": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Period"
+    },
+    "economic_evidence_level": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Economic Evidence Level"
+    }
+  },
+  "required": [
+    "capability",
+    "executor_id",
+    "executor_fingerprint",
+    "provider",
+    "integration_adapter",
+    "action_size_bucket",
+    "validator_digest"
+  ],
+  "title": "EvidenceCohortKey",
+  "type": "object"
+}

@@ -4,11 +4,69 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
 from aeep.proofs import DSHLiveComparisonArm, DSHLiveComparisonReport, DSHLiveProofReport
+
+NATIVE_ARMS = ("DSH_DIRECT", "AEEP_MODEL_FACING_MCP", "AEEP_HOST_NATIVE")
+NATIVE_CATEGORIES = (
+    "structured_extraction",
+    "classification",
+    "code_comprehension",
+    "deterministic_file_text",
+    "bounded_summarization",
+)
+NATIVE_CONDITIONS = (
+    "cold",
+    "warm",
+    "cache_eviction",
+    "compaction",
+    "provider_switch",
+    "tool_switch",
+)
+
+
+def native_plan() -> dict[str, Any]:
+    cases: list[dict[str, Any]] = []
+    for category in NATIVE_CATEGORIES:
+        for condition in NATIVE_CONDITIONS:
+            case_id = f"{category}:{condition}"
+            order = list(NATIVE_ARMS)
+            random.Random(f"aeep-0.5.1:{case_id}").shuffle(order)
+            cases.append(
+                {
+                    "case_id": case_id,
+                    "category": category,
+                    "condition": condition,
+                    "arm_order": order,
+                    "prompt_contract": "task only; oracle answer is held outside the prompt",
+                }
+            )
+    return {
+        "schema_version": "0.5.1",
+        "live_execution": False,
+        "requires_separate_user_approval": True,
+        "pilot_cases": 5,
+        "pilot_excluded_from_main_results": True,
+        "main_cases": len(cases),
+        "main_trials": len(cases) * len(NATIVE_ARMS),
+        "arms": list(NATIVE_ARMS),
+        "fixed_model_and_reasoning": True,
+        "cases": cases,
+    }
+
+
+def validate_native_plan() -> dict[str, Any]:
+    plan = native_plan()
+    assert plan["main_cases"] == 30
+    assert plan["main_trials"] == 90
+    assert all(set(item["arm_order"]) == set(NATIVE_ARMS) for item in plan["cases"])
+    assert len({tuple(item["arm_order"]) for item in plan["cases"]}) > 1
+    assert not any("expected answer" in item["prompt_contract"] for item in plan["cases"])
+    return plan
 
 LIST_TOOL = "mcp__aeep__aeep_list_capabilities"
 ROUTE_TOOL = "mcp__aeep__aeep_route_action"
@@ -208,9 +266,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     action.add_argument("--check-plan", action="store_true")
     action.add_argument("--check-report", type=Path)
     action.add_argument("--check-comparison", type=Path)
+    action.add_argument("--print-native-plan", action="store_true")
+    action.add_argument("--check-native-plan", action="store_true")
     args = parser.parse_args(argv)
     validate_plan()
-    if args.print_plan:
+    if args.print_native_plan:
+        print(json.dumps(validate_native_plan(), indent=2))
+    elif args.check_native_plan:
+        plan = validate_native_plan()
+        print(json.dumps({key: plan[key] for key in ("main_cases", "main_trials", "requires_separate_user_approval")}))
+    elif args.print_plan:
         print(json.dumps({"schema_version": "0.5", "turns": prompts()}, indent=2))
     elif args.check_plan:
         print(json.dumps({"turns": len(LIVE_PLAN), "expected_aeep_receipts": 3}))

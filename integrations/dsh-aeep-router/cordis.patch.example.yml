@@ -1,0 +1,32 @@
+- insert:
+    - id: aeep-native-router
+      name: aeep-dsh-router
+      config:
+        aeepCommand: /absolute/path/to/python
+        aeepArgs: [-m, aeep]
+        manifest: /absolute/path/to/aeep-dsh.yaml
+        workspace: /absolute/path/to/dsh-workspace
+        maxInputBytes: 1048576
+        baselineTools: []
+        modelCapability: dsh.model.request@1
+        modelRoutes:
+          dsh.model.deepseek:
+            provider: deepseek
+            model: deepseek-chat
+        toolRoutes:
+          web_fetch:
+            capability: web.page.read@1
+            parameterSchemaDigest: sha256:SOURCE_PARAMETER_SCHEMA_DIGEST
+            outputSchemaDigest: sha256:WEB_FETCH_OUTPUT_SCHEMA_DIGEST
+            executors:
+              dsh.web.raw:
+                tool: web_fetch
+                parameterSchemaDigest: sha256:SOURCE_PARAMETER_SCHEMA_DIGEST
+                outputSchemaDigest: sha256:WEB_FETCH_OUTPUT_SCHEMA_DIGEST
+            # Keep the installed read_url route absent until it returns a true
+            # statusCode and its reviewed output digest is pinned here with:
+            # dsh.web.compact:
+            #   tool: read_url
+            #   parameterSchemaDigest: sha256:READ_URL_PARAMETER_SCHEMA_DIGEST
+            #   outputSchemaDigest: sha256:READ_URL_OUTPUT_SCHEMA_DIGEST
+            #   resultAdapter: read-url-to-web-fetch-v1

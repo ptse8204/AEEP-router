@@ -58,15 +58,33 @@ The bonus is intentionally small and never bypasses hard constraints.
 
 ## Static priors and observations
 
-Cold-start estimates come from executor configuration. Real receipts are blended using sample-aware history and the action's privacy-preserving input-size bucket. A provider's advertised number remains a prior; it is not copied into observed performance. Low-confidence estimates carry a configurable uncertainty burden.
+Cold-start estimates come from executor configuration. Real receipts are
+blended only from the exact versioned evidence cohort, including behavior
+fingerprint, provider/model/adapter identity, region/account tier, input-size
+bucket, validators, cache profile, and economic-evidence level. Legacy-unbound
+or mismatched rows remain auditable but cannot influence live routing. A
+provider's advertised number remains a prior; it is not copied into observed
+performance. Low-confidence estimates carry a configurable uncertainty burden.
 
-A production network can replace the local EWMA with confidence intervals, task-conditioned models, quantile latency, drift detection, and signed attestations without changing the core objects.
+After five exact-cohort samples the estimator also exposes deterministic
+empirical p50/p95 resources, observed cash p95, and reliability/quality lower
+bounds. These are descriptive bounds, never payment authorization.
+
+The router may retain a feasible operator baseline when the score improvement
+does not cover measured routing overhead and policy margin. This abstention runs
+after feasibility, so it cannot restore a rejected baseline. More adaptive
+selection remains shadow-only until paired reports demonstrate positive value
+without hiding negative outcomes.
 
 ## Execution boundaries
 
 ### Python
 
-Best for trusted, deterministic in-process work. It has low overhead but weak isolation. A timed-out worker thread cannot be forcibly killed safely.
+Reviewed manifest callables may still run in process for compatibility.
+Provider-package Python routes are forced through an argv-only worker
+subprocess with bounded JSON pipes and timeout termination. Optional POSIX
+CPU/memory limits improve containment but do not replace a container or VM for
+untrusted filesystem/network access.
 
 ### Command
 
@@ -81,6 +99,22 @@ Uses bounded streaming and conservative target validation. It is appropriate for
 Discovers the configured tool, measures schema/context overhead, invokes it over stdio or Streamable HTTP, reads optional AEEP usage claims, and caches discovery/tool schemas according to protocol hints and credential scope. Protocol mode can be pinned; automatic legacy fallback requires an unambiguous method-not-found response.
 
 The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP accepts only complete single-round tool results; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
+
+For DeepSeek Harness, the preferred adapter runs at the host's model/tool
+dispatch boundary. Its `/aeep` command preflights one exact capability/input,
+then exposes only the canonical source tool for that turn. One argv-only,
+bounded JSONL `aeep host-bridge` keeps a Router and event loop alive for the
+plugin lifetime. The model-facing MCP bridge remains historical negative-control
+material, not the ordinary route.
+
+The adapter pins source and selected-target parameter/output digests and
+validates the hinted or rerouted arguments against both live schemas. Hidden
+targets are permitted only for the nested call admitted by the current AEEP
+decision. Output schemas must match exactly unless the one reviewed
+`read-url-to-web-fetch-v1` adapter is configured; that adapter requires the
+target's real status, final URL, text, truncation state, and content type.
+Preflight, drift, mapping, adapter, or bridge failure rejects the routed action
+without falling back to an unreviewed implementation.
 
 ### Delegate
 
@@ -306,7 +340,7 @@ over-reserve.
 
 ## Future extension points
 
-1. Confidence intervals and contextual bandit routing.
+1. Drift-aware bounds and contextual-bandit shadow evaluation.
 2. Result caching within explicit bounded actions.
 3. Sandboxed hosted executors.
 4. Organization policy services and private catalogs.
@@ -315,7 +349,7 @@ over-reserve.
 6. Hosted marketplace accounts, custody, payouts, and fraud controls.
 7. Richer OpenTelemetry semantic events, exporters, and trace-to-action correlation.
 
-## Provider-package supply chain (0.5)
+## Provider-package supply chain (0.6)
 
 ```text
 aeep-provider.yaml
@@ -335,11 +369,17 @@ finalized in CAS before one SQLite transaction publishes trusted metadata.
 External evidence feeds the existing estimator as a prior. It does not enter
 the observations table and does not create a second scorer.
 
-New v0.5 signatures use RFC 8785. Verification dispatches on the signed profile;
-legacy signatures are historical/recovery-only. Database schema v4 records the
+New signatures use RFC 8785. Verification dispatches on the signed profile;
+legacy signatures are historical/recovery-only. Database schema v5 records the
 cutover, package revisions, artifacts, evidence decisions, smoke results, cache
-observations, registry metadata, and durable approvals.
+observations, registry metadata, durable approvals, and immutable evidence
+cohort provenance on receipts and observations.
 
 Cache affinity follows the same hard/soft split as every other routing signal:
 cold resources decide feasibility, while a privacy-safe warm expectation may
 change the score of an already feasible route.
+
+Version 0.6 adds explicit evidence authority/cohort declarations, signed
+provider discovery, and provider conformance checks. A v0.5 package remains
+readable, but evidence that lacks the new declarations is accepted only as a
+low-confidence prior and cannot qualify a route.

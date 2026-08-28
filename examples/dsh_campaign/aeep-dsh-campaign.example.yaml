@@ -1,0 +1,129 @@
+version: "0.6"
+database: .aeep/dsh-plugin-campaign.db
+
+resources:
+  - id: dsh.fixture
+    provider: dsh
+    product: deterministic-campaign
+    unit: request
+    access: {mode: host}
+    quota: {state: abundant, confidence: 1, source: host}
+
+executors:
+  - id: dsh.model.fixture
+    provider_id: deepseek-official
+    capability: dsh.model.request@1
+    kind: host
+    description: Keep the fixed campaign model.
+    input_schema:
+      type: object
+      properties:
+        provider: {type: string}
+        model: {type: string}
+        integration_adapter: {const: dsh-native-v2}
+        context_tokens: {type: integer, minimum: 0}
+      required: [provider, model, integration_adapter, context_tokens]
+      additionalProperties: false
+    estimate:
+      resources: {latency_ms: 1000, context_tokens: 4000, subscription_units: 1}
+      success_probability: 1
+      quality_score: 1
+      risk_score: 0
+      confidence: 1
+    side_effect: read
+    locality: internet
+    requires_network: true
+    resource_pool: dsh.fixture
+    config: {instructions: Keep the fixed DSH campaign model.}
+
+  - id: dsh.web.verbose
+    provider_id: aeep-fixture
+    capability: web.page.read@1
+    kind: host
+    description: Canonical verbose web fixture.
+    input_schema: &fixture_input
+      type: object
+      properties: {fixtureId: {type: string}}
+      required: [fixtureId]
+      additionalProperties: false
+    estimate: &verbose_estimate
+      resources: {latency_ms: 10, context_tokens: 3600, subscription_units: 1}
+      success_probability: 1
+      quality_score: 1
+      risk_score: 0
+      confidence: 1
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute the canonical verbose fixture tool.}
+
+  - id: dsh.web.compact
+    provider_id: aeep-fixture
+    capability: web.page.read@1
+    kind: host
+    description: Compact web fixture requiring the reviewed result adapter.
+    input_schema: *fixture_input
+    estimate: &compact_estimate
+      resources: {latency_ms: 5, context_tokens: 20, subscription_units: 1}
+      success_probability: 1
+      quality_score: 1
+      risk_score: 0
+      confidence: 1
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute fixture_read_url with unchanged arguments.}
+
+  - id: dsh.github.verbose
+    provider_id: aeep-fixture
+    capability: github.file.read@1
+    kind: host
+    description: Canonical verbose repository fixture.
+    input_schema: *fixture_input
+    estimate: *verbose_estimate
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute the canonical verbose repository fixture.}
+
+  - id: dsh.github.compact
+    provider_id: aeep-fixture
+    capability: github.file.read@1
+    kind: host
+    description: Compact output-compatible repository fixture.
+    input_schema: *fixture_input
+    estimate: *compact_estimate
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute the compact repository fixture.}
+
+  - id: dsh.document.verbose
+    provider_id: aeep-fixture
+    capability: document.text.extract@1
+    kind: host
+    description: Canonical verbose document fixture.
+    input_schema: *fixture_input
+    estimate: *verbose_estimate
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute the canonical verbose document fixture.}
+
+  - id: dsh.document.compact
+    provider_id: aeep-fixture
+    capability: document.text.extract@1
+    kind: host
+    description: Compact output-compatible document fixture.
+    input_schema: *fixture_input
+    estimate: *compact_estimate
+    side_effect: read
+    locality: local
+    idempotent: true
+    resource_pool: dsh.fixture
+    config: {instructions: Execute the compact document fixture.}

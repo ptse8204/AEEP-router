@@ -1,21 +1,27 @@
 from __future__ import annotations
 
+import base64
+import io
 import json
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from types import SimpleNamespace
 from urllib.parse import parse_qs, urlparse
 
 import pytest
 from conftest import manifest_with
 
-from aeep.executors import ExecutionContext, HTTPExecutor
+from aeep.executors import ExecutionContext, HTTPExecutor, PythonExecutor, python_worker
+from aeep.executors.command import CommandExecutor
 from aeep.models import (
     ActionRequest,
+    ExecutionStatus,
     ExecutorKind,
     ExecutorSpec,
     Locality,
+    RawExecution,
     ResourceVector,
     RouteEstimate,
     SideEffect,
@@ -259,6 +265,168 @@ def test_execution_context_prepared_ids_default_to_none(text_schema):
     )
 
     assert (context.prepared_id, context.quote_id, context.attempt_id) == (None, None, None)
+
+
+@pytest.mark.asyncio
+async def test_python_executor_subprocess_isolation(text_schema):
+    spec = ExecutorSpec(
+        id="python-isolated",
+        capability="text.stats",
+        kind=ExecutorKind.PYTHON,
+        description="isolated python",
+        input_schema=text_schema,
+        side_effect=SideEffect.NONE,
+        config={
+            "callable": "aeep.examples.tools:printing_text_stats",
+            "isolation": "subprocess",
+            "timeout_seconds": 5,
+        },
+    )
+    context = ExecutionContext(
+        request=ActionRequest(capability=spec.capability, input={"text": "one two"}),
+        spec=spec,
+        estimate=spec.estimate,
+        attempt=1,
+    )
+
+    raw = await PythonExecutor().execute(context)
+
+    assert raw.status is ExecutionStatus.SUCCESS
+    assert raw.output == {"characters": 7, "words": 2, "lines": 1}
+    assert raw.metadata["isolation"] == "subprocess"
+
+
+@pytest.mark.asyncio
+async def test_python_worker_argument_modes_and_limits(monkeypatch) -> None:
+    monkeypatch.setattr(python_worker, "load_callable", lambda _: lambda **value: value)
+    assert await python_worker._invoke(
+        {"callable": "fixture", "argument_mode": "kwargs", "input": {"x": 1}}
+    ) == {"x": 1}
+
+    monkeypatch.setattr(python_worker, "load_callable", lambda _: lambda value: value)
+    assert await python_worker._invoke(
+        {"callable": "fixture", "argument_mode": "dict", "input": {"x": 1}}
+    ) == {"x": 1}
+    request_result = await python_worker._invoke(
+        {
+            "callable": "fixture",
+            "argument_mode": "request",
+            "request": {"capability": "fixture@1"},
+        }
+    )
+    assert request_result.capability == "fixture@1"
+
+    async def async_value(**value):
+        return value
+
+    monkeypatch.setattr(python_worker, "load_callable", lambda _: async_value)
+    assert await python_worker._invoke(
+        {"callable": "fixture", "input": {"x": 1}}
+    ) == {"x": 1}
+    with pytest.raises(ValueError, match="unsupported Python argument_mode"):
+        await python_worker._invoke(
+            {"callable": "fixture", "argument_mode": "unknown", "input": {}}
+        )
+
+    calls = []
+    fake_resource = SimpleNamespace(
+        RLIMIT_CPU=1,
+        RLIMIT_AS=2,
+        setrlimit=lambda kind, value: calls.append((kind, value)),
+    )
+    monkeypatch.setitem(sys.modules, "resource", fake_resource)
+    monkeypatch.setattr(sys, "platform", "darwin")
+    python_worker._apply_limits(2, 3)
+    assert calls == [(1, (2, 2)), (2, (3 * 1024 * 1024, 3 * 1024 * 1024))]
+    monkeypatch.setattr(sys, "platform", "win32")
+    python_worker._apply_limits(2, 3)
+
+
+def test_python_worker_main_envelopes(monkeypatch) -> None:
+    def run(payload: bytes) -> dict[str, object]:
+        stdout = io.StringIO()
+        monkeypatch.setattr(sys, "stdin", SimpleNamespace(buffer=io.BytesIO(payload)))
+        monkeypatch.setattr(sys, "stdout", stdout)
+        assert python_worker.main() == 0
+        return json.loads(stdout.getvalue())
+
+    payload = base64.b64encode(
+        json.dumps(
+            {
+                "callable": "aeep.examples.tools:text_stats",
+                "input": {"text": "one two"},
+            }
+        ).encode()
+    )
+    assert run(payload)["ok"] is True
+    assert run(b"not-base64")["error_type"] == "Error"
+    assert run(b"x" * 1_333_337)["error_type"] == "ValueError"
+
+    async def unserializable(_payload):
+        return {object()}
+
+    monkeypatch.setattr(python_worker, "_invoke", unserializable)
+    assert run(base64.b64encode(b"{}"))["error_type"] == "TypeError"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("response", "error_type"),
+    [({"bad": True}, "ProtocolError"), ({"ok": False, "error_type": "Fixture"}, "Fixture")],
+)
+async def test_python_subprocess_fails_closed_on_worker_envelope(
+    monkeypatch,
+    response,
+    error_type,
+) -> None:
+    async def execute(_self, _context):
+        return RawExecution(status=ExecutionStatus.SUCCESS, output=response)
+
+    monkeypatch.setattr(CommandExecutor, "execute", execute)
+    spec = ExecutorSpec(
+        id="python-isolated",
+        capability="fixture@1",
+        kind=ExecutorKind.PYTHON,
+        description="isolated Python",
+        side_effect=SideEffect.NONE,
+        config={"callable": "fixture:function", "isolation": "subprocess"},
+    )
+    raw = await PythonExecutor().execute(
+        ExecutionContext(
+            request=ActionRequest(capability=spec.capability),
+            spec=spec,
+            estimate=spec.estimate,
+            attempt=1,
+        )
+    )
+    assert raw.status is ExecutionStatus.FAILED
+    assert raw.error_type == error_type
+
+
+@pytest.mark.asyncio
+async def test_python_subprocess_rejects_invalid_configuration() -> None:
+    spec = ExecutorSpec(
+        id="python-isolated",
+        capability="fixture@1",
+        kind=ExecutorKind.PYTHON,
+        description="isolated Python",
+        side_effect=SideEffect.NONE,
+        config={
+            "callable": "fixture:function",
+            "isolation": "subprocess",
+            "max_stdin_bytes": 1,
+        },
+    )
+    context = ExecutionContext(
+        request=ActionRequest(capability=spec.capability),
+        spec=spec,
+        estimate=spec.estimate,
+        attempt=1,
+    )
+    assert (await PythonExecutor().execute(context)).status is ExecutionStatus.REJECTED
+    spec.config = {"isolation": "unknown"}
+    with pytest.raises(Exception, match="unsupported Python isolation"):
+        await PythonExecutor().execute(context)
 
 
 @pytest.mark.asyncio

@@ -1,7 +1,7 @@
 # Migrating to AEEP 0.5
 
 AEEP 0.5 adds signed provider packages, RFC 8785 signatures, portable evidence,
-cache-affinity scoring, durable approvals, and SQLite schema version 4. Existing
+cache-affinity scoring, durable approvals, and SQLite schema version 5. Existing
 manifest versions `0.1`, `0.15`, `0.2`, `0.3`, and `0.4` remain readable.
 
 ## Signature cutover
@@ -22,10 +22,13 @@ Providers must reissue live offers, quotes, aggregates, and attestations. Run
 
 ## Database
 
-Opening a schema-v3 database performs one transactional v3→v4 migration. It
-adds protocol-cutover, provider-package, content-artifact, evidence, smoke,
-cache, registry, and approval tables, then records `rfc8785_live_cutover_at`.
-Historical rows and payload digests are not rewritten.
+Opening a schema-v3 database performs transactional v3→v4→v5 migrations.
+Version 4 adds protocol-cutover, provider-package, content-artifact, evidence,
+smoke, cache, registry, and approval tables, then records
+`rfc8785_live_cutover_at`. Version 5 adds nullable immutable fingerprint/cohort
+provenance to receipts and observations. Historical rows and payload digests
+are not rewritten; unbound legacy rows remain reportable but do not affect live
+routing.
 
 ## Provider packages
 

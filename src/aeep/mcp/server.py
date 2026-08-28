@@ -231,7 +231,7 @@ class AEEPToolService:
                     receipt.model_dump(mode="json"),
                     usage=receipt.actual_resources,
                 )
-            if name == "aeep_request_quotes":
+            if name in {"aeep_estimate_route_prices", "aeep_request_quotes"}:
                 quote_request = QuoteRequest(
                     action=_action_from_arguments(arguments),
                     executor_ids=arguments.get("executor_ids"),

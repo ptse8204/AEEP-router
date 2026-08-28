@@ -636,6 +636,32 @@
       "title": "Capability",
       "type": "string"
     },
+    "executor_fingerprint": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executor Fingerprint"
+    },
+    "cohort_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cohort Digest"
+    },
     "receipt_id": {
       "anyOf": [
         {

@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
+import hashlib
 import inspect
 import json
 import re
 from collections.abc import Awaitable, Callable, Mapping, Sequence
+from datetime import datetime
 from pathlib import Path
 from typing import Any, TypeVar
 from urllib.parse import urljoin, urlparse
 
 import yaml
+from pydantic import BaseModel
 
 from .economic.canonical import canonical_payload
 from .economic.signing import Signer
@@ -33,6 +36,22 @@ from .models import (
     TrustLevel,
     UsageStatement,
 )
+from .provider_package import (
+    ArtifactReference,
+    EvidenceReference,
+    ProviderCompatibility,
+    ProviderIdentity,
+    ProviderPackage,
+    ProviderPackageIntegrity,
+    ProviderPackageMetadata,
+    ProviderPackageSpec,
+    PublishedExecutor,
+    PublishedProviderRoute,
+    RouteFingerprint,
+    SmokeTestDefinition,
+    portable_route_fingerprint,
+    provider_package_digest,
+)
 from .templates import render
 
 QuoteHandlerResult = BoundedQuote | Mapping[str, Any]
@@ -49,6 +68,90 @@ UsageHandler = Callable[
 _HandlerResult = TypeVar("_HandlerResult", QuoteHandlerResult, UsageHandlerResult)
 _EconomicRecord = TypeVar("_EconomicRecord", CapabilityOffer, BoundedQuote, UsageStatement)
 _RouteKey = tuple[str, str, str]
+
+
+def build_provider_package(
+    *,
+    package_id: str,
+    version: str,
+    issued_at: datetime,
+    provider: ProviderIdentity,
+    compatibility: ProviderCompatibility,
+    capabilities: Sequence[CapabilityDefinition],
+    executors: Sequence[ExecutorSpec],
+    artifacts: Sequence[ArtifactReference] = (),
+    evidence: Sequence[EvidenceReference] = (),
+    smoke_tests: Sequence[SmokeTestDefinition] = (),
+    artifact_bindings: Mapping[str, Sequence[str]] | None = None,
+) -> ProviderPackage:
+    """Build an unsigned v0.6 package from operator-reviewed route records."""
+
+    definitions = {item.capability: item for item in capabilities}
+    routes: list[PublishedProviderRoute] = []
+    for spec in executors:
+        definition = definitions.get(spec.capability)
+        if definition is None:
+            raise ConfigurationError(
+                f"executor {spec.id!r} has no exact capability definition"
+            )
+        published = PublishedProviderRoute(
+            route_id=spec.id,
+            capability=spec.capability,
+            input_schema=definition.input_schema,
+            output_schema=definition.output_schema,
+            executor=PublishedExecutor(
+                kind=spec.kind,
+                description=spec.description,
+                side_effect=spec.side_effect,
+                locality=spec.locality,
+                requires_network=spec.requires_network,
+                data_residency=tuple(spec.data_residency),
+                idempotent=spec.idempotent,
+                resource_pool=spec.resource_pool,
+                validators=tuple(spec.validators),
+                config=spec.config,
+            ),
+            declared_fingerprint=RouteFingerprint(value="sha256:" + "0" * 64),
+            artifact_bindings=tuple((artifact_bindings or {}).get(spec.id, ())),
+            static_estimate=spec.estimate,
+            tags=tuple(spec.tags),
+        )
+        routes.append(
+            published.model_copy(
+                update={
+                    "declared_fingerprint": RouteFingerprint(
+                        value=portable_route_fingerprint(published, provider.provider_id)
+                    )
+                }
+            )
+        )
+    package = ProviderPackage(
+        metadata=ProviderPackageMetadata(
+            package_id=package_id,
+            version=version,
+            issued_at=issued_at,
+        ),
+        spec=ProviderPackageSpec(
+            provider=provider,
+            compatibility=compatibility,
+            capabilities=tuple(capabilities),
+            routes=tuple(routes),
+            artifacts=tuple(artifacts),
+            evidence=tuple(evidence),
+            smoke_tests=tuple(smoke_tests),
+        ),
+        integrity=ProviderPackageIntegrity(digest="sha256:" + "0" * 64),
+    )
+    return package.model_copy(
+        update={"integrity": ProviderPackageIntegrity(digest=provider_package_digest(package))}
+    )
+
+
+def export_evidence_artifact(record: BaseModel) -> tuple[bytes, str]:
+    """Serialize one validated report and return its content-addressed digest."""
+
+    payload = record.model_dump_json(indent=2).encode("utf-8") + b"\n"
+    return payload, f"sha256:{hashlib.sha256(payload).hexdigest()}"
 
 
 async def _handler_result(
@@ -413,7 +516,8 @@ def provider_from_manifest(
         metadata={
             "mcp": {"command": "aeep", "args": ["serve", "--transport", "stdio"]},
             "health": "/healthz",
-            "quotes": "aeep_request_quotes",
+            "price_estimates": "aeep_estimate_route_prices",
+            "quotes_legacy": "aeep_request_quotes",
             "metering": "aeep_get_metrics",
         },
     )

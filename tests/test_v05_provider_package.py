@@ -8,6 +8,7 @@ import pytest
 import yaml
 
 from aeep.artifact_store import ContentArtifactStore
+from aeep.conformance import run_provider_conformance
 from aeep.economic.signing import Ed25519Signer
 from aeep.economic.trust import TrustStore, TrustStoreVerifier
 from aeep.errors import ConfigurationError
@@ -19,9 +20,12 @@ from aeep.models import (
     PolicyConfig,
     SideEffect,
     TrustedKeyRole,
+    TrustLevel,
 )
 from aeep.provider_ingest import ProviderPackageIngestor
 from aeep.provider_package import (
+    EvidenceAcceptanceStatus,
+    EvidenceAuthorityClass,
     ProviderCompatibility,
     ProviderIdentity,
     ProviderPackage,
@@ -43,6 +47,7 @@ from aeep.provider_package import (
 )
 from aeep.qualification import RouteLifecycle
 from aeep.router import Router
+from aeep.sdk import build_provider_package
 from aeep.store import LATEST_DATABASE_SCHEMA, ReceiptStore
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -101,7 +106,7 @@ def package_fixture() -> tuple[ProviderPackage, Ed25519Signer]:
     package = ProviderPackage(
         metadata=ProviderPackageMetadata(
             package_id="fixture.provider.package",
-            version="0.5.0",
+            version="0.6.0",
             issued_at=now,
             expires_at=now + timedelta(days=365),
         ),
@@ -122,7 +127,7 @@ def package_fixture() -> tuple[ProviderPackage, Ed25519Signer]:
             ),
             compatibility=ProviderCompatibility(
                 aeep_min="0.5.0",
-                aeep_max_exclusive="0.6.0",
+                aeep_max_exclusive="0.7.0",
             ),
             capabilities=(capability,),
             routes=(route,),
@@ -161,6 +166,107 @@ def test_package_digest_signature_and_portable_fingerprint() -> None:
         }
     )
     assert not verify_embedded_package_signature(changed, changed.signatures[0])
+    report = run_provider_conformance(package)
+    assert report.passed
+    assert all(item.passed for item in report.checks)
+
+
+def test_v05_package_signature_compatibility() -> None:
+    package, signer = package_fixture()
+    unsigned = package.model_copy(
+        update={
+            "api_version": "aeep.dev/v0.5",
+            "integrity": ProviderPackageIntegrity(digest="sha256:" + "0" * 64),
+            "signatures": (),
+        }
+    )
+    legacy = sign_provider_package(
+        unsigned,
+        signer,
+        signature_id="fixture-v05-signature",
+        issued_at=package.metadata.issued_at,
+    )
+
+    assert legacy.integrity.digest == provider_package_digest(legacy)
+    assert verify_embedded_package_signature(legacy, legacy.signatures[0])
+    assert ProviderPackage.model_validate(
+        legacy.model_dump(mode="json", by_alias=True)
+    ) == legacy
+
+
+def test_sdk_builds_content_addressed_v06_package() -> None:
+    source, _ = package_fixture()
+    published = source.spec.routes[0]
+    executor = published.executor_spec(source.spec.provider.provider_id)
+    executor.side_effect = published.executor.side_effect
+    executor.idempotent = published.executor.idempotent
+    built = build_provider_package(
+        package_id="fixture.sdk.package",
+        version="0.6.0",
+        issued_at=source.metadata.issued_at,
+        provider=source.spec.provider,
+        compatibility=source.spec.compatibility,
+        capabilities=source.spec.capabilities,
+        executors=(executor,),
+    )
+
+    assert built.api_version == "aeep.dev/v0.6"
+    assert built.integrity.digest == provider_package_digest(built)
+    assert built.spec.routes[0].declared_fingerprint.value == portable_route_fingerprint(
+        built.spec.routes[0], built.spec.provider.provider_id
+    )
+
+
+def test_v05_evidence_is_accepted_only_as_an_incomplete_prior() -> None:
+    package, _ = load_provider_package(
+        ROOT / "examples" / "provider_package" / "aeep-provider.yaml"
+    )
+    legacy = package.model_copy(update={"api_version": "aeep.dev/v0.5"})
+    evidence = legacy.spec.evidence[0]
+
+    acceptance = ProviderPackageIngestor._acceptance(
+        legacy,
+        evidence,
+        metric="correctness",
+        trust=TrustLevel.ATTESTED,
+        subject_matches=True,
+        allow_self_asserted_priors=True,
+        evaluated_at=datetime(2026, 8, 21, tzinfo=UTC),
+    )
+
+    assert acceptance.status is EvidenceAcceptanceStatus.ACCEPTED_AS_PRIOR
+    assert acceptance.reason_code == "legacy_incomplete_evidence_prior"
+
+
+@pytest.mark.parametrize(
+    "authority",
+    [
+        EvidenceAuthorityClass.PROVIDER_SELF_ATTESTED,
+        EvidenceAuthorityClass.DISTRIBUTOR_ATTESTED,
+    ],
+)
+def test_non_independent_v06_evidence_cannot_qualify(
+    authority: EvidenceAuthorityClass,
+) -> None:
+    package, _ = load_provider_package(
+        ROOT / "examples" / "provider_package" / "aeep-provider.yaml"
+    )
+    evidence = package.spec.evidence[0].model_copy(
+        update={"authority_class": authority}
+    )
+
+    acceptance = ProviderPackageIngestor._acceptance(
+        package,
+        evidence,
+        metric="correctness",
+        trust=TrustLevel.ATTESTED,
+        subject_matches=True,
+        allow_self_asserted_priors=True,
+        evaluated_at=datetime(2026, 8, 21, tzinfo=UTC),
+    )
+
+    assert acceptance.status is EvidenceAcceptanceStatus.ACCEPTED_AS_PRIOR
+    assert acceptance.reason_code == "non_independent_authority_prior"
 
 
 def test_strict_yaml_and_directory_resolution(tmp_path: Path) -> None:
@@ -217,7 +323,7 @@ async def test_package_ingest_is_inert_idempotent_and_self_asserted(tmp_path: Pa
     assert first[0].spec.side_effect is SideEffect.FINANCIAL
     assert store.get_provider_package(package.integrity.digest) == package
     assert store.protocol_cutover("rfc8785_live_cutover") is not None
-    assert LATEST_DATABASE_SCHEMA == 4
+    assert LATEST_DATABASE_SCHEMA == 5
     router = Router(Manifest(database=str(tmp_path / "aeep.db")), store=store)
     reports = await router.smoke_candidate(first[0].executor_id)
     assert len(reports) == 1
@@ -309,4 +415,8 @@ def test_v3_database_migrates_provider_package_state_transactionally(tmp_path: P
         } <= tables
         assert {"package_digest", "package_fingerprint", "verification_snapshot_id"} <= columns
         assert store.protocol_cutover("rfc8785_live_cutover") is not None
-        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 4
+        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 5
+        receipt_columns = {
+            row[1] for row in store._connection.execute("PRAGMA table_info(receipts)")
+        }
+        assert {"executor_fingerprint", "cohort_digest"} <= receipt_columns

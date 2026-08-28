@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import json
 import os
+import runpy
 import subprocess
 import sys
 from datetime import UTC, datetime
+from decimal import Decimal
 from pathlib import Path
+from types import SimpleNamespace
 
 from aeep.models import ExecutionStatus
 from aeep.proofs import (
@@ -14,9 +18,123 @@ from aeep.proofs import (
     DSHLiveProofReport,
     DSHProofReport,
     JobProofReport,
+    RoutingValueReport,
+    RoutingValueStatus,
+    RoutingValueTrial,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_live_plugin_campaign_parser_sanitizes_session_events() -> None:
+    campaign = runpy.run_path(str(ROOT / "examples/dsh_campaign/plugin_campaign.py"))
+    events = [
+        {
+            "type": "assistant/message",
+            "data": {
+                "usage": {
+                    "inputTokens": 10,
+                    "outputTokens": 2,
+                    "cacheReadTokens": 20,
+                    "cacheWriteTokens": 3,
+                    "reasoningTokens": 1,
+                },
+                "message": {
+                    "source": {"kind": "model"},
+                    "content": [{"type": "text", "text": "proof-value"}],
+                }
+            },
+        },
+        {"type": "tool/call", "data": {"name": "web_fetch", "arguments": "secret"}},
+        {
+            "type": "tool/result",
+            "data": {
+                "message": {
+                    "content": [
+                        {
+                            "type": "tool-result",
+                            "toolCallId": "call-1",
+                            "content": [{"type": "text", "text": "fixture output"}],
+                            "isError": False,
+                        }
+                    ]
+                }
+            },
+        },
+        {"type": "turn/end", "data": {"reason": {"kind": "completed"}}},
+    ]
+    parsed = campaign["parse_session_events"](json.dumps(item) for item in events)
+
+    assert parsed["completed"] is True
+    assert parsed["tools"] == ["web_fetch"]
+    assert parsed["usage"]["total_tokens"] == 35
+    assert parsed["usage"]["cache_write_tokens"] == 3
+    assert parsed["rendered_result_bytes"] > 0
+    assert "secret" not in json.dumps(parsed)
+
+
+def test_live_plugin_campaign_resolves_database_from_manifest(tmp_path: Path) -> None:
+    campaign = runpy.run_path(str(ROOT / "examples/dsh_campaign/plugin_campaign.py"))
+    manifest = tmp_path / "aeep.yaml"
+    campaign["_database"].__globals__["load_manifest"] = lambda _: (
+        SimpleNamespace(database=Path(".aeep/campaign.db")),
+        {},
+    )
+
+    assert campaign["_database"](manifest) == tmp_path / ".aeep/campaign.db"
+
+
+def test_live_plugin_campaign_requires_the_planned_capabilities() -> None:
+    campaign = runpy.run_path(str(ROOT / "examples/dsh_campaign/plugin_campaign.py"))
+    cases = [
+        {
+            "case_id": capability,
+            "capability": capability,
+            "input": {},
+            "prompt": "fixture",
+            "expected": "fixture",
+            "expected_tool": "fixture",
+            "native_patch": "fixture",
+            "manifest": "fixture",
+        }
+        for capability in sorted(
+            {"web.page.read@1", "github.file.read@1", "document.text.extract@1"}
+        )
+    ]
+    definition = {
+        "harness_version": "0.1.1-rc.2",
+        "model": "fixture-model",
+        "settings": {"temperature": 0},
+        "plugins": ["fixture-tools", "aeep-dsh-router"],
+        "cases": cases,
+    }
+    assert campaign["validate_definition"](definition) == cases
+
+    warmups, trials = campaign["build_plan"](cases, repetitions=10, seed=8204)
+    assert len(warmups) == 6
+    assert len(trials) == 60
+    assert campaign["build_plan"](cases, repetitions=10, seed=8204) == (
+        warmups,
+        trials,
+    )
+
+
+def test_live_plugin_campaign_bootstrap_is_deterministic() -> None:
+    campaign = runpy.run_path(str(ROOT / "examples/dsh_campaign/plugin_campaign.py"))
+    interval = campaign["bootstrap_median_interval"](
+        [2, 3, 4, 5], seed=8204, resamples=500
+    )
+
+    assert interval == campaign["bootstrap_median_interval"](
+        [2, 3, 4, 5], seed=8204, resamples=500
+    )
+    assert interval["ci95_low"] > 0
+    assert campaign["classify_savings"](
+        [{"passed": True}], {"ci95_low": -1.0, "ci95_high": 2.0}
+    ) == "inconclusive"
+    assert campaign["classify_savings"](
+        [{"passed": True}], {"ci95_low": 1.0, "ci95_high": 2.0}
+    ) == "demonstrated_savings"
 
 
 def run_script(script: str, destination: Path) -> None:
@@ -194,6 +312,34 @@ def test_live_dsh_plan_requires_six_sanitized_fail_closed_turns(
     assert "suspended after" in failed.stderr
 
 
+def test_native_dsh_plan_is_paired_randomized_and_requires_approval() -> None:
+    environment = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+    process = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "examples/dsh_campaign/live_campaign.py"),
+            "--print-native-plan",
+        ],
+        cwd=ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=30,
+        check=False,
+    )
+    assert process.returncode == 0, process.stdout + process.stderr
+    plan = __import__("json").loads(process.stdout)
+    assert plan["main_cases"] == 30
+    assert plan["main_trials"] == 90
+    assert plan["requires_separate_user_approval"] is True
+    assert set(plan["arms"]) == {
+        "DSH_DIRECT",
+        "AEEP_MODEL_FACING_MCP",
+        "AEEP_HOST_NATIVE",
+    }
+    assert len({tuple(item["arm_order"]) for item in plan["cases"]}) > 1
+
+
 def test_job_fixture_proof_requires_approval_and_reconciles_timeout(
     tmp_path: Path,
 ) -> None:
@@ -298,3 +444,34 @@ def test_live_dsh_comparison_reports_overhead_without_marketing_it_as_savings(
         check=False,
     )
     assert process.returncode == 0, process.stdout + process.stderr
+
+
+def test_routing_value_report_keeps_negative_regret() -> None:
+    trial = RoutingValueTrial(
+        trial_id="negative-1",
+        workload_digest="sha256:" + "a" * 64,
+        cohort_digest="sha256:" + "b" * 64,
+        selected_executor_id="selected",
+        baseline_executor_id="baseline",
+        selected_receipt_id="selected-receipt",
+        baseline_receipt_id="baseline-receipt",
+        routing_overhead_ms=Decimal("2"),
+        selected_total_latency_ms=Decimal("120"),
+        baseline_total_latency_ms=Decimal("100"),
+        signed_latency_delta_ms=Decimal("20"),
+        selected_cash_usd=Decimal("0.02"),
+        baseline_cash_usd=Decimal("0.01"),
+        signed_cash_delta_usd=Decimal("0.01"),
+        selected_model_tokens=200,
+        baseline_model_tokens=100,
+        signed_token_delta=100,
+        status=RoutingValueStatus.NEGATIVE,
+    )
+    report = RoutingValueReport(
+        report_id="routing-value-1",
+        generated_at=datetime(2026, 8, 26, tzinfo=UTC),
+        paired_trials=(trial,),
+    )
+
+    assert report.paired_trials[0].signed_token_delta == 100
+    assert report.paired_trials[0].status is RoutingValueStatus.NEGATIVE

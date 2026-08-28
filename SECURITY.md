@@ -36,6 +36,11 @@ Do not open a public issue containing a working exploit, credential, or private 
 - Put untrusted tools in containers/VMs with filesystem, network, process, and syscall controls.
 - Do not use in-process Python for untrusted code.
 
+Packaged Python callables run in a killable subprocess with bounded JSON pipes
+and optional POSIX CPU/memory limits. This prevents a timed-out worker from
+remaining in the router process, but it is not a cross-platform filesystem or
+network sandbox. Use a container or VM for untrusted code.
+
 ## HTTP/SSRF
 
 - Public remote calls require HTTPS by default.
@@ -76,7 +81,21 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 
 Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The compatibility HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system. Cross-provider 0.4 economic evidence uses locally trusted Ed25519 keys bound to provider identity, capability, validity period, revocation metadata, and approved quote hosts.
 
-Imported traces and SDK measurements also influence local history. Treat trace files and instrumented client access as trusted measurement inputs. The built-in instrumentation stores resource metadata and identifiers, not action payloads or model outputs; trace attributes can still contain sensitive data and should be filtered at the telemetry collector.
+Live historical estimates use only receipts bound to the exact versioned
+evidence cohort and behavior fingerprint. Legacy-unbound or mismatched rows stay
+available for audit but cannot affect selection. This prevents a route ID,
+provider, model, validator, or cache-scope change from inheriting unrelated
+performance history.
+
+Empirical p95 and lower-bound estimates describe exact-cohort history only.
+They cannot replace signed payment maxima or weaken hard constraints. Router
+abstention may retain only a baseline that already passed those constraints.
+
+Imported traces and SDK measurements remain audit evidence unless a trusted
+ingestion path binds them to the exact runtime fingerprint and evidence cohort.
+The built-in instrumentation stores resource metadata and identifiers, not
+action payloads or model outputs; trace attributes can still contain sensitive
+data and should be filtered at the telemetry collector.
 
 ## Subscription resources
 
@@ -104,6 +123,22 @@ Imported traces and SDK measurements also influence local history. Treat trace f
   while retaining original TLS SNI.
 - Registry labels and container provenance never grant qualification, economic
   trust, activation, or approval.
+- Signed provider discovery documents remain inert provenance metadata. Their
+  keys and endpoints do not become trusted until local policy recognizes them.
+- Version 0.5 package evidence that lacks the version 0.6 authority/cohort
+  declaration is capped as a weak prior and cannot qualify a route by itself.
+
+## DeepSeek Harness host adapter
+
+The host-native DSH adapter keeps AEEP routing outside model context. It uses
+one argv-only persistent child, bounded JSONL stdin/stdout, exact
+operator-authored executor mappings, transient action hints, per-turn tool
+allowlists, and a nested-call guard. It never persists prompts, action inputs,
+outputs, or session IDs and never discovers, installs, qualifies, activates, or
+widens approval. If AEEP, the bridge, or the live DSH inventory disagrees with
+the configured input or output contracts, `/aeep` fails closed before the model
+call or routed execution. A failed consequential call is never retried. Live
+campaigns require a separate operator approval.
 
 ## RFC 8785 cutover
 

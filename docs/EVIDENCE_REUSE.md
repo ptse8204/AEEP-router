@@ -1,7 +1,11 @@
-# AEEP 0.5 portable evidence reuse
+# AEEP 0.6 portable evidence reuse
 
 Evidence acceptance is metric-specific. It never activates a route and it is
 never inserted as a local observation.
+
+Version 0.6 evidence declares both an authority class and an exact portable
+cohort. Version 0.5 evidence without those declarations is capped as a weak
+prior and cannot qualify a route by itself.
 
 | Metric | Reuse rule |
 |---|---|
@@ -19,6 +23,19 @@ history formula and increasingly dominate. A summary and the campaign behind it
 are never counted twice. A live bounded quote remains authoritative for a
 maximum cash authorization.
 
+Local history is reused only within the exact `aeep-evidence-cohort-v1` bound
+to the receipt at execution time. Route ID reuse, fingerprint drift, provider or
+model changes, validator changes, cache-profile changes, and legacy rows without
+a cohort binding cannot leak observations into a live estimate.
+
+After five exact-cohort local observations, the estimator exposes empirical
+p50/p95 resources and reliability/quality lower bounds. Observed cash p95 is
+descriptive only; payment authorization still requires an immutable signed
+quote, offer, or pinned-rate-card maximum.
+
 Evidence-assisted qualification requires trusted exact correctness evidence and
 one or two successful local smoke executions. Self-asserted evidence can be a
 weak prior when policy permits, but cannot qualify by default.
+Provider-self and distributor authority classes remain prior-only even when the
+signing key is locally trusted; independent-lab, organization-admin, or local-
+operator evidence may satisfy correctness gates under local trust policy.

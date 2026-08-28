@@ -1,4 +1,4 @@
-# AEEP 0.5 provider-package fixture
+# AEEP 0.6 provider-package fixture
 
 This directory contains a deterministic signed package, independently attested
 evidence, a local trust store, and no credentials. Regenerate it with:

@@ -57,6 +57,8 @@ def estimate_cache_affinity(
             context.previous_state_digest_hmac is not None
             and context.previous_state_digest_hmac == latest.state_digest_hmac
             and context.stable_prefix_digest_hmac == latest.stable_prefix_digest_hmac
+            and context.compaction_generation == latest.compaction_generation
+            and context.context_reset_reason is None
         )
     reliability = (context.observed_hits + 1) / (context.observed_attempts + 2)
     probability = min(1.0, max(0.0, identity * prefix * freshness * continuity * reliability))
@@ -73,6 +75,14 @@ def estimate_cache_affinity(
         cold_resources=cold_resources,
         warm_resources=warm_resources,
         expected_resources=expected,
+        expected_reusable_input_tokens=round(
+            probability * context.eligible_cached_tokens_estimate
+        ),
+        switch_penalty_latency_ms=max(
+            0.0,
+            cold_resources.latency_ms - expected.latency_ms,
+        ),
+        compaction_generation=context.compaction_generation,
     )
 
 

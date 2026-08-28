@@ -2408,6 +2408,36 @@ def route(
             _run(router.close())
 
 
+@app.command("host-bridge")
+def host_bridge(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    integration_id: str = typer.Option("host-native-v1", "--integration-id"),
+    max_input_bytes: int = typer.Option(
+        262_144, "--max-input-bytes", min=1_024, max=1_048_576
+    ),
+    max_output_bytes: int = typer.Option(
+        262_144, "--max-output-bytes", min=1_024, max=1_048_576
+    ),
+) -> None:
+    """Serve the bounded local JSONL protocol used by native host adapters."""
+
+    from .host_bridge import run_host_bridge
+
+    try:
+        code = run_host_bridge(
+            manifest,
+            sys.stdin.buffer,
+            sys.stdout.buffer,
+            integration_id=integration_id,
+            max_input_bytes=max_input_bytes,
+            max_output_bytes=max_output_bytes,
+        )
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=True)
+    if code:
+        raise typer.Exit(code=code)
+
+
 @app.command()
 def run(
     capability: str = typer.Argument(...),
@@ -3067,6 +3097,28 @@ def provider_sign(
             compact=compact,
         )
     except (AEEPError, UnicodeDecodeError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+
+
+@provider_app.command("conformance")
+def provider_conformance(
+    path: Path,
+    compact: bool = typer.Option(False, "--compact"),
+) -> None:
+    """Run deterministic v0.6 provider-package conformance checks."""
+
+    from .conformance import run_provider_conformance
+    from .provider_package import load_provider_package
+
+    try:
+        package, _ = load_provider_package(path)
+        report = run_provider_conformance(package)
+        _emit(report, compact=compact)
+        if not report.passed:
+            raise typer.Exit(code=2)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
 
 

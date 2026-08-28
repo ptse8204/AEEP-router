@@ -1,0 +1,129 @@
+version: "0.5"
+database: .aeep/dsh-native.db
+
+resources:
+  - id: dsh.deepseek.flash
+    provider: deepseek-official
+    product: deepseek-v4-flash
+    unit: request
+    access:
+      mode: host
+    quota:
+      state: unknown
+      source: user
+  - id: dsh.deepseek.chat
+    provider: deepseek-official
+    product: deepseek-chat
+    unit: request
+    access:
+      mode: host
+    quota:
+      state: unknown
+      source: user
+  - id: dsh.web
+    provider: dsh
+    product: web-fetch
+    unit: request
+    access:
+      mode: host
+    quota:
+      state: unknown
+      source: user
+
+executors:
+  - id: dsh.model.deepseek-flash
+    provider_id: deepseek-official
+    capability: dsh.model.request@1
+    kind: host
+    description: Exact DSH DeepSeek flash model route
+    input_schema:
+      type: object
+      properties:
+        provider: {type: string}
+        model: {type: string}
+        integration_adapter: {const: dsh-native-v2}
+        context_tokens: {type: integer, minimum: 0}
+      required: [provider, model, integration_adapter, context_tokens]
+      additionalProperties: false
+    estimate:
+      resources:
+        latency_ms: 1500
+        context_tokens: 8000
+        subscription_units: 1
+      success_probability: 0.98
+      quality_score: 0.90
+      risk_score: 0.05
+      confidence: 0.50
+    side_effect: read
+    locality: internet
+    requires_network: true
+    resource_pool: dsh.deepseek.flash
+    safe_to_auto_execute: false
+    config:
+      instructions: Use the exact DSH deepseek-official/deepseek-v4-flash route.
+      provider: deepseek-official
+      model: deepseek-v4-flash
+      integration_adapter: dsh-native-v2
+
+  - id: dsh.model.deepseek-chat
+    provider_id: deepseek-official
+    capability: dsh.model.request@1
+    kind: host
+    description: Exact DSH DeepSeek chat model route
+    input_schema:
+      type: object
+      properties:
+        provider: {type: string}
+        model: {type: string}
+        integration_adapter: {const: dsh-native-v2}
+        context_tokens: {type: integer, minimum: 0}
+      required: [provider, model, integration_adapter, context_tokens]
+      additionalProperties: false
+    estimate:
+      resources:
+        latency_ms: 2200
+        context_tokens: 8000
+        subscription_units: 1
+      success_probability: 0.99
+      quality_score: 0.95
+      risk_score: 0.05
+      confidence: 0.50
+    side_effect: read
+    locality: internet
+    requires_network: true
+    resource_pool: dsh.deepseek.chat
+    safe_to_auto_execute: false
+    config:
+      instructions: Use the exact DSH deepseek-official/deepseek-chat route.
+      provider: deepseek-official
+      model: deepseek-chat
+      integration_adapter: dsh-native-v2
+
+  - id: dsh.web.raw
+    provider_id: dsh
+    capability: web.page.read@1
+    kind: host
+    description: Canonical DSH web_fetch route
+    input_schema:
+      type: object
+      properties:
+        url: {type: string}
+      required: [url]
+      additionalProperties: false
+    estimate:
+      resources:
+        latency_ms: 500
+        context_tokens: 5000
+        subscription_units: 1
+      success_probability: 0.98
+      quality_score: 0.95
+      risk_score: 0.05
+      confidence: 0.50
+    side_effect: read
+    locality: internet
+    requires_network: true
+    idempotent: true
+    resource_pool: dsh.web
+    safe_to_auto_execute: false
+    config:
+      instructions: Execute the exact canonical DSH web_fetch tool.

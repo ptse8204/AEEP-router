@@ -1,12 +1,40 @@
 # AEEP Agent Router
 
-Pick the best way for an AI agent to perform an action.
+**Route an agent action to the best policy-compliant implementation before the
+model sees or calls every available tool.**
 
-AEEP compares available routes—local Python, command-line tools, HTTP APIs, MCP tools, or an existing AI subscription—and chooses the best one for the current job. It considers cost, speed, reliability, quality, privacy, risk, and remaining quota.
+AEEP is a provider-neutral execution control layer for AI agents. A host submits
+an exact capability and bounded input; AEEP rejects infeasible routes first,
+then compares compatible local Python, CLI, HTTP, MCP, browser, or subscription
+implementations by cost, speed, reliability, quality, privacy, risk, and quota.
+The model does not need to inspect AEEP's catalog or make another routing call.
 
-It rejects routes that break your limits before scoring the rest.
+It is deliberately not a planner, tool marketplace, or model-specific wrapper.
 
-> **Status:** AEEP 0.5 is working alpha software. Signed provider packages still ingest inert; remote artifacts and economic networking are disabled by default. Review qualification, trust, payment, approval, and recovery policy before production use.
+> **Status:** AEEP 0.6 is working alpha software. Signed provider packages still ingest inert; remote artifacts and economic networking are disabled by default. Review qualification, trust, payment, approval, and recovery policy before production use.
+
+## What the repository has achieved
+
+- **Host-native routing:** a persistent bounded JSONL bridge lets agent hosts
+  route before model/tool dispatch, expose only the canonical selected tool,
+  and keep AEEP and hidden implementation schemas out of model context.
+- **Measured Codex result:** in a 2026-08-28 GPT-5.6 Terra Medium campaign,
+  20 matched direct/AEEP pairs all passed the same exact-output oracle and
+  receipt gates. Direct Codex used 287,104 provider tokens; AEEP used no model
+  call after selecting the compatible deterministic route. Median paired
+  reduction was 14,356.5 tokens (95% bootstrap interval 14,349–14,363), and
+  median latency was 5,976.5 ms versus 6.48 ms. This proves the routing benefit
+  for this eligible action, not a universal percentage. [Report](reports/v06/codex/campaign.md)
+- **Fail-closed provider onboarding:** signed JCS provider packages ingest
+  inert, artifacts are content-addressed, evidence and publisher authority are
+  separate, and qualification plus activation remain explicit operator steps.
+- **Auditable economics and safety:** hard policy constraints precede scores;
+  prepared decisions, approvals, quotes, settlement, recovery, raw resource
+  receipts, cache affinity, and evidence provenance remain distinct records.
+- **Portable proof suites:** deterministic DSH, economic-evidence, provider,
+  cache, and synthetic job-application campaigns exercise routing and safety
+  without requiring real credentials, payments, applications, or external
+  writes.
 
 ## Quick start
 
@@ -117,8 +145,12 @@ aeep candidate activate fixture.command.text-statistics -m examples/provider_pac
 ```
 
 Package and artifact signatures, exact fingerprints, evidence, and smoke results
-are independent gates. Ingest never runs or activates imported code. New 0.5
+are independent gates. Ingest never runs or activates imported code. New signed
 records use RFC 8785; legacy signatures are historical/recovery-only.
+
+Version 0.6 evidence declares its authority class and exact portable cohort.
+Older v0.5 packages remain parseable, but their incomplete evidence is capped as
+a prior and cannot satisfy evidence-assisted qualification by itself.
 
 ## Prepare a route with economic evidence
 
@@ -225,6 +257,12 @@ python3 -m aeep serve \
 
 Add that command to your MCP client. Setup notes for Codex, Claude, and other clients are in [Integration guides](docs/INTEGRATIONS.md) and [Bring Your Own Subscription](docs/BYOS.md).
 
+DeepSeek Harness should use the bundled host-native adapter in
+`integrations/dsh-aeep-router/`. It routes before model/tool dispatch through
+one persistent local `aeep host-bridge`, so AEEP schemas and routing calls do not consume model
+context. The earlier model-facing MCP run is retained only as a negative
+control; it is not the recommended integration.
+
 Install the bundled minimal skill after a normal wheel install:
 
 ```bash
@@ -244,6 +282,8 @@ aeep ingest otel trace.json
 - Actual cash, subscription quota, API-equivalent counterfactuals, and private policy valuations kept in separate ledgers.
 - Isolated repeated campaigns with immutable pricing snapshots and `aeep campaign prove` release-gate evaluation.
 - Output validation and receipts showing estimated versus actual use.
+- Exact-cohort empirical uncertainty and explicit router abstention when a
+  feasible baseline costs less than the expected optimization value.
 - Safe fallback when another route fails.
 - Signed offers and request-bound quotes, prepared decisions, partial
   settlement, reconciliation, and evidence-safe reporting when explicitly
@@ -259,8 +299,10 @@ Commands use argument arrays, not shell interpolation. Requests cannot loosen ma
 - [Security](SECURITY.md)
 - [Economic accounting](docs/ACCOUNTING.md)
 - [0.4 proof harness and controlled campaigns](examples/proof/README.md)
+- [GPT-5.6 Terra Medium Codex comparison](reports/v06/codex/campaign.md)
 - [0.5 economic evidence proof campaign](examples/economic_evidence/README.md)
 - [Provider packages](docs/PROVIDER_PACKAGES.md)
+- [Migration to 0.6](docs/MIGRATION_0.6.md)
 - [Migration to 0.5](docs/MIGRATION_0.5.md)
 - [Evidence reuse](docs/EVIDENCE_REUSE.md)
 - [Cache affinity](docs/CACHE_AFFINITY.md)

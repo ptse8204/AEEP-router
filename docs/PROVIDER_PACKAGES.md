@@ -1,8 +1,12 @@
-# AEEP 0.5 provider packages
+# AEEP 0.6 provider packages
 
 `aeep-provider.yaml` publishes provider identity, exact capability contracts,
 inert route declarations, content-addressed artifacts, evidence references, and
 bounded smoke definitions. It never grants activation or approval.
+
+Version 0.6 evidence must declare its authority class and exact portable cohort.
+Version 0.5 packages remain readable, but evidence missing those declarations is
+capped as a weak prior and cannot qualify a route by itself.
 
 ```bash
 aeep provider validate examples/provider_package/aeep-provider.yaml
@@ -29,3 +33,12 @@ Package command routes use portable executable/package identities. Local
 runtime resolution happens after ingest and is revalidated before smoke and
 execution. A package cannot rely on a platform-specific absolute path as its
 portable evidence fingerprint.
+
+Published Python routes use subprocess isolation with bounded JSON pipes and
+timeout termination. This is a process boundary, not a replacement for a
+container or VM when provider code is untrusted.
+
+Providers may publish signed discovery metadata at
+`/.well-known/aeep-provider.json` and validate a package with `aeep provider
+conformance PATH`. Discovery and conformance remain inert: they do not grant
+trust, install, qualify, activate, or execute.

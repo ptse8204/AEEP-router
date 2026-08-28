@@ -71,7 +71,7 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 4
+LATEST_DATABASE_SCHEMA = 5
 
 _LEGACY_SCHEMA: tuple[str, ...] = (
     """
@@ -868,6 +868,24 @@ def _migrate_v3_to_v4(connection: sqlite3.Connection) -> None:
     )
 
 
+def _migrate_v4_to_v5(connection: sqlite3.Connection) -> None:
+    for table in ("receipts", "observations"):
+        _add_column_if_missing(connection, table, "executor_fingerprint", "TEXT")
+        _add_column_if_missing(connection, table, "cohort_digest", "TEXT")
+    connection.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_receipts_evidence_cohort
+        ON receipts(executor_id, executor_fingerprint, cohort_digest, started_at DESC)
+        """
+    )
+    connection.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_observations_evidence_cohort
+        ON observations(executor_fingerprint, cohort_digest, observed_at DESC)
+        """
+    )
+
+
 def _migrate_v1_to_v2(connection: sqlite3.Connection) -> None:
     """Upgrade pre-authorization 0.4 development databases without losing evidence."""
 
@@ -1144,6 +1162,9 @@ class ReceiptStore:
                 if version < 4:
                     _migrate_v3_to_v4(self._connection)
                     version = 4
+                if version < 5:
+                    _migrate_v4_to_v5(self._connection)
+                    version = 5
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -6235,8 +6256,9 @@ class ReceiptStore:
                 """
                 INSERT OR REPLACE INTO receipts
                     (receipt_id, decision_id, action_id, capability, executor_id,
-                     status, started_at, ended_at, payload_json)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     status, started_at, ended_at, executor_fingerprint,
+                     cohort_digest, payload_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     receipt.receipt_id,
@@ -6247,6 +6269,8 @@ class ReceiptStore:
                     receipt.status.value,
                     receipt.started_at.isoformat(),
                     receipt.ended_at.isoformat(),
+                    receipt.executor_fingerprint,
+                    receipt.cohort_digest,
                     payload,
                 ),
             )
@@ -6267,8 +6291,9 @@ class ReceiptStore:
                     """
                     INSERT INTO receipts
                         (receipt_id, decision_id, action_id, capability, executor_id,
-                         status, started_at, ended_at, payload_json)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                         status, started_at, ended_at, executor_fingerprint,
+                         cohort_digest, payload_json)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         receipt.receipt_id,
@@ -6279,6 +6304,8 @@ class ReceiptStore:
                         receipt.status.value,
                         receipt.started_at.isoformat(),
                         receipt.ended_at.isoformat(),
+                        receipt.executor_fingerprint,
+                        receipt.cohort_digest,
                         receipt.model_dump_json(),
                     ),
                 )
@@ -6407,6 +6434,32 @@ class ReceiptStore:
         receipts.reverse()
         return receipts
 
+    def receipts_for_cohort(
+        self,
+        executor_id: str,
+        *,
+        executor_fingerprint: str,
+        cohort_digest: str,
+        limit: int = 200,
+    ) -> list[ExecutionReceipt]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT payload_json FROM receipts
+                WHERE executor_id = ? AND executor_fingerprint = ? AND cohort_digest = ?
+                ORDER BY started_at DESC LIMIT ?
+                """,
+                (
+                    executor_id,
+                    executor_fingerprint,
+                    cohort_digest,
+                    max(1, min(limit, 10_000)),
+                ),
+            ).fetchall()
+        receipts = [ExecutionReceipt.model_validate_json(row[0]) for row in rows]
+        receipts.reverse()
+        return receipts
+
     def list_decisions(self, *, limit: int = 50) -> list[RouteDecision]:
         with self._lock:
             rows = self._connection.execute(
@@ -6505,14 +6558,17 @@ class ReceiptStore:
             self._connection.execute(
                 """
                 INSERT OR REPLACE INTO observations
-                    (observation_id, provider_id, capability, observed_at, payload_json)
-                VALUES (?, ?, ?, ?, ?)
+                    (observation_id, provider_id, capability, observed_at,
+                     executor_fingerprint, cohort_digest, payload_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     observation.observation_id,
                     observation.provider_id,
                     observation.capability,
                     observation.observed_at.isoformat(),
+                    observation.executor_fingerprint,
+                    observation.cohort_digest,
                     observation.model_dump_json(),
                 ),
             )

@@ -15,6 +15,7 @@ from aeep.benchmarking import (
     EconomicProofCampaignReport,
     ReleaseProofReport,
 )
+from aeep.conformance import ProviderConformanceReport
 from aeep.discovery import RegistryCandidate
 from aeep.integrations import export_tools
 from aeep.models import (
@@ -45,6 +46,8 @@ from aeep.models import (
     EconomicPaymentConfig,
     EconomicRequirementsConfig,
     EconomicTrustStoreConfig,
+    EstimateUncertainty,
+    EvidenceCohortKey,
     ExecutionReceipt,
     ExecutorSpec,
     ExternalOutcomeReport,
@@ -86,14 +89,18 @@ from aeep.models import (
 from aeep.proofs import (
     DSHLiveComparisonReport,
     DSHLiveProofReport,
+    DSHNativeCampaignReport,
+    DSHPluginCampaignReport,
     DSHProofReport,
     JobProofReport,
     ResumePlan,
+    RoutingValueReport,
 )
 from aeep.provider_package import (
     CandidateVerificationSnapshot,
     ComparativeMeasurement,
     EvidenceAcceptance,
+    ProviderDiscoveryDocument,
     ProviderPackage,
     SmokeTestReport,
 )
@@ -105,6 +112,8 @@ SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
     "action-features.schema.json": ActionFeatures,
+    "evidence-cohort-key.schema.json": EvidenceCohortKey,
+    "estimate-uncertainty.schema.json": EstimateUncertainty,
     "action-approval-record.schema.json": ActionApprovalRecord,
     "action-request.schema.json": ActionRequest,
     "authorization-meter-quantity.schema.json": AuthorizationMeterQuantity,
@@ -155,6 +164,8 @@ MODEL_FILES = {
     "provider-descriptor.schema.json": ProviderDescriptor,
     "provider-package-config.schema.json": ProviderPackageConfig,
     "aeep-provider.schema.json": ProviderPackage,
+    "provider-discovery.schema.json": ProviderDiscoveryDocument,
+    "provider-conformance-report.schema.json": ProviderConformanceReport,
     "evidence-acceptance.schema.json": EvidenceAcceptance,
     "candidate-verification-snapshot.schema.json": CandidateVerificationSnapshot,
     "smoke-test-report.schema.json": SmokeTestReport,
@@ -163,6 +174,9 @@ MODEL_FILES = {
     "dsh-proof-report.schema.json": DSHProofReport,
     "dsh-live-proof-report.schema.json": DSHLiveProofReport,
     "dsh-live-comparison-report.schema.json": DSHLiveComparisonReport,
+    "dsh-native-campaign-report.schema.json": DSHNativeCampaignReport,
+    "dsh-plugin-campaign-report.schema.json": DSHPluginCampaignReport,
+    "routing-value-report.schema.json": RoutingValueReport,
     "job-proof-report.schema.json": JobProofReport,
     "resume-plan.schema.json": ResumePlan,
     "quote.schema.json": Quote,

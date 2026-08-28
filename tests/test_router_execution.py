@@ -15,7 +15,10 @@ from aeep.models import (
     Locality,
     PolicyConfig,
     ResourceVector,
+    RouteBypassReason,
+    RouteDisposition,
     RouteEstimate,
+    RoutingAbstentionConfig,
     SideEffect,
 )
 from aeep.router import Router
@@ -48,6 +51,90 @@ async def test_route_and_execute_best_python(text_schema, stats_schema):
     assert outcome.receipts[0].output_valid is True
     assert router.store.get_decision(decision.decision_id) is not None
     await router.close()
+
+
+def test_router_abstains_when_gain_is_below_configured_overhead(
+    text_schema, stats_schema
+):
+    baseline = python_spec(
+        "baseline",
+        "aeep.examples.tools:text_stats",
+        latency_ms=20,
+        input_schema=text_schema,
+        output_schema=stats_schema,
+    )
+    optimized = python_spec(
+        "optimized",
+        "aeep.examples.tools:text_stats",
+        latency_ms=10,
+        input_schema=text_schema,
+        output_schema=stats_schema,
+    )
+    policy = PolicyConfig(
+        name="abstain",
+        routing_abstention=RoutingAbstentionConfig(
+            baseline_executor_id=baseline.id,
+            minimum_score_gain=1,
+        ),
+    )
+    manifest = manifest_with(baseline, optimized)
+    manifest.default_policy = policy.name
+    manifest.policies[policy.name] = policy
+    router = Router(manifest)
+
+    decision = router.route(
+        ActionRequest(capability="text.stats", input={"text": "x"}, policy=policy.name)
+    )
+
+    assert decision.disposition is RouteDisposition.BYPASS_ROUTER
+    assert decision.bypass_reason is RouteBypassReason.OPTIMIZATION_VALUE_BELOW_OVERHEAD
+    assert decision.selected_executor_id == baseline.id
+    assert decision.expected_net_benefit is not None
+    asyncio.run(router.close())
+
+
+def test_router_abstention_never_restores_an_infeasible_baseline(
+    text_schema, stats_schema
+):
+    baseline = python_spec(
+        "baseline",
+        "aeep.examples.tools:text_stats",
+        latency_ms=200,
+        input_schema=text_schema,
+        output_schema=stats_schema,
+    )
+    safe = python_spec(
+        "safe",
+        "aeep.examples.tools:text_stats",
+        latency_ms=10,
+        input_schema=text_schema,
+        output_schema=stats_schema,
+    )
+    policy = PolicyConfig(
+        name="abstain",
+        routing_abstention=RoutingAbstentionConfig(
+            baseline_executor_id=baseline.id,
+            minimum_score_gain=100,
+        ),
+    )
+    manifest = manifest_with(baseline, safe)
+    manifest.default_policy = policy.name
+    manifest.policies[policy.name] = policy
+    router = Router(manifest)
+
+    decision = router.route(
+        ActionRequest(
+            capability="text.stats",
+            input={"text": "x"},
+            policy=policy.name,
+            constraints=ActionConstraints(max_latency_ms=50),
+        )
+    )
+
+    assert decision.selected_executor_id == safe.id
+    assert decision.baseline_executor_id == safe.id
+    assert decision.bypass_reason is RouteBypassReason.ONLY_ONE_FEASIBLE_ROUTE
+    asyncio.run(router.close())
 
 
 @pytest.mark.asyncio

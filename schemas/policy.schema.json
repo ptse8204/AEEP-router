@@ -408,6 +408,45 @@
       "title": "ReferenceScales",
       "type": "object"
     },
+    "RoutingAbstentionConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "baseline_executor_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline Executor Id"
+        },
+        "minimum_score_gain": {
+          "default": 0.01,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Minimum Score Gain",
+          "type": "number"
+        },
+        "overhead_p95_ms": {
+          "default": 2.0,
+          "maximum": 60000,
+          "minimum": 0,
+          "title": "Overhead P95 Ms",
+          "type": "number"
+        }
+      },
+      "title": "RoutingAbstentionConfig",
+      "type": "object"
+    },
     "ShadowPrices": {
       "additionalProperties": false,
       "description": "Optional local economic values for scarce non-cash resources.\n\nValues are USD per unit. They are additive to reported monetary cost and are\nuseful for subscription quotas or expensive local compute. Defaults are zero\nso AEEP does not pretend different providers' tokens are fungible.",
@@ -584,6 +623,9 @@
     },
     "evidence_reuse": {
       "$ref": "#/$defs/EvidenceReusePolicyConfig"
+    },
+    "routing_abstention": {
+      "$ref": "#/$defs/RoutingAbstentionConfig"
     },
     "uncertainty_penalty": {
       "default": 0.1,

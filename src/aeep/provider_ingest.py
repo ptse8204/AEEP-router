@@ -26,6 +26,7 @@ from .provider_package import (
     ComparativeMeasurement,
     EvidenceAcceptance,
     EvidenceAcceptanceStatus,
+    EvidenceAuthorityClass,
     EvidenceReference,
     EvidenceType,
     FingerprintStatus,
@@ -218,13 +219,13 @@ class ProviderPackageIngestor:
         if now.tzinfo is None or now.utcoffset() is None:
             raise ConfigurationError("provider-package clock must be timezone-aware")
         now = now.astimezone(UTC)
-        if not _semver(package.spec.compatibility.aeep_min) <= (0, 5, 0):
+        if not _semver(package.spec.compatibility.aeep_min) <= (0, 6, 0):
             raise ConfigurationError("provider package requires a newer AEEP version")
         if (
             package.spec.compatibility.aeep_max_exclusive is not None
-            and _semver(package.spec.compatibility.aeep_max_exclusive) <= (0, 5, 0)
+            and _semver(package.spec.compatibility.aeep_max_exclusive) <= (0, 6, 0)
         ):
-            raise ConfigurationError("provider package excludes AEEP 0.5")
+            raise ConfigurationError("provider package excludes AEEP 0.6")
         if package.metadata.expires_at is not None and now >= package.metadata.expires_at:
             raise ConfigurationError("provider package is expired")
 
@@ -618,6 +619,28 @@ class ProviderPackageIngestor:
         elif not subject_matches:
             status = EvidenceAcceptanceStatus.REJECTED
             reason, confidence = "evidence_subject_mismatch", Decimal(0)
+        elif trust in {TrustLevel.VERIFIED, TrustLevel.ATTESTED} and (
+            package.api_version == "aeep.dev/v0.5"
+            or evidence.authority_class is None
+            or evidence.cohort is None
+        ):
+            status = EvidenceAcceptanceStatus.ACCEPTED_AS_PRIOR
+            reason, confidence = "legacy_incomplete_evidence_prior", Decimal("0.25")
+        elif trust in {TrustLevel.VERIFIED, TrustLevel.ATTESTED} and (
+            evidence.authority_class
+            in {
+                EvidenceAuthorityClass.PROVIDER_SELF_ATTESTED,
+                EvidenceAuthorityClass.DISTRIBUTOR_ATTESTED,
+            }
+        ):
+            status = EvidenceAcceptanceStatus.ACCEPTED_AS_PRIOR
+            reason = "non_independent_authority_prior"
+            confidence = Decimal(
+                "0.20"
+                if evidence.authority_class
+                is EvidenceAuthorityClass.PROVIDER_SELF_ATTESTED
+                else "0.25"
+            )
         elif trust in {TrustLevel.VERIFIED, TrustLevel.ATTESTED}:
             status = EvidenceAcceptanceStatus.ACCEPTED
             reason = "accepted_exact_subject"

@@ -708,6 +708,93 @@
       "title": "EstimateSource",
       "type": "string"
     },
+    "EstimateUncertainty": {
+      "additionalProperties": false,
+      "description": "Empirical bounds from one exact evidence cohort; never authorization.",
+      "properties": {
+        "profile": {
+          "const": "aeep-estimate-uncertainty-v1",
+          "default": "aeep-estimate-uncertainty-v1",
+          "title": "Profile",
+          "type": "string"
+        },
+        "method": {
+          "const": "empirical-nearest-rank-wilson-v1",
+          "default": "empirical-nearest-rank-wilson-v1",
+          "title": "Method",
+          "type": "string"
+        },
+        "sample_size": {
+          "minimum": 5,
+          "title": "Sample Size",
+          "type": "integer"
+        },
+        "cohort_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Cohort Digest",
+          "type": "string"
+        },
+        "resources_p50": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "resources_p95": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "cash_p95_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Observed p95 only; never a payment authorization maximum.",
+          "title": "Cash P95 Usd"
+        },
+        "success_lower_bound": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Success Lower Bound",
+          "type": "number"
+        },
+        "quality_sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Quality Sample Size",
+          "type": "integer"
+        },
+        "quality_lower_bound": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Lower Bound"
+        }
+      },
+      "required": [
+        "sample_size",
+        "cohort_digest",
+        "resources_p50",
+        "resources_p95",
+        "success_lower_bound"
+      ],
+      "title": "EstimateUncertainty",
+      "type": "object"
+    },
     "EvidenceReusePolicyConfig": {
       "additionalProperties": false,
       "properties": {
@@ -1216,6 +1303,9 @@
         "evidence_reuse": {
           "$ref": "#/$defs/EvidenceReusePolicyConfig"
         },
+        "routing_abstention": {
+          "$ref": "#/$defs/RoutingAbstentionConfig"
+        },
         "uncertainty_penalty": {
           "default": 0.1,
           "description": "Added score burden at zero estimate confidence.",
@@ -1619,9 +1709,59 @@
           "minimum": 0,
           "title": "Sample Size",
           "type": "integer"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EstimateUncertainty"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "RouteEstimate",
+      "type": "object"
+    },
+    "RoutingAbstentionConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "baseline_executor_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline Executor Id"
+        },
+        "minimum_score_gain": {
+          "default": 0.01,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Minimum Score Gain",
+          "type": "number"
+        },
+        "overhead_p95_ms": {
+          "default": 2.0,
+          "maximum": 60000,
+          "minimum": 0,
+          "title": "Overhead P95 Ms",
+          "type": "number"
+        }
+      },
+      "title": "RoutingAbstentionConfig",
       "type": "object"
     },
     "ShadowPrices": {
@@ -2077,14 +2217,15 @@
   "additionalProperties": false,
   "properties": {
     "version": {
-      "default": "0.5",
+      "default": "0.6",
       "enum": [
         "0.1",
         "0.15",
         "0.2",
         "0.3",
         "0.4",
-        "0.5"
+        "0.5",
+        "0.6"
       ],
       "title": "Version",
       "type": "string"

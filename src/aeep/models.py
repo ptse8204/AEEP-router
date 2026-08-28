@@ -621,6 +621,27 @@ class ResourceVector(StrictModel):
         return ResourceVector.model_validate(values)
 
 
+class EstimateUncertainty(StrictModel):
+    """Empirical bounds from one exact evidence cohort; never authorization."""
+
+    profile: Literal["aeep-estimate-uncertainty-v1"] = "aeep-estimate-uncertainty-v1"
+    method: Literal["empirical-nearest-rank-wilson-v1"] = (
+        "empirical-nearest-rank-wilson-v1"
+    )
+    sample_size: int = Field(ge=5)
+    cohort_digest: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
+    resources_p50: ResourceVector
+    resources_p95: ResourceVector
+    cash_p95_usd: Decimal | None = Field(
+        default=None,
+        ge=0,
+        description="Observed p95 only; never a payment authorization maximum.",
+    )
+    success_lower_bound: float = Field(ge=0, le=1)
+    quality_sample_size: int = Field(default=0, ge=0)
+    quality_lower_bound: float | None = Field(default=None, ge=0, le=1)
+
+
 class RouteEstimate(StrictModel):
     resources: ResourceVector = Field(default_factory=ResourceVector)
     cash: CashEstimate = Field(default_factory=CashEstimate)
@@ -631,6 +652,7 @@ class RouteEstimate(StrictModel):
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     source: EstimateSource = EstimateSource.STATIC
     sample_size: int = Field(default=0, ge=0)
+    uncertainty: EstimateUncertainty | None = None
 
     @model_validator(mode="before")
     @classmethod
@@ -716,6 +738,9 @@ class CacheAffinityEstimate(StrictModel):
     cold_resources: ResourceVector
     warm_resources: ResourceVector
     expected_resources: ResourceVector
+    expected_reusable_input_tokens: int = Field(default=0, ge=0)
+    switch_penalty_latency_ms: float = Field(default=0, ge=0)
+    compaction_generation: int = Field(default=0, ge=0)
 
 
 class CacheAffinityReceipt(StrictModel):
@@ -746,6 +771,7 @@ class CacheAffinityObservation(StrictModel):
     cache_hit: bool
     cached_input_tokens: int = Field(ge=0)
     cache_write_input_tokens: int = Field(ge=0)
+    compaction_generation: int = Field(default=0, ge=0)
     observed_at: datetime = Field(default_factory=utc_now)
 
 
@@ -760,6 +786,13 @@ class EvidenceReusePolicyConfig(StrictModel):
     enabled: bool = True
     max_shared_weight: float = Field(default=0.85, ge=0, le=1)
     shared_prior_samples: int = Field(default=5, ge=1, le=1000)
+
+
+class RoutingAbstentionConfig(StrictModel):
+    enabled: bool = True
+    baseline_executor_id: str | None = Field(default=None, max_length=200)
+    minimum_score_gain: float = Field(default=0.01, ge=0, le=100)
+    overhead_p95_ms: float = Field(default=2.0, ge=0, le=60_000)
 
 
 class ApprovalSource(StrEnum):
@@ -840,6 +873,29 @@ class ActionFeatures(StrictModel):
     text_characters: int = Field(ge=0)
     max_depth: int = Field(ge=0)
     size_bucket: str = Field(pattern=r"^(empty|2\^[0-9]+)$")
+
+
+class EvidenceCohortKey(StrictModel):
+    """Sanitized runtime identity for evidence used by live routing."""
+
+    profile: Literal["aeep-evidence-cohort-v1"] = "aeep-evidence-cohort-v1"
+    capability: str = Field(min_length=1, max_length=200)
+    executor_id: str = Field(min_length=1, max_length=200)
+    executor_fingerprint: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
+    provider: str = Field(min_length=1, max_length=200)
+    provider_version: str | None = Field(default=None, max_length=200)
+    model: str | None = Field(default=None, max_length=200)
+    model_version: str | None = Field(default=None, max_length=200)
+    integration_adapter: str = Field(min_length=1, max_length=200)
+    integration_adapter_version: str | None = Field(default=None, max_length=200)
+    region: str | None = Field(default=None, max_length=100)
+    account_tier: str | None = Field(default=None, max_length=100)
+    action_size_bucket: str = Field(pattern=r"^(unknown|empty|2\^[0-9]+)$")
+    validator_digest: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
+    cache_namespace: str | None = Field(default=None, max_length=200)
+    cache_profile: str | None = Field(default=None, max_length=200)
+    evidence_period: str | None = Field(default=None, max_length=100)
+    economic_evidence_level: str | None = Field(default=None, max_length=100)
 
 
 _IDENTIFIER_PATTERN = r"^[A-Za-z0-9_.:-]+$"
@@ -2319,6 +2375,9 @@ class PolicyConfig(StrictModel):
     evidence_reuse: EvidenceReusePolicyConfig = Field(
         default_factory=EvidenceReusePolicyConfig
     )
+    routing_abstention: RoutingAbstentionConfig = Field(
+        default_factory=RoutingAbstentionConfig
+    )
     uncertainty_penalty: float = Field(
         default=0.10,
         ge=0.0,
@@ -2732,7 +2791,7 @@ class ProviderPackageConfig(StrictModel):
 
 
 class Manifest(StrictModel):
-    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5"] = "0.5"
+    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6"] = "0.6"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)
@@ -2822,11 +2881,27 @@ class CandidateScore(StrictModel):
     rank: int | None = None
 
 
+class RouteDisposition(StrEnum):
+    SELECTED = "SELECTED"
+    BYPASS_ROUTER = "BYPASS_ROUTER"
+
+
+class RouteBypassReason(StrEnum):
+    ONLY_ONE_FEASIBLE_ROUTE = "only_one_feasible_route"
+    PINNED_EXECUTOR = "pinned_executor"
+    OPTIMIZATION_VALUE_BELOW_OVERHEAD = "optimization_value_below_overhead"
+
+
 class RouteDecision(StrictModel):
     decision_id: str = Field(default_factory=lambda: new_id("dec"))
     action: ActionRequest
     policy: PolicyConfig
     selected_executor_id: str | None = None
+    disposition: RouteDisposition = RouteDisposition.SELECTED
+    baseline_executor_id: str | None = None
+    bypass_reason: RouteBypassReason | None = None
+    routing_overhead_ms: float = Field(default=0, ge=0)
+    expected_net_benefit: float | None = None
     candidates: list[CandidateScore] = Field(default_factory=list)
     action_features: ActionFeatures | None = None
     created_at: datetime = Field(default_factory=utc_now)
@@ -2845,6 +2920,14 @@ class ExecutionReceipt(StrictModel):
     started_at: datetime = Field(default_factory=utc_now)
     ended_at: datetime = Field(default_factory=utc_now)
     estimated: RouteEstimate
+    executor_fingerprint: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
+    cohort_digest: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
     action_features: ActionFeatures | None = None
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
     accounting: ResourceAccounting = Field(default_factory=ResourceAccounting)
@@ -2888,6 +2971,8 @@ class CompactRouteDecision(StrictModel):
     action_id: str
     capability: str
     selected: str | None = None
+    disposition: RouteDisposition = RouteDisposition.SELECTED
+    bypass_reason: RouteBypassReason | None = None
     reason: str
     alternatives: list[CompactAlternative] = Field(default_factory=list)
     rejected: int = 0
@@ -2957,6 +3042,14 @@ class Observation(StrictModel):
     provider_id: str | None = None
     executor_id: str
     capability: str
+    executor_fingerprint: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
+    cohort_digest: str | None = Field(
+        default=None,
+        pattern=r"^sha256:[a-f0-9]{64}$",
+    )
     receipt_id: str | None = None
     resources: ResourceVector = Field(default_factory=ResourceVector)
     accounting: ResourceAccounting = Field(default_factory=ResourceAccounting)

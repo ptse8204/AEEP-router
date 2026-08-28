@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from typer.testing import CliRunner
 
 from aeep.cli import app
 
 runner = CliRunner()
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_cli_init_doctor_route_run_history(tmp_path):
@@ -42,6 +44,7 @@ def test_cli_tools_and_tool_call(tmp_path):
     assert result.exit_code == 0
     assert {tool["name"] for tool in json.loads(result.stdout)["tools"]} == {
         "aeep_execute_action",
+        "aeep_estimate_route_prices",
         "aeep_get_metrics",
         "aeep_list_capabilities",
         "aeep_record_outcome",
@@ -66,6 +69,20 @@ def test_cli_tools_and_tool_call(tmp_path):
     )
     assert result.exit_code == 0, result.output
     assert json.loads(result.stdout)["output"]["words"] == 3
+
+
+def test_cli_provider_conformance() -> None:
+    result = runner.invoke(
+        app,
+        [
+            "provider",
+            "conformance",
+            str(ROOT / "examples" / "provider_package" / "aeep-provider.yaml"),
+            "--compact",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.stdout)["passed"] is True
 
 
 def test_cli_missing_route_has_machine_readable_error(tmp_path):

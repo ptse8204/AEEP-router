@@ -1,0 +1,56 @@
+- insert:
+    - id: aeep-native-router
+      name: aeep-dsh-router
+      config:
+        aeepCommand: /absolute/path/to/python3
+        aeepArgs: [-m, aeep]
+        manifest: /absolute/path/to/aeep-dsh-campaign.yaml
+        workspace: /absolute/path/to/AEEP-dsh-test
+        timeoutMs: 10000
+        maxInputBytes: 1048576
+        maxOutputBytes: 1048576
+        baselineTools: []
+        modelCapability: dsh.model.request@1
+        modelRoutes:
+          dsh.model.fixture: {provider: deepseek-official, model: deepseek-v4-flash}
+        toolRoutes:
+          web_fetch:
+            capability: web.page.read@1
+            parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+            outputSchemaDigest: sha256:f52d25cc82094e021400137b982764f41c9d7f48ece49a7a58722cbd0a9fb2fb
+            executors:
+              dsh.web.verbose:
+                tool: web_fetch
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:f52d25cc82094e021400137b982764f41c9d7f48ece49a7a58722cbd0a9fb2fb
+              dsh.web.compact:
+                tool: fixture_read_url
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:c4795db4ba44f9f2a05ec340d9fea403b4fd3ef1d81d2d869687fd2f3b4c14cc
+                resultAdapter: read-url-to-web-fetch-v1
+          github_file_read:
+            capability: github.file.read@1
+            parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+            outputSchemaDigest: sha256:38bd4b7065104a5e5829b20534c48ffaa5201056e617fd862f5289c4d7be9498
+            executors:
+              dsh.github.verbose:
+                tool: github_file_read
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:38bd4b7065104a5e5829b20534c48ffaa5201056e617fd862f5289c4d7be9498
+              dsh.github.compact:
+                tool: fixture_github_file_read_compact
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:38bd4b7065104a5e5829b20534c48ffaa5201056e617fd862f5289c4d7be9498
+          document_text_extract:
+            capability: document.text.extract@1
+            parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+            outputSchemaDigest: sha256:b639699300b3e3d231e51ff523c21e8d4b773c338728ac000a836bc71024589b
+            executors:
+              dsh.document.verbose:
+                tool: document_text_extract
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:b639699300b3e3d231e51ff523c21e8d4b773c338728ac000a836bc71024589b
+              dsh.document.compact:
+                tool: fixture_document_text_extract_compact
+                parameterSchemaDigest: sha256:c98293f37744d18075eb35c22245861418e093660937f9cbca5fae8adb91e087
+                outputSchemaDigest: sha256:b639699300b3e3d231e51ff523c21e8d4b773c338728ac000a836bc71024589b

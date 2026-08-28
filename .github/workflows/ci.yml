@@ -34,8 +34,21 @@ jobs:
       - run: python examples/dsh_campaign/campaign.py --check
       - run: python examples/dsh_campaign/live_campaign.py --check-report reports/v05/dsh/live-safety.json
       - run: python examples/dsh_campaign/live_campaign.py --check-comparison reports/v05/dsh/live-comparison.json
+      - run: python examples/dsh_campaign/live_campaign.py --check-native-plan
       - run: python examples/job_application/campaign.py --check
       - run: aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact
       - run: coverage run -m pytest
       - run: coverage report -m
       - run: python -m build
+
+  dsh-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+        working-directory: integrations/dsh-aeep-router
+      - run: npm test
+        working-directory: integrations/dsh-aeep-router

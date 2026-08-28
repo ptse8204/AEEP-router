@@ -1,4 +1,4 @@
-"""Regenerate the deterministic AEEP v0.5 provider-package fixture."""
+"""Regenerate the deterministic AEEP v0.6 provider-package fixture."""
 
 from __future__ import annotations
 
@@ -37,6 +37,8 @@ from aeep.provider_package import (
     ArtifactPurpose,
     ArtifactReference,
     ComparativeMeasurement,
+    EvidenceAuthorityClass,
+    EvidenceCohortDeclaration,
     EvidenceProducer,
     EvidenceReference,
     EvidenceSubject,
@@ -327,6 +329,19 @@ def main() -> None:
                 role=TrustedKeyRole.INDEPENDENT_VERIFIER,
                 key_id=verifier.key_id,
             ),
+            authority_class=EvidenceAuthorityClass.INDEPENDENT_LAB,
+            cohort=EvidenceCohortDeclaration(
+                provider_version="0.6.0",
+                adapter_type="command",
+                adapter_version="1",
+                action_feature_profile="aeep-action-features-v1",
+                validator_digest=(
+                    "sha256:" + hashlib.sha256(rfc8785.dumps([])).hexdigest()
+                ),
+                period_start=NOW,
+                period_end=NOW + timedelta(days=1),
+                economic_evidence_level="attested",
+            ),
             trust_claim=TrustLevel.ATTESTED,
             validity=EvidenceValidity(
                 issued_at=NOW,
@@ -348,16 +363,16 @@ def main() -> None:
     package = ProviderPackage(
         metadata=ProviderPackageMetadata(
             package_id="fixture.provider.package",
-            version="0.5.0",
+            version="0.6.0",
             issued_at=NOW,
             expires_at=NOW + timedelta(days=365),
-            description="Synthetic AEEP v0.5 provider-package fixture.",
+            description="Synthetic AEEP v0.6 provider-package fixture.",
         ),
         spec=ProviderPackageSpec(
             provider=ProviderIdentity(
                 provider_id="fixture.provider",
                 display_name="Fixture Provider",
-                publisher=PublisherIdentity(name="AEEP fixtures", subject="fixture:aep-v05"),
+                publisher=PublisherIdentity(name="AEEP fixtures", subject="fixture:aep-v06"),
                 keys=(
                     ProviderPublicKey(
                         key_id=publisher.key_id,
@@ -377,10 +392,10 @@ def main() -> None:
             ),
             compatibility=ProviderCompatibility(
                 aeep_min="0.5.0",
-                aeep_max_exclusive="0.6.0",
+                aeep_max_exclusive="0.7.0",
                 python=">=3.11",
                 platforms=("any",),
-                protocols=("aeep-provider-package-v1",),
+                protocols=("aeep-provider-package-v2",),
             ),
             capabilities=(capability,),
             routes=(route,),

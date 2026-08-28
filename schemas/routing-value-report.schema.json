@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "RoutingValueStatus": {
+      "enum": [
+        "demonstrated_positive",
+        "approximately_neutral",
+        "negative",
+        "unknown",
+        "insufficient_counterfactual_evidence"
+      ],
+      "title": "RoutingValueStatus",
+      "type": "string"
+    },
+    "RoutingValueTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.6",
+          "default": "0.6",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trial_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "workload_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Workload Digest",
+          "type": "string"
+        },
+        "cohort_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Cohort Digest",
+          "type": "string"
+        },
+        "selected_executor_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Selected Executor Id",
+          "type": "string"
+        },
+        "baseline_executor_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Baseline Executor Id",
+          "type": "string"
+        },
+        "selected_receipt_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Selected Receipt Id",
+          "type": "string"
+        },
+        "baseline_receipt_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Baseline Receipt Id",
+          "type": "string"
+        },
+        "routing_overhead_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Routing Overhead Ms"
+        },
+        "selected_total_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Selected Total Latency Ms"
+        },
+        "baseline_total_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Baseline Total Latency Ms"
+        },
+        "signed_latency_delta_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Signed Latency Delta Ms"
+        },
+        "selected_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Cash Usd"
+        },
+        "baseline_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline Cash Usd"
+        },
+        "signed_cash_delta_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signed Cash Delta Usd"
+        },
+        "selected_model_tokens": {
+          "minimum": 0,
+          "title": "Selected Model Tokens",
+          "type": "integer"
+        },
+        "baseline_model_tokens": {
+          "minimum": 0,
+          "title": "Baseline Model Tokens",
+          "type": "integer"
+        },
+        "signed_token_delta": {
+          "title": "Signed Token Delta",
+          "type": "integer"
+        },
+        "cache_benefit_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Benefit Tokens",
+          "type": "integer"
+        },
+        "cache_loss_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Loss Tokens",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/$defs/RoutingValueStatus"
+        }
+      },
+      "required": [
+        "trial_id",
+        "workload_digest",
+        "cohort_digest",
+        "selected_executor_id",
+        "baseline_executor_id",
+        "selected_receipt_id",
+        "baseline_receipt_id",
+        "routing_overhead_ms",
+        "selected_total_latency_ms",
+        "baseline_total_latency_ms",
+        "signed_latency_delta_ms",
+        "selected_model_tokens",
+        "baseline_model_tokens",
+        "signed_token_delta",
+        "status"
+      ],
+      "title": "RoutingValueTrial",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.6",
+      "default": "0.6",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "report_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Report Id",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "paired_trials": {
+      "items": {
+        "$ref": "#/$defs/RoutingValueTrial"
+      },
+      "minItems": 1,
+      "title": "Paired Trials",
+      "type": "array"
+    }
+  },
+  "required": [
+    "report_id",
+    "generated_at",
+    "paired_trials"
+  ],
+  "title": "RoutingValueReport",
+  "type": "object"
+}

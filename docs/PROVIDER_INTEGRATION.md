@@ -35,11 +35,12 @@ ordinary application configuration. Publish only the public key plus key ID,
 provider identity, validity window, exact capabilities, and expected quote
 hosts. Plan rotation/revocation before production.
 
-Signed records use `aeep-canonical-json-v1`. Do not sign an ordinary
-`json.dumps()` result from a different serialization profile. Decimals are JSON
-strings, timestamps are aware UTC, Unicode is NFC, nulls are explicit, floats
-are forbidden, and the root `signature` field is excluded from the payload.
-Keep the fixed vectors in `tests/test_v04_signing.py` in cross-language CI.
+New records use `rfc8785-jcs-v1`. Do not sign an ordinary `json.dumps()` result
+from a different serialization profile. Decimals are JSON strings, timestamps
+are aware UTC, nulls are explicit, floats are forbidden, and the root
+`signature` field is excluded from the payload. Legacy
+`aeep-canonical-json-v1` records are historical/recovery-only. Keep both fixed
+vector suites in cross-language CI.
 
 ## Lightweight Python helper
 
@@ -158,9 +159,10 @@ provider.register_usage_handler(
 At the transport boundary call `await provider.process_quote(request)`. After a
 known attempt, call `await provider.process_usage(quote_id,
 prepared_id=prepared_id, attempt_id=attempt_id)`. The helper never invents
-missing execution status, meters, or provider-calculated amount. Its in-memory
-idempotency is suitable for examples; distributed providers need a durable
-atomic store keyed by request, nonce, quote, and attempt.
+missing execution status, meters, or provider-calculated amount. Use
+`SQLiteProviderOperationStore` for one durable local provider process.
+Distributed providers still need an atomic shared store keyed by request,
+nonce, quote, and attempt.
 
 ## Quote request privacy
 
@@ -186,6 +188,7 @@ A versioned provider/market service can expose:
 ```text
 GET  /health
 GET  /.well-known/aeep-keys.json
+GET  /.well-known/aeep-provider.json
 GET  /v1/offers?capability=...&executor_ids=...
 POST /v1/quotes
 POST /v1/usage-statements

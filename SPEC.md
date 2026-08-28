@@ -1,4 +1,4 @@
-# AEEP 0.5 protocol specification
+# AEEP 0.6 protocol specification
 
 AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
 
@@ -25,7 +25,7 @@ A conforming implementation can:
 
 ## 2. Non-goals
 
-AEEP 0.5 does not define:
+AEEP 0.6 does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;
@@ -115,6 +115,11 @@ A route estimate contains:
 - source (`static`, `historical`, `blended`, `quote`, `observed`);
 - historical sample size.
 
+After at least five exact-cohort observations, an estimate MAY also include
+empirical nearest-rank p50/p95 resources, observed cash p95, a Wilson success
+lower bound, and a quality lower bound. These bounds describe history; observed
+cash p95 MUST NOT authorize payment or replace an immutable signed maximum.
+
 Probability and scores are in `[0,1]`.
 
 The reference scorer applies a configurable penalty to low-confidence estimates. Confidence is not an observation and MUST NOT bypass hard constraints.
@@ -151,6 +156,13 @@ A custom implementation MAY use a different ranking algorithm if it:
 - returns score/explanation components;
 - is deterministic for equivalent inputs when configured as deterministic;
 - does not discard raw measurements.
+
+An implementation MAY abstain from optimization and retain an
+operator-configured baseline only when that baseline is itself feasible. The
+reference implementation returns `BYPASS_ROUTER` for a pinned route, a sole
+feasible route, or a score improvement that does not exceed measured routing
+overhead plus policy margin. Abstention MUST happen after hard constraints and
+MUST NOT restore a rejected route.
 
 ## 10. Runtime approval
 
@@ -198,7 +210,13 @@ A host/delegated placeholder receipt MUST NOT be treated as a failed observation
 
 ## 14. Historical learning
 
-The reference estimator blends static priors with an exponentially weighted history conditioned on a privacy-preserving input-size bucket. Invalid outputs count against successful completion. Host-selected, delegated, and unknown placeholder statuses are ignored.
+The reference estimator blends static priors with exponentially weighted
+history only from the exact `aeep-evidence-cohort-v1`: capability, executor,
+behavior fingerprint, provider/model/adapter, region/account tier, action-size
+bucket, validator digest, cache namespace/profile, and economic-evidence level.
+Invalid outputs count against successful completion. Host-selected, delegated,
+unknown placeholder, legacy-unbound, and cohort-mismatched rows are ignored for
+live routing.
 
 Implementations SHOULD expose sample size and estimate source. They MUST avoid presenting learned estimates as exact guarantees. Externally reported outcomes are untrusted input unless authenticated or attested and MAY be excluded from shared reputation.
 
@@ -218,8 +236,12 @@ The reference server exposes:
 - `aeep_route_action`
 - `aeep_execute_action`
 - `aeep_record_outcome`
-- `aeep_request_quotes`
+- `aeep_estimate_route_prices`
+- `aeep_request_quotes` (deprecated alias)
 - `aeep_get_metrics`
+- `aeep_show_prepared_decision`
+- `aeep_show_quote`
+- `aeep_show_settlement`
 
 Provider-specific declaration shapes are projections of the same JSON contracts.
 
@@ -692,10 +714,13 @@ unidentified amount into binding quote evidence.
 
 ## 45. Provider packages
 
-`aeep-provider.yaml` uses `apiVersion: aeep.dev/v0.5` and `kind:
+`aeep-provider.yaml` defaults to `apiVersion: aeep.dev/v0.6` and `kind:
 ProviderPackage`. It publishes provider identity, exact capability contracts,
 inert routes, content-addressed artifacts, evidence subjects, and bounded smoke
-definitions. It MUST NOT contain an activation or approval control.
+definitions. It MUST NOT contain an activation or approval control. Version
+0.6 evidence declares an authority class and exact cohort. Version 0.5 packages
+remain parseable, but incomplete evidence is capped as a weak prior and cannot
+qualify a route by itself.
 
 The signed payload contains exactly `apiVersion`, `kind`, `metadata`, and
 `spec`, encoded with RFC 8785. Ed25519 signs a domain-separated SHA-256 digest.
@@ -706,6 +731,10 @@ Ingest MUST bound and strictly parse YAML, reject duplicate keys and aliases,
 recompute every package and route digest, hash artifacts before parsing, and
 atomically persist only inert candidates. It MUST NOT execute, authenticate,
 install, qualify, activate, or raise an approval ceiling.
+
+Published Python routes MUST resolve to subprocess isolation with bounded JSON
+pipes and timeout termination. This process boundary is not a filesystem or
+network sandbox; untrusted code still requires an OS container or VM.
 
 ## 46. Canonicalization transition
 
@@ -743,6 +772,12 @@ They MUST NOT install, start, execute, qualify, activate, or grant trust. Regist
 verification labels, image provenance, usage counts, and popularity remain
 metadata until local policy recognizes a specific signer and role.
 
+A provider MAY publish a signed RFC-8785
+`/.well-known/aeep-provider.json` discovery document containing exact protocol,
+endpoint, capability, fingerprint, and signing-key metadata. Discovery proves
+only document provenance. It MUST NOT grant local trust, install code, qualify a
+route, activate a route, or authorize execution.
+
 ## 50. Durable approvals and proof campaigns
 
 Every consequential invocation records an immutable approval bound to the
@@ -751,6 +786,16 @@ approval, source, and validity. Package, provider, registry, model, and workflow
 data cannot create or raise this record.
 
 The deterministic DSH and job-application campaigns are validation clients of
-the Router. They do not add planner semantics. Default and CI campaigns use only
+the Router. The version 2 live DSH campaign compares only direct DSH and
+host-native AEEP: ten randomized pairs for each of three read capabilities,
+with one excluded warm-up pair per capability. AEEP routes before tool exposure,
+so the model receives one canonical source schema and no AEEP or hidden-target
+schema. Provider token buckets remain authoritative; route-level tool pressure
+and next-call correlation are reported separately. Savings may be claimed only
+when all hard gates pass and the fixed-seed 95% bootstrap interval is wholly
+positive. Model-facing AEEP MCP is retained only as historical negative-control
+material. Offline plan validation is safe, but the 60-session live execution
+requires a separate operator approval. These campaigns do not
+add planner semantics. Default and CI campaigns use only
 synthetic routes, identities, mail, browser/form behavior, and resume facts; no
 real submission, email send, CAPTCHA bypass, or credential is permitted.

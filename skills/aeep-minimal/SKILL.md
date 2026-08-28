@@ -9,7 +9,9 @@ description: Route bounded agent actions through AEEP when CLI, MCP, API, local,
 2. Identify the current named subscription resource with `aeep subscriptions status`.
 3. Call `aeep_route_action`, or run `aeep route --agent` when MCP is unavailable.
 4. Include known monetary, latency, context, memory, and subscription-quota pressure. Preserve tight Claude, ChatGPT/Codex, or local-model capacity when another route is feasible.
-5. Follow the selected feasible route.
+5. Follow the selected feasible route. `BYPASS_ROUTER` means AEEP retained the
+   feasible operator baseline because optimization did not justify its overhead;
+   it is not a policy bypass.
 6. If `HOST_SELECTED`, perform the task in the named `resource_pool`.
 7. If CLI, MCP, API, or local execution is selected, invoke that route through AEEP.
 8. Report a host outcome exactly once with `aeep_record_outcome` or `aeep record`, including `subscription_units` consumed.

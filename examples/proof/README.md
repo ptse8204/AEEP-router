@@ -1,4 +1,4 @@
-# AEEP 0.5 proof assets
+# AEEP 0.6 proof assets
 
 These assets preserve the qualification, accounting, campaign, workflow, and
 release-gate paths introduced before 0.4. The `fixture.*` routes are hermetic
@@ -89,6 +89,15 @@ API-equivalent values under the pinned official snapshot were approximately
 $0.0468 per local-data trial and $0.0525-$0.0616 per GitHub trial. Actual cash
 and Codex-credit consumption remain unavailable, not zero.
 
+`local-data-codex-terra-medium-suite.yaml` is the current host-portability
+comparison. It pins Codex CLI 0.147.0 to `gpt-5.6-terra` with medium reasoning
+and runs ten randomized direct/AEEP pairs in both process-cold and router-warm
+conditions. All 40 measured trials passed the exact oracle and receipt gates.
+The 20 direct turns used 287,104 provider tokens; AEEP routed the same actions
+to the exact-compatible local implementation without a model call. See the
+[campaign report](../../reports/v06/codex/campaign.md) for the bounded claim,
+bootstrap interval, raw-resource split, and excluded setup usage.
+
 ```bash
 aeep campaign run @examples/proof/local-data-codex-live-suite.yaml \
   --manifest examples/proof/aeep.yaml \
@@ -98,6 +107,10 @@ aeep campaign run @examples/proof/github-codex-live-suite.yaml \
   --manifest examples/proof/aeep.yaml \
   --database .aeep/live-codex-github.db \
   --output .aeep/proof-results/live-codex-github.json
+aeep campaign run @examples/proof/local-data-codex-terra-medium-suite.yaml \
+  --manifest examples/proof/aeep.yaml \
+  --database .aeep/codex-terra-medium-comparison.db \
+  --output reports/v06/codex/campaign.json
 aeep campaign prove \
   --report-file .aeep/proof-results/live-codex-local-data.json \
   --report-file .aeep/proof-results/live-codex-github.json \

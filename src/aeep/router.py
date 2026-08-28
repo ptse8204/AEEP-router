@@ -77,7 +77,7 @@ from .errors import (
     ConfigurationError,
     NoRouteError,
 )
-from .estimator import HistoricalEstimator, action_features
+from .estimator import HistoricalEstimator, action_features, evidence_cohort_digest
 from .executors import (
     CommandExecutor,
     DelegateExecutor,
@@ -156,7 +156,9 @@ from .models import (
     RejectedCandidate,
     ResourceAccounting,
     ResourceVector,
+    RouteBypassReason,
     RouteDecision,
+    RouteDisposition,
     RouteEstimate,
     SettlementEvidence,
     SettlementReceipt,
@@ -655,6 +657,15 @@ class Router:
         }
 
     def _save_receipt(self, receipt: ExecutionReceipt) -> None:
+        existing = self.store.get_receipt(receipt.receipt_id)
+        if existing is not None:
+            if (
+                receipt.executor_fingerprint != existing.executor_fingerprint
+                or receipt.cohort_digest != existing.cohort_digest
+            ):
+                raise ConfigurationError("persisted receipt evidence binding is immutable")
+        elif self.registry.contains(receipt.executor_id):
+            self._bind_receipt_evidence(self.registry.get(receipt.executor_id), receipt)
         persisted = receipt.model_copy(deep=True)
         persisted.metadata = self._safe_receipt_metadata(persisted.metadata)
         persisted.validation_results = [
@@ -680,6 +691,16 @@ class Router:
             persisted.error_message = persisted.error_type
         self.store.save_receipt(persisted)
 
+    @staticmethod
+    def _bind_receipt_evidence(spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
+        fingerprint, cohort = evidence_cohort_digest(spec, receipt.action_features)
+        if receipt.executor_fingerprint not in {None, fingerprint}:
+            raise ConfigurationError("receipt executor fingerprint does not match runtime route")
+        if receipt.cohort_digest not in {None, cohort}:
+            raise ConfigurationError("receipt evidence cohort does not match runtime route")
+        receipt.executor_fingerprint = fingerprint
+        receipt.cohort_digest = cohort
+
     def _observe_receipt(self, spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
         if receipt.status in {
             ExecutionStatus.DELEGATED,
@@ -693,6 +714,8 @@ class Router:
                 provider_id=spec.provider_id or "local",
                 executor_id=spec.id,
                 capability=receipt.capability,
+                executor_fingerprint=receipt.executor_fingerprint,
+                cohort_digest=receipt.cohort_digest,
                 receipt_id=receipt.receipt_id,
                 resources=receipt.actual_resources,
                 accounting=receipt.accounting,
@@ -852,6 +875,7 @@ class Router:
                 cache_hit=receipt.warm_state_reused,
                 cached_input_tokens=resources.cached_input_tokens,
                 cache_write_input_tokens=resources.cache_write_input_tokens,
+                compaction_generation=cache.compaction_generation,
                 observed_at=self._economic_now(),
             )
         )
@@ -860,6 +884,7 @@ class Router:
     def route(self, request: ActionRequest | dict[str, Any]) -> RouteDecision:
         """Validate, filter, rank, explain, and persist an action decision."""
 
+        routing_started = time.perf_counter()
         self._ensure_open()
         request_model = (
             request if isinstance(request, ActionRequest) else ActionRequest.model_validate(request)
@@ -929,6 +954,49 @@ class Router:
         rejected.sort(key=lambda item: item.executor_id)
         ordered = [*feasible, *rejected]
         selected = feasible[0].executor_id if feasible else None
+        disposition = RouteDisposition.SELECTED
+        bypass_reason: RouteBypassReason | None = None
+        baseline_executor_id: str | None = None
+        expected_net_benefit: float | None = None
+        abstention = policy.routing_abstention
+        if feasible and abstention.enabled:
+            allowed = policy.constraints.allowed_executor_ids
+            configured_baseline = abstention.baseline_executor_id
+            baseline = next(
+                (
+                    item
+                    for item in feasible
+                    if item.executor_id == configured_baseline
+                ),
+                None,
+            )
+            if len(feasible) == 1:
+                baseline = feasible[0]
+                bypass_reason = RouteBypassReason.ONLY_ONE_FEASIBLE_ROUTE
+            elif allowed is not None and len(allowed) == 1:
+                baseline = next(
+                    (item for item in feasible if item.executor_id == allowed[0]),
+                    None,
+                )
+                if baseline is not None:
+                    bypass_reason = RouteBypassReason.PINNED_EXECUTOR
+            elif baseline is not None and baseline.score is not None and feasible[0].score is not None:
+                overhead_score = (
+                    policy.weights.normalized()["latency"]
+                    * math.log1p(
+                        abstention.overhead_p95_ms / policy.references.latency_ms
+                    )
+                )
+                expected_net_benefit = (
+                    baseline.score.total - feasible[0].score.total - overhead_score
+                )
+                if expected_net_benefit <= abstention.minimum_score_gain:
+                    bypass_reason = RouteBypassReason.OPTIMIZATION_VALUE_BELOW_OVERHEAD
+            if baseline is not None:
+                baseline_executor_id = baseline.executor_id
+            if bypass_reason is not None and baseline is not None:
+                disposition = RouteDisposition.BYPASS_ROUTER
+                selected = baseline.executor_id
 
         if not candidates and not self.registry.find(request_model.capability):
             explanation = f"No enabled executor advertises capability {request_model.capability!r}."
@@ -939,17 +1007,35 @@ class Router:
                 f"{len(rejected)} candidate(s) produced {reason_count} rejection reason(s)."
             )
         else:
-            winner = feasible[0]
+            winner = next(item for item in feasible if item.executor_id == selected)
             score = winner.score.total if winner.score is not None else 0.0
-            explanation = (
-                f"Selected {selected!r} from {len(feasible)} feasible route(s) under "
-                f"policy {policy.name!r}; lower score is better (winner {score:.6f})."
-            )
+            if disposition is RouteDisposition.BYPASS_ROUTER:
+                assert bypass_reason is not None
+                explanation = (
+                    f"Bypassed route optimization and retained {selected!r}: "
+                    f"{bypass_reason.value.replace('_', ' ')}. Hard constraints still passed."
+                )
+            else:
+                explanation = (
+                    f"Selected {selected!r} from {len(feasible)} feasible route(s) under "
+                    f"policy {policy.name!r}; lower score is better (winner {score:.6f})."
+                )
+            if winner.cache_affinity is not None:
+                explanation += (
+                    f" Cache affinity predicted {winner.cache_affinity.warm_probability:.1%} "
+                    f"warm probability and {winner.cache_affinity.expected_reusable_input_tokens} "
+                    "reusable input tokens."
+                )
 
         decision = RouteDecision(
             action=request_model,
             policy=policy,
             selected_executor_id=selected,
+            disposition=disposition,
+            baseline_executor_id=baseline_executor_id,
+            bypass_reason=bypass_reason,
+            routing_overhead_ms=(time.perf_counter() - routing_started) * 1000.0,
+            expected_net_benefit=expected_net_benefit,
             candidates=ordered,
             action_features=features,
             explanation=explanation,
@@ -4349,7 +4435,7 @@ class Router:
         source_id: str | None = None,
         allow_remote_artifacts: bool | None = None,
     ) -> tuple[RouteCandidate, ...]:
-        """Verify one v0.5 package and atomically persist inert candidates."""
+        """Verify one supported provider package and persist inert candidates."""
 
         self._ensure_open()
         config = self.manifest.provider_packages
@@ -5611,6 +5697,7 @@ class Router:
         report: ExternalOutcomeReport | dict[str, Any],
         *,
         _trusted_accounting: ResourceAccounting | None = None,
+        _trusted_metadata: dict[str, Any] | None = None,
     ) -> ExecutionReceipt:
         """Record the selected host-executed delegate exactly once.
 
@@ -5706,9 +5793,12 @@ class Router:
             validation_results=report_model.validation_results,
             output_valid=report_model.output_valid,
             error_message=report_model.error_message,
-            metadata={"externally_reported": True},
+            metadata={"externally_reported": True, **(_trusted_metadata or {})},
         )
         persisted = receipt.model_copy(deep=True)
+        self._bind_receipt_evidence(spec, receipt)
+        persisted.executor_fingerprint = receipt.executor_fingerprint
+        persisted.cohort_digest = receipt.cohort_digest
         persisted.error_message = persisted.error_type or (
             "execution failed" if persisted.error_message else None
         )
@@ -6656,7 +6746,9 @@ class Router:
             )
         selected = decision.selected_executor_id
         reason = (
-            f"lowest feasible burden under {decision.policy.name}"
+            decision.bypass_reason.value.replace("_", " ")
+            if decision.bypass_reason is not None
+            else f"lowest feasible burden under {decision.policy.name}"
             if selected is not None
             else "no feasible route"
         )
@@ -6665,6 +6757,8 @@ class Router:
             action_id=decision.action.action_id,
             capability=decision.action.capability,
             selected=selected,
+            disposition=decision.disposition,
+            bypass_reason=decision.bypass_reason,
             reason=reason,
             alternatives=alternatives,
             rejected=sum(not candidate.feasible for candidate in decision.candidates),

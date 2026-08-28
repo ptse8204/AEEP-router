@@ -1,0 +1,626 @@
+{
+  "$defs": {
+    "DSHPluginBootstrapInterval": {
+      "additionalProperties": false,
+      "properties": {
+        "median": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Median"
+        },
+        "ci95_low": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ci95 Low"
+        },
+        "ci95_high": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ci95 High"
+        },
+        "resamples": {
+          "minimum": 100,
+          "title": "Resamples",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "median",
+        "ci95_low",
+        "ci95_high",
+        "resamples"
+      ],
+      "title": "DSHPluginBootstrapInterval",
+      "type": "object"
+    },
+    "DSHPluginCampaignArm": {
+      "enum": [
+        "DSH_DIRECT",
+        "AEEP_HOST_NATIVE"
+      ],
+      "title": "DSHPluginCampaignArm",
+      "type": "string"
+    },
+    "DSHPluginCampaignGate": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "passed"
+      ],
+      "title": "DSHPluginCampaignGate",
+      "type": "object"
+    },
+    "DSHPluginCampaignPair": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "repetition": {
+          "maximum": 9,
+          "minimum": 0,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "direct_total_tokens": {
+          "minimum": 0,
+          "title": "Direct Total Tokens",
+          "type": "integer"
+        },
+        "aeep_total_tokens": {
+          "minimum": 0,
+          "title": "Aeep Total Tokens",
+          "type": "integer"
+        },
+        "tokens_saved_by_aeep": {
+          "title": "Tokens Saved By Aeep",
+          "type": "integer"
+        },
+        "token_savings": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Token Savings",
+          "type": "object"
+        },
+        "rendered_result_bytes_saved": {
+          "title": "Rendered Result Bytes Saved",
+          "type": "integer"
+        },
+        "rendered_result_tokens_saved": {
+          "title": "Rendered Result Tokens Saved",
+          "type": "integer"
+        },
+        "next_model_input_tokens_saved": {
+          "title": "Next Model Input Tokens Saved",
+          "type": "integer"
+        },
+        "schema_bytes_saved": {
+          "title": "Schema Bytes Saved",
+          "type": "integer"
+        },
+        "latency_ms_saved": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Latency Ms Saved"
+        },
+        "tool_results_match": {
+          "title": "Tool Results Match",
+          "type": "boolean"
+        },
+        "correctness_matches": {
+          "title": "Correctness Matches",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "case_id",
+        "repetition",
+        "direct_total_tokens",
+        "aeep_total_tokens",
+        "tokens_saved_by_aeep",
+        "token_savings",
+        "rendered_result_bytes_saved",
+        "rendered_result_tokens_saved",
+        "next_model_input_tokens_saved",
+        "schema_bytes_saved",
+        "latency_ms_saved",
+        "tool_results_match",
+        "correctness_matches"
+      ],
+      "title": "DSHPluginCampaignPair",
+      "type": "object"
+    },
+    "DSHPluginCampaignPressure": {
+      "additionalProperties": false,
+      "properties": {
+        "receipt_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Receipt Ids",
+          "type": "array"
+        },
+        "selected_executor_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected Executor Ids",
+          "type": "array"
+        },
+        "raw_result_bytes": {
+          "minimum": 0,
+          "title": "Raw Result Bytes",
+          "type": "integer"
+        },
+        "rendered_result_bytes": {
+          "minimum": 0,
+          "title": "Rendered Result Bytes",
+          "type": "integer"
+        },
+        "rendered_result_approx_tokens": {
+          "minimum": 0,
+          "title": "Rendered Result Approx Tokens",
+          "type": "integer"
+        },
+        "next_model_calls": {
+          "minimum": 0,
+          "title": "Next Model Calls",
+          "type": "integer"
+        },
+        "next_model_input_tokens": {
+          "minimum": 0,
+          "title": "Next Model Input Tokens",
+          "type": "integer"
+        },
+        "next_model_attribution_ambiguous": {
+          "title": "Next Model Attribution Ambiguous",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "raw_result_bytes",
+        "rendered_result_bytes",
+        "rendered_result_approx_tokens",
+        "next_model_calls",
+        "next_model_input_tokens",
+        "next_model_attribution_ambiguous"
+      ],
+      "title": "DSHPluginCampaignPressure",
+      "type": "object"
+    },
+    "DSHPluginCampaignTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "trial_id": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Trial Id",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "capability": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Capability",
+          "type": "string"
+        },
+        "repetition": {
+          "maximum": 99,
+          "minimum": -1,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "warmup": {
+          "title": "Warmup",
+          "type": "boolean"
+        },
+        "arm": {
+          "$ref": "#/$defs/DSHPluginCampaignArm"
+        },
+        "completed": {
+          "title": "Completed",
+          "type": "boolean"
+        },
+        "correct": {
+          "title": "Correct",
+          "type": "boolean"
+        },
+        "model_calls": {
+          "minimum": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "tool_calls": {
+          "minimum": 0,
+          "title": "Tool Calls",
+          "type": "integer"
+        },
+        "expected_tool_called": {
+          "title": "Expected Tool Called",
+          "type": "boolean"
+        },
+        "observed_tool_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Tool Names",
+          "type": "array"
+        },
+        "exposed_tool_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exposed Tool Names",
+          "type": "array"
+        },
+        "exposed_tool_count": {
+          "minimum": 0,
+          "title": "Exposed Tool Count",
+          "type": "integer"
+        },
+        "tool_schema_bytes": {
+          "minimum": 0,
+          "title": "Tool Schema Bytes",
+          "type": "integer"
+        },
+        "end_to_end_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "End To End Latency Ms"
+        },
+        "usage": {
+          "$ref": "#/$defs/DSHPluginCampaignUsage"
+        },
+        "pressure": {
+          "$ref": "#/$defs/DSHPluginCampaignPressure"
+        },
+        "rendered_result_bytes": {
+          "minimum": 0,
+          "title": "Rendered Result Bytes",
+          "type": "integer"
+        },
+        "rendered_result_approx_tokens": {
+          "minimum": 0,
+          "title": "Rendered Result Approx Tokens",
+          "type": "integer"
+        },
+        "next_model_input_tokens": {
+          "minimum": 0,
+          "title": "Next Model Input Tokens",
+          "type": "integer"
+        },
+        "tool_result_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Tool Result Digest",
+          "type": "string"
+        },
+        "final_output_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Final Output Digest",
+          "type": "string"
+        },
+        "expected_output_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Expected Output Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trial_id",
+        "case_id",
+        "capability",
+        "repetition",
+        "warmup",
+        "arm",
+        "completed",
+        "correct",
+        "model_calls",
+        "tool_calls",
+        "expected_tool_called",
+        "observed_tool_names",
+        "exposed_tool_names",
+        "exposed_tool_count",
+        "tool_schema_bytes",
+        "end_to_end_latency_ms",
+        "usage",
+        "pressure",
+        "rendered_result_bytes",
+        "rendered_result_approx_tokens",
+        "next_model_input_tokens",
+        "tool_result_digest",
+        "final_output_digest",
+        "expected_output_digest"
+      ],
+      "title": "DSHPluginCampaignTrial",
+      "type": "object"
+    },
+    "DSHPluginCampaignUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "model_calls": {
+          "minimum": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "cache_read_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Tokens",
+          "type": "integer"
+        },
+        "cache_write_tokens": {
+          "minimum": 0,
+          "title": "Cache Write Tokens",
+          "type": "integer"
+        },
+        "reasoning_tokens": {
+          "minimum": 0,
+          "title": "Reasoning Tokens",
+          "type": "integer"
+        },
+        "total_input_tokens": {
+          "minimum": 0,
+          "title": "Total Input Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_calls",
+        "input_tokens",
+        "output_tokens",
+        "cache_read_tokens",
+        "cache_write_tokens",
+        "reasoning_tokens",
+        "total_input_tokens",
+        "total_tokens"
+      ],
+      "title": "DSHPluginCampaignUsage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep-dsh-plugin-campaign-v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "live_dsh": {
+      "const": true,
+      "title": "Live Dsh",
+      "type": "boolean"
+    },
+    "requires_separate_user_approval": {
+      "const": true,
+      "title": "Requires Separate User Approval",
+      "type": "boolean"
+    },
+    "arms": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/DSHPluginCampaignArm"
+        },
+        {
+          "$ref": "#/$defs/DSHPluginCampaignArm"
+        }
+      ],
+      "title": "Arms",
+      "type": "array"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "repetitions_per_capability": {
+      "const": 10,
+      "title": "Repetitions Per Capability",
+      "type": "integer"
+    },
+    "harness_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Harness Version",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "settings_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Settings Digest",
+      "type": "string"
+    },
+    "installed_plugin_inventory": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Installed Plugin Inventory",
+      "type": "array"
+    },
+    "installation": {
+      "additionalProperties": true,
+      "title": "Installation",
+      "type": "object"
+    },
+    "excluded_warmup_trials": {
+      "items": {
+        "$ref": "#/$defs/DSHPluginCampaignTrial"
+      },
+      "title": "Excluded Warmup Trials",
+      "type": "array"
+    },
+    "excluded_prior_pilot": {
+      "additionalProperties": true,
+      "title": "Excluded Prior Pilot",
+      "type": "object"
+    },
+    "trials": {
+      "items": {
+        "$ref": "#/$defs/DSHPluginCampaignTrial"
+      },
+      "title": "Trials",
+      "type": "array"
+    },
+    "arm_summaries": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Arm Summaries",
+      "type": "object"
+    },
+    "pairs": {
+      "items": {
+        "$ref": "#/$defs/DSHPluginCampaignPair"
+      },
+      "title": "Pairs",
+      "type": "array"
+    },
+    "paired_token_savings": {
+      "$ref": "#/$defs/DSHPluginBootstrapInterval"
+    },
+    "tokens_saved_by_aeep": {
+      "title": "Tokens Saved By Aeep",
+      "type": "integer"
+    },
+    "savings_status": {
+      "enum": [
+        "demonstrated_savings",
+        "no_demonstrated_savings",
+        "inconclusive",
+        "invalid_campaign"
+      ],
+      "title": "Savings Status",
+      "type": "string"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/DSHPluginCampaignGate"
+      },
+      "title": "Gates",
+      "type": "array"
+    },
+    "privacy": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Privacy",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "synthetic",
+    "live_dsh",
+    "requires_separate_user_approval",
+    "arms",
+    "seed",
+    "repetitions_per_capability",
+    "harness_version",
+    "model",
+    "settings_digest",
+    "installed_plugin_inventory",
+    "installation",
+    "excluded_warmup_trials",
+    "excluded_prior_pilot",
+    "trials",
+    "arm_summaries",
+    "pairs",
+    "paired_token_savings",
+    "tokens_saved_by_aeep",
+    "savings_status",
+    "gates",
+    "privacy"
+  ],
+  "title": "DSHPluginCampaignReport",
+  "type": "object"
+}

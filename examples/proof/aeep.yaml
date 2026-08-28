@@ -77,6 +77,62 @@ executors:
       timeout_seconds: 120
       max_output_bytes: 2000000
 
+  - id: live.codex-terra-medium-text-stats
+    provider_id: openai
+    resource_pool: openai:chatgpt:agentic
+    capability: text.stats@1
+    kind: command
+    description: Isolated GPT-5.6 Terra Medium Codex baseline with terminal JSONL usage capture.
+    input_schema:
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 5000, input_tokens: 20000, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.95
+      risk_score: 0.01
+      confidence: 0.5
+    side_effect: none
+    locality: local
+    config:
+      argv:
+        - codex
+        - exec
+        - --ephemeral
+        - --json
+        - --ignore-user-config
+        - --ignore-rules
+        - --model
+        - gpt-5.6-terra
+        - -c
+        - 'model_reasoning_effort="medium"'
+        - --sandbox
+        - read-only
+        - --skip-git-repo-check
+        - "Do not use tools. Count only the exact text between the markers, excluding the markers. Return only compact JSON with integer keys characters, words, lines. <text>{input.text}</text>"
+      output:
+        type: jsonl
+        match: {type: item.completed, item.type: agent_message}
+        path: item.text
+        decode_json: true
+      usage_capture:
+        type: codex_jsonl
+        provider: openai
+        model: gpt-5.6-terra
+        access_channel: subscription
+      timeout_seconds: 120
+      max_output_bytes: 2000000
+
   - id: live.codex-github-default-branch
     provider_id: openai
     resource_pool: openai:chatgpt:agentic
