@@ -1,5 +1,9 @@
 # GPT-5.6 Terra Medium: direct Codex vs AEEP host-native routing
 
+> **Superseded baseline:** this run explicitly disabled tools in the Codex arm.
+> Use the [tool-ready campaign](tool-ready-campaign.md) for the controlled
+> comparison where Codex and AEEP share the installed implementation.
+
 - Run date: 2026-08-28
 - Codex CLI: 0.147.0
 - Model: `gpt-5.6-terra`

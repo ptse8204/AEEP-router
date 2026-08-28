@@ -215,6 +215,8 @@ def test_jsonl_output_parser_selects_the_final_structured_message():
 async def test_command_codex_capture_attaches_usage_without_persisting_jsonl(tmp_path):
     script = (
         "import json;"
+        "print(json.dumps({'type':'item.completed','item':{'type':'command_execution',"
+        "'command':'python3 -m fixture.tool','status':'completed','exit_code':0}}));"
         "print(json.dumps({'type':'item.completed','item':{'type':'agent_message',"
         "'text':'{\\\"value\\\":1}'}}));"
         "print(json.dumps({'type':'turn.completed','usage':{'input_tokens':100,"
@@ -248,6 +250,7 @@ async def test_command_codex_capture_attaches_usage_without_persisting_jsonl(tmp
                 "provider": "openai",
                 "model": "codex-fixture",
                 "access_channel": "subscription",
+                "required_command_substring": "python3 -m fixture.tool",
             },
         },
     )
@@ -255,7 +258,25 @@ async def test_command_codex_capture_attaches_usage_without_persisting_jsonl(tmp
     outcome = await router.execute(router.route(ActionRequest(capability=route.capability)))
     assert outcome.output == {"value": 1}
     assert outcome.receipts[0].accounting.model_usage[0].cached_input_tokens == 40
+    assert outcome.receipts[0].metadata["codex_command_executions"] == 1
     assert "agent_message" not in outcome.receipts[0].model_dump_json()
+    await router.close()
+
+    rejected = route.model_copy(
+        update={
+            "id": "codex-fixture-missing-tool",
+            "config": {
+                **route.config,
+                "usage_capture": {
+                    **route.config["usage_capture"],
+                    "required_command_substring": "python3 -m missing.tool",
+                },
+            },
+        }
+    )
+    router = Router(manifest_with(rejected))
+    outcome = await router.execute(router.route(ActionRequest(capability=rejected.capability)))
+    assert not outcome.ok
     await router.close()
 
 

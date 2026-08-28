@@ -133,6 +133,63 @@ executors:
       timeout_seconds: 120
       max_output_bytes: 2000000
 
+  - id: live.codex-terra-medium-tool-ready-text-stats
+    provider_id: openai
+    resource_pool: openai:chatgpt:agentic
+    capability: text.stats@1
+    kind: command
+    description: GPT-5.6 Terra Medium baseline with the exact local tool already installed and identified.
+    input_schema:
+      type: object
+      properties: {text: {type: string}}
+      required: [text]
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters: {type: integer}
+        words: {type: integer}
+        lines: {type: integer}
+      required: [characters, words, lines]
+      additionalProperties: false
+    estimate:
+      resources: {monetary_usd: 0, latency_ms: 10000, input_tokens: 40000, subscription_units: 1}
+      success_probability: 0.95
+      quality_score: 0.95
+      risk_score: 0.01
+      confidence: 0.5
+    side_effect: none
+    locality: local
+    config:
+      argv:
+        - codex
+        - exec
+        - --ephemeral
+        - --json
+        - --ignore-user-config
+        - --ignore-rules
+        - --model
+        - gpt-5.6-terra
+        - -c
+        - 'model_reasoning_effort="medium"'
+        - --sandbox
+        - read-only
+        - --skip-git-repo-check
+        - 'The exact deterministic tool is already installed and its interface is known. Do not search, inspect, or install anything. Use the shell tool exactly once to run: python3 -m aeep.examples.text_stats_cli "{input.text}". Return only the compact JSON emitted by that command, with integer keys characters, words, lines.'
+      output:
+        type: jsonl
+        match: {type: item.completed, item.type: agent_message}
+        path: item.text
+        decode_json: true
+      usage_capture:
+        type: codex_jsonl
+        provider: openai
+        model: gpt-5.6-terra
+        access_channel: subscription
+        required_command_substring: python3 -m aeep.examples.text_stats_cli
+      timeout_seconds: 120
+      max_output_bytes: 2000000
+
   - id: live.codex-github-default-branch
     provider_id: openai
     resource_pool: openai:chatgpt:agentic

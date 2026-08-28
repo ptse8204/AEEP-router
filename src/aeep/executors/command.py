@@ -253,9 +253,10 @@ class CommandExecutor(BaseExecutor):
             if not isinstance(model, str) or not model:
                 raise ConfigurationError("Codex JSONL capture requires a model")
             try:
+                lines = stdout.splitlines()
                 accounting.model_usage.append(
                     parse_codex_jsonl(
-                        stdout.splitlines(),
+                        lines,
                         provider=str(capture.get("provider", "openai")),
                         model=model,
                         access_channel=ModelAccessChannel(
@@ -264,6 +265,30 @@ class CommandExecutor(BaseExecutor):
                         max_bytes=max_output,
                     )
                 )
+                required_command = capture.get("required_command_substring")
+                if required_command is not None:
+                    if not isinstance(required_command, str) or not required_command:
+                        raise ConfigurationError(
+                            "required_command_substring must be a non-empty string"
+                        )
+                    commands = [
+                        event["item"]
+                        for line in lines
+                        if isinstance((event := json.loads(line)), dict)
+                        and event.get("type") == "item.completed"
+                        and isinstance(event.get("item"), dict)
+                        and event["item"].get("type") == "command_execution"
+                    ]
+                    if (
+                        len(commands) != 1
+                        or commands[0].get("status") != "completed"
+                        or commands[0].get("exit_code") != 0
+                        or required_command not in commands[0].get("command", "")
+                    ):
+                        raise ConfigurationError(
+                            "Codex did not complete exactly one required command execution"
+                        )
+                    metadata["codex_command_executions"] = 1
             except Exception as exc:
                 return RawExecution(
                     status=ExecutionStatus.FAILED,

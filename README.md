@@ -31,17 +31,26 @@ wrapper.
 
 ## Measured result
 
-| 20 matched actions | Direct Codex | AEEP route |
+This test asks one narrow question: when an exact deterministic tool already
+exists, can routing before the model avoid the model's tool-selection loop?
+
+| 20 matched actions | Codex + exact tool | AEEP + same tool |
 |---|---:|---:|
 | Exact results | 20/20 | 20/20 |
-| Provider input + output tokens | 287,104 | 0 |
-| Median input + output per action | 14,356.5 | 0 |
-| Median latency | 5,976.5 ms | 6.48 ms |
+| Verified local-tool executions | 20/20 | 20/20 |
+| Provider input + output tokens | 584,449 | 0 |
+| Median tokens per action | 28,888 | 0 |
+| Median latency | 8,324.9 ms | 5.47 ms |
 
-GPT-5.6 Terra Medium, fixed seed, identical `text.stats@1` inputs and output
-oracle. Median paired token reduction was 14,356.5 (95% CI: 14,349–14,363).
-AEEP avoided the model call because an exact-compatible local route existed;
-this is not a claim about every workload. [Full report](reports/v06/codex/campaign.md).
+Both sides were installed before measurement. Codex was given the exact command
+and forbidden from discovering or installing anything; it still needed the
+model → tool → model loop. AEEP received the structured `text.stats@1` action
+and invoked the same underlying Python function without a provider call.
+
+This does not measure clean-machine installation, natural-language intent
+recognition, or work requiring model judgment. Provider totals include Codex's
+full host context; the meter cannot attribute every token to an individual
+schema. [Method, exclusions, and raw accounting](reports/v06/codex/tool-ready-campaign.md).
 
 ## Quick start
 

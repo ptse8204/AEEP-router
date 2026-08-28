@@ -1,0 +1,25 @@
+schema_version: "0.3"
+suite_id: aeep-06-live-codex-terra-medium-tool-ready-v1
+domain: local-data
+deterministic_tools_available: true
+seed: 60828
+repetitions: 10
+baseline_route_id: codex-tool-ready
+routes:
+  - route_id: codex-tool-ready
+    executor_id: live.codex-terra-medium-tool-ready-text-stats
+    provider: openai
+    model: gpt-5.6-terra
+    access_channel: subscription
+  - route_id: aeep-host-native
+    executor_id: hybrid.local-text-stats
+conditions: [process-cold, router-warm]
+cases:
+  - case_id: local-holdout
+    split: holdout
+    action:
+      capability: text.stats@1
+      input: {text: "one two three"}
+    validators:
+      - kind: exact_match
+        config: {expected: {characters: 13, words: 3, lines: 1}}
