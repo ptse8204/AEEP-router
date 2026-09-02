@@ -1,8 +1,8 @@
 {
   "schema": "aeep-router-completion-v1",
   "version": "0.7.0",
-  "revision": "2e85075fb5a77afca464b6ff99f3b1794c900fd0",
-  "generated_at": "2026-09-02T12:23:42.833048Z",
+  "revision": "f651ced6997397faaa9d775cb590f9741f2be739",
+  "generated_at": "2026-09-02T12:37:23.782562Z",
   "profiles": {
     "core": "PASS",
     "openai": "PASS",
@@ -311,6 +311,198 @@
       ],
       "artifact_digests": [
         "sha256:4f64cfaf3cc5c58197f8eeefbb6e5e75ac990c3f4628724dd9c73c5bd4ee6f2b"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "critical-module-branch-coverage",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_release_gate.py::test_critical_module_branch_coverage"
+      ],
+      "evidence_ids": [
+        "scripts/check_critical_coverage.py"
+      ],
+      "artifact_digests": [
+        "sha256:f55245ba77fa9f130a56bf328f182f841ab6183eaeadde92833bc596a1939070"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-before-claim",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-after-claim",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-after-cash-reservation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v04_payments.py::test_manager_reserve_is_durably_idempotent_and_recovers_lost_response"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-after-capacity-reservation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_capacity.py::test_capacity_reservation_release_and_replay_are_atomic"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-before-external-invocation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-after-app-server-turn-start",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-during-streamed-output",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_turn_failure_modes_fail_closed"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-before-validation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-during-settlement",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v04_payments.py::test_settlement_adapter_failure_preserves_indeterminate_reservation"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-after-partial-release",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fault-during-recovery",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_recovery_inspects_external_state_and_never_retries_invoking_attempt"
+      ],
+      "evidence_ids": [
+        "reports/v07/fault-injection.json"
+      ],
+      "artifact_digests": [
+        "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
       ],
       "reason": ""
     },

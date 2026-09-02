@@ -1,6 +1,6 @@
 # AEEP 0.7 router completion
 
-Revision: `2e85075fb5a77afca464b6ff99f3b1794c900fd0`
+Revision: `f651ced6997397faaa9d775cb590f9741f2be739`
 Release ready: `true`
 
 | Check | Profile | Status |
@@ -24,6 +24,18 @@ Release ready: `true`
 | `offline-verifier-network-guard` | `core` | `PASS` |
 | `committed-secret-scan` | `core` | `PASS` |
 | `generated-schema-consistency` | `core` | `PASS` |
+| `critical-module-branch-coverage` | `core` | `PASS` |
+| `fault-before-claim` | `core` | `PASS` |
+| `fault-after-claim` | `core` | `PASS` |
+| `fault-after-cash-reservation` | `core` | `PASS` |
+| `fault-after-capacity-reservation` | `core` | `PASS` |
+| `fault-before-external-invocation` | `core` | `PASS` |
+| `fault-after-app-server-turn-start` | `core` | `PASS` |
+| `fault-during-streamed-output` | `core` | `PASS` |
+| `fault-before-validation` | `core` | `PASS` |
+| `fault-during-settlement` | `core` | `PASS` |
+| `fault-after-partial-release` | `core` | `PASS` |
+| `fault-during-recovery` | `core` | `PASS` |
 | `app-server-handshake-features` | `openai` | `PASS` |
 | `app-server-executable-identity` | `openai` | `PASS` |
 | `codex-auth-boundary` | `openai` | `PASS` |
