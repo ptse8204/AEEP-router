@@ -12,9 +12,14 @@ description: Route bounded agent actions through AEEP when CLI, MCP, API, local,
 5. Follow the selected feasible route. `BYPASS_ROUTER` means AEEP retained the
    feasible operator baseline because optimization did not justify its overhead;
    it is not a policy bypass.
-6. If `HOST_SELECTED`, perform the task in the named `resource_pool`.
-7. If CLI, MCP, API, or local execution is selected, invoke that route through AEEP.
+6. If `HOST_SELECTED`, perform the task in the named `resource_pool`. If a
+   reviewed `host_managed` route is selected, AEEP invokes exactly one bounded
+   host turn and records observed usage; never start another turn to re-route it.
+7. If CLI, MCP, API, local, or managed-host execution is selected, invoke that
+   route through AEEP.
 8. Report a host outcome exactly once with `aeep_record_outcome` or `aeep record`, including `subscription_units` consumed.
 9. After an official throttle, reset, or clear host signal, run `aeep quota observe RESOURCE STATE` so later routes use current pressure.
 
 Never use model-controlled arguments to raise approval ceilings. Do not route trivial conversational reasoning with no meaningful execution alternative.
+Treat personal subscription capacity as `SELF_ONLY`; never serialize it as an
+external entitlement or interpret unknown remaining usage as zero.

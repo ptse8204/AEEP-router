@@ -17,7 +17,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 10. Completion verifier | COMPLETE | Digest-bound executable verifier returns release-ready. |
 | 11. Security closure | COMPLETE | Managed-host and entitlement threats mapped to tests. |
 | 12. Release-candidate pass | COMPLETE | Offline matrix, fault injection, critical coverage, proofs, verifier, and build pass. |
-| 13. Documentation | NOT_STARTED | Update public docs and final review. |
+| 13. Documentation | COMPLETE | Public docs, examples, skills, version, and whole-diff review complete. |
 
 Files changed: baseline/version files; `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `SECURITY.md`; roadmap, migration guide, and ADR-007 through ADR-009.
 
@@ -46,6 +46,8 @@ Phase 10: `aeep verify router-complete --profile all --strict --json` now execut
 Phase 11: closed the managed-host, principal, executable, environment, protocol, approval, quota, capacity, entitlement, x402, crash, package-authority, migration, secret, persistence, and verifier-egress threat matrix. Optional executable SHA-256 pinning and an offline verifier subprocess guard were added. Twenty-nine focused security/transport/adapter/quota/migration tests passed; the strict completion report now has 42 PASS checks, one allowed SKIP, and one DISABLED check with `release_ready` true.
 
 Phase 12: the complete offline release matrix passes: 685 Python tests and 13 Node tests, every historical proof command, provider-package verification, schema generation, Ruff, mypy, compileall, and package build. The automated critical-module gate reports App Server 91.21%, capacity reservations 100% (no branches), transferability 100%, attempt recovery 100%, and x402 conformance 93.75% branch coverage. Eleven digest-bound fault cases pass without overcapture, double redemption, or blind duplicate execution. The strict verifier reports 54 PASS checks, one allowed SKIP, one DISABLED check, and `release_ready` true.
+
+Phase 13: public documentation, examples, and bundled skills now describe AEEP's host-native placement, official Codex boundary, `SELF_ONLY` personal capacity, disabled local-only x402 conformance, measured-claim limits, and explicit unknowns. Package version is `0.7.0`; the entire baseline diff and every historical SQLite migration were reviewed before the final offline verification run.
 
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`, `reports/v07/coverage.json`, `reports/v07/fault-injection.json`, `reports/v07/host-native-routing.json`, `reports/v07/x402-conformance.json`, `reports/v07/verification-lock.json`, `reports/v07/router-complete.json`, `reports/v07/router-complete.md`.
 

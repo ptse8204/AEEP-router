@@ -28,6 +28,12 @@ uncertainty is `1 - confidence`, plus 0.25 when exact remaining capacity is unkn
 and another 0.25 when percentage is also unknown. Private per-unit values remain
 labelled policy valuations and never become cash or settlement evidence.
 
+Capacity reservations are a separate ledger from cash reservations. They bind
+one resource, execution, maximum quantity, unit, expiry, idempotency key, claim
+token, and compare-and-set version. Unknown availability cannot authorize an
+external entitlement. Release or redemption changes only the capacity ledger;
+it never implies a refund, payment, sale, or public exchange rate.
+
 ## Estimate versus actual
 
 Before execution, `RouteEstimate.cash` can be supported by a static prior,

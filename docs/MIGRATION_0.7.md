@@ -42,3 +42,18 @@ active managed-host attempts or capacity reservations.
 SQLite schema version 6 adds capacity observations, reservations, authorization
 evidence, execution entitlements, and redemption receipts. Existing rows and
 tables are not rewritten.
+
+SQLite schema version 7 adds durable execution attempts and transition history.
+Existing execution, receipt, and payment rows remain intact; recovery never
+reconstructs raw action inputs or outputs from the database.
+
+After migration, regenerate schemas from source and run the offline completion
+gate:
+
+```bash
+python3 scripts/generate_schemas.py --check
+aeep verify router-complete --profile all --strict --json
+```
+
+The verifier may report the live OpenAI-account proof as `SKIP` and live
+marketplace networking as `DISABLED`; neither is silently promoted to `PASS`.

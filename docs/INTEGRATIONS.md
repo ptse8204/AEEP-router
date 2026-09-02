@@ -1,6 +1,6 @@
 # Agent integration guide
 
-AEEP 0.6 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP 0.7 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
@@ -109,6 +109,10 @@ default_tools_approval_mode = "writes"
 Keep the Codex/ChatGPT host approval mode enabled even though AEEP has its own controls. The two layers address different risks.
 
 Official reference: <https://developers.openai.com/codex/mcp>
+
+The managed subscription adapter uses the official Codex App Server protocol,
+not MCP, for Codex-owned authentication, runtime model/quota discovery, and one
+bounded turn. Official reference: <https://learn.chatgpt.com/docs/app-server>
 
 ## Claude Code
 
