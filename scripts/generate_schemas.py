@@ -118,6 +118,7 @@ from aeep.provider_package import (
 )
 from aeep.qualification import QualificationReport, RouteCandidate
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
+from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
@@ -224,6 +225,9 @@ MODEL_FILES = {
     "usage-statement.schema.json": UsageStatement,
     "workflow-request.schema.json": WorkflowRequest,
     "workflow-execution-outcome.schema.json": WorkflowExecutionOutcome,
+    "x402-batch-record.schema.json": X402BatchRecord,
+    "x402-capacity-commitment.schema.json": X402CapacityCommitment,
+    "x402-conformance-report.schema.json": X402ConformanceReport,
 }
 
 TOOL_FILES = {

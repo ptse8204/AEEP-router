@@ -7194,6 +7194,36 @@ class ReceiptStore:
             for row in rows
         ]
 
+    def release_execution_entitlement(
+        self,
+        entitlement_id: str,
+        *,
+        expected_version: int,
+        now: datetime | None = None,
+    ) -> None:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT state, version, expires_at FROM execution_entitlements "
+                "WHERE entitlement_id = ?",
+                (entitlement_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution entitlement does not exist")
+            if row["state"] == "released":
+                return
+            if datetime.fromisoformat(row["expires_at"]) <= current_time:
+                raise ConfigurationError("cannot release expired entitlement")
+            if row["state"] != "active":
+                raise ConfigurationError(f"cannot release {row['state']} entitlement")
+            cursor = connection.execute(
+                "UPDATE execution_entitlements SET state = 'released', version = version + 1 "
+                "WHERE entitlement_id = ? AND state = 'active' AND version = ?",
+                (entitlement_id, expected_version),
+            )
+            if cursor.rowcount != 1:
+                raise ConfigurationError("execution entitlement compare-and-set failed")
+
     def create_execution_attempt(self, attempt: ExecutionAttempt) -> ExecutionAttempt:
         payload = attempt.model_dump_json()
         with self._immediate_transaction() as connection:

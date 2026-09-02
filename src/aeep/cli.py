@@ -71,6 +71,7 @@ offer_app = typer.Typer(help="Inspect and import signed capability offers.")
 economic_app = typer.Typer(help="Prepare routes and inspect economic evidence.")
 settlement_app = typer.Typer(help="Inspect and reconcile settlement evidence.")
 market_app = typer.Typer(help="Run the local reference economic market.")
+x402_app = typer.Typer(help="Run optional offline x402 capacity conformance.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
@@ -87,6 +88,7 @@ app.add_typer(offer_app, name="offer")
 app.add_typer(economic_app, name="economic")
 app.add_typer(settlement_app, name="settlement")
 app.add_typer(market_app, name="market")
+app.add_typer(x402_app, name="x402")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -3120,6 +3122,38 @@ def provider_conformance(
         raise
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
+
+
+@x402_app.command("conformance")
+def x402_conformance(
+    binding: str = typer.Option("aeep-local", "--binding"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Run the credential-free local capacity-binding campaign."""
+
+    from .x402 import run_local_conformance
+
+    try:
+        report = run_local_conformance(binding=binding)
+        if json_output:
+            _emit(report)
+        else:
+            _economic_emit(
+                report,
+                json_output=False,
+                title="AEEP x402 local conformance",
+                fields=[
+                    ("binding", report.binding),
+                    ("passed", report.passed),
+                    ("network", "disabled"),
+                ],
+            )
+        if not report.passed:
+            raise typer.Exit(code=2)
+    except typer.Exit:
+        raise
+    except (AEEPError, ValueError) as exc:
+        _fail(exc)
 
 
 @candidate_app.command("status")

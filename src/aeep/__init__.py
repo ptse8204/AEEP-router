@@ -209,6 +209,18 @@ from .sdk import (
 )
 from .version import __version__
 from .workflow import WorkflowExecutionOutcome, WorkflowRequest
+from .x402 import (
+    X402BatchRecord,
+    X402BatchState,
+    X402CapacityCommitment,
+    X402ConformanceCheck,
+    X402ConformanceReport,
+    accumulate,
+    canonical_commitment_bytes,
+    commit,
+    reconcile,
+    run_local_conformance,
+)
 
 __all__ = [
     "ActionApprovalRecord",
@@ -382,11 +394,18 @@ __all__ = [
     "UsageStatement",
     "WorkflowExecutionOutcome",
     "WorkflowRequest",
+    "X402BatchRecord",
+    "X402BatchState",
+    "X402CapacityCommitment",
+    "X402ConformanceCheck",
+    "X402ConformanceReport",
     "__version__",
+    "accumulate",
     "billable_amount_for_execution",
     "billable_amount_for_terms",
     "build_provider_package",
     "cache_hmac",
+    "canonical_commitment_bytes",
     "capability",
     "capacity_digest",
     "cash_accounting_for_reporting",
@@ -396,6 +415,7 @@ __all__ = [
     "cash_estimate_from_market_aggregate",
     "cash_estimate_from_offer",
     "cash_estimate_from_quote",
+    "commit",
     "economic_settlement_oracles",
     "estimate_cache_affinity",
     "evaluate_economic_proof",
@@ -410,7 +430,9 @@ __all__ = [
     "normalize_cache_usage",
     "observation_quota",
     "principal_digest",
+    "reconcile",
     "require_entitlement_authority",
     "reservation",
     "revalue_campaign",
+    "run_local_conformance",
 ]
