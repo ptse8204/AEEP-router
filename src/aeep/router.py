@@ -90,7 +90,7 @@ from .executors import (
     PythonExecutor,
 )
 from .executors.base import BaseExecutor, ExecutionContext
-from .hosts import ManagedHostAdapter, ManagedHostRegistry
+from .hosts import CodexAppServerAdapter, ManagedHostAdapter, ManagedHostRegistry
 from .models import (
     ActionApprovalRecord,
     ActionConstraints,
@@ -436,9 +436,31 @@ class Router:
         )
         self._executors: dict[ExecutorKind, BaseExecutor] = dict(executor_overrides or {})
         self.managed_hosts = ManagedHostRegistry()
-        for adapter_id in sorted(managed_host_adapters or {}):
-            self.managed_hosts.register(adapter_id, (managed_host_adapters or {})[adapter_id])
-        if ExecutorKind.MANAGED_HOST in self._executors and managed_host_adapters:
+        configured_hosts = dict(managed_host_adapters or {})
+        codex_specs = [
+            spec
+            for spec in normalized.executors
+            if spec.kind is ExecutorKind.MANAGED_HOST
+            and spec.managed_host_config().adapter_id == CodexAppServerAdapter.adapter_id
+        ]
+        if codex_specs and CodexAppServerAdapter.adapter_id not in configured_hosts:
+            bindings = {
+                (spec.resource_pool, spec.managed_host_config().argv) for spec in codex_specs
+            }
+            if len(bindings) != 1:
+                raise ConfigurationError(
+                    "Codex App Server routes must share one argv and resource binding"
+                )
+            configured_hosts[CodexAppServerAdapter.adapter_id] = (
+                CodexAppServerAdapter.from_executor(
+                    codex_specs[0],
+                    principal_salt=secrets.token_bytes(32),
+                    manifest_directory=(self.manifest_path.parent if self.manifest_path else None),
+                )
+            )
+        for adapter_id in sorted(configured_hosts):
+            self.managed_hosts.register(adapter_id, configured_hosts[adapter_id])
+        if ExecutorKind.MANAGED_HOST in self._executors and configured_hosts:
             raise ConfigurationError(
                 "managed-host executor override cannot be combined with adapter registrations"
             )

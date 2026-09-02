@@ -15,7 +15,7 @@ from typing import Any, TypeAlias
 
 from ..capacity import CapacityObservation, principal_digest
 from ..errors import ConfigurationError
-from ..models import ExecutionStatus, RawExecution, SideEffect
+from ..models import ExecutionStatus, ExecutorKind, ExecutorSpec, RawExecution, SideEffect
 from .base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
 from .codex_accounting import rate_limit_observation, turn_accounting
 from .codex_models import (
@@ -373,6 +373,36 @@ class CodexAppServerAdapter:
         self._probe: HostProbe | None = None
         self._attempts: dict[str, tuple[str, str]] = {}
         self._execute_lock = asyncio.Lock()
+
+    @classmethod
+    def from_executor(
+        cls,
+        spec: ExecutorSpec,
+        *,
+        principal_salt: bytes,
+        manifest_directory: Path | None = None,
+    ) -> CodexAppServerAdapter:
+        if spec.kind is not ExecutorKind.MANAGED_HOST or spec.resource_pool is None:
+            raise ConfigurationError("Codex adapter requires a managed-host resource route")
+        config = spec.managed_host_config()
+        if config.adapter_id != cls.adapter_id:
+            raise ConfigurationError("managed-host route does not select Codex App Server")
+        cwd = (
+            config.working_directory
+            if config.working_directory_policy == "fixed"
+            else str(manifest_directory)
+            if config.working_directory_policy == "manifest" and manifest_directory is not None
+            else None
+        )
+        return cls(
+            argv=config.argv,
+            resource_id=spec.resource_pool,
+            principal_salt=principal_salt,
+            environment_allowlist=config.environment_allowlist,
+            cwd=cwd,
+            max_message_bytes=config.max_message_bytes,
+            request_timeout=min(30, config.timeout_seconds),
+        )
 
     async def account(self) -> CodexAccountObservation:
         payload = await self.transport.request("account/read", {"refreshToken": False})

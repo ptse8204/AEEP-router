@@ -68,6 +68,22 @@ A model cannot elevate that ceiling through tool arguments.
 
 ## ChatGPT desktop and Codex
 
+For a reviewed `host_managed` route, start from
+`examples/subscriptions/openai-codex-app-server.yaml`, replace the absolute Codex
+executable path, and use the operator diagnostics before routing:
+
+```bash
+aeep hosts codex doctor --manifest aeep.yaml --json
+aeep hosts codex account --manifest aeep.yaml --json
+aeep hosts codex models --manifest aeep.yaml --json
+aeep hosts codex quota --manifest aeep.yaml --json
+```
+
+These diagnostics perform no model turn. `aeep hosts codex login` is the sole
+interactive login entry point and is intentionally not a model tool. Codex owns
+the authentication state; AEEP receives only redacted account observations and
+does not read Codex credential files.
+
 Current Codex hosts support local stdio and remote Streamable HTTP MCP servers. Add the local server from the UI, or use the CLI:
 
 ```bash

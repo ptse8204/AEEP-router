@@ -72,6 +72,9 @@ economic_app = typer.Typer(help="Prepare routes and inspect economic evidence.")
 settlement_app = typer.Typer(help="Inspect and reconcile settlement evidence.")
 market_app = typer.Typer(help="Run the local reference economic market.")
 x402_app = typer.Typer(help="Run optional offline x402 capacity conformance.")
+hosts_app = typer.Typer(help="Inspect locally configured managed hosts.")
+codex_host_app = typer.Typer(help="Inspect the official local Codex App Server.")
+capacity_app = typer.Typer(help="Inspect provider-neutral capacity state.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
@@ -89,6 +92,9 @@ app.add_typer(economic_app, name="economic")
 app.add_typer(settlement_app, name="settlement")
 app.add_typer(market_app, name="market")
 app.add_typer(x402_app, name="x402")
+app.add_typer(hosts_app, name="hosts")
+hosts_app.add_typer(codex_host_app, name="codex")
+app.add_typer(capacity_app, name="capacity")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -344,6 +350,29 @@ async def _await_and_close(router: Router, awaitable: Any) -> Any:
 
     try:
         return await awaitable
+    finally:
+        await router.close()
+
+
+async def _codex_operator_call(manifest: Path | None, operation: str) -> Any:
+    from .hosts import CodexAppServerAdapter
+
+    router = Router.from_manifest(manifest)
+    try:
+        adapter = router.managed_hosts.get(CodexAppServerAdapter.adapter_id)
+        if not isinstance(adapter, CodexAppServerAdapter):
+            raise ConfigurationError("manifest has no Codex App Server managed-host route")
+        if operation == "doctor":
+            return await adapter.probe()
+        if operation == "account":
+            return await adapter.account()
+        if operation == "models":
+            return await adapter.list_models()
+        if operation == "quota":
+            return await adapter.snapshot_capacity()
+        if operation == "login":
+            return await adapter.login()
+        raise ConfigurationError("unknown Codex operator operation")
     finally:
         await router.close()
 
@@ -3154,6 +3183,176 @@ def x402_conformance(
         raise
     except (AEEPError, ValueError) as exc:
         _fail(exc)
+
+
+def _codex_result(
+    operation: str,
+    *,
+    manifest: Path | None,
+    json_output: bool,
+) -> None:
+    try:
+        value = _run(_codex_operator_call(manifest, operation))
+        payload = (
+            [item.model_dump(mode="json") for item in value]
+            if isinstance(value, list)
+            else value.model_dump(mode="json")
+            if hasattr(value, "model_dump")
+            else value
+        )
+        if json_output:
+            _emit(payload)
+        else:
+            typer.echo(f"Codex {operation}: {json.dumps(payload, default=str)}")
+    except (AEEPError, OSError, TimeoutError, ValueError) as exc:
+        _fail(exc)
+
+
+@codex_host_app.command("doctor")
+def codex_doctor(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Probe App Server features without starting a model turn."""
+
+    _codex_result("doctor", manifest=manifest, json_output=json_output)
+
+
+@codex_host_app.command("account")
+def codex_account(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show only a redacted account observation."""
+
+    _codex_result("account", manifest=manifest, json_output=json_output)
+
+
+@codex_host_app.command("models")
+def codex_models(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List runtime-discovered host models."""
+
+    _codex_result("models", manifest=manifest, json_output=json_output)
+
+
+@codex_host_app.command("quota")
+def codex_quota(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show all observed App Server rate-limit windows."""
+
+    _codex_result("quota", manifest=manifest, json_output=json_output)
+
+
+@codex_host_app.command("login")
+def codex_login(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+) -> None:
+    """Start the official operator-interactive ChatGPT login flow."""
+
+    try:
+        response = _run(_codex_operator_call(manifest, "login"))
+        auth_url = response.get("authUrl") if isinstance(response, dict) else None
+        typer.echo("Codex login started.")
+        if isinstance(auth_url, str) and auth_url.startswith("https://"):
+            typer.echo(f"Open in your browser: {auth_url}")
+    except (AEEPError, OSError, TimeoutError, ValueError) as exc:
+        _fail(exc)
+
+
+def _capacity_rows(router: Router) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for resource_id in sorted(router.resources):
+        resource = router.resources[resource_id]
+        observation = router.store.latest_capacity_observation(resource_id)
+        rows.append(
+            {
+                "resource": resource.model_dump(mode="json"),
+                "latest_observation": (
+                    observation.model_dump(mode="json") if observation is not None else None
+                ),
+            }
+        )
+    return rows
+
+
+@capacity_app.command("list")
+def capacity_list(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List configured capacity resources and latest observations."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        rows = _capacity_rows(router)
+        if json_output:
+            _emit({"resources": rows})
+        else:
+            typer.echo("\n".join(row["resource"]["id"] for row in rows) or "No resources.")
+    except (AEEPError, OSError, ValueError) as exc:
+        _fail(exc)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@capacity_app.command("status")
+def capacity_status(
+    resource_id: str,
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Show one configured capacity resource."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        row = next(
+            (item for item in _capacity_rows(router) if item["resource"]["id"] == resource_id),
+            None,
+        )
+        if row is None:
+            raise ConfigurationError(f"unknown capacity resource {resource_id!r}")
+        if json_output:
+            _emit(row)
+        else:
+            typer.echo(json.dumps(row, default=str))
+    except (AEEPError, OSError, ValueError) as exc:
+        _fail(exc)
+    finally:
+        if router is not None:
+            _run(router.close())
+
+
+@capacity_app.command("reservations")
+def capacity_reservations(
+    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """List durable capacity reservations without action payloads."""
+
+    router: Router | None = None
+    try:
+        router = Router.from_manifest(manifest)
+        reservations = [
+            item.model_dump(mode="json")
+            for item in router.store.list_capacity_reservations()
+        ]
+        if json_output:
+            _emit({"reservations": reservations})
+        else:
+            typer.echo(f"Capacity reservations: {len(reservations)}")
+    except (AEEPError, OSError, ValueError) as exc:
+        _fail(exc)
+    finally:
+        if router is not None:
+            _run(router.close())
 
 
 @candidate_app.command("status")

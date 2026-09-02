@@ -13,7 +13,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 6. Durable attempts | COMPLETE | Unified attempts and SQLite schema 7 verified. |
 | 7. Tool Search proofs | COMPLETE | Four host-native routing campaigns verified. |
 | 8. x402 contracts | COMPLETE | Offline local batch binding verified. |
-| 9. Operator CLI | NOT_STARTED | Add host/capacity/x402 commands. |
+| 9. Operator CLI | COMPLETE | Host, capacity, and x402 operator commands verified. |
 | 10. Completion verifier | NOT_STARTED | Add digest-bound verification. |
 | 11. Security closure | NOT_STARTED | Update threats and negative tests. |
 | 12. Release-candidate pass | NOT_STARTED | Run the full release matrix. |
@@ -38,6 +38,8 @@ Phase 6: ordinary, managed-host, and prepared execution now share a durable comp
 Phase 7: exact local bypass, managed single-turn, native Tool Search coexistence, and the extra-round meta-router negative control are captured in a typed, schema-checked proof report. Eighteen focused proof, Codex-adapter, and managed-host tests passed; Ruff, mypy, compile, and generated schemas passed.
 
 Phase 8: added an optional `aeep-local` x402 v2 batch binding over the existing capacity entitlement ledger. The credential-free campaign proves canonical commitment, authority/action/beneficiary/maximum binding, replay, expiry, partial release, double-redemption rejection, SELF_ONLY rejection, and overclaim dispute with live networking disabled. Nineteen focused capacity, x402, and CLI tests passed; Ruff, mypy, compile, and generated schemas passed.
+
+Phase 9: added non-billable Codex doctor/account/models/quota diagnostics, an explicit operator-only login command, capacity list/status/reservations commands, and automatic construction of the official adapter from reviewed local managed-host configuration. The OpenAI example is runtime-discovered and SELF_ONLY. Twenty-eight focused CLI, adapter, managed-host, and x402 tests passed; Ruff, mypy, compile, example parsing, and generated schemas passed.
 
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`, `reports/v07/host-native-routing.json`, `reports/v07/x402-conformance.json`.
 
