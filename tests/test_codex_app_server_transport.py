@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from aeep.errors import ConfigurationError
 from aeep.hosts import CodexAppServerTransport, CodexProtocolError
 
 FAKE = Path(__file__).parent / "fixtures" / "fake_codex_app_server.py"
@@ -25,6 +26,13 @@ async def test_transport_handshake_requests_and_clean_shutdown():
     assert process is not None and process.returncode is None
     await transport.close()
     assert process.returncode == 0
+
+
+def test_executable_path_and_optional_digest_are_validated(tmp_path):
+    with pytest.raises(ConfigurationError, match="executable file"):
+        CodexAppServerTransport((str(tmp_path / "missing"),))
+    with pytest.raises(ConfigurationError, match="digest mismatch"):
+        CodexAppServerTransport(argv(), executable_sha256=f"sha256:{'0' * 64}")
 
 
 @pytest.mark.asyncio

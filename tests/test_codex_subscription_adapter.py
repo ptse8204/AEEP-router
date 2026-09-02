@@ -29,7 +29,10 @@ def argv(scenario: str = "success") -> tuple[str, ...]:
 
 
 def adapter(
-    scenario: str = "success", *, approval_handler: Any = None
+    scenario: str = "success",
+    *,
+    approval_handler: Any = None,
+    environment_allowlist: tuple[str, ...] = (),
 ) -> CodexAppServerAdapter:
     return CodexAppServerAdapter(
         argv=argv(scenario),
@@ -38,6 +41,7 @@ def adapter(
         max_message_bytes=1024,
         request_timeout=2,
         approval_handler=approval_handler,
+        environment_allowlist=environment_allowlist,
     )
 
 
@@ -98,6 +102,31 @@ async def test_adapter_never_reads_codex_auth_files(monkeypatch):
     try:
         account = await host.account()
         assert account.authenticated
+    finally:
+        await host.close()
+
+
+@pytest.mark.asyncio
+async def test_environment_is_exactly_allowlisted(monkeypatch):
+    monkeypatch.setenv("AEEP_ALLOWED", "visible")
+    monkeypatch.setenv("AEEP_BLOCKED", "must-not-cross")
+    host = adapter("environment", environment_allowlist=("AEEP_ALLOWED",))
+    try:
+        account = await host.account()
+        assert account.plan_type == "allowed=visible;blocked=False"
+    finally:
+        await host.close()
+
+
+@pytest.mark.asyncio
+async def test_account_switch_invalidates_cached_probe_and_hmac_identity():
+    host = adapter("account-switch")
+    try:
+        assert (await host.probe()).status is HostProbeStatus.READY
+        first = host._account
+        second = await host.account()
+        assert first is not None and first.principal_digest != second.principal_digest
+        assert host._probe is None
     finally:
         await host.close()
 
@@ -205,6 +234,16 @@ async def test_approval_requires_both_host_decision_and_aeep_ceiling():
     finally:
         await read_host.close()
         await write_host.close()
+
+
+@pytest.mark.asyncio
+async def test_approval_request_replay_fails_closed():
+    host = adapter("approval-replay", approval_handler=lambda *_args: True)
+    try:
+        raw = await host.execute(context("approval-replay"))
+        assert raw.status is not ExecutionStatus.SUCCESS
+    finally:
+        await host.close()
 
 
 @pytest.mark.asyncio

@@ -1,8 +1,8 @@
 {
   "schema": "aeep-router-completion-v1",
   "version": "0.7.0",
-  "revision": "8ddc4e1c1e2521f79580c3271b80e4a14e397b5a",
-  "generated_at": "2026-09-02T12:14:25.334939Z",
+  "revision": "2e85075fb5a77afca464b6ff99f3b1794c900fd0",
+  "generated_at": "2026-09-02T12:23:42.833048Z",
   "profiles": {
     "core": "PASS",
     "openai": "PASS",
@@ -203,12 +203,44 @@
       "reason": ""
     },
     {
+      "id": "managed-prompt-output-privacy",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_security.py::test_default_database_omits_managed_prompt_and_output"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_security.py"
+      ],
+      "artifact_digests": [
+        "sha256:bd33cb6820eb67bb3530758bfd67dac04243d03e91f78e9398633e298af2384c"
+      ],
+      "reason": ""
+    },
+    {
       "id": "old-manifest-database-compatibility",
       "profile": "core",
       "required": true,
       "status": "PASS",
       "test_ids": [
         "tests/test_v04_store_migrations.py::test_unversioned_legacy_database_migrates_without_data_loss"
+      ],
+      "evidence_ids": [
+        "tests/test_v04_store_migrations.py"
+      ],
+      "artifact_digests": [
+        "sha256:16e33fe0ace6525814508e3416c03d973bf1082949380d8877970bdaf4ca62e2"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "database-migration-rollback",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v04_store_migrations.py::test_failed_migration_rolls_back_as_one_transaction"
       ],
       "evidence_ids": [
         "tests/test_v04_store_migrations.py"
@@ -231,6 +263,38 @@
       ],
       "artifact_digests": [
         "sha256:e0416f275f72c8a9688cff9754ecc8c30082bceb04e4499365961aa28347878a"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "offline-verifier-network-guard",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_security.py::test_verifier_subprocess_enables_offline_guard"
+      ],
+      "evidence_ids": [
+        "tests/conftest.py"
+      ],
+      "artifact_digests": [
+        "sha256:e162877f5d0feac7c47631252040e115f2ab577ae8b1572b856c5b96086eec95"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "committed-secret-scan",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_security.py::test_committed_fixture_reports_contain_no_secret_patterns"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_security.py"
+      ],
+      "artifact_digests": [
+        "sha256:bd33cb6820eb67bb3530758bfd67dac04243d03e91f78e9398633e298af2384c"
       ],
       "reason": ""
     },
@@ -262,7 +326,23 @@
         "tests/fixtures/fake_codex_app_server.py"
       ],
       "artifact_digests": [
-        "sha256:0be762839e207e1a031b2a0bdcb6b7d0afe926f651ffbb82eca7eabb214eeeff"
+        "sha256:b9ffbef17ef9c66bfb5b7d0fadf93a708f83b050c502b1f2b078b4d3fe708a99"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "app-server-executable-identity",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_app_server_transport.py::test_executable_path_and_optional_digest_are_validated"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_app_server_transport.py"
+      ],
+      "artifact_digests": [
+        "sha256:3c3ce4edbca0b0fa4af8ee9a51293411ba05070926235c2694f489d1f758d1c0"
       ],
       "reason": ""
     },
@@ -278,7 +358,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -294,7 +374,39 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "account-switch-hmac-invalidation",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_account_switch_invalidates_cached_probe_and_hmac_identity"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "bounded-environment-allowlist",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_environment_is_exactly_allowlisted"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -326,7 +438,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -342,7 +454,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -358,7 +470,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -374,7 +486,23 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "approval-replay",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_approval_request_replay_fails_closed"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -390,7 +518,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -406,7 +534,7 @@
         "tests/test_codex_subscription_adapter.py"
       ],
       "artifact_digests": [
-        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+        "sha256:7ad30bbb58507bcf6e91996699100eba7fd33cd499b93bbb7d0d649b71aa1817"
       ],
       "reason": ""
     },
@@ -422,7 +550,7 @@
         "tests/fixtures/fake_codex_app_server.py"
       ],
       "artifact_digests": [
-        "sha256:0be762839e207e1a031b2a0bdcb6b7d0afe926f651ffbb82eca7eabb214eeeff"
+        "sha256:b9ffbef17ef9c66bfb5b7d0fadf93a708f83b050c502b1f2b078b4d3fe708a99"
       ],
       "reason": ""
     },

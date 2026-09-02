@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import socket
 from typing import Any
 
 import pytest
@@ -13,6 +15,18 @@ from aeep.models import (
     RouteEstimate,
     SideEffect,
 )
+
+
+@pytest.fixture(autouse=True)
+def block_network_during_completion_verification(monkeypatch):
+    if os.getenv("AEEP_VERIFY_OFFLINE") != "1":
+        return
+
+    def denied(*_args: object, **_kwargs: object):
+        raise AssertionError("completion verification attempted a network connection")
+
+    monkeypatch.setattr(socket, "create_connection", denied)
+    monkeypatch.setattr(socket.socket, "connect", denied)
 
 
 @pytest.fixture

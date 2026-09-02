@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import os
 import sys
 import time
 from typing import Any
@@ -19,10 +20,15 @@ def response(request: dict[str, Any], result: dict[str, Any]) -> None:
     send({"id": request["id"], "result": result})
 
 
-def account(authenticated: bool) -> dict[str, Any]:
+def account(
+    authenticated: bool,
+    *,
+    principal: str = "fixture-principal",
+    plan_type: str = "unknown",
+) -> dict[str, Any]:
     return {
         "account": (
-            {"type": "chatgpt", "email": "fixture-principal", "planType": "unknown"}
+            {"type": "chatgpt", "email": principal, "planType": plan_type}
             if authenticated
             else None
         ),
@@ -171,7 +177,12 @@ def turn_started(request: dict[str, Any], scenario: str) -> None:
     if scenario == "failure":
         terminal("failed")
         return
-    if scenario in {"approval-read", "approval-write", "unknown-request"}:
+    if scenario in {
+        "approval-read",
+        "approval-write",
+        "approval-replay",
+        "unknown-request",
+    }:
         method = (
             "item/fileChange/requestApproval"
             if scenario == "approval-write"
@@ -192,6 +203,8 @@ def turn_started(request: dict[str, Any], scenario: str) -> None:
         send({"id": "fixture-approval", "method": method, "params": params})
         reply = json.loads(sys.stdin.readline())
         accepted = reply.get("result", {}).get("decision") == "accept"
+        if scenario == "approval-replay":
+            send({"id": "fixture-approval", "method": method, "params": params})
         if scenario == "unknown-request":
             accepted = "error" in reply
         terminal("completed" if accepted else "failed")
@@ -206,6 +219,7 @@ def main() -> None:
     parser.add_argument("--scenario", default="success")
     scenario = parser.parse_args().scenario
     authenticated = scenario != "unauthenticated"
+    account_reads = 0
     for line in sys.stdin:
         request = json.loads(line)
         method = request.get("method")
@@ -222,7 +236,22 @@ def main() -> None:
                 },
             )
         elif method == "account/read":
-            response(request, account(authenticated))
+            account_reads += 1
+            principal = (
+                f"fixture-principal-{account_reads}"
+                if scenario == "account-switch"
+                else "fixture-principal"
+            )
+            plan_type = (
+                f"allowed={os.getenv('AEEP_ALLOWED', '')};"
+                f"blocked={bool(os.getenv('AEEP_BLOCKED'))}"
+                if scenario == "environment"
+                else "unknown"
+            )
+            response(
+                request,
+                account(authenticated, principal=principal, plan_type=plan_type),
+            )
             if scenario == "duplicate-response":
                 response(request, account(authenticated))
         elif method == "account/rateLimits/read":

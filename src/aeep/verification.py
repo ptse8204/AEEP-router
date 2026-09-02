@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -99,17 +100,25 @@ _CHECKS = (
     _CheckSpec("crash-recovery-no-blind-duplicate", "core", "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate", "tests/test_v07_execution_attempts.py"),
     _CheckSpec("receipt-accounting-integrity", "core", "tests/test_v04_accounting.py::test_subscription_usage_stays_separate_from_cash", "tests/test_v04_accounting.py"),
     _CheckSpec("privacy-defaults", "core", "tests/test_router_execution.py::test_persisted_decision_redacts_sensitive_input_and_context", "tests/test_router_execution.py"),
+    _CheckSpec("managed-prompt-output-privacy", "core", "tests/test_v07_security.py::test_default_database_omits_managed_prompt_and_output", "tests/test_v07_security.py"),
     _CheckSpec("old-manifest-database-compatibility", "core", "tests/test_v04_store_migrations.py::test_unversioned_legacy_database_migrates_without_data_loss", "tests/test_v04_store_migrations.py"),
+    _CheckSpec("database-migration-rollback", "core", "tests/test_v04_store_migrations.py::test_failed_migration_rolls_back_as_one_transaction", "tests/test_v04_store_migrations.py"),
     _CheckSpec("offline-operation", "core", "tests/test_v07_host_native_routing.py::test_exact_local_bypass_makes_no_model_call", "tests/test_v07_host_native_routing.py"),
+    _CheckSpec("offline-verifier-network-guard", "core", "tests/test_v07_security.py::test_verifier_subprocess_enables_offline_guard", "tests/conftest.py"),
+    _CheckSpec("committed-secret-scan", "core", "tests/test_v07_security.py::test_committed_fixture_reports_contain_no_secret_patterns", "tests/test_v07_security.py"),
     _CheckSpec("generated-schema-consistency", "core", "tests/test_generated_artifacts.py::test_checked_in_schemas_are_current", "tests/test_generated_artifacts.py"),
     _CheckSpec("app-server-handshake-features", "openai", "tests/test_codex_app_server_transport.py::test_transport_handshake_requests_and_clean_shutdown", "tests/fixtures/fake_codex_app_server.py"),
+    _CheckSpec("app-server-executable-identity", "openai", "tests/test_codex_app_server_transport.py::test_executable_path_and_optional_digest_are_validated", "tests/test_codex_app_server_transport.py"),
     _CheckSpec("codex-auth-boundary", "openai", "tests/test_codex_subscription_adapter.py::test_auth_required_is_explicit_and_does_not_fallback", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("account-identity-redaction", "openai", "tests/test_codex_subscription_adapter.py::test_runtime_models_and_multi_window_quota_are_preserved", "tests/test_codex_subscription_adapter.py"),
+    _CheckSpec("account-switch-hmac-invalidation", "openai", "tests/test_codex_subscription_adapter.py::test_account_switch_invalidates_cached_probe_and_hmac_identity", "tests/test_codex_subscription_adapter.py"),
+    _CheckSpec("bounded-environment-allowlist", "openai", "tests/test_codex_subscription_adapter.py::test_environment_is_exactly_allowlisted", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("runtime-model-discovery", "openai", "tests/test_v07_operator_cli.py::test_codex_operator_commands_use_fake_without_model_turn", "tests/test_v07_operator_cli.py"),
     _CheckSpec("multi-window-quota", "openai", "tests/test_codex_subscription_adapter.py::test_runtime_models_and_multi_window_quota_are_preserved", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("per-turn-token-accounting", "openai", "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("model-reroute-recording", "openai", "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("approval-intersection", "openai", "tests/test_codex_subscription_adapter.py::test_approval_requires_both_host_decision_and_aeep_ceiling", "tests/test_codex_subscription_adapter.py"),
+    _CheckSpec("approval-replay", "openai", "tests/test_codex_subscription_adapter.py::test_approval_request_replay_fails_closed", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("one-turn-managed-execution", "openai", "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("no-credential-file-reads", "openai", "tests/test_codex_subscription_adapter.py::test_adapter_never_reads_codex_auth_files", "tests/test_codex_subscription_adapter.py"),
     _CheckSpec("fake-server-conformance", "openai", "tests/test_codex_app_server_transport.py::test_transport_fails_closed_on_invalid_frames", "tests/fixtures/fake_codex_app_server.py"),
@@ -148,6 +157,7 @@ def _pytest(root: Path, node_ids: list[str]) -> tuple[bool, str]:
         capture_output=True,
         text=True,
         timeout=300,
+        env={**os.environ, "AEEP_VERIFY_OFFLINE": "1"},
     )
     output = (result.stdout + result.stderr).strip()
     return result.returncode == 0, output[-2000:]

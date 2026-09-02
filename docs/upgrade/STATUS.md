@@ -15,7 +15,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 8. x402 contracts | COMPLETE | Offline local batch binding verified. |
 | 9. Operator CLI | COMPLETE | Host, capacity, and x402 operator commands verified. |
 | 10. Completion verifier | COMPLETE | Digest-bound executable verifier returns release-ready. |
-| 11. Security closure | NOT_STARTED | Update threats and negative tests. |
+| 11. Security closure | COMPLETE | Managed-host and entitlement threats mapped to tests. |
 | 12. Release-candidate pass | NOT_STARTED | Run the full release matrix. |
 | 13. Documentation | NOT_STARTED | Update public docs and final review. |
 
@@ -42,6 +42,8 @@ Phase 8: added an optional `aeep-local` x402 v2 batch binding over the existing 
 Phase 9: added non-billable Codex doctor/account/models/quota diagnostics, an explicit operator-only login command, capacity list/status/reservations commands, and automatic construction of the official adapter from reviewed local managed-host configuration. The OpenAI example is runtime-discovered and SELF_ONLY. Twenty-eight focused CLI, adapter, managed-host, and x402 tests passed; Ruff, mypy, compile, example parsing, and generated schemas passed.
 
 Phase 10: `aeep verify router-complete --profile all --strict --json` now executes the required pytest nodes, verifies their locked SHA-256 evidence artifacts, and derives readiness. The report contains 34 PASS checks, one allowed live-account SKIP, and one DISABLED live-marketplace check; all three offline profiles PASS and `release_ready` is true. Tamper detection and deterministic tie-breaking tests pass; Ruff, mypy, compile, and generated schemas pass.
+
+Phase 11: closed the managed-host, principal, executable, environment, protocol, approval, quota, capacity, entitlement, x402, crash, package-authority, migration, secret, persistence, and verifier-egress threat matrix. Optional executable SHA-256 pinning and an offline verifier subprocess guard were added. Twenty-nine focused security/transport/adapter/quota/migration tests passed; the strict completion report now has 42 PASS checks, one allowed SKIP, and one DISABLED check with `release_ready` true.
 
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`, `reports/v07/host-native-routing.json`, `reports/v07/x402-conformance.json`, `reports/v07/verification-lock.json`, `reports/v07/router-complete.json`, `reports/v07/router-complete.md`.
 

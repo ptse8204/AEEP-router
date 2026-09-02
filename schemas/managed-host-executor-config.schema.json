@@ -57,6 +57,19 @@
       "title": "Argv",
       "type": "array"
     },
+    "executable_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executable Sha256"
+    },
     "instructions": {
       "maxLength": 100000,
       "minLength": 1,

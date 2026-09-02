@@ -59,6 +59,7 @@ class CodexAppServerTransport:
         max_message_bytes: int = 1_048_576,
         max_stderr_bytes: int = 65_536,
         request_timeout: float = 30,
+        executable_sha256: str | None = None,
     ) -> None:
         if not argv or not Path(argv[0]).is_absolute():
             raise ConfigurationError("Codex App Server executable must be an absolute argv path")
@@ -70,6 +71,26 @@ class CodexAppServerTransport:
         self.max_message_bytes = max_message_bytes
         self.max_stderr_bytes = max_stderr_bytes
         self.request_timeout = request_timeout
+        if executable_sha256 is not None and (
+            len(executable_sha256) != 71
+            or not executable_sha256.startswith("sha256:")
+            or any(
+                character not in "0123456789abcdef"
+                for character in executable_sha256[7:]
+            )
+        ):
+            raise ConfigurationError("Codex executable digest must be sha256 lowercase hex")
+        self.executable_sha256 = executable_sha256
+        executable = Path(self.argv[0])
+        if not executable.is_file() or not os.access(executable, os.X_OK):
+            raise ConfigurationError("Codex App Server executable is not an executable file")
+        if self.executable_sha256 is not None:
+            digest = hashlib.sha256()
+            with executable.open("rb") as stream:
+                while chunk := stream.read(1_048_576):
+                    digest.update(chunk)
+            if f"sha256:{digest.hexdigest()}" != self.executable_sha256:
+                raise ConfigurationError("Codex App Server executable digest mismatch")
         self._process: asyncio.subprocess.Process | None = None
         self._pending: dict[int, asyncio.Future[JsonObject]] = {}
         self._response_ids: set[int] = set()
@@ -355,6 +376,7 @@ class CodexAppServerAdapter:
         cwd: str | None = None,
         max_message_bytes: int = 1_048_576,
         request_timeout: float = 30,
+        executable_sha256: str | None = None,
         approval_handler: ApprovalHandler | None = None,
     ) -> None:
         if not principal_salt:
@@ -368,6 +390,7 @@ class CodexAppServerAdapter:
             cwd=cwd,
             max_message_bytes=max_message_bytes,
             request_timeout=request_timeout,
+            executable_sha256=executable_sha256,
         )
         self._account: CodexAccountObservation | None = None
         self._probe: HostProbe | None = None
@@ -402,6 +425,7 @@ class CodexAppServerAdapter:
             cwd=cwd,
             max_message_bytes=config.max_message_bytes,
             request_timeout=min(30, config.timeout_seconds),
+            executable_sha256=config.executable_sha256,
         )
 
     async def account(self) -> CodexAccountObservation:

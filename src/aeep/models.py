@@ -2283,6 +2283,9 @@ class ManagedHostModelConstraints(StrictModel):
 class ManagedHostExecutorConfig(StrictModel):
     adapter_id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
     argv: tuple[str, ...] = Field(min_length=1)
+    executable_sha256: str | None = Field(
+        default=None, pattern=r"^sha256:[a-f0-9]{64}$"
+    )
     instructions: str = Field(min_length=1, max_length=100_000)
     model_constraints: ManagedHostModelConstraints = Field(
         default_factory=ManagedHostModelConstraints
