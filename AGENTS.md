@@ -32,5 +32,9 @@ coverage report -m
 - External outcome reports apply only to the selected delegate, are terminal, and are stored once atomically.
 - Resource measurements must be finite and non-negative.
 - Tool behavior is shared across MCP, CLI, and provider-schema exports.
+- Legacy `host` remains delegated; direct host execution uses a separately configured managed-host adapter.
+- Subscription capacity defaults to `SELF_ONLY`; unknown capacity never authorizes transfer.
+- Codex owns authentication; never read, copy, log, return, or persist Codex authentication state.
+- x402 compatibility is offline and disabled by default; it never qualifies or activates a route.
 
 Read `SPEC.md`, `ARCHITECTURE.md`, and `SECURITY.md` before changing protocol or executor behavior.

@@ -103,6 +103,18 @@ data and should be filtered at the telemetry collector.
 - Prefer explicit user/host/official signals; do not scrape undocumented billing dashboards.
 - A host selection does not grant the host new permissions. Keep its normal approval UI and sandbox enabled.
 - Authenticate host outcome reporting and accept only the selected route once.
+- Default personal subscription resources to `SELF_ONLY`; reject external
+  entitlements before serialization.
+- Keep Codex login and reusable authentication state inside Codex. Never read its
+  authentication files or copy browser cookies.
+- Intersect AEEP's operator approval ceiling with the managed host's approval;
+  rejection, expiry, or disconnection fails closed.
+
+Managed-host executables are trusted local control-plane dependencies. Pin or
+validate their configured path, pass an allowlisted environment, bound every
+protocol frame and stderr buffer, and persist invocation state before starting a
+turn. Runtime model and quota claims remain observations with provenance; an
+account/principal change invalidates cached capacity.
 
 ## Registries and imported providers
 

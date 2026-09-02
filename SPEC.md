@@ -270,9 +270,18 @@ AEEP-specific usage can be returned under `_meta["org.aeep/usage"]` as a `Resour
 
 A `SubscriptionResource` identifies a provider/product, host/CLI/MCP access mode, capabilities, and quota state. Valid quota states are `abundant`, `normal`, `tight`, `critical`, `exhausted`, and `unknown`, with confidence and source. An exhausted resource MUST be infeasible. Runtime quota data MAY override a manifest prior. Implementations MUST NOT scrape undocumented consumer billing dashboards or convert quota into cash.
 
+Legacy subscription resources default to `SELF_ONLY` transferability and
+`SUBSCRIPTION_USAGE` settlement.
+
 A `host` executor references one subscription resource. Selection returns `HOST_SELECTED`; AEEP does not call a model API. The current host performs the bounded action and reports one terminal outcome.
 
 Runtime `QuotaObservation` records override manifest priors until replaced. A terminal selected-host outcome MAY include one quota observation for its own resource.
+
+A `host_managed` executor is distinct from delegated `host`. It invokes only a
+locally configured and activated adapter after the same policy, qualification,
+approval, and validation checks as other executors. The adapter MUST discover
+available models at runtime and MUST NOT read, copy, return, or persist host
+authentication state. Imported packages cannot authorize a managed-host route.
 
 ## 20. Legacy quotes and signed receipts
 
@@ -799,3 +808,43 @@ requires a separate operator approval. These campaigns do not
 add planner semantics. Default and CI campaigns use only
 synthetic routes, identities, mail, browser/form behavior, and resume facts; no
 real submission, email send, CAPTCHA bypass, or credential is permitted.
+
+## 51. Capacity and transferability
+
+Capacity records preserve provider-local resource identifiers, units, windows,
+confidence, and evidence. Quantities MUST be finite, non-negative decimals.
+Reservations are idempotent compare-and-set records and MUST NOT exceed known
+remaining capacity. Unknown capacity cannot authorize an external entitlement.
+
+`SELF_ONLY` capacity cannot name an external beneficiary. More permissive
+transferability requires explicit provider authorization evidence. Entitlements
+bind issuer, beneficiary, backing-resource fingerprint, exact capability and
+action digest, maximum quantity, unit, expiry, nonce, and signature. Expired,
+consumed, replayed, overclaimed, or mismatched entitlements fail closed. Capacity
+and cash reservations remain separate ledgers.
+
+## 52. Managed-host execution
+
+A managed-host execution snapshots capacity before final scoring and revalidates
+it before invocation. One execution starts at most one model turn unless a
+separately qualified multi-turn protocol says otherwise. The AEEP approval
+ceiling and host approval must both permit every consequential operation.
+Prompt and output data are process-local by default; receipts retain only
+digests, operational status, observed resource use, actual model when known, and
+approval evidence.
+
+## 53. Tool Search coexistence
+
+For a preclassified exact action, AEEP MUST NOT invoke a model merely to decide
+whether to route. When model judgment is required, a host planner or native Tool
+Search supplies the bounded action and AEEP selects one implementation without a
+separate model-facing meta-router round. Compatibility MCP tools remain available
+but are not the preferred host-native path.
+
+## 54. x402 compatibility
+
+The 0.7 x402 binding is local conformance for commit, accumulate, and
+redeem/reconcile semantics. It is disabled by default and performs no live
+networking or value movement. Resource-specific capacity is not cash. A
+`SELF_ONLY` resource MUST fail before commitment serialization, and settlement
+evidence MUST NOT qualify or activate an implementation.

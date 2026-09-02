@@ -5,8 +5,8 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | Phase | State | Next executable step |
 |---|---|---|
 | 0. Baseline | COMPLETE | Baseline preserved in `reports/v07/baseline.json`. |
-| 1. Protocol boundary | IN_PROGRESS | Write ADRs and migration guide. |
-| 2. Capacity contracts | NOT_STARTED | Extend resource and accounting models. |
+| 1. Protocol boundary | COMPLETE | Decisions frozen in ADR-007 through ADR-009. |
+| 2. Capacity contracts | IN_PROGRESS | Extend resource and accounting models. |
 | 3. Managed-host seam | NOT_STARTED | Add the provider-neutral adapter boundary. |
 | 4. Codex App Server | NOT_STARTED | Implement and test the transport adapter. |
 | 5. Quota routing | NOT_STARTED | Add capacity pressure to routing. |
@@ -19,7 +19,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 12. Release-candidate pass | NOT_STARTED | Run the full release matrix. |
 | 13. Documentation | NOT_STARTED | Update public docs and final review. |
 
-Files changed: `docs/upgrade/STATUS.md`, `reports/v07/upgrade-events.jsonl`, `reports/v07/baseline.json`.
+Files changed: baseline/version files; `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `SECURITY.md`; roadmap, migration guide, and ADR-007 through ADR-009.
 
 Migrations added: none.
 
