@@ -10,6 +10,7 @@ from .accounting import (
     cash_estimate_from_quote,
 )
 from .artifact_store import ContentArtifactStore, ResolvedArtifact
+from .attempts import AttemptService, ExecutionAttempt, ExecutionAttemptState
 from .benchmarking import (
     BenchmarkCampaignReport,
     BenchmarkRevaluationReport,
@@ -214,6 +215,7 @@ __all__ = [
     "ActionRequest",
     "AgentBudget",
     "ArtifactReference",
+    "AttemptService",
     "AuthorizationKind",
     "AuthorizationMeterQuantity",
     "BenchmarkCampaignReport",
@@ -286,6 +288,8 @@ __all__ = [
     "EvidenceAttestation",
     "EvidenceReference",
     "EvidenceSubject",
+    "ExecutionAttempt",
+    "ExecutionAttemptState",
     "ExecutionEntitlement",
     "ExecutionOutcome",
     "ExecutionReceipt",

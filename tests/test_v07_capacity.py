@@ -90,8 +90,8 @@ def test_capacity_reservation_release_and_replay_are_atomic(tmp_path, quantity):
         assert store.release_capacity_reservation(
             value.reservation_id, expected_version=1, now=NOW
         ) == released
-        assert LATEST_DATABASE_SCHEMA == 6
-        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 6
+        assert LATEST_DATABASE_SCHEMA == 7
+        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 7
 
 
 def test_reservation_rejects_unknown_overdraw_and_expiry(tmp_path):

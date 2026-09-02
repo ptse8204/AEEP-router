@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from aeep.attempts import ExecutionAttempt
 from aeep.benchmarking import (
     BenchmarkCampaignReport,
     BenchmarkRevaluationReport,
@@ -162,6 +163,7 @@ MODEL_FILES = {
     "economic-trust-store-config.schema.json": EconomicTrustStoreConfig,
     "entitlement-redemption-receipt.schema.json": EntitlementRedemptionReceipt,
     "execution-receipt.schema.json": ExecutionReceipt,
+    "execution-attempt.schema.json": ExecutionAttempt,
     "execution-entitlement.schema.json": ExecutionEntitlement,
     "executor-spec.schema.json": ExecutorSpec,
     "external-outcome-report.schema.json": ExternalOutcomeReport,

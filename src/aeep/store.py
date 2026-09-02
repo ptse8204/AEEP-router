@@ -15,6 +15,7 @@ from typing import TypedDict, TypeVar
 
 from pydantic import BaseModel
 
+from .attempts import ExecutionAttempt, ExecutionAttemptState
 from .capacity.models import (
     CapacityAuthorizationEvidence,
     CapacityObservation,
@@ -81,7 +82,7 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 6
+LATEST_DATABASE_SCHEMA = 7
 
 _LEGACY_SCHEMA: tuple[str, ...] = (
     """
@@ -927,6 +928,51 @@ _V07_CAPACITY_SCHEMA: tuple[str, ...] = (
     """,
 )
 
+_V07_ATTEMPT_SCHEMA: tuple[str, ...] = (
+    """
+    CREATE TABLE IF NOT EXISTS execution_attempts (
+        attempt_id TEXT PRIMARY KEY,
+        decision_id TEXT NOT NULL,
+        prepared_id TEXT,
+        action_digest TEXT NOT NULL,
+        executor_id TEXT NOT NULL,
+        executor_fingerprint TEXT NOT NULL,
+        state TEXT NOT NULL,
+        owner_id TEXT,
+        lease_expires_at TEXT,
+        heartbeat_at TEXT,
+        version INTEGER NOT NULL,
+        updated_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_recovery
+    ON execution_attempts(state, lease_expires_at, updated_at)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_decision
+    ON execution_attempts(decision_id, updated_at DESC)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_prepared
+    ON execution_attempts(prepared_id, updated_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS execution_attempt_transitions (
+        transition_id TEXT PRIMARY KEY,
+        attempt_id TEXT NOT NULL,
+        from_state TEXT NOT NULL,
+        to_state TEXT NOT NULL,
+        version INTEGER NOT NULL,
+        occurred_at TEXT NOT NULL,
+        reason TEXT,
+        FOREIGN KEY (attempt_id) REFERENCES execution_attempts(attempt_id),
+        UNIQUE (attempt_id, version)
+    )
+    """,
+)
+
 
 def _table_columns(
     connection: sqlite3.Connection, table: str
@@ -1265,6 +1311,10 @@ class ReceiptStore:
                     for statement in _V07_CAPACITY_SCHEMA:
                         self._connection.execute(statement)
                     version = 6
+                if version < 7:
+                    for statement in _V07_ATTEMPT_SCHEMA:
+                        self._connection.execute(statement)
+                    version = 7
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -7143,6 +7193,237 @@ class ReceiptStore:
             EntitlementRedemptionReceipt.model_validate_json(row["payload_json"])
             for row in rows
         ]
+
+    def create_execution_attempt(self, attempt: ExecutionAttempt) -> ExecutionAttempt:
+        payload = attempt.model_dump_json()
+        with self._immediate_transaction() as connection:
+            existing = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt.attempt_id,),
+            ).fetchone()
+            if existing is not None:
+                stored = ExecutionAttempt.model_validate_json(existing["payload_json"])
+                immutable = (
+                    "decision_id",
+                    "prepared_id",
+                    "action_digest",
+                    "executor_id",
+                    "executor_fingerprint",
+                    "side_effect",
+                    "idempotent",
+                )
+                if any(getattr(stored, field) != getattr(attempt, field) for field in immutable):
+                    raise ConfigurationError(
+                        "execution attempt ID was reused with different authority"
+                    )
+                return stored
+            connection.execute(
+                """
+                INSERT INTO execution_attempts (
+                    attempt_id, decision_id, prepared_id, action_digest, executor_id,
+                    executor_fingerprint, state, owner_id, lease_expires_at,
+                    heartbeat_at, version, updated_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    attempt.attempt_id,
+                    attempt.decision_id,
+                    attempt.prepared_id,
+                    attempt.action_digest,
+                    attempt.executor_id,
+                    attempt.executor_fingerprint,
+                    attempt.state.value,
+                    attempt.owner_id,
+                    self._utc_text(attempt.lease_expires_at)
+                    if attempt.lease_expires_at
+                    else None,
+                    self._utc_text(attempt.heartbeat_at) if attempt.heartbeat_at else None,
+                    attempt.version,
+                    self._utc_text(attempt.updated_at),
+                    payload,
+                ),
+            )
+        return attempt
+
+    def get_execution_attempt(self, attempt_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+        return ExecutionAttempt.model_validate_json(row["payload_json"]) if row else None
+
+    def claim_execution_attempt(
+        self,
+        attempt_id: str,
+        *,
+        owner_id: str,
+        claimed_at: datetime,
+        lease_expires_at: datetime,
+    ) -> ExecutionAttempt:
+        if lease_expires_at <= claimed_at:
+            raise ConfigurationError("execution-attempt lease must expire after claim")
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution attempt does not exist")
+            current = ExecutionAttempt.model_validate_json(row["payload_json"])
+            if current.state is ExecutionAttemptState.CLAIMED and current.owner_id == owner_id:
+                return current
+            if current.state is not ExecutionAttemptState.CREATED or current.version != 0:
+                raise ConfigurationError("execution attempt is already claimed")
+            updated = ExecutionAttempt.model_validate(
+                {
+                    **current.model_dump(mode="python"),
+                    "state": ExecutionAttemptState.CLAIMED,
+                    "owner_id": owner_id,
+                    "lease_expires_at": lease_expires_at,
+                    "heartbeat_at": claimed_at,
+                    "version": 1,
+                    "updated_at": claimed_at,
+                }
+            )
+            self._save_attempt_update_locked(connection, current, updated, reason="claimed")
+        return updated
+
+    def transition_execution_attempt(
+        self,
+        attempt_id: str,
+        *,
+        expected_state: ExecutionAttemptState,
+        expected_version: int,
+        target_state: ExecutionAttemptState,
+        updated_at: datetime,
+        reason: str | None = None,
+        cash_reservation_ids: tuple[str, ...] | None = None,
+        capacity_reservation_ids: tuple[str, ...] | None = None,
+        invocation_start_digest: str | None = None,
+        external_attempt_digest: str | None = None,
+        external_thread_digest: str | None = None,
+        external_turn_digest: str | None = None,
+        terminal_receipt_ids: tuple[str, ...] | None = None,
+    ) -> ExecutionAttempt:
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution attempt does not exist")
+            current = ExecutionAttempt.model_validate_json(row["payload_json"])
+            if current.state is not expected_state or current.version != expected_version:
+                raise ConfigurationError("execution-attempt compare-and-set failed")
+            if not current.can_transition_to(target_state):
+                raise ConfigurationError(
+                    f"illegal execution-attempt transition: {current.state} -> {target_state}"
+                )
+            changes: dict[str, object] = {
+                "state": target_state,
+                "version": current.version + 1,
+                "updated_at": updated_at,
+                "heartbeat_at": updated_at,
+            }
+            optional = {
+                "cash_reservation_ids": cash_reservation_ids,
+                "capacity_reservation_ids": capacity_reservation_ids,
+                "invocation_start_digest": invocation_start_digest,
+                "external_attempt_digest": external_attempt_digest,
+                "external_thread_digest": external_thread_digest,
+                "external_turn_digest": external_turn_digest,
+                "terminal_receipt_ids": terminal_receipt_ids,
+            }
+            changes.update({key: value for key, value in optional.items() if value is not None})
+            if reason is not None:
+                changes["recovery_reason"] = reason[:2000]
+            updated = ExecutionAttempt.model_validate(
+                {**current.model_dump(mode="python"), **changes}
+            )
+            self._save_attempt_update_locked(connection, current, updated, reason=reason)
+        return updated
+
+    def _save_attempt_update_locked(
+        self,
+        connection: sqlite3.Connection,
+        current: ExecutionAttempt,
+        updated: ExecutionAttempt,
+        *,
+        reason: str | None,
+    ) -> None:
+        cursor = connection.execute(
+            """
+            UPDATE execution_attempts
+            SET state = ?, owner_id = ?, lease_expires_at = ?, heartbeat_at = ?,
+                version = ?, updated_at = ?, payload_json = ?
+            WHERE attempt_id = ? AND state = ? AND version = ?
+            """,
+            (
+                updated.state.value,
+                updated.owner_id,
+                self._utc_text(updated.lease_expires_at) if updated.lease_expires_at else None,
+                self._utc_text(updated.heartbeat_at) if updated.heartbeat_at else None,
+                updated.version,
+                self._utc_text(updated.updated_at),
+                updated.model_dump_json(),
+                current.attempt_id,
+                current.state.value,
+                current.version,
+            ),
+        )
+        if cursor.rowcount != 1:
+            raise ConfigurationError("execution-attempt compare-and-set failed")
+        connection.execute(
+            """
+            INSERT INTO execution_attempt_transitions (
+                transition_id, attempt_id, from_state, to_state, version, occurred_at, reason
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                f"{current.attempt_id}:{updated.version}",
+                current.attempt_id,
+                current.state.value,
+                updated.state.value,
+                updated.version,
+                self._utc_text(updated.updated_at),
+                reason[:2000] if reason is not None else None,
+            ),
+        )
+
+    def list_recoverable_execution_attempts(
+        self, *, now: datetime, limit: int = 100
+    ) -> list[ExecutionAttempt]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT payload_json FROM execution_attempts
+                WHERE state IN ('CLAIMED', 'RESERVED', 'INVOKING', 'VALIDATING',
+                                'SETTLING', 'INDETERMINATE')
+                  AND lease_expires_at IS NOT NULL AND lease_expires_at <= ?
+                ORDER BY updated_at, attempt_id LIMIT ?
+                """,
+                (self._utc_text(now), max(1, min(limit, 10_000))),
+            ).fetchall()
+        return [ExecutionAttempt.model_validate_json(row["payload_json"]) for row in rows]
+
+    def execution_attempt_for_decision(self, decision_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE decision_id = ? "
+                "ORDER BY updated_at DESC, rowid DESC LIMIT 1",
+                (decision_id,),
+            ).fetchall()
+        return ExecutionAttempt.model_validate_json(rows[0]["payload_json"]) if rows else None
+
+    def execution_attempt_for_prepared(self, prepared_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE prepared_id = ? "
+                "ORDER BY updated_at DESC, rowid DESC LIMIT 1",
+                (prepared_id,),
+            ).fetchall()
+        return ExecutionAttempt.model_validate_json(rows[0]["payload_json"]) if rows else None
 
     def save_receipts(self, receipts: Iterable[ExecutionReceipt]) -> None:
         for receipt in receipts:

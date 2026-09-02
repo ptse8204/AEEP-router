@@ -12,6 +12,7 @@ from .models import (
     ExecutorSpec,
     Locality,
     PolicyConfig,
+    QuotaState,
     RouteEstimate,
     ScoreBreakdown,
     SubscriptionQuota,
@@ -120,12 +121,12 @@ def _subscription_burden_components(
             reset_factor += min(1.0, seconds / current.window_duration_seconds)
         else:
             reset_factor = 1.5
-    confidence_uncertainty = (
-        1.0
-        - current.confidence
-        + (0.25 if current.remaining_units is None else 0.0)
-        + (0.25 if current.used_percent is None and current.remaining_units is None else 0.0)
+    missing_signal = (
+        current.state is QuotaState.UNKNOWN
+        and current.remaining_units is None
+        and current.used_percent is None
     )
+    confidence_uncertainty = 1.0 - current.confidence + (0.5 if missing_signal else 0.0)
     burden = math.log1p(
         pressure
         * policy.subscription_scarcity_multiplier

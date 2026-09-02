@@ -40,6 +40,7 @@ from .accounting import (
     mirror_actual_cash,
 )
 from .artifact_store import ContentArtifactStore
+from .attempts import AttemptService, ExecutionAttempt, ExecutionAttemptState
 from .cache_affinity import estimate_cache_affinity
 from .capacity import CapacityObservation, CapacityWindow, observation_quota
 from .config import load_manifest
@@ -289,6 +290,8 @@ class Router:
         self.provider_registry = CompositeProviderRegistry(normalized.registries)
         self.providers: dict[str, ProviderDescriptor] = {}
         self.store = store or ReceiptStore(normalized.database)
+        self.attempts = AttemptService(self.store)
+        self._worker_id = f"router-{secrets.token_hex(12)}"
         for candidate in self.store.list_route_candidates():
             if candidate.status == RouteLifecycle.ACTIVE:
                 report = self.store.get_qualification_report(
@@ -712,6 +715,88 @@ class Router:
             }.get(persisted.status, "execution_error")
             persisted.error_message = persisted.error_type
         self.store.save_receipt(persisted)
+
+    def _create_claimed_attempt(
+        self,
+        *,
+        decision_id: str,
+        prepared_id: str | None,
+        action_digest_value: str,
+        spec: ExecutorSpec,
+        attempt_id: str | None = None,
+    ) -> ExecutionAttempt:
+        now = self._economic_now()
+        prior = self.store.execution_attempt_for_decision(decision_id)
+        if prior is not None and prior.state in {
+            ExecutionAttemptState.INDETERMINATE,
+            ExecutionAttemptState.DISPUTED,
+        }:
+            raise ConfigurationError(
+                "decision has an unresolved external invocation; blind retry denied"
+            )
+        attempt = self.store.create_execution_attempt(
+            ExecutionAttempt(
+                attempt_id=attempt_id or new_id("attempt"),
+                decision_id=decision_id,
+                prepared_id=prepared_id,
+                action_digest=action_digest_value,
+                executor_id=spec.id,
+                executor_fingerprint=executor_fingerprint(spec),
+                side_effect=spec.side_effect,
+                idempotent=spec.idempotent,
+                retry_eligible=(
+                    spec.idempotent and spec.side_effect.rank <= SideEffect.READ.rank
+                ),
+                created_at=now,
+                updated_at=now,
+            )
+        )
+        return self.store.claim_execution_attempt(
+            attempt.attempt_id,
+            owner_id=self._worker_id,
+            claimed_at=now,
+            lease_expires_at=now + timedelta(hours=1),
+        )
+
+    def _advance_attempt(
+        self,
+        attempt: ExecutionAttempt,
+        target: ExecutionAttemptState,
+        *,
+        reason: str | None = None,
+        **updates: Any,
+    ) -> ExecutionAttempt:
+        return self.store.transition_execution_attempt(
+            attempt.attempt_id,
+            expected_state=attempt.state,
+            expected_version=attempt.version,
+            target_state=target,
+            updated_at=self._economic_now(),
+            reason=reason,
+            **updates,
+        )
+
+    @staticmethod
+    def _terminal_attempt_state(
+        receipt: ExecutionReceipt, *, retry_eligible: bool
+    ) -> ExecutionAttemptState:
+        succeeded = (
+            receipt.status
+            in {
+                ExecutionStatus.SUCCESS,
+                ExecutionStatus.DELEGATED,
+                ExecutionStatus.HOST_SELECTED,
+            }
+            and receipt.output_valid is not False
+            and receipt.task_valid is not False
+        )
+        if succeeded:
+            return ExecutionAttemptState.COMPLETED
+        if receipt.status is ExecutionStatus.REJECTED:
+            return ExecutionAttemptState.REJECTED
+        if receipt.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and not retry_eligible:
+            return ExecutionAttemptState.INDETERMINATE
+        return ExecutionAttemptState.FAILED
 
     @staticmethod
     def _bind_receipt_evidence(spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
@@ -2644,6 +2729,18 @@ class Router:
                 PreparedDecisionState.INDETERMINATE,
                 reason,
             )
+        attempt = self.store.execution_attempt_for_prepared(prepared_id)
+        if attempt is not None and attempt.state in {
+            ExecutionAttemptState.RESERVED,
+            ExecutionAttemptState.INVOKING,
+            ExecutionAttemptState.VALIDATING,
+            ExecutionAttemptState.SETTLING,
+        }:
+            self._advance_attempt(
+                attempt,
+                ExecutionAttemptState.INDETERMINATE,
+                reason=reason,
+            )
 
     def _verify_usage_statement(
         self,
@@ -2913,7 +3010,9 @@ class Router:
         attempt_id: str,
         charge_id: str,
         approval_id: str | None = None,
-    ) -> tuple[ExecutionOutcome, ExecutionReceipt, object | None]:
+        durable_attempt: ExecutionAttempt,
+        approved_side_effect: SideEffect,
+    ) -> tuple[ExecutionOutcome, ExecutionReceipt, object | None, ExecutionAttempt]:
         """Invoke exactly the prepared route once and return unpersisted evidence."""
 
         decision = context.route_decision
@@ -2946,7 +3045,15 @@ class Router:
                     prepared_id=context.prepared.prepared_id,
                     quote_id=context.prepared.selected_quote_id,
                     attempt_id=attempt_id,
+                    approved_side_effect=approved_side_effect,
                 )
+            )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.VALIDATING,
+                reason="prepared executor returned; validating locally",
+                external_thread_digest=raw.metadata.get("thread_identity_digest"),
+                external_turn_digest=raw.metadata.get("turn_identity_digest"),
             )
             usage_payload: object | None = raw.metadata.pop(
                 "_economic_usage_statement", None
@@ -3061,6 +3168,11 @@ class Router:
                 },
                 approval_id=approval_id,
             )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.SETTLING,
+                reason="prepared validation completed; settlement pending",
+            )
         success = (
             raw.status is ExecutionStatus.SUCCESS
             and output_valid is not False
@@ -3073,7 +3185,7 @@ class Router:
             decision=decision,
             receipts=[receipt],
         )
-        return outcome, receipt, usage_payload
+        return outcome, receipt, usage_payload, durable_attempt
 
     async def execute_prepared(
         self,
@@ -3302,6 +3414,13 @@ class Router:
         idempotency_key = context.request.idempotency_key
         attempt_id = new_id("attempt")
         charge_id = f"charge_{hashlib.sha256(prepared_id.encode()).hexdigest()}"
+        durable_attempt = self._create_claimed_attempt(
+            decision_id=prepared_id,
+            prepared_id=prepared_id,
+            action_digest_value=prepared.action_digest,
+            spec=spec,
+            attempt_id=attempt_id,
+        )
         approval_id: str | None = None
         if (
             spec.side_effect.rank > SideEffect.READ.rank
@@ -3357,6 +3476,12 @@ class Router:
                     payment_approved=payment_approved,
                     human_approved=human_approved,
                     executor_id=spec.id,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="cash reservation recorded",
+                    cash_reservation_ids=(reservation.reservation_id,),
                 )
                 # The hold does not grant execution authority. Recheck route and
                 # economic trust after reservation and immediately before INVOKING.
@@ -3474,6 +3599,11 @@ class Router:
                 invocation_started = True
                 invocation_marker[0] = True
             else:
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="zero cash and capacity reservation recorded",
+                )
                 self.store.claim_prepared_for_invocation(
                     prepared_id,
                     claim_token=claim_token,
@@ -3484,14 +3614,28 @@ class Router:
                 )
                 invocation_started = True
                 invocation_marker[0] = True
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.INVOKING,
+                reason="prepared external invocation boundary entered",
+                invocation_start_digest=deterministic_digest(
+                    {
+                        "attempt_id": attempt_id,
+                        "executor_fingerprint": durable_attempt.executor_fingerprint,
+                        "prepared_id": prepared_id,
+                    }
+                ),
+            )
             if idempotency_key is not None:
                 self.store.mark_idempotency_executing(idempotency_key)
-            outcome, receipt, usage_payload = await self._invoke_prepared_once(
+            outcome, receipt, usage_payload, durable_attempt = await self._invoke_prepared_once(
                 context,
                 spec=spec,
                 attempt_id=attempt_id,
                 charge_id=charge_id,
                 approval_id=approval_id,
+                durable_attempt=durable_attempt,
+                approved_side_effect=approved_side_effect,
             )
             # Persist a sanitized local execution fact before any usage parsing or
             # payment call. Recovery may enrich this receipt, but must never need
@@ -3531,6 +3675,17 @@ class Router:
                             abandoned_at=self._economic_now(),
                             claim_token=claim_token,
                         )
+                stored_attempt = self.store.get_execution_attempt(attempt_id)
+                if stored_attempt is not None and stored_attempt.state in {
+                    ExecutionAttemptState.CLAIMED,
+                    ExecutionAttemptState.RESERVED,
+                }:
+                    with suppress(Exception):
+                        self._advance_attempt(
+                            stored_attempt,
+                            ExecutionAttemptState.FAILED,
+                            reason="prepared execution failed before invocation",
+                        )
             raise
 
         if reservation is None:
@@ -3551,6 +3706,14 @@ class Router:
             )
             self._save_receipt(receipt)
             self._observe_receipt(spec, receipt)
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                self._terminal_attempt_state(
+                    receipt, retry_eligible=durable_attempt.retry_eligible
+                ),
+                reason="confirmed-free prepared execution finalized",
+                terminal_receipt_ids=(receipt.receipt_id,),
+            )
             if idempotency_key is not None:
                 self.store.complete_idempotency(
                     idempotency_key,
@@ -3726,6 +3889,14 @@ class Router:
             )
             self._save_receipt(receipt)
             self._observe_receipt(spec, receipt)
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                self._terminal_attempt_state(
+                    receipt, retry_eligible=durable_attempt.retry_eligible
+                ),
+                reason="prepared settlement finalized",
+                terminal_receipt_ids=(receipt.receipt_id,),
+            )
             if idempotency_key is not None:
                 self.store.complete_prepared_action_idempotency(
                     prepared_id,
@@ -3897,6 +4068,14 @@ class Router:
         )
         self._save_receipt(receipt)
         self._observe_receipt(spec, receipt)
+        durable_attempt = self._advance_attempt(
+            durable_attempt,
+            self._terminal_attempt_state(
+                receipt, retry_eligible=durable_attempt.retry_eligible
+            ),
+            reason="prepared settlement finalized",
+            terminal_receipt_ids=(receipt.receipt_id,),
+        )
         if idempotency_key is not None:
             self.store.complete_prepared_action_idempotency(
                 prepared_id,
@@ -4887,7 +5066,8 @@ class Router:
         spec.enabled = False
         if spec.kind in {ExecutorKind.PYTHON, ExecutorKind.MANAGED_HOST}:
             raise ConfigurationError(
-                "external Python or managed-host candidates cannot be qualified from packages; "
+                "external Python or managed-host candidates cannot be qualified in-process "
+                "from packages; "
                 "use a reviewed command/container route or a trusted local manifest executor"
             )
         fingerprint = behavior_fingerprint(spec)
@@ -5569,6 +5749,34 @@ class Router:
                 )
                 self.store.save_action_approval(approval)
                 approval_id = approval.approval_id
+            durable_attempt = self._create_claimed_attempt(
+                decision_id=decision.decision_id,
+                prepared_id=None,
+                action_digest_value=deterministic_digest(
+                    {
+                        "capability": decision.action.capability,
+                        "input": decision.action.input,
+                        "constraints": decision.action.constraints,
+                    }
+                ),
+                spec=spec,
+            )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.RESERVED,
+                reason="zero or locally managed reservation recorded",
+            )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.INVOKING,
+                reason="external invocation boundary entered",
+                invocation_start_digest=deterministic_digest(
+                    {
+                        "attempt_id": durable_attempt.attempt_id,
+                        "executor_fingerprint": durable_attempt.executor_fingerprint,
+                    }
+                ),
+            )
             started_at = utc_now()
             with start_span(
                 "aeep.execute",
@@ -5583,14 +5791,30 @@ class Router:
             ) as span:
                 if _idempotency_claimed and idempotency_key and attempt_number == 1:
                     self.store.mark_idempotency_executing(idempotency_key)
-                raw = await self._executor_for(spec.kind).execute(
-                    ExecutionContext(
-                        request=decision.action,
-                        spec=spec,
-                        estimate=estimate,
-                        attempt=attempt_number,
-                        approved_side_effect=approved_side_effect,
+                try:
+                    raw = await self._executor_for(spec.kind).execute(
+                        ExecutionContext(
+                            request=decision.action,
+                            spec=spec,
+                            estimate=estimate,
+                            attempt=attempt_number,
+                            attempt_id=durable_attempt.attempt_id,
+                            approved_side_effect=approved_side_effect,
+                        )
                     )
+                except Exception:
+                    self._advance_attempt(
+                        durable_attempt,
+                        ExecutionAttemptState.INDETERMINATE,
+                        reason="executor raised after invocation boundary",
+                    )
+                    raise
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.VALIDATING,
+                    reason="executor returned; validating locally",
+                    external_thread_digest=raw.metadata.get("thread_identity_digest"),
+                    external_turn_digest=raw.metadata.get("turn_identity_digest"),
                 )
                 output_valid: bool | None = None
                 task_valid: bool | None = None
@@ -5714,11 +5938,42 @@ class Router:
                     error_type=error_type,
                     error_message=error_message,
                     trace_id=trace_id_from_span(span),
-                    metadata={**raw.metadata, "exit_code": raw.exit_code},
+                    metadata={
+                        **raw.metadata,
+                        "exit_code": raw.exit_code,
+                        "attempt_id": durable_attempt.attempt_id,
+                    },
                     approval_id=approval_id,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.SETTLING,
+                    reason="validation completed; finalizing local accounting",
                 )
                 self._save_receipt(receipt)
                 self._observe_receipt(spec, receipt)
+                attempt_succeeded = raw.status in {
+                    ExecutionStatus.SUCCESS,
+                    ExecutionStatus.DELEGATED,
+                    ExecutionStatus.HOST_SELECTED,
+                } and output_valid is not False and task_valid is not False
+                if attempt_succeeded:
+                    terminal_attempt_state = ExecutionAttemptState.COMPLETED
+                elif raw.status is ExecutionStatus.REJECTED:
+                    terminal_attempt_state = ExecutionAttemptState.REJECTED
+                elif raw.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
+                    spec.kind is ExecutorKind.MANAGED_HOST
+                    or not durable_attempt.retry_eligible
+                ):
+                    terminal_attempt_state = ExecutionAttemptState.INDETERMINATE
+                else:
+                    terminal_attempt_state = ExecutionAttemptState.FAILED
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    terminal_attempt_state,
+                    reason="terminal receipt persisted",
+                    terminal_receipt_ids=(receipt.receipt_id,),
+                )
                 attempts.append(receipt)
                 last_output = raw.output
 
@@ -5765,6 +6020,8 @@ class Router:
                 )
 
             if attempt_number >= max_attempts:
+                break
+            if durable_attempt.state is ExecutionAttemptState.INDETERMINATE:
                 break
             if not self._can_fallback(
                 status=raw.status,

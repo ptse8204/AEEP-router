@@ -323,7 +323,7 @@ async def test_package_ingest_is_inert_idempotent_and_self_asserted(tmp_path: Pa
     assert first[0].spec.side_effect is SideEffect.FINANCIAL
     assert store.get_provider_package(package.integrity.digest) == package
     assert store.protocol_cutover("rfc8785_live_cutover") is not None
-    assert LATEST_DATABASE_SCHEMA == 6
+    assert LATEST_DATABASE_SCHEMA == 7
     router = Router(Manifest(database=str(tmp_path / "aeep.db")), store=store)
     reports = await router.smoke_candidate(first[0].executor_id)
     assert len(reports) == 1
@@ -415,7 +415,7 @@ def test_v3_database_migrates_provider_package_state_transactionally(tmp_path: P
         } <= tables
         assert {"package_digest", "package_fingerprint", "verification_snapshot_id"} <= columns
         assert store.protocol_cutover("rfc8785_live_cutover") is not None
-        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 6
+        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 7
         receipt_columns = {
             row[1] for row in store._connection.execute("PRAGMA table_info(receipts)")
         }
