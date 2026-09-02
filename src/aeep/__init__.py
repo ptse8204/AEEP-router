@@ -52,6 +52,13 @@ from .capacity import (
 )
 from .discovery import ProviderPackageLocator, RegistryCandidate, RegistryQuery
 from .hosts import (
+    CodexAccountObservation,
+    CodexAppServerAdapter,
+    CodexAppServerTransport,
+    CodexProtocolError,
+    CodexRequestError,
+    CodexTurnResult,
+    CodexUsageTelemetry,
     HostModel,
     HostProbe,
     HostProbeStatus,
@@ -239,6 +246,13 @@ __all__ = [
     "CapacityTransferability",
     "CapacityWindow",
     "CashAccounting",
+    "CodexAccountObservation",
+    "CodexAppServerAdapter",
+    "CodexAppServerTransport",
+    "CodexProtocolError",
+    "CodexRequestError",
+    "CodexTurnResult",
+    "CodexUsageTelemetry",
     "ComparativeMeasurement",
     "ContentArtifactStore",
     "CounterfactualCashCost",

@@ -636,6 +636,8 @@ class Router:
     def _safe_receipt_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
         allowed = {
             "adapter_id",
+            "actual_model",
+            "approval_evidence_digest",
             "argument_mode",
             "callable",
             "executable",
@@ -663,6 +665,10 @@ class Router:
             "stdout_bytes",
             "stdout_truncated",
             "tool",
+            "tool_call_count",
+            "model_turn_count",
+            "thread_identity_digest",
+            "turn_identity_digest",
             "tool_schema_tokens_estimate",
         }
         return {
@@ -5503,6 +5509,7 @@ class Router:
                         spec=spec,
                         estimate=estimate,
                         attempt=attempt_number,
+                        approved_side_effect=approved_side_effect,
                     )
                 )
                 output_valid: bool | None = None

@@ -42,6 +42,8 @@ class ManagedHostExecutor(BaseExecutor):
                     config=config,
                     attempt=context.attempt,
                     attempt_id=attempt_id,
+                    output_schema=context.spec.output_schema,
+                    approved_side_effect=context.approved_side_effect.value,
                 )
             ),
             timeout=config.timeout_seconds,

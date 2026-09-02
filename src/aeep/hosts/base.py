@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import Protocol
+from typing import Any, Protocol
 
 from pydantic import Field
 
@@ -41,6 +41,8 @@ class ManagedHostExecutionContext:
     config: ManagedHostExecutorConfig
     attempt: int
     attempt_id: str
+    output_schema: dict[str, Any] | None = None
+    approved_side_effect: str = "read"
 
 
 class ManagedHostAdapter(Protocol):

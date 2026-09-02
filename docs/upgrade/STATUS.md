@@ -8,7 +8,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 1. Protocol boundary | COMPLETE | Decisions frozen in ADR-007 through ADR-009. |
 | 2. Capacity contracts | COMPLETE | Capacity contracts and SQLite schema 6 verified. |
 | 3. Managed-host seam | COMPLETE | Provider-neutral adapter and executor verified. |
-| 4. Codex App Server | IN_PROGRESS | Implement and test the transport adapter. |
+| 4. Codex App Server | COMPLETE | Fake-server transport and managed adapter verified. |
 | 5. Quota routing | NOT_STARTED | Add capacity pressure to routing. |
 | 6. Durable attempts | NOT_STARTED | Unify attempt persistence and recovery. |
 | 7. Tool Search proofs | NOT_STARTED | Add host-native routing campaigns. |
@@ -29,6 +29,8 @@ Phase 2: 57 capacity, migration, and provider-package tests passed; Ruff, mypy, 
 
 Phase 3: managed-host router, registry collision, legacy host, provider-package authority, Ruff, mypy, compile, and schema checks passed.
 
+Phase 4: added a bounded persistent App Server transport, sanitized account/model/quota observations, approval intersection, one-turn execution, token/reroute accounting, operator-only login service, and a credential-free fake server. Ruff, mypy, compile, schemas, and 37 focused transport/adapter/router tests passed.
+
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`.
 
-Unresolved risks: the literal `python` command is unavailable on this host; baseline and release checks use `python3` and record that substitution.
+Unresolved risks: the literal `python` command is unavailable on this host; baseline and release checks use `python3` and record that substitution. Live Codex login and model execution remain intentionally untested pending explicit operator approval.
