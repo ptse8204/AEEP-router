@@ -51,6 +51,14 @@ from .capacity import (
     reservation,
 )
 from .discovery import ProviderPackageLocator, RegistryCandidate, RegistryQuery
+from .hosts import (
+    HostModel,
+    HostProbe,
+    HostProbeStatus,
+    ManagedHostAdapter,
+    ManagedHostExecutionContext,
+    ManagedHostRegistry,
+)
 from .instrumentation import TraceIngestor, instrument_anthropic, instrument_openai
 from .models import (
     ActionApprovalRecord,
@@ -92,6 +100,8 @@ from .models import (
     ExecutionReceipt,
     ExecutorSpec,
     FailureChargePolicy,
+    ManagedHostExecutorConfig,
+    ManagedHostModelConstraints,
     Manifest,
     MarketAggregate,
     MarketAggregatesConfig,
@@ -267,9 +277,17 @@ __all__ = [
     "ExecutorSpec",
     "FailureChargePolicy",
     "FreePaymentAdapterV2",
+    "HostModel",
+    "HostProbe",
+    "HostProbeStatus",
     "InvoicePaymentAdapterV2",
     "JobProofReport",
     "LocalLedgerPaymentAdapter",
+    "ManagedHostAdapter",
+    "ManagedHostExecutionContext",
+    "ManagedHostExecutorConfig",
+    "ManagedHostModelConstraints",
+    "ManagedHostRegistry",
     "Manifest",
     "MarketAggregate",
     "MarketAggregatesConfig",

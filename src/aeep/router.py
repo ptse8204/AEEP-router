@@ -83,10 +83,12 @@ from .executors import (
     DelegateExecutor,
     HostExecutor,
     HTTPExecutor,
+    ManagedHostExecutor,
     MCPExecutor,
     PythonExecutor,
 )
 from .executors.base import BaseExecutor, ExecutionContext
+from .hosts import ManagedHostAdapter, ManagedHostRegistry
 from .models import (
     ActionApprovalRecord,
     ActionConstraints,
@@ -260,6 +262,7 @@ class Router:
         clock: Callable[[], datetime] | None = None,
         unlimited_economic_budget: bool | None = None,
         executor_overrides: Mapping[ExecutorKind, BaseExecutor] | None = None,
+        managed_host_adapters: Mapping[str, ManagedHostAdapter] | None = None,
     ) -> None:
         normalized = manifest.model_copy(deep=True)
         policies = builtin_policies()
@@ -428,6 +431,16 @@ class Router:
             else None
         )
         self._executors: dict[ExecutorKind, BaseExecutor] = dict(executor_overrides or {})
+        self.managed_hosts = ManagedHostRegistry()
+        for adapter_id in sorted(managed_host_adapters or {}):
+            self.managed_hosts.register(adapter_id, (managed_host_adapters or {})[adapter_id])
+        if ExecutorKind.MANAGED_HOST in self._executors and managed_host_adapters:
+            raise ConfigurationError(
+                "managed-host executor override cannot be combined with adapter registrations"
+            )
+        self._executors.setdefault(
+            ExecutorKind.MANAGED_HOST, ManagedHostExecutor(self.managed_hosts)
+        )
         self._validated_decisions: dict[str, str] = {}
         self._prepared_contexts: dict[str, PreparedExecutionContext] = {}
         self._closed = False
@@ -622,6 +635,7 @@ class Router:
     @staticmethod
     def _safe_receipt_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
         allowed = {
+            "adapter_id",
             "argument_mode",
             "callable",
             "executable",
@@ -4856,10 +4870,10 @@ class Router:
         spec.idempotent = idempotent
         spec.safe_to_auto_execute = safe_to_auto_execute
         spec.enabled = False
-        if spec.kind == ExecutorKind.PYTHON:
+        if spec.kind in {ExecutorKind.PYTHON, ExecutorKind.MANAGED_HOST}:
             raise ConfigurationError(
-                "external Python candidates cannot be qualified in-process; "
-                "use a reviewed command/container route or a trusted manifest executor"
+                "external Python or managed-host candidates cannot be qualified from packages; "
+                "use a reviewed command/container route or a trusted local manifest executor"
             )
         fingerprint = behavior_fingerprint(spec)
         checks = require_static_qualification(spec)
@@ -6084,7 +6098,11 @@ class Router:
                         spec.enabled
                         and (
                             spec.side_effect.rank > SideEffect.READ.rank
-                            or spec.kind in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
+                            or spec.kind in {
+                                ExecutorKind.DELEGATE,
+                                ExecutorKind.HOST,
+                                ExecutorKind.MANAGED_HOST,
+                            }
                             or bool(spec.config.get("exclusive_resource"))
                         )
                         for spec in compatible

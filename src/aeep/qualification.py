@@ -14,7 +14,15 @@ from jsonschema import Draft202012Validator
 from pydantic import Field, model_validator
 
 from .errors import ConfigurationError
-from .models import ExecutorKind, ExecutorSpec, SideEffect, StrictModel, new_id, utc_now
+from .models import (
+    ExecutorKind,
+    ExecutorSpec,
+    ManagedHostExecutorConfig,
+    SideEffect,
+    StrictModel,
+    new_id,
+    utc_now,
+)
 
 
 class RouteLifecycle(StrEnum):
@@ -182,6 +190,7 @@ def behavior_fingerprint(spec: ExecutorSpec) -> str:
             "tool",
             "tool_schema_digest",
         },
+        ExecutorKind.MANAGED_HOST: set(ManagedHostExecutorConfig.model_fields),
         ExecutorKind.DELEGATE: {"instructions"},
     }[spec.kind]
     config_keys.update(
@@ -348,6 +357,15 @@ def static_qualification_checks(spec: ExecutorSpec) -> dict[str, bool]:
                 "max_response_bytes",
             ),
         )
+    elif spec.kind == ExecutorKind.MANAGED_HOST:
+        try:
+            managed = spec.managed_host_config()
+        except ValueError:
+            adapter = False
+            bounds = False
+        else:
+            adapter = os.path.isabs(managed.argv[0])
+            bounds = managed.timeout_seconds > 0 and managed.max_message_bytes > 0
     return {
         "schemas": schemas,
         "adapter_config": adapter,
