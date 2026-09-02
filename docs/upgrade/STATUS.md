@@ -6,8 +6,8 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 |---|---|---|
 | 0. Baseline | COMPLETE | Baseline preserved in `reports/v07/baseline.json`. |
 | 1. Protocol boundary | COMPLETE | Decisions frozen in ADR-007 through ADR-009. |
-| 2. Capacity contracts | IN_PROGRESS | Extend resource and accounting models. |
-| 3. Managed-host seam | NOT_STARTED | Add the provider-neutral adapter boundary. |
+| 2. Capacity contracts | COMPLETE | Capacity contracts and SQLite schema 6 verified. |
+| 3. Managed-host seam | IN_PROGRESS | Add the provider-neutral adapter boundary. |
 | 4. Codex App Server | NOT_STARTED | Implement and test the transport adapter. |
 | 5. Quota routing | NOT_STARTED | Add capacity pressure to routing. |
 | 6. Durable attempts | NOT_STARTED | Unify attempt persistence and recovery. |
@@ -21,9 +21,11 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 
 Files changed: baseline/version files; `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `SECURITY.md`; roadmap, migration guide, and ADR-007 through ADR-009.
 
-Migrations added: none.
+Migrations added: SQLite schema 6 adds capacity observations, reservations, authorization evidence, entitlements, and redemptions.
 
 Tests run: compile, Ruff, mypy, schemas, 582 Python tests, 13 Node tests, all CI proof checks, coverage, and build passed. Baseline total coverage: 80%.
+
+Phase 2: 57 capacity, migration, and provider-package tests passed; Ruff, mypy, and schema generation passed.
 
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`.
 

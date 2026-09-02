@@ -165,6 +165,7 @@ from .models import (
     SideEffect,
     SignedExecutionReceipt,
     SubscriptionQuota,
+    SubscriptionResource,
     TrustLevel,
     UsageStatement,
     ValidationKind,
@@ -738,7 +739,7 @@ class Router:
         if override is not None:
             return override
         resource = self.resources.get(spec.resource_pool)
-        if resource is None:
+        if not isinstance(resource, SubscriptionResource):
             return None
         observed = self.store.latest_quota_observation(resource.id)
         return observed.quota if observed is not None else resource.quota
@@ -776,6 +777,8 @@ class Router:
         values: list[dict[str, Any]] = []
         for resource_id in sorted(self.resources):
             resource = self.resources[resource_id]
+            if not isinstance(resource, SubscriptionResource):
+                continue
             observed = self.store.latest_quota_observation(resource_id)
             values.append(
                 {

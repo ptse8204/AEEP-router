@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "CapacitySignature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "maxLength": 50,
+          "minLength": 1,
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "CapacitySignature",
+      "type": "object"
+    },
+    "CapacityTransferability": {
+      "enum": [
+        "self_only",
+        "same_principal",
+        "provider_authorized",
+        "transferable"
+      ],
+      "title": "CapacityTransferability",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "entitlement_id": {
+      "title": "Entitlement Id",
+      "type": "string"
+    },
+    "issuer_principal_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Issuer Principal Digest",
+      "type": "string"
+    },
+    "beneficiary_principal_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Beneficiary Principal Digest",
+      "type": "string"
+    },
+    "backing_resource_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Backing Resource Id",
+      "type": "string"
+    },
+    "backing_resource_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Backing Resource Fingerprint",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Capability",
+      "type": "string"
+    },
+    "action_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "maximum_quantity": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Maximum Quantity"
+    },
+    "unit": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Unit",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "nonce": {
+      "maxLength": 500,
+      "minLength": 16,
+      "title": "Nonce",
+      "type": "string"
+    },
+    "transferability_basis": {
+      "$ref": "#/$defs/CapacityTransferability"
+    },
+    "authorization_evidence_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorization Evidence Id"
+    },
+    "signature": {
+      "$ref": "#/$defs/CapacitySignature"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "issuer_principal_digest",
+    "beneficiary_principal_digest",
+    "backing_resource_id",
+    "backing_resource_fingerprint",
+    "capability",
+    "action_digest",
+    "maximum_quantity",
+    "unit",
+    "expires_at",
+    "nonce",
+    "transferability_basis",
+    "signature"
+  ],
+  "title": "ExecutionEntitlement",
+  "type": "object"
+}

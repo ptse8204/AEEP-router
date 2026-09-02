@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "CapacityReservationStatus": {
+      "enum": [
+        "reserved",
+        "claimed",
+        "released",
+        "expired",
+        "consumed"
+      ],
+      "title": "CapacityReservationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reservation_id": {
+      "title": "Reservation Id",
+      "type": "string"
+    },
+    "resource_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "execution_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Execution Id",
+      "type": "string"
+    },
+    "maximum_quantity": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Maximum Quantity"
+    },
+    "unit": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Unit",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/CapacityReservationStatus",
+      "default": "reserved"
+    },
+    "idempotency_key": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "claim_token": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Claim Token"
+    },
+    "version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "resource_id",
+    "execution_id",
+    "maximum_quantity",
+    "unit",
+    "expires_at",
+    "idempotency_key"
+  ],
+  "title": "CapacityReservation",
+  "type": "object"
+}

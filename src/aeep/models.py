@@ -39,6 +39,12 @@ from pydantic import (
     model_validator,
 )
 
+from .capacity.models import (
+    CapacityResource,
+    CapacitySettlementMode,
+    CapacityTransferability,
+)
+
 
 def utc_now() -> datetime:
     return datetime.now(UTC)
@@ -498,6 +504,8 @@ class SubscriptionResource(StrictModel):
     access: SubscriptionAccess = Field(default_factory=SubscriptionAccess)
     quota: SubscriptionQuota = Field(default_factory=SubscriptionQuota)
     capabilities: SubscriptionCapabilities = Field(default_factory=SubscriptionCapabilities)
+    transferability: CapacityTransferability = CapacityTransferability.SELF_ONLY
+    settlement_mode: CapacitySettlementMode = CapacitySettlementMode.SUBSCRIPTION_USAGE
 
     @model_validator(mode="after")
     def align_quota_unit(self) -> SubscriptionResource:
@@ -2790,6 +2798,12 @@ class ProviderPackageConfig(StrictModel):
         return self
 
 
+ResourceDefinition: TypeAlias = Annotated[
+    SubscriptionResource | CapacityResource,
+    Field(discriminator="kind"),
+]
+
+
 class Manifest(StrictModel):
     version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"] = "0.7"
     database: str = ".aeep/aeep.db"
@@ -2801,9 +2815,21 @@ class Manifest(StrictModel):
     provider_packages: ProviderPackageConfig = Field(default_factory=ProviderPackageConfig)
     policies: dict[str, PolicyConfig] = Field(default_factory=dict)
     capabilities: list[CapabilityDefinition] = Field(default_factory=list)
-    resources: list[SubscriptionResource] = Field(default_factory=list)
+    resources: list[ResourceDefinition] = Field(default_factory=list)
     registries: list[RegistryConfig] = Field(default_factory=list)
     executors: list[ExecutorSpec] = Field(default_factory=list)
+
+    @field_validator("resources", mode="before")
+    @classmethod
+    def migrate_legacy_resource_kinds(cls, value: Any) -> Any:
+        if isinstance(value, list):
+            return [
+                {"kind": "subscription", **item}
+                if isinstance(item, dict) and "kind" not in item
+                else item
+                for item in value
+            ]
+        return value
 
     @field_validator("executors")
     @classmethod
@@ -2817,8 +2843,8 @@ class Manifest(StrictModel):
     @field_validator("resources")
     @classmethod
     def unique_resource_ids(
-        cls, resources: list[SubscriptionResource]
-    ) -> list[SubscriptionResource]:
+        cls, resources: list[ResourceDefinition]
+    ) -> list[ResourceDefinition]:
         ids = [resource.id for resource in resources]
         duplicates = sorted({item for item in ids if ids.count(item) > 1})
         if duplicates:
@@ -2850,6 +2876,12 @@ class Manifest(StrictModel):
                     f"executor {executor.id!r} references unknown resource_pool "
                     f"{executor.resource_pool!r}"
                 )
+            if executor.kind == ExecutorKind.HOST and executor.resource_pool:
+                resource = next(
+                    item for item in self.resources if item.id == executor.resource_pool
+                )
+                if not isinstance(resource, SubscriptionResource):
+                    raise ValueError("legacy host executors require a subscription resource")
         return self
 
 

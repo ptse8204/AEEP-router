@@ -1,5 +1,25 @@
 {
   "$defs": {
+    "CapacitySettlementMode": {
+      "enum": [
+        "none",
+        "subscription_usage",
+        "x402_batch",
+        "x402_exact"
+      ],
+      "title": "CapacitySettlementMode",
+      "type": "string"
+    },
+    "CapacityTransferability": {
+      "enum": [
+        "self_only",
+        "same_principal",
+        "provider_authorized",
+        "transferable"
+      ],
+      "title": "CapacityTransferability",
+      "type": "string"
+    },
     "QuotaSource": {
       "enum": [
         "user",
@@ -196,6 +216,14 @@
     },
     "capabilities": {
       "$ref": "#/$defs/SubscriptionCapabilities"
+    },
+    "transferability": {
+      "$ref": "#/$defs/CapacityTransferability",
+      "default": "self_only"
+    },
+    "settlement_mode": {
+      "$ref": "#/$defs/CapacitySettlementMode",
+      "default": "subscription_usage"
     }
   },
   "required": [

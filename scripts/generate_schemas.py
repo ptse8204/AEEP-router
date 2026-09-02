@@ -15,6 +15,15 @@ from aeep.benchmarking import (
     EconomicProofCampaignReport,
     ReleaseProofReport,
 )
+from aeep.capacity import (
+    CapacityAuthorizationEvidence,
+    CapacityObservation,
+    CapacityReservation,
+    CapacityResource,
+    CapacityWindow,
+    EntitlementRedemptionReceipt,
+    ExecutionEntitlement,
+)
 from aeep.conformance import ProviderConformanceReport
 from aeep.discovery import RegistryCandidate
 from aeep.integrations import export_tools
@@ -129,6 +138,11 @@ MODEL_FILES = {
     "cache-affinity-estimate.schema.json": CacheAffinityEstimate,
     "cache-affinity-receipt.schema.json": CacheAffinityReceipt,
     "cache-affinity-observation.schema.json": CacheAffinityObservation,
+    "capacity-authorization-evidence.schema.json": CapacityAuthorizationEvidence,
+    "capacity-observation.schema.json": CapacityObservation,
+    "capacity-reservation.schema.json": CapacityReservation,
+    "capacity-resource.schema.json": CapacityResource,
+    "capacity-window.schema.json": CapacityWindow,
     "candidate-ranking.schema.json": CandidateRanking,
     "cash-accounting.schema.json": CashAccounting,
     "capability-definition.schema.json": CapabilityDefinition,
@@ -145,7 +159,9 @@ MODEL_FILES = {
     "economic-payment-config.schema.json": EconomicPaymentConfig,
     "economic-requirements-config.schema.json": EconomicRequirementsConfig,
     "economic-trust-store-config.schema.json": EconomicTrustStoreConfig,
+    "entitlement-redemption-receipt.schema.json": EntitlementRedemptionReceipt,
     "execution-receipt.schema.json": ExecutionReceipt,
+    "execution-entitlement.schema.json": ExecutionEntitlement,
     "executor-spec.schema.json": ExecutorSpec,
     "external-outcome-report.schema.json": ExternalOutcomeReport,
     "manifest.schema.json": Manifest,

@@ -38,3 +38,7 @@ Schema migrations are additive and transactional. Back up the SQLite file before
 opening it with 0.7. A 0.6 binary can still read its historical tables but will
 ignore new 0.7 tables and executor kinds; use 0.7 for any database containing
 active managed-host attempts or capacity reservations.
+
+SQLite schema version 6 adds capacity observations, reservations, authorization
+evidence, execution entitlements, and redemption receipts. Existing rows and
+tables are not rewritten.
