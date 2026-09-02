@@ -18,6 +18,61 @@ class ProofGate(EconomicStrictModel):
     detail: str = Field(max_length=2000)
 
 
+class HostNativeCampaign(EconomicStrictModel):
+    name: Literal[
+        "exact-local-bypass",
+        "managed-model-single-turn",
+        "native-tool-search-plus-aeep",
+        "negative-control-meta-router",
+    ]
+    passed: bool
+    default_path: bool
+    provider_calls: int = Field(ge=0)
+    model_turn_count: int = Field(ge=0)
+    routing_model_rounds: int = Field(ge=0)
+    tool_selection_rounds: int = Field(ge=0)
+    implementation_schema_bytes: int = Field(ge=0)
+    result_bytes: int = Field(ge=0)
+    test_ids: tuple[str, ...] = Field(min_length=1)
+
+
+class HostNativeRoutingReport(EconomicStrictModel):
+    schema_version: Literal["aeep-host-native-routing-v1"] = (
+        "aeep-host-native-routing-v1"
+    )
+    generated_at: UtcDateTime
+    tested_action_classes: tuple[str, ...] = Field(min_length=1)
+    universal_token_savings_claimed: Literal[False] = False
+    campaigns: tuple[HostNativeCampaign, ...]
+
+    @model_validator(mode="after")
+    def required_campaigns_pass(self) -> HostNativeRoutingReport:
+        by_name = {item.name: item for item in self.campaigns}
+        required = {
+            "exact-local-bypass",
+            "managed-model-single-turn",
+            "native-tool-search-plus-aeep",
+            "negative-control-meta-router",
+        }
+        if set(by_name) != required or len(self.campaigns) != len(required):
+            raise ValueError("host-native proof requires each campaign exactly once")
+        exact = by_name["exact-local-bypass"]
+        if exact.provider_calls or exact.model_turn_count or exact.routing_model_rounds:
+            raise ValueError("exact local bypass cannot call a provider or model")
+        managed = by_name["managed-model-single-turn"]
+        if managed.model_turn_count != 1 or managed.routing_model_rounds:
+            raise ValueError("managed proof requires one execution turn and no routing turn")
+        native = by_name["native-tool-search-plus-aeep"]
+        if native.implementation_schema_bytes:
+            raise ValueError("native Tool Search cannot expose implementation schemas")
+        negative = by_name["negative-control-meta-router"]
+        if negative.default_path or negative.model_turn_count < 2:
+            raise ValueError("meta-router negative control must remain a non-default extra round")
+        if not all(item.passed for item in self.campaigns):
+            raise ValueError("host-native proof campaigns must pass")
+        return self
+
+
 class RoutingValueStatus(StrEnum):
     DEMONSTRATED_POSITIVE = "demonstrated_positive"
     APPROXIMATELY_NEUTRAL = "approximately_neutral"

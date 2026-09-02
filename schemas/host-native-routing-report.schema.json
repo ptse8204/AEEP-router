@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "HostNativeCampaign": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "enum": [
+            "exact-local-bypass",
+            "managed-model-single-turn",
+            "native-tool-search-plus-aeep",
+            "negative-control-meta-router"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "default_path": {
+          "title": "Default Path",
+          "type": "boolean"
+        },
+        "provider_calls": {
+          "minimum": 0,
+          "title": "Provider Calls",
+          "type": "integer"
+        },
+        "model_turn_count": {
+          "minimum": 0,
+          "title": "Model Turn Count",
+          "type": "integer"
+        },
+        "routing_model_rounds": {
+          "minimum": 0,
+          "title": "Routing Model Rounds",
+          "type": "integer"
+        },
+        "tool_selection_rounds": {
+          "minimum": 0,
+          "title": "Tool Selection Rounds",
+          "type": "integer"
+        },
+        "implementation_schema_bytes": {
+          "minimum": 0,
+          "title": "Implementation Schema Bytes",
+          "type": "integer"
+        },
+        "result_bytes": {
+          "minimum": 0,
+          "title": "Result Bytes",
+          "type": "integer"
+        },
+        "test_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Test Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "default_path",
+        "provider_calls",
+        "model_turn_count",
+        "routing_model_rounds",
+        "tool_selection_rounds",
+        "implementation_schema_bytes",
+        "result_bytes",
+        "test_ids"
+      ],
+      "title": "HostNativeCampaign",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep-host-native-routing-v1",
+      "default": "aeep-host-native-routing-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "tested_action_classes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Tested Action Classes",
+      "type": "array"
+    },
+    "universal_token_savings_claimed": {
+      "const": false,
+      "default": false,
+      "title": "Universal Token Savings Claimed",
+      "type": "boolean"
+    },
+    "campaigns": {
+      "items": {
+        "$ref": "#/$defs/HostNativeCampaign"
+      },
+      "title": "Campaigns",
+      "type": "array"
+    }
+  },
+  "required": [
+    "generated_at",
+    "tested_action_classes",
+    "campaigns"
+  ],
+  "title": "HostNativeRoutingReport",
+  "type": "object"
+}

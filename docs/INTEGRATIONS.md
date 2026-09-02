@@ -19,6 +19,23 @@ Financial acceptance, reservations, captures, releases, refunds, and reconciliat
 
 This keeps the routing contract stable even when an agent host changes. The host remains responsible for its own sandbox and approval UI; AEEP independently enforces manifest constraints and its operator-configured execution ceiling.
 
+## Preferred host-native dispatch
+
+For an exact action already classified by the host, call AEEP directly with the
+bounded `ActionRequest`; a deterministic local winner requires no model call. If
+model judgment is required, native Tool Search or the host planner first chooses
+the semantic capability, then AEEP selects the reviewed implementation and starts
+at most one managed-host execution turn. Implementation routes and the full AEEP
+control schema stay outside model input unless the selected host explicitly needs
+a canonical source tool.
+
+MCP and provider-native function exports remain supported compatibility surfaces.
+Putting `aeep_route_action` in a separate model-facing meta-router round is the
+documented negative control, not the default integration. The offline campaign in
+`reports/v07/host-native-routing.json` records model turns, tool-selection rounds,
+implementation-schema bytes, and result bytes for the tested exact-local and
+bounded-model action classes; it makes no universal token-savings claim.
+
 For DeepSeek Harness, prefer `integrations/dsh-aeep-router/`. That Cordis plugin
 accepts an exact `/aeep` capability envelope and routes it before the model call
 through one persistent, bounded JSONL `aeep host-bridge`. The model sees only

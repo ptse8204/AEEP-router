@@ -158,6 +158,10 @@ async def test_managed_action_records_one_turn_reroute_and_token_accounting():
         assert outcome.ok and outcome.output == {"characters": 3}
         assert receipt.metadata["actual_model"] == "fixture-model-b"
         assert receipt.metadata["model_turn_count"] == 1
+        assert receipt.metadata["tool_selection_rounds"] == 0
+        assert receipt.metadata["implementation_schema_bytes"] == 0
+        assert receipt.metadata["output_schema_bytes"] > 0
+        assert receipt.metadata["result_bytes"] == 16
         assert receipt.actual_resources.input_tokens == 7
         assert receipt.actual_resources.output_tokens == 3
         assert receipt.accounting.subscription_usage[0].consumed is None

@@ -604,6 +604,14 @@ class CodexAppServerAdapter:
                 if result.status == "interrupted"
                 else ExecutionStatus.FAILED
             )
+            output_schema_bytes = (
+                len(json.dumps(context.output_schema, separators=(",", ":")).encode())
+                if context.output_schema is not None
+                else 0
+            )
+            result_bytes = len(
+                json.dumps(result.output, separators=(",", ":"), ensure_ascii=False).encode()
+            )
             return RawExecution(
                 status=status,
                 output=result.output,
@@ -614,6 +622,10 @@ class CodexAppServerAdapter:
                 metadata={
                     "actual_model": result.actual_model,
                     "model_turn_count": 1,
+                    "tool_selection_rounds": 0,
+                    "implementation_schema_bytes": 0,
+                    "output_schema_bytes": output_schema_bytes,
+                    "result_bytes": result_bytes,
                     "tool_call_count": result.tool_count,
                     "approval_evidence_digest": _message_digest(
                         {"digests": list(result.approval_digests)}
