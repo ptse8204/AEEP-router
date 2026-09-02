@@ -2791,7 +2791,7 @@ class ProviderPackageConfig(StrictModel):
 
 
 class Manifest(StrictModel):
-    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6"] = "0.6"
+    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"] = "0.7"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)

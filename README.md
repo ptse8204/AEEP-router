@@ -18,7 +18,7 @@ remaining options are scored.
 It is an execution control layer—not a planner, marketplace, or model-specific
 wrapper.
 
-> **Status:** AEEP 0.6 is alpha software. Review policy, trust, approval, and
+> **Status:** AEEP 0.7 is alpha software. Review policy, trust, approval, and
 > recovery settings before production use.
 
 ## What works today

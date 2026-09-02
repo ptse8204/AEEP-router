@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased — 0.6.0
+## Unreleased — 0.7.0a1
+
+The prior `0.6.0` heading described repository development state. No Git tag or
+published release exists for it; those changes remain listed here as inherited
+0.7 development history rather than a fabricated release.
+
+### Incorporated 0.6 development work
 
 - deterministic empirical p50/p95 resource estimates, observed cash p95, Wilson
   reliability lower bounds, and quality lower bounds after five exact-cohort

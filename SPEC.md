@@ -1,4 +1,4 @@
-# AEEP 0.6 protocol specification
+# AEEP 0.7 protocol specification
 
 AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
 
@@ -25,7 +25,7 @@ A conforming implementation can:
 
 ## 2. Non-goals
 
-AEEP 0.6 does not define:
+AEEP 0.7 does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;

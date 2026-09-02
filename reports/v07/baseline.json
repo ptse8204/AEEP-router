@@ -1,0 +1,34 @@
+{
+  "schema": "aeep-upgrade-baseline-v1",
+  "revision": "405a74433df1707823c59597dabd84ba9aaa19cf",
+  "branch": "main",
+  "tags": [],
+  "worktree_clean": true,
+  "python": "3.13.1",
+  "codex": "0.151.0",
+  "source_version": "0.6.0",
+  "command_substitution": "The host has no `python` executable; equivalent checks used python3 3.13.1.",
+  "checks": [
+    {"id": "literal-python", "command": "python --version", "status": "FAIL", "reason": "command not found (pre-existing host environment)"},
+    {"id": "compileall", "command": "python3 -m compileall -q src examples tests", "status": "PASS"},
+    {"id": "ruff", "command": "ruff check .", "status": "PASS", "summary": "All checks passed"},
+    {"id": "mypy", "command": "mypy src", "status": "PASS", "summary": "68 source files"},
+    {"id": "schemas", "command": "PYTHONPATH=src python3 scripts/generate_schemas.py --check", "status": "PASS"},
+    {"id": "pytest", "command": "coverage run -m pytest", "status": "PASS", "summary": "582 passed, 1 warning in 31.81s"},
+    {"id": "coverage", "command": "coverage report -m", "status": "PASS", "summary": "80% total coverage"},
+    {"id": "build", "command": "python3 -m build", "status": "PASS"},
+    {"id": "economic-proof", "status": "PASS", "summary": "420 trials; all economic and safety gates passed"},
+    {"id": "dsh-proof", "status": "PASS"},
+    {"id": "dsh-live-report-checks", "status": "PASS", "summary": "saved safety/comparison reports passed; comparison recorded -36,382 tokens saved by AEEP"},
+    {"id": "job-proof", "status": "PASS"},
+    {"id": "provider-package", "status": "PASS"},
+    {"id": "dsh-plugin", "status": "PASS", "summary": "13 tests passed"}
+  ],
+  "pre_existing_failures": [
+    "The `python` command name is absent; `python3` is available.",
+    "The saved DSH comparison passes its configured gates while reporting negative measured token savings (-36,382); no positive universal savings claim is made."
+  ],
+  "release_state": "No Git tags exist. The 0.6.0 changelog heading was unreleased development state, not a published release.",
+  "coverage_report": "reports/v07/baseline-coverage.json",
+  "status": "COMPLETE"
+}
