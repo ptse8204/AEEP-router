@@ -6216,7 +6216,7 @@ class ReceiptStore:
                     observation.observation_id,
                     observation.resource_id,
                     observation.observed_at.isoformat(),
-                    observation.model_dump_json(),
+                    observation.model_dump_json(exclude_computed_fields=True),
                 ),
             )
 
@@ -6721,7 +6721,7 @@ class ReceiptStore:
                     observation.resource_id,
                     self._utc_text(observation.observed_at),
                     observation.canonical_digest,
-                    observation.model_dump_json(),
+                    observation.model_dump_json(exclude_computed_fields=True),
                 ),
             )
         return observation
@@ -6734,7 +6734,7 @@ class ReceiptStore:
         with self._lock:
             rows = self._connection.execute(
                 f"SELECT payload_json FROM capacity_observations {where} "
-                "ORDER BY observed_at DESC LIMIT ?",
+                "ORDER BY observed_at DESC, rowid DESC LIMIT ?",
                 (*parameters, max(1, min(limit, 10_000))),
             ).fetchall()
         return [CapacityObservation.model_validate_json(row["payload_json"]) for row in rows]
@@ -7025,7 +7025,7 @@ class ReceiptStore:
                     self._utc_text(entitlement.expires_at),
                     entitlement.authorization_evidence_id,
                     digest,
-                    entitlement.model_dump_json(),
+                    entitlement.model_dump_json(exclude_computed_fields=True),
                 ),
             )
         return entitlement

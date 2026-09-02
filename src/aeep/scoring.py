@@ -70,13 +70,38 @@ def subscription_score_components(
 ) -> tuple[float, float]:
     """Return dimensionless pressure and private USD policy value for one pool."""
 
+    burden, value, _, _, _ = _subscription_burden_components(
+        resource_pool=resource_pool,
+        unit=unit,
+        units=units,
+        policy=policy,
+        quota=quota,
+        success_probability=success_probability,
+    )
+    return burden, value
+
+
+def _subscription_burden_components(
+    *,
+    resource_pool: str,
+    unit: str,
+    units: float,
+    policy: PolicyConfig,
+    quota: SubscriptionQuota | None,
+    success_probability: float,
+) -> tuple[float, float, float, float, float]:
+    """Exact deterministic opportunity-cost formula and its reportable components."""
+
     current = quota or SubscriptionQuota(unit=unit)
     if current.remaining_units is not None:
         remaining = float(current.remaining_units)
         pressure = units / remaining if remaining else float("inf")
-    elif current.allowance_units is not None:
+    elif current.allowance_units is not None and current.remaining_units is None:
         allowance = float(current.allowance_units)
         pressure = units / allowance if allowance else float("inf")
+    elif current.used_percent is not None:
+        used_fraction = float(current.used_percent) / 100
+        pressure = units * max(0.05, used_fraction) / max(0.01, 1 - used_fraction)
     else:
         pressure = units * current.state.pressure
     rule = next(
@@ -88,16 +113,32 @@ def subscription_score_components(
         None,
     )
     pool_weight = rule.pressure_weight if rule else 1.0
-    confidence_uncertainty = 1.0 - current.confidence
+    reset_factor = 1.0
+    if current.reset_at is not None:
+        if current.observed_at is not None and current.window_duration_seconds is not None:
+            seconds = max(0.0, (current.reset_at - current.observed_at).total_seconds())
+            reset_factor += min(1.0, seconds / current.window_duration_seconds)
+        else:
+            reset_factor = 1.5
+    confidence_uncertainty = (
+        1.0
+        - current.confidence
+        + (0.25 if current.remaining_units is None else 0.0)
+        + (0.25 if current.used_percent is None and current.remaining_units is None else 0.0)
+    )
     burden = math.log1p(
-        pressure * policy.subscription_scarcity_multiplier * pool_weight + confidence_uncertainty
+        pressure
+        * policy.subscription_scarcity_multiplier
+        * pool_weight
+        * reset_factor
+        + confidence_uncertainty
     ) / max(success_probability, 0.001)
     value = (
         units * float(rule.policy_value_usd_per_unit)
         if rule and rule.policy_value_usd_per_unit is not None
         else 0.0
     )
-    return burden, value
+    return burden, value, pressure, reset_factor, confidence_uncertainty
 
 
 def add_subscription_vector(
@@ -115,16 +156,25 @@ def add_subscription_vector(
     burdens: list[float] = []
     private_value = 0.0
     for item in known:
-        burden, value = subscription_score_components(
+        burden, value, pressure, reset_factor, evidence_uncertainty = (
+            _subscription_burden_components(
             resource_pool=item.resource_pool,
             unit=item.unit,
             units=float(item.consumed or 0),
             policy=policy,
             quota=quotas.get((item.resource_pool, item.unit)),
             success_probability=estimate.success_probability,
+            )
         )
         burdens.append(burden)
         private_value += value
+        breakdown.subscription_pressure = max(breakdown.subscription_pressure, pressure)
+        breakdown.subscription_reset_factor = max(
+            breakdown.subscription_reset_factor, reset_factor
+        )
+        breakdown.subscription_evidence_uncertainty = max(
+            breakdown.subscription_evidence_uncertainty, evidence_uncertainty
+        )
     weights = policy.weights.normalized()
     subscription = weights["subscription"] * max(burdens, default=0.0)
     base_value = policy_valuation_amount(estimate, policy)
@@ -139,6 +189,7 @@ def add_subscription_vector(
     updated = breakdown.model_copy(deep=True)
     updated.subscription = subscription
     updated.policy_valuation += policy_value - prior_policy_value
+    updated.subscription_policy_value_usd += private_value
     updated.monetary += policy_value - prior_policy_value
     updated.total += subscription + policy_value - prior_policy_value
     return updated
@@ -322,10 +373,20 @@ def score_candidate(
     )
     compute = _compute_burden(estimate, policy, context) * expected_multiplier
     subscription = 0.0
+    subscription_policy_value = 0.0
+    subscription_pressure = 0.0
+    subscription_reset_factor = 1.0
+    subscription_evidence_uncertainty = 0.0
     if subscription_quota is not None and _subscription_units(spec, estimate):
         units = _subscription_units(spec, estimate)
         unit = subscription_quota.unit
-        subscription, subscription_policy_value = subscription_score_components(
+        (
+            subscription,
+            subscription_policy_value,
+            subscription_pressure,
+            subscription_reset_factor,
+            subscription_evidence_uncertainty,
+        ) = _subscription_burden_components(
             resource_pool=spec.resource_pool or "",
             unit=unit,
             units=units,
@@ -369,6 +430,18 @@ def score_candidate(
         latency=weights["latency"] * latency,
         compute=weights["compute"] * compute,
         subscription=weights["subscription"] * subscription,
+        subscription_pressure=(
+            subscription_pressure if subscription_quota is not None else 0.0
+        ),
+        subscription_reset_factor=(
+            subscription_reset_factor if subscription_quota is not None else 1.0
+        ),
+        subscription_evidence_uncertainty=(
+            subscription_evidence_uncertainty if subscription_quota is not None else 0.0
+        ),
+        subscription_policy_value_usd=(
+            subscription_policy_value if subscription_quota is not None else 0.0
+        ),
         reliability=weights["reliability"] * reliability,
         quality=weights["quality"] * quality,
         risk=weights["risk"] * risk,

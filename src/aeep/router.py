@@ -41,6 +41,7 @@ from .accounting import (
 )
 from .artifact_store import ContentArtifactStore
 from .cache_affinity import estimate_cache_affinity
+from .capacity import CapacityObservation, CapacityWindow, observation_quota
 from .config import load_manifest
 from .discovery import CompositeProviderRegistry
 from .economic.aggregates import MarketAggregateSelector
@@ -755,10 +756,18 @@ class Router:
     ) -> SubscriptionQuota | None:
         if not spec.resource_pool:
             return None
+        resource = self.resources.get(spec.resource_pool)
+        if isinstance(resource, SubscriptionResource) and spec.kind is ExecutorKind.MANAGED_HOST:
+            capacity = self.store.latest_capacity_observation(resource.id)
+            if capacity is not None:
+                return observation_quota(
+                    capacity,
+                    unit=resource.unit,
+                    now=self._economic_now(),
+                )
         override = context.subscription_quotas.get(spec.resource_pool)
         if override is not None:
             return override
-        resource = self.resources.get(spec.resource_pool)
         if not isinstance(resource, SubscriptionResource):
             return None
         observed = self.store.latest_quota_observation(resource.id)
@@ -5108,7 +5117,39 @@ class Router:
         )
         if not self.registry.find(request_model.capability):
             await self.discover(request_model.capability)
+        await self._snapshot_managed_capacity(request_model.capability)
         return self.route(request_model)
+
+    async def _snapshot_managed_capacity(
+        self, capability: str, *, executor_id: str | None = None
+    ) -> None:
+        seen: set[tuple[str, str]] = set()
+        for spec in sorted(self.registry.find(capability), key=lambda item: item.id):
+            if spec.kind is not ExecutorKind.MANAGED_HOST or (
+                executor_id is not None and spec.id != executor_id
+            ):
+                continue
+            config = spec.managed_host_config()
+            key = (config.adapter_id, spec.resource_pool or "")
+            if key in seen:
+                continue
+            seen.add(key)
+            try:
+                observation = await asyncio.wait_for(
+                    self.managed_hosts.get(config.adapter_id).snapshot_capacity(),
+                    timeout=min(config.timeout_seconds, 30),
+                )
+                if observation.resource_id != spec.resource_pool:
+                    raise ConfigurationError(
+                        "managed-host capacity observation names the wrong resource"
+                    )
+            except Exception:
+                observation = CapacityObservation(
+                    resource_id=spec.resource_pool or "unknown",
+                    source="managed_host_unavailable",
+                    windows=(CapacityWindow(window_id="unknown", confidence=0),),
+                )
+            self.store.save_capacity_observation(observation)
 
     async def benchmark(
         self,
@@ -5263,6 +5304,25 @@ class Router:
         )
 
     @staticmethod
+    def _quota_materially_changed(
+        before: SubscriptionQuota | None, after: SubscriptionQuota | None
+    ) -> bool:
+        if before is None or after is None:
+            return before is not after
+        fields = (
+            "state",
+            "confidence",
+            "unit",
+            "allowance_units",
+            "remaining_units",
+            "used_percent",
+            "reset_at",
+            "window_duration_seconds",
+            "window_count",
+        )
+        return any(getattr(before, field) != getattr(after, field) for field in fields)
+
+    @staticmethod
     def _can_fallback(
         *,
         status: ExecutionStatus,
@@ -5294,6 +5354,7 @@ class Router:
         allow_unsafe_executor: bool = False,
         dry_run: bool = False,
         _idempotency_claimed: bool = False,
+        _quota_rerouted: bool = False,
     ) -> ExecutionOutcome:
         """Route and execute, returning a full decision plus attempt receipts.
 
@@ -5388,6 +5449,7 @@ class Router:
                     approved_side_effect=approved_side_effect,
                     allow_unsafe_executor=allow_unsafe_executor,
                     _idempotency_claimed=True,
+                    _quota_rerouted=_quota_rerouted,
                 )
             except Exception:
                 self.store.mark_idempotency_indeterminate(idempotency_key)
@@ -5409,6 +5471,24 @@ class Router:
         for attempt_number, candidate in enumerate(candidates[:max_attempts], start=1):
             spec = self.registry.get(candidate.executor_id)
             self._require_active_spec(spec)
+            if spec.kind is ExecutorKind.MANAGED_HOST:
+                before_quota = candidate.subscription_quota
+                await self._snapshot_managed_capacity(
+                    decision.action.capability, executor_id=spec.id
+                )
+                after_quota = self._subscription_quota(spec, decision.action.context)
+                if (
+                    not _quota_rerouted
+                    and self._quota_materially_changed(before_quota, after_quota)
+                ):
+                    rerouted = self.route(decision.action)
+                    return await self.execute(
+                        rerouted,
+                        approved_side_effect=approved_side_effect,
+                        allow_unsafe_executor=allow_unsafe_executor,
+                        _idempotency_claimed=_idempotency_claimed,
+                        _quota_rerouted=True,
+                    )
             if not spec.enabled or spec.capability != decision.action.capability:
                 raise NoRouteError(
                     f"route {spec.id!r} is no longer active for {decision.action.capability!r}; reroute"

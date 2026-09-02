@@ -18,6 +18,16 @@ zero incremental cash and positive scarce usage. When funding or billing is
 unknown, actual cash is unavailable—not zero. Fixed monthly fees are campaign
 context and are never amortized per action.
 
+For managed subscription routes, AEEP retains every provider window and scores the
+most constraining one. The exact opportunity burden is
+`log1p(scarcity_multiplier × pool_weight × pressure × reset_factor + uncertainty)
+/ success_probability`. Pressure uses exact remaining capacity when available,
+otherwise the reported used percentage, otherwise a conservative unknown-state
+penalty. `reset_factor` is 1–2 from the observed reset distance and window duration;
+uncertainty is `1 - confidence`, plus 0.25 when exact remaining capacity is unknown
+and another 0.25 when percentage is also unknown. Private per-unit values remain
+labelled policy valuations and never become cash or settlement evidence.
+
 ## Estimate versus actual
 
 Before execution, `RouteEstimate.cash` can be supported by a static prior,

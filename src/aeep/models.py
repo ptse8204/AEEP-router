@@ -466,11 +466,16 @@ class ValidationKind(StrEnum):
 class SubscriptionQuota(StrictModel):
     state: QuotaState = QuotaState.UNKNOWN
     reset_at: datetime | None = None
+    observed_at: datetime | None = None
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     source: QuotaSource = QuotaSource.USER
     unit: str = Field(default="provider_unit", min_length=1, max_length=100)
     allowance_units: Decimal | None = Field(default=None, ge=0)
     remaining_units: Decimal | None = Field(default=None, ge=0)
+    used_percent: Decimal | None = Field(default=None, ge=0, le=100)
+    window_duration_seconds: int | None = Field(default=None, gt=0)
+    window_count: int = Field(default=1, ge=1)
+    evidence_digest: str | None = Field(default=None, pattern=r"^sha256:[a-f0-9]{64}$")
 
     @model_validator(mode="after")
     def valid_allowance(self) -> SubscriptionQuota:
@@ -480,6 +485,11 @@ class SubscriptionQuota(StrictModel):
             and self.remaining_units > self.allowance_units
         ):
             raise ValueError("remaining_units cannot exceed allowance_units")
+        for timestamp in (self.reset_at, self.observed_at):
+            if timestamp is not None and (
+                timestamp.tzinfo is None or timestamp.utcoffset() is None
+            ):
+                raise ValueError("subscription quota times must be timezone-aware")
         return self
 
 
@@ -2946,6 +2956,10 @@ class ScoreBreakdown(StrictModel):
     latency: float = 0.0
     compute: float = 0.0
     subscription: float = 0.0
+    subscription_pressure: float = 0.0
+    subscription_reset_factor: float = 1.0
+    subscription_evidence_uncertainty: float = 0.0
+    subscription_policy_value_usd: float = 0.0
     reliability: float = 0.0
     quality: float = 0.0
     risk: float = 0.0

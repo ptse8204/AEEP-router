@@ -299,6 +299,19 @@
                 "default": null,
                 "title": "Reset At"
               },
+              "observed_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Observed At"
+              },
               "confidence": {
                 "default": 0.5,
                 "maximum": 1.0,
@@ -350,6 +363,56 @@
                 ],
                 "default": null,
                 "title": "Remaining Units"
+              },
+              "used_percent": {
+                "anyOf": [
+                  {
+                    "maximum": 100.0,
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Used Percent"
+              },
+              "window_duration_seconds": {
+                "anyOf": [
+                  {
+                    "exclusiveMinimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Window Duration Seconds"
+              },
+              "window_count": {
+                "default": 1,
+                "minimum": 1,
+                "title": "Window Count",
+                "type": "integer"
+              },
+              "evidence_digest": {
+                "anyOf": [
+                  {
+                    "pattern": "^sha256:[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Evidence Digest"
               }
             },
             "title": "SubscriptionQuota",

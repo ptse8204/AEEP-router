@@ -9,7 +9,7 @@ Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 | 2. Capacity contracts | COMPLETE | Capacity contracts and SQLite schema 6 verified. |
 | 3. Managed-host seam | COMPLETE | Provider-neutral adapter and executor verified. |
 | 4. Codex App Server | COMPLETE | Fake-server transport and managed adapter verified. |
-| 5. Quota routing | NOT_STARTED | Add capacity pressure to routing. |
+| 5. Quota routing | COMPLETE | Multi-window pressure and pre-invocation revalidation verified. |
 | 6. Durable attempts | NOT_STARTED | Unify attempt persistence and recovery. |
 | 7. Tool Search proofs | NOT_STARTED | Add host-native routing campaigns. |
 | 8. x402 contracts | NOT_STARTED | Add offline conformance binding. |
@@ -30,6 +30,8 @@ Phase 2: 57 capacity, migration, and provider-package tests passed; Ruff, mypy, 
 Phase 3: managed-host router, registry collision, legacy host, provider-package authority, Ruff, mypy, compile, and schema checks passed.
 
 Phase 4: added a bounded persistent App Server transport, sanitized account/model/quota observations, approval intersection, one-turn execution, token/reroute accounting, operator-only login service, and a credential-free fake server. Ruff, mypy, compile, schemas, and 37 focused transport/adapter/router tests passed.
+
+Phase 5: mapped all raw quota windows to a conservative maximum-pressure routing view; exposed pressure, reset, uncertainty, and private valuation score components; refreshed before scoring and revalidated once before invocation. Forty-four focused scoring, router, and adapter tests passed; Ruff, mypy, compile, and generated schemas passed.
 
 Proof/report paths: `reports/v07/baseline.json`, `reports/v07/baseline-coverage.json`.
 

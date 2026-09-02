@@ -17,7 +17,7 @@ from .models import (
     ExecutionEntitlement,
     capacity_digest,
 )
-from .policy import require_entitlement_authority
+from .policy import observation_quota, require_entitlement_authority
 from .reservations import reservation
 
 __all__ = [
@@ -37,6 +37,7 @@ __all__ = [
     "ExecutionEntitlement",
     "capacity_digest",
     "issue_entitlement",
+    "observation_quota",
     "principal_digest",
     "require_entitlement_authority",
     "reservation",

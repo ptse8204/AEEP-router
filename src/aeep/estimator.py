@@ -20,6 +20,7 @@ from .models import (
     EvidenceStatus,
     ExecutionReceipt,
     ExecutionStatus,
+    ExecutorKind,
     ExecutorSpec,
     MeasurementEvidence,
     PolicyConfig,
@@ -100,6 +101,10 @@ class HistoricalEstimator:
         features: ActionFeatures | None = None,
     ) -> RouteEstimate:
         base = _shared_prior(self.store, spec, policy)
+        if spec.kind is ExecutorKind.MANAGED_HOST:
+            # Runtime model/account/region are unknown until host selection. Mixing
+            # those observations would be less useful than the qualified static bound.
+            return base
         fingerprint, cohort = evidence_cohort_digest(spec, features)
         receipts = [
             receipt
