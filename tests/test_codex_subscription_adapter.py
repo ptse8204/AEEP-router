@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import builtins
 import sys
 from pathlib import Path
 from typing import Any
@@ -79,6 +80,24 @@ async def test_auth_required_is_explicit_and_does_not_fallback():
         probe = await host.probe()
         assert probe.status is HostProbeStatus.AUTH_REQUIRED
         assert probe.supported_features == ("account/read",)
+    finally:
+        await host.close()
+
+
+@pytest.mark.asyncio
+async def test_adapter_never_reads_codex_auth_files(monkeypatch):
+    real_open = builtins.open
+
+    def guarded_open(file: object, *args: object, **kwargs: object):
+        if str(file).endswith("auth.json"):
+            raise AssertionError("adapter attempted to read Codex credentials")
+        return real_open(file, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "open", guarded_open)
+    host = adapter()
+    try:
+        account = await host.account()
+        assert account.authenticated
     finally:
         await host.close()
 

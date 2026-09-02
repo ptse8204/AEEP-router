@@ -10,6 +10,7 @@ from .models import (
     CapacitySignature,
     CapacityTransferability,
     ExecutionEntitlement,
+    utc_now,
 )
 from .policy import require_entitlement_authority
 
@@ -30,6 +31,7 @@ def issue_entitlement(
     transferability: CapacityTransferability,
     signature: CapacitySignature,
     authorization: CapacityAuthorizationEvidence | None = None,
+    issued_at: datetime | None = None,
 ) -> ExecutionEntitlement:
     require_entitlement_authority(
         transferability=transferability,
@@ -60,4 +62,5 @@ def issue_entitlement(
         transferability_basis=transferability,
         authorization_evidence_id=authorization.evidence_id if authorization else None,
         signature=signature,
+        issued_at=issued_at or utc_now(),
     )

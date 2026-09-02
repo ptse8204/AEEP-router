@@ -117,6 +117,7 @@ from aeep.provider_package import (
     SmokeTestReport,
 )
 from aeep.qualification import QualificationReport, RouteCandidate
+from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
 
@@ -216,6 +217,7 @@ MODEL_FILES = {
     "route-candidate.schema.json": RouteCandidate,
     "qualification-report.schema.json": QualificationReport,
     "route-decision.schema.json": RouteDecision,
+    "router-completion-report.schema.json": RouterCompletionReport,
     "settlement-evidence.schema.json": SettlementEvidence,
     "settlement-receipt.schema.json": SettlementReceipt,
     "signature-envelope-v2.schema.json": SignatureEnvelopeV2,

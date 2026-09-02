@@ -36,6 +36,7 @@ def self_only_entitlement():
         signature=CapacitySignature(
             algorithm="fixture", key_id="offline", value="signed"
         ),
+        issued_at=NOW,
     )
 
 

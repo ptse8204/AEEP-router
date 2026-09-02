@@ -75,6 +75,7 @@ x402_app = typer.Typer(help="Run optional offline x402 capacity conformance.")
 hosts_app = typer.Typer(help="Inspect locally configured managed hosts.")
 codex_host_app = typer.Typer(help="Inspect the official local Codex App Server.")
 capacity_app = typer.Typer(help="Inspect provider-neutral capacity state.")
+verify_app = typer.Typer(help="Run digest-bound executable completion checks.")
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
@@ -95,6 +96,7 @@ app.add_typer(x402_app, name="x402")
 app.add_typer(hosts_app, name="hosts")
 hosts_app.add_typer(codex_host_app, name="codex")
 app.add_typer(capacity_app, name="capacity")
+app.add_typer(verify_app, name="verify")
 
 
 def _emit(value: Any, *, compact: bool = False) -> None:
@@ -3353,6 +3355,28 @@ def capacity_reservations(
     finally:
         if router is not None:
             _run(router.close())
+
+
+@verify_app.command("router-complete")
+def verify_router_completion(
+    profile: str = typer.Option("all", "--profile"),
+    strict: bool = typer.Option(False, "--strict"),
+    json_output: bool = typer.Option(False, "--json"),
+) -> None:
+    """Execute the selected release checks and verify locked evidence digests."""
+
+    from .verification import strict_failure, verify_router_complete, write_completion_report
+
+    if profile not in {"core", "openai", "marketplace-contract", "all"}:
+        _fail(ConfigurationError("unknown completion verification profile"))
+    report = verify_router_complete(profile=profile)  # type: ignore[arg-type]
+    write_completion_report(report)
+    if json_output:
+        _emit(report)
+    else:
+        typer.echo(f"AEEP router completion: {'PASS' if report.release_ready else 'INCOMPLETE'}")
+    if strict and strict_failure(report):
+        raise typer.Exit(code=2)
 
 
 @candidate_app.command("status")

@@ -1,0 +1,584 @@
+{
+  "schema": "aeep-router-completion-v1",
+  "version": "0.7.0",
+  "revision": "8ddc4e1c1e2521f79580c3271b80e4a14e397b5a",
+  "generated_at": "2026-09-02T12:14:25.334939Z",
+  "profiles": {
+    "core": "PASS",
+    "openai": "PASS",
+    "marketplace_contract": "PASS",
+    "marketplace_live": "DISABLED"
+  },
+  "checks": [
+    {
+      "id": "exact-versioned-capability",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_version_consistency.py::test_legacy_manifest_versions_remain_supported"
+      ],
+      "evidence_ids": [
+        "tests/test_version_consistency.py"
+      ],
+      "artifact_digests": [
+        "sha256:5ab75989c3aa4c87863d73f01f736391349ebb1786b1dbaf61f6347fc3bca536"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "input-output-schema-validation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_router_execution.py::test_invalid_output_without_fallback_has_failed_outcome"
+      ],
+      "evidence_ids": [
+        "tests/test_router_execution.py"
+      ],
+      "artifact_digests": [
+        "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "hard-policy-before-scoring",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_models_policy_scoring.py::test_hard_constraints_reject_before_scoring"
+      ],
+      "evidence_ids": [
+        "tests/test_models_policy_scoring.py"
+      ],
+      "artifact_digests": [
+        "sha256:9be7471108001513fe17f4c4975680f9d4ece49d967475bb4fe1f1a895ff7e69"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "request-cannot-weaken-policy",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_models_policy_scoring.py::test_merge_constraints_never_weakens_policy"
+      ],
+      "evidence_ids": [
+        "tests/test_models_policy_scoring.py"
+      ],
+      "artifact_digests": [
+        "sha256:9be7471108001513fe17f4c4975680f9d4ece49d967475bb4fe1f1a895ff7e69"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "route-qualification-activation-drift",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v03_qualification_workflow.py::test_candidate_requires_qualification_activation_and_suspends_on_drift"
+      ],
+      "evidence_ids": [
+        "tests/test_v03_qualification_workflow.py"
+      ],
+      "artifact_digests": [
+        "sha256:dca5f7ad13c1e0e0ecf2e11fd4c43cb968915228e14227e806799adc5eccf050"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "deterministic-ranking-tie-breaking",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_completion_verifier.py::test_router_tie_breaks_by_executor_id"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_completion_verifier.py"
+      ],
+      "artifact_digests": [
+        "sha256:5926765d96be138481c6c3270c56b8dace2e47f4243d455cb038134d3096b44c"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "baseline-abstention",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_router_execution.py::test_router_abstains_when_gain_is_below_configured_overhead"
+      ],
+      "evidence_ids": [
+        "tests/test_router_execution.py"
+      ],
+      "artifact_digests": [
+        "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "idempotency",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_p0_usefulness.py::test_idempotency_replays_receipt_without_reexecuting_output"
+      ],
+      "evidence_ids": [
+        "tests/test_p0_usefulness.py"
+      ],
+      "artifact_digests": [
+        "sha256:fdfdfa250519b59a3deeb808698362a043d210cb3ab3e001033cbfd98a1c1da1"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "unified-attempt-transitions",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_execution_attempts.py"
+      ],
+      "artifact_digests": [
+        "sha256:baa862a8ebaef8350e23067755bd3b4b989d47c7599d12be00214688af753fb2"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "crash-recovery-no-blind-duplicate",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_execution_attempts.py"
+      ],
+      "artifact_digests": [
+        "sha256:baa862a8ebaef8350e23067755bd3b4b989d47c7599d12be00214688af753fb2"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "receipt-accounting-integrity",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v04_accounting.py::test_subscription_usage_stays_separate_from_cash"
+      ],
+      "evidence_ids": [
+        "tests/test_v04_accounting.py"
+      ],
+      "artifact_digests": [
+        "sha256:8fe98a6cf7fdf709aef26dcd3c410f545636d60c8d6b4835d0dbbb6570c93a5b"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "privacy-defaults",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_router_execution.py::test_persisted_decision_redacts_sensitive_input_and_context"
+      ],
+      "evidence_ids": [
+        "tests/test_router_execution.py"
+      ],
+      "artifact_digests": [
+        "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "old-manifest-database-compatibility",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v04_store_migrations.py::test_unversioned_legacy_database_migrates_without_data_loss"
+      ],
+      "evidence_ids": [
+        "tests/test_v04_store_migrations.py"
+      ],
+      "artifact_digests": [
+        "sha256:16e33fe0ace6525814508e3416c03d973bf1082949380d8877970bdaf4ca62e2"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "offline-operation",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_host_native_routing.py::test_exact_local_bypass_makes_no_model_call"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_host_native_routing.py"
+      ],
+      "artifact_digests": [
+        "sha256:e0416f275f72c8a9688cff9754ecc8c30082bceb04e4499365961aa28347878a"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "generated-schema-consistency",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_generated_artifacts.py::test_checked_in_schemas_are_current"
+      ],
+      "evidence_ids": [
+        "tests/test_generated_artifacts.py"
+      ],
+      "artifact_digests": [
+        "sha256:4f64cfaf3cc5c58197f8eeefbb6e5e75ac990c3f4628724dd9c73c5bd4ee6f2b"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "app-server-handshake-features",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_app_server_transport.py::test_transport_handshake_requests_and_clean_shutdown"
+      ],
+      "evidence_ids": [
+        "tests/fixtures/fake_codex_app_server.py"
+      ],
+      "artifact_digests": [
+        "sha256:0be762839e207e1a031b2a0bdcb6b7d0afe926f651ffbb82eca7eabb214eeeff"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "codex-auth-boundary",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_auth_required_is_explicit_and_does_not_fallback"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "account-identity-redaction",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_runtime_models_and_multi_window_quota_are_preserved"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "runtime-model-discovery",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_operator_cli.py::test_codex_operator_commands_use_fake_without_model_turn"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_operator_cli.py"
+      ],
+      "artifact_digests": [
+        "sha256:47910e90e90c43108fb6157de81ba7ff42ba2a1b44fb08818ed14ecbbd68adf2"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "multi-window-quota",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_runtime_models_and_multi_window_quota_are_preserved"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "per-turn-token-accounting",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "model-reroute-recording",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "approval-intersection",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_approval_requires_both_host_decision_and_aeep_ceiling"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "one-turn-managed-execution",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_managed_action_records_one_turn_reroute_and_token_accounting"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "no-credential-file-reads",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_subscription_adapter.py::test_adapter_never_reads_codex_auth_files"
+      ],
+      "evidence_ids": [
+        "tests/test_codex_subscription_adapter.py"
+      ],
+      "artifact_digests": [
+        "sha256:b9a5a242648e6aeba976b023e3636bbc8d93aa3824a7b3e2012b36cf5b13eba8"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "fake-server-conformance",
+      "profile": "openai",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_codex_app_server_transport.py::test_transport_fails_closed_on_invalid_frames"
+      ],
+      "evidence_ids": [
+        "tests/fixtures/fake_codex_app_server.py"
+      ],
+      "artifact_digests": [
+        "sha256:0be762839e207e1a031b2a0bdcb6b7d0afe926f651ffbb82eca7eabb214eeeff"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "capacity-resource-contract",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_capacity.py::test_old_subscription_resources_keep_safe_defaults"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_capacity.py"
+      ],
+      "artifact_digests": [
+        "sha256:b61da49cd26df6b194fc55a7c47b60c7adc96ffbd5555e336e6f45b854c60a76"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "transferability-enforcement",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_capacity.py::test_self_only_openai_capacity_cannot_issue_external_entitlement"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_capacity.py"
+      ],
+      "artifact_digests": [
+        "sha256:b61da49cd26df6b194fc55a7c47b60c7adc96ffbd5555e336e6f45b854c60a76"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "capacity-reservation-release",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_capacity.py::test_capacity_reservation_release_and_replay_are_atomic"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_capacity.py"
+      ],
+      "artifact_digests": [
+        "sha256:b61da49cd26df6b194fc55a7c47b60c7adc96ffbd5555e336e6f45b854c60a76"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "entitlement-binding",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline"
+      ],
+      "evidence_ids": [
+        "tests/test_x402_capacity_binding.py"
+      ],
+      "artifact_digests": [
+        "sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "openai-self-only-rejection",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_x402_capacity_binding.py::test_openai_self_only_fails_before_x402_serialization"
+      ],
+      "evidence_ids": [
+        "tests/test_x402_capacity_binding.py"
+      ],
+      "artifact_digests": [
+        "sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "provider-authorized-mock-transfer",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_v07_capacity.py::test_provider_authorized_entitlement_redeems_once_without_double_spend"
+      ],
+      "evidence_ids": [
+        "tests/test_v07_capacity.py"
+      ],
+      "artifact_digests": [
+        "sha256:b61da49cd26df6b194fc55a7c47b60c7adc96ffbd5555e336e6f45b854c60a76"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "x402-local-batch-conformance",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_x402_capacity_binding.py::test_x402_cli_emits_valid_json_report"
+      ],
+      "evidence_ids": [
+        "reports/v07/x402-conformance.json"
+      ],
+      "artifact_digests": [
+        "sha256:7a30477cddd9edd529a3fda099ce09d85242ae23ebf05e41918a144060f87955"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "replay-expiry-double-spend",
+      "profile": "marketplace_contract",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline"
+      ],
+      "evidence_ids": [
+        "tests/test_x402_capacity_binding.py"
+      ],
+      "artifact_digests": [
+        "sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "openai-live-account-proof",
+      "profile": "openai",
+      "required": false,
+      "status": "SKIP",
+      "test_ids": [],
+      "evidence_ids": [],
+      "artifact_digests": [],
+      "reason": "requires explicit operator approval, an interactive Codex login, and permission to consume one live subscription turn"
+    },
+    {
+      "id": "live-marketplace-networking",
+      "profile": "marketplace_live",
+      "required": false,
+      "status": "DISABLED",
+      "test_ids": [],
+      "evidence_ids": [],
+      "artifact_digests": [],
+      "reason": "AEEP 0.7 ships local contracts only; live networking is disabled"
+    }
+  ],
+  "router_core_ready": true,
+  "openai_adapter_ready": true,
+  "openai_live_verified": false,
+  "marketplace_contract_ready": true,
+  "marketplace_live_enabled": false,
+  "release_ready": true
+}

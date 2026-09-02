@@ -59,6 +59,7 @@ def run_local_conformance(*, binding: str = "aeep-local") -> X402ConformanceRepo
         transferability=CapacityTransferability.PROVIDER_AUTHORIZED,
         signature=signature,
         authorization=authority,
+        issued_at=now,
     )
     checks: list[X402ConformanceCheck] = []
 

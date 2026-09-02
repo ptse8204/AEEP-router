@@ -207,6 +207,14 @@ from .sdk import (
     executor_from_callable,
     export_evidence_artifact,
 )
+from .verification import (
+    CompletionCheck,
+    CompletionStatus,
+    RouterCompletionReport,
+    strict_failure,
+    verify_router_complete,
+    write_completion_report,
+)
 from .version import __version__
 from .workflow import WorkflowExecutionOutcome, WorkflowRequest
 from .x402 import (
@@ -271,6 +279,8 @@ __all__ = [
     "CodexTurnResult",
     "CodexUsageTelemetry",
     "ComparativeMeasurement",
+    "CompletionCheck",
+    "CompletionStatus",
     "ContentArtifactStore",
     "CounterfactualCashCost",
     "CounterfactualReport",
@@ -376,6 +386,7 @@ __all__ = [
     "RouteDecision",
     "RouteDisposition",
     "Router",
+    "RouterCompletionReport",
     "RoutingAbstentionConfig",
     "RoutingValueReport",
     "RoutingValueTrial",
@@ -435,4 +446,7 @@ __all__ = [
     "reservation",
     "revalue_campaign",
     "run_local_conformance",
+    "strict_failure",
+    "verify_router_complete",
+    "write_completion_report",
 ]

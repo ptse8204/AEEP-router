@@ -162,6 +162,7 @@ def test_provider_authorized_entitlement_redeems_once_without_double_spend(tmp_p
         transferability=CapacityTransferability.PROVIDER_AUTHORIZED,
         authorization=evidence,
         signature=SIGNATURE,
+        issued_at=NOW,
     )
     with ReceiptStore(tmp_path / "entitlement.db") as store:
         store.save_capacity_authorization_evidence(evidence)

@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "CompletionCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "profile": {
+          "enum": [
+            "core",
+            "openai",
+            "marketplace_contract",
+            "marketplace_live"
+          ],
+          "title": "Profile",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/CompletionStatus"
+        },
+        "test_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Test Ids",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "artifact_digests": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Artifact Digests",
+          "type": "array"
+        },
+        "reason": {
+          "default": "",
+          "maxLength": 4000,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "profile",
+        "required",
+        "status"
+      ],
+      "title": "CompletionCheck",
+      "type": "object"
+    },
+    "CompletionStatus": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "SKIP",
+        "DISABLED"
+      ],
+      "title": "CompletionStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "aeep-router-completion-v1",
+      "default": "aeep-router-completion-v1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "version": {
+      "const": "0.7.0",
+      "default": "0.7.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "revision": {
+      "pattern": "^(?:[a-f0-9]{40}|unknown)$",
+      "title": "Revision",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "profiles": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CompletionStatus"
+      },
+      "title": "Profiles",
+      "type": "object"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/CompletionCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "router_core_ready": {
+      "title": "Router Core Ready",
+      "type": "boolean"
+    },
+    "openai_adapter_ready": {
+      "title": "Openai Adapter Ready",
+      "type": "boolean"
+    },
+    "openai_live_verified": {
+      "title": "Openai Live Verified",
+      "type": "boolean"
+    },
+    "marketplace_contract_ready": {
+      "title": "Marketplace Contract Ready",
+      "type": "boolean"
+    },
+    "marketplace_live_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Marketplace Live Enabled",
+      "type": "boolean"
+    },
+    "release_ready": {
+      "title": "Release Ready",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "revision",
+    "generated_at",
+    "profiles",
+    "checks",
+    "router_core_ready",
+    "openai_adapter_ready",
+    "openai_live_verified",
+    "marketplace_contract_ready",
+    "release_ready"
+  ],
+  "title": "RouterCompletionReport",
+  "type": "object"
+}
