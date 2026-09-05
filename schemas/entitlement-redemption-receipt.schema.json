@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "EntitlementRedemptionStatus": {
+      "enum": [
+        "partial",
+        "consumed"
+      ],
+      "title": "EntitlementRedemptionStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "redemption_id": {
+      "title": "Redemption Id",
+      "type": "string"
+    },
+    "entitlement_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Entitlement Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "quantity_consumed": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Quantity Consumed"
+    },
+    "remaining_quantity": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Remaining Quantity"
+    },
+    "status": {
+      "$ref": "#/$defs/EntitlementRedemptionStatus"
+    },
+    "evidence_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Evidence Digest",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "entitlement_id",
+    "attempt_id",
+    "quantity_consumed",
+    "remaining_quantity",
+    "status",
+    "evidence_digest"
+  ],
+  "title": "EntitlementRedemptionReceipt",
+  "type": "object"
+}

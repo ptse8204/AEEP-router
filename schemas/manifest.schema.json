@@ -448,6 +448,135 @@
       "title": "CapabilityDefinition",
       "type": "object"
     },
+    "CapacityResource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "purchased_credit",
+            "local_compute",
+            "external_entitlement"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "product": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Product",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "resource_fingerprint": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Resource Fingerprint",
+          "type": "string"
+        },
+        "transferability": {
+          "$ref": "#/$defs/CapacityTransferability",
+          "default": "self_only"
+        },
+        "settlement_mode": {
+          "$ref": "#/$defs/CapacitySettlementMode",
+          "default": "none"
+        },
+        "allowance": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowance"
+        },
+        "remaining": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remaining"
+        },
+        "authorization_evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authorization Evidence Id"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "provider",
+        "product",
+        "unit",
+        "resource_fingerprint"
+      ],
+      "title": "CapacityResource",
+      "type": "object"
+    },
+    "CapacitySettlementMode": {
+      "enum": [
+        "none",
+        "subscription_usage",
+        "x402_batch",
+        "x402_exact"
+      ],
+      "title": "CapacitySettlementMode",
+      "type": "string"
+    },
+    "CapacityTransferability": {
+      "enum": [
+        "self_only",
+        "same_principal",
+        "provider_authorized",
+        "transferable"
+      ],
+      "title": "CapacityTransferability",
+      "type": "string"
+    },
     "CashEstimate": {
       "additionalProperties": false,
       "properties": {
@@ -854,6 +983,7 @@
         "http",
         "mcp",
         "host",
+        "host_managed",
         "delegate"
       ],
       "title": "ExecutorKind",
@@ -1975,6 +2105,19 @@
           "default": null,
           "title": "Reset At"
         },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        },
         "confidence": {
           "default": 0.5,
           "maximum": 1.0,
@@ -2026,6 +2169,56 @@
           ],
           "default": null,
           "title": "Remaining Units"
+        },
+        "used_percent": {
+          "anyOf": [
+            {
+              "maximum": 100.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Used Percent"
+        },
+        "window_duration_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Window Duration Seconds"
+        },
+        "window_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Window Count",
+          "type": "integer"
+        },
+        "evidence_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Digest"
         }
       },
       "title": "SubscriptionQuota",
@@ -2075,6 +2268,14 @@
         },
         "capabilities": {
           "$ref": "#/$defs/SubscriptionCapabilities"
+        },
+        "transferability": {
+          "$ref": "#/$defs/CapacityTransferability",
+          "default": "self_only"
+        },
+        "settlement_mode": {
+          "$ref": "#/$defs/CapacitySettlementMode",
+          "default": "subscription_usage"
         }
       },
       "required": [
@@ -2217,7 +2418,7 @@
   "additionalProperties": false,
   "properties": {
     "version": {
-      "default": "0.6",
+      "default": "0.7",
       "enum": [
         "0.1",
         "0.15",
@@ -2225,7 +2426,8 @@
         "0.3",
         "0.4",
         "0.5",
-        "0.6"
+        "0.6",
+        "0.7"
       ],
       "title": "Version",
       "type": "string"
@@ -2287,7 +2489,23 @@
     },
     "resources": {
       "items": {
-        "$ref": "#/$defs/SubscriptionResource"
+        "discriminator": {
+          "mapping": {
+            "external_entitlement": "#/$defs/CapacityResource",
+            "local_compute": "#/$defs/CapacityResource",
+            "purchased_credit": "#/$defs/CapacityResource",
+            "subscription": "#/$defs/SubscriptionResource"
+          },
+          "propertyName": "kind"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/SubscriptionResource"
+          },
+          {
+            "$ref": "#/$defs/CapacityResource"
+          }
+        ]
       },
       "title": "Resources",
       "type": "array"

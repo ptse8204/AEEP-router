@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import os
+import socket
+import sys
 from typing import Any
 
 import pytest
@@ -13,6 +16,28 @@ from aeep.models import (
     RouteEstimate,
     SideEffect,
 )
+
+
+@pytest.fixture(autouse=True)
+def block_network_during_completion_verification(monkeypatch):
+    if os.getenv("AEEP_VERIFY_OFFLINE") != "1":
+        return
+
+    def denied(*_args: object, **_kwargs: object):
+        raise AssertionError("completion verification attempted a network connection")
+
+    connect = socket.socket.connect
+    socketpair_code = socket.socketpair.__code__
+
+    def guarded_connect(sock, address):
+        # Windows socketpair connects to its own ephemeral loopback listener.
+        # Permit only that stdlib call site, not arbitrary loopback connections.
+        if sys._getframe(1).f_code is socketpair_code:
+            return connect(sock, address)
+        return denied(sock, address)
+
+    monkeypatch.setattr(socket, "create_connection", denied)
+    monkeypatch.setattr(socket.socket, "connect", guarded_connect)
 
 
 @pytest.fixture

@@ -13,13 +13,17 @@ AEEP feasibility + economic policy
           │
      selected route
           │
-   ┌──────┼────────┬────────┬───────────┐
- Python  CLI      HTTP     MCP     host/delegate
-                                      │
-                              browser/model/GUI host
+   ┌──────┼────────┬────────┬───────────┬──────────────┐
+ Python  CLI      HTTP     MCP     host/delegate   managed host
+                                      │                 │
+                              browser/model/GUI     reviewed adapter
 ```
 
 AEEP belongs below planning and above execution adapters. It does not tell an agent how to decompose an open-ended goal; it optimizes bounded actions after decomposition.
+
+Native Tool Search remains above this boundary. It may discover a capability,
+then pass the bounded `ActionRequest` to AEEP; implementation discovery and
+selection do not add a model-facing meta-router round.
 
 ## Why a semantic action rather than a tool name
 
@@ -123,6 +127,24 @@ Represents an execution surface owned by the host agent: browser, GUI, computer-
 ### Host subscription
 
 `host` formalizes current-agent execution without calling a model API. It references a user-owned `SubscriptionResource`, returns `HOST_SELECTED`, and consumes provider-local `subscription_units`. Quota pressure changes the preference score or rejects an exhausted resource; it is never converted into a public cash value.
+
+### Managed host
+
+`host_managed` invokes a reviewed, locally configured adapter directly and does
+not change legacy `host` behavior. Adapters expose probe, capacity snapshot,
+runtime model discovery, bounded execution, interruption, and close operations.
+The first reference adapter targets the official Codex App Server. Codex owns
+authentication; AEEP persists only HMAC principal correlation and sanitized
+operational evidence. A provider package cannot authorize this local boundary.
+
+Subscription capacity is provider-local. Reservations and entitlements retain
+its raw unit and resource fingerprint. Personal subscription resources default
+to `SELF_ONLY`; private valuation may affect scoring but cannot become cash or
+settlement evidence.
+
+x402 support binds only eligible provider-authorized capacity to an offline,
+disabled-by-default batch-settlement contract. Marketplace, wallet, custody,
+payout, cryptocurrency, and live transfer behavior are outside 0.7.
 
 ## Persistence
 

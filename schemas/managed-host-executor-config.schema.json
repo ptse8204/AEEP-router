@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "ManagedHostModelConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "required_capabilities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Capabilities",
+          "type": "array"
+        },
+        "minimum_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum Context Tokens"
+        }
+      },
+      "title": "ManagedHostModelConstraints",
+      "type": "object"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "adapter_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Adapter Id",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Argv",
+      "type": "array"
+    },
+    "executable_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executable Sha256"
+    },
+    "instructions": {
+      "maxLength": 100000,
+      "minLength": 1,
+      "title": "Instructions",
+      "type": "string"
+    },
+    "model_constraints": {
+      "$ref": "#/$defs/ManagedHostModelConstraints"
+    },
+    "reasoning_efforts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasoning Efforts",
+      "type": "array"
+    },
+    "working_directory_policy": {
+      "default": "inherit",
+      "enum": [
+        "inherit",
+        "manifest",
+        "fixed"
+      ],
+      "title": "Working Directory Policy",
+      "type": "string"
+    },
+    "working_directory": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory"
+    },
+    "sandbox_policy": {
+      "default": "host_default",
+      "enum": [
+        "host_default",
+        "read_only",
+        "workspace_write"
+      ],
+      "title": "Sandbox Policy",
+      "type": "string"
+    },
+    "approval_ceiling": {
+      "$ref": "#/$defs/SideEffect",
+      "default": "read"
+    },
+    "output_mode": {
+      "default": "json",
+      "enum": [
+        "json",
+        "text"
+      ],
+      "title": "Output Mode",
+      "type": "string"
+    },
+    "timeout_seconds": {
+      "default": 300,
+      "exclusiveMinimum": 0,
+      "maximum": 3600,
+      "title": "Timeout Seconds",
+      "type": "number"
+    },
+    "max_message_bytes": {
+      "default": 1048576,
+      "maximum": 16777216,
+      "minimum": 1024,
+      "title": "Max Message Bytes",
+      "type": "integer"
+    },
+    "environment_allowlist": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Environment Allowlist",
+      "type": "array"
+    },
+    "store_prompt": {
+      "default": false,
+      "title": "Store Prompt",
+      "type": "boolean"
+    },
+    "store_output": {
+      "default": false,
+      "title": "Store Output",
+      "type": "boolean"
+    },
+    "redaction_policy": {
+      "default": "default",
+      "enum": [
+        "default",
+        "strict"
+      ],
+      "title": "Redaction Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "adapter_id",
+    "argv",
+    "instructions"
+  ],
+  "title": "ManagedHostExecutorConfig",
+  "type": "object"
+}

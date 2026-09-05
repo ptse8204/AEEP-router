@@ -11,6 +11,7 @@ import hashlib
 import ipaddress
 import json
 import math
+import os
 import re
 from datetime import UTC, datetime
 from decimal import (
@@ -37,6 +38,12 @@ from pydantic import (
     WithJsonSchema,
     field_validator,
     model_validator,
+)
+
+from .capacity.models import (
+    CapacityResource,
+    CapacitySettlementMode,
+    CapacityTransferability,
 )
 
 
@@ -68,6 +75,7 @@ class ExecutorKind(StrEnum):
     HTTP = "http"
     MCP = "mcp"
     HOST = "host"
+    MANAGED_HOST = "host_managed"
     DELEGATE = "delegate"
 
 
@@ -458,11 +466,16 @@ class ValidationKind(StrEnum):
 class SubscriptionQuota(StrictModel):
     state: QuotaState = QuotaState.UNKNOWN
     reset_at: datetime | None = None
+    observed_at: datetime | None = None
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     source: QuotaSource = QuotaSource.USER
     unit: str = Field(default="provider_unit", min_length=1, max_length=100)
     allowance_units: Decimal | None = Field(default=None, ge=0)
     remaining_units: Decimal | None = Field(default=None, ge=0)
+    used_percent: Decimal | None = Field(default=None, ge=0, le=100)
+    window_duration_seconds: int | None = Field(default=None, gt=0)
+    window_count: int = Field(default=1, ge=1)
+    evidence_digest: str | None = Field(default=None, pattern=r"^sha256:[a-f0-9]{64}$")
 
     @model_validator(mode="after")
     def valid_allowance(self) -> SubscriptionQuota:
@@ -472,6 +485,11 @@ class SubscriptionQuota(StrictModel):
             and self.remaining_units > self.allowance_units
         ):
             raise ValueError("remaining_units cannot exceed allowance_units")
+        for timestamp in (self.reset_at, self.observed_at):
+            if timestamp is not None and (
+                timestamp.tzinfo is None or timestamp.utcoffset() is None
+            ):
+                raise ValueError("subscription quota times must be timezone-aware")
         return self
 
 
@@ -498,6 +516,8 @@ class SubscriptionResource(StrictModel):
     access: SubscriptionAccess = Field(default_factory=SubscriptionAccess)
     quota: SubscriptionQuota = Field(default_factory=SubscriptionQuota)
     capabilities: SubscriptionCapabilities = Field(default_factory=SubscriptionCapabilities)
+    transferability: CapacityTransferability = CapacityTransferability.SELF_ONLY
+    settlement_mode: CapacitySettlementMode = CapacitySettlementMode.SUBSCRIPTION_USAGE
 
     @model_validator(mode="after")
     def align_quota_unit(self) -> SubscriptionResource:
@@ -2255,6 +2275,49 @@ class LedgerEvent(StrictModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
+class ManagedHostModelConstraints(StrictModel):
+    required_capabilities: tuple[str, ...] = ()
+    minimum_context_tokens: int | None = Field(default=None, ge=1)
+
+
+class ManagedHostExecutorConfig(StrictModel):
+    adapter_id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
+    argv: tuple[str, ...] = Field(min_length=1)
+    executable_sha256: str | None = Field(
+        default=None, pattern=r"^sha256:[a-f0-9]{64}$"
+    )
+    instructions: str = Field(min_length=1, max_length=100_000)
+    model_constraints: ManagedHostModelConstraints = Field(
+        default_factory=ManagedHostModelConstraints
+    )
+    reasoning_efforts: tuple[str, ...] = ()
+    working_directory_policy: Literal["inherit", "manifest", "fixed"] = "inherit"
+    working_directory: str | None = Field(default=None, max_length=4096)
+    sandbox_policy: Literal["host_default", "read_only", "workspace_write"] = "host_default"
+    approval_ceiling: SideEffect = SideEffect.READ
+    output_mode: Literal["json", "text"] = "json"
+    timeout_seconds: float = Field(default=300, gt=0, le=3600)
+    max_message_bytes: int = Field(default=1_048_576, ge=1024, le=16_777_216)
+    environment_allowlist: tuple[str, ...] = ()
+    store_prompt: bool = False
+    store_output: bool = False
+    redaction_policy: Literal["default", "strict"] = "default"
+
+    @model_validator(mode="after")
+    def valid_managed_host_config(self) -> ManagedHostExecutorConfig:
+        if not os.path.isabs(self.argv[0]):
+            raise ValueError("managed-host executable must be an absolute path")
+        if any(not item or "\x00" in item for item in self.argv):
+            raise ValueError("managed-host argv entries must be non-empty and NUL-free")
+        if self.working_directory_policy == "fixed" and not self.working_directory:
+            raise ValueError("fixed working-directory policy requires a directory")
+        if self.working_directory_policy != "fixed" and self.working_directory is not None:
+            raise ValueError("working_directory is valid only for fixed policy")
+        if len(self.environment_allowlist) != len(set(self.environment_allowlist)):
+            raise ValueError("managed-host environment allowlist contains duplicates")
+        return self
+
+
 class ExecutorSpec(StrictModel):
     id: str = Field(min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_.:-]+$")
     capability: str = Field(min_length=1, max_length=200)
@@ -2289,7 +2352,19 @@ class ExecutorSpec(StrictModel):
             raise ValueError("host executors require resource_pool")
         if self.kind == ExecutorKind.HOST and self.estimate.resources.subscription_units == 0:
             self.estimate.resources.subscription_units = 1.0
+        if self.kind == ExecutorKind.MANAGED_HOST:
+            config = ManagedHostExecutorConfig.model_validate(self.config)
+            if not self.resource_pool:
+                raise ValueError("managed-host executors require resource_pool")
+            if self.side_effect.rank > config.approval_ceiling.rank:
+                raise ValueError("managed-host approval ceiling is below route side effect")
+            object.__setattr__(self, "config", config.model_dump(mode="json"))
         return self
+
+    def managed_host_config(self) -> ManagedHostExecutorConfig:
+        if self.kind is not ExecutorKind.MANAGED_HOST:
+            raise ValueError("executor is not a managed-host route")
+        return ManagedHostExecutorConfig.model_validate(self.config)
 
 
 class MetricWeights(StrictModel):
@@ -2790,8 +2865,14 @@ class ProviderPackageConfig(StrictModel):
         return self
 
 
+ResourceDefinition: TypeAlias = Annotated[
+    SubscriptionResource | CapacityResource,
+    Field(discriminator="kind"),
+]
+
+
 class Manifest(StrictModel):
-    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6"] = "0.6"
+    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"] = "0.7"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)
@@ -2801,9 +2882,21 @@ class Manifest(StrictModel):
     provider_packages: ProviderPackageConfig = Field(default_factory=ProviderPackageConfig)
     policies: dict[str, PolicyConfig] = Field(default_factory=dict)
     capabilities: list[CapabilityDefinition] = Field(default_factory=list)
-    resources: list[SubscriptionResource] = Field(default_factory=list)
+    resources: list[ResourceDefinition] = Field(default_factory=list)
     registries: list[RegistryConfig] = Field(default_factory=list)
     executors: list[ExecutorSpec] = Field(default_factory=list)
+
+    @field_validator("resources", mode="before")
+    @classmethod
+    def migrate_legacy_resource_kinds(cls, value: Any) -> Any:
+        if isinstance(value, list):
+            return [
+                {"kind": "subscription", **item}
+                if isinstance(item, dict) and "kind" not in item
+                else item
+                for item in value
+            ]
+        return value
 
     @field_validator("executors")
     @classmethod
@@ -2817,8 +2910,8 @@ class Manifest(StrictModel):
     @field_validator("resources")
     @classmethod
     def unique_resource_ids(
-        cls, resources: list[SubscriptionResource]
-    ) -> list[SubscriptionResource]:
+        cls, resources: list[ResourceDefinition]
+    ) -> list[ResourceDefinition]:
         ids = [resource.id for resource in resources]
         duplicates = sorted({item for item in ids if ids.count(item) > 1})
         if duplicates:
@@ -2850,6 +2943,12 @@ class Manifest(StrictModel):
                     f"executor {executor.id!r} references unknown resource_pool "
                     f"{executor.resource_pool!r}"
                 )
+            if executor.kind in {ExecutorKind.HOST, ExecutorKind.MANAGED_HOST} and executor.resource_pool:
+                resource = next(
+                    item for item in self.resources if item.id == executor.resource_pool
+                )
+                if not isinstance(resource, SubscriptionResource):
+                    raise ValueError("host executors require a subscription resource")
         return self
 
 
@@ -2860,6 +2959,10 @@ class ScoreBreakdown(StrictModel):
     latency: float = 0.0
     compute: float = 0.0
     subscription: float = 0.0
+    subscription_pressure: float = 0.0
+    subscription_reset_factor: float = 1.0
+    subscription_evidence_uncertainty: float = 0.0
+    subscription_policy_value_usd: float = 0.0
     reliability: float = 0.0
     quality: float = 0.0
     risk: float = 0.0

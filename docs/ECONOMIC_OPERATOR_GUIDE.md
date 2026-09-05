@@ -1,8 +1,29 @@
 # Economic evidence operator guide
 
-This guide enables AEEP 0.5 economic evidence for already qualified and active
-routes. It does not qualify routes, grant approval, move real money, or turn a
-provider quote into permission to execute.
+This guide covers AEEP 0.5 economic evidence plus AEEP 0.7 subscription capacity
+operations for already qualified and active routes. It does not qualify routes,
+grant approval, move real money, or turn a provider quote into permission to
+execute.
+
+## Subscription-native diagnostics
+
+For a reviewed Codex App Server manifest, inspect the local host without using a
+model turn:
+
+```bash
+aeep hosts codex doctor --manifest aeep.yaml --json
+aeep hosts codex account --manifest aeep.yaml --json
+aeep hosts codex models --manifest aeep.yaml --json
+aeep hosts codex quota --manifest aeep.yaml --json
+aeep capacity list --manifest aeep.yaml --json
+aeep capacity status RESOURCE_ID --manifest aeep.yaml --json
+aeep capacity reservations --manifest aeep.yaml --json
+```
+
+Only `aeep hosts codex login` may start the interactive Codex-owned login flow;
+run it only with explicit operator intent. Personal subscription capacity is
+`SELF_ONLY`. The `aeep x402 conformance --binding aeep-local --json` command is
+offline proof only and cannot transfer or settle value.
 
 ## 1. Keep the default offline first
 

@@ -16,10 +16,14 @@ Use AEEP at the bounded-action level. Do not send an open-ended objective such a
 python -m aeep search "current git branch" --compact
 ```
 
-2. Check named subscription pressure when a host route may be used:
+2. Check named subscription pressure when a host route may be used. For a
+   reviewed Codex `host_managed` route, prefer the non-billable host diagnostics:
 
 ```bash
 python -m aeep subscriptions status --compact
+aeep hosts codex doctor --manifest aeep.yaml --json
+aeep hosts codex models --manifest aeep.yaml --json
+aeep hosts codex quota --manifest aeep.yaml --json
 ```
 
 3. Route before executing when the task is expensive, risky, novel, or has several alternatives. Use the semantic compact response, not the full audit object:

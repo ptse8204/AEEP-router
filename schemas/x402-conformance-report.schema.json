@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "X402ConformanceCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "DISABLED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ],
+      "title": "X402ConformanceCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep-x402-conformance-v1",
+      "default": "aeep-x402-conformance-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "binding": {
+      "const": "aeep-local",
+      "default": "aeep-local",
+      "title": "Binding",
+      "type": "string"
+    },
+    "production": {
+      "const": false,
+      "default": false,
+      "title": "Production",
+      "type": "boolean"
+    },
+    "network_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Network Enabled",
+      "type": "boolean"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/X402ConformanceCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checks"
+  ],
+  "title": "X402ConformanceReport",
+  "type": "object"
+}

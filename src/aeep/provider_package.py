@@ -249,6 +249,12 @@ class PublishedExecutor(ProviderPackageModel):
     validators: tuple[ValidationSpec, ...] = ()
     config: dict[str, JsonValue] = Field(default_factory=dict)
 
+    @model_validator(mode="after")
+    def no_local_managed_host_authority(self) -> PublishedExecutor:
+        if self.kind is ExecutorKind.MANAGED_HOST:
+            raise ValueError("provider packages cannot declare managed-host executors")
+        return self
+
 
 class PublishedProviderRoute(ProviderPackageModel):
     route_id: str = Field(min_length=1, max_length=200, pattern=_IDENTIFIER_PATTERN)

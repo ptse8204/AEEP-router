@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "CapacitySettlementMode": {
+      "enum": [
+        "none",
+        "subscription_usage",
+        "x402_batch",
+        "x402_exact"
+      ],
+      "title": "CapacitySettlementMode",
+      "type": "string"
+    },
+    "CapacityTransferability": {
+      "enum": [
+        "self_only",
+        "same_principal",
+        "provider_authorized",
+        "transferable"
+      ],
+      "title": "CapacityTransferability",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "purchased_credit",
+        "local_compute",
+        "external_entitlement"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "product": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Product",
+      "type": "string"
+    },
+    "unit": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Unit",
+      "type": "string"
+    },
+    "resource_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Resource Fingerprint",
+      "type": "string"
+    },
+    "transferability": {
+      "$ref": "#/$defs/CapacityTransferability",
+      "default": "self_only"
+    },
+    "settlement_mode": {
+      "$ref": "#/$defs/CapacitySettlementMode",
+      "default": "none"
+    },
+    "allowance": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Allowance"
+    },
+    "remaining": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Remaining"
+    },
+    "authorization_evidence_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorization Evidence Id"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "provider",
+    "product",
+    "unit",
+    "resource_fingerprint"
+  ],
+  "title": "CapacityResource",
+  "type": "object"
+}

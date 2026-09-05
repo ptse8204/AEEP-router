@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "CapacitySignature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "maxLength": 50,
+          "minLength": 1,
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "CapacitySignature",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "resource_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "resource_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Resource Fingerprint",
+      "type": "string"
+    },
+    "issuer_principal_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Issuer Principal Digest",
+      "type": "string"
+    },
+    "authorized_beneficiary_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorized Beneficiary Digest"
+    },
+    "transferability": {
+      "enum": [
+        "provider_authorized",
+        "transferable"
+      ],
+      "title": "Transferability",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "signature": {
+      "$ref": "#/$defs/CapacitySignature"
+    }
+  },
+  "required": [
+    "provider_id",
+    "resource_id",
+    "resource_fingerprint",
+    "issuer_principal_digest",
+    "transferability",
+    "expires_at",
+    "signature"
+  ],
+  "title": "CapacityAuthorizationEvidence",
+  "type": "object"
+}

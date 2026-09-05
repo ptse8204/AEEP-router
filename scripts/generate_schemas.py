@@ -8,12 +8,22 @@ import json
 from pathlib import Path
 from typing import Any
 
+from aeep.attempts import ExecutionAttempt
 from aeep.benchmarking import (
     BenchmarkCampaignReport,
     BenchmarkRevaluationReport,
     BenchmarkSuite,
     EconomicProofCampaignReport,
     ReleaseProofReport,
+)
+from aeep.capacity import (
+    CapacityAuthorizationEvidence,
+    CapacityObservation,
+    CapacityReservation,
+    CapacityResource,
+    CapacityWindow,
+    EntitlementRedemptionReceipt,
+    ExecutionEntitlement,
 )
 from aeep.conformance import ProviderConformanceReport
 from aeep.discovery import RegistryCandidate
@@ -51,6 +61,7 @@ from aeep.models import (
     ExecutionReceipt,
     ExecutorSpec,
     ExternalOutcomeReport,
+    ManagedHostExecutorConfig,
     Manifest,
     MarketAggregate,
     MarketAggregatesConfig,
@@ -92,6 +103,7 @@ from aeep.proofs import (
     DSHNativeCampaignReport,
     DSHPluginCampaignReport,
     DSHProofReport,
+    HostNativeRoutingReport,
     JobProofReport,
     ResumePlan,
     RoutingValueReport,
@@ -105,7 +117,9 @@ from aeep.provider_package import (
     SmokeTestReport,
 )
 from aeep.qualification import QualificationReport, RouteCandidate
+from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
+from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
@@ -129,6 +143,11 @@ MODEL_FILES = {
     "cache-affinity-estimate.schema.json": CacheAffinityEstimate,
     "cache-affinity-receipt.schema.json": CacheAffinityReceipt,
     "cache-affinity-observation.schema.json": CacheAffinityObservation,
+    "capacity-authorization-evidence.schema.json": CapacityAuthorizationEvidence,
+    "capacity-observation.schema.json": CapacityObservation,
+    "capacity-reservation.schema.json": CapacityReservation,
+    "capacity-resource.schema.json": CapacityResource,
+    "capacity-window.schema.json": CapacityWindow,
     "candidate-ranking.schema.json": CandidateRanking,
     "cash-accounting.schema.json": CashAccounting,
     "capability-definition.schema.json": CapabilityDefinition,
@@ -145,12 +164,16 @@ MODEL_FILES = {
     "economic-payment-config.schema.json": EconomicPaymentConfig,
     "economic-requirements-config.schema.json": EconomicRequirementsConfig,
     "economic-trust-store-config.schema.json": EconomicTrustStoreConfig,
+    "entitlement-redemption-receipt.schema.json": EntitlementRedemptionReceipt,
     "execution-receipt.schema.json": ExecutionReceipt,
+    "execution-attempt.schema.json": ExecutionAttempt,
+    "execution-entitlement.schema.json": ExecutionEntitlement,
     "executor-spec.schema.json": ExecutorSpec,
     "external-outcome-report.schema.json": ExternalOutcomeReport,
     "manifest.schema.json": Manifest,
     "market-aggregate.schema.json": MarketAggregate,
     "market-aggregates-config.schema.json": MarketAggregatesConfig,
+    "managed-host-executor-config.schema.json": ManagedHostExecutorConfig,
     "meter-quantity.schema.json": MeterQuantity,
     "observation.schema.json": Observation,
     "payment-reservation.schema.json": PaymentReservation,
@@ -178,6 +201,7 @@ MODEL_FILES = {
     "dsh-plugin-campaign-report.schema.json": DSHPluginCampaignReport,
     "routing-value-report.schema.json": RoutingValueReport,
     "job-proof-report.schema.json": JobProofReport,
+    "host-native-routing-report.schema.json": HostNativeRoutingReport,
     "resume-plan.schema.json": ResumePlan,
     "quote.schema.json": Quote,
     "quote-acceptance.schema.json": QuoteAcceptance,
@@ -193,6 +217,7 @@ MODEL_FILES = {
     "route-candidate.schema.json": RouteCandidate,
     "qualification-report.schema.json": QualificationReport,
     "route-decision.schema.json": RouteDecision,
+    "router-completion-report.schema.json": RouterCompletionReport,
     "settlement-evidence.schema.json": SettlementEvidence,
     "settlement-receipt.schema.json": SettlementReceipt,
     "signature-envelope-v2.schema.json": SignatureEnvelopeV2,
@@ -202,6 +227,9 @@ MODEL_FILES = {
     "usage-statement.schema.json": UsageStatement,
     "workflow-request.schema.json": WorkflowRequest,
     "workflow-execution-outcome.schema.json": WorkflowExecutionOutcome,
+    "x402-batch-record.schema.json": X402BatchRecord,
+    "x402-capacity-commitment.schema.json": X402CapacityCommitment,
+    "x402-conformance-report.schema.json": X402ConformanceReport,
 }
 
 TOOL_FILES = {

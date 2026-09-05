@@ -1,6 +1,6 @@
 # Agent integration guide
 
-AEEP 0.6 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP 0.7 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
@@ -18,6 +18,23 @@ The three economic inspection tools read already-persisted, sanitized records. T
 Financial acceptance, reservations, captures, releases, refunds, and reconciliation are operator-only and are not model tools. Raw action input, output, credentials, and external billing references are not returned by the economic inspection tools.
 
 This keeps the routing contract stable even when an agent host changes. The host remains responsible for its own sandbox and approval UI; AEEP independently enforces manifest constraints and its operator-configured execution ceiling.
+
+## Preferred host-native dispatch
+
+For an exact action already classified by the host, call AEEP directly with the
+bounded `ActionRequest`; a deterministic local winner requires no model call. If
+model judgment is required, native Tool Search or the host planner first chooses
+the semantic capability, then AEEP selects the reviewed implementation and starts
+at most one managed-host execution turn. Implementation routes and the full AEEP
+control schema stay outside model input unless the selected host explicitly needs
+a canonical source tool.
+
+MCP and provider-native function exports remain supported compatibility surfaces.
+Putting `aeep_route_action` in a separate model-facing meta-router round is the
+documented negative control, not the default integration. The offline campaign in
+`reports/v07/host-native-routing.json` records model turns, tool-selection rounds,
+implementation-schema bytes, and result bytes for the tested exact-local and
+bounded-model action classes; it makes no universal token-savings claim.
 
 For DeepSeek Harness, prefer `integrations/dsh-aeep-router/`. That Cordis plugin
 accepts an exact `/aeep` capability envelope and routes it before the model call
@@ -51,6 +68,22 @@ A model cannot elevate that ceiling through tool arguments.
 
 ## ChatGPT desktop and Codex
 
+For a reviewed `host_managed` route, start from
+`examples/subscriptions/openai-codex-app-server.yaml`, replace the absolute Codex
+executable path, and use the operator diagnostics before routing:
+
+```bash
+aeep hosts codex doctor --manifest aeep.yaml --json
+aeep hosts codex account --manifest aeep.yaml --json
+aeep hosts codex models --manifest aeep.yaml --json
+aeep hosts codex quota --manifest aeep.yaml --json
+```
+
+These diagnostics perform no model turn. `aeep hosts codex login` is the sole
+interactive login entry point and is intentionally not a model tool. Codex owns
+the authentication state; AEEP receives only redacted account observations and
+does not read Codex credential files.
+
 Current Codex hosts support local stdio and remote Streamable HTTP MCP servers. Add the local server from the UI, or use the CLI:
 
 ```bash
@@ -76,6 +109,10 @@ default_tools_approval_mode = "writes"
 Keep the Codex/ChatGPT host approval mode enabled even though AEEP has its own controls. The two layers address different risks.
 
 Official reference: <https://developers.openai.com/codex/mcp>
+
+The managed subscription adapter uses the official Codex App Server protocol,
+not MCP, for Codex-owned authentication, runtime model/quota discovery, and one
+bounded turn. Official reference: <https://learn.chatgpt.com/docs/app-server>
 
 ## Claude Code
 

@@ -4,6 +4,12 @@ AEEP 0.5 adds portable signed provider evidence while retaining provider-neutral
 blockchain, transferable token, public storefront, payment custodian, provider
 payout service, or autonomous tool marketplace.
 
+AEEP 0.7 additionally defines a provider-neutral capacity entitlement and an
+offline `aeep-local` x402 batch mapping. The mapping commits, accumulates, and
+reconciles already-authorized capacity records only. It is disabled by default,
+performs no network call or value movement, and rejects `SELF_ONLY` resources
+before serialization. Local conformance is not evidence of live-market readiness.
+
 The exchange answers two bounded questions for an already qualified route:
 
 1. What is the expected and guaranteed maximum provider charge for this exact
@@ -117,11 +123,13 @@ The roadmap deliberately separates protocol evidence from financial products:
 - **0.5 — Provider interoperability and aggregate trust:** broader provider
   compatibility, rotation/discovery governance, and stronger aggregate quality
   controls.
+- **0.7 — Capacity contract conformance:** provider-authorized mock entitlement
+  and replay-safe local x402 batch mapping, with live networking disabled.
 - **Later — Provider settlement and marketplace governance:** optional hosted
   accounts, clearing, payouts, fraud controls, disputes, and governance, if a
   separate service is justified.
 - **Later — Optional transferable marketplace credits:** only after explicit
-  legal, security, governance, and product design. AEEP 0.5 makes no promise to
+  legal, security, governance, and product design. AEEP 0.7 makes no promise to
   create them.
 
 See [Operator guide](ECONOMIC_OPERATOR_GUIDE.md), [Provider integration](PROVIDER_INTEGRATION.md),

@@ -1,6 +1,35 @@
 # Changelog
 
-## Unreleased — 0.6.0
+## Unreleased — 0.7.0
+
+### 0.7 subscription-native router
+
+- connect quantified managed capacity to ordinary and prepared execution with
+  atomic invocation claims and terminal release; retain uncertain claims beyond
+  expiry and check coverage of transactional store functions;
+- preferred host-native routing beneath Tool Search, with exact local bypass and
+  at most one managed model turn for the measured reference paths;
+- provider-neutral capacity observations, reservations, transferability,
+  authorization evidence, entitlements, and atomic redemptions;
+- an official local Codex App Server adapter with Codex-owned authentication,
+  runtime model discovery, multi-window quota evidence, approval intersection,
+  bounded JSONL transport, and observed token/model accounting;
+- shared durable execution attempts with compare-and-set transitions, leases,
+  invocation evidence, terminal receipts, and no blind duplicate after an
+  indeterminate external call;
+- offline x402 capacity batch conformance, disabled by default, with no wallet,
+  custody, payout, live marketplace, or value movement;
+- operator diagnostics and a digest-bound `router-complete` verifier whose live
+  account proof remains an explicit skip until separately authorized;
+- SQLite schema versions 6 and 7, generated capacity/attempt/x402/report schemas,
+  cross-platform offline CI, a fault-injection matrix, and per-critical-module
+  branch-coverage gates.
+
+The prior `0.6.0` heading described repository development state. No Git tag or
+published release exists for it; those changes remain listed here as inherited
+0.7 development history rather than a fabricated release.
+
+### Incorporated 0.6 development work
 
 - deterministic empirical p50/p95 resource estimates, observed cash p95, Wilson
   reliability lower bounds, and quality lower bounds after five exact-cohort

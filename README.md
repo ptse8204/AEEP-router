@@ -12,22 +12,29 @@ flowchart LR
 ```
 
 AEEP can route to local Python, CLI, HTTP, MCP, browser, or subscription-backed
-implementations. Unsafe or unaffordable routes are rejected before the
-remaining options are scored.
+implementations. Its preferred role is host-native execution routing beneath
+native Tool Search: the host identifies a bounded capability, then AEEP applies
+policy and selects one reviewed implementation without adding a routing-model
+round. Unsafe or unaffordable routes are rejected before scoring.
 
 It is an execution control layer—not a planner, marketplace, or model-specific
 wrapper.
 
-> **Status:** AEEP 0.6 is alpha software. Review policy, trust, approval, and
+> **Status:** AEEP 0.7 is source-complete alpha software. Review policy, trust, approval, and
 > recovery settings before production use.
 
 ## What works today
 
 - Host-native routing that keeps hidden tool and router schemas out of model
   context.
+- OpenAI/ChatGPT subscription execution through the official local Codex App
+  Server boundary; Codex owns authentication and model discovery.
+- Provider-neutral capacity reservations and durable execution-attempt recovery.
 - Fail-closed provider packages with signatures, evidence, smoke checks, and
   explicit activation.
 - Economic routing with hard limits, approvals, usage receipts, and recovery.
+- Offline x402 capacity contract/conformance with live marketplace networking
+  disabled by default.
 
 ## Measured result
 
@@ -47,10 +54,13 @@ and forbidden from discovering or installing anything; it still needed the
 model → tool → model loop. AEEP received the structured `text.stats@1` action
 and invoked the same underlying Python function without a provider call.
 
-This does not measure clean-machine installation, natural-language intent
-recognition, or work requiring model judgment. Provider totals include Codex's
-full host context; the meter cannot attribute every token to an individual
-schema. [Method, exclusions, and raw accounting](reports/v06/codex/tool-ready-campaign.md).
+This tested saving applies only to the explicitly measured deterministic
+`text.stats@1` action class. It does not measure clean-machine installation,
+natural-language intent recognition, or work requiring model judgment. Provider
+totals include Codex's full host context; the meter cannot attribute every token
+to an individual schema. Unknown usage remains unknown, and live-market
+readiness is never inferred from local conformance. [Method, exclusions, and raw
+accounting](reports/v06/codex/tool-ready-campaign.md).
 
 ## Quick start
 
@@ -90,6 +100,10 @@ See [integration guidance](docs/INTEGRATIONS.md).
 - Writes and payments require operator approval.
 - Inputs and outputs are not persisted by default.
 - Commands use argv arrays, never shell interpolation.
+- Personal subscription capacity is `SELF_ONLY` and cannot be resold or used to
+  issue an external entitlement.
+- Marketplace/x402 networking and value movement are absent and disabled by
+  default.
 
 ## Documentation
 
@@ -99,7 +113,7 @@ See [integration guidance](docs/INTEGRATIONS.md).
 - [Provider packages](docs/PROVIDER_PACKAGES.md)
 - [Evidence reuse](docs/EVIDENCE_REUSE.md)
 - [Economic accounting](docs/ACCOUNTING.md)
-- [Migration to 0.6](docs/MIGRATION_0.6.md)
+- [Migration to 0.7](docs/MIGRATION_0.7.md)
 - [Examples](examples/quickstart/README.md)
 - [Changelog](CHANGELOG.md)
 
@@ -109,7 +123,10 @@ See [integration guidance](docs/INTEGRATIONS.md).
 pip install -e '.[dev,http-server]'
 ruff check .
 mypy src
-pytest
+coverage run --branch -m pytest
+coverage json -o reports/v07/coverage.json
+python3 scripts/check_critical_coverage.py reports/v07/coverage.json
+aeep verify router-complete --profile all --strict --json
 ```
 
 Licensed under [Apache-2.0](LICENSE).

@@ -1,0 +1,247 @@
+{
+  "$defs": {
+    "ExecutionAttemptState": {
+      "enum": [
+        "CREATED",
+        "CLAIMED",
+        "RESERVED",
+        "INVOKING",
+        "VALIDATING",
+        "SETTLING",
+        "COMPLETED",
+        "FAILED",
+        "REJECTED",
+        "CANCELLED",
+        "INDETERMINATE",
+        "DISPUTED"
+      ],
+      "title": "ExecutionAttemptState",
+      "type": "string"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "attempt_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "decision_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "prepared_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prepared Id"
+    },
+    "action_digest": {
+      "pattern": "^(?:sha256:)?[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "executor_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^(?:sha256:)?[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "side_effect": {
+      "$ref": "#/$defs/SideEffect"
+    },
+    "idempotent": {
+      "title": "Idempotent",
+      "type": "boolean"
+    },
+    "owner_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Owner Id"
+    },
+    "lease_expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lease Expires At"
+    },
+    "heartbeat_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Heartbeat At"
+    },
+    "version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer"
+    },
+    "state": {
+      "$ref": "#/$defs/ExecutionAttemptState",
+      "default": "CREATED"
+    },
+    "external_attempt_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Attempt Digest"
+    },
+    "external_thread_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Thread Digest"
+    },
+    "external_turn_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Turn Digest"
+    },
+    "cash_reservation_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Cash Reservation Ids",
+      "type": "array"
+    },
+    "capacity_reservation_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Capacity Reservation Ids",
+      "type": "array"
+    },
+    "invocation_start_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Invocation Start Digest"
+    },
+    "retry_eligible": {
+      "default": false,
+      "title": "Retry Eligible",
+      "type": "boolean"
+    },
+    "recovery_reason": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Recovery Reason"
+    },
+    "terminal_receipt_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Terminal Receipt Ids",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "action_digest",
+    "executor_id",
+    "executor_fingerprint",
+    "side_effect",
+    "idempotent"
+  ],
+  "title": "ExecutionAttempt",
+  "type": "object"
+}

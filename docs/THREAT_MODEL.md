@@ -1,4 +1,4 @@
-# AEEP 0.6 provider and economic evidence threat model
+# AEEP 0.7 managed-host and economic evidence threat model
 
 This document scopes the new economic evidence path. It complements
 `SECURITY.md`; it is not a penetration-test report or a production certification.
@@ -44,6 +44,29 @@ This document scopes the new economic evidence path. It complements
 | Provider usage/aggregate | provider assertion, not local observation or invoice proof |
 | Billing record/invoice reference | stronger external evidence after authentication/reconciliation |
 | MCP/model tool caller | cannot elevate approval or financial authority |
+| Local Codex App Server | trusted only as the reviewed execution boundary; protocol data and runtime observations remain validated and bounded |
+| Capacity/x402 counterparty | authorization source only; signatures do not prove service quality or honest metering |
+
+## 0.7 managed-host and entitlement controls
+
+| Threat | Enforcement point | Executable evidence |
+|---|---|---|
+| Authentication theft / credential scraping | Codex retains login; adapter requests redacted account state and never opens `auth.json` | `test_adapter_never_reads_codex_auth_files` |
+| Principal confusion or HMAC mismatch | salted principal digest and cached-probe invalidation on account change | `test_account_switch_invalidates_cached_probe_and_hmac_identity` |
+| Compromised/replaced executable | absolute executable path, executable check, optional SHA-256 pin, exact environment allowlist | `test_executable_path_and_optional_digest_are_validated`, `test_environment_is_exactly_allowlisted` |
+| Protocol injection | bounded JSONL stdout, separate bounded stderr, pending-ID ownership, duplicate rejection | `test_transport_fails_closed_on_invalid_frames` |
+| Approval laundering/replay | minimum of AEEP and Codex ceilings; single-use approval IDs and digest-only evidence | `test_approval_requires_both_host_decision_and_aeep_ceiling`, `test_approval_request_replay_fails_closed` |
+| Prompt/output leakage | selected bounded instruction only; default database stores neither prompt nor output | `test_default_database_omits_managed_prompt_and_output` |
+| Model reroute outside constraints | runtime discovery and actual-reroute observation; unknown remains unknown | `test_managed_action_records_one_turn_reroute_and_token_accounting` |
+| Stale/spoofed quota race | multi-window provenance, uncertainty, refresh before scoring, revalidation before invocation | `test_exhaustion_rejects_and_preinvoke_change_reroutes_without_model_turn` |
+| Capacity double reservation | idempotent SQLite CAS reservation/claim/release | `test_capacity_reservation_release_and_replay_are_atomic` |
+| Entitlement replay / SELF_ONLY conversion | authority, resource, action, beneficiary, nonce, expiry, and atomic redemption binding | `test_self_only_openai_capacity_cannot_issue_external_entitlement`, `test_provider_authorized_entitlement_redeems_once_without_double_spend` |
+| x402 replay/overclaim | offline accumulator replay rejection and disputed overclaim; live networking disabled | `test_local_batch_conformance_is_complete_and_offline` |
+| Crash after invocation | shared durable attempt enters `INVOKING` first; recovery does not execute again | `test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate` |
+| Package-to-host authority escalation | provider packages cannot declare or qualify a local managed-host adapter | `test_provider_package_cannot_grant_managed_host_authority` |
+| Migration corruption | one transaction with rollback and historical fixtures | `test_failed_migration_rolls_back_as_one_transaction` |
+| Secret committed in proof material | deterministic scan of committed fixture/report patterns | `test_committed_fixture_reports_contain_no_secret_patterns` |
+| Verification egress | strict verifier marks its pytest subprocess offline and the test harness blocks sockets | `test_verifier_subprocess_enables_offline_guard` |
 
 ## Data flow and enforcement points
 

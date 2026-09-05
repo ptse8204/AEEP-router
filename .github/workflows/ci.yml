@@ -27,6 +27,7 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e '.[dev,http-server]'
+      - run: python -m compileall -q src examples tests
       - run: ruff check .
       - run: mypy src
       - run: python scripts/generate_schemas.py --check
@@ -37,8 +38,11 @@ jobs:
       - run: python examples/dsh_campaign/live_campaign.py --check-native-plan
       - run: python examples/job_application/campaign.py --check
       - run: aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact
-      - run: coverage run -m pytest
+      - run: coverage run --branch -m pytest
+      - run: coverage json -o reports/v07/coverage.json
+      - run: python scripts/check_critical_coverage.py reports/v07/coverage.json
       - run: coverage report -m
+      - run: aeep verify router-complete --profile all --strict --json
       - run: python -m build
 
   dsh-plugin:

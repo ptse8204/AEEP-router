@@ -103,6 +103,43 @@ data and should be filtered at the telemetry collector.
 - Prefer explicit user/host/official signals; do not scrape undocumented billing dashboards.
 - A host selection does not grant the host new permissions. Keep its normal approval UI and sandbox enabled.
 - Authenticate host outcome reporting and accept only the selected route once.
+- Default personal subscription resources to `SELF_ONLY`; reject external
+  entitlements before serialization.
+- Keep Codex login and reusable authentication state inside Codex. Never read its
+  authentication files or copy browser cookies.
+- Intersect AEEP's operator approval ceiling with the managed host's approval;
+  rejection, expiry, or disconnection fails closed.
+
+Managed-host executables are trusted local control-plane dependencies. Pin or
+validate their configured path, pass an allowlisted environment, bound every
+protocol frame and stderr buffer, and persist invocation state before starting a
+turn. Runtime model and quota claims remain observations with provenance; an
+account/principal change invalidates cached capacity.
+
+### Managed-host and capacity threat closure
+
+| Threat | Control |
+|---|---|
+| Codex authentication-token theft | Codex owns login; AEEP never reads credential files, cookies, or raw auth responses. |
+| Cross-account/principal confusion | Account identity is a process-local salted HMAC; a change invalidates the cached probe before more routing. |
+| Malicious or replaced App Server executable | The path is absolute and executable; high-assurance manifests may pin `executable_sha256`. A valid pin does not make a compromised binary trustworthy. |
+| Stdout/stderr protocol injection | Stdout accepts bounded protocol JSON only; malformed, oversized, duplicate, and unknown frames fail closed. Stderr is separate and bounded. |
+| Approval laundering or replay | AEEP and host ceilings intersect; approval request IDs are single-use and raw commands are replaced by digests. |
+| Prompt/action over-disclosure | Only the selected route's bounded template and action fields cross the host boundary. |
+| Output persistence leakage | Prompt and output persistence default off; receipts retain only redacted operational metadata and digests. |
+| Model reroute outside policy | Models are runtime-discovered under declared constraints and the actual rerouted model remains an observation. Unknown reroutes stay unknown. |
+| Rate-limit race, spoofing, or staleness | Capacity is refreshed before scoring and revalidated before invocation; exhausted reports hard-reject and stale/partial evidence carries uncertainty. |
+| Capacity double reservation | SQLite immediate transactions, idempotency binding, expiry, and compare-and-set versions serialize claims and release. |
+| Entitlement replay or SELF_ONLY conversion | Nonces, action/beneficiary/resource binding, authority evidence, expiry, attempt-bound redemption, and atomic remaining quantity fail closed. |
+| x402 overclaim | Local reconciliation disputes claims above the maximum or observed redemption; no live rail can capture value. |
+| Crash after external invocation | Durable `INVOKING` evidence precedes the boundary; unknown outcomes become `INDETERMINATE` and execution is not silently repeated. |
+| Imported package authorizes local host | Imported managed-host and in-process routes remain inert and cannot qualify themselves; only reviewed local configuration constructs the adapter. |
+
+Residual risk remains with a compromised executable, operator manifest, local
+database, clock, or approval UI. Executable hashing detects replacement only
+when an operator pins a trusted digest; it is not code signing, sandboxing, or
+attestation. Subscription telemetry may be delayed or dishonest, so it cannot
+authorize transfer or cash settlement.
 
 ## Registries and imported providers
 

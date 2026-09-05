@@ -1,0 +1,59 @@
+{
+  "schema_version": "aeep-host-native-routing-v1",
+  "generated_at": "2026-09-02T00:00:00Z",
+  "tested_action_classes": [
+    "exact deterministic local transformation",
+    "bounded model judgment after native capability selection"
+  ],
+  "universal_token_savings_claimed": false,
+  "campaigns": [
+    {
+      "name": "exact-local-bypass",
+      "passed": true,
+      "default_path": true,
+      "provider_calls": 0,
+      "model_turn_count": 0,
+      "routing_model_rounds": 0,
+      "tool_selection_rounds": 0,
+      "implementation_schema_bytes": 0,
+      "result_bytes": 16,
+      "test_ids": ["test_exact_local_bypass_makes_no_model_call"]
+    },
+    {
+      "name": "managed-model-single-turn",
+      "passed": true,
+      "default_path": true,
+      "provider_calls": 1,
+      "model_turn_count": 1,
+      "routing_model_rounds": 0,
+      "tool_selection_rounds": 0,
+      "implementation_schema_bytes": 0,
+      "result_bytes": 16,
+      "test_ids": ["test_managed_action_records_one_turn_reroute_and_token_accounting"]
+    },
+    {
+      "name": "native-tool-search-plus-aeep",
+      "passed": true,
+      "default_path": true,
+      "provider_calls": 1,
+      "model_turn_count": 1,
+      "routing_model_rounds": 0,
+      "tool_selection_rounds": 1,
+      "implementation_schema_bytes": 0,
+      "result_bytes": 16,
+      "test_ids": ["test_native_tool_search_passes_only_bounded_action"]
+    },
+    {
+      "name": "negative-control-meta-router",
+      "passed": true,
+      "default_path": false,
+      "provider_calls": 2,
+      "model_turn_count": 2,
+      "routing_model_rounds": 1,
+      "tool_selection_rounds": 1,
+      "implementation_schema_bytes": 1024,
+      "result_bytes": 16,
+      "test_ids": ["test_meta_router_negative_control_is_rejected_as_default"]
+    }
+  ]
+}

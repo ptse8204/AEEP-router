@@ -40,7 +40,9 @@ from .accounting import (
     mirror_actual_cash,
 )
 from .artifact_store import ContentArtifactStore
+from .attempts import AttemptService, ExecutionAttempt, ExecutionAttemptState
 from .cache_affinity import estimate_cache_affinity
+from .capacity import CapacityObservation, CapacityReservation, CapacityWindow, observation_quota
 from .config import load_manifest
 from .discovery import CompositeProviderRegistry
 from .economic.aggregates import MarketAggregateSelector
@@ -83,10 +85,12 @@ from .executors import (
     DelegateExecutor,
     HostExecutor,
     HTTPExecutor,
+    ManagedHostExecutor,
     MCPExecutor,
     PythonExecutor,
 )
 from .executors.base import BaseExecutor, ExecutionContext
+from .hosts import CodexAppServerAdapter, ManagedHostAdapter, ManagedHostRegistry
 from .models import (
     ActionApprovalRecord,
     ActionConstraints,
@@ -165,6 +169,7 @@ from .models import (
     SideEffect,
     SignedExecutionReceipt,
     SubscriptionQuota,
+    SubscriptionResource,
     TrustLevel,
     UsageStatement,
     ValidationKind,
@@ -259,6 +264,7 @@ class Router:
         clock: Callable[[], datetime] | None = None,
         unlimited_economic_budget: bool | None = None,
         executor_overrides: Mapping[ExecutorKind, BaseExecutor] | None = None,
+        managed_host_adapters: Mapping[str, ManagedHostAdapter] | None = None,
     ) -> None:
         normalized = manifest.model_copy(deep=True)
         policies = builtin_policies()
@@ -284,6 +290,8 @@ class Router:
         self.provider_registry = CompositeProviderRegistry(normalized.registries)
         self.providers: dict[str, ProviderDescriptor] = {}
         self.store = store or ReceiptStore(normalized.database)
+        self.attempts = AttemptService(self.store)
+        self._worker_id = f"router-{secrets.token_hex(12)}"
         for candidate in self.store.list_route_candidates():
             if candidate.status == RouteLifecycle.ACTIVE:
                 report = self.store.get_qualification_report(
@@ -427,6 +435,38 @@ class Router:
             else None
         )
         self._executors: dict[ExecutorKind, BaseExecutor] = dict(executor_overrides or {})
+        self.managed_hosts = ManagedHostRegistry()
+        configured_hosts = dict(managed_host_adapters or {})
+        codex_specs = [
+            spec
+            for spec in normalized.executors
+            if spec.kind is ExecutorKind.MANAGED_HOST
+            and spec.managed_host_config().adapter_id == CodexAppServerAdapter.adapter_id
+        ]
+        if codex_specs and CodexAppServerAdapter.adapter_id not in configured_hosts:
+            bindings = {
+                (spec.resource_pool, spec.managed_host_config().argv) for spec in codex_specs
+            }
+            if len(bindings) != 1:
+                raise ConfigurationError(
+                    "Codex App Server routes must share one argv and resource binding"
+                )
+            configured_hosts[CodexAppServerAdapter.adapter_id] = (
+                CodexAppServerAdapter.from_executor(
+                    codex_specs[0],
+                    principal_salt=secrets.token_bytes(32),
+                    manifest_directory=(self.manifest_path.parent if self.manifest_path else None),
+                )
+            )
+        for adapter_id in sorted(configured_hosts):
+            self.managed_hosts.register(adapter_id, configured_hosts[adapter_id])
+        if ExecutorKind.MANAGED_HOST in self._executors and configured_hosts:
+            raise ConfigurationError(
+                "managed-host executor override cannot be combined with adapter registrations"
+            )
+        self._executors.setdefault(
+            ExecutorKind.MANAGED_HOST, ManagedHostExecutor(self.managed_hosts)
+        )
         self._validated_decisions: dict[str, str] = {}
         self._prepared_contexts: dict[str, PreparedExecutionContext] = {}
         self._closed = False
@@ -621,6 +661,9 @@ class Router:
     @staticmethod
     def _safe_receipt_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
         allowed = {
+            "adapter_id",
+            "actual_model",
+            "approval_evidence_digest",
             "argument_mode",
             "callable",
             "executable",
@@ -648,6 +691,14 @@ class Router:
             "stdout_bytes",
             "stdout_truncated",
             "tool",
+            "tool_call_count",
+            "model_turn_count",
+            "tool_selection_rounds",
+            "implementation_schema_bytes",
+            "output_schema_bytes",
+            "result_bytes",
+            "thread_identity_digest",
+            "turn_identity_digest",
             "tool_schema_tokens_estimate",
         }
         return {
@@ -690,6 +741,145 @@ class Router:
             }.get(persisted.status, "execution_error")
             persisted.error_message = persisted.error_type
         self.store.save_receipt(persisted)
+
+    def _create_claimed_attempt(
+        self,
+        *,
+        decision_id: str,
+        prepared_id: str | None,
+        action_digest_value: str,
+        spec: ExecutorSpec,
+        attempt_id: str | None = None,
+    ) -> ExecutionAttempt:
+        now = self._economic_now()
+        prior = self.store.execution_attempt_for_decision(decision_id)
+        if prior is not None and prior.state in {
+            ExecutionAttemptState.INDETERMINATE,
+            ExecutionAttemptState.DISPUTED,
+        }:
+            raise ConfigurationError(
+                "decision has an unresolved external invocation; blind retry denied"
+            )
+        attempt = self.store.create_execution_attempt(
+            ExecutionAttempt(
+                attempt_id=attempt_id or new_id("attempt"),
+                decision_id=decision_id,
+                prepared_id=prepared_id,
+                action_digest=action_digest_value,
+                executor_id=spec.id,
+                executor_fingerprint=executor_fingerprint(spec),
+                side_effect=spec.side_effect,
+                idempotent=spec.idempotent,
+                retry_eligible=(
+                    spec.idempotent and spec.side_effect.rank <= SideEffect.READ.rank
+                ),
+                created_at=now,
+                updated_at=now,
+            )
+        )
+        return self.store.claim_execution_attempt(
+            attempt.attempt_id,
+            owner_id=self._worker_id,
+            claimed_at=now,
+            lease_expires_at=now + timedelta(hours=1),
+        )
+
+    def _advance_attempt(
+        self,
+        attempt: ExecutionAttempt,
+        target: ExecutionAttemptState,
+        *,
+        reason: str | None = None,
+        capacity_spec: ExecutorSpec | None = None,
+        capacity_estimate: RouteEstimate | None = None,
+        **updates: Any,
+    ) -> ExecutionAttempt:
+        hold = None
+        if target is ExecutionAttemptState.RESERVED and capacity_spec is not None:
+            assert capacity_estimate is not None
+            hold = self._reserve_attempt_capacity(attempt, capacity_spec, capacity_estimate)
+            if hold is not None:
+                updates["capacity_reservation_ids"] = (hold.reservation_id,)
+        try:
+            return self.store.transition_execution_attempt(
+                attempt.attempt_id,
+                expected_state=attempt.state,
+                expected_version=attempt.version,
+                target_state=target,
+                updated_at=self._economic_now(),
+                reason=reason,
+                **updates,
+            )
+        except Exception:
+            if hold is not None:
+                self.store.release_capacity_reservation(
+                    hold.reservation_id, expected_version=hold.version, now=self._economic_now()
+                )
+            raise
+
+    def _reserve_attempt_capacity(
+        self, attempt: ExecutionAttempt, spec: ExecutorSpec, estimate: RouteEstimate
+    ) -> CapacityReservation | None:
+        if spec.kind is not ExecutorKind.MANAGED_HOST:
+            return None
+        resource = self.resources[spec.resource_pool or ""]
+        observation = self.store.latest_capacity_observation(resource.id)
+        if observation is None:
+            return None
+        quota = observation_quota(observation, unit=resource.unit, now=self._economic_now())
+        if quota.remaining_units is None:
+            # Percentages cannot authorize a hold in provider-local absolute units.
+            return None
+        quantities = []
+        for prior in (spec.estimate, estimate):
+            entries = [item for item in prior.subscription_usage if item.resource_pool == resource.id]
+            if any(item.unit != resource.unit for item in entries):
+                raise ConfigurationError("capacity estimate unit does not match resource")
+            quantities.append(sum(
+                (item.consumed for item in entries if item.consumed is not None), Decimal(0)
+            ) if entries else Decimal(str(prior.resources.subscription_units)))
+        quantity = max(quantities)
+        if quantity <= 0:
+            raise ConfigurationError("quantified managed capacity requires a positive usage estimate")
+        now = self._economic_now()
+        return self.store.reserve_capacity(
+            CapacityReservation(
+                resource_id=resource.id,
+                execution_id=attempt.attempt_id,
+                maximum_quantity=quantity,
+                unit=resource.unit,
+                expires_at=now + timedelta(seconds=spec.managed_host_config().timeout_seconds),
+                idempotency_key=f"{attempt.attempt_id}:capacity",
+                created_at=now,
+                updated_at=now,
+            ),
+            known_available=quota.remaining_units,
+            now=now,
+        )
+
+    @staticmethod
+    def _terminal_attempt_state(
+        receipt: ExecutionReceipt, *, retry_eligible: bool
+    ) -> ExecutionAttemptState:
+        succeeded = (
+            receipt.status
+            in {
+                ExecutionStatus.SUCCESS,
+                ExecutionStatus.DELEGATED,
+                ExecutionStatus.HOST_SELECTED,
+            }
+            and receipt.output_valid is not False
+            and receipt.task_valid is not False
+        )
+        if succeeded:
+            return ExecutionAttemptState.COMPLETED
+        if receipt.status is ExecutionStatus.REJECTED:
+            return ExecutionAttemptState.REJECTED
+        if receipt.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
+            receipt.executor_kind is ExecutorKind.MANAGED_HOST or not retry_eligible
+        ):
+            return ExecutionAttemptState.INDETERMINATE
+        return ExecutionAttemptState.FAILED
 
     @staticmethod
     def _bind_receipt_evidence(spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
@@ -734,11 +924,19 @@ class Router:
     ) -> SubscriptionQuota | None:
         if not spec.resource_pool:
             return None
+        resource = self.resources.get(spec.resource_pool)
+        if isinstance(resource, SubscriptionResource) and spec.kind is ExecutorKind.MANAGED_HOST:
+            capacity = self.store.latest_capacity_observation(resource.id)
+            if capacity is not None:
+                return observation_quota(
+                    capacity,
+                    unit=resource.unit,
+                    now=self._economic_now(),
+                )
         override = context.subscription_quotas.get(spec.resource_pool)
         if override is not None:
             return override
-        resource = self.resources.get(spec.resource_pool)
-        if resource is None:
+        if not isinstance(resource, SubscriptionResource):
             return None
         observed = self.store.latest_quota_observation(resource.id)
         return observed.quota if observed is not None else resource.quota
@@ -776,6 +974,8 @@ class Router:
         values: list[dict[str, Any]] = []
         for resource_id in sorted(self.resources):
             resource = self.resources[resource_id]
+            if not isinstance(resource, SubscriptionResource):
+                continue
             observed = self.store.latest_quota_observation(resource_id)
             values.append(
                 {
@@ -2612,6 +2812,18 @@ class Router:
                 PreparedDecisionState.INDETERMINATE,
                 reason,
             )
+        attempt = self.store.execution_attempt_for_prepared(prepared_id)
+        if attempt is not None and attempt.state in {
+            ExecutionAttemptState.RESERVED,
+            ExecutionAttemptState.INVOKING,
+            ExecutionAttemptState.VALIDATING,
+            ExecutionAttemptState.SETTLING,
+        }:
+            self._advance_attempt(
+                attempt,
+                ExecutionAttemptState.INDETERMINATE,
+                reason=reason,
+            )
 
     def _verify_usage_statement(
         self,
@@ -2881,7 +3093,9 @@ class Router:
         attempt_id: str,
         charge_id: str,
         approval_id: str | None = None,
-    ) -> tuple[ExecutionOutcome, ExecutionReceipt, object | None]:
+        durable_attempt: ExecutionAttempt,
+        approved_side_effect: SideEffect,
+    ) -> tuple[ExecutionOutcome, ExecutionReceipt, object | None, ExecutionAttempt]:
         """Invoke exactly the prepared route once and return unpersisted evidence."""
 
         decision = context.route_decision
@@ -2914,7 +3128,15 @@ class Router:
                     prepared_id=context.prepared.prepared_id,
                     quote_id=context.prepared.selected_quote_id,
                     attempt_id=attempt_id,
+                    approved_side_effect=approved_side_effect,
                 )
+            )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.VALIDATING,
+                reason="prepared executor returned; validating locally",
+                external_thread_digest=raw.metadata.get("thread_identity_digest"),
+                external_turn_digest=raw.metadata.get("turn_identity_digest"),
             )
             usage_payload: object | None = raw.metadata.pop(
                 "_economic_usage_statement", None
@@ -3029,6 +3251,11 @@ class Router:
                 },
                 approval_id=approval_id,
             )
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.SETTLING,
+                reason="prepared validation completed; settlement pending",
+            )
         success = (
             raw.status is ExecutionStatus.SUCCESS
             and output_valid is not False
@@ -3041,7 +3268,7 @@ class Router:
             decision=decision,
             receipts=[receipt],
         )
-        return outcome, receipt, usage_payload
+        return outcome, receipt, usage_payload, durable_attempt
 
     async def execute_prepared(
         self,
@@ -3081,7 +3308,7 @@ class Router:
                     )
                     self._prepared_contexts.pop(prepared_id, None)
             raise
-        except Exception:
+        except (Exception, asyncio.CancelledError):
             if invocation_marker[0]:
                 with suppress(Exception):
                     self._mark_economic_indeterminate(
@@ -3206,6 +3433,7 @@ class Router:
             )
 
         # Re-evaluate current hard feasibility for same-process and rehydrated calls.
+        await self._snapshot_managed_capacity(context.request.capability, executor_id=spec.id)
         live_request = self._fill_runtime_context(context.request)
         live_policy = self._policy_for(live_request)
         live_estimate = self.estimator.estimate(
@@ -3270,6 +3498,13 @@ class Router:
         idempotency_key = context.request.idempotency_key
         attempt_id = new_id("attempt")
         charge_id = f"charge_{hashlib.sha256(prepared_id.encode()).hexdigest()}"
+        durable_attempt = self._create_claimed_attempt(
+            decision_id=prepared_id,
+            prepared_id=prepared_id,
+            action_digest_value=prepared.action_digest,
+            spec=spec,
+            attempt_id=attempt_id,
+        )
         approval_id: str | None = None
         if (
             spec.side_effect.rank > SideEffect.READ.rank
@@ -3325,6 +3560,14 @@ class Router:
                     payment_approved=payment_approved,
                     human_approved=human_approved,
                     executor_id=spec.id,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="cash reservation recorded",
+                    cash_reservation_ids=(reservation.reservation_id,),
+                    capacity_spec=spec,
+                    capacity_estimate=live_estimate,
                 )
                 # The hold does not grant execution authority. Recheck route and
                 # economic trust after reservation and immediately before INVOKING.
@@ -3442,6 +3685,13 @@ class Router:
                 invocation_started = True
                 invocation_marker[0] = True
             else:
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="confirmed-free reservation boundary",
+                    capacity_spec=spec,
+                    capacity_estimate=live_estimate,
+                )
                 self.store.claim_prepared_for_invocation(
                     prepared_id,
                     claim_token=claim_token,
@@ -3452,20 +3702,34 @@ class Router:
                 )
                 invocation_started = True
                 invocation_marker[0] = True
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                ExecutionAttemptState.INVOKING,
+                reason="prepared external invocation boundary entered",
+                invocation_start_digest=deterministic_digest(
+                    {
+                        "attempt_id": attempt_id,
+                        "executor_fingerprint": durable_attempt.executor_fingerprint,
+                        "prepared_id": prepared_id,
+                    }
+                ),
+            )
             if idempotency_key is not None:
                 self.store.mark_idempotency_executing(idempotency_key)
-            outcome, receipt, usage_payload = await self._invoke_prepared_once(
+            outcome, receipt, usage_payload, durable_attempt = await self._invoke_prepared_once(
                 context,
                 spec=spec,
                 attempt_id=attempt_id,
                 charge_id=charge_id,
                 approval_id=approval_id,
+                durable_attempt=durable_attempt,
+                approved_side_effect=approved_side_effect,
             )
             # Persist a sanitized local execution fact before any usage parsing or
             # payment call. Recovery may enrich this receipt, but must never need
             # to repeat the external action to prove that invocation returned.
             self._save_receipt(receipt)
-        except Exception:
+        except (Exception, asyncio.CancelledError):
             if invocation_started:
                 self._mark_economic_indeterminate(
                     prepared_id, "external invocation or evidence processing raised"
@@ -3499,6 +3763,17 @@ class Router:
                             abandoned_at=self._economic_now(),
                             claim_token=claim_token,
                         )
+                stored_attempt = self.store.get_execution_attempt(attempt_id)
+                if stored_attempt is not None and stored_attempt.state in {
+                    ExecutionAttemptState.CLAIMED,
+                    ExecutionAttemptState.RESERVED,
+                }:
+                    with suppress(Exception):
+                        self._advance_attempt(
+                            stored_attempt,
+                            ExecutionAttemptState.FAILED,
+                            reason="prepared execution failed before invocation",
+                        )
             raise
 
         if reservation is None:
@@ -3519,6 +3794,14 @@ class Router:
             )
             self._save_receipt(receipt)
             self._observe_receipt(spec, receipt)
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                self._terminal_attempt_state(
+                    receipt, retry_eligible=durable_attempt.retry_eligible
+                ),
+                reason="confirmed-free prepared execution finalized",
+                terminal_receipt_ids=(receipt.receipt_id,),
+            )
             if idempotency_key is not None:
                 self.store.complete_idempotency(
                     idempotency_key,
@@ -3694,6 +3977,14 @@ class Router:
             )
             self._save_receipt(receipt)
             self._observe_receipt(spec, receipt)
+            durable_attempt = self._advance_attempt(
+                durable_attempt,
+                self._terminal_attempt_state(
+                    receipt, retry_eligible=durable_attempt.retry_eligible
+                ),
+                reason="prepared settlement finalized",
+                terminal_receipt_ids=(receipt.receipt_id,),
+            )
             if idempotency_key is not None:
                 self.store.complete_prepared_action_idempotency(
                     prepared_id,
@@ -3865,6 +4156,14 @@ class Router:
         )
         self._save_receipt(receipt)
         self._observe_receipt(spec, receipt)
+        durable_attempt = self._advance_attempt(
+            durable_attempt,
+            self._terminal_attempt_state(
+                receipt, retry_eligible=durable_attempt.retry_eligible
+            ),
+            reason="prepared settlement finalized",
+            terminal_receipt_ids=(receipt.receipt_id,),
+        )
         if idempotency_key is not None:
             self.store.complete_prepared_action_idempotency(
                 prepared_id,
@@ -4853,10 +5152,11 @@ class Router:
         spec.idempotent = idempotent
         spec.safe_to_auto_execute = safe_to_auto_execute
         spec.enabled = False
-        if spec.kind == ExecutorKind.PYTHON:
+        if spec.kind in {ExecutorKind.PYTHON, ExecutorKind.MANAGED_HOST}:
             raise ConfigurationError(
-                "external Python candidates cannot be qualified in-process; "
-                "use a reviewed command/container route or a trusted manifest executor"
+                "external Python or managed-host candidates cannot be qualified in-process "
+                "from packages; "
+                "use a reviewed command/container route or a trusted local manifest executor"
             )
         fingerprint = behavior_fingerprint(spec)
         checks = require_static_qualification(spec)
@@ -5085,7 +5385,39 @@ class Router:
         )
         if not self.registry.find(request_model.capability):
             await self.discover(request_model.capability)
+        await self._snapshot_managed_capacity(request_model.capability)
         return self.route(request_model)
+
+    async def _snapshot_managed_capacity(
+        self, capability: str, *, executor_id: str | None = None
+    ) -> None:
+        seen: set[tuple[str, str]] = set()
+        for spec in sorted(self.registry.find(capability), key=lambda item: item.id):
+            if spec.kind is not ExecutorKind.MANAGED_HOST or (
+                executor_id is not None and spec.id != executor_id
+            ):
+                continue
+            config = spec.managed_host_config()
+            key = (config.adapter_id, spec.resource_pool or "")
+            if key in seen:
+                continue
+            seen.add(key)
+            try:
+                observation = await asyncio.wait_for(
+                    self.managed_hosts.get(config.adapter_id).snapshot_capacity(),
+                    timeout=min(config.timeout_seconds, 30),
+                )
+                if observation.resource_id != spec.resource_pool:
+                    raise ConfigurationError(
+                        "managed-host capacity observation names the wrong resource"
+                    )
+            except Exception:
+                observation = CapacityObservation(
+                    resource_id=spec.resource_pool or "unknown",
+                    source="managed_host_unavailable",
+                    windows=(CapacityWindow(window_id="unknown", confidence=0),),
+                )
+            self.store.save_capacity_observation(observation)
 
     async def benchmark(
         self,
@@ -5240,6 +5572,25 @@ class Router:
         )
 
     @staticmethod
+    def _quota_materially_changed(
+        before: SubscriptionQuota | None, after: SubscriptionQuota | None
+    ) -> bool:
+        if before is None or after is None:
+            return before is not after
+        fields = (
+            "state",
+            "confidence",
+            "unit",
+            "allowance_units",
+            "remaining_units",
+            "used_percent",
+            "reset_at",
+            "window_duration_seconds",
+            "window_count",
+        )
+        return any(getattr(before, field) != getattr(after, field) for field in fields)
+
+    @staticmethod
     def _can_fallback(
         *,
         status: ExecutionStatus,
@@ -5271,6 +5622,7 @@ class Router:
         allow_unsafe_executor: bool = False,
         dry_run: bool = False,
         _idempotency_claimed: bool = False,
+        _quota_rerouted: bool = False,
     ) -> ExecutionOutcome:
         """Route and execute, returning a full decision plus attempt receipts.
 
@@ -5365,6 +5717,7 @@ class Router:
                     approved_side_effect=approved_side_effect,
                     allow_unsafe_executor=allow_unsafe_executor,
                     _idempotency_claimed=True,
+                    _quota_rerouted=_quota_rerouted,
                 )
             except Exception:
                 self.store.mark_idempotency_indeterminate(idempotency_key)
@@ -5386,6 +5739,24 @@ class Router:
         for attempt_number, candidate in enumerate(candidates[:max_attempts], start=1):
             spec = self.registry.get(candidate.executor_id)
             self._require_active_spec(spec)
+            if spec.kind is ExecutorKind.MANAGED_HOST:
+                before_quota = candidate.subscription_quota
+                await self._snapshot_managed_capacity(
+                    decision.action.capability, executor_id=spec.id
+                )
+                after_quota = self._subscription_quota(spec, decision.action.context)
+                if (
+                    not _quota_rerouted
+                    and self._quota_materially_changed(before_quota, after_quota)
+                ):
+                    rerouted = self.route(decision.action)
+                    return await self.execute(
+                        rerouted,
+                        approved_side_effect=approved_side_effect,
+                        allow_unsafe_executor=allow_unsafe_executor,
+                        _idempotency_claimed=_idempotency_claimed,
+                        _quota_rerouted=True,
+                    )
             if not spec.enabled or spec.capability != decision.action.capability:
                 raise NoRouteError(
                     f"route {spec.id!r} is no longer active for {decision.action.capability!r}; reroute"
@@ -5466,6 +5837,43 @@ class Router:
                 )
                 self.store.save_action_approval(approval)
                 approval_id = approval.approval_id
+            durable_attempt = self._create_claimed_attempt(
+                decision_id=decision.decision_id,
+                prepared_id=None,
+                action_digest_value=deterministic_digest(
+                    {
+                        "capability": decision.action.capability,
+                        "input": decision.action.input,
+                        "constraints": decision.action.constraints,
+                    }
+                ),
+                spec=spec,
+            )
+            try:
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="local reservation boundary",
+                    capacity_spec=spec,
+                    capacity_estimate=current_estimate,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.INVOKING,
+                    reason="external invocation boundary entered",
+                    invocation_start_digest=deterministic_digest(
+                        {
+                            "attempt_id": durable_attempt.attempt_id,
+                            "executor_fingerprint": durable_attempt.executor_fingerprint,
+                        }
+                    ),
+                )
+            except Exception:
+                self._advance_attempt(
+                    durable_attempt, ExecutionAttemptState.FAILED,
+                    reason="capacity admission failed before invocation",
+                )
+                raise
             started_at = utc_now()
             with start_span(
                 "aeep.execute",
@@ -5480,13 +5888,30 @@ class Router:
             ) as span:
                 if _idempotency_claimed and idempotency_key and attempt_number == 1:
                     self.store.mark_idempotency_executing(idempotency_key)
-                raw = await self._executor_for(spec.kind).execute(
-                    ExecutionContext(
-                        request=decision.action,
-                        spec=spec,
-                        estimate=estimate,
-                        attempt=attempt_number,
+                try:
+                    raw = await self._executor_for(spec.kind).execute(
+                        ExecutionContext(
+                            request=decision.action,
+                            spec=spec,
+                            estimate=estimate,
+                            attempt=attempt_number,
+                            attempt_id=durable_attempt.attempt_id,
+                            approved_side_effect=approved_side_effect,
+                        )
                     )
+                except (Exception, asyncio.CancelledError):
+                    self._advance_attempt(
+                        durable_attempt,
+                        ExecutionAttemptState.INDETERMINATE,
+                        reason="executor raised after invocation boundary",
+                    )
+                    raise
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.VALIDATING,
+                    reason="executor returned; validating locally",
+                    external_thread_digest=raw.metadata.get("thread_identity_digest"),
+                    external_turn_digest=raw.metadata.get("turn_identity_digest"),
                 )
                 output_valid: bool | None = None
                 task_valid: bool | None = None
@@ -5610,11 +6035,42 @@ class Router:
                     error_type=error_type,
                     error_message=error_message,
                     trace_id=trace_id_from_span(span),
-                    metadata={**raw.metadata, "exit_code": raw.exit_code},
+                    metadata={
+                        **raw.metadata,
+                        "exit_code": raw.exit_code,
+                        "attempt_id": durable_attempt.attempt_id,
+                    },
                     approval_id=approval_id,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.SETTLING,
+                    reason="validation completed; finalizing local accounting",
                 )
                 self._save_receipt(receipt)
                 self._observe_receipt(spec, receipt)
+                attempt_succeeded = raw.status in {
+                    ExecutionStatus.SUCCESS,
+                    ExecutionStatus.DELEGATED,
+                    ExecutionStatus.HOST_SELECTED,
+                } and output_valid is not False and task_valid is not False
+                if attempt_succeeded:
+                    terminal_attempt_state = ExecutionAttemptState.COMPLETED
+                elif raw.status is ExecutionStatus.REJECTED:
+                    terminal_attempt_state = ExecutionAttemptState.REJECTED
+                elif raw.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
+                    spec.kind is ExecutorKind.MANAGED_HOST
+                    or not durable_attempt.retry_eligible
+                ):
+                    terminal_attempt_state = ExecutionAttemptState.INDETERMINATE
+                else:
+                    terminal_attempt_state = ExecutionAttemptState.FAILED
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    terminal_attempt_state,
+                    reason="terminal receipt persisted",
+                    terminal_receipt_ids=(receipt.receipt_id,),
+                )
                 attempts.append(receipt)
                 last_output = raw.output
 
@@ -5661,6 +6117,8 @@ class Router:
                 )
 
             if attempt_number >= max_attempts:
+                break
+            if durable_attempt.state is ExecutionAttemptState.INDETERMINATE:
                 break
             if not self._can_fallback(
                 status=raw.status,
@@ -6081,7 +6539,11 @@ class Router:
                         spec.enabled
                         and (
                             spec.side_effect.rank > SideEffect.READ.rank
-                            or spec.kind in {ExecutorKind.DELEGATE, ExecutorKind.HOST}
+                            or spec.kind in {
+                                ExecutorKind.DELEGATE,
+                                ExecutorKind.HOST,
+                                ExecutorKind.MANAGED_HOST,
+                            }
                             or bool(spec.config.get("exclusive_resource"))
                         )
                         for spec in compatible

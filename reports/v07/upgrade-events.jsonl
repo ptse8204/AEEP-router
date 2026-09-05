@@ -1,0 +1,13 @@
+{"event":"upgrade_started","revision":"405a74433df1707823c59597dabd84ba9aaa19cf","branch":"codex/aeep-07-subscription-native-router","source_version":"0.6.0","target_version":"0.7.0a1"}
+{"event":"baseline_complete","tests":"582 passed","coverage_percent":80,"pre_existing_code_failures":0,"environment_failure":"python command missing; used python3"}
+{"event":"phase_complete","phase":1,"proofs":["docs/adr/ADR-007-subscription-native-routing.md","docs/adr/ADR-008-capacity-transferability.md","docs/adr/ADR-009-x402-compatibility-boundary.md"]}
+{"event":"phase_complete","phase":2,"migration":"sqlite-6","tests":"57 capacity/migration/provider tests passed","schemas":"generated and checked"}
+{"event":"phase_complete","phase":3,"tests":"managed-host, router, legacy-host, and provider-package tests passed","schemas":"generated and checked"}
+{"event":"phase_complete","phase":4,"tests":"37 focused App Server, managed-host, and router tests passed","live_account":"SKIP: requires explicit operator-approved Codex login and model turn"}
+{"event":"phase_complete","phase":5,"tests":"44 focused quota/scoring/router/adapter tests passed","schemas":"generated and checked"}
+{"event":"phase_complete","phase":6,"migration":"sqlite-7","tests":"fault-state, concurrency, managed crash, prepared recovery, and full Python suite passed","schemas":"generated and checked"}
+{"event":"phase_complete","phase":7,"tests":"18 focused host-native, Codex adapter, and managed-host tests passed","proof":"reports/v07/host-native-routing.json","schemas":"generated and checked"}
+{"event":"phase_complete","phase":8,"tests":"19 focused x402, capacity, and CLI tests passed","proof":"reports/v07/x402-conformance.json","network":"DISABLED","schemas":"generated and checked"}
+{"event":"phase_complete","phase":9,"tests":"28 focused operator CLI, adapter, managed-host, x402, and compatibility tests passed","example":"examples/subscriptions/openai-codex-app-server.yaml","login":"not invoked outside the credential-free fake"}
+{"event":"phase_complete","phase":10,"command":"aeep verify router-complete --profile all --strict --json","profiles":{"core":"PASS","openai":"PASS","marketplace_contract":"PASS","marketplace_live":"DISABLED"},"checks":{"PASS":34,"SKIP":1,"DISABLED":1},"release_ready":true}
+{"event":"phase_complete","phase":11,"tests":"29 focused security, transport, adapter, quota, and migration tests passed","checks":{"PASS":42,"SKIP":1,"DISABLED":1},"release_ready":true,"residual":"executable pinning is optional and local host integrity remains operator-owned"}

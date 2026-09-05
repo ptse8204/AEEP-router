@@ -15,6 +15,17 @@ from typing import TypedDict, TypeVar
 
 from pydantic import BaseModel
 
+from .attempts import ExecutionAttempt, ExecutionAttemptState
+from .capacity.models import (
+    CapacityAuthorizationEvidence,
+    CapacityObservation,
+    CapacityReservation,
+    CapacityReservationStatus,
+    EntitlementRedemptionReceipt,
+    EntitlementRedemptionStatus,
+    ExecutionEntitlement,
+    capacity_digest,
+)
 from .discovery import RegistryCandidate
 from .economic.canonical import canonical_digest, canonical_payload
 from .economic.trust import (
@@ -71,7 +82,7 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 5
+LATEST_DATABASE_SCHEMA = 7
 
 _LEGACY_SCHEMA: tuple[str, ...] = (
     """
@@ -831,6 +842,137 @@ _V05_SCHEMA: tuple[str, ...] = (
     """,
 )
 
+_V07_CAPACITY_SCHEMA: tuple[str, ...] = (
+    """
+    CREATE TABLE IF NOT EXISTS capacity_observations (
+        observation_id TEXT PRIMARY KEY,
+        resource_id TEXT NOT NULL,
+        observed_at TEXT NOT NULL,
+        canonical_digest TEXT NOT NULL UNIQUE,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_capacity_observations_resource
+    ON capacity_observations(resource_id, observed_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS capacity_reservations (
+        reservation_id TEXT PRIMARY KEY,
+        resource_id TEXT NOT NULL,
+        execution_id TEXT NOT NULL,
+        maximum_quantity TEXT NOT NULL,
+        unit TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        state TEXT NOT NULL,
+        idempotency_key TEXT NOT NULL UNIQUE,
+        claim_token TEXT UNIQUE,
+        version INTEGER NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_capacity_reservations_resource_state
+    ON capacity_reservations(resource_id, unit, state, expires_at)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS capacity_authorization_evidence (
+        evidence_id TEXT PRIMARY KEY,
+        provider_id TEXT NOT NULL,
+        resource_id TEXT NOT NULL,
+        resource_fingerprint TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        payload_digest TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS execution_entitlements (
+        entitlement_id TEXT PRIMARY KEY,
+        resource_id TEXT NOT NULL,
+        resource_fingerprint TEXT NOT NULL,
+        nonce TEXT NOT NULL UNIQUE,
+        maximum_quantity TEXT NOT NULL,
+        remaining_quantity TEXT NOT NULL,
+        unit TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        state TEXT NOT NULL,
+        version INTEGER NOT NULL,
+        authorization_evidence_id TEXT,
+        payload_digest TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        FOREIGN KEY (authorization_evidence_id)
+            REFERENCES capacity_authorization_evidence(evidence_id)
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_entitlements_resource_state
+    ON execution_entitlements(resource_id, state, expires_at)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS entitlement_redemptions (
+        redemption_id TEXT PRIMARY KEY,
+        entitlement_id TEXT NOT NULL,
+        attempt_id TEXT NOT NULL UNIQUE,
+        quantity_consumed TEXT NOT NULL,
+        remaining_quantity TEXT NOT NULL,
+        status TEXT NOT NULL,
+        timestamp TEXT NOT NULL,
+        payload_digest TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        FOREIGN KEY (entitlement_id) REFERENCES execution_entitlements(entitlement_id),
+        UNIQUE (entitlement_id, attempt_id)
+    )
+    """,
+)
+
+_V07_ATTEMPT_SCHEMA: tuple[str, ...] = (
+    """
+    CREATE TABLE IF NOT EXISTS execution_attempts (
+        attempt_id TEXT PRIMARY KEY,
+        decision_id TEXT NOT NULL,
+        prepared_id TEXT,
+        action_digest TEXT NOT NULL,
+        executor_id TEXT NOT NULL,
+        executor_fingerprint TEXT NOT NULL,
+        state TEXT NOT NULL,
+        owner_id TEXT,
+        lease_expires_at TEXT,
+        heartbeat_at TEXT,
+        version INTEGER NOT NULL,
+        updated_at TEXT NOT NULL,
+        payload_json TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_recovery
+    ON execution_attempts(state, lease_expires_at, updated_at)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_decision
+    ON execution_attempts(decision_id, updated_at DESC)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_execution_attempts_prepared
+    ON execution_attempts(prepared_id, updated_at DESC)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS execution_attempt_transitions (
+        transition_id TEXT PRIMARY KEY,
+        attempt_id TEXT NOT NULL,
+        from_state TEXT NOT NULL,
+        to_state TEXT NOT NULL,
+        version INTEGER NOT NULL,
+        occurred_at TEXT NOT NULL,
+        reason TEXT,
+        FOREIGN KEY (attempt_id) REFERENCES execution_attempts(attempt_id),
+        UNIQUE (attempt_id, version)
+    )
+    """,
+)
+
 
 def _table_columns(
     connection: sqlite3.Connection, table: str
@@ -1165,6 +1307,14 @@ class ReceiptStore:
                 if version < 5:
                     _migrate_v4_to_v5(self._connection)
                     version = 5
+                if version < 6:
+                    for statement in _V07_CAPACITY_SCHEMA:
+                        self._connection.execute(statement)
+                    version = 6
+                if version < 7:
+                    for statement in _V07_ATTEMPT_SCHEMA:
+                        self._connection.execute(statement)
+                    version = 7
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -6116,7 +6266,7 @@ class ReceiptStore:
                     observation.observation_id,
                     observation.resource_id,
                     observation.observed_at.isoformat(),
-                    observation.model_dump_json(),
+                    observation.model_dump_json(exclude_computed_fields=True),
                 ),
             )
 
@@ -6596,6 +6746,758 @@ class ReceiptStore:
                 parameters,
             ).fetchall()
         return [Observation.model_validate_json(row[0]) for row in rows]
+
+    def save_capacity_observation(
+        self, observation: CapacityObservation
+    ) -> CapacityObservation:
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT canonical_digest, payload_json FROM capacity_observations "
+                "WHERE observation_id = ?",
+                (observation.observation_id,),
+            ).fetchone()
+            if row is not None:
+                if row["canonical_digest"] != observation.canonical_digest:
+                    raise ConfigurationError("capacity observation ID was reused with different data")
+                return CapacityObservation.model_validate_json(row["payload_json"])
+            connection.execute(
+                """
+                INSERT INTO capacity_observations (
+                    observation_id, resource_id, observed_at, canonical_digest, payload_json
+                ) VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    observation.observation_id,
+                    observation.resource_id,
+                    self._utc_text(observation.observed_at),
+                    observation.canonical_digest,
+                    observation.model_dump_json(exclude_computed_fields=True),
+                ),
+            )
+        return observation
+
+    def list_capacity_observations(
+        self, *, resource_id: str | None = None, limit: int = 10_000
+    ) -> list[CapacityObservation]:
+        where = "WHERE resource_id = ?" if resource_id is not None else ""
+        parameters: tuple[object, ...] = (resource_id,) if resource_id is not None else ()
+        with self._lock:
+            rows = self._connection.execute(
+                f"SELECT payload_json FROM capacity_observations {where} "
+                "ORDER BY observed_at DESC, rowid DESC LIMIT ?",
+                (*parameters, max(1, min(limit, 10_000))),
+            ).fetchall()
+        return [CapacityObservation.model_validate_json(row["payload_json"]) for row in rows]
+
+    def latest_capacity_observation(
+        self, resource_id: str
+    ) -> CapacityObservation | None:
+        values = self.list_capacity_observations(resource_id=resource_id, limit=1)
+        return values[0] if values else None
+
+    @staticmethod
+    def _capacity_reservation_from_row(row: sqlite3.Row) -> CapacityReservation:
+        value = CapacityReservation.model_validate_json(row["payload_json"])
+        return value.model_copy(
+            update={
+                "status": CapacityReservationStatus(row["state"]),
+                "claim_token": row["claim_token"],
+                "version": int(row["version"]),
+                "updated_at": datetime.fromisoformat(row["updated_at"]),
+            }
+        )
+
+    def reserve_capacity(
+        self,
+        reservation: CapacityReservation,
+        *,
+        known_available: Decimal | None,
+        now: datetime | None = None,
+    ) -> CapacityReservation:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        if reservation.expires_at <= current_time:
+            raise ConfigurationError("capacity reservation is already expired")
+        available = Decimal(str(known_available)) if known_available is not None else None
+        if available is not None and (not available.is_finite() or available < 0):
+            raise ConfigurationError("known capacity must be finite and non-negative")
+        if reservation.maximum_quantity and available is None:
+            raise ConfigurationError("unknown capacity cannot be reserved")
+        with self._immediate_transaction() as connection:
+            existing = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE idempotency_key = ?",
+                (reservation.idempotency_key,),
+            ).fetchone()
+            if existing is not None:
+                stored = self._capacity_reservation_from_row(existing)
+                binding = (
+                    stored.resource_id,
+                    stored.execution_id,
+                    stored.maximum_quantity,
+                    stored.unit,
+                    stored.expires_at,
+                )
+                requested = (
+                    reservation.resource_id,
+                    reservation.execution_id,
+                    reservation.maximum_quantity,
+                    reservation.unit,
+                    reservation.expires_at,
+                )
+                if binding != requested:
+                    raise ConfigurationError(
+                        "capacity reservation idempotency key was reused with different data"
+                    )
+                return stored
+            held_rows = connection.execute(
+                """
+                SELECT maximum_quantity FROM capacity_reservations
+                WHERE resource_id = ? AND unit = ?
+                  AND ((state = ? AND expires_at > ?) OR state = ?)
+                """,
+                (
+                    reservation.resource_id,
+                    reservation.unit,
+                    CapacityReservationStatus.RESERVED.value,
+                    self._utc_text(current_time),
+                    CapacityReservationStatus.CLAIMED.value,
+                ),
+            ).fetchall()
+            held = sum((Decimal(row["maximum_quantity"]) for row in held_rows), Decimal(0))
+            if available is not None and held + reservation.maximum_quantity > available:
+                raise ConfigurationError("capacity reservation exceeds known available capacity")
+            connection.execute(
+                """
+                INSERT INTO capacity_reservations (
+                    reservation_id, resource_id, execution_id, maximum_quantity, unit,
+                    expires_at, state, idempotency_key, claim_token, version,
+                    created_at, updated_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    reservation.reservation_id,
+                    reservation.resource_id,
+                    reservation.execution_id,
+                    str(reservation.maximum_quantity),
+                    reservation.unit,
+                    self._utc_text(reservation.expires_at),
+                    CapacityReservationStatus.RESERVED.value,
+                    reservation.idempotency_key,
+                    None,
+                    0,
+                    self._utc_text(reservation.created_at),
+                    self._utc_text(reservation.updated_at),
+                    reservation.model_dump_json(),
+                ),
+            )
+        return reservation
+
+    def get_capacity_reservation(
+        self, reservation_id: str
+    ) -> CapacityReservation | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?",
+                (reservation_id,),
+            ).fetchone()
+        return self._capacity_reservation_from_row(row) if row else None
+
+    def list_capacity_reservations(
+        self, *, resource_id: str | None = None, limit: int = 10_000
+    ) -> list[CapacityReservation]:
+        where = "WHERE resource_id = ?" if resource_id is not None else ""
+        parameters: tuple[object, ...] = (resource_id,) if resource_id is not None else ()
+        with self._lock:
+            rows = self._connection.execute(
+                f"SELECT * FROM capacity_reservations {where} "
+                "ORDER BY created_at DESC LIMIT ?",
+                (*parameters, max(1, min(limit, 10_000))),
+            ).fetchall()
+        return [self._capacity_reservation_from_row(row) for row in rows]
+
+    def claim_capacity_reservation(
+        self,
+        reservation_id: str,
+        *,
+        claim_token: str,
+        expected_version: int,
+        now: datetime | None = None,
+    ) -> CapacityReservation:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?",
+                (reservation_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("capacity reservation does not exist")
+            stored = self._capacity_reservation_from_row(row)
+            if stored.status is CapacityReservationStatus.CLAIMED:
+                if stored.claim_token != claim_token:
+                    raise ConfigurationError("capacity reservation is claimed by another worker")
+                return stored
+            if stored.expires_at <= current_time:
+                connection.execute(
+                    "UPDATE capacity_reservations SET state = ?, version = version + 1, "
+                    "updated_at = ? WHERE reservation_id = ?",
+                    (CapacityReservationStatus.EXPIRED.value, self._utc_text(current_time), reservation_id),
+                )
+                raise ConfigurationError("capacity reservation expired before claim")
+            if stored.status is not CapacityReservationStatus.RESERVED:
+                raise ConfigurationError(f"cannot claim {stored.status.value} capacity")
+            cursor = connection.execute(
+                """
+                UPDATE capacity_reservations
+                SET state = ?, claim_token = ?, version = version + 1, updated_at = ?
+                WHERE reservation_id = ? AND version = ? AND state = ?
+                """,
+                (
+                    CapacityReservationStatus.CLAIMED.value,
+                    claim_token,
+                    self._utc_text(current_time),
+                    reservation_id,
+                    expected_version,
+                    CapacityReservationStatus.RESERVED.value,
+                ),
+            )
+            if cursor.rowcount != 1:
+                raise ConfigurationError("capacity reservation compare-and-set failed")
+            claimed = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?",
+                (reservation_id,),
+            ).fetchone()
+        return self._capacity_reservation_from_row(claimed)
+
+    def release_capacity_reservation(
+        self,
+        reservation_id: str,
+        *,
+        expected_version: int,
+        now: datetime | None = None,
+    ) -> CapacityReservation:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?",
+                (reservation_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("capacity reservation does not exist")
+            stored = self._capacity_reservation_from_row(row)
+            if stored.status is CapacityReservationStatus.RELEASED:
+                return stored
+            if stored.status not in {
+                CapacityReservationStatus.RESERVED,
+                CapacityReservationStatus.CLAIMED,
+            }:
+                raise ConfigurationError(f"cannot release {stored.status.value} capacity")
+            cursor = connection.execute(
+                """
+                UPDATE capacity_reservations
+                SET state = ?, version = version + 1, updated_at = ?
+                WHERE reservation_id = ? AND version = ? AND state = ?
+                """,
+                (
+                    CapacityReservationStatus.RELEASED.value,
+                    self._utc_text(current_time),
+                    reservation_id,
+                    expected_version,
+                    stored.status.value,
+                ),
+            )
+            if cursor.rowcount != 1:
+                raise ConfigurationError("capacity reservation compare-and-set failed")
+            released = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?",
+                (reservation_id,),
+            ).fetchone()
+        return self._capacity_reservation_from_row(released)
+
+    def save_capacity_authorization_evidence(
+        self, evidence: CapacityAuthorizationEvidence
+    ) -> CapacityAuthorizationEvidence:
+        return self._save_immutable(
+            table="capacity_authorization_evidence",
+            identity={"evidence_id": evidence.evidence_id},
+            indexed={
+                "provider_id": evidence.provider_id,
+                "resource_id": evidence.resource_id,
+                "resource_fingerprint": evidence.resource_fingerprint,
+                "expires_at": self._utc_text(evidence.expires_at),
+            },
+            value=evidence,
+        )
+
+    def save_execution_entitlement(
+        self, entitlement: ExecutionEntitlement
+    ) -> ExecutionEntitlement:
+        with self._immediate_transaction() as connection:
+            if entitlement.authorization_evidence_id:
+                row = connection.execute(
+                    "SELECT payload_json FROM capacity_authorization_evidence WHERE evidence_id = ?",
+                    (entitlement.authorization_evidence_id,),
+                ).fetchone()
+                if row is None:
+                    raise ConfigurationError("entitlement authorization evidence is missing")
+                evidence = CapacityAuthorizationEvidence.model_validate_json(row["payload_json"])
+                if (
+                    evidence.resource_id != entitlement.backing_resource_id
+                    or evidence.resource_fingerprint != entitlement.backing_resource_fingerprint
+                    or evidence.issuer_principal_digest != entitlement.issuer_principal_digest
+                    or evidence.expires_at < entitlement.expires_at
+                ):
+                    raise ConfigurationError("entitlement authorization evidence does not match")
+            digest = entitlement.canonical_digest
+            existing = connection.execute(
+                "SELECT payload_digest, payload_json FROM execution_entitlements "
+                "WHERE entitlement_id = ? OR nonce = ?",
+                (entitlement.entitlement_id, entitlement.nonce),
+            ).fetchone()
+            if existing is not None:
+                if existing["payload_digest"] != digest:
+                    raise ConfigurationError("entitlement ID or nonce was reused with different data")
+                return ExecutionEntitlement.model_validate_json(existing["payload_json"])
+            connection.execute(
+                """
+                INSERT INTO execution_entitlements (
+                    entitlement_id, resource_id, resource_fingerprint, nonce,
+                    maximum_quantity, remaining_quantity, unit, expires_at, state,
+                    version, authorization_evidence_id, payload_digest, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', 0, ?, ?, ?)
+                """,
+                (
+                    entitlement.entitlement_id,
+                    entitlement.backing_resource_id,
+                    entitlement.backing_resource_fingerprint,
+                    entitlement.nonce,
+                    str(entitlement.maximum_quantity),
+                    str(entitlement.maximum_quantity),
+                    entitlement.unit,
+                    self._utc_text(entitlement.expires_at),
+                    entitlement.authorization_evidence_id,
+                    digest,
+                    entitlement.model_dump_json(exclude_computed_fields=True),
+                ),
+            )
+        return entitlement
+
+    def redeem_entitlement(
+        self,
+        entitlement_id: str,
+        *,
+        attempt_id: str,
+        quantity: Decimal,
+        now: datetime | None = None,
+    ) -> EntitlementRedemptionReceipt:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        requested = Decimal(str(quantity))
+        if not requested.is_finite() or requested <= 0:
+            raise ConfigurationError("redemption quantity must be finite and positive")
+        with self._immediate_transaction() as connection:
+            replay = connection.execute(
+                "SELECT * FROM entitlement_redemptions WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if replay is not None:
+                if replay["entitlement_id"] != entitlement_id or Decimal(
+                    replay["quantity_consumed"]
+                ) != requested:
+                    raise ConfigurationError("redemption attempt was reused with different data")
+                return EntitlementRedemptionReceipt.model_validate_json(replay["payload_json"])
+            row = connection.execute(
+                "SELECT * FROM execution_entitlements WHERE entitlement_id = ?",
+                (entitlement_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution entitlement does not exist")
+            if datetime.fromisoformat(row["expires_at"]) <= current_time:
+                connection.execute(
+                    "UPDATE execution_entitlements SET state = 'expired', version = version + 1 "
+                    "WHERE entitlement_id = ? AND state = 'active'",
+                    (entitlement_id,),
+                )
+                raise ConfigurationError("execution entitlement is expired")
+            if row["state"] != "active":
+                raise ConfigurationError(f"execution entitlement is {row['state']}")
+            remaining = Decimal(row["remaining_quantity"])
+            if requested > remaining:
+                raise ConfigurationError("redemption exceeds entitlement maximum")
+            new_remaining = remaining - requested
+            status = (
+                EntitlementRedemptionStatus.CONSUMED
+                if new_remaining == 0
+                else EntitlementRedemptionStatus.PARTIAL
+            )
+            evidence_digest = capacity_digest(
+                {
+                    "entitlement_digest": row["payload_digest"],
+                    "attempt_id": attempt_id,
+                    "quantity": str(requested),
+                    "remaining": str(new_remaining),
+                }
+            )
+            redemption_id = self._payment_operation_result_id("redemption", attempt_id)
+            receipt = EntitlementRedemptionReceipt(
+                redemption_id=redemption_id,
+                entitlement_id=entitlement_id,
+                attempt_id=attempt_id,
+                quantity_consumed=requested,
+                remaining_quantity=new_remaining,
+                status=status,
+                evidence_digest=evidence_digest,
+                timestamp=current_time,
+            )
+            connection.execute(
+                """
+                INSERT INTO entitlement_redemptions (
+                    redemption_id, entitlement_id, attempt_id, quantity_consumed,
+                    remaining_quantity, status, timestamp, payload_digest, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    receipt.redemption_id,
+                    entitlement_id,
+                    attempt_id,
+                    str(requested),
+                    str(new_remaining),
+                    status.value,
+                    self._utc_text(current_time),
+                    capacity_digest(receipt),
+                    receipt.model_dump_json(),
+                ),
+            )
+            connection.execute(
+                """
+                UPDATE execution_entitlements
+                SET remaining_quantity = ?, state = ?, version = version + 1
+                WHERE entitlement_id = ? AND version = ? AND state = 'active'
+                """,
+                (
+                    str(new_remaining),
+                    "consumed" if new_remaining == 0 else "active",
+                    entitlement_id,
+                    int(row["version"]),
+                ),
+            )
+        return receipt
+
+    def list_entitlement_redemptions(
+        self, entitlement_id: str, *, limit: int = 10_000
+    ) -> list[EntitlementRedemptionReceipt]:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM entitlement_redemptions "
+                "WHERE entitlement_id = ? ORDER BY timestamp LIMIT ?",
+                (entitlement_id, max(1, min(limit, 10_000))),
+            ).fetchall()
+        return [
+            EntitlementRedemptionReceipt.model_validate_json(row["payload_json"])
+            for row in rows
+        ]
+
+    def release_execution_entitlement(
+        self,
+        entitlement_id: str,
+        *,
+        expected_version: int,
+        now: datetime | None = None,
+    ) -> None:
+        current_time = (now or datetime.now(UTC)).astimezone(UTC)
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT state, version, expires_at FROM execution_entitlements "
+                "WHERE entitlement_id = ?",
+                (entitlement_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution entitlement does not exist")
+            if row["state"] == "released":
+                return
+            if datetime.fromisoformat(row["expires_at"]) <= current_time:
+                raise ConfigurationError("cannot release expired entitlement")
+            if row["state"] != "active":
+                raise ConfigurationError(f"cannot release {row['state']} entitlement")
+            cursor = connection.execute(
+                "UPDATE execution_entitlements SET state = 'released', version = version + 1 "
+                "WHERE entitlement_id = ? AND state = 'active' AND version = ?",
+                (entitlement_id, expected_version),
+            )
+            if cursor.rowcount != 1:
+                raise ConfigurationError("execution entitlement compare-and-set failed")
+
+    def create_execution_attempt(self, attempt: ExecutionAttempt) -> ExecutionAttempt:
+        payload = attempt.model_dump_json()
+        with self._immediate_transaction() as connection:
+            existing = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt.attempt_id,),
+            ).fetchone()
+            if existing is not None:
+                stored = ExecutionAttempt.model_validate_json(existing["payload_json"])
+                immutable = (
+                    "decision_id",
+                    "prepared_id",
+                    "action_digest",
+                    "executor_id",
+                    "executor_fingerprint",
+                    "side_effect",
+                    "idempotent",
+                )
+                if any(getattr(stored, field) != getattr(attempt, field) for field in immutable):
+                    raise ConfigurationError(
+                        "execution attempt ID was reused with different authority"
+                    )
+                return stored
+            connection.execute(
+                """
+                INSERT INTO execution_attempts (
+                    attempt_id, decision_id, prepared_id, action_digest, executor_id,
+                    executor_fingerprint, state, owner_id, lease_expires_at,
+                    heartbeat_at, version, updated_at, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    attempt.attempt_id,
+                    attempt.decision_id,
+                    attempt.prepared_id,
+                    attempt.action_digest,
+                    attempt.executor_id,
+                    attempt.executor_fingerprint,
+                    attempt.state.value,
+                    attempt.owner_id,
+                    self._utc_text(attempt.lease_expires_at)
+                    if attempt.lease_expires_at
+                    else None,
+                    self._utc_text(attempt.heartbeat_at) if attempt.heartbeat_at else None,
+                    attempt.version,
+                    self._utc_text(attempt.updated_at),
+                    payload,
+                ),
+            )
+        return attempt
+
+    def get_execution_attempt(self, attempt_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            row = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+        return ExecutionAttempt.model_validate_json(row["payload_json"]) if row else None
+
+    def claim_execution_attempt(
+        self,
+        attempt_id: str,
+        *,
+        owner_id: str,
+        claimed_at: datetime,
+        lease_expires_at: datetime,
+    ) -> ExecutionAttempt:
+        if lease_expires_at <= claimed_at:
+            raise ConfigurationError("execution-attempt lease must expire after claim")
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution attempt does not exist")
+            current = ExecutionAttempt.model_validate_json(row["payload_json"])
+            if current.state is ExecutionAttemptState.CLAIMED and current.owner_id == owner_id:
+                return current
+            if current.state is not ExecutionAttemptState.CREATED or current.version != 0:
+                raise ConfigurationError("execution attempt is already claimed")
+            updated = ExecutionAttempt.model_validate(
+                {
+                    **current.model_dump(mode="python"),
+                    "state": ExecutionAttemptState.CLAIMED,
+                    "owner_id": owner_id,
+                    "lease_expires_at": lease_expires_at,
+                    "heartbeat_at": claimed_at,
+                    "version": 1,
+                    "updated_at": claimed_at,
+                }
+            )
+            self._save_attempt_update_locked(connection, current, updated, reason="claimed")
+        return updated
+
+    def transition_execution_attempt(
+        self,
+        attempt_id: str,
+        *,
+        expected_state: ExecutionAttemptState,
+        expected_version: int,
+        target_state: ExecutionAttemptState,
+        updated_at: datetime,
+        reason: str | None = None,
+        cash_reservation_ids: tuple[str, ...] | None = None,
+        capacity_reservation_ids: tuple[str, ...] | None = None,
+        invocation_start_digest: str | None = None,
+        external_attempt_digest: str | None = None,
+        external_thread_digest: str | None = None,
+        external_turn_digest: str | None = None,
+        terminal_receipt_ids: tuple[str, ...] | None = None,
+    ) -> ExecutionAttempt:
+        with self._immediate_transaction() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise ConfigurationError("execution attempt does not exist")
+            current = ExecutionAttempt.model_validate_json(row["payload_json"])
+            if current.state is not expected_state or current.version != expected_version:
+                raise ConfigurationError("execution-attempt compare-and-set failed")
+            if not current.can_transition_to(target_state):
+                raise ConfigurationError(
+                    f"illegal execution-attempt transition: {current.state} -> {target_state}"
+                )
+            changes: dict[str, object] = {
+                "state": target_state,
+                "version": current.version + 1,
+                "updated_at": updated_at,
+                "heartbeat_at": updated_at,
+            }
+            optional = {
+                "cash_reservation_ids": cash_reservation_ids,
+                "capacity_reservation_ids": capacity_reservation_ids,
+                "invocation_start_digest": invocation_start_digest,
+                "external_attempt_digest": external_attempt_digest,
+                "external_thread_digest": external_thread_digest,
+                "external_turn_digest": external_turn_digest,
+                "terminal_receipt_ids": terminal_receipt_ids,
+            }
+            changes.update({key: value for key, value in optional.items() if value is not None})
+            if reason is not None:
+                changes["recovery_reason"] = reason[:2000]
+            updated = ExecutionAttempt.model_validate(
+                {**current.model_dump(mode="python"), **changes}
+            )
+            self._transition_attempt_capacity_locked(connection, current, updated)
+            self._save_attempt_update_locked(connection, current, updated, reason=reason)
+        return updated
+
+    def _transition_attempt_capacity_locked(
+        self,
+        connection: sqlite3.Connection,
+        current: ExecutionAttempt,
+        updated: ExecutionAttempt,
+    ) -> None:
+        """Claim/release holds in the same transaction as the invocation/terminal state."""
+        if updated.capacity_reservation_ids != current.capacity_reservation_ids and not (
+            current.state is ExecutionAttemptState.CLAIMED
+            and updated.state is ExecutionAttemptState.RESERVED
+            and not current.capacity_reservation_ids
+        ):
+            raise ConfigurationError("execution-attempt capacity bindings are immutable")
+        for reservation_id in updated.capacity_reservation_ids:
+            row = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?", (reservation_id,)
+            ).fetchone()
+            if row is None or row["execution_id"] != current.attempt_id:
+                raise ConfigurationError("capacity reservation does not belong to execution attempt")
+            hold = self._capacity_reservation_from_row(row)
+            if updated.state in {ExecutionAttemptState.RESERVED, ExecutionAttemptState.INVOKING} and (
+                hold.status is not CapacityReservationStatus.RESERVED or hold.expires_at <= updated.updated_at
+            ):
+                raise ConfigurationError("capacity reservation is not available for invocation")
+            if updated.state is ExecutionAttemptState.INVOKING:
+                connection.execute(
+                    "UPDATE capacity_reservations SET state = ?, claim_token = ?, "
+                    "version = version + 1, updated_at = ? WHERE reservation_id = ?",
+                    (CapacityReservationStatus.CLAIMED.value, current.owner_id,
+                     self._utc_text(updated.updated_at), reservation_id),
+                )
+            elif updated.state in {
+                ExecutionAttemptState.COMPLETED, ExecutionAttemptState.FAILED,
+                ExecutionAttemptState.REJECTED, ExecutionAttemptState.CANCELLED,
+            }:
+                if hold.status not in {CapacityReservationStatus.RESERVED, CapacityReservationStatus.CLAIMED}:
+                    raise ConfigurationError("execution-attempt capacity was already finalized")
+                connection.execute(
+                    "UPDATE capacity_reservations SET state = ?, version = version + 1, "
+                    "updated_at = ? WHERE reservation_id = ?",
+                    (CapacityReservationStatus.RELEASED.value, self._utc_text(updated.updated_at), reservation_id),
+                )
+
+    def _save_attempt_update_locked(
+        self,
+        connection: sqlite3.Connection,
+        current: ExecutionAttempt,
+        updated: ExecutionAttempt,
+        *,
+        reason: str | None,
+    ) -> None:
+        cursor = connection.execute(
+            """
+            UPDATE execution_attempts
+            SET state = ?, owner_id = ?, lease_expires_at = ?, heartbeat_at = ?,
+                version = ?, updated_at = ?, payload_json = ?
+            WHERE attempt_id = ? AND state = ? AND version = ?
+            """,
+            (
+                updated.state.value,
+                updated.owner_id,
+                self._utc_text(updated.lease_expires_at) if updated.lease_expires_at else None,
+                self._utc_text(updated.heartbeat_at) if updated.heartbeat_at else None,
+                updated.version,
+                self._utc_text(updated.updated_at),
+                updated.model_dump_json(),
+                current.attempt_id,
+                current.state.value,
+                current.version,
+            ),
+        )
+        if cursor.rowcount != 1:
+            raise ConfigurationError("execution-attempt compare-and-set failed")
+        connection.execute(
+            """
+            INSERT INTO execution_attempt_transitions (
+                transition_id, attempt_id, from_state, to_state, version, occurred_at, reason
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                f"{current.attempt_id}:{updated.version}",
+                current.attempt_id,
+                current.state.value,
+                updated.state.value,
+                updated.version,
+                self._utc_text(updated.updated_at),
+                reason[:2000] if reason is not None else None,
+            ),
+        )
+
+    def list_recoverable_execution_attempts(
+        self, *, now: datetime, limit: int = 100
+    ) -> list[ExecutionAttempt]:
+        with self._lock:
+            rows = self._connection.execute(
+                """
+                SELECT payload_json FROM execution_attempts
+                WHERE state IN ('CLAIMED', 'RESERVED', 'INVOKING', 'VALIDATING',
+                                'SETTLING', 'INDETERMINATE')
+                  AND lease_expires_at IS NOT NULL AND lease_expires_at <= ?
+                ORDER BY updated_at, attempt_id LIMIT ?
+                """,
+                (self._utc_text(now), max(1, min(limit, 10_000))),
+            ).fetchall()
+        return [ExecutionAttempt.model_validate_json(row["payload_json"]) for row in rows]
+
+    def execution_attempt_for_decision(self, decision_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE decision_id = ? "
+                "ORDER BY updated_at DESC, rowid DESC LIMIT 1",
+                (decision_id,),
+            ).fetchall()
+        return ExecutionAttempt.model_validate_json(rows[0]["payload_json"]) if rows else None
+
+    def execution_attempt_for_prepared(self, prepared_id: str) -> ExecutionAttempt | None:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT payload_json FROM execution_attempts WHERE prepared_id = ? "
+                "ORDER BY updated_at DESC, rowid DESC LIMIT 1",
+                (prepared_id,),
+            ).fetchall()
+        return ExecutionAttempt.model_validate_json(rows[0]["payload_json"]) if rows else None
 
     def save_receipts(self, receipts: Iterable[ExecutionReceipt]) -> None:
         for receipt in receipts:

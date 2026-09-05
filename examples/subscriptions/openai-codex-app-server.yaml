@@ -1,0 +1,49 @@
+version: "0.7"
+database: .aeep/codex-subscription.db
+default_policy: balanced
+
+resources:
+  - id: openai.codex.personal
+    kind: subscription
+    provider: openai
+    product: chatgpt-codex
+    unit: provider_unit
+    transferability: self_only
+    settlement_mode: subscription_usage
+    access: {mode: host}
+    quota: {state: unknown, confidence: 0, source: rate_limit}
+    capabilities: {reasoning: true, coding: true}
+
+executors:
+  - id: openai.codex.review
+    capability: code.review@1
+    kind: host_managed
+    resource_pool: openai.codex.personal
+    description: Review a bounded change through the locally authenticated Codex host.
+    input_schema:
+      type: object
+      properties:
+        request: {type: string, maxLength: 20000}
+      required: [request]
+      additionalProperties: false
+    side_effect: read
+    estimate:
+      resources: {latency_ms: 5000, subscription_units: 1}
+      confidence: 0.4
+    config:
+      adapter_id: codex-app-server
+      # Replace only this executable path; argv remains an array and never uses a shell.
+      argv: [/absolute/path/to/codex, app-server]
+      instructions: "Review only this bounded request and return the findings: {input.request}"
+      model_constraints: {required_capabilities: [text]}
+      reasoning_efforts: [medium]
+      working_directory_policy: manifest
+      sandbox_policy: read_only
+      approval_ceiling: read
+      output_mode: json
+      timeout_seconds: 300
+      max_message_bytes: 1048576
+      environment_allowlist: []
+      store_prompt: false
+      store_output: false
+      redaction_policy: strict

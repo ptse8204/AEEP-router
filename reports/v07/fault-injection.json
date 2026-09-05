@@ -1,0 +1,62 @@
+{
+  "schema": "aeep-v07-fault-injection-v1",
+  "result": "PASS",
+  "safety_invariant": "No injected failure produced unauthorized overcapture, double redemption, or blind duplicate execution.",
+  "cases": [
+    {
+      "fault": "before claim",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+    },
+    {
+      "fault": "after claim",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+    },
+    {
+      "fault": "after cash reservation",
+      "status": "PASS",
+      "test_id": "tests/test_v04_payments.py::test_manager_reserve_is_durably_idempotent_and_recovers_lost_response"
+    },
+    {
+      "fault": "after capacity reservation",
+      "status": "PASS",
+      "test_id": "tests/test_v07_capacity.py::test_capacity_reservation_release_and_replay_are_atomic"
+    },
+    {
+      "fault": "before external invocation",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+    },
+    {
+      "fault": "immediately after App Server turn start",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate"
+    },
+    {
+      "fault": "during streamed output",
+      "status": "PASS",
+      "test_id": "tests/test_codex_subscription_adapter.py::test_turn_failure_modes_fail_closed"
+    },
+    {
+      "fault": "after terminal result but before validation",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+    },
+    {
+      "fault": "during settlement",
+      "status": "PASS",
+      "test_id": "tests/test_v04_payments.py::test_settlement_adapter_failure_preserves_indeterminate_reservation"
+    },
+    {
+      "fault": "after partial release",
+      "status": "PASS",
+      "test_id": "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline"
+    },
+    {
+      "fault": "during recovery",
+      "status": "PASS",
+      "test_id": "tests/test_v07_execution_attempts.py::test_recovery_inspects_external_state_and_never_retries_invoking_attempt"
+    }
+  ]
+}

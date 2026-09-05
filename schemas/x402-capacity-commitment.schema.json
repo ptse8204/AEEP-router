@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "CapacitySignature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "maxLength": 50,
+          "minLength": 1,
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "title": "CapacitySignature",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "binding": {
+      "const": "aeep-local",
+      "default": "aeep-local",
+      "title": "Binding",
+      "type": "string"
+    },
+    "protocol_version": {
+      "const": "x402-v2-batch",
+      "default": "x402-v2-batch",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "entitlement_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Entitlement Id",
+      "type": "string"
+    },
+    "entitlement_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Entitlement Digest",
+      "type": "string"
+    },
+    "beneficiary_principal_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Beneficiary Principal Digest",
+      "type": "string"
+    },
+    "backing_resource_fingerprint": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Backing Resource Fingerprint",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Capability",
+      "type": "string"
+    },
+    "action_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Action Digest",
+      "type": "string"
+    },
+    "maximum_quantity": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Maximum Quantity"
+    },
+    "unit": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Unit",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "nonce": {
+      "maxLength": 500,
+      "minLength": 16,
+      "title": "Nonce",
+      "type": "string"
+    },
+    "authorization_evidence_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Authorization Evidence Id",
+      "type": "string"
+    },
+    "signature": {
+      "$ref": "#/$defs/CapacitySignature"
+    }
+  },
+  "required": [
+    "entitlement_id",
+    "entitlement_digest",
+    "beneficiary_principal_digest",
+    "backing_resource_fingerprint",
+    "capability",
+    "action_digest",
+    "maximum_quantity",
+    "unit",
+    "expires_at",
+    "nonce",
+    "authorization_evidence_id",
+    "signature"
+  ],
+  "title": "X402CapacityCommitment",
+  "type": "object"
+}

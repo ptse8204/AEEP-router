@@ -69,13 +69,13 @@ def test_package_and_documentation_versions_are_consistent():
     assert proof["schema_version"] == economic_protocol_version
 
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    match = re.search(r"^## Unreleased — (\d+\.\d+\.\d+)$", changelog, re.MULTILINE)
+    match = re.search(r"^## Unreleased — ([0-9A-Za-z.]+)$", changelog, re.MULTILINE)
     assert match is not None
     assert match.group(1) == project_version
 
 
 def test_legacy_manifest_versions_remain_supported():
-    versions = ("0.1", "0.15", "0.2", "0.3", "0.4", "0.5")
+    versions = ("0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6")
     assert tuple(Manifest.model_validate({"version": version}).version for version in versions) == versions
-    assert Manifest().version == "0.6"
-    assert default_manifest_dict()["version"] == "0.6"
+    assert Manifest().version == "0.7"
+    assert default_manifest_dict()["version"] == "0.7"

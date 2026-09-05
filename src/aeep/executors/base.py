@@ -5,7 +5,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from ..models import ActionRequest, ExecutorSpec, RawExecution, RouteEstimate
+from ..models import ActionRequest, ExecutorSpec, RawExecution, RouteEstimate, SideEffect
 
 
 @dataclass(slots=True)
@@ -17,6 +17,7 @@ class ExecutionContext:
     prepared_id: str | None = None
     quote_id: str | None = None
     attempt_id: str | None = None
+    approved_side_effect: SideEffect = SideEffect.READ
 
 
 class BaseExecutor(ABC):
