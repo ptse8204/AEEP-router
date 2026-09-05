@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import os
 import re
+import socket
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +24,28 @@ from aeep.models import (
 from aeep.router import Router
 
 ROOT = Path(__file__).parents[1]
+
+
+def test_offline_guard_allows_socketpair_but_denies_network(monkeypatch):
+    from conftest import block_network_during_completion_verification
+
+    if os.getenv("AEEP_VERIFY_OFFLINE") != "1":
+        monkeypatch.setenv("AEEP_VERIFY_OFFLINE", "1")
+        # Exercise Windows' implementation on platforms exposing the stdlib fallback.
+        monkeypatch.setattr(socket, "socketpair", getattr(socket, "_fallback_socketpair", socket.socketpair))
+        block_network_during_completion_verification.__wrapped__(monkeypatch)
+    left, right = socket.socketpair()
+    try:
+        left.sendall(b"x")
+        assert right.recv(1) == b"x"
+        for address in (("127.0.0.1", 9), ("192.0.2.1", 443)):
+            with socket.socket() as sock, pytest.raises(AssertionError, match="network connection"):
+                sock.connect(address)
+            with pytest.raises(AssertionError, match="network connection"):
+                socket.create_connection(address)
+    finally:
+        left.close()
+        right.close()
 
 
 class PrivateManagedHost:
