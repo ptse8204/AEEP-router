@@ -24,7 +24,10 @@ CAPACITY_FUNCTIONS = (
 
 def main() -> int:
     report_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("reports/v07/coverage.json")
-    files = json.loads(report_path.read_text(encoding="utf-8"))["files"]
+    files = {
+        name.replace("\\", "/"): value
+        for name, value in json.loads(report_path.read_text(encoding="utf-8"))["files"].items()
+    }
     failed = False
     for label, path in CRITICAL_MODULES.items():
         summary = files[path]["summary"]
