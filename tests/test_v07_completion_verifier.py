@@ -39,7 +39,7 @@ def test_router_tie_breaks_by_executor_id():
 
 def test_core_verifier_executes_tests_and_checks_locked_digests():
     report = verify_router_complete(profile="core")
-    assert report.profiles["core"] is CompletionStatus.PASS
+    assert report.profiles["core"] is CompletionStatus.PASS, report.model_dump_json(indent=2)
     assert all(
         item.test_ids and item.artifact_digests
         for item in report.checks
