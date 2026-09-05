@@ -1,6 +1,6 @@
 # AEEP 0.7 router completion
 
-Revision: `0fe9f66d5a8dbe3542bbf1038bce1037ef35d8d1`
+Revision: `d68be2ac01824b55ede23c5b26b4f92a6b46d46d`
 Release ready: `true`
 
 | Check | Profile | Status |
@@ -54,6 +54,8 @@ Release ready: `true`
 | `capacity-resource-contract` | `marketplace_contract` | `PASS` |
 | `transferability-enforcement` | `marketplace_contract` | `PASS` |
 | `capacity-reservation-release` | `marketplace_contract` | `PASS` |
+| `managed-capacity-admission` | `core` | `PASS` |
+| `uncertain-capacity-retention` | `core` | `PASS` |
 | `entitlement-binding` | `marketplace_contract` | `PASS` |
 | `openai-self-only-rejection` | `marketplace_contract` | `PASS` |
 | `provider-authorized-mock-transfer` | `marketplace_contract` | `PASS` |

@@ -1,8 +1,8 @@
 {
   "schema": "aeep-router-completion-v1",
   "version": "0.7.0",
-  "revision": "0fe9f66d5a8dbe3542bbf1038bce1037ef35d8d1",
-  "generated_at": "2026-09-02T12:46:08.211164Z",
+  "revision": "d68be2ac01824b55ede23c5b26b4f92a6b46d46d",
+  "generated_at": "2026-09-05T10:42:51.479230Z",
   "profiles": {
     "core": "PASS",
     "openai": "PASS",
@@ -326,7 +326,7 @@
         "scripts/check_critical_coverage.py"
       ],
       "artifact_digests": [
-        "sha256:f55245ba77fa9f130a56bf328f182f841ab6183eaeadde92833bc596a1939070"
+        "sha256:ed59bbcac455f12e9a006334fac1395a676ac189d6853c1bb4bf16e9c67e3c74"
       ],
       "reason": ""
     },
@@ -791,6 +791,38 @@
       ],
       "artifact_digests": [
         "sha256:b61da49cd26df6b194fc55a7c47b60c7adc96ffbd5555e336e6f45b854c60a76"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "managed-capacity-admission",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_managed_capacity_reservations.py::test_shared_capacity_blocks_concurrent_invocation_and_releases"
+      ],
+      "evidence_ids": [
+        "tests/test_managed_capacity_reservations.py"
+      ],
+      "artifact_digests": [
+        "sha256:648997f94199d0e04f942496d4145cba4e8fac40910d625b5e4c3e0fa2f1100b"
+      ],
+      "reason": ""
+    },
+    {
+      "id": "uncertain-capacity-retention",
+      "profile": "core",
+      "required": true,
+      "status": "PASS",
+      "test_ids": [
+        "tests/test_managed_capacity_reservations.py::test_uncertain_managed_execution_keeps_capacity_beyond_expiry"
+      ],
+      "evidence_ids": [
+        "tests/test_managed_capacity_reservations.py"
+      ],
+      "artifact_digests": [
+        "sha256:648997f94199d0e04f942496d4145cba4e8fac40910d625b5e4c3e0fa2f1100b"
       ],
       "reason": ""
     },
