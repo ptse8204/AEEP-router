@@ -42,7 +42,7 @@ from .accounting import (
 from .artifact_store import ContentArtifactStore
 from .attempts import AttemptService, ExecutionAttempt, ExecutionAttemptState
 from .cache_affinity import estimate_cache_affinity
-from .capacity import CapacityObservation, CapacityWindow, observation_quota
+from .capacity import CapacityObservation, CapacityReservation, CapacityWindow, observation_quota
 from .config import load_manifest
 from .discovery import CompositeProviderRegistry
 from .economic.aggregates import MarketAggregateSelector
@@ -790,16 +790,71 @@ class Router:
         target: ExecutionAttemptState,
         *,
         reason: str | None = None,
+        capacity_spec: ExecutorSpec | None = None,
+        capacity_estimate: RouteEstimate | None = None,
         **updates: Any,
     ) -> ExecutionAttempt:
-        return self.store.transition_execution_attempt(
-            attempt.attempt_id,
-            expected_state=attempt.state,
-            expected_version=attempt.version,
-            target_state=target,
-            updated_at=self._economic_now(),
-            reason=reason,
-            **updates,
+        hold = None
+        if target is ExecutionAttemptState.RESERVED and capacity_spec is not None:
+            assert capacity_estimate is not None
+            hold = self._reserve_attempt_capacity(attempt, capacity_spec, capacity_estimate)
+            if hold is not None:
+                updates["capacity_reservation_ids"] = (hold.reservation_id,)
+        try:
+            return self.store.transition_execution_attempt(
+                attempt.attempt_id,
+                expected_state=attempt.state,
+                expected_version=attempt.version,
+                target_state=target,
+                updated_at=self._economic_now(),
+                reason=reason,
+                **updates,
+            )
+        except Exception:
+            if hold is not None:
+                self.store.release_capacity_reservation(
+                    hold.reservation_id, expected_version=hold.version, now=self._economic_now()
+                )
+            raise
+
+    def _reserve_attempt_capacity(
+        self, attempt: ExecutionAttempt, spec: ExecutorSpec, estimate: RouteEstimate
+    ) -> CapacityReservation | None:
+        if spec.kind is not ExecutorKind.MANAGED_HOST:
+            return None
+        resource = self.resources[spec.resource_pool or ""]
+        observation = self.store.latest_capacity_observation(resource.id)
+        if observation is None:
+            return None
+        quota = observation_quota(observation, unit=resource.unit, now=self._economic_now())
+        if quota.remaining_units is None:
+            # Percentages cannot authorize a hold in provider-local absolute units.
+            return None
+        quantities = []
+        for prior in (spec.estimate, estimate):
+            entries = [item for item in prior.subscription_usage if item.resource_pool == resource.id]
+            if any(item.unit != resource.unit for item in entries):
+                raise ConfigurationError("capacity estimate unit does not match resource")
+            quantities.append(sum(
+                (item.consumed for item in entries if item.consumed is not None), Decimal(0)
+            ) if entries else Decimal(str(prior.resources.subscription_units)))
+        quantity = max(quantities)
+        if quantity <= 0:
+            raise ConfigurationError("quantified managed capacity requires a positive usage estimate")
+        now = self._economic_now()
+        return self.store.reserve_capacity(
+            CapacityReservation(
+                resource_id=resource.id,
+                execution_id=attempt.attempt_id,
+                maximum_quantity=quantity,
+                unit=resource.unit,
+                expires_at=now + timedelta(seconds=spec.managed_host_config().timeout_seconds),
+                idempotency_key=f"{attempt.attempt_id}:capacity",
+                created_at=now,
+                updated_at=now,
+            ),
+            known_available=quota.remaining_units,
+            now=now,
         )
 
     @staticmethod
@@ -820,7 +875,9 @@ class Router:
             return ExecutionAttemptState.COMPLETED
         if receipt.status is ExecutionStatus.REJECTED:
             return ExecutionAttemptState.REJECTED
-        if receipt.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and not retry_eligible:
+        if receipt.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
+            receipt.executor_kind is ExecutorKind.MANAGED_HOST or not retry_eligible
+        ):
             return ExecutionAttemptState.INDETERMINATE
         return ExecutionAttemptState.FAILED
 
@@ -3251,7 +3308,7 @@ class Router:
                     )
                     self._prepared_contexts.pop(prepared_id, None)
             raise
-        except Exception:
+        except (Exception, asyncio.CancelledError):
             if invocation_marker[0]:
                 with suppress(Exception):
                     self._mark_economic_indeterminate(
@@ -3376,6 +3433,7 @@ class Router:
             )
 
         # Re-evaluate current hard feasibility for same-process and rehydrated calls.
+        await self._snapshot_managed_capacity(context.request.capability, executor_id=spec.id)
         live_request = self._fill_runtime_context(context.request)
         live_policy = self._policy_for(live_request)
         live_estimate = self.estimator.estimate(
@@ -3508,6 +3566,8 @@ class Router:
                     ExecutionAttemptState.RESERVED,
                     reason="cash reservation recorded",
                     cash_reservation_ids=(reservation.reservation_id,),
+                    capacity_spec=spec,
+                    capacity_estimate=live_estimate,
                 )
                 # The hold does not grant execution authority. Recheck route and
                 # economic trust after reservation and immediately before INVOKING.
@@ -3628,7 +3688,9 @@ class Router:
                 durable_attempt = self._advance_attempt(
                     durable_attempt,
                     ExecutionAttemptState.RESERVED,
-                    reason="zero cash and capacity reservation recorded",
+                    reason="confirmed-free reservation boundary",
+                    capacity_spec=spec,
+                    capacity_estimate=live_estimate,
                 )
                 self.store.claim_prepared_for_invocation(
                     prepared_id,
@@ -3667,7 +3729,7 @@ class Router:
             # payment call. Recovery may enrich this receipt, but must never need
             # to repeat the external action to prove that invocation returned.
             self._save_receipt(receipt)
-        except Exception:
+        except (Exception, asyncio.CancelledError):
             if invocation_started:
                 self._mark_economic_indeterminate(
                     prepared_id, "external invocation or evidence processing raised"
@@ -5787,22 +5849,31 @@ class Router:
                 ),
                 spec=spec,
             )
-            durable_attempt = self._advance_attempt(
-                durable_attempt,
-                ExecutionAttemptState.RESERVED,
-                reason="zero or locally managed reservation recorded",
-            )
-            durable_attempt = self._advance_attempt(
-                durable_attempt,
-                ExecutionAttemptState.INVOKING,
-                reason="external invocation boundary entered",
-                invocation_start_digest=deterministic_digest(
-                    {
-                        "attempt_id": durable_attempt.attempt_id,
-                        "executor_fingerprint": durable_attempt.executor_fingerprint,
-                    }
-                ),
-            )
+            try:
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.RESERVED,
+                    reason="local reservation boundary",
+                    capacity_spec=spec,
+                    capacity_estimate=current_estimate,
+                )
+                durable_attempt = self._advance_attempt(
+                    durable_attempt,
+                    ExecutionAttemptState.INVOKING,
+                    reason="external invocation boundary entered",
+                    invocation_start_digest=deterministic_digest(
+                        {
+                            "attempt_id": durable_attempt.attempt_id,
+                            "executor_fingerprint": durable_attempt.executor_fingerprint,
+                        }
+                    ),
+                )
+            except Exception:
+                self._advance_attempt(
+                    durable_attempt, ExecutionAttemptState.FAILED,
+                    reason="capacity admission failed before invocation",
+                )
+                raise
             started_at = utc_now()
             with start_span(
                 "aeep.execute",
@@ -5828,7 +5899,7 @@ class Router:
                             approved_side_effect=approved_side_effect,
                         )
                     )
-                except Exception:
+                except (Exception, asyncio.CancelledError):
                     self._advance_attempt(
                         durable_attempt,
                         ExecutionAttemptState.INDETERMINATE,

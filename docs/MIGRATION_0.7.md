@@ -32,6 +32,21 @@ require a resource more permissive than `SELF_ONLY` plus provider authorization
 evidence. x402 compatibility is local and disabled by default; migration enables
 no network, wallet, payment, or marketplace behavior.
 
+Managed execution now reserves quantified capacity before invocation in both
+ordinary and prepared execution. The admission quantity is the larger of the
+configured and current usage estimates, in the resource's own unit. A quantified
+resource requires a positive estimate. All workers sharing the SQLite database
+count outstanding holds; the invocation transition claims the hold atomically,
+and a definite terminal transition releases it atomically. Claimed holds do not
+expire while execution is unresolved. Timeout, cancellation, and indeterminate
+outcomes require operator reconciliation before release.
+
+These are estimated concurrency admission holds, not provider-enforced usage
+ceilings or a cumulative consumption ledger. Provider usage can exceed an
+estimate, and external consumers do not participate in the local database.
+Percentage-only or unknown quota cannot be converted into absolute capacity:
+those routes retain quota-aware scoring without an absolute-unit reservation.
+
 ## Rollback and mixed versions
 
 Schema migrations are additive and transactional. Back up the SQLite file before

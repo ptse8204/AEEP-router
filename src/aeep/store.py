@@ -6851,15 +6851,15 @@ class ReceiptStore:
             held_rows = connection.execute(
                 """
                 SELECT maximum_quantity FROM capacity_reservations
-                WHERE resource_id = ? AND unit = ? AND state IN (?, ?)
-                  AND expires_at > ?
+                WHERE resource_id = ? AND unit = ?
+                  AND ((state = ? AND expires_at > ?) OR state = ?)
                 """,
                 (
                     reservation.resource_id,
                     reservation.unit,
                     CapacityReservationStatus.RESERVED.value,
-                    CapacityReservationStatus.CLAIMED.value,
                     self._utc_text(current_time),
+                    CapacityReservationStatus.CLAIMED.value,
                 ),
             ).fetchall()
             held = sum((Decimal(row["maximum_quantity"]) for row in held_rows), Decimal(0))
@@ -7371,8 +7371,52 @@ class ReceiptStore:
             updated = ExecutionAttempt.model_validate(
                 {**current.model_dump(mode="python"), **changes}
             )
+            self._transition_attempt_capacity_locked(connection, current, updated)
             self._save_attempt_update_locked(connection, current, updated, reason=reason)
         return updated
+
+    def _transition_attempt_capacity_locked(
+        self,
+        connection: sqlite3.Connection,
+        current: ExecutionAttempt,
+        updated: ExecutionAttempt,
+    ) -> None:
+        """Claim/release holds in the same transaction as the invocation/terminal state."""
+        if updated.capacity_reservation_ids != current.capacity_reservation_ids and not (
+            current.state is ExecutionAttemptState.CLAIMED
+            and updated.state is ExecutionAttemptState.RESERVED
+            and not current.capacity_reservation_ids
+        ):
+            raise ConfigurationError("execution-attempt capacity bindings are immutable")
+        for reservation_id in updated.capacity_reservation_ids:
+            row = connection.execute(
+                "SELECT * FROM capacity_reservations WHERE reservation_id = ?", (reservation_id,)
+            ).fetchone()
+            if row is None or row["execution_id"] != current.attempt_id:
+                raise ConfigurationError("capacity reservation does not belong to execution attempt")
+            hold = self._capacity_reservation_from_row(row)
+            if updated.state in {ExecutionAttemptState.RESERVED, ExecutionAttemptState.INVOKING} and (
+                hold.status is not CapacityReservationStatus.RESERVED or hold.expires_at <= updated.updated_at
+            ):
+                raise ConfigurationError("capacity reservation is not available for invocation")
+            if updated.state is ExecutionAttemptState.INVOKING:
+                connection.execute(
+                    "UPDATE capacity_reservations SET state = ?, claim_token = ?, "
+                    "version = version + 1, updated_at = ? WHERE reservation_id = ?",
+                    (CapacityReservationStatus.CLAIMED.value, current.owner_id,
+                     self._utc_text(updated.updated_at), reservation_id),
+                )
+            elif updated.state in {
+                ExecutionAttemptState.COMPLETED, ExecutionAttemptState.FAILED,
+                ExecutionAttemptState.REJECTED, ExecutionAttemptState.CANCELLED,
+            }:
+                if hold.status not in {CapacityReservationStatus.RESERVED, CapacityReservationStatus.CLAIMED}:
+                    raise ConfigurationError("execution-attempt capacity was already finalized")
+                connection.execute(
+                    "UPDATE capacity_reservations SET state = ?, version = version + 1, "
+                    "updated_at = ? WHERE reservation_id = ?",
+                    (CapacityReservationStatus.RELEASED.value, self._utc_text(updated.updated_at), reservation_id),
+                )
 
     def _save_attempt_update_locked(
         self,

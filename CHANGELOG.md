@@ -4,6 +4,9 @@
 
 ### 0.7 subscription-native router
 
+- connect quantified managed capacity to ordinary and prepared execution with
+  atomic invocation claims and terminal release; retain uncertain claims beyond
+  expiry and check coverage of transactional store functions;
 - preferred host-native routing beneath Tool Search, with exact local bypass and
   at most one managed model turn for the measured reference paths;
 - provider-neutral capacity observations, reservations, transferability,

@@ -137,6 +137,8 @@ _CHECKS = (
     _CheckSpec("capacity-resource-contract", "marketplace_contract", "tests/test_v07_capacity.py::test_old_subscription_resources_keep_safe_defaults", "tests/test_v07_capacity.py"),
     _CheckSpec("transferability-enforcement", "marketplace_contract", "tests/test_v07_capacity.py::test_self_only_openai_capacity_cannot_issue_external_entitlement", "tests/test_v07_capacity.py"),
     _CheckSpec("capacity-reservation-release", "marketplace_contract", "tests/test_v07_capacity.py::test_capacity_reservation_release_and_replay_are_atomic", "tests/test_v07_capacity.py"),
+    _CheckSpec("managed-capacity-admission", "core", "tests/test_managed_capacity_reservations.py::test_shared_capacity_blocks_concurrent_invocation_and_releases", "tests/test_managed_capacity_reservations.py"),
+    _CheckSpec("uncertain-capacity-retention", "core", "tests/test_managed_capacity_reservations.py::test_uncertain_managed_execution_keeps_capacity_beyond_expiry", "tests/test_managed_capacity_reservations.py"),
     _CheckSpec("entitlement-binding", "marketplace_contract", "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline", "tests/test_x402_capacity_binding.py"),
     _CheckSpec("openai-self-only-rejection", "marketplace_contract", "tests/test_x402_capacity_binding.py::test_openai_self_only_fails_before_x402_serialization", "tests/test_x402_capacity_binding.py"),
     _CheckSpec("provider-authorized-mock-transfer", "marketplace_contract", "tests/test_v07_capacity.py::test_provider_authorized_entitlement_redeems_once_without_double_spend", "tests/test_v07_capacity.py"),
