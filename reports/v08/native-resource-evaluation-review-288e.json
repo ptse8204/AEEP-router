@@ -1,0 +1,54 @@
+{
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "authority": "Standing finite test-definition delegation; supported local-resource evaluation only, not candidate admission",
+  "frozen_at": "2026-09-30; before resource fixture generation and measurement",
+  "fixtures": {
+    "seed": 20260930,
+    "split": "resource_evaluation",
+    "count": 3,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "structure": "Three fresh paired native/AEEP workbook process samples; alternating order; one partial-write/restart/reconcile recovery sample; five-second aggregate idle baseline",
+  "ceilings": {
+    "process_wall_ms": 5000,
+    "sampled_process_cpu_ms": 4000,
+    "sampled_process_peak_memory_mb": 768,
+    "sampled_process_memory_mb_seconds": 1500,
+    "retained_project_bytes": 8388608,
+    "task_schema_bytes": 16384,
+    "project_config_bytes": 1024,
+    "project_config_mutations": 2,
+    "recovery_wall_ms": 10000,
+    "recovery_retained_bytes": 8388608
+  },
+  "rationale": "Previous exploratory maxima: wall1280.65ms,cpu1131.49ms,RSS386.54MiB,memory165.95MiB*s,retained1400616bytes,schema15202bytes,config473bytes. Fixed rounded allowances cover observed startup/validation/retention with stated sampling uncertainty; recovery allows two startups plus bounded restart/reconciliation. These are supported-scope engineering ceilings, not a human resource preference, campaign threshold or inferred savings.",
+  "hard_guards": "Each task within existing native sandbox, reviewed scratch, unchanged required workbook validator, independent grader; exact task allowance and ownership cleanup remain enforced",
+  "whole_host_measurements": [
+    "aggregate CPU counters",
+    "available/used memory",
+    "swap used",
+    "aggregate disk IO counters",
+    "filesystem available bytes"
+  ],
+  "whole_host_scoring": "Contextual only: other desktop/agent work and cache drift remain; no attribution or pass inferred from host deltas",
+  "assessment_measurements": "Read-only repository assessment-lab logical/allocated file totals plus retained main ledger counters; no new assessment trials",
+  "unknowns": [
+    "actual model/context/subscription accounting",
+    "causal whole-host incremental usage",
+    "long-term retention beyond sampled finite workloads",
+    "human acceptance"
+  ],
+  "model_turns": 0,
+  "cash_authorized": 0,
+  "global_changes": false,
+  "prior_checks_replayed": false,
+  "release_ready": false,
+  "drivers": {
+    "native-resource-evaluation-288e.py": "e9716f3fddc09a61a71663fb8f267b3893a749a32446a35878e9ec3a4c91a2f0",
+    "native-resource-recovery-288e.py": "5f55d491da65061c9b93a3edf003f58012c324621782145ad752f09a8be4c234"
+  }
+}

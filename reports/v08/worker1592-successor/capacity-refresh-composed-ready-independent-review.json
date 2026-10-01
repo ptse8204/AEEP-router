@@ -1,0 +1,20 @@
+{
+  "authority": "Parent delegated September30 exact bounded callback sequence",
+  "driver_sha256": "f0d9f8164d4858f1aeb4d64658173f78e7456c44e380e653d787a637e0be5f2e",
+  "worker_digest": "7ceec1d0a3149ad4412c940c6d7dadab84e20576d6032b3ac55c278386bcbc2d",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "execution_authorized": true,
+  "limits": {
+    "operations": 1,
+    "seconds": 30,
+    "experimental_model_turns": 0,
+    "cash_usd": 0
+  },
+  "checks": [
+    "Exact existing selected worker/spec/binary/config retained",
+    "Initialize and account/rateLimits/read only; no thread/turn/account-read/auth-state inspection",
+    "Fresh deterministic operation preserves main budget and finishes actual elapsed",
+    "Owned container absence/process exit/no callback tasks checked under deadline"
+  ],
+  "prerequisite": "Full existing runner.prepare already passed for corrected one-attempt bundle"
+}

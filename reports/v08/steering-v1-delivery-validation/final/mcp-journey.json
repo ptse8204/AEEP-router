@@ -1,0 +1,1268 @@
+{
+  "source_digest": "2132389e083418d20f12e47b770b6dcd07813452b3735e433d06b302db8798d7",
+  "kind": "actual native command through stdio MCP; no model or Codex UI claim",
+  "setup_and_cleanup_commands": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/aeep.json",
+        "define",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/scope.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5634087910875678,
+      "result": {
+        "scope_id": "cli-journey",
+        "digest": "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245",
+        "reviewed": false
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "assess",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/aeep.json",
+        "review",
+        "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5454802089370787,
+      "result": {
+        "digest": "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245",
+        "reviewed": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/aeep.json",
+        "activate",
+        "cli-journey"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6496770831290632,
+      "result": {
+        "activation_id": "task_0d83a0a3c69d4ceabcaffc45112cf542",
+        "activation_digest": "b42b3ec0445b014053fcc7c561bafb58c7b39d1a0da3a421731d3b226bb93454",
+        "scope_digest": "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245",
+        "reviewed": true,
+        "scope_reviewed": true,
+        "overlay": "applied",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/.aeep/task-profiles/task_0d83a0a3c69d4ceabcaffc45112cf542.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 0,
+        "attempts_remaining": 2,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/aeep.json",
+        "control",
+        "uninstall",
+        "task_0d83a0a3c69d4ceabcaffc45112cf542"
+      ],
+      "exit_code": 0,
+      "seconds": 0.579565541120246,
+      "result": {
+        "activation_id": "task_0d83a0a3c69d4ceabcaffc45112cf542",
+        "activation_digest": "b42b3ec0445b014053fcc7c561bafb58c7b39d1a0da3a421731d3b226bb93454",
+        "scope_digest": "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/.aeep/task-profiles/task_0d83a0a3c69d4ceabcaffc45112cf542.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 1,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    }
+  ],
+  "server_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "-m",
+    "aeep",
+    "serve",
+    "--transport",
+    "stdio",
+    "--profile",
+    "task",
+    "--task-activation",
+    "task_0d83a0a3c69d4ceabcaffc45112cf542",
+    "-m",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/aeep.json"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "responses": [
+    {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.0"
+        },
+        "capabilities": {
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "instructions": "Use the available task tools within the operator scope. Results include recorded verification limits and recovery state. No assessment or approval controls are exposed."
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "name": "aeep_csv",
+            "description": "CSV to string-valued records with strict row widths and unique headers.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "maxLength": 100000
+                },
+                "delimiter": {
+                  "enum": [
+                    ",",
+                    ";",
+                    "\t"
+                  ]
+                }
+              },
+              "required": [
+                "text",
+                "delimiter"
+              ],
+              "additionalProperties": false
+            },
+            "outputSchema": {
+              "$defs": {
+                "CashAccounting": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "status": {
+                      "$ref": "#/$defs/EvidenceStatus",
+                      "default": "unavailable"
+                    },
+                    "components": {
+                      "items": {
+                        "$ref": "#/$defs/CashEvidence"
+                      },
+                      "title": "Components",
+                      "type": "array"
+                    }
+                  },
+                  "title": "CashAccounting",
+                  "type": "object"
+                },
+                "CashClassification": {
+                  "enum": [
+                    "verified",
+                    "billing_reconciled",
+                    "pinned_rate_billable_usage",
+                    "estimated",
+                    "unavailable"
+                  ],
+                  "title": "CashClassification",
+                  "type": "string"
+                },
+                "CashEvidence": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "charge_id": {
+                      "maxLength": 200,
+                      "minLength": 1,
+                      "title": "Charge Id",
+                      "type": "string"
+                    },
+                    "amount": {
+                      "anyOf": [
+                        {
+                          "minimum": 0.0,
+                          "type": "number"
+                        },
+                        {
+                          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Amount"
+                    },
+                    "currency": {
+                      "default": "USD",
+                      "pattern": "^[A-Z]{3}$",
+                      "title": "Currency",
+                      "type": "string"
+                    },
+                    "classification": {
+                      "$ref": "#/$defs/CashClassification",
+                      "default": "unavailable"
+                    },
+                    "evidence": {
+                      "$ref": "#/$defs/MeasurementEvidence"
+                    },
+                    "rate_snapshot_id": {
+                      "anyOf": [
+                        {
+                          "maxLength": 100,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Rate Snapshot Id"
+                    },
+                    "billing_record_id": {
+                      "anyOf": [
+                        {
+                          "maxLength": 200,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Billing Record Id"
+                    },
+                    "usage_fingerprint": {
+                      "anyOf": [
+                        {
+                          "maxLength": 128,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Usage Fingerprint"
+                    },
+                    "applied_rate_ids": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "title": "Applied Rate Ids",
+                      "type": "array"
+                    },
+                    "applied_meter_quantities": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "title": "Applied Meter Quantities",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "charge_id"
+                  ],
+                  "title": "CashEvidence",
+                  "type": "object"
+                },
+                "CompactAlternative": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "executor_id": {
+                      "title": "Executor Id",
+                      "type": "string"
+                    },
+                    "kind": {
+                      "$ref": "#/$defs/ExecutorKind"
+                    },
+                    "score": {
+                      "title": "Score",
+                      "type": "number"
+                    },
+                    "delta": {
+                      "minimum": 0.0,
+                      "title": "Delta",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "executor_id",
+                    "kind",
+                    "score",
+                    "delta"
+                  ],
+                  "title": "CompactAlternative",
+                  "type": "object"
+                },
+                "CompactRouteDecision": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "decision_id": {
+                      "title": "Decision Id",
+                      "type": "string"
+                    },
+                    "action_id": {
+                      "title": "Action Id",
+                      "type": "string"
+                    },
+                    "capability": {
+                      "title": "Capability",
+                      "type": "string"
+                    },
+                    "selected": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Selected"
+                    },
+                    "disposition": {
+                      "$ref": "#/$defs/RouteDisposition",
+                      "default": "SELECTED"
+                    },
+                    "bypass_reason": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/RouteBypassReason"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "reason": {
+                      "title": "Reason",
+                      "type": "string"
+                    },
+                    "alternatives": {
+                      "items": {
+                        "$ref": "#/$defs/CompactAlternative"
+                      },
+                      "title": "Alternatives",
+                      "type": "array"
+                    },
+                    "rejected": {
+                      "default": 0,
+                      "title": "Rejected",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "decision_id",
+                    "action_id",
+                    "capability",
+                    "reason"
+                  ],
+                  "title": "CompactRouteDecision",
+                  "type": "object"
+                },
+                "EvidenceSource": {
+                  "enum": [
+                    "billing_record",
+                    "local_meter",
+                    "priced_measured_billable_usage",
+                    "confirmed_no_incremental_charge",
+                    "provider_report",
+                    "pinned_rate_table",
+                    "operator_report",
+                    "static_estimate",
+                    "legacy_unspecified",
+                    "unavailable"
+                  ],
+                  "title": "EvidenceSource",
+                  "type": "string"
+                },
+                "EvidenceStatus": {
+                  "enum": [
+                    "complete",
+                    "partial",
+                    "conflict",
+                    "unavailable"
+                  ],
+                  "title": "EvidenceStatus",
+                  "type": "string"
+                },
+                "ExecutionStatus": {
+                  "enum": [
+                    "success",
+                    "failed",
+                    "timeout",
+                    "rejected",
+                    "host_selected",
+                    "delegated",
+                    "unknown"
+                  ],
+                  "title": "ExecutionStatus",
+                  "type": "string"
+                },
+                "ExecutorKind": {
+                  "enum": [
+                    "command",
+                    "python",
+                    "http",
+                    "mcp",
+                    "host",
+                    "host_managed",
+                    "delegate"
+                  ],
+                  "title": "ExecutorKind",
+                  "type": "string"
+                },
+                "MeasurementEvidence": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "status": {
+                      "$ref": "#/$defs/EvidenceStatus",
+                      "default": "unavailable"
+                    },
+                    "source": {
+                      "$ref": "#/$defs/EvidenceSource",
+                      "default": "unavailable"
+                    },
+                    "trust": {
+                      "$ref": "#/$defs/TrustLevel",
+                      "default": "untrusted"
+                    },
+                    "evidence_id": {
+                      "anyOf": [
+                        {
+                          "maxLength": 200,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Evidence Id"
+                    },
+                    "source_reference": {
+                      "anyOf": [
+                        {
+                          "maxLength": 500,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Source Reference"
+                    },
+                    "digest": {
+                      "anyOf": [
+                        {
+                          "pattern": "^[A-Fa-f0-9]{64}$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Digest"
+                    },
+                    "observed_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Observed At"
+                    }
+                  },
+                  "title": "MeasurementEvidence",
+                  "type": "object"
+                },
+                "ModelAccessChannel": {
+                  "enum": [
+                    "api",
+                    "subscription",
+                    "purchased_credit",
+                    "mixed",
+                    "unknown"
+                  ],
+                  "title": "ModelAccessChannel",
+                  "type": "string"
+                },
+                "ModelTokenUsage": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "provider": {
+                      "maxLength": 100,
+                      "minLength": 1,
+                      "title": "Provider",
+                      "type": "string"
+                    },
+                    "model": {
+                      "maxLength": 200,
+                      "minLength": 1,
+                      "title": "Model",
+                      "type": "string"
+                    },
+                    "access_channel": {
+                      "$ref": "#/$defs/ModelAccessChannel",
+                      "default": "unknown"
+                    },
+                    "input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Input Tokens",
+                      "type": "integer"
+                    },
+                    "cached_input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Cached Input Tokens",
+                      "type": "integer"
+                    },
+                    "cache_write_input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Cache Write Input Tokens",
+                      "type": "integer"
+                    },
+                    "output_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Output Tokens",
+                      "type": "integer"
+                    },
+                    "reasoning_output_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Reasoning Output Tokens",
+                      "type": "integer"
+                    },
+                    "evidence": {
+                      "$ref": "#/$defs/MeasurementEvidence"
+                    }
+                  },
+                  "required": [
+                    "provider",
+                    "model"
+                  ],
+                  "title": "ModelTokenUsage",
+                  "type": "object"
+                },
+                "ResourceAccounting": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cash": {
+                      "$ref": "#/$defs/CashAccounting"
+                    },
+                    "subscription_usage": {
+                      "items": {
+                        "$ref": "#/$defs/SubscriptionUsage"
+                      },
+                      "title": "Subscription Usage",
+                      "type": "array"
+                    },
+                    "model_usage": {
+                      "items": {
+                        "$ref": "#/$defs/ModelTokenUsage"
+                      },
+                      "title": "Model Usage",
+                      "type": "array"
+                    },
+                    "tool_footprint": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/ToolFootprint"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "title": "ResourceAccounting",
+                  "type": "object"
+                },
+                "ResourceVector": {
+                  "additionalProperties": false,
+                  "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+                  "properties": {
+                    "monetary_usd": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Monetary Usd",
+                      "type": "number"
+                    },
+                    "latency_ms": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Latency Ms",
+                      "type": "number"
+                    },
+                    "cpu_ms": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Cpu Ms",
+                      "type": "number"
+                    },
+                    "memory_mb_seconds": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Memory Mb Seconds",
+                      "type": "number"
+                    },
+                    "peak_memory_mb": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Peak Memory Mb",
+                      "type": "number"
+                    },
+                    "gpu_ms": {
+                      "default": 0.0,
+                      "minimum": 0.0,
+                      "title": "Gpu Ms",
+                      "type": "number"
+                    },
+                    "network_bytes": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Network Bytes",
+                      "type": "integer"
+                    },
+                    "context_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Context Tokens",
+                      "type": "integer"
+                    },
+                    "input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Input Tokens",
+                      "type": "integer"
+                    },
+                    "cached_input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Cached Input Tokens",
+                      "type": "integer"
+                    },
+                    "cache_write_input_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Cache Write Input Tokens",
+                      "type": "integer"
+                    },
+                    "output_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Output Tokens",
+                      "type": "integer"
+                    },
+                    "reasoning_output_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Reasoning Output Tokens",
+                      "type": "integer"
+                    },
+                    "subscription_units": {
+                      "default": 0.0,
+                      "description": "Provider-local capacity units; not cash and not transferable.",
+                      "minimum": 0.0,
+                      "title": "Subscription Units",
+                      "type": "number"
+                    }
+                  },
+                  "title": "ResourceVector",
+                  "type": "object"
+                },
+                "RouteBypassReason": {
+                  "enum": [
+                    "only_one_feasible_route",
+                    "pinned_executor",
+                    "optimization_value_below_overhead"
+                  ],
+                  "title": "RouteBypassReason",
+                  "type": "string"
+                },
+                "RouteDisposition": {
+                  "enum": [
+                    "SELECTED",
+                    "BYPASS_ROUTER"
+                  ],
+                  "title": "RouteDisposition",
+                  "type": "string"
+                },
+                "SideEffect": {
+                  "enum": [
+                    "none",
+                    "read",
+                    "write",
+                    "destructive",
+                    "financial"
+                  ],
+                  "title": "SideEffect",
+                  "type": "string"
+                },
+                "SubscriptionCharge": {
+                  "enum": [
+                    "included",
+                    "paid",
+                    "mixed",
+                    "unknown"
+                  ],
+                  "title": "SubscriptionCharge",
+                  "type": "string"
+                },
+                "SubscriptionUsage": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "provider": {
+                      "maxLength": 100,
+                      "minLength": 1,
+                      "title": "Provider",
+                      "type": "string"
+                    },
+                    "resource_pool": {
+                      "maxLength": 200,
+                      "minLength": 1,
+                      "title": "Resource Pool",
+                      "type": "string"
+                    },
+                    "unit": {
+                      "default": "provider_unit",
+                      "maxLength": 100,
+                      "minLength": 1,
+                      "title": "Unit",
+                      "type": "string"
+                    },
+                    "consumed": {
+                      "anyOf": [
+                        {
+                          "minimum": 0.0,
+                          "type": "number"
+                        },
+                        {
+                          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Consumed"
+                    },
+                    "source": {
+                      "$ref": "#/$defs/MeasurementEvidence"
+                    },
+                    "included_or_paid": {
+                      "$ref": "#/$defs/SubscriptionCharge",
+                      "default": "unknown"
+                    },
+                    "rate_snapshot_id": {
+                      "anyOf": [
+                        {
+                          "maxLength": 100,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Rate Snapshot Id"
+                    },
+                    "usage_fingerprint": {
+                      "anyOf": [
+                        {
+                          "maxLength": 128,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Usage Fingerprint"
+                    }
+                  },
+                  "required": [
+                    "provider",
+                    "resource_pool"
+                  ],
+                  "title": "SubscriptionUsage",
+                  "type": "object"
+                },
+                "TaskReceiptView": {
+                  "additionalProperties": false,
+                  "description": "Allowlisted evidence for a task response; never arbitrary receipt metadata.",
+                  "properties": {
+                    "receipt_id": {
+                      "title": "Receipt Id",
+                      "type": "string"
+                    },
+                    "executor_id": {
+                      "title": "Executor Id",
+                      "type": "string"
+                    },
+                    "status": {
+                      "$ref": "#/$defs/ExecutionStatus"
+                    },
+                    "approval_id": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Approval Id"
+                    },
+                    "schema_valid": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Schema Valid"
+                    },
+                    "task_valid": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Task Valid"
+                    },
+                    "checks": {
+                      "items": {
+                        "$ref": "#/$defs/ValidationResult"
+                      },
+                      "title": "Checks",
+                      "type": "array"
+                    },
+                    "recorded_resources": {
+                      "$ref": "#/$defs/ResourceVector"
+                    },
+                    "accounting": {
+                      "$ref": "#/$defs/ResourceAccounting"
+                    },
+                    "enforcement_backend_digest": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Enforcement Backend Digest"
+                    }
+                  },
+                  "required": [
+                    "receipt_id",
+                    "executor_id",
+                    "status",
+                    "recorded_resources",
+                    "accounting"
+                  ],
+                  "title": "TaskReceiptView",
+                  "type": "object"
+                },
+                "ToolFootprint": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "schema_bytes": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Schema Bytes",
+                      "type": "integer"
+                    },
+                    "schema_approx_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Schema Approx Tokens",
+                      "type": "integer"
+                    },
+                    "raw_result_bytes": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Raw Result Bytes",
+                      "type": "integer"
+                    },
+                    "raw_result_approx_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Raw Result Approx Tokens",
+                      "type": "integer"
+                    },
+                    "filtered_result_bytes": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Filtered Result Bytes",
+                      "type": "integer"
+                    },
+                    "filtered_result_approx_tokens": {
+                      "default": 0,
+                      "minimum": 0,
+                      "title": "Filtered Result Approx Tokens",
+                      "type": "integer"
+                    },
+                    "exposed_to_model": {
+                      "default": false,
+                      "title": "Exposed To Model",
+                      "type": "boolean"
+                    }
+                  },
+                  "title": "ToolFootprint",
+                  "type": "object"
+                },
+                "TrustLevel": {
+                  "enum": [
+                    "untrusted",
+                    "self_asserted",
+                    "observed",
+                    "verified",
+                    "attested"
+                  ],
+                  "title": "TrustLevel",
+                  "type": "string"
+                },
+                "ValidationKind": {
+                  "enum": [
+                    "schema",
+                    "exact_match",
+                    "range",
+                    "state_transition",
+                    "callback",
+                    "downstream",
+                    "llm",
+                    "human"
+                  ],
+                  "title": "ValidationKind",
+                  "type": "string"
+                },
+                "ValidationResult": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "$ref": "#/$defs/ValidationKind"
+                    },
+                    "valid": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Valid"
+                    },
+                    "quality_score": {
+                      "anyOf": [
+                        {
+                          "maximum": 1.0,
+                          "minimum": 0.0,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "Quality Score"
+                    },
+                    "detail": {
+                      "default": "",
+                      "maxLength": 4096,
+                      "title": "Detail",
+                      "type": "string"
+                    },
+                    "trust": {
+                      "$ref": "#/$defs/TrustLevel",
+                      "default": "observed"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ],
+                  "title": "ValidationResult",
+                  "type": "object"
+                }
+              },
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "aeep.task-outcome.v1",
+                  "default": "aeep.task-outcome.v1",
+                  "title": "Schema Version",
+                  "type": "string"
+                },
+                "ok": {
+                  "title": "Ok",
+                  "type": "boolean"
+                },
+                "status": {
+                  "$ref": "#/$defs/ExecutionStatus"
+                },
+                "output": {},
+                "decision": {
+                  "$ref": "#/$defs/CompactRouteDecision"
+                },
+                "summary": {
+                  "title": "Summary",
+                  "type": "string"
+                },
+                "approval_ceiling": {
+                  "$ref": "#/$defs/SideEffect"
+                },
+                "task_scope_digest": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Task Scope Digest"
+                },
+                "task_activation_digest": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Task Activation Digest"
+                },
+                "operating_lifecycle": {
+                  "const": "session-scoped",
+                  "default": "session-scoped",
+                  "title": "Operating Lifecycle",
+                  "type": "string"
+                },
+                "changes_verified": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Changes Verified"
+                },
+                "permission_scope": {
+                  "const": "operator ceiling; backend scope requires separate evidence",
+                  "default": "operator ceiling; backend scope requires separate evidence",
+                  "title": "Permission Scope",
+                  "type": "string"
+                },
+                "receipts": {
+                  "items": {
+                    "$ref": "#/$defs/TaskReceiptView"
+                  },
+                  "title": "Receipts",
+                  "type": "array"
+                },
+                "verification_limits": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Verification Limits",
+                  "type": "array"
+                },
+                "recovery_state": {
+                  "default": "unknown",
+                  "enum": [
+                    "none",
+                    "required",
+                    "unknown"
+                  ],
+                  "title": "Recovery State",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ok",
+                "status",
+                "decision",
+                "summary",
+                "approval_ceiling"
+              ],
+              "title": "TaskExecutionOutcome",
+              "type": "object"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"schema_version\": \"aeep.task-outcome.v1\", \"ok\": true, \"status\": \"success\", \"output\": {\"records\": [{\"name\": \"Ada\"}]}, \"decision\": {\"decision_id\": \"dec_aaa75d8b27094b36a78545efb76416c1\", \"action_id\": \"act_ff23ed9151c44741b67056ee1bfbafb7\", \"capability\": \"assessment.csv@1\", \"selected\": \"reference.csv\", \"disposition\": \"BYPASS_ROUTER\", \"bypass_reason\": \"only_one_feasible_route\", \"reason\": \"only one feasible route\", \"alternatives\": [], \"rejected\": 0}, \"summary\": \"Completed; task verification is incomplete.\", \"approval_ceiling\": \"read\", \"task_scope_digest\": \"bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245\", \"task_activation_digest\": \"b42b3ec0445b014053fcc7c561bafb58c7b39d1a0da3a421731d3b226bb93454\", \"operating_lifecycle\": \"session-scoped\", \"changes_verified\": null, \"permission_scope\": \"operator ceiling; backend scope requires separate evidence\", \"receipts\": [{\"receipt_id\": \"rcpt_9f238a3328d548c6aee93501e05fe583\", \"executor_id\": \"reference.csv\", \"status\": \"success\", \"approval_id\": \"approval_3574550489f147b79d56e816b50455c7\", \"schema_valid\": true, \"task_valid\": true, \"checks\": [{\"kind\": \"schema\", \"valid\": true, \"quality_score\": 1.0, \"detail\": \"\", \"trust\": \"observed\"}], \"recorded_resources\": {\"monetary_usd\": 0.0, \"latency_ms\": 179.84170909039676, \"cpu_ms\": 58.365959000000004, \"memory_mb_seconds\": 2.0852494161481445, \"peak_memory_mb\": 48.1875, \"gpu_ms\": 0.0, \"network_bytes\": 0, \"context_tokens\": 7, \"input_tokens\": 0, \"cached_input_tokens\": 0, \"cache_write_input_tokens\": 0, \"output_tokens\": 0, \"reasoning_output_tokens\": 0, \"subscription_units\": 0.0}, \"accounting\": {\"cash\": {\"status\": \"unavailable\", \"components\": []}, \"subscription_usage\": [], \"model_usage\": [], \"tool_footprint\": null}, \"enforcement_backend_digest\": \"830bbc9669a8029d9929803c2ade2447df78fe3aa88c4bd0411b222e4ac96896\"}], \"verification_limits\": [\"Non-schema task verification is incomplete or unavailable.\", \"Preservation, isolation and comparative savings are not established by execution success.\"], \"recovery_state\": \"none\"}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "schema_version": "aeep.task-outcome.v1",
+          "ok": true,
+          "status": "success",
+          "output": {
+            "records": [
+              {
+                "name": "Ada"
+              }
+            ]
+          },
+          "decision": {
+            "decision_id": "dec_aaa75d8b27094b36a78545efb76416c1",
+            "action_id": "act_ff23ed9151c44741b67056ee1bfbafb7",
+            "capability": "assessment.csv@1",
+            "selected": "reference.csv",
+            "disposition": "BYPASS_ROUTER",
+            "bypass_reason": "only_one_feasible_route",
+            "reason": "only one feasible route",
+            "alternatives": [],
+            "rejected": 0
+          },
+          "summary": "Completed; task verification is incomplete.",
+          "approval_ceiling": "read",
+          "task_scope_digest": "bd72cce2cb14c90c28089c7d629f00644c3b1beecc62eb6782b2bd2ae6bf2245",
+          "task_activation_digest": "b42b3ec0445b014053fcc7c561bafb58c7b39d1a0da3a421731d3b226bb93454",
+          "operating_lifecycle": "session-scoped",
+          "changes_verified": null,
+          "permission_scope": "operator ceiling; backend scope requires separate evidence",
+          "receipts": [
+            {
+              "receipt_id": "rcpt_9f238a3328d548c6aee93501e05fe583",
+              "executor_id": "reference.csv",
+              "status": "success",
+              "approval_id": "approval_3574550489f147b79d56e816b50455c7",
+              "schema_valid": true,
+              "task_valid": true,
+              "checks": [
+                {
+                  "kind": "schema",
+                  "valid": true,
+                  "quality_score": 1.0,
+                  "detail": "",
+                  "trust": "observed"
+                }
+              ],
+              "recorded_resources": {
+                "monetary_usd": 0.0,
+                "latency_ms": 179.84170909039676,
+                "cpu_ms": 58.365959000000004,
+                "memory_mb_seconds": 2.0852494161481445,
+                "peak_memory_mb": 48.1875,
+                "gpu_ms": 0.0,
+                "network_bytes": 0,
+                "context_tokens": 7,
+                "input_tokens": 0,
+                "cached_input_tokens": 0,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 0,
+                "reasoning_output_tokens": 0,
+                "subscription_units": 0.0
+              },
+              "accounting": {
+                "cash": {
+                  "status": "unavailable",
+                  "components": []
+                },
+                "subscription_usage": [],
+                "model_usage": [],
+                "tool_footprint": null
+              },
+              "enforcement_backend_digest": "830bbc9669a8029d9929803c2ade2447df78fe3aa88c4bd0411b222e4ac96896"
+            }
+          ],
+          "verification_limits": [
+            "Non-schema task verification is incomplete or unavailable.",
+            "Preservation, isolation and comparative savings are not established by execution success."
+          ],
+          "recovery_state": "none"
+        }
+      }
+    }
+  ],
+  "only_protocol_json_on_stdout": true
+}

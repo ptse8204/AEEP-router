@@ -1,0 +1,33 @@
+{
+  "reviewed_at": "2026-09-30T20:17:45.243426+00:00",
+  "status": "approved-exact-conditional-sequence",
+  "drivers_sha256": {
+    "run-native-capacity-refresh-ade3.py": "abc61cd09713042150ecf04c86c089cfae7d7bb52b0bc9a70b8b71a02aa1a205",
+    "native-sol61-code-mode-file-handoff-ade3.py": "9c1b4cc02ccf8d40752b115c29962f8535b41e1a9d1641824fb39da280041569"
+  },
+  "authority": "User instruction to continue actual tests, gpt-6.1-sol for unfinished tests, standing September25/27 finite amendments.",
+  "sequence": [
+    {
+      "name": "native_capacity",
+      "operations": 1,
+      "seconds": 30,
+      "model_turns": 0,
+      "cash_usd": 0
+    },
+    {
+      "name": "native_small_workbook_handoff",
+      "condition": "fresh native unexhausted capacity, exact pins/config/inventory acknowledged",
+      "setup_operations": 1,
+      "setup_seconds": 40,
+      "host_operations": 1,
+      "host_seconds": 240,
+      "model_turns": 1,
+      "cash_usd": 0
+    }
+  ],
+  "review": "Parent inspected full current capacity driver, complete predecessor-preserving handoff diff, execution/events/verification/cleanup path and source validation prerequisites. Source unchanged. Exact generated fixture/input/oracle/reader/tool binding frozen before dispatch. Payload pressure remains hypothesis; synthetic small task diagnostic cannot pass broader qualification, resource or autonomy gates.",
+  "runtime_owner": "/root/sol61_website_local",
+  "runtime_serialization": "No other live/native/container operations until owner returns this window.",
+  "no_blind_retry": true,
+  "no_authentication_access_or_global_configuration_changes": true
+}

@@ -1,0 +1,45 @@
+{
+  "preparation_only": true,
+  "downloaded": false,
+  "image_built": false,
+  "release": "https://github.com/openai/codex/releases/tag/rust-v0.159.2",
+  "tag": "rust-v0.159.2",
+  "published_at": "2026-09-29T23:57:16Z",
+  "assets": [
+    {
+      "name": "codex-package-aarch64-unknown-linux-musl.tar.gz",
+      "size": 150270060,
+      "digest": "sha256:05a524a463cadf7e3e22c7f923539c0d0b74c3e78b1f5f1fab52e50e6fb3312f",
+      "browser_download_url": "https://github.com/openai/codex/releases/download/rust-v0.159.2/codex-package-aarch64-unknown-linux-musl.tar.gz"
+    },
+    {
+      "name": "codex-package-aarch64-unknown-linux-musl.tar.gz.sigstore",
+      "size": 8565,
+      "digest": "sha256:ba88e0c84f699da0ce9fe7ac4f3cf2b54a9705da79e53857bdfb99ebe6a99965",
+      "browser_download_url": "https://github.com/openai/codex/releases/download/rust-v0.159.2/codex-package-aarch64-unknown-linux-musl.tar.gz.sigstore"
+    },
+    {
+      "name": "codex-package-aarch64-unknown-linux-musl.tar.zst",
+      "size": 109213770,
+      "digest": "sha256:1017b8175e4c4c6529866ed4b67c8e93ad7f0169ad89888068f0ad9707c5999d",
+      "browser_download_url": "https://github.com/openai/codex/releases/download/rust-v0.159.2/codex-package-aarch64-unknown-linux-musl.tar.zst"
+    },
+    {
+      "name": "codex-package-aarch64-unknown-linux-musl.tar.zst.sigstore",
+      "size": 8585,
+      "digest": "sha256:91309fe8b101a4c2e1d22780bd0ceb01cc08d1de020a40a3b575788b52c25e98",
+      "browser_download_url": "https://github.com/openai/codex/releases/download/rust-v0.159.2/codex-package-aarch64-unknown-linux-musl.tar.zst.sigstore"
+    }
+  ],
+  "reason": "Existing0.154 catalogs omit selected6.1 after bounded wait; actual refresh success/runtime identity unknown. Native0.159.2 advertises6.1, so same-release Linux successor is a justified compatibility investigation, not proof model availability.",
+  "existing_path": "integrations/managed-worker/Dockerfile consumes reviewed local same-release codex/code-mode-host/rg/resources. Offline build --network=none; both worker arms must share runtime pin and effective permissions.",
+  "next_bounded_step": "Download only official release package into owned review context after exact artifact review, verify release digest and provenance, inspect member inventory for all required executables/resources before image build. No global install or auth access.",
+  "required_gates": [
+    "same-grant scope amendment binds both exact successor image/runtime digests",
+    "unchanged protected sign-in volumes and operator-terminal-only setup",
+    "fresh isolated boundary and runtime/tool/model conformance before trials",
+    "retain all old terminal inspections and budgets"
+  ],
+  "no_auth_inspection": true,
+  "no_trial_authority": true
+}

@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Operator-owned, finite task delegation; does not qualify any executor.",
+  "properties": {
+    "schema_version": {
+      "const": "aeep.task-scope.v1",
+      "default": "aeep.task-scope.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Scope Id",
+      "type": "string"
+    },
+    "project_root": {
+      "title": "Project Root",
+      "type": "string"
+    },
+    "executor_fingerprints": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 32,
+      "minProperties": 1,
+      "title": "Executor Fingerprints",
+      "type": "object"
+    },
+    "approval_ceiling": {
+      "$ref": "#/$defs/SideEffect",
+      "default": "read"
+    },
+    "max_attempts": {
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer"
+    },
+    "max_attempt_seconds": {
+      "exclusiveMinimum": 0,
+      "maximum": 3600,
+      "title": "Max Attempt Seconds",
+      "type": "number"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scope_id",
+    "project_root",
+    "executor_fingerprints",
+    "max_attempts",
+    "max_attempt_seconds",
+    "expires_at"
+  ],
+  "title": "TaskScope",
+  "type": "object"
+}

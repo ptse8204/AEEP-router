@@ -1,0 +1,23 @@
+{
+  "image": "sha256:3c83ebf81e94017d2859a4a2cb38ae5db40f26126b897f44de7bf46e6d4686ff",
+  "version": "0.154.0",
+  "model_turns": 0,
+  "signed_in": false,
+  "seccomp_sha256": "b272a9c55749f7e1256192308851ab7078386246f7fe27f5dff66eecfd41e903",
+  "args": [
+    "sandbox",
+    "-P",
+    "aeep",
+    "--include-managed-config",
+    "--",
+    "python3",
+    "-c",
+    "import pathlib; print('ALLOWED'); print(pathlib.Path('/worker/auth/canary').exists())"
+  ],
+  "exit_code": 1,
+  "stdout": "ALLOWED\n",
+  "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import pathlib; print('ALLOWED'); print(pathlib.Path('/worker/auth/canary').exists())\n                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/local/lib/python3.13/pathlib/_abc.py\", line 450, in exists\n    self.stat(follow_symlinks=follow_symlinks)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/pathlib/_local.py\", line 515, in stat\n    return os.stat(self, follow_symlinks=follow_symlinks)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [Errno 13] Permission denied: '/worker/auth/canary'\n",
+  "purpose": "Unapproved no-model nested-sandbox diagnostic using a synthetic canary",
+  "environment_verified": false,
+  "configuration_status": "draft_requires_review"
+}

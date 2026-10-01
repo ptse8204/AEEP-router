@@ -1,0 +1,104 @@
+{
+  "argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "-m",
+    "aeep",
+    "tool-call",
+    "aeep_recipe_f468b36bc594",
+    "--profile",
+    "task",
+    "--task-activation",
+    "task_9f4e85be34324479a3ec3653a53961ea",
+    "--manifest",
+    "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sol61-agent-use-uzpp2ehj/aeep.json",
+    "--arguments",
+    "@/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sol61-agent-use-uzpp2ehj/scratch/small-input.json",
+    "--compact"
+  ],
+  "exit_code": 4,
+  "wall_seconds": 0.6056958748959005,
+  "result_file": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sol61-agent-use-uzpp2ehj/stale-result.json",
+  "stderr_bytes": 0,
+  "stdout_bytes": 9443,
+  "stdout_sha256": "9c0aabb13a6771109d0fce10c69e22444cdfd8dd9edd382c39c8d953e1b1eaaa",
+  "stop_response": {
+    "schema_version": "aeep.task-outcome.v1",
+    "ok": false,
+    "status": "failed",
+    "decision": {
+      "decision_id": "dec_420ba6fbb6544305a3f49c7380ca5e65",
+      "action_id": "act_c5bda048bf894915bc019ff20eaf7855",
+      "capability": "assessment.workbook@1",
+      "selected": "native.workbook.sol61-agent-use",
+      "disposition": "BYPASS_ROUTER",
+      "bypass_reason": "only_one_feasible_route",
+      "reason": "only one feasible route",
+      "alternatives": [],
+      "rejected": 0
+    },
+    "summary": "Task did not complete successfully; inspect the recorded outcome before retrying.",
+    "approval_ceiling": "read",
+    "task_scope_digest": "784bcc2186bf56a05e93057ac314eabda5df342fcd0e0281e772e9993ab48109",
+    "task_activation_digest": "77ce5b02d835e0f39533907736a9003e3f20cc8990158c4fdad7e926744b8add",
+    "operating_lifecycle": "session-scoped",
+    "changes_verified": null,
+    "permission_scope": "operator ceiling; backend scope requires separate evidence",
+    "receipts": [
+      {
+        "receipt_id": "rcpt_fec0eaac6d60402997d2c866d3a97854",
+        "executor_id": "native.workbook.sol61-agent-use",
+        "status": "success",
+        "approval_id": "approval_f3c53eac3e64407b846eef080b637456",
+        "schema_valid": true,
+        "task_valid": false,
+        "checks": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "observed"
+          },
+          {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "",
+            "trust": "verified"
+          }
+        ],
+        "recorded_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 178.33300004713237,
+          "cpu_ms": 49.45954,
+          "memory_mb_seconds": 3.0753465867928753,
+          "peak_memory_mb": 51.390625,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 1849,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "enforcement_backend_digest": "c1bcb6377131b45711e094b77e0166c0171cb7913a0dd2437c96c89cb9c3342d"
+      }
+    ],
+    "verification_limits": [
+      "Non-schema task verification is incomplete or unavailable.",
+      "Preservation, isolation and comparative savings are not established by execution success."
+    ],
+    "recovery_state": "unknown"
+  }
+}

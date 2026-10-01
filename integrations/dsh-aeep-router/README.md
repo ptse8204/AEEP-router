@@ -16,8 +16,8 @@ outside that allowlist.
 One argv-only `aeep host-bridge` child remains alive for the plugin lifetime.
 JSONL messages and responses are bounded; a failed request is not retried. A
 later request may start a fresh bridge. AEEP receives resource counts, exact
-rendered-result pressure, decision/executor IDs, and bounded receipt links—never
-prompts, arguments, tool values, outputs, or session IDs.
+rendered-result pressure, decision/executor IDs, and bounded receipt links. It
+never receives prompts, arguments, tool values, outputs, or session IDs.
 
 The pre-enable local transport check used ten identical fixture routes on the
 macOS test host. Median round-trip time was 368.90 ms for process-per-event and

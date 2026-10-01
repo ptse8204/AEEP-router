@@ -73,8 +73,14 @@ def evidence_cohort(spec: ExecutorSpec, features: ActionFeatures | None) -> Evid
 def evidence_cohort_digest(
     spec: ExecutorSpec,
     features: ActionFeatures | None,
+    runtime_digest: str | None = None,
 ) -> tuple[str, str]:
     key = evidence_cohort(spec, features)
+    if runtime_digest is not None:
+        return key.executor_fingerprint, canonical_action_digest({
+            "purpose": "aeep-resolved-host-cohort-v2", "cohort": key.model_dump(mode="json"),
+            "runtime_digest": runtime_digest,
+        })
     return key.executor_fingerprint, canonical_action_digest(
         {"purpose": key.profile, "cohort": key.model_dump(mode="json")}
     )
@@ -101,11 +107,15 @@ class HistoricalEstimator:
         features: ActionFeatures | None = None,
     ) -> RouteEstimate:
         base = _shared_prior(self.store, spec, policy)
+        runtime_digest = None
         if spec.kind is ExecutorKind.MANAGED_HOST:
             # Runtime model/account/region are unknown until host selection. Mixing
             # those observations would be less useful than the qualified static bound.
-            return base
-        fingerprint, cohort = evidence_cohort_digest(spec, features)
+            binding = self.store.host_runtime_digests.get(spec.id)
+            if binding is None or binding[0] != behavior_fingerprint(spec):
+                return base
+            runtime_digest = binding[1]
+        fingerprint, cohort = evidence_cohort_digest(spec, features, runtime_digest)
         receipts = [
             receipt
             for receipt in self.store.receipts_for_cohort(

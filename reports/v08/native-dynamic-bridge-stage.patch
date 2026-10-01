@@ -1,0 +1,1243 @@
+--- a/src/aeep/hosts/codex_app_server.py
++++ b/src/aeep/hosts/codex_app_server.py
+@@ -3,12 +3,13 @@
+ from __future__ import annotations
+ 
+ import asyncio
++import contextvars
+ import hashlib
+ import inspect
+ import json
+ import os
+ import time
+-from collections.abc import AsyncIterator, Callable, Mapping
++from collections.abc import AsyncIterator, Awaitable, Callable, Mapping
+ from contextlib import suppress
+ from dataclasses import replace
+ from pathlib import Path
+@@ -18,7 +19,7 @@
+ from pydantic import Field
+ 
+ from ..capacity import CapacityObservation, principal_digest
+-from ..errors import ConfigurationError
++from ..errors import ConfigurationError, InputValidationError
+ from ..execution import (
+     EventJournal,
+     EventKind,
+@@ -145,7 +146,11 @@
+         self._write_lock = asyncio.Lock()
+         self._start_lock = asyncio.Lock()
+         self._tasks: list[asyncio.Task[None]] = []
++        self._dynamic_tasks: set[asyncio.Task[None]] = set()
++        self.dynamic_tool_handler: Callable[[JsonObject], Awaitable[JsonObject]] | None = None
++        self.dynamic_tool_context: contextvars.Context | None = None
+         self._fatal: BaseException | None = None
++        self._failure_event = asyncio.Event()
+         self._closing = False
+         self._started = False
+         self.stderr = bytearray()
+@@ -178,6 +183,7 @@
+                 if key in os.environ
+             }
+             self._fatal = None
++            self._failure_event.clear()
+             self.catalog_metrics = None
+             self._closing = False
+             self._process = await asyncio.create_subprocess_exec(
+@@ -344,6 +350,16 @@
+         if request_id in self._server_request_ids:
+             raise CodexProtocolError("duplicate App Server server-request ID")
+         self._server_request_ids.add(request_id)
++        if method == "item/tool/call" and self.dynamic_tool_handler is not None:
++            if self._dynamic_tasks:
++                await self._write({"id": request_id, "error": {"code": -32602, "message": "dynamic task call already pending"}})
++                return
++            handler = self.dynamic_tool_handler
++            task = asyncio.create_task(self._answer_dynamic_tool(request_id, params, handler),
++                context=self.dynamic_tool_context.copy() if self.dynamic_tool_context is not None else None)
++            self._dynamic_tasks.add(task)
++            task.add_done_callback(self._dynamic_tasks.discard)
++            return
+         if method not in _APPROVAL_METHODS:
+             await self._write(
+                 {
+@@ -369,6 +385,34 @@
+         self.approval_digests.extend((request_digest, response_digest))
+         await self._write({"id": request_id, "result": response})
+ 
++    async def _answer_dynamic_tool(self, request_id: str | int, params: JsonObject,
++                                   handler: Callable[[JsonObject], Awaitable[JsonObject]]) -> None:
++        try:
++            result = await handler(params)
++            await self._write({"id": request_id, "result": result})
++        except asyncio.CancelledError:
++            raise
++        except (ConfigurationError, InputValidationError, ValueError, TypeError, TimeoutError):
++            with suppress(CodexProtocolError, BrokenPipeError):
++                await self._write({"id": request_id, "error": {"code": -32602, "message": "dynamic task call rejected"}})
++        except BaseException:
++            self._fail(CodexProtocolError("dynamic task callback failed"))
++
++    async def cancel_dynamic_tools(self) -> None:
++        self.dynamic_tool_handler = None
++        self.dynamic_tool_context = None
++        tasks = tuple(self._dynamic_tasks)
++        for task in tasks:
++            task.cancel()
++        if tasks:
++            done, pending = await asyncio.wait(tasks, timeout=3)
++            for task in done:
++                if not task.cancelled():
++                    task.exception()
++            if pending:
++                raise CodexProtocolError("dynamic task cleanup unconfirmed")
++        self._dynamic_tasks.clear()
++
+     async def _read_stderr(self) -> None:
+         process = self._process
+         if process is None or process.stderr is None:
+@@ -395,6 +439,9 @@
+             if not future.done():
+                 future.set_exception(self._fatal)
+         self._pending.clear()
++        self._failure_event.set()
++        for task in tuple(self._dynamic_tasks):
++            task.cancel()
+         process = self._process
+         if process is not None and process.returncode is None:
+             process.terminate()
+@@ -404,6 +451,11 @@
+             raise CodexProtocolError("Codex App Server transport failed") from self._fatal
+ 
+     async def close(self) -> None:
++        cleanup_error = None
++        try:
++            await self.cancel_dynamic_tools()
++        except CodexProtocolError as exc:
++            cleanup_error = exc
+         self._closing = True
+         process = self._process
+         if process is not None and process.stdin is not None and not process.stdin.is_closing():
+@@ -436,6 +488,8 @@
+         self._process = None
+         self._started = False
+         self._pending.clear()
++        if cleanup_error is not None:
++            raise cleanup_error
+ 
+ 
+ class CodexAppServerAdapter:
+@@ -455,6 +509,7 @@
+         request_timeout: float = 30,
+         executable_sha256: str | None = None,
+         approval_handler: ApprovalHandler | None = None,
++        dynamic_tools_factory: Callable[[ManagedHostExecutionContext, Any], Any] | None = None,
+         options: AppServerOptions | None = None,
+     ) -> None:
+         if not principal_salt:
+@@ -462,6 +517,7 @@
+         self.resource_id = resource_id
+         self.principal_salt = principal_salt
+         self.approval_handler = approval_handler
++        self.dynamic_tools_factory = dynamic_tools_factory
+         self.transport = CodexAppServerTransport(
+             argv,
+             environment_allowlist=environment_allowlist,
+@@ -809,6 +865,9 @@
+             collector = _TurnCollector(max_output_bytes=context.config.max_message_bytes, journal=journal)
+             unsubscribe = self.transport.subscribe(collector.handle)
+             boundary_reference = None
++            dynamic_session = None
++            dynamic_cleanup_unconfirmed = False
++            raw = None
+             try:
+                 thread_params: JsonObject = {
+                     "ephemeral": True,
+@@ -838,6 +897,29 @@
+                     if permission_profile is None:
+                         config_overrides = thread_params.setdefault("config", {})
+                         config_overrides.update(worker_permissions(writable=context.config.sandbox_policy == "workspace_write", skill_path=invocation.skill_path if invocation is not None and invocation.mode == "skill" else None))
++                dynamic_digest = invocation.dynamic_tools_digest if invocation is not None else None
++                if dynamic_digest is not None:
++                    assert invocation is not None
++                    from .codex_dynamic_tools import CodexDynamicTools, DynamicToolSession
++                    if (self._worker is None or self.dynamic_tools_factory is None
++                            or not self.transport.options.experimental_api):
++                        raise ConfigurationError("environment verification unavailable: dynamic task composition missing")
++                    binding = self.dynamic_tools_factory(context, self)
++                    if not isinstance(binding, CodexDynamicTools):
++                        raise ConfigurationError("invalid operator dynamic task binding")
++                    dynamic_session = DynamicToolSession(binding, worker_digest=self._worker.digest(),
++                        expected_digest=dynamic_digest, approved_side_effect=ceiling,
++                        max_bytes=context.config.max_message_bytes - 512,
++                        deadline=asyncio.get_running_loop().time() + context.config.timeout_seconds,
++                        outer_attempt_id=context.attempt_id, journal=journal)
++                    if invocation.mode == "dynamic_tool" and (invocation.server != binding.namespace
++                            or binding.inventory().get(f"dynamic:{invocation.server}:{invocation.tool}") != invocation.tool_sha256):
++                        raise ConfigurationError("dynamic candidate target differs from reviewed declarations")
++                    thread_params["dynamicTools"] = binding.declarations()
++                    self.transport.dynamic_tool_handler = dynamic_session.call
++                    self.transport.dynamic_tool_context = contextvars.copy_context()
++                elif self.dynamic_tools_factory is not None:
++                    raise ConfigurationError("environment verification unavailable: dynamic task composition is unbound")
+                 thread_response = await self.transport.request("thread/start", thread_params)
+                 if context.workspace is not None:
+                     profile = thread_response.get("activePermissionProfile")
+@@ -850,6 +932,8 @@
+                 if not isinstance(thread_id, str) or not thread_id:
+                     raise CodexProtocolError("thread/start omitted thread identity")
+                 collector.thread_id = thread_id
++                if dynamic_session is not None:
++                    dynamic_session.bind_thread(thread_id)
+                 actual_model = thread_response.get("model")
+                 collector.actual_model = (
+                     actual_model if isinstance(actual_model, str) else selected.id
+@@ -891,6 +975,8 @@
+                 if invocation is not None and invocation.mode == "skill" and invocation.exposure != "optional":
+                     turn_params["input"][0]["text"] = f"${invocation.skill_name} {context.instruction}"
+                     turn_params["input"].append({"type": "skill", "name": invocation.skill_name, "path": invocation.skill_path})
++                if invocation is not None and invocation.mode == "dynamic_tool" and invocation.exposure != "optional":
++                    turn_params["input"][0]["text"] = f"Use {invocation.server}.{invocation.tool} for this task. {context.instruction}"
+                 if effort is not None:
+                     turn_params["effort"] = effort
+                 if context.config.artifact is not None:
+@@ -906,11 +992,33 @@
+                 if not isinstance(turn_id, str) or not turn_id:
+                     raise CodexProtocolError("turn/start omitted turn identity")
+                 collector.turn_id = turn_id
++                if dynamic_session is not None:
++                    dynamic_session.bind_turn(turn_id)
+                 self._attempts[context.attempt_id] = (thread_id, turn_id)
+-                result = await asyncio.wait_for(
+-                    asyncio.shield(collector.future), timeout=context.config.timeout_seconds
+-                )
++                if dynamic_session is not None:
++                    failed = asyncio.create_task(self.transport._failure_event.wait())
++                    try:
++                        done, _ = await asyncio.wait((collector.future, failed),
++                            timeout=context.config.timeout_seconds, return_when=asyncio.FIRST_COMPLETED)
++                        if failed in done:
++                            self.transport._raise_if_failed()
++                        if collector.future not in done:
++                            raise TimeoutError()
++                        result = collector.future.result()
++                    finally:
++                        failed.cancel()
++                        await asyncio.gather(failed, return_exceptions=True)
++                    if self.transport._dynamic_tasks:
++                        raise CodexProtocolError("turn completed before dynamic task response")
++                else:
++                    result = await asyncio.wait_for(
++                        asyncio.shield(collector.future), timeout=context.config.timeout_seconds
++                    )
+                 await asyncio.sleep(0)
++                if (dynamic_session is not None and invocation is not None and invocation.mode == "dynamic_tool"
++                        and invocation.exposure != "optional"
++                        and invocation.tool not in dynamic_session.tools_succeeded):
++                    raise ConfigurationError("required dynamic candidate was not invoked")
+                 if collector.error is not None:
+                     raise collector.error
+                 result = result.model_copy(
+@@ -920,7 +1028,8 @@
+                 )
+             except (TimeoutError, asyncio.CancelledError):
+                 await self._interrupt_known(context.attempt_id)
+-                return self._partial_execution(collector, ExecutionStatus.TIMEOUT, started)
++                raw = self._partial_execution(collector, ExecutionStatus.TIMEOUT, started)
++                return raw
+             except (CodexProtocolError, CodexRequestError, ConfigurationError) as exc:
+                 raw = self._partial_execution(collector, ExecutionStatus.FAILED, started)
+                 raw.metadata["host_failure_code"] = (
+@@ -935,6 +1044,18 @@
+                 raw.metadata["host_tools_used"] = json.dumps(sorted(collector.tools_used))
+                 return raw
+             finally:
++                if dynamic_session is not None:
++                    dynamic_session.close()
++                    try:
++                        await self.transport.cancel_dynamic_tools()
++                    except CodexProtocolError:
++                        dynamic_cleanup_unconfirmed = True
++                    if raw is not None:
++                        raw.metadata['dynamic_callback_evidence'] = dynamic_session.evidence
++                        raw.metadata['dynamic_cleanup_confirmed'] = not dynamic_cleanup_unconfirmed
++                        if dynamic_cleanup_unconfirmed:
++                            raw.status = ExecutionStatus.FAILED
++                            raw.error_type = 'DYNAMIC_TASK_CLEANUP_UNCONFIRMED'
+                 unsubscribe()
+                 self.transport.approval_observer = None
+                 self.transport.approval_handler = None
+@@ -946,6 +1067,7 @@
+             )
+             resources.latency_ms = (time.monotonic() - started) * 1000
+             status = (
++                ExecutionStatus.FAILED if dynamic_cleanup_unconfirmed else
+                 ExecutionStatus.SUCCESS
+                 if result.status == "completed"
+                 else ExecutionStatus.TIMEOUT
+@@ -972,6 +1094,14 @@
+                 error_type="HOST_IDENTITY_DRIFT" if drifted else None if status is ExecutionStatus.SUCCESS else "CODEX_TURN_FAILED",
+                 error_message=result.error,
+                 metadata={
++                    **({"dynamic_tools_digest": dynamic_session.expected_digest,
++                        "dynamic_tool_calls": len(dynamic_session._calls),
++                        "dynamic_callback_evidence": dynamic_session.evidence,
++                        "dynamic_cleanup_confirmed": not dynamic_cleanup_unconfirmed,
++                        "dynamic_declaration_bytes": len(json.dumps(binding.declarations(), separators=(',', ':'), allow_nan=False).encode()),
++                        "dynamic_schema_bytes": sum(len(json.dumps(tool['inputSchema'], separators=(',', ':'), allow_nan=False).encode()) for tool in binding._tools),
++                        "dynamic_exposure": "declaration_accepted; model visibility requires live evidence"}
++                       if dynamic_session is not None else {}),
+                     "actual_model": result.actual_model,
+                     "host_runtime_digest": actual_runtime,
+                     **({"boundary_digest": boundary_reference} if boundary_reference is not None else {}),
+--- /dev/null
++++ b/src/aeep/hosts/codex_dynamic_tools.py
+@@ -0,0 +1,327 @@
++"""Operator-bound Codex client tools; the model supplies only task arguments."""
++from __future__ import annotations
++
++import asyncio
++import copy
++import hashlib
++import json
++import math
++import re
++from collections.abc import Awaitable, Callable
++from contextvars import ContextVar
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Any
++
++from jsonschema.validators import validator_for
++
++from ..errors import ConfigurationError
++from ..models import SideEffect
++from ..registry import validate_json
++from .codex_invocation import contract_digest
++
++
++@dataclass(frozen=True)
++class DynamicCallContext:
++    outer_attempt_digest: str
++    call_digest: str
++    action_id: str
++    record_link: Callable[[str], None]
++
++
++_call_context: ContextVar[DynamicCallContext | None] = ContextVar('aeep_codex_dynamic_call', default=None)
++
++
++def current_dynamic_call() -> DynamicCallContext | None:
++    return _call_context.get()
++
++
++class CodexDynamicTools:
++    """A fixed, reviewed client-tool binding installed by operator composition.
++
++    No handler, authority, path or command can be registered through JSON or a
++    model call. The checker resolves current backend/scope/access evidence; a
++    declared digest alone is not enforcement evidence.
++    """
++
++    def __init__(self, *, namespace: str, tools: list[dict[str, Any]],
++                 identity: dict[str, Any], max_calls: int, timeout_seconds: float,
++                 call: Callable[[str, dict[str, Any]], Awaitable[dict[str, Any]]],
++                 check: Callable[[], str]) -> None:
++        if (not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,63}', namespace)
++                or type(max_calls) is not int or not 1 <= max_calls <= 32
++                or isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float))
++                or not math.isfinite(timeout_seconds) or not 0 < timeout_seconds <= 300
++                or not tools or len(tools) > 32):
++            raise ConfigurationError('invalid dynamic task binding limits')
++        self.namespace = namespace
++        self._tools = copy.deepcopy(tools)
++        self._by_name = {item.get('name'): item for item in self._tools}
++        if len(self._by_name) != len(tools) or any(
++            not isinstance(name, str) or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,63}', name)
++            or set(item) - {'name', 'description', 'inputSchema', 'outputSchema'}
++            or not isinstance(item.get('description'), str)
++            or not isinstance(item.get('inputSchema'), dict)
++            for name, item in self._by_name.items()
++        ):
++            raise ConfigurationError('invalid dynamic task declarations')
++        for item in self._tools:
++            for key in ('inputSchema', 'outputSchema'):
++                if key in item:
++                    try:
++                        validator_for(item[key]).check_schema(item[key])
++                    except Exception as exc:
++                        raise ConfigurationError('invalid dynamic task schema') from exc
++        self.max_calls, self.timeout_seconds = max_calls, timeout_seconds
++        self._call, self._check = call, check
++        self.identity = copy.deepcopy(identity)
++        try:
++            self.approval_ceiling = SideEffect(identity["approval_ceiling"])
++        except (KeyError, ValueError) as exc:
++            raise ConfigurationError("dynamic task binding requires an operator ceiling") from exc
++        for field in ('worker_digest', 'native_backend_digest', 'implementation_digest'):
++            if not isinstance(identity.get(field), str) or not re.fullmatch(r'[a-f0-9]{64}', identity[field]):
++                raise ConfigurationError('dynamic task binding requires exact worker/backend/implementation')
++        self.digest = contract_digest({'namespace': namespace, 'tools': self._tools,
++            'identity': self.identity, 'max_calls': max_calls, 'timeout_seconds': timeout_seconds})
++
++    def definition(self) -> dict[str, Any]:
++        return copy.deepcopy({'namespace': self.namespace, 'tools': self._tools,
++            'identity': self.identity, 'max_calls': self.max_calls, 'timeout_seconds': self.timeout_seconds})
++
++    @staticmethod
++    def implementation_digest() -> str:
++        root = Path(__file__).parents[1]
++        names = ('hosts/codex_dynamic_tools.py', 'hosts/codex_app_server.py',
++                 'hosts/codex_invocation.py', 'assessment/tools.py',
++                 'assessment/fixed_helper.py', 'router.py')
++        return contract_digest({name: hashlib.sha256((root / name).read_bytes()).hexdigest()
++                                for name in names})
++
++    def require_reviewed_binding(self, repository: Any, *, worker: Any,
++                                 service: Any, artifact: Any = None) -> str:
++        """Resolve the actual protected composition, not a supplied success bit."""
++        from ..assessment.repository import AssessmentRepository
++        from ..economic.prepared import executor_fingerprint
++        from ..models import ExecutorKind, TaskScope
++        from .codex_sandbox import NativeSandboxConfig, native_backend_digest
++        document = repository.get('codex_dynamic_tools', self.digest)
++        with repository.store._lock:
++            review = repository.store._connection.execute(
++                'SELECT revoked FROM assessment_reviews WHERE digest=?', (self.digest,)).fetchone()
++        if (document != self.definition() or review is None or review[0]
++                or worker.digest() != self.identity['worker_digest']
++                or self.implementation_digest() != self.identity['implementation_digest']
++                or self.identity.get('artifact') != (artifact.model_dump(mode='json') if artifact else None)):
++            raise ConfigurationError('dynamic task composition is unreviewed or changed')
++        scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get(
++            'task_scope', service.router._task_scope_digest))
++        limits = self.identity.get('scope_limits', {})
++        if (self.identity.get('executor_fingerprints') != scope.executor_fingerprints
++                or scope.max_attempts > limits.get('max_attempts', 0)
++                or scope.max_attempt_seconds > limits.get('max_attempt_seconds', 0)):
++            raise ConfigurationError('dynamic task scope or executor binding differs')
++        backends = {}
++        for spec in service.router.registry.all():
++            if spec.id not in scope.executor_fingerprints:
++                continue
++            if scope.executor_fingerprints[spec.id] != executor_fingerprint(spec):
++                raise ConfigurationError('dynamic task executor fingerprint differs')
++            service.router._require_active_spec(spec)
++            boundary = NativeSandboxConfig.model_validate(spec.config.get('native_sandbox', {}))
++            if spec.kind is not ExecutorKind.COMMAND or not spec.config.get('argv_literal') or not boundary.single_process:
++                raise ConfigurationError('dynamic task composition requires the exact native single-process backend')
++            boundary.validate_single_process()
++            backends[spec.id] = native_backend_digest(boundary)
++        if set(backends) != set(scope.executor_fingerprints):
++            raise ConfigurationError('dynamic task scope executor is missing')
++        if not backends or contract_digest(backends) != self.identity['native_backend_digest']:
++            raise ConfigurationError('dynamic native backend binding differs')
++        return self.digest
++
++    @classmethod
++    def task_service(cls, service: Any, *, namespace: str, identity: dict[str, Any],
++                     max_calls: int, timeout_seconds: float,
++                     check: Callable[[], str], artifact_context: Any = None,
++                     artifact_worker: Any = None, execution_id: str | None = None,
++                     authorized_call: Callable[[str, dict[str, Any]], Awaitable[dict[str, Any]]] | None = None) -> CodexDynamicTools:
++        from ..assessment.fixed_helper import FixedHelperService
++        from ..mcp.server import AEEPToolService
++        if not isinstance(service, (AEEPToolService, FixedHelperService)) or service.profile != 'task' or service.router._task_scope_digest is None:
++            raise ConfigurationError('dynamic task tools require a bound task-only service')
++        if identity.get("approval_ceiling") != service.approved_side_effect.value:
++            raise ConfigurationError("dynamic task service ceiling differs")
++        from ..assessment.repository import AssessmentRepository
++        from ..models import TaskScope
++        scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get("task_scope", service.router._task_scope_digest))
++        if 'task_scope_digest' in identity:
++            raise ConfigurationError('task scope is execution authority, not immutable behavior')
++        if (identity.get('executor_fingerprints') != scope.executor_fingerprints
++                or scope.max_attempts > identity.get('scope_limits', {}).get('max_attempts', 0)
++                or scope.max_attempt_seconds > identity.get('scope_limits', {}).get('max_attempt_seconds', 0)):
++            raise ConfigurationError('dynamic scope exceeds reviewed behavior')
++        if max_calls > scope.max_attempts or timeout_seconds > scope.max_attempt_seconds:
++            raise ConfigurationError("dynamic task limits exceed scope")
++        declared = service.list_tools()
++        def current() -> str:
++            for spec in service.router.registry.all():
++                if spec.id in scope.executor_fingerprints:
++                    service.router._require_active_spec(spec)
++            if service.list_tools() != declared or service.approved_side_effect.value != identity["approval_ceiling"]:
++                raise ConfigurationError('dynamic task declarations changed')
++            return check()
++        exposed = copy.deepcopy(declared)
++        task_call = authorized_call or service.call
++        handler = task_call
++        if any(value is not None for value in (artifact_context, artifact_worker, execution_id)):
++            if (artifact_context is None or artifact_worker is None or not execution_id
++                    or artifact_context.config.artifact is None
++                    or artifact_worker.digest() != identity['worker_digest']):
++                raise ConfigurationError('dynamic artifact binding is incomplete')
++            artifact = artifact_context.config.artifact
++            for item in exposed:
++                item['inputSchema'] = {'type': 'object', 'properties': {}, 'additionalProperties': False}
++                item['description'] += ' Uses the operator-bound input artifact and writes the bound output artifact; no path arguments.'
++            async def artifact_call(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
++                # Existing transport names/limits are operator config, never model paths.
++                data = await artifact_worker.artifact(execution_id, name=artifact.input_name,
++                    limit=artifact.max_bytes, timeout=min(10, timeout_seconds))
++                task_input = copy.deepcopy(artifact_context.request.input)
++                task_input[artifact.input_field] = data['data']
++                result = await task_call(name, task_input)
++                outcome = result.get('structuredContent')
++                if not isinstance(outcome, dict):
++                    raise ConfigurationError('dynamic artifact task outcome unavailable')
++                output = outcome.get('output')
++                if outcome.get('ok') is True:
++                    if not isinstance(output, dict) or not isinstance(output.get(artifact.output_field), str):
++                        raise ConfigurationError('dynamic artifact task output unavailable')
++                    await artifact_worker.artifact(execution_id, name=artifact.output_name,
++                        limit=artifact.max_bytes, data=output[artifact.output_field], timeout=min(10, timeout_seconds))
++                # Return existing receipt/recovery evidence without opaque artifact bytes.
++                public = copy.deepcopy(outcome)
++                public['output'] = None
++                return {'isError': result.get('isError') is True, 'structuredContent': public,
++                    'content': [{'type': 'text', 'text': json.dumps(public, separators=(',', ':'), allow_nan=False)}]}
++            handler = artifact_call
++        return cls(namespace=namespace, tools=exposed, identity=identity,
++                   max_calls=max_calls, timeout_seconds=timeout_seconds,
++                   call=handler, check=current)
++
++    def verify(self, expected_digest: str, worker_digest: str) -> None:
++        current = contract_digest({"namespace": self.namespace, "tools": self._tools,
++            "identity": self.identity, "max_calls": self.max_calls, "timeout_seconds": self.timeout_seconds})
++        if (self._by_name != {item["name"]: item for item in self._tools}
++                or current != self.digest or self.digest != expected_digest or self.identity['worker_digest'] != worker_digest
++                or self._check() != self.digest):
++            raise ConfigurationError('environment verification unavailable: dynamic task binding differs')
++
++    def declarations(self) -> list[dict[str, Any]]:
++        return [{'type': 'namespace', 'name': self.namespace,
++                 'description': 'Operator-scoped task tools.', 'tools': [
++            {'type': 'function', 'name': item['name'], 'description': item['description'],
++             'inputSchema': copy.deepcopy(item['inputSchema']), 'deferLoading': False}
++            for item in self._tools]}]
++
++    def inventory(self) -> dict[str, str]:
++        return {f'dynamic:{self.namespace}:{name}': contract_digest(item)
++                for name, item in self._by_name.items()}
++
++
++class DynamicToolSession:
++    """One turn's bounded callback authority, with identity established by replies."""
++
++    def __init__(self, binding: CodexDynamicTools, *, worker_digest: str,
++                 expected_digest: str, approved_side_effect: SideEffect, max_bytes: int, deadline: float,
++                 outer_attempt_id: str = "diagnostic", journal: Any = None) -> None:
++        binding.verify(expected_digest, worker_digest)
++        if binding.approval_ceiling.rank > approved_side_effect.rank:
++            raise ConfigurationError("dynamic task binding exceeds outer approval ceiling")
++        self.binding, self.worker_digest, self.expected_digest = binding, worker_digest, expected_digest
++        self.max_bytes, self.deadline = max_bytes, deadline
++        self.outer_attempt_digest = contract_digest({"attempt_id": outer_attempt_id})
++        self.journal = journal
++        self.thread_id: str | None = None
++        self.turn_id: str | None = None
++        self._ready = asyncio.Event()
++        self._calls: set[str] = set()
++        self.closed = False
++        self.tools_called: set[str] = set()
++        self.tools_succeeded: set[str] = set()
++        self.evidence: list[dict[str, Any]] = []
++
++    def bind_thread(self, thread_id: str) -> None:
++        self.thread_id = thread_id
++
++    def bind_turn(self, turn_id: str) -> None:
++        self.turn_id = turn_id
++        self._ready.set()
++
++    def close(self) -> None:
++        self.closed = True
++        self._ready.set()
++
++    async def call(self, params: dict[str, Any]) -> dict[str, Any]:
++        required = {'arguments', 'callId', 'threadId', 'turnId', 'tool'}
++        if (not required <= params.keys() or set(params) - required - {'namespace'}
++                or any(not isinstance(params[k], str) or not 1 <= len(params[k]) <= 200
++                       for k in required - {'arguments'})
++                or params.get('namespace') != self.binding.namespace
++                or params['tool'] not in self.binding._by_name
++                or not isinstance(params['arguments'], dict)
++                or params['callId'] in self._calls or len(self._calls) >= self.binding.max_calls):
++            raise ConfigurationError('invalid dynamic task call')
++        self._calls.add(params['callId'])
++        async with asyncio.timeout_at(self.deadline):
++            await self._ready.wait()
++            if self.closed or params['threadId'] != self.thread_id or params['turnId'] != self.turn_id:
++                raise ConfigurationError('dynamic task call identity differs')
++            self.binding.verify(self.expected_digest, self.worker_digest)
++            validate_json(params['arguments'], self.binding._by_name[params['tool']]['inputSchema'],
++                          label='dynamic task arguments')
++            call_digest = contract_digest({key: params[key]
++                for key in ('threadId', 'turnId', 'callId', 'namespace', 'tool')})
++            def link(reference: str) -> None:
++                if not isinstance(reference, str) or not re.fullmatch(r'[a-f0-9]{64}', reference):
++                    raise ConfigurationError('invalid dynamic callback evidence reference')
++                self.evidence.append({'call_digest': call_digest, 'evidence_ref': reference})
++                if self.journal is not None:
++                    self.journal.append('message.received', 'dynamic-link:' + reference,
++                        action_digest=call_digest, evidence_ref=reference)
++            context = DynamicCallContext(self.outer_attempt_digest, call_digest,
++                'dynamic_' + call_digest, link)
++            if self.journal is not None:
++                self.journal.append('action.started', 'dynamic-start:' + call_digest, action_digest=call_digest)
++            token = _call_context.set(context)
++            try:
++                async with asyncio.timeout(self.binding.timeout_seconds):
++                    self.tools_called.add(params['tool'])
++                    result = await self.binding._call(params['tool'], copy.deepcopy(params['arguments']))
++            finally:
++                _call_context.reset(token)
++            if not isinstance(result, dict):
++                raise ConfigurationError("dynamic task result must be an object")
++            envelope = result.get('structuredContent', {})
++            receipts = envelope.get('receipts', []) if isinstance(envelope, dict) else []
++            self.evidence.append({'call_digest': contract_digest({key: params[key]
++                for key in ('threadId', 'turnId', 'callId', 'namespace', 'tool')}),
++                'task_scope_digest': envelope.get('task_scope_digest') if isinstance(envelope, dict)
++                    and isinstance(envelope.get('task_scope_digest'), str)
++                    and re.fullmatch(r'[a-f0-9]{64}', envelope['task_scope_digest']) else None,
++                'receipt_ids': [item['receipt_id'] for item in receipts[:32]
++                    if isinstance(item, dict) and isinstance(item.get('receipt_id'), str)
++                    and re.fullmatch(r'[A-Za-z0-9_.:-]{1,200}', item['receipt_id'])]
++                    if isinstance(receipts, list) else []})
++            self.binding.verify(self.expected_digest, self.worker_digest)
++            output_schema = self.binding._by_name[params["tool"]].get("outputSchema")
++            if output_schema is not None:
++                validate_json(result.get("structuredContent"), output_schema, label="dynamic task output")
++            text = json.dumps(result, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
++            if len(text.encode()) > self.max_bytes:
++                raise ConfigurationError('dynamic task result exceeds frame limit')
++            if self.journal is not None:
++                self.journal.append('action.completed', 'dynamic-complete:' + call_digest, action_digest=call_digest)
++            if result.get('isError') is not True:
++                self.tools_succeeded.add(params['tool'])
++            return {'success': result.get('isError') is not True,
++                    'contentItems': [{'type': 'inputText', 'text': text}]}
+--- a/src/aeep/hosts/codex_exec.py
++++ b/src/aeep/hosts/codex_exec.py
+@@ -149,7 +149,7 @@
+         if config != self.config:
+             return RawExecution(status=ExecutionStatus.REJECTED, error_type="CONFIGURATION_REJECTED",
+                                 error_message="execution configuration differs from registered adapter")
+-        if config.invocation is not None and config.invocation.mode != "turn":
++        if config.invocation is not None and (config.invocation.mode != "turn" or config.invocation.dynamic_tools_digest is not None):
+             return RawExecution(status=ExecutionStatus.REJECTED, error_type="MISSING_CAPABILITY",
+                                 error_message="this Exec adapter supports explicit turn execution only")
+         observed = RawExecution(status=ExecutionStatus.SUCCESS)
+--- a/src/aeep/hosts/codex_pair_inspection.py
++++ b/src/aeep/hosts/codex_pair_inspection.py
+@@ -146,6 +146,7 @@
+                     or not worker.model_proxy_url or not worker.credential_volume
+                     or (not extended and config.input_tree is not None)
+                     or config.store_prompt or config.store_output
++                    or (config.invocation is not None and config.invocation.dynamic_tools_digest is not None)
+                     or (self.schema_version.endswith('.v1') and (config.artifact is not None
+                         or (config.invocation is not None and config.invocation.mode != 'turn')))):
+                 raise ValueError('paired probe requires protected signed-in workers with exact entrypoints')
+--- a/src/aeep/hosts/registry.py
++++ b/src/aeep/hosts/registry.py
+@@ -31,6 +31,12 @@
+         if not name or ":" in name or name in self._factories:
+             raise ConfigurationError("invalid or duplicate adapter factory")
+         self._factories[name] = factory
++
++    def clone_factories(self) -> ManagedHostRegistry:
++        """Fresh campaign adapters retain operator composition, never processes."""
++        registry = ManagedHostRegistry()
++        registry._factories = dict(self._factories)
++        return registry
+ 
+     def configure(
+         self, specs: Iterable[ExecutorSpec], *, principal_salt: bytes | Callable[[], bytes],
+--- a/src/aeep/models.py
++++ b/src/aeep/models.py
+@@ -2312,7 +2312,7 @@
+ class ManagedHostInvocation(StrictModel):
+     """Operator-owned invocation and inventory, never model-facing arguments."""
+ 
+-    mode: Literal["turn", "skill", "mcp_tool"] = "turn"
++    mode: Literal["turn", "skill", "mcp_tool", "dynamic_tool"] = "turn"
+     skill_name: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]+$")
+     skill_path: str | None = None
+     skill_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+@@ -2324,6 +2324,7 @@
+     exposure: Literal["required", "optional"] | None = None
+     local_profile: Literal["capable_local"] | None = None
+     native_catalog: bool | None = None
++    dynamic_tools_digest: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+ 
+     @model_serializer(mode="wrap")
+     def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+@@ -2332,7 +2333,7 @@
+             result.pop("supporting_tools", None)
+         if not self.supporting_skills:
+             result.pop("supporting_skills", None)
+-        for key in ("exposure", "local_profile", "native_catalog"):
++        for key in ("exposure", "local_profile", "native_catalog", "dynamic_tools_digest"):
+             if getattr(self, key) is None:
+                 result.pop(key, None)
+         return result
+@@ -2340,8 +2341,8 @@
+     @model_validator(mode="after")
+     def exact_target(self) -> ManagedHostInvocation:
+         skill = (self.skill_name, self.skill_path, self.skill_sha256)
+-        if self.exposure is not None and self.mode != "skill":
+-            raise ValueError("exposure applies only to a reviewed skill")
++        if self.exposure is not None and self.mode not in {"skill", "dynamic_tool"}:
++            raise ValueError("exposure applies only to a reviewed skill or dynamic tool")
+         if self.native_catalog and self.local_profile is None:
+             raise ValueError("native catalog requires a reviewed local profile")
+         paths = [item.path for item in self.supporting_skills]
+@@ -2354,11 +2355,15 @@
+         if self.mode == "skill":
+             if not all(skill) or any(tool) or not os.path.isabs(self.skill_path or "") or os.path.basename(self.skill_path or "") != "SKILL.md":
+                 raise ValueError("skill invocation requires an exact absolute path and content digest")
+-        elif self.mode == "mcp_tool":
++        elif self.mode in {"mcp_tool", "dynamic_tool"}:
+             if not all(tool) or any(skill):
+                 raise ValueError("MCP invocation requires an exact server, tool and contract digest")
+         elif any(skill) or any(tool):
+             raise ValueError("turn invocation cannot include skill or MCP targets")
++        if self.mode == "dynamic_tool" and self.dynamic_tools_digest is None:
++            raise ValueError("dynamic tool invocation requires an operator binding digest")
++        if self.dynamic_tools_digest is not None and self.mode not in {"turn", "dynamic_tool"}:
++            raise ValueError("dynamic tools cannot be combined with skill or MCP targets")
+         return self
+ 
+ 
+@@ -2428,7 +2433,10 @@
+     def process_binding(self) -> str:
+         fields = {"argv", "executable_sha256", "environment_allowlist", "working_directory_policy",
+                   "working_directory", "max_message_bytes", "managed_worker", "adapter_options", "exec_model"}
+-        return json.dumps(self.model_dump(mode="json", include=fields), sort_keys=True)
++        value = self.model_dump(mode="json", include=fields)
++        if self.invocation is not None and self.invocation.dynamic_tools_digest is not None:
++            value["dynamic_tools_digest"] = self.invocation.dynamic_tools_digest
++        return json.dumps(value, sort_keys=True)
+ 
+     @model_validator(mode="after")
+     def valid_managed_host_config(self) -> ManagedHostExecutorConfig:
+--- a/src/aeep/assessment/comparison.py
++++ b/src/aeep/assessment/comparison.py
+@@ -137,7 +137,10 @@
+         if invocation.supporting_skills != base.invocation.supporting_skills:
+             raise ConfigurationError("incremental arms differ in reviewed background skills")
+         if member.id == candidate.id:
+-            if invocation.mode != "skill" or (invocation.exposure or "required") != experiment.exposure:
++            dynamic_candidate = (invocation.mode == "dynamic_tool"
++                and invocation.dynamic_tools_digest is not None
++                and experiment.stage in {"qualification", "aeep_value"})
++            if (invocation.mode != "skill" and not dynamic_candidate) or (invocation.exposure or "required") != experiment.exposure:
+                 raise ConfigurationError("candidate invocation does not match the frozen exposure mode")
+         elif invocation.mode != "turn":
+             raise ConfigurationError("control arms cannot target the candidate")
+--- a/src/aeep/assessment/boundary.py
++++ b/src/aeep/assessment/boundary.py
+@@ -300,6 +300,7 @@
+         if (definition.name != "model_connectivity" or definition.executor.capability != "aeep.conformance.connectivity@1"
+                 or config.managed_worker is None or invocation is None or invocation.mode != "turn"
+                 or invocation.supporting_tools or invocation.supporting_skills or invocation.local_profile is not None
++                or invocation.dynamic_tools_digest is not None
+                 or config.artifact is not None or config.input_tree is not None or config.store_prompt or config.store_output
+                 or config.timeout_seconds > 60 or config.approval_ceiling.rank > 1
+                 or definition.executor.estimate.cash.upper_bound_usd != 0):
+--- a/src/aeep/assessment/tools.py
++++ b/src/aeep/assessment/tools.py
+@@ -110,10 +110,16 @@
+     custom = reviewed_recipes(service.router.store)
+     if name in {"aeep_csv", "aeep_text", "aeep_search"} or name in custom:
+         recipe = custom[name] if name in custom else shipped_recipe(name.removeprefix("aeep_"))
++        from ..hosts.codex_dynamic_tools import current_dynamic_call
++        callback = current_dynamic_call()
++        request = ActionRequest(
++                capability=recipe.capability, input=arguments,
++                constraints=ActionConstraints(max_side_effect=service.approved_side_effect)
++                if service.profile == 'task' else ActionConstraints())
++        if callback is not None:
++            request = request.model_copy(update={'action_id': callback.action_id})
+         outcome = await service.router.execute(
+-            ActionRequest(capability=recipe.capability, input=arguments,
+-                constraints=ActionConstraints(max_side_effect=service.approved_side_effect)
+-                if service.profile == 'task' else ActionConstraints()),
++            request,
+             approved_side_effect=service.approved_side_effect,
+             allow_unsafe_executor=service.allow_unsafe_executor,
+         )
+--- /dev/null
++++ b/tests/test_codex_dynamic_tools.py
+@@ -0,0 +1,402 @@
++from __future__ import annotations
++
++import asyncio
++import sys
++from pathlib import Path
++
++import pytest
++
++from aeep.errors import ConfigurationError, InputValidationError
++from aeep.hosts.codex_app_server import AppServerOptions, CodexAppServerTransport
++from aeep.hosts.codex_dynamic_tools import CodexDynamicTools, DynamicToolSession
++from aeep.models import ManagedHostExecutorConfig, ManagedHostInvocation, SideEffect
++
++TOOL = {'name': 'fixed', 'description': 'Fixed synthetic value operation.',
++        'inputSchema': {'type': 'object', 'properties': {'value': {'type': 'integer'}},
++                        'required': ['value'], 'additionalProperties': False},
++        'outputSchema': {'type': 'object', 'properties': {'value': {'type': 'integer'}},
++                         'required': ['value'], 'additionalProperties': False}}
++
++
++def binding(handler=None, *, ceiling='read', timeout=1, max_calls=1):
++    calls = []
++    async def call(name, arguments):
++        calls.append((name, arguments))
++        return {'isError': False, 'structuredContent': arguments}
++    holder = {}
++    value = CodexDynamicTools(namespace='task', tools=[TOOL], identity={
++        'worker_digest': 'a' * 64, 'native_backend_digest': 'b' * 64,
++        'implementation_digest': 'c' * 64, 'approval_ceiling': ceiling},
++        max_calls=max_calls, timeout_seconds=timeout, call=handler or call,
++        check=lambda: holder['value'].digest)
++    holder['value'] = value
++    return value, calls
++
++
++def session(value, *, ceiling=SideEffect.READ):
++    return DynamicToolSession(value, worker_digest='a' * 64, expected_digest=value.digest,
++        approved_side_effect=ceiling, max_bytes=4096,
++        deadline=asyncio.get_running_loop().time() + 2)
++
++
++def params(**changes):
++    return {'threadId': 'thread', 'turnId': 'turn', 'callId': 'call',
++            'namespace': 'task', 'tool': 'fixed', 'arguments': {'value': 1}, **changes}
++
++
++@pytest.mark.asyncio
++async def test_turn_response_race_waits_for_exact_identity_then_dispatches_once():
++    value, calls = binding()
++    active = session(value)
++    active.bind_thread('thread')
++    task = asyncio.create_task(active.call(params()))
++    await asyncio.sleep(0)
++    assert not calls
++    active.bind_turn('turn')
++    assert (await task)['success'] is True
++    assert calls == [('fixed', {'value': 1})]
++    with pytest.raises(ConfigurationError):
++        await active.call(params())
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize('changes', [
++    {'threadId': 'other'}, {'turnId': 'other'}, {'namespace': 'other'},
++    {'tool': 'approval'}, {'arguments': {'value': 1, 'approval_ceiling': 'write'}},
++    {'callId': True}, {'unreviewed': True}, {'arguments': []},
++])
++async def test_invalid_identity_schema_or_authority_never_dispatches(changes):
++    value, calls = binding()
++    active = session(value)
++    active.bind_thread('thread')
++    active.bind_turn('turn')
++    with pytest.raises((ConfigurationError, InputValidationError)):
++        await active.call(params(**changes))
++    assert calls == []
++
++
++@pytest.mark.asyncio
++async def test_outer_read_cannot_launder_write_and_mutation_rejects():
++    value, _ = binding(ceiling='write')
++    with pytest.raises(ConfigurationError, match='outer approval'):
++        session(value)
++    value, _ = binding()
++    value.identity['native_backend_digest'] = 'd' * 64
++    with pytest.raises(ConfigurationError, match='binding differs'):
++        session(value)
++
++
++@pytest.mark.parametrize('timeout', [float('nan'), float('inf'), True, 0])
++def test_limits_are_finite_and_schema_valid_before_declaration(timeout):
++    with pytest.raises(ConfigurationError):
++        binding(timeout=timeout)
++
++
++@pytest.mark.asyncio
++async def test_post_effect_output_failure_keeps_effect_and_cannot_retry():
++    effects = []
++    async def call(name, args):
++        effects.append('durable receipt remains owned by task service')
++        return {'isError': False, 'structuredContent': {'value': 'wrong'}}
++    value, _ = binding(call)
++    active = session(value)
++    active.bind_thread('thread')
++    active.bind_turn('turn')
++    with pytest.raises(InputValidationError):
++        await active.call(params())
++    assert effects and not active.tools_succeeded
++    with pytest.raises(ConfigurationError):
++        await active.call(params(callId='second'))
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize('mode', ['success', 'eof', 'early-terminal'])
++async def test_protocol_reader_keeps_running_and_owned_callback_cancels(mode):
++    entered, cancelled, terminal = asyncio.Event(), asyncio.Event(), asyncio.Event()
++    async def call(name, arguments):
++        entered.set()
++        if mode != 'success':
++            try:
++                await transport.request('fixture/entered', {})
++                await asyncio.Event().wait()
++            finally:
++                cancelled.set()
++        return {'isError': False, 'structuredContent': arguments}
++    value, _ = binding(call)
++    active = session(value)
++    fixture = Path(__file__).parent / 'fixtures/fake_codex_dynamic_tools.py'
++    transport = CodexAppServerTransport((sys.executable, '-u', str(fixture), mode),
++        request_timeout=1, options=AppServerOptions(experimental_api=True))
++    transport.dynamic_tool_handler = active.call
++    transport.subscribe(lambda method, data: terminal.set() if method in {'turn/completed', 'callback/replied'} else None)
++    try:
++        thread = await transport.request('thread/start', {'dynamicTools': value.declarations()})
++        active.bind_thread(thread['thread']['id'])
++        turn = await transport.request('turn/start', {'threadId': 'thread'})
++        active.bind_turn(turn['turn']['id'])
++        if mode == 'eof':
++            await asyncio.wait_for(transport._failure_event.wait(), 1)
++        else:
++            await asyncio.wait_for(terminal.wait(), 1)
++        if mode == 'success':
++            assert active.tools_succeeded == {'fixed'}
++        else:
++            active.close()
++            await transport.cancel_dynamic_tools()
++            assert not active.tools_succeeded
++    finally:
++        await transport.close()
++    assert not transport._dynamic_tasks
++    assert entered.is_set()
++    if mode != 'success':
++        assert cancelled.is_set()
++
++
++def test_optional_binding_changes_process_identity_without_changing_legacy_dump():
++    base = ManagedHostExecutorConfig(adapter_id='codex-app-server', argv=(sys.executable,),
++                                    instructions='fixed', invocation=ManagedHostInvocation())
++    assert 'dynamic_tools_digest' not in base.invocation.model_dump()
++    old = base.process_binding()
++    scoped = base.model_copy(update={'invocation': ManagedHostInvocation(dynamic_tools_digest='a' * 64)})
++    assert scoped.process_binding() != old
++    with pytest.raises(ValueError):
++        ManagedHostInvocation(mode='dynamic_tool', server='task', tool='fixed', tool_sha256='a' * 64)
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize('mode', ['success', 'eof', 'early-terminal'])
++async def test_adapter_requires_completed_callback_and_cancels_partial_effects(monkeypatch, mode):
++    from types import SimpleNamespace
++    from unittest.mock import AsyncMock
++
++    from aeep.hosts.base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
++    from aeep.hosts.codex_app_server import CodexAppServerAdapter
++    from aeep.models import ActionRequest, ExecutionStatus
++    effects, cancelled = [], []
++    async def call(name, args):
++        effects.append('task service owns durable receipt/recovery')
++        if mode != 'success':
++            try:
++                await host.transport.request('fixture/entered', {})
++                await asyncio.Event().wait()
++            finally:
++                cancelled.append(True)
++        return {'isError': False, 'structuredContent': args}
++    value, _ = binding(call)
++    fixture = Path(__file__).parent / 'fixtures/fake_codex_dynamic_tools.py'
++    argv = (sys.executable, '-u', str(fixture), mode)
++    invocation = ManagedHostInvocation(mode='dynamic_tool', server='task', tool='fixed',
++        tool_sha256=value.inventory()['dynamic:task:fixed'], dynamic_tools_digest=value.digest,
++        exposure='required')
++    config = ManagedHostExecutorConfig(adapter_id='codex-app-server', argv=argv,
++        instructions='fixed', invocation=invocation, timeout_seconds=1)
++    host = CodexAppServerAdapter(argv=argv, resource_id='fixture', principal_salt=b'fixture',
++        options=AppServerOptions(experimental_api=True), dynamic_tools_factory=lambda ctx, adapter: value)
++    host._worker = SimpleNamespace(digest=lambda: 'a' * 64, reviewed_files={})
++    host.probe = AsyncMock(return_value=HostProbe(adapter_id='codex-app-server', status=HostProbeStatus.READY))
++    host.list_models = AsyncMock(return_value=[HostModel(id='fixture')])
++    monkeypatch.setattr('aeep.hosts.codex_app_server.inventory', AsyncMock(return_value={'skills': [], 'apps': [], 'servers': []}))
++    monkeypatch.setattr('aeep.hosts.codex_app_server.verify_thread_inventory', AsyncMock(return_value=None))
++    ctx = ManagedHostExecutionContext(request=ActionRequest(capability='fixed', input={}),
++        instruction='fixed', config=config, attempt=1, attempt_id='case')
++    try:
++        raw = await host._execute(ctx)
++        assert raw.status is (ExecutionStatus.SUCCESS if mode == 'success' else ExecutionStatus.FAILED)
++        if mode == 'success':
++            assert raw.output == {'completed': True} and raw.metadata['dynamic_tool_calls'] == 1
++        assert not host.transport._dynamic_tasks
++        assert effects
++        if mode != 'success':
++            assert cancelled
++            assert raw.metadata['dynamic_cleanup_confirmed']
++    finally:
++        await host.transport.close()
++
++
++@pytest.mark.asyncio
++async def test_callback_identity_link_is_retained_before_output_rejection():
++    from aeep.execution import EventJournal
++    from aeep.hosts.codex_dynamic_tools import current_dynamic_call
++    observed = []
++    async def call(name, args):
++        context = current_dynamic_call()
++        assert context is not None and context.action_id == 'dynamic_' + context.call_digest
++        observed.append(context.outer_attempt_digest)
++        context.record_link('f' * 64)
++        return {'isError': False, 'structuredContent': {'value': 'invalid'}}
++    value, _ = binding(call)
++    journal = EventJournal('outer')
++    active = DynamicToolSession(value, worker_digest='a' * 64, expected_digest=value.digest,
++        approved_side_effect=SideEffect.READ, max_bytes=4096,
++        deadline=asyncio.get_running_loop().time() + 2, outer_attempt_id='outer', journal=journal)
++    active.bind_thread('thread')
++    active.bind_turn('turn')
++    with pytest.raises(InputValidationError):
++        await active.call(params())
++    assert observed and active.evidence[0]['evidence_ref'] == 'f' * 64
++    assert any(event.evidence_ref == 'f' * 64 for event in journal.items)
++    assert current_dynamic_call() is None
++
++
++@pytest.mark.asyncio
++async def test_transport_teardown_runs_when_callback_cleanup_is_unconfirmed(monkeypatch):
++    from aeep.hosts.codex_app_server import CodexProtocolError
++    fixture = Path(__file__).parent / 'fixtures/fake_codex_dynamic_tools.py'
++    transport = CodexAppServerTransport((sys.executable, '-u', str(fixture), 'success'))
++    await transport.start()
++    process = transport._process
++    async def unconfirmed():
++        raise CodexProtocolError('dynamic task cleanup unconfirmed')
++    monkeypatch.setattr(transport, 'cancel_dynamic_tools', unconfirmed)
++    with pytest.raises(CodexProtocolError, match='cleanup unconfirmed'):
++        await transport.close()
++    assert process.returncode is not None and not transport._tasks and transport._process is None
++
++
++@pytest.mark.asyncio
++async def test_exec_explicitly_rejects_turn_with_dynamic_binding():
++    from aeep.hosts.base import ManagedHostExecutionContext
++    from aeep.hosts.codex_exec import CodexExecAdapter
++    from aeep.models import ActionRequest, ExecutionStatus, ExecutorSpec
++    spec = ExecutorSpec(id='exec', capability='fixed', kind='host_managed', resource_pool='fixture',
++        description='offline unsupported dynamic host', config={'adapter_id': 'codex-exec',
++        'argv': [sys.executable], 'instructions': 'fixed',
++        'invocation': {'mode': 'turn', 'dynamic_tools_digest': 'a' * 64}})
++    host = CodexExecAdapter(spec)
++    ctx = ManagedHostExecutionContext(request=ActionRequest(capability='fixed', input={}),
++        instruction='fixed', config=host.config, attempt=1, attempt_id='case')
++    assert (await host.execute(ctx)).status is ExecutionStatus.REJECTED
++
++
++def test_old_pair_inspection_cannot_attest_dynamic_exposure():
++    from test_v08_pair_inspection import definition
++
++    from aeep.hosts.codex_pair_inspection import WorkerPairInspection
++    value = definition(task_profile=True).model_dump(mode='json')
++    value['control']['config']['invocation']['dynamic_tools_digest'] = 'a' * 64
++    with pytest.raises(ValueError):
++        WorkerPairInspection.model_validate(value)
++
++@pytest.mark.parametrize('change', ['limits', 'program', 'missing', 'fresh'])
++def test_reviewed_binding_rejects_changed_scope_program_or_missing_executor(tmp_path, monkeypatch, change):
++    from datetime import timedelta
++    from types import SimpleNamespace
++
++    from aeep.assessment.onboarding import reference_spec
++    from aeep.assessment.repository import AssessmentRepository
++    from aeep.economic.prepared import executor_fingerprint
++    from aeep.models import ExecutorKind, Manifest, TaskScope, utc_now
++    from aeep.router import Router
++    spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
++        'config': {'argv': [sys.executable, '-I', '-c', 'print(1)'], 'argv_literal': True}})
++    router = Router(Manifest(database=str(tmp_path/'state.db'), executors=[spec]), manifest_path=tmp_path.resolve()/'manifest.json')
++    repo = AssessmentRepository(router.store)
++    scope = TaskScope(scope_id='bound', project_root=str(tmp_path.resolve()),
++        executor_fingerprints={spec.id: executor_fingerprint(spec)}, max_attempts=1,
++        max_attempt_seconds=1, expires_at=utc_now()+timedelta(minutes=5))
++    digest = repo.put('task_scope', scope.scope_id, scope)
++    repo.review(digest)
++    router.bind_task_scope(scope.scope_id)
++    value, _ = binding()
++    value.identity.update(scope_limits={'max_attempts': 1, 'max_attempt_seconds': 1}, executor_fingerprints=scope.executor_fingerprints,
++                          implementation_digest=value.implementation_digest())
++    value.digest = __import__('aeep.hosts.codex_invocation', fromlist=['contract_digest']).contract_digest(value.definition())
++    original_get = repo.get
++    monkeypatch.setattr(repo, 'get', lambda kind, key: value.definition() if kind == 'codex_dynamic_tools' else original_get(kind, key))
++    router.store._connection.execute('INSERT INTO assessment_reviews(digest, approved_at, revoked) VALUES (?, ?, 0)', (value.digest, utc_now().isoformat()))
++    router.store._connection.commit()
++    if change == 'limits':
++        other = scope.model_copy(update={'scope_id': 'other', 'max_attempts': 2})
++        other_digest = repo.put('task_scope', other.scope_id, other)
++        repo.review(other_digest)
++        router._task_scope_digest = other_digest
++    elif change == 'program':
++        changed = spec.model_copy(update={'config': {**spec.config, 'argv': [sys.executable, '-I', '-c', 'print(2)']}})
++        monkeypatch.setattr(router.registry, 'all', lambda: [changed])
++    elif change == 'missing':
++        monkeypatch.setattr(router.registry, 'all', lambda: [])
++    else:
++        from aeep.hosts.codex_invocation import contract_digest
++        from aeep.hosts.codex_sandbox import NativeSandboxConfig
++        monkeypatch.setattr(NativeSandboxConfig, 'model_validate', lambda value: SimpleNamespace(single_process=True, validate_single_process=lambda: None))
++        monkeypatch.setattr('aeep.hosts.codex_sandbox.native_backend_digest', lambda value: 'same-backend')
++        monkeypatch.setattr(router, '_require_active_spec', lambda spec: None)
++        value.identity['native_backend_digest'] = contract_digest({spec.id: 'same-backend'})
++        value.digest = contract_digest(value.definition())
++        router.store._connection.execute('INSERT INTO assessment_reviews VALUES (?, ?, 0)', (value.digest, utc_now().isoformat()))
++        router.store._connection.commit()
++        for index in range(2):
++            fresh = scope.model_copy(update={'scope_id': f'fresh-{index}'})
++            fresh_digest = repo.put('task_scope', fresh.scope_id, fresh)
++            repo.review(fresh_digest)
++            router._task_scope_digest = fresh_digest
++            assert value.require_reviewed_binding(repo, worker=SimpleNamespace(digest=lambda: 'a'*64), service=SimpleNamespace(router=router)) == value.digest
++        router.store.close()
++        return
++    try:
++        with pytest.raises(ConfigurationError, match=r'scope|fingerprint|missing'):
++            value.require_reviewed_binding(repo, worker=SimpleNamespace(digest=lambda: 'a'*64),
++                service=SimpleNamespace(router=router))
++    finally:
++        router.store.close()
++
++@pytest.mark.asyncio
++async def test_cloned_campaign_factory_captures_actual_router_and_reserved_attempt(tmp_path, monkeypatch):
++    from types import SimpleNamespace
++    from unittest.mock import AsyncMock
++
++    from test_v08_assessment import setup_assessment
++
++    from aeep.assessment.fixed_helper import current_assessment_router
++    from aeep.assessment.models import AssessmentLimits, content_digest
++    from aeep.attempts import ExecutionAttempt
++    from aeep.hosts.base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
++    from aeep.hosts.codex_app_server import CodexAppServerAdapter
++    from aeep.models import ActionRequest
++
++    root, assessment, plan, _grant = setup_assessment(tmp_path)
++    job = assessment.enqueue(plan.plan_id)
++    with root.store._immediate_transaction() as connection:
++        connection.execute("UPDATE assessment_jobs SET state='running' WHERE id=?", (job,))
++    assessment.repository.reserve(plan, 'factory-trial', AssessmentLimits(max_operations=1, max_elapsed_seconds=20), stage='trial')
++    scoped = root._campaign_router([root.registry.get(plan.candidate_id)], plan_digest=content_digest(plan))
++    scoped._callback_trial_identity = (job, 'factory-trial')
++    scoped._trial_check = lambda: assessment.repository.authorize(plan)
++    attempt = scoped.store.create_execution_attempt(ExecutionAttempt(attempt_id='factory-outer',
++        decision_id='factory-decision', action_digest='a'*64, executor_id=plan.candidate_id,
++        executor_fingerprint='b'*64, side_effect=SideEffect.READ, idempotent=True,
++        owner_id='operator', state='INVOKING', invocation_start_digest='sha256:'+'c'*64))
++    value, calls = binding()
++    captured = []
++    def factory(context, adapter):
++        actual = current_assessment_router()
++        assert actual is scoped and actual is not root
++        assert actual._callback_trial_identity == (job, 'factory-trial')
++        assert context.attempt_id == attempt.attempt_id
++        assert assessment.repository.operation_ledger(plan.plan_id).operations[0].elapsed_seconds is None
++        captured.append(actual)
++        return value
++    argv = (sys.executable, '-u', str(Path(__file__).parent/'fixtures/fake_codex_dynamic_tools.py'), 'success')
++    cfg = ManagedHostExecutorConfig(adapter_id='codex-app-server', argv=argv, instructions='fixed',
++        invocation=ManagedHostInvocation(mode='dynamic_tool', server='task', tool='fixed',
++            tool_sha256=value.inventory()['dynamic:task:fixed'], dynamic_tools_digest=value.digest,
++            exposure='required'), timeout_seconds=1)
++    host = CodexAppServerAdapter(argv=argv, resource_id='factory', principal_salt=b'fixture',
++        options=AppServerOptions(experimental_api=True), dynamic_tools_factory=factory)
++    host._worker = SimpleNamespace(digest=lambda: 'a'*64, reviewed_files={})
++    host.probe = AsyncMock(return_value=HostProbe(adapter_id='codex-app-server', status=HostProbeStatus.READY))
++    host.list_models = AsyncMock(return_value=[HostModel(id='fixture')])
++    monkeypatch.setattr('aeep.hosts.codex_app_server.inventory', AsyncMock(return_value={'skills': [], 'apps': [], 'servers': []}))
++    monkeypatch.setattr('aeep.hosts.codex_app_server.verify_thread_inventory', AsyncMock(return_value=None))
++    context = ManagedHostExecutionContext(request=ActionRequest(capability='fixed', input={}),
++        instruction='fixed', config=cfg, attempt=1, attempt_id=attempt.attempt_id)
++    # Only protocol/model execution is stubbed; the scoped invocation context is real.
++    monkeypatch.setattr(scoped, '_invoke_controlled_authorized', lambda unused: host._execute(context))
++    try:
++        raw = await scoped._invoke_controlled(None)
++        assert raw.status.value == 'success' and captured == [scoped] and calls
++        assert current_assessment_router() is None
++    finally:
++        await host.close()
++        await scoped.close()
++        await root.close()
+--- /dev/null
++++ b/tests/fixtures/fake_codex_dynamic_tools.py
+@@ -0,0 +1,44 @@
++"""Offline native client-tool protocol fixture; no inference/authentication."""
++import json
++import sys
++
++mode = sys.argv[1]
++
++def send(value):
++    print(json.dumps(value), flush=True)
++
++for line in sys.stdin:
++    request = json.loads(line)
++    method = request.get('method')
++    if 'id' not in request:
++        continue
++    if method == 'initialize':
++        send({'id': request['id'], 'result': {'userAgent': 'fixture/1'}})
++    elif method == 'thread/start':
++        assert request['params']['dynamicTools'][0]['name'] == 'task'
++        send({'id': request['id'], 'result': {'thread': {'id': 'thread'}}})
++    elif method == 'turn/start':
++        send({'id': 'call-request', 'method': 'item/tool/call', 'params': {
++            'threadId': 'thread', 'turnId': 'turn', 'callId': 'call',
++            'namespace': 'task', 'tool': 'fixed', 'arguments': {'value': 1}}})
++        send({'id': request['id'], 'result': {'turn': {'id': 'turn'}}})
++        if mode in {'eof', 'early-terminal'}:
++            entered = json.loads(sys.stdin.readline())
++            assert entered.get('method') == 'fixture/entered'
++            if mode == 'eof':
++                break
++            send({'id': entered['id'], 'result': {}})
++        if mode == 'early-terminal':
++            send({'method': 'turn/completed', 'params': {'threadId': 'thread',
++                  'turn': {'id': 'turn', 'status': 'completed'}}})
++        else:
++            reply = json.loads(sys.stdin.readline())
++            send({'method': 'callback/replied', 'params': {'success': reply.get('result', {}).get('success')}})
++            send({'method': 'item/completed', 'params': {'threadId': 'thread', 'turnId': 'turn',
++                'item': {'id': 'call', 'type': 'dynamicToolCall', 'namespace': 'task', 'tool': 'fixed', 'status': 'completed'}}})
++            send({'method': 'item/completed', 'params': {'threadId': 'thread', 'turnId': 'turn',
++                'item': {'type': 'agentMessage', 'phase': 'final_answer', 'text': '{"completed":true}'}}})
++            send({'method': 'turn/completed', 'params': {'threadId': 'thread',
++                  'turn': {'id': 'turn', 'status': 'completed'}}})
++    else:
++        send({'id': request['id'], 'result': {}})
+--- a/docs/ASSESSMENT_TESTING.md
++++ b/docs/ASSESSMENT_TESTING.md
+@@ -779,3 +779,16 @@
+ reply path for older hosts. Unknown phases fail protocol validation. Message
+ contents remain transient, and a commentary-only completion supplies no answer.
+ Actual stdio fixtures exercise progress followed by a structured final result.
++
++### Scoped dynamic-tool composition
++
++The operator-composed App Server bridge separates immutable behavior from execution
++permission. The reviewed behavior binds declarations, executor fingerprints,
++native backend, artifact semantics and finite permission/resource limits. Each
++callback also binds its current reviewed task scope, canonical trial reservation
++and outer attempt. Fresh case scopes may share a behavior definition only when
++they match its complete executor mapping and remain within its limits. Their
++attempt allowances remain separate durable records; database copies cannot reset
++allowances. Changed programs, backends or permissions require new review and
++applicable evidence. A declaration acknowledgement alone does not establish model
++visibility, composite boundary conformance or campaign qualification.

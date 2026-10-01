@@ -1,0 +1,152 @@
+{
+  "source_before": "49d05cab9f8fe97b9ba04e0032463407dbab6feb9b8c29cd7aeb318255d54946",
+  "source_after": "49d05cab9f8fe97b9ba04e0032463407dbab6feb9b8c29cd7aeb318255d54946",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07903170899953693,
+      "log": "reports/v08/task-profile-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6708588750334457,
+      "log": "reports/v08/task-profile-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.04087449994403869,
+      "log": "reports/v08/task-profile-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.045069208019413,
+      "log": "reports/v08/task-profile-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12956337502691895,
+      "log": "reports/v08/task-profile-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 365.2983709999826,
+      "log": "reports/v08/task-profile-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 562.2332726670429,
+      "log": "reports/v08/task-profile-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.152996874996461,
+      "log": "reports/v08/task-profile-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/task-profile-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8893033750355244,
+      "log": "reports/v08/task-profile-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/task-profile-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07261037500575185,
+      "log": "reports/v08/task-profile-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/task-profile-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07628970802761614,
+      "log": "reports/v08/task-profile-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.89735504204873,
+      "log": "reports/v08/task-profile-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1258806249825284,
+      "log": "reports/v08/task-profile-check-12.txt"
+    }
+  ]
+}

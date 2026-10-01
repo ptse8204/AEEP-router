@@ -1,0 +1,108 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_6e34ad47b2e54cff93bba942a7d0a4f1",
+    "operation_id": "conformance_probe_6e34ad47b2e54cff93bba942a7d0a4f1-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_structures",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_budget",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_start",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_cancel",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_status",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_report",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [],
+    "canonical_evidence_digest": "2518d53694b2d81d002707f6224ee4c172e57aba1f4332a14dfac1b6b01d30ab",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 70529,
+          "cached_input_tokens": 57600,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 436,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

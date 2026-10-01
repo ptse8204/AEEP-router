@@ -1,0 +1,92 @@
+{
+  "schema_version": "assessment.worker-filesystem-probe.v1",
+  "codex_executable_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "probe_source_sha256": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+  "profile": {
+    "permissions.aeep_assessment.filesystem": {
+      ":minimal": "read",
+      ":workspace_roots": {
+        ".": "write"
+      }
+    },
+    "permissions.aeep_assessment.network.enabled": false
+  },
+  "workers": [
+    {
+      "role": "baseline",
+      "checks": {
+        "own_read": {
+          "passed": true,
+          "returncode": 0
+        },
+        "own_write": {
+          "passed": true,
+          "returncode": 0
+        },
+        "other_read_denied": {
+          "passed": true,
+          "returncode": 1
+        },
+        "other_write_denied": {
+          "passed": true,
+          "returncode": 1
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "checks": {
+        "own_read": {
+          "passed": true,
+          "returncode": 0
+        },
+        "own_write": {
+          "passed": true,
+          "returncode": 0
+        },
+        "other_read_denied": {
+          "passed": true,
+          "returncode": 1
+        },
+        "other_write_denied": {
+          "passed": true,
+          "returncode": 1
+        }
+      }
+    }
+  ],
+  "filesystem_verified": true,
+  "network_verified": false,
+  "tool_boundary_verified": false,
+  "model_turns_started": 0,
+  "elapsed_seconds": 0.22949479200178757,
+  "scope": "CLI filesystem profile only; separate App Server and tool-access verification remains required.",
+  "sessions": [
+    {
+      "role": "baseline",
+      "model_turns_started": 0,
+      "available_tools": "unknown",
+      "tool_boundary_verified": false,
+      "stage": "thread_inventory",
+      "protocol_version": "aeep-agent-router/0.154.0 (Mac OS 26.6.0; arm64) unknown (aeep-agent-router; 0.8)",
+      "cwd_acknowledged": true,
+      "profile_acknowledged": true,
+      "approvals_acknowledged": true,
+      "error_type": "ConfigurationError",
+      "reason": "isolated MCP inventory is incomplete"
+    },
+    {
+      "role": "candidate",
+      "model_turns_started": 0,
+      "available_tools": "unknown",
+      "tool_boundary_verified": false,
+      "stage": "thread_inventory",
+      "protocol_version": "aeep-agent-router/0.154.0 (Mac OS 26.6.0; arm64) unknown (aeep-agent-router; 0.8)",
+      "cwd_acknowledged": true,
+      "profile_acknowledged": true,
+      "approvals_acknowledged": true,
+      "error_type": "ConfigurationError",
+      "reason": "isolated MCP inventory is incomplete"
+    }
+  ]
+}

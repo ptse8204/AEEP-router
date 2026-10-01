@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-09-27T11:16:43.803397+00:00",
+  "request_id": "planning_9d708bcb161545db8fd243451b781055",
+  "receipt_id": "rcpt_42c5fb5abb824942ab51ef0eb3713e14",
+  "execution_success": true,
+  "schema_valid": false,
+  "model_turns": 1,
+  "result_bytes": 16939,
+  "raw_result_persisted": false,
+  "diagnosis": "Collector concatenates all completed agentMessage items. Progress plus final JSON reproduces invalid structured output offline. Original failed output was intentionally not persisted, so its exact shape cannot be reconstructed.",
+  "remediation": "Separate documented commentary and final_answer phases; retain legacy unphased results and fail unknown phases. Validate source and renew worker identity before a new reviewed training-only construction.",
+  "operation_replayed": false,
+  "budget_reset": false,
+  "candidate_correctness_failure": false,
+  "source_digest": "a8e460f1fb5a19a0bf93dff7f3f7987708d19eb3c7a59a0ac93b7f0b74958fde",
+  "documentation": "https://learn.chatgpt.com/docs/app-server#items"
+}

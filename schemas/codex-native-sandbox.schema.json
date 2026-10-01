@@ -1,0 +1,91 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "codex.native-sandbox.v1",
+      "default": "codex.native-sandbox.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "binary": {
+      "title": "Binary",
+      "type": "string"
+    },
+    "binary_sha256": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Binary Sha256",
+      "type": "string"
+    },
+    "project_root": {
+      "title": "Project Root",
+      "type": "string"
+    },
+    "read_roots": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Read Roots",
+      "type": "array"
+    },
+    "write_roots": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 16,
+      "title": "Write Roots",
+      "type": "array"
+    },
+    "deny_roots": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Deny Roots",
+      "type": "array"
+    },
+    "network": {
+      "const": false,
+      "default": false,
+      "title": "Network",
+      "type": "boolean"
+    },
+    "single_process": {
+      "default": false,
+      "title": "Single Process",
+      "type": "boolean"
+    },
+    "python_binary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Python Binary"
+    },
+    "python_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Python Sha256"
+    }
+  },
+  "required": [
+    "binary",
+    "binary_sha256",
+    "project_root"
+  ],
+  "title": "NativeSandboxConfig",
+  "type": "object"
+}

@@ -1,0 +1,324 @@
+{
+  "source_digest": "33ee4c0a3a29491a3318e9521c507a9bdbc108e230abc9eda95f004b8f3fe8eb",
+  "checks": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-m",
+        "not real_container",
+        "tests/test_v08_assessment.py",
+        "tests/test_v08_campaign_foundations.py",
+        "tests/test_v08_assessment_interfaces.py",
+        "tests/test_v08_codex_invocation.py",
+        "tests/test_v08_containment.py",
+        "tests/test_v08_comparisons.py",
+        "tests/test_v08_identity.py",
+        "tests/test_v08_planning.py",
+        "tests/test_v08_accounting_faults.py",
+        "tests/test_v08_workers.py",
+        "tests/test_v08_execution_boundary.py",
+        "tests/test_v08_scope_amendments.py",
+        "tests/test_v08_conformance.py",
+        "tests/test_v08_managed_workers.py",
+        "tests/test_v08_executable_recipes.py",
+        "tests/test_v08_controlled_fixture.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 215.03900816699024,
+      "output_log": "01.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-m",
+        "real_container",
+        "tests/test_v08_real_container.py",
+        "tests/test_v08_managed_workers.py",
+        "tests/test_v08_executable_recipes.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 316.52769749995787,
+      "output_log": "02.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.06638845801353455,
+      "output_log": "03.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.6655913749709725,
+      "output_log": "04.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.09369345899904147,
+      "output_log": "05.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.06278416595887393,
+      "output_log": "06.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.2937012500478886,
+      "output_log": "07.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-m",
+        "not real_container"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 253.07564479095163,
+      "output_log": "08.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-m",
+        "not real_container"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 362.94857770903036,
+      "output_log": "09.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-release-sjknc1ff/coverage.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.2539827919681557,
+      "output_log": "10.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.9051027920213528,
+      "output_log": "11.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-release-sjknc1ff/coverage.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.03123891697032377,
+      "output_log": "12.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-release-sjknc1ff/coverage.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.030649500025901943,
+      "output_log": "13.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.4670708749908954,
+      "output_log": "14.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.35160037502646446,
+      "output_log": "15.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.3516719589824788,
+      "output_log": "16.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.34988479100866243,
+      "output_log": "17.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.35101691697491333,
+      "output_log": "18.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.3527345830225386,
+      "output_log": "19.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.4270004159770906,
+      "output_log": "20.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 6.5471872499911115,
+      "output_log": "21.log"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.0541927500162274,
+      "output_log": "22.log"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 2.6377370419795625,
+      "output_log": "23.log"
+    }
+  ],
+  "coverage": {
+    "covered_lines": 20784,
+    "num_statements": 24336,
+    "percent_covered": 81.66358595194085,
+    "percent_covered_display": "82",
+    "missing_lines": 3552,
+    "excluded_lines": 225,
+    "percent_statements_covered": 85.4043392504931,
+    "percent_statements_covered_display": "85",
+    "num_branches": 8124,
+    "num_partial_branches": 1858,
+    "covered_branches": 5724,
+    "missing_branches": 2400,
+    "percent_branches_covered": 70.45790251107829,
+    "percent_branches_covered_display": "70"
+  },
+  "grant": {
+    "authorization_id": "onboarding",
+    "operations": 302,
+    "reserved_model_turns": 2,
+    "elapsed_seconds": 93.31732538260985,
+    "cash_usd": "0",
+    "remaining_turn_allowances": 298,
+    "remaining_seconds": 3506.68267461739
+  },
+  "runner_sha256": "3be1e838014e1c14ccb6212c8604efd250bfb8ad75c934689403f6373be9daca",
+  "log_directory": "execution-boundary-logs"
+}

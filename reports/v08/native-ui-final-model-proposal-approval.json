@@ -1,0 +1,117 @@
+{
+  "plan_id": "plan_ed56d5d877f54e5bbd409b860549681f",
+  "preview": {
+    "campaign_allowance": {
+      "scope": "fresh_campaign_reservations",
+      "stages": [
+        {
+          "stage": "trial",
+          "calls_minimum": 282,
+          "calls_upper": 282,
+          "operations_upper": 282,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 18330.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "warmup",
+          "calls_minimum": 0,
+          "calls_upper": 0,
+          "operations_upper": 0,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "router_setup",
+          "calls_minimum": 283,
+          "calls_upper": 283,
+          "operations_upper": 283,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 8490,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "grader_validation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "report_generation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "generation_and_proposal",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.03993283398449421,
+          "cash_reservation_upper_usd": "0"
+        }
+      ],
+      "upper_allowance": {
+        "operations": 568,
+        "model_turns": 0,
+        "elapsed_seconds": 26880.039932833984,
+        "cash_usd": "0"
+      },
+      "prior_operations": [
+        {
+          "operation_id": "setup_cost_3ea8895b49b0497e91554bf51fecd807",
+          "stage": "static_inspection",
+          "state": "complete",
+          "elapsed_seconds": 0.001323375036008656,
+          "reserved": {
+            "max_operations": 1,
+            "max_model_turns": 0,
+            "max_elapsed_seconds": 0.001323375036008656,
+            "max_cash_usd": "0"
+          }
+        }
+      ],
+      "gaps": [],
+      "fits_remaining": true,
+      "authorization_changed": false,
+      "automatic_retries": 0,
+      "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+    },
+    "purpose": "assessment",
+    "adapter_eligibility": [],
+    "minimum_trial_model_turns": 0,
+    "trial_elapsed_upper_seconds": 18330.0,
+    "evaluation_stage": null,
+    "screening_trial_model_turns": 0,
+    "workers": [
+      {
+        "role": "candidate",
+        "executor_id": "fixture.candidate",
+        "model_worker_profiles": []
+      },
+      {
+        "role": "baseline",
+        "executor_id": "fixture.baseline",
+        "model_worker_profiles": []
+      }
+    ],
+    "model_worker_profile_count": 0,
+    "measurement_concurrency": 1,
+    "remaining": {
+      "model_turns": 0,
+      "elapsed_seconds": 29978.20816900744,
+      "operations": 9431,
+      "cash_usd": "0"
+    },
+    "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+  },
+  "counters_unchanged": true
+}

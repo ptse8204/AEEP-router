@@ -1,0 +1,557 @@
+{
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "operation_id": "native-project-preflight-next:planning_native_sol61_trusted_project_preflight_next",
+  "task_scope_digest": "0efa5edb632805595ad858c9e4ec47313066c2b9c0cacd51b6f41dba3cc9a782",
+  "setup_operation_id": "native-setup:planning_native-sol61-trusted-project-preflight-next-setup",
+  "setup_elapsed_seconds": 0.512949459021911,
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 23277,
+  "classification": "turn-free trusted-project native profile and MCP discovery preflight; no model or planner execution",
+  "configuration_layers": [
+    {
+      "type": "sessionFlags",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    },
+    {
+      "type": "project",
+      "owned_project_layer": true,
+      "disabled_reason": null
+    },
+    {
+      "type": "user",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    },
+    {
+      "type": "system",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    }
+  ],
+  "project_config_layer_present": true,
+  "project_config_layer_enabled": true,
+  "permission_acknowledgement": {
+    "model": "gpt-6.1-sol",
+    "cwd": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq",
+    "approvalPolicy": "never",
+    "approvalsReviewer": "user",
+    "profile": {
+      "id": "aeep-native-task",
+      "extends": null
+    }
+  },
+  "inventory": [
+    {
+      "name": "aeep_task_d54c93d8f02b450c8b01f0a3f2e512e2",
+      "tools": [
+        "aeep_recipe_f468b36bc594"
+      ]
+    },
+    {
+      "name": "code-review",
+      "tools": []
+    },
+    {
+      "name": "codex_app",
+      "tools": []
+    },
+    {
+      "name": "computer-use",
+      "tools": []
+    },
+    {
+      "name": "cua_repl",
+      "tools": [
+        "js",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "node_repl",
+      "tools": [
+        "js",
+        "js_add_node_module_dir",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "shortlist",
+      "tools": [
+        "add_to_queue",
+        "bot_control",
+        "get_application_status",
+        "get_applied_jobs",
+        "manage_profile",
+        "manage_queue",
+        "manage_resumes",
+        "prefill_job",
+        "search_jobs"
+      ]
+    },
+    {
+      "name": "sweet-saver-fare",
+      "tools": []
+    },
+    {
+      "name": "tunnelMcp",
+      "tools": [
+        "connect_stdio_mcp",
+        "create_tunnel_runtime",
+        "install_or_select_tunnel_client",
+        "list_runtime_aliases",
+        "runtime_status",
+        "stop_runtime"
+      ]
+    }
+  ],
+  "owned_mcp_launch_errors": [],
+  "selected_server": "aeep_task_d54c93d8f02b450c8b01f0a3f2e512e2",
+  "selected_tool": "aeep_recipe_f468b36bc594",
+  "preflight_passed": true,
+  "actual_model_turns_started": 0,
+  "host_cleanup_confirmed": true,
+  "uninstall": {
+    "activation_id": "task_d54c93d8f02b450c8b01f0a3f2e512e2",
+    "activation_digest": "3f91bb8c7e5fc1cc8a9972f5b39b3e17f8bbd29644e003e3f7159554e2d386e4",
+    "scope_digest": "0efa5edb632805595ad858c9e4ec47313066c2b9c0cacd51b6f41dba3cc9a782",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/task_d54c93d8f02b450c8b01f0a3f2e512e2.json",
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/codex-config.lock"
+    ],
+    "codex_mcp_entry": "absent",
+    "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.codex/config.toml",
+    "retained_artifacts": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/codex-config.lock"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 0,
+    "attempts_remaining": 3,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "activation_inspection": {
+    "activation_id": "task_d54c93d8f02b450c8b01f0a3f2e512e2",
+    "activation_digest": "3f91bb8c7e5fc1cc8a9972f5b39b3e17f8bbd29644e003e3f7159554e2d386e4",
+    "scope_digest": "0efa5edb632805595ad858c9e4ec47313066c2b9c0cacd51b6f41dba3cc9a782",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/task_d54c93d8f02b450c8b01f0a3f2e512e2.json",
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/codex-config.lock"
+    ],
+    "codex_mcp_entry": "absent",
+    "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.codex/config.toml",
+    "retained_artifacts": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-rka2u0oq/.aeep/task-profiles/codex-config.lock"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 0,
+    "attempts_remaining": 3,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "elapsed_seconds": 3.220195459201932,
+  "process_samples": [
+    {
+      "elapsed_seconds": 0.15350879216566682,
+      "process_count": 2,
+      "rss_bytes": 129720320
+    },
+    {
+      "elapsed_seconds": 0.21294491714797914,
+      "process_count": 4,
+      "rss_bytes": 146878464
+    },
+    {
+      "elapsed_seconds": 0.2701947500463575,
+      "process_count": 5,
+      "rss_bytes": 150269952
+    },
+    {
+      "elapsed_seconds": 0.3269704591948539,
+      "process_count": 4,
+      "rss_bytes": 154005504
+    },
+    {
+      "elapsed_seconds": 0.3842157500330359,
+      "process_count": 8,
+      "rss_bytes": 236056576
+    },
+    {
+      "elapsed_seconds": 0.44153820909559727,
+      "process_count": 9,
+      "rss_bytes": 312651776
+    },
+    {
+      "elapsed_seconds": 0.49857550021260977,
+      "process_count": 9,
+      "rss_bytes": 336678912
+    },
+    {
+      "elapsed_seconds": 0.5555824590846896,
+      "process_count": 9,
+      "rss_bytes": 353730560
+    },
+    {
+      "elapsed_seconds": 0.6121558342128992,
+      "process_count": 9,
+      "rss_bytes": 371621888
+    },
+    {
+      "elapsed_seconds": 0.6691769591998309,
+      "process_count": 9,
+      "rss_bytes": 381136896
+    },
+    {
+      "elapsed_seconds": 0.7257332920562476,
+      "process_count": 9,
+      "rss_bytes": 394838016
+    },
+    {
+      "elapsed_seconds": 0.7832502501551062,
+      "process_count": 13,
+      "rss_bytes": 498356224
+    },
+    {
+      "elapsed_seconds": 0.8396966671571136,
+      "process_count": 14,
+      "rss_bytes": 560488448
+    },
+    {
+      "elapsed_seconds": 0.8969939171802253,
+      "process_count": 14,
+      "rss_bytes": 583036928
+    },
+    {
+      "elapsed_seconds": 0.9541660840623081,
+      "process_count": 12,
+      "rss_bytes": 578056192
+    },
+    {
+      "elapsed_seconds": 1.0112877921201289,
+      "process_count": 11,
+      "rss_bytes": 591425536
+    },
+    {
+      "elapsed_seconds": 1.068166834069416,
+      "process_count": 11,
+      "rss_bytes": 600289280
+    },
+    {
+      "elapsed_seconds": 1.1247597092296928,
+      "process_count": 11,
+      "rss_bytes": 611774464
+    },
+    {
+      "elapsed_seconds": 1.1816706252284348,
+      "process_count": 11,
+      "rss_bytes": 617820160
+    },
+    {
+      "elapsed_seconds": 1.238482000073418,
+      "process_count": 11,
+      "rss_bytes": 623587328
+    },
+    {
+      "elapsed_seconds": 1.2948438751045614,
+      "process_count": 11,
+      "rss_bytes": 623587328
+    },
+    {
+      "elapsed_seconds": 1.3523854590021074,
+      "process_count": 11,
+      "rss_bytes": 623587328
+    },
+    {
+      "elapsed_seconds": 1.4111740421503782,
+      "process_count": 11,
+      "rss_bytes": 626913280
+    },
+    {
+      "elapsed_seconds": 1.469503709115088,
+      "process_count": 11,
+      "rss_bytes": 626913280
+    },
+    {
+      "elapsed_seconds": 1.5307143342215568,
+      "process_count": 11,
+      "rss_bytes": 626913280
+    },
+    {
+      "elapsed_seconds": 1.5908267500344664,
+      "process_count": 11,
+      "rss_bytes": 626913280
+    },
+    {
+      "elapsed_seconds": 1.6511472091078758,
+      "process_count": 11,
+      "rss_bytes": 627437568
+    },
+    {
+      "elapsed_seconds": 1.7109980001114309,
+      "process_count": 11,
+      "rss_bytes": 627437568
+    },
+    {
+      "elapsed_seconds": 1.7724568340927362,
+      "process_count": 11,
+      "rss_bytes": 627650560
+    },
+    {
+      "elapsed_seconds": 1.8332545841112733,
+      "process_count": 11,
+      "rss_bytes": 627650560
+    },
+    {
+      "elapsed_seconds": 1.8937775420490652,
+      "process_count": 11,
+      "rss_bytes": 627732480
+    },
+    {
+      "elapsed_seconds": 1.9547468752134591,
+      "process_count": 11,
+      "rss_bytes": 627879936
+    },
+    {
+      "elapsed_seconds": 2.015073792077601,
+      "process_count": 11,
+      "rss_bytes": 629993472
+    },
+    {
+      "elapsed_seconds": 2.074522042181343,
+      "process_count": 11,
+      "rss_bytes": 629993472
+    },
+    {
+      "elapsed_seconds": 2.133957125013694,
+      "process_count": 11,
+      "rss_bytes": 629993472
+    },
+    {
+      "elapsed_seconds": 2.1937885840889066,
+      "process_count": 11,
+      "rss_bytes": 629993472
+    },
+    {
+      "elapsed_seconds": 2.2532290420494974,
+      "process_count": 11,
+      "rss_bytes": 629993472
+    },
+    {
+      "elapsed_seconds": 2.316322750179097,
+      "process_count": 11,
+      "rss_bytes": 630173696
+    },
+    {
+      "elapsed_seconds": 2.3798304172232747,
+      "process_count": 11,
+      "rss_bytes": 630173696
+    },
+    {
+      "elapsed_seconds": 2.443374542053789,
+      "process_count": 11,
+      "rss_bytes": 630173696
+    },
+    {
+      "elapsed_seconds": 2.503255750052631,
+      "process_count": 11,
+      "rss_bytes": 630173696
+    },
+    {
+      "elapsed_seconds": 2.562514250166714,
+      "process_count": 11,
+      "rss_bytes": 630435840
+    },
+    {
+      "elapsed_seconds": 2.622894792119041,
+      "process_count": 11,
+      "rss_bytes": 630435840
+    },
+    {
+      "elapsed_seconds": 2.6821684590540826,
+      "process_count": 11,
+      "rss_bytes": 630435840
+    },
+    {
+      "elapsed_seconds": 2.7410358341876417,
+      "process_count": 11,
+      "rss_bytes": 630435840
+    },
+    {
+      "elapsed_seconds": 2.8046770840883255,
+      "process_count": 11,
+      "rss_bytes": 630435840
+    },
+    {
+      "elapsed_seconds": 2.8644550000317395,
+      "process_count": 11,
+      "rss_bytes": 630484992
+    },
+    {
+      "elapsed_seconds": 2.926833667093888,
+      "process_count": 11,
+      "rss_bytes": 630484992
+    },
+    {
+      "elapsed_seconds": 2.988357459194958,
+      "process_count": 11,
+      "rss_bytes": 630484992
+    },
+    {
+      "elapsed_seconds": 3.048786000115797,
+      "process_count": 11,
+      "rss_bytes": 630665216
+    },
+    {
+      "elapsed_seconds": 3.1084681251086295,
+      "process_count": 11,
+      "rss_bytes": 630665216
+    },
+    {
+      "elapsed_seconds": 3.1674221251159906,
+      "process_count": 11,
+      "rss_bytes": 630665216
+    }
+  ],
+  "owned_process_observations": [
+    {
+      "pid": 77962,
+      "create_time": 1790761271.129852,
+      "cpu_seconds": 0.51220816,
+      "peak_rss_bytes": 167952384
+    },
+    {
+      "pid": 77974,
+      "create_time": 1790761271.179996,
+      "cpu_seconds": 0.023166875,
+      "peak_rss_bytes": 5746688
+    },
+    {
+      "pid": 77976,
+      "create_time": 1790761271.199943,
+      "cpu_seconds": 0.019940874,
+      "peak_rss_bytes": 5353472
+    },
+    {
+      "pid": 77982,
+      "create_time": 1790761271.225776,
+      "cpu_seconds": 0.028843874,
+      "peak_rss_bytes": 7610368
+    },
+    {
+      "pid": 78010,
+      "create_time": 1790761271.384208,
+      "cpu_seconds": 0.07240029,
+      "peak_rss_bytes": 21037056
+    },
+    {
+      "pid": 78011,
+      "create_time": 1790761271.384229,
+      "cpu_seconds": 0.441168208,
+      "peak_rss_bytes": 98648064
+    },
+    {
+      "pid": 78012,
+      "create_time": 1790761271.384231,
+      "cpu_seconds": 0.038239709,
+      "peak_rss_bytes": 53018624
+    },
+    {
+      "pid": 78022,
+      "create_time": 1790761271.38662,
+      "cpu_seconds": 0.13992258000000002,
+      "peak_rss_bytes": 38793216
+    },
+    {
+      "pid": 78024,
+      "create_time": 1790761271.435949,
+      "cpu_seconds": 0.070663959,
+      "peak_rss_bytes": 20365312
+    },
+    {
+      "pid": 78025,
+      "create_time": 1790761271.78861,
+      "cpu_seconds": 0.032506083,
+      "peak_rss_bytes": 53133312
+    },
+    {
+      "pid": 78027,
+      "create_time": 1790761271.792648,
+      "cpu_seconds": 0.43824209599999997,
+      "peak_rss_bytes": 97812480
+    },
+    {
+      "pid": 78029,
+      "create_time": 1790761271.792713,
+      "cpu_seconds": 0.069116207,
+      "peak_rss_bytes": 20791296
+    },
+    {
+      "pid": 78038,
+      "create_time": 1790761271.79318,
+      "cpu_seconds": 0.135317916,
+      "peak_rss_bytes": 38834176
+    },
+    {
+      "pid": 78039,
+      "create_time": 1790761271.819331,
+      "cpu_seconds": 0.06743596,
+      "peak_rss_bytes": 20381696
+    }
+  ],
+  "event_counts": {
+    "remoteControl/status/changed": 1,
+    "thread/started": 1,
+    "mcpServer/startupStatus/updated": 18,
+    "account/updated": 1
+  },
+  "tool_events": [],
+  "auxiliary_actions": [],
+  "owned_mcp_startup_events": [
+    {
+      "owned_server": true,
+      "status": "starting",
+      "error_code": null,
+      "error_present": false
+    },
+    {
+      "owned_server": true,
+      "status": "ready",
+      "error_code": null,
+      "error_present": false
+    },
+    {
+      "owned_server": true,
+      "status": "ready",
+      "error_code": null,
+      "error_present": false
+    }
+  ],
+  "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+  "unexpected_tool_detection": "post-execution observation only, not preventative enforcement",
+  "network_observations": "unknown; no network telemetry collected",
+  "resource_limits": "sampled process tree; rapid and between-sample child lifetimes can be missed; includes host/MCP/AEEP descendants observed, no whole-machine baseline",
+  "model_identity": "requested gpt-6.1-sol; reroute notification if observed; absence of reroute is not independent runtime identity",
+  "grant_after": [
+    8557,
+    2523,
+    73638.97412540275,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "release_ready": false,
+  "replay_allowed": false,
+  "tool_results_observed": 0
+}

@@ -1,0 +1,73 @@
+{
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "review_sha256": "d7a61f48e686698e2c87a42aa4133caaf321547067168909e4389ec3f21a133d",
+  "driver_sha256": "5f55d491da65061c9b93a3edf003f58012c324621782145ad752f09a8be4c234",
+  "scope_digest": "0d90d8c969fab2aecb548e3be171e36afcaccae0804f1447fcb7bdb7af86e4b3",
+  "executor_fingerprint": "sha256:08ca29a579b042f4416227660d1b78644c6b1b90db6b06f97f4e17e31954914b",
+  "receipt_id": "rcpt_da941a986d0c4265896d6707b8d83d04",
+  "effect_sha256": "0acc2ec023b9b7d04f9dda3a9cf36cdca86a8e678ce845e09da6f6f5c77f41b7",
+  "task_attempts": 1,
+  "task_replays": 0,
+  "phases": [
+    {
+      "phase": "reviewed_before_execution",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 873256,
+        "allocated_bytes": 876544
+      },
+      "elapsed_ms": 186.43158301711082
+    },
+    {
+      "phase": "failed_write_before_close",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 1174016,
+        "allocated_bytes": 1175552
+      },
+      "elapsed_ms": 349.07033294439316
+    },
+    {
+      "phase": "closed_unresolved",
+      "disk": {
+        "files": 1,
+        "logical_bytes": 815104,
+        "allocated_bytes": 815104
+      },
+      "elapsed_ms": 350.52041593007743
+    },
+    {
+      "phase": "reconciled_after_restart",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 901464,
+        "allocated_bytes": 905216
+      },
+      "elapsed_ms": 358.10854099690914
+    },
+    {
+      "phase": "reconciled_closed",
+      "disk": {
+        "files": 1,
+        "logical_bytes": 815104,
+        "allocated_bytes": 815104
+      },
+      "elapsed_ms": 358.39308286085725
+    }
+  ],
+  "recovery_wall_ms": 358.39337506331503,
+  "recovery_retained_bytes": 815104,
+  "recovery_local_checks": {
+    "wall_within_frozen_bound": true,
+    "retention_within_frozen_bound": true,
+    "allowance_not_refunded": true,
+    "effect_reverted": true
+  },
+  "operator_attestation": "Locally observed synthetic effect was deleted and exact-reviewed reconciliation applied; not automated verification of arbitrary effects",
+  "model_turns": 0,
+  "source_unchanged": true,
+  "temporary_measurement_store_removed_after_report": true,
+  "resource_gate_complete": false,
+  "release_ready": false,
+  "evidence_retention_limitation": "Disposable synthetic recovery database removed after measurement; the report retains phase sizes, receipt ID and reviewed definitions but not original canonical receipt/reconciliation storage. This measurement cannot satisfy durable recovery release verification; no replay to repair this limitation."
+}

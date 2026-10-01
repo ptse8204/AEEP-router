@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Protocol
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .models import SideEffect, StrictModel, new_id, utc_now
 
@@ -87,6 +87,15 @@ _TRANSITIONS: dict[ExecutionAttemptState, frozenset[ExecutionAttemptState]] = {
 
 
 class ExecutionAttempt(StrictModel):
+    task_scope_digest: str | None = Field(default=None, pattern=r'^[a-f0-9]{64}$')
+
+    @model_serializer(mode='wrap')
+    def preserve_unscoped(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+        result: dict[str, object] = handler(self)
+        if self.task_scope_digest is None:
+            result.pop('task_scope_digest', None)
+        return result
+
     attempt_id: str = Field(default_factory=lambda: new_id("attempt"), min_length=1, max_length=200)
     decision_id: str = Field(min_length=1, max_length=200)
     prepared_id: str | None = Field(default=None, max_length=200)

@@ -1,0 +1,115 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_07db4c8a83424ed7aee5e9a50deada88",
+      "operation_id": "linux-lifecycle-runtime:conformance_probe_07db4c8a83424ed7aee5e9a50deada88",
+      "image": "sha256:d0b4298deb1d4592abe2046c3269da983e0dee502b6bc2d677b3429744902934",
+      "worker_digest": "3e2e58c8ff6e708d7afa34ddd7df47a9e1faade619170779c3f92f0a54135160",
+      "cleanup_confirmed": true,
+      "protocol_passed": false,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "observed_allowed_profiles": {
+        "aeep": true,
+        "aeep-task-child": true
+      },
+      "effective_requirements_matches": true,
+      "own_server_ready_before_guard": true,
+      "observed": {
+        "guard": {
+          "pid": 2,
+          "ppid": 1,
+          "sid": 1,
+          "pgid": 1,
+          "uid": 65534,
+          "coordinator_visible_owned_chain": false,
+          "reported_session_group_matches_leader": false
+        },
+        "exit_code": 0,
+        "stderr_bytes": 0,
+        "payload": {
+          "limits_after_exec": [
+            0,
+            0
+          ],
+          "pid_after_exec": 2,
+          "fork_denied": true,
+          "fork_error_type": "BlockingIOError",
+          "spawn_denied": true,
+          "spawn_error_type": "BlockingIOError",
+          "raise_limit_denied": true,
+          "raise_limit_error_type": "ValueError",
+          "/workspace/private/state.json:read_denied": true,
+          "/workspace/private/state.json:write_denied": true,
+          "/workspace/task/input:write_denied": true,
+          "output_written": true
+        },
+        "linger_guard": {
+          "pid": 2,
+          "ppid": 1,
+          "sid": 1,
+          "pgid": 1,
+          "uid": 65534,
+          "coordinator_visible_owned_chain": false,
+          "reported_session_group_matches_leader": false
+        },
+        "linger_live_before_cleanup": true,
+        "private_state_unchanged": true,
+        "model_command": {
+          "canary_read_denied": true,
+          "canary_write_denied": true,
+          "server_read_denied": true,
+          "server_write_denied": true,
+          "requirements_read_denied": false,
+          "requirements_write_denied": true,
+          "config_read_denied": true,
+          "config_write_denied": true
+        },
+        "independent_private_state_unchanged": true
+      },
+      "witness_argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "exec",
+        "--user",
+        "65534:65534",
+        "aeep-2da20142ed2b0b2fdff523c2ac6e2471",
+        "/usr/local/bin/python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib;p=pathlib.Path('/workspace/private/state.json');print(json.dumps({'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}))"
+      ],
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:54:51.943048Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:54:51.943075Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "elapsed_seconds": 3.723129624966532,
+      "canonical_record_digest": "70511cf9cf828a9a043a705b3f4fce4ead8f99bf31c7ea63276ba62b5083b4b0"
+    }
+  },
+  "probe_supported": false,
+  "classification": "dedicated_child_lifecycle_not_established",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8640,
+    "model_turns": 2535,
+    "elapsed_seconds": 74792.08767619403,
+    "cash_usd": "0.0"
+  }
+}

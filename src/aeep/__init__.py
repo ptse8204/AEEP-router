@@ -10,6 +10,20 @@ from .accounting import (
     cash_estimate_from_quote,
 )
 from .artifact_store import ContentArtifactStore, ResolvedArtifact
+from .assessment.models import (
+    AssessmentAuthorization,
+    AssessmentEnvironment,
+    AssessmentLimits,
+    AssessmentPlan,
+    AssessmentPlanningRequest,
+    AssessmentProgress,
+    AssessmentReport,
+    AssessmentSubject,
+    DefinitionProposal,
+    RecipeDefinition,
+    ScopedAdmission,
+)
+from .assessment.service import AssessmentService
 from .attempts import AttemptService, ExecutionAttempt, ExecutionAttemptState
 from .benchmarking import (
     BenchmarkCampaignReport,
@@ -237,6 +251,15 @@ __all__ = [
     "ActionRequest",
     "AgentBudget",
     "ArtifactReference",
+    "AssessmentAuthorization",
+    "AssessmentEnvironment",
+    "AssessmentLimits",
+    "AssessmentPlan",
+    "AssessmentPlanningRequest",
+    "AssessmentProgress",
+    "AssessmentReport",
+    "AssessmentService",
+    "AssessmentSubject",
     "AttemptService",
     "AuthorizationKind",
     "AuthorizationMeterQuantity",
@@ -289,6 +312,7 @@ __all__ = [
     "DSHLiveProofReport",
     "DSHPluginCampaignReport",
     "DSHProofReport",
+    "DefinitionProposal",
     "EconomicBenchmarkOracle",
     "EconomicBenchmarkRouteType",
     "EconomicBenchmarkTrial",
@@ -372,6 +396,7 @@ __all__ = [
     "QuoteRequest",
     "QuoteRequestV2",
     "RateCardSnapshot",
+    "RecipeDefinition",
     "ReconciliationStatus",
     "RefundReceiptV2",
     "RegistryCandidate",
@@ -391,6 +416,7 @@ __all__ = [
     "RoutingValueReport",
     "RoutingValueTrial",
     "SQLiteProviderOperationStore",
+    "ScopedAdmission",
     "SettlementEvidence",
     "SettlementReceipt",
     "SettlementStatus",

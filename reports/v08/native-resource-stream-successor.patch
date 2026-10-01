@@ -1,0 +1,193 @@
+--- native-no-aeep-baseline-child-v3.py
++++ native-no-aeep-baseline-child-stream.py
+@@ -1,9 +1,17 @@
+ """Frozen-resource baseline: stdlib-only coordinator; no AEEP imports/service."""
+ import asyncio,base64,hashlib,json,os,signal,subprocess,sys,time,traceback
+ from pathlib import Path
++
++def file_sha256(path):
++    digest = hashlib.sha256()
++    with Path(path).open("rb") as source:
++        for chunk in iter(lambda: source.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
+ async def main(p):
+-    assert hashlib.sha256(open(p['binary'],'rb').read()).hexdigest()==p['binary_sha256']
+-    assert hashlib.sha256(open(p['python'],'rb').read()).hexdigest()==p['python_sha256']
++    assert file_sha256(p['binary'])==p['binary_sha256']
++    assert file_sha256(p['python'])==p['python_sha256']
+     assert hashlib.sha256(p['guard'].encode()).hexdigest()==p['guard_sha256']
+     process=None;pending={};next_id=0;target=None;stdout=bytearray();stderr_bytes=0;ready=asyncio.Event();prefix=bytearray();fatal=None;read_task=None;drain_task=None
+     def identity(pid):
+--- native-sol61-resource-full-path-aeep-final.py
++++ native-sol61-resource-full-path-aeep-stream.py
+@@ -3,6 +3,14 @@
+ from collections import Counter
+ from datetime import timedelta
+ from pathlib import Path
++
++def file_sha256(path):
++    digest = hashlib.sha256()
++    with Path(path).open("rb") as source:
++        for chunk in iter(lambda: source.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
+ import psutil
+ from aeep.assessment.models import AssessmentPlanningRequest, AssessmentLimits
+ from aeep.assessment.repository import AssessmentRepository
+@@ -62,7 +70,7 @@
+     assert json.loads(BOUNDARY_RECORD.read_text())["source_digest"]==SOURCE
+     main_router=Router.from_manifest(ROOT/'.aeep/live-review-v3/aeep.json');repo=AssessmentRepository(main_router.store)
+     old=AssessmentPlanningRequest.model_validate(repo.get('planning_request','planning_8e8a10fdfd7f49b891cf9f3f44c35228'))
+-    setup_definition=Preparation(source_digest=SOURCE,driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),workbook_program_sha256=hashlib.sha256((ASSETS/'workbook_program.py').read_bytes()).hexdigest(),literal_fixtures_sha256=hashlib.sha256((ASSETS/'workbook-grader-fixtures.json').read_bytes()).hexdigest())
++    setup_definition=Preparation(source_digest=SOURCE,driver_sha256=file_sha256(Path(__file__)),workbook_program_sha256=file_sha256((ASSETS/'workbook_program.py')),literal_fixtures_sha256=file_sha256((ASSETS/'workbook-grader-fixtures.json')))
+     setup_identity=Path(__file__).stem+'-setup'
+     setup_mapping=repo.put('native_host_setup',setup_identity,setup_definition);repo.review(setup_mapping)
+     setup_request=old.model_copy(update={'plan_id':'planning_'+setup_identity,'mapping_digest':setup_mapping,'definition_digests':[*old.definition_digests,setup_mapping]})
+@@ -71,7 +79,7 @@
+     setup_operation='native-setup:'+setup_request.plan_id
+     repo.reserve(setup_request,setup_operation,AssessmentLimits(max_operations=1,max_elapsed_seconds=40),stage='native_fixture_scope_setup')
+     setup_started=time.perf_counter()
+-    result_path=REPORTS/'native-sol61-resource-full-path-aeep-result-288e.json'; assert not result_path.exists()
++    result_path=REPORTS/'native-sol61-resource-full-path-aeep-stream-result.json'; assert not result_path.exists()
+     directory=Path(tempfile.mkdtemp(prefix='aeep-sol61-model-journey-',dir=ROOT)).resolve(); scratch=directory/'scratch'; scratch.mkdir()
+     generated=subprocess.run([str(PYTHON),'-I',str(ASSETS/'workbook_program.py'),'generate'],input=json.dumps({'seed':107,'stages':[{'split':'demo','count':3}]}),text=True,capture_output=True,check=True,timeout=15)
+     generated_cases=json.loads(generated.stdout)['cases']
+@@ -79,26 +87,26 @@
+     fault_input=dict(cases[0]['input'],row_bound=cases[0]['input']['row_bound']+1)
+     source=(ASSETS/'workbook_program.py').read_text(); fault=json.loads((ASSETS/'workbook-faults.json').read_text())['stale_value']
+     prefix=subprocess.run([str(PYTHON),'-I','-c','import sys;print(sys.prefix)'],check=True,capture_output=True,text=True).stdout.strip()
+-    boundary=NativeSandboxConfig(binary=str(BINARY),binary_sha256='sha256:'+hashlib.sha256(BINARY.read_bytes()).hexdigest(),project_root=str(directory),read_roots=[str(Path(prefix).resolve()),str(ROOT/'AGENTS.md')],write_roots=[str(scratch)],single_process=True,python_binary=str(PYTHON.resolve()),python_sha256='sha256:'+hashlib.sha256(PYTHON.resolve().read_bytes()).hexdigest())
++    boundary=NativeSandboxConfig(binary=str(BINARY),binary_sha256='sha256:'+file_sha256(BINARY),project_root=str(directory),read_roots=[str(Path(prefix).resolve()),str(ROOT/'AGENTS.md')],write_roots=[str(scratch)],single_process=True,python_binary=str(PYTHON.resolve()),python_sha256='sha256:'+file_sha256(PYTHON.resolve()))
+     recipe=workbook_recipe(); spec=recipe.extension.reference.model_copy(deep=True);spec.id='native.workbook.sol61-model-journey';spec.input_schema=recipe.input_schema;spec.output_schema=recipe.output_schema
+     program="import json,sys;ns={'__name__':'reference'};exec("+repr(source)+",ns);inp=json.load(sys.stdin);print(json.dumps(ns['reference'](inp)))"
+     spec.config={**spec.config,'argv':[str(PYTHON),'-I','-c',program],'native_sandbox':boundary.model_dump(mode='json'),'env':{'TMPDIR':str(scratch)},'max_output_bytes':200000}
+     spec.validators=[ValidationSpec(kind=ValidationKind.CALLBACK,config={'name':'aeep.workbook.native.v1','implementation_digest':implementation_digest()})]
+     manifest=directory/'aeep.json';manifest.write_text(Manifest(database=str(directory/'.aeep/state.db'),executors=[spec]).model_dump_json())
+     task=Router.from_manifest(manifest);task_repo=AssessmentRepository(task.store);task_repo.review(task_repo.put('recipe',recipe.recipe_id,recipe))
+-    scope=TaskScope(scope_id='sol61-resource-full-path-aeep',project_root=str(directory),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.READ,max_attempts=1,max_attempt_seconds=30,expires_at=utc_now()+timedelta(minutes=10))
++    scope=TaskScope(scope_id='sol61-resource-full-path-aeep-stream',project_root=str(directory),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.READ,max_attempts=1,max_attempt_seconds=30,expires_at=utc_now()+timedelta(minutes=10))
+     scope_digest=task_repo.put('task_scope',scope.scope_id,scope);task_repo.review(scope_digest);activation=activate(task,scope.scope_id)
+     service=AEEPToolService(task,profile='task',task_activation=activation.activation_id);tools=service.list_tools();assert len(tools)==1;tool=tools[0]['name']
+     inputs=[cases[0]['input']]
+     prompt='No model prompt dispatched; operator-owned direct MCP protocol exercise.'
+     launch_table=tomllib.loads((directory/'.codex/config.toml').read_text())['mcp_servers']['aeep_'+activation.activation_id]
+-    launcher={**launch_table,'command_sha256':hashlib.sha256(Path(launch_table['command']).resolve().read_bytes()).hexdigest()}
+-    definition=Definition(generated_launcher=launcher,binary_sha256=boundary.binary_sha256,executor_fingerprint=executor_fingerprint(spec),scope_digest=scope_digest,prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),input_hashes=[hashlib.sha256(json.dumps(x,sort_keys=True).encode()).hexdigest() for x in inputs],native_overrides=boundary.permission_overrides(),inherited_instruction_sha256=hashlib.sha256((ROOT/'AGENTS.md').read_bytes()).hexdigest(),native_boundary_evidence_sha256=hashlib.sha256(BOUNDARY_RECORD.read_bytes()).hexdigest(),native_boundary_log_sha256=hashlib.sha256(BOUNDARY_LOG.read_bytes()).hexdigest(),setup_operation_id=setup_operation)
+-    mapping=repo.put('native_host_diagnostic','sol61-resource-full-path-aeep',definition);repo.review(mapping)
+-    req=old.model_copy(update={'plan_id':'planning_native_sol61_resource_full_path_aeep','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]})
++    launcher={**launch_table,'command_sha256':file_sha256(Path(launch_table['command']).resolve())}
++    definition=Definition(generated_launcher=launcher,binary_sha256=boundary.binary_sha256,executor_fingerprint=executor_fingerprint(spec),scope_digest=scope_digest,prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),input_hashes=[hashlib.sha256(json.dumps(x,sort_keys=True).encode()).hexdigest() for x in inputs],native_overrides=boundary.permission_overrides(),inherited_instruction_sha256=file_sha256((ROOT/'AGENTS.md')),native_boundary_evidence_sha256=file_sha256(BOUNDARY_RECORD),native_boundary_log_sha256=file_sha256(BOUNDARY_LOG),setup_operation_id=setup_operation)
++    mapping=repo.put('native_host_diagnostic','sol61-resource-full-path-aeep-stream',definition);repo.review(mapping)
++    req=old.model_copy(update={'plan_id':'planning_native_sol61_resource_full_path_aeep_stream','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]})
+     request_digest=repo.put('planning_request',req.plan_id,req);repo.review(request_digest);repo.authorize(req)
+-    review={'authority':'standing September25/27 exact review delegation;September30 unfinished tests model selection','source_digest':SOURCE,'definition':definition.model_dump(),'mapping_digest':mapping,'request_digest':request_digest,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'scope':scope.model_dump(mode='json'),'activation':activation.activation_id,'schema_bytes':len(json.dumps(tools).encode()),'instructions_bytes':len(service.instructions.encode()),'prompt_bytes':len(prompt.encode()),'authentication':'Codex-owned; never accessed','global_configuration_changes':False,'new_services':False,'native_boundary_result':str(BOUNDARY_RECORD.relative_to(REPORTS)),'note':'planning request is authorization envelope only; no planner execution or managed-worker conformance'}
+-    (REPORTS/'native-sol61-resource-full-path-aeep-review-288e.json').write_text(json.dumps(review,indent=2))
++    review={'authority':'standing September25/27 exact review delegation;September30 unfinished tests model selection','source_digest':SOURCE,'definition':definition.model_dump(),'mapping_digest':mapping,'request_digest':request_digest,'driver_sha256':file_sha256(Path(__file__)),'scope':scope.model_dump(mode='json'),'activation':activation.activation_id,'schema_bytes':len(json.dumps(tools).encode()),'instructions_bytes':len(service.instructions.encode()),'prompt_bytes':len(prompt.encode()),'authentication':'Codex-owned; never accessed','global_configuration_changes':False,'new_services':False,'native_boundary_result':str(BOUNDARY_RECORD.relative_to(REPORTS)),'note':'planning request is authorization envelope only; no planner execution or managed-worker conformance'}
++    (REPORTS/'native-sol61-resource-full-path-aeep-stream-review.json').write_text(json.dumps(review,indent=2))
+     setup_elapsed=time.perf_counter()-setup_started
+     repo.finish_operation(setup_operation,elapsed_seconds=setup_elapsed)
+     operation='native-resource-full-path-aeep:'+req.plan_id;repo.reserve(req,operation,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=60),stage='native_host_resource_full_path_aeep')
+@@ -239,7 +247,7 @@
+         repo.finish_operation(operation,elapsed_seconds=elapsed,accounting=accounting)
+         record.update(elapsed_seconds=elapsed,process_samples=samples,owned_process_observations=list(processes.values()),event_counts=dict(events),tool_events=tool_events,auxiliary_actions=auxiliary_actions,owned_mcp_startup_events=startup_events,outer_host_boundary=definition.outer_host_boundary,unexpected_tool_detection=definition.unexpected_tool_detection,network_observations='unknown; no network telemetry collected',resource_limits='sampled process tree; rapid and between-sample child lifetimes can be missed; includes host/MCP/AEEP descendants observed, no whole-machine baseline',model_identity='requested gpt-6.1-sol; reroute notification if observed; absence of reroute is not independent runtime identity',grant_after=list(main_router.store._connection.execute('SELECT operations,model_turns,elapsed_seconds,cash_usd FROM assessment_grants WHERE id=?',(req.authorization_id,)).fetchone()),source_unchanged=verification_source_digest(ROOT)==SOURCE,release_ready=False,replay_allowed=False)
+         record['tool_results_observed']=len(outputs)
+-        evidence=ROOT/'.aeep/native-sol61-resource-full-path-aeep-evidence';evidence.mkdir(exist_ok=False)
++        evidence=ROOT/'.aeep/native-sol61-resource-full-path-aeep-stream-evidence';evidence.mkdir(exist_ok=False)
+         await task.close();await main_router.close()
+         import shutil
+         shutil.move(str(directory/'.aeep'),str(evidence/'task-state'));shutil.rmtree(directory)
+--- native-resource-full-path-pair-final.py
++++ native-resource-full-path-pair-stream.py
+@@ -2,6 +2,14 @@
+ import asyncio,ast,hashlib,json,os,subprocess,sys,tempfile,time,shutil
+ import psutil
+ from pathlib import Path
++
++def file_sha256(path):
++    digest = hashlib.sha256()
++    with Path(path).open("rb") as source:
++        for chunk in iter(lambda: source.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
+ from dataclasses import asdict
+ from aeep.assessment.models import AssessmentPlanningRequest,AssessmentLimits
+ from aeep.assessment.repository import AssessmentRepository
+@@ -14,6 +22,7 @@
+ SOURCE='46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236'
+ BINARY=Path('/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex')
+ PYTHON=Path('/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3').resolve()
++PINNED_EXECUTABLE_DIGESTS = {}
+ class Definition(StrictModel):
+     source_digest:str
+     files_sha256:dict[str,str]
+@@ -31,14 +40,22 @@
+     classification:str='n1 software-only incremental fresh-process footprint; no model workflow, qualification, marginal capability benefit or release/resource gate'
+ async def monitored(argv,stdin,timeout):
+     started=time.perf_counter();p=await asyncio.create_subprocess_exec(*argv,stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE,cwd=str(ROOT))
+-    stop=asyncio.Event();owned={};cpu_observed={};samples=[];metrics=_ProcessMetrics();root_handle=psutil.Process(p.pid)
++    stop=asyncio.Event();owned={};roles={};cpu_observed={};samples=[];metrics=_ProcessMetrics();root_handle=psutil.Process(p.pid)
+     async def identities():
+         last=time.perf_counter()
+         while not stop.is_set():
+             try:
+                 parent=root_handle
+                 for child in [parent,*parent.children(recursive=True)] if parent.is_running() else []:
+-                    try:owned[(child.pid,child.create_time())]=child
++                    try:
++                        identity=(child.pid,child.create_time());owned[identity]=child
++                        if identity not in roles:
++                            detail={'pid':identity[0],'create_time':identity[1],'observation':'first_seen','name':None,'executable_basename':None,'declared_executable_sha256':None,'ppid':None,'status':None,'identity_metadata':'unknown'}
++                            roles[identity]=detail
++                            try:
++                                executable=Path(child.exe())
++                                detail.update(name=child.name(),executable_basename=executable.name,ppid=child.ppid(),status=child.status(),declared_executable_sha256=PINNED_EXECUTABLE_DIGESTS.get(str(executable.resolve())),identity_metadata='observed')
++                            except psutil.Error:pass
+                     except psutil.Error:pass
+             except psutil.Error:pass
+             rss=0
+@@ -85,20 +102,21 @@
+             parsed=json.loads(out.splitlines()[-1]);safe['child_metadata']={k:v for k,v in parsed.items() if k in ('diagnostic_failed','error_type','stack','required_validator_valid','independent_grader_valid')}
+         except (ValueError,IndexError):safe['child_metadata_unavailable']=True
+         error=RuntimeError('bounded_stage_failed');error.safe_metadata=safe;raise error
+-    return json.loads(out),{'wall_ms':(time.perf_counter()-started)*1000,'sampled_process_tree':asdict(metrics),'stderr_bytes':len(err),'exit_code':p.returncode,'owned_process_identities_observed':len(owned),'owned_survivors':survivors,'owned_before_shutdown_grace':before_grace,'shutdown_grace_seconds':grace_seconds,'samples_including_shutdown_grace':samples,'observed_cpu_policy':'sum last sampled CPU per exact owned identity; very short unsampled lifetimes remain unknown'}
++    return json.loads(out),{'wall_ms':(time.perf_counter()-started)*1000,'sampled_process_tree':asdict(metrics),'stderr_bytes':len(err),'exit_code':p.returncode,'owned_process_identities_observed':len(owned),'owned_process_roles':list(roles.values()),'role_metadata_policy':'once per observed identity; declared pinned executable hash only, others unknown; no cmdline/environment; added observation overhead included','owned_survivors':survivors,'owned_before_shutdown_grace':before_grace,'shutdown_grace_seconds':grace_seconds,'samples_including_shutdown_grace':samples,'observed_cpu_policy':'sum last sampled CPU per exact owned identity; very short unsampled lifetimes remain unknown'}
+ async def main():
+     assert verification_source_digest(ROOT)==SOURCE
+-    resultpath=REPORTS/'native-resource-full-path-pair-v5-result.json';assert not resultpath.exists()
+-    native=REPORTS/'native-no-aeep-baseline-child-v3.py';aeep=REPORTS/'native-sol61-resource-full-path-aeep-final.py'
++    resultpath=REPORTS/'native-resource-full-path-pair-stream-result.json';assert not resultpath.exists()
++    native=REPORTS/'native-no-aeep-baseline-child-stream.py';aeep=REPORTS/'native-sol61-resource-full-path-aeep-stream.py'
+     guardnode=next(x.value for x in ast.parse((ROOT/'src/aeep/hosts/codex_native_process.py').read_text()).body if isinstance(x,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SINGLE_PROCESS_GUARD' for t in x.targets));guard=ast.literal_eval(guardnode)
+     paths=[Path(__file__),native,aeep,ROOT/'src/aeep/hosts/codex_native_process.py',ASSETS/'workbook_program.py',ASSETS/'workbook_grader.py',ROOT/'src/aeep/assessment/workbook_native.py']
+-    definition=Definition(source_digest=SOURCE,files_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},binary_sha256=hashlib.sha256(BINARY.read_bytes()).hexdigest(),python_sha256=hashlib.sha256(PYTHON.read_bytes()).hexdigest(),guard_sha256=hashlib.sha256(guard.encode()).hexdigest())
++    definition=Definition(source_digest=SOURCE,files_sha256={str(p.relative_to(ROOT)):file_sha256(p) for p in paths},binary_sha256=file_sha256(BINARY),python_sha256=file_sha256(PYTHON),guard_sha256=hashlib.sha256(guard.encode()).hexdigest())
++    PINNED_EXECUTABLE_DIGESTS.update({str(BINARY.resolve()):definition.binary_sha256,str(PYTHON.resolve()):definition.python_sha256})
+     router=Router.from_manifest(ROOT/'.aeep/live-review-v3/aeep.json');repo=AssessmentRepository(router.store);old=AssessmentPlanningRequest.model_validate(repo.get('planning_request','planning_8e8a10fdfd7f49b891cf9f3f44c35228'))
+-    mapping=repo.put('native_resource_pair','full-path-pair-v5',definition);repo.review(mapping);req=old.model_copy(update={'plan_id':'planning_native_resource_full_path_pair_v5','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]});digest=repo.put('planning_request',req.plan_id,req);repo.review(digest);repo.authorize(req)
++    mapping=repo.put('native_resource_pair','full-path-pair-stream',definition);repo.review(mapping);req=old.model_copy(update={'plan_id':'planning_native_resource_full_path_pair_stream','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]});digest=repo.put('planning_request',req.plan_id,req);repo.review(digest);repo.authorize(req)
+     review={'authority':'standing September25/27 finite exact review; parent authorized one software-only pair','definition':definition.model_dump(),'mapping_digest':mapping,'request_digest':digest,'authentication':'Codex-owned, no auth state accessed','measurement':'each fresh coordinator and owned descendants, startup through cleanup; external verifier stage included in end-to-end totals; setup reported separately; sampled peaks never added across sequential stages','limits':'existing frozen local checks unchanged, n1 exploratory; no retrospective engineering threshold changes','nested_aeep_accounting':'AEEP arm separately reserves its existing supported fixture/host operations; wrapper reservation covers baseline, generation, verifier and measurement overhead only'}
+-    (REPORTS/'native-resource-full-path-pair-v5-review.json').write_text(json.dumps(review,indent=2)+'\n');operation='native-resource-pair:'+req.plan_id;repo.reserve(req,operation,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=160),stage='native_resource_full_path_pair')
++    (REPORTS/'native-resource-full-path-pair-stream-review.json').write_text(json.dumps(review,indent=2)+'\n');operation='native-resource-pair:'+req.plan_id;repo.reserve(req,operation,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=160),stage='native_resource_full_path_pair')
+     started=time.perf_counter();separately_debited_aeep_seconds=0.0
+-    record={'source_digest':SOURCE,'classification':definition.classification,'model_turns':0,'review_sha256':hashlib.sha256((REPORTS/'native-resource-full-path-pair-v5-review.json').read_bytes()).hexdigest(),'resource_gate_complete':False,'samples':[]};directory=None
++    record={'source_digest':SOURCE,'classification':definition.classification,'model_turns':0,'review_sha256':file_sha256((REPORTS/'native-resource-full-path-pair-stream-review.json')),'resource_gate_complete':False,'samples':[]};directory=None
+     try:
+         cases,setup=await monitored([str(PYTHON),'-I',str(ASSETS/'workbook_program.py'),'generate'],json.dumps({'seed':107,'stages':[{'split':'demo','count':3}]}).encode(),15);case=cases['cases'][1];record['fixture_generation_stage']=setup
+         policy_setup_started=time.perf_counter();policy_setup_cpu_started=time.process_time()
+@@ -112,10 +130,10 @@
+         verifier="import json,sys,runpy;from aeep.assessment.workbook_native import validate;from aeep.validators import ValidationContext;p=json.load(sys.stdin);required=validate(ValidationContext(p['input'],p['output'])).valid is True;independent=runpy.run_path(p['grader'])['grade'](p) is True;print(json.dumps({'required_validator_valid':required,'independent_grader_valid':independent}));assert required and independent"
+         checks,verify_metrics=await monitored([sys.executable,'-c',verifier],json.dumps({'input':case['input'],'output':output,'expected':case['output'],'grader':str(ASSETS/'workbook_grader.py')}).encode(),15)
+         record['samples'].append({'arm':'stdlib_native','execution':metrics,'external_verifier':verify_metrics,'checks':checks,'native_metadata':baseline,'input_sha256':hashlib.sha256(json.dumps(case['input'],sort_keys=True).encode()).hexdigest(),'input_json_bytes':len(json.dumps(case['input']).encode()),'output_json_bytes':len(json.dumps(output).encode()),'native_permission_override_bytes':len(json.dumps(payload['permission_overrides']).encode()),'output_sha256':hashlib.sha256(json.dumps(output,sort_keys=True).encode()).hexdigest(),'retained_project_bytes':sum(p.stat().st_size for p in directory.rglob('*') if p.is_file()),'schema_bytes':0,'project_config_bytes':0,'model_context_tokens':0})
+-        aeepout,aeepmetrics=await monitored([sys.executable,str(aeep)],b'',100);aeepresult=json.loads((REPORTS/'native-sol61-resource-full-path-aeep-result-288e.json').read_text());assert json.loads((REPORTS/'native-sol61-resource-full-path-aeep-review-288e.json').read_text())['definition']['input_hashes']==[record['samples'][0]['input_sha256']],'fixture_mismatch'
++        aeepout,aeepmetrics=await monitored([sys.executable,str(aeep)],b'',100);aeepresult=json.loads((REPORTS/'native-sol61-resource-full-path-aeep-stream-result.json').read_text());assert json.loads((REPORTS/'native-sol61-resource-full-path-aeep-stream-review.json').read_text())['definition']['input_hashes']==[record['samples'][0]['input_sha256']],'fixture_mismatch'
+         separately_debited_aeep_seconds=aeepresult['setup_elapsed_seconds']+aeepresult['elapsed_seconds'];assert aeepresult['journey_passed'] and aeepresult['host_cleanup_confirmed']
+         inherited_hashes=aeepresult['inherited_mcp_name_hashes'];record['inherited_mcp_inventory_equal']=inherited_hashes==baseline['inherited_mcp_name_hashes'];assert record['inherited_mcp_inventory_equal'],'inherited_host_inventory_mismatch'
+-        record['samples'].append({'arm':'generated_project_mcp_aeep','execution_including_setup_and_verifier':aeepmetrics,'detail_result':'native-sol61-resource-full-path-aeep-result-288e.json','input_json_bytes':aeepresult['task_input_json_bytes'],'output_sha256':aeepresult['transformation_output_sha256'],'output_json_bytes':aeepresult['transformation_output_json_bytes'],'schema_bytes':aeepresult['schema_bytes'],'project_config_bytes':aeepresult['project_config_bytes'],'retained_project_bytes':sum(p.stat().st_size for p in (ROOT/'.aeep/native-sol61-resource-full-path-aeep-evidence').rglob('*') if p.is_file()),'instructions_bytes':aeepresult['instructions_bytes'],'model_context_tokens':0,'checks':aeepresult['checks']})
++        record['samples'].append({'arm':'generated_project_mcp_aeep','execution_including_setup_and_verifier':aeepmetrics,'detail_result':'native-sol61-resource-full-path-aeep-stream-result.json','input_json_bytes':aeepresult['task_input_json_bytes'],'output_sha256':aeepresult['transformation_output_sha256'],'output_json_bytes':aeepresult['transformation_output_json_bytes'],'schema_bytes':aeepresult['schema_bytes'],'project_config_bytes':aeepresult['project_config_bytes'],'retained_project_bytes':sum(p.stat().st_size for p in (ROOT/'.aeep/native-sol61-resource-full-path-aeep-stream-evidence').rglob('*') if p.is_file()),'instructions_bytes':aeepresult['instructions_bytes'],'model_context_tokens':0,'checks':aeepresult['checks']})
+         for sample in record['samples']:
+             stages=[sample[key] for key in ('execution','external_verifier','execution_including_setup_and_verifier') if key in sample]
+             sample['total_end_to_end_wall_ms']=sum(x['wall_ms'] for x in stages)

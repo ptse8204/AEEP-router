@@ -6,9 +6,12 @@ import hashlib
 import json
 import math
 import random
+import re
 import sqlite3
 import time
-from collections.abc import Callable, Iterable
+from collections import defaultdict
+from collections.abc import Awaitable, Callable, Iterable
+from copy import deepcopy
 from datetime import datetime
 from decimal import Decimal
 from enum import StrEnum
@@ -16,7 +19,7 @@ from pathlib import Path
 from statistics import median
 from typing import Any, Literal, cast
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .accounting import (
     aggregate_accounting,
@@ -24,8 +27,9 @@ from .accounting import (
     subscription_usage_from_tokens,
 )
 from .codex_capture import parse_codex_jsonl as parse_codex_jsonl
-from .errors import ConfigurationError
+from .errors import ConfigurationError, NoRouteError
 from .models import (
+    ActionConstraints,
     ActionRequest,
     CandidateScore,
     CashAccounting,
@@ -38,6 +42,7 @@ from .models import (
     EstimateSource,
     EvidenceSource,
     EvidenceStatus,
+    ExecutionReceipt,
     ExecutionStatus,
     ExecutorKind,
     ExecutorSpec,
@@ -55,6 +60,7 @@ from .models import (
     SubscriptionUsage,
     TrustLevel,
     UtcDateTime,
+    ValidationResult,
     ValidationSpec,
     new_id,
     utc_now,
@@ -71,6 +77,15 @@ from .workflow import WorkflowRequest, WorkflowStatus, pointer_get, pointer_repl
 class BenchmarkCondition(StrEnum):
     PROCESS_COLD = "process-cold"
     ROUTER_WARM = "router-warm"
+
+
+class AssessmentBenchmarkCondition(StrEnum):
+    ROUTER_FRESH = "router-fresh"
+    FRESH_WORKER = "fresh-worker"
+    REUSED_WORKER = "reused-worker"
+
+
+TrialCondition = BenchmarkCondition | AssessmentBenchmarkCondition
 
 
 class BenchmarkSplit(StrEnum):
@@ -91,6 +106,17 @@ class BenchmarkCase(StrictModel):
     split: BenchmarkSplit
     action: ActionRequest
     validators: list[ValidationSpec] = Field(default_factory=list)
+    variation: str | None = None
+    template_family: str | None = None
+    fixture_files: dict[str, str] | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        for key in ("variation", "template_family", "fixture_files"):
+            if result.get(key) is None:
+                result.pop(key, None)
+        return result
 
 
 class BenchmarkRoute(StrictModel):
@@ -106,11 +132,16 @@ class BenchmarkRoute(StrictModel):
     subscription_resource_pool: str | None = None
     subscription_unit: str = "provider_unit"
     validation_output_path: str | None = None
+    case_input_bindings: dict[str, str] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def valid_accounting_bindings(self) -> BenchmarkRoute:
         if (self.executor_id is None) == (self.workflow is None):
             raise ValueError("benchmark routes require exactly one executor_id or workflow")
+        if self.case_input_bindings and self.workflow is None:
+            raise ValueError("case input bindings require a workflow")
+        if any(not path.startswith("/") for path in self.case_input_bindings):
+            raise ValueError("case bindings must target a workflow input JSON Pointer")
         if self.actual_rate_snapshot_id and self.access_channel != ModelAccessChannel.API:
             raise ValueError("actual rate snapshots require API access_channel")
         if self.subscription_rate_snapshot_id and not self.subscription_resource_pool:
@@ -126,8 +157,8 @@ class BenchmarkSuite(StrictModel):
     seed: int = 0
     repetitions: int = Field(default=30, ge=1, le=1000)
     routes: list[BenchmarkRoute] = Field(min_length=1)
-    conditions: list[BenchmarkCondition] = Field(
-        default_factory=lambda: [BenchmarkCondition.PROCESS_COLD, BenchmarkCondition.ROUTER_WARM]
+    conditions: list[TrialCondition] = Field(
+        default_factory=lambda: cast(list[TrialCondition], [BenchmarkCondition.PROCESS_COLD, BenchmarkCondition.ROUTER_WARM])
     )
     pricing_snapshots: list[RateCardSnapshot] = Field(default_factory=list)
     cases: list[BenchmarkCase] = Field(min_length=1)
@@ -135,6 +166,17 @@ class BenchmarkSuite(StrictModel):
     acknowledge_cash_risk: bool = False
     max_total_cash_usd: Decimal | None = Field(default=None, ge=0)
     allow_zero_subscription_weight: bool = False
+    sequential_stages: bool = False
+    stop_on_screening_failure: bool = False
+    warmup_cases: list[BenchmarkCase] = Field(default_factory=list)
+    paired_order: bool = False
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.paired_order:
+            result.pop("paired_order", None)
+        return result
 
     @model_validator(mode="after")
     def unique_ids(self) -> BenchmarkSuite:
@@ -145,6 +187,13 @@ class BenchmarkSuite(StrictModel):
             if len(values) != len(set(values)):
                 raise ValueError(f"duplicate benchmark {label} id")
         route_ids = {route.route_id for route in self.routes}
+        warmup_ids = [case.case_id for case in self.warmup_cases]
+        if len(warmup_ids) != len(set(warmup_ids)) or set(warmup_ids) & {
+            case.case_id for case in self.cases
+        }:
+            raise ValueError("warm-up cases must have distinct, separate identities")
+        if self.sequential_stages and any(item in self.conditions for item in (BenchmarkCondition.ROUTER_WARM, AssessmentBenchmarkCondition.REUSED_WORKER)) and not self.warmup_cases:
+            raise ValueError("staged campaigns require separate warm-up cases")
         if self.baseline_route_id is not None and self.baseline_route_id not in route_ids:
             raise ValueError("baseline_route_id is not a benchmark route")
         return self
@@ -157,7 +206,7 @@ class BenchmarkTrial(StrictModel):
     case_id: str
     route_id: str
     route_fingerprint: str | None = None
-    condition: BenchmarkCondition
+    condition: TrialCondition
     repetition: int = Field(ge=0)
     phase: BenchmarkPhase
     state: str = Field(pattern=r"^(running|complete|failed|skipped)$")
@@ -167,11 +216,22 @@ class BenchmarkTrial(StrictModel):
     valid: bool | None = None
     status: ExecutionStatus | None = None
     wall_time_ms: float | None = Field(default=None, ge=0)
+    grading_wall_time_ms: float | None = Field(default=None, ge=0)
+    routing_overhead_ms: float | None = Field(default=None, ge=0)
+    invocation_guard_ms: float | None = Field(default=None, ge=0)
     actual_resources: ResourceVector = Field(default_factory=ResourceVector)
     accounting: ResourceAccounting = Field(default_factory=ResourceAccounting)
     model_usage_complete: bool = False
     counterfactual_costs: list[CounterfactualCashCost] = Field(default_factory=list)
     receipt_ids: list[str] = Field(default_factory=list)
+    host_runtime_digests: dict[str, str] = Field(default_factory=dict)
+    host_models: dict[str, str] | None = None
+    case_validation: list[ValidationResult] = Field(default_factory=list)
+    correctness_failed: bool | None = None
+    execution_failure_codes: list[str] = Field(default_factory=list)
+    failure_category: Literal["task_failure", "tool_failure", "model_failure", "environment_failure", "orchestrator_failure", "timeout", "policy_denial", "indeterminate"] | None = None
+    failure_stage: Literal["preflight", "invocation", "grading", "accounting"] | None = None
+    capability_discovery: dict[str, bool | None] | None = None
     operation_count: int = Field(default=0, ge=0)
     retry_fallback_count: int = Field(default=0, ge=0)
     intervention_count: int = Field(default=0, ge=0)
@@ -179,6 +239,18 @@ class BenchmarkTrial(StrictModel):
     policy_score: float | None = None
     error_type: str | None = None
     error_message: str | None = Field(default=None, max_length=1000)
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if self.host_models is None:
+            result.pop("host_models", None)
+        if self.grading_wall_time_ms is None:
+            result.pop("grading_wall_time_ms", None)
+        for key in ("failure_category", "failure_stage", "capability_discovery"):
+            if getattr(self, key) is None:
+                result.pop(key, None)
+        return result
 
     @model_validator(mode="after")
     def infer_measured_model_usage(self) -> BenchmarkTrial:
@@ -192,7 +264,7 @@ class BenchmarkTrial(StrictModel):
 
 class BenchmarkSummary(StrictModel):
     route_id: str
-    condition: BenchmarkCondition
+    condition: TrialCondition
     trials: int
     attempted: int
     completed: int
@@ -214,7 +286,7 @@ class BenchmarkSummary(StrictModel):
 class BenchmarkDelta(StrictModel):
     route_id: str
     baseline_route_id: str
-    condition: BenchmarkCondition
+    condition: TrialCondition
     paired_trials: int
     median_wall_time_delta_ms: float | None
     bootstrap_low_ms: float | None
@@ -223,7 +295,7 @@ class BenchmarkDelta(StrictModel):
 
 class BenchmarkOracle(StrictModel):
     case_id: str
-    condition: BenchmarkCondition
+    condition: TrialCondition
     repetition: int
     selected_route_id: str | None = None
     policy_route_id: str | None = None
@@ -235,7 +307,7 @@ class BenchmarkOracle(StrictModel):
 
 class SubscriptionConservation(StrictModel):
     route_id: str
-    condition: BenchmarkCondition
+    condition: TrialCondition
     resource_pool: str
     unit: str
     measured_trials: int
@@ -298,7 +370,7 @@ class EconomicBenchmarkTrial(EconomicStrictModel):
     case_id: str = Field(min_length=1, max_length=200)
     route_id: str = Field(min_length=1, max_length=200)
     route_type: EconomicBenchmarkRouteType
-    condition: BenchmarkCondition
+    condition: TrialCondition
     split: BenchmarkSplit
     repetition: int = Field(ge=0)
     task_valid: bool
@@ -422,7 +494,7 @@ class EconomicWorkflowProofTrial(EconomicStrictModel):
 
     schema_version: EconomicSchemaVersion = "0.5"
     workflow_id: str = Field(min_length=1, max_length=200)
-    condition: BenchmarkCondition
+    condition: TrialCondition
     split: BenchmarkSplit
     repetition: int = Field(ge=0)
     task_valid: bool
@@ -486,7 +558,7 @@ class EconomicBenchmarkOracle(EconomicStrictModel):
     """Cheapest task-valid route with authoritative actual-cash evidence."""
 
     case_id: str
-    condition: BenchmarkCondition
+    condition: TrialCondition
     repetition: int = Field(ge=0)
     selected_route_id: str | None = None
     oracle_route_id: str | None = None
@@ -551,7 +623,7 @@ def economic_settlement_oracles(
     """Compare AEEP with settled paid or authoritatively confirmed-free routes."""
 
     groups: dict[
-        tuple[str, BenchmarkCondition, int], list[EconomicBenchmarkTrial]
+        tuple[str, TrialCondition, int], list[EconomicBenchmarkTrial]
     ] = {}
     for trial in trials:
         if trial.split is not BenchmarkSplit.HOLDOUT:
@@ -1023,27 +1095,47 @@ def _median_currency_text(values: Iterable[CurrencyAmount]) -> str:
     return f"{measured[0].currency} {amount:f}"
 
 
+def _pin_action(action: ActionRequest, executor_id: str) -> ActionRequest:
+    pinned = action.model_copy(deep=True)
+    pinned.constraints = merge_constraints(
+        action.constraints, ActionConstraints(allowed_executor_ids=[executor_id])
+    )
+    return pinned
+
+
+def _case_workflow(route: BenchmarkRoute, case: BenchmarkCase | None) -> WorkflowRequest:
+    assert route.workflow is not None
+    workflow = route.workflow.model_copy(deep=True)
+    if case is not None:
+        workflow.constraints = merge_constraints(workflow.constraints, case.action.constraints)
+        for target, source in route.case_input_bindings.items():
+            pointer_replace(workflow.input, target, deepcopy(pointer_get(case.action.input, source)))
+    return workflow
+
+
 def _benchmark_route_candidates(
-    router: Router, route: BenchmarkRoute
+    router: Router, route: BenchmarkRoute, case: BenchmarkCase | None = None
 ) -> list[tuple[ExecutorSpec, CandidateScore]]:
     if route.executor_id is not None:
         spec = router.registry.get(route.executor_id)
-        action = ActionRequest(capability=spec.capability)
-        action.constraints.allowed_executor_ids = [spec.id]
+        action = _pin_action(
+            case.action if case is not None else ActionRequest(capability=spec.capability), spec.id
+        )
         decision = router.route(action)
         candidate = next(item for item in decision.candidates if item.executor_id == spec.id)
         return [(spec, candidate)]
     assert route.workflow is not None
     candidates: list[tuple[ExecutorSpec, CandidateScore]] = []
-    for step in route.workflow.steps:
+    workflow = _case_workflow(route, case)
+    for step in workflow.steps:
         action = step.action.model_copy(deep=True)
-        action.constraints = merge_constraints(route.workflow.constraints, action.constraints)
+        action.constraints = merge_constraints(workflow.constraints, action.constraints)
         for binding in step.bindings:
             if binding.source_step_id is None:
                 pointer_replace(
                     action.input,
                     binding.target_path,
-                    pointer_get(route.workflow.input, binding.source_path),
+                    pointer_get(workflow.input, binding.source_path),
                 )
         decision = router.route(action)
         if decision.selected_executor_id is None:
@@ -1064,15 +1156,14 @@ def _benchmark_route_specs(router: Router, route: BenchmarkRoute) -> list[Execut
 
 def _workflow_plan_score(router: Router, case: BenchmarkCase, route: BenchmarkRoute) -> float:
     if route.executor_id is not None:
-        action = case.action.model_copy(deep=True)
-        action.constraints.allowed_executor_ids = [route.executor_id]
+        action = _pin_action(case.action, route.executor_id)
         decision = router.route(action)
         candidate = next(
-            item for item in decision.candidates if item.executor_id == route.executor_id
+            (item for item in decision.candidates if item.executor_id == route.executor_id), None
         )
-        return candidate.score.total if candidate.feasible and candidate.score else math.inf
+        return candidate.score.total if candidate is not None and candidate.feasible and candidate.score else math.inf
 
-    planned = _benchmark_route_candidates(router, route)
+    planned = _benchmark_route_candidates(router, route, case)
     resources = ResourceVector()
     cash_amounts: list[Decimal] = []
     cash_bounds: list[Decimal] = []
@@ -1190,8 +1281,16 @@ def _workflow_plan_score(router: Router, case: BenchmarkCase, route: BenchmarkRo
 class BenchmarkRunner:
     """Small hermetic runner; production receipt/history stores are never used."""
 
-    def __init__(self, router_factory: Callable[[], Router], database: str | Path) -> None:
+    def __init__(
+        self, router_factory: Callable[[], Router], database: str | Path, *,
+        before_trial: Callable[[Router, BenchmarkRoute, BenchmarkTrial], Awaitable[None]] | None = None,
+        after_trial: Callable[[BenchmarkTrial], None] | None = None,
+        separate_grading: bool = False,
+    ) -> None:
         self.router_factory = router_factory
+        self.before_trial = before_trial
+        self.after_trial = after_trial
+        self.separate_grading = separate_grading
         self.database = str(database)
         target = Path(self.database)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -1222,6 +1321,62 @@ class BenchmarkRunner:
             )
             """
         )
+        self.connection.execute(
+            "CREATE TABLE IF NOT EXISTS trial_receipts ("
+            "receipt_id TEXT PRIMARY KEY, trial_id TEXT NOT NULL, payload_json TEXT NOT NULL)"
+        )
+        self.connection.execute(
+            "CREATE TABLE IF NOT EXISTS environments ("
+            "suite_id TEXT PRIMARY KEY, content_sha256 TEXT NOT NULL)"
+        )
+        self.connection.execute(
+            "CREATE TABLE IF NOT EXISTS trial_stores ("
+            "trial_id TEXT PRIMARY KEY, database_path TEXT NOT NULL)"
+        )
+
+    def _claim_trial(self, trial: BenchmarkTrial) -> None:
+        try:
+            self.connection.execute(
+                "INSERT INTO trials VALUES (?, ?, ?, ?)",
+                (trial.trial_id, trial.suite_id, trial.state, trial.model_dump_json()),
+            )
+            self.connection.commit()
+        except sqlite3.IntegrityError as exc:
+            self.connection.rollback()
+            raise ConfigurationError("benchmark trial already claimed; resume explicitly") from exc
+
+    def _retain_receipts(
+        self, router: Router, trial: BenchmarkTrial, receipts: list[ExecutionReceipt]
+    ) -> None:
+        # Read back the router-sanitized record, never persist raw outcome payloads.
+        for receipt in receipts:
+            stored = router.store.get_receipt(receipt.receipt_id)
+            if stored is None:
+                raise ConfigurationError("trial receipt was not durably recorded")
+            self.connection.execute(
+                "INSERT OR IGNORE INTO trial_receipts VALUES (?, ?, ?)",
+                (stored.receipt_id, trial.trial_id, stored.model_dump_json()),
+            )
+        self.connection.commit()
+
+    def _freeze_environment(self, suite: BenchmarkSuite, router: Router) -> None:
+        identity: dict[str, Any] = {
+            "executors": [item.model_dump(mode="json") for item in router.registry.all()],
+            "policies": {key: value.model_dump(mode="json") for key, value in router.manifest.policies.items()},
+            "resources": [item.model_dump(mode="json") for item in router.manifest.resources],
+        }
+        if self.separate_grading:
+            identity["separate_grading"] = True
+        digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+        self._freeze_identity("environments", suite.suite_id, digest, "benchmark execution environment changed; start a new suite")
+
+    def _freeze_identity(self, table: Literal["environments", "suites"], identity: str, digest: str, reason: str) -> None:
+        with self.connection:
+            self.connection.execute("BEGIN IMMEDIATE")
+            row = self.connection.execute(f"SELECT content_sha256 FROM {table} WHERE suite_id=?", (identity,)).fetchone()
+            if row is not None and row[0] != digest:
+                raise ConfigurationError(reason)
+            self.connection.execute(f"INSERT OR IGNORE INTO {table} VALUES (?, ?)", (identity, digest))
 
     def _save_trial(self, trial: BenchmarkTrial) -> None:
         self.connection.execute(
@@ -1239,16 +1394,7 @@ class BenchmarkRunner:
             suite.model_dump(mode="json"), sort_keys=True, separators=(",", ":")
         ).encode()
         digest = hashlib.sha256(canonical).hexdigest()
-        row = self.connection.execute(
-            "SELECT content_sha256 FROM suites WHERE suite_id = ?", (suite.suite_id,)
-        ).fetchone()
-        if row is not None and row[0] != digest:
-            raise ConfigurationError("benchmark suite id is already bound to different content")
-        self.connection.execute(
-            "INSERT OR IGNORE INTO suites (suite_id, content_sha256) VALUES (?, ?)",
-            (suite.suite_id, digest),
-        )
-        self.connection.commit()
+        self._freeze_identity("suites", suite.suite_id, digest, "benchmark suite id is already bound to different content")
         return digest
 
     def _freeze_snapshots(self, suite: BenchmarkSuite) -> None:
@@ -1279,9 +1425,41 @@ class BenchmarkRunner:
         if action.idempotency_key is not None:
             raise ConfigurationError("benchmark route variants cannot share idempotency keys")
         started = time.perf_counter()
+        grading_elapsed = 0.0
+        receipts: list[ExecutionReceipt] = []
+        if router.store.path != ":memory:":
+            self.connection.execute(
+                "INSERT OR IGNORE INTO trial_stores VALUES (?, ?)",
+                (trial.trial_id, router.store.path),
+            )
+            self.connection.commit()
+        if self.before_trial is not None:
+            try:
+                await self.before_trial(router, route, trial)
+            except Exception:
+                trial.state = "skipped"
+                trial.failure_category = "environment_failure"
+                trial.failure_stage = "preflight"
+                trial.ended_at = utc_now()
+                self._save_trial(trial)
+                raise
         try:
+            if suite.paired_order and case.fixture_files is not None:
+                from .assessment.recipes import search_files
+                files = search_files(action.input["root"])
+                actual = {item["path"]: hashlib.sha256(item["text"].encode()).hexdigest() for item in files}
+                if actual != case.fixture_files:
+                    raise ConfigurationError("benchmark fixture changed; start a new reviewed plan")
+                trial_root = Path(action.input["root"]).parent / "trial-inputs" / hashlib.sha256(trial.trial_id.encode()).hexdigest()
+                trial_root.mkdir(parents=True, exist_ok=False)
+                for fixture in files:
+                    target = trial_root / fixture["path"]
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(fixture["text"].encode())
+                action.input["root"] = str(trial_root)
+                case = case.model_copy(update={"action": action})
             if route.executor_id is not None:
-                action.constraints.allowed_executor_ids = [route.executor_id]
+                action = _pin_action(action, route.executor_id)
                 decision = router.route(action)
                 if decision.selected_executor_id is None:
                     raise ConfigurationError(decision.explanation)
@@ -1301,7 +1479,7 @@ class BenchmarkRunner:
                 )
             else:
                 assert route.workflow is not None
-                workflow = route.workflow.model_copy(
+                workflow = _case_workflow(route, case).model_copy(
                     update={"workflow_id": f"{route.workflow.workflow_id}.{trial.trial_id}"},
                     deep=True,
                 )
@@ -1343,6 +1521,27 @@ class BenchmarkRunner:
                 policy.constraints.allowed_executor_kinds = None
                 policy.constraints.denied_executor_ids = []
                 quota = None
+            trial.receipt_ids = [receipt.receipt_id for receipt in receipts]
+            trial.execution_failure_codes = sorted({str(receipt.metadata["host_failure_code"]) for receipt in receipts if receipt.metadata.get("host_failure_code") in {"protocol_frame_limit", "inventory_not_isolated", "environment_verification_unavailable", "host_request_rejected", "host_protocol_failure"}})
+            discoveries = [receipt.metadata.get("capability_discovery") for receipt in receipts]
+            if len(discoveries) == 1 and isinstance(discoveries[0], dict):
+                trial.capability_discovery = {key: discoveries[0].get(key) if type(discoveries[0].get(key)) is bool else None
+                                              for key in ("exposed", "retrieved", "invoked")}
+            decisions = [router.store.get_decision(identity) for identity in {receipt.decision_id for receipt in receipts}]
+            trial.routing_overhead_ms = sum(item.routing_overhead_ms for item in decisions if item is not None) if decisions and all(item is not None for item in decisions) else None
+            guards = [receipt.metadata.get("invocation_guard_ms") for receipt in receipts]
+            trial.invocation_guard_ms = sum(float(value) for value in guards if isinstance(value, (int, float))) if guards and all(isinstance(value, (int, float)) for value in guards) else None
+            trial.host_runtime_digests = {
+                receipt.executor_id: receipt.metadata["host_runtime_digest"]
+                for receipt in receipts if isinstance(receipt.metadata.get("host_runtime_digest"), str)
+            }
+            trial.operation_count = len(receipts)
+            self._retain_receipts(router, trial, receipts)
+            trial.accounting = aggregate_accounting(receipts)
+            trial.actual_resources = _aggregate_resources(
+                receipts, (time.perf_counter() - started) * 1000.0
+            )
+            self._save_trial(trial)
             if any(
                 item.side_effect.rank > SideEffect.READ.rank or not item.idempotent
                 for item in specs
@@ -1353,17 +1552,34 @@ class BenchmarkRunner:
                 for receipt in receipts
             )
             if valid and case.validators:
-                results = await run_validators(
-                    case.validators,
-                    ValidationContext(
-                        input=action.input,
-                        output=extract_path(output, route.validation_output_path),
-                    ),
-                    router.validator_callbacks,
-                )
+                grading_started = time.perf_counter()
+                try:
+                    results = await run_validators(
+                        case.validators,
+                        ValidationContext(input=action.input, output=extract_path(output, route.validation_output_path)),
+                        router.validator_callbacks, raise_errors=suite.sequential_stages,
+                    )
+                finally:
+                    grading_elapsed += time.perf_counter() - grading_started
+                trial.case_validation = [
+                    result.model_copy(update={"detail": result.detail if result.valid is False
+                        and re.fullmatch(r"[a-z][a-z0-9_]{0,63}", result.detail)
+                        and isinstance(spec.config.get("failure_codes"), list)
+                        and result.detail in spec.config["failure_codes"] else ""})
+                    for spec, result in zip(case.validators, results, strict=True)
+                ]
                 valid = all(result.valid is True for result in results)
             trial.ok = ok
             trial.valid = valid
+            trial.correctness_failed = (ok and not valid) or any(receipt.output_valid is False or receipt.task_valid is False for receipt in receipts)
+            if trial.execution_failure_codes:
+                trial.failure_category, trial.failure_stage = "environment_failure", "preflight"
+                trial.correctness_failed = False
+            elif trial.correctness_failed:
+                trial.failure_category, trial.failure_stage = "task_failure", "grading"
+            elif not ok:
+                trial.failure_category, trial.failure_stage = "indeterminate", "invocation"
+            trial.host_models = {receipt.executor_id: receipt.metadata["actual_model"] for receipt in receipts if isinstance(receipt.metadata.get("actual_model"), str)} or None
             trial.status = status
             trial.accounting = aggregate_accounting(receipts)
             snapshots = {snapshot.snapshot_id: snapshot for snapshot in suite.pricing_snapshots}
@@ -1411,6 +1627,8 @@ class BenchmarkRunner:
                     for usage in trial.accounting.model_usage
                 )
             ) or (
+                not suite.sequential_stages
+                and
                 route.provider is None
                 and route.model is None
                 and route.access_channel == ModelAccessChannel.UNKNOWN
@@ -1488,24 +1706,39 @@ class BenchmarkRunner:
         except Exception as exc:
             trial.state = "failed"
             trial.error_type = type(exc).__name__
+            if isinstance(exc, NoRouteError) or (isinstance(exc, ConfigurationError) and not receipts):
+                trial.failure_category, trial.failure_stage = "environment_failure", "preflight"
             if isinstance(exc, ConfigurationError):
                 trial.error_message = str(exc)[:1000]
         trial.wall_time_ms = (time.perf_counter() - started) * 1000.0
+        if self.separate_grading:
+            trial.grading_wall_time_ms = grading_elapsed * 1000
+            trial.wall_time_ms = max(0, trial.wall_time_ms - trial.grading_wall_time_ms)
         trial.actual_resources.latency_ms = trial.wall_time_ms
         trial.ended_at = utc_now()
         self._save_trial(trial)
+        if self.after_trial is not None:
+            self.after_trial(trial)
         return trial
 
     async def _preflight(self, suite: BenchmarkSuite) -> dict[str, str | None]:
         router = self.router_factory()
         try:
+            self._freeze_environment(suite, router)
             planned_upper = Decimal(0)
             risky = False
             snapshots = {snapshot.snapshot_id: snapshot for snapshot in suite.pricing_snapshots}
             multiplier = suite.repetitions * len(suite.cases) * len(suite.conditions)
-            if BenchmarkCondition.ROUTER_WARM in suite.conditions:
+            if any(item in suite.conditions for item in (BenchmarkCondition.ROUTER_WARM, AssessmentBenchmarkCondition.REUSED_WORKER)):
                 multiplier += 1
             for route in suite.routes:
+                for condition in suite.conditions:
+                    if condition in {AssessmentBenchmarkCondition.FRESH_WORKER, AssessmentBenchmarkCondition.REUSED_WORKER}:
+                        feature = condition.value.replace('-', '_')
+                        for spec in _benchmark_route_specs(router, route):
+                            capabilities = (router.managed_hosts.capabilities(spec.managed_host_config().adapter_id)
+                                if spec.kind == ExecutorKind.MANAGED_HOST else router._executor_for(spec.kind, spec).capabilities())
+                            capabilities.require([feature])
                 snapshot_ids = [
                     item
                     for item in (
@@ -1531,7 +1764,7 @@ class BenchmarkRunner:
                     if not spec.enabled:
                         raise ConfigurationError(f"benchmark route {spec.id!r} is not active")
                     candidate = router.store.get_route_candidate(spec.id)
-                    if candidate is not None:
+                    if candidate is not None and router._trial_fingerprints.get(spec.id) != behavior_fingerprint(spec):
                         report = router.store.get_qualification_report(
                             candidate.qualification_report_id or ""
                         )
@@ -1591,14 +1824,12 @@ class BenchmarkRunner:
                 raise ConfigurationError(
                     "proof campaigns with subscription routes require a non-zero subscription weight"
                 )
-            return {
-                case.case_id: min(
-                    suite.routes,
-                    key=lambda route: (_workflow_plan_score(router, case, route), route.route_id),
-                ).route_id
-                for case in suite.cases
-                if case.split == BenchmarkSplit.HOLDOUT
-            }
+            frozen: dict[str, str | None] = {}
+            for case in suite.cases:
+                if case.split == BenchmarkSplit.HOLDOUT:
+                    score, route_id = min((_workflow_plan_score(router, case, route), route.route_id) for route in suite.routes)
+                    frozen[case.case_id] = route_id if math.isfinite(score) else None
+            return frozen
         finally:
             await router.close()
 
@@ -1616,11 +1847,39 @@ class BenchmarkRunner:
             for route in suite.routes
         ]
         rng.shuffle(planned)
-        warm: dict[str, Router] = {}
-        warmed: set[str] = set()
+        if suite.paired_order:
+            blocks = [(case, condition, repetition) for case in suite.cases for condition in suite.conditions for repetition in range(suite.repetitions)]
+            rng.shuffle(blocks)
+            if suite.sequential_stages:
+                order = {BenchmarkSplit.QUALIFICATION: 0, BenchmarkSplit.TRAINING: 1, BenchmarkSplit.HOLDOUT: 2}
+                blocks.sort(key=lambda block: order[block[0].split])
+            planned = []
+            counters: dict[tuple[BenchmarkSplit, TrialCondition], int] = defaultdict(int)
+            for case, condition, repetition in blocks:
+                key = (case.split, condition)
+                reverse = counters[key] % 2
+                counters[key] += 1
+                for route in (list(reversed(suite.routes)) if reverse else suite.routes):
+                    planned.append((case, route, condition, repetition))
+        if suite.sequential_stages:
+            stage_order = {BenchmarkSplit.QUALIFICATION: 0, BenchmarkSplit.TRAINING: 1, BenchmarkSplit.HOLDOUT: 2}
+            planned.sort(key=lambda item: stage_order[item[0].split])
+        warm: dict[tuple[str, TrialCondition], Router] = {}
+        warmed: set[tuple[str, TrialCondition]] = set()
         trials: list[BenchmarkTrial] = []
+        screened_out: set[str] = set()
+        previous_split: BenchmarkSplit | None = None
         try:
             for case, route, condition, repetition in planned:
+                if suite.stop_on_screening_failure and route.route_id in screened_out:
+                    continue
+                if suite.sequential_stages and previous_split != case.split:
+                    for instance in warm.values():
+                        await instance.close()
+                    warm.clear()
+                    warmed.clear()
+                    previous_split = case.split
+
                 trial_id = f"trial_{suite.suite_id}_{case.case_id}_{route.route_id}_{condition}_{repetition}"
                 existing = self.connection.execute(
                     "SELECT payload_json, state FROM trials WHERE trial_id = ?", (trial_id,)
@@ -1628,7 +1887,10 @@ class BenchmarkRunner:
                 if existing is not None:
                     if existing[1] == "running":
                         raise ConfigurationError(f"ambiguous running benchmark trial {trial_id}")
-                    trials.append(BenchmarkTrial.model_validate_json(existing[0]))
+                    prior = BenchmarkTrial.model_validate_json(existing[0])
+                    trials.append(prior)
+                    if prior.phase == BenchmarkPhase.QUALIFICATION and prior.valid is False:
+                        screened_out.add(route.route_id)
                     continue
                 phase = {
                     BenchmarkSplit.QUALIFICATION: BenchmarkPhase.QUALIFICATION,
@@ -1646,18 +1908,20 @@ class BenchmarkRunner:
                     phase=phase,
                     state="running",
                 )
-                self._save_trial(trial)
-                if condition == BenchmarkCondition.PROCESS_COLD:
+                self._claim_trial(trial)
+                worker_key = (route.route_id, condition)
+                if condition in {BenchmarkCondition.PROCESS_COLD, AssessmentBenchmarkCondition.ROUTER_FRESH, AssessmentBenchmarkCondition.FRESH_WORKER}:
                     router = self.router_factory()
                 else:
-                    warm_router = warm.get(route.route_id)
+                    warm_router = warm.get(worker_key)
                     if warm_router is None:
                         warm_router = self.router_factory()
-                        warm[route.route_id] = warm_router
+                        warm[worker_key] = warm_router
                     router = warm_router
-                    if route.route_id not in warmed:
+                    if worker_key not in warmed:
+                        warmup_case = suite.warmup_cases[0] if suite.warmup_cases else case
                         setup = BenchmarkTrial(
-                            trial_id=f"setup_{run_id}_{route.route_id}_{time.time_ns()}",
+                            trial_id=f"setup_{run_id}_{route.route_id}_{case.split if suite.sequential_stages else 'all'}" + (f"_{condition}" if condition == AssessmentBenchmarkCondition.REUSED_WORKER else ""),
                             run_id=run_id,
                             suite_id=suite.suite_id,
                             case_id=case.case_id,
@@ -1667,12 +1931,18 @@ class BenchmarkRunner:
                             phase=BenchmarkPhase.SETUP,
                             state="running",
                         )
-                        self._save_trial(setup)
-                        trials.append(await self._execute_trial(router, suite, case, route, setup))
-                        warmed.add(route.route_id)
-                trials.append(await self._execute_trial(router, suite, case, route, trial))
-                if condition == BenchmarkCondition.PROCESS_COLD:
-                    await router.close()
+                        self._claim_trial(setup)
+                        trials.append(await self._execute_trial(router, suite, warmup_case, route, setup))
+                        warmed.add(worker_key)
+                try:
+                    self._freeze_environment(suite, router)
+                    completed = await self._execute_trial(router, suite, case, route, trial)
+                    trials.append(completed)
+                    if completed.phase == BenchmarkPhase.QUALIFICATION and completed.valid is False:
+                        screened_out.add(route.route_id)
+                finally:
+                    if condition in {BenchmarkCondition.PROCESS_COLD, AssessmentBenchmarkCondition.ROUTER_FRESH, AssessmentBenchmarkCondition.FRESH_WORKER}:
+                        await router.close()
         finally:
             for router in warm.values():
                 await router.close()
@@ -1703,7 +1973,7 @@ class BenchmarkRunner:
 
 
 def _summaries(trials: list[BenchmarkTrial]) -> list[BenchmarkSummary]:
-    groups: dict[tuple[str, BenchmarkCondition], list[BenchmarkTrial]] = {}
+    groups: dict[tuple[str, TrialCondition], list[BenchmarkTrial]] = {}
     for trial in trials:
         if trial.phase == BenchmarkPhase.SETUP:
             continue
@@ -1843,7 +2113,7 @@ def _oracles(
     frozen: dict[str, str | None],
 ) -> list[BenchmarkOracle]:
     measured = [trial for trial in _eligible_measurements(trials) if trial.valid is True]
-    groups: dict[tuple[str, BenchmarkCondition, int], list[BenchmarkTrial]] = {}
+    groups: dict[tuple[str, TrialCondition, int], list[BenchmarkTrial]] = {}
     for trial in measured:
         groups.setdefault((trial.case_id, trial.condition, trial.repetition), []).append(trial)
     route_by_executor = {
@@ -1906,8 +2176,8 @@ def _subscription_conservation(
     trials: list[BenchmarkTrial],
 ) -> list[SubscriptionConservation]:
     measured = _eligible_measurements(trials)
-    groups: dict[tuple[str, BenchmarkCondition, str, str], list[Decimal | None]] = {}
-    totals: dict[tuple[str, BenchmarkCondition], int] = {}
+    groups: dict[tuple[str, TrialCondition, str, str], list[Decimal | None]] = {}
+    totals: dict[tuple[str, TrialCondition], int] = {}
     for trial in measured:
         totals[(trial.route_id, trial.condition)] = (
             totals.get((trial.route_id, trial.condition), 0) + 1
@@ -2048,8 +2318,8 @@ def revalue_campaign(
 
 def _trial_groups(
     trials: list[BenchmarkTrial],
-) -> list[tuple[str, BenchmarkCondition, list[BenchmarkTrial]]]:
-    groups: dict[tuple[str, BenchmarkCondition], list[BenchmarkTrial]] = {}
+) -> list[tuple[str, TrialCondition, list[BenchmarkTrial]]]:
+    groups: dict[tuple[str, TrialCondition], list[BenchmarkTrial]] = {}
     for trial in trials:
         groups.setdefault((trial.route_id, trial.condition), []).append(trial)
     return [(route, condition, items) for (route, condition), items in sorted(groups.items())]
@@ -2073,7 +2343,7 @@ def _eligible_measurements(trials: list[BenchmarkTrial]) -> list[BenchmarkTrial]
 
 
 def _heldout_policy_oracle_values(report: BenchmarkCampaignReport) -> list[bool]:
-    groups: dict[tuple[str, BenchmarkCondition, int], list[BenchmarkTrial]] = {}
+    groups: dict[tuple[str, TrialCondition, int], list[BenchmarkTrial]] = {}
     for trial in _eligible_measurements(report.trials):
         if trial.phase == BenchmarkPhase.HOLDOUT:
             groups.setdefault((trial.case_id, trial.condition, trial.repetition), []).append(trial)

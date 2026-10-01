@@ -1,0 +1,45 @@
+{
+  "preparation_only": true,
+  "operation_executed": false,
+  "authority": "Parent standing finite diagnostic delegation September30; launch waits live/resource quiet window",
+  "version": "existing reviewed Linux0.154.0; no upgrade proposed yet",
+  "primary_source": [
+    {
+      "url": "https://github.com/openai/codex/blob/rust-v0.154.0/codex-rs/app-server/src/models.rs",
+      "finding": "model/list uses OnlineIfUncached; may return valid cached catalog"
+    },
+    {
+      "url": "https://github.com/openai/codex/blob/rust-v0.154.0/codex-rs/app-server/src/models_refresh_worker.rs",
+      "finding": "background worker immediately calls Online before refresh interval sleep"
+    },
+    {
+      "url": "https://github.com/openai/codex/blob/rust-v0.154.0/codex-rs/app-server/src/message_processor.rs",
+      "finding": "processor constructor starts background refresh worker"
+    }
+  ],
+  "schema": "installed0.159.2 ModelListParams exposes includeHidden/cursor/limit, no explicit refresh flag",
+  "limits": {
+    "new_operations": 1,
+    "new_model_turns": 0,
+    "total_reserved_seconds": 120,
+    "overall_diagnostic_seconds": 90,
+    "background_wait_seconds": 30,
+    "cleanup_seconds": 20,
+    "model_list_pages": 100
+  },
+  "procedure": "New exact reviewed same-worker conformance request; retain adapter lifetime across initial hidden-inclusive sanitized catalog,30s bounded wait and second sanitized catalog; collect version-bound runtime identity through existing non-auth host inspection if available; close transport and explicit owned worker cleanup; terminal result no replay",
+  "inconclusive_conditions": [
+    "missing runtime identity",
+    "background refresh/network failure",
+    "only unchanged catalog without proof refresh completed"
+  ],
+  "prohibited": [
+    "auth/cache read/delete",
+    "sign-in capture",
+    "model call",
+    "image pull",
+    "global host changes",
+    "admission"
+  ],
+  "successor_image_if_needed": "Existing managed-worker reviewed local same-release codex/code-mode-host/rg/resources offline Dockerfile; both arms must receive identical runtime upgrade with exact image digest and same-grant scope amendment. Protected sign-in remains operator terminal, existing volumes unchanged."
+}

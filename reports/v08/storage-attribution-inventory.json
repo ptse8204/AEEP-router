@@ -1,0 +1,328 @@
+{
+  "recorded_at": "2026-09-30T13:34:06.197270+00:00",
+  "measurement_boundary": "Only existing reports, exact installed Codex runtime package metadata, Python executable stat, current AEEP wheel archive inventory, repository-owned named validation/build paths, existing immutable lab image metadata. No home/user/auth/cache-wide scan, no container run/model/capacity probe/download/source edits. File stats exclude symlinks and credential names.",
+  "shared_installed_codex": {
+    "path": "/Applications/ChatGPT.app/Contents/Resources/codex-cli",
+    "observed_at": "2026-09-30T13:34:06.189418+00:00",
+    "files": 47,
+    "logical_bytes": 331584489,
+    "allocated_bytes": 348532736,
+    "skipped_symlinks": 0,
+    "skipped_credential_names": 0,
+    "attribution": "Already-installed desktop Codex0.159.2 runtime package only; excludes surrounding ChatGPT.app and all Codex state. Not incremental AEEP install bytes."
+  },
+  "shared_installed_python_executable": {
+    "path": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+    "logical_executable_bytes": 119328,
+    "allocated_executable_bytes": 122880,
+    "version": "3.13.1",
+    "attribution": "Shared installed Python executable only; stdlib/shared library/install total not scanned and unknown."
+  },
+  "aeep_wheel_snapshot": {
+    "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0-py3-none-any.whl",
+    "compressed_bytes": 1144127,
+    "uncompressed_member_bytes": 5699872,
+    "members": 402,
+    "sha256": "acfbfd380735ac17941f94e81e5c3b1b8fe97b6abbcccaf8fa406a24c8a9f6fb",
+    "stable_during_read": true,
+    "attribution": "Observed build artifact snapshot; checks may rebuild it. Not an observed installed delta or final release binding."
+  },
+  "already_covered_dependency_inventory": {
+    "record": "native-resource-inventory-result-288e.json",
+    "package_count": 31,
+    "reported_logical_bytes_sum": 55793181,
+    "reported_allocated_bytes_sum": 61173760,
+    "attribution": "Historical288e installed/shared Python distributions; may overlap; not resampled or added to Codex/Python/AEEP as incremental installation."
+  },
+  "repository_lab_caches": {
+    ".pytest_cache": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.pytest_cache",
+      "observed_at": "2026-09-30T13:34:06.192102+00:00",
+      "files": 5,
+      "logical_bytes": 122982,
+      "allocated_bytes": 139264,
+      "skipped_symlinks": 0,
+      "skipped_credential_names": 0,
+      "attribution": "Repository-owned validation/build artifact; snapshot during checks, may grow/change. Not production dependency overhead."
+    },
+    ".ruff_cache": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.ruff_cache",
+      "observed_at": "2026-09-30T13:34:06.194584+00:00",
+      "files": 44,
+      "logical_bytes": 38310,
+      "allocated_bytes": 196608,
+      "skipped_symlinks": 0,
+      "skipped_credential_names": 0,
+      "attribution": "Repository-owned validation/build artifact; snapshot during checks, may grow/change. Not production dependency overhead."
+    },
+    ".mypy_cache": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.mypy_cache",
+      "observed_at": "2026-09-30T13:34:06.194811+00:00",
+      "files": 4,
+      "logical_bytes": 30490848,
+      "allocated_bytes": 30547968,
+      "skipped_symlinks": 0,
+      "skipped_credential_names": 0,
+      "attribution": "Repository-owned validation/build artifact; snapshot during checks, may grow/change. Not production dependency overhead."
+    },
+    "build": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/build",
+      "observed_at": "2026-09-30T13:34:06.197262+00:00",
+      "files": 46,
+      "logical_bytes": 400822,
+      "allocated_bytes": 516096,
+      "skipped_symlinks": 0,
+      "skipped_credential_names": 0,
+      "attribution": "Repository-owned validation/build artifact; snapshot during checks, may grow/change. Not production dependency overhead."
+    }
+  },
+  "optional_lab_images": [
+    {
+      "role": "control1592",
+      "immutable_image": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+      "reported_logical_image_bytes": 439244032
+    },
+    {
+      "role": "treatment1592",
+      "immutable_image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "reported_logical_image_bytes": 464514173
+    },
+    {
+      "role": "protected_workbook_oracle",
+      "immutable_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+      "reported_logical_image_bytes": 63173515
+    }
+  ],
+  "image_measurement": "Existing Docker image inspect Id/Size/User only, all USER65534:65534. Logical image sizes may share layers; physical unique storage, build cache, Docker VM disk and image deletion reclaim are UNKNOWN. No total physical image sum or prune. Assessment lab only; ordinary routing does not require these workers.",
+  "historical_evidence_storage": "Reuse historical native-resource-inventory-result-288e.json groups; no duplicate scan of canonical bulk. Historical live-review-v3 logical62,917,230,276B is a dated laboratory observation, not current total, production install requirement or newly attributed AEEP overhead. Subsequent exact cleanup records supersede historical retained sizes.",
+  "current_pilot_evidence": {
+    "record": "worker1592-successor/pilot-workflow-46803-result.json",
+    "canonical_history_retained": true,
+    "actual_owned_retained_growth_bytes": 29478912,
+    "actual_materialized_scoped_copy_bytes": 4825088,
+    "conservative_finite_assessment_allowance_bytes": 1585684480,
+    "allowance_not_actual_consumption": true
+  },
+  "removed_owned_setup_duplicates": {
+    "record": "worker1592-successor/owned-cleanup.json",
+    "removed_logical_bytes": 950756283,
+    "physical_reclaim_unknown": true,
+    "images_reviews_logs_notices_and_canonical_history_retained": true
+  },
+  "unknowns": [
+    "Fresh install incremental disk delta: no clean matched install experiment performed.",
+    "Dependency unique physical/storage attribution and APFS sharing/compression.",
+    "Unrelated/global caches, authentication volumes, full application/VM disk intentionally not inspected.",
+    "Current full evidence-store total and indefinite retention growth; known historical and finite records reused.",
+    "Whole-system resource/release acceptance and production benefit remain unestablished."
+  ],
+  "release_ready": false,
+  "resource_gate_complete": false,
+  "benefit_claim": false,
+  "final_build_artifacts": {
+    "observed_at": "2026-09-30T18:41:00.313492+00:00",
+    "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+    "existing_validation_record": "delivery-boundary-validation-ade3b4e98078.json",
+    "validation_record_sha256": "54faf9c1024f80428c926aaffedc49e9ce296b96278f7db0c9624c3c156fd21f",
+    "package_build_phase": {
+      "name": "package-build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-package-build-ade3b4e98078.log",
+      "recorded_at": "2026-09-30T18:40:01.376665+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "b2536ad67239fdb057db828429958405fb136ddf5cc3affba6915a205d63e6c5",
+      "exit_code": 0,
+      "wall_seconds": 1.7967745000496507,
+      "source_unchanged": true
+    },
+    "build_log_sha256": "de5e57eeb338c15a360d66b7f75ab75fb3385987008705a326c113b1f356d35d",
+    "artifacts": {
+      "aeep_agent_router-0.8.0-py3-none-any.whl": {
+        "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0-py3-none-any.whl",
+        "compressed_bytes": 1167900,
+        "allocated_artifact_bytes": 1171456,
+        "sha256": "0f39905f43b49363d85b3a6573e2ea78221fee87cf1e787503fc533a9093d1cc",
+        "modified_at": "2026-09-30T18:40:03.058577+00:00",
+        "members": 405,
+        "uncompressed_member_bytes": 5808017,
+        "bytecode_members": 0,
+        "entry_point_metadata_present": true,
+        "stable_during_read": true
+      },
+      "aeep_agent_router-0.8.0.tar.gz": {
+        "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0.tar.gz",
+        "compressed_bytes": 1316287,
+        "allocated_artifact_bytes": 1318912,
+        "sha256": "c31dbb440bae9e89cac844a16d57a031d5d075be7fd4307e2ea0e345563dc676",
+        "modified_at": "2026-09-30T18:40:02.290856+00:00",
+        "members": 602,
+        "regular_file_members": 550,
+        "uncompressed_regular_member_bytes": 7524019,
+        "symlink_members": 0,
+        "hardlink_members": 0,
+        "stable_during_read": true
+      }
+    },
+    "attribution": "AEEP-owned current wheel/source archive metadata from completed source ade3b4e9 package-build; no installation/extraction or fresh installed-system delta. Prior snapshots retained historically.",
+    "wheel_only_staging_assessment": "Static wheel-member inventory measures exact shipped AEEP payload without dependencies, imports, entry-point execution, or new installation. No staging installation performed: installers remap .data payload, generate entry-point wrappers/RECORD and may compile bytecode; unpacked archive sizes therefore are not installed physical bytes or total-system delta. Shared Python/Codex/dependencies remain separately attributed; APFS allocation and generated install bytes unknown.",
+    "source_unchanged": true,
+    "no_install_uninstall_extract_or_download": true,
+    "no_model_container_resource_test": true
+  },
+  "historical_final_build_artifacts": [
+    {
+      "observed_at": "2026-09-30T14:34:02.308209+00:00",
+      "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+      "existing_validation_record": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-validation-94f3fad31d28.json",
+      "validation_record_sha256": "be07ff6529877ef1695bd726068177ea812d43094e7e9cbeeacb897d6bebb529",
+      "package_build_phase": {
+        "name": "package-build",
+        "argv": [
+          "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+          "-m",
+          "build",
+          "--no-isolation"
+        ],
+        "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+        "environment_overrides": {
+          "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+          "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+          "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+        },
+        "log": "delivery-boundary-package-build-94f3fad31d28.log",
+        "recorded_at": "2026-09-30T13:45:52.005365+00:00",
+        "command_spelling_exact": true,
+        "timeout_seconds": 1200,
+        "attempt": 1,
+        "driver_sha256": "e334a2040c2176516a36dfc5ddfa9d544cc3fad2645458b38c470f894cea0126",
+        "exit_code": 0,
+        "wall_seconds": 1.77246025018394,
+        "source_unchanged": true
+      },
+      "build_log_sha256": "33ac861865ef313e5a46a8b8ee3045394ee8d94d8db93c417024d817dc3e9894",
+      "artifacts": {
+        "aeep_agent_router-0.8.0-py3-none-any.whl": {
+          "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0-py3-none-any.whl",
+          "compressed_bytes": 1144627,
+          "allocated_artifact_bytes": 1146880,
+          "sha256": "ec5dfa65442a309fa8c125e66cc892e7e92b18b86b3efc9d745d14c6d120f0f1",
+          "modified_at": "2026-09-30T13:45:53.682688+00:00",
+          "uncompressed_member_bytes": 5701346,
+          "members": 402,
+          "bytecode_members": 0,
+          "entry_point_metadata_present": true,
+          "groups": {
+            "package_code_and_resources": {
+              "members": 131,
+              "uncompressed_bytes": 2618142
+            },
+            "packaged_data": {
+              "members": 264,
+              "uncompressed_bytes": 3015643
+            },
+            "distribution_metadata": {
+              "members": 7,
+              "uncompressed_bytes": 67561
+            }
+          },
+          "stable_during_read": true
+        },
+        "aeep_agent_router-0.8.0.tar.gz": {
+          "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0.tar.gz",
+          "compressed_bytes": 1272622,
+          "allocated_artifact_bytes": 1273856,
+          "sha256": "05c18bee6423470f22cb44d5ffc77a5d9b770961bb12e114601cfb401f8ba4d0",
+          "modified_at": "2026-09-30T13:45:52.901450+00:00",
+          "uncompressed_regular_member_bytes": 7326545,
+          "members": 587,
+          "regular_file_members": 536,
+          "symlink_members": 0,
+          "hardlink_members": 0,
+          "groups": {},
+          "stable_during_read": true
+        }
+      },
+      "attribution": "AEEP-owned final wheel and source distribution archive bytes, from the completed source94 package-build phase. Not fresh-installed incremental system bytes; dependencies are excluded. Prior aeep_wheel_snapshot remains unchanged.",
+      "wheel_only_staging_assessment": "Static wheel-member inventory measures exact shipped AEEP payload without dependencies, imports, entry-point execution, or new installation. No staging installation performed: installers remap .data payload, generate entry-point wrappers/RECORD and may compile bytecode; unpacked archive sizes therefore are not installed physical bytes or total-system delta. Shared Python/Codex/dependencies remain separately attributed; APFS allocation and generated install bytes unknown.",
+      "source_unchanged": true,
+      "no_install_uninstall_extract_or_download": true,
+      "no_model_container_resource_test": true
+    },
+    {
+      "observed_at": "2026-09-30T16:47:01.304605+00:00",
+      "source_digest": "bcbef9aa86a9376511560bd855bd70695057cbd120d260dca633de007610633b",
+      "existing_validation_record": "delivery-boundary-validation-bcbef9aa86a9.json",
+      "validation_record_sha256": "3e2773648c0b1df2e773905dd885452513b546d4a4555e5743512d56af59fdfc",
+      "package_build_phase": {
+        "name": "package-build",
+        "argv": [
+          "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+          "-m",
+          "build",
+          "--no-isolation"
+        ],
+        "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+        "environment_overrides": {
+          "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+          "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+          "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+        },
+        "log": "delivery-boundary-package-build-bcbef9aa86a9.log",
+        "recorded_at": "2026-09-30T16:45:09.153683+00:00",
+        "command_spelling_exact": true,
+        "timeout_seconds": 1200,
+        "attempt": 1,
+        "driver_sha256": "53da4c790742a50045cf081d3420d01f9ecf0c38c43d3d2796bc0a024772e78e",
+        "exit_code": 0,
+        "wall_seconds": 1.7926840418949723,
+        "source_unchanged": true
+      },
+      "build_log_sha256": "41e20cb850179ee112a5841c55d9ebd9e916ef99b42fa1d2a5ee65b3bcca4c4c",
+      "artifacts": {
+        "aeep_agent_router-0.8.0-py3-none-any.whl": {
+          "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0-py3-none-any.whl",
+          "compressed_bytes": 1157215,
+          "allocated_artifact_bytes": 1159168,
+          "sha256": "a90061f0fdaec735227534fee73f8e192ce497a720637d7bce3afda34b942e1b",
+          "modified_at": "2026-09-30T16:45:10.831975+00:00",
+          "stable_during_read": true,
+          "members": 404,
+          "uncompressed_member_bytes": 5751263,
+          "bytecode_members": 0,
+          "entry_point_metadata_present": true
+        },
+        "aeep_agent_router-0.8.0.tar.gz": {
+          "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0.tar.gz",
+          "compressed_bytes": 1300708,
+          "allocated_artifact_bytes": 1302528,
+          "sha256": "b7a09435657ce7a6876be61f6987ce9267ebbce19097488b09e51053803523be",
+          "modified_at": "2026-09-30T16:45:10.077647+00:00",
+          "stable_during_read": true,
+          "members": 598,
+          "regular_file_members": 546,
+          "uncompressed_regular_member_bytes": 7437039,
+          "symlink_members": 0,
+          "hardlink_members": 0
+        }
+      },
+      "attribution": "AEEP-owned current wheel/source archive metadata from completed sourcebcbef9 package-build; no installation/extraction or fresh installed-system delta. Prior94 snapshot retained historically.",
+      "wheel_only_staging_assessment": "Static wheel-member inventory measures exact shipped AEEP payload without dependencies, imports, entry-point execution, or new installation. No staging installation performed: installers remap .data payload, generate entry-point wrappers/RECORD and may compile bytecode; unpacked archive sizes therefore are not installed physical bytes or total-system delta. Shared Python/Codex/dependencies remain separately attributed; APFS allocation and generated install bytes unknown.",
+      "source_unchanged": true,
+      "no_install_uninstall_extract_or_download": true,
+      "no_model_container_resource_test": true
+    }
+  ]
+}

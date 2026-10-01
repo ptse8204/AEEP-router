@@ -1,6 +1,6 @@
-# Bring Your Own Subscription
+# Bring your own subscription
 
-AEEP treats ChatGPT/Codex, Claude/Claude Code, local models, MCP servers, and local software as resources the user already owns. It never extracts consumer credentials or converts subscription capacity into currency.
+AEEP can route work through resources you already have: ChatGPT/Codex, Claude/Claude Code, local models, MCP servers, and local software. It never extracts consumer credentials or converts subscription capacity into currency.
 
 ## Codex or ChatGPT
 
@@ -26,7 +26,7 @@ it is not exported as a model tool. Personal OpenAI capacity remains `SELF_ONLY`
 
 ## Quota signals
 
-Set quota state from user declarations, official host metadata, official CLI output, rate-limit responses, or conservative heuristics. Do not scrape undocumented billing dashboards. `subscription_units` and quota pressure remain provider-local, private routing signals—not cash or transferable credits.
+Set quota state from user declarations, official host metadata, official CLI output, rate-limit responses, or conservative heuristics. Do not scrape undocumented billing dashboards. `subscription_units` and quota pressure are private routing signals in provider-local units. They are neither cash nor transferable credits.
 
 ```bash
 aeep subscriptions add claude-max --provider anthropic --product claude-max --state normal

@@ -1,0 +1,113 @@
+{
+  "source_before": "cd21b218c9b9beac1900aacbb4ede3347f310f9efc677c3d72637e5416b70a99",
+  "source_after": "cd21b218c9b9beac1900aacbb4ede3347f310f9efc677c3d72637e5416b70a99",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.45398975000716746,
+      "log": "reports/v08/environment-stop-release-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4489138750359416,
+      "log": "reports/v08/environment-stop-release-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5072915829950944,
+      "log": "reports/v08/environment-stop-release-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4533011669991538,
+      "log": "reports/v08/environment-stop-release-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4584367919014767,
+      "log": "reports/v08/environment-stop-release-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4559792500222102,
+      "log": "reports/v08/environment-stop-release-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.543987000011839,
+      "log": "reports/v08/environment-stop-release-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 8.816660957993008,
+      "log": "reports/v08/environment-stop-release-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 3.433191582909785,
+      "log": "reports/v08/environment-stop-release-08.txt"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "schema_version": "assessment.worker-inspection.v1",
+  "request_id": "conformance_probe_867a41ac4a204cb0bb9741fdd358ed70",
+  "worker_digest": "afe888d75ba979957faad5882b5868bcc7ad0c60cff004754fe4745759331699",
+  "execution_evidence_digest": "39d8adc7807fb59d782908894400da827aa9a3ea620c6913c8eca43d93515d7d",
+  "observations": {
+    "inspection_complete": false,
+    "full_conformance": false,
+    "model_turns": 0,
+    "identity_digest": "65460c2e4ad2645573db245b43654a42eb43d0902094b995448d27226e13a738",
+    "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+    "models": [
+      {
+        "id": "gpt-6-astra",
+        "reasoning_efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ]
+      },
+      {
+        "id": "gpt-5.6-sol",
+        "reasoning_efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ]
+      },
+      {
+        "id": "gpt-5.6-terra",
+        "reasoning_efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ]
+      },
+      {
+        "id": "gpt-5.6-luna",
+        "reasoning_efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ]
+      },
+      {
+        "id": "gpt-5.5",
+        "reasoning_efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ]
+      }
+    ],
+    "config/read": {
+      "config/default_permissions": {
+        "present": false,
+        "matches": false,
+        "expected": "aeep"
+      },
+      "config/approval_policy": {
+        "present": false,
+        "matches": false,
+        "expected": "never"
+      },
+      "config/web_search": {
+        "present": true,
+        "matches": true,
+        "expected": "disabled"
+      },
+      "config/mcp_servers": {
+        "present": true,
+        "matches": true,
+        "expected": {}
+      },
+      "config/features/apps": {
+        "present": true,
+        "matches": true,
+        "expected": false
+      },
+      "config/features/memories": {
+        "present": true,
+        "matches": true,
+        "expected": false
+      },
+      "config/features/multi_agent": {
+        "present": true,
+        "matches": true,
+        "expected": false
+      },
+      "config/features/browser_use": {
+        "present": true,
+        "matches": true,
+        "expected": false
+      },
+      "config/features/computer_use": {
+        "present": true,
+        "matches": true,
+        "expected": false
+      }
+    },
+    "configRequirements/read": {
+      "requirements/allowedPermissionProfiles": {
+        "present": true,
+        "matches": true,
+        "expected": {
+          "aeep": true
+        }
+      },
+      "requirements/allowedApprovalPolicies": {
+        "present": true,
+        "matches": true,
+        "expected": [
+          "never"
+        ]
+      },
+      "requirements/allowedWebSearchModes": {
+        "present": true,
+        "matches": true,
+        "expected": [
+          "disabled"
+        ]
+      }
+    },
+    "advertised_inventory": {
+      "skills": [
+        {
+          "name": "imagegen",
+          "path": "/worker/auth/skills/.system/imagegen/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "openai-docs",
+          "path": "/worker/auth/skills/.system/openai-docs/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "plugin-creator",
+          "path": "/worker/auth/skills/.system/plugin-creator/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "review-agent",
+          "path": "/worker/auth/skills/.system/review-agent/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "skill-creator",
+          "path": "/worker/auth/skills/.system/skill-creator/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "skill-installer",
+          "path": "/worker/auth/skills/.system/skill-installer/SKILL.md",
+          "enabled": false
+        },
+        {
+          "name": "spreadsheets:Spreadsheets",
+          "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+          "enabled": true
+        }
+      ],
+      "apps": [],
+      "servers": []
+    },
+    "failed_stage": "sandbox_command",
+    "error_type": "ConfigurationError",
+    "cleanup_confirmed": true
+  }
+}

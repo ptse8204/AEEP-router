@@ -1,0 +1,94 @@
+{
+  "observation": {
+    "operation_id": "composed:conformance_current_composed_ready_ade3",
+    "request_digest": "055387945599118caaa6fdcf24fe866147b6e06e6b8b2ca5b141c00dbd0ee106",
+    "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+    "stage": "observation_verified_pending_cleanup",
+    "error_type": null,
+    "cleanup_confirmed": true,
+    "host_receipt_digest": "946050ca8b65b01f032c0e6c44cd0a09532aa60951a1445d66225c202acd18b9",
+    "outer_attempt_digests": [
+      "fd9473cfe19f866320e27c93ef18f409c3d169abcb7efcf21565efa6e68dff43"
+    ],
+    "outer_receipt_digests": [
+      "913f5bf500dbaa84064a455b7d9827828108d28496c4d823f3a6c7ab0e5da66d"
+    ],
+    "elapsed_seconds": 17.562048667110503,
+    "full_conformance": false
+  },
+  "receipt_status": "success",
+  "receipt_metadata": {
+    "actual_model": "gpt-6.1-sol",
+    "model_turn_count": 1,
+    "dynamic_tool_calls": 1,
+    "dynamic_cleanup_confirmed": true,
+    "dynamic_declaration_bytes": 758,
+    "dynamic_schema_bytes": 124,
+    "execution_evidence_digest": "f4126c61ffa13841b4a199ca59a72cd09897528d59018683e027f828cbe7df32",
+    "host_runtime_digest": "c05359f340fc71345cdbc7b9c2e47198e2287fafb79088581c789394ac0e038f"
+  },
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 13077.49562500976,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 17831,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 68,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [
+      {
+        "provider": "openai",
+        "resource_pool": "codex.self",
+        "unit": "provider_unit",
+        "consumed": null,
+        "source": {
+          "status": "unavailable",
+          "source": "unavailable",
+          "trust": "untrusted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        },
+        "included_or_paid": "unknown",
+        "rate_snapshot_id": null,
+        "usage_fingerprint": null
+      }
+    ],
+    "model_usage": [
+      {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "access_channel": "subscription",
+        "input_tokens": 17831,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 68,
+        "reasoning_output_tokens": 0,
+        "evidence": {
+          "status": "complete",
+          "source": "provider_report",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": "2026-09-30T20:46:46.962402Z"
+        }
+      }
+    ],
+    "tool_footprint": null
+  }
+}

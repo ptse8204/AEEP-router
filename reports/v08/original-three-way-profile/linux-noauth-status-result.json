@@ -1,0 +1,47 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_beca7fb1d0ab4b158d702065baaf0214",
+      "operation_id": "linux-noauth-status:conformance_probe_beca7fb1d0ab4b158d702065baaf0214",
+      "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+      "worker_digest": "e5c5554acdf38970a348945789b677695ed66c39523259449287ef29cf2eef00",
+      "cleanup_confirmed": true,
+      "protocol_passed": true,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "configuration_initialization_passed": true,
+      "own_server_present": true,
+      "own_tool_count": 1,
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:24:43.702092Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:24:43.702119Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "elapsed_seconds": 2.7267644160892814,
+      "canonical_record_digest": "81b6a503169c6e2e26ac2350470de389864b5d0e0384aca8ed937353327e2e34"
+    }
+  },
+  "configuration_initialization_passed": true,
+  "classification": "own_server_ready",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8629,
+    "model_turns": 2535,
+    "elapsed_seconds": 74749.29591136216,
+    "cash_usd": "0.0"
+  }
+}

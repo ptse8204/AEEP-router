@@ -1,0 +1,74 @@
+{
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "review_sha256": "9fdd290818817379de0b3fc5db744e471f0d07d3b52dee3b6e14a1b0bffe43f5",
+  "driver_sha256": "7c63c3fdb07e84e93702ff165ebe561ec9a813ccd56dd653ed9ccdc11da64713",
+  "scope_digest": "e4986d5bd6ed97ed74010307ec6f2af42bea096429566fa6996a3237f8266254",
+  "executor_fingerprint": "sha256:aff053fb180e78c0482e9cc4166c2b9f709e9e3d4ae27e69ee260625f01da65a",
+  "receipt_id": "rcpt_9f8b47ea70034508a57fd84204a061f5",
+  "effect_sha256": "0acc2ec023b9b7d04f9dda3a9cf36cdca86a8e678ce845e09da6f6f5c77f41b7",
+  "task_attempts": 1,
+  "task_replays": 0,
+  "phases": [
+    {
+      "phase": "reviewed_before_execution",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 873256,
+        "allocated_bytes": 876544
+      },
+      "elapsed_ms": 117.5986248999834
+    },
+    {
+      "phase": "failed_write_before_close",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 1174016,
+        "allocated_bytes": 1175552
+      },
+      "elapsed_ms": 450.21812501363456
+    },
+    {
+      "phase": "closed_unresolved",
+      "disk": {
+        "files": 1,
+        "logical_bytes": 815104,
+        "allocated_bytes": 815104
+      },
+      "elapsed_ms": 451.7609169706702
+    },
+    {
+      "phase": "reconciled_after_restart",
+      "disk": {
+        "files": 3,
+        "logical_bytes": 901464,
+        "allocated_bytes": 905216
+      },
+      "elapsed_ms": 460.04045801237226
+    },
+    {
+      "phase": "reconciled_closed",
+      "disk": {
+        "files": 1,
+        "logical_bytes": 815104,
+        "allocated_bytes": 815104
+      },
+      "elapsed_ms": 460.39862488396466
+    }
+  ],
+  "recovery_wall_ms": 461.00641693919897,
+  "recovery_retained_bytes": 815104,
+  "recovery_local_checks": {
+    "wall_within_frozen_bound": true,
+    "retention_within_frozen_bound": true,
+    "allowance_not_refunded": true,
+    "effect_reverted": true
+  },
+  "operator_attestation": "Locally observed synthetic effect was deleted and exact-reviewed reconciliation applied; not automated verification of arbitrary effects",
+  "model_turns": 0,
+  "source_unchanged": true,
+  "temporary_measurement_store_removed_after_report": true,
+  "canonical_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-resource-successor-evidence/recovery",
+  "canonical_review_and_receipt_retained": true,
+  "resource_gate_complete": false,
+  "release_ready": false
+}

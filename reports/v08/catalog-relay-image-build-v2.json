@@ -1,0 +1,14 @@
+{
+  "base_image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "method": "stopped-container snapshot; container never started",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "source_files": {
+    "integrations/managed-worker/worker-launch": "ceae49ee124d0b4ad3abdb112856d24116996cf10054fa414702c95310eeefe1",
+    "src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275"
+  },
+  "launcher_mode": "0755",
+  "reason": "prior snapshot copied a non-executable launcher; Dockerfile chmod requirement now preserved",
+  "image": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7"
+}

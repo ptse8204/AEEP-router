@@ -1,0 +1,24 @@
+{
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "model_calls": 0,
+  "config": "[analytics]\nenabled = false\n[otel]\nexporter = \"none\"\ntrace_exporter = \"none\"\nmetrics_exporter = { otlp-http = { endpoint = \"http://127.0.0.1:4318/v1/metrics\", protocol = \"json\" } }\nlog_user_prompt = false\n",
+  "elapsed_seconds": 5.253218458034098,
+  "exit_code": 0,
+  "observation": {
+    "initialize_response": {
+      "id": 1,
+      "result": {
+        "userAgent": "aeep-offline-config-probe/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-offline-config-probe; 0.8)",
+        "codexHome": "/tmp/config-probe",
+        "platformFamily": "unix",
+        "platformOs": "linux"
+      }
+    },
+    "exit_code": -15,
+    "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir \"/tmp\" (codex_home: AbsolutePathBuf(\"/tmp/config-probe\"))\n\u001b[2m2026-09-26T08:38:34.246513Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-26T08:38:34.246540Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: https://developers.openai.com/codex/concepts/sandboxing#prerequisites. Codex will use the bundled bubblewrap in the meantime.\n"
+  },
+  "launcher_error": ""
+}

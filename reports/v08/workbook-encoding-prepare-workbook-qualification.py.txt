@@ -1,0 +1,37 @@
+import asyncio,json
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentScopeAmendment,AssessmentAuthorization,AssessmentEnvironment,content_digest
+from aeep.assessment.extensions import prepare
+from aeep.assessment.workbook import workbook_recipe
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection
+from aeep.qualification import RouteCandidate,behavior_fingerprint
+from aeep.models import Manifest
+p=Path('reports/v08')
+async def main():
+ raw=json.loads(Path('.aeep/live-review-v3/aeep.json').read_text());old=Router.from_manifest('.aeep/live-review-v3/aeep.json')
+ try:
+  s=AssessmentService(old,Path('.aeep/live-review-v3/.aeep/assessments').resolve());repo=s.repository
+  b=json.loads((p/'qualification-encoding-profile-review-bundle.json').read_text());a=json.loads((p/'qualification-encoding-profile-assembly.json').read_text())
+  d=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][0]['pair_definition_digest']))
+  env=AssessmentEnvironment(environment_id='workbook-encoding',kind='container',identity={'purpose':'Offline workbook generator/grader plus independently bound managed task workers'},container_image='sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228',container_runtime='/usr/local/bin/docker',container_socket='/Users/edwintse/.docker/run/docker.sock',memory_mb=512,conformance_digests={getattr(d,role).id:a['boundary_conformance_digests'][role] for role in ('control','treatment')},differential_conformance_digest=a['differential_conformance_digest'])
+  recipe=workbook_recipe();recipe_digest=repo.put('recipe',content_digest(recipe),recipe)
+  request=prepare(s,subject_id=b['requests'][0]['subject_digest'],recipe_id=recipe_digest,authorization_id='onboarding',environment=env,seed=202609262)
+  digests=set(request.definition_digests)|{request.subject_digest};definitions={digest:json.loads(old.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(digest,)).fetchone()[0]) for digest in digests}
+  grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'))
+  amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[request.subject_digest],recipe_digests=[request.recipe_digest],environment_digests=[request.environment_digest],reviewed_digests=sorted(digests))
+  before=list(old.store._connection.execute("SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id='onboarding'").fetchone())
+  assert 3600-before[2]>35 and before[-1]==0 and repo.effective_grant('onboarding').expires_at>datetime.now(timezone.utc)
+  bundle={'authority':'Operator delegated routine test/plan revisions on 2026-09-25','purpose':'Fresh workbook fixtures for reviewed failure-code diagnostics in the existing offline image; no candidate/model execution','request':request.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'maximum_operations':1,'maximum_reserved_seconds':35,'maximum_model_turns':0,'budget_expanded':False,'usage_before':before}
+  with (p/'workbook-encoding-materialization-review.json').open('x') as f:f.write(json.dumps(bundle,indent=2)+'\n')
+  repo.approve_bundle(amendment,definitions)
+  old.store.save_route_candidate(RouteCandidate(executor_id=d.treatment.id,source_id='operator-reviewed-workbook-encoding',capability=d.treatment.capability,behavior_fingerprint=behavior_fingerprint(d.treatment),spec=d.treatment))
+  raw['executors']=[*raw['executors'],d.control.model_dump(mode='json')]
+  manifest=Manifest.model_validate(raw)
+  with Path('.aeep/live-review-v3/workbook-encoding.json').open('x') as f:f.write(manifest.model_dump_json(indent=2))
+  with (p/'workbook-encoding-materialization-approval.json').open('x') as f:f.write(json.dumps({'request_id':request.plan_id,'scope_amendment_digest':content_digest(amendment),'authority':bundle['authority'],'usage_before':before,'model_turns':0},indent=2)+'\n')
+  print(json.dumps({'request_id':request.plan_id,'recipe_digest':recipe_digest,'environment_digest':request.environment_digest,'usage_before':before},indent=2))
+ finally:await old.close()
+asyncio.run(main())

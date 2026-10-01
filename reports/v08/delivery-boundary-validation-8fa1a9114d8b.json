@@ -1,0 +1,283 @@
+{
+  "source_digest": "8fa1a9114d8bfd83b28fa8acd1ba681f87a20d8a7ff88957b416bbdef377306a",
+  "review_sha256": "fe639150c41724d0e27cc54def9385043f3e973832976300f7afc904333a356b",
+  "review_filename": "native-boundary-validation-composed-review.json",
+  "scratch_directory": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-compileall-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:34.708979+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 0.08700445806607604,
+      "source_unchanged": true
+    },
+    {
+      "name": "schema",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-schema-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:34.917091+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 0.6116925829555839,
+      "source_unchanged": true
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-ruff-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:35.648033+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 0.08964429213665426,
+      "source_unchanged": true
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "mypy",
+        "src"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-mypy-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:35.859800+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 1.385874249972403,
+      "source_unchanged": true
+    },
+    {
+      "name": "policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-policy-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:37.370280+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 0.1515870839357376,
+      "source_unchanged": true
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-pytest-8fa1a9114d8b.xml",
+        "--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w/pytest"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-pytest-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:14:37.640480+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 462.32507083402015,
+      "source_unchanged": true
+    },
+    {
+      "name": "coverage-pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-coverage-pytest-8fa1a9114d8b.xml",
+        "--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w/coverage"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "COVERAGE_FILE": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w/coverage.data"
+      },
+      "log": "delivery-boundary-coverage-pytest-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:22:20.096853+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 719.9621942078229,
+      "source_unchanged": true
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "COVERAGE_FILE": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w/coverage.data"
+      },
+      "log": "delivery-boundary-coverage-report-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:34:20.186690+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 1.195848000003025,
+      "source_unchanged": true
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-coverage-8fa1a9114d8b.json"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "COVERAGE_FILE": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-m4k8jq2w/coverage.data"
+      },
+      "log": "delivery-boundary-coverage-json-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:34:21.513857+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 1.5573037499561906,
+      "source_unchanged": true
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-coverage-8fa1a9114d8b.json"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-critical-coverage-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:34:23.196958+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 0,
+      "wall_seconds": 0.04894270794466138,
+      "source_unchanged": true
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-coverage-8fa1a9114d8b.json"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-assessment-coverage-8fa1a9114d8b.log",
+      "recorded_at": "2026-09-30T17:34:23.365059+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "attempt": 1,
+      "driver_sha256": "d8d93faf46c812e246ace4344231d715965d77e855a33334c5ed7ffaa07555f8",
+      "exit_code": 1,
+      "wall_seconds": 0.04764624987728894,
+      "source_unchanged": true
+    }
+  ],
+  "complete": false,
+  "release_ready": false
+}

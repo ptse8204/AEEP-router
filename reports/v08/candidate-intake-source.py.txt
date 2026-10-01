@@ -1,0 +1,36 @@
+import asyncio,json,sqlite3
+from datetime import datetime,timezone
+from pathlib import Path
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentSubject,content_digest
+from aeep.assessment.identity import verify_subject
+from aeep.assessment.recipes import shipped_recipe
+from aeep.assessment.verification import verification_source_digest
+async def main():
+ root=Path.cwd();source=verification_source_digest(root);out=root/'reports/v08/remaining-family-candidates.json'
+ assert not out.exists()
+ manifest=root/'.aeep/live-review-v3/aeep.json'
+ router=Router.from_manifest(manifest)
+ try:
+  service=AssessmentService(router,root/'.aeep/live-review-v3/.aeep/assessments')
+  db=router.store._connection
+  sql="SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id='onboarding'"
+  before=list(db.execute(sql).fetchone())
+  subject=service.inspect_local(Path('/Users/edwintse/.codex/plugins/cache/ponytail/ponytail/4.10.0/skills/ponytail'),kind='skill')
+  verify_subject(subject)
+  prior=AssessmentSubject.model_validate(service.repository.get('subject','subject_169dba4bb752e622c3d885ca6b3d43c4383c588264dfdc0034035691d5f5bb6a'))
+  verify_subject(prior)
+  costs=[{'id':row[0],'record':json.loads(row[1])} for row in db.execute("SELECT id,payload_json FROM assessment_records WHERE kind='setup_cost' AND json_extract(payload_json,'$.subject_digest')=?",(content_digest(subject),))]
+  after=list(db.execute(sql).fetchone());assert before==after
+  assert len(subject.dependency_digests)==1 and subject.declarations['skills'][0]['name']=='ponytail'
+  definitions={f:shipped_recipe(f).model_dump(mode='json') for f in ['csv','text','search']}
+  candidates=[
+   {'families':['csv','workbook'],'subject_id':prior.subject_id,'subject_digest':content_digest(prior),'selected_capability':'Spreadsheets local-file workflow with its reviewed package dependencies','structure':'complete_workflow','reason':'The installed instructions support delimited data and workbook manipulation. CSV and workbook tasks have a direct functional connection.','status':'historical workbook mapping exists; CSV stage mappings and current-source profiles still required'},
+   {'families':['text','search'],'subject_id':subject.subject_id,'subject_digest':content_digest(subject),'selected_capability':'Ponytail main coding skill; no sibling skills or lifecycle hooks','structure':'controlled_agent','reason':'Both tasks can be completed by short parsing/search programs. The skill explicitly addresses parsers, code, standard-library choices and minimal implementations; its possible value is less agent work or fewer mistakes. This is a hypothesis, not observed benefit.','scope_limit':'Evidence would apply to adding this coding-guidance skill to an agent doing these tasks, not to a standalone text extractor/search implementation or the full Ponytail package.','qualification':'Require the exact skill only in qualification; verify instruction loading separately from task correctness.','value_studies':'Keep shared tools and task instructions identical. Candidate availability is optional; ignored cases stay in the main comparison.','status':'selected and statically inspected; no worker image, route, comparison, grant scope or approval created'}]
+  record={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':source,'authority':'operator delegated candidate selection and routine test-definition preparation; no spending or disclosure expansion','candidates':candidates,'new_subject':subject.model_dump(mode='json'),'recipe_digests':{f:content_digest(v) for f,v in definitions.items()},'setup_cost_records':costs,'setup_cost_handling':'Existing static-inspection setup record retained; future proposed plan must reference it and charge it through the existing ledger. This intake did not run a candidate or reserve a model turn.','grant_counters_before':before,'grant_counters_after':after,'model_calls':0,'readiness':False,'next_requirements':['freeze selected skill in a treatment image derived from the shared capable base','verify candidate absence and equivalent permissions in control','review exact task mappings, stronger/reusable controls and disjoint evaluation-stage inputs','obtain current conformance and sufficient explicit finite authorization','run qualification then marginal/native catalog stages without changing thresholds']}
+  assert verification_source_digest(root)==source
+  with out.open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+  print(json.dumps({'subject_id':subject.subject_id,'subject_digest':content_digest(subject),'setup_cost_ids':[item['id'] for item in costs],'grant_counters_unchanged':True,'record':str(out)}))
+ finally:await router.close()
+asyncio.run(main())

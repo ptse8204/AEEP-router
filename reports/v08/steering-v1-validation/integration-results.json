@@ -1,0 +1,107 @@
+[
+  {
+    "argv": [
+      "python3",
+      "examples/economic_evidence/campaign.py",
+      "--repetitions",
+      "30",
+      "--check",
+      "--require-gates"
+    ],
+    "exit_code": 0,
+    "seconds": 0.7260150909423828,
+    "log": "reports/v08/steering-v1-validation/integration-00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.49537086486816406,
+    "log": "reports/v08/steering-v1-validation/integration-01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-report",
+      "reports/v05/dsh/live-safety.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4798910617828369,
+    "log": "reports/v08/steering-v1-validation/integration-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-comparison",
+      "reports/v05/dsh/live-comparison.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.48357200622558594,
+    "log": "reports/v08/steering-v1-validation/integration-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-native-plan"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4958939552307129,
+    "log": "reports/v08/steering-v1-validation/integration-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/job_application/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.47475218772888184,
+    "log": "reports/v08/steering-v1-validation/integration-05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "aeep",
+      "provider",
+      "verify",
+      "examples/provider_package/aeep-provider.yaml",
+      "-m",
+      "examples/provider_package/aeep.yaml",
+      "--compact"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5697231292724609,
+    "log": "reports/v08/steering-v1-validation/integration-06.log"
+  },
+  {
+    "argv": [
+      "npm",
+      "test",
+      "--prefix",
+      "integrations/dsh-aeep-router"
+    ],
+    "exit_code": 0,
+    "seconds": 1.5636711120605469,
+    "log": "reports/v08/steering-v1-validation/integration-07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "build",
+      "--no-isolation",
+      "--outdir",
+      "reports/v08/steering-v1-validation/dist"
+    ],
+    "exit_code": 0,
+    "seconds": 2.0902652740478516,
+    "log": "reports/v08/steering-v1-validation/integration-08.log"
+  }
+]

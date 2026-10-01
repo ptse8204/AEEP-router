@@ -1,0 +1,35 @@
+{
+  "kind": "exploratory native Codex project MCP integration, not a model trial or controlled comparison",
+  "installed_codex_version": "codex-cli 0.154.0",
+  "project_condition": "fresh trusted Git project with isolated temporary CODEX_HOME; no unrelated MCP server configured",
+  "first_host_call": {
+    "discovered_tools": ["aeep_csv"],
+    "receipt_id": "rcpt_87c0ed99f2c247debd3e5bd5dfef0cd3",
+    "status": "failed",
+    "attempts_used": 1,
+    "cause": "native sandbox denied exec of /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 because the fixture omitted the Python installation from read_roots",
+    "diagnostic": "sandbox-exec: execvp() failed: Operation not permitted",
+    "accounting": "failed attempt retained in its temporary project until fixture cleanup; not replayed or converted to success"
+  },
+  "corrected_host_call": {
+    "fixture_change": "declare the canonical Python installation as a native read root, matching the existing native boundary test",
+    "discovered_tools": ["aeep_csv"],
+    "other_mcp_servers": 0,
+    "receipt_id": "rcpt_bf27fdf171fe4db4ab16707f471e0c57",
+    "status": "success",
+    "output": {"records": [{"name": "Ada"}]},
+    "receipt_summary": "Completed; task verification is incomplete.",
+    "pause_rejection": "task activation is paused or incomplete",
+    "exhaustion_rejection": "task scope allowance exhausted or an earlier attempt needs completion/recovery",
+    "attempts_used": 1,
+    "uninstall": "project MCP entry and AEEP-created config removed; attempt remained in its temporary project until fixture cleanup"
+  },
+  "retained_regression": "tests/test_v08_task_lifecycle.py::test_actual_codex_project_mcp_discovery_call_pause_and_uninstall",
+  "import_boundary": "The retained regression places an aeep.py that raises in the project; the MCP entry uses Python -I -m aeep and the host call succeeds without importing that file.",
+  "limitations": [
+    "Temporary synthetic projects were removed after each probe; receipt IDs in this summary are observed references, not durable stores",
+    "No model turn occurred, so automatic model choice and current-chat hot loading remain unobserved",
+    "Codex can retain cached tool inventory in an already running session",
+    "This does not establish arbitrary task preservation, marginal benefit, live assessment gates or controlled worker isolation"
+  ]
+}

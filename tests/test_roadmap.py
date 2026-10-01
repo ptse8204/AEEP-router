@@ -298,7 +298,16 @@ async def test_local_registry_discovers_only_requested_capability(tmp_path):
             )
         ],
     )
-    assert report.passed
+    if not report.passed:
+        from aeep.assessment.repository import AssessmentRepository
+        repository = AssessmentRepository(router.store)
+        receipt_details = []
+        for identity in report.source_evidence_ids:
+            receipt = repository.get('qualification_receipt', identity)
+            receipt_details.append({key: receipt.get(key) for key in
+                                    ('status', 'error_type', 'error_message', 'task_valid')})
+        pytest.fail(f'qualification failed: checks={report.static_checks}, '
+                    f'runs={report.passed_runs}/{report.dynamic_runs}, receipts={receipt_details}')
     router.activate_candidate("remote.local")
     decision = router.route(ActionRequest(capability="text.stats", input={"text": "abc"}))
     assert decision.selected_executor_id == "remote.local"

@@ -1,0 +1,709 @@
+{
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "review_sha256": "9fdd290818817379de0b3fc5db744e471f0d07d3b52dee3b6e14a1b0bffe43f5",
+  "samples": [
+    {
+      "index": "0",
+      "arm": "native",
+      "process_wall_ms": 1118.9023749902844,
+      "sampled_process_tree": {
+        "cpu_ms": 1012.014336,
+        "peak_memory_mb": 491.8125,
+        "memory_mb_seconds": 290.6183461094806
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "834682b7cc61bc57774a9a8650f772f4e718929983277f308f738616072a6723",
+      "tasks": [
+        {
+          "task_wall_ms": 538.4100419469178,
+          "input_sha256": "d7a02c6c4b395c0f25313e50608d8fa08cd54880edc7df41a2fbd802bb23d509",
+          "input_json_bytes": 7320,
+          "output_json_bytes": 7488,
+          "output_sha256": "4ef170e058ea5f290e8de17fb75442356d48f7f2a8fe5d98b00dbcaea1487b25",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": null,
+          "recorded_resources": {
+            "cpu_ms": 248.53100200000003,
+            "peak_memory_mb": 152.21875,
+            "memory_mb_seconds": 22.24811873964427
+          }
+        }
+      ],
+      "retention_checkpoints": [],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ]
+    },
+    {
+      "index": "0",
+      "arm": "aeep",
+      "process_wall_ms": 1139.782833866775,
+      "sampled_process_tree": {
+        "cpu_ms": 1130.452192,
+        "peak_memory_mb": 494.828125,
+        "memory_mb_seconds": 286.59270397096407
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "f096e195d812884ed41855d5ca4f6b309ccb5e4aacc19a72e9f70578359ae617",
+      "tasks": [
+        {
+          "task_wall_ms": 422.0204579178244,
+          "input_sha256": "d7a02c6c4b395c0f25313e50608d8fa08cd54880edc7df41a2fbd802bb23d509",
+          "input_json_bytes": 7320,
+          "output_json_bytes": 7488,
+          "output_sha256": "4ef170e058ea5f290e8de17fb75442356d48f7f2a8fe5d98b00dbcaea1487b25",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_8253f0b9170d4cadab32f54ccc697ee1",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 383.2736248150468,
+            "cpu_ms": 208.16179200000002,
+            "memory_mb_seconds": 18.347261873685056,
+            "peak_memory_mb": 149.5,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1872,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        }
+      ],
+      "retention_checkpoints": [
+        {
+          "phase": "activated",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1083903,
+            "allocated_bytes": 1089536,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_1",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1384663,
+            "allocated_bytes": 1388544,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "closed",
+          "disk": {
+            "files": 2,
+            "logical_bytes": 950272,
+            "allocated_bytes": 950272,
+            "symlink_files_skipped": 0
+          }
+        }
+      ],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        },
+        {
+          "bytes": 501,
+          "digest": "122160a8042a09f97c9f87ee4ba2aff75c7aa2c67e219010eda0004b87aac80d"
+        },
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ],
+      "scope_digest": "de650200ff41b85c83eecd652e243b40ad778bd029da6b483d606af3bb0fab38",
+      "activation_id": "task_92c7d55c375b4a849ae528828c2ecf66",
+      "executor_fingerprint": "sha256:caefe1d0e199ebe63511abfe8e58515ff2273768761858528d075e10b0ee621d",
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "uninstall_inspection": {
+        "activation_id": "task_92c7d55c375b4a849ae528828c2ecf66",
+        "activation_digest": "d27e3ae68fe41cf0beb6f783d3f60dcda832988755d0fbded6477d185ef37447",
+        "scope_digest": "de650200ff41b85c83eecd652e243b40ad778bd029da6b483d606af3bb0fab38",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-bpcaemsk/.aeep/task-profiles/task_92c7d55c375b4a849ae528828c2ecf66.json",
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-bpcaemsk/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-bpcaemsk/.codex/config.toml",
+        "retained_artifacts": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-bpcaemsk/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "config_mutations": 2,
+      "retained_project_bytes": 950272,
+      "canonical_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-resource-successor-evidence/0-aeep",
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "config": true,
+        "config_mutations": true,
+        "config_restored": true
+      }
+    },
+    {
+      "index": "1",
+      "arm": "aeep",
+      "process_wall_ms": 1203.459749929607,
+      "sampled_process_tree": {
+        "cpu_ms": 1190.942556,
+        "peak_memory_mb": 494.0,
+        "memory_mb_seconds": 295.40432155531016
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "601ccb7a8b9a6fd469c94a78ecb7cae803be890e7f3502efc06365b3662f2bf5",
+      "tasks": [
+        {
+          "task_wall_ms": 423.1830418575555,
+          "input_sha256": "36e6b87b1d641a547f1d0f63aa633ff0d4c5ccaab4b11ef80974a436b3c95d04",
+          "input_json_bytes": 7306,
+          "output_json_bytes": 7424,
+          "output_sha256": "0bcf042c95a646d9daa780516ed011dff14927d5caf1e3506212c53a69fba6c1",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_13070604ce244935959bca1d39ba00a7",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 383.0067089293152,
+            "cpu_ms": 211.219368,
+            "memory_mb_seconds": 18.513887060336856,
+            "peak_memory_mb": 149.34375,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1856,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        }
+      ],
+      "retention_checkpoints": [
+        {
+          "phase": "activated",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1083903,
+            "allocated_bytes": 1089536,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_1",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1384663,
+            "allocated_bytes": 1388544,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "closed",
+          "disk": {
+            "files": 2,
+            "logical_bytes": 950272,
+            "allocated_bytes": 950272,
+            "symlink_files_skipped": 0
+          }
+        }
+      ],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        },
+        {
+          "bytes": 501,
+          "digest": "36032992bdb7eeb05ebfbfc3e7ad13ae4a15b114034592dd27793f5510f88a0c"
+        },
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ],
+      "scope_digest": "f34336be03f6fb595d6b4caeabd6982ed47062198416f9009faad2cc9284c39d",
+      "activation_id": "task_5dc5783f60904ddbac5bbf4439e032ed",
+      "executor_fingerprint": "sha256:a10fa03d7fc32fd8bc38ece3b52a98c8f4c130b1bc4ccd26329b063a05261347",
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "uninstall_inspection": {
+        "activation_id": "task_5dc5783f60904ddbac5bbf4439e032ed",
+        "activation_digest": "77d6e66386496629613e1897d2dfa80cd6a4a96e080066d34f74d7722392e600",
+        "scope_digest": "f34336be03f6fb595d6b4caeabd6982ed47062198416f9009faad2cc9284c39d",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-_q9hlhog/.aeep/task-profiles/task_5dc5783f60904ddbac5bbf4439e032ed.json",
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-_q9hlhog/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-_q9hlhog/.codex/config.toml",
+        "retained_artifacts": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-_q9hlhog/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "config_mutations": 2,
+      "retained_project_bytes": 950272,
+      "canonical_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-resource-successor-evidence/1-aeep",
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "config": true,
+        "config_mutations": true,
+        "config_restored": true
+      }
+    },
+    {
+      "index": "1",
+      "arm": "native",
+      "process_wall_ms": 978.3997910562903,
+      "sampled_process_tree": {
+        "cpu_ms": 923.8819800000001,
+        "peak_memory_mb": 486.65625,
+        "memory_mb_seconds": 232.33679838800163
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "3ddd5529ffd859d826ecc0c48f8070773a09c90b049c877059451c637d06aee4",
+      "tasks": [
+        {
+          "task_wall_ms": 387.5714170280844,
+          "input_sha256": "36e6b87b1d641a547f1d0f63aa633ff0d4c5ccaab4b11ef80974a436b3c95d04",
+          "input_json_bytes": 7306,
+          "output_json_bytes": 7424,
+          "output_sha256": "0bcf042c95a646d9daa780516ed011dff14927d5caf1e3506212c53a69fba6c1",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": null,
+          "recorded_resources": {
+            "cpu_ms": 186.20037200000002,
+            "peak_memory_mb": 148.9375,
+            "memory_mb_seconds": 20.073059713737166
+          }
+        }
+      ],
+      "retention_checkpoints": [],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ]
+    },
+    {
+      "index": "2",
+      "arm": "native",
+      "process_wall_ms": 967.671416932717,
+      "sampled_process_tree": {
+        "cpu_ms": 935.7692160000001,
+        "peak_memory_mb": 490.75,
+        "memory_mb_seconds": 232.20312391822517
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "78538d2cb40ae874039389685cfa6ae4c3353924db50a6b0dd54e9ae8334a317",
+      "tasks": [
+        {
+          "task_wall_ms": 382.85745889879763,
+          "input_sha256": "4e80ae1bcc1fb45fce6be652aecd70e60d37c25db190521bb447347c8bf7c2b5",
+          "input_json_bytes": 7373,
+          "output_json_bytes": 7572,
+          "output_sha256": "3a5a2023921b8f795e3ab95092c55b70a1cbcda301702b9737cd16873b61885d",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": null,
+          "recorded_resources": {
+            "cpu_ms": 200.532168,
+            "peak_memory_mb": 150.265625,
+            "memory_mb_seconds": 19.13064717693851
+          }
+        }
+      ],
+      "retention_checkpoints": [],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ]
+    },
+    {
+      "index": "2",
+      "arm": "aeep",
+      "process_wall_ms": 1128.5637919791043,
+      "sampled_process_tree": {
+        "cpu_ms": 1083.4613020000002,
+        "peak_memory_mb": 491.015625,
+        "memory_mb_seconds": 288.7490449252109
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "f9b5cac8443329410ecdb6f068752d758f486fd36db30fe3df15dd553d77b946",
+      "tasks": [
+        {
+          "task_wall_ms": 423.7200829666108,
+          "input_sha256": "4e80ae1bcc1fb45fce6be652aecd70e60d37c25db190521bb447347c8bf7c2b5",
+          "input_json_bytes": 7373,
+          "output_json_bytes": 7572,
+          "output_sha256": "3a5a2023921b8f795e3ab95092c55b70a1cbcda301702b9737cd16873b61885d",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_15b8d995e08b42c69ebbec64e2127521",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 384.5537498127669,
+            "cpu_ms": 189.74712,
+            "memory_mb_seconds": 20.10187943870187,
+            "peak_memory_mb": 148.328125,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1893,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        }
+      ],
+      "retention_checkpoints": [
+        {
+          "phase": "activated",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1083903,
+            "allocated_bytes": 1089536,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_1",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1384663,
+            "allocated_bytes": 1388544,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "closed",
+          "disk": {
+            "files": 2,
+            "logical_bytes": 950272,
+            "allocated_bytes": 950272,
+            "symlink_files_skipped": 0
+          }
+        }
+      ],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        },
+        {
+          "bytes": 501,
+          "digest": "570973ae8c12c1ec55e75960e50e9395ddf5e49db5093af190dc04b3651deef1"
+        },
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ],
+      "scope_digest": "ef1fa19238d1e8d2d94337fe544ad54603cd656a9edb98014b320e1c7c8dbfe1",
+      "activation_id": "task_24ae00f349f74e39b10ed1de72564604",
+      "executor_fingerprint": "sha256:d13fa8318d23a609c571403e863df84ee6c36de9b7baa91b1a5550aa3fd9ffcd",
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "uninstall_inspection": {
+        "activation_id": "task_24ae00f349f74e39b10ed1de72564604",
+        "activation_digest": "c8f51e659a6589924711ce0e58469a6d757429b3e305ec47dd22d083e23b049d",
+        "scope_digest": "ef1fa19238d1e8d2d94337fe544ad54603cd656a9edb98014b320e1c7c8dbfe1",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-rfyg77qz/.aeep/task-profiles/task_24ae00f349f74e39b10ed1de72564604.json",
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-rfyg77qz/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-rfyg77qz/.codex/config.toml",
+        "retained_artifacts": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-rfyg77qz/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "config_mutations": 2,
+      "retained_project_bytes": 950272,
+      "canonical_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-resource-successor-evidence/2-aeep",
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "config": true,
+        "config_mutations": true,
+        "config_restored": true
+      }
+    },
+    {
+      "index": "retention_growth",
+      "arm": "aeep",
+      "process_wall_ms": 2026.0043751914054,
+      "sampled_process_tree": {
+        "cpu_ms": 1747.911336,
+        "peak_memory_mb": 494.75,
+        "memory_mb_seconds": 632.5477498649998
+      },
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "backend_digest": "c5e003775b37e1af2abaa8c5ea5c96183fce5fde3440e975c69b6b503de26dbc",
+      "tasks": [
+        {
+          "task_wall_ms": 422.98716702498496,
+          "input_sha256": "d7a02c6c4b395c0f25313e50608d8fa08cd54880edc7df41a2fbd802bb23d509",
+          "input_json_bytes": 7320,
+          "output_json_bytes": 7488,
+          "output_sha256": "4ef170e058ea5f290e8de17fb75442356d48f7f2a8fe5d98b00dbcaea1487b25",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_ff045867cc304c2aa8eacff9ee77499a",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 383.5966249462217,
+            "cpu_ms": 206.71545799999998,
+            "memory_mb_seconds": 20.688905552327924,
+            "peak_memory_mb": 149.8125,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1872,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        },
+        {
+          "task_wall_ms": 447.38975004293025,
+          "input_sha256": "36e6b87b1d641a547f1d0f63aa633ff0d4c5ccaab4b11ef80974a436b3c95d04",
+          "input_json_bytes": 7306,
+          "output_json_bytes": 7424,
+          "output_sha256": "0bcf042c95a646d9daa780516ed011dff14927d5caf1e3506212c53a69fba6c1",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_3a89b3085bc14827be010d75d791277a",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 411.3667909987271,
+            "cpu_ms": 203.89491600000002,
+            "memory_mb_seconds": 21.72057771951586,
+            "peak_memory_mb": 149.21875,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1856,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        },
+        {
+          "task_wall_ms": 410.16433387994766,
+          "input_sha256": "4e80ae1bcc1fb45fce6be652aecd70e60d37c25db190521bb447347c8bf7c2b5",
+          "input_json_bytes": 7373,
+          "output_json_bytes": 7572,
+          "output_sha256": "3a5a2023921b8f795e3ab95092c55b70a1cbcda301702b9737cd16873b61885d",
+          "required_validator_valid": true,
+          "independent_grader_valid": true,
+          "receipt_id": "rcpt_88a974d83a9b46028849b069505bad15",
+          "recorded_resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 374.76074998266995,
+            "cpu_ms": 213.103748,
+            "memory_mb_seconds": 18.856671061490488,
+            "peak_memory_mb": 149.671875,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 1893,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          }
+        }
+      ],
+      "retention_checkpoints": [
+        {
+          "phase": "activated",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1083903,
+            "allocated_bytes": 1089536,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_1",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1384663,
+            "allocated_bytes": 1388544,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_2",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 1706023,
+            "allocated_bytes": 1712128,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "after_task_3",
+          "disk": {
+            "files": 5,
+            "logical_bytes": 2027383,
+            "allocated_bytes": 2760704,
+            "symlink_files_skipped": 0
+          }
+        },
+        {
+          "phase": "closed",
+          "disk": {
+            "files": 2,
+            "logical_bytes": 983040,
+            "allocated_bytes": 983040,
+            "symlink_files_skipped": 0
+          }
+        }
+      ],
+      "config_states": [
+        {
+          "bytes": 0,
+          "digest": null
+        },
+        {
+          "bytes": 501,
+          "digest": "3cbbd6fae6f4a04948fa69e32bef4528f3653d20f0f27c67fd6046b8a55f414b"
+        },
+        {
+          "bytes": 0,
+          "digest": null
+        }
+      ],
+      "scope_digest": "b5a294f97c5361628ed30ff98ee7b0c3e0cd3b5f9d53e5e0766d9fd6dc731d9a",
+      "activation_id": "task_c66285c485f140e2bed32446603a3b20",
+      "executor_fingerprint": "sha256:c02c8f0c2ec03d1276d0f420d4aa82d02818e07c05a7283199fa60e6bb8aa7ba",
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "uninstall_inspection": {
+        "activation_id": "task_c66285c485f140e2bed32446603a3b20",
+        "activation_digest": "3edf48ec02730cd5d7cafe89016eb7c7c8261cb2c6f5f16c6ed6ac1acdd6898e",
+        "scope_digest": "b5a294f97c5361628ed30ff98ee7b0c3e0cd3b5f9d53e5e0766d9fd6dc731d9a",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-omo0_r69/.aeep/task-profiles/task_c66285c485f140e2bed32446603a3b20.json",
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-omo0_r69/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-omo0_r69/.codex/config.toml",
+        "retained_artifacts": [
+          "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-resource-successor-omo0_r69/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 3,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "config_mutations": 2,
+      "retained_project_bytes": 983040,
+      "canonical_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-resource-successor-evidence/retention_growth-aeep",
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "config": true,
+        "config_mutations": true,
+        "config_restored": true
+      }
+    }
+  ],
+  "classification": "Matched executor resource comparator using the same AEEP-provided reference/required-validator implementations and equivalent single-process native boundary in both arms; common implementation and dependency costs remain counted. Not a capable agent without AEEP, not whole-system acceptance, not a candidate qualification or benefit claim.",
+  "complete": true,
+  "source_unchanged": true,
+  "model_turns": 0,
+  "raw_payloads_retained": false,
+  "resource_gate_complete": false,
+  "release_ready": false
+}

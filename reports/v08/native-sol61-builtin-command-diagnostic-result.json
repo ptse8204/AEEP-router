@@ -1,0 +1,343 @@
+{
+  "definition_digest": "12e0bdca4c50b835090aef850e92b2f677d12e44b44a7f11e3e99db7d132cc87",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "operation_id": "native-protocol:planning_native_sol61_builtin_command_diagnostic",
+  "response_thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+  "permission_ack": {
+    "id": "aeep-native-task",
+    "extends": null
+  },
+  "response_turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+  "natural_command_success": true,
+  "collector_status": "completed",
+  "collector_usage": {
+    "inputTokens": 43885,
+    "cachedInputTokens": 34816,
+    "cacheWriteInputTokens": 0,
+    "outputTokens": 74,
+    "reasoningOutputTokens": 0,
+    "totalTokens": 43959
+  },
+  "collector_tool_count": 1,
+  "actual_model": null,
+  "output_retained": false,
+  "cleanup_confirmed": true,
+  "appserver_stderr": {
+    "bytes": 772,
+    "truncated": false,
+    "known_error_classes": []
+  },
+  "owned_survivors_cleaned": [],
+  "commands": [
+    {
+      "exit_code": 0,
+      "status": "completed",
+      "output_equals_one": true
+    }
+  ],
+  "server_requests": [],
+  "transport_fatal_type": null,
+  "terminal_status": "completed",
+  "elapsed_seconds": 11.401232041185722,
+  "events": [
+    {
+      "seconds": 0.3345886250026524,
+      "after_interrupt": false,
+      "method": "turn/started",
+      "keys": [
+        "threadId",
+        "turn"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": null,
+      "nested_turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true
+    },
+    {
+      "seconds": 2.2716908750589937,
+      "after_interrupt": false,
+      "method": "item/started",
+      "keys": [
+        "item",
+        "startedAtMs",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "userMessage",
+      "phase": null,
+      "item_keys": [
+        "clientId",
+        "content",
+        "id",
+        "type"
+      ],
+      "item_status": null
+    },
+    {
+      "seconds": 2.2717331661842763,
+      "after_interrupt": false,
+      "method": "item/completed",
+      "keys": [
+        "completedAtMs",
+        "item",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "userMessage",
+      "phase": null,
+      "item_keys": [
+        "clientId",
+        "content",
+        "id",
+        "type"
+      ],
+      "item_status": null
+    },
+    {
+      "seconds": 8.046774875139818,
+      "after_interrupt": false,
+      "method": "item/started",
+      "keys": [
+        "item",
+        "startedAtMs",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "commandExecution",
+      "phase": null,
+      "item_keys": [
+        "aggregatedOutput",
+        "command",
+        "commandActions",
+        "cwd",
+        "durationMs",
+        "exitCode",
+        "id",
+        "pluginId",
+        "processId",
+        "scriptPath",
+        "source",
+        "status",
+        "type"
+      ],
+      "item_status": "inProgress"
+    },
+    {
+      "seconds": 8.046807916136459,
+      "after_interrupt": false,
+      "method": "item/completed",
+      "keys": [
+        "completedAtMs",
+        "item",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "commandExecution",
+      "phase": null,
+      "item_keys": [
+        "aggregatedOutput",
+        "command",
+        "commandActions",
+        "cwd",
+        "durationMs",
+        "exitCode",
+        "id",
+        "pluginId",
+        "processId",
+        "scriptPath",
+        "source",
+        "status",
+        "type"
+      ],
+      "item_status": "completed"
+    },
+    {
+      "seconds": 8.046848583035171,
+      "after_interrupt": false,
+      "method": "thread/tokenUsage/updated",
+      "keys": [
+        "threadId",
+        "tokenUsage",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "numeric_usage": {
+        "total": {
+          "totalTokens": 21948,
+          "inputTokens": 21879,
+          "cachedInputTokens": 13056,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 69,
+          "reasoningOutputTokens": 0
+        },
+        "last": {
+          "totalTokens": 21948,
+          "inputTokens": 21879,
+          "cachedInputTokens": 13056,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 69,
+          "reasoningOutputTokens": 0
+        }
+      }
+    },
+    {
+      "seconds": 10.9546053330414,
+      "after_interrupt": false,
+      "method": "item/started",
+      "keys": [
+        "item",
+        "startedAtMs",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "agentMessage",
+      "phase": "final_answer",
+      "item_keys": [
+        "delivery",
+        "id",
+        "memoryCitation",
+        "phase",
+        "questions",
+        "text",
+        "type"
+      ],
+      "item_status": null
+    },
+    {
+      "seconds": 10.963054916122928,
+      "after_interrupt": false,
+      "method": "item/agentMessage/delta",
+      "keys": [
+        "delta",
+        "itemId",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true
+    },
+    {
+      "seconds": 11.33530450006947,
+      "after_interrupt": false,
+      "method": "item/completed",
+      "keys": [
+        "completedAtMs",
+        "item",
+        "threadId",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "item_type": "agentMessage",
+      "phase": "final_answer",
+      "item_keys": [
+        "delivery",
+        "id",
+        "memoryCitation",
+        "phase",
+        "questions",
+        "text",
+        "type"
+      ],
+      "item_status": null
+    },
+    {
+      "seconds": 11.384230916155502,
+      "after_interrupt": false,
+      "method": "thread/tokenUsage/updated",
+      "keys": [
+        "threadId",
+        "tokenUsage",
+        "turnId"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "nested_turn_hash": null,
+      "thread_equal": true,
+      "turn_equal": true,
+      "collector_installed": true,
+      "numeric_usage": {
+        "total": {
+          "totalTokens": 43959,
+          "inputTokens": 43885,
+          "cachedInputTokens": 34816,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 74,
+          "reasoningOutputTokens": 0
+        },
+        "last": {
+          "totalTokens": 22011,
+          "inputTokens": 22006,
+          "cachedInputTokens": 21760,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 5,
+          "reasoningOutputTokens": 0
+        }
+      }
+    },
+    {
+      "seconds": 11.386395458132029,
+      "after_interrupt": false,
+      "method": "turn/completed",
+      "keys": [
+        "threadId",
+        "turn"
+      ],
+      "thread_hash": "4f11b4d79b95369c22a0a3afa26812c46d7da687425c20fbfcaf895f758626a4",
+      "turn_hash": null,
+      "nested_turn_hash": "f17214b63e9d3464ec0f2d00ddda7365263a760b583cc7a53a4bbdd82e2710bb",
+      "thread_equal": true,
+      "turn_equal": false,
+      "collector_installed": true,
+      "status": "completed",
+      "error_code": null
+    }
+  ],
+  "collector_error_type": null,
+  "source_unchanged": true
+}

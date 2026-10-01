@@ -1,0 +1,124 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_completed_worker_exit_preserves_admission_when_reading_report ______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-551/test_completed_worker_exit_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1096cac40>
+
+    async def test_completed_worker_exit_preserves_admission_when_reading_report(tmp_path, monkeypatch):
+        import asyncio
+        import os
+        import sys
+        from pathlib import Path
+    
+        from test_v08_assessment import setup_assessment
+    
+        from aeep.assessment import recovery
+        from aeep.assessment.service import AssessmentService
+        from aeep.mcp.server import AEEPToolService
+        from aeep.models import ActionRequest
+        from aeep.router import Router
+    
+        source, assessment, plan, _grant = setup_assessment(tmp_path)
+        manifest = source.manifest.model_copy(deep=True)
+        manifest.database = str(tmp_path / "worker-exit.db")
+        manifest_file = tmp_path / "aeep.json"
+        manifest_file.write_text(manifest.model_dump_json())
+        identity = assessment.enqueue(plan.plan_id)
+        with sqlite3.connect(manifest.database) as destination:
+            source.store._connection.backup(destination)
+        await source.close()
+        root = Path(__file__).resolve().parents[1]
+        process = await asyncio.create_subprocess_exec(
+            sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest_file),
+            "--directory", str(assessment.directory), "--assessment", identity,
+            env={**os.environ, "PYTHONPATH": os.pathsep.join([str(root / "src"), str(root / "tests")])},
+            stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+        )
+        _out, errors = await asyncio.wait_for(process.communicate(), timeout=60)
+        assert process.returncode == 0, errors.decode()
+        router = Router.from_manifest(manifest_file)
+        try:
+            assessment = AssessmentService(router, assessment.directory)
+            assert recovery.worker_alive(assessment.repository, identity) is False
+            job = assessment.status(identity)
+            assert job["state"] == "complete"
+>           admission = assessment.admit(job["report_id"])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_assessment_interfaces.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x1095f6d50>
+report_id = 'fit_19ab66f3f3c148fd8e2e6ef775b1fc03'
+
+    def admit(self, report_id: str) -> ScopedAdmission:
+        report = AssessmentReport.model_validate(self.repository.get("report", report_id))
+        plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+        campaign = BenchmarkCampaignReport.model_validate(
+            self.repository.get("campaign", report.campaign_digest)
+        )
+        ledger = AssessmentOperationLedger.model_validate(self.repository.get("operation_ledger", report.operation_ledger_digest)) if report.operation_ledger_digest else None
+        verified = fit_report(plan, recipe, campaign, ledger=ledger)
+        if (
+            verified.outcome != "useful_within_scope"
+            or not verified.qualification_passed
+            or report.outcome != verified.outcome
+        ):
+            raise ConfigurationError(
+                "admission requires passed qualification and a measured benefit"
+            )
+        if report.grader_validation_digest is None:
+            raise ConfigurationError("admission requires independent grader-validation evidence")
+        validation = GraderValidationEvidence.model_validate(self.repository.get("grader_validation", report.grader_validation_digest))
+        with self.router.store._lock:
+            graded = self.router.store._connection.execute(
+                "SELECT 1 FROM assessment_records r JOIN assessment_operations o ON o.id=r.id JOIN assessment_records s ON s.id=o.id AND s.kind='operation_start' WHERE r.kind='grader_validation' AND r.digest=? AND json_extract(s.payload_json, '$.plan_id')=? AND json_extract(s.payload_json, '$.stage')='grader_validation' AND o.state='complete'",
+                (report.grader_validation_digest, plan.plan_id),
+            ).fetchone()
+        if (graded is None or content_digest(validation) != report.grader_validation_digest
+                or validation.recipe_digest != plan.recipe_digest
+                or len(set(validation.independent_fixture_digests)) < 2
+                or validation.generator_fixture_digests != [content_digest(case) for case in plan.suite.cases[:8]]):
+            raise ConfigurationError("admission grader-validation evidence does not match the plan")
+        mapping = self._verify_dependencies(plan)
+        for spec in mapping.subjects:
+            if spec.kind == ExecutorKind.MANAGED_HOST:
+                digest = verified.host_runtime_digests.get(spec.id)
+                if not digest or self.router.store.host_runtime_digests.get(spec.id) != (behavior_fingerprint(spec), digest):
+                    raise ConfigurationError("managed-host admission requires resolved runtime identity")
+        from .boundary import require_managed_boundaries
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_managed_boundaries(self.repository, environment, mapping.subjects, verified.host_runtime_digests)
+        with (
+            self.router._route_activation_lock,
+            self.router.store._immediate_transaction() as connection,
+        ):
+            grant = self.repository.authorize(plan)
+            if not grant.automatic_admission:
+                raise ConfigurationError(
+                    "standing authorization does not permit automatic admission"
+                )
+            existing = connection.execute(
+                "SELECT admission_id, revoked, revoked_at FROM assessment_admissions WHERE executor_id=?",
+                (plan.candidate_id,),
+            ).fetchone()
+            if existing is not None:
+                previous = ScopedAdmission.model_validate(
+                    self.repository.get("admission", existing[0])
+                )
+                previous_report = AssessmentReport.model_validate(
+                    self.repository.get("report", previous.report_id)
+                )
+                if existing[1] and (
+                    existing[2] is None
+                    or report.created_at <= datetime.fromisoformat(existing[2])
+                    or previous_report.campaign_digest == report.campaign_digest
+                ):
+>                   raise ConfigurationError("revoked admission requires fresh assessment evidence")
+E                   aeep.errors.ConfigurationError: revoked admission requires fresh assessment evidence
+
+src/aeep/assessment/service.py:641: ConfigurationError
+=========================== short test summary info ============================
+FAILED tests/test_v08_assessment_interfaces.py::test_completed_worker_exit_preserves_admission_when_reading_report

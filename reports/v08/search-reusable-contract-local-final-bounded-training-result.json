@@ -1,0 +1,279 @@
+{
+  "comparison": {
+    "schema_version": "assessment.comparison.v1",
+    "structure": "direct",
+    "candidate": {
+      "executor_id": "search-reusable-contract-local-training.generated",
+      "fingerprint": "7e37db5ed49ce4086ab681eadc36b22ff0e52f9bb217919077315118745bf8ab",
+      "dependencies": {},
+      "host_config": null
+    },
+    "baseline": {
+      "executor_id": "search-reusable-contract-local-training.reference",
+      "fingerprint": "b7910b86afa2bc0d8335fb79dca5594e64aa78ab862a02959d3ec3fad7811f01",
+      "dependencies": {},
+      "host_config": null
+    },
+    "reference": null,
+    "primary_metric": "wall_time_ms",
+    "primary_condition": "router-fresh"
+  },
+  "feature_combinations": [
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[1, 1, 41, 41]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[2, 1, 41, 70]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[1, 2, 41, 41]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[1, 1, 48, 48]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[2, 1, 52, 61]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[3, 1, 52, 90]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[2, 3, 52, 61]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[2, 1, 59, 68]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[3, 1, 63, 81]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[4, 1, 63, 110]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[3, 4, 63, 81]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[3, 1, 70, 88]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[4, 1, 74, 101]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[5, 1, 74, 130]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[4, 5, 74, 101]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    },
+    {
+      "family": "search",
+      "size": "small",
+      "structure": "[4, 1, 81, 108]",
+      "root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments",
+      "unicode": false
+    }
+  ],
+  "schema_version": "assessment.report.v2",
+  "report_id": "fit_f7209f7a4b6741cf92d47e9b8e7190ea",
+  "plan_digest": "17a4b9e8af8b9c8673012d9e89e3f56903ca87790a12fa564a126157f78fab26",
+  "outcome": "insufficient_evidence",
+  "qualification_passed": false,
+  "distinct_holdout_cases": 0,
+  "distinct_paired_cases": 0,
+  "correctness_failures": 0,
+  "execution_failures": 0,
+  "tested_variations": [],
+  "condition_comparisons": {
+    "router-fresh": {
+      "paired_savings": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null
+      },
+      "savings_interval": {},
+      "paired_measurement_cases": {
+        "wall_time_ms": 0,
+        "local.cpu_ms": 0,
+        "local.gpu_ms": 0,
+        "local.memory_mb_seconds": 0,
+        "local.network_bytes": 0
+      },
+      "break_even_uses": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null,
+        "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.output_tokens": null,
+        "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+        "subscription.openai.codex.self.provider_unit": null
+      }
+    }
+  },
+  "measured_usage": {
+    "campaign_wall_time_ms": 35492.337375180796,
+    "known_campaign_wall_time_ms": 35492.337375180796,
+    "known_overhead_wall_time_ms": 70998.74321313109,
+    "assessment_wall_time_ms": 106491.08058831189,
+    "included_routing_overhead_ms": 158.88899727724493,
+    "included_invocation_guard_ms": 1470.3742491547018,
+    "known_campaign_subtotal.local.cpu_ms": null,
+    "campaign_total.local.cpu_ms": null,
+    "known_overhead_subtotal.local.cpu_ms": 17350.205,
+    "assessment_total.local.cpu_ms": null,
+    "known_campaign_subtotal.local.gpu_ms": null,
+    "campaign_total.local.gpu_ms": null,
+    "known_overhead_subtotal.local.gpu_ms": null,
+    "assessment_total.local.gpu_ms": null,
+    "known_campaign_subtotal.local.memory_mb_seconds": null,
+    "campaign_total.local.memory_mb_seconds": null,
+    "known_overhead_subtotal.local.memory_mb_seconds": null,
+    "assessment_total.local.memory_mb_seconds": null,
+    "known_campaign_subtotal.local.network_bytes": null,
+    "campaign_total.local.network_bytes": null,
+    "known_overhead_subtotal.local.network_bytes": null,
+    "assessment_total.local.network_bytes": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+    "campaign_total.subscription.openai.codex.self.provider_unit": null,
+    "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+    "assessment_total.subscription.openai.codex.self.provider_unit": null
+  },
+  "measurement_coverage": {
+    "local.cpu_ms": "0/56",
+    "local.gpu_ms": "0/56",
+    "local.memory_mb_seconds": "0/56",
+    "local.network_bytes": "0/56",
+    "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.output_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/56",
+    "subscription.openai.codex.self.provider_unit": "0/56"
+  },
+  "paired_measurement_cases": {
+    "wall_time_ms": 0,
+    "local.cpu_ms": 0,
+    "local.gpu_ms": 0,
+    "local.memory_mb_seconds": 0,
+    "local.network_bytes": 0
+  },
+  "paired_savings": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null
+  },
+  "savings_interval": {},
+  "break_even_uses": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null,
+    "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "subscription.openai.codex.self.provider_unit": null
+  },
+  "estimated_production_savings": {},
+  "campaign_digest": "7b66ac2ceb81da03d1357cb5c1742f743d5bc6bca87649dd8732d1a617762f51",
+  "operation_ledger_digest": "eb739aa4d0b292c0e0eba133ca34c6d43cb7b5dd65f95bb2bfe678aff28eb30a",
+  "grader_validation_digest": "e068da9d53ab52f346433beff10a67969e640b2ceb8e9a49090dab7d31b9f44c",
+  "host_runtime_digests": {},
+  "deterministic_reference_comparison": {},
+  "explanations": [
+    "Correctness counts distinct held-out cases; repetitions measure variability.",
+    "Latency includes routing and grading. The interval resamples template families and cases.",
+    "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+    "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+    "Comparison structure: direct; admission uses wall time under router-fresh. Conditions are never pooled."
+  ],
+  "created_at": "2026-09-28T04:13:36.962326Z"
+}

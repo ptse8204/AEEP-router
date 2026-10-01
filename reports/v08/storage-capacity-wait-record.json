@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-09-28T06:24:35.471056+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "former_queue_exit": 1,
+  "stopped_before": "text",
+  "text_started": false,
+  "search_started": false,
+  "current_session": 82869,
+  "current_queue_review": "storage-capacity-remaining-value-queue-review.json",
+  "after_csv_maintenance_result": "value-queue-after-csv-compression-result.json",
+  "verified_journal_pairs": 763,
+  "maintenance_ledger_state": "complete",
+  "allocated_bytes_saved": 69680619520,
+  "free_gib_observed": 85.6,
+  "next_required_gib": 119.38493728637695,
+  "filesystem_observation": {
+    "purgeable_time_machine_snapshots": [
+      "com.apple.TimeMachine.2026-09-27-214225.local",
+      "com.apple.TimeMachine.2026-09-27-224213.local"
+    ],
+    "inference": "Snapshots created during CSV appear to retain pre-compression file blocks; allocated-byte reductions did not translate to equivalent free capacity."
+  },
+  "recovery": "Passive native reclamation wait, maximum 30 hours per campaign; no backup deletion, no relaxed storage guard, no evidence deletion. One existing supervisor resumes exact unstarted plans when capacity is sufficient.",
+  "remaining_gates": [
+    "text and search marginal-value campaigns",
+    "remaining task-only capability calls",
+    "source-bound final verifier",
+    "native-catalog observations for all four families",
+    "complete historical CSV interruption accounting"
+  ],
+  "release_ready": false
+}

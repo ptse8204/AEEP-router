@@ -1,0 +1,76 @@
+{
+  "source_before": "b08c1f15cb6b17fddf70070a14c5b2548da71247bac315e3bff8a7ceaf30882e",
+  "source_after": "b08c1f15cb6b17fddf70070a14c5b2548da71247bac315e3bff8a7ceaf30882e",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1346764579648152,
+      "log": "reports/v08/preparation-cost-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7321029999293387,
+      "log": "reports/v08/preparation-cost-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08151762501802295,
+      "log": "reports/v08/preparation-cost-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2486292909597978,
+      "log": "reports/v08/preparation-cost-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1401910410495475,
+      "log": "reports/v08/preparation-cost-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-agent-router/.aeep/preparation-cost-recheck-tests-5",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 1,
+      "seconds": 373.15704045898747,
+      "log": "reports/v08/preparation-cost-recheck-check-05.txt"
+    }
+  ]
+}

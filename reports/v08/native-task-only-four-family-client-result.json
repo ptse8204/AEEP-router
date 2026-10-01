@@ -1,0 +1,99 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_b73b7e879572471490524e313ad8f7e1",
+    "operation_id": "conformance_probe_b73b7e879572471490524e313ad8f7e1-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "task",
+        "tool": "aeep_csv",
+        "status": "completed",
+        "result_is_error": null,
+        "output_digest": "ee9529740c865369f47a11b8be31e2cfb77e83cbdc878259619378bf3e0f39d7",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "task",
+        "tool": "aeep_text",
+        "status": "completed",
+        "result_is_error": null,
+        "output_digest": "ef706a06332bb6c7f6b562fbe692ad1e4c9bc60d252fffa8274377f97d687f3d",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "task",
+        "tool": "aeep_search",
+        "status": "completed",
+        "result_is_error": null,
+        "output_digest": "298086414dbde047d4383e83bc86decb732a0546aa864f5a0951fc97af6a6b1d",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "task",
+        "tool": "aeep_recipe_f468b36bc594",
+        "status": "completed",
+        "result_is_error": null,
+        "output_digest": "48b8d4088be35b8aae01b4966b1552448d1286e4d72643c4c5c0606126290859",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "task_receipt_ids": [
+      "rcpt_331217df82ad44ea8707de4dc013b90c",
+      "rcpt_3b88055297c546ada30f7059f09b99c7",
+      "rcpt_899fd057a4ef4157b9a3d298a669071e",
+      "rcpt_dfdcfc45142d45a6a883cf94483303d4"
+    ],
+    "canonical_evidence_digest": "f00be7c2ce1de9bee98990a8c973333e5b515b5cd6c2a148a16a27ec73ab9242",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 87405,
+          "cached_input_tokens": 48640,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4823,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Four-family task-only baseline routing; not candidate conformance, admission or comparative evidence"
+  }
+}

@@ -1,0 +1,586 @@
+{
+  "schema_version": "aeep.footprint-calibration.v1",
+  "recorded_at": "2026-09-29T18:54:49.029490+00:00",
+  "purpose": "exploratory calibration; no release or benefit verdict",
+  "reference": {
+    "os": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "python": "3.13.1",
+    "logical_cpus": 14,
+    "physical_memory_bytes": 25769803776,
+    "codex_sha256": "sha256:4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+    "dependencies": {
+      "psutil": "6.1.1",
+      "pydantic": "2.12.0",
+      "jsonschema": "4.23.0"
+    }
+  },
+  "boundary": "Fresh Python coordinator plus its Codex sandbox and command descendants. Supervisor and existing desktop/host are shared and excluded.",
+  "measurement_limits": [
+    "10ms process sampling can miss short-lived children and their CPU; CPU is a sampled lower bound.",
+    "RSS sums can count shared pages more than once; these are sampled resident sums, not unique whole-machine memory.",
+    "Idle is a 250ms local coordinator sample, not complete Codex host idle memory.",
+    "Compilation/pinning in the harness is excluded from baseline; AEEP checks at activation/dispatch are included.",
+    "Synthetic CSV only. Assessment lab, workbook workload, actual host context and recovery footprint remain unmeasured.",
+    "No amortization or speculative savings are subtracted. No acceptance budgets or holdouts are evaluated."
+  ],
+  "production": {
+    "samples": [
+      {
+        "scenario": "idle",
+        "arm": "native",
+        "task_ms": [],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 326.26424985937774,
+        "sampled_process_tree": {
+          "cpu_ms": 68.186916,
+          "peak_memory_mb": 30.234375,
+          "memory_mb_seconds": 9.149800164039334
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "aeep",
+        "task_ms": [],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 369.8678750079125,
+        "evidence_bytes_before_close": 873256,
+        "evidence_bytes_after_close": 811008,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 758.8727078400552,
+        "sampled_process_tree": {
+          "cpu_ms": 479.49199200000004,
+          "peak_memory_mb": 91.484375,
+          "memory_mb_seconds": 52.94825002771904
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "aeep",
+        "task_ms": [],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 349.39487488009036,
+        "evidence_bytes_before_close": 873256,
+        "evidence_bytes_after_close": 811008,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 734.0129169169813,
+        "sampled_process_tree": {
+          "cpu_ms": 473.26471599999996,
+          "peak_memory_mb": 91.046875,
+          "memory_mb_seconds": 52.26306340108931
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "native",
+        "task_ms": [],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 326.6646252013743,
+        "sampled_process_tree": {
+          "cpu_ms": 61.321831,
+          "peak_memory_mb": 30.328125,
+          "memory_mb_seconds": 8.754667618966778
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "native",
+        "task_ms": [],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 325.00379206612706,
+        "sampled_process_tree": {
+          "cpu_ms": 59.827040999999994,
+          "peak_memory_mb": 30.03125,
+          "memory_mb_seconds": 8.56773602179237
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "aeep",
+        "task_ms": [],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 364.1732910182327,
+        "evidence_bytes_before_close": 873256,
+        "evidence_bytes_after_close": 811008,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 757.1216251235455,
+        "sampled_process_tree": {
+          "cpu_ms": 482.517048,
+          "peak_memory_mb": 90.890625,
+          "memory_mb_seconds": 52.541005932100234
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "native",
+        "task_ms": [
+          69.29416581988335
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 141.86512492597103,
+        "sampled_process_tree": {
+          "cpu_ms": 113.515957,
+          "peak_memory_mb": 79.46875,
+          "memory_mb_seconds": 5.519639428162918
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "aeep",
+        "task_ms": [
+          172.44233284145594
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 355.4685830604285,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 669.4451668299735,
+        "sampled_process_tree": {
+          "cpu_ms": 608.960096,
+          "peak_memory_mb": 141.3125,
+          "memory_mb_seconds": 47.22143312340995
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "aeep",
+        "task_ms": [
+          169.97158294543624
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 365.2617079205811,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 671.9401658046991,
+        "sampled_process_tree": {
+          "cpu_ms": 621.784088,
+          "peak_memory_mb": 143.875,
+          "memory_mb_seconds": 47.9951513616179
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "native",
+        "task_ms": [
+          52.294749999418855
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 122.13533418253064,
+        "sampled_process_tree": {
+          "cpu_ms": 99.07179,
+          "peak_memory_mb": 81.203125,
+          "memory_mb_seconds": 4.386424747510318
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "native",
+        "task_ms": [
+          51.794375060126185
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 121.95895798504353,
+        "sampled_process_tree": {
+          "cpu_ms": 98.98299800000001,
+          "peak_memory_mb": 81.484375,
+          "memory_mb_seconds": 4.405861918483424
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "aeep",
+        "task_ms": [
+          177.07429197616875
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 363.0180829204619,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 679.2271670419723,
+        "sampled_process_tree": {
+          "cpu_ms": 619.548656,
+          "peak_memory_mb": 142.75,
+          "memory_mb_seconds": 48.01229743013391
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "native",
+        "task_ms": [
+          53.3412080258131,
+          51.73570802435279,
+          50.95283407717943,
+          55.79416686668992,
+          54.52420888468623
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 340.3226670343429,
+        "sampled_process_tree": {
+          "cpu_ms": 109.84653999999999,
+          "peak_memory_mb": 82.015625,
+          "memory_mb_seconds": 17.381669556529232
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "aeep",
+        "task_ms": [
+          176.7934998497367,
+          163.59545895829797,
+          166.9683330692351,
+          168.57233294285834,
+          157.73091604933143
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 369.6346248034388,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 2480056,
+        "evidence_bytes_after_close": 892928,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 1339.0978330280632,
+        "sampled_process_tree": {
+          "cpu_ms": 1133.5439039999999,
+          "peak_memory_mb": 144.71875,
+          "memory_mb_seconds": 114.63231326463938
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "aeep",
+        "task_ms": [
+          170.4056249000132,
+          165.06449994631112,
+          163.01437513902783,
+          163.42466697096825,
+          167.89674991741776
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 356.1050829011947,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 2480056,
+        "evidence_bytes_after_close": 892928,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 1313.32420790568,
+        "sampled_process_tree": {
+          "cpu_ms": 1113.779872,
+          "peak_memory_mb": 144.828125,
+          "memory_mb_seconds": 114.28494156208762
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "native",
+        "task_ms": [
+          83.23179208673537,
+          69.73149999976158,
+          57.01662506908178,
+          63.763124868273735,
+          56.71445792540908
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 1,
+        "process_wall_ms": 433.0543330870569,
+        "sampled_process_tree": {
+          "cpu_ms": 131.72670800000003,
+          "peak_memory_mb": 82.15625,
+          "memory_mb_seconds": 21.695089386787004
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "native",
+        "task_ms": [
+          53.170083090662956,
+          52.96087497845292,
+          51.45304091274738,
+          51.43854208290577,
+          49.97533280402422
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 333.0420001875609,
+        "sampled_process_tree": {
+          "cpu_ms": 111.24912300000001,
+          "peak_memory_mb": 82.703125,
+          "memory_mb_seconds": 16.900590071636543
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "aeep",
+        "task_ms": [
+          218.8378751743585,
+          196.6954581439495,
+          179.42095804028213,
+          170.12929217889905,
+          162.6554171089083
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 367.91920801624656,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "evidence_bytes_before_close": 2480056,
+        "evidence_bytes_after_close": 892928,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 2,
+        "process_wall_ms": 1444.3034590221941,
+        "sampled_process_tree": {
+          "cpu_ms": 1193.69904,
+          "peak_memory_mb": 143.609375,
+          "memory_mb_seconds": 123.74067586648744
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "native",
+        "task_ms": [
+          48.27850009314716
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 0,
+        "process_wall_ms": 124.77429118007421,
+        "sampled_process_tree": {
+          "cpu_ms": 99.46037,
+          "peak_memory_mb": 80.90625,
+          "memory_mb_seconds": 4.465477780850051
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "aeep",
+        "task_ms": [
+          162.35799994319677
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 400.21925000473857,
+        "sample_summary": "Task did not complete successfully; inspect the recorded outcome before retrying.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 0,
+        "process_wall_ms": 700.8797498419881,
+        "sampled_process_tree": {
+          "cpu_ms": 616.417472,
+          "peak_memory_mb": 128.515625,
+          "memory_mb_seconds": 47.42460588735048
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "aeep",
+        "task_ms": [
+          206.35250001214445
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 362.7845000009984,
+        "sample_summary": "Task did not complete successfully; inspect the recorded outcome before retrying.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 1,
+        "process_wall_ms": 705.7787501253188,
+        "sampled_process_tree": {
+          "cpu_ms": 634.037784,
+          "peak_memory_mb": 140.0625,
+          "memory_mb_seconds": 50.93327181037239
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "native",
+        "task_ms": [
+          49.80862489901483
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 1,
+        "process_wall_ms": 123.44370898790658,
+        "sampled_process_tree": {
+          "cpu_ms": 101.13524699999999,
+          "peak_memory_mb": 80.859375,
+          "memory_mb_seconds": 4.426249705669761
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "native",
+        "task_ms": [
+          48.339542001485825
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 2,
+        "process_wall_ms": 121.58066686242819,
+        "sampled_process_tree": {
+          "cpu_ms": 98.206915,
+          "peak_memory_mb": 80.65625,
+          "memory_mb_seconds": 4.396385455951531
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "aeep",
+        "task_ms": [
+          161.36445803567767
+        ],
+        "schema_bytes": 14146,
+        "instructions_bytes": 168,
+        "activation_ms": 373.25683305971324,
+        "sample_summary": "Task did not complete successfully; inspect the recorded outcome before retrying.",
+        "evidence_bytes_before_close": 1174016,
+        "evidence_bytes_after_close": 815104,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 2,
+        "process_wall_ms": 672.4774579051882,
+        "sampled_process_tree": {
+          "cpu_ms": 623.0824319999999,
+          "peak_memory_mb": 129.15625,
+          "memory_mb_seconds": 46.29281181695842
+        }
+      }
+    ],
+    "comparisons": {
+      "idle": {
+        "median_process_wall_ms": {
+          "native": 326.26424985937774,
+          "aeep": 757.1216251235455
+        },
+        "incremental_ms": 430.8573752641678
+      },
+      "cold": {
+        "median_process_wall_ms": {
+          "native": 122.13533418253064,
+          "aeep": 671.9401658046991
+        },
+        "incremental_ms": 549.8048316221684
+      },
+      "warm": {
+        "median_process_wall_ms": {
+          "native": 340.3226670343429,
+          "aeep": 1339.0978330280632
+        },
+        "incremental_ms": 998.7751659937203
+      },
+      "failure": {
+        "median_process_wall_ms": {
+          "native": 123.44370898790658,
+          "aeep": 700.8797498419881
+        },
+        "incremental_ms": 577.4360408540815
+      }
+    }
+  },
+  "assessment": null,
+  "unknown": [
+    "whole-host startup and peak memory",
+    "OS cache usage",
+    "exact context tokens",
+    "network telemetry",
+    "installation/dependency disk increment",
+    "human effort",
+    "long-term retention growth",
+    "crash/recovery footprint"
+  ],
+  "operations": {
+    "model_calls": 0,
+    "reviewer_calls": 0,
+    "downloads": 0,
+    "optional_integrations": [],
+    "persistent_config_mutations": 0,
+    "hooks": 0,
+    "services": 0,
+    "ports": 0,
+    "retries": 0,
+    "network_policy": "disabled for command children; coordinator network activity not instrumented",
+    "cleanup": "disposable synthetic stores removed after normal close; not production evidence cleanup"
+  }
+}

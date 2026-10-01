@@ -1,0 +1,177 @@
+{
+  "execution_authorized": true,
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "driver_sha256": "bb540af4ac6dc583c7c1470c5cc1d316d762169388b2eac97c16e0ae81648bfd",
+  "binary_sha256": "50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+  "python_sha256": "5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325",
+  "dependencies": {
+    "AGENTS.md": "ebdf6620fd29b0167c7d47c41e345c89b58643599acd2f5837540aab529d5c92",
+    "reports/v08/workbook-footprint-calibration-288e.py": "20ba60dd05368e2a52b6fe4af587914fa772e52e8df80cada71f9fe05acf6a96",
+    "integrations/assessment-runtime/workbook_program.py": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18",
+    "integrations/assessment-runtime/workbook-grader-fixtures.json": "e1342eb43a3daac7ef1dd59ab121d4b1e4f77d07ab8595e4639fc5b8b7c7e5be",
+    "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-result-288e.json": "d6f77b48fcaddf3cbcf14e8b2a34119854fbc9de46a6df2dfc4a1b6db2f67326",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-audit.json": "4804c85e9965ac27cae314eb31b153a2497512a5a1b40a79e846d1b3077f7c61"
+  },
+  "expected_input_hashes": [
+    "1930562b96f2c3e24ac374fcc189e27dab121dec8678bc354eb7d98dcea12be8",
+    "7e792ce599e4ba4a78288998dabeb8afa907bd6ad74abd2152d560883c7372fe"
+  ],
+  "expected_shared_inventory": [
+    {
+      "name": "code-review",
+      "tools": []
+    },
+    {
+      "name": "codex_app",
+      "tools": []
+    },
+    {
+      "name": "computer-use",
+      "tools": []
+    },
+    {
+      "name": "cua_repl",
+      "tools": [
+        "js",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "node_repl",
+      "tools": [
+        "js",
+        "js_add_node_module_dir",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "shortlist",
+      "tools": [
+        "add_to_queue",
+        "bot_control",
+        "get_application_status",
+        "get_applied_jobs",
+        "manage_profile",
+        "manage_queue",
+        "manage_resumes",
+        "prefill_job",
+        "search_jobs"
+      ]
+    },
+    {
+      "name": "sweet-saver-fare",
+      "tools": []
+    },
+    {
+      "name": "tunnelMcp",
+      "tools": [
+        "connect_stdio_mcp",
+        "create_tunnel_runtime",
+        "install_or_select_tunnel_client",
+        "list_runtime_aliases",
+        "runtime_status",
+        "stop_runtime"
+      ]
+    }
+  ],
+  "prompt_template": "Complete the two ordered synthetic workbook tasks in {input_path}, using ordinary native tools and the existing Python {python} and independent libraries available in its runtime. Each input supplies workbook_b64 plus its task contract. Read and decode the inputs, implement the task requirements yourself, and write valid recalculated XLSX artifacts to {scratch}/output-0.xlsx and {scratch}/output-1.xlsx. Preserve the declared unrelated sheet and formatting; do not expose encoded workbook data in the response. Use existing code-mode/tool progressive disclosure normally; no AEEP tool or protected reference/oracle/grader is available. Do not read unrelated files, credentials or authentication state, use network services, change global configuration, retry after a rejected command, or invoke unrelated MCP tools. Work only in the declared scratch directory. Return only successes:[boolean,boolean], stopped_after_rejection:boolean, and reason completed/unavailable/denied/failed. Report failure honestly; independent grading is outside your process.",
+  "prompt_template_sha256": "0ec54673c23622c72c17e0a7fb13405f968b313b2cd51f9dcefcec61856281f4",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "successes": {
+        "type": "array",
+        "items": {
+          "type": "boolean"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "stopped_after_rejection": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "unavailable",
+          "denied",
+          "failed"
+        ]
+      }
+    },
+    "required": [
+      "successes",
+      "stopped_after_rejection",
+      "reason"
+    ],
+    "additionalProperties": false
+  },
+  "maximum_operations": 2,
+  "maximum_reserved_seconds": 280,
+  "maximum_model_turns": 1,
+  "cash_usd": 0,
+  "body_seconds": 225,
+  "setup_seconds": 40,
+  "host_seconds": 240,
+  "fixture_definition": "Existing policy literal small and seed29/count11/index10 larger; same exact input hashes as successful AEEP observation; calibration fixtures, never holdout.",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "ordinary_tools": "No progressive-disclosure preload; inherited shared MCP inventory must match AEEP arm minus own AEEP server. Existing independent libraries and ordinary shell/file/code-mode tools remain available.",
+  "classification": "n1 baseline resource calibration compared descriptively with existing forced AEEP handoff; no causal selection benefit, qualification, release/resource acceptance or heldout claim.",
+  "quality_floor": "Both unchanged independent workbook grader checks must pass before any successful-task resource comparison; failed task still retains cost.",
+  "measurement_boundary": "Observable owned App Server/MCP descendants sampled every50ms, plus separate assessment controller samples. External provider compute and whole-machine totals unknown. No double-counted sum of controller and shared runtimes.",
+  "telemetry_unknowns": [
+    "whole-machine interference/baseline",
+    "provider CPU/GPU/memory/energy",
+    "actual network bytes/requests and private disclosure telemetry",
+    "very short unsampled process lifetimes",
+    "shared RSS pages and cache attribution",
+    "AEEP historical controller resource telemetry absent",
+    "historical vs sibling order/cache/provider variance; n1 not paired causal evidence"
+  ],
+  "acceptance_thresholds": "None selected from calibration; existing software-only frozen checks retained separately and not transferred. New budgets require review before heldout evaluation.",
+  "prior_aeep_observation": {
+    "elapsed_seconds": 17.80378087493591,
+    "checks": [
+      {
+        "index": 0,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+        "independent_grader_valid": true
+      },
+      {
+        "index": 1,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+        "independent_grader_valid": true
+      }
+    ],
+    "token_usage": {
+      "inputTokens": 59694,
+      "cachedInputTokens": 29568,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 291,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 59985
+    },
+    "forced_handoff": true
+  },
+  "differences": [
+    "AEEP arm forced exact trusted workbook helper handoff; baseline implements workbook task using ordinary native tools; this measures realized workflows, not isolated routing overhead or optional capability selection.",
+    "Sequential historical AEEP then baseline; no randomization/repetition inferred."
+  ],
+  "auth": "Codex-owned; no agent access/state copies",
+  "cleanup": "Close native transport, verify observed PID+creation-time ownership; remove only owned scratch, preserve canonical assessment operations/results; survivors cause failure.",
+  "no_replay": true,
+  "native_capacity_preflight": "Inside existing host operation before any turn/start: account/rateLimits/read normalized by rate_limit_observation; unknown/missing/exhausted native windows stop, no worker equivalence. Snapshot/latency recorded separately; native AEEP arm used separate0.487s precheck.",
+  "event_policy": "Bounded command/MCP/dynamic/file event names and command hashes only; no arguments/results. Any MCP invocation violates baseline prompt and fails successful-workflow policy after independent grading; observation is not preventive containment.",
+  "quality_preservation": "Each output independently graded and checks stored before model/status/MCP policy assertions; invalid/missing artifacts retain bounded failure facts.",
+  "reserved_vs_actual": "1turn reserved conservatively; turn_start_dispatched records whether host request issued. Preflight stop does not infer model inference or refund.",
+  "authorization_note": "Parent exact review under standing September27 finite delegation:2ops280seconds1gpt-6.1-sol medium turn/$0 descriptive baseline, no repeat or acceptance/causal claim; runtime window released after live callback cleanup."
+}

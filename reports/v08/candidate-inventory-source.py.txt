@@ -1,0 +1,52 @@
+import asyncio,hashlib,json,time
+from datetime import datetime,timezone
+from pathlib import Path
+from aeep.hosts import codex_metrics
+from aeep.hosts.codex_app_server import CodexAppServerAdapter
+from aeep.hosts.workers import ManagedWorkerBinding
+from aeep.models import ExecutorSpec
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentSetupCost
+from aeep.assessment.verification import verification_source_digest
+async def main():
+ root=Path.cwd();out=root/'reports/v08/ponytail-worker-inventory-v2.json';assert not out.exists()
+ start=time.monotonic();cpu=time.process_time();build=json.loads((root/'reports/v08/ponytail-worker-preparation-v2.json').read_text())
+ spec=ExecutorSpec.model_validate(json.loads((root/'reports/v08/offline-inspection-fixture-specs.json').read_text())[0]);worker=ManagedWorkerBinding.model_validate(spec.config['managed_worker'])
+ assert worker.credential_volume is None and worker.network_id is None and worker.model_proxy_url is None
+ results=[]
+ for role,image in [('control',build['base_image']),('treatment',build['candidate_image'])]:
+  files=dict(worker.reviewed_files or {},**{codex_metrics.WORKER_PATH:hashlib.sha256(Path(codex_metrics.__file__).read_bytes()).hexdigest()})
+  if role=='treatment':files[build['candidate_path']]=build['skill_sha256']
+  binding=worker.model_copy(update={'worker_id':'ponytail-offline-'+role,'image':image,'reviewed_files':files})
+  configured=spec.model_copy(deep=True);configured.config['managed_worker']=binding.model_dump(mode='json');configured.config['adapter_options']=dict(configured.config.get('adapter_options') or {},catalog_metrics=True)
+  host=CodexAppServerAdapter.from_executor(configured,principal_salt=b'offline-fixture')
+  try:
+   await host.transport.start()
+   reply=await host.transport.request('skills/list',{'cwds':['/workspace'],'forceReload':True})
+   skills=[];errors=[]
+   for group in reply['data']:
+    errors.extend(group.get('errors',[]))
+    for item in group['skills']:skills.append({k:item[k] for k in ['name','path','enabled']})
+   assert not errors
+   results.append({'role':role,'image':image,'protocol_version':host.transport.protocol_version,'skills':skills,'errors':len(errors)})
+  finally:await host.close()
+  assert host.transport.catalog_metrics and host.transport.catalog_metrics['collector_closed']
+ control=results[0]['skills'];treatment=results[1]['skills'];selected=[s for s in treatment if s['path']==build['candidate_path']]
+ assert selected==[{'name':'ponytail','path':build['candidate_path'],'enabled':True}],selected
+ assert sorted(control,key=lambda s:s['path'])==sorted([s for s in treatment if s['path']!=build['candidate_path']],key=lambda s:s['path'])
+ assert not any('ponytail' in s['path'].lower() or 'ponytail' in s['name'].lower() for s in control)
+ record={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':verification_source_digest(root),'subject_digest':build['subject_digest'],'purpose':'native no-model advertised skill inventory for selected installed skill; not exposure, permissions or live acceptance','results':results,'shared_inventory_equal':True,'candidate_advertised_only_in_treatment':True,'elapsed_seconds':time.monotonic()-start,'client_cpu_ms':(time.process_time()-cpu)*1000,'model_calls':0,'credentials_mounted':False,'network':'none'}
+ router=Router.from_manifest(root/'.aeep/live-review-v3/aeep.json')
+ try:
+  service=AssessmentService(router,root/'.aeep/live-review-v3/.aeep/assessments');cost=AssessmentSetupCost(subject_digest=build['subject_digest'],stage='offline_candidate_inventory',elapsed_seconds=record['elapsed_seconds'],cpu_ms=record['client_cpu_ms']);service.repository.put('setup_cost',cost.cost_id,cost);record['setup_cost_id']=cost.cost_id
+ finally:await router.close()
+ with out.open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+ print(json.dumps({'shared_inventory_equal':True,'candidate_advertised_only_in_treatment':True,'setup_cost_id':cost.cost_id,'model_calls':0}))
+started=time.monotonic();started_cpu=time.process_time()
+try:
+ asyncio.run(main())
+except Exception as exc:
+ failure={'stage':'offline inventory v2','error_type':type(exc).__name__,'detail':str(exc)[:500],'elapsed_seconds':time.monotonic()-started,'client_cpu_ms':(time.process_time()-started_cpu)*1000,'model_calls':0}
+ with Path('reports/v08/ponytail-worker-inventory-v2-failure.json').open('x') as f:json.dump(failure,f,indent=2);f.write('\n')
+ raise

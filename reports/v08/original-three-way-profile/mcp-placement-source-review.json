@@ -1,0 +1,16 @@
+{
+  "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/rmcp-client/src/stdio_server_launcher.rs",
+  "version": "rust-v0.159.2",
+  "local_path": "LocalStdioServerLauncher::launch_server lines242-300 directly builds/spawns orchestrator child with stdio descriptor policy",
+  "executor_path": "ExecutorStdioServerLauncher::launch_server lines581-597 uses ExecParams sandbox=None, enforce_managed_network=false",
+  "inference": "MCP startup is separate from the model command sandbox; actual worker placement/control isolation remains unproven until probes",
+  "task_backend_gap": "Existing task-scope CommandExecutor requires native_sandbox; ManagedWorkerBinding attests outer container only and is not a scoped child policy or adapter-owned runtime identity inside the task server",
+  "required_probes": [
+    "Model shell cannot read/write task manifest, scope/reviews, receipt DB/WAL or MCP private pipes",
+    "Model shell cannot alter startup config, launch arbitrary privileged server or spoof task receipts",
+    "Task operation cannot access control store, host paths, network or future cases",
+    "Backend identity/profile/config match actual pinned worker at every dispatch",
+    "Attempt/ceiling/expiry/resources remain enforced via existing TaskScope and Router paths"
+  ],
+  "execution": false
+}

@@ -1,0 +1,110 @@
+{
+  "recorded_at": "2026-09-24T22:15:02.922065+00:00",
+  "purpose": "authenticated model connectivity only; not plugin assessment or full boundary conformance",
+  "approved_bundle_sha256": "592d5610a6bf91262c4bf4d2cd8126fbbc6e30af1b8dc239a8b73339011f5657",
+  "results": [
+    {
+      "role": "control",
+      "request_id": "conformance_probe_da6b66f5899e45ea99b75efcac4c002f",
+      "probe_id": "probe_e9e645240a2f4145b440160dfc11072a",
+      "probe_digest": "9ad7fc1858d3e5c325814f9d0a8838551c0385295390cd00ec56fb3e84cabec3",
+      "execution_evidence_digest": "6096ebed6d3e58a0fa610955afaeb3af2222b0c0dd5987b34b3372999929638a",
+      "connected": true,
+      "operation_complete": true,
+      "adapter_evidence": [
+        {
+          "digest": "26e538e0211e3832aa161921fd271559628ecd8b9e7728c206c60a3200e6015a",
+          "complete": true,
+          "identity_resolved": true,
+          "event_kinds": [
+            "execution.started",
+            "action.started",
+            "action.completed",
+            "action.started",
+            "action.completed",
+            "usage.reported",
+            "usage.reported",
+            "execution.completed"
+          ],
+          "usage_event_count": 2
+        }
+      ]
+    },
+    {
+      "role": "treatment",
+      "request_id": "conformance_probe_d38897e8093a4d75a4eae632b8d6b479",
+      "probe_id": "probe_0284330eb321458597d96688f1067147",
+      "probe_digest": "6d8dccf7e9f61482f981747ea4d6f7eaa0e84aba3b35340923fcdcc17bd50c48",
+      "execution_evidence_digest": "a70542f3980e8e944678e841f0cd91dd0797915d6f61c1ecbbd16cbf34c8c4b8",
+      "connected": true,
+      "operation_complete": true,
+      "adapter_evidence": [
+        {
+          "digest": "87c9e1795b7dd53bdd35f0a738041923e5ac950d6a7cf658c11afdc4b3457e38",
+          "complete": true,
+          "identity_resolved": true,
+          "event_kinds": [
+            "execution.started",
+            "action.started",
+            "action.completed",
+            "action.started",
+            "action.completed",
+            "usage.reported",
+            "usage.reported",
+            "execution.completed"
+          ],
+          "usage_event_count": 2
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "operations": 306,
+    "reserved_model_turns": 4,
+    "elapsed_seconds": 276.6424535077531,
+    "cash_usd": "0"
+  },
+  "remaining": {
+    "model_turn_allowances": 296,
+    "elapsed_seconds": 3323.357546492247
+  },
+  "assessment_campaigns_started": false,
+  "full_boundary_conformance": false,
+  "measurements": [
+    {
+      "role": "control",
+      "stage": "signin",
+      "elapsed_seconds": 150.9792140829377
+    },
+    {
+      "role": "control",
+      "stage": "probe",
+      "elapsed_seconds": 5.223040292039514,
+      "reported_model_usage": {
+        "input_tokens": 6421,
+        "output_tokens": 9,
+        "cached_input_tokens": 0
+      }
+    },
+    {
+      "role": "treatment",
+      "stage": "signin",
+      "elapsed_seconds": 22.206184250069782
+    },
+    {
+      "role": "treatment",
+      "stage": "probe",
+      "elapsed_seconds": 4.916689500096254,
+      "reported_model_usage": {
+        "input_tokens": 6519,
+        "output_tokens": 9,
+        "cached_input_tokens": 0
+      }
+    }
+  ],
+  "observed_remaining_aeep_containers": [
+    "aeep-reviewed-model-proxy"
+  ],
+  "bootstrap_elapsed_seconds": 183.32512812514324,
+  "measurement_limits": "Sign-in resources beyond elapsed time were not measured. Native CPU, memory, network and context overhead are not established by default zeros in legacy resource vectors. These probes establish connectivity, not complete conformance or plugin benefit."
+}

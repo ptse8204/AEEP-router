@@ -1,0 +1,123 @@
+{
+  "additionalProperties": false,
+  "description": "Select configured definitions; no paths, executable code or approval fields.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.setup.v1",
+      "default": "assessment.setup.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "authorization_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "subject_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "recipe_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Recipe Id",
+      "type": "string"
+    },
+    "environment_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "baseline_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Baseline Id",
+      "type": "string"
+    },
+    "structure": {
+      "anyOf": [
+        {
+          "enum": [
+            "direct",
+            "controlled_agent",
+            "workflow"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Structure"
+    },
+    "seed": {
+      "default": 0,
+      "maximum": 2147483647,
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "case_set_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Case Set Id"
+    },
+    "experiment_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Experiment Id"
+    },
+    "pilot_report_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pilot Report Id"
+    }
+  },
+  "required": [
+    "authorization_id",
+    "subject_id",
+    "recipe_id",
+    "environment_id",
+    "candidate_id",
+    "baseline_id"
+  ],
+  "title": "AssessmentSetupRequest",
+  "type": "object"
+}

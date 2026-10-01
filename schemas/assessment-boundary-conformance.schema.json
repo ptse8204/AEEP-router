@@ -1,0 +1,183 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "assessment.boundary-conformance.v1",
+      "enum": [
+        "assessment.boundary-conformance.v1",
+        "assessment.boundary-conformance.v2",
+        "assessment.boundary-conformance.v3"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "conformance_id": {
+      "title": "Conformance Id",
+      "type": "string"
+    },
+    "source_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Digest",
+      "type": "string"
+    },
+    "worker_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Digest",
+      "type": "string"
+    },
+    "image_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Image Digest",
+      "type": "string"
+    },
+    "binary_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Binary Digest",
+      "type": "string"
+    },
+    "adapter": {
+      "title": "Adapter",
+      "type": "string"
+    },
+    "adapter_version": {
+      "title": "Adapter Version",
+      "type": "string"
+    },
+    "effective_policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Effective Policy Digest",
+      "type": "string"
+    },
+    "reviewed_inventory_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Reviewed Inventory Digest",
+      "type": "string"
+    },
+    "identity_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Identity Digest",
+      "type": "string"
+    },
+    "enforcement_definition_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Enforcement Definition Digest",
+      "type": "string"
+    },
+    "advertised_tools": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Advertised Tools",
+      "type": "array"
+    },
+    "permitted_tools": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Permitted Tools",
+      "type": "array"
+    },
+    "used_tools": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Used Tools",
+      "type": "array"
+    },
+    "probe_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Probe Digests",
+      "type": "array"
+    },
+    "configuration_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Configuration Digest"
+    },
+    "effective_inventory": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Inventory"
+    },
+    "callback_binding_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Callback Binding Digest"
+    },
+    "native_backend_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Native Backend Digest"
+    },
+    "composed_definition_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Composed Definition Digest"
+    }
+  },
+  "required": [
+    "conformance_id",
+    "source_digest",
+    "worker_digest",
+    "image_digest",
+    "binary_digest",
+    "adapter",
+    "adapter_version",
+    "effective_policy_digest",
+    "reviewed_inventory_digest",
+    "identity_digest",
+    "enforcement_definition_digest",
+    "advertised_tools",
+    "permitted_tools",
+    "used_tools",
+    "probe_digests"
+  ],
+  "title": "BoundaryConformance",
+  "type": "object"
+}

@@ -1,0 +1,152 @@
+{
+  "source_before": "88661001bb9553bb308d1bec983c7eb1fa157350eaaba61101734ffcd1ed05e9",
+  "source_after": "88661001bb9553bb308d1bec983c7eb1fa157350eaaba61101734ffcd1ed05e9",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09034516604151577,
+      "log": "reports/v08/budget-preview-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5712265420006588,
+      "log": "reports/v08/budget-preview-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.048995292047038674,
+      "log": "reports/v08/budget-preview-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.14323795796371996,
+      "log": "reports/v08/budget-preview-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.15111995907500386,
+      "log": "reports/v08/budget-preview-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 338.11355954105966,
+      "log": "reports/v08/budget-preview-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 483.28786233300343,
+      "log": "reports/v08/budget-preview-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0302089171018451,
+      "log": "reports/v08/budget-preview-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/budget-preview-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3211624999530613,
+      "log": "reports/v08/budget-preview-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/budget-preview-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04719829198438674,
+      "log": "reports/v08/budget-preview-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/budget-preview-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04437179199885577,
+      "log": "reports/v08/budget-preview-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0726829168852419,
+      "log": "reports/v08/budget-preview-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048908833996392787,
+      "log": "reports/v08/budget-preview-check-12.txt"
+    }
+  ]
+}

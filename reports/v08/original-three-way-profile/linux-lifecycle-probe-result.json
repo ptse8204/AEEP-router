@@ -1,0 +1,47 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_47b612d6f3804dca85d453fc8268f8df",
+      "operation_id": "linux-lifecycle-probe:conformance_probe_47b612d6f3804dca85d453fc8268f8df",
+      "image": "sha256:20c7b056dac5eeed464f20b2560dd5001339064c1942b74944147cc35773c065",
+      "worker_digest": "46385dcea290b8e0c565d6eb9a566e6bbe7eb0c2b8d491eb9aa1f2f0bd43e92e",
+      "cleanup_confirmed": true,
+      "protocol_passed": false,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:39:32.613731Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:39:32.613765Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "error_type": "AssertionError",
+      "failing_stage": "effective_requirements",
+      "error_class": "assertion_failed",
+      "elapsed_seconds": 0.38344095810316503,
+      "canonical_record_digest": "035fef1213c154fde8291d0e718e98bed711f679c177cc8cd8b26b49da81a6ec"
+    }
+  },
+  "probe_supported": false,
+  "classification": "dedicated_child_lifecycle_not_established",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8632,
+    "model_turns": 2535,
+    "elapsed_seconds": 74753.60898932,
+    "cash_usd": "0.0"
+  }
+}

@@ -1,8 +1,7 @@
 # AEEP 0.6 provider trust
 
-Cryptographic integrity and effective identity trust are separate. An embedded
-key can prove that one package revision is internally consistent, but it is only
-`self_asserted` until local policy pins that key.
+An embedded key can verify a package revision's integrity. Its identity remains
+`self_asserted` until local policy pins the key.
 
 Trusted keys have explicit roles:
 

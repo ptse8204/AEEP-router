@@ -1,0 +1,72 @@
+{
+  "source_before": "9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872",
+  "source_after": "9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09287970792502165,
+      "log": "reports/v08/workbook-encoding-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6665022500092164,
+      "log": "reports/v08/workbook-encoding-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08205341594293714,
+      "log": "reports/v08/workbook-encoding-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3612641670042649,
+      "log": "reports/v08/workbook-encoding-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1442647079238668,
+      "log": "reports/v08/workbook-encoding-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "seconds": 454.6478198330151,
+      "log": "reports/v08/workbook-encoding-check-05.txt"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "authority": "standing September25/27 exact review delegation;September30 unfinished tests model selection",
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "definition": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "executor_fingerprint": "sha256:acb04629c1eda7304eb931fa20aeaa1d102600af5bd1d5862af8acffeed7543a",
+    "scope_digest": "4c39bd54dd9168615f28b6a3c6a08ee6b88db5b48f312ea581cff6a537c3fe25",
+    "prompt_sha256": "e6a9bbc531169ef6202ab689fa85cb121224b1b6482c121f89d6414f7e3d2082",
+    "input_hashes": [
+      "111ce2bacd599c1a4405ce5795b95e54417c68cf8ad7001353c21c2bb895bfdb"
+    ],
+    "native_overrides": [
+      "-c",
+      "permissions.aeep-native-task.network.enabled=false",
+      "-c",
+      "permissions.aeep-native-task.filesystem={ \":root\" = \"deny\", \":minimal\" = \"read\", \"/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/AGENTS.md\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/scratch\" = \"write\", \"/Users/edwintse/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.aeep\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yaml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.json\" = \"deny\", \"/private/tmp\" = \"deny\", \"/private/tmp/**\" = \"deny\", \"/private/tmp{,/**}\" = \"deny\", \"/private/var/tmp\" = \"deny\", \"/private/var/tmp/**\" = \"deny\", \"/private/var/tmp{,/**}\" = \"deny\", \"/Users/edwintse/.codex/**\" = \"deny\", \"/Users/edwintse/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.aeep/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.aeep{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.codex/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yaml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yaml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.yml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.json/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb/aeep.json{,/**}\" = \"deny\" }"
+    ],
+    "inherited_instruction_sha256": "ebdf6620fd29b0167c7d47c41e345c89b58643599acd2f5837540aab529d5c92",
+    "native_boundary_evidence_sha256": "5542ae9f6e0f7a4b965efc8b992f3ff4616c93e09c4927fab364b7016b3b9d1e",
+    "native_boundary_log_sha256": "2d8c9f2fe689dff0616f5e36d8d95ebc0555c9acb1357678e8f73a175dadc3b1",
+    "setup_operation_id": "native-setup:planning_native-sol61-direct-only-one-call-setup",
+    "exposure_override": "mcp_servers.aeep_task_312cb4d7263f46f4881f6fffb56da2ff.omit_tools_from=[\"deferred\",\"code_mode\"]",
+    "exact_server": "aeep_task_312cb4d7263f46f4881f6fffb56da2ff",
+    "exact_tool": "aeep_recipe_f468b36bc594",
+    "maximum_seconds": 240,
+    "maximum_model_turns": 1,
+    "maximum_operations": 1,
+    "exploratory_resource_bounds": {
+      "host_tree_peak_rss_bytes": 1073741824,
+      "observed_host_tree_cpu_seconds": 60,
+      "elapsed_seconds": 240,
+      "retained_evidence_bytes": 8388608
+    },
+    "classification": "new direct-only explicitly named one-call diagnostic; fresh seed103/index4; reference tool transformation, no workbook replay, autonomy qualification or marginal benefit",
+    "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+    "unexpected_tool_detection": "post-execution observation only, not preventative enforcement"
+  },
+  "mapping_digest": "1b346a32b484e6d7f09452d47f8479349e8a8b94102ecf1def70140d403d55a3",
+  "request_digest": "5a1cf43c27b7a91f8e402eb021c9fcadc95001d903473acb49c9ff0ecc93b1f6",
+  "driver_sha256": "69a8a461f815e9c960bb0e4ffb905ae371591f9e986433acd5d1299c27256b71",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "sol61-direct-only-one-call",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-__s12mzb",
+    "executor_fingerprints": {
+      "native.workbook.sol61-model-journey": "sha256:acb04629c1eda7304eb931fa20aeaa1d102600af5bd1d5862af8acffeed7543a"
+    },
+    "approval_ceiling": "read",
+    "max_attempts": 1,
+    "max_attempt_seconds": 30.0,
+    "expires_at": "2026-09-30T11:00:15.555330Z"
+  },
+  "activation": "task_312cb4d7263f46f4881f6fffb56da2ff",
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 7856,
+  "authentication": "Codex-owned; never accessed",
+  "global_configuration_changes": false,
+  "new_services": false,
+  "native_boundary_result": "native-single-process-source-freeze.json",
+  "note": "planning request is authorization envelope only; no planner execution or managed-worker conformance"
+}

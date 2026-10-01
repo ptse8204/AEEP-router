@@ -37,6 +37,7 @@ from .accounting import (
     cash_accounting_from_usage_statement,
     cash_estimate_from_offer,
     cash_estimate_from_quote,
+    independent_receipts,
     mirror_actual_cash,
 )
 from .artifact_store import ContentArtifactStore
@@ -77,6 +78,7 @@ from .economics import HMACSigner, QuoteService
 from .errors import (
     ApprovalRequired,
     ConfigurationError,
+    InputValidationError,
     NoRouteError,
 )
 from .estimator import HistoricalEstimator, action_features, evidence_cohort_digest
@@ -90,7 +92,7 @@ from .executors import (
     PythonExecutor,
 )
 from .executors.base import BaseExecutor, ExecutionContext
-from .hosts import CodexAppServerAdapter, ManagedHostAdapter, ManagedHostRegistry
+from .hosts import ManagedHostAdapter, ManagedHostRegistry
 from .models import (
     ActionApprovalRecord,
     ActionConstraints,
@@ -157,6 +159,7 @@ from .models import (
     QuoteRequest,
     QuoteRequestV2,
     RateCardSnapshot,
+    RawExecution,
     RejectedCandidate,
     ResourceAccounting,
     ResourceVector,
@@ -206,12 +209,14 @@ from .qualification import (
     QualificationReport,
     RouteCandidate,
     RouteLifecycle,
+    activate_qualified_state,
     behavior_fingerprint,
+    require_candidate_qualification,
     require_static_qualification,
 )
 from .registry import Registry, validate_json
 from .runtime import detect_compute_availability
-from .scoring import policy_valuation_amount, score_candidate
+from .scoring import policy_valuation_amount, rejection_reasons, score_candidate
 from .store import ReceiptStore
 from .telemetry import start_span, trace_id_from_span
 from .validators import ValidationContext, ValidatorCallback, run_validators
@@ -265,6 +270,7 @@ class Router:
         unlimited_economic_budget: bool | None = None,
         executor_overrides: Mapping[ExecutorKind, BaseExecutor] | None = None,
         managed_host_adapters: Mapping[str, ManagedHostAdapter] | None = None,
+        managed_host_registry: ManagedHostRegistry | None = None,
     ) -> None:
         normalized = manifest.model_copy(deep=True)
         policies = builtin_policies()
@@ -285,6 +291,13 @@ class Router:
         )
         self.manifest_path = Path(manifest_path).resolve() if manifest_path else None
         self._route_activation_lock = RLock()
+        self._trial_fingerprints: dict[str, str] = {}
+        self._trial_deadline: float | None = None
+        self._trial_check: Callable[[], None] | None = None
+        self._callback_trial_identity: tuple[str, str] | None = None
+        self._trial_boundary_references: dict[str, str] = {}
+        self._task_scope_digest: str | None = None
+        self._task_activation_digest: str | None = None
         self.registry = Registry(normalized.executors)
         self.resources = {resource.id: resource for resource in normalized.resources}
         self.provider_registry = CompositeProviderRegistry(normalized.registries)
@@ -314,9 +327,13 @@ class Router:
                     )
                     self.store.save_route_candidate(candidate)
                 elif self.registry.contains(candidate.executor_id):
-                    raise ConfigurationError(
-                        f"active candidate {candidate.executor_id!r} collides with a manifest route"
-                    )
+                    with self.store._lock:
+                        admission = self.store._connection.execute("SELECT 1 FROM assessment_admissions WHERE executor_id=?", (candidate.executor_id,)).fetchone()
+                    if admission is None or behavior_fingerprint(self.registry.get(candidate.executor_id)) != candidate.behavior_fingerprint:
+                        raise ConfigurationError(
+                            f"active candidate {candidate.executor_id!r} collides with a manifest route"
+                        )
+                    self.registry.replace(candidate.spec)
                 else:
                     self.registry.register(candidate.spec)
         self.estimator = HistoricalEstimator(self.store)
@@ -435,39 +452,23 @@ class Router:
             else None
         )
         self._executors: dict[ExecutorKind, BaseExecutor] = dict(executor_overrides or {})
-        self.managed_hosts = ManagedHostRegistry()
+        self.managed_hosts = managed_host_registry.clone_factories() if managed_host_registry is not None else ManagedHostRegistry()
         configured_hosts = dict(managed_host_adapters or {})
-        codex_specs = [
-            spec
-            for spec in normalized.executors
-            if spec.kind is ExecutorKind.MANAGED_HOST
-            and spec.managed_host_config().adapter_id == CodexAppServerAdapter.adapter_id
-        ]
-        if codex_specs and CodexAppServerAdapter.adapter_id not in configured_hosts:
-            bindings = {
-                (spec.resource_pool, spec.managed_host_config().argv) for spec in codex_specs
-            }
-            if len(bindings) != 1:
-                raise ConfigurationError(
-                    "Codex App Server routes must share one argv and resource binding"
-                )
-            configured_hosts[CodexAppServerAdapter.adapter_id] = (
-                CodexAppServerAdapter.from_executor(
-                    codex_specs[0],
-                    principal_salt=secrets.token_bytes(32),
-                    manifest_directory=(self.manifest_path.parent if self.manifest_path else None),
-                )
-            )
         for adapter_id in sorted(configured_hosts):
             self.managed_hosts.register(adapter_id, configured_hosts[adapter_id])
-        if ExecutorKind.MANAGED_HOST in self._executors and configured_hosts:
+        self.managed_hosts.configure(
+            self.registry.all(), principal_salt=self.store.host_principal_key,
+            manifest_directory=self.manifest_path.parent if self.manifest_path else None,
+        )
+        if ExecutorKind.MANAGED_HOST in self._executors and self.managed_hosts.ids():
             raise ConfigurationError(
                 "managed-host executor override cannot be combined with adapter registrations"
             )
         self._executors.setdefault(
-            ExecutorKind.MANAGED_HOST, ManagedHostExecutor(self.managed_hosts)
+            ExecutorKind.MANAGED_HOST, ManagedHostExecutor(self.managed_hosts, self.store)
         )
         self._validated_decisions: dict[str, str] = {}
+        self._fixed_dispatches: set[str] = set()
         self._prepared_contexts: dict[str, PreparedExecutionContext] = {}
         self._closed = False
 
@@ -661,8 +662,24 @@ class Router:
     @staticmethod
     def _safe_receipt_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
         allowed = {
+            "execution_evidence_digest",
+            "assessment_admission_id",
+            "boundary_digest",
+            "worker_digest",
+            "container_client_cpu_ms",
+            "container_client_peak_memory_mb",
             "adapter_id",
             "actual_model",
+            "host_runtime_digest",
+            "dynamic_tools_digest",
+            "dynamic_tool_calls",
+            "dynamic_cleanup_confirmed",
+            "dynamic_declaration_bytes",
+            "dynamic_schema_bytes",
+            "host_failure_code",
+            "host_tools_used",
+            "host_available_tools",
+            "host_advertised_inventory_digest",
             "approval_evidence_digest",
             "argument_mode",
             "callable",
@@ -700,6 +717,10 @@ class Router:
             "thread_identity_digest",
             "turn_identity_digest",
             "tool_schema_tokens_estimate",
+            "component_receipt_ids",
+            "invocation_guard_ms",
+            "enforcement_backend_digest",
+            "task_scope_digest",
         }
         return {
             key: value
@@ -741,6 +762,9 @@ class Router:
             }.get(persisted.status, "execution_error")
             persisted.error_message = persisted.error_type
         self.store.save_receipt(persisted)
+        if any(result.valid is False and result.trust in {TrustLevel.OBSERVED, TrustLevel.VERIFIED} for result in persisted.validation_results):
+            with self.store._immediate_transaction() as connection:
+                connection.execute("UPDATE assessment_admissions SET revoked=1, revoked_at=? WHERE executor_id=?", (utc_now().isoformat(), persisted.executor_id))
 
     def _create_claimed_attempt(
         self,
@@ -762,6 +786,7 @@ class Router:
             )
         attempt = self.store.create_execution_attempt(
             ExecutionAttempt(
+                task_scope_digest=self._task_scope_digest,
                 attempt_id=attempt_id or new_id("attempt"),
                 decision_id=decision_id,
                 prepared_id=prepared_id,
@@ -859,7 +884,7 @@ class Router:
 
     @staticmethod
     def _terminal_attempt_state(
-        receipt: ExecutionReceipt, *, retry_eligible: bool
+        receipt: ExecutionReceipt, *, attempt: ExecutionAttempt
     ) -> ExecutionAttemptState:
         succeeded = (
             receipt.status
@@ -873,17 +898,22 @@ class Router:
         )
         if succeeded:
             return ExecutionAttemptState.COMPLETED
+        if attempt.task_scope_digest is not None and attempt.side_effect.rank > SideEffect.READ.rank:
+            # An error after dispatch does not prove a delegated write had no effects.
+            # Retain the scope's recovery barrier, including across new decisions/restarts.
+            return ExecutionAttemptState.INDETERMINATE
         if receipt.status is ExecutionStatus.REJECTED:
             return ExecutionAttemptState.REJECTED
         if receipt.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
-            receipt.executor_kind is ExecutorKind.MANAGED_HOST or not retry_eligible
+            receipt.executor_kind is ExecutorKind.MANAGED_HOST or not attempt.retry_eligible
         ):
             return ExecutionAttemptState.INDETERMINATE
         return ExecutionAttemptState.FAILED
 
     @staticmethod
     def _bind_receipt_evidence(spec: ExecutorSpec, receipt: ExecutionReceipt) -> None:
-        fingerprint, cohort = evidence_cohort_digest(spec, receipt.action_features)
+        runtime_digest = receipt.metadata.get("host_runtime_digest") if spec.kind is ExecutorKind.MANAGED_HOST else None
+        fingerprint, cohort = evidence_cohort_digest(spec, receipt.action_features, runtime_digest if isinstance(runtime_digest, str) else None)
         if receipt.executor_fingerprint not in {None, fingerprint}:
             raise ConfigurationError("receipt executor fingerprint does not match runtime route")
         if receipt.cohort_digest not in {None, cohort}:
@@ -1098,6 +1128,11 @@ class Router:
 
         candidates: list[CandidateScore] = []
         for spec in compatible:
+            try:
+                self._require_active_spec(spec, request_model)
+            except NoRouteError as exc:
+                candidates.append(CandidateScore(executor_id=spec.id, feasible=False, rejection_reasons=[str(exc)], estimate=spec.estimate.model_copy(deep=True)))
+                continue
             cold_estimate = self.estimator.estimate(spec, policy, features)
             cold = score_candidate(
                 spec,
@@ -1452,7 +1487,7 @@ class Router:
 
         for spec in compatible:
             try:
-                self._require_active_spec(spec)
+                self._require_active_spec(spec, request_model)
             except NoRouteError as exc:
                 rejected_reasons[spec.id] = [str(exc)]
                 continue
@@ -1691,7 +1726,7 @@ class Router:
             if quote_provider is None:  # pragma: no cover - narrowed by live_ready
                 raise ConfigurationError("live quote provider disappeared during preparation")
             try:
-                self._require_active_spec(spec)
+                self._require_active_spec(spec, request_model)
                 disclosed = disclose_quote_features(
                     disclosure_policy(spec),
                     action_input=request_model.input,
@@ -2106,7 +2141,7 @@ class Router:
                 continue
 
             try:
-                self._require_active_spec(spec)
+                self._require_active_spec(spec, request_model)
             except NoRouteError as exc:
                 rejected_reasons[executor_id] = [str(exc)]
                 continue
@@ -2583,7 +2618,7 @@ class Router:
         if prepared.selected_executor_id is None:
             raise NoRouteError("prepared decision has no feasible selected route")
         spec = self.registry.get(prepared.selected_executor_id)
-        self._require_active_spec(spec)
+        self._require_active_spec(spec, original)
         if executor_fingerprint(spec) != prepared.selected_executor_fingerprint:
             raise NoRouteError("prepared executor fingerprint changed; requalification is required")
         validate_json(original.input, spec.input_schema, label=f"input for {spec.id}")
@@ -2694,7 +2729,7 @@ class Router:
         if prepared.selected_executor_id is None:
             raise NoRouteError("prepared decision has no feasible selected route")
         spec = self.registry.get(prepared.selected_executor_id)
-        self._require_active_spec(spec)
+        self._require_active_spec(spec, context.request)
         if executor_fingerprint(spec) != prepared.selected_executor_fingerprint:
             raise NoRouteError("prepared executor fingerprint changed; requalification is required")
         selected_quote = context.selected_quote
@@ -3099,6 +3134,7 @@ class Router:
         """Invoke exactly the prepared route once and return unpersisted evidence."""
 
         decision = context.route_decision
+        self._require_active_spec(spec, decision.action)
         candidate = next(
             (
                 item
@@ -3119,7 +3155,7 @@ class Router:
                 "aeep.attempt_id": attempt_id,
             },
         ) as span:
-            raw = await self._executor_for(spec.kind).execute(
+            raw = await self._invoke_controlled(
                 ExecutionContext(
                     request=decision.action,
                     spec=spec,
@@ -3410,7 +3446,7 @@ class Router:
         if prepared.selected_executor_id is None or prepared.maximum_cash_authorization is None:
             raise NoRouteError("prepared decision has no executable bounded route")
         spec = self.registry.get(prepared.selected_executor_id)
-        self._require_active_spec(spec)
+        self._require_active_spec(spec, context.request)
         if spec.side_effect.rank > approved_side_effect.rank and spec.kind not in {
             ExecutorKind.DELEGATE,
             ExecutorKind.HOST,
@@ -3575,7 +3611,7 @@ class Router:
                     raise ConfigurationError(
                         "prepared decision expired while reserving payment"
                     )
-                self._require_active_spec(spec)
+                self._require_active_spec(spec, context.request)
                 if executor_fingerprint(spec) != prepared.selected_executor_fingerprint:
                     raise NoRouteError(
                         "prepared executor drifted after reservation; invocation denied"
@@ -3661,7 +3697,7 @@ class Router:
                     # activation/suspension mutations take the same lock, so a
                     # route cannot be revoked between this final check and the
                     # durable RESERVED -> INVOKING transition.
-                    self._require_active_spec(spec)
+                    self._require_active_spec(spec, context.request)
                     if (
                         executor_fingerprint(spec)
                         != prepared.selected_executor_fingerprint
@@ -3797,7 +3833,7 @@ class Router:
             durable_attempt = self._advance_attempt(
                 durable_attempt,
                 self._terminal_attempt_state(
-                    receipt, retry_eligible=durable_attempt.retry_eligible
+                    receipt, attempt=durable_attempt
                 ),
                 reason="confirmed-free prepared execution finalized",
                 terminal_receipt_ids=(receipt.receipt_id,),
@@ -3980,7 +4016,7 @@ class Router:
             durable_attempt = self._advance_attempt(
                 durable_attempt,
                 self._terminal_attempt_state(
-                    receipt, retry_eligible=durable_attempt.retry_eligible
+                    receipt, attempt=durable_attempt
                 ),
                 reason="prepared settlement finalized",
                 terminal_receipt_ids=(receipt.receipt_id,),
@@ -4159,7 +4195,7 @@ class Router:
         durable_attempt = self._advance_attempt(
             durable_attempt,
             self._terminal_attempt_state(
-                receipt, retry_eligible=durable_attempt.retry_eligible
+                receipt, attempt=durable_attempt
             ),
             reason="prepared settlement finalized",
             terminal_receipt_ids=(receipt.receipt_id,),
@@ -5164,69 +5200,50 @@ class Router:
         case_passed = [True] * len(dynamic_cases)
         passed_runs = 0
         dynamic_runs = 0
-        warm_executors: dict[ExecutorKind, BaseExecutor] = {}
+        warm_router: Router | None = None
+        evidence_ids: list[str] = []
+        plan_digest = hashlib.sha256(json.dumps({
+            "fingerprint": fingerprint,
+            "cases": [case.model_dump(mode="json") for case in cases],
+            "repetitions": repetitions,
+            "conditions": [condition.value for condition in run_conditions],
+        }, sort_keys=True).encode()).hexdigest()
         try:
             for condition in run_conditions:
                 for _ in range(repetitions):
                     for case_index, case in enumerate(dynamic_cases):
-                        validate_json(
-                            case.input,
-                            spec.input_schema,
-                            label=f"qualification input for {spec.id}",
-                        )
+                        validate_json(case.input, spec.input_schema, label=f"qualification input for {spec.id}")
                         if condition == QualificationCondition.PROCESS_COLD:
-                            executor = _EXECUTOR_TYPES[spec.kind]()
+                            trial_router = self._campaign_router([spec], plan_digest=plan_digest)
                         else:
-                            warm_executor = warm_executors.get(spec.kind)
-                            if warm_executor is None:
-                                warm_executor = _EXECUTOR_TYPES[spec.kind]()
-                                warm_executors[spec.kind] = warm_executor
-                            executor = warm_executor
+                            if warm_router is None:
+                                warm_router = self._campaign_router([spec], plan_digest=plan_digest)
+                            trial_router = warm_router
                         try:
-                            request = ActionRequest(capability=spec.capability, input=case.input)
-                            try:
-                                raw = await executor.execute(
-                                    ExecutionContext(
-                                        request=request,
-                                        spec=spec,
-                                        estimate=spec.estimate,
-                                        attempt=1,
-                                    )
-                                )
-                            except Exception:
-                                raw = None
+                            request = ActionRequest(
+                                capability=spec.capability, input=case.input,
+                                constraints=ActionConstraints(allowed_executor_ids=[spec.id]),
+                            )
+                            outcome = await trial_router.execute(request)
+                            for receipt in outcome.receipts:
+                                stored = trial_router.store.get_receipt(receipt.receipt_id)
+                                if stored is not None:
+                                    from .assessment.repository import AssessmentRepository
+                                    AssessmentRepository(self.store).put("qualification_receipt", stored.receipt_id, stored)
+                                    evidence_ids.append(stored.receipt_id)
+                            valid = outcome.ok and outcome.status == ExecutionStatus.SUCCESS
+                            valid &= all(receipt.output_valid is not False and receipt.task_valid is not False for receipt in outcome.receipts)
+                            if case.expected_output is not None:
+                                valid &= outcome.output == case.expected_output
                         finally:
                             if condition == QualificationCondition.PROCESS_COLD:
-                                await executor.close()
+                                await trial_router.close()
                         dynamic_runs += 1
-                        if raw is None:
-                            case_passed[case_index] = False
-                            continue
-                        valid = raw.status == ExecutionStatus.SUCCESS
-                        if valid and spec.output_schema is not None:
-                            try:
-                                validate_json(
-                                    raw.output,
-                                    spec.output_schema,
-                                    label=f"qualification output for {spec.id}",
-                                )
-                            except Exception:
-                                valid = False
-                        if valid and case.expected_output is not None:
-                            valid = raw.output == case.expected_output
-                        if valid and spec.validators:
-                            results = await run_validators(
-                                spec.validators,
-                                ValidationContext(input=case.input, output=raw.output),
-                                self.validator_callbacks,
-                            )
-                            valid = all(result.valid is True for result in results)
                         case_passed[case_index] &= valid
-                        if valid:
-                            passed_runs += 1
+                        passed_runs += int(valid)
         finally:
-            for executor in warm_executors.values():
-                await executor.close()
+            if warm_router is not None:
+                await warm_router.close()
         report = QualificationReport(
             candidate_id=candidate.candidate_id,
             behavior_fingerprint=fingerprint,
@@ -5234,10 +5251,11 @@ class Router:
             dynamic_cases=len(dynamic_cases),
             passed_cases=sum(case_passed),
             repetitions=repetitions,
-            conditions=run_conditions,
+            conditions=list(run_conditions),
             dynamic_runs=dynamic_runs,
             passed_runs=passed_runs,
             passed=passed_runs == dynamic_runs,
+            source_evidence_ids=evidence_ids,
         )
         self.store.save_qualification_report(report)
         if report.passed:
@@ -5269,15 +5287,8 @@ class Router:
             report = self.store.get_qualification_report(
                 candidate.qualification_report_id or ""
             )
-            if (
-                report is None
-                or not report.passed
-                or report.behavior_fingerprint != candidate.behavior_fingerprint
-                or behavior_fingerprint(candidate.spec) != candidate.behavior_fingerprint
-            ):
-                raise ConfigurationError(
-                    "qualification evidence does not match candidate fingerprint"
-                )
+            require_candidate_qualification(candidate, report)
+            assert report is not None
             if candidate.package_digest is not None:
                 package = self.store.get_provider_package(candidate.package_digest)
                 snapshot = self.store.get_candidate_verification_snapshot(
@@ -5309,9 +5320,7 @@ class Router:
                     raise ConfigurationError(
                         "evidence-assisted activation requires current trusted correctness evidence"
                     )
-            candidate.status = RouteLifecycle.ACTIVE
-            candidate.spec.enabled = True
-            candidate.updated_at = utc_now()
+            activate_qualified_state(candidate, report)
             self.store.save_route_candidate(candidate)
             self.registry.replace(candidate.spec)
             return candidate
@@ -5333,7 +5342,95 @@ class Router:
     def candidate_status(self) -> list[RouteCandidate]:
         return self.store.list_route_candidates()
 
-    def _require_active_spec(self, spec: ExecutorSpec) -> None:
+    def _campaign_router(
+        self, subjects: list[ExecutorSpec], *, plan_digest: str,
+        database: str | Path = ":memory:", snapshot_bound_digests: set[str] | None = None,
+    ) -> Router:
+        """Internal isolated trial authority; never changes a production candidate."""
+        if len(plan_digest) != 64 or any(c not in "0123456789abcdef" for c in plan_digest):
+            raise ConfigurationError("controlled trials require an exact plan digest")
+        if snapshot_bound_digests is not None and plan_digest not in snapshot_bound_digests:
+            raise ConfigurationError("scoped trial snapshot must retain its exact plan digest")
+        snapshot = self.store.campaign_snapshot(database, bound_digests=snapshot_bound_digests)
+        manifest = self.manifest.model_copy(deep=True)
+        manifest.database = str(database)
+        try:
+            router = Router(
+                manifest, manifest_path=self.manifest_path, store=snapshot,
+                validator_callbacks=self.validator_callbacks,
+                managed_host_registry=self.managed_hosts,
+            )
+            for subject in subjects:
+                if subject.side_effect.rank > SideEffect.READ.rank or not subject.idempotent:
+                    raise ConfigurationError("controlled trials require read-only idempotent subjects")
+                spec = subject.model_copy(deep=True)
+                spec.enabled = True
+                router.registry.replace(spec)
+                router.managed_hosts.configure(
+                    [spec], principal_salt=router.store.host_principal_key,
+                    manifest_directory=self.manifest_path.parent if self.manifest_path else None,
+                )
+                router._trial_fingerprints[spec.id] = behavior_fingerprint(spec)
+            return router
+        except BaseException:
+            snapshot.close()
+            raise
+
+    def bind_task_scope(self, identity: str) -> SideEffect:
+        """Operator-only session binding; task arguments cannot select authority."""
+        from .assessment.models import content_digest
+        from .assessment.repository import AssessmentRepository
+        from .models import TaskScope
+        scope = TaskScope.model_validate(AssessmentRepository(self.store).get('task_scope', identity))
+        digest = content_digest(scope)
+        if self.store.path == ':memory:':
+            raise ConfigurationError('task scope requires durable attempt storage')
+        if self._task_scope_digest is not None and self._task_scope_digest != digest:
+            raise ConfigurationError('a task session cannot replace its authority')
+        if self.manifest_path is None or self.manifest_path.parent != Path(scope.project_root):
+            raise ConfigurationError('task scope belongs to another project')
+        self._task_scope_digest = digest
+        return scope.approval_ceiling
+
+    def _require_task_scope(self, spec: ExecutorSpec, *, activating: bool = False) -> None:
+        if self._task_scope_digest is None:
+            return
+        from .models import TaskScope
+        with self.store._lock:
+            row = self.store._connection.execute(
+                "SELECT r.payload_json FROM assessment_records r JOIN assessment_reviews v ON v.digest=r.digest WHERE r.kind='task_scope' AND r.digest=? AND v.revoked=0",
+                (self._task_scope_digest,),
+            ).fetchone()
+        if row is None:
+            raise NoRouteError('task scope is paused or unavailable')
+        scope = TaskScope.model_validate_json(row[0])
+        if utc_now() >= scope.expires_at or scope.executor_fingerprints.get(spec.id) != executor_fingerprint(spec):
+            raise NoRouteError('task scope expired or executor is outside its exact reviewed scope')
+        if spec.side_effect.rank > scope.approval_ceiling.rank:
+            raise NoRouteError('task scope permission or resource bound exceeded')
+        controls = [Path(self.store.path).parent]
+        if self.manifest_path is not None:
+            controls.append(self.manifest_path)
+        try:
+            self._executor_for(spec.kind, spec).require_task_scope(scope, spec, controls, activating=activating)
+        except (ConfigurationError, ValueError) as exc:
+            raise NoRouteError(str(exc)) from exc
+
+    def _require_active_spec(self, spec: ExecutorSpec, request: ActionRequest | None = None, *, check_activation: bool = True) -> None:
+        if check_activation and self._task_activation_digest is not None:
+            from .tasks import require_activation
+            require_activation(self, self._task_activation_digest)
+        self._require_task_scope(spec)
+        if spec.required_capabilities:
+            try:
+                capabilities = (
+                    self.managed_hosts.capabilities(spec.managed_host_config().adapter_id)
+                    if spec.kind is ExecutorKind.MANAGED_HOST
+                    else self._executor_for(spec.kind, spec).capabilities()
+                )
+                capabilities.require(list(spec.required_capabilities))
+            except ConfigurationError as exc:
+                raise NoRouteError(str(exc)) from exc
         if not spec.enabled:
             raise NoRouteError(f"route {spec.id!r} is not active; reroute")
         if not self.registry.contains(spec.id):
@@ -5346,10 +5443,20 @@ class Router:
             raise NoRouteError(
                 f"route {spec.id!r} is not active for its exact fingerprint; reroute"
             )
+        trial_authorized = self._trial_fingerprints.get(spec.id) == behavior_fingerprint(spec)
+        if not trial_authorized:
+            with self.store._lock:
+                marker = self.store._connection.execute("SELECT admission_id FROM assessment_admissions WHERE executor_id=?", (spec.id,)).fetchone()
+            if marker is not None:
+                from .assessment.applicability import require_applicable
+                from .assessment.repository import AssessmentRepository
+                admission = AssessmentRepository(self.store).get("admission", marker[0])
+                baseline = self.registry.get(admission["baseline_id"]) if self.registry.contains(admission["baseline_id"]) else None
+                require_applicable(self.store, spec, request, baseline)
         candidate = self.store.get_route_candidate(spec.id)
         if candidate is None:
             return
-        if (
+        if not trial_authorized and (
             candidate.status != RouteLifecycle.ACTIVE
             or not spec.enabled
             or candidate.behavior_fingerprint != behavior_fingerprint(spec)
@@ -5388,6 +5495,144 @@ class Router:
         await self._snapshot_managed_capacity(request_model.capability)
         return self.route(request_model)
 
+    async def _resolve_host_identity(self, spec: ExecutorSpec) -> None:
+        if spec.kind is not ExecutorKind.MANAGED_HOST:
+            return
+        config = spec.managed_host_config()
+        self.store.host_runtime_digests.pop(spec.id, None)
+        try:
+            digest = await asyncio.wait_for(self.managed_hosts.resolve_identity(config), min(config.timeout_seconds, 30))
+            if digest is not None:
+                self.store.host_runtime_digests[spec.id] = (behavior_fingerprint(spec), digest)
+                with self.store._immediate_transaction() as connection:
+                    rows = connection.execute("SELECT a.executor_id, r.payload_json FROM assessment_admissions a JOIN assessment_records r ON r.kind='admission' AND r.id=a.admission_id WHERE a.revoked=0").fetchall()
+                    for executor_id, payload in rows:
+                        expected = json.loads(payload).get("host_runtime_digests", {}).get(spec.id)
+                        if expected is not None and expected != digest:
+                            connection.execute("UPDATE assessment_admissions SET revoked=1, revoked_at=? WHERE executor_id=?", (utc_now().isoformat(), executor_id))
+        except Exception:
+            pass
+
+    async def _invoke_controlled(self, context: ExecutionContext) -> RawExecution:
+        from .assessment.fixed_helper import _assessment_router
+
+        token = _assessment_router.set(self if self._trial_check is not None else None)
+        try:
+            return await self._invoke_controlled_authorized(context)
+        finally:
+            _assessment_router.reset(token)
+
+    async def _invoke_controlled_authorized(self, context: ExecutionContext) -> RawExecution:
+        guard_started = time.perf_counter()
+        spec = context.spec
+        if self._trial_check is not None:
+            self._trial_check()
+        if self._trial_deadline is not None and asyncio.get_running_loop().time() >= self._trial_deadline:
+            raise NoRouteError("assessment trial deadline exhausted")
+        from .assessment.repository import AssessmentRepository
+        with self.store._lock:
+            marker = self.store._connection.execute("SELECT admission_id FROM assessment_admissions WHERE executor_id=?", (spec.id,)).fetchone()
+        if marker is not None and spec.id not in self._trial_fingerprints:
+            admission = AssessmentRepository(self.store).get("admission", marker[0])
+            for executor_id, expected in admission.get("host_runtime_digests", {}).items():
+                await self._resolve_host_identity(self.registry.get(executor_id))
+                binding = self.store.host_runtime_digests.get(executor_id)
+                if binding is None or binding[1] != expected:
+                    with self.store._immediate_transaction() as connection:
+                        connection.execute("UPDATE assessment_admissions SET revoked=1, revoked_at=? WHERE executor_id=?", (utc_now().isoformat(), spec.id))
+                    raise NoRouteError("assessed host identity changed or is unavailable")
+                self.store.expected_host_runtime_digests[executor_id] = expected
+        self._require_active_spec(spec, context.request)
+        boundary_reference = self._trial_boundary_references.get(spec.id)
+        if marker is not None and spec.id not in self._trial_fingerprints:
+            environment = AssessmentRepository(self.store).get("environment", admission["environment_digest"])
+            boundary_reference = (environment.get("conformance_digests") or {}).get(spec.id)
+
+        def check_invocation() -> str | None:
+            if self._trial_check is not None:
+                self._trial_check()
+            self._require_active_spec(spec, context.request)
+            return boundary_reference
+
+        context.invocation_check = check_invocation
+        guard_ms = (time.perf_counter() - guard_started) * 1000
+        if "assessment_workflow" in spec.config:
+            from .assessment.adapters import execute_workflow_adapter
+            from .execution import persist_execution_events, start_execution
+            repository = AssessmentRepository(self.store)
+            with persist_execution_events(lambda journal_id, event: repository.put(
+                "execution_event", f"{journal_id}:{event.sequence}", event
+            )):
+                handle = start_execution(context.attempt_id or context.request.action_id,
+                    "reviewed-workflow", lambda _journal: execute_workflow_adapter(self, context))
+            raw = await handle.task
+        else:
+            from .assessment.adapters import prepare_context, project_output
+            mapped_context, adapter = prepare_context(context)
+            if self._trial_check is not None:
+                self._trial_check()
+            async with asyncio.timeout_at(self._trial_deadline):
+                executor = self._executor_for(spec.kind, spec)
+                from .execution import persist_execution_events
+                repository = AssessmentRepository(self.store)
+                with self.store._lock:
+                    stop_sequence = self.store._connection.execute('SELECT COALESCE(MAX(rowid),0) FROM assessment_records').fetchone()[0] if self._task_activation_digest else 0
+                with persist_execution_events(lambda journal_id, event: repository.put(
+                    "execution_event", f"{journal_id}:{event.sequence}", event
+                )):
+                    handle = await executor.start(mapped_context)
+                stop_watch = None
+                if self._task_activation_digest is not None:
+                    from .tasks import watch_stop
+                    stop_watch = asyncio.create_task(watch_stop(self, self._task_activation_digest,
+                        lambda: executor.cancel(handle), stop_sequence))
+                try:
+                    raw = project_output(await handle.task, adapter)
+                finally:
+                    if stop_watch is not None:
+                        stop_watch.cancel()
+                        with suppress(asyncio.CancelledError):
+                            await stop_watch
+                    if not handle.task.done():
+                        await executor.cancel(handle)
+                    if handle.task.cancelled() or (handle.task.done() and handle.task.exception() is not None):
+                        interrupted = handle.journal.evidence(
+                            executor.capabilities().adapter, RawExecution(status=ExecutionStatus.TIMEOUT)
+                        )
+                        AssessmentRepository(self.store).put("execution_evidence", interrupted.digest(), interrupted)
+        # Only the coordinator-owned workflow adapter can declare aggregation.
+        # External executor claims must not hide independent receipt charges.
+        if "assessment_workflow" not in spec.config:
+            raw.metadata.pop("component_receipt_ids", None)
+        evidence = raw.metadata.pop("execution_evidence", None)
+        if evidence is not None:
+            from .execution import ExecutionEvidence
+            canonical = ExecutionEvidence.model_validate(evidence)
+            if canonical.attempt_id != (context.attempt_id or context.request.action_id):
+                raise ConfigurationError("execution evidence belongs to another attempt")
+            digest = AssessmentRepository(self.store).put("execution_evidence", canonical.digest(), canonical)
+            raw.metadata["execution_evidence_digest"] = digest
+        if marker is not None and spec.id not in self._trial_fingerprints:
+            raw.metadata["assessment_admission_id"] = marker[0]
+        guard_started = time.perf_counter()
+        if marker is not None and spec.id not in self._trial_fingerprints and raw.status == ExecutionStatus.SUCCESS:
+            recipe = AssessmentRepository(self.store).get("recipe", admission["recipe_digest"])
+            try:
+                validate_json(raw.output, recipe["output_schema"], label="assessed task output")
+            except (ConfigurationError, InputValidationError):
+                AssessmentRepository(self.store).revoke_admission(spec.id)
+                raw.status = ExecutionStatus.FAILED
+                raw.output = None
+                raw.error_type = "ASSESSMENT_CONTRACT_VIOLATION"
+        if raw.error_type == "HOST_IDENTITY_DRIFT":
+            self.store.host_runtime_digests.pop(spec.id, None)
+            with self.store._immediate_transaction() as connection:
+                connection.execute("UPDATE assessment_admissions SET revoked=1, revoked_at=? WHERE executor_id=?", (utc_now().isoformat(), spec.id))
+        raw.metadata["invocation_guard_ms"] = guard_ms + (time.perf_counter() - guard_started) * 1000
+        if self._task_scope_digest is not None:
+            raw.metadata['task_scope_digest'] = self._task_scope_digest
+        return raw
+
     async def _snapshot_managed_capacity(
         self, capability: str, *, executor_id: str | None = None
     ) -> None:
@@ -5398,6 +5643,7 @@ class Router:
             ):
                 continue
             config = spec.managed_host_config()
+            await self._resolve_host_identity(spec)
             key = (config.adapter_id, spec.resource_pool or "")
             if key in seen:
                 continue
@@ -5464,7 +5710,7 @@ class Router:
 
         for candidate in candidates:
             spec = self.registry.get(candidate.executor_id)
-            self._require_active_spec(spec)
+            self._require_active_spec(spec, route_decision.action)
             entry = BenchmarkEntry(
                 executor_id=spec.id,
                 executor_kind=spec.kind,
@@ -5554,7 +5800,12 @@ class Router:
             entry.actual_rank = rank
         return result
 
-    def _executor_for(self, kind: ExecutorKind) -> BaseExecutor:
+    def _executor_for(self, kind: ExecutorKind, spec: ExecutorSpec | None = None) -> BaseExecutor:
+        if spec is not None and spec.id not in self._trial_fingerprints:
+            from .assessment.containment import admitted_container
+            contained = admitted_container(self.store, spec)
+            if contained is not None:
+                return contained
         executor = self._executors.get(kind)
         if executor is None:
             try:
@@ -5614,6 +5865,49 @@ class Router:
             ExecutionStatus.UNKNOWN,
         }
 
+    async def execute_fixed(
+        self, request: ActionRequest, executor_id: str, *,
+        approved_side_effect: SideEffect = SideEffect.READ,
+    ) -> ExecutionOutcome:
+        """Operator-only scoped native helper dispatch, without capability selection.
+
+        Common authorization, validation and receipt overhead remains measured.
+        This method is deliberately absent from model-facing exports.
+        """
+        self._ensure_open()
+        spec = self.registry.get(executor_id)
+        if (self._task_scope_digest is None or spec.kind is not ExecutorKind.COMMAND
+                or "native_sandbox" not in spec.config):
+            raise ConfigurationError("fixed dispatch requires a scoped native command helper")
+        request = self._fill_runtime_context(request.model_copy(deep=True))
+        if spec.capability != request.capability:
+            raise NoRouteError("fixed helper capability mismatch")
+        self._require_active_spec(spec, request)
+        validate_json(request.input, spec.input_schema, label=f"input for {spec.id}")
+        policy = self._policy_for(request)
+        features = action_features(request.input)
+        estimate = self.estimator.estimate(spec, policy, features)
+        reasons = rejection_reasons(spec, estimate, policy, request.context)
+        if reasons:
+            raise NoRouteError("fixed helper violates current policy: " + "; ".join(reasons))
+        decision = RouteDecision(
+            action=request, policy=policy, selected_executor_id=spec.id,
+            disposition=RouteDisposition.BYPASS_ROUTER,
+            bypass_reason=RouteBypassReason.PINNED_EXECUTOR,
+            candidates=[CandidateScore(executor_id=spec.id, feasible=True,
+                                       estimate=estimate, rank=1)],
+            action_features=features,
+            explanation="Operator-selected helper; common dispatch audit only.",
+        )
+        self._validated_decisions[decision.decision_id] = self._decision_digest(decision)
+        self._fixed_dispatches.add(decision.decision_id)
+        try:
+            self._persist_decision(decision)
+            return await self.execute(decision, approved_side_effect=approved_side_effect)
+        finally:
+            self._fixed_dispatches.discard(decision.decision_id)
+            self._validated_decisions.pop(decision.decision_id, None)
+
     async def execute(
         self,
         request_or_decision: ActionRequest | RouteDecision | dict[str, Any],
@@ -5643,8 +5937,11 @@ class Router:
                 ActionRequest.model_validate(request_or_decision)
             )
 
+        fixed_dispatch = decision.decision_id in self._fixed_dispatches
         expected_digest = self._validated_decisions.get(decision.decision_id)
         if expected_digest != self._decision_digest(decision):
+            if fixed_dispatch:
+                raise ConfigurationError("fixed dispatch identity changed")
             if decision.action.input.get("__aeep_redacted__") is True:
                 raise ConfigurationError(
                     "persisted decisions have redacted inputs and cannot be executed; "
@@ -5732,13 +6029,13 @@ class Router:
             return outcome
 
         fallback = decision.policy.fallback
-        max_attempts = min(len(candidates), fallback.max_attempts if fallback.enabled else 1)
+        max_attempts = 1 if fixed_dispatch else min(len(candidates), fallback.max_attempts if fallback.enabled else 1)
         attempts: list[ExecutionReceipt] = []
         last_output: Any = None
 
         for attempt_number, candidate in enumerate(candidates[:max_attempts], start=1):
             spec = self.registry.get(candidate.executor_id)
-            self._require_active_spec(spec)
+            self._require_active_spec(spec, decision.action)
             if spec.kind is ExecutorKind.MANAGED_HOST:
                 before_quota = candidate.subscription_quota
                 await self._snapshot_managed_capacity(
@@ -5785,13 +6082,17 @@ class Router:
                     f"executor {spec.id!r} requires prepared economic execution; "
                     "use prepare_route() followed by execute_prepared()"
                 )
-            current = score_candidate(
-                spec,
-                current_estimate,
-                current_policy,
-                decision.action.context,
-                self._subscription_quota(spec, decision.action.context),
-            )
+            if fixed_dispatch:
+                reasons = rejection_reasons(
+                    spec, current_estimate, current_policy, decision.action.context,
+                )
+                current = CandidateScore(executor_id=spec.id, feasible=not reasons,
+                                         rejection_reasons=reasons, estimate=current_estimate)
+            else:
+                current = score_candidate(
+                    spec, current_estimate, current_policy, decision.action.context,
+                    self._subscription_quota(spec, decision.action.context),
+                )
             if not current.feasible:
                 raise NoRouteError(
                     f"route {spec.id!r} no longer satisfies current policy: "
@@ -5821,7 +6122,7 @@ class Router:
 
             estimate = candidate.estimate
             approval_id: str | None = None
-            if spec.side_effect.rank > SideEffect.READ.rank:
+            if spec.side_effect.rank > SideEffect.READ.rank or self._task_scope_digest is not None:
                 approval = ActionApprovalRecord(
                     action_digest=deterministic_digest(
                         {
@@ -5831,7 +6132,7 @@ class Router:
                     ),
                     policy_digest=self._effective_policy_digest(current_policy),
                     attempt_id=f"attempt-{attempt_number}",
-                    granted_side_effect=approved_side_effect,
+                    granted_side_effect=spec.side_effect if self._task_scope_digest is not None else approved_side_effect,
                     source=ApprovalSource.EMBEDDED_CALLER,
                     granted_at=self._economic_now(),
                 )
@@ -5889,7 +6190,8 @@ class Router:
                 if _idempotency_claimed and idempotency_key and attempt_number == 1:
                     self.store.mark_idempotency_executing(idempotency_key)
                 try:
-                    raw = await self._executor_for(spec.kind).execute(
+                    self._require_active_spec(spec, decision.action)
+                    raw = await self._invoke_controlled(
                         ExecutionContext(
                             request=decision.action,
                             spec=spec,
@@ -6049,22 +6351,7 @@ class Router:
                 )
                 self._save_receipt(receipt)
                 self._observe_receipt(spec, receipt)
-                attempt_succeeded = raw.status in {
-                    ExecutionStatus.SUCCESS,
-                    ExecutionStatus.DELEGATED,
-                    ExecutionStatus.HOST_SELECTED,
-                } and output_valid is not False and task_valid is not False
-                if attempt_succeeded:
-                    terminal_attempt_state = ExecutionAttemptState.COMPLETED
-                elif raw.status is ExecutionStatus.REJECTED:
-                    terminal_attempt_state = ExecutionAttemptState.REJECTED
-                elif raw.status in {ExecutionStatus.TIMEOUT, ExecutionStatus.UNKNOWN} and (
-                    spec.kind is ExecutorKind.MANAGED_HOST
-                    or not durable_attempt.retry_eligible
-                ):
-                    terminal_attempt_state = ExecutionAttemptState.INDETERMINATE
-                else:
-                    terminal_attempt_state = ExecutionAttemptState.FAILED
+                terminal_attempt_state = self._terminal_attempt_state(receipt, attempt=durable_attempt)
                 durable_attempt = self._advance_attempt(
                     durable_attempt,
                     terminal_attempt_state,
@@ -7111,7 +7398,7 @@ class Router:
         spec = self.registry.get(decision.selected_executor_id)
         if not spec.enabled:
             raise ConfigurationError("waiting workflow route is no longer active")
-        self._require_active_spec(spec)
+        self._require_active_spec(spec, decision.action)
         step = next(item for item in workflow.steps if item.step_id == step_id)
         action = step.action.model_copy(deep=True)
         action.constraints = merge_constraints(workflow.constraints, action.constraints)
@@ -7250,6 +7537,66 @@ class Router:
                 for receipt in outcome.receipts
             ],
             instructions=outcome.delegated_instructions,
+        )
+
+    def task_outcome(self, outcome: ExecutionOutcome, *, approved_side_effect: SideEffect) -> Any:
+        """Render existing evidence without a model call or new persisted payload."""
+        from .models import TaskExecutionOutcome, TaskReceiptView
+
+        receipts = [TaskReceiptView(
+            receipt_id=item.receipt_id, executor_id=item.executor_id, status=item.status,
+            approval_id=item.approval_id, schema_valid=item.schema_valid,
+            task_valid=item.task_valid, recorded_resources=item.actual_resources,
+            checks=[check.model_copy(update={'detail': ''}) for check in item.validation_results],
+            accounting=item.accounting,
+            enforcement_backend_digest=item.metadata.get('enforcement_backend_digest'),
+        ) for item in outcome.receipts]
+        verified = outcome.ok and bool(receipts) and all(
+            item.task_valid is True and any(check.kind.value != 'schema' and check.valid is True
+                and check.trust in {TrustLevel.OBSERVED, TrustLevel.VERIFIED} for check in item.checks)
+            for item in receipts)
+        limits = [] if verified else ['Non-schema task verification is incomplete or unavailable.']
+        limits.append('Preservation, isolation and comparative savings are not established by execution success.')
+        summary = ('Completed; recorded non-schema task checks passed.' if verified else
+                   'Completed; task verification is incomplete.' if outcome.ok else
+                   'Task did not complete successfully; inspect the recorded outcome before retrying.')
+        if verified and len(outcome.receipts) == 1:
+            receipt = outcome.receipts[0]
+            if self.registry.contains(receipt.executor_id):
+                spec = self.registry.get(receipt.executor_id)
+                configured = any(check.kind == ValidationKind.CALLBACK
+                    and check.config.get('name') == 'aeep.workbook.native.v1'
+                    for check in spec.validators)
+                builtin = False
+                if configured:
+                    from .assessment.workbook_native import implementation_digest
+                    builtin = any(check.config == {
+                        'name': 'aeep.workbook.native.v1', 'implementation_digest': implementation_digest()}
+                        for check in spec.validators)
+                observed = any(check.kind == ValidationKind.CALLBACK and check.valid is True
+                    and check.trust in {TrustLevel.OBSERVED, TrustLevel.VERIFIED}
+                    for check in receipt.validation_results)
+                if (builtin and observed and receipt.task_valid is True
+                        and receipt.executor_fingerprint == executor_fingerprint(spec)):
+                    summary = ('Completed; cleaned workbook checks passed for retained rows, '
+                               'formulas, totals, and Notes values.')
+                    limits.append('Formatting and other OOXML preservation were not fully checked.')
+        recovery: Literal['none', 'required', 'unknown'] = 'none' if outcome.ok else 'unknown'
+        with self.store._lock:
+            attempts = self.store._connection.execute(
+                'SELECT state FROM execution_attempts WHERE decision_id=?',
+                (outcome.decision.decision_id,),
+            ).fetchall()
+        if any(row[0] in {'INDETERMINATE', 'DISPUTED'} for row in attempts):
+            recovery = 'required'
+            summary = 'The external outcome is unresolved. Reconcile it before retrying.'
+        return TaskExecutionOutcome(
+            ok=outcome.ok, status=outcome.status, output=outcome.output,
+            decision=self.compact_decision(outcome.decision), summary=summary,
+            approval_ceiling=approved_side_effect, receipts=receipts,
+            task_scope_digest=self._task_scope_digest,
+            task_activation_digest=self._task_activation_digest,
+            verification_limits=limits, recovery_state=recovery,
         )
 
     def list_policies(self) -> list[dict[str, Any]]:
@@ -7402,7 +7749,7 @@ class Router:
         self._ensure_open()
         decisions = self.store.list_decisions(limit=limit)
         receipts = self.store.list_receipts(limit=limit)
-        operational_receipts = [
+        operational_receipts = independent_receipts([
             self._receipt_with_current_payment_evidence(receipt)
             for receipt in receipts
             if receipt.status
@@ -7411,7 +7758,7 @@ class Router:
                 ExecutionStatus.HOST_SELECTED,
                 ExecutionStatus.UNKNOWN,
             }
-        ]
+        ])
         accounting = aggregate_accounting(operational_receipts)
         final_receipts: dict[str, ExecutionReceipt] = {}
         for receipt in reversed(receipts):

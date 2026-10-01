@@ -11,6 +11,52 @@ from aeep.hosts import CodexAppServerTransport, CodexProtocolError
 FAKE = Path(__file__).parent / "fixtures" / "fake_codex_app_server.py"
 
 
+@pytest.mark.assessment_contract
+@pytest.mark.asyncio
+@pytest.mark.parametrize("legacy", [False, True])
+async def test_turn_result_excludes_progress_and_prefers_explicit_final(legacy):
+    from aeep.hosts.codex_app_server import _TurnCollector
+
+    collector = _TurnCollector(max_output_bytes=1024)
+    collector.handle("item/completed", {"item": {
+        "type": "agentMessage", "phase": "commentary", "text": "Building the tool."
+    }})
+    if not legacy:
+        collector.handle("item/completed", {"item": {
+            "type": "agentMessage", "text": "Earlier unphased message."
+        }})
+    collector.handle("item/completed", {"item": {
+        "type": "agentMessage", "phase": None if legacy else "final_answer",
+        "text": '{"source":"print(1)","usage":"python3 tool.py"}'
+    }})
+    collector.handle("turn/completed", {"turn": {"status": "completed"}})
+    assert (await collector.future).output == {
+        "source": "print(1)", "usage": "python3 tool.py"
+    }
+
+
+@pytest.mark.assessment_contract
+@pytest.mark.asyncio
+async def test_turn_message_phase_rejects_unknown_and_retains_output_bounds():
+    from aeep.hosts.codex_app_server import _TurnCollector
+
+    for phase, message in [("unknown", "unknown agent message phase"),
+                           ("final_answer", "exceeds")]:
+        collector = _TurnCollector(max_output_bytes=3)
+        collector.handle("item/completed", {"item": {
+            "type": "agentMessage", "phase": phase, "text": "large"
+        }})
+        collector.handle("turn/completed", {"turn": {"status": "completed"}})
+        with pytest.raises(CodexProtocolError, match=message):
+            await collector.future
+    collector = _TurnCollector(max_output_bytes=3)
+    collector.handle("item/completed", {"item": {
+        "type": "agentMessage", "phase": "commentary", "text": "working"
+    }})
+    collector.handle("turn/completed", {"turn": {"status": "completed"}})
+    assert (await collector.future).output == ""
+
+
 def argv(scenario: str = "success") -> tuple[str, ...]:
     return (sys.executable, "-u", str(FAKE), "--scenario", scenario)
 

@@ -1,0 +1,25 @@
+.......E..
+======================================================================
+ERROR: test_timeout_preserves_exact_partial_lineage_and_accounting (__main__.Checks.test_timeout_preserves_exact_partial_lineage_and_accounting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/check-native-composed-post-reset-runner-offline.py", line 197, in test_timeout_preserves_exact_partial_lineage_and_accounting
+    attempt = ExecutionAttempt(decision_id=partial.decision_id,action_digest='1'*64,
+        executor_id='host',executor_fingerprint='2'*64,side_effect=SideEffect.READ,idempotent=True,
+        state='INDETERMINATE')
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pydantic/main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutionAttempt
+  Value error, claimed execution attempts require an owner [type=value_error, input_value={'decision_id': 'partial-...state': 'INDETERMINATE'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.017s
+
+FAILED (errors=1)

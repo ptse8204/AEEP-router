@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-09-28T03:57:54.622661+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "authority": "2026-09-27 standing exact review and recoverable setup/execution authority",
+  "previous_record": "schema-local-four-arm-queue-continuation.json",
+  "interruption_record": "csv-schema-local-storage-interruption.json",
+  "old_queue_state": "exited; never restart",
+  "maintenance": {
+    "script": "/tmp/aeep-compress-closed-evidence.py",
+    "session_id": 99757,
+    "review": "storage-recovery-compression-maintenance-review.json",
+    "result": "storage-recovery-compression-result.json",
+    "file_hash_journal": "storage-recovery-compression-files.jsonl",
+    "request_id": "planning_1c58b84c8fbb4d92add0f1f29fdb35b1",
+    "completion_required_before_model_work": true
+  },
+  "search_builder": {
+    "script": "/tmp/aeep-storage-recovery-run-search-builder.py",
+    "script_sha256": "d32e4e0d0ad3b57d4711aac3ca758017a439d6c288ebb44af9a71a00264dbfae",
+    "request_id": "planning_b7a7f76bbf424b76994703c39b9236db",
+    "review": "search-builder-contract-local-execution-review.json",
+    "generated_output": "search-builder-contract-local-generated.json",
+    "execution": "Wait for verified compression result and at least 80GiB free, then generate once through existing bounded candidate-free planner. One model turn; no holdout inputs or answers. Output inert pending exact review."
+  },
+  "unstarted_plans": {
+    "csv": {
+      "plan_id": "plan_9e59cfedba9a402a9345de2128c84217",
+      "review": "csv-four-arm-value-storage-recovery-execution-review.json",
+      "manifest": ".aeep/live-review-v3/csv-four-arm-schema-local.json",
+      "note": "New seed and disjoint cases; same arms, thresholds and original schema. Includes old indeterminate CSV and maintenance request in cost lineage. Unknown costs must remain unknown."
+    },
+    "text": {
+      "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+      "review": "text-four-arm-value-schema-local-execution-review.json",
+      "manifest": ".aeep/live-review-v3/text-four-arm-schema-local.json",
+      "note": "Never started; existing review unchanged."
+    }
+  },
+  "next": "Review generated search source, run contained training-only validation, freeze immutable images and verify corrected-contract four-arm profiles. Then start one sequential value queue after current storage capacity and ledger checks. Do not replay the old CSV plan. Compress closed completed evidence between campaigns if needed to avoid another storage failure.",
+  "native_catalog_gap": "native-catalog-recovery-docs-review.json",
+  "release_ready": false
+}

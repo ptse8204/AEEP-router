@@ -1,0 +1,29 @@
+{
+  "source_digest": "7ff8eb2e7bdd713a20401ef5c5ce7f76fbb0a7200cdc0299af52229f3c85cfad",
+  "kind": "actual native controlled process-boundary probe; synthetic temporary effects only",
+  "model_calls": 0,
+  "coordinator_death_tested": false,
+  "cases": [
+    {
+      "detached": false,
+      "status": "timeout",
+      "child_started": true,
+      "effect_after_timeout": false,
+      "elapsed_ms": 395.5518330913037,
+      "raw_error_type": "TimeoutError",
+      "child_program_sleep_seconds": 0.8,
+      "observation_wait_seconds": 1.0
+    },
+    {
+      "detached": true,
+      "status": "timeout",
+      "child_started": true,
+      "effect_after_timeout": false,
+      "elapsed_ms": 416.2915830966085,
+      "raw_error_type": "TimeoutError",
+      "child_program_sleep_seconds": 0.8,
+      "observation_wait_seconds": 1.0
+    }
+  ],
+  "measurement_note": "The child sleep and observation wait are requested delays, not kernel-enforced lifetime bounds. Outcome observations are unchanged."
+}

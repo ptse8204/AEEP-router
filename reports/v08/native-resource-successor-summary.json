@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-09-30T09:50:46.634721+00:00",
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "review": "native-resource-successor-review.json",
+  "measurements": "native-resource-successor-result.json",
+  "recovery": "native-resource-successor-recovery-result.json",
+  "durable_audit": "native-resource-successor-evidence-audit.json",
+  "local_bounds_passed": true,
+  "complete": true,
+  "resource_gate_complete": false,
+  "classification": "Matched executor resource comparator using the same AEEP-provided reference/required-validator implementations and equivalent single-process native boundary in both arms; common implementation and dependency costs remain counted. Not a capable agent without AEEP, not whole-system acceptance, not a candidate qualification or benefit claim.",
+  "limitations": [
+    "Not a capable-agent whole-system comparison; common AEEP implementation is present and counted in both arms.",
+    "No full model/server baseline, subscription telemetry or machine UX acceptance established.",
+    "Finite three-call retention specimen does not extrapolate indefinite growth."
+  ],
+  "commands": [
+    "PYTHONPATH=src python3 reports/v08/native-resource-successor-driver.py",
+    "PYTHONPATH=src python3 reports/v08/native-resource-successor-recovery.py"
+  ],
+  "model_turns": 0,
+  "task_attempts": 7,
+  "baseline_commands": 3
+}

@@ -1,0 +1,55 @@
+........................................................................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 22%]
+........................................................................ [ 30%]
+........................................................................ [ 38%]
+........................................................................ [ 45%]
+........................................................................ [ 53%]
+........................................................................ [ 60%]
+........................................................................ [ 68%]
+.............................................................F.......... [ 76%]
+....................................................s................... [ 83%]
+...............ss..........s............s............................... [ 91%]
+..................ssss........................ss.......s................ [ 98%]
+...s.......                                                              [100%]
+=================================== FAILURES ===================================
+_____________ test_focused_tools_do_not_expose_operator_arguments ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-497/test_focused_tools_do_not_expo0')
+
+    async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
+        router, _service, _plan, _grant = setup_assessment(tmp_path)
+        try:
+            service = AEEPToolService(router, profile="assessment")
+            names = {tool["name"] for tool in service.list_tools()}
+>           assert names == {
+                "aeep_csv",
+                "aeep_text",
+                "aeep_search",
+                "aeep_assessment_start",
+                "aeep_assessment_status",
+                "aeep_assessment_report",
+                "aeep_assessment_cancel",
+                "aeep_assessment_generate_definition",
+                "aeep_assessment_structures",
+                "aeep_assessment_select_structure",
+                "aeep_assessment_budget",
+            }
+E           AssertionError: assert {'aeep_assess..._report', ...} == {'aeep_assess...t_start', ...}
+E             
+E             Extra items in the left set:
+E             'aeep_assessment_setup'
+E             'aeep_assessment_options'
+E             'aeep_assessment_generate_cases'
+E             Use -v to get more diff
+
+tests/test_v08_assessment.py:516: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_assessment.py::test_focused_tools_do_not_expose_operator_arguments
+1 failed, 933 passed, 13 skipped, 1 warning in 414.36s (0:06:54)

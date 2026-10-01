@@ -1,0 +1,172 @@
+{
+  "source_digest": "4454786178b193766685ea01ebb6c29410d48d3b6701c07f429592947618b4ca",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06961841695010662,
+      "log": "reports/v08/steering-v1-repair-validation/00.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7166196249891073,
+      "log": "reports/v08/steering-v1-repair-validation/01.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.050790333887562156,
+      "log": "reports/v08/steering-v1-repair-validation/02.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2723370420280844,
+      "log": "reports/v08/steering-v1-repair-validation/03.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1571778340730816,
+      "log": "reports/v08/steering-v1-repair-validation/04.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 470.78695137496106,
+      "log": "reports/v08/steering-v1-repair-validation/05.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 681.5896979579702,
+      "log": "reports/v08/steering-v1-repair-validation/06.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2526217082049698,
+      "log": "reports/v08/steering-v1-repair-validation/07.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "reports/v08/steering-v1-repair-validation/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6411211660597473,
+      "log": "reports/v08/steering-v1-repair-validation/08.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/steering-v1-repair-validation/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.059935374883934855,
+      "log": "reports/v08/steering-v1-repair-validation/09.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/steering-v1-repair-validation/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06715104100294411,
+      "log": "reports/v08/steering-v1-repair-validation/10.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 8.186481999931857,
+      "log": "reports/v08/steering-v1-repair-validation/11.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "reports/v08/steering-v1-repair-validation/dist"
+      ],
+      "exit_code": 0,
+      "seconds": 2.082577083958313,
+      "log": "reports/v08/steering-v1-repair-validation/12.log",
+      "source_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+{
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "runtime_version": "0.159.2",
+  "runtime_binary": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+  "runtime_sha256": "50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+  "requested_model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "actual_model_identity": "unknown; no reroute observed is not identity proof",
+  "driver": "native-sol61-one-case-availability.py",
+  "driver_sha256": "98dd6b1a674f19ebf48e6456c037ce10b40d2290c461f237c27ddf1396a255b7",
+  "result_sha256": "d0cfa52a1ed9021e07a1176d6b3d1deb12b1a180c15f2960a6231165b2267bb9",
+  "scope_digest": "a818882f7cdb96dae19abcb295791fdbe5466e89e721ebd4b6810e4d0770a548",
+  "operation_id": "native-one-case:planning_native_sol61_one_case_availability",
+  "setup_seconds": 0.47834208398126066,
+  "host_seconds": 225.07709545781836,
+  "usage": {
+    "inputTokens": 32733,
+    "cachedInputTokens": 0,
+    "cacheWriteInputTokens": 0,
+    "outputTokens": 68,
+    "reasoningOutputTokens": 0,
+    "totalTokens": 32801
+  },
+  "usage_status": "partial interrupted turn; recorded in main ledger",
+  "grant_after": [
+    8565,
+    2526,
+    74128.74730673758,
+    "0.0"
+  ],
+  "task_attempts": 0,
+  "task_receipts": 0,
+  "selected_mcp_server": "aeep_task_0f843a34d639413baa5823997233cd42",
+  "selected_tool": "aeep_recipe_f468b36bc594",
+  "mcp_lifecycle": "ready, not model-exposure proof",
+  "task_input_schema_bytes": 950,
+  "task_input_schema_valid": true,
+  "task_output_envelope_schema_valid": true,
+  "mcp_declaration_bytes": 15202,
+  "item_types": "unknown; only recognized MCP/dynamic/command/file types counted by original observer, raw item types not retained",
+  "terminal": "interrupted after operator harness bound; no natural terminal observed",
+  "server_requests": [],
+  "transport_fatal_type": null,
+  "root_cause": "unresolved native model-progress/tool-exposure failure; no demonstrated schema/name/apps feature mismatch",
+  "upstream_version_scope": "rust-v0.159.2 public source; version correspondence does not prove identical desktop build",
+  "primary_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/mcp_tool_exposure.rs",
+      "finding": "Regular MCP tools are independent of apps-enabled branch; available tool-search selects deferred versus direct exposure; registry construction can skip invalid specifications."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/features/src/lib.rs",
+      "finding": "Legacy tool-search flag is removed/no-op; code-mode and naming features exist."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/handlers/mcp.rs",
+      "finding": "Model specifications and tool search metadata are derived separately from server inventory."
+    }
+  ],
+  "effective_model_tool_registry": "unknown; not captured",
+  "cleanup_confirmed": true,
+  "owned_process_identity_recheck_survivors": [],
+  "process_samples": 3621,
+  "sampled_peak_tree_rss_bytes": 629338112,
+  "sum_last_observed_cpu_seconds": 3.404434019,
+  "published_or_sent": false,
+  "further_model_dispatch": "none queued; next test must target demonstrated difference, no deadline-loop replay",
+  "autonomy": "inert; four scenarios not dispatched",
+  "cash": "0.0",
+  "credentials_accessed": false,
+  "helper_trace": "native-sol61-code-mode-helper-readonly-trace.json",
+  "direct_mcp_roundtrip": {
+    "result": "native-sol61-mcp-roundtrip-result-288e.json",
+    "sha256": "078fc3d45b9b97b112099887f3a051a8d551a48920b005586073239b851e48ed",
+    "roundtrip_seconds": 0.38892479077912867,
+    "host_seconds": 2.2902555419132113,
+    "setup_seconds": 0.5005632499232888,
+    "model_turns": 0,
+    "durable_counts": {
+      "execution_attempts": 1,
+      "receipts": 1
+    },
+    "independent_grader_passed": true,
+    "generated_launcher": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "args": [
+        "-I",
+        "-m",
+        "aeep",
+        "serve",
+        "--transport",
+        "stdio",
+        "--profile",
+        "task",
+        "--approve",
+        "read",
+        "--task-activation",
+        "task_fc8b1a0a00c849dabac8e708c0fb0763",
+        "--manifest",
+        "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-wg5kuu3f/aeep.json"
+      ],
+      "command_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0"
+    },
+    "implication": "Exact generated launcher and native child request/output path works for fresh declared request; model exposure/progress unresolved"
+  },
+  "eager_exposure_inspection": {
+    "verified_per_server_eager_override": false,
+    "enabled_tools": "supported allowlist, not eager-exposure switch",
+    "startup_readiness": "connection/catalog readiness, not eager model exposure",
+    "legacy_tool_search_flag": "removed/no-op in versioned source",
+    "omitted_or_disabled_entry_fields": "absent in generated owned project entry; effective inherited model registry remains unknown",
+    "primary_sources": [
+      "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/config/src/mcp_types.rs",
+      "https://learn.chatgpt.com/docs/config-file/config-reference"
+    ],
+    "no_further_inference": true
+  },
+  "effective_exposure_diagnostic": {
+    "result": "native-sol61-exposure-helper-result-288e.json",
+    "baseline_owned_server_enabled": true,
+    "baseline_omit_tools_from": "absent",
+    "installed_direct_only_override": [
+      "deferred",
+      "code_mode"
+    ],
+    "helper_handshake": "connection/ready protocol1; EOF exit0; stderr0",
+    "model_exposure": "unknown until fresh changed-control model diagnostic",
+    "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4"
+  },
+  "direct_only_changed_intervention": {
+    "result": "native-sol61-direct-only-one-call-result-288e.json",
+    "effective_override_acknowledged": [
+      "deferred",
+      "code_mode"
+    ],
+    "elapsed_seconds": 225.03757625003345,
+    "item_types_phases": [
+      {
+        "type": "userMessage"
+      },
+      {
+        "type": "userMessage"
+      },
+      {
+        "type": "agentMessage",
+        "phase": "commentary"
+      },
+      {
+        "type": "agentMessage",
+        "phase": "commentary"
+      }
+    ],
+    "terminal": "interrupted after deadline interrupt",
+    "natural_terminal": false,
+    "tool_items_observed": false,
+    "usage": "unknown; no usage update observed",
+    "durable_task_counts": {
+      "receipts": 0,
+      "refund_receipts_v2": 0,
+      "settlement_receipts": 0,
+      "execution_attempts": 0,
+      "execution_attempt_transitions": 0
+    },
+    "owned_survivors": [],
+    "actual_model_exposure": "unknown; inventory and effective exposure configuration do not independently prove request contents",
+    "cause": "unresolved native model progress after commentary; no demonstrated parser/helper/launcher/collector mismatch",
+    "unchanged_replay_allowed": false,
+    "appserver_stderr_evidence": {
+      "transport_capacity_bytes": 65536,
+      "retained_in_driver_result": false,
+      "availability": "unavailable after owned process/driver termination",
+      "retry_rate_limit_connection_classifications": "unknown; no retained stderr classifiers",
+      "observed_protocol_failures": "none before timeout; transport fatal null; server requests empty; MCP startup ready"
+    }
+  },
+  "code_mode_only_followup": {
+    "status": "bounded read-only question resolved in pinned primary source; installed request contents still unknown",
+    "source_tag": "rust-v0.159.2",
+    "installed_binary_sha256": "50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "mode_origin": {
+      "precedence": [
+        "explicit ModelInfo.tool_mode",
+        "features.code_mode_only",
+        "features.code_mode",
+        "Direct"
+      ],
+      "feature_defaults": {
+        "code_mode": false,
+        "code_mode_only": false,
+        "code_mode_host": true
+      },
+      "config_overrides_model_mode": false,
+      "fallback": "only unavailable CodeMode with permitted in-process fallback becomes Direct; CodeModeOnly stays unchanged",
+      "model_origin": "ModelInfo is backend model metadata; unknown-slug fallback sets tool_mode=None; with_config_overrides does not change it",
+      "effective_selected_model_mode": "not returned by retained supported config/read; unknown"
+    },
+    "direct_only_path": {
+      "server_omit_tools_from": [
+        "deferred",
+        "code_mode"
+      ],
+      "resulting_exposure": "DirectModelOnly",
+      "is_direct": true,
+      "is_available_in_code_mode": false,
+      "hidden_by_code_mode_only": false,
+      "condition": "registered MCP tool survives preceding policy/registration/schema gates; this code-mode filter alone cannot hide DirectModelOnly"
+    },
+    "installed_membership_evidence": "binary contains code_mode_only/code_mode/direct_only_tool_namespaces/omit_tools_from/tool_mode strings; not proof of executing a specific source path",
+    "primary_sources": [
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/mod.rs",
+        "lines": "68\u201388",
+        "supports": "requested/effective mode and fallback"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/spec_plan.rs",
+        "lines": "183\u2013258, 529\u2013565, 753\u2013765",
+        "supports": "MCP omission mapping, model-visible build and CodeModeOnly hide predicate"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/tools/src/tool_executor.rs",
+        "lines": "44\u201389",
+        "supports": "DirectModelOnly is direct and excluded from code-mode surface"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/features/src/lib.rs",
+        "lines": "1024\u20131064",
+        "supports": "code-mode feature keys/defaults"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/protocol/src/openai_models.rs",
+        "lines": "374\u2013376, 464\u2013473",
+        "supports": "backend model metadata ToolMode optional field"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/models-manager/src/model_info.rs",
+        "lines": "16\u201355, 90\u2013140",
+        "supports": "config override function and fallback metadata"
+      }
+    ],
+    "new_local_intervention": "none established beyond already-tested exact direct-only omission setting",
+    "further_model_calls": false,
+    "claim_limit": "versioned primary source is not byte-equivalence proof for desktop binary or proof that the stalled turn received a tool declaration"
+  },
+  "builtin_command_partition": {
+    "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+    "result": "native-sol61-builtin-command-diagnostic-result.json",
+    "result_sha256": "6af3f7c5ce4a15589feacad82b8205971d4722a215ca5b076704a1c30c25f509",
+    "natural_command_success": true,
+    "elapsed_seconds": 11.401232041185722,
+    "recognized_command_execution": [
+      {
+        "exit_code": 0,
+        "status": "completed",
+        "output_equals_one": true
+      }
+    ],
+    "usage": {
+      "inputTokens": 43885,
+      "cachedInputTokens": 34816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 74,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 43959
+    },
+    "actual_model_identity": "unknown",
+    "cleanup_confirmed": true,
+    "finding": "Native builtin command execution works in this arrangement; unresolved MCP-specific exposure/use/progress is not demonstrated general native tool failure. Large encoded workbook arguments remain an untested confound, not an established cause."
+  },
+  "tiny_csv_partition": {
+    "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+    "result": "native-sol61-tiny-csv-mcp-result-288e.json",
+    "result_sha256": "098269fc4b9d909b778cc1bd36f3a3c3d8119e080df61332a8f21af46c0e368f",
+    "elapsed_seconds": 13.47133170790039,
+    "natural_terminal": "completed",
+    "own_tool": "aeep_csv",
+    "own_mcp_item_status": "failed",
+    "task_attempts": 0,
+    "task_receipts": 0,
+    "cleanup_confirmed": true,
+    "model_tool_exposure": "Own MCP selected in actual model item; execution failed before durable task attempt. Does not establish workbook exposure/use or payload-pressure cause.",
+    "lost_diagnostics": [
+      "item.error",
+      "actual model argument shape/hash",
+      "effective per-tool approval mode"
+    ],
+    "approval_hypothesis": {
+      "project_evidence": "assessment/tools.py declarations contain no annotations; exact scope READ/unexpired/fingerprint pinned.",
+      "primary_source": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/mcp_tool_call.rs",
+      "line_ranges": [
+        "2342-2369",
+        "1553-1556",
+        "2372-2400"
+      ],
+      "finding": "Absent annotations need approval in Auto/Writes; required approval is denied under never; denied path can emit immediate failed item. Observed1ms failed item consistent, exact cause unproven without retained error/effective policy."
+    },
+    "usage": {
+      "inputTokens": 56343,
+      "cachedInputTokens": 27904,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 78,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 56421
+    },
+    "further_inference": "none queued; no unchanged replay",
+    "supported_scoped_control": {
+      "primary_source": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/config/src/mcp_types.rs",
+      "enum": [
+        "auto",
+        "prompt",
+        "writes",
+        "approve"
+      ],
+      "configuration": "mcp_servers.<generatedserver>.tools.<exacttool>.approval_mode=\"approve\"",
+      "scope": "proposed operator-owned execution-local setting bound to reviewed task scope; no default/global change, no annotations-as-authority",
+      "effective_ack": "pending0model check; admin restriction remains effective; no model turn queued until ACK"
+    }
+  },
+  "tiny_csv_approved_intervention": {
+    "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+    "result": "native-sol61-tiny-csv-approved-result-288e.json",
+    "result_sha256": "9771dacf7848e6d17e6a893f4c2919116479d0b7dab6ecdb6e8253278bc77870",
+    "review": "native-sol61-tiny-csv-approved-review-288e.json",
+    "effective_config_result": "native-sol61-tiny-approval-config-result-288e.json",
+    "effective_rule": {
+      "default_tools_approval_mode": null,
+      "own_tool_approval_mode": "approve",
+      "own_tool_rule_present": true,
+      "own_server_enabled": true,
+      "enabled_tools": null,
+      "disabled_tools": null
+    },
+    "elapsed_seconds": 18.094984124880284,
+    "setup_elapsed_seconds": 0.2213032499421388,
+    "natural_terminal": "completed",
+    "own_mcp_item_status": "completed",
+    "arguments_equal_expected": true,
+    "task_attempts": 1,
+    "task_receipts": 1,
+    "required_and_independent_checks_passed": true,
+    "selected_executor_identity_checked": true,
+    "cleanup_confirmed": true,
+    "usage": {
+      "inputTokens": 57223,
+      "cachedInputTokens": 28032,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 138,
+      "reasoningOutputTokens": 43,
+      "totalTokens": 57361
+    },
+    "actual_model_identity": "unknown; requested6.1Sol, no independent runtime identity",
+    "finding": "Small own native MCP task succeeded after operator-owned exact per-tool approve rule. Source approval gate and intervention support host approval incompatibility as the actionable explanation for tiny rejection; its exact historical item.error/effective mode remain unavailable. Earlier large workbook argument stalls remain separate and unresolved.",
+    "claims_excluded": [
+      "default discovery success",
+      "workbook model workflow success",
+      "capability qualification",
+      "controlled benefit comparison",
+      "arbitrary shell boundary",
+      "whole-host isolation"
+    ],
+    "next_inference": "none queued by this agent"
+  },
+  "small_workbook_approved_intervention": {
+    "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+    "result": "native-sol61-small-workbook-approved-result-288e.json",
+    "result_sha256": "2def9a9b70ff5b23cadde590fc6aa8c7094b2b7ae2d00d24149c9755c62cc610",
+    "review": "native-sol61-small-workbook-approved-review-288e.json",
+    "effective_rule": {
+      "default_tools_approval_mode": null,
+      "own_tool_approval_mode": "approve",
+      "own_tool_rule_present": true
+    },
+    "elapsed_seconds": 225.03880262491293,
+    "setup_elapsed_seconds": 0.39950516587123275,
+    "failure": "TimeoutError at model_turn after225s body",
+    "prompt_bytes": 7701,
+    "item_types_observed": [
+      "userMessage",
+      "agentMessage/commentary"
+    ],
+    "pre_interrupt_last_item_seconds": 9.393882374977693,
+    "interrupt_seconds": 225.00223733391613,
+    "terminal": "interrupted after harness timeout; no natural completion",
+    "task_attempts": 0,
+    "task_receipts": 0,
+    "cleanup_confirmed": true,
+    "usage": "unknown; no usage update observed; reserved1turn preserved in main ledger",
+    "appserver_stderr": {
+      "bytes": 1158,
+      "truncated": false,
+      "known_error_classes": []
+    },
+    "server_requests": [],
+    "transport_fatal_type": null,
+    "finding": "Own per-tool approval works for tiny CSV but did not resolve encoded workbook progress. Actual workbook model exposure and payload-pressure cause remain unproven. No more unchanged workbook calls.",
+    "next_readonly_question": "Existing native code-mode variable dataflow from bounded scratch-file read to own same MCP without model re-emitting encoded argument; no new store/router/shim"
+  },
+  "code_mode_file_handoff_design": {
+    "proposal": "native-sol61-code-mode-file-handoff-proposal.json",
+    "sha256": "f4094523bdc5b175217ddf0a2e24fa24b44dde141ad99d02ff96dcca89757725",
+    "status": "inert; no model calls/config probe; original capacity stop respected",
+    "capacity_applicability": "Native rate-limit notification counts retained only, no principal/bucket metadata. Controlled worker weekly100% does not independently identify native principal; no alternative account/provider sought.",
+    "actual_tool_mode": "unknown; supported native zero-model schema lacks effective model-request registry/tool_mode API; feature ACK alone insufficient"
+  }
+}

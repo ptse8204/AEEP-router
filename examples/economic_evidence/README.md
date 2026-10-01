@@ -1,6 +1,6 @@
 # AEEP 0.5 deterministic economic-evidence proof
 
-This campaign extends AEEP's benchmark evidence with the real prepared-routing path. The paid
+This campaign tests AEEP's prepared-routing path. The paid
 trials call `Router.prepare_route()`, reserve the signed maximum, call
 `Router.execute_prepared()`, verify provider usage, settle the measured charge, and release the
 remainder. It uses only the in-process reference provider, deterministic test keys, a local
@@ -22,15 +22,15 @@ PYTHONPATH=src python examples/economic_evidence/campaign.py \
 
 `--require-gates` makes the command fail when a required economic gate, including the measured
 settlement-oracle gate, is unmet. Evidence-safety violations fail even without that flag. The
-time and token engineering targets remain explicit report results; they are not silently turned
-into release-gate passes.
+report lists time and token engineering targets separately; those results do not count
+as release-gate passes.
 
 The checked run contains 420 trials: seven route types, 30 repetitions, process-cold and
 router-warm conditions, and equal qualification/training/holdout splits. The route types are
 local Python, local CLI, direct HTTP mock transport, local MCP stdio, a usage-priced provider,
 an unknown-cash subscription baseline, and the AEEP hybrid decision. HTTP stays in-process; MCP
-and CLI processes use exact argv arrays. Subscription token counts are synthetic and visibly
-flagged, so they are excluded from token-saving claims. The hybrid router learned from 40 real
+and CLI processes use exact argv arrays. The report labels subscription token counts as synthetic
+and excludes them from token-saving claims. The hybrid router learned from 40 real
 qualification/training observations; the oracle is evaluated only on the 20 held-out
 condition/repetition cases. A separate two-step prepared workflow trial is reported outside the
 420 single-action trials.

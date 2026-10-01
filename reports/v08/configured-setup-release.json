@@ -1,0 +1,113 @@
+{
+  "source_before": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+  "source_after": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4468237090623006,
+      "log": "reports/v08/configured-setup-release-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4295939579606056,
+      "log": "reports/v08/configured-setup-release-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47548554197419435,
+      "log": "reports/v08/configured-setup-release-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4216507909586653,
+      "log": "reports/v08/configured-setup-release-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47894504200667143,
+      "log": "reports/v08/configured-setup-release-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4775209160288796,
+      "log": "reports/v08/configured-setup-release-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5460589160211384,
+      "log": "reports/v08/configured-setup-release-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 7.596057166927494,
+      "log": "reports/v08/configured-setup-release-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 3.3507323330268264,
+      "log": "reports/v08/configured-setup-release-08.txt"
+    }
+  ]
+}

@@ -1,0 +1,1124 @@
+{
+  "schema_version": "aeep.worker-dependency-review.v1",
+  "policy_approved": false,
+  "environment_verified": false,
+  "model_turns": 0,
+  "worker": {
+    "schema_version": "execution.worker.v2",
+    "worker_id": "spreadsheets-review",
+    "runtime": "/usr/local/bin/docker",
+    "socket": "/Users/edwintse/.docker/run/docker.sock",
+    "image": "sha256:0162072320fb3e976abc78e58cbec0fb002a5f34bf8265502548b34c7364e0f3",
+    "platform": "linux/arm64",
+    "binary": "/opt/codex/codex",
+    "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+    "configuration_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dependencies_digest": "e805af6d54aee58110ee0cb1a473998966c181849d8242250f406e69fdf877d3",
+    "cpu_count": 1.0,
+    "memory_mb": 1024,
+    "process_limit": 64,
+    "network_id": null,
+    "credential_volume": null,
+    "seccomp_profile": {
+      "archMap": [
+        {
+          "architecture": "SCMP_ARCH_X86_64",
+          "subArchitectures": [
+            "SCMP_ARCH_X86",
+            "SCMP_ARCH_X32"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_AARCH64",
+          "subArchitectures": [
+            "SCMP_ARCH_ARM"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_MIPS64",
+          "subArchitectures": [
+            "SCMP_ARCH_MIPS",
+            "SCMP_ARCH_MIPS64N32"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_MIPS64N32",
+          "subArchitectures": [
+            "SCMP_ARCH_MIPS",
+            "SCMP_ARCH_MIPS64"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_MIPSEL64",
+          "subArchitectures": [
+            "SCMP_ARCH_MIPSEL",
+            "SCMP_ARCH_MIPSEL64N32"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_MIPSEL64N32",
+          "subArchitectures": [
+            "SCMP_ARCH_MIPSEL",
+            "SCMP_ARCH_MIPSEL64"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_S390X",
+          "subArchitectures": [
+            "SCMP_ARCH_S390"
+          ]
+        },
+        {
+          "architecture": "SCMP_ARCH_RISCV64",
+          "subArchitectures": null
+        },
+        {
+          "architecture": "SCMP_ARCH_LOONGARCH64",
+          "subArchitectures": null
+        }
+      ],
+      "defaultAction": "SCMP_ACT_ERRNO",
+      "defaultErrnoRet": 1,
+      "syscalls": [
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "names": [
+            "accept",
+            "accept4",
+            "access",
+            "adjtimex",
+            "alarm",
+            "bind",
+            "brk",
+            "cachestat",
+            "capget",
+            "capset",
+            "chdir",
+            "chmod",
+            "chown",
+            "chown32",
+            "clock_adjtime",
+            "clock_adjtime64",
+            "clock_getres",
+            "clock_getres_time64",
+            "clock_gettime",
+            "clock_gettime64",
+            "clock_nanosleep",
+            "clock_nanosleep_time64",
+            "close",
+            "close_range",
+            "connect",
+            "copy_file_range",
+            "creat",
+            "dup",
+            "dup2",
+            "dup3",
+            "epoll_create",
+            "epoll_create1",
+            "epoll_ctl",
+            "epoll_ctl_old",
+            "epoll_pwait",
+            "epoll_pwait2",
+            "epoll_wait",
+            "epoll_wait_old",
+            "eventfd",
+            "eventfd2",
+            "execve",
+            "execveat",
+            "exit",
+            "exit_group",
+            "faccessat",
+            "faccessat2",
+            "fadvise64",
+            "fadvise64_64",
+            "fallocate",
+            "fanotify_mark",
+            "fchdir",
+            "fchmod",
+            "fchmodat",
+            "fchmodat2",
+            "fchown",
+            "fchown32",
+            "fchownat",
+            "fcntl",
+            "fcntl64",
+            "fdatasync",
+            "fgetxattr",
+            "flistxattr",
+            "flock",
+            "fork",
+            "fremovexattr",
+            "fsetxattr",
+            "fstat",
+            "fstat64",
+            "fstatat64",
+            "fstatfs",
+            "fstatfs64",
+            "fsync",
+            "ftruncate",
+            "ftruncate64",
+            "futex",
+            "futex_requeue",
+            "futex_time64",
+            "futex_wait",
+            "futex_waitv",
+            "futex_wake",
+            "futimesat",
+            "getcpu",
+            "getcwd",
+            "getdents",
+            "getdents64",
+            "getegid",
+            "getegid32",
+            "geteuid",
+            "geteuid32",
+            "getgid",
+            "getgid32",
+            "getgroups",
+            "getgroups32",
+            "getitimer",
+            "getpeername",
+            "getpgid",
+            "getpgrp",
+            "getpid",
+            "getppid",
+            "getpriority",
+            "getrandom",
+            "getresgid",
+            "getresgid32",
+            "getresuid",
+            "getresuid32",
+            "getrlimit",
+            "get_robust_list",
+            "getrusage",
+            "getsid",
+            "getsockname",
+            "getsockopt",
+            "get_thread_area",
+            "gettid",
+            "gettimeofday",
+            "getuid",
+            "getuid32",
+            "getxattr",
+            "getxattrat",
+            "inotify_add_watch",
+            "inotify_init",
+            "inotify_init1",
+            "inotify_rm_watch",
+            "io_cancel",
+            "ioctl",
+            "io_destroy",
+            "io_getevents",
+            "io_pgetevents",
+            "io_pgetevents_time64",
+            "ioprio_get",
+            "ioprio_set",
+            "io_setup",
+            "io_submit",
+            "ipc",
+            "kill",
+            "landlock_add_rule",
+            "landlock_create_ruleset",
+            "landlock_restrict_self",
+            "lchown",
+            "lchown32",
+            "lgetxattr",
+            "link",
+            "linkat",
+            "listen",
+            "listmount",
+            "listxattr",
+            "listxattrat",
+            "llistxattr",
+            "_llseek",
+            "lremovexattr",
+            "lseek",
+            "lsetxattr",
+            "lstat",
+            "lstat64",
+            "madvise",
+            "map_shadow_stack",
+            "membarrier",
+            "memfd_create",
+            "memfd_secret",
+            "mincore",
+            "mkdir",
+            "mkdirat",
+            "mknod",
+            "mknodat",
+            "mlock",
+            "mlock2",
+            "mlockall",
+            "mmap",
+            "mmap2",
+            "mprotect",
+            "mq_getsetattr",
+            "mq_notify",
+            "mq_open",
+            "mq_timedreceive",
+            "mq_timedreceive_time64",
+            "mq_timedsend",
+            "mq_timedsend_time64",
+            "mq_unlink",
+            "mremap",
+            "mseal",
+            "msgctl",
+            "msgget",
+            "msgrcv",
+            "msgsnd",
+            "msync",
+            "munlock",
+            "munlockall",
+            "munmap",
+            "name_to_handle_at",
+            "nanosleep",
+            "newfstatat",
+            "_newselect",
+            "open",
+            "openat",
+            "openat2",
+            "pause",
+            "pidfd_open",
+            "pidfd_send_signal",
+            "pipe",
+            "pipe2",
+            "pkey_alloc",
+            "pkey_free",
+            "pkey_mprotect",
+            "poll",
+            "ppoll",
+            "ppoll_time64",
+            "prctl",
+            "pread64",
+            "preadv",
+            "preadv2",
+            "prlimit64",
+            "process_mrelease",
+            "pselect6",
+            "pselect6_time64",
+            "pwrite64",
+            "pwritev",
+            "pwritev2",
+            "read",
+            "readahead",
+            "readlink",
+            "readlinkat",
+            "readv",
+            "recv",
+            "recvfrom",
+            "recvmmsg",
+            "recvmmsg_time64",
+            "recvmsg",
+            "remap_file_pages",
+            "removexattr",
+            "removexattrat",
+            "rename",
+            "renameat",
+            "renameat2",
+            "restart_syscall",
+            "riscv_hwprobe",
+            "rmdir",
+            "rseq",
+            "rt_sigaction",
+            "rt_sigpending",
+            "rt_sigprocmask",
+            "rt_sigqueueinfo",
+            "rt_sigreturn",
+            "rt_sigsuspend",
+            "rt_sigtimedwait",
+            "rt_sigtimedwait_time64",
+            "rt_tgsigqueueinfo",
+            "sched_getaffinity",
+            "sched_getattr",
+            "sched_getparam",
+            "sched_get_priority_max",
+            "sched_get_priority_min",
+            "sched_getscheduler",
+            "sched_rr_get_interval",
+            "sched_rr_get_interval_time64",
+            "sched_setaffinity",
+            "sched_setattr",
+            "sched_setparam",
+            "sched_setscheduler",
+            "sched_yield",
+            "seccomp",
+            "select",
+            "semctl",
+            "semget",
+            "semop",
+            "semtimedop",
+            "semtimedop_time64",
+            "send",
+            "sendfile",
+            "sendfile64",
+            "sendmmsg",
+            "sendmsg",
+            "sendto",
+            "setfsgid",
+            "setfsgid32",
+            "setfsuid",
+            "setfsuid32",
+            "setgid",
+            "setgid32",
+            "setgroups",
+            "setgroups32",
+            "setitimer",
+            "setpgid",
+            "setpriority",
+            "setregid",
+            "setregid32",
+            "setresgid",
+            "setresgid32",
+            "setresuid",
+            "setresuid32",
+            "setreuid",
+            "setreuid32",
+            "setrlimit",
+            "set_robust_list",
+            "setsid",
+            "setsockopt",
+            "set_thread_area",
+            "set_tid_address",
+            "setuid",
+            "setuid32",
+            "setxattr",
+            "setxattrat",
+            "shmat",
+            "shmctl",
+            "shmdt",
+            "shmget",
+            "shutdown",
+            "sigaltstack",
+            "signalfd",
+            "signalfd4",
+            "sigprocmask",
+            "sigreturn",
+            "socketcall",
+            "socketpair",
+            "splice",
+            "stat",
+            "stat64",
+            "statfs",
+            "statfs64",
+            "statmount",
+            "statx",
+            "symlink",
+            "symlinkat",
+            "sync",
+            "sync_file_range",
+            "syncfs",
+            "sysinfo",
+            "tee",
+            "tgkill",
+            "time",
+            "timer_create",
+            "timer_delete",
+            "timer_getoverrun",
+            "timer_gettime",
+            "timer_gettime64",
+            "timer_settime",
+            "timer_settime64",
+            "timerfd_create",
+            "timerfd_gettime",
+            "timerfd_gettime64",
+            "timerfd_settime",
+            "timerfd_settime64",
+            "times",
+            "tkill",
+            "truncate",
+            "truncate64",
+            "ugetrlimit",
+            "umask",
+            "uname",
+            "unlink",
+            "unlinkat",
+            "uretprobe",
+            "utime",
+            "utimensat",
+            "utimensat_time64",
+            "utimes",
+            "vfork",
+            "vmsplice",
+            "wait4",
+            "waitid",
+            "waitpid",
+            "write",
+            "writev"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "minKernel": "4.8"
+          },
+          "names": [
+            "process_vm_readv",
+            "process_vm_writev",
+            "ptrace"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_LT",
+              "value": 38
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 39
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 41
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 42
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 43
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 44
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 45
+            }
+          ],
+          "names": [
+            "socket"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 0
+            }
+          ],
+          "names": [
+            "personality"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 8
+            }
+          ],
+          "names": [
+            "personality"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 131072
+            }
+          ],
+          "names": [
+            "personality"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 131080
+            }
+          ],
+          "names": [
+            "personality"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_EQ",
+              "value": 4294967295
+            }
+          ],
+          "names": [
+            "personality"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "ppc64le"
+            ]
+          },
+          "names": [
+            "sync_file_range2",
+            "swapcontext"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "arm",
+              "arm64"
+            ]
+          },
+          "names": [
+            "arm_fadvise64_64",
+            "arm_sync_file_range",
+            "sync_file_range2",
+            "breakpoint",
+            "cacheflush",
+            "set_tls"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "amd64",
+              "x32"
+            ]
+          },
+          "names": [
+            "arch_prctl"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "amd64",
+              "x32",
+              "x86"
+            ]
+          },
+          "names": [
+            "modify_ldt"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "s390",
+              "s390x"
+            ]
+          },
+          "names": [
+            "s390_pci_mmio_read",
+            "s390_pci_mmio_write",
+            "s390_runtime_instr"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "arches": [
+              "riscv64"
+            ]
+          },
+          "names": [
+            "riscv_flush_icache"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_DAC_READ_SEARCH"
+            ]
+          },
+          "names": [
+            "open_by_handle_at"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_ADMIN"
+            ]
+          },
+          "names": [
+            "bpf",
+            "clone",
+            "clone3",
+            "fanotify_init",
+            "fsconfig",
+            "fsmount",
+            "fsopen",
+            "fspick",
+            "lookup_dcookie",
+            "lsm_get_self_attr",
+            "lsm_list_modules",
+            "lsm_set_self_attr",
+            "mount",
+            "mount_setattr",
+            "move_mount",
+            "open_tree",
+            "perf_event_open",
+            "quotactl",
+            "quotactl_fd",
+            "setdomainname",
+            "sethostname",
+            "setns",
+            "syslog",
+            "umount",
+            "umount2",
+            "unshare"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_MASKED_EQ",
+              "value": 2114060288
+            }
+          ],
+          "excludes": {
+            "arches": [
+              "s390",
+              "s390x"
+            ],
+            "caps": [
+              "CAP_SYS_ADMIN"
+            ]
+          },
+          "names": [
+            "clone"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 1,
+              "op": "SCMP_CMP_MASKED_EQ",
+              "value": 2114060288
+            }
+          ],
+          "comment": "s390 parameter ordering for clone is different",
+          "excludes": {
+            "caps": [
+              "CAP_SYS_ADMIN"
+            ]
+          },
+          "includes": {
+            "arches": [
+              "s390",
+              "s390x"
+            ]
+          },
+          "names": [
+            "clone"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ERRNO",
+          "errnoRet": 38,
+          "excludes": {
+            "caps": [
+              "CAP_SYS_ADMIN"
+            ]
+          },
+          "names": [
+            "clone3"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_BOOT"
+            ]
+          },
+          "names": [
+            "reboot"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_CHROOT"
+            ]
+          },
+          "names": [
+            "chroot"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_MODULE"
+            ]
+          },
+          "names": [
+            "delete_module",
+            "init_module",
+            "finit_module"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_PACCT"
+            ]
+          },
+          "names": [
+            "acct"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_PTRACE"
+            ]
+          },
+          "names": [
+            "kcmp",
+            "pidfd_getfd",
+            "process_madvise",
+            "process_vm_readv",
+            "process_vm_writev",
+            "ptrace"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_RAWIO"
+            ]
+          },
+          "names": [
+            "iopl",
+            "ioperm"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_TIME"
+            ]
+          },
+          "names": [
+            "settimeofday",
+            "stime",
+            "clock_settime",
+            "clock_settime64"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_TTY_CONFIG"
+            ]
+          },
+          "names": [
+            "vhangup"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYS_NICE"
+            ]
+          },
+          "names": [
+            "get_mempolicy",
+            "mbind",
+            "set_mempolicy",
+            "set_mempolicy_home_node"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_SYSLOG"
+            ]
+          },
+          "names": [
+            "syslog"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_BPF"
+            ]
+          },
+          "names": [
+            "bpf"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "includes": {
+            "caps": [
+              "CAP_PERFMON"
+            ]
+          },
+          "names": [
+            "perf_event_open"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "names": [
+            "unshare",
+            "mount",
+            "umount2",
+            "pivot_root",
+            "sethostname",
+            "setdomainname",
+            "setns"
+          ]
+        },
+        {
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 0,
+              "op": "SCMP_CMP_MASKED_EQ",
+              "value": 268435456,
+              "valueTwo": 268435456
+            }
+          ],
+          "names": [
+            "clone"
+          ]
+        }
+      ]
+    },
+    "permissions_profile": "aeep"
+  },
+  "observations": {
+    "runtime": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 9, in <module>\n    assert r.returncode==0,r.stderr\n           ^^^^^^^^^^^^^^^\nAssertionError: file:///workspace/probe.mjs:1\nimport {Workbook} from '@oai/artifact-tool';import assert from 'node:assert/strict';const w=await Workbook.fromCSV('id,name\n                                                                                                                   ^^^^^^^^\n\nSyntaxError: Invalid or unexpected token\n    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)\n    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:110:18)\n    at #translate (node:internal/modules/esm/loader:559:20)\n    at afterLoad (node:internal/modules/esm/loader:612:29)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:617:12)\n    at #createModuleJob (node:internal/modules/esm/loader:640:36)\n    at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:321:41)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:680:25)\n\nNode.js v22.23.2\n\n"
+    },
+    "skills": {
+      "data": [
+        {
+          "cwd": "/workspace",
+          "skills": [
+            {
+              "name": "imagegen",
+              "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+              "interface": {
+                "displayName": "Image Gen",
+                "shortDescription": "Generate or edit images for websites, games, and more",
+                "iconSmall": "/worker/auth/skills/.system/imagegen/assets/imagegen-small.svg",
+                "iconLarge": "/worker/auth/skills/.system/imagegen/assets/imagegen.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+              },
+              "path": "/worker/auth/skills/.system/imagegen/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "openai-docs",
+              "description": "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex.",
+              "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+              "interface": {
+                "displayName": "OpenAI Docs",
+                "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                "iconSmall": "/worker/auth/skills/.system/openai-docs/assets/openai-small.svg",
+                "iconLarge": "/worker/auth/skills/.system/openai-docs/assets/openai.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+              },
+              "path": "/worker/auth/skills/.system/openai-docs/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "plugin-creator",
+              "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow.",
+              "interface": {
+                "displayName": "Plugin Creator",
+                "shortDescription": "Scaffold plugins and marketplace entries",
+                "iconSmall": "/worker/auth/skills/.system/plugin-creator/assets/plugin-creator-small.svg",
+                "iconLarge": "/worker/auth/skills/.system/plugin-creator/assets/plugin-creator.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $plugin-creator to scaffold a valid plugin in the personal marketplace, then validate it before handing it back."
+              },
+              "path": "/worker/auth/skills/.system/plugin-creator/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "review-agent",
+              "description": "Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions.",
+              "interface": {
+                "displayName": "Review Agent",
+                "shortDescription": "Find actionable bugs in code changes",
+                "iconSmall": null,
+                "iconLarge": null,
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+              },
+              "path": "/worker/auth/skills/.system/review-agent/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "skill-creator",
+              "description": "Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources.",
+              "shortDescription": "Create or update a skill",
+              "interface": {
+                "displayName": "Skill Creator",
+                "shortDescription": "Create or update a skill",
+                "iconSmall": "/worker/auth/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                "iconLarge": "/worker/auth/skills/.system/skill-creator/assets/skill-creator.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": null
+              },
+              "path": "/worker/auth/skills/.system/skill-creator/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "skill-installer",
+              "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+              "shortDescription": "Install curated skills from openai/skills or other repos",
+              "interface": {
+                "displayName": "Skill Installer",
+                "shortDescription": "Install curated skills from openai/skills or other repos",
+                "iconSmall": "/worker/auth/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                "iconLarge": "/worker/auth/skills/.system/skill-installer/assets/skill-installer.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": null
+              },
+              "path": "/worker/auth/skills/.system/skill-installer/SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "spreadsheets:Spreadsheets",
+              "description": "Use skill when user requests to create, modify, analyze, visualize, or work with spreadsheet files (`.xlsx`, `.xls`, `.csv`, `.tsv`) or Google Sheets with formulas, formatting, charts, tables, and recalculation. Do not use for live controlling Microsoft Excel app or a live Excel session.",
+              "interface": {
+                "displayName": "Spreadsheets",
+                "shortDescription": "Create and edit spreadsheet or Google Sheets-ready files",
+                "iconSmall": "/opt/dependencies/plugin/skills/spreadsheets/assets/file-spreadsheet.png",
+                "iconLarge": "/opt/dependencies/plugin/skills/spreadsheets/assets/file-spreadsheet.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": "#107C41",
+                "defaultPrompt": "Use $Spreadsheets to build or update a spreadsheet artifact with formulas, formatting, and verification."
+              },
+              "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+              "scope": "admin",
+              "enabled": true,
+              "pluginId": null
+            }
+          ],
+          "errors": []
+        }
+      ]
+    },
+    "cleanup_confirmed": true
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "additionalProperties": false,
+  "description": "Operator-approved scope additions; ceilings and counters remain on the root grant.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.scope-amendment.v1",
+      "default": "assessment.scope-amendment.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "amendment_id": {
+      "title": "Amendment Id",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "authorization_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Authorization Digest",
+      "type": "string"
+    },
+    "subject_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Subject Digests",
+      "type": "array"
+    },
+    "recipe_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Recipe Digests",
+      "type": "array"
+    },
+    "environment_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Environment Digests",
+      "type": "array"
+    },
+    "reviewed_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reviewed Digests",
+      "type": "array"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "authorization_id",
+    "authorization_digest",
+    "subject_digests",
+    "recipe_digests",
+    "environment_digests",
+    "reviewed_digests"
+  ],
+  "title": "AssessmentScopeAmendment",
+  "type": "object"
+}

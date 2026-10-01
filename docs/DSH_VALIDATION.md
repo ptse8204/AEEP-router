@@ -1,21 +1,21 @@
 # AEEP 0.6 DSH validation
 
 The deterministic DSH fixture compares a model-suggested route, static AEEP,
-signed shared evidence, and shared evidence plus local/cache adaptation. DSH is
-a host/usage adapter—not a core routing dependency.
+signed shared evidence, and shared evidence plus local/cache adaptation. DSH
+handles host integration and usage reporting. The router core does not depend on it.
 
 ```bash
 PYTHONPATH=src python examples/dsh_campaign/campaign.py
 PYTHONPATH=src python examples/dsh_campaign/campaign.py --check
 ```
 
-The proof uses the real signed provider-package lifecycle, reuses a 100-sample
-prior, runs exactly two smoke executions, explicitly activates, and then routes
-synthetic web/GitHub/document capabilities through the real Router. Hard gates
+The proof follows the signed provider-package lifecycle: it reuses a 100-sample
+prior, runs exactly two smoke executions, explicitly activates the routes, then
+uses the Router to select synthetic web/GitHub/document capabilities. Hard gates
 cover receipts, inert ingest, bounded smoke, deterministic valid execution, and
-privacy. Performance and regret remain measured outcomes rather than required
-marketing claims. The checked artifacts live in `reports/v05/dsh/`; synthetic
-fixture token deltas are labeled separately from live Harness usage.
+privacy. The report records performance and regret without requiring a positive
+result. The checked artifacts live in `reports/v05/dsh/`; synthetic fixture token
+deltas are labeled separately from live Harness usage.
 
 ## Historical MCP negative control
 
@@ -47,8 +47,7 @@ observations.
 correctness comparison. It excludes three pilot sessions whose prompts disclosed
 the expected answer. The measured AEEP arm was more accurate but used more
 tokens, and the checked report preserves that negative savings result.
-It is evidence that model-facing routing has a cost, not evidence of token
-savings.
+These results show the token cost of model-facing routing.
 
 ## Host-native paired campaign
 

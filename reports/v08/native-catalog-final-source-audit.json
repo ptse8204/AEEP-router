@@ -1,0 +1,41 @@
+{
+  "recorded_at": "2026-09-27T12:40:21.474343+00:00",
+  "official_release_tag": "rust-v0.154.0",
+  "official_source_commit": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "sources": [
+    {
+      "path": "codex-rs/core/src/skills.rs",
+      "sha256": "1969b75051e085dcd93275028f47a92a384fe86f0b0cc2edafed8b0a147c0db5",
+      "url": "https://github.com/openai/codex/blob/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/core/src/skills.rs"
+    },
+    {
+      "path": "codex-rs/analytics/src/client.rs",
+      "sha256": "2d991d3399163c791ab709dbd5985adb9e153e94fb5fa0a8c9573e0d225717e7",
+      "url": "https://github.com/openai/codex/blob/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/analytics/src/client.rs"
+    },
+    {
+      "path": "codex-rs/ext/skills/src/render_observability.rs",
+      "sha256": "3f4e3f2fe8af33d90fe160ca838b6e2ee8acad2572ad74386af2df0da2f54d78",
+      "url": "https://github.com/openai/codex/blob/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/ext/skills/src/render_observability.rs"
+    },
+    {
+      "path": "codex-rs/ext/skills/src/world_state_catalogs.rs",
+      "sha256": "f9b805ae669c4e1e313d512ee0981d72e8e2a9cc86855d119e86342fc4eba098",
+      "url": "https://github.com/openai/codex/blob/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/ext/skills/src/world_state_catalogs.rs"
+    }
+  ],
+  "observations": [
+    "Skill injection emits metrics and passes skill invocation facts to the analytics client. This is not a documented complete local per-turn catalog/invocation event stream.",
+    "The inspected analytics record_fact method uses an optional queue and try_send; absence of an exported fact is not proof of no invocation.",
+    "The inspected catalog-render telemetry reports aggregate counts and truncation, not a candidate-specific rendered-membership record.",
+    "AEEP keeps candidate exposed/retrieved/invoked unknown where these observations are unavailable. Local collector fault tests retain missing and incomplete export states."
+  ],
+  "conclusion": "Current discovery evidence is insufficient for the native-catalog completion gate. This is an observation gap, not a budget or operator-approval blocker, and does not invalidate independent qualification or marginal-value evidence.",
+  "remedy": "Use a supported candidate-specific per-turn catalog and skill observation stream with a verifiable completion boundary, or separately design and verify an explicitly labelled instrumented-host experiment. Do not replace native discovery, treat absent counters as false, or present a custom host as unmodified Codex.",
+  "actions_not_taken": [
+    "No desktop Codex binary or configuration changed",
+    "No upstream source patch built or installed",
+    "No authentication material accessed",
+    "No live metric values fabricated"
+  ]
+}

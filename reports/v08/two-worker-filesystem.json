@@ -1,0 +1,64 @@
+{
+  "schema_version": "assessment.worker-filesystem-probe.v1",
+  "codex_executable_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "probe_source_sha256": "2a92eb4b2b7644199e9906e210820a5113a1b55338218878d264045e08d3148a",
+  "profile": {
+    "permissions.aeep_assessment.filesystem": {
+      ":minimal": "read",
+      ":workspace_roots": {
+        ".": "write"
+      }
+    },
+    "permissions.aeep_assessment.network.enabled": false
+  },
+  "workers": [
+    {
+      "role": "baseline",
+      "checks": {
+        "own_read": {
+          "passed": true,
+          "returncode": 0
+        },
+        "own_write": {
+          "passed": true,
+          "returncode": 0
+        },
+        "other_read_denied": {
+          "passed": true,
+          "returncode": 1
+        },
+        "other_write_denied": {
+          "passed": true,
+          "returncode": 1
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "checks": {
+        "own_read": {
+          "passed": true,
+          "returncode": 0
+        },
+        "own_write": {
+          "passed": true,
+          "returncode": 0
+        },
+        "other_read_denied": {
+          "passed": true,
+          "returncode": 1
+        },
+        "other_write_denied": {
+          "passed": true,
+          "returncode": 1
+        }
+      }
+    }
+  ],
+  "filesystem_verified": true,
+  "network_verified": false,
+  "tool_boundary_verified": false,
+  "model_turns_started": 0,
+  "elapsed_seconds": 0.23740320798242465,
+  "scope": "CLI filesystem profile only; separate App Server and tool-access verification remains required."
+}

@@ -6,6 +6,7 @@ import gzip
 import hashlib
 import ipaddress
 import os
+import stat
 import tempfile
 from dataclasses import dataclass
 from io import BytesIO
@@ -53,10 +54,24 @@ def _safe_local_path(package_root: Path, relative: str) -> Path:
 
 def _read_stable_file(path: Path, maximum: int) -> bytes:
     try:
-        flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
-        descriptor = os.open(path, flags)
+        flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+        if os.open in os.supports_dir_fd and hasattr(os, "O_NOFOLLOW"):
+            absolute = path.absolute()
+            parent = os.open(absolute.anchor, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                for part in absolute.parts[1:-1]:
+                    child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+                    os.close(parent)
+                    parent = child
+                descriptor = os.open(absolute.name, flags, dir_fd=parent)
+            finally:
+                os.close(parent)
+        else:
+            descriptor = os.open(path, flags)
         with os.fdopen(descriptor, "rb") as stream:
             before = os.fstat(stream.fileno())
+            if not stat.S_ISREG(before.st_mode) or before.st_size > maximum:
+                raise ConfigurationError("artifact must be a regular file within the configured size limit")
             chunks: list[bytes] = []
             total = 0
             while chunk := stream.read(64 * 1024):

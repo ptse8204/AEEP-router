@@ -1,0 +1,160 @@
+{
+  "source_before": "a8e460f1fb5a19a0bf93dff7f3f7987708d19eb3c7a59a0ac93b7f0b74958fde",
+  "source_after": "a8e460f1fb5a19a0bf93dff7f3f7987708d19eb3c7a59a0ac93b7f0b74958fde",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09197308297734708,
+      "log": "reports/v08/authorized-workers-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6028008749708533,
+      "log": "reports/v08/authorized-workers-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.0761264170287177,
+      "log": "reports/v08/authorized-workers-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1834585829637945,
+      "log": "reports/v08/authorized-workers-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.14300787495449185,
+      "log": "reports/v08/authorized-workers-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-workers-final-5",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 429.00708462507464,
+      "log": "reports/v08/authorized-workers-final-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-workers-final-6",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 608.9969972920371,
+      "log": "reports/v08/authorized-workers-final-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1738443339709193,
+      "log": "reports/v08/authorized-workers-final-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/authorized-workers-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5137492089997977,
+      "log": "reports/v08/authorized-workers-final-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/authorized-workers-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04898608406074345,
+      "log": "reports/v08/authorized-workers-final-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/authorized-workers-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04668699996545911,
+      "log": "reports/v08/authorized-workers-final-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1722920420579612,
+      "log": "reports/v08/authorized-workers-final-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09088208398316056,
+      "log": "reports/v08/authorized-workers-final-check-12.txt"
+    }
+  ]
+}

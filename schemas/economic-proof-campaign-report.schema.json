@@ -1,5 +1,14 @@
 {
   "$defs": {
+    "AssessmentBenchmarkCondition": {
+      "enum": [
+        "router-fresh",
+        "fresh-worker",
+        "reused-worker"
+      ],
+      "title": "AssessmentBenchmarkCondition",
+      "type": "string"
+    },
     "BenchmarkCondition": {
       "enum": [
         "process-cold",
@@ -47,7 +56,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "repetition": {
           "minimum": 0,
@@ -191,7 +208,15 @@
           "$ref": "#/$defs/EconomicBenchmarkRouteType"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "split": {
           "$ref": "#/$defs/BenchmarkSplit"
@@ -500,7 +525,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "split": {
           "$ref": "#/$defs/BenchmarkSplit"

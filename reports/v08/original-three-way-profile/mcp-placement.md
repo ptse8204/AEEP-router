@@ -1,0 +1,7 @@
+# Existing MCP placement and remaining backend work
+
+The pinned [0.159.2 stdio launcher](https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/rmcp-client/src/stdio_server_launcher.rs) separates local orchestrator-child startup from executor startup. The latter passes no command sandbox in its execution parameters. This supports a task server outside the model command sandbox; actual worker behavior still requires probes.
+
+Existing managed-worker conformance establishes the outer image and enclosure. It does not itself establish a scoped child policy or an adapter-owned runtime identity for CommandExecutor inside the server. TaskScope currently accepts only the Mac native command backend. Reusing a worker digest as an unverified flag would weaken that invariant.
+
+A coherent patch must bind the existing TaskScope to the actual managed enclosure, keep the model denied private authority and receipt storage, and apply a restricted child policy that also denies task executors that storage. Existing Router approvals, attempts, expiration, limits, receipts and task-only MCP remain the authority path. The worker startup/command compiler and actual conformance must supply that proof before a profile can run. No new broker, native-Mac claim, alternative ledger or generic recursion exception is justified by this source review. The exact source observations and required probes are recorded in mcp-placement-source-review.json.

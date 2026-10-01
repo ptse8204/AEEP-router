@@ -1,0 +1,60 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_ee4079db264a4a24931ff569ebe15b52",
+      "operation_id": "linux-lifecycle-idempotent:conformance_probe_ee4079db264a4a24931ff569ebe15b52",
+      "image": "sha256:1bbead3bc0b6e686770400c841671f3257fe8ae0f5955a22e9aaef0d460e05e9",
+      "worker_digest": "ee6239ba21441687e2fc322df5b70631afe728cde350497266bc70036764c741",
+      "cleanup_confirmed": true,
+      "protocol_passed": false,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "observed_allowed_profiles": {
+        "aeep": true,
+        "aeep-task-child": true
+      },
+      "effective_requirements_matches": true,
+      "own_server_error": {
+        "config_error_categories": [],
+        "recognized_public_config_fields": [],
+        "recognized_error_types": [],
+        "sanitized_config_error_excerpt": "MCP startup failed: handshaking with MCP server failed: connection closed: initialize response: connection closed: initialize response",
+        "stderr_bytes_retained": 134,
+        "stderr_truncated": false
+      },
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:44:43.399595Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:44:43.399621Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n\u001b[2m2026-09-30T14:44:48.563933Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_api::endpoint::responses_websocket\u001b[0m\u001b[2m:\u001b[0m failed to connect to websocket: IO error: failed to lookup address information: Try again, url: wss:[redacted-path]\n",
+        "stderr_bytes_retained": 897,
+        "stderr_truncated": false
+      },
+      "error_type": "TimeoutError",
+      "failing_stage": "tool_inventory",
+      "error_class": "timeout",
+      "elapsed_seconds": 10.511998874833807,
+      "canonical_record_digest": "9294abaefcfa670ddac529837914478c7ab4ad05f9daf1c748b8f382e2a4e5a3"
+    }
+  },
+  "probe_supported": false,
+  "classification": "dedicated_child_lifecycle_not_established",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8635,
+    "model_turns": 2535,
+    "elapsed_seconds": 74776.04519919376,
+    "cash_usd": "0.0"
+  }
+}

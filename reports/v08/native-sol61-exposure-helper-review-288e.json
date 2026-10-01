@@ -1,0 +1,83 @@
+{
+  "authority": "standing September25/27 exact review delegation;September30 unfinished tests model selection",
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "definition": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "executor_fingerprint": "sha256:00fdbbf6cbab245f5b3398e0ccd3ea7356f3d48de51ed28700b76d3e29a33f40",
+    "scope_digest": "6b255ddf359f5febf972afd23f6bdac3f1ae7b660510a96ac35fef4f7b25aec8",
+    "prompt_sha256": "19d8f0b59d21a78a778e45220c79987017c941e0af890a3864d440a419d953eb",
+    "input_hashes": [
+      "e6e6a47682f03ae95afa637a0ef68776c2cc245d0c5889ec2b67d795035d9af0"
+    ],
+    "native_overrides": [
+      "-c",
+      "permissions.aeep-native-task.network.enabled=false",
+      "-c",
+      "permissions.aeep-native-task.filesystem={ \":root\" = \"deny\", \":minimal\" = \"read\", \"/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/AGENTS.md\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/scratch\" = \"write\", \"/Users/edwintse/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.aeep\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yaml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.json\" = \"deny\", \"/private/tmp\" = \"deny\", \"/private/tmp/**\" = \"deny\", \"/private/tmp{,/**}\" = \"deny\", \"/private/var/tmp\" = \"deny\", \"/private/var/tmp/**\" = \"deny\", \"/private/var/tmp{,/**}\" = \"deny\", \"/Users/edwintse/.codex/**\" = \"deny\", \"/Users/edwintse/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.aeep/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.aeep{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.codex/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yaml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yaml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.yml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.json/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.json{,/**}\" = \"deny\" }"
+    ],
+    "inherited_instruction_sha256": "ebdf6620fd29b0167c7d47c41e345c89b58643599acd2f5837540aab529d5c92",
+    "native_boundary_evidence_sha256": "5542ae9f6e0f7a4b965efc8b992f3ff4616c93e09c4927fab364b7016b3b9d1e",
+    "native_boundary_log_sha256": "2d8c9f2fe689dff0616f5e36d8d95ebc0555c9acb1357678e8f73a175dadc3b1",
+    "setup_operation_id": "native-setup:planning_native-sol61-exposure-helper-setup",
+    "generated_launcher": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "args": [
+        "-I",
+        "-m",
+        "aeep",
+        "serve",
+        "--transport",
+        "stdio",
+        "--profile",
+        "task",
+        "--approve",
+        "read",
+        "--task-activation",
+        "task_52270ac9dd334b1694a6ba5c1dfcb2df",
+        "--manifest",
+        "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r/aeep.json"
+      ],
+      "command_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0"
+    },
+    "helper_sha256": "16fea600263ce5ce283b343c2b62d34e3448933b1de9af391e3f87c7da95c683",
+    "exposure_override": "mcp_servers.aeep_task_52270ac9dd334b1694a6ba5c1dfcb2df.omit_tools_from=[\"deferred\",\"code_mode\"]",
+    "maximum_seconds": 60,
+    "maximum_model_turns": 0,
+    "maximum_operations": 1,
+    "exploratory_resource_bounds": {
+      "host_tree_peak_rss_bytes": 1073741824,
+      "observed_host_tree_cpu_seconds": 60,
+      "elapsed_seconds": 60,
+      "retained_evidence_bytes": 8388608
+    },
+    "classification": "zero-model two effective config reads plus fixed helper handshake; fresh seed97/index1; exact generated launcher and native task child, no model exposure, planner execution or qualification",
+    "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+    "unexpected_tool_detection": "post-execution observation only, not preventative enforcement"
+  },
+  "mapping_digest": "8e24d9b2f3f49e6c31978e1eb63b98a872cb768dbf656363d3b00ba1de5859d9",
+  "request_digest": "c6638a6531e66ec98371e2f364021e94a77142a378ec751558bf9fb0fb789e6c",
+  "driver_sha256": "b18784e674d7a893555af421da68b6a8cf6d31c323219c4a18ae35cda2cd4593",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "sol61-exposure-helper",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-soay4z4r",
+    "executor_fingerprints": {
+      "native.workbook.sol61-model-journey": "sha256:00fdbbf6cbab245f5b3398e0ccd3ea7356f3d48de51ed28700b76d3e29a33f40"
+    },
+    "approval_ceiling": "read",
+    "max_attempts": 1,
+    "max_attempt_seconds": 30.0,
+    "expires_at": "2026-09-30T10:57:43.390925Z"
+  },
+  "activation": "task_52270ac9dd334b1694a6ba5c1dfcb2df",
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 72,
+  "authentication": "Codex-owned; never accessed",
+  "global_configuration_changes": false,
+  "new_services": false,
+  "native_boundary_result": "native-single-process-source-freeze.json",
+  "note": "planning request is authorization envelope only; no planner execution or managed-worker conformance"
+}

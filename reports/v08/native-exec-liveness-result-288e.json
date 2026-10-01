@@ -1,0 +1,47 @@
+{
+  "review": {
+    "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "authority": "parent September 30 finite native liveness feasibility instruction",
+    "cases": [
+      "close2",
+      "kill2",
+      "terminate2"
+    ],
+    "command": "sandboxed Python sets hard RLIMIT_NPROC=0 before writing started marker, waits2sec then writes effect",
+    "bounds": "max8sec wait to start; observe2.5sec; cleanup identity-bound observed children; no model/auth/global config",
+    "protocol_source": "https://github.com/openai/codex/blob/main/codex-rs/exec-server/README.md",
+    "driver_sha256": "0bcf254b1ed4669e6f607abf52dcfe3899ea2ceef9961de98edcecb93e93cbaa",
+    "expected": "server exit on pipe closure and no command effect after owner closure, death or terminate"
+  },
+  "cases": [
+    {
+      "mode": "close2",
+      "started": true,
+      "effect_after_stop": false,
+      "server_still_live": false,
+      "cleanup_signalled_owned_pids": [],
+      "remaining_owned_live_pids": [],
+      "elapsed_seconds": 3.0909177500288934
+    },
+    {
+      "mode": "kill2",
+      "started": true,
+      "effect_after_stop": false,
+      "server_still_live": false,
+      "cleanup_signalled_owned_pids": [],
+      "remaining_owned_live_pids": [],
+      "elapsed_seconds": 3.0192950000055134
+    },
+    {
+      "mode": "terminate2",
+      "started": true,
+      "effect_after_stop": false,
+      "server_still_live": false,
+      "cleanup_signalled_owned_pids": [],
+      "remaining_owned_live_pids": [],
+      "elapsed_seconds": 3.104621500009671
+    }
+  ],
+  "claim": "bounded native feasibility only; no adapter implementation or general containment qualification"
+}

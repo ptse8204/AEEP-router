@@ -1,0 +1,72 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_1ebcf7de63464faab7e8589108198883",
+      "operation_id": "linux-lifecycle-startup-detail:conformance_probe_1ebcf7de63464faab7e8589108198883",
+      "image": "sha256:1bbead3bc0b6e686770400c841671f3257fe8ae0f5955a22e9aaef0d460e05e9",
+      "worker_digest": "ee6239ba21441687e2fc322df5b70631afe728cde350497266bc70036764c741",
+      "cleanup_confirmed": true,
+      "protocol_passed": true,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "observed_allowed_profiles": {
+        "aeep": true,
+        "aeep-task-child": true
+      },
+      "effective_requirements_matches": true,
+      "own_server_present": true,
+      "diagnostic_argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "exec",
+        "--user",
+        "65534:65534",
+        "aeep-c813c25857582e9ae83682ce8a5aee8a",
+        "/usr/local/bin/python3",
+        "-I",
+        "-c",
+        "import json,pathlib,subprocess; p=pathlib.Path('/workspace/private');r={'private_exists':p.exists(),'private_is_file':p.is_file(),'private_is_dir':p.is_dir()}; q=subprocess.run(['/usr/local/bin/python3','/opt/aeep/linux-mcp-server.py'],input=b'{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}\\n',capture_output=True,timeout=5);r['fixed_server_exit_code']=q.returncode;r['stderr_bytes']=len(q.stderr);t=q.stderr.decode('utf-8',errors='replace');r['known_exception']=[k for k in ('FileExistsError','NotADirectoryError','PermissionError','ModuleNotFoundError','ImportError','SyntaxError','OSError') if k in t];r['known_path_tokens']=[k for k in ('/workspace/private','/workspace/task','/opt/aeep/linux-mcp-server.py') if k in t];print(json.dumps(r))"
+      ],
+      "fixed_server_startup": {
+        "private_exists": true,
+        "private_is_file": false,
+        "private_is_dir": true,
+        "fixed_server_exit_code": 0,
+        "stderr_bytes": 0,
+        "known_exception": [],
+        "known_path_tokens": []
+      },
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:48:41.193715Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:48:41.193742Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "elapsed_seconds": 3.6881582501810044,
+      "canonical_record_digest": "d87e7801b7eb78327fc8aead1868f72e25952d9deb7a888e62d60d878ee8857d"
+    }
+  },
+  "probe_supported": true,
+  "classification": "own_server_startup_diagnostic_completed",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8636,
+    "model_turns": 2535,
+    "elapsed_seconds": 74779.73335744394,
+    "cash_usd": "0.0"
+  }
+}

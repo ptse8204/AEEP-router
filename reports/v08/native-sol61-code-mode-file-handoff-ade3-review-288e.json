@@ -1,0 +1,73 @@
+{
+  "authority": "standing September25/27 exact review delegation;September30 unfinished tests model selection",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "definition": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "executor_fingerprint": "sha256:5fd239d2982927f639fb0539145910dd4ae66b8a9d1a88bcff43b0a4616d28b0",
+    "scope_digest": "a74e7559bb487e9ea535ad0c4e9a4dde03496388f43f7c3b4c7fdd95970f8e28",
+    "prompt_sha256": "209b1d53f445bcbc25e409e3d433de293bf61a3c6700efad8af3867ebb115906",
+    "input_hashes": [
+      "e6149d0af1dc1acc9c959883119f188a1e51ed0b5b8d887b3c86bf0b29667981"
+    ],
+    "native_overrides": [
+      "-c",
+      "permissions.aeep-native-task.network.enabled=false",
+      "-c",
+      "permissions.aeep-native-task.filesystem={ \":root\" = \"deny\", \":minimal\" = \"read\", \"/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/AGENTS.md\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/scratch\" = \"write\", \"/Users/edwintse/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.aeep\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yaml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.json\" = \"deny\", \"/private/tmp\" = \"deny\", \"/private/tmp/**\" = \"deny\", \"/private/tmp{,/**}\" = \"deny\", \"/private/var/tmp\" = \"deny\", \"/private/var/tmp/**\" = \"deny\", \"/private/var/tmp{,/**}\" = \"deny\", \"/Users/edwintse/.codex/**\" = \"deny\", \"/Users/edwintse/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.aeep/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.aeep{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.codex/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yaml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yaml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.yml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.json/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/aeep.json{,/**}\" = \"deny\" }"
+    ],
+    "inherited_instruction_sha256": "ebdf6620fd29b0167c7d47c41e345c89b58643599acd2f5837540aab529d5c92",
+    "native_boundary_evidence_sha256": "54faf9c1024f80428c926aaffedc49e9ce296b96278f7db0c9624c3c156fd21f",
+    "native_boundary_log_sha256": "2d8c9f2fe689dff0616f5e36d8d95ebc0555c9acb1357678e8f73a175dadc3b1",
+    "setup_operation_id": "native-setup:planning_native-sol61-code-mode-file-handoff-ade3-setup",
+    "reader_command": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 -I -c 'from pathlib import Path; import sys; sys.stdout.write(Path('\"'\"'/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87/scratch/input.json'\"'\"').read_text(encoding=\"utf-8\"))'",
+    "reader_command_sha256": "4337be1a70722e6340a0af8098a8e9a3dbc225ecf6d177a4486390646106b510",
+    "staged_input_sha256": "e6149d0af1dc1acc9c959883119f188a1e51ed0b5b8d887b3c86bf0b29667981",
+    "cell_sha256": "de0a83e2e07885f75e96a5142cdc02e9bb459d8c5d4f37e1b78bfd8b8efd9e0b",
+    "approval_source": "actual production-generated exact task rules",
+    "exposure_override": "mcp_servers.aeep_task_256038ee45414f93a9be58431e0ce6fe.omit_tools_from=[\"deferred\"]",
+    "exact_server": "aeep_task_256038ee45414f93a9be58431e0ce6fe",
+    "exact_tool": "aeep_recipe_f468b36bc594",
+    "expected_sha256": "047ea55867a7f5ca4e458048355f1924257d67837f0bee441e5eca2a19f3358b",
+    "spec_sha256": "78f3d471cffb7570f228ad0db66d3827f41175d11258c19f29740b9e70ecf583",
+    "schema_sha256": "de1b79f1349f97c4c0777950b1113bc569c5806f5188601ad7732033d2e84392",
+    "generated_launcher_sha256": "9f7963db9182e782466c6571716b9c3fc8ffa6a3812b459c6cd326614672fd41",
+    "maximum_seconds": 240,
+    "maximum_model_turns": 1,
+    "maximum_operations": 1,
+    "exploratory_resource_bounds": {
+      "host_tree_peak_rss_bytes": 1073741824,
+      "observed_host_tree_cpu_seconds": 60,
+      "elapsed_seconds": 240,
+      "retained_evidence_bytes": 8388608
+    },
+    "classification": "inert existing-code-mode file handoff diagnostic; fresh2rowworkbook seed113/index0; existing code-mode scratch file\u2192builtin reader variable\u2192own scoped MCP; no opaque model argument transcription or new transport, no workbook replay, autonomy qualification or marginal benefit",
+    "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+    "unexpected_tool_detection": "post-execution observation only, not preventative enforcement"
+  },
+  "mapping_digest": "c5ce13b4cd6d60d6a179f6d687b7a8547339e38eb862ce33ded983112fa9b33f",
+  "request_digest": "7951e593dadca432561b1c20fa4f451afd61647af1315e40ed98df40964e537c",
+  "driver_sha256": "9c1b4cc02ccf8d40752b115c29962f8535b41e1a9d1641824fb39da280041569",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "sol61-code-mode-file-handoff-ade3",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-kq7fje87",
+    "executor_fingerprints": {
+      "native.workbook.sol61-small-approved": "sha256:5fd239d2982927f639fb0539145910dd4ae66b8a9d1a88bcff43b0a4616d28b0"
+    },
+    "approval_ceiling": "read",
+    "max_attempts": 1,
+    "max_attempt_seconds": 30.0,
+    "expires_at": "2026-09-30T20:28:29.969399Z"
+  },
+  "activation": "task_256038ee45414f93a9be58431e0ce6fe",
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 1088,
+  "authentication": "Codex-owned; never accessed",
+  "global_configuration_changes": false,
+  "new_services": false,
+  "native_boundary_result": "delivery-boundary-validation-ade3b4e98078.json",
+  "note": "planning request is authorization envelope only; no planner execution or managed-worker conformance"
+}

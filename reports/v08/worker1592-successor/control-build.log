@@ -1,0 +1,18 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 451B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953
+#2 ERROR: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+------
+ > [internal] load metadata for docker.io/library/sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953 AS control
+   2 |     USER root
+   3 |     RUN ["rm", "-rf", "/opt/codex"]
+--------------------
+ERROR: failed to build: failed to solve: sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953: failed to resolve source metadata for docker.io/library/sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed

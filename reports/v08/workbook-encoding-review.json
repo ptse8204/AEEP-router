@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-09-26T09:57:54.334948+00:00",
+  "source_digest": "9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872",
+  "authority": "2026-09-25 delegated routine definition review; no budget expansion",
+  "recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+  "reason": "Independent known-correct fixture demonstrated rejection of equivalent OOXML text encoding. Preserve task semantics and explicitly validate reviewed correct artifacts before trials.",
+  "files": {
+    "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f",
+    "integrations/assessment-runtime/workbook-grader-fixtures.json": "e1342eb43a3daac7ef1dd59ab121d4b1e4f77d07ab8595e4639fc5b8b7c7e5be"
+  },
+  "changes": [
+    "Preserve str cell values as text",
+    "Reject unreviewed cell types",
+    "Bind four known-correct literal artifacts, including alternate text encoding, into the recipe",
+    "Validate those artifacts before candidates and include their calls in budget previews"
+  ],
+  "unchanged": [
+    "Task contract, truth values, formulas, caches, bold formatting and sheets",
+    "8 screening, 28 training, 105 holdout cases",
+    "100 distinct holdouts and zero failures required",
+    "Original grant counters, cash and disclosure limits",
+    "Prior recipe revocations and immutable reports"
+  ],
+  "validation_pending": true,
+  "live_execution_approved": false
+}

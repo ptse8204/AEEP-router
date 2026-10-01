@@ -1,0 +1,42 @@
+{
+  "approved_at": "2026-09-25T19:53:46.844350+00:00",
+  "authority": "2026-09-25 operator delegation within existing grant",
+  "bundle_sha256": "e7ea7003e6a7a31d6e485109f6a125eabfbfd8ba57918a2f6c773cc2d7cb000b",
+  "plan_id": "plan_44a9b7d4287040ffa63617f845b57aa6",
+  "scope_amendment_digest": "be9ac7fb298fc80f06fee4562c16094d29e26b1d993c86a0d114ed81b11f1e6e",
+  "purpose": "Eight-case, two-arm workbook timing pilot; optional plugin exposure, no qualification or admission",
+  "usage_before": [
+    319,
+    8,
+    335.24302450648975,
+    "0",
+    0
+  ],
+  "budget_expanded": false,
+  "maximum_new_model_turns": 16,
+  "execution_policy": "Run fixed pilot under the remaining original grant. Each operation reserves before execution. If allowance is insufficient, stop and retain insufficient-evidence outcome; never lower thresholds or reset counters.",
+  "pessimistic_campaign_bound_exceeds_remaining": true,
+  "adapter_eligibility": [
+    {
+      "executor_id": "workbook-pilot.treatment",
+      "adapter": "codex-app-server:workbook-treatment",
+      "adapter_version": "1",
+      "support_status": "experimental",
+      "eligible": true,
+      "missing_capabilities": [],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    },
+    {
+      "executor_id": "workbook-pilot.control",
+      "adapter": "codex-app-server:workbook-control",
+      "adapter_version": "1",
+      "support_status": "experimental",
+      "eligible": true,
+      "missing_capabilities": [],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    }
+  ],
+  "source_digest": "49d05cab9f8fe97b9ba04e0032463407dbab6feb9b8c29cd7aeb318255d54946"
+}

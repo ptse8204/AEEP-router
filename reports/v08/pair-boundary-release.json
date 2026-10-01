@@ -1,0 +1,113 @@
+{
+  "source_before": "78ade1f06ce6b1f63868460a19b246c25d9adeda864294e439ce301ed9d0af08",
+  "source_after": "78ade1f06ce6b1f63868460a19b246c25d9adeda864294e439ce301ed9d0af08",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.496004750020802,
+      "log": "reports/v08/pair-boundary-release-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4503900420386344,
+      "log": "reports/v08/pair-boundary-release-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.49790562503039837,
+      "log": "reports/v08/pair-boundary-release-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4537006670143455,
+      "log": "reports/v08/pair-boundary-release-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4421701249666512,
+      "log": "reports/v08/pair-boundary-release-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4489583329996094,
+      "log": "reports/v08/pair-boundary-release-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5512610840378329,
+      "log": "reports/v08/pair-boundary-release-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 7.710969625040889,
+      "log": "reports/v08/pair-boundary-release-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 3.0632237090030685,
+      "log": "reports/v08/pair-boundary-release-08.txt"
+    }
+  ]
+}

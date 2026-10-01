@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "AssessmentLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_operations": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Operations",
+          "type": "integer"
+        },
+        "max_model_turns": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Max Model Turns",
+          "type": "integer"
+        },
+        "max_elapsed_seconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 604800,
+          "title": "Max Elapsed Seconds",
+          "type": "number"
+        },
+        "max_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "title": "Max Cash Usd"
+        }
+      },
+      "required": [
+        "max_operations",
+        "max_elapsed_seconds"
+      ],
+      "title": "AssessmentLimits",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Absolute operator ceilings on the original ledger, with optimistic concurrency.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.budget-amendment.v1",
+      "default": "assessment.budget-amendment.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "amendment_id": {
+      "title": "Amendment Id",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "authorization_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Authorization Digest",
+      "type": "string"
+    },
+    "previous_amendment_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Amendment Digest"
+    },
+    "limits": {
+      "$ref": "#/$defs/AssessmentLimits"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "authorization_id",
+    "authorization_digest",
+    "limits",
+    "expires_at"
+  ],
+  "title": "AssessmentBudgetAmendment",
+  "type": "object"
+}

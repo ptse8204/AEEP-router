@@ -1,0 +1,31 @@
+import asyncio,json
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentScopeAmendment,AssessmentAuthorization,content_digest
+from aeep.assessment.boundary import BoundaryProbeDefinition,prepare_model_probe
+from aeep.assessment.verification import verification_source_digest
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection,prepare_pair
+from aeep.models import ExecutorSpec
+p=Path('reports/v08')
+async def main():
+ r=Router.from_manifest('.aeep/live-review-v3/workbook-pilot.json')
+ try:
+  s=AssessmentService(r,Path('.aeep/live-review-v3/.aeep/assessments').resolve());repo=s.repository
+  b=json.loads((p/'task-profile-review-bundle.json').read_text());original=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][0]['pair_definition_digest']))
+  raw=original.treatment.model_dump(mode='json');raw['id']='workbook-diagnostics.treatment';raw['config']['adapter_id']='codex-app-server:workbook-diagnostics-treatment';raw['config']['invocation']['exposure']='required'
+  treatment=ExecutorSpec.model_validate(raw)
+  deadline=json.loads((p/'workbook-pilot-timing.json').read_text())['proposed_normal_deadline_seconds'];assert deadline==203
+  treatment.config['timeout_seconds']=deadline
+  control=original.control.model_copy(deep=True);control.id='workbook-diagnostics.control';control.config['adapter_id']='codex-app-server:workbook-diagnostics-control';control.config['timeout_seconds']=deadline
+  d=original.model_copy(update={'control':control,'treatment':treatment});d=WorkerPairInspection.model_validate(d.model_dump(mode='json'))
+  sources=[prepare_model_probe(s,source_plan_id='plan_44a9b7d4287040ffa63617f845b57aa6',definition=BoundaryProbeDefinition(name='qualification_profile_identity_only',executor=spec,expected={})) for spec in (d.control,d.treatment)]
+  result=prepare_pair(s,*(q.plan_id for q in sources),d);requests=result['requests']
+  digests={digest for q in requests for digest in [*q['definition_digests'],q['subject_digest']]};definitions={digest:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(digest,)).fetchone()[0]) for digest in digests}
+  grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=sorted({q['subject_digest'] for q in requests}),recipe_digests=sorted({q['recipe_digest'] for q in requests}),environment_digests=sorted({q['environment_digest'] for q in requests}),reviewed_digests=sorted(digests))
+  bundle={'source_digest':verification_source_digest(Path.cwd()),'prepared_at':datetime.now(timezone.utc).isoformat(),'operator_authority':'2026-09-25 delegated routine plan/test-definition revisions within existing limits','purpose':'Required-invocation workbook qualification profile inspection; fixed command probes only, no model/task execution','amendment':amendment.model_dump(mode='json'),'definitions':definitions,'requests':requests,'maximum_operations':2,'maximum_model_turns':0,'maximum_reserved_seconds':480,'boundary_reviews':b['boundary_reviews']}
+  with (p/'qualification-diagnostics-profile-review-bundle.json').open('x') as f:f.write(json.dumps(bundle,indent=2)+'\n')
+  print(json.dumps({'prepared_only':True,'request_ids':[q['plan_id'] for q in requests],'run_after_final_checks':True},indent=2))
+ finally:await r.close()
+asyncio.run(main())

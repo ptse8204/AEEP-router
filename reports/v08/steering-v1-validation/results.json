@@ -1,0 +1,68 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5825648307800293,
+    "log": "reports/v08/steering-v1-validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 2.351844072341919,
+    "log": "reports/v08/steering-v1-validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.3579437732696533,
+    "log": "reports/v08/steering-v1-validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 2.7651281356811523,
+    "log": "reports/v08/steering-v1-validation/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 1,
+    "seconds": 0.2690889835357666,
+    "log": "reports/v08/steering-v1-validation/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 1,
+    "seconds": 450.20285177230835,
+    "log": "reports/v08/steering-v1-validation/05.log"
+  }
+]

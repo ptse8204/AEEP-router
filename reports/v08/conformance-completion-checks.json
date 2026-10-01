@@ -1,0 +1,152 @@
+{
+  "source_before": "b3bf0b79c8e3672a575814585c310872e66da388068da67140535a9c85c69f61",
+  "source_after": "b3bf0b79c8e3672a575814585c310872e66da388068da67140535a9c85c69f61",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0799003749853,
+      "log": "reports/v08/conformance-completion-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7744088750332594,
+      "log": "reports/v08/conformance-completion-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.12831983400974423,
+      "log": "reports/v08/conformance-completion-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.4033029999118298,
+      "log": "reports/v08/conformance-completion-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.17584987496957183,
+      "log": "reports/v08/conformance-completion-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 479.20804983295966,
+      "log": "reports/v08/conformance-completion-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 504.24498641700484,
+      "log": "reports/v08/conformance-completion-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0928913749521598,
+      "log": "reports/v08/conformance-completion-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/conformance-completion-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.4473012919770554,
+      "log": "reports/v08/conformance-completion-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/conformance-completion-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048952833050861955,
+      "log": "reports/v08/conformance-completion-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/conformance-completion-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03983983397483826,
+      "log": "reports/v08/conformance-completion-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2407779999775812,
+      "log": "reports/v08/conformance-completion-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1937620419776067,
+      "log": "reports/v08/conformance-completion-check-12.txt"
+    }
+  ]
+}

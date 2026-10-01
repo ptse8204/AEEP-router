@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aeep-agent-router"
-version = "0.7.0"
+version = "0.8.0"
 description = "Host-native, provider-neutral routing that filters infeasible agent actions before model and tool execution."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -60,6 +60,12 @@ aeep = ["py.typed"]
 "share/aeep/skills/aeep-minimal/agents" = ["skills/aeep-minimal/agents/openai.yaml"]
 "share/aeep/skills/aeep-router" = ["skills/aeep-router/SKILL.md"]
 "share/aeep/skills/aeep-router/scripts" = ["skills/aeep-router/scripts/route.sh"]
+"share/aeep/integrations/managed-worker/proxy" = ["integrations/managed-worker/proxy/Dockerfile", "integrations/managed-worker/proxy/squid.conf"]
+"share/aeep/integrations/aeep/.codex-plugin" = ["integrations/aeep/.codex-plugin/plugin.json"]
+"share/aeep/integrations/aeep" = ["integrations/aeep/.mcp.json", "integrations/aeep/README.md"]
+"share/aeep/integrations/aeep/skills/assess-plugin" = ["integrations/aeep/skills/assess-plugin/SKILL.md"]
+"share/aeep/integrations/managed-worker" = ["integrations/managed-worker/worker-launch", "integrations/managed-worker/README.md", "integrations/managed-worker/Dockerfile", "integrations/managed-worker/requirements.example.toml", "integrations/managed-worker/nested-sandbox-seccomp.example.json", "integrations/managed-worker/Dockerfile.incremental", "integrations/managed-worker/requirements-linux-arm64.lock", "integrations/managed-worker/capable-local-config.json"]
+"share/aeep/integrations/assessment-runtime" = ["integrations/assessment-runtime/Dockerfile", "integrations/assessment-runtime/*.py", "integrations/assessment-runtime/*.json"]
 "share/aeep/docs" = ["docs/*.md"]
 "share/aeep/schemas" = ["schemas/*.json"]
 "share/aeep/examples/quickstart" = ["examples/quickstart/*.md", "examples/quickstart/*.py", "examples/quickstart/*.yaml"]
@@ -81,6 +87,15 @@ aeep = ["py.typed"]
 addopts = "-q"
 asyncio_mode = "auto"
 testpaths = ["tests"]
+markers = [
+  "native_boundary: opt-in native Codex sandbox allow/deny probes without model calls",
+  "assessment_contract: offline recipe, mapping and protocol contracts",
+  "assessment_lifecycle: offline authority, accounting and recovery faults",
+  "assessment_boundary: real subprocess, filesystem or container boundaries",
+  "real_container: opt-in pinned-container checks within the boundary layer",
+  "codex_conformance: authorized installed Codex host boundary checks",
+  "live_acceptance: source-bound live product release evidence",
+]
 pythonpath = ["src"]
 
 [tool.coverage.run]
@@ -95,6 +110,9 @@ fail_under = 80
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+# Historical reports include exact probe source. Keep those archived bytes intact;
+# active implementations, integration assets, examples, scripts and tests are linted.
+extend-exclude = ["reports"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "RUF", "SIM", "ASYNC"]

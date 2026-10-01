@@ -1,0 +1,113 @@
+{
+  "source_before": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "source_after": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.49130537500604987,
+      "log": "reports/v08/pilot-calibration-final-release-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47983470803592354,
+      "log": "reports/v08/pilot-calibration-final-release-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47904145799111575,
+      "log": "reports/v08/pilot-calibration-final-release-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47481945797335356,
+      "log": "reports/v08/pilot-calibration-final-release-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4691460410831496,
+      "log": "reports/v08/pilot-calibration-final-release-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4754526249598712,
+      "log": "reports/v08/pilot-calibration-final-release-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5275558339199051,
+      "log": "reports/v08/pilot-calibration-final-release-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 7.518306375015527,
+      "log": "reports/v08/pilot-calibration-final-release-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 3.2490806250134483,
+      "log": "reports/v08/pilot-calibration-final-release-08.txt"
+    }
+  ]
+}

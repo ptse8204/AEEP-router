@@ -1,0 +1,72 @@
+{
+  "source_before": "4523302540832772afda04673b89012b9fc08ea6687b516a3cb93d161f9d7ae2",
+  "source_after": "4523302540832772afda04673b89012b9fc08ea6687b516a3cb93d161f9d7ae2",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0855833749519661,
+      "log": "reports/v08/pilot-calibration-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6112272499594837,
+      "log": "reports/v08/pilot-calibration-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.048638417036272585,
+      "log": "reports/v08/pilot-calibration-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7956546669593081,
+      "log": "reports/v08/pilot-calibration-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1371952909976244,
+      "log": "reports/v08/pilot-calibration-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 2,
+      "seconds": 188.3216343750246,
+      "log": "reports/v08/pilot-calibration-check-05.txt"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.task-reconciliation.v1",
+      "default": "aeep.task-reconciliation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "attempt_id": {
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "attempt_version": {
+      "minimum": 0,
+      "title": "Attempt Version",
+      "type": "integer"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "resolution": {
+      "enum": [
+        "effects_verified",
+        "effects_reverted"
+      ],
+      "title": "Resolution",
+      "type": "string"
+    },
+    "evidence_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "title": "Evidence Digests",
+      "type": "array"
+    }
+  },
+  "required": [
+    "attempt_id",
+    "attempt_version",
+    "scope_digest",
+    "resolution",
+    "evidence_digests"
+  ],
+  "title": "TaskReconciliation",
+  "type": "object"
+}

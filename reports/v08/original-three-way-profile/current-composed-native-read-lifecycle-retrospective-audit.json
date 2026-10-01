@@ -1,0 +1,37 @@
+{
+  "classification": "Retrospective READ lifecycle component audit under standing finite semantic-test amendment; not predeclared pass or full conformance",
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "result_sha256": "bf4c659450c33e47e5582bd5518182d0ca21e7c6dd63a1a390e45a687d5affc9",
+  "audit_sha256": "2710bd0a8522d8c5e4ce8edf99c034796d3f528e7b9bd0a173bccf80f2415cb9",
+  "rationale": "src/aeep/hosts/codex_native_process.py159 catches CancelledError and marks timed_out; READ terminal timeout can settle FAILED with terminal receipt. WRITE recovery unchanged. Prior INDETERMINATE/propagation definition remains failed.",
+  "native_attempts_added": 0,
+  "model_turns_added": 0,
+  "full_composed_conformance": false,
+  "source_contract": {
+    "native_cancellation": "src/aeep/hosts/codex_native_process.py:159 catches CancelledError as timed_out",
+    "existing_native_test": "tests/test_v08_native_process.py:86 awaits cancelled task result and asserts raw.timed_out",
+    "command_result": "src/aeep/executors/command.py:416 emits TIMEOUT on timed_out",
+    "durable_read_terminal": "src/aeep/router.py:887 _terminal_attempt_state yields FAILED for idempotent native COMMAND READ; scoped WRITE unsuccessful remains INDETERMINATE",
+    "different_mock_contract": "tests/test_fixed_callback_authority.py:101 uses monkeypatched indefinitely pending executor and expects propagated cancellation; not actual native executor semantics"
+  },
+  "amendment_authority": "September25/27 standing finite amendments, parent instruction to complete retained evidence audit September30",
+  "original_failed_results_preserved": [
+    "current-composed-native-lifecycle-5fff-result.json",
+    "current-composed-native-lifecycle-observer-5fff-result.json",
+    "current-composed-native-lifecycle-observer-sql-sql-5fff-result.json"
+  ],
+  "observed": {
+    "cancel_requested_after_owned_ready": true,
+    "all_owned_identity_predicates": true,
+    "native_return_status": "timeout",
+    "native_cleanup_incomplete": false,
+    "owned_processes_absent": true,
+    "durable_attempt_state": "FAILED",
+    "terminal_receipt_present": true,
+    "host_eof_observed": false
+  },
+  "no_replay": true,
+  "native_backend_digest": "05798c4974413c7411c9e174dbd98f978554dd32f292dd90d49c0d8e867450de",
+  "child_attempt_digest": "b0428a4d7fb32cdafe37d56a497a5ed159584fd1459d06341617ecdd63bbe7a1",
+  "child_receipt_digest": "1fed5907a80211f5397ac1b75977d150dc9e26eda0cb36022a0f13f80da8f0b2"
+}

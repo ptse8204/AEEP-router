@@ -244,10 +244,19 @@ def neutral_tools() -> list[dict[str, Any]]:
     return deepcopy(_BASE_TOOLS)
 
 
-def export_tools(format: ToolFormat) -> list[dict[str, Any]]:
+def export_tools(format: ToolFormat, *, profile: str = 'legacy') -> list[dict[str, Any]]:
     """Export equivalent declarations in the selected provider's native shape."""
 
     tools = neutral_tools()
+    if profile == 'task':
+        from ..assessment.tools import declarations
+        declarations_list = declarations(tasks_only=True)
+        if format == 'mcp':
+            return declarations_list
+        tools = [{'name': item['name'], 'description': item['description'],
+                  'schema': item['inputSchema']} for item in declarations_list]
+    elif profile != 'legacy':
+        raise ValueError(f'unsupported export profile {profile!r}')
     if format == "mcp":
         return [
             {

@@ -1,0 +1,94 @@
+{
+  "source_before": "1d259aa9bf5658ea6374625d34c6a9d02253e367c1dafb3b00004218832f9a1a",
+  "checks": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "output_tail": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output_tail": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "output_tail": "All checks passed!\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "output_tail": "Success: no issues found in 117 source files\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "output_tail": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/incremental-coverage.json"
+      ],
+      "exit_code": 0,
+      "output_tail": "App Server transport: 221/242 branches (91.32%)\ntransferability: 30/30 branches (100.00%)\nunified attempt recovery: 22/22 branches (100.00%)\nx402 conformance: 15/16 branches (93.75%)\nReceiptStore.reserve_capacity: 12/12 branches (100.00%)\nReceiptStore.claim_capacity_reservation: 12/12 branches (100.00%)\nReceiptStore.release_capacity_reservation: 8/8 branches (100.00%)\nReceiptStore._transition_attempt_capacity_locked: 13/14 branches (92.86%)\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/incremental-coverage.json"
+      ],
+      "exit_code": 0,
+      "output_tail": "differential environment: 14/14 branches (100.00%)\nbudget amendment: 10/10 branches (100.00%)\nincremental utility: 8/8 branches (100.00%)\nutility measurements: 6/6 branches (100.00%)\npaired utility decisions: 13/14 branches (92.86%)\nboundary verification: 15/16 branches (93.75%)\nproduction worker binding: 8/8 branches (100.00%)\nscope amendment transaction: 21/22 branches (95.45%)\ncapability eligibility: 2/2 branches (100.00%)\napplicability: 27/28 branches (96.43%)\nauthorization: 8/8 branches (100.00%)\ndurable budget reservation: 6/6 branches (100.00%)\nbudget completion: 12/12 branches (100.00%)\natomic admission: 23/24 branches (95.83%)\n"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "output_tail": "es usage\nok 1 - native command preflights, routes two model requests, hides the target, and correlates usage\n  ---\n  duration_ms: 166.893708\n  type: 'test'\n  ...\n# Subtest: schema digests ignore object key order\nok 2 - schema digests ignore object key order\n  ---\n  duration_ms: 2.230291\n  type: 'test'\n  ...\n# Subtest: legacy CLI transport remains measurable\nok 3 - legacy CLI transport remains measurable\n  ---\n  duration_ms: 150.855542\n  type: 'test'\n  ...\n# Subtest: action hints are exact bounded JSON\nok 4 - action hints are exact bounded JSON\n  ---\n  duration_ms: 0.826958\n  type: 'test'\n  ...\n# Subtest: assembly exposes only admitted schemas and removes hidden guidance\nok 5 - assembly exposes only admitted schemas and removes hidden guidance\n  ---\n  duration_ms: 0.3705\n  type: 'test'\n  ...\n# Subtest: invalid mappings and hidden baselines fail before registration\nok 6 - invalid mappings and hidden baselines fail before registration\n  ---\n  duration_ms: 0.884625\n  type: 'test'\n  ...\n# Subtest: transparent substitution still requires the exact output contract\nok 7 - transparent substitution still requires the exact output contract\n  ---\n  duration_ms: 0.440084\n  type: 'test'\n  ...\n# Subtest: read_url adapter preserves true HTTP facts and canonical shape\nok 8 - read_url adapter preserves true HTTP facts and canonical shape\n  ---\n  duration_ms: 1.320958\n  type: 'test'\n  ...\n# Subtest: campaign fixtures provide compact output without changing canonical contracts\nok 9 - campaign fixtures provide compact output without changing canonical contracts\n  ---\n  duration_ms: 1.041083\n  type: 'test'\n  ...\n# Subtest: persistent bridge multiplexes requests through one child\nok 10 - persistent bridge multiplexes requests through one child\n  ---\n  duration_ms: 136.760417\n  type: 'test'\n  ...\n# Subtest: a failed bridge request is not retried and a later request may restart\nok 11 - a failed bridge request is not retried and a later request may restart\n  ---\n  duration_ms: 161.970916\n  type: 'test'\n  ...\n# Subtest: bridge record sends only bounded trusted telemetry fields\nok 12 - bridge record sends only bounded trusted telemetry fields\n  ---\n  duration_ms: 0.505625\n  type: 'test'\n  ...\n# Subtest: legacy transport kills timeout and rejects oversized input\nok 13 - legacy transport kills timeout and rejects oversized input\n  ---\n  duration_ms: 30.695416\n  type: 'test'\n  ...\n1..13\n# tests 13\n# suites 0\n# pass 13\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 685.024792\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output_tail": ""
+    }
+  ],
+  "source_after": "1d259aa9bf5658ea6374625d34c6a9d02253e367c1dafb3b00004218832f9a1a"
+}

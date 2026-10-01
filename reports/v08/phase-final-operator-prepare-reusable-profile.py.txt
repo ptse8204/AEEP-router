@@ -1,0 +1,55 @@
+import asyncio,copy,hashlib,json
+from pathlib import Path
+from datetime import datetime,timezone
+from typing import Any
+from pydantic import create_model
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentAuthorization,AssessmentScopeAmendment,DifferentialEnvironment,content_digest
+from aeep.assessment.boundary import BoundaryProbeDefinition,prepare_model_probe
+from aeep.assessment.verification import verification_source_digest
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection,prepare_pair
+from aeep.hosts.workers import binding_from_config
+from aeep.models import StrictModel
+class SharedReview(StrictModel):
+ definition:dict[str,Any]
+async def main():
+ p=Path('reports/v08');r=Router.from_manifest('.aeep/live-review-v3/workbook-phase-final.json')
+ try:
+  s=AssessmentService(r,Path('.aeep/live-review-v3/.aeep/assessments'));repo=s.repository
+  prior=json.loads((p/'value-phase-final-profile-review-bundle.json').read_text());original=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',prior['requests'][0]['pair_definition_digest']))
+  built=json.loads((p/'reusable-phase-final-image-readable-result.json').read_text());images=built['images'];files=built['files']
+  shared=SharedReview(definition={'purpose':'Existing capable environment plus frozen training-built reusable workbook tool, identically present in both boundary-check arms','original_shared_definition_digest':original.differential.shared_definition_digest,'image_build_definition_digest':built['definition_digest'],'images':images,'reusable_files':files,'candidate_difference':'The same whole Spreadsheets package; only the candidate-absent control will enter the reusable baseline arm'})
+  shared_digest=repo.put('shared_environment_definition',content_digest(shared),shared)
+  inventory={**original.differential.control_inventory,'common_profile':shared_digest,'reusable_tool':content_digest(files)}
+  diff=original.differential.model_copy(update={'shared_definition_digest':shared_digest,'control_inventory':inventory,'treatment_inventory':{**inventory,**original.differential.candidate_inventory}})
+  raw=original.model_dump(mode='json');raw.update(schema_version='assessment.worker-pair-inspection.v3',differential=diff.model_dump(mode='json'))
+  for role in ('control','treatment'):
+   spec=raw[role];spec['id']=f'reusable-phase-final.{role}';config=spec['config'];config['adapter_id']=f'codex-app-server:reusable-phase-final-{role}'
+   config['instructions']='A reusable training-built Python tool is available at /opt/dependencies/reusable/clean_workbook.py, with usage in /opt/dependencies/reusable/USAGE.txt. You may use or inspect it when helpful. '+config['instructions']
+   worker=config['managed_worker'];worker.update(worker_id=f'reusable-phase-final-{role}',image=images[role],reviewed_files={**(worker.get('reviewed_files') or {}),**files})
+  definition=WorkerPairInspection.model_validate(raw);sources=[];extra={shared_digest:shared.model_dump(mode='json')};reviews={}
+  for role in ('control','treatment'):
+   spec=getattr(definition,role);worker=binding_from_config(spec.managed_host_config().managed_worker);assert worker
+   document=repo.put('worker_binding',worker.digest(),worker);extra[document]=worker.model_dump(mode='json')
+   old=prior['boundary_reviews'][role]
+   policy=copy.deepcopy(repo.get('effective_policy_definition',old['effective_policy_digest']));policy['definition']['image']=worker.image
+   policy_digest=repo.put('effective_policy_definition',content_digest(policy),SharedReview(**policy));extra[policy_digest]=policy
+   enforcement=copy.deepcopy(repo.get('enforcement_definition',old['enforcement_definition_digest']))
+   enforcement['definition'].update(worker_digest=worker.digest(),effective_policy_digest=policy_digest,immutable_image=worker.image,shared_layer_lineage={'original_enforcement_digest':old['enforcement_definition_digest'],'image_build_definition_digest':built['definition_digest'],'each_image_extends_its_exact_existing_base':True,'only_added_files':files},candidate_difference='Existing complete Spreadsheets package, aliases and exclusive dependencies; both inspection arms also contain identical unchanged generated reusable code. Only control enters the reusable experimental arm.')
+   enforcement_digest=repo.put('enforcement_definition',content_digest(enforcement),SharedReview(**enforcement));extra[enforcement_digest]=enforcement
+   effective=diff.control_inventory if role=='control' else diff.treatment_inventory
+   inv=repo.put('reviewed_inventory',content_digest(effective),create_model('ReviewedInventory',__base__=StrictModel,**{key:(str,...) for key in effective})(**effective));extra[inv]=effective
+   reviews[role]={**old,'worker_digest':worker.digest(),'worker_document_digest':document,'effective_policy_digest':policy_digest,'enforcement_definition_digest':enforcement_digest,'effective_inventory':effective,'reviewed_inventory_digest':inv}
+   sources.append(prepare_model_probe(s,source_plan_id='plan_032f55bc64cc4c168501898224e8c0f0',definition=BoundaryProbeDefinition(name='reusable_profile_identity',executor=spec,expected={})))
+  result=prepare_pair(s,*(q.plan_id for q in sources),definition);requests=result['requests'];digests={x for q in requests for x in [*q['definition_digests'],q['subject_digest']]}
+  definitions={d:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(d,)).fetchone()[0]) for d in digests};definitions.update(extra)
+  root=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(root),subject_digests=[requests[0]['subject_digest']],recipe_digests=[requests[0]['recipe_digest']],environment_digests=sorted({q['environment_digest'] for q in requests}),reviewed_digests=sorted(definitions))
+  bundle={'prepared_at':datetime.now(timezone.utc).isoformat(),'source_digest':verification_source_digest(Path.cwd()),'operator_authority':'2026-09-27 standing continuation, scope and exact-review delegation','purpose':'Verify exact reusable baseline worker policy, identity and immutable generated source; command probes only, no task/model turn','requests':requests,'definitions':definitions,'amendment':amendment.model_dump(mode='json'),'boundary_reviews':reviews,'maximum_reserved_seconds':480,'maximum_model_turns':0}
+  path=p/'reusable-phase-final-profile-review-bundle.json'
+  with path.open('x') as f:json.dump(bundle,f,indent=2);f.write('\n')
+  repo.approve_bundle(amendment,definitions)
+  with (p/'reusable-phase-final-profile-approval.json').open('x') as f:json.dump({'authority':bundle['operator_authority'],'bundle_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'request_ids':[q['plan_id'] for q in requests],'scope_applied':True},f,indent=2);f.write('\n')
+  print([q['plan_id'] for q in requests])
+ finally:await r.close()
+asyncio.run(main())

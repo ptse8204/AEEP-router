@@ -1,0 +1,27 @@
+{
+  "executed_command": [
+    "python3",
+    "reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-successor-inert.py",
+    "48b65c8b1c3c2f63e3c53d6126d1c6f1f48514acf6ccc2fd72974ee056a156c4"
+  ],
+  "environment_override": {
+    "PYTHONPATH": "src"
+  },
+  "driver_sha256": "0dd8c0a36ea92648ba7053c6709c6ed167d610a7e2e4c260f0e1d3bd32264669",
+  "review_sha256": "48b65c8b1c3c2f63e3c53d6126d1c6f1f48514acf6ccc2fd72974ee056a156c4",
+  "actual_argv": [
+    "/opt/codex/codex",
+    "app-server",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.command=\"/usr/local/bin/python3\"",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.args=[\"/opt/aeep/linux-mcp-server.py\"]",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.enabled=true"
+  ],
+  "result_sha256": "ef8db5050546e0b816996955cbe6e5a926cc0d3c8478a6a9ff73e75c36813f91",
+  "cleanup_confirmed": true,
+  "source_unchanged": true,
+  "failure": "AttributeError during config_read local validation; exact nullable field unavailable because safe observer did not record frame/type. No thread/start executed. Startup accepted, declaration support untested.",
+  "unchanged_retry_allowed": false
+}

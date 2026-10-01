@@ -8,7 +8,7 @@ from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 from typing import Any, Protocol
 
-from .errors import ConfigurationError
+from .errors import ConfigurationError, ValidationExecutionError
 from .models import (
     TrustLevel,
     ValidationKind,
@@ -191,6 +191,13 @@ def validator_from_spec(
             after_path=str(config.get("after_path", "state")),
         )
     name = config.get("name")
+    if name == 'aeep.workbook.native.v1':
+        if spec.kind != ValidationKind.CALLBACK or set(config) != {'name', 'implementation_digest'}:
+            raise ConfigurationError('native workbook validator requires an exact callback declaration')
+        from .assessment.workbook_native import implementation_digest, validate
+        if config['implementation_digest'] != implementation_digest():
+            raise ConfigurationError('native workbook validator implementation changed; renew executor review')
+        return CallbackValidator(validate)  # Reserved built-in; caller callbacks cannot replace it.
     callback = callbacks.get(str(name)) if name is not None else None
     if callback is None:
         raise ConfigurationError(f"{spec.kind.value} validator requires a registered callback")
@@ -206,12 +213,15 @@ async def run_validators(
     specs: list[ValidationSpec],
     context: ValidationContext,
     callbacks: Mapping[str, ValidatorCallback],
+    *, raise_errors: bool = False,
 ) -> list[ValidationResult]:
     results: list[ValidationResult] = []
     for spec in specs:
         try:
             results.append(await validator_from_spec(spec, callbacks).validate(context))
         except Exception as exc:
+            if raise_errors:
+                raise ValidationExecutionError("assessment grader could not execute") from exc
             results.append(
                 ValidationResult(
                     kind=spec.kind,

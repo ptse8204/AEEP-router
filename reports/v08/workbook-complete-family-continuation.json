@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-09-28T01:30:15.002422+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "authority": "2026-09-27 delegated exact review and execution authority",
+  "completed_workbook": {
+    "assessment_id": "assessment_094e65ee0e42440989c4adfa51378ef7",
+    "report_id": "fit_d869167c012b4ac3a157872281fb78f7",
+    "qualification_passed": true,
+    "distinct_holdout_cases": 105,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "comparison_outcome": "insufficient_evidence; qualification alone does not establish benefit"
+  },
+  "failed_csv": {
+    "assessment_id": "assessment_3fc44cca3a454cbea926e296fb5a2462",
+    "report_id": "fit_00db842311b84a62928b1392cfafafd1",
+    "classification": "Execution failure, not candidate incorrectness. Subsequent harmless schema probe confirmed native invalid_json_schema rejection mentioning oneOf.",
+    "replayed": false
+  },
+  "diagnostics": [
+    "csv-schema-diagnostic-review.json",
+    "csv-schema-diagnostic-result.json",
+    "csv-schema-local-validation-review.json",
+    "csv-schema-local-validation-result.json"
+  ],
+  "correction": "New internal route IDs omit native outputSchema and add an obligatory local schema validator containing the original unchanged schema. JSON parsing, task graders and thresholds remain unchanged. Both primary arms receive identical transport changes.",
+  "official_schema_reference": "https://developers.openai.com/api/docs/guides/structured-outputs",
+  "validation": "Five known-valid/invalid local-schema fixtures per family passed; contained harmless native JSON request succeeded and passed the original schema. See each new execution review.",
+  "active_comparison": {
+    "plan_id": "plan_b17c0a67fb224546ab4b1de9995ca88b",
+    "assessment_id": "assessment_d12f50a1f3294c779a0bc7b9255e41ad",
+    "supervisor": "/tmp/aeep-run-reviewed-workbook-value.py",
+    "state": "complete",
+    "report_id": "fit_5ea659a4db38486e89705c6f771f7819",
+    "outcome": "no_measured_benefit",
+    "command_result": "workbook-four-arm-value-recovery-command-result.json"
+  },
+  "waiting_qualification_supervisor": "/tmp/aeep-run-local-schema-qualifications.py",
+  "queue_scripts": {
+    "/tmp/aeep-run-reviewed-workbook-value.py": "b1ff8bc7be16e3dd2125ae010ec88aa05e2ad6b8e5833fcd3a8bff2831990931",
+    "/tmp/aeep-run-local-schema-qualifications.py": "fbce8dc585a704b58667db1418fa507314af6c92ac9fa77d683488c6eb4bcfe6"
+  },
+  "pending": "After new family qualifications, prepare matching four-arm local-schema mappings and fresh training-only reusable construction before value campaigns. Old generated artifacts are historical unless their exact training inputs are part of the reviewed new training set. Never reuse old family value compiler unchanged.",
+  "source_changed": false,
+  "budget_reset": false,
+  "release_ready": false,
+  "previous_record": "schema-local-recovery-continuation.json",
+  "active_qualification": {
+    "family": "csv",
+    "plan_id": "plan_50c824fa34b54e179aef83b2da040e4c",
+    "assessment_id": "assessment_bea5a77721fd4bee9661c7f1d536d401",
+    "supervisor": "/tmp/aeep-run-local-schema-qualifications.py"
+  },
+  "source_bound_verification": "workbook-recovery-per-manifest-verification.json",
+  "verification_note": "Each completed stage reconstructs with its matching manifest, verified host boundaries and accounting. Earlier combined-manifest diagnostic retained; qualification routes were absent from the value manifest. All-family gates remain false."
+}

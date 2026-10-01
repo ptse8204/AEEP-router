@@ -1,0 +1,90 @@
+{
+  "definition_sha256": "485a486ff4bdb54177c94a60c17c9c413b896c414dae70dca7905d23552b9719",
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "phases": [
+    {
+      "operation": "build",
+      "response": {
+        "schema_version": "aeep.task-outcome.v1",
+        "ok": false,
+        "status": "failed",
+        "output": "{\"operation\": \"build\", \"updated\": \"index.html\"}",
+        "decision": {
+          "decision_id": "dec_5f28716cd06f49ff9b6e307f0c8f1ae7",
+          "action_id": "act_8b317ce3b71b4f7bb66e6b9a8a68ab21",
+          "capability": "local.website.fixed@1",
+          "selected": "local.website.fixed",
+          "disposition": "BYPASS_ROUTER",
+          "bypass_reason": "only_one_feasible_route",
+          "reason": "only one feasible route",
+          "alternatives": [],
+          "rejected": 0
+        },
+        "summary": "The external outcome is unresolved. Reconcile it before retrying.",
+        "approval_ceiling": "write",
+        "task_scope_digest": "e52e3d39bdee17807c8c7a3aec92eb5304576605a0a00fb4e4da08407eb67f34",
+        "task_activation_digest": "2e756e42859bfe465149883cf7a0bdad104b83dbb87af0644444f65ce33d95fd",
+        "operating_lifecycle": "session-scoped",
+        "changes_verified": null,
+        "permission_scope": "operator ceiling; backend scope requires separate evidence",
+        "receipts": [
+          {
+            "receipt_id": "rcpt_e26d1d9df0aa47b485b6f52ed7fd259c",
+            "executor_id": "local.website.fixed",
+            "status": "success",
+            "approval_id": "approval_3968b38b4b514699836a2c593fb310ad",
+            "schema_valid": false,
+            "task_valid": null,
+            "checks": [
+              {
+                "kind": "schema",
+                "valid": false,
+                "quality_score": 0.0,
+                "detail": "",
+                "trust": "observed"
+              }
+            ],
+            "recorded_resources": {
+              "monetary_usd": 0.0,
+              "latency_ms": 288.3779581170529,
+              "cpu_ms": 130.054085,
+              "memory_mb_seconds": 8.399239312358986,
+              "peak_memory_mb": 123.25,
+              "gpu_ms": 0.0,
+              "network_bytes": 0,
+              "context_tokens": 12,
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 0,
+              "reasoning_output_tokens": 0,
+              "subscription_units": 0.0
+            },
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [],
+              "model_usage": [],
+              "tool_footprint": null
+            },
+            "enforcement_backend_digest": "444e849041390c3dc0e0a37c1340d57255dfa83a4c87cb5e9c9c7a4dccf43c47"
+          }
+        ],
+        "verification_limits": [
+          "Non-schema task verification is incomplete or unavailable.",
+          "Preservation, isolation and comparative savings are not established by execution success."
+        ],
+        "recovery_state": "required"
+      }
+    }
+  ],
+  "classification": "Offline synthetic local lifecycle; no live agent, value, arbitrary website readiness, or deployment evidence",
+  "assessment_ledger": "Separate production task allowance; no assessment operations",
+  "model_tokens": "Unknown for authoring collaboration; no model invocation in lifecycle",
+  "activation_id": "task_b27c3178969240758dc34f33c6fb3701",
+  "complete": false,
+  "failure_type": "AssertionError",
+  "failure": ""
+}

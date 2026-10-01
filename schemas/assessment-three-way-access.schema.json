@@ -1,0 +1,67 @@
+{
+  "additionalProperties": false,
+  "description": "Exact expected inventories; observed conformance must independently match.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.three-way-access.v1",
+      "default": "assessment.three-way-access.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "normal_inventory": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Normal Inventory",
+      "type": "object"
+    },
+    "discovery_inventory": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Discovery Inventory",
+      "type": "object"
+    },
+    "external_candidate_inventory": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "External Candidate Inventory",
+      "type": "object"
+    },
+    "worker_digests": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxProperties": 3,
+      "minProperties": 3,
+      "title": "Worker Digests",
+      "type": "object"
+    },
+    "configuration_digests": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxProperties": 3,
+      "minProperties": 3,
+      "title": "Configuration Digests",
+      "type": "object"
+    }
+  },
+  "required": [
+    "normal_inventory",
+    "discovery_inventory",
+    "external_candidate_inventory",
+    "worker_digests",
+    "configuration_digests"
+  ],
+  "title": "ThreeWayAccessDefinition",
+  "type": "object"
+}

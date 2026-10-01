@@ -1,0 +1,31 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "files": {
+    "reports/v08/original-three-way-profile/immutable-lifecycle-mapped/Dockerfile": "a1146fd07dbd65ddffbf61d5cc12fe34740d863b16583266b357a40786c76e2d",
+    "reports/v08/original-three-way-profile/immutable-lifecycle-mapped/requirements.toml": "c79a2de26c538d43e7d9c202e15b1155e8f8f05c237b068fbe7fa1419f28462c",
+    "reports/v08/original-three-way-profile/immutable-lifecycle-mapped/linux-mcp-server.py": "d7ec9402a11b78a8abcb71156b55727ac262c08ae90c2bc606bc7519f3a81473"
+  },
+  "bounds": {
+    "setup_operations": 1,
+    "setup_seconds": 90,
+    "probe_operations": 1,
+    "probe_seconds": 60,
+    "experimental_model_turns": 0,
+    "cash_usd": 0
+  },
+  "existing_methods": [
+    "initialize",
+    "initialized",
+    "command/exec",
+    "command/exec/write"
+  ],
+  "mapping": "Unique NStgid and main-thread NSpid namespace suffix under owned AppServer descendants; verified outer SID/PGID+starttime; pidfd held before NUL; missing/ambiguous identity fails closed.",
+  "cases": [
+    "postexec EAGAIN fork/posix_spawn, private path+held FD alias",
+    "existing command timeout child death before container cleanup",
+    "AppServer stdin EOF child death before container cleanup"
+  ],
+  "no_product_source_change": true,
+  "prior_failures_retained": true,
+  "execution_authorized": false
+}

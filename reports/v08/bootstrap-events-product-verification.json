@@ -1,0 +1,32 @@
+{
+  "schema_version": "assessment.verification.v1",
+  "offline_checks_passed": false,
+  "source_digest": "b3bf0b79c8e3672a575814585c310872e66da388068da67140535a9c85c69f61",
+  "host_protocol_checks_passed": false,
+  "live_codex_verified": false,
+  "complete_economic_accounting": false,
+  "untrusted_plugin_containment": false,
+  "host_inventory_and_invocation": false,
+  "release_ready": false,
+  "remaining_gates": [
+    "offline assessment regression checks",
+    "real-container isolation, cancellation and crash-recovery verification",
+    "live verification of Codex inventory and effective tool isolation",
+    "authorized live Codex assessment-to-use campaigns and task calls for all four families",
+    "controlled-fixture admission, revocation and stale-decision rejection checks",
+    "final compatibility, coverage, proof and package-build release checks",
+    "source-bound complete assessment operation accounting",
+    "source-bound qualification evidence across all four families",
+    "source-bound marginal_value evidence across all four families",
+    "source-bound native_catalog evidence across all four families"
+  ],
+  "failure_detail": "amily=\"csv\", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id=\"grant\", environment=environment)\n        for digest in plan.definition_digests:\n            service.repository.review(digest)\n        service.repository.grant(AssessmentAuthorization(authorization_id=\"grant\", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_model_turns=200, max_elapsed_seconds=20000), automatic_admission=True, expires_at=utc_now() + timedelta(hours=1)))\n    \n        async def execute(self, context):\n            await asyncio.sleep(0.04)\n            return RawExecution(status=ExecutionStatus.SUCCESS, output=reference_csv(**context.request.input), metadata={\"host_runtime_digest\": await self.resolve_identity(context.config)})\n    \n        monkeypatch.setattr(CodexAppServerAdapter, \"execute\", execute)\n        try:\n            # This is an offline identity fixture, not worker-conformance evidence.\n            with monkeypatch.context() as campaign_patch:\n                campaign_patch.setattr(\"aeep.assessment.boundary.require_managed_boundaries\", lambda *_args: None)\n                report = await service.run(service.enqueue(plan.plan_id))\n>           assert report.outcome == \"useful_within_scope\", report.explanations\nE           AssertionError: ['Correctness counts distinct held-out cases; repetitions measure variability.', 'Latency includes routing and grading...; admission uses wall time under router-fresh. Conditions are never pooled.', 'assessment_blocked_or_budget_exhausted']\nE           assert 'insufficient_evidence' == 'useful_within_scope'\nE             \nE             - useful_within_scope\nE             + insufficient_evidence\n\ntests/test_v08_identity.py:140: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_v08_identity.py::test_host_assessment_admission_history_and_account_drift\nControlled fixture validation failed: controlled fixture belongs to another source revision",
+  "live_evidence": {},
+  "compatibility_checks_passed": false,
+  "demonstrated_savings": false,
+  "controlled_fixture_verified": false,
+  "controlled_fixture_evidence": {},
+  "adapter_production_support": {},
+  "production_support_verified": false,
+  "production_ready": false
+}

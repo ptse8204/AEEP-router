@@ -1,0 +1,86 @@
+{
+  "source_before": "5b00657f6c7756aa9a2cf284a3730c81b1df1bcfc9001a266ca40ec2d4dacba9",
+  "source_after": "34f6819bd49669fa51402a53ad4e30364760f00e553a6be8707952a9cac3d6d0",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09075949992984533,
+      "log": "reports/v08/continuation-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6123986250022426,
+      "log": "reports/v08/continuation-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.07886008301284164,
+      "log": "reports/v08/continuation-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.35222320805769414,
+      "log": "reports/v08/continuation-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13295612495858222,
+      "log": "reports/v08/continuation-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 270.15288970805705,
+      "log": "reports/v08/continuation-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "seconds": 353.15519879211206,
+      "log": "reports/v08/continuation-check-06.txt"
+    }
+  ]
+}

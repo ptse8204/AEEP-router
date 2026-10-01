@@ -26,6 +26,6 @@ AEEP never reads, copies, returns, or stores reusable authentication material.
 ## Consequences
 
 Managed routes need explicit local adapter configuration and a second approval
-intersection. AEEP may execute one bounded host turn and record sanitized usage,
-but it neither plans the action nor owns login state. Older host integrations
-continue unchanged.
+intersection. AEEP may execute one bounded host turn and record sanitized usage.
+The host retains planning and login state. Older host integrations continue
+unchanged.

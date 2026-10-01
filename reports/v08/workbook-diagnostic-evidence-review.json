@@ -1,0 +1,42 @@
+{
+  "schema_version": "assessment.research.workbook-diagnostics.v1",
+  "recorded_at": "2026-09-26T09:22:45.528966+00:00",
+  "plan_id": "plan_9980d8b5194748cf98d20c5b81ea747b",
+  "database_read_only": true,
+  "trials": [
+    {
+      "trial_id": "trial_plan_9980d8b5194748cf98d20c5b81ea747b_recipe_generation_2d7b8f9d339f403f8349d4b14c15db2a-qualification-2_workbook-recovery.treatment_fresh-worker_0",
+      "status": "success",
+      "ok": true,
+      "valid": false,
+      "correctness_failed": true,
+      "failure_category": "task_failure",
+      "failure_stage": "grading",
+      "case_validation": [
+        {
+          "kind": "callback",
+          "valid": false,
+          "quality_score": 0.0,
+          "detail": "",
+          "trust": "verified"
+        }
+      ]
+    }
+  ],
+  "files": {
+    "integrations/assessment-runtime/workbook_program.py": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18",
+    "integrations/assessment-runtime/workbook_grader.py": "3efb29311118cba7b1160c4c745670e946ce2a58a642440f422eeef24c2aa087",
+    "src/aeep/assessment/extensions.py": "165df0f75837bb03a81ee6ec42f35d36dfc8758a6517a782052e37efb4187223",
+    "src/aeep/benchmarking.py": "f354984b119994667762e12f4a9b0ea4b18a07f23ef1559a3c9f018759ad4bf2"
+  },
+  "finding": "The contained grader returns only booleans; benchmark persistence strips free-text details. Saved evidence identifies grading failure, not the workbook cell, formula, cache or structure that caused it. Task artifacts were not retained by default.",
+  "inferences_rejected": [
+    "Cannot attribute the failure to a specific Spreadsheets component",
+    "Cannot rerun the historical result from absent output bytes",
+    "Cannot change the frozen grader to obtain a passing result"
+  ],
+  "next_action": "If pursuing a corrected workflow, review bounded non-content reason codes or named checks before a new diagnostic experiment; retain only reviewed codes, not workbook values. Use fresh cases and charge the existing grant. Historical result remains unsuitable.",
+  "model_calls": 0,
+  "historical_result_changed": false,
+  "release_evidence": false
+}

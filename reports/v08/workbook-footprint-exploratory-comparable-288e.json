@@ -1,0 +1,121 @@
+{
+  "schema_version": "aeep.workbook-footprint-exploratory.v1",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "purpose": "Two synthetic workbook sizes, one fresh native and AEEP sample each; no acceptance or benefit verdict",
+  "comparability": "Both arms use the same native sandbox, bundled Python reference, one reserved built-in validator and one independent recipe grader. The baseline runs both checks after command execution; AEEP runs the required validator inside dispatch and the independent grader afterward. AEEP additionally performs activation, receipt checks and cleanup. Host MCP and model context are excluded.",
+  "measurement_limits": [
+    "One repetition per size; no significance or cold-cache control.",
+    "10ms process sampling can miss short-lived children; RSS sums may double-count shared pages.",
+    "Installed Codex/Python and host are shared; this is not incremental installation or whole-host cost.",
+    "Only successful reference output and normal cleanup; failure/recovery cost remains separate."
+  ],
+  "samples": [
+    {
+      "arm": "native",
+      "case": "small",
+      "input_json_bytes": 7194,
+      "input_xlsx_bytes": 4948,
+      "output_json_bytes": 7315,
+      "output_xlsx_bytes": 5471,
+      "activation_ms": null,
+      "dispatch_ms": 188.64804203622043,
+      "post_dispatch_required_check_ms": 2.630916889756918,
+      "post_dispatch_independent_grader_ms": 0.19516702741384506,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": null,
+      "schema_bytes": 0,
+      "instructions_bytes": 0,
+      "project_host_config_bytes": 0,
+      "evidence_bytes_after_uninstall": 0,
+      "uninstall_ms": null,
+      "process_wall_ms": 636.2984171137214,
+      "sampled_process_tree": {
+        "cpu_ms": 567.683116,
+        "peak_memory_mb": 380.796875,
+        "memory_mb_seconds": 114.9050217123804
+      }
+    },
+    {
+      "arm": "aeep",
+      "case": "small",
+      "input_json_bytes": 7194,
+      "input_xlsx_bytes": 4948,
+      "output_json_bytes": 7315,
+      "output_xlsx_bytes": 5471,
+      "activation_ms": 104.56499992869794,
+      "dispatch_ms": 212.22383296117187,
+      "post_dispatch_required_check_ms": null,
+      "post_dispatch_independent_grader_ms": 0.2923749852925539,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": true,
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "project_host_config_bytes": 480,
+      "evidence_bytes_after_uninstall": 1400616,
+      "uninstall_ms": 1.0423751082271338,
+      "process_wall_ms": 780.7724999729544,
+      "sampled_process_tree": {
+        "cpu_ms": 734.3807949999999,
+        "peak_memory_mb": 386.453125,
+        "memory_mb_seconds": 161.61345280351088
+      }
+    },
+    {
+      "arm": "native",
+      "case": "larger",
+      "input_json_bytes": 8324,
+      "input_xlsx_bytes": 5792,
+      "output_json_bytes": 8719,
+      "output_xlsx_bytes": 6525,
+      "activation_ms": null,
+      "dispatch_ms": 189.03787503950298,
+      "post_dispatch_required_check_ms": 3.0333749018609524,
+      "post_dispatch_independent_grader_ms": 0.29866606928408146,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": null,
+      "schema_bytes": 0,
+      "instructions_bytes": 0,
+      "project_host_config_bytes": 0,
+      "evidence_bytes_after_uninstall": 0,
+      "uninstall_ms": null,
+      "process_wall_ms": 651.06291603297,
+      "sampled_process_tree": {
+        "cpu_ms": 569.6822179999999,
+        "peak_memory_mb": 379.578125,
+        "memory_mb_seconds": 117.15681712621881
+      }
+    },
+    {
+      "arm": "aeep",
+      "case": "larger",
+      "input_json_bytes": 8324,
+      "input_xlsx_bytes": 5792,
+      "output_json_bytes": 8719,
+      "output_xlsx_bytes": 6525,
+      "activation_ms": 104.17550010606647,
+      "dispatch_ms": 214.86270893365145,
+      "post_dispatch_required_check_ms": null,
+      "post_dispatch_independent_grader_ms": 0.3403332084417343,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": true,
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "project_host_config_bytes": 480,
+      "evidence_bytes_after_uninstall": 1400616,
+      "uninstall_ms": 0.961249927058816,
+      "process_wall_ms": 784.6089580561966,
+      "sampled_process_tree": {
+        "cpu_ms": 729.405576,
+        "peak_memory_mb": 386.609375,
+        "memory_mb_seconds": 160.10627024998394
+      }
+    }
+  ],
+  "model_calls": 0,
+  "downloads": 0,
+  "release_ready": false
+}

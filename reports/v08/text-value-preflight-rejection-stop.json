@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-09-28T23:20:14.755728+00:00",
+  "authority": "Standing recoverable failure authority; assessment policy requires stop after environment/configuration failure",
+  "assessment_id": "assessment_7f144acd1ff8429fbbabf5abe3f0f35a",
+  "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+  "receipt_id": "rcpt_bf4d7d7462964fa0b6805b2edb053e9f",
+  "reason": "Managed-host execution was rejected without runtime identity or usage; canonical execution journal has only execution.started and execution.failed. App Server REJECTED branches are preflight configuration/probe/model/identity checks. Benchmark recorded indeterminate and kept scheduling trials, so stop via existing cancellation API pending root-cause review. No retry or replay.",
+  "source_change": false,
+  "worker_evidence": ".aeep/live-review-v3/.aeep/assessments/plan_26218022d39942e8903a997b7cda1681/attempts/worker_d4eef072ee97455aa1253d9daf486d1e.sqlite3",
+  "discovery": "Heartbeat observed 569 complete trials with 568 valid successes; rejected reusable-control trial occurred at 23:12:59 UTC.",
+  "persisted_job_after_stop": {
+    "id": "assessment_7f144acd1ff8429fbbabf5abe3f0f35a",
+    "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+    "state": "complete",
+    "report_id": "fit_2345dde049da4a8eb3769f439a60d929",
+    "started_at": "2026-09-28T22:07:02.482535+00:00",
+    "error_code": "assessment_blocked_or_budget_exhausted"
+  },
+  "search_started": false,
+  "queue_exit_code": 1,
+  "command_result": "text-four-arm-value-schema-local-command-result.json",
+  "report": "text-four-arm-value-schema-local-live-report.json",
+  "defect": "ManagedHostExecutor returns probe rejection without the bounded host_failure_code consumed by BenchmarkRunner. Receipt persistence deliberately redacts free-form diagnostics; the runner thus labels rejection indeterminate and AssessmentService does not stop. Apply existing host_request_rejected code at the shared managed-host executor boundary, including adapter-returned rejection.",
+  "repair_authority": "Documented concrete defect exception to frozen source; September 27 standing repair authority. Historical evidence retains old source; current-source release checks and new live definitions must be renewed. No started plan replay."
+}

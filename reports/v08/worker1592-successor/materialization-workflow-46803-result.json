@@ -1,0 +1,66 @@
+{
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "request_id": "recipe_generation_dfd3cbc6989d4382bfad1e93010aff41",
+  "model_turns": 0,
+  "prior_cause_remains_unknown": true,
+  "no_admission": true,
+  "replay_allowed": false,
+  "materialization_passed": true,
+  "case_set_digest": "27d454e3609a97ec8045a1111eed645d28ef1cc96e537285d3c723158f26647b",
+  "case_count": 141,
+  "split_counts": {
+    "qualification": 8,
+    "training": 28,
+    "holdout": 105
+  },
+  "distinct_screening_count": 8,
+  "distinct_case_count": 141,
+  "diagnostics": [
+    {
+      "stage": "parent_output_parser",
+      "declared_type": "json",
+      "encoded_bytes": 1165734,
+      "parsed": true
+    },
+    {
+      "stage": "parent_command_transport",
+      "declared_output_limit": 32065536,
+      "declared_output_type": "json",
+      "status": "success",
+      "exit_code": 0,
+      "known_error_type": "unclassified",
+      "classification": "unclassified",
+      "json_position": null,
+      "stdout_bytes": 1165734,
+      "stderr_bytes": 0,
+      "stdout_truncated": false,
+      "stderr_truncated": false,
+      "child": {
+        "known_error_type": "unclassified",
+        "classification": "unclassified",
+        "json_position": null,
+        "status": "success",
+        "stdout_bytes": 1173120,
+        "stderr_bytes": 0,
+        "stdout_truncated": false,
+        "stderr_truncated": false
+      }
+    },
+    {
+      "stage": "contained_result",
+      "status": "success",
+      "exit_code": 0,
+      "known_error_type": "unclassified",
+      "classification": "unclassified",
+      "json_position": null
+    }
+  ],
+  "elapsed_seconds": 1.6606490828562528,
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8607,
+    "model_turns": 2533,
+    "elapsed_seconds": 74503.69011194538,
+    "cash_usd": "0.0"
+  }
+}

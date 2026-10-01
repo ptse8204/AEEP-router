@@ -1,0 +1,15 @@
+{
+  "stage": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-project-tool-approval-stage-8u1e9yqr",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "hashes": {
+    "src/aeep/hosts/codex_project.py": "eeed1ba4498cb3d56d8f5078107d74a9079aebbafae272a0c19957874e64c277",
+    "tests/test_v08_task_lifecycle.py": "e0a93d56e30662a08e567e9705bd18844df489c93c3f7c193399533a2955bfe0"
+  },
+  "patch_sha256": "3989f3cd533e29244c4e3e57ddf30e73fa1b24ef5ef71ee8731666f1e9bdb157",
+  "narrow_tests": "Earlier4cases passed; unrelated no-tools rejection and its test removed after parent compatibility review. Retained3cases READ/WRITE exact exposure/useredit preservation +ruleedit conflict previously passed. No rerun during live window.",
+  "lifecycle_analysis": "AEEPToolService(task_scope=scope_digest) rebinds same existing router scope only; no task_activation supplied, so require_activation/install_binding recursion is absent; list_tools uses existing declarations/fingerprint filter. No calls/assessments launched. Persisted TaskCodexBinding.block contains all owned pertool rules for unchanged entry_state/remove_binding conflict handling.",
+  "no_root_edits": true,
+  "not_applied": true,
+  "full_checks_required_after_apply": true,
+  "compatibility": "Empty task declarations generate zero approval rules and retain prior SDK activation behavior"
+}

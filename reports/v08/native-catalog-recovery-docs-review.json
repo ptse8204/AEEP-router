@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-09-27T13:19:18.487389+00:00",
+  "installed_worker_version": "0.154.0",
+  "latest_documented_cli_version": "0.157.1",
+  "sources": [
+    "https://learn.chatgpt.com/docs/app-server",
+    "https://learn.chatgpt.com/docs/developer-commands",
+    "https://learn.chatgpt.com/docs/changelog",
+    "https://developers.openai.com/blog/eval-skills"
+  ],
+  "observations": [
+    "App Server documentation describes skill listing, changes and explicit skill input; it does not document a complete per-trial skill exposure/retrieval/non-use event contract.",
+    "The documented debug prompt-input command renders a model-visible prompt snapshot. Pinned source constructs a separate ephemeral prompt via build_prompt_input; this is not an observation of the active App Server trial.",
+    "CLI 0.156 introduced an activity dashboard. The cited changelog does not establish complete per-trial candidate discovery evidence or negative non-use observations.",
+    "The official skill-eval guide describes tracing commands and artifacts; it does not supply the missing exact catalog-event completeness contract."
+  ],
+  "pinned_prompt_debug_source_sha256": "f0e8acde897400a65fd7904b15cf54088b0981a44126b05cb2a95b5700b2ab6b",
+  "inference": "These references do not establish that upgrading solves the known catalog measurement gap. Keep the ongoing reviewed version frozen and report unavailable facts as unknown. A later version needs independent verification before changed worker plans.",
+  "actions": "Read-only documentation/source inspection; no host upgrade, credential access, task execution or change to the active campaign."
+}

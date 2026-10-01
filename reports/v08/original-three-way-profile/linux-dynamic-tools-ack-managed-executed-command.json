@@ -1,0 +1,34 @@
+{
+  "command": [
+    "python3",
+    "reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-managed-inert.py",
+    "f11f0c2e4ef74c2f6eda9ab3437417636ef6d833bcf0af9040be4c92fa3f2189"
+  ],
+  "environment_override": {
+    "PYTHONPATH": "src"
+  },
+  "driver_sha256": "84da5081b1da7a7efbb7d8d7e13e6091af60d11672c7a9c684b4b46de030d136",
+  "authorized_review_sha256": "f11f0c2e4ef74c2f6eda9ab3437417636ef6d833bcf0af9040be4c92fa3f2189",
+  "result_sha256": "66942c008213e264e3b68cba9a5556fb2e54b3d6257c75dc61899dc50c8fa32d",
+  "log_sha256": "53d04dbf504be88cdc1b0e613177c8373d34a42c8bd894d8f68faa1ece7c65ab",
+  "argv": [
+    "/opt/codex/codex",
+    "app-server",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.command=\"/usr/local/bin/python3\"",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.args=[\"/opt/aeep/linux-mcp-server.py\"]",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.enabled=true"
+  ],
+  "accounting_delta": {
+    "operations": 1,
+    "model_turns": 0,
+    "elapsed_seconds": 2.7077326658181846,
+    "cash_usd": "0.0"
+  },
+  "cleanup_confirmed": true,
+  "source_unchanged": true,
+  "classification": "Declaration request acceptance on exact noauth Linux0.159.2 worker only; model visibility/runtime calls/conformance unproven",
+  "replay_allowed": false
+}

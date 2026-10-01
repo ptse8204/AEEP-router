@@ -1,0 +1,60 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_completed_worker_exit_preserves_admission_when_reading_report ______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-552/test_completed_worker_exit_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10aea2650>
+
+    async def test_completed_worker_exit_preserves_admission_when_reading_report(tmp_path, monkeypatch):
+        import asyncio
+        import os
+        import sys
+        from pathlib import Path
+    
+        from test_v08_assessment import setup_assessment
+    
+        from aeep.assessment import recovery
+        from aeep.assessment.service import AssessmentService
+        from aeep.mcp.server import AEEPToolService
+        from aeep.models import ActionRequest
+        from aeep.router import Router
+    
+        source, assessment, plan, _grant = setup_assessment(tmp_path)
+        manifest = source.manifest.model_copy(deep=True)
+        manifest.database = str(tmp_path / "worker-exit.db")
+        manifest_file = tmp_path / "aeep.json"
+        manifest_file.write_text(manifest.model_dump_json())
+        identity = assessment.enqueue(plan.plan_id)
+        with sqlite3.connect(manifest.database) as destination:
+            source.store._connection.backup(destination)
+        await source.close()
+        root = Path(__file__).resolve().parents[1]
+        process = await asyncio.create_subprocess_exec(
+            sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest_file),
+            "--directory", str(assessment.directory), "--assessment", identity,
+            env={**os.environ, "PYTHONPATH": os.pathsep.join([str(root / "src"), str(root / "tests")])},
+            stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+        )
+        _out, errors = await asyncio.wait_for(process.communicate(), timeout=60)
+        assert process.returncode == 0, errors.decode()
+        router = Router.from_manifest(manifest_file)
+        try:
+            assessment = AssessmentService(router, assessment.directory)
+            assert recovery.worker_alive(assessment.repository, identity) is False
+            job = assessment.status(identity)
+            assert job["state"] == "complete"
+            admission = assessment.admit(job["report_id"])
+            tools = AEEPToolService(router, profile="assessment")
+            for operation in ("status", "report"):
+                result = await tools.call("aeep_assessment_" + operation, {"assessment_id": identity})
+                assert not result["isError"]
+            request = ActionRequest(capability=plan.suite.domain, input=plan.suite.cases[0].action.input)
+>           assert router.route(request).selected_executor_id == admission.executor_id
+E           AssertionError: assert 'baseline' == 'candidate'
+E             
+E             - candidate
+E             + baseline
+
+tests/test_v08_assessment_interfaces.py:63: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_assessment_interfaces.py::test_completed_worker_exit_preserves_admission_when_reading_report

@@ -1,0 +1,366 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+........................................................................ [ 20%]
+........................................................................ [ 27%]
+........................................................................ [ 34%]
+........................................................................ [ 41%]
+........................................................................ [ 48%]
+........................................................................ [ 55%]
+........................................................................ [ 62%]
+........................................................................ [ 69%]
+...................................F..F..F....F.......................
+=================================== FAILURES ===================================
+_____ test_host_plugin_namespace_and_server_policy_use_exact_selected_path _____
+
+tmp_path = PosixPath('/private/tmp/aeep-delivery-final-pytest/test_host_plugin_namespace_and0')
+
+    def test_host_plugin_namespace_and_server_policy_use_exact_selected_path(tmp_path):
+        path = tmp_path / "SKILL.md"
+        path.write_text("reviewed parser")
+        data = catalog(path)
+        data["skills"][0]["name"] = "installed:parse"
+        data["servers"][0]["pluginId"] = "parser@local"
+        target = ManagedHostInvocation(mode="skill", skill_name="parse", skill_path=str(path), skill_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+        resolved = resolve_skill_name(data, target)
+        assert resolved.skill_name == "installed:parse"
+>       overrides = isolated_config(data, resolved)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_codex_invocation.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+catalog = {'apps': [{'callable': True, 'id': 'external'}], 'servers': [{'name': 'parser', 'pluginId': 'parser@local', 'tools': {...name': 'installed:parse', 'path': '/private/tmp/aeep-delivery-final-pytest/test_host_plugin_namespace_and0/SKILL.md'}]}
+target = ManagedHostInvocation(mode='skill', skill_name='installed:parse', skill_path='/private/tmp/aeep-delivery-final-pytest/...e, tool_sha256=None, supporting_tools=(), supporting_skills=(), exposure=None, local_profile=None, native_catalog=None)
+
+    def isolated_config(catalog: dict[str, Any], target: ManagedHostInvocation, *, verified_worker_skill: bool = False, reviewed_worker_files: dict[str, str] | None = None) -> dict[str, Any]:
+        """Thread-local overrides only. Never edit the user's Codex configuration."""
+        overrides: dict[str, Any] = {
+            "apps._default.enabled": False,
+            "features.apps": False,
+            "features.code_mode_host": False,
+            "features.computer_use": False,
+            "features.browser_use": False,
+            "features.browser_use_external": False,
+            "features.skill_search": False,
+            "features.tool_suggest": False,
+            "features.multi_agent": False,
+            "agents.enabled": False,
+            "features.image_generation": False,
+            "features.sleep_tool": False,
+            "features.view_image": False,
+            "features.goals": False,
+            "features.hooks": False,
+            "features.memories": False,
+            "features.skill_mcp_dependency_install": False,
+            "features.shell_tool": False,
+            "features.unified_exec": False,
+            "tools.view_image": False,
+            "web_search": "disabled",
+        }
+        if target.local_profile == "capable_local":
+            overrides.update({"features.shell_tool": True, "features.unified_exec": True})
+        if target.native_catalog:
+            overrides.update({"features.skill_search": True, "features.tool_suggest": True})
+        for app in catalog["apps"]:
+            identity = app["id"]
+            if not isinstance(identity, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", identity):
+                raise ConfigurationError("Codex app identity cannot be safely scoped")
+            overrides[f"apps.{identity}.enabled"] = False
+        skill_found = False
+        skill_config = []
+        supporting = {item.path: item for item in target.supporting_skills}
+        found_supporting: set[str] = set()
+        for skill in catalog["skills"]:
+            path = skill["path"]
+            if not isinstance(path, str) or not Path(path).is_absolute():
+                raise ConfigurationError("Codex skill has no explicit absolute path")
+            selected = (
+                target.mode == "skill"
+                and path == target.skill_path
+                and skill["name"] == target.skill_name
+            )
+            if selected:
+                file = Path(path)
+                if (
+                    not skill["enabled"]
+                    or (reviewed_worker_files is not None and not verified_worker_skill)
+                    or (not verified_worker_skill and (file.is_symlink()
+                        or not file.is_file()
+                        or file.stat().st_size > 1_000_000
+                        or hashlib.sha256(file.read_bytes()).hexdigest() != target.skill_sha256))
+                    or "aeep" in str(file).lower()
+                ):
+>                   raise ConfigurationError("skill is unavailable, changed or recursive")
+E                   aeep.errors.ConfigurationError: skill is unavailable, changed or recursive
+
+src/aeep/hosts/codex_invocation.py:174: ConfigurationError
+__ test_supported_invocation_restricts_inventory_and_keeps_usage[False-skill] __
+
+tmp_path = PosixPath('/private/tmp/aeep-delivery-final-pytest/test_supported_invocation_rest1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f11ad60>
+mode = 'skill', optional = False
+
+    @pytest.mark.parametrize("mode", ["turn", "skill", "mcp_tool"])
+    @pytest.mark.parametrize("optional", [False, True])
+    async def test_supported_invocation_restricts_inventory_and_keeps_usage(
+        tmp_path, monkeypatch, mode, optional
+    ):
+        path = tmp_path / "SKILL.md"
+        path.write_text("Parse labeled data into JSON.")
+        target = ManagedHostInvocation.model_validate(
+            {
+                "mode": mode,
+                **({"exposure": "optional", "local_profile": "capable_local"} if optional and mode == "skill" else {}),
+                **(
+                    {
+                        "skill_name": "parse",
+                        "skill_path": str(path),
+                        "skill_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                    }
+                    if mode == "skill"
+                    else {"server": "parser", "tool": "parse", "tool_sha256": contract_digest(TOOL)}
+                    if mode == "mcp_tool"
+                    else {}
+                ),
+            }
+        )
+        host = adapter()
+        original = host.transport.request
+        requests = []
+        host.transport.max_message_bytes = 16384
+    
+        async def request(method, params=None, **kw):
+            params = params or {}
+            requests.append(method)
+            if method == "skills/list":
+                return {"data": [{"skills": catalog(path)["skills"], "errors": []}]}
+            if method == "app/installed":
+                return {"apps": [] if "threadId" in params else catalog(path)["apps"]}
+            if method == "mcpServerStatus/list":
+                return {
+                    "data": catalog(path)["servers"]
+                    if mode == "mcp_tool" or "threadId" not in params
+                    else []
+                }
+            if method == "thread/start":
+                overrides = params["config"]
+                assert overrides["features.multi_agent"] is False
+                assert overrides["apps.external.enabled"] is False
+                assert overrides["mcp_servers.parser.enabled"] is (mode == "mcp_tool")
+            if method == "turn/start":
+                assert mode != "mcp_tool"
+                if mode == "skill" and optional:
+                    assert len(params["input"]) == 1
+                    assert not params["input"][0]["text"].startswith("$parse ")
+                if mode == "skill" and not optional:
+                    assert params["input"][1] == {"type": "skill", "name": "parse", "path": str(path)}
+                    assert params["input"][0]["text"].startswith("$parse ")
+            if method == "mcpServer/tool/call":
+                assert params["arguments"] == {"text": "abc"}
+                return {"structuredContent": {"characters": 3}}
+            return await original(method, params, **kw)
+    
+        monkeypatch.setattr(host.transport, "request", request)
+        ctx = context()
+        ctx = replace(ctx, config=ctx.config.model_copy(update={"invocation": target}))
+        try:
+            result = await host.execute(ctx)
+>           assert result.status == ExecutionStatus.SUCCESS
+E           AssertionError: assert <ExecutionSta...LED: 'failed'> == <ExecutionSta...SS: 'success'>
+E             
+E             - success
+E             + failed
+
+tests/test_v08_codex_invocation.py:155: AssertionError
+__ test_supported_invocation_restricts_inventory_and_keeps_usage[True-skill] ___
+
+tmp_path = PosixPath('/private/tmp/aeep-delivery-final-pytest/test_supported_invocation_rest4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10cb8ce50>
+mode = 'skill', optional = True
+
+    @pytest.mark.parametrize("mode", ["turn", "skill", "mcp_tool"])
+    @pytest.mark.parametrize("optional", [False, True])
+    async def test_supported_invocation_restricts_inventory_and_keeps_usage(
+        tmp_path, monkeypatch, mode, optional
+    ):
+        path = tmp_path / "SKILL.md"
+        path.write_text("Parse labeled data into JSON.")
+        target = ManagedHostInvocation.model_validate(
+            {
+                "mode": mode,
+                **({"exposure": "optional", "local_profile": "capable_local"} if optional and mode == "skill" else {}),
+                **(
+                    {
+                        "skill_name": "parse",
+                        "skill_path": str(path),
+                        "skill_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                    }
+                    if mode == "skill"
+                    else {"server": "parser", "tool": "parse", "tool_sha256": contract_digest(TOOL)}
+                    if mode == "mcp_tool"
+                    else {}
+                ),
+            }
+        )
+        host = adapter()
+        original = host.transport.request
+        requests = []
+        host.transport.max_message_bytes = 16384
+    
+        async def request(method, params=None, **kw):
+            params = params or {}
+            requests.append(method)
+            if method == "skills/list":
+                return {"data": [{"skills": catalog(path)["skills"], "errors": []}]}
+            if method == "app/installed":
+                return {"apps": [] if "threadId" in params else catalog(path)["apps"]}
+            if method == "mcpServerStatus/list":
+                return {
+                    "data": catalog(path)["servers"]
+                    if mode == "mcp_tool" or "threadId" not in params
+                    else []
+                }
+            if method == "thread/start":
+                overrides = params["config"]
+                assert overrides["features.multi_agent"] is False
+                assert overrides["apps.external.enabled"] is False
+                assert overrides["mcp_servers.parser.enabled"] is (mode == "mcp_tool")
+            if method == "turn/start":
+                assert mode != "mcp_tool"
+                if mode == "skill" and optional:
+                    assert len(params["input"]) == 1
+                    assert not params["input"][0]["text"].startswith("$parse ")
+                if mode == "skill" and not optional:
+                    assert params["input"][1] == {"type": "skill", "name": "parse", "path": str(path)}
+                    assert params["input"][0]["text"].startswith("$parse ")
+            if method == "mcpServer/tool/call":
+                assert params["arguments"] == {"text": "abc"}
+                return {"structuredContent": {"characters": 3}}
+            return await original(method, params, **kw)
+    
+        monkeypatch.setattr(host.transport, "request", request)
+        ctx = context()
+        ctx = replace(ctx, config=ctx.config.model_copy(update={"invocation": target}))
+        try:
+            result = await host.execute(ctx)
+>           assert result.status == ExecutionStatus.SUCCESS
+E           AssertionError: assert <ExecutionSta...LED: 'failed'> == <ExecutionSta...SS: 'success'>
+E             
+E             - success
+E             + failed
+
+tests/test_v08_codex_invocation.py:155: AssertionError
+_________ test_reviewed_background_skills_keep_native_catalog_bounded __________
+
+tmp_path = PosixPath('/private/tmp/aeep-delivery-final-pytest/test_reviewed_background_skill0')
+
+    def test_reviewed_background_skills_keep_native_catalog_bounded(tmp_path):
+        from aeep.models import ReviewedHostSkill
+    
+        path = tmp_path / 'SKILL.md'
+        path.write_text('reviewed background capability')
+        reviewed = ReviewedHostSkill(name='parse',path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+        target = ManagedHostInvocation(mode='turn',local_profile='capable_local',native_catalog=True,supporting_skills=[reviewed])
+        data = catalog(path)
+>       assert isolated_config(data,target)['skills.config'] == [{'path':str(tmp_path),'enabled':True}]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_codex_invocation.py:287: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+catalog = {'apps': [{'callable': True, 'id': 'external'}], 'servers': [{'name': 'parser', 'tools': {'parse': {'description': 'un...': True, 'name': 'parse', 'path': '/private/tmp/aeep-delivery-final-pytest/test_reviewed_background_skill0/SKILL.md'}]}
+target = ManagedHostInvocation(mode='turn', skill_name=None, skill_path=None, skill_sha256=None, server=None, tool=None, tool_s...a78cfecc51cdbf978e78fd21cde7179e5ae29ee2493f2dc'),), exposure=None, local_profile='capable_local', native_catalog=True)
+
+    def isolated_config(catalog: dict[str, Any], target: ManagedHostInvocation, *, verified_worker_skill: bool = False, reviewed_worker_files: dict[str, str] | None = None) -> dict[str, Any]:
+        """Thread-local overrides only. Never edit the user's Codex configuration."""
+        overrides: dict[str, Any] = {
+            "apps._default.enabled": False,
+            "features.apps": False,
+            "features.code_mode_host": False,
+            "features.computer_use": False,
+            "features.browser_use": False,
+            "features.browser_use_external": False,
+            "features.skill_search": False,
+            "features.tool_suggest": False,
+            "features.multi_agent": False,
+            "agents.enabled": False,
+            "features.image_generation": False,
+            "features.sleep_tool": False,
+            "features.view_image": False,
+            "features.goals": False,
+            "features.hooks": False,
+            "features.memories": False,
+            "features.skill_mcp_dependency_install": False,
+            "features.shell_tool": False,
+            "features.unified_exec": False,
+            "tools.view_image": False,
+            "web_search": "disabled",
+        }
+        if target.local_profile == "capable_local":
+            overrides.update({"features.shell_tool": True, "features.unified_exec": True})
+        if target.native_catalog:
+            overrides.update({"features.skill_search": True, "features.tool_suggest": True})
+        for app in catalog["apps"]:
+            identity = app["id"]
+            if not isinstance(identity, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", identity):
+                raise ConfigurationError("Codex app identity cannot be safely scoped")
+            overrides[f"apps.{identity}.enabled"] = False
+        skill_found = False
+        skill_config = []
+        supporting = {item.path: item for item in target.supporting_skills}
+        found_supporting: set[str] = set()
+        for skill in catalog["skills"]:
+            path = skill["path"]
+            if not isinstance(path, str) or not Path(path).is_absolute():
+                raise ConfigurationError("Codex skill has no explicit absolute path")
+            selected = (
+                target.mode == "skill"
+                and path == target.skill_path
+                and skill["name"] == target.skill_name
+            )
+            if selected:
+                file = Path(path)
+                if (
+                    not skill["enabled"]
+                    or (reviewed_worker_files is not None and not verified_worker_skill)
+                    or (not verified_worker_skill and (file.is_symlink()
+                        or not file.is_file()
+                        or file.stat().st_size > 1_000_000
+                        or hashlib.sha256(file.read_bytes()).hexdigest() != target.skill_sha256))
+                    or "aeep" in str(file).lower()
+                ):
+                    raise ConfigurationError("skill is unavailable, changed or recursive")
+                # Skills that need tools require a separately reviewed workflow mapping.
+                if (skill.get("dependencies") or {}).get("tools") and not target.supporting_tools:
+                    raise ConfigurationError(
+                        "skill tool dependencies require a reviewed workflow mapping"
+                    )
+                skill_found = True
+            if path in supporting:
+                reviewed = supporting[path]
+                file = Path(path)
+                verified = (reviewed_worker_files or {}).get(path) == reviewed.sha256
+                if (skill["name"] != reviewed.name or not skill["enabled"] or "aeep" in path.lower()
+                        or (reviewed_worker_files is not None and not verified)
+                        or (not verified and (file.is_symlink() or not file.is_file()
+                            or file.stat().st_size > 1_000_000
+                            or hashlib.sha256(file.read_bytes()).hexdigest() != reviewed.sha256))):
+>                   raise ConfigurationError("supporting skill is unavailable, changed or recursive")
+E                   aeep.errors.ConfigurationError: supporting skill is unavailable, changed or recursive
+
+src/aeep/hosts/codex_invocation.py:190: ConfigurationError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_codex_invocation.py::test_host_plugin_namespace_and_server_policy_use_exact_selected_path
+FAILED tests/test_v08_codex_invocation.py::test_supported_invocation_restricts_inventory_and_keeps_usage[False-skill]
+FAILED tests/test_v08_codex_invocation.py::test_supported_invocation_restricts_inventory_and_keeps_usage[True-skill]
+FAILED tests/test_v08_codex_invocation.py::test_reviewed_background_skills_keep_native_catalog_bounded
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:123: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+4 failed, 786 passed, 1 warning in 182.63s (0:03:02)

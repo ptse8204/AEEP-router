@@ -1,0 +1,104 @@
+{
+  "status": "inert_preparation_requires_root_exact_source_review",
+  "authority": "standing finite setup/testing delegation; same planning_8e8a10fdfd7f49b891cf9f3f44c35228 grant; no budget reset",
+  "base_driver": "reports/v08/native-sol61-generated-approval-ack-94f3.py",
+  "adapter_helper": "src/aeep/hosts/codex_app_server.py:CodexAppServerTransport",
+  "declaration_helper": "src/aeep/hosts/codex_dynamic_tools.py:CodexDynamicTools.declarations",
+  "binary": "/opt/codex/codex",
+  "binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+  "version": "0.159.2",
+  "argv_template": [
+    "/opt/codex/codex",
+    "app-server",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.command=\"/usr/local/bin/python3\"",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.args=[\"/opt/aeep/linux-mcp-server.py\"]",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.enabled=true"
+  ],
+  "maximum_reservation": {
+    "operations": 1,
+    "elapsed_seconds": 60,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "body_timeout_seconds": 30,
+    "transport_close_seconds": 3,
+    "worker_cleanup_seconds": 8
+  },
+  "declarations": [
+    {
+      "type": "namespace",
+      "name": "aeep_task",
+      "description": "Operator-scoped task tools.",
+      "tools": [
+        {
+          "type": "function",
+          "name": "verify_local_fixture",
+          "description": "Fixed declaration acknowledgement only; no invocation in this check.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "type": "string",
+                "enum": [
+                  "verify"
+                ]
+              }
+            },
+            "required": [
+              "operation"
+            ],
+            "additionalProperties": false
+          },
+          "deferLoading": false
+        }
+      ]
+    }
+  ],
+  "declaration_sha256": "c9355ad51ed63b22db346374769e8daeeedd2e438ae587392a1aacb5bfc1d58a",
+  "allowed_client_requests": [
+    "initialize",
+    "config/read",
+    "configRequirements/read",
+    "thread/start ephemeral with exact declarations"
+  ],
+  "forbidden": [
+    "turn/start",
+    "model/list",
+    "rateLimits/read",
+    "dynamic tool invocation",
+    "MCP tool calls",
+    "authentication reads",
+    "global config mutation"
+  ],
+  "checks": [
+    "new combined source digest and completed validation record before reservation",
+    "full executable digest before launch",
+    "exact owned permission config matches config/read; sanitize layer metadata only",
+    "thread/start result worker profile id/cwd/approval policy matches",
+    "request accepted without protocol error; thread identity hashed only",
+    "no model turn or tool invocation; fixed MCP initialization/list permitted and separately disclosed",
+    "close and verify tracked owned PID+creation-time cleanup",
+    "canonical reserve/finish and before/after same-grant counters retained"
+  ],
+  "acknowledgement_limit": "Acceptance of exact declaration-bearing request only. Response may not echo declarations; no runtime invocation, model visibility, provider conformance, qualification or release claim.",
+  "pending_bindings": [
+    "completed validation and root exact review; execution_authorized remains false"
+  ],
+  "target": "protected no-auth Linux App Server worker; native Mac preparation superseded for bridge support",
+  "source_digest": "bcbef9aa86a9376511560bd855bd70695057cbd120d260dca633de007610633b",
+  "driver": "reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-managed-inert.py",
+  "driver_sha256": "84da5081b1da7a7efbb7d8d7e13e6091af60d11672c7a9c684b4b46de030d136",
+  "prior_worker_review": "reports/v08/original-three-way-profile/linux-noauth-config-review.json",
+  "worker_image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+  "worker_binary": "/opt/codex/codex",
+  "worker_binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+  "worker_credential_volume": null,
+  "worker_network_id": null,
+  "permission_profile_id": "aeep",
+  "review": "reports/v08/original-three-way-profile/linux-dynamic-tools-ack-managed-review.json",
+  "review_sha256": "3fc8587c45ba1d1a1d45d9f74617059fefb3099db11dc0a05115911e3d6abb26",
+  "worker_digest": "e5c5554acdf38970a348945789b677695ed66c39523259449287ef29cf2eef00",
+  "startup_behavior": "Original fixed MCP may initialize/list; writes owned synthetic canary; no tools/call/nested sandbox probe; counted within60s."
+}

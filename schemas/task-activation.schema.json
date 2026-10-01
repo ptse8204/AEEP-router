@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.task-activation.v1",
+      "default": "aeep.task-activation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "activation_id": {
+      "pattern": "^task_[a-zA-Z0-9_-]{1,100}$",
+      "title": "Activation Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "manifest_file_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest File Digest"
+    },
+    "manifest_path": {
+      "title": "Manifest Path",
+      "type": "string"
+    },
+    "original_value": {
+      "default": null,
+      "title": "Original Value",
+      "type": "null"
+    }
+  },
+  "required": [
+    "scope_digest",
+    "manifest_digest",
+    "manifest_path"
+  ],
+  "title": "TaskActivation",
+  "type": "object"
+}

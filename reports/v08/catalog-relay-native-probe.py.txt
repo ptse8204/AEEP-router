@@ -1,0 +1,28 @@
+import ast,hashlib,json,subprocess,time
+from pathlib import Path
+source=Path('reports/v08/native-catalog-metrics-probe.py.txt').read_text()
+tree=ast.parse(source)
+script=next(ast.literal_eval(node.value) for node in tree.body if isinstance(node,ast.Assign) and any(isinstance(target,ast.Name) and target.id=='script' for target in node.targets))
+script=script.replace('import json,os,subprocess,queue,threading,time,signal','import json,os,subprocess,queue,threading,time,signal,sys')
+script=script.replace('thread_id=None;skill_inventory={};network_probe={}','thread_id=None;skill_inventory={};network_probe={}')
+script=script.replace('messages=queue.Queue()','messages=queue.Queue(); relay_snapshots=[]')
+script=script.replace('try:messages.put(json.loads(line))',"try:\n   item=json.loads(line)\n   if item.get('method')=='aeep/catalogMetrics':relay_snapshots.append(item['params'])\n   else:messages.put(item)")
+old="['/opt/codex/codex','app-server','--strict-config','--stdio']"
+relay="import sys; sys.path.insert(0,'/opt/aeep'); from codex_metrics import relay; raise SystemExit(relay(['/opt/codex/codex','app-server','--strict-config','--stdio'],'aeep-metrics-"+'f'*32+"'))"
+script=script.replace(old,"[sys.executable,'-c',"+repr(relay)+"]")
+script=script.replace("'serviceName':'aeep-offline-metrics'","'serviceName':'aeep-metrics-"+'f'*32+"'")
+script=script.replace("program='import socket", "ports=[int(line.split()[1].split(':')[1],16) for line in Path('/proc/net/tcp').read_text().splitlines()[1:] if line.split()[1].split(':')[0]=='0100007F' and line.split()[3]=='0A']\ncollector_ports=[port for port in ports if port!=server.server_port]\nassert len(collector_ports)==1,collector_ports\ncollector_port=collector_ports[0]\nprogram='import socket")
+script=script.replace("'+str(server.server_port)+'),timeout=2)","'+str(collector_port)+'),timeout=2)")
+a=script.index('time.sleep(15)');b=script.index('print(json.dumps(',a)
+script=script[:a]+"proc.stdin.close()\ntry:proc.wait(timeout=10);stopped='stdin_eof'\nexcept subprocess.TimeoutExpired:proc.terminate();proc.wait(timeout=5);stopped='sigterm'\ntime.sleep(.1);server.shutdown()\n"+script[b:]
+script=script.replace("'analytics':__import__('tomllib').loads(config)['analytics']['enabled']","'relay_analytics_enabled':True,'relay_snapshots':relay_snapshots")
+script=script.replace("'observation_seconds_after_turn':15","'observation_seconds_after_turn':0.1")
+image=Path('/tmp/aeep-catalog-relay-image-id').read_text().strip()
+assert image.startswith('sha256:') and len(image)==71, 'wait for a completed image build'
+for explicit in (False,True):
+ code=script.replace('ANALYTICS','True').replace('EXPLICIT',repr(explicit)).replace('enabled = True\\n','enabled = true\\n')
+ cmd=['/usr/local/bin/docker','--host','unix:///Users/edwintse/.docker/run/docker.sock','run','--rm','--pull','never','--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--security-opt','seccomp=/tmp/aeep-offline-metrics-seccomp.json','--pids-limit','64','--memory','512m','--cpus','1','--user','65534:65534','--tmpfs','/tmp:rw,nosuid,nodev,size=67108864','--tmpfs','/workspace:rw,nosuid,nodev,size=67108864,uid=65534,gid=65534,mode=0700','--entrypoint','python3',image,'-c',code]
+ start=time.monotonic();result=subprocess.run(cmd,capture_output=True,text=True,timeout=60)
+ record={'image':image,'collector_sha256':hashlib.sha256(Path('src/aeep/hosts/codex_metrics.py').read_bytes()).hexdigest(),'probe_sha256':hashlib.sha256(code.encode()).hexdigest(),'credentials_mounted':False,'host_mounts':False,'network':'none','model_calls':0,'elapsed_seconds':time.monotonic()-start,'exit_code':result.returncode,'observation':json.loads(result.stdout) if result.stdout.strip() else None,'launcher_error':result.stderr[:3000]}
+ Path(f'reports/v08/catalog-relay-native-v2-{str(explicit).lower()}.json').write_text(json.dumps(record,indent=2)+'\n')
+ print(json.dumps(record),flush=True)

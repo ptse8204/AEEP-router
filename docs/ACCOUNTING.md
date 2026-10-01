@@ -1,7 +1,7 @@
 # AEEP economic accounting
 
-AEEP 0.5 keeps resource dimensions and their evidence separate. It does not
-produce one universal dollar score.
+AEEP 0.5 keeps resource use and its supporting evidence in separate ledgers.
+It does not combine them into a universal dollar score.
 
 | Ledger | What it records | Routing | Cash claim |
 |---|---|---:|---:|
@@ -15,16 +15,16 @@ produce one universal dollar score.
 
 There is no combined dollar total. A subscription action can have evidenced
 zero incremental cash and positive scarce usage. When funding or billing is
-unknown, actual cash is unavailable—not zero. Fixed monthly fees are campaign
-context and are never amortized per action.
+unknown, actual cash is unavailable and must not be recorded as zero. Fixed
+monthly fees are campaign context and are never amortized per action.
 
 For managed subscription routes, AEEP retains every provider window and scores the
 most constraining one. The exact opportunity burden is
 `log1p(scarcity_multiplier × pool_weight × pressure × reset_factor + uncertainty)
 / success_probability`. Pressure uses exact remaining capacity when available,
 otherwise the reported used percentage, otherwise a conservative unknown-state
-penalty. `reset_factor` is 1–2 from the observed reset distance and window duration;
-uncertainty is `1 - confidence`, plus 0.25 when exact remaining capacity is unknown
+penalty. `reset_factor` ranges from 1 to 2 based on the observed reset distance
+and window duration; uncertainty is `1 - confidence`, plus 0.25 when exact remaining capacity is unknown
 and another 0.25 when percentage is also unknown. Private per-unit values remain
 labelled policy valuations and never become cash or settlement evidence.
 
@@ -80,7 +80,7 @@ Unknown actual cash stays `None`/unavailable through routing, metrics,
 reputation, counterfactuals, and reports. It cannot satisfy a known-cash policy,
 become a free route, enter a cost average, or support a cash-savings claim.
 
-Confirmed zero is a numeric zero plus eligible provenance—for example a
+Confirmed zero requires a numeric zero and eligible provenance, such as a
 completed no-charge settlement. Estimated zero is still an estimate. Reports
 must label all three cases separately:
 

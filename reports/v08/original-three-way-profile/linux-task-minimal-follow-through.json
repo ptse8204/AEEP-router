@@ -1,0 +1,30 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "status": "design_only_no_source_change",
+  "observed_prerequisite": "MCP-owned fixed child sandbox works on pinned immutable Linux image; synthetic canary denied to child and command path. Public requirements read is allowed; no private task-store proof.",
+  "preferred_existing_runtime": "Existing stdio MCP task-only AEEPToolService and CommandExecutor; no dynamicTools bridge or second runtime.",
+  "minimum_contract": {
+    "src/aeep/hosts/codex_sandbox.py": "Add separately versioned Linux managed-profile boundary alongside unchanged v1 Mac config. Exact pinned Codex binary plus protected requirements/profile digest; use existing sandbox argv with managed config. Reject single_process Mac guard on Linux. Do not override a requirements-owned profile. Compile/validate declared roots against the exact protected profile rather than infer enforcement from worker digest.",
+    "src/aeep/executors/command.py": "Parse explicit boundary variant and reuse task-scope, timeout, minimal environment, last-authority, dispatch, resource/attempt/receipt and cleanup paths. Linux child process cleanup must be proved before enabling automatic activation.",
+    "src/aeep/tasks.py": "Reuse existing scope activation/checks; no new budget or scope system. Only minimal variant typing if needed.",
+    "src/aeep/qualification.py": "Include actual Linux boundary identity in existing fingerprint/qualification binding; no transfer from Mac or diagnostic.",
+    "schemas and scripts/generate_schemas.py": "Export additive versioned boundary schema, preserve v1 serializations.",
+    "tests": "Adversarial incompatible platform/profile/hash/root/control-path rejection; exact Mac v1 behavior; scope expiry/pause/ceiling/attempt handling shared; actual Linux denial/cleanup conformance separate from offline unit checks."
+  },
+  "immutable_profile": {
+    "task_child": "Dedicated protected requirements-owned task profile limited to frozen per-case input/output/scratch paths; no broad /workspace write for scoped executor.",
+    "coordinator_state": "Per-case operator/coordinator-owned manifest, DB, reviews and scope under explicit deny subtree excluded from model shell AND task child. Service must still read its own state. Image readonly, private state never exposed by tool args.",
+    "service": "Existing task MCP launcher with profile task and reviewed activation. No assessment declarations, scope editing or arbitrary path/command tool.",
+    "control": "Same useful workload helper and discovery capabilities equally available without AEEP. Candidate adds only reviewed task route/decision/receipt surface.",
+    "authority": "Operator materializes/reviews scope and activation before worker dispatch; ordinary task allowance stays separate from campaign grant."
+  },
+  "remaining_required_evidence": [
+    "Protected requirements/profile and immutable server/config/runtime inspection bound to exact image",
+    "Actual model-command and task-child denial of private scope/store/manifest; independent owned-state witness",
+    "Bounded coordinator/child death, cleanup and process/resource limits on Linux (current nonroot Mac hardNPROC guard cannot transfer)",
+    "Effective shared discovery/candidate access equivalence and real separate third-profile full conformance",
+    "Canonical fresh required-use qualification with task receipt and protected independent grader, then disjoint optional three-way value holdout",
+    "Model capacity external reset before model trials; human usability response still absent"
+  ],
+  "breadth": "Small boundary variant and reuse is feasible in principle, but current observations do not establish process cleanup or private-store enforcement. Do not enable Linux by merely removing darwin guard."
+}

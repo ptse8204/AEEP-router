@@ -1,0 +1,32 @@
+F................                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_package_and_documentation_versions_are_consistent ____________
+
+    def test_package_and_documentation_versions_are_consistent():
+        with (ROOT / "pyproject.toml").open("rb") as source:
+            project_version = tomllib.load(source)["project"]["version"]
+        assert project_version == __version__
+    
+        protocol_version = project_version.rsplit(".", 1)[0]
+        economic_protocol_version = "0.5"
+        markers = {
+            "README.md": f"**Status:** AEEP {protocol_version}",
+            "SPEC.md": f"# AEEP {protocol_version} protocol specification",
+            "docs/ACCOUNTING.md": f"AEEP {economic_protocol_version} keeps",
+            "examples/economic_evidence/README.md": (
+                f"# AEEP {economic_protocol_version} deterministic economic-evidence proof"
+            ),
+            "examples/economic_evidence/report.md": (
+                f"# AEEP {economic_protocol_version} economic evidence proof"
+            ),
+            "examples/proof/README.md": f"# AEEP {protocol_version} proof assets",
+        }
+        for path, marker in markers.items():
+>           assert marker in (ROOT / path).read_text(encoding="utf-8")
+E           AssertionError: assert '**Status:** AEEP 0.8' in '# AEEP Agent Router\n\nAEEP helps an agent choose an approved tool for a specific task. It checks\npermissions and ap...STING.md) before changing or running\nassessment, execution-adapter or release-verification work in this repository.\n'
+E            +  where '# AEEP Agent Router\n\nAEEP helps an agent choose an approved tool for a specific task. It checks\npermissions and ap...STING.md) before changing or running\nassessment, execution-adapter or release-verification work in this repository.\n' = read_text(encoding='utf-8')
+E            +    where read_text = (PosixPath('/Users/edwintse/Documents/aeep-agent-router') / 'README.md').read_text
+
+tests/test_version_consistency.py:35: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_version_consistency.py::test_package_and_documentation_versions_are_consistent

@@ -1,0 +1,29 @@
+{
+  "status": "completed_on_final468_with_frozen_memory_checks_failed",
+  "model_turns": 0,
+  "classification": "software-only incremental fresh-process n1; full native model workflow remains blocked",
+  "failed_pairs": [
+    "native-resource-full-path-pair-result.json",
+    "native-resource-full-path-pair-v2-result.json"
+  ],
+  "diagnostics": [
+    "native-baseline-initialization-result.json",
+    "native-baseline-guard-noop-result.json",
+    "native-baseline-sampler-noop-result.json",
+    "native-baseline-sampler-grace-noop-result.json"
+  ],
+  "concrete_diagnosis": "Immediate cleanup snapshot encountered owned git startup probes; a bounded<=2s grace observed their disappearance naturally in no-op. Original failed pair causes remain unknown because stage metadata was discarded.",
+  "sampler": "exact-owned tracking continues through bounded <=2s grace; sampled final cumulative CPU by identity, concurrent RSS snapshots; model/inherited payloads not retained",
+  "known_limits": "unsampled short-lived processes and final between-sample CPU unknown; no native model usage; no causal whole-machine acceptance",
+  "unchanged_frozen_checks": "wall5s/cpu4s/RSS768MiB/memory1500MiB\u00b7s/retention8MiB/schema16KiB/config1KiB; not relaxed",
+  "files_sha256": {
+    "native-resource-full-path-pair-v5.py": "1ad226414c5d9b7ac194e343fe09f55a8b492cb9479e79d5b5d2501ba4858335",
+    "native-no-aeep-baseline-child-v3.py": "ee652b56503d7cdd896b0e236a704c5c601a415b5f7838fbf6bb729afba5bc53",
+    "native-sol61-resource-full-path-aeep-b2.py": "0cdde340bc0178682cad994d5f61f04d9bd248a5568f4e97811e6661c1c7f9f8"
+  },
+  "next_step": "No unchanged pair replay; resource gate incomplete and native model workflow still blocked.",
+  "outer_host_lifecycle": "both arms initialize, zero-turn ephemeral thread/start and supported MCP readiness; inherited server name hashes must match after excluding owned AEEP server",
+  "pending_source": "b2 successor may receive storage repair; do not launch until final freeze/checks",
+  "result": "native-resource-full-path-pair-v5-result.json",
+  "summary": "native-resource-full-path-summary.json"
+}

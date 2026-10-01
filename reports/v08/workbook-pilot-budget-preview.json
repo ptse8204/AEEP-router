@@ -1,0 +1,339 @@
+{
+  "campaign_allowance": {
+    "scope": "fresh_campaign_reservations",
+    "stages": [
+      {
+        "stage": "trial",
+        "calls_minimum": 16,
+        "calls_upper": 16,
+        "operations_upper": 16,
+        "model_turns": 16,
+        "elapsed_reservation_upper_seconds": 2000.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "warmup",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "router_setup",
+        "calls_minimum": 17,
+        "calls_upper": 17,
+        "operations_upper": 17,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 510,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_validation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "report_generation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_reference",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 35.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_probe",
+        "calls_minimum": 1,
+        "calls_upper": 198,
+        "operations_upper": 198,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 6930.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "recipe_grading",
+        "calls_minimum": 0,
+        "calls_upper": 16,
+        "operations_upper": 16,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 560.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "generation_and_proposal",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.04376079107169062,
+        "cash_reservation_upper_usd": "0"
+      }
+    ],
+    "upper_allowance": {
+      "operations": 251,
+      "model_turns": 16,
+      "elapsed_seconds": 10095.043760791072,
+      "cash_usd": "0"
+    },
+    "prior_operations": [
+      {
+        "operation_id": "inspection:conformance_probe_1823273d1e86472bb1ef5fa6917e1eaa",
+        "stage": "worker_inspection",
+        "state": "complete",
+        "elapsed_seconds": 1.5034112919820473,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 120.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_076ce5d5a5364699bf5d9dc17f55b2ab",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 3.3976477079559118,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_16ec96d5b5f94fcaaec120275e69441e",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.956190457916819,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_c3a4af1744c8491cbb1d165eec72cc60",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.962931707967073,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_cf12926b967b4fe3910cbb52a990d901",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 3.499813499976881,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_e107b0420676430bb604eaf736bc4ff7",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 3.4945631249574944,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_e8f6f81f9ec1481ea2d13636bf77d1f3",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 3.402947290916927,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "probe:conformance_probe_6eeaf8ed605e486d991146b3af6efb45",
+        "stage": "conformance_bootstrap",
+        "state": "complete",
+        "elapsed_seconds": 6.854196000029333,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "probe:conformance_probe_9e0ffd669db345249e6fe7b1e2a320f7",
+        "stage": "conformance_bootstrap",
+        "state": "complete",
+        "elapsed_seconds": 6.509738958906382,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "probe:conformance_probe_b77fbb6eeb8c44868637c312a3a3f397",
+        "stage": "conformance_bootstrap",
+        "state": "complete",
+        "elapsed_seconds": 8.080868332996033,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "probe:conformance_probe_da6b66f5899e45ea99b75efcac4c002f",
+        "stage": "conformance_bootstrap",
+        "state": "complete",
+        "elapsed_seconds": 5.223040292039514,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "probe:conformance_probe_f59d5e3797664c0dac10f0e1b0290e21",
+        "stage": "conformance_bootstrap",
+        "state": "complete",
+        "elapsed_seconds": 7.299258750048466,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "recipe_generation_bbb9121ea1664c928b7e5f66a19e2aec-generator",
+        "stage": "recipe_generation",
+        "state": "complete",
+        "elapsed_seconds": 1.3993281250586733,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "setup_cost_9683303f0f2c4494bc1a5c8be9795316",
+        "stage": "static_inspection",
+        "state": "complete",
+        "elapsed_seconds": 0.005556292016990483,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 0.005556292016990483,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "signin:conformance_probe_da6b66f5899e45ea99b75efcac4c002f",
+        "stage": "worker_signin",
+        "state": "complete",
+        "elapsed_seconds": 150.9792140829377,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 330.0,
+          "max_cash_usd": "0"
+        }
+      }
+    ],
+    "gaps": [],
+    "fits_remaining": false,
+    "authorization_changed": false,
+    "automatic_retries": 0,
+    "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+  },
+  "purpose": "timing_pilot",
+  "adapter_eligibility": [
+    {
+      "executor_id": "workbook-pilot.treatment",
+      "adapter": "codex-app-server:workbook-treatment",
+      "adapter_version": "1",
+      "support_status": "unknown",
+      "eligible": false,
+      "missing_capabilities": [
+        "identity",
+        "usage"
+      ],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    },
+    {
+      "executor_id": "workbook-pilot.control",
+      "adapter": "codex-app-server:workbook-control",
+      "adapter_version": "1",
+      "support_status": "unknown",
+      "eligible": false,
+      "missing_capabilities": [
+        "identity",
+        "usage"
+      ],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    }
+  ],
+  "minimum_trial_model_turns": 16,
+  "trial_elapsed_upper_seconds": 2000.0,
+  "evaluation_stage": null,
+  "screening_trial_model_turns": 16,
+  "workers": [
+    {
+      "role": "candidate",
+      "executor_id": "workbook-pilot.treatment",
+      "model_worker_profiles": [
+        "codex-app-server:workbook-treatment"
+      ]
+    },
+    {
+      "role": "baseline",
+      "executor_id": "workbook-pilot.control",
+      "model_worker_profiles": [
+        "codex-app-server:workbook-control"
+      ]
+    }
+  ],
+  "model_worker_profile_count": 2,
+  "measurement_concurrency": 1,
+  "remaining": {
+    "model_turns": 292,
+    "elapsed_seconds": 3264.7569754935103,
+    "operations": 9681,
+    "cash_usd": "0"
+  },
+  "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+}

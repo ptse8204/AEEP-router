@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "helper_sha256": "fd9fcb6b0bc58f36c7127be0824732313dc3d5f899685b785392d19e23591c1e",
+  "authority_amendment_sha256": "a31ad4f05e4f6e9042abc985268a538bf2fed9f409fb4dcee46c2b7bc65994eb",
+  "checks": [
+    {
+      "case": "21actualphase names plus retained failed container accepted for native only",
+      "expected_acceptance": true,
+      "observed_acceptance": true
+    },
+    {
+      "case": "missing native phase rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "failed native phase rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "duplicate native phase rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "wrong source rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "wrong record digest rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "missing historical container outcome rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    },
+    {
+      "case": "unexpected phase rejected",
+      "expected_acceptance": false,
+      "observed_acceptance": false
+    }
+  ],
+  "provenance": "Synthetic temporary JSON records; tests exact native-only prerequisite policy only. No real validation pass fabricated.",
+  "experimental_model_turns": 0,
+  "hosts_started": 0,
+  "real_canonical_state_changed": false,
+  "execution_authorization": "Standing finite native amendment conditional on all actual21 records passed/sourcebound, sole runtime release and exact native definitions. Worker/container/fullrelease gates unchanged.",
+  "actual_native_validation_records": {
+    "reports/v08/delivery-boundary-validation-5fffda8a3210.json": "323fbaf755d87a115bd729fb01b6337a39f1f1148f9380bec81c014c1acf6734"
+  },
+  "actual_native_phase_validation": {
+    "required_native_software_phases": [
+      "compileall",
+      "schema",
+      "ruff",
+      "mypy",
+      "policy",
+      "pytest",
+      "coverage-pytest",
+      "coverage-report",
+      "coverage-json",
+      "critical-coverage",
+      "assessment-coverage",
+      "node",
+      "economic",
+      "dsh",
+      "dsh-live",
+      "dsh-comparison",
+      "dsh-native-plan",
+      "job",
+      "provider",
+      "router-complete",
+      "package-build"
+    ],
+    "optional_container_outcomes": [
+      {
+        "exit_code": 1,
+        "source_unchanged": true
+      }
+    ],
+    "container_conformance_established": false,
+    "classification": "Native container-free execution prerequisite only; no container or whole-release pass inferred"
+  },
+  "actual_gate_passed": true,
+  "worker_gate_passed": false,
+  "full_release_ready": false,
+  "execution_authorized_conditionally": true
+}

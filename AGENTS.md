@@ -2,18 +2,32 @@
 
 ## Goal
 
-Maintain a secure, provider-neutral action economics profiler/router. Do not turn AEEP into a model-specific wrapper or speculative token system.
+Maintain a secure, provider-neutral system that measures whether adding a capability helps an already capable agent, then scopes approved automatic use. Preserve the compatible execution router, accounting and optional economic features. Keep Codex-specific behavior in adapters.
 
 ## Required checks
+
+The operator delegated routine assessment-plan and test-definition changes on
+2026-09-25. Record exact reviews under that authority and continue without asking
+for each revision. On September 27 the operator also approved the pending assessment-budget
+amendment and delegated further finite amendments needed to complete this plan.
+Record exact amendments without repeating approval requests. This does not expand
+cash spending, disclosure or credential access;
+see the standing-authority section in `docs/ASSESSMENT_TESTING.md`.
+
+Before changing execution, assessment, adapters or release verification, read
+`docs/ASSESSMENT_TESTING.md`. This policy applies to every agent working in this
+repository. Include that path in any delegated-agent brief. Keep implementation
+status and remaining gates in `reports/v08/plan-coverage.md`; chat history is not
+the project record.
 
 After code changes:
 
 ```bash
-python -m compileall -q src examples tests
-PYTHONPATH=src python scripts/generate_schemas.py --check
-pytest
-coverage run -m pytest
-coverage report -m
+python3 -m compileall -q src examples tests
+PYTHONPATH=src python3 scripts/generate_schemas.py --check
+python3 -m pytest
+python3 -m coverage run --branch -m pytest
+python3 -m coverage report -m
 ```
 
 ## Invariants
@@ -36,5 +50,14 @@ coverage report -m
 - Subscription capacity defaults to `SELF_ONLY`; unknown capacity never authorizes transfer.
 - Codex owns authentication; never read, copy, log, return, or persist Codex authentication state.
 - x402 compatibility is offline and disabled by default; it never qualifies or activates a route.
+- Protocol details belong in adapters, not routing or assessment decisions.
+- Agent/plugin comparisons require separate controlled container workers; different prompts or desktop subagents do not prove isolation.
+- Assess a capable shared environment plus a reviewed candidate difference; qualification may force invocation, value trials must leave it optional.
+- Freeze structure, adapter, utility dimensions, guardrails, conditions and thresholds before holdout. Never change them to obtain a favorable result.
+- Keep answers, future cases, shared writable state and unrelated host configuration outside trial workers.
+- Never reset an existing assessment budget or infer measurements from missing evidence.
+- Timing pilots cannot qualify, admit, satisfy release gates or supply holdout inputs; retain their costs in the main assessment.
+- Protected sign-in is an operator-terminal setup operation on the same grant. Never capture its output through agent tools.
+- Ordinary routing must continue without assessment workers. Live and production-support gates require their own evidence.
 
 Read `SPEC.md`, `ARCHITECTURE.md`, and `SECURITY.md` before changing protocol or executor behavior.

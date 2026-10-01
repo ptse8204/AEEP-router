@@ -1,0 +1,32 @@
+{
+  "authority": "Parent exact instruction: <=15s read-only API availability and failed-test inventory; standing Sep25/27 finite amendment",
+  "definition": {
+    "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+    "driver_sha256": "cf73ed7c542b0c52c91cc42ef1427583b32b01635a9326d5ff3370ff72c91234",
+    "commands": [
+      [
+        "/usr/local/bin/docker",
+        "version",
+        "--format",
+        "{{json .Server}}"
+      ],
+      [
+        "/usr/local/bin/docker",
+        "ps",
+        "-a",
+        "--filter",
+        "name=^aeep-",
+        "--format",
+        "{{json .}}"
+      ]
+    ],
+    "maximum_seconds": 15,
+    "maximum_operations": 1,
+    "model_turns": 0,
+    "cash_usd": 0
+  },
+  "definition_digest": "aa5ac3e0deed5dba5be84bd060f76e8adc43cd0dbc4247ad769fad1780ce7b53",
+  "request_digest": "70d174c1cea34f5e95dc8f7a65f90909132614e9288338d824c75c88dbdaec61",
+  "operation_id": "docker-status:planning_docker_readonly_status_5fff",
+  "no_restart_prune_kill_or_model": true
+}

@@ -1,6 +1,61 @@
 # Changelog
 
-## Unreleased — 0.7.0
+## Unreleased — 0.8.0
+
+### 0.8 assessment implementation (release gates remain open)
+
+- separate App Server progress messages from final structured results, while
+  preserving legacy unphased replies and rejecting unknown message phases;
+
+- extend paired worker inspection to reviewed Ponytail, search and shared native
+  catalog profiles; retain exact candidate absence, dependency and permission checks;
+- verify candidate discovery against treatment receipts without requiring fictitious
+  control observations; missing or inconsistent treatment facts still fail the gate;
+
+- carry saved subject preparation costs into new plans and charge shared operation
+  identities once; preserve frozen plans and explicit preceding-stage lineage;
+
+- handle OOXML `str` text cells correctly and validate separately reviewed correct
+  artifacts before trials; reject unknown cell types without changing task rules;
+
+- retain exact reviewed grader failure codes without task content; new executable
+  extension v3 preserves the boolean decisions and legacy v1/v2 contracts;
+
+- preserve pilot costs when a reviewed v6 main plan adopts the measured deadline;
+  require unchanged implementations and independently verified current boundaries;
+- stop assessment after environment failures while retaining the first trial's
+  accounting; do not reserve the remaining cases;
+
+- add separately configured Codex worker processes, fresh trial workspaces,
+  explicit worker/turn counts, and reproducible no-model boundary probes;
+
+- add selectable direct, controlled-agent and complete-workflow comparisons,
+  reviewed comparison bindings, joint feature scope and condition-specific reports;
+- strengthen structural fixtures and independent grader checks, balance trial
+  ordering, isolate search inputs and retain legacy evidence semantics;
+- separate advertised host tools from verified availability, block scoped model
+  trials when enforcement cannot be established, and verify stored live evidence;
+
+- add reviewed assessment contracts, durable budget reservations, SQLite schema 8,
+  local jobs, scoped admission and execution-time applicability checks;
+- run CSV, labeled-text and local search recipes through the existing campaign
+  engine; support reviewed declarative record templates and generated task tools;
+- preserve benchmark request restrictions, bind case inputs into workflows,
+  separate stages, retain sanitized receipts and reject environment drift;
+- run qualification through controlled execution and preserve its receipt evidence;
+- add the focused Codex plugin, assessment CLI and an explicit product verifier;
+- retain partial Codex usage after interrupted turns and persist AEEP-owned host
+  correlation keys; preserve MCP output contracts and untrusted annotations;
+- add bounded definition planning, exact review bundles, static package intake,
+  declarative argument/result adapters and reviewed workflow mappings;
+- retain trial attempt databases, detect vanished workers and clean up their
+  containers without replaying uncertain calls;
+- bind managed-host admission and historical cohorts to resolved identities;
+  revoke scoped use after verified identity drift;
+- include setup, generation, planning and grading operations in an immutable
+  cost ledger, with separate deterministic-reference comparisons;
+- retain historical release reports and document outstanding host integration,
+  containment, full accounting and live validation in `docs/ASSESSMENT.md`.
 
 ### 0.7 subscription-native router
 
@@ -27,7 +82,7 @@
 
 The prior `0.6.0` heading described repository development state. No Git tag or
 published release exists for it; those changes remain listed here as inherited
-0.7 development history rather than a fabricated release.
+0.7 development history.
 
 ### Incorporated 0.6 development work
 
@@ -54,7 +109,7 @@ published release exists for it; those changes remain listed here as inherited
   route avoided 287,104 measured provider tokens without claiming a universal
   savings rate.
 
-## 0.5.1 — 2026-08-26
+## 0.5.1 (2026-08-26)
 
 - exact `aeep-evidence-cohort-v1` binding for every new receipt and observation;
   legacy or fingerprint-mismatched rows cannot affect live estimates;
@@ -65,7 +120,7 @@ published release exists for it; those changes remain listed here as inherited
 - SQLite schema v5 migration for immutable receipt/observation fingerprint and
   cohort provenance.
 
-## 0.5.0 — 2026-08-24
+## 0.5.0 (2026-08-24)
 
 - native `aeep.dev/v0.5` provider packages with bounded strict YAML, RFC 8785
   digests, role-scoped Ed25519 signatures, portable route fingerprints, and
@@ -107,7 +162,7 @@ published release exists for it; those changes remain listed here as inherited
 - compatibility for 0.1 through 0.4 manifests, legacy quotes and receipts, and
   legacy full-capture payment adapters.
 
-## 0.3.0 — 2026-08-13
+## 0.3.0 (2026-08-13)
 
 - evidence-aware cash, provider-local subscription, model-token, counterfactual, and policy-valuation ledgers;
 - immutable, scope-checked Decimal rate-card snapshots, explicit derived revaluation, and bounded Codex JSONL usage capture;
@@ -124,7 +179,7 @@ published release exists for it; those changes remain listed here as inherited
 - MCP server discovery import and a real GitHub default-branch routing example;
 - full Apache-2.0 license text and Ruff/mypy cross-platform CI checks.
 
-## 0.2.0 — 2026-08-12
+## 0.2.0 (2026-08-12)
 
 - subscription resources, explicit quota pressure, host executors, and BYOS skills/examples;
 - versioned capabilities, quotes and acceptance, signed receipts, validators, and trust observations;
@@ -134,7 +189,7 @@ published release exists for it; those changes remain listed here as inherited
 - provider SDK plus CLI, MCP, and OpenAPI importers and local descriptor publication;
 - six shared MCP/CLI/provider tools, with financial operations kept outside model control.
 
-## 0.1.0 — 2026-08-10
+## 0.1.0 (2026-08-10)
 
 Initial working alpha:
 
@@ -150,3 +205,25 @@ Initial working alpha:
 - provider-native tool declarations;
 - ChatGPT/Codex, Claude, DeepSeek, Z.AI, and OpenClaw integration material;
 - generated JSON Schemas, examples, security guidance, and tests.
+
+### 0.8 incremental-capability work (not release acceptance)
+
+- Added versioned differential experiments, four-arm schedules, optional skill
+  exposure, multimetric utility and immutable operator budget amendments.
+- Added a contained workbook recipe with independent OOXML grading and fault
+  fixtures, plus capable Linux worker build assets.
+- Preserved legacy contracts and separated upstream adapter support from product
+  evidence. Authenticated conformance, native catalog and live acceptance remain
+  incomplete; see reports/v08/incremental-status.md.
+
+- Added configured assessment setup to CLI and model tools, including bounded
+  choice listing and reviewed executable fixture generation. New agent setup
+  requires capable isolated workers; legacy initialization remains available.
+  Scope and review checks preserve the existing grant, and model fixture results
+  exclude task inputs and expected answers.
+
+- Preserve historical assessment-report digests when the execution-failure count
+  was absent; explicit counts remain serialized.
+- Add an opt-in bounded local Codex catalog-metrics relay through the existing
+  worker/stdio path. Preserve partial observations and unknown discovery states;
+  metrics alone cannot satisfy native-catalog release gates.

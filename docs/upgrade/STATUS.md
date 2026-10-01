@@ -1,5 +1,8 @@
 # AEEP 0.7 upgrade status
 
+This record covers the 0.7 upgrade. Current 0.8 results and unfinished work are
+recorded in [plan coverage](../../reports/v08/plan-coverage.md).
+
 Baseline revision: `405a74433df1707823c59597dabd84ba9aaa19cf`
 
 | Phase | State | Next executable step |

@@ -1,4 +1,4 @@
-# AEEP 0.7 proof assets
+# AEEP 0.8 proof assets
 
 These assets preserve the qualification, accounting, campaign, workflow, and
 release-gate paths introduced before 0.4. The `fixture.*` routes are hermetic
@@ -6,15 +6,15 @@ harness tests and must never be described as live model evidence. The 0.4
 economic-settlement campaign is documented separately under
 `examples/economic_evidence/`.
 
-The controlled MCP supply is the Docker `fetch` image pinned in
+The controlled MCP provider uses the Docker `fetch` image pinned in
 `docker-fetch-provider.json`. The operator profile is named `aeep-lab`, has
 dynamic tools disabled, and enables only `fetch.fetch`. Qualification is bound
 to the checked-in image/profile/gateway fingerprint before activation.
 
 Campaign outputs belong in `.aeep/proof-results/`; the isolated benchmark
 database belongs in `.aeep/`. Neither contains action inputs or model outputs.
-Direct API campaigns remain cost-gated: do not run them without an explicit
-cash ceiling and per-trial billing evidence. Subscription-backed Codex
+Direct API campaigns require an explicit cash ceiling and per-trial billing
+evidence before execution. Subscription-backed Codex
 campaigns may report measured tokens and API-equivalent counterfactuals, but
 actual cash and subscription credits remain unavailable without independent
 evidence.

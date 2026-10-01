@@ -1,0 +1,152 @@
+{
+  "source_before": "5676fd7387befe5cec3cbdec963f06e843f578142d63791033b03f2d349c3063",
+  "source_after": "5676fd7387befe5cec3cbdec963f06e843f578142d63791033b03f2d349c3063",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.044066542061045766,
+      "log": "reports/v08/search-tree-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6492079999297857,
+      "log": "reports/v08/search-tree-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.0429657920030877,
+      "log": "reports/v08/search-tree-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.29474262497387826,
+      "log": "reports/v08/search-tree-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.14965758298058063,
+      "log": "reports/v08/search-tree-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 338.8847774999449,
+      "log": "reports/v08/search-tree-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 464.0178641669918,
+      "log": "reports/v08/search-tree-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0465875000227243,
+      "log": "reports/v08/search-tree-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-tree-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.337323416955769,
+      "log": "reports/v08/search-tree-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-tree-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04860995803028345,
+      "log": "reports/v08/search-tree-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-tree-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0482150410534814,
+      "log": "reports/v08/search-tree-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1401696249376982,
+      "log": "reports/v08/search-tree-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04880450002383441,
+      "log": "reports/v08/search-tree-check-12.txt"
+    }
+  ]
+}

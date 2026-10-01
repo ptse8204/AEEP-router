@@ -1,15 +1,15 @@
 # HTTP executor example
 
-Terminal 1:
+Start the example server in one terminal:
 
 ```bash
 python examples/http/server.py
 ```
 
-Terminal 2:
+Run the action in another terminal:
 
 ```bash
 aeep run text.stats -i '{"text":"one two"}' -m examples/http/aeep.yaml
 ```
 
-The API returns a trusted cost header which becomes observed monetary usage.
+AEEP records the API's trusted cost header as observed monetary usage.

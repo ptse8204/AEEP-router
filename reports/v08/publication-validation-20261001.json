@@ -1,0 +1,163 @@
+{
+  "kind": "documentation and publication verification; no new live qualification",
+  "commands": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_version_consistency.py",
+        "tests/test_v08_task_presentation.py",
+        "tests/test_v08_skillsbench_offer_letter.py"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 1.8075361249502748,
+      "log": "publication-check-6-20261001-final.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_version_consistency.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.8354869589675218,
+      "log": "publication-check-9-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.9780440831091255,
+      "log": "publication-check-10-20261001.log"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.07774529210291803,
+      "log": "publication-check-11-20261001.log"
+    }
+  ],
+  "prior_full_validation": "delivery-boundary-validation-5fffda8a3210-audit.json",
+  "digest_transition": {
+    "prior_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+    "current_digest": "b37a3d3d18ac6d775558634fa4d435ac54a7b011c0a531e137726f169d568eca",
+    "changed_bound_files": [
+      {
+        "path": "integrations/aeep/README.md",
+        "before": "0cbaecd27b8b8178796bb19b74ed8145bf7b16d1254ee2ed2353ce23881e4cf3",
+        "after": "39f0cc54cea58928bebd36b4f80f1b713f616fcee02c10629c279b24151d2ad3"
+      },
+      {
+        "path": "integrations/aeep/skills/assess-plugin/SKILL.md",
+        "before": "25d1d391ab0d679f615282b2121ec9234f6b6dc7da35a0db629259728d02678f",
+        "after": "d0489c6744f8b0eb0cd6d4e2a71c05389aeb75eb0d799158d93677b762c1a522"
+      },
+      {
+        "path": "integrations/managed-worker/README.md",
+        "before": "cb564e28609f30093b84d2c5d8493d9ed5629d8d459d7edf9f094b889d49bfde",
+        "after": "020defbd88a17f15426a42efec369d460bc28848ea65b61b180dc251c1dd2a25"
+      }
+    ]
+  },
+  "earlier_checks": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04024624987505376,
+      "log": "publication-check-1-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7279386250302196,
+      "log": "publication-check-2-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04038370796479285,
+      "log": "publication-check-3-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.18612508405931294,
+      "log": "publication-check-4-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.1824328750371933,
+      "log": "publication-check-5-20261001.log"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_version_consistency.py",
+        "tests/test_v08_task_presentation.py",
+        "tests/test_v08_skillsbench_offer_letter.py"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 1.9135799170471728,
+      "log": "publication-check-6-20261001.log"
+    }
+  ],
+  "correction": "Restored the README status, accounting version wording and changelog heading consumed by the existing version-consistency test; no test code changed.",
+  "all_final_checks_passed": true,
+  "focused_tests": "15 presentation/SkillsBench checks passed in retained combined runs; both version-consistency checks passed after restoring required markers.",
+  "full_suite_repeated": false,
+  "live_checks_repeated": false,
+  "staged_whitespace_review": {
+    "exit_code": 2,
+    "issue_count": 469,
+    "outside_archived_reports": [
+      "src/aeep/assessment/fixed_helper.py:133: trailing whitespace.",
+      "src/aeep/hosts/codex_pair_inspection.py:982: new blank line at EOF.",
+      "src/aeep/hosts/codex_project.py:206: new blank line at EOF.",
+      "tests/test_fixed_helper.py:70: new blank line at EOF.",
+      "tests/test_v08_task_lifecycle.py:560: new blank line at EOF."
+    ],
+    "disposition": "Retained existing source bytes and exact archived evidence; whitespace findings are not execution or prose regressions."
+  }
+}

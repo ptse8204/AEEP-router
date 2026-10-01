@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from fastapi import Request as _FastAPIRequest
 
-from ..errors import AEEPError, ApprovalRequired, ProtocolError
+from ..errors import AEEPError, ApprovalRequired, ConfigurationError, ProtocolError
 from ..integrations import export_tools
 from ..models import ActionRequest, ExternalOutcomeReport, QuoteRequest, ResourceVector, SideEffect
 from ..router import Router
@@ -177,18 +177,60 @@ class AEEPToolService:
         *,
         approved_side_effect: SideEffect = SideEffect.READ,
         allow_unsafe_executor: bool = False,
+        profile: str = "legacy",
+        task_scope: str | None = None,
+        task_activation: str | None = None,
     ) -> None:
         self.router = router
         # These are operator-controlled ceilings. Tool-call arguments are
         # untrusted model output and therefore cannot elevate approvals.
         self.approved_side_effect = approved_side_effect
         self.allow_unsafe_executor = allow_unsafe_executor
+        if profile not in {"legacy", "assessment", "task"}:
+            raise ConfigurationError("unknown tool profile")
+        self.profile = profile
+        if task_activation is not None:
+            from ..assessment.models import content_digest
+            from ..tasks import require_activation
+            if task_scope is not None or profile != 'task':
+                raise ConfigurationError('task activation requires the task profile and cannot be combined with another scope')
+            activation = require_activation(router, task_activation)
+            router._task_activation_digest = content_digest(activation)
+            task_scope = activation.scope_digest
+        if task_scope is not None:
+            if profile != 'task':
+                raise ConfigurationError('task scope requires the task-only tool profile')
+            scope_ceiling = router.bind_task_scope(task_scope)
+            self.approved_side_effect = min(approved_side_effect, scope_ceiling, key=lambda level: level.rank)
+        self.assessment_workers: list[Any] = []
+
+    @property
+    def instructions(self) -> str:
+        if self.profile == 'task':
+            return ('Use the available task tools within the operator scope. Results include recorded '
+                    'verification limits and recovery state. No assessment or approval controls are exposed.')
+        return _INSTRUCTIONS
 
     def list_tools(self) -> list[dict[str, Any]]:
+        if self.profile in {"assessment", "task"}:
+            from ..assessment.tools import declarations
+            if self.profile == 'task':
+                specs = self.router.registry.all()
+                if self.router._task_scope_digest is not None:
+                    from ..assessment.repository import AssessmentRepository
+                    from ..economic.prepared import executor_fingerprint
+                    from ..models import TaskScope
+                    scope = TaskScope.model_validate(AssessmentRepository(self.router.store).get('task_scope', self.router._task_scope_digest))
+                    specs = [spec for spec in specs if scope.executor_fingerprints.get(spec.id) == executor_fingerprint(spec)]
+                return declarations(self.router.store, tasks_only=True, capabilities={spec.capability for spec in specs})
+            return declarations(self.router.store, tasks_only=self.profile == 'task')
         return export_tools("mcp")
 
     async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            if self.profile in {"assessment", "task"}:
+                from ..assessment.tools import call
+                return await call(self, name, arguments)
             if name == "aeep_list_capabilities":
                 payload = self.router.search_capabilities(
                     str(arguments.get("query", "")),
@@ -337,7 +379,7 @@ class MCPProtocolApp:
                 {
                     "supportedVersions": [MODERN_VERSION, LEGACY_VERSION],
                     "capabilities": {"tools": {"listChanged": False}},
-                    "instructions": _INSTRUCTIONS,
+                    "instructions": self.service.instructions,
                     "ttlMs": 300_000,
                     "cacheScope": "private",
                 },
@@ -352,7 +394,7 @@ class MCPProtocolApp:
                     "protocolVersion": LEGACY_VERSION,
                     "serverInfo": {"name": "aeep-agent-router", "version": __version__},
                     "capabilities": {"tools": {"listChanged": False}},
-                    "instructions": _INSTRUCTIONS,
+                    "instructions": self.service.instructions,
                 },
             )
         if method == "ping":
@@ -417,6 +459,9 @@ async def serve_stdio(
     approved_side_effect: SideEffect = SideEffect.READ,
     allow_unsafe_executor: bool = False,
     max_message_bytes: int = 2_000_000,
+    profile: str = "legacy",
+    task_scope: str | None = None,
+    task_activation: str | None = None,
 ) -> None:
     """Run until stdin closes."""
 
@@ -426,6 +471,9 @@ async def serve_stdio(
             router,
             approved_side_effect=approved_side_effect,
             allow_unsafe_executor=allow_unsafe_executor,
+            profile=profile,
+            task_scope=task_scope,
+            task_activation=task_activation,
         )
     )
     max_bytes = max(1024, int(max_message_bytes))
@@ -471,6 +519,9 @@ def create_http_app(
     allow_unsafe_executor: bool = False,
     max_body_bytes: int = 2_000_000,
     allowed_origins: set[str] | None = None,
+    profile: str = "legacy",
+    task_scope: str | None = None,
+    task_activation: str | None = None,
 ) -> Any:
     """Create an optional FastAPI app without making FastAPI a base dependency."""
 
@@ -491,6 +542,9 @@ def create_http_app(
         router,
         approved_side_effect=approved_side_effect,
         allow_unsafe_executor=allow_unsafe_executor,
+        profile=profile,
+        task_scope=task_scope,
+        task_activation=task_activation,
     )
     protocol = MCPProtocolApp(service)
 

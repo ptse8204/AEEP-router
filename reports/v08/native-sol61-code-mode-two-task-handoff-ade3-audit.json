@@ -1,0 +1,174 @@
+{
+  "status": "pass: bounded native code-mode two-task diagnostic, no value/qualification/release claim",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "files": {
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-result-288e.json": "d6f77b48fcaddf3cbcf14e8b2a34119854fbc9de46a6df2dfc4a1b6db2f67326",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-parent-review.json": "1c8f816e8ff7c64f7cd6aebc859c5c42d332426600d9ba5a37beed6a16a2f799",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-preparation-review.json": "bb1fa8b001f2fd30912fc81314ecb501bb3b459e9f2bbbab4b727076357089f1",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-review-288e.json": "954e54776531821281aa7ac62515275f81195a704952edd66780655bc74ba0f3",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3-setup-review.json": "c2600a0727017df8c8fe9fea3e33a79fe6db4c95be22a36c3bed3d53843aba43",
+    "reports/v08/native-capacity-refresh-two-task-ade3-result.json": "59659a7c822131d1ff4c1ba7fd6a2645fe19827cd02ad014aa02a50bb91c07e1",
+    "reports/v08/native-capacity-refresh-two-task-ade3-exact-review.json": "c893044d1e397f5427212b2308ba07545a8f3b79b1ab5a502e76fb4181460e7a",
+    "reports/v08/native-sol61-code-mode-two-task-handoff-ade3.py": "5d270124b3b73547328ba138f2d62722b3a38518059d3d07bc6d6b2c38de9308",
+    ".aeep/native-sol61-code-mode-two-task-handoff-ade3-evidence/task-state/state.db": "bbb61a9c15fb097dba89abb47f53ed7492f2319105e9b9e484a03cf3e71cef93"
+  },
+  "actuals": {
+    "setup_elapsed_seconds": 0.44449437502771616,
+    "elapsed_seconds": 17.80378087493591,
+    "token_usage": {
+      "inputTokens": 59694,
+      "cachedInputTokens": 29568,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 291,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 59985
+    },
+    "actual_model": null,
+    "durable_task_attempts": 2,
+    "durable_receipts": 2,
+    "cleanup_confirmed": true,
+    "source_unchanged": true,
+    "reader_command_events": [
+      {
+        "type": "commandExecution",
+        "tool": null,
+        "namespace": null,
+        "command_sha256": "e2f50bd12066443ee6aa0510c27bc01dbaec8330cf1ecb2c98dd0f49cda44795",
+        "command_equals_reviewed_reader": true,
+        "exit_code": 0
+      }
+    ],
+    "checks": [
+      {
+        "index": 0,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+        "independent_grader_valid": true
+      },
+      {
+        "index": 1,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+        "independent_grader_valid": true
+      }
+    ]
+  },
+  "durable_receipts": [
+    {
+      "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+      "executor_id": "native.workbook.sol61-two-task-handoff",
+      "status": "success",
+      "task_valid": true,
+      "schema_valid": true,
+      "validation_results": [
+        {
+          "kind": "schema",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "schema validation passed",
+          "trust": "observed"
+        },
+        {
+          "kind": "callback",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "callback validation passed",
+          "trust": "verified"
+        }
+      ],
+      "actual_resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 417.8421660326421,
+        "cpu_ms": 217.82254,
+        "memory_mb_seconds": 19.881016240287863,
+        "peak_memory_mb": 149.890625,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 1829,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "metadata": {
+        "attempt_id": "attempt_054e2cd2336a453b8a3cb64f308373cd",
+        "task_scope_digest": "60b7c978c01550408eedc69c04843e5f4e4380fbfa7a65ef01d61966ad1fb609",
+        "enforcement_backend_digest": "6b6b85c61f5b0727d655ffdab9952824de259256882d22b88d46208ee687b455",
+        "execution_evidence_digest": "d7b53a71c16eab205c2f8706d7f0ee36a60239d1751f4d46ae3bec83d2e34507"
+      }
+    },
+    {
+      "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+      "executor_id": "native.workbook.sol61-two-task-handoff",
+      "status": "success",
+      "task_valid": true,
+      "schema_valid": true,
+      "validation_results": [
+        {
+          "kind": "schema",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "schema validation passed",
+          "trust": "observed"
+        },
+        {
+          "kind": "callback",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "callback validation passed",
+          "trust": "verified"
+        }
+      ],
+      "actual_resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 383.31841700710356,
+        "cpu_ms": 210.938624,
+        "memory_mb_seconds": 20.312115627410094,
+        "peak_memory_mb": 149.921875,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 2180,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "metadata": {
+        "attempt_id": "attempt_047ffefda4f2429c90b48988c45c2749",
+        "task_scope_digest": "60b7c978c01550408eedc69c04843e5f4e4380fbfa7a65ef01d61966ad1fb609",
+        "enforcement_backend_digest": "6b6b85c61f5b0727d655ffdab9952824de259256882d22b88d46208ee687b455",
+        "execution_evidence_digest": "c8689484066c3d98c6ed54eb0cfdfc5337d448d8ba7dcdf83c54b64acb5b4979"
+      }
+    }
+  ],
+  "durable_attempts": [
+    {
+      "attempt_id": "attempt_054e2cd2336a453b8a3cb64f308373cd",
+      "state": "COMPLETED"
+    },
+    {
+      "attempt_id": "attempt_047ffefda4f2429c90b48988c45c2749",
+      "state": "COMPLETED"
+    }
+  ],
+  "content_artifacts": 0,
+  "lifecycle": {
+    "uninstalled": true,
+    "scope_attempts_remaining": 0,
+    "recovery_attempts": [],
+    "owned_directory_absent": true
+  },
+  "limitations": [
+    "Model requestedgpt6.1sol medium; actual_model absent, no independent provider identity observation.",
+    "Timing is n1 exploratory and includes native host/MCP/task overhead; no comparative benefit or broad readiness claim.",
+    "Network observation unknown; unexpected tool detection post-execution only.",
+    "Payloads not retained; independent grader booleans computed from actual transient outputs before assertions, bound to durable receipts.",
+    "Prior seed113 result remainsfailed; exact wrapper-equivalence retrospective does not fabricate independent grading of unretained prior output."
+  ]
+}

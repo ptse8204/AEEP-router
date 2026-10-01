@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-09-28T23:48:48.348561+00:00",
+  "authority": "Operator explicitly requested switching experimental agents to GPT-6 Sol; standing September 27 exact-review and finite-amendment authority.",
+  "source_digest": "6daf49e503146b89cc1bd29f606bb2a310b551bed5dacc4e6941be719c04c839",
+  "target_model": "gpt-6-sol",
+  "scope": "All future experiment model calls across CSV, text, search and workbook, including qualification, four value arms, training-only builders, model conformance, and native-catalog/task-only follow-through.",
+  "reasoning_policy": "Preserve each existing role: medium normal/candidate/reusable, high higher-compute; builder and qualification efforts unchanged.",
+  "official_model_documentation": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+  "local_model_availability": "Not yet verified in the pinned managed worker; official model documentation is not local conformance evidence.",
+  "successor_definitions": [
+    {
+      "family": "text",
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/sol-successor-definitions/text.json",
+      "sha256": "23f83dbb7edc824dea048b6de91bd4324f7b6c2a659dd031e2e5f70f341cb583",
+      "executor_count": 7
+    },
+    {
+      "family": "csv",
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/sol-successor-definitions/csv.json",
+      "sha256": "4e6c21893fd1046c314fc2e4b9740cb7cbe8806bb39d6f9bff115effac2fc8ae",
+      "executor_count": 7
+    },
+    {
+      "family": "search",
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/sol-successor-definitions/search.json",
+      "sha256": "561c71471b4deeb6c8704b1675696d37d9706d8aa146fd1791ddd92670d8635f",
+      "executor_count": 7
+    },
+    {
+      "family": "workbook",
+      "path": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/sol-successor-definitions/workbook.json",
+      "sha256": "0368dae6919e3127e2c7c6a14ce86ef18e804467c471b63554394ef0ca3827d0",
+      "executor_count": 7
+    }
+  ],
+  "predecessor_review_hashes": {
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/text-four-arm-schema-local-freeze-complete-review.json": "a698e6feb297e94e69da80101124950039d4d279085e40e424df1d16733831fd",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/text-builder-schema-local-execution-review.json": "865d187c96e39ee56aa3a81cd3950db433b96a6cf4356b060fee501bd45578b9",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/csv-four-arm-schema-local-freeze-complete-review.json": "2f0c954958c022634a4fce20edb99cdacc8f0cc34536d5d5d4d2633ff721c3a7",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/csv-builder-schema-local-execution-review.json": "67ce4ac1170dd6813490d72a023c5af264a44d69244f9c97d7e890f24575e597",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-four-arm-contract-local-freeze-complete-review.json": "6d5a1a6fb2791e28180645c0dea6fc260a916aed462e9e71be2209fa3ee287bd",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-builder-contract-local-execution-review.json": "3f60245316f0f7caa22d6964eb73356cc62d10605d4a27df03bfc8a9a4447f3c",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/workbook-four-arm-recovery-freeze-complete-review.json": "9d802cfdf929e74c0640a9d80d343297f004e75587fcd15a1e74b56af0e71d0b",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/builder-recovery-final-execution-review.json": "7a2c9e3b9a9425da288389a09f0d6b4fffd8c7067e008b78d0c2ff091f2a08cc"
+  },
+  "validation": {
+    "executor_specs_validated": 28,
+    "only_spec_changes": [
+      "id suffix .sol",
+      "config.model_constraints.allowed_model_ids: gpt-6-astra to gpt-6-sol"
+    ],
+    "reasoning_prompts_thresholds_and_guardrails_preserved": true,
+    "source_digest_unchanged": true,
+    "historical_review_hashes_unchanged": true,
+    "active_live_jobs": 0
+  },
+  "usage_before": [
+    8546,
+    2522,
+    73621.2754641946,
+    "0.0"
+  ],
+  "usage_after": [
+    8546,
+    2522,
+    73621.2754641946,
+    "0.0"
+  ],
+  "live_execution_started": false,
+  "remaining_gates": [
+    "Actual-container repair validation",
+    "Fresh Sol model/source-bound worker conformance",
+    "Fresh qualification and disjoint value/native-catalog plans; fresh training-only reusable builds",
+    "Source-bound controlled lifecycle and final release verification",
+    "Native-catalog observations and prior interrupted CSV accounting remain explicit gaps"
+  ]
+}

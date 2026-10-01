@@ -1,0 +1,88 @@
+{
+  "kind": "standing-authority finite preparation; no trial executed",
+  "authority": "docs/ASSESSMENT_TESTING.md; parent delegated one exploratory preparation September 30",
+  "source_digest": "67c5c28237caf555bb8bb57c7b0b7c58958dae0f3b0bba7bfce412d5f2763cdb",
+  "upstream_commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "inputs": {
+    "offer_letter_template.docx": {
+      "url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/environment/offer_letter_template.docx",
+      "sha256": "34a2fe42f5799f35b9543af63d712b9e28cc93f97847528c3fbfe76071f60d15",
+      "bytes": 38686,
+      "zip_valid": true,
+      "zip_members": 19,
+      "uncompressed_bytes": 834777
+    },
+    "employee_data.json": {
+      "url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/environment/employee_data.json",
+      "sha256": "64dcb6aad2423051a638efefc85d1b47d306718e462342281553bf00082870c0",
+      "bytes": 774
+    }
+  },
+  "execution_performed": false,
+  "admission_allowed": false,
+  "official_reproduction": false,
+  "case_contract": {
+    "capability": "assessment.offer_letter@1",
+    "input": [
+      "template_b64",
+      "employee_data"
+    ],
+    "output": {
+      "document_b64": "bounded base64 DOCX; at most 200000 encoded chars and 150000 decoded bytes"
+    },
+    "local_program_cap_seconds": 30,
+    "oracle": "src/aeep/assessment/skillsbench_offer_letter.py:grade_artifact; trusted coordinator callback only",
+    "existing_case_adapter": "exploratory_case",
+    "split_caveat": "Existing adapter uses QUALIFICATION split internally. One case is exploratory only; do not invoke admission/qualification transitions."
+  },
+  "fixture_definitions": [
+    {
+      "id": "correct",
+      "builder": "tests/test_v08_skillsbench_offer_letter.py:_filled with pinned data",
+      "expected": "all independent grade_artifact checks true"
+    },
+    {
+      "id": "unfilled-template",
+      "builder": "exact pinned template bytes",
+      "expected": "upstream/text checks reject"
+    },
+    {
+      "id": "removed-body-paragraph",
+      "builder": "_filled remove_paragraph=True",
+      "expected": "text/structure reject"
+    },
+    {
+      "id": "malformed-base64",
+      "builder": "literal invalid base64 output",
+      "expected": "bounded parser reject"
+    }
+  ],
+  "protected_handoff": {
+    "worker_visible": [
+      "pinned template",
+      "pinned employee data",
+      "task instructions",
+      "candidate executable and bounded output contract"
+    ],
+    "worker_excluded": [
+      "oracle source",
+      "correct/fault outputs",
+      "expected results",
+      "parent repository writes",
+      "future cases"
+    ],
+    "return": "document_b64 as existing bounded action output; callback validation in trusted Router coordinator",
+    "required_before_trial": [
+      "review existing recipe extension truth/output contracts for exact artifact output",
+      "separate controlled worker mount inspection confirming oracle exclusion",
+      "bind candidate executable/runtime and literal argv",
+      "record finite budget operation and standalone exploratory disposition"
+    ],
+    "no_new_transport": "Use existing action output and trusted callback; do not create parallel artifact service."
+  },
+  "dependencies": [
+    "current frozen validation/native model/resource evidence finishes before source work",
+    "if current recipe materializer cannot express this exact binary artifact callback, report contract gap before changing source",
+    "141-case reviewed recipe required for later qualification; not authorized by this one-case preparation"
+  ]
+}

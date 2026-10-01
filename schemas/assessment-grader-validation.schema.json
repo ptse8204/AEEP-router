@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.grader-validation.v1",
+      "default": "assessment.grader-validation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "recipe_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Digest",
+      "type": "string"
+    },
+    "independent_fixture_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Independent Fixture Digests",
+      "type": "array"
+    },
+    "generator_fixture_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Generator Fixture Digests",
+      "type": "array"
+    },
+    "rejected_fault_count": {
+      "minimum": 1,
+      "title": "Rejected Fault Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "recipe_digest",
+    "independent_fixture_digests",
+    "generator_fixture_digests",
+    "rejected_fault_count"
+  ],
+  "title": "GraderValidationEvidence",
+  "type": "object"
+}

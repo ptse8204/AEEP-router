@@ -1,0 +1,542 @@
+{
+  "classification": "Actual current5fff installed-native zero-model cold/idle/failure/recovery follow-through; no model replay, benefit/qualification or new idle threshold",
+  "result_sha256": "c3c92a074591fcd64d711ec72e34b833e87815da83f85b01b6455b726de4df50",
+  "driver_sha256": "21d34b77730030b5d48aba08d73dbebd3fdcafd6c1546f2e9b8e7828b24df5aa",
+  "review_sha256": "499f9001ca43846be823d82774e494af3a567b7a513f694cd3a1715c210b13a1",
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "source_unchanged": true,
+  "all_dependencies_unchanged": true,
+  "samples": [
+    {
+      "phase": "idle_host",
+      "total_inclusive_seconds": 5.341687540989369,
+      "setup_seconds": 0.14271245803683996,
+      "setup_controller_cpu_delta_seconds": 0.13847875799999998,
+      "setup_controller_rss_before_bytes": 94584832,
+      "setup_controller_rss_after_bytes": 101711872,
+      "rss_sampling_scope": "Observed phase endpoints, not unobserved transient peak; entire fresh-child process tree separately sampled",
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 4640.350110999999,
+        "peak_memory_mb": 694.44921875,
+        "memory_mb_seconds": 2428.3575359942715
+      },
+      "scope_digest": "64e71450893ec5ad9aa11599121d5e62e2189bb0aabc977f7a79835e630d9464",
+      "executor_fingerprint": "sha256:24d83f5523e3a5fc9feec9af46c234f7016d0563002c57ca6b7d8bbcd514a443",
+      "backend_digest": "7c858d0d829170c716a750642059e5a02427b8fe7eac0f633ee2993d8f993a47",
+      "closed_store_final": {
+        "logical_bytes": 946176,
+        "allocated_bytes": 983040,
+        "files": 2
+      },
+      "config_states": [
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 608,
+          "allocated_bytes": 4096,
+          "files": 1
+        },
+        {
+          "logical_bytes": 608,
+          "allocated_bytes": 4096,
+          "files": 1
+        },
+        {
+          "logical_bytes": 608,
+          "allocated_bytes": 4096,
+          "files": 1
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        }
+      ],
+      "checkpoint_controller": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.2875068932771683e-05,
+          "controller": {
+            "cpu_seconds": 0.35066474400000003,
+            "rss_bytes": 94289920
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.02565904101356864,
+          "controller": {
+            "cpu_seconds": 0.37283077600000003,
+            "rss_bytes": 99090432
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.14373554103076458,
+          "controller": {
+            "cpu_seconds": 0.490112384,
+            "rss_bytes": 101711872
+          }
+        },
+        {
+          "phase": "native_host_and_own_mcp_ready",
+          "elapsed_seconds": 1.8993541251402348,
+          "controller": {
+            "cpu_seconds": 1.2783110400000002,
+            "rss_bytes": 103366656
+          }
+        },
+        {
+          "phase": "idle_3_seconds_complete",
+          "elapsed_seconds": 4.900878583081067,
+          "controller": {
+            "cpu_seconds": 3.451821824,
+            "rss_bytes": 103366656
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 4.9130018330179155,
+          "controller": {
+            "cpu_seconds": 3.4636771200000003,
+            "rss_bytes": 103301120
+          }
+        }
+      ],
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "errors": [],
+      "host_ready_seconds": 1.755179583095014,
+      "idle_seconds": 3.0010695001110435,
+      "idle_native_tree_metrics": {
+        "cpu_ms": 1195.3744949999998,
+        "peak_memory_mb": 382.74609375,
+        "memory_mb_seconds": 1134.2860243420546
+      },
+      "idle_identity_matched_cpu_delta_seconds": 0.01964159199999997,
+      "idle_cpu_identity_count": 6,
+      "idle_missed_identity_cost_unknown": true,
+      "native_tree_whole_host_metrics": {
+        "cpu_ms": 1909.049833,
+        "peak_memory_mb": 596.23046875,
+        "memory_mb_seconds": 1916.3860348923945
+      },
+      "inventory": [
+        {
+          "name": "aeep_task_12abe87c4aae441fad1adb1de2fbec80",
+          "tools": [
+            "aeep_recipe_f468b36bc594"
+          ]
+        },
+        {
+          "name": "code-review",
+          "tools": []
+        },
+        {
+          "name": "codex_app",
+          "tools": []
+        },
+        {
+          "name": "computer-use",
+          "tools": []
+        },
+        {
+          "name": "cua_repl",
+          "tools": [
+            "js",
+            "js_reset",
+            "turn_ended"
+          ]
+        },
+        {
+          "name": "node_repl",
+          "tools": [
+            "js",
+            "js_add_node_module_dir",
+            "js_reset",
+            "turn_ended"
+          ]
+        },
+        {
+          "name": "shortlist",
+          "tools": [
+            "add_to_queue",
+            "bot_control",
+            "get_application_status",
+            "get_applied_jobs",
+            "manage_profile",
+            "manage_queue",
+            "manage_resumes",
+            "prefill_job",
+            "search_jobs"
+          ]
+        },
+        {
+          "name": "sweet-saver-fare",
+          "tools": []
+        },
+        {
+          "name": "tunnelMcp",
+          "tools": [
+            "connect_stdio_mcp",
+            "create_tunnel_runtime",
+            "install_or_select_tunnel_client",
+            "list_runtime_aliases",
+            "runtime_status",
+            "stop_runtime"
+          ]
+        }
+      ],
+      "native_permission_ack": "aeep-native-task",
+      "idle_ceiling": "Descriptive only: no prior numeric idle ceiling was declared or tuned.",
+      "imported_frozen_budget_checks": {
+        "current_source": true,
+        "setup40s": true,
+        "config1KiB": true,
+        "retained8MiB": true,
+        "cleanup": true,
+        "schema16KiB": true,
+        "config_mutations2": true
+      },
+      "applicable_checks_passed": true,
+      "observed_config_mutations": 2
+    },
+    {
+      "phase": "cold_command",
+      "total_inclusive_seconds": 1.0884891669265926,
+      "setup_seconds": 0.13770983298309147,
+      "setup_controller_cpu_delta_seconds": 0.13680376000000005,
+      "setup_controller_rss_before_bytes": 94879744,
+      "setup_controller_rss_after_bytes": 100859904,
+      "rss_sampling_scope": "Observed phase endpoints, not unobserved transient peak; entire fresh-child process tree separately sampled",
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 1026.1822419999999,
+        "peak_memory_mb": 249.703125,
+        "memory_mb_seconds": 119.27691307807982
+      },
+      "scope_digest": "276738e2f33a34da5e9996fb5dea3b812e05ea1f7d7f651869cedc744cd43ad5",
+      "executor_fingerprint": "sha256:4fe60f4b6e7f05b390d38c1aacc9e850c378d0f6506beb7e49a290e988114544",
+      "backend_digest": "62e936f76dd19d2b33a8d8b3ececa9a74b3c75e3c4fa51bafdbdc3ca0d0318b9",
+      "closed_store_final": {
+        "logical_bytes": 950272,
+        "allocated_bytes": 950272,
+        "files": 2
+      },
+      "config_states": [
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 608,
+          "allocated_bytes": 4096,
+          "files": 1
+        },
+        {
+          "logical_bytes": 608,
+          "allocated_bytes": 4096,
+          "files": 1
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        }
+      ],
+      "checkpoint_controller": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.2333039194345474e-05,
+          "controller": {
+            "cpu_seconds": 0.36850146,
+            "rss_bytes": 94502912
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.02313637500628829,
+          "controller": {
+            "cpu_seconds": 0.391004236,
+            "rss_bytes": 99319808
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.13870387501083314,
+          "controller": {
+            "cpu_seconds": 0.506259496,
+            "rss_bytes": 100859904
+          }
+        },
+        {
+          "phase": "cold_task_verified",
+          "elapsed_seconds": 0.6396409580484033,
+          "controller": {
+            "cpu_seconds": 0.825908704,
+            "rss_bytes": 104923136
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 0.6432917499914765,
+          "controller": {
+            "cpu_seconds": 0.829054688,
+            "rss_bytes": 104923136
+          }
+        }
+      ],
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "errors": [],
+      "cold_dispatch_seconds": 0.49891437496989965,
+      "receipt": {
+        "receipt_id": "rcpt_34544c30ff8a4b1a979601c65a187ce4",
+        "task_valid": true,
+        "recorded_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 458.93062511458993,
+          "cpu_ms": 214.119372,
+          "memory_mb_seconds": 28.62796879533198,
+          "peak_memory_mb": 150.15625,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 1829,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      "independent_grader_valid": true,
+      "legacy_zero_dimensions": "Receipt numeric defaults retained; absentnetwork/GPU/cash/subscription measurements unknown, not observed zeros.",
+      "imported_frozen_budget_checks": {
+        "current_source": true,
+        "setup40s": true,
+        "config1KiB": true,
+        "retained8MiB": true,
+        "cleanup": true,
+        "schema16KiB": true,
+        "required_and_independent": true,
+        "command5s": true,
+        "command4CPUs": true,
+        "command768MiB": true,
+        "command1500MiBs": true,
+        "config_mutations2": true
+      },
+      "applicable_checks_passed": true,
+      "observed_config_mutations": 2
+    },
+    {
+      "phase": "failure_recovery",
+      "total_inclusive_seconds": 0.7865097080357373,
+      "setup_seconds": 0.017678875010460615,
+      "setup_controller_cpu_delta_seconds": 0.016926508000000007,
+      "setup_controller_rss_before_bytes": 94552064,
+      "setup_controller_rss_after_bytes": 98189312,
+      "rss_sampling_scope": "Observed phase endpoints, not unobserved transient peak; entire fresh-child process tree separately sampled",
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 721.7348800000001,
+        "peak_memory_mb": 228.671875,
+        "memory_mb_seconds": 70.20335742826501
+      },
+      "scope_digest": "f601bd5c4f3373e385c7fac4f07d2f750965a9450d2bfeee6b49e3957838a7a1",
+      "executor_fingerprint": "sha256:12f6a9f03e443488f073c4b755f98f591c14c50ebcc210922dcc15c5e1168e15",
+      "backend_digest": "fd80b8e97c0b522418a6e9c60032191dca8e13ac3157e2ff6c1f9705b5f389e8",
+      "closed_store_final": {
+        "logical_bytes": 815104,
+        "allocated_bytes": 815104,
+        "files": 1
+      },
+      "config_states": [
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        },
+        {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0
+        }
+      ],
+      "checkpoint_controller": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.1250143870711327e-05,
+          "controller": {
+            "cpu_seconds": 0.357486712,
+            "rss_bytes": 94158848
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.018340750131756067,
+          "controller": {
+            "cpu_seconds": 0.375050336,
+            "rss_bytes": 98172928
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.01859679212793708,
+          "controller": {
+            "cpu_seconds": 0.375285216,
+            "rss_bytes": 98189312
+          }
+        },
+        {
+          "phase": "failed_write_unresolved",
+          "elapsed_seconds": 0.3398963341023773,
+          "controller": {
+            "cpu_seconds": 0.624033464,
+            "rss_bytes": 100958208
+          }
+        },
+        {
+          "phase": "closed_unresolved",
+          "elapsed_seconds": 0.3424001671373844,
+          "controller": {
+            "cpu_seconds": 0.6255789279999999,
+            "rss_bytes": 100925440
+          }
+        },
+        {
+          "phase": "reconciled_after_restart",
+          "elapsed_seconds": 0.35212983400560915,
+          "controller": {
+            "cpu_seconds": 0.634674608,
+            "rss_bytes": 101253120
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 0.3525826670229435,
+          "controller": {
+            "cpu_seconds": 0.635082696,
+            "rss_bytes": 101220352
+          }
+        }
+      ],
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "errors": [],
+      "failed_dispatch_seconds": 0.32114700018428266,
+      "recovery_seconds": 0.008587625110521913,
+      "failed_receipt_id": "rcpt_c846bc0778264042b59309ef2e92e9c1",
+      "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+      "reconciliation": {
+        "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+        "state": "FAILED",
+        "reconciliation_digest": "ce12eb9a61fd457bd61c6e78dd74e02227e92a501cbddbc009589e5b32a8b8b2",
+        "evidence_origin": "operator-reviewed inspection",
+        "automated_verification": false,
+        "allowance_reset": false
+      },
+      "closed_canonical_stores": {
+        "before": {
+          "database_sha256": "7a7b29d53e85286ff849ca11afd027b2f97fde32a60afc35223dffc57e97b5d0",
+          "bytes": 815104,
+          "attempt_rows": [
+            {
+              "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+              "state": "INDETERMINATE",
+              "version": 6,
+              "executor_fingerprint": "sha256:12f6a9f03e443488f073c4b755f98f591c14c50ebcc210922dcc15c5e1168e15"
+            }
+          ],
+          "receipt_count": 1
+        },
+        "after": {
+          "database_sha256": "3880f36ade7a75494d29dc97b862bc7a57e50e1bb1edd109c2aa66d842a7c75b",
+          "bytes": 815104,
+          "attempt_rows": [
+            {
+              "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+              "state": "FAILED",
+              "version": 8,
+              "executor_fingerprint": "sha256:12f6a9f03e443488f073c4b755f98f591c14c50ebcc210922dcc15c5e1168e15"
+            }
+          ],
+          "receipt_count": 1
+        }
+      },
+      "imported_frozen_budget_checks": {
+        "current_source": true,
+        "setup40s": true,
+        "config1KiB": true,
+        "retained8MiB": true,
+        "cleanup": true,
+        "recovery10s": true,
+        "no_allowance_reset": true,
+        "terminal_failed": true,
+        "before_indeterminate_after_failed": true,
+        "receipt_preserved": true,
+        "config_mutations2": true
+      },
+      "applicable_checks_passed": true,
+      "observed_config_mutations": 0
+    }
+  ],
+  "measurement_completed": true,
+  "all_applicable_frozen_checks_passed": true,
+  "actual_accounting": {
+    "operations": 3,
+    "model_turns": 0,
+    "elapsed_seconds": 7.216686415951699,
+    "cash_ledger_delta": "0.0"
+  },
+  "applicability": "Same current native runtime/module hashes/binary/profile compiler; exact per-fixture scopes/executor fingerprints/backend digests bind different owned roots and READ/WRITE permissions. Never transfer failed unrelated lifecycle component or historical f55/468 metrics.",
+  "assessment_vs_production": "Parent whole-child tree includes import/setup/assessmentcontroller and owned native processes, labelled combined; actual idle AppServer+MCP tree sampled separately. Controller setup CPU/RSS endpoints recorded, not a claimed continuous phasepeak. Protected fixture/grader and DB evidence copying remain assessment costs.",
+  "storage": "Closed before/after canonical SQLite stores retained in owned lab evidence; marker effects reverted locally and task allowance not refunded. Successful transient roots removed. No globalDocker/cache/usercleanup.",
+  "unknowns": [
+    "Ambient Docker/testcontainer cleanup/VM activity remainsunknown",
+    "Providercompute/energy/network/subscription/cash and sharedpages/cache attribution unavailable",
+    "Rapid missed process lifetimes/setup transientRSSpeak not fabricated",
+    "Coldchild import plus startup tree sampled; setup phasepoint snapshots do not isolate every sharedpage or library allocation",
+    "Human effort/development/review compute outside observed runtimeledger"
+  ],
+  "resource_model_pair_immutable": true,
+  "no_runtime_repeats": true,
+  "release_ready": false,
+  "independent_audit_sha256": "1927db3c8be0a6af60287de3e4877130053f9b17135da91be9c84aec6d0548aa"
+}

@@ -1,0 +1,22 @@
+{
+  "image": "sha256:3c83ebf81e94017d2859a4a2cb38ae5db40f26126b897f44de7bf46e6d4686ff",
+  "version": "0.154.0",
+  "model_turns": 0,
+  "signed_in": false,
+  "args": [
+    "sandbox",
+    "-P",
+    "aeep",
+    "--include-managed-config",
+    "--",
+    "python3",
+    "-c",
+    "import pathlib; print('ALLOWED'); print(pathlib.Path('/worker/auth/canary').exists())"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)\nbwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. On e.g. debian this can be enabled with 'sysctl kernel.unprivileged_userns_clone=1'.\n",
+  "purpose": "Unsigned-in local environment probe; not plugin or model evaluation",
+  "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+  "environment_verified": false
+}

@@ -1,7 +1,8 @@
 # AEEP 0.7 managed-host and economic evidence threat model
 
-This document scopes the new economic evidence path. It complements
-`SECURITY.md`; it is not a penetration-test report or a production certification.
+This document describes threats and controls for managed-host execution and
+economic evidence. It complements `SECURITY.md` and provides neither a
+penetration-test report nor production certification.
 
 ## Security objectives
 

@@ -1,0 +1,81 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "assessment.recipe-materialization.v1",
+      "enum": [
+        "assessment.recipe-materialization.v1",
+        "assessment.recipe-materialization.v2"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    },
+    "recipe_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Digest",
+      "type": "string"
+    },
+    "mapping_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Mapping Digest",
+      "type": "string"
+    },
+    "environment_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Digest",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "definition_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Definition Digests",
+      "type": "array"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "runtime_dependencies": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Runtime Dependencies"
+    }
+  },
+  "required": [
+    "subject_digest",
+    "recipe_digest",
+    "mapping_digest",
+    "environment_digest",
+    "authorization_id",
+    "definition_digests",
+    "seed"
+  ],
+  "title": "RecipeMaterializationRequest",
+  "type": "object"
+}

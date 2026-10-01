@@ -1,6 +1,6 @@
 # GitHub default branch demo
 
-This example routes one real action across local Git, GitHub REST, GitHub MCP, two commercial subscriptions, and a browser delegate.
+This example chooses a route for one real action: finding a repository's default branch. The available routes use local Git, GitHub REST, GitHub MCP, two commercial subscriptions, or a browser delegate.
 
 ```bash
 aeep route github.repository.default-branch@1 \

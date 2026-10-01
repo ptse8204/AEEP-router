@@ -1,0 +1,16 @@
+{
+  "status": "static resolution checked; actual Linux helper handshake pending validation terminal",
+  "primary_source": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/install-context/src/lib.rs",
+  "primary_source_sha256": "b7305f28586f61f7a3cc7d3c53c95dacabca05529b1ba3aa4b5e42d306db2ae5",
+  "runtime_version": "0.159.2",
+  "installed_layout": "/opt/codex/codex and sibling /opt/codex/codex-code-mode-host; resources under /opt/codex/codex-resources",
+  "package_manifest": "Official package inventory contains206-byte root codex-package.json; reviewed flattening copy did not copy it.",
+  "static_findings": [
+    "code_mode_host_program first tries bundled_resource then falls back to code_mode_host_program_from_exe (lines176-207).",
+    "Without recognized package/standalone layout, current_exe parent plus codex-code-mode-host is explicitly used and checked for file existence.",
+    "Complete package recognition requires bin directory layout and package-root codex-package.json (lines285-298); flattened /opt/codex does not satisfy it.",
+    "The package-layout bundled resource/path lookup therefore differs. This observation does not establish failure of sibling helper discovery or the already measured container boundaries."
+  ],
+  "required_next": "One bounded zero-model framed connection/hello\u2192connection/ready protocol-v1 helper probe using existing isolated worker machinery after final checks; close stdin, observe bounded normal exit, owned cleanup. No rebuild absent actual failure.",
+  "no_execution_or_auth_access": true
+}

@@ -1,0 +1,160 @@
+{
+  "source_before": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "source_after": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08522012492176145,
+      "log": "reports/v08/recovery-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6311970000388101,
+      "log": "reports/v08/recovery-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.045647541992366314,
+      "log": "reports/v08/recovery-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8615031250519678,
+      "log": "reports/v08/recovery-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13281145901419222,
+      "log": "reports/v08/recovery-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-recovery-final-5",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 391.9888907090062,
+      "log": "reports/v08/recovery-final-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-recovery-final-6",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 607.7047199170338,
+      "log": "reports/v08/recovery-final-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.132742292014882,
+      "log": "reports/v08/recovery-final-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/recovery-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5144192919833586,
+      "log": "reports/v08/recovery-final-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/recovery-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04649116692598909,
+      "log": "reports/v08/recovery-final-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/recovery-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04408841603435576,
+      "log": "reports/v08/recovery-final-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2022305000573397,
+      "log": "reports/v08/recovery-final-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04196204210165888,
+      "log": "reports/v08/recovery-final-check-12.txt"
+    }
+  ]
+}

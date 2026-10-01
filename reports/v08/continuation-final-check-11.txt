@@ -1,0 +1,92 @@
+
+> aeep-dsh-router@0.6.0 test
+> node --test test.mjs runtime.test.mjs
+
+TAP version 13
+# Subtest: native command preflights, routes two model requests, hides the target, and correlates usage
+ok 1 - native command preflights, routes two model requests, hides the target, and correlates usage
+  ---
+  duration_ms: 156.60625
+  type: 'test'
+  ...
+# Subtest: schema digests ignore object key order
+ok 2 - schema digests ignore object key order
+  ---
+  duration_ms: 2.313875
+  type: 'test'
+  ...
+# Subtest: legacy CLI transport remains measurable
+ok 3 - legacy CLI transport remains measurable
+  ---
+  duration_ms: 140.49275
+  type: 'test'
+  ...
+# Subtest: action hints are exact bounded JSON
+ok 4 - action hints are exact bounded JSON
+  ---
+  duration_ms: 0.731417
+  type: 'test'
+  ...
+# Subtest: assembly exposes only admitted schemas and removes hidden guidance
+ok 5 - assembly exposes only admitted schemas and removes hidden guidance
+  ---
+  duration_ms: 0.303417
+  type: 'test'
+  ...
+# Subtest: invalid mappings and hidden baselines fail before registration
+ok 6 - invalid mappings and hidden baselines fail before registration
+  ---
+  duration_ms: 0.648334
+  type: 'test'
+  ...
+# Subtest: transparent substitution still requires the exact output contract
+ok 7 - transparent substitution still requires the exact output contract
+  ---
+  duration_ms: 0.400583
+  type: 'test'
+  ...
+# Subtest: read_url adapter preserves true HTTP facts and canonical shape
+ok 8 - read_url adapter preserves true HTTP facts and canonical shape
+  ---
+  duration_ms: 0.871167
+  type: 'test'
+  ...
+# Subtest: campaign fixtures provide compact output without changing canonical contracts
+ok 9 - campaign fixtures provide compact output without changing canonical contracts
+  ---
+  duration_ms: 0.795542
+  type: 'test'
+  ...
+# Subtest: persistent bridge multiplexes requests through one child
+ok 10 - persistent bridge multiplexes requests through one child
+  ---
+  duration_ms: 125.5045
+  type: 'test'
+  ...
+# Subtest: a failed bridge request is not retried and a later request may restart
+ok 11 - a failed bridge request is not retried and a later request may restart
+  ---
+  duration_ms: 147.372625
+  type: 'test'
+  ...
+# Subtest: bridge record sends only bounded trusted telemetry fields
+ok 12 - bridge record sends only bounded trusted telemetry fields
+  ---
+  duration_ms: 0.418583
+  type: 'test'
+  ...
+# Subtest: legacy transport kills timeout and rejects oversized input
+ok 13 - legacy transport kills timeout and rejects oversized input
+  ---
+  duration_ms: 30.187125
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 625.023417

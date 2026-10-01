@@ -1,0 +1,62 @@
+import asyncio,hashlib,json
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.extensions import prepare,invoke,grader_results
+from aeep.assessment.models import AssessmentPlan,AssessmentEnvironment,AssessmentAuthorization,AssessmentScopeAmendment,RecipeDefinition,content_digest
+from aeep.assessment.planning import ReusableBuildOutput
+from aeep.models import StrictModel
+from aeep.assessment.verification import verification_source_digest
+ROOT=Path('/Users/edwintse/Documents/aeep-agent-router');P=ROOT/'reports/v08'
+SOURCE='402a5c1f16ce1d8b13de24bdc99f7859cacfd13bfe10a1b693f604a19303a39b'
+BUILD='reusable-build:planning_bd963159f568438aa360dbab05e72075'
+class ValidationRecord(StrictModel):
+    source_digest:str
+    build_operation_id:str
+    generated_source_sha256:str
+    request_id:str
+    training_input_digests:list[str]
+    results:list[dict]
+    purpose:str='Training-only generated baseline validation; never qualification, holdout or admission evidence'
+async def main():
+    assert verification_source_digest(ROOT)==SOURCE
+    r=Router.from_manifest(ROOT/'.aeep/live-review-v3/workbook-phase-final.json')
+    try:
+        s=AssessmentService(r,ROOT/'.aeep/live-review-v3/.aeep/assessments');repo=s.repository
+        plan=AssessmentPlan.model_validate(repo.get('plan','plan_032f55bc64cc4c168501898224e8c0f0'))
+        built=ReusableBuildOutput.model_validate(repo.get('reusable_build_output',BUILD))
+        training=[c for c in plan.suite.cases if c.split.value=='training']
+        assert len(training)==28 and [content_digest(c.action.input) for c in training]==built.training_input_digests
+        original=RecipeDefinition.model_validate(repo.get('recipe',plan.recipe_digest));assert original.extension
+        spec=original.extension.reference.model_copy(deep=True)
+        spec.id='workbook.generated-reusable-training';spec.description='Reviewed generated baseline; training inputs only'
+        spec.config={**spec.config,'argv':['python3','-c',built.source]}
+        spec.input_schema=original.input_schema;spec.output_schema=original.output_schema
+        recipe=original.model_copy(update={'recipe_id':'workbook-reusable-training-validation','description':'Training-only generated implementation validation against the unchanged independent workbook grader; no candidate assessment or admission','extension':original.extension.model_copy(update={'reference':spec})})
+        recipe=RecipeDefinition.model_validate(recipe.model_dump(mode='json'))
+        digest=repo.put('recipe',content_digest(recipe),recipe)
+        environment=AssessmentEnvironment.model_validate(repo.get('environment',plan.environment_digest))
+        scope=prepare(s,subject_id=plan.subject_digest,recipe_id=digest,authorization_id=plan.authorization_id,environment=environment,seed=plan.suite.seed)
+        digests=set(scope.definition_digests)|{scope.subject_digest}
+        definitions={d:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(d,)).fetchone()[0]) for d in digests}
+        grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'))
+        amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[scope.subject_digest],recipe_digests=[scope.recipe_digest],environment_digests=[scope.environment_digest],reviewed_digests=sorted(digests))
+        review={'authority':'2026-09-27 delegated routine reviews and finite budget authority','purpose':'Execute exact reviewed generated source in existing contained recipe extension; only the frozen 28 builder training inputs. Grader remains separate and unchanged. No materialization, screening, holdout, qualification or admission.','review_findings':['Read full generated source; stdlib/openpyxl only, no subprocess, network or external filesystem access','Input/output bounded by reviewed schema and existing container resource/timeout controls','Expected answers supplied only to separate grader; generated code remains outside coordinator','Reference slot is the implementation under training validation, not independent correctness authority'],'build_operation_id':BUILD,'source_digest':SOURCE,'generated_source_sha256':hashlib.sha256(built.source.encode()).hexdigest(),'scope':scope.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'training_input_digests':built.training_input_digests,'maximum_operations':29,'maximum_elapsed_seconds':1015,'maximum_model_turns':0,'cash':0}
+        with (P/'reusable-phase-final-training-review.json').open('x') as f:json.dump(review,f,indent=2);f.write('\n')
+        repo.approve_bundle(amendment,definitions);repo.authorize(scope)
+        examples=[]
+        for index,case in enumerate(training):
+            assert verification_source_digest(ROOT)==SOURCE
+            output,_=await invoke(s,scope,spec,case.action.input,stage='reusable_training_validation',operation_id=f'{scope.plan_id}-training-{index}')
+            expected=case.validators[0].config['expected']
+            examples.append({'input':case.action.input,'output':output,'expected':expected})
+            print(f'Completed contained training execution {index+1}/28',flush=True)
+        reply,_=await invoke(s,scope,recipe.extension.grader,{'examples':examples},stage='reusable_training_grading',operation_id=f'{scope.plan_id}-grading')
+        results=grader_results(reply,recipe.extension,len(training))
+        record=ValidationRecord(source_digest=SOURCE,build_operation_id=BUILD,generated_source_sha256=review['generated_source_sha256'],request_id=scope.plan_id,training_input_digests=built.training_input_digests,results=[{'case_id':c.case_id,'variation':c.variation,'valid':v.valid,'failure_code':v.detail or None} for c,v in zip(training,results,strict=True)])
+        repo.put('reusable_training_validation',scope.plan_id,record)
+        with (P/'reusable-phase-final-training-result.json').open('x') as f:f.write(record.model_dump_json(indent=2)+'\n')
+        print(json.dumps({'request_id':scope.plan_id,'passed':sum(v.valid for v in results),'total':len(results),'record_digest':content_digest(record)}),flush=True)
+    finally:await r.close()
+asyncio.run(main())

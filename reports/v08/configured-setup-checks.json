@@ -1,0 +1,72 @@
+{
+  "source_before": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+  "source_after": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09251500002574176,
+      "log": "reports/v08/configured-setup-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6652791660744697,
+      "log": "reports/v08/configured-setup-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08434012497309595,
+      "log": "reports/v08/configured-setup-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.41086312499828637,
+      "log": "reports/v08/configured-setup-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13263404194731265,
+      "log": "reports/v08/configured-setup-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "seconds": 415.58019954210613,
+      "log": "reports/v08/configured-setup-check-05.txt"
+    }
+  ]
+}

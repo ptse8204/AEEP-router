@@ -1,0 +1,17 @@
+{
+  "model_turns": 0,
+  "live_verified": false,
+  "reviewed_version": "0.154.0",
+  "source": "generated schema of the pinned CLI binary",
+  "files": {
+    "v2/ThreadStartParams.json": "25f490368ec6df52a2a3b82a5469d2413307eb93439121b309f415b5648eee7a",
+    "ServerNotification.json": "eb4317b57ce7cad32d6ab8a5b7d39eb765c8fb8f67acbc808dd6e55959411c93",
+    "v2/RawResponseItemCompletedNotification.json": "808fe739fc46130292a0a8c1969ff4e63dff856fc241ff78ce207a8eb1a67f46"
+  },
+  "findings": {
+    "experimental_opt_in": "AEEP now defaults to false and accepts exact operator adapter options. Reviewed worker setup opts in explicitly.",
+    "discovery": "Raw response item types exist, but the enabling thread field is labelled internal use only. No supported complete public discovery event stream has been established. Catalog observations remain unknown.",
+    "inventory": "Advertised MCP inventory is not effective permission evidence.",
+    "next_step": "An authorized installed-version conformance probe must establish any supported retrieval observation before claiming catalog completion."
+  }
+}

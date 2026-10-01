@@ -1,6 +1,7 @@
 # Contributing
 
-Contributions are welcome, especially adapters, benchmarks, policy research, security review, and real execution traces stripped of sensitive data.
+You can contribute adapters, benchmarks, policy research, security reviews, or
+real execution traces with sensitive data removed.
 
 ## Development
 
@@ -19,7 +20,7 @@ coverage report -m
 1. Preserve raw resource measurements.
 2. Hard constraints precede scoring.
 3. Every selection must be explainable.
-4. Safe failure beats silent fallback.
+4. Fail safely; never fall back silently.
 5. Do not make one provider's token a universal currency.
 6. Protocol objects remain provider-neutral.
 7. New execution boundaries require explicit security analysis.
@@ -27,13 +28,12 @@ coverage report -m
 
 ## Pull requests
 
-Include:
+Describe the problem, your design, and the alternatives you considered. Explain
+any compatibility or security impact and record the tests you ran. Update the
+documentation and specification when the change affects them.
 
-- problem statement;
-- design and alternatives;
-- compatibility impact;
-- security impact;
-- tests;
-- documentation/update to the spec when applicable.
+Keep provider-specific logic in adapters/integrations so the core scorer stays
+independent of any model vendor, payment rail, or marketplace.
 
-Keep provider-specific logic in adapters/integrations. Do not couple the core scorer to one model vendor, payment rail, or marketplace.
+Read the [assessment testing policy](docs/ASSESSMENT_TESTING.md) before changing or running
+assessment, execution-adapter or release-verification work in this repository.

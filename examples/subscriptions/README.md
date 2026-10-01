@@ -1,6 +1,6 @@
 # Subscription-aware routing
 
-This demo needs no model API key. It represents the current Claude session as a host-owned subscription resource and compares it with local execution.
+This demo compares the current Claude session, represented as a host-owned subscription resource, with local execution. It needs no model API key.
 
 ```bash
 aeep route text.stats \

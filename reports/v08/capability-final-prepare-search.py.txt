@@ -1,0 +1,40 @@
+import asyncio,json,hashlib
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentScopeAmendment,AssessmentAuthorization,AssessmentEnvironment,IncrementalExperiment,UtilityPolicy,ReviewedMapping,content_digest
+from aeep.assessment.recipes import shipped_recipe
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection
+from aeep.qualification import RouteCandidate,behavior_fingerprint
+from aeep.models import Manifest
+async def main():
+ p=Path('reports/v08');base=Path('.aeep/live-review-v3');b=json.loads((p/'search-capability-final-profile-review-bundle.json').read_text());a=json.loads((p/'search-capability-final-profile-assembly.json').read_text())
+ r=Router.from_manifest(base/'aeep.json')
+ try:
+  repo=AssessmentService(r,base/'.aeep/assessments').repository;d=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][0]['pair_definition_digest']))
+  candidate=RouteCandidate(executor_id=d.treatment.id,source_id='operator-reviewed-search-20260927',capability=d.treatment.capability,behavior_fingerprint=behavior_fingerprint(d.treatment),spec=d.treatment)
+  assert r.store.get_route_candidate(candidate.executor_id) is None;r.store.save_route_candidate(candidate)
+  raw=json.loads((base/'aeep.json').read_text());raw['executors'].append(d.control.model_dump(mode='json'));manifest=Manifest.model_validate(raw)
+  path=base/'search-capability-final.json'
+  with path.open('x') as f:f.write(manifest.model_dump_json(indent=2))
+ finally:await r.close()
+ r=Router.from_manifest(path)
+ try:
+  s=AssessmentService(r,base/'.aeep/assessments');repo=s.repository
+  env=AssessmentEnvironment(environment_id='search-capability-final',kind='container',identity={'purpose':'Shipped synthetic search recipe and exact managed worker profiles','approved_root':str(s.directory)},container_image='sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228',container_runtime='/usr/local/bin/docker',container_socket='/Users/edwintse/.docker/run/docker.sock',memory_mb=512,conformance_digests={getattr(d,role).id:a['boundary_conformance_digests'][role] for role in ('control','treatment')},differential_conformance_digest=a['differential_conformance_digest'])
+  experiment=IncrementalExperiment(stage='qualification',exposure='required',environment=d.differential,utility=UtilityPolicy(benefit_dimensions=['wall_time_ms'],guardrail_dimensions=['wall_time_ms']))
+  plan=s.propose(subject_id=b['requests'][0]['subject_digest'],family='search',candidate_id=d.treatment.id,baseline_id=d.control.id,authorization_id='onboarding',environment=env,seed=202609276,structure='controlled_agent',experiment=experiment)
+  mapping=ReviewedMapping.model_validate(repo.get('mapping',plan.mapping_digest));r.managed_hosts.configure(mapping.subjects,principal_salt=r.store.host_principal_key,manifest_directory=base.resolve())
+  preview=s.budget_preview(plan.plan_id);assert not plan.blocked_reasons and all(x['eligible'] for x in preview['adapter_eligibility'])
+  digests=set(plan.definition_digests)|{plan.subject_digest};definitions={x:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(x,)).fetchone()[0]) for x in digests}
+  grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[plan.subject_digest],recipe_digests=[plan.recipe_digest],environment_digests=[plan.environment_digest],reviewed_digests=sorted(digests))
+  bundle={'recorded_at':datetime.now(timezone.utc).isoformat(),'authority':'2026-09-27 operator continuation and standing review authority','plan':plan.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'budget_preview':preview,'deadline_policy':'203-second finite operator ceiling; no search timing calibration or performance claim is asserted','execution_policy':'New frozen search cases, unchanged 8/28/105 thresholds, required invocation for qualification only, no automatic retry of uncertain or failed execution'}
+  out=p/'search-capability-final-execution-review.json'
+  with out.open('x') as f:json.dump(bundle,f,indent=2);f.write('\n')
+  repo.approve_bundle(amendment,definitions);repo.authorize(plan)
+  record={'recorded_at':datetime.now(timezone.utc).isoformat(),'authority':bundle['authority'],'plan_id':plan.plan_id,'bundle_sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'scope_amendment_digest':content_digest(amendment),'budget_reset':False}
+  with (p/'search-capability-final-execution-approval.json').open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+  print(json.dumps(record))
+ finally:await r.close()
+asyncio.run(main())

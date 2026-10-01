@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import Any, Protocol
@@ -43,6 +44,9 @@ class ManagedHostExecutionContext:
     attempt_id: str
     output_schema: dict[str, Any] | None = None
     approved_side_effect: str = "read"
+    expected_runtime_digest: str | None = None
+    workspace: str | None = None
+    invocation_check: Callable[[], str | None] | None = None
 
 
 class ManagedHostAdapter(Protocol):

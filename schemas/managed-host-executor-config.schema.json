@@ -1,8 +1,224 @@
 {
   "$defs": {
+    "ManagedHostArtifact": {
+      "additionalProperties": false,
+      "description": "Reviewed, single-file transport; paths cannot be supplied by task arguments.",
+      "properties": {
+        "input_field": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$",
+          "title": "Input Field",
+          "type": "string"
+        },
+        "output_field": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$",
+          "title": "Output Field",
+          "type": "string"
+        },
+        "input_name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+          "title": "Input Name",
+          "type": "string"
+        },
+        "output_name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+          "title": "Output Name",
+          "type": "string"
+        },
+        "max_bytes": {
+          "default": 1000000,
+          "maximum": 4000000,
+          "minimum": 1,
+          "title": "Max Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "input_field",
+        "output_field",
+        "input_name",
+        "output_name"
+      ],
+      "title": "ManagedHostArtifact",
+      "type": "object"
+    },
+    "ManagedHostInvocation": {
+      "additionalProperties": false,
+      "description": "Operator-owned invocation and inventory, never model-facing arguments.",
+      "properties": {
+        "mode": {
+          "default": "turn",
+          "enum": [
+            "turn",
+            "skill",
+            "mcp_tool",
+            "dynamic_tool"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "skill_name": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Skill Name"
+        },
+        "skill_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Skill Path"
+        },
+        "skill_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Skill Sha256"
+        },
+        "server": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Server"
+        },
+        "tool": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool"
+        },
+        "tool_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Sha256"
+        },
+        "supporting_tools": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewedHostTool"
+          },
+          "title": "Supporting Tools",
+          "type": "array"
+        },
+        "supporting_skills": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewedHostSkill"
+          },
+          "title": "Supporting Skills",
+          "type": "array"
+        },
+        "exposure": {
+          "anyOf": [
+            {
+              "enum": [
+                "required",
+                "optional"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exposure"
+        },
+        "local_profile": {
+          "anyOf": [
+            {
+              "const": "capable_local",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Profile"
+        },
+        "native_catalog": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Native Catalog"
+        },
+        "dynamic_tools_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dynamic Tools Digest"
+        }
+      },
+      "title": "ManagedHostInvocation",
+      "type": "object"
+    },
     "ManagedHostModelConstraints": {
       "additionalProperties": false,
       "properties": {
+        "allowed_model_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Model Ids",
+          "type": "array"
+        },
         "required_capabilities": {
           "default": [],
           "items": {
@@ -26,6 +242,60 @@
         }
       },
       "title": "ManagedHostModelConstraints",
+      "type": "object"
+    },
+    "ReviewedHostSkill": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[A-Za-z0-9_:-]+$",
+          "title": "Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "path",
+        "sha256"
+      ],
+      "title": "ReviewedHostSkill",
+      "type": "object"
+    },
+    "ReviewedHostTool": {
+      "additionalProperties": false,
+      "properties": {
+        "server": {
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Server",
+          "type": "string"
+        },
+        "tool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Tool",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "server",
+        "tool",
+        "sha256"
+      ],
+      "title": "ReviewedHostTool",
       "type": "object"
     },
     "SideEffect": {
@@ -173,6 +443,107 @@
       ],
       "title": "Redaction Policy",
       "type": "string"
+    },
+    "invocation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ManagedHostInvocation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "assessment_adapter": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Assessment Adapter"
+    },
+    "worker_workspace": {
+      "anyOf": [
+        {
+          "const": "temporary",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Workspace"
+    },
+    "exec_model": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exec Model"
+    },
+    "managed_worker": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Managed Worker"
+    },
+    "artifact": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ManagedHostArtifact"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "input_tree": {
+      "anyOf": [
+        {
+          "const": "local_search_tree:1",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Tree"
+    },
+    "adapter_options": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Adapter Options"
     }
   },
   "required": [

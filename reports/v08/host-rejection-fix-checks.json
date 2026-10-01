@@ -1,0 +1,269 @@
+{
+  "source_before": "6daf49e503146b89cc1bd29f606bb2a310b551bed5dacc4e6941be719c04c839",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.057401583064347506,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5847303329501301,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.029036374995484948,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.283274459070526,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12098462495487183,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-host-rejection-fix-5",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 403.4704202080611,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/tmp/validation-host-rejection-fix-6",
+        "-o",
+        "tmp_path_retention_policy=all"
+      ],
+      "exit_code": 0,
+      "seconds": 640.462200082955,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2947053749812767,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.704945332952775,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04836041701491922,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04658608406316489,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5451527499826625,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05448983295354992,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-12.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.666994332917966,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-13.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5143752089934424,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-14.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5165515830740333,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-15.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5142711669905111,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-16.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5051527500618249,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-17.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5600349169690162,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-18.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5442347079515457,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-19.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 7.230820249998942,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-20.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-dist"
+      ],
+      "exit_code": 0,
+      "seconds": 3.1548943750094622,
+      "log": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/host-rejection-fix-check-21.txt"
+    }
+  ],
+  "source_after": "6daf49e503146b89cc1bd29f606bb2a310b551bed5dacc4e6941be719c04c839"
+}

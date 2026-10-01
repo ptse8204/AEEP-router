@@ -1,0 +1,296 @@
+{
+  "schema_version": "aeep.footprint-calibration.v3",
+  "recorded_at": "2026-09-29T23:34:23.446191+00:00",
+  "purpose": "exploratory calibration; no release or benefit verdict",
+  "reference": {
+    "os": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "python": "3.13.1",
+    "logical_cpus": 14,
+    "physical_memory_bytes": 25769803776,
+    "codex_sha256": "sha256:4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+    "dependencies": {
+      "psutil": "6.1.1",
+      "pydantic": "2.12.0",
+      "jsonschema": "4.23.0"
+    }
+  },
+  "boundary": "Fresh Python coordinator plus its Codex sandbox and command descendants. Supervisor and existing desktop/host are shared and excluded.",
+  "measurement_limits": [
+    "10ms process sampling can miss short-lived children and their CPU; CPU is a sampled lower bound.",
+    "RSS sums can count shared pages more than once; these are sampled resident sums, not unique whole-machine memory.",
+    "Idle is a 250ms local coordinator sample, not complete Codex host idle memory.",
+    "Compilation/pinning in the harness is excluded from baseline; AEEP checks at activation/dispatch are included.",
+    "AEEP arm includes manifest write, owned overlay and project MCP entry creation, pause/rejected dispatch/resume/uninstall, retained lock and accounting. Native arm needs none of these controls.",
+    "Synthetic CSV only. Assessment lab, workbook workload, actual host context and recovery footprint remain unmeasured.",
+    "No amortization or speculative savings are subtracted. No acceptance budgets or holdouts are evaluated."
+  ],
+  "production": {
+    "samples": [
+      {
+        "scenario": "idle",
+        "arm": "native",
+        "task_ms": [],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 307.0498751476407,
+        "sampled_process_tree": {
+          "cpu_ms": 47.224416,
+          "peak_memory_mb": 30.359375,
+          "memory_mb_seconds": 8.661475386667007
+        }
+      },
+      {
+        "scenario": "idle",
+        "arm": "aeep",
+        "task_ms": [],
+        "manifest_bytes": 3814,
+        "project_host_config_bytes_after_activation": 473,
+        "schema_bytes": 14406,
+        "instructions_bytes": 168,
+        "activation_ms": 372.19954119063914,
+        "project_host_config_bytes_after_uninstall": 0,
+        "project_host_config_mutations": 2,
+        "project_host_entry_after_uninstall": false,
+        "retained_project_lock_files": 1,
+        "retained_project_lock_bytes": 0,
+        "pause_resume_uninstall_ms": 99.45004200562835,
+        "pause_rejected_dispatch": true,
+        "evidence_bytes_before_close": 968016,
+        "evidence_bytes_after_close": 811008,
+        "verified_tasks": 0,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 810.5504580307752,
+        "sampled_process_tree": {
+          "cpu_ms": 536.355384,
+          "peak_memory_mb": 92.390625,
+          "memory_mb_seconds": 62.152487419665704
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "native",
+        "task_ms": [
+          56.14362517371774
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 111.04300012812018,
+        "sampled_process_tree": {
+          "cpu_ms": 85.879622,
+          "peak_memory_mb": 78.140625,
+          "memory_mb_seconds": 4.505521545150259
+        }
+      },
+      {
+        "scenario": "cold",
+        "arm": "aeep",
+        "task_ms": [
+          138.12941615469754
+        ],
+        "manifest_bytes": 3814,
+        "project_host_config_bytes_after_activation": 473,
+        "schema_bytes": 14406,
+        "instructions_bytes": 168,
+        "activation_ms": 367.4488749820739,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "project_host_config_bytes_after_uninstall": 0,
+        "project_host_config_mutations": 2,
+        "project_host_entry_after_uninstall": false,
+        "retained_project_lock_files": 1,
+        "retained_project_lock_bytes": 0,
+        "pause_resume_uninstall_ms": 87.98279194161296,
+        "pause_rejected_dispatch": true,
+        "evidence_bytes_before_close": 1281136,
+        "evidence_bytes_after_close": 823296,
+        "verified_tasks": 1,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 691.0682499874383,
+        "sampled_process_tree": {
+          "cpu_ms": 653.106144,
+          "peak_memory_mb": 141.03125,
+          "memory_mb_seconds": 52.200361709172284
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "native",
+        "task_ms": [
+          40.450209053233266,
+          40.076459059491754,
+          39.82983296737075,
+          38.89845893718302,
+          39.60762498900294
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 254.57054213620722,
+        "sampled_process_tree": {
+          "cpu_ms": 79.874998,
+          "peak_memory_mb": 80.828125,
+          "memory_mb_seconds": 12.190998066249449
+        }
+      },
+      {
+        "scenario": "warm",
+        "arm": "aeep",
+        "task_ms": [
+          138.1694998126477,
+          134.65775013901293,
+          135.84958296269178,
+          136.22616697102785,
+          137.37895898520947
+        ],
+        "manifest_bytes": 3814,
+        "project_host_config_bytes_after_activation": 473,
+        "schema_bytes": 14406,
+        "instructions_bytes": 168,
+        "activation_ms": 373.24895802885294,
+        "sample_summary": "Completed; task verification is incomplete.",
+        "project_host_config_bytes_after_uninstall": 0,
+        "project_host_config_mutations": 2,
+        "project_host_entry_after_uninstall": false,
+        "retained_project_lock_files": 1,
+        "retained_project_lock_bytes": 0,
+        "pause_resume_uninstall_ms": 87.83183293417096,
+        "pause_rejected_dispatch": true,
+        "evidence_bytes_before_close": 2583056,
+        "evidence_bytes_after_close": 897024,
+        "verified_tasks": 5,
+        "expected_failures": 0,
+        "repetition": 0,
+        "process_wall_ms": 1232.6317499391735,
+        "sampled_process_tree": {
+          "cpu_ms": 1093.254384,
+          "peak_memory_mb": 145.5625,
+          "memory_mb_seconds": 109.93343364437897
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "native",
+        "task_ms": [
+          36.7034999653697
+        ],
+        "activation_ms": null,
+        "schema_bytes": 0,
+        "instructions_bytes": 0,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 0,
+        "process_wall_ms": 93.88158307410777,
+        "sampled_process_tree": {
+          "cpu_ms": 71.775583,
+          "peak_memory_mb": 76.984375,
+          "memory_mb_seconds": 3.1091322868414863
+        }
+      },
+      {
+        "scenario": "failure",
+        "arm": "aeep",
+        "task_ms": [
+          137.2602079063654
+        ],
+        "manifest_bytes": 3678,
+        "project_host_config_bytes_after_activation": 473,
+        "schema_bytes": 14406,
+        "instructions_bytes": 168,
+        "activation_ms": 373.6389169935137,
+        "sample_summary": "Task did not complete successfully; inspect the recorded outcome before retrying.",
+        "project_host_config_bytes_after_uninstall": 0,
+        "project_host_config_mutations": 2,
+        "project_host_entry_after_uninstall": false,
+        "retained_project_lock_files": 1,
+        "retained_project_lock_bytes": 0,
+        "pause_resume_uninstall_ms": 88.2440828718245,
+        "pause_rejected_dispatch": true,
+        "evidence_bytes_before_close": 1281136,
+        "evidence_bytes_after_close": 823296,
+        "verified_tasks": 0,
+        "expected_failures": 1,
+        "repetition": 0,
+        "process_wall_ms": 688.1905829068273,
+        "sampled_process_tree": {
+          "cpu_ms": 651.51812,
+          "peak_memory_mb": 142.78125,
+          "memory_mb_seconds": 52.70907291484036
+        }
+      }
+    ],
+    "comparisons": {
+      "idle": {
+        "median_process_wall_ms": {
+          "native": 307.0498751476407,
+          "aeep": 810.5504580307752
+        },
+        "incremental_ms": 503.5005828831345
+      },
+      "cold": {
+        "median_process_wall_ms": {
+          "native": 111.04300012812018,
+          "aeep": 691.0682499874383
+        },
+        "incremental_ms": 580.0252498593181
+      },
+      "warm": {
+        "median_process_wall_ms": {
+          "native": 254.57054213620722,
+          "aeep": 1232.6317499391735
+        },
+        "incremental_ms": 978.0612078029662
+      },
+      "failure": {
+        "median_process_wall_ms": {
+          "native": 93.88158307410777,
+          "aeep": 688.1905829068273
+        },
+        "incremental_ms": 594.3089998327196
+      }
+    }
+  },
+  "assessment": null,
+  "unknown": [
+    "whole-host startup and peak memory",
+    "OS cache usage",
+    "exact context tokens",
+    "network telemetry",
+    "installation/dependency disk increment",
+    "human effort",
+    "long-term retention growth",
+    "crash/recovery footprint"
+  ],
+  "operations": {
+    "model_calls": 0,
+    "reviewer_calls": 0,
+    "downloads": 0,
+    "optional_integrations": [],
+    "project_host_config_mutations_per_aeep_sample": [
+      2
+    ],
+    "project_host_entry_after_uninstall": false,
+    "retained_project_lock_files_per_aeep_sample": [
+      1
+    ],
+    "owned_overlay_files_per_activation": 1,
+    "hooks": 0,
+    "services": 0,
+    "ports": 0,
+    "retries": 0,
+    "network_policy": "disabled for command children; coordinator network activity not instrumented",
+    "cleanup": "disposable synthetic stores removed after normal close; not production evidence cleanup"
+  }
+}

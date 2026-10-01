@@ -1,0 +1,47 @@
+{
+  "schema_version": "assessment.research.metrics.v1",
+  "purpose": "offline pinned-host protocol investigation; not live acceptance or release conformance",
+  "recorded_at": "2026-09-26T09:01:44.193461+00:00",
+  "implementation_source_digest": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "program": "native-catalog-metrics-probe.py.txt",
+  "program_sha256": "970ba9bbf852c36c21fc4ee947e54cea66b0b3cdced1431e9a11eaf9f4bf2f38",
+  "seccomp": "native-catalog-metrics-seccomp.json",
+  "seccomp_sha256": "c598d8ad3319b4c05ba271252377f72b67294bdf8dbb77bc9934efd87cca3e91",
+  "observations": [
+    {
+      "path": "native-catalog-metrics-user-skill-false.json",
+      "sha256": "5428eb184b90e83b6d96d6b3a2e8e92dc4834c21ffa5e158eb062347e67d4718",
+      "explicit": false
+    },
+    {
+      "path": "native-catalog-metrics-user-skill-true.json",
+      "sha256": "97c546c280ba26fd0834e17b46d92f31b1c6c3383c5c572fa700d7b9d997e788",
+      "explicit": true
+    }
+  ],
+  "model_calls": 0,
+  "subscription_budget_unchanged": true,
+  "grant_counters": [
+    586,
+    114,
+    1629.6554747556802,
+    "0"
+  ],
+  "release_evidence": false,
+  "limitations": [
+    "Synthetic model responses; no learned selection or plugin performance",
+    "Explicit injection only; implicit retrieval and invocation completeness unverified",
+    "Synthetic response usage must never enter assessment accounting",
+    "No graceful-flush completeness proof; the killed-host probe demonstrates lost metrics",
+    "Historical synthetic v1/v2 optional observations misreported analytics setting; use v3 or later"
+  ],
+  "next_action": "Validate implicit native skill loading and loss/completeness semantics before integrating filtered positive observations through the existing adapter journal",
+  "interruption_probe": {
+    "path": "native-catalog-metrics-killed-true.json",
+    "sha256": "9acd757a0cc80f964d935b4670954556aac6a4cfe81627cc14fb58a60a698dec",
+    "program": "native-catalog-metrics-killed-probe.py.txt",
+    "program_sha256": "15ed8c6ea7f05ed589d8d3aeadadb01e02c90b7ccff54fdb80c2cb471d73273b",
+    "known_skill_injection": true,
+    "injection_metric_delivered": false
+  }
+}

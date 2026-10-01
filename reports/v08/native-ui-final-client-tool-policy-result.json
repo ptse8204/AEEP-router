@@ -1,0 +1,79 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_733c7227e7a94c009f4c442d54f8e282",
+    "operation_id": "conformance_probe_733c7227e7a94c009f4c442d54f8e282-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_options",
+        "status": "completed",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_status",
+        "status": "completed",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_csv",
+        "status": "completed",
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [
+      "rcpt_2aca3755cbcc4ecca2982e6e652029f4"
+    ],
+    "canonical_evidence_digest": "6b7d873aaf24cd7c359b3c3da4dbc5edca85558c80b82693b4a9d9cef23c67e5",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 24563,
+          "cached_input_tokens": 11648,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 268,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

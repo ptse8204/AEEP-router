@@ -1,0 +1,116 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "assessment.conformance-request.v1",
+      "enum": [
+        "assessment.conformance-request.v1",
+        "assessment.conformance-request.v2",
+        "assessment.conformance-request.v3",
+        "assessment.conformance-request.v4"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    },
+    "recipe_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Digest",
+      "type": "string"
+    },
+    "mapping_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Mapping Digest",
+      "type": "string"
+    },
+    "environment_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Digest",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "definition_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Definition Digests",
+      "type": "array"
+    },
+    "worker_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Digest",
+      "type": "string"
+    },
+    "executable_dependencies": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Executable Dependencies",
+      "type": "object"
+    },
+    "operation": {
+      "anyOf": [
+        {
+          "enum": [
+            "worker_inspection",
+            "worker_pair_inspection",
+            "composed_pair_inspection"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Operation"
+    },
+    "pair_definition_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pair Definition Digest"
+    },
+    "composed_model_turns": {
+      "default": 0,
+      "enum": [
+        0,
+        1
+      ],
+      "title": "Composed Model Turns",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "subject_digest",
+    "recipe_digest",
+    "mapping_digest",
+    "environment_digest",
+    "authorization_id",
+    "definition_digests",
+    "worker_digest",
+    "executable_dependencies"
+  ],
+  "title": "ConformanceProbeRequest",
+  "type": "object"
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+"""Immutable image entrypoint. Never read authentication; exec Codex with reviewed settings."""
+import hashlib
+import json
+import os
+import sys
+from pathlib import Path
+
+
+def main():
+    fallback = Path("/worker/home/.cache/codex-runtimes/codex-primary-runtime")
+    fallback.mkdir(parents=True, exist_ok=True)
+    (fallback / "dependencies").symlink_to("/opt/dependencies/runtime")
+    binary_digest, config_digest, binary, *arguments = sys.argv[1:]
+    config = Path('/opt/aeep/worker-config.json')
+    if hashlib.sha256(config.read_bytes()).hexdigest() != config_digest:
+        raise SystemExit('worker configuration digest mismatch')
+    with Path(binary).open('rb') as stream:
+        if hashlib.file_digest(stream, 'sha256').hexdigest() != binary_digest:
+            raise SystemExit('worker binary digest mismatch')
+    overrides = json.loads(config.read_text())
+    if not isinstance(overrides, list) or not all(isinstance(item, str) and '\x00' not in item for item in overrides):
+        raise SystemExit('invalid reviewed worker configuration')
+    schema = os.environ.pop("AEEP_OUTPUT_SCHEMA", None)
+    if schema is not None:
+        Path("/tmp/aeep-output.schema.json").write_text(schema)
+    argv = [binary]
+    for override in overrides:
+        argv += ['-c', override]
+    os.execv(binary, [*argv, *arguments])
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,11 @@
+import json,subprocess,os,sys
+from pathlib import Path
+p=Path('reports/v08')
+for label in ('value','higher','reusable'):
+ name=label+'-four-arm-final';b=json.loads((p/f'{name}-profile-review-bundle.json').read_text());ids=[q['plan_id'] for q in b['requests']]
+ with (p/f'{name}-profile-live-pair.json').open('x') as f:
+  subprocess.run([sys.executable,'-m','aeep','assess','--manifest','.aeep/live-review-v3/workbook-phase-final.json','inspect-pair',*ids],stdout=f,env={**os.environ,'PYTHONPATH':'src'},check=True)
+ helper=Path('/tmp/aeep-phase-final-assemble-value.py').read_text().replace('value-phase-final',name)
+ dest=Path('/tmp/aeep-'+name+'-assemble.py');dest.write_text(helper)
+ subprocess.run([sys.executable,str(dest)],env={**os.environ,'PYTHONPATH':'src'},stdout=subprocess.DEVNULL,check=True)
+ print(name,'conformance passed',flush=True)

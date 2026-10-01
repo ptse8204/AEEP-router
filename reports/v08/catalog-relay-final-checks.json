@@ -1,0 +1,152 @@
+{
+  "source_before": "180806bb74076753dfaabcfc083c160ba4b79ca9c1762a8e0641ad8b936598be",
+  "source_after": "180806bb74076753dfaabcfc083c160ba4b79ca9c1762a8e0641ad8b936598be",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09018725005444139,
+      "log": "reports/v08/catalog-relay-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7232947089942172,
+      "log": "reports/v08/catalog-relay-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08139741700142622,
+      "log": "reports/v08/catalog-relay-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3409477500244975,
+      "log": "reports/v08/catalog-relay-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.14799658302217722,
+      "log": "reports/v08/catalog-relay-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 411.29378700000234,
+      "log": "reports/v08/catalog-relay-final-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 555.5531149590388,
+      "log": "reports/v08/catalog-relay-final-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0463827919447795,
+      "log": "reports/v08/catalog-relay-final-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/catalog-relay-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3954139580018818,
+      "log": "reports/v08/catalog-relay-final-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/catalog-relay-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04846466693561524,
+      "log": "reports/v08/catalog-relay-final-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/catalog-relay-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04836958402302116,
+      "log": "reports/v08/catalog-relay-final-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2459500830154866,
+      "log": "reports/v08/catalog-relay-final-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09175979101564735,
+      "log": "reports/v08/catalog-relay-final-check-12.txt"
+    }
+  ]
+}

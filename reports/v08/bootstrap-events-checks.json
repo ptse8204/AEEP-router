@@ -1,0 +1,72 @@
+{
+  "source_before": "f91ed4b8d4f6da59db42f6696649433a685f3fea97d3a03d294e3a809bf871b8",
+  "source_after": "b3bf0b79c8e3672a575814585c310872e66da388068da67140535a9c85c69f61",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07690891600213945,
+      "log": "reports/v08/bootstrap-events-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7241475420305505,
+      "log": "reports/v08/bootstrap-events-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.07606395799666643,
+      "log": "reports/v08/bootstrap-events-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3129079591017216,
+      "log": "reports/v08/bootstrap-events-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1336795830866322,
+      "log": "reports/v08/bootstrap-events-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "seconds": 421.5992304580286,
+      "log": "reports/v08/bootstrap-events-check-05.txt"
+    }
+  ]
+}

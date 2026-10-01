@@ -1,0 +1,343 @@
+{
+  "comparison": {
+    "schema_version": "assessment.comparison.v1",
+    "structure": "direct",
+    "candidate": {
+      "executor_id": "text-reusable-bounded-training.generated",
+      "fingerprint": "053198c3b92181e458b2a6a715bc31fe1da3fd2934f66e9e39ec9d323a390413",
+      "dependencies": {},
+      "host_config": null
+    },
+    "baseline": {
+      "executor_id": "text-reusable-bounded-training.reference",
+      "fingerprint": "e0a5b59212778e51c766408756b440e61ed5a3fe3aebf9215a86829e26fa35a0",
+      "dependencies": {},
+      "host_config": null
+    },
+    "reference": null,
+    "primary_metric": "wall_time_ms",
+    "primary_condition": "router-fresh"
+  },
+  "feature_combinations": [
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\"], false, 2, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], true, 4, true, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 4, false, true, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+      "unicode": true,
+      "fields": "[\"id\", \"name\", \"note\"]",
+      "unicode_characters": "ë"
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 4, false, false, false]",
+      "unicode": false,
+      "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"extra\", \"id\", \"name\"], false, 3, false, false, false]",
+      "unicode": false,
+      "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"extra\", \"id\", \"name\", \"note\"], true, 5, true, false, false]",
+      "unicode": false,
+      "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 5, false, true, false]",
+      "unicode": false,
+      "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 4, false, false, false]",
+      "unicode": true,
+      "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+      "unicode_characters": "ë"
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"note\"], false, 2, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\"], false, 1, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"note\"], true, 3, true, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"note\"], false, 2, false, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"note\"], false, 3, false, true, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\"], false, 2, false, false, true]",
+      "unicode": false,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], true, 4, true, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 4, false, true, false]",
+      "unicode": false,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": ""
+    },
+    {
+      "family": "text",
+      "size": "small",
+      "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+      "unicode": true,
+      "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+      "unicode_characters": "ë"
+    }
+  ],
+  "schema_version": "assessment.report.v2",
+  "report_id": "fit_a2535f0c4b1d46a9a7d8d085dd8f4669",
+  "plan_digest": "72b8063a6e19fea2edea29553e647d2d98414dedfd5777a5bcc533b00d626376",
+  "outcome": "unsuitable",
+  "qualification_passed": false,
+  "distinct_holdout_cases": 0,
+  "distinct_paired_cases": 0,
+  "correctness_failures": 4,
+  "execution_failures": 0,
+  "tested_variations": [],
+  "condition_comparisons": {
+    "router-fresh": {
+      "paired_savings": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null
+      },
+      "savings_interval": {},
+      "paired_measurement_cases": {
+        "wall_time_ms": 0,
+        "local.cpu_ms": 0,
+        "local.gpu_ms": 0,
+        "local.memory_mb_seconds": 0,
+        "local.network_bytes": 0
+      },
+      "break_even_uses": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null,
+        "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.input_tokens": null,
+        "model.openai.gpt-6-astra.subscription.output_tokens": null,
+        "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+        "subscription.openai.codex.self.provider_unit": null
+      }
+    }
+  },
+  "measured_usage": {
+    "campaign_wall_time_ms": 34583.817377802916,
+    "known_campaign_wall_time_ms": 34583.817377802916,
+    "known_overhead_wall_time_ms": 47213.971914956346,
+    "assessment_wall_time_ms": 81797.78929275926,
+    "included_routing_overhead_ms": 168.87991735711694,
+    "included_invocation_guard_ms": 1088.786335894838,
+    "known_campaign_subtotal.local.cpu_ms": null,
+    "campaign_total.local.cpu_ms": null,
+    "known_overhead_subtotal.local.cpu_ms": 11420.144000000004,
+    "assessment_total.local.cpu_ms": null,
+    "known_campaign_subtotal.local.gpu_ms": null,
+    "campaign_total.local.gpu_ms": null,
+    "known_overhead_subtotal.local.gpu_ms": null,
+    "assessment_total.local.gpu_ms": null,
+    "known_campaign_subtotal.local.memory_mb_seconds": null,
+    "campaign_total.local.memory_mb_seconds": null,
+    "known_overhead_subtotal.local.memory_mb_seconds": null,
+    "assessment_total.local.memory_mb_seconds": null,
+    "known_campaign_subtotal.local.network_bytes": null,
+    "campaign_total.local.network_bytes": null,
+    "known_overhead_subtotal.local.network_bytes": null,
+    "assessment_total.local.network_bytes": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+    "campaign_total.subscription.openai.codex.self.provider_unit": null,
+    "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+    "assessment_total.subscription.openai.codex.self.provider_unit": null
+  },
+  "measurement_coverage": {
+    "local.cpu_ms": "0/56",
+    "local.gpu_ms": "0/56",
+    "local.memory_mb_seconds": "0/56",
+    "local.network_bytes": "0/56",
+    "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.input_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.output_tokens": "0/56",
+    "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/56",
+    "subscription.openai.codex.self.provider_unit": "0/56"
+  },
+  "paired_measurement_cases": {
+    "wall_time_ms": 0,
+    "local.cpu_ms": 0,
+    "local.gpu_ms": 0,
+    "local.memory_mb_seconds": 0,
+    "local.network_bytes": 0
+  },
+  "paired_savings": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null
+  },
+  "savings_interval": {},
+  "break_even_uses": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null,
+    "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.input_tokens": null,
+    "model.openai.gpt-6-astra.subscription.output_tokens": null,
+    "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+    "subscription.openai.codex.self.provider_unit": null
+  },
+  "estimated_production_savings": {},
+  "campaign_digest": "060922d4334fa478dfe67486f790ef03bc2411ba69164c3659dd5c2768874cfb",
+  "operation_ledger_digest": "6f3db057bff633b1b81c4a8e560fdf2683765e8e3c0b199e12d12d14154a48a8",
+  "grader_validation_digest": "2cfc217b7e5c0dc1af8e32ef680c4f6a3b332d31183d8a26795906a54996a9b0",
+  "host_runtime_digests": {},
+  "deterministic_reference_comparison": {},
+  "explanations": [
+    "Correctness counts distinct held-out cases; repetitions measure variability.",
+    "Latency includes routing and grading. The interval resamples template families and cases.",
+    "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+    "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+    "Comparison structure: direct; admission uses wall time under router-fresh. Conditions are never pooled."
+  ],
+  "created_at": "2026-09-27T12:27:00.280612Z"
+}

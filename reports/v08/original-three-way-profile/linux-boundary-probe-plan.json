@@ -1,0 +1,74 @@
+{
+  "schema_version": "report.linux-task-boundary-probe-plan.v1",
+  "execution_authorized": false,
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "purpose": "Preimplementation zero-model availability/isolation diagnostic, not qualification or full conformance",
+  "ordering": "After current materialization diagnostic and tiny nativeMac MCP milestone; parent-scheduled quiet window",
+  "image": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+  "reuse": [
+    "ManagedWorkerBinding launch/cleanup and immutable image",
+    "CodexAppServerTransport command/exec, initialize, thread/start inventory only",
+    "Existing reviewed probe/accounting paths; exact request/grant reservation must be supplied before execution"
+  ],
+  "bounds": {
+    "fresh_workers_max": 2,
+    "assessment_operations_max": 2,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "per_worker_seconds": 45,
+    "total_reserved_seconds": 90,
+    "per_command_ms": 5000,
+    "output_bytes_cap": 4096,
+    "canary_bytes_max": 1024,
+    "cleanup_seconds_per_worker": 10
+  },
+  "prohibited": [
+    "model turns",
+    "installation/download/build",
+    "admin/capability flags",
+    "host bind mounts",
+    "credential/auth state access",
+    "canonical policy mutation",
+    "budget reset",
+    "replay to obtain favorable result"
+  ],
+  "synthetic_private_state": "/tmp/aeep-probe-private-v1/state.json; fixed public non-auth canary, source-controlled hash, no real credentials or assessment state",
+  "phases": [
+    {
+      "id": "availability",
+      "worker": "fresh default immutable worker",
+      "steps": [
+        "Verify actual binary/image/policy identity using existing helper",
+        "Observe module availability only with importlib.util.find_spec; no install",
+        "Run bounded existing command/exec against public paths and Codex sandbox help",
+        "Attempt actual nested codex sandbox with fixed literal Python argv under existing aeep profile; collect supported/unsupported and errors without substitution",
+        "Observe default policy canary access separately; access must never be mistaken for protected private state"
+      ]
+    },
+    {
+      "id": "private-state-denial",
+      "worker": "fresh same image, exact stricter task-local permission overrides only",
+      "steps": [
+        "Create fixed synthetic private canary via existing trusted worker observation helper outside model command sandbox",
+        "Use existing named aeep profile with narrowly added denial of synthetic private path; record exact override/config fingerprint and acknowledgement",
+        "Attempt direct and nested command/exec read/write/truncate/rename of canary and parent; require denial and unchanged independently inspected hash",
+        "If startup configuration permits, launch a fixed stdlib synthetic MCP canary server (no AEEP/install) to prove private-state access occurs outside command sandbox; list/call once by protocol, zero model turns",
+        "Attempt model-command process/pipe/private-config access and direct privileged startup spoof; require actual denial",
+        "Verify no survivors using existing identity cleanup, retain all unsupported/failing outcomes"
+      ]
+    }
+  ],
+  "stop_rules": [
+    "Fail closed if overrides cannot be acknowledged/enforced, nested sandbox unavailable or actual configuration identity unbound",
+    "Do not fall back to unsandboxed command",
+    "Synthetic MCP probe does not attest task-only AEEP tool contracts, authority or receipts",
+    "No full resource/admission/threeway-ready claim from this diagnostic"
+  ],
+  "unresolved_executable_bindings": [
+    "Exact reviewed driver/helper argv and source pins",
+    "Existing assessment operation request/authorization and non-reset reservation",
+    "Trusted setup observation helper for synthetic canary and exact tightening configuration",
+    "Actual protocol support and installed module availability; never inferred from image metadata"
+  ],
+  "follow_through": "Only observed successful denial/placement results justify a versioned managed/Linux TaskScope backend proposal; final task service still needs full actual conformance and fresh qualification"
+}

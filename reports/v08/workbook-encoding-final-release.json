@@ -1,0 +1,113 @@
+{
+  "source_before": "e43c0939ddb45265ce87bbed2bfbf1c5ab281f3677bb24105f8917e79f32308c",
+  "source_after": "e43c0939ddb45265ce87bbed2bfbf1c5ab281f3677bb24105f8917e79f32308c",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.435684125055559,
+      "log": "reports/v08/workbook-encoding-final-release-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.48595941707026213,
+      "log": "reports/v08/workbook-encoding-final-release-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.471070250030607,
+      "log": "reports/v08/workbook-encoding-final-release-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.47205804206896573,
+      "log": "reports/v08/workbook-encoding-final-release-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.45247399993240833,
+      "log": "reports/v08/workbook-encoding-final-release-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4703550839331001,
+      "log": "reports/v08/workbook-encoding-final-release-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.523217040929012,
+      "log": "reports/v08/workbook-encoding-final-release-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 8.473600041004829,
+      "log": "reports/v08/workbook-encoding-final-release-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 3.1827406670199707,
+      "log": "reports/v08/workbook-encoding-final-release-08.txt"
+    }
+  ]
+}

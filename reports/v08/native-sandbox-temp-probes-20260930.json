@@ -1,0 +1,43 @@
+{
+  "purpose": "Synthetic native containment fault and repair; no model call or production data",
+  "source_digest_after_repair": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "installed_codex_version": "0.154.0",
+  "initial_failure": {
+    "log": "delivery-final-pytest-6f7.log",
+    "result": "1 failed, 1028 passed, 15 skipped",
+    "fault": "An explicit denied subtree in a pytest project under /private/tmp remained readable and writable through the named macOS permission profile",
+    "direct_probe": "A project outside /private/tmp also read and wrote a separately denied /private/tmp canary",
+    "settings_with_no_effect": [
+      "sandbox_workspace_write.exclude_tmpdir_env_var=true",
+      "sandbox_workspace_write.exclude_slash_tmp=true",
+      "permissions.aeep-native-task.filesystem.\":slash_tmp\"=deny",
+      "permissions.aeep-native-task.filesystem.\":tmpdir\"=deny",
+      "exact absolute deny"
+    ]
+  },
+  "repair_probes": {
+    "recursive_glob_denied_read_and_write": true,
+    "brace_glob_denied_root_itself": true,
+    "slash_tmp_alias_denied": true,
+    "var_tmp_denied": true,
+    "declared_subtree_and_protected_control_denied": true,
+    "rename_into_denied_temp_rejected": true,
+    "child_read_rejected": true,
+    "network_bind_rejected": true,
+    "per_user_tmpdir_sibling_read_write_denied_without_explicit_grant": true,
+    "system_temp_project_and_read_grants_rejected_by_config": true,
+    "glob_metacharacters_in_configured_paths_rejected": true
+  },
+  "workbook_followup": {
+    "first_failure": "openpyxl could not create a NamedTemporaryFile after system temp was denied",
+    "repair": "The native command accepts only literal TMPDIR/TMP/TEMP values equal to an existing reviewed project write_root; inherited temp variables are cleared",
+    "focused_result": "19 passed in tests/test_v08_task_profile.py with installed Codex and bundled workbook Python, including a separate MCP subprocess success and corrupted-output rejection"
+  },
+  "limits": [
+    "The supported native project/read/write scope excludes /tmp and /var/tmp trees on this installed release",
+    "The :minimal runtime read baseline remains in the named profile",
+    "Synthetic native probes and workbook calls are not model-driven qualification or production support evidence"
+  ],
+  "documentation": "https://learn.chatgpt.com/docs/permissions",
+  "installed_release_seatbelt_source": "https://github.com/openai/codex/blob/rust-v0.154.0/codex-rs/sandboxing/src/seatbelt.rs#L24-L32"
+}

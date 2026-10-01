@@ -1,0 +1,195 @@
+{
+  "execution_authorized": true,
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "driver_sha256": "e5880940ea20f815c2204a7cdb0d6c48c069a1f7a5d41cca752a322932c83012",
+  "binary_sha256": "50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+  "python_sha256": "5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325",
+  "dependencies": {
+    "reports/v08/native-model-resource-acceptance-definition-5fff-v3.json": "a05cacd71f61387a659c1e075149640878deb0cb2c6fe11cdbd9547683b99887",
+    "reports/v08/native-model-resource-fresh-cases-5fff.py": "83a51d139915ef414d16b46bab1a2873aac8b27e33a16e6d5dad899f5ebb4af7",
+    "integrations/assessment-runtime/workbook_program.py": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18",
+    "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f",
+    "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+    "reports/v08/native-only-validation-prerequisite-5fff.py": "fd9fcb6b0bc58f36c7127be0824732313dc3d5f899685b785392d19e23591c1e",
+    "reports/v08/native-baseline-shell-preflight-ade3-result.json": "1271e8ec5bacbf44a942f4c004b326a9e9c2ffcc8f2bbf6e3dfee6447a8c7080"
+  },
+  "expected_shared_inventory": [
+    {
+      "name": "code-review",
+      "tools": []
+    },
+    {
+      "name": "codex_app",
+      "tools": []
+    },
+    {
+      "name": "computer-use",
+      "tools": []
+    },
+    {
+      "name": "cua_repl",
+      "tools": [
+        "js",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "node_repl",
+      "tools": [
+        "js",
+        "js_add_node_module_dir",
+        "js_reset",
+        "turn_ended"
+      ]
+    },
+    {
+      "name": "shortlist",
+      "tools": [
+        "add_to_queue",
+        "bot_control",
+        "get_application_status",
+        "get_applied_jobs",
+        "manage_profile",
+        "manage_queue",
+        "manage_resumes",
+        "prefill_job",
+        "search_jobs"
+      ]
+    },
+    {
+      "name": "sweet-saver-fare",
+      "tools": []
+    },
+    {
+      "name": "tunnelMcp",
+      "tools": [
+        "connect_stdio_mcp",
+        "create_tunnel_runtime",
+        "install_or_select_tunnel_client",
+        "list_runtime_aliases",
+        "runtime_status",
+        "stop_runtime"
+      ]
+    }
+  ],
+  "prompt_template": "Complete the two ordered synthetic workbook tasks in {input_path}, using ordinary native tools and the existing Python {python} and independent libraries available in its runtime. Each input supplies workbook_b64 plus its task contract. Read and decode the inputs, implement the task requirements yourself, and write valid recalculated XLSX artifacts to {scratch}/output-0.xlsx and {scratch}/output-1.xlsx. Preserve the declared unrelated sheet and formatting; do not expose encoded workbook data in the response. Use existing code-mode/tool progressive disclosure normally; no AEEP tool or protected reference/oracle/grader is available. Do not read unrelated files, credentials or authentication state, use network services, change global configuration, retry after a rejected command, or invoke unrelated MCP tools. Work only in the declared scratch directory. TMPDIR, TMP and TEMP are configured to that writable scratch root; use existing Python/libraries normally. Return only successes:[boolean,boolean], stopped_after_rejection:boolean, and reason completed/unavailable/denied/failed. Report failure honestly; independent grading is outside your process. For every shell command, set the shell temporary prefix first within that invocation: TMPPREFIX=\"{scratch}/zsh-owned-\"; use the declared scratch for temporary files. This is a shell variable for that invocation only. Do not change global environment or permissions.",
+  "prompt_template_sha256": "81993ce70ae4fa84d005561abbbdd10e9cc8fce287cbafb7807f57d6bda63e5d",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "successes": {
+        "type": "array",
+        "items": {
+          "type": "boolean"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "stopped_after_rejection": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "unavailable",
+          "denied",
+          "failed"
+        ]
+      }
+    },
+    "required": [
+      "successes",
+      "stopped_after_rejection",
+      "reason"
+    ],
+    "additionalProperties": false
+  },
+  "maximum_operations": 2,
+  "maximum_reserved_seconds": 280,
+  "maximum_model_turns": 1,
+  "cash_usd": 0,
+  "body_seconds": 225,
+  "setup_seconds": 40,
+  "host_seconds": 240,
+  "fixture_definition": "Existing policy literal small and seed29/count11/index10 larger; same exact input hashes as successful AEEP observation; calibration fixtures, never holdout.",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "ordinary_tools": "No progressive-disclosure preload; inherited shared MCP inventory must match AEEP arm minus own AEEP server. Existing independent libraries and ordinary shell/file/code-mode tools remain available.",
+  "classification": "Fresh resource-only two-task workflow engineering evaluation; no controlled causal/selection benefit or qualification",
+  "quality_floor": "Both unchanged independent workbook grader checks must pass before any successful-task resource comparison; failed task still retains cost.",
+  "measurement_boundary": "Observable owned App Server/MCP descendants sampled every50ms, plus separate assessment controller samples. External provider compute and whole-machine totals unknown. No double-counted sum of controller and shared runtimes.",
+  "telemetry_unknowns": [
+    "whole-machine interference/baseline",
+    "provider CPU/GPU/memory/energy",
+    "actual network bytes/requests and private disclosure telemetry",
+    "very short unsampled process lifetimes",
+    "shared RSS pages and cache attribution",
+    "AEEP historical controller resource telemetry absent",
+    "historical vs sibling order/cache/provider variance; n1 not paired causal evidence"
+  ],
+  "acceptance_thresholds": "None selected from calibration; existing software-only frozen checks retained separately and not transferred. New budgets require review before heldout evaluation.",
+  "prior_aeep_observation": {
+    "elapsed_seconds": 17.80378087493591,
+    "checks": [
+      {
+        "index": 0,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+        "independent_grader_valid": true
+      },
+      {
+        "index": 1,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+        "independent_grader_valid": true
+      }
+    ],
+    "token_usage": {
+      "inputTokens": 59694,
+      "cachedInputTokens": 29568,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 291,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 59985
+    },
+    "forced_handoff": true
+  },
+  "differences": [
+    "AEEP arm forced exact trusted workbook helper handoff; baseline implements workbook task using ordinary native tools; this measures realized workflows, not isolated routing overhead or optional capability selection.",
+    "Sequential historical AEEP then baseline; no randomization/repetition inferred."
+  ],
+  "auth": "Codex-owned; no agent access/state copies",
+  "cleanup": "Close native transport, verify observed PID+creation-time ownership; remove only owned scratch, preserve canonical assessment operations/results; survivors cause failure.",
+  "no_replay": true,
+  "native_capacity_preflight": "Inside existing host operation before any turn/start: account/rateLimits/read normalized by rate_limit_observation; unknown/missing/exhausted native windows stop, no worker equivalence. Snapshot/latency recorded separately; native AEEP arm used separate0.487s precheck.",
+  "event_policy": "Bounded command/MCP/dynamic/file event names and command hashes only; no arguments/results. Any MCP invocation violates baseline prompt and fails successful-workflow policy after independent grading; observation is not preventive containment.",
+  "quality_preservation": "Each output independently graded and checks stored before model/status/MCP policy assertions; invalid/missing artifacts retain bounded failure facts.",
+  "reserved_vs_actual": "1turn reserved conservatively; turn_start_dispatched records whether host request issued. Preflight stop does not infer model inference or refund.",
+  "preflight": "Existing NativeSandboxConfig.validate_environment for TMPDIR/TMP/TEMP owned scratch; only report-process os.environ scoped while native transport.start captures supported allowlist; exact prior values restored. Actual command/exec inherits environment (no env override), creates/writes/reads/deletes own tempfile before any model; failure stops.",
+  "changed_experiment": "Separate successor: original baseline immutable and failed-quality finding retained; writable temporary environment parity repaired, actual previous cause remains unknown.",
+  "diagnostics": "Sanitized terminal schema fields and command exit/category retained; no raw task output, command text, argvpayload or stderr.",
+  "resource_definition_sha256": "a05cacd71f61387a659c1e075149640878deb0cb2c6fe11cdbd9547683b99887",
+  "resource_authority_sha256": "a876b2739f61383abfb571f33909e132866ecc7332d8738b22b3fc568414c232",
+  "source_validation_required": "Exact21named applicable native/software phases, sourceunchanged; no full22requirement for container-free Mac resource/shell runs",
+  "shell_support_required": "Exact reviewed zero-model shell preflight must pass; parent review/window and result binding before dispatch",
+  "resource_seed": 2026093047,
+  "fixture_binding": "Baseline setup generates protected11cases/selects0,10 after exact approved definition; all11input hashes disjoint from canonical and previous calibration, durable owned fixture record. AEEP uses exact same protected record. No oracle enters evaluated host.",
+  "preparation_review_corrections": "Setup40s deadline/finalization evidence, interruption output grading, strict final whitelist, fixture-oracle canonical hash binding, owned logical+allocated storage/config/controller dimensions; unknown development orchestration overhead retained",
+  "setup_body_seconds": 35,
+  "setup_cleanup_headroom_seconds": 5,
+  "independent_review_sha256": "180805e44aafea8e5ddf5fee8272db2d1351ebd3bd6d3fb9aa6b9b89d0ce20e8",
+  "authority": "Standing delegated finite testing authority; root authorized exact peer-reviewed corrections, execution held for final22/human fixture/shell-support prerequisites.",
+  "native_validation_records": {
+    "reports/v08/native-only-validation-prerequisite-5fff-snapshot.json": "323fbaf755d87a115bd729fb01b6337a39f1f1148f9380bec81c014c1acf6734"
+  },
+  "native_only_prerequisite_amendment": "Exact21named noncontainer phases must allPASS/current source. Optional container-all original outcome retained; no full22/container/release pass inferred. Final actualvalidationrecord hashes pending.",
+  "validated_record_sha256": "323fbaf755d87a115bd729fb01b6337a39f1f1148f9380bec81c014c1acf6734",
+  "shell_support_result_sha256": "1271e8ec5bacbf44a942f4c004b326a9e9c2ffcc8f2bbf6e3dfee6447a8c7080",
+  "execution_local_shell_setting": "TMPPREFIX=<same owned writable scratch>/zsh-owned- within shell invocation only; no global environment/profile widening. Same outer-host setting applied baseline instructions/AEEP fixed reader where applicable.",
+  "original_model_denial_cause": "Unknown; fixed diagnostic does not identify historical model command/path.",
+  "root_exact_review_note": "Root standing finite authority plus independent final exact TMPPREFIX/native prerequisite review;21applicable phasesPASS source5fff, actual shell supportPASS and sole nativewindowreleased. Same frozenv3 budgets/resource-onlyseed/order4ops560s2turns/$0. AmbientDockerunknown retained."
+}

@@ -1,0 +1,134 @@
+{
+  "recorded_at": "2026-09-28T02:29:42.133931+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "authority": "2026-09-27 standing exact-review and finite execution authority",
+  "previous_record": "workbook-complete-family-continuation.json",
+  "supervisor": "/tmp/aeep-schema-local-run-reviewed-queue.py",
+  "supervisor_sha256": "f1aa1e07a8fee4687d3dc2433250d9346e455549214b5d1f94f520fe49435578",
+  "execution_rule": "Search qualification, CSV value, text value sequentially. No replay of any started plan; stop queue on command or execution failure. Use existing CLI AssessmentService/BenchmarkRunner. No duplicate queues.",
+  "plans": [
+    {
+      "family": "search",
+      "plan_id": "plan_ce7e4655c31c4af48f9a5b8f2a2f2bbc",
+      "manifest": ".aeep/live-review-v3/search-contract-local.json",
+      "review": "search-contract-local-execution-review.json",
+      "review_sha256": "1b67e29a0cb7a8d291e50aba2f87f99b3c4ecc77e84d67c7bcad9e1bade37d7d",
+      "command_result": "search-contract-local-command-result.json",
+      "live_report": "search-contract-local-live-report.json",
+      "campaign_upper_allowance": {
+        "operations": 286,
+        "model_turns": 141,
+        "elapsed_seconds": 33648.25956262497,
+        "cash_usd": "0"
+      },
+      "remaining_at_review": {
+        "model_turns": 4781,
+        "elapsed_seconds": 547762.8665399099,
+        "operations": 44787,
+        "cash_usd": "0"
+      },
+      "all_adapter_eligibility_verified": true
+    },
+    {
+      "family": "csv",
+      "plan_id": "plan_e915d9d5be214924859f7579a8bca5f0",
+      "manifest": ".aeep/live-review-v3/csv-four-arm-schema-local.json",
+      "review": "csv-four-arm-value-schema-local-execution-review.json",
+      "review_sha256": "0b3f724d6be94a3be05ac63f659dc66065d88806b47801f88e1c57534e011be7",
+      "command_result": "csv-four-arm-value-schema-local-command-result.json",
+      "live_report": "csv-four-arm-value-schema-local-live-report.json",
+      "campaign_upper_allowance": {
+        "operations": 1414,
+        "model_turns": 564,
+        "elapsed_seconds": 176340.0526259999,
+        "cash_usd": "0"
+      },
+      "remaining_at_review": {
+        "model_turns": 4781,
+        "elapsed_seconds": 547750.1440853268,
+        "operations": 44783,
+        "cash_usd": "0"
+      },
+      "all_adapter_eligibility_verified": true
+    },
+    {
+      "family": "text",
+      "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+      "manifest": ".aeep/live-review-v3/text-four-arm-schema-local.json",
+      "review": "text-four-arm-value-schema-local-execution-review.json",
+      "review_sha256": "94d39df4c23ddf0d508d556024e90fa954f9e366deb70c14e18a022917bd004d",
+      "command_result": "text-four-arm-value-schema-local-command-result.json",
+      "live_report": "text-four-arm-value-schema-local-live-report.json",
+      "campaign_upper_allowance": {
+        "operations": 1414,
+        "model_turns": 564,
+        "elapsed_seconds": 176340.041611625,
+        "cash_usd": "0"
+      },
+      "remaining_at_review": {
+        "model_turns": 4781,
+        "elapsed_seconds": 547750.1440853268,
+        "operations": 44783,
+        "cash_usd": "0"
+      },
+      "all_adapter_eligibility_verified": true
+    }
+  ],
+  "completed_qualification": {
+    "csv": {
+      "report_id": "fit_fa7acd77988d4592b0d8b3b7ae6a1ab5",
+      "qualification_passed": true,
+      "distinct_holdout_cases": 105,
+      "correctness_failures": 0,
+      "execution_failures": 0,
+      "verification": "csv-schema-local-live-verification.json"
+    },
+    "text": {
+      "report_id": "fit_6c082e587d0543008154786e005e4d22",
+      "qualification_passed": true,
+      "distinct_holdout_cases": 105,
+      "correctness_failures": 0,
+      "execution_failures": 0,
+      "verification": "text-schema-local-live-verification.json"
+    }
+  },
+  "completed_workbook_value": {
+    "report_id": "fit_5ea659a4db38486e89705c6f771f7819",
+    "outcome": "no_measured_benefit",
+    "verification": "workbook-recovery-per-manifest-verification.json"
+  },
+  "search_setup_correction": {
+    "prior_report_id": "fit_958a3f36b2c34715b236b1dd52709397",
+    "prior_receipt_id": "rcpt_25fd2e1164914c96a29049ffe4ed090e",
+    "prior_result": "Required schema validation failed; original record retained unchanged. No output payload retained.",
+    "defect": "After disabling unsupported native constrained generation the search task instructions omitted the exact result object/field contract. Both arms now receive the same original schema in task instructions, with the same required local validator. Causation of the prior answer cannot be proven.",
+    "review": "search-contract-local-profile-review-bundle.json",
+    "boundary": "search-contract-local-profile-assembly.json",
+    "fresh_seed": 202609313,
+    "prior_invocations_replayed": false
+  },
+  "preparation_diagnostic": "CSV initial preview used unconfigured local adapter registrations and was ineligible before invocation. Existing mapping subjects were then configured through managed_hosts.configure and the same inert plan reviewed; no task replay.",
+  "reusable_training": {
+    "csv": {
+      "outcome": "insufficient_evidence",
+      "correctness_failures": 0,
+      "execution_failures": 0,
+      "distinct_holdout_cases": 0
+    },
+    "text": {
+      "outcome": "unsuitable",
+      "correctness_failures": 4,
+      "execution_failures": 0,
+      "distinct_holdout_cases": 0
+    }
+  },
+  "remaining_after_queue": [
+    "Search reusable construction on matching fresh training inputs, contained validation, immutable images, paired conformance and four-arm campaign if qualification passes",
+    "Remaining task-only family calls and source-bound final verifier",
+    "Native-catalog treatment exposure/retrieval/invocation observation gap remains explicit"
+  ],
+  "native_catalog_gap": "native-catalog-recovery-docs-review.json",
+  "source_changed": false,
+  "budget_reset": false,
+  "release_ready": false
+}

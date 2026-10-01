@@ -1,0 +1,22 @@
+{
+  "base_image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "method": "stopped-container snapshot; container never started",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "source_files": {
+    "integrations/managed-worker/worker-launch": "ceae49ee124d0b4ad3abdb112856d24116996cf10054fa414702c95310eeefe1",
+    "src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275"
+  },
+  "prior_builds": [
+    {
+      "method": "BuildKit bare digest",
+      "status": "failed with context deadline exceeded"
+    },
+    {
+      "method": "legacy builder using local base tag",
+      "status": "cancelled after TERM did not stop client; KILL confirmed exit 137"
+    }
+  ],
+  "image": "sha256:65337c8a0cf15391dd866c0df12c7394d35c39de5ba754fa367c49766d7e1872"
+}

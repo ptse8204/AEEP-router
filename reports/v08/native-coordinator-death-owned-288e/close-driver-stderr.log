@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/native-exec-liveness-driver-288e.py", line 64, in <module>
+    if __name__=='__main__': supervisor() if len(sys.argv)==1 else worker(sys.argv[1])
+                                                                   ~~~~~~^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/native-exec-liveness-driver-288e.py", line 25, in worker
+    send({'id':1,'method':'initialize','params':{'clientName':'aeep-bounded-liveness-probe'}});response(1)
+                                                                                               ~~~~~~~~^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/native-exec-liveness-driver-288e.py", line 20, in response
+    if not line: raise RuntimeError('native exec-server ended before response')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: native exec-server ended before response

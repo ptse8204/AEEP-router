@@ -9,7 +9,7 @@ It is not cash.
 The binding is disabled by default. `aeep-local` creates no network connection,
 wallet, token, stablecoin, custody, payout, or real-value transfer. A
 `SELF_ONLY` or `SAME_PRINCIPAL` entitlement is rejected before commitment
-serialization. Consequently, personal OpenAI subscription capacity cannot be
+serialization. Personal OpenAI subscription capacity therefore cannot be
 committed for an external beneficiary.
 
 Provider-authorized mock capacity is the sole positive conformance path. The

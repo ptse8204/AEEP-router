@@ -1,0 +1,152 @@
+{
+  "source_before": "f664ef9dffd21fcfc48c5217c29ee2e34f82f33acd1589603a6037cc4c8355e3",
+  "source_after": "f664ef9dffd21fcfc48c5217c29ee2e34f82f33acd1589603a6037cc4c8355e3",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08989854203537107,
+      "log": "reports/v08/pilot-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6198095419676974,
+      "log": "reports/v08/pilot-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.09100058302283287,
+      "log": "reports/v08/pilot-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3784979999763891,
+      "log": "reports/v08/pilot-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13643220893573016,
+      "log": "reports/v08/pilot-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 291.29943133401684,
+      "log": "reports/v08/pilot-final-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 388.11514941602945,
+      "log": "reports/v08/pilot-final-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9751207910012454,
+      "log": "reports/v08/pilot-final-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2859950829297304,
+      "log": "reports/v08/pilot-final-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04846833401825279,
+      "log": "reports/v08/pilot-final-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04845458397176117,
+      "log": "reports/v08/pilot-final-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0801334159914404,
+      "log": "reports/v08/pilot-final-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.15195275004953146,
+      "log": "reports/v08/pilot-final-check-12.txt"
+    }
+  ]
+}

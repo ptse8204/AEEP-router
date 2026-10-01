@@ -96,6 +96,11 @@ def terminal(status: str = "completed") -> None:
 
 
 def successful_events(*, conflicting_usage: bool = False) -> None:
+    send({"method": "item/completed", "params": {
+        "threadId": "fixture-thread", "turnId": "fixture-turn",
+        "item": {"id": "fixture-progress", "type": "agentMessage",
+                 "phase": "commentary", "text": "Computing the result."},
+    }})
     send(
         {
             "method": "item/plan/delta",
@@ -147,6 +152,7 @@ def successful_events(*, conflicting_usage: bool = False) -> None:
                 "item": {
                     "id": "fixture-message",
                     "type": "agentMessage",
+                    "phase": "final_answer",
                     "text": '{"characters":3}',
                 },
             },

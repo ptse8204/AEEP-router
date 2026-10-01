@@ -1,0 +1,70 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_9c8d1f02076148808bc075a2946ca134",
+      "operation_id": "linux-noauth-boundary:conformance_probe_9c8d1f02076148808bc075a2946ca134",
+      "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+      "worker_digest": "eb0f786969a9dcbebb2f53a1fcb9273e693c3a02fec966390f977544cb566ccd",
+      "cleanup_confirmed": true,
+      "protocol_passed": false,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "effective_requirements_matches": true,
+      "observed": {
+        "server_canary_readable": true,
+        "exit_code": 0,
+        "stderr_class": "none",
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 60,
+        "child": {
+          "marker": true,
+          "read_denied": true,
+          "write_denied": true
+        },
+        "canary_unchanged": true,
+        "model_command": {
+          "canary_read_denied": true,
+          "canary_write_denied": true,
+          "server_read_denied": true,
+          "server_write_denied": true,
+          "requirements_read_denied": false,
+          "requirements_write_denied": true,
+          "config_read_denied": true,
+          "config_write_denied": true
+        },
+        "independent_canary_unchanged": true
+      },
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:27:46.558384Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:27:46.558414Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "elapsed_seconds": 2.68400074983947,
+      "canonical_record_digest": "2c9aadc142a68492deaa2f91288fe17fdbcb95dd747bb01f405acf7b9877254e"
+    }
+  },
+  "probe_supported": false,
+  "classification": "mcp_child_support_or_denial_not_established",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8630,
+    "model_turns": 2535,
+    "elapsed_seconds": 74751.979912112,
+    "cash_usd": "0.0"
+  }
+}

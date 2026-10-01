@@ -1,0 +1,468 @@
+{
+  "authority": "2026-09-27 standing testing authority",
+  "request": {
+    "schema_version": "assessment.conformance-request.v1",
+    "plan_id": "conformance_probe_b73b7e879572471490524e313ad8f7e1",
+    "subject_digest": "faf2bf6fef3293fc97ed6f7eb5b1e6022fd875488cb80c505de09c036068851c",
+    "recipe_digest": "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+    "mapping_digest": "65c8ddd7f8123c700c7e6bee804bd49de27bde190d9d3633d3c2757745e17eda",
+    "environment_digest": "463fb4cc9951e2300e2a53898e87e61b4239f0c5a5fc673469e8fab3237a332a",
+    "authorization_id": "onboarding",
+    "definition_digests": [
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+      "65c8ddd7f8123c700c7e6bee804bd49de27bde190d9d3633d3c2757745e17eda",
+      "463fb4cc9951e2300e2a53898e87e61b4239f0c5a5fc673469e8fab3237a332a"
+    ],
+    "worker_digest": "a433abd7e86f24d873d63326f4e67f118296955ddae4bde3da50b752e60fd782",
+    "executable_dependencies": {
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py": "7ccaea3c80c7c9d71853999e47112a77d0393c8e26c98198096545f7d58615bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py": "41df9ff33d90dafa6210fdb1e8f045b09ae900258357114a424f36d0c845987a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py": "f4032f461d77e330e7f9ad06d821817a8901d7d29b24ab51afb8c2e8664a66a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/artifact_store.py": "5c34cd0c5d631c5609b4f23795daef1bf0b5ca72756598b93a71a193f1f7bf23",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/__init__.py": "388afb63319bcaa278b0ba9c4860d62bf3bb89c1932fc3a22dcb56614cbf9835",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/adapters.py": "1b780590dbc9b2a8bedff87a670ab6345f53ea4f9005d44a0876f21c8002433f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/boundary.py": "3e75e70a932508a8488739d7463edd1eed5dd28b1606c3a5463da882f473907e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/budget.py": "cab960c0c1083e87d8b157d084e2cf109fc0f6cc286ed10cd34633ba08a6174b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py": "1786318285b76ad1741fb266ccc120b8ef6f85546dad793494059d5021e68076",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/comparison.py": "419bf14ceb9d46b876277f949266222a590137214d7b2424d485e518c2e51c7d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/container_worker.py": "2f4a9d3bb85fa0a7be41419bd7a76daf2c2c2f43713c0a799a4a004e7e9ff8e5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/containment.py": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/controlled_fixture.py": "ac32d042b3221c93a8fd7e6713227710c0ea50ff4cf8206e466e2a78d362487e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/destinations.py": "9fc02703a7e6785bdebf63568b053eae21ec2d05920b5205a4c03eaeffba0a08",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "b56a83fa4df309a3d415fd10d7c72430cd556c2f2ad2e52e3f036d68dd6b9296",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/onboarding.py": "d09c60ced4eea0ed27dc3c903b83eea250be0d4fc73f20396c42e1b048f8b74c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/pilot.py": "e484b494435236c17b9342986db3bba05b5fe7044b88eead737eaa741fb72518",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py": "333939219c7caac7f9a66d0acbcbd98b262900a24809fbbe60d1aa3835cbe05f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recovery.py": "af91beb82613e30a76f71988658db111c4aaa5309f96a852d4a4ad3cff28c2ce",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/reporting.py": "4aec948f7773de6034632dbe01336a13f2f5ec4b3086f6a8f2e64b377d0e1cfb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/service.py": "78d871388fe423699e1d8a59dda81cb345fa4568af01c10ca48c844e2dfac7f3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/tools.py": "686e00f925740e30bb2df02c2d2674c3d6e884fef50464c9e0513e0107c8bd59",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "0621e16c39689fd84abb5e931f995d82475b595070c0c00dbcaef7fe9c850f6e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/worker.py": "e7838401cf937b697217331c10184159f81e828a8d7aaf9860af4db71529dbfa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/attempts.py": "265711ad218a21d368e615529c59a8d0a757a0f1bb4f0cf223555fee9569ce4f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/benchmarking.py": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cache_affinity.py": "e7da8796cba11d91a6afe08f4fe84035fc5eb1c365dd685556a8809292530f3f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/__init__.py": "52ba8f97715a1ad0bb0b77101af30e90a60f6eec8d54cd7572fc5565e1a6aeeb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/entitlements.py": "70e44025aa58c979350b0981bdb819eb3e69a0228083d47f927884b94f3bd50c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/evidence.py": "b7a8f3841fb9420d655fb2ab66bfde9f6daa6d5a1188a244c5ee5e2354a21197",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/policy.py": "f64662425c3add67fdb5cb5c921d2d5bbccdffea90e552cc11c4d9f4cb1a9261",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/reservations.py": "9635df6e8f2bf9b1ab1733667c7371a417934289cc12f3a68c6cd8599e80aa58",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cli.py": "aa2093e51890fe7d90c8ab7d9418ac1f2f2b4dc5a8fbb69bb41b202037afe72e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/codex_capture.py": "8a9665a9c9485e83ab2ee9e14d74f1470b3738731cef17ddcbd69b52e3ca592b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/config.py": "b11459ea4432808520741d951b7e79776ed613c1a088c407692ad1dee6690f24",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/conformance.py": "42c22969c67ba10ac8fe3dbecf9eefbfe4572dda38887f41e46868da7f3a381c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/discovery.py": "fd480761cc839f0719b1220153498252fc9f3f3f53edeb21b5e9c57cc616bbaa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/__init__.py": "c4336b042572eeb363ab48c6c73631bcb9100ff8749464f9fd4da3b1eb53eb74",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/aggregates.py": "9045a8f9d969fbb874fd5420c56f0c840294f21b5c7b565741b10a02f5e19354",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/canonical.py": "54aa8a1709cba41bcd1179bbcdae135433381130a30c17b219d72ce7e36d501f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/disclosure.py": "5a21fe2f9b0e9e4bf40fa79b9cc6bec985ec74b77461d22a8df7e9b56dd6bf1e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/execution.py": "1cb851c024f9a0ae5cfda48be194370453459bf55cddd878a7e4617efd5857d3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/prepared.py": "90eb07d845cbb3a0b36310961e0d22de21a68efe763c5b5d73307867a4c24161",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/quotes.py": "2044c60a8743dfa242e716e5b618fab49bbb55da83027519829d503d155c0acd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/signing.py": "f7750a9124bfcaea01316b96918d270bd572b774e6dffbcba17168d39e61ea65",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/trust.py": "dd11fb7c5f759895e262d117bc3ac89a61c64c6b7fee0310e468be86d649c066",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economics.py": "8fa9c96a4072ebea5a8b3228833e92c613443cbf310c72b388306f0cf4bffc72",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/errors.py": "c51312a14bf22c1f8132f8a16fe570c61245c92e28c0f3eda6648390016aea00",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/estimator.py": "a37bbfd9f3e888354d7c6f50176d131d656d16a2f57cc218f878de702104c60e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/__init__.py": "d30e96668b295d873113f829f8314a06665dc28b449b5d60b816b8da4ebd19f6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/proof_cli.py": "e424112ba1841edb99f997a0d365a4c3655bbd234e7b41c1f4df0d36965c065c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/text_stats_cli.py": "452ada1c0c75a6f62d45baeea431ae1dd13b6c3e4a7b49e0c6c1c70c28301084",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/tools.py": "ebe617bbb89ad87c21cb4dfaec3f6907adddd79deef8b1853162d2fb0af06e41",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/__init__.py": "f68e20884d31645e331c7cfcc1e1ce30579d3bb55cb80d47a877da8fea6bd716",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/base.py": "66bdfcff71168ba8c4f56157426da865bd061870c1d2782028ee395c1f03becf",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/command.py": "3d43ea780660393c0b6e1bc6d5c4b6c4c70719c845c2cb8a7f1f3582ec931360",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/delegate.py": "c580cc4d8baeb23643950a6facf39a8980b08dea11dd46bba7934cefa049318e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/host.py": "e5228971b9cba702afc53d963442cfc60803e3b8895108eb6797da04b9a1d28a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/http.py": "596c626e772462fa188e9ba8b73ad65c7d7e21a0eae4d9d9c04ebcf2e726d68c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/managed_host.py": "2d84dd05b1c06d914a4552f840f8c1442fbd5656ca05fd113561ebf0d329bfb0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/mcp.py": "6d62cfc329b3c697938b170fb086fdc3db849ca6856284f88734e188bb7e2219",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/network.py": "132f73e5fa5290c1e51b049abf689385207026b3692f7ca476c914150b7a101f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/parsing.py": "c8582f19bfb4d5ea59864484d33989d37d8a69910619884d15552248ff65d43b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python.py": "997054c0ef5e0c56e2e4d40103d5994e25b6739eaf78460316ac11a21c08e092",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python_worker.py": "6452fa5d189bd6f8ad7a761f45584f09ecaac302c8e7d80dabd035a3c291bcd6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/host_bridge.py": "0be103b73bbb8f7e11fa857d9631b64d2aefae0644888e120fa7f689655a20c8",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/__init__.py": "4ec79da28db2ddcccf62ee4afdca457489a58625523c8eb474e30213fbdb22b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/base.py": "fccc3daf7838c2cb8e14e0703bbdffc4dc765d768b30d7a0f3f9c0afd987375c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_exec.py": "0291a202f829b20f97376bfb72f0df6ef1ef170d0cf3c8affc2315178faa5162",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_inspection.py": "de8df4e6cb77f8ffe7e1be5d92ef8bfede70faad5e5f0556e84ea8857724081f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_invocation.py": "4dd18987e8bc606e07278762c5c4d123268d6f78a93a7675e2aae6baf25ff450",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_models.py": "abeb488f7c533064a3a6c745079c0ea5b29e8c6bb0af92a4fc1a4982fad9f51f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_signin.py": "dc609895eff2be6ff84e2eda536bf06b40aad798ba2f2da07f6fa0f8472b7933",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/registry.py": "e98a2d3b17f480d4d089d795ca2587fb738c18e9f2e442f73c76cc5189a2bf95",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/instrumentation.py": "e956105a2cfae23d4897b0a89099d28f5563f53c017129d28c11de60fee4fe47",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/__init__.py": "8ea11f622bc0175dbf0d09e682bd6c12098857ebd1462a12f98dacdb81844179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/tool_schemas.py": "23d384ec5bbc6f6f6b90f55315600dbc70da936d45ad1852c6b6eadd2b411bf6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/__init__.py": "8a0697b9772b7a21328339216c9ab7c39cd3aeb78a1082e12888f5ff0a604ecc",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/service.py": "2ab6c25749a29e3450598e35d06dddb41aeb68bf3ee0f45973d439ec01e1bfa7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/__init__.py": "279f2d722aa971af13149e13e010fd6a33c90aaeecf27077c661f2ebd781e4ae",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py": "f66535dda606a7013538ad5456728f7fba1ec6684c8070a002528ecf7f6777ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/headers.py": "b0436321a2b6d5aec44344e950d953d0f8051568b5fa9207b3c6211a5a8e569d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/server.py": "03ddd0e1e805e5be74eafbd1b01d80a129973ecbdb9fc4eb12729b2027ed7957",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py": "03cda305f56cae4ea20a00a8871adc31a05c2555e98245cdcff5e8f993d67cc7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/payments.py": "dc6b5814c0874f97f267a378990b50df182f7722fbd96f426a2c3006569e3317",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/policy.py": "5eb1320ae59a4bb9c81399a782896f7a50343b8e867da4bf72de31e2cd8cf8a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/profiler.py": "cc9a9e6dc1382a6bcd69297109eaef0360de72120730868872d6a1d8ae78a7b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/proofs.py": "862e4f056f4eb5b7a2f30cd8cac3f269d86ba649da495f523e59f62699e66bd5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_ingest.py": "977459d25a37e8c7f932b93a6cc996b805ea169115408eeac16bdc9bedeeea5d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_operations.py": "e5b41460ad2f0722f77ac0c47b30ce7afa55227a9b277c78723fef47db513566",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_package.py": "110104c1a1a840c5ff2cff6e7baa76ee1ce51bc887e7e36e64ff47b00721e058",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/qualification.py": "5e8a62900e3ca35ab1207bd9964fbc4b340a81990df927466794010629ab7398",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/registry.py": "d01ecef8ba1349b5ca1b15b7485876d888a80f86042cd23b288c1dbf3eeae73a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "0e512d280e4be601a6f5d77775c9071584867dd20d22e71dc3f6ae063dd564bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/runtime.py": "6740407e22fbbc7e66b7e436fe4ef1c7f74316a08effa3a5414fa7e53d355350",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/scoring.py": "83b8c07e77d9a2a5c6a599355917485444649aad711f343a1d6a206ce4eaa90a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/sdk.py": "6d8026eb1cc123f0af920d585d96599b4742bcdfd74b77772a254e3e507e1c44",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "4f944b0d54cac2132ec99450cc5fbc454cb367c624f6adced885012734176894",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/telemetry.py": "9a63f08aa475d735731aef0cfc6f3e975fea19cfdf6c8c7cdcce382093ae3a45",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/templates.py": "05a6074b17911a41fe0656b0d3d80b2b098a39b7e46e21ba51d5f281a3b393ea",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/validators.py": "dd84d6957ba6e3685fdbb9b43b74088708b4be2b756eef4957c36984ceb6a019",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/verification.py": "cab39c5a73ed95ab8394531e1a12079d3b11e3e79e773f845810642d86ae144e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/version.py": "88f95809c233bb35bb4f61ca0e499894c911239d5d04b7cd4713cf896adfc3d5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/workflow.py": "49d5d8953a82c102e2d653d157ba99aaa06422217baf224f6ad56c8e8b314d6c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/__init__.py": "a2544c9338505b7df5f624729c87541fca3970ff5f9eab89c92d6c894ae79d94",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/batch.py": "f378396fe0e20bf3a3e2ba512811e01f53c32f11aeb685f887cf153b7032a732",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/conformance.py": "ee9909178cd95f03acd788974c334a41747c7f1cd9589c1a115847074cefeb91",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/models.py": "062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc"
+    }
+  },
+  "amendment": {
+    "schema_version": "assessment.scope-amendment.v1",
+    "amendment_id": "amendment_224450160d4c47778e95272e22b225b8",
+    "authorization_id": "onboarding",
+    "authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "subject_digests": [
+      "faf2bf6fef3293fc97ed6f7eb5b1e6022fd875488cb80c505de09c036068851c"
+    ],
+    "recipe_digests": [
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf"
+    ],
+    "environment_digests": [
+      "463fb4cc9951e2300e2a53898e87e61b4239f0c5a5fc673469e8fab3237a332a"
+    ],
+    "reviewed_digests": [
+      "463fb4cc9951e2300e2a53898e87e61b4239f0c5a5fc673469e8fab3237a332a",
+      "65c8ddd7f8123c700c7e6bee804bd49de27bde190d9d3633d3c2757745e17eda",
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+      "faf2bf6fef3293fc97ed6f7eb5b1e6022fd875488cb80c505de09c036068851c"
+    ],
+    "issued_at": "2026-09-28T06:34:32.020747Z"
+  },
+  "definitions": {
+    "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf": {
+      "schema_version": "assessment.recipe.v1",
+      "recipe_id": "csv.v2",
+      "implementation_digest": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "capability": "assessment.csv@1",
+      "description": "CSV to string-valued records with strict row widths and unique headers.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "delimiter": {
+            "enum": [
+              ",",
+              ";",
+              "\t"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "delimiter"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "records"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "generator": "builtin:csv:2",
+      "generator_config": {},
+      "grader": "exact_match:1",
+      "extractor": "builtin:csv:3",
+      "variations": [
+        "plain",
+        "quoted",
+        "unicode",
+        "empty",
+        "reordered",
+        "semicolon",
+        "malformed"
+      ],
+      "exclusions": [
+        "Inputs outside the reviewed limits",
+        "Unreviewed formats and encodings"
+      ],
+      "dependencies": {
+        "recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3"
+      },
+      "screening_cases": 8,
+      "minimum_holdout_cases": 100,
+      "minimum_paired_cases": 20,
+      "maximum_correctness_failures": 0
+    },
+    "463fb4cc9951e2300e2a53898e87e61b4239f0c5a5fc673469e8fab3237a332a": {
+      "environment_id": "native-codex-task-only-four-families",
+      "kind": "trusted_local",
+      "identity": {
+        "purpose": "Product client test only, no candidate comparison or conformance claim",
+        "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+        "configuration_digest": "937d33a5b0b5633ac4efeff3a999053a84860a5c7a604c231a299ad78b594db5"
+      },
+      "network": false,
+      "container_image": null,
+      "cpu_count": 1.0,
+      "memory_mb": 256,
+      "process_limit": 64,
+      "container_runtime": null,
+      "container_socket": null,
+      "read_only_roots": []
+    },
+    "65c8ddd7f8123c700c7e6bee804bd49de27bde190d9d3633d3c2757745e17eda": {
+      "name": "native_task_only_four_families",
+      "executor": {
+        "id": "native.ui-client",
+        "capability": "assessment.ui-conformance@1",
+        "kind": "command",
+        "description": "Native Codex four-family task-only calls through local baselines",
+        "input_schema": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "output_schema": null,
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": null,
+            "upper_bound_usd": null,
+            "evidence": {
+              "status": "unavailable",
+              "source": "unavailable",
+              "trust": "untrusted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "argv": [
+            "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+            "exec",
+            "--json",
+            "--ephemeral",
+            "--ignore-user-config",
+            "--ignore-rules",
+            "--skip-git-repo-check",
+            "--sandbox",
+            "read-only",
+            "--model",
+            "gpt-6-astra",
+            "-c",
+            "approval_policy=\"never\"",
+            "-c",
+            "forced_login_method=\"chatgpt\"",
+            "-c",
+            "model_reasoning_effort=\"low\"",
+            "-c",
+            "project_doc_max_bytes=0",
+            "-c",
+            "web_search=\"disabled\"",
+            "-c",
+            "features.apps=false",
+            "-c",
+            "features.shell_tool=false",
+            "-c",
+            "features.unified_exec=false",
+            "-c",
+            "features.multi_agent=false",
+            "-c",
+            "features.memories=false",
+            "-c",
+            "features.hooks=false",
+            "-c",
+            "features.browser=false",
+            "-c",
+            "features.computer_use=false",
+            "-c",
+            "mcp_servers.task.command=\"/Library/Frameworks/Python.framework/Versions/3.13/bin/python3\"",
+            "-c",
+            "mcp_servers.task.args=[\"-m\", \"aeep\", \"serve\", \"--profile\", \"assessment\", \"--manifest\", \"/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/task-only-four-family-baselines.json\"]",
+            "-c",
+            "mcp_servers.task.env.PYTHONPATH=\"/Users/edwintse/Documents/aeep-agent-router/src\"",
+            "-c",
+            "mcp_servers.task.enabled_tools=[\"aeep_csv\", \"aeep_text\", \"aeep_search\", \"aeep_recipe_f468b36bc594\"]",
+            "-c",
+            "mcp_servers.task.required=true",
+            "-c",
+            "mcp_servers.task.startup_timeout_sec=30",
+            "-c",
+            "mcp_servers.task.tool_timeout_sec=45",
+            "-c",
+            "mcp_servers.task.default_tools_approval_mode=\"approve\"",
+            "-c",
+            "mcp_servers.task.tools.aeep_csv.approval_mode=\"approve\"",
+            "-c",
+            "mcp_servers.task.tools.aeep_text.approval_mode=\"approve\"",
+            "-c",
+            "mcp_servers.task.tools.aeep_search.approval_mode=\"approve\"",
+            "-c",
+            "mcp_servers.task.tools.aeep_recipe_f468b36bc594.approval_mode=\"approve\"",
+            "-"
+          ],
+          "argv_literal": true,
+          "cwd": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-native-ui-j81ke9hd",
+          "stdin": "{input.instruction}",
+          "env": {
+            "HOME": "/Users/edwintse",
+            "PATH": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/usr/local/opt/ruby/bin:/usr/local/opt/ruby/bin:/Users/edwintse/.antigravity/antigravity/bin:/Users/edwintse/.antigravity/antigravity/bin:/Library/PostgreSQL/17/bin/:/Users/edwintse/.local/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/et/Downloads/geckodriver:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Library/TeX/texbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/edwintse/.codex/tmp/arg0/codex-arg0JHuCGM:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/usr/local/opt/ruby/bin:/Users/edwintse/.antigravity/antigravity/bin:/Library/PostgreSQL/17/bin/:/Users/edwintse/.local/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/Users/edwintse/.cargo/bin:/Users/edwintse/.docker/bin:/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/edwintse/.docker/bin"
+          },
+          "timeout_seconds": 180,
+          "max_output_bytes": 2000000,
+          "output": {
+            "type": "text"
+          }
+        }
+      },
+      "expected": {
+        "aeep_csv": true,
+        "aeep_text": true,
+        "aeep_search": true,
+        "aeep_recipe_f468b36bc594": true
+      }
+    },
+    "faf2bf6fef3293fc97ed6f7eb5b1e6022fd875488cb80c505de09c036068851c": {
+      "schema_version": "assessment.subject.v1",
+      "subject_id": "subject_169dba4bb752e622c3d885ca6b3d43c4383c588264dfdc0034035691d5f5bb6a",
+      "kind": "plugin",
+      "location": "/Users/edwintse/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.915.20218/skills/spreadsheets",
+      "dependency_digests": {
+        "SKILL.md": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+        "agents/openai.yaml": "8dc6dfa3a1c6fd33ecb3088fe4d4e24689fc47685c43a9bac360fcee2af02a40",
+        "artifact_tool_docs/API_QUICK_START.md": "2795943c6a356a6bb94767526acb53a6aec8599be1d15fdbe54458bc799d5f4a",
+        "artifact_tool_docs/DATA_TABLES.md": "f87542406b8a2282521233c11fec87087eb2889628a1f20944977c0ad9c68488",
+        "artifact_tool_docs/SPARKLINES.md": "d3926fac25653829837c03136124126e1d1be192de6d62bf1f77e29300d97c1f",
+        "assets/file-spreadsheet.png": "3a1c5e6c52a1877942b8ef8654247fbe1c4a82f6df8ef464dc99983fc72cd6fb",
+        "container_tools/mark_artifact_operation_started.mjs": "20c5a86e596154c0541c7bfc4c52c17d928e22e27c6f0ff936c1c3fe16873c10",
+        "domain_guidance/financial_models.md": "ff163c47d4bcb14a9bf21cbb8e6fa5d73f407100e818e7a307f062e08d3025f1",
+        "domain_guidance/healthcare.md": "df5b9dcb9df988c197fcb377e0b9798f582e9cd30d1c103fd7cd8957a215dff9",
+        "domain_guidance/marketing_advertising.md": "bd6a715ac7d9ad2c830dff146e48321ccc4330c0024f471e85be66c5bb65b014",
+        "domain_guidance/scientific_research.md": "a95381e624c4c9562efee3e4a5cdd41bd52e1d3330545ab64d2a85242b10c0af",
+        "features/charts.md": "f85e0fa9ba2505f9ee3dd9c4529d1c529b0ce7c9c5e95a919409025c0217c470",
+        "references/clarification-questions.md": "0d67633236e34505e1116bb61d95cd92685c7e27a2d66d00ec0f43b90d7ba6e1",
+        "references/image-references.md": "148690f09a1f33a8d61a3f28df8b9c872a6bc16f0eaa2ea561bcc4dcd07bc2cc",
+        "references/read_only_qna.md": "687beb1ce4c32164fd8f8f17e0a2c6a4371798ab1d47835a0a74efe7b8f980a6",
+        "references/template-elicitation.md": "60b0ea3e373eef4f2a11fa419a7214f6580ac8e9b91028e7ba0968d4106e69ad",
+        "routing/google_sheets.md": "0acafc1a346240b9346c08e67b69ab289286c80d93528583c085444407ffc428",
+        "style_guidelines.md": "52f91ee6bc4c0a3b633b35df33924092a07e48c45cc839942288592989e33063",
+        "workflows/create_workflows.md": "92e3d0910bde06d210718f47f88f24a51d33bf03b4560cca3e280fbcde22a47d",
+        "workflows/edit_workflows.md": "f75917488c75b5a7b9e194c57131163d54ad23405802944e1d59eece990d27d8"
+      },
+      "description": "Use skill when user requests to create, modify, analyze, visualize, or work with spreadsheet files (`.xlsx`, `.xls`, `.csv`, `.tsv`) or Google Sheets with formulas, formatting, charts, tables, and recalculation. Do not use for live controlling Microsoft Excel app or a live Excel session.",
+      "input_schema": null,
+      "output_schema": null,
+      "declarations": {
+        "tools": [],
+        "skills": [
+          {
+            "name": "Spreadsheets",
+            "description": "Use skill when user requests to create, modify, analyze, visualize, or work with spreadsheet files (`.xlsx`, `.xls`, `.csv`, `.tsv`) or Google Sheets with formulas, formatting, charts, tables, and recalculation. Do not use for live controlling Microsoft Excel app or a live Excel session.",
+            "path": "/Users/edwintse/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.915.20218/skills/spreadsheets/SKILL.md",
+            "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+          }
+        ],
+        "workflows": [],
+        "missing": [
+          "Skills need a reviewed task mapping and supported Codex sandbox access."
+        ]
+      }
+    }
+  },
+  "prompt": "Use only the task MCP server. Call each of the following four task tools exactly once, sequentially, with the supplied task arguments. Do not choose implementations, change permissions, run assessments or use other tools. Copy the supplied workbook base64 unchanged into its task argument. Do not repeat or explain the returned workbook bytes. Return only a short completion summary. These synthetic tasks verify baseline routing, not plugin savings. Tasks: {\"aeep_csv\": {\"text\": \"id,name\\ncheck-1,Ada\\n\", \"delimiter\": \",\"}, \"aeep_text\": {\"text\": \"Name: Ada\\nCity: Vancouver\\n\", \"fields\": [\"Name\", \"City\"]}, \"aeep_search\": {\"root\": \"/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/task-only-inputs/search\", \"query\": \"cobalt\", \"path\": \".\"}, \"aeep_recipe_f468b36bc594\": {\"workbook_b64\": \"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\", \"task\": \"Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. Write Summary!A1=\\\"Total\\\" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula caches; return its base64 bytes as workbook_b64. No macros or external links.\", \"variation\": \"mixed_types_dates\", \"row_bound\": 2}}",
+  "maximum_model_turns": 1,
+  "maximum_elapsed_seconds": 200,
+  "cash": 0,
+  "limitations": "Normal Codex client only. No runtime identity, isolation, plugin benefit or admission evidence."
+}

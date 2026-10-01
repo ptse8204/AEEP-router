@@ -1,0 +1,63 @@
+{
+  "status": "inert design only; no configuration probe/cell/model call dispatched; capacity stop respected",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "goal": "Pass transient owned workbook input from bounded local file through existing native code-mode variables to the same own MCP, avoiding model reproduction of base64. Payload-pressure hypothesis remains unproven.",
+  "dataflow": [
+    "Operator stages synthetic input.json within existing writable/readable scratch; exact bytes/schema/hash reviewed and removed on cleanup",
+    "One existing native code-mode cell invokes builtin exec_command with frozen safely quoted pinned Python reader command",
+    "Code-mode receives builtin structured output in a JS variable and JSON.parse passes the object to the exact own task MCP function",
+    "Only booleans are text-emitted; raw base64 need not enter returned model output; independent validator/grader and durable receipt remain required"
+  ],
+  "reader_command_template": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -I -c 'from pathlib import Path; import sys; sys.stdout.write(Path('\"'\"'<owned-scratch-absolute-path>/input.json'\"'\"').read_text(encoding=\"utf-8\"))'",
+  "reader_command_template_sha256": "37f3404f59507783b521f43f4a8557b9658274df3a4f0d8879d98efddbfbfa9c",
+  "cell_template": "const loaded = await tools.exec_command({\"cmd\":\"/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -I -c 'from pathlib import Path; import sys; sys.stdout.write(Path('\\\"'\\\"'<owned-scratch-absolute-path>/input.json'\\\"'\\\"').read_text(encoding=\\\"utf-8\\\"))'\",\"yield_time_ms\":10000,\"max_output_tokens\":8000});\nif (loaded.exit_code !== 0 || loaded.session_id !== undefined) throw new Error(\"reader_not_complete\");\nconst input = JSON.parse(loaded.output);\nconst outcome = await tools.<normalized-own-MCP-function>(input);\ntext({ok: outcome.structuredContent?.ok === true});",
+  "cell_template_sha256": "07145f775ba9e48f8d1becbeb04312f247abf907448a559dd2fac606014b6975",
+  "template_binding": "Actual owned absolute scratch path and actual normalized own MCP name must replace placeholders before exact review; command built with shlex.join argv, no user interpolation, shell expansion or credential access",
+  "boundary_distinction": "Existing host builtin exec_command is a cmd-string interface; AEEP command remains argv-only pinned Python with hardNPROC0 native guard. This one synthetic file read does not qualify arbitrary native shell execution or inherited MCP processes.",
+  "task_local_candidate_settings": {
+    "features.code_mode": true,
+    "features.apps": false,
+    "own_server.omit_tools_from": [
+      "deferred"
+    ],
+    "own_server.tools.exact_tool.approval_mode": "approve"
+  },
+  "operator_authority": "Same reviewed task scope/fingerprint/expiry/attempt30s ceiling; outer named filesystem/network profile unchanged; no server-default/global rule, feature installation, account/provider switch or new shim/store",
+  "preconditions_before_any_future_model": [
+    "Capacity restored under applicable original principal; current cross-host/principal capacity applicability unknown, no bypass",
+    "Zero-model exact config/read ACK for task-local code_mode flag, own MCP exposure omission deferred only and exact per-tool approve; managed restrictions preserved",
+    "Supported own MCP inventory ready and exact function naming derived/checked; inventory is not actual model exposure proof",
+    "Installed same-release helper pin/hello already verified; any helper availability/error observation retained as safe codes",
+    "Actual model tool mode/builtin availability must be resolved or explicitly accepted as unknown in exact diagnostic review; current supported schema lacks model-request registry/tool_mode query"
+  ],
+  "supported_interface_evidence": [
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/code-mode-protocol/src/description.rs",
+      "lines": "18-28,349-383",
+      "finding": "Native exec uses JS tools object, no direct filesystem/Node; normalized function identifiers; nested results can remain variables."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/context.rs",
+      "lines": "416-443",
+      "finding": "Builtin exec code-mode result has exit_code/session_id/output, suitable for JSON.parse without printing the encoded input."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/code_mode/mod.rs",
+      "lines": "117-134,311-328",
+      "finding": "Existing native service executes cells and brokers nested tools; no new transport needed."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/mod.rs",
+      "lines": "68-88",
+      "finding": "Model metadata mode takes precedence over task-local feature; flag ACK alone cannot prove effective model mode."
+    }
+  ],
+  "installed_zero_model_schema_limit": "Pinned AppServer ClientRequest has no code-mode execute/registry-read method. ThreadStartResponse and ModelListResponse Model fields do not expose tool_mode or effective model-request tool specs. mcpServerStatus/list proves only server inventory. Therefore full model tool availability cannot currently be proven from these zero-model methods alone.",
+  "alternative_managed_artifact": "Existing src/aeep/hosts/codex_app_server.py artifact input requires self._worker and owned worker process identity (lines878-884); it is not an existing local-native filebinding. Do not create parallel artifact transport.",
+  "future_observation_requirements": [
+    "Safe item.type/status/phase and code-mode nested builtin/own MCP events; exact reader-command hash, input argument hash/equality, safe numeric/known-message error classes before discard",
+    "Natural completion; exactly one own MCP receipt/attempt; callback task validity+independent grader; no other model tool use allowed by declared diagnostic scope",
+    "Cleanup own fixture and exact owned processes; retained main ledger elapsed/turn/accounting unknowns; no unchanged retry"
+  ],
+  "default_activation": "No code-mode forcing proposed for ordinary activation; this remains a separate scoped intervention requiring evidence."
+}

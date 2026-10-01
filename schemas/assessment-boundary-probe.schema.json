@@ -1,0 +1,74 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.boundary-probe.v1",
+      "default": "assessment.boundary-probe.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "probe_id": {
+      "title": "Probe Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "implementation_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Digest",
+      "type": "string"
+    },
+    "worker_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Digest",
+      "type": "string"
+    },
+    "execution_evidence_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Execution Evidence Digest",
+      "type": "string"
+    },
+    "observed": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Observed",
+      "type": "object"
+    },
+    "host_receipt_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host Receipt Digest"
+    }
+  },
+  "required": [
+    "probe_id",
+    "name",
+    "implementation_digest",
+    "worker_digest",
+    "execution_evidence_digest",
+    "observed"
+  ],
+  "title": "BoundaryProbe",
+  "type": "object"
+}

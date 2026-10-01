@@ -1,0 +1,14 @@
+from pathlib import Path
+import json,sqlite3
+p=Path('reports/v08');c=sqlite3.connect('file:.aeep/live-review-v3/aeep.sqlite3?mode=ro',uri=True)
+b=json.loads((p/'qualification-capability-final-profile-review-bundle.json').read_text());pair=json.loads((p/'qualification-capability-final-profile-live-pair.json').read_text());workers={}
+assert pair['probes_match']
+for role in ('control','treatment'):
+ row=c.execute("SELECT payload_json FROM assessment_records WHERE kind='worker_pair_inspection' AND digest=?",(pair['workers'][role]['record_digest'],)).fetchone();assert row
+ obs=json.loads(row[0]);(p/f'qualification-capability-final-profile-{role}-observations.json').write_text(row[0]+'\n')
+ workers[role]={'identity_digest':obs['observations']['inspection']['identity_digest']}
+c.close()
+s=Path('/tmp/aeep-assemble-completion.py').read_text().replace('bootstrap-events-review-bundle.json','qualification-capability-final-profile-review-bundle.json').replace('conformance-completion','qualification-capability-final-profile').replace("r=json.loads((p/'qualification-capability-final-profile-live-result.json').read_text())","r="+repr({'source_digest':b['source_digest'],'workers':workers})).replace("b['requests'][2]","b['requests'][0]")
+s=s.replace('Exact bootstrap executor configurations only; task profiles require matching identity observations','Exact workbook control and required-treatment configurations at 203 seconds; no task turn executed by inspection')
+s=s.replace('Fresh authenticated model streams and 22 paired probes with individual durable events, reviewed policy/enforcement/inventory and completed ledger operations','Fresh authenticated exact-task identities, native thread configuration checks and 22 paired command probes with durable events; prior model connectivity is supporting evidence only')
+exec(compile(s,'assemble-qualification-capability-final-profile','exec'))

@@ -1,0 +1,42 @@
+{
+  "schema_version": "assessment.verification.v1",
+  "offline_checks_passed": false,
+  "source_digest": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+  "host_protocol_checks_passed": false,
+  "live_codex_verified": false,
+  "complete_economic_accounting": false,
+  "untrusted_plugin_containment": false,
+  "host_inventory_and_invocation": false,
+  "release_ready": false,
+  "remaining_gates": [
+    "offline assessment regression checks",
+    "real-container isolation, cancellation and crash-recovery verification",
+    "live verification of Codex inventory and effective tool isolation",
+    "authorized live Codex assessment-to-use campaigns and task calls for all four families",
+    "final compatibility, coverage, proof and package-build release checks",
+    "source-bound complete assessment operation accounting",
+    "source-bound qualification evidence across all four families",
+    "source-bound marginal_value evidence across all four families",
+    "source-bound native_catalog evidence across all four families"
+  ],
+  "failure_detail": ".........F.............................................................. [ 30%]\n...................................s.................................... [ 60%]\n........................................................................ [ 91%]\n.....................                                                    [100%]\n=================================== FAILURES ===================================\n_____________ test_focused_tools_do_not_expose_operator_arguments ______________\n\ntmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-500/test_focused_tools_do_not_expo0')\n\n    async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):\n        router, _service, _plan, _grant = setup_assessment(tmp_path)\n        try:\n            service = AEEPToolService(router, profile=\"assessment\")\n            names = {tool[\"name\"] for tool in service.list_tools()}\n>           assert names == {\n                \"aeep_csv\",\n                \"aeep_text\",\n                \"aeep_search\",\n                \"aeep_assessment_start\",\n                \"aeep_assessment_status\",\n                \"aeep_assessment_report\",\n                \"aeep_assessment_cancel\",\n                \"aeep_assessment_generate_definition\",\n                \"aeep_assessment_structures\",\n                \"aeep_assessment_select_structure\",\n                \"aeep_assessment_budget\",\n            }\nE           AssertionError: assert {'aeep_assess..._report', ...} == {'aeep_assess...t_start', ...}\nE             \nE             Extra items in the left set:\nE             'aeep_assessment_generate_cases'\nE             'aeep_assessment_options'\nE             'aeep_assessment_setup'\nE             Use -v to get more diff\n\ntests/test_v08_assessment.py:516: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_v08_assessment.py::test_focused_tools_do_not_expose_operator_arguments",
+  "live_evidence": {},
+  "compatibility_checks_passed": false,
+  "demonstrated_savings": false,
+  "controlled_fixture_verified": true,
+  "controlled_fixture_evidence": {
+    "schema_version": "assessment.controlled-fixture.v1",
+    "purpose": "controlled local lifecycle fixture; not plugin savings",
+    "source_digest": "4ff3bc6b5239bdbfc50a215d9025a4e916a0c315b89fda40ea05819ecc87fa0e",
+    "plan_id": "plan_e5b21081ed4343d196402d3a769f70c6",
+    "report_id": "fit_9797a9aef6594a798dbe55de23d4d3ec",
+    "admission_id": "admission_49e38cf8cb0240ddac1e5ba0753eb469",
+    "receipt_id": "rcpt_c715c7643c6641e1b7188417c69fe9ae",
+    "stale_decision_id": "dec_e1b80acd09d54c75b4a0056ca435fd4b",
+    "rejection_evidence_digest": "472ebf13f586bdb18f0894ff2a4758377064173e013c284fbec5822494219a07",
+    "baseline_decision_id": "dec_ab14c92fa31d436e9fa36ad916731670"
+  },
+  "adapter_production_support": {},
+  "production_support_verified": false,
+  "production_ready": false
+}

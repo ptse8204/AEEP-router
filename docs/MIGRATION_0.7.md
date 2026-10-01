@@ -41,9 +41,9 @@ and a definite terminal transition releases it atomically. Claimed holds do not
 expire while execution is unresolved. Timeout, cancellation, and indeterminate
 outcomes require operator reconciliation before release.
 
-These are estimated concurrency admission holds, not provider-enforced usage
-ceilings or a cumulative consumption ledger. Provider usage can exceed an
-estimate, and external consumers do not participate in the local database.
+These holds use estimates to control concurrent admission. They neither enforce
+provider usage ceilings nor track cumulative consumption. Provider usage can
+exceed an estimate, and external consumers do not participate in the local database.
 Percentage-only or unknown quota cannot be converted into absolute capacity:
 those routes retain quota-aware scoring without an absolute-unit reservation.
 

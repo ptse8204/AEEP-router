@@ -1,0 +1,35 @@
+{
+  "status": "staged only; no test execution; independent review and parent approval required",
+  "source_baseline": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "authority": "standing September25/27 finite exact test-definition amendment; parent source-stage instruction",
+  "files": {
+    ".aeep/native-task-presentation-stage/src/aeep/task_cli.py": "cb300099da2b5affeec022799df0caab6eb0290b6169f29f9dac92f6c4c62588",
+    ".aeep/native-task-presentation-stage/src/aeep/cli.py": "9c8aea4a120a17f54750c519e77f0acdf66f7e1733a5593aab60005b0ccfe945",
+    ".aeep/native-task-presentation-stage/tests/test_v08_task_presentation.py": "8e3bf27676a9b23b60ce0322c537ae58f9346a93b86cbfa997d3200c87f391dd"
+  },
+  "preimages": {
+    "src/aeep/task_cli.py": "1a59ca1fe4d235d117fca0cadb729a74dd46b583fb9099fb0b44cedb72a7a3ba",
+    "src/aeep/cli.py": "7f98312493fbd489efb7dcc8e0c3150649ef79f5dc3d0e91c900306b7efa9842"
+  },
+  "patch_sha256": "01d2ef4f9bfd428d9bc8c59e4fc6a70aa7c13f38fe7de6611eeffc40b5560409",
+  "changes": [
+    "One deterministic text formatter of existing TaskExecutionOutcome, reusing production summary and allowlisted checks/decision; never prints output/action/metadata.",
+    "Existing tool-call gets opt-in --text for task profile only; other profiles reject before dispatch. Existing JSON defaults unchanged.",
+    "Existing task control gets opt-in --text; mutations/authority unchanged.",
+    "Add task result receipt_id inspection, JSON default/text opt-in; loads actual decision+receipt+recordedscope, production task_outcome; historical output/runtimeapproval explicitly unavailable, no dispatch.",
+    "Control commands shown only with supplied current validated activation, matching receipt scope and existing manifest; lifecycle operator-only. History permissions not inferred from currentactivation."
+  ],
+  "test_definition": [
+    "Payload omission and unknown defaults, route/reason/limits preserved",
+    "Recovery requires reconcile before retry",
+    "Validated activation scope mismatch rejects; missing manifest omitscommands; spaces shellquoted",
+    "Non-task --text rejection before Router/tool dispatch"
+  ],
+  "limits": [
+    "Human comprehension remains unmeasured; standalone inspection does not demonstrate original in-agent summary comprehension.",
+    "Completed journey original disposable manifest unavailable, so hands-oncontrols cannot be offered.",
+    "Current MCPJSON and task outcome model unchanged; tasksummary already auto-delivered retains its existing workbook-specific logic.",
+    "Receipt-based reconstructed view does not reproduce original transient output or actual historical runtime approval ceiling."
+  ],
+  "runtime": "no models, subprocesses, capacity, taskdispatch or controls; AST parsed only"
+}

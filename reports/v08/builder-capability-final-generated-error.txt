@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py", line 4, in <module>
+    app()
+    ~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/main.py", line 1154, in __call__
+    raise e
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/_click/core.py", line 807, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/core.py", line 1203, in main
+    return _main(
+        self,
+    ...<6 lines>...
+        **extra,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/core.py", line 189, in _main
+    rv = self.invoke(ctx)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/core.py", line 1125, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/core.py", line 1125, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/_click/core.py", line 746, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/_click/core.py", line 489, in invoke
+    return callback(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/typer/main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py", line 262, in generate_definition
+    emit(asyncio.run(generate(ctx.obj, planning_id)))
+         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py", line 162, in generate
+    raise ConfigurationError("planning did not return a valid definition; usage retained")
+aeep.errors.ConfigurationError: planning did not return a valid definition; usage retained

@@ -1,0 +1,42 @@
+{
+  "schema_version": "assessment.verification.v1",
+  "offline_checks_passed": false,
+  "source_digest": "9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872",
+  "host_protocol_checks_passed": false,
+  "live_codex_verified": false,
+  "complete_economic_accounting": false,
+  "untrusted_plugin_containment": false,
+  "host_inventory_and_invocation": false,
+  "release_ready": false,
+  "remaining_gates": [
+    "offline assessment regression checks",
+    "real-container isolation, cancellation and crash-recovery verification",
+    "live verification of Codex inventory and effective tool isolation",
+    "authorized live Codex assessment-to-use campaigns and task calls for all four families",
+    "final compatibility, coverage, proof and package-build release checks",
+    "source-bound complete assessment operation accounting",
+    "source-bound qualification evidence across all four families",
+    "source-bound marginal_value evidence across all four families",
+    "source-bound native_catalog evidence across all four families"
+  ],
+  "failure_detail": "]}\n            assert stages['grader_reference']['calls_upper'] == 1\n            assert stages['grader_probe']['calls_minimum'] == 1\n            literal_count = len(recipe.extension.independent_fixtures) + len(recipe.extension.transformed_fixtures)\n>           assert stages['grader_probe']['calls_upper'] == 141 + literal_count + (literal_count + 8) * (10 + len(recipe.extension.fault_outputs))\nE           AssertionError: assert 353 == ((141 + 4) + ((4 + 8) * (10 + 7)))\nE            +  where 7 = len([{'workbook_b64': 'invalid'}, {'workbook_b64': 'UEsDBBQAAAAIAJiEN12l4RtYHwEAAGAEAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbMVUy0...ACYhDddvECMRWYBAAC8AgAAGAAAAAAAAAAAAAAAgAFhEQAAeGwvd29ya3NoZWV0cy9zaGVldDIueG1sUEsFBgAAAAAKAAoAhAIAAP0SAAAAAA=='}, ...])\nE            +    where [{'workbook_b64': 'invalid'}, {'workbook_b64': 'UEsDBBQAAAAIAJiEN12l4RtYHwEAAGAEAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbMVUy0...ACYhDddvECMRWYBAAC8AgAAGAAAAAAAAAAAAAAAgAFhEQAAeGwvd29ya3NoZWV0cy9zaGVldDIueG1sUEsFBgAAAAAKAAoAhAIAAP0SAAAAAA=='}, ...] = ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v3', generator=ExecutorSpec(id='workbook.generat...nt', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook']).fault_outputs\nE            +      where ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v3', generator=ExecutorSpec(id='workbook.generat...nt', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook']) = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='workbook', implementation_digest='5e73be3c2dde7f525...t', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook'])).extension\n\ntests/test_v08_budget.py:99: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_v08_budget.py::test_extension_preview_bounds_output_dependent_batches",
+  "live_evidence": {},
+  "compatibility_checks_passed": false,
+  "demonstrated_savings": false,
+  "controlled_fixture_verified": true,
+  "controlled_fixture_evidence": {
+    "schema_version": "assessment.controlled-fixture.v1",
+    "purpose": "controlled local lifecycle fixture; not plugin savings",
+    "source_digest": "9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872",
+    "plan_id": "plan_d750caccc98d47a0ad3911c174a6dde6",
+    "report_id": "fit_c1c9cf89eb9943db95e85c0085bd2f56",
+    "admission_id": "admission_cb7af1631f7f4a758dd1854c703ee32e",
+    "receipt_id": "rcpt_5ddc01003d104a328444c699ccf1ce11",
+    "stale_decision_id": "dec_ce5353fb14914ed482ae761b9f435f62",
+    "rejection_evidence_digest": "ce1c20df4a52955603673f894116ffaa13fe28c40c16a9a702fedde55dc015a3",
+    "baseline_decision_id": "dec_c0a5ff62a1b844c390602d4dd16ac05a"
+  },
+  "adapter_production_support": {},
+  "production_support_verified": false,
+  "production_ready": false
+}

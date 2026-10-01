@@ -1,0 +1,1161 @@
+Exact argv: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pytest -q -rs -m real_container --junitxml=/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-container-5fffda8a3210.xml --basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container
+FFFFFFFFFFFF                                                             [100%]
+=================================== FAILURES ===================================
+________ test_reviewed_executable_recipe_enters_the_same_campaign[True] ________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_reviewed_executable_recip0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10e92cc30>
+real = True
+
+    @pytest.mark.parametrize("real", [False, pytest.param(True, marks=[pytest.mark.assessment_boundary, pytest.mark.real_container, pytest.mark.skipif(not os.environ.get("AEEP_CONTAINER_IMAGE"), reason="requires reviewed local container runtime")])])
+    async def test_reviewed_executable_recipe_enters_the_same_campaign(tmp_path, monkeypatch, real):
+        router, service, recipe, request, environment = setup(tmp_path, monkeypatch, real=real)
+        try:
+            with pytest.raises(ConfigurationError, match="review"):
+                await materialize(service, request.plan_id)
+            for digest in request.definition_digests:
+                service.repository.review(digest)
+            cases = await materialize(service, request.plan_id)
+            assert await materialize(service, request.plan_id) == cases
+            assert Counter(case.variation for case in cases.cases if case.split.value == "holdout") == {"1":35,"2":35,"3":35}
+            assert structural_features(recipe, {"items":["unseen content"]}) == {"length":1}
+            assert structural_features(recipe, {"wrong":[]}) is None
+            options = dict(subject_id=request.subject_digest, family=recipe.recipe_id, candidate_id="candidate", baseline_id="baseline",
+                           authorization_id=request.authorization_id, environment=environment, seed=request.seed, case_set_id=request.plan_id)
+            plan = service.propose(**options)
+            assert plan.schema_version == "assessment.plan.v3"
+            with pytest.raises(ConfigurationError, match="fresh cases"):
+                service.propose(**options)
+            for digest in plan.definition_digests:
+                service.repository.review(digest)
+            preview = service.budget_preview(plan.plan_id)['campaign_allowance']
+>           report = await service.run(service.enqueue(plan.plan_id))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_executable_recipes.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/assessment/service.py:1170: in run
+    campaign = await runner.run(plan.suite)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/benchmarking.py:1911: in run
+    self._claim_trial(trial)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.benchmarking.BenchmarkRunner object at 0x10e9730e0>
+trial = BenchmarkTrial(trial_id='trial_plan_54f6b493c92e41a9924e31e229c363ac_recipe_generation_f5dcbcb2575e49fbb72950070886414...allback_count=0, intervention_count=0, cache_hit_verified=None, policy_score=None, error_type=None, error_message=None)
+
+    def _claim_trial(self, trial: BenchmarkTrial) -> None:
+        try:
+>           self.connection.execute(
+                "INSERT INTO trials VALUES (?, ?, ?, ?)",
+                (trial.trial_id, trial.suite_id, trial.state, trial.model_dump_json()),
+            )
+E           sqlite3.OperationalError: unable to open database file
+
+src/aeep/benchmarking.py:1339: OperationalError
+_______________ test_real_managed_worker_uses_only_frozen_image ________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_real_managed_worker_uses_0')
+
+    @pytest.mark.skipif(not os.environ.get("AEEP_CONTAINER_RUNTIME"), reason="requires explicitly configured local container runtime")
+    @pytest.mark.real_container
+    async def test_real_managed_worker_uses_only_frozen_image(tmp_path):
+        import asyncio
+    
+        from aeep.hosts.base import ManagedHostExecutionContext
+        from aeep.models import ActionRequest, ExecutionStatus
+    
+        runtime, socket = os.environ["AEEP_CONTAINER_RUNTIME"], os.environ["AEEP_CONTAINER_SOCKET"]
+        root = (await asyncio.to_thread(Path(__file__).resolve)).parents[1]
+        launch = (root / "integrations/managed-worker/worker-launch").read_bytes()
+        (tmp_path / "worker-launch").write_bytes(launch)
+        (tmp_path / "worker-config.json").write_text("[]")
+        # This local process is explicitly a transport fixture, not a Codex model.
+        code = b'''#!/usr/bin/env python3
+    import json,os,pathlib,sys
+    sys.stdin.read()
+    pathlib.Path('/workspace/current.txt').write_text('current case')
+    result={'uid':os.getuid(),'cwd':os.getcwd(),'home':os.environ['HOME'],'has_repo':pathlib.Path('/repository').exists()}
+    for event in [{'type':'turn.started'}, {'type':'item.completed','item':{'id':'result','type':'agent_message','text':json.dumps(result)}}, {'type':'turn.completed','usage':{'input_tokens':0,'cached_input_tokens':0,'output_tokens':0}}]:
+     print(json.dumps(event),flush=True)
+    '''
+        (tmp_path / "fixture-codex").write_bytes(code)
+        (tmp_path / "Dockerfile").write_text('FROM python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0\nCOPY worker-launch worker-config.json /opt/aeep/\nCOPY fixture-codex /opt/fixture-codex\nRUN chmod 755 /opt/aeep/worker-launch /opt/fixture-codex\n')
+        iid = tmp_path / "image-id"
+        process = await asyncio.create_subprocess_exec(runtime, "--host", f"unix://{socket}", "build", "--network=none", "--iidfile", str(iid), str(tmp_path), stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.PIPE)
+        _, error = await asyncio.wait_for(process.communicate(), 60)
+>       assert process.returncode == 0, error.decode()[-1000:]
+E       AssertionError: ERROR: failed to build: failed to solve: write /var/lib/desktop-containerd/daemon/io.containerd.metadata.v1.bolt/meta.db: read-only file system
+E         
+E       assert 1 == 0
+E        +  where 1 = <Process 44401>.returncode
+
+tests/test_v08_managed_workers.py:254: AssertionError
+___________ test_native_catalog_relay_in_offline_codex_worker[False] ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_native_catalog_relay_in_o0')
+explicit = False
+
+    @pytest.mark.real_container
+    @pytest.mark.parametrize('explicit', [False, True])
+    def test_native_catalog_relay_in_offline_codex_worker(tmp_path, explicit):
+        import json
+        import re
+        import runpy
+        import subprocess
+        import uuid
+    
+        from aeep.hosts import codex_metrics
+    
+        image = os.environ.get('AEEP_CATALOG_METRICS_IMAGE')
+        definitions = os.environ.get('AEEP_INSPECTION_FIXTURE_SPECS')
+        if not image or not definitions:
+            pytest.skip('pinned catalog relay image and offline worker specs required')
+        assert re.fullmatch(r'sha256:[a-f0-9]{64}', image)
+        spec = ExecutorSpec.model_validate(json.loads(Path(definitions).read_text())[0])
+        worker = ManagedWorkerBinding.model_validate(spec.config['managed_worker'])
+        assert worker.credential_volume is None and worker.network_id is None and worker.model_proxy_url is None
+        security = worker.prepare_security(tmp_path)
+        assert security is not None
+        # Exercise the real image entrypoint and adapter opt-in, without a thread,
+        # authentication observation or model request. The protocol probe below
+        # then checks native export and sandbox denial using a synthetic provider.
+        import asyncio
+    
+        from aeep.hosts.codex_app_server import CodexAppServerAdapter
+    
+        collector_hash = hashlib.sha256(Path(codex_metrics.__file__).read_bytes()).hexdigest()
+        frozen_worker = worker.model_copy(update={'image':image,
+            'reviewed_files':dict(worker.reviewed_files or {}, **{codex_metrics.WORKER_PATH:collector_hash})})
+        configured = spec.model_copy(deep=True)
+        configured.config['managed_worker'] = frozen_worker.model_dump(mode='json')
+        configured.config['adapter_options'] = dict(configured.config.get('adapter_options') or {},catalog_metrics=True)
+        async def initialize_only():
+            host = CodexAppServerAdapter.from_executor(configured,principal_salt=b'offline-fixture')
+            try:
+                await host.transport.start()
+                assert host.transport.protocol_version
+            finally:
+                await host.close()
+            assert host.transport.catalog_metrics is not None
+            assert host.transport.catalog_metrics['collector_closed']
+            assert host.transport.catalog_metrics['delivery_complete'] is False
+>       asyncio.run(initialize_only())
+
+tests/test_v08_managed_workers.py:466: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:194: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:720: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests/test_v08_managed_workers.py:459: in initialize_only
+    await host.transport.start()
+src/aeep/hosts/codex_app_server.py:204: in start
+    response = await self._request_started(
+src/aeep/hosts/codex_app_server.py:239: in _request_started
+    return await asyncio.wait_for(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Future finished exception=CodexProtocolError('Codex App Server exited with status 125')>
+timeout = 30
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           aeep.hosts.codex_app_server.CodexProtocolError: Codex App Server exited with status 125
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:507: CodexProtocolError
+___________ test_native_catalog_relay_in_offline_codex_worker[True] ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_native_catalog_relay_in_o1')
+explicit = True
+
+    @pytest.mark.real_container
+    @pytest.mark.parametrize('explicit', [False, True])
+    def test_native_catalog_relay_in_offline_codex_worker(tmp_path, explicit):
+        import json
+        import re
+        import runpy
+        import subprocess
+        import uuid
+    
+        from aeep.hosts import codex_metrics
+    
+        image = os.environ.get('AEEP_CATALOG_METRICS_IMAGE')
+        definitions = os.environ.get('AEEP_INSPECTION_FIXTURE_SPECS')
+        if not image or not definitions:
+            pytest.skip('pinned catalog relay image and offline worker specs required')
+        assert re.fullmatch(r'sha256:[a-f0-9]{64}', image)
+        spec = ExecutorSpec.model_validate(json.loads(Path(definitions).read_text())[0])
+        worker = ManagedWorkerBinding.model_validate(spec.config['managed_worker'])
+        assert worker.credential_volume is None and worker.network_id is None and worker.model_proxy_url is None
+        security = worker.prepare_security(tmp_path)
+        assert security is not None
+        # Exercise the real image entrypoint and adapter opt-in, without a thread,
+        # authentication observation or model request. The protocol probe below
+        # then checks native export and sandbox denial using a synthetic provider.
+        import asyncio
+    
+        from aeep.hosts.codex_app_server import CodexAppServerAdapter
+    
+        collector_hash = hashlib.sha256(Path(codex_metrics.__file__).read_bytes()).hexdigest()
+        frozen_worker = worker.model_copy(update={'image':image,
+            'reviewed_files':dict(worker.reviewed_files or {}, **{codex_metrics.WORKER_PATH:collector_hash})})
+        configured = spec.model_copy(deep=True)
+        configured.config['managed_worker'] = frozen_worker.model_dump(mode='json')
+        configured.config['adapter_options'] = dict(configured.config.get('adapter_options') or {},catalog_metrics=True)
+        async def initialize_only():
+            host = CodexAppServerAdapter.from_executor(configured,principal_salt=b'offline-fixture')
+            try:
+                await host.transport.start()
+                assert host.transport.protocol_version
+            finally:
+                await host.close()
+            assert host.transport.catalog_metrics is not None
+            assert host.transport.catalog_metrics['collector_closed']
+            assert host.transport.catalog_metrics['delivery_complete'] is False
+>       asyncio.run(initialize_only())
+
+tests/test_v08_managed_workers.py:466: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:194: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:720: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests/test_v08_managed_workers.py:459: in initialize_only
+    await host.transport.start()
+src/aeep/hosts/codex_app_server.py:204: in start
+    response = await self._request_started(
+src/aeep/hosts/codex_app_server.py:239: in _request_started
+    return await asyncio.wait_for(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fut = <Future finished exception=CodexProtocolError('Codex App Server exited with status 125')>
+timeout = 30
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           aeep.hosts.codex_app_server.CodexProtocolError: Codex App Server exited with status 125
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:507: CodexProtocolError
+__ test_actual_pair_separates_canaries_dependencies_and_interrupted_processes __
+
+    @pytest.mark.real_container
+    @pytest.mark.skipif(not os.environ.get('AEEP_INSPECTION_FIXTURE_SPECS'), reason='requires explicit offline Codex pair')
+    async def test_actual_pair_separates_canaries_dependencies_and_interrupted_processes():
+        result = await probe(Path(os.environ['AEEP_INSPECTION_FIXTURE_SPECS']))
+>       assert result['passed'], result
+E       AssertionError: {'authenticated': False, 'error_type': 'CodexProtocolError', 'failed_stage': 'start', 'fixture_digest': 'fd2d629a87a17ac0643bb712e4b669cac93794b1cd1c2c8ad0ec7d511b0d0978', ...}
+E       assert False
+
+tests/test_v08_offline_pair.py:68: AssertionError
+______________ test_real_container_boundaries_timeout_and_cleanup ______________
+
+    async def test_real_container_boundaries_timeout_and_cleanup():
+        environment = AssessmentEnvironment(environment_id="release-container", kind="container", identity={"purpose": "release-validation"}, container_image=os.environ["AEEP_CONTAINER_IMAGE"], container_runtime=os.environ["AEEP_CONTAINER_RUNTIME"], container_socket=os.environ["AEEP_CONTAINER_SOCKET"], memory_mb=256, process_limit=32)
+        executor = ContainerExecutor(environment)
+        code = '''import json,os,pathlib,socket
+    checks={"uid":os.getuid(),"pids":pathlib.Path("/sys/fs/cgroup/pids.max").read_text().strip(),"memory":pathlib.Path("/sys/fs/cgroup/memory.max").read_text().strip()}
+    try:
+     pathlib.Path("/forbidden-write").write_text("denied")
+     checks["filesystem_denied"]=False
+    except OSError:
+     checks["filesystem_denied"]=True
+    sock=socket.socket();sock.settimeout(.2)
+    try:
+     sock.connect(("1.1.1.1",443));checks["network_denied"]=False
+    except OSError:
+     checks["network_denied"]=True
+    finally:
+     sock.close()
+    print(json.dumps(checks))
+    '''
+        spec = ExecutorSpec(id="contained-check", capability="container.check@1", kind="command", description="Release containment check", config={"argv": ["python3", "-c", code], "output": {"type": "json"}, "timeout_seconds": 10})
+        context = ExecutionContext(spec=spec, request=ActionRequest(capability=spec.capability), estimate=spec.estimate, attempt=1, attempt_id=new_id("real-container"))
+        result = await executor.execute(context)
+>       assert result.status == ExecutionStatus.SUCCESS, result.model_dump_json()
+E       AssertionError: {"status":"failed","output":null,"resources":{"monetary_usd":0.0,"latency_ms":40.389041882008314,"cpu_ms":0.0,"memory_mb_seconds":0.0,"peak_memory_mb":0.0,"gpu_ms":0.0,"network_bytes":0,"context_tokens":0,"input_tokens":0,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":0,"reasoning_output_tokens":0,"subscription_units":0.0},"accounting":{"cash":{"status":"unavailable","components":[]},"subscription_usage":[],"model_usage":[],"tool_footprint":null},"stdout":null,"stderr":null,"exit_code":125,"error_type":"CommandExitError","error_message":"command exited with status 125","metadata":{"container_image":"sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228","container_name":"aeep-70e9a9fecb3ae375d77b801d41bae418","container_resource_usage":"unavailable"}}
+E       assert <ExecutionSta...LED: 'failed'> == <ExecutionSta...SS: 'success'>
+E         
+E         - success
+E         + failed
+
+tests/test_v08_real_container.py:42: AssertionError
+____ test_real_worker_crash_retains_attempt_and_recovery_removes_container _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_real_worker_crash_retains0')
+
+    async def test_real_worker_crash_retains_attempt_and_recovery_removes_container(tmp_path):
+        import sqlite3
+        import sys
+        from datetime import timedelta
+    
+        from aeep.assessment.models import AssessmentAuthorization, AssessmentLimits, content_digest
+        from aeep.assessment.onboarding import reference_spec
+        from aeep.assessment.recovery import recover
+        from aeep.assessment.service import AssessmentService
+        from aeep.models import Manifest, SideEffect, utc_now
+        from aeep.qualification import RouteCandidate, behavior_fingerprint
+        from aeep.router import Router
+    
+        root = tmp_path.resolve()
+        manifest = root / "aeep.json"
+        manifest.write_text(Manifest(database=str(root / "main.sqlite3"), executors=[reference_spec("csv")]).model_dump_json())
+        router = Router.from_manifest(manifest)
+        service = AssessmentService(router, root / "assessments")
+        plugin = root / "plugin.txt"
+        plugin.write_text("Reviewed crash fixture")
+        subject = service.inspect_local(plugin)
+        candidate = ExecutorSpec(id="crash-candidate", capability="assessment.csv@1", kind="command", description="Controlled crash fixture", enabled=False, idempotent=True, side_effect=SideEffect.READ, estimate=reference_spec("csv").estimate, config={"argv": ["python3", "-c", "import time; time.sleep(60)"], "timeout_seconds": 60, "output": {"type": "json"}})
+        router.store.save_route_candidate(RouteCandidate(executor_id=candidate.id, source_id="reviewed-crash-fixture", capability=candidate.capability, behavior_fingerprint=behavior_fingerprint(candidate), spec=candidate))
+        environment = AssessmentEnvironment(environment_id="release-container", kind="container", identity={}, container_image=os.environ["AEEP_CONTAINER_IMAGE"], container_runtime=os.environ["AEEP_CONTAINER_RUNTIME"], container_socket=os.environ["AEEP_CONTAINER_SOCKET"])
+        plan = service.propose(subject_id=subject.subject_id, family="csv", candidate_id=candidate.id, baseline_id="reference.csv", authorization_id="crash-grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="crash-grant", subject_digests=[content_digest(subject)], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=1000), expires_at=utc_now() + timedelta(hours=1)))
+        assessment_id = service.enqueue(plan.plan_id)
+        worker = await asyncio.create_subprocess_exec(sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest), "--directory", str(service.directory), "--assessment", assessment_id, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+        target = None
+        try:
+            async with asyncio.timeout(20):
+                while target is None:
+>                   await asyncio.sleep(0.1)
+
+tests/test_v08_real_container.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+delay = 0.1, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        if math.isnan(delay):
+            raise ValueError("Invalid delay: NaN (not a number)")
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:718: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_real_worker_crash_retains0')
+
+    async def test_real_worker_crash_retains_attempt_and_recovery_removes_container(tmp_path):
+        import sqlite3
+        import sys
+        from datetime import timedelta
+    
+        from aeep.assessment.models import AssessmentAuthorization, AssessmentLimits, content_digest
+        from aeep.assessment.onboarding import reference_spec
+        from aeep.assessment.recovery import recover
+        from aeep.assessment.service import AssessmentService
+        from aeep.models import Manifest, SideEffect, utc_now
+        from aeep.qualification import RouteCandidate, behavior_fingerprint
+        from aeep.router import Router
+    
+        root = tmp_path.resolve()
+        manifest = root / "aeep.json"
+        manifest.write_text(Manifest(database=str(root / "main.sqlite3"), executors=[reference_spec("csv")]).model_dump_json())
+        router = Router.from_manifest(manifest)
+        service = AssessmentService(router, root / "assessments")
+        plugin = root / "plugin.txt"
+        plugin.write_text("Reviewed crash fixture")
+        subject = service.inspect_local(plugin)
+        candidate = ExecutorSpec(id="crash-candidate", capability="assessment.csv@1", kind="command", description="Controlled crash fixture", enabled=False, idempotent=True, side_effect=SideEffect.READ, estimate=reference_spec("csv").estimate, config={"argv": ["python3", "-c", "import time; time.sleep(60)"], "timeout_seconds": 60, "output": {"type": "json"}})
+        router.store.save_route_candidate(RouteCandidate(executor_id=candidate.id, source_id="reviewed-crash-fixture", capability=candidate.capability, behavior_fingerprint=behavior_fingerprint(candidate), spec=candidate))
+        environment = AssessmentEnvironment(environment_id="release-container", kind="container", identity={}, container_image=os.environ["AEEP_CONTAINER_IMAGE"], container_runtime=os.environ["AEEP_CONTAINER_RUNTIME"], container_socket=os.environ["AEEP_CONTAINER_SOCKET"])
+        plan = service.propose(subject_id=subject.subject_id, family="csv", candidate_id=candidate.id, baseline_id="reference.csv", authorization_id="crash-grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="crash-grant", subject_digests=[content_digest(subject)], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=1000), expires_at=utc_now() + timedelta(hours=1)))
+        assessment_id = service.enqueue(plan.plan_id)
+        worker = await asyncio.create_subprocess_exec(sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest), "--directory", str(service.directory), "--assessment", assessment_id, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+        target = None
+        try:
+>           async with asyncio.timeout(20):
+                       ^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_real_container.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10f144980>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/timeouts.py:116: TimeoutError
+__________ test_real_trial_mount_excludes_future_cases_and_other_arm ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_real_trial_mount_excludes0')
+
+    async def test_real_trial_mount_excludes_future_cases_and_other_arm(tmp_path):
+        fixture_root = tmp_path.resolve() / 'fixtures'
+        current = fixture_root / 'trial-inputs' / ('a' * 64)
+        other = fixture_root / 'trial-inputs' / ('b' * 64)
+        future = fixture_root / 'holdout-0'
+        for root in (current, other, future):
+            root.mkdir(parents=True)
+            (root / 'input.txt').write_text('synthetic fixture')
+        environment = AssessmentEnvironment(environment_id='private-fixture', kind='container', identity={},
+            container_image=os.environ['AEEP_CONTAINER_IMAGE'], container_runtime=os.environ['AEEP_CONTAINER_RUNTIME'],
+            container_socket=os.environ['AEEP_CONTAINER_SOCKET'])
+        code = '''import json,pathlib,sys
+    p=json.load(sys.stdin); root=pathlib.Path(p['root'])
+    print(json.dumps({'current':(root/'input.txt').read_text(), 'other':pathlib.Path(p['other']).exists(), 'future':pathlib.Path(p['future']).exists()}))
+    '''
+        spec = ExecutorSpec(id='private-fixture', capability='test', kind='command', description='Controlled private-fixture probe',
+            config={'argv':['python3','-c',code], 'stdin_json':True, 'output':{'type':'json'}, 'timeout_seconds':10})
+        context = ExecutionContext(spec=spec, request=ActionRequest(capability='test', input={'root':str(current),'other':str(other),'future':str(future)}),
+            estimate=spec.estimate, attempt=1, attempt_id=new_id('fixture'))
+        result = await ContainerExecutor(environment, fixture_root=fixture_root).execute(context)
+>       assert result.status == ExecutionStatus.SUCCESS, result.model_dump_json()
+E       AssertionError: {"status":"timeout","output":null,"resources":{"monetary_usd":0.0,"latency_ms":11012.590584112331,"cpu_ms":0.0,"memory_mb_seconds":0.0,"peak_memory_mb":0.0,"gpu_ms":0.0,"network_bytes":0,"context_tokens":0,"input_tokens":0,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":0,"reasoning_output_tokens":0,"subscription_units":0.0},"accounting":{"cash":{"status":"unavailable","components":[]},"subscription_usage":[],"model_usage":[],"tool_footprint":null},"stdout":null,"stderr":null,"exit_code":143,"error_type":"TimeoutError","error_message":"command exceeded 11 seconds","metadata":{"container_image":"sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228","container_name":"aeep-a24db71f3cb30c0d23cfff948e73d23b","container_resource_usage":"unavailable"}}
+E       assert <ExecutionSta...UT: 'timeout'> == <ExecutionSta...SS: 'success'>
+E         
+E         - success
+E         + timeout
+
+tests/test_v08_real_container.py:148: AssertionError
+_____ test_real_worker_artifact_transfer_rejects_escapes_and_shared_state ______
+
+fut = <coroutine object Process.communicate at 0x10f253970>, timeout = 10
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/subprocess.py:201: in communicate
+    stdin, stdout, stderr = await tasks.gather(stdin, stdout, stderr)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/subprocess.py:181: in _read_stream
+    output = await stream.read()
+             ^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/streams.py:723: in read
+    block = await self.read(self._limit)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/streams.py:730: in read
+    await self._wait_for_data('read')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <StreamReader transport=<_UnixReadPipeTransport fd=14 polling>>
+func_name = 'read'
+
+    async def _wait_for_data(self, func_name):
+        """Wait until feed_data() or feed_eof() is called.
+    
+        If stream was paused, automatically resume it.
+        """
+        # StreamReader uses a future to link the protocol feed_data() method
+        # to a read coroutine. Running two read coroutines at the same time
+        # would have an unexpected behaviour. It would not possible to know
+        # which coroutine would get the next data.
+        if self._waiter is not None:
+            raise RuntimeError(
+                f'{func_name}() called while another coroutine is '
+                f'already waiting for incoming data')
+    
+        assert not self._eof, '_wait_for_data after EOF'
+    
+        # Waiting for data while paused will make deadlock, so prevent it.
+        # This is essential for readexactly(n) for case when n > self._limit.
+        if self._paused:
+            self._paused = False
+            self._transport.resume_reading()
+    
+        self._waiter = self._loop.create_future()
+        try:
+>           await self._waiter
+E           asyncio.exceptions.CancelledError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/streams.py:539: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+    async def test_real_worker_artifact_transfer_rejects_escapes_and_shared_state():
+        import base64
+        import hashlib
+    
+        from aeep.errors import ConfigurationError
+        from aeep.hosts.workers import ManagedWorkerBinding
+    
+        worker = ManagedWorkerBinding(worker_id='artifact-fixture',runtime=os.environ['AEEP_CONTAINER_RUNTIME'],
+            socket=os.environ['AEEP_CONTAINER_SOCKET'],image=os.environ['AEEP_CONTAINER_IMAGE'],
+            platform='linux/arm64' if os.uname().machine == 'arm64' else 'linux/amd64',binary='/usr/local/bin/python3',
+            binary_sha256='a'*64,configuration_digest='b'*64,dependencies_digest='c'*64)
+        ids = [new_id('artifact-case'), new_id('artifact-other')]
+        docker = [worker.runtime,'--host','unix://'+worker.socket]
+        async def command(*argv):
+            process = await asyncio.create_subprocess_exec(*argv,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
+            stdout, stderr = await asyncio.wait_for(process.communicate(),10)
+            assert process.returncode == 0, stderr.decode()[-1000:]
+            return stdout
+        names = ['aeep-'+hashlib.sha256(identity.encode()).hexdigest()[:32] for identity in ids]
+        try:
+            for name in names:
+>               await command(*docker,'run','--pull=never','--rm','-d','--name',name,'--network=none','--read-only',
+                    '--user','65534:65534','--cap-drop=ALL','--security-opt=no-new-privileges','--pids-limit=16','--memory=128m',
+                    '--tmpfs','/workspace:rw,nosuid,nodev,size=8m,uid=65534,gid=65534,mode=700',
+                    '--entrypoint','python3',worker.image,'-c','import time; time.sleep(60)')
+
+tests/test_v08_real_container.py:173: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_v08_real_container.py:167: in command
+    stdout, stderr = await asyncio.wait_for(process.communicate(),10)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:506: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10efb7300>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/timeouts.py:116: TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+    async def test_real_worker_artifact_transfer_rejects_escapes_and_shared_state():
+        import base64
+        import hashlib
+    
+        from aeep.errors import ConfigurationError
+        from aeep.hosts.workers import ManagedWorkerBinding
+    
+        worker = ManagedWorkerBinding(worker_id='artifact-fixture',runtime=os.environ['AEEP_CONTAINER_RUNTIME'],
+            socket=os.environ['AEEP_CONTAINER_SOCKET'],image=os.environ['AEEP_CONTAINER_IMAGE'],
+            platform='linux/arm64' if os.uname().machine == 'arm64' else 'linux/amd64',binary='/usr/local/bin/python3',
+            binary_sha256='a'*64,configuration_digest='b'*64,dependencies_digest='c'*64)
+        ids = [new_id('artifact-case'), new_id('artifact-other')]
+        docker = [worker.runtime,'--host','unix://'+worker.socket]
+        async def command(*argv):
+            process = await asyncio.create_subprocess_exec(*argv,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
+            stdout, stderr = await asyncio.wait_for(process.communicate(),10)
+            assert process.returncode == 0, stderr.decode()[-1000:]
+            return stdout
+        names = ['aeep-'+hashlib.sha256(identity.encode()).hexdigest()[:32] for identity in ids]
+        try:
+            for name in names:
+                await command(*docker,'run','--pull=never','--rm','-d','--name',name,'--network=none','--read-only',
+                    '--user','65534:65534','--cap-drop=ALL','--security-opt=no-new-privileges','--pids-limit=16','--memory=128m',
+                    '--tmpfs','/workspace:rw,nosuid,nodev,size=8m,uid=65534,gid=65534,mode=700',
+                    '--entrypoint','python3',worker.image,'-c','import time; time.sleep(60)')
+            payload = base64.b64encode(b'current task only').decode()
+            written = await worker.artifact(ids[0],name='input.xlsx',limit=100,data=payload)
+            result = await worker.artifact(ids[0],name='input.xlsx',limit=100)
+            assert result['data'] == payload and result['sha256'] == written['sha256']
+            await command(*docker,'exec',names[0],'python3','-c',
+                "import os; os.symlink('/etc/passwd','/workspace/link.xlsx'); os.mkfifo('/workspace/fifo.xlsx'); os.link('/workspace/input.xlsx','/workspace/hard.xlsx')")
+            for name, limit in [('link.xlsx',100),('fifo.xlsx',100),('hard.xlsx',100),('../etc/passwd',100),('input.xlsx',2)]:
+                with pytest.raises(ConfigurationError,match='artifact transfer failed'):
+                    await worker.artifact(ids[0],name=name,limit=limit)
+            for name, data in [('input.xlsx',payload),('other.xlsx','not base64'),('large.xlsx',base64.b64encode(b'x'*101).decode())]:
+                with pytest.raises(ConfigurationError,match='artifact transfer failed'):
+                    await worker.artifact(ids[0],name=name,limit=100,data=data)
+            with pytest.raises(ConfigurationError,match='artifact transfer failed'):
+                await worker.artifact(ids[1],name='input.xlsx',limit=100)
+        finally:
+            for identity in ids:
+>               assert await worker.cleanup(identity)
+E               assert False
+
+tests/test_v08_real_container.py:193: AssertionError
+_____ test_contained_workbook_materialization_grader_and_honest_rejection ______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-lumtg5f7/container/test_contained_workbook_materi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f12fbb0>
+
+    @pytest.mark.real_container
+    @pytest.mark.assessment_boundary
+    @pytest.mark.skipif(not os.environ.get('AEEP_WORKBOOK_IMAGE'), reason='requires a pinned offline workbook recipe runtime')
+    async def test_contained_workbook_materialization_grader_and_honest_rejection(tmp_path, monkeypatch):
+        from test_v08_executable_recipes import setup
+    
+        from aeep.assessment.extensions import materialize
+    
+        # Deliberately wrong native fixtures prove the shared campaign reports a loss;
+        # this is not a plugin or live-Codex comparison.
+        router, service, recipe, request, environment = setup(tmp_path, monkeypatch, recipe=workbook_recipe(), real=True)
+        try:
+            for name in ('candidate', 'baseline'):
+                spec = router.registry.get(name).model_copy(update={'capability': recipe.capability})
+                spec.config = {**spec.config, 'argv': ['python3', '-c', "print('{}')"]}
+                router.registry.replace(spec)
+            for digest in request.definition_digests:
+                service.repository.review(digest)
+>           cases = await materialize(service, request.plan_id)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_workbook.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/assessment/extensions.py:163: in materialize
+    payload, _elapsed = await invoke(service, request, recipe.extension.generator,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+service = <aeep.assessment.service.AssessmentService object at 0x10e8d1a90>
+scope = RecipeMaterializationRequest(schema_version='assessment.recipe-materialization.v2', plan_id='recipe_generation_a343766...uments/aeep-agent-router/src/aeep/x402/models.py': '062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc'})
+spec = ExecutorSpec(id='workbook.generator', capability='assessment.workbook@1', kind=<ExecutorKind.COMMAND: 'command'>, desc...son': True, 'timeout_seconds': 30, 'max_output_bytes': 16000000, 'output': {'type': 'json'}}, required_capabilities=())
+value = {'seed': 19, 'stages': [{'count': 8, 'split': 'qualification'}, {'count': 28, 'split': 'training'}, {'count': 105, 'sp...s': ['mixed_types_dates', 'missing_invalid', 'duplicates', 'multiple_sheets', 'formulas', 'structure_formatting', ...]}
+
+    async def invoke(service: AssessmentService, scope: AssessmentPlan | RecipeMaterializationRequest,
+                     spec: ExecutorSpec, value: dict[str, Any], *, stage: str, operation_id: str | None = None,
+                     elapsed_times: list[float] | None = None) -> tuple[Any, float]:
+        from .containment import ContainerExecutor
+        from .identity import verify_dependencies
+    
+        recipe = RecipeDefinition.model_validate(service.repository.get("recipe", scope.recipe_digest))
+        environment = AssessmentEnvironment.model_validate(service.repository.get("environment", scope.environment_digest))
+        require_environment(recipe, environment)
+        if recipe.extension is None or spec not in (recipe.extension.generator, recipe.extension.grader, recipe.extension.reference):
+            raise ConfigurationError("recipe executor is not in its reviewed definition")
+        service.repository.authorize(scope)
+        if isinstance(scope, RecipeMaterializationRequest):
+            if not scope.runtime_dependencies or content_digest(RecipeRuntimeBinding(dependencies=scope.runtime_dependencies)) not in scope.definition_digests:
+                raise ConfigurationError("recipe materialization runtime must be frozen and reviewed")
+            verify_dependencies(scope.runtime_dependencies)
+        operation_id = operation_id or new_id("recipe_call")
+        timeout = float(spec.config["timeout_seconds"])
+        service.repository.reserve(scope, operation_id,
+            AssessmentLimits(max_operations=1, max_elapsed_seconds=timeout + 5), stage=stage)
+        started = time.perf_counter()
+        router = None
+        outcome = None
+        try:
+            router = service.router._campaign_router([spec], plan_digest=content_digest(scope),
+                database=service.directory / scope.plan_id / "recipe-operations" / f"{operation_id}.sqlite3",
+                snapshot_bound_digests={
+                    content_digest(scope), scope.subject_digest, scope.recipe_digest,
+                    scope.mapping_digest, scope.environment_digest, *scope.definition_digests,
+                    *([scope.recipe_case_set_digest] if isinstance(scope, AssessmentPlan) and scope.recipe_case_set_digest else []),
+                })
+            router._executors[ExecutorKind.COMMAND] = ContainerExecutor(environment)
+            def check() -> None:
+                service.repository.authorize(scope)
+                if isinstance(scope, RecipeMaterializationRequest):
+                    verify_dependencies(scope.runtime_dependencies or {})
+                else:
+                    service._verify_dependencies(scope)
+            router._trial_check = check
+            outcome = await router.execute(ActionRequest(capability=spec.capability, input=value,
+                constraints=ActionConstraints(allowed_executor_ids=[spec.id])))
+            for receipt in outcome.receipts:
+                stored = router.store.get_receipt(receipt.receipt_id)
+                if stored is not None:
+                    service.repository.put("recipe_receipt", stored.receipt_id, stored)
+            if not outcome.ok:
+>               raise ConfigurationError("recipe program failed; candidate correctness is not evaluated")
+E               aeep.errors.ConfigurationError: recipe program failed; candidate correctness is not evaluated
+
+src/aeep/assessment/extensions.py:139: ConfigurationError
+------------------------------ Captured log call -------------------------------
+WARNING  asyncio:unix_events.py:1459 Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 44616 is closed
+________ test_workbook_real_generator_reference_and_independent_grader _________
+
+    @pytest.mark.real_container
+    @pytest.mark.assessment_boundary
+    @pytest.mark.skipif(not os.environ.get('AEEP_WORKBOOK_IMAGE'), reason='requires a pinned offline image with openpyxl 3.1.5')
+    def test_workbook_real_generator_reference_and_independent_grader():
+        image = os.environ['AEEP_WORKBOOK_IMAGE']
+        assert image.startswith('sha256:') and len(image) == 71
+        program = (ASSETS / 'workbook_program.py').read_text().split("if __name__ == '__main__':")[0]
+        grader = (ASSETS / 'workbook_grader.py').read_text().split("if __name__ == '__main__':")[0]
+        check = '''
+    payload={'seed':21,'stages':[{'split':'screening','count':8},{'split':'training','count':28},{'split':'holdout','count':105}]}
+    cases=generate(payload)['cases']
+    assert generate(payload)['cases']==cases
+    assert all(grade({'input':case['input'],'output':reference(case['input']),'expected':case['output']}) for case in cases)
+    print(json.dumps({'count':len(cases),'holdout_variations':[case['variation'] for case in cases[36:]]}))
+    '''
+>       result = subprocess.run([os.environ['AEEP_CONTAINER_RUNTIME'], '--host', 'unix://' + os.environ['AEEP_CONTAINER_SOCKET'],
+            'run', '--rm', '--network=none', '--read-only', '--user', '65534:65534', '--cap-drop=ALL',
+            '--security-opt=no-new-privileges', '--memory=256m', '--pids-limit=64', '--cpus=1',
+            '--tmpfs', '/tmp:rw,noexec,nosuid,nodev,size=32m', '--entrypoint', 'python3', image,
+            '-c', program + '\n' + grader + '\n' + check], capture_output=True, text=True, timeout=60, check=True)
+
+tests/test_v08_workbook.py:136: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = 60, check = True
+popenargs = (['/usr/local/bin/docker', '--host', 'unix:///Users/edwintse/.docker/run/docker.sock', 'run', '--rm', '--network=none', ...],)
+kwargs = {'stderr': -1, 'stdout': -1, 'text': True}
+process = <Popen: returncode: 1 args: ['/usr/local/bin/docker', '--host', 'unix:///Use...>
+stdout = ''
+stderr = 'request returned 500 Internal Server Error for API route and version http://%2FUsers%2Fedwintse%2F.docker%2Frun%2Fdocker.sock/_ping, check if the server supports the requested API version\n'
+retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout is given, and the process takes too long, a TimeoutExpired
+        exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['/usr/local/bin/docker', '--host', 'unix:///Users/edwintse/.docker/run/docker.sock', 'run', '--rm', '--network=none', '--read-only', '--user', '65534:65534', '--cap-drop=ALL', '--security-opt=no-new-privileges', '--memory=256m', '--pids-limit=64', '--cpus=1', '--tmpfs', '/tmp:rw,noexec,nosuid,nodev,size=32m', '--entrypoint', 'python3', 'sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228', '-c', '"""Reviewed offline workbook generator/reference. Executed only in the recipe container."""\nimport base64\nimport io\nimport json\nimport random\nimport sys\nimport zipfile\nfrom datetime import datetime\n\nfrom openpyxl import Workbook, load_workbook\nfrom openpyxl.styles import Font\n\nHEADERS = [\'ID\', \'Date\', \'Quantity\', \'Price\', \'Amount\']\nTASK = (\'Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric \'\n        \'quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates \'\n        \'to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. \'\n        \'Write Summary!A1="Total" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets \'\n        \'and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula \'\n        \'caches; return its base64 bytes as workbook_b64. No macros or external links.\')\nVARIATIONS = [\'mixed_types_dates\', \'missing_invalid\', \'duplicates\', \'multiple_sheets\',\n              \'formulas\', \'structure_formatting\', \'unicode_sparse\']\n\n\ndef encode(book):\n    book.properties.created = book.properties.modified = datetime(2000, 1, 1)\n    stream = io.BytesIO()\n    book.save(stream)\n    return canonical(stream.getvalue())\n\n\ndef canonical(raw):\n    target = io.BytesIO()\n    with zipfile.ZipFile(io.BytesIO(raw)) as source, zipfile.ZipFile(target, \'w\') as dest:\n        for name in sorted(source.namelist()):\n            value = source.read(name)\n            if name == \'docProps/core.xml\':\n                from xml.etree import ElementTree as ET\n                root = ET.fromstring(value)\n                for field in (\'created\', \'modified\'):\n                    root.find(\'{http://purl.org/dc/terms/}\' + field).text = \'2000-01-01T00:00:00Z\'\n                value = ET.tostring(root)\n            info = zipfile.ZipInfo(name, (2000, 1, 1, 0, 0, 0))\n            info.compress_type = zipfile.ZIP_DEFLATED\n            dest.writestr(info, value)\n    return base64.b64encode(target.getvalue()).decode()\n\n\ndef render(rows, extras):\n    book = Workbook()\n    sheet = book.active\n    sheet.title = \'Data\'\n    sheet.append(HEADERS)\n    for row in rows:\n        sheet.append(row)\n    for cell in sheet[1]:\n        cell.font = Font(bold=True)\n    for name, value in extras.items():\n        book.create_sheet(name)[\'A1\'] = value\n    return encode(book)\n\n\ndef clean(rows):\n    result, seen = [], set()\n    for identity, date, quantity, price, *_ in rows:\n        if identity is None or identity in seen:\n            continue\n        seen.add(identity)\n        try:\n            quantity = int(quantity or 0)\n            price = int(price or 0)\n            date = datetime.strptime(str(date)[:10], \'%Y-%m-%d\').strftime(\'%Y-%m-%d\')\n        except (TypeError, ValueError):\n            continue\n        result.append([str(identity), date, quantity, price, quantity * price])\n    return result\n\n\ndef generate(payload):\n    rng = random.Random(payload[\'seed\'])\n    cases = []\n    for stage in payload[\'stages\']:\n        for index in range(stage[\'count\']):\n            variation = VARIATIONS[index % len(VARIATIONS)]\n            rows = [[f\'{stage["split"]}-{rng.getrandbits(48):012x}-{i}\', f\'2026-09-{i+1:02}\',\n                     rng.randrange(1, 20), rng.randrange(1, 100), None] for i in range(2 + index % 14)]\n            extras = {\'Notes\': \'Preserve this note\'} if variation in {\'multiple_sheets\', \'structure_formatting\'} else {}\n            if variation == \'mixed_types_dates\':\n                for row in rows[::2]:\n                    row[2] = str(row[2])\n                    row[1] = datetime.strptime(row[1], \'%Y-%m-%d\')\n            elif variation == \'missing_invalid\':\n                rows[0][2] = None\n                rows[-1][3] = \'invalid\'\n            elif variation == \'duplicates\':\n                rows.insert(1, list(rows[0]))\n                rows[1][3] = 999\n            elif variation == \'formulas\':\n                for row in rows:\n                    row[4] = \'=1+1\'\n            elif variation == \'unicode_sparse\':\n                rows[0][0] = \'東京\\u2013Zoë-\' + rows[0][0]\n                rows.insert(1, [None] * 5)\n            truth = {\'rows\': clean(rows), \'extras\': extras}\n            value = {\'workbook_b64\': render(rows, extras), \'task\': TASK,\n                     \'variation\': variation, \'row_bound\': len(rows)}\n            cases.append({\'input\': value, \'output\': truth, \'variation\': variation,\n                          \'template_family\': \'workbook:\' + variation})\n    return {\'cases\': cases}\n\n\ndef reference(value):\n    # Read the actual rendered input; generator truth is never an input here.\n    book = load_workbook(io.BytesIO(base64.b64decode(value[\'workbook_b64\'])), data_only=False)\n    rows = clean(list(book[\'Data\'].values)[1:])\n    sheet = book[\'Data\']\n    sheet.delete_rows(2, sheet.max_row)\n    for index, row in enumerate(rows, 2):\n        sheet.append([*row[:4], f\'=C{index}*D{index}\'])\n    if \'Summary\' not in book:\n        book.create_sheet(\'Summary\')\n    book[\'Summary\'][\'A1\'] = \'Total\'\n    book[\'Summary\'][\'B1\'] = f\'=SUM(Data!E2:E{len(rows)+1})\'\n    # openpyxl writes formulas without caches. Populate this deterministic\n    # reference\'s caches; the separate grader recomputes from actual cells.\n    from xml.etree import ElementTree as ET\n    raw = base64.b64decode(encode(book))\n    target = io.BytesIO()\n    ns = \'{http://schemas.openxmlformats.org/spreadsheetml/2006/main}\'\n    with zipfile.ZipFile(io.BytesIO(raw)) as source, zipfile.ZipFile(target, \'w\', zipfile.ZIP_DEFLATED) as dest:\n        for name in source.namelist():\n            data = source.read(name)\n            if name.startswith(\'xl/worksheets/\'):\n                root = ET.fromstring(data)\n                for cell in root.iter(ns+\'c\'):\n                    formula = cell.find(ns+\'f\')\n                    if formula is None:\n                        continue\n                    cached = cell.find(ns+\'v\')\n                    if cached is None:\n                        cached = ET.SubElement(cell, ns+\'v\')\n                    cached.text = str(sum(row[4] for row in rows) if formula.text.startswith(\'SUM(\')\n                                      else rows[int(cell.attrib[\'r\'][1:])-2][4])\n                data = ET.tostring(root)\n            dest.writestr(name, data)\n    return {\'workbook_b64\': canonical(target.getvalue())}\n\n\n\n"""Independent bounded OOXML grader; supports only the recipe\'s product/SUM formulas."""\nimport base64\nimport io\nimport json\nimport posixpath\nimport sys\nimport zipfile\nfrom decimal import Decimal\nfrom xml.etree import ElementTree as ET\n\nN = \'{http://schemas.openxmlformats.org/spreadsheetml/2006/main}\'\nR = \'{http://schemas.openxmlformats.org/officeDocument/2006/relationships}\'\n\n\ndef inspect(encoded):\n    if not isinstance(encoded, str) or len(encoded) > 200000:\n        raise ValueError(\'oversized workbook\')\n    with zipfile.ZipFile(io.BytesIO(base64.b64decode(encoded, validate=True))) as archive:\n        entries = archive.infolist()\n        if (len(entries) > 100 or len({item.filename for item in entries}) != len(entries)\n                or sum(item.file_size for item in entries) > 2000000\n                or any(\'..\' in item.filename.split(\'/\') or item.filename.startswith(\'/\')\n                       or \'vba\' in item.filename.lower() or \'externallink\' in item.filename.lower() for item in entries)):\n            raise ValueError(\'unsupported workbook archive\')\n        def xml(name):\n            value = archive.read(name)\n            if b\'<!DOCTYPE\' in value or b\'<!ENTITY\' in value:\n                raise ValueError(\'XML declarations denied\')\n            return ET.fromstring(value)\n        links = xml(\'xl/_rels/workbook.xml.rels\')\n        if any(item.get(\'TargetMode\') == \'External\' for item in links):\n            raise ValueError(\'external relationships denied\')\n        targets = {item.get(\'Id\'): posixpath.normpath(posixpath.join(\'xl\', item.get(\'Target\', \'\').lstrip(\'/\')))\n                   if not item.get(\'Target\', \'\').startswith(\'/\') else item.get(\'Target\').lstrip(\'/\') for item in links}\n        strings = []\n        if \'xl/sharedStrings.xml\' in archive.namelist():\n            strings = [\'\'.join(item.itertext()) for item in xml(\'xl/sharedStrings.xml\').findall(N+\'si\')]\n        sheets = {}\n        for sheet in xml(\'xl/workbook.xml\').find(N+\'sheets\'):\n            cells = {}\n            for cell in xml(targets[sheet.get(R+\'id\')]).iter(N+\'c\'):\n                address = cell.get(\'r\')\n                if address in cells:\n                    raise ValueError(\'duplicate cell\')\n                value, formula = cell.findtext(N+\'v\'), cell.findtext(N+\'f\')\n                if cell.get(\'t\') == \'inlineStr\':\n                    value = \'\'.join(cell.find(N+\'is\').itertext())\n                elif cell.get(\'t\') == \'s\':\n                    value = strings[int(value)]\n                elif cell.get(\'t\') == \'str\':\n                    pass  # OOXML string values are text, including numeric-looking IDs.\n                elif cell.get(\'t\') not in (None, \'n\'):\n                    raise ValueError(\'unsupported cell type\')\n                elif value is not None:\n                    value = Decimal(value)\n                cells[address] = (value, formula, int(cell.get(\'s\', \'0\')))\n            if sheet.get(\'name\') in sheets:\n                raise ValueError(\'duplicate sheet\')\n            sheets[sheet.get(\'name\')] = cells\n        styles = xml(\'xl/styles.xml\')\n        fonts = list(styles.find(N+\'fonts\'))\n        bold = {index for index, style in enumerate(styles.find(N+\'cellXfs\'))\n                if fonts[int(style.get(\'fontId\', \'0\'))].find(N+\'b\') is not None\n                and fonts[int(style.get(\'fontId\', \'0\'))].find(N+\'b\').get(\'val\', \'1\') not in {\'0\', \'false\'}}\n        return sheets, bold\n\n\ndef failure_code(example):\n    try:\n        if not isinstance(example[\'output\'], dict) or set(example[\'output\']) != {\'workbook_b64\'}:\n            return \'output_contract\'\n        sheets, bold = inspect(example[\'output\'][\'workbook_b64\'])\n        truth = example[\'expected\']\n        if set(sheets) != {\'Data\', \'Summary\', *truth[\'extras\']}:\n            return \'sheet_set\'\n        data = sheets[\'Data\']\n        expected_addresses = {f\'{col}{row}\' for row in range(1, len(truth[\'rows\'])+2) for col in \'ABCDE\'}\n        if {key for key, item in data.items() if item[0] is not None or item[1] is not None} != expected_addresses:\n            return \'data_extent\'\n        for col, header in zip(\'ABCDE\', [\'ID\', \'Date\', \'Quantity\', \'Price\', \'Amount\'], strict=True):\n            if data[col+\'1\'][0] != header or data[col+\'1\'][2] not in bold:\n                return \'header_format\'\n        recomputed = Decimal(0)\n        for index, expected in enumerate(truth[\'rows\'], 2):\n            for col, value in zip(\'ABCDE\', expected, strict=True):\n                if data[f\'{col}{index}\'][0] != value:\n                    return \'formula_cache\' if col == \'E\' else \'cell_value\'\n            # No eval: the reviewed formula grammar is exactly these references.\n            if data[f\'E{index}\'][1] != f\'C{index}*D{index}\':\n                return \'row_formula\'\n            product = data[f\'C{index}\'][0] * data[f\'D{index}\'][0]\n            if data[f\'E{index}\'][0] != product:\n                return \'formula_cache\'\n            recomputed += product\n        summary = sheets[\'Summary\']\n        if (summary[\'A1\'][0] != \'Total\' or summary[\'B1\'][0] != recomputed\n                or summary[\'B1\'][1] != f\'SUM(Data!E2:E{len(truth["rows"])+1})\'):\n            return \'summary\'\n        return None if all({key: cell[:2] for key, cell in sheets[name].items()} == {\'A1\': (value, None)} for name, value in truth[\'extras\'].items()) else \'preserved_sheets\'\n    except (ValueError, TypeError, KeyError, IndexError, AttributeError, ArithmeticError, RuntimeError, NotImplementedError, ET.ParseError, zipfile.BadZipFile):\n        return \'invalid_workbook\'\n\n\ndef grade(example):\n    return failure_code(example) is None\n\n\n\n\npayload={\'seed\':21,\'stages\':[{\'split\':\'screening\',\'count\':8},{\'split\':\'training\',\'count\':28},{\'split\':\'holdout\',\'count\':105}]}\ncases=generate(payload)[\'cases\']\nassert generate(payload)[\'cases\']==cases\nassert all(grade({\'input\':case[\'input\'],\'output\':reference(case[\'input\']),\'expected\':case[\'output\']}) for case in cases)\nprint(json.dumps({\'count\':len(cases),\'holdout_variations\':[case[\'variation\'] for case in cases[36:]]}))\n']' returned non-zero exit status 1./Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored in: <function BaseSubprocessTransport.__del__ at 0x10ac69b20>
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_subprocess.py", line 130, in __del__
+    self.close()
+    ~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_subprocess.py", line 107, in close
+    proto.pipe.close()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/unix_events.py", line 603, in close
+    self._close(None)
+    ~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/unix_events.py", line 627, in _close
+    self._loop.call_soon(self._call_connection_lost, exc)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 828, in call_soon
+    self._check_closed()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 551, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+
+Enable tracemalloc to get traceback where the object was allocated.
+See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+  warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))
+
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py:577: CalledProcessError
+_____ test_real_offline_codex_inspection_uses_sandbox_without_credentials ______
+
+fut = <Future cancelled>, timeout = 30
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:507: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.mark.real_container
+    @pytest.mark.assessment_boundary
+    @pytest.mark.skipif(not os.environ.get('AEEP_INSPECTION_FIXTURE_SPECS'), reason='requires explicit offline Codex worker specs')
+    async def test_real_offline_codex_inspection_uses_sandbox_without_credentials():
+        import asyncio
+    
+        from aeep.hosts.codex_app_server import CodexAppServerAdapter
+        from aeep.hosts.workers import binding_from_config
+    
+        data = await asyncio.to_thread(Path(os.environ['AEEP_INSPECTION_FIXTURE_SPECS']).read_bytes)
+        assert len(data) < 262144
+        specs = json.loads(data)
+        assert isinstance(specs, list) and 1 <= len(specs) <= 2
+        for value in specs:
+            spec = ExecutorSpec.model_validate(value)
+            config = spec.managed_host_config()
+            worker = binding_from_config(config.managed_worker)
+            assert worker is not None
+            assert worker.credential_volume is worker.network_id is worker.model_proxy_url is None
+            assert config.argv == (worker.binary, 'app-server')
+            adapter = CodexAppServerAdapter.from_executor(spec, principal_salt=b'offline-fixture')
+            try:
+>               result = await adapter.transport.request('command/exec', {
+                    'command':['python3','-c',COMMAND.replace('PROXY_HOST',repr('127.0.0.1')).replace('PROXY_PORT','3128')],
+                    'cwd':'/workspace','timeoutMs':10000,'outputBytesCap':4096}, timeout=20)
+
+tests/test_v08_worker_inspection.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/hosts/codex_app_server.py:226: in request
+    await self.start()
+src/aeep/hosts/codex_app_server.py:204: in start
+    response = await self._request_started(
+src/aeep/hosts/codex_app_server.py:239: in _request_started
+    return await asyncio.wait_for(
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:506: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10ed4e940>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/timeouts.py:116: TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+    @pytest.mark.real_container
+    @pytest.mark.assessment_boundary
+    @pytest.mark.skipif(not os.environ.get('AEEP_INSPECTION_FIXTURE_SPECS'), reason='requires explicit offline Codex worker specs')
+    async def test_real_offline_codex_inspection_uses_sandbox_without_credentials():
+        import asyncio
+    
+        from aeep.hosts.codex_app_server import CodexAppServerAdapter
+        from aeep.hosts.workers import binding_from_config
+    
+        data = await asyncio.to_thread(Path(os.environ['AEEP_INSPECTION_FIXTURE_SPECS']).read_bytes)
+        assert len(data) < 262144
+        specs = json.loads(data)
+        assert isinstance(specs, list) and 1 <= len(specs) <= 2
+        for value in specs:
+            spec = ExecutorSpec.model_validate(value)
+            config = spec.managed_host_config()
+            worker = binding_from_config(config.managed_worker)
+            assert worker is not None
+            assert worker.credential_volume is worker.network_id is worker.model_proxy_url is None
+            assert config.argv == (worker.binary, 'app-server')
+            adapter = CodexAppServerAdapter.from_executor(spec, principal_salt=b'offline-fixture')
+            try:
+                result = await adapter.transport.request('command/exec', {
+                    'command':['python3','-c',COMMAND.replace('PROXY_HOST',repr('127.0.0.1')).replace('PROXY_PORT','3128')],
+                    'cwd':'/workspace','timeoutMs':10000,'outputBytesCap':4096}, timeout=20)
+                assert result['exitCode'] == 0, result
+                # The deny-by-default profile hides this path. Absence is not a
+                # claim that a filesystem permission error was observed.
+                assert json.loads(result['stdout']) == {
+                    'workspace_write':True,'configuration_write':'absent','proxy':'denied','direct':'denied'}
+            finally:
+                try:
+                    await adapter.transport.close()
+                finally:
+>                   assert await worker.cleanup(adapter._worker_process_id)
+E                   assert False
+
+tests/test_v08_worker_inspection.py:102: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

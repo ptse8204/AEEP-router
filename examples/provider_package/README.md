@@ -7,7 +7,7 @@ evidence, a local trust store, and no credentials. Regenerate it with:
 PYTHONPATH=src python examples/provider_package/build_fixture.py
 ```
 
-The lifecycle is:
+Verify, ingest and inspect the package, then run smoke checks, qualify it and activate it:
 
 ```bash
 aeep provider verify examples/provider_package/aeep-provider.yaml \

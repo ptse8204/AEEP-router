@@ -19,9 +19,9 @@ The signed payload is RFC 8785 canonical JSON containing only `apiVersion`,
 `kind`, `metadata`, and `spec`. Ed25519 signs the domain-separated SHA-256
 digest. Formatting, YAML comments, and key order do not affect the digest.
 
-Manifest input is limited to 1 MiB, strict JSON-compatible YAML, no aliases,
-no duplicate keys, maximum depth 32, and bounded collections. Artifact paths
-are relative to the manifest directory. Absolute paths, traversal, symlinks,
+Manifests must use strict JSON-compatible YAML and fit within 1 MiB. The parser
+rejects aliases and duplicate keys, limits nesting to depth 32, and bounds
+collection sizes. Artifact paths are relative to the manifest directory. Absolute paths, traversal, symlinks,
 unknown compression, and archive extraction are rejected.
 
 Accepted local or opt-in HTTPS artifacts are copied into immutable SHA-256 CAS

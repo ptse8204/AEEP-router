@@ -1,0 +1,272 @@
+{
+  "source_digest": "2132389e083418d20f12e47b770b6dcd07813452b3735e433d06b302db8798d7",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09523416589945555,
+      "log": "reports/v08/steering-v1-delivery-validation/final/00.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7904082909226418,
+      "log": "reports/v08/steering-v1-delivery-validation/final/01.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.09015708393417299,
+      "log": "reports/v08/steering-v1-delivery-validation/final/02.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.34974262514151633,
+      "log": "reports/v08/steering-v1-delivery-validation/final/03.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.19463645806536078,
+      "log": "reports/v08/steering-v1-delivery-validation/final/04.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 507.57313999999315,
+      "log": "reports/v08/steering-v1-delivery-validation/final/05.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 724.4564574579708,
+      "log": "reports/v08/steering-v1-delivery-validation/final/06.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2659835410304368,
+      "log": "reports/v08/steering-v1-delivery-validation/final/07.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "reports/v08/steering-v1-delivery-validation/final/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5894908329937607,
+      "log": "reports/v08/steering-v1-delivery-validation/final/08.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/steering-v1-delivery-validation/final/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09276495897211134,
+      "log": "reports/v08/steering-v1-delivery-validation/final/09.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/steering-v1-delivery-validation/final/coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0582162500359118,
+      "log": "reports/v08/steering-v1-delivery-validation/final/10.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 8.13521487498656,
+      "log": "reports/v08/steering-v1-delivery-validation/final/11.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "reports/v08/steering-v1-delivery-validation/final/dist"
+      ],
+      "exit_code": 0,
+      "seconds": 1.9943894578609616,
+      "log": "reports/v08/steering-v1-delivery-validation/final/12.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5638112078886479,
+      "log": "reports/v08/steering-v1-delivery-validation/final/13.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5087559169624001,
+      "log": "reports/v08/steering-v1-delivery-validation/final/14.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5102965829428285,
+      "log": "reports/v08/steering-v1-delivery-validation/final/15.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5169699578545988,
+      "log": "reports/v08/steering-v1-delivery-validation/final/16.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5216154160443693,
+      "log": "reports/v08/steering-v1-delivery-validation/final/17.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5203749588690698,
+      "log": "reports/v08/steering-v1-delivery-validation/final/18.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5746878329664469,
+      "log": "reports/v08/steering-v1-delivery-validation/final/19.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.311872333055362,
+      "log": "reports/v08/steering-v1-delivery-validation/final/20.log",
+      "source_unchanged": true
+    }
+  ]
+}

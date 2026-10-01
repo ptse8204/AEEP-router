@@ -1,0 +1,16 @@
+{
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "model_calls": 0,
+  "config": "aeep_unknown_probe = true\n[analytics]\nenabled = false\n[otel]\nexporter = \"none\"\ntrace_exporter = \"none\"\nmetrics_exporter = { otlp-http = { endpoint = \"http://127.0.0.1:4318/v1/metrics\", protocol = \"json\" } }\nlog_user_prompt = false\n",
+  "elapsed_seconds": 0.49746079207398,
+  "exit_code": 0,
+  "observation": {
+    "initialize_response": null,
+    "exit_code": 1,
+    "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir \"/tmp\" (codex_home: AbsolutePathBuf(\"/tmp/config-probe\"))\nError: /tmp/config-probe/config.toml:1:1: unknown configuration field `aeep_unknown_probe`\n"
+  },
+  "launcher_error": ""
+}

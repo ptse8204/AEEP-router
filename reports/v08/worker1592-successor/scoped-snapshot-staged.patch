@@ -1,0 +1,270 @@
+--- a/src/aeep/store.py
++++ b/src/aeep/store.py
+@@ -1401,21 +1401,9 @@
+                         parameters: tuple[str, ...] = ()
+                         if table == "assessment_records":
+                             condition = " WHERE kind NOT IN ('operation_start', 'operation_measurement', 'setup_cost', 'worker', 'recovery', 'planning_receipt')"
+-                            if bound_digests is not None:
+-                                # Admission, environment and recipe records remain available to
+-                                # every non-trial fallback route. Only non-runtime campaign
+-                                # definitions unrelated to the verified plan are omitted.
+-                                bulky_kinds = (
+-                                    'operation_ledger', 'campaign', 'recipe_case_set',
+-                                    'conformance_request', 'recipe_receipt',
+-                                    'host_inventory', 'worker_pair_definition',
+-                                )
+-                                digests = tuple(sorted(bound_digests))
+-                                condition += (" AND (kind NOT IN (" + ",".join("?" for _ in bulky_kinds)
+-                                    + ") OR digest IN (" + ",".join("?" for _ in digests)
+-                                    + ") OR digest IN (SELECT digest FROM assessment_reviews))")
+-                                parameters = (*bulky_kinds, *digests)
+                         rows = self._connection.execute(f"SELECT * FROM {table}{condition}", parameters).fetchall()
++                        if table == "assessment_records" and bound_digests is not None:
++                            rows = self._scoped_campaign_records(rows, bound_digests)
+                         if rows:
+                             placeholders = ",".join("?" for _ in rows[0])
+                             connection.executemany(
+@@ -1427,6 +1415,124 @@
+         except BaseException:
+             snapshot.close()
+             raise
++
++    def _scoped_campaign_records(
++        self, rows: list[sqlite3.Row], bound_digests: set[str],
++    ) -> list[sqlite3.Row]:
++        # Runtime authority stays intact. Only unrelated assessment metadata is
++        # omitted; review membership alone does not make history a dependency.
++        bulky = {
++            "plan", "mapping", "boundary_probe_definition", "boundary_probe",
++            "boundary_conformance", "execution_evidence", "execution_event",
++            "operation_ledger", "campaign", "recipe_case_set", "conformance_request",
++            "recipe_receipt", "host_inventory", "worker_pair_definition",
++            "worker_pair_inspection", "planning_request", "planning_mapping",
++            "recipe_materialization_request", "report", "comparison", "probe_runtime",
++            "environment", "recipe", "subject", "worker_binding", "recipe_runtime",
++            "runtime_binding", "run_binding", "effective_policy_definition",
++            "enforcement_definition", "reviewed_inventory", "differential_conformance",
++            "grader_validation", "utility_policy", "pilot_policy",
++            "shared_environment", "shared_environment_definition",
++        }
++        by_digest: dict[str, list[sqlite3.Row]] = {}
++        by_identity: dict[tuple[str, str], str] = {}
++        by_identifier: dict[str, set[str]] = {}
++        for row in rows:
++            by_digest.setdefault(row["digest"], []).append(row)
++            by_identity[row["kind"], row["id"]] = row["digest"]
++            by_identifier.setdefault(row["id"], set()).add(row["digest"])
++        roots = bound_digests & by_digest.keys()
++        if not roots:
++            raise ConfigurationError("scoped snapshot has no stored bound definitions")
++        for marker in self._connection.execute("SELECT admission_id FROM assessment_admissions"):
++            root = by_identity.get(("admission", marker[0]))
++            if root is None:
++                raise ConfigurationError("scoped snapshot admission definition is missing")
++            roots.add(root)
++        roots.update(row["digest"] for row in rows if row["kind"] in {
++            "task_scope", "task_activation", "task_lifecycle", "task_codex_binding",
++        })
++        selected: set[str] = set()
++        visiting: set[str] = set()
++        # These fields refer to stored assessment documents, unlike source,
++        # binary and executable-dependency hashes which refer to external bytes.
++        required = {
++            "subject_digest", "recipe_digest", "mapping_digest", "environment_digest",
++            "plan_digest", "campaign_digest", "recipe_case_set_digest",
++            "execution_evidence_digest", "enforcement_definition_digest",
++            "effective_policy_digest", "reviewed_inventory_digest", "scope_digest",
++            "activation_digest", "definition_digests", "probe_digests",
++            "conformance_digests", "differential_conformance_digest",
++            "operation_ledger_digest", "grader_validation_digest",
++        }
++
++        def strings(value: object) -> Iterator[str]:
++            if isinstance(value, str):
++                yield value
++            elif isinstance(value, dict):
++                for item in value.values():
++                    yield from strings(item)
++            elif isinstance(value, list):
++                for item in value:
++                    yield from strings(item)
++
++        def visit(digest: str) -> None:
++            if digest in visiting:
++                raise ConfigurationError("scoped snapshot assessment references are cyclic")
++            if digest in selected:
++                return
++            visiting.add(digest)
++            for row in by_digest[digest]:
++                document = json.loads(row["payload_json"])
++                references: set[str] = set()
++                for value in strings(document):
++                    if len(value) == 64:
++                        if value in by_digest:
++                            references.add(value)
++                        references.update(by_identifier.get(value, set()))
++                references.discard(digest)  # Identity fields can name this document itself.
++                for field in required | ({"implementation_digest"} if row["kind"] == "boundary_probe" else set()):
++                    for value in strings(document.get(field)):
++                        matches = ({value} if value in by_digest else set()) | by_identifier.get(value, set())
++                        if not matches:
++                            raise ConfigurationError("scoped snapshot assessment dependency is missing")
++                        references.update(matches)
++                if row["kind"] == "admission":
++                    report = by_identity.get(("report", document.get("report_id")))
++                    if document.get("report_id") is not None and report is None:
++                        raise ConfigurationError("scoped snapshot admission report is missing")
++                    if report is not None:
++                        references.add(report)
++                if row["kind"] in {"plan", "recipe_case_set"}:
++                    identities = document.get("preparation_request_ids") or []
++                    if row["kind"] == "recipe_case_set" and document.get("request_id"):
++                        identities = [document["request_id"]]
++                    for identity in identities:
++                        matches = {by_identity[kind, identity] for kind in
++                                   {"recipe_materialization_request", "plan"}
++                                   if (kind, identity) in by_identity}
++                        if not matches:
++                            raise ConfigurationError("scoped snapshot preparation definition is missing")
++                        references.update(matches)
++                if row["kind"] == "plan":
++                    for identity in document.get("planning_request_ids", []):
++                        planning = by_identity.get(("planning_request", identity))
++                        if planning is None:
++                            raise ConfigurationError("scoped snapshot planning definition is missing")
++                        references.add(planning)
++                if row["kind"] == "task_codex_binding":
++                    activation = by_identity.get(("task_activation", document.get("activation_id")))
++                    if activation is None:
++                        raise ConfigurationError("scoped snapshot task activation is missing")
++                    references.add(activation)
++                for reference in references:
++                    visit(reference)
++            visiting.remove(digest)
++            selected.add(digest)
++
++        for root in roots:
++            visit(root)
++        return [row for row in rows if row["kind"] not in bulky or row["digest"] in selected]
+ 
+     @staticmethod
+     def _immutable_insert_locked(
+--- a/src/aeep/assessment/extensions.py
++++ b/src/aeep/assessment/extensions.py
+@@ -115,7 +115,12 @@
+     outcome = None
+     try:
+         router = service.router._campaign_router([spec], plan_digest=content_digest(scope),
+-            database=service.directory / scope.plan_id / "recipe-operations" / f"{operation_id}.sqlite3")
++            database=service.directory / scope.plan_id / "recipe-operations" / f"{operation_id}.sqlite3",
++            snapshot_bound_digests={
++                content_digest(scope), scope.subject_digest, scope.recipe_digest,
++                scope.mapping_digest, scope.environment_digest, *scope.definition_digests,
++                *([scope.recipe_case_set_digest] if isinstance(scope, AssessmentPlan) and scope.recipe_case_set_digest else []),
++            })
+         router._executors[ExecutorKind.COMMAND] = ContainerExecutor(environment)
+         def check() -> None:
+             service.repository.authorize(scope)
+--- a/tests/test_v08_campaign_foundations.py
++++ b/tests/test_v08_campaign_foundations.py
+@@ -1,5 +1,6 @@
+ from __future__ import annotations
+ 
++import json
+ from decimal import Decimal
+ 
+ import pytest
+@@ -74,15 +75,68 @@
+         def rows(store):
+             return {tuple(row) for row in store._connection.execute('SELECT kind, id FROM assessment_records')}
+         assert ('campaign', 'historical') in rows(broad)
+-        assert rows(scoped) == {('campaign', 'selected'), ('plan', 'historical'),
+-            ('mapping', 'historical'), ('boundary_probe_definition', 'historical'),
+-            ('worker_pair_definition', 'reviewed'),
+-            ('admission', 'runtime'), ('environment', 'runtime'), ('recipe', 'runtime')}
++        assert rows(scoped) == {('campaign', 'selected'), ('admission', 'runtime')}
+         assert scoped._connection.execute("SELECT revoked FROM assessment_admissions WHERE executor_id='fallback'").fetchone()[0] == 1
+         assert len(rows(source)) == 10
+     finally:
+         broad.close()
+         scoped.close()
++        source.close()
++
++
++def test_scoped_snapshot_reference_closure_and_external_hashes(tmp_path):
++    source = ReceiptStore(tmp_path / "source.sqlite3")
++    documents = [
++        ("plan", "scope", "a" * 64, {"recipe_digest": "recipe-name", "definition_digests": ["b" * 64], "planning_request_ids": ["planning-name"]}),
++        ("boundary_conformance", "boundary", "b" * 64, {"configuration_digest": "0" * 64, "identity_digest": "0" * 64, "binary_digest": "0" * 64, "effective_inventory": {"python": "3" * 64}, "reviewed_inventory_digest": "inventory-name", "effective_policy_digest": "policy-name"}),
++        ("reviewed_inventory", "inventory-name", "c" * 64, {}),
++        ("effective_policy_definition", "policy-name", "d" * 64, {}),
++        ("recipe", "recipe-name", "e" * 64, {}),
++        ("planning_request", "planning-name", "3" * 64, {}),
++        ("admission", "fallback", "f" * 64, {"recipe_digest": "fallback-recipe", "environment_digest": "fallback-environment", "report_id": "fallback-report"}),
++        ("recipe", "fallback-recipe", "4" * 64, {}),
++        ("environment", "fallback-environment", "5" * 64, {"conformance_digests": ["b" * 64]}),
++        ("report", "fallback-report", "6" * 64, {"plan_digest": "a" * 64}),
++        ("environment", "historical", "7" * 64, {"conformance_digests": ["8" * 64]}),
++        ("boundary_conformance", "historical", "8" * 64, {}),
++        ("task_activation", "activation-name", "9" * 64, {"scope_digest": "a" * 64, "manifest_digest": "0" * 64}),
++        ("task_codex_binding", "activation-name", "1" * 64, {"activation_id": "activation-name"}),
++        ("task_lifecycle", "pause", "2" * 64, {"activation_digest": "9" * 64}),
++    ]
++    with source._immediate_transaction() as connection:
++        for kind, identity, digest, document in documents:
++            connection.execute("INSERT INTO assessment_records VALUES (?, ?, ?, ?)", (kind, identity, digest, json.dumps(document)))
++        connection.execute("INSERT INTO assessment_admissions VALUES ('fallback', 'fallback', 1, NULL)")
++        connection.execute("INSERT INTO assessment_reviews VALUES (?, ?, 1)", ('8' * 64, '2026-09-29T00:00:00Z'))
++    before = list(source._connection.iterdump())
++    scoped = source.campaign_snapshot(bound_digests={"a" * 64, "0" * 64})
++    try:
++        identities = {(row[0], row[1]) for row in scoped._connection.execute("SELECT kind,id FROM assessment_records")}
++        assert identities == {(kind, identity) for kind, identity, _, _ in documents if identity != "historical"}
++        assert scoped._connection.execute("SELECT revoked FROM assessment_admissions").fetchone()[0] == 1
++        assert scoped._connection.execute("SELECT revoked FROM assessment_reviews").fetchone()[0] == 1
++        assert not scoped._connection.execute("SELECT * FROM execution_attempts").fetchall()
++        assert list(source._connection.iterdump()) == before
++    finally:
++        scoped.close()
++        source.close()
++
++
++@pytest.mark.parametrize("documents", [
++    [("a" * 64, {"recipe_digest": "missing-recipe"})],
++    [("a" * 64, {"recipe_digest": "b" * 64}), ("b" * 64, {"recipe_digest": "a" * 64})],
++])
++def test_scoped_snapshot_missing_and_cyclic_dependencies_fail_closed(tmp_path, documents):
++    source = ReceiptStore(tmp_path / "source.sqlite3")
++    with source._immediate_transaction() as connection:
++        for digest, document in documents:
++            connection.execute("INSERT INTO assessment_records VALUES ('recipe', ?, ?, ?)", (digest, digest, json.dumps(document)))
++    before = list(source._connection.iterdump())
++    try:
++        with pytest.raises(ConfigurationError, match=r"missing|cyclic"):
++            source.campaign_snapshot(bound_digests={"a" * 64})
++        assert list(source._connection.iterdump()) == before
++    finally:
+         source.close()
+ 
+ 
+--- a/tests/test_v08_assessment.py
++++ b/tests/test_v08_assessment.py
+@@ -381,6 +381,18 @@
+ 
+         spec = router.registry.get("candidate")
+         baseline = router.registry.get("baseline")
++        scoped = router.store.campaign_snapshot(bound_digests={content_digest(plan)})
++        try:
++            applicability.require_applicable(scoped, spec, request, baseline)
++            for table in ("assessment_grants", "assessment_reviews", "assessment_admissions"):
++                assert list(scoped._connection.execute(f"SELECT * FROM {table} ORDER BY 1")) == list(router.store._connection.execute(f"SELECT * FROM {table} ORDER BY 1"))
++            with scoped._immediate_transaction() as connection:
++                connection.execute("UPDATE assessment_admissions SET revoked=1")
++            with pytest.raises(NoRouteError, match="revoked"):
++                applicability.require_applicable(scoped, spec, request, baseline)
++            assert router.store._connection.execute("SELECT revoked FROM assessment_admissions").fetchone()[0] == 0
++        finally:
++            scoped.close()
+         for changed_spec, changed_baseline in (
+             (spec.model_copy(update={"config": {"callable": "builtins:len"}}), baseline),
+             (spec, baseline.model_copy(update={"config": {"callable": "builtins:len"}})),

@@ -1,0 +1,42 @@
+{
+  "classification": "Read-only derived exploratory AEEP whole-model-workflow observation; no acceptance/benefit",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "observation": "native-sol61-code-mode-two-task-handoff-ade3-result-288e.json",
+  "observation_sha256": "d6f77b48fcaddf3cbcf14e8b2a34119854fbc9de46a6df2dfc4a1b6db2f67326",
+  "raw_observed": {
+    "setup_seconds": 0.44449437502771616,
+    "workflow_seconds": 17.80378087493591,
+    "sample_count": 307,
+    "host_tree_peak_rss_bytes": 628211712,
+    "sampled_host_tree_memory_byte_seconds": 7651962203.06715,
+    "sampled_cpu_last_per_owned_identity_seconds": 3.61118818,
+    "task_schema_bytes": 15202,
+    "added_instruction_bytes": 168,
+    "token_usage": {
+      "inputTokens": 59694,
+      "cachedInputTokens": 29568,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 291,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 59985
+    },
+    "independent_checks": [
+      {
+        "index": 0,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+        "independent_grader_valid": true
+      },
+      {
+        "index": 1,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+        "independent_grader_valid": true
+      }
+    ]
+  },
+  "limits": "Sampled owned host/MCP/AEEP descendants only, not whole-machine/provider compute; RSS includes shared pages; controller absent; short lifetimes/network telemetry unknown. No raw-payload read/persistence.",
+  "next_missing_observation": "Reviewed ordinary-tool native baseline on identical fixtures/model/profile/shared inventory; pending root review/window."
+}

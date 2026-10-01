@@ -1,0 +1,117 @@
+{
+  "operation_id": "linux-lifecycle-mapped-image:conformance_probe_9536c8667b8c47e485fc3a6426da1b95",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "base_image": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+  "setup_complete": true,
+  "commands": [
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "image",
+        "inspect",
+        "aeep-sol61-successor-control:1592"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 3724,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_class": "none",
+      "known_build_steps": []
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "build",
+        "--network=none",
+        "--pull=false",
+        "--platform",
+        "linux/arm64",
+        "--progress=plain",
+        "--iidfile",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/linux-lifecycle-mapped-image-id",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/immutable-lifecycle-mapped"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 1589,
+      "stderr_sha256": "4b6705240023dc16f95c12f011b82b715261b9b4f05dd7b98f4b32b5cd96cb65",
+      "stderr_class": "none",
+      "known_build_steps": [
+        "load_definition",
+        "load_metadata",
+        "load_context",
+        "copy_requirements",
+        "copy_server",
+        "export_image"
+      ]
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "image",
+        "inspect",
+        "aeep-sol61-successor-control:1592",
+        "sha256:544167ec8b5fc61979eec43ec1f30a6b1a1f61ab69816ec1e42cb365e0fb57fa"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 7290,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_class": "none",
+      "known_build_steps": []
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "run",
+        "--name",
+        "aeep-linux-image-8b932688dc38c39f1fd988b3",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--user",
+        "65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--entrypoint",
+        "/usr/local/bin/python3",
+        "sha256:544167ec8b5fc61979eec43ec1f30a6b1a1f61ab69816ec1e42cb365e0fb57fa",
+        "-c",
+        "import hashlib,json,pathlib;paths=['/opt/codex/codex', '/opt/aeep/worker-config.json', '/opt/aeep/worker-launch', '/etc/codex/requirements.toml', '/opt/aeep/linux-mcp-server.py'];r={};\nfor p in paths:\n with pathlib.Path(p).open(\"rb\") as f:r[p]=hashlib.file_digest(f,\"sha256\").hexdigest()\nprint(json.dumps(r))"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 485,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_class": "none",
+      "known_build_steps": []
+    }
+  ],
+  "image": "sha256:544167ec8b5fc61979eec43ec1f30a6b1a1f61ab69816ec1e42cb365e0fb57fa",
+  "base_layer_prefix_matches": true,
+  "inherited_runtime_config_matches": true,
+  "inspection_container_name": "aeep-linux-image-8b932688dc38c39f1fd988b3",
+  "public_file_sha256": {
+    "/opt/codex/codex": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+    "/opt/aeep/worker-config.json": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+    "/opt/aeep/worker-launch": "07e4e47282fd4afa1e11d4405a7f1baeb5c4b3057ff866fef4b704b03262af8d",
+    "/etc/codex/requirements.toml": "c79a2de26c538d43e7d9c202e15b1155e8f8f05c237b068fbe7fa1419f28462c",
+    "/opt/aeep/linux-mcp-server.py": "7f8dd581e77c8dd63bef4c7b2b3ac45168b1d3721a7467bbdf0833a18f8c5aa3"
+  },
+  "inspection_cleanup_confirmed": true,
+  "inspection_cleanup_seconds": 0.03174933302216232,
+  "elapsed_seconds": 1.281030209036544,
+  "host_free_delta_bytes": 3985408,
+  "source_unchanged": true,
+  "canonical_record_digest": "809b4d8ecc23170f67063aa63ed07d9b0aa266ed6d01a3d2f253d89c4e6c785c"
+}

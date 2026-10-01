@@ -1,0 +1,29 @@
+import asyncio,json,hashlib
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentScopeAmendment,AssessmentAuthorization,AssessmentEnvironment,IncrementalExperiment,UtilityPolicy,ReviewedMapping,content_digest
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection
+p=Path('reports/v08')
+async def main():
+ r=Router.from_manifest('.aeep/live-review-v3/workbook-encoding-final.json')
+ try:
+  s=AssessmentService(r,Path('.aeep/live-review-v3/.aeep/assessments').resolve());repo=s.repository
+  q=json.loads((p/'workbook-encoding-final-materialization-review.json').read_text())['request'];b=json.loads((p/'qualification-encoding-final-profile-review-bundle.json').read_text());d=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][0]['pair_definition_digest']))
+  experiment=IncrementalExperiment(stage='qualification',exposure='required',environment=d.differential,utility=UtilityPolicy(benefit_dimensions=['wall_time_ms'],guardrail_dimensions=['wall_time_ms']))
+  plan=s.propose(subject_id=q['subject_digest'],family=q['recipe_digest'],candidate_id=d.treatment.id,baseline_id=d.control.id,authorization_id='onboarding',environment=AssessmentEnvironment.model_validate(repo.get('environment',q['environment_digest'])),seed=q['seed'],structure='workflow',case_set_id=q['plan_id'],experiment=experiment)
+  mapping=ReviewedMapping.model_validate(repo.get('mapping',plan.mapping_digest));r.managed_hosts.configure(mapping.subjects,principal_salt=r.store.host_principal_key,manifest_directory=Path('.aeep/live-review-v3').resolve())
+  preview=s.budget_preview(plan.plan_id);assert not plan.blocked_reasons and all(x['eligible'] for x in preview['adapter_eligibility'])
+  digests=set(plan.definition_digests)|{plan.subject_digest};definitions={digest:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(digest,)).fetchone()[0]) for digest in digests}
+  grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[plan.subject_digest],recipe_digests=[plan.recipe_digest],environment_digests=[plan.environment_digest],reviewed_digests=sorted(digests))
+  bundle={'authority':'2026-09-25 operator delegation within existing grant','purpose':'Spreadsheets workbook qualification with content-free failure codes; same acceptance rules, fresh fixed cases, required invocation and early screening rejection. Historical failures remain unchanged; no comparative admission.','calibration':'workbook-pilot-timing.json','plan':plan.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'budget_preview':preview,'execution_policy':'Use the existing grant with durable admission before each operation. Full worst-case reservations do not fit; stop with insufficient evidence on exhaustion. Preserve thresholds and all failed/uncertain attempts.'}
+  out=p/'workbook-encoding-final-execution-review.json'
+  with out.open('x') as f:f.write(json.dumps(bundle,indent=2)+'\n')
+  before=list(r.store._connection.execute("SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id='onboarding'").fetchone());assert before[-1]==0 and 3600-before[2]>208 and 300-before[1]>=1
+  repo.approve_bundle(amendment,definitions);repo.authorize(plan)
+  record={'approved_at':datetime.now(timezone.utc).isoformat(),'authority':bundle['authority'],'bundle_sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'plan_id':plan.plan_id,'scope_amendment_digest':content_digest(amendment),'budget_expanded':False,'usage_before':before,'execution_policy':bundle['execution_policy']}
+  with (p/'workbook-encoding-final-execution-approval.json').open('x') as f:f.write(json.dumps(record,indent=2)+'\n')
+  print(json.dumps(record,indent=2))
+ finally:await r.close()
+asyncio.run(main())

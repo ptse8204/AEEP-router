@@ -1,0 +1,472 @@
+{
+  "source_digest": "0ff682efba1def934c3ce16ebbc37f11047c7ac8a3c3e0678998964856d0b08c",
+  "kind": "offline synthetic CLI journey through installed native launcher; no model calls",
+  "native_binary_sha256": "sha256:4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "commands": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "define",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/scope.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.542189042083919,
+      "result": {
+        "scope_id": "cli-journey",
+        "digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": false
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "assess",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "review",
+        "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5210760000627488,
+      "result": {
+        "digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "activate",
+        "cli-journey"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6275850830134004,
+      "result": {
+        "activation_id": "task_1f353778373349b69fb13d6398dc326c",
+        "activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": true,
+        "scope_reviewed": true,
+        "overlay": "applied",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/.aeep/task-profiles/task_1f353778373349b69fb13d6398dc326c.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 0,
+        "attempts_remaining": 2,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "tool-call",
+        "aeep_csv",
+        "--profile",
+        "task",
+        "--task-activation",
+        "task_1f353778373349b69fb13d6398dc326c",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "-a",
+        "{\"text\": \"name\\nAda\\n\", \"delimiter\": \",\"}"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7085507079027593,
+      "result": {
+        "schema_version": "aeep.task-outcome.v1",
+        "ok": true,
+        "status": "success",
+        "output": {
+          "records": [
+            {
+              "name": "Ada"
+            }
+          ]
+        },
+        "decision": {
+          "decision_id": "dec_c47e1f09019142179f962d8edea46975",
+          "action_id": "act_88f137abf2654d37b380504b92562ac0",
+          "capability": "assessment.csv@1",
+          "selected": "reference.csv",
+          "disposition": "BYPASS_ROUTER",
+          "bypass_reason": "only_one_feasible_route",
+          "reason": "only one feasible route",
+          "alternatives": [],
+          "rejected": 0
+        },
+        "summary": "Completed; task verification is incomplete.",
+        "approval_ceiling": "read",
+        "task_scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "task_activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "operating_lifecycle": "session-scoped",
+        "changes_verified": null,
+        "permission_scope": "operator ceiling; backend scope requires separate evidence",
+        "receipts": [
+          {
+            "receipt_id": "rcpt_c39206f5aa084062919a08f67601185c",
+            "executor_id": "reference.csv",
+            "status": "success",
+            "approval_id": "approval_1ab95c56c0594d22bb0eb618d845bd7e",
+            "schema_valid": true,
+            "task_valid": true,
+            "checks": [
+              {
+                "kind": "schema",
+                "valid": true,
+                "quality_score": 1.0,
+                "detail": "",
+                "trust": "observed"
+              }
+            ],
+            "recorded_resources": {
+              "monetary_usd": 0.0,
+              "latency_ms": 162.68158401362598,
+              "cpu_ms": 49.370416,
+              "memory_mb_seconds": 1.624947749893181,
+              "peak_memory_mb": 46.421875,
+              "gpu_ms": 0.0,
+              "network_bytes": 0,
+              "context_tokens": 7,
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 0,
+              "reasoning_output_tokens": 0,
+              "subscription_units": 0.0
+            },
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [],
+              "model_usage": [],
+              "tool_footprint": null
+            },
+            "enforcement_backend_digest": "a10d7dfe18b08ffb26507969a1197ba616bd21e443af582afdd9dba6d9f62cd7"
+          }
+        ],
+        "verification_limits": [
+          "Non-schema task verification is incomplete or unavailable.",
+          "Preservation, isolation and comparative savings are not established by execution success."
+        ],
+        "recovery_state": "none"
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "control",
+        "pause",
+        "task_1f353778373349b69fb13d6398dc326c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5113838340621442,
+      "result": {
+        "activation_id": "task_1f353778373349b69fb13d6398dc326c",
+        "activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "applied",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/.aeep/task-profiles/task_1f353778373349b69fb13d6398dc326c.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 1,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "tool-call",
+        "aeep_csv",
+        "--profile",
+        "task",
+        "--task-activation",
+        "task_1f353778373349b69fb13d6398dc326c",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "-a",
+        "{\"text\": \"name\\nAda\\n\", \"delimiter\": \",\"}"
+      ],
+      "exit_code": 2,
+      "seconds": 0.516425957903266,
+      "result": {
+        "ok": false,
+        "error": "task activation is paused or incomplete",
+        "error_type": "ConfigurationError"
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "control",
+        "resume",
+        "task_1f353778373349b69fb13d6398dc326c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6044918750412762,
+      "result": {
+        "activation_id": "task_1f353778373349b69fb13d6398dc326c",
+        "activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": true,
+        "scope_reviewed": true,
+        "overlay": "applied",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/.aeep/task-profiles/task_1f353778373349b69fb13d6398dc326c.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 1,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "tool-call",
+        "aeep_csv",
+        "--profile",
+        "task",
+        "--task-activation",
+        "task_1f353778373349b69fb13d6398dc326c",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "-a",
+        "{\"text\": \"name\\nAda\\n\", \"delimiter\": \",\"}"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6857602498494089,
+      "result": {
+        "schema_version": "aeep.task-outcome.v1",
+        "ok": true,
+        "status": "success",
+        "output": {
+          "records": [
+            {
+              "name": "Ada"
+            }
+          ]
+        },
+        "decision": {
+          "decision_id": "dec_1b2df83be4af4efc8adf2f4a43d6af6f",
+          "action_id": "act_7a660fdd4896490196295d1b1358e77f",
+          "capability": "assessment.csv@1",
+          "selected": "reference.csv",
+          "disposition": "BYPASS_ROUTER",
+          "bypass_reason": "only_one_feasible_route",
+          "reason": "only one feasible route",
+          "alternatives": [],
+          "rejected": 0
+        },
+        "summary": "Completed; task verification is incomplete.",
+        "approval_ceiling": "read",
+        "task_scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "task_activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "operating_lifecycle": "session-scoped",
+        "changes_verified": null,
+        "permission_scope": "operator ceiling; backend scope requires separate evidence",
+        "receipts": [
+          {
+            "receipt_id": "rcpt_a5087f61dfb64800a29862d6c6488530",
+            "executor_id": "reference.csv",
+            "status": "success",
+            "approval_id": "approval_e1c78825c8164027be2e3fe1bb75e5a2",
+            "schema_valid": true,
+            "task_valid": true,
+            "checks": [
+              {
+                "kind": "schema",
+                "valid": true,
+                "quality_score": 1.0,
+                "detail": "",
+                "trust": "observed"
+              }
+            ],
+            "recorded_resources": {
+              "monetary_usd": 0.0,
+              "latency_ms": 146.9860419165343,
+              "cpu_ms": 34.765749,
+              "memory_mb_seconds": 1.3477873946649197,
+              "peak_memory_mb": 48.109375,
+              "gpu_ms": 0.0,
+              "network_bytes": 0,
+              "context_tokens": 7,
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 0,
+              "reasoning_output_tokens": 0,
+              "subscription_units": 0.0
+            },
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [],
+              "model_usage": [],
+              "tool_footprint": null
+            },
+            "enforcement_backend_digest": "a10d7dfe18b08ffb26507969a1197ba616bd21e443af582afdd9dba6d9f62cd7"
+          }
+        ],
+        "verification_limits": [
+          "Non-schema task verification is incomplete or unavailable.",
+          "Preservation, isolation and comparative savings are not established by execution success."
+        ],
+        "recovery_state": "none"
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "tool-call",
+        "aeep_csv",
+        "--profile",
+        "task",
+        "--task-activation",
+        "task_1f353778373349b69fb13d6398dc326c",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "-a",
+        "{\"text\": \"name\\nAda\\n\", \"delimiter\": \",\"}"
+      ],
+      "exit_code": 4,
+      "seconds": 0.5395286660641432,
+      "result": {
+        "error": "task scope allowance exhausted or an earlier attempt needs completion/recovery",
+        "error_type": "ConfigurationError"
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "control",
+        "uninstall",
+        "task_1f353778373349b69fb13d6398dc326c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5161217080894858,
+      "result": {
+        "activation_id": "task_1f353778373349b69fb13d6398dc326c",
+        "activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/.aeep/task-profiles/task_1f353778373349b69fb13d6398dc326c.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 2,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "task",
+        "-m",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/aeep.json",
+        "control",
+        "inspect",
+        "task_1f353778373349b69fb13d6398dc326c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5083256661891937,
+      "result": {
+        "activation_id": "task_1f353778373349b69fb13d6398dc326c",
+        "activation_digest": "d95f80db3f6218baecd5662d3645147f19557118fffc20e3b8afa764807998c4",
+        "scope_digest": "933d3c818edcb4772d2aec17869bbe6520a9d91303311380d8ad8e2fa0661dc5",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project/.aeep/task-profiles/task_1f353778373349b69fb13d6398dc326c.json"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 2,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "stderr": ""
+    }
+  ],
+  "retained_project": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/cli-project",
+  "verified_successes": 2,
+  "expected_rejections": 2,
+  "receipt_ids": [
+    "rcpt_c39206f5aa084062919a08f67601185c",
+    "rcpt_a5087f61dfb64800a29862d6c6488530"
+  ],
+  "human_usability_test": false
+}

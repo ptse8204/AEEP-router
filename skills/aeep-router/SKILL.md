@@ -71,7 +71,7 @@ After an official throttle or reset signal:
 python -m aeep quota observe RESOURCE_ID tight --source rate_limit --compact
 ```
 
-Report failures and timeouts too; otherwise future routing remains biased by static priors. Report only the selected delegated executor and submit one final outcome for that decision/executor pair. Use `ActionProfiler` rather than fabricating a delegate report for unrelated work.
+Report failures and timeouts so future routing does not remain biased by static priors. Submit one final outcome for the selected decision/executor pair only. Use `ActionProfiler` for unrelated work; never fabricate a delegate report for it.
 
 9. Use route calibration only after explicit operator confirmation because it executes several alternatives and may incur charges or disclose input to multiple providers:
 
@@ -87,7 +87,7 @@ Never benchmark non-idempotent, destructive, financial, or sensitive actions aut
 ## Output handling
 
 - Commands emit JSON on stdout.
-- Exit `3` means no feasible route; read rejection reasons rather than bypassing constraints.
+- Exit `3` means no feasible route. Read the rejection reasons and preserve the constraints.
 - Exit `4` means attempts completed but no valid success.
 - Do not scrape human prose or infer approval from a low score.
 - Do not treat estimated tokens as exact provider billing usage.

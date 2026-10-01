@@ -1,0 +1,71 @@
+{
+  "status": "PASS-inert-runner-preparation-only",
+  "scope": "read-only inert operator runner review; no imports, runtime, authority mutation or model calls",
+  "driver_sha256": "2ad8e180d7766670288e7e8b3e92f91d25d7580220496d2337bc0564f3722271",
+  "findings": [
+    {
+      "id": "one-request-replay",
+      "detail": "Caller can change operation_id to reserve the same one-turn request again. Bind deterministic operation identity to request content before existing reserve."
+    },
+    {
+      "id": "cleanup-evidence",
+      "detail": "Router.close return alone cannot establish owned worker cleanup: adapter.close ignores cleanup bool. Retain actual cleanup result using existing owned handle."
+    },
+    {
+      "id": "partial-terminal-evidence",
+      "detail": "Only success outcome assigns receipt and links host evidence. Failure/cancellation needs safe canonical scoped attempt/receipt evidence retained with unknown accounting distinguished."
+    },
+    {
+      "id": "loaded-source",
+      "detail": "Bind source_root to actual imported package/runtime dependencies rather than only hashing a caller-supplied path."
+    }
+  ],
+  "limits": [
+    "No manufactured full conformance from scripted callbacks",
+    "No fresh request/model execution before reset and confirmed capacity",
+    "Reviewed request is separately finite and may not be widened or retried"
+  ],
+  "reviewed_successor_sha256": "44725cbf2e14867a4df6c6f1d7e56041efa5d8919642f3c6393203cc58e48582",
+  "resolved_findings": [
+    {
+      "id": "one-request-replay",
+      "resolution": "Deterministic composed:<request.plan_id> identity rejected on reuse by existing reserve."
+    },
+    {
+      "id": "cleanup-evidence",
+      "resolution": "Exact owned container absence and exited transport/no callback tasks checked under shared cleanup deadline."
+    },
+    {
+      "id": "partial-terminal-evidence",
+      "resolution": "Scoped exact-action attempt/receipt/journal snapshots retained before owned store closes, including failures."
+    },
+    {
+      "id": "loaded-source",
+      "resolution": "Caller source_root must match loaded aeep package root and frozen digest."
+    },
+    {
+      "id": "success-before-cleanup",
+      "resolution": "Positive BoundaryProbe publication delayed until actual cleanup and finish_operation succeed."
+    },
+    {
+      "id": "operator-factory-source",
+      "resolution": "Actual registered factory pinned before clone; actual adapter dynamic factory pinned before startup/per-dispatch. Bounded ordinary function/bound-method closure/default/keyword producer traversal; opaque callable classes rejected."
+    }
+  ],
+  "remaining_findings": [],
+  "offline_owner_checks": {
+    "tests": 11,
+    "elapsed_seconds": 0.021,
+    "log": "native-composed-runner-offline-factory-defaults-final.log",
+    "log_sha256": "7ecde787e04f8ba947916daf1075d9d0634ede4b93133daea18de938709eacc4",
+    "fixture_sha256": "207c06a7c691deb42441b1c6cd9cbc9ee74e917b3753db29ce224efa3cebcdec",
+    "reviewer_reran": false
+  },
+  "limitations": [
+    "No actual worker/native/model launch by reviewer or this prepared runner.",
+    "Offline tests use synthetic repository/transport plumbing; they do not establish actual conformance or qualification.",
+    "Fresh reviewed exact request, worker/profile/scope/source dependencies and confirmed capacity after reset remain required.",
+    "One READ callback observation does not complete the fifteen-probe composed conformance gate.",
+    "Function file pins do not constitute transitive arbitrary Python behavior proof; use a fresh process and exact reviewed operator composition/import path."
+  ]
+}

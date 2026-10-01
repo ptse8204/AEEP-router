@@ -1,0 +1,145 @@
+{
+  "schema_version": "report.original-three-way.definition.v1",
+  "recorded_at": "2026-09-30T10:40:11.317160+00:00",
+  "authority": "September25/27 routine exact assessment-definition and finite-amendment delegation; parent requested inert original3way preparation",
+  "execution_authorized": false,
+  "purpose": "Original ExperimentB, not renamed historical four-arm candidate study",
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "arms": [
+    {
+      "route_id": "normal_host",
+      "role": "Capable shared environment, ordinary independent libraries/shell/helpers; no external discovery intervention",
+      "image": null,
+      "executor_fingerprint": null,
+      "conformance_digest": null
+    },
+    {
+      "route_id": "discovery_host",
+      "role": "Same environment plus pinned external discovery snapshot and candidate catalog/artifact access; optional candidate use",
+      "image": null,
+      "executor_fingerprint": null,
+      "conformance_digest": null
+    },
+    {
+      "route_id": "discovery_aeep_host",
+      "role": "Equivalent discovery snapshot, candidate aliases/artifacts/access and user constraints plus frozen AEEP evidence/admission/profile decisions; optional use",
+      "image": null,
+      "executor_fingerprint": null,
+      "conformance_digest": null
+    }
+  ],
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "common_task_contract": {
+    "family": "workbook",
+    "capability": "assessment.workbook@1",
+    "generator": "contained_json:1",
+    "grader": "contained_json:1",
+    "extractor": "workbook_structure:1",
+    "variations": [
+      "mixed_types_dates",
+      "missing_invalid",
+      "duplicates",
+      "multiple_sheets",
+      "formulas",
+      "structure_formatting",
+      "unicode_sparse"
+    ],
+    "exclusions": [
+      "macros",
+      "external links",
+      "connected Excel",
+      "formulas other than relative products and SUM ranges",
+      "workbooks larger than the admitted structural bounds",
+      "fractional or negative quantities/prices",
+      "input formulas other than the reviewed stale constant formula",
+      "unobserved shared-string input encodings"
+    ],
+    "implementation_pins": {
+      "integrations/assessment-runtime/workbook_program.py": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18",
+      "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f",
+      "src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179"
+    },
+    "historical_definition_reference": "workbook-value-final-materialization-review.json",
+    "fresh_seeds": {
+      "qualification": 202610021,
+      "three_way_value": 202610022
+    },
+    "reuse_historical_holdout_inputs": false,
+    "case_counts": {
+      "screening": 8,
+      "training": 28,
+      "holdout": 105
+    },
+    "qualification": "Separate candidate-only required-use141-case campaign on current exact backend/model; never supplied by optional3way or oldmodel records",
+    "truth_location": "Existing protected coordinator/grader outside all trial workers",
+    "value_cases_materialized": false
+  },
+  "utility": {
+    "benefit_dimensions": [
+      "wall_time_ms",
+      "task_success"
+    ],
+    "guardrail_dimensions": [
+      "wall_time_ms"
+    ],
+    "minimum_resource_benefit": 0.1,
+    "minimum_success_gain": 0.05,
+    "maximum_resource_regression": 0.1,
+    "family_error_rate": 0.05
+  },
+  "qualification_thresholds": {
+    "minimum_distinct_holdouts": 100,
+    "every_variation_required": true,
+    "maximum_correctness_failures": 0,
+    "minimum_fully_measured_pairs_per_resource": 20
+  },
+  "budgets": {
+    "normal_task_seconds": 203,
+    "larger_task_seconds": 406,
+    "basis": "Prior workbook frozen normal deadline203 and twice-deadline406; proposed matched same-effort resource conditions, not inherited timing qualification for successor model",
+    "all_three_arms_same_budget_per_condition": true,
+    "conditions_separate": true,
+    "finite_grant_amendment_digest": null,
+    "no_paid_api": true
+  },
+  "scheduler": {
+    "schema": "BenchmarkSuite0.3",
+    "routes": 3,
+    "baseline_route_id": "discovery_host",
+    "repetitions": 1,
+    "fresh_worker": true,
+    "fresh_conversation": true,
+    "private_case_workspace": true,
+    "order": "Seeded shuffle of all trials with paired_order=false; current paired_order=true only reverses order and would keep middle arm fixed in a three-route suite",
+    "cache": "Local state reset each task; provider-cache inability retained as unknown; no invented cold-cache assurance"
+  },
+  "comparisons": [
+    "discovery_aeep_host vs discovery_host (AEEP contribution)",
+    "discovery_host vs normal_host (discovery contribution)",
+    "discovery_aeep_host vs normal_host (combined intervention)"
+  ],
+  "multiple_comparisons": "Existing family_error_rate0.05, grouped case/template estimates; guard all declared dimensions and all3comparisons separately per budget. Missing dimensions remain unknown.",
+  "shared_costs": "Count shared workload/libraries and runtime startup in each arm; discovery/setup/grading and prior assessment costs remain charged, no duplicate ledger debit",
+  "schema_findings": {
+    "benchmark_suite": "Can hold3 genuine routes without schema changes",
+    "assessment_service": "IncrementalExperiment value requires2challengers, yielding4arms; cannot compile original3way. Managed reference must not be mislabelled third experimental arm; reference/oracle role remains independent.",
+    "runner_authority": "Before running rawBenchmarkRunner, exact reviewed driver must attach existing repository authorization/reservation callbacks and all3profile enforcement; never bypass grant with bare runner."
+  },
+  "pending_bindings": [
+    "Three actual separately conformed worker profiles, model-list support and effective permissions",
+    "Pinned discovery snapshot/normalized candidate aliases and equivalent last2access inventories",
+    "Current approved evidence/admission/profile policy digest and backend-applicable candidate qualification",
+    "Fresh materialized141-case set and exact finite grant amendment",
+    "Existing-seam3route runner callbacks/accounting review"
+  ],
+  "successor_pair_image_inventory": {
+    "control": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+    "treatment": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+    "conformed": false,
+    "three_way_binding": false
+  },
+  "next_step": "After successor pair conformance, create and independently conform the discovery+AEEP third profile with equivalent treatment access, then bind fingerprints/observations into a new exact definition. Materialize fresh workbook cases via existing contained generator; compile3routes with BenchmarkSuite and exact reviewed callbacks. This artifact starts no worker or turn.",
+  "qualified": false,
+  "admitted": false
+}

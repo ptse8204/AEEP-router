@@ -1,0 +1,24 @@
+"""Run already reviewed plans once, sequentially, through the existing CLI."""
+import json,os,subprocess,sys,sqlite3
+from datetime import datetime,timezone
+from pathlib import Path
+from aeep.assessment.verification import verification_source_digest
+root=Path('/Users/edwintse/Documents/aeep-agent-router');os.chdir(root)
+p=root/'reports/v08';source='a8e460f1fb5a19a0bf93dff7f3f7987708d19eb3c7a59a0ac93b7f0b74958fde'
+for family in ('workbook','csv','text','search'):
+ assert verification_source_digest(root)==source
+ plan=json.loads((p/f'{family}-capability-final-execution-approval.json').read_text())['plan_id']
+ with sqlite3.connect('file:.aeep/live-review-v3/aeep.sqlite3?mode=ro',uri=True) as connection:
+  assert connection.execute('SELECT COUNT(*) FROM assessment_jobs WHERE plan_id=?',(plan,)).fetchone()[0]==0,'Never replay a started plan'
+ command=[sys.executable,'-m','aeep','assess','--manifest',f'.aeep/live-review-v3/{family}-capability-final.json','run',plan]
+ print(f'{family}: starting reviewed plan {plan}',flush=True)
+ with (p/f'{family}-capability-final-live-report.json').open('x') as out,(p/f'{family}-capability-final-live-stderr.txt').open('x') as err:
+  result=subprocess.run(command,stdout=out,stderr=err,env={**os.environ,'PYTHONPATH':'src'})
+ record={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':source,'plan_id':plan,'command':command,'exit_code':result.returncode}
+ with (p/f'{family}-capability-final-command-result.json').open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+ print(f'{family}: command exited {result.returncode}',flush=True)
+ if result.returncode:break
+ report=json.loads((p/f'{family}-capability-final-live-report.json').read_text())
+ print(json.dumps({k:report.get(k) for k in ('report_id','outcome','qualification_passed','correctness_failures','execution_failures','distinct_holdout_cases')}),flush=True)
+ if report.get('execution_failures'):
+  print('Review environment failure before admitting further family work',flush=True);break

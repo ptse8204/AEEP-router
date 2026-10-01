@@ -1,0 +1,46 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+____ test_search_workflow_assessment_binds_cases_and_preserves_constraints _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-575/test_search_workflow_assessmen0')
+
+    async def test_search_workflow_assessment_binds_cases_and_preserves_constraints(tmp_path):
+        from aeep.assessment.adapters import WorkflowAdapter
+        from aeep.qualification import behavior_fingerprint
+        from aeep.workflow import WorkflowRequest
+    
+        recipe = shipped_recipe("search")
+        first = python_spec("input", "test_v08_planning:search_input", capability="search.input@1")
+        second = python_spec("extract", "aeep.assessment.recipes:reference_search", capability="search.extract@1")
+        workflow = WorkflowRequest.model_validate({
+            "workflow_id": "reviewed-search", "input": {"root": "", "query": "", "path": ""},
+            "steps": [
+                {"step_id": "input", "action": {"capability": first.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [first.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key} for key in ("root", "query", "path")]},
+                {"step_id": "extract", "depends_on": ["input"], "action": {"capability": second.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [second.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key, "source_step_id": "input"} for key in ("root", "query", "path")]},
+            ], "outputs": [{"name": "result", "step_id": "extract", "path": ""}],
+        })
+        candidate = python_spec("workflow", "aeep.assessment.adapters:workflow_target", capability=recipe.capability)
+        adapter = WorkflowAdapter(workflow=workflow, case_input_bindings={"/" + key: "/" + key for key in ("root", "query", "path")}, executor_fingerprints={spec.id: behavior_fingerprint(spec) for spec in (first, second)})
+        candidate.config["assessment_workflow"] = adapter.model_dump(mode="json")
+        candidate.config["assessment_adapter"] = {"output_pointer": "/result"}
+        baseline = python_spec("baseline", "test_v08_planning:slow_search", capability=recipe.capability)
+        router = Router(manifest_with(candidate, baseline, first, second))
+        service = AssessmentService(router, tmp_path / "assessment")
+        plugin = tmp_path / "plugin.txt"
+        plugin.write_text("reviewed workflow fixture")
+        subject = service.inspect_local(plugin)
+        environment = AssessmentEnvironment(environment_id="local", kind="trusted_local", identity={"approved_root": str(tmp_path)})
+        plan = service.propose(subject_id=subject.subject_id, family="search", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id="grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="grant", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=20000), expires_at=utc_now() + timedelta(hours=1)))
+        try:
+            report = await service.run(service.enqueue(plan.plan_id))
+>           assert report.qualification_passed, report.explanations
+E           AssertionError: ['Correctness counts distinct held-out cases; repetitions measure variability.', 'Latency includes routing and grading...resh. Conditions are never pooled.', 'Benefits apply to the complete reviewed workflow, not to the plugin alone.', ...]
+E           assert False
+E            +  where False = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='workflow', cand...ked_or_budget_exhausted'], created_at=datetime.datetime(2026, 9, 29, 17, 40, 53, 734629, tzinfo=datetime.timezone.utc)).qualification_passed
+
+tests/test_v08_planning.py:212: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_planning.py::test_search_workflow_assessment_binds_cases_and_preserves_constraints

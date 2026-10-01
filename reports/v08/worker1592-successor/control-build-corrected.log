@@ -1,0 +1,47 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 525B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/aeep-reusable-reviewed-base-control@sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953
+#2 DONE 0.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 ...
+
+#5 [control 1/4] FROM docker.io/library/aeep-reusable-reviewed-base-control@sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953
+#5 resolve docker.io/library/aeep-reusable-reviewed-base-control@sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953 0.5s done
+#5 CACHED
+
+#4 [internal] load build context
+#4 ...
+
+#6 [control 2/4] RUN ["rm", "-rf", "/opt/codex"]
+#6 DONE 0.4s
+
+#4 [internal] load build context
+#4 transferring context: 400.35MB 2.7s done
+#4 DONE 2.8s
+
+#7 [control 3/4] COPY runtime/ /opt/codex/
+#7 DONE 1.7s
+
+#8 [control 4/4] COPY LICENSE /opt/codex/LICENSE
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 6.5s done
+#9 exporting manifest sha256:519ebd76228fd084e2c5c6cb7cfac38b62e50aed1c22ebe0d6582ac63fb52ce9 done
+#9 exporting config sha256:06561833dd7d2d2bbc4b6ef3522feb9506b2a0e84355dd4ecbe60d7f878c4804 done
+#9 exporting attestation manifest sha256:49d51b9366c3e73ab090a717826d65103495ab884e3a5db14f0d80541dbd45ee done
+#9 exporting manifest list sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d done
+#9 naming to docker.io/library/aeep-sol61-successor-control:1592 done
+#9 unpacking to docker.io/library/aeep-sol61-successor-control:1592
+#9 unpacking to docker.io/library/aeep-sol61-successor-control:1592 1.3s done
+#9 DONE 7.9s

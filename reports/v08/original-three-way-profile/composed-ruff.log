@@ -1,0 +1,121 @@
+I001 [*] Import block is un-sorted or un-formatted
+   --> src/aeep/hosts/codex_pair_inspection.py:688:5
+    |
+686 |       reservation. This cannot establish a native AppServer-issued tool call.
+687 |       """
+688 | /     from .codex_dynamic_tools import DynamicToolSession
+689 | |     from ..models import SideEffect
+    | |___________________________________^
+690 |
+691 |       if (not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool)
+    |
+help: Organize imports
+    |
+687 |     """
+688 +     from ..models import SideEffect
+689 |     from .codex_dynamic_tools import DynamicToolSession
+    -     from ..models import SideEffect
+690 |
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> src/aeep/hosts/codex_pair_inspection.py:865:5
+    |
+863 |       identity = repository.get('codex_dynamic_tools', record.callback_binding_digest)['identity']
+864 |       identity_digest = record.identity_digest
+865 | /     from ..models import ExecutionReceipt
+866 | |     from ..economic.prepared import executor_fingerprint
+    | |________________________________________________________^
+867 |       if probe.host_receipt_digest is None:
+868 |           raise ConfigurationError('actual callback host receipt is missing')
+    |
+help: Organize imports
+    |
+864 |     identity_digest = record.identity_digest
+865 +     from ..economic.prepared import executor_fingerprint
+866 |     from ..models import ExecutionReceipt
+    -     from ..economic.prepared import executor_fingerprint
+867 |     if probe.host_receipt_digest is None:
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests/test_codex_composed_inspection.py:92:5
+    |
+ 90 |   async def test_canonical_scripted_callback_executes_protected_csv_native_guard(tmp_path, case):
+ 91 |       """Actual native child + scripted host peer; never full native-host conformance."""
+ 92 | /     import errno
+ 93 | |     import json
+ 94 | |     import sys
+ 95 | |     import time
+ 96 | |     from datetime import timedelta
+ 97 | |     from pathlib import Path
+ 98 | |     from types import SimpleNamespace
+ 99 | |
+100 | |     from test_v08_assessment import setup_assessment
+101 | |     from test_v08_native_process import BINARY, boundary
+102 | |
+103 | |     from aeep.assessment.fixed_helper import AssessmentCallbackAuthority, FixedHelperService
+104 | |     from aeep.assessment.identity import runtime_dependencies
+105 | |     from aeep.assessment.models import AssessmentLimits, ConformanceProbeRequest, content_digest
+106 | |     from aeep.assessment.onboarding import reference_spec
+107 | |     from aeep.assessment.repository import AssessmentRepository
+108 | |     from aeep.attempts import ExecutionAttempt
+109 | |     from aeep.economic.prepared import executor_fingerprint
+110 | |     from aeep.hosts.codex_app_server import CodexAppServerTransport
+111 | |     from aeep.hosts.codex_invocation import contract_digest
+112 | |     from aeep.hosts.codex_pair_inspection import inspect_scripted_callback, protected_callback_evidence
+113 | |     from aeep.hosts.codex_sandbox import native_backend_digest
+114 | |     from aeep.models import ActionConstraints, ExecutorKind, Manifest, PolicyConfig, SideEffect, StrictModel, TaskScope, utc_now
+115 | |     from aeep.router import Router
+    | |__________________________________^
+116 |
+117 |       if sys.platform != 'darwin' or not BINARY.exists():
+    |
+help: Organize imports
+    |
+111 |     from aeep.hosts.codex_invocation import contract_digest
+    -     from aeep.hosts.codex_pair_inspection import inspect_scripted_callback, protected_callback_evidence
+112 +     from aeep.hosts.codex_pair_inspection import (
+113 +         inspect_scripted_callback,
+114 +         protected_callback_evidence,
+115 +     )
+116 |     from aeep.hosts.codex_sandbox import native_backend_digest
+    -     from aeep.models import ActionConstraints, ExecutorKind, Manifest, PolicyConfig, SideEffect, StrictModel, TaskScope, utc_now
+117 +     from aeep.models import (
+118 +         ActionConstraints,
+119 +         ExecutorKind,
+120 +         Manifest,
+121 +         PolicyConfig,
+122 +         SideEffect,
+123 +         StrictModel,
+124 +         TaskScope,
+125 +         utc_now,
+126 +     )
+127 |     from aeep.router import Router
+    |
+
+ASYNC240 Async functions should not use pathlib.Path methods, use trio.Path or anyio.path
+   --> tests/test_codex_composed_inspection.py:139:33
+    |
+137 |     spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
+138 |         'side_effect': ceiling, 'idempotent': case == 'guard',
+139 |         'config': {'argv': [str(Path(sys.executable).resolve()), '-I', '-c', program],
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+140 |             'argv_literal': True, 'output': {'type': 'json'}, 'timeout_seconds': 5,
+141 |             'native_sandbox': native.model_dump(mode='json')}})
+    |
+
+ASYNC110 Use `asyncio.Event` instead of awaiting `asyncio.sleep` in a `while` loop
+   --> tests/test_codex_composed_inspection.py:211:17
+    |
+209 |                   recheck=holder['authority'].check, timeout_seconds=10))
+210 |               async with asyncio.timeout(5):
+211 | /                 while not marker.exists():
+212 | |                     await asyncio.sleep(.02)
+    | |____________________________________________^
+213 |               task.cancel()
+214 |               with pytest.raises(asyncio.CancelledError):
+    |
+
+Found 5 errors.
+[*] 3 fixable with the `--fix` option.

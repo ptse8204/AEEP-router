@@ -1,0 +1,79 @@
+{
+  "recorded_at": "2026-09-30T00:50:48.837914+00:00",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-compileall-288e.log"
+    },
+    {
+      "name": "schema",
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-schema-288e.log"
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-ruff-288e.log"
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-mypy-288e.log"
+    },
+    {
+      "name": "policy",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-policy-288e.log"
+    },
+    {
+      "name": "critical_coverage",
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-final-coverage-288e.json"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-critical_coverage-288e.log"
+    },
+    {
+      "name": "assessment_coverage",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-final-coverage-288e.json"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-assessment_coverage-288e.log"
+    }
+  ],
+  "source_unchanged": true
+}

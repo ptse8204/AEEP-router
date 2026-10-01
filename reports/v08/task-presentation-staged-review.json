@@ -1,0 +1,77 @@
+{
+  "status": "staged focused/static checks pass; independent review/apply pending; shared source unchanged",
+  "source_baseline": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "authority": "standing September25/27 finite exact test-definition amendment; parent source-stage instruction",
+  "files": {
+    ".aeep/native-task-presentation-stage/src/aeep/task_cli.py": "1dc7aa45f13095ab2bd865fac3befed39350b02fa2f40da2a2d0c056b9e5bc24",
+    ".aeep/native-task-presentation-stage/src/aeep/cli.py": "87c4ae99b4201b89e6ae549423a1bc603023c9bcbb5d84ddc70ba4edde4578e0",
+    ".aeep/native-task-presentation-stage/tests/test_v08_task_presentation.py": "c3719ac744737e6dc27db328f7b6932e45da8e290f907716ea099c0de0995509"
+  },
+  "preimages": {
+    "src/aeep/task_cli.py": "1a59ca1fe4d235d117fca0cadb729a74dd46b583fb9099fb0b44cedb72a7a3ba",
+    "src/aeep/cli.py": "7f98312493fbd489efb7dcc8e0c3150649ef79f5dc3d0e91c900306b7efa9842"
+  },
+  "patch_sha256": "f44f47fd4afcbb62b06d5c0712859254b51fc4c197158871c9defe0306ccf671",
+  "changes": [
+    "One deterministic text formatter of existing TaskExecutionOutcome, reusing production summary and allowlisted checks/decision; never prints output/action/metadata.",
+    "Existing tool-call gets opt-in --text for task profile only; other profiles reject before dispatch. Existing JSON defaults unchanged.",
+    "Existing task control gets opt-in --text; mutations/authority unchanged.",
+    "Add task result receipt_id inspection, JSON default/text opt-in; loads actual decision+receipt+recordedscope, production task_outcome; historical output/runtimeapproval explicitly unavailable, no dispatch.",
+    "Control commands shown only with supplied current validated activation, matching receipt scope and existing manifest; lifecycle operator-only. History permissions not inferred from currentactivation."
+  ],
+  "test_definition": [
+    "Payload omission and unknown defaults, route/reason/limits preserved",
+    "Recovery requires reconcile before retry",
+    "Validated activation scope mismatch rejects; missing manifest omitscommands; spaces shellquoted",
+    "Non-task --text rejection before Router/tool dispatch",
+    "Actual disposable canonical decisions/receipts/scope/paused activation; CLI JSON and text result preserve receipt identity, payload absence and unchanged conflicting overlay",
+    "Invalid activation still shows summary; paused/conflict inspection text and usable operator hints",
+    "Actual CLI rejected error preserves original exit/code/type/ceiling and omits message payload; JSON default unchanged"
+  ],
+  "limits": [
+    "Human comprehension remains unmeasured; standalone inspection does not demonstrate original in-agent summary comprehension.",
+    "Completed journey original disposable manifest unavailable, so hands-oncontrols cannot be offered.",
+    "Current MCPJSON and task outcome model unchanged; tasksummary already auto-delivered retains its existing workbook-specific logic.",
+    "Receipt-based reconstructed view does not reproduce original transient output or actual historical runtime approval ceiling."
+  ],
+  "runtime": "six disposable local tests and narrow Ruff/mypy only; no native/model/capacity/task execution",
+  "initial_review_sha256": "39d7e99c67e7fe6c85233771cdc2e15b70a24c0800f3d6d0b18cee0fc342b2a1",
+  "corrections": [
+    "Command hints use existing read-only inspect canonical manifest/scope binding, not dispatch eligibility; paused/conflicted activation keeps inspect/pause/undo hints. Invalid/mismatched binding gives explicit unavailable warning while receipt summary remains.",
+    "tool-call --text recognizes actual task-outcome envelope; original rejected errors preserve exit4/type/requiredlevel/code with message digest/bytes, withholding untrusted message and payload. JSON behavior unchanged.",
+    "Unused import removed, import order repaired, inspect recovery list narrowed."
+  ],
+  "checks": {
+    "focused": {
+      "command": "PYTHONPATH=src python3 -m pytest -q tests/test_v08_task_presentation.py",
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-task-presentation-stage",
+      "passed": 6,
+      "exit_code": 0,
+      "log": "reports/v08/task-presentation-focused-final.log",
+      "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24"
+    },
+    "ruff": {
+      "command": "python3 -m ruff check src/aeep/task_cli.py src/aeep/cli.py tests/test_v08_task_presentation.py",
+      "exit_code": 0
+    },
+    "mypy": {
+      "command": "python3 -m mypy src/aeep/task_cli.py src/aeep/cli.py",
+      "exit_code": 0,
+      "files_checked": 2
+    }
+  },
+  "preserved_failures": [
+    {
+      "phase": "initial pytest collection",
+      "error": "root pyproject pythonpath selected root src; no staged tests ran; repaired by stage-owned pyproject and stage cwd"
+    },
+    {
+      "phase": "initial Ruff",
+      "error": "3 import sorting findings; repaired only stage imports"
+    },
+    {
+      "phase": "initial mypy",
+      "error": "inspect dict object recovery list len typing; narrowed via existing cast"
+    }
+  ]
+}

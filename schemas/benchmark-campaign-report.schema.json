@@ -1,5 +1,14 @@
 {
   "$defs": {
+    "AssessmentBenchmarkCondition": {
+      "enum": [
+        "router-fresh",
+        "fresh-worker",
+        "reused-worker"
+      ],
+      "title": "AssessmentBenchmarkCondition",
+      "type": "string"
+    },
     "BenchmarkCondition": {
       "enum": [
         "process-cold",
@@ -20,7 +29,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "paired_trials": {
           "title": "Paired Trials",
@@ -80,7 +97,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "repetition": {
           "title": "Repetition",
@@ -185,7 +210,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "trials": {
           "title": "Trials",
@@ -332,7 +365,15 @@
           "title": "Route Fingerprint"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "repetition": {
           "minimum": 0,
@@ -406,6 +447,45 @@
           "default": null,
           "title": "Wall Time Ms"
         },
+        "grading_wall_time_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grading Wall Time Ms"
+        },
+        "routing_overhead_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Routing Overhead Ms"
+        },
+        "invocation_guard_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Invocation Guard Ms"
+        },
         "actual_resources": {
           "$ref": "#/$defs/ResourceVector"
         },
@@ -430,6 +510,116 @@
           },
           "title": "Receipt Ids",
           "type": "array"
+        },
+        "host_runtime_digests": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Host Runtime Digests",
+          "type": "object"
+        },
+        "host_models": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Host Models"
+        },
+        "case_validation": {
+          "items": {
+            "$ref": "#/$defs/ValidationResult"
+          },
+          "title": "Case Validation",
+          "type": "array"
+        },
+        "correctness_failed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Correctness Failed"
+        },
+        "execution_failure_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Execution Failure Codes",
+          "type": "array"
+        },
+        "failure_category": {
+          "anyOf": [
+            {
+              "enum": [
+                "task_failure",
+                "tool_failure",
+                "model_failure",
+                "environment_failure",
+                "orchestrator_failure",
+                "timeout",
+                "policy_denial",
+                "indeterminate"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Category"
+        },
+        "failure_stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "preflight",
+                "invocation",
+                "grading",
+                "accounting"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Stage"
+        },
+        "capability_discovery": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capability Discovery"
         },
         "operation_count": {
           "default": 0,
@@ -1060,7 +1250,15 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/$defs/BenchmarkCondition"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BenchmarkCondition"
+            },
+            {
+              "$ref": "#/$defs/AssessmentBenchmarkCondition"
+            }
+          ],
+          "title": "Condition"
         },
         "resource_pool": {
           "title": "Resource Pool",
@@ -1244,6 +1442,69 @@
       ],
       "title": "TrustLevel",
       "type": "string"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid"
+        },
+        "quality_score": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Score"
+        },
+        "detail": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Detail",
+          "type": "string"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "observed"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationResult",
+      "type": "object"
     }
   },
   "additionalProperties": false,

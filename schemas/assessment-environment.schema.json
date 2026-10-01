@@ -1,0 +1,130 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "environment_id": {
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "trusted_local",
+        "container",
+        "codex_sandbox"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "identity": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Identity",
+      "type": "object"
+    },
+    "network": {
+      "default": false,
+      "title": "Network",
+      "type": "boolean"
+    },
+    "container_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Image"
+    },
+    "cpu_count": {
+      "default": 1,
+      "exclusiveMinimum": 0,
+      "maximum": 64,
+      "title": "Cpu Count",
+      "type": "number"
+    },
+    "memory_mb": {
+      "default": 256,
+      "maximum": 65536,
+      "minimum": 32,
+      "title": "Memory Mb",
+      "type": "integer"
+    },
+    "process_limit": {
+      "default": 64,
+      "maximum": 1024,
+      "minimum": 1,
+      "title": "Process Limit",
+      "type": "integer"
+    },
+    "container_runtime": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Runtime"
+    },
+    "container_socket": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Socket"
+    },
+    "read_only_roots": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Read Only Roots",
+      "type": "array"
+    },
+    "conformance_digests": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conformance Digests"
+    },
+    "differential_conformance_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Differential Conformance Digest"
+    }
+  },
+  "required": [
+    "environment_id",
+    "kind",
+    "identity"
+  ],
+  "title": "AssessmentEnvironment",
+  "type": "object"
+}

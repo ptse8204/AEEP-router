@@ -1,0 +1,226 @@
+{
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "model_calls": 0,
+  "elapsed_seconds": 16.842655000044033,
+  "exit_code": 0,
+  "observation": {
+    "diagnostics": [],
+    "analytics": true,
+    "initialize": {
+      "success": true,
+      "error": null
+    },
+    "thread_start": {
+      "success": true,
+      "error": null
+    },
+    "turn_start": {
+      "success": true,
+      "error": null
+    },
+    "terminal_status": "completed",
+    "collector_access_from_sandbox": {
+      "exit_code": 0,
+      "outcome": "denied",
+      "error": null
+    },
+    "skill_inventory": {
+      "count": 7,
+      "synthetic_found": true,
+      "synthetic_enabled": true,
+      "errors": 0
+    },
+    "synthetic_turns": 1,
+    "explicit_skill": false,
+    "model_calls": 0,
+    "requests": {
+      "requests": 3,
+      "parse_failures": 0,
+      "other_metric_count": 47,
+      "fixture_requests": 2,
+      "full_skill_marker_seen": true,
+      "skill_description_in_request": true,
+      "tool_names": [],
+      "request_keys": [
+        "client_metadata",
+        "include",
+        "input",
+        "model",
+        "parallel_tool_calls",
+        "prompt_cache_key",
+        "reasoning",
+        "store",
+        "stream",
+        "text",
+        "tool_choice"
+      ],
+      "metadata_keys": [
+        "root_turn_id",
+        "session_id",
+        "thread_id",
+        "turn_id",
+        "x-codex-installation-id",
+        "x-codex-turn-metadata",
+        "x-codex-window-id"
+      ],
+      "exec_mentioned": true,
+      "exec_wrapper_mentioned": true,
+      "tool_error_seen": true,
+      "skill_marker_in_tool_result": true
+    },
+    "selected_metrics": [
+      {
+        "name": "codex.thread.started",
+        "kind": "sum",
+        "attribute_keys": [
+          "app.version",
+          "is_git",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "service_name": "aeep-offline-metrics",
+        "asInt": 1
+      },
+      {
+        "name": "codex.thread.skills.enabled_total",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "host_world_state",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 6.0,
+        "min": 6.0,
+        "max": 6.0
+      },
+      {
+        "name": "codex.thread.skills.enabled_total",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "thread_context",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      {
+        "name": "codex.thread.skills.kept_total",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "host_world_state",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 6.0,
+        "min": 6.0,
+        "max": 6.0
+      },
+      {
+        "name": "codex.thread.skills.kept_total",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "thread_context",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      {
+        "name": "codex.thread.skills.truncated",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "host_world_state",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      {
+        "name": "codex.thread.skills.truncated",
+        "kind": "histogram",
+        "attribute_keys": [
+          "app.version",
+          "catalog_surface",
+          "model",
+          "originator",
+          "service_name",
+          "session_source"
+        ],
+        "catalog_surface": "thread_context",
+        "service_name": "aeep-offline-metrics",
+        "count": 1,
+        "sum": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      {
+        "name": "codex.skill.injected",
+        "kind": "sum",
+        "attribute_keys": [
+          "app.version",
+          "invoke_type",
+          "model",
+          "model_slug",
+          "originator",
+          "plugin_id",
+          "reasoning_effort",
+          "service_name",
+          "session_source",
+          "skill",
+          "status"
+        ],
+        "invoke_type": "implicit",
+        "service_name": "aeep-offline-metrics",
+        "skill": "synthetic",
+        "status": "ok",
+        "asInt": 1
+      }
+    ],
+    "stop": "sigint",
+    "exit_code": -2,
+    "requested_export_interval_ms": 1000,
+    "observation_seconds_after_turn": 15
+  },
+  "launcher_error": ""
+}

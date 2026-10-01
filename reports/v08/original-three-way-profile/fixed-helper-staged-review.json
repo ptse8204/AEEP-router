@@ -1,0 +1,63 @@
+{
+  "status": "frozen-staged-awaiting-independent-review-and-root-application",
+  "root_source": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "authority": "docs/ASSESSMENT_TESTING.md standing finite test-definition delegation; parent exact fixed-dispatch review",
+  "files": {
+    "src/aeep/router.py": {
+      "stage_sha256": "edadc4bf7d42b76f530c4de4220591fe70b6224fcecd27100e91fd5884456582",
+      "root_preimage_sha256": "884285a9655c8775320ca223260bbabe200d14d14faff1356802dca3d3d28bec"
+    },
+    "src/aeep/assessment/fixed_helper.py": {
+      "stage_sha256": "cdfa1178e1c4cb1889e9cafd33392f90e68a645c540875c0674bc8782c017055",
+      "root_preimage_sha256": null
+    },
+    "src/aeep/assessment/service.py": {
+      "stage_sha256": "91f24b93b7d7b2ed97a09e00c9fcbe81ec67d046070d8b52c29100b33b4ad921",
+      "root_preimage_sha256": "bebaa250c92817659e42ea7ad57ae6b431a1522f2127ce2406ed7c08352b9a70"
+    },
+    "src/aeep/assessment/verification.py": {
+      "stage_sha256": "91c750b7c09d095b1f96d963ac32191a408f1e8856a0793fd0a75e501338ed9d",
+      "root_preimage_sha256": "5fcdec4ccf29a9724450f524fafa8b76f7b295b4771316920a4a0764ba38a35d"
+    },
+    "tests/test_fixed_helper.py": {
+      "stage_sha256": "b8820b799e3121da3c888c7f0e10eb8a0df34482237cda08b6f529931145f422",
+      "root_preimage_sha256": null
+    },
+    "tests/test_fixed_helper_recovery.py": {
+      "stage_sha256": "407e57bd3f0a63c80054020f5133d159cb5ffa2f0d31882def62dce185afad29",
+      "root_preimage_sha256": null
+    },
+    "tests/test_fixed_callback_authority.py": {
+      "stage_sha256": "48cf1c17e8af4c1c3761db3419dbf44ae3140b8d0e7fc13ffbc498149223c6b1",
+      "root_preimage_sha256": null
+    }
+  },
+  "focused_checks": {
+    "command": "PYTHONPATH=src python3 -m pytest -q -ra tests/test_fixed_helper.py tests/test_fixed_helper_recovery.py tests/test_fixed_callback_authority.py tests/test_v08_task_profile.py",
+    "passed": 31,
+    "skipped": 2,
+    "skip_reason": "actual native binary/workbook opt-in absent from staged unit run",
+    "compile": "passed owned source/tests",
+    "ruff": "exact frozen owned7 paths PASS",
+    "mypy": "exact frozen owned3 modules PASS"
+  },
+  "historical_development_failures": [
+    "wrong NativeSandboxConfig import corrected",
+    "expired fixture attempted mutation of immutable record; corrected clock fixture",
+    "wrong initial pytest working directory",
+    "nonexistent _save_decision corrected to existing _persist_decision",
+    "Ruff removed fixture import; explicit reexport corrected",
+    "broadened incremental fixture needs workbook assets not included in staging; no runtime conclusion",
+    "transitive in-progress adapter mypy errors corrected by owner"
+  ],
+  "limits": [
+    "no experimental model turn or campaign",
+    "stub/mocked boundary tests are plumbing, not native conformance",
+    "common fixed audit/authorization/receipt costs remain in control wall/resource measurements",
+    "supporting callback resources overlap outer inclusive reservation; no second elapsed debit",
+    "actual composed profile boundary, fresh required-use qualification and disjoint optional value campaign remain required"
+  ],
+  "root_source_readback": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "focused_log": "reports/v08/original-three-way-profile/fixed-helper-final-focused.log",
+  "factory_test": "live owner reports actual adapter factory under cloned campaign Router/canonical trial+attempt and real JSONL fixture pass; see combined bridge report"
+}

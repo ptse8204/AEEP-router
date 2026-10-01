@@ -1,0 +1,1099 @@
+{
+  "$defs": {
+    "CashEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Usd"
+        },
+        "upper_bound_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Bound Usd"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "title": "CashEstimate",
+      "type": "object"
+    },
+    "EstimateSource": {
+      "enum": [
+        "static",
+        "historical",
+        "blended",
+        "quote",
+        "observed"
+      ],
+      "title": "EstimateSource",
+      "type": "string"
+    },
+    "EstimateUncertainty": {
+      "additionalProperties": false,
+      "description": "Empirical bounds from one exact evidence cohort; never authorization.",
+      "properties": {
+        "profile": {
+          "const": "aeep-estimate-uncertainty-v1",
+          "default": "aeep-estimate-uncertainty-v1",
+          "title": "Profile",
+          "type": "string"
+        },
+        "method": {
+          "const": "empirical-nearest-rank-wilson-v1",
+          "default": "empirical-nearest-rank-wilson-v1",
+          "title": "Method",
+          "type": "string"
+        },
+        "sample_size": {
+          "minimum": 5,
+          "title": "Sample Size",
+          "type": "integer"
+        },
+        "cohort_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Cohort Digest",
+          "type": "string"
+        },
+        "resources_p50": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "resources_p95": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "cash_p95_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Observed p95 only; never a payment authorization maximum.",
+          "title": "Cash P95 Usd"
+        },
+        "success_lower_bound": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Success Lower Bound",
+          "type": "number"
+        },
+        "quality_sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Quality Sample Size",
+          "type": "integer"
+        },
+        "quality_lower_bound": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Lower Bound"
+        }
+      },
+      "required": [
+        "sample_size",
+        "cohort_digest",
+        "resources_p50",
+        "resources_p95",
+        "success_lower_bound"
+      ],
+      "title": "EstimateUncertainty",
+      "type": "object"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "billing_record",
+        "local_meter",
+        "priced_measured_billable_usage",
+        "confirmed_no_incremental_charge",
+        "provider_report",
+        "pinned_rate_table",
+        "operator_report",
+        "static_estimate",
+        "legacy_unspecified",
+        "unavailable"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "ExecutableRecipeExtension": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.recipe-extension.v1",
+          "enum": [
+            "assessment.recipe-extension.v1",
+            "assessment.recipe-extension.v2",
+            "assessment.recipe-extension.v3"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "generator": {
+          "$ref": "#/$defs/ExecutorSpec"
+        },
+        "grader": {
+          "$ref": "#/$defs/ExecutorSpec"
+        },
+        "reference": {
+          "$ref": "#/$defs/ExecutorSpec"
+        },
+        "independent_fixtures": {
+          "items": {
+            "$ref": "#/$defs/RecipeLiteralFixture"
+          },
+          "maxItems": 100,
+          "minItems": 2,
+          "title": "Independent Fixtures",
+          "type": "array"
+        },
+        "transformed_fixtures": {
+          "items": {
+            "$ref": "#/$defs/RecipeLiteralFixture"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Transformed Fixtures",
+          "type": "array"
+        },
+        "fault_outputs": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Fault Outputs",
+          "type": "array"
+        },
+        "feature_rules": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RecipeFeatureRule"
+          },
+          "title": "Feature Rules",
+          "type": "object"
+        },
+        "variation_features": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "title": "Variation Features",
+          "type": "object"
+        },
+        "template_families": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Template Families",
+          "type": "array"
+        },
+        "truth_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Truth Schema"
+        },
+        "failure_codes": {
+          "anyOf": [
+            {
+              "items": {
+                "pattern": "^[a-z][a-z0-9_]{0,63}$",
+                "type": "string"
+              },
+              "maxItems": 32,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Codes"
+        }
+      },
+      "required": [
+        "generator",
+        "grader",
+        "reference",
+        "independent_fixtures",
+        "transformed_fixtures",
+        "fault_outputs",
+        "feature_rules",
+        "variation_features",
+        "template_families"
+      ],
+      "title": "ExecutableRecipeExtension",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "host_managed",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "ExecutorSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "capability": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Capability",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ExecutorKind"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "output_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema"
+        },
+        "estimate": {
+          "$ref": "#/$defs/RouteEstimate"
+        },
+        "side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "locality": {
+          "$ref": "#/$defs/Locality",
+          "default": "local"
+        },
+        "requires_network": {
+          "default": false,
+          "title": "Requires Network",
+          "type": "boolean"
+        },
+        "data_residency": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Data Residency",
+          "type": "array"
+        },
+        "idempotent": {
+          "default": true,
+          "title": "Idempotent",
+          "type": "boolean"
+        },
+        "safe_to_auto_execute": {
+          "default": true,
+          "title": "Safe To Auto Execute",
+          "type": "boolean"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "resource_pool": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Pool"
+        },
+        "provider_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Id"
+        },
+        "validators": {
+          "items": {
+            "$ref": "#/$defs/ValidationSpec"
+          },
+          "title": "Validators",
+          "type": "array"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required_capabilities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Capabilities",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "capability",
+        "kind",
+        "description"
+      ],
+      "title": "ExecutorSpec",
+      "type": "object"
+    },
+    "Locality": {
+      "enum": [
+        "in_process",
+        "local",
+        "lan",
+        "internet"
+      ],
+      "title": "Locality",
+      "type": "string"
+    },
+    "MeasurementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource",
+          "default": "unavailable"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "title": "MeasurementEvidence",
+      "type": "object"
+    },
+    "RecipeDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.recipe.v1",
+          "enum": [
+            "assessment.recipe.v1",
+            "assessment.recipe.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "recipe_id": {
+          "title": "Recipe Id",
+          "type": "string"
+        },
+        "implementation_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Implementation Digest",
+          "type": "string"
+        },
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "output_schema": {
+          "additionalProperties": true,
+          "title": "Output Schema",
+          "type": "object"
+        },
+        "generator": {
+          "title": "Generator",
+          "type": "string"
+        },
+        "generator_config": {
+          "additionalProperties": true,
+          "title": "Generator Config",
+          "type": "object"
+        },
+        "grader": {
+          "title": "Grader",
+          "type": "string"
+        },
+        "extractor": {
+          "title": "Extractor",
+          "type": "string"
+        },
+        "variations": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Variations",
+          "type": "array"
+        },
+        "exclusions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exclusions",
+          "type": "array"
+        },
+        "dependencies": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "object"
+        },
+        "screening_cases": {
+          "const": 8,
+          "default": 8,
+          "title": "Screening Cases",
+          "type": "integer"
+        },
+        "minimum_holdout_cases": {
+          "const": 100,
+          "default": 100,
+          "title": "Minimum Holdout Cases",
+          "type": "integer"
+        },
+        "minimum_paired_cases": {
+          "const": 20,
+          "default": 20,
+          "title": "Minimum Paired Cases",
+          "type": "integer"
+        },
+        "maximum_correctness_failures": {
+          "const": 0,
+          "default": 0,
+          "title": "Maximum Correctness Failures",
+          "type": "integer"
+        },
+        "extension": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExecutableRecipeExtension"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "recipe_id",
+        "capability",
+        "description",
+        "input_schema",
+        "output_schema",
+        "generator",
+        "grader",
+        "extractor",
+        "variations"
+      ],
+      "title": "RecipeDefinition",
+      "type": "object"
+    },
+    "RecipeFeatureRule": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "pattern": "^(?:/.*)?$",
+          "title": "Path",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "length",
+            "type",
+            "enum"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "maxItems": 100,
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "operation"
+      ],
+      "title": "RecipeFeatureRule",
+      "type": "object"
+    },
+    "RecipeLiteralFixture": {
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "additionalProperties": true,
+          "title": "Input",
+          "type": "object"
+        },
+        "output": {
+          "additionalProperties": true,
+          "title": "Output",
+          "type": "object"
+        },
+        "grader_output": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grader Output"
+        }
+      },
+      "required": [
+        "input",
+        "output"
+      ],
+      "title": "RecipeLiteralFixture",
+      "type": "object"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "RouteEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "cash": {
+          "$ref": "#/$defs/CashEstimate"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
+        },
+        "success_probability": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.001,
+          "title": "Success Probability",
+          "type": "number"
+        },
+        "quality_score": {
+          "default": 0.95,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Quality Score",
+          "type": "number"
+        },
+        "risk_score": {
+          "default": 0.05,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Risk Score",
+          "type": "number"
+        },
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/EstimateSource",
+          "default": "static"
+        },
+        "sample_size": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Sample Size",
+          "type": "integer"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EstimateUncertainty"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "RouteEstimate",
+      "type": "object"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    },
+    "SubscriptionCharge": {
+      "enum": [
+        "included",
+        "paid",
+        "mixed",
+        "unknown"
+      ],
+      "title": "SubscriptionCharge",
+      "type": "string"
+    },
+    "SubscriptionUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "consumed": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consumed"
+        },
+        "source": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "included_or_paid": {
+          "$ref": "#/$defs/SubscriptionCharge",
+          "default": "unknown"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        }
+      },
+      "required": [
+        "provider",
+        "resource_pool"
+      ],
+      "title": "SubscriptionUsage",
+      "type": "object"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    },
+    "ValidationKind": {
+      "enum": [
+        "schema",
+        "exact_match",
+        "range",
+        "state_transition",
+        "callback",
+        "downstream",
+        "llm",
+        "human"
+      ],
+      "title": "ValidationKind",
+      "type": "string"
+    },
+    "ValidationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ValidationKind"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ValidationSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recipe": {
+      "$ref": "#/$defs/RecipeDefinition"
+    },
+    "candidate": {
+      "$ref": "#/$defs/ExecutorSpec"
+    },
+    "explanation": {
+      "maxLength": 10000,
+      "title": "Explanation",
+      "type": "string"
+    },
+    "missing_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Requirements",
+      "type": "array"
+    },
+    "planning_request_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Planning Request Id"
+    }
+  },
+  "required": [
+    "recipe",
+    "candidate",
+    "explanation"
+  ],
+  "title": "DefinitionProposal",
+  "type": "object"
+}

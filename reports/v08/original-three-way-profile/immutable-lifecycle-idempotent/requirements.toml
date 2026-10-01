@@ -1,0 +1,47 @@
+allowed_approval_policies = ["never"]
+allowed_web_search_modes = ["disabled"]
+allow_managed_hooks_only = true
+allowed_login_methods = ["chatgpt"]
+default_permissions = "aeep"
+[allowed_permission_profiles]
+aeep = true
+"aeep-task-child" = true
+
+[permissions.aeep.filesystem]
+":root" = "deny"
+":minimal" = "read"
+"/workspace" = "write"
+"/workspace/private-state.json" = "deny"
+"/workspace/private" = "deny"
+"/tmp" = "write"
+"/worker/auth" = "deny"
+"/opt/codex" = "read"
+"/opt/dependencies" = "read"
+"/opt/skills" = "read"
+"/etc/codex/skills" = "read"
+"/worker/home/.cache/codex-runtimes" = "read"
+[permissions.aeep.network]
+enabled = false
+[features]
+apps = false
+memories = false
+multi_agent = false
+browser_use = false
+computer_use = false
+[mcp_servers]
+
+[mcp_servers.linux_boundary_diagnostic.identity.command]
+executable = "/usr/local/bin/python3"
+args = [{match="exact",value="/opt/aeep/linux-mcp-server.py"}]
+
+[permissions.aeep-task-child.filesystem]
+":root" = "deny"
+":minimal" = "read"
+"/workspace/task/input" = "read"
+"/workspace/task/output" = "write"
+"/workspace/private" = "deny"
+"/workspace/private-state.json" = "deny"
+"/worker/auth" = "deny"
+"/opt/aeep" = "deny"
+[permissions.aeep-task-child.network]
+enabled = false

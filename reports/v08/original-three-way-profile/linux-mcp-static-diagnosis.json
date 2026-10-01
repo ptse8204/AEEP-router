@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "utils/cli/src/config_override.rs": {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/utils/cli/src/config_override.rs",
+      "sha256": "7edda8533dd3395b22214f140eb2c93a45b7dad2595635f57691099d408ce071"
+    },
+    "config/src/overrides.rs": {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/config/src/overrides.rs",
+      "sha256": "dbac7a6f68de31e74c11e9671fe0b1f68f8783c68cff5a9ba26348e0b5f86c0a"
+    },
+    "core/src/config/mod.rs": {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/config/mod.rs",
+      "sha256": "df6d6871a35a9e365e36beb3d388c2c39cae59d95bd84834321c8501390ec397"
+    },
+    "protocol/src/mcp_policy.rs": {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/protocol/src/mcp_policy.rs",
+      "sha256": "a3cf28e5927faaf600cff2e014afb11e11caea16991c8231273aa09a9ae4e12c"
+    },
+    "config/src/mcp_requirements.rs": {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/config/src/mcp_requirements.rs",
+      "sha256": "ca5cb0bce2bfb553dcb13539bd114bfaaa46b7ba5c0e265fe9269683b4eaa247"
+    }
+  },
+  "static_findings": {
+    "cli_keys_split_on_every_dot_without_quoted_key_parsing": true,
+    "prior_canary_key_produces_nested_filesystem_value": true,
+    "whole_filesystem_inline_table_parses_and_preserves_all_existing_rules": true,
+    "direct_program_compiles": true,
+    "direct_program_actual_newlines": 5,
+    "direct_program_literal_backslash_n": 0,
+    "empty_managed_mcp_allowlist_disables_unlisted_servers": true
+  },
+  "runtime_cause": "The malformed override is demonstrated statically; no retained runtime message proves it caused the observed exit1. Empty managed MCP allowlist also prevents the proposed server from being enabled after startup.",
+  "prototype_sha256": "e2761475c0973765ff0d4213d1410d621289453956466e1e75da342f18e23631",
+  "no_workers_or_model_turns": true
+}

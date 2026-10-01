@@ -1,0 +1,17 @@
+Original synthetic task instruction:
+Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. Write Summary!A1="Total" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula caches; return its base64 bytes as workbook_b64. No macros or external links.
+
+Completed; cleaned workbook checks passed for retained rows, formulas, totals, and Notes values.
+Route: native.workbook.human-presentation-5fff (only one feasible route).
+Operator approval ceiling: read; backend scope requires separate evidence.
+Changes verified: unknown.
+Recovery: none. Scope: a00bd66f9ff8ababbaf63b5fba80defc067f899f821919ced831927f2710d04b.
+Receipt rcpt_4fefb3f19d154a14861407cde594a791: schema: passed (observed), callback: passed (verified).
+Preservation, isolation and comparative savings are not established by execution success.
+Formatting and other OOXML preservation were not fully checked.
+Receipt view: original task output and historical runtime approval are not retained; displayed ceiling is the recorded operator scope ceiling. Current controls do not establish historical permissions.
+Recorded scope: at most 1 attempts, each at most 30s, expires 2026-09-30T22:43:37.995092+00:00. Pause/resume does not reset allowance.
+Resources and spending: inspect receipt accounting; missing measurements are unknown, not zero.
+Inspect: aeep task --manifest /Users/edwintse/Documents/aeep-agent-router/.aeep/human-presentation-5fff/aeep.json control inspect task_a896d2a0cc2241b1ad57344463160c4d
+Pause: aeep task --manifest /Users/edwintse/Documents/aeep-agent-router/.aeep/human-presentation-5fff/aeep.json control pause task_a896d2a0cc2241b1ad57344463160c4d
+Undo owned configuration: aeep task --manifest /Users/edwintse/Documents/aeep-agent-router/.aeep/human-presentation-5fff/aeep.json control rollback task_a896d2a0cc2241b1ad57344463160c4d

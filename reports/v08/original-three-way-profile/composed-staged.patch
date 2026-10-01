@@ -1,0 +1,2113 @@
+--- a/src/aeep/assessment/boundary.py
++++ b/src/aeep/assessment/boundary.py
+@@ -48,6 +48,14 @@
+         record = require_conformance(repository, digest,
+             source_digest=verification_source_digest(Path(__file__).resolve().parents[3]),
+             worker_digest=worker.digest(), identity_digest=identity)
++        invocation = config.invocation
++        dynamic_digest = invocation.dynamic_tools_digest if invocation is not None else None
++        if dynamic_digest is not None:
++            if (record.schema_version != 'assessment.boundary-conformance.v3'
++                    or record.callback_binding_digest != dynamic_digest):
++                raise ConfigurationError('dynamic profile requires exact composed boundary evidence')
++        elif record.schema_version == 'assessment.boundary-conformance.v3':
++            raise ConfigurationError('composed boundary differs from plain worker profile')
+         if (record.adapter != config.adapter_id or record.adapter_version != "1"
+                 or record.image_digest != "sha256:" + worker.image.split("sha256:")[-1]
+                 or record.binary_digest != worker.binary_sha256
+@@ -69,10 +77,21 @@
+     worker_digest: Digest
+     execution_evidence_digest: Digest
+     observed: dict[str, str | int | bool]
++    host_receipt_digest: Digest | None = None
++
++    @model_serializer(mode='wrap')
++    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
++        result: dict[str, object] = handler(self)
++        if self.host_receipt_digest is None:
++            result.pop('host_receipt_digest', None)
++        return result
++
++
++COMPOSED_PROBES = frozenset({"callback_authority", "native_boundary", "callback_lifecycle", "protected_state"})
+ 
+ 
+ class BoundaryConformance(StrictModel):
+-    schema_version: Literal["assessment.boundary-conformance.v1", "assessment.boundary-conformance.v2"] = "assessment.boundary-conformance.v1"
++    schema_version: Literal["assessment.boundary-conformance.v1", "assessment.boundary-conformance.v2", "assessment.boundary-conformance.v3"] = "assessment.boundary-conformance.v1"
+     conformance_id: str
+     source_digest: Digest
+     worker_digest: Digest
+@@ -92,18 +111,27 @@
+     probe_digests: list[Digest]
+     configuration_digest: Digest | None = None
+     effective_inventory: dict[str, Digest] | None = None
++    callback_binding_digest: Digest | None = None
++    native_backend_digest: Digest | None = None
++    composed_definition_digest: Digest | None = None
+ 
+     @model_serializer(mode="wrap")
+     def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+         result: dict[str, object] = handler(self)
+-        for key in ("configuration_digest", "effective_inventory"):
++        for key in ("configuration_digest", "effective_inventory", "callback_binding_digest", "native_backend_digest", "composed_definition_digest"):
+             if getattr(self, key) is None:
+                 result.pop(key, None)
+         return result
+ 
+     @model_validator(mode="after")
+     def versioned_policy(self) -> BoundaryConformance:
+-        if self.schema_version.endswith('.v2'):
++        if self.schema_version.endswith('.v3'):
++            if any(value is None for value in (self.configuration_digest, self.effective_inventory,
++                    self.callback_binding_digest, self.native_backend_digest, self.composed_definition_digest)):
++                raise ValueError('composed conformance requires exact callback/native/definition bindings')
++        elif any(value is not None for value in (self.callback_binding_digest, self.native_backend_digest, self.composed_definition_digest)):
++            raise ValueError('historical conformance cannot acquire composed semantics')
++        elif self.schema_version.endswith('.v2'):
+             if self.configuration_digest is None or self.effective_inventory is None:
+                 raise ValueError("v2 conformance requires configured and effective policy bindings")
+         elif self.configuration_digest is not None or self.effective_inventory is not None:
+@@ -142,7 +170,7 @@
+     for identity, expected_inventory in ((record.control_conformance_digest, expected.control_inventory),
+                                          (record.treatment_conformance_digest, expected.treatment_inventory)):
+         boundary = BoundaryConformance.model_validate(repository.get("boundary_conformance", identity))
+-        if (boundary.schema_version != "assessment.boundary-conformance.v2" or boundary.effective_inventory != expected_inventory
++        if (boundary.schema_version not in {"assessment.boundary-conformance.v2", "assessment.boundary-conformance.v3"} or boundary.effective_inventory != expected_inventory
+                 or boundary.reviewed_inventory_digest != content_digest(expected_inventory)):
+             raise ConfigurationError("effective inventory differs from the differential definition")
+         require_conformance(repository, identity, source_digest=boundary.source_digest,
+@@ -197,7 +225,7 @@
+         boundary = BoundaryConformance.model_validate(repository.get('boundary_conformance', conformance))
+         if (boundary.worker_digest != access.worker_digests[role]
+                 or boundary.configuration_digest != access.configuration_digests[role]
+-                or boundary.schema_version != 'assessment.boundary-conformance.v2'
++                or boundary.schema_version not in {'assessment.boundary-conformance.v2', 'assessment.boundary-conformance.v3'}
+                 or boundary.effective_inventory != inventory
+                 or boundary.reviewed_inventory_digest != content_digest(inventory)):
+             raise ConfigurationError('three-way effective worker/access binding differs')
+@@ -242,6 +270,10 @@
+                 raise ConfigurationError("environment verification unavailable: enforcement review missing")
+     if not set(record.used_tools).issubset(record.permitted_tools):
+         raise ConfigurationError("environment verification unavailable: unpermitted tool used")
++    composed = record.schema_version.endswith('.v3')
++    if composed:
++        from ..hosts.codex_pair_inspection import verify_composed_binding
++        selected_spec = verify_composed_binding(repository, record, worker_digest)
+     checked: set[str] = set()
+     for probe_digest in record.probe_digests:
+         probe = BoundaryProbe.model_validate(repository.get("boundary_probe", probe_digest))
+@@ -261,8 +293,13 @@
+                 or not any(event.kind == "artifact.created" and event.evidence_ref == content_digest(probe.observed)
+                            for event in evidence.events)):
+             raise ConfigurationError("environment verification unavailable: probe execution evidence missing")
++        if composed and probe.name == 'callback_authority':
++            from ..hosts.codex_pair_inspection import verify_composed_callback
++            verify_composed_callback(repository, record, probe, definition, evidence, selected_spec)
+         checked.add(probe.name)
+-    required = REQUIRED_PROBES | {"candidate_access"} if record.schema_version.endswith('.v2') else REQUIRED_PROBES
++    required = REQUIRED_PROBES | {"candidate_access"} if record.schema_version.endswith(('.v2', '.v3')) else REQUIRED_PROBES
++    if composed:
++        required |= COMPOSED_PROBES
+     if checked != required:
+         raise ConfigurationError("environment verification unavailable: required probes missing")
+     return record
+--- a/src/aeep/assessment/fixed_helper.py
++++ b/src/aeep/assessment/fixed_helper.py
+@@ -86,11 +86,12 @@
+ 
+     def __init__(self, assessment: Any, plan: Any, assessment_id: str,
+                  operation_id: str, *, outer_router: Router, outer_attempt_id: str, binding_digest: str,
+-                 resolve_binding: Callable[[], str], max_calls: int) -> None:
++                 resolve_binding: Callable[[], str], max_calls: int, _conformance: bool = False) -> None:
+         self.assessment, self.plan = assessment, plan
+         self.assessment_id, self.operation_id = assessment_id, operation_id
+         self.binding_digest, self.resolve_binding = binding_digest, resolve_binding
+         self.max_calls = max_calls
++        self._conformance = _conformance
+         self.outer_router, self.outer_attempt_id = outer_router, outer_attempt_id
+         from ..hosts.codex_invocation import contract_digest
+         self.outer_attempt_digest = contract_digest({"attempt_id": outer_attempt_id})
+@@ -99,6 +100,20 @@
+             raise ConfigurationError("invalid callback authority binding")
+         self.check()
+ 
++    @classmethod
++    def for_conformance(cls, assessment: Any, request: Any, operation_id: str, *,
++                        outer_router: Router, outer_attempt_id: str, binding_digest: str,
++                        resolve_binding: Callable[[], str], max_calls: int) -> AssessmentCallbackAuthority:
++        from .models import ConformanceProbeRequest
++        if (not isinstance(request, ConformanceProbeRequest)
++                or request.schema_version != 'assessment.conformance-request.v4'
++                or request.operation != 'composed_pair_inspection'):
++            raise ConfigurationError('composed authority requires an exact v4 inspection request')
++        return cls(assessment, request, request.plan_id, operation_id,
++                   outer_router=outer_router, outer_attempt_id=outer_attempt_id,
++                   binding_digest=binding_digest, resolve_binding=resolve_binding,
++                   max_calls=max_calls, _conformance=True)
++
+     def _require_reserved(self, connection: Any) -> None:
+         import asyncio
+         from datetime import timedelta
+@@ -107,24 +122,42 @@
+         from .models import AssessmentOperation
+ 
+         self.assessment.repository.authorize(self.plan)
+-        row = connection.execute("SELECT state FROM assessment_jobs WHERE id=? AND plan_id=?",
+-                                 (self.assessment_id, self.plan.plan_id)).fetchone()
++        if self._conformance:
++            row = None
++            context_identity = getattr(self.outer_router, '_callback_conformance_identity', None)
++            stage = 'composed_pair_inspection'
++        else:
++            row = connection.execute("SELECT state FROM assessment_jobs WHERE id=? AND plan_id=?",
++                                     (self.assessment_id, self.plan.plan_id)).fetchone()
++            context_identity = getattr(self.outer_router, '_callback_trial_identity', None)
++            stage = 'trial' 
+         reserved = connection.execute("SELECT state FROM assessment_operations WHERE id=?",
+                                       (self.operation_id,)).fetchone()
+         operation = AssessmentOperation.model_validate(
+             self.assessment.repository.get("operation_start", self.operation_id))
+-        if (getattr(self.outer_router, "_callback_trial_identity", None) != (self.assessment_id, self.operation_id)
++        if (context_identity != (self.assessment_id, self.operation_id)
+                 or utc_now() < operation.started_at
+                 or utc_now() >= operation.started_at + timedelta(seconds=operation.reserved.max_elapsed_seconds)
+                 or (self.outer_router._trial_deadline is not None
+                     and asyncio.get_running_loop().time() >= self.outer_router._trial_deadline)):
+             raise ConfigurationError("callback trial identity or reservation deadline differs")
+-        if (row is None or row[0] != "running" or reserved is None or reserved[0] != "reserved"
+-                or operation.plan_id != self.plan.plan_id or operation.stage != "trial"):
++        if ((not self._conformance and (row is None or row[0] != "running"))
++                or reserved is None or reserved[0] != "reserved"
++                or operation.plan_id != self.plan.plan_id or operation.stage != stage
++                or (self._conformance and operation.reserved.max_model_turns != self.plan.composed_model_turns)):
+             raise ConfigurationError("callback requires a running reserved outer trial")
+ 
+     def check(self) -> str:
+-        self.assessment._verify_dependencies(self.plan)
++        if self._conformance:
++            from .identity import verify_dependencies
++            from .models import content_digest
++            verify_dependencies(self.plan.executable_dependencies)
++            current = self.assessment.repository.get('conformance_request', self.plan.plan_id)
++            if (content_digest(current) != content_digest(self.plan)
++                    or self.binding_digest not in self.plan.definition_digests):
++                raise ConfigurationError('composed request or callback definition differs')
++        else:
++            self.assessment._verify_dependencies(self.plan)
+         from ..attempts import ExecutionAttemptState
+         attempt = self.outer_router.store.get_execution_attempt(self.outer_attempt_id)
+         if attempt is None or attempt.state is not ExecutionAttemptState.INVOKING:
+@@ -140,7 +173,6 @@
+ 
+     async def call(self, service: Any, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+         import hashlib
+-        import json
+ 
+         from ..hosts.codex_dynamic_tools import current_dynamic_call
+         from ..models import StrictModel
+@@ -161,17 +193,44 @@
+             call_digest: str
+             binding_digest: str
+             task_scope_digest: str
++            context_kind: str
++            model_turn_allowance: int
++            request_digest: str
++            operation_reference: str
++            outer_attempt_reference: str
+ 
+         scope_digest = service.router._task_scope_digest
+         if not isinstance(scope_digest, str) or re.fullmatch(r"[a-f0-9]{64}", scope_digest) is None:
+             raise ConfigurationError("callback requires an exact execution task scope")
++        repo = self.assessment.repository
++        outer_attempt = self.outer_router.store.get_execution_attempt(self.outer_attempt_id)
++        if outer_attempt is None:
++            raise ConfigurationError('callback outer attempt disappeared')
++        outer_reference = repo.put('callback_outer_attempt', content_digest(outer_attempt), outer_attempt)
++        operation_reference = content_digest(repo.get('operation_start', self.operation_id))
++        from ..models import TaskScope
++        from .repository import AssessmentRepository
++        scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get('task_scope', scope_digest))
+         claim = Claim(outer_operation_digest=outer_digest,
+                       outer_attempt_digest=context.outer_attempt_digest,
+                       call_digest=context.call_digest, binding_digest=self.binding_digest,
+-                      task_scope_digest=scope_digest)
++                      task_scope_digest=scope_digest,
++                      context_kind="conformance" if self._conformance else "trial",
++                      model_turn_allowance=self.plan.composed_model_turns if self._conformance else 0,
++                      request_digest=content_digest(self.plan), operation_reference=operation_reference,
++                      outer_attempt_reference=outer_reference)
+         repo = self.assessment.repository
+         with repo.store._immediate_transaction() as connection:
+             self._require_reserved(connection)
++            from ..attempts import ExecutionAttemptState
++            current_outer = self.outer_router.store.get_execution_attempt(self.outer_attempt_id)
++            if current_outer is None or current_outer.state is not ExecutionAttemptState.INVOKING:
++                raise ConfigurationError('callback outer attempt stopped before claim')
++            if self.resolve_binding() != self.binding_digest or service.router._task_scope_digest != scope_digest:
++                raise ConfigurationError('callback binding or execution scope changed before claim')
++            for spec in service.router.registry.all():
++                if spec.id in scope.executor_fingerprints:
++                    service.router._require_task_scope(spec)
+             if connection.execute("SELECT 1 FROM assessment_records WHERE kind='callback_claim' AND id=?", (key,)).fetchone():
+                 raise ConfigurationError("callback already claimed; blind retry denied")
+             count = connection.execute(
+@@ -193,15 +252,28 @@
+                     (context.action_id,)).fetchall()
+                 receipts = service.router.store._connection.execute(
+                     "SELECT payload_json FROM receipts WHERE action_id=?", (context.action_id,)).fetchall()
++            from ..attempts import ExecutionAttempt
++            from ..models import ExecutionReceipt, TaskScope
++            from .repository import AssessmentRepository
++            child_attempts = [ExecutionAttempt.model_validate_json(row[0]) for row in rows]
++            child_receipts = [ExecutionReceipt.model_validate_json(row[0]) for row in receipts]
++            scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get('task_scope', scope_digest))
++            scope_reference = repo.put('callback_task_scope', scope_digest, scope)
++            attempt_references = [repo.put('callback_child_attempt', content_digest(item), item) for item in child_attempts]
++            receipt_references = [repo.put('callback_child_receipt', content_digest(item), item) for item in child_receipts]
++            child_specs = {name: service.router.registry.get(name) for name in scope.executor_fingerprints}
++            spec_references = {name: repo.put("callback_child_executor", content_digest(spec), spec) for name, spec in child_specs.items()}
+             class Evidence(StrictModel):
+                 claim_digest: str
+                 task_scope_digest: str
++                task_scope_reference: str
+                 child_attempt_digests: list[str]
+                 child_receipt_digests: list[str]
++                child_executor_digests: dict[str, str]
+                 resources_overlap_outer_trial: bool = True
+ 
+             evidence_digest = repo.put("callback_evidence", key, Evidence(
+-                claim_digest=content_digest(claim), task_scope_digest=scope_digest,
+-                child_attempt_digests=[content_digest(json.loads(row[0])) for row in rows],
+-                child_receipt_digests=[content_digest(json.loads(row[0])) for row in receipts]))
++                claim_digest=content_digest(claim), task_scope_digest=scope_digest, task_scope_reference=scope_reference,
++                child_attempt_digests=attempt_references,
++                child_receipt_digests=receipt_references, child_executor_digests=spec_references))
+             context.record_link(evidence_digest)
+--- a/src/aeep/assessment/models.py
++++ b/src/aeep/assessment/models.py
+@@ -597,7 +597,7 @@
+ 
+ 
+ class ConformanceProbeRequest(StrictModel):
+-    schema_version: Literal["assessment.conformance-request.v1", "assessment.conformance-request.v2", "assessment.conformance-request.v3"] = "assessment.conformance-request.v1"
++    schema_version: Literal["assessment.conformance-request.v1", "assessment.conformance-request.v2", "assessment.conformance-request.v3", "assessment.conformance-request.v4"] = "assessment.conformance-request.v1"
+     plan_id: str = Field(default_factory=lambda: new_id("conformance_probe"))
+     subject_digest: Digest
+     recipe_digest: Digest
+@@ -607,12 +607,31 @@
+     definition_digests: list[Digest]
+     worker_digest: Digest
+     executable_dependencies: dict[str, Digest]
+-    operation: Literal["worker_inspection", "worker_pair_inspection"] | None = None
++    operation: Literal["worker_inspection", "worker_pair_inspection", "composed_pair_inspection"] | None = None
+     pair_definition_digest: Digest | None = None
++    composed_model_turns: Literal[0, 1] = 0
++
++    @model_validator(mode="before")
++    @classmethod
++    def strict_composed_allowance(cls, value: Any) -> Any:
++        if isinstance(value, dict) and 'composed_model_turns' in value:
++            turns = value['composed_model_turns']
++            if type(turns) is not int or turns not in {0, 1}:
++                raise ValueError('composed model allowance must be the integer zero or one')
++        return value
+ 
+     @model_validator(mode="after")
+     def operation_version(self) -> ConformanceProbeRequest:
+-        if self.schema_version.endswith('.v3'):
++        if self.schema_version.endswith('.v4'):
++            if (self.operation != 'composed_pair_inspection'
++                    or self.pair_definition_digest not in self.definition_digests
++                    or not self.executable_dependencies):
++                raise ValueError('composed inspection requires its frozen definition and dependencies')
++        elif self.composed_model_turns != 0:
++            raise ValueError('composed model allowance requires a v4 request')
++        elif self.operation == 'composed_pair_inspection':
++            raise ValueError('composed inspection requires a v4 conformance request')
++        elif self.schema_version.endswith('.v3'):
+             if self.operation != 'worker_pair_inspection' or self.pair_definition_digest not in self.definition_digests:
+                 raise ValueError("paired inspection requires its frozen pair definition")
+         elif self.pair_definition_digest is not None or self.operation == 'worker_pair_inspection':
+@@ -628,6 +647,8 @@
+             result.pop('operation', None)
+         if self.pair_definition_digest is None:
+             result.pop('pair_definition_digest', None)
++        if not self.schema_version.endswith('.v4'):
++            result.pop('composed_model_turns', None)
+         return result
+ 
+ 
+--- a/src/aeep/assessment/verification.py
++++ b/src/aeep/assessment/verification.py
+@@ -103,6 +103,8 @@
+             "tests/test_v08_task_profile.py",
+             "tests/test_v08_native_process.py",
+             "tests/test_v08_three_way.py",
++            "tests/test_v08_composed_contract.py",
++            "tests/test_codex_composed_inspection.py",
+             "tests/test_fixed_helper.py",
+             "tests/test_fixed_helper_recovery.py",
+             "tests/test_fixed_callback_authority.py",
+--- a/src/aeep/hosts/codex_pair_inspection.py
++++ b/src/aeep/hosts/codex_pair_inspection.py
+@@ -613,3 +613,370 @@
+     if isinstance(failure,(asyncio.CancelledError,KeyboardInterrupt,SystemExit)):
+         raise failure
+     return result
++
++
++async def inspect_dynamic_declaration(adapter: CodexAppServerAdapter, *,
++                                      config: Any, worker: ManagedWorkerBinding,
++                                      binding: Any, journal: EventJournal,
++                                      recheck: Any) -> dict[str, Any]:
++    """Zero-turn declaration/policy observation; never model-exposure evidence.
++
++    The canonical composed probe owner must authorize the binding and operation
++    before this function. This function neither registers authority nor invokes
++    a callback. Legacy paired inspection does not call it.
++    """
++    from .codex_app_server import _select_model_config
++    from .codex_dynamic_tools import CodexDynamicTools
++    from .codex_invocation import inventory, isolated_config, verify_thread_inventory
++
++    target = config.invocation
++    if (not isinstance(binding, CodexDynamicTools) or target is None
++            or target.dynamic_tools_digest != binding.digest
++            or not adapter.transport.options.experimental_api):
++        raise ConfigurationError('composed declaration identity unavailable')
++    recheck()
++    binding.verify(target.dynamic_tools_digest, worker.digest())
++    selected = _select_model_config(await adapter.list_models(), config)
++    if selected is None:
++        raise ConfigurationError('composed worker model metadata unavailable')
++    catalog = await inventory(adapter.transport, '/workspace')
++    journal.append('action.started', 'dynamic-declaration-start',
++                   action_digest=content_digest(binding.definition()))
++    # No handler is installed: declaration inspection has no task-call authority.
++    response = await adapter.transport.request('thread/start', {
++        'ephemeral': True, 'cwd': '/workspace', 'model': selected.id,
++        'permissions': worker.permissions_profile, 'approvalPolicy': 'never',
++        'approvalsReviewer': 'user',
++        'config': isolated_config(catalog, target,
++            reviewed_worker_files=worker.reviewed_files or {}),
++        'dynamicTools': binding.declarations(),
++    })
++    thread = response.get('thread')
++    if (not isinstance(thread, dict) or not isinstance(thread.get('id'), str)
++            or not thread['id'] or response.get('approvalsReviewer') != 'user'):
++        raise ConfigurationError('composed declaration response malformed')
++    await verify_thread_inventory(adapter.transport, thread['id'], target)
++    recheck()
++    binding.verify(target.dynamic_tools_digest, worker.digest())
++    profile = response.get('activePermissionProfile')
++    journal.append('action.completed', 'dynamic-declaration-complete')
++    return {
++        'binding_digest': binding.digest,
++        'declaration_digest': content_digest({'dynamicTools': binding.declarations()}),
++        'declaration_bytes': len(json.dumps(binding.declarations(), separators=(',', ':'), allow_nan=False).encode()),
++        'declaration_acknowledged': True,
++        'model_tool_exposure': 'unknown',
++        'model_turns': 0,
++        'task_calls': 0,
++        'active_policy': {
++            'profile_matches': isinstance(profile, dict) and profile.get('id') == worker.permissions_profile and profile.get('extends') is None,
++            'approval_never': response.get('approvalPolicy') == 'never',
++            'cwd_matches': response.get('cwd') == '/workspace',
++        },
++    }
++
++
++async def inspect_scripted_callback(transport: Any, *, binding: Any,
++                                    worker_digest: str, outer_attempt_id: str,
++                                    journal: EventJournal, recheck: Any,
++                                    timeout_seconds: float) -> dict[str, Any]:
++    """Exercise the existing callback parser over a reviewed scripted transport.
++
++    Caller owns its exact fixture executable binding and canonical conformance
++    reservation. This cannot establish a native AppServer-issued tool call.
++    """
++    from ..models import SideEffect
++    from .codex_dynamic_tools import DynamicToolSession
++
++    if (not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool)
++            or not 0 < timeout_seconds <= 60):
++        raise ConfigurationError('scripted callback inspection timeout invalid')
++    recheck()
++    active = DynamicToolSession(binding, worker_digest=worker_digest,
++        expected_digest=binding.digest,
++        approved_side_effect=SideEffect(binding.identity['approval_ceiling']),
++        max_bytes=16384, deadline=asyncio.get_running_loop().time()+timeout_seconds,
++        outer_attempt_id=outer_attempt_id, journal=journal)
++    terminal = asyncio.get_running_loop().create_future()
++    def event(method: str, params: dict[str, Any]) -> None:
++        if method == 'fixture/callback-result' and not terminal.done():
++            terminal.set_result(params)
++    unsubscribe = transport.subscribe(event)
++    transport.dynamic_tool_handler = active.call
++    import contextvars
++    transport.dynamic_tool_context = contextvars.copy_context()
++    try:
++        async with asyncio.timeout(timeout_seconds):
++            thread = await transport.request('thread/start', {'dynamicTools': binding.declarations()})
++            active.bind_thread(thread['thread']['id'])
++            turn = await transport.request('fixture/callback', {})
++            active.bind_turn(turn['turn']['id'])
++            result = await terminal
++            if not isinstance(result, dict) or set(result) != {'response_success'} or type(result['response_success']) is not bool:
++                raise ConfigurationError('scripted callback result malformed')
++            recheck()
++            return {'provenance': 'reviewed_scripted_transport', 'model_turns': 0,
++                'native_host_issued_callback': 'unobserved',
++                'binding_digest': binding.digest,
++                'response_success': result['response_success'],
++                'completed_tools': sorted(active.tools_succeeded),
++                'callback_evidence': active.evidence}
++    finally:
++        active.close()
++        try:
++            await transport.cancel_dynamic_tools()
++        finally:
++            unsubscribe()
++            transport.dynamic_tool_handler = None
++            transport.dynamic_tool_context = None
++
++
++class ComposedPairDefinition(StrictModel):
++    """Additive composition identity; historical worker-pair schemas are unchanged."""
++    schema_version: Literal['assessment.composed-pair-inspection.v1'] = 'assessment.composed-pair-inspection.v1'
++    control: ExecutorSpec
++    treatment: ExecutorSpec
++    differential: DifferentialEnvironment
++    shared_versions: dict[str, str]
++    callback_bindings: dict[Digest, Digest]
++    native_backends: dict[Digest, Digest]
++
++    @model_validator(mode='after')
++    def exact_composition(self) -> ComposedPairDefinition:
++        workers = []
++        configs = []
++        if set(self.shared_versions) != {'pandas', 'openpyxl'}:
++            raise ValueError('composed inspection requires exact shared workbook versions')
++        for role in ('control', 'treatment'):
++            spec = getattr(self, role)
++            config = spec.managed_host_config()
++            worker = binding_from_config(config.managed_worker)
++            target = config.invocation
++            if (worker is None or target is None or config.adapter_id.split(':', 1)[0] != 'codex-app-server'
++                    or config.argv != (worker.binary, 'app-server') or not worker.model_proxy_url
++                    or not worker.credential_volume or config.store_prompt or config.store_output
++                    or target.dynamic_tools_digest != self.callback_bindings.get(worker.digest())
++                    or target.mode != ('turn' if role == 'control' else 'dynamic_tool')
++                    or target.local_profile != 'capable_local' or config.artifact is None
++                    or not self.native_backends.get(worker.digest())):
++                raise ValueError('composed inspection requires exact worker/callback/native profiles')
++            workers.append(worker)
++            configs.append(config)
++        validate_worker_pair(*workers)
++        targets = [config.invocation for config in configs]
++        assert targets[0] is not None and targets[1] is not None
++        if (targets[0].native_catalog != targets[1].native_catalog
++                or targets[0].supporting_skills != targets[1].supporting_skills
++                or targets[0].supporting_tools != targets[1].supporting_tools):
++            raise ValueError('composed profiles require identical shared capabilities')
++        keys = {worker.digest() for worker in workers}
++        if set(self.callback_bindings) != keys or set(self.native_backends) != keys:
++            raise ValueError('composed identity maps must cover exactly the selected workers')
++        if configs[0].model_dump(exclude={'adapter_id', 'managed_worker', 'invocation'}) != configs[1].model_dump(exclude={'adapter_id', 'managed_worker', 'invocation'}):
++            raise ValueError('composed profiles require equivalent shared executor settings')
++        return self
++
++
++def protected_callback_evidence(repository: Any, task_router: Any,
++                                scripted_result: dict[str, Any]) -> dict[str, Any]:
++    """Resolve linked canonical child evidence; never infer missing receipts."""
++    from ..assessment.models import content_digest
++    links = scripted_result.get('callback_evidence', [])
++    if not isinstance(links, list) or len(links) > 64:
++        raise ConfigurationError('callback evidence links malformed')
++    references = {item['evidence_ref'] for item in links
++        if isinstance(item, dict) and isinstance(item.get('evidence_ref'), str)}
++    states = []
++    receipt_count = 0
++    scope_digests = set()
++    for reference in references:
++        evidence = repository.get('callback_evidence', reference)
++        claim = repository.get('callback_claim', evidence['claim_digest'])
++        if (claim.get('context_kind') != 'conformance'
++                or evidence.get('task_scope_digest') != claim.get('task_scope_digest')
++                or evidence.get('resources_overlap_outer_trial') is not True):
++            raise ConfigurationError('callback canonical evidence differs')
++        if (claim.get('binding_digest') != scripted_result.get('binding_digest')
++                or claim.get('task_scope_digest') != task_router._task_scope_digest):
++            raise ConfigurationError('callback binding or current scope differs')
++        action_id = 'dynamic_' + claim['call_digest']
++        with task_router.store._lock:
++            attempts = [json.loads(row[0]) for row in task_router.store._connection.execute(
++                'SELECT a.payload_json FROM execution_attempts a JOIN decisions d ON d.decision_id=a.decision_id WHERE d.action_id=?', (action_id,))]
++            receipts = [json.loads(row[0]) for row in task_router.store._connection.execute(
++                'SELECT payload_json FROM receipts WHERE action_id=?', (action_id,))]
++        if len(attempts) > 32 or len(receipts) > 32:
++            raise ConfigurationError('callback child evidence exceeds fixed bound')
++        attempt_map = {content_digest(item): item for item in attempts}
++        receipt_map = {content_digest(item): item for item in receipts}
++        scope_digests.add(claim['task_scope_digest'])
++        for digest in evidence['child_attempt_digests']:
++            if digest not in attempt_map:
++                raise ConfigurationError('callback child attempt is unavailable')
++            if attempt_map[digest].get('task_scope_digest') != claim['task_scope_digest']:
++                raise ConfigurationError('callback child attempt scope differs')
++            states.append(attempt_map[digest]['state'])
++        for digest in evidence['child_receipt_digests']:
++            if digest not in receipt_map:
++                raise ConfigurationError('callback child receipt is unavailable')
++            receipt_count += 1
++    return {'canonical_link_count': len(references), 'child_attempt_states': states,
++        'child_receipt_count': receipt_count, 'task_scope_digests': sorted(scope_digests),
++        'provenance': scripted_result.get('provenance'),
++        'native_host_issued_callback': 'unobserved', 'full_conformance': False}
++
++
++def verify_composed_binding(repository: Any, record: Any, worker_digest: str) -> ExecutorSpec:
++    if record.adapter.split(':', 1)[0] != 'codex-app-server':
++        raise ConfigurationError('composed conformance adapter is unsupported')
++    document = repository.get('codex_dynamic_tools', record.callback_binding_digest)
++    identity = document.get('identity', {})
++    from .codex_dynamic_tools import CodexDynamicTools
++    if (identity.get('implementation_digest') != CodexDynamicTools.implementation_digest()
++            or content_digest(document) != record.callback_binding_digest
++            or identity.get('worker_digest') != worker_digest
++            or identity.get('native_backend_digest') != record.native_backend_digest):
++        raise ConfigurationError('composed callback backend or worker binding differs')
++    composite = repository.get('composed_pair_definition', record.composed_definition_digest)
++    if (composite.get('callback_bindings', {}).get(worker_digest) != record.callback_binding_digest
++            or composite.get('native_backends', {}).get(worker_digest) != record.native_backend_digest):
++        raise ConfigurationError('composed definition does not bind selected callback/native worker')
++    from ..hosts.workers import binding_from_config
++    composed = ComposedPairDefinition.model_validate(composite)
++    profiles = [composed.control, composed.treatment]
++    selected = [spec for spec in profiles if (bound := binding_from_config(spec.managed_host_config().managed_worker)) is not None and bound.digest() == worker_digest]
++    if len(selected) != 1:
++        raise ConfigurationError('composed profile identity is missing or ambiguous')
++    target = selected[0].managed_host_config().invocation
++    if target is None or target.dynamic_tools_digest != record.callback_binding_digest:
++        raise ConfigurationError('composed profile identity is missing or ambiguous')
++    if content_digest(composite) != record.composed_definition_digest:
++        raise ConfigurationError('composed inspection definition differs')
++    with repository.store._lock:
++        for required_review in (record.callback_binding_digest, record.composed_definition_digest):
++            reviewed = repository.store._connection.execute(
++                'SELECT revoked FROM assessment_reviews WHERE digest=?', (required_review,)).fetchone()
++            if reviewed is None or reviewed[0]:
++                raise ConfigurationError('composed boundary requires current exact review')
++    return selected[0]
++
++
++def verify_composed_callback(repository: Any, record: Any, probe: Any, definition: Any,
++                             evidence: Any, selected_spec: ExecutorSpec) -> None:
++    identity = repository.get('codex_dynamic_tools', record.callback_binding_digest)['identity']
++    identity_digest = record.identity_digest
++    from ..economic.prepared import executor_fingerprint
++    from ..models import ExecutionReceipt
++    if probe.host_receipt_digest is None:
++        raise ConfigurationError('actual callback host receipt is missing')
++    host_receipt = ExecutionReceipt.model_validate(repository.get('conformance_host_receipt', probe.host_receipt_digest))
++    if (content_digest(host_receipt) != probe.host_receipt_digest
++            or host_receipt.executor_fingerprint != executor_fingerprint(selected_spec)
++            or host_receipt.metadata.get('host_runtime_digest') != identity_digest
++            or host_receipt.metadata.get('dynamic_tools_digest') != record.callback_binding_digest
++            or host_receipt.status is not ExecutionStatus.SUCCESS
++            or host_receipt.metadata.get('dynamic_cleanup_confirmed') is not True
++            or host_receipt.metadata.get('model_turn_count') != 1
++            or not host_receipt.accounting.model_usage):
++        raise ConfigurationError('callback host receipt is not the pinned actual process identity')
++    invocation = definition.executor.managed_host_config().invocation if definition.executor.kind.value == 'host_managed' else None
++    if (invocation is None or invocation.dynamic_tools_digest != record.callback_binding_digest
++            or probe.observed.get('callback_origin') != 'native_app_server'
++            or probe.observed.get('native_callback_observed') is not True
++            or not any(event.kind == 'action.completed' and isinstance(event.source_id, str) and event.source_id.startswith(('dynamic-complete:', 'adapter:dynamic-complete:')) for event in evidence.events)
++            or not any(event.accounting is not None and event.accounting.model_usage for event in evidence.events)):
++        raise ConfigurationError('full composed conformance requires an actual model-issued native callback')
++    links = [event.evidence_ref for event in evidence.events
++             if isinstance(event.source_id, str) and event.source_id.startswith(('dynamic-link:', 'adapter:dynamic-link:')) and event.evidence_ref is not None]
++    if not links:
++        raise ConfigurationError('native callback lacks durable child evidence')
++    for reference in links:
++        child = repository.get('callback_evidence', reference)
++        claim = repository.get('callback_claim', child['claim_digest'])
++        if (content_digest(child) != reference
++                or content_digest(claim) != child['claim_digest']
++                or not any(event.action_digest == claim.get('call_digest') and event.evidence_ref == reference for event in evidence.events)
++                or not any(event.kind == 'action.completed' and event.action_digest == claim.get('call_digest') for event in evidence.events)
++                or claim.get('context_kind') != 'conformance' or claim.get('model_turn_allowance') != 1
++                or claim.get('binding_digest') != record.callback_binding_digest
++                or child.get('task_scope_digest') != claim.get('task_scope_digest')
++                or not child.get('child_attempt_digests') or not child.get('child_receipt_digests')):
++            raise ConfigurationError('native callback evidence is not bound to a model conformance allowance')
++        from ..attempts import ExecutionAttempt
++        request = ConformanceProbeRequest.model_validate(repository.get('conformance_request', claim['request_digest']))
++        operation = repository.get('operation_start', claim['operation_reference'])
++        outer = ExecutionAttempt.model_validate(repository.get('callback_outer_attempt', claim['outer_attempt_reference']))
++        from .codex_invocation import contract_digest
++        if (content_digest(outer) != claim['outer_attempt_reference']
++                or content_digest(operation) != claim['operation_reference']
++                or contract_digest({'attempt_id': outer.attempt_id}) != claim.get('outer_attempt_digest')
++                or content_digest(request) != claim['request_digest']
++                or request.schema_version != 'assessment.conformance-request.v4'
++                or request.operation != 'composed_pair_inspection' or request.composed_model_turns != 1
++                or request.pair_definition_digest != record.composed_definition_digest
++                or record.callback_binding_digest not in request.definition_digests
++                or operation.get('plan_id') != request.plan_id or operation.get('stage') != 'composed_pair_inspection'
++                or operation.get('reserved', {}).get('max_model_turns') != 1
++                or evidence.attempt_id != outer.attempt_id
++                or outer.state.value != 'INVOKING'
++                or outer.executor_id != selected_spec.id
++                or host_receipt.executor_id != selected_spec.id
++                or outer.decision_id != host_receipt.decision_id
++                or outer.executor_fingerprint != host_receipt.executor_fingerprint):
++            raise ConfigurationError('native callback request/reservation/host attempt lineage differs')
++        repository.authorize(request)
++        from ..assessment.identity import verify_dependencies
++        verify_dependencies(request.executable_dependencies)
++        from ..models import TaskScope
++        scope = TaskScope.model_validate(repository.get('callback_task_scope', child['task_scope_reference']))
++        limits = identity.get('scope_limits', {})
++        from ..models import SideEffect
++        if (content_digest(scope) != child['task_scope_digest']
++                or scope.executor_fingerprints != identity.get('executor_fingerprints')
++                or scope.max_attempts > limits.get('max_attempts', 0)
++                or scope.max_attempt_seconds > limits.get('max_attempt_seconds', 0)
++                or scope.approval_ceiling.rank > SideEffect(identity['approval_ceiling']).rank):
++            raise ConfigurationError('native callback scope evidence differs')
++        from .codex_sandbox import NativeSandboxConfig, native_backend_digest
++        native_specs = {name: ExecutorSpec.model_validate(repository.get('callback_child_executor', reference))
++                        for name, reference in child.get('child_executor_digests', {}).items()}
++        if set(native_specs) != set(scope.executor_fingerprints):
++            raise ConfigurationError('callback native executor mapping is incomplete')
++        backends = {}
++        for name, executor in native_specs.items():
++            boundary = NativeSandboxConfig.model_validate(executor.config.get('native_sandbox', {}))
++            if (content_digest(executor) != child['child_executor_digests'][name]
++                    or executor_fingerprint(executor) != scope.executor_fingerprints[name]
++                    or executor.kind is not ExecutorKind.COMMAND
++                    or not executor.config.get('argv_literal') or not boundary.single_process):
++                raise ConfigurationError('callback native executor binding differs')
++            boundary.validate_single_process()
++            boundary.argv([])  # Offline policy compilation and streamed native-binary pin check.
++            backends[name] = native_backend_digest(boundary)
++        if contract_digest(backends) != record.native_backend_digest:
++            raise ConfigurationError('callback actual aggregate native backend differs')
++        attempts = [ExecutionAttempt.model_validate(repository.get('callback_child_attempt', item)) for item in child['child_attempt_digests']]
++        receipts = [ExecutionReceipt.model_validate(repository.get('callback_child_receipt', item)) for item in child['child_receipt_digests']]
++        if any(content_digest(item) != expected for item, expected in zip(attempts, child['child_attempt_digests'], strict=True)) or any(content_digest(item) != expected for item, expected in zip(receipts, child['child_receipt_digests'], strict=True)):
++            raise ConfigurationError('callback child canonical digest differs')
++        for receipt in receipts:
++            if receipt.action_id != 'dynamic_' + claim['call_digest']:
++                raise ConfigurationError('callback child action differs')
++            matching = [item for item in attempts if item.decision_id == receipt.decision_id
++                        and item.task_scope_digest == child['task_scope_digest']
++                        and receipt.receipt_id in item.terminal_receipt_ids
++                        and item.executor_fingerprint == receipt.executor_fingerprint]
++            if len(matching) != 1 or scope.executor_fingerprints.get(receipt.executor_id) != receipt.executor_fingerprint:
++                raise ConfigurationError('callback child receipt does not match the scoped canonical attempt')
++            from .codex_sandbox import NativeSandboxConfig, native_backend_digest
++            executor_reference = child.get('child_executor_digests', {}).get(receipt.executor_id)
++            executor = ExecutorSpec.model_validate(repository.get('callback_child_executor', executor_reference or ''))
++            boundary = NativeSandboxConfig.model_validate(executor.config.get('native_sandbox', {}))
++            if (content_digest(executor) != executor_reference
++                    or executor_fingerprint(executor) != receipt.executor_fingerprint
++                    or executor.kind is not ExecutorKind.COMMAND
++                    or not executor.config.get('argv_literal') or not boundary.single_process
++                    or receipt.metadata.get('enforcement_backend_digest') != native_backend_digest(boundary)):
++                raise ConfigurationError('callback child native backend evidence differs')
++            boundary.validate_single_process()
++
+--- a/src/aeep/router.py
++++ b/src/aeep/router.py
+@@ -671,6 +671,11 @@
+             "adapter_id",
+             "actual_model",
+             "host_runtime_digest",
++            "dynamic_tools_digest",
++            "dynamic_tool_calls",
++            "dynamic_cleanup_confirmed",
++            "dynamic_declaration_bytes",
++            "dynamic_schema_bytes",
+             "host_failure_code",
+             "host_tools_used",
+             "host_available_tools",
+--- /dev/null
++++ b/tests/fixtures/fake_composed_callback.py
+@@ -0,0 +1,26 @@
++"""Pinned zero-model scripted JSONL callback peer; no credentials or native claims."""
++import json
++import sys
++
++arguments = json.loads(sys.argv[1]) if len(sys.argv) == 2 else {}
++assert isinstance(arguments, dict) and len(json.dumps(arguments).encode()) <= 4096
++namespace = tool = None
++for line in sys.stdin:
++    message = json.loads(line)
++    method = message.get('method')
++    if method == 'initialize':
++        print(json.dumps({'id': message['id'], 'result': {'userAgent': 'composed-fixture/1'}}), flush=True)
++    elif method == 'thread/start':
++        declarations = message['params']['dynamicTools']
++        assert len(declarations) == 1 and len(declarations[0]['tools']) == 1
++        namespace = declarations[0]['name']
++        tool = declarations[0]['tools'][0]['name']
++        print(json.dumps({'id': message['id'], 'result': {'thread': {'id': 'fixture-thread'}}}), flush=True)
++    elif method == 'fixture/callback':
++        print(json.dumps({'id': 'fixture-call-request', 'method': 'item/tool/call', 'params': {
++            'threadId': 'fixture-thread', 'turnId': 'fixture-turn', 'callId': 'fixture-call',
++            'namespace': namespace, 'tool': tool, 'arguments': arguments}}), flush=True)
++        print(json.dumps({'id': message['id'], 'result': {'turn': {'id': 'fixture-turn'}}}), flush=True)
++    elif message.get('id') == 'fixture-call-request':
++        print(json.dumps({'method': 'fixture/callback-result', 'params': {
++            'response_success': message.get('result', {}).get('success') is True}}), flush=True)
+--- /dev/null
++++ b/tests/test_codex_composed_inspection.py
+@@ -0,0 +1,267 @@
++"""Offline definition checks; actual worker/native conformance remains separate."""
++from types import SimpleNamespace
++from unittest.mock import AsyncMock
++
++import pytest
++
++from aeep.errors import ConfigurationError
++from aeep.execution import EventJournal
++from aeep.hosts.codex_app_server import AppServerOptions
++from aeep.hosts.codex_dynamic_tools import CodexDynamicTools
++from aeep.hosts.codex_pair_inspection import inspect_dynamic_declaration
++from aeep.models import ManagedHostInvocation
++
++
++@pytest.mark.asyncio
++async def test_zero_turn_declaration_does_not_install_handler_or_claim_exposure(monkeypatch):
++    holder = {}
++    async def forbidden(*args):
++        raise AssertionError('inspection dispatched task')
++    binding = CodexDynamicTools(namespace='task', tools=[{'name': 'fixed',
++        'description': 'Synthetic fixed task', 'inputSchema': {'type': 'object'}}],
++        identity={'worker_digest': 'a'*64, 'native_backend_digest': 'b'*64,
++                  'implementation_digest': 'c'*64, 'approval_ceiling': 'read'},
++        max_calls=1, timeout_seconds=1, call=forbidden,
++        check=lambda: holder['binding'].digest)
++    holder['binding'] = binding
++    response = {'thread': {'id': 'synthetic'}, 'approvalsReviewer': 'user',
++        'activePermissionProfile': {'id': 'aeep', 'extends': None},
++        'approvalPolicy': 'never', 'cwd': '/workspace'}
++    transport = SimpleNamespace(options=AppServerOptions(experimental_api=True),
++        request=AsyncMock(return_value=response), dynamic_tool_handler=None)
++    adapter = SimpleNamespace(transport=transport, list_models=AsyncMock(return_value=[]))
++    target = ManagedHostInvocation(mode='turn', dynamic_tools_digest=binding.digest)
++    config = SimpleNamespace(invocation=target)
++    worker = SimpleNamespace(digest=lambda: 'a'*64, permissions_profile='aeep', reviewed_files={})
++    monkeypatch.setattr('aeep.hosts.codex_app_server._select_model_config', lambda models, cfg: SimpleNamespace(id='metadata-only'))
++    monkeypatch.setattr('aeep.hosts.codex_invocation.inventory', AsyncMock(return_value={}))
++    monkeypatch.setattr('aeep.hosts.codex_invocation.isolated_config', lambda *args, **kwargs: {})
++    monkeypatch.setattr('aeep.hosts.codex_invocation.verify_thread_inventory', AsyncMock())
++    result = await inspect_dynamic_declaration(adapter, config=config, worker=worker,
++        binding=binding, journal=EventJournal('synthetic'), recheck=lambda: None)
++    assert result['model_tool_exposure'] == 'unknown'
++    assert result['model_turns'] == result['task_calls'] == 0
++    assert transport.dynamic_tool_handler is None
++    assert [call.args[0] for call in transport.request.await_args_list] == ['thread/start']
++    transport.options = AppServerOptions(experimental_api=False)
++    with pytest.raises(ConfigurationError):
++        await inspect_dynamic_declaration(adapter, config=config, worker=worker,
++            binding=binding, journal=EventJournal('rejected'), recheck=lambda: None)
++
++
++@pytest.mark.asyncio
++async def test_scripted_callback_uses_transport_but_does_not_claim_native_host_call():
++    import sys
++    from pathlib import Path
++
++    from aeep.hosts.codex_app_server import CodexAppServerTransport
++    from aeep.hosts.codex_pair_inspection import inspect_scripted_callback
++
++    holder = {}
++    observed = []
++    async def call(name, arguments):
++        observed.append((name, arguments))
++        return {'isError': False, 'structuredContent': {'ok': True}}
++    binding = CodexDynamicTools(namespace='bounded', tools=[{'name': 'fixed',
++        'description': 'Operator bound synthetic task',
++        'inputSchema': {'type': 'object', 'additionalProperties': False}}],
++        identity={'worker_digest': 'a'*64, 'native_backend_digest': 'b'*64,
++                  'implementation_digest': 'c'*64, 'approval_ceiling': 'read'},
++        max_calls=1, timeout_seconds=1, call=call,
++        check=lambda: holder['binding'].digest)
++    holder['binding'] = binding
++    transport = CodexAppServerTransport(argv=(sys.executable, '-u',
++        str(Path(__file__).parent/'fixtures/fake_composed_callback.py')),
++        options=AppServerOptions(experimental_api=True))
++    try:
++        result = await inspect_scripted_callback(transport, binding=binding,
++            worker_digest='a'*64, outer_attempt_id='owned-fixture',
++            journal=EventJournal('scripted'), recheck=lambda: None, timeout_seconds=2)
++        assert result['response_success'] and observed == [('fixed', {})]
++        assert result['completed_tools'] == ['fixed']
++        assert result['native_host_issued_callback'] == 'unobserved'
++        assert result['model_turns'] == 0
++    finally:
++        await transport.close()
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize('case', ['guard', 'cancel_after_write'])
++async def test_canonical_scripted_callback_executes_protected_csv_native_guard(tmp_path, case):
++    """Actual native child + scripted host peer; never full native-host conformance."""
++    import errno
++    import json
++    import sys
++    import time
++    from datetime import timedelta
++    from pathlib import Path
++    from types import SimpleNamespace
++
++    from test_v08_assessment import setup_assessment
++    from test_v08_native_process import BINARY, boundary
++
++    from aeep.assessment.fixed_helper import AssessmentCallbackAuthority, FixedHelperService
++    from aeep.assessment.identity import runtime_dependencies
++    from aeep.assessment.models import AssessmentLimits, ConformanceProbeRequest, content_digest
++    from aeep.assessment.onboarding import reference_spec
++    from aeep.assessment.repository import AssessmentRepository
++    from aeep.attempts import ExecutionAttempt
++    from aeep.economic.prepared import executor_fingerprint
++    from aeep.hosts.codex_app_server import CodexAppServerTransport
++    from aeep.hosts.codex_invocation import contract_digest
++    from aeep.hosts.codex_pair_inspection import (
++        inspect_scripted_callback,
++        protected_callback_evidence,
++    )
++    from aeep.hosts.codex_sandbox import native_backend_digest
++    from aeep.models import (
++        ActionConstraints,
++        ExecutorKind,
++        Manifest,
++        PolicyConfig,
++        SideEffect,
++        StrictModel,
++        TaskScope,
++        utc_now,
++    )
++    from aeep.router import Router
++
++    if sys.platform != 'darwin' or not BINARY.exists():
++        pytest.skip('pinned native Mac runtime required')
++    (tmp_path/'assessment').mkdir()
++    root, assessment, plan, _grant = setup_assessment(tmp_path/'assessment')
++    private = tmp_path/'protected'
++    private.mkdir()
++    native = boundary(private.resolve())
++    canary = private/'private-canary'
++    canary.write_text('synthetic-private-witness')
++    native = native.model_copy(update={'deny_roots': [str(canary), str(private/'state.db')]})
++    text = f'hard_nproc,fork_errno,spawn_errno,marker,private_denied\n0:0,{errno.EAGAIN},{errno.EAGAIN},post_exec,true\n'
++    program = ('import os,resource,json; r={"hard_nproc":":".join(map(str,resource.getrlimit(resource.RLIMIT_NPROC))),"marker":"post_exec"};\n'
++        'try:os.fork();r["fork_errno"]="unexpected"\nexcept OSError as e:r["fork_errno"]=str(e.errno)\n'
++        'try:os.posix_spawn("/usr/bin/true",["/usr/bin/true"],{});r["spawn_errno"]="unexpected"\nexcept OSError as e:r["spawn_errno"]=str(e.errno)\n'
++        f'try:open({str(canary)!r}).read();r["private_denied"]="false"\nexcept PermissionError:r["private_denied"]="true"\n'
++        'print(json.dumps({"records":[r]}))')
++    marker = private/'data'/'owned-callback-effect'
++    if case == 'cancel_after_write':
++        program = f'import pathlib,time;pathlib.Path({str(marker)!r}).write_text("synthetic");time.sleep(30)'
++    ceiling = SideEffect.WRITE if case == 'cancel_after_write' else SideEffect.READ
++    spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
++        'side_effect': ceiling, 'idempotent': case == 'guard',
++        'config': {'argv': [native.python_binary, '-I', '-c', program],
++            'argv_literal': True, 'output': {'type': 'json'}, 'timeout_seconds': 5,
++            'native_sandbox': native.model_dump(mode='json')}})
++    task_router = Router(Manifest(database=str(private/'state.db'), executors=[spec],
++        policies={'balanced': PolicyConfig(name='balanced', constraints=ActionConstraints(max_side_effect=ceiling))}),
++        manifest_path=private.resolve()/'manifest.json')
++    task_repo = AssessmentRepository(task_router.store)
++    scope = TaskScope(scope_id='native-inspection', project_root=str(private.resolve()),
++        executor_fingerprints={spec.id: executor_fingerprint(spec)}, approval_ceiling=ceiling, max_attempts=1,
++        max_attempt_seconds=5, expires_at=utc_now()+timedelta(minutes=5))
++    task_repo.review(task_repo.put('task_scope', scope.scope_id, scope))
++    task_router.bind_task_scope(scope.scope_id)
++    descriptor = {'name': 'fixed_csv', 'description': 'Fixed public native CSV enforcement probe',
++        'inputSchema': spec.input_schema}
++    fixed = FixedHelperService(task_router, spec.id, task_scope=scope.scope_id,
++        declaration=descriptor, check=lambda: content_digest(task_repo.get('task_scope', task_router._task_scope_digest)),
++        approved_side_effect=ceiling)
++    holder = {}
++    def resolve():
++        return holder['binding'].require_reviewed_binding(assessment.repository,
++            worker=SimpleNamespace(digest=lambda: 'a'*64), service=fixed)
++    callback_errors = []
++    async def authorized(name, arguments):
++        try:
++            return await holder['authority'].call(fixed, name, arguments)
++        except Exception as error:
++            import hashlib
++            message = str(error)
++            callback_errors.append({'type': type(error).__name__, 'message_bytes': len(message.encode()),
++                'message_sha256': hashlib.sha256(message.encode()).hexdigest()})
++            raise
++    binding = CodexDynamicTools.task_service(fixed, namespace='inspection',
++        identity={'worker_digest': 'a'*64, 'native_backend_digest': contract_digest({spec.id: native_backend_digest(native)}),
++            'implementation_digest': CodexDynamicTools.implementation_digest(), 'approval_ceiling': ceiling.value,
++            'executor_fingerprints': scope.executor_fingerprints,
++            'scope_limits': {'max_attempts': 1, 'max_attempt_seconds': 5}},
++        max_calls=1, timeout_seconds=5.0, check=resolve, authorized_call=authorized)
++    holder['binding'] = binding
++    class Definition(StrictModel):
++        namespace: str
++        tools: list[dict]
++        identity: dict
++        max_calls: int
++        timeout_seconds: float
++    definition_digest = assessment.repository.put('codex_dynamic_tools', binding.digest,
++        Definition.model_validate(binding.definition()))
++    assessment.repository.review(definition_digest)
++    request = ConformanceProbeRequest(schema_version='assessment.conformance-request.v4',
++        subject_digest=plan.subject_digest, recipe_digest=plan.recipe_digest,
++        environment_digest=plan.environment_digest, mapping_digest=plan.mapping_digest,
++        authorization_id=plan.authorization_id, worker_digest='a'*64,
++        definition_digests=[*plan.definition_digests, binding.digest],
++        pair_definition_digest=binding.digest, executable_dependencies=runtime_dependencies(),
++        operation='composed_pair_inspection', composed_model_turns=0)
++    assessment.repository.put('conformance_request', request.plan_id, request)
++    operation = 'owned-composed-inspection'
++    started = time.perf_counter()
++    assessment.repository.reserve(request, operation, AssessmentLimits(max_operations=1,
++        max_elapsed_seconds=20, max_model_turns=0), stage='composed_pair_inspection')
++    root._callback_conformance_identity = (request.plan_id, operation)
++    root._trial_check = lambda: assessment.repository.authorize(request)
++    attempt = root.store.create_execution_attempt(ExecutionAttempt(attempt_id='owned-composed-outer',
++        decision_id='owned-composed-decision', action_digest='b'*64, executor_id=plan.candidate_id,
++        executor_fingerprint='c'*64, side_effect=ceiling, idempotent=case == 'guard',
++        owner_id='operator', state='INVOKING', invocation_start_digest='sha256:'+'d'*64))
++    holder['authority'] = AssessmentCallbackAuthority.for_conformance(assessment, request, operation,
++        outer_router=root, outer_attempt_id=attempt.attempt_id, binding_digest=binding.digest,
++        resolve_binding=resolve, max_calls=1)
++    task_router._trial_check = holder['authority'].check
++    task_router._trial_deadline = root._trial_deadline
++    transport = CodexAppServerTransport(argv=(sys.executable, '-u',
++        str(Path(__file__).parent/'fixtures/fake_composed_callback.py'),
++        json.dumps({'text': text, 'delimiter': ','})), options=AppServerOptions(experimental_api=True))
++    try:
++        if case == 'cancel_after_write':
++            import asyncio
++            task = asyncio.create_task(inspect_scripted_callback(transport, binding=binding, worker_digest='a'*64,
++                outer_attempt_id=attempt.attempt_id, journal=EventJournal(operation),
++                recheck=holder['authority'].check, timeout_seconds=10))
++            async with asyncio.timeout(5):
++                # The marker is an independent native-process observation.
++                while not marker.exists():
++                    if task.done():
++                        result = await task
++                        raise AssertionError({'callback_errors': callback_errors, 'response_success': result['response_success'], 'evidence': result['callback_evidence']})
++                    await asyncio.sleep(.02)
++            task.cancel()
++            with pytest.raises(asyncio.CancelledError):
++                await task
++            assert marker.read_text() == 'synthetic'
++            with task_router.store._lock:
++                states = [json.loads(row[0])['state'] for row in task_router.store._connection.execute('SELECT payload_json FROM execution_attempts')]
++            assert 'INDETERMINATE' in states
++            assert not transport._dynamic_tasks
++            return
++        result = await inspect_scripted_callback(transport, binding=binding, worker_digest='a'*64,
++            outer_attempt_id=attempt.attempt_id, journal=EventJournal(operation),
++            recheck=holder['authority'].check, timeout_seconds=10)
++        evidence = protected_callback_evidence(assessment.repository, task_router, result)
++        assert result['response_success'] and evidence['child_receipt_count'] == 1
++        assert canary.read_text() == 'synthetic-private-witness'
++        assert evidence['canonical_link_count'] == 1 and evidence['full_conformance'] is False
++        assert evidence['native_host_issued_callback'] == 'unobserved'
++        assert assessment.repository.operation_ledger(request.plan_id).operations[0].elapsed_seconds is None
++        from aeep.errors import NoRouteError
++        task_repo.review(content_digest(scope), revoke=True)
++        with pytest.raises((ConfigurationError, NoRouteError)):
++            await inspect_scripted_callback(transport, binding=binding, worker_digest='a'*64,
++                outer_attempt_id=attempt.attempt_id, journal=EventJournal(operation+'-rejected'),
++                recheck=holder['authority'].check, timeout_seconds=1)
++        with task_router.store._lock:
++            assert task_router.store._connection.execute('SELECT count(*) FROM execution_attempts').fetchone()[0] == 1
++    finally:
++        await transport.close()
++        assessment.repository.finish_operation(operation, elapsed_seconds=time.perf_counter()-started)
++        await task_router.close()
++        await root.close()
+--- /dev/null
++++ b/tests/test_v08_composed_contract.py
+@@ -0,0 +1,85 @@
++"""Finite composed authority preserves old requests and rejects coerced allowances."""
++import pytest
++from pydantic import ValidationError
++
++from aeep.assessment.models import ConformanceProbeRequest
++
++pytestmark = pytest.mark.assessment_contract
++
++
++def request(**changes):
++    value = dict(plan_id="fixed", subject_digest="a"*64, recipe_digest="b"*64,
++        mapping_digest="c"*64, environment_digest="d"*64, authorization_id="grant",
++        definition_digests=["e"*64], worker_digest="f"*64, executable_dependencies={"runtime":"1"*64})
++    value.update(changes)
++    return value
++
++@pytest.mark.parametrize("turns", [True, False, 0.5, 1.0, "0", "1", -1, 2])
++def test_composed_allowance_is_strict(turns):
++    with pytest.raises(ValidationError):
++        ConformanceProbeRequest.model_validate(request(schema_version="assessment.conformance-request.v4",
++            operation="composed_pair_inspection", pair_definition_digest="e"*64, composed_model_turns=turns))
++
++@pytest.mark.parametrize("turns", [0,1])
++def test_composed_finite_allowance(turns):
++    parsed = ConformanceProbeRequest.model_validate(request(schema_version="assessment.conformance-request.v4",
++        operation="composed_pair_inspection", pair_definition_digest="e"*64, composed_model_turns=turns))
++    assert parsed.model_dump()["composed_model_turns"] == turns
++
++def test_legacy_request_exact_serialization():
++    frozen = request(schema_version="assessment.conformance-request.v1")
++    assert ConformanceProbeRequest.model_validate(frozen).model_dump(mode="json") == frozen
++
++def test_old_request_cannot_gain_composed_authority():
++    with pytest.raises(ValidationError):
++        ConformanceProbeRequest.model_validate(request(composed_model_turns=1))
++    with pytest.raises(ValidationError):
++        ConformanceProbeRequest.model_validate(request(operation="composed_pair_inspection"))
++
++
++def test_scripted_callback_cannot_supply_full_native_proof():
++    from types import SimpleNamespace
++
++    from aeep.errors import ConfigurationError
++    from aeep.hosts.codex_pair_inspection import verify_composed_callback
++    class Repo:
++        def get(self, kind, identity):
++            assert kind == "codex_dynamic_tools"
++            return {"identity": {}}
++    with pytest.raises(ConfigurationError, match="host receipt"):
++        verify_composed_callback(Repo(), SimpleNamespace(callback_binding_digest="a"*64, identity_digest="b"*64),
++            SimpleNamespace(host_receipt_digest=None), None, None, None)
++
++def test_dynamic_receipt_metadata_retains_only_safe_scalars():
++    from aeep.router import Router
++    supplied = {"dynamic_tools_digest": "a"*64, "dynamic_tool_calls": 1,
++        "dynamic_cleanup_confirmed": True, "dynamic_schema_bytes": 12,
++        "dynamic_declaration_bytes": 15, "raw_callback_arguments": {"secret":"payload"}}
++    assert Router._safe_receipt_metadata(supplied) == {key:value for key,value in supplied.items()
++        if key != "raw_callback_arguments"}
++
++
++def legacy_boundary():
++    return dict(schema_version="assessment.boundary-conformance.v1", conformance_id="old",
++        source_digest="1"*64, worker_digest="2"*64, image_digest="sha256:"+"3"*64,
++        binary_digest="4"*64, adapter="fixture", adapter_version="1",
++        effective_policy_digest="5"*64, reviewed_inventory_digest="6"*64, identity_digest="7"*64,
++        enforcement_definition_digest="8"*64, advertised_tools=[], permitted_tools=[], used_tools=[], probe_digests=[])
++
++def test_legacy_boundary_exact_serialization_and_no_composed_upgrade():
++    from aeep.assessment.boundary import BoundaryConformance
++    frozen=legacy_boundary()
++    assert BoundaryConformance.model_validate(frozen).model_dump(mode="json") == frozen
++    with pytest.raises(ValidationError):
++        BoundaryConformance.model_validate({**frozen, "callback_binding_digest":"a"*64})
++
++@pytest.mark.parametrize("missing", ["configuration_digest", "effective_inventory",
++    "callback_binding_digest", "native_backend_digest", "composed_definition_digest"])
++def test_composed_boundary_requires_all_exact_bindings(missing):
++    from aeep.assessment.boundary import BoundaryConformance
++    value={**legacy_boundary(), "schema_version":"assessment.boundary-conformance.v3",
++        "configuration_digest":"a"*64, "effective_inventory":{}, "callback_binding_digest":"b"*64,
++        "native_backend_digest":"c"*64, "composed_definition_digest":"d"*64}
++    value.pop(missing)
++    with pytest.raises(ValidationError):
++        BoundaryConformance.model_validate(value)
+--- a/tests/test_v08_conformance.py
++++ b/tests/test_v08_conformance.py
+@@ -39,7 +39,7 @@
+         require_managed_boundaries(None, environment, [spec], {"host": "1" * 64})
+     environment.conformance_digests = {"host": "2" * 64}
+     # This fixture verifies binding checks, not effective host permissions.
+-    record = SimpleNamespace(adapter="codex-exec", adapter_version="1", image_digest=worker.image,
++    record = SimpleNamespace(schema_version="assessment.boundary-conformance.v1", adapter="codex-exec", adapter_version="1", image_digest=worker.image,
+         binary_digest=worker.binary_sha256, effective_policy_digest=worker.configuration_digest, configuration_digest=None)
+     monkeypatch.setattr("aeep.assessment.boundary.require_conformance", lambda *_args, **_kwargs: record)
+     require_managed_boundaries(None, environment, [spec], {"host": "1" * 64})
+--- a/scripts/generate_schemas.py
++++ b/scripts/generate_schemas.py
+@@ -57,7 +57,7 @@
+ from aeep.discovery import RegistryCandidate
+ from aeep.execution import ExecutionEvent, ExecutionEvidence, ExecutorCapabilities
+ from aeep.hosts.codex_inspection import WorkerInspectionResult
+-from aeep.hosts.codex_pair_inspection import WorkerPairInspection
++from aeep.hosts.codex_pair_inspection import ComposedPairDefinition, WorkerPairInspection
+ from aeep.hosts.codex_sandbox import NativeSandboxConfig
+ from aeep.hosts.workers import ManagedWorkerBinding
+ from aeep.integrations import export_tools
+@@ -205,6 +205,7 @@
+     "assessment-conformance-request.schema.json": ConformanceProbeRequest,
+     "assessment-worker-inspection.schema.json": WorkerInspectionResult,
+     "assessment-worker-pair-inspection.schema.json": WorkerPairInspection,
++    "assessment-composed-pair-inspection.schema.json": ComposedPairDefinition,
+     "assessment-definition-proposal.schema.json": DefinitionProposal,
+     "benchmark-suite.schema.json": BenchmarkSuite,
+     "benchmark-campaign-report.schema.json": BenchmarkCampaignReport,
+--- a/schemas/assessment-boundary-conformance.schema.json
++++ b/schemas/assessment-boundary-conformance.schema.json
+@@ -5,7 +5,8 @@
+       "default": "assessment.boundary-conformance.v1",
+       "enum": [
+         "assessment.boundary-conformance.v1",
+-        "assessment.boundary-conformance.v2"
++        "assessment.boundary-conformance.v2",
++        "assessment.boundary-conformance.v3"
+       ],
+       "title": "Schema Version",
+       "type": "string"
+@@ -119,6 +120,45 @@
+       ],
+       "default": null,
+       "title": "Effective Inventory"
++    },
++    "callback_binding_digest": {
++      "anyOf": [
++        {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null,
++      "title": "Callback Binding Digest"
++    },
++    "native_backend_digest": {
++      "anyOf": [
++        {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null,
++      "title": "Native Backend Digest"
++    },
++    "composed_definition_digest": {
++      "anyOf": [
++        {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null,
++      "title": "Composed Definition Digest"
+     }
+   },
+   "required": [
+--- a/schemas/assessment-boundary-probe.schema.json
++++ b/schemas/assessment-boundary-probe.schema.json
+@@ -46,6 +46,19 @@
+       },
+       "title": "Observed",
+       "type": "object"
++    },
++    "host_receipt_digest": {
++      "anyOf": [
++        {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null,
++      "title": "Host Receipt Digest"
+     }
+   },
+   "required": [
+--- /dev/null
++++ b/schemas/assessment-composed-pair-inspection.schema.json
+@@ -0,0 +1,837 @@
++{
++  "$defs": {
++    "CashEstimate": {
++      "additionalProperties": false,
++      "properties": {
++        "amount_usd": {
++          "anyOf": [
++            {
++              "minimum": 0.0,
++              "type": "number"
++            },
++            {
++              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Amount Usd"
++        },
++        "upper_bound_usd": {
++          "anyOf": [
++            {
++              "minimum": 0.0,
++              "type": "number"
++            },
++            {
++              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Upper Bound Usd"
++        },
++        "evidence": {
++          "$ref": "#/$defs/MeasurementEvidence"
++        }
++      },
++      "title": "CashEstimate",
++      "type": "object"
++    },
++    "DifferentialEnvironment": {
++      "additionalProperties": false,
++      "description": "Reviewed expected inventories, not a claim that permissions were verified.",
++      "properties": {
++        "shared_definition_digest": {
++          "pattern": "^[a-f0-9]{64}$",
++          "title": "Shared Definition Digest",
++          "type": "string"
++        },
++        "control_inventory": {
++          "additionalProperties": {
++            "pattern": "^[a-f0-9]{64}$",
++            "type": "string"
++          },
++          "title": "Control Inventory",
++          "type": "object"
++        },
++        "treatment_inventory": {
++          "additionalProperties": {
++            "pattern": "^[a-f0-9]{64}$",
++            "type": "string"
++          },
++          "title": "Treatment Inventory",
++          "type": "object"
++        },
++        "candidate_inventory": {
++          "additionalProperties": {
++            "pattern": "^[a-f0-9]{64}$",
++            "type": "string"
++          },
++          "minProperties": 1,
++          "title": "Candidate Inventory",
++          "type": "object"
++        },
++        "candidate_paths": {
++          "items": {
++            "type": "string"
++          },
++          "minItems": 1,
++          "title": "Candidate Paths",
++          "type": "array"
++        },
++        "candidate_aliases": {
++          "items": {
++            "type": "string"
++          },
++          "title": "Candidate Aliases",
++          "type": "array"
++        }
++      },
++      "required": [
++        "shared_definition_digest",
++        "control_inventory",
++        "treatment_inventory",
++        "candidate_inventory",
++        "candidate_paths"
++      ],
++      "title": "DifferentialEnvironment",
++      "type": "object"
++    },
++    "EstimateSource": {
++      "enum": [
++        "static",
++        "historical",
++        "blended",
++        "quote",
++        "observed"
++      ],
++      "title": "EstimateSource",
++      "type": "string"
++    },
++    "EstimateUncertainty": {
++      "additionalProperties": false,
++      "description": "Empirical bounds from one exact evidence cohort; never authorization.",
++      "properties": {
++        "profile": {
++          "const": "aeep-estimate-uncertainty-v1",
++          "default": "aeep-estimate-uncertainty-v1",
++          "title": "Profile",
++          "type": "string"
++        },
++        "method": {
++          "const": "empirical-nearest-rank-wilson-v1",
++          "default": "empirical-nearest-rank-wilson-v1",
++          "title": "Method",
++          "type": "string"
++        },
++        "sample_size": {
++          "minimum": 5,
++          "title": "Sample Size",
++          "type": "integer"
++        },
++        "cohort_digest": {
++          "pattern": "^sha256:[a-f0-9]{64}$",
++          "title": "Cohort Digest",
++          "type": "string"
++        },
++        "resources_p50": {
++          "$ref": "#/$defs/ResourceVector"
++        },
++        "resources_p95": {
++          "$ref": "#/$defs/ResourceVector"
++        },
++        "cash_p95_usd": {
++          "anyOf": [
++            {
++              "minimum": 0.0,
++              "type": "number"
++            },
++            {
++              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "description": "Observed p95 only; never a payment authorization maximum.",
++          "title": "Cash P95 Usd"
++        },
++        "success_lower_bound": {
++          "maximum": 1,
++          "minimum": 0,
++          "title": "Success Lower Bound",
++          "type": "number"
++        },
++        "quality_sample_size": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Quality Sample Size",
++          "type": "integer"
++        },
++        "quality_lower_bound": {
++          "anyOf": [
++            {
++              "maximum": 1,
++              "minimum": 0,
++              "type": "number"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Quality Lower Bound"
++        }
++      },
++      "required": [
++        "sample_size",
++        "cohort_digest",
++        "resources_p50",
++        "resources_p95",
++        "success_lower_bound"
++      ],
++      "title": "EstimateUncertainty",
++      "type": "object"
++    },
++    "EvidenceSource": {
++      "enum": [
++        "billing_record",
++        "local_meter",
++        "priced_measured_billable_usage",
++        "confirmed_no_incremental_charge",
++        "provider_report",
++        "pinned_rate_table",
++        "operator_report",
++        "static_estimate",
++        "legacy_unspecified",
++        "unavailable"
++      ],
++      "title": "EvidenceSource",
++      "type": "string"
++    },
++    "EvidenceStatus": {
++      "enum": [
++        "complete",
++        "partial",
++        "conflict",
++        "unavailable"
++      ],
++      "title": "EvidenceStatus",
++      "type": "string"
++    },
++    "ExecutorKind": {
++      "enum": [
++        "command",
++        "python",
++        "http",
++        "mcp",
++        "host",
++        "host_managed",
++        "delegate"
++      ],
++      "title": "ExecutorKind",
++      "type": "string"
++    },
++    "ExecutorSpec": {
++      "additionalProperties": false,
++      "properties": {
++        "id": {
++          "maxLength": 200,
++          "minLength": 1,
++          "pattern": "^[A-Za-z0-9_.:-]+$",
++          "title": "Id",
++          "type": "string"
++        },
++        "capability": {
++          "maxLength": 200,
++          "minLength": 1,
++          "title": "Capability",
++          "type": "string"
++        },
++        "kind": {
++          "$ref": "#/$defs/ExecutorKind"
++        },
++        "description": {
++          "maxLength": 4000,
++          "minLength": 1,
++          "title": "Description",
++          "type": "string"
++        },
++        "input_schema": {
++          "additionalProperties": true,
++          "title": "Input Schema",
++          "type": "object"
++        },
++        "output_schema": {
++          "anyOf": [
++            {
++              "additionalProperties": true,
++              "type": "object"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Output Schema"
++        },
++        "estimate": {
++          "$ref": "#/$defs/RouteEstimate"
++        },
++        "side_effect": {
++          "$ref": "#/$defs/SideEffect",
++          "default": "read"
++        },
++        "locality": {
++          "$ref": "#/$defs/Locality",
++          "default": "local"
++        },
++        "requires_network": {
++          "default": false,
++          "title": "Requires Network",
++          "type": "boolean"
++        },
++        "data_residency": {
++          "items": {
++            "type": "string"
++          },
++          "title": "Data Residency",
++          "type": "array"
++        },
++        "idempotent": {
++          "default": true,
++          "title": "Idempotent",
++          "type": "boolean"
++        },
++        "safe_to_auto_execute": {
++          "default": true,
++          "title": "Safe To Auto Execute",
++          "type": "boolean"
++        },
++        "enabled": {
++          "default": true,
++          "title": "Enabled",
++          "type": "boolean"
++        },
++        "tags": {
++          "items": {
++            "type": "string"
++          },
++          "title": "Tags",
++          "type": "array"
++        },
++        "resource_pool": {
++          "anyOf": [
++            {
++              "maxLength": 200,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Resource Pool"
++        },
++        "provider_id": {
++          "anyOf": [
++            {
++              "maxLength": 200,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Provider Id"
++        },
++        "validators": {
++          "items": {
++            "$ref": "#/$defs/ValidationSpec"
++          },
++          "title": "Validators",
++          "type": "array"
++        },
++        "config": {
++          "additionalProperties": true,
++          "title": "Config",
++          "type": "object"
++        },
++        "required_capabilities": {
++          "default": [],
++          "items": {
++            "type": "string"
++          },
++          "title": "Required Capabilities",
++          "type": "array"
++        }
++      },
++      "required": [
++        "id",
++        "capability",
++        "kind",
++        "description"
++      ],
++      "title": "ExecutorSpec",
++      "type": "object"
++    },
++    "Locality": {
++      "enum": [
++        "in_process",
++        "local",
++        "lan",
++        "internet"
++      ],
++      "title": "Locality",
++      "type": "string"
++    },
++    "MeasurementEvidence": {
++      "additionalProperties": false,
++      "properties": {
++        "status": {
++          "$ref": "#/$defs/EvidenceStatus",
++          "default": "unavailable"
++        },
++        "source": {
++          "$ref": "#/$defs/EvidenceSource",
++          "default": "unavailable"
++        },
++        "trust": {
++          "$ref": "#/$defs/TrustLevel",
++          "default": "untrusted"
++        },
++        "evidence_id": {
++          "anyOf": [
++            {
++              "maxLength": 200,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Evidence Id"
++        },
++        "source_reference": {
++          "anyOf": [
++            {
++              "maxLength": 500,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Source Reference"
++        },
++        "digest": {
++          "anyOf": [
++            {
++              "pattern": "^[A-Fa-f0-9]{64}$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Digest"
++        },
++        "observed_at": {
++          "anyOf": [
++            {
++              "format": "date-time",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Observed At"
++        }
++      },
++      "title": "MeasurementEvidence",
++      "type": "object"
++    },
++    "ResourceVector": {
++      "additionalProperties": false,
++      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
++      "properties": {
++        "monetary_usd": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Monetary Usd",
++          "type": "number"
++        },
++        "latency_ms": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Latency Ms",
++          "type": "number"
++        },
++        "cpu_ms": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Cpu Ms",
++          "type": "number"
++        },
++        "memory_mb_seconds": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Memory Mb Seconds",
++          "type": "number"
++        },
++        "peak_memory_mb": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Peak Memory Mb",
++          "type": "number"
++        },
++        "gpu_ms": {
++          "default": 0.0,
++          "minimum": 0.0,
++          "title": "Gpu Ms",
++          "type": "number"
++        },
++        "network_bytes": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Network Bytes",
++          "type": "integer"
++        },
++        "context_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Context Tokens",
++          "type": "integer"
++        },
++        "input_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Input Tokens",
++          "type": "integer"
++        },
++        "cached_input_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Cached Input Tokens",
++          "type": "integer"
++        },
++        "cache_write_input_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Cache Write Input Tokens",
++          "type": "integer"
++        },
++        "output_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Output Tokens",
++          "type": "integer"
++        },
++        "reasoning_output_tokens": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Reasoning Output Tokens",
++          "type": "integer"
++        },
++        "subscription_units": {
++          "default": 0.0,
++          "description": "Provider-local capacity units; not cash and not transferable.",
++          "minimum": 0.0,
++          "title": "Subscription Units",
++          "type": "number"
++        }
++      },
++      "title": "ResourceVector",
++      "type": "object"
++    },
++    "RouteEstimate": {
++      "additionalProperties": false,
++      "properties": {
++        "resources": {
++          "$ref": "#/$defs/ResourceVector"
++        },
++        "cash": {
++          "$ref": "#/$defs/CashEstimate"
++        },
++        "subscription_usage": {
++          "items": {
++            "$ref": "#/$defs/SubscriptionUsage"
++          },
++          "title": "Subscription Usage",
++          "type": "array"
++        },
++        "success_probability": {
++          "default": 0.95,
++          "maximum": 1.0,
++          "minimum": 0.001,
++          "title": "Success Probability",
++          "type": "number"
++        },
++        "quality_score": {
++          "default": 0.95,
++          "maximum": 1.0,
++          "minimum": 0.0,
++          "title": "Quality Score",
++          "type": "number"
++        },
++        "risk_score": {
++          "default": 0.05,
++          "maximum": 1.0,
++          "minimum": 0.0,
++          "title": "Risk Score",
++          "type": "number"
++        },
++        "confidence": {
++          "default": 0.5,
++          "maximum": 1.0,
++          "minimum": 0.0,
++          "title": "Confidence",
++          "type": "number"
++        },
++        "source": {
++          "$ref": "#/$defs/EstimateSource",
++          "default": "static"
++        },
++        "sample_size": {
++          "default": 0,
++          "minimum": 0,
++          "title": "Sample Size",
++          "type": "integer"
++        },
++        "uncertainty": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/EstimateUncertainty"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null
++        }
++      },
++      "title": "RouteEstimate",
++      "type": "object"
++    },
++    "SideEffect": {
++      "enum": [
++        "none",
++        "read",
++        "write",
++        "destructive",
++        "financial"
++      ],
++      "title": "SideEffect",
++      "type": "string"
++    },
++    "SubscriptionCharge": {
++      "enum": [
++        "included",
++        "paid",
++        "mixed",
++        "unknown"
++      ],
++      "title": "SubscriptionCharge",
++      "type": "string"
++    },
++    "SubscriptionUsage": {
++      "additionalProperties": false,
++      "properties": {
++        "provider": {
++          "maxLength": 100,
++          "minLength": 1,
++          "title": "Provider",
++          "type": "string"
++        },
++        "resource_pool": {
++          "maxLength": 200,
++          "minLength": 1,
++          "title": "Resource Pool",
++          "type": "string"
++        },
++        "unit": {
++          "default": "provider_unit",
++          "maxLength": 100,
++          "minLength": 1,
++          "title": "Unit",
++          "type": "string"
++        },
++        "consumed": {
++          "anyOf": [
++            {
++              "minimum": 0.0,
++              "type": "number"
++            },
++            {
++              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Consumed"
++        },
++        "source": {
++          "$ref": "#/$defs/MeasurementEvidence"
++        },
++        "included_or_paid": {
++          "$ref": "#/$defs/SubscriptionCharge",
++          "default": "unknown"
++        },
++        "rate_snapshot_id": {
++          "anyOf": [
++            {
++              "maxLength": 100,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Rate Snapshot Id"
++        },
++        "usage_fingerprint": {
++          "anyOf": [
++            {
++              "maxLength": 128,
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Usage Fingerprint"
++        }
++      },
++      "required": [
++        "provider",
++        "resource_pool"
++      ],
++      "title": "SubscriptionUsage",
++      "type": "object"
++    },
++    "TrustLevel": {
++      "enum": [
++        "untrusted",
++        "self_asserted",
++        "observed",
++        "verified",
++        "attested"
++      ],
++      "title": "TrustLevel",
++      "type": "string"
++    },
++    "ValidationKind": {
++      "enum": [
++        "schema",
++        "exact_match",
++        "range",
++        "state_transition",
++        "callback",
++        "downstream",
++        "llm",
++        "human"
++      ],
++      "title": "ValidationKind",
++      "type": "string"
++    },
++    "ValidationSpec": {
++      "additionalProperties": false,
++      "properties": {
++        "kind": {
++          "$ref": "#/$defs/ValidationKind"
++        },
++        "config": {
++          "additionalProperties": true,
++          "title": "Config",
++          "type": "object"
++        },
++        "required": {
++          "default": true,
++          "title": "Required",
++          "type": "boolean"
++        }
++      },
++      "required": [
++        "kind"
++      ],
++      "title": "ValidationSpec",
++      "type": "object"
++    }
++  },
++  "additionalProperties": false,
++  "description": "Additive composition identity; historical worker-pair schemas are unchanged.",
++  "properties": {
++    "schema_version": {
++      "const": "assessment.composed-pair-inspection.v1",
++      "default": "assessment.composed-pair-inspection.v1",
++      "title": "Schema Version",
++      "type": "string"
++    },
++    "control": {
++      "$ref": "#/$defs/ExecutorSpec"
++    },
++    "treatment": {
++      "$ref": "#/$defs/ExecutorSpec"
++    },
++    "differential": {
++      "$ref": "#/$defs/DifferentialEnvironment"
++    },
++    "shared_versions": {
++      "additionalProperties": {
++        "type": "string"
++      },
++      "title": "Shared Versions",
++      "type": "object"
++    },
++    "callback_bindings": {
++      "patternProperties": {
++        "^[a-f0-9]{64}$": {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        }
++      },
++      "title": "Callback Bindings",
++      "type": "object"
++    },
++    "native_backends": {
++      "patternProperties": {
++        "^[a-f0-9]{64}$": {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        }
++      },
++      "title": "Native Backends",
++      "type": "object"
++    }
++  },
++  "required": [
++    "control",
++    "treatment",
++    "differential",
++    "shared_versions",
++    "callback_bindings",
++    "native_backends"
++  ],
++  "title": "ComposedPairDefinition",
++  "type": "object"
++}
+--- a/schemas/assessment-conformance-request.schema.json
++++ b/schemas/assessment-conformance-request.schema.json
+@@ -6,7 +6,8 @@
+       "enum": [
+         "assessment.conformance-request.v1",
+         "assessment.conformance-request.v2",
+-        "assessment.conformance-request.v3"
++        "assessment.conformance-request.v3",
++        "assessment.conformance-request.v4"
+       ],
+       "title": "Schema Version",
+       "type": "string"
+@@ -65,7 +66,8 @@
+         {
+           "enum": [
+             "worker_inspection",
+-            "worker_pair_inspection"
++            "worker_pair_inspection",
++            "composed_pair_inspection"
+           ],
+           "type": "string"
+         },
+@@ -88,6 +90,15 @@
+       ],
+       "default": null,
+       "title": "Pair Definition Digest"
++    },
++    "composed_model_turns": {
++      "default": 0,
++      "enum": [
++        0,
++        1
++      ],
++      "title": "Composed Model Turns",
++      "type": "integer"
+     }
+   },
+   "required": [

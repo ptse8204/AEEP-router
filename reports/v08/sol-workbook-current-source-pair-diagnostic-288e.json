@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-09-30T00:49:24.887315+00:00",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "initial_start_file": "sol-workbook-current-source-pair-start-288e.json",
+  "initial_failure_file": "sol-workbook-current-source-pair-failure-288e.json",
+  "initial_driver_error_type": "KeyError",
+  "initial_driver_error_scope": "report extraction after execute_pair returned incomplete worker records; it did not cause the worker inspection failure",
+  "pair_failure_stage_inferred_from_source": "control:identity_policy",
+  "pair_failure_reason_supported": "collect returned inspection_complete=true but identity_digest=None; execute_pair requires nonempty identity_digest at this stage. Strict reviewed allowed_model_ids=[gpt-6-sol], and first worker default model/list omitted it. An independently charged hidden-inclusive model/list also omitted it. Account state is unknown and was not inspected.",
+  "workers": {
+    "control": {
+      "request_id": "conformance_probe_9dea717f97dd4fd5b94fb1d59e38e8c8",
+      "operation_id": "pair-inspection:conformance_probe_9dea717f97dd4fd5b94fb1d59e38e8c8",
+      "operation_state": "complete",
+      "inspection_present": true,
+      "inspection_complete": true,
+      "identity_digest_present": false,
+      "models_present": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "cleanup_confirmed": true,
+      "probes_match": false,
+      "event_kinds": [
+        "execution.started",
+        "action.started",
+        "action.completed",
+        "action.started",
+        "action.completed",
+        "action.started",
+        "action.completed",
+        "artifact.created",
+        "execution.failed"
+      ],
+      "model_turns": 0
+    },
+    "treatment": {
+      "request_id": "conformance_probe_06d2b3db63bd4852ba1672a762ff8940",
+      "operation_id": "pair-inspection:conformance_probe_06d2b3db63bd4852ba1672a762ff8940",
+      "operation_state": "complete",
+      "inspection_present": false,
+      "inspection_complete": null,
+      "identity_digest_present": false,
+      "models_present": [],
+      "cleanup_confirmed": null,
+      "probes_match": false,
+      "event_kinds": [
+        "execution.started",
+        "artifact.created",
+        "execution.failed"
+      ],
+      "model_turns": 0
+    }
+  },
+  "subsequent_hidden_model_result_file": "sol-workbook-hidden-model-diagnostic-result-288e.json",
+  "grant_after_all_diagnostics": {
+    "operations": 8549,
+    "model_turns": 2522,
+    "elapsed_seconds": 73627.58259448549,
+    "cash_usd": "0.0"
+  },
+  "historical_unresolved_reserved_rows": 2,
+  "pair_replay_allowed": false,
+  "release_ready": false
+}

@@ -30,6 +30,7 @@ jobs:
       - run: python -m compileall -q src examples tests
       - run: ruff check .
       - run: mypy src
+      - run: python scripts/check_assessment_policy.py
       - run: python scripts/generate_schemas.py --check
       - run: python examples/economic_evidence/campaign.py --repetitions 30 --check --require-gates
       - run: python examples/dsh_campaign/campaign.py --check
@@ -39,8 +40,9 @@ jobs:
       - run: python examples/job_application/campaign.py --check
       - run: aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact
       - run: coverage run --branch -m pytest
-      - run: coverage json -o reports/v07/coverage.json
-      - run: python scripts/check_critical_coverage.py reports/v07/coverage.json
+      - run: coverage json -o reports/v08/coverage.json
+      - run: python scripts/check_critical_coverage.py reports/v08/coverage.json
+      - run: python scripts/check_assessment_coverage.py reports/v08/coverage.json
       - run: coverage report -m
       - run: aeep verify router-complete --profile all --strict --json
       - run: python -m build
@@ -56,3 +58,23 @@ jobs:
         working-directory: integrations/dsh-aeep-router
       - run: npm test
         working-directory: integrations/dsh-aeep-router
+
+  assessment-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -e '.[dev,http-server]'
+      - name: Build the pinned assessment runtime
+        run: docker build --iidfile /tmp/aeep-image-id integrations/assessment-runtime
+      - name: Check real containment and interrupted-worker recovery
+        shell: bash
+        run: |
+          export AEEP_CONTAINER_IMAGE="$(cat /tmp/aeep-image-id)"
+          export AEEP_WORKBOOK_IMAGE="$AEEP_CONTAINER_IMAGE"
+          export AEEP_CONTAINER_RUNTIME="$(command -v docker)"
+          export AEEP_CONTAINER_SOCKET=/var/run/docker.sock
+          python -m pytest -m assessment_boundary

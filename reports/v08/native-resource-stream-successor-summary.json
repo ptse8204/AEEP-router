@@ -1,0 +1,97 @@
+{
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "classification": "one exploratory software-only pair with streamed integrity hashing; no model workflow or release/benefit qualification",
+  "result": "native-resource-full-path-pair-stream-result.json",
+  "result_sha256": "1530a5480fcce475f0e49e12c7aadd81a96ce50a782e5dcfedd41367e4abd514",
+  "complete": true,
+  "source_unchanged": true,
+  "total_pair_wall_seconds": 5.195506667019799,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "earlier_failed_pair_preserved": "native-resource-full-path-pair-v5-result.json",
+  "changed_intervention": "Both fresh coordinators stream SHA256 integrity reads in1MiB chunks; original baseline allocated240185120-byte binary in one read, AEEP same read_bytes. Guard, fixture, scope, host lifecycle, verification, limits and sampling math unchanged; once-per-identity role metadata added and overhead included.",
+  "samples": [
+    {
+      "arm": "stdlib_native",
+      "total_end_to_end_wall_ms": 2123.356250114739,
+      "total_sampled_cpu_ms": 1559.245774,
+      "observed_peak_memory_mb": 439.23828125,
+      "total_sampled_memory_mb_seconds": 609.6226449580026,
+      "retained_project_bytes": 0,
+      "schema_bytes": 0,
+      "project_config_bytes": 0,
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "project_config": true
+      },
+      "observed_executable_basename_counts_by_stage": [
+        {
+          "Python": 1,
+          "codex": 2,
+          "git": 2,
+          "unknown": 6,
+          "git-remote-http": 1,
+          "node": 4,
+          "node_repl": 4,
+          "python3.12": 1
+        },
+        {
+          "Python": 1
+        }
+      ],
+      "cleanup_survivors_by_stage": [
+        [],
+        []
+      ]
+    },
+    {
+      "arm": "generated_project_mcp_aeep",
+      "total_end_to_end_wall_ms": 2884.649041108787,
+      "total_sampled_cpu_ms": 3542.729218,
+      "observed_peak_memory_mb": 699.55859375,
+      "total_sampled_memory_mb_seconds": 1150.6343425346895,
+      "retained_project_bytes": 950272,
+      "schema_bytes": 15202,
+      "project_config_bytes": 489,
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": true,
+        "retention": true,
+        "schema": true,
+        "project_config": true
+      },
+      "observed_executable_basename_counts_by_stage": [
+        {
+          "Python": 3,
+          "python3.12": 3,
+          "codex": 8,
+          "git": 2,
+          "zsh": 1,
+          "git-remote-http": 1,
+          "unknown": 2,
+          "node_repl": 4,
+          "node": 4
+        }
+      ],
+      "cleanup_survivors_by_stage": [
+        []
+      ]
+    }
+  ],
+  "limits": "existing frozen numerical checks unchanged; observed all pass on n1; full resource/human/model workflow gate remains open",
+  "unknowns": [
+    "network packet/byte counts",
+    "host-level subscription context usage (no model turns)",
+    "unobserved between-sample CPU/RSS lifetimes",
+    "Per-role CPU/RSS attribution unknown; roles retained but no individual resource series",
+    "Codex-owned global retention not inspected",
+    "Fixed baseline-first/AEEP-second order and cache effects prevent causal benefit inference"
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "execution.worker.v1",
+      "enum": [
+        "execution.worker.v1",
+        "execution.worker.v2"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "worker_id": {
+      "pattern": "^[a-z][a-z0-9-]{0,50}$",
+      "title": "Worker Id",
+      "type": "string"
+    },
+    "runtime": {
+      "title": "Runtime",
+      "type": "string"
+    },
+    "socket": {
+      "title": "Socket",
+      "type": "string"
+    },
+    "image": {
+      "pattern": "^(?:[A-Za-z0-9._/:+-]+@)?sha256:[a-f0-9]{64}$",
+      "title": "Image",
+      "type": "string"
+    },
+    "platform": {
+      "enum": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "title": "Platform",
+      "type": "string"
+    },
+    "binary": {
+      "title": "Binary",
+      "type": "string"
+    },
+    "binary_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Binary Sha256",
+      "type": "string"
+    },
+    "configuration_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Configuration Digest",
+      "type": "string"
+    },
+    "dependencies_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Dependencies Digest",
+      "type": "string"
+    },
+    "cpu_count": {
+      "default": 1,
+      "exclusiveMinimum": 0,
+      "maximum": 64,
+      "title": "Cpu Count",
+      "type": "number"
+    },
+    "memory_mb": {
+      "default": 1024,
+      "maximum": 65536,
+      "minimum": 128,
+      "title": "Memory Mb",
+      "type": "integer"
+    },
+    "process_limit": {
+      "default": 64,
+      "maximum": 1024,
+      "minimum": 1,
+      "title": "Process Limit",
+      "type": "integer"
+    },
+    "network_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Network Id"
+    },
+    "model_proxy_url": {
+      "anyOf": [
+        {
+          "pattern": "^http://(?:[0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{1,5}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Proxy Url"
+    },
+    "credential_volume": {
+      "anyOf": [
+        {
+          "pattern": "^aeep-auth-[a-z0-9-]{1,64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Credential Volume"
+    },
+    "seccomp_profile": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seccomp Profile"
+    },
+    "permissions_profile": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Permissions Profile"
+    },
+    "reviewed_files": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewed Files"
+    }
+  },
+  "required": [
+    "worker_id",
+    "runtime",
+    "socket",
+    "image",
+    "platform",
+    "binary",
+    "binary_sha256",
+    "configuration_digest",
+    "dependencies_digest"
+  ],
+  "title": "ManagedWorkerBinding",
+  "type": "object"
+}

@@ -1,0 +1,55 @@
+{
+  "source_digest": "3cb7c3c11443db7eee3f9ce6966d7d7aff4d834a3e787384672958f43ce631fe",
+  "review_sha256": "e702db66c242c8a762aac0c92958666afb589d663ca19256266d58d62b4ec1a2",
+  "scratch_directory": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-5kr6gs9m",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-compileall-3cb7c3c11443.log",
+      "recorded_at": "2026-09-30T09:24:42.201388+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "wall_seconds": 0.07204908295534551,
+      "source_unchanged": true
+    },
+    {
+      "name": "schema",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "cwd": "/Users/edwintse/Documents/aeep-agent-router",
+      "environment_overrides": {
+        "PYTHONPATH": "/Users/edwintse/Documents/aeep-agent-router/src",
+        "AEEP_NATIVE_CODEX": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+        "AEEP_NATIVE_WORKBOOK_PYTHON": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+      },
+      "log": "delivery-boundary-schema-3cb7c3c11443.log",
+      "recorded_at": "2026-09-30T09:24:42.302699+00:00",
+      "command_spelling_exact": true,
+      "timeout_seconds": 1200,
+      "exit_code": 1,
+      "wall_seconds": 0.7207552911713719,
+      "source_unchanged": true
+    }
+  ],
+  "complete": false,
+  "release_ready": false
+}

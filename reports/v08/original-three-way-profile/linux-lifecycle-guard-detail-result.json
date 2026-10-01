@@ -1,0 +1,76 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_176251a242c440a0af1666f0db9cff80",
+      "operation_id": "linux-lifecycle-guard-detail:conformance_probe_176251a242c440a0af1666f0db9cff80",
+      "image": "sha256:1bbead3bc0b6e686770400c841671f3257fe8ae0f5955a22e9aaef0d460e05e9",
+      "worker_digest": "ee6239ba21441687e2fc322df5b70631afe728cde350497266bc70036764c741",
+      "cleanup_confirmed": true,
+      "protocol_passed": true,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "observed_allowed_profiles": {
+        "aeep": true,
+        "aeep-task-child": true
+      },
+      "effective_requirements_matches": true,
+      "own_server_present": true,
+      "diagnostic_argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "exec",
+        "--user",
+        "65534:65534",
+        "aeep-d922b7a73e26bfc8816e2c07df06287e",
+        "/usr/local/bin/python3",
+        "-I",
+        "-c",
+        "import json,subprocess; p=subprocess.run(['/opt/codex/codex', 'sandbox', '--permission-profile', 'aeep-task-child', '--include-managed-config', '--cd', '/workspace/task', '--', '/usr/local/bin/python3', '-c', \"import os,resource,sys,json\\nif sys.platform!='linux' or os.geteuid()==0:raise RuntimeError('unsupported guard host')\\nresource.setrlimit(resource.RLIMIT_NPROC,(0,0))\\nif resource.getrlimit(resource.RLIMIT_NPROC)!=(0,0):raise RuntimeError('guard limit missing')\\nprint(json.dumps({'pid':os.getpid(),'ppid':os.getppid(),'sid':os.getsid(0),'pgid':os.getpgrp(),'uid':os.geteuid()}),flush=True)\\nif os.read(0,1)!=b'\\\\x00':raise RuntimeError('incomplete guard handshake')\\nos.execve('/usr/local/bin/python3',['/usr/local/bin/python3','-c',sys.argv[1]],{'PATH':'/usr/local/bin:/usr/bin:/bin'})\\n\", \"import json,os,pathlib,resource,subprocess,time\\nr={'limits_after_exec':list(resource.getrlimit(resource.RLIMIT_NPROC)),'pid_after_exec':os.getpid()}\\nfor name,call in [('fork',os.fork),('spawn',lambda:subprocess.run(['/usr/local/bin/python3','-c','pass'])),('raise_limit',lambda:resource.setrlimit(resource.RLIMIT_NPROC,(1,1)))]:\\n try:\\n  value=call();r[name+'_denied']=False\\n  if name=='fork' and value==0:os._exit(0)\\n  if name=='fork':os.waitpid(value,0)\\n except (OSError,ValueError,PermissionError) as e:r[name+'_denied']=True;r[name+'_error_type']=type(e).__name__\\nfor name in ('/workspace/private/state.json','/workspace/task/input'):\\n for op in ('read','write'):\\n  if name.endswith('/input') and op=='read':continue\\n  try:\\n   p=pathlib.Path(name if not name.endswith('/input') else name+'/forbidden');p.read_bytes() if op=='read' else p.write_bytes(b'changed');r[name+':'+op+'_denied']=False\\n  except OSError:r[name+':'+op+'_denied']=True\\npathlib.Path('/workspace/task/output/marker.json').write_text('ok')\\nr['output_written']=True\\nprint(json.dumps(r),flush=True)\\n\"],input=b'\\x00',capture_output=True,timeout=5);print(json.dumps({'exit_code':p.returncode,'stdout_bytes':len(p.stdout),'stderr':p.stderr[:2048].decode('utf-8',errors='replace')}))"
+      ],
+      "guard_launch_detail": {
+        "exit_code": 1,
+        "stdout_bytes": 0,
+        "safe_error": {
+          "config_error_categories": [],
+          "recognized_public_config_fields": [],
+          "recognized_error_types": [],
+          "sanitized_config_error_excerpt": "bwrap: execvp /opt/codex/codex: No such file or directory\n",
+          "stderr_bytes_retained": 58,
+          "stderr_truncated": false
+        },
+        "known_exception": []
+      },
+      "safe_transport": {
+        "process_exit_code_before_cleanup": null,
+        "config_error_categories": [
+          "invalid_value",
+          "requirements_rejection"
+        ],
+        "recognized_public_config_fields": [
+          "value"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "bwrap_mentioned",
+        "sanitized_config_error_excerpt": "\u001b[2m2026-09-30T14:52:21.779451Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Configured value for `web_search_mode` is disallowed by requirements; falling back to required value Disabled. Details: invalid value for `web_search_mode`: `Cached` is not in the allowed set [Disabled] (set by /etc/codex/requirements.toml)\n\u001b[2m2026-09-30T14:52:21.779479Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Codex could not find bubblewrap on PATH. Install bubblewrap with your OS package manager. See the sandbox prerequisites: [redacted-url] Codex will use the bundled bubblewrap in the meantime.\n",
+        "stderr_bytes_retained": 658,
+        "stderr_truncated": false
+      },
+      "elapsed_seconds": 3.6551548750139773,
+      "canonical_record_digest": "afb6f5480ba8894f72036798680b9ba0bbe01f99232c2b2c46598cba0793b17d"
+    }
+  },
+  "probe_supported": true,
+  "classification": "guard_launch_diagnostic_completed",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8638,
+    "model_turns": 2535,
+    "elapsed_seconds": 74787.07523048599,
+    "cash_usd": "0.0"
+  }
+}

@@ -2,8 +2,8 @@
 
 This fixture compares a model-suggested route with static, shared-evidence, and
 locally adaptive AEEP routing. It uses only local synthetic routes and stores no
-prompt content. Reports are written to `reports/v05/dsh/` and cover static and
-JS-rendered content, malformed-output fallback, unqualified routes, evidence
+prompt content. Reports in `reports/v05/dsh/` cover static and JS-rendered
+content, malformed-output fallback, unqualified routes, evidence
 reuse, rate-card revaluation, cache reset/eviction, package tampering, and
 fixed-seed route ordering.
 
@@ -50,7 +50,7 @@ preserves a supplied DSH Web PID, separates installation and warm-up data, and
 emits the generated `schemas/dsh-plugin-campaign-report.schema.json` contract.
 It reports disjoint provider token buckets, tool-result/schema pressure,
 next-model-call input correlation, correctness, latency, and receipt coverage.
-A savings claim is suppressed unless every hard gate passes and the 95%
+The report claims savings only when every hard gate passes and the 95%
 bootstrap interval is wholly positive.
 
 Copy and resolve the absolute placeholders in `cases.example.json`,
@@ -72,6 +72,6 @@ PYTHONPATH=src python examples/dsh_campaign/plugin_campaign.py \
 ```
 
 The comparison report uses six fresh read-only sessions to compare direct model
-counting with one AEEP `text.stats` call. It records the observed correctness
-gain and token overhead without treating the negative savings result as a
-failure. It does not prove that AEEP saves tokens.
+counting with one AEEP `text.stats` call. Correctness improved, but token use
+increased. The report retains that negative savings result; it does not treat
+it as a campaign failure or evidence that AEEP saves tokens.

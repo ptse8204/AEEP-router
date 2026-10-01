@@ -1,0 +1,189 @@
+--- reports/v08/native-sol61-code-mode-file-handoff-ade3.py
++++ reports/v08/native-sol61-code-mode-two-task-handoff-ade3.py
+@@ -1,4 +1,4 @@
+-"""Fresh smallest generated workbook with supported exact per-tool native approval; no unchanged replay; no replay or qualification."""
++"""Two predeclared workbook tasks with supported exact per-tool native approval; no unchanged replay; no replay or qualification."""
+ import asyncio, hashlib, json, os, runpy, subprocess, tempfile, time, shlex, sys
+ from collections import Counter
+ from datetime import timedelta
+@@ -29,9 +29,11 @@
+     driver_sha256: str
+     workbook_program_sha256: str
+     literal_fixtures_sha256: str
+-    generation_seed: int=113
+-    generation_count: int=1
+-    selected_generated_indices: list[int]=[0]
++    calibration_cases_sha256: str
++    independent_grader_sha256: str
++    generation_seed: int=29
++    generation_count: int=11
++    selected_generated_indices: list[int]=[10]
+     maximum_seconds: int=40
+     model_turns: int=0
+     classification: str='fixture generation and reviewed production task-scope setup; no model/planner execution'
+@@ -64,19 +66,23 @@
+     maximum_model_turns: int=1
+     maximum_operations: int=1
+     exploratory_resource_bounds: dict[str, float]={'host_tree_peak_rss_bytes':1073741824,'observed_host_tree_cpu_seconds':60,'elapsed_seconds':240,'retained_evidence_bytes':8388608}
+-    classification: str='inert existing-code-mode file handoff diagnostic; fresh2rowworkbook seed113/index0; existing code-mode scratch file→builtin reader variable→own scoped MCP; no opaque model argument transcription or new transport, no workbook replay, autonomy qualification or marginal benefit'
++    classification: str='inert existing-code-mode file handoff diagnostic; policy first literal fixture plus original seed29/index10 larger workbook; existing code-mode scratch file→builtin reader variable→own scoped MCP; no opaque model argument transcription or new transport, no workbook replay, autonomy qualification or marginal benefit'
+     outer_host_boundary: str='named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile'
+     unexpected_tool_detection: str='post-execution observation only, not preventative enforcement'
+ def file_hash(path):
+     with Path(path).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
++def reader_matches(observed,reader):
++    if not isinstance(observed,str):return False
++    try:return shlex.split(observed)==['/bin/zsh','-lc',reader]
++    except ValueError:return False
+ async def main():
+     assert verification_source_digest(ROOT)==SOURCE
+-    assert os.getenv('AEEP_NATIVE_CODE_MODE_FUTURE_EXACT_REVIEW')=='authorized-capacity-and-preflight', 'INERT: future exact review/capacity/preflight required; no inferred availability'
++    assert os.getenv('AEEP_NATIVE_CODE_MODE_FUTURE_EXACT_REVIEW')=='authorized-two-task-exact-review', 'INERT: future exact review/capacity/preflight required; no inferred availability'
+     assert file_hash(BINARY)=='50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5'
+     assert BOUNDARY_RECORD.is_file(), "native source-bound validation record pending"
+     validated=json.loads(BOUNDARY_RECORD.read_text());assert validated['source_digest']==SOURCE and validated['complete'] and validated['source_unchanged']
+     assert len(validated['checks'])==22 and all(item['exit_code']==0 and item['source_unchanged'] for item in validated['checks'])
+-    capacity=json.loads((REPORTS/'native-capacity-refresh-ade3-result.json').read_text())
++    capacity=json.loads((REPORTS/'native-capacity-refresh-two-task-ade3-result.json').read_text())
+     assert capacity['source_digest']==SOURCE and capacity['cleanup_confirmed'] and capacity['source_unchanged']
+     from datetime import datetime, timezone
+     assert 0 <= (datetime.now(timezone.utc)-datetime.fromisoformat(capacity['recorded_at'])).total_seconds() <= 300
+@@ -86,7 +92,7 @@
+     assert any(window.get('window_id')=='codex:primary' for window in windows)
+     main_router=Router.from_manifest(ROOT/'.aeep/live-review-v3/aeep.json');repo=AssessmentRepository(main_router.store)
+     old=AssessmentPlanningRequest.model_validate(repo.get('planning_request','planning_8e8a10fdfd7f49b891cf9f3f44c35228'))
+-    setup_definition=Preparation(source_digest=SOURCE,driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),workbook_program_sha256=file_hash(ASSETS/'workbook_program.py'),literal_fixtures_sha256=file_hash(ASSETS/'workbook-grader-fixtures.json'))
++    setup_definition=Preparation(source_digest=SOURCE,driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),workbook_program_sha256=file_hash(ASSETS/'workbook_program.py'),literal_fixtures_sha256=file_hash(ASSETS/'workbook-grader-fixtures.json'),calibration_cases_sha256=file_hash(REPORTS/'workbook-footprint-calibration-288e.py'),independent_grader_sha256=file_hash(ASSETS/'workbook_grader.py'))
+     setup_identity=Path(__file__).stem+'-setup'
+     setup_mapping=repo.put('native_host_setup',setup_identity,setup_definition);repo.review(setup_mapping)
+     setup_request=old.model_copy(update={'plan_id':'planning_'+setup_identity,'mapping_digest':setup_mapping,'definition_digests':[*old.definition_digests,setup_mapping]})
+@@ -95,42 +101,41 @@
+     setup_operation='native-setup:'+setup_request.plan_id
+     repo.reserve(setup_request,setup_operation,AssessmentLimits(max_operations=1,max_elapsed_seconds=40),stage='native_fixture_scope_setup')
+     setup_started=time.perf_counter()
+-    result_path=REPORTS/'native-sol61-code-mode-file-handoff-ade3-result-288e.json'; assert not result_path.exists()
++    result_path=REPORTS/'native-sol61-code-mode-two-task-handoff-ade3-result-288e.json'; assert not result_path.exists()
+     directory=Path(tempfile.mkdtemp(prefix='aeep-sol61-model-journey-',dir=ROOT)).resolve(); scratch=directory/'scratch'; scratch.mkdir()
+-    generated=subprocess.run([str(PYTHON),'-I',str(ASSETS/'workbook_program.py'),'generate'],input=json.dumps({'seed':113,'stages':[{'split':'demo','count':1}]}),text=True,capture_output=True,check=True,timeout=15)
+-    generated_case=json.loads(generated.stdout)['cases'][0]
+-    cases=[{'input':generated_case['input'],'expected':generated_case['output']}]
++    fixtures=runpy.run_path(str(REPORTS/'workbook-footprint-calibration-288e.py'))['cases']()
++    cases=[fixtures['small'],fixtures['larger']]
+     source=(ASSETS/'workbook_program.py').read_text()
+     prefix=subprocess.run([str(PYTHON),'-I','-c','import sys;print(sys.prefix)'],check=True,capture_output=True,text=True).stdout.strip()
+     boundary=NativeSandboxConfig(binary=str(BINARY),binary_sha256='sha256:'+file_hash(BINARY),project_root=str(directory),read_roots=[str(Path(prefix).resolve()),str(ROOT/'AGENTS.md')],write_roots=[str(scratch)],single_process=True,python_binary=str(PYTHON.resolve()),python_sha256='sha256:'+file_hash(PYTHON.resolve()))
+-    recipe=workbook_recipe();spec=recipe.extension.reference.model_copy(deep=True);spec.id='native.workbook.sol61-small-approved';spec.input_schema=recipe.input_schema;spec.output_schema=recipe.output_schema
++    recipe=workbook_recipe();spec=recipe.extension.reference.model_copy(deep=True);spec.id='native.workbook.sol61-two-task-handoff';spec.input_schema=recipe.input_schema;spec.output_schema=recipe.output_schema
+     program="import json,sys;ns={'__name__':'reference'};exec("+repr(source)+",ns);inp=json.load(sys.stdin);print(json.dumps(ns['reference'](inp)))"
+     spec.config={**spec.config,'argv':[str(PYTHON.resolve()),'-I','-c',program],'native_sandbox':boundary.model_dump(mode='json'),'env':{'TMPDIR':str(scratch)},'max_output_bytes':200000,'timeout_seconds':30}
+     spec.validators=[ValidationSpec(kind=ValidationKind.CALLBACK,config={'name':'aeep.workbook.native.v1','implementation_digest':implementation_digest()})]
+     manifest=directory/'aeep.json';manifest.write_text(Manifest(database=str(directory/'.aeep/state.db'),executors=[spec]).model_dump_json())
+     task=Router.from_manifest(manifest);task_repo=AssessmentRepository(task.store);task_repo.review(task_repo.put("recipe",recipe.recipe_id,recipe))
+-    scope=TaskScope(scope_id='sol61-code-mode-file-handoff-ade3',project_root=str(directory),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.READ,max_attempts=1,max_attempt_seconds=30,expires_at=utc_now()+timedelta(minutes=10))
++    scope=TaskScope(scope_id='sol61-code-mode-two-task-handoff-ade3',project_root=str(directory),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.READ,max_attempts=2,max_attempt_seconds=30,expires_at=utc_now()+timedelta(minutes=10))
+     scope_digest=task_repo.put('task_scope',scope.scope_id,scope);task_repo.review(scope_digest);activation=activate(task,scope.scope_id)
+     service=AEEPToolService(task,profile='task',task_activation=activation.activation_id);tools=service.list_tools();assert len(tools)==1;tool=tools[0]['name']
+-    inputs=[cases[0]['input']]
++    inputs=[case['input'] for case in cases]
+     override='mcp_servers.aeep_'+activation.activation_id+'.omit_tools_from=["deferred"]'
+     entry=__import__('tomllib').loads((directory/'.codex/config.toml').read_text())['mcp_servers']['aeep_'+activation.activation_id]
+     assert entry['tools']=={tool:{'approval_mode':'approve'}} and 'default_tools_approval_mode' not in entry,'generated tool rule mismatch'
+-    staged=scratch/'input.json';staged.write_text(json.dumps(inputs[0],sort_keys=True),encoding='utf-8')
++    staged=scratch/'input.json';staged.write_text(json.dumps(inputs,sort_keys=True),encoding='utf-8')
+     reader_program='from pathlib import Path; import sys; sys.stdout.write(Path('+repr(str(staged))+').read_text(encoding="utf-8"))'
+     reader_command=shlex.join([str(PYTHON.resolve()),'-I','-c',reader_program])
+     nested_name='mcp__aeep_'+activation.activation_id+'__'+tool
+-    cell='const loaded=await tools.exec_command('+json.dumps({'cmd':reader_command,'yield_time_ms':10000,'max_output_tokens':8000},separators=(',',':'))+'); if(loaded.exit_code!==0 || loaded.session_id!==undefined) throw new Error("reader_not_complete"); const input=JSON.parse(loaded.output); const result=await tools.'+nested_name+'(input); text({ok:result.structuredContent?.ok===true});'
+-    prompt='Use native exec code-mode exactly once to run the following literal cell. It reads only the declared synthetic scratch input and invokes the one own scoped MCP tool, without printing encoded input/output. No unrelated tools, credentials, network, retries or transformations. Return only successes:[boolean], stopped_after_rejection:boolean and reason completed/unavailable/denied/failed. Cell: '+cell
+-    definition=Definition(reader_command=reader_command,reader_command_sha256=hashlib.sha256(reader_command.encode()).hexdigest(),staged_input_sha256=file_hash(staged),cell_sha256=hashlib.sha256(cell.encode()).hexdigest(),approval_source="actual production-generated exact task rules",expected_sha256=hashlib.sha256(json.dumps(cases[0]['expected'],sort_keys=True).encode()).hexdigest(),spec_sha256=hashlib.sha256(spec.model_dump_json().encode()).hexdigest(),schema_sha256=hashlib.sha256(json.dumps(tools,sort_keys=True).encode()).hexdigest(),generated_launcher_sha256=hashlib.sha256((directory/'.codex/config.toml').read_bytes()).hexdigest(),exposure_override=override,exact_server="aeep_"+activation.activation_id,exact_tool=tool,binary_sha256=boundary.binary_sha256,executor_fingerprint=executor_fingerprint(spec),scope_digest=scope_digest,prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),input_hashes=[hashlib.sha256(json.dumps(x,sort_keys=True).encode()).hexdigest() for x in inputs],native_overrides=boundary.permission_overrides(),inherited_instruction_sha256=hashlib.sha256((ROOT/'AGENTS.md').read_bytes()).hexdigest(),native_boundary_evidence_sha256=hashlib.sha256(BOUNDARY_RECORD.read_bytes()).hexdigest(),native_boundary_log_sha256=hashlib.sha256(BOUNDARY_LOG.read_bytes()).hexdigest(),setup_operation_id=setup_operation)
+-    mapping=repo.put('native_host_diagnostic','sol61-code-mode-file-handoff-ade3',definition);repo.review(mapping)
+-    req=old.model_copy(update={'plan_id':'planning_native_sol61_code_mode_file_handoff_ade3','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]})
++    cell='const loaded=await tools.exec_command('+json.dumps({'cmd':reader_command,'yield_time_ms':10000,'max_output_tokens':8000},separators=(',',':'))+'); if(loaded.exit_code!==0 || loaded.session_id!==undefined) throw new Error("reader_not_complete"); const input=JSON.parse(loaded.output); const successes=[]; for(const task of input){const result=await tools.'+nested_name+'(task); successes.push(result.structuredContent?.ok===true); if(successes.at(-1)!==true) break;} text({successes});'
++    prompt='Use native exec code-mode exactly once to run the following literal cell. It reads only the declared synthetic scratch input and invokes the one own scoped MCP tool for both ordered tasks, without printing encoded input/output. No unrelated tools, credentials, network, retries or transformations. Return only successes:[boolean,boolean], stopped_after_rejection:boolean and reason completed/unavailable/denied/failed. Cell: '+cell
++    definition=Definition(reader_command=reader_command,reader_command_sha256=hashlib.sha256(reader_command.encode()).hexdigest(),staged_input_sha256=file_hash(staged),cell_sha256=hashlib.sha256(cell.encode()).hexdigest(),approval_source="actual production-generated exact task rules",expected_sha256=hashlib.sha256(json.dumps([case['expected'] for case in cases],sort_keys=True).encode()).hexdigest(),spec_sha256=hashlib.sha256(spec.model_dump_json().encode()).hexdigest(),schema_sha256=hashlib.sha256(json.dumps(tools,sort_keys=True).encode()).hexdigest(),generated_launcher_sha256=hashlib.sha256((directory/'.codex/config.toml').read_bytes()).hexdigest(),exposure_override=override,exact_server="aeep_"+activation.activation_id,exact_tool=tool,binary_sha256=boundary.binary_sha256,executor_fingerprint=executor_fingerprint(spec),scope_digest=scope_digest,prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),input_hashes=[hashlib.sha256(json.dumps(x,sort_keys=True).encode()).hexdigest() for x in inputs],native_overrides=boundary.permission_overrides(),inherited_instruction_sha256=hashlib.sha256((ROOT/'AGENTS.md').read_bytes()).hexdigest(),native_boundary_evidence_sha256=hashlib.sha256(BOUNDARY_RECORD.read_bytes()).hexdigest(),native_boundary_log_sha256=hashlib.sha256(BOUNDARY_LOG.read_bytes()).hexdigest(),setup_operation_id=setup_operation)
++    mapping=repo.put('native_host_diagnostic','sol61-code-mode-two-task-handoff-ade3',definition);repo.review(mapping)
++    req=old.model_copy(update={'plan_id':'planning_native_sol61_code_mode_two_task_handoff_ade3','mapping_digest':mapping,'definition_digests':[*old.definition_digests,mapping]})
+     request_digest=repo.put('planning_request',req.plan_id,req);repo.review(request_digest);repo.authorize(req)
+     review={'authority':'standing September25/27 exact review delegation;September30 unfinished tests model selection','source_digest':SOURCE,'definition':definition.model_dump(),'mapping_digest':mapping,'request_digest':request_digest,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'scope':scope.model_dump(mode='json'),'activation':activation.activation_id,'schema_bytes':len(json.dumps(tools).encode()),'instructions_bytes':len(service.instructions.encode()),'prompt_bytes':len(prompt.encode()),'authentication':'Codex-owned; never accessed','global_configuration_changes':False,'new_services':False,'native_boundary_result':str(BOUNDARY_RECORD.relative_to(REPORTS)),'note':'planning request is authorization envelope only; no planner execution or managed-worker conformance'}
+-    (REPORTS/'native-sol61-code-mode-file-handoff-ade3-review-288e.json').write_text(json.dumps(review,indent=2))
++    (REPORTS/'native-sol61-code-mode-two-task-handoff-ade3-review-288e.json').write_text(json.dumps(review,indent=2))
+     setup_elapsed=time.perf_counter()-setup_started
+     repo.finish_operation(setup_operation,elapsed_seconds=setup_elapsed)
+-    operation='native-one-case:'+req.plan_id;repo.reserve(req,operation,AssessmentLimits(max_operations=1,max_model_turns=1,max_elapsed_seconds=240),stage='native_host_model_journey')
++    operation='native-two-task:'+req.plan_id;repo.reserve(req,operation,AssessmentLimits(max_operations=1,max_model_turns=1,max_elapsed_seconds=240),stage='native_host_model_journey')
+     chronology=[];server_requests=[];interrupt_started=False
+     began=time.perf_counter();transport=None;turn_id=None;thread_id=None;collector=None;samples=[];processes={};events=Counter();outputs=[];tool_events=[];auxiliary_actions=[];startup_events=[];sampling=True
+     record={'source_digest':SOURCE,'operation_id':operation,'task_scope_digest':scope_digest,'setup_operation_id':setup_operation,'setup_elapsed_seconds':setup_elapsed,'schema_bytes':review['schema_bytes'],'instructions_bytes':review['instructions_bytes'],'prompt_bytes':review['prompt_bytes'],'classification':definition.classification}
+@@ -169,11 +174,11 @@
+         if method=='item/completed' and isinstance(params.get('item'),dict):
+             item=params['item']
+             if item.get('type') in {'commandExecution','fileChange','dynamicToolCall'}:
+-                auxiliary_actions.append({'type':item.get('type'),'tool':item.get('tool'),'namespace':item.get('namespace'),'command_sha256':hashlib.sha256(item['command'].encode()).hexdigest() if isinstance(item.get('command'),str) else None,'command_equals_reviewed_reader':item.get('command')==reader_command if item.get('type')=='commandExecution' else None,'exit_code':item.get('exitCode') if isinstance(item.get('exitCode'),int) else None})
++                auxiliary_actions.append({'type':item.get('type'),'tool':item.get('tool'),'namespace':item.get('namespace'),'command_sha256':hashlib.sha256(item['command'].encode()).hexdigest() if isinstance(item.get('command'),str) else None,'command_equals_reviewed_reader':reader_matches(item.get('command'),reader_command) if item.get('type')=='commandExecution' else None,'exit_code':item.get('exitCode') if isinstance(item.get('exitCode'),int) else None})
+             if item.get('type')=='mcpToolCall':
+                 result=item.get('result');error=item.get('error');error_text=json.dumps(error,ensure_ascii=True)[:4000] if error is not None else ''
+                 arguments=item.get('arguments');argument_hash=hashlib.sha256(json.dumps(arguments,sort_keys=True).encode()).hexdigest() if isinstance(arguments,dict) else None
+-                tool_events.append({'server':item.get('server'),'tool':item.get('tool'),'status':item.get('status'),'result_keys':sorted(result) if isinstance(result,dict) else None,'argument_keys':sorted(arguments) if isinstance(arguments,dict) else None,'argument_sha256':argument_hash,'arguments_equal_expected':arguments==inputs[0] if isinstance(arguments,dict) else None,'error_present':error is not None,'error_shape':sorted(error) if isinstance(error,dict) else type(error).__name__ if error is not None else None,'error_sha256':hashlib.sha256(error_text.encode()).hexdigest() if error_text else None,'error_code':error.get('code') if isinstance(error,dict) and isinstance(error.get('code'),int) else None,'known_error_classes':[label for phrase,label in [('approval policy is never','approval_required_never'),('not available to the model','model_binding_unavailable'),('invalid','invalid_argument_or_result'),('permission denied','permission_denied'),('unknown','unknown_binding'),('timed out','timeout'),('metadata is incomplete','modern_metadata_incomplete')] if phrase in error_text.lower()],'unclassified_error':bool(error_text) and not any(phrase in error_text.lower() for phrase in ('approval policy is never','not available to the model','invalid','permission denied','unknown','timed out','metadata is incomplete'))})
++                tool_events.append({'server':item.get('server'),'tool':item.get('tool'),'status':item.get('status'),'result_keys':sorted(result) if isinstance(result,dict) else None,'argument_keys':sorted(arguments) if isinstance(arguments,dict) else None,'argument_sha256':argument_hash,'arguments_equal_expected':(arguments==inputs[len(tool_events)] if len(tool_events)<len(inputs) else False) if isinstance(arguments,dict) else None,'error_present':error is not None,'error_shape':sorted(error) if isinstance(error,dict) else type(error).__name__ if error is not None else None,'error_sha256':hashlib.sha256(error_text.encode()).hexdigest() if error_text else None,'error_code':error.get('code') if isinstance(error,dict) and isinstance(error.get('code'),int) else None,'known_error_classes':[label for phrase,label in [('approval policy is never','approval_required_never'),('not available to the model','model_binding_unavailable'),('invalid','invalid_argument_or_result'),('permission denied','permission_denied'),('unknown','unknown_binding'),('timed out','timeout'),('metadata is incomplete','modern_metadata_incomplete')] if phrase in error_text.lower()],'unclassified_error':bool(error_text) and not any(phrase in error_text.lower() for phrase in ('approval policy is never','not available to the model','invalid','permission denied','unknown','timed out','metadata is incomplete'))})
+                 if isinstance(result,dict):
+                     structured=result.get('structuredContent')
+                     if not isinstance(structured,dict):
+@@ -181,7 +186,12 @@
+                             if isinstance(content,dict) and content.get('type')=='text':
+                                 try: candidate=json.loads(content.get('text','')); structured=candidate if isinstance(candidate,dict) else structured
+                                 except (ValueError,TypeError): pass
+-                    if isinstance(structured,dict):outputs.append(structured)
++                    if isinstance(structured,dict):
++                        outputs.append(structured)
++                        i=len(outputs)-1
++                        valid=runpy.run_path(str(ASSETS/'workbook_grader.py'))['grade']({'input':inputs[i],'output':structured.get('output'),'expected':cases[i]['expected']}) if i<len(inputs) and structured.get('output') is not None else False
++                        receipt=structured.get('receipts',[{}])[0]
++                        record.setdefault('checks',[]).append({'index':i,'ok':structured.get('ok'),'task_valid':receipt.get('task_valid'),'receipt_id':receipt.get('receipt_id'),'independent_grader_valid':valid})
+     sampler=asyncio.create_task(sample())
+     stage='host_start'
+     try:
+@@ -237,27 +247,24 @@
+             thread_id=response['thread']['id'];collector=_TurnCollector(max_output_bytes=200000);collector.thread_id=thread_id;transport.subscribe(collector.handle)
+             assert hashlib.sha256((ROOT/'AGENTS.md').read_bytes()).hexdigest()==definition.inherited_instruction_sha256,'inherited instructions changed'
+             stage='turn/start'
+-            response=await transport.request('turn/start',{'threadId':thread_id,'input':[{'type':'text','text':prompt}],'model':'gpt-6.1-sol','effort':'medium','outputSchema':{'type':'object','properties':{'successes':{'type':'array','items':{'type':'boolean'},'minItems':1,'maxItems':1},'stopped_after_rejection':{'type':'boolean'},'reason':{'type':'string','enum':['completed','unavailable','denied','failed']}},'required':['successes','stopped_after_rejection','reason'],'additionalProperties':False}})
++            response=await transport.request('turn/start',{'threadId':thread_id,'input':[{'type':'text','text':prompt}],'model':'gpt-6.1-sol','effort':'medium','outputSchema':{'type':'object','properties':{'successes':{'type':'array','items':{'type':'boolean'},'minItems':2,'maxItems':2},'stopped_after_rejection':{'type':'boolean'},'reason':{'type':'string','enum':['completed','unavailable','denied','failed']}},'required':['successes','stopped_after_rejection','reason'],'additionalProperties':False}})
+             turn_id=response['turn']['id'];collector.turn_id=turn_id
+             stage='model_turn'
+             result=await collector.future
+             record.update(turn_status=result.status,actual_model=result.actual_model,token_usage=result.token_usage,tool_count=result.tool_count,final_output={k:v for k,v in result.output.items() if k in ('successes','stopped_after_rejection','reason')} if isinstance(result.output,dict) else {'unknown':True,'sha256':hashlib.sha256(str(result.output).encode()).hexdigest()},turn_error='reported; raw terminal text withheld' if result.error else None)
+             assert result.status=='completed' and result.actual_model in (None,'gpt-6.1-sol'),'model turn failed or substituted'
+-            assert len(outputs)==1,'missing observed tool results'
++            assert len(outputs)==2,'missing observed tool results'
+             assert all(x['server']==expected_server and x['tool']==tool for x in tool_events),'unexpected MCP tool used'
+             command_events=[x for x in auxiliary_actions if x['type']=='commandExecution'];record['reader_command_events']=command_events
+             assert len(command_events)==1 and command_events[0]['command_equals_reviewed_reader'] is True and command_events[0]['exit_code']==0,'reviewed reader command not completed exactly once'
+             assert all(x['type']=='commandExecution' or (x['type']=='dynamicToolCall' and x['tool'] in {'exec','wait','tool_search','toolSearch','search_tools','list_tools'}) for x in auxiliary_actions),'unexpected non-reader action used'
+             stage='independent_grading'
+-            checks=[]
+-            for i,output in enumerate(outputs):
+-                valid=runpy.run_path(str(ASSETS/'workbook_grader.py'))['grade']({'input':inputs[i],'output':output.get('output'),'expected':cases[0]['expected']}) if output.get('output') is not None else False
+-                receipt=output.get('receipts',[{}])[0];checks.append({'index':i,'ok':output.get('ok'),'task_valid':receipt.get('task_valid'),'receipt_id':receipt.get('receipt_id'),'summary':output.get('summary'),'recovery_state':output.get('recovery_state'),'resources':receipt.get('recorded_resources'),'independent_grader_valid':valid})
+-            record['checks']=checks
++            checks=record.get('checks',[])
++            assert len(checks)==2,'missing independent outcomes'
+             assert all(x['ok'] and x['task_valid'] is True and x['independent_grader_valid'] for x in checks)
+             record['journey_passed']=True
+             assert all(event['arguments_equal_expected'] is True for event in tool_events),'observed own MCP args mismatch or unavailable'
+-            assert len(tool_events)==1 and tool_events[0]['status']=='completed','own MCP event not terminal' 
++            assert len(tool_events)==2 and all(event['status']=='completed' for event in tool_events),'own MCP event not terminal' 
+     except BaseException as exc:
+         record.update(error_type=type(exc).__name__,failed_stage=stage,journey_passed=False)
+         if hasattr(exc,'method'): record['failed_method']=exc.method
+@@ -306,9 +313,9 @@
+         record['durable_task_attempts']=task.store._connection.execute('SELECT COUNT(*) FROM execution_attempts').fetchone()[0]
+         record['durable_receipts']=task.store._connection.execute('SELECT COUNT(*) FROM receipts').fetchone()[0]
+         if record.get('journey_passed'):
+-            assert record['durable_task_attempts']==record['durable_receipts']==1
++            assert record['durable_task_attempts']==record['durable_receipts']==2
+             assert task.store._connection.execute('SELECT executor_id FROM receipts').fetchall()[0][0]==spec.id,'durable selected executor mismatch'
+-        evidence=ROOT/'.aeep/native-sol61-code-mode-file-handoff-ade3-evidence';evidence.mkdir(exist_ok=False)
++        evidence=ROOT/'.aeep/native-sol61-code-mode-two-task-handoff-ade3-evidence';evidence.mkdir(exist_ok=False)
+         await task.close();await main_router.close()
+         import shutil
+         shutil.move(str(directory/'.aeep'),str(evidence/'task-state'));shutil.rmtree(directory)

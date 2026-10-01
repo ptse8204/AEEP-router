@@ -1,0 +1,24 @@
+{
+  "expected": {
+    "build": {
+      "verified.html": "<!doctype html><html lang=\"en\"><head><title>Verified fixture</title><link rel=\"stylesheet\" href=\"verified.css\"></head><body><h1>Verified local website</h1><aside>Preserve literal content</aside></body></html>",
+      "verified.css": "body { color: #222; background: #fff; }\n",
+      "verified-note.txt": "Keep this unrelated operator note.\n"
+    },
+    "edit": {
+      "verified.html": "<!doctype html><html lang=\"en\"><head><title>Verified fixture</title><link rel=\"stylesheet\" href=\"verified.css\"></head><body><h1>Verified updated website</h1><aside>Preserve literal content</aside></body></html>",
+      "verified.css": "body { color: #222; background: #fff; }\n",
+      "verified-note.txt": "Keep this unrelated operator note.\n"
+    }
+  },
+  "output": {
+    "build": {
+      "operation": "build",
+      "updated": "verified.html"
+    },
+    "edit": {
+      "operation": "edit",
+      "updated": "verified.html"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "classification": "proposed corrected READ lifecycle observation from retained actual evidence; NOT published/pass until independent review",
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "result_sha256": "bf4c659450c33e47e5582bd5518182d0ca21e7c6dd63a1a390e45a687d5affc9",
+  "audit_sha256": "2710bd0a8522d8c5e4ce8edf99c034796d3f528e7b9bd0a173bccf80f2415cb9",
+  "expected": {
+    "cancel_requested_after_owned_ready": true,
+    "all_owned_identity_predicates": true,
+    "native_return_status": "timeout",
+    "native_cleanup_incomplete": false,
+    "owned_processes_absent": true,
+    "durable_attempt_state": "FAILED",
+    "terminal_receipt_present": true,
+    "host_eof_observed": false
+  },
+  "rationale": "src/aeep/hosts/codex_native_process.py159 catches CancelledError and marks timed_out; READ terminal timeout can settle FAILED with terminal receipt. WRITE recovery unchanged. Prior INDETERMINATE/propagation definition remains failed.",
+  "native_attempts_added": 0,
+  "model_turns_added": 0,
+  "full_composed_conformance": false,
+  "source_contract": {
+    "native_cancellation": "src/aeep/hosts/codex_native_process.py:159 catches CancelledError as timed_out",
+    "existing_native_test": "tests/test_v08_native_process.py:86 awaits cancelled task result and asserts raw.timed_out",
+    "command_result": "src/aeep/executors/command.py:416 emits TIMEOUT on timed_out",
+    "durable_read_terminal": "src/aeep/router.py:887 _terminal_attempt_state yields FAILED for idempotent native COMMAND READ; scoped WRITE unsuccessful remains INDETERMINATE",
+    "different_mock_contract": "tests/test_fixed_callback_authority.py:101 uses monkeypatched indefinitely pending executor and expects propagated cancellation; not actual native executor semantics"
+  }
+}

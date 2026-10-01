@@ -1,0 +1,53 @@
+{
+  "status": "executed once: zero-model generated effective ACK passed; cleanup and source unchanged",
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "files_sha256": {
+    "native-sol61-generated-approval-ack-94f3.py": "370cc944c0e0d3b83fe3ba9c8b325dc0dfcb840524442ea7036d830c95072500",
+    "native-sol61-code-mode-file-handoff-94f3.py": "581f6ff0a14fbcff6763b22d4d4aa4de519be0d18b6a6f597904e42d1cea6639"
+  },
+  "applied_record": "project-tool-approval-applied.json",
+  "applied_record_sha256": "530bd519d6a372fc01573790ef0b65b4bce8a3871c99af7c3291822627185735",
+  "missing_integration_evidence": "Existing lifecycle tests check TOML READ/WRITE exact task rules and user-edit conflict handling. Installed actual native lifecycle test performs inventory/direct MCP/pause/uninstall but does not call config/read or assert effective generated per-tool approval; final required checks therefore lack this exact ACK.",
+  "zero_model_check": {
+    "driver": "native-sol61-generated-approval-ack-94f3.py",
+    "setup_max_seconds": 20,
+    "host_max_seconds": 30,
+    "body_max_seconds": 20,
+    "operations": 2,
+    "model_turns": 0,
+    "task_calls": 0,
+    "own_service_expected_tools": [
+      "aeep_csv"
+    ],
+    "unrelated_configured_task_capability": "text excluded by reviewed csv-only executor fingerprint scope",
+    "cli_approval_override": false,
+    "cli_exposure_override": false,
+    "assertions": [
+      "Actual generated own entry tools map equals exact scoped service declarations, each approve; no generated server default",
+      "Supported config/read effective same exact tool map and no default; admin rejection/ignored config fails closed",
+      "Own service inventory ready and native named FS/network profile acknowledged; no model turn",
+      "Uninstall removes owned entry and preserves declared user edits before/after activation; zero attempts/receipts; exact owned cleanup"
+    ],
+    "launch_gates": [
+      "Final same-source22checks terminalcomplete exit0",
+      "Validation agent execution window released",
+      "Exact main-ledger setup/host definitions reviewed before reserve, activation/spec/config/tool/scope hashes recorded dynamically before host launch"
+    ]
+  },
+  "code_mode_driver": {
+    "driver": "native-sol61-code-mode-file-handoff-94f3.py",
+    "status": "executable inert prototype; --execute-reviewed-model-diagnostic plus explicit future capacity/preflight review required",
+    "actual_function_name_binding": "mcp__<ownedserver>__<tool> follows primary normalized identifier example; actual native registry name still needs verification",
+    "input_transport": "Existing scratch file\u2192builtin exec_command structured output\u2192JSON.parse\u2192same MCP; no alternate service/store/transport",
+    "model_permission": "none currently; capacity stop and future availability gates retained; no direct activation code-mode forcing",
+    "small_exact_diff_from": "native-sol61-small-workbook-approved.py",
+    "important_unknown": "Effective model mode/request tool registry unavailable via currently retained zero-model AppServer schema; do not infer from feature ACK/helper hello"
+  },
+  "review_corrections": [
+    "Protocol error messages never persisted: numeric code, byte length/SHA256, fixed known class only",
+    "Rollback invariant failures recorded without assertion before operation/result retention",
+    "Docstring identifies zero-model config ACK"
+  ],
+  "result": "native-sol61-generated-approval-ack-94f3-result-288e.json",
+  "result_sha256": "5b975f27ba71bb40ee2f5a993fbda200e771e36c0f76570dcb4b9729b8b7de63"
+}

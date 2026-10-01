@@ -1,0 +1,95 @@
+{
+  "source_digest": "bcbef9aa86a9376511560bd855bd70695057cbd120d260dca633de007610633b",
+  "source_unchanged": true,
+  "reconstructed": true,
+  "runtime_result": {
+    "request_id": "conformance_probe_0fc2985891c74e7daab850d6ee3a60ac",
+    "operation_id": "linux-dynamic-tools-ack:conformance_probe_0fc2985891c74e7daab850d6ee3a60ac",
+    "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+    "worker_digest": "f62e2a0a4ce38a2099e9650a832bece22a76059e5c61e9a9aa1467727b63270f",
+    "cleanup_confirmed": true,
+    "protocol_passed": false,
+    "cpu_seconds": null,
+    "peak_memory_mb": null,
+    "accounting_complete": false,
+    "safe_transport": {
+      "known_error_template": "process_exited",
+      "reported_exit_code": 1,
+      "process_exit_code_before_cleanup": 1,
+      "config_error_categories": [],
+      "recognized_public_config_fields": [
+        "mcp_servers",
+        "linux_boundary_diagnostic"
+      ],
+      "recognized_error_types": [],
+      "stderr_class": "unclassified",
+      "error_excerpt_withheld": "categorized_diagnostics_only",
+      "stderr_bytes_retained": 69,
+      "stderr_truncated": false
+    },
+    "error_type": "CodexProtocolError",
+    "failing_stage": "transport_initialize",
+    "error_class": "protocol_or_configuration",
+    "elapsed_seconds": 0.39153350004926324
+  },
+  "canonical_observation_digest": "c5d1322919d9309f6a2b6eae3139650dd191a2f6a44bc6484af72c0feb07a4b1",
+  "operation_measurement": {
+    "operation_id": "linux-dynamic-tools-ack:conformance_probe_0fc2985891c74e7daab850d6ee3a60ac",
+    "plan_id": "conformance_probe_0fc2985891c74e7daab850d6ee3a60ac",
+    "stage": "worker_inspection",
+    "reserved": {
+      "max_operations": 1,
+      "max_model_turns": 0,
+      "max_elapsed_seconds": 60.0,
+      "max_cash_usd": "0"
+    },
+    "started_at": "2026-09-30T16:46:59.570219Z",
+    "elapsed_seconds": 0.39153350004926324,
+    "accounting": null,
+    "resources": null
+  },
+  "operation_state": "complete",
+  "reporting_error": {
+    "type": "TypeError",
+    "stage": "final accounting_delta",
+    "cause": "cash_usd is a decimal string; subtraction requires Decimal conversion",
+    "launched_driver_sha256": "897e11971eb18a7961ba031c2fe6f13596baed1027a5f49a62acb1c9931bb5b2",
+    "failure_log_sha256": "34e9f1635bb670f92551d49611c6f3b3cbb5da3fbbb820953b329a3e9324f514"
+  },
+  "grant_before": null,
+  "grant_before_status": "not persisted by launched driver; not reconstructed from aggregate counters",
+  "grant_after": {
+    "operations": 8642,
+    "model_turns": 2535,
+    "elapsed_seconds": 74793.76023990312,
+    "cash_usd": "0.0"
+  },
+  "operation_charge": {
+    "operations": 1,
+    "model_turns": 0,
+    "elapsed_seconds": 0.39153350004926324,
+    "cash_usd": "0"
+  },
+  "classification": "transport_initialization_failed; dynamic declaration support not tested",
+  "runtime_version": "unknown initialization failed",
+  "model_turns": 0,
+  "dynamic_calls": 0,
+  "full_conformance": false,
+  "release_ready": false,
+  "replay_allowed": false,
+  "argv": [
+    "/opt/codex/codex",
+    "app-server",
+    "-c",
+    "features.apps=false",
+    "-c",
+    "permissions.aeep.filesystem={\":root\" = \"deny\", \":minimal\" = \"read\", \"/workspace\" = \"write\", \"/workspace/private-state.json\" = \"deny\", \"/tmp\" = \"write\", \"/worker/auth\" = \"deny\", \"/opt/codex\" = \"read\", \"/opt/dependencies\" = \"read\", \"/opt/skills\" = \"read\", \"/etc/codex/skills\" = \"read\", \"/worker/home/.cache/codex-runtimes\" = \"read\"}",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.enabled=false"
+  ],
+  "executed_command": [
+    "python3",
+    "reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-inert.py",
+    "d6d1a4e95461a7f2a9be71c408b32405359ff5449337ade2d9e80f0f9b481dbc"
+  ]
+}

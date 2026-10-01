@@ -11,6 +11,7 @@ from decimal import Decimal
 from typing import Any
 
 from ..errors import ConfigurationError, ProtocolError
+from ..execution import ExecutorCapabilities
 from ..mcp.client import MCPHTTPClient, MCPResponse, MCPStdioClient
 from ..models import (
     CashAccounting,
@@ -119,6 +120,14 @@ def _accounting_from_meta(result: dict[str, Any], context: ExecutionContext) -> 
 
 
 class MCPExecutor(BaseExecutor):
+    def capabilities(self) -> ExecutorCapabilities:
+        return ExecutorCapabilities(
+            adapter="mcp", version="1", support_status="supported",
+            features={"execution": "supported", "structured_output": "supported",
+                      "usage": "unknown", "streaming": "unsupported",
+                      "identity": "unknown", "cancellation": "unknown", "isolation": "unknown"},
+        )
+
     def __init__(self) -> None:
         self._clients: dict[str, MCPStdioClient | MCPHTTPClient] = {}
         self._tool_schemas: dict[str, tuple[dict[str, Any], float]] = {}

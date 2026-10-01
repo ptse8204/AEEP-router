@@ -1,0 +1,33 @@
+{
+  "schema_version": "assessment.research.metrics.v3",
+  "recorded_at": "2026-09-26T09:21:16.290719+00:00",
+  "purpose": "offline EOF shutdown and HTTP exporter failure; no live acceptance",
+  "implementation_source_digest": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "artifacts": {
+    "native-catalog-metrics-eof-false.json": "9048eba6f3b94ef7a2d1b9bb2d54d56160180fc99c4897551b946f214e7f19c9",
+    "native-catalog-metrics-eof-probe.py.txt": "b78e36ed299713f107ac28c21c0ef9a0a579cc7d2da473e82844961c15a11e8e",
+    "native-catalog-metrics-export-failure-false.json": "d831105e2e30c92bbbd1a17610cf2c2dd9cba76c1fc46c7f205e795333caa5fa",
+    "native-catalog-metrics-export-failure-probe.py.txt": "2cc477247d985eb99bf31329896e2d83d6065d50d63ef2aae985ae367eb53099",
+    "native-catalog-metrics-seccomp.json": "c598d8ad3319b4c05ba271252377f72b67294bdf8dbb77bc9934efd87cca3e91"
+  },
+  "observed": [
+    "EOF after completed scripted turn exited zero and delivered implicit skill metric",
+    "Exporter HTTP 503 also exited zero but retained no metric",
+    "Native skill-reading command succeeded in both cases",
+    "Sandbox command denied access to collector in both cases"
+  ],
+  "limitations": [
+    "Scripted local responses, no learned selection",
+    "Successful process exit is not exporter acknowledgement",
+    "Positive delivery does not prove complete instrumentation or candidate-specific exposure",
+    "Offline profile is not authenticated live conformance"
+  ],
+  "grant_counters": [
+    586,
+    114,
+    1629.6554747556802,
+    "0"
+  ],
+  "model_calls": 0,
+  "release_evidence": false
+}

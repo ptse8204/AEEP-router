@@ -7,7 +7,7 @@ import json
 import os
 from datetime import datetime
 from enum import StrEnum
-from typing import Any, Literal
+from typing import Any, Literal, cast
 from urllib.parse import urlparse
 
 from jsonschema import Draft202012Validator
@@ -71,8 +71,8 @@ class QualificationReport(StrictModel):
     dynamic_cases: int = Field(default=0, ge=0)
     passed_cases: int = Field(default=0, ge=0)
     repetitions: int = Field(default=1, ge=1)
-    conditions: list[QualificationCondition] = Field(
-        default_factory=lambda: [QualificationCondition.PROCESS_COLD]
+    conditions: list[QualificationCondition | Literal["router-fresh", "fresh-worker", "reused-worker"]] = Field(
+        default_factory=lambda: cast(list[QualificationCondition | Literal["router-fresh", "fresh-worker", "reused-worker"]], [QualificationCondition.PROCESS_COLD])
     )
     dynamic_runs: int = Field(default=0, ge=0)
     passed_runs: int = Field(default=0, ge=0)
@@ -96,10 +96,26 @@ class QualificationCase(StrictModel):
     expected_output: Any | None = None
 
 
+def require_candidate_qualification(candidate: RouteCandidate, report: QualificationReport | None) -> None:
+    """Shared evidence binding for legacy activation and scoped assessment admission."""
+    if report is None or not report.passed or report.behavior_fingerprint != candidate.behavior_fingerprint or behavior_fingerprint(candidate.spec) != candidate.behavior_fingerprint:
+        raise ConfigurationError("qualification evidence does not match candidate fingerprint")
+
+
+def activate_qualified_state(candidate: RouteCandidate, report: QualificationReport) -> None:
+    require_candidate_qualification(candidate, report)
+    candidate.status = RouteLifecycle.ACTIVE
+    candidate.spec.enabled = True
+    candidate.qualification_report_id = report.report_id
+    candidate.updated_at = utc_now()
+
+
 def behavior_fingerprint(spec: ExecutorSpec) -> str:
     config_keys = {
         ExecutorKind.COMMAND: {
             "argv",
+            "argv_literal",
+            "native_sandbox",
             "cwd",
             "env",
             "inherit_env",
@@ -224,6 +240,9 @@ def behavior_fingerprint(spec: ExecutorSpec) -> str:
         "data_residency": sorted(spec.data_residency),
         "resource_pool": spec.resource_pool,
     }
+    if spec.kind == ExecutorKind.COMMAND and "native_sandbox" in spec.config:
+        from .hosts.codex_sandbox import native_policy_digest
+        payload["native_policy_digest"] = native_policy_digest()
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode()
     return hashlib.sha256(canonical).hexdigest()
 

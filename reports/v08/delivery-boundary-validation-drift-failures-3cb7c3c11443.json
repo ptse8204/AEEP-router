@@ -1,0 +1,78 @@
+{
+  "recorded_at": "2026-09-30T09:40:15.636130+00:00",
+  "source_at_start": "3cb7c3c11443db7eee3f9ce6966d7d7aff4d834a3e787384672958f43ce631fe",
+  "source_unchanged": false,
+  "total": 1060,
+  "passed": 1042,
+  "failed": 3,
+  "skipped": 15,
+  "tests": [
+    {
+      "test": "tests/test_v08_assessment.py::test_generated_definition_requires_review_and_uses_same_pipeline",
+      "campaigns": [
+        {
+          "plan_id": "plan_b61cd7b49801425c88590dc8bb60cf7f",
+          "trial_count": 35,
+          "database_sha256": "af6ce5987432896aa78919eb4ad5f9dc1201b97c5d2c552e9e395f3401086606",
+          "failure_reasons": [],
+          "states": {
+            "complete": 34,
+            "skipped": 1
+          }
+        }
+      ]
+    },
+    {
+      "test": "tests/test_v08_pilot.py::test_pilot_uses_campaign_but_cannot_qualify_or_reuse_holdout",
+      "campaigns": [
+        {
+          "plan_id": "plan_574e20ed61954a828f2786902b9126f7",
+          "trial_count": 37,
+          "database_sha256": "b3a5541670c6551ae259beda5d55b64b442e9ef030a45d02cd302136e7b60d38",
+          "failure_reasons": [
+            {
+              "type": "ConfigurationError",
+              "message": "assessment executable dependency changed; renewed review is required",
+              "count": 1
+            }
+          ],
+          "states": {
+            "complete": 36,
+            "failed": 1
+          }
+        },
+        {
+          "plan_id": "plan_163d66e9c37d45898accb5dcc004fff1",
+          "trial_count": 16,
+          "database_sha256": "5655f17283eee53b3d25375c7e63b3b2c691f3b49860b4863f08a225ad1f5219",
+          "failure_reasons": [],
+          "states": {
+            "complete": 16
+          }
+        }
+      ]
+    },
+    {
+      "test": "tests/test_v08_planning.py::test_search_workflow_assessment_binds_cases_and_preserves_constraints",
+      "campaigns": [
+        {
+          "plan_id": "plan_db79fe35852d473c80e68af641555462",
+          "trial_count": 182,
+          "database_sha256": "43189b9d626e5fc917bd8e305161983af95a000d475702a3a907a14e46262ce8",
+          "failure_reasons": [],
+          "states": {
+            "complete": 181,
+            "skipped": 1
+          }
+        }
+      ]
+    }
+  ],
+  "no_rerun": true,
+  "conclusion": {
+    "pilot": "Confirmed executable dependency drift; renewed review required.",
+    "other_two": "Persisted preflight environment_failure, with exception detail discarded by before_trial path. Source drift is established for run but exact causes remain unproven.",
+    "classification": "No stable-source regression claim; final frozen suite must evaluate affected tests.",
+    "remaining_validation": "Deferred during integration corrections and live quiet window."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "recorded_at": "2026-09-30T08:46:39.592094+00:00",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "definition_review": "native-resource-evaluation-review-288e.json",
+  "source_unchanged": true,
+  "fresh_case_count": 3,
+  "observed_local_dimension_checks_passed": true,
+  "config_mutation_holdout_status": "unknown; earlier calibration measured two, not a held-out observation",
+  "aeep_process_wall_ms": [
+    874.6275419835001,
+    875.4316670820117,
+    885.0463752169162
+  ],
+  "aeep_sampled_process_cpu_ms": [
+    770.1908520000001,
+    792.047682,
+    789.099956
+  ],
+  "aeep_sampled_peak_memory_mb": [
+    386.375,
+    385.640625,
+    385.5
+  ],
+  "aeep_retained_project_bytes": [
+    950272,
+    950272,
+    950272
+  ],
+  "schema_bytes": [
+    15202,
+    15202,
+    15202
+  ],
+  "applied_config_bytes": [
+    481,
+    481,
+    481
+  ],
+  "recovery_wall_ms": 358.39337506331503,
+  "recovery_closed_bytes": 815104,
+  "recovery_peak_journal_and_database_bytes": 1174016,
+  "recovery_checks": {
+    "wall_within_frozen_bound": true,
+    "retention_within_frozen_bound": true,
+    "allowance_not_refunded": true,
+    "effect_reverted": true
+  },
+  "host_sample_count": 159,
+  "host_attribution": "Observed aggregate host CPU/memory/swap/disk counters; concurrent desktop/model work and cache drift prevent causal incremental attribution. No subjective whole-machine acceptance inferred.",
+  "assessment_lab_disk": {
+    "logical_bytes": 63355515071,
+    "allocated_bytes": 67863502848
+  },
+  "dominant_lab_group": {
+    "files": 5238,
+    "logical_bytes": 62917230276,
+    "allocated_bytes": 67364544512
+  },
+  "package_uncompressed_bytes": 5661660,
+  "ledger_snapshot": [
+    {
+      "grant": "onboarding",
+      "operations": 8550,
+      "model_turns": 2522,
+      "elapsed_seconds": 73628.0477188183,
+      "cash_usd": "0.0"
+    }
+  ],
+  "accounting": "Read-only inventory; resource measurement operations were native production-scope synthetic samples, not candidate assessment trials. No grant reset/amendment/candidate model turns. Other agent had separately charged one operation by this snapshot.",
+  "remaining_required_dimensions": [
+    "Host/model context/subscription costs for actual App Server use",
+    "Whole-host attribution and acceptance",
+    "Long-term model-driven evidence retention growth",
+    "Human comprehension/acceptance",
+    "Held-out config mutation counter not observed"
+  ],
+  "canonical_evidence_limitation": "Disposable synthetic recovery database removed after measurement; the report retains phase sizes, receipt ID and reviewed definitions but not original canonical receipt/reconciliation storage. This measurement cannot satisfy durable recovery release verification; no replay to repair this limitation.",
+  "completed_software_suites_rerun": 0,
+  "resource_gate_complete": false,
+  "release_ready": false,
+  "records": {
+    "native-resource-evaluation-review-288e.json": "d7a61f48e686698e2c87a42aa4133caaf321547067168909e4389ec3f21a133d",
+    "native-resource-evaluation-result-288e.json": "a5922afd99af266a95b1706432b9453160843e30a57848b40bf748578428ac40",
+    "native-resource-recovery-result-288e.json": "914683a95de68e304b99fd96fb1b3209b40afda04fd83d4ba1f3aa886e3cfda8",
+    "native-resource-inventory-result-288e.json": "8d149560171687b01243c0e7991ecc25e585deeef9c0ec3c0fa9f036ca22ef53"
+  }
+}

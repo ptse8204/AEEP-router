@@ -1,0 +1,170 @@
+{
+  "review": {
+    "authority": "Standing finite fixture amendment; no additional dispatch beyond original1+successor2 authorized total3",
+    "change": "Existing output JSON parser setting; remaining single edit scope on SAME DB",
+    "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+    "driver_sha256": "aa46e5068b097f9c5f58971cc6d0701a6d06beaee1d6a6ad9573e445c3931164",
+    "manifest_sha256": "ea9a207cdba859a54f20b2b896db5bf78cc7f75dce05f15f61489247ad78ad76",
+    "scope_digest": "cf04fcde0dfb805ba370e130fec4039625a2c55234c8e63a1e2fd87f5f517241",
+    "executor_fingerprint": "sha256:e959cd21071ac13732c9842dd1ccbf609b68af5b8c0497e96b7a7de18e155949",
+    "build_reconciliation": {
+      "attempt_id": "attempt_b82136b832bf47d6961498badae70145",
+      "state": "COMPLETED",
+      "reconciliation_digest": "3e726e527862421a51446b229d9c87aad95c5eb214c17ae541e2a3aaa64e7ec1",
+      "evidence_origin": "operator-reviewed inspection",
+      "automated_verification": false,
+      "allowance_reset": false
+    },
+    "build_observation": {
+      "receipt_id": "rcpt_e26d1d9df0aa47b485b6f52ed7fd259c",
+      "index_sha256": "825f8bfac2cd9171a6901c141967181c1ffb56da49062b0e70285bbe15cc6568",
+      "unchanged": {
+        "style.css": "3b9fbce6848b6ddda34f3cef963cfa58a44e3fa938e419ae0f3d24e2832549ce",
+        "unrelated.txt": "1621f7f133c79c2e502ccbf33979ae5ace4acf22626de653cf9f6439bdb781e3"
+      },
+      "cleanup_confirmed": true
+    },
+    "build_receipt_id": "rcpt_e26d1d9df0aa47b485b6f52ed7fd259c"
+  },
+  "classification": "Offline synthetic local lifecycle; no live agent, value, arbitrary website readiness, or deployment evidence",
+  "phases": [
+    {
+      "operation": "later_edit",
+      "response": {
+        "schema_version": "aeep.task-outcome.v1",
+        "ok": true,
+        "status": "success",
+        "output": {
+          "operation": "edit",
+          "updated": "index.html"
+        },
+        "decision": {
+          "decision_id": "dec_75547edf468e4a9798a56fcf16921857",
+          "action_id": "act_cd017c3493d64d20a44c155cc0885cbb",
+          "capability": "local.website.fixed@1",
+          "selected": "local.website.fixed",
+          "disposition": "BYPASS_ROUTER",
+          "bypass_reason": "only_one_feasible_route",
+          "reason": "only one feasible route",
+          "alternatives": [],
+          "rejected": 0
+        },
+        "summary": "Completed; task verification is incomplete.",
+        "approval_ceiling": "write",
+        "task_scope_digest": "cf04fcde0dfb805ba370e130fec4039625a2c55234c8e63a1e2fd87f5f517241",
+        "task_activation_digest": "751c602c5305fd98608e57a94b4f705548e9104c714783654f682cf22331d3d4",
+        "operating_lifecycle": "session-scoped",
+        "changes_verified": null,
+        "permission_scope": "operator ceiling; backend scope requires separate evidence",
+        "receipts": [
+          {
+            "receipt_id": "rcpt_fbb63ef38ae64627adef0ccb63b48b68",
+            "executor_id": "local.website.fixed",
+            "status": "success",
+            "approval_id": "approval_839bdb7a819c4678a95dc181ff376147",
+            "schema_valid": true,
+            "task_valid": true,
+            "checks": [
+              {
+                "kind": "schema",
+                "valid": true,
+                "quality_score": 1.0,
+                "detail": "",
+                "trust": "observed"
+              }
+            ],
+            "recorded_resources": {
+              "monetary_usd": 0.0,
+              "latency_ms": 338.65875005722046,
+              "cpu_ms": 133.766788,
+              "memory_mb_seconds": 8.589137363655027,
+              "peak_memory_mb": 124.703125,
+              "gpu_ms": 0.0,
+              "network_bytes": 0,
+              "context_tokens": 11,
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 0,
+              "reasoning_output_tokens": 0,
+              "subscription_units": 0.0
+            },
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [],
+              "model_usage": [],
+              "tool_footprint": null
+            },
+            "enforcement_backend_digest": "444e849041390c3dc0e0a37c1340d57255dfa83a4c87cb5e9c9c7a4dccf43c47"
+          }
+        ],
+        "verification_limits": [
+          "Non-schema task verification is incomplete or unavailable.",
+          "Preservation, isolation and comparative savings are not established by execution success."
+        ],
+        "recovery_state": "none"
+      }
+    }
+  ],
+  "independent_file_checks": true,
+  "publish": {
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"error\": \"unknown assessment-profile tool\", \"error_type\": \"ConfigurationError\"}"
+        }
+      ],
+      "isError": true,
+      "structuredContent": {
+        "error": "unknown assessment-profile tool",
+        "error_type": "ConfigurationError"
+      }
+    },
+    "permitted_route": false,
+    "network_invoked": false,
+    "destination_authority": false
+  },
+  "paused_dispatch": {
+    "error": "task activation is paused or incomplete",
+    "error_type": "ConfigurationError"
+  },
+  "uninstall": {
+    "activation_id": "task_2075995d9ee24aa395a8d0f2d6e037b9",
+    "activation_digest": "751c602c5305fd98608e57a94b4f705548e9104c714783654f682cf22331d3d4",
+    "scope_digest": "cf04fcde0dfb805ba370e130fec4039625a2c55234c8e63a1e2fd87f5f517241",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-website-local/.aeep/task-profiles/task_2075995d9ee24aa395a8d0f2d6e037b9.json",
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-website-local/.aeep/task-profiles/codex-config.lock"
+    ],
+    "codex_mcp_entry": "absent",
+    "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-website-local/.codex/config.toml",
+    "retained_artifacts": [
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/native-website-local/.aeep/task-profiles/codex-config.lock"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 1,
+    "attempts_remaining": 0,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "complete": true,
+  "project_config_restored": true,
+  "later_user_edit_preserved": true,
+  "model_turns": 0,
+  "publish_gate_complete": false,
+  "receipt_retained": true,
+  "limits": [
+    "Fixed literal HTML checks only; no browser rendering or accessibility audit",
+    "Build receipt output schema failed before parser fixture repair; build effects independently inspected and operator-reviewed, never relabeled automated success"
+  ],
+  "source_unchanged": true
+}

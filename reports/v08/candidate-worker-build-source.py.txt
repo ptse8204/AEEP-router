@@ -1,0 +1,63 @@
+import asyncio,hashlib,io,json,subprocess,tarfile,time,uuid
+from datetime import datetime,timezone
+from pathlib import Path
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentSetupCost
+from aeep.assessment.verification import verification_source_digest
+ROOT=Path.cwd();OUT=ROOT/'reports/v08/ponytail-worker-preparation-v2.json'
+BASE='sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7'
+DOCKER=['/usr/local/bin/docker','--host','unix:///Users/edwintse/.docker/run/docker.sock']
+def call(args,**kwargs):
+ p=subprocess.run([*DOCKER,*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=90,**kwargs)
+ if p.returncode:raise RuntimeError(f'{args[0]} failed with exit {p.returncode}: {p.stderr.decode()[:500]}')
+ return p.stdout.decode().strip()
+async def main():
+ assert not OUT.exists()
+ start=time.monotonic();cpu=time.process_time();source=verification_source_digest(ROOT)
+ selected=json.loads((ROOT/'reports/v08/remaining-family-candidates.json').read_text())
+ subject=selected['new_subject'];path=Path(subject['location'])/'SKILL.md';data=path.read_bytes();digest=hashlib.sha256(data).hexdigest()
+ assert digest==subject['dependency_digests']['SKILL.md']
+ archive=io.BytesIO()
+ with tarfile.open(fileobj=archive,mode='w') as tar:
+  for directory in ('etc','etc/codex','etc/codex/skills','opt','opt/dependencies','opt/dependencies/ponytail'):
+   d=tarfile.TarInfo(directory);d.type=tarfile.DIRTYPE;d.mode=0o755;tar.addfile(d)
+  link=tarfile.TarInfo('etc/codex/skills/ponytail');link.type=tarfile.SYMTYPE;link.linkname='/opt/dependencies/ponytail';tar.addfile(link)
+  f=tarfile.TarInfo('opt/dependencies/ponytail/SKILL.md');f.mode=0o444;f.size=len(data);tar.addfile(f,io.BytesIO(data))
+ name='aeep-ponytail-preparation-'+uuid.uuid4().hex[:12];created=False
+ record={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':source,'base_image':BASE,'subject_digest':selected['candidates'][1]['subject_digest'],'skill_sha256':digest,'candidate_path':'/opt/dependencies/ponytail/SKILL.md','discovery_alias':'/etc/codex/skills/ponytail','method':'stopped-container snapshot of one exact installed skill; container never started','credentials_mounted':False,'host_mounts':False,'network':'none','model_calls':0,'live_conformance':False,'execution_approval':False}
+ try:
+  call(['create','--name',name,'--network','none','--entrypoint','/bin/true',BASE]);created=True
+  call(['cp','-',name+':/'],input=archive.getvalue())
+  diff=call(['diff',name]).splitlines();record['filesystem_diff']=diff
+  assert all(line[2:] in {'/etc','/etc/codex','/etc/codex/skills','/etc/codex/skills/ponytail','/etc/codex/skills/ponytail/SKILL.md','/opt','/opt/dependencies','/opt/dependencies/ponytail','/opt/dependencies/ponytail/SKILL.md'} for line in diff),diff
+  candidate=call(['commit',name]);record['candidate_image']=candidate
+ finally:
+  if created:call(['rm',name])
+ program='''import hashlib,json,pathlib,pandas,openpyxl
+p=pathlib.Path('/opt/dependencies/ponytail/SKILL.md')
+print(json.dumps({'candidate_exists':p.is_file(),'candidate_sha256':hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None,'pandas':pandas.__version__,'openpyxl':openpyxl.__version__}))'''
+ probes=[]
+ for role,image in [('control',BASE),('treatment',candidate)]:
+  result=json.loads(call(['run','--rm','--network','none','--read-only','--user','65534:65534','--cpus','1','--memory','256m','--pids-limit','32','--cap-drop','ALL','--security-opt','no-new-privileges','--env','PYTHONDONTWRITEBYTECODE=1','--entrypoint','python3',image,'-c',program]))
+  assert result['candidate_exists']==(role=='treatment')
+  assert result['candidate_sha256']==(digest if role=='treatment' else None)
+  probes.append({'role':role,'image':image,'observation':result})
+ assert probes[0]['observation']['pandas']==probes[1]['observation']['pandas']=='2.3.2'
+ assert probes[0]['observation']['openpyxl']==probes[1]['observation']['openpyxl']=='3.1.5'
+ record['prior_failures']=['ponytail-worker-preparation-initial-failure.json','ponytail-worker-inventory-initial-failure.json'];record['supersedes_image_layout']='ponytail-worker-preparation.json';record['probes']=probes;record['elapsed_seconds']=time.monotonic()-start;record['client_cpu_ms']=(time.process_time()-cpu)*1000
+ router=Router.from_manifest(ROOT/'.aeep/live-review-v3/aeep.json')
+ try:
+  service=AssessmentService(router,ROOT/'.aeep/live-review-v3/.aeep/assessments')
+  sql="SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id='onboarding'"
+  before=list(router.store._connection.execute(sql).fetchone())
+  cost=AssessmentSetupCost(subject_digest=record['subject_digest'],stage='offline_worker_image_preparation',elapsed_seconds=record['elapsed_seconds'],cpu_ms=record['client_cpu_ms'])
+  service.repository.put('setup_cost',cost.cost_id,cost)
+  assert before==list(router.store._connection.execute(sql).fetchone())
+  record['setup_cost_id']=cost.cost_id;record['setup_cost_handling']='Retained preparation cost must be included in the future reviewed plan setup_cost_ids and charged once through the existing ledger before execution; no live plan exists for this subject yet.'
+  record['grant_counters_unchanged']=before
+ finally:await router.close()
+ assert source==verification_source_digest(ROOT)
+ with OUT.open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+ print(json.dumps({'candidate_image':candidate,'probe_count':len(probes),'setup_cost_id':cost.cost_id,'elapsed_seconds':record['elapsed_seconds'],'model_calls':0}))
+asyncio.run(main())

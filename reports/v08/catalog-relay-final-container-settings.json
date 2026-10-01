@@ -1,0 +1,21 @@
+{
+  "purpose": "reproduction settings for the completed offline real-container suite",
+  "harness_sha256": "448e8fe54fa383d7fe9ce1a634087269af0761fe9aa54669f8eec0f65247385d",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-m",
+    "real_container"
+  ],
+  "runtime": "/usr/local/bin/docker",
+  "socket": "/Users/edwintse/.docker/run/docker.sock",
+  "environment": {
+    "AEEP_CONTAINER_IMAGE": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+    "AEEP_WORKBOOK_IMAGE": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+    "AEEP_CATALOG_METRICS_IMAGE": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+    "AEEP_INSPECTION_FIXTURE_SPECS": "reports/v08/offline-inspection-fixture-specs.json"
+  },
+  "model_calls": 0,
+  "result": "catalog-relay-final-containers.json"
+}

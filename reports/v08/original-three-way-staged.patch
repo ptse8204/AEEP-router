@@ -1,0 +1,1088 @@
+--- a/src/aeep/assessment/boundary.py
++++ b/src/aeep/assessment/boundary.py
+@@ -16,6 +16,7 @@
+     ConformanceProbeRequest,
+     DifferentialEnvironment,
+     Digest,
++    ThreeWayAccessDefinition,
+     content_digest,
+ )
+ from .repository import AssessmentRepository
+@@ -154,6 +155,64 @@
+             "definition_digest": content_digest(expected), "candidate_available": expected_access,
+         }:
+             raise ConfigurationError("candidate availability probe does not bind the reviewed paths and aliases")
++
++
++    if plan.comparison.experiment.stage == 'aeep_value':
++        require_three_way_access(repository, environment, plan)
++
++
++def require_three_way_access(repository: AssessmentRepository, environment: AssessmentEnvironment,
++                             plan: AssessmentPlan) -> None:
++    from .models import ReviewedMapping
++
++    assert plan.comparison is not None and plan.comparison.experiment is not None
++    experiment = plan.comparison.experiment
++    digest = experiment.three_way_access_digest
++    if digest is None or digest not in plan.definition_digests or experiment.normal_host is None:
++        raise ConfigurationError('three-way access definition is unbound')
++    access = ThreeWayAccessDefinition.model_validate(repository.get('three_way_access', digest))
++    with repository.store._lock:
++        reviewed = repository.store._connection.execute(
++            'SELECT revoked FROM assessment_reviews WHERE digest=?', (digest,)).fetchone()
++    if content_digest(access) != digest or reviewed is None or reviewed[0]:
++        raise ConfigurationError('three-way access requires current exact review')
++    expected = experiment.environment
++    if (set(access.normal_inventory) & set(access.discovery_inventory)
++            or expected.control_inventory != access.normal_inventory | access.discovery_inventory
++            or any(expected.control_inventory.get(key) != value for key, value in access.external_candidate_inventory.items())
++            or set(access.external_candidate_inventory) & set(expected.candidate_inventory)):
++        raise ConfigurationError('three-way discovery or external candidate access differs')
++    roles = [experiment.normal_host.executor_id, plan.baseline_id, plan.candidate_id]
++    if set(access.worker_digests) != set(roles) or set(access.configuration_digests) != set(roles):
++        raise ConfigurationError('three-way worker roles differ')
++    mapping = ReviewedMapping.model_validate(repository.get('mapping', plan.mapping_digest))
++    specs = {spec.id: spec for spec in mapping.subjects}
++    inventories = [access.normal_inventory, expected.control_inventory, expected.treatment_inventory]
++    identities = {}
++    selected = []
++    for role, inventory in zip(roles, inventories, strict=True):
++        conformance = (environment.conformance_digests or {}).get(role)
++        if role not in specs or conformance is None:
++            raise ConfigurationError('three-way worker conformance missing')
++        boundary = BoundaryConformance.model_validate(repository.get('boundary_conformance', conformance))
++        if (boundary.worker_digest != access.worker_digests[role]
++                or boundary.configuration_digest != access.configuration_digests[role]
++                or boundary.schema_version != 'assessment.boundary-conformance.v2'
++                or boundary.effective_inventory != inventory
++                or boundary.reviewed_inventory_digest != content_digest(inventory)):
++            raise ConfigurationError('three-way effective worker/access binding differs')
++        if role == experiment.normal_host.executor_id:
++            absence = next((BoundaryProbe.model_validate(repository.get('boundary_probe', item))
++                            for item in boundary.probe_digests
++                            if repository.get('boundary_probe', item).get('name') == 'candidate_access'), None)
++            if absence is None or absence.observed != {
++                    'definition_digest': content_digest(expected), 'candidate_available': False}:
++                raise ConfigurationError('normal host intervention absence differs')
++        identities[role] = boundary.identity_digest
++        selected.append(specs[role])
++    # Validates current source, actual configured immutable worker, binary, config,
++    # reviewed enforcement and every execution-backed probe for all three roles.
++    require_managed_boundaries(repository, environment, selected, identities)
+ 
+ 
+ def require_conformance(repository: AssessmentRepository, digest: str, *, source_digest: str,
+--- a/src/aeep/assessment/comparison.py
++++ b/src/aeep/assessment/comparison.py
+@@ -92,6 +92,8 @@
+         for challenger in experiment.challengers:
+             if challenger.executor_id not in by_id or arm(by_id[challenger.executor_id], dependencies) != challenger:
+                 raise ConfigurationError("challenger differs from its reviewed route mapping")
++        if experiment.stage == 'aeep_value' and (candidate.kind != ExecutorKind.MANAGED_HOST or baseline.kind != ExecutorKind.MANAGED_HOST):
++            raise ConfigurationError('three-way value requires managed hosts')
+         if candidate.kind == ExecutorKind.MANAGED_HOST or baseline.kind == ExecutorKind.MANAGED_HOST:
+             validate_incremental_hosts(candidate, baseline, by_id, experiment)
+     return AssessmentComparison(schema_version="assessment.comparison.v2" if experiment else "assessment.comparison.v1", structure=structure, candidate=arm(candidate, dependencies), baseline=arm(baseline, dependencies), reference=arm(reference, []) if reference else None, experiment=experiment,
+@@ -126,7 +128,10 @@
+                      or config.reasoning_efforts == base.reasoning_efforts):
+             raise ConfigurationError("higher-compute arm requires distinct pinned effort and twice the deadline")
+         invocation = config.invocation
+-        if (invocation.local_profile != base.invocation.local_profile
++        if experiment.stage == 'aeep_value' and invocation.supporting_tools != base.invocation.supporting_tools:
++            raise ConfigurationError('three-way ordinary supporting tools differ')
++        normal = experiment.normal_host is not None and member.id == experiment.normal_host.executor_id
++        if not normal and (invocation.local_profile != base.invocation.local_profile
+                 or invocation.native_catalog != base.invocation.native_catalog):
+             raise ConfigurationError("incremental arms differ in shared local/catalog profiles")
+         if invocation.supporting_skills != base.invocation.supporting_skills:
+--- a/src/aeep/assessment/models.py
++++ b/src/aeep/assessment/models.py
+@@ -340,12 +340,24 @@
+         return self
+ 
+ 
++class ThreeWayAccessDefinition(StrictModel):
++    """Exact expected inventories; observed conformance must independently match."""
++    schema_version: Literal['assessment.three-way-access.v1'] = 'assessment.three-way-access.v1'
++    normal_inventory: dict[str, Digest]
++    discovery_inventory: dict[str, Digest] = Field(min_length=1)
++    external_candidate_inventory: dict[str, Digest] = Field(min_length=1)
++    worker_digests: dict[str, Digest] = Field(min_length=3, max_length=3)
++    configuration_digests: dict[str, Digest] = Field(min_length=3, max_length=3)
++
++
+ class IncrementalExperiment(StrictModel):
+-    schema_version: Literal["assessment.experiment.v1"] = "assessment.experiment.v1"
+-    stage: Literal["qualification", "marginal_value", "native_catalog"]
++    schema_version: Literal["assessment.experiment.v1", "assessment.experiment.v2"] = "assessment.experiment.v1"
++    stage: Literal["qualification", "marginal_value", "native_catalog", "aeep_value"]
+     exposure: Literal["required", "optional"]
+     environment: DifferentialEnvironment
+     utility: UtilityPolicy
++    normal_host: ComparisonArm | None = None
++    three_way_access_digest: Digest | None = None
+     higher_compute: ComparisonArm | None = None
+     reusable_tool: ComparisonArm | None = None
+     reusable_artifact_digest: Digest | None = None
+@@ -355,13 +367,34 @@
+     catalog_definition_digest: Digest | None = None
+     marginal_report_digest: Digest | None = None
+ 
++    @model_serializer(mode='wrap')
++    def preserve_four_arm(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
++        result: dict[str, Any] = handler(self)
++        if self.schema_version == 'assessment.experiment.v1':
++            result.pop('normal_host', None)
++            result.pop('three_way_access_digest', None)
++        return result
++
+     @model_validator(mode="after")
+     def stage_contract(self) -> IncrementalExperiment:
++        three_way = self.stage == 'aeep_value'
++        if three_way != (self.schema_version == 'assessment.experiment.v2'):
++            raise ValueError('three-way value requires experiment.v2')
++        if three_way:
++            if (self.normal_host is None or self.three_way_access_digest is None
++                    or self.qualification_report_digest is None or self.higher_compute is not None
++                    or self.reusable_tool is not None or self.reusable_artifact_digest is not None
++                    or self.reusable_build_operation_ids or self.catalog_definition_digest is not None
++                    or self.marginal_report_digest is not None
++                    or self.feasible_challengers != [self.normal_host.executor_id]):
++                raise ValueError('three-way requires one normal host, access and qualification evidence')
++        elif self.normal_host is not None or self.three_way_access_digest is not None:
++            raise ValueError('historical experiments cannot acquire three-way fields')
+         if (self.stage == "qualification") != (self.exposure == "required"):
+             raise ValueError("only qualification requires candidate invocation")
+         if self.stage == "qualification" and self.challengers:
+             raise ValueError("qualification does not run comparative challengers")
+-        if self.stage != "qualification" and (self.higher_compute is None or self.reusable_tool is None
++        if self.stage not in {"qualification", "aeep_value"} and (self.higher_compute is None or self.reusable_tool is None
+                 or self.reusable_artifact_digest is None or not self.reusable_build_operation_ids
+                 or self.qualification_report_digest is None):
+             raise ValueError("value stages require two frozen challengers, build accounting and qualification evidence")
+@@ -374,7 +407,7 @@
+ 
+     @property
+     def challengers(self) -> list[ComparisonArm]:
+-        return [arm for arm in (self.higher_compute, self.reusable_tool) if arm is not None]
++        return [self.normal_host] if self.normal_host is not None else [arm for arm in (self.higher_compute, self.reusable_tool) if arm is not None]
+ 
+ 
+ class AssessmentSetupRequest(StrictModel):
+--- a/src/aeep/assessment/reporting.py
++++ b/src/aeep/assessment/reporting.py
+@@ -289,7 +289,7 @@
+     positions = {(case, rep) for case in expected for rep in range(plan.suite.repetitions)}
+     compared_ids = [plan.baseline_id, *experiment.feasible_challengers]
+     # Bonferroni bounds cover every declared metric/guardrail and challenger.
+-    alpha = policy.family_error_rate / max(1, len(dimensions) * len(compared_ids) * len(plan.suite.conditions))
++    alpha = policy.family_error_rate / max(1, len(dimensions) * (3 if experiment.stage == "aeep_value" else len(compared_ids)) * len(plan.suite.conditions))
+ 
+     def value(trial: BenchmarkTrial, metric: str) -> float | None:
+         if metric == "task_success":
+@@ -348,6 +348,10 @@
+                    complete=primary["complete"] and all(result["complete"] for result in challengers.values()),
+                    stage=experiment.stage, family_error_rate=policy.family_error_rate,
+                    analysis="all_assigned_cases", candidate_selection_filter=False)
++    if experiment.stage == "aeep_value":
++        assert experiment.normal_host is not None
++        primary["discovery_vs_normal"] = compare(plan.baseline_id, experiment.normal_host.executor_id)
++        primary["complete"] &= primary["discovery_vs_normal"]["complete"]
+     if experiment.stage == "qualification":
+         primary["benefit"] = False  # Qualification is never comparative admission authority.
+     if experiment.stage == "native_catalog":
+--- a/src/aeep/assessment/service.py
++++ b/src/aeep/assessment/service.py
+@@ -194,7 +194,7 @@
+         selection = next(item for item in options["choices"] if item["structure"] == selected_structure)
+         reference = None
+         reference_id = f"reference.{family}"
+-        if baseline.kind == ExecutorKind.MANAGED_HOST and self.router.registry.contains(reference_id) and reference_id not in {candidate_id, baseline_id}:
++        if (experiment is None or experiment.stage != "aeep_value") and baseline.kind == ExecutorKind.MANAGED_HOST and self.router.registry.contains(reference_id) and reference_id not in {candidate_id, baseline_id}:
+             reference = self.router.registry.get(reference_id)
+             if reference.capability != recipe.capability:
+                 raise ConfigurationError("configured reference has an incompatible task contract")
+@@ -325,7 +325,7 @@
+             candidate_id=candidate_id,
+             baseline_id=baseline_id,
+             reference_id=reference.id if reference else None,
+-            definition_digests=[recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
++            definition_digests=[*([experiment.three_way_access_digest] if experiment and experiment.three_way_access_digest else []), recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
+             route_fingerprints={item.id: behavior_fingerprint(item) for item in mapping.subjects},
+             executable_dependencies=mapping.executable_dependencies,
+             suite=BenchmarkSuite(
+@@ -340,7 +340,7 @@
+                 cases=cases,
+                 conditions=[AssessmentBenchmarkCondition(comparison.primary_condition)],
+                 sequential_stages=True,
+-                paired_order=True,
++                paired_order=experiment is None or experiment.stage != "aeep_value",
+                 stop_on_screening_failure=pilot is None,
+                 baseline_route_id=None if experiment and experiment.stage == "qualification" else baseline_id,
+                 max_total_cash_usd=Decimal(0),
+@@ -593,6 +593,7 @@
+             )
+         if report.grader_validation_digest is None:
+             raise ConfigurationError("admission requires independent grader-validation evidence")
++        assert report.grader_validation_digest is not None
+         validation = GraderValidationEvidence.model_validate(self.repository.get("grader_validation", report.grader_validation_digest))
+         with self.router.store._lock:
+             graded = self.router.store._connection.execute(
+@@ -764,6 +765,34 @@
+                 raise ConfigurationError("assessment route changed; renewed review is required")
+         return mapping
+ 
++    def _verify_three_way_qualification(self, plan: AssessmentPlan,
++                                        qualified_plan: AssessmentPlan, report: AssessmentReport) -> None:
++        """Supplement existing canonical qualification checks, never replace refitting."""
++        self.repository.authorize(qualified_plan)
++        self._verify_dependencies(qualified_plan)
++        if qualified_plan.candidate_id != plan.candidate_id or content_digest(qualified_plan) != report.plan_digest:
++            raise ConfigurationError('three-way qualification candidate/plan differs')
++        assert report.grader_validation_digest is not None
++        validation = GraderValidationEvidence.model_validate(self.repository.get('grader_validation', report.grader_validation_digest))
++        if (content_digest(validation) != report.grader_validation_digest
++                or validation.recipe_digest != plan.recipe_digest or validation.rejected_fault_count < 1):
++            raise ConfigurationError('three-way qualification grader binding differs')
++        rows = self.router.store._connection.execute(
++            "SELECT digest FROM assessment_records WHERE kind='grader_validation' AND id IN (SELECT id || ':grader-validation' FROM assessment_jobs WHERE plan_id=? AND report_id=? AND state='complete' AND error_code IS NULL)",
++            (qualified_plan.plan_id, report.report_id)).fetchall()
++        if not any(row[0] == report.grader_validation_digest for row in rows):
++            raise ConfigurationError('three-way requires canonical qualification grader validation')
++        qualified_mapping = ReviewedMapping.model_validate(self.repository.get('mapping', qualified_plan.mapping_digest))
++        current_mapping = ReviewedMapping.model_validate(self.repository.get('mapping', plan.mapping_digest))
++        left = qualified_mapping.candidate.managed_host_config().model_dump(mode='json')
++        right = current_mapping.candidate.managed_host_config().model_dump(mode='json')
++        if left['invocation'].get('exposure') != 'required' or right['invocation'].get('exposure') != 'optional':
++            raise ConfigurationError('three-way qualification exposure differs')
++        for config in (left, right):
++            config['invocation'].pop('exposure')
++        if left != right:
++            raise ConfigurationError('three-way qualification candidate backend differs')
++
+     def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+         from .boundary import require_differential
+         environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+@@ -789,6 +818,14 @@
+             raise ConfigurationError("incremental value requires current independent qualification evidence")
+         allowed_training = {content_digest(case.action.input) for case in qualified_plan.suite.cases if case.split == BenchmarkSplit.TRAINING}
+         prior_inputs = {content_digest(case.action.input) for case in qualified_plan.suite.cases if case.split == BenchmarkSplit.HOLDOUT}
++        if experiment.stage == 'aeep_value':
++            self.repository.authorize(qualified_plan)
++            if (content_digest(qualified_plan) != report.plan_digest
++                    or content_digest(campaign) != report.campaign_digest
++                    or qualified_plan.candidate_id != plan.candidate_id
++                    or len(qualified_plan.suite.routes) != 1
++                    or prior_experiment.exposure != 'required'):
++                raise ConfigurationError('three-way qualification canonical lineage differs')
+         if experiment.stage == 'native_catalog':
+             marginal = AssessmentReport.model_validate(self.repository.get('report', experiment.marginal_report_digest or ''))
+             marginal_plan = AssessmentPlan.model_validate(self.repository.get('plan', marginal.plan_digest))
+@@ -817,6 +854,9 @@
+             ).fetchone()
+             if completed is None:
+                 raise ConfigurationError("qualification requires a completed campaign, not a report alone")
++            if experiment.stage == 'aeep_value':
++                self._verify_three_way_qualification(plan, qualified_plan, report)
++                return
+             for identity in experiment.reusable_build_operation_ids:
+                 row = self.router.store._connection.execute(
+                     "SELECT state, grant_id FROM assessment_operations WHERE id=?", (identity,)).fetchone()
+--- a/src/aeep/assessment/verification.py
++++ b/src/aeep/assessment/verification.py
+@@ -102,6 +102,7 @@
+             "tests/test_v08_controlled_fixture.py",
+             "tests/test_v08_task_profile.py",
+             "tests/test_v08_native_process.py",
++            "tests/test_v08_three_way.py",
+             "tests/test_v08_task_lifecycle.py",
+             "tests/test_v08_ard.py",
+         ],
+--- a/scripts/generate_schemas.py
++++ b/scripts/generate_schemas.py
+@@ -33,6 +33,7 @@
+     RecipeMaterializationRequest,
+     ReusableBaselineArtifact,
+     ScopedAdmission,
++    ThreeWayAccessDefinition,
+ )
+ from aeep.assessment.tools import declarations as assessment_tools
+ from aeep.attempts import ExecutionAttempt
+@@ -180,6 +181,7 @@
+     "assessment-scope-amendment.schema.json": AssessmentScopeAmendment,
+     "assessment-budget-amendment.schema.json": AssessmentBudgetAmendment,
+     "assessment-experiment.schema.json": IncrementalExperiment,
++    "assessment-three-way-access.schema.json": ThreeWayAccessDefinition,
+     "assessment-pilot.schema.json": PilotPolicy,
+     "assessment-reusable-baseline.schema.json": ReusableBaselineArtifact,
+     "assessment-differential-conformance.schema.json": DifferentialConformance,
+--- a/schemas/assessment-admission.schema.json
++++ b/schemas/assessment-admission.schema.json
+@@ -175,8 +175,11 @@
+       "additionalProperties": false,
+       "properties": {
+         "schema_version": {
+-          "const": "assessment.experiment.v1",
+           "default": "assessment.experiment.v1",
++          "enum": [
++            "assessment.experiment.v1",
++            "assessment.experiment.v2"
++          ],
+           "title": "Schema Version",
+           "type": "string"
+         },
+@@ -184,7 +187,8 @@
+           "enum": [
+             "qualification",
+             "marginal_value",
+-            "native_catalog"
++            "native_catalog",
++            "aeep_value"
+           ],
+           "title": "Stage",
+           "type": "string"
+@@ -202,6 +206,30 @@
+         },
+         "utility": {
+           "$ref": "#/$defs/UtilityPolicy"
++        },
++        "normal_host": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/ComparisonArm"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null
++        },
++        "three_way_access_digest": {
++          "anyOf": [
++            {
++              "pattern": "^[a-f0-9]{64}$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Three Way Access Digest"
+         },
+         "higher_compute": {
+           "anyOf": [
+--- a/schemas/assessment-comparison.schema.json
++++ b/schemas/assessment-comparison.schema.json
+@@ -106,8 +106,11 @@
+       "additionalProperties": false,
+       "properties": {
+         "schema_version": {
+-          "const": "assessment.experiment.v1",
+           "default": "assessment.experiment.v1",
++          "enum": [
++            "assessment.experiment.v1",
++            "assessment.experiment.v2"
++          ],
+           "title": "Schema Version",
+           "type": "string"
+         },
+@@ -115,7 +118,8 @@
+           "enum": [
+             "qualification",
+             "marginal_value",
+-            "native_catalog"
++            "native_catalog",
++            "aeep_value"
+           ],
+           "title": "Stage",
+           "type": "string"
+@@ -133,6 +137,30 @@
+         },
+         "utility": {
+           "$ref": "#/$defs/UtilityPolicy"
++        },
++        "normal_host": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/ComparisonArm"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null
++        },
++        "three_way_access_digest": {
++          "anyOf": [
++            {
++              "pattern": "^[a-f0-9]{64}$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Three Way Access Digest"
+         },
+         "higher_compute": {
+           "anyOf": [
+--- a/schemas/assessment-experiment.schema.json
++++ b/schemas/assessment-experiment.schema.json
+@@ -164,8 +164,11 @@
+   "additionalProperties": false,
+   "properties": {
+     "schema_version": {
+-      "const": "assessment.experiment.v1",
+       "default": "assessment.experiment.v1",
++      "enum": [
++        "assessment.experiment.v1",
++        "assessment.experiment.v2"
++      ],
+       "title": "Schema Version",
+       "type": "string"
+     },
+@@ -173,7 +176,8 @@
+       "enum": [
+         "qualification",
+         "marginal_value",
+-        "native_catalog"
++        "native_catalog",
++        "aeep_value"
+       ],
+       "title": "Stage",
+       "type": "string"
+@@ -191,6 +195,30 @@
+     },
+     "utility": {
+       "$ref": "#/$defs/UtilityPolicy"
++    },
++    "normal_host": {
++      "anyOf": [
++        {
++          "$ref": "#/$defs/ComparisonArm"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null
++    },
++    "three_way_access_digest": {
++      "anyOf": [
++        {
++          "pattern": "^[a-f0-9]{64}$",
++          "type": "string"
++        },
++        {
++          "type": "null"
++        }
++      ],
++      "default": null,
++      "title": "Three Way Access Digest"
+     },
+     "higher_compute": {
+       "anyOf": [
+--- a/schemas/assessment-plan.schema.json
++++ b/schemas/assessment-plan.schema.json
+@@ -1112,8 +1112,11 @@
+       "additionalProperties": false,
+       "properties": {
+         "schema_version": {
+-          "const": "assessment.experiment.v1",
+           "default": "assessment.experiment.v1",
++          "enum": [
++            "assessment.experiment.v1",
++            "assessment.experiment.v2"
++          ],
+           "title": "Schema Version",
+           "type": "string"
+         },
+@@ -1121,7 +1124,8 @@
+           "enum": [
+             "qualification",
+             "marginal_value",
+-            "native_catalog"
++            "native_catalog",
++            "aeep_value"
+           ],
+           "title": "Stage",
+           "type": "string"
+@@ -1139,6 +1143,30 @@
+         },
+         "utility": {
+           "$ref": "#/$defs/UtilityPolicy"
++        },
++        "normal_host": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/ComparisonArm"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null
++        },
++        "three_way_access_digest": {
++          "anyOf": [
++            {
++              "pattern": "^[a-f0-9]{64}$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Three Way Access Digest"
+         },
+         "higher_compute": {
+           "anyOf": [
+--- a/schemas/assessment-report.schema.json
++++ b/schemas/assessment-report.schema.json
+@@ -175,8 +175,11 @@
+       "additionalProperties": false,
+       "properties": {
+         "schema_version": {
+-          "const": "assessment.experiment.v1",
+           "default": "assessment.experiment.v1",
++          "enum": [
++            "assessment.experiment.v1",
++            "assessment.experiment.v2"
++          ],
+           "title": "Schema Version",
+           "type": "string"
+         },
+@@ -184,7 +187,8 @@
+           "enum": [
+             "qualification",
+             "marginal_value",
+-            "native_catalog"
++            "native_catalog",
++            "aeep_value"
+           ],
+           "title": "Stage",
+           "type": "string"
+@@ -202,6 +206,30 @@
+         },
+         "utility": {
+           "$ref": "#/$defs/UtilityPolicy"
++        },
++        "normal_host": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/ComparisonArm"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null
++        },
++        "three_way_access_digest": {
++          "anyOf": [
++            {
++              "pattern": "^[a-f0-9]{64}$",
++              "type": "string"
++            },
++            {
++              "type": "null"
++            }
++          ],
++          "default": null,
++          "title": "Three Way Access Digest"
+         },
+         "higher_compute": {
+           "anyOf": [
+--- /dev/null
++++ b/schemas/assessment-three-way-access.schema.json
+@@ -0,0 +1,67 @@
++{
++  "additionalProperties": false,
++  "description": "Exact expected inventories; observed conformance must independently match.",
++  "properties": {
++    "schema_version": {
++      "const": "assessment.three-way-access.v1",
++      "default": "assessment.three-way-access.v1",
++      "title": "Schema Version",
++      "type": "string"
++    },
++    "normal_inventory": {
++      "additionalProperties": {
++        "pattern": "^[a-f0-9]{64}$",
++        "type": "string"
++      },
++      "title": "Normal Inventory",
++      "type": "object"
++    },
++    "discovery_inventory": {
++      "additionalProperties": {
++        "pattern": "^[a-f0-9]{64}$",
++        "type": "string"
++      },
++      "minProperties": 1,
++      "title": "Discovery Inventory",
++      "type": "object"
++    },
++    "external_candidate_inventory": {
++      "additionalProperties": {
++        "pattern": "^[a-f0-9]{64}$",
++        "type": "string"
++      },
++      "minProperties": 1,
++      "title": "External Candidate Inventory",
++      "type": "object"
++    },
++    "worker_digests": {
++      "additionalProperties": {
++        "pattern": "^[a-f0-9]{64}$",
++        "type": "string"
++      },
++      "maxProperties": 3,
++      "minProperties": 3,
++      "title": "Worker Digests",
++      "type": "object"
++    },
++    "configuration_digests": {
++      "additionalProperties": {
++        "pattern": "^[a-f0-9]{64}$",
++        "type": "string"
++      },
++      "maxProperties": 3,
++      "minProperties": 3,
++      "title": "Configuration Digests",
++      "type": "object"
++    }
++  },
++  "required": [
++    "normal_inventory",
++    "discovery_inventory",
++    "external_candidate_inventory",
++    "worker_digests",
++    "configuration_digests"
++  ],
++  "title": "ThreeWayAccessDefinition",
++  "type": "object"
++}
+--- /dev/null
++++ b/tests/legacy-experiment-v1-f55.json
+@@ -0,0 +1 @@
++{"schema_version":"assessment.experiment.v1","stage":"qualification","exposure":"required","environment":{"shared_definition_digest":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","control_inventory":{"python":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},"treatment_inventory":{"python":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","plugin":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"candidate_inventory":{"plugin":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"candidate_paths":["/opt/plugin"],"candidate_aliases":[]},"utility":{"benefit_dimensions":["wall_time_ms"],"guardrail_dimensions":["wall_time_ms"],"minimum_resource_benefit":0.1,"minimum_success_gain":0.05,"maximum_resource_regression":0.1,"family_error_rate":0.05},"higher_compute":null,"reusable_tool":null,"reusable_artifact_digest":null,"reusable_build_operation_ids":[],"feasible_challengers":[],"qualification_report_digest":null,"catalog_definition_digest":null,"marginal_report_digest":null}
+\ No newline at end of file
+--- /dev/null
++++ b/tests/test_v08_three_way.py
+@@ -0,0 +1,411 @@
++"""Original three-way authority; no live workers or model calls."""
++
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++from pydantic import ValidationError
++from test_v08_incremental import environment
++
++from aeep.assessment.boundary import BoundaryConformance, BoundaryProbe, require_three_way_access
++from aeep.assessment.models import (
++    IncrementalExperiment,
++    ThreeWayAccessDefinition,
++    UtilityPolicy,
++    content_digest,
++)
++from aeep.assessment.repository import AssessmentRepository
++from aeep.errors import ConfigurationError
++from aeep.store import ReceiptStore
++
++pytestmark = pytest.mark.assessment_contract
++
++
++def value(**changes):
++    args = dict(
++        schema_version="assessment.experiment.v2",
++        stage="aeep_value",
++        exposure="optional",
++        environment=environment(),
++        utility=UtilityPolicy(
++            benefit_dimensions=["wall_time_ms"], guardrail_dimensions=["wall_time_ms"]
++        ),
++        normal_host={"executor_id": "normal", "fingerprint": "1" * 64, "dependencies": {}},
++        three_way_access_digest="2" * 64,
++        qualification_report_digest="3" * 64,
++        feasible_challengers=["normal"],
++    )
++    args.update(changes)
++    return IncrementalExperiment(**args)
++
++
++def test_historical_exact_json_and_three_role_version():
++    old = IncrementalExperiment(
++        stage="qualification",
++        exposure="required",
++        environment=environment(),
++        utility=value().utility,
++    )
++    encoded = old.model_dump_json()
++    assert encoded == Path(__file__).with_name("legacy-experiment-v1-f55.json").read_text()
++    assert "normal_host" not in encoded and "three_way_access_digest" not in encoded
++    assert IncrementalExperiment.model_validate_json(encoded).model_dump_json() == encoded
++    assert [a.executor_id for a in value().challengers] == ["normal"]
++    for change in (
++        {"schema_version": "assessment.experiment.v1"},
++        {"normal_host": None},
++        {"three_way_access_digest": None},
++        {"higher_compute": {"executor_id": "high", "fingerprint": "a" * 64, "dependencies": {}}},
++        {"feasible_challengers": []},
++        {"exposure": "required"},
++    ):
++        with pytest.raises(ValidationError):
++            value(**change)
++    with pytest.raises(ValidationError):
++        IncrementalExperiment.model_validate(
++            {**old.model_dump(), "normal_host": value().normal_host.model_dump()}
++        )
++
++
++@pytest.fixture
++def access_fixture(tmp_path, monkeypatch):
++    store = ReceiptStore(tmp_path / "fixture.db")
++    repo = AssessmentRepository(store)
++    experiment = value()
++    access = ThreeWayAccessDefinition(
++        normal_inventory={},
++        discovery_inventory=experiment.environment.control_inventory,
++        external_candidate_inventory=experiment.environment.control_inventory,
++        worker_digests={r: "4" * 64 for r in ("normal", "baseline", "candidate")},
++        configuration_digests={r: "5" * 64 for r in ("normal", "baseline", "candidate")},
++    )
++    plan = SimpleNamespace(
++        comparison=SimpleNamespace(experiment=experiment),
++        candidate_id="candidate",
++        baseline_id="baseline",
++        mapping_digest="6" * 64,
++        definition_digests=[],
++    )
++    env = SimpleNamespace(conformance_digests={})
++    boundaries = {}
++    for role, available, inventory in [
++        ("normal", False, {}),
++        ("baseline", False, experiment.environment.control_inventory),
++        ("candidate", True, experiment.environment.treatment_inventory),
++    ]:
++        probe = BoundaryProbe(
++            probe_id=role,
++            name="candidate_access",
++            implementation_digest="a" * 64,
++            worker_digest="4" * 64,
++            execution_evidence_digest="b" * 64,
++            observed={
++                "definition_digest": content_digest(experiment.environment),
++                "candidate_available": available,
++            },
++        )
++        ref = repo.put("boundary_probe", role, probe)
++        boundaries[role] = BoundaryConformance(
++            schema_version="assessment.boundary-conformance.v2",
++            conformance_id=role,
++            source_digest="c" * 64,
++            worker_digest="4" * 64,
++            image_digest="sha256:" + "d" * 64,
++            binary_digest="e" * 64,
++            adapter="fixture",
++            adapter_version="1",
++            effective_policy_digest="f" * 64,
++            reviewed_inventory_digest=content_digest(inventory),
++            identity_digest="1" * 64,
++            enforcement_definition_digest="2" * 64,
++            advertised_tools=list(inventory),
++            permitted_tools=list(inventory),
++            used_tools=[],
++            probe_digests=[ref],
++            configuration_digest="5" * 64,
++            effective_inventory=inventory,
++        )
++
++    def bind(access_record=access, records=boundaries, review=True):
++        digest = repo.put("three_way_access", content_digest(access_record), access_record)
++        if review:
++            repo.review(digest)
++        experiment.three_way_access_digest = digest
++        plan.definition_digests = [digest]
++        env.conformance_digests = {
++            role: repo.put("boundary_conformance", content_digest(record), record)
++            for role, record in records.items()
++        }
++        return digest
++
++    bind()
++    # This unit tests semantic bindings; actual execution-backed conformance remains
++    # covered independently by test_v08_conformance and require_managed_boundaries.
++    original_get = repo.get
++    mapping = SimpleNamespace(subjects=[SimpleNamespace(id=r) for r in boundaries])
++    monkeypatch.setattr("aeep.assessment.models.ReviewedMapping.model_validate", lambda _v: mapping)
++    monkeypatch.setattr(
++        repo,
++        "get",
++        lambda kind, identity: {} if kind == "mapping" else original_get(kind, identity),
++    )
++    calls = []
++    monkeypatch.setattr(
++        "aeep.assessment.boundary.require_managed_boundaries",
++        lambda _repo, _env, specs, ids: calls.append(([s.id for s in specs], ids)),
++    )
++    yield repo, plan, env, access, boundaries, bind, calls
++    store.close()
++
++
++def test_three_actual_role_bindings_reach_existing_boundary_gate(access_fixture):
++    repo, plan, env, _access, _records, _bind, calls = access_fixture
++    require_three_way_access(repo, env, plan)
++    assert calls[0][0] == ["normal", "baseline", "candidate"]
++    assert set(calls[0][1]) == set(calls[0][0])
++
++
++@pytest.mark.parametrize(
++    "fault",
++    [
++        "fake_equal",
++        "unreviewed",
++        "revoked",
++        "worker",
++        "config",
++        "inventory",
++        "missing_role",
++        "normal_absence",
++        "external_access",
++    ],
++)
++def test_false_or_unbound_three_way_access_fails_closed(access_fixture, fault):
++    repo, plan, env, access, records, bind, calls = access_fixture
++    if fault == "fake_equal":
++        plan.comparison.experiment.three_way_access_digest = "9" * 64
++        plan.definition_digests = ["9" * 64]
++    elif fault == "unreviewed":
++        access = access.model_copy(update={"configuration_digests": {r: "6" * 64 for r in records}})
++        bind(access, review=False)
++    elif fault == "revoked":
++        repo.review(plan.comparison.experiment.three_way_access_digest, revoke=True)
++    elif fault in {"worker", "config", "inventory"}:
++        field = {
++            "worker": "worker_digest",
++            "config": "configuration_digest",
++            "inventory": "effective_inventory",
++        }[fault]
++        records = {
++            **records,
++            "normal": records["normal"].model_copy(
++                update={field: {"fake": "8" * 64} if fault == "inventory" else "8" * 64}
++            ),
++        }
++        bind(records=records)
++    elif fault == "missing_role":
++        env.conformance_digests.pop("normal")
++    elif fault == "normal_absence":
++        record = records["normal"]
++        bad = BoundaryProbe(
++            probe_id="bad",
++            name="candidate_access",
++            implementation_digest="a" * 64,
++            worker_digest="4" * 64,
++            execution_evidence_digest="b" * 64,
++            observed={"definition_digest": "9" * 64, "candidate_available": False},
++        )
++        ref = repo.put("boundary_probe", "bad", bad)
++        bind(records={**records, "normal": record.model_copy(update={"probe_digests": [ref]})})
++    elif fault == "external_access":
++        bind(access.model_copy(update={"external_candidate_inventory": {"python": "8" * 64}}))
++    with pytest.raises(ConfigurationError):
++        require_three_way_access(repo, env, plan)
++    assert not calls
++
++
++@pytest.mark.parametrize(
++    "fault", [None, "candidate", "revoked", "grader_recipe", "grader_job", "backend", "exposure"]
++)
++def test_qualification_transfer_uses_canonical_records_and_exact_backend(
++    tmp_path, monkeypatch, fault
++):
++    from aeep.assessment.models import GraderValidationEvidence
++    from aeep.assessment.service import AssessmentService
++    from aeep.models import StrictModel
++
++    class Qualified(StrictModel):
++        candidate_id: str = "candidate"
++        plan_id: str = "qualified"
++        mapping_digest: str = "qmap"
++
++    qualified = Qualified()
++    plan = SimpleNamespace(candidate_id="candidate", recipe_digest="a" * 64, mapping_digest="vmap")
++    validation = GraderValidationEvidence(
++        recipe_digest=plan.recipe_digest,
++        independent_fixture_digests=["b" * 64],
++        generator_fixture_digests=[],
++        rejected_fault_count=1,
++    )
++    store = ReceiptStore(tmp_path / "qualification.db")
++    repo = AssessmentRepository(store)
++    digest = repo.put("grader_validation", "validation", validation)
++    report = SimpleNamespace(
++        plan_digest=content_digest(qualified),
++        grader_validation_digest=digest,
++        report_id="qualified-report",
++    )
++    store._connection.execute(
++        "INSERT INTO assessment_jobs(id,plan_id,state,report_id) VALUES(?,?,?,?)",
++        ("job", qualified.plan_id, "complete", report.report_id),
++    )
++    store._connection.execute(
++        "UPDATE assessment_records SET id=? WHERE kind='grader_validation' AND digest=?",
++        ("job:grader-validation", digest),
++    )
++    configs = {
++        "qmap": {"invocation": {"exposure": "required"}, "model": "same"},
++        "vmap": {"invocation": {"exposure": "optional"}, "model": "same"},
++    }
++    original_get = repo.get
++
++    def get(kind, key):
++        if kind == "mapping":
++            return key
++        return original_get(kind, key)
++
++    monkeypatch.setattr(repo, "get", get)
++    monkeypatch.setattr(
++        "aeep.assessment.service.ReviewedMapping.model_validate",
++        lambda key: SimpleNamespace(
++            candidate=SimpleNamespace(
++                managed_host_config=lambda: SimpleNamespace(
++                    model_dump=lambda **kw: {
++                        **configs[key],
++                        "invocation": dict(configs[key]["invocation"]),
++                    }
++                )
++            )
++        ),
++    )
++    calls = []
++
++    def authorize(value):
++        calls.append("authorize")
++        if fault == "revoked":
++            raise ConfigurationError("qualification review revoked")
++
++    monkeypatch.setattr(repo, "authorize", authorize)
++    service = object.__new__(AssessmentService)
++    service.repository = repo
++    service.router = SimpleNamespace(store=store)
++    service._verify_dependencies = lambda value: calls.append("dependencies")
++    if fault == "candidate":
++        plan.candidate_id = "other"
++    if fault == "grader_recipe":
++        plan.recipe_digest = "c" * 64
++    if fault == "grader_job":
++        store._connection.execute("UPDATE assessment_jobs SET state='running'")
++    if fault == "backend":
++        configs["vmap"]["model"] = "other"
++    if fault == "exposure":
++        configs["qmap"]["invocation"]["exposure"] = "optional"
++    if fault:
++        with pytest.raises(ConfigurationError):
++            service._verify_three_way_qualification(plan, qualified, report)
++    else:
++        service._verify_three_way_qualification(plan, qualified, report)
++        assert calls == ["authorize", "dependencies"]
++    store.close()
++
++
++@pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
++def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
++    import aeep.assessment.service as module
++    from aeep.assessment.service import AssessmentService
++
++    current = value()
++    prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
++    case = SimpleNamespace(
++        split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
++    )
++    from aeep.benchmarking import BenchmarkSplit
++
++    case.split = BenchmarkSplit.HOLDOUT
++    qualified = SimpleNamespace(
++        plan_id="qualified",
++        candidate_id="candidate",
++        authorization_id="grant",
++        subject_digest="subject",
++        recipe_digest="recipe",
++        comparison=SimpleNamespace(experiment=prior),
++        suite=SimpleNamespace(routes=["candidate"], cases=[case]),
++    )
++    plan = SimpleNamespace(
++        candidate_id="candidate",
++        authorization_id="grant",
++        subject_digest="subject",
++        recipe_digest="recipe",
++        environment_digest="environment",
++        suite=SimpleNamespace(cases=[case]),
++    )
++    report = SimpleNamespace(
++        plan_digest="qualified-digest",
++        campaign_digest="campaign-digest",
++        grader_validation_digest="grader",
++    )
++    campaign = SimpleNamespace()
++    binding = SimpleNamespace(source_digest="current-source")
++    records = {
++        "environment": SimpleNamespace(),
++        "report": report,
++        "plan": qualified,
++        "campaign": campaign,
++        "run_binding": binding,
++        "recipe": SimpleNamespace(),
++    }
++    for name in (
++        "AssessmentEnvironment",
++        "AssessmentReport",
++        "AssessmentPlan",
++        "BenchmarkCampaignReport",
++        "AssessmentRunBinding",
++        "RecipeDefinition",
++    ):
++        monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
++    monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
++    monkeypatch.setattr(
++        "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
++    )
++    monkeypatch.setattr(
++        module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
++    )
++
++    def digest(record):
++        if record is report:
++            return current.qualification_report_digest
++        if record is qualified:
++            return report.plan_digest
++        if record is campaign:
++            return report.campaign_digest
++        return "same-input"
++
++    monkeypatch.setattr(module, "content_digest", digest)
++    service = object.__new__(AssessmentService)
++    service.repository = SimpleNamespace(
++        get=lambda kind, key: records[kind], authorize=lambda _: None
++    )
++    if fault in ("grant", "subject", "recipe"):
++        setattr(
++            qualified,
++            {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
++                fault
++            ],
++            "unrelated",
++        )
++    if fault == "source":
++        binding.source_digest = "old-source"
++    with pytest.raises(
++        ConfigurationError,
++        match="disjoint holdout" if fault == "holdout" else "current independent qualification",
++    ):
++        service._verify_incremental_evidence(plan, current)

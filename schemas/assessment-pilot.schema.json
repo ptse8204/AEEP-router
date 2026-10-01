@@ -1,0 +1,47 @@
+{
+  "additionalProperties": false,
+  "description": "Timing-only design; never qualification or comparative evidence.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.pilot.v1",
+      "default": "assessment.pilot.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "cases": {
+      "const": 8,
+      "default": 8,
+      "title": "Cases",
+      "type": "integer"
+    },
+    "percentile": {
+      "const": 95,
+      "default": 95,
+      "title": "Percentile",
+      "type": "integer"
+    },
+    "deadline_multiplier": {
+      "default": 2,
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Deadline Multiplier",
+      "type": "number"
+    },
+    "minimum_deadline_seconds": {
+      "default": 1,
+      "exclusiveMinimum": 0,
+      "maximum": 3600,
+      "title": "Minimum Deadline Seconds",
+      "type": "number"
+    },
+    "maximum_deadline_seconds": {
+      "default": 300,
+      "exclusiveMinimum": 0,
+      "maximum": 3600,
+      "title": "Maximum Deadline Seconds",
+      "type": "number"
+    }
+  },
+  "title": "PilotPolicy",
+  "type": "object"
+}

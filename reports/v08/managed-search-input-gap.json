@@ -1,0 +1,35 @@
+{
+  "purpose": "static constructor audit; inert fixture identities, no selected candidate or execution",
+  "source_digest": "78ade1f06ce6b1f63868460a19b246c25d9adeda864294e439ce301ed9d0af08",
+  "model_turns": 0,
+  "grant_changed": false,
+  "observed_routes": [
+    {
+      "route_id": "incremental.control",
+      "host_root_field_in_input": true,
+      "artifact_transfer_configured": false,
+      "declarative_input_transform_configured": false
+    },
+    {
+      "route_id": "incremental.treatment",
+      "host_root_field_in_input": true,
+      "artifact_transfer_configured": false,
+      "declarative_input_transform_configured": false
+    },
+    {
+      "route_id": "incremental.higher",
+      "host_root_field_in_input": true,
+      "artifact_transfer_configured": false,
+      "declarative_input_transform_configured": false
+    },
+    {
+      "route_id": "incremental.reusable",
+      "host_root_field_in_input": true,
+      "artifact_transfer_configured": false,
+      "declarative_input_transform_configured": false
+    }
+  ],
+  "finding": "incremental local-search routes render the coordinator root path into instructions, while isolated workers have no host mounts and receive no search tree",
+  "existing_legacy_path": "host_spec uses local_search_tree:1 to read files into prompt data; this does not give incremental workers a private searchable tree",
+  "required_change": "reviewed bounded file-tree delivery through existing worker artifact transport, identical private fixture state for each arm, and preservation of query/path/error semantics; do not mount coordinator fixture directories or disclose future cases/answers"
+}

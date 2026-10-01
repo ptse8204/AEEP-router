@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-09-27T10:39:23.134934+00:00",
+  "source_digest": "b08c1f15cb6b17fddf70070a14c5b2548da71247bac315e3bff8a7ceaf30882e",
+  "phase": "active workbook qualification; source frozen",
+  "next_operations": [
+    {
+      "label": "csv",
+      "review_bundle": "csv-authorized-resume-profile-review-bundle.json",
+      "approval": "csv-authorized-resume-profile-approval.json",
+      "request_ids": [
+        "conformance_probe_ed400f4a674c4ffb85d5bb75ab594dc1",
+        "conformance_probe_edf15d536d174a23b1287637b542cef0"
+      ]
+    },
+    {
+      "label": "builder",
+      "review_bundle": "builder-authorized-resume-profile-review-bundle.json",
+      "approval": "builder-authorized-resume-profile-approval.json",
+      "request_ids": [
+        "conformance_probe_37e3665972d547eda7d6b35f65829823",
+        "conformance_probe_a467854ddc58478f84f83f33e4595df6"
+      ]
+    },
+    {
+      "label": "value",
+      "review_bundle": "value-authorized-resume-profile-review-bundle.json",
+      "approval": "value-authorized-resume-profile-approval.json",
+      "request_ids": [
+        "conformance_probe_cd16c43c56a04f04a83e5f1c58a2736b",
+        "conformance_probe_f3144bc3e14f451cb71741a15666f51e"
+      ]
+    },
+    {
+      "label": "higher",
+      "review_bundle": "higher-authorized-resume-profile-review-bundle.json",
+      "approval": "higher-authorized-resume-profile-approval.json",
+      "request_ids": [
+        "conformance_probe_1affe7cde8714d85b9ecec24a0e35733",
+        "conformance_probe_e5f84ba714c543949d5f473538219003"
+      ]
+    }
+  ],
+  "execution_rule": "Wait for measured workbook campaign to reach a terminal state; inspect infrastructure failures before starting further model work. Use existing inspect-pair, planning and campaign operations sequentially. No automatic retry.",
+  "remaining_code_findings": [
+    {
+      "path": "src/aeep/hosts/codex_pair_inspection.py",
+      "finding": "The current reviewed paired inspector only accepts the Spreadsheets profile. Ponytail skill/search/native-catalog profiles require an extension with independent fault and real-boundary checks."
+    },
+    {
+      "path": "src/aeep/assessment/verification.py",
+      "finding": "Native-catalog receipt check currently requires discovery facts on every host arm, while reporting checks candidate trials. Candidate absence and unavailable discovery measurements must retain distinct meanings."
+    }
+  ],
+  "permission_request_required": false,
+  "full_plan_complete": false,
+  "status": "superseded before execution by capability-final source-bound reviews",
+  "reason": "Remaining worker-profile and catalog-receipt checks were implemented after the diagnostic campaign was cancelled. Do not execute stale requests."
+}

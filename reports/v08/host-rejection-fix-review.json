@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-09-28T23:23:59.675088+00:00",
+  "old_source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "new_source_digest": "6daf49e503146b89cc1bd29f606bb2a310b551bed5dacc4e6941be719c04c839",
+  "concrete_defect_record": "text-value-preflight-rejection-stop.json",
+  "change": "Shared ManagedHostExecutor now labels failed probes and otherwise-unlabelled adapter rejections with existing bounded host_request_rejected metadata, preserving more-specific codes. Existing receipt redaction, runner environment-failure classification and stop path remain unchanged.",
+  "files": {
+    "src/aeep/executors/managed_host.py": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+    "tests/test_v08_accounting_faults.py": "2ec2e56123ffdb4184125a072855fb13f0f88a1183471aa2b7033e131328ad89"
+  },
+  "focused_validation": {
+    "command": [
+      "python3",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_v08_accounting_faults.py"
+    ],
+    "exit_code": 0,
+    "passed": 12
+  },
+  "required_validation": {
+    "script": "/tmp/aeep-host-rejection-validation.py",
+    "session_id": 21318,
+    "record": "host-rejection-fix-checks.json",
+    "state": "running"
+  },
+  "historical_evidence": "Unmodified; old-source completed evidence and partial cancelled text retain their original meaning. Current-source release verification cannot reuse their run bindings.",
+  "next": "Finish required offline and actual-container checks; review new source-bound workers and fresh plans before any additional live execution. Do not replay old plans. Preserve all counters and explicit native-catalog/prior-CSV accounting gaps."
+}

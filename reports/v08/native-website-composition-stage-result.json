@@ -1,0 +1,33 @@
+{
+  "scope": "Explicit operator composition/example; standard generated Codex project launcher unchanged; no live website readiness, qualification, benefit or resource acceptance claim.",
+  "source_root_unchanged_by_this_work": true,
+  "files": {
+    "examples/native_website/task_service.py": {
+      "sha256": "d7918527f7a1c9541d8e550c2f26ce0c34bed8d8230b066958dd88de8555902a",
+      "bytes": 9860
+    },
+    "examples/native_website/README.md": {
+      "sha256": "c667798d361f5d79b653167aa978470dddc1b551cf7b7126446585d7ae424a44",
+      "bytes": 3017
+    },
+    "tests/test_v08_native_website_composition.py": {
+      "sha256": "aae98685fc81352bdc10ddbb2bddda41394dbf04f0a26854e95571a735a1d36d",
+      "bytes": 7001
+    }
+  },
+  "focused_command": "PYTHONPATH=.aeep/native-dynamic-tool-stage/src python3 -m pytest .aeep/native-dynamic-tool-stage/tests/test_v08_native_website_composition.py -q",
+  "focused_result": {
+    "exit_code": 0,
+    "passed": 3,
+    "log": "reports/v08/native-website-composition-stage.log"
+  },
+  "ruff": "passed",
+  "prior_failure": {
+    "stage": "offline fixture creation",
+    "cause": "PolicyConfig max_side_effect belongs within ActionConstraints; corrected before task dispatch",
+    "task_attempts": 0,
+    "model_turns": 0
+  },
+  "model_turns": 0,
+  "core_api_added": false
+}

@@ -1,0 +1,20 @@
+{
+  "source_digest": "b08c1f15cb6b17fddf70070a14c5b2548da71247bac315e3bff8a7ceaf30882e",
+  "initial_run": "preparation-cost-final-checks.json",
+  "initial_log": "preparation-cost-final-check-05.txt",
+  "failed_test": "test_calibrated_main_executes_without_recharging_pilot",
+  "observed_failure": "105 holdouts recorded but qualification false; assertion output mentions a missing result",
+  "cause": "unresolved; failed temporary directory was unavailable when inspected",
+  "isolated_recheck": "preparation-cost-final-pilot-recheck.txt",
+  "isolated_recheck_exit_code": 0,
+  "source_changed_for_recheck": false,
+  "full_recheck": "preparation-cost-recheck2-checks.json",
+  "retention": "separate persistent /tmp/validation-cost-final-b08-* directories outside repository and without the reserved aeep path substring",
+  "first_full_recheck": {
+    "checks": "preparation-cost-recheck-checks.json",
+    "result": "4 failed, 941 passed, 15 skipped",
+    "cause": "harness basetemp under aeep repository triggered intentional skill-path recursion rejection",
+    "focused_external_path_check": "preparation-cost-path-recheck.txt",
+    "focused_external_path_exit_code": 0
+  }
+}

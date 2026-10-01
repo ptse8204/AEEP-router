@@ -1,0 +1,111 @@
+{
+  "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+  "predecessor": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "frozen": true,
+  "files": {
+    "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+    "src/aeep/hosts/codex_native_process.py": "208290c143fd42b697b05ea55f2206d74f1fb2fb9d476692d3023644af64bd9c",
+    "src/aeep/executors/command.py": "6e277fa74178e6898bb1f2b920b4aeb3538cdb378457e111f984b557737dfc54",
+    "tests/test_v08_native_process.py": "5482a65942fa069cf893be5cd4c2a2a5313d0645a72517e1220eae3bbc402fa1",
+    "src/aeep/assessment/verification.py": "165fc55f83a62f669a9ca90a39d5d2bb15960554141eeba9a77a9a57aa5b56ca",
+    "src/aeep/hosts/codex_project.py": "667c43a3fca477a99888bde4ae7038d83732533fd511985b5a42096fa7b6e0f7",
+    "src/aeep/assessment/tools.py": "901ece1615f9ea472d1e0e0f8cdc14a73b6e62a38baba3d1aada93e6138d18ec",
+    "tests/test_v08_task_lifecycle.py": "4b66127f95f2082c7950fd65c6f8b1f0e1925fa1dd0c719dc2eb3dc8b096d9ab"
+  },
+  "guard_sha256": "a4bbf4f35a749da96e5dc4579d4b479bc8e4b83d2557313bf9a01a3526412663",
+  "review": "native-single-process-implementation-review.json",
+  "focused_checks": {
+    "command": "AEEP_NATIVE_WORKBOOK_PYTHON=/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 PYTHONPATH=src python3 -m pytest -q tests/test_v08_native_process.py tests/test_v08_task_profile.py",
+    "log": "native-single-process-focused-final.log",
+    "passed": 30,
+    "skipped": 2,
+    "ruff": "passed for four changed files",
+    "mypy": "passed for three changed source modules",
+    "compileall": "passed for four changed files",
+    "new_module_cases": 13,
+    "new_module_actual_native_cases": 12,
+    "new_module_local_configuration_cases": 1
+  },
+  "claimed_scope": "opt-in nonroot macOS single-process executor through installed native App Server command/exec; direct named permission profile; nofork hard limit; exact pre-payload session identity; complementary connection EOF and creation-time handle cleanup",
+  "fault_outcomes": {
+    "coordinator_SIGKILL": "no late synthetic effect; one durable INVOKING attempt retained",
+    "native_AppServer_SIGKILL": "no late synthetic effect after identity cleanup; one durable INDETERMINATE attempt retained",
+    "fork_posix_spawn_hardlimit_raise": "denied",
+    "setsid_timeout_and_cancel": "no late effect",
+    "native_workbook_reference": "trusted output passed independent grader",
+    "read_only": "no scratch/write permission required",
+    "filesystem_network": "allowed read succeeded, disallowed read and bind denied"
+  },
+  "remaining": [
+    "full required repository suite and source-bound actual container checks owned by coordinator/resource agent",
+    "fresh reviewed task scopes/live model journey/resource acceptance under changed source/backend",
+    "simultaneous coordinator and native host loss unsupported; no independent persistent supervisor",
+    "arbitrary child-producing executors unsupported in single-process mode",
+    "process measurements after native initialization; startup telemetry unavailable"
+  ],
+  "history": "Old source findings, all probe failures and unknown accounting remain; no replay/refund or candidate admission",
+  "schema_repair": {
+    "command": "PYTHONPATH=src python3 scripts/generate_schemas.py",
+    "schema": "schemas/codex-native-sandbox.schema.json",
+    "sha256": "8570ea4e15dabf7a6d47ff6b62cd3a95dfe693568c745186db444ddfce29ecd2",
+    "added_properties": {
+      "single_process": {
+        "default": false,
+        "title": "Single Process",
+        "type": "boolean"
+      },
+      "python_binary": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Python Binary"
+      },
+      "python_sha256": {
+        "anyOf": [
+          {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Python Sha256"
+      }
+    },
+    "check_log": "delivery-boundary-schema-repaired-3cb7c3c11443.log",
+    "prior_failure_log": "delivery-boundary-schema-3cb7c3c11443.log",
+    "review": "Generated schema reflects the three existing native profile fields; no runtime edits. Schema is untracked in the inherited working tree, so git diff does not display it. Prior --check identified only this stale artifact.",
+    "digest_scope": "Existing verification digest excludes schemas, docs and reports; source digest unchanged. Schema SHA independently binds renewed artifact freeze."
+  },
+  "previous_freeze": "67c5c28237caf555bb8bb57c7b0b7c58958dae0f3b0bba7bfce412d5f2763cdb",
+  "verification_list_amendment": "Parent review added new native acceptance module to existing explicit product offline test list; no test definitions or execution behavior changed. Prior 3cb7 focused evidence retained as predecessor, full checks pending renewed source.",
+  "project_write_review": {
+    "authority": "Parent delegated production correction and exact finite regression amendment; docs/ASSESSMENT_TESTING.md standing authority",
+    "problem": "Project launch default READ and task ActionRequest default READ blocked exact-reviewed WRITE scopes",
+    "change": "Renderer --approve uses activated operator-owned scope ceiling; shared task ActionRequest max_side_effect uses service ceiling already minimized with bound scope. Assessment/legacy defaults remain READ. Model input schemas remain unchanged.",
+    "checks": {
+      "focused": "tests/test_v08_task_lifecycle.py tests/test_v08_task_profile.py",
+      "passed": 33,
+      "skipped": 3,
+      "log": "project-mcp-write-focused-final.log",
+      "ruff": "passed",
+      "mypy": "passed two source files",
+      "compileall": "passed changed files",
+      "schema": "passed"
+    },
+    "regression": "Generated project argv parsed through actual service; WRITE produces owned file, READ produces no file; model approval arguments rejected without attempts; revocation blocks further calls.",
+    "retained_failure_logs": [
+      "project-mcp-write-precompanion-failure.log",
+      "project-mcp-write-focused.log"
+    ],
+    "full_checks": "pending renewed source"
+  }
+}

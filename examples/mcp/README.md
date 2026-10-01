@@ -1,6 +1,6 @@
 # MCP executor example
 
-This example launches a real newline-delimited stdio MCP server, discovers its schema, calls `text_stats`, measures schema/result context overhead, validates output, and stores a receipt.
+This example launches a real newline-delimited stdio MCP server and discovers its schema. It calls `text_stats`, measures the schema and result context overhead, validates the output, and stores a receipt.
 
 ```bash
 pip install -e .

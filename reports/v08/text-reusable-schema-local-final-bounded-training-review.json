@@ -1,0 +1,3123 @@
+{
+  "recorded_at": "2026-09-28T02:21:19.433356+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "authority": "2026-09-27 delegated exact reviews and bounded testing",
+  "purpose": "Training-only direct validation of generated text baseline through the existing AssessmentService/BenchmarkRunner, using exactly its 28 builder inputs against the independent deterministic reference. No holdout, qualification, plugin assessment, savings/admission claim or model turns.",
+  "review_findings": [
+    "Read full source; Python json/sys only; input transport is bounded, no network, subprocess or filesystem calls. Source ignores bare requested labels and trims surrounding whitespace; independent training validation must reveal any semantic mismatch without changing the grader",
+    "The generated tool runs only in a pinned offline container with fresh per-invocation state",
+    "Expected answers stay in the external case validator; no candidate fixture contains answers"
+  ],
+  "generated_source_sha256": "6067f45db30c72af2887c760dff5a015900b154dfc05b5a8295635a3b8ef3d02",
+  "build_operation_id": "reusable-build:planning_f2b1fd1fe18e47cfa5751e8249c8d2bd",
+  "training_input_digests": [
+    "dff12ecf339a48a7d8ccffebab916aff7142f812342c39d1e4a754c811cf51c0",
+    "579e0ab359fa6bcf110c658bdcad4dd8ee2cd3c89cda5da60139d600ad5c0383",
+    "260fcbddf6abd14315bcb51ff5de0e397f776786d60e68a28944428b72fdacb8",
+    "1fb8ef1ac33af8e24741bd67c8c2c10eb7595198c93411912aab1bdbdf9a2be1",
+    "2e24ddbb841fabf5fc827ee7b1aa961a38f4304829c10a2744eb5b437ba3d123",
+    "f5ba493c58fb89ed34f350ef620e5856d01b3d9fe6ba35ab2dc15232e2b9b01b",
+    "dcd5aa8504f38a6f954623e703496ff40a504e1dc9a3e29c22f6a463b760c27d",
+    "485bbc51bc840f644da9e3df8f3dee294fc51794803287eb9d1ca0021fe9d746",
+    "2d693c6bd720308a742518c4a911004ca8503e2633c6ec6ed6efa650088a4156",
+    "e393c1648722d100e1044203ae056cb355be23446dab1f447ba1c3d139df6b77",
+    "80ab06d99aa5baf0a5116ecaca5822149ad7d251f9c04d2aa7e567bc8f36e605",
+    "3c9eda84669c3fa3a9cffb360cad803ba1deb302e94c6b1dd8ee55a1c12d1859",
+    "1a72ff160dfd3293e5360275a1d9ec99c0ecd47b972d05fbb2b03b153808eb7d",
+    "98d641ef9fe05bc0715b05260e84202067177e7603f6bf9da945565e0f22ade7",
+    "cda94166820d7afe17ba2f7cd0c8fd63ec3ce82544cb31f6632dc80af5e50329",
+    "1043a927b2f206a30c5649357b8b414258c7df9423e8257ddeffc8d20794014c",
+    "006a0e08660c68a63d6bb64d756a401788271a8f0470c2e592aa16e1aa23ad81",
+    "22240a694997faa102a25c579b7eeb06d5e19d98524913947c1dce2b1c3d6b8b",
+    "cacd1fa99db568df97b05a18d8eb478754d308157486623e5a4d3862291e0c95",
+    "85fcc06217cf373ae25f9bdedad5f55e3f663c853f8e947ce9ca654aac010787",
+    "0416a67f54e9a072c346a586d248b88fed05af979aa827aeca1824f76ff0abe4",
+    "916b3b0a2df7fa043ee1553d405269e1a9d77a08601f8773646dfd2360f0c7f7",
+    "3bd0e70de1d8f7c70b001d0c64a89cc22871c1413b4d8b0027a2262f1b5fc05f",
+    "ddca3b725bdede9c6caac767c1aed5a9d60bf7281889044ff14034bcd9b20fc5",
+    "9eacdb652c957f11e1ea22bd3440bf4d53ecf1970b854cc5e4462f692612bb50",
+    "ab6b1cd6fed96e6e7f98db59a6c9df55f4cbe24aaff9b95a63b676b13a9c3f29",
+    "fcdff469c36e48e0ce792f0c5121498bf94faf1e95fdedf785cda328d3abf4e3",
+    "dd64ecb7a37053dc3108c33c2fea81cba5d3e006dedf4c889eb20e6c113fb33f"
+  ],
+  "inert_full_proposal_id": "plan_2d891376afc148a0ad6e86a7ccf031c1",
+  "plan": {
+    "comparison": {
+      "schema_version": "assessment.comparison.v1",
+      "structure": "direct",
+      "candidate": {
+        "executor_id": "text-reusable-schema-local-training.generated",
+        "fingerprint": "59b5de4db91d372e3fc8bb4cc437b1ded25bc392f2cf4db541a6fd73175889bb",
+        "dependencies": {},
+        "host_config": null
+      },
+      "baseline": {
+        "executor_id": "text-reusable-schema-local-training.reference",
+        "fingerprint": "6232064e3f57bea11efe1b16c77971c8c1187a58364e2b8ad1a01414ba555ddb",
+        "dependencies": {},
+        "host_config": null
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "router-fresh"
+    },
+    "feature_combinations": [
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\"], false, 2, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], true, 4, true, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 4, false, true, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+        "unicode": true,
+        "fields": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": "\u00eb"
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 4, false, false, false]",
+        "unicode": false,
+        "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"extra\", \"id\", \"name\"], false, 3, false, false, false]",
+        "unicode": false,
+        "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"extra\", \"id\", \"name\", \"note\"], true, 5, true, false, false]",
+        "unicode": false,
+        "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 5, false, true, false]",
+        "unicode": false,
+        "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"extra\", \"id\", \"name\", \"note\"], false, 4, false, false, false]",
+        "unicode": true,
+        "fields": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": "\u00eb"
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"note\"], false, 2, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\"], false, 1, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"note\"], true, 3, true, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"note\"], false, 2, false, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"note\"], false, 3, false, true, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\"], false, 2, false, false, true]",
+        "unicode": false,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], true, 4, true, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 4, false, true, false]",
+        "unicode": false,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "text",
+        "size": "small",
+        "structure": "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+        "unicode": true,
+        "fields": "[\"id\", \"missing\", \"name\", \"note\"]",
+        "unicode_characters": "\u00eb"
+      }
+    ],
+    "schema_version": "assessment.plan.v2",
+    "plan_id": "plan_3dbb8f08aa2a4f3eb3ec92513187b4bc",
+    "subject_digest": "2e56c2adfe12af7e6b3c31a56a9692ceb723892da0c7ea04682fe1ad389b1c50",
+    "recipe_digest": "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0",
+    "mapping_digest": "1994788c5bd1e9bac09fd77e36e443ab68625698a60a30403d9c7f1902d68178",
+    "environment_digest": "7b48cb76c070f55b8ed66876f631c0187539dee6eb2b71488d0169e7ab7cb54c",
+    "authorization_id": "onboarding",
+    "candidate_id": "text-reusable-schema-local-training.generated",
+    "baseline_id": "text-reusable-schema-local-training.reference",
+    "reference_id": null,
+    "definition_digests": [
+      "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0",
+      "1994788c5bd1e9bac09fd77e36e443ab68625698a60a30403d9c7f1902d68178",
+      "7b48cb76c070f55b8ed66876f631c0187539dee6eb2b71488d0169e7ab7cb54c",
+      "c3dde7cb8452c12200be00d2086296a5f852054e1f436b7ed2e774a529b3667a"
+    ],
+    "route_fingerprints": {
+      "text-reusable-schema-local-training.generated": "59b5de4db91d372e3fc8bb4cc437b1ded25bc392f2cf4db541a6fd73175889bb",
+      "text-reusable-schema-local-training.reference": "6232064e3f57bea11efe1b16c77971c8c1187a58364e2b8ad1a01414ba555ddb"
+    },
+    "executable_dependencies": {
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py": "7ccaea3c80c7c9d71853999e47112a77d0393c8e26c98198096545f7d58615bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py": "41df9ff33d90dafa6210fdb1e8f045b09ae900258357114a424f36d0c845987a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py": "f4032f461d77e330e7f9ad06d821817a8901d7d29b24ab51afb8c2e8664a66a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/artifact_store.py": "5c34cd0c5d631c5609b4f23795daef1bf0b5ca72756598b93a71a193f1f7bf23",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/__init__.py": "388afb63319bcaa278b0ba9c4860d62bf3bb89c1932fc3a22dcb56614cbf9835",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/adapters.py": "1b780590dbc9b2a8bedff87a670ab6345f53ea4f9005d44a0876f21c8002433f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/boundary.py": "3e75e70a932508a8488739d7463edd1eed5dd28b1606c3a5463da882f473907e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/budget.py": "cab960c0c1083e87d8b157d084e2cf109fc0f6cc286ed10cd34633ba08a6174b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py": "1786318285b76ad1741fb266ccc120b8ef6f85546dad793494059d5021e68076",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/comparison.py": "419bf14ceb9d46b876277f949266222a590137214d7b2424d485e518c2e51c7d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/container_worker.py": "2f4a9d3bb85fa0a7be41419bd7a76daf2c2c2f43713c0a799a4a004e7e9ff8e5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/containment.py": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/controlled_fixture.py": "ac32d042b3221c93a8fd7e6713227710c0ea50ff4cf8206e466e2a78d362487e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/destinations.py": "9fc02703a7e6785bdebf63568b053eae21ec2d05920b5205a4c03eaeffba0a08",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "b56a83fa4df309a3d415fd10d7c72430cd556c2f2ad2e52e3f036d68dd6b9296",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/onboarding.py": "d09c60ced4eea0ed27dc3c903b83eea250be0d4fc73f20396c42e1b048f8b74c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/pilot.py": "e484b494435236c17b9342986db3bba05b5fe7044b88eead737eaa741fb72518",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py": "333939219c7caac7f9a66d0acbcbd98b262900a24809fbbe60d1aa3835cbe05f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recovery.py": "af91beb82613e30a76f71988658db111c4aaa5309f96a852d4a4ad3cff28c2ce",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/reporting.py": "4aec948f7773de6034632dbe01336a13f2f5ec4b3086f6a8f2e64b377d0e1cfb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/service.py": "78d871388fe423699e1d8a59dda81cb345fa4568af01c10ca48c844e2dfac7f3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/tools.py": "686e00f925740e30bb2df02c2d2674c3d6e884fef50464c9e0513e0107c8bd59",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "0621e16c39689fd84abb5e931f995d82475b595070c0c00dbcaef7fe9c850f6e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/worker.py": "e7838401cf937b697217331c10184159f81e828a8d7aaf9860af4db71529dbfa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/attempts.py": "265711ad218a21d368e615529c59a8d0a757a0f1bb4f0cf223555fee9569ce4f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/benchmarking.py": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cache_affinity.py": "e7da8796cba11d91a6afe08f4fe84035fc5eb1c365dd685556a8809292530f3f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/__init__.py": "52ba8f97715a1ad0bb0b77101af30e90a60f6eec8d54cd7572fc5565e1a6aeeb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/entitlements.py": "70e44025aa58c979350b0981bdb819eb3e69a0228083d47f927884b94f3bd50c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/evidence.py": "b7a8f3841fb9420d655fb2ab66bfde9f6daa6d5a1188a244c5ee5e2354a21197",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/policy.py": "f64662425c3add67fdb5cb5c921d2d5bbccdffea90e552cc11c4d9f4cb1a9261",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/reservations.py": "9635df6e8f2bf9b1ab1733667c7371a417934289cc12f3a68c6cd8599e80aa58",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cli.py": "aa2093e51890fe7d90c8ab7d9418ac1f2f2b4dc5a8fbb69bb41b202037afe72e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/codex_capture.py": "8a9665a9c9485e83ab2ee9e14d74f1470b3738731cef17ddcbd69b52e3ca592b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/config.py": "b11459ea4432808520741d951b7e79776ed613c1a088c407692ad1dee6690f24",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/conformance.py": "42c22969c67ba10ac8fe3dbecf9eefbfe4572dda38887f41e46868da7f3a381c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/discovery.py": "fd480761cc839f0719b1220153498252fc9f3f3f53edeb21b5e9c57cc616bbaa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/__init__.py": "c4336b042572eeb363ab48c6c73631bcb9100ff8749464f9fd4da3b1eb53eb74",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/aggregates.py": "9045a8f9d969fbb874fd5420c56f0c840294f21b5c7b565741b10a02f5e19354",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/canonical.py": "54aa8a1709cba41bcd1179bbcdae135433381130a30c17b219d72ce7e36d501f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/disclosure.py": "5a21fe2f9b0e9e4bf40fa79b9cc6bec985ec74b77461d22a8df7e9b56dd6bf1e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/execution.py": "1cb851c024f9a0ae5cfda48be194370453459bf55cddd878a7e4617efd5857d3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/prepared.py": "90eb07d845cbb3a0b36310961e0d22de21a68efe763c5b5d73307867a4c24161",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/quotes.py": "2044c60a8743dfa242e716e5b618fab49bbb55da83027519829d503d155c0acd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/signing.py": "f7750a9124bfcaea01316b96918d270bd572b774e6dffbcba17168d39e61ea65",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/trust.py": "dd11fb7c5f759895e262d117bc3ac89a61c64c6b7fee0310e468be86d649c066",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economics.py": "8fa9c96a4072ebea5a8b3228833e92c613443cbf310c72b388306f0cf4bffc72",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/errors.py": "c51312a14bf22c1f8132f8a16fe570c61245c92e28c0f3eda6648390016aea00",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/estimator.py": "a37bbfd9f3e888354d7c6f50176d131d656d16a2f57cc218f878de702104c60e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/__init__.py": "d30e96668b295d873113f829f8314a06665dc28b449b5d60b816b8da4ebd19f6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/proof_cli.py": "e424112ba1841edb99f997a0d365a4c3655bbd234e7b41c1f4df0d36965c065c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/text_stats_cli.py": "452ada1c0c75a6f62d45baeea431ae1dd13b6c3e4a7b49e0c6c1c70c28301084",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/tools.py": "ebe617bbb89ad87c21cb4dfaec3f6907adddd79deef8b1853162d2fb0af06e41",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/__init__.py": "f68e20884d31645e331c7cfcc1e1ce30579d3bb55cb80d47a877da8fea6bd716",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/base.py": "66bdfcff71168ba8c4f56157426da865bd061870c1d2782028ee395c1f03becf",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/command.py": "3d43ea780660393c0b6e1bc6d5c4b6c4c70719c845c2cb8a7f1f3582ec931360",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/delegate.py": "c580cc4d8baeb23643950a6facf39a8980b08dea11dd46bba7934cefa049318e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/host.py": "e5228971b9cba702afc53d963442cfc60803e3b8895108eb6797da04b9a1d28a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/http.py": "596c626e772462fa188e9ba8b73ad65c7d7e21a0eae4d9d9c04ebcf2e726d68c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/managed_host.py": "2d84dd05b1c06d914a4552f840f8c1442fbd5656ca05fd113561ebf0d329bfb0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/mcp.py": "6d62cfc329b3c697938b170fb086fdc3db849ca6856284f88734e188bb7e2219",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/network.py": "132f73e5fa5290c1e51b049abf689385207026b3692f7ca476c914150b7a101f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/parsing.py": "c8582f19bfb4d5ea59864484d33989d37d8a69910619884d15552248ff65d43b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python.py": "997054c0ef5e0c56e2e4d40103d5994e25b6739eaf78460316ac11a21c08e092",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python_worker.py": "6452fa5d189bd6f8ad7a761f45584f09ecaac302c8e7d80dabd035a3c291bcd6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/host_bridge.py": "0be103b73bbb8f7e11fa857d9631b64d2aefae0644888e120fa7f689655a20c8",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/__init__.py": "4ec79da28db2ddcccf62ee4afdca457489a58625523c8eb474e30213fbdb22b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/base.py": "fccc3daf7838c2cb8e14e0703bbdffc4dc765d768b30d7a0f3f9c0afd987375c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_exec.py": "0291a202f829b20f97376bfb72f0df6ef1ef170d0cf3c8affc2315178faa5162",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_inspection.py": "de8df4e6cb77f8ffe7e1be5d92ef8bfede70faad5e5f0556e84ea8857724081f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_invocation.py": "4dd18987e8bc606e07278762c5c4d123268d6f78a93a7675e2aae6baf25ff450",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_models.py": "abeb488f7c533064a3a6c745079c0ea5b29e8c6bb0af92a4fc1a4982fad9f51f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_signin.py": "dc609895eff2be6ff84e2eda536bf06b40aad798ba2f2da07f6fa0f8472b7933",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/registry.py": "e98a2d3b17f480d4d089d795ca2587fb738c18e9f2e442f73c76cc5189a2bf95",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/instrumentation.py": "e956105a2cfae23d4897b0a89099d28f5563f53c017129d28c11de60fee4fe47",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/__init__.py": "8ea11f622bc0175dbf0d09e682bd6c12098857ebd1462a12f98dacdb81844179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/tool_schemas.py": "23d384ec5bbc6f6f6b90f55315600dbc70da936d45ad1852c6b6eadd2b411bf6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/__init__.py": "8a0697b9772b7a21328339216c9ab7c39cd3aeb78a1082e12888f5ff0a604ecc",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/service.py": "2ab6c25749a29e3450598e35d06dddb41aeb68bf3ee0f45973d439ec01e1bfa7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/__init__.py": "279f2d722aa971af13149e13e010fd6a33c90aaeecf27077c661f2ebd781e4ae",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py": "f66535dda606a7013538ad5456728f7fba1ec6684c8070a002528ecf7f6777ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/headers.py": "b0436321a2b6d5aec44344e950d953d0f8051568b5fa9207b3c6211a5a8e569d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/server.py": "03ddd0e1e805e5be74eafbd1b01d80a129973ecbdb9fc4eb12729b2027ed7957",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py": "03cda305f56cae4ea20a00a8871adc31a05c2555e98245cdcff5e8f993d67cc7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/payments.py": "dc6b5814c0874f97f267a378990b50df182f7722fbd96f426a2c3006569e3317",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/policy.py": "5eb1320ae59a4bb9c81399a782896f7a50343b8e867da4bf72de31e2cd8cf8a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/profiler.py": "cc9a9e6dc1382a6bcd69297109eaef0360de72120730868872d6a1d8ae78a7b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/proofs.py": "862e4f056f4eb5b7a2f30cd8cac3f269d86ba649da495f523e59f62699e66bd5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_ingest.py": "977459d25a37e8c7f932b93a6cc996b805ea169115408eeac16bdc9bedeeea5d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_operations.py": "e5b41460ad2f0722f77ac0c47b30ce7afa55227a9b277c78723fef47db513566",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_package.py": "110104c1a1a840c5ff2cff6e7baa76ee1ce51bc887e7e36e64ff47b00721e058",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/qualification.py": "5e8a62900e3ca35ab1207bd9964fbc4b340a81990df927466794010629ab7398",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/registry.py": "d01ecef8ba1349b5ca1b15b7485876d888a80f86042cd23b288c1dbf3eeae73a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "0e512d280e4be601a6f5d77775c9071584867dd20d22e71dc3f6ae063dd564bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/runtime.py": "6740407e22fbbc7e66b7e436fe4ef1c7f74316a08effa3a5414fa7e53d355350",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/scoring.py": "83b8c07e77d9a2a5c6a599355917485444649aad711f343a1d6a206ce4eaa90a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/sdk.py": "6d8026eb1cc123f0af920d585d96599b4742bcdfd74b77772a254e3e507e1c44",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "4f944b0d54cac2132ec99450cc5fbc454cb367c624f6adced885012734176894",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/telemetry.py": "9a63f08aa475d735731aef0cfc6f3e975fea19cfdf6c8c7cdcce382093ae3a45",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/templates.py": "05a6074b17911a41fe0656b0d3d80b2b098a39b7e46e21ba51d5f281a3b393ea",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/validators.py": "dd84d6957ba6e3685fdbb9b43b74088708b4be2b756eef4957c36984ceb6a019",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/verification.py": "cab39c5a73ed95ab8394531e1a12079d3b11e3e79e773f845810642d86ae144e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/version.py": "88f95809c233bb35bb4f61ca0e499894c911239d5d04b7cd4713cf896adfc3d5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/workflow.py": "49d5d8953a82c102e2d653d157ba99aaa06422217baf224f6ad56c8e8b314d6c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/__init__.py": "a2544c9338505b7df5f624729c87541fca3970ff5f9eab89c92d6c894ae79d94",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/batch.py": "f378396fe0e20bf3a3e2ba512811e01f53c32f11aeb685f887cf153b7032a732",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/conformance.py": "ee9909178cd95f03acd788974c334a41747c7f1cd9589c1a115847074cefeb91",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/models.py": "062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc"
+    },
+    "suite": {
+      "schema_version": "0.3",
+      "suite_id": "training_suite_e3794ff90f25446c80356d74df6d9e00",
+      "domain": "assessment.text@1",
+      "deterministic_tools_available": true,
+      "seed": 202609277,
+      "repetitions": 1,
+      "routes": [
+        {
+          "route_id": "text-reusable-schema-local-training.generated",
+          "executor_id": "text-reusable-schema-local-training.generated",
+          "workflow": null,
+          "provider": null,
+          "model": null,
+          "access_channel": "unknown",
+          "actual_rate_snapshot_id": null,
+          "counterfactual_rate_snapshot_id": null,
+          "subscription_rate_snapshot_id": null,
+          "subscription_resource_pool": null,
+          "subscription_unit": "provider_unit",
+          "validation_output_path": null,
+          "case_input_bindings": {}
+        },
+        {
+          "route_id": "text-reusable-schema-local-training.reference",
+          "executor_id": "text-reusable-schema-local-training.reference",
+          "workflow": null,
+          "provider": null,
+          "model": null,
+          "access_channel": "unknown",
+          "actual_rate_snapshot_id": null,
+          "counterfactual_rate_snapshot_id": null,
+          "subscription_rate_snapshot_id": null,
+          "subscription_resource_pool": null,
+          "subscription_unit": "provider_unit",
+          "validation_output_path": null,
+          "case_input_bindings": {}
+        }
+      ],
+      "conditions": [
+        "router-fresh"
+      ],
+      "pricing_snapshots": [],
+      "cases": [
+        {
+          "case_id": "training-plain-0",
+          "split": "training",
+          "action": {
+            "action_id": "act_31396145d55b4d37ac55bd9c596d4ebb",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-6e2aafc0db692aa2ec747fff\nname: Ada\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-6e2aafc0db692aa2ec747fff",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "text.v2:plain:shape-0"
+        },
+        {
+          "case_id": "training-optional-1",
+          "split": "training",
+          "action": {
+            "action_id": "act_3ec3f198734640979c55554cd24418b4",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-9fa7557393d4af2dbbeea2d1\nname: Ada",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-9fa7557393d4af2dbbeea2d1",
+                    "name": "Ada"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "optional",
+          "template_family": "text.v2:optional:shape-0"
+        },
+        {
+          "case_id": "training-repeated-2",
+          "split": "training",
+          "action": {
+            "action_id": "act_c052e00b07224b208b9510710ee2bfa5",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-a200a1ecc6089eb46e4a233c\nname: Ada\nnote: example\nid: duplicate",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "repeated",
+          "template_family": "text.v2:repeated:shape-0"
+        },
+        {
+          "case_id": "training-reordered-3",
+          "split": "training",
+          "action": {
+            "action_id": "act_b6e62fa6ed7549cabd11dfadda61ef44",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "note: example\nname: Ada\nid: item-7eeb1838b55751e1b138dd8f",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-7eeb1838b55751e1b138dd8f",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "text.v2:reordered:shape-0"
+        },
+        {
+          "case_id": "training-distractor-4",
+          "split": "training",
+          "action": {
+            "action_id": "act_aa079ea6000a4b0b8154a6e108094537",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "unrequested: ignore this\nid: item-f0365305251657bbdff53be2\nname: Ada\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-f0365305251657bbdff53be2",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "distractor",
+          "template_family": "text.v2:distractor:shape-0"
+        },
+        {
+          "case_id": "training-unicode-5",
+          "split": "training",
+          "action": {
+            "action_id": "act_6a0116e61d504ee48a5ebd8585ab907f",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-522f70d025465be99fd95f19\nname: Zo\u00eb\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-522f70d025465be99fd95f19",
+                    "name": "Zo\u00eb",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "text.v2:unicode:shape-0"
+        },
+        {
+          "case_id": "training-invalid-6",
+          "split": "training",
+          "action": {
+            "action_id": "act_89295b892daf4e9ca71c2882d2c17bdc",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-d8972a23cc302378826d5b18\nname: Ada\nnote: example\nid",
+              "fields": [
+                "id",
+                "name",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "invalid",
+          "template_family": "text.v2:invalid:shape-0"
+        },
+        {
+          "case_id": "training-plain-7",
+          "split": "training",
+          "action": {
+            "action_id": "act_cc3eb14454944dc0bf1f1a2e3ee9362b",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-d165316be00300a035831fba\nname: Ada\nnote: example\nextra: extra value",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-d165316be00300a035831fba",
+                    "name": "Ada",
+                    "note": "example",
+                    "extra": "extra value"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "text.v2:plain:shape-1"
+        },
+        {
+          "case_id": "training-optional-8",
+          "split": "training",
+          "action": {
+            "action_id": "act_1a67469a1fb8407bb707bfcf27ff772a",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-cc12c6b309edb6821a09e69b\nname: Ada\nextra: extra value",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-cc12c6b309edb6821a09e69b",
+                    "name": "Ada",
+                    "extra": "extra value"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "optional",
+          "template_family": "text.v2:optional:shape-1"
+        },
+        {
+          "case_id": "training-repeated-9",
+          "split": "training",
+          "action": {
+            "action_id": "act_7623c710c8c348039e6a37ced1247a6e",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-3c36a19c2b4f2d7352721dd0\nname: Ada\nnote: example\nextra: extra value\nid: duplicate",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "repeated",
+          "template_family": "text.v2:repeated:shape-1"
+        },
+        {
+          "case_id": "training-reordered-10",
+          "split": "training",
+          "action": {
+            "action_id": "act_ffba3cab7035469ebdaba6c5eb4e91b0",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "extra: extra value\nnote: example\nname: Ada\nid: item-9a4b7ea22cf60a76b4e837e9",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-9a4b7ea22cf60a76b4e837e9",
+                    "name": "Ada",
+                    "note": "example",
+                    "extra": "extra value"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "text.v2:reordered:shape-1"
+        },
+        {
+          "case_id": "training-distractor-11",
+          "split": "training",
+          "action": {
+            "action_id": "act_c4d3789745e24441bb141017d5abdef7",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "unrequested: ignore this\nid: item-3d34dbbeda5a243b99c986c0\nname: Ada\nnote: example\nextra: extra value",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-3d34dbbeda5a243b99c986c0",
+                    "name": "Ada",
+                    "note": "example",
+                    "extra": "extra value"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "distractor",
+          "template_family": "text.v2:distractor:shape-1"
+        },
+        {
+          "case_id": "training-unicode-12",
+          "split": "training",
+          "action": {
+            "action_id": "act_cd92c2b2b0804e23bf44b5b6022f1ebc",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-fcfef6c4fa6dba8280a55949\nname: Zo\u00eb\nnote: example\nextra: extra value",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-fcfef6c4fa6dba8280a55949",
+                    "name": "Zo\u00eb",
+                    "note": "example",
+                    "extra": "extra value"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "text.v2:unicode:shape-1"
+        },
+        {
+          "case_id": "training-invalid-13",
+          "split": "training",
+          "action": {
+            "action_id": "act_c8684518612d4798ac6ae98adaa4d8dd",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-91b91a04a8173bf710b7a606\nname: Ada\nnote: example\nextra: extra value\nid",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "extra"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "invalid",
+          "template_family": "text.v2:invalid:shape-1"
+        },
+        {
+          "case_id": "training-plain-14",
+          "split": "training",
+          "action": {
+            "action_id": "act_c7f7a38019ae4cafadb9adb374045218",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-622eb4763a332a4c28691c84\nnote: example",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-622eb4763a332a4c28691c84",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "text.v2:plain:shape-2"
+        },
+        {
+          "case_id": "training-optional-15",
+          "split": "training",
+          "action": {
+            "action_id": "act_a0886a92e8504905b27a7ee31b16999b",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-db44b1fc1a8f84bf433c9760",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-db44b1fc1a8f84bf433c9760"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "optional",
+          "template_family": "text.v2:optional:shape-2"
+        },
+        {
+          "case_id": "training-repeated-16",
+          "split": "training",
+          "action": {
+            "action_id": "act_b6b7fe6de5fb41dd91e0f0c40d1faaab",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-66eaaa683e3512a468b8667b\nnote: example\nid: duplicate",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "repeated",
+          "template_family": "text.v2:repeated:shape-2"
+        },
+        {
+          "case_id": "training-reordered-17",
+          "split": "training",
+          "action": {
+            "action_id": "act_8f61270237e0400a8edc5f19d07f3014",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "note: example\nid: item-18ebb40cfa5343eba4b71860",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-18ebb40cfa5343eba4b71860",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "text.v2:reordered:shape-2"
+        },
+        {
+          "case_id": "training-distractor-18",
+          "split": "training",
+          "action": {
+            "action_id": "act_57e5eef787e947aa87890fa8c9f3d8eb",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "unrequested: ignore this\nid: item-c7334b305347973ce4b058b1\nnote: example",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-c7334b305347973ce4b058b1",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "distractor",
+          "template_family": "text.v2:distractor:shape-2"
+        },
+        {
+          "case_id": "training-unicode-19",
+          "split": "training",
+          "action": {
+            "action_id": "act_fd75620738224546bc61c99549ff1ec5",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-0e6653fe5751c01fef920086\nnote: example",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-0e6653fe5751c01fef920086",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "text.v2:unicode:shape-2"
+        },
+        {
+          "case_id": "training-invalid-20",
+          "split": "training",
+          "action": {
+            "action_id": "act_80a170c6b88f43708b5353f15a59a860",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-13532a1c0533948ba5c6eb66\nnote: example\nid",
+              "fields": [
+                "id",
+                "note"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "invalid",
+          "template_family": "text.v2:invalid:shape-2"
+        },
+        {
+          "case_id": "training-plain-21",
+          "split": "training",
+          "action": {
+            "action_id": "act_7f849569f0e34bbd928ba1856d7c1a83",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-6b48bb6b23a5357baa324198\nname: Ada\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-6b48bb6b23a5357baa324198",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "text.v2:plain:shape-3"
+        },
+        {
+          "case_id": "training-optional-22",
+          "split": "training",
+          "action": {
+            "action_id": "act_e286891d30714c5395027657617b5606",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-ef3112b256bb62ba8db2f5ce\nname: Ada",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-ef3112b256bb62ba8db2f5ce",
+                    "name": "Ada"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "optional",
+          "template_family": "text.v2:optional:shape-3"
+        },
+        {
+          "case_id": "training-repeated-23",
+          "split": "training",
+          "action": {
+            "action_id": "act_c08655662de44673b2632199e1a72d71",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-4342c295a7e7f5773ba79af5\nname: Ada\nnote: example\nid: duplicate",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "repeated",
+          "template_family": "text.v2:repeated:shape-3"
+        },
+        {
+          "case_id": "training-reordered-24",
+          "split": "training",
+          "action": {
+            "action_id": "act_e408369651f142ca9dd73de524d9a0c8",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "note: example\nname: Ada\nid: item-deffe4d666af35724ecfbca3",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-deffe4d666af35724ecfbca3",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "text.v2:reordered:shape-3"
+        },
+        {
+          "case_id": "training-distractor-25",
+          "split": "training",
+          "action": {
+            "action_id": "act_6b8b2c09090c4f4385927d446bc9b5ba",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "unrequested: ignore this\nid: item-f846ec3bea3ae8947258f2b3\nname: Ada\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-f846ec3bea3ae8947258f2b3",
+                    "name": "Ada",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "distractor",
+          "template_family": "text.v2:distractor:shape-3"
+        },
+        {
+          "case_id": "training-unicode-26",
+          "split": "training",
+          "action": {
+            "action_id": "act_c60767cc9a8f4bdcae6f4b12076a7ddd",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-436e7d42195fcc35e4372559\nname: Zo\u00eb\nnote: example",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "fields": {
+                    "id": "item-436e7d42195fcc35e4372559",
+                    "name": "Zo\u00eb",
+                    "note": "example"
+                  }
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "text.v2:unicode:shape-3"
+        },
+        {
+          "case_id": "training-invalid-27",
+          "split": "training",
+          "action": {
+            "action_id": "act_d7287be5aa3840ec8019d34f11164db6",
+            "capability": "assessment.text@1",
+            "input": {
+              "text": "id: item-9c856f8c12ef87d0316cf985\nname: Ada\nnote: example\nid",
+              "fields": [
+                "id",
+                "name",
+                "note",
+                "missing"
+              ]
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "invalid",
+          "template_family": "text.v2:invalid:shape-3"
+        }
+      ],
+      "baseline_route_id": "text-reusable-schema-local-training.reference",
+      "acknowledge_cash_risk": false,
+      "max_total_cash_usd": "0",
+      "allow_zero_subscription_weight": true,
+      "sequential_stages": true,
+      "stop_on_screening_failure": true,
+      "warmup_cases": [],
+      "paired_order": true
+    },
+    "applicability": {
+      "family": [
+        "text"
+      ],
+      "size": [
+        "small"
+      ],
+      "structure": [
+        "[[\"id\", \"name\", \"note\"], false, 3, false, false, true]",
+        "[[\"id\", \"name\"], false, 2, false, false, true]",
+        "[[\"id\", \"name\", \"note\"], true, 4, true, false, false]",
+        "[[\"id\", \"name\", \"note\"], false, 3, false, false, false]",
+        "[[\"id\", \"name\", \"note\"], false, 4, false, true, false]",
+        "[[\"extra\", \"id\", \"name\", \"note\"], false, 4, false, false, false]",
+        "[[\"extra\", \"id\", \"name\"], false, 3, false, false, false]",
+        "[[\"extra\", \"id\", \"name\", \"note\"], true, 5, true, false, false]",
+        "[[\"extra\", \"id\", \"name\", \"note\"], false, 5, false, true, false]",
+        "[[\"id\", \"note\"], false, 2, false, false, true]",
+        "[[\"id\"], false, 1, false, false, true]",
+        "[[\"id\", \"note\"], true, 3, true, false, false]",
+        "[[\"id\", \"note\"], false, 2, false, false, false]",
+        "[[\"id\", \"note\"], false, 3, false, true, false]"
+      ],
+      "unicode": [
+        false,
+        true
+      ],
+      "fields": [
+        "[\"id\", \"name\", \"note\"]",
+        "[\"extra\", \"id\", \"name\", \"note\"]",
+        "[\"id\", \"note\"]",
+        "[\"id\", \"missing\", \"name\", \"note\"]"
+      ],
+      "unicode_characters": [
+        "",
+        "\u00eb"
+      ]
+    },
+    "blocked_reasons": [],
+    "setup_cost_ids": [
+      "setup_cost_8bf4f1fcf2a24faa9801ab548ac54620",
+      "setup_c0b47b20d8804c74a89b3a9f5e88cd67"
+    ],
+    "planning_request_ids": [
+      "planning_f2b1fd1fe18e47cfa5751e8249c8d2bd"
+    ]
+  },
+  "amendment": {
+    "schema_version": "assessment.scope-amendment.v1",
+    "amendment_id": "amendment_baa905e5a3d240288cab74f6d8f81273",
+    "authorization_id": "onboarding",
+    "authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "subject_digests": [
+      "2e56c2adfe12af7e6b3c31a56a9692ceb723892da0c7ea04682fe1ad389b1c50"
+    ],
+    "recipe_digests": [
+      "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0"
+    ],
+    "environment_digests": [
+      "7b48cb76c070f55b8ed66876f631c0187539dee6eb2b71488d0169e7ab7cb54c"
+    ],
+    "reviewed_digests": [
+      "1994788c5bd1e9bac09fd77e36e443ab68625698a60a30403d9c7f1902d68178",
+      "2e56c2adfe12af7e6b3c31a56a9692ceb723892da0c7ea04682fe1ad389b1c50",
+      "7b48cb76c070f55b8ed66876f631c0187539dee6eb2b71488d0169e7ab7cb54c",
+      "c3dde7cb8452c12200be00d2086296a5f852054e1f436b7ed2e774a529b3667a",
+      "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0"
+    ],
+    "issued_at": "2026-09-28T02:21:19.433159Z"
+  },
+  "definitions": {
+    "7b48cb76c070f55b8ed66876f631c0187539dee6eb2b71488d0169e7ab7cb54c": {
+      "environment_id": "text-reusable-schema-local-training-offline",
+      "kind": "container",
+      "identity": {
+        "purpose": "Frozen generated source training validation, no model turns or qualification claims"
+      },
+      "network": false,
+      "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+      "cpu_count": 1.0,
+      "memory_mb": 512,
+      "process_limit": 64,
+      "container_runtime": "/usr/local/bin/docker",
+      "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+      "read_only_roots": []
+    },
+    "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0": {
+      "schema_version": "assessment.recipe.v1",
+      "recipe_id": "text.v2",
+      "implementation_digest": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "capability": "assessment.text@1",
+      "description": "Extract exact labeled fields; omit absent fields and reject duplicate requested labels.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 100,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "text",
+          "fields"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "fields"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "generator": "builtin:text:2",
+      "generator_config": {},
+      "grader": "exact_match:1",
+      "extractor": "builtin:text:3",
+      "variations": [
+        "plain",
+        "optional",
+        "repeated",
+        "reordered",
+        "distractor",
+        "unicode",
+        "invalid"
+      ],
+      "exclusions": [
+        "Inputs outside the reviewed limits",
+        "Unreviewed formats and encodings"
+      ],
+      "dependencies": {
+        "recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3"
+      },
+      "screening_cases": 8,
+      "minimum_holdout_cases": 100,
+      "minimum_paired_cases": 20,
+      "maximum_correctness_failures": 0
+    },
+    "c3dde7cb8452c12200be00d2086296a5f852054e1f436b7ed2e774a529b3667a": {
+      "schema_version": "assessment.comparison.v1",
+      "structure": "direct",
+      "candidate": {
+        "executor_id": "text-reusable-schema-local-training.generated",
+        "fingerprint": "59b5de4db91d372e3fc8bb4cc437b1ded25bc392f2cf4db541a6fd73175889bb",
+        "dependencies": {},
+        "host_config": null
+      },
+      "baseline": {
+        "executor_id": "text-reusable-schema-local-training.reference",
+        "fingerprint": "6232064e3f57bea11efe1b16c77971c8c1187a58364e2b8ad1a01414ba555ddb",
+        "dependencies": {},
+        "host_config": null
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "router-fresh"
+    },
+    "2e56c2adfe12af7e6b3c31a56a9692ceb723892da0c7ea04682fe1ad389b1c50": {
+      "schema_version": "assessment.subject.v1",
+      "subject_id": "subject_d70ed45c57d9061e03a914523a86af7ca8263f90b2608894a87d474e69c685d3",
+      "kind": "command",
+      "location": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/generated/text_schema_local_records.py",
+      "dependency_digests": {
+        "text_schema_local_records.py": "6067f45db30c72af2887c760dff5a015900b154dfc05b5a8295635a3b8ef3d02"
+      },
+      "description": "Locally selected package; declarations are not execution approval.",
+      "input_schema": null,
+      "output_schema": null,
+      "declarations": {
+        "tools": [],
+        "skills": [],
+        "workflows": [],
+        "missing": [
+          "No callable contract found; select a skill, advertise tool schemas, or review a command wrapper."
+        ]
+      }
+    },
+    "1994788c5bd1e9bac09fd77e36e443ab68625698a60a30403d9c7f1902d68178": {
+      "candidate": {
+        "id": "text-reusable-schema-local-training.generated",
+        "capability": "assessment.text@1",
+        "kind": "command",
+        "description": "Exact generated text reusable tool; training validation only",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 100000
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 100,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "text",
+            "fields"
+          ],
+          "additionalProperties": false
+        },
+        "output_schema": {
+          "type": "object",
+          "oneOf": [
+            {
+              "properties": {
+                "fields": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "fields"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "properties": {
+                "error": {
+                  "const": "invalid_input"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "argv": [
+            "python3",
+            "-c",
+            "import json\nimport sys\n\n\ndef extract_fields(data):\n    \"\"\"Extract exact, case-sensitive labels from colon-delimited lines.\"\"\"\n    invalid = {\"error\": \"invalid_input\"}\n    if not isinstance(data, dict) or set(data) != {\"text\", \"fields\"}:\n        return invalid\n    text, labels = data[\"text\"], data[\"fields\"]\n    if not isinstance(text, str) or len(text) > 100000:\n        return invalid\n    if not isinstance(labels, list) or not 1 <= len(labels) <= 100:\n        return invalid\n    if any(not isinstance(label, str) for label in labels):\n        return invalid\n    if len(set(labels)) != len(labels):\n        return invalid\n\n    requested = set(labels)\n    found = {}\n    for line in text.splitlines():\n        label, separator, value = line.partition(\":\")\n        if not separator or label not in requested:\n            continue\n        if label in found:\n            return invalid\n        found[label] = value.strip()\n    return {\"fields\": {label: found[label] for label in labels if label in found}}\n\n\ndef main():\n    try:\n        data = json.load(sys.stdin)\n        result = extract_fields(data)\n    except (ValueError, UnicodeError, RecursionError):\n        result = {\"error\": \"invalid_input\"}\n    json.dump(result, sys.stdout, ensure_ascii=True)\n    sys.stdout.write(\"\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+          ],
+          "argv_literal": true,
+          "stdin_json": true,
+          "timeout_seconds": 30,
+          "max_output_bytes": 1000000,
+          "output": {
+            "type": "json"
+          }
+        }
+      },
+      "baseline": {
+        "id": "text-reusable-schema-local-training.reference",
+        "capability": "assessment.text@1",
+        "kind": "python",
+        "description": "Extract exact labeled fields; omit absent fields and reject duplicate requested labels.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 100000
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 100,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "text",
+            "fields"
+          ],
+          "additionalProperties": false
+        },
+        "output_schema": {
+          "type": "object",
+          "oneOf": [
+            {
+              "properties": {
+                "fields": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "fields"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "properties": {
+                "error": {
+                  "const": "invalid_input"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 5.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "callable": "aeep.assessment.recipes:reference_text"
+        }
+      },
+      "dependencies": [],
+      "executable_dependencies": {
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py": "7ccaea3c80c7c9d71853999e47112a77d0393c8e26c98198096545f7d58615bd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py": "41df9ff33d90dafa6210fdb1e8f045b09ae900258357114a424f36d0c845987a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py": "f4032f461d77e330e7f9ad06d821817a8901d7d29b24ab51afb8c2e8664a66a5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/artifact_store.py": "5c34cd0c5d631c5609b4f23795daef1bf0b5ca72756598b93a71a193f1f7bf23",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/__init__.py": "388afb63319bcaa278b0ba9c4860d62bf3bb89c1932fc3a22dcb56614cbf9835",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/adapters.py": "1b780590dbc9b2a8bedff87a670ab6345f53ea4f9005d44a0876f21c8002433f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/boundary.py": "3e75e70a932508a8488739d7463edd1eed5dd28b1606c3a5463da882f473907e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/budget.py": "cab960c0c1083e87d8b157d084e2cf109fc0f6cc286ed10cd34633ba08a6174b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py": "1786318285b76ad1741fb266ccc120b8ef6f85546dad793494059d5021e68076",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/comparison.py": "419bf14ceb9d46b876277f949266222a590137214d7b2424d485e518c2e51c7d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/container_worker.py": "2f4a9d3bb85fa0a7be41419bd7a76daf2c2c2f43713c0a799a4a004e7e9ff8e5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/containment.py": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/controlled_fixture.py": "ac32d042b3221c93a8fd7e6713227710c0ea50ff4cf8206e466e2a78d362487e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/destinations.py": "9fc02703a7e6785bdebf63568b053eae21ec2d05920b5205a4c03eaeffba0a08",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "b56a83fa4df309a3d415fd10d7c72430cd556c2f2ad2e52e3f036d68dd6b9296",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/onboarding.py": "d09c60ced4eea0ed27dc3c903b83eea250be0d4fc73f20396c42e1b048f8b74c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/pilot.py": "e484b494435236c17b9342986db3bba05b5fe7044b88eead737eaa741fb72518",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py": "333939219c7caac7f9a66d0acbcbd98b262900a24809fbbe60d1aa3835cbe05f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recovery.py": "af91beb82613e30a76f71988658db111c4aaa5309f96a852d4a4ad3cff28c2ce",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/reporting.py": "4aec948f7773de6034632dbe01336a13f2f5ec4b3086f6a8f2e64b377d0e1cfb",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/service.py": "78d871388fe423699e1d8a59dda81cb345fa4568af01c10ca48c844e2dfac7f3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/tools.py": "686e00f925740e30bb2df02c2d2674c3d6e884fef50464c9e0513e0107c8bd59",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "0621e16c39689fd84abb5e931f995d82475b595070c0c00dbcaef7fe9c850f6e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/worker.py": "e7838401cf937b697217331c10184159f81e828a8d7aaf9860af4db71529dbfa",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/attempts.py": "265711ad218a21d368e615529c59a8d0a757a0f1bb4f0cf223555fee9569ce4f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/benchmarking.py": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cache_affinity.py": "e7da8796cba11d91a6afe08f4fe84035fc5eb1c365dd685556a8809292530f3f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/__init__.py": "52ba8f97715a1ad0bb0b77101af30e90a60f6eec8d54cd7572fc5565e1a6aeeb",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/entitlements.py": "70e44025aa58c979350b0981bdb819eb3e69a0228083d47f927884b94f3bd50c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/evidence.py": "b7a8f3841fb9420d655fb2ab66bfde9f6daa6d5a1188a244c5ee5e2354a21197",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/policy.py": "f64662425c3add67fdb5cb5c921d2d5bbccdffea90e552cc11c4d9f4cb1a9261",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/reservations.py": "9635df6e8f2bf9b1ab1733667c7371a417934289cc12f3a68c6cd8599e80aa58",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cli.py": "aa2093e51890fe7d90c8ab7d9418ac1f2f2b4dc5a8fbb69bb41b202037afe72e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/codex_capture.py": "8a9665a9c9485e83ab2ee9e14d74f1470b3738731cef17ddcbd69b52e3ca592b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/config.py": "b11459ea4432808520741d951b7e79776ed613c1a088c407692ad1dee6690f24",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/conformance.py": "42c22969c67ba10ac8fe3dbecf9eefbfe4572dda38887f41e46868da7f3a381c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/discovery.py": "fd480761cc839f0719b1220153498252fc9f3f3f53edeb21b5e9c57cc616bbaa",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/__init__.py": "c4336b042572eeb363ab48c6c73631bcb9100ff8749464f9fd4da3b1eb53eb74",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/aggregates.py": "9045a8f9d969fbb874fd5420c56f0c840294f21b5c7b565741b10a02f5e19354",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/canonical.py": "54aa8a1709cba41bcd1179bbcdae135433381130a30c17b219d72ce7e36d501f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/disclosure.py": "5a21fe2f9b0e9e4bf40fa79b9cc6bec985ec74b77461d22a8df7e9b56dd6bf1e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/execution.py": "1cb851c024f9a0ae5cfda48be194370453459bf55cddd878a7e4617efd5857d3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/prepared.py": "90eb07d845cbb3a0b36310961e0d22de21a68efe763c5b5d73307867a4c24161",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/quotes.py": "2044c60a8743dfa242e716e5b618fab49bbb55da83027519829d503d155c0acd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/signing.py": "f7750a9124bfcaea01316b96918d270bd572b774e6dffbcba17168d39e61ea65",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/trust.py": "dd11fb7c5f759895e262d117bc3ac89a61c64c6b7fee0310e468be86d649c066",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economics.py": "8fa9c96a4072ebea5a8b3228833e92c613443cbf310c72b388306f0cf4bffc72",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/errors.py": "c51312a14bf22c1f8132f8a16fe570c61245c92e28c0f3eda6648390016aea00",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/estimator.py": "a37bbfd9f3e888354d7c6f50176d131d656d16a2f57cc218f878de702104c60e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/__init__.py": "d30e96668b295d873113f829f8314a06665dc28b449b5d60b816b8da4ebd19f6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/proof_cli.py": "e424112ba1841edb99f997a0d365a4c3655bbd234e7b41c1f4df0d36965c065c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/text_stats_cli.py": "452ada1c0c75a6f62d45baeea431ae1dd13b6c3e4a7b49e0c6c1c70c28301084",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/tools.py": "ebe617bbb89ad87c21cb4dfaec3f6907adddd79deef8b1853162d2fb0af06e41",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/__init__.py": "f68e20884d31645e331c7cfcc1e1ce30579d3bb55cb80d47a877da8fea6bd716",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/base.py": "66bdfcff71168ba8c4f56157426da865bd061870c1d2782028ee395c1f03becf",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/command.py": "3d43ea780660393c0b6e1bc6d5c4b6c4c70719c845c2cb8a7f1f3582ec931360",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/delegate.py": "c580cc4d8baeb23643950a6facf39a8980b08dea11dd46bba7934cefa049318e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/host.py": "e5228971b9cba702afc53d963442cfc60803e3b8895108eb6797da04b9a1d28a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/http.py": "596c626e772462fa188e9ba8b73ad65c7d7e21a0eae4d9d9c04ebcf2e726d68c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/managed_host.py": "2d84dd05b1c06d914a4552f840f8c1442fbd5656ca05fd113561ebf0d329bfb0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/mcp.py": "6d62cfc329b3c697938b170fb086fdc3db849ca6856284f88734e188bb7e2219",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/network.py": "132f73e5fa5290c1e51b049abf689385207026b3692f7ca476c914150b7a101f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/parsing.py": "c8582f19bfb4d5ea59864484d33989d37d8a69910619884d15552248ff65d43b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python.py": "997054c0ef5e0c56e2e4d40103d5994e25b6739eaf78460316ac11a21c08e092",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python_worker.py": "6452fa5d189bd6f8ad7a761f45584f09ecaac302c8e7d80dabd035a3c291bcd6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/host_bridge.py": "0be103b73bbb8f7e11fa857d9631b64d2aefae0644888e120fa7f689655a20c8",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/__init__.py": "4ec79da28db2ddcccf62ee4afdca457489a58625523c8eb474e30213fbdb22b9",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/base.py": "fccc3daf7838c2cb8e14e0703bbdffc4dc765d768b30d7a0f3f9c0afd987375c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_exec.py": "0291a202f829b20f97376bfb72f0df6ef1ef170d0cf3c8affc2315178faa5162",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_inspection.py": "de8df4e6cb77f8ffe7e1be5d92ef8bfede70faad5e5f0556e84ea8857724081f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_invocation.py": "4dd18987e8bc606e07278762c5c4d123268d6f78a93a7675e2aae6baf25ff450",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_models.py": "abeb488f7c533064a3a6c745079c0ea5b29e8c6bb0af92a4fc1a4982fad9f51f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_signin.py": "dc609895eff2be6ff84e2eda536bf06b40aad798ba2f2da07f6fa0f8472b7933",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/registry.py": "e98a2d3b17f480d4d089d795ca2587fb738c18e9f2e442f73c76cc5189a2bf95",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/instrumentation.py": "e956105a2cfae23d4897b0a89099d28f5563f53c017129d28c11de60fee4fe47",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/__init__.py": "8ea11f622bc0175dbf0d09e682bd6c12098857ebd1462a12f98dacdb81844179",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/tool_schemas.py": "23d384ec5bbc6f6f6b90f55315600dbc70da936d45ad1852c6b6eadd2b411bf6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/__init__.py": "8a0697b9772b7a21328339216c9ab7c39cd3aeb78a1082e12888f5ff0a604ecc",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/service.py": "2ab6c25749a29e3450598e35d06dddb41aeb68bf3ee0f45973d439ec01e1bfa7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/__init__.py": "279f2d722aa971af13149e13e010fd6a33c90aaeecf27077c661f2ebd781e4ae",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py": "f66535dda606a7013538ad5456728f7fba1ec6684c8070a002528ecf7f6777ef",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/headers.py": "b0436321a2b6d5aec44344e950d953d0f8051568b5fa9207b3c6211a5a8e569d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/server.py": "03ddd0e1e805e5be74eafbd1b01d80a129973ecbdb9fc4eb12729b2027ed7957",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py": "03cda305f56cae4ea20a00a8871adc31a05c2555e98245cdcff5e8f993d67cc7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/payments.py": "dc6b5814c0874f97f267a378990b50df182f7722fbd96f426a2c3006569e3317",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/policy.py": "5eb1320ae59a4bb9c81399a782896f7a50343b8e867da4bf72de31e2cd8cf8a5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/profiler.py": "cc9a9e6dc1382a6bcd69297109eaef0360de72120730868872d6a1d8ae78a7b9",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/proofs.py": "862e4f056f4eb5b7a2f30cd8cac3f269d86ba649da495f523e59f62699e66bd5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_ingest.py": "977459d25a37e8c7f932b93a6cc996b805ea169115408eeac16bdc9bedeeea5d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_operations.py": "e5b41460ad2f0722f77ac0c47b30ce7afa55227a9b277c78723fef47db513566",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_package.py": "110104c1a1a840c5ff2cff6e7baa76ee1ce51bc887e7e36e64ff47b00721e058",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/qualification.py": "5e8a62900e3ca35ab1207bd9964fbc4b340a81990df927466794010629ab7398",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/registry.py": "d01ecef8ba1349b5ca1b15b7485876d888a80f86042cd23b288c1dbf3eeae73a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "0e512d280e4be601a6f5d77775c9071584867dd20d22e71dc3f6ae063dd564bd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/runtime.py": "6740407e22fbbc7e66b7e436fe4ef1c7f74316a08effa3a5414fa7e53d355350",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/scoring.py": "83b8c07e77d9a2a5c6a599355917485444649aad711f343a1d6a206ce4eaa90a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/sdk.py": "6d8026eb1cc123f0af920d585d96599b4742bcdfd74b77772a254e3e507e1c44",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "4f944b0d54cac2132ec99450cc5fbc454cb367c624f6adced885012734176894",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/telemetry.py": "9a63f08aa475d735731aef0cfc6f3e975fea19cfdf6c8c7cdcce382093ae3a45",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/templates.py": "05a6074b17911a41fe0656b0d3d80b2b098a39b7e46e21ba51d5f281a3b393ea",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/validators.py": "dd84d6957ba6e3685fdbb9b43b74088708b4be2b756eef4957c36984ceb6a019",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/verification.py": "cab39c5a73ed95ab8394531e1a12079d3b11e3e79e773f845810642d86ae144e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/version.py": "88f95809c233bb35bb4f61ca0e499894c911239d5d04b7cd4713cf896adfc3d5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/workflow.py": "49d5d8953a82c102e2d653d157ba99aaa06422217baf224f6ad56c8e8b314d6c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/__init__.py": "a2544c9338505b7df5f624729c87541fca3970ff5f9eab89c92d6c894ae79d94",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/batch.py": "f378396fe0e20bf3a3e2ba512811e01f53c32f11aeb685f887cf153b7032a732",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/conformance.py": "ee9909178cd95f03acd788974c334a41747c7f1cd9589c1a115847074cefeb91",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/models.py": "062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc"
+      }
+    }
+  },
+  "budget_preview": {
+    "campaign_allowance": {
+      "scope": "fresh_campaign_reservations",
+      "stages": [
+        {
+          "stage": "trial",
+          "calls_minimum": 56,
+          "calls_upper": 56,
+          "operations_upper": 56,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 2800.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "warmup",
+          "calls_minimum": 0,
+          "calls_upper": 0,
+          "operations_upper": 0,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "router_setup",
+          "calls_minimum": 57,
+          "calls_upper": 57,
+          "operations_upper": 57,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 1710,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "grader_validation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "report_generation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "static_inspection",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.0009425830794498324,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "generation_and_proposal",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.03457512496970594,
+          "cash_reservation_upper_usd": "0"
+        }
+      ],
+      "upper_allowance": {
+        "operations": 117,
+        "model_turns": 0,
+        "elapsed_seconds": 4570.035517708049,
+        "cash_usd": "0"
+      },
+      "prior_operations": [
+        {
+          "operation_id": "reusable-build:planning_f2b1fd1fe18e47cfa5751e8249c8d2bd",
+          "stage": "reusable_build",
+          "state": "complete",
+          "elapsed_seconds": 28.34905483399052,
+          "reserved": {
+            "max_operations": 1,
+            "max_model_turns": 1,
+            "max_elapsed_seconds": 605.0,
+            "max_cash_usd": "0.0"
+          }
+        }
+      ],
+      "gaps": [],
+      "fits_remaining": true,
+      "authorization_changed": false,
+      "automatic_retries": 0,
+      "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+    },
+    "purpose": "assessment",
+    "adapter_eligibility": [],
+    "minimum_trial_model_turns": 0,
+    "trial_elapsed_upper_seconds": 2800.0,
+    "evaluation_stage": null,
+    "screening_trial_model_turns": 0,
+    "workers": [
+      {
+        "role": "candidate",
+        "executor_id": "text-reusable-schema-local-training.generated",
+        "model_worker_profiles": []
+      },
+      {
+        "role": "baseline",
+        "executor_id": "text-reusable-schema-local-training.reference",
+        "model_worker_profiles": []
+      }
+    ],
+    "model_worker_profile_count": 0,
+    "measurement_concurrency": 1,
+    "remaining": {
+      "model_turns": 4781,
+      "elapsed_seconds": 547893.0615510477,
+      "operations": 45025,
+      "cash_usd": "0"
+    },
+    "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+  }
+}

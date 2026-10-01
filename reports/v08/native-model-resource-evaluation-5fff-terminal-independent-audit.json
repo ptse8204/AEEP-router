@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "checks": {
+    "baseline_result_hash": true,
+    "baseline_quality_cleanup_source": true,
+    "baseline_ceilings": true,
+    "aeep_result_hash": true,
+    "aeep_quality_cleanup_source": true,
+    "aeep_ceilings": true,
+    "definition_hash": true,
+    "inclusive_delta": true,
+    "no_broad_gate": true,
+    "durable_two_attempts_receipts": true
+  },
+  "canonical_task_counts": {
+    "receipts": 2,
+    "execution_attempts": 2
+  },
+  "comparison_sha256": "94afec3b34c0295f9490d0262e52534e9838c6a9007022a5d9f93bcd3697f7c7",
+  "classification": "Read-only independent audit of exact two result hashes, frozen definition, actual retained canonical task rows and accounting delta. Local observed ceilings pass only; broader resource/release gate remains false, fixed-order n1 not causal benefit.",
+  "runtime_launched": false,
+  "experimental_model_turns": 0
+}

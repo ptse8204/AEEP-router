@@ -1,0 +1,21 @@
+import asyncio,json,hashlib
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentScopeAmendment,ConformanceProbeRequest,content_digest
+from aeep.assessment.identity import verify_dependencies
+from aeep.assessment.verification import verification_source_digest
+async def main():
+ p=Path('reports/v08');b=json.loads((p/'qualification-diagnostics-profile-review-bundle.json').read_text());assert b['source_digest']==verification_source_digest(Path.cwd())
+ r=Router.from_manifest('.aeep/live-review-v3/workbook-pilot.json')
+ try:
+  repo=AssessmentService(r,Path('.aeep/live-review-v3/.aeep/assessments').resolve()).repository
+  before=list(r.store._connection.execute("SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id='onboarding'").fetchone());assert 3600-before[2]>=480 and before[-1]==0
+  for q in b['requests']:verify_dependencies(ConformanceProbeRequest.model_validate(q).executable_dependencies)
+  amendment=AssessmentScopeAmendment.model_validate(b['amendment']);repo.approve_bundle(amendment,b['definitions'])
+  record={'approved_at':datetime.now(timezone.utc).isoformat(),'authority':b['operator_authority'],'bundle_sha256':hashlib.sha256((p/'qualification-diagnostics-profile-review-bundle.json').read_bytes()).hexdigest(),'scope_amendment_digest':content_digest(amendment),'usage_before':before,'request_ids':[q['plan_id'] for q in b['requests']],'budget_expanded':False,'model_turns':0}
+  with (p/'qualification-diagnostics-profile-approval.json').open('x') as f:f.write(json.dumps(record,indent=2)+'\n')
+  print(json.dumps(record,indent=2))
+ finally:await r.close()
+asyncio.run(main())

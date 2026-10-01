@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-30T01:02:23.206990+00:00",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "calibration_file": "workbook-footprint-exploratory-final-288e.json",
+  "calibration_sha256": "68ea597623bbb4d34b4f93d216a52aaf77b04e3e7c6d18d9cea698e44e840f76",
+  "driver_file": "workbook-footprint-calibration-288e.py",
+  "driver_sha256": "20ba60dd05368e2a52b6fe4af587914fa772e52e8df80cada71f9fe05acf6a96",
+  "command": "PYTHONPATH=src python3 reports/v08/workbook-footprint-calibration-288e.py",
+  "exit_code": 0,
+  "installation_observations": {
+    "aeep_built_wheel": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0-py3-none-any.whl",
+      "bytes": 1134957
+    },
+    "aeep_built_sdist": {
+      "path": "/Users/edwintse/Documents/aeep-agent-router/dist/aeep_agent_router-0.8.0.tar.gz",
+      "bytes": 1252911
+    },
+    "shared_codex_binary": {
+      "path": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+      "bytes": 222655232
+    },
+    "shared_bundled_python_binary": {
+      "path": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "bytes": 18058560
+    },
+    "aeep_source_python_bytes": 2587382
+  },
+  "attribution": "Built AEEP wheel/sdist are artifacts, not additional runtime allocation; Codex and bundled Python binaries pre-existed and are shared. No dependency-install delta or whole-host disk cost measured.",
+  "prior_attempts": [
+    "workbook-footprint-exploratory-first-failure-288e.log: symlink launcher path, no workload result",
+    "workbook-footprint-exploratory-288e.json: noncomparable extra AEEP post-dispatch validator",
+    "workbook-footprint-exploratory-comparable-288e.json: comparable earlier one-repetition snapshot, superseded by final source-bound driver run"
+  ],
+  "source_unchanged": true,
+  "release_ready": false
+}

@@ -1,0 +1,64 @@
+{
+  "recorded_at": "2026-09-28T06:23:34.371276+00:00",
+  "authority": "September 27 standing exact review, finite operation and continuation authority; zero cash and existing restrictions unchanged",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "queue_script": "/tmp/aeep-storage-capacity-run-remaining-value-queue.py",
+  "queue_sha256": "9d6c0ee024bdb8d71eb8d64aa09679c35d237e6733e4d0303d0b8019b72622fb",
+  "campaigns": [
+    {
+      "family": "text",
+      "prefix": "text-four-arm-value-schema-local",
+      "manifest": ".aeep/live-review-v3/text-four-arm-schema-local.json",
+      "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+      "file_hashes": {
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/text-four-arm-value-schema-local-execution-approval.json": "450576ef6613de7077186e3b526b964f74eac398add5200f9de0540b1721a3ec",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/text-four-arm-value-schema-local-execution-review.json": "94d39df4c23ddf0d508d556024e90fa954f9e366deb70c14e18a022917bd004d",
+        "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/text-four-arm-schema-local.json": "e24ed34a0158a67ada47d4eb6dccb2988ecba0fdb6acf5c35bbfe0495a696bdc"
+      },
+      "campaign_allowance": {
+        "operations": 1414,
+        "model_turns": 564,
+        "elapsed_seconds": 176340.041611625,
+        "cash_usd": "0"
+      },
+      "maintenance_script": "/tmp/aeep-value-queue-after-text-compress.py",
+      "maintenance_sha256": "0658a6ccc60bea186c129490eca60174b868757a26c6207bd337df949e185d8d"
+    },
+    {
+      "family": "search",
+      "prefix": "search-four-arm-value-contract-local",
+      "manifest": ".aeep/live-review-v3/search-four-arm-contract-local.json",
+      "plan_id": "plan_720229a92e594726809bc34d09d6e2d3",
+      "file_hashes": {
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-four-arm-value-contract-local-execution-approval.json": "eb1c7ddfc4baf32f16d362104d93261b9e0e0a0e9d39b58e8f0e115a6fbf9af9",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/search-four-arm-value-contract-local-execution-review.json": "a08652f8e1a97f303dad05456900b513bbf1a800b9cfef6b40a0709ef859d186",
+        "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/search-four-arm-contract-local.json": "625aab910d0a0cdb768e5e90211a283e18bd246819fc25a0cb5a6312040bf2f7"
+      },
+      "campaign_allowance": {
+        "operations": 1414,
+        "model_turns": 564,
+        "elapsed_seconds": 176340.185541042,
+        "cash_usd": "0"
+      },
+      "maintenance_script": "/tmp/aeep-value-queue-after-search-compress.py",
+      "maintenance_sha256": "3fea6b41029848468aab41e8a67c278dcded2b68704a000df66e01ea24b3a24d"
+    }
+  ],
+  "remaining_at_review": {
+    "model_turns": 4512,
+    "elapsed_seconds": 542456.4582516754,
+    "operations": 44048,
+    "cash_usd": "0"
+  },
+  "combined_maximum_seconds_including_maintenance": 356280.227152667,
+  "maintenance_maximum_operations": 2,
+  "maintenance_maximum_model_turns": 0,
+  "free_bytes_at_review": 91962978304,
+  "storage_policy": "Before each campaign: 706 private ledger snapshots at 125 percent current main database size plus 20 GiB host headroom. Between campaigns only: native transparent compression of completed closed evidence, exact byte hashes and separately charged operation. Never compress active or indeterminate campaign files.",
+  "failure_policy": "Stop on nonzero command exit, nonterminal persisted job, execution failure, insufficient disk, or failed maintenance; never replay any started plan. Candidate correctness or benefit losses remain genuine results. CSV prior unknown overhead remains unknown.",
+  "native_catalog_gap": "native-catalog-recovery-docs-review.json",
+  "release_ready": false,
+  "previous_queue": "/tmp/aeep-storage-recovery-run-value-queue.py",
+  "previous_queue_state": "Exited 1 before text: insufficient free storage; CSV complete and never replayed.",
+  "passive_wait_policy": "Up to 30 hours before each campaign, checking free space every 60 seconds; no model operation or active trial during wait. Source and no-overlap/no-replay conditions rechecked before launch. No snapshot deletion or backup-setting changes."
+}

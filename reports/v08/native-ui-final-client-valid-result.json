@@ -1,0 +1,69 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_8643023f41b74b439bd9120cdd64dd52",
+    "operation_id": "conformance_probe_8643023f41b74b439bd9120cdd64dd52-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_options",
+        "status": "failed"
+      },
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_status",
+        "status": "failed"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_csv",
+        "status": "failed"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [],
+    "canonical_evidence_digest": "d03a8215e35e638639cae082fdae8ac814b5ccbd2bded7493029c4d672a981da",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 30832,
+          "cached_input_tokens": 23424,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 263,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

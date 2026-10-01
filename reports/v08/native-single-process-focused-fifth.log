@@ -1,0 +1,30 @@
+........F..                                                              [100%]
+=================================== FAILURES ===================================
+________________ test_native_single_process_workbook_reference _________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-684/test_native_single_process_wor0')
+
+    @pytest.mark.skipif(not os.environ.get('AEEP_NATIVE_WORKBOOK_PYTHON'), reason='explicit installed workbook Python required')
+    def test_native_single_process_workbook_reference(tmp_path):
+        import runpy
+        import subprocess
+        workbook_python = Path(os.environ['AEEP_NATIVE_WORKBOOK_PYTHON']).resolve()
+        prefix = subprocess.check_output([str(workbook_python), '-I', '-c', 'import sys;print(sys.prefix)'], text=True).strip()
+        b = boundary(tmp_path.resolve()).model_copy(update={'python_binary': str(workbook_python),
+            'python_sha256': 'sha256:' + hashlib.sha256(workbook_python.read_bytes()).hexdigest(), 'read_roots': [str(Path(prefix).resolve())]})
+        assets = Path(__file__).resolve().parents[1] / 'integrations' / 'assessment-runtime'
+        source = (assets / 'workbook_program.py').read_text()
+        program = "import json,sys;ns={'__name__':'reference'};exec("+repr(source)+",ns);print(json.dumps(ns['reference'](json.load(sys.stdin))))"
+        fixture = json.loads((assets / 'workbook-grader-fixtures.json').read_text())[0]
+        raw = asyncio.run(execute_single_process(b, [str(workbook_python), '-I', '-c', program],
+            {'TMPDIR': b.write_roots[0]}, json.dumps(fixture['input']).encode(), 10, 200000))
+        assert raw.exit_code == 0 and not raw.stream_error, raw
+        output = json.loads(raw.stdout)
+        grade = runpy.run_path(str(assets / 'workbook_grader.py'))['grade']
+>       assert grade(fixture['input'], output, fixture['expected'])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: grade() takes 1 positional argument but 3 were given
+
+tests/test_v08_native_process.py:136: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_v08_native_process.py::test_native_single_process_workbook_reference

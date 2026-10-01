@@ -1,0 +1,123 @@
+.........FF                                                              [100%]
+=================================== FAILURES ===================================
+__ test_native_owned_connection_death_and_native_server_failure[coordinator] ___
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-686/test_native_owned_connection_d0')
+death = 'coordinator'
+
+    @pytest.mark.skipif(sys.platform != 'darwin' or not BINARY.exists(), reason='installed native Mac runtime required')
+    @pytest.mark.parametrize('death', ['coordinator', 'native_server'])
+    def test_native_owned_connection_death_and_native_server_failure(tmp_path, death):
+        import subprocess
+        import time
+    
+        import psutil
+        root = tmp_path.resolve()
+        b = boundary(root)
+        marker, effect = root/'data'/'started', root/'data'/'effect'
+        code = '''import asyncio,json,sys
+    from pathlib import Path
+    from aeep.hosts.codex_sandbox import NativeSandboxConfig
+    from datetime import timedelta
+    from aeep.assessment.onboarding import reference_spec
+    from aeep.assessment.repository import AssessmentRepository
+    from aeep.economic.prepared import executor_fingerprint
+    from aeep.models import Manifest,TaskScope,ActionRequest,ActionConstraints,PolicyConfig,SideEffect,ExecutorKind,utc_now
+    from aeep.router import Router
+    b=NativeSandboxConfig.model_validate(json.loads(sys.argv[1]))
+    program="import os,pathlib,sys,time;pathlib.Path(sys.argv[1]).write_text(str(os.getpid()));time.sleep(1);pathlib.Path(sys.argv[2]).write_text('synthetic');time.sleep(2)"
+    async def run():
+     root=Path(b.project_root)
+     spec=reference_spec('csv').model_copy(update={'kind':ExecutorKind.COMMAND,'side_effect':SideEffect.WRITE,'idempotent':False,'config':{'argv':[sys.executable,'-I','-c',program,sys.argv[2],sys.argv[3]],'argv_literal':True,'native_sandbox':b.model_dump(mode='json'),'timeout_seconds':5}})
+     manifest=Manifest(database=str(root/'.aeep'/'state.db'),executors=[spec],policies={'write':PolicyConfig(name='write',constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))})
+     router=Router(manifest,manifest_path=root/'aeep.json')
+     repo=AssessmentRepository(router.store)
+     scope=TaskScope(scope_id='crash',project_root=str(root),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.WRITE,max_attempts=1,max_attempt_seconds=5,expires_at=utc_now()+timedelta(minutes=2))
+     repo.review(repo.put('task_scope',scope.scope_id,scope));router.bind_task_scope(scope.scope_id)
+     outcome=await router.execute(ActionRequest(capability=spec.capability,policy='write',input={'text':'a\n1','delimiter':','},constraints=ActionConstraints(max_side_effect=SideEffect.WRITE)),approved_side_effect=SideEffect.WRITE)
+     receipt=outcome.receipts[-1]
+     print(json.dumps({'stream_error':receipt.error_type=='NATIVE_COMMAND_PROTOCOL_FAILED','cleanup_incomplete':receipt.metadata['process_cleanup']['cleanup_incomplete']}))
+     await router.close()
+    asyncio.run(run())
+    '''
+        repo = Path(__file__).resolve().parents[1]
+        process = subprocess.Popen([sys.executable,'-c',code,b.model_dump_json(),str(marker),str(effect)],
+            stdout=subprocess.PIPE,stderr=subprocess.PIPE,env={'PATH':os.environ.get('PATH',''),'PYTHONPATH':str(repo/'src')})
+        owner = psutil.Process(process.pid)
+        handles = [owner]
+        try:
+            deadline = time.monotonic()+6
+            while not marker.exists() and process.poll() is None and time.monotonic()<deadline:
+                time.sleep(.02)
+>           assert marker.exists(), process.communicate(timeout=2)
+E           AssertionError: (b'', b'  File "<string>", line 20
+E                 outcome=await router.execute(ActionRequest(capability=spec.capability,policy=\...                                                  ^
+E             SyntaxError: unterminated string literal (detected at line 20)
+E             ')
+E           assert False
+E            +  where False = exists()
+E            +    where exists = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-686/test_native_owned_connection_d0/data/started').exists
+
+tests/test_v08_native_process.py:183: AssertionError
+_ test_native_owned_connection_death_and_native_server_failure[native_server] __
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-686/test_native_owned_connection_d1')
+death = 'native_server'
+
+    @pytest.mark.skipif(sys.platform != 'darwin' or not BINARY.exists(), reason='installed native Mac runtime required')
+    @pytest.mark.parametrize('death', ['coordinator', 'native_server'])
+    def test_native_owned_connection_death_and_native_server_failure(tmp_path, death):
+        import subprocess
+        import time
+    
+        import psutil
+        root = tmp_path.resolve()
+        b = boundary(root)
+        marker, effect = root/'data'/'started', root/'data'/'effect'
+        code = '''import asyncio,json,sys
+    from pathlib import Path
+    from aeep.hosts.codex_sandbox import NativeSandboxConfig
+    from datetime import timedelta
+    from aeep.assessment.onboarding import reference_spec
+    from aeep.assessment.repository import AssessmentRepository
+    from aeep.economic.prepared import executor_fingerprint
+    from aeep.models import Manifest,TaskScope,ActionRequest,ActionConstraints,PolicyConfig,SideEffect,ExecutorKind,utc_now
+    from aeep.router import Router
+    b=NativeSandboxConfig.model_validate(json.loads(sys.argv[1]))
+    program="import os,pathlib,sys,time;pathlib.Path(sys.argv[1]).write_text(str(os.getpid()));time.sleep(1);pathlib.Path(sys.argv[2]).write_text('synthetic');time.sleep(2)"
+    async def run():
+     root=Path(b.project_root)
+     spec=reference_spec('csv').model_copy(update={'kind':ExecutorKind.COMMAND,'side_effect':SideEffect.WRITE,'idempotent':False,'config':{'argv':[sys.executable,'-I','-c',program,sys.argv[2],sys.argv[3]],'argv_literal':True,'native_sandbox':b.model_dump(mode='json'),'timeout_seconds':5}})
+     manifest=Manifest(database=str(root/'.aeep'/'state.db'),executors=[spec],policies={'write':PolicyConfig(name='write',constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))})
+     router=Router(manifest,manifest_path=root/'aeep.json')
+     repo=AssessmentRepository(router.store)
+     scope=TaskScope(scope_id='crash',project_root=str(root),executor_fingerprints={spec.id:executor_fingerprint(spec)},approval_ceiling=SideEffect.WRITE,max_attempts=1,max_attempt_seconds=5,expires_at=utc_now()+timedelta(minutes=2))
+     repo.review(repo.put('task_scope',scope.scope_id,scope));router.bind_task_scope(scope.scope_id)
+     outcome=await router.execute(ActionRequest(capability=spec.capability,policy='write',input={'text':'a\n1','delimiter':','},constraints=ActionConstraints(max_side_effect=SideEffect.WRITE)),approved_side_effect=SideEffect.WRITE)
+     receipt=outcome.receipts[-1]
+     print(json.dumps({'stream_error':receipt.error_type=='NATIVE_COMMAND_PROTOCOL_FAILED','cleanup_incomplete':receipt.metadata['process_cleanup']['cleanup_incomplete']}))
+     await router.close()
+    asyncio.run(run())
+    '''
+        repo = Path(__file__).resolve().parents[1]
+        process = subprocess.Popen([sys.executable,'-c',code,b.model_dump_json(),str(marker),str(effect)],
+            stdout=subprocess.PIPE,stderr=subprocess.PIPE,env={'PATH':os.environ.get('PATH',''),'PYTHONPATH':str(repo/'src')})
+        owner = psutil.Process(process.pid)
+        handles = [owner]
+        try:
+            deadline = time.monotonic()+6
+            while not marker.exists() and process.poll() is None and time.monotonic()<deadline:
+                time.sleep(.02)
+>           assert marker.exists(), process.communicate(timeout=2)
+E           AssertionError: (b'', b'  File "<string>", line 20
+E                 outcome=await router.execute(ActionRequest(capability=spec.capability,policy=\...                                                  ^
+E             SyntaxError: unterminated string literal (detected at line 20)
+E             ')
+E           assert False
+E            +  where False = exists()
+E            +    where exists = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-686/test_native_owned_connection_d1/data/started').exists
+
+tests/test_v08_native_process.py:183: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_native_process.py::test_native_owned_connection_death_and_native_server_failure[coordinator]
+FAILED tests/test_v08_native_process.py::test_native_owned_connection_death_and_native_server_failure[native_server]

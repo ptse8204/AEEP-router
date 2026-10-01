@@ -733,12 +733,28 @@ def subscription_model_accounting(
     return ResourceAccounting(cash=cash, subscription_usage=[subscription], model_usage=[usage])
 
 
+def independent_receipts(receipts: Iterable[ExecutionReceipt]) -> list[ExecutionReceipt]:
+    """Count a workflow summary once when its component receipts are also present."""
+    items = list({receipt.receipt_id: receipt for receipt in receipts}.values())
+    components: set[str] = set()
+    for receipt in items:
+        value = receipt.metadata.get("component_receipt_ids")
+        if isinstance(value, str):
+            try:
+                ids = json.loads(value)
+            except ValueError:
+                continue
+            if isinstance(ids, list) and all(isinstance(item, str) for item in ids):
+                components.update(item for item in ids if item != receipt.receipt_id)
+    return [receipt for receipt in items if receipt.receipt_id not in components]
+
+
 def aggregate_accounting(
     receipts: Iterable[ExecutionReceipt],
 ) -> ResourceAccounting:
     """Aggregate every attempt while keeping provider-local pools isolated."""
 
-    items = list(receipts)
+    items = independent_receipts(receipts)
     cash_components = [
         component for receipt in items for component in receipt.accounting.cash.components
     ]

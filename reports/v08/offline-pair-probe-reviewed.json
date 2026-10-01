@@ -1,0 +1,64 @@
+{
+  "purpose": "offline paired-worker boundary fixture",
+  "authenticated": false,
+  "model_turns": 0,
+  "full_conformance": false,
+  "source_digest": "a1e38974134b37a0b621916575ae8fdcdb01c33397d1ef5763cc599a79253609",
+  "fixture_digest": "fd2d629a87a17ac0643bb712e4b669cac93794b1cd1c2c8ad0ec7d511b0d0978",
+  "workers": {
+    "control": {
+      "worker_digest": "f4d04ccbaf12fad87b8dec069504dd34f847b806470c87798b02b78702a64437",
+      "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+      "cgroups": {
+        "cpu.max": "100000 100000",
+        "memory.max": "1073741824",
+        "pids.max": "64"
+      },
+      "private_mounts": true,
+      "cleanup_confirmed": true,
+      "observed": {
+        "own_workspace": "readable",
+        "other_workspace": "absent",
+        "credential_canary": "denied",
+        "external_answer": "absent",
+        "shared_workbook_roundtrip": true,
+        "pandas": "2.3.2",
+        "openpyxl": "3.1.5",
+        "candidate_skill_sha256": null,
+        "candidate_alias": false,
+        "candidate_runtime": false
+      }
+    },
+    "treatment": {
+      "worker_digest": "2ad8d8589ebbf9d8fc45cb3488d53446c79cf572004402867afbbd3d5a26b038",
+      "image": "sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f",
+      "cgroups": {
+        "cpu.max": "100000 100000",
+        "memory.max": "1073741824",
+        "pids.max": "64"
+      },
+      "private_mounts": true,
+      "cleanup_confirmed": true,
+      "observed": {
+        "own_workspace": "readable",
+        "other_workspace": "absent",
+        "credential_canary": "denied",
+        "external_answer": "absent",
+        "shared_workbook_roundtrip": true,
+        "pandas": "2.3.2",
+        "openpyxl": "3.1.5",
+        "candidate_skill_sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+        "candidate_alias": true,
+        "candidate_runtime": true
+      },
+      "dependency_execution": {
+        "authoring_helper": true,
+        "artifact_tool_csv": true
+      }
+    }
+  },
+  "passed": true,
+  "interrupted_request_error_type": "CodexProtocolError",
+  "source_unchanged": true,
+  "observation_digest": "7dcae47ad442a025ccb9b34d5465dc5def7256776eb689d7a414840f2a6e7873"
+}

@@ -1,0 +1,37 @@
+{
+  "artifact_tool": "2.8.61",
+  "skia_canvas": "3.0.8",
+  "linux_skia_url": "https://github.com/samizdatco/skia-canvas/releases/download/v3.0.8/linux-arm64-glibc.gz",
+  "linux_skia_digest": "sha256:0665d07a60c05d912a2fd1459aeb37714eb0445c2f7848407638546c3d2e1a70",
+  "source_package_modified": false,
+  "schema_version": "aeep.dependency-probe.v1",
+  "purpose": "local Linux dependency compatibility, not plugin assessment",
+  "plugin": "spreadsheets/26.915.20218",
+  "image_digest": "sha256:ba485539815a2a85d17b929bff47c4add1b474f7034df41c45f366f71af8ff54",
+  "node": "22.23.2",
+  "observations": {
+    "csv_import": true,
+    "xlsx_export": true,
+    "network": "none",
+    "user": 65534
+  },
+  "model_turns": 0,
+  "host_conformance": false,
+  "live_product_acceptance": false,
+  "remaining": [
+    "Complete runtime tools and skill path mapping",
+    "Image and security-policy review",
+    "Codex-managed worker login",
+    "Effective policy and identity verification",
+    "Live whole-workflow comparison"
+  ],
+  "required_runtime_mapping": {
+    "artifact_tool": "2.8.61, verified Linux CSV import and XLSX export",
+    "skia_canvas": "3.0.8 Linux arm64 glibc, archive digest verified",
+    "node": "22.23.2 Linux arm64",
+    "python": "3.13 Linux in pinned base image",
+    "load_workspace_dependencies": "desktop-owned tool unavailable in the worker; requires a reviewed local mapping or the skill fallback layout",
+    "container_tools/mark_artifact_operation_started.mjs": "not present in inspected plugin or dependency tree; required for authoring, not read-only CSV work",
+    "connected_documents": "desktop Excel-control connector; outside local synthetic CSV comparison and existing disclosure authorization"
+  }
+}

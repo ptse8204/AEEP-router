@@ -1,0 +1,23 @@
+...F..                                                                   [100%]
+=================================== FAILURES ===================================
+_____________ test_native_single_process_timeout_and_normal_error ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-681/test_native_single_process_tim0')
+
+    @pytest.mark.skipif(sys.platform != 'darwin' or not BINARY.exists(), reason='installed native Mac runtime required')
+    async def test_native_single_process_timeout_and_normal_error(tmp_path):
+        b = boundary(tmp_path.resolve())
+        effect = Path(b.write_roots[0]) / 'effect'
+        program = 'import os,time,pathlib,sys;\ntry:os.setsid()\nexcept OSError:pass\ntime.sleep(1);pathlib.Path(sys.argv[1]).write_text("bad")'
+        raw = await execute_single_process(b, [sys.executable, '-I', '-c', program, str(effect)], {}, None, .4, 10000)
+        assert raw.timed_out
+        await asyncio.sleep(1.1)
+        assert not effect.exists()
+        raw = await execute_single_process(b, [sys.executable, '-I', '-c', 'raise SystemExit(7)'], {}, None, 5, 10000)
+>       assert raw.exit_code == 7 and not raw.stream_error
+E       AssertionError: assert (None == 7)
+E        +  where None = NativeCommandResult(stdout=b'', stdout_total=0, stderr=b'', stderr_total=0, exit_code=None, timed_out=False, stream_er...plete=True, metrics=_ProcessMetrics(cpu_ms=115.236663, peak_memory_mb=132.359375, memory_mb_seconds=6.278612750462344)).exit_code
+
+tests/test_v08_native_process.py:56: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_native_process.py::test_native_single_process_timeout_and_normal_error

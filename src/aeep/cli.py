@@ -20,6 +20,7 @@ from typing import Any
 import typer
 import yaml
 
+from .assessment.cli import app as assessment_app
 from .config import find_manifest, load_manifest, write_default_manifest
 from .errors import AEEPError, ApprovalRequired, ConfigurationError
 from .executors.python import load_callable
@@ -47,6 +48,7 @@ from .models import (
     SubscriptionResource,
 )
 from .router import Router
+from .task_cli import app as task_app
 from .version import __version__
 
 app = typer.Typer(
@@ -76,6 +78,32 @@ hosts_app = typer.Typer(help="Inspect locally configured managed hosts.")
 codex_host_app = typer.Typer(help="Inspect the official local Codex App Server.")
 capacity_app = typer.Typer(help="Inspect provider-neutral capacity state.")
 verify_app = typer.Typer(help="Run digest-bound executable completion checks.")
+app.add_typer(assessment_app, name="assess")
+app.add_typer(task_app, name='task')
+
+
+@app.command("init-assessment")
+def init_assessment(
+    directory: Path,
+    plugin: Path,
+    family: str = "csv",
+    codex: Path = typer.Option(Path("codex")),
+    max_model_turns: int = typer.Option(..., min=0),
+    max_elapsed_seconds: float = typer.Option(..., min=0.001),
+    structure: str | None = typer.Option(None, help="direct, controlled_agent, or workflow; default uses the recommendation"),
+) -> None:
+    """Create a selected-plugin assessment and exact review bundle; execute nothing."""
+    from typing import cast
+
+    from .assessment.models import AssessmentLimits, ComparisonStructure
+    from .assessment.onboarding import initialize
+    if structure not in {None, "direct", "controlled_agent", "workflow"}:
+        raise typer.BadParameter("structure must be direct, controlled_agent or workflow")
+    executable = Path(shutil.which(str(codex)) or str(codex))
+    result = asyncio.run(initialize(directory, plugin, family, executable, AssessmentLimits(max_operations=10000, max_model_turns=max_model_turns, max_elapsed_seconds=max_elapsed_seconds), structure=cast(ComparisonStructure | None, structure)))
+    typer.echo(json.dumps(result, indent=2))
+
+
 app.add_typer(tools_app, name="tools")
 app.add_typer(import_app, name="import")
 app.add_typer(subscriptions_app, name="subscriptions")
@@ -108,7 +136,7 @@ def _emit(value: Any, *, compact: bool = False) -> None:
         separators=(",", ":") if compact else None,
         indent=None if compact else 2,
         sort_keys=False,
-        default=str,
+        default=lambda item: item.model_dump(mode='json') if hasattr(item, 'model_dump') else str(item),
     )
     typer.echo(text)
 
@@ -2751,6 +2779,10 @@ def tool_call(
     approve_unsafe_executor: bool = typer.Option(False, "--approve-unsafe-executor"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
+    profile: str = typer.Option('legacy', '--profile', help='legacy, assessment, or task'),
+    task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID'),
+    task_activation: str | None = typer.Option(None, '--task-activation'),
+    text: bool = typer.Option(False, '--text', help='Concise task result; JSON remains the default.'),
 ) -> None:
     """Invoke an AEEP tool over deterministic JSON without running an MCP server."""
 
@@ -2758,7 +2790,18 @@ def tool_call(
 
     router: Router | None = None
     try:
+        if text and profile != 'task':
+            raise ValueError('--text is supported only for the task profile')
         router = Router.from_manifest(manifest)
+        controls = None
+        if text and task_activation is not None:
+            from .task_cli import control_commands
+            from .tasks import inspect as inspect_task
+            try:
+                activation_state = inspect_task(router, task_activation)
+                controls = control_commands(router, task_activation, str(activation_state['scope_digest']))
+            except (AEEPError, ValueError, OSError):
+                controls = ['Pause/undo commands unavailable: activation could not be inspected.']
         result = _run(
             _await_and_close(
                 router,
@@ -2766,13 +2809,34 @@ def tool_call(
                     router,
                     approved_side_effect=approve,
                     allow_unsafe_executor=approve_unsafe_executor,
+                    profile=profile,
+                    task_scope=task_scope,
+                    task_activation=task_activation,
                 ).call(name, _mapping(arguments, name="arguments")),
             )
         )
         router = None
         structured = result.get("structuredContent")
         payload = structured if structured is not None else result
-        _emit(payload, compact=compact)
+        if text:
+            from .models import TaskExecutionOutcome
+            from .task_cli import result_text
+            if isinstance(payload, dict) and payload.get('schema_version') == 'aeep.task-outcome.v1':
+                typer.echo(result_text(TaskExecutionOutcome.model_validate(payload), controls=controls))
+            elif bool(result.get('isError', False)):
+                # Preserve typed rejection details without printing untrusted error text/payloads.
+                import hashlib
+                error = payload if isinstance(payload, dict) else {}
+                message = str(error.get('error', ''))
+                safe_error = {key: error[key] for key in ('code', 'error_type', 'required_level')
+                    if key in error and isinstance(error[key], (str, int))}
+                safe_error.update(error='Task rejected; original message withheld in text view.',
+                    message_bytes=len(message.encode()), message_sha256=hashlib.sha256(message.encode()).hexdigest())
+                _emit(safe_error, compact=compact)
+            else:
+                raise ValueError('task response has no recognized outcome envelope')
+        else:
+            _emit(payload, compact=compact)
         if bool(result.get("isError", False)):
             raise typer.Exit(code=4)
     except typer.Exit:
@@ -2791,11 +2855,12 @@ def tools_export(
         help="mcp, openai-responses, openai-chat, anthropic, deepseek, or zai",
     ),
     compact: bool = typer.Option(False, "--compact"),
+    profile: str = typer.Option('legacy', '--profile', help='legacy or task; built-in declarations only'),
 ) -> None:
     """Export the AEEP agent tools in a provider-native declaration format."""
 
     try:
-        _emit({"tools": export_tools(format)}, compact=compact)  # type: ignore[arg-type]
+        _emit({"tools": export_tools(format, profile=profile)}, compact=compact)  # type: ignore[arg-type]
     except ValueError as exc:
         _fail(exc, compact=compact)
 
@@ -3660,6 +3725,7 @@ def evidence_revalue(
 def registry_search(
     query: str,
     registry: str = typer.Option("mcp", "--registry"),
+    base_url: str | None = typer.Option(None, '--base-url', help='Explicit public ARD registry base URL.'),
     fixture: Path | None = typer.Option(None, "--fixture"),
     catalog: str | None = typer.Option(None, "--catalog"),
     token_env: str | None = typer.Option(None, "--token-env"),
@@ -3668,6 +3734,7 @@ def registry_search(
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     from .discovery import (
+        ARDRegistryAdapter,
         DockerCatalogAdapter,
         FixtureRegistryAdapter,
         MCPCommunityRegistryAdapter,
@@ -3679,7 +3746,11 @@ def registry_search(
     router = Router.from_manifest(manifest)
     try:
         adapter: PackageRegistryAdapter
-        if registry == "fixture":
+        if registry == 'ard':
+            if base_url is None:
+                raise typer.BadParameter('ARD requires --base-url; the query must contain only public search terms')
+            adapter = ARDRegistryAdapter(base_url, fallback=FixtureRegistryAdapter(fixture) if fixture else None)
+        elif registry == "fixture":
             if fixture is None:
                 raise typer.BadParameter("fixture registry requires --fixture")
             adapter = FixtureRegistryAdapter(fixture)
@@ -3694,10 +3765,13 @@ def registry_search(
                 raise typer.BadParameter("Smithery registry requires --token-env")
             adapter = SmitheryRegistryAdapter(token_env=token_env)
         else:
-            raise typer.BadParameter("registry must be fixture, mcp, docker, or smithery")
+            raise typer.BadParameter("registry must be fixture, ard, mcp, docker, or smithery")
         results = _run(adapter.search(RegistryQuery(query=query, limit=limit)))
         for item in results:
             router.store.save_registry_candidate(item)
+        if isinstance(adapter, ARDRegistryAdapter):
+            for warning in adapter.warnings:
+                typer.echo(warning, err=True)
         _emit(results, compact=compact)
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
@@ -3809,32 +3883,14 @@ def campaign_run(
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     from .benchmarking import BenchmarkRunner, BenchmarkSuite, format_campaign_report
-    from .store import ReceiptStore
-
     source = Router.from_manifest(manifest)
     snapshot = source.manifest.model_copy(deep=True)
     snapshot.database = ":memory:"
-    candidates = source.store.list_route_candidates()
-    candidate_ids = {candidate.executor_id for candidate in candidates}
-    reports = [
-        report
-        for candidate in candidates
-        if candidate.qualification_report_id is not None
-        and (report := source.store.get_qualification_report(candidate.qualification_report_id))
-        is not None
-    ]
-    snapshot.executors = [
-        spec.model_copy(deep=True) for spec in source.registry.all() if spec.id not in candidate_ids
-    ]
+    dependencies = source.store.campaign_snapshot()
     _run(source.close())
 
     def isolated_router() -> Router:
-        store = ReceiptStore(":memory:")
-        for candidate in candidates:
-            store.save_route_candidate(candidate)
-        for report in reports:
-            store.save_qualification_report(report)
-        return Router(snapshot, store=store)
+        return Router(snapshot, manifest_path=manifest, store=dependencies.campaign_snapshot())
 
     runner = BenchmarkRunner(isolated_router, database)
     try:
@@ -3848,6 +3904,9 @@ def campaign_run(
             typer.echo(format_campaign_report(report))
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
+    finally:
+        runner.connection.close()
+        dependencies.close()
 
 
 @campaign_app.command("prove")
@@ -3919,8 +3978,11 @@ def campaign_revalue(
 
 @app.command()
 def serve(
+    profile: str = typer.Option("legacy", "--profile", help="legacy, assessment, or task (no assessment controls)"),
+    task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID; never a tool argument.'),
+    task_activation: str | None = typer.Option(None, '--task-activation'),
     transport: str = typer.Option("stdio", "--transport", help="stdio or http"),
-    manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    manifest: Path | None = typer.Option(None, "--manifest", "-m", envvar="AEEP_MANIFEST"),
     approve: SideEffect = typer.Option(
         SideEffect.READ,
         "--approve",
@@ -3941,6 +4003,9 @@ def serve(
             _run(
                 serve_stdio(
                     manifest_value,
+                    profile=profile,
+                    task_scope=task_scope,
+                    task_activation=task_activation,
                     approved_side_effect=approve,
                     allow_unsafe_executor=approve_unsafe_executor,
                 )
@@ -3966,10 +4031,32 @@ def serve(
     http_app = create_http_app(
         manifest_value,
         bearer_token=token,
+        profile=profile,
+        task_scope=task_scope,
+        task_activation=task_activation,
         approved_side_effect=approve,
         allow_unsafe_executor=approve_unsafe_executor,
     )
     uvicorn.run(http_app, host=host, port=port, log_level="info")
+
+
+@verify_app.command("controlled-fixture")
+def controlled_fixture_command(directory: Path) -> None:
+    """Run a labelled local admission/use/revocation fixture without model turns."""
+    import asyncio
+
+    from .assessment.controlled_fixture import run
+    _emit(asyncio.run(run(directory.resolve())), compact=False)
+
+
+@verify_app.command("assessment-product")
+def verify_assessment_product_command(strict: bool = typer.Option(False, "--strict"), real_container: bool = typer.Option(False, "--real-container"), manifest: Path | None = typer.Option(None, "--manifest", "-m"), assessment: list[str] = typer.Option([], "--assessment"), receipt: list[str] = typer.Option([], "--receipt"), release_checks: bool = typer.Option(False, "--release-checks"), controlled_fixture: Path | None = typer.Option(None, "--controlled-fixture")) -> None:
+    """Check implemented offline behavior and expose outstanding 0.8 release gates."""
+    from .assessment.verification import verify_assessment_product
+    report = verify_assessment_product(real_container=real_container, manifest=manifest, assessment_ids=assessment, receipt_ids=receipt, release_checks=release_checks, controlled_fixture=controlled_fixture)
+    _emit(report, compact=False)
+    if strict and not report.release_ready:
+        raise typer.Exit(code=1)
 
 
 if __name__ == "__main__":  # pragma: no cover

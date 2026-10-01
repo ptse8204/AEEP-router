@@ -1,7 +1,7 @@
 # AEEP 0.6 portable evidence reuse
 
-Evidence acceptance is metric-specific. It never activates a route and it is
-never inserted as a local observation.
+AEEP evaluates imported evidence separately for each metric. Accepting it never
+activates a route or records it as a local observation.
 
 Version 0.6 evidence declares both an authority class and an exact portable
 cohort. Version 0.5 evidence without those declarations is capped as a weak
@@ -17,9 +17,9 @@ prior and cannot qualify a route by itself.
 | Latency/CPU/memory/network | Environment-sensitive prior; local receipts dominate |
 | Side effects/approval | Never imported |
 
-Accepted priors blend into the existing estimator with their own sample count,
-applicability, confidence, and source IDs. Local receipts then use the existing
-history formula and increasingly dominate. A summary and the campaign behind it
+The estimator combines accepted priors using their sample count, applicability,
+confidence, and source IDs. As local receipts accumulate, the existing history
+formula gives them more weight. A summary and the campaign behind it
 are never counted twice. A live bounded quote remains authoritative for a
 maximum cash authorization.
 

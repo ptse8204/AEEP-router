@@ -51,7 +51,19 @@
     },
     "conditions": {
       "items": {
-        "$ref": "#/$defs/QualificationCondition"
+        "anyOf": [
+          {
+            "$ref": "#/$defs/QualificationCondition"
+          },
+          {
+            "enum": [
+              "router-fresh",
+              "fresh-worker",
+              "reused-worker"
+            ],
+            "type": "string"
+          }
+        ]
       },
       "title": "Conditions",
       "type": "array"

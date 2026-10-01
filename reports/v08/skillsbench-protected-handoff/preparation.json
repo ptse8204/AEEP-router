@@ -1,0 +1,35 @@
+{
+  "prepared_only": true,
+  "executed": false,
+  "admission_allowed": false,
+  "wrappers": {
+    "grader.py": "4cc45780e6b5278c2fa7c078e52e4464c5e646265a2de210f37373da45f82699",
+    "reference.py": "474792f5487fb900caf398b9ec875243413ad7eed7fff74caf1fd8a0f9ecf761"
+  },
+  "origin": {
+    "grader": "existing grade_artifact + bounded _document, copied into standalone contained oracle",
+    "reference": "independent test fixture OOXML builder, separate from grader text walk"
+  },
+  "invocation": "Exact argv python3 -I -c with pinned wrapper bytes; existing extensions.invoke; no extra host roots or installs",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "document_b64"
+    ],
+    "properties": {
+      "document_b64": {
+        "type": "string",
+        "maxLength": 200000
+      }
+    }
+  },
+  "truth_contract": "expected contains pinned template_b64 and employee_data. Truth stays in separate grader invocation; only input sent to candidate.",
+  "protected_mounts": "No host repository or oracle path in candidate worker; grader uses pinned assessment-runtime image with no extra roots/network.",
+  "materialization": "ONE exploratory case only through existing invoke; no RecipeCaseSet or weakened141 constraint",
+  "remaining": [
+    "exact reviewed recipe/request/runtime/environment binding in main grant",
+    "materialize actual known-good/fault artifact fixtures in trusted scratch without exposing them to candidate",
+    "quiet-window release then bounded same-worker refresh diagnostic before protected handoff"
+  ]
+}

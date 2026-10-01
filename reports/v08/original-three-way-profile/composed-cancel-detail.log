@@ -1,0 +1,365 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_canonical_scripted_callback_executes_protected_csv_native_guard[cancel_after_write] _
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-767/test_canonical_scripted_callba0')
+case = 'cancel_after_write'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('case', ['guard', 'cancel_after_write'])
+    async def test_canonical_scripted_callback_executes_protected_csv_native_guard(tmp_path, case):
+        """Actual native child + scripted host peer; never full native-host conformance."""
+        import errno
+        import json
+        import sys
+        import time
+        from datetime import timedelta
+        from pathlib import Path
+        from types import SimpleNamespace
+    
+        from test_v08_assessment import setup_assessment
+        from test_v08_native_process import BINARY, boundary
+    
+        from aeep.assessment.fixed_helper import AssessmentCallbackAuthority, FixedHelperService
+        from aeep.assessment.identity import runtime_dependencies
+        from aeep.assessment.models import AssessmentLimits, ConformanceProbeRequest, content_digest
+        from aeep.assessment.onboarding import reference_spec
+        from aeep.assessment.repository import AssessmentRepository
+        from aeep.attempts import ExecutionAttempt
+        from aeep.economic.prepared import executor_fingerprint
+        from aeep.hosts.codex_app_server import CodexAppServerTransport
+        from aeep.hosts.codex_invocation import contract_digest
+        from aeep.hosts.codex_pair_inspection import (
+            inspect_scripted_callback,
+            protected_callback_evidence,
+        )
+        from aeep.hosts.codex_sandbox import native_backend_digest
+        from aeep.models import (
+            ActionConstraints,
+            ExecutorKind,
+            Manifest,
+            PolicyConfig,
+            SideEffect,
+            StrictModel,
+            TaskScope,
+            utc_now,
+        )
+        from aeep.router import Router
+    
+        if sys.platform != 'darwin' or not BINARY.exists():
+            pytest.skip('pinned native Mac runtime required')
+        (tmp_path/'assessment').mkdir()
+        root, assessment, plan, _grant = setup_assessment(tmp_path/'assessment')
+        private = tmp_path/'protected'
+        private.mkdir()
+        native = boundary(private.resolve())
+        canary = private/'private-canary'
+        canary.write_text('synthetic-private-witness')
+        native = native.model_copy(update={'deny_roots': [str(canary), str(private/'state.db')]})
+        text = f'hard_nproc,fork_errno,spawn_errno,marker,private_denied\n0:0,{errno.EAGAIN},{errno.EAGAIN},post_exec,true\n'
+        program = ('import os,resource,json; r={"hard_nproc":":".join(map(str,resource.getrlimit(resource.RLIMIT_NPROC))),"marker":"post_exec"};\n'
+            'try:os.fork();r["fork_errno"]="unexpected"\nexcept OSError as e:r["fork_errno"]=str(e.errno)\n'
+            'try:os.posix_spawn("/usr/bin/true",["/usr/bin/true"],{});r["spawn_errno"]="unexpected"\nexcept OSError as e:r["spawn_errno"]=str(e.errno)\n'
+            f'try:open({str(canary)!r}).read();r["private_denied"]="false"\nexcept PermissionError:r["private_denied"]="true"\n'
+            'print(json.dumps({"records":[r]}))')
+        marker = private/'data'/'owned-callback-effect'
+        if case == 'cancel_after_write':
+            program = f'import pathlib,time;pathlib.Path({str(marker)!r}).write_text("synthetic");time.sleep(30)'
+        ceiling = SideEffect.WRITE if case == 'cancel_after_write' else SideEffect.READ
+        spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
+            'side_effect': ceiling, 'idempotent': case == 'guard',
+            'config': {'argv': [native.python_binary, '-I', '-c', program],
+                'argv_literal': True, 'output': {'type': 'json'}, 'timeout_seconds': 5,
+                'native_sandbox': native.model_dump(mode='json')}})
+        task_router = Router(Manifest(database=str(private/'state.db'), executors=[spec],
+            policies={'default': PolicyConfig(name='default', constraints=ActionConstraints(max_side_effect=ceiling))}),
+            manifest_path=private.resolve()/'manifest.json')
+        task_repo = AssessmentRepository(task_router.store)
+        scope = TaskScope(scope_id='native-inspection', project_root=str(private.resolve()),
+            executor_fingerprints={spec.id: executor_fingerprint(spec)}, approval_ceiling=ceiling, max_attempts=1,
+            max_attempt_seconds=5, expires_at=utc_now()+timedelta(minutes=5))
+        task_repo.review(task_repo.put('task_scope', scope.scope_id, scope))
+        task_router.bind_task_scope(scope.scope_id)
+        descriptor = {'name': 'fixed_csv', 'description': 'Fixed public native CSV enforcement probe',
+            'inputSchema': spec.input_schema}
+        fixed = FixedHelperService(task_router, spec.id, task_scope=scope.scope_id,
+            declaration=descriptor, check=lambda: content_digest(task_repo.get('task_scope', task_router._task_scope_digest)),
+            approved_side_effect=ceiling)
+        holder = {}
+        def resolve():
+            return holder['binding'].require_reviewed_binding(assessment.repository,
+                worker=SimpleNamespace(digest=lambda: 'a'*64), service=fixed)
+        callback_errors = []
+        async def authorized(name, arguments):
+            try:
+                return await holder['authority'].call(fixed, name, arguments)
+            except Exception as error:
+                import hashlib
+                message = str(error)
+                callback_errors.append({'type': type(error).__name__, 'message_bytes': len(message.encode()),
+                    'message_sha256': hashlib.sha256(message.encode()).hexdigest()})
+                raise
+        binding = CodexDynamicTools.task_service(fixed, namespace='inspection',
+            identity={'worker_digest': 'a'*64, 'native_backend_digest': contract_digest({spec.id: native_backend_digest(native)}),
+                'implementation_digest': CodexDynamicTools.implementation_digest(), 'approval_ceiling': ceiling.value,
+                'executor_fingerprints': scope.executor_fingerprints,
+                'scope_limits': {'max_attempts': 1, 'max_attempt_seconds': 5}},
+            max_calls=1, timeout_seconds=5.0, check=resolve, authorized_call=authorized)
+        holder['binding'] = binding
+        class Definition(StrictModel):
+            namespace: str
+            tools: list[dict]
+            identity: dict
+            max_calls: int
+            timeout_seconds: float
+        definition_digest = assessment.repository.put('codex_dynamic_tools', binding.digest,
+            Definition.model_validate(binding.definition()))
+        assessment.repository.review(definition_digest)
+        request = ConformanceProbeRequest(schema_version='assessment.conformance-request.v4',
+            subject_digest=plan.subject_digest, recipe_digest=plan.recipe_digest,
+            environment_digest=plan.environment_digest, mapping_digest=plan.mapping_digest,
+            authorization_id=plan.authorization_id, worker_digest='a'*64,
+            definition_digests=[*plan.definition_digests, binding.digest],
+            pair_definition_digest=binding.digest, executable_dependencies=runtime_dependencies(),
+            operation='composed_pair_inspection', composed_model_turns=0)
+        assessment.repository.put('conformance_request', request.plan_id, request)
+        operation = 'owned-composed-inspection'
+        started = time.perf_counter()
+        assessment.repository.reserve(request, operation, AssessmentLimits(max_operations=1,
+            max_elapsed_seconds=20, max_model_turns=0), stage='composed_pair_inspection')
+        root._callback_conformance_identity = (request.plan_id, operation)
+        root._trial_check = lambda: assessment.repository.authorize(request)
+        attempt = root.store.create_execution_attempt(ExecutionAttempt(attempt_id='owned-composed-outer',
+            decision_id='owned-composed-decision', action_digest='b'*64, executor_id=plan.candidate_id,
+            executor_fingerprint='c'*64, side_effect=ceiling, idempotent=case == 'guard',
+            owner_id='operator', state='INVOKING', invocation_start_digest='sha256:'+'d'*64))
+        holder['authority'] = AssessmentCallbackAuthority.for_conformance(assessment, request, operation,
+            outer_router=root, outer_attempt_id=attempt.attempt_id, binding_digest=binding.digest,
+            resolve_binding=resolve, max_calls=1)
+        task_router._trial_check = holder['authority'].check
+        task_router._trial_deadline = root._trial_deadline
+        transport = CodexAppServerTransport(argv=(sys.executable, '-u',
+            str(Path(__file__).parent/'fixtures/fake_composed_callback.py'),
+            json.dumps({'text': text, 'delimiter': ','})), options=AppServerOptions(experimental_api=True))
+        try:
+            if case == 'cancel_after_write':
+                import asyncio
+                task = asyncio.create_task(inspect_scripted_callback(transport, binding=binding, worker_digest='a'*64,
+                    outer_attempt_id=attempt.attempt_id, journal=EventJournal(operation),
+                    recheck=holder['authority'].check, timeout_seconds=10))
+                async with asyncio.timeout(5):
+                    # The marker is an independent native-process observation.
+                    while not marker.exists():
+                        if task.done():
+                            result = await task
+                            raise AssertionError({'callback_errors': callback_errors, 'response_success': result['response_success'], 'evidence': result['callback_evidence']})
+>                       await asyncio.sleep(.02)
+
+tests/test_codex_composed_inspection.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+delay = 0.02, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        if math.isnan(delay):
+            raise ValueError("Invalid delay: NaN (not a number)")
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:718: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-767/test_canonical_scripted_callba0')
+case = 'cancel_after_write'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('case', ['guard', 'cancel_after_write'])
+    async def test_canonical_scripted_callback_executes_protected_csv_native_guard(tmp_path, case):
+        """Actual native child + scripted host peer; never full native-host conformance."""
+        import errno
+        import json
+        import sys
+        import time
+        from datetime import timedelta
+        from pathlib import Path
+        from types import SimpleNamespace
+    
+        from test_v08_assessment import setup_assessment
+        from test_v08_native_process import BINARY, boundary
+    
+        from aeep.assessment.fixed_helper import AssessmentCallbackAuthority, FixedHelperService
+        from aeep.assessment.identity import runtime_dependencies
+        from aeep.assessment.models import AssessmentLimits, ConformanceProbeRequest, content_digest
+        from aeep.assessment.onboarding import reference_spec
+        from aeep.assessment.repository import AssessmentRepository
+        from aeep.attempts import ExecutionAttempt
+        from aeep.economic.prepared import executor_fingerprint
+        from aeep.hosts.codex_app_server import CodexAppServerTransport
+        from aeep.hosts.codex_invocation import contract_digest
+        from aeep.hosts.codex_pair_inspection import (
+            inspect_scripted_callback,
+            protected_callback_evidence,
+        )
+        from aeep.hosts.codex_sandbox import native_backend_digest
+        from aeep.models import (
+            ActionConstraints,
+            ExecutorKind,
+            Manifest,
+            PolicyConfig,
+            SideEffect,
+            StrictModel,
+            TaskScope,
+            utc_now,
+        )
+        from aeep.router import Router
+    
+        if sys.platform != 'darwin' or not BINARY.exists():
+            pytest.skip('pinned native Mac runtime required')
+        (tmp_path/'assessment').mkdir()
+        root, assessment, plan, _grant = setup_assessment(tmp_path/'assessment')
+        private = tmp_path/'protected'
+        private.mkdir()
+        native = boundary(private.resolve())
+        canary = private/'private-canary'
+        canary.write_text('synthetic-private-witness')
+        native = native.model_copy(update={'deny_roots': [str(canary), str(private/'state.db')]})
+        text = f'hard_nproc,fork_errno,spawn_errno,marker,private_denied\n0:0,{errno.EAGAIN},{errno.EAGAIN},post_exec,true\n'
+        program = ('import os,resource,json; r={"hard_nproc":":".join(map(str,resource.getrlimit(resource.RLIMIT_NPROC))),"marker":"post_exec"};\n'
+            'try:os.fork();r["fork_errno"]="unexpected"\nexcept OSError as e:r["fork_errno"]=str(e.errno)\n'
+            'try:os.posix_spawn("/usr/bin/true",["/usr/bin/true"],{});r["spawn_errno"]="unexpected"\nexcept OSError as e:r["spawn_errno"]=str(e.errno)\n'
+            f'try:open({str(canary)!r}).read();r["private_denied"]="false"\nexcept PermissionError:r["private_denied"]="true"\n'
+            'print(json.dumps({"records":[r]}))')
+        marker = private/'data'/'owned-callback-effect'
+        if case == 'cancel_after_write':
+            program = f'import pathlib,time;pathlib.Path({str(marker)!r}).write_text("synthetic");time.sleep(30)'
+        ceiling = SideEffect.WRITE if case == 'cancel_after_write' else SideEffect.READ
+        spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
+            'side_effect': ceiling, 'idempotent': case == 'guard',
+            'config': {'argv': [native.python_binary, '-I', '-c', program],
+                'argv_literal': True, 'output': {'type': 'json'}, 'timeout_seconds': 5,
+                'native_sandbox': native.model_dump(mode='json')}})
+        task_router = Router(Manifest(database=str(private/'state.db'), executors=[spec],
+            policies={'default': PolicyConfig(name='default', constraints=ActionConstraints(max_side_effect=ceiling))}),
+            manifest_path=private.resolve()/'manifest.json')
+        task_repo = AssessmentRepository(task_router.store)
+        scope = TaskScope(scope_id='native-inspection', project_root=str(private.resolve()),
+            executor_fingerprints={spec.id: executor_fingerprint(spec)}, approval_ceiling=ceiling, max_attempts=1,
+            max_attempt_seconds=5, expires_at=utc_now()+timedelta(minutes=5))
+        task_repo.review(task_repo.put('task_scope', scope.scope_id, scope))
+        task_router.bind_task_scope(scope.scope_id)
+        descriptor = {'name': 'fixed_csv', 'description': 'Fixed public native CSV enforcement probe',
+            'inputSchema': spec.input_schema}
+        fixed = FixedHelperService(task_router, spec.id, task_scope=scope.scope_id,
+            declaration=descriptor, check=lambda: content_digest(task_repo.get('task_scope', task_router._task_scope_digest)),
+            approved_side_effect=ceiling)
+        holder = {}
+        def resolve():
+            return holder['binding'].require_reviewed_binding(assessment.repository,
+                worker=SimpleNamespace(digest=lambda: 'a'*64), service=fixed)
+        callback_errors = []
+        async def authorized(name, arguments):
+            try:
+                return await holder['authority'].call(fixed, name, arguments)
+            except Exception as error:
+                import hashlib
+                message = str(error)
+                callback_errors.append({'type': type(error).__name__, 'message_bytes': len(message.encode()),
+                    'message_sha256': hashlib.sha256(message.encode()).hexdigest()})
+                raise
+        binding = CodexDynamicTools.task_service(fixed, namespace='inspection',
+            identity={'worker_digest': 'a'*64, 'native_backend_digest': contract_digest({spec.id: native_backend_digest(native)}),
+                'implementation_digest': CodexDynamicTools.implementation_digest(), 'approval_ceiling': ceiling.value,
+                'executor_fingerprints': scope.executor_fingerprints,
+                'scope_limits': {'max_attempts': 1, 'max_attempt_seconds': 5}},
+            max_calls=1, timeout_seconds=5.0, check=resolve, authorized_call=authorized)
+        holder['binding'] = binding
+        class Definition(StrictModel):
+            namespace: str
+            tools: list[dict]
+            identity: dict
+            max_calls: int
+            timeout_seconds: float
+        definition_digest = assessment.repository.put('codex_dynamic_tools', binding.digest,
+            Definition.model_validate(binding.definition()))
+        assessment.repository.review(definition_digest)
+        request = ConformanceProbeRequest(schema_version='assessment.conformance-request.v4',
+            subject_digest=plan.subject_digest, recipe_digest=plan.recipe_digest,
+            environment_digest=plan.environment_digest, mapping_digest=plan.mapping_digest,
+            authorization_id=plan.authorization_id, worker_digest='a'*64,
+            definition_digests=[*plan.definition_digests, binding.digest],
+            pair_definition_digest=binding.digest, executable_dependencies=runtime_dependencies(),
+            operation='composed_pair_inspection', composed_model_turns=0)
+        assessment.repository.put('conformance_request', request.plan_id, request)
+        operation = 'owned-composed-inspection'
+        started = time.perf_counter()
+        assessment.repository.reserve(request, operation, AssessmentLimits(max_operations=1,
+            max_elapsed_seconds=20, max_model_turns=0), stage='composed_pair_inspection')
+        root._callback_conformance_identity = (request.plan_id, operation)
+        root._trial_check = lambda: assessment.repository.authorize(request)
+        attempt = root.store.create_execution_attempt(ExecutionAttempt(attempt_id='owned-composed-outer',
+            decision_id='owned-composed-decision', action_digest='b'*64, executor_id=plan.candidate_id,
+            executor_fingerprint='c'*64, side_effect=ceiling, idempotent=case == 'guard',
+            owner_id='operator', state='INVOKING', invocation_start_digest='sha256:'+'d'*64))
+        holder['authority'] = AssessmentCallbackAuthority.for_conformance(assessment, request, operation,
+            outer_router=root, outer_attempt_id=attempt.attempt_id, binding_digest=binding.digest,
+            resolve_binding=resolve, max_calls=1)
+        task_router._trial_check = holder['authority'].check
+        task_router._trial_deadline = root._trial_deadline
+        transport = CodexAppServerTransport(argv=(sys.executable, '-u',
+            str(Path(__file__).parent/'fixtures/fake_composed_callback.py'),
+            json.dumps({'text': text, 'delimiter': ','})), options=AppServerOptions(experimental_api=True))
+        try:
+            if case == 'cancel_after_write':
+                import asyncio
+                task = asyncio.create_task(inspect_scripted_callback(transport, binding=binding, worker_digest='a'*64,
+                    outer_attempt_id=attempt.attempt_id, journal=EventJournal(operation),
+                    recheck=holder['authority'].check, timeout_seconds=10))
+>               async with asyncio.timeout(5):
+                           ^^^^^^^^^^^^^^^^^^
+
+tests/test_codex_composed_inspection.py:230: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10d0fed40>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/timeouts.py:116: TimeoutError
+=========================== short test summary info ============================
+FAILED tests/test_codex_composed_inspection.py::test_canonical_scripted_callback_executes_protected_csv_native_guard[cancel_after_write]

@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.worker-inspection.v1",
+      "default": "assessment.worker-inspection.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "worker_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Digest",
+      "type": "string"
+    },
+    "execution_evidence_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Execution Evidence Digest"
+    },
+    "observations": {
+      "additionalProperties": true,
+      "title": "Observations",
+      "type": "object"
+    }
+  },
+  "required": [
+    "request_id",
+    "worker_digest",
+    "execution_evidence_digest",
+    "observations"
+  ],
+  "title": "WorkerInspectionResult",
+  "type": "object"
+}

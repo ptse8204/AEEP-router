@@ -1,0 +1,89 @@
+{
+  "kind": "exploratory live subagent integration smoke; not a controlled comparison or qualification",
+  "requested_agent_model": "gpt-6-sol",
+  "source_digest": "2132389e083418d20f12e47b770b6dcd07813452b3735e433d06b302db8798d7",
+  "tasks": [
+    {
+      "task": "small",
+      "independent_grader_passed": true,
+      "receipt_ids": [
+        "rcpt_b5f2e6c9c2874919b0014d25928bea94"
+      ],
+      "summary": "Completed; task verification is incomplete.",
+      "verification": null,
+      "recovery_state": "none"
+    },
+    {
+      "task": "larger",
+      "independent_grader_passed": true,
+      "receipt_ids": [
+        "rcpt_a09f6737b8c2426d9f3dff62c01bcece"
+      ],
+      "summary": "Completed; task verification is incomplete.",
+      "verification": null,
+      "recovery_state": "none"
+    }
+  ],
+  "rejections": [
+    {
+      "exit_code": 2,
+      "response": {
+        "ok": false,
+        "error": "task activation is paused or incomplete",
+        "error_type": "ConfigurationError"
+      }
+    },
+    {
+      "exit_code": 4,
+      "response": {
+        "error": "aeep_recipe_f468b36bc594 validation failed: $: violates JSON Schema 'additionalProperties' constraint",
+        "error_type": "InputValidationError"
+      }
+    },
+    {
+      "exit_code": 4,
+      "response": {
+        "error": "task scope allowance exhausted or an earlier attempt needs completion/recovery",
+        "error_type": "ConfigurationError"
+      }
+    }
+  ],
+  "cleanup": {
+    "activation_id": "task_22742a7a293f411b8967dddbc9e3e68f",
+    "activation_digest": "72b245cac45f41fee3a16e4e1bb4a80fcbb75cc508df5e74cca9f8093a69ae85",
+    "scope_digest": "492995293c56060237b97e091e61e2b948d68d364167381659c336f7ea1046fb",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/sol-agent-smoke-20260929T215826Z/project/.aeep/task-profiles/task_22742a7a293f411b8967dddbc9e3e68f.json"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 2,
+    "attempts_remaining": 0,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "agent_summary": "Small workbook: AEEP returned success using native.workbook.reference, with schema_valid=true and task_valid=true in the receipt. The output workbook was saved as small-output.xlsx. The receipt says non-schema task verification is incomplete; workbook correctness and preservation are not established by this call.\n\nLarger workbook: AEEP returned success using native.workbook.reference, with schema_valid=true and task_valid=true in the receipt. The output workbook was saved as larger-output.xlsx. The receipt says non-schema task verification is incomplete; workbook correctness and preservation are not established by this call.\n\nTwo task calls were attempted; both returned success. The receipts do not establish comparative savings.\n",
+  "limitations": [
+    "Explicit CLI guidance; no automatic Codex tool discovery tested",
+    "Same host filesystem, not a controlled isolated comparison",
+    "Reference capability selected in advance; no marginal-benefit claim",
+    "Independent grading happened after task receipts; receipts correctly report incomplete task verification",
+    "No live SkillsBench reproduction or full qualification",
+    "Subagent token/account costs unavailable from this interface; not counted as zero"
+  ],
+  "subagent": {
+    "task": "/root/sol_real_task",
+    "configured_model": "gpt-6-sol",
+    "launch_accepted": true,
+    "runtime_model_identity_independently_verified": false
+  },
+  "harness_sha256": {
+    "prepare.py": "c66b45e52b39831d01116b210ec7e2b4c8158863fb624edd91583425aa604078",
+    "verify.py": "f43655f03de9970e81f85f4b6c41f3cfdb6ed7648fd84a391f964513cf7ee9f3"
+  },
+  "recorded_files_logical_bytes": 1057680
+}

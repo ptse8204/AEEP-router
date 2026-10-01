@@ -1,0 +1,574 @@
+{
+  "$defs": {
+    "AssessmentComparison": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.comparison.v1",
+          "enum": [
+            "assessment.comparison.v1",
+            "assessment.comparison.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "structure": {
+          "enum": [
+            "direct",
+            "controlled_agent",
+            "workflow"
+          ],
+          "title": "Structure",
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/ComparisonArm"
+        },
+        "baseline": {
+          "$ref": "#/$defs/ComparisonArm"
+        },
+        "reference": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ComparisonArm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "primary_metric": {
+          "const": "wall_time_ms",
+          "default": "wall_time_ms",
+          "title": "Primary Metric",
+          "type": "string"
+        },
+        "primary_condition": {
+          "default": "router-fresh",
+          "title": "Primary Condition",
+          "type": "string"
+        },
+        "experiment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IncrementalExperiment"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "structure",
+        "candidate",
+        "baseline"
+      ],
+      "title": "AssessmentComparison",
+      "type": "object"
+    },
+    "ComparisonArm": {
+      "additionalProperties": false,
+      "properties": {
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "fingerprint": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fingerprint",
+          "type": "string"
+        },
+        "dependencies": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "object"
+        },
+        "host_config": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Host Config"
+        }
+      },
+      "required": [
+        "executor_id",
+        "fingerprint",
+        "dependencies"
+      ],
+      "title": "ComparisonArm",
+      "type": "object"
+    },
+    "DifferentialEnvironment": {
+      "additionalProperties": false,
+      "description": "Reviewed expected inventories, not a claim that permissions were verified.",
+      "properties": {
+        "shared_definition_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Shared Definition Digest",
+          "type": "string"
+        },
+        "control_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Control Inventory",
+          "type": "object"
+        },
+        "treatment_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Treatment Inventory",
+          "type": "object"
+        },
+        "candidate_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Candidate Inventory",
+          "type": "object"
+        },
+        "candidate_paths": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Candidate Paths",
+          "type": "array"
+        },
+        "candidate_aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Aliases",
+          "type": "array"
+        }
+      },
+      "required": [
+        "shared_definition_digest",
+        "control_inventory",
+        "treatment_inventory",
+        "candidate_inventory",
+        "candidate_paths"
+      ],
+      "title": "DifferentialEnvironment",
+      "type": "object"
+    },
+    "IncrementalExperiment": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.experiment.v1",
+          "enum": [
+            "assessment.experiment.v1",
+            "assessment.experiment.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "qualification",
+            "marginal_value",
+            "native_catalog",
+            "aeep_value"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "exposure": {
+          "enum": [
+            "required",
+            "optional"
+          ],
+          "title": "Exposure",
+          "type": "string"
+        },
+        "environment": {
+          "$ref": "#/$defs/DifferentialEnvironment"
+        },
+        "utility": {
+          "$ref": "#/$defs/UtilityPolicy"
+        },
+        "normal_host": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ComparisonArm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "three_way_access_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Three Way Access Digest"
+        },
+        "higher_compute": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ComparisonArm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reusable_tool": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ComparisonArm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reusable_artifact_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reusable Artifact Digest"
+        },
+        "reusable_build_operation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reusable Build Operation Ids",
+          "type": "array"
+        },
+        "feasible_challengers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Feasible Challengers",
+          "type": "array"
+        },
+        "qualification_report_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Qualification Report Digest"
+        },
+        "catalog_definition_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Catalog Definition Digest"
+        },
+        "marginal_report_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Marginal Report Digest"
+        }
+      },
+      "required": [
+        "stage",
+        "exposure",
+        "environment",
+        "utility"
+      ],
+      "title": "IncrementalExperiment",
+      "type": "object"
+    },
+    "UtilityPolicy": {
+      "additionalProperties": false,
+      "description": "Dimensions are native measurement keys; never an invented common currency.",
+      "properties": {
+        "benefit_dimensions": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Benefit Dimensions",
+          "type": "array"
+        },
+        "guardrail_dimensions": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Guardrail Dimensions",
+          "type": "array"
+        },
+        "minimum_resource_benefit": {
+          "default": 0.1,
+          "exclusiveMaximum": 1,
+          "minimum": 0.1,
+          "title": "Minimum Resource Benefit",
+          "type": "number"
+        },
+        "minimum_success_gain": {
+          "default": 0.05,
+          "exclusiveMaximum": 1,
+          "minimum": 0.05,
+          "title": "Minimum Success Gain",
+          "type": "number"
+        },
+        "maximum_resource_regression": {
+          "default": 0.1,
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Maximum Resource Regression",
+          "type": "number"
+        },
+        "family_error_rate": {
+          "default": 0.05,
+          "exclusiveMinimum": 0,
+          "maximum": 0.05,
+          "title": "Family Error Rate",
+          "type": "number"
+        }
+      },
+      "required": [
+        "benefit_dimensions",
+        "guardrail_dimensions"
+      ],
+      "title": "UtilityPolicy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "comparison": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AssessmentComparison"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "feature_combinations": {
+      "anyOf": [
+        {
+          "items": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feature Combinations"
+    },
+    "schema_version": {
+      "default": "assessment.admission.v1",
+      "enum": [
+        "assessment.admission.v1",
+        "assessment.admission.v2",
+        "assessment.admission.v3"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "admission_id": {
+      "title": "Admission Id",
+      "type": "string"
+    },
+    "executor_id": {
+      "title": "Executor Id",
+      "type": "string"
+    },
+    "baseline_id": {
+      "title": "Baseline Id",
+      "type": "string"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "candidate_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Fingerprint",
+      "type": "string"
+    },
+    "executable_dependencies": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Executable Dependencies",
+      "type": "object"
+    },
+    "baseline_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Baseline Fingerprint",
+      "type": "string"
+    },
+    "host_runtime_digests": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Host Runtime Digests",
+      "type": "object"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    },
+    "definition_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Definition Digests",
+      "type": "array"
+    },
+    "recipe_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Digest",
+      "type": "string"
+    },
+    "mapping_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Mapping Digest",
+      "type": "string"
+    },
+    "environment_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Digest",
+      "type": "string"
+    },
+    "extractor": {
+      "title": "Extractor",
+      "type": "string"
+    },
+    "applicability": {
+      "additionalProperties": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "type": "array"
+      },
+      "title": "Applicability",
+      "type": "object"
+    },
+    "qualification_report_id": {
+      "title": "Qualification Report Id",
+      "type": "string"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "executor_id",
+    "baseline_id",
+    "capability",
+    "candidate_fingerprint",
+    "baseline_fingerprint",
+    "subject_digest",
+    "definition_digests",
+    "recipe_digest",
+    "mapping_digest",
+    "environment_digest",
+    "extractor",
+    "applicability",
+    "qualification_report_id",
+    "report_id",
+    "authorization_id",
+    "expires_at"
+  ],
+  "title": "ScopedAdmission",
+  "type": "object"
+}

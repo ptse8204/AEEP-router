@@ -1,0 +1,152 @@
+{
+  "source_before": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "source_after": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08931166701950133,
+      "log": "reports/v08/pilot-calibration-final-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7241869999561459,
+      "log": "reports/v08/pilot-calibration-final-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.07745529199019074,
+      "log": "reports/v08/pilot-calibration-final-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3600640830118209,
+      "log": "reports/v08/pilot-calibration-final-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1332279589259997,
+      "log": "reports/v08/pilot-calibration-final-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 377.13290637510363,
+      "log": "reports/v08/pilot-calibration-final-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 525.4687770000892,
+      "log": "reports/v08/pilot-calibration-final-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.149729791097343,
+      "log": "reports/v08/pilot-calibration-final-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-calibration-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5257863749284297,
+      "log": "reports/v08/pilot-calibration-final-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-calibration-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.040904249995946884,
+      "log": "reports/v08/pilot-calibration-final-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pilot-calibration-final-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04124129202682525,
+      "log": "reports/v08/pilot-calibration-final-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2524011249188334,
+      "log": "reports/v08/pilot-calibration-final-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07673779199831188,
+      "log": "reports/v08/pilot-calibration-final-check-12.txt"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "recorded_at": "2026-09-27T13:19:42.436471+00:00",
+  "source_digest": "6daf49e503146b89cc1bd29f606bb2a310b551bed5dacc4e6941be719c04c839",
+  "authority": "2026-09-27 standing review/execution/budget authority; no routine approval pending",
+  "validation": "recovery-final-validation-summary.json",
+  "native_client_journey": "native-ui-recovery-journey-summary.json",
+  "qualification_supervisor": "/tmp/aeep-recovery-final-run-qualifications.py",
+  "state": "Managed-host rejection classification repaired; required checks running, all live queues stopped.",
+  "families": {
+    "workbook": {
+      "qualification_plan_id": "plan_1195ac116fae4c1fa90ca2841f0df756",
+      "qualification_manifest": ".aeep/live-review-v3/workbook-recovery-final.json",
+      "builder_request_id": "planning_e7ef212605ff42488a882f0fdc260484",
+      "reusable_artifact_digest": "dfdd90e22688a8f8ce5ca3fbc6fe2c5c3fc20dfc874a7788d9d4d7d31629514f",
+      "frozen_comparison": "workbook-four-arm-recovery-freeze-complete-review.json",
+      "value_manifest": ".aeep/live-review-v3/workbook-four-arm-reference-recovery.json",
+      "value_compiler": "/tmp/aeep-recovery-final-compile-workbook-value.py",
+      "qualification_report_id": "fit_d869167c012b4ac3a157872281fb78f7",
+      "value_plan_id": "plan_b17c0a67fb224546ab4b1de9995ca88b",
+      "value_report_id": "fit_5ea659a4db38486e89705c6f771f7819",
+      "value_outcome": "no_measured_benefit"
+    },
+    "csv": {
+      "qualification_plan_id": "plan_50c824fa34b54e179aef83b2da040e4c",
+      "qualification_manifest": ".aeep/live-review-v3/csv-schema-local.json",
+      "builder_request_id": "planning_452de4daa10440a4af39a2fffab9f78c",
+      "reusable_artifact_digest": "6489f34aa26620c63156753d28ab5a6fa16f9d362062b1622edc617ee4c5fcc3",
+      "frozen_comparison": "csv-four-arm-schema-local-freeze-complete-review.json",
+      "value_manifest": ".aeep/live-review-v3/csv-four-arm-schema-local.json",
+      "value_compiler": "/tmp/aeep-storage-recovery-compile-csv-value.py csv",
+      "prior_qualification_plan_id": "plan_fca065a5cfa34988952aa9944f602dbe",
+      "value_compiler_status": "Reviewed; existing sequential queue executes once with storage headroom checks.",
+      "qualification_report_id": "fit_fa7acd77988d4592b0d8b3b7ae6a1ab5",
+      "qualification_verification": "csv-schema-local-live-verification.json",
+      "value_plan_id": "plan_9e59cfedba9a402a9345de2128c84217",
+      "prior_value_plan_id": "plan_e915d9d5be214924859f7579a8bca5f0",
+      "value_report_id": "fit_41bdf73c76d94d92ac0e4cf7bb207b2a",
+      "value_outcome": "no_measured_benefit",
+      "value_verification": "csv-four-arm-value-storage-recovery-live-verification.json",
+      "value_milestone": "csv-storage-recovery-value-milestone.json",
+      "value_accounting_gap": {
+        "operation_id": "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+        "origin_plan": "plan_e915d9d5be214924859f7579a8bca5f0",
+        "stage": "report_generation",
+        "elapsed_seconds": null,
+        "reason": "Prior storage-interrupted campaign retained its unresolved report reservation. Do not fabricate zero cost or reset counters."
+      }
+    },
+    "text": {
+      "qualification_plan_id": "plan_2e92f880b5d8497c9c9ac207c914cebe",
+      "qualification_manifest": ".aeep/live-review-v3/text-schema-local.json",
+      "builder_request_id": "planning_f2b1fd1fe18e47cfa5751e8249c8d2bd",
+      "reusable_artifact_digest": "9a640308de68ccb2675a13de7489b2fa933f7058b7398996696fde5e34f3537b",
+      "frozen_comparison": "text-four-arm-schema-local-freeze-complete-review.json",
+      "value_manifest": ".aeep/live-review-v3/text-four-arm-schema-local.json",
+      "value_compiler": "/tmp/aeep-schema-local-compile-family-value.py text",
+      "prior_qualification_plan_id": "plan_d634949396264514b929eda14e505743",
+      "value_compiler_status": "Cancelled after preflight rejection; preserve partial evidence, never replay.",
+      "qualification_report_id": "fit_6c082e587d0543008154786e005e4d22",
+      "qualification_verification": "text-schema-local-live-verification.json",
+      "value_plan_id": "plan_26218022d39942e8903a997b7cda1681",
+      "value_report_id": "fit_2345dde049da4a8eb3769f439a60d929",
+      "value_outcome": "insufficient_evidence"
+    },
+    "search": {
+      "qualification_plan_id": "plan_ce7e4655c31c4af48f9a5b8f2a2f2bbc",
+      "qualification_manifest": ".aeep/live-review-v3/search-contract-local.json",
+      "builder_request_id": "planning_b7a7f76bbf424b76994703c39b9236db",
+      "reusable_artifact_digest": "9a59c4dd20942539207af50310ded0ff5fe63d36d85e78acde1f1175eef96513",
+      "frozen_comparison": "search-four-arm-contract-local-freeze-complete-review.json",
+      "value_manifest": ".aeep/live-review-v3/search-four-arm-contract-local.json",
+      "value_compiler": "/tmp/aeep-search-contract-compile-value.py search",
+      "prior_qualification_plan_id": "plan_3787a07895a34e13bf387f3bd7b6438d",
+      "value_compiler_status": "Never started; no execution until repair and source-bound review complete.",
+      "qualification_report_id": "fit_52ab009d06064d218062608309f14fed",
+      "qualification_verification": "search-contract-local-live-verification.json",
+      "qualification_milestone": "search-contract-local-qualified-milestone.json",
+      "builder_status": "Complete; inert source reviewed, all 28 contained training cases correct, immutable images and all three four-arm profile pairs verified.",
+      "value_plan_id": "plan_720229a92e594726809bc34d09d6e2d3"
+    }
+  },
+  "workbook_value_cases": "recipe_generation_047d452f40524b61b7259058171ba977",
+  "native_catalog_gap": "native-catalog-recovery-docs-review.json",
+  "next": "Run the reviewed /tmp/aeep-sol-validate-workers-visible.py in the attached terminal. It checks four Sol qualification worker pairs sequentially with zero model task turns; stop on failure and never replay started requests. Actual-container validation passed. Fresh Sol campaigns remain unstarted.",
+  "automatic_follow_through": {
+    "recorded_at": "2026-09-28T22:08:18.923290+00:00",
+    "automation_id": "finish-aeep-assessment-validation",
+    "same_chat": true,
+    "interval_minutes": 10,
+    "value_queue_review": "reports/v08/post-cleanup-remaining-value-queue-review.json",
+    "queue_script": "/tmp/aeep-post-cleanup-run-remaining-value-queue.py",
+    "qualification_progress_script": "/tmp/aeep-current-assessment-progress.py",
+    "execution_rule": "Do not start duplicate queues or replay any started/uncertain plan. Inspect completed command and persisted job records.",
+    "routine_approval_pending": false,
+    "state": "Must follow current repair record; stopped live queue must never restart."
+  },
+  "current_queues": {
+    "review": "reports/v08/post-cleanup-remaining-value-queue-review.json",
+    "active_supervisor": null,
+    "state": "stopped_after_preflight_rejection",
+    "never_restart_old_queue": true,
+    "previous_queue_state": "Operator cleanup stopped former capacity supervisor, exit 143.",
+    "session_id": 31651,
+    "persisted_jobs": [
+      {
+        "id": "assessment_7f144acd1ff8429fbbabf5abe3f0f35a",
+        "plan_id": "plan_26218022d39942e8903a997b7cda1681",
+        "state": "complete",
+        "report_id": "fit_2345dde049da4a8eb3769f439a60d929",
+        "error_code": "assessment_blocked_or_budget_exhausted"
+      }
+    ],
+    "start_record": "reports/v08/post-cleanup-continuation-start.json",
+    "supervisor_exit_code": 1,
+    "failure_record": "reports/v08/text-value-preflight-rejection-stop.json"
+  },
+  "updated_at": "2026-09-29T09:34:50.595871+00:00",
+  "native_task_only_calls": {
+    "state": "complete",
+    "result": "native-task-only-four-family-client-result.json",
+    "preparation": "task-only-four-family-preparation-review.json",
+    "verification": "combined-live-evidence-progress-verification.json",
+    "receipt_ids": [
+      "rcpt_331217df82ad44ea8707de4dc013b90c",
+      "rcpt_3b88055297c546ada30f7059f09b99c7",
+      "rcpt_899fd057a4ef4157b9a3d298a669071e",
+      "rcpt_dfdcfc45142d45a6a883cf94483303d4"
+    ],
+    "scope": "All four task-only tools invoked once by native Codex client through configured local baselines. No new real admission or savings claim.",
+    "queue_supervisor_resumed": true
+  },
+  "combined_verification_manifest": ".aeep/live-review-v3/final-combined-evidence.json",
+  "additional_cleanup_record": "reports/v08/operator-requested-older-trial-copy-cleanup.json",
+  "snapshot_cleanup_record": "reports/v08/operator-approved-local-snapshot-cleanup.json",
+  "post_cleanup_verification": "reports/v08/post-cleanup-live-evidence-verification.json",
+  "historical_source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "source_repair_review": "reports/v08/host-rejection-fix-review.json",
+  "required_validation": {
+    "script": "/tmp/aeep-host-rejection-validation.py",
+    "session_id": 21318,
+    "record": "host-rejection-fix-checks.json",
+    "state": "completed"
+  },
+  "experiment_model": {
+    "model": "gpt-6-sol",
+    "review": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/sol-experiment-model-switch-review.json",
+    "definitions_directory": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/sol-successor-definitions",
+    "state": "selected_pending_fresh_conformance_and_plans",
+    "never_resume_astra_plans": true
+  },
+  "terminal_execution": {
+    "review": "reports/v08/attached-terminal-continuation-review.json",
+    "mode": "foreground_attached_terminal",
+    "state": "container_validation_passed_awaiting_sol_worker_command",
+    "script": "/tmp/aeep-host-rejection-fix-containers-visible.py",
+    "no_background_supervisors": true,
+    "next_worker_review": "reports/v08/sol-qualification-pairs-review.json",
+    "next_worker_command_review": "reports/v08/sol-worker-terminal-command-review.json",
+    "container_result": "reports/v08/host-rejection-fix-containers.json",
+    "container_tests_passed": 12,
+    "next_script": "/tmp/aeep-sol-validate-workers-visible.py"
+  }
+}

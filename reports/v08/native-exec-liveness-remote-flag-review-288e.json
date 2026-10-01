@@ -1,0 +1,15 @@
+{
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+  "authority": "parent September 30 finite native liveness feasibility instruction",
+  "cases": [
+    "close",
+    "kill",
+    "terminate"
+  ],
+  "command": "sandboxed Python sets hard RLIMIT_NPROC=0 before writing started marker, waits2sec then writes effect",
+  "bounds": "max8sec wait to start; observe2.5sec; cleanup identity-bound observed children; no model/auth/global config",
+  "protocol_source": "https://github.com/openai/codex/blob/main/codex-rs/exec-server/README.md",
+  "driver_sha256": "826abf8d055af849abcf493aa61aa4c011cafc85426deedc566af6594f5947cd",
+  "expected": "server exit on pipe closure and no command effect after owner closure, death or terminate"
+}

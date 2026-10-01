@@ -1,0 +1,113 @@
+{
+  "recorded_at": "2026-09-28T06:12:57.624610+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "plan_id": "plan_9e59cfedba9a402a9345de2128c84217",
+  "job_id": "assessment_71f8c14da3a84a6ebf78e48500a4dd7e",
+  "report_id": "fit_41bdf73c76d94d92ac0e4cf7bb207b2a",
+  "report_file": "csv-four-arm-value-storage-recovery-live-report.json",
+  "verification_file": "csv-four-arm-value-storage-recovery-live-verification.json",
+  "executions": 705,
+  "correctness_failures": 0,
+  "execution_failures": 0,
+  "distinct_holdouts": 105,
+  "outcome": "no_measured_benefit",
+  "utility_evidence": {
+    "metrics": {
+      "task_success": {
+        "relative_saving": null,
+        "success_gain": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ],
+        "distinct_pairs": 105,
+        "zero_baseline_regression": false
+      },
+      "wall_time_ms": {
+        "relative_saving": -0.008830834373585488,
+        "success_gain": null,
+        "interval": [
+          -0.07812708946515032,
+          0.06060339740630312
+        ],
+        "distinct_pairs": 105,
+        "zero_baseline_regression": false
+      }
+    },
+    "complete": true,
+    "benefit": false,
+    "guardrails_passed": true,
+    "challengers": {
+      "csv-higher-four-arm-final.control.json-local": {
+        "metrics": {
+          "task_success": {
+            "relative_saving": null,
+            "success_gain": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "distinct_pairs": 105,
+            "zero_baseline_regression": false
+          },
+          "wall_time_ms": {
+            "relative_saving": 0.003035621181517327,
+            "success_gain": null,
+            "interval": [
+              -0.05079392045131555,
+              0.05099630549758424
+            ],
+            "distinct_pairs": 105,
+            "zero_baseline_regression": false
+          }
+        },
+        "complete": true,
+        "benefit": false,
+        "guardrails_passed": true
+      },
+      "csv-reusable-four-arm-final.control.json-local": {
+        "metrics": {
+          "task_success": {
+            "relative_saving": null,
+            "success_gain": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "distinct_pairs": 105,
+            "zero_baseline_regression": false
+          },
+          "wall_time_ms": {
+            "relative_saving": 0.02642901586846801,
+            "success_gain": null,
+            "interval": [
+              -0.03209934693408532,
+              0.07731575354982284
+            ],
+            "distinct_pairs": 105,
+            "zero_baseline_regression": false
+          }
+        },
+        "complete": true,
+        "benefit": false,
+        "guardrails_passed": true
+      }
+    },
+    "dominated": false,
+    "stage": "marginal_value",
+    "family_error_rate": 0.05,
+    "analysis": "all_assigned_cases",
+    "candidate_selection_filter": false
+  },
+  "host_verified": true,
+  "accounting_verified": false,
+  "accounting_gap": {
+    "operation_id": "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+    "origin_plan": "plan_e915d9d5be214924859f7579a8bca5f0",
+    "stage": "report_generation",
+    "elapsed_seconds": null,
+    "reason": "Prior storage-interrupted campaign retained its unresolved report reservation. Do not fabricate zero cost or reset counters."
+  },
+  "admission_created": false,
+  "release_ready": false
+}

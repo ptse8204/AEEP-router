@@ -1,0 +1,47 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "model_turns": 0,
+  "full_conformance": false,
+  "workers": {
+    "outside_mcp": {
+      "request_id": "conformance_probe_3f47d10d9728472e85a71e7193dd0946",
+      "operation_id": "linux-noauth-config:conformance_probe_3f47d10d9728472e85a71e7193dd0946",
+      "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+      "worker_digest": "f62e2a0a4ce38a2099e9650a832bece22a76059e5c61e9a9aa1467727b63270f",
+      "cleanup_confirmed": true,
+      "protocol_passed": false,
+      "cpu_seconds": null,
+      "peak_memory_mb": null,
+      "accounting_complete": false,
+      "safe_transport": {
+        "known_error_template": "process_exited",
+        "reported_exit_code": 1,
+        "process_exit_code_before_cleanup": 1,
+        "config_error_categories": [],
+        "recognized_public_config_fields": [
+          "permissions",
+          "aeep"
+        ],
+        "recognized_error_types": [],
+        "stderr_class": "unclassified",
+        "sanitized_config_error_excerpt": "Error: requirements.toml permissions profile `aeep` conflicts with a config-defined profile of the same name\n",
+        "stderr_bytes_retained": 109,
+        "stderr_truncated": false
+      },
+      "error_type": "CodexProtocolError",
+      "failing_stage": "transport_initialize",
+      "error_class": "protocol_or_configuration",
+      "elapsed_seconds": 0.44160941685549915,
+      "canonical_record_digest": "9cc2e3e21abf8d70dbaa7ead812cee32e70f1e46909882b1d3230fbb1950854f"
+    }
+  },
+  "configuration_initialization_passed": false,
+  "classification": "noauth_configuration_initialization_failed",
+  "source_unchanged": true,
+  "grant_after": {
+    "operations": 8627,
+    "model_turns": 2535,
+    "elapsed_seconds": 74744.25660848687,
+    "cash_usd": "0.0"
+  }
+}

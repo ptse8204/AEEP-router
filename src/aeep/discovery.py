@@ -18,7 +18,7 @@ import rfc8785
 import yaml
 from pydantic import Field, JsonValue
 
-from .errors import ConfigurationError, ProtocolError
+from .errors import ConfigurationError, ExecutorError, ProtocolError
 from .executors.network import validate_http_url
 from .models import ProviderDescriptor, RegistryConfig, StrictModel
 
@@ -204,6 +204,91 @@ class FixtureRegistryAdapter:
             if len(matched) >= query.limit:
                 break
         return matched
+
+
+class ARDRegistryAdapter:
+    """Explicit, single-page ARD v0.91 search; results are inert candidate metadata."""
+
+    adapter_id = 'ard'
+
+    def __init__(self, base_url: str, *, client: httpx.AsyncClient | None = None,
+                 fallback: PackageRegistryAdapter | None = None, allowed_types: tuple[str, ...] = ()) -> None:
+        self.base_url = base_url.rstrip('/')
+        self.client = client
+        self.fallback = fallback
+        self.allowed_types = allowed_types
+        self.warnings: list[str] = []
+
+    async def search(self, query: RegistryQuery) -> list[RegistryCandidate]:
+        self.warnings = []
+        # Only a caller-supplied public search phrase crosses this preparation
+        # boundary. There is no ActionRequest, task payload or filesystem context.
+        if not query.query.strip():
+            raise ConfigurationError('ARD requires an explicit public search phrase')
+        try:
+            async with asyncio.timeout(10):
+                return await self._search(query)
+        except (ConfigurationError, ExecutorError, ProtocolError, httpx.HTTPError, ValueError, TimeoutError, RecursionError):
+            if self.fallback is None:
+                raise ProtocolError('ARD search unavailable or unsupported; no candidates activated') from None
+            self.warnings.append('ARD unavailable or unsupported; returning configured local candidates')
+            return await self.fallback.search(query)
+
+    async def _search(self, query: RegistryQuery) -> list[RegistryCandidate]:
+        parsed = httpx.URL(self.base_url)
+        if parsed.query or parsed.fragment:
+            raise ConfigurationError('ARD registry base URL cannot contain a query or fragment')
+        url = self.base_url + '/search'
+        await validate_http_url(url, {'allowed_hosts':[httpx.URL(self.base_url).host]}, label='ARD registry')
+        body: dict[str, Any] = {'query':{'text':query.query}, 'pageSize':query.limit, 'federation':'none'}
+        if query.cursor is not None:
+            body['pageToken'] = query.cursor
+        # Filter locally too; a registry's optional filter support is not authority.
+        if self.allowed_types:
+            body['query']['filter'] = {'type':list(self.allowed_types)}
+        client = self.client or httpx.AsyncClient(timeout=10, follow_redirects=False, trust_env=False)
+        try:
+            async with client.stream('POST', url, json=body, headers={'accept':'application/json'}, follow_redirects=False) as response:
+                response.raise_for_status()
+                chunks, total = [], 0
+                async for chunk in response.aiter_bytes():
+                    total += len(chunk)
+                    if total > 1_000_000:
+                        raise ProtocolError('ARD response exceeds 1 MiB')
+                    chunks.append(chunk)
+            data = json.loads(b''.join(chunks))
+        finally:
+            if self.client is None:
+                await client.aclose()
+        if not isinstance(data, dict) or not isinstance(data.get('results'), list):
+            raise ProtocolError('ARD response requires results')
+        candidates = []
+        for entry in data['results'][:query.limit]:
+            try:
+                candidates.append(self._candidate(entry))
+            except (ValueError, TypeError, ConfigurationError, ProtocolError):
+                self.warnings.append('Malformed or unsupported ARD entry omitted')
+        if data.get('referrals') or data.get('pageToken'):
+            self.warnings.append('Additional pages/referrals were not fetched')
+        return candidates
+
+    def _candidate(self, entry: Any) -> RegistryCandidate:
+        if not isinstance(entry, dict) or not isinstance(entry.get('identifier'), str) or not entry['identifier'].startswith('urn:air:'):
+            raise ValueError('invalid ARD identifier')
+        context = entry.get('@context')
+        if context not in (None, 'https://agenticresourcediscovery.org/context/v1'):
+            raise ConfigurationError('ARD context expansion beyond the pinned base context is unsupported')
+        if self.allowed_types and entry.get('type') not in self.allowed_types:
+            raise ConfigurationError('ARD artifact type is outside the local selection')
+        if 'url' in entry and 'data' in entry:
+            raise ValueError('ARD entry contains both artifact value and reference')
+        digest = _metadata_digest(entry)
+        return RegistryCandidate(registry_candidate_id='ard_'+digest.removeprefix('sha256:')[:32],
+            adapter_id=self.adapter_id, name=entry.get('displayName') or entry['identifier'],
+            description=entry.get('description',''), version=entry.get('version'),
+            provenance={'specification':'ARD v0.91', 'entry':entry, 'trust_verified':False,
+                        'artifact_fetched':False, 'namespace_support':'default namespace only'},
+            retrieved_at=datetime.now(UTC), raw_metadata_digest=digest)
 
 
 class MCPCommunityRegistryAdapter:

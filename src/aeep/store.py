@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import secrets
 import sqlite3
 import threading
 from collections.abc import Iterable, Iterator
@@ -82,7 +83,17 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 7
+LATEST_DATABASE_SCHEMA = 8
+
+_V08_ASSESSMENT_SCHEMA = (
+    "CREATE TABLE IF NOT EXISTS host_correlation_keys (id TEXT PRIMARY KEY, key BLOB NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS assessment_records (kind TEXT NOT NULL, id TEXT NOT NULL, digest TEXT NOT NULL, payload_json TEXT NOT NULL, PRIMARY KEY(kind, id), UNIQUE(kind, digest))",
+    "CREATE TABLE IF NOT EXISTS assessment_reviews (digest TEXT PRIMARY KEY, approved_at TEXT NOT NULL, revoked INTEGER NOT NULL DEFAULT 0 CHECK(revoked IN (0,1)))",
+    "CREATE TABLE IF NOT EXISTS assessment_grants (id TEXT PRIMARY KEY, revoked INTEGER NOT NULL DEFAULT 0 CHECK(revoked IN (0,1)), operations INTEGER NOT NULL DEFAULT 0, model_turns INTEGER NOT NULL DEFAULT 0, elapsed_seconds REAL NOT NULL DEFAULT 0, cash_usd TEXT NOT NULL DEFAULT '0')",
+    "CREATE TABLE IF NOT EXISTS assessment_operations (id TEXT PRIMARY KEY, grant_id TEXT NOT NULL REFERENCES assessment_grants(id), state TEXT NOT NULL, reserved_json TEXT NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS assessment_jobs (id TEXT PRIMARY KEY, plan_id TEXT NOT NULL, state TEXT NOT NULL, report_id TEXT, started_at TEXT, error_code TEXT)",
+    "CREATE TABLE IF NOT EXISTS assessment_admissions (executor_id TEXT PRIMARY KEY, admission_id TEXT NOT NULL, revoked INTEGER NOT NULL DEFAULT 0 CHECK(revoked IN (0,1)), revoked_at TEXT)",
+)
 
 _LEGACY_SCHEMA: tuple[str, ...] = (
     """
@@ -1250,6 +1261,9 @@ class PreparedActionFinalizationRecord(TypedDict):
 
 class ReceiptStore:
     def __init__(self, path: str | Path) -> None:
+        # Runtime identities must be resolved afresh after process restart.
+        self.host_runtime_digests: dict[str, tuple[str, str]] = {}
+        self.expected_host_runtime_digests: dict[str, str] = {}
         self.path = str(path)
         if self.path != ":memory:":
             target = Path(self.path).expanduser()
@@ -1315,6 +1329,10 @@ class ReceiptStore:
                     for statement in _V07_ATTEMPT_SCHEMA:
                         self._connection.execute(statement)
                     version = 7
+                if version < 8:
+                    for statement in _V08_ASSESSMENT_SCHEMA:
+                        self._connection.execute(statement)
+                    version = 8
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -1344,6 +1362,177 @@ class ReceiptStore:
                 raise
             else:
                 self._connection.commit()
+
+    def host_principal_key(self) -> bytes:
+        """AEEP-owned correlation key, unrelated to host authentication state."""
+        with self._immediate_transaction() as connection:
+            connection.execute("INSERT OR IGNORE INTO host_correlation_keys VALUES ('principal', ?)", (secrets.token_bytes(32),))
+            row = connection.execute("SELECT key FROM host_correlation_keys WHERE id='principal'").fetchone()
+            assert row is not None
+            return bytes(row[0])
+
+    def campaign_snapshot(
+        self, path: str | Path = ":memory:", *, bound_digests: set[str] | None = None,
+    ) -> ReceiptStore:
+        """Copy execution authority, optionally omitting unrelated campaign definitions."""
+        if bound_digests is not None and not bound_digests:
+            raise ConfigurationError("scoped campaign snapshot requires reviewed definition digests")
+        if str(path) != ":memory:":
+            target = Path(path)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            # Exclusive creation prevents a resumed campaign from overwriting attempt history.
+            with target.open("xb"):
+                pass
+        snapshot = ReceiptStore(path)
+        tables = (
+            "assessment_records", "assessment_reviews", "assessment_grants", "assessment_admissions",
+            "host_correlation_keys", "route_candidates", "qualification_reports", "rate_card_snapshots",
+            "provider_signing_keys", "provider_packages", "provider_package_signatures",
+            "content_artifacts", "provider_package_artifacts", "evidence_records",
+            "evidence_acceptances", "smoke_test_reports", "candidate_verification_snapshots",
+        )
+        try:
+            with self._lock, snapshot._immediate_transaction() as connection:
+                # A read transaction freezes all dependencies at the same source revision.
+                self._connection.execute("BEGIN")
+                try:
+                    for table in tables:
+                        condition = ""
+                        parameters: tuple[str, ...] = ()
+                        if table == "assessment_records":
+                            condition = " WHERE kind NOT IN ('operation_start', 'operation_measurement', 'setup_cost', 'worker', 'recovery', 'planning_receipt')"
+                        rows = self._connection.execute(f"SELECT * FROM {table}{condition}", parameters).fetchall()
+                        if table == "assessment_records" and bound_digests is not None:
+                            rows = self._scoped_campaign_records(rows, bound_digests)
+                        if rows:
+                            placeholders = ",".join("?" for _ in rows[0])
+                            connection.executemany(
+                                f"INSERT INTO {table} VALUES ({placeholders})", rows
+                            )
+                finally:
+                    self._connection.rollback()
+            return snapshot
+        except BaseException:
+            snapshot.close()
+            raise
+
+    def _scoped_campaign_records(
+        self, rows: list[sqlite3.Row], bound_digests: set[str],
+    ) -> list[sqlite3.Row]:
+        # Runtime authority stays intact. Only unrelated assessment metadata is
+        # omitted; review membership alone does not make history a dependency.
+        bulky = {
+            "plan", "mapping", "boundary_probe_definition", "boundary_probe",
+            "boundary_conformance", "execution_evidence", "execution_event",
+            "operation_ledger", "campaign", "recipe_case_set", "conformance_request",
+            "recipe_receipt", "host_inventory", "worker_pair_definition",
+            "worker_pair_inspection", "planning_request", "planning_mapping",
+            "recipe_materialization_request", "report", "comparison", "probe_runtime",
+            "environment", "recipe", "subject", "worker_binding", "recipe_runtime",
+            "runtime_binding", "run_binding", "effective_policy_definition",
+            "enforcement_definition", "reviewed_inventory", "differential_conformance",
+            "grader_validation", "utility_policy", "pilot_policy",
+            "shared_environment", "shared_environment_definition",
+        }
+        by_digest: dict[str, list[sqlite3.Row]] = {}
+        by_identity: dict[tuple[str, str], str] = {}
+        by_identifier: dict[str, set[str]] = {}
+        for row in rows:
+            by_digest.setdefault(row["digest"], []).append(row)
+            by_identity[row["kind"], row["id"]] = row["digest"]
+            by_identifier.setdefault(row["id"], set()).add(row["digest"])
+        roots = bound_digests & by_digest.keys()
+        if not roots:
+            raise ConfigurationError("scoped snapshot has no stored bound definitions")
+        for marker in self._connection.execute("SELECT admission_id FROM assessment_admissions"):
+            root = by_identity.get(("admission", marker[0]))
+            if root is None:
+                raise ConfigurationError("scoped snapshot admission definition is missing")
+            roots.add(root)
+        roots.update(row["digest"] for row in rows if row["kind"] in {
+            "task_scope", "task_activation", "task_lifecycle", "task_codex_binding",
+        })
+        selected: set[str] = set()
+        visiting: set[str] = set()
+        # These fields refer to stored assessment documents, unlike source,
+        # binary and executable-dependency hashes which refer to external bytes.
+        required = {
+            "subject_digest", "recipe_digest", "mapping_digest", "environment_digest",
+            "plan_digest", "campaign_digest", "recipe_case_set_digest",
+            "execution_evidence_digest", "enforcement_definition_digest",
+            "effective_policy_digest", "reviewed_inventory_digest", "scope_digest",
+            "activation_digest", "definition_digests", "probe_digests",
+            "conformance_digests", "differential_conformance_digest",
+            "operation_ledger_digest", "grader_validation_digest",
+        }
+
+        def strings(value: object) -> Iterator[str]:
+            if isinstance(value, str):
+                yield value
+            elif isinstance(value, dict):
+                for item in value.values():
+                    yield from strings(item)
+            elif isinstance(value, list):
+                for item in value:
+                    yield from strings(item)
+
+        def visit(digest: str) -> None:
+            if digest in visiting:
+                raise ConfigurationError("scoped snapshot assessment references are cyclic")
+            if digest in selected:
+                return
+            visiting.add(digest)
+            for row in by_digest[digest]:
+                document = json.loads(row["payload_json"])
+                references: set[str] = set()
+                for value in strings(document):
+                    if len(value) == 64:
+                        if value in by_digest:
+                            references.add(value)
+                        references.update(by_identifier.get(value, set()))
+                references.discard(digest)  # Identity fields can name this document itself.
+                for field in required | ({"implementation_digest"} if row["kind"] == "boundary_probe" else set()):
+                    for value in strings(document.get(field)):
+                        matches = ({value} if value in by_digest else set()) | by_identifier.get(value, set())
+                        if not matches:
+                            raise ConfigurationError("scoped snapshot assessment dependency is missing")
+                        references.update(matches)
+                if row["kind"] == "admission":
+                    report = by_identity.get(("report", document.get("report_id")))
+                    if document.get("report_id") is not None and report is None:
+                        raise ConfigurationError("scoped snapshot admission report is missing")
+                    if report is not None:
+                        references.add(report)
+                if row["kind"] in {"plan", "recipe_case_set"}:
+                    identities = document.get("preparation_request_ids") or []
+                    if row["kind"] == "recipe_case_set" and document.get("request_id"):
+                        identities = [document["request_id"]]
+                    for identity in identities:
+                        matches = {by_identity[kind, identity] for kind in
+                                   {"recipe_materialization_request", "plan"}
+                                   if (kind, identity) in by_identity}
+                        if not matches:
+                            raise ConfigurationError("scoped snapshot preparation definition is missing")
+                        references.update(matches)
+                if row["kind"] == "plan":
+                    for identity in document.get("planning_request_ids", []):
+                        planning = by_identity.get(("planning_request", identity))
+                        if planning is None:
+                            raise ConfigurationError("scoped snapshot planning definition is missing")
+                        references.add(planning)
+                if row["kind"] == "task_codex_binding":
+                    activation = by_identity.get(("task_activation", document.get("activation_id")))
+                    if activation is None:
+                        raise ConfigurationError("scoped snapshot task activation is missing")
+                    references.add(activation)
+                for reference in references:
+                    visit(reference)
+            visiting.remove(digest)
+            selected.add(digest)
+
+        for root in roots:
+            visit(root)
+        return [row for row in rows if row["kind"] not in bulky or row["digest"] in selected]
 
     @staticmethod
     def _immutable_insert_locked(
@@ -7234,6 +7423,7 @@ class ReceiptStore:
             if existing is not None:
                 stored = ExecutionAttempt.model_validate_json(existing["payload_json"])
                 immutable = (
+                    "task_scope_digest",
                     "decision_id",
                     "prepared_id",
                     "action_digest",
@@ -7247,6 +7437,28 @@ class ReceiptStore:
                         "execution attempt ID was reused with different authority"
                     )
                 return stored
+            if attempt.task_scope_digest is not None:
+                from .models import TaskScope, utc_now
+                row = connection.execute(
+                    "SELECT r.payload_json FROM assessment_records r JOIN assessment_reviews v ON v.digest=r.digest WHERE r.kind='task_scope' AND r.digest=? AND v.revoked=0",
+                    (attempt.task_scope_digest,),
+                ).fetchone()
+                if row is None:
+                    raise ConfigurationError('task scope is paused or unavailable')
+                scope = TaskScope.model_validate_json(row[0])
+                if utc_now() >= scope.expires_at:
+                    raise ConfigurationError('task scope expired')
+                if (scope.executor_fingerprints.get(attempt.executor_id) != attempt.executor_fingerprint
+                        or attempt.side_effect.rank > scope.approval_ceiling.rank):
+                    raise ConfigurationError('attempt exceeds its exact task authority')
+                # ponytail: scan existing attempts; add a JSON-expression index if measured session volume requires it.
+                states = connection.execute(
+                    "SELECT state FROM execution_attempts WHERE json_extract(payload_json, '$.task_scope_digest')=?",
+                    (attempt.task_scope_digest,),
+                ).fetchall()
+                terminal = {'COMPLETED', 'FAILED', 'REJECTED', 'CANCELLED'}
+                if len(states) >= scope.max_attempts or any(row[0] not in terminal for row in states):
+                    raise ConfigurationError('task scope allowance exhausted or an earlier attempt needs completion/recovery')
             connection.execute(
                 """
                 INSERT INTO execution_attempts (
@@ -7313,7 +7525,7 @@ class ReceiptStore:
                     "lease_expires_at": lease_expires_at,
                     "heartbeat_at": claimed_at,
                     "version": 1,
-                    "updated_at": claimed_at,
+                    "updated_at": max(current.updated_at, claimed_at),
                 }
             )
             self._save_attempt_update_locked(connection, current, updated, reason="claimed")
@@ -7353,7 +7565,9 @@ class ReceiptStore:
             changes: dict[str, object] = {
                 "state": target_state,
                 "version": current.version + 1,
-                "updated_at": updated_at,
+                # Wall clocks can move backwards. Keep the state timestamp
+                # ordered while retaining the observed time in heartbeat_at.
+                "updated_at": max(current.updated_at, updated_at),
                 "heartbeat_at": updated_at,
             }
             optional = {

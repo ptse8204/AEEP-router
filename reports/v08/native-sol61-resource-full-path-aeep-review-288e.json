@@ -1,0 +1,81 @@
+{
+  "authority": "standing September25/27 exact review delegation;September30 unfinished tests model selection",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "definition": {
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "executor_fingerprint": "sha256:49c47fb929145732726e03c5ff15bd709e823e5bddd6bc1f23349a84a9c44fbb",
+    "scope_digest": "8c234334657c993b04c639d58007450e4e689f76522cdcddbbb9253739ba45f6",
+    "prompt_sha256": "19d8f0b59d21a78a778e45220c79987017c941e0af890a3864d440a419d953eb",
+    "input_hashes": [
+      "da738436b4bbe21328eb57a7e0c95b0bffae745d6a58e6fd862a4c0570dd187e"
+    ],
+    "native_overrides": [
+      "-c",
+      "permissions.aeep-native-task.network.enabled=false",
+      "-c",
+      "permissions.aeep-native-task.filesystem={ \":root\" = \"deny\", \":minimal\" = \"read\", \"/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/AGENTS.md\" = \"read\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/scratch\" = \"write\", \"/Users/edwintse/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.codex\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yaml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yml\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.json\" = \"deny\", \"/private/tmp\" = \"deny\", \"/private/tmp/**\" = \"deny\", \"/private/tmp{,/**}\" = \"deny\", \"/private/var/tmp\" = \"deny\", \"/private/var/tmp/**\" = \"deny\", \"/private/var/tmp{,/**}\" = \"deny\", \"/Users/edwintse/.codex/**\" = \"deny\", \"/Users/edwintse/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.codex/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.codex{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yaml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yaml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yml/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.yml{,/**}\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.json/**\" = \"deny\", \"/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.json{,/**}\" = \"deny\" }"
+    ],
+    "inherited_instruction_sha256": "ebdf6620fd29b0167c7d47c41e345c89b58643599acd2f5837540aab529d5c92",
+    "native_boundary_evidence_sha256": "64cf4195e44584f7b8400a90bd653f6ee806650ea41232869391e5d856cfa803",
+    "native_boundary_log_sha256": "2d8c9f2fe689dff0616f5e36d8d95ebc0555c9acb1357678e8f73a175dadc3b1",
+    "setup_operation_id": "native-setup:planning_native-sol61-resource-full-path-aeep-final-setup",
+    "generated_launcher": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "args": [
+        "-I",
+        "-m",
+        "aeep",
+        "serve",
+        "--transport",
+        "stdio",
+        "--profile",
+        "task",
+        "--approve",
+        "read",
+        "--task-activation",
+        "task_df37ed9ee7c34c93b4668d01eaf3c745",
+        "--manifest",
+        "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.json"
+      ],
+      "command_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0"
+    },
+    "maximum_seconds": 60,
+    "maximum_model_turns": 0,
+    "maximum_operations": 1,
+    "exploratory_resource_bounds": {
+      "host_tree_peak_rss_bytes": 1073741824,
+      "observed_host_tree_cpu_seconds": 60,
+      "elapsed_seconds": 60,
+      "retained_evidence_bytes": 8388608
+    },
+    "classification": "new zero-model native AppServer MCP tool roundtrip; fresh seed107/index1; exact generated launcher and native task child, no model exposure, planner execution or qualification",
+    "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+    "unexpected_tool_detection": "post-execution observation only, not preventative enforcement"
+  },
+  "mapping_digest": "166e4f251a86977690f9ee67d53ac2daa391fa3d16b83233f038619fb88fe423",
+  "request_digest": "67487895e7c1cdc975bea8efcd0e1e59682fafdf3f69e27440944c9796822543",
+  "driver_sha256": "56bb309fda0f152fd8c6dcb6ee74c6e93720daf1f55ed775d59dc9f7f3fe9d9f",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "sol61-resource-full-path-aeep",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh",
+    "executor_fingerprints": {
+      "native.workbook.sol61-model-journey": "sha256:49c47fb929145732726e03c5ff15bd709e823e5bddd6bc1f23349a84a9c44fbb"
+    },
+    "approval_ceiling": "read",
+    "max_attempts": 1,
+    "max_attempt_seconds": 30.0,
+    "expires_at": "2026-09-30T12:32:04.733561Z"
+  },
+  "activation": "task_df37ed9ee7c34c93b4668d01eaf3c745",
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 72,
+  "authentication": "Codex-owned; never accessed",
+  "global_configuration_changes": false,
+  "new_services": false,
+  "native_boundary_result": "native-resource-final-source-applicability.json",
+  "note": "planning request is authorization envelope only; no planner execution or managed-worker conformance"
+}

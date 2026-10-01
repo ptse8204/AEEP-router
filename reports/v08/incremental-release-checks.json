@@ -1,0 +1,104 @@
+{
+  "source_before": "1d259aa9bf5658ea6374625d34c6a9d02253e367c1dafb3b00004218832f9a1a",
+  "checks": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"campaign_id\": \"deterministic-local-economic-evidence\", \"failed_required_economic_gates\": [], \"failed_safety_invariants\": [], \"output_dir\": \"/Users/edwintse/Documents/aeep-agent-router/examples/economic_evidence\", \"repetitions\": 30, \"safety_invariants_passed\": true, \"trials\": 420}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"gates_passed\": true}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"gates_passed\": true, \"turns\": 6}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"gates_passed\": true, \"trials\": 6, \"tokens_saved_by_aeep\": -36382}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"main_cases\": 30, \"main_trials\": 90, \"requires_separate_user_approval\": true}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"gates_passed\": true}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "output_tail": "{\"package_digest\":\"sha256:96ffad39a239ed623014d6b2f5a253a845d100a1f08e82749e6b5a5faa879543\",\"integrity_status\":\"verified\",\"signatures\":[{\"signature_id\":\"fixture-publisher-signature\",\"key_id\":\"fixture-publisher\",\"status\":\"verified\",\"effective_trust\":\"verified\",\"key_source\":\"operator_trust_store\",\"failure_code\":null}],\"artifacts\":[],\"effective_identity_trust\":\"verified\",\"failure_codes\":[],\"evaluated_at\":\"2026-09-24T00:14:04.267006Z\"}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "aeep",
+        "verify",
+        "router-complete",
+        "--profile",
+        "all",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "output_tail": "s\": [\n        \"tests/test_managed_capacity_reservations.py\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:648997f94199d0e04f942496d4145cba4e8fac40910d625b5e4c3e0fa2f1100b\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"entitlement-binding\",\n      \"profile\": \"marketplace_contract\",\n      \"required\": true,\n      \"status\": \"PASS\",\n      \"test_ids\": [\n        \"tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline\"\n      ],\n      \"evidence_ids\": [\n        \"tests/test_x402_capacity_binding.py\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"openai-self-only-rejection\",\n      \"profile\": \"marketplace_contract\",\n      \"required\": true,\n      \"status\": \"PASS\",\n      \"test_ids\": [\n        \"tests/test_x402_capacity_binding.py::test_openai_self_only_fails_before_x402_serialization\"\n      ],\n      \"evidence_ids\": [\n        \"tests/test_x402_capacity_binding.py\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"provider-authorized-mock-transfer\",\n      \"profile\": \"marketplace_contract\",\n      \"required\": true,\n      \"status\": \"PASS\",\n      \"test_ids\": [\n        \"tests/test_v07_capacity.py::test_provider_authorized_entitlement_redeems_once_without_double_spend\"\n      ],\n      \"evidence_ids\": [\n        \"tests/test_v07_capacity.py\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:3becdb74a035cc777f835f26a21efb47ddddcbe80f99b91002884a37905e21cd\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"x402-local-batch-conformance\",\n      \"profile\": \"marketplace_contract\",\n      \"required\": true,\n      \"status\": \"PASS\",\n      \"test_ids\": [\n        \"tests/test_x402_capacity_binding.py::test_x402_cli_emits_valid_json_report\"\n      ],\n      \"evidence_ids\": [\n        \"reports/v07/x402-conformance.json\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:7a30477cddd9edd529a3fda099ce09d85242ae23ebf05e41918a144060f87955\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"replay-expiry-double-spend\",\n      \"profile\": \"marketplace_contract\",\n      \"required\": true,\n      \"status\": \"PASS\",\n      \"test_ids\": [\n        \"tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline\"\n      ],\n      \"evidence_ids\": [\n        \"tests/test_x402_capacity_binding.py\"\n      ],\n      \"artifact_digests\": [\n        \"sha256:5ef5fcf2e34cdc2eb1cd927033ad68159eeb7a6c9b37a0f9a2e49e5567c5c5b5\"\n      ],\n      \"reason\": \"\"\n    },\n    {\n      \"id\": \"openai-live-account-proof\",\n      \"profile\": \"openai\",\n      \"required\": false,\n      \"status\": \"SKIP\",\n      \"test_ids\": [],\n      \"evidence_ids\": [],\n      \"artifact_digests\": [],\n      \"reason\": \"requires explicit operator approval, an interactive Codex login, and permission to consume one live subscription turn\"\n    },\n    {\n      \"id\": \"live-marketplace-networking\",\n      \"profile\": \"marketplace_live\",\n      \"required\": false,\n      \"status\": \"DISABLED\",\n      \"test_ids\": [],\n      \"evidence_ids\": [],\n      \"artifact_digests\": [],\n      \"reason\": \"AEEP 0.7 ships local contracts only; live networking is disabled\"\n    }\n  ],\n  \"router_core_ready\": true,\n  \"openai_adapter_ready\": true,\n  \"openai_live_verified\": false,\n  \"marketplace_contract_ready\": true,\n  \"marketplace_live_enabled\": false,\n  \"release_ready\": true\n}\n"
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build"
+      ],
+      "exit_code": 0,
+      "output_tail": "/schemas/resume-plan.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/route-candidate.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/route-decision.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/router-completion-report.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/routing-value-report.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/settlement-evidence.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/settlement-receipt.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/signature-envelope-v2.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/signed-execution-receipt.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/smoke-test-report.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/subscription-resource.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.anthropic.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.assessment.mcp.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.deepseek.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.mcp.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.openai-chat.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.openai-responses.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/tools.zai.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/trace-profile-report.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/usage-statement.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/workflow-execution-outcome.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/workflow-request.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/x402-batch-record.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/x402-capacity-commitment.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/schemas/x402-conformance-report.schema.json'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/skills/aeep-minimal/SKILL.md'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/skills/aeep-minimal/agents/openai.yaml'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/skills/aeep-router/SKILL.md'\nadding 'aeep_agent_router-0.8.0.data/data/share/aeep/skills/aeep-router/scripts/route.sh'\nadding 'aeep_agent_router-0.8.0.dist-info/licenses/LICENSE'\nadding 'aeep_agent_router-0.8.0.dist-info/licenses/NOTICE'\nadding 'aeep_agent_router-0.8.0.dist-info/METADATA'\nadding 'aeep_agent_router-0.8.0.dist-info/WHEEL'\nadding 'aeep_agent_router-0.8.0.dist-info/entry_points.txt'\nadding 'aeep_agent_router-0.8.0.dist-info/top_level.txt'\nadding 'aeep_agent_router-0.8.0.dist-info/RECORD'\nremoving build/bdist.macosx-10.13-universal2/wheel\nSuccessfully built aeep_agent_router-0.8.0.tar.gz and aeep_agent_router-0.8.0-py3-none-any.whl\n* Creating isolated environment: venv+pip...\n* Installing packages in isolated environment:\n  - setuptools>=75\n  - wheel\n* Getting build dependencies for sdist...\n* Building sdist...\n* Building wheel from sdist\n* Creating isolated environment: venv+pip...\n* Installing packages in isolated environment:\n  - setuptools>=75\n  - wheel\n* Getting build dependencies for wheel...\n* Building wheel...\n"
+    }
+  ],
+  "source_after": "1d259aa9bf5658ea6374625d34c6a9d02253e367c1dafb3b00004218832f9a1a"
+}

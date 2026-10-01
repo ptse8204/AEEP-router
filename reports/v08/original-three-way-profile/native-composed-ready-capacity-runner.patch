@@ -1,0 +1,31 @@
+--- native-composed-current-capacity-runner.py
++++ native-composed-ready-capacity-runner.py
+@@ -105,7 +105,7 @@
+             'SELECT approved_at,revoked FROM assessment_reviews WHERE digest=?',
+             (content_digest(request),)).fetchone()
+     if (review is None or review[1]
+-            or datetime.fromisoformat(review[0]) < datetime(2026,9,30,20,9,57,tzinfo=timezone.utc)):
++            or datetime.fromisoformat(review[0]) < datetime(2026,9,30,20,43,34,tzinfo=timezone.utc)):
+         raise ConfigurationError('fresh post-capacity-observation exact request review required')
+     import aeep.router
+     loaded_root = Path(aeep.router.__file__).resolve().parents[2]
+@@ -202,8 +202,8 @@
+     """
+     if capacity_confirmed is not True:
+         raise ConfigurationError('operator capacity confirmation required')
+-    capacity_path = Path(__file__).resolve().parents[1]/'worker1592-successor/capacity-refresh-ade3-result.json'
+-    if file_digest(capacity_path) != '975bb5b330967c1110786eb8f20d3c637bf16d3a11500fdf6b5fd00cf6eb1d31':
++    capacity_path = Path(__file__).resolve().parents[1]/'worker1592-successor/capacity-refresh-composed-ready-ade3-result.json'
++    if file_digest(capacity_path) != '202657d65e6075d455d8b8d441f8dcdf846710c7be60964183c7cf186f7c6d72':
+         raise ConfigurationError('reviewed same-worker capacity observation changed')
+     import json
+     from datetime import timedelta
+@@ -214,7 +214,7 @@
+     if (not refreshed.get('cleanup_confirmed') or not refreshed.get('source_unchanged')
+             or current.get('resource_id') != 'codex.self'
+             or not current.get('windows')
+-            or any(window.get('exhausted') is not False or window.get('used_percent') != '0' for window in current['windows'])
++            or any(window.get('exhausted') is not False or window.get('used_percent') != '3' for window in current['windows'])
+             or not observed <= now < observed+timedelta(minutes=30)):
+         raise ConfigurationError('fresh reviewed same-worker capacity not available')
+     request, definition, action, spec = prepare(

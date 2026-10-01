@@ -1,0 +1,24 @@
+{
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "binary": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+  "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "coordinator-death-fixed",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/native-coordinator-death-owned-288e",
+    "executor_fingerprints": {
+      "reference.csv": "sha256:e83270c86860e29311630a9f068b541211560e2b7d7936590a3829f9a138012f"
+    },
+    "approval_ceiling": "write",
+    "max_attempts": 1,
+    "max_attempt_seconds": 10.0,
+    "expires_at": "2026-09-30T08:50:14.949978Z"
+  },
+  "capability": "assessment.csv@1",
+  "fault": "SIGKILL only owned coordinator after detached-child started marker; observe 2.5sec then identity-safe cleanup",
+  "authority": "AGENTS.md September 27 finite test amendment delegation; parent explicit September 30 instruction",
+  "model_calls": 0,
+  "cash": 0,
+  "runtime_bound_seconds": 20,
+  "expected": "no post-coordinator-death effect; durable attempt retained without replay"
+}

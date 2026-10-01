@@ -1,0 +1,91 @@
+--- a/tests/test_v08_conformance.py
++++ b/tests/test_v08_conformance.py
+@@ -463,3 +463,88 @@
+         with pytest.raises(ConfigurationError, match=r"(composed boundary|composed boundary evidence)"):
+             require_managed_boundaries(None, environment, [spec], {spec.id:"4"*64})
+     assert len(calls) == 1
++
++
++@pytest.mark.parametrize("invalid_callback", [False, True])
++async def test_composed_conformance_rejects_legacy_only_or_unbacked_callback(tmp_path, invalid_callback):
++    """Canonical fixture records never substitute for a native-issued callback."""
++    from test_v08_assessment import setup_assessment
++    from test_v08_pair_inspection import definition as paired_definition
++
++    from aeep.assessment.boundary import COMPOSED_PROBES
++    from aeep.execution import EventJournal
++    from aeep.hosts.codex_dynamic_tools import CodexDynamicTools
++    from aeep.hosts.codex_pair_inspection import ComposedPairDefinition
++    from aeep.hosts.workers import binding_from_config
++    from aeep.models import RawExecution
++    router, service, _plan, _grant = setup_assessment(tmp_path)
++    repo = service.repository
++    try:
++        pair = paired_definition(task_profile=True)
++        specs = [pair.control.model_copy(deep=True), pair.treatment.model_copy(deep=True)]
++        callbacks, backends = {}, {}
++        class CallbackDefinition(StrictModel):
++            identity: dict[str, str]
++        for role, spec in zip(("control", "treatment"), specs, strict=True):
++            worker = binding_from_config(spec.managed_host_config().managed_worker)
++            backend = content_digest(ReviewedDefinition(purpose="synthetic native binding " + role))
++            identity = {"worker_digest":worker.digest(), "native_backend_digest":backend,
++                "implementation_digest":CodexDynamicTools.implementation_digest()}
++            callback = repo.put("codex_dynamic_tools", role, CallbackDefinition(identity=identity))
++            repo.review(callback)
++            callbacks[worker.digest()] = callback
++            backends[worker.digest()] = backend
++            spec.config["invocation"] = {"mode":"turn" if role == "control" else "dynamic_tool",
++                "local_profile":"capable_local", "dynamic_tools_digest":callback,
++                **({"server":"fixture", "tool":"fixed", "tool_sha256":"a"*64} if role == "treatment" else {})}
++        composite = ComposedPairDefinition(control=specs[0], treatment=specs[1],
++            differential=pair.differential, shared_versions=pair.shared_versions,
++            callback_bindings=callbacks, native_backends=backends)
++        composite_ref = repo.put("composed_pair_definition", "fixture-composite", composite)
++        repo.review(composite_ref)
++        worker = binding_from_config(specs[0].managed_host_config().managed_worker)
++        repo.review(repo.put("worker_binding", worker.digest(), worker))
++        reviewed = []
++        for name in ("enforcement", "effective-policy", "inventory"):
++            ref = repo.put("definition", name, ReviewedDefinition(purpose=name))
++            repo.review(ref)
++            reviewed.append(ref)
++        expected = {"synthetic":True}
++        journal = EventJournal("synthetic-composed")
++        journal.append("artifact.created", "fixed-synthetic", evidence_ref=content_digest(expected))
++        journal.append("execution.completed", "fixed-terminal")
++        evidence = journal.evidence("fixture", RawExecution(status="success",
++            metadata={"boundary_digest":worker.digest()}))
++        evidence_ref = repo.put("execution_evidence", content_digest(evidence), evidence)
++        probes = []
++        names = REQUIRED_PROBES | {"candidate_access"}
++        if invalid_callback:
++            names |= COMPOSED_PROBES
++        for name in sorted(names):
++            definition = BoundaryProbeDefinition(name=name, executor=ExecutorSpec(
++                id="synthetic", capability="probe", kind="command", description="Never launched",
++                config={"argv":[sys.executable,"-c","pass"]}), expected=expected)
++            ref = repo.put("boundary_probe_definition", name, definition)
++            repo.review(ref)
++            probe = BoundaryProbe(probe_id=name, name=name, implementation_digest=ref,
++                worker_digest=worker.digest(), execution_evidence_digest=evidence_ref, observed=expected)
++            probes.append(repo.put("boundary_probe", name, probe))
++        record = BoundaryConformance(schema_version="assessment.boundary-conformance.v3",
++            conformance_id="synthetic", source_digest="1"*64, worker_digest=worker.digest(),
++            image_digest=worker.image, binary_digest=worker.binary_sha256, adapter="codex-app-server:control",
++            adapter_version="1", effective_policy_digest=reviewed[1], reviewed_inventory_digest=reviewed[2],
++            identity_digest="2"*64, enforcement_definition_digest=reviewed[0], advertised_tools=[],
++            permitted_tools=[], used_tools=[], probe_digests=probes, configuration_digest=worker.configuration_digest,
++            effective_inventory={}, callback_binding_digest=callbacks[worker.digest()],
++            native_backend_digest=backends[worker.digest()], composed_definition_digest=composite_ref)
++        ref = repo.put("boundary_conformance", "fixture", record)
++        error = "host receipt is missing" if invalid_callback else "required probes missing"
++        with pytest.raises(ConfigurationError, match=error):
++            require_conformance(repo, ref, source_digest="1"*64, worker_digest=worker.digest(), identity_digest="2"*64)
++        # Matching reviewed strings cannot authorize a different native backend.
++        wrong = record.model_copy(update={"conformance_id":"wrong-backend", "native_backend_digest":"0"*64})
++        wrong_ref = repo.put("boundary_conformance", "wrong-backend", wrong)
++        with pytest.raises(ConfigurationError, match="backend or worker binding differs"):
++            require_conformance(repo, wrong_ref, source_digest="1"*64, worker_digest=worker.digest(), identity_digest="2"*64)
++    finally:
++        await router.close()

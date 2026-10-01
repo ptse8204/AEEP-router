@@ -1,0 +1,152 @@
+{
+  "source_before": "cd21b218c9b9beac1900aacbb4ede3347f310f9efc677c3d72637e5416b70a99",
+  "source_after": "cd21b218c9b9beac1900aacbb4ede3347f310f9efc677c3d72637e5416b70a99",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07695770799182355,
+      "log": "reports/v08/environment-stop-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6199303750181571,
+      "log": "reports/v08/environment-stop-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.0786383330123499,
+      "log": "reports/v08/environment-stop-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3731513749808073,
+      "log": "reports/v08/environment-stop-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13290470791980624,
+      "log": "reports/v08/environment-stop-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 363.8512824579375,
+      "log": "reports/v08/environment-stop-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 495.2557118330151,
+      "log": "reports/v08/environment-stop-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0573694159975275,
+      "log": "reports/v08/environment-stop-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/environment-stop-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3339768330333754,
+      "log": "reports/v08/environment-stop-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/environment-stop-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.040848499978892505,
+      "log": "reports/v08/environment-stop-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/environment-stop-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03993962495587766,
+      "log": "reports/v08/environment-stop-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1597791670355946,
+      "log": "reports/v08/environment-stop-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07802958402317017,
+      "log": "reports/v08/environment-stop-check-12.txt"
+    }
+  ]
+}

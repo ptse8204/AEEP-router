@@ -1,0 +1,36 @@
+import asyncio,json,time
+from pathlib import Path
+from aeep.router import Router
+from aeep.models import Manifest
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentPlan,AssessmentEnvironment,AssessmentAuthorization,AssessmentScopeAmendment,RecipeDefinition,AssessmentSetupCost,content_digest
+from aeep.assessment.extensions import prepare
+from aeep.assessment.onboarding import reference_spec
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection
+async def main():
+ p=Path('reports/v08');base=Path('.aeep/live-review-v3');started=time.perf_counter();cpu=time.process_time();r=Router.from_manifest(base/'workbook-four-arm-final.json')
+ try:
+  s=AssessmentService(r,base/'.aeep/assessments');repo=s.repository;prior=AssessmentPlan.model_validate(repo.get('plan','plan_032f55bc64cc4c168501898224e8c0f0'))
+  recipe=RecipeDefinition.model_validate(repo.get('recipe',prior.recipe_digest));assert recipe.extension
+  bindings={};main_assembly=None
+  for label in ('value','higher','reusable'):
+   b=json.loads((p/f'{label}-four-arm-final-profile-review-bundle.json').read_text());a=json.loads((p/f'{label}-four-arm-final-profile-assembly.json').read_text());d=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][0]['pair_definition_digest']))
+   bindings[d.control.id]=a['boundary_conformance_digests']['control']
+   if label=='value':bindings[d.treatment.id]=a['boundary_conformance_digests']['treatment'];main_assembly=a
+  env=AssessmentEnvironment(environment_id='workbook-four-arm-value-final',kind='container',identity={'purpose':'Fresh four-arm workbook marginal-value comparison plus separate deterministic reference; offline generator/grader'},container_image='sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228',container_runtime='/usr/local/bin/docker',container_socket='/Users/edwintse/.docker/run/docker.sock',memory_mb=512,conformance_digests=bindings,differential_conformance_digest=main_assembly['differential_conformance_digest'])
+  request=prepare(s,subject_id=prior.subject_digest,recipe_id=prior.recipe_digest,authorization_id='onboarding',environment=env,seed=202609281)
+  ds=set(request.definition_digests)|{request.subject_digest};definitions={d:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(d,)).fetchone()[0]) for d in ds}
+  root=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(root),subject_digests=[request.subject_digest],recipe_digests=[request.recipe_digest],environment_digests=[request.environment_digest],reviewed_digests=sorted(definitions))
+  review={'authority':'2026-09-27 delegated routine reviews and execution','purpose':'Generate fresh 8/28/105 workbook value-stage fixtures in the existing offline container. These cases are inaccessible to trial workers until individually assigned. No comparative execution before qualification passes.','request':request.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'model_turns':0,'maximum_operations':1,'maximum_elapsed_seconds':35}
+  with (p/'workbook-value-final-materialization-review.json').open('x') as f:json.dump(review,f,indent=2);f.write('\n')
+  repo.approve_bundle(amendment,definitions)
+  reference=recipe.extension.reference.model_copy(deep=True);reference.id='reference.'+prior.recipe_digest
+  reference.input_schema=recipe.input_schema;reference.output_schema=recipe.output_schema
+  reference.config['assessment_adapter']={'input_template':{'inputs':['{input}']},'target_input_schema':{'type':'object','required':['inputs'],'properties':{'inputs':{'type':'array','items':recipe.input_schema,'minItems':1,'maxItems':1}},'additionalProperties':False},'output_pointer':'/outputs/0'}
+  reference.estimate.cash=reference_spec('csv').estimate.cash.model_copy(deep=True)
+  raw=json.loads((base/'workbook-four-arm-final.json').read_text());raw['executors'].append(reference.model_dump(mode='json'));manifest=Manifest.model_validate(raw)
+  with (base/'workbook-four-arm-reference-final.json').open('x') as f:f.write(manifest.model_dump_json(indent=2))
+  cost=AssessmentSetupCost(subject_digest=prior.subject_digest,stage='value_reference_mapping_preparation',elapsed_seconds=time.perf_counter()-started,cpu_ms=(time.process_time()-cpu)*1000);repo.put('setup_cost',cost.cost_id,cost)
+  print(json.dumps({'request_id':request.plan_id,'environment_digest':request.environment_digest,'reference_id':reference.id,'setup_cost_id':cost.cost_id}))
+ finally:await r.close()
+asyncio.run(main())

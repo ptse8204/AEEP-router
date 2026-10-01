@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/worker1592-successor/prepare-pilot-workflow-46803.py", line 17, in <module>
+    r.managed_hosts.configure([ExecutorSpec.model_validate(pair[role]) for role in ("control","treatment")],principal_salt=r.store.principal_salt,manifest_directory=r.manifest_path.parent)
+                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ReceiptStore' object has no attribute 'principal_salt'

@@ -1,0 +1,121 @@
+........s.......F.................ss                                     [100%]
+=================================== FAILURES ===================================
+_______ test_project_mcp_launch_uses_only_reviewed_scope_ceiling[write] ________
+
+self = <aeep.router.Router object at 0x1097af9d0>
+spec = ExecutorSpec(id='reference.csv', capability='assessment.csv@1', kind=<ExecutorKind.COMMAND: 'command'>, description='C...single_process': False, 'python_binary': None, 'python_sha256': None}, 'timeout_seconds': 1}, required_capabilities=())
+
+    def _require_task_scope(self, spec: ExecutorSpec, *, activating: bool = False) -> None:
+        if self._task_scope_digest is None:
+            return
+        from .models import TaskScope
+        with self.store._lock:
+            row = self.store._connection.execute(
+                "SELECT r.payload_json FROM assessment_records r JOIN assessment_reviews v ON v.digest=r.digest WHERE r.kind='task_scope' AND r.digest=? AND v.revoked=0",
+                (self._task_scope_digest,),
+            ).fetchone()
+        if row is None:
+            raise NoRouteError('task scope is paused or unavailable')
+        scope = TaskScope.model_validate_json(row[0])
+        if utc_now() >= scope.expires_at or scope.executor_fingerprints.get(spec.id) != executor_fingerprint(spec):
+            raise NoRouteError('task scope expired or executor is outside its exact reviewed scope')
+        if spec.side_effect.rank > scope.approval_ceiling.rank:
+            raise NoRouteError('task scope permission or resource bound exceeded')
+        controls = [Path(self.store.path).parent]
+        if self.manifest_path is not None:
+            controls.append(self.manifest_path)
+        try:
+>           self._executor_for(spec.kind, spec).require_task_scope(scope, spec, controls, activating=activating)
+
+src/aeep/router.py:5406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.executors.command.CommandExecutor object at 0x109934e60>
+scope = TaskScope(schema_version='aeep.task-scope.v1', scope_id='approval-launch', project_root='/private/var/folders/_g/bvzl9...ax_attempts=5, max_attempt_seconds=1.0, expires_at=datetime.datetime(2026, 9, 30, 9, 43, 18, 517107, tzinfo=TzInfo(0)))
+spec = ExecutorSpec(id='reference.csv', capability='assessment.csv@1', kind=<ExecutorKind.COMMAND: 'command'>, description='C...single_process': False, 'python_binary': None, 'python_sha256': None}, 'timeout_seconds': 1}, required_capabilities=())
+control_paths = [PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-693/test_project_mcp_la.../folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-693/test_project_mcp_launch_uses_o1/aeep.json')]
+
+    def require_task_scope(self, scope: TaskScope, spec: ExecutorSpec, control_paths: list[Path], *, activating: bool = False) -> None:
+        from ..hosts.codex_sandbox import NativeSandboxConfig
+        if 'native_sandbox' not in spec.config or 'assessment_workflow' in spec.config:
+            raise ConfigurationError('task scope v1 requires a native sandbox command')
+>       boundary = NativeSandboxConfig.model_validate(spec.config['native_sandbox'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for NativeSandboxConfig
+E         Value error, native writes require explicit project subdirectories [type=value_error, input_value={'schema_version': 'codex..., 'python_sha256': None}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+src/aeep/executors/command.py:110: ValidationError
+
+The above exception was the direct cause of the following exception:
+
+project = (PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-693/test_project_mcp_la..., max_attempt_seconds=1.0, expires_at=datetime.datetime(2026, 9, 30, 9, 43, 18, 517107, tzinfo=datetime.timezone.utc)))
+ceiling = <SideEffect.WRITE: 'write'>
+
+    @pytest.mark.parametrize("ceiling", [SideEffect.READ, SideEffect.WRITE])
+    async def test_project_mcp_launch_uses_only_reviewed_scope_ceiling(project, ceiling):
+        manifest_path, original_scope = project
+        manifest = Manifest.model_validate_json(manifest_path.read_text())
+        effect = manifest_path.parent / "owned-write-effect"
+        config = dict(manifest.executors[0].config)
+        if ceiling == SideEffect.WRITE:
+            config["argv"] = [sys.executable, "-I", "-c",
+                "import pathlib,json,sys; pathlib.Path(sys.argv[1]).write_text('written'); print(json.dumps({'records':[]}))",
+                str(effect)]
+            config["native_sandbox"]["write_roots"] = [str(manifest_path.parent)]
+        spec = manifest.executors[0].model_copy(update={"side_effect": ceiling, "config": config})
+        manifest = manifest.model_copy(update={"executors": [spec], "policies": {
+            "balanced": PolicyConfig(name="balanced", constraints=ActionConstraints(max_side_effect=ceiling))}})
+        manifest_path.write_text(manifest.model_dump_json())
+        router = Router.from_manifest(manifest_path)
+        scope = original_scope.model_copy(update={"scope_id": "approval-launch", "approval_ceiling": ceiling,
+            "executor_fingerprints": {spec.id: executor_fingerprint(spec)}})
+        repo = AssessmentRepository(router.store)
+        repo.review(repo.put("task_scope", scope.scope_id, scope))
+        try:
+>           activation = activate(router, scope.scope_id)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_task_lifecycle.py:470: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/tasks.py:134: in activate
+    _scope_ready(router, content_digest(scope))
+src/aeep/tasks.py:127: in _scope_ready
+    router._require_active_spec(spec, check_activation=False)
+src/aeep/router.py:5414: in _require_active_spec
+    self._require_task_scope(spec)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.router.Router object at 0x1097af9d0>
+spec = ExecutorSpec(id='reference.csv', capability='assessment.csv@1', kind=<ExecutorKind.COMMAND: 'command'>, description='C...single_process': False, 'python_binary': None, 'python_sha256': None}, 'timeout_seconds': 1}, required_capabilities=())
+
+    def _require_task_scope(self, spec: ExecutorSpec, *, activating: bool = False) -> None:
+        if self._task_scope_digest is None:
+            return
+        from .models import TaskScope
+        with self.store._lock:
+            row = self.store._connection.execute(
+                "SELECT r.payload_json FROM assessment_records r JOIN assessment_reviews v ON v.digest=r.digest WHERE r.kind='task_scope' AND r.digest=? AND v.revoked=0",
+                (self._task_scope_digest,),
+            ).fetchone()
+        if row is None:
+            raise NoRouteError('task scope is paused or unavailable')
+        scope = TaskScope.model_validate_json(row[0])
+        if utc_now() >= scope.expires_at or scope.executor_fingerprints.get(spec.id) != executor_fingerprint(spec):
+            raise NoRouteError('task scope expired or executor is outside its exact reviewed scope')
+        if spec.side_effect.rank > scope.approval_ceiling.rank:
+            raise NoRouteError('task scope permission or resource bound exceeded')
+        controls = [Path(self.store.path).parent]
+        if self.manifest_path is not None:
+            controls.append(self.manifest_path)
+        try:
+            self._executor_for(spec.kind, spec).require_task_scope(scope, spec, controls, activating=activating)
+        except (ConfigurationError, ValueError) as exc:
+>           raise NoRouteError(str(exc)) from exc
+E           aeep.errors.NoRouteError: 1 validation error for NativeSandboxConfig
+E             Value error, native writes require explicit project subdirectories [type=value_error, input_value={'schema_version': 'codex..., 'python_sha256': None}, input_type=dict]
+E               For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+src/aeep/router.py:5408: NoRouteError
+=========================== short test summary info ============================
+FAILED tests/test_v08_task_lifecycle.py::test_project_mcp_launch_uses_only_reviewed_scope_ceiling[write]

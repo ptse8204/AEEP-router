@@ -1,0 +1,16 @@
+{
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "model_calls": 0,
+  "config": "[analytics]\nenabled = false\n[otel]\nexporter = \"none\"\ntrace_exporter = \"none\"\nmetrics_exporter = \"aeep-invalid\"\nlog_user_prompt = false\n",
+  "elapsed_seconds": 0.24190633289981633,
+  "exit_code": 0,
+  "observation": {
+    "initialize_response": null,
+    "exit_code": 1,
+    "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir \"/tmp\" (codex_home: AbsolutePathBuf(\"/tmp/config-probe\"))\nError: /tmp/config-probe/config.toml:6:20: unknown variant `aeep-invalid`, expected one of `none`, `statsig`, `otlp-http`, `otlp-grpc`\n"
+  },
+  "launcher_error": ""
+}

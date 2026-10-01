@@ -1,0 +1,659 @@
+{
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "review_sha256": "499f9001ca43846be823d82774e494af3a567b7a513f694cd3a1715c210b13a1",
+  "samples": [
+    {
+      "phase": "idle_host",
+      "operation_id": "native-profile:planning_native_resource_lifecycle_profile_5fff:idle_host",
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "owned_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-toilhy5p",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model_turns": 0,
+      "phases": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.2875068932771683e-05,
+          "controller": {
+            "cpu_seconds": 0.35066474400000003,
+            "rss_bytes": 94289920
+          },
+          "project_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.02565904101356864,
+          "controller": {
+            "cpu_seconds": 0.37283077600000003,
+            "rss_bytes": 99090432
+          },
+          "project_storage": {
+            "logical_bytes": 1025696,
+            "allocated_bytes": 1028096,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.14373554103076458,
+          "controller": {
+            "cpu_seconds": 0.490112384,
+            "rss_bytes": 101711872
+          },
+          "project_storage": {
+            "logical_bytes": 1083893,
+            "allocated_bytes": 1089536,
+            "files": 5
+          },
+          "config_storage": {
+            "logical_bytes": 608,
+            "allocated_bytes": 4096,
+            "files": 1
+          }
+        },
+        {
+          "phase": "native_host_and_own_mcp_ready",
+          "elapsed_seconds": 1.8993541251402348,
+          "controller": {
+            "cpu_seconds": 1.2783110400000002,
+            "rss_bytes": 103366656
+          },
+          "project_storage": {
+            "logical_bytes": 1092133,
+            "allocated_bytes": 2142208,
+            "files": 5
+          },
+          "config_storage": {
+            "logical_bytes": 608,
+            "allocated_bytes": 4096,
+            "files": 1
+          }
+        },
+        {
+          "phase": "idle_3_seconds_complete",
+          "elapsed_seconds": 4.900878583081067,
+          "controller": {
+            "cpu_seconds": 3.451821824,
+            "rss_bytes": 103366656
+          },
+          "project_storage": {
+            "logical_bytes": 1092133,
+            "allocated_bytes": 2142208,
+            "files": 5
+          },
+          "config_storage": {
+            "logical_bytes": 608,
+            "allocated_bytes": 4096,
+            "files": 1
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 4.9130018330179155,
+          "controller": {
+            "cpu_seconds": 3.4636771200000003,
+            "rss_bytes": 103301120
+          },
+          "project_storage": {
+            "logical_bytes": 946176,
+            "allocated_bytes": 983040,
+            "files": 2
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        }
+      ],
+      "backend_digest": "7c858d0d829170c716a750642059e5a02427b8fe7eac0f633ee2993d8f993a47",
+      "scope_digest": "64e71450893ec5ad9aa11599121d5e62e2189bb0aabc977f7a79835e630d9464",
+      "executor_fingerprint": "sha256:24d83f5523e3a5fc9feec9af46c234f7016d0563002c57ca6b7d8bbcd514a443",
+      "schema_bytes": 15202,
+      "setup_seconds": 0.14271245803683996,
+      "setup_controller_before": {
+        "cpu_seconds": 0.35157433000000005,
+        "rss_bytes": 94584832
+      },
+      "setup_controller_after": {
+        "cpu_seconds": 0.490053088,
+        "rss_bytes": 101711872
+      },
+      "native_permission_ack": "aeep-native-task",
+      "inventory": [
+        {
+          "name": "aeep_task_12abe87c4aae441fad1adb1de2fbec80",
+          "tools": [
+            "aeep_recipe_f468b36bc594"
+          ]
+        },
+        {
+          "name": "code-review",
+          "tools": []
+        },
+        {
+          "name": "codex_app",
+          "tools": []
+        },
+        {
+          "name": "computer-use",
+          "tools": []
+        },
+        {
+          "name": "cua_repl",
+          "tools": [
+            "js",
+            "js_reset",
+            "turn_ended"
+          ]
+        },
+        {
+          "name": "node_repl",
+          "tools": [
+            "js",
+            "js_add_node_module_dir",
+            "js_reset",
+            "turn_ended"
+          ]
+        },
+        {
+          "name": "shortlist",
+          "tools": [
+            "add_to_queue",
+            "bot_control",
+            "get_application_status",
+            "get_applied_jobs",
+            "manage_profile",
+            "manage_queue",
+            "manage_resumes",
+            "prefill_job",
+            "search_jobs"
+          ]
+        },
+        {
+          "name": "sweet-saver-fare",
+          "tools": []
+        },
+        {
+          "name": "tunnelMcp",
+          "tools": [
+            "connect_stdio_mcp",
+            "create_tunnel_runtime",
+            "install_or_select_tunnel_client",
+            "list_runtime_aliases",
+            "runtime_status",
+            "stop_runtime"
+          ]
+        }
+      ],
+      "own_server_tool_error_present": false,
+      "host_ready_seconds": 1.755179583095014,
+      "idle_native_tree_metrics": {
+        "cpu_ms": 1195.3744949999998,
+        "peak_memory_mb": 382.74609375,
+        "memory_mb_seconds": 1134.2860243420546
+      },
+      "idle_seconds": 3.0010695001110435,
+      "idle_cpu_semantics": "Existing monitor max concurrent cumulative CPU retained separately; identity-matched sampled delta below excludes unavailable/reused/missed identities.",
+      "idle_identity_matched_cpu_delta_seconds": 0.01964159199999997,
+      "idle_cpu_identity_count": 6,
+      "idle_missed_identity_cost_unknown": true,
+      "measurement_completed": true,
+      "native_tree_whole_host_metrics": {
+        "cpu_ms": 1909.049833,
+        "peak_memory_mb": 596.23046875,
+        "memory_mb_seconds": 1916.3860348923945
+      },
+      "owned_survivors_cleaned": [],
+      "uninstall": {
+        "activation_id": "task_12abe87c4aae441fad1adb1de2fbec80",
+        "activation_digest": "5ddb395b3c4c872d21e55193bed7dee9122ff4d65c7c0c8f5d5a5f981f2d4b55",
+        "scope_digest": "64e71450893ec5ad9aa11599121d5e62e2189bb0aabc977f7a79835e630d9464",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-toilhy5p/.aeep/task-profiles/task_12abe87c4aae441fad1adb1de2fbec80.json",
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-toilhy5p/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-toilhy5p/.codex/config.toml",
+        "retained_artifacts": [
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-toilhy5p/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 0,
+        "attempts_remaining": 1,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "uninstall_overlay": "absent",
+      "cleanup_errors": [],
+      "elapsed_seconds": 4.913001124979928,
+      "source_unchanged": true,
+      "network_provider_shared_cache_unknown": true,
+      "parent_owned_survivors_cleaned": [],
+      "parent_owned_survivors_remaining": [],
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 4640.350110999999,
+        "peak_memory_mb": 694.44921875,
+        "memory_mb_seconds": 2428.3575359942715
+      },
+      "partial_finalization_errors": [],
+      "retained_evidence_storage": {
+        "logical_bytes": 946176,
+        "allocated_bytes": 946176,
+        "files": 2
+      },
+      "elapsed_inclusive_seconds": 5.341687540989369,
+      "owned_transient_removed": true
+    },
+    {
+      "phase": "cold_command",
+      "operation_id": "native-profile:planning_native_resource_lifecycle_profile_5fff:cold_command",
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "owned_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-bsm93a72",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model_turns": 0,
+      "phases": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.2333039194345474e-05,
+          "controller": {
+            "cpu_seconds": 0.36850146,
+            "rss_bytes": 94502912
+          },
+          "project_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.02313637500628829,
+          "controller": {
+            "cpu_seconds": 0.391004236,
+            "rss_bytes": 99319808
+          },
+          "project_storage": {
+            "logical_bytes": 1025696,
+            "allocated_bytes": 1028096,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.13870387501083314,
+          "controller": {
+            "cpu_seconds": 0.506259496,
+            "rss_bytes": 100859904
+          },
+          "project_storage": {
+            "logical_bytes": 1083893,
+            "allocated_bytes": 1089536,
+            "files": 5
+          },
+          "config_storage": {
+            "logical_bytes": 608,
+            "allocated_bytes": 4096,
+            "files": 1
+          }
+        },
+        {
+          "phase": "cold_task_verified",
+          "elapsed_seconds": 0.6396409580484033,
+          "controller": {
+            "cpu_seconds": 0.825908704,
+            "rss_bytes": 104923136
+          },
+          "project_storage": {
+            "logical_bytes": 1384653,
+            "allocated_bytes": 1388544,
+            "files": 5
+          },
+          "config_storage": {
+            "logical_bytes": 608,
+            "allocated_bytes": 4096,
+            "files": 1
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 0.6432917499914765,
+          "controller": {
+            "cpu_seconds": 0.829054688,
+            "rss_bytes": 104923136
+          },
+          "project_storage": {
+            "logical_bytes": 950272,
+            "allocated_bytes": 950272,
+            "files": 2
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        }
+      ],
+      "backend_digest": "62e936f76dd19d2b33a8d8b3ececa9a74b3c75e3c4fa51bafdbdc3ca0d0318b9",
+      "scope_digest": "276738e2f33a34da5e9996fb5dea3b812e05ea1f7d7f651869cedc744cd43ad5",
+      "executor_fingerprint": "sha256:4fe60f4b6e7f05b390d38c1aacc9e850c378d0f6506beb7e49a290e988114544",
+      "schema_bytes": 15202,
+      "setup_seconds": 0.13770983298309147,
+      "setup_controller_before": {
+        "cpu_seconds": 0.369436172,
+        "rss_bytes": 94879744
+      },
+      "setup_controller_after": {
+        "cpu_seconds": 0.5062399320000001,
+        "rss_bytes": 100859904
+      },
+      "cold_dispatch_seconds": 0.49891437496989965,
+      "required_success": true,
+      "receipt": {
+        "receipt_id": "rcpt_34544c30ff8a4b1a979601c65a187ce4",
+        "task_valid": true,
+        "recorded_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 458.93062511458993,
+          "cpu_ms": 214.119372,
+          "memory_mb_seconds": 28.62796879533198,
+          "peak_memory_mb": 150.15625,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 1829,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      "independent_grader_valid": true,
+      "measurement_completed": true,
+      "owned_survivors_cleaned": [],
+      "uninstall": {
+        "activation_id": "task_f21ee25bf22647ca9d8dcecfed4ba468",
+        "activation_digest": "e34bcd3ca7643e30b2b770621475ad12aac035ed090ed21d5d36e62b39c0e43f",
+        "scope_digest": "276738e2f33a34da5e9996fb5dea3b812e05ea1f7d7f651869cedc744cd43ad5",
+        "reviewed": false,
+        "scope_reviewed": true,
+        "overlay": "absent",
+        "owned_files": [
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-bsm93a72/.aeep/task-profiles/task_f21ee25bf22647ca9d8dcecfed4ba468.json",
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-bsm93a72/.aeep/task-profiles/codex-config.lock"
+        ],
+        "codex_mcp_entry": "absent",
+        "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-bsm93a72/.codex/config.toml",
+        "retained_artifacts": [
+          "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-bsm93a72/.aeep/task-profiles/codex-config.lock"
+        ],
+        "persistent_host_changes": [],
+        "scope_expired": false,
+        "attempts_used": 1,
+        "attempts_remaining": 0,
+        "recovery_attempts": [],
+        "lifecycle": "session-scoped",
+        "accounting_retained": true
+      },
+      "uninstall_overlay": "absent",
+      "cleanup_errors": [],
+      "elapsed_seconds": 0.6432907080743462,
+      "source_unchanged": true,
+      "network_provider_shared_cache_unknown": true,
+      "parent_owned_survivors_cleaned": [],
+      "parent_owned_survivors_remaining": [],
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 1026.1822419999999,
+        "peak_memory_mb": 249.703125,
+        "memory_mb_seconds": 119.27691307807982
+      },
+      "partial_finalization_errors": [],
+      "retained_evidence_storage": {
+        "logical_bytes": 1896448,
+        "allocated_bytes": 1896448,
+        "files": 4
+      },
+      "elapsed_inclusive_seconds": 1.0884891669265926,
+      "owned_transient_removed": true
+    },
+    {
+      "phase": "failure_recovery",
+      "operation_id": "native-profile:planning_native_resource_lifecycle_profile_5fff:failure_recovery",
+      "cleanup_confirmed": true,
+      "accounting_finished": true,
+      "owned_root": "/Users/edwintse/Documents/aeep-agent-router/aeep-owned-current-profile-uftf9m_z",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model_turns": 0,
+      "phases": [
+        {
+          "phase": "cold_child_after_imports",
+          "elapsed_seconds": 1.1250143870711327e-05,
+          "controller": {
+            "cpu_seconds": 0.357486712,
+            "rss_bytes": 94158848
+          },
+          "project_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "reviewed_before_activation",
+          "elapsed_seconds": 0.018340750131756067,
+          "controller": {
+            "cpu_seconds": 0.375050336,
+            "rss_bytes": 98172928
+          },
+          "project_storage": {
+            "logical_bytes": 873256,
+            "allocated_bytes": 876544,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "activated_or_bound",
+          "elapsed_seconds": 0.01859679212793708,
+          "controller": {
+            "cpu_seconds": 0.375285216,
+            "rss_bytes": 98189312
+          },
+          "project_storage": {
+            "logical_bytes": 873256,
+            "allocated_bytes": 876544,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "failed_write_unresolved",
+          "elapsed_seconds": 0.3398963341023773,
+          "controller": {
+            "cpu_seconds": 0.624033464,
+            "rss_bytes": 100958208
+          },
+          "project_storage": {
+            "logical_bytes": 1174016,
+            "allocated_bytes": 1175552,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "closed_unresolved",
+          "elapsed_seconds": 0.3424001671373844,
+          "controller": {
+            "cpu_seconds": 0.6255789279999999,
+            "rss_bytes": 100925440
+          },
+          "project_storage": {
+            "logical_bytes": 815104,
+            "allocated_bytes": 815104,
+            "files": 1
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "reconciled_after_restart",
+          "elapsed_seconds": 0.35212983400560915,
+          "controller": {
+            "cpu_seconds": 0.634674608,
+            "rss_bytes": 101253120
+          },
+          "project_storage": {
+            "logical_bytes": 901464,
+            "allocated_bytes": 905216,
+            "files": 3
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        },
+        {
+          "phase": "closed_final",
+          "elapsed_seconds": 0.3525826670229435,
+          "controller": {
+            "cpu_seconds": 0.635082696,
+            "rss_bytes": 101220352
+          },
+          "project_storage": {
+            "logical_bytes": 815104,
+            "allocated_bytes": 815104,
+            "files": 1
+          },
+          "config_storage": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0
+          }
+        }
+      ],
+      "backend_digest": "fd80b8e97c0b522418a6e9c60032191dca8e13ac3157e2ff6c1f9705b5f389e8",
+      "scope_digest": "f601bd5c4f3373e385c7fac4f07d2f750965a9450d2bfeee6b49e3957838a7a1",
+      "executor_fingerprint": "sha256:12f6a9f03e443488f073c4b755f98f591c14c50ebcc210922dcc15c5e1168e15",
+      "setup_seconds": 0.017678875010460615,
+      "setup_controller_before": {
+        "cpu_seconds": 0.358344256,
+        "rss_bytes": 94552064
+      },
+      "setup_controller_after": {
+        "cpu_seconds": 0.37527076400000003,
+        "rss_bytes": 98189312
+      },
+      "failed_dispatch_seconds": 0.32114700018428266,
+      "failed_receipt_id": "rcpt_c846bc0778264042b59309ef2e92e9c1",
+      "failed_effect_sha256": "0acc2ec023b9b7d04f9dda3a9cf36cdca86a8e678ce845e09da6f6f5c77f41b7",
+      "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+      "reconciliation": {
+        "attempt_id": "attempt_913824f72c3b491795cca866324df26a",
+        "state": "FAILED",
+        "reconciliation_digest": "ce12eb9a61fd457bd61c6e78dd74e02227e92a501cbddbc009589e5b32a8b8b2",
+        "evidence_origin": "operator-reviewed inspection",
+        "automated_verification": false,
+        "allowance_reset": false
+      },
+      "recovery_seconds": 0.008587625110521913,
+      "measurement_completed": true,
+      "owned_survivors_cleaned": [],
+      "cleanup_errors": [],
+      "elapsed_seconds": 0.35258204210549593,
+      "source_unchanged": true,
+      "network_provider_shared_cache_unknown": true,
+      "parent_owned_survivors_cleaned": [],
+      "parent_owned_survivors_remaining": [],
+      "assessment_child_plus_owned_tree_metrics": {
+        "cpu_ms": 721.7348800000001,
+        "peak_memory_mb": 228.671875,
+        "memory_mb_seconds": 70.20335742826501
+      },
+      "partial_finalization_errors": [],
+      "retained_evidence_storage": {
+        "logical_bytes": 3526656,
+        "allocated_bytes": 3526656,
+        "files": 6
+      },
+      "elapsed_inclusive_seconds": 0.7865097080357373,
+      "owned_transient_removed": true
+    }
+  ],
+  "model_turns": 0,
+  "ambient_lab": "Docker API/timeouts and optional lab cleanup unknown; no quietness claim",
+  "release_ready": false,
+  "grant_before": [
+    8676,
+    2546,
+    75250.99812273495,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "dependency_hashes_unchanged": true,
+  "grant_after": [
+    8679,
+    2546,
+    75258.2148091509,
+    "0.0"
+  ],
+  "main_close_succeeded": true,
+  "completed": true
+}

@@ -4,7 +4,7 @@ AEEP 0.5 adds portable signed provider evidence while retaining provider-neutral
 blockchain, transferable token, public storefront, payment custodian, provider
 payout service, or autonomous tool marketplace.
 
-AEEP 0.7 additionally defines a provider-neutral capacity entitlement and an
+AEEP 0.7 also defines a provider-neutral capacity entitlement and an
 offline `aeep-local` x402 batch mapping. The mapping commits, accumulates, and
 reconciles already-authorized capacity records only. It is disabled by default,
 performs no network call or value movement, and rejects `SELF_ONLY` resources
@@ -51,7 +51,7 @@ Provider-advertised URLs do not grant authority. Unknown providers and keys are
 untrusted. The local deterministic reference service deliberately permits
 loopback HTTP only when the operator starts it; its test key is public material.
 
-## Evidence, not truth by signature
+## What signatures establish
 
 Ed25519 signatures make offer, quote, usage, and aggregate tampering detectable
 and bind statements to a trusted provider identity. They prove the provider
@@ -65,7 +65,7 @@ static prior → offer → quote → usage statement → settlement → reconcil
 ```
 
 Stages share one charge linkage and are not summed. Local observations remain
-separate. Market aggregates are scoped, stale-able priors with minimum cohorts;
+separate. Market aggregates are scoped priors with expiry and minimum cohorts;
 they cannot override a live quote or local quality threshold.
 
 ## Provider supply
@@ -103,10 +103,10 @@ anonymous static prior cannot authorize cash. `execute_prepared()` rechecks
 route, policy, key, authorization, budget, idempotency, and approval, then
 reserves, invokes, measures, and settles.
 
-Payment adapters are rail-neutral orchestration. The free/prepaid/invoice/local
-callback adapters enforce Decimal currency, idempotency, partial capture,
-release, refund, and reconciliation invariants. They are not custody or
-financial-accounting systems. Production rails must authenticate callbacks and
+Payment adapters coordinate settlement without depending on a particular rail.
+The free/prepaid/invoice/local callback adapters enforce Decimal currency,
+idempotency, partial capture, release, refund, and reconciliation invariants. They
+are not custody or financial-accounting systems. Production rails must authenticate callbacks and
 reconcile against their own authoritative records.
 
 The 0.4 reference router enables this path only for USD because existing hard
@@ -116,19 +116,19 @@ settlement is implemented.
 
 ## Roadmap boundary
 
-The roadmap deliberately separates protocol evidence from financial products:
+The roadmap separates protocol evidence from financial products:
 
-- **0.4 — Economic evidence:** offers, quotes, prepared decisions, usage,
+- 0.4, economic evidence: offers, quotes, prepared decisions, usage,
   reservation/settlement, reconciliation, aggregates, and local trust.
-- **0.5 — Provider interoperability and aggregate trust:** broader provider
+- 0.5, provider interoperability and aggregate trust: broader provider
   compatibility, rotation/discovery governance, and stronger aggregate quality
   controls.
-- **0.7 — Capacity contract conformance:** provider-authorized mock entitlement
+- 0.7, capacity contract conformance: provider-authorized mock entitlement
   and replay-safe local x402 batch mapping, with live networking disabled.
-- **Later — Provider settlement and marketplace governance:** optional hosted
+- Later, provider settlement and marketplace governance: optional hosted
   accounts, clearing, payouts, fraud controls, disputes, and governance, if a
   separate service is justified.
-- **Later — Optional transferable marketplace credits:** only after explicit
+- Later, optional transferable marketplace credits: only after explicit
   legal, security, governance, and product design. AEEP 0.7 makes no promise to
   create them.
 

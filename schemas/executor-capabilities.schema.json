@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "execution.capabilities.v1",
+      "default": "execution.capabilities.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "adapter": {
+      "title": "Adapter",
+      "type": "string"
+    },
+    "version": {
+      "default": "1",
+      "title": "Version",
+      "type": "string"
+    },
+    "support_status": {
+      "default": "unknown",
+      "enum": [
+        "supported",
+        "experimental",
+        "unknown"
+      ],
+      "title": "Support Status",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": {
+        "enum": [
+          "supported",
+          "unsupported",
+          "unknown"
+        ],
+        "type": "string"
+      },
+      "title": "Features",
+      "type": "object"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "adapter"
+  ],
+  "title": "ExecutorCapabilities",
+  "type": "object"
+}

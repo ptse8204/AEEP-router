@@ -1,0 +1,25 @@
+{
+  "purpose": "static protocol capability review; no host authentication or model execution",
+  "codex_version": "0.154.0",
+  "generation_command": [
+    "codex",
+    "app-server",
+    "generate-json-schema",
+    "--out",
+    "OUTPUT_DIRECTORY"
+  ],
+  "schema_digests": {
+    "v2/CommandExecTerminateParams.json": "979ece7059c6713d0909ab1690daec27149510f4ea2ec10014600bfb1d631c97",
+    "v2/ProcessExitedNotification.json": "06cb5f39c67f84c227063d7f40e5e78fb62afdb76778c3d603687181896e8440",
+    "v2/ThreadStartParams.json": "792e2f32e37cece971bd616664ea2053741acbed4e9c92e9d1766427718f2ecd",
+    "ClientRequest.json": "da767fedd73502ceb644f5d7974927e1a6b7f1917b092aaa029e81949abf0125"
+  },
+  "findings": {
+    "command_exec": "Supports argv-only standalone sandboxed execution without a model turn",
+    "command_exec_terminate": "Targets the client-supplied connection-scoped process ID; does not establish cleanup of every process launched by an agent",
+    "process_exited": "Describes processes started with process/spawn, not an exhaustive worker process inventory",
+    "thread_shell": "Described as unsandboxed; excluded from assessment execution and probes"
+  },
+  "reused_worker_verified": false,
+  "remaining": "Verify per-case process cleanup, private state and reset behavior before advertising reused-worker support"
+}

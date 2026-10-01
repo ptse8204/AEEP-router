@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.reusable-baseline.v1",
+      "default": "assessment.reusable-baseline.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "worker_files": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Worker Files",
+      "type": "object"
+    },
+    "training_input_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Training Input Digests",
+      "type": "array"
+    },
+    "build_operation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Build Operation Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "executor_fingerprint",
+    "worker_files",
+    "training_input_digests",
+    "build_operation_ids"
+  ],
+  "title": "ReusableBaselineArtifact",
+  "type": "object"
+}

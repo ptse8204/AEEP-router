@@ -1,0 +1,21 @@
+Exact argv: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m coverage run --branch -m pytest -q --junitxml=/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-coverage-pytest-b2d436cb7ee4.xml --basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-gacq7r7n/coverage
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 148, in _get_module_details
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/coverage/__init__.py", line 24, in <module>
+    from coverage.control import (
+    ...<2 lines>...
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/coverage/control.py", line 25, in <module>
+    from coverage.collector import Collector
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/coverage/collector.py", line 18, in <module>
+    from coverage.data import CoverageData
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/coverage/data.py", line 25, in <module>
+    from coverage.sqldata import CoverageData as CoverageData  # pylint: disable=useless-import-alias
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/coverage/sqldata.py", line 23, in <module>
+    import uuid
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/uuid.py", line 573, in <module>
+    import _uuid
+KeyboardInterrupt

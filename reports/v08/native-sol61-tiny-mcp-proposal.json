@@ -1,0 +1,44 @@
+{
+  "status": "inert design; no setup/reservation/model turn dispatched",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "classification": "One diagnostic of native MCP use with minimal arguments, not capability qualification or workbook success",
+  "changed_intervention": "Replace approximately7.3KB workbook/base64 arguments with existing csv capability and tiny explicit arguments, preserving generated project task launcher, direct-only omission settings, runtime/model/effort/native permission profile and opt-in command boundary. This partitions payload pressure from actual MCP use without asserting either cause.",
+  "precedent": "tests/test_v08_task_lifecycle.py project fixture and test_project_activation_pause_resume_user_edit_and_uninstall_preserve_evidence; existing csv task tool aeep_csv",
+  "fixture": {
+    "capability": "csv",
+    "input": {
+      "text": "a\n1",
+      "delimiter": ","
+    },
+    "expected": {
+      "records": [
+        {
+          "a": "1"
+        }
+      ]
+    },
+    "argv_program": "import csv,io,json,sys; p=json.load(sys.stdin); print(json.dumps({\"records\":list(csv.DictReader(io.StringIO(p[\"text\"]),delimiter=p[\"delimiter\"]))}))"
+  },
+  "executor": "reference_spec(\"csv\") changed to COMMAND with exact canonical pinned Python -I -c argv_program; unchanged csv input/output schemas; argv_literal true; output JSON; native_sandbox single_process true and exact pinned guard/profile; read ceiling; one executor and one task attempt;10second attempt bound",
+  "model_prompt": "Call the explicitly named generated own AEEP csv MCP tool once with {\"text\":\"a\\n1\",\"delimiter\":\",\"}. Do not use other tools or commands. Return only the declared boolean success object. Actual exact server/tool name frozen after activation, before model reservation.",
+  "lifecycle": "Owned fixture subdirectory under trusted repository; exact existing generated task activation/project launcher, own tool required ready; inherited inventory preserved; task-local omit_tools_from deferred/code_mode, no global configuration edits; same outer named profile/never approval.",
+  "finite_bounds": {
+    "setup_operations": 1,
+    "setup_seconds": 20,
+    "host_operations": 1,
+    "host_seconds_total": 100,
+    "model_body_seconds": 85,
+    "model_turns": 1,
+    "task_attempts": 1,
+    "task_attempt_seconds": 10,
+    "cash_usd": 0
+  },
+  "required_evidence": [
+    "Exact driver/source/runtime/Python/guard/schema/fingerprint/scope/prompt hashes reviewed before launch in existing main ledger",
+    "Natural terminal plus completed own mcpToolCall and matching own server/tool; durable exactly1attempt1receipt; task_valid and required schema validation",
+    "Independent equality assertion against fixed expected records; receipt selected executor equals scoped fingerprint",
+    "Sanitized item type/status/phase/timestamps/hash identity flags, numeric usage, server-request method/decision, transport fatal type and bounded stderr classifications; no raw model prose retained",
+    "Cleanup pinned PID+creationtime through bounded grace; revoke/uninstall scope; preserve failures and uncertain accounting; no repeat on timeout"
+  ],
+  "limitations": "Success proves this tiny own task MCP path with explicit direct-only settings, not default discovery, workbook integration, qualification, benefit or general host isolation. Failure would still require event evidence before attributing cause."
+}

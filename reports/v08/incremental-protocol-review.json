@@ -1,0 +1,20 @@
+{
+  "purpose": "Static follow-up on remaining protocol implementation; no authentication or model execution",
+  "reviewed_version": "0.154.0",
+  "official_documentation": "https://learn.chatgpt.com/docs/app-server",
+  "schemas": {
+    "v2/RawResponseItemCompletedNotification.json": "808fe739fc46130292a0a8c1969ff4e63dff856fc241ff78ce207a8eb1a67f46",
+    "v2/ThreadStartParams.json": "792e2f32e37cece971bd616664ea2053741acbed4e9c92e9d1766427718f2ecd",
+    "ServerNotification.json": "2a52bea56cd6bd994a9d014e2af60d631446d810bd78181714e4b05375a9a222",
+    "v1/InitializeParams.json": "6f0094be9a65242ec779a40794cbd4fdfa32fca1e45084a16adfb50501d33ea2"
+  },
+  "findings": {
+    "experimental_opt_in": "Official API supports disabling experimental methods/fields; AEEP still opts in unconditionally. Version-specific method requirements need review.",
+    "inventory": "mcpServerStatus/list is server/tool/resource/auth inventory, not proof of command or model-tool enforcement.",
+    "retrieval": "Pinned RawResponseItem schema includes tool_search_call and tool_search_output. Normalize candidate identities without retaining contents, then verify actual delivery and completeness; schema availability alone is not a runtime observation.",
+    "skills": "Explicit skill input remains appropriate for qualification. Optional value trials omit forced skill instructions.",
+    "support": "Upstream experimental support is separate from assessment evidence and production readiness."
+  },
+  "model_turns": 0,
+  "live_verified": false
+}

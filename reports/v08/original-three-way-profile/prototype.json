@@ -1,0 +1,109 @@
+{
+  "schema_version": "report.three-way-task-profile-prototype.v1",
+  "recorded_at": "2026-09-30T12:34:03.095508+00:00",
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "execution_authorized": false,
+  "prototype_only": true,
+  "runtime_schema_validated": false,
+  "purpose": "Actual task-only AEEP route/decision/receipt intervention inside third controlled worker; outer campaign engine is not the intervention",
+  "existing_images": {
+    "normal": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+    "discovery_source": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+    "third": null
+  },
+  "existing_shared_candidate": {
+    "skill_name": "Spreadsheets",
+    "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+    "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+    "bundle_sha256": "b17af7658e2bafb3ba4509514e896d538f682370fa654a24e733f1c5116fd79f",
+    "discovery_pair_equality_required": true
+  },
+  "roles": {
+    "normal_host": {
+      "invocation": "turn",
+      "external_discovery": false,
+      "aeep_task_profile": null
+    },
+    "discovery_host": {
+      "invocation": "turn",
+      "external_discovery": true,
+      "supporting_skill": "exact Spreadsheets binding above",
+      "aeep_task_profile": null
+    },
+    "discovery_aeep_host": {
+      "invocation": "turn (unsupported current v2 candidate contract)",
+      "external_discovery": true,
+      "supporting_skill": "identical Spreadsheets binding above",
+      "aeep_task_profile": {
+        "transport": "existing task-only MCP service; operator-owned immutable configuration",
+        "capability": "assessment.workbook@1",
+        "tool_contract_digest": null,
+        "manifest_digest": null,
+        "profile_declaration_digest": null,
+        "executor_fingerprints": null,
+        "required_during_qualification": true,
+        "optional_during_value": true,
+        "private_control_store": "proposed /worker/aeep-private (must be denied to model/shell and verified)",
+        "case_data": "existing /workspace only",
+        "assessment_tools": false,
+        "lifecycle_tools": false,
+        "approval_tools": false,
+        "host_or_coordinator_mounts": false,
+        "nested_model_calls": false,
+        "authority": "Extend existing TaskScope/backend identity and existing dispatch checks; no second approval or allowance system",
+        "task_scope_digest": null,
+        "enclosure_binding_digest": null
+      }
+    }
+  },
+  "dependencies": {
+    "src/aeep/router.py": "884285a9655c8775320ca223260bbabe200d14d14faff1356802dca3d3d28bec",
+    "src/aeep/mcp/server.py": "dedc5937a6e873de5e723d7317cd7233f94d349bdd2b174304820ae5b475e737",
+    "src/aeep/assessment/tools.py": "901ece1615f9ea472d1e0e0f8cdc14a73b6e62a38baba3d1aada93e6138d18ec",
+    "src/aeep/assessment/boundary.py": "d9e2ceaebaa278f52b62223adc06790563116ca5412633833ebbf4d332821131",
+    "src/aeep/assessment/service.py": "bebaa250c92817659e42ea7ad57ae6b431a1522f2127ce2406ed7c08352b9a70",
+    "src/aeep/assessment/comparison.py": "8854b183a6b9fbd6fa998481701085f01f1eaf25ff3998dbcdc239e210033cff",
+    "src/aeep/hosts/codex_invocation.py": "30efe620b89244adb55eb53b1107620fdc9ffe35e89f1f47fc93e94d683ef41e",
+    "src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+    "src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+    "src/aeep/executors/command.py": "6e277fa74178e6898bb1f2b920b4aeb3538cdb378457e111f984b557737dfc54",
+    "integrations/managed-worker/Dockerfile.incremental": "1e97dd33eaa3c30eda481f3c370ccda2b89c7e954bec40d2d59d01502e441c5d",
+    "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f"
+  },
+  "not_reusable_inside_trial_worker": [
+    "workbook_grader.py and grader fixtures",
+    "workbook_program.py generator/reference implementation as candidate executor",
+    "canonical assessment database or ledger",
+    "historical answers/future cases",
+    "host credentials/configuration/Docker socket"
+  ],
+  "unbound_prerequisites": [
+    "Actual shared non-oracle task executor(s) with equivalent direct access in discovery baseline",
+    "Reviewed frozen AEEP routing evidence/policy with applicable backend and no automatic admission",
+    "Pinned immutable third image/package/dependencies and exact worker configuration",
+    "Task-only declaration and manifest binding with private control-store denial",
+    "Separate actual conformance of all three changed profiles; existing pair does not transfer",
+    "141 fresh required-use qualification cases on exact backend; canonical complete job/grader/refit and disjoint value holdouts",
+    "Finite reviewed budgets/accounting and three-way access definition for exact profiles",
+    "Existing TaskScope support for verified immutable managed-worker enclosure, preserving ceilings/expiry/attempt reservations/resource limits at dispatch; no caller self-attestation"
+  ],
+  "current_blockers": [
+    "validate_incremental_hosts requires candidate skill mode",
+    "isolated_config rejects AEEP skill and MCP identities as recursive",
+    "Supporting skills must equal normal baseline too; normal discovery omission needs explicit reviewed role restriction",
+    "native_catalog only enables search flags; unselected skills stay disabled",
+    "Existing WorkerPairInspection forbids task supporting tools and assumes turn/skill intervention",
+    "TaskScopev1 command boundary requires native_sandbox; cannot be claimed for Linux worker",
+    "No attested shared non-oracle routed workbook executor currently bound"
+  ],
+  "qualified": false,
+  "admitted": false,
+  "preferred_exposure": "Existing required/optional skill invocation calling fixed existing task tool-call CLI; exact isolated assessment exception only",
+  "cli_entry": {
+    "existing_command": "aeep tool-call",
+    "profile": "task",
+    "task_scope": "fixed operator-reviewed binding, unresolved",
+    "assessment_or_lifecycle_commands": false,
+    "store_access_boundary": "Unresolved: CLI launched by model shell cannot safely share writable authority/receipt DB with that model"
+  }
+}

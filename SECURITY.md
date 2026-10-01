@@ -1,14 +1,19 @@
 # Security policy and deployment guidance
 
-AEEP can launch commands, call remote services, and advise another agent. Treat its manifest and database as security-sensitive control-plane assets.
+AEEP can launch commands, call remote services, and advise another agent. Its
+manifest and database control these operations, so protect both as
+security-sensitive assets.
 
 ## Supported version
 
-The repository is an alpha. Security fixes target the latest commit/version only until a stable release policy is published.
+AEEP is alpha software. Until the project publishes a stable release policy,
+security fixes target only the latest commit/version.
 
 ## Reporting
 
-Do not open a public issue containing a working exploit, credential, or private endpoint. Use the repository's private security-advisory channel when one is established; until then, contact the repository owner privately.
+Do not include working exploits, credentials, or private endpoints in public
+issues. Contact the repository owner privately until the project establishes a
+private security-advisory channel, then use that channel.
 
 ## Trust boundaries
 
@@ -41,6 +46,24 @@ and optional POSIX CPU/memory limits. This prevents a timed-out worker from
 remaining in the router process, but it is not a cross-platform filesystem or
 network sandbox. Use a container or VM for untrusted code.
 
+## Project task lifecycle
+
+Each project activation creates only a new AEEP-owned overlay. The control-plane
+manifest, overlay directory and store must remain outside the task child's
+writable boundary. Missing or edited overlays and manifest drift stop dispatch.
+Rollback compares applied/current bytes and preserves edits as a conflict. It
+never restores a saved copy of host authentication or global configuration.
+
+Pause rejects new dispatch. Stop also signals the current session's owned
+execution handle through a durable event. The command sampler retains observed
+process handles with creation-time identity so a detached observed child is also
+signaled. Native commands leaving observed background children are rejected.
+Polling can miss rapid forks; this does not establish containment
+of detached adversarial descendants or cleanup after coordinator death. Those
+boundaries require their own conformance evidence before support is claimed.
+Unresolved writes stay blocked until exact operator-reviewed effect inspection;
+absence of accounting is not evidence that nothing happened.
+
 ## HTTP/SSRF
 
 - Public remote calls require HTTPS by default.
@@ -51,11 +74,18 @@ network sandbox. Use a container or VM for untrusted code.
 
 ## MCP
 
-Connecting an MCP server grants it an integration boundary. Review its command, environment, working directory, transport URL, authentication, and exposed tool behavior. Remote content can contain prompt injection; AEEP routing does not sanitize an agent's interpretation of returned data.
+Before connecting an MCP server, review its command, environment, working
+directory, transport URL, authentication, and exposed tool behavior. The
+connection gives that server access through the integration boundary. Returned
+content can contain prompt injection; AEEP routing cannot sanitize how an agent
+interprets it.
 
 Remote MCP HTTP clients use the ordinary HTTP executor's HTTPS, allowlist, IP-classification, redirect, response-size, and no-ambient-proxy defaults. Modern MCP request headers are derived only from validated primitive schema properties; duplicate case-insensitive names, unsafe names, unsupported schemas, or header/body disagreement are rejected. Stdio and HTTP messages are bounded, but production deployments still need process, ingress, and egress limits outside Python.
 
-The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put it behind TLS, authentication, Origin validation/policy, request-body limits, rate limits, logging, and network policy. Do not expose it directly as a public multi-tenant service.
+The built-in HTTP MCP server has only a static bearer token as its minimum guard.
+Deploy it behind TLS, authentication, Origin validation/policy, request-body
+limits, rate limits, logging, and network policy. Do not expose it directly as a
+public multi-tenant service.
 
 ## Side effects
 
@@ -77,9 +107,20 @@ The built-in HTTP MCP server uses a static bearer token as a minimum guard. Put 
 
 ## Outcome integrity and history poisoning
 
-`aeep_record_outcome` changes future estimates. Treat access to it as write access to routing policy. Authenticate remote callers, rate-limit reports, preserve provenance, and do not merge unauthenticated reports into shared reputation. The reference implementation accepts an external report only for the selected feasible delegate and only once per decision/executor pair, but a compromised authorized caller can still fabricate that one report. Use `ActionProfiler` for trusted operator-owned measurement outside the delegate flow.
+`aeep_record_outcome` changes future estimates, so access to it is write access
+to routing policy. Authenticate remote callers, rate-limit reports, and preserve
+provenance. Keep unauthenticated reports out of shared reputation. The reference
+implementation accepts one external report per decision/executor pair, only for
+the selected feasible delegate. A compromised authorized caller can still
+fabricate that report. Use `ActionProfiler` for trusted operator-owned
+measurement outside the delegate flow.
 
-Provider descriptors and estimates are claims, not observations. Local reputation excludes untrusted and self-asserted observations. The compatibility HMAC signature proves possession of one shared secret only; it is not public-key identity or a global trust system. Cross-provider 0.4 economic evidence uses locally trusted Ed25519 keys bound to provider identity, capability, validity period, revocation metadata, and approved quote hosts.
+Local reputation excludes provider descriptors, estimates, and other untrusted
+or self-asserted claims from observed results. The compatibility HMAC signature
+proves only possession of a shared secret; it supplies neither public-key
+identity nor global trust. Cross-provider 0.4 economic evidence uses locally
+trusted Ed25519 keys bound to provider identity, capability, validity period,
+revocation metadata, and approved quote hosts.
 
 Live historical estimates use only receipts bound to the exact versioned
 evidence cohort and behavior fingerprint. Legacy-unbound or mismatched rows stay
@@ -251,15 +292,23 @@ an approval exists.
 
 ## Benchmarking
 
-`aeep benchmark` executes more than one feasible route. Even read-only routes can incur fees, consume quota, or disclose the same input to several providers. The CLI requires explicit confirmation, keeps hard constraints active, and skips non-idempotent/delegated routes by default. Do not expose benchmark invocation as an unrestricted model tool.
+`aeep benchmark` executes multiple feasible routes. Read-only routes can still
+incur fees, consume quota, or disclose the same input to several providers. The
+CLI requires explicit confirmation and enforces hard constraints throughout. It
+skips non-idempotent/delegated routes by default. Do not expose benchmark
+invocation as an unrestricted model tool.
 
 ## Data policy
 
-Set `data_sensitivity`, locality, and allowed residency on requests/policies. These fields are enforcement inputs only when executor metadata is trustworthy. A production network needs provider attestation and independent audit.
+Set `data_sensitivity`, locality, and allowed residency on requests/policies.
+Enforcement through these fields depends on trustworthy executor metadata.
+Production networks need provider attestation and independent audit.
 
 ## Resource exhaustion
 
-Set command/HTTP/MCP timeouts and output limits. Apply OS/container memory, CPU, process, file, and network quotas for stronger enforcement. AEEP estimates are not a substitute for kernel-level limits.
+Set command/HTTP/MCP timeouts and output limits. For stronger enforcement, apply
+OS/container quotas for memory, CPU, processes, files, and network access.
+Resource estimates cannot replace kernel-level limits.
 
 ## Dependency and release hygiene
 
@@ -271,3 +320,81 @@ Before production:
 - run tests on supported Python versions;
 - review optional HTTP-server dependencies;
 - restrict who can edit manifests and policies.
+
+
+## Assessment authorization (0.8)
+
+Installed plugin metadata, declared side effects and model-generated recipes are
+untrusted inputs. Reviews bind exact definitions; standing authorizations bind
+subjects, recipes, environments and finite ceilings. Model-facing tools cannot
+expand those grants. New declarative recipes require review before generation.
+Untrusted executable adapters without supported containment remain blocked.
+Destination grants default to local execution and Codex. Remote origins must be
+explicitly permitted as well as having disclosure authorization. Host-owned MCP
+targets require operator-reviewed locality; advertised safety hints cannot supply
+it. An unrestricted container network requires the explicit `network:any` grant.
+
+Trial receipts and assessment operations are distinct from production history.
+Cancellation and revocation stop new admissions to work; uncertain in-flight work
+retains its budget reservation. Revoked scoped routes retain their admission
+marker and cannot silently become unrestricted. Verified receipt validation
+failures revoke scoped use without launching baseline calls.
+Resolved host identities use a separate evidence cohort and are checked again
+before invocation. Runtime model changes preserve incurred usage but cannot count
+as evidence for the earlier identity. Recovery checks worker creation time as
+well as PID, retains ambiguous attempts, and addresses only their own container
+names. It does not retry candidate execution.
+
+Host correlation uses an AEEP-owned SQLite key. No Codex authentication file is
+read, copied, returned or persisted. Codex itself owns authentication. The
+assessment guide lists the remaining containment and live integration gates.
+
+Separate agent sessions and fresh directories do not establish tool isolation.
+Temporary Codex workers request minimal filesystem permissions, no network and
+non-escalating approvals. Host acknowledgement and harmless local filesystem
+probes are recorded separately from complete tool-access verification. An
+incomplete inventory or unverified invocation path keeps scoped model trials
+blocked. Boundary probes never read Codex authentication state or invoke
+unrelated installed tools.
+
+Managed-host containers use immutable image references and no host bind mounts.
+Code and configuration digests are checked inside the launcher. Separate homes,
+workspaces and optional credential volumes prevent accidental shared state;
+they do not prove that agent commands cannot access credentials or use hosted
+tools. Those boundaries require independently reviewed enforcement and actual
+conformance evidence. Default networking is disabled. A selected network ID is
+not proof of restricted egress. Scoped admission and routing reject missing or
+changed worker conformance even when host identity is known.
+
+Canonical event writes happen before publication to the invocation consumer.
+Storage failure stops further execution; interruption retains the events already
+committed. Cumulative usage is labelled separately from incremental usage, and
+event replay cannot double-charge a completed operation. Operator scope
+amendments share the original grant's counters and ceilings. Bundle review and
+amendment application occur in one transaction.
+
+### Differential environments and budget amendments
+
+A capable control can use approved shell, files and Python libraries. Treatment
+adds only the reviewed candidate bundle; candidate files, aliases and discovery
+paths must be absent from control. Both workers require independently verified
+post-login policy and immutable image bindings. Inventory equality and synthetic
+probe success alone are insufficient. New differential records cannot upgrade
+historical permission claims.
+
+Budget amendments are operator-only, immutable and serialized against a checked
+predecessor. They preserve the original ledger and do not credit consumed usage.
+Models cannot approve definitions, amendments or adapters. Worker authentication,
+model-service connectivity and command egress remain separate verified boundaries.
+Workbook archives are byte/member/expanded-size bounded; macros, external links,
+XML entity declarations and unsafe paths are outside the reviewed recipe.
+
+Catalog metrics are opt-in and require the exact collector source in the worker's
+reviewed file bindings. The local relay discards raw payloads and unknown tags,
+bounds HTTP bodies and observations, and rejects child protocol frames that try
+to impersonate its reserved notification. The coordinator rejects misbound or
+regressing snapshots. Collector closure is not upstream export acknowledgement.
+Task-command and supporting-integration access to the collector still require
+verified enforcement; receipt observations do not grant themselves trust or
+complete discovery status. Fresh telemetry settings need effective-policy review
+and cannot widen the authorized remote destinations.

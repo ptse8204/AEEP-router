@@ -1,0 +1,25 @@
+{
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "inspection_only": true,
+  "model_turns": 0,
+  "source_changed": false,
+  "files": {
+    "src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+    "src/aeep/mcp/server.py": "dedc5937a6e873de5e723d7317cd7233f94d349bdd2b174304820ae5b475e737",
+    "src/aeep/assessment/tools.py": "901ece1615f9ea472d1e0e0f8cdc14a73b6e62a38baba3d1aada93e6138d18ec"
+  },
+  "findings": {
+    "transport_server_requests": "Only approval-method allowlist; unknown methods return -32601. No dynamic task callback.",
+    "thread_start": "Current adapter constructs no dynamicTools declarations.",
+    "collector": "Recognizes completed dynamicToolCall items only; this is observation rather than invocation support.",
+    "existing_task_service": "AEEPToolService(profile=task,task_scope/activation) binds reviewed scope, limits operator ceiling, filters declarations by exact executor fingerprints, reuses existing handlers."
+  },
+  "minimum_missing_contract": [
+    "Pinned App Server dynamicTools request/result schema and server-request method binding",
+    "Task-only adapter callback to existing service with exact declared names/arguments and no assessment or privileged calls",
+    "Per-worker isolated scoped stores and protected oracle; equivalent bare helper control access",
+    "Actual worker-to-native coordinator enforcement and backend conformance; no host path/free-command arguments",
+    "Required invocation qualification then optional three-way value campaign"
+  ],
+  "conclusion": "Existing task service is reusable but no functioning dynamic bridge exists. No bridge implemented or qualification inferred."
+}

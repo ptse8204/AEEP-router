@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "DifferentialEnvironment": {
+      "additionalProperties": false,
+      "description": "Reviewed expected inventories, not a claim that permissions were verified.",
+      "properties": {
+        "shared_definition_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Shared Definition Digest",
+          "type": "string"
+        },
+        "control_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Control Inventory",
+          "type": "object"
+        },
+        "treatment_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Treatment Inventory",
+          "type": "object"
+        },
+        "candidate_inventory": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Candidate Inventory",
+          "type": "object"
+        },
+        "candidate_paths": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Candidate Paths",
+          "type": "array"
+        },
+        "candidate_aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Aliases",
+          "type": "array"
+        }
+      },
+      "required": [
+        "shared_definition_digest",
+        "control_inventory",
+        "treatment_inventory",
+        "candidate_inventory",
+        "candidate_paths"
+      ],
+      "title": "DifferentialEnvironment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.differential-conformance.v1",
+      "default": "assessment.differential-conformance.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "definition": {
+      "$ref": "#/$defs/DifferentialEnvironment"
+    },
+    "control_conformance_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Control Conformance Digest",
+      "type": "string"
+    },
+    "treatment_conformance_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Treatment Conformance Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "definition",
+    "control_conformance_digest",
+    "treatment_conformance_digest"
+  ],
+  "title": "DifferentialConformance",
+  "type": "object"
+}

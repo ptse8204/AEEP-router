@@ -1,0 +1,82 @@
+{
+  "operation_id": "native-components:conformance_current_native_lifecycle_observer_sql_5fff",
+  "definition_digest": "e051c73e6a1fb700dde687deffc5faff39f0343bae9a760ed61964f16d263472",
+  "model_turns": 0,
+  "native_attempts": 1,
+  "host_eof": "unobserved",
+  "observed": {},
+  "probe_digests": [],
+  "cleanup_confirmed": false,
+  "full_conformance": false,
+  "fresh_scope_digest": "6bce948b7ebb3ed09389a031071134c760d2fafb00282fd221b8edb4bc3940c1",
+  "observer_stage": "enforce",
+  "observer_identity": {
+    "pid": 55615,
+    "created_at": 1790806747.61146,
+    "pgid": 55615,
+    "sid": 55615,
+    "marker_valid": true
+  },
+  "observer_ancestry": [
+    {
+      "pid": 55612,
+      "ppid": 55611,
+      "created_at": 1790806747.53471,
+      "name": "codex",
+      "executable_basename": "codex",
+      "matches_pinned_binary": true
+    }
+  ],
+  "observer_predicates": {
+    "marker": true,
+    "pgid": true,
+    "sid": true,
+    "exact_server_ancestry": true,
+    "report_ancestor_seen": true
+  },
+  "owned_processes": [
+    {
+      "pid": 55615,
+      "ppid": 55612,
+      "created_at": 1790806747.61146,
+      "name": "python3.12"
+    },
+    {
+      "pid": 55612,
+      "ppid": 55611,
+      "created_at": 1790806747.53471,
+      "name": "codex"
+    }
+  ],
+  "native_raw_diagnostic": {
+    "status": "timeout",
+    "error_type": "TimeoutError",
+    "exit_code": null,
+    "stdout_bytes": 46,
+    "stderr_bytes": 0,
+    "process_cleanup": {
+      "boundary": "native App Server EOF ownership and hard no-fork session leader",
+      "observed_processes": 0,
+      "cleanup_incomplete": false
+    }
+  },
+  "error_type": "ValueError",
+  "error_bytes": 42,
+  "error_sha256": "48df3dca2f277dfe944a0eee1f3ee6aad7f047c6546a5bed75fbc445cc69549d",
+  "stack": [
+    {
+      "file": "run-current-composed-native-lifecycle-observer-sql-5fff.py",
+      "line": 139
+    }
+  ],
+  "child_attempt_digests": [
+    "b0428a4d7fb32cdafe37d56a497a5ed159584fd1459d06341617ecdd63bbe7a1"
+  ],
+  "child_receipt_digests": [
+    "1fed5907a80211f5397ac1b75977d150dc9e26eda0cb36022a0f13f80da8f0b2"
+  ],
+  "elapsed_seconds": 0.503887209109962,
+  "accounting_finished": true,
+  "source_unchanged": true,
+  "main_close_confirmed": true
+}

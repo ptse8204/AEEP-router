@@ -1,0 +1,152 @@
+{
+  "source_before": "78ade1f06ce6b1f63868460a19b246c25d9adeda864294e439ce301ed9d0af08",
+  "source_after": "78ade1f06ce6b1f63868460a19b246c25d9adeda864294e439ce301ed9d0af08",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0800310829654336,
+      "log": "reports/v08/pair-boundary-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6728374169906601,
+      "log": "reports/v08/pair-boundary-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.07269704097416252,
+      "log": "reports/v08/pair-boundary-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.39792641706299037,
+      "log": "reports/v08/pair-boundary-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12971149990335107,
+      "log": "reports/v08/pair-boundary-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 370.5975276250392,
+      "log": "reports/v08/pair-boundary-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 470.46196812507696,
+      "log": "reports/v08/pair-boundary-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0178682910045609,
+      "log": "reports/v08/pair-boundary-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pair-boundary-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.371988832950592,
+      "log": "reports/v08/pair-boundary-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pair-boundary-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048612582962960005,
+      "log": "reports/v08/pair-boundary-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/pair-boundary-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04848150000907481,
+      "log": "reports/v08/pair-boundary-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1127440839773044,
+      "log": "reports/v08/pair-boundary-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048933333018794656,
+      "log": "reports/v08/pair-boundary-check-12.txt"
+    }
+  ]
+}

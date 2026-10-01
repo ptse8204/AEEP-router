@@ -1,0 +1,94 @@
+{
+  "recorded_at": "2026-09-26T12:32:18.595281+00:00",
+  "source_digest": "180806bb74076753dfaabcfc083c160ba4b79ca9c1762a8e0641ad8b936598be",
+  "selection": "remaining-family-candidates.json",
+  "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+  "recommended_structure": "controlled_agent",
+  "families": [
+    "text",
+    "search"
+  ],
+  "implementation_unit": "installed Ponytail main skill only; package hooks and sibling skills excluded",
+  "control_image": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+  "treatment_image": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023",
+  "installed_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+  "candidate_path": "/opt/dependencies/ponytail/SKILL.md",
+  "discovery_alias": "/etc/codex/skills/ponytail",
+  "native_inventory": "ponytail-worker-inventory-v2.json",
+  "image_preparation": "ponytail-worker-preparation-v2.json",
+  "historical_attempts": [
+    "ponytail-worker-preparation-initial-failure.json",
+    "ponytail-worker-preparation.json",
+    "ponytail-worker-inventory-initial-failure.json"
+  ],
+  "retained_setup_costs": [
+    {
+      "id": "setup_cost_0fe2449d09f3443f8779b283302bc4db",
+      "record": {
+        "cost_id": "setup_cost_0fe2449d09f3443f8779b283302bc4db",
+        "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+        "stage": "static_inspection",
+        "elapsed_seconds": 0.0031269999453797936,
+        "cpu_ms": 1.5099999999999558
+      }
+    },
+    {
+      "id": "setup_cost_54a8265181b04ee4bffb9dfa50f338a2",
+      "record": {
+        "cost_id": "setup_cost_54a8265181b04ee4bffb9dfa50f338a2",
+        "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+        "stage": "offline_candidate_inventory",
+        "elapsed_seconds": 2.826367292087525,
+        "cpu_ms": 39.141000000000034
+      }
+    },
+    {
+      "id": "setup_cost_99f3496183a24baa80d3e2449fff6faa",
+      "record": {
+        "cost_id": "setup_cost_99f3496183a24baa80d3e2449fff6faa",
+        "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+        "stage": "offline_worker_image_preparation",
+        "elapsed_seconds": 2.1204577499302104,
+        "cpu_ms": 33.899999999999984
+      }
+    },
+    {
+      "id": "setup_cost_451f782d0fa9459b8fb1c19e50c46b71",
+      "record": {
+        "cost_id": "setup_cost_451f782d0fa9459b8fb1c19e50c46b71",
+        "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+        "stage": "offline_worker_image_preparation",
+        "elapsed_seconds": 2.5372464589308947,
+        "cpu_ms": 31.29900000000002
+      }
+    }
+  ],
+  "known_measured_setup_seconds": 7.48719850089401,
+  "additional_failed_preparation_client_seconds": 0.570169083,
+  "complete_preparation_measurement": false,
+  "missing_measurement": "initial inventory harness failure did not retain full elapsed duration; retain as unknown, never zero",
+  "before_execution": [
+    "choose the structure at initiation and freeze a new reviewed plan",
+    "bind all retained setup cost IDs and the failed-preparation records; never treat preparation as free or fully measured",
+    "review exact environment and source-bound conformance; inventory does not prove effective permissions",
+    "freeze baseline, higher-compute and training-only reusable control definitions",
+    "apply operator-approved finite budget expansion on the same counters",
+    "use identical task contracts/instructions in both arms; do not rewrite recipes to force Ponytail use"
+  ],
+  "source_artifacts": {
+    "candidate-intake-source.py.txt": "3357a32719f65a7a1d391f1216782b7368191b86155b3a7dfe8a1dc222dfed65",
+    "candidate-worker-build-source.py.txt": "48c569a3c19a4cbc347e3549995c646543d229f52b919bc3b6c61ccec86ba334",
+    "candidate-inventory-source.py.txt": "a5836e8772cca56acd6b0a69d112008bbe1f1d4ed26807ce11ada5b905494f24"
+  },
+  "grant_counters_unchanged": [
+    683,
+    136,
+    3364.272100803093,
+    "0",
+    0
+  ],
+  "model_calls": 0,
+  "candidate_executed": false,
+  "conformance_complete": false,
+  "admission_eligible": false
+}

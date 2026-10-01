@@ -1,0 +1,516 @@
+{
+  "tools": [
+    {
+      "name": "aeep_assessment_options",
+      "description": "List existing operator-selected subjects, recipes, environments and configured routes under a current grant. Does not inspect files or approve execution.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "authorization_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "after": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "authorization_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_setup",
+      "description": "Prepare a reviewed-recipe assessment using existing configuration and grant scope. Returns missing review requirements, fixture-generation instructions or a proposed plan; never approves definitions or starts trials.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "description": "Select configured definitions; no paths, executable code or approval fields.",
+        "properties": {
+          "schema_version": {
+            "const": "assessment.setup.v1",
+            "default": "assessment.setup.v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "authorization_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Authorization Id",
+            "type": "string"
+          },
+          "subject_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Subject Id",
+            "type": "string"
+          },
+          "recipe_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Recipe Id",
+            "type": "string"
+          },
+          "environment_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Environment Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "baseline_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Baseline Id",
+            "type": "string"
+          },
+          "structure": {
+            "anyOf": [
+              {
+                "enum": [
+                  "direct",
+                  "controlled_agent",
+                  "workflow"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Structure"
+          },
+          "seed": {
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0,
+            "title": "Seed",
+            "type": "integer"
+          },
+          "case_set_id": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Case Set Id"
+          },
+          "experiment_id": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Experiment Id"
+          },
+          "pilot_report_id": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pilot Report Id"
+          }
+        },
+        "required": [
+          "authorization_id",
+          "subject_id",
+          "recipe_id",
+          "environment_id",
+          "candidate_id",
+          "baseline_id"
+        ],
+        "title": "AssessmentSetupRequest",
+        "type": "object"
+      }
+    },
+    {
+      "name": "aeep_assessment_generate_cases",
+      "description": "Generate synthetic fixtures for an existing, operator-reviewed materialization request under its original grant. Cannot approve a recipe, expand limits or replay execution.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "materialization_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "materialization_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_csv",
+      "description": "CSV to string-valued records with strict row widths and unique headers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "delimiter": {
+            "enum": [
+              ",",
+              ";",
+              "\t"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "delimiter"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "records"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "aeep_text",
+      "description": "Extract exact labeled fields; omit absent fields and reject duplicate requested labels.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 100,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "text",
+          "fields"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "fields"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "aeep_search",
+      "description": "Find literal matches in UTF-8 files beneath an approved root, returning sorted paths and line numbers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "root",
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "matches": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    },
+                    "line": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "line",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "matches"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "aeep_assessment_start",
+      "description": "Start an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "plan_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_status",
+      "description": "Status an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "assessment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "assessment_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_report",
+      "description": "Report an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "assessment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "assessment_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_cancel",
+      "description": "Cancel an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "assessment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "assessment_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_generate_definition",
+      "description": "Generate_definition an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "planning_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "planning_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_structures",
+      "description": "Structures an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "plan_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_select_structure",
+      "description": "Select_structure an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "structure": {
+            "enum": [
+              "direct",
+              "controlled_agent",
+              "workflow"
+            ]
+          }
+        },
+        "required": [
+          "plan_id",
+          "structure"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "aeep_assessment_budget",
+      "description": "Budget an assessment under an existing reviewed plan and operator authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "plan_id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

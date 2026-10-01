@@ -1,0 +1,45 @@
+import asyncio,hashlib,json
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.router import Router
+from aeep.models import Manifest,ExecutorSpec,ExecutorKind,new_id
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.onboarding import reference_spec
+from aeep.assessment.models import AssessmentPlan,AssessmentEnvironment,AssessmentAuthorization,AssessmentScopeAmendment,content_digest
+from aeep.assessment.planning import ReusableBuildOutput
+from aeep.assessment.verification import verification_source_digest
+ROOT=Path('/Users/edwintse/Documents/aeep-agent-router');P=ROOT/'reports/v08';BASE=ROOT/'.aeep/live-review-v3'
+async def main():
+ r=Router.from_manifest(BASE/'csv-phase-final-builder.json')
+ try:
+  s=AssessmentService(r,BASE/'.aeep/assessments');repo=s.repository
+  built=ReusableBuildOutput.model_validate(repo.get('reusable_build_output','reusable-build:planning_0462cbdb27af46a29c3f3de8b7d65f00'))
+  origin=AssessmentPlan.model_validate(repo.get('plan','plan_a9aff200f17541a6be8fb9c31b0e019c'))
+  training=[c for c in origin.suite.cases if c.split.value=='training'];assert len(training)==28 and [content_digest(c.action.input) for c in training]==built.training_input_digests
+  target=BASE/'generated/csv_records.py';target.parent.mkdir(exist_ok=True)
+  assert target.read_text()==built.source
+  subject=s.inspect_local(target,kind='command')
+  baseline=reference_spec('csv').model_copy(update={'id':'csv-reusable-bounded-training.reference'})
+  candidate=ExecutorSpec(id='csv-reusable-bounded-training.generated',capability=baseline.capability,kind=ExecutorKind.COMMAND,description='Exact generated CSV reusable tool; training validation only',input_schema=baseline.input_schema,output_schema=baseline.output_schema,config={'argv':['python3','-c',built.source],'argv_literal':True,'stdin_json':True,'timeout_seconds':30,'max_output_bytes':1000000,'output':{'type':'json'}})
+  candidate.estimate.cash=baseline.estimate.cash.model_copy(deep=True)
+  raw=json.loads((BASE/'aeep.json').read_text());raw['executors'].extend([candidate.model_dump(mode='json'),baseline.model_dump(mode='json')]);manifest=Manifest.model_validate(raw);path=BASE/'csv-reusable-bounded-training.json'
+  with path.open('x') as f:f.write(manifest.model_dump_json(indent=2))
+ finally:await r.close()
+ r=Router.from_manifest(path)
+ try:
+  s=AssessmentService(r,BASE/'.aeep/assessments');repo=s.repository
+  env=AssessmentEnvironment(environment_id='csv-reusable-bounded-training-offline',kind='container',identity={'purpose':'Frozen generated source training validation, no model turns or qualification claims'},container_image='sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228',container_runtime='/usr/local/bin/docker',container_socket='/Users/edwintse/.docker/run/docker.sock',memory_mb=512)
+  proposal=s.propose(subject_id=subject.subject_id,family='csv',candidate_id=candidate.id,baseline_id=baseline.id,authorization_id='onboarding',environment=env,seed=202609277,structure='direct')
+  # Hand-authored training-only suite uses the same engine and fixed acceptance rules.
+  # The service-generated full proposal remains inert and preserved; it is never run.
+  plan=proposal.model_copy(update={'plan_id':new_id('plan'),'suite':proposal.suite.model_copy(update={'cases':training,'suite_id':new_id('training_suite')}),'planning_request_ids':[built.request_id],'applicability':origin.applicability,'feature_combinations':origin.feature_combinations})
+  plan=AssessmentPlan.model_validate(plan.model_dump(mode='json'));repo.put('plan',plan.plan_id,plan)
+  digests=set(plan.definition_digests)|{plan.subject_digest};definitions={d:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(d,)).fetchone()[0]) for d in digests}
+  root=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(root),subject_digests=[plan.subject_digest],recipe_digests=[plan.recipe_digest],environment_digests=[plan.environment_digest],reviewed_digests=sorted(definitions))
+  review={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':verification_source_digest(ROOT),'authority':'2026-09-27 delegated exact reviews and bounded testing','prior_attempt':'plan_aab3f987e9764e3dbaf40e17f18ecc9d stopped before trials because generated native route lacked an explicit finite cash bound; original costs retained. The offline container has zero cash upper bound in this new reviewed definition.','purpose':'Training-only direct validation of generated CSV baseline through the existing AssessmentService/BenchmarkRunner, using exactly its 28 builder inputs against the independent deterministic reference. No holdout, qualification, plugin assessment, savings/admission claim or model turns.','review_findings':['Read full source; Python csv/io/json/sys only, bounded input and JSON output, no network, subprocess or filesystem calls','The generated tool runs only in a pinned offline container with fresh per-invocation state','Expected answers stay in the external case validator; no candidate fixture contains answers'],'generated_source_sha256':hashlib.sha256(built.source.encode()).hexdigest(),'build_operation_id':built.operation_id,'training_input_digests':built.training_input_digests,'inert_full_proposal_id':proposal.plan_id,'plan':plan.model_dump(mode='json'),'amendment':amendment.model_dump(mode='json'),'definitions':definitions,'budget_preview':s.budget_preview(plan.plan_id)}
+  with (P/'csv-reusable-phase-final-bounded-training-review.json').open('x') as f:json.dump(review,f,indent=2);f.write('\n')
+  repo.approve_bundle(amendment,definitions);repo.authorize(plan)
+  with (P/'csv-reusable-phase-final-bounded-training-approval.json').open('x') as f:json.dump({'plan_id':plan.plan_id,'manifest':str(path),'scope_amendment_digest':content_digest(amendment)},f,indent=2);f.write('\n')
+  print(plan.plan_id)
+ finally:await r.close()
+asyncio.run(main())

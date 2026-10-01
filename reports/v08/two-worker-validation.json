@@ -1,0 +1,116 @@
+{
+  "schema_version": "assessment.worker-validation.v1",
+  "source_digest": "65c34b49105badea461a3475a96f93ddadbb01a9e209113fb093be325b847ddf",
+  "release_ready": false,
+  "implementation": [
+    "independent codex-app-server worker identities and processes",
+    "fresh per-invocation workspaces with named permissions and non-escalating approvals",
+    "legacy configuration serialization preserved",
+    "worker profile counts, screening turns and full-trial budget preview",
+    "repeatable CLI filesystem and empty App Server session probes"
+  ],
+  "validation": {
+    "plain_pytest_passed": 764,
+    "plain_pytest_skipped": 5,
+    "final_coverage_suite_passed": 767,
+    "final_coverage_suite_skipped": 5,
+    "additional_final_onboarding_test_passed": 1,
+    "coverage_percent": 81.4631264563983,
+    "app_server_branch_coverage_percent": 91.42857142857143,
+    "assessment_authority_branch_coverage_percent": 100,
+    "node_tests_passed": 13,
+    "real_container_tests_passed": 2,
+    "compile_schemas_ruff_mypy": true,
+    "ci_proofs": true,
+    "legacy_router_verifier": true
+  },
+  "live_boundary_evidence": {
+    "path": "reports/v08/two-worker-conformance.json",
+    "sha256": "d49743875c936316c0aac3bb23ab08fb56de935d0e36ca5fef12c0826fa13295",
+    "scope": "Harmless host conformance only; no selected plugin evaluation or model turns."
+  },
+  "assessment_grant": {
+    "counters_unchanged": true,
+    "current": {
+      "id": "onboarding",
+      "revoked": 0,
+      "operations": 302,
+      "model_turns": 2,
+      "elapsed_seconds": 93.31732538260985,
+      "cash_usd": "0"
+    },
+    "remaining_model_turn_allowances": 298,
+    "remaining_elapsed_seconds": 3506.68267461739
+  },
+  "remaining_gates": [
+    "complete effective tool access verification; both real session inventory checks were incomplete",
+    "reviewed mapping of Spreadsheets runtime dependencies",
+    "authorized model screening and complete live acceptance evidence; no candidate was activated"
+  ],
+  "logs": {
+    "pytest": {
+      "path": "/tmp/aeep-workers-pytest.txt",
+      "sha256": "525effae4d3e131d1e8fe81d2be80835cf4ced90446701a2f25c1a82383beea7"
+    },
+    "coverage-tests": {
+      "path": "/tmp/aeep-workers-coverage-tests.txt",
+      "sha256": "314b311edc6f7c2e779247dae00bcdc4a9b2c4753d9f803e5bbfeb8114acaae3"
+    },
+    "coverage": {
+      "path": "/tmp/aeep-workers-coverage.json",
+      "sha256": "3e1be4729f9d1ccc9d9db0a857b60e6416ad8ebb9d80d16e711d44fc02277c77"
+    },
+    "onboarding-test": {
+      "path": "/tmp/aeep-workers-onboarding-test.txt",
+      "sha256": "423b1d0e014eb1eab96f4420f7b344c2615be505dd574b756ac884826ca74f2d"
+    },
+    "final-focused": {
+      "path": "/tmp/aeep-workers-final-focused.txt",
+      "sha256": "d90685fc5de28b342b6110757f7f7507151671084550692eda1e8cc3cc5b0c60"
+    },
+    "final-mypy": {
+      "path": "/tmp/aeep-workers-final-mypy.txt",
+      "sha256": "c68f50a89794521a4d43d1354657bb2b465570f85b8cf4a226fc9f9fa7200852"
+    },
+    "node": {
+      "path": "/tmp/aeep-workers-node.txt",
+      "sha256": "1ae0b56094929acab3489d640136c584dcee2423e5e479c5da8542852a7be7aa"
+    },
+    "economic": {
+      "path": "/tmp/aeep-workers-economic.txt",
+      "sha256": "ca3689caf6fbaf8433095ab3dc9d3581e61bc0b99b8a1d363a525047f7ae00a4"
+    },
+    "dsh": {
+      "path": "/tmp/aeep-workers-dsh.txt",
+      "sha256": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8"
+    },
+    "safety": {
+      "path": "/tmp/aeep-workers-safety.txt",
+      "sha256": "e248519aba472a0a75510e4608782ec06b5aeb4acace9d6c8630d7651f403d92"
+    },
+    "comparison": {
+      "path": "/tmp/aeep-workers-comparison.txt",
+      "sha256": "0453ab8103b70437b3a29632b4e660496d03e8f5c1dc14950f242b4274f51c4d"
+    },
+    "native": {
+      "path": "/tmp/aeep-workers-native.txt",
+      "sha256": "a3514433ddfe1f8c6219ed94832c1d238be5ad0994e0df3d1f4d8ebc3a5e1be9"
+    },
+    "job": {
+      "path": "/tmp/aeep-workers-job.txt",
+      "sha256": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8"
+    },
+    "provider": {
+      "path": "/tmp/aeep-workers-provider.txt",
+      "sha256": "325414fdb856d0c018248bc2ca7991aa2410a02cdc233144da999ad4fb8465d6"
+    },
+    "router-verification": {
+      "path": "/tmp/aeep-workers-router-verification.json",
+      "sha256": "3401b0db8d84ef5bc4929734ee407fe2a303d1845a0a1e37f2a8c100748449d4"
+    },
+    "container": {
+      "path": "/tmp/aeep-workers-container.txt",
+      "sha256": "99db33d5c94c6f7da021687c7391181685cc33299c5435b1c861e2db3be3ec87"
+    }
+  }
+}

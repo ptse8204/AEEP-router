@@ -1,0 +1,354 @@
+Continue work in ptse8204/AEEP-router on top of the existing checkout.
+
+This is an implementation directive: inspect the current architecture, make a bounded change plan, and implement the smallest coherent end-to-end increment. Do not start a fresh repository or stop at a research document when safe local implementation is possible.
+
+Research snapshot: September 29, 2026. Recheck upstream documentation and the installed host version before relying on any interface.
+
+OBJECTIVE
+
+Build evidence-backed capability admission and task-specific configuration using the same mechanisms in both experimentation and production.
+
+The broader mission is to make useful independent capabilities demonstrably valuable, selectable by agents, and eventually supportable through authorized funding, while helping people achieve dependable outcomes with affordable models.
+
+The immediate product is not another global app store, general-purpose agent planner, or speculative token currency.
+
+ARD supplies discovery. AEEP supplies evidence, admission, configuration decisions, routing, verification, and outcome records. Native host controls should perform tool management and enforce supported restrictions wherever possible.
+
+Use existing upstream infrastructure when it fits. Contribute generally useful improvements upstream rather than maintain unnecessary forks. Keep ARD replaceable and preserve local/manual capability sources.
+
+1. AUDIT AND PRESERVE THE EXISTING FOUNDATION
+
+Read AGENTS.md, README.md, SPEC.md, ARCHITECTURE.md, SECURITY.md, applicable ADRs, current upgrade/status documents, and relevant tests.
+
+Record the actual branch, commit, host version, and baseline check results. Preserve uncommitted user work.
+
+The inspected main-branch documentation describes ActionRequest routing, qualification/activation, fingerprint-bound evidence, ResourceVector / ResourceAccounting, managed Codex App Server execution, host bridges, recovery, and shared service methods. Verify these against the actual checkout rather than assuming documentation proves implementation.
+
+Map existing candidate/discovery, host-adapter, campaign, profiler, receipt, trust, and policy components to KEEP, EXTEND, WRAP, or RETIRE-LATER. Identify concrete files and tests. Do not create duplicate managers, ledgers, or evidence databases.
+
+Preserve:
+- Hard constraints before scoring.
+- Explicit qualification and activation.
+- Ordinary route() remaining offline and deterministic.
+- Approval ceilings outside model-controlled arguments.
+- Argv-only command execution.
+- Privacy-preserving records and honest unknown measurements.
+- Separation between benchmark observations and production history.
+- No blind retry of indeterminate consequential actions.
+- Existing compatibility, migration, accounting, and recovery guarantees.
+
+The host remains responsible for overall task planning. AEEP manages bounded action choices and task-scoped capability configurations without adding a routing-model round unnecessarily.
+
+Codex continues to own authentication. Never read, copy, log, return, or persist Codex authentication state. Do not silently replace subscription-backed execution with paid API execution.
+
+Keep subscription usage, API charges, counterfactual valuations, and funded settlement separate. Live marketplace/payment execution is outside this increment.
+
+2. VERIFY AND REUSE EXISTING TOOL CONTROLS
+
+Produce a compact compatibility matrix: source, version, scope, observed behavior, limitations, and fallback.
+
+ARD:
+Use the inspected discovery specification, not an assumed runtime-control protocol. Normalize entries into existing AEEP candidates while retaining provenance and version/content references.
+
+Do not assume universal negative-filter syntax, complete registry coverage, or support for every extension field. Apply local eligibility filtering too. Bound and redact discovery queries, federation, pagination, response sizes, and outbound artifact/context fetches.
+
+Missing trust information remains missing. Discovery alone must never install, qualify, activate, or authorize a resource.
+
+Codex:
+Evaluate native MCP enabled / enabled_tools / disabled_tools, per-skill enablement, supported project plugin configuration, and plugin-scoped MCP policies.
+
+Respect configuration precedence and workspace administration. Disabling a plugin does not prove its files are absent.
+
+App Server:
+Inspect supported configuration, skill enablement, MCP reload, and effective-state methods for the installed version.
+
+Current documentation lists skills/config/write, config/mcpServer/reload, and mcpServerStatus/list. It marks plugin/list, plugin/read, plugin/install, and plugin/uninstall under development and unsuitable for production clients. Do not make production depend on those methods while that warning applies.
+
+Evaluate stability per method/version rather than treating the entire App Server as either experimental or stable. A reload acknowledgement is not proof of immediate revocation or cleared model context.
+
+Responses API:
+Distinguish MCP allowed_tools, function tool_choice restrictions, and tool_search / defer_loading. They affect different parts of import, call eligibility, and context loading.
+
+Keep API adapters optional and separately authorized.
+
+OpenAI Agents SDK:
+Evaluate MCPServerManager for connection lifecycle and static/dynamic tool_filter for exposure. These are not plugin-value evaluators and are not automatically controls for an existing Codex or ChatGPT session.
+
+Do not assume ChatGPT's internal plugin manager is externally callable.
+
+Prefer native controls. Add a narrow mediated dispatch/filter layer only where it closes a demonstrated gap. Do not build a new general gateway by default.
+
+3. ONE SHARED CAPABILITY-PROFILE MECHANISM
+
+Extend existing configuration models with a versioned task-scoped profile, or reuse an equivalent already present. CapabilityProfile is an illustrative name, not a requirement to invent another class.
+
+Represent:
+- Resource identities and assessed versions/fingerprints.
+- Selected plugin components and dependencies.
+- Eligible/discoverable capabilities.
+- Exposed tool definitions and skill files.
+- Allowed operations and side-effect approval requirements.
+- Filesystem, network, and credential scopes.
+- Hooks, scripts, and relevant package resources.
+- Resource limits and intended host/model configuration.
+
+Keep installed, discoverable, permitted, exposed, and used as separate states.
+
+A plugin can bundle skills, servers, files, dependencies, and hooks. Removing one component is a component ablation, not automatically a whole-plugin ablation. Do not silently alter a package and represent it as the unchanged upstream version.
+
+Use one production implementation to validate profiles, compile native controls, inspect effective state, activate, enforce admitted dispatch, record observations, and tear down or replace a profile.
+
+Experiments call that same implementation. They add fixtures, repetitions, and comparisons—not a separate enforcement system.
+
+Report host support separately for catalog filtering, schema exposure, skill/file exclusion, call enforcement, filesystem/network isolation, credential scope, hooks, context reset, and resource observability.
+
+Unsupported means unsupported. Advisory-only operation must not pass a strict isolation gate.
+
+Use execution-local configuration/processes where necessary. Never toggle a user's global plugin state across concurrent trials. Do not obtain isolation by copying authentication files. Report a blocker when the documented host arrangement cannot provide the required separation.
+
+4. DEFINE WHAT “REMOVING A TOOL” MEANS
+
+Distinguish:
+
+Deferred:
+The capability can be discovered later. It is not excluded.
+
+Hidden:
+It is omitted from a catalog or context surface, but other access paths may remain.
+
+Call-blocked:
+Mediated dispatch rejects the operation even if the model knows it exists.
+
+Absent/inaccessible:
+Candidate-specific artifacts/services cannot be reached within the declared execution boundary.
+
+For strict control arms, handle candidate-specific catalog entries, skill content, plugin hooks, reachable package artifacts, endpoints, credentials, aliases, caches, resources/prompts, and rediscovery paths.
+
+Do not infer absence from a UI toggle. If unrestricted access defeats exclusion, mark the trial unsupported or contaminated rather than manufacture strict evidence.
+
+Retain normal baseline tools, independent libraries, and permitted self-generated helpers. Do not cripple the control by removing ordinary shell access, networking, or competitors merely to make a candidate look useful. Disclose unavoidable differences.
+
+A workspace directory is not a sandbox. A tool-name filter does not constrain everything a server process or allowed general-purpose command can do. Apply actual host/process/service permissions where required and recheck authorization at execution.
+
+Already-loaded skill instructions do not disappear when the skill is disabled. Use fresh contexts for strict comparisons and clean handoffs. Do not reuse treatment history in a control through resume/fork. Compaction is not proof of erasure.
+
+Production must support scoped activation, version pinning, drift detection, expiry/revocation, rollback, and teardown. Make transitions concurrency-safe, revalidate before new calls, and document handling of in-flight operations.
+
+The evaluated agent must not be able to change its own policy. Keep high-authority host-control methods outside its task toolset.
+
+5. REUSE EXISTING BENCHMARKS
+
+Assess these, in this order:
+
+SkillsBench:
+The first adapter candidate for direct paired skill-benefit evaluation. Start with a small pinned, local, credential-free task subset. Reuse task packages and deterministic verifiers; retain licenses, attribution, task IDs, and revision.
+
+The current repository uses native BenchFlow task.md packages and offers local Docker execution. API-oriented upstream agent runners must not force a change to AEEP's subscription-authentication boundary.
+
+OSWorld-MCP:
+Relevant to GUI-versus-tool decisions, spreadsheet work, and distractor tools. Defer heavyweight desktop setup until the small vertical slice works.
+
+ModelScope MCPBench:
+Useful for comparing MCP server implementations under fixed model/agent configurations.
+
+Accenture MCP-Bench and Toolathlon:
+Useful for later realistic multi-tool and multi-application configurations. Their model scores are not automatically marginal-value scores for individual plugins.
+
+Document verifier quality, reset requirements, dependencies, external services, licensing, cost, maintenance, and adaptation limits.
+
+Prefer thin adapters referencing upstream tasks. A changed host, task subset, prompt, budget, verifier, or tool environment is an adapted evaluation—not an official reproduced leaderboard score.
+
+Validate tasks with the oracle before agent trials. Keep oracle solutions and private checks outside the evaluated agent's reachable workspace. The agent must not modify its trusted verifier.
+
+Generated task variations require review and a trustworthy success criterion. Candidate authors must not define all their own success tests.
+
+Do not claim plugin/skill evaluation does not exist. Published average gains do not establish that a specific capability helps a particular user, model, or configuration.
+
+6. MAKE EXPERIMENTATION EASY
+
+Represent each campaign as:
+- A pinned base profile.
+- An explicit candidate/component delta.
+- Task suite and revision.
+- Host/model/effort settings.
+- Resource bounds and repetitions.
+- Independent verification.
+
+A preflight/dry-run must show resolved profiles, effective differences, exclusions, required services/credentials, limits, and blockers.
+
+Extend the existing CLI/API rather than create a parallel command hierarchy.
+
+Experiment A — candidate value:
+
+Control:
+Normal environment without the candidate.
+
+Treatment:
+The same environment with the candidate available.
+
+Do not force invocation. Keep baseline skills and ordinary competitors constant. Label forced-use, narrowed-subset, and hidden-but-installed arms as distinct diagnostics.
+
+Experiment B — AEEP value:
+
+Compare:
+1. Normal host.
+2. Host with external discovery.
+3. The same discovery-enabled host with AEEP evidence/admission/profile decisions.
+
+The latter two must have equivalent candidate access and user constraints. Do not attribute better discovery to AEEP's decision logic.
+
+Use a pinned source snapshot for reproducible discovery comparisons. Label live-discovery campaigns separately.
+
+For both experiments:
+Reset project/service state, start fresh agent sessions, and hold instructions/model/host settings constant except for the intervention. Randomize or counterbalance trial order.
+
+Record warm/cold cache conditions and any inability to reset provider caches. Prevent treatment artifacts or feedback from leaking into controls.
+
+Predeclare normal and larger resource budgets. Let agents generate their own helper code. Measure whether benefits persist when the control has more room to work.
+
+Distinguish efficiency gains from enabling access the baseline fundamentally lacks, such as a private external service.
+
+Use task-aware paired estimates and uncertainty. A smoke test proves wiring, not broad benefit. Do not treat dependent repetitions as independent tasks or select winners by tool-call count.
+
+Freeze evidence/admission policy during scored comparisons. Keep calibration/selection tasks separate from held-out evaluation. Explicit online adaptation is a separate protocol.
+
+A bundled-skill gain is not automatically attributable to each component.
+
+7. METRICS AND EVIDENCE
+
+Verify actual output/state rather than accepting “agent says done.”
+
+Keep functional outcome, execution quality, permission compliance, and comparative contribution separate. For subjective quality, record the rubric and judgment uncertainty.
+
+Retain raw quality/reliability, wall time, model/cache usage, retries, context/schema estimates, external charges, observable local resources, and human intervention.
+
+Account for discovery, setup, verification, AEEP overhead, and amortizable assessment costs. Include stronger-model supervision and escalation.
+
+Do not double-count cached and total tokens or present inferred per-skill context usage as exact telemetry.
+
+Time is a user preference or operational cap—not the universal objective. A slower route can win when it meets the quality floor and uses fewer scarce resources.
+
+Unknown subscription cost/capacity stays unknown. Subscription usage must not be reported as API cash.
+
+Reuse existing evidence cohorts and receipt schemas. Bind evidence to capability/version/fingerprint, components, task/verifier revision, host/model/effort, profiles, policy, budgets, cache conditions, trial count, source, and observation period.
+
+A remote service's schema hash does not prove unchanged backend behavior.
+
+Keep observations, estimates, and controlled comparisons distinct. Imported research is contextual evidence, not automatic qualification or activation.
+
+Support USE, DO NOT USE, RESTRICT, TEST FIRST, and INSUFFICIENT EVIDENCE through existing lifecycle concepts without conflicting duplicate states.
+
+Routine runtime decisions should reuse evidence cheaply, not start new benchmarks.
+
+Preserve contributor identity and future authorized-support references, but keep publisher, contributor, and beneficiary relationships distinct. Do not turn saved tokens into redeemable balances or allocate credit by call count.
+
+8. FIRST IMPLEMENTATION SLICE
+
+Deliver:
+- One ARD adapter plus existing/local fallback.
+- Shared profile compilation and effective-state inspection.
+- A supported Codex host integration.
+- A small pinned SkillsBench adapter, or a precise compatibility blocker.
+- A realistic paired spreadsheet campaign.
+- A normal production-style invocation using the same profile mechanism.
+
+Use small and larger spreadsheet tasks that verify requested changes and preservation of unrelated workbook content. Do not preselect which route wins.
+
+Keep an offline deterministic demonstration, upstream task/verifier validation, and an authorized live-agent campaign as separately reported checks. Synthetic results must not be presented as evidence of real model benefit.
+
+Demonstrate production stage profiles where practical: building, verification, publishing, and a smaller later content edit. These are scoped configurations, not a requirement for permanent agents or services.
+
+9. ACCEPTANCE TESTS
+
+Prove:
+- Profiles reject escalation, invalid dependencies, stale bindings, and unsupported strict isolation.
+- Control/treatment differences contain only declared changes.
+- Required baseline capabilities still work.
+- A permitted harmless operation succeeds and a disallowed operation fails through the claimed boundary.
+- Deferred search, aliases, caches, hooks, and direct candidate paths cannot silently restore an excluded capability within the declared boundary.
+- Concurrent executions cannot change each other's configuration, fixtures, or authority.
+- Revocation, drift, missing required servers, and unsupported host versions fail explicitly rather than widen access.
+- Experiments and production invoke the same authorization/activation implementation.
+- ARD errors, unknown fields, unsupported filters, malformed entries, and hostile fetch destinations do not activate resources or leak private task data.
+- Existing routing, migrations, serialization, approval, accounting, idempotency, and recovery guarantees remain valid.
+- Mismatched or stale external evidence cannot silently authorize production decisions.
+
+Test both inclusion and exclusion. An allow-list that accidentally removes every tool is not a successful isolation implementation.
+
+When native controls fail, pin a validated version, use a reviewed narrow fallback, or mark the mode unsupported. Do not weaken acceptance criteria to make a release check green.
+
+10. DELIVERABLES AND COMPLETION
+
+Update existing architecture/roadmap/status documents with:
+- The ARD/AEEP boundary.
+- Host compatibility and enforcement limits.
+- Shared profile lifecycle.
+- Benchmark reuse/adaptation decisions.
+- Implemented scope and follow-on work.
+
+Provide tested commands for preflight, profile diff/inspection, paired execution, verification, and production-style execution. Label proposed commands until implemented.
+
+Run the repository's required schema, lint/type, test, coverage, and release checks where applicable. Separate pre-existing failures from regressions. Do not reinterpret old deterministic routing results as proof of general plugin benefit.
+
+Report concrete files changed, reused components, commands run, test results, measurements, blockers, and remaining phases.
+
+Distinguish:
+implemented and tested;
+offline-only;
+live-verified;
+blocked.
+
+Do not publish a release, start paid services, install unreviewed software in the real user's environment, or execute consequential live benchmarks without authorization.
+
+Begin with repository inspection, a concise change map, and baseline checks. Then implement the smallest coherent slice and leave an explicit continuation state.
+
+PRIMARY SOURCES
+
+ARD:
+https://agenticresourcediscovery.org/spec/
+
+Codex MCP:
+https://developers.openai.com/codex/mcp
+
+Codex configuration:
+https://developers.openai.com/codex/config-reference
+
+Plugin packaging/configuration:
+https://developers.openai.com/plugins/build/plugins
+
+Codex App Server:
+https://developers.openai.com/codex/app-server
+
+Reported allow-list issue; verify rather than assume:
+https://github.com/openai/codex/issues/47102
+
+Responses MCP:
+https://developers.openai.com/api/docs/guides/tools-connectors-mcp
+
+Function calling:
+https://developers.openai.com/api/docs/guides/function-calling
+
+Tool search:
+https://developers.openai.com/api/docs/guides/tools-tool-search
+
+OpenAI Agents SDK MCP:
+https://openai.github.io/openai-agents-python/mcp/
+
+SkillsBench:
+https://github.com/benchflow-ai/skillsbench
+https://www.skillsbench.ai/blogs/skillsbench-1-1
+
+OSWorld-MCP:
+https://github.com/X-PLUG/OSWorld-MCP
+
+ModelScope MCPBench:
+https://github.com/modelscope/MCPBench
+
+Accenture MCP-Bench:
+https://arxiv.org/abs/2508.20453
+
+Toolathlon:
+https://toolathlon.xyz/
+
+These are research inputs, not dependencies to install unconditionally.
+Pin actual versions and inspect licenses before incorporating code or data.

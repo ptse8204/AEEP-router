@@ -1,0 +1,152 @@
+{
+  "source_before": "dc113fe0c7e427e4c2a30a035429a606120b10b8a7ddc8a9129430f5ffce9235",
+  "source_after": "dc113fe0c7e427e4c2a30a035429a606120b10b8a7ddc8a9129430f5ffce9235",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08447062503546476,
+      "log": "reports/v08/paired-conformance-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6756059170002118,
+      "log": "reports/v08/paired-conformance-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08537608303595334,
+      "log": "reports/v08/paired-conformance-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.36551291693467647,
+      "log": "reports/v08/paired-conformance-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13850000000093132,
+      "log": "reports/v08/paired-conformance-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 333.23285916703753,
+      "log": "reports/v08/paired-conformance-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 464.83646291692276,
+      "log": "reports/v08/paired-conformance-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0382424170384184,
+      "log": "reports/v08/paired-conformance-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/paired-conformance-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.371136000030674,
+      "log": "reports/v08/paired-conformance-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/paired-conformance-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.043735124985687435,
+      "log": "reports/v08/paired-conformance-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/paired-conformance-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04455900005996227,
+      "log": "reports/v08/paired-conformance-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.131908499985002,
+      "log": "reports/v08/paired-conformance-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048750750022009015,
+      "log": "reports/v08/paired-conformance-check-12.txt"
+    }
+  ]
+}

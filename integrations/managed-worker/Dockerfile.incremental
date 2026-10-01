@@ -1,0 +1,16 @@
+# Reproducible offline rebuild of the reviewed Linux contexts. Pulling is disabled.
+FROM aeep-review-spreadsheets@sha256:7424e9ed9ac41dc449a91a0ad773548295e6d601ea24ff81deca9846700dc613 AS plugin
+FROM aeep-review-plain@sha256:c2dd47ee717cff588507a4c0adb3b4fe303e9397b0f8f53fa529139accc3a13d AS common
+USER root
+COPY wheels/ /tmp/wheels/
+COPY requirements.lock /tmp/requirements.lock
+RUN python3 -m pip install --no-index --find-links=/tmp/wheels --require-hashes -r /tmp/requirements.lock && rm -rf /tmp/wheels /tmp/requirements.lock
+COPY worker-launch worker-config.json codex_metrics.py /opt/aeep/
+RUN chmod 755 /opt/aeep/worker-launch
+USER 65534:65534
+
+FROM common AS treatment
+USER root
+COPY --from=plugin /opt/dependencies/ /opt/dependencies/
+RUN mkdir -p /etc/codex/skills && ln -s /opt/dependencies/plugin/skills/spreadsheets /etc/codex/skills/spreadsheets
+USER 65534:65534

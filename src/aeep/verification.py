@@ -170,7 +170,7 @@ def _pytest(root: Path, node_ids: list[str]) -> tuple[bool, str]:
         check=False,
         capture_output=True,
         text=True,
-        timeout=300,
+        timeout=900,
         env={**os.environ, "AEEP_VERIFY_OFFLINE": "1"},
     )
     output = (result.stdout + result.stderr).strip()
@@ -184,6 +184,9 @@ def verify_router_complete(
 ) -> RouterCompletionReport:
     repository = (root or Path(__file__).resolve().parents[2]).resolve()
     lock_path = repository / "reports" / "v07" / "verification-lock.json"
+    current_lock = repository / "reports" / "v08" / "verification-lock.json"
+    if current_lock.is_file():
+        lock_path = current_lock
     lock = json.loads(lock_path.read_text(encoding="utf-8"))
     expected_digests: dict[str, str] = lock["artifacts"]
     selected_profiles = (
@@ -283,13 +286,13 @@ def verify_router_complete(
 
 def write_completion_report(report: RouterCompletionReport, *, root: Path | None = None) -> None:
     repository = (root or Path(__file__).resolve().parents[2]).resolve()
-    report_dir = repository / "reports" / "v07"
+    report_dir = repository / "reports" / ("v08" if (repository / "reports" / "v08" / "verification-lock.json").exists() else "v07")
     report_dir.mkdir(parents=True, exist_ok=True)
     (report_dir / "router-complete.json").write_text(
         report.model_dump_json(indent=2) + "\n", encoding="utf-8"
     )
     lines = [
-        "# AEEP 0.7 router completion",
+        "# AEEP legacy router compatibility",
         "",
         f"Revision: `{report.revision}`",
         f"Release ready: `{str(report.release_ready).lower()}`",

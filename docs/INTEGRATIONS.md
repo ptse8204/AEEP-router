@@ -1,6 +1,6 @@
 # Agent integration guide
 
-AEEP 0.7 exposes the same ten operations across MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients; provider-native schemas remain useful where the application owns the model/tool loop:
+AEEP 0.7 exposes ten operations through MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients. Applications that manage their own model/tool loop can use the provider-native schemas:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
@@ -17,17 +17,17 @@ The three economic inspection tools read already-persisted, sanitized records. T
 
 Financial acceptance, reservations, captures, releases, refunds, and reconciliation are operator-only and are not model tools. Raw action input, output, credentials, and external billing references are not returned by the economic inspection tools.
 
-This keeps the routing contract stable even when an agent host changes. The host remains responsible for its own sandbox and approval UI; AEEP independently enforces manifest constraints and its operator-configured execution ceiling.
+The same routing contract applies across agent hosts. Each host manages its sandbox and approval UI; AEEP separately enforces manifest constraints and the execution ceiling configured by the operator.
 
 ## Preferred host-native dispatch
 
-For an exact action already classified by the host, call AEEP directly with the
-bounded `ActionRequest`; a deterministic local winner requires no model call. If
-model judgment is required, native Tool Search or the host planner first chooses
-the semantic capability, then AEEP selects the reviewed implementation and starts
-at most one managed-host execution turn. Implementation routes and the full AEEP
-control schema stay outside model input unless the selected host explicitly needs
-a canonical source tool.
+Once the host has classified an action, call AEEP with the bounded
+`ActionRequest`. AEEP can select a local implementation deterministically without
+a model call. When the action needs model judgment, native Tool Search or the
+host planner chooses the semantic capability first. AEEP then selects a reviewed
+implementation and starts at most one managed-host execution turn. Implementation
+routes and the full AEEP control schema stay outside model input unless the
+selected host explicitly needs a canonical source tool.
 
 MCP and provider-native function exports remain supported compatibility surfaces.
 Putting `aeep_route_action` in a separate model-facing meta-router round is the
@@ -210,7 +210,7 @@ Official references:
 - <https://docs.z.ai/guides/capabilities/mcp-call>
 - <https://docs.z.ai/devpack/quick-start>
 
-## Agent Skills
+## Agent skills
 
 Copy [`../skills/aeep-router`](../skills/aeep-router) into the host's supported skills directory. The included `SKILL.md` teaches the agent to:
 

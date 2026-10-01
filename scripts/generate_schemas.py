@@ -8,6 +8,34 @@ import json
 from pathlib import Path
 from typing import Any
 
+from aeep.assessment.boundary import BoundaryConformance, BoundaryProbe, DifferentialConformance
+from aeep.assessment.controlled_fixture import ControlledFixtureRecord
+from aeep.assessment.models import (
+    AssessmentAuthorization,
+    AssessmentBudgetAmendment,
+    AssessmentComparison,
+    AssessmentEnvironment,
+    AssessmentPlan,
+    AssessmentPlanningRequest,
+    AssessmentProgress,
+    AssessmentReport,
+    AssessmentScopeAmendment,
+    AssessmentSetupRequest,
+    AssessmentSubject,
+    ConformanceProbeRequest,
+    DefinitionProposal,
+    ExecutableRecipeExtension,
+    GraderValidationEvidence,
+    IncrementalExperiment,
+    PilotPolicy,
+    RecipeCaseSet,
+    RecipeDefinition,
+    RecipeMaterializationRequest,
+    ReusableBaselineArtifact,
+    ScopedAdmission,
+    ThreeWayAccessDefinition,
+)
+from aeep.assessment.tools import declarations as assessment_tools
 from aeep.attempts import ExecutionAttempt
 from aeep.benchmarking import (
     BenchmarkCampaignReport,
@@ -27,6 +55,11 @@ from aeep.capacity import (
 )
 from aeep.conformance import ProviderConformanceReport
 from aeep.discovery import RegistryCandidate
+from aeep.execution import ExecutionEvent, ExecutionEvidence, ExecutorCapabilities
+from aeep.hosts.codex_inspection import WorkerInspectionResult
+from aeep.hosts.codex_pair_inspection import ComposedPairDefinition, WorkerPairInspection
+from aeep.hosts.codex_sandbox import NativeSandboxConfig
+from aeep.hosts.workers import ManagedWorkerBinding
 from aeep.integrations import export_tools
 from aeep.models import (
     ActionApprovalRecord,
@@ -94,6 +127,8 @@ from aeep.models import (
     SignatureEnvelopeV2,
     SignedExecutionReceipt,
     SubscriptionResource,
+    TaskExecutionOutcome,
+    TaskScope,
     TraceProfileReport,
     UsageStatement,
 )
@@ -117,6 +152,7 @@ from aeep.provider_package import (
     SmokeTestReport,
 )
 from aeep.qualification import QualificationReport, RouteCandidate
+from aeep.tasks import TaskActivation, TaskReconciliation
 from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
@@ -125,6 +161,30 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "codex-native-sandbox.schema.json": NativeSandboxConfig,
+    "task-scope.schema.json": TaskScope,
+    "task-activation.schema.json": TaskActivation,
+    "task-reconciliation.schema.json": TaskReconciliation,
+    "task-outcome.schema.json": TaskExecutionOutcome,
+    "assessment-setup-request.schema.json": AssessmentSetupRequest,
+    "assessment-controlled-fixture.schema.json": ControlledFixtureRecord,
+    "assessment-recipe-extension.schema.json": ExecutableRecipeExtension,
+    "assessment-recipe-materialization.schema.json": RecipeMaterializationRequest,
+    "assessment-recipe-cases.schema.json": RecipeCaseSet,
+    "execution-worker.schema.json": ManagedWorkerBinding,
+    "assessment-boundary-conformance.schema.json": BoundaryConformance,
+    "assessment-boundary-probe.schema.json": BoundaryProbe,
+    "executor-capabilities.schema.json": ExecutorCapabilities,
+    "execution-event.schema.json": ExecutionEvent,
+    "execution-evidence.schema.json": ExecutionEvidence,
+    "assessment-grader-validation.schema.json": GraderValidationEvidence,
+    "assessment-scope-amendment.schema.json": AssessmentScopeAmendment,
+    "assessment-budget-amendment.schema.json": AssessmentBudgetAmendment,
+    "assessment-experiment.schema.json": IncrementalExperiment,
+    "assessment-three-way-access.schema.json": ThreeWayAccessDefinition,
+    "assessment-pilot.schema.json": PilotPolicy,
+    "assessment-reusable-baseline.schema.json": ReusableBaselineArtifact,
+    "assessment-differential-conformance.schema.json": DifferentialConformance,
     "action-features.schema.json": ActionFeatures,
     "evidence-cohort-key.schema.json": EvidenceCohortKey,
     "estimate-uncertainty.schema.json": EstimateUncertainty,
@@ -132,6 +192,21 @@ MODEL_FILES = {
     "action-request.schema.json": ActionRequest,
     "authorization-meter-quantity.schema.json": AuthorizationMeterQuantity,
     "benchmark-result.schema.json": BenchmarkResult,
+    "assessment-subject.schema.json": AssessmentSubject,
+    "assessment-progress.schema.json": AssessmentProgress,
+    "assessment-recipe.schema.json": RecipeDefinition,
+    "assessment-plan.schema.json": AssessmentPlan,
+    "assessment-comparison.schema.json": AssessmentComparison,
+    "assessment-authorization.schema.json": AssessmentAuthorization,
+    "assessment-report.schema.json": AssessmentReport,
+    "assessment-admission.schema.json": ScopedAdmission,
+    "assessment-environment.schema.json": AssessmentEnvironment,
+    "assessment-planning-request.schema.json": AssessmentPlanningRequest,
+    "assessment-conformance-request.schema.json": ConformanceProbeRequest,
+    "assessment-worker-inspection.schema.json": WorkerInspectionResult,
+    "assessment-worker-pair-inspection.schema.json": WorkerPairInspection,
+    "assessment-composed-pair-inspection.schema.json": ComposedPairDefinition,
+    "assessment-definition-proposal.schema.json": DefinitionProposal,
     "benchmark-suite.schema.json": BenchmarkSuite,
     "benchmark-campaign-report.schema.json": BenchmarkCampaignReport,
     "benchmark-revaluation-report.schema.json": BenchmarkRevaluationReport,
@@ -252,6 +327,8 @@ def generated() -> dict[Path, str]:
         values[SCHEMA_DIR / filename] = _encoded(model.model_json_schema())
     for filename, tool_format in TOOL_FILES.items():
         values[SCHEMA_DIR / filename] = _encoded({"tools": export_tools(tool_format)})
+    values[SCHEMA_DIR / "tools.assessment.mcp.json"] = _encoded({"tools": assessment_tools()})
+    values[SCHEMA_DIR / "tools.task.mcp.json"] = _encoded({"tools": assessment_tools(tasks_only=True)})
     return values
 
 

@@ -1,0 +1,199 @@
+{
+  "operation_id": "setup:planning_current_composed_workbook_5fff_native_only",
+  "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "setup_complete": true,
+  "project": "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3",
+  "scope": {
+    "schema_version": "aeep.task-scope.v1",
+    "scope_id": "current-composed-workbook-5fff",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3",
+    "executor_fingerprints": {
+      "native.composed.workbook": "sha256:2bde7b769feecebd6e0ac3c42b80edf0e186891cf35f901936f6ef0699068699"
+    },
+    "approval_ceiling": "read",
+    "max_attempts": 1,
+    "max_attempt_seconds": 10.0,
+    "expires_at": "2026-09-30T23:58:24.309436Z"
+  },
+  "scope_digest": "71126cab4d91fb5d45bf76ce36d098d2b4c78fd11835023f9896aa7d76203348",
+  "spec": {
+    "id": "native.composed.workbook",
+    "capability": "assessment.workbook@1",
+    "kind": "command",
+    "description": "Reviewed offline workbook recipe program",
+    "input_schema": {
+      "type": "object",
+      "required": [
+        "workbook_b64",
+        "task",
+        "variation",
+        "row_bound"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "workbook_b64": {
+          "type": "string",
+          "maxLength": 200000
+        },
+        "task": {
+          "const": "Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. Write Summary!A1=\"Total\" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula caches; return its base64 bytes as workbook_b64. No macros or external links."
+        },
+        "variation": {
+          "enum": [
+            "mixed_types_dates",
+            "missing_invalid",
+            "duplicates",
+            "multiple_sheets",
+            "formulas",
+            "structure_formatting",
+            "unicode_sparse"
+          ]
+        },
+        "row_bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      }
+    },
+    "output_schema": {
+      "type": "object",
+      "required": [
+        "workbook_b64"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "workbook_b64": {
+          "type": "string",
+          "maxLength": 200000
+        }
+      }
+    },
+    "estimate": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": null,
+        "upper_bound_usd": null,
+        "evidence": {
+          "status": "unavailable",
+          "source": "unavailable",
+          "trust": "untrusted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "side_effect": "read",
+    "locality": "local",
+    "requires_network": false,
+    "data_residency": [],
+    "idempotent": true,
+    "safe_to_auto_execute": true,
+    "enabled": true,
+    "tags": [],
+    "resource_pool": null,
+    "provider_id": null,
+    "validators": [
+      {
+        "kind": "callback",
+        "config": {
+          "name": "aeep.workbook.native.v1",
+          "implementation_digest": "2233da94128c9a5304a4c937e83248d862c6f96e3dd3749a4df0ef0fbeba3ad4"
+        },
+        "required": true
+      }
+    ],
+    "config": {
+      "argv": [
+        "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-I",
+        "-c",
+        "import json,sys;ns={'__name__':'reference'};exec('\"\"\"Reviewed offline workbook generator/reference. Executed only in the recipe container.\"\"\"\\nimport base64\\nimport io\\nimport json\\nimport random\\nimport sys\\nimport zipfile\\nfrom datetime import datetime\\n\\nfrom openpyxl import Workbook, load_workbook\\nfrom openpyxl.styles import Font\\n\\nHEADERS = [\\'ID\\', \\'Date\\', \\'Quantity\\', \\'Price\\', \\'Amount\\']\\nTASK = (\\'Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric \\'\\n        \\'quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates \\'\\n        \\'to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. \\'\\n        \\'Write Summary!A1=\"Total\" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets \\'\\n        \\'and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula \\'\\n        \\'caches; return its base64 bytes as workbook_b64. No macros or external links.\\')\\nVARIATIONS = [\\'mixed_types_dates\\', \\'missing_invalid\\', \\'duplicates\\', \\'multiple_sheets\\',\\n              \\'formulas\\', \\'structure_formatting\\', \\'unicode_sparse\\']\\n\\n\\ndef encode(book):\\n    book.properties.created = book.properties.modified = datetime(2000, 1, 1)\\n    stream = io.BytesIO()\\n    book.save(stream)\\n    return canonical(stream.getvalue())\\n\\n\\ndef canonical(raw):\\n    target = io.BytesIO()\\n    with zipfile.ZipFile(io.BytesIO(raw)) as source, zipfile.ZipFile(target, \\'w\\') as dest:\\n        for name in sorted(source.namelist()):\\n            value = source.read(name)\\n            if name == \\'docProps/core.xml\\':\\n                from xml.etree import ElementTree as ET\\n                root = ET.fromstring(value)\\n                for field in (\\'created\\', \\'modified\\'):\\n                    root.find(\\'{http://purl.org/dc/terms/}\\' + field).text = \\'2000-01-01T00:00:00Z\\'\\n                value = ET.tostring(root)\\n            info = zipfile.ZipInfo(name, (2000, 1, 1, 0, 0, 0))\\n            info.compress_type = zipfile.ZIP_DEFLATED\\n            dest.writestr(info, value)\\n    return base64.b64encode(target.getvalue()).decode()\\n\\n\\ndef render(rows, extras):\\n    book = Workbook()\\n    sheet = book.active\\n    sheet.title = \\'Data\\'\\n    sheet.append(HEADERS)\\n    for row in rows:\\n        sheet.append(row)\\n    for cell in sheet[1]:\\n        cell.font = Font(bold=True)\\n    for name, value in extras.items():\\n        book.create_sheet(name)[\\'A1\\'] = value\\n    return encode(book)\\n\\n\\ndef clean(rows):\\n    result, seen = [], set()\\n    for identity, date, quantity, price, *_ in rows:\\n        if identity is None or identity in seen:\\n            continue\\n        seen.add(identity)\\n        try:\\n            quantity = int(quantity or 0)\\n            price = int(price or 0)\\n            date = datetime.strptime(str(date)[:10], \\'%Y-%m-%d\\').strftime(\\'%Y-%m-%d\\')\\n        except (TypeError, ValueError):\\n            continue\\n        result.append([str(identity), date, quantity, price, quantity * price])\\n    return result\\n\\n\\ndef generate(payload):\\n    rng = random.Random(payload[\\'seed\\'])\\n    cases = []\\n    for stage in payload[\\'stages\\']:\\n        for index in range(stage[\\'count\\']):\\n            variation = VARIATIONS[index % len(VARIATIONS)]\\n            rows = [[f\\'{stage[\"split\"]}-{rng.getrandbits(48):012x}-{i}\\', f\\'2026-09-{i+1:02}\\',\\n                     rng.randrange(1, 20), rng.randrange(1, 100), None] for i in range(2 + index % 14)]\\n            extras = {\\'Notes\\': \\'Preserve this note\\'} if variation in {\\'multiple_sheets\\', \\'structure_formatting\\'} else {}\\n            if variation == \\'mixed_types_dates\\':\\n                for row in rows[::2]:\\n                    row[2] = str(row[2])\\n                    row[1] = datetime.strptime(row[1], \\'%Y-%m-%d\\')\\n            elif variation == \\'missing_invalid\\':\\n                rows[0][2] = None\\n                rows[-1][3] = \\'invalid\\'\\n            elif variation == \\'duplicates\\':\\n                rows.insert(1, list(rows[0]))\\n                rows[1][3] = 999\\n            elif variation == \\'formulas\\':\\n                for row in rows:\\n                    row[4] = \\'=1+1\\'\\n            elif variation == \\'unicode_sparse\\':\\n                rows[0][0] = \\'\u6771\u4eac\\\\u2013Zo\u00eb-\\' + rows[0][0]\\n                rows.insert(1, [None] * 5)\\n            truth = {\\'rows\\': clean(rows), \\'extras\\': extras}\\n            value = {\\'workbook_b64\\': render(rows, extras), \\'task\\': TASK,\\n                     \\'variation\\': variation, \\'row_bound\\': len(rows)}\\n            cases.append({\\'input\\': value, \\'output\\': truth, \\'variation\\': variation,\\n                          \\'template_family\\': \\'workbook:\\' + variation})\\n    return {\\'cases\\': cases}\\n\\n\\ndef reference(value):\\n    # Read the actual rendered input; generator truth is never an input here.\\n    book = load_workbook(io.BytesIO(base64.b64decode(value[\\'workbook_b64\\'])), data_only=False)\\n    rows = clean(list(book[\\'Data\\'].values)[1:])\\n    sheet = book[\\'Data\\']\\n    sheet.delete_rows(2, sheet.max_row)\\n    for index, row in enumerate(rows, 2):\\n        sheet.append([*row[:4], f\\'=C{index}*D{index}\\'])\\n    if \\'Summary\\' not in book:\\n        book.create_sheet(\\'Summary\\')\\n    book[\\'Summary\\'][\\'A1\\'] = \\'Total\\'\\n    book[\\'Summary\\'][\\'B1\\'] = f\\'=SUM(Data!E2:E{len(rows)+1})\\'\\n    # openpyxl writes formulas without caches. Populate this deterministic\\n    # reference\\'s caches; the separate grader recomputes from actual cells.\\n    from xml.etree import ElementTree as ET\\n    raw = base64.b64decode(encode(book))\\n    target = io.BytesIO()\\n    ns = \\'{http://schemas.openxmlformats.org/spreadsheetml/2006/main}\\'\\n    with zipfile.ZipFile(io.BytesIO(raw)) as source, zipfile.ZipFile(target, \\'w\\', zipfile.ZIP_DEFLATED) as dest:\\n        for name in source.namelist():\\n            data = source.read(name)\\n            if name.startswith(\\'xl/worksheets/\\'):\\n                root = ET.fromstring(data)\\n                for cell in root.iter(ns+\\'c\\'):\\n                    formula = cell.find(ns+\\'f\\')\\n                    if formula is None:\\n                        continue\\n                    cached = cell.find(ns+\\'v\\')\\n                    if cached is None:\\n                        cached = ET.SubElement(cell, ns+\\'v\\')\\n                    cached.text = str(sum(row[4] for row in rows) if formula.text.startswith(\\'SUM(\\')\\n                                      else rows[int(cell.attrib[\\'r\\'][1:])-2][4])\\n                data = ET.tostring(root)\\n            dest.writestr(name, data)\\n    return {\\'workbook_b64\\': canonical(target.getvalue())}\\n\\n\\nif __name__ == \\'__main__\\':\\n    payload = json.load(sys.stdin)\\n    print(json.dumps(generate(payload) if sys.argv[1] == \\'generate\\'\\n                     else {\\'outputs\\': [reference(value) for value in payload[\\'inputs\\']]}))\\n',ns);inp=json.load(sys.stdin);print(json.dumps(ns['reference'](inp)))"
+      ],
+      "argv_literal": true,
+      "stdin_json": true,
+      "max_output_bytes": 200000,
+      "timeout_seconds": 10,
+      "output": {
+        "type": "json"
+      },
+      "env": {
+        "TMPDIR": "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/scratch"
+      },
+      "native_sandbox": {
+        "schema_version": "codex.native-sandbox.v1",
+        "binary": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+        "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+        "project_root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3",
+        "read_roots": [
+          "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python",
+          "/Users/edwintse/Documents/aeep-agent-router/AGENTS.md"
+        ],
+        "write_roots": [
+          "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/scratch"
+        ],
+        "deny_roots": [
+          "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/.aeep",
+          "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/aeep.json"
+        ],
+        "network": false,
+        "single_process": true,
+        "python_binary": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "python_sha256": "sha256:5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325"
+      }
+    }
+  },
+  "native": {
+    "schema_version": "codex.native-sandbox.v1",
+    "binary": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+    "binary_sha256": "sha256:50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "project_root": "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3",
+    "read_roots": [
+      "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python",
+      "/Users/edwintse/Documents/aeep-agent-router/AGENTS.md"
+    ],
+    "write_roots": [
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/scratch"
+    ],
+    "deny_roots": [
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/.aeep",
+      "/Users/edwintse/Documents/aeep-agent-router/.aeep/current-composed-workbook-ade3/aeep.json"
+    ],
+    "network": false,
+    "single_process": true,
+    "python_binary": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "python_sha256": "sha256:5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325"
+  },
+  "old_scope_preserved": true,
+  "elapsed_seconds": 0.14589091716334224,
+  "accounting_finished": true,
+  "source_unchanged": true,
+  "main_close_confirmed": true
+}

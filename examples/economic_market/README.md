@@ -40,9 +40,9 @@ For `action.json`, the deterministic result is expected/captured USD 0.0012,
 maximum/reserved USD 0.0030, and released USD 0.0018. The settlement evidence
 level is `PAYMENT_SETTLEMENT`.
 
-That long flag is intentionally test-only. For an authenticated end-to-end
-router flow, export the same locally chosen token in both terminals, start the
-operator server, and use the separate authenticated manifest:
+The unauthenticated flag is for tests only. To run the authenticated router
+flow, export the same locally chosen token in both terminals, start the operator
+server, and use the separate authenticated manifest:
 
 ```bash
 export AEEP_REFERENCE_MARKET_TOKEN='locally-chosen-test-token'
@@ -94,5 +94,5 @@ The quote endpoint accepts only counts and the declared `input_bytes` disclosure
 It never accepts the action text. `/v1/execute` receives text only for execution;
 the service retains no input or output. Aggregates are published only after at
 least 20 billing-reconciled, task-valid records in one coarse input-size bucket,
-and expose no action identifiers or digests. A settlement identifier is linkage,
-not proof that a payment rail captured money.
+and expose no action identifiers or digests. A settlement identifier links
+records; it does not prove that a payment rail captured money.

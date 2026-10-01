@@ -32,6 +32,19 @@
   },
   "additionalProperties": false,
   "properties": {
+    "task_scope_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Task Scope Digest"
+    },
     "attempt_id": {
       "maxLength": 200,
       "minLength": 1,

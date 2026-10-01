@@ -1,0 +1,81 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_562ec807707948e38c47bc2e207344bb",
+    "operation_id": "conformance_probe_562ec807707948e38c47bc2e207344bb-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_start",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_status",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_report",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [],
+    "canonical_evidence_digest": "1faf51cac82888edce1df51da0c1b821a2822be4c9cb79e301ef137dacb20f15",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 66690,
+          "cached_input_tokens": 56448,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 277,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

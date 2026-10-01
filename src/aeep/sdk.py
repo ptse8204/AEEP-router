@@ -682,11 +682,19 @@ async def import_mcp_server(
             input_schema=(
                 tool.get("inputSchema") if isinstance(tool.get("inputSchema"), dict) else None
             ),
+            output_schema=(
+                tool.get("outputSchema") if isinstance(tool.get("outputSchema"), dict) else None
+            ),
         )
         for tool in tools
         if isinstance(tool, dict) and isinstance(tool.get("name"), str)
     ]
     executors = [executor for descriptor in descriptors for executor in descriptor.executors]
+    advertised = {str(tool["name"]): tool for tool in tools if isinstance(tool, dict) and isinstance(tool.get("name"), str)}
+    for executor in executors:
+        tool = advertised[str(executor.config["tool"])]
+        if isinstance(tool.get("description"), str):
+            executor.description = tool["description"][:4000]
     definitions = [
         CapabilityDefinition(
             namespace=executor.capability.rsplit(".", 1)[0],
@@ -705,7 +713,14 @@ async def import_mcp_server(
         name=provider_id,
         capabilities=definitions,
         executors=executors,
-        metadata={"mcp_tool_count": len(executors)},
+        metadata={
+            "mcp_tool_count": len(executors),
+            "untrusted_tool_descriptions": {name: tool["description"] for name, tool in advertised.items() if isinstance(tool.get("description"), str)},
+            "untrusted_tool_annotations": {
+                name: tool["annotations"] for name, tool in advertised.items()
+                if isinstance(tool.get("annotations"), dict)
+            },
+        },
     )
 
 

@@ -1,0 +1,31 @@
+                                                                                
+ Usage: python -m aeep serve [OPTIONS]                                          
+                                                                                
+ Expose AEEP as an MCP server for ChatGPT/Codex, Claude, or OpenClaw.           
+                                                                                
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --profile                       <str>                 legacy, assessment, or │
+│                                                       task (no assessment    │
+│                                                       controls)              │
+│                                                       [default: legacy]      │
+│ --task-scope                    <str>                 Operator-reviewed task │
+│                                                       scope ID; never a tool │
+│                                                       argument.              │
+│ --transport                     <str>                 stdio or http          │
+│                                                       [default: stdio]       │
+│ --manifest              -m      <path>                [env var:              │
+│                                                       AEEP_MANIFEST]         │
+│ --approve                       <none|read|write|des  Operator-controlled    │
+│                                 tructive|financial>   approval ceiling for   │
+│                                                       MCP tool execution.    │
+│                                                       [default: read]        │
+│ --approve-unsafe-exec…                                                       │
+│ --host                          <str>                 [default: 127.0.0.1]   │
+│ --port                          <int range>           [default: 8765]        │
+│                                 [1<=x<=65535]                                │
+│ --token-env                     <str>                 [default:              │
+│                                                       AEEP_BEARER_TOKEN]     │
+│ --help                                                Show this message and  │
+│                                                       exit.                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+

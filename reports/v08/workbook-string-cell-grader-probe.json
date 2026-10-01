@@ -1,0 +1,30 @@
+{
+  "purpose": "Independent grader encoding check; fixture values/formulas/caches unchanged",
+  "changed_cells": 10,
+  "transformation": "inlineStr/is/t text to str/v text",
+  "result": {
+    "valid": [
+      true,
+      false
+    ],
+    "failure_codes": [
+      null,
+      "invalid_workbook"
+    ]
+  },
+  "source_fixture": "workbook-grader-fixtures.json example 1",
+  "model_calls": 0,
+  "live_artifact_examined": false,
+  "independent_reader": {
+    "reader": "openpyxl 3.1.5",
+    "values_formulas_caches_sheets_bold_equal": true
+  },
+  "reader_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "official_cell_type_reference": "https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellvalues",
+  "live_failure_cause_proven": false,
+  "source_digest": "92f1257d14ad6f915d5194aaee8083d850d91d480b2a4c431b48e9b22e5b5a33",
+  "files": {
+    "integrations/assessment-runtime/workbook_grader.py": "13263655c64bf164aacab104b27d4896e8729c26b0ce9306c9fe14ac6562d284",
+    "integrations/assessment-runtime/workbook-grader-fixtures.json": "42645997f7cb74d94e19ad34fac98c83bcca747109ca2ef960a022d9b3f398a1"
+  }
+}

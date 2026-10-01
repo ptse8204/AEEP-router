@@ -1,0 +1,50 @@
+import asyncio,copy,hashlib,json
+from pathlib import Path
+from datetime import datetime,timezone
+from typing import Any
+from aeep.router import Router
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.models import AssessmentAuthorization,AssessmentScopeAmendment,content_digest
+from aeep.assessment.boundary import BoundaryProbeDefinition,prepare_model_probe
+from aeep.assessment.verification import verification_source_digest
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection,prepare_pair
+from aeep.hosts.workers import binding_from_config
+from aeep.models import StrictModel
+class SharedReview(StrictModel):
+ definition:dict[str,Any]
+PREFIX='A reusable training-built Python tool is available at /opt/dependencies/reusable/clean_workbook.py, with usage in /opt/dependencies/reusable/USAGE.txt. You may use or inspect it when helpful. '
+COMMON='If this environment contains /opt/dependencies/reusable/clean_workbook.py, a reviewed training-built tool is available there, with usage in /opt/dependencies/reusable/USAGE.txt. You may use or inspect available tools when helpful. '
+async def main():
+ p=Path('reports/v08');r=Router.from_manifest('.aeep/live-review-v3/workbook-phase-final.json')
+ try:
+  s=AssessmentService(r,Path('.aeep/live-review-v3/.aeep/assessments'));repo=s.repository
+  for label in ('value','higher','reusable'):
+   prior=json.loads((p/f'{label}-phase-final-profile-review-bundle.json').read_text());d=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',prior['requests'][0]['pair_definition_digest']))
+   sources=[];extra={};reviews={};name=label+'-four-arm-final'
+   for role in ('control','treatment'):
+    spec=getattr(d,role);spec.id=f'{name}.{role}';config=spec.config;config['adapter_id']=f'codex-app-server:{name}-{role}'
+    config['instructions']=COMMON+config['instructions'].removeprefix(PREFIX)
+    worker_raw=config['managed_worker'];worker_raw['worker_id']=f'{name}-{role}'
+    slot=role if label=='value' else ('treatment' if role=='control' else 'control')
+    worker_raw['credential_volume']='aeep-auth-incremental-'+slot
+    worker=binding_from_config(spec.managed_host_config().managed_worker);assert worker
+    document=repo.put('worker_binding',worker.digest(),worker);extra[document]=worker.model_dump(mode='json')
+    old=prior['boundary_reviews'][role]
+    policy=copy.deepcopy(repo.get('effective_policy_definition',old['effective_policy_digest']));assert policy['definition']['image']==worker.image
+    policy_digest=repo.put('effective_policy_definition',content_digest(policy),SharedReview(**policy));extra[policy_digest]=policy
+    enforcement=copy.deepcopy(repo.get('enforcement_definition',old['enforcement_definition_digest']))
+    enforcement['definition'].update(worker_digest=worker.digest(),effective_policy_digest=policy_digest,execution_slots='Normal control uses protected slot A; candidate, higher-compute and reusable controls use protected slot B sequentially. Every task starts a fresh container, conversation and workspace. These pair probes use separate slots. No authentication file is read or copied by the coordinator.',common_instructions='All four arms receive the same conditional notice of the reusable file; only the reusable image contains it.')
+    enforcement_digest=repo.put('enforcement_definition',content_digest(enforcement),SharedReview(**enforcement));extra[enforcement_digest]=enforcement
+    reviews[role]={**old,'worker_digest':worker.digest(),'worker_document_digest':document,'effective_policy_digest':policy_digest,'enforcement_definition_digest':enforcement_digest}
+    sources.append(prepare_model_probe(s,source_plan_id='plan_032f55bc64cc4c168501898224e8c0f0',definition=BoundaryProbeDefinition(name=name+'_identity',executor=spec,expected={})))
+   d=WorkerPairInspection.model_validate(d.model_dump(mode='json'));result=prepare_pair(s,*(q.plan_id for q in sources),d);requests=result['requests'];digests={x for q in requests for x in [*q['definition_digests'],q['subject_digest']]}
+   definitions={x:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(x,)).fetchone()[0]) for x in digests};definitions.update(extra)
+   root=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'));amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(root),subject_digests=[requests[0]['subject_digest']],recipe_digests=[requests[0]['recipe_digest']],environment_digests=sorted({q['environment_digest'] for q in requests}),reviewed_digests=sorted(definitions))
+   bundle={'prepared_at':datetime.now(timezone.utc).isoformat(),'source_digest':verification_source_digest(Path.cwd()),'operator_authority':'2026-09-27 standing continuation and exact-review delegation','purpose':'Freeze identical task instructions and two-slot sequential four-arm layout before any value-stage case; no qualification changes. All value arms get the same conditional reusable-tool notice. Protected volumes remain separate across each active comparison pair. No model turns in these probes.','requests':requests,'definitions':definitions,'amendment':amendment.model_dump(mode='json'),'boundary_reviews':reviews,'maximum_reserved_seconds':480,'maximum_model_turns':0}
+   path=p/f'{name}-profile-review-bundle.json'
+   with path.open('x') as f:json.dump(bundle,f,indent=2);f.write('\n')
+   repo.approve_bundle(amendment,definitions)
+   with (p/f'{name}-profile-approval.json').open('x') as f:json.dump({'authority':bundle['operator_authority'],'bundle_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'request_ids':[q['plan_id'] for q in requests],'scope_applied':True},f,indent=2);f.write('\n')
+   print(name,[q['plan_id'] for q in requests],flush=True)
+ finally:await r.close()
+asyncio.run(main())

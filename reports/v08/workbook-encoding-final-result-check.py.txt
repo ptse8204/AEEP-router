@@ -1,0 +1,39 @@
+import json,sqlite3
+from collections import Counter
+from datetime import datetime,timezone
+from pathlib import Path
+from aeep.assessment.models import AssessmentPlan,AssessmentReport,RecipeDefinition,AssessmentOperationLedger,content_digest
+from aeep.assessment.reporting import fit_report
+from aeep.benchmarking import BenchmarkCampaignReport
+from aeep.assessment.verification import verification_source_digest
+root=Path('/Users/edwintse/Documents/aeep-agent-router');base=root/'.aeep/live-review-v3';p=root/'reports/v08'
+plan_id='plan_46d6ee0c66cc4c58b78fa4f4ce33c604';source='e43c0939ddb45265ce87bbed2bfbf1c5ab281f3677bb24105f8917e79f32308c'
+assert verification_source_digest(root)==source
+c=sqlite3.connect((base/'aeep.sqlite3').as_uri()+'?mode=ro',uri=True)
+job=c.execute('SELECT id,state,report_id,error_code FROM assessment_jobs WHERE plan_id=?',(plan_id,)).fetchone();assert job[1] in ('complete','cancelled','indeterminate'),job
+assert job[2],job
+
+def get(kind,identity,model):
+ row=c.execute('SELECT digest,payload_json FROM assessment_records WHERE kind=? AND (id=? OR digest=?)',(kind,identity,identity)).fetchone();assert row
+ value=model.model_validate_json(row[1]);assert content_digest(value)==row[0]
+ return value
+report=get('report',job[2],AssessmentReport);plan=get('plan',plan_id,AssessmentPlan);recipe=get('recipe',plan.recipe_digest,RecipeDefinition)
+campaign=get('campaign',report.campaign_digest,BenchmarkCampaignReport);ledger=get('operation_ledger',report.operation_ledger_digest,AssessmentOperationLedger)
+replayed=fit_report(plan,recipe,campaign,ledger=ledger)
+assert (replayed.outcome,replayed.qualification_passed)==(report.outcome,report.qualification_passed)
+assert replayed.measured_usage==report.measured_usage
+usage=c.execute('SELECT operations,model_turns,elapsed_seconds,cash_usd,revoked FROM assessment_grants WHERE id=?',('onboarding',)).fetchone()
+trial_db=sqlite3.connect((base/'.aeep/assessments'/plan_id/'campaign.sqlite3').as_uri()+'?mode=ro',uri=True)
+receipts=[json.loads(v) for (v,) in trial_db.execute('SELECT payload_json FROM trial_receipts')]
+trials=[json.loads(v) for (v,) in trial_db.execute('SELECT payload_json FROM trials')]
+phases={}
+for trial in trials:
+ phase=trial['case_id'].rsplit('-',2)[-2]
+ counts=phases.setdefault(phase,Counter());counts[trial['state']]+=1
+ if trial.get('valid') is True:counts['passed']+=1
+ if trial.get('correctness_failed'):counts['correctness_failed']+=1
+required={receipt for trial in campaign.trials for receipt in trial.receipt_ids}
+assert required.issubset({r['receipt_id'] for r in receipts})
+record={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':source,'assessment_id':job[0],'job_state':job[1],'job_error_code':job[3],'plan_id':plan_id,'report_id':report.report_id,'report_digest':content_digest(report),'outcome':report.outcome,'qualification_passed':report.qualification_passed,'phases':phases,'task_model_turns':sum(r.get('metadata',{}).get('model_turn_count',0) for r in receipts),'receipt_count':len(receipts),'report_reproduced':True,'receipt_references_verified':True,'ledger_operations':len(ledger.operations),'ledger_complete_measurements':all(o.elapsed_seconds is not None for o in ledger.operations),'usage_after':usage,'remaining_turn_allowances':300-usage[1],'remaining_elapsed_seconds':3600-usage[2],'budget_expanded':False,'release_ready':False}
+with (p/'workbook-encoding-final-result.json').open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+print(json.dumps(record,indent=2))

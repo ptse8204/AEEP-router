@@ -1,0 +1,37 @@
+import json,uuid
+from pathlib import Path
+from datetime import datetime,timezone
+from aeep.store import ReceiptStore
+from aeep.assessment.repository import AssessmentRepository
+from aeep.assessment.models import content_digest
+from aeep.assessment.boundary import BoundaryConformance,DifferentialConformance,require_conformance
+from aeep.execution import ExecutionEvidence
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection
+from aeep.hosts.workers import binding_from_config
+from aeep.assessment.verification import verification_source_digest
+p=Path('reports/v08');b=json.loads((p/'bootstrap-events-review-bundle.json').read_text());r=json.loads((p/'conformance-completion-live-result.json').read_text());pair=json.loads((p/'conformance-completion-live-pair.json').read_text())
+assert r['source_digest']==verification_source_digest(Path.cwd())
+store=ReceiptStore('.aeep/live-review-v3/aeep.sqlite3');repo=AssessmentRepository(store)
+try:
+ definition=WorkerPairInspection.model_validate(repo.get('worker_pair_definition',b['requests'][2]['pair_definition_digest']))
+ records={}
+ for role in ('control','treatment'):
+  review=b['boundary_reviews'][role];spec=getattr(definition,role);worker=binding_from_config(spec.managed_host_config().managed_worker);assert worker
+  obs=json.loads((p/f'conformance-completion-{role}-observations.json').read_text())['observations'];inventory=obs['inspection']['advertised_inventory'];enabled=[s['name'] for s in inventory['skills'] if s['enabled']]
+  assert enabled==review['required_advertised_skills'] and inventory['apps']==review['required_advertised_apps'] and inventory['servers']==review['required_advertised_mcp_servers']
+  assert obs['inspection']['identity_digest']==r['workers'][role]['identity_digest'] and obs['cleanup_confirmed']
+  for digest in pair['workers'][role]['probe_digests']:
+   probe=repo.get('boundary_probe',digest);e=ExecutionEvidence.model_validate(repo.get('execution_evidence',probe['execution_evidence_digest']))
+   assert e.identity_digest==r['workers'][role]['identity_digest'] and e.complete
+   for event in e.events:assert repo.get('execution_event',e.journal_id+':'+str(event.sequence))==event.model_dump(mode='json')
+  records[role]=BoundaryConformance(schema_version='assessment.boundary-conformance.v2',conformance_id='conformance_'+uuid.uuid4().hex,source_digest=r['source_digest'],worker_digest=worker.digest(),image_digest=worker.image,binary_digest=worker.binary_sha256,adapter=spec.managed_host_config().adapter_id,adapter_version='1',effective_policy_digest=review['effective_policy_digest'],reviewed_inventory_digest=review['reviewed_inventory_digest'],identity_digest=r['workers'][role]['identity_digest'],enforcement_definition_digest=review['enforcement_definition_digest'],advertised_tools=['skill:'+n for n in enabled],permitted_tools=['command/exec',*['skill:'+n for n in enabled]],used_tools=['command/exec'],probe_digests=pair['workers'][role]['probe_digests'],configuration_digest=worker.configuration_digest,effective_inventory=review['effective_inventory'])
+ with store._immediate_transaction() as connection:
+  digests={role:repo._put(connection,'boundary_conformance',rec.conformance_id,rec) for role,rec in records.items()}
+  for role,rec in records.items():require_conformance(repo,digests[role],source_digest=r['source_digest'],worker_digest=rec.worker_digest,identity_digest=rec.identity_digest)
+  differential=DifferentialConformance(definition=definition.differential,control_conformance_digest=digests['control'],treatment_conformance_digest=digests['treatment'])
+  differential_digest=repo._put(connection,'differential_conformance',content_digest(differential),differential)
+ result={'recorded_at':datetime.now(timezone.utc).isoformat(),'source_digest':r['source_digest'],'approval_record':'conformance-completion-approval.json','boundary_conformance_digests':digests,'differential_conformance_digest':differential_digest,'scope':'Exact bootstrap executor configurations only; task profiles require matching identity observations','evidence':'Fresh authenticated model streams and 22 paired probes with individual durable events, reviewed policy/enforcement/inventory and completed ledger operations','model_turns_started_in_this_operation':0,'candidate_campaign_started':False,'candidate_activated':False,'release_ready':False}
+ out=p/'conformance-completion-assembly.json'
+ with out.open('x') as f:f.write(json.dumps(result,indent=2)+'\n')
+ print(json.dumps(result,indent=2))
+finally:store.close()

@@ -1,8 +1,44 @@
-# AEEP 0.7 protocol specification
+# AEEP 0.8 protocol specification
 
-AEEP is an open, provider-neutral contract for profiling and choosing execution routes for bounded agent actions. It complements MCP/HTTP/CLI transports and payment systems rather than replacing them.
+AEEP is an open, provider-neutral contract for measuring and choosing execution
+routes for bounded agent actions. It works with existing MCP/HTTP/CLI transports
+and payment systems; it does not replace them.
 
 Normative keywords **MUST**, **SHOULD**, and **MAY** follow RFC 2119 usage.
+
+The optional task profile uses aeep.task-scope.v1 and aeep.task-outcome.v1.
+Definitions MUST be stored and reviewed through the operator-only definition
+interface. Task arguments MUST NOT define or expand delegation. A scope binds
+project, exact executor fingerprints, expiry, side-effect ceiling, attempt count
+and per-attempt duration. It MUST NOT qualify a route. Unsupported execution
+boundaries MUST reject scoped dispatch. Attempts reserve the allowance atomically
+and retain it across revocation, restart and recovery.
+
+An unsuccessful scoped write after the invocation boundary MUST remain unresolved
+until its effects are reconciled. A nonzero exit code alone MUST NOT clear the
+scope's recovery barrier or authorize a new attempt.
+
+Project lifecycle uses aeep.task-activation.v1 in the existing exact-definition
+store. An activation MUST bind its reviewed scope, effective manifest and on-disk
+manifest bytes. Missing, changed or unreviewed activation state MUST reject new
+dispatch. Pause and removal MUST revoke before cleanup; user-edited owned files
+MUST be preserved as conflicts. Uninstall MUST retain attempts, reviews, receipts
+and recovery/accounting records. Task tools MUST NOT expose lifecycle authority.
+
+The aeep.task-reconciliation.v1 record is an operator attestation of inspected
+local effects. It MUST receive exact review and bind the unresolved attempt
+version, scope, resolution and stored evidence references. Reconciliation MUST
+reject missing terminal receipts or outstanding cash/capacity reservations. It
+MUST update the existing attempt journal atomically without refunding allowance
+or changing historical receipts. An attestation MUST NOT be described as an
+automated verifier result.
+
+Native command fingerprints include native_sandbox and argv_literal configuration.
+Changing either requires fresh applicable evidence; previous stored records are
+not rewritten. A task result contains task output and sanitized existing decision,
+receipt, accounting and recovery fields. Unknown verification remains unknown;
+execution success alone MUST NOT imply preservation, isolation or savings.
+Legacy/assessment outputs and historical attempt serialization remain compatible.
 
 ## 1. Goals
 
@@ -11,7 +47,7 @@ A conforming implementation can:
 1. Represent a semantic action and hard constraints.
 2. Advertise multiple executor routes for that action.
 3. Preserve estimates in raw resource dimensions.
-4. reject infeasible routes before preference scoring.
+4. Reject infeasible routes before preference scoring.
 5. Produce an explainable, deterministic decision.
 6. Record actual execution receipts.
 7. Update future estimates from observed outcomes without treating provider claims as observations.
@@ -25,7 +61,7 @@ A conforming implementation can:
 
 ## 2. Non-goals
 
-AEEP 0.7 does not define:
+The execution protocol does not define:
 
 - model prompts or planner behavior;
 - semantic equivalence discovery for arbitrary tools;
@@ -37,14 +73,20 @@ AEEP 0.7 does not define:
 
 It also does not define cryptocurrency, blockchain settlement, transferable
 consumer tokens, custody, provider payouts, exchange rates, autonomous provider
-onboarding, or automatic route qualification/activation. The 0.4 network is an
+onboarding, or unrestricted route qualification/activation. Reviewed assessment
+admissions are a separate, versioned authority path. The 0.4 network is an
 economic evidence exchange, not a public marketplace or financial product.
 
 ## 3. Capability
 
-A `capability` is a stable semantic action name such as `text.stats`, `github.issue.create`, or the versioned `weather.current@1`. Shared network definitions use a namespace, name, input/output schemas, side-effect class, and version.
+A `capability` names a stable semantic action, such as `text.stats`,
+`github.issue.create`, or the versioned `weather.current@1`. Shared network
+definitions specify a namespace, name, input/output schemas, side-effect class,
+and version.
 
-An operator MUST only register executors under the same capability when they consider their input/output contracts equivalent enough for the application. Capability names SHOULD be namespaced in shared ecosystems.
+An operator MUST register executors under the same capability only when they
+consider the input/output contracts equivalent enough for the application.
+Capability names SHOULD be namespaced in shared ecosystems.
 
 ## 4. ActionRequest
 
@@ -168,7 +210,11 @@ MUST NOT restore a rejected route.
 
 Routing permission and execution approval are separate.
 
-An implementation MUST NOT execute a route whose side-effect level exceeds the explicit runtime approval. An executor marked unsafe for automatic execution requires a separate explicit approval. Model-supplied tool arguments MUST NOT raise either approval ceiling; approval is operator/host configuration. Delegated routes return instructions and remain subject to host-runtime permissions.
+An implementation MUST NOT execute a route whose side-effect level exceeds the
+explicit runtime approval. Executors marked unsafe for automatic execution need
+a separate explicit approval. The operator or host configures both ceilings;
+model-supplied tool arguments MUST NOT raise either. Delegated routes return
+instructions and remain subject to host-runtime permissions.
 
 Side-effect order:
 
@@ -180,7 +226,11 @@ none < read < write < destructive < financial
 
 An adapter returns a `RawExecution` with status, output, actual resources, bounded diagnostics, and metadata.
 
-If an output schema exists, a successful transport result MUST be validated. Transport success, execution success, schema validity, task validity, and quality MUST remain distinct in the receipt. Schema, exact-match, range, state-transition, callback, downstream, optional LLM, and optional human validators use the same result envelope.
+A successful transport result MUST be validated against its output schema when
+one exists. Receipts MUST distinguish transport success, execution success,
+schema validity, task validity, and quality. Schema, exact-match, range,
+state-transition, callback, downstream, optional LLM, and optional human
+validators share the same result envelope.
 
 ## 12. Fallback
 
@@ -218,15 +268,27 @@ Invalid outputs count against successful completion. Host-selected, delegated,
 unknown placeholder, legacy-unbound, and cohort-mismatched rows are ignored for
 live routing.
 
-Implementations SHOULD expose sample size and estimate source. They MUST avoid presenting learned estimates as exact guarantees. Externally reported outcomes are untrusted input unless authenticated or attested and MAY be excluded from shared reputation.
+Implementations SHOULD expose the sample size and source of each estimate. They
+MUST NOT present learned estimates as exact guarantees. External outcome reports
+are untrusted unless authenticated or attested and MAY be excluded from shared
+reputation.
 
 ## 15. Persistence and minimization
 
-The reference implementation redacts action input and action context from persisted decisions by default. Implementations SHOULD minimize stored task data and MUST make full-payload persistence an explicit operator choice. Output previews are opt-in. Redacted stored decisions are audit records and MUST NOT be re-executed as if they contained the original request.
+The reference implementation redacts action input and context from stored
+decisions by default. Implementations SHOULD minimize stored task data and MUST
+require an explicit operator choice to persist full payloads. Output previews
+are opt-in. Redacted decisions are audit records; they MUST NOT be executed as
+though they contained the original request.
 
 ## 16. Benchmarking
 
-A benchmark sequentially executes feasible alternatives to reduce resource-contention bias and produces a `BenchmarkResult`. Implementations MUST preserve all hard constraints and runtime approvals. They SHOULD exclude delegated and non-idempotent routes by default and MUST require an explicit operator confirmation because calibration may incur charges or disclose input to multiple providers.
+A benchmark runs feasible alternatives sequentially to reduce resource-contention
+bias and returns a `BenchmarkResult`. Implementations MUST enforce all hard
+constraints and runtime approvals. They SHOULD exclude delegated and
+non-idempotent routes by default. Calibration may incur charges or disclose input
+to multiple providers, so implementations MUST require explicit operator
+confirmation.
 
 ## 17. Agent tools
 
@@ -245,7 +307,10 @@ The reference server exposes:
 
 Provider-specific declaration shapes are projections of the same JSON contracts.
 
-Capability listing MUST support progressive disclosure. The reference tools accept search, prefix, pagination, and detail controls. Route and execute tools return compact decision/outcome objects by default; full decisions remain available through explicit detail or inspection.
+Capability listing MUST support progressive disclosure. The reference tools
+accept search, prefix, pagination, and detail controls. Route and execute tools
+default to compact decision/outcome objects. Callers can request full decisions
+through detail or inspection.
 
 Quote acceptance, payment authorization, reservation, capture, refund, and benchmarking MUST NOT be exposed as unrestricted model tools.
 
@@ -319,7 +384,11 @@ An MCP server importer MAY inspect `tools/list` and generate reviewed local desc
 
 ## 25. Existing-agent profiling
 
-The reference trace ingestor accepts OTLP JSON, plain span JSON, and JSON Lines. It reconstructs model, tool, browser, command, HTTP, and MCP calls from standard or AEEP attributes, retaining resource totals and retry/failure counts without persisting payloads or outputs. Recommendations MUST be limited to explicitly registered equivalent capabilities.
+The reference trace ingestor accepts OTLP JSON, plain span JSON, and JSON Lines.
+It reconstructs model, tool, browser, command, HTTP, and MCP calls from standard
+or AEEP attributes. It retains resource totals and retry/failure counts without
+storing payloads or outputs. Recommendations MUST be limited to explicitly
+registered equivalent capabilities.
 
 OpenAI and Anthropic SDK wrappers record latency, usage, outcome, and optionally operator-supplied monetary calculation. Unavailable provider billing is recorded as unknown, not inferred from a static price table.
 
@@ -345,11 +414,19 @@ Rate cards are canonical, content-addressed snapshots. Calculations use decimal 
 
 ## 29. Qualification lifecycle
 
-Imported and discovered routes enter as inert candidates. Qualification binds reviewed schemas, adapter identity, validators, side effects, idempotency, safety properties, and dynamic cases to an exact behavior fingerprint. Qualification never activates. Execution requires an active local record with the same fingerprint; drift suspends the route before another invocation.
+Imported and discovered routes start as inert candidates. Qualification binds
+reviewed schemas, adapter identity, validators, side effects, idempotency, safety
+properties, and dynamic cases to an exact behavior fingerprint. Activation is
+a separate step. Execution requires an active local record with that fingerprint;
+drift suspends the route before another invocation.
 
 ## 30. Workflows and campaigns
 
-Workflow requests contain caller-authored bounded DAGs. Every step uses the ordinary route/execute enforcement path. Bindings are RFC 6901 JSON Pointers and replace existing input slots only. Workflow accounting includes every retry and fallback, groups subscription usage by pool and unit, and never sums parallel wall time or memory peaks.
+Callers supply workflow requests as bounded DAGs. Each step uses the ordinary
+route/execute enforcement path. RFC 6901 JSON Pointer bindings replace existing
+input slots only. Accounting includes every retry and fallback and groups
+subscription usage by pool and unit. It never sums parallel wall time or memory
+peaks.
 
 Repeated benchmark campaigns use an isolated database, immutable suite inputs and rate snapshots, deterministic route order, distinct cold/warm conditions, and raw trial retention without action inputs or outputs. Qualification, activation, workflow resume, campaign execution, and accounting trust elevation remain outside model-facing tools.
 
@@ -848,3 +925,43 @@ redeem/reconcile semantics. It is disabled by default and performs no live
 networking or value movement. Resource-specific capacity is not cash. A
 `SELF_ONLY` resource MUST fail before commitment serialization, and settlement
 evidence MUST NOT qualify or activate an implementation.
+
+
+## Assessment contracts (0.8, versioned independently)
+
+Assessment definitions, plans, authorizations, reports and scoped admissions use
+`assessment.*.v1` schema identifiers. Ordinary routing MUST NOT start assessments
+or contact a planning model. Model arguments MUST NOT create, expand or revoke
+operator grants or approve definitions. A definition change requires renewed
+review of its digest before execution.
+
+Campaign execution MUST preserve request constraints and production eligibility.
+An admission requires both passed qualification and comparative evidence under a
+current authorization. Invocation MUST recheck scope, revocation and identity.
+Unknown features exclude an assessed alternative. Historical cohorts retain their
+original meaning; an older receipt does not establish a new assessed scope.
+
+See [ASSESSMENT.md](docs/ASSESSMENT.md) for the current implementation and remaining
+release gates. Container and live Codex contracts are not claimed as complete.
+
+### Incremental assessment contracts
+
+Assessment plan v4 binds comparison v2 with separate qualification, marginal-value
+and native-catalog stages. Required invocation is limited to qualification;
+value studies assess optional availability in a reviewed capable shared
+environment. Four-arm value schedules preserve deliberate higher-compute and
+training-built reusable-tool differences. Differential conformance binds actual
+control/treatment inventory, candidate access probes and effective worker policy.
+
+Report/admission v3 preserves predeclared native utility dimensions, simultaneous
+confidence bounds, regression guardrails and feasible challenger dominance.
+Historical versions retain their original serialization and interpretation.
+Budget amendments change absolute ceilings or expiry on the same grant ledger,
+with immutable predecessor checks and transactional operator review.
+
+The optional native catalog metrics envelope is versioned independently as
+`codex.catalog-metrics.v1`. It contains bounded, scope-correlated observations,
+not permissions, usage accounting or comparative evidence by itself. Collectors
+MUST omit raw export payloads and unknown attributes. Receipts MUST preserve
+missing discovery facts as unknown; a closed local collector MUST NOT imply
+complete upstream export or establish that a candidate was not used.

@@ -1,0 +1,95 @@
+............FF                                                           [100%]
+=================================== FAILURES ===================================
+__ test_composed_conformance_rejects_legacy_only_or_unbacked_callback[False] ___
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-777/test_composed_conformance_reje0')
+invalid_callback = False
+
+    @pytest.mark.parametrize("invalid_callback", [False, True])
+    async def test_composed_conformance_rejects_legacy_only_or_unbacked_callback(tmp_path, invalid_callback):
+        """Canonical fixture records never substitute for a native-issued callback."""
+        from test_v08_assessment import setup_assessment
+        from test_v08_pair_inspection import definition as paired_definition
+    
+        from aeep.assessment.boundary import COMPOSED_PROBES
+        from aeep.execution import EventJournal
+        from aeep.hosts.codex_dynamic_tools import CodexDynamicTools
+        from aeep.hosts.codex_pair_inspection import ComposedPairDefinition
+        from aeep.hosts.workers import binding_from_config
+        from aeep.models import RawExecution
+        router, service, _plan, _grant = setup_assessment(tmp_path)
+        repo = service.repository
+        try:
+            pair = paired_definition(task_profile=True)
+            specs = [pair.control.model_copy(deep=True), pair.treatment.model_copy(deep=True)]
+            callbacks, backends = {}, {}
+            class CallbackDefinition(StrictModel):
+                identity: dict[str, str]
+            for role, spec in zip(("control", "treatment"), specs, strict=True):
+                worker = binding_from_config(spec.managed_host_config().managed_worker)
+                backend = content_digest(ReviewedDefinition(purpose="synthetic native binding " + role))
+                identity = {"worker_digest":worker.digest(), "native_backend_digest":backend,
+                    "implementation_digest":CodexDynamicTools.implementation_digest()}
+                callback = repo.put("codex_dynamic_tools", role, CallbackDefinition(identity=identity))
+                repo.review(callback)
+                callbacks[worker.digest()] = callback
+                backends[worker.digest()] = backend
+                spec.config["invocation"] = {"mode":"turn" if role == "control" else "dynamic_tool",
+                    "local_profile":"capable_local", "dynamic_tools_digest":callback}
+>           composite = ComposedPairDefinition(control=specs[0], treatment=specs[1],
+                differential=pair.differential, shared_versions=pair.shared_versions,
+                callback_bindings=callbacks, native_backends=backends)
+E               pydantic_core._pydantic_core.ValidationError: 1 validation error for ComposedPairDefinition
+E               treatment.invocation
+E                 Value error, MCP invocation requires an exact server, tool and contract digest [type=value_error, input_value={'mode': 'dynamic_tool', ...0b570e6e0a03911804c84f'}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+tests/test_v08_conformance.py:499: ValidationError
+___ test_composed_conformance_rejects_legacy_only_or_unbacked_callback[True] ___
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-777/test_composed_conformance_reje1')
+invalid_callback = True
+
+    @pytest.mark.parametrize("invalid_callback", [False, True])
+    async def test_composed_conformance_rejects_legacy_only_or_unbacked_callback(tmp_path, invalid_callback):
+        """Canonical fixture records never substitute for a native-issued callback."""
+        from test_v08_assessment import setup_assessment
+        from test_v08_pair_inspection import definition as paired_definition
+    
+        from aeep.assessment.boundary import COMPOSED_PROBES
+        from aeep.execution import EventJournal
+        from aeep.hosts.codex_dynamic_tools import CodexDynamicTools
+        from aeep.hosts.codex_pair_inspection import ComposedPairDefinition
+        from aeep.hosts.workers import binding_from_config
+        from aeep.models import RawExecution
+        router, service, _plan, _grant = setup_assessment(tmp_path)
+        repo = service.repository
+        try:
+            pair = paired_definition(task_profile=True)
+            specs = [pair.control.model_copy(deep=True), pair.treatment.model_copy(deep=True)]
+            callbacks, backends = {}, {}
+            class CallbackDefinition(StrictModel):
+                identity: dict[str, str]
+            for role, spec in zip(("control", "treatment"), specs, strict=True):
+                worker = binding_from_config(spec.managed_host_config().managed_worker)
+                backend = content_digest(ReviewedDefinition(purpose="synthetic native binding " + role))
+                identity = {"worker_digest":worker.digest(), "native_backend_digest":backend,
+                    "implementation_digest":CodexDynamicTools.implementation_digest()}
+                callback = repo.put("codex_dynamic_tools", role, CallbackDefinition(identity=identity))
+                repo.review(callback)
+                callbacks[worker.digest()] = callback
+                backends[worker.digest()] = backend
+                spec.config["invocation"] = {"mode":"turn" if role == "control" else "dynamic_tool",
+                    "local_profile":"capable_local", "dynamic_tools_digest":callback}
+>           composite = ComposedPairDefinition(control=specs[0], treatment=specs[1],
+                differential=pair.differential, shared_versions=pair.shared_versions,
+                callback_bindings=callbacks, native_backends=backends)
+E               pydantic_core._pydantic_core.ValidationError: 1 validation error for ComposedPairDefinition
+E               treatment.invocation
+E                 Value error, MCP invocation requires an exact server, tool and contract digest [type=value_error, input_value={'mode': 'dynamic_tool', ...0b570e6e0a03911804c84f'}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+tests/test_v08_conformance.py:499: ValidationError
+=========================== short test summary info ============================
+FAILED tests/test_v08_conformance.py::test_composed_conformance_rejects_legacy_only_or_unbacked_callback[False]
+FAILED tests/test_v08_conformance.py::test_composed_conformance_rejects_legacy_only_or_unbacked_callback[True]

@@ -1,0 +1,117 @@
+{
+  "schema_version": "aeep.workbook-footprint-exploratory.v1",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "purpose": "Two synthetic workbook sizes, one fresh native and AEEP sample each; no acceptance or benefit verdict",
+  "comparability": "Both arms use the same native sandbox, bundled Python reference, reserved built-in validator and independent recipe grader. AEEP additionally performs activation, receipt checks and cleanup. Host MCP and model context are excluded.",
+  "measurement_limits": [
+    "One repetition per size; no significance or cold-cache control.",
+    "10ms process sampling can miss short-lived children; RSS sums may double-count shared pages.",
+    "Installed Codex/Python and host are shared; this is not incremental installation or whole-host cost.",
+    "Only successful reference output and normal cleanup; failure/recovery cost remains separate."
+  ],
+  "samples": [
+    {
+      "arm": "native",
+      "case": "small",
+      "input_json_bytes": 7194,
+      "input_xlsx_bytes": 4948,
+      "output_json_bytes": 7315,
+      "output_xlsx_bytes": 5471,
+      "activation_ms": null,
+      "dispatch_ms": 206.17741695605218,
+      "post_dispatch_independent_checks_ms": 4.024167079478502,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": null,
+      "schema_bytes": 0,
+      "instructions_bytes": 0,
+      "project_host_config_bytes": 0,
+      "evidence_bytes_after_uninstall": 0,
+      "uninstall_ms": null,
+      "process_wall_ms": 667.852042010054,
+      "sampled_process_tree": {
+        "cpu_ms": 601.7072179999999,
+        "peak_memory_mb": 380.421875,
+        "memory_mb_seconds": 124.54844311247143
+      }
+    },
+    {
+      "arm": "aeep",
+      "case": "small",
+      "input_json_bytes": 7194,
+      "input_xlsx_bytes": 4948,
+      "output_json_bytes": 7315,
+      "output_xlsx_bytes": 5471,
+      "activation_ms": 120.19274989143014,
+      "dispatch_ms": 219.18433299288154,
+      "post_dispatch_independent_checks_ms": 1.3673750218003988,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": true,
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "project_host_config_bytes": 480,
+      "evidence_bytes_after_uninstall": 1400616,
+      "uninstall_ms": 1.3592499308288097,
+      "process_wall_ms": 812.1018330566585,
+      "sampled_process_tree": {
+        "cpu_ms": 750.3877960000001,
+        "peak_memory_mb": 384.046875,
+        "memory_mb_seconds": 170.5598876040931
+      }
+    },
+    {
+      "arm": "native",
+      "case": "larger",
+      "input_json_bytes": 8324,
+      "input_xlsx_bytes": 5792,
+      "output_json_bytes": 8719,
+      "output_xlsx_bytes": 6525,
+      "activation_ms": null,
+      "dispatch_ms": 189.50845883227885,
+      "post_dispatch_independent_checks_ms": 3.312458982691169,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": null,
+      "schema_bytes": 0,
+      "instructions_bytes": 0,
+      "project_host_config_bytes": 0,
+      "evidence_bytes_after_uninstall": 0,
+      "uninstall_ms": null,
+      "process_wall_ms": 651.4987079426646,
+      "sampled_process_tree": {
+        "cpu_ms": 568.864957,
+        "peak_memory_mb": 379.53125,
+        "memory_mb_seconds": 117.27884918716518
+      }
+    },
+    {
+      "arm": "aeep",
+      "case": "larger",
+      "input_json_bytes": 8324,
+      "input_xlsx_bytes": 5792,
+      "output_json_bytes": 8719,
+      "output_xlsx_bytes": 6525,
+      "activation_ms": 104.71591702662408,
+      "dispatch_ms": 215.94254183582962,
+      "post_dispatch_independent_checks_ms": 1.7723750788718462,
+      "required_validator_valid": true,
+      "recipe_grader_valid": true,
+      "aeep_receipt_validator_valid": true,
+      "schema_bytes": 15202,
+      "instructions_bytes": 168,
+      "project_host_config_bytes": 480,
+      "evidence_bytes_after_uninstall": 1400616,
+      "uninstall_ms": 0.9522079490125179,
+      "process_wall_ms": 785.4689580854028,
+      "sampled_process_tree": {
+        "cpu_ms": 731.242995,
+        "peak_memory_mb": 386.53125,
+        "memory_mb_seconds": 159.72608610575844
+      }
+    }
+  ],
+  "model_calls": 0,
+  "downloads": 0,
+  "release_ready": false
+}

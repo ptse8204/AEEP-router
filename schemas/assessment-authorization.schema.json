@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "AssessmentLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_operations": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Operations",
+          "type": "integer"
+        },
+        "max_model_turns": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Max Model Turns",
+          "type": "integer"
+        },
+        "max_elapsed_seconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 604800,
+          "title": "Max Elapsed Seconds",
+          "type": "number"
+        },
+        "max_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "title": "Max Cash Usd"
+        }
+      },
+      "required": [
+        "max_operations",
+        "max_elapsed_seconds"
+      ],
+      "title": "AssessmentLimits",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.authorization.v1",
+      "default": "assessment.authorization.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "subject_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Subject Digests",
+      "type": "array"
+    },
+    "recipe_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Recipe Digests",
+      "type": "array"
+    },
+    "environment_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Environment Digests",
+      "type": "array"
+    },
+    "limits": {
+      "$ref": "#/$defs/AssessmentLimits"
+    },
+    "remote_disclosure": {
+      "default": false,
+      "title": "Remote Disclosure",
+      "type": "boolean"
+    },
+    "allowed_destinations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Destinations",
+      "type": "array"
+    },
+    "automatic_admission": {
+      "default": false,
+      "title": "Automatic Admission",
+      "type": "boolean"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "subject_digests",
+    "recipe_digests",
+    "environment_digests",
+    "limits",
+    "expires_at"
+  ],
+  "title": "AssessmentAuthorization",
+  "type": "object"
+}

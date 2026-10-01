@@ -1,0 +1,71 @@
+{
+  "classification": "offline retrospective; original failed result immutable; no rerun or new workbook generation",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "original_result_sha256": "6a2ab4568e3bb937bdc4901abd9ebff72718dc12cc95c9a29dc09378426040d9",
+  "original_review_sha256": "e3cf923e72d751d56bc0829465f03428e60430e9e1246aaeb97cb3e06b99253f",
+  "command_proof": {
+    "observed_sha256": "4a60cd8f8fe648192982ae1a8102bbc560dd87accfb5e10c987d690494f67769",
+    "known_argv": [
+      "/bin/zsh",
+      "-lc",
+      "exact reviewed reader_command"
+    ],
+    "representation": "Codex0.159.2 item_builders from_raw\u2192redact_secrets(shlex_join(argv)); Cargo.lock shlex1.3.0; ASCII reader contains apostrophes and no forbidden double-quote strategy bytes, so shlex1.3 quotes entire reader in double quotes and escapes inner double quotes",
+    "deterministic_rendered_hash_equal": true,
+    "parsed_argv_exact_equal": true,
+    "original_literal_comparator_wrong": true
+  },
+  "sources": [
+    "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/app-server-protocol/src/protocol/item_builders.rs",
+    "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/shell.rs",
+    "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/shell-command/src/parse_command.rs",
+    "https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/Cargo.lock",
+    "https://raw.githubusercontent.com/comex/rust-shlex/1.3.0/src/bytes.rs"
+  ],
+  "receipt": {
+    "receipt_id": "rcpt_12c7753715914c919105e359130a91ad",
+    "task_valid": true,
+    "validation_results": [
+      {
+        "kind": "schema",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "schema validation passed",
+        "trust": "observed"
+      },
+      {
+        "kind": "callback",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "callback validation passed",
+        "trust": "verified"
+      }
+    ]
+  },
+  "durable_attempt_count": 1,
+  "durable_attempt_state": "COMPLETED",
+  "content_artifact_count": 0,
+  "independent_grader_original_output": "unknown: original harness assertion preceded grader; transient output not retained and owned scratch deleted; no regeneration used",
+  "journey_release_ready": false,
+  "successor": {
+    "file": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/native-sol61-code-mode-two-task-handoff-ade3.py",
+    "sha256": "5d270124b3b73547328ba138f2d62722b3a38518059d3d07bc6d6b2c38de9308",
+    "inert": true,
+    "first_literal_fixture": 0,
+    "larger_seed": 29,
+    "larger_index": 10,
+    "model_turns": 1,
+    "host_seconds": 240,
+    "body_seconds": 225,
+    "setup_operations": 1,
+    "setup_seconds": 40,
+    "host_operations": 1,
+    "task_scope_attempts": 2,
+    "task_attempt_seconds": 30,
+    "cash_usd": 0,
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "grading": "actual transient MCP output independently graded immediately on observation; only booleans and receipt IDs persisted before subsequent harness checks",
+    "reader_match": "shlex.split(event.command) exact /bin/zsh,-lc,reviewed_reader only; malformed/alternate commands rejected"
+  }
+}

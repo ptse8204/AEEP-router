@@ -1,0 +1,44 @@
+{
+  "authority": "standing September25/27 finite exact review; parent authorized one software-only pair",
+  "definition": {
+    "source_digest": "f55ebe5ca0764a8ebfbcfa653c49ee39cced7e85b0a78515d6bbbb6b2f0a1cc4",
+    "files_sha256": {
+      "reports/v08/native-resource-full-path-pair-v2.py": "d3c0a3a732250ce3feb24dd550ed3ee2ef35d89cce4585b6f846e7548f39558e",
+      "reports/v08/native-no-aeep-baseline-child-v2.py": "b0661921b11c9ca995248b2825a1b2e8d975545c016df563c28446a59d8cb753",
+      "reports/v08/native-sol61-resource-full-path-aeep.py": "5013165ab61f1cc242e73d720775e53f27a5e4cdb0092c392db408d352f581e3",
+      "src/aeep/hosts/codex_native_process.py": "208290c143fd42b697b05ea55f2206d74f1fb2fb9d476692d3023644af64bd9c",
+      "integrations/assessment-runtime/workbook_program.py": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18",
+      "integrations/assessment-runtime/workbook_grader.py": "7a7b6b9aad91e91e5f2106f3312f7bbdd7ac089579420bd470479839a0f5d37f",
+      "src/aeep/assessment/workbook_native.py": "e847487d235d8a6d0ea44d20fd07c776c23c4439ebaeec354043c57ce4219d6f"
+    },
+    "binary_sha256": "50ac633af64851511f9bbc71032cdae7f1ba20b3234c189687d61ba846c354c5",
+    "python_sha256": "5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325",
+    "guard_sha256": "a4bbf4f35a749da96e5dc4579d4b479bc8e4b83d2557313bf9a01a3526412663",
+    "fixture_seed": 107,
+    "fixture_count": 3,
+    "fixture_index": 1,
+    "maximum_operations": 1,
+    "maximum_model_turns": 0,
+    "maximum_seconds": 160,
+    "arms": [
+      "stdlib_native",
+      "generated_project_mcp_aeep"
+    ],
+    "frozen_checks": {
+      "process_wall_ms": 5000,
+      "sampled_process_cpu_ms": 4000,
+      "sampled_process_peak_memory_mb": 768,
+      "sampled_process_memory_mb_seconds": 1500,
+      "retained_project_bytes": 8388608,
+      "task_schema_bytes": 16384,
+      "project_config_bytes": 1024
+    },
+    "classification": "n1 software-only incremental fresh-process footprint; no model workflow, qualification, marginal capability benefit or release/resource gate"
+  },
+  "mapping_digest": "d2e5bf59972af198b87d1a67545bba7b963cf55a8a3d45c2953fdfc76c581f49",
+  "request_digest": "dcf1ce744334f4ccecfa943b4a49343f9da0aa68de346240eeb3944325be1a01",
+  "authentication": "Codex-owned, no auth state accessed",
+  "measurement": "each fresh coordinator and owned descendants, startup through cleanup; external verifier stage included in end-to-end totals; setup reported separately; sampled peaks never added across sequential stages",
+  "limits": "existing frozen local checks unchanged, n1 exploratory; no retrospective engineering threshold changes",
+  "nested_aeep_accounting": "AEEP arm separately reserves its existing supported fixture/host operations; wrapper reservation covers baseline, generation, verifier and measurement overhead only"
+}

@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/workbook-footprint-calibration-288e.py", line 189, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/workbook-footprint-calibration-288e.py", line 164, in main
+    raise RuntimeError(f"{case_name}/{arm}: " + stderr.decode()[:1500])
+RuntimeError: small/native: Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/workbook-footprint-calibration-288e.py", line 187, in <module>
+    asyncio.run(child(json.load(sys.stdin)))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/workbook-footprint-calibration-288e.py", line 47, in child
+    boundary = NativeSandboxConfig(binary=str(CODEX), binary_sha256=binary_digest,
+        project_root=str(root), read_roots=[str(Path(prefix).resolve())], write_roots=[str(scratch)])
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pydantic/main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for NativeSandboxConfig
+  Value error, native sandbox paths must be absolute, canonical and syml

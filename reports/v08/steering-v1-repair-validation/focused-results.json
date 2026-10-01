@@ -1,0 +1,74 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.08037579199299216,
+    "log": "reports/v08/steering-v1-repair-validation/focused-00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.8388998748268932,
+    "log": "reports/v08/steering-v1-repair-validation/focused-01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.07383737480267882,
+    "log": "reports/v08/steering-v1-repair-validation/focused-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 0.3164780419319868,
+    "log": "reports/v08/steering-v1-repair-validation/focused-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.1535394168458879,
+    "log": "reports/v08/steering-v1-repair-validation/focused-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "tests/test_v08_task_profile.py",
+      "tests/test_v07_execution_attempts.py",
+      "tests/test_router_execution.py",
+      "tests/test_v04_economic_execution.py",
+      "tests/test_v04_prepared_execution_edges.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 2.8377469999250025,
+    "log": "reports/v08/steering-v1-repair-validation/focused-05.log"
+  }
+]

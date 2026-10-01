@@ -1,0 +1,10 @@
+
+==================================== ERRORS ====================================
+______________ ERROR collecting tests/test_v08_native_process.py _______________
+tests/test_v08_native_process.py:118: in <module>
+    @pytest.mark.skipif(not os.environ.get('AEEP_NATIVE_WORKBOOK_PYTHON'), reason='explicit installed workbook Python required')
+                            ^^
+E   NameError: name 'os' is not defined. Did you forget to import 'os'?
+=========================== short test summary info ============================
+ERROR tests/test_v08_native_process.py - NameError: name 'os' is not defined....
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!

@@ -1,0 +1,59 @@
+........................................................................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 22%]
+........................................................................ [ 30%]
+........................................................................ [ 37%]
+........................................................................ [ 45%]
+........................................................................ [ 52%]
+........................................................................ [ 60%]
+........................................................................ [ 67%]
+........................................................................ [ 75%]
+...............................................................s........ [ 82%]
+..........................ss..........s.........ss...s.................. [ 90%]
+................F..............ssss........................ss.......s... [ 97%]
+................s.......                                                 [100%]
+=================================== FAILURES ===================================
+____________ test_calibrated_main_executes_without_recharging_pilot ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-526/test_calibrated_main_executes_0')
+
+    async def test_calibrated_main_executes_without_recharging_pilot(tmp_path):
+        router, service, original, grant = setup_assessment(tmp_path)
+        environment = AssessmentEnvironment.model_validate(service.repository.get('environment', original.environment_digest))
+        options = dict(subject_id=original.subject_digest, family='csv',
+            candidate_id=original.candidate_id, baseline_id=original.baseline_id,
+            authorization_id=grant.authorization_id, environment=environment)
+        try:
+            pilot = service.propose(**options, seed=123, pilot=PilotPolicy())
+            for digest in pilot.definition_digests:
+                service.repository.review(digest)
+            report = await service.run(service.enqueue(pilot.plan_id))
+            timing = timing_preview(service, report.report_id)
+            prior_ledger = service.repository.operation_ledger(pilot.plan_id)
+            for spec in router.manifest.executors:
+                spec.config['timeout_seconds'] = timing['proposed_normal_deadline_seconds']
+                router.registry.replace(spec)
+            with pytest.raises(ConfigurationError, match='route changed'):
+                timing_preview(service, report.report_id)
+            main = service.propose(**options, seed=456, pilot_report_id=report.report_id)
+            assert main.schema_version == 'assessment.plan.v6' and not main.blocked_reasons
+            with pytest.raises(ConfigurationError, match='review'):
+                service.enqueue(main.plan_id)
+            for digest in main.definition_digests:
+                service.repository.review(digest)
+            result = await service.run(service.enqueue(main.plan_id))
+>           assert result.distinct_holdout_cases == 105 and result.qualification_passed
+E           AssertionError: assert (105 == 105 and False)
+E            +  where 105 = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='direct', candid...n from a missing result.'], created_at=datetime.datetime(2026, 9, 26, 12, 43, 1, 581621, tzinfo=datetime.timezone.utc)).distinct_holdout_cases
+E            +  and   False = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='direct', candid...n from a missing result.'], created_at=datetime.datetime(2026, 9, 26, 12, 43, 1, 581621, tzinfo=datetime.timezone.utc)).qualification_passed
+
+tests/test_v08_pilot.py:235: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_pilot.py::test_calibrated_main_executes_without_recharging_pilot
+1 failed, 944 passed, 15 skipped, 1 warning in 421.35s (0:07:01)

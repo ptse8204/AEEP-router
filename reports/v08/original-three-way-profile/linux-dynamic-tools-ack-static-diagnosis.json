@@ -1,0 +1,89 @@
+{
+  "scope": "Offline public managed requirements and prior canonical records only; no runtime/credential reads",
+  "files": {
+    "immutable-diagnostic-local-tag/requirements.toml": "5804803cff64274400cbfb3595cd79cb316ee4181dc1055160efb66862c9621a",
+    "immutable-diagnostic-local-tag/Dockerfile": "a1146fd07dbd65ddffbf61d5cc12fe34740d863b16583266b357a40786c76e2d",
+    "immutable-diagnostic-local-tag/linux-mcp-server.py": "7c7b6af817c1a8bc1be568ecdefb725c9af3b2a96e7bdc6b7162dd2dde72dcac",
+    "linux-noauth-status-review.json": "2e59b445a4653d95e4be02d80c0af350d4b9e6176fb351736e62ba5805aa0838",
+    "linux-noauth-status-result.json": "3606f8f371b94eb9386ce85cf7a0b8aec0a26ab084125049836b67fb9805b560",
+    "linux-noauth-config-result.json": "7bc0d8aeff788b5dc52532a15adc1e1c764e81d1b6d1a607ba47ebf1ba7293c8"
+  },
+  "failed_ack_exact_first_error": "unknown;69byte stderr categorization did not retain exact reason",
+  "concrete_faults": [
+    "Disabled diagnostic entry omits command/args expected by MCP configuration/immutable identity",
+    "Config redeclares aeep profile that immutable requirements already define; prior exact failure proves collision"
+  ],
+  "mandatory_enabled_claim": "not established from requirements identity allowlist alone",
+  "known_supported_same_image_argv": [
+    "/opt/codex/codex",
+    "app-server",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.command=\"/usr/local/bin/python3\"",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.args=[\"/opt/aeep/linux-mcp-server.py\"]",
+    "-c",
+    "mcp_servers.linux_boundary_diagnostic.enabled=true"
+  ],
+  "known_supported_worker": {
+    "schema_version": "execution.worker.v2",
+    "worker_id": "linux-noauth-status-diagnostic",
+    "runtime": "/usr/local/bin/docker",
+    "socket": "/Users/edwintse/.docker/run/docker.sock",
+    "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+    "platform": "linux/arm64",
+    "binary": "/opt/codex/codex",
+    "binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+    "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+    "dependencies_digest": "3f1569c2846d110614374ac5e2fe173f11c5c12c8ac1c0723ce1e6e52aae00c9",
+    "cpu_count": 1.0,
+    "memory_mb": 1024,
+    "process_limit": 64,
+    "network_id": null,
+    "model_proxy_url": null,
+    "credential_volume": null,
+    "permissions_profile": "aeep",
+    "reviewed_files": {
+      "/opt/aeep/linux-mcp-server.py": "7c7b6af817c1a8bc1be568ecdefb725c9af3b2a96e7bdc6b7162dd2dde72dcac"
+    }
+  },
+  "prior_observation": {
+    "request_id": "conformance_probe_beca7fb1d0ab4b158d702065baaf0214",
+    "operation_id": "linux-noauth-status:conformance_probe_beca7fb1d0ab4b158d702065baaf0214",
+    "image": "sha256:e7e465b7ba53cb72817860cfe53a1db5d7039bfdf0201727de892944187e107b",
+    "worker_digest": "e5c5554acdf38970a348945789b677695ed66c39523259449287ef29cf2eef00",
+    "cleanup_confirmed": true,
+    "protocol_passed": true,
+    "cpu_seconds": null,
+    "peak_memory_mb": null,
+    "accounting_complete": false,
+    "configuration_initialization_passed": true,
+    "own_server_present": true,
+    "own_tool_count": 1,
+    "safe_transport": {
+      "process_exit_code_before_cleanup": null,
+      "config_error_categories": [
+        "invalid_value",
+        "requirements_rejection"
+      ],
+      "recognized_public_config_fields": [
+        "value"
+      ],
+      "recognized_error_types": [],
+      "stderr_class": "bwrap_mentioned",
+      "stderr_bytes_retained": 658,
+      "stderr_truncated": false
+    },
+    "elapsed_seconds": 2.7267644160892814,
+    "canonical_record_digest": "81b6a503169c6e2e26ac2350470de389864b5d0e0384aca8ed937353327e2e34"
+  },
+  "successor_scope": "Fresh declaration ACK only; may include original fixed MCP startup, no tools/call/turn/model/capacity; unchanged immutable policy. Exact new review/root scheduling required.",
+  "server_startup_effect": "Writes fixed synthetic /workspace/private-state.json canary in isolated owned worker; no nested sandbox process until explicit tools/call. Nonroot contained process; existing worker cleanup owns it.",
+  "limits": {
+    "operations": 1,
+    "seconds": 60,
+    "turns": 0,
+    "cash_usd": 0
+  },
+  "source_changes": false,
+  "runtime_launches": 0
+}

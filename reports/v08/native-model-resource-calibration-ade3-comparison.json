@@ -1,0 +1,86 @@
+{
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "classification": "Descriptive n1 whole-model-workflow calibration; failed baseline vs independently verified forced AEEP workflow, not successful-task efficiency/causal value/release acceptance",
+  "baseline": {
+    "workflow_seconds": 89.28386920900084,
+    "capacity_preflight_seconds": 0.5175456248689443,
+    "host_tree_peak_rss_bytes": 429412352,
+    "sampled_host_tree_memory_byte_seconds": 23967100236.307076,
+    "sampled_cpu_last_per_owned_identity_seconds": 2.232672161,
+    "controller_peak_rss_bytes": 107020288,
+    "controller_cpu_observed_seconds": 8.493588928000001,
+    "token_usage": {
+      "inputTokens": 126477,
+      "cachedInputTokens": 90112,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 2600,
+      "reasoningOutputTokens": 238,
+      "totalTokens": 129077
+    },
+    "independent_checks": [
+      {
+        "index": 0,
+        "independent_grader_valid": false,
+        "grader_error_type": "AssertionError"
+      },
+      {
+        "index": 1,
+        "independent_grader_valid": false,
+        "grader_error_type": "AssertionError"
+      }
+    ],
+    "scratch_bytes_before_cleanup": 15536
+  },
+  "aeep": {
+    "setup_seconds": 0.44449437502771616,
+    "workflow_seconds": 17.80378087493591,
+    "sample_count": 307,
+    "host_tree_peak_rss_bytes": 628211712,
+    "sampled_host_tree_memory_byte_seconds": 7651962203.06715,
+    "sampled_cpu_last_per_owned_identity_seconds": 3.61118818,
+    "task_schema_bytes": 15202,
+    "added_instruction_bytes": 168,
+    "token_usage": {
+      "inputTokens": 59694,
+      "cachedInputTokens": 29568,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 291,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 59985
+    },
+    "independent_checks": [
+      {
+        "index": 0,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_e5665ea54abb4ec5b5f64f1902f8ad36",
+        "independent_grader_valid": true
+      },
+      {
+        "index": 1,
+        "ok": true,
+        "task_valid": true,
+        "receipt_id": "rcpt_cf4b24fc2b2b4afea878196c6e58b99a",
+        "independent_grader_valid": true
+      }
+    ]
+  },
+  "input_hashes_match": true,
+  "source_unchanged": true,
+  "cleanup_confirmed": true,
+  "baseline_quality_floor_passed": false,
+  "baseline_failure_cause": "unknown; raw model final/command text not retained; missing required artifacts cannot distinguish refusal/tool/path cause",
+  "concrete_configuration_asymmetry": "AEEP executor sets writable TMPDIR=scratch; failed baseline does not. Potential confound, not proved actual failure cause; separately reviewed successor required.",
+  "gate_complete": false,
+  "unknowns": [
+    "whole-machine interference/baseline",
+    "provider CPU/GPU/memory/energy",
+    "actual network bytes/requests and private disclosure telemetry",
+    "very short unsampled process lifetimes",
+    "shared RSS pages and cache attribution",
+    "AEEP historical controller resource telemetry absent",
+    "historical vs sibling order/cache/provider variance; n1 not paired causal evidence"
+  ],
+  "original_baseline_result_sha256": "3448c1f1e742a85a995479a15bb79f55ec232cdebc5fb22a9cb1649d29f48e89",
+  "aeep_observation_sha256": "b39cb4cd6e3d396d8561c5980cf7db87afae4ad676257cb5039755b0125402bd"
+}

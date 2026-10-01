@@ -1,0 +1,31 @@
+{
+  "execution_authorized": false,
+  "source_context": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "prior_attempts_unchanged": true,
+  "filesystem_override": "permissions.aeep.filesystem={\":root\" = \"deny\", \":minimal\" = \"read\", \"/workspace\" = \"write\", \"/tmp\" = \"write\", \"/worker/auth\" = \"deny\", \"/opt/codex\" = \"read\", \"/opt/dependencies\" = \"read\", \"/opt/skills\" = \"read\", \"/etc/codex/skills\" = \"read\", \"/worker/home/.cache/codex-runtimes\" = \"read\", \"/workspace/private-state.json\" = \"deny\"}",
+  "existing_rules_preserved": true,
+  "canary_only_added_deny": true,
+  "required_managed_mcp_allowance": {
+    "linux_boundary_diagnostic": {
+      "identity": {
+        "command": {
+          "executable": "python3",
+          "args": [
+            {
+              "match": "exact",
+              "value": "-c"
+            },
+            {
+              "match": "exact",
+              "value": "\"\"\"Fixed synthetic diagnostic; MCP stdout is protocol JSON only.\"\"\"\nimport hashlib\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nTOOL = {'name': 'sandbox_probe', 'description': 'Observe a fixed synthetic Linux sandbox boundary.', 'inputSchema': {'type': 'object', 'properties': {}, 'additionalProperties': False}}\nPATH = Path('/workspace/private-state.json')\nPATH.write_bytes(b'aeep-public-canary-v1')\n\ndef stderr_class(data):\n    text = data.decode('utf-8', errors='replace').lower()\n    for name, markers in (('unsupported_flag', ('unexpected argument', 'unrecognized option', 'unknown option')), ('permission_denied', ('permission denied', 'operation not permitted')), ('namespace_unavailable', ('namespace', 'unshare')), ('seccomp_unavailable', ('seccomp',)), ('landlock_unavailable', ('landlock',)), ('bwrap_unavailable', ('bwrap', 'bubblewrap'))):\n        if any(marker in text for marker in markers):\n            return name\n    return 'unclassified' if data else 'none'\n\ndef observe():\n    code = 'import json,pathlib;p=pathlib.Path(\"/workspace/private-state.json\");r={\"marker\":True};\\nfor op in (\"read\",\"write\"):\\n try:\\n  p.read_bytes() if op==\"read\" else p.write_bytes(b\"changed\");r[op+\"_denied\"]=False\\n except OSError:r[op+\"_denied\"]=True\\nprint(json.dumps(r))'\n    argv = ['/opt/codex/codex', 'sandbox', '--permission-profile', 'aeep', '--include-managed-config', '--cd', '/workspace', '--', 'python3', '-c', code]\n    facts = {'server_canary_readable': PATH.read_bytes() == b'aeep-public-canary-v1'}\n    try:\n        result = subprocess.run(argv, capture_output=True, timeout=5)\n        facts.update(exit_code=result.returncode, stderr_class=stderr_class(result.stderr), stderr_bytes=len(result.stderr), stderr_sha256=hashlib.sha256(result.stderr).hexdigest(), stdout_bytes=len(result.stdout))\n        facts['child'] = json.loads(result.stdout) if result.returncode == 0 else None\n    except (OSError, ValueError, subprocess.TimeoutExpired) as exc:\n        facts['error_type'] = type(exc).__name__\n    facts['canary_unchanged'] = PATH.read_bytes() == b'aeep-public-canary-v1'\n    return facts\n\nfor line in sys.stdin:\n    message = json.loads(line)\n    if 'id' not in message:\n        continue\n    method = message.get('method')\n    if method == 'initialize':\n        result = {'protocolVersion': message.get('params', {}).get('protocolVersion', '2025-11-25'), 'serverInfo': {'name': 'linux-boundary-diagnostic', 'version': '1'}, 'capabilities': {'tools': {}}}\n    elif method == 'tools/list':\n        result = {'tools': [TOOL]}\n    elif method == 'tools/call' and message.get('params', {}).get('name') == 'sandbox_probe' and message.get('params', {}).get('arguments', {}) == {}:\n        facts = observe()\n        result = {'content': [{'type': 'text', 'text': json.dumps(facts)}], 'structuredContent': facts, 'isError': False}\n    else:\n        print(json.dumps({'jsonrpc': '2.0', 'id': message['id'], 'error': {'code': -32601, 'message': 'Unsupported fixed diagnostic request'}}), flush=True)\n        continue\n    print(json.dumps({'jsonrpc': '2.0', 'id': message['id'], 'result': result}), flush=True)\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "requires_new_operator_reviewed_immutable_requirements_profile": true,
+  "existing_empty_allowlist_must_not_be_bypassed": true,
+  "no_actual_image_or_conformance_binding": true,
+  "qualification": false
+}

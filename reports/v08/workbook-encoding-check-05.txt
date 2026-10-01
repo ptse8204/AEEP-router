@@ -1,0 +1,225 @@
+........................................................................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 22%]
+........................................................................ [ 30%]
+........................................................................ [ 38%]
+........................................................................ [ 45%]
+........................................................................ [ 53%]
+........................................................................ [ 61%]
+........................................................................ [ 68%]
+........................................................................ [ 76%]
+F.............................................s......................... [ 84%]
+...F.....ss..........s............s..................................... [ 91%]
+............ssss........................ss.......s...................s.. [ 99%]
+.....                                                                    [100%]
+=================================== FAILURES ===================================
+____________ test_extension_preview_bounds_output_dependent_batches ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-478/test_extension_preview_bounds_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b06d2b0>
+
+    async def test_extension_preview_bounds_output_dependent_batches(tmp_path, monkeypatch):
+        from test_v08_executable_recipes import definition
+    
+        from aeep.assessment.workbook import workbook_recipe
+        router, service, plan, _ = setup_assessment(tmp_path)
+        try:
+            recipe = workbook_recipe()
+            assert recipe.extension
+            read = service.repository.get
+            monkeypatch.setattr(service.repository, 'get', lambda kind, identity:
+                recipe.model_dump(mode='json') if kind == 'recipe' else read(kind, identity))
+            result = service.budget_preview(plan.plan_id)['campaign_allowance']
+            stages = {item['stage']: item for item in result['stages']}
+            assert stages['grader_reference']['calls_upper'] == 1
+            assert stages['grader_probe']['calls_minimum'] == 1
+            literal_count = len(recipe.extension.independent_fixtures) + len(recipe.extension.transformed_fixtures)
+>           assert stages['grader_probe']['calls_upper'] == 141 + literal_count + (literal_count + 8) * (10 + len(recipe.extension.fault_outputs))
+E           AssertionError: assert 353 == ((141 + 4) + ((4 + 8) * (10 + 7)))
+E            +  where 7 = len([{'workbook_b64': 'invalid'}, {'workbook_b64': 'UEsDBBQAAAAIAJiEN12l4RtYHwEAAGAEAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbMVUy0...ACYhDddvECMRWYBAAC8AgAAGAAAAAAAAAAAAAAAgAFhEQAAeGwvd29ya3NoZWV0cy9zaGVldDIueG1sUEsFBgAAAAAKAAoAhAIAAP0SAAAAAA=='}, ...])
+E            +    where [{'workbook_b64': 'invalid'}, {'workbook_b64': 'UEsDBBQAAAAIAJiEN12l4RtYHwEAAGAEAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbMVUy0...ACYhDddvECMRWYBAAC8AgAAGAAAAAAAAAAAAAAAgAFhEQAAeGwvd29ya3NoZWV0cy9zaGVldDIueG1sUEsFBgAAAAAKAAoAhAIAAP0SAAAAAA=='}, ...] = ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v3', generator=ExecutorSpec(id='workbook.generat...nt', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook']).fault_outputs
+E            +      where ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v3', generator=ExecutorSpec(id='workbook.generat...nt', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook']) = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='workbook', implementation_digest='5e73be3c2dde7f525...t', 'header_format', 'cell_value', 'row_formula', 'formula_cache', 'summary', 'preserved_sheets', 'invalid_workbook'])).extension
+
+tests/test_v08_budget.py:99: AssertionError
+___________ test_host_assessment_admission_history_and_account_drift ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-478/test_host_assessment_admission0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109d5b000>
+
+    async def test_host_assessment_admission_history_and_account_drift(tmp_path, monkeypatch):
+        import asyncio
+        from datetime import timedelta
+    
+        from test_codex_subscription_adapter import RESOURCE_ID, managed_config
+    
+        from aeep.assessment.models import (
+            AssessmentAuthorization,
+            AssessmentEnvironment,
+            AssessmentLimits,
+        )
+        from aeep.assessment.recipes import reference_csv, shipped_recipe
+        from aeep.assessment.service import AssessmentService
+        from aeep.estimator import HistoricalEstimator
+        from aeep.hosts import CodexAppServerAdapter
+        from aeep.models import (
+            ActionRequest,
+            EstimateSource,
+            ExecutionStatus,
+            ExecutorSpec,
+            Manifest,
+            RawExecution,
+            SideEffect,
+            SubscriptionResource,
+            utc_now,
+        )
+        from aeep.router import Router
+    
+        recipe = shipped_recipe("csv")
+        candidate = python_spec("candidate", "aeep.assessment.recipes:reference_csv", capability=recipe.capability, input_schema=recipe.input_schema, output_schema=recipe.output_schema)
+        baseline = ExecutorSpec(id="baseline", capability=recipe.capability, kind="host_managed", description="Offline Codex comparison", resource_pool=RESOURCE_ID, side_effect=SideEffect.READ, config={**managed_config(), "invocation": {"mode": "turn"}}, estimate=candidate.estimate.model_copy(deep=True))
+        router = Router(Manifest(database=":memory:", executors=[candidate, baseline], resources=[SubscriptionResource(id=RESOURCE_ID, provider="openai", product="codex")]))
+        service = AssessmentService(router, tmp_path / "assessment")
+        plugin = tmp_path / "plugin.txt"
+        plugin.write_text("deterministic CSV fixture")
+        subject = service.inspect_local(plugin)
+        environment = AssessmentEnvironment(environment_id="host", kind="codex_sandbox", identity={})
+        plan = service.propose(subject_id=subject.subject_id, family="csv", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id="grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="grant", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_model_turns=200, max_elapsed_seconds=20000), automatic_admission=True, expires_at=utc_now() + timedelta(hours=1)))
+    
+        async def execute(self, context):
+            await asyncio.sleep(0.04)
+            return RawExecution(status=ExecutionStatus.SUCCESS, output=reference_csv(**context.request.input), metadata={"host_runtime_digest": await self.resolve_identity(context.config)})
+    
+        monkeypatch.setattr(CodexAppServerAdapter, "execute", execute)
+        try:
+            # This is an offline identity fixture, not worker-conformance evidence.
+            with monkeypatch.context() as campaign_patch:
+                campaign_patch.setattr("aeep.assessment.boundary.require_managed_boundaries", lambda *_args: None)
+                report = await service.run(service.enqueue(plan.plan_id))
+            assert report.outcome == "useful_within_scope", report.explanations
+            with pytest.raises(ConfigurationError, match="worker boundary"):
+>               service.admit(report.report_id)
+
+tests/test_v08_identity.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x10a927a10>
+report_id = 'fit_82f995f790004c808b8a203d77a4052f'
+
+    def admit(self, report_id: str) -> ScopedAdmission:
+        report = AssessmentReport.model_validate(self.repository.get("report", report_id))
+        plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+        campaign = BenchmarkCampaignReport.model_validate(
+            self.repository.get("campaign", report.campaign_digest)
+        )
+        ledger = AssessmentOperationLedger.model_validate(self.repository.get("operation_ledger", report.operation_ledger_digest)) if report.operation_ledger_digest else None
+        verified = fit_report(plan, recipe, campaign, ledger=ledger)
+        if (
+            verified.outcome != "useful_within_scope"
+            or not verified.qualification_passed
+            or report.outcome != verified.outcome
+        ):
+            raise ConfigurationError(
+                "admission requires passed qualification and a measured benefit"
+            )
+        if report.grader_validation_digest is None:
+            raise ConfigurationError("admission requires independent grader-validation evidence")
+        validation = GraderValidationEvidence.model_validate(self.repository.get("grader_validation", report.grader_validation_digest))
+        with self.router.store._lock:
+            graded = self.router.store._connection.execute(
+                "SELECT 1 FROM assessment_records r JOIN assessment_operations o ON o.id=r.id JOIN assessment_records s ON s.id=o.id AND s.kind='operation_start' WHERE r.kind='grader_validation' AND r.digest=? AND json_extract(s.payload_json, '$.plan_id')=? AND json_extract(s.payload_json, '$.stage')='grader_validation' AND o.state='complete'",
+                (report.grader_validation_digest, plan.plan_id),
+            ).fetchone()
+        if (graded is None or content_digest(validation) != report.grader_validation_digest
+                or validation.recipe_digest != plan.recipe_digest
+                or len(set(validation.independent_fixture_digests)) < 2
+                or validation.generator_fixture_digests != [content_digest(case) for case in plan.suite.cases[:8]]):
+            raise ConfigurationError("admission grader-validation evidence does not match the plan")
+        mapping = self._verify_dependencies(plan)
+        for spec in mapping.subjects:
+            if spec.kind == ExecutorKind.MANAGED_HOST:
+                digest = verified.host_runtime_digests.get(spec.id)
+                if not digest or self.router.store.host_runtime_digests.get(spec.id) != (behavior_fingerprint(spec), digest):
+>                   raise ConfigurationError("managed-host admission requires resolved runtime identity")
+E                   aeep.errors.ConfigurationError: managed-host admission requires resolved runtime identity
+
+src/aeep/assessment/service.py:602: ConfigurationError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-478/test_host_assessment_admission0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109d5b000>
+
+    async def test_host_assessment_admission_history_and_account_drift(tmp_path, monkeypatch):
+        import asyncio
+        from datetime import timedelta
+    
+        from test_codex_subscription_adapter import RESOURCE_ID, managed_config
+    
+        from aeep.assessment.models import (
+            AssessmentAuthorization,
+            AssessmentEnvironment,
+            AssessmentLimits,
+        )
+        from aeep.assessment.recipes import reference_csv, shipped_recipe
+        from aeep.assessment.service import AssessmentService
+        from aeep.estimator import HistoricalEstimator
+        from aeep.hosts import CodexAppServerAdapter
+        from aeep.models import (
+            ActionRequest,
+            EstimateSource,
+            ExecutionStatus,
+            ExecutorSpec,
+            Manifest,
+            RawExecution,
+            SideEffect,
+            SubscriptionResource,
+            utc_now,
+        )
+        from aeep.router import Router
+    
+        recipe = shipped_recipe("csv")
+        candidate = python_spec("candidate", "aeep.assessment.recipes:reference_csv", capability=recipe.capability, input_schema=recipe.input_schema, output_schema=recipe.output_schema)
+        baseline = ExecutorSpec(id="baseline", capability=recipe.capability, kind="host_managed", description="Offline Codex comparison", resource_pool=RESOURCE_ID, side_effect=SideEffect.READ, config={**managed_config(), "invocation": {"mode": "turn"}}, estimate=candidate.estimate.model_copy(deep=True))
+        router = Router(Manifest(database=":memory:", executors=[candidate, baseline], resources=[SubscriptionResource(id=RESOURCE_ID, provider="openai", product="codex")]))
+        service = AssessmentService(router, tmp_path / "assessment")
+        plugin = tmp_path / "plugin.txt"
+        plugin.write_text("deterministic CSV fixture")
+        subject = service.inspect_local(plugin)
+        environment = AssessmentEnvironment(environment_id="host", kind="codex_sandbox", identity={})
+        plan = service.propose(subject_id=subject.subject_id, family="csv", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id="grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="grant", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_model_turns=200, max_elapsed_seconds=20000), automatic_admission=True, expires_at=utc_now() + timedelta(hours=1)))
+    
+        async def execute(self, context):
+            await asyncio.sleep(0.04)
+            return RawExecution(status=ExecutionStatus.SUCCESS, output=reference_csv(**context.request.input), metadata={"host_runtime_digest": await self.resolve_identity(context.config)})
+    
+        monkeypatch.setattr(CodexAppServerAdapter, "execute", execute)
+        try:
+            # This is an offline identity fixture, not worker-conformance evidence.
+            with monkeypatch.context() as campaign_patch:
+                campaign_patch.setattr("aeep.assessment.boundary.require_managed_boundaries", lambda *_args: None)
+                report = await service.run(service.enqueue(plan.plan_id))
+            assert report.outcome == "useful_within_scope", report.explanations
+>           with pytest.raises(ConfigurationError, match="worker boundary"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'worker boundary'
+E             Actual message: 'managed-host admission requires resolved runtime identity'
+
+tests/test_v08_identity.py:141: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_budget.py::test_extension_preview_bounds_output_dependent_batches
+FAILED tests/test_v08_identity.py::test_host_assessment_admission_history_and_account_drift
+2 failed, 926 passed, 13 skipped, 1 warning in 453.57s (0:07:33)

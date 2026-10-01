@@ -35,8 +35,10 @@ from pydantic import (
     ConfigDict,
     Field,
     PlainSerializer,
+    SerializerFunctionWrapHandler,
     WithJsonSchema,
     field_validator,
+    model_serializer,
     model_validator,
 )
 
@@ -2276,8 +2278,108 @@ class LedgerEvent(StrictModel):
 
 
 class ManagedHostModelConstraints(StrictModel):
+    allowed_model_ids: tuple[str, ...] = ()
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.allowed_model_ids:
+            result.pop("allowed_model_ids", None)
+        return result
+
     required_capabilities: tuple[str, ...] = ()
     minimum_context_tokens: int | None = Field(default=None, ge=1)
+
+
+class ReviewedHostTool(StrictModel):
+    server: str = Field(pattern=r"^[A-Za-z0-9_-]+$")
+    tool: str = Field(min_length=1, max_length=200)
+    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class ReviewedHostSkill(StrictModel):
+    name: str = Field(pattern=r"^[A-Za-z0-9_:-]+$")
+    path: str
+    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+    @model_validator(mode="after")
+    def absolute_skill(self) -> ReviewedHostSkill:
+        if not os.path.isabs(self.path) or os.path.basename(self.path) != "SKILL.md" or ".." in self.path.split("/"):
+            raise ValueError("supporting skill requires an exact absolute SKILL.md path")
+        return self
+
+
+class ManagedHostInvocation(StrictModel):
+    """Operator-owned invocation and inventory, never model-facing arguments."""
+
+    mode: Literal["turn", "skill", "mcp_tool", "dynamic_tool"] = "turn"
+    skill_name: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]+$")
+    skill_path: str | None = None
+    skill_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    server: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]+$")
+    tool: str | None = Field(default=None, min_length=1, max_length=200)
+    tool_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    supporting_tools: tuple[ReviewedHostTool, ...] = ()
+    supporting_skills: tuple[ReviewedHostSkill, ...] = ()
+    exposure: Literal["required", "optional"] | None = None
+    local_profile: Literal["capable_local"] | None = None
+    native_catalog: bool | None = None
+    dynamic_tools_digest: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.supporting_tools:
+            result.pop("supporting_tools", None)
+        if not self.supporting_skills:
+            result.pop("supporting_skills", None)
+        for key in ("exposure", "local_profile", "native_catalog", "dynamic_tools_digest"):
+            if getattr(self, key) is None:
+                result.pop(key, None)
+        return result
+
+    @model_validator(mode="after")
+    def exact_target(self) -> ManagedHostInvocation:
+        skill = (self.skill_name, self.skill_path, self.skill_sha256)
+        if self.exposure is not None and self.mode not in {"skill", "dynamic_tool"}:
+            raise ValueError("exposure applies only to a reviewed skill or dynamic tool")
+        if self.native_catalog and self.local_profile is None:
+            raise ValueError("native catalog requires a reviewed local profile")
+        paths = [item.path for item in self.supporting_skills]
+        if len(paths) != len(set(paths)) or self.skill_path in paths:
+            raise ValueError("supporting skills must be distinct from each other and the candidate")
+        identities = [(item.server, item.tool) for item in self.supporting_tools]
+        if len(identities) != len(set(identities)):
+            raise ValueError("supporting tool identities must be unique")
+        tool = (self.server, self.tool, self.tool_sha256)
+        if self.mode == "skill":
+            if not all(skill) or any(tool) or not os.path.isabs(self.skill_path or "") or os.path.basename(self.skill_path or "") != "SKILL.md":
+                raise ValueError("skill invocation requires an exact absolute path and content digest")
+        elif self.mode in {"mcp_tool", "dynamic_tool"}:
+            if not all(tool) or any(skill):
+                raise ValueError("MCP invocation requires an exact server, tool and contract digest")
+        elif any(skill) or any(tool):
+            raise ValueError("turn invocation cannot include skill or MCP targets")
+        if self.mode == "dynamic_tool" and self.dynamic_tools_digest is None:
+            raise ValueError("dynamic tool invocation requires an operator binding digest")
+        if self.dynamic_tools_digest is not None and self.mode not in {"turn", "dynamic_tool"}:
+            raise ValueError("dynamic tools cannot be combined with skill or MCP targets")
+        return self
+
+
+class ManagedHostArtifact(StrictModel):
+    """Reviewed, single-file transport; paths cannot be supplied by task arguments."""
+    input_field: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_]{0,63}$")
+    output_field: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_]{0,63}$")
+    input_name: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
+    output_name: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
+    max_bytes: int = Field(default=1_000_000, ge=1, le=4_000_000)
+
+    @model_validator(mode="after")
+    def distinct_files(self) -> ManagedHostArtifact:
+        if self.input_name == self.output_name:
+            raise ValueError("worker input and output files must differ")
+        return self
 
 
 class ManagedHostExecutorConfig(StrictModel):
@@ -2302,9 +2404,54 @@ class ManagedHostExecutorConfig(StrictModel):
     store_prompt: bool = False
     store_output: bool = False
     redaction_policy: Literal["default", "strict"] = "default"
+    invocation: ManagedHostInvocation | None = None
+    assessment_adapter: dict[str, Any] | None = None
+    worker_workspace: Literal["temporary"] | None = None
+    exec_model: str | None = Field(default=None, min_length=1, max_length=200)
+    managed_worker: dict[str, Any] | None = None
+    artifact: ManagedHostArtifact | None = None
+    input_tree: Literal["local_search_tree:1"] | None = None
+    adapter_options: dict[str, Any] | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy_worker_config(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if self.worker_workspace is None:
+            result.pop("worker_workspace", None)
+        if self.exec_model is None:
+            result.pop("exec_model", None)
+        if self.managed_worker is None:
+            result.pop("managed_worker", None)
+        if self.artifact is None:
+            result.pop("artifact", None)
+        if self.input_tree is None:
+            result.pop("input_tree", None)
+        if self.adapter_options is None:
+            result.pop("adapter_options", None)
+        return result
+
+    def process_binding(self) -> str:
+        fields = {"argv", "executable_sha256", "environment_allowlist", "working_directory_policy",
+                  "working_directory", "max_message_bytes", "managed_worker", "adapter_options", "exec_model"}
+        value = self.model_dump(mode="json", include=fields)
+        if self.invocation is not None and self.invocation.dynamic_tools_digest is not None:
+            value["dynamic_tools_digest"] = self.invocation.dynamic_tools_digest
+        return json.dumps(value, sort_keys=True)
 
     @model_validator(mode="after")
     def valid_managed_host_config(self) -> ManagedHostExecutorConfig:
+        if self.input_tree is not None and (
+            self.managed_worker is None or self.artifact is not None
+            or (self.invocation is not None and self.invocation.mode == "mcp_tool")
+            or not self.assessment_adapter
+            or self.assessment_adapter.get("input_transform") != "local_search_tree:2"
+            or not self.assessment_adapter.get("read_only_roots")
+        ):
+            raise ValueError("input tree requires a managed worker and reviewed search roots")
+        if self.artifact is not None and (self.managed_worker is None or self.output_mode != "json"):
+            raise ValueError("artifact transport requires a managed worker and JSON output")
+        if self.worker_workspace is not None and self.invocation is None:
+            raise ValueError("temporary workers require an explicit reviewed invocation")
         if not os.path.isabs(self.argv[0]):
             raise ValueError("managed-host executable must be an absolute path")
         if any(not item or "\x00" in item for item in self.argv):
@@ -2341,6 +2488,15 @@ class ExecutorSpec(StrictModel):
     validators: list[ValidationSpec] = Field(default_factory=list)
     config: dict[str, Any] = Field(default_factory=dict)
 
+    required_capabilities: tuple[str, ...] = ()
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy_capabilities(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.required_capabilities:
+            result.pop("required_capabilities", None)
+        return result
+
     @model_validator(mode="after")
     def validate_network_locality(self) -> ExecutorSpec:
         if self.locality == Locality.INTERNET and not self.requires_network:
@@ -2354,11 +2510,19 @@ class ExecutorSpec(StrictModel):
             self.estimate.resources.subscription_units = 1.0
         if self.kind == ExecutorKind.MANAGED_HOST:
             config = ManagedHostExecutorConfig.model_validate(self.config)
+            if config.input_tree is not None and "input_tree" not in self.required_capabilities:
+                object.__setattr__(self, "required_capabilities", (*self.required_capabilities, "input_tree"))
             if not self.resource_pool:
                 raise ValueError("managed-host executors require resource_pool")
             if self.side_effect.rank > config.approval_ceiling.rank:
                 raise ValueError("managed-host approval ceiling is below route side effect")
-            object.__setattr__(self, "config", config.model_dump(mode="json"))
+            normalized = config.model_dump(mode="json")
+            # Additive options must not change existing signed route fingerprints.
+            if config.invocation is None:
+                normalized.pop("invocation")
+            if config.assessment_adapter is None:
+                normalized.pop("assessment_adapter")
+            object.__setattr__(self, "config", normalized)
         return self
 
     def managed_host_config(self) -> ManagedHostExecutorConfig:
@@ -2872,7 +3036,7 @@ ResourceDefinition: TypeAlias = Annotated[
 
 
 class Manifest(StrictModel):
-    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"] = "0.7"
+    version: Literal["0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8"] = "0.8"
     database: str = ".aeep/aeep.db"
     default_policy: str = "balanced"
     persistence: PersistenceConfig = Field(default_factory=PersistenceConfig)
@@ -3097,6 +3261,65 @@ class CompactExecutionOutcome(StrictModel):
     decision: CompactRouteDecision
     receipts: list[CompactReceipt] = Field(default_factory=list)
     instructions: str | None = None
+
+
+class TaskScope(StrictModel):
+    """Operator-owned, finite task delegation; does not qualify any executor."""
+
+    schema_version: Literal['aeep.task-scope.v1'] = 'aeep.task-scope.v1'
+    scope_id: str = Field(min_length=1, max_length=200)
+    project_root: str
+    executor_fingerprints: dict[str, str] = Field(min_length=1, max_length=32)
+    approval_ceiling: SideEffect = SideEffect.READ
+    max_attempts: int = Field(ge=1, le=1000)
+    max_attempt_seconds: float = Field(gt=0, le=3600)
+    expires_at: datetime
+
+    @model_validator(mode='after')
+    def bounded_scope(self) -> TaskScope:
+        from pathlib import Path
+        if self.expires_at.tzinfo is None or self.expires_at.utcoffset() is None:
+            raise ValueError('task scope expiry must be timezone-aware')
+        if not Path(self.project_root).is_absolute() or Path(self.project_root).resolve() != Path(self.project_root):
+            raise ValueError('task scope project must be an absolute canonical path')
+        if self.approval_ceiling.rank > SideEffect.WRITE.rank:
+            raise ValueError('task scope v1 does not delegate consequential external or financial operations')
+        if any(not re.fullmatch(r'sha256:[a-f0-9]{64}', value) for value in self.executor_fingerprints.values()):
+            raise ValueError('task scope requires exact executor fingerprints')
+        return self
+
+
+class TaskReceiptView(StrictModel):
+    """Allowlisted evidence for a task response; never arbitrary receipt metadata."""
+
+    receipt_id: str
+    executor_id: str
+    status: ExecutionStatus
+    approval_id: str | None = None
+    schema_valid: bool | None = None
+    task_valid: bool | None = None
+    checks: list[ValidationResult] = Field(default_factory=list)
+    recorded_resources: ResourceVector
+    accounting: ResourceAccounting
+    enforcement_backend_digest: str | None = None
+
+
+class TaskExecutionOutcome(StrictModel):
+    schema_version: Literal["aeep.task-outcome.v1"] = "aeep.task-outcome.v1"
+    ok: bool
+    status: ExecutionStatus
+    output: Any = None
+    decision: CompactRouteDecision
+    summary: str
+    approval_ceiling: SideEffect
+    task_scope_digest: str | None = None
+    task_activation_digest: str | None = None
+    operating_lifecycle: Literal['session-scoped'] = 'session-scoped'
+    changes_verified: bool | None = None
+    permission_scope: Literal["operator ceiling; backend scope requires separate evidence"] = "operator ceiling; backend scope requires separate evidence"
+    receipts: list[TaskReceiptView] = Field(default_factory=list)
+    verification_limits: list[str] = Field(default_factory=list)
+    recovery_state: Literal["none", "required", "unknown"] = "unknown"
 
 
 class ExternalOutcomeReport(StrictModel):

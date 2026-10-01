@@ -1,0 +1,152 @@
+{
+  "source_before": "92f1257d14ad6f915d5194aaee8083d850d91d480b2a4c431b48e9b22e5b5a33",
+  "source_after": "92f1257d14ad6f915d5194aaee8083d850d91d480b2a4c431b48e9b22e5b5a33",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09235620801337063,
+      "log": "reports/v08/grader-diagnostics-check-00.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6704768750350922,
+      "log": "reports/v08/grader-diagnostics-check-01.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.04374674998689443,
+      "log": "reports/v08/grader-diagnostics-check-02.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.18714441708289087,
+      "log": "reports/v08/grader-diagnostics-check-03.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1474640000378713,
+      "log": "reports/v08/grader-diagnostics-check-04.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 444.1630690830061,
+      "log": "reports/v08/grader-diagnostics-check-05.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 535.5654784579528,
+      "log": "reports/v08/grader-diagnostics-check-06.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "seconds": 1.045990708982572,
+      "log": "reports/v08/grader-diagnostics-check-07.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/grader-diagnostics-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3867600420489907,
+      "log": "reports/v08/grader-diagnostics-check-08.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/grader-diagnostics-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04060674994252622,
+      "log": "reports/v08/grader-diagnostics-check-09.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/grader-diagnostics-coverage.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04837066703476012,
+      "log": "reports/v08/grader-diagnostics-check-10.txt"
+    },
+    {
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "integrations/dsh-aeep-router"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1404311660444364,
+      "log": "reports/v08/grader-diagnostics-check-11.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08608437504153699,
+      "log": "reports/v08/grader-diagnostics-check-12.txt"
+    }
+  ]
+}

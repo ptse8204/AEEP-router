@@ -1,0 +1,71 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+........................................................................ [ 20%]
+........................................................................ [ 27%]
+........................................................................ [ 34%]
+........................................................................ [ 41%]
+........................................................................ [ 48%]
+........................................................................ [ 55%]
+........................................................................ [ 62%]
+........................................................................ [ 68%]
+........................................................................ [ 75%]
+..........s...................................ss..........s.........ss.. [ 82%]
+.s...............................................................ssss... [ 89%]
+........................................................F....ss......... [ 96%]
+........s...................s.......                                     [100%]
+=================================== FAILURES ===================================
+______________ test_actual_native_allow_deny_and_network_boundary ______________
+
+tmp_path = PosixPath('/private/tmp/delivery-final-pytest/test_actual_native_allow_deny_0')
+
+    @pytest.mark.native_boundary
+    @pytest.mark.skipif(not os.getenv('AEEP_NATIVE_CODEX'), reason='explicit native launcher required')
+    def test_actual_native_allow_deny_and_network_boundary(tmp_path):
+        root = tmp_path.resolve()
+        data = root / 'data'
+        data.mkdir()
+        denied = root / 'private'
+        denied.mkdir()
+        (denied / 'canary').write_text('synthetic-canary')
+        binary = Path(os.environ['AEEP_NATIVE_CODEX']).resolve()
+        boundary = NativeSandboxConfig(binary=str(binary), binary_sha256='sha256:' + hashlib.sha256(binary.read_bytes()).hexdigest(),
+            project_root=str(root), read_roots=[str(Path(sys.prefix).resolve())], write_roots=[str(data)], deny_roots=[str(denied)])
+        program = '''import json, pathlib, socket, subprocess, sys
+    data, denied = map(pathlib.Path, sys.argv[1:])
+    (data / 'allowed').write_text('ok')
+    result = {'allowed': (data / 'allowed').read_text() == 'ok'}
+    for name, operation in [('read_denied', lambda: (denied / 'canary').read_text()), ('write_denied', lambda: (denied / 'written').write_text('bad'))]:
+        try: operation(); result[name] = False
+        except PermissionError: result[name] = True
+    try:
+        s = socket.socket(); s.bind(('127.0.0.1', 0)); result['network_denied'] = False; s.close()
+    except PermissionError: result['network_denied'] = True
+    child = subprocess.run([sys.executable, '-I', '-c', 'import pathlib,sys; pathlib.Path(sys.argv[1]).read_text()', str(denied / 'canary')], capture_output=True)
+    result['child_denied'] = child.returncode != 0
+    print(json.dumps(result))
+    '''
+        spec = reference_spec('csv').model_copy(update={'kind': 'command', 'config': {
+            'argv': [sys.executable, '-I', '-c', program, str(data), str(denied)], 'argv_literal': True,
+            'native_sandbox': boundary.model_dump(mode='json'), 'output': {'type': 'json'}, 'timeout_seconds': 10}})
+        raw = asyncio.run(CommandExecutor().execute(ExecutionContext(request=ActionRequest(capability=spec.capability), spec=spec, estimate=spec.estimate, attempt=1)))
+        assert raw.status == ExecutionStatus.SUCCESS, (raw.error_message, raw.stderr)
+>       assert raw.output == {'allowed': True, 'read_denied': True, 'write_denied': True, 'network_denied': True, 'child_denied': True}
+E       AssertionError: assert {'allowed': T...': False, ...} == {'allowed': T...d': True, ...}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'write_denied': False} != {'write_denied': True}
+E         {'read_denied': False} != {'read_denied': True}
+E         {'child_denied': False} != {'child_denied': True}
+E         Use -v to get more diff
+
+tests/test_v08_task_profile.py:380: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_task_profile.py::test_actual_native_allow_deny_and_network_boundary
+1 failed, 1028 passed, 15 skipped, 1 warning in 429.45s (0:07:09)

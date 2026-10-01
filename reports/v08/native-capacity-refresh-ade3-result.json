@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-09-30T20:18:03.625919+00:00",
+  "source_digest": "ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1",
+  "operation_id": "capacity:planning_native_capacity_ade3",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "controlled_worker_principal_equivalence": "unknown; no transfer inferred",
+  "capacity": {
+    "observation_id": "capacity_ff63e44553ca48beade164393590bac7",
+    "resource_id": "native-codex-subscription",
+    "windows": [
+      {
+        "window_id": "codex:primary",
+        "unit": "provider_unit",
+        "used_percent": "1",
+        "allowance": null,
+        "remaining": null,
+        "reset_at": "2026-10-07T19:53:37Z",
+        "duration_seconds": 604800,
+        "hard_limit": true,
+        "exhausted": false,
+        "confidence": 0.95,
+        "evidence": [
+          {
+            "evidence_id": "capacity-evidence_e7a06cbd7cd9482aa33c566701bd6aa9",
+            "source": "codex_app_server_rate_limits",
+            "source_digest": "sha256:35c20b395687670096cad912a1bfa685283bbdded9bec75318eaccb9b5296d07",
+            "observed_at": "2026-09-30T20:18:04.085991Z",
+            "confidence": 0.95
+          }
+        ]
+      }
+    ],
+    "source": "codex_app_server",
+    "observed_at": "2026-09-30T20:18:04.086067Z",
+    "redacted_provider_metadata": {
+      "reset_credits_available": 3
+    },
+    "canonical_digest": "sha256:432e4116af3ccff0178064479d64789d664d14ba7af4bb0b0e1048250e93f329"
+  },
+  "cleanup_confirmed": true,
+  "elapsed_seconds": 0.46584387496113777,
+  "source_unchanged": true
+}

@@ -1,5 +1,57 @@
 # Architecture and design decisions
 
+## Native task increment (steering amendment v1)
+
+Production and assessment share Router eligibility, approvals, execution attempts,
+receipts and the existing exact-definition repository. Task scopes use that
+repository for review and revocation; durable attempts record their usage. This
+adds no separate budget database, profile manager or worker scheduler.
+
+The task-only MCP service exposes configured capability tools and returns their
+results with sanitized receipt evidence. It generates explanations deterministically,
+without a narrator model. Legacy and assessment interfaces keep their existing outputs.
+Provider-specific native control compilation lives in the Codex sandbox adapter.
+Executors must explicitly support bounded task scopes; unsupported adapters
+reject them. Native controls are invocation-local and include managed host policy.
+Project activation stores an immutable intent in the existing repository and
+creates one owned overlay. Dispatch checks the activation review, overlay bytes
+and both effective and on-disk manifest identity. Lifecycle controls revoke
+authority before cleanup, preserve edited overlays as conflicts and retain
+accounting. Native host controls remain invocation-local; arbitrary host
+configuration is not edited.
+Session-owned stop events cancel only that activation's current command handle.
+The existing sampler retains observed descendants by process identity for cleanup,
+including children that change process sessions. Native commands with observed
+background children fail. This does not replace an enforced process boundary.
+Reviewed local effect reconciliation uses the existing attempt journal in one
+transaction and never refunds used task allowance.
+
+Native routing compiles permission rules without rereading the launcher on every
+eligibility check. Actual launch verifies its full pinned hash after the final
+authority check. Scoped writes that fail after dispatch retain an indeterminate
+attempt and block further scoped work until reconciliation, including after
+restart or pause/resume. Prepared and ordinary paths share terminal classification.
+
+The selected production target remains native Codex on macOS. Passing command
+canaries and synthetic workbook tasks proves the tested command arrangement;
+it does not complete model qualification, effective host equivalence, resource
+acceptance, usability or unattended live-operation gates. See the current
+[coverage record](reports/v08/plan-coverage.md).
+
+The [assessment testing policy](docs/ASSESSMENT_TESTING.md) defines the current
+worker and release boundaries. `aeep.execution` supplies provider-neutral
+capabilities, handles, ordered events and evidence. Explicit host registrations
+own adapter construction and identity resolution. Existing `execute` methods
+remain compatibility entry points. App Server retains experimental status;
+Codex Exec and MCP report only the capabilities they implement.
+
+Controlled invocations persist sanitized journal events through the existing
+assessment repository. Completed receipts link to immutable execution evidence.
+Worker images, binary/configuration/dependency digests and resource restrictions
+are bound by `ManagedWorkerBinding`. Conformance records remain separate from
+those declarations. Scoped managed-host admission and subsequent routing require
+current conformance for the configured worker, identity and adapter.
+
 ## Placement in an agent stack
 
 ```text
@@ -19,7 +71,8 @@ AEEP feasibility + economic policy
                               browser/model/GUI     reviewed adapter
 ```
 
-AEEP belongs below planning and above execution adapters. It does not tell an agent how to decompose an open-ended goal; it optimizes bounded actions after decomposition.
+The host planner decomposes an open-ended goal into bounded actions. AEEP then
+selects execution routes for those actions and passes them to adapters.
 
 Native Tool Search remains above this boundary. It may discover a capability,
 then pass the bounded `ActionRequest` to AEEP; implementation discovery and
@@ -27,13 +80,17 @@ selection do not add a model-facing meta-router round.
 
 ## Why a semantic action rather than a tool name
 
-Tool names bind a decision to one transport/provider. A capability such as `github.current_branch` can have local CLI, REST, MCP, cached-state, and browser routes. The semantic contract is the comparison boundary.
+A tool name identifies one transport or provider. A capability such as
+`github.current_branch` can have local CLI, REST, MCP, cached-state, and browser
+routes. AEEP compares routes that share this semantic contract.
 
-Automatic equivalence inference is deliberately absent. Silent substitution between almost-equivalent actions is more dangerous than asking operators to register contracts explicitly.
+Operators register equivalent contracts explicitly. AEEP does not infer
+equivalence, because substituting an almost-equivalent action can change its effects.
 
 ## Why raw resources rather than one credit
 
-A scalar is useful for ranking but destructive as an interchange format. Raw dimensions preserve:
+A scalar supports ranking, but cannot carry every resource measurement. Keeping
+the raw dimensions supports:
 
 - auditability;
 - policy changes without rewriting history;
@@ -46,19 +103,21 @@ The scorer can derive a local scalar at decision time. Receipts retain the vecto
 
 ## Why feasibility precedes scoring
 
-Weighted averages allow compensation: enough speed can mathematically offset a privacy violation. A hard constraint must never be offset by a preference. Therefore rejected candidates have no total score.
+A weighted average could let speed offset a privacy violation. AEEP checks hard
+constraints before preferences, so rejected candidates receive no total score.
 
 ## Expected cost per success
 
 A route that costs half as much but succeeds half as often can be more expensive after retries. The scorer scales consumable burden by inverse success probability and separately penalizes unreliability.
 
-This is still a model, not a guarantee. Correlated failures, fallback cost, and side-effect ambiguity require richer planning in later versions.
+The estimate cannot guarantee the cost of success. Later versions need richer
+planning to account for correlated failures, fallback cost, and ambiguous side effects.
 
 ## Locality and current state
 
 Local execution receives a small configurable preference because it often avoids network, data disclosure, and context overhead. If caller state is already local to an execution surface, a second locality bonus can represent reuse of current state.
 
-The bonus is intentionally small and never bypasses hard constraints.
+The small bonus applies only after hard constraints pass.
 
 ## Static priors and observations
 
@@ -92,15 +151,23 @@ untrusted filesystem/network access.
 
 ### Command
 
-Uses `create_subprocess_exec`, never a shell. It offers process isolation, timeouts, bounded output, and host metrics. It is the preferred local boundary for tools with meaningful side effects or dependencies.
+The command executor uses `create_subprocess_exec` without a shell. It provides
+process isolation, timeouts, bounded output, and host metrics. Use this local
+boundary for tools with meaningful side effects or dependencies.
 
 ### HTTP
 
-Uses bounded streaming and conservative target validation. It is appropriate for ordinary REST APIs. Provider cost headers remain claims unless reconciled by trusted accounting evidence.
+The HTTP executor uses bounded streaming and conservative target validation for
+ordinary REST APIs. Provider cost headers remain claims until trusted accounting
+evidence reconciles them.
 
 ### MCP
 
-Discovers the configured tool, measures schema/context overhead, invokes it over stdio or Streamable HTTP, reads optional AEEP usage claims, and caches discovery/tool schemas according to protocol hints and credential scope. Protocol mode can be pinned; automatic legacy fallback requires an unambiguous method-not-found response.
+The MCP executor discovers the configured tool and measures its schema/context
+overhead before invoking it over stdio or Streamable HTTP. It reads optional AEEP
+usage claims and caches discovery/tool schemas according to protocol hints and
+credential scope. Operators can pin the protocol mode. Automatic legacy fallback
+requires an unambiguous method-not-found response.
 
 The modern path mirrors protocol version, method, tool name, and schema-authorized primitive parameters into HTTP headers; validates header/body consistency; bounds messages; and applies the same SSRF/allowlist/HTTPS policy as the HTTP executor. AEEP accepts only complete single-round tool results; multi-round `input_required` continuation belongs to the host agent until a later protocol adapter is defined.
 
@@ -122,7 +189,12 @@ without falling back to an unreviewed implementation.
 
 ### Delegate
 
-Represents an execution surface owned by the host agent: browser, GUI, computer-use, model reasoning, or an unavailable native tool. AEEP returns instructions and a decision ID; the host reports the outcome later. To prevent arbitrary history injection, external reports are accepted only for the selected, feasible delegate and only once per decision/executor pair. Trusted out-of-band measurement uses `ActionProfiler` instead.
+A delegate represents a surface owned by the host agent: browser, GUI,
+computer-use, model reasoning, or an unavailable native tool. AEEP returns
+instructions and a decision ID; the host reports the outcome later. To prevent
+arbitrary history injection, AEEP accepts external reports only for the selected,
+feasible delegate and only once per decision/executor pair. Trusted out-of-band
+measurement uses `ActionProfiler`.
 
 ### Host subscription
 
@@ -148,9 +220,15 @@ payout, cryptocurrency, and live transfer behavior are outside 0.7.
 
 ## Persistence
 
-SQLite provides a zero-service local deployment. Decisions and receipts are stored as validated JSON plus indexed lookup columns. The store can be replaced later by an interface-backed service.
+SQLite stores decisions and receipts locally as validated JSON with indexed
+lookup columns, so deployment needs no separate database service. A future
+service can implement the same store interface.
 
-Action input and context are redacted from persisted decisions by default, and outputs are not persisted by default. The live decision returned to the invoking process still contains the request needed for immediate execution. Stored redacted decisions are intentionally non-replayable. This limits accidental sensitive-data retention and keeps the receipt database focused on economics.
+By default, stored decisions redact action input and context, and the store omits
+outputs. The live decision returned to the invoking process contains the request
+needed for immediate execution. Redacted stored decisions cannot be replayed.
+These defaults limit accidental retention of sensitive data while preserving
+economic records.
 
 Idempotency records atomically bind a caller key to a canonical action hash and its receipt IDs. Replays avoid execution and return those receipts, but cannot reconstruct output unless an operator later enables a separate output store.
 
@@ -161,21 +239,41 @@ Idempotency records atomically bind a caller key to a canonical action hash and 
 - MCP server for standard tool clients.
 - Native tool schema exports for providers whose application owns the function-call loop.
 
-All call the same service methods to prevent behavioral drift. Model tools use paginated capability search and compact route/run envelopes by default; complete decisions remain queryable by ID. Runtime approval ceilings are process/operator configuration and are not exposed as model-controlled function arguments.
+All interfaces call the same service methods to keep behavior consistent. Model
+tools default to paginated capability search and compact route/run envelopes;
+complete decisions remain queryable by ID. The process or operator configures
+runtime approval ceilings. Model-controlled function arguments cannot change them.
 
 ## Existing-agent instrumentation
 
-OpenAI and Anthropic clients can be wrapped at their normal `create` calls without adding those SDKs as dependencies. The wrapper records usage, timing, and terminal status but never prompts or outputs. The trace ingestor accepts OTLP JSON or JSON Lines, reconstructs common call types, and compares only capabilities the operator has explicitly registered. This is passive profiling, not semantic equivalence inference.
+Wrappers around OpenAI and Anthropic clients' normal `create` calls record usage,
+timing, and terminal status without storing prompts or outputs or adding those
+SDKs as dependencies. The trace ingestor accepts OTLP JSON or JSON Lines and
+reconstructs common call types. This passive profiling compares only capabilities
+the operator has explicitly registered; it cannot infer semantic equivalence.
 
 ## Calibration
 
-Cold-start manifests contain priors, not truth. `Router.benchmark` executes feasible alternatives sequentially and produces comparable observed receipts. Sequential execution reduces contention bias; explicit confirmation, normal hard constraints, and approval ceilings remain in force. Delegates and non-idempotent routes are skipped by default. Benchmarking is deliberately outside the model-facing tool surface so an agent cannot silently multiply paid calls.
+Cold-start manifest estimates are priors. `Router.benchmark` measures feasible
+alternatives sequentially and produces comparable receipts. Sequential execution
+reduces contention bias. Every run still requires explicit confirmation and must
+respect normal hard constraints and approval ceilings. Benchmarks skip delegates
+and non-idempotent routes by default. Model-facing tools cannot start benchmarks
+and silently multiply paid calls.
 
 ## Qualification and workflows
 
-External supply is persisted separately from the runtime Registry. Discovery creates disabled candidates; qualification and activation are explicit operator transitions bound to a canonical behavior fingerprint. The Registry contains only trusted manifest routes and active, fingerprint-matching candidates. `Router.execute` rechecks current policy, capability, active state, and fingerprint at the invocation boundary.
+The store keeps external supply separate from the runtime Registry. Discovery
+creates disabled candidates. Operators qualify and activate them through explicit
+transitions bound to a canonical behavior fingerprint. The Registry contains only
+trusted manifest routes and active candidates with matching fingerprints.
+`Router.execute` rechecks current policy, capability, active state, and fingerprint
+immediately before invocation.
 
-Workflow execution is an additive SDK/CLI layer above the existing action router. The caller supplies the DAG. Steps are routed just in time and reuse approvals, fallback, validation, receipts, idempotency, and observation. Inputs and intermediate outputs stay in memory; checkpoints contain only hashes, status, and selected IDs.
+The workflow SDK/CLI runs caller-supplied DAGs through the existing action router.
+It routes each step when ready, using the same approvals, fallback, validation,
+receipts, idempotency, and observation. Inputs and intermediate outputs stay in
+memory; checkpoints contain only hashes, status, and selected IDs.
 
 ## Economic accounting
 
@@ -405,3 +503,54 @@ Version 0.6 adds explicit evidence authority/cohort declarations, signed
 provider discovery, and provider conformance checks. A v0.5 package remains
 readable, but evidence that lacks the new declarations is accepted only as a
 low-confidence prior and cannot qualify a route.
+
+
+## Assessment boundary (0.8)
+
+`aeep.assessment` owns immutable definitions, operator reviews, authorizations,
+job state and comparative reports. Its service calls `BenchmarkRunner`, which
+executes through isolated `Router` instances. `ReceiptStore.campaign_snapshot`
+copies authority dependencies but excludes production observations and attempts.
+Qualification also uses this controlled execution path.
+
+The assessment repository uses `ReceiptStore._immediate_transaction` for
+budget admission and activation. Runtime applicability checks do not start a
+worker or invoke a planner. The legacy tool profile remains available; the
+assessment profile provides direct capability tools and bounded job controls.
+The worker's state is durable while its process is replaceable; an uncertain
+invocation is retained rather than retried automatically.
+
+Static intake retains declared contracts without starting a process. The bounded
+planner emits inert definitions; operator review and candidate installation are
+separate operations. Declarative adapters reuse the template and JSON Pointer
+helpers. Workflow mappings reuse the workflow engine and campaign case bindings.
+An immutable operation ledger connects setup and planning costs to comparisons
+without copying campaign observations into production history.
+
+Codex adapter IDs may use `codex-app-server:<worker>` to select independent
+App Server processes. New skill onboarding separates baseline and candidate
+workers. Temporary invocation workspaces use explicit named permission profiles;
+conversation and filesystem checks remain separate from tool-access verification.
+The same campaign runner schedules both workers and records their usage.
+
+### Incremental-capability assessment
+
+`assessment.comparison` compiles the four reviewed arm definitions into the
+existing BenchmarkRunner. `assessment.boundary` validates each worker and the
+reviewed difference between workers; inventories do not substitute for effective
+permissions. `assessment.reporting` evaluates optional availability across all
+assigned cases, with missing measurements retained and utility dimensions kept
+separate. Reusable-tool construction operations are linked into the same ledger.
+
+The contained recipe extension can distinguish semantic truth from output
+artifacts. Workbook generation/reference run with pinned openpyxl; a separate
+bounded OOXML program checks formulas, caches, values and required structure.
+The coordinator performs bounded structural extraction, not workbook cleaning.
+These offline mechanisms do not establish authenticated host or catalog evidence.
+
+App Server's optional catalog metrics relay runs beside Codex inside the existing
+worker. The image pins the stdlib-only collector module. Sanitized OTLP snapshots
+share the bounded stdio transport; the adapter verifies their scope and monotonic
+history, binds canonical event digests and retains partial receipt metadata.
+The coordinator does not interpret native metric names when ranking or admitting
+routes. Counts and injection events do not establish complete discovery evidence.

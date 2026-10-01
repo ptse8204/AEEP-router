@@ -25,7 +25,7 @@ run it only with explicit operator intent. Personal subscription capacity is
 `SELF_ONLY`. The `aeep x402 conformance --binding aeep-local --json` command is
 offline proof only and cannot transfer or settle value.
 
-## 1. Keep the default offline first
+## 1. Validate offline
 
 Install and validate the manifest before enabling networking:
 
@@ -67,7 +67,8 @@ The trust store is operator-owned JSON:
 
 Obtain and compare the key through an authenticated operator channel. The
 provider's key-discovery endpoint is useful for distribution but does not make
-the key trusted. Use exact versioned capabilities and exact hosts—no wildcards.
+the key trusted. Use exact versioned capabilities and exact hosts; wildcards are
+not allowed.
 Keep old/revoked metadata so historical evidence remains auditable.
 
 ## 3. Configure a bounded network path
@@ -274,8 +275,8 @@ else:
 
 An operator that has explicitly enabled ordinary fallback policy may instead
 call `execute_prepared_with_fallback(...)` for one bounded action. The helper
-fresh-prepares at most once, excludes the failed executor, and uses a new action
-attempt, idempotency binding, digest, and quote. It is allowed only after a
+prepares a fresh decision at most once, excludes the failed executor, and uses a
+new action attempt, idempotency binding, digest, and quote. It is allowed only after a
 durably settled `FAILED`/`REJECTED` result from an idempotent read route. It never
 falls back after timeout/indeterminate outcome or for a consequential route.
 
@@ -319,7 +320,7 @@ operator retention policy.
 
 Cancel a decision while it is `PREPARED` when it is no longer needed. The async
 cancellation path may also release a reservation only while durable state shows
-invocation has not begun. It rejects casual cancellation after `INVOKING`; an
+invocation has not begun. It rejects cancellation after `INVOKING`; an
 external effect with an uncertain outcome is not relabeled failed or retried.
 
 ```bash
@@ -334,7 +335,7 @@ could be consequential, delegated, hosted, or resource-exclusive. The workflow
 checks prior settled actual cash plus all maxima in the wave against
 `WorkflowBudget.max_cash_usd`; an unusable or over-budget wave is cancelled
 before reservation. Payment and human approvals remain explicit workflow-call
-arguments. Economic evidence disabled preserves the legacy offline workflow
+arguments. Disabling economic evidence preserves the legacy offline workflow
 path.
 
 ## 7. Inspect settlement and reconciliation

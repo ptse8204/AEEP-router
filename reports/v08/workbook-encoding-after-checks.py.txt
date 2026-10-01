@@ -1,0 +1,56 @@
+import asyncio,json,os,subprocess,time
+from pathlib import Path
+from aeep.assessment.verification import verification_source_digest
+root=Path.cwd();p=root/'reports/v08';expected='9361bf6c9bb74526c72e2057556ac798f09697bbcdf3128d9792d5e11ab6e872'
+env=dict(os.environ,PYTHONPATH=str(root/'src'))
+for _ in range(120):
+ try:
+  checks=json.loads((p/'workbook-encoding-checks.json').read_text())
+  assert not any(c['exit_code'] for c in checks['checks']), 'Source validation failed'
+  if len(checks['checks'])==13:
+   containers=json.loads((p/'workbook-encoding-containers.json').read_text())
+   release=json.loads((p/'workbook-encoding-release.json').read_text())
+   product=json.loads((p/'workbook-encoding-product-verification.json').read_text())
+   assert containers['exit_code']==0 and all(c['exit_code']==0 for c in release['checks'])
+   assert product['source_digest']==expected and product['offline_checks_passed'] and product['controlled_fixture_verified']
+   for record in (checks,containers,release):assert record['source_before']==record['source_after']==expected
+   break
+ except (FileNotFoundError,json.JSONDecodeError):pass
+ time.sleep(10)
+else:raise SystemExit('Validation still pending; no live work started')
+assert verification_source_digest(root)==expected
+print('All source checks passed; beginning the reviewed boundary renewal.',flush=True)
+def script(name):
+ result=subprocess.run(['python3','/tmp/aeep-encoding-'+name+'.py'],env=env,capture_output=True,text=True,timeout=120)
+ if result.returncode:
+  print(result.stderr[-2000:],flush=True);raise SystemExit(result.returncode)
+ print(name+' completed',flush=True)
+script('approve-calibrated-profile')
+b=json.loads((p/'qualification-encoding-profile-review-bundle.json').read_text())
+with (p/'qualification-encoding-profile-live-pair.json').open('x') as out:
+ result=subprocess.run(['python3','-m','aeep','assess','--manifest','.aeep/live-review-v3/workbook-pilot.json','inspect-pair',*[q['plan_id'] for q in b['requests']]],env=env,stdout=out,stderr=subprocess.PIPE,text=True,timeout=600)
+if result.returncode:
+ print(result.stderr[-2000:],flush=True);raise SystemExit(result.returncode)
+assert json.loads((p/'qualification-encoding-profile-live-pair.json').read_text())['probes_match']
+script('assemble-calibrated-profile');script('prepare-workbook-qualification')
+async def materialize():
+ from aeep.router import Router
+ from aeep.assessment.service import AssessmentService
+ from aeep.assessment.extensions import materialize
+ r=Router.from_manifest('.aeep/live-review-v3/workbook-encoding.json')
+ try:
+  s=AssessmentService(r,root/'.aeep/live-review-v3/.aeep/assessments')
+  request=json.loads((p/'workbook-encoding-materialization-review.json').read_text())['request']
+  cases=await materialize(s,request['plan_id'])
+  assert len(cases.cases)==141
+  print('Fresh 141-case set materialized under the existing grant.',flush=True)
+ finally:await r.close()
+asyncio.run(materialize())
+script('propose-qualification')
+plan=json.loads((p/'workbook-encoding-execution-approval.json').read_text())['plan_id']
+print('Starting the new diagnostic qualification with unchanged acceptance rules.',flush=True)
+with (p/'workbook-encoding-live-report.json').open('x') as out:
+ result=subprocess.run(['python3','-m','aeep','assess','--manifest','.aeep/live-review-v3/workbook-encoding.json','run',plan],env=env,stdout=out,stderr=subprocess.PIPE,text=True,timeout=3600)
+print('Qualification command terminal:',result.returncode,flush=True)
+if result.returncode:print(result.stderr[-2000:],flush=True)
+raise SystemExit(result.returncode)

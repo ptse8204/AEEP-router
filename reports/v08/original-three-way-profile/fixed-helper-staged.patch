@@ -1,0 +1,715 @@
+--- a/src/aeep/router.py
++++ b/src/aeep/router.py
+@@ -216,7 +216,7 @@
+ )
+ from .registry import Registry, validate_json
+ from .runtime import detect_compute_availability
+-from .scoring import policy_valuation_amount, score_candidate
++from .scoring import policy_valuation_amount, rejection_reasons, score_candidate
+ from .store import ReceiptStore
+ from .telemetry import start_span, trace_id_from_span
+ from .validators import ValidationContext, ValidatorCallback, run_validators
+@@ -270,6 +270,7 @@
+         unlimited_economic_budget: bool | None = None,
+         executor_overrides: Mapping[ExecutorKind, BaseExecutor] | None = None,
+         managed_host_adapters: Mapping[str, ManagedHostAdapter] | None = None,
++        managed_host_registry: ManagedHostRegistry | None = None,
+     ) -> None:
+         normalized = manifest.model_copy(deep=True)
+         policies = builtin_policies()
+@@ -293,6 +294,7 @@
+         self._trial_fingerprints: dict[str, str] = {}
+         self._trial_deadline: float | None = None
+         self._trial_check: Callable[[], None] | None = None
++        self._callback_trial_identity: tuple[str, str] | None = None
+         self._trial_boundary_references: dict[str, str] = {}
+         self._task_scope_digest: str | None = None
+         self._task_activation_digest: str | None = None
+@@ -450,7 +452,7 @@
+             else None
+         )
+         self._executors: dict[ExecutorKind, BaseExecutor] = dict(executor_overrides or {})
+-        self.managed_hosts = ManagedHostRegistry()
++        self.managed_hosts = managed_host_registry.clone_factories() if managed_host_registry is not None else ManagedHostRegistry()
+         configured_hosts = dict(managed_host_adapters or {})
+         for adapter_id in sorted(configured_hosts):
+             self.managed_hosts.register(adapter_id, configured_hosts[adapter_id])
+@@ -466,6 +468,7 @@
+             ExecutorKind.MANAGED_HOST, ManagedHostExecutor(self.managed_hosts, self.store)
+         )
+         self._validated_decisions: dict[str, str] = {}
++        self._fixed_dispatches: set[str] = set()
+         self._prepared_contexts: dict[str, PreparedExecutionContext] = {}
+         self._closed = False
+ 
+@@ -5350,6 +5353,7 @@
+             router = Router(
+                 manifest, manifest_path=self.manifest_path, store=snapshot,
+                 validator_callbacks=self.validator_callbacks,
++                managed_host_registry=self.managed_hosts,
+             )
+             for subject in subjects:
+                 if subject.side_effect.rank > SideEffect.READ.rank or not subject.idempotent:
+@@ -5505,6 +5509,15 @@
+             pass
+ 
+     async def _invoke_controlled(self, context: ExecutionContext) -> RawExecution:
++        from .assessment.fixed_helper import _assessment_router
++
++        token = _assessment_router.set(self if self._trial_check is not None else None)
++        try:
++            return await self._invoke_controlled_authorized(context)
++        finally:
++            _assessment_router.reset(token)
++
++    async def _invoke_controlled_authorized(self, context: ExecutionContext) -> RawExecution:
+         guard_started = time.perf_counter()
+         spec = context.spec
+         if self._trial_check is not None:
+@@ -5847,6 +5860,49 @@
+             ExecutionStatus.UNKNOWN,
+         }
+ 
++    async def execute_fixed(
++        self, request: ActionRequest, executor_id: str, *,
++        approved_side_effect: SideEffect = SideEffect.READ,
++    ) -> ExecutionOutcome:
++        """Operator-only scoped native helper dispatch, without capability selection.
++
++        Common authorization, validation and receipt overhead remains measured.
++        This method is deliberately absent from model-facing exports.
++        """
++        self._ensure_open()
++        spec = self.registry.get(executor_id)
++        if (self._task_scope_digest is None or spec.kind is not ExecutorKind.COMMAND
++                or "native_sandbox" not in spec.config):
++            raise ConfigurationError("fixed dispatch requires a scoped native command helper")
++        request = self._fill_runtime_context(request.model_copy(deep=True))
++        if spec.capability != request.capability:
++            raise NoRouteError("fixed helper capability mismatch")
++        self._require_active_spec(spec, request)
++        validate_json(request.input, spec.input_schema, label=f"input for {spec.id}")
++        policy = self._policy_for(request)
++        features = action_features(request.input)
++        estimate = self.estimator.estimate(spec, policy, features)
++        reasons = rejection_reasons(spec, estimate, policy, request.context)
++        if reasons:
++            raise NoRouteError("fixed helper violates current policy: " + "; ".join(reasons))
++        decision = RouteDecision(
++            action=request, policy=policy, selected_executor_id=spec.id,
++            disposition=RouteDisposition.BYPASS_ROUTER,
++            bypass_reason=RouteBypassReason.PINNED_EXECUTOR,
++            candidates=[CandidateScore(executor_id=spec.id, feasible=True,
++                                       estimate=estimate, rank=1)],
++            action_features=features,
++            explanation="Operator-selected helper; common dispatch audit only.",
++        )
++        self._validated_decisions[decision.decision_id] = self._decision_digest(decision)
++        self._fixed_dispatches.add(decision.decision_id)
++        try:
++            self._persist_decision(decision)
++            return await self.execute(decision, approved_side_effect=approved_side_effect)
++        finally:
++            self._fixed_dispatches.discard(decision.decision_id)
++            self._validated_decisions.pop(decision.decision_id, None)
++
+     async def execute(
+         self,
+         request_or_decision: ActionRequest | RouteDecision | dict[str, Any],
+@@ -5876,8 +5932,11 @@
+                 ActionRequest.model_validate(request_or_decision)
+             )
+ 
++        fixed_dispatch = decision.decision_id in self._fixed_dispatches
+         expected_digest = self._validated_decisions.get(decision.decision_id)
+         if expected_digest != self._decision_digest(decision):
++            if fixed_dispatch:
++                raise ConfigurationError("fixed dispatch identity changed")
+             if decision.action.input.get("__aeep_redacted__") is True:
+                 raise ConfigurationError(
+                     "persisted decisions have redacted inputs and cannot be executed; "
+@@ -5965,7 +6024,7 @@
+             return outcome
+ 
+         fallback = decision.policy.fallback
+-        max_attempts = min(len(candidates), fallback.max_attempts if fallback.enabled else 1)
++        max_attempts = 1 if fixed_dispatch else min(len(candidates), fallback.max_attempts if fallback.enabled else 1)
+         attempts: list[ExecutionReceipt] = []
+         last_output: Any = None
+ 
+@@ -6018,13 +6077,17 @@
+                     f"executor {spec.id!r} requires prepared economic execution; "
+                     "use prepare_route() followed by execute_prepared()"
+                 )
+-            current = score_candidate(
+-                spec,
+-                current_estimate,
+-                current_policy,
+-                decision.action.context,
+-                self._subscription_quota(spec, decision.action.context),
+-            )
++            if fixed_dispatch:
++                reasons = rejection_reasons(
++                    spec, current_estimate, current_policy, decision.action.context,
++                )
++                current = CandidateScore(executor_id=spec.id, feasible=not reasons,
++                                         rejection_reasons=reasons, estimate=current_estimate)
++            else:
++                current = score_candidate(
++                    spec, current_estimate, current_policy, decision.action.context,
++                    self._subscription_quota(spec, decision.action.context),
++                )
+             if not current.feasible:
+                 raise NoRouteError(
+                     f"route {spec.id!r} no longer satisfies current policy: "
+--- /dev/null
++++ b/src/aeep/assessment/fixed_helper.py
+@@ -0,0 +1,207 @@
++"""Operator-composed fixed helper; common task audit, without route selection."""
++from __future__ import annotations
++
++import re
++from collections.abc import Callable
++from contextvars import ContextVar
++from copy import deepcopy
++from typing import Any
++
++from ..economic.prepared import executor_fingerprint
++from ..errors import ConfigurationError
++from ..models import ActionConstraints, ActionRequest, ExecutorKind, SideEffect
++from ..registry import validate_json
++from ..router import Router
++
++_assessment_router: ContextVar[Router | None] = ContextVar("aeep_assessment_router", default=None)
++
++
++def current_assessment_router() -> Router | None:
++    return _assessment_router.get()
++
++
++class FixedHelperService:
++    profile = "task"
++
++    def __init__(self, router: Router, executor_id: str, *, task_scope: str,
++                 declaration: dict[str, Any], check: Callable[[], str],
++                 approved_side_effect: SideEffect = SideEffect.READ) -> None:
++        self.router = router
++        self.executor_id = executor_id
++        self._check = check
++        self._binding = check()
++        if not isinstance(self._binding, str) or re.fullmatch(r"[a-f0-9]{64}", self._binding) is None:
++            raise ConfigurationError("fixed helper requires an exact current authority digest")
++        scope_ceiling = router.bind_task_scope(task_scope)
++        self.approved_side_effect = min(approved_side_effect, scope_ceiling, key=lambda level: level.rank)
++        spec = router.registry.get(executor_id)
++        native = spec.config.get("native_sandbox", {})
++        if (spec.kind is not ExecutorKind.COMMAND or not native.get("single_process")
++                or not spec.config.get("argv_literal")):
++            raise ConfigurationError("fixed callback requires the literal single-process native helper")
++        self._fingerprint = executor_fingerprint(spec)
++        if declaration.get("inputSchema") != spec.input_schema:
++            raise ConfigurationError("fixed helper input schema differs from reviewed executor")
++        self._declaration = deepcopy(declaration)
++        self._require_current()
++
++    def _require_current(self) -> None:
++        if self._check() != self._binding:
++            raise ConfigurationError("fixed helper campaign binding changed")
++        spec = self.router.registry.get(self.executor_id)
++        if executor_fingerprint(spec) != self._fingerprint:
++            raise ConfigurationError("fixed helper fingerprint changed")
++        self.router._require_task_scope(spec)
++
++    def list_tools(self) -> list[dict[str, Any]]:
++        self._require_current()
++        return [deepcopy(self._declaration)]
++
++    async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
++        from ..mcp.server import _tool_result
++
++        self._require_current()
++        if name != self._declaration["name"]:
++            raise ConfigurationError("unknown fixed helper")
++        validate_json(arguments, self._declaration["inputSchema"], label=name)
++        spec = self.router.registry.get(self.executor_id)
++        from ..hosts.codex_dynamic_tools import current_dynamic_call
++        context = current_dynamic_call()
++        request = ActionRequest(capability=spec.capability, input=arguments,
++                                constraints=ActionConstraints(max_side_effect=self.approved_side_effect))
++        if context is not None:
++            request.action_id = context.action_id
++        outcome = await self.router.execute_fixed(
++            request,
++            spec.id, approved_side_effect=self.approved_side_effect,
++        )
++        # Attempts and receipts are already durable before an external callback returns.
++        result = self.router.task_outcome(outcome, approved_side_effect=self.approved_side_effect)
++        self._require_current()
++        return _tool_result(result.model_dump(mode="json"), is_error=not outcome.ok)
++
++
++class AssessmentCallbackAuthority:
++    """Supporting calls consume an existing outer reservation, never a second clock."""
++
++    def __init__(self, assessment: Any, plan: Any, assessment_id: str,
++                 operation_id: str, *, outer_router: Router, outer_attempt_id: str, binding_digest: str,
++                 resolve_binding: Callable[[], str], max_calls: int) -> None:
++        self.assessment, self.plan = assessment, plan
++        self.assessment_id, self.operation_id = assessment_id, operation_id
++        self.binding_digest, self.resolve_binding = binding_digest, resolve_binding
++        self.max_calls = max_calls
++        self.outer_router, self.outer_attempt_id = outer_router, outer_attempt_id
++        from ..hosts.codex_invocation import contract_digest
++        self.outer_attempt_digest = contract_digest({"attempt_id": outer_attempt_id})
++        if (type(max_calls) is not int or not 1 <= max_calls <= 32
++                or not isinstance(binding_digest, str) or re.fullmatch(r"[a-f0-9]{64}", binding_digest) is None):
++            raise ConfigurationError("invalid callback authority binding")
++        self.check()
++
++    def _require_reserved(self, connection: Any) -> None:
++        import asyncio
++        from datetime import timedelta
++
++        from ..models import utc_now
++        from .models import AssessmentOperation
++
++        self.assessment.repository.authorize(self.plan)
++        row = connection.execute("SELECT state FROM assessment_jobs WHERE id=? AND plan_id=?",
++                                 (self.assessment_id, self.plan.plan_id)).fetchone()
++        reserved = connection.execute("SELECT state FROM assessment_operations WHERE id=?",
++                                      (self.operation_id,)).fetchone()
++        operation = AssessmentOperation.model_validate(
++            self.assessment.repository.get("operation_start", self.operation_id))
++        if (getattr(self.outer_router, "_callback_trial_identity", None) != (self.assessment_id, self.operation_id)
++                or utc_now() < operation.started_at
++                or utc_now() >= operation.started_at + timedelta(seconds=operation.reserved.max_elapsed_seconds)
++                or (self.outer_router._trial_deadline is not None
++                    and asyncio.get_running_loop().time() >= self.outer_router._trial_deadline)):
++            raise ConfigurationError("callback trial identity or reservation deadline differs")
++        if (row is None or row[0] != "running" or reserved is None or reserved[0] != "reserved"
++                or operation.plan_id != self.plan.plan_id or operation.stage != "trial"):
++            raise ConfigurationError("callback requires a running reserved outer trial")
++
++    def check(self) -> str:
++        self.assessment._verify_dependencies(self.plan)
++        from ..attempts import ExecutionAttemptState
++        attempt = self.outer_router.store.get_execution_attempt(self.outer_attempt_id)
++        if attempt is None or attempt.state is not ExecutionAttemptState.INVOKING:
++            raise ConfigurationError("callback outer attempt is not invoking")
++        if self.outer_router._trial_check is None:
++            raise ConfigurationError("callback lacks controlled assessment trial")
++        self.outer_router._trial_check()
++        if self.resolve_binding() != self.binding_digest:
++            raise ConfigurationError("callback effective binding changed")
++        with self.assessment.router.store._lock:
++            self._require_reserved(self.assessment.router.store._connection)
++        return self.binding_digest
++
++    async def call(self, service: Any, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
++        import hashlib
++        import json
++
++        from ..hosts.codex_dynamic_tools import current_dynamic_call
++        from ..models import StrictModel
++        from .models import content_digest
++
++        context = current_dynamic_call()
++        if context is None:
++            raise ConfigurationError("callback lacks operator-installed call identity")
++        self.check()
++        if context.outer_attempt_digest != self.outer_attempt_digest:
++            raise ConfigurationError("callback outer attempt differs")
++        outer_digest = hashlib.sha256(self.operation_id.encode()).hexdigest()
++        key = content_digest({"outer_operation": outer_digest, "call": context.call_digest})
++
++        class Claim(StrictModel):
++            outer_operation_digest: str
++            outer_attempt_digest: str
++            call_digest: str
++            binding_digest: str
++            task_scope_digest: str
++
++        scope_digest = service.router._task_scope_digest
++        if not isinstance(scope_digest, str) or re.fullmatch(r"[a-f0-9]{64}", scope_digest) is None:
++            raise ConfigurationError("callback requires an exact execution task scope")
++        claim = Claim(outer_operation_digest=outer_digest,
++                      outer_attempt_digest=context.outer_attempt_digest,
++                      call_digest=context.call_digest, binding_digest=self.binding_digest,
++                      task_scope_digest=scope_digest)
++        repo = self.assessment.repository
++        with repo.store._immediate_transaction() as connection:
++            self._require_reserved(connection)
++            if connection.execute("SELECT 1 FROM assessment_records WHERE kind='callback_claim' AND id=?", (key,)).fetchone():
++                raise ConfigurationError("callback already claimed; blind retry denied")
++            count = connection.execute(
++                "SELECT count(*) FROM assessment_records WHERE kind='callback_claim' AND json_extract(payload_json,'$.outer_operation_digest')=?",
++                (outer_digest,)).fetchone()[0]
++            if count >= self.max_calls:
++                raise ConfigurationError("outer callback allowance exhausted")
++            repo._put(connection, "callback_claim", key, claim)
++        try:
++            result = await service.call(name, arguments)
++            if not isinstance(result, dict):
++                raise ConfigurationError("callback result is not a tool envelope")
++            return result
++        finally:
++            # Resolve existing durable evidence even if handler/output validation was cancelled.
++            with service.router.store._lock:
++                rows = service.router.store._connection.execute(
++                    "SELECT a.payload_json FROM execution_attempts a JOIN decisions d ON d.decision_id=a.decision_id WHERE d.action_id=?",
++                    (context.action_id,)).fetchall()
++                receipts = service.router.store._connection.execute(
++                    "SELECT payload_json FROM receipts WHERE action_id=?", (context.action_id,)).fetchall()
++            class Evidence(StrictModel):
++                claim_digest: str
++                task_scope_digest: str
++                child_attempt_digests: list[str]
++                child_receipt_digests: list[str]
++                resources_overlap_outer_trial: bool = True
++
++            evidence_digest = repo.put("callback_evidence", key, Evidence(
++                claim_digest=content_digest(claim), task_scope_digest=scope_digest,
++                child_attempt_digests=[content_digest(json.loads(row[0])) for row in rows],
++                child_receipt_digests=[content_digest(json.loads(row[0])) for row in receipts]))
++            context.record_link(evidence_digest)
+--- a/src/aeep/assessment/service.py
++++ b/src/aeep/assessment/service.py
+@@ -1015,6 +1015,7 @@
+                 stage="trial",
+             )
+             router._trial_deadline = asyncio.get_running_loop().time() + trial_seconds
++            router._callback_trial_identity = (assessment_id, trial.trial_id)
+             started = time.perf_counter()
+             try:
+                 async with asyncio.timeout_at(router._trial_deadline):
+--- a/src/aeep/assessment/verification.py
++++ b/src/aeep/assessment/verification.py
+@@ -103,6 +103,10 @@
+             "tests/test_v08_task_profile.py",
+             "tests/test_v08_native_process.py",
+             "tests/test_v08_three_way.py",
++            "tests/test_fixed_helper.py",
++            "tests/test_fixed_helper_recovery.py",
++            "tests/test_fixed_callback_authority.py",
++            "tests/test_codex_dynamic_tools.py",
+             "tests/test_v08_task_lifecycle.py",
+             "tests/test_v08_ard.py",
+         ],
+--- /dev/null
++++ b/tests/test_fixed_helper.py
+@@ -0,0 +1,70 @@
++from __future__ import annotations
++
++import asyncio
++import sys
++from datetime import timedelta
++
++import pytest
++
++from aeep.assessment.onboarding import reference_spec
++from aeep.assessment.repository import AssessmentRepository
++from aeep.economic.prepared import executor_fingerprint
++from aeep.errors import ConfigurationError, NoRouteError
++from aeep.hosts.codex_sandbox import NativeSandboxConfig
++from aeep.models import ActionRequest, ExecutorKind, Manifest, TaskScope, utc_now
++from aeep.router import Router
++
++
++def forbidden(*args, **kwargs):
++    raise AssertionError("control used capability selection")
++
++
++@pytest.fixture
++def fixed(tmp_path, monkeypatch):
++    root = tmp_path.resolve()
++    monkeypatch.setattr(NativeSandboxConfig, "argv", lambda self, command: command)
++    monkeypatch.setattr(Router, "route", forbidden)
++    monkeypatch.setattr(Router, "route_with_discovery", forbidden)
++    monkeypatch.setattr("aeep.router.score_candidate", forbidden)
++    boundary = NativeSandboxConfig(binary=str(root / "launcher"), binary_sha256="sha256:" + "a"*64,
++                                   project_root=str(root), write_roots=[str(root / "data")])
++    spec = reference_spec("csv").model_copy(update={"kind": ExecutorKind.COMMAND, "config": {
++        "argv": [sys.executable, "-I", "-c", 'import json; print(json.dumps({"records": []}))'],
++        "argv_literal": True, "output": {"type": "json"}, "timeout_seconds": 1,
++        "native_sandbox": boundary.model_dump(mode="json")}})
++    router = Router(Manifest(database=str(root / "state.db"), executors=[spec]), manifest_path=root / "manifest.json")
++    repo = AssessmentRepository(router.store)
++    scope = TaskScope(scope_id="fixed", project_root=str(root), executor_fingerprints={spec.id: executor_fingerprint(spec)},
++                      max_attempts=1, max_attempt_seconds=2, expires_at=utc_now()+timedelta(minutes=5))
++    digest = repo.put("task_scope", scope.scope_id, scope)
++    repo.review(digest)
++    router.bind_task_scope(scope.scope_id)
++    return router, repo, scope, digest, spec
++
++
++async def test_fixed_no_selection_and_atomic_allowance(fixed):
++    router, _repo, _scope, _digest, spec = fixed
++    request = ActionRequest(capability=spec.capability, input={"text": "", "delimiter": ","})
++    try:
++        results = await asyncio.gather(*(router.execute_fixed(request, spec.id) for _ in range(2)), return_exceptions=True)
++        assert sum(not isinstance(item, BaseException) and item.ok for item in results) == 1
++        assert sum(isinstance(item, ConfigurationError) for item in results) == 1
++        assert not router._fixed_dispatches
++    finally:
++        await router.close()
++
++
++@pytest.mark.parametrize("invalid", ["revoked", "expired"])
++async def test_fixed_current_authority(fixed, invalid, monkeypatch):
++    router, repo, scope, digest, spec = fixed
++    if invalid == "revoked":
++        repo.review(digest, revoke=True)
++    else:
++        monkeypatch.setattr("aeep.router.utc_now", lambda: scope.expires_at + timedelta(seconds=1))
++    try:
++        with pytest.raises(NoRouteError):
++            await router.execute_fixed(ActionRequest(capability=spec.capability, input={"text": "", "delimiter": ","}), spec.id)
++        assert not router._fixed_dispatches
++    finally:
++        await router.close()
++
+--- /dev/null
++++ b/tests/test_fixed_helper_recovery.py
+@@ -0,0 +1,96 @@
++from __future__ import annotations
++
++import sys
++from datetime import timedelta
++
++import pytest
++
++from aeep.assessment.models import content_digest
++from aeep.assessment.onboarding import reference_spec
++from aeep.assessment.repository import AssessmentRepository
++from aeep.attempts import ExecutionAttemptState
++from aeep.economic.prepared import executor_fingerprint
++from aeep.errors import ConfigurationError
++from aeep.hosts.codex_sandbox import NativeSandboxConfig
++from aeep.models import (
++    ActionConstraints,
++    ActionRequest,
++    ExecutorKind,
++    Manifest,
++    PolicyConfig,
++    SideEffect,
++    TaskScope,
++    utc_now,
++)
++from aeep.router import Router
++
++
++@pytest.mark.parametrize("failure", ["exit", "timeout"])
++async def test_fixed_partial_write_requires_recovery_after_restart(tmp_path, monkeypatch, failure):
++    root = tmp_path.resolve()
++    data = root / 'data'
++    data.mkdir()
++    effect = data / 'effect'
++    monkeypatch.setattr(NativeSandboxConfig, 'argv', lambda self, command: command)
++    boundary = NativeSandboxConfig(binary=str(root / 'fixture'), binary_sha256='sha256:' + 'a'*64,
++        project_root=str(root), write_roots=[str(data)])
++    program = ('import pathlib,sys,time; p=pathlib.Path(sys.argv[1]); '
++               'p.write_text(p.read_text()+"effect\\n" if p.exists() else "effect\\n"); '
++               + ('sys.exit(3)' if failure == 'exit' else 'time.sleep(10)'))
++    spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
++        'side_effect': SideEffect.WRITE, 'idempotent': False, 'config': {
++        'argv': [sys.executable, '-I', '-c', program, str(effect)], 'argv_literal': True,
++        'native_sandbox': boundary.model_dump(mode='json'), 'timeout_seconds': 0.5}})
++    manifest = Manifest(database=str(root / '.aeep' / 'state.db'), executors=[spec],
++        policies={'write': PolicyConfig(name='write', constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))})
++    request = ActionRequest(capability=spec.capability, policy='write', input={'text': 'a\n1', 'delimiter': ','},
++        constraints=ActionConstraints(max_side_effect=SideEffect.WRITE))
++    router = Router(manifest, manifest_path=root / 'aeep.yaml')
++    repo = AssessmentRepository(router.store)
++    scope = TaskScope(scope_id='recovery', project_root=str(root),
++        executor_fingerprints={spec.id: executor_fingerprint(spec)}, approval_ceiling=SideEffect.WRITE,
++        max_attempts=3, max_attempt_seconds=1, expires_at=utc_now() + timedelta(minutes=5))
++    digest = repo.put('task_scope', scope.scope_id, scope)
++    repo.review(digest)
++    router.bind_task_scope(scope.scope_id)
++    try:
++        outcome = await router.execute_fixed(request, spec.id, approved_side_effect=SideEffect.WRITE)
++        assert not outcome.ok and effect.read_text() == 'effect\n'
++        attempt = router.store.execution_attempt_for_decision(outcome.decision.decision_id)
++        assert attempt is not None and attempt.state is ExecutionAttemptState.INDETERMINATE
++        payload = router.task_outcome(outcome, approved_side_effect=SideEffect.WRITE)
++        assert payload.recovery_state == 'required' and 'Reconcile' in payload.summary
++    finally:
++        await router.close()
++    restarted = Router(manifest, manifest_path=root / 'aeep.yaml')
++    try:
++        repo = AssessmentRepository(restarted.store)
++        repo.review(digest, revoke=True)
++        repo.review(digest)
++        restarted.bind_task_scope(scope.scope_id)
++        with pytest.raises(ConfigurationError, match='recovery'):
++            await restarted.execute_fixed(request, spec.id, approved_side_effect=SideEffect.WRITE)
++        assert effect.read_text() == 'effect\n'  # Restart/pause/resume must not duplicate the write.
++        assert restarted.store.get_receipt(outcome.receipts[0].receipt_id) is not None
++        from aeep.tasks import TaskReconciliation, reconcile
++        # Explicit operator inspection/reversal, never an automatic retry.
++        effect.unlink()
++        recovery = TaskReconciliation(attempt_id=attempt.attempt_id, attempt_version=attempt.version,
++            scope_digest=digest, resolution='effects_reverted', evidence_digests=[digest])
++        recovery_digest=repo.put('task_reconciliation',content_digest(recovery),recovery)
++        with pytest.raises(ConfigurationError,match='review'):
++            reconcile(restarted,recovery_digest)
++        repo.review(recovery_digest)
++        resolved=reconcile(restarted,recovery_digest)
++        assert resolved['state']=='FAILED' and resolved['allowance_reset'] is False
++        assert restarted.store.get_receipt(outcome.receipts[0].receipt_id) is not None
++        with pytest.raises(ConfigurationError,match='exact unresolved'):
++            reconcile(restarted,recovery_digest)
++        retried = await restarted.execute_fixed(request, spec.id, approved_side_effect=SideEffect.WRITE)
++        assert not retried.ok and effect.read_text() == 'effect\n'
++        next_attempt = restarted.store.execution_attempt_for_decision(retried.decision.decision_id)
++        assert next_attempt is not None and next_attempt.attempt_id != attempt.attempt_id
++        assert next_attempt.state is ExecutionAttemptState.INDETERMINATE
++        assert restarted.store._connection.execute('SELECT COUNT(*) FROM execution_attempts').fetchone()[0] == 2
++    finally:
++        await restarted.close()
+--- /dev/null
++++ b/tests/test_fixed_callback_authority.py
+@@ -0,0 +1,143 @@
++from __future__ import annotations
++
++import asyncio
++import hashlib
++from types import SimpleNamespace
++
++import pytest
++from test_fixed_helper import fixed as fixed
++from test_v08_assessment import setup_assessment
++
++from aeep.assessment.fixed_helper import AssessmentCallbackAuthority
++from aeep.assessment.models import AssessmentLimits, content_digest
++from aeep.attempts import ExecutionAttempt, ExecutionAttemptState
++from aeep.errors import ConfigurationError
++from aeep.hosts.codex_dynamic_tools import DynamicCallContext, _call_context
++from aeep.hosts.codex_invocation import contract_digest
++from aeep.models import SideEffect
++
++
++async def test_callback_claim_replay_and_outer_authority(tmp_path, fixed):
++    router, assessment, plan, _grant = setup_assessment(tmp_path)
++    repo = assessment.repository
++    job = assessment.enqueue(plan.plan_id)
++    with router.store._immediate_transaction() as connection:
++        connection.execute("UPDATE assessment_jobs SET state='running' WHERE id=?", (job,))
++    repo.reserve(plan, "trial", AssessmentLimits(max_operations=1, max_elapsed_seconds=20), stage="trial")
++    router._callback_trial_identity = (job, "trial")
++    router._trial_check = lambda: repo.authorize(plan)
++    outer_attempt = router.store.create_execution_attempt(ExecutionAttempt(attempt_id="outer", decision_id="outer-decision", action_digest="a"*64, executor_id=plan.candidate_id, executor_fingerprint="b"*64, side_effect=SideEffect.READ, idempotent=True, owner_id="owner", state="INVOKING", invocation_start_digest="sha256:"+"c"*64))
++    authority = AssessmentCallbackAuthority(assessment, plan, job, "trial", outer_router=router,
++        outer_attempt_id=outer_attempt.attempt_id, binding_digest="a"*64, resolve_binding=lambda: "a"*64, max_calls=1)
++    calls = []
++    async def call(name, args):
++        calls.append(name)
++        return {"isError": False}
++    child_router, _repo, _scope, _digest, _spec = fixed
++    service = SimpleNamespace(router=child_router, call=call)
++    links = []
++    context = DynamicCallContext(contract_digest({"attempt_id": outer_attempt.attempt_id}), "c"*64, "dynamic_"+"c"*64, links.append)
++    token = _call_context.set(context)
++    try:
++        results = await asyncio.gather(*(authority.call(service, "fixed", {}) for _ in range(2)), return_exceptions=True)
++        assert len(calls) == 1 and len(links) == 1
++        assert sum(isinstance(value, ConfigurationError) for value in results) == 1
++        claim_key = content_digest({"outer_operation": hashlib.sha256(b'trial').hexdigest(), "call": "c"*64})
++        assert repo.get("callback_evidence", claim_key)["resources_overlap_outer_trial"]
++        assert repo.operation_ledger(plan.plan_id).operations[0].elapsed_seconds is None
++        router._callback_trial_identity = (job, "another-trial")
++        with pytest.raises(ConfigurationError, match="identity"):
++            authority.check()
++        router._callback_trial_identity = (job, "trial")
++        repo.finish_operation("trial", elapsed_seconds=0)
++        with pytest.raises(ConfigurationError, match="reserved"):
++            authority.check()
++    finally:
++        _call_context.reset(token)
++        await child_router.close()
++        await router.close()
++
++
++@pytest.mark.parametrize("invalid", ["expired", "future", "monotonic", "revoked", "attempt_terminal", "bool", "fraction"])
++async def test_callback_rejects_stale_authority(tmp_path, invalid, monkeypatch):
++    router, assessment, plan, _grant = setup_assessment(tmp_path)
++    repo = assessment.repository
++    job = assessment.enqueue(plan.plan_id)
++    with router.store._immediate_transaction() as connection:
++        connection.execute("UPDATE assessment_jobs SET state='running' WHERE id=?", (job,))
++    repo.reserve(plan, "trial", AssessmentLimits(max_operations=1, max_elapsed_seconds=20), stage="trial")
++    router._callback_trial_identity = (job, "trial")
++    router._trial_check = lambda: repo.authorize(plan)
++    outer_attempt = router.store.create_execution_attempt(ExecutionAttempt(attempt_id="outer", decision_id="outer-decision", action_digest="a"*64, executor_id=plan.candidate_id, executor_fingerprint="b"*64, side_effect=SideEffect.READ, idempotent=True, owner_id="owner", state="INVOKING", invocation_start_digest="sha256:"+"c"*64))
++    authority = AssessmentCallbackAuthority(assessment, plan, job, "trial", outer_router=router,
++        outer_attempt_id=outer_attempt.attempt_id, binding_digest="a"*64, resolve_binding=lambda: "a"*64, max_calls=1)
++    try:
++        if invalid in {"bool", "fraction"}:
++            with pytest.raises(ConfigurationError, match="binding"):
++                AssessmentCallbackAuthority(assessment, plan, job, "trial", outer_router=router,
++                    outer_attempt_id=outer_attempt.attempt_id, binding_digest="a"*64,
++                    resolve_binding=lambda: "a"*64, max_calls=True if invalid == "bool" else 1.5)
++            return
++        if invalid in {"expired", "future"}:
++            from datetime import timedelta
++
++            from aeep.models import utc_now
++            monkeypatch.setattr("aeep.models.utc_now", lambda: utc_now()+timedelta(minutes=5 if invalid == "expired" else -5))
++        elif invalid == "monotonic":
++            router._trial_deadline = asyncio.get_running_loop().time()-1
++        elif invalid == "revoked":
++            repo.review(plan.mapping_digest, revoke=True)
++        else:
++            with router.store._immediate_transaction() as connection:
++                # Exact existing canonical state transition, not a descriptor-only check.
++                connection.execute("UPDATE execution_attempts SET payload_json=? WHERE attempt_id=?",
++                    (outer_attempt.model_copy(update={"state": ExecutionAttemptState.FAILED}).model_dump_json(), outer_attempt.attempt_id))
++        with pytest.raises(ConfigurationError):
++            authority.check()
++    finally:
++        await router.close()
++
++
++async def test_callback_cancellation_retains_child_attempt_link(tmp_path, monkeypatch, fixed):
++    router, assessment, plan, _grant = setup_assessment(tmp_path)
++    repo = assessment.repository
++    job = assessment.enqueue(plan.plan_id)
++    with router.store._immediate_transaction() as connection:
++        connection.execute("UPDATE assessment_jobs SET state='running' WHERE id=?", (job,))
++    repo.reserve(plan, "trial", AssessmentLimits(max_operations=1, max_elapsed_seconds=20), stage="trial")
++    router._callback_trial_identity = (job, "trial")
++    router._trial_check = lambda: repo.authorize(plan)
++    outer_attempt = router.store.create_execution_attempt(ExecutionAttempt(attempt_id="outer", decision_id="outer-decision", action_digest="a"*64, executor_id=plan.candidate_id, executor_fingerprint="b"*64, side_effect=SideEffect.READ, idempotent=True, owner_id="owner", state="INVOKING", invocation_start_digest="sha256:"+"c"*64))
++    authority = AssessmentCallbackAuthority(assessment, plan, job, "trial", outer_router=router,
++        outer_attempt_id=outer_attempt.attempt_id, binding_digest="a"*64, resolve_binding=lambda: "a"*64, max_calls=1)
++    child_router, _repo, _scope, _digest, spec = fixed
++    from aeep.executors.command import CommandExecutor
++    from aeep.models import ActionRequest
++    started = asyncio.Event()
++    async def pending(self, execution_context):
++        started.set()
++        await asyncio.Future()
++    monkeypatch.setattr(CommandExecutor, "execute", pending)
++    async def call(name, arguments):
++        request = ActionRequest(action_id="dynamic_"+"c"*64, capability=spec.capability,
++                                input={"text": "", "delimiter": ","})
++        await child_router.execute_fixed(request, spec.id)
++        raise AssertionError("cancelled invocation returned")
++    links = []
++    context = DynamicCallContext(contract_digest({"attempt_id": outer_attempt.attempt_id}), "c"*64,
++                                 "dynamic_"+"c"*64, links.append)
++    token = _call_context.set(context)
++    try:
++        task = asyncio.create_task(authority.call(SimpleNamespace(router=child_router, call=call), "fixed", {}))
++        await asyncio.wait_for(started.wait(), 1)
++        task.cancel()
++        with pytest.raises(asyncio.CancelledError):
++            await task
++        assert len(links) == 1
++        evidence = repo.get("callback_evidence", content_digest({"outer_operation": hashlib.sha256(b"trial").hexdigest(), "call": "c"*64}))
++        assert evidence["child_attempt_digests"]
++        assert not child_router._fixed_dispatches
++    finally:
++        _call_context.reset(token)
++        await child_router.close()
++        await router.close()

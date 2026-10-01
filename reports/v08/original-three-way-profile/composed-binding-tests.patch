@@ -1,0 +1,55 @@
+--- a/tests/test_v08_conformance.py
++++ b/tests/test_v08_conformance.py
+@@ -414,3 +414,52 @@
+     await stop_process(process)
+     assert process.terminated and process.killed
+     await stop_process(None)
++
++
++@pytest.mark.parametrize("dynamic,version,callback,accepted", [
++    (True, "v3", "a" * 64, True),
++    (True, "v3", "b" * 64, False),
++    (True, "v2", None, False),
++    (False, "v3", "a" * 64, False),
++])
++def test_composed_worker_binding_cannot_transfer_to_another_profile(
++        monkeypatch, dynamic, version, callback, accepted):
++    """Exercise production admission binding, independent of probe verification."""
++    from test_v08_managed_workers import binding
++
++    from aeep.assessment.boundary import require_managed_boundaries
++    from aeep.assessment.models import AssessmentEnvironment
++    worker = binding()
++    config = {"adapter_id": "codex-app-server", "argv": [worker.binary, "app-server"],
++        "instructions": "fixed fixture", "managed_worker": worker.model_dump(mode="json")}
++    if dynamic:
++        config["invocation"] = {"mode": "turn", "dynamic_tools_digest": "a" * 64}
++    spec = ExecutorSpec(id="host", capability="fixture", kind="host_managed",
++        resource_pool="fixture", description="fixture", config=config)
++    values = dict(schema_version="assessment.boundary-conformance." + version,
++        conformance_id="reviewed", source_digest="1"*64, worker_digest=worker.digest(),
++        image_digest=worker.image, binary_digest=worker.binary_sha256,
++        adapter="codex-app-server", adapter_version="1", effective_policy_digest="2"*64,
++        reviewed_inventory_digest="3"*64, identity_digest="4"*64,
++        enforcement_definition_digest="5"*64, advertised_tools=[], permitted_tools=[],
++        used_tools=[], probe_digests=[], configuration_digest=worker.configuration_digest,
++        effective_inventory={})
++    if version == "v3":
++        values.update(callback_binding_digest=callback, native_backend_digest="6"*64,
++            composed_definition_digest="7"*64)
++    record = BoundaryConformance.model_validate(values)
++    calls = []
++    def verified(repo, digest, **expected):
++        calls.append((digest, expected))
++        return record
++    monkeypatch.setattr("aeep.assessment.boundary.require_conformance", verified)
++    environment = AssessmentEnvironment(environment_id="fixture", kind="codex_sandbox",
++        identity={}, conformance_digests={spec.id:"8"*64})
++    if accepted:
++        require_managed_boundaries(None, environment, [spec], {spec.id:"4"*64})
++        assert calls[0][1]["worker_digest"] == worker.digest()
++        assert calls[0][1]["identity_digest"] == "4"*64
++    else:
++        with pytest.raises(ConfigurationError, match=r"(composed boundary|composed boundary evidence)"):
++            require_managed_boundaries(None, environment, [spec], {spec.id:"4"*64})
++    assert len(calls) == 1

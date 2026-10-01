@@ -1,0 +1,202 @@
+{
+  "version": "0.8",
+  "database": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project/.aeep/state.db",
+  "default_policy": "balanced",
+  "persistence": {
+    "store_action_inputs": false,
+    "store_action_context": false
+  },
+  "signing": null,
+  "budget": null,
+  "economic_evidence": {
+    "enabled": false,
+    "settlement_currency": "USD",
+    "live_quotes": {
+      "enabled": false,
+      "top_k": 3,
+      "per_provider_timeout_seconds": 2.0,
+      "total_timeout_seconds": 4.0,
+      "maximum_response_bytes": 262144,
+      "maximum_clock_skew_seconds": 30,
+      "maximum_quote_ttl_seconds": 600
+    },
+    "requirements": {
+      "require_binding_quote_for_paid_routes": true,
+      "allow_verified_static_offer": true,
+      "allow_static_prior": false,
+      "minimum_evidence_level": "SIGNED_QUOTE",
+      "quote_failure_policy": "REQUIRE_BINDING_QUOTE",
+      "pinned_rate_cards": {}
+    },
+    "market_aggregates": {
+      "enabled": false,
+      "maximum_age_seconds": 86400,
+      "minimum_sample_size": 20,
+      "minimum_settlement_verified_fraction": "0.80"
+    },
+    "network": {
+      "allowed_quote_hosts": [],
+      "allow_private_addresses": false,
+      "allow_redirects": false,
+      "trust_environment_proxy": false
+    },
+    "trust_store": {
+      "path": "~/.config/aeep/provider-keys.json"
+    },
+    "payment": {
+      "adapter": "free",
+      "unlimited_budget": false
+    }
+  },
+  "provider_packages": {
+    "artifact_root": ".aeep/artifacts",
+    "maximum_artifact_bytes": 52428800,
+    "allow_remote_artifacts": false,
+    "allowed_artifact_hosts": [],
+    "allow_private_addresses": false,
+    "allow_self_asserted_priors": true,
+    "require_local_smoke": true
+  },
+  "policies": {},
+  "capabilities": [],
+  "resources": [],
+  "registries": [],
+  "executors": [
+    {
+      "id": "reference.csv",
+      "capability": "assessment.csv@1",
+      "kind": "command",
+      "description": "CSV to string-valued records with strict row widths and unique headers.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "delimiter": {
+            "enum": [
+              ",",
+              ";",
+              "\t"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "delimiter"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "records"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 5.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": "0.0",
+          "upper_bound_usd": "0.0",
+          "evidence": {
+            "status": "complete",
+            "source": "static_estimate",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "read",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+          "-I",
+          "-c",
+          "import csv,io,json,sys; v=json.load(sys.stdin); print(json.dumps({\"records\":list(csv.DictReader(io.StringIO(v[\"text\"]),delimiter=v[\"delimiter\"]))}))"
+        ],
+        "argv_literal": true,
+        "stdin_json": true,
+        "timeout_seconds": 10,
+        "output": {
+          "type": "json"
+        },
+        "native_sandbox": {
+          "schema_version": "codex.native-sandbox.v1",
+          "binary": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+          "binary_sha256": "sha256:4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+          "project_root": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/steering-v1-delivery-validation/final/mcp-project",
+          "read_roots": [
+            "/Library/Frameworks/Python.framework/Versions/3.13"
+          ],
+          "write_roots": [],
+          "deny_roots": [],
+          "network": false
+        }
+      }
+    }
+  ]
+}

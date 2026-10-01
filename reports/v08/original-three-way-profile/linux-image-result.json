@@ -1,0 +1,50 @@
+{
+  "operation_id": "linux-diagnostic-image:conformance_probe_b4e0b335b5324300b2f85657a3ec0d23",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "source_digest": "94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb",
+  "base_image": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+  "setup_complete": false,
+  "commands": [
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "image",
+        "inspect",
+        "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 3568,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "build",
+        "--network=none",
+        "--pull=false",
+        "--platform",
+        "linux/arm64",
+        "--progress=plain",
+        "--iidfile",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/linux-diagnostic-image-id",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/immutable-diagnostic"
+      ],
+      "exit_code": 1,
+      "stdout_bytes": 0,
+      "stderr_bytes": 1382,
+      "stderr_sha256": "2938c8a0160c1b742e04ab8a30b6a11f6d3e9859be3642151f7627d060e52427"
+    }
+  ],
+  "error_type": "RuntimeError",
+  "failed_stage": "offline_build",
+  "elapsed_seconds": 1.3734478340484202,
+  "host_free_delta_bytes": 2408448,
+  "source_unchanged": true,
+  "canonical_record_digest": "cf50bee8a40bc36498c0c725b60c5bd40a0525c0d52b9cd44b3b8502d831cfb2"
+}

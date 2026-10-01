@@ -1,0 +1,96 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_1bc36d5031c14aa48de087ea1d7da34a",
+    "operation_id": "conformance_probe_1bc36d5031c14aa48de087ea1d7da34a-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_options",
+        "status": "failed",
+        "error_keys": [
+          "message"
+        ],
+        "diagnostic_categories": [
+          "approval",
+          "mcp"
+        ],
+        "error_digest": "554ead599db5938bff0210e503c82c2a69e3ffc93fd27af0585bfc383706b64d",
+        "error_code": null
+      },
+      {
+        "server": "assessment",
+        "tool": "aeep_assessment_status",
+        "status": "failed",
+        "error_keys": [
+          "message"
+        ],
+        "diagnostic_categories": [
+          "approval",
+          "mcp"
+        ],
+        "error_digest": "554ead599db5938bff0210e503c82c2a69e3ffc93fd27af0585bfc383706b64d",
+        "error_code": null
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_csv",
+        "status": "failed",
+        "error_keys": [
+          "message"
+        ],
+        "diagnostic_categories": [
+          "approval",
+          "mcp"
+        ],
+        "error_digest": "554ead599db5938bff0210e503c82c2a69e3ffc93fd27af0585bfc383706b64d",
+        "error_code": null
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [],
+    "canonical_evidence_digest": "8ff944c46f83190838ac494882f4d51a7221737788c2a8600313da6800d1835d",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 30830,
+          "cached_input_tokens": 15104,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 261,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

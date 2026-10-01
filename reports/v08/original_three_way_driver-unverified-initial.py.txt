@@ -1,0 +1,149 @@
+"""Run an exact reviewed three-route plan through AssessmentService, never bare Runner.
+
+Binding records are supplied by the coordinator after conformance. This module
+does not create/review definitions, amend budgets, materialize cases or admit.
+"""
+import argparse
+import asyncio
+import hashlib
+import json
+from collections import defaultdict
+from pathlib import Path
+
+from aeep.assessment.boundary import require_managed_boundaries
+from aeep.assessment.models import (
+    AssessmentEnvironment,
+    AssessmentPlan,
+    AssessmentReport,
+    content_digest,
+)
+from aeep.assessment.reporting import paired_interval
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.verification import verification_source_digest
+from aeep.benchmarking import BenchmarkCampaignReport
+from aeep.errors import ConfigurationError
+from aeep.models import ExecutorKind
+from aeep.router import Router
+
+ROOT = Path(__file__).resolve().parents[2]
+ROLES = ('normal_host', 'discovery_host', 'discovery_aeep_host')
+
+
+def require(condition, message):
+    if not condition:
+        raise ConfigurationError(message)
+
+
+def checked_path(value):
+    path = Path(value).absolute()
+    require(path == path.resolve() and path.is_relative_to(ROOT), 'explicit workspace path required')
+    require(path.name not in {'auth.json', 'credentials.json', '.env'}, 'secret path forbidden')
+    return path
+
+
+def validate(service, binding):
+    repo = service.repository
+    plan = AssessmentPlan.model_validate(repo.get('plan', binding['plan_id']))
+    require(content_digest(plan) == binding['plan_digest'], 'plan drift')
+    definition = repo.get('three_way_run_definition', binding['definition_digest'])
+    require(content_digest(definition) == binding['definition_digest'], 'definition drift')
+    require(binding['definition_digest'] in plan.definition_digests, 'definition not bound to plan')
+    require(definition['driver_sha256'] == hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), 'driver drift')
+    require(definition['source_digest'] == verification_source_digest(ROOT), 'source drift')
+    require(definition['model'] == 'gpt-6.1-sol' and definition['automatic_admission'] is False, 'model/admission contract mismatch')
+    repo.authorize(plan)  # Existing grant, scope and every exact review; no new ledger.
+    qualification_digest = definition['qualification_report_digest']
+    require(qualification_digest in plan.definition_digests, 'separate qualification must be reviewed and bound')
+    qualification = AssessmentReport.model_validate(repo.get('report', qualification_digest))
+    require(qualification.qualification_passed and qualification.distinct_holdout_cases >= 100, 'separate qualification incomplete')
+    qualified_plan = AssessmentPlan.model_validate(repo.get('plan', qualification.plan_digest))
+    require(qualified_plan.comparison is not None and qualified_plan.comparison.experiment is not None and qualified_plan.comparison.experiment.stage == 'qualification' and len(qualified_plan.suite.routes) == 1, 'qualification must be separate required-use candidate-only evidence')
+    service._verify_dependencies(qualified_plan)
+    qualifier_binding = repo.get('run_binding', qualified_plan.plan_id)
+    require(qualifier_binding['source_digest'] == definition['source_digest'], 'old-source qualification cannot transfer')
+    require(qualification_digest not in definition.get('historical_report_digests', []), 'historical qualification cannot be relabelled')
+    mapping = service._verify_dependencies(plan)
+    roles = definition['roles']
+    require(set(roles) == set(ROLES) and len(set(roles.values())) == 3, 'three distinct roles required')
+    require(plan.candidate_id == roles['discovery_aeep_host'] and plan.baseline_id == roles['discovery_host'], 'primary pair mismatch')
+    require(plan.comparison is not None and plan.comparison.experiment is None, 'historical four-arm schema cannot stand in for three-way')
+    require(plan.reference_id is None, 'protected grader is independent; no experimental arm may be a reference')
+    require({r.route_id for r in plan.suite.routes} == set(roles.values()) and len(plan.suite.routes) == 3, 'exactly three campaign routes required')
+    require(all(r.executor_id == r.route_id for r in plan.suite.routes), 'explicit executor routes required')
+    require(not plan.suite.paired_order and plan.suite.repetitions == 1, 'seeded shuffle and one independent observation per case required')
+    require(len(plan.suite.conditions) == 1 and plan.suite.conditions[0].value == 'fresh-worker', 'one fresh-worker condition required')
+    counts = defaultdict(int)
+    for case in plan.suite.cases:
+        counts[case.split.value] += 1
+    require(dict(counts) == {'qualification': 8, 'training': 28, 'holdout': 105}, 'unchanged141-case contract required')
+    require(plan.recipe_case_set_digest is not None and not plan.blocked_reasons, 'materialized unblocked plan required')
+    specs = {s.id: s for s in mapping.subjects}
+    require(set(roles.values()) <= set(specs), 'third route must be exact reviewed mapping dependency')
+    selected = [specs[roles[role]] for role in ROLES]
+    require(all(s.kind == ExecutorKind.MANAGED_HOST for s in selected), 'three real managed hosts required')
+    require(definition['qualification_backend_binding_digest'] in plan.definition_digests, 'backend/model qualification binding absent')
+    configs = [s.managed_host_config() for s in selected]
+    require(all(c.model_constraints.allowed_model_ids == ('gpt-6.1-sol',) and c.reasoning_efforts == ('medium',) for c in configs), 'exact model and matched effort required')
+    require(len({c.instructions for c in configs}) == 1, 'task instructions must match')
+    require(all(c.timeout_seconds == definition['task_seconds'] for c in configs), 'matched frozen task budget required')
+    require(definition['task_seconds'] in {203, 406}, 'unreviewed normal/larger budget')
+    require(not any(c.store_prompt or c.store_output for c in configs), 'raw task persistence forbidden')
+    require(all(plan.route_fingerprints.get(s.id) == definition['fingerprints'][s.id] for s in selected), 'all three exact fingerprints required')
+    environment = AssessmentEnvironment.model_validate(repo.get('environment', plan.environment_digest))
+    require_managed_boundaries(repo, environment, selected, definition['runtime_identities'])
+    # Equality is bound to reviewed inventories, not inferred from matching labels.
+    require(definition['discovery_snapshot_digests']['discovery_host'] == definition['discovery_snapshot_digests']['discovery_aeep_host'], 'unequal discovery snapshots')
+    require(definition['candidate_access_digests']['discovery_host'] == definition['candidate_access_digests']['discovery_aeep_host'], 'unequal candidate access')
+    require(definition['user_constraints_digests']['discovery_host'] == definition['user_constraints_digests']['discovery_aeep_host'], 'unequal user constraints')
+    return plan, definition
+
+
+def export(campaign, plan, definition):
+    fields = ('trial_id', 'case_id', 'route_id', 'condition', 'repetition', 'phase', 'state', 'ok', 'valid', 'wall_time_ms', 'actual_resources', 'accounting', 'receipt_ids', 'failure_category', 'failure_stage', 'error_type')
+    raw = [{k: v for k, v in t.model_dump(mode='json').items() if k in fields} for t in campaign.trials]
+    families = {c.case_id: c.template_family for c in plan.suite.cases}
+    runs = {(t.case_id, t.route_id): t for t in campaign.trials if t.phase.value == 'holdout'}
+    summaries = []
+    roles = definition['roles']
+    for left, right in [('discovery_aeep_host', 'discovery_host'), ('discovery_host', 'normal_host'), ('discovery_aeep_host', 'normal_host')]:
+        differences = {}
+        for case in plan.suite.cases:
+            a, b = runs.get((case.case_id, roles[left])), runs.get((case.case_id, roles[right]))
+            if a and b and a.ok and b.ok and a.valid is True and b.valid is True and a.wall_time_ms is not None and b.wall_time_ms is not None:
+                differences[case.case_id] = [b.wall_time_ms - a.wall_time_ms]
+        # Six predeclared dimension/contrast tests per budget, two budgets:12.
+        estimate, interval = paired_interval(differences, 20, plan.suite.seed, families, alpha=0.05 / 12)
+        summaries.append({'left': left, 'right': right, 'distinct_measured_pairs': len(differences), 'wall_time_difference_ms': estimate, 'family_adjusted_interval_ms': interval, 'analysis_scope': 'correct fully measured holdout pairs only; no success/resource benefit gate claimed'})
+    return {'trials': raw, 'comparisons': summaries, 'automatic_admission': False, 'full_three_way_value_analysis_complete': False}
+
+
+async def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--binding', required=True)
+    parser.add_argument('--run', action='store_true')
+    args = parser.parse_args()
+    binding = json.loads(checked_path(args.binding).read_text())
+    router = Router.from_manifest(checked_path(binding['manifest']))
+    try:
+        service = AssessmentService(router, checked_path(binding['assessment_directory']))
+        plan, definition = validate(service, binding)
+        if not args.run:
+            print(json.dumps({'ready': True, 'plan_digest': content_digest(plan), 'workers_started': 0, 'model_turns': 0}))
+            return
+        require(definition['execution_authorized'] is True, 'exact run authorization absent')
+        output = checked_path(binding['output'])
+        require(not output.exists(), 'one-shot output already exists; inspect existing work')
+        job = service.enqueue(plan.plan_id)
+        report = await service.run(job)
+        campaign = BenchmarkCampaignReport.model_validate(service.repository.get('campaign', report.campaign_digest))
+        result = export(campaign, plan, definition)
+        result.update(plan_digest=content_digest(plan), report_id=report.report_id, campaign_digest=report.campaign_digest, operation_ledger_digest=report.operation_ledger_digest, primary_pair_only_fit={'outcome': report.outcome, 'qualification_passed': report.qualification_passed}, source_unchanged=verification_source_digest(ROOT) == definition['source_digest'])
+        with output.open('x') as stream:
+            json.dump(result, stream, indent=2)
+        print(json.dumps({'output': str(output), 'admitted': False}))
+    finally:
+        await router.close()
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

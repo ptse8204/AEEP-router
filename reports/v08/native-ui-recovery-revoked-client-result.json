@@ -1,0 +1,74 @@
+{
+  "definition": {
+    "request_id": "conformance_probe_4b27b08f3b294cb080c38e01816ac6cb",
+    "operation_id": "conformance_probe_4b27b08f3b294cb080c38e01816ac6cb-native-client",
+    "process_status": "success",
+    "stream_complete": true,
+    "calls": [
+      {
+        "server": "fixture",
+        "tool": "aeep_assessment_report",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "server": "fixture",
+        "tool": "aeep_csv",
+        "status": "completed",
+        "result_is_error": null,
+        "error_keys": "NoneType",
+        "diagnostic_categories": [],
+        "error_digest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    ],
+    "event_types": [
+      "item.completed",
+      "item.started",
+      "thread.started",
+      "turn.completed",
+      "turn.started"
+    ],
+    "item_types": [
+      "agent_message",
+      "error",
+      "mcp_tool_call"
+    ],
+    "fixture_receipt_ids": [
+      "rcpt_4d135837f49d4fb984a52e00c7fe16a8"
+    ],
+    "canonical_evidence_digest": "29c9785614468eff6e14ca8c8b75c0fa7639fb1e4671f3b062a9870e32e95e42",
+    "model_usage": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 74484,
+          "cached_input_tokens": 52096,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 206,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "scope": "Product interface only; not candidate conformance or comparative evidence"
+  }
+}

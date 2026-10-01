@@ -75,7 +75,7 @@ def test_package_and_documentation_versions_are_consistent():
 
 
 def test_legacy_manifest_versions_remain_supported():
-    versions = ("0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6")
+    versions = ("0.1", "0.15", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7")
     assert tuple(Manifest.model_validate({"version": version}).version for version in versions) == versions
-    assert Manifest().version == "0.7"
-    assert default_manifest_dict()["version"] == "0.7"
+    assert Manifest().version == "0.8"
+    assert default_manifest_dict()["version"] == "0.8"

@@ -1,0 +1,61 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.controlled-fixture.v1",
+      "default": "assessment.controlled-fixture.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "purpose": {
+      "const": "controlled local lifecycle fixture; not plugin savings",
+      "default": "controlled local lifecycle fixture; not plugin savings",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "source_digest": {
+      "title": "Source Digest",
+      "type": "string"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "admission_id": {
+      "title": "Admission Id",
+      "type": "string"
+    },
+    "receipt_id": {
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "stale_decision_id": {
+      "title": "Stale Decision Id",
+      "type": "string"
+    },
+    "rejection_evidence_digest": {
+      "title": "Rejection Evidence Digest",
+      "type": "string"
+    },
+    "baseline_decision_id": {
+      "title": "Baseline Decision Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_digest",
+    "plan_id",
+    "report_id",
+    "admission_id",
+    "receipt_id",
+    "stale_decision_id",
+    "rejection_evidence_digest",
+    "baseline_decision_id"
+  ],
+  "title": "ControlledFixtureRecord",
+  "type": "object"
+}

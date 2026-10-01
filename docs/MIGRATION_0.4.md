@@ -1,8 +1,8 @@
 # Migrating to AEEP 0.4
 
-AEEP 0.4 is additive for existing offline routing. It accepts manifests from
-0.1, 0.15, 0.2, and 0.3, retains legacy quotes/receipts/payment objects, and
-does not make `route()` contact an economic provider.
+AEEP 0.4 extends the existing offline router. It accepts manifests from 0.1,
+0.15, 0.2, and 0.3 and retains legacy quotes, receipts, and payment objects.
+`route()` continues to run without contacting an economic provider.
 
 ## Before upgrading
 
@@ -51,8 +51,7 @@ rolls back on failure, checks every foreign-key relationship before commit, and
 is idempotent when reopened. SQLite foreign-key enforcement is enabled during
 normal operation. The version-2 table rebuild temporarily disables enforcement
 before its transaction, runs `foreign_key_check` before committing, and restores
-enforcement afterward. A database with a newer `user_version` is rejected rather
-than guessed at.
+enforcement afterward. The migration rejects a database with a newer `user_version`.
 
 Verify after staging startup:
 

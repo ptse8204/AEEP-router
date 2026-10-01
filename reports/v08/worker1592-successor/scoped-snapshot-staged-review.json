@@ -1,0 +1,37 @@
+{
+  "stage": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-scoped-snapshot-fff5ou1u",
+  "base_source": "b2d436cb7ee44fcdcaaec5721583d548bfa3baea6c467f04bde688c7614df392",
+  "files": {
+    "src/aeep/store.py": "c59ddb7862466ff46d90d8f5c34f88567774e45ddad4baec20fa08c112898f26",
+    "src/aeep/assessment/extensions.py": "dbd50a08ef0fcd5596a55a7ad047006f9402a08ab8ef6f3d4a7c4619b5a25ef0",
+    "tests/test_v08_campaign_foundations.py": "201ea2614b11f803af21abc825567f218838ebe335ddbdae63f0274cceb87a1d",
+    "tests/test_v08_assessment.py": "468dd3ed6a6160f4183e31486f541c54fe766cb3c8c0c5d360bc19fd3e43ec10"
+  },
+  "patch_sha256": "c74272f81f2f7570590bfcb16eec561be4949ce37d7b3c8361dc404ab52c0469",
+  "failure_retained": "Broader staged modules run raced an explicitly recorded subsequent source edit; executable-dependency identity gate rejected. Final focused replay runs after staged freeze; no failure normalized.",
+  "no_root_source_changes": false,
+  "preimages": {
+    "src/aeep/store.py": "5db05bebab7e4207b3993ddaff0eaa37b69d15a5358ccad6f09d43121f72cdd4",
+    "src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+    "tests/test_v08_campaign_foundations.py": "edf1c2056d94ef1e51054497c2ccb5771ac24cafefe098b980b566f58c69c426",
+    "tests/test_v08_assessment.py": "6758629b0af3a27ddb36908f774e99e24e839640c0e1975fb7182f1a3cbf6f51"
+  },
+  "static_checks": {
+    "ruff": "passed4changedfiles",
+    "mypy": "passed2sourcefiles",
+    "synthetic_closure": "4passed",
+    "actual_admission_frozen_isolated": "passed",
+    "combined_frozen": "24passed; session64908 exit0; scoped-snapshot-focused-final.log"
+  },
+  "applied_source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "independent_review": "sol61_website_local apply-ready at exact source hashes; isolated previous textfamily failure passed after stagefreeze",
+  "staging_cleanup": {
+    "owned_path": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-scoped-snapshot-fff5ou1u",
+    "removed_file_count": 424,
+    "removed_bytes": 30484529,
+    "after_required_22_phase_validation": true,
+    "canonical_or_child_attempt_stores_removed": false,
+    "applied_patch_and_hashes_retained": true,
+    "path_absent": true
+  }
+}

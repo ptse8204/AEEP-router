@@ -1,0 +1,34 @@
+{
+  "schema_version": "assessment.research.metrics.v2",
+  "purpose": "offline scripted native tool read; not learned plugin selection or live acceptance",
+  "recorded_at": "2026-09-26T09:16:11.558377+00:00",
+  "implementation_source_digest": "a35b604dba8843824df2623cd67b28a77a1a82c6d49c1c8d73d1a57fd0b035d6",
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "program": "native-catalog-metrics-implicit-probe.py.txt",
+  "program_sha256": "e7bbdc5969a898d1abc4704f78e8b6bf05e7da7a3393d133f10852c8273f7d36",
+  "seccomp": "native-catalog-metrics-seccomp.json",
+  "seccomp_sha256": "c598d8ad3319b4c05ba271252377f72b67294bdf8dbb77bc9934efd87cca3e91",
+  "observation": "native-catalog-metrics-implicit-confirmed-false.json",
+  "observation_sha256": "bc8a9da9d75309711549d54e2a8cb19e55e089609ec1a4a05779c83cd7129c74",
+  "observed": [
+    "Successful native command execution",
+    "Skill content in the custom tool result",
+    "Implicit skill injection metric with trial tag",
+    "Sandbox command denied collector connection"
+  ],
+  "limitations": [
+    "Model responses were scripted",
+    "Missing top-level tools array does not mean missing tools; declarations also appeared in prompt context",
+    "No complete flush or negative observation guarantee",
+    "Profile differs from authenticated worker; independent conformance still required"
+  ],
+  "historical_receipt_check": "catalog-research-historical-receipts-verified.json",
+  "grant_counters": [
+    586,
+    114,
+    1629.6554747556802,
+    "0"
+  ],
+  "model_calls": 0,
+  "release_evidence": false
+}

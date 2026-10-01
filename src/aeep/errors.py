@@ -15,6 +15,10 @@ class InputValidationError(AEEPError):
     """Action input does not satisfy the capability schema."""
 
 
+class ValidationExecutionError(ConfigurationError):
+    """The grader failed to run; this is not evidence against an implementation."""
+
+
 class NoRouteError(AEEPError):
     """No executor satisfies the action constraints."""
 

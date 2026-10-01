@@ -1,0 +1,3604 @@
+{
+  "recorded_at": "2026-09-28T02:20:44.047528+00:00",
+  "source_digest": "cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2",
+  "authority": "2026-09-27 delegated exact reviews and bounded testing",
+  "historical_context": "plan_aab3f987e9764e3dbaf40e17f18ecc9d stopped before trials because generated native route lacked an explicit finite cash bound; original costs retained. The offline container has zero cash upper bound in this new reviewed definition.",
+  "purpose": "Training-only direct validation of generated CSV baseline through the existing AssessmentService/BenchmarkRunner, using exactly its 28 builder inputs against the independent deterministic reference. No holdout, qualification, plugin assessment, savings/admission claim or model turns.",
+  "review_findings": [
+    "Read full source; Python csv/io/json/sys only, bounded input and JSON output, no network, subprocess or filesystem calls",
+    "The generated tool runs only in a pinned offline container with fresh per-invocation state",
+    "Expected answers stay in the external case validator; no candidate fixture contains answers"
+  ],
+  "generated_source_sha256": "18b79710edc85eb72850247a0afc04f6f020ad82fc5c10d3b80d143ae6a5a8a6",
+  "build_operation_id": "reusable-build:planning_452de4daa10440a4af39a2fffab9f78c",
+  "training_input_digests": [
+    "bf368b4a48584dd940d6d47fe77cef3a97ac5cfc43aa24f0fb59cf779e1228f0",
+    "19cdd03ad1dee9d897481b28a10296e215bf9ab007b89bbbc7316acc1968d3f9",
+    "83c2a74998e3c47f710dc36f7309d5f644f6a736c04b2abf3563fb1252dd4899",
+    "0a221f6c78f81c2facc602863753a102a2b9f036ed5b028f57df5c4e2ccc59b4",
+    "0fe44c97e9c862d703cb12a599c2d72fa97eb842a66633317f369910d7d08cf4",
+    "53d2081cd8c5f6998dd9f441b97dfd2162ffca3593597f1c0907bca6e457dbb2",
+    "17e73d60dc692ad01e7c12d90518000350c4d29d57fc80b00767fc20a1119da0",
+    "5db79e97d00e8fc048d4d9e0f76c17504f7334004a87dbe4c7bf3d779dd6004b",
+    "6d45a8db1174e43e4febb34265ada29ad21cc4db7db07acab54eaeb8611b164c",
+    "d584edcd8aebf1e6c3282e1750df9c9eb6ba1b3408afc205e881d8eae948493a",
+    "b4c06fd820b722fbde763f95ad733af351f1ab212089d07e3932d8a98d2ed36d",
+    "29967fad698e7eee68b449955e36bd9519ba6ee66addf38b5e451b51107f4c8d",
+    "a9ae1b82b19f8d08b2a3f59df42b10126eed9dfcb3f1d0086afb333384923c9a",
+    "aa1d8790252a712fff6f45e10b6f67dee900b4cb145df2cf43da68cbf64dd8e3",
+    "2c259a44493792ec66bfe7a211786ad216b454e10dbcddafee975c9379d5be03",
+    "c6af9e4a32c96d5c581753f666d1b484adaaa5b7c9f4cc160b4bfcc2464359ae",
+    "4ffa3a6becc13fe778be1aba117eec61032259f66aa343d78330e21279d20229",
+    "09b79812f6f86b15ac7c2096f0ca125623abcea65de03472841b6f0c9cf0f272",
+    "55caf29438b6fcfbc01925dfbd4ac84bbed6ef3eac62c69f515081eee94950ff",
+    "a0435b84e6e81110a7c650e3954fc16f81fc076cb55ac23ad04854a7ad2f682f",
+    "0367f7f26773b755d1a42c30bb8ca8d93f411b1370bd2ccc1230758927f95b62",
+    "19cfdac928503b90907b4a1b247e3f8781f9aa536c57d80e4587bdb014e76a2e",
+    "5b588c5b0f600cf6a5376cad062100fc174893cb7a46ab496144a682fdf2e676",
+    "bac56e1aabf88aac81e6129d8bddd64aa2d664065351c6e196cb4c3671497e9e",
+    "9dfb0f1cb5cc2fe4d1b76b8d4b4cadb96c4378c57ede3c382e32ad04f2287795",
+    "a6643e0b115794e32da8599275c1809301be4da542119e0444a6481d51f8e589",
+    "e7b891276d829f42a52015d8ad607852095a9811eabd0dce9bc9e348627e63bc",
+    "805cf26a54ab63fd41c97bb9775b55ee4ddd36ea06aed129bd2fd9b3139f9e71"
+  ],
+  "inert_full_proposal_id": "plan_a0363b97734249cd93136d7449b9ccb4",
+  "plan": {
+    "comparison": {
+      "schema_version": "assessment.comparison.v1",
+      "structure": "direct",
+      "candidate": {
+        "executor_id": "csv-reusable-schema-local-training.generated",
+        "fingerprint": "0b0ea6705ec817c9008c84fa6a1b8e090e5dbc801affaa2fe1959eaebdd069e9",
+        "dependencies": {},
+        "host_config": null
+      },
+      "baseline": {
+        "executor_id": "csv-reusable-schema-local-training.reference",
+        "fingerprint": "d253316ae5bc703f2aa385c0ee179e2edb50f9c806a202beea6e4e2e18aa62be",
+        "dependencies": {},
+        "host_config": null
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "router-fresh"
+    },
+    "feature_combinations": [
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, false, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, true, true, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, false, false, false, true]",
+        "delimiter": ",",
+        "unicode": true,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": "\u4eac\u6771"
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, false, false, true, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, false, false, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, false, false, false, false, true]",
+        "delimiter": ";",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[1, 3, true, true, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, false, false, false, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, false, true, true, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, false, false, false, false, false]",
+        "delimiter": ",",
+        "unicode": true,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": "\u4eac\u6771"
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, false, false, false, true, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, false, false, false, false, false]",
+        "delimiter": ";",
+        "unicode": false,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[2, 4, true, true, false, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"extra\", \"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, false, false, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, false, true, true, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, false, false, false, true, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, false, false, false, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, false, false, false, false, true]",
+        "delimiter": ";",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[5, 2, true, true, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, false, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, true, true, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, false, false, false, true]",
+        "delimiter": ",",
+        "unicode": true,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": "\u4eac\u6771"
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, false, false, true, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, false, false, false, false]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, false, false, false, false, true]",
+        "delimiter": ";",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      },
+      {
+        "family": "csv",
+        "size": "small",
+        "structure": "[12, 3, true, true, false, false, true]",
+        "delimiter": ",",
+        "unicode": false,
+        "columns": "[\"id\", \"name\", \"note\"]",
+        "unicode_characters": ""
+      }
+    ],
+    "schema_version": "assessment.plan.v2",
+    "plan_id": "plan_643ec848b2aa4645a215b273a6c38d49",
+    "subject_digest": "00c52606b785db25e9894a2c14bb4d6e632f14e80fcb0fab7926239871ef685e",
+    "recipe_digest": "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+    "mapping_digest": "e1b3b217cacc3b3cf416bb8079fa3dc87a46e53a17b727e05140e1b9131a576e",
+    "environment_digest": "0b5c897a0ce4a93d4e8a756dd4b979c8b8b16a549ec0118a5863c2d4bb9e4bc3",
+    "authorization_id": "onboarding",
+    "candidate_id": "csv-reusable-schema-local-training.generated",
+    "baseline_id": "csv-reusable-schema-local-training.reference",
+    "reference_id": null,
+    "definition_digests": [
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+      "e1b3b217cacc3b3cf416bb8079fa3dc87a46e53a17b727e05140e1b9131a576e",
+      "0b5c897a0ce4a93d4e8a756dd4b979c8b8b16a549ec0118a5863c2d4bb9e4bc3",
+      "c9cb4c83744f5422121f101588b9444c90af7570db6648f6e5dd155c1e794d44"
+    ],
+    "route_fingerprints": {
+      "csv-reusable-schema-local-training.generated": "0b0ea6705ec817c9008c84fa6a1b8e090e5dbc801affaa2fe1959eaebdd069e9",
+      "csv-reusable-schema-local-training.reference": "d253316ae5bc703f2aa385c0ee179e2edb50f9c806a202beea6e4e2e18aa62be"
+    },
+    "executable_dependencies": {
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py": "7ccaea3c80c7c9d71853999e47112a77d0393c8e26c98198096545f7d58615bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py": "41df9ff33d90dafa6210fdb1e8f045b09ae900258357114a424f36d0c845987a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py": "f4032f461d77e330e7f9ad06d821817a8901d7d29b24ab51afb8c2e8664a66a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/artifact_store.py": "5c34cd0c5d631c5609b4f23795daef1bf0b5ca72756598b93a71a193f1f7bf23",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/__init__.py": "388afb63319bcaa278b0ba9c4860d62bf3bb89c1932fc3a22dcb56614cbf9835",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/adapters.py": "1b780590dbc9b2a8bedff87a670ab6345f53ea4f9005d44a0876f21c8002433f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/boundary.py": "3e75e70a932508a8488739d7463edd1eed5dd28b1606c3a5463da882f473907e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/budget.py": "cab960c0c1083e87d8b157d084e2cf109fc0f6cc286ed10cd34633ba08a6174b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py": "1786318285b76ad1741fb266ccc120b8ef6f85546dad793494059d5021e68076",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/comparison.py": "419bf14ceb9d46b876277f949266222a590137214d7b2424d485e518c2e51c7d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/container_worker.py": "2f4a9d3bb85fa0a7be41419bd7a76daf2c2c2f43713c0a799a4a004e7e9ff8e5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/containment.py": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/controlled_fixture.py": "ac32d042b3221c93a8fd7e6713227710c0ea50ff4cf8206e466e2a78d362487e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/destinations.py": "9fc02703a7e6785bdebf63568b053eae21ec2d05920b5205a4c03eaeffba0a08",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "b56a83fa4df309a3d415fd10d7c72430cd556c2f2ad2e52e3f036d68dd6b9296",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/onboarding.py": "d09c60ced4eea0ed27dc3c903b83eea250be0d4fc73f20396c42e1b048f8b74c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/pilot.py": "e484b494435236c17b9342986db3bba05b5fe7044b88eead737eaa741fb72518",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py": "333939219c7caac7f9a66d0acbcbd98b262900a24809fbbe60d1aa3835cbe05f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recovery.py": "af91beb82613e30a76f71988658db111c4aaa5309f96a852d4a4ad3cff28c2ce",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/reporting.py": "4aec948f7773de6034632dbe01336a13f2f5ec4b3086f6a8f2e64b377d0e1cfb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/service.py": "78d871388fe423699e1d8a59dda81cb345fa4568af01c10ca48c844e2dfac7f3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/tools.py": "686e00f925740e30bb2df02c2d2674c3d6e884fef50464c9e0513e0107c8bd59",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "0621e16c39689fd84abb5e931f995d82475b595070c0c00dbcaef7fe9c850f6e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/worker.py": "e7838401cf937b697217331c10184159f81e828a8d7aaf9860af4db71529dbfa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/attempts.py": "265711ad218a21d368e615529c59a8d0a757a0f1bb4f0cf223555fee9569ce4f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/benchmarking.py": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cache_affinity.py": "e7da8796cba11d91a6afe08f4fe84035fc5eb1c365dd685556a8809292530f3f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/__init__.py": "52ba8f97715a1ad0bb0b77101af30e90a60f6eec8d54cd7572fc5565e1a6aeeb",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/entitlements.py": "70e44025aa58c979350b0981bdb819eb3e69a0228083d47f927884b94f3bd50c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/evidence.py": "b7a8f3841fb9420d655fb2ab66bfde9f6daa6d5a1188a244c5ee5e2354a21197",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/policy.py": "f64662425c3add67fdb5cb5c921d2d5bbccdffea90e552cc11c4d9f4cb1a9261",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/reservations.py": "9635df6e8f2bf9b1ab1733667c7371a417934289cc12f3a68c6cd8599e80aa58",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cli.py": "aa2093e51890fe7d90c8ab7d9418ac1f2f2b4dc5a8fbb69bb41b202037afe72e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/codex_capture.py": "8a9665a9c9485e83ab2ee9e14d74f1470b3738731cef17ddcbd69b52e3ca592b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/config.py": "b11459ea4432808520741d951b7e79776ed613c1a088c407692ad1dee6690f24",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/conformance.py": "42c22969c67ba10ac8fe3dbecf9eefbfe4572dda38887f41e46868da7f3a381c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/discovery.py": "fd480761cc839f0719b1220153498252fc9f3f3f53edeb21b5e9c57cc616bbaa",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/__init__.py": "c4336b042572eeb363ab48c6c73631bcb9100ff8749464f9fd4da3b1eb53eb74",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/aggregates.py": "9045a8f9d969fbb874fd5420c56f0c840294f21b5c7b565741b10a02f5e19354",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/canonical.py": "54aa8a1709cba41bcd1179bbcdae135433381130a30c17b219d72ce7e36d501f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/disclosure.py": "5a21fe2f9b0e9e4bf40fa79b9cc6bec985ec74b77461d22a8df7e9b56dd6bf1e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/execution.py": "1cb851c024f9a0ae5cfda48be194370453459bf55cddd878a7e4617efd5857d3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/prepared.py": "90eb07d845cbb3a0b36310961e0d22de21a68efe763c5b5d73307867a4c24161",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/quotes.py": "2044c60a8743dfa242e716e5b618fab49bbb55da83027519829d503d155c0acd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/signing.py": "f7750a9124bfcaea01316b96918d270bd572b774e6dffbcba17168d39e61ea65",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/trust.py": "dd11fb7c5f759895e262d117bc3ac89a61c64c6b7fee0310e468be86d649c066",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economics.py": "8fa9c96a4072ebea5a8b3228833e92c613443cbf310c72b388306f0cf4bffc72",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/errors.py": "c51312a14bf22c1f8132f8a16fe570c61245c92e28c0f3eda6648390016aea00",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/estimator.py": "a37bbfd9f3e888354d7c6f50176d131d656d16a2f57cc218f878de702104c60e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/__init__.py": "d30e96668b295d873113f829f8314a06665dc28b449b5d60b816b8da4ebd19f6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/proof_cli.py": "e424112ba1841edb99f997a0d365a4c3655bbd234e7b41c1f4df0d36965c065c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/text_stats_cli.py": "452ada1c0c75a6f62d45baeea431ae1dd13b6c3e4a7b49e0c6c1c70c28301084",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/tools.py": "ebe617bbb89ad87c21cb4dfaec3f6907adddd79deef8b1853162d2fb0af06e41",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/__init__.py": "f68e20884d31645e331c7cfcc1e1ce30579d3bb55cb80d47a877da8fea6bd716",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/base.py": "66bdfcff71168ba8c4f56157426da865bd061870c1d2782028ee395c1f03becf",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/command.py": "3d43ea780660393c0b6e1bc6d5c4b6c4c70719c845c2cb8a7f1f3582ec931360",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/delegate.py": "c580cc4d8baeb23643950a6facf39a8980b08dea11dd46bba7934cefa049318e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/host.py": "e5228971b9cba702afc53d963442cfc60803e3b8895108eb6797da04b9a1d28a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/http.py": "596c626e772462fa188e9ba8b73ad65c7d7e21a0eae4d9d9c04ebcf2e726d68c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/managed_host.py": "2d84dd05b1c06d914a4552f840f8c1442fbd5656ca05fd113561ebf0d329bfb0",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/mcp.py": "6d62cfc329b3c697938b170fb086fdc3db849ca6856284f88734e188bb7e2219",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/network.py": "132f73e5fa5290c1e51b049abf689385207026b3692f7ca476c914150b7a101f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/parsing.py": "c8582f19bfb4d5ea59864484d33989d37d8a69910619884d15552248ff65d43b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python.py": "997054c0ef5e0c56e2e4d40103d5994e25b6739eaf78460316ac11a21c08e092",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python_worker.py": "6452fa5d189bd6f8ad7a761f45584f09ecaac302c8e7d80dabd035a3c291bcd6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/host_bridge.py": "0be103b73bbb8f7e11fa857d9631b64d2aefae0644888e120fa7f689655a20c8",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/__init__.py": "4ec79da28db2ddcccf62ee4afdca457489a58625523c8eb474e30213fbdb22b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/base.py": "fccc3daf7838c2cb8e14e0703bbdffc4dc765d768b30d7a0f3f9c0afd987375c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_exec.py": "0291a202f829b20f97376bfb72f0df6ef1ef170d0cf3c8affc2315178faa5162",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_inspection.py": "de8df4e6cb77f8ffe7e1be5d92ef8bfede70faad5e5f0556e84ea8857724081f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_invocation.py": "4dd18987e8bc606e07278762c5c4d123268d6f78a93a7675e2aae6baf25ff450",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_models.py": "abeb488f7c533064a3a6c745079c0ea5b29e8c6bb0af92a4fc1a4982fad9f51f",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_signin.py": "dc609895eff2be6ff84e2eda536bf06b40aad798ba2f2da07f6fa0f8472b7933",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/registry.py": "e98a2d3b17f480d4d089d795ca2587fb738c18e9f2e442f73c76cc5189a2bf95",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/instrumentation.py": "e956105a2cfae23d4897b0a89099d28f5563f53c017129d28c11de60fee4fe47",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/__init__.py": "8ea11f622bc0175dbf0d09e682bd6c12098857ebd1462a12f98dacdb81844179",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/tool_schemas.py": "23d384ec5bbc6f6f6b90f55315600dbc70da936d45ad1852c6b6eadd2b411bf6",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/__init__.py": "8a0697b9772b7a21328339216c9ab7c39cd3aeb78a1082e12888f5ff0a604ecc",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/service.py": "2ab6c25749a29e3450598e35d06dddb41aeb68bf3ee0f45973d439ec01e1bfa7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/__init__.py": "279f2d722aa971af13149e13e010fd6a33c90aaeecf27077c661f2ebd781e4ae",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py": "f66535dda606a7013538ad5456728f7fba1ec6684c8070a002528ecf7f6777ef",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/headers.py": "b0436321a2b6d5aec44344e950d953d0f8051568b5fa9207b3c6211a5a8e569d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/server.py": "03ddd0e1e805e5be74eafbd1b01d80a129973ecbdb9fc4eb12729b2027ed7957",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py": "03cda305f56cae4ea20a00a8871adc31a05c2555e98245cdcff5e8f993d67cc7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/payments.py": "dc6b5814c0874f97f267a378990b50df182f7722fbd96f426a2c3006569e3317",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/policy.py": "5eb1320ae59a4bb9c81399a782896f7a50343b8e867da4bf72de31e2cd8cf8a5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/profiler.py": "cc9a9e6dc1382a6bcd69297109eaef0360de72120730868872d6a1d8ae78a7b9",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/proofs.py": "862e4f056f4eb5b7a2f30cd8cac3f269d86ba649da495f523e59f62699e66bd5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_ingest.py": "977459d25a37e8c7f932b93a6cc996b805ea169115408eeac16bdc9bedeeea5d",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_operations.py": "e5b41460ad2f0722f77ac0c47b30ce7afa55227a9b277c78723fef47db513566",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_package.py": "110104c1a1a840c5ff2cff6e7baa76ee1ce51bc887e7e36e64ff47b00721e058",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/qualification.py": "5e8a62900e3ca35ab1207bd9964fbc4b340a81990df927466794010629ab7398",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/registry.py": "d01ecef8ba1349b5ca1b15b7485876d888a80f86042cd23b288c1dbf3eeae73a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "0e512d280e4be601a6f5d77775c9071584867dd20d22e71dc3f6ae063dd564bd",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/runtime.py": "6740407e22fbbc7e66b7e436fe4ef1c7f74316a08effa3a5414fa7e53d355350",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/scoring.py": "83b8c07e77d9a2a5c6a599355917485444649aad711f343a1d6a206ce4eaa90a",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/sdk.py": "6d8026eb1cc123f0af920d585d96599b4742bcdfd74b77772a254e3e507e1c44",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "4f944b0d54cac2132ec99450cc5fbc454cb367c624f6adced885012734176894",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/telemetry.py": "9a63f08aa475d735731aef0cfc6f3e975fea19cfdf6c8c7cdcce382093ae3a45",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/templates.py": "05a6074b17911a41fe0656b0d3d80b2b098a39b7e46e21ba51d5f281a3b393ea",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/validators.py": "dd84d6957ba6e3685fdbb9b43b74088708b4be2b756eef4957c36984ceb6a019",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/verification.py": "cab39c5a73ed95ab8394531e1a12079d3b11e3e79e773f845810642d86ae144e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/version.py": "88f95809c233bb35bb4f61ca0e499894c911239d5d04b7cd4713cf896adfc3d5",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/workflow.py": "49d5d8953a82c102e2d653d157ba99aaa06422217baf224f6ad56c8e8b314d6c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/__init__.py": "a2544c9338505b7df5f624729c87541fca3970ff5f9eab89c92d6c894ae79d94",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/batch.py": "f378396fe0e20bf3a3e2ba512811e01f53c32f11aeb685f887cf153b7032a732",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/conformance.py": "ee9909178cd95f03acd788974c334a41747c7f1cd9589c1a115847074cefeb91",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/models.py": "062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc"
+    },
+    "suite": {
+      "schema_version": "0.3",
+      "suite_id": "training_suite_ea8e3f375f7d40c089878efd7d1bc890",
+      "domain": "assessment.csv@1",
+      "deterministic_tools_available": true,
+      "seed": 202609277,
+      "repetitions": 1,
+      "routes": [
+        {
+          "route_id": "csv-reusable-schema-local-training.generated",
+          "executor_id": "csv-reusable-schema-local-training.generated",
+          "workflow": null,
+          "provider": null,
+          "model": null,
+          "access_channel": "unknown",
+          "actual_rate_snapshot_id": null,
+          "counterfactual_rate_snapshot_id": null,
+          "subscription_rate_snapshot_id": null,
+          "subscription_resource_pool": null,
+          "subscription_unit": "provider_unit",
+          "validation_output_path": null,
+          "case_input_bindings": {}
+        },
+        {
+          "route_id": "csv-reusable-schema-local-training.reference",
+          "executor_id": "csv-reusable-schema-local-training.reference",
+          "workflow": null,
+          "provider": null,
+          "model": null,
+          "access_channel": "unknown",
+          "actual_rate_snapshot_id": null,
+          "counterfactual_rate_snapshot_id": null,
+          "subscription_rate_snapshot_id": null,
+          "subscription_resource_pool": null,
+          "subscription_unit": "provider_unit",
+          "validation_output_path": null,
+          "case_input_bindings": {}
+        }
+      ],
+      "conditions": [
+        "router-fresh"
+      ],
+      "pricing_snapshots": [],
+      "cases": [
+        {
+          "case_id": "training-plain-0",
+          "split": "training",
+          "action": {
+            "action_id": "act_30bc3d098fab4c94bf06633d7982fd56",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-74774925a702ae80c56fa2a9-0,Ada,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-74774925a702ae80c56fa2a9-0",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "csv.v2:plain:shape-0"
+        },
+        {
+          "case_id": "training-quoted-1",
+          "split": "training",
+          "action": {
+            "action_id": "act_0079b437678749aaaaee5221b61a9bcb",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-f2ae14fd399144e6508819c5-0,Ada,\"line 1\n\"\"quoted\"\", value\"\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-f2ae14fd399144e6508819c5-0",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "quoted",
+          "template_family": "csv.v2:quoted:shape-0"
+        },
+        {
+          "case_id": "training-unicode-2",
+          "split": "training",
+          "action": {
+            "action_id": "act_dc0c76b7fbb740c08dca6f7a93668941",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-4d21dcda582c23c16b1cf0df-0,\u6771\u4eac,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-4d21dcda582c23c16b1cf0df-0",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "csv.v2:unicode:shape-0"
+        },
+        {
+          "case_id": "training-empty-3",
+          "split": "training",
+          "action": {
+            "action_id": "act_95b99b5542164a74bcc9811d4162a5d1",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-6708e51f29788426a2b59c09-0,Ada,\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-6708e51f29788426a2b59c09-0",
+                      "name": "Ada",
+                      "note": ""
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "empty",
+          "template_family": "csv.v2:empty:shape-0"
+        },
+        {
+          "case_id": "training-reordered-4",
+          "split": "training",
+          "action": {
+            "action_id": "act_81e0173be562438ebc6418a82094bc3a",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "note,name,id\r\nexample,Ada,item-94043eac1fa2516fd970947d-0\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-94043eac1fa2516fd970947d-0",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "csv.v2:reordered:shape-0"
+        },
+        {
+          "case_id": "training-semicolon-5",
+          "split": "training",
+          "action": {
+            "action_id": "act_8d157edf38474d069ba3501f1e030b9f",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id;name;note\r\nitem-1145c69d1563c5b571291834-0;Ada;example\r\n",
+              "delimiter": ";"
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-1145c69d1563c5b571291834-0",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "semicolon",
+          "template_family": "csv.v2:semicolon:shape-0"
+        },
+        {
+          "case_id": "training-malformed-6",
+          "split": "training",
+          "action": {
+            "action_id": "act_90f27d6b8eea4632ae61015a2ec6f9ec",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-6e3907aca3d736dc3d44eac9-0,Ada,example\r\n\"unterminated",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "malformed",
+          "template_family": "csv.v2:malformed:shape-0"
+        },
+        {
+          "case_id": "training-plain-7",
+          "split": "training",
+          "action": {
+            "action_id": "act_f3112ef40ef64232ab5fafe33aaa80cb",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note,extra\r\nitem-072bfb7eaf3382c885ca59b2-0,Ada,example,extra value\r\nitem-072bfb7eaf3382c885ca59b2-1,Ada,example,extra value\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-072bfb7eaf3382c885ca59b2-0",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-072bfb7eaf3382c885ca59b2-1",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "csv.v2:plain:shape-1"
+        },
+        {
+          "case_id": "training-quoted-8",
+          "split": "training",
+          "action": {
+            "action_id": "act_9bddfcb2c0f0451a8f334e057e1b7372",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note,extra\r\nitem-685d9107aba25e8ee3132c8f-0,Ada,\"line 1\n\"\"quoted\"\", value\",extra value\r\nitem-685d9107aba25e8ee3132c8f-1,Ada,\"line 1\n\"\"quoted\"\", value\",extra value\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-685d9107aba25e8ee3132c8f-0",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-685d9107aba25e8ee3132c8f-1",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "quoted",
+          "template_family": "csv.v2:quoted:shape-1"
+        },
+        {
+          "case_id": "training-unicode-9",
+          "split": "training",
+          "action": {
+            "action_id": "act_7f1a9861b22141aca3e1ed71c8d72c34",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note,extra\r\nitem-d640421bcb9ddf0fd4c8f218-0,\u6771\u4eac,example,extra value\r\nitem-d640421bcb9ddf0fd4c8f218-1,\u6771\u4eac,example,extra value\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-d640421bcb9ddf0fd4c8f218-0",
+                      "name": "\u6771\u4eac",
+                      "note": "example",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-d640421bcb9ddf0fd4c8f218-1",
+                      "name": "\u6771\u4eac",
+                      "note": "example",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "csv.v2:unicode:shape-1"
+        },
+        {
+          "case_id": "training-empty-10",
+          "split": "training",
+          "action": {
+            "action_id": "act_132c1d3892ea4712ae76e7aed7ea66a9",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note,extra\r\nitem-e0221d9ad42a1de35118facc-0,Ada,,extra value\r\nitem-e0221d9ad42a1de35118facc-1,Ada,,extra value\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-e0221d9ad42a1de35118facc-0",
+                      "name": "Ada",
+                      "note": "",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-e0221d9ad42a1de35118facc-1",
+                      "name": "Ada",
+                      "note": "",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "empty",
+          "template_family": "csv.v2:empty:shape-1"
+        },
+        {
+          "case_id": "training-reordered-11",
+          "split": "training",
+          "action": {
+            "action_id": "act_563849c7f4f84f3390b63957aafeb806",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "extra,note,name,id\r\nextra value,example,Ada,item-5cd48f331eefc29ea2d8880a-0\r\nextra value,example,Ada,item-5cd48f331eefc29ea2d8880a-1\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-5cd48f331eefc29ea2d8880a-0",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-5cd48f331eefc29ea2d8880a-1",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "csv.v2:reordered:shape-1"
+        },
+        {
+          "case_id": "training-semicolon-12",
+          "split": "training",
+          "action": {
+            "action_id": "act_bc8248ea12474f959254ec305866a5a1",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id;name;note;extra\r\nitem-3d4e90653f16ac9ec80c78f9-0;Ada;example;extra value\r\nitem-3d4e90653f16ac9ec80c78f9-1;Ada;example;extra value\r\n",
+              "delimiter": ";"
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-3d4e90653f16ac9ec80c78f9-0",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    },
+                    {
+                      "id": "item-3d4e90653f16ac9ec80c78f9-1",
+                      "name": "Ada",
+                      "note": "example",
+                      "extra": "extra value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "semicolon",
+          "template_family": "csv.v2:semicolon:shape-1"
+        },
+        {
+          "case_id": "training-malformed-13",
+          "split": "training",
+          "action": {
+            "action_id": "act_dde037a4c14b46a19aba18f83a4057b2",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note,extra\r\nitem-709531e06558656dde3a47be-0,Ada,example,extra value\r\nitem-709531e06558656dde3a47be-1,Ada,example,extra value\r\n\"unterminated",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "malformed",
+          "template_family": "csv.v2:malformed:shape-1"
+        },
+        {
+          "case_id": "training-plain-14",
+          "split": "training",
+          "action": {
+            "action_id": "act_1124d0518efd478883b262c8371754f5",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,note\r\nitem-73ee77798e13f6809909932c-0,example\r\nitem-73ee77798e13f6809909932c-1,example\r\nitem-73ee77798e13f6809909932c-2,example\r\nitem-73ee77798e13f6809909932c-3,example\r\nitem-73ee77798e13f6809909932c-4,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-73ee77798e13f6809909932c-0",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-73ee77798e13f6809909932c-1",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-73ee77798e13f6809909932c-2",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-73ee77798e13f6809909932c-3",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-73ee77798e13f6809909932c-4",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "csv.v2:plain:shape-2"
+        },
+        {
+          "case_id": "training-quoted-15",
+          "split": "training",
+          "action": {
+            "action_id": "act_9e6a80c2c4d748aaa8c710a539fe351b",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,note\r\nitem-4ea74695f3d9835d84bc2274-0,\"line 1\n\"\"quoted\"\", value\"\r\nitem-4ea74695f3d9835d84bc2274-1,\"line 1\n\"\"quoted\"\", value\"\r\nitem-4ea74695f3d9835d84bc2274-2,\"line 1\n\"\"quoted\"\", value\"\r\nitem-4ea74695f3d9835d84bc2274-3,\"line 1\n\"\"quoted\"\", value\"\r\nitem-4ea74695f3d9835d84bc2274-4,\"line 1\n\"\"quoted\"\", value\"\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-4ea74695f3d9835d84bc2274-0",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-4ea74695f3d9835d84bc2274-1",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-4ea74695f3d9835d84bc2274-2",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-4ea74695f3d9835d84bc2274-3",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-4ea74695f3d9835d84bc2274-4",
+                      "note": "line 1\n\"quoted\", value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "quoted",
+          "template_family": "csv.v2:quoted:shape-2"
+        },
+        {
+          "case_id": "training-unicode-16",
+          "split": "training",
+          "action": {
+            "action_id": "act_16290c77f1564c49bfa6f3f04879f723",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,note\r\nitem-2fa1f4026fd8cb05ae4a5d89-0,example\r\nitem-2fa1f4026fd8cb05ae4a5d89-1,example\r\nitem-2fa1f4026fd8cb05ae4a5d89-2,example\r\nitem-2fa1f4026fd8cb05ae4a5d89-3,example\r\nitem-2fa1f4026fd8cb05ae4a5d89-4,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-2fa1f4026fd8cb05ae4a5d89-0",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-2fa1f4026fd8cb05ae4a5d89-1",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-2fa1f4026fd8cb05ae4a5d89-2",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-2fa1f4026fd8cb05ae4a5d89-3",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-2fa1f4026fd8cb05ae4a5d89-4",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "csv.v2:unicode:shape-2"
+        },
+        {
+          "case_id": "training-empty-17",
+          "split": "training",
+          "action": {
+            "action_id": "act_f1f7adfda1994e2badf5e4f5fa5e3f10",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,note\r\nitem-fb785d46bd31b788571975e6-0,\r\nitem-fb785d46bd31b788571975e6-1,\r\nitem-fb785d46bd31b788571975e6-2,\r\nitem-fb785d46bd31b788571975e6-3,\r\nitem-fb785d46bd31b788571975e6-4,\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-fb785d46bd31b788571975e6-0",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-fb785d46bd31b788571975e6-1",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-fb785d46bd31b788571975e6-2",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-fb785d46bd31b788571975e6-3",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-fb785d46bd31b788571975e6-4",
+                      "note": ""
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "empty",
+          "template_family": "csv.v2:empty:shape-2"
+        },
+        {
+          "case_id": "training-reordered-18",
+          "split": "training",
+          "action": {
+            "action_id": "act_63bd715352b449328ab068d9ff614e3e",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "note,id\r\nexample,item-ebf20b933f61eb9dfa2e2a92-0\r\nexample,item-ebf20b933f61eb9dfa2e2a92-1\r\nexample,item-ebf20b933f61eb9dfa2e2a92-2\r\nexample,item-ebf20b933f61eb9dfa2e2a92-3\r\nexample,item-ebf20b933f61eb9dfa2e2a92-4\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-ebf20b933f61eb9dfa2e2a92-0",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-ebf20b933f61eb9dfa2e2a92-1",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-ebf20b933f61eb9dfa2e2a92-2",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-ebf20b933f61eb9dfa2e2a92-3",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-ebf20b933f61eb9dfa2e2a92-4",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "csv.v2:reordered:shape-2"
+        },
+        {
+          "case_id": "training-semicolon-19",
+          "split": "training",
+          "action": {
+            "action_id": "act_d6b5acd9bee04609a3cf380ca3810939",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id;note\r\nitem-a6f0021eae026751c73a1a75-0;example\r\nitem-a6f0021eae026751c73a1a75-1;example\r\nitem-a6f0021eae026751c73a1a75-2;example\r\nitem-a6f0021eae026751c73a1a75-3;example\r\nitem-a6f0021eae026751c73a1a75-4;example\r\n",
+              "delimiter": ";"
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-a6f0021eae026751c73a1a75-0",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-a6f0021eae026751c73a1a75-1",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-a6f0021eae026751c73a1a75-2",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-a6f0021eae026751c73a1a75-3",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-a6f0021eae026751c73a1a75-4",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "semicolon",
+          "template_family": "csv.v2:semicolon:shape-2"
+        },
+        {
+          "case_id": "training-malformed-20",
+          "split": "training",
+          "action": {
+            "action_id": "act_e068485241f94b96ab81bb00bf82e685",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,note\r\nitem-8ab7c2311e88f47f70224b69-0,example\r\nitem-8ab7c2311e88f47f70224b69-1,example\r\nitem-8ab7c2311e88f47f70224b69-2,example\r\nitem-8ab7c2311e88f47f70224b69-3,example\r\nitem-8ab7c2311e88f47f70224b69-4,example\r\n\"unterminated",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "malformed",
+          "template_family": "csv.v2:malformed:shape-2"
+        },
+        {
+          "case_id": "training-plain-21",
+          "split": "training",
+          "action": {
+            "action_id": "act_65d603ece5d249c69fdeb509ad95db78",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-058418e433cfbf2e8893b622-0,Ada,example\r\nitem-058418e433cfbf2e8893b622-1,Ada,example\r\nitem-058418e433cfbf2e8893b622-2,Ada,example\r\nitem-058418e433cfbf2e8893b622-3,Ada,example\r\nitem-058418e433cfbf2e8893b622-4,Ada,example\r\nitem-058418e433cfbf2e8893b622-5,Ada,example\r\nitem-058418e433cfbf2e8893b622-6,Ada,example\r\nitem-058418e433cfbf2e8893b622-7,Ada,example\r\nitem-058418e433cfbf2e8893b622-8,Ada,example\r\nitem-058418e433cfbf2e8893b622-9,Ada,example\r\nitem-058418e433cfbf2e8893b622-10,Ada,example\r\nitem-058418e433cfbf2e8893b622-11,Ada,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-0",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-1",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-2",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-3",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-4",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-5",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-6",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-7",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-8",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-9",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-10",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-058418e433cfbf2e8893b622-11",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "plain",
+          "template_family": "csv.v2:plain:shape-3"
+        },
+        {
+          "case_id": "training-quoted-22",
+          "split": "training",
+          "action": {
+            "action_id": "act_d25e8f31be68439289e867b7310f4b20",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-239edace06d4549f95e543ef-0,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-1,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-2,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-3,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-4,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-5,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-6,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-7,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-8,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-9,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-10,Ada,\"line 1\n\"\"quoted\"\", value\"\r\nitem-239edace06d4549f95e543ef-11,Ada,\"line 1\n\"\"quoted\"\", value\"\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-239edace06d4549f95e543ef-0",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-1",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-2",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-3",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-4",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-5",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-6",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-7",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-8",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-9",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-10",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    },
+                    {
+                      "id": "item-239edace06d4549f95e543ef-11",
+                      "name": "Ada",
+                      "note": "line 1\n\"quoted\", value"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "quoted",
+          "template_family": "csv.v2:quoted:shape-3"
+        },
+        {
+          "case_id": "training-unicode-23",
+          "split": "training",
+          "action": {
+            "action_id": "act_d2a475ff707142aea0050398b52d3f70",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-cec814fc238792c00f3f8847-0,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-1,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-2,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-3,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-4,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-5,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-6,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-7,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-8,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-9,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-10,\u6771\u4eac,example\r\nitem-cec814fc238792c00f3f8847-11,\u6771\u4eac,example\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-0",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-1",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-2",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-3",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-4",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-5",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-6",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-7",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-8",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-9",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-10",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-cec814fc238792c00f3f8847-11",
+                      "name": "\u6771\u4eac",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "unicode",
+          "template_family": "csv.v2:unicode:shape-3"
+        },
+        {
+          "case_id": "training-empty-24",
+          "split": "training",
+          "action": {
+            "action_id": "act_6a2b7e140d674fcab9b110622252a3f3",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-47e2736c6fc888e82d1a9ab8-0,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-1,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-2,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-3,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-4,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-5,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-6,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-7,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-8,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-9,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-10,Ada,\r\nitem-47e2736c6fc888e82d1a9ab8-11,Ada,\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-0",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-1",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-2",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-3",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-4",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-5",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-6",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-7",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-8",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-9",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-10",
+                      "name": "Ada",
+                      "note": ""
+                    },
+                    {
+                      "id": "item-47e2736c6fc888e82d1a9ab8-11",
+                      "name": "Ada",
+                      "note": ""
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "empty",
+          "template_family": "csv.v2:empty:shape-3"
+        },
+        {
+          "case_id": "training-reordered-25",
+          "split": "training",
+          "action": {
+            "action_id": "act_72c47d6137d542f7b06e4a4c7aa77c31",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "note,name,id\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-0\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-1\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-2\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-3\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-4\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-5\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-6\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-7\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-8\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-9\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-10\r\nexample,Ada,item-9cb7bca0edfaeb8a9c2c1ab8-11\r\n",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-0",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-1",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-2",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-3",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-4",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-5",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-6",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-7",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-8",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-9",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-10",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-9cb7bca0edfaeb8a9c2c1ab8-11",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "reordered",
+          "template_family": "csv.v2:reordered:shape-3"
+        },
+        {
+          "case_id": "training-semicolon-26",
+          "split": "training",
+          "action": {
+            "action_id": "act_63ee8bd2f3a949b7ae8dc1eb3228ecab",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id;name;note\r\nitem-e191496a81ce80207db587ec-0;Ada;example\r\nitem-e191496a81ce80207db587ec-1;Ada;example\r\nitem-e191496a81ce80207db587ec-2;Ada;example\r\nitem-e191496a81ce80207db587ec-3;Ada;example\r\nitem-e191496a81ce80207db587ec-4;Ada;example\r\nitem-e191496a81ce80207db587ec-5;Ada;example\r\nitem-e191496a81ce80207db587ec-6;Ada;example\r\nitem-e191496a81ce80207db587ec-7;Ada;example\r\nitem-e191496a81ce80207db587ec-8;Ada;example\r\nitem-e191496a81ce80207db587ec-9;Ada;example\r\nitem-e191496a81ce80207db587ec-10;Ada;example\r\nitem-e191496a81ce80207db587ec-11;Ada;example\r\n",
+              "delimiter": ";"
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "records": [
+                    {
+                      "id": "item-e191496a81ce80207db587ec-0",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-1",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-2",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-3",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-4",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-5",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-6",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-7",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-8",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-9",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-10",
+                      "name": "Ada",
+                      "note": "example"
+                    },
+                    {
+                      "id": "item-e191496a81ce80207db587ec-11",
+                      "name": "Ada",
+                      "note": "example"
+                    }
+                  ]
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "semicolon",
+          "template_family": "csv.v2:semicolon:shape-3"
+        },
+        {
+          "case_id": "training-malformed-27",
+          "split": "training",
+          "action": {
+            "action_id": "act_2139fd931b784a8e832afcae515a60f4",
+            "capability": "assessment.csv@1",
+            "input": {
+              "text": "id,name,note\r\nitem-3798f9f66832fec3d79417fd-0,Ada,example\r\nitem-3798f9f66832fec3d79417fd-1,Ada,example\r\nitem-3798f9f66832fec3d79417fd-2,Ada,example\r\nitem-3798f9f66832fec3d79417fd-3,Ada,example\r\nitem-3798f9f66832fec3d79417fd-4,Ada,example\r\nitem-3798f9f66832fec3d79417fd-5,Ada,example\r\nitem-3798f9f66832fec3d79417fd-6,Ada,example\r\nitem-3798f9f66832fec3d79417fd-7,Ada,example\r\nitem-3798f9f66832fec3d79417fd-8,Ada,example\r\nitem-3798f9f66832fec3d79417fd-9,Ada,example\r\nitem-3798f9f66832fec3d79417fd-10,Ada,example\r\nitem-3798f9f66832fec3d79417fd-11,Ada,example\r\n\"unterminated",
+              "delimiter": ","
+            },
+            "policy": "balanced",
+            "constraints": {
+              "max_cost_usd": null,
+              "max_latency_ms": null,
+              "max_cpu_ms": null,
+              "max_memory_mb_seconds": null,
+              "max_peak_memory_mb": null,
+              "max_gpu_ms": null,
+              "max_network_bytes": null,
+              "max_context_tokens": null,
+              "min_success_probability": 0.7,
+              "min_quality_score": 0.5,
+              "max_risk_score": 0.5,
+              "max_side_effect": "read",
+              "allow_network": true,
+              "require_local": false,
+              "allowed_executor_kinds": null,
+              "allowed_executor_ids": null,
+              "denied_executor_ids": [],
+              "allowed_data_residency": null
+            },
+            "context": {
+              "data_sensitivity": "internal",
+              "state_locality": null,
+              "preferred_region": null,
+              "compute": {
+                "available_memory_mb": null,
+                "available_cpu_fraction": null,
+                "available_gpu_ms": null,
+                "context_tokens_remaining": null,
+                "monetary_budget_remaining_usd": null,
+                "network_metered": false
+              },
+              "labels": {},
+              "traceparent": null,
+              "subscription_quotas": {},
+              "cache_affinity": null
+            },
+            "idempotency_key": null
+          },
+          "validators": [
+            {
+              "kind": "exact_match",
+              "config": {
+                "expected": {
+                  "error": "invalid_input"
+                }
+              },
+              "required": true
+            }
+          ],
+          "variation": "malformed",
+          "template_family": "csv.v2:malformed:shape-3"
+        }
+      ],
+      "baseline_route_id": "csv-reusable-schema-local-training.reference",
+      "acknowledge_cash_risk": false,
+      "max_total_cash_usd": "0",
+      "allow_zero_subscription_weight": true,
+      "sequential_stages": true,
+      "stop_on_screening_failure": true,
+      "warmup_cases": [],
+      "paired_order": true
+    },
+    "applicability": {
+      "family": [
+        "csv"
+      ],
+      "size": [
+        "small"
+      ],
+      "structure": [
+        "[1, 3, false, false, false, false, true]",
+        "[1, 3, false, true, true, false, true]",
+        "[1, 3, false, false, false, true, true]",
+        "[1, 3, false, false, false, false, false]",
+        "[1, 3, true, true, false, false, true]",
+        "[2, 4, false, false, false, false, false]",
+        "[2, 4, false, true, true, false, false]",
+        "[2, 4, false, false, false, true, false]",
+        "[2, 4, true, true, false, false, false]",
+        "[5, 2, false, false, false, false, true]",
+        "[5, 2, false, true, true, false, true]",
+        "[5, 2, false, false, false, true, true]",
+        "[5, 2, false, false, false, false, false]",
+        "[5, 2, true, true, false, false, true]",
+        "[12, 3, false, false, false, false, true]",
+        "[12, 3, false, true, true, false, true]",
+        "[12, 3, false, false, false, true, true]",
+        "[12, 3, false, false, false, false, false]",
+        "[12, 3, true, true, false, false, true]"
+      ],
+      "delimiter": [
+        ",",
+        ";"
+      ],
+      "unicode": [
+        false,
+        true
+      ],
+      "columns": [
+        "[\"id\", \"name\", \"note\"]",
+        "[\"extra\", \"id\", \"name\", \"note\"]",
+        "[\"id\", \"note\"]"
+      ],
+      "unicode_characters": [
+        "",
+        "\u4eac\u6771"
+      ]
+    },
+    "blocked_reasons": [],
+    "setup_cost_ids": [
+      "setup_cost_ddd3d55feaa643869e76aa1f5086e855",
+      "setup_b3b35a98d40e4239af0c30e2f39c3cbe"
+    ],
+    "planning_request_ids": [
+      "planning_452de4daa10440a4af39a2fffab9f78c"
+    ]
+  },
+  "amendment": {
+    "schema_version": "assessment.scope-amendment.v1",
+    "amendment_id": "amendment_ceceaea02cca457a953923adf1e533e1",
+    "authorization_id": "onboarding",
+    "authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "subject_digests": [
+      "00c52606b785db25e9894a2c14bb4d6e632f14e80fcb0fab7926239871ef685e"
+    ],
+    "recipe_digests": [
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf"
+    ],
+    "environment_digests": [
+      "0b5c897a0ce4a93d4e8a756dd4b979c8b8b16a549ec0118a5863c2d4bb9e4bc3"
+    ],
+    "reviewed_digests": [
+      "00c52606b785db25e9894a2c14bb4d6e632f14e80fcb0fab7926239871ef685e",
+      "0b5c897a0ce4a93d4e8a756dd4b979c8b8b16a549ec0118a5863c2d4bb9e4bc3",
+      "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+      "c9cb4c83744f5422121f101588b9444c90af7570db6648f6e5dd155c1e794d44",
+      "e1b3b217cacc3b3cf416bb8079fa3dc87a46e53a17b727e05140e1b9131a576e"
+    ],
+    "issued_at": "2026-09-28T02:20:44.047375Z"
+  },
+  "definitions": {
+    "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf": {
+      "schema_version": "assessment.recipe.v1",
+      "recipe_id": "csv.v2",
+      "implementation_digest": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+      "capability": "assessment.csv@1",
+      "description": "CSV to string-valued records with strict row widths and unique headers.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 100000
+          },
+          "delimiter": {
+            "enum": [
+              ",",
+              ";",
+              "\t"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "delimiter"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "records"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "error": {
+                "const": "invalid_input"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "generator": "builtin:csv:2",
+      "generator_config": {},
+      "grader": "exact_match:1",
+      "extractor": "builtin:csv:3",
+      "variations": [
+        "plain",
+        "quoted",
+        "unicode",
+        "empty",
+        "reordered",
+        "semicolon",
+        "malformed"
+      ],
+      "exclusions": [
+        "Inputs outside the reviewed limits",
+        "Unreviewed formats and encodings"
+      ],
+      "dependencies": {
+        "recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3"
+      },
+      "screening_cases": 8,
+      "minimum_holdout_cases": 100,
+      "minimum_paired_cases": 20,
+      "maximum_correctness_failures": 0
+    },
+    "c9cb4c83744f5422121f101588b9444c90af7570db6648f6e5dd155c1e794d44": {
+      "schema_version": "assessment.comparison.v1",
+      "structure": "direct",
+      "candidate": {
+        "executor_id": "csv-reusable-schema-local-training.generated",
+        "fingerprint": "0b0ea6705ec817c9008c84fa6a1b8e090e5dbc801affaa2fe1959eaebdd069e9",
+        "dependencies": {},
+        "host_config": null
+      },
+      "baseline": {
+        "executor_id": "csv-reusable-schema-local-training.reference",
+        "fingerprint": "d253316ae5bc703f2aa385c0ee179e2edb50f9c806a202beea6e4e2e18aa62be",
+        "dependencies": {},
+        "host_config": null
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "router-fresh"
+    },
+    "0b5c897a0ce4a93d4e8a756dd4b979c8b8b16a549ec0118a5863c2d4bb9e4bc3": {
+      "environment_id": "csv-reusable-schema-local-training-offline",
+      "kind": "container",
+      "identity": {
+        "purpose": "Frozen generated source training validation, no model turns or qualification claims"
+      },
+      "network": false,
+      "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+      "cpu_count": 1.0,
+      "memory_mb": 512,
+      "process_limit": 64,
+      "container_runtime": "/usr/local/bin/docker",
+      "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+      "read_only_roots": []
+    },
+    "e1b3b217cacc3b3cf416bb8079fa3dc87a46e53a17b727e05140e1b9131a576e": {
+      "candidate": {
+        "id": "csv-reusable-schema-local-training.generated",
+        "capability": "assessment.csv@1",
+        "kind": "command",
+        "description": "Exact generated CSV reusable tool; training validation only",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 100000
+            },
+            "delimiter": {
+              "enum": [
+                ",",
+                ";",
+                "\t"
+              ]
+            }
+          },
+          "required": [
+            "text",
+            "delimiter"
+          ],
+          "additionalProperties": false
+        },
+        "output_schema": {
+          "type": "object",
+          "oneOf": [
+            {
+              "properties": {
+                "records": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "records"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "properties": {
+                "error": {
+                  "const": "invalid_input"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "argv": [
+            "python3",
+            "-c",
+            "import csv\nimport io\nimport json\nimport sys\n\n\ndef convert_csv(payload):\n    \"\"\"Convert CSV to string-valued records, or return invalid_input.\"\"\"\n    invalid = {\"error\": \"invalid_input\"}\n    if not isinstance(payload, dict) or set(payload) != {\"text\", \"delimiter\"}:\n        return invalid\n    text = payload[\"text\"]\n    delimiter = payload[\"delimiter\"]\n    if not isinstance(text, str) or len(text) > 100000:\n        return invalid\n    if not isinstance(delimiter, str) or delimiter not in (\",\", \";\", \"\\t\"):\n        return invalid\n\n    try:\n        reader = csv.reader(\n            io.StringIO(text, newline=\"\"),\n            delimiter=delimiter,\n            quotechar='\"',\n            doublequote=True,\n            skipinitialspace=False,\n            strict=True,\n        )\n        headers = next(reader, None)\n        if not headers or len(set(headers)) != len(headers):\n            return invalid\n        records = []\n        for row in reader:\n            if len(row) != len(headers):\n                return invalid\n            records.append(dict(zip(headers, row)))\n        return {\"records\": records}\n    except (csv.Error, ValueError):\n        return invalid\n\n\ndef main():\n    try:\n        payload = json.loads(sys.stdin.buffer.read().decode(\"utf-8\"))\n    except (UnicodeError, ValueError):\n        result = {\"error\": \"invalid_input\"}\n    else:\n        result = convert_csv(payload)\n    sys.stdout.write(json.dumps(result, ensure_ascii=True) + \"\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+          ],
+          "argv_literal": true,
+          "stdin_json": true,
+          "timeout_seconds": 30,
+          "max_output_bytes": 1000000,
+          "output": {
+            "type": "json"
+          }
+        }
+      },
+      "baseline": {
+        "id": "csv-reusable-schema-local-training.reference",
+        "capability": "assessment.csv@1",
+        "kind": "python",
+        "description": "CSV to string-valued records with strict row widths and unique headers.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 100000
+            },
+            "delimiter": {
+              "enum": [
+                ",",
+                ";",
+                "\t"
+              ]
+            }
+          },
+          "required": [
+            "text",
+            "delimiter"
+          ],
+          "additionalProperties": false
+        },
+        "output_schema": {
+          "type": "object",
+          "oneOf": [
+            {
+              "properties": {
+                "records": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "records"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "properties": {
+                "error": {
+                  "const": "invalid_input"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 5.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "callable": "aeep.assessment.recipes:reference_csv"
+        }
+      },
+      "dependencies": [],
+      "executable_dependencies": {
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py": "7ccaea3c80c7c9d71853999e47112a77d0393c8e26c98198096545f7d58615bd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__main__.py": "41df9ff33d90dafa6210fdb1e8f045b09ae900258357114a424f36d0c845987a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py": "f4032f461d77e330e7f9ad06d821817a8901d7d29b24ab51afb8c2e8664a66a5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/artifact_store.py": "5c34cd0c5d631c5609b4f23795daef1bf0b5ca72756598b93a71a193f1f7bf23",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/__init__.py": "388afb63319bcaa278b0ba9c4860d62bf3bb89c1932fc3a22dcb56614cbf9835",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/adapters.py": "1b780590dbc9b2a8bedff87a670ab6345f53ea4f9005d44a0876f21c8002433f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/boundary.py": "3e75e70a932508a8488739d7463edd1eed5dd28b1606c3a5463da882f473907e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/budget.py": "cab960c0c1083e87d8b157d084e2cf109fc0f6cc286ed10cd34633ba08a6174b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/cli.py": "1786318285b76ad1741fb266ccc120b8ef6f85546dad793494059d5021e68076",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/comparison.py": "419bf14ceb9d46b876277f949266222a590137214d7b2424d485e518c2e51c7d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/container_worker.py": "2f4a9d3bb85fa0a7be41419bd7a76daf2c2c2f43713c0a799a4a004e7e9ff8e5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/containment.py": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/controlled_fixture.py": "ac32d042b3221c93a8fd7e6713227710c0ea50ff4cf8206e466e2a78d362487e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/destinations.py": "9fc02703a7e6785bdebf63568b053eae21ec2d05920b5205a4c03eaeffba0a08",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/extensions.py": "b801124d4d32c2f7125cad8e626627b1c462dd3a9ec84c3d8820c1a7096879b5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "b56a83fa4df309a3d415fd10d7c72430cd556c2f2ad2e52e3f036d68dd6b9296",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/onboarding.py": "d09c60ced4eea0ed27dc3c903b83eea250be0d4fc73f20396c42e1b048f8b74c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/pilot.py": "e484b494435236c17b9342986db3bba05b5fe7044b88eead737eaa741fb72518",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/planning.py": "333939219c7caac7f9a66d0acbcbd98b262900a24809fbbe60d1aa3835cbe05f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recipes.py": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/recovery.py": "af91beb82613e30a76f71988658db111c4aaa5309f96a852d4a4ad3cff28c2ce",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/reporting.py": "4aec948f7773de6034632dbe01336a13f2f5ec4b3086f6a8f2e64b377d0e1cfb",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/service.py": "78d871388fe423699e1d8a59dda81cb345fa4568af01c10ca48c844e2dfac7f3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/tools.py": "686e00f925740e30bb2df02c2d2674c3d6e884fef50464c9e0513e0107c8bd59",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "0621e16c39689fd84abb5e931f995d82475b595070c0c00dbcaef7fe9c850f6e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/workbook.py": "93cb486f2549f4bf87ea0d66ffc6f85c101567f5a21cedd819aec373bca0e179",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/worker.py": "e7838401cf937b697217331c10184159f81e828a8d7aaf9860af4db71529dbfa",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/attempts.py": "265711ad218a21d368e615529c59a8d0a757a0f1bb4f0cf223555fee9569ce4f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/benchmarking.py": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cache_affinity.py": "e7da8796cba11d91a6afe08f4fe84035fc5eb1c365dd685556a8809292530f3f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/__init__.py": "52ba8f97715a1ad0bb0b77101af30e90a60f6eec8d54cd7572fc5565e1a6aeeb",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/entitlements.py": "70e44025aa58c979350b0981bdb819eb3e69a0228083d47f927884b94f3bd50c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/evidence.py": "b7a8f3841fb9420d655fb2ab66bfde9f6daa6d5a1188a244c5ee5e2354a21197",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/policy.py": "f64662425c3add67fdb5cb5c921d2d5bbccdffea90e552cc11c4d9f4cb1a9261",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/reservations.py": "9635df6e8f2bf9b1ab1733667c7371a417934289cc12f3a68c6cd8599e80aa58",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/cli.py": "aa2093e51890fe7d90c8ab7d9418ac1f2f2b4dc5a8fbb69bb41b202037afe72e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/codex_capture.py": "8a9665a9c9485e83ab2ee9e14d74f1470b3738731cef17ddcbd69b52e3ca592b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/config.py": "b11459ea4432808520741d951b7e79776ed613c1a088c407692ad1dee6690f24",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/conformance.py": "42c22969c67ba10ac8fe3dbecf9eefbfe4572dda38887f41e46868da7f3a381c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/discovery.py": "fd480761cc839f0719b1220153498252fc9f3f3f53edeb21b5e9c57cc616bbaa",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/__init__.py": "c4336b042572eeb363ab48c6c73631bcb9100ff8749464f9fd4da3b1eb53eb74",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/aggregates.py": "9045a8f9d969fbb874fd5420c56f0c840294f21b5c7b565741b10a02f5e19354",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/canonical.py": "54aa8a1709cba41bcd1179bbcdae135433381130a30c17b219d72ce7e36d501f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/disclosure.py": "5a21fe2f9b0e9e4bf40fa79b9cc6bec985ec74b77461d22a8df7e9b56dd6bf1e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/execution.py": "1cb851c024f9a0ae5cfda48be194370453459bf55cddd878a7e4617efd5857d3",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/prepared.py": "90eb07d845cbb3a0b36310961e0d22de21a68efe763c5b5d73307867a4c24161",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/quotes.py": "2044c60a8743dfa242e716e5b618fab49bbb55da83027519829d503d155c0acd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/signing.py": "f7750a9124bfcaea01316b96918d270bd572b774e6dffbcba17168d39e61ea65",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economic/trust.py": "dd11fb7c5f759895e262d117bc3ac89a61c64c6b7fee0310e468be86d649c066",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/economics.py": "8fa9c96a4072ebea5a8b3228833e92c613443cbf310c72b388306f0cf4bffc72",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/errors.py": "c51312a14bf22c1f8132f8a16fe570c61245c92e28c0f3eda6648390016aea00",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/estimator.py": "a37bbfd9f3e888354d7c6f50176d131d656d16a2f57cc218f878de702104c60e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/__init__.py": "d30e96668b295d873113f829f8314a06665dc28b449b5d60b816b8da4ebd19f6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/proof_cli.py": "e424112ba1841edb99f997a0d365a4c3655bbd234e7b41c1f4df0d36965c065c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/text_stats_cli.py": "452ada1c0c75a6f62d45baeea431ae1dd13b6c3e4a7b49e0c6c1c70c28301084",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/examples/tools.py": "ebe617bbb89ad87c21cb4dfaec3f6907adddd79deef8b1853162d2fb0af06e41",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/__init__.py": "f68e20884d31645e331c7cfcc1e1ce30579d3bb55cb80d47a877da8fea6bd716",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/base.py": "66bdfcff71168ba8c4f56157426da865bd061870c1d2782028ee395c1f03becf",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/command.py": "3d43ea780660393c0b6e1bc6d5c4b6c4c70719c845c2cb8a7f1f3582ec931360",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/delegate.py": "c580cc4d8baeb23643950a6facf39a8980b08dea11dd46bba7934cefa049318e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/host.py": "e5228971b9cba702afc53d963442cfc60803e3b8895108eb6797da04b9a1d28a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/http.py": "596c626e772462fa188e9ba8b73ad65c7d7e21a0eae4d9d9c04ebcf2e726d68c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/managed_host.py": "2d84dd05b1c06d914a4552f840f8c1442fbd5656ca05fd113561ebf0d329bfb0",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/mcp.py": "6d62cfc329b3c697938b170fb086fdc3db849ca6856284f88734e188bb7e2219",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/network.py": "132f73e5fa5290c1e51b049abf689385207026b3692f7ca476c914150b7a101f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/parsing.py": "c8582f19bfb4d5ea59864484d33989d37d8a69910619884d15552248ff65d43b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python.py": "997054c0ef5e0c56e2e4d40103d5994e25b6739eaf78460316ac11a21c08e092",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/executors/python_worker.py": "6452fa5d189bd6f8ad7a761f45584f09ecaac302c8e7d80dabd035a3c291bcd6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/host_bridge.py": "0be103b73bbb8f7e11fa857d9631b64d2aefae0644888e120fa7f689655a20c8",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/__init__.py": "4ec79da28db2ddcccf62ee4afdca457489a58625523c8eb474e30213fbdb22b9",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/base.py": "fccc3daf7838c2cb8e14e0703bbdffc4dc765d768b30d7a0f3f9c0afd987375c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "d226095b0a980445aa8158002aee543644a7032fe598b6003026dcbb0b79e5f7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_exec.py": "0291a202f829b20f97376bfb72f0df6ef1ef170d0cf3c8affc2315178faa5162",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_inspection.py": "de8df4e6cb77f8ffe7e1be5d92ef8bfede70faad5e5f0556e84ea8857724081f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_invocation.py": "4dd18987e8bc606e07278762c5c4d123268d6f78a93a7675e2aae6baf25ff450",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_metrics.py": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_models.py": "abeb488f7c533064a3a6c745079c0ea5b29e8c6bb0af92a4fc1a4982fad9f51f",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "45b5aa684e2d125cba9155a1eefe050863163fbfbccb66f9add504dcddc5c15b",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_signin.py": "dc609895eff2be6ff84e2eda536bf06b40aad798ba2f2da07f6fa0f8472b7933",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/registry.py": "e98a2d3b17f480d4d089d795ca2587fb738c18e9f2e442f73c76cc5189a2bf95",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/instrumentation.py": "e956105a2cfae23d4897b0a89099d28f5563f53c017129d28c11de60fee4fe47",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/__init__.py": "8ea11f622bc0175dbf0d09e682bd6c12098857ebd1462a12f98dacdb81844179",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/integrations/tool_schemas.py": "23d384ec5bbc6f6f6b90f55315600dbc70da936d45ad1852c6b6eadd2b411bf6",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/__init__.py": "8a0697b9772b7a21328339216c9ab7c39cd3aeb78a1082e12888f5ff0a604ecc",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/market_server/service.py": "2ab6c25749a29e3450598e35d06dddb41aeb68bf3ee0f45973d439ec01e1bfa7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/__init__.py": "279f2d722aa971af13149e13e010fd6a33c90aaeecf27077c661f2ebd781e4ae",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py": "f66535dda606a7013538ad5456728f7fba1ec6684c8070a002528ecf7f6777ef",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/headers.py": "b0436321a2b6d5aec44344e950d953d0f8051568b5fa9207b3c6211a5a8e569d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/server.py": "03ddd0e1e805e5be74eafbd1b01d80a129973ecbdb9fc4eb12729b2027ed7957",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py": "03cda305f56cae4ea20a00a8871adc31a05c2555e98245cdcff5e8f993d67cc7",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/payments.py": "dc6b5814c0874f97f267a378990b50df182f7722fbd96f426a2c3006569e3317",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/policy.py": "5eb1320ae59a4bb9c81399a782896f7a50343b8e867da4bf72de31e2cd8cf8a5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/profiler.py": "cc9a9e6dc1382a6bcd69297109eaef0360de72120730868872d6a1d8ae78a7b9",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/proofs.py": "862e4f056f4eb5b7a2f30cd8cac3f269d86ba649da495f523e59f62699e66bd5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_ingest.py": "977459d25a37e8c7f932b93a6cc996b805ea169115408eeac16bdc9bedeeea5d",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_operations.py": "e5b41460ad2f0722f77ac0c47b30ce7afa55227a9b277c78723fef47db513566",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/provider_package.py": "110104c1a1a840c5ff2cff6e7baa76ee1ce51bc887e7e36e64ff47b00721e058",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/qualification.py": "5e8a62900e3ca35ab1207bd9964fbc4b340a81990df927466794010629ab7398",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/registry.py": "d01ecef8ba1349b5ca1b15b7485876d888a80f86042cd23b288c1dbf3eeae73a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "0e512d280e4be601a6f5d77775c9071584867dd20d22e71dc3f6ae063dd564bd",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/runtime.py": "6740407e22fbbc7e66b7e436fe4ef1c7f74316a08effa3a5414fa7e53d355350",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/scoring.py": "83b8c07e77d9a2a5c6a599355917485444649aad711f343a1d6a206ce4eaa90a",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/sdk.py": "6d8026eb1cc123f0af920d585d96599b4742bcdfd74b77772a254e3e507e1c44",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "4f944b0d54cac2132ec99450cc5fbc454cb367c624f6adced885012734176894",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/telemetry.py": "9a63f08aa475d735731aef0cfc6f3e975fea19cfdf6c8c7cdcce382093ae3a45",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/templates.py": "05a6074b17911a41fe0656b0d3d80b2b098a39b7e46e21ba51d5f281a3b393ea",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/validators.py": "dd84d6957ba6e3685fdbb9b43b74088708b4be2b756eef4957c36984ceb6a019",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/verification.py": "cab39c5a73ed95ab8394531e1a12079d3b11e3e79e773f845810642d86ae144e",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/version.py": "88f95809c233bb35bb4f61ca0e499894c911239d5d04b7cd4713cf896adfc3d5",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/workflow.py": "49d5d8953a82c102e2d653d157ba99aaa06422217baf224f6ad56c8e8b314d6c",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/__init__.py": "a2544c9338505b7df5f624729c87541fca3970ff5f9eab89c92d6c894ae79d94",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/batch.py": "f378396fe0e20bf3a3e2ba512811e01f53c32f11aeb685f887cf153b7032a732",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/conformance.py": "ee9909178cd95f03acd788974c334a41747c7f1cd9589c1a115847074cefeb91",
+        "/Users/edwintse/Documents/aeep-agent-router/src/aeep/x402/models.py": "062b50666ea71ce25733ece8409d125232263a3037a93d758c50e43a03bd56fc"
+      }
+    },
+    "00c52606b785db25e9894a2c14bb4d6e632f14e80fcb0fab7926239871ef685e": {
+      "schema_version": "assessment.subject.v1",
+      "subject_id": "subject_a7914e9d64929e9f552217fb7d52db046c198af85870a793d1761b25126e9bc6",
+      "kind": "command",
+      "location": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/generated/csv_schema_local_records.py",
+      "dependency_digests": {
+        "csv_schema_local_records.py": "18b79710edc85eb72850247a0afc04f6f020ad82fc5c10d3b80d143ae6a5a8a6"
+      },
+      "description": "Locally selected package; declarations are not execution approval.",
+      "input_schema": null,
+      "output_schema": null,
+      "declarations": {
+        "tools": [],
+        "skills": [],
+        "workflows": [],
+        "missing": [
+          "No callable contract found; select a skill, advertise tool schemas, or review a command wrapper."
+        ]
+      }
+    }
+  },
+  "budget_preview": {
+    "campaign_allowance": {
+      "scope": "fresh_campaign_reservations",
+      "stages": [
+        {
+          "stage": "trial",
+          "calls_minimum": 56,
+          "calls_upper": 56,
+          "operations_upper": 56,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 2800.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "warmup",
+          "calls_minimum": 0,
+          "calls_upper": 0,
+          "operations_upper": 0,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.0,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "router_setup",
+          "calls_minimum": 57,
+          "calls_upper": 57,
+          "operations_upper": 57,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 1710,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "grader_validation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "report_generation",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 30,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "static_inspection",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.0012987499358132482,
+          "cash_reservation_upper_usd": "0"
+        },
+        {
+          "stage": "generation_and_proposal",
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "operations_upper": 1,
+          "model_turns": 0,
+          "elapsed_reservation_upper_seconds": 0.07353475003037602,
+          "cash_reservation_upper_usd": "0"
+        }
+      ],
+      "upper_allowance": {
+        "operations": 117,
+        "model_turns": 0,
+        "elapsed_seconds": 4570.074833499966,
+        "cash_usd": "0"
+      },
+      "prior_operations": [
+        {
+          "operation_id": "reusable-build:planning_452de4daa10440a4af39a2fffab9f78c",
+          "stage": "reusable_build",
+          "state": "complete",
+          "elapsed_seconds": 26.67313600005582,
+          "reserved": {
+            "max_operations": 1,
+            "max_model_turns": 1,
+            "max_elapsed_seconds": 605.0,
+            "max_cash_usd": "0.0"
+          }
+        }
+      ],
+      "gaps": [],
+      "fits_remaining": true,
+      "authorization_changed": false,
+      "automatic_retries": 0,
+      "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+    },
+    "purpose": "assessment",
+    "adapter_eligibility": [],
+    "minimum_trial_model_turns": 0,
+    "trial_elapsed_upper_seconds": 2800.0,
+    "evaluation_stage": null,
+    "screening_trial_model_turns": 0,
+    "workers": [
+      {
+        "role": "candidate",
+        "executor_id": "csv-reusable-schema-local-training.generated",
+        "model_worker_profiles": []
+      },
+      {
+        "role": "baseline",
+        "executor_id": "csv-reusable-schema-local-training.reference",
+        "model_worker_profiles": []
+      }
+    ],
+    "model_worker_profile_count": 0,
+    "measurement_concurrency": 1,
+    "remaining": {
+      "model_turns": 4781,
+      "elapsed_seconds": 547893.0615510477,
+      "operations": 45025,
+      "cash_usd": "0"
+    },
+    "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+  }
+}

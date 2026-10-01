@@ -1,0 +1,42 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 525B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/aeep-reusable-reviewed-base-treatment@sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f
+#2 DONE 0.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 3.69kB done
+#4 DONE 0.0s
+
+#5 [treatment 1/4] FROM docker.io/library/aeep-reusable-reviewed-base-treatment@sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f
+#5 resolve docker.io/library/aeep-reusable-reviewed-base-treatment@sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f
+#5 resolve docker.io/library/aeep-reusable-reviewed-base-treatment@sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f 0.5s done
+#5 CACHED
+
+#6 [treatment 2/4] RUN ["rm", "-rf", "/opt/codex"]
+#6 DONE 0.2s
+
+#7 [treatment 3/4] COPY runtime/ /opt/codex/
+#7 DONE 0.5s
+
+#8 [treatment 4/4] COPY LICENSE /opt/codex/LICENSE
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 5.9s done
+#9 exporting manifest sha256:bea999a29d46446e86111e98e31da402025d8392ce0d432a8d56969134657bd2 0.0s done
+#9 exporting config sha256:4e395e9b79b63bc00788875daf1de92429a0ada052c41a31dfc585c82d09a160 0.0s done
+#9 exporting attestation manifest sha256:b815e2f52f4301129676cc9a7988d671fca7f885833b7bbac4ed922d14dc240c done
+#9 exporting manifest list sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53 done
+#9 naming to docker.io/library/aeep-sol61-successor-treatment:1592 done
+#9 unpacking to docker.io/library/aeep-sol61-successor-treatment:1592
+#9 unpacking to docker.io/library/aeep-sol61-successor-treatment:1592 1.3s done
+#9 DONE 7.3s

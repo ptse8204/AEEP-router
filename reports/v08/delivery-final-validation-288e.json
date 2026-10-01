@@ -1,0 +1,235 @@
+{
+  "recorded_at": "2026-09-30T00:51:27.075793+00:00",
+  "source_digest": "288e082274cf22631398ca404180f6b58cb27ed7d5654fec0420d1ee6a0a2782",
+  "source_unchanged": true,
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-compileall-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "schema",
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-schema-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-ruff-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-mypy-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "policy",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-policy-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "critical_coverage",
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-final-coverage-288e.json"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-critical_coverage-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "assessment_coverage",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-final-coverage-288e.json"
+      ],
+      "exit_code": 0,
+      "log": "delivery-final-assessment_coverage-288e.log",
+      "run_phase": "post-suite exact-source static/gate rerun"
+    },
+    {
+      "name": "full_pytest",
+      "command": "AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex AEEP_NATIVE_WORKBOOK_PYTHON=/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 PYTHONPATH=src python3 -m pytest -q --basetemp=\"$TMPDIR/aeep-delivery-final-288e-pytest\"",
+      "exit_code": 0,
+      "counts": {
+        "passed": 1032,
+        "skipped": 15,
+        "failed": 0
+      },
+      "log": "delivery-final-pytest-288e.log",
+      "command_provenance": "Reconstructed from retained run context; terminal log did not echo exact shell spelling.",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "branch_coverage_pytest",
+      "command": "AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex AEEP_NATIVE_WORKBOOK_PYTHON=/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 PYTHONPATH=src python3 -m coverage run --branch -m pytest -q --basetemp=\"$TMPDIR/aeep-delivery-final-288e-coverage\"",
+      "exit_code": 0,
+      "counts": {
+        "passed": 1032,
+        "skipped": 15,
+        "failed": 0
+      },
+      "log": "delivery-final-coverage-288e.log",
+      "command_provenance": "Reconstructed from retained run context; terminal log did not echo exact shell spelling.",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "container_initial_partial",
+      "command": "PYTHONPATH=src python3 -m pytest -q -rs -m real_container",
+      "exit_code": 0,
+      "counts": {
+        "passed": 6,
+        "skipped": 6,
+        "failed": 0
+      },
+      "log": "delivery-final-container-288e.log",
+      "qualification": "partial; six skips due omitted explicit fixture environment",
+      "command_provenance": "Reconstructed from retained run context; terminal log did not echo exact shell spelling.",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "container_all",
+      "command": "AEEP_CONTAINER_IMAGE=sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228 AEEP_WORKBOOK_IMAGE=sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228 AEEP_CATALOG_METRICS_IMAGE=sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7 AEEP_INSPECTION_FIXTURE_SPECS=reports/v08/offline-inspection-fixture-specs.json AEEP_CONTAINER_RUNTIME=/usr/local/bin/docker AEEP_CONTAINER_SOCKET=/Users/edwintse/.docker/run/docker.sock PYTHONPATH=src python3 -m pytest -q -rs -m real_container --basetemp=\"$TMPDIR/aeep-delivery-final-288e-container-all\"",
+      "exit_code": 0,
+      "counts": {
+        "passed": 12,
+        "skipped": 0,
+        "failed": 0
+      },
+      "log": "delivery-final-container-all-288e.log",
+      "qualification": "all 12 selected cases passed, no pull/build",
+      "command_provenance": "Exact invocation retained in continuation context",
+      "command_spelling_exact": true
+    },
+    {
+      "name": "node",
+      "command": "npm test",
+      "cwd": "integrations/dsh-aeep-router",
+      "exit_code": 0,
+      "passed": 13,
+      "log": "delivery-final-node-288e.log"
+    },
+    {
+      "name": "package_build",
+      "command": "python3 -m build --no-isolation",
+      "exit_code": 0,
+      "artifacts": [
+        "aeep_agent_router-0.8.0.tar.gz",
+        "aeep_agent_router-0.8.0-py3-none-any.whl"
+      ],
+      "log": "delivery-final-build-288e.log"
+    },
+    {
+      "name": "economic",
+      "command": "python3 examples/economic_evidence/campaign.py --repetitions 30 --check --require-gates",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-economic-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "dsh",
+      "command": "python3 examples/dsh_campaign/campaign.py --check",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-dsh-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "dsh-live",
+      "command": "python3 examples/dsh_campaign/live_campaign.py --check-report reports/v05/dsh/live-safety.json",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-dsh-live-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "dsh-comparison",
+      "command": "python3 examples/dsh_campaign/live_campaign.py --check-comparison reports/v05/dsh/live-comparison.json",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-dsh-comparison-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "dsh-native-plan",
+      "command": "python3 examples/dsh_campaign/live_campaign.py --check-native-plan",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-dsh-native-plan-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "job",
+      "command": "python3 examples/job_application/campaign.py --check",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-job-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "provider",
+      "command": "aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-provider-288e.log",
+      "command_spelling_exact": false
+    },
+    {
+      "name": "router-complete",
+      "command": "aeep verify router-complete --profile all --strict --json",
+      "command_provenance": "repository CI workflow; matching retained terminal log",
+      "exit_code": 0,
+      "log": "delivery-final-router-complete-288e.log",
+      "command_spelling_exact": false
+    }
+  ],
+  "coverage": {
+    "total_percent": 82.38335029731611,
+    "branch_percent": 72.28788518362178,
+    "critical_gate_passed": true,
+    "assessment_gate_passed": true,
+    "json_file": "delivery-final-coverage-288e.json"
+  },
+  "historical_failed_or_interrupted_runs_not_counted": [
+    "delivery-final-pytest-6f7.log",
+    "delivery-batch-pytest.log"
+  ],
+  "scratch_cleanup": "Only dedicated successful pytest/coverage/container basetemp trees removed after runs; logs/results kept",
+  "release_ready": false
+}

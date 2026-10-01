@@ -1,0 +1,92 @@
+{
+  "source_digest": "0ff682efba1def934c3ce16ebbc37f11047c7ac8a3c3e0678998964856d0b08c",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1496355419512838,
+      "log": "reports/v08/steering-v1-delivery-validation/00.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7959336249623448,
+      "log": "reports/v08/steering-v1-delivery-validation/01.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.08830800000578165,
+      "log": "reports/v08/steering-v1-delivery-validation/02.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.35914104199036956,
+      "log": "reports/v08/steering-v1-delivery-validation/03.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.19865445792675018,
+      "log": "reports/v08/steering-v1-delivery-validation/04.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 474.1924353749491,
+      "log": "reports/v08/steering-v1-delivery-validation/05.log",
+      "source_unchanged": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 2,
+      "seconds": 193.6726756670978,
+      "log": "reports/v08/steering-v1-delivery-validation/06.log",
+      "source_unchanged": true
+    }
+  ]
+}

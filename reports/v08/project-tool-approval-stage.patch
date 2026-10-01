@@ -1,0 +1,77 @@
+--- src/aeep/hosts/codex_project.py
++++ src/aeep/hosts/codex_project.py
+@@ -160,6 +160,14 @@
+             + f'command = {json.dumps(sys.executable, ensure_ascii=False)}\n'
+             + 'args = ' + json.dumps(['-I', '-m', 'aeep', 'serve', '--transport', 'stdio', '--profile', 'task', '--approve', approval_ceiling.value,
+                 '--task-activation', record.activation_id, '--manifest', record.manifest_path], ensure_ascii=False) + '\n')
++        # Match the task-only service's exact scope/fingerprint declaration filter.
++        # Codex still restricts these rules to this owned server and named tools;
++        # the service independently enforces the reviewed approval ceiling.
++        from ..mcp.server import AEEPToolService
++        tools = AEEPToolService(router, profile='task', task_scope=record.scope_digest).list_tools()
++        for tool in tools:
++            block += (f'\n[mcp_servers.{name}.tools.{json.dumps(tool["name"], ensure_ascii=False)}]\n'
++                      + 'approval_mode = "approve"\n')
+         binding = TaskCodexBinding(activation_id=record.activation_id, config_path=str(path), block=block)
+         try:
+             tomllib.loads((base + block.encode()).decode('utf-8'))
+--- tests/test_v08_task_lifecycle.py
++++ tests/test_v08_task_lifecycle.py
+@@ -504,3 +504,57 @@
+         assert router.store._connection.execute("SELECT count(*) FROM execution_attempts").fetchone()[0] == attempts
+     finally:
+         await router.close()
++
++
++@pytest.mark.parametrize('ceiling', [SideEffect.READ, SideEffect.WRITE])
++async def test_project_codex_approval_rules_match_scoped_task_tools_and_preserve_user_edits(project, ceiling):
++    manifest, original_scope = project
++    # An unrelated configured task capability must not receive a rule.
++    definition = Manifest.model_validate_json(manifest.read_text())
++    definition.executors.append(reference_spec('text'))
++    manifest.write_text(definition.model_dump_json())
++    router = Router.from_manifest(manifest)
++    try:
++        scope = original_scope.model_copy(update={'scope_id': 'approval-' + ceiling.value,
++                                                  'approval_ceiling': ceiling})
++        repo = AssessmentRepository(router.store)
++        repo.review(repo.put('task_scope', scope.scope_id, scope))
++        config = manifest.parent / '.codex' / 'config.toml'
++        config.parent.mkdir()
++        config.write_text('model = "user-model"\n[mcp_servers.user]\ncommand = "user-tool"\n')
++        activation = activate(router, scope.scope_id)
++        service = AEEPToolService(router, profile='task', task_activation=activation.activation_id)
++        expected = {tool['name'] for tool in service.list_tools()}
++        name = 'aeep_' + activation.activation_id
++        entry = tomllib.loads(config.read_text())['mcp_servers'][name]
++        assert expected == {'aeep_csv'}
++        assert entry['tools'] == {tool: {'approval_mode': 'approve'} for tool in expected}
++        assert 'default_tools_approval_mode' not in entry
++        assert entry['args'][entry['args'].index('--approve') + 1] == ceiling.value
++        assert all(not tool.startswith('aeep_assessment_') for tool in entry['tools'])
++        # A user edit outside the exact owned block survives ordinary rollback.
++        config.write_text(config.read_text() + '\n[user_preferences]\nkeep = true\n')
++        assert change_state(router, activation.activation_id, 'uninstall')['codex_mcp_entry'] == 'absent'
++        remaining = tomllib.loads(config.read_text())
++        assert remaining['model'] == 'user-model'
++        assert remaining['mcp_servers'] == {'user': {'command': 'user-tool'}}
++        assert remaining['user_preferences'] == {'keep': True}
++    finally:
++        await router.close()
++
++
++async def test_project_codex_tool_approval_user_edit_conflicts_with_rollback(project):
++    manifest, scope = project
++    router = Router.from_manifest(manifest)
++    try:
++        activation = activate(router, scope.scope_id)
++        config = manifest.parent / '.codex' / 'config.toml'
++        changed = config.read_text().replace('approval_mode = "approve"', 'approval_mode = "prompt"')
++        config.write_text(changed)
++        with pytest.raises(ConfigurationError, match='entry changed'):
++            change_state(router, activation.activation_id, 'uninstall')
++        assert config.read_text() == changed
++        assert not inspect(router, activation.activation_id)['reviewed']
++    finally:
++        await router.close()
++

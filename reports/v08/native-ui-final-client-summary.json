@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-09-27T12:23:36.481298+00:00",
+  "source_digest": "402a5c1f16ce1d8b13de24bdc99f7859cacfd13bfe10a1b693f604a19303a39b",
+  "coordinator_pre_execution_failure": {
+    "operation_id": "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client",
+    "reason": "Operator helper omitted required RawExecution.status before creating the command execution context. No Codex client process started for this operation. Exact elapsed measurement unavailable; reservation retained, not refunded or replayed."
+  },
+  "failed_client_records": [
+    "native-ui-final-client-valid-result.json",
+    "native-ui-final-client-diagnostic-result.json"
+  ],
+  "configuration_correction": "Replace auto tool approval with documented explicit approve policy for only the three reviewed local MCP tools; preserve approval_policy never, enabled tool allowlists and disabled command/browser tools. No user configuration file changed.",
+  "passing_client_record": "native-ui-final-client-tool-policy-result.json",
+  "receipt_id": "rcpt_2aca3755cbcc4ecca2982e6e652029f4",
+  "receipt_executor": "fixture.baseline",
+  "receipt_status": "success",
+  "verified": [
+    "actual native Codex MCP setup options call",
+    "actual native Codex MCP running-assessment status call",
+    "actual native Codex task-only CSV call and durable baseline receipt after candidate revocation"
+  ],
+  "not_verified": [
+    "model-driven setup/start/report/cancel complete journey",
+    "candidate worker isolation or identity",
+    "plugin benefit",
+    "managed admitted use"
+  ],
+  "credential_state_read": false,
+  "grant_counters_reset": false
+}

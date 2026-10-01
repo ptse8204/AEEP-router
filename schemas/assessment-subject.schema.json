@@ -1,0 +1,83 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.subject.v1",
+      "default": "assessment.subject.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "plugin",
+        "skill",
+        "mcp",
+        "openapi",
+        "provider_package",
+        "command"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "location": {
+      "title": "Location",
+      "type": "string"
+    },
+    "dependency_digests": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Dependency Digests",
+      "type": "object"
+    },
+    "description": {
+      "default": "",
+      "maxLength": 10000,
+      "title": "Description",
+      "type": "string"
+    },
+    "input_schema": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Schema"
+    },
+    "output_schema": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Schema"
+    },
+    "declarations": {
+      "additionalProperties": true,
+      "title": "Declarations",
+      "type": "object"
+    }
+  },
+  "required": [
+    "kind",
+    "location",
+    "dependency_digests"
+  ],
+  "title": "AssessmentSubject",
+  "type": "object"
+}

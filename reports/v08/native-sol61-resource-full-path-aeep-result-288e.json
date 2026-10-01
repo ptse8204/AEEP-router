@@ -1,0 +1,489 @@
+{
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "operation_id": "native-resource-full-path-aeep:planning_native_sol61_resource_full_path_aeep",
+  "task_scope_digest": "8c234334657c993b04c639d58007450e4e689f76522cdcddbbb9253739ba45f6",
+  "setup_operation_id": "native-setup:planning_native-sol61-resource-full-path-aeep-final-setup",
+  "setup_elapsed_seconds": 0.3315127498935908,
+  "project_config_bytes": 489,
+  "schema_bytes": 15202,
+  "instructions_bytes": 168,
+  "prompt_bytes": 72,
+  "classification": "new zero-model native AppServer MCP tool roundtrip; fresh seed107/index1; exact generated launcher and native task child, no model exposure, planner execution or qualification",
+  "generated_launcher": {
+    "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "args": [
+      "-I",
+      "-m",
+      "aeep",
+      "serve",
+      "--transport",
+      "stdio",
+      "--profile",
+      "task",
+      "--approve",
+      "read",
+      "--task-activation",
+      "task_df37ed9ee7c34c93b4668d01eaf3c745",
+      "--manifest",
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/aeep.json"
+    ],
+    "command_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0"
+  },
+  "configuration_layers": [
+    {
+      "type": "sessionFlags",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    },
+    {
+      "type": "project",
+      "owned_project_layer": true,
+      "disabled_reason": null
+    },
+    {
+      "type": "user",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    },
+    {
+      "type": "system",
+      "owned_project_layer": false,
+      "disabled_reason": null
+    }
+  ],
+  "project_config_layer_present": true,
+  "project_config_layer_enabled": true,
+  "permission_acknowledgement": {
+    "model": "gpt-6.1-sol",
+    "cwd": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh",
+    "approvalPolicy": "never",
+    "approvalsReviewer": "user",
+    "profile": {
+      "id": "aeep-native-task",
+      "extends": null
+    }
+  },
+  "inventory_counts": {
+    "servers": 9,
+    "tools": 23
+  },
+  "inherited_mcp_name_hashes": [
+    "10be6beef496b89dae799c37bd04e5eba2a6264a0a4d605f5661b50d7dc4d1ea",
+    "2d13a68bbd45b5023d614616a288991db00cb5789fc60cab2f884e3c92003b5a",
+    "717d32bb32dbbc160a16199742dea33a0f51d557381f7c5fefa452be9ebdf9ce",
+    "881b6f922c116cd6e5f3ee494ce500858f2c0f75b732e38a5c9b9e9e6d677180",
+    "a5942b0f72b1ec7f8b1b817320f87b8088ae346ced70a23b9b129ef2fd5e0b41",
+    "b32e6f37f5dad64e2d1df0bc8809e43701a88ab92d7072b24a41b8b5b6a19ac0",
+    "b7370f7cd8cef43a3b795881dd73252bac6c55b9683c6012ea6dffadbc74be2b",
+    "f9489c18e39c720f11d789b3e8c52d25acb9ffcf2be0470b3b28cdb3108faac6"
+  ],
+  "owned_mcp_launch_errors": [],
+  "selected_server": "aeep_task_df37ed9ee7c34c93b4668d01eaf3c745",
+  "selected_tool": "aeep_recipe_f468b36bc594",
+  "mcp_response_keys": [
+    "content",
+    "isError",
+    "structuredContent"
+  ],
+  "mcp_response_is_error": false,
+  "resource_full_path_aeep_seconds": 0.40148845803923905,
+  "actual_model_turns_started": 0,
+  "checks": [
+    {
+      "index": 0,
+      "ok": true,
+      "task_valid": true,
+      "receipt_id": "rcpt_600cdd36762f40848a35ba8b3130c39f",
+      "summary": "Completed; cleaned workbook checks passed for retained rows, formulas, totals, and Notes values.",
+      "recovery_state": "none",
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 357.3979998473078,
+        "cpu_ms": 173.37937200000002,
+        "memory_mb_seconds": 17.20743320497786,
+        "peak_memory_mb": 146.390625,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 1853,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "independent_grader_valid": true
+    }
+  ],
+  "transformation_output_sha256": "1d6a11639791fe678849346db6f482008001f728b7dc1d3cbc599cd4c1f92918",
+  "transformation_output_json_bytes": 7412,
+  "task_input_json_bytes": 7294,
+  "journey_passed": true,
+  "host_cleanup_confirmed": true,
+  "event_chronology": [],
+  "server_requests": [],
+  "transport_fatal_type": null,
+  "collector_usage": null,
+  "collector_terminal_status": null,
+  "uninstall": {
+    "activation_id": "task_df37ed9ee7c34c93b4668d01eaf3c745",
+    "activation_digest": "531a29011ab285c43253e930e9338775b925d056b70a1d38c8c60774f08d6edb",
+    "scope_digest": "8c234334657c993b04c639d58007450e4e689f76522cdcddbbb9253739ba45f6",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/task_df37ed9ee7c34c93b4668d01eaf3c745.json",
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/codex-config.lock"
+    ],
+    "codex_mcp_entry": "absent",
+    "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.codex/config.toml",
+    "retained_artifacts": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/codex-config.lock"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 1,
+    "attempts_remaining": 0,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "activation_inspection": {
+    "activation_id": "task_df37ed9ee7c34c93b4668d01eaf3c745",
+    "activation_digest": "531a29011ab285c43253e930e9338775b925d056b70a1d38c8c60774f08d6edb",
+    "scope_digest": "8c234334657c993b04c639d58007450e4e689f76522cdcddbbb9253739ba45f6",
+    "reviewed": false,
+    "scope_reviewed": true,
+    "overlay": "absent",
+    "owned_files": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/task_df37ed9ee7c34c93b4668d01eaf3c745.json",
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/codex-config.lock"
+    ],
+    "codex_mcp_entry": "absent",
+    "project_host_config": "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.codex/config.toml",
+    "retained_artifacts": [
+      "/Users/edwintse/Documents/aeep-agent-router/aeep-sol61-model-journey-bpcrjpmh/.aeep/task-profiles/codex-config.lock"
+    ],
+    "persistent_host_changes": [],
+    "scope_expired": false,
+    "attempts_used": 1,
+    "attempts_remaining": 0,
+    "recovery_attempts": [],
+    "lifecycle": "session-scoped",
+    "accounting_retained": true
+  },
+  "elapsed_seconds": 1.9131271671503782,
+  "process_samples": [
+    {
+      "elapsed_seconds": 0.1554840002208948,
+      "process_count": 5,
+      "rss_bytes": 141139968
+    },
+    {
+      "elapsed_seconds": 0.21537000010721385,
+      "process_count": 6,
+      "rss_bytes": 156852224
+    },
+    {
+      "elapsed_seconds": 0.27319854218512774,
+      "process_count": 4,
+      "rss_bytes": 153423872
+    },
+    {
+      "elapsed_seconds": 0.3321743751876056,
+      "process_count": 9,
+      "rss_bytes": 283725824
+    },
+    {
+      "elapsed_seconds": 0.39083162508904934,
+      "process_count": 9,
+      "rss_bytes": 328171520
+    },
+    {
+      "elapsed_seconds": 0.44871970918029547,
+      "process_count": 9,
+      "rss_bytes": 346767360
+    },
+    {
+      "elapsed_seconds": 0.5099895840976387,
+      "process_count": 9,
+      "rss_bytes": 365477888
+    },
+    {
+      "elapsed_seconds": 0.5733896251767874,
+      "process_count": 13,
+      "rss_bytes": 450805760
+    },
+    {
+      "elapsed_seconds": 0.636332374997437,
+      "process_count": 14,
+      "rss_bytes": 538062848
+    },
+    {
+      "elapsed_seconds": 0.7027274169959128,
+      "process_count": 12,
+      "rss_bytes": 553205760
+    },
+    {
+      "elapsed_seconds": 0.7641865841578692,
+      "process_count": 11,
+      "rss_bytes": 571789312
+    },
+    {
+      "elapsed_seconds": 0.8226330000907183,
+      "process_count": 11,
+      "rss_bytes": 588124160
+    },
+    {
+      "elapsed_seconds": 0.8808748750016093,
+      "process_count": 11,
+      "rss_bytes": 597905408
+    },
+    {
+      "elapsed_seconds": 0.9389830841682851,
+      "process_count": 11,
+      "rss_bytes": 610947072
+    },
+    {
+      "elapsed_seconds": 0.9952845422085375,
+      "process_count": 11,
+      "rss_bytes": 619548672
+    },
+    {
+      "elapsed_seconds": 1.0539223751984537,
+      "process_count": 11,
+      "rss_bytes": 619761664
+    },
+    {
+      "elapsed_seconds": 1.1137897921726108,
+      "process_count": 11,
+      "rss_bytes": 619794432
+    },
+    {
+      "elapsed_seconds": 1.1762897921726108,
+      "process_count": 11,
+      "rss_bytes": 619892736
+    },
+    {
+      "elapsed_seconds": 1.238690708996728,
+      "process_count": 11,
+      "rss_bytes": 619892736
+    },
+    {
+      "elapsed_seconds": 1.3012489590328187,
+      "process_count": 11,
+      "rss_bytes": 623448064
+    },
+    {
+      "elapsed_seconds": 1.3641044590622187,
+      "process_count": 11,
+      "rss_bytes": 623448064
+    },
+    {
+      "elapsed_seconds": 1.4273706250824034,
+      "process_count": 11,
+      "rss_bytes": 623448064
+    },
+    {
+      "elapsed_seconds": 1.489391417009756,
+      "process_count": 6,
+      "rss_bytes": 391528448
+    },
+    {
+      "elapsed_seconds": 1.5503222921397537,
+      "process_count": 6,
+      "rss_bytes": 392495104
+    },
+    {
+      "elapsed_seconds": 1.60662770899944,
+      "process_count": 6,
+      "rss_bytes": 392593408
+    },
+    {
+      "elapsed_seconds": 1.6646252090577036,
+      "process_count": 6,
+      "rss_bytes": 392593408
+    },
+    {
+      "elapsed_seconds": 1.7310930001549423,
+      "process_count": 7,
+      "rss_bytes": 511426560
+    },
+    {
+      "elapsed_seconds": 1.7971859590616077,
+      "process_count": 8,
+      "rss_bytes": 530366464
+    },
+    {
+      "elapsed_seconds": 1.8612508750520647,
+      "process_count": 8,
+      "rss_bytes": 550993920
+    }
+  ],
+  "owned_process_observations": [
+    {
+      "pid": 99533,
+      "create_time": 1790770924.939042,
+      "cpu_seconds": 0.461394048,
+      "peak_rss_bytes": 162742272
+    },
+    {
+      "pid": 99545,
+      "create_time": 1790770924.967061,
+      "cpu_seconds": 0.016454666,
+      "peak_rss_bytes": 5750784
+    },
+    {
+      "pid": 99548,
+      "create_time": 1790770924.990461,
+      "cpu_seconds": 0.005127749,
+      "peak_rss_bytes": 2818048
+    },
+    {
+      "pid": 99550,
+      "create_time": 1790770924.994239,
+      "cpu_seconds": 0.010058665999999999,
+      "peak_rss_bytes": 32768
+    },
+    {
+      "pid": 99547,
+      "create_time": 1790770924.982618,
+      "cpu_seconds": 0.016552249999999998,
+      "peak_rss_bytes": 5275648
+    },
+    {
+      "pid": 99577,
+      "create_time": 1790770925.053428,
+      "cpu_seconds": 0.011101416,
+      "peak_rss_bytes": 5341184
+    },
+    {
+      "pid": 99578,
+      "create_time": 1790770925.054822,
+      "cpu_seconds": 0.009757791,
+      "peak_rss_bytes": 2129920
+    },
+    {
+      "pid": 99559,
+      "create_time": 1790770925.001786,
+      "cpu_seconds": 0.024329624,
+      "peak_rss_bytes": 7663616
+    },
+    {
+      "pid": 99580,
+      "create_time": 1790770925.136548,
+      "cpu_seconds": 0.029646708,
+      "peak_rss_bytes": 52527104
+    },
+    {
+      "pid": 99581,
+      "create_time": 1790770925.136624,
+      "cpu_seconds": 0.064659914,
+      "peak_rss_bytes": 20054016
+    },
+    {
+      "pid": 99582,
+      "create_time": 1790770925.136631,
+      "cpu_seconds": 0.709893216,
+      "peak_rss_bytes": 100564992
+    },
+    {
+      "pid": 99594,
+      "create_time": 1790770925.13708,
+      "cpu_seconds": 0.13149162,
+      "peak_rss_bytes": 38174720
+    },
+    {
+      "pid": 99595,
+      "create_time": 1790770925.164274,
+      "cpu_seconds": 0.065128165,
+      "peak_rss_bytes": 19365888
+    },
+    {
+      "pid": 99596,
+      "create_time": 1790770925.400731,
+      "cpu_seconds": 0.082439704,
+      "peak_rss_bytes": 21889024
+    },
+    {
+      "pid": 99597,
+      "create_time": 1790770925.400733,
+      "cpu_seconds": 0.031413082,
+      "peak_rss_bytes": 53035008
+    },
+    {
+      "pid": 99598,
+      "create_time": 1790770925.404966,
+      "cpu_seconds": 0.418789136,
+      "peak_rss_bytes": 98074624
+    },
+    {
+      "pid": 99609,
+      "create_time": 1790770925.405571,
+      "cpu_seconds": 0.145825876,
+      "peak_rss_bytes": 39227392
+    },
+    {
+      "pid": 99610,
+      "create_time": 1790770925.434557,
+      "cpu_seconds": 0.074202335,
+      "peak_rss_bytes": 21413888
+    },
+    {
+      "pid": 99617,
+      "create_time": 1790770926.539045,
+      "cpu_seconds": 0.087469708,
+      "peak_rss_bytes": 118341632
+    },
+    {
+      "pid": 99621,
+      "create_time": 1790770926.587656,
+      "cpu_seconds": 0.107206788,
+      "peak_rss_bytes": 45416448
+    }
+  ],
+  "event_counts": {
+    "remoteControl/status/changed": 1,
+    "thread/started": 1,
+    "mcpServer/startupStatus/updated": 18,
+    "account/updated": 1
+  },
+  "tool_events": [],
+  "auxiliary_actions": [],
+  "owned_mcp_startup_events": [
+    {
+      "owned_server": true,
+      "status": "starting",
+      "error_code": null,
+      "error_present": false
+    },
+    {
+      "owned_server": true,
+      "status": "ready",
+      "error_code": null,
+      "error_present": false
+    },
+    {
+      "owned_server": true,
+      "status": "ready",
+      "error_code": null,
+      "error_present": false
+    }
+  ],
+  "outer_host_boundary": "named filesystem/network profile for native model commands; no single-process guarantee for outer model host; inherited MCP processes outside this profile",
+  "unexpected_tool_detection": "post-execution observation only, not preventative enforcement",
+  "network_observations": "unknown; no network telemetry collected",
+  "resource_limits": "sampled process tree; rapid and between-sample child lifetimes can be missed; includes host/MCP/AEEP descendants observed, no whole-machine baseline",
+  "model_identity": "requested gpt-6.1-sol; reroute notification if observed; absence of reroute is not independent runtime identity",
+  "grant_after": [
+    8588,
+    2530,
+    74587.47762694699,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "release_ready": false,
+  "replay_allowed": false,
+  "tool_results_observed": 1
+}

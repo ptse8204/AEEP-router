@@ -1,0 +1,118 @@
+{
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "assessment_id": "assessment_f0d4f6ab3fdd4095821fcd98e5bf500c",
+  "trial_facts": [
+    {
+      "trial_id": "trial_plan_8cff1fd34b944535b1f806cc9b68432c_recipe_generation_dfd3cbc6989d4382bfad1e93010aff41-qualification-2_qualification-phase-final.treatment.sol-sol61-1592_fresh-worker_0",
+      "route_id": "qualification-phase-final.treatment.sol-sol61-1592",
+      "state": "failed",
+      "error_type": "NoRouteError",
+      "failure_category": "environment_failure",
+      "failure_stage": "preflight",
+      "operation_count": 0,
+      "receipt_ids": [],
+      "wall_time_ms": 3340.0086250621825
+    }
+  ],
+  "child_facts": [
+    {
+      "child_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments/plan_8cff1fd34b944535b1f806cc9b68432c/attempts/worker_8e81dfd19b384fb1984d7b793402bc89.sqlite3",
+      "attempt_count": 0,
+      "receipt_count": 0,
+      "quota_rejections": []
+    },
+    {
+      "child_store": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments/plan_8cff1fd34b944535b1f806cc9b68432c/attempts/worker_f239114ffc1e4a44b858f2e0cc3c7fe6.sqlite3",
+      "attempt_count": 0,
+      "receipt_count": 0,
+      "quota_rejections": [
+        {
+          "decision_id": "dec_1861b2d9617d4c8688ff49f641ba4f47",
+          "selected_executor_id": null,
+          "candidates": [
+            {
+              "executor_id": "qualification-phase-final.control.sol-sol61-1592",
+              "rejection_categories": [
+                "outside_allowed_ids",
+                "subscription_exhausted"
+              ],
+              "quota": {
+                "state": "exhausted",
+                "reset_at": "2026-10-03T20:27:22Z",
+                "observed_at": "2026-09-30T13:10:22.671694Z",
+                "confidence": 0.95,
+                "source": "rate_limit",
+                "used_percent": "100",
+                "window_duration_seconds": 604800,
+                "evidence_digest": "sha256:73fb9415ec3f70aff98091ce633e7ce800a2eddb60713bf83e9852ed68a41768"
+              }
+            },
+            {
+              "executor_id": "qualification-phase-final.treatment.sol-sol61-1592",
+              "rejection_categories": [
+                "subscription_exhausted"
+              ],
+              "quota": {
+                "state": "exhausted",
+                "reset_at": "2026-10-03T20:27:22Z",
+                "observed_at": "2026-09-30T13:10:22.671694Z",
+                "confidence": 0.95,
+                "source": "rate_limit",
+                "used_percent": "100",
+                "window_duration_seconds": 604800,
+                "evidence_digest": "sha256:73fb9415ec3f70aff98091ce633e7ce800a2eddb60713bf83e9852ed68a41768"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnosis": "Hard routing rejection after adapter-refreshed provider rate-limit observation: codex.self exhausted, used100%, weekly604800s, reset2026-10-03T20:27:22Z. No task attempt or receipt launched. Charged1turn is the conservative trial reservation, not observed workbook inference. Protected grader validation passed before this trial. No automatic retry or provider/model substitution.",
+  "artifact_delivery_model_tool_use": "Not observed: no durable task attempt/receipt; no model/tool event collector evidence in failed trial.",
+  "fresh_worker_capacity_observation": {
+    "observation_id": "capacity_fed0a3f833924fc39e17470f036b2f57",
+    "canonical_digest": "sha256:73fb9415ec3f70aff98091ce633e7ce800a2eddb60713bf83e9852ed68a41768",
+    "resource_id": "codex.self",
+    "observed_at": "2026-09-30T13:10:22.671694Z",
+    "source": "codex_app_server",
+    "windows": [
+      {
+        "window_id": "codex:primary",
+        "unit": "provider_unit",
+        "used_percent": "100",
+        "allowance": null,
+        "remaining": null,
+        "reset_at": "2026-10-03T20:27:22Z",
+        "duration_seconds": 604800,
+        "hard_limit": true,
+        "exhausted": true,
+        "confidence": 0.95,
+        "evidence": [
+          {
+            "evidence_id": "capacity-evidence_ac2adc7c279149a48c30d3152c796b75",
+            "source": "codex_app_server_rate_limits",
+            "source_digest": "sha256:d62e01c4108b74c2665799c3e2cd0325f1e47285a2eb7da6188747f53837fcc4",
+            "observed_at": "2026-09-30T13:10:22.671462Z",
+            "confidence": 0.95
+          }
+        ]
+      }
+    ],
+    "executor_id": "qualification-phase-final.treatment.sol-sol61-1592",
+    "adapter_id": "codex-app-server:qualification-phase-final-treatment",
+    "worker_id": "incremental-treatment",
+    "worker_digest": "7ceec1d0a3149ad4412c940c6d7dadab84e20576d6032b3ac55c278386bcbc2d",
+    "immutable_image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+    "binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+    "reviewed_conformance_identity_digest": "198e99ca9c9fd84b404fe3b46d257916ba74ba18b9255864444f288c4b15357d",
+    "runtime_bindings_recorded_this_plan": [
+      {
+        "plan_id": "plan_8cff1fd34b944535b1f806cc9b68432c",
+        "executor_id": "qualification-phase-final.treatment.sol-sol61-1592",
+        "digest": "198e99ca9c9fd84b404fe3b46d257916ba74ba18b9255864444f288c4b15357d"
+      }
+    ],
+    "principal_equivalence_to_native_desktop": "unknown; neither authentication state nor principal key was accessed; native and worker applicability must not be assumed"
+  }
+}

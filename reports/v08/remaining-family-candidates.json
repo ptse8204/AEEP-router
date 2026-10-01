@@ -1,0 +1,102 @@
+{
+  "recorded_at": "2026-09-26T12:26:18.795155+00:00",
+  "source_digest": "180806bb74076753dfaabcfc083c160ba4b79ca9c1762a8e0641ad8b936598be",
+  "authority": "operator delegated candidate selection and routine test-definition preparation; no spending or disclosure expansion",
+  "candidates": [
+    {
+      "families": [
+        "csv",
+        "workbook"
+      ],
+      "subject_id": "subject_169dba4bb752e622c3d885ca6b3d43c4383c588264dfdc0034035691d5f5bb6a",
+      "subject_digest": "faf2bf6fef3293fc97ed6f7eb5b1e6022fd875488cb80c505de09c036068851c",
+      "selected_capability": "Spreadsheets local-file workflow with its reviewed package dependencies",
+      "structure": "complete_workflow",
+      "reason": "The installed instructions support delimited data and workbook manipulation. CSV and workbook tasks have a direct functional connection.",
+      "status": "historical workbook mapping exists; CSV stage mappings and current-source profiles still required"
+    },
+    {
+      "families": [
+        "text",
+        "search"
+      ],
+      "subject_id": "subject_050c99e8eaaf8e8eb87a07a305eec3a81e7f2b61c989261d7081eb782bcfdc3d",
+      "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+      "selected_capability": "Ponytail main coding skill; no sibling skills or lifecycle hooks",
+      "structure": "controlled_agent",
+      "reason": "Both tasks can be completed by short parsing/search programs. The skill explicitly addresses parsers, code, standard-library choices and minimal implementations; its possible value is less agent work or fewer mistakes. This is a hypothesis, not observed benefit.",
+      "scope_limit": "Evidence would apply to adding this coding-guidance skill to an agent doing these tasks, not to a standalone text extractor/search implementation or the full Ponytail package.",
+      "qualification": "Require the exact skill only in qualification; verify instruction loading separately from task correctness.",
+      "value_studies": "Keep shared tools and task instructions identical. Candidate availability is optional; ignored cases stay in the main comparison.",
+      "status": "selected and statically inspected; no worker image, route, comparison, grant scope or approval created"
+    }
+  ],
+  "new_subject": {
+    "schema_version": "assessment.subject.v1",
+    "subject_id": "subject_050c99e8eaaf8e8eb87a07a305eec3a81e7f2b61c989261d7081eb782bcfdc3d",
+    "kind": "skill",
+    "location": "/Users/edwintse/.codex/plugins/cache/ponytail/ponytail/4.10.0/skills/ponytail",
+    "dependency_digests": {
+      "SKILL.md": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+    },
+    "description": "Forces the laziest solution that actually works, simplest, shortest, most minimal. Channels a senior dev who has seen everything: question whether the task needs to exist at all (YAGNI), reach for the standard library before custom code, native platform features before dependencies, one line before fifty. Supports intensity levels: lite, full (default), ultra. Use on ANY coding task: writing, adding, refactoring, fixing, reviewing, or designing code, and choosing libraries or dependencies. Also use whenever the user says \"ponytail\", \"be lazy\", \"lazy mode\", \"simplest solution\", \"minimal solution\", \"yagni\", \"do less\", or \"shortest path\", or complains about over-engineering, bloat, boilerplate, or unnecessary dependencies. Do NOT use for non-coding requests (general knowledge, prose, translation, summaries, recipes).\n",
+    "input_schema": null,
+    "output_schema": null,
+    "declarations": {
+      "tools": [],
+      "skills": [
+        {
+          "name": "ponytail",
+          "description": "Forces the laziest solution that actually works, simplest, shortest, most minimal. Channels a senior dev who has seen everything: question whether the task needs to exist at all (YAGNI), reach for the standard library before custom code, native platform features before dependencies, one line before fifty. Supports intensity levels: lite, full (default), ultra. Use on ANY coding task: writing, adding, refactoring, fixing, reviewing, or designing code, and choosing libraries or dependencies. Also use whenever the user says \"ponytail\", \"be lazy\", \"lazy mode\", \"simplest solution\", \"minimal solution\", \"yagni\", \"do less\", or \"shortest path\", or complains about over-engineering, bloat, boilerplate, or unnecessary dependencies. Do NOT use for non-coding requests (general knowledge, prose, translation, summaries, recipes).\n",
+          "path": "/Users/edwintse/.codex/plugins/cache/ponytail/ponytail/4.10.0/skills/ponytail/SKILL.md",
+          "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+        }
+      ],
+      "workflows": [],
+      "missing": [
+        "Skills need a reviewed task mapping and supported Codex sandbox access."
+      ]
+    }
+  },
+  "recipe_digests": {
+    "csv": "b72212ead29df8a3da76c2162ede0aab593f8e709fde54ebaade7082219abbdf",
+    "text": "d08cf2d53068e76df00a05fd68a37660b8297e1cca2440367fff50fe7f1767e0",
+    "search": "5c0f12ebb24b436d20501ea8082dafc5659d2b8f33e4f79117545ecec6c1ff7f"
+  },
+  "setup_cost_records": [
+    {
+      "id": "setup_cost_0fe2449d09f3443f8779b283302bc4db",
+      "record": {
+        "cost_id": "setup_cost_0fe2449d09f3443f8779b283302bc4db",
+        "subject_digest": "9b012a9bf4b12a50e13ef0b00c73844dd753010dcf1679747b8f9d0ed37f8a8b",
+        "stage": "static_inspection",
+        "elapsed_seconds": 0.0031269999453797936,
+        "cpu_ms": 1.5099999999999558
+      }
+    }
+  ],
+  "setup_cost_handling": "Existing static-inspection setup record retained; future proposed plan must reference it and charge it through the existing ledger. This intake did not run a candidate or reserve a model turn.",
+  "grant_counters_before": [
+    683,
+    136,
+    3364.272100803093,
+    "0",
+    0
+  ],
+  "grant_counters_after": [
+    683,
+    136,
+    3364.272100803093,
+    "0",
+    0
+  ],
+  "model_calls": 0,
+  "readiness": false,
+  "next_requirements": [
+    "freeze selected skill in a treatment image derived from the shared capable base",
+    "verify candidate absence and equivalent permissions in control",
+    "review exact task mappings, stronger/reusable controls and disjoint evaluation-stage inputs",
+    "obtain current conformance and sufficient explicit finite authorization",
+    "run qualification then marginal/native catalog stages without changing thresholds"
+  ]
+}

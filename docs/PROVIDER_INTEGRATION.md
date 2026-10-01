@@ -5,11 +5,11 @@ qualification, scoring, payment custody, or the complete router. The protocol is
 transport-neutral and works behind HTTP, MCP, a CLI broker, or a hosted-agent
 gateway.
 
-The Python helper currently ships in the main distribution, but it does not
-instantiate the router or require provider-side route policy. It is not yet a
-separately published minimal provider package. Non-Python or dependency-minimal
-providers may implement the generated 0.5 schemas, RFC 8785 vectors,
-and Ed25519 envelopes directly.
+The Python helper ships in the main distribution. It neither instantiates the
+router nor requires provider-side route policy, and no separate minimal provider
+package is published yet. Providers using other languages or fewer dependencies
+can implement the generated 0.5 schemas, RFC 8785 vectors, and Ed25519 envelopes
+directly.
 
 ## Provider responsibilities
 
@@ -216,7 +216,7 @@ charges.
 When the provider's amount exceeds the signed maximum, return the statement for
 audit but expect the buyer to cap capture and open a dispute. When the actual
 amount cannot be safely determined, return an explicit indeterminate status or
-manual-reconciliation policy—not zero.
+manual-reconciliation policy. Do not substitute zero.
 
 ## Market aggregates
 

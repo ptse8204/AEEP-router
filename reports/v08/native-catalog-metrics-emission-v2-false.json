@@ -1,0 +1,35 @@
+{
+  "image": "sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953",
+  "credentials_mounted": false,
+  "host_mounts": false,
+  "network": "none",
+  "model_calls": 0,
+  "elapsed_seconds": 16.333675457979552,
+  "exit_code": 0,
+  "observation": {
+    "analytics": false,
+    "initialize": {
+      "success": true,
+      "error": null
+    },
+    "thread_start": {
+      "success": false,
+      "error": {
+        "code": -32603,
+        "message": "error creating thread: Fatal error: Failed to initialize session: failed to load AGENTS.md instructions for environment `local`: fs sandbox helper failed with status exit status: 1: bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. On e.g. debian this can be enabled with 'sysctl kernel.unprivileged_userns_clone=1'."
+      }
+    },
+    "model_calls": 0,
+    "requests": {
+      "requests": 0,
+      "parse_failures": 0,
+      "other_metric_count": 0
+    },
+    "selected_metrics": [],
+    "stop": "sigint",
+    "exit_code": -2,
+    "requested_export_interval_ms": 1000,
+    "observation_seconds": 15
+  },
+  "launcher_error": ""
+}

@@ -1,0 +1,12 @@
+FROM sha256:13e64837ee831676705b19af677d23e4ab89cb1c6dc7f56efb53100fa7d67953 AS control
+USER root
+RUN ["rm", "-rf", "/opt/codex"]
+COPY runtime/ /opt/codex/
+COPY LICENSE /opt/codex/LICENSE
+USER 65534:65534
+FROM sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f AS treatment
+USER root
+RUN ["rm", "-rf", "/opt/codex"]
+COPY runtime/ /opt/codex/
+COPY LICENSE /opt/codex/LICENSE
+USER 65534:65534

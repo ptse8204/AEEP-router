@@ -1,0 +1,156 @@
+{
+  "source_digest": "46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236",
+  "complete": true,
+  "resource_gate_complete": false,
+  "release_ready": false,
+  "classification": "n1 software-only incremental fresh-process footprint; no model workflow, qualification, marginal capability benefit or release/resource gate",
+  "order": "baseline first, AEEP second; n1, no counterbalance; startup caches/order may explain wall difference; descriptive differences only",
+  "paired_input_sha256": "da738436b4bbe21328eb57a7e0c95b0bffae745d6a58e6fd862a4c0570dd187e",
+  "paired_output_hashes_equal": true,
+  "inherited_mcp_inventory_equal": true,
+  "baseline_aeep_modules_or_service_present": false,
+  "task_state_counts": {
+    "execution_attempts": 1,
+    "receipts": 1
+  },
+  "model_turns": 0,
+  "cash_usd": "0",
+  "ledger": [
+    {
+      "operation_id": "native-resource-pair:planning_native_resource_full_path_pair_v5",
+      "state": "complete",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 160.0,
+        "max_cash_usd": "0"
+      },
+      "measured_elapsed_seconds": 4.359147623879835,
+      "accounting": null
+    },
+    {
+      "operation_id": "native-setup:planning_native-sol61-resource-full-path-aeep-final-setup",
+      "state": "complete",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 40.0,
+        "max_cash_usd": "0"
+      },
+      "measured_elapsed_seconds": 0.3315127498935908,
+      "accounting": null
+    },
+    {
+      "operation_id": "native-resource-full-path-aeep:planning_native_sol61_resource_full_path_aeep",
+      "state": "complete",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 60.0,
+        "max_cash_usd": "0"
+      },
+      "measured_elapsed_seconds": 1.9131271671503782,
+      "accounting": null
+    }
+  ],
+  "native_applicability": "native-resource-final-source-applicability.json",
+  "review": "native-resource-full-path-pair-v5-review.json",
+  "result": "native-resource-full-path-pair-v5-result.json",
+  "aeep_detail": "native-sol61-resource-full-path-aeep-result-288e.json",
+  "samples": [
+    {
+      "arm": "stdlib_native",
+      "total_end_to_end_wall_ms": 3673.9435421768576,
+      "total_sampled_cpu_ms": 1632.0503,
+      "observed_peak_memory_mb": 676.8828125,
+      "total_sampled_memory_mb_seconds": 1978.816001268905,
+      "retained_project_bytes": 0,
+      "schema_bytes": 0,
+      "project_config_bytes": 0,
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": true,
+        "memory_integral": false,
+        "retention": true,
+        "schema": true,
+        "project_config": true
+      }
+    },
+    {
+      "arm": "generated_project_mcp_aeep",
+      "total_end_to_end_wall_ms": 2721.880874829367,
+      "total_sampled_cpu_ms": 3588.924247,
+      "observed_peak_memory_mb": 944.39453125,
+      "total_sampled_memory_mb_seconds": 1604.4349991613772,
+      "retained_project_bytes": 950272,
+      "schema_bytes": 15202,
+      "project_config_bytes": 489,
+      "frozen_bound_checks": {
+        "wall": true,
+        "cpu": true,
+        "rss": false,
+        "memory_integral": false,
+        "retention": true,
+        "schema": true,
+        "project_config": true
+      }
+    }
+  ],
+  "bounds_status": "AEEP peakRSS fails768MiB; both memoryintegrals fail1500MiB\u00b7s; no bounds relaxed",
+  "timing_boundary": "each fresh owned coordinator/process tree includes host/thread/MCP startup, execution, mandatory verification, cleanup grace; common fixture generation and baseline policy assembly separately retained and included in pair total",
+  "cpu_coverage": "sum last sampled cumulativeCPU per exact owned identity through teardown; short unsampled lifetimes/final between-sample increments unknown",
+  "rss_coverage": "concurrent observed owned-processRSS samples; max peak across sequential stages, never sum of sequential peaks",
+  "unknowns": [
+    "network packet/byte counts",
+    "host-level subscription context usage (no model turns)",
+    "unobserved between-sample CPU/RSS lifetimes",
+    "actual whole-machine causal baseline",
+    "long-run retention growth",
+    "full model-driven task workflow (still blocked)",
+    "baseline nativehost stderr772bytes unclassified; no raw content retained",
+    "Codex-owned global cache/log retention bytes (not inspected; auth-state boundaries preserved)"
+  ],
+  "retention": "AEEP950272bytes canonical closed task evidence; baseline0projectbytes. Measurement reports/samples separate from production retention. No raw input/output retained.",
+  "original_failed_pairs_preserved": [
+    "native-resource-full-path-pair-result.json",
+    "native-resource-full-path-pair-v2-result.json"
+  ],
+  "host_cleanup": "all stage owned_survivors empty after boundedgrace; no forced cleanup in final pair",
+  "one_pair_total_wall_seconds": 6.603787540923804,
+  "observed_stage_cpu_ms_including_setup": 5332.681503,
+  "source_unchanged": true,
+  "raw_command_context_dimension": {
+    "context_tokens": 1853,
+    "classification": "receipt command resource dimension; not observed model token/context usage"
+  },
+  "attribution": {
+    "inherited_host_inventory": {
+      "baseline_servers": 8,
+      "baseline_tools": 22,
+      "aeep_total_servers": 9,
+      "aeep_total_tools": 23,
+      "inherited_server_name_hashes_equal": true,
+      "per_server_memory_cpu_attribution": "unknown; final whole-tree sampler did not retain process role names"
+    },
+    "known_actual_aeep_path_difference": [
+      "operator-owned AEEP coordinator imports/setup and scope/ledger/receipt operations",
+      "one generated-project AEEP Python MCP service",
+      "one separate service-owned AppServer for native command execution (codex_native_process.py constructs transport per call)",
+      "mandatory callback and independent verification; baseline verifier independently counted"
+    ],
+    "observed_cpu_difference_ms": 1956.8739469999998,
+    "observed_peak_rss_difference_mib": 267.51171875,
+    "difference_limit": "fixed-order n1, observational software difference only; neither causal library attribution nor savings",
+    "inner_host_sampler": "50ms sample peak623448064bytes, versus10ms full-coordinator treepeak944.39453125MiB; different scope/cadence, do not subtract peaks to infer coordinator cost",
+    "receipt_command_path": {
+      "latency_ms": 357.3979998473078,
+      "cpu_ms": 173.37937200000002,
+      "peak_memory_mb": 146.390625,
+      "memory_mb_seconds": 17.20743320497786,
+      "scope": "nested native command path; already included in whole owned-tree sampling; never add receipt peak or CPU again"
+    },
+    "supported_next_intervention": "Review service-owned native command-host reuse as a future bounded architecture experiment; source confirms repeated host construction, but this n1 does not prove savings or security applicability. Requires preserving per-dispatch executable/profile authority and command/session ownership, timeout/EOF cleanup and concurrency semantics. No source edit or extra pair launched.",
+    "baseline_constraint": "inherited MCP inventory is preserved; do not remove inherited tools to make existing comparison pass"
+  }
+}

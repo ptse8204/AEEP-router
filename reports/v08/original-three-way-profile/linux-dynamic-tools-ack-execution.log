@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-inert.py", line 199, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/original-three-way-profile/run-linux-dynamic-tools-ack-inert.py", line 193, in main
+    result['accounting_delta'] = {key: result['grant_after'][key] - result['grant_before'][key] for key in result['grant_before']}
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'str'

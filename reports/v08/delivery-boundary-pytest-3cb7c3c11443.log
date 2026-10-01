@@ -1,0 +1,253 @@
+Exact argv: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pytest -q --junitxml=/Users/edwintse/Documents/aeep-agent-router/reports/v08/delivery-boundary-pytest-3cb7c3c11443.xml --basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-5kr6gs9m/pytest
+........................................................................ [  6%]
+........................................................................ [ 13%]
+........................................................................ [ 20%]
+........................................................................ [ 27%]
+........................................................................ [ 33%]
+........................................................................ [ 40%]
+........................................................................ [ 47%]
+........................................................................ [ 54%]
+........................................................................ [ 61%]
+...................................................................F.... [ 67%]
+........................................................................ [ 74%]
+..........s...................................ss..........s.........ss.. [ 81%]
+..............s..............................................F.......F.. [ 88%]
+......ssss.............................................................. [ 95%]
+.....ss.................s...................s.......                     [100%]
+=================================== FAILURES ===================================
+_______ test_generated_definition_requires_review_and_uses_same_pipeline _______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-5kr6gs9m/pytest/test_generated_definition_requ0')
+
+    async def test_generated_definition_requires_review_and_uses_same_pipeline(tmp_path):
+        recipe = shipped_recipe("text").model_copy(
+            update={
+                "recipe_id": "generated-record.v1",
+                "capability": "example.record@1",
+                "output_schema": {"type": "object", "properties": {"record": {"type": "object", "additionalProperties": {"type": "string"}}}, "required": ["record"], "additionalProperties": False},
+                "generator": "record_template:1",
+                "extractor": "record_template:1",
+                "generator_config": {
+                    "fields": ["id", "name"],
+                    "independent_fixtures": [
+                        {"input": {"text": "id = value-000000000000000000000000\nname = value-111111111111111111111111"}, "output": {"record": {"id": "value-000000000000000000000000", "name": "value-111111111111111111111111"}}},
+                        {"input": {"text": "name = value-111111111111111111111111\nid = value-000000000000000000000000"}, "output": {"record": {"id": "value-000000000000000000000000", "name": "value-111111111111111111111111"}}},
+                    ],
+                    "templates": {
+                        "forward": "id = {id}\nname = {name}",
+                        "reverse": "name = {name}\nid = {id}",
+                    },
+                },
+                "variations": ["forward", "reverse"],
+                "input_schema": {
+                    "type": "object",
+                    "properties": {"text": {"type": "string", "maxLength": 4096}},
+                    "required": ["text"],
+                    "additionalProperties": False,
+                },
+            }
+        )
+        routes = [
+            python_spec(
+                name,
+                f"test_v08_assessment:{function}",
+                capability=recipe.capability,
+                input_schema=recipe.input_schema,
+                output_schema=recipe.output_schema,
+            )
+            for name, function in [("candidate", "custom_record"), ("baseline", "slow_record")]
+        ]
+        router = Router(manifest_with(*routes))
+        service = AssessmentService(router, tmp_path / "assessment")
+        file = tmp_path / "plugin.txt"
+        file.write_text("selected generated-recipe fixture")
+        try:
+            subject = service.inspect_local(file)
+            digest = service.repository.put("recipe", recipe.recipe_id, recipe)
+            options = dict(
+                subject_id=subject.subject_id,
+                family=recipe.recipe_id,
+                candidate_id="candidate",
+                baseline_id="baseline",
+                authorization_id="grant",
+                environment=AssessmentEnvironment(
+                    environment_id="test", kind="trusted_local", identity={"fixture": "1"}
+                ),
+            )
+            with pytest.raises(ConfigurationError, match="first execution"):
+                service.propose(**options)
+            service.repository.review(digest)
+            plan = service.propose(**options)
+            for definition in plan.definition_digests:
+                service.repository.review(definition)
+            service.repository.grant(
+                AssessmentAuthorization(
+                    authorization_id="grant",
+                    subject_digests=[plan.subject_digest],
+                    recipe_digests=[plan.recipe_digest],
+                    environment_digests=[plan.environment_digest],
+                    limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=20000),
+                    automatic_admission=True,
+                    expires_at=utc_now() + timedelta(hours=1),
+                )
+            )
+            report = await service.run(service.enqueue(plan.plan_id))
+>           assert report.qualification_passed
+E           AssertionError: assert False
+E            +  where False = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='direct', candid...cked_or_budget_exhausted'], created_at=datetime.datetime(2026, 9, 30, 9, 31, 24, 913096, tzinfo=datetime.timezone.utc)).qualification_passed
+
+tests/test_v08_assessment.py:127: AssertionError
+_________ test_pilot_uses_campaign_but_cannot_qualify_or_reuse_holdout _________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-5kr6gs9m/pytest/test_pilot_uses_campaign_but_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d3b00c0>
+
+    async def test_pilot_uses_campaign_but_cannot_qualify_or_reuse_holdout(tmp_path, monkeypatch):
+        router, service, original, grant = setup_assessment(tmp_path)
+        try:
+            assert 'pilot' not in original.model_dump()
+            with pytest.raises(ValidationError):
+                PilotPolicy(deadline_multiplier=float('inf'))
+            with pytest.raises(ValidationError):
+                PilotPolicy(minimum_deadline_seconds=20, maximum_deadline_seconds=10)
+            pilot = service.propose(subject_id=original.subject_digest, family='csv',
+                candidate_id=original.candidate_id, baseline_id=original.baseline_id,
+                authorization_id=grant.authorization_id,
+                environment=AssessmentEnvironment.model_validate(service.repository.get('environment',original.environment_digest)),
+                seed=123, pilot=PilotPolicy())
+            assert pilot.schema_version == 'assessment.plan.v5'
+            assert len(pilot.suite.cases) == 8 and not pilot.suite.stop_on_screening_failure
+            for digest in pilot.definition_digests:
+                service.repository.review(digest)
+            before = service.budget_preview(pilot.plan_id)['remaining']
+            report = await service.run(service.enqueue(pilot.plan_id))
+            assert not report.qualification_passed and report.outcome == 'insufficient_evidence'
+            with pytest.raises(ConfigurationError, match='admission requires'):
+                service.admit(report.report_id)
+            measured = timing_preview(service, report.report_id)
+            assert measured['complete_measurements'] and measured['assigned_executions'] == 16
+            assert measured['proposed_normal_deadline_seconds'] >= 1
+            assert not measured['authorization_changed']
+            assert measured['remaining']['elapsed_seconds'] < before['elapsed_seconds']
+            with pytest.raises(ValidationError, match='eight distinct'):
+                AssessmentPlan.model_validate({**pilot.model_dump(), 'suite': original.suite.model_dump()})
+            altered = original.model_copy(deep=True)
+            altered.suite.cases[-1].action.input = pilot.suite.cases[0].action.input
+            with pytest.raises(ConfigurationError, match='cannot enter'):
+                require_separation(service.repository, altered)
+            changed = pilot.model_copy(deep=True)
+            changed.suite.cases[0].action.input = original.suite.cases[-1].action.input
+            with pytest.raises(ConfigurationError, match='cannot enter'):
+                require_separation(service.repository, changed)
+            assert content_digest(pilot) == content_digest(service.repository.get('plan',pilot.plan_id))
+            with pytest.raises(ValidationError, match='main plan'):
+                AssessmentPlan.model_validate({**pilot.model_dump(), 'schema_version':'assessment.plan.v6'})
+            main = service.propose(subject_id=original.subject_digest, family='csv',
+                candidate_id=original.candidate_id, baseline_id=original.baseline_id,
+                authorization_id=grant.authorization_id,
+                environment=AssessmentEnvironment.model_validate(service.repository.get('environment',original.environment_digest)),
+                seed=456, pilot_report_id=report.report_id)
+            assert main.pilot is None and main.pilot_report_digest == content_digest(report)
+            assert main.schema_version == 'assessment.plan.v6' and len(main.suite.cases) == 141
+            assert pilot.plan_id in main.preparation_request_ids
+            from aeep.assessment.pilot import require_linked_pilot
+            read_mapping = service.repository.get
+            def corrupted_mapping(kind, identity):
+                value = read_mapping(kind, identity)
+                if kind == 'mapping' and identity == main.mapping_digest:
+                    value['candidate']['description'] = 'altered after review'
+                return value
+            with monkeypatch.context() as patch:
+                patch.setattr(service.repository, 'get', corrupted_mapping)
+                with pytest.raises(ConfigurationError, match='main mapping identity differs'):
+                    require_linked_pilot(service.repository, main)
+            mismatched = main.model_copy(update={'baseline_id':'different'})
+            with pytest.raises(ConfigurationError,match='pilot evidence differs'):
+                require_linked_pilot(service.repository, mismatched)
+            additional = AssessmentEnvironment.model_validate(service.repository.get('environment',main.environment_digest))
+            additional.conformance_digests = {'extra_challenger':'a'*64}
+            added_digest = service.repository.put('environment','additional-cost-profile',additional)
+            # This verifies lineage only, not the added profile's execution eligibility.
+            assert require_linked_pilot(service.repository,main.model_copy(update={'environment_digest':added_digest})) == pilot
+            read = service.repository.get
+            def prior_boundary(kind, identity):
+                value = read(kind, identity)
+                return {**value, 'conformance_digests': {'candidate':'b'*64}} if kind == 'environment' and identity == pilot.environment_digest else value
+            with monkeypatch.context() as patch:
+                patch.setattr(service.repository, 'get', prior_boundary)
+                with pytest.raises(ConfigurationError,match='environment policy changed'):
+                    require_linked_pilot(service.repository,main.model_copy(update={'schema_version':'assessment.plan.v5','environment_digest':added_digest}))
+                assert require_linked_pilot(service.repository, main.model_copy(update={'environment_digest':added_digest})) == pilot
+                retained = additional.model_copy(update={'conformance_digests':{'candidate':'b'*64,'extra_challenger':'a'*64}})
+                retained_digest = service.repository.put('environment','retained-cost-profile',retained)
+                assert require_linked_pilot(service.repository,main.model_copy(update={'environment_digest':retained_digest})) == pilot
+            additional.network = True
+            changed_digest = service.repository.put('environment','changed-cost-policy',additional)
+            with pytest.raises(ConfigurationError,match='environment policy changed'):
+                require_linked_pilot(service.repository,main.model_copy(update={'environment_digest':changed_digest}))
+            for digest in main.definition_digests:
+                service.repository.review(digest)
+            # The prior operations are included, never debited a second time.
+            prior_ids = {item.operation_id for item in service.repository.operation_ledger(pilot.plan_id).operations}
+            main_report = await service.run(service.enqueue(main.plan_id))
+            ledger = service.repository.get('operation_ledger', main_report.operation_ledger_digest)
+            ids = [item['operation_id'] for item in ledger['operations']]
+            assert prior_ids <= set(ids) and len(ids) == len(set(ids))
+            assert main_report.measured_usage['known_overhead_wall_time_ms'] >= report.measured_usage['known_campaign_wall_time_ms']
+>           assert main_report.distinct_holdout_cases == 105
+E           AssertionError: assert 0 == 105
+E            +  where 0 = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='direct', candid...locked_or_budget_exhausted'], created_at=datetime.datetime(2026, 9, 30, 9, 36, 53, 2062, tzinfo=datetime.timezone.utc)).distinct_holdout_cases
+
+tests/test_v08_pilot.py:111: AssertionError
+____ test_search_workflow_assessment_binds_cases_and_preserves_constraints _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-boundary-validation-5kr6gs9m/pytest/test_search_workflow_assessmen0')
+
+    async def test_search_workflow_assessment_binds_cases_and_preserves_constraints(tmp_path):
+        from aeep.assessment.adapters import WorkflowAdapter
+        from aeep.qualification import behavior_fingerprint
+        from aeep.workflow import WorkflowRequest
+    
+        recipe = shipped_recipe("search")
+        first = python_spec("input", "test_v08_planning:search_input", capability="search.input@1")
+        second = python_spec("extract", "aeep.assessment.recipes:reference_search", capability="search.extract@1")
+        workflow = WorkflowRequest.model_validate({
+            "workflow_id": "reviewed-search", "input": {"root": "", "query": "", "path": ""},
+            "steps": [
+                {"step_id": "input", "action": {"capability": first.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [first.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key} for key in ("root", "query", "path")]},
+                {"step_id": "extract", "depends_on": ["input"], "action": {"capability": second.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [second.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key, "source_step_id": "input"} for key in ("root", "query", "path")]},
+            ], "outputs": [{"name": "result", "step_id": "extract", "path": ""}],
+        })
+        candidate = python_spec("workflow", "aeep.assessment.adapters:workflow_target", capability=recipe.capability)
+        adapter = WorkflowAdapter(workflow=workflow, case_input_bindings={"/" + key: "/" + key for key in ("root", "query", "path")}, executor_fingerprints={spec.id: behavior_fingerprint(spec) for spec in (first, second)})
+        candidate.config["assessment_workflow"] = adapter.model_dump(mode="json")
+        candidate.config["assessment_adapter"] = {"output_pointer": "/result"}
+        baseline = python_spec("baseline", "test_v08_planning:slow_search", capability=recipe.capability)
+        router = Router(manifest_with(candidate, baseline, first, second))
+        service = AssessmentService(router, tmp_path / "assessment")
+        plugin = tmp_path / "plugin.txt"
+        plugin.write_text("reviewed workflow fixture")
+        subject = service.inspect_local(plugin)
+        environment = AssessmentEnvironment(environment_id="local", kind="trusted_local", identity={"approved_root": str(tmp_path)})
+        plan = service.propose(subject_id=subject.subject_id, family="search", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id="grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="grant", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=20000), expires_at=utc_now() + timedelta(hours=1)))
+        try:
+            report = await service.run(service.enqueue(plan.plan_id))
+>           assert report.qualification_passed, report.explanations
+E           AssertionError: ['Correctness counts distinct held-out cases; repetitions measure variability.', 'Latency includes routing and grading...resh. Conditions are never pooled.', 'Benefits apply to the complete reviewed workflow, not to the plugin alone.', ...]
+E           assert False
+E            +  where False = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='workflow', cand...cked_or_budget_exhausted'], created_at=datetime.datetime(2026, 9, 30, 9, 37, 39, 218443, tzinfo=datetime.timezone.utc)).qualification_passed
+
+tests/test_v08_planning.py:212: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_assessment.py::test_generated_definition_requires_review_and_uses_same_pipeline
+FAILED tests/test_v08_pilot.py::test_pilot_uses_campaign_but_cannot_qualify_or_reuse_holdout
+FAILED tests/test_v08_planning.py::test_search_workflow_assessment_binds_cases_and_preserves_constraints
