@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-10-03T08:08:55.351976+00:00",
+  "authority": "September 25/27 standing finite setup and evidence delegation",
+  "execution_authorized": true,
+  "review_sha256": "47a5bfe3c09ab6d24d6f0312774d0f8900ef7d2a50fa4e9f49fd9c81ff50dfe0",
+  "script_sha256": "f501e4cd8855e38edbc70bf841962228023d3913a1c1d2bcd68fc2255c7f1bdd",
+  "request_id": "conformance_probe_dffac78e181f4910a6b5cec6484dc716",
+  "exact_proxy_container_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+  "action": "Run exact reviewed zero-turn paired worker component check once inside a separately charged start/stop lifecycle for existing reviewed model-service proxy.",
+  "limits": {
+    "proxy_operations": 2,
+    "proxy_reserved_seconds": 120,
+    "worker_operations": 2,
+    "worker_reserved_seconds": 480,
+    "model_turns": 0,
+    "cash_usd": 0
+  },
+  "reviewed": [
+    "Reserve both proxy start and cleanup before starting the exact stopped proxy.",
+    "Worker collector separately reserves two operations before any worker launch.",
+    "Start/stop commands have bounded subprocess timeouts and exact identity checks; worker coroutine has a450-second outer timeout plus collector cleanup.",
+    "Always attempt proxy restoration after start; preserve unknown cleanup, uncertain reservations and result files on failure.",
+    "No image pull/build, credential file access, callback task call or model turn; no automatic replay.",
+    "Source and exact prepared dependencies remain frozen; whole-system costs are not claimed."
+  ]
+}

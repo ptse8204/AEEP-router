@@ -1,0 +1,1256 @@
+{
+  "aggregate_limits": {
+    "cash_ceiling_usd": 0,
+    "total_maximum_model_turns": 2,
+    "total_maximum_operations": 18,
+    "total_maximum_reserved_seconds": 1596
+  },
+  "aggregate_reserved": {
+    "max_elapsed_seconds": 1596.0,
+    "max_model_turns": 2,
+    "max_operations": 18
+  },
+  "all_observed_operations_settled": true,
+  "audit_base_sha256": "8516bb3ff7c2c2c7ce2707793d6553cea5f8dda8dee9f92847df5733c9414703",
+  "both_diagnostic_results_present": true,
+  "canonical_database_read_only": true,
+  "diagnostic_results": {
+    "diagnostic-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 203.23082208400592,
+      "error_type": "PydanticUserError",
+      "failure_stage": "receipt_verification",
+      "host_execution_success": null,
+      "host_receipt_status": "timeout",
+      "model_turn_count_observed": 1,
+      "operation_settled": true,
+      "present": true,
+      "result_status": "failed",
+      "sha256": "249c2c86f14a2f21596fa9154d983e8d39c575a49b39c9f9526b64bfe534ee07",
+      "source_unchanged": true,
+      "stage": "canonical_result_persistence_unconfirmed"
+    },
+    "diagnostic-v2-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 23.510002250084653,
+      "error_type": null,
+      "failure_stage": null,
+      "host_execution_success": true,
+      "host_receipt_status": "success",
+      "model_turn_count_observed": 1,
+      "operation_settled": true,
+      "present": true,
+      "result_status": "passed",
+      "sha256": "9164b1ef85e54a7a3575dd558782673ca1ff50a7b0e26ae8bb50862e988b08e8",
+      "source_unchanged": true,
+      "stage": "callback_probe_recorded"
+    }
+  },
+  "expected_operation_count_present": true,
+  "finite_amendment_sha256": "7bb1dc32dd529c2e953fa68d0c26042b71f949506390ee2f1c81d74f9dacdd96",
+  "grant": {
+    "cash_usd": "0.0",
+    "elapsed_seconds": 107877.87661648821,
+    "id": "onboarding",
+    "model_turns": 2838,
+    "operations": 9730,
+    "revoked": 0
+  },
+  "grant_delta_scope": "all grant activity since preflight; not necessarily diagnostic-only",
+  "grant_delta_since_preflight": {
+    "elapsed_seconds": 282.88446316705085,
+    "model_turns": 2,
+    "operations": 18
+  },
+  "images": {
+    "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de": {
+      "configured_reference": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+      "inspection": {
+        "available": true,
+        "value": {
+          "digests": [],
+          "id": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+          "tags": []
+        }
+      }
+    },
+    "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53": {
+      "configured_reference": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "inspection": {
+        "available": true,
+        "value": {
+          "digests": [
+            "aeep-sol61-successor-treatment@sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53"
+          ],
+          "id": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+          "tags": [
+            "aeep-sol61-successor-treatment:1592"
+          ]
+        }
+      }
+    }
+  },
+  "known_containers": {
+    "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3": {
+      "inspection": {
+        "available": true,
+        "value": {
+          "id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+          "image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+          "name": "/aeep-reviewed-model-proxy",
+          "running": false,
+          "status": "exited"
+        }
+      },
+      "reported_by": "c-worker-components-v3-proxy-result.json"
+    },
+    "aeep-022e5c6c8cf9a8305cb6c58b82b38d0f": {
+      "inspection": {
+        "available": false,
+        "returncode": 1
+      },
+      "reported_by": "c-treatment-capacity-result.json"
+    }
+  },
+  "observed_at": "2026-10-04T23:15:03.646970+00:00",
+  "operation_time_scope": "ledger operations once each; child receipts and snapshots are not added",
+  "phases": [
+    {
+      "accounting": null,
+      "elapsed_seconds": 1.070878957863897,
+      "grant_id": "onboarding",
+      "measurement_digest": "fa36995d9d986959a8bbfc3715a64135d17447f69eadb995a1dfba1824a383b9",
+      "operation_id": "c-native-components:conformance_delay_native_treatment_20261004_e6b71acb",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 40.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "native_component_inspection",
+      "start_digest": "63bd6bc2cba03e05c7c1a13359b75218f41ddde85ffd32efac9cb703a4d104a2",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.1248981249518692,
+      "grant_id": "onboarding",
+      "measurement_digest": "bf763ef09e91cc5c3fe180445de078419dfd364a624cb29ca1b8ef62d81ac51f",
+      "operation_id": "capacity:planning_delay_capacity_e6b71a_19027f56_20261004",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "capacity_introspection",
+      "start_digest": "7a6effa6b03389eface0fdf73b0d373504c203c525fea466c9a87aca4a065324",
+      "state": "complete"
+    },
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [
+          {
+            "access_channel": "subscription",
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 264960,
+            "evidence": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": "2026-10-04T23:02:40.825960Z",
+              "source": "provider_report",
+              "source_reference": null,
+              "status": "partial",
+              "trust": "self_asserted"
+            },
+            "input_tokens": 303694,
+            "model": "gpt-6-luna",
+            "output_tokens": 8947,
+            "provider": "openai",
+            "reasoning_output_tokens": 6096
+          }
+        ],
+        "subscription_usage": [
+          {
+            "consumed": null,
+            "included_or_paid": "unknown",
+            "provider": "openai",
+            "rate_snapshot_id": null,
+            "resource_pool": "codex.self",
+            "source": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": null,
+              "source": "unavailable",
+              "source_reference": null,
+              "status": "unavailable",
+              "trust": "untrusted"
+            },
+            "unit": "provider_unit",
+            "usage_fingerprint": null
+          }
+        ],
+        "tool_footprint": null
+      },
+      "elapsed_seconds": 203.23082208400592,
+      "grant_id": "onboarding",
+      "measurement_digest": "34aca820b373c66900175d128e524b5d38ea241228dd041fadd16f820ecb8b0b",
+      "operation_id": "composed:conformance_probe_17ffbc14f98146619659c1cdec1660b2",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 208.0,
+        "max_model_turns": 1,
+        "max_operations": 1
+      },
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 264960,
+        "context_tokens": 0,
+        "cpu_ms": 0.0,
+        "gpu_ms": 0.0,
+        "input_tokens": 303694,
+        "latency_ms": 199076.657458907,
+        "memory_mb_seconds": 0.0,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 8947,
+        "peak_memory_mb": 0.0,
+        "reasoning_output_tokens": 6096,
+        "subscription_units": 0.0
+      },
+      "stage": "composed_pair_inspection",
+      "start_digest": "326d3c148144243ecca17959e767bb1ccbbb0b185693d80a40d44fd328d38f0b",
+      "state": "complete"
+    },
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [
+          {
+            "access_channel": "subscription",
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 26112,
+            "evidence": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": "2026-10-04T23:14:14.567095Z",
+              "source": "provider_report",
+              "source_reference": null,
+              "status": "complete",
+              "trust": "self_asserted"
+            },
+            "input_tokens": 58591,
+            "model": "gpt-6-luna",
+            "output_tokens": 716,
+            "provider": "openai",
+            "reasoning_output_tokens": 522
+          }
+        ],
+        "subscription_usage": [
+          {
+            "consumed": null,
+            "included_or_paid": "unknown",
+            "provider": "openai",
+            "rate_snapshot_id": null,
+            "resource_pool": "codex.self",
+            "source": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": null,
+              "source": "unavailable",
+              "source_reference": null,
+              "status": "unavailable",
+              "trust": "untrusted"
+            },
+            "unit": "provider_unit",
+            "usage_fingerprint": null
+          }
+        ],
+        "tool_footprint": null
+      },
+      "elapsed_seconds": 23.510002250084653,
+      "grant_id": "onboarding",
+      "measurement_digest": "dc94abb15b8a7e90a0c6120b4513d1e6e779a79c9318711ae4377d80a62d632b",
+      "operation_id": "composed:conformance_probe_df79d56a327244f0953a000bcea3c5f7",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 208.0,
+        "max_model_turns": 1,
+        "max_operations": 1
+      },
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 26112,
+        "context_tokens": 0,
+        "cpu_ms": 0.0,
+        "gpu_ms": 0.0,
+        "input_tokens": 58591,
+        "latency_ms": 19391.98691607453,
+        "memory_mb_seconds": 0.0,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 716,
+        "peak_memory_mb": 0.0,
+        "reasoning_output_tokens": 522,
+        "subscription_units": 0.0
+      },
+      "stage": "composed_pair_inspection",
+      "start_digest": "db7da21dee1717ac5404c6f5547566a6de63b0e4f66904425d9f2f4b55ff7d18",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 4.530442166840658,
+      "grant_id": "onboarding",
+      "measurement_digest": "d4b3142e31e6b0ecb402f8470b66483150674e014dcd24f7ccd85e41648ceff1",
+      "operation_id": "conformance_probe_3381d9eca6d44f19810f14b256ce5e21:proxy_preflight",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 30.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "proxy_preflight",
+      "start_digest": "ccac51be7c75f34bbe6b399fbc647b576ee9f20fd1032a3b971451ba64ef539d",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 0.12080737482756376,
+      "grant_id": "onboarding",
+      "measurement_digest": "840ef574c56459023ec177f07370abb6b9f58b143ab404388276e04d971561e3",
+      "operation_id": "conformance_probe_3381d9eca6d44f19810f14b256ce5e21:proxy_start",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_setup",
+      "start_digest": "b282865d4955eced5b967f3a8a0c3ce5a26ff66f9bbff579608dd9ff6aa680fb",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.1800592911895365,
+      "grant_id": "onboarding",
+      "measurement_digest": "faeb3f4331880de578356d8c8d4f5beb1048ec81639ae37a1862c6616cc0ded5",
+      "operation_id": "conformance_probe_3381d9eca6d44f19810f14b256ce5e21:proxy_stop",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_cleanup",
+      "start_digest": "9915cd93fb6530a32f1a1ccb84809efd951367527ce1537e5cd9d8fe01ff3c83",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.056656166911125,
+      "grant_id": "onboarding",
+      "measurement_digest": "dc98359992f063b553e493a99eecada7eff875550f58af1c5bb38ccbf53ce437",
+      "operation_id": "conformance_probe_3448425682ff403e81809e399a60ff43:proxy_preflight",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 30.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "proxy_preflight",
+      "start_digest": "3a6c3b9935d4a5052528a2da801dc4c2868b2e9597defc5063cc607ffd1af539",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 0.09940837509930134,
+      "grant_id": "onboarding",
+      "measurement_digest": "cc10ba5f92d8afb314a9bb4aa0eb6dec3b664a9667e0a8ac35c777f76aaa5a34",
+      "operation_id": "conformance_probe_3448425682ff403e81809e399a60ff43:proxy_start",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_setup",
+      "start_digest": "209b15af255dcf56612c044c1add917a10a03cd68c2d5665808bbedc1aa698ff",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.288293750025332,
+      "grant_id": "onboarding",
+      "measurement_digest": "5a212de70f9d96053171263f30d187d6d082f35a1b7d861ef4a938e4cd20851a",
+      "operation_id": "conformance_probe_3448425682ff403e81809e399a60ff43:proxy_stop",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_cleanup",
+      "start_digest": "26a3a81b88fdd224a4042a0bea59ff1bc4ad66fc72e3737aa207936ee5d0fbe7",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.069092083023861,
+      "grant_id": "onboarding",
+      "measurement_digest": "e1fe5b36435e7fae86f70db0d5786d33c228c285ade96d3029a0b340fc0a1c75",
+      "operation_id": "conformance_probe_4ee9727c2e334b0d914d40148eccc206:proxy_preflight",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 30.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "proxy_preflight",
+      "start_digest": "b66eb0b98209cef3268bc3c95283ca0e2c06436b263839a46c15179f385768e7",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 0.1528037078678608,
+      "grant_id": "onboarding",
+      "measurement_digest": "4be9c7693dbacc0cae41ad92313e53ff57d915740bedb5f2432afb7f1439e53b",
+      "operation_id": "conformance_probe_4ee9727c2e334b0d914d40148eccc206:proxy_start",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_setup",
+      "start_digest": "be18b84cd9fe30e48caa3cb5eef6a3f23aa6f43e76ec580c0437a6797b0306ef",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.318537082988769,
+      "grant_id": "onboarding",
+      "measurement_digest": "29f9bcdd821146cab91a485f91a21aef65babbcf6bfd2f85c87873184783bd16",
+      "operation_id": "conformance_probe_4ee9727c2e334b0d914d40148eccc206:proxy_stop",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_cleanup",
+      "start_digest": "a57398163342771f4881d78290bd2a2b1a9c1bc499b0cd263168d345982097e5",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 1.9644673340953887,
+      "grant_id": "onboarding",
+      "measurement_digest": "25405975f185db0cd112cb87059a2d2e9f74277f3ce46559ca70da1bf5a9cff9",
+      "operation_id": "conformance_probe_9bd9564d20d1450b8db41040fbb58b46:proxy_preflight",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 30.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "proxy_preflight",
+      "start_digest": "9d68226559b00bda2387691b0f4468cb691065f2d5276271a62541652fdd2e7d",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 0.10787850013002753,
+      "grant_id": "onboarding",
+      "measurement_digest": "1b919d914dcd4c98324b52f2ad7337144995eb6a25d7443e37bdf8eaa1d61f75",
+      "operation_id": "conformance_probe_9bd9564d20d1450b8db41040fbb58b46:proxy_start",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_setup",
+      "start_digest": "161d9f73fed79f443a86fa3563ff809b5555ee42d70b70cea76a125adaea8fc3",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 2.5513097499497235,
+      "grant_id": "onboarding",
+      "measurement_digest": "771b9adff08a9db8bfc2bd7c408441788f4719fe77b2033516eee96ad7593af1",
+      "operation_id": "conformance_probe_9bd9564d20d1450b8db41040fbb58b46:proxy_stop",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "reviewed_proxy_cleanup",
+      "start_digest": "124d599c12629453e4a8d62dc719a8b4c9e4e891365754c7f24a715e95fc1536",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 16.322245709132403,
+      "grant_id": "onboarding",
+      "measurement_digest": "85e1ac8601ba50f47fa75898efddb5461e95be690c2ff18e367a937b02b3c831",
+      "operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 240.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "worker_pair_inspection",
+      "start_digest": "599c1565d12f7fa579aad91813bb9af25f24d6f35b44676ce1a04602e2171953",
+      "state": "complete"
+    },
+    {
+      "accounting": null,
+      "elapsed_seconds": 16.18586045806296,
+      "grant_id": "onboarding",
+      "measurement_digest": "858284dc030b2e4ad67ee8d38eb72383aec5df451e21bc3b9c3396dad35287ad",
+      "operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 240.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": null,
+      "stage": "worker_pair_inspection",
+      "start_digest": "81813145251bb3a8698377f4e0822bf152b89585282e9421a4327796aff597c2",
+      "state": "complete"
+    }
+  ],
+  "preexisting_reserved_operations": [
+    {
+      "current_state": "reserved",
+      "id": "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client",
+      "unchanged": true
+    },
+    {
+      "current_state": "reserved",
+      "id": "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+      "unchanged": true
+    }
+  ],
+  "probe_parent_links": [
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "02b9cec975fae1b950ae68855eff20c41b230ebf28b1e2a55c5a2262042e50b2",
+      "probe_name": "cross_worker",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "1743d859b87b5d3bbe19ce4613d1c041822d89e5b03d41fa19ccaa3759f11d09",
+      "probe_name": "denied_tool",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "1bcacb3c37c050d75a599c72653a059b709563383ce9347e1149ca3ead9982c0",
+      "probe_name": "credential_canary",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "2f91f9af91a7b9fa251215589fc5450b379840c42969d5c6e709c92675c62701",
+      "probe_name": "events",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "30dff03147dc281ae67a9fccc417cccbc29098166c6b8bec24627c1d7d86862d",
+      "probe_name": "configuration",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "3105fb4901537244a355747b3e308f1e5ca1b6d837db5977ffd4f25917ff5418",
+      "probe_name": "events",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "3ac980a501854b5f6af21a2581f924acdbee6c248179114c2c70dba028aa5aa2",
+      "probe_name": "candidate_access",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "613296934e19f7c9663bfb3c00b31017ea67d4516440aba417dded2b34db613a",
+      "probe_name": "resource_limits",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "6f670c8d3027cd8a0ff4b5e726a26044bc0befad0f27cbdf5c93f428ec57478b",
+      "probe_name": "configuration",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "6fc03bf591319676b6d934b97870135115fdb8bff01892a4178d32eac4e36717",
+      "probe_name": "candidate_access",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "6fd644c609c0cae14b6827f2988c1d9f118db7aea52c1e4e807e307761992afa",
+      "probe_name": "denied_tool",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "7bec9dfa3a30f3a1decd4475ec71d902e09257ee8b9fcaf254a818b4d65968aa",
+      "probe_name": "allowed_tool",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "7fd3835d6007edd2bc80b49423ef8650953a7b1351e631506e0a14233a89ca3c",
+      "probe_name": "candidate_network",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "98069595108a92fba572a88e6ea781783899685a6b2f6b3661a15cc88d851ec4",
+      "probe_name": "allowed_tool",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "9cb99ea658eb3deb9da7322ff829b0ea046cd60be9d842b01cd0956ac3e1991b",
+      "probe_name": "answers",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "a2bb16778eac3040a59ef32f4ccb4ecf52ddd3292de728555407c9be186730f8",
+      "probe_name": "cleanup",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "abee66c361ea11fd306d0a0750fffedf0c6427acdd4f9d7276bd6c42667d0083",
+      "probe_name": "cleanup",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "b9e46ff44b03edb791d92045bdda685be7fa7ec1ff5bfa3232cb6083c96ed6bf",
+      "probe_name": "candidate_network",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "bb7c7eec98c5c39035ca0ebc7fbe2cf674c8096f23e0f64ac0da28883d89ecfd",
+      "probe_name": "credential_canary",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "c87b636fb153cd287f2af9943b45238dd5be8ac2bf887757e986f34771b0de4f",
+      "probe_name": "cross_worker",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.322245709132403,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "d5c65d7880b6671f870c90d278812582ae9b0b6f487e4322feda24e2266125e9",
+      "probe_name": "answers",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 16.18586045806296,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "pair-inspection:conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "ee6ec0a6fcf43c2d41c509e3a999392a9b1c81b5a1c50754e80651549eb6c340",
+      "probe_name": "resource_limits",
+      "result": "c-worker-components-result-v2.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 23.510002250084653,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "composed:conformance_probe_df79d56a327244f0953a000bcea3c5f7",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "a9aa3a8afe55e466e4e6d05b6fa0651ba2f8035d78996d01fdc803bb8ca4be63",
+      "probe_name": "callback_authority",
+      "result": "diagnostic-v2-result.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 1.070878957863897,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "c-native-components:conformance_delay_native_treatment_20261004_e6b71acb",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "1729af9d386422a1c4c5b2f5be5a296580d292570fa47631f343caf9f00a27c3",
+      "probe_name": "native_boundary",
+      "result": "native-components-treatment-result.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 1.070878957863897,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "c-native-components:conformance_delay_native_treatment_20261004_e6b71acb",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "2a5156b4ee315d8ab641ddca6bc917a634a9d8d3f09a5d70be9340e418db1312",
+      "probe_name": "callback_lifecycle",
+      "result": "native-components-treatment-result.json"
+    },
+    {
+      "measurement_present": true,
+      "measurement_seconds": 1.070878957863897,
+      "parent_grant_id": "onboarding",
+      "parent_in_diagnostic": true,
+      "parent_operation_id": "c-native-components:conformance_delay_native_treatment_20261004_e6b71acb",
+      "parent_request_worker_matches": true,
+      "parent_start_digest_matches": true,
+      "parent_state": "complete",
+      "probe_definition_in_parent_request": true,
+      "probe_digest": "886a1e1fc59a7e0b14c028f335adf263b2d53f2f5e628382c03d354b813d2b31",
+      "probe_name": "protected_state",
+      "result": "native-components-treatment-result.json"
+    }
+  ],
+  "reservations_within_limits": true,
+  "results": {
+    "c-capacity-v1-proxy-result.json": {
+      "model_turns": 0,
+      "proxy_restored_stopped": true,
+      "sha256": "f540182e09a16e0bf1928c52b5f68d7eec166c23675f280885ddc4f270f58231",
+      "source_unchanged": true,
+      "status": "passed",
+      "workers": {}
+    },
+    "c-diagnostic-v1-proxy-result.json": {
+      "model_turns": 0,
+      "proxy_restored_stopped": true,
+      "sha256": "5a6db4b9946ea7d47e439964705b5ffbab6d8e9e8a42248a07c6e7b1d0477261",
+      "source_unchanged": true,
+      "status": "failed",
+      "workers": {}
+    },
+    "c-diagnostic-v2-proxy-result.json": {
+      "model_turns": 0,
+      "proxy_restored_stopped": true,
+      "sha256": "8107afadb01bfd7d2aa13949bb75c334042276073ae130639c0c74c4c3acee2b",
+      "source_unchanged": true,
+      "status": "passed",
+      "workers": {}
+    },
+    "c-treatment-capacity-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 2.1248981249518692,
+      "model_turns": 0,
+      "sha256": "84703e5aa0279bfdd31c30d2b291017b604517a86b8e5bada5504fd2c4f12578",
+      "source_unchanged": true,
+      "status": "passed",
+      "workers": {}
+    },
+    "c-worker-components-result-v2.json": {
+      "model_turns": 0,
+      "sha256": "0481cefd577e9251fb918d9cdd6a86d1ae6e146a1d89fe63e6bcb4177788aa75",
+      "source_unchanged": true,
+      "workers": {
+        "control": {
+          "cleanup_confirmed": true,
+          "request_id": "conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+          "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+        },
+        "treatment": {
+          "cleanup_confirmed": true,
+          "request_id": "conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+          "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+        }
+      }
+    },
+    "c-worker-components-v3-proxy-result.json": {
+      "model_turns": 0,
+      "proxy_restored_stopped": true,
+      "sha256": "412f0b53b5ada1942a94401df278e0c914dc6af8739e66eefbba9fb80c4b7cc7",
+      "source_unchanged": true,
+      "status": "passed",
+      "workers": {}
+    },
+    "diagnostic-persistence-result.json": {
+      "model_turns": 0,
+      "sha256": "65b7b8aa0362f703c5ca464c1de4e96f3b33b69605839e2033bfa80b38edd5de",
+      "status": "persisted_reviewed_inert",
+      "workers": {}
+    },
+    "diagnostic-result-recovery-proposed-review.json": {
+      "model_turns": 0,
+      "sha256": "8ce80953390215e085b033c75b4f2b3738430e48766071a647e09b4e143d19e1",
+      "status": "proposed_not_authorized",
+      "workers": {}
+    },
+    "diagnostic-result-recovery-result.json": {
+      "sha256": "efc8edef01794a71bf628fa37362b5834e2248f03e619c2762c2a95966008c73",
+      "status": "failed_result_persisted",
+      "workers": {}
+    },
+    "diagnostic-result-recovery-review.json": {
+      "model_turns": 0,
+      "sha256": "41e828fce5b9cff85debe6f61f206fc1e12ff19bfb6649cdee33b544ea52ba81",
+      "status": "reviewed",
+      "workers": {}
+    },
+    "diagnostic-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 203.23082208400592,
+      "host_accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [
+          {
+            "access_channel": "subscription",
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 264960,
+            "evidence": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": "2026-10-04T23:02:40.825960Z",
+              "source": "provider_report",
+              "source_reference": null,
+              "status": "partial",
+              "trust": "self_asserted"
+            },
+            "input_tokens": 303694,
+            "model": "gpt-6-luna",
+            "output_tokens": 8947,
+            "provider": "openai",
+            "reasoning_output_tokens": 6096
+          }
+        ],
+        "subscription_usage": [
+          {
+            "consumed": null,
+            "included_or_paid": "unknown",
+            "provider": "openai",
+            "rate_snapshot_id": null,
+            "resource_pool": "codex.self",
+            "source": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": null,
+              "source": "unavailable",
+              "source_reference": null,
+              "status": "unavailable",
+              "trust": "untrusted"
+            },
+            "unit": "provider_unit",
+            "usage_fingerprint": null
+          }
+        ],
+        "tool_footprint": null
+      },
+      "host_resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 264960,
+        "context_tokens": 0,
+        "cpu_ms": 0.0,
+        "gpu_ms": 0.0,
+        "input_tokens": 303694,
+        "latency_ms": 199076.657458907,
+        "memory_mb_seconds": 0.0,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 8947,
+        "peak_memory_mb": 0.0,
+        "reasoning_output_tokens": 6096,
+        "subscription_units": 0.0
+      },
+      "model_turn_count_observed": 1,
+      "operation_settled": true,
+      "result_status": "failed",
+      "sha256": "249c2c86f14a2f21596fa9154d983e8d39c575a49b39c9f9526b64bfe534ee07",
+      "source_unchanged": true,
+      "workers": {}
+    },
+    "diagnostic-v2-persistence-result.json": {
+      "model_turns": 0,
+      "sha256": "b96839da4225e8cd171422398f44e252302b09bbbf2300d8ac25ae618ab62fd9",
+      "status": "persisted_reviewed_inert",
+      "workers": {}
+    },
+    "diagnostic-v2-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 23.510002250084653,
+      "host_accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [
+          {
+            "access_channel": "subscription",
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 26112,
+            "evidence": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": "2026-10-04T23:14:14.567095Z",
+              "source": "provider_report",
+              "source_reference": null,
+              "status": "complete",
+              "trust": "self_asserted"
+            },
+            "input_tokens": 58591,
+            "model": "gpt-6-luna",
+            "output_tokens": 716,
+            "provider": "openai",
+            "reasoning_output_tokens": 522
+          }
+        ],
+        "subscription_usage": [
+          {
+            "consumed": null,
+            "included_or_paid": "unknown",
+            "provider": "openai",
+            "rate_snapshot_id": null,
+            "resource_pool": "codex.self",
+            "source": {
+              "digest": null,
+              "evidence_id": null,
+              "observed_at": null,
+              "source": "unavailable",
+              "source_reference": null,
+              "status": "unavailable",
+              "trust": "untrusted"
+            },
+            "unit": "provider_unit",
+            "usage_fingerprint": null
+          }
+        ],
+        "tool_footprint": null
+      },
+      "host_resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 26112,
+        "context_tokens": 0,
+        "cpu_ms": 0.0,
+        "gpu_ms": 0.0,
+        "input_tokens": 58591,
+        "latency_ms": 19391.98691607453,
+        "memory_mb_seconds": 0.0,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 716,
+        "peak_memory_mb": 0.0,
+        "reasoning_output_tokens": 522,
+        "subscription_units": 0.0
+      },
+      "model_turn_count_observed": 1,
+      "operation_settled": true,
+      "result_status": "passed",
+      "sha256": "9164b1ef85e54a7a3575dd558782673ca1ff50a7b0e26ae8bb50862e988b08e8",
+      "source_unchanged": true,
+      "workers": {}
+    },
+    "native-components-treatment-result.json": {
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 1.070878957863897,
+      "model_turns": 0,
+      "operation_settled": true,
+      "receipt_resources": [
+        {
+          "accounting": {
+            "cash": {
+              "components": [],
+              "status": "unavailable"
+            },
+            "model_usage": [],
+            "subscription_usage": [],
+            "tool_footprint": null
+          },
+          "executor_id": "delay20261004.native.component.guard.treatment",
+          "receipt_id": "rcpt_a41be0e76ca14a1e89d903a672fa5bec",
+          "resources": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 0,
+            "context_tokens": 47,
+            "cpu_ms": 176.32212600000003,
+            "gpu_ms": 0.0,
+            "input_tokens": 0,
+            "latency_ms": 377.41320906206965,
+            "memory_mb_seconds": 10.924485937819554,
+            "monetary_usd": 0.0,
+            "network_bytes": 0,
+            "output_tokens": 0,
+            "peak_memory_mb": 123.0625,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "status": "success"
+        },
+        {
+          "accounting": {
+            "cash": {
+              "components": [],
+              "status": "unavailable"
+            },
+            "model_usage": [],
+            "subscription_usage": [],
+            "tool_footprint": null
+          },
+          "executor_id": "delay20261004.native.component.cancel.treatment",
+          "receipt_id": "rcpt_5e214f5a1f814ce08ed89cf3a95c980b",
+          "resources": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 0,
+            "context_tokens": 12,
+            "cpu_ms": 119.18029100000001,
+            "gpu_ms": 0.0,
+            "input_tokens": 0,
+            "latency_ms": 337.8937500528991,
+            "memory_mb_seconds": 10.63727220715009,
+            "monetary_usd": 0.0,
+            "network_bytes": 0,
+            "output_tokens": 0,
+            "peak_memory_mb": 117.34375,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "status": "timeout"
+        }
+      ],
+      "result_status": "pass",
+      "sha256": "0451c9e0d9ed9c5ef7f1a20ab426403a1e1aeb4134e754440c42937266ff2f5f",
+      "source_unchanged": true,
+      "workers": {}
+    }
+  },
+  "runtime_mutations": false,
+  "schema_version": "assessment.diagnostic-resource-audit.v2",
+  "sum_completed_operation_seconds": 282.88446316705085,
+  "terminal_diagnostic_present": true,
+  "unknowns": [
+    "Whole-system preparation/audit overhead and complete resource totals are unavailable.",
+    "Missing disposable worker identifiers remain unknown; cleanup flags retain their recorded evidence scope.",
+    "Failed Docker inspection is unavailable, not proof of removal."
+  ],
+  "workers": {
+    "control": {
+      "image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "worker_id": "b-luna-discovery-20261003"
+    },
+    "treatment": {
+      "image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "worker_id": "b-luna-aeep-20261003"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "assessment.b-current-callback-persistence-review.v1",
+  "recorded_at": "2026-10-03T09:05:10.040796+00:00",
+  "authority": "Standing September 25/27 finite assessment delegation and current continuation",
+  "persistence_authorized": true,
+  "execution_authorized": false,
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "preparation_sha256": "26e0950a034f892611fe4f6f674a859fc8a92f055b780e7cda566013473f9007",
+  "preparer_sha256": "2e3fa87421792ea58df0a7b97f482fa44722169f60289ef4bef814ceef5f8cd0",
+  "request_digest": "3972e5deb114e26298f37b61584cd7f2fe852edc001f622595b9415165fb4a6a",
+  "request_id": "conformance_probe_73f14d25ff584796b60ae0a68058e687",
+  "records_reviewed": [
+    {
+      "kind": "boundary_probe_definition",
+      "digest": "5ec6163aaf6b18fc9f02e0a2df2f112f67d71c18ee3911b4ffc6eb2609e373f6"
+    },
+    {
+      "kind": "composed_callback_action",
+      "digest": "0643c460b2b7144cec3835c40da842298c091d946df799aa1a9f447a2d8690d7"
+    },
+    {
+      "kind": "b_callback_fixture_binding",
+      "digest": "87c9d3165fc461b0678bdf15a601fdaaf8bb453f1a541528def72a91a8b4b1c0"
+    },
+    {
+      "kind": "b_callback_capacity_binding",
+      "digest": "1105f9165e923010df7edfa4070090d7580a373f046223adc53800c90e7ba0a9"
+    },
+    {
+      "kind": "conformance_request",
+      "digest": "3972e5deb114e26298f37b61584cd7f2fe852edc001f622595b9415165fb4a6a"
+    }
+  ],
+  "limits": {
+    "cash_usd": 0,
+    "elapsed_seconds": 208.0,
+    "model_turns": 1,
+    "operations": 1,
+    "task_call_timeout_seconds": 10.0,
+    "task_calls": 1,
+    "task_scope_attempts": 1
+  },
+  "review_findings": [
+    "Pinned current shared environment and treatment callback",
+    "Only first public fixture input parsed; content-free binding persisted; action template input empty",
+    "Current same-worker zero-turn capacity evidence bound",
+    "Exact native v4 result and execution runner require separate final review",
+    "No operation reservation or model call authorized by this persistence step"
+  ]
+}

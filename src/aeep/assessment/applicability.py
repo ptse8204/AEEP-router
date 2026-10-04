@@ -28,7 +28,13 @@ def require_applicable(
     spec: ExecutorSpec,
     request: ActionRequest | None,
     baseline: ExecutorSpec | None = None,
+    *,
+    configuration_only: bool = False,
 ) -> None:
+    # Operator preparation has no task input yet. It still checks every binding;
+    # dispatch always supplies its input and uses the default complete check.
+    if configuration_only and request is not None:
+        raise ConfigurationError('configuration-only validation cannot dispatch an action')
     with store._lock:
         marker = store._connection.execute(
             "SELECT admission_id, revoked FROM assessment_admissions WHERE executor_id=?",
@@ -36,7 +42,7 @@ def require_applicable(
         ).fetchone()
         if marker is None:
             return
-        if marker[1] or request is None:
+        if marker[1] or (request is None and not configuration_only):
             raise NoRouteError("scoped automatic use is revoked or lacks applicability evidence")
         repository = AssessmentRepository(store)
         try:
@@ -84,16 +90,18 @@ def require_applicable(
             ):
                 repository.revoke_admission(spec.id)
                 raise ConfigurationError("reviewed recipe changed")
-            validate_json(request.input, recipe.input_schema, label="assessed task input")
-            observed = recipe_features(recipe, request.input)
-            if (
-                observed is None
-                or set(observed) != set(admission.applicability)
-                or any(value not in admission.applicability[key] for key, value in observed.items())
-            ):
-                raise ConfigurationError("request lies outside the assessed scope")
-            if admission.feature_combinations is not None and observed not in admission.feature_combinations:
-                raise ConfigurationError("request combines features that were not assessed together")
+            if not configuration_only:
+                assert request is not None
+                validate_json(request.input, recipe.input_schema, label="assessed task input")
+                observed = recipe_features(recipe, request.input)
+                if (
+                    observed is None
+                    or set(observed) != set(admission.applicability)
+                    or any(value not in admission.applicability[key] for key, value in observed.items())
+                ):
+                    raise ConfigurationError("request lies outside the assessed scope")
+                if admission.feature_combinations is not None and observed not in admission.feature_combinations:
+                    raise ConfigurationError("request combines features that were not assessed together")
             subject = AssessmentSubject.model_validate(
                 repository.get("subject", admission.subject_digest)
             )

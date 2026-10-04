@@ -1,0 +1,83 @@
+{
+  "correction": "The successor compares the reviewed project-manifest digest to the exact pinned native manifest SHA, rather than a nonexistent setup-result field. It also binds a distinct v2 review/result path, request ID and definition ID; originals remain unchanged.",
+  "execution_authorized": false,
+  "failure": {
+    "cause": "The runner incorrectly indexed manifest_sha256 from b-native-setup-v3-result.json. The pinned fixture has no top-level manifest_sha256 field.",
+    "field": "manifest_sha256",
+    "location": "load_review; prior line 240",
+    "type": "KeyError"
+  },
+  "fixture_audit": {
+    "native_project_manifest_sha256": "11707d498ce6a285c85c0e7c90314e9f24ff355e1be987021898896e9e920d60",
+    "native_project_manifest_sha256_source": "pinned b-native-component-definitions.py constant; already represented by prior native-component review's manifest_sha256",
+    "producer_sha256": "c116448d0123c55cd3fada656a49f230702211e373d0b5b24caf6625d2da2a1f",
+    "setup_result_has_manifest_sha256": false,
+    "setup_result_sha256": "45f2344b74181d79ca284c8d3d3adc3d8d73a3c9edd1ccc51ef6993ed2968752",
+    "setup_result_top_level_keys": [
+      "artifact",
+      "callback_documents_by_role",
+      "elapsed_measurement_scope",
+      "elapsed_seconds",
+      "model_turns",
+      "operation_id",
+      "operation_settled",
+      "project",
+      "project_bytes",
+      "request_id",
+      "review_sha256",
+      "scope_digest",
+      "scope_expires_at",
+      "scope_id",
+      "setup_complete",
+      "source_digest",
+      "task_calls",
+      "whole_system_cost_complete",
+      "worker_documents",
+      "worker_launches"
+    ],
+    "setup_review_has_manifest_sha256": false,
+    "setup_review_sha256": "ab4f78de528080b8684d8d608786d15a5b8aa616755d7f9033957ac0c44ef7b5",
+    "setup_review_top_level_keys": [
+      "amendment",
+      "authority",
+      "canonical_store",
+      "definitions",
+      "execution_authorized",
+      "max_cash_usd",
+      "max_model_turns",
+      "max_operations",
+      "max_project_bytes",
+      "max_seconds",
+      "project",
+      "purpose",
+      "request",
+      "request_digest",
+      "source_digest"
+    ]
+  },
+  "full_conformance": false,
+  "preflight_outcome": "failed_before_main_database_open_or_reservation",
+  "prior_driver_path": "reports/v08/luna-docx-stage/b-run-native-components.py",
+  "prior_driver_sha256": "b1c3f26bd933d0bd7d427fe7d867072fe479e16b394a1d3b8fa4f78a90f7690d",
+  "prior_reviewed_request_id": "conformance_b_native_components_449b",
+  "remaining_gates": [
+    "callback authority/invocation and host EOF remain unobserved",
+    "these three probes alone do not satisfy require_conformance required/composed probe set"
+  ],
+  "reservation_or_execution_started": false,
+  "schema_version": "b-native-components-preflight-correction.v1",
+  "stage": "native_component_inspection",
+  "successor_definition_id": "b-native-components-v2-449b",
+  "successor_driver_path": "reports/v08/luna-docx-stage/b-run-native-components-v2.py",
+  "successor_driver_sha256": "baed241364499948433931471617e8da5ac58c0eb7311c004e6ec2397d1cf7a7",
+  "successor_probe_evidence": "Each probe is predeclared in the request. Actual supervisor evidence references retained child receipts/evidence and actual observed output/process cleanup; a cancelled child receipt is never relabeled successful.",
+  "successor_probe_names": [
+    "native_boundary",
+    "protected_state",
+    "callback_lifecycle"
+  ],
+  "successor_request_id": "conformance_b_native_components_v2_449b",
+  "successor_result_path": "reports/v08/luna-docx-stage/b-native-components-v2-result.json",
+  "successor_review_path": "reports/v08/luna-docx-stage/b-native-components-v2-review.json",
+  "successor_review_schema": "b-native-components-review.v2"
+}

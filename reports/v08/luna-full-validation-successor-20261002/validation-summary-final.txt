@@ -1,0 +1,57 @@
+Final bounded software verification record
+Date: 2026-10-02
+
+Source and lock binding
+- Before the DOCX marker, global verification_source_digest was
+  060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293.
+- The authorized one-line marker in tests/test_v08_docx_pair_inspection.py has
+  preimage SHA-256 77f16bb78a525cdc75c8f9c06f276b914c22fa27985461e9ba9ac9356cb1344c
+  and postimage SHA-256 21ff8fdfd4b342047a78adf4f2b1c535a8131de257c4c0be0c23a0058508e47a.
+- After that marker, global verification_source_digest is
+  eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1.
+- Current reports/v08/verification-lock.json SHA-256 is
+  2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71.
+- The September 25/27 standing delegated test-definition authority and exact
+  reason are recorded in docx-test-layer-review.json. No production source was
+  changed in this subtask.
+
+Validation outcomes
+- Assessment policy, compileall, generated schema check, and the three DOCX
+  contract tests passed after the marker. See 11 through 14 logs.
+- Final plain full pytest passed: 1,163 passed, 21 skipped, 1 warning in
+  591.86s. The warning is Starlette's httpx TestClient deprecation.
+- Final `coverage run --branch -m pytest` passed: 1,163 passed, 21 skipped,
+  1 warning in 899.33s. `coverage report -m` passed with 82% total coverage
+  over 30,304 statements and 10,368 branches (2,263 missing). See 15 through
+  18 logs; coverage data and JSON are retained as coverage-after-marker.data
+  and coverage-after-marker.json.
+- Both existing coverage gates passed against the final coverage JSON. Critical
+  gate minimum was 91.42% (App Server transport); assessment gate minimum was
+  90.00% (incremental utility). Exact per-target values are in logs 19 and 20.
+- After the current v08 idempotency artifact pin was reviewed and updated, the
+  focused completion verifier and a full pytest passed (1,163 passed, 21
+  skipped, 1 warning in 580.86s); branch coverage and both gates also passed
+  before the marker. The lock review records the old and new artifact digests.
+- The earlier offline-guard full pytest failure and the initial stale tool
+  surface failures are preserved in the preceding luna-full-validation-20261002
+  report directory. The initial post-lock full test failure was solely the
+  stale current-v08 pin for tests/test_p0_usefulness.py and remains preserved
+  as 03-pytest.log here. No failure log was overwritten.
+
+Storage and cleanup
+- The initial successor test root reached 5,772,652 KiB and was removed after
+  completion and a no-open-handles check.
+- The post-lock retry root reached 11,573,240 KiB and was removed after
+  completion and a no-open-handles check.
+- The final marker-bound test root reached 11,558,832 KiB and was removed after
+  completion and a no-open-handles check. All logs and coverage artifacts remain.
+- macOS NSURL important-usage capacity was about 236.2 GB before verification;
+  after final temp cleanup it was 229,488,776,046 bytes. Raw `df` then showed
+  42 GiB free. Storage readings are in storage-before.log,
+  storage-before-final-marker-run.log, and storage-after-cleanup.log.
+
+Exact commands and per-command environment are in commands.txt and each log.
+Both complete test runs cleared AEEP_VERIFY_OFFLINE and explicit live, native,
+and container opt-ins. Test temp roots were under the allowed platform temp
+parent; no installs, Docker operations, authentication reads, or model calls
+were made by this validation task.

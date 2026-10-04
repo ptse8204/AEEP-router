@@ -1,5 +1,42 @@
 # Architecture and design decisions
 
+## Discovery and admission boundary
+
+[ADR-010](docs/adr/ADR-010-ard-discovery-boundary.md) selects ARD as the primary
+external discovery protocol, with local/manual sources and other adapters kept
+available. Discovery is an explicit preparation step. The host owns task
+planning; `ActionRequest` remains the semantic execution contract, and ordinary
+routing neither contacts a registry nor launches assessment.
+
+Registry metadata supplies inert identities and provenance. Artifact inspection
+and reviewed mappings connect those candidates to existing assessment subjects.
+Applicable evidence must bind artifact and behavior fingerprints as well as the
+task/model/configuration cohort. Discovery rank and publisher trust claims never
+become observed resources or local qualification. Admission, activation and
+dispatch keep their existing authority checks; a recommendation alone cannot
+activate a route.
+
+`discovery_service.py` stores source/query/result lineage through the existing
+assessment repository; query text and cursor text are represented by digests.
+`capability_lifecycle.py` binds a discovered candidate to an operator-selected
+local inspection and optional mapping, then looks up existing applicable
+admission. Its returned disposition is advice at lookup time, never an execution
+grant. Metadata and identity remain separate from inspected artifact bytes.
+
+`profiles.py` wraps existing task scopes and activation with exact manifest,
+executor and tool-schema bindings. It supports AEEP task-service schema exposure
+and call enforcement. Whole-host catalog filtering, native skill/hook/file
+exclusion and context reset are unsupported in this profile implementation;
+strict requests stop at preflight. Existing managed-host invocation adapters
+separately compile native controls for their reviewed invocation targets.
+Installed, discoverable, permitted, exposed and used remain separate facts, with
+unobserved host states left unknown. A component toggle does not establish
+whole-plugin absence, and a fresh directory provides no credential isolation.
+
+The [integration compatibility record](docs/INTEGRATIONS.md#native-control-compatibility)
+separates documented host methods from observed enforcement. Implementation
+status and unmeasured gates remain in [plan coverage](reports/v08/plan-coverage.md).
+
 ## Native task increment (steering amendment v1)
 
 Production and assessment share Router eligibility, approvals, execution attempts,
@@ -42,8 +79,10 @@ The [assessment testing policy](docs/ASSESSMENT_TESTING.md) defines the current
 worker and release boundaries. `aeep.execution` supplies provider-neutral
 capabilities, handles, ordered events and evidence. Explicit host registrations
 own adapter construction and identity resolution. Existing `execute` methods
-remain compatibility entry points. App Server retains experimental status;
-Codex Exec and MCP report only the capabilities they implement.
+remain compatibility entry points. App Server support is assessed per method and
+installed version; its under-development plugin-management methods are excluded
+from production dependencies. Codex Exec and MCP report only the capabilities
+they implement.
 
 Controlled invocations persist sanitized journal events through the existing
 assessment repository. Completed receipts link to immutable execution evidence.

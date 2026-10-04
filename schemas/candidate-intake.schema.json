@@ -1,0 +1,299 @@
+{
+  "$defs": {
+    "ExternalResourceIdentity": {
+      "additionalProperties": false,
+      "description": "Registry identity, never an assertion that artifact bytes were verified.",
+      "properties": {
+        "schema_version": {
+          "const": "discovery.external_identity.v1",
+          "default": "discovery.external_identity.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "scheme": {
+          "enum": [
+            "ard",
+            "registry"
+          ],
+          "title": "Scheme",
+          "type": "string"
+        },
+        "identifier": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Identifier",
+          "type": "string"
+        },
+        "registry_origin": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Registry Origin",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        },
+        "content_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Digest"
+        }
+      },
+      "required": [
+        "scheme",
+        "identifier",
+        "registry_origin"
+      ],
+      "title": "ExternalResourceIdentity",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "PackageLocatorKind": {
+      "enum": [
+        "local",
+        "https",
+        "repository"
+      ],
+      "title": "PackageLocatorKind",
+      "type": "string"
+    },
+    "ProviderPackageLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/PackageLocatorKind"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "subdirectory": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subdirectory"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "ProviderPackageLocator",
+      "type": "object"
+    },
+    "RegistryCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "registry_candidate_id": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Registry Candidate Id",
+          "type": "string"
+        },
+        "adapter_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Adapter Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Description",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Tags",
+          "type": "array"
+        },
+        "source_repository": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Repository"
+        },
+        "package_locator": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProviderPackageLocator"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "remote_endpoint": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remote Endpoint"
+        },
+        "provenance": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Provenance",
+          "type": "object"
+        },
+        "marketplace_labels": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Marketplace Labels",
+          "type": "object"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "raw_metadata_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Raw Metadata Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry_candidate_id",
+        "adapter_id",
+        "name",
+        "retrieved_at",
+        "raw_metadata_digest"
+      ],
+      "title": "RegistryCandidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.candidate-intake.v1",
+      "default": "aeep.candidate-intake.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/RegistryCandidate"
+    },
+    "candidate_snapshot_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Snapshot Digest",
+      "type": "string"
+    },
+    "external_identity": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExternalResourceIdentity"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    },
+    "mapping_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mapping Digest"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate",
+    "candidate_snapshot_digest",
+    "subject_id",
+    "subject_digest"
+  ],
+  "title": "CandidateIntake",
+  "type": "object"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "luna.b_native_workbook_producer_review.v1",
+  "status": "static_preparation_complete; setup_not_executed",
+  "source_binding": {
+    "verification_source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+    "current_source_helper": "reports/v08/original-three-way-profile/current-native-workbook-producer.py",
+    "current_source_helper_sha256": "bc3369fdcdb5b86603b468395f7004b6a4fb3ae832c7eff54d991e0f98d910a7",
+    "new_report_local_helper": "reports/v08/luna-docx-stage/b-native-workbook-producer.py",
+    "new_report_local_helper_sha256": "6418d61c4ea1d7009da74ad731e958cd6f3241cb3df8722ca74ba49177666b16",
+    "ordinary_workbook_program": "integrations/assessment-runtime/workbook_program.py",
+    "ordinary_workbook_program_sha256": "51b9030cf4fe85a1e123d869965f90fbbb58ae03a5d17c91bca1e652009a4c18"
+  },
+  "runtime_pins": {
+    "native_launcher_path": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+    "native_launcher_version": "codex-cli 0.154.0",
+    "native_launcher_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+    "python_configured_path": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "python_resolved_path": "/Users/edwintse/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "python_version": "Python 3.12.14",
+    "python_sha256": "5ccd02f7849086e9314db5778ba9085c10a7dd3879c949626f2cf838294c7325",
+    "verification": "Paths, versions and file hashes checked read-only; producer and project code were not imported or executed."
+  },
+  "preserved_contract": {
+    "ordinary_operation": "Existing workbook_recipe/reference workbook_program ordinary operation remains the shared fixed/AEEP operation; this is not the grader.",
+    "executor": "native.composed.workbook; COMMAND argv-only Python -I -c implementation; existing workbook callback validator retained.",
+    "policy": "fallback disabled; max_attempts=1.",
+    "task_scope": "READ ceiling; one attempt; max_attempt_seconds=10; two-hour expiry; exact executor fingerprint; fresh project directory required.",
+    "services": "Retains FixedHelperService and AEEPToolService(profile=\"task\", task_scope=...). document() creates the current CodexDynamicTools.task_service declarations with the reviewed worker/native-backend/implementation/scope/artifact identity, max_calls=1 and timeout_seconds=10.",
+    "source_and_runtime_checks": "require_pins checks full eaa source digest, exact Codex launcher SHA and exact Python runtime SHA before setup/reopen.",
+    "project_isolation": "setup refuses an existing project and refuses a path inside the repository; it requires an existing parent. It does not reset or open a canonical assessment DB."
+  },
+  "explicit_future_functions": {
+    "setup(project)": {
+      "effect": "Creates the fresh project/scratch tree and project-local .aeep/state.db, writes aeep.json, registers/reviews the workbook recipe and fixed TaskScope, and binds that scope.",
+      "precondition": "Must receive a separately reviewed finite setup reservation and exact absent project path outside the repository. No setup has been performed.",
+      "failure_handling": "A failure may leave a partial project; preserve it as unfinished evidence and do not reuse/reset that path."
+    },
+    "reopen(project)": "Reads the existing project manifest/scope, checks executor fingerprint/project binding, and binds the existing scope; no allowance reset.",
+    "services(...)": "Constructs the task-profile AEEP and fixed helper service objects and verifies the exact workbook declaration; it does not invoke a task handler.",
+    "document(...)": "Builds callback declarations only; code comment and call path show no verifier or handler invocation. It requires exact future worker/artifact inputs and should follow the reviewed setup.",
+    "automatic_entrypoint": "AST confirms no module-level calls and no main/autoexecution block."
+  },
+  "static_checks": {
+    "ast_parse": "PASS; six top-level function definitions; zero module-level calls.",
+    "ruff": "The new helper reports 25 pre-existing-style findings; the original helper reports 26. No Ruff finding count increased. New file retains compressed legacy statements, unused json import, and loop-lambda B023 diagnostics; these were not broadened into a formatting rewrite.",
+    "runtime_or_test_execution": "None."
+  },
+  "limits": "This prepares a report-local producer only. It does not create/reserve project state, prove current native or task-boundary conformance, make a qualification plan, run workers/models, or qualify/admit a candidate."
+}

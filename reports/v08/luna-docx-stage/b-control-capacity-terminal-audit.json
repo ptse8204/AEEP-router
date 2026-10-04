@@ -1,0 +1,146 @@
+{
+  "audit_scope": "Read-only terminal audit of exactly three reviewed capacity/proxy operations, their operation rows, result reports, source-unchanged assertions and reported proxy stopped state. No runtime, replay, auth access, task payload read, grant write or canonical mutation.",
+  "audited_at": "2026-10-03T09:53:35Z",
+  "canonical_read_method": {
+    "authentication_state_read": false,
+    "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+    "mode": "SQLite URI mode=ro",
+    "rows": "Exactly the three operation IDs listed above, with their operation_start and operation_measurement digests and selected timing fields.",
+    "task_payload_read": false
+  },
+  "control_binding": {
+    "capacity_digest": "sha256:fbaf193b9ea393ba126f7cd9548ea95de5f224dac401db6d77426f13bc6a9df1",
+    "capacity_observed_at": "2026-10-03T09:52:11.686712Z",
+    "executor_id": "b.luna.discovery",
+    "method": "account/rateLimits/read",
+    "profile": "reports/v08/luna-docx-stage/b-current-profile-v2.json",
+    "resource_id": "codex.self",
+    "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+  },
+  "evidence_files": {
+    "b-control-capacity-proxy-lifecycle-result.json": {
+      "path": "reports/v08/luna-docx-stage/b-control-capacity-proxy-lifecycle-result.json",
+      "sha256": "db1bb678046d4fb219ad2d71003295ce9cd1762e283c1c9601540e271b37c34a"
+    },
+    "b-control-capacity-proxy-lifecycle-review.json": {
+      "path": "reports/v08/luna-docx-stage/b-control-capacity-proxy-lifecycle-review.json",
+      "sha256": "e53c1a96bfeb6a35dda38e234b657f51d3c7ce9adf213bc2b754d391f72ca54c"
+    },
+    "b-control-capacity-proxy-lifecycle-started.json": {
+      "path": "reports/v08/luna-docx-stage/b-control-capacity-proxy-lifecycle-started.json",
+      "sha256": "dc05f54ffd1732fe968c1db98cd3a864882b1e13d9ef7a3dac3436180935c819"
+    },
+    "b-control-capacity-result.json": {
+      "path": "reports/v08/luna-docx-stage/b-control-capacity-result.json",
+      "sha256": "ee954929771c7c955f126f0da0047185a8ade3f156167f2510a7ca88d2c4a736"
+    },
+    "b-control-capacity-review.json": {
+      "path": "reports/v08/luna-docx-stage/b-control-capacity-review.json",
+      "sha256": "0a54a07a3c2fec588afc724b05a20cbfecdd6b48034022a219b6b506f4719264"
+    }
+  },
+  "interpretation": "All three exact canonical operations are complete with their reviewed one-operation, zero-turn, zero-cash-ceiling reservations. The control worker capacity read passed and the reviewed proxy lifecycle reports it restored stopped. This is capacity introspection and cleanup evidence only; it is not callback conformance, qualification or value evidence.",
+  "limits": [
+    "Actual cash/subscription use was not measured.",
+    "Proxy stopped state is based on the exact lifecycle result; this audit did not issue a new Docker query.",
+    "The capacity observation details are represented only by resource, timestamp and digest; rate-limit window contents are not repeated."
+  ],
+  "operations": [
+    {
+      "operation_id": "capacity:planning_b_control_capacity_449b_e15b7ee0",
+      "records": [
+        {
+          "digest": "ea869c7d284f43a8618c47fd1d915bf37712955ed57c5338b93f8f79e162519d",
+          "elapsed_seconds": null,
+          "kind": "operation_start",
+          "stage": "capacity_introspection",
+          "started_at": "2026-10-03T09:52:08.925263Z"
+        },
+        {
+          "digest": "1e486cc5c0ad4b44f2e08ab86743c35480384ffa879a63a2154286e97992ef02",
+          "elapsed_seconds": 2.9390529999509454,
+          "kind": "operation_measurement",
+          "stage": "capacity_introspection",
+          "started_at": "2026-10-03T09:52:08.925263Z"
+        }
+      ],
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "state": "complete"
+    },
+    {
+      "operation_id": "conformance_probe_eb8156552bdd4d35a243bed1381e79ae:proxy_start",
+      "records": [
+        {
+          "digest": "ddf3176e887cf2d12d6603e0a24ddd9042ec7989753cac34ed0b43fc17bab0a9",
+          "elapsed_seconds": null,
+          "kind": "operation_start",
+          "stage": "reviewed_proxy_setup",
+          "started_at": "2026-10-03T09:52:06.131277Z"
+        },
+        {
+          "digest": "7ff24a685c568f97a9d0b4032d849f35deedcbf8f3cc05cc8f4e60ad26a6f681",
+          "elapsed_seconds": 2.6660509170033038,
+          "kind": "operation_measurement",
+          "stage": "reviewed_proxy_setup",
+          "started_at": "2026-10-03T09:52:06.131277Z"
+        }
+      ],
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "state": "complete"
+    },
+    {
+      "operation_id": "conformance_probe_eb8156552bdd4d35a243bed1381e79ae:proxy_stop",
+      "records": [
+        {
+          "digest": "4a800f1eb97e16ae3a8c0cf8a808d936658f1bb38586aac94e8b53f9cd4c4a19",
+          "elapsed_seconds": null,
+          "kind": "operation_start",
+          "stage": "reviewed_proxy_cleanup",
+          "started_at": "2026-10-03T09:52:06.137421Z"
+        },
+        {
+          "digest": "0f4d534d663cc0fc6519eb08fbd36e7b57f574799d544ebf195b497091473764",
+          "elapsed_seconds": 1.791046124882996,
+          "kind": "operation_measurement",
+          "stage": "reviewed_proxy_cleanup",
+          "started_at": "2026-10-03T09:52:06.137421Z"
+        }
+      ],
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "state": "complete"
+    }
+  ],
+  "result_assertions": {
+    "actual_cash_cost_usd": null,
+    "capacity_cleanup_confirmed": true,
+    "capacity_refresh_status": "passed",
+    "capacity_source_unchanged": true,
+    "cash_ceiling_usd": 0,
+    "model_turns": 0,
+    "proxy_lifecycle_status": "passed",
+    "proxy_restored_stopped": true,
+    "proxy_running_wall_seconds": 4.893965916940942,
+    "router_closed": true,
+    "source_unchanged": true,
+    "start_operation_settled": true,
+    "stop_operation_settled": true,
+    "whole_system_cost_complete": false
+  },
+  "schema_version": "aeep.b-control-capacity-terminal-audit.v1",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad"
+}

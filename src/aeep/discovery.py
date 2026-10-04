@@ -5,18 +5,20 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import math
 import os
+import re
 import shutil
 from datetime import UTC, datetime
 from enum import StrEnum
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, Literal, Protocol
 from urllib.parse import urlencode
 
 import httpx
 import rfc8785
 import yaml
-from pydantic import Field, JsonValue
+from pydantic import Field, JsonValue, field_validator, model_validator
 
 from .errors import ConfigurationError, ExecutorError, ProtocolError
 from .executors.network import validate_http_url
@@ -149,6 +151,107 @@ class RegistryCandidate(StrictModel):
     raw_metadata_digest: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
 
 
+class ExternalResourceIdentity(StrictModel):
+    """Registry identity, never an assertion that artifact bytes were verified."""
+
+    schema_version: Literal['discovery.external_identity.v1'] = 'discovery.external_identity.v1'
+    scheme: Literal['ard', 'registry']
+    identifier: str = Field(min_length=1, max_length=2048)
+    registry_origin: str = Field(min_length=1, max_length=2048)
+    version: str | None = Field(default=None, max_length=200)
+    content_digest: str | None = Field(default=None, pattern=r'^sha256:[a-f0-9]{64}$')
+
+    @model_validator(mode='after')
+    def validate_identity(self) -> ExternalResourceIdentity:
+        if any(character.isspace() or ord(character) < 32 for character in self.identifier):
+            raise ValueError('external identifier must not contain whitespace or controls')
+        if self.scheme == 'ard':
+            if not self.identifier.startswith('urn:air:') or self.identifier == 'urn:air:':
+                raise ValueError('ARD identity requires its exact urn:air identifier')
+            url = httpx.URL(self.registry_origin)
+            if url.scheme != 'https' or not url.host or url.userinfo or url.query or url.fragment:
+                raise ValueError('ARD registry origin requires a credential-free HTTPS base URL')
+            object.__setattr__(self, 'registry_origin', str(url).rstrip('/'))
+        return self
+
+    def digest(self) -> str:
+        return _metadata_digest(self.model_dump(mode='json'))
+
+
+def external_resource_identity(candidate: RegistryCandidate) -> ExternalResourceIdentity | None:
+    """Legacy candidates stay unbound; do not infer exact identity from their names."""
+    value = candidate.provenance.get('external_identity')
+    return ExternalResourceIdentity.model_validate(value) if value is not None else None
+
+
+def candidate_artifact_type(candidate: RegistryCandidate) -> JsonValue:
+    entry = candidate.provenance.get('entry')
+    return entry.get('type') if isinstance(entry, dict) else candidate.provenance.get('artifact_type')
+
+
+class DiscoveryRequest(StrictModel):
+    schema_version: Literal['discovery.request.v1'] = 'discovery.request.v1'
+    public_query: str = Field(min_length=1, max_length=500)
+    source_ids: list[str] = Field(min_length=1, max_length=8)
+    limit: int = Field(default=20, ge=1, le=100)
+    cursor: str | None = Field(default=None, max_length=1000)
+    artifact_types: list[str] = Field(default_factory=list, max_length=32)
+
+    @field_validator('public_query')
+    @classmethod
+    def public_phrase(cls, value: str) -> str:
+        value = value.strip()
+        if (not value or any(ord(character) < 32 for character in value)
+                or re.search(r'(?i)(?:bearer\s|(?:api[_-]?key|password|token)\s*[:=]|'
+                             r'file://|/(?:Users|home)/|[A-Z]:\\|\S+@\S+)', value)):
+            raise ValueError('discovery requires public search terms without credentials or private paths')
+        return value
+
+    @field_validator('source_ids', 'artifact_types')
+    @classmethod
+    def bounded_labels(cls, values: list[str]) -> list[str]:
+        if len(set(values)) != len(values) or any(
+            not value or len(value) > 100 or any(ord(c) < 32 for c in value) for value in values
+        ):
+            raise ValueError('discovery labels must be unique, nonempty and bounded')
+        return values
+
+    @model_validator(mode='after')
+    def single_cursor_source(self) -> DiscoveryRequest:
+        if self.cursor is not None and len(self.source_ids) != 1:
+            raise ValueError('a page cursor belongs to exactly one source')
+        return self
+
+
+class DiscoverySourceRecord(StrictModel):
+    schema_version: Literal['discovery.source.v1'] = 'discovery.source.v1'
+    source_record_id: str
+    discovery_id: str
+    source_id: str
+    adapter_id: str
+    created_at: datetime
+    query_digest: str = Field(pattern=r'^sha256:[a-f0-9]{64}$')
+    status: Literal['complete', 'fallback', 'failed', 'timeout', 'skipped']
+    candidate_ids: list[str] = Field(default_factory=list)
+    candidate_digests: list[str] = Field(default_factory=list)
+    elapsed_ms: float = Field(ge=0)
+    cash_usd: float | None = Field(default=None, ge=0)
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class DiscoveryResult(StrictModel):
+    schema_version: Literal['discovery.result.v1'] = 'discovery.result.v1'
+    discovery_id: str
+    created_at: datetime
+    query_digest: str = Field(pattern=r'^sha256:[a-f0-9]{64}$')
+    candidate_ids: list[str] = Field(default_factory=list)
+    candidates: list[RegistryCandidate] = Field(default_factory=list)
+    source_records: list[DiscoverySourceRecord] = Field(default_factory=list)
+    elapsed_ms: float = Field(ge=0)
+
+
 class PackageRegistryAdapter(Protocol):
     adapter_id: str
 
@@ -166,13 +269,27 @@ def _metadata_digest(value: Any) -> str:
 class FixtureRegistryAdapter:
     adapter_id = "fixture"
 
-    def __init__(self, path: str | Path, *, clock: Any | None = None) -> None:
+    def __init__(self, path: str | Path, *, clock: Any | None = None,
+                 allowed_types: tuple[str, ...] = ()) -> None:
         self.path = Path(path)
         self.clock = clock or (lambda: datetime.now(UTC))
+        self.allowed_types = allowed_types
+
+    def _read(self) -> bytes:
+        from .artifact_store import _read_stable_file
+        from .assessment.identity import protected_directory
+
+        path = self.path.absolute()
+        if (protected_directory(path) or path != path.resolve() or path.is_symlink()
+                or path.name in {'auth.json', 'credentials.json', '.env'}
+                or path.name.startswith('.env.')
+                or any(part in {'.ssh', '.aws', '.azure', '.kube'} for part in path.parts)):
+            raise ConfigurationError('fixture registry requires an explicit non-secret regular file')
+        return _read_stable_file(path, 1_000_000)
 
     async def search(self, query: RegistryQuery) -> list[RegistryCandidate]:
         try:
-            payload = await asyncio.to_thread(self.path.read_bytes)
+            payload = await asyncio.to_thread(self._read)
         except OSError as exc:
             raise ConfigurationError("cannot read fixture registry") from exc
         if len(payload) > 1_000_000:
@@ -200,7 +317,10 @@ class FixtureRegistryAdapter:
             normalized.setdefault("adapter_id", self.adapter_id)
             normalized.setdefault("retrieved_at", self.clock())
             normalized.setdefault("raw_metadata_digest", _metadata_digest(item))
-            matched.append(RegistryCandidate.model_validate(normalized))
+            candidate = RegistryCandidate.model_validate(normalized)
+            if self.allowed_types and candidate_artifact_type(candidate) not in self.allowed_types:
+                continue
+            matched.append(candidate)
             if len(matched) >= query.limit:
                 break
         return matched
@@ -219,20 +339,24 @@ class ARDRegistryAdapter:
         self.allowed_types = allowed_types
         self.warnings: list[str] = []
 
-    async def search(self, query: RegistryQuery) -> list[RegistryCandidate]:
+    async def search(self, query: RegistryQuery, *, timeout_seconds: float = 10) -> list[RegistryCandidate]:
         self.warnings = []
         # Only a caller-supplied public search phrase crosses this preparation
         # boundary. There is no ActionRequest, task payload or filesystem context.
         if not query.query.strip():
             raise ConfigurationError('ARD requires an explicit public search phrase')
+        if not math.isfinite(timeout_seconds) or not 0 < timeout_seconds <= 10:
+            raise ConfigurationError('ARD remote search deadline must be finite and at most ten seconds')
         try:
-            async with asyncio.timeout(10):
+            async with asyncio.timeout(timeout_seconds):
                 return await self._search(query)
         except (ConfigurationError, ExecutorError, ProtocolError, httpx.HTTPError, ValueError, TimeoutError, RecursionError):
             if self.fallback is None:
                 raise ProtocolError('ARD search unavailable or unsupported; no candidates activated') from None
             self.warnings.append('ARD unavailable or unsupported; returning configured local candidates')
-            return await self.fallback.search(query)
+            candidates = await self.fallback.search(query)
+            return [candidate for candidate in candidates
+                    if not self.allowed_types or candidate_artifact_type(candidate) in self.allowed_types]
 
     async def _search(self, query: RegistryQuery) -> list[RegistryCandidate]:
         parsed = httpx.URL(self.base_url)
@@ -283,10 +407,18 @@ class ARDRegistryAdapter:
         if 'url' in entry and 'data' in entry:
             raise ValueError('ARD entry contains both artifact value and reference')
         digest = _metadata_digest(entry)
-        return RegistryCandidate(registry_candidate_id='ard_'+digest.removeprefix('sha256:')[:32],
+        identity = ExternalResourceIdentity(
+            scheme='ard', identifier=entry['identifier'], registry_origin=self.base_url,
+            version=entry.get('version'),
+        )
+        # Identical entries served by different registries are separate provenance.
+        candidate_digest = _metadata_digest({'origin': identity.registry_origin, 'metadata': digest})
+        return RegistryCandidate(registry_candidate_id='ard_'+candidate_digest.removeprefix('sha256:')[:32],
             adapter_id=self.adapter_id, name=entry.get('displayName') or entry['identifier'],
             description=entry.get('description',''), version=entry.get('version'),
             provenance={'specification':'ARD v0.91', 'entry':entry, 'trust_verified':False,
+                        'specification_revision':'b76f235a8f461876ad4f1e77abd0eb0eb302b48d',
+                        'external_identity':identity.model_dump(mode='json'),
                         'artifact_fetched':False, 'namespace_support':'default namespace only'},
             retrieved_at=datetime.now(UTC), raw_metadata_digest=digest)
 

@@ -113,7 +113,10 @@ async def inventory(
     }
 
 
-_BUNDLED_AEEP_SKILL_SHA256 = '25d1d391ab0d679f615282b2121ec9234f6b6dc7da35a0db629259728d02678f'
+_BUNDLED_AEEP_SKILL_SHA256 = {
+    '25d1d391ab0d679f615282b2121ec9234f6b6dc7da35a0db629259728d02678f',
+    'd0489c6744f8b0eb0cd6d4e2a71c05389aeb75eb0d799158d93677b762c1a522',
+}
 
 
 def _recursive_aeep_skill(skill: dict[str, Any], path: Path, digest: str | None) -> bool:
@@ -125,7 +128,7 @@ def _recursive_aeep_skill(skill: dict[str, Any], path: Path, digest: str | None)
     plugin = str(skill.get('pluginId', '')).split('@', 1)[0].lower()
     return (name in {'aeep', 'assess-plugin'} or name.startswith('aeep-')
             or plugin == 'aeep' or plugin.startswith('aeep-') or packaged
-            or digest == _BUNDLED_AEEP_SKILL_SHA256)
+            or digest in _BUNDLED_AEEP_SKILL_SHA256)
 
 
 def isolated_config(catalog: dict[str, Any], target: ManagedHostInvocation, *, verified_worker_skill: bool = False, reviewed_worker_files: dict[str, str] | None = None) -> dict[str, Any]:

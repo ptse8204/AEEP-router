@@ -608,8 +608,9 @@ async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
             "aeep_assessment_options",
             "aeep_assessment_setup",
             "aeep_assessment_generate_cases",
+            "aeep_lookup_capability",
         }
-        assert len(AEEPToolService(router).list_tools()) == 10
+        assert len(AEEPToolService(router).list_tools()) == 11
         response = await service.call("aeep_csv", {"text": "a,b\nx,y\n", "delimiter": ","})
         assert not response.get("isError")
         response = await service.call(

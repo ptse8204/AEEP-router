@@ -1,0 +1,818 @@
+{
+  "admission": false,
+  "blocked_reasons": [],
+  "budget_preview": {
+    "adapter_eligibility": [
+      {
+        "adapter": "codex-app-server:b-luna-aeep",
+        "adapter_version": "1",
+        "eligible": true,
+        "executor_id": "b.luna.aeep",
+        "managed_worker_configured": true,
+        "missing_capabilities": [],
+        "permission_verification": "checked_separately_before_invocation",
+        "support_status": "experimental"
+      }
+    ],
+    "campaign_allowance": {
+      "authorization_changed": false,
+      "automatic_retries": 0,
+      "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls.",
+      "fits_remaining": true,
+      "gaps": [],
+      "prior_operations": [
+        {
+          "elapsed_seconds": 1.032658708980307,
+          "operation_id": "b-native-components:conformance_b_native_components_v2_449b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.9761783748399466,
+          "operation_id": "b-native-components:conformance_b_native_components_v3_449b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.005622582975775,
+          "operation_id": "b-native-components:conformance_b_native_components_v4_449b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.0625067078508437,
+          "operation_id": "b-native-components:conformance_b_native_control_449b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.0282752078492194,
+          "operation_id": "c-native-components:conformance_c_native_components_control_50de",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.9891002499498427,
+          "operation_id": "c-native-components:conformance_c_native_components_treatment_50de",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 40.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "native_component_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 65.32130650011823,
+          "operation_id": "composed:conformance_probe_275bcac801924c7ab39f1a64aa15b29b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 208.0,
+            "max_model_turns": 1,
+            "max_operations": 1
+          },
+          "stage": "composed_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 76.41542812483385,
+          "operation_id": "composed:conformance_probe_73f14d25ff584796b60ae0a68058e687",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 208.0,
+            "max_model_turns": 1,
+            "max_operations": 1
+          },
+          "stage": "composed_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 15.335226542083547,
+          "operation_id": "composed:conformance_probe_b4854fe7b9bf4e75a17b54a7c141e234",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 208.0,
+            "max_model_turns": 1,
+            "max_operations": 1
+          },
+          "stage": "composed_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 66.81490745791234,
+          "operation_id": "composed:conformance_probe_eadcb4eee1a04e0dafa86cf8ffd9fba9",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 208.0,
+            "max_model_turns": 1,
+            "max_operations": 1
+          },
+          "stage": "composed_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.9333583330735564,
+          "operation_id": "conformance_probe_142d66c189ce4ccbbc56b5b4e2fd9e62:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.1124924998730421,
+          "operation_id": "conformance_probe_142d66c189ce4ccbbc56b5b4e2fd9e62:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.549995666136965,
+          "operation_id": "conformance_probe_142d66c189ce4ccbbc56b5b4e2fd9e62:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.652950500138104,
+          "operation_id": "conformance_probe_2261e300a89844dc83b0795ff9436c4c:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.6507214999292046,
+          "operation_id": "conformance_probe_2261e300a89844dc83b0795ff9436c4c:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.8726009170059115,
+          "operation_id": "conformance_probe_5c7e39f87b1c4f95930b9345be90f807:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.293496917001903,
+          "operation_id": "conformance_probe_5c7e39f87b1c4f95930b9345be90f807:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.895724750123918,
+          "operation_id": "conformance_probe_6edf0d0d0d024915a7e4d66ebfd1af65:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.09689016593620181,
+          "operation_id": "conformance_probe_6edf0d0d0d024915a7e4d66ebfd1af65:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.374916958855465,
+          "operation_id": "conformance_probe_6edf0d0d0d024915a7e4d66ebfd1af65:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.018732249969616532,
+          "operation_id": "conformance_probe_87a789c2360c4887a6ac14c63d12f237:proxy_metadata_diagnostic",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight_diagnostic",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 4.771392832975835,
+          "operation_id": "conformance_probe_87a789c2360c4887a6ac14c63d12f237:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.8894019580911845,
+          "operation_id": "conformance_probe_9322047301f84c89bcbc5f316b6cd02f:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.0986087501514703,
+          "operation_id": "conformance_probe_9322047301f84c89bcbc5f316b6cd02f:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.951029583113268,
+          "operation_id": "conformance_probe_9322047301f84c89bcbc5f316b6cd02f:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.3685589998494834,
+          "operation_id": "conformance_probe_9d68d35bc5d6450ca9e2a2e95d4b0755:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.470118834171444,
+          "operation_id": "conformance_probe_9d68d35bc5d6450ca9e2a2e95d4b0755:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.9029795830138028,
+          "operation_id": "conformance_probe_a2b6f33fad9b43af9d5e6d97a2f04223:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.12752316589467227,
+          "operation_id": "conformance_probe_a2b6f33fad9b43af9d5e6d97a2f04223:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.0190617910120636,
+          "operation_id": "conformance_probe_a2b6f33fad9b43af9d5e6d97a2f04223:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.11794212507084012,
+          "operation_id": "conformance_probe_a2deabffff324b17b6354f361f9d8ee4:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.165413249982521,
+          "operation_id": "conformance_probe_a2deabffff324b17b6354f361f9d8ee4:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 4.322053584037349,
+          "operation_id": "conformance_probe_a726084983b84e7eb690bf519ba16a39:proxy_preflight",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 30.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "proxy_preflight",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.12310225004330277,
+          "operation_id": "conformance_probe_a726084983b84e7eb690bf519ba16a39:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.288818374974653,
+          "operation_id": "conformance_probe_a726084983b84e7eb690bf519ba16a39:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.11854974995367229,
+          "operation_id": "conformance_probe_ba35fb97b0344a8dbb6ee8fb05e44253:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.217112041078508,
+          "operation_id": "conformance_probe_ba35fb97b0344a8dbb6ee8fb05e44253:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 0.7441413751803339,
+          "operation_id": "conformance_probe_cdbd4c9430374cfb8555771735f4a6c6:b_native_project_setup",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 120.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "b_native_project_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.685099749825895,
+          "operation_id": "conformance_probe_dffac78e181f4910a6b5cec6484dc716:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 5.322490208083764,
+          "operation_id": "conformance_probe_dffac78e181f4910a6b5cec6484dc716:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 2.6660509170033038,
+          "operation_id": "conformance_probe_eb8156552bdd4d35a243bed1381e79ae:proxy_start",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_setup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 1.791046124882996,
+          "operation_id": "conformance_probe_eb8156552bdd4d35a243bed1381e79ae:proxy_stop",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 60.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "reviewed_proxy_cleanup",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 16.476355416933075,
+          "operation_id": "pair-inspection:conformance_probe_4b643f2dfe6c4b06b86b243d79229cf4",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 15.148578541819006,
+          "operation_id": "pair-inspection:conformance_probe_6be2797fa71d4134ba4b1611ee460ab7",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 16.350305708125234,
+          "operation_id": "pair-inspection:conformance_probe_a06ff960273d4c2685195ff5d4382960",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 5.08605333394371,
+          "operation_id": "pair-inspection:conformance_probe_adb7773d9cdf4398a5ce857c9597d68b",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 15.27920470898971,
+          "operation_id": "pair-inspection:conformance_probe_bf48e94ea8b6458baadcb19a8f0325e0",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 5.090048208134249,
+          "operation_id": "pair-inspection:conformance_probe_c6ecf848c21d43488e8141b97a7e467e",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 240.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "worker_pair_inspection",
+          "state": "complete"
+        },
+        {
+          "elapsed_seconds": 3.7322841670829803,
+          "operation_id": "recipe_generation_fba076846c6c42abb85d72cb67c820f5-generator",
+          "reserved": {
+            "max_cash_usd": "0",
+            "max_elapsed_seconds": 35.0,
+            "max_model_turns": 0,
+            "max_operations": 1
+          },
+          "stage": "recipe_generation",
+          "state": "complete"
+        }
+      ],
+      "scope": "fresh_campaign_reservations",
+      "stages": [
+        {
+          "calls_minimum": 141,
+          "calls_upper": 141,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 29328.0,
+          "model_turns": 141,
+          "operations_upper": 141,
+          "stage": "trial"
+        },
+        {
+          "calls_minimum": 0,
+          "calls_upper": 0,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 0.0,
+          "model_turns": 0,
+          "operations_upper": 0,
+          "stage": "warmup"
+        },
+        {
+          "calls_minimum": 142,
+          "calls_upper": 142,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 4260,
+          "model_turns": 0,
+          "operations_upper": 142,
+          "stage": "router_setup"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 30,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "grader_validation"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 30,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "report_generation"
+        },
+        {
+          "calls_minimum": 2,
+          "calls_upper": 2,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 70.0,
+          "model_turns": 0,
+          "operations_upper": 2,
+          "stage": "grader_reference"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 353,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 12355.0,
+          "model_turns": 0,
+          "operations_upper": 353,
+          "stage": "grader_probe"
+        },
+        {
+          "calls_minimum": 0,
+          "calls_upper": 141,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 4935.0,
+          "model_turns": 0,
+          "operations_upper": 141,
+          "stage": "recipe_grading"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 0.07611758285202086,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "generation_and_proposal"
+        }
+      ],
+      "upper_allowance": {
+        "cash_usd": "0",
+        "elapsed_seconds": 51008.07611758285,
+        "model_turns": 141,
+        "operations": 782
+      }
+    },
+    "evaluation_stage": "qualification",
+    "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced.",
+    "measurement_concurrency": 1,
+    "minimum_trial_model_turns": 141,
+    "model_worker_profile_count": 1,
+    "purpose": "assessment",
+    "remaining": {
+      "cash_usd": "0",
+      "elapsed_seconds": 505631.01331243385,
+      "model_turns": 3305,
+      "operations": 40724
+    },
+    "screening_trial_model_turns": 8,
+    "trial_elapsed_upper_seconds": 29328.0,
+    "workers": [
+      {
+        "executor_id": "b.luna.aeep",
+        "model_worker_profiles": [
+          "codex-app-server:b-luna-aeep"
+        ],
+        "role": "candidate"
+      }
+    ]
+  },
+  "capacity_bootstrap_cost_audit": {
+    "already_charged_cpu_ms": null,
+    "already_charged_elapsed_seconds": 10.145983666880056,
+    "operations": [
+      {
+        "already_charged": true,
+        "cpu_measurement_status": "unavailable",
+        "cpu_ms": null,
+        "elapsed_seconds": 2.9390529999509454,
+        "grant_id": "onboarding",
+        "operation_id": "capacity:planning_b_control_capacity_449b_e15b7ee0",
+        "operation_measurement_digest": "1e486cc5c0ad4b44f2e08ab86743c35480384ffa879a63a2154286e97992ef02",
+        "operation_state": "complete",
+        "request_id": "planning_b_control_capacity_449b_e15b7ee0",
+        "request_path": "b-control-capacity-request.json",
+        "request_sha256": "d123e89c2103a726c56118aa625be6ad7a5d55151ed5e53d6e3d776f57bd5fac",
+        "result_path": "b-control-capacity-result.json",
+        "result_sha256": "ee954929771c7c955f126f0da0047185a8ade3f156167f2510a7ca88d2c4a736",
+        "role": "b-control"
+      },
+      {
+        "already_charged": true,
+        "cpu_measurement_status": "unavailable",
+        "cpu_ms": null,
+        "elapsed_seconds": 2.058614583918825,
+        "grant_id": "onboarding",
+        "operation_id": "capacity:planning_b_treatment_capacity_449b_19027f56",
+        "operation_measurement_digest": "daf8049541e81a6a6efc8e396d1921eb6213a5afcc8158e48d75b509afce95dd",
+        "operation_state": "complete",
+        "request_id": "planning_b_treatment_capacity_449b_19027f56",
+        "request_path": "b-treatment-capacity-request.json",
+        "request_sha256": "ae56fb2fb27eb594f2376b19d1b32c1a5bb6d4bde6d0616341f64a79fd53b971",
+        "result_path": "b-treatment-capacity-result.json",
+        "result_sha256": "261d4e5a15f5ac25c745efc19836e15556bbb25d8dc76053ef0866d1ceef7191",
+        "role": "b-treatment"
+      },
+      {
+        "already_charged": true,
+        "cpu_measurement_status": "unavailable",
+        "cpu_ms": null,
+        "elapsed_seconds": 1.8449669999536127,
+        "grant_id": "onboarding",
+        "operation_id": "capacity:planning_c_control_capacity_50de_e15b7ee0_20261003",
+        "operation_measurement_digest": "7b8f51b943b9b7d2879d935e9f68736f8054737157952620d7966b77046ad1e4",
+        "operation_state": "complete",
+        "request_id": "planning_c_control_capacity_50de_e15b7ee0_20261003",
+        "request_path": "c-control-capacity-request.json",
+        "request_sha256": "25904e7e0dc6ff7d4ab0671e03d79afaabf9568fa78269af2cdc6ff70956c0ad",
+        "result_path": "c-control-capacity-result.json",
+        "result_sha256": "27863c786b9e96e4db4554d32da0d1f0b8de73e71f49068889dc7378e964e3d0",
+        "role": "c-control"
+      },
+      {
+        "already_charged": true,
+        "cpu_measurement_status": "unavailable",
+        "cpu_ms": null,
+        "elapsed_seconds": 3.3033490830566734,
+        "grant_id": "onboarding",
+        "operation_id": "capacity:planning_c_treatment_capacity_50de_19027f56_20261003",
+        "operation_measurement_digest": "85ddbef506a018383838aba664cc3dddee73d9099caf318290abd861bd489fc8",
+        "operation_state": "complete",
+        "request_id": "planning_c_treatment_capacity_50de_19027f56_20261003",
+        "request_path": "c-treatment-capacity-request.json",
+        "request_sha256": "daaa7166a985517cc5294e3c4c4b9bd3e321ac4ed12ada96f7b26ffec192fd2f",
+        "result_path": "c-treatment-capacity-result.json",
+        "result_sha256": "e773792aa37051473f9ee2bb448f9a2944b779e9c38174614ffb74ec37a2dfae",
+        "role": "c-treatment"
+      }
+    ],
+    "ordinary_campaign_allowance_addition": false,
+    "ordinary_plan_ledger_inclusion": false,
+    "resource_coverage_limitation": "CPU measurement remains unavailable for operations whose canonical operation_measurement has no ResourceVector.",
+    "same_grant": "onboarding",
+    "schema_version": "c.workbook-qualification-capacity-bootstrap-cost-audit.v1",
+    "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+    "status": "passed",
+    "whole_system_cost_complete": false
+  },
+  "case_set_digest": "0117a882ee59ca0c6cd2f4906d15110a8241949b48656bf62d07222d9fc89d87",
+  "execution_authorized": false,
+  "not_enqueued": true,
+  "plan_digest": "59b0d2a4516098eb4a04b454f5a95f12da2795ba3e3a5b4a39c76d36164179ac",
+  "plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+  "proposal_sha256": "5b9942cbc930c487f67f59b51c62128746ec37480a8fa3c7762b27bc82a1064a",
+  "qualification": false,
+  "replay_allowed": false,
+  "runner_sha256": "f43cfd7b2d786633b559ddd000d72af33d722592da78f82bab3d57f5a4400a24",
+  "schema_version": "c.workbook-qualification-plan-proposal-result.v1",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "status": "passed"
+}

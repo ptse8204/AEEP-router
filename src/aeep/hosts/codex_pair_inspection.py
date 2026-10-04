@@ -46,6 +46,13 @@ from .workers import ManagedWorkerBinding, binding_from_config, validate_worker_
 # All paths are synthetic canaries or reviewed public dependencies. No auth files.
 CHECK = '''import hashlib,io,json,pathlib
 import pandas,openpyxl
+if DOCX_PROBE:
+ import docx
+ from docx import Document
+ document=Document();document.add_paragraph('synthetic AEEP DOCX roundtrip')
+ docx_buffer=io.BytesIO();document.save(docx_buffer)
+ reopened=Document(io.BytesIO(docx_buffer.getvalue()))
+ docx_roundtrip=[paragraph.text for paragraph in reopened.paragraphs]==['synthetic AEEP DOCX roundtrip']
 p=pathlib.Path
 result={}
 for label,name in PATHS.items():
@@ -57,6 +64,9 @@ buf=io.BytesIO();pandas.DataFrame({'value':[3,7]}).to_excel(buf,index=False)
 book=openpyxl.load_workbook(io.BytesIO(buf.getvalue()))
 result['shared_workbook_roundtrip']=book.active['A3'].value==7
 result['pandas']=pandas.__version__;result['openpyxl']=openpyxl.__version__
+if DOCX_PROBE:
+ result['python-docx']=docx.__version__
+ result['python_docx_roundtrip']=docx_roundtrip
 skill=p('/opt/dependencies/plugin/skills/spreadsheets/SKILL.md')
 if skill.is_symlink() or any(parent.is_symlink() for parent in skill.parents):raise ValueError('unsafe candidate path')
 result['candidate_skill_sha256']=hashlib.sha256(skill.read_bytes()).hexdigest() if skill.is_file() else None
@@ -106,6 +116,9 @@ print(json.dumps({'authoring_helper':marked.returncode==0,'artifact_tool_csv':ra
 CANDIDATE_PATHS = {'/opt/dependencies/plugin/skills/spreadsheets/SKILL.md',
                    '/etc/codex/skills/spreadsheets/SKILL.md', '/opt/dependencies/runtime'}
 SKILL_PROFILES: dict[str, tuple[str, str, str, set[str]]] = {
+    'docx:1': ('/opt/dependencies/plugin/skills/docx/SKILL.md',
+               '/etc/codex/skills/docx/SKILL.md', '/opt/dependencies/plugin/skills/docx',
+               {'docx'}),
     'spreadsheets:1': ('/opt/dependencies/plugin/skills/spreadsheets/SKILL.md',
                        '/etc/codex/skills/spreadsheets/SKILL.md', '/opt/dependencies/runtime',
                        {'Spreadsheets', 'spreadsheets:Spreadsheets'}),
@@ -117,7 +130,7 @@ SKILL_PROFILES: dict[str, tuple[str, str, str, set[str]]] = {
 
 class WorkerPairInspection(StrictModel):
     schema_version: Literal['assessment.worker-pair-inspection.v1', 'assessment.worker-pair-inspection.v2', 'assessment.worker-pair-inspection.v3'] = 'assessment.worker-pair-inspection.v1'
-    profile: Literal['spreadsheets:1', 'ponytail:1'] = 'spreadsheets:1'
+    profile: Literal['spreadsheets:1', 'ponytail:1', 'docx:1'] = 'spreadsheets:1'
     control: ExecutorSpec
     treatment: ExecutorSpec
     # The differential definition remains separately reviewed; paths cannot be
@@ -131,11 +144,12 @@ class WorkerPairInspection(StrictModel):
         differential = self.differential
         skill_path, alias_path, directory, names = SKILL_PROFILES[self.profile]
         extended = self.schema_version.endswith('.v3')
+        shared_version_names = {'pandas', 'openpyxl', 'python-docx'} if self.profile == 'docx:1' else {'pandas', 'openpyxl'}
         if ((not extended and self.profile != 'spreadsheets:1')
                 or set(differential.candidate_paths) != {skill_path, alias_path, directory}
                 or not set(differential.candidate_aliases).issubset(names)
                 or (extended and not differential.candidate_aliases)
-                or set(self.shared_versions) != {'pandas','openpyxl'}):
+                or set(self.shared_versions) != shared_version_names):
             raise ValueError('paired probe requires its exact reviewed skill profile')
         workers = []
         for spec in (self.control,self.treatment):
@@ -289,13 +303,14 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
     requirements = inspect.get('configRequirements/read',{})
     active = facts['active_policy']
     versions = all(observed.get(name)==version for name,version in definition.shared_versions.items())
+    docx_roundtrip = (definition.profile != 'docx:1' or observed.get('python_docx_roundtrip') is True)
     allowed_mounts = [m for m in meta['mounts'] if m.get('Type') in {'volume','bind'}]
     mount_ok = (len(allowed_mounts)==1 and allowed_mounts[0].get('Type')=='volume'
                 and allowed_mounts[0].get('Name')==worker.credential_volume and allowed_mounts[0].get('Destination')=='/worker/auth')
     return {
         'allowed_tool': {'workspace_write':inspect['sandbox_command']['workspace_write'] is True,
-                         'dependencies':observed['shared_workbook_roundtrip'] is True and versions and (not expected
-                             or definition.profile == 'ponytail:1'
+                         'dependencies':observed['shared_workbook_roundtrip'] is True and versions and docx_roundtrip and (not expected
+                             or definition.profile in {'ponytail:1', 'docx:1'}
                              or facts.get('dependencies')=={'authoring_helper':True,'artifact_tool_csv':True})},
         'denied_tool': {'credential_read_denied':observed['credential_canary']=='denied'},
         'cross_worker': {'own_readable':observed['own_workspace']=='readable','other_absent':observed['other_workspace']=='absent'},
@@ -316,10 +331,15 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
     }
 
 
-def filesystem_observation(value: dict[str, Any]) -> dict[str, Any]:
+def filesystem_observation(value: dict[str, Any], profile: str = 'spreadsheets:1') -> dict[str, Any]:
+    if profile not in SKILL_PROFILES:
+        raise ConfigurationError('unknown paired skill profile')
     statuses = {'own_workspace','other_workspace','credential_canary','external_answer'}
     booleans = {'shared_workbook_roundtrip','candidate_alias','candidate_runtime'}
     versions = {'pandas','openpyxl'}
+    if profile == 'docx:1':
+        booleans.add('python_docx_roundtrip')
+        versions.add('python-docx')
     if (set(value) != statuses | booleans | versions | {'candidate_skill_sha256'}
             or any(value[key] not in {'readable','empty','directory','denied','absent'} for key in statuses)
             or any(type(value[key]) is not bool for key in booleans)
@@ -507,10 +527,10 @@ async def execute_pair(service: AssessmentService, control_request: str, treatme
                     for index in range(2):
                         paths = {'own_workspace':'/workspace/'+markers[index],'other_workspace':'/workspace/'+markers[1-index],
                                  'credential_canary':'/worker/auth/'+canary,'external_answer':str(answer)}
-                        program = CHECK.replace('PATHS',repr(paths))
+                        program = CHECK.replace('PATHS',repr(paths)).replace('DOCX_PROBE',str(definition.profile == 'docx:1'))
                         for old, new in zip(SKILL_PROFILES['spreadsheets:1'][:3], SKILL_PROFILES[definition.profile][:3], strict=True):
                             program = program.replace(repr(old), repr(new))
-                        facts[index]['filesystem'] = filesystem_observation(await observed_command(index,'filesystem',program))
+                        facts[index]['filesystem'] = filesystem_observation(await observed_command(index,'filesystem',program), definition.profile)
                     if definition.profile == 'spreadsheets:1':
                         dependencies = await observed_command(1,'dependencies',DEPENDENCY,30000)
                         if set(dependencies)!={'authoring_helper','artifact_tool_csv'} or any(type(v) is not bool for v in dependencies.values()):
@@ -662,6 +682,7 @@ async def inspect_dynamic_declaration(adapter: CodexAppServerAdapter, *,
     journal.append('action.completed', 'dynamic-declaration-complete')
     return {
         'binding_digest': binding.digest,
+        'dynamic_inventory': binding.inventory(),
         'declaration_digest': content_digest({'dynamicTools': binding.declarations()}),
         'declaration_bytes': len(json.dumps(binding.declarations(), separators=(',', ':'), allow_nan=False).encode()),
         'declaration_acknowledged': True,
@@ -674,6 +695,43 @@ async def inspect_dynamic_declaration(adapter: CodexAppServerAdapter, *,
             'cwd_matches': response.get('cwd') == '/workspace',
         },
     }
+
+
+def dynamic_candidate_access_observation(definition: DifferentialEnvironment, *,
+                                         binding: Any, worker: ManagedWorkerBinding,
+                                         declaration: dict[str, Any]) -> dict[str, str | bool]:
+    """Observe the declared callback delta independently of physical skill access.
+
+    Use only after inspect_dynamic_declaration under the same reviewed operation.
+    This does not prove model exposure; composed conformance still requires its
+    actual callback receipt, protected state and lifecycle evidence. Shared skill
+    files and permissions require their own worker observations.
+    """
+    from .codex_dynamic_tools import CodexDynamicTools
+
+    if not definition.candidate_dynamic_tools or not isinstance(binding, CodexDynamicTools):
+        raise ConfigurationError('dynamic candidate observation requires an exact tool differential')
+    binding.verify(binding.digest, worker.digest())
+    inventory = binding.inventory()
+    policy = declaration.get('active_policy')
+    if (declaration.get('binding_digest') != binding.digest
+            or declaration.get('dynamic_inventory') != inventory
+            or declaration.get('declaration_digest') != content_digest({'dynamicTools': binding.declarations()})
+            or declaration.get('declaration_acknowledged') is not True
+            or declaration.get('model_tool_exposure') != 'unknown'
+            or type(declaration.get('model_turns')) is not int or declaration['model_turns'] != 0
+            or type(declaration.get('task_calls')) is not int or declaration['task_calls'] != 0
+            or not isinstance(policy, dict)
+            or any(policy.get(key) is not True for key in ('profile_matches', 'approval_never', 'cwd_matches'))):
+        raise ConfigurationError('dynamic candidate declaration observation differs from the reviewed worker')
+    candidates = definition.candidate_dynamic_tools
+    present = {key: inventory[key] for key in candidates if key in inventory}
+    if present and present != candidates:
+        raise ConfigurationError('dynamic candidate declaration is incomplete or changed')
+    return {'definition_digest': content_digest(definition),
+            'candidate_available': bool(present), 'candidate_kind': 'dynamic_tool',
+            'candidate_tools_digest': content_digest(candidates),
+            'callback_binding_digest': binding.digest}
 
 
 async def inspect_scripted_callback(transport: Any, *, binding: Any,
@@ -900,6 +958,8 @@ def verify_composed_callback(repository: Any, record: Any, probe: Any, definitio
                 or claim.get('context_kind') != 'conformance' or claim.get('model_turn_allowance') != 1
                 or claim.get('binding_digest') != record.callback_binding_digest
                 or child.get('task_scope_digest') != claim.get('task_scope_digest')
+                or (probe.schema_version == 'assessment.boundary-probe.v2'
+                    and probe.charged_operation_digest != claim.get('operation_reference'))
                 or not child.get('child_attempt_digests') or not child.get('child_receipt_digests')):
             raise ConfigurationError('native callback evidence is not bound to a model conformance allowance')
         from ..attempts import ExecutionAttempt
@@ -979,4 +1039,3 @@ def verify_composed_callback(repository: Any, record: Any, probe: Any, definitio
                     or receipt.metadata.get('enforcement_backend_digest') != native_backend_digest(boundary)):
                 raise ConfigurationError('callback child native backend evidence differs')
             boundary.validate_single_process()
-

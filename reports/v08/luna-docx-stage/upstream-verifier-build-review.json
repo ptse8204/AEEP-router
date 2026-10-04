@@ -1,0 +1,44 @@
+{
+  "schema_version": "assessment.skillsbench-docx-verifier-build-review.v1",
+  "status": "approved_after_campaign",
+  "execution_authorized": true,
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "campaign_terminal_record_path": "successor-qualification-terminal.json",
+  "campaign_terminal_record_sha256": "0ce50cefa63205a0ac27a86807286f3936b96c22b91a92fbb8dd40c6a6dad6ef",
+  "runner_sha256": "b3770cb80154bf70d431cc5d7fb41c1a12891b220e97120486d96712b548accc",
+  "plan_sha256": "1de69bb87e8b1bd9261344d45cd345cbc1199fb9988f9eb87e840591164ed623",
+  "dockerfile_sha256": "6a4181f1fe323aaaf69cf143570963b02d40977a1f752be981dbd25a9dafdfcb",
+  "lock_sha256": "2c125370f6e87b8003f95a8625d714ca335706e8255adf7f3b753400f051dabd",
+  "fetch_result_sha256": "e9c7563446d962154b3b90427a307090b657ae9235c71a7e3ba5f6f3d6e26ed9",
+  "base_tag": "aeep-skillsbench-docx-control:luna-xhigh-20261002",
+  "expected_base_image_id": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+  "output_tag": "aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002",
+  "limits": {
+    "max_operations": 1,
+    "max_seconds": 180,
+    "max_model_turns": 0,
+    "max_cash_usd": 0,
+    "max_growth_bytes": 1000000000
+  },
+  "assessment_reservation": {
+    "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+    "operation_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:upstream_verifier_image_setup_20261003"
+  },
+  "authorization_id": "onboarding",
+  "storage": {
+    "required_important_capacity_before_bytes": 54687091200,
+    "required_important_capacity_after_bytes": 53687091200,
+    "raw_host_growth_max_bytes": 1000000000
+  },
+  "base_binding_note": "Dockerfile FROM uses the reviewed local control tag. The runner checks the tag image ID immediately before and after the build, but does not claim the FROM tag is immutable; a concurrent retag between checks cannot be excluded.",
+  "reviewed_at": "2026-10-03T05:55:10.812891+00:00",
+  "authority": "Standing operator delegation of September 25/27, 2026; separate verifier image, zero model turns and zero cash.",
+  "prepared_review_sha256": "e040bce179f42ad59a0d890d215812ebb97cc2bf520466a81196388c3b01852f",
+  "capacity_before_review": {
+    "NSURLVolumeAvailableCapacityForImportantUsageKey_bytes": 213319007854,
+    "NSURLVolumeAvailableCapacityKey_bytes": 53919051776
+  },
+  "ordinary_free_before_review_bytes": 53919027200,
+  "storage_review_note": "Uses the already reviewed important-usage capacity threshold of 50 GiB plus 1 GB, consistent with the operator continuation after the quota correction (plan-coverage.md lines 115-130). An earlier inline preflight additionally required ordinary free space plus the entire 1 GB bound and stopped before any reservation or build; that extra condition was not in the prepared review. Both capacity measures remain recorded; no cleanup or reserve change.",
+  "post_report_cost_lineage": "Separate post-report operation retained on the same onboarding grant; no rewrite of qualification evidence."
+}

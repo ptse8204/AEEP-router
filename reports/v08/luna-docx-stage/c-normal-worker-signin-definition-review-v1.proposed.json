@@ -1,0 +1,91 @@
+{
+  "adapter_id": "codex-app-server:b-luna-discovery",
+  "common_inventory": {
+    "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+  },
+  "definition_content_digest_sha256": "958eb9ee2ef5f7833a932bd6412a5792c839c41122deece1fef8a72b03e1fb7c",
+  "definition_path": "reports/v08/luna-docx-stage/c-normal-worker-signin-definition-v1.proposed.json",
+  "definition_sha256": "e6165266122ef8f07216d7c1298c73ef29dc7444a8573983ac3086ebd5e2ae35",
+  "derived_from_executor_id": "b.luna.discovery",
+  "execution_authorized": false,
+  "existing_api": {
+    "implementation": "src/aeep/assessment/boundary.py:prepare_model_probe",
+    "implementation_signin": "src/aeep/hosts/codex_signin.py:signin_worker",
+    "qualification_report_embedded_in_request": false,
+    "request_preparation_cli": "aeep assess --manifest MANIFEST prepare-conformance SOURCE_PLAN_ID DEFINITION_JSON",
+    "scope_amendment_required_before_signin": true,
+    "signin_cli": "aeep assess --manifest MANIFEST signin-worker REQUEST_ID"
+  },
+  "image_evidence_path": "reports/v08/luna-docx-stage/b-existing-image-inspection.json",
+  "image_evidence_sha256": "7893ab3efe6e241f0753bc4edd7a6b13fbd766a0e12c4d770580eef370f8683b",
+  "image_plan_path": "reports/v08/luna-docx-stage/image-build-plan.json",
+  "image_plan_sha256": "e8690e0d56606ec6844cc1d93137e9511130b55633fb6814515bbcdf56ba3906",
+  "model_id": "gpt-6-luna",
+  "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+  "nonclaims": [
+    "No image/runtime contents were inspected here.",
+    "No credential volume was created or read.",
+    "No normal worker conformance or three-way differential conformance exists from this artifact.",
+    "Current C qualification must pass before root uses the proposed preparation.",
+    "The current required-exposure AEEP profile is not value-ready; value requires an optional candidate profile and fresh applicable conformance."
+  ],
+  "omitted_only_inventory_entry": {
+    "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+  },
+  "preparation_authorized": false,
+  "profile_path": "reports/v08/luna-docx-stage/c-current-profile-v1.json",
+  "profile_sha256": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449",
+  "profile_source_plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+  "proposed_credential_volume": "aeep-auth-c-normal-20261003",
+  "proposed_executor_id": "c.luna.normal",
+  "proposed_image_id": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+  "proposed_worker_id": "c-luna-normal-20261003",
+  "proxy_url": "http://172.18.0.2:3128",
+  "reasoning_effort": "xhigh",
+  "required_preconditions": [
+    "Caller waits for the current qualification to settle PASS and for cleanup/accounting to be confirmed; this proposed bootstrap request derives its authority fields from the existing plan and does not bind a qualification report into the request.",
+    "A separate exact review authorizes this preparation artifact before prepare-conformance is called.",
+    "Before any worker start, reserve metadata preflight and verify the exact plain image ID is present, matches current Codex/App Server runtime and Luna/xhigh support, has the common packages, and lacks the Spreadsheets skill/catalog entry.",
+    "Verify the proposed worker ID and credential-volume name are unused and ownership is known; the two current C credentials remain separate and untouched.",
+    "Keep the shared fixed-helper contract byte-for-byte from discovery. Later three-role validation must inspect the actual common tools and effective inventory; this definition alone is not conformance.",
+    "Review the generated conformance request and an exact scope amendment before terminal sign-in; no model or task call is part of sign-in."
+  ],
+  "schema_version": "c.normal-worker-signin-definition-review.v1",
+  "setup_limits": {
+    "metadata_preflight": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 30,
+      "max_model_turns": 0,
+      "max_operations": 1
+    },
+    "post_login_inspection": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 120,
+      "max_model_turns": 0,
+      "max_operations": 1
+    },
+    "protected_signin": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 330,
+      "max_model_turns": 0,
+      "max_operations": 1
+    },
+    "total": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 1080,
+      "max_model_turns": 0,
+      "max_operations": 4
+    },
+    "worker_component_inspection": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 600,
+      "max_model_turns": 0,
+      "max_operations": 1
+    }
+  },
+  "shared_physical_support": {
+    "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+  },
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "status": "proposed_unapproved"
+}

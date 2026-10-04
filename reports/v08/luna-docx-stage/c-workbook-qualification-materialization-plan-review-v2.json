@@ -1,0 +1,86 @@
+{
+  "schema_version": "c.workbook-qualification-materialization-plan-review.v1",
+  "runner_sha256": "4513d7d7299c04205fd7924c75277f12091412342d475d2773a5d6f61ff0978b",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "profile_sha256": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449",
+  "c_conformance": {
+    "proposal_path": "reports/v08/luna-docx-stage/c-boundary-conformance-proposal-v1.json",
+    "proposal_sha256": "d6b7fcf91f285e28465b5286dfcdbcd7575fe5e331bdd33424ec60967dd5fb93",
+    "result_path": "reports/v08/luna-docx-stage/c-boundary-conformance-apply-result-v1.json",
+    "result_sha256": "b5dcb07fa9db864b1f421322541441a8bb20584d7f6658889d24ebb75f0cdc40",
+    "digests": {
+      "control_conformance_digest": "1b7fe4c370e3850fea06128308487ab91a93e54687d5b05660b189faae47bf6f",
+      "treatment_conformance_digest": "227f3be41eda52ce6dec78564118dec997aaf92870fe877d5d29a40d96cef9ad",
+      "differential_conformance_digest": "48f91fe4d9ea37cecd385fa095bba560db7a0b74944a1a049bbe43034bae67f0"
+    }
+  },
+  "workbook_recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+  "environment": {
+    "environment_id": "c-workbook-qualification-20261003",
+    "kind": "container",
+    "identity": {
+      "purpose": "Offline workbook generation and grading; Luna/xhigh AEEP native callback qualification"
+    },
+    "network": false,
+    "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+    "cpu_count": 1.0,
+    "memory_mb": 512,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [],
+    "conformance_digests": {
+      "b.luna.discovery": "1b7fe4c370e3850fea06128308487ab91a93e54687d5b05660b189faae47bf6f",
+      "b.luna.aeep": "227f3be41eda52ce6dec78564118dec997aaf92870fe877d5d29a40d96cef9ad"
+    },
+    "differential_conformance_digest": "48f91fe4d9ea37cecd385fa095bba560db7a0b74944a1a049bbe43034bae67f0"
+  },
+  "paired_conformance_digest": "48f91fe4d9ea37cecd385fa095bba560db7a0b74944a1a049bbe43034bae67f0",
+  "seed": 2026100302,
+  "seed_uniqueness_metadata": {
+    "existing_request_count": 28,
+    "matching_seed_count": 0
+  },
+  "maximum_operations": 1,
+  "maximum_reserved_seconds": 35,
+  "maximum_model_turns": 0,
+  "maximum_cash_usd": 0,
+  "split_counts": {
+    "qualification": 8,
+    "training": 28,
+    "holdout": 105
+  },
+  "database_bytes_at_prepare": 192479984,
+  "snapshot_bytes_upper": 10500128,
+  "snapshot_file_components_before_close": {
+    "c-materialization-scoped-snapshot-sample.sqlite3": 5193728,
+    "c-materialization-scoped-snapshot-sample.sqlite3-wal": 5273632,
+    "c-materialization-scoped-snapshot-sample.sqlite3-shm": 32768
+  },
+  "snapshot_file_components_after_close": {
+    "c-materialization-scoped-snapshot-sample.sqlite3": 5193728,
+    "c-materialization-scoped-snapshot-sample.sqlite3-wal": 0,
+    "c-materialization-scoped-snapshot-sample.sqlite3-shm": 0
+  },
+  "snapshot_bytes_measurement_basis": "max(main+wal+shm while open after proposed review rows, checkpointed main+wal+shm after close)",
+  "snapshot_count_upper": 1,
+  "snapshot_copy_count_basis": {
+    "materialize_invocations": 1,
+    "invoke_campaign_router_calls_per_invocation": 1,
+    "derived_copy_count": 1
+  },
+  "campaign_receipt_bytes_upper": 16000410,
+  "canonical_receipt_bytes_upper": 16000410,
+  "receipt_wrapper_bytes_upper": 410,
+  "artifact_bytes_upper": 32168079,
+  "generator_output_limit_bytes": 16000000,
+  "case_set_wrapper_bytes_upper": 168079,
+  "storage_allowance_bytes": 74669027,
+  "execution_authorized": false,
+  "canonical_request_prepared": true,
+  "storage_amendment": {
+    "reason": "Post-approval observed SQLite snapshot page layout adds 8216 bytes; no generator operation or case set existed. Only storage estimate is renewed.",
+    "previous_review_sha256": "18fd460cc29b84f925ac1233907fb1751bfe7980a4b4998702c15ea083407e06",
+    "reviewed_at": "2026-10-03T13:10:14.907911+00:00"
+  }
+}

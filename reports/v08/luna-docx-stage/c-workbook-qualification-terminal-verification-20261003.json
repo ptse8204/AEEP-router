@@ -1,0 +1,98 @@
+{
+  "accounting": {
+    "grant_after": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": 107594.99215332116,
+      "model_turns": 2836,
+      "operations": 9712
+    },
+    "interpretation": "Measured operation elapsed times are ledger charges, not complete whole-system resource measurements. Missing usage remains unknown; no savings claim.",
+    "measurement_coverage": {
+      "local.cpu_ms": "0/141",
+      "local.gpu_ms": "0/141",
+      "local.memory_mb_seconds": "0/141",
+      "local.network_bytes": "0/141",
+      "model.openai.gpt-6-luna.subscription.cache_write_input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.cached_input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.output_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.reasoning_output_tokens": "0/141",
+      "subscription.openai.codex.self.provider_unit": "0/141"
+    },
+    "other_historical_reserved": 2,
+    "selected_plan_measured_elapsed_seconds_sum": 8426.005465755006,
+    "selected_plan_operations": 436,
+    "selected_plan_reserved": 0,
+    "unsettled_or_unmeasured": 0,
+    "whole_system_cost_complete": false
+  },
+  "admission": {
+    "audit_gap_clarification": "The broad standing grant permits automatic admission, but the exact execution review disables it. Qualification failed and no admission exists. The first audit helper unnecessarily expected the broad grant to disable admission as well; its observation is retained, not a runtime authorization failure.",
+    "candidate_markers_after": 0,
+    "candidate_records_after": 0,
+    "independent_before_snapshot_available": false,
+    "review_allows_admission": false,
+    "runner_verified_unchanged": true,
+    "standing_authorization_automatic_admission": true,
+    "standing_authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "value_or_normal_worker_setup_proceeded": false
+  },
+  "assessment_id": "assessment_a9369479529649cdab7a21b971dbabbc",
+  "canonical_outcome": "insufficient_evidence",
+  "cleanup": {
+    "container_inventory": [
+      "7ffdac90eee4 aeep-docx-upstream-verifier-cdb54b83ed3e Exited (0) 10 hours ago",
+      "78ce8aac8482 ssf-backup-b77-recovery-postgres Exited (0) 3 days ago",
+      "5f9a44f86633 aeep-reviewed-model-proxy Exited (0) 2 minutes ago",
+      "140c7b79943f ssf-provider-backoff-db Exited (255) 39 hours ago"
+    ],
+    "coordinator_closed": true,
+    "native_host_process_sweep_performed": false,
+    "owned_trial_container_remaining": false,
+    "proxy_cleanup_accounted": true,
+    "proxy_running": false,
+    "proxy_status": "exited",
+    "resources_deleted_by_audit": false,
+    "running_container_count": 0,
+    "scope": "Observed Docker inventory contains no campaign trial workers; reviewed proxy stopped. Native receipt audit verifies terminal scoped attempts separately; this is not a whole-host process containment claim."
+  },
+  "counts": {
+    "cases": 141,
+    "correctness_failures": 0,
+    "holdout_passes": 101,
+    "holdouts": 105,
+    "interventions": 0,
+    "passes": 136,
+    "retries": 0,
+    "timeouts": 5
+  },
+  "independently_checked_source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "observed_at": "2026-10-03T16:00:11.059307+00:00",
+  "plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+  "qualification_completed": true,
+  "qualification_passed": false,
+  "references": [
+    {
+      "path": "c-workbook-qualification-result-20261003-v3.json",
+      "sha256": "2e2f83c0d110035f4d1919df686d85ae868f634f8afdb60b1d4a4cff41bbdf8c"
+    },
+    {
+      "path": "c-workbook-qualification-terminal-audit-20261003-v3.json",
+      "sha256": "8b653140c7e11527443a7463d7cd8b566e2d0bc163ce3780109d41f4c68efa8e"
+    },
+    {
+      "path": "c-workbook-qualification-terminal-audit-20261003-v3.py",
+      "sha256": "671eff220758f991ab815add0e58e389c1d72f34d2a368138822deb382b94b72"
+    },
+    {
+      "path": "c-workbook-qualification-execution-review-20261003-v3.json",
+      "sha256": "08cf5715c2d8dc8548d4f0f9efbbc27ffc3dc1d6a6c8db412fa0ec52756087d1"
+    }
+  ],
+  "report_id": "fit_c1b3933c5a14423d80c8f34ca3a58f7f",
+  "runtime_seconds_through_proxy_cleanup": 8438.631915041013,
+  "schema_version": "aeep.c-workbook-terminal-verification.v1",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "storage_free_gib": 132.25690078735352,
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71"
+}

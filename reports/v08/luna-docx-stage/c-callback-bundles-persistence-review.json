@@ -1,0 +1,22 @@
+{
+  "persistence_authorized": true,
+  "execution_authorized": false,
+  "reviewed_at": "2026-10-03T12:48:18.763437+00:00",
+  "authority": "docs/ASSESSMENT_TESTING.md September 25/27 standing finite delegation; coordinating-agent exact review",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "runner_sha256": "da22ad4f8b7f7d41dc5c603c90abac29c59ed28695cf8eef5c570ea4665a8cbc",
+  "manifest_sha256": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+  "bundles": {
+    "c-current-callback-preparation-v1.json": "164fe0d43d7727d0a6153a3e1301892328e9b17377fc3d3a862cf0e46a1e622d",
+    "c-control-callback-preparation-v1.json": "692b7ad9ff89ea670b7c6630fdb8ff44061873441e3ea7fb0857bfc09983a488"
+  },
+  "reason": "Earlier treatment persistence refused an identical preexisting probe definition before any insertion. No runtime started. Atomic successor reuses only identical active-reviewed immutable probe/fixture definitions; fresh requests, actions, capacity and scope bindings cannot collide.",
+  "prior_failure": {
+    "error": "ValueError: one-shot callback record already exists; no replay",
+    "first_kind": "boundary_probe_definition",
+    "digest": "5ec6163aaf6b18fc9f02e0a2df2f112f67d71c18ee3911b4ffc6eb2609e373f6",
+    "records_inserted": 0,
+    "operations_reserved": 0,
+    "model_turns": 0
+  }
+}

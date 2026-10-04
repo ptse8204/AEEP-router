@@ -1,0 +1,47 @@
+{
+  "no_action_taken": [
+    "No tests run by this reviewer",
+    "No source or root report files edited",
+    "No worker/model/runtime or canonical operation"
+  ],
+  "policy": "docs/ASSESSMENT_TESTING.md",
+  "prior_review": {
+    "path": "reports/v08/luna-docx-stage/b-dynamic-access-code-review.json",
+    "sha256": "08a6889839f1f2800d03464307a72ee47d9c7eb861d91712c2b489a8f9bea2bc"
+  },
+  "remaining_open": [
+    {
+      "evidence": "src/aeep/hosts/codex_pair_inspection.py:700-735 defines dynamic_candidate_access_observation; reports/v08/original-three-way-profile/collect-composed-workers-5fff.py:89-97 still emits the legacy skill-shaped probe.",
+      "item": "Wire the dynamic access observation into the exact composed collector and resulting boundary record.",
+      "next": "Use the current reviewed composed collection lifecycle; call inspect_dynamic_declaration and dynamic_candidate_access_observation to emit the richer candidate_access probe. Record actual dynamic declaration inventory in effective_inventory and preserve declaration-only model_exposure=unknown."
+    },
+    {
+      "evidence": "src/aeep/hosts/codex_pair_inspection.py:142-195 remains a physical skill differential and reports/v08/original-three-way-profile/collect-composed-workers-5fff.py:20,61-65 retains equality with that physical definition.",
+      "item": "Independently measure equal physical Spreadsheets access in discovery and AEEP roles.",
+      "next": "Keep physical inventory verification separate from dynamic candidate access. Require exact skill path/hash/alias/runtime and final skill inventory equality across discovery and AEEP, and bind the common result to the reviewed ThreeWayAccessDefinition; do not use the old treatment-only physical Spreadsheets delta for B."
+    },
+    {
+      "checks": "Cover plain-v2 candidate absence exact marker, reject callback/candidate presence on normal, reject wrong/missing treatment target key or digest, reject controls targeting candidate, and assert legacy physical serialization unchanged.",
+      "item": "Focused adversarial tests and generated schema validation remain to be independently confirmed."
+    }
+  ],
+  "review_scope": "Read-only independent re-review of root boundary fixes only. No source edits, tests, runtime/model/Docker/grant/canonical operations.",
+  "reviewed_current_file": {
+    "path": "src/aeep/assessment/boundary.py",
+    "sha256": "b5e230fd40b6e259d4cdbcdf672f9ff2feb8673c2db221bf524fbd0c6a12165c"
+  },
+  "schema_version": "luna.dynamic_candidate_contract_review_followup.v1",
+  "verdict": "The two boundary findings in the prior review are addressed by the current diff; no regression found in those fixes. The adapter collector gap remains open.",
+  "verified_fixes": [
+    {
+      "finding": "Candidate-free normal role with no callback",
+      "lines": "src/aeep/assessment/boundary.py:166-207,276-321",
+      "result": "Pass. With dynamic candidates in the definition, missing callback binding is allowed only for available=false, boundary v2, and an empty dynamic effective inventory. The canonical probe must exactly include callback_binding_digest=\"absent\" and false availability. The three-way loop still requires the normal role\u2019s worker/config/effective inventory and later runs require_managed_boundaries; v2 does not become an unverified shortcut."
+    },
+    {
+      "finding": "Selected invocation joined to reviewed dynamic candidate",
+      "lines": "src/aeep/assessment/boundary.py:210-224,264-269,305-321",
+      "result": "Pass. Available treatment must use mode=dynamic_tool and its exact dynamic namespace/tool key and SHA must match candidate_dynamic_tools; its invocation binding must equal the conformance callback digest. Unavailable controls must use mode=turn and bind the same callback identity as their boundary (or both be absent on plain v2). The checker is called for the qualification/value differential roles and all three aeep_value roles."
+    }
+  ]
+}

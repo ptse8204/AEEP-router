@@ -1,0 +1,82 @@
+{
+  "schema_version": "aeep.report.source-renewal-proposal.v1",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "execution_authorized": false,
+  "canonical_writes_performed": false,
+  "runtime_calls_performed": false,
+  "fresh_environment_evidence": false,
+  "historical_setup_retained": true,
+  "callback_identity_delta": {
+    "control": {
+      "implementation_digest": {
+        "before": "b55e60d7db97fd842922da6790656222d776467dab5216ca52acb046309683fb",
+        "after": "c0cff5940f64acacf4dd73b78e0c0660594eff334709393e053f1118589ad4d7"
+      },
+      "native_backend_digest": {
+        "before": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+        "after": "f53fedbec7a5b6fe2c8aa049e9ec5fa01097c9e98ecd141762bf2c8670b56763"
+      },
+      "executor_fingerprints": {
+        "before": {
+          "native.composed.workbook": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4"
+        },
+        "after": {
+          "native.composed.workbook": "sha256:b68f61e41832651f8c39fd3cb1b3c3a6fa1f252d930d3ef81a19b7f83f4e8524"
+        }
+      }
+    },
+    "treatment": {
+      "implementation_digest": {
+        "before": "b55e60d7db97fd842922da6790656222d776467dab5216ca52acb046309683fb",
+        "after": "c0cff5940f64acacf4dd73b78e0c0660594eff334709393e053f1118589ad4d7"
+      },
+      "native_backend_digest": {
+        "before": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+        "after": "f53fedbec7a5b6fe2c8aa049e9ec5fa01097c9e98ecd141762bf2c8670b56763"
+      },
+      "executor_fingerprints": {
+        "before": {
+          "native.composed.workbook": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4"
+        },
+        "after": {
+          "native.composed.workbook": "sha256:b68f61e41832651f8c39fd3cb1b3c3a6fa1f252d930d3ef81a19b7f83f4e8524"
+        }
+      }
+    }
+  },
+  "unchanged_checks": {
+    "callback_other_fields": true,
+    "worker_specs_except_dynamic_binding": true,
+    "differential": true,
+    "shared_spreadsheets": true,
+    "instructions": true,
+    "native_project": true
+  },
+  "renewal_reason": "native policy digest includes App Server adapter source; unchanged manifest requires fresh source-derived executor/backend pins as well as callback implementation pin",
+  "remaining_before_execution": [
+    "Exact root review of source-derived pin delta and execution helper bundle",
+    "Review fresh scope with current executor fingerprint; historical scope is not reused",
+    "Current worker and native component observations",
+    "Finite charged proxy and callback diagnostic operations"
+  ],
+  "worker_component_preparation": {
+    "request_ids": [
+      "conformance_probe_957483c3b46142b9bf6b48b2ddfea81e",
+      "conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a"
+    ],
+    "maximum_operations": 2,
+    "maximum_model_turns": 0,
+    "maximum_reserved_seconds": 480,
+    "probe_count": 22
+  },
+  "artifacts": {
+    "assemble-profile-v2.py": "119c4ad1a4d7c93cb8d52fbe3ece45cd4d685dbfce1d68304bdb585939365679",
+    "current-profile-assembler.py": "d7332bd84588e6b6117c6ef78bc94717ad4090c6d3755975efde376becc1abc8",
+    "c-current-profile-v2.json": "ac096d106954d86433f4743333ac7004765a9dbc2db229c9fbecc5efa3db2eb8",
+    "c-composed-worker-collector-v1.py": "7b9ae37277f33b94b2ac8b81569791ddeb7692af19fb2fb1b7da11fe2ac5765e",
+    "c-prepare-worker-components-v2.py": "42c3b37477341fd66481faa2274437f4a0026653c0ec0e5e809281201f707e9a",
+    "c-run-worker-components-v2.py": "71f3c8e3ddc3ef7d9d323c7e937017590595c662844fc62cbe68a7b2fdc8e4d9",
+    "c-worker-components-preparation-v2.json": "f8cf01401f228e9cf42260454208f9015dcfeb46382f0ffcf215acbccae58b41",
+    "profile-v1-preparation-stop.json": "c8e853bed87c0fb1042963c757e15a181c43b16cabbc68e9a9991c5c33c8c70c"
+  }
+}

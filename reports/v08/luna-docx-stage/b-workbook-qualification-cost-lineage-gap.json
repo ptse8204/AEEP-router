@@ -1,0 +1,86 @@
+{
+  "recorded_at": "2026-10-03T11:34:56.879758+00:00",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "plan_id": "plan_3ea3e6a57d9c4571bd29bc513efde3de",
+  "plan_digest": "29081efe94dd4020bbe232e93b62d07f1dd804c0a9ea2a8e405459313535fc37",
+  "proposal_sha256": "3fb158a7aeec9df643e1512eb82e843547d0eadff2b8e6ac1a8c0e274aee6c61",
+  "status": "pre_execution_cost_lineage_gap",
+  "missing_direct_operation_lookup": [
+    {
+      "role": "control",
+      "probe_digest": "06a32348559906ac703c9662354b7d76b42b98f2014b8acfd49ef0ca7ffcd59b",
+      "probe_name": "callback_lifecycle",
+      "execution_evidence_digest": "e34ad2b1f1f8b2b967501e6e2482df87d6ffb730862514cdcc769cb2ca18e6e9",
+      "attempt_id": "b-native-supervisor-conformance_b_native_control_449b-callback_lifecycle"
+    },
+    {
+      "role": "control",
+      "probe_digest": "b03f94c73cea34ed47f442e6fe2ae02242652c2605f6de78aabe8fbd61bd1710",
+      "probe_name": "native_boundary",
+      "execution_evidence_digest": "b9cb9e290436d867726a3687f047a7de4ac817c795eaea9717c3fccbe7a8ef75",
+      "attempt_id": "b-native-supervisor-conformance_b_native_control_449b-native_boundary"
+    },
+    {
+      "role": "control",
+      "probe_digest": "71fbae4b335d8105ab518b8094d770e1f807fd6b1e262f1c52a04c9f80ccd001",
+      "probe_name": "protected_state",
+      "execution_evidence_digest": "4ac066f0906e6c58a1a2dce756641812e92ee7e109c6d9cc47eddd5d0fd62d9e",
+      "attempt_id": "b-native-supervisor-conformance_b_native_control_449b-protected_state"
+    },
+    {
+      "role": "control",
+      "probe_digest": "d373684205d629ab5e91538ace382487a27bd4f15e59f366dc1072e5ba29438a",
+      "probe_name": "callback_authority",
+      "execution_evidence_digest": "cfd0eda5c1b90a64593a6955b1627aa03160eb0e76eed64948c2dad42b5ea506",
+      "attempt_id": "attempt_0e2502009cc24e579a582d5d4cb8eb74"
+    },
+    {
+      "role": "treatment",
+      "probe_digest": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+      "probe_name": "callback_authority",
+      "execution_evidence_digest": "7765098f6fdcc5e7daaed0ca8a750849836aaeb1bf6759b7b716958c0df1e23a",
+      "attempt_id": "attempt_0ca1850f82f8449c8184c524ab0c79ac"
+    },
+    {
+      "role": "treatment",
+      "probe_digest": "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+      "probe_name": "native_boundary",
+      "execution_evidence_digest": "19b0dd2fe92bedf074c034d4d1ef16f997711ea010a03c37421e62ac546d8590",
+      "attempt_id": "b-native-supervisor-conformance_b_native_components_v4_449b-native_boundary"
+    },
+    {
+      "role": "treatment",
+      "probe_digest": "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+      "probe_name": "callback_lifecycle",
+      "execution_evidence_digest": "4c5776606a4c70da38d157f3236186a540858ac0f01fdd6868a81515dc046eaa",
+      "attempt_id": "b-native-supervisor-conformance_b_native_components_v4_449b-callback_lifecycle"
+    },
+    {
+      "role": "treatment",
+      "probe_digest": "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616",
+      "probe_name": "protected_state",
+      "execution_evidence_digest": "e9e31dc42fda3720ab9a9c7d31045c15112a42f680369006c42bf6299d56874a",
+      "attempt_id": "b-native-supervisor-conformance_b_native_components_v4_449b-protected_state"
+    }
+  ],
+  "new_campaign_upper_allowance": {
+    "cash_usd": "0",
+    "elapsed_seconds": 51008.07312320778,
+    "model_turns": 141,
+    "operations": 782
+  },
+  "budget_preview_gaps": [
+    "preparation cost lineage is incomplete or belongs to another grant"
+  ],
+  "diagnosis": "AssessmentService._cost_sources resolves operation_start by execution evidence attempt_id. Composed native supervisor and actual callback attempts have their own attempt IDs under charged parent assessment operations. The direct lookup fails.",
+  "impact": "Ordinary run would set assessment_cost_lineage_unavailable and qualification_passed=False even if task outputs passed. Runner was not executed.",
+  "preserved": [
+    "Existing canonical operations and measurements",
+    "Source449b and all conformance records",
+    "Unused fresh cases and inert proposal",
+    "Earlier failed and unresolved operations"
+  ],
+  "new_model_turns": 0,
+  "execution_authorized": false,
+  "resolution": "Repair exact parent cost attribution; do not fabricate operation_start aliases, erase gaps or waive qualification gate."
+}

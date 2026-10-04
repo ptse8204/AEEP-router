@@ -1,0 +1,54 @@
+{
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "diagnostic_result_sha256": "249c2c86f14a2f21596fa9154d983e8d39c575a49b39c9f9526b64bfe534ee07",
+  "host_receipt_digest": "d9b4abbc0ce423d4861452c71242a288dff6b0d99149aa643011c5bd32c0c126",
+  "host_receipt_status": "timeout",
+  "host_tool_count": 13,
+  "host_progress": {
+    "stage": "awaiting_turn_completion",
+    "elapsed_seconds": 199.071235334035,
+    "callback_counts": {
+      "requested": 1,
+      "handler_completed": 1,
+      "response_written": 1,
+      "rejected": 0
+    },
+    "last_event": "item/started",
+    "callback_last_elapsed_seconds": {
+      "requested": 14.72486733389087,
+      "handler_completed": 16.043329834006727,
+      "response_written": 16.043366374913603
+    },
+    "last_item_type": "reasoning",
+    "last_event_elapsed_seconds": 198.46513266698457,
+    "final_message_received": false,
+    "turn_completion_received": false
+  },
+  "callback_response_to_snapshot_seconds": 183.0278689591214,
+  "callback_response_to_last_event_seconds": 182.42176629207097,
+  "outer_operation_elapsed_seconds": 203.23082208400592,
+  "native_receipt": {
+    "receipt_id": "rcpt_836ef71ed65c41838554ce76a8b24559",
+    "status": "success",
+    "started_at": "2026-10-04T22:59:36.733576Z",
+    "ended_at": "2026-10-04T22:59:37.733558Z",
+    "execution_success": true,
+    "schema_valid": true,
+    "task_valid": false,
+    "output_valid": true
+  },
+  "worker_cleanup_confirmed": true,
+  "final_artifact_metadata_present": false,
+  "final_artifact_retrieval": "Skipped for TIMEOUT by unchanged current wrapper execute() control flow; not independently timed.",
+  "interpretation": "This fresh failure occurred after a response carrying a rejected native task result, before observed final answer/turn completion. Last observed activity was a reasoning-item start. It does not reproduce the five historical task-valid-child timeouts.",
+  "limits": [
+    "Local pipe write is not peer acknowledgement.",
+    "No raw event contents or model thoughts retained; continued host activity does not establish its purpose.",
+    "Unlike the historical five timeouts, this case has task_valid=false; historical causality remains unresolved.",
+    "No independent grader ran for this diagnostic; a valid native child receipt does not establish a completed outer workbook.",
+    "Artifact retrieval and cleanup durations remain unmeasured separately.",
+    "Report serialization failed after receipt verification; original failed file retained."
+  ],
+  "native_task_validation_passed": false,
+  "input_domain_audit": "first-input-domain-audit.json"
+}

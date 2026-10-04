@@ -61,3 +61,19 @@ python3 -m coverage report -m
 - Ordinary routing must continue without assessment workers. Live and production-support gates require their own evidence.
 
 Read `SPEC.md`, `ARCHITECTURE.md`, and `SECURITY.md` before changing protocol or executor behavior.
+
+## ARD upstream contributions
+
+Classify missing ARD concepts before extending the adapter:
+
+- General discovery interoperability (identifiers, endpoints, manifests,
+  federation or conformance) belongs upstream. Prepare an issue or contribution;
+  publication still requires explicit user authorization.
+- Comparative evidence, task/model cohorts, utility, admission and local routing
+  policy belong in AEEP.
+- Portable ecosystem evidence starts locally; propose an upstream namespace or
+  attestation integration only after the local contract is useful.
+- An open upstream pull request is not an adopted interface. Any prototype must
+  be optional and cannot silently change the pinned compatibility contract.
+
+Use the source pin and boundary in `docs/adr/ADR-010-ard-discovery-boundary.md`.

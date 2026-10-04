@@ -822,6 +822,869 @@
         "readOnlyHint": true,
         "idempotentHint": true
       }
+    },
+    {
+      "name": "aeep_discover_resources",
+      "description": "Search operator-configured sources using public terms only. Returns inert untrusted metadata; never installs, qualifies, activates or assesses a resource.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "schema_version": {
+            "const": "discovery.request.v1",
+            "default": "discovery.request.v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "public_query": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Public Query",
+            "type": "string"
+          },
+          "source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8,
+            "minItems": 1,
+            "title": "Source Ids",
+            "type": "array"
+          },
+          "limit": {
+            "default": 20,
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "cursor": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Cursor"
+          },
+          "artifact_types": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 32,
+            "title": "Artifact Types",
+            "type": "array"
+          }
+        },
+        "required": [
+          "public_query",
+          "source_ids"
+        ],
+        "title": "DiscoveryRequest",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": false
+      }
+    },
+    {
+      "name": "aeep_lookup_capability",
+      "description": "Look up local, scoped evidence for an inspected candidate. Returns an applicable admission or a reason to assess or keep the current environment. Never starts an assessment or grants authority; dispatch rechecks applicability.",
+      "inputSchema": {
+        "$defs": {
+          "ActionConstraints": {
+            "additionalProperties": false,
+            "properties": {
+              "max_cost_usd": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Cost Usd"
+              },
+              "max_latency_ms": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Latency Ms"
+              },
+              "max_cpu_ms": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Cpu Ms"
+              },
+              "max_memory_mb_seconds": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Memory Mb Seconds"
+              },
+              "max_peak_memory_mb": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Peak Memory Mb"
+              },
+              "max_gpu_ms": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Gpu Ms"
+              },
+              "max_network_bytes": {
+                "anyOf": [
+                  {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Network Bytes"
+              },
+              "max_context_tokens": {
+                "anyOf": [
+                  {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Context Tokens"
+              },
+              "min_success_probability": {
+                "default": 0.7,
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Min Success Probability",
+                "type": "number"
+              },
+              "min_quality_score": {
+                "default": 0.5,
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Min Quality Score",
+                "type": "number"
+              },
+              "max_risk_score": {
+                "default": 0.5,
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Max Risk Score",
+                "type": "number"
+              },
+              "max_side_effect": {
+                "$ref": "#/$defs/SideEffect",
+                "default": "read"
+              },
+              "allow_network": {
+                "default": true,
+                "title": "Allow Network",
+                "type": "boolean"
+              },
+              "require_local": {
+                "default": false,
+                "title": "Require Local",
+                "type": "boolean"
+              },
+              "allowed_executor_kinds": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/$defs/ExecutorKind"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Allowed Executor Kinds"
+              },
+              "allowed_executor_ids": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Allowed Executor Ids"
+              },
+              "denied_executor_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Denied Executor Ids",
+                "type": "array"
+              },
+              "allowed_data_residency": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Allowed Data Residency"
+              }
+            },
+            "title": "ActionConstraints",
+            "type": "object"
+          },
+          "ActionContext": {
+            "additionalProperties": false,
+            "properties": {
+              "data_sensitivity": {
+                "$ref": "#/$defs/DataSensitivity",
+                "default": "internal"
+              },
+              "state_locality": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/Locality"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "preferred_region": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Preferred Region"
+              },
+              "compute": {
+                "$ref": "#/$defs/ComputeAvailability"
+              },
+              "labels": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "title": "Labels",
+                "type": "object"
+              },
+              "traceparent": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Traceparent"
+              },
+              "subscription_quotas": {
+                "additionalProperties": {
+                  "$ref": "#/$defs/SubscriptionQuota"
+                },
+                "title": "Subscription Quotas",
+                "type": "object"
+              },
+              "cache_affinity": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/CacheRoutingContext"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              }
+            },
+            "title": "ActionContext",
+            "type": "object"
+          },
+          "ActionRequest": {
+            "additionalProperties": false,
+            "properties": {
+              "action_id": {
+                "title": "Action Id",
+                "type": "string"
+              },
+              "capability": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Capability",
+                "type": "string"
+              },
+              "input": {
+                "additionalProperties": true,
+                "title": "Input",
+                "type": "object"
+              },
+              "policy": {
+                "default": "balanced",
+                "title": "Policy",
+                "type": "string"
+              },
+              "constraints": {
+                "$ref": "#/$defs/ActionConstraints"
+              },
+              "context": {
+                "$ref": "#/$defs/ActionContext"
+              },
+              "idempotency_key": {
+                "anyOf": [
+                  {
+                    "maxLength": 256,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Idempotency Key"
+              }
+            },
+            "required": [
+              "capability"
+            ],
+            "title": "ActionRequest",
+            "type": "object"
+          },
+          "CacheRoutingContext": {
+            "additionalProperties": false,
+            "properties": {
+              "cache_scope_key_hmac": {
+                "pattern": "^[a-f0-9]{64}$",
+                "title": "Cache Scope Key Hmac",
+                "type": "string"
+              },
+              "provider": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Provider",
+                "type": "string"
+              },
+              "model": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Model",
+                "type": "string"
+              },
+              "integration_adapter": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Integration Adapter",
+                "type": "string"
+              },
+              "route_id": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Route Id",
+                "type": "string"
+              },
+              "stable_prefix_digest_hmac": {
+                "pattern": "^[a-f0-9]{64}$",
+                "title": "Stable Prefix Digest Hmac",
+                "type": "string"
+              },
+              "previous_state_digest_hmac": {
+                "anyOf": [
+                  {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Previous State Digest Hmac"
+              },
+              "common_prefix_tokens_estimate": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Common Prefix Tokens Estimate",
+                "type": "integer"
+              },
+              "eligible_cached_tokens_estimate": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Eligible Cached Tokens Estimate",
+                "type": "integer"
+              },
+              "recent_cache_read_tokens": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Recent Cache Read Tokens",
+                "type": "integer"
+              },
+              "recent_cache_write_tokens": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Recent Cache Write Tokens",
+                "type": "integer"
+              },
+              "recent_cache_miss_tokens": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Recent Cache Miss Tokens",
+                "type": "integer"
+              },
+              "observed_hits": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Observed Hits",
+                "type": "integer"
+              },
+              "observed_attempts": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Observed Attempts",
+                "type": "integer"
+              },
+              "last_seen_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Last Seen At"
+              },
+              "compaction_generation": {
+                "default": 0,
+                "minimum": 0,
+                "title": "Compaction Generation",
+                "type": "integer"
+              },
+              "context_reset_reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Context Reset Reason"
+              }
+            },
+            "required": [
+              "cache_scope_key_hmac",
+              "provider",
+              "model",
+              "integration_adapter",
+              "route_id",
+              "stable_prefix_digest_hmac"
+            ],
+            "title": "CacheRoutingContext",
+            "type": "object"
+          },
+          "ComputeAvailability": {
+            "additionalProperties": false,
+            "description": "Resources available to the caller at routing time.\n\nThese values are optional because agents often know context-window or quota\nheadroom that the local process cannot detect.",
+            "properties": {
+              "available_memory_mb": {
+                "anyOf": [
+                  {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Available Memory Mb"
+              },
+              "available_cpu_fraction": {
+                "anyOf": [
+                  {
+                    "exclusiveMinimum": 0.0,
+                    "maximum": 1.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Available Cpu Fraction"
+              },
+              "available_gpu_ms": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Available Gpu Ms"
+              },
+              "context_tokens_remaining": {
+                "anyOf": [
+                  {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Context Tokens Remaining"
+              },
+              "monetary_budget_remaining_usd": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Monetary Budget Remaining Usd"
+              },
+              "network_metered": {
+                "default": false,
+                "title": "Network Metered",
+                "type": "boolean"
+              }
+            },
+            "title": "ComputeAvailability",
+            "type": "object"
+          },
+          "DataSensitivity": {
+            "enum": [
+              "public",
+              "internal",
+              "confidential",
+              "restricted"
+            ],
+            "title": "DataSensitivity",
+            "type": "string"
+          },
+          "ExecutorKind": {
+            "enum": [
+              "command",
+              "python",
+              "http",
+              "mcp",
+              "host",
+              "host_managed",
+              "delegate"
+            ],
+            "title": "ExecutorKind",
+            "type": "string"
+          },
+          "Locality": {
+            "enum": [
+              "in_process",
+              "local",
+              "lan",
+              "internet"
+            ],
+            "title": "Locality",
+            "type": "string"
+          },
+          "QuotaSource": {
+            "enum": [
+              "user",
+              "host",
+              "official_cli",
+              "rate_limit",
+              "heuristic",
+              "observed"
+            ],
+            "title": "QuotaSource",
+            "type": "string"
+          },
+          "QuotaState": {
+            "description": "Private opportunity-cost signal for a non-transferable subscription.",
+            "enum": [
+              "abundant",
+              "normal",
+              "tight",
+              "critical",
+              "exhausted",
+              "unknown"
+            ],
+            "title": "QuotaState",
+            "type": "string"
+          },
+          "SideEffect": {
+            "enum": [
+              "none",
+              "read",
+              "write",
+              "destructive",
+              "financial"
+            ],
+            "title": "SideEffect",
+            "type": "string"
+          },
+          "SubscriptionQuota": {
+            "additionalProperties": false,
+            "properties": {
+              "state": {
+                "$ref": "#/$defs/QuotaState",
+                "default": "unknown"
+              },
+              "reset_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Reset At"
+              },
+              "observed_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Observed At"
+              },
+              "confidence": {
+                "default": 0.5,
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Confidence",
+                "type": "number"
+              },
+              "source": {
+                "$ref": "#/$defs/QuotaSource",
+                "default": "user"
+              },
+              "unit": {
+                "default": "provider_unit",
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Unit",
+                "type": "string"
+              },
+              "allowance_units": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Allowance Units"
+              },
+              "remaining_units": {
+                "anyOf": [
+                  {
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Remaining Units"
+              },
+              "used_percent": {
+                "anyOf": [
+                  {
+                    "maximum": 100.0,
+                    "minimum": 0.0,
+                    "type": "number"
+                  },
+                  {
+                    "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Used Percent"
+              },
+              "window_duration_seconds": {
+                "anyOf": [
+                  {
+                    "exclusiveMinimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Window Duration Seconds"
+              },
+              "window_count": {
+                "default": 1,
+                "minimum": 1,
+                "title": "Window Count",
+                "type": "integer"
+              },
+              "evidence_digest": {
+                "anyOf": [
+                  {
+                    "pattern": "^sha256:[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Evidence Digest"
+              }
+            },
+            "title": "SubscriptionQuota",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "candidate_id": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "intake_id": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Intake Id"
+          },
+          "request": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ActionRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "title": "AdmissionLookupRequest",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true
+      }
     }
   ]
 }

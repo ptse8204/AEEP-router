@@ -1,0 +1,9 @@
+Validation sequence; each command runs from /Users/edwintse/Documents/aeep-agent-router.
+
+1. python3 -m compileall -q src examples tests
+2. python3 scripts/generate_schemas.py --check
+3. AEEP_VERIFY_OFFLINE=1 TMPDIR=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/tmp-main PYTEST_ADDOPTS="--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main -o cache_dir=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-full-validation-20261002/pytest-cache-main" python3 -m pytest
+4. AEEP_VERIFY_OFFLINE=1 TMPDIR=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/tmp-coverage COVERAGE_FILE=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-full-validation-20261002/coverage.data PYTEST_ADDOPTS="--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-coverage -o cache_dir=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-full-validation-20261002/pytest-cache-coverage" python3 -m coverage run --branch -m pytest
+5. COVERAGE_FILE=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-full-validation-20261002/coverage.data python3 -m coverage report -m
+
+The `run_check.py` wrapper records full stdout/stderr and exit status for each step, samples storage every 30 seconds, and stops on a source change, combined retained/test-temp growth above 30 GiB, or important-usage free capacity below 80 GiB. `source-before.sha256` is checked during monitored runs and compared after all steps.

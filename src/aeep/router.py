@@ -677,6 +677,7 @@ class Router:
             "dynamic_declaration_bytes",
             "dynamic_schema_bytes",
             "host_failure_code",
+            "host_progress",
             "host_tools_used",
             "host_available_tools",
             "host_advertised_inventory_digest",
@@ -5416,7 +5417,10 @@ class Router:
         except (ConfigurationError, ValueError) as exc:
             raise NoRouteError(str(exc)) from exc
 
-    def _require_active_spec(self, spec: ExecutorSpec, request: ActionRequest | None = None, *, check_activation: bool = True) -> None:
+    def _require_active_spec(self, spec: ExecutorSpec, request: ActionRequest | None = None, *,
+                             check_activation: bool = True, configuration_only: bool = False) -> None:
+        if configuration_only and (request is not None or self._task_scope_digest is None):
+            raise ConfigurationError('configuration-only validation requires a bound task scope and no action')
         if check_activation and self._task_activation_digest is not None:
             from .tasks import require_activation
             require_activation(self, self._task_activation_digest)
@@ -5452,7 +5456,7 @@ class Router:
                 from .assessment.repository import AssessmentRepository
                 admission = AssessmentRepository(self.store).get("admission", marker[0])
                 baseline = self.registry.get(admission["baseline_id"]) if self.registry.contains(admission["baseline_id"]) else None
-                require_applicable(self.store, spec, request, baseline)
+                require_applicable(self.store, spec, request, baseline, configuration_only=configuration_only)
         candidate = self.store.get_route_candidate(spec.id)
         if candidate is None:
             return

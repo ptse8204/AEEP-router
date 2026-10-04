@@ -1,0 +1,182 @@
+{
+  "recorded_at": "2026-10-03T07:53:56.524549+00:00",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+  "status": "all_commands_passed",
+  "command_count": 12,
+  "commands": [
+    {
+      "name": "04-compileall-retry",
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d452197e510c00960b631fdf183b5ff437792e82e619b14480a9e6210d060818"
+    },
+    {
+      "name": "05-schema-check-retry",
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0b1013bd512c0408ac26a50e3184e126d4f648d1ee0629979d5fa7b52b93bba0"
+    },
+    {
+      "name": "06-focused-retry",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v08_dynamic_differential.py",
+        "tests/test_v08_three_way.py",
+        "tests/test_v08_incremental.py",
+        "tests/test_v08_conformance.py",
+        "tests/test_codex_composed_inspection.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "deba9439468484ac6f35c97c26e523d875d56a6273e986b1ae5667258c9e40a0"
+    },
+    {
+      "name": "07-policy",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "34543fe8f11cf2e414e8372feace2cbfd118319cfb73920c86b0456a31cba928"
+    },
+    {
+      "name": "08-ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "examples"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0f6ac0ea76ea4bc2dbb211257129a826c7b6e207a2486196c49aa368ee130be9"
+    },
+    {
+      "name": "09-mypy",
+      "argv": [
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e6292fcc8f1c2d285a73c990144aed409bd0947039a7c33cf55fbcc9d0bb8c85"
+    },
+    {
+      "name": "10-pytest",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "exit_code": 0,
+      "log_sha256": "40f55b3bc8730fd7b83f33c570f990e1612a65a0c691c4c613324fef5c268d06"
+    },
+    {
+      "name": "11-coverage-run",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "exit_code": 0,
+      "log_sha256": "2207ea112d99899135309118995bc22c96fd7728eb08c85ce9f62b7eac22671e"
+    },
+    {
+      "name": "12-coverage-report",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "log_sha256": "fdb05c09c2fa3b67cd22df7c8343b3d02f64723b86fcf4e15a877c9869233819"
+    },
+    {
+      "name": "13-coverage-json",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "--data-file=reports/v08/luna-b-three-role-validation-20261003/coverage.data",
+        "-o",
+        "reports/v08/luna-b-three-role-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0b62ee03b6cc2d15384ab92df3d41831f3f54e038d40491214897bb64f1c045a"
+    },
+    {
+      "name": "14-critical-coverage",
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/luna-b-three-role-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "ec9668aace2db91d23459fe5166c9c31dfd7b4f0606fb971df25a855ecd6dd49"
+    },
+    {
+      "name": "15-assessment-coverage",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/luna-b-three-role-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "4585f1f9b762f3d027b47d8a453de19a11ed899a008d07295db8dc9c44b9477a"
+    }
+  ],
+  "pytest_summaries": {
+    "10-pytest": "1204 passed, 21 skipped, 1 warning in 554.19s (0:09:14)",
+    "11-coverage-run": "1204 passed, 21 skipped, 1 warning in 831.07s (0:13:51)"
+  },
+  "coverage_totals": {
+    "covered_lines": 25927,
+    "num_statements": 30408,
+    "percent_covered": 81.79725759059745,
+    "percent_covered_display": "82",
+    "missing_lines": 4481,
+    "excluded_lines": 245,
+    "percent_statements_covered": 85.26374638253091,
+    "percent_statements_covered_display": "85",
+    "num_branches": 10432,
+    "num_partial_branches": 2269,
+    "covered_branches": 7479,
+    "missing_branches": 2953,
+    "percent_branches_covered": 71.69286809815951,
+    "percent_branches_covered_display": "72"
+  },
+  "scope": "Offline software validation; real model/native/container opt-ins were cleared. Skips do not establish live or boundary gates.",
+  "source_unchanged": true,
+  "temporary_resources_retained": true,
+  "temporary_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-b-three-role-validation-20261003",
+  "canonical_assessment_grant_used": false,
+  "remaining": [
+    "Current composed boundary conformance",
+    "Matching live qualification",
+    "Original three-way AEEP-value campaign",
+    "Independent production/adoption gates"
+  ]
+}

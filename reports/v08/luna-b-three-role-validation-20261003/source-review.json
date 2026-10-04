@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-10-03T07:30:04.149317+00:00",
+  "authority": "September 25/27 standing review delegation; original B continuation",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "prior_tested_source": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "implementation": [
+    "Three-way workers checked pairwise for independent identity and credential storage.",
+    "Normal supports may only be an exact subset; omitted skills require exact skill:<name>/SHA in reviewed external discovery inventory.",
+    "External discovery inventory must be discovery-only; common/normal inventory entries cannot be mislabeled external.",
+    "All current source-bound per-role conformance gates and historical four-arm rules remain required."
+  ],
+  "file_sha256": {
+    "src/aeep/assessment/comparison.py": "11e4e7ef45109868e340fc14dd0b1b2298f77cb081d25913ce09320c74b1fbc5",
+    "src/aeep/assessment/boundary.py": "b71f2f10a9a0c876c8b967245a1d064ebc36307425b0984b2c7bdf3d2a9554fc",
+    "tests/test_v08_three_way.py": "3e5f8a6175c62e95a0d36f78184e0d9ccb0a357c18a7fcb040a3e5158a17cb95",
+    "docs/ASSESSMENT_TESTING.md": "832523e4a06c7de78621f7ead45afccc2959ec26600b75ba798dc1992f071760",
+    "reports/v08/luna-docx-stage/b-three-role-validator-amendment.json": "e5398ca3bd7053eb4564cf29525b9c914483b5dc2f6ac03ccfe52714177f8dcb"
+  },
+  "wrapper_sha256": "4b24f7dd0002be136f23aa6d5453d99b08f8f5d2a7c343481f2c38335a7f4eef",
+  "commands_sha256": "b1dd6541eb5f50d05a8135376504e6f3f256c6fab0729d38d718882f86a4343a",
+  "limits": {
+    "per_command_seconds": 1800,
+    "max_temporary_bytes": 32212254720,
+    "host_reserve_bytes": 53687091200,
+    "initial_free_required_bytes": 85899345920
+  },
+  "scope": "Offline software checks only; live/native/container opt-ins cleared. No canonical grant or model/worker calls.",
+  "prior_focused": "25 passed before new boundary tests; Luna focused28 passed before root added2 external binding cases.",
+  "no_runtime_setup_on_prior_source": true
+}

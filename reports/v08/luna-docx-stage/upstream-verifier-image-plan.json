@@ -1,0 +1,67 @@
+{
+  "schema_version": "assessment.skillsbench-docx-verifier-image-plan.v1",
+  "status": "prepared_inert_no_wheel_download_or_build",
+  "purpose": "Separate pytest-only derivative for one public fixed-artifact compatibility check; never use as a trial worker image.",
+  "upstream": {
+    "repository": "benchflow-ai/skillsbench",
+    "commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "verifier": "tasks/offer-letter-generator/verifier/test_outputs.py",
+    "verifier_sha256": "913b9a3ebe579aed9c8f876dededea4d6a957eca9fbd0d9e8f043719cfb8cf05",
+    "license": "Apache-2.0",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "base": {
+    "tag": "aeep-skillsbench-docx-control:luna-xhigh-20261002",
+    "image_id": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+    "required_existing_packages": {
+      "python-docx": "1.1.2"
+    }
+  },
+  "verifier_only_packages": [
+    {"name": "pytest", "version": "8.4.1", "filename": "pytest-8.4.1-py3-none-any.whl", "sha256": "539c70ba6fcead8e78eebbf1115e8b589e7565830d7d006a8723f19ac8a0afb7", "bytes": 365474, "url": "https://files.pythonhosted.org/packages/29/16/c8a903f4c4dffe7a12843191437d7cd8e32751d5de349d45d3fe69544e87/pytest-8.4.1-py3-none-any.whl"},
+    {"name": "iniconfig", "version": "2.1.0", "filename": "iniconfig-2.1.0-py3-none-any.whl", "sha256": "9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760", "bytes": 6050, "url": "https://files.pythonhosted.org/packages/2c/e1/e6716421ea10d38022b952c159d5161ca1193197fb744506875fbb87ea7b/iniconfig-2.1.0-py3-none-any.whl"},
+    {"name": "packaging", "version": "25.0", "filename": "packaging-25.0-py3-none-any.whl", "sha256": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484", "bytes": 66469, "url": "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl"},
+    {"name": "pluggy", "version": "1.6.0", "filename": "pluggy-1.6.0-py3-none-any.whl", "sha256": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", "bytes": 20538, "url": "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl"},
+    {"name": "pygments", "version": "2.19.2", "filename": "pygments-2.19.2-py3-none-any.whl", "sha256": "86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b", "bytes": 1225217, "url": "https://files.pythonhosted.org/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl"}
+  ],
+  "wheel_download_total_bytes": 1683748,
+  "context": {
+    "dockerfile": "reports/v08/luna-docx-stage/verifier-image-context/Dockerfile.verifier",
+    "requirements_lock": "reports/v08/luna-docx-stage/verifier-image-context/requirements-verifier.lock",
+    "wheel_dir": "reports/v08/luna-docx-stage/verifier-image-context/wheels",
+    "new_tag": "aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002",
+    "build_platform": "linux/arm64",
+    "network": "none",
+    "pull": false,
+    "effect_on_trial_images": "none; this is a new image tag derived from the already-built control image",
+    "base_tag_resolution": "The Dockerfile FROM uses the reviewed local control tag. The build wrapper checks that tag's image ID immediately before and after the build. Dockerfile FROM is not claimed to resolve an immutable digest, and a concurrent retag between checks cannot be excluded."
+  },
+  "wheel_fetch_bounds_after_campaign": {
+    "operations": 1,
+    "seconds": 60,
+    "download_work_deadline_seconds": 50,
+    "per_wheel_subprocess_timeout_seconds": 10,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "download_bytes": 1683748,
+    "authorization_id": "onboarding"
+  },
+  "setup_bounds_after_campaign": {
+    "operations": 1,
+    "seconds": 180,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "download_bytes": 0,
+    "host_disk_growth_bytes_max": 1000000000,
+    "required_host_free_bytes_before": 54687091200,
+    "storage_measurement": "Foundation important-usage capacity must be at least 50 GiB plus the separate 1,000,000,000-byte raw host-growth bound before build; retain 50 GiB afterward."
+  },
+  "run_bounds_after_campaign": {
+    "operations": 1,
+    "seconds": 30,
+    "model_turns": 0,
+    "cash_usd": 0
+  },
+  "cost_lineage": "After the live campaign reaches a canonical terminal result, the wheel download, verifier-only image build, and 18-assertion run each require a separate pre-reserved one-operation record on the same onboarding grant. No prior counters are reset; preserve each result and operation receipt.",
+  "compatibility_claim": "Only the pinned 18 parametrized assertions in test_outputs.py are exercised against this one already-reviewed public literal artifact. The upstream test.sh, uv, CTRF output, reward file, task worker, model, generator, holdouts and qualification/admission are excluded."
+}

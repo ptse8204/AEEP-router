@@ -1,0 +1,83 @@
+{
+  "observed_at": "2026-10-03T05:57:56.223806+00:00",
+  "status": "pass",
+  "scope": "Exact pinned upstream pytest module on fixed public literal fixture index 0; 18 assertions. No failed heldout artifact was inspected or regraded.",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "records": [
+    {
+      "path": "upstream-verifier-wheel-fetch-result.json",
+      "sha256": "e9c7563446d962154b3b90427a307090b657ae9235c71a7e3ba5f6f3d6e26ed9"
+    },
+    {
+      "path": "upstream-verifier-build-result.json",
+      "sha256": "d3893eb4fd0fe202dd8adc4073ac40d4a28c04adc715a2cfdb53f5f344dc4769"
+    },
+    {
+      "path": "upstream-verifier-run-result.json",
+      "sha256": "dcdd43450479f7736d52e0e02f387e4f2efe7799d159af00ae25b4b4642eceee"
+    }
+  ],
+  "image_tag": "aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002",
+  "image_id": "sha256:7d5c98e4ad4bcdab74f314f0452d776711e62525a94922b5a01c7d39caef072c",
+  "container": {
+    "Id": "7ffdac90eee4d7c0660ed2725224baad7528ef25cdf21e8f8442be6a505620f3",
+    "Image": "sha256:7d5c98e4ad4bcdab74f314f0452d776711e62525a94922b5a01c7d39caef072c",
+    "Running": false,
+    "ExitCode": 0,
+    "NetworkMode": "none",
+    "ReadonlyRootfs": true,
+    "User": "65534:65534",
+    "Mounts": [
+      {
+        "Destination": "/root",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/upstream-verifier-context/input",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/verifier",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/upstream-verifier-context/verifier",
+        "Type": "bind"
+      }
+    ]
+  },
+  "container_retained": true,
+  "canonical_operations": [
+    {
+      "id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:upstream_verifier_wheel_fetch_20261003",
+      "grant_id": "onboarding",
+      "state": "complete"
+    },
+    {
+      "id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:upstream_verifier_image_setup_20261003",
+      "grant_id": "onboarding",
+      "state": "complete"
+    },
+    {
+      "id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:upstream_verifier_compatibility_20261003",
+      "grant_id": "onboarding",
+      "state": "complete"
+    }
+  ],
+  "accounted_elapsed_seconds": 8.462546665919945,
+  "model_turns": 0,
+  "grant_after": {
+    "id": "onboarding",
+    "revoked": 0,
+    "operations": 9221,
+    "model_turns": 2691,
+    "elapsed_seconds": 98785.65667610941,
+    "cash_usd": "0.0"
+  },
+  "limitations": [
+    "Not an official SkillsBench reproduction or candidate trial.",
+    "No test.sh, CTRF or reward-file harness executed.",
+    "Does not establish qualification, benefit, admission or failure-case coverage.",
+    "Post-report costs remain separate and must be linked once in any future economic analysis."
+  ]
+}

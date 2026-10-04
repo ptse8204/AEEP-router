@@ -1,0 +1,52 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.docx
+#1 transferring dockerfile: 912B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/aeep-sol61-successor-control@sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d
+#2 DONE 0.7s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [common 1/5] FROM docker.io/library/aeep-sol61-successor-control@sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d
+#5 resolve docker.io/library/aeep-sol61-successor-control@sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d
+#5 resolve docker.io/library/aeep-sol61-successor-control@sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d 0.6s done
+#5 DONE 0.6s
+
+#4 [internal] load build context
+#4 transferring context: 8.24kB done
+#4 DONE 0.0s
+
+#6 [common 2/5] RUN python3 -c "import sys; assert sys.version_info[:2] == (3, 13), sys.version"
+#6 CACHED
+
+#7 [common 3/5] COPY wheels/ /tmp/wheels/
+#7 CACHED
+
+#8 [common 4/5] COPY requirements-docx.lock /tmp/requirements-docx.lock
+#8 CACHED
+
+#9 [common 5/5] RUN python3 -m pip install --no-index --find-links=/tmp/wheels --require-hashes -r /tmp/requirements-docx.lock && rm -rf /tmp/wheels /tmp/requirements-docx.lock
+#9 CACHED
+
+#10 [treatment 1/2] COPY docx/SKILL.md /opt/dependencies/plugin/skills/docx/SKILL.md
+#10 DONE 0.0s
+
+#11 [treatment 2/2] RUN mkdir -p /etc/codex/skills && ln -s /opt/dependencies/plugin/skills/docx /etc/codex/skills/docx
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers 0.0s done
+#12 exporting manifest sha256:9b9227de2a3a7587d5c61d7fcda56d6543802145dac2d86c508a324eff454d49 done
+#12 exporting config sha256:dd5a0bc95066ae6ab5640db670b860e63088fe3221178bb57acfb59803a35399 done
+#12 exporting attestation manifest sha256:280bd02baf71f570a751cb71d90abb3b6f4458d0f160b79a186eb1e40e921e08 done
+#12 exporting manifest list sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2 done
+#12 naming to docker.io/library/aeep-skillsbench-docx-treatment:luna-xhigh-20261002 done
+#12 unpacking to docker.io/library/aeep-skillsbench-docx-treatment:luna-xhigh-20261002 0.0s done
+#12 DONE 0.1s

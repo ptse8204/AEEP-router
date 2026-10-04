@@ -1,0 +1,97 @@
+{
+  "schema_version": "luna.b_prerequisite_readiness_supplement.v1",
+  "status": "read_only_readiness_audit; no current-source runnable three-way producer identified",
+  "audit_scope": {
+    "policy_read": [
+      "docs/ASSESSMENT_TESTING.md",
+      "SPEC.md",
+      "ARCHITECTURE.md",
+      "SECURITY.md"
+    ],
+    "actions": "Static inspection of bounded report metadata and public API definitions only; no test/import/runtime, worker, model, Docker, authentication, grant, canonical database, or holdout access.",
+    "source_digest_current": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1"
+  },
+  "decision": {
+    "ready_to_execute": false,
+    "reason": "No current-source Luna/xhigh three-role profile/conformance producer or frozen B plan exists. The current DOCX required-exposure qualification is unsuitable (137/141 passed, 2 correctness failures, 2 timeouts, no admission) and cannot supply lineage for this different B subject.",
+    "qualification_record": {
+      "path": "reports/v08/luna-docx-stage/successor-qualification-terminal.json",
+      "sha256": "0ce50cefa63205a0ac27a86807286f3936b96c22b91a92fbb8dd40c6a6dad6ef",
+      "result_path": "successor-qualification-result.json",
+      "result_sha256": "f6560524c6e4de43046ab09c777bd05e1827b74bfc9b99c190a9965ccb911971",
+      "report_id": "fit_fa7c4604d5d448fe9e4ce12c363ce315",
+      "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+      "qualification_status": "correctness_failed",
+      "admission_count_for_docx_executors": 0
+    },
+    "intended_intervention": "Existing task-only AEEP route/receipt use with a fixed reviewed TaskScope, evaluated as an optional third arm alongside equivalent discovery access; this is the pre-DOCX documented B design, not a new candidate.",
+    "intended_shared_candidate_reference_only": {
+      "name": "Spreadsheets supporting skill",
+      "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+      "file_sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+      "bundle_sha256": "b17af7658e2bafb3ba4509514e896d538f682370fa654a24e733f1c5116fd79f",
+      "provenance": "Historical planning pin in reports/v08/original-three-way-profile/prototype.json (source 46803ee2814c77977c4408b60768c6581fc0189f0c8fb9a8ccd7dd77ccc4b236); not reverified or bound to a current AssessmentSubject/candidate ID.",
+      "current_exact_subject_id_source_binding": null
+    }
+  },
+  "next_existing_producer_to_adapt": {
+    "path": "reports/v08/original-three-way-profile/assemble-current-composed-request.py",
+    "sha256": "e0a48251c10393cec2dbd75fe6b7626b78c8d7623eca9ab1dafcd6e583445ad5",
+    "why_this_is_the_nearest_starting_point": "Pure reviewed-profile assembly; checks exact managed-worker/callback identities and emits a concrete native composed-pair conformance request without reservation or host execution.",
+    "limits": "Pinned to source ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1 and ComposedPairDefinition control/treatment only. It is not current-source, Luna/xhigh, or a three-role B producer. Rebind/review and a third role would be required before use.",
+    "not_the_next_producer": {
+      "path": "reports/v08/original-three-way-profile/current-composed-native-component-definitions.py",
+      "sha256": "8c3a4f2e52354db5e6ffb4e3cc9eee7f578e8c743006a99f605bc2cc2e5a1f5d",
+      "reason": "Only defines native boundary/cancellation component probes and is tied to source 5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc and a fixed old workbook project; it cannot produce qualification or three-way profiles.",
+      "static_review_runtime_launched": false
+    }
+  },
+  "arm_access_invariants": {
+    "roles": [
+      "normal host",
+      "external-discovery host",
+      "same discovery host plus AEEP task-only intervention"
+    ],
+    "same_candidate_and_operation": "The Spreadsheets candidate and ordinary non-oracle operation must be the same in the discovery and AEEP arms; the normal host alone omits external discovery.",
+    "inventory_rule": "Discovery and AEEP arms have equivalent discovery/candidate access. Bind all three exact worker and configuration digests and match the observed effective inventory for each role; prove normal-host candidate absence.",
+    "current_model_checks": "ThreeWayAccessDefinition binds normal_inventory, discovery_inventory, external_candidate_inventory plus exact three-role worker_digests/configuration_digests. require_three_way_access checks reviewed definition digest, inventory composition, all three current conformance records and normal-host candidate absence; require_differential checks the reviewed environment definition and conformance inventories.",
+    "access_definition_source": "src/aeep/assessment/models.py:322-363; src/aeep/assessment/boundary.py:149-216"
+  },
+  "minimal_existing_public_api_path": [
+    "Prepare an explicit IncrementalExperiment(stage=\"qualification\", exposure=\"required\") and AssessmentEnvironment with exact role bindings; AssessmentService.propose(..., experiment=...) freezes the plan.",
+    "Review exact definitions and obtain current conformance for each role; call require_differential through the normal assessment verification path. Do not treat the two-role prepare_pair/execute_pair helper as three-way proof.",
+    "Use AssessmentService.budget_preview(plan_id), then the ordinary reviewed enqueue(plan_id) and run(assessment_id); only AssessmentService.admit(report_id) can admit a useful, qualification-passing report with independent grader-validation evidence.",
+    "After successful same-subject/source/backend qualification, define disjoint IncrementalExperiment(schema_version=\"assessment.experiment.v2\", stage=\"aeep_value\", exposure=\"optional\", normal_host=..., three_way_access_digest=..., qualification_report_digest=..., feasible_challengers=[normal_host.executor_id]); preview budget and run only after review."
+  ],
+  "public_api_refs": {
+    "AssessmentService.propose": "src/aeep/assessment/service.py:157",
+    "AssessmentService.budget_preview": "src/aeep/assessment/service.py:425",
+    "AssessmentService.admit": "src/aeep/assessment/service.py:577",
+    "AssessmentService.run": "src/aeep/assessment/service.py:946",
+    "AssessmentService._verify_incremental_evidence": "src/aeep/assessment/service.py:787",
+    "IncrementalExperiment_and_ThreeWayAccessDefinition": "src/aeep/assessment/models.py:343-399",
+    "require_differential_and_three_way_access": "src/aeep/assessment/boundary.py:149-216",
+    "two_role_native_pair_helpers": "src/aeep/hosts/codex_pair_inspection.py:215,405"
+  },
+  "prerequisite_inputs_before_any_campaign": [
+    "Exact current subject ID and current candidate/source snapshot for the pre-existing Spreadsheets-supported task intervention; explicitly bind\u2014not infer\u2014the external discovery source and same ordinary task operation.",
+    "Reviewed task-only declaration, immutable task manifest/tool contract, executor fingerprints and fixed TaskScope; actual trusted authority-isolated model-to-task boundary plus fresh execution-backed conformance proving private control/receipt state is unavailable to the model.",
+    "Three Luna/xhigh role profiles with exact model/reasoning settings, distinct controlled worker identities, image/configuration digests, effective tool/skill inventories, supporting capabilities and per-role fresh current-source boundary conformance.",
+    "Reviewed ThreeWayAccessDefinition and DifferentialEnvironment/DifferentialConformance bound to those roles; discovery and AEEP access equal, normal discovery omission explicit.",
+    "A fresh exact-backend required-exposure qualification with protected independent grader, 8 screening / 28 training / 105 holdout structure, zero correctness failures, successful refit and current report lineage. The failed DOCX plan is not transferable.",
+    "Only after passing qualification: disjoint 141-case aeep_value plan, optional candidate invocation, exact qualification_report_digest, budget_preview and contemporaneous storage/allowance preflight."
+  ],
+  "prerequisite_records": {
+    "path": "reports/v08/original-three-way-profile/current-native-qualification-prerequisites-5fff.json",
+    "sha256": "c310d68abca0e5ec7d028540775ffd901b979745ddcd5f148483b70ef2be5a34",
+    "status": "read-only implementation trace; no cases or campaign instantiated",
+    "source_digest": "5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc",
+    "current_composed_review": {
+      "path": "reports/v08/original-three-way-profile/current-composed-native-components-5fff-independent-review.json",
+      "sha256": "115a28cb015592e889b20066c3d20de7ec2b36733c1da6021a35648798902185",
+      "runtime_launched": false,
+      "scope": "Static review only; exact bounded native component probe authorization was conditional, and does not create a qualification/value recipe."
+    }
+  },
+  "remaining_decision": "Root can begin report-local current-source B producer preparation next turn using the documented Spreadsheets/task-only concept and the pair assembler only as a design reference. Do not run the stale 5fff helper, bind the failed DOCX result, promote unmatched live-search metadata, or invent a replacement candidate."
+}

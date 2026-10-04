@@ -1,0 +1,65 @@
+{
+  "additionalProperties": false,
+  "description": "Registry identity, never an assertion that artifact bytes were verified.",
+  "properties": {
+    "schema_version": {
+      "const": "discovery.external_identity.v1",
+      "default": "discovery.external_identity.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scheme": {
+      "enum": [
+        "ard",
+        "registry"
+      ],
+      "title": "Scheme",
+      "type": "string"
+    },
+    "identifier": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Identifier",
+      "type": "string"
+    },
+    "registry_origin": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Registry Origin",
+      "type": "string"
+    },
+    "version": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Version"
+    },
+    "content_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Digest"
+    }
+  },
+  "required": [
+    "scheme",
+    "identifier",
+    "registry_origin"
+  ],
+  "title": "ExternalResourceIdentity",
+  "type": "object"
+}

@@ -1,5 +1,927 @@
 # 0.8 plan coverage and remaining work
 
+The [October 4 live delay diagnostic](live-delay-diagnostic-20261004/findings.md)
+renewed 22 worker and three native boundary checks on source `e6b71acb…`, then ran
+Luna/xhigh twice with fresh scopes. The first new input contained unsupported
+fractional prices: native task validation failed and the outer host timed out at
+203.231 seconds. That preparation error and all costs remain recorded. A new
+integer-only input passed in 23.510 seconds: a task-valid callback response at
+16.593 seconds was followed by normal turn completion at 19.319 seconds, artifact
+retrieval and confirmed cleanup. This demonstrates one successful current-source
+completion, not the cause of the five historical timeouts. A report-helper type
+resolution error was recovered without replay; no production source or verification
+lock changed. The [final audit](live-delay-diagnostic-20261004/resources-audit-v2-final.json)
+records 18 settled operations, two turns and 282.884 measured operation-seconds.
+No images were built or pulled; no containers remained running; 143.5 GiB was free.
+This diagnostic does not qualify or admit a route, renew the full paired comparison,
+or supply holdout evidence. Separate artifact/cleanup timing and the historical
+post-valid-callback delay remain open.
+
+The [October 4 follow-up investigation](outer-worker-followup-20261004/investigation.md)
+used the exact historical wheel and read-only metadata from all five timeout
+receipts plus one passing comparison. Missing normal-completion metadata fields
+match the adapter's partial timeout/cancellation return. In the matched historical
+wrapper, that return skips final output retrieval and survives only if worker
+cleanup succeeds. This narrows the failure stage without identifying the timeout
+trigger or the reason for later host activity. Eight synthetic wrapper/deadline
+probes passed in 0.283 seconds using Luna/xhigh; they made no live calls and
+changed no production source or tests. Retrieval/cleanup cancellation can still
+lose the returned progress summary, a separate observation gap. Historical
+results and the verification lock remain unchanged. The follow-up uses small
+reports and in-memory probes, with no database copies, installations or new
+Docker resources; the [storage record](outer-worker-followup-20261004/storage-preflight.json)
+identifies existing retained test scratch directories without deleting them.
+
+
+The October 4 documentation revision replaces the README's overview with plain
+instructions, concrete use cases and a results table. The new
+[evidence guide](../../docs/EVIDENCE.md) links successful software, native
+workbook, deterministic-tool and lifecycle results to their methods and limits.
+It retains the negative DOCX and workbook qualifications and the unrun value study.
+
+The [timeout-diagnostic implementation review](outer-worker-delay-20261004/implementation-review.json)
+authorizes content-free adapter progress metadata and offline regression checks.
+The [metadata audit](luna-docx-stage/c-workbook-callback-delay-metadata-diagnostic.json)
+retains all five original timeouts. Existing event streams show completed
+callbacks followed by further host activity; the specific cause of the later delay
+is still unknown. The adapter now snapshots callback response-write counts,
+workflow stage and completion flags before interruption. This is a diagnostic
+change, not evidence of a live timeout repair. The
+[Luna/xhigh review](outer-worker-delay-20261004/luna-diagnostic-review.json)
+records its limits: aggregate callback counters, local pipe writes rather than
+acknowledgements, and no timing of later artifact retrieval or cleanup.
+The [October 4 validation](outer-worker-delay-20261004/validation-terminal.json)
+passed the full coverage suite: 1,219 passed, 21 opt-in skips, one dependency warning,
+and 81.8925% combined statement and branch coverage. Both coverage gates, compile,
+schema, policy, lint, type checks, 13 Node tests, offline integration proofs,
+provider-package verification, wheel/sdist builds and retained artifact checks
+passed. The first plain pytest run found one README version-marker failure among
+1,218 passes; the marker was restored, both version tests passed, and the full
+coverage run then passed. The original failure log remains in the validation folder.
+Five new regression cases cover four callback/timeout conditions and SQLite
+receipt persistence. Source is `e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6`;
+the previous verification lock is unchanged. These source changes require fresh
+applicable conformance before another live study;
+the source-bound results below remain historical.
+
+The [October 3 cost-link repair](luna-docx-stage/b-boundary-cost-link-amendment-20261003.json)
+is implemented on source `50de999e…` after the ordinary workbook proposal exposed
+missing parent operation attribution for composed boundary checks. The [code review](luna-docx-stage/c-boundary-cost-code-review-20261003.json) records 10 passing
+focused tests and the independent Luna review. Compile, schema, policy, lint,
+type checks, 28 focused integration tests and both full-suite runs (1,214 passed,
+21 opt-in skips each) passed. Both coverage gates passed; overall branch-inclusive
+coverage is 81.87%. The [terminal validation record](luna-c-boundary-cost-validation-20261003/terminal-summary.json)
+binds all 12 checks to the frozen source. Fresh C worker/native checks have
+passed 28 probes, and the [production cost resolver audit](luna-docx-stage/c-component-parent-cost-audit.json)
+resolves every probe to its canonical measured parent. Both zero-turn capacity
+checks passed. The [actual treatment callback](luna-docx-stage/c-current-callback-result-v1.json)
+also passed in 15.34 seconds with one Luna/xhigh turn, exact charged-parent
+lineage and confirmed cleanup. The [control callback](luna-docx-stage/c-control-callback-result-v1.json)
+also passed in 65.32 seconds with one Luna/xhigh turn. Both proxy brackets restored
+the proxy to stopped. The [complete cost audit](luna-docx-stage/c-all-probes-parent-cost-audit.json)
+resolves all 30 checks to six measured parents. The router then
+[validated and atomically accepted both worker records and their comparison definition](luna-docx-stage/c-boundary-conformance-apply-result-v1.json):
+seven new documents, two unchanged reviewed inventories reused, and no grant
+counter changes. Source `50de999e…` now has passing software checks and renewed
+composed conformance. Source `449b2e2f…` and its passing conformance remain
+historical evidence. No earlier charge or result has been rewritten.
+
+Fresh workbook [materialization](luna-docx-stage/c-workbook-qualification-materialization-result.json)
+completed with seed 2026100302: eight screening, 28 training and 105 holdout cases.
+The first storage preflight stopped before generation because the actual SQLite
+snapshot was 8,216 bytes larger than estimated after approval. The
+[storage-only amendment](luna-docx-stage/c-workbook-materialization-storage-amendment-review.json)
+preserves that stop and the original reviews; the same unexecuted request then
+completed in 3.73 charged seconds with no model turns. The
+[ordinary qualification proposal](luna-docx-stage/c-workbook-qualification-plan-proposal.json)
+has no budget gaps and fits the existing grant: at most 782 operations, 141 model
+turns, 51,008.08 charged seconds and zero cash, plus separately reviewed runtime
+setup. Its plan is `plan_143001e5f4be4fd9b17f78d797340b70`. The
+[reviewed third launch](luna-docx-stage/c-workbook-qualification-execution-review-20261003-v3.json)
+started job `assessment_a9369479529649cdab7a21b971dbabbc` after storage, 141 fresh
+task scopes, proxy setup and capacity checks passed. The
+[completed run](luna-docx-stage/c-workbook-qualification-result-20261003-v3.json)
+finished at 15:57 UTC with 136 passes and five invocation timeouts: screening 8/8,
+training 27/28, holdout 101/105. Independent grader validation passed, and there
+were no graded incorrect answers, retries or interventions. The canonical report
+`fit_c1b3933c5a14423d80c8f34ca3a58f7f` records `insufficient_evidence` and
+`qualification_passed=false`. The four holdout timeouts prevent qualification
+under the unchanged rule. The conditional normal-worker preparation remains
+inert, and no value study or admission can proceed from this qualification.
+The [terminal audit](luna-docx-stage/c-workbook-qualification-terminal-audit-20261003-v3.json)
+reconciles all 141 cases and 436 completed, measured operations for this plan,
+with no outstanding plan reservations and no candidate admission. Two unrelated
+historical reservations remain untouched. The reviewed proxy is stopped; no
+containers were running after completion. Source and verification lock are
+unchanged. The canonical resource coverage is 0/141 for the listed dimensions,
+despite 136 provider usage-complete flags; whole-system cost and savings remain
+unproven. The [independent terminal verification](luna-docx-stage/c-workbook-qualification-terminal-verification-20261003.json)
+records Docker state, source and lock checks, 8,426.01 measured operation seconds,
+and 132.26 GiB free. It also resolves an overstrict audit expectation: the standing
+grant permits automatic admission, while this exact execution review disables it.
+No admission was created. A retained before-state snapshot and a whole-host process
+sweep are unavailable; those are not claimed as independently verified.
+Two launcher failures are
+retained: a string/enum mismatch stopped before any operation, then a missing
+Docker socket URI prefix stopped metadata preflight. The latter used one operation
+and 0.0818 seconds, with no model turns. The corrected launch preserves that charge
+and verifies that it is the only prior plan operation before proceeding with the
+full fresh schedule. Neither failure ran a trial or consumed a task scope.
+The [terminal timeout scope audit](luna-docx-stage/c-workbook-timeout-task-scope-terminal-audit.json)
+checked all five timeouts, preserving the earlier four-case audit. Each maps to a distinct
+reviewed scope, completed native attempt and successful, valid child receipt.
+The native child finished 146 to 175 seconds before the outer workflow timed out.
+The exact cause of the outer delay remains unknown; model usage is incomplete.
+Successful child execution does not convert an outer timeout into a passing trial.
+The [campaign-bound storage sample](luna-docx-stage/c-workbook-campaign-storage-review.json)
+measured 16,193,816 bytes across SQLite main/WAL/SHM after approval in an isolated
+copy. The reviewed 639-copy and artifact allowance is 51.94 GiB, in addition to
+the 50 GiB host reserve; 137.24 GiB was free at review. Four earlier
+capacity operations remain in a separate audit, already charged; their CPU cost
+is unknown and they do not support a resource-savings claim.
+
+The [supplemental checks](luna-c-supplemental-validation-20261003/supplemental-results.json)
+passed all ten offline CI, package and artifact checks on the same frozen source,
+including 13 Node tests. Provider verification used an isolated copy and preserved
+the original example database.
+
+The [atomic callback-definition setup](luna-docx-stage/c-callback-bundles-persistence-result.json)
+reused only identical, actively reviewed probe and fixture definitions. The earlier
+treatment setup helper had rejected an existing identical probe before inserting
+anything; its failure and the exact correction are retained in the
+[persistence review](luna-docx-stage/c-callback-bundles-persistence-review.json).
+Neither setup step consumed a model turn or reset an allowance.
+
+The missed integration was cost collection after composed conformance: earlier
+checks validated worker and callback behavior, while cost collection still
+assumed that every execution attempt ID was a charged operation ID. Native
+child attempts have separate IDs. The first ordinary workbook budget preview
+exercised that join and exposed the gap; the new regressions cover it.
+
+The [October 3 storage recheck](luna-docx-stage/b-storage-recheck-20261003.json)
+measured 151.37 GiB of ordinary free space on the workspace filesystem, above
+the 50 GiB reserve. This is host disk availability, not a Codex quota; no cleanup
+was performed for this recheck.
+The [continuation check](luna-docx-stage/b-storage-continuation-20261003.json)
+at 09:34 UTC measured 150.52 GiB available; the reserve remains satisfied.
+
+The three-way continuation implemented the missing dynamic-tool differential
+contract on source `9d09d61a…`. Discovery and AEEP can now share the same physical
+Spreadsheets skill while the AEEP callback is identified separately by its exact
+declaration and reviewed worker binding. Legacy physical-skill serialization is
+preserved. The [recorded amendment](luna-docx-stage/b-dynamic-access-amendment.json)
+and [follow-up review](luna-docx-stage/b-dynamic-access-code-review-followup.json)
+explain the change. Focused checks, compile, schema consistency, policy checks,
+Ruff and mypy passed. Full pytest and the branch-coverage run each passed
+1,197 tests with 21 explicit opt-in skips; both coverage gates passed. The
+[terminal validation record](luna-b-dynamic-validation-20261003/terminal-summary.json)
+binds the 12 commands listed in its command manifest to this source.
+Current worker collection has passed the component checks described below;
+paired composed conformance has passed for the exact two-worker definition. Both
+actual callbacks and complete worker records passed, followed by the paired record.
+The treatment record has since
+passed the complete verifier, as recorded below. The completed
+results below retain their original `eaad5bc7…` source. Both original worker
+images [remain present](luna-docx-stage/b-existing-image-inspection.json).
+
+The [three-role validator amendment](luna-docx-stage/b-three-role-validator-amendment.json)
+is implemented on source `449b2e2f…`. Normal may omit only the exact supporting
+skills bound to discovery-only inventory, and all three worker pairs must be
+independent. The earlier binding tests did not exercise these cases. Seven added
+checks cover these gaps and preserve the historical four-arm rules. Full pytest
+and the branch-coverage run each passed 1,204 tests with 21 explicit opt-in skips.
+Overall coverage is 81.80% (82% rounded), and both required coverage gates passed.
+Compile, schema consistency, focused tests, policy checks, Ruff and mypy passed;
+the [terminal record](luna-b-three-role-validation-20261003/terminal-summary.json)
+binds all 12 commands to the unchanged source.
+The [supplemental CI checks](luna-b-three-role-validation-20261003/supplemental-results-correction.json)
+passed the economic, DSH, job-application and provider checks, all 13 Node tests,
+wheel/sdist builds, and all 23 locked artifact comparisons. The report-only artifact
+checker first used the wrong repository path; its failed log and corrected pass
+are retained. Provider verification changed its example database, which was left
+intact and is separate from the live assessment ledger.
+
+The [fresh native project setup](luna-docx-stage/b-native-setup-terminal-audit.json)
+completed under one existing-grant operation, using 0.744 measured seconds and
+zero model turns. Its actual callback declarations now form the current two-role
+profile. Inert assembly initially rejected the canonical `sha256:` executor
+fingerprint format; the report-local guard was corrected, with the failed attempt
+preserved and no project setup replay. Preparation and final bookkeeping costs
+remain unmeasured.
+
+The [current worker-component audit](luna-docx-stage/b-worker-components-terminal-audit.json)
+records both real workers passing all 11 checks each with zero model turns.
+Both advertise Luna with xhigh, share the same observed Spreadsheets skill and
+dependencies, and confirm cleanup. Only treatment has the added AEEP callback.
+The exact proxy was restored to stopped; all four successful inspection/lifecycle
+operations are settled on the existing grant.
+
+Two earlier attempts remain recorded: a missing native-manifest field in the
+root review stopped execution before worker reservation, and the first actual
+inspection rejected an unqualified skill name. The current profile binds the
+observed `spreadsheets:Spreadsheets` identity on both workers. The earlier costs
+and failed records were retained; no candidate model trial was retried. Paired
+conformance now includes the paired differential record described below. Qualification and
+the real three-way campaign remain unrun on this source.
+
+The [current capacity refresh](luna-docx-stage/b-treatment-capacity-result.json)
+passed on the treatment worker through the supported rate-limit API, with zero
+model turns and confirmed cleanup. Its [proxy lifecycle](luna-docx-stage/b-treatment-capacity-proxy-lifecycle-result.json)
+also passed and restored the exact proxy to stopped. The three operations retain
+their separate measurements on the existing grant.
+
+Native guard observations passed, but the first two executed component runs
+remain failed. The [v2 audit](luna-docx-stage/b-native-components-v2-failure-audit.json)
+records an observer that attempted to inspect the protected kernel ancestor.
+The [v3 result](luna-docx-stage/b-native-components-v3-result.json) confirms owned
+readiness after that correction, then fails an incorrect cancellation assertion:
+the existing native idempotent READ contract returns a timeout and a failed
+attempt, rather than raising cancellation and marking the attempt indeterminate.
+The existing native cancellation test and router state transition specify that
+behavior. Neither run establishes complete boundary conformance; their costs,
+receipts and temporary stores remain intact.
+
+The [v4 native component result](luna-docx-stage/b-native-components-v4-result.json)
+passed all three predeclared probes, retaining links to both actual child receipts.
+The guard blocked process creation, network access and private-state reads. The
+cancellation check observed the owned process, requested cancellation, verified
+the TIMEOUT/error response and durable FAILED READ attempt, and confirmed the
+owned processes were gone. One operation used 1.006 measured seconds and zero
+model turns; settlement and source stability passed. The [exact amendment review](luna-docx-stage/b-native-components-v4-parent-review.json)
+explains the READ contract correction. Host EOF, WRITE recovery, full composed
+conformance and comparative value are not established by these probes.
+
+The matching [control native audit](luna-docx-stage/b-control-native-terminal-audit.json)
+also passed all three checks against fresh control-bound probes and receipts.
+Its single operation used 1.063 measured seconds and zero model turns; cleanup,
+protected-state preservation and settlement passed. It preserved the consumed
+treatment scope. The control's actual model-issued callback subsequently passed.
+
+The [actual Luna/xhigh callback](luna-docx-stage/b-current-callback-result-v2.json)
+passed on the first public workbook fixture. One recorded model turn invoked the
+reviewed AEEP callback and produced a successful host receipt linked to protected
+native child evidence. The measured operation took 76.415 seconds; worker cleanup,
+grant settlement and source stability passed. The [proxy lifecycle](luna-docx-stage/b-current-callback-proxy-lifecycle-result.json)
+restored the exact proxy to stopped and settled its separate start/stop operations.
+The runner checks actual adapter, executor, runtime, worker and callback identities
+before describing the call as native App Server activity. Its initial proposal,
+independent review finding and corrected execution review are retained.
+The [terminal callback audit](luna-docx-stage/b-current-callback-terminal-audit.json)
+and an independent parent rerun of `verify_composed_callback` both passed against
+the canonical host receipt, callback claim, one-use scope and completed native
+child receipt. The verifier used an ephemeral view of the actual binding fields;
+it did not create a full boundary-conformance record or consume another turn.
+The [tool-identity audit](luna-docx-stage/b-current-callback-tool-identity-audit.json)
+also matches both receipt hashes to the collector's exact serialization: one
+command-execution category and the named AEEP workbook callback. It does not
+recover command arguments or task contents.
+Treatment currently requires the AEEP callback through its invocation profile.
+Control keeps helper use optional. Any later value study must use a separately
+reviewed profile that also leaves the treatment callback optional.
+
+The [treatment conformance application](luna-docx-stage/b-treatment-boundary-apply-result.json)
+then persisted the exact policy, inventory, enforcement and v3 conformance records
+in one transaction. The existing full conformance verifier passed all 15 probes,
+and the candidate-access verifier passed against the reviewed differential.
+The [parent review](luna-docx-stage/b-treatment-boundary-parent-review.json)
+uses the standing delegation. Independent review prompted an atomic write path
+that avoids router initialization and its possible unrelated route updates.
+Grant counters and source stayed unchanged; this consumed no model turn.
+This establishes the exact treatment environment, not paired conformance,
+qualification, admission or comparative value.
+The [metadata successor](luna-docx-stage/b-treatment-advertisement-correction-result.json)
+preserves that record and all 15 probes while removing unsupported advertised-tool
+names. A canonically linked annotation records advertisement names as unknown;
+the empty list does not prove absence. Observed tool use and the reviewed effective
+inventory remain unchanged, and the full conformance verifier still passes.
+
+The [control capacity audit](luna-docx-stage/b-control-capacity-terminal-audit.json)
+confirms the supported API refresh and its two proxy operations are complete,
+with zero model turns. The proxy lifecycle reported it restored to stopped.
+
+The [control callback result](luna-docx-stage/b-control-callback-result.json)
+passed on the same first public workbook fixture. Luna/xhigh chose the optional
+fixed helper and completed one native callback in 66.815 measured seconds.
+Its fresh scope allowed one READ attempt of at most ten seconds; the consumed
+treatment scope was preserved. The [proxy lifecycle](luna-docx-stage/b-control-callback-proxy-lifecycle-result.json)
+confirmed cleanup, settled all three operations and restored the proxy to stopped.
+The [canonical audit](luna-docx-stage/b-control-callback-terminal-audit.json)
+passed the strict binding and callback verifiers, including the completed native
+attempt, receipt and one-use scope. The receipt's exact tool hash resolves to
+`fixed_workbook`; no AEEP selection callback was exposed to control. Complete
+control conformance subsequently passed and was stored in one transaction, with
+all 15 probes and candidate absence verified. The [application record](luna-docx-stage/b-control-boundary-apply-result.json)
+confirms unchanged grant counters and no model turn.
+The [paired application](luna-docx-stage/b-differential-apply-result.json) then
+stored and verified the exact differential against both canonical worker records.
+Its field-only validation projection is explicitly not a campaign plan; no plan,
+case set, campaign authorization or task result was created. The first application
+rolled back because the report wrapper omitted repository-method forwarding;
+the retained failure record confirms that no partial record or review remained.
+The two callback timings are single connectivity observations, not a resource
+comparison or evidence of benefit.
+
+The remaining workbook campaign connection uses the existing operator adapter
+factory and `union_operator_factory`. The default managed-host factory does not
+install the native callback service. The report-local runner must prepare exact
+plan-bound scopes before enqueue, select the matching scope only after the
+assessment runner reserves that trial, and retain the callback/receipt lineage.
+The [report-local composition helper](luna-docx-stage/b-qualification-callback-composition.py)
+now implements that connection. It verifies the pinned native manifest and
+executor before scope creation, checks the complete scope index and setup
+operation, and enforces exact READ/one-attempt/ten-second authority per trial.
+Only the mapped treatment receives the custom callback factory; other adapters
+keep their ordinary behavior. Trial teardown closes its native service after
+post-call verification and accounting. Static review caught and corrected missing
+index checks and the first version's incompatibility with existing coordinator
+adapters. The [final independent static review](luna-docx-stage/b-qualification-callback-composition-static-review-v2.json)
+and pure frozen-input check passed on helper SHA `82f602d9…`.
+This assembly has not executed a campaign. Its outer execution review
+must bind the campaign deadline to the complete reserved budget and fix scope
+expiry at that deadline plus 15 minutes. The campaign still needs its ordinary
+exact plan and execution-budget reviews.
+
+Fresh [workbook case generation](luna-docx-stage/b-workbook-qualification-materialization-result.json)
+passed on the unchanged source, using seed `2026100301`: 141 distinct inputs,
+split into 8 qualification, 28 training and 105 holdout cases. The exact
+[parent review](luna-docx-stage/b-workbook-qualification-materialization-parent-review.json)
+and [independent static review](luna-docx-stage/b-workbook-qualification-materialization-static-review.json)
+bind the existing offline generator and new AEEP workflow subject. Generation
+charged one operation and 3.937 measured seconds, with zero model turns, preserving
+all earlier grant usage. The coordinator closed; independent container-removal
+confirmation and complete whole-system costs were not collected by this helper.
+The filesystem had 149.27 GiB free immediately before preparation. No qualification
+trial has run against these cases yet.
+
+The ordinary [qualification proposal](luna-docx-stage/b-workbook-qualification-plan-proposal.json)
+was prepared with no structural block, but its budget preview found a
+[cost-attribution integration gap](luna-docx-stage/b-workbook-qualification-cost-lineage-gap.json).
+Eight composed probes have native-supervisor or callback attempt IDs distinct
+from their charged parent assessment operations. The cost collector assumes
+those IDs are identical and cannot complete the lookup. Its existing failure
+path would invalidate qualification even if every workbook passed. The runner
+was therefore not launched; the 141 cases remain unused. The proposed upper
+allowance is 782 operations, 141 model turns and 51,008.073 seconds before the
+separately reviewed orchestration allowance. These are reservation bounds,
+not measured use. Fixing the exact parent-operation link remains necessary;
+the gap has not been waived and no historical operation has been rewritten.
+
+The provider reported 78,721 input tokens (58,112 cached), 3,474 output tokens and
+2,333 reasoning-output tokens through subscription access. These are provider
+reports, not independent resource measurements or a cost-saving result. Actual
+cash, subscription units and whole-system totals remain unknown. The public-fixture
+callback is connectivity evidence, not qualification, admission or a value trial.
+
+The Luna/xhigh DOCX qualification campaign completed all 141 cases on October 3,
+2026: 137 passed, two failed the adapted `text_preserved` correctness check, and
+two invocations timed out. The canonical report is **unsuitable**, with
+qualification rejected and no DOCX admission. All 105 distinct holdouts ran;
+101 passed. The frozen zero-correctness-failure rule remains unchanged.
+The [terminal audit](luna-docx-stage/successor-qualification-terminal.json) binds
+the canonical report, job, failure records, final grant totals and cleanup.
+The runner exited successfully, the exact reviewed proxy is stopped, its setup
+and cleanup operations are settled, and the source digest is unchanged.
+
+Both timeouts retain incomplete usage and were not retried. All 141 trials
+report zero retries or interventions. Although 139 trials carry a provider
+usage-complete flag, the canonical report records 0/141 measured coverage for
+its listed resource dimensions. Missing totals, actual cash and subscription
+units remain unknown. Post-report proxy cleanup is retained separately for any
+future cost lineage. This campaign cannot unlock marginal-value trials or
+establish benefit, an unchanged upstream-verifier result, or an official
+SkillsBench score. The [current summaries](luna-docx-stage/successor-progress.json)
+contain no task inputs or expected answers. The
+[latest outcome record](luna-docx-stage/bounded-evidence-outcomes-20261003.json)
+records its earlier storage checkpoint separately: 49.87 GiB already free and
+198.32 GiB available for important usage including reclaimable space. Neither is
+a quota. A later preflight had enough ordinary free space for the bounded software
+validation that has now completed; its logs contain contemporaneous storage measurements.
+
+The separate [upstream compatibility check](luna-docx-stage/upstream-verifier-terminal-audit.json)
+passed all 18 assertions in the unchanged pinned SkillsBench verifier on public
+literal fixture 0. It used a separate network-disabled, read-only container with
+no model or authentication calls. Download, image build and verification consumed
+three operations and 8.463 measured seconds on the existing grant. The stopped
+container and exact image are retained. This does not regrade the failed holdouts
+or constitute an official SkillsBench run; the qualification result is unchanged.
+
+The [bounded live ARD search](luna-docx-stage/discovery-live-result.json) returned
+four Hugging Face Space candidates for the public phrase `docx`. The existing
+service stored the query, source, candidate snapshots and identities, and the
+result round-tripped through its canonical getter. One operation and 0.490 measured
+seconds were charged to the same grant, with no model call or artifact download.
+All four remain untrusted provider metadata. None identifies the pinned
+SkillsBench skill, so no subject association, intake or activation was created.
+
+The joined synthetic native lifecycle completed successfully in 213.7 seconds.
+It exercised fixture discovery, reviewed intake, qualification, admission,
+profile dispatch, receipt capture, revocation and teardown using the same native
+command fingerprint. The [supervisor result](luna-docx-stage/discovery-profile-bridge-supervisor-result.jsonl)
+records a successful admission and denial after revocation. Its separate temporary
+fixture grant did not change the canonical onboarding ledger. The deliberately
+slower baseline is fixture behavior; this is software integration evidence, not
+real capability benefit or container-to-native evidence transfer. The [independent stored-record audit](luna-docx-stage/discovery-profile-bridge-terminal-audit.json)
+confirms the executor/admission linkage through the scope, receipt and capture,
+persisted revocation, and activation/uninstall events. Denial, unchanged invocation
+counts and absent-overlay checks also rely on the successfully completed runner
+assertions. The discovery fixture uses an explicit operator mapping to the command;
+it does not prove automatic identity matching. The temporary store is retained.
+
+All 379 process identities observed by the supervisor were gone at completion;
+polling cannot prove that no unobserved detached process existed. The source
+remained unchanged, and the sampled temporary tree stayed below its 2 GiB cap.
+The [exact execution review](luna-docx-stage/workflow-linkage-bridge-execution-review.json)
+binds the runner, supervisor, launcher and storage preflight. The initial fake
+supervisor timeout failure and its strict corrected pass remain in the
+[repair review](luna-docx-stage/workflow-linkage-bridge-supervisor-static-review-v2.json).
+No one-shot runner should be replayed.
+
+The [remaining-goal audit](luna-docx-stage/remaining-goal-audit-20261003.json)
+separates historical negative candidate-value results from current Luna evidence.
+A real three-way AEEP-value campaign remains unrun and remains part of the
+active evidence goal. The [readiness audit](luna-docx-stage/post-evidence-b-readiness.json)
+identifies three current Luna/xhigh boundaries, equivalent effective access, a
+pinned intervention, and successful matching qualification as prerequisites.
+The [current callback trace](luna-docx-stage/current-callback-three-role-seam-map.json)
+identified the dynamic-access contract gap addressed above. The protected callback
+already existed; older unsafe CLI proposals are not a current runtime result. The completed public-literal
+upstream check does not regrade the failed held-out output, and any live discovery
+association requires an actual identity/artifact match. Native lifecycle fixtures
+remain software evidence; cloud execution and broader adoption gates remain separate.
+
+## Luna evidence continuation (October 2, 2026)
+
+The operator resumed testing and selected `gpt-6-luna` at `xhigh`. Two development
+subagents used that setting. The [evidence record](luna-xhigh-evidence-20261002.json)
+binds their test definitions, commands, native executable and remaining gates.
+The September 25/27 standing delegation covers these bounded test additions;
+campaign definitions, thresholds and canonical grant counters are unchanged.
+
+The first checkpoint passed 47 distinct checks: 44 ARD/three-way/SkillsBench
+checks, the portable and real-native discovery lifecycle variants, and the
+existing native filesystem/network boundary check. Compile, schema consistency,
+Ruff and mypy also passed. The initial native fixture failed because Python's
+read root was missing; adding the same explicit interpreter root used by the
+existing boundary fixture resolved it. The failure remains in the record.
+
+Discovery and reviewed inert intake correctly recommend assessment when no
+admission exists. A separate reviewed synthetic task profile runs a CSV task
+through Codex CLI 0.154.0, rejects dispatch after profile-review revocation and
+uninstalls. These observations do not connect the discovered artifact to a
+successful admission. The new SkillsBench software checks cover deterministic,
+balanced 8/28/105 generation, independent literal and reference-output acceptance,
+declared faulty-output rejection, and artifact/source drift. Their generated
+inputs are developer fixtures and must not become future campaign holdouts.
+
+The successor test closes the positive-advice gap through the existing real
+synthetic `AssessmentService.run`/`admit` fixture. Lookup recommends the admitted
+CSV executor, the dispatch receipt carries that same admission, and lookup
+restricts it after revocation. The fixture deliberately delays its baseline;
+its result establishes software integration only. Its Python admission is not
+transferred to the separate native profile. Portable profile capture also
+records invocation while keeping host context, inventory and preservation
+unknown and excluding the known task payload. A first run under `/tmp` was
+correctly rejected by the native scope boundary; the unchanged definitions
+passed from the supported platform temporary directory. Each synthetic run
+used about 310 MiB, more than anticipated. Both exact completed temporary roots
+were checked for open handles and removed; their paths, sizes and failures are
+retained in the successor evidence record. The native-only successor also passed
+the capture assertions against the same pinned Codex executable; its 828 KiB
+temporary root was checked and removed. The two checkpoints cover 48 distinct
+tests. Successor source `4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66`
+remained unchanged during its completed checks. These additions changed test
+code only; the complete current-source release suite remains unrun.
+
+Controlled Luna comparisons, protected SkillsBench materialization and grading,
+the official upstream verifier, full pytest/coverage and fresh worker conformance
+remain unfinished. Desktop subagents do not supply controlled-trial evidence.
+Historical worker inventories advertise Luna/xhigh, but the model proxy is
+stopped and no fresh assessment-model call was made. The original grant remains valid to
+October 25 with counters 8,681 operations, 2,546 turns and 75,258.72103060992
+seconds; the cash counter is zero. The checkpoint's free storage was 46.33 GiB, below the
+50 GiB reserve. Docker reports reclaimable cache/image data, but ownership and
+retention checks are required before deletion; Docker resources were preserved. Cloud-only
+execution still needs a replacement for the composed Mac-native backend and
+fresh boundary evidence.
+
+The subsequent goal audit rechecked the unchanged source, unchanged canonical
+grant and completed tester. Host space remained about 46.2 GiB after the same
+storage blocker had persisted across three goal turns. Bounded independent
+checks are complete; the goal is blocked on sufficient storage for the remaining
+validation and controlled work. Resumption requires the 50 GiB reserve plus the
+measured run allowance, or a suitable approved existing filesystem/runtime.
+The exact audit is in the evidence record; no goal-completion claim is made.
+
+The operator challenged that storage interpretation. A subsequent read-only
+check found 49.6 GB (46.2 GiB) already free, but Foundation reported 233.9 GB
+(217.8 GiB) available for important usage, including reclaimable capacity.
+APFS reports no configured volume quota. The earlier free-space number was
+accurate but incomplete; it did not establish a hard storage quota or allocation
+failure. The 50 GiB threshold came from the user-supplied storage instructions,
+applied conservatively to already-free space. Both measurements and this
+correction are saved alongside the original audit. No reserve instruction was
+changed and no files or snapshots were deleted during the recheck.
+
+The operator then instructed continuation. Runtime preflight now records both
+already-free capacity and macOS capacity available for important usage; the
+latter was 236.3 GB before the resumed work. Full software verification is
+managed by Luna/xhigh with a 30 GiB temporary-data ceiling and
+at least 50 GiB available headroom. The [protected literal review](luna-skillsbench-protected-20261002/review.json)
+prepares at most four offline recipe operations/140 seconds, zero model turns
+and zero cash, using the existing pinned runtime image. It creates no holdouts,
+qualification or admission. Exact scope approval and execution remain separate
+from this preparation. The worker-readiness audit is checking an appropriate
+DOCX candidate; the historical Spreadsheets treatment cannot supply its evidence.
+
+The exact protected literal run then [passed](luna-skillsbench-protected-20261002/result.json)
+on source `4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66`,
+after independent review of its definitions, runner, frozen dependencies and
+finite bounds. Three sequential offline operations accepted six correct examples
+(three independent bundled artifacts plus three reference outputs) and rejected
+all nine declared faulty examples. All three reservations completed on the
+original grant: 8,684 operations, 2,546 turns, 75,265.82207736 seconds and zero
+cash afterward. Harness wall time was 7.521 seconds; the charged operation time
+was 7.101 seconds. These functional checks ran alongside the software suite and
+provide no comparative performance evidence. No generator, holdout, candidate
+model, qualification or admission ran. The independent
+[canonical audit](luna-skillsbench-protected-20261002/canonical-audit.json) passed:
+all three canonical/local receipt pairs match, all owned containers are absent,
+and two preexisting reservations remain untouched. The retained footprint is
+13,370,621 bytes. Candidate CPU/RSS, tool footprint and receipt cash measurements
+remain unknown; the zero cash counter is not a substitute for those observations.
+
+The first full pytest attempt completed with 1,136 passed, 24 failed and 21
+skipped; its [original log](luna-full-validation-20261002/03-pytest.log) is retained.
+The coordinator mistakenly applied `AEEP_VERIFY_OFFLINE=1` to the whole suite,
+blocking legitimate local HTTP fixture connections. Coverage was held after
+that failure. Eleven tool-surface assertions and one callback stub also need
+updates for the newly implemented discovery/lookup and configuration checks.
+Two failures exposed a real recursion-guard regression: the renamed bundled
+assessment skill no longer matched its old content pin. The shared guard now
+recognizes both the historical and current skill hashes, preserving both
+candidate and supporting-skill rejection. All 25 invocation tests passed after
+that correction. The remaining failures are being rerun without the misplaced
+offline guard; no campaign threshold or worker network policy is relaxed.
+
+The corrected focused runs passed: 15 tool-surface/signature cases and ten
+localhost HTTP/MCP cases. The earlier failed assertion edit and a mistyped
+pytest selection are retained separately. The additive `docx:1` paired-worker
+profile now checks the same pinned python-docx version and synthetic save/reopen
+operation in both arms; existing candidate-absence and boundary checks still
+apply. It is restricted to v3 and keeps the earlier profile defaults and
+serialization. Three DOCX tests, 45 existing paired-inspection tests and 25
+invocation tests pass. An independent Luna/xhigh source review found no blocker.
+Compile/schema checks and mypy's 137 source files pass; a fresh full suite and
+branch coverage are being run on source
+`060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293`.
+These checks do not establish authenticated worker conformance or skill benefit.
+
+The successor full run exposed one remaining current-lock mismatch after the
+reviewed MCP tool-list assertion changed. Its 1,162 passes and one failure are
+retained. The [exact pin review](luna-full-validation-successor-20261002/lock-review.json)
+updates only the current v08 hash of that test file; the historical v07 lock and
+all passing criteria remain intact. The focused verifier then passed, followed
+by [full pytest](luna-full-validation-successor-20261002/05-pytest-rerun.log):
+1,163 passed, 21 skipped. Source `060fbefd…35e293` and the current lock hash
+`2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71`
+remained unchanged. The branch-coverage run also passed 1,163 tests with 21
+skipped; the overall coverage report passed at 82%, and both the critical and
+assessment coverage gates passed. The policy checker found a missing layer
+marker in the new DOCX test module. A test-metadata-only successor will classify
+those three offline checks as assessment contracts and repeat final validation;
+production behavior and the completed runtime observations remain unchanged.
+The marker-only successor source is
+`eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1`.
+Policy, compile, schemas and all three DOCX contract tests passed, followed by
+[full pytest](luna-full-validation-successor-20261002/15-pytest-marker.log):
+1,163 passed, 21 skipped, one upstream deprecation warning in 591.86 seconds.
+The [final branch-coverage run](luna-full-validation-successor-20261002/16-coverage-run-marker.log)
+also passed 1,163 tests with 21 skipped and one warning in 899.33 seconds.
+Overall coverage passed at 82% over 30,304 statements; both existing coverage
+gates passed (critical minimum 91.42%, assessment minimum 90.00%). Source and
+lock hashes remained unchanged. The earlier complete run is retained separately.
+
+The matched DOCX images were [built successfully](luna-docx-stage/setup-result.json)
+from the existing pinned plain worker base. Both have the same locked libraries;
+treatment adds only the pinned upstream skill and discovery alias. Tags are
+`aeep-skillsbench-docx-control:luna-xhigh-20261002` (image
+`sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27`)
+and `aeep-skillsbench-docx-treatment:luna-xhigh-20261002` (image
+`sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2`).
+The [independent audit](luna-docx-stage/setup-independent-audit.json) confirms
+the common image layers, package hashes, image metadata and canonical operation.
+The setup consumed one operation and 73.809887458 seconds, with no model turns:
+the grant afterward records 8,685 operations, 2,546 turns and 75,339.63196481811
+seconds, with cash counter zero. No credentials or persistent volumes were read
+or copied, and no worker was started. An optimized-Python guard check rejected
+a wrong review hash before spending. The audit retains a future-run download
+deadline hardening note; the completed setup remained within its bounds.
+The fresh [DOCX paired inspection](luna-docx-stage/pair-result.json) passed on
+both exact images, with matching probes and confirmed worker cleanup. Both
+catalogs advertise Luna and xhigh; no model turn ran. The shared proxy was
+returned to its prior stopped state. The two worker operations plus proxy
+lifecycle consumed three operations and 23.360629 seconds; canonical counters
+became 8,688 operations, 2,546 turns and 75,362.99259381788 seconds, cash zero.
+These observations establish the checked boundaries and dependency availability;
+fresh connectivity and full conformance remain separate.
+
+The protected generation operation then completed, but its report wrapper raised
+`AttributeError` while counting distinct inputs: it used `case.input` instead of
+`case.action.input`. The [original failed result](luna-docx-stage/materialization-result.json)
+is retained unchanged. Canonical counters became 8,689 operations, 2,546 turns
+and 75,364.6242130259 seconds. The read-only
+[canonical audit](luna-docx-stage/materialization-canonical-audit.json) passed:
+all 141 inputs are distinct, the splits are exactly 8/28/105, and each of seven
+variations has 15 holdouts. The stored and computed case-set digest is
+`f341e8cb5147f6cd6dc0c2dcb1ff79de194bc51162c92f7a6aa519becd17f610`.
+The generator's receipt succeeded, its reservation completed in 1.631619208
+seconds, and its owned container is absent. No case values or answers were
+printed. The wrapper failure remains unchanged; generation was not replayed.
+No candidate comparison, qualification or admission is claimed from this setup.
+
+Qualification preparation found that this generated set binds the preliminary
+generator environment, while the campaign must bind its final worker-conformance
+references in the same environment digest. The proposal correctly rejects that
+mismatch. The preliminary cases remain unused generator evidence. After the final
+environment is reviewed, a fresh request with seed 2026100203 will generate the
+qualification set through the existing API; no case records or authority will
+be copied around the environment check. The earlier cost remains charged.
+
+Fresh connectivity definitions use the existing typed request API because the
+CLI preparation helper requires an existing assessment plan. This new DOCX
+subject has none yet. The operator script creates inert, exact reviewed
+requests; it does not bypass the ordinary authorization, reservation or
+execution path. This is still a manual setup step in the fresh-subject journey.
+The [first connectivity attempt](luna-docx-stage/connectivity-result.json)
+failed in control with `ConfigurationError`; treatment was not attempted and
+the proxy returned to its stopped state. One turn was reserved; completed
+model usage and the precise failure cause remain unobserved. A prior typed
+boolean connectivity result supports preparing a fresh schema correction,
+with the original failed request and cost retained.
+
+The [fresh typed-schema successor](luna-docx-stage/root-connectivity-result.json)
+passed both isolated worker probes on source `eaad5bc7…c717ee1`, requesting
+`gpt-6-luna` at `xhigh`. Each executor changed only its response schema from
+an untyped constant to an explicit boolean; the acceptance predicate remained
+exactly `{"connected":true}`. Exact execution review SHA:
+`5da44e968110e19a9e06fc181163f3e57efae77b64aaede75720589143b82e40`.
+The two fresh requests reserved two turns, returned successful adapter results,
+and restored the proxy to its stopped state. The separately charged proxy
+lifecycle had 26.008069375 seconds of harness wall time; the canonical
+operation measurement is retained in the independent audit. Fixed diagnostic categories retained
+no raw error messages. The earlier failure's cause remains unconfirmed;
+the successful successor is consistent with schema compatibility being the
+issue. Connectivity does not establish DOCX correctness or skill benefit.
+
+
+Both current-source worker conformance records have now been applied and
+[verified](luna-docx-stage/boundary-apply-result.json): all 11 required probes
+per role match the exact task workers, and the differential record links the
+reviewed shared environment and candidate difference. Connectivity remains
+separate evidence. This step made no model calls and changed no grant counters.
+
+The [final case generation](luna-docx-stage/root-final-materialization-result.json)
+passed using seed `2026100203` and the final qualification environment
+`37c799bc62862afb6f0b718099303d44668f8cb63dd623367876c85807709c81`.
+It produced 141 distinct inputs in the unchanged 8/28/105 splits; case-set digest
+`905e56ad9a7a7d982433d62df67ce502e6bbe8b088fc2fd3d17198d25d26b813`.
+The earlier preliminary case set remains unused and charged. The fresh request
+used one offline operation and zero model turns, leaving the original grant at
+8,695 operations, 2,549 turns and 75,422.04544660891 seconds. The grant's cash
+counter is zero; actual model cash and subscription consumption remain unknown.
+Scored DOCX trials, qualification and admission are still pending. The
+[ordinary qualification proposal](luna-docx-stage/root-qualification-review.json)
+now has no blocking reasons, passes both worker and full differential checks,
+and fits the existing grant. Its frozen maximum is 141 model turns and 728
+operations, with 62,795.109172625 seconds of reservation allowance, including
+grading and setup. This is a ceiling, not predicted duration. It uses
+`controlled_agent`, required skill exposure and fresh workers. All 14 completed
+DOCX preparation operations, including failed and unused attempts, are linked.
+Two inert wrapper mistakes were corrected before any campaign began; their
+[attempt record](luna-docx-stage/root-proposal-attempts.json) is retained.
+
+The exact [qualification runner](luna-docx-stage/root-qualification-execution-review.json)
+started assessment `assessment_4c8098a840db4244945ce8204459d7ef` on plan
+`plan_811e138d8f36417ba793ac526591f4b6`. Execution review SHA is
+`2e0bfd2619eda8b6b3a3fc42ad135875bc019d613002dbe0cd51633f5de96467`.
+The reviewed extension adds two proxy administration operations, at most 60
+seconds each. Setup is charged before the campaign; cleanup is charged after
+its report and must be included separately in any later economic lineage.
+Measured scoped snapshots are 21,725,184 bytes each; 584 maximum snapshots at
+a twofold allowance require 25,375,014,912 bytes. The runner reserves 30 GiB of
+available capacity plus the standing 50 GiB headroom. Before starting, macOS
+reported 227,082,740,590 bytes available for important usage and 42,261,409,792
+bytes already free. No Docker resources were deleted. Grader validation starts
+before candidate calls; campaign results remain pending.
+
+The [first qualification run](luna-docx-stage/root-qualification-result.json)
+terminated with insufficient evidence at the first trial's identity preflight.
+The independent grader validation completed (11 reference and 31 probe
+operations); the trial was skipped as an environment failure before any task
+receipt or persisted runtime binding. One model turn was reserved; completed
+model usage is unobserved. Fifty operations were charged, including proxy
+administration, and the proxy was restored. No task correctness conclusion,
+qualification or admission follows from this result. Three bounded, zero-model
+[identity diagnostics](luna-docx-stage/root-full-preflight-diagnostic-result.json)
+subsequently resolved the original exact task identity; the original failure's
+cause remains unconfirmed. All failures and costs remain in the same grant.
+The grant allows automatic admission, but this immutable qualification stage
+forces comparative benefit false, making the automatic-admission branch
+unreachable. A later value run must review that authority separately.
+
+A single fresh successor ran under [execution review](luna-docx-stage/successor-qualification-execution-review.json)
+`9f37fb8aac347bf158430cf77a605b866007a17039118d50ceb9cbd776efd879`.
+Plan `plan_b3ccf1dccc4043129ad213eb7a50e6d4` uses seed `2026100204`
+and 141 inputs disjoint from the stopped plan. Workers, source, utility,
+thresholds and 8/28/105 counts are unchanged. All 68 preceding operations are
+linked, including the stopped campaign, proxy cleanup and diagnostics. The
+report-local observer captures exception types, categories and source locations
+around identity/preflight, rethrowing the same failures without raw messages.
+It changes no routing or scoring behavior. The preceding run's grader evidence
+accepted three independent fixtures and rejected 88 declared faults; that does
+not establish candidate correctness.
+
+The successor passed its [first scored DOCX screening case](luna-docx-stage/successor-first-screening-pass.json):
+execution succeeded, independent validation passed, runtime identity matched,
+and the trial reported complete model usage with no retry, fallback or operator
+intervention. Measured task wall time was 274,374.95820922777 ms, excluding
+protected grading. This first-case observation is historical. Assessment
+`assessment_b7304a6d072c4aae98e45839200e9055` subsequently
+[completed with a negative qualification](luna-docx-stage/successor-qualification-terminal.json):
+137 of 141 passed, two failed `text_preserved`, and two timed out. Of 105 holdouts,
+101 passed. The canonical outcome is `unsuitable`; no admission or downstream
+value authorization follows. Both one-shot runners remain unreplayable.
+
+The separate [upstream verifier staging record](luna-docx-stage/upstream-verifier-stage.json)
+pins the original `test_outputs.py`, Apache-2.0 license and the already-reviewed
+public reference document and employee-data file. It has made no container run,
+installation, model call or grant change. Its independent verifier image and
+18-case compatibility check remain pending until the timed campaign is terminal.
+The current real SkillsBench campaign began through a reviewed local subject;
+the discovery-to-intake-to-admission glue is evidenced separately by the bounded
+software tests. A real joined discovery/admission journey must be distinguished
+from these separate observations.
+
+The [upstream verifier preparation review](luna-docx-stage/upstream-verifier-preparation-root-review.json)
+binds the staged scripts after correction of deadline/accounting checks, source
+verification, a variable-order error and redirect handling. All 12 artifact hashes,
+Python syntax, JSON and the focused undefined-variable checks passed. Download,
+build and verification remain unexecuted and require separate same-grant
+reservations of 60, 180 and 30 seconds after the current campaign is terminal.
+
+The [value-stage readiness audit](luna-docx-stage/value-stage-readiness.json)
+identifies the existing optional-use path and its remaining evidence. A successful
+canonical qualification report must precede the four-arm `marginal_value` plan.
+That plan still needs fresh control, optional treatment, higher-compute and
+training-only reusable-tool profiles, their exact boundary evidence, disjoint
+cases and complete cost lineage, including post-report proxy cleanup. Existing
+worker catalogs advertise Luna `max` after `xhigh`; this is not a measured
+higher-compute result. The audit made no model, Docker, database or source changes.
+
+The current model/repository APIs can associate a reviewed discovery candidate
+with the existing local subject through `CandidateIntake`, after the operator
+verifies the stored subject and exact artifact. There is no dedicated CLI command
+for this existing-subject association. It would record a reviewed local binding;
+it would not prove that discovery supplied the bytes or preceded qualification.
+No such association has yet been written for this real DOCX campaign. The
+[read-only live-store check](luna-docx-stage/discovery-live-readiness.json) found
+zero discovery candidates or intake records and no discovery configuration in
+the current manifest. The operator-selected ARD endpoint has been requested;
+this does not block the already-running qualification campaign. The
+[prepared live discovery check](luna-docx-stage/discovery-live-check-plan.json)
+uses the public Hugging Face endpoint listed in the [official ARD reference
+implementations](https://agenticresourcediscovery.org/ref_implementations/) as a
+default, subject to any operator preference received before execution. It is
+inert until a separate same-grant reservation and exact review after the timed
+campaign. No canonical manifest change, artifact fetch or automatic association
+to the pinned DOCX subject is included.
+
+The [retained skipped-check audit](luna-docx-stage/skipped-checks-audit.json)
+confirms both final full-suite runs reported 1,163 passes and 21 skips. Their
+quiet-mode logs and node-ID caches do not identify individual skip reasons.
+The audit separates static opt-in guards from observed outcomes; the skips do
+not count as passing live, container, native or cloud gates.
+
+## Implementation continuation (October 2, 2026)
+
+The operator requested building the two supplied plans and deferred experiments
+and test-development work. This increment adds the missing connections around
+the existing router, assessment service, store and task lifecycle. It creates no
+new grants, qualification, admission or experimental result. Source digest:
+`bb55d5cd1486440d703f1325cdfdbb610c637036092213d0701325bb53a29446`. The [build record](implementation-build-20261002.json)
+contains exact changed-file hashes and static-check results.
+
+| Plan area | Implementation and remaining boundary |
+|---|---|
+| ARD architecture and compatibility | [ADR-010](../../docs/adr/ADR-010-ard-discovery-boundary.md) pins v0.91 and its license. The native-control matrix separates documentation from observed support. |
+| Discovery service and identity | `discovery.py` and `discovery_service.py` provide versioned requests, source/query/result records, exact external identities, configured sources, result/time ceilings, local type filters and bounded local fallback. Public phrases and cursors are persisted as digests. |
+| Upstream conformance fixtures | Deferred with test-development work. The exact upstream revision is recorded; this build does not claim ARD conformance. |
+| Candidate intake | `capability_lifecycle.py` binds inert metadata to a bounded local artifact inspection and optional reviewed mapping. Exact intake review is separate from discovery and execution. |
+| Evidence identity | Intake and decision cohorts carry resource/version identity, metadata and artifact-dependency digests, subject/mapping, behavior, recipe, environment, host and scope references. Missing legacy dimensions remain unknown. |
+| Admission dispositions | Local lookup returns admit/reject/restrict/assess/inconclusive/expired with reasons, current evidence references and next action. Admission advice requires a current request and applicable authority; it does not execute or grant access. |
+| Three-arm reporting | The existing v2 normal/discovery/discovery+AEEP definitions and separate marginal comparisons remain in use. No new campaign or favorable result is substituted for the unfinished live comparison. |
+| Fast-path integration | CLI `evidence lookup` and shared `aeep_lookup_capability` inspect local evidence without launching assessments. `aeep_discover_resources` requires configured sources; task-only profiles expose neither preparation tool. |
+| Shared capability profiles | `profiles.py` compiles, diffs, preflights, activates, inspects and removes profiles through existing task controls. Exact reviews, scope, manifest, component and schema pins recheck at dispatch. Project and execution-local task-service modes share the implementation. |
+| Assessment composition | Fixed-helper controls and routed callbacks consume reviewed profile activations. Dynamic bindings pin profile behavior and recheck it per callback. Scope IDs and used allowances stay separate. The existing campaign authority and isolation checks still apply. |
+| Configuration profiler | `configuration_profile.py` persists separate declared/observed/unavailable states and up to 100 selected scope-bound receipt observations. Compiled schema bytes do not claim loaded host context. Raw resources, nullable measurements and accounting remain separate. |
+| Conditional recommendations and contributors | Lookup reports scoped evidence and explicitly historical comparisons, with keep-current-environment as a valid result. Contributor/license/support metadata remains labelled unverified; no rating or payout is inferred. |
+| SkillsBench build | `skillsbench_recipe.py` exports a packaged offer-letter adaptation with contained generator, reference and grader; pinned inputs/license/provenance; independent literal Yes/No/Unicode artifacts; seven variations; and balanced 8/28/105 generation. Historical exploratory code and records remain unchanged. |
+| CLI and provider contracts | Operator intake/profile/capture/export commands, shared MCP/provider preparation tools and generated JSON schemas expose the same implementation. Examples are in [INTEGRATIONS.md](../../docs/INTEGRATIONS.md). |
+
+Two integration defects were repaired during static review. A remote ARD timeout
+now leaves a bounded interval for configured local fallback. Input-free profile
+activation now validates admission authority and every configuration binding;
+request schema and feature applicability remain mandatory at dispatch. Profile
+records follow the existing scoped snapshot dependency closure. The fixed-helper
+profile path also verifies its complete advertised schema against the reviewed
+profile, preventing a differently exposed control from borrowing that pin.
+
+The SkillsBench definition is an AEEP adaptation of one template family, not an
+official upstream score or evidence of independence across templates. Exporting
+it is not protected grader validation, materialization or a qualifying trial.
+The bundled assets and contained programs add no dependency. No model call,
+Docker build, dependency installation, protected sign-in, grant amendment or
+cloud provisioning occurred in this build pass.
+
+Compile, generated-schema consistency, Ruff, mypy over 137 source files, CLI
+registration and whitespace checks passed. Small data-only module checks verified
+model invariants and recipe source compilation. Full pytest, coverage, live host
+checks, upstream conformance and campaigns are deferred at the operator's request;
+these static results do not satisfy their release gates. Historical evidence
+retains its original source binding and is not refreshed automatically.
+
+Supported profile enforcement covers the AEEP task service. Wider running-host
+skill/file/hook exclusion, complete catalog filtering, context reset and requested
+model changes remain unsupported by this wrapper and fail strict preflight.
+Existing managed-host adapters retain their separately reviewed native controls.
+The website vertical remains conditional on the earlier admission experiment;
+heavy OSWorld, later MCPBench/Toolathlon work and funded compensation remain
+outside the immediate increment specified by the plans.
+
+The portable components can be developed on Linux. Complete cloud-only execution
+of the existing composed campaign still requires replacing its Mac-only native
+executor and obtaining fresh boundary evidence. No cloud runtime was provisioned
+or validated. The current [cloud boundary](../../docs/INTEGRATIONS.md#cloud-deployment-boundary)
+uses the updated official documentation; the older cloud page is now labelled
+legacy. Canonical ledger continuity, protected operator sign-in and explicit cash
+authority remain deployment requirements. Local storage was already below the
+50 GiB reserve; no large operation or further cleanup was performed.
+
+The earlier [audit](ard-skillsbench-cloud-audit-20261002.md) records which parts
+were absent before this build. Existing records show earlier work on execution,
+containment and workbook/CSV campaigns, including retained negative results and
+incomplete live gates. They do not establish every historical design motive.
+This increment closes the integration gaps without treating unfinished campaigns
+or unsupported host controls as successful implementation evidence.
+
+## ARD steering and cloud feasibility audit (October 2, 2026)
+
+The user requested the pasted ARD-native steering plan, broader experiments
+including SkillsBench, or an implementation audit explaining unfinished work;
+they also requested a check of complete cloud execution. The
+[audit](ard-skillsbench-cloud-audit-20261002.md) maps every proposed PR to current
+code, separates historical experiments from unfinished ones, and gives the
+remaining file-by-file work. The [check record](ard-skillsbench-cloud-audit-20261002.json)
+binds commit `c0609f0e1839ea17bbd4871c028e84e75e26970e`, unchanged implementation
+digest `b37a3d3d18ac6d775558634fa4d435ac54a7b011c0a531e137726f169d568eca`,
+and 41 passing offline checks: nine SkillsBench, nine ARD and 23 three-way checks.
+
+The assessment/router primitives exist, but the complete ARD intake/evidence
+connection, formal dispositions and recommendation surface remain unfinished.
+SkillsBench still has one exploratory offer-letter adaptation with an explicitly
+disabled qualifying generator. Its historical protected artifact handoff is not
+a model comparison. The original three-arm value campaign remains incomplete.
+Historical workbook/CSV negative results retain their original scope.
+
+Portable checks and Linux assessment workers can be prepared for cloud execution.
+The existing composed three-arm profile still calls a Mac-only protected executor;
+moving it unchanged to Linux cannot satisfy that boundary or Mac acceptance.
+No cloud runtime/account was tested or provisioned. Storage, protected worker
+authentication, canonical ledger continuity, exact runtime review and any cash
+authorization remain prerequisites. Local space was 39.19 GiB, below the 50 GiB
+reserve. This audit changed no implementation, grants, thresholds or live evidence.
+
+## Validation temporary-folder cleanup (October 2, 2026)
+
+The operator authorized removal of the eleven identified
+`aeep-boundary-validation-*` temporary directories. All were bound to existing
+validation reports. No open file references or running validation workers were
+found, and none of the three current/stopped containers mounted these directories.
+Cleanup removed all eleven directories. About 0.97 GiB of failed-test diagnostics
+and raw coverage data was moved, on the same filesystem, to the ignored local
+`.aeep/validation-cleanup-preserved-20261002` directory. Canonical stores, Docker
+resources, published logs and report bytes were preserved.
+
+The removed directory allocation was 88.46 GiB. This is not confirmed physical
+space recovery: host free capacity remained about 39.3 GiB immediately afterward,
+below the 50 GiB reserve. Twenty-five local Time Machine snapshots were observed;
+they may retain the deleted blocks, but their exact contribution is unmeasured.
+No backup or snapshot was changed. The
+[cleanup audit](validation-temporary-cleanup-20261002.json) records exact paths,
+retained diagnostics, report hashes and before/after capacity. This maintenance
+changes no test result, execution code, authority or unresolved live accounting.
+
+
 ## GitHub publication and documentation revision (October 1, 2026)
 
 The operator requested publication of the existing implementation and a Humanizer
@@ -2690,6 +3612,12 @@ The [11-worker component assembly](original-three-way-profile/current-composed-w
 
 
 ### September 30: SkillsBench adapter gap checked against code
+
+This dated inspection is superseded by the October 2 bounded recipe implementation
+and the [October 3 terminal DOCX qualification](luna-docx-stage/successor-qualification-terminal.json).
+The generator and fresh case materialization now exist; the candidate failed
+qualification. The public-literal upstream verifier compatibility check also
+completed, while official SkillsBench reproduction remains unclaimed.
 
 The [current adapter audit](skillsbench-current-adapter-gap-audit.json) distinguishes the implemented exploratory reuse from qualification. `src/aeep/assessment/skillsbench_offer_letter.py` provides pinned input checks and a bounded trusted DOCX grader; its existing tests exercise correct output, input tampering, malformed packages and missing structure through the shared Router/BenchmarkRunner contracts. The historical [protected two-container handoff](skillsbench-protected-handoff/result.json) passed reference equality and accepted/rejected the four declared grader artifacts. These results were not repeated.
 

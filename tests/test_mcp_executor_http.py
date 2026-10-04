@@ -424,7 +424,10 @@ def test_create_http_app_auth_and_modern_header_validation(tmp_path):
         response = client.post("/mcp", json=message, headers=_modern_headers("tools/list"))
         assert response.status_code == 200
         result = response.json()["result"]
-        assert len(result["tools"]) == 10
+        names = {tool["name"] for tool in result["tools"]}
+        assert len(names) == 11
+        assert "aeep_lookup_capability" in names
+        assert "aeep_discover_resources" not in names
         assert result["resultType"] == "complete"
         assert result["ttlMs"] > 0
         assert {

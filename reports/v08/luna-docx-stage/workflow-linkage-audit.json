@@ -1,0 +1,91 @@
+{
+  "audit": {
+    "date": "2026-10-02",
+    "mode": "read-only source and evidence review",
+    "no_tests_imports_or_runtime_calls": true,
+    "policy_read": "docs/ASSESSMENT_TESTING.md:340-357,364-377,418-429"
+  },
+  "existing_positive_fixture": {
+    "candidate_kind": "PYTHON",
+    "candidate_id": "fixture.candidate",
+    "proved_links": [
+      {
+        "link": "controlled assessment admission to lookup decision",
+        "detail": "The test wraps AssessmentService.admit, reads the real report and plan, makes a synthetic RegistryCandidate/intake in the same store, and retains the admission ID. CapabilityLifecycle.lookup must return admit for that candidate/request and the same executor/admission IDs.",
+        "references": [
+          "tests/test_v08_discovery_lifecycle.py:164-191",
+          "tests/test_v08_discovery_lifecycle.py:193-205"
+        ]
+      },
+      {
+        "link": "lookup decision to real route execution receipt",
+        "detail": "For the exact request, the wrapper calls the original Router.execute; the receipt executor ID and assessment_admission_id must equal the lookup decision. The controlled-fixture record must carry that receipt and admission ID.",
+        "references": [
+          "tests/test_v08_discovery_lifecycle.py:193-223",
+          "src/aeep/assessment/controlled_fixture.py:85-90,106-112",
+          "src/aeep/assessment/controlled_fixture.py:127-153"
+        ]
+      },
+      {
+        "link": "same admission to revocation and stale-decision rejection",
+        "detail": "The controlled-fixture helper creates a stale route before revoking the admitted executor, executes it after revocation, and records a permission-denied event referencing that admission. Its validator checks the stale decision selected the admitted executor, the admission is revoked, and the denial evidence references the same admission. The test then confirms a new lookup is restricted with admission_revoked.",
+        "references": [
+          "src/aeep/assessment/controlled_fixture.py:91-113",
+          "src/aeep/assessment/controlled_fixture.py:127-147",
+          "tests/test_v08_discovery_lifecycle.py:225-234"
+        ]
+      }
+    ],
+    "missing_links": [
+      "The positive test manually saves a RegistryCandidate; it does not pass the result of DiscoveryService.search into intake/admission. Discovery search and no-admission intake are covered by the separate _run_lifecycle path.",
+      "The positive admission executor is not activated through CapabilityProfile/TaskScope, and its invocation receipt is not captured through configuration_profile.capture.",
+      "The profile helper uses executor fixture.csv, asserts there are no assessment jobs/grants/admissions, and tests review revocation plus teardown. It is not the fixture.candidate admission.",
+      "The native variant calls only _run_lifecycle with a native-sandbox COMMAND spec; it does not qualify or reuse the Python fixture.candidate admission."
+    ],
+    "references": [
+      "tests/test_v08_discovery_lifecycle.py:75-99",
+      "tests/test_v08_discovery_lifecycle.py:101-146",
+      "tests/test_v08_discovery_lifecycle.py:151-160",
+      "tests/test_v08_discovery_lifecycle.py:170-184",
+      "tests/test_v08_discovery_lifecycle.py:237-240",
+      "reports/v08/luna-xhigh-evidence-20261002.json:216-229"
+    ]
+  },
+  "profile_backend_feasibility": {
+    "existing_python_candidate_through_task_profile": "infeasible without changing the admitted executor definition",
+    "reasoning": [
+      "controlled_fixture.run constructs fixture.candidate from reference_spec('csv'), whose spec kind is PYTHON and whose config is an in-process callable.",
+      "TaskScope records exact executor fingerprints. Task activation binds the scope, then _scope_ready calls Router._require_active_spec and _require_task_scope for each executor.",
+      "BaseExecutor.require_task_scope rejects by default. PythonExecutor has no override, so the unchanged PYTHON candidate fails the task-scope backend check before invocation; subprocess isolation inside PythonExecutor does not change that outer spec kind.",
+      "CommandExecutor is the only task-scope override. It requires kind COMMAND with native_sandbox, minimal environment, matching project root and bounded timeout, and validates the native boundary on activation.",
+      "Changing the admitted candidate from PYTHON to native-sandbox COMMAND changes behavior_fingerprint: executor kind and kind-specific config keys are included. Assessment plans and admissions bind that fingerprint, so a conversion after admission cannot preserve the admission.",
+      "CapabilityProfile contains scope/manifest/tool digests and components but no admission ID. A new command-backed fixture can establish receipt lineage to the current admission; the profile itself cannot claim that admission as a first-class field."
+    ],
+    "references": [
+      "src/aeep/assessment/controlled_fixture.py:64-69",
+      "src/aeep/assessment/onboarding.py:43-45",
+      "src/aeep/models.py:3266-3289",
+      "src/aeep/tasks.py:136-156",
+      "src/aeep/router.py:5395-5417,5419-5458",
+      "src/aeep/executors/base.py:37-39",
+      "src/aeep/executors/python.py:39-49,117-163",
+      "src/aeep/executors/command.py:105-124",
+      "src/aeep/qualification.py:113-143,226-247",
+      "src/aeep/assessment/service.py:329,671-712",
+      "src/aeep/profiles.py:53-67,105-118,222-240,250-270"
+    ],
+    "preflight_caveat": "Profile preflight checks declared bindings and explicitly says activation still checks backend/scope; _scope_ready is the enforcing activation path (profiles.py:222-229; tasks.py:136-156)."
+  },
+  "smallest_next_check": {
+    "classification": "new labelled synthetic controlled fixture; not runnable by reusing the current hard-coded Python controlled-fixture candidate unchanged",
+    "path": [
+      "Define the candidate as the same native-sandbox COMMAND spec from the start of AssessmentService planning, execution, qualification and admission. Do not convert the existing Python-qualified spec.",
+      "Use a test-local controlled-fixture builder with the existing AssessmentService and CapabilityLifecycle APIs; feed a locally discovered candidate through reviewed intake to lookup.",
+      "Create/review a TaskScope using executor_fingerprint of that exact command spec; derive a task-service CapabilityProfile, activate with bind_service, and dispatch the same request.",
+      "Assert lookup executor/admission IDs equal the dispatch receipt executor and assessment_admission_id; capture that exact receipt with configuration_profile.capture.",
+      "Revoke the assessment admission; prove the pre-revocation stale decision and a subsequent task-service dispatch are rejected, then teardown the activation. Keep the result labelled as lifecycle evidence only."
+    ],
+    "backend_evidence_for_fixture_shape": "tests/test_v08_discovery_lifecycle.py:40-53 already defines a native-sandbox COMMAND task-profile executor but does not assess/admit it; controlled_fixture.py:57-86 shows the existing service plan/run/admit sequence but hard-codes a PYTHON candidate.",
+    "no_transfer": "The new fixture must qualify/admit the command-backed candidate itself. Do not carry the Python fixture's qualification/admission across the changed backend fingerprint, and do not describe this local lifecycle check as live benefit or native catalog evidence."
+  }
+}

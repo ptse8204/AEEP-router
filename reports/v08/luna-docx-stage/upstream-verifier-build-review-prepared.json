@@ -1,0 +1,34 @@
+{
+  "schema_version": "assessment.skillsbench-docx-verifier-build-review.v1",
+  "status": "prepared_not_authorized",
+  "execution_authorized": false,
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "campaign_terminal_record_path": null,
+  "campaign_terminal_record_sha256": null,
+  "runner_sha256": "b3770cb80154bf70d431cc5d7fb41c1a12891b220e97120486d96712b548accc",
+  "plan_sha256": "1de69bb87e8b1bd9261344d45cd345cbc1199fb9988f9eb87e840591164ed623",
+  "dockerfile_sha256": "6a4181f1fe323aaaf69cf143570963b02d40977a1f752be981dbd25a9dafdfcb",
+  "lock_sha256": "2c125370f6e87b8003f95a8625d714ca335706e8255adf7f3b753400f051dabd",
+  "fetch_result_sha256": null,
+  "base_tag": "aeep-skillsbench-docx-control:luna-xhigh-20261002",
+  "expected_base_image_id": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+  "output_tag": "aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002",
+  "limits": {
+    "max_operations": 1,
+    "max_seconds": 180,
+    "max_model_turns": 0,
+    "max_cash_usd": 0,
+    "max_growth_bytes": 1000000000
+  },
+  "assessment_reservation": {
+    "plan_id": null,
+    "operation_id": null
+  },
+  "authorization_id": "onboarding",
+  "storage": {
+    "required_important_capacity_before_bytes": 54687091200,
+    "required_important_capacity_after_bytes": 53687091200,
+    "raw_host_growth_max_bytes": 1000000000
+  },
+  "base_binding_note": "Dockerfile FROM uses the reviewed local control tag. The runner checks the tag image ID immediately before and after the build, but does not claim the FROM tag is immutable; a concurrent retag between checks cannot be excluded."
+}

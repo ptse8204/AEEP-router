@@ -1,0 +1,114 @@
+{
+  "audit": "PASS_CASE_SET_PERSISTED; WRAPPER_FAILURE_PRESERVED",
+  "case_set": {
+    "action_capability": "assessment.offer_letter@1",
+    "all_inputs_distinct": true,
+    "case_count": 141,
+    "computed_digest": "f341e8cb5147f6cd6dc0c2dcb1ff79de194bc51162c92f7a6aa519becd17f610",
+    "digest_matches": true,
+    "distinct_input_count": 141,
+    "environment_digest": "c6ce0baa267791d8b0d4c5a8acae1fc4755e9acc86d1b073b8f687bf9eb4bd39",
+    "recipe_digest": "f760c9f03d3e728e6566dd8ddb48d960aee5b8ac81ec7192a44f3dffd296f3fe",
+    "seed": 2026100202,
+    "split_counts": {
+      "holdout": 105,
+      "qualification": 8,
+      "training": 28
+    },
+    "stored_digest": "f341e8cb5147f6cd6dc0c2dcb1ff79de194bc51162c92f7a6aa519becd17f610",
+    "template_family_counts": {
+      "skillsbench-offer-letter:pinned-template": 141
+    },
+    "unique_case_ids": true,
+    "validator_count_per_case": [
+      1
+    ],
+    "variation_counts_by_split": {
+      "holdout": {
+        "date_boundaries": 15,
+        "long_fields": 15,
+        "numeric_boundaries": 15,
+        "relocation_no": 15,
+        "relocation_yes": 15,
+        "unicode_names": 15,
+        "xml_escaping": 15
+      },
+      "qualification": {
+        "date_boundaries": 1,
+        "long_fields": 1,
+        "numeric_boundaries": 1,
+        "relocation_no": 1,
+        "relocation_yes": 2,
+        "unicode_names": 1,
+        "xml_escaping": 1
+      },
+      "training": {
+        "date_boundaries": 4,
+        "long_fields": 4,
+        "numeric_boundaries": 4,
+        "relocation_no": 4,
+        "relocation_yes": 4,
+        "unicode_names": 4,
+        "xml_escaping": 4
+      }
+    }
+  },
+  "case_values_or_answers_emitted": false,
+  "container_cleanup": {
+    "derived_name": "aeep-3618ad0697457af66859ee9aab4db365",
+    "docker_inspect": "absent: daemon reported No such container",
+    "inspection_source": "Docker container metadata only"
+  },
+  "failed_wrapper_result_sha256": "06f9a97f35dcdc27b737970cdc6b542d2fb159f163846a7c3435f1fc96af469d",
+  "grant": {
+    "after_materialization": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": 75364.6242130259,
+      "model_turns": 2546,
+      "operations": 8689
+    },
+    "before_pair_stage": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": 75362.99259381788,
+      "model_turns": 2546,
+      "operations": 8688
+    },
+    "delta": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": "1.63161920802",
+      "model_turns": 0,
+      "operations": 1
+    }
+  },
+  "operation": {
+    "grant_id": "onboarding",
+    "operation_id": "recipe_generation_9bf15f5a8fa34ca481878ed14844f1f1-generator",
+    "reserved": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 35.0,
+      "max_model_turns": 0,
+      "max_operations": 1
+    },
+    "state": "complete",
+    "worker_receipt_attempt_id": "attempt_572034856b784edca466d1f29c2cc049",
+    "worker_receipt_capability": "assessment.offer_letter@1",
+    "worker_receipt_execution_evidence_digest": "c532928c4c0b0c442b07434bd1f2222a3c2d343e860a473ca5d46c79092e4809",
+    "worker_receipt_executor_id": "skillsbench.offer_letter.generate",
+    "worker_receipt_id": "rcpt_e86d1e801d514665949925e05ac99235",
+    "worker_receipt_output_field_present": false,
+    "worker_receipt_status": "success"
+  },
+  "request_id": "recipe_generation_9bf15f5a8fa34ca481878ed14844f1f1",
+  "review_sha256": "f813cbce076f6b6735ffdf9d324ec4de4f62ab4e6d0c286c52a985535ddbaeed",
+  "runner_sha256": "504b252602ae580a1886c991ccb69743d57d89d58683ac48cdff7d13911df7fc",
+  "scope": "Read-only canonical audit; no case values or expected outputs emitted",
+  "source_digest_expected": "060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293",
+  "source_digest_observed": "060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293",
+  "source_unchanged": true,
+  "wrapper_result": {
+    "error_cause": "wrapper dereferenced BenchmarkCase.c.input; case input is held at BenchmarkCase.action.input",
+    "error_type": "AttributeError",
+    "materialization_passed": false,
+    "replay_allowed": false
+  }
+}

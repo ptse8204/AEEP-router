@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import json
 import os
 import time
 from collections.abc import Callable
@@ -896,11 +897,89 @@ class AssessmentService:
             if worker is None or any((worker.reviewed_files or {}).get(name) != digest for name, digest in artifact_record.worker_files.items()):
                 raise ConfigurationError("reusable artifact is not bound into its immutable worker")
 
+    def _probe_cost_source(self, probe: Any, evidence: Any, *, authorization_id: str) -> str:
+        """Resolve a probe to its explicitly charged assessment operation.
+
+        Legacy v1 probes retain their original attempt-id lookup. Version 2
+        probes carry a canonical operation-start digest because adapter-owned
+        child attempts are not assessment operation identifiers.
+        """
+        from .boundary import BoundaryProbe
+        from .models import AssessmentOperation, ConformanceProbeRequest, content_digest
+
+        if not isinstance(probe, BoundaryProbe):
+            raise ConfigurationError('boundary probe is malformed')
+        if probe.schema_version == 'assessment.boundary-probe.v1':
+            # Preserve the historical direct lookup and its serialized meaning.
+            operation = AssessmentOperation.model_validate(
+                self.repository.get('operation_start', evidence.attempt_id)
+            )
+            return operation.plan_id
+
+        charged_digest = probe.charged_operation_digest
+        if charged_digest is None:
+            raise ConfigurationError('boundary probe v2 has no charged operation binding')
+        with self.router.store._lock:
+            connection = self.router.store._connection
+            start_row = connection.execute(
+                "SELECT id, digest, payload_json FROM assessment_records "
+                "WHERE kind='operation_start' AND digest=?", (charged_digest,)
+            ).fetchone()
+            if start_row is None:
+                raise ConfigurationError('boundary probe charged operation is unavailable')
+            operation_state = connection.execute(
+                'SELECT grant_id, state FROM assessment_operations WHERE id=?', (start_row[0],)
+            ).fetchone()
+            measurement_row = connection.execute(
+                "SELECT digest, payload_json FROM assessment_records "
+                "WHERE kind='operation_measurement' AND id=?", (start_row[0],)
+            ).fetchone()
+
+        try:
+            start_payload = json.loads(start_row[2])
+            operation = AssessmentOperation.model_validate(start_payload)
+            if (start_row[1] != charged_digest or content_digest(start_payload) != charged_digest
+                    or operation.operation_id != start_row[0]
+                    or operation_state is None or operation_state[1] != 'complete'
+                    or operation_state[0] != authorization_id):
+                raise ConfigurationError('boundary probe charged operation is not settled under this grant')
+            if measurement_row is None:
+                raise ConfigurationError('boundary probe charged operation has no valid measurement')
+            measurement_payload = json.loads(measurement_row[1])
+            measured = AssessmentOperation.model_validate(measurement_payload)
+            if (content_digest(measurement_payload) != measurement_row[0]
+                    or measured.operation_id != operation.operation_id
+                    or measured.plan_id != operation.plan_id
+                    or measured.stage != operation.stage
+                    or measured.reserved != operation.reserved
+                    or measured.elapsed_seconds is None):
+                raise ConfigurationError('boundary probe charged operation has no valid measurement')
+            with self.router.store._lock:
+                request_row = self.router.store._connection.execute(
+                    "SELECT digest, payload_json FROM assessment_records "
+                    "WHERE kind='conformance_request' AND id=?", (operation.plan_id,)
+                ).fetchone()
+            if request_row is None:
+                raise ConfigurationError('boundary probe charged operation request is unavailable')
+            request_payload = json.loads(request_row[1])
+            request = ConformanceProbeRequest.model_validate(request_payload)
+            if (content_digest(request_payload) != request_row[0]
+                    or request.plan_id != operation.plan_id
+                    or request.authorization_id != authorization_id
+                    or request.worker_digest != probe.worker_digest
+                    or probe.implementation_digest not in request.definition_digests):
+                raise ConfigurationError('boundary probe charged operation differs from its reviewed request')
+        except ConfigurationError:
+            raise
+        except (TypeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+            raise ConfigurationError('boundary probe charged operation records are malformed') from exc
+        return operation.plan_id
+
     def _cost_sources(self, plan: AssessmentPlan, *, require_complete: bool = True) -> tuple[list[str], list[str]]:
         """Include measured preparation and preceding stages without another debit."""
         from ..execution import ExecutionEvidence
         from .boundary import BoundaryConformance, BoundaryProbe
-        from .models import AssessmentOperation
+        from .models import content_digest
 
         experiment = plan.comparison.experiment if plan.comparison else None
         identities = set(plan.setup_cost_ids)
@@ -926,11 +1005,21 @@ class AssessmentService:
                     (boundary.worker_digest, plan.authorization_id)).fetchall()
             sources.update(row[0] for row in bootstrap)
             for probe_digest in boundary.probe_digests:
-                probe = BoundaryProbe.model_validate(self.repository.get('boundary_probe', probe_digest))
-                evidence = ExecutionEvidence.model_validate(self.repository.get('execution_evidence', probe.execution_evidence_digest))
-                operation = AssessmentOperation.model_validate(self.repository.get('operation_start', evidence.attempt_id))
+                probe_payload = self.repository.get('boundary_probe', probe_digest)
+                probe = BoundaryProbe.model_validate(probe_payload)
+                evidence_payload = self.repository.get('execution_evidence', probe.execution_evidence_digest)
+                evidence = ExecutionEvidence.model_validate(evidence_payload)
+                if probe.schema_version == 'assessment.boundary-probe.v2' and (
+                    content_digest(probe_payload) != probe_digest
+                    or content_digest(evidence) != probe.execution_evidence_digest
+                    or not evidence.complete
+                ):
+                    raise ConfigurationError('boundary probe v2 execution evidence is incomplete or changed')
+                source_plan_id = self._probe_cost_source(
+                    probe, evidence, authorization_id=plan.authorization_id
+                )
                 # A bootstrap request also owns its protected sign-in operation.
-                sources.add(operation.plan_id)
+                sources.add(source_plan_id)
         ledger = self.repository.operation_ledger(plan.plan_id, sorted(identities), sorted(sources))
         observed = {item.operation_id for item in ledger.operations}
         missing = identities - observed

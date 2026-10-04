@@ -1,0 +1,977 @@
+{
+  "$defs": {
+    "CashAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "components": {
+          "items": {
+            "$ref": "#/$defs/CashEvidence"
+          },
+          "title": "Components",
+          "type": "array"
+        }
+      },
+      "title": "CashAccounting",
+      "type": "object"
+    },
+    "CashClassification": {
+      "enum": [
+        "verified",
+        "billing_reconciled",
+        "pinned_rate_billable_usage",
+        "estimated",
+        "unavailable"
+      ],
+      "title": "CashClassification",
+      "type": "string"
+    },
+    "CashEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "charge_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Charge Id",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/CashClassification",
+          "default": "unavailable"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "billing_record_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Record Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        },
+        "applied_rate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applied Rate Ids",
+          "type": "array"
+        },
+        "applied_meter_quantities": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Applied Meter Quantities",
+          "type": "object"
+        }
+      },
+      "required": [
+        "charge_id"
+      ],
+      "title": "CashEvidence",
+      "type": "object"
+    },
+    "ComponentObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "title": "Component Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "installed": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "discovered": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "permitted": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "exposed": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "invoked": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "successful": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "verified": {
+          "$ref": "#/$defs/ConfigurationState"
+        },
+        "receipt_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Receipt Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "component_id",
+        "content_digest"
+      ],
+      "title": "ComponentObservation",
+      "type": "object"
+    },
+    "ConfigurationReceiptObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "receipt_id": {
+          "title": "Receipt Id",
+          "type": "string"
+        },
+        "receipt_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Receipt Digest",
+          "type": "string"
+        },
+        "executor_id": {
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "invocation_started": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Invocation Started"
+        },
+        "execution_success": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Execution Success"
+        },
+        "schema_valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Valid"
+        },
+        "task_valid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Valid"
+        },
+        "trusted_task_verification": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trusted Task Verification"
+        },
+        "quality_score": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Score"
+        },
+        "attempt_number": {
+          "minimum": 1,
+          "title": "Attempt Number",
+          "type": "integer"
+        },
+        "raw_resources": {
+          "$ref": "#/$defs/ResourceVector"
+        },
+        "accounting": {
+          "$ref": "#/$defs/ResourceAccounting"
+        },
+        "measurements": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Measurements",
+          "type": "object"
+        },
+        "measurement_status": {
+          "additionalProperties": {
+            "enum": [
+              "available",
+              "unavailable"
+            ],
+            "type": "string"
+          },
+          "title": "Measurement Status",
+          "type": "object"
+        },
+        "result_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result Bytes"
+        },
+        "execution_evidence_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Execution Evidence Digest"
+        },
+        "host_inventory_digest": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Host Inventory Digest"
+        },
+        "preservation": {
+          "const": "unavailable",
+          "default": "unavailable",
+          "title": "Preservation",
+          "type": "string"
+        },
+        "comparative_contribution": {
+          "const": "not_established",
+          "default": "not_established",
+          "title": "Comparative Contribution",
+          "type": "string"
+        }
+      },
+      "required": [
+        "receipt_id",
+        "receipt_digest",
+        "executor_id",
+        "attempt_number",
+        "raw_resources",
+        "accounting",
+        "measurements",
+        "measurement_status"
+      ],
+      "title": "ConfigurationReceiptObservation",
+      "type": "object"
+    },
+    "ConfigurationState": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "default": "unavailable",
+          "enum": [
+            "observed",
+            "declared",
+            "unavailable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "basis": {
+          "default": "unavailable",
+          "maxLength": 200,
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "title": "ConfigurationState",
+      "type": "object"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "billing_record",
+        "local_meter",
+        "priced_measured_billable_usage",
+        "confirmed_no_incremental_charge",
+        "provider_report",
+        "pinned_rate_table",
+        "operator_report",
+        "static_estimate",
+        "legacy_unspecified",
+        "unavailable"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "conflict",
+        "unavailable"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "MeasurementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "unavailable"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource",
+          "default": "unavailable"
+        },
+        "trust": {
+          "$ref": "#/$defs/TrustLevel",
+          "default": "untrusted"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Fa-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "title": "MeasurementEvidence",
+      "type": "object"
+    },
+    "ModelAccessChannel": {
+      "enum": [
+        "api",
+        "subscription",
+        "purchased_credit",
+        "mixed",
+        "unknown"
+      ],
+      "title": "ModelAccessChannel",
+      "type": "string"
+    },
+    "ModelTokenUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "access_channel": {
+          "$ref": "#/$defs/ModelAccessChannel",
+          "default": "unknown"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        }
+      },
+      "required": [
+        "provider",
+        "model"
+      ],
+      "title": "ModelTokenUsage",
+      "type": "object"
+    },
+    "ResourceAccounting": {
+      "additionalProperties": false,
+      "properties": {
+        "cash": {
+          "$ref": "#/$defs/CashAccounting"
+        },
+        "subscription_usage": {
+          "items": {
+            "$ref": "#/$defs/SubscriptionUsage"
+          },
+          "title": "Subscription Usage",
+          "type": "array"
+        },
+        "model_usage": {
+          "items": {
+            "$ref": "#/$defs/ModelTokenUsage"
+          },
+          "title": "Model Usage",
+          "type": "array"
+        },
+        "tool_footprint": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolFootprint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ResourceAccounting",
+      "type": "object"
+    },
+    "ResourceVector": {
+      "additionalProperties": false,
+      "description": "Raw resource dimensions for one attempt.\n\n`memory_mb_seconds` is the integral of route-attributable resident memory\nover time. `peak_memory_mb` is retained separately because it is useful as a\nhard capacity constraint rather than only a consumable-resource signal.",
+      "properties": {
+        "monetary_usd": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Monetary Usd",
+          "type": "number"
+        },
+        "latency_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "cpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Cpu Ms",
+          "type": "number"
+        },
+        "memory_mb_seconds": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Memory Mb Seconds",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Peak Memory Mb",
+          "type": "number"
+        },
+        "gpu_ms": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Gpu Ms",
+          "type": "number"
+        },
+        "network_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Network Bytes",
+          "type": "integer"
+        },
+        "context_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Context Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "cached_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cached Input Tokens",
+          "type": "integer"
+        },
+        "cache_write_input_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "reasoning_output_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Reasoning Output Tokens",
+          "type": "integer"
+        },
+        "subscription_units": {
+          "default": 0.0,
+          "description": "Provider-local capacity units; not cash and not transferable.",
+          "minimum": 0.0,
+          "title": "Subscription Units",
+          "type": "number"
+        }
+      },
+      "title": "ResourceVector",
+      "type": "object"
+    },
+    "SubscriptionCharge": {
+      "enum": [
+        "included",
+        "paid",
+        "mixed",
+        "unknown"
+      ],
+      "title": "SubscriptionCharge",
+      "type": "string"
+    },
+    "SubscriptionUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "resource_pool": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Resource Pool",
+          "type": "string"
+        },
+        "unit": {
+          "default": "provider_unit",
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "consumed": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consumed"
+        },
+        "source": {
+          "$ref": "#/$defs/MeasurementEvidence"
+        },
+        "included_or_paid": {
+          "$ref": "#/$defs/SubscriptionCharge",
+          "default": "unknown"
+        },
+        "rate_snapshot_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Snapshot Id"
+        },
+        "usage_fingerprint": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage Fingerprint"
+        }
+      },
+      "required": [
+        "provider",
+        "resource_pool"
+      ],
+      "title": "SubscriptionUsage",
+      "type": "object"
+    },
+    "ToolFootprint": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Bytes",
+          "type": "integer"
+        },
+        "schema_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Schema Approx Tokens",
+          "type": "integer"
+        },
+        "raw_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Bytes",
+          "type": "integer"
+        },
+        "raw_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Raw Result Approx Tokens",
+          "type": "integer"
+        },
+        "filtered_result_bytes": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Bytes",
+          "type": "integer"
+        },
+        "filtered_result_approx_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Filtered Result Approx Tokens",
+          "type": "integer"
+        },
+        "exposed_to_model": {
+          "default": false,
+          "title": "Exposed To Model",
+          "type": "boolean"
+        }
+      },
+      "title": "ToolFootprint",
+      "type": "object"
+    },
+    "TrustLevel": {
+      "enum": [
+        "untrusted",
+        "self_asserted",
+        "observed",
+        "verified",
+        "attested"
+      ],
+      "title": "TrustLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.configuration-observation.v1",
+      "default": "aeep.configuration-observation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "observation_id": {
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Profile Digest",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "activation_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Activation Digest"
+    },
+    "compiled_tools_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Compiled Tools Digest",
+      "type": "string"
+    },
+    "compiled_schema_bytes": {
+      "minimum": 0,
+      "title": "Compiled Schema Bytes",
+      "type": "integer"
+    },
+    "compiled_tool_count": {
+      "minimum": 0,
+      "title": "Compiled Tool Count",
+      "type": "integer"
+    },
+    "actual_host_context_tokens": {
+      "default": null,
+      "title": "Actual Host Context Tokens",
+      "type": "null"
+    },
+    "actual_visible_inventory": {
+      "const": "unavailable",
+      "default": "unavailable",
+      "title": "Actual Visible Inventory",
+      "type": "string"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/ComponentObservation"
+      },
+      "maxItems": 128,
+      "title": "Components",
+      "type": "array"
+    },
+    "receipts": {
+      "items": {
+        "$ref": "#/$defs/ConfigurationReceiptObservation"
+      },
+      "maxItems": 100,
+      "title": "Receipts",
+      "type": "array"
+    },
+    "receipt_coverage": {
+      "const": "operator-selected scope-bound receipts; not an exhaustive census",
+      "default": "operator-selected scope-bound receipts; not an exhaustive census",
+      "title": "Receipt Coverage",
+      "type": "string"
+    },
+    "activation_ready": {
+      "default": false,
+      "title": "Activation Ready",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "profile_digest",
+    "scope_digest",
+    "manifest_digest",
+    "compiled_tools_digest",
+    "compiled_schema_bytes",
+    "compiled_tool_count",
+    "components"
+  ],
+  "title": "ConfigurationObservation",
+  "type": "object"
+}

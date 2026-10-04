@@ -1,0 +1,121 @@
+{
+  "schema_version": "assessment.canonical-audit.v1",
+  "verdict": "pass",
+  "read_only": true,
+  "review_sha256": "1f9ee8a0c9fa1d30fb0da1b5bff304d97ef3f1c5cb16c5bd13c4c233480885b8",
+  "runner_sha256": "ef0c87743fc3406c1386d5b084560b6f471c72ad522a0f1938f471063f436cf4",
+  "result_sha256": "4e579f2b0d7e75bcfd022f7df2d82cfcc39b1666d684fdf2fc65fc1320da4565",
+  "source_digest": {
+    "expected": "4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66",
+    "observed": "4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66",
+    "match": true,
+    "runtime_dependency_hashes_matching": 137
+  },
+  "result_validity": {
+    "passed": true,
+    "expected_decisions": 15,
+    "expected_positive": 6,
+    "expected_negative": 9,
+    "observed_decisions": 15,
+    "observed_positive": 6,
+    "observed_negative": 9,
+    "decisions_match": true,
+    "observed_failure_codes": [
+      "invalid_document",
+      "text_preserved"
+    ],
+    "failure_codes_reviewed": true,
+    "qualifying_materialization": false,
+    "admission": false,
+    "official_reproduction": false,
+    "replay_allowed": false
+  },
+  "operations": [
+    {
+      "id": "recipe_generation_dab90b36c3e645eaa20e96677834c9b2-literal-reference",
+      "stage": "grader_reference",
+      "state": "complete",
+      "reserved_operations": 1,
+      "reserved_model_turns": 0,
+      "reserved_seconds": 35,
+      "measured_seconds": 4.0600035830866545,
+      "attempt_id": "attempt_7edb77bd05e448be9ae05b91fde55b70",
+      "attempt_state": "COMPLETED",
+      "receipt_id": "rcpt_830449aad0e84bd2a074d74f2ce99ef1",
+      "receipt_digest": "89a7c3bb506fc2913767d9765f08df2d8d8606efbdfb65823fe0214577899d98",
+      "receipt_status": "success",
+      "canonical_receipt_matches_operation_local_receipt": true,
+      "derived_container_name": "aeep-28b1556bb8d3b2cafa4a63e3987e5015",
+      "docker_metadata": "absent"
+    },
+    {
+      "id": "recipe_generation_dab90b36c3e645eaa20e96677834c9b2-literal-grader-0",
+      "stage": "grader_probe",
+      "state": "complete",
+      "reserved_operations": 1,
+      "reserved_model_turns": 0,
+      "reserved_seconds": 35,
+      "measured_seconds": 1.5696110420394689,
+      "attempt_id": "attempt_a5967019f46740369459e15e0f3bfc7b",
+      "attempt_state": "COMPLETED",
+      "receipt_id": "rcpt_a8ce201247714ae29d92c1354c28d7ef",
+      "receipt_digest": "0ba27a94f7a6b5d2161d237a6ab6161699a52fffdb97e3448626036f1ea3d661",
+      "receipt_status": "success",
+      "canonical_receipt_matches_operation_local_receipt": true,
+      "derived_container_name": "aeep-5666e0f614e63dd6f25acd86a2eb0265",
+      "docker_metadata": "absent"
+    },
+    {
+      "id": "recipe_generation_dab90b36c3e645eaa20e96677834c9b2-literal-grader-1",
+      "stage": "grader_probe",
+      "state": "complete",
+      "reserved_operations": 1,
+      "reserved_model_turns": 0,
+      "reserved_seconds": 35,
+      "measured_seconds": 1.4714321249630302,
+      "attempt_id": "attempt_fac502d3d2eb4954b8f8227475d88c76",
+      "attempt_state": "COMPLETED",
+      "receipt_id": "rcpt_e1f19f6b31c54062a8300687170c3993",
+      "receipt_digest": "31da24d3b10d7c6d97bb104d36fd1513765d53cb99966a0a19c6c5376a9e3962",
+      "receipt_status": "success",
+      "canonical_receipt_matches_operation_local_receipt": true,
+      "derived_container_name": "aeep-2731a2c0ba8c775e82c455363d37be91",
+      "docker_metadata": "absent"
+    }
+  ],
+  "accounting": {
+    "prior_grant_counters": {
+      "operations": 8681,
+      "model_turns": 2546,
+      "elapsed_seconds": 75258.72103060992,
+      "cash_usd": 0
+    },
+    "current_grant_counters": {
+      "operations": 8684,
+      "model_turns": 2546,
+      "elapsed_seconds": 75265.82207736,
+      "cash_usd": 0,
+      "revoked": false
+    },
+    "grant_delta": {
+      "operations": 3,
+      "model_turns": 0,
+      "elapsed_seconds": 7.10104675008,
+      "cash_usd": 0
+    },
+    "sum_operation_elapsed_seconds": 7.101046750089154,
+    "harness_wall_seconds": 7.520686875097454,
+    "harness_wall_minus_operation_elapsed_seconds": 0.4196401250083004,
+    "accounting_status": "Each operation receipt has empty model/subscription usage, null tool footprint, and cash status unavailable. The grant counter delta is $0; no cash measurement is claimed. Candidate CPU/RSS and tool footprint remain unmeasured; default zero resource fields are not observations.",
+    "preexisting_reserved_operations": 2,
+    "preexisting_reserved_operations_unchanged": true
+  },
+  "footprint_bytes": {
+    "report_directory_before_audit_record": 775421,
+    "recipe_operations_directory": 12595200,
+    "combined_before_audit_record": 13370621,
+    "note": "Report-directory and combined bytes were measured before this audit record was created; they exclude canonical-audit.json."
+  },
+  "no_source_or_canonical_database_edits_during_audit": true,
+  "containers_or_models_started_by_audit": false
+}

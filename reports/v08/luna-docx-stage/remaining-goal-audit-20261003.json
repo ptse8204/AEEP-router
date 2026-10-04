@@ -1,0 +1,129 @@
+{
+  "schema_version": "aeep.remaining-goal-audit.v1",
+  "audit_scope": "Read-only comparison of the supplied user plan, assessment policy, plan coverage and referenced evidence. No runtime/imports/tests/model calls/Docker/grant/database/source changes or holdout-content reads.",
+  "as_of": "2026-10-03T02:56:24.661300+00:00",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "active_campaign": {
+    "session": "37153",
+    "assessment_id": "assessment_b7304a6d072c4aae98e45839200e9055",
+    "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+    "frozen_conditions": "gpt-6-luna/xhigh, fixed SkillsBench offer-letter adaptation, unchanged skill, worker profiles, grader, utility, thresholds and 8/28/105 design; 141 disjoint cases.",
+    "checkpoint": "At 2026-10-03T02:56:24.661300Z, 80 trials were complete: 79 passed (8 screening, 28 training, 43 held-outs) and one held-out failed the declared text_preserved grader check; one held-out trial was running.",
+    "consequence": "The frozen zero-correctness-failure qualification rule is already unsatisfied. Finish and audit the current run for terminal accounting only. Do not alter the recipe, candidate, grader, threshold, cases or plan; do not start DOCX marginal-value trials, qualify, admit or turn this result into an official SkillsBench score.",
+    "evidence": [
+      "reports/v08/plan-coverage.md:1-19,324-345",
+      "reports/v08/luna-docx-stage/successor-first-holdout-failure.json",
+      "reports/v08/luna-docx-stage/successor-training-pass.json",
+      "reports/v08/luna-docx-stage/successor-progress.json (observed_at 2026-10-03T02:56:24.661300Z)"
+    ]
+  },
+  "matrix": [
+    {
+      "requested_work": "End-to-end discovery \u2192 intake \u2192 admission \u2192 task profile \u2192 receipt \u2192 revocation",
+      "status": "Components and separate software fixtures exist; the real joined workflow is incomplete.",
+      "coverage_and_limits": "The current live store has no discovery config, discovery results/candidates, or intake records. Software tests separately cover discovery/intake, a positive Python admission/lookup/receipt/revocation, and a native task profile; those are different candidate/backend paths. The Python admission cannot be transferred to native COMMAND because executor fingerprints differ. A current-source report-local synthetic native bridge is staged, not executed; it searches a local fixture registry, uses a temporary store/grant and can only establish synthetic lifecycle behavior. It is not a real ARD-to-admission journey.",
+      "next_existing_path": "After session 37153 is terminal, the prepared one-page metadata-only ARD check can call DiscoveryService.from_config(store, config).search(request) once (1 operation, up to 30 seconds, 0 model turns/cash, no artifact fetch). Then an operator can bind the exact registered candidate snapshot to the exact already-stored local subject with CandidateIntake plus AssessmentRepository.put/review, and call CapabilityLifecycle.lookup. The CLI `aeep candidate intake` re-inspects a path; there is no dedicated existing-subject intake command. A genuine positive lifecycle still requires an independently successful current qualification/admission for that exact native COMMAND executor, then the same fingerprint in TaskScope/CapabilityProfile, dispatch receipt and revocation checks. Associate a returned candidate only if its exact identity and locally inspected artifact actually match the selected subject; otherwise record no match and retain separate provenance. Never link unrelated search metadata merely to complete the chain.",
+      "evidence": [
+        "reports/v08/luna-docx-stage/discovery-live-readiness.json",
+        "reports/v08/luna-docx-stage/discovery-live-check-plan.json",
+        "reports/v08/luna-docx-stage/workflow-linkage-audit.json",
+        "reports/v08/luna-docx-stage/workflow-linkage-bridge-root-review.json",
+        "reports/v08/luna-docx-stage/workflow-linkage-bridge-supervisor-root-review.json",
+        "reports/v08/plan-coverage.md:23-42,346-388",
+        "src/aeep/capability_lifecycle.py:86-103,150-240",
+        "src/aeep/assessment/repository.py:29-63"
+      ]
+    },
+    {
+      "requested_work": "SkillsBench direct paired skill-benefit evaluation at Luna/xhigh",
+      "status": "The first pinned offer-letter adaptation is in a live qualification run and has a frozen-contract correctness failure; no qualification or value result is available.",
+      "coverage_and_limits": "The protected DOCX profile and 8/28/105 materialization, exact worker pair, fresh typed Luna/xhigh connectivity and 11-per-role boundary records are current-source evidence. The held-out failure is under the declared text-preservation requirement. A later optional-candidate value plan is conditional on successful qualification; it is not authorized or justified by this result. The original upstream verifier has not run, so the failure does not establish what that unchanged verifier would report.",
+      "next_existing_path": "Let the frozen campaign reach terminal state once and retain every result/cost. Afterward, the separately reviewed 18-assertion upstream verifier compatibility check can run with its own same-grant fetch/build/run reservations (60/180/30 seconds); it checks the pinned public literal fixture at index 0 against the unchanged upstream assertions. It does not run on the failed held-out output and cannot explain that output, repair qualification or claim official reproduction. Any other task/candidate is a distinct new frozen study with fresh cases and reviews, never a replacement for this failed result.",
+      "evidence": [
+        "docs/ASSESSMENT_TESTING.md:129-145,229-235",
+        "reports/v08/plan-coverage.md:1-19,196-218,270-345",
+        "reports/v08/luna-docx-stage/upstream-verifier-stage.json",
+        "reports/v08/luna-docx-stage/upstream-verifier-preparation-root-review.json"
+      ]
+    },
+    {
+      "requested_work": "Experiment A: optional candidate capability value",
+      "status": "There are completed historical A-style results, both negative; the current DOCX candidate cannot enter its conditional optional-use value stage.",
+      "coverage_and_limits": "The frozen AEEP marginal_value path uses optional treatment and includes control, treatment, higher-compute and training-only reusable challengers. Historical Spreadsheets plan_b17c0a67fb224546ab4b1de9995ca88b and CSV plan_9e59cfedba9a402a9345de2128c84217 completed 705 executions each with no measured benefit; the reusable-tool control dominated Spreadsheets and CSV utility was approximately flat. Both reports bind source cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2, different from current DOCX source eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1. They are valid negative findings for their original case/worker/source cohorts, but do not establish a current gpt-6-luna/xhigh or SkillsBench result. Text value stopped on a preflight failure; search value did not start after the queue stopped.",
+      "next_existing_path": "For a future eligible candidate use `aeep assess incremental-routes DEFINITION`, the existing `AssessmentService.propose`/budget-preview/run path with `IncrementalExperiment(stage='marginal_value', exposure='optional')`, and `prepare-reusable` using only successful qualification training inputs. For DOCX specifically, do not proceed: its current qualification is invalidated by the frozen correctness failure. A different candidate requires its own explicit frozen case set, qualification, boundaries, reusable tool and plan.",
+      "evidence": [
+        "docs/ASSESSMENT_TESTING.md:129-145,528-551",
+        "reports/v08/plan-coverage.md:1908-1922,2094-2100,2673-2683,2804-2812",
+        "reports/v08/luna-docx-stage/value-stage-readiness.json"
+      ]
+    },
+    {
+      "requested_work": "Experiment B: original normal-host / discovery-host / discovery-plus-AEEP value comparison",
+      "status": "The v2 three-route contract/reporting and offline checks exist; no real three-arm campaign has run.",
+      "coverage_and_limits": "The B report separates AEEP-versus-discovery, AEEP-versus-normal and discovery-versus-normal, but a live comparison still needs equivalent candidate access/user constraints, fresh exact conformance for all three managed profiles, current qualification and disjoint scored cases. A single actual composed callback and paired inspections do not prove those conditions. There is no current live discovery result or admitted DOCX candidate. The current DOCX qualification failure cannot supply B's candidate qualification.",
+      "next_existing_path": "Use the existing `assessment.experiment.v2` stage `aeep_value` and `AssessmentService.propose`/run path only after selecting a candidate with successful current qualification and freezing three equivalent profiles, exact boundaries, utility and case set. Preserve old v1/four-arm evidence and do not attribute discovery's effect to AEEP.",
+      "evidence": [
+        "docs/ASSESSMENT_TESTING.md:149-166",
+        "reports/v08/ard-skillsbench-cloud-audit-20261002.md:24-47,56-77",
+        "reports/v08/plan-coverage.md:3030-3066,3187-3202"
+      ]
+    },
+    {
+      "requested_work": "Realistic paired spreadsheet/native use",
+      "status": "There is completed spreadsheet value evidence and bounded native task evidence, but not a current Luna/xhigh optional-selection comparison.",
+      "coverage_and_limits": "The historical 705-run spreadsheet comparison is a real four-arm negative value result on source cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2. The later native two-workbook file-handoff passed independent grading on source ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1, but was a directed helper path under a requested GPT-6.1 Sol medium profile; actual model identity was not independently observed. A four-scenario native run on source 5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc recorded one workbook completion and three safe stops. These task and resource observations do not establish current Luna/xhigh selection benefit, a full native paired candidate comparison, or whole-host resource acceptance.",
+      "next_existing_path": "Retain the negative spreadsheet result. If a new current-model paired study is still desired, use the existing reviewed AssessmentService/BenchmarkRunner comparison, fresh matched cases/contexts, optional treatment, same host/model settings, independent preservation grader and exact current worker boundaries. Do not relabel the directed native handoff or autonomy scenarios as that comparison.",
+      "evidence": [
+        "reports/v08/plan-coverage.md:1908-1922,3177-3190,3211-3233",
+        "docs/ASSESSMENT_TESTING.md:92-145,205-235"
+      ]
+    },
+    {
+      "requested_work": "Complete cloud execution feasibility",
+      "status": "The architecture was assessed; no cloud account/runtime was provisioned or validated.",
+      "coverage_and_limits": "Portable offline code work is plausible in Codex cloud, but a default task container does not establish separate controlled workers, protected oracle, nested sandbox, durable grant ledger or authenticated model inventory. The current composed AEEP route invokes a Mac-only protected executor and cannot run unchanged on Linux. A dedicated Linux runtime needs a new exact execution binding/conformance, or a remote Mac makes the campaign hybrid. No cloud model access, subscription capacity, remote authentication, VM provisioning or cloud acceptance was observed; zero-cash authority does not fund hosted API usage or renting a VM.",
+      "next_existing_path": "Before any cloud campaign, choose the destination/runtime, preserve the same canonical grant and required dependency closure without credentials, then establish fresh host-specific worker and native-executor boundaries. Treat a cloud Mac as a new host cohort. No current campaign result transfers automatically.",
+      "evidence": [
+        "reports/v08/ard-skillsbench-cloud-audit-20261002.md:99-139",
+        "reports/v08/plan-coverage.md:88-96,452-455",
+        "docs/ASSESSMENT_TESTING.md:48-86"
+      ]
+    }
+  ],
+  "independent_bounded_steps_after_current_run": [
+    {
+      "step": "Complete and audit only active session 37153, without relaunching its one-shot runner or changing frozen definitions.",
+      "purpose": "Obtain canonical terminal accounting and cleanup; it cannot restore eligibility after the recorded correctness failure.",
+      "reference": "reports/v08/plan-coverage.md:1-19,324-345"
+    },
+    {
+      "step": "Execute the staged upstream verifier compatibility check once, with its reviewed separate reservations and current capacity/image checks.",
+      "purpose": "Determine compatibility with the pinned original verifier; this does not qualify, admit, measure benefit or constitute full upstream reproduction.",
+      "reference": "reports/v08/luna-docx-stage/upstream-verifier-preparation-root-review.json"
+    },
+    {
+      "step": "Run the prepared bounded ARD metadata search once, then retain its candidate/source IDs as inert discovery evidence.",
+      "purpose": "Independently observe the selected endpoint and query path. No artifact fetch, automatic association, qualification or admission follows.",
+      "reference": "reports/v08/luna-docx-stage/discovery-live-check-plan.json"
+    },
+    {
+      "step": "After the campaign, complete the staged synthetic native lifecycle bridge only after its fake-child check, fresh runtime preflight and exact post-campaign review.",
+      "purpose": "Exercise local fixture discovery/intake, same-native-COMMAND qualification/admission, exact-profile dispatch, receipt capture and revocation in a zero-model synthetic scope. A failure honestly stops at no admission; a pass is software lifecycle evidence only.",
+      "reference": "reports/v08/luna-docx-stage/workflow-linkage-bridge-root-review.json; reports/v08/luna-docx-stage/workflow-linkage-bridge-supervisor-root-review.json"
+    }
+  ],
+  "separate_product_adoption_gates": {
+    "status": "Not established by the DOCX campaign or software contract checks.",
+    "remaining_examples": "Whole-system resource acceptance, actual participant comprehension, broader task autonomy, reversibility/recovery on supported installations, explanation quality from receipts, and host/backend applicability at activation/dispatch remain distinct adoption gates. A narrow two-task resource pair or directed native tasks must retain their declared scope.",
+    "policy_reference": "docs/ASSESSMENT_TESTING.md:36-47 and Human comprehension check section"
+  },
+  "historical_evidence_rule": "Keep earlier workbook/CSV negative comparisons (source cb19dc7aeded282e8b4621402e39d5c21a90cdf2a8574e6877e5e4452b2dc4c2), native handoff evidence (source ade3b4e98078a7a33a9a1ff9bf1a917063872dbc4eeba96d42ee33cec554a3d1), native autonomy evidence (source 5fffda8a321005abc175e63f887f118b2297097542a5c1332560cb60f409f9bc), interrupted/failed plans and synthetic fixtures under their original cohorts. Current DOCX qualification binds source eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1 and gpt-6-luna/xhigh; older results remain valuable findings but cannot be pooled or substituted for that cohort or an actual three-way AEEP campaign.",
+  "root_review": {
+    "status": "reviewed_with_two_scope_clarifications",
+    "clarifications": [
+      "Public-literal upstream compatibility does not regrade or explain the failed held-out case.",
+      "Live metadata can be associated only after verifying its exact match to the local subject; no fabricated provenance."
+    ],
+    "execution_authorized": false
+  }
+}

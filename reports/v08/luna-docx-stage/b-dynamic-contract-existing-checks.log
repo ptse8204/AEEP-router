@@ -1,0 +1,156 @@
+.............................F............                               [100%]
+=================================== FAILURES ===================================
+_____________ test_differential_shared_inventory_absence_and_drift _____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-808/test_differential_shared_inven0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d495320>
+
+    async def test_differential_shared_inventory_absence_and_drift(tmp_path, monkeypatch):
+        from test_v08_assessment import setup_assessment
+        from test_v08_incremental import environment
+    
+        from aeep.assessment.boundary import DifferentialConformance, require_differential
+        from aeep.assessment.models import AssessmentEnvironment, IncrementalExperiment, UtilityPolicy
+    
+        router, service, plan, _grant = setup_assessment(tmp_path)
+        repo = service.repository
+        try:
+            env = AssessmentEnvironment(environment_id='differential', kind='codex_sandbox', identity={})
+            require_differential(repo, env, plan)  # Historical comparisons retain their meaning.
+            shared = repo.put('definition', 'shared', ReviewedDefinition(purpose='shared python plus shell'))
+            definition = environment().model_copy(update={'shared_definition_digest': shared})
+            experiment = IncrementalExperiment(stage='qualification', exposure='required', environment=definition,
+                utility=UtilityPolicy(benefit_dimensions=['wall_time_ms'], guardrail_dimensions=['wall_time_ms']))
+            plan = plan.model_copy(update={'schema_version': 'assessment.plan.v4', 'comparison': plan.comparison.model_copy(
+                update={'schema_version': 'assessment.comparison.v2', 'experiment': experiment})})
+            with pytest.raises(ConfigurationError, match='missing'):
+                require_differential(repo, env, plan)
+            # These records test differential validation only. The independent
+            # conformance validator is exercised above with real local probe results.
+            monkeypatch.setattr('aeep.assessment.boundary.require_conformance', lambda *args, **kwargs: None)
+            records = []
+            for role, available, inventory in [('control', False, definition.control_inventory), ('treatment', True, definition.treatment_inventory)]:
+                probe = BoundaryProbe(probe_id=role, name='candidate_access', implementation_digest='1'*64, worker_digest='2'*64,
+                    execution_evidence_digest='3'*64, observed={'definition_digest': content_digest(definition), 'candidate_available': available})
+                probe_ref = repo.put('boundary_probe', role, probe)
+                record = BoundaryConformance(schema_version='assessment.boundary-conformance.v2', conformance_id=role,
+                    source_digest='4'*64, worker_digest='2'*64, image_digest='sha256:'+'5'*64, binary_digest='6'*64,
+                    adapter='fixture', adapter_version='1', effective_policy_digest='7'*64, reviewed_inventory_digest=content_digest(inventory),
+                    identity_digest='8'*64, enforcement_definition_digest='9'*64, advertised_tools=list(inventory), permitted_tools=list(inventory),
+                    used_tools=[], probe_digests=[probe_ref], configuration_digest='a'*64, effective_inventory=inventory)
+                records.append(record)
+            def bind(control, treatment):
+                refs = [repo.put('boundary_conformance', content_digest(record), record) for record in (control, treatment)]
+                pair = DifferentialConformance(definition=definition, control_conformance_digest=refs[0], treatment_conformance_digest=refs[1])
+                env.differential_conformance_digest = repo.put('differential_conformance', content_digest(pair), pair)
+                env.conformance_digests = {plan.baseline_id: refs[0], plan.candidate_id: refs[1]}
+            bind(*records)
+            with pytest.raises(ConfigurationError, match='operator review'):
+                require_differential(repo, env, plan)
+            repo.review(shared)
+            require_differential(repo, env, plan)
+            env.conformance_digests[plan.baseline_id] = 'b'*64
+            with pytest.raises(ConfigurationError, match='differs'):
+                require_differential(repo, env, plan)
+            bind(records[0].model_copy(update={'effective_inventory': definition.treatment_inventory}), records[1])
+            with pytest.raises(ConfigurationError, match='effective inventory'):
+                require_differential(repo, env, plan)
+            bind(records[0].model_copy(update={'probe_digests': []}), records[1])
+            with pytest.raises(ConfigurationError, match='availability probe'):
+>               require_differential(repo, env, plan)
+
+tests/test_v08_conformance.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/assessment/boundary.py:232: in require_differential
+    require_candidate_access(repository, boundary, expected,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repository = <aeep.assessment.repository.AssessmentRepository object at 0x10d96caa0>
+boundary = BoundaryConformance(schema_version='assessment.boundary-conformance.v2', conformance_id='control', source_digest='4444...bbbbbbbbbbbbbbbbbbbbbbbbb'}, callback_binding_digest=None, native_backend_digest=None, composed_definition_digest=None)
+expected = DifferentialEnvironment(shared_definition_digest='439c02c649c432208d774f951fbf470e8a44b7b3060f04a96494c57b30518ee8', c...ccccccccccccccccccccccccccccccccc'}, candidate_paths=['/opt/plugin'], candidate_aliases=[], candidate_dynamic_tools={})
+
+    def require_candidate_access(repository: AssessmentRepository, boundary: BoundaryConformance,
+                                 expected: DifferentialEnvironment, *, available: bool) -> None:
+        """Bind access observations to the candidate representation and reviewed worker.
+    
+        Callers separately require execution-backed boundary conformance. Dynamic
+        access additionally resolves the actual reviewed declaration; a claimed
+        availability flag cannot stand in for the callback contract.
+        """
+        probes = [BoundaryProbe.model_validate(repository.get("boundary_probe", item))
+                  for item in boundary.probe_digests
+                  if repository.get("boundary_probe", item).get("name") == "candidate_access"]
+        observation: dict[str, str | int | bool] = {
+            "definition_digest": content_digest(expected), "candidate_available": available,
+        }
+        if len(probes) != 1:
+>           raise ConfigurationError("candidate availability requires one exact probe")
+E           aeep.errors.ConfigurationError: candidate availability requires one exact probe
+
+src/aeep/assessment/boundary.py:164: ConfigurationError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-808/test_differential_shared_inven0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d495320>
+
+    async def test_differential_shared_inventory_absence_and_drift(tmp_path, monkeypatch):
+        from test_v08_assessment import setup_assessment
+        from test_v08_incremental import environment
+    
+        from aeep.assessment.boundary import DifferentialConformance, require_differential
+        from aeep.assessment.models import AssessmentEnvironment, IncrementalExperiment, UtilityPolicy
+    
+        router, service, plan, _grant = setup_assessment(tmp_path)
+        repo = service.repository
+        try:
+            env = AssessmentEnvironment(environment_id='differential', kind='codex_sandbox', identity={})
+            require_differential(repo, env, plan)  # Historical comparisons retain their meaning.
+            shared = repo.put('definition', 'shared', ReviewedDefinition(purpose='shared python plus shell'))
+            definition = environment().model_copy(update={'shared_definition_digest': shared})
+            experiment = IncrementalExperiment(stage='qualification', exposure='required', environment=definition,
+                utility=UtilityPolicy(benefit_dimensions=['wall_time_ms'], guardrail_dimensions=['wall_time_ms']))
+            plan = plan.model_copy(update={'schema_version': 'assessment.plan.v4', 'comparison': plan.comparison.model_copy(
+                update={'schema_version': 'assessment.comparison.v2', 'experiment': experiment})})
+            with pytest.raises(ConfigurationError, match='missing'):
+                require_differential(repo, env, plan)
+            # These records test differential validation only. The independent
+            # conformance validator is exercised above with real local probe results.
+            monkeypatch.setattr('aeep.assessment.boundary.require_conformance', lambda *args, **kwargs: None)
+            records = []
+            for role, available, inventory in [('control', False, definition.control_inventory), ('treatment', True, definition.treatment_inventory)]:
+                probe = BoundaryProbe(probe_id=role, name='candidate_access', implementation_digest='1'*64, worker_digest='2'*64,
+                    execution_evidence_digest='3'*64, observed={'definition_digest': content_digest(definition), 'candidate_available': available})
+                probe_ref = repo.put('boundary_probe', role, probe)
+                record = BoundaryConformance(schema_version='assessment.boundary-conformance.v2', conformance_id=role,
+                    source_digest='4'*64, worker_digest='2'*64, image_digest='sha256:'+'5'*64, binary_digest='6'*64,
+                    adapter='fixture', adapter_version='1', effective_policy_digest='7'*64, reviewed_inventory_digest=content_digest(inventory),
+                    identity_digest='8'*64, enforcement_definition_digest='9'*64, advertised_tools=list(inventory), permitted_tools=list(inventory),
+                    used_tools=[], probe_digests=[probe_ref], configuration_digest='a'*64, effective_inventory=inventory)
+                records.append(record)
+            def bind(control, treatment):
+                refs = [repo.put('boundary_conformance', content_digest(record), record) for record in (control, treatment)]
+                pair = DifferentialConformance(definition=definition, control_conformance_digest=refs[0], treatment_conformance_digest=refs[1])
+                env.differential_conformance_digest = repo.put('differential_conformance', content_digest(pair), pair)
+                env.conformance_digests = {plan.baseline_id: refs[0], plan.candidate_id: refs[1]}
+            bind(*records)
+            with pytest.raises(ConfigurationError, match='operator review'):
+                require_differential(repo, env, plan)
+            repo.review(shared)
+            require_differential(repo, env, plan)
+            env.conformance_digests[plan.baseline_id] = 'b'*64
+            with pytest.raises(ConfigurationError, match='differs'):
+                require_differential(repo, env, plan)
+            bind(records[0].model_copy(update={'effective_inventory': definition.treatment_inventory}), records[1])
+            with pytest.raises(ConfigurationError, match='effective inventory'):
+                require_differential(repo, env, plan)
+            bind(records[0].model_copy(update={'probe_digests': []}), records[1])
+>           with pytest.raises(ConfigurationError, match='availability probe'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'availability probe'
+E             Actual message: 'candidate availability requires one exact probe'
+
+tests/test_v08_conformance.py:106: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_conformance.py::test_differential_shared_inventory_absence_and_drift

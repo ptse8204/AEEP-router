@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-10-03T08:14:51.268403+00:00",
+  "authority": "standing finite setup review; correct exact observed host metadata before trials",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "previous_result": "b-worker-components-result.json",
+  "outcome": "failed component inspection; no model turns",
+  "observed_skill": {
+    "name": "spreadsheets:Spreadsheets",
+    "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+    "enabled": true
+  },
+  "diagnosis": "Exact supporting-skill name guard rejects the prepared unqualified name against the observed namespaced catalog identity. No guard weakened. Original collector exception message/stage was not retained in outer result; this confirmed metadata mismatch must be repaired.",
+  "completed_operations": [
+    {
+      "id": "pair-inspection:conformance_probe_c6ecf848c21d43488e8141b97a7e467e",
+      "state": "complete"
+    },
+    {
+      "id": "pair-inspection:conformance_probe_adb7773d9cdf4398a5ce857c9597d68b",
+      "state": "complete"
+    }
+  ],
+  "control_cleanup_confirmed": true,
+  "treatment_inspection_not_reached": true,
+  "proxy_restored_stopped": true,
+  "running_container_ids_after": [],
+  "canonical_grant_after": {
+    "operations": 9229,
+    "model_turns": 2691,
+    "elapsed_seconds": 98807.41053919168,
+    "cash_usd": "0.0",
+    "revoked": 0
+  },
+  "materializer": "b-materialize-profile-v3.py",
+  "materializer_sha256": "fa0f32db3493f05bcbdbbaacff90338eb49a38841f9f10ba8b3368b9bc76b464",
+  "change": "Use spreadsheets:Spreadsheets in both supporting_skills and shared alias inventory; same canonical path, reviewed bytes, workers, image and callback/native identities. New profile and fresh worker requests required.",
+  "old_files_and_costs_preserved": true
+}

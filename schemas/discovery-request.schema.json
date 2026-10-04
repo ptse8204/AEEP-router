@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "discovery.request.v1",
+      "default": "discovery.request.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "public_query": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Public Query",
+      "type": "string"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "limit": {
+      "default": 20,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+    },
+    "cursor": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cursor"
+    },
+    "artifact_types": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Artifact Types",
+      "type": "array"
+    }
+  },
+  "required": [
+    "public_query",
+    "source_ids"
+  ],
+  "title": "DiscoveryRequest",
+  "type": "object"
+}

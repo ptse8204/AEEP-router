@@ -94,9 +94,47 @@ class CodexDynamicTools:
         root = Path(__file__).parents[1]
         names = ('hosts/codex_dynamic_tools.py', 'hosts/codex_app_server.py',
                  'hosts/codex_invocation.py', 'assessment/tools.py',
-                 'assessment/fixed_helper.py', 'router.py')
+                 'assessment/fixed_helper.py', 'router.py', 'profiles.py', 'tasks.py',
+                 'assessment/applicability.py')
         return contract_digest({name: hashlib.sha256((root / name).read_bytes()).hexdigest()
                                 for name in names})
+
+    @staticmethod
+    def profile_behavior(service: Any) -> str | None:
+        """Operator composition pin for an activated profile; never an approval.
+
+        Set identity['capability_profile_behavior_digest'] to this value before
+        storing/reviewing a dynamic binding. Fresh scopes with the same limits
+        can share behavior; their IDs, expiry and used allowances stay separate.
+        Exact profile review and activation are rechecked on every resolution.
+        """
+        from ..assessment.repository import AssessmentRepository
+        from ..models import TaskScope
+        from ..profiles import load
+        from ..tasks import require_activation
+        activation_id = service.router._task_activation_digest
+        if activation_id is None:
+            return None
+        activation = require_activation(service.router, activation_id)
+        if activation.scope_digest != service.router._task_scope_digest:
+            raise ConfigurationError('dynamic profile activation scope differs')
+        if activation.capability_profile_digest is None:
+            return None
+        profile = load(service.router, activation.capability_profile_digest)
+        scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get(
+            'task_scope', activation.scope_digest))
+        return contract_digest({
+            'profile': profile.model_dump(mode='json', exclude={'profile_id', 'scope_digest'}),
+            'scope_contract': scope.model_dump(mode='json', exclude={'scope_id', 'expires_at'}),
+        })
+
+    @classmethod
+    def _require_profile_behavior(cls, service: Any, identity: dict[str, Any]) -> None:
+        current = cls.profile_behavior(service)
+        expected = identity.get('capability_profile_behavior_digest')
+        if current != expected or (expected is not None and (
+                not isinstance(expected, str) or re.fullmatch(r'[a-f0-9]{64}', expected) is None)):
+            raise ConfigurationError('dynamic capability profile behavior is missing or changed')
 
     def require_reviewed_binding(self, repository: Any, *, worker: Any,
                                  service: Any, artifact: Any = None) -> str:
@@ -105,6 +143,7 @@ class CodexDynamicTools:
         from ..economic.prepared import executor_fingerprint
         from ..models import ExecutorKind, TaskScope
         from .codex_sandbox import NativeSandboxConfig, native_backend_digest
+        self._require_profile_behavior(service, self.identity)
         document = repository.get('codex_dynamic_tools', self.digest)
         with repository.store._lock:
             review = repository.store._connection.execute(
@@ -127,7 +166,7 @@ class CodexDynamicTools:
                 continue
             if scope.executor_fingerprints[spec.id] != executor_fingerprint(spec):
                 raise ConfigurationError('dynamic task executor fingerprint differs')
-            service.router._require_active_spec(spec)
+            service.router._require_active_spec(spec, configuration_only=True)
             boundary = NativeSandboxConfig.model_validate(spec.config.get('native_sandbox', {}))
             if spec.kind is not ExecutorKind.COMMAND or not spec.config.get('argv_literal') or not boundary.single_process:
                 raise ConfigurationError('dynamic task composition requires the exact native single-process backend')
@@ -149,6 +188,7 @@ class CodexDynamicTools:
         from ..mcp.server import AEEPToolService
         if not isinstance(service, (AEEPToolService, FixedHelperService)) or service.profile != 'task' or service.router._task_scope_digest is None:
             raise ConfigurationError('dynamic task tools require a bound task-only service')
+        cls._require_profile_behavior(service, identity)
         if identity.get("approval_ceiling") != service.approved_side_effect.value:
             raise ConfigurationError("dynamic task service ceiling differs")
         from ..assessment.repository import AssessmentRepository
@@ -164,9 +204,10 @@ class CodexDynamicTools:
             raise ConfigurationError("dynamic task limits exceed scope")
         declared = service.list_tools()
         def current() -> str:
+            cls._require_profile_behavior(service, identity)
             for spec in service.router.registry.all():
                 if spec.id in scope.executor_fingerprints:
-                    service.router._require_active_spec(spec)
+                    service.router._require_active_spec(spec, configuration_only=True)
             if service.list_tools() != declared or service.approved_side_effect.value != identity["approval_ceiling"]:
                 raise ConfigurationError('dynamic task declarations changed')
             return check()
@@ -325,3 +366,20 @@ class DynamicToolSession:
                 self.tools_succeeded.add(params['tool'])
             return {'success': result.get('isError') is not True,
                     'contentItems': [{'type': 'inputText', 'text': text}]}
+
+
+def _profile_binding_self_check() -> None:
+    """Data-only invariant: an unprofiled service cannot claim a profile pin."""
+    from types import SimpleNamespace
+    service = SimpleNamespace(router=SimpleNamespace(_task_activation_digest=None))
+    CodexDynamicTools._require_profile_behavior(service, {})
+    try:
+        CodexDynamicTools._require_profile_behavior(service, {
+            'capability_profile_behavior_digest': '0' * 64})
+    except ConfigurationError:
+        return
+    raise AssertionError('unprofiled service accepted a profile behavior claim')
+
+
+if __name__ == '__main__':
+    _profile_binding_self_check()

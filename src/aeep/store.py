@@ -1433,6 +1433,7 @@ class ReceiptStore:
             "enforcement_definition", "reviewed_inventory", "differential_conformance",
             "grader_validation", "utility_policy", "pilot_policy",
             "shared_environment", "shared_environment_definition",
+            "capability_profile",
         }
         by_digest: dict[str, list[sqlite3.Row]] = {}
         by_identity: dict[tuple[str, str], str] = {}
@@ -1461,7 +1462,7 @@ class ReceiptStore:
             "plan_digest", "campaign_digest", "recipe_case_set_digest",
             "execution_evidence_digest", "enforcement_definition_digest",
             "effective_policy_digest", "reviewed_inventory_digest", "scope_digest",
-            "activation_digest", "definition_digests", "probe_digests",
+            "activation_digest", "capability_profile_digest", "definition_digests", "probe_digests",
             "conformance_digests", "differential_conformance_digest",
             "operation_ledger_digest", "grader_validation_digest",
         }

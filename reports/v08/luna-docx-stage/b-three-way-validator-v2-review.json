@@ -1,0 +1,57 @@
+{
+  "schema_version": "assessment.b-three-way-validator-v2-review.v1",
+  "status": "static_review_complete",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "source_review": {
+    "files": [
+      "src/aeep/assessment/comparison.py",
+      "src/aeep/assessment/boundary.py",
+      "src/aeep/assessment/models.py",
+      "tests/test_v08_three_way.py"
+    ],
+    "findings": [
+      "The aeep_value stage allows the normal supporting-skill tuple only as an exact subset of discovery skills keyed by path; candidate support remains equal to discovery support. Other stages retain the prior equality rule.",
+      "The aeep_value comparison gate checks all three worker pairs for independence. The experiment model restricts this stage to one normal challenger and disallows the historical higher-compute/reusable arms, so the new pairwise rule does not alter historical four-arm experiments.",
+      "The three-way boundary gate binds all role IDs to reviewed mapping specs, current conformance records, worker/configuration digests, and role inventories. Dynamic candidate target is checked against the actual invocation for each role. The service preflight also runs differential validation, which checks exact baseline/treatment candidate-access probes and reviewed candidate declarations, before requiring the three-way gate.",
+      "External inventory is value-equal to a subset of discovery inventory and disjoint from the candidate delta. Normal and discovery inventories are disjoint, so every accepted external entry is absent from normal. Each discovery skill omitted from normal must additionally appear as skill:<name> with that skill's exact SHA-256. Additional discovery-backed external entries are intentionally allowed; omitted-skill equality is not the whole external inventory contract."
+    ],
+    "tests": {
+      "coverage_observed": "The current focused tests cover an allowed omitted skill, a missing omitted-support binding, a wrong skill digest, an external entry already present in normal, and normal-skill subset violations.",
+      "execution_status": "Root reports 30 focused three-way tests passing. I did not run tests because the repository validation session is active."
+    },
+    "runtime_review": false,
+    "blocking_findings": []
+  },
+  "report_local_copies": {
+    "collector": {
+      "path": "reports/v08/luna-docx-stage/b-composed-worker-collector-v2.py",
+      "sha256": "575d04b2000004ffbaa06d00e3e73f2b55b84839eaf83fc3ec79adecc8941f97",
+      "source_pin": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+      "common_inventory": "Exactly the Spreadsheets descriptor digest plus skill:<aliasName> mapped to the measured canonical skill SHA. The physical probe first verifies the measured SHA equals the reviewed descriptor; the observed common map is then compared with the reviewed component and used to form role effective inventory."
+    },
+    "assembler": {
+      "path": "reports/v08/luna-docx-stage/b-current-profile-assembler-v2.py",
+      "sha256": "779e82268861ab8db604fa6573c6fe084e73d8bb34655a523cc3baabe1efa84d",
+      "source_pin": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+      "common_inventory": "The pure two-role assembly records the reviewed expected descriptor and skill SHA. Its output continues to mark shared physical inventory as unobserved; only the separate worker collector can report the observed common inventory."
+    },
+    "preserved_originals": {
+      "collector": "reports/v08/luna-docx-stage/b-composed-worker-collector.py",
+      "collector_sha256": "fd74eaf373377ec6572b45a521b3212719c5f5a3929ecfa4011e2245d363f9ae",
+      "assembler": "reports/v08/luna-docx-stage/b-current-profile-assembler.py",
+      "assembler_sha256": "0191ad8f6a0a84c4c254361a6de0354fa599b28f0efd997f0247ec7fd28e9d6f"
+    }
+  },
+  "static_checks": {
+    "collector_ast_parse": "pass",
+    "assembler_ast_parse": "pass",
+    "both_have_main_entrypoint": false,
+    "source_or_test_files_edited_by_this_review": false,
+    "imports_runtime_models_workers_docker_or_canonical_state_touched": false,
+    "model_or_worker_execution_performed": false
+  },
+  "limits": [
+    "The two v2 report-local copies are inert preparation, not three-role conformance, qualification, or value evidence.",
+    "No run, import, test, Docker operation, model call, grant operation, or canonical database write was performed."
+  ]
+}

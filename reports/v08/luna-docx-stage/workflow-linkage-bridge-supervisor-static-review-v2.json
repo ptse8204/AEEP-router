@@ -1,0 +1,91 @@
+{
+  "status": "static_review_complete_fake_self_check_passed_execution_deferred",
+  "execution_authorized": false,
+  "reviewer": "Luna/xhigh",
+  "supersedes_review": "workflow-linkage-bridge-supervisor-static-review.json",
+  "supervisor_path": "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py",
+  "supervisor_sha256": "bfe09ad43e49b9e552410028280d637391ac11c4aed2646a29600b5676aaf5d1",
+  "runner_path": "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py",
+  "runner_sha256": "59d768579bceab6adffb3f09cac7adce2b4eb3e859c16187089ff7ba8460335c",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "assessment_testing_path": "docs/ASSESSMENT_TESTING.md",
+  "assessment_testing_sha256": "c0448f7ecacfdb5392cf9c5bbe06c971a1ebe460f9e159f7c5ee22b88884e997",
+  "review_pins": {
+    "runner_review_sha256": "28bc12cc2c7a16f39483395fc2249ec97590b7924a853a019f84dbecd09bf832",
+    "root_static_review_sha256": "a12b5760351b912e2b0dd91068d3f4692be7222c12e45ceb5891802e680274c6",
+    "campaign_terminal_record_path": "reports/v08/luna-docx-stage/successor-qualification-terminal.json",
+    "campaign_terminal_record_sha256": "0ce50cefa63205a0ac27a86807286f3936b96c22b91a92fbb8dd40c6a6dad6ef",
+    "campaign_result_path": "reports/v08/luna-docx-stage/successor-qualification-result.json",
+    "campaign_result_sha256": "f6560524c6e4de43046ab09c777bd05e1827b74bfc9b99c190a9965ccb911971",
+    "future_execution_review_path": "reports/v08/luna-docx-stage/workflow-linkage-bridge-execution-review.json"
+  },
+  "campaign_terminal_context": {
+    "assessment_id": "assessment_b7304a6d072c4aae98e45839200e9055",
+    "qualification_status": "correctness_failed",
+    "qualification_passed": false,
+    "canonical_outcome": "unsuitable",
+    "trial_counts": {
+      "total": 141,
+      "passes": 137,
+      "correctness_failures": 2,
+      "invocation_timeouts": 2,
+      "distinct_holdout_cases": 105,
+      "holdout_passes": 101
+    },
+    "cleanup_verified": true,
+    "downstream_value_authorized_by_this_campaign": false
+  },
+  "static_checks": {
+    "ruff": {
+      "command": "ruff check reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py",
+      "result": "passed"
+    },
+    "ast_parse": {
+      "command": "python3 -c 'import ast; from pathlib import Path; ast.parse(Path(\"reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py\").read_text())'",
+      "result": "passed; no project code imported"
+    }
+  },
+  "self_check": {
+    "command": "python3 reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py --self-check",
+    "bounded_by_seconds": 10,
+    "result_record": "reports/v08/luna-docx-stage/workflow-linkage-bridge-supervisor-self-check-rerun-04/result.json",
+    "result_record_sha256": "185caa07af8697a9f80f2e23d394c25eb255589b90e212c91e291fe2c622b4c3",
+    "exit_code": 0,
+    "elapsed_seconds": 0.844,
+    "stdout_sha256": "431fc5a166016a1a22a3d7b00a9e43873c5876084207b45feaa62989d24c353c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "assertions": [
+      "fake worker success and matching temporary-directory records",
+      "fake timeout and observed descendant cleanup",
+      "unrelated process survives and is absent from tracked identities",
+      "no protocol issue in either fake path"
+    ],
+    "resource_check": "No matching fake sleeper process or aeep-supervisor-self-check temporary directory remained after completion.",
+    "scope": "Fake subprocesses only; zero model turns, no canonical grant mutation, no source change, no real bridge/Docker/model execution."
+  },
+  "failure_diagnosis": {
+    "initial_record": "reports/v08/luna-docx-stage/workflow-linkage-bridge-supervisor-self-check.json",
+    "initial_stderr_sha256": "7917434b5b5ac0b0a601eb9b08e985ac2ea26cb9cfd78b3e854c3131ab3208a6",
+    "diagnostic_rerun_stderr_sha256": "38a7b87a9e1bb3072c897b3161c9025ccb972ca18cb82dcdc90c03a07cdf9e81",
+    "reproduction": "The timeout fixture's parent received the supervisor's intentional SIGINT without handling KeyboardInterrupt; Python wrote a traceback to the merged output pipe, correctly setting protocol_issue=non_json_output. The process-count and cleanup checks had otherwise passed.",
+    "correction": "The fake timeout parent catches its expected KeyboardInterrupt. The timeout path still requires protocol_issue=null; no production protocol tolerance was added.",
+    "retained_diagnostic": "reports/v08/luna-docx-stage/workflow-linkage-bridge-supervisor-self-check-rerun-02/result.json",
+    "superseded_diagnostic_pass": "rerun-03 passed only after temporarily permitting non_json_output and is explicitly excluded from final validation; its files are retained."
+  },
+  "reviewed_contract": {
+    "campaign_gate": "Execution requires a fresh explicitly hashed approval bound to this supervisor, runner, terminal campaign record, exact result hash, correctness_failed qualification status and verified cleanup.",
+    "source_integrity": "Rehashes source after the child exits and fails closed on a changed or unavailable digest.",
+    "child_protocol": "A successful supervisor result requires protocol_issue=null, both started and terminal records, and an identical temporary_directory in both records.",
+    "cleanup": "Pre-cleanup observation exceptions still force cleanup; exceptional cleanup escalates to exact PID/create_time identities before descriptor closure.",
+    "limitations": "Observed-process cleanup is not proof of complete containment; polling cannot detect every detached or missed child, and sampled temporary-tree size is not a filesystem quota."
+  },
+  "source_refs": [
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:103-138",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:341-377",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:446-489",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:556-592",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:597-669",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py:494-538"
+  ],
+  "runtime_validation": "The real bridge remains unrun pending a fresh execution review for the final supervisor SHA."
+}

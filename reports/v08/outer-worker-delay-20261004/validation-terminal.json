@@ -1,0 +1,294 @@
+{
+  "status": "passed",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+  "temporary_directory": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-delay-validation-20261004-2akd944i",
+  "initial_full_suite": {
+    "log": "06-pytest.log",
+    "result": "1 failed, 1218 passed, 21 skipped; required README status marker restored and targeted version test rerun; full coverage suite rerun follows"
+  },
+  "commands": [
+    {
+      "name": "01-compile",
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.07955462508834898,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "02-schemas",
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.7326735001988709,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "03-policy",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.20504149980843067,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "04-ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "examples"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.012946041068062186,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "05-mypy",
+      "argv": [
+        "mypy",
+        "src"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 1.3883255410473794,
+      "log_sha256": "1aeeb2c4ee773199b40b81ab2a64c281afac8e659d6eebc9152450ab548c15ac"
+    },
+    {
+      "name": "06-version-correction",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-ra",
+        "tests/test_version_consistency.py"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.5653719590045512,
+      "log_sha256": "cdf8d13a3f141b449c7d92c9b86d6fd681de17445a1d661236b92f93860eafac"
+    },
+    {
+      "name": "07-coverage-run",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 819.3687625830062,
+      "log_sha256": "aae9797180988f97dda5f9dabc7597dc767fa3267f13702ac299e78c1b1b4ed7"
+    },
+    {
+      "name": "08-coverage-report",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 1.1942807079758495,
+      "log_sha256": "ff30b07848b476979b85ee0cb02b9ffecefc2e0d41b7bf10b6564ecbcb465b2e"
+    },
+    {
+      "name": "09-coverage-json",
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "reports/v08/outer-worker-delay-20261004/coverage.json"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 1.6328873748425394,
+      "log_sha256": "c4d3f57110612b90b9d49d7e7a095622325f720194020f4db20fb3990b9217ec"
+    },
+    {
+      "name": "10-critical",
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/outer-worker-delay-20261004/coverage.json"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.04894995898939669,
+      "log_sha256": "77549615bf1bb3ab5751ae24e057d4e330285911f054e5cf5a7d7adcca526a33"
+    },
+    {
+      "name": "11-assessment-coverage",
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/outer-worker-delay-20261004/coverage.json"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.04780791699886322,
+      "log_sha256": "160837997aa51a888fa283d16e07a946f4707fbb491b66963ba1750df5dda06e"
+    },
+    {
+      "name": "12-supplemental",
+      "argv": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.4468637921381742,
+      "log_sha256": "ca3689caf6fbaf8433095ab3dc9d3581e61bc0b99b8a1d363a525047f7ae00a4"
+    },
+    {
+      "name": "13-supplemental",
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.43602262483909726,
+      "log_sha256": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8"
+    },
+    {
+      "name": "14-supplemental",
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.4333309589419514,
+      "log_sha256": "e248519aba472a0a75510e4608782ec06b5aeb4acace9d6c8630d7651f403d92"
+    },
+    {
+      "name": "15-supplemental",
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.4350674159359187,
+      "log_sha256": "0453ab8103b70437b3a29632b4e660496d03e8f5c1dc14950f242b4274f51c4d"
+    },
+    {
+      "name": "16-supplemental",
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.4281075829640031,
+      "log_sha256": "a3514433ddfe1f8c6219ed94832c1d238be5ad0994e0df3d1f4d8ebc3a5e1be9"
+    },
+    {
+      "name": "17-supplemental",
+      "argv": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.43151549994945526,
+      "log_sha256": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8"
+    },
+    {
+      "name": "18-supplemental",
+      "argv": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "reports/v08/outer-worker-delay-20261004/isolated-provider-package/aeep-provider.yaml",
+        "-m",
+        "reports/v08/outer-worker-delay-20261004/isolated-provider-package/aeep.yaml",
+        "--compact"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.4958904171362519,
+      "log_sha256": "49deafc28b1b8f2b5fce359c8d6ad01b381de7b2f2f9e551db239143e00b3692"
+    },
+    {
+      "name": "19-supplemental",
+      "argv": [
+        "npm",
+        "--prefix",
+        "integrations/dsh-aeep-router",
+        "test"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 1.1610918331425637,
+      "log_sha256": "9247ab2ca0b5112f0983f16e53a07782daf8e3759fd9be24a27dd0cbd902f0a7"
+    },
+    {
+      "name": "20-supplemental",
+      "argv": [
+        "python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "reports/v08/outer-worker-delay-20261004/package-build-output"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 1.8149479168932885,
+      "log_sha256": "3fc12c4689cd746dec63ea3951f2e4adeef32ce424c28cbd09b73b398a116e79"
+    },
+    {
+      "name": "21-supplemental",
+      "argv": [
+        "python3",
+        "reports/v08/luna-b-three-role-validation-20261003/check_router_completion_artifacts.py"
+      ],
+      "returncode": 0,
+      "guard": null,
+      "elapsed_seconds": 0.048705833964049816,
+      "log_sha256": "4d8a30005483e76e263f3fdff7ddc246e3e4c6d0ef77028983f28c8e5c2ce4ed"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "aeep.docx-image-build-plan.v1",
+  "status": "prepared_only_no_download_or_build",
+  "candidate": {
+    "upstream": "benchflow-ai/skillsbench",
+    "commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "task": "tasks/offer-letter-generator",
+    "skill_path": "tasks/offer-letter-generator/environment/skills/docx/SKILL.md",
+    "skill_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/environment/skills/docx/SKILL.md",
+    "skill_sha256": "65c3442f51953a6b987e8aefa9abcb458f110344e80cc16c7c7efb931a13efea",
+    "skill_bytes": 7869,
+    "repository_license": "Apache-2.0",
+    "task_dockerfile_sha256": "5ffb0d7fecb51602aad769604cf637b0de3411b8e983eb4bf202ff04838f539a",
+    "task_dependency": "python-docx==1.1.2"
+  },
+  "common_base": {
+    "tag": "aeep-sol61-successor-control:1592",
+    "image_id": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+    "repo_digest": "aeep-sol61-successor-control@sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+    "architecture": "linux/arm64",
+    "shared_preexisting_packages": {
+      "pandas": "2.3.2",
+      "openpyxl": "3.1.5"
+    },
+    "reason": "plain successor control image; excludes existing Spreadsheets treatment profile"
+  },
+  "packages": [
+    {
+      "name": "python-docx",
+      "version": "1.1.2",
+      "filename": "python_docx-1.1.2-py3-none-any.whl",
+      "sha256": "08c20d6058916fb19853fcf080f7f42b6270d89eac9fa5f8c15f691c0017fabe",
+      "size": 244315,
+      "url": "https://files.pythonhosted.org/packages/3e/3d/330d9efbdb816d3f60bf2ad92f05e1708e4a1b9abe80461ac3444c83f749/python_docx-1.1.2-py3-none-any.whl",
+      "license": "MIT"
+    },
+    {
+      "name": "lxml",
+      "version": "5.4.0",
+      "filename": "lxml-5.4.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "sha256": "cccd007d5c95279e529c146d095f1d39ac05139de26c098166c4beb9374b0f4d",
+      "size": 4760915,
+      "url": "https://files.pythonhosted.org/packages/92/1f/93e42d93e9e7a44b2d3354c462cd784dbaaf350f7976b5d7c3f85d68d1b1/lxml-5.4.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.15.0",
+      "filename": "typing_extensions-4.15.0-py3-none-any.whl",
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "size": 44614,
+      "url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "license": "See wheel dist-info/licenses"
+    }
+  ],
+  "context": {
+    "dockerfile": "reports/v08/luna-docx-stage/image-context/Dockerfile.docx",
+    "requirements_lock": "reports/v08/luna-docx-stage/image-context/requirements-docx.lock",
+    "skill_file": "reports/v08/luna-docx-stage/image-context/docx/SKILL.md",
+    "output_tags": {
+      "control": "aeep-skillsbench-docx-control:luna-xhigh-20261002",
+      "treatment": "aeep-skillsbench-docx-treatment:luna-xhigh-20261002"
+    },
+    "treatment_delta": "one exact SKILL.md file plus /etc/codex/skills/docx alias; no executable/helper or task/reference assets"
+  },
+  "resource_and_grant_bounds": {
+    "current_grant_id": "onboarding",
+    "new_operation_reservation": 1,
+    "maximum_model_turns": 0,
+    "cash_usd": 0,
+    "maximum_elapsed_seconds": 600,
+    "maximum_seconds_per_image": 180,
+    "maximum_host_disk_growth_bytes": 3000000000,
+    "required_host_free_bytes_before": 53687091200,
+    "download_bytes_exact": 5049844,
+    "docker_build_network": "none",
+    "pull": false,
+    "platform": "linux/arm64",
+    "source_binding": "Create a fresh current-source setup request after source/tests freeze. Historic worker1592 setup.py binds obsolete source f55ebe5c\u2026; do not replay it.",
+    "no_state_reset_or_cleanup": "Preserve canonical DB counters, old images, proxy and all unknown resources.",
+    "capacity_measure": "macOS important-usage available capacity; preserve 50 GiB reserve plus 3 GB setup allowance; record already-free bytes separately"
+  },
+  "verification_sources": {
+    "python_docx_metadata": "https://pypi.org/pypi/python-docx/1.1.2/json",
+    "lxml_metadata": "https://pypi.org/pypi/lxml/5.4.0/json",
+    "typing_extensions_metadata": "https://pypi.org/pypi/typing_extensions/4.15.0/json",
+    "all_wheel_hashes": "Read from official PyPI JSON metadata; no wheel contents downloaded."
+  }
+}

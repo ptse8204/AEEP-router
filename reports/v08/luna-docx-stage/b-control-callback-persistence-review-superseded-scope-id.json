@@ -1,0 +1,49 @@
+{
+  "schema_version": "assessment.b-control-callback-persistence-review.v1",
+  "recorded_at": "2026-10-03T10:06:59.971474+00:00",
+  "authority": "standing September25/27 finite assessment delegation",
+  "persistence_authorized": true,
+  "execution_authorized": false,
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "preparation_sha256": "6706501fe689d1cff840d18178850dd226264dd7a1804d20ce1a7f25fec927f0",
+  "preparer_sha256": "ba10fbf83acc3714c55f52391e2a9026ad4539bc8e36d9451fcf1658e3022f39",
+  "request_id": "conformance_probe_50f0878708064724a3a0c24d02d9d55d",
+  "request_digest": "215318b580b51912903b279e1fe6f8e89e30a43161440c55a1b38eaf24c15f2e",
+  "records_reviewed": [
+    {
+      "kind": "boundary_probe_definition",
+      "digest": "ab6304120c48de8259092c5442feef9ddbb67c6a56e8cf4ddf547daddbcbc2ae"
+    },
+    {
+      "kind": "composed_callback_action",
+      "digest": "c15e068c2461210b717a67f9a89ba1d41accc3079e08951ed916e0f17c0220c5"
+    },
+    {
+      "kind": "b_callback_fixture_binding",
+      "digest": "87c9d3165fc461b0678bdf15a601fdaaf8bb453f1a541528def72a91a8b4b1c0"
+    },
+    {
+      "kind": "b_callback_capacity_binding",
+      "digest": "901a51d84e2adf4f0c3bc6d980999fcf6493b41827267db1a6ff35c101e1ea04"
+    },
+    {
+      "kind": "b_control_task_scope_binding",
+      "digest": "1f2af24bc5fd9f9650c29ccebdd09e0e0191efdbe0d0f3540a6158fc96f2679d"
+    },
+    {
+      "kind": "conformance_request",
+      "digest": "215318b580b51912903b279e1fe6f8e89e30a43161440c55a1b38eaf24c15f2e"
+    }
+  ],
+  "limits": {
+    "cash_usd": 0,
+    "elapsed_seconds": 208.0,
+    "model_turns": 1,
+    "operations": 1,
+    "task_call_timeout_seconds": 10.0,
+    "task_calls": 1,
+    "task_scope_attempts": 1
+  },
+  "persistence_method": "Parent exact atomic existing-schema SQLite transaction; reuse only identical already-reviewed shared fixture binding. Other proposed one-shot records must be absent. Avoid Router initialization.",
+  "helper_limitation": "Unused preparer _persist rejects the intentionally shared existing fixture after earlier individual writes. Parent detected this before invoking it; no partial persistence occurred."
+}

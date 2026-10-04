@@ -1,0 +1,308 @@
+{
+  "accounting": {
+    "operation_totals_by_stage": {
+      "capacity_introspection": {
+        "count": 1,
+        "elapsed_seconds_total": 1.935242,
+        "measured": 1,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "generation_and_proposal": {
+        "count": 1,
+        "elapsed_seconds_total": 0.076118,
+        "measured": 1,
+        "resource_vectors_present": 1,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "grader_probe": {
+        "count": 6,
+        "elapsed_seconds_total": 11.119526,
+        "measured": 6,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 6
+        },
+        "unmeasured": 0
+      },
+      "grader_reference": {
+        "count": 2,
+        "elapsed_seconds_total": 4.373344,
+        "measured": 2,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 2
+        },
+        "unmeasured": 0
+      },
+      "grader_validation": {
+        "count": 1,
+        "elapsed_seconds_total": 0.304556,
+        "measured": 1,
+        "resource_vectors_present": 1,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "recipe_grading": {
+        "count": 136,
+        "elapsed_seconds_total": 240.260727,
+        "measured": 136,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 136
+        },
+        "unmeasured": 0
+      },
+      "report_generation": {
+        "count": 1,
+        "elapsed_seconds_total": 0.044729,
+        "measured": 1,
+        "resource_vectors_present": 1,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "reviewed_proxy_cleanup": {
+        "count": 1,
+        "elapsed_seconds_total": 2.718656,
+        "measured": 1,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "reviewed_proxy_setup": {
+        "count": 1,
+        "elapsed_seconds_total": 0.260251,
+        "measured": 1,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      },
+      "router_setup": {
+        "count": 142,
+        "elapsed_seconds_total": 25.328634,
+        "measured": 142,
+        "resource_vectors_present": 142,
+        "states": {
+          "complete": 142
+        },
+        "unmeasured": 0
+      },
+      "trial": {
+        "count": 141,
+        "elapsed_seconds_total": 8137.389889,
+        "measured": 141,
+        "resource_vectors_present": 141,
+        "states": {
+          "complete": 141
+        },
+        "unmeasured": 0
+      },
+      "workbook_storage_docker_preflight": {
+        "count": 2,
+        "elapsed_seconds_total": 2.143385,
+        "measured": 2,
+        "resource_vectors_present": 0,
+        "states": {
+          "complete": 2
+        },
+        "unmeasured": 0
+      },
+      "workbook_trial_task_scopes": {
+        "count": 1,
+        "elapsed_seconds_total": 0.050409,
+        "measured": 1,
+        "resource_vectors_present": 1,
+        "states": {
+          "complete": 1
+        },
+        "unmeasured": 0
+      }
+    },
+    "other_or_unlinked_reserved": 2,
+    "reserved_by_plan_id": {
+      "conformance_probe_85882b1252ac409aa073fcb3c33b87bb": 1,
+      "plan_e915d9d5be214924859f7579a8bca5f0": 1
+    },
+    "reviewed_setup_operations": {
+      "capacity": {
+        "elapsed_seconds": 1.9352416670881212,
+        "grant_id": "onboarding",
+        "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-capacity-snapshot-v3",
+        "present": true,
+        "reserved_max_elapsed_seconds": 60.0,
+        "reserved_max_operations": 1,
+        "stage": "capacity_introspection",
+        "state": "complete"
+      },
+      "preflight": {
+        "elapsed_seconds": 2.0615646250080317,
+        "grant_id": "onboarding",
+        "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-storage-docker-preflight-v3",
+        "present": true,
+        "reserved_max_elapsed_seconds": 30.0,
+        "reserved_max_operations": 1,
+        "stage": "workbook_storage_docker_preflight",
+        "state": "complete"
+      },
+      "proxy_start": {
+        "elapsed_seconds": 0.26025054208002985,
+        "grant_id": "onboarding",
+        "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-proxy-start-v3",
+        "present": true,
+        "reserved_max_elapsed_seconds": 60.0,
+        "reserved_max_operations": 1,
+        "stage": "reviewed_proxy_setup",
+        "state": "complete"
+      },
+      "proxy_stop": {
+        "elapsed_seconds": 2.718655708944425,
+        "grant_id": "onboarding",
+        "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-proxy-stop-v3",
+        "present": true,
+        "reserved_max_elapsed_seconds": 60.0,
+        "reserved_max_operations": 1,
+        "stage": "reviewed_proxy_cleanup",
+        "state": "complete"
+      },
+      "scope_preparation": {
+        "elapsed_seconds": 0.05040912516415119,
+        "grant_id": "onboarding",
+        "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-task-scope-preparation-v1",
+        "present": true,
+        "reserved_max_elapsed_seconds": 600.0,
+        "reserved_max_operations": 1,
+        "stage": "workbook_trial_task_scopes",
+        "state": "complete"
+      }
+    },
+    "selected_plan_operation_count": 436,
+    "selected_plan_reserved": 0,
+    "unsettled_or_unmeasured": 0,
+    "whole_system_cost_complete": false
+  },
+  "admission": {
+    "authorization_disables_automatic_admission": false,
+    "candidate_marker_count_after": 0,
+    "candidate_record_count_after": 0,
+    "no_candidate_admission_observed_after": true,
+    "pre_run_snapshot_available": false,
+    "review_disables_admission": true,
+    "runner_asserted_unchanged": true
+  },
+  "audit_status": "terminal_metadata_reconciled_with_open_gaps",
+  "audited_at_utc": "2026-10-03T15:57:32.018289+00:00",
+  "canonical": {
+    "campaign_digest": "5d0c1def1bf2061e667c0ce1d6fb4f254fda68dde16ab5d3802424b9ac32e6a1",
+    "campaign_trial_count": 141,
+    "correctness_failures": 0,
+    "execution_failures": 5,
+    "grader_validation_present": true,
+    "job_state": "complete",
+    "measurement_coverage": {
+      "local.cpu_ms": "0/141",
+      "local.gpu_ms": "0/141",
+      "local.memory_mb_seconds": "0/141",
+      "local.network_bytes": "0/141",
+      "model.openai.gpt-6-luna.subscription.cache_write_input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.cached_input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.input_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.output_tokens": "0/141",
+      "model.openai.gpt-6-luna.subscription.reasoning_output_tokens": "0/141",
+      "subscription.openai.codex.self.provider_unit": "0/141"
+    },
+    "operation_ledger_count": 484,
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "report_digest": "df1cdbeeeb745bacb1dd1143b635413cf986ea75bdff5ea82bdb0d31b89764cb",
+    "report_id": "fit_c1b3933c5a14423d80c8f34ca3a58f7f"
+  },
+  "cleanup": {
+    "host_worker_process_state": "not independently checked here",
+    "proxy_stopped_state": "not checked here; parent performs read-only Docker inspection",
+    "runner_coordinator_closed_claim": true,
+    "runner_owned_capacity_worker_cleanup_claim": true,
+    "runner_proxy_cleanup_accounting_claim": true,
+    "runner_proxy_restored_claim": true,
+    "scope_index": {
+      "digest_matches_result": true,
+      "operation_id": "plan_143001e5f4be4fd9b17f78d797340b70:workbook-task-scope-preparation-v1",
+      "plan_id_matches": true,
+      "present": true,
+      "scope_count": 141,
+      "sha256": "0d7771514b600699d4373f1cbc2d94285357420e296c1b66a80a84621d21e626"
+    }
+  },
+  "gaps": [
+    "review/authorization does not establish disabled admission",
+    "no retained pre-run admission-row snapshot; a change cannot be independently reconstructed",
+    "proxy stopped state and host-worker cleanup require separate read-only Docker/host verification",
+    "whole-system cost completeness remains unproven; preserve the report coverage map as authoritative"
+  ],
+  "identity": {
+    "assessment_id": "assessment_a9369479529649cdab7a21b971dbabbc",
+    "baseline_id": "b.luna.discovery",
+    "candidate_id": "b.luna.aeep",
+    "case_set_digest": "0117a882ee59ca0c6cd2f4906d15110a8241949b48656bf62d07222d9fc89d87",
+    "plan_digest": "59b0d2a4516098eb4a04b454f5a95f12da2795ba3e3a5b4a39c76d36164179ac",
+    "plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+    "result_sha256": "2e2f83c0d110035f4d1919df686d85ae868f634f8afdb60b1d4a4cff41bbdf8c",
+    "review_sha256": "08cf5715c2d8dc8548d4f0f9efbbc27ffc3dc1d6a6c8db412fa0ec52756087d1"
+  },
+  "qualification": {
+    "campaign_trial_count": 141,
+    "model_usage_complete_trials": 136,
+    "outcomes_by_split": {
+      "holdout": {
+        "passed": 101,
+        "timeout": 4
+      },
+      "qualification": {
+        "passed": 8
+      },
+      "training": {
+        "passed": 27,
+        "timeout": 1
+      }
+    },
+    "predeclared_timeout_floor_met": true,
+    "qualification_must_remain_failed": true,
+    "runner_status": "failed",
+    "split_totals": {
+      "holdout": 105,
+      "qualification": 8,
+      "training": 28
+    },
+    "timeouts_by_split": {
+      "holdout": 4,
+      "qualification": 0,
+      "training": 1
+    },
+    "trial_operation_count_total": 141,
+    "trial_state_counts": {
+      "complete": 141
+    },
+    "value_admission_and_normal_worker_setup_allowed": false
+  },
+  "read_method": {
+    "Docker_or_live_trial_commands_run": false,
+    "canonical_state_mutated": false,
+    "database_mode": "SQLite URI mode=ro",
+    "selected_metadata_only": true,
+    "task_input_output_answer_receipt_or_auth_read_or_emitted": false
+  },
+  "schema_version": "aeep.c-workbook-qualification-terminal-audit.v1"
+}

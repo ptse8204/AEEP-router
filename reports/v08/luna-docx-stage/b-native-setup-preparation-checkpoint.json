@@ -1,0 +1,29 @@
+{
+  "source_digest": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "status": "inert definitions prepared; execution on hold pending further three-role validator changes",
+  "review_path": "b-native-setup-review.json",
+  "review_sha256": "8811b51e44cfe6354cfe5be76ecefc6d975fa70fa4966eba11a75429882b8e81",
+  "prepare_command": "PYTHONPATH=src python3 reports/v08/luna-docx-stage/b-native-setup.py prepare",
+  "first_attempt": {
+    "outcome": "rejected before opening canonical Router",
+    "reason": "ManagedWorkerBinding permits reviewed immutable files only under /opt; attempted /etc skill alias pin was invalid.",
+    "correction": "Keep canonical /opt pin; independently verify alias resolution in later physical worker observations."
+  },
+  "second_attempt": {
+    "exit_code": 0,
+    "request_id": "conformance_probe_65d3e21b102142ef996f8a901df18c74",
+    "inert_definition_count": 8
+  },
+  "grant_unchanged": {
+    "operations": 9222,
+    "model_turns": 2691,
+    "elapsed_seconds": 98786.14704452548,
+    "cash_usd": "0.0",
+    "revoked": 0
+  },
+  "project_created": false,
+  "scope_review_committed": false,
+  "reservation_created": false,
+  "workers_or_models_launched": false,
+  "future_action": "Preserve this historical source-bound review. Prepare a new request/file after the final source is frozen; do not execute or silently repin this exact review."
+}

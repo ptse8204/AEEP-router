@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-10-03T13:08:58.179273+00:00",
+  "status": "pre_execution_storage_check_failed",
+  "generator_started": false,
+  "operation_reserved": false,
+  "case_set_created": false,
+  "model_turns": 0,
+  "request_id": "recipe_generation_fba076846c6c42abb85d72cb67c820f5",
+  "original_review_sha256": "18fd460cc29b84f925ac1233907fb1751bfe7980a4b4998702c15ea083407e06",
+  "original_snapshot_bytes_upper": 10491912,
+  "actual_storage": {
+    "snapshot_bytes_upper": 10500128,
+    "snapshot_file_components_before_close": {
+      "c-materialization-scoped-snapshot-sample.sqlite3": 5193728,
+      "c-materialization-scoped-snapshot-sample.sqlite3-wal": 5273632,
+      "c-materialization-scoped-snapshot-sample.sqlite3-shm": 32768
+    },
+    "snapshot_file_components_after_close": {
+      "c-materialization-scoped-snapshot-sample.sqlite3": 5193728,
+      "c-materialization-scoped-snapshot-sample.sqlite3-wal": 0,
+      "c-materialization-scoped-snapshot-sample.sqlite3-shm": 0
+    },
+    "snapshot_bytes_measurement_basis": "max(main+wal+shm while open after proposed review rows, checkpointed main+wal+shm after close)",
+    "snapshot_count_upper": 1,
+    "snapshot_copy_count_basis": {
+      "materialize_invocations": 1,
+      "invoke_campaign_router_calls_per_invocation": 1,
+      "derived_copy_count": 1
+    },
+    "campaign_receipt_bytes_upper": 16000410,
+    "canonical_receipt_bytes_upper": 16000410,
+    "receipt_wrapper_bytes_upper": 410,
+    "artifact_bytes_upper": 32168079,
+    "generator_output_limit_bytes": 16000000,
+    "case_set_wrapper_bytes_upper": 168079
+  },
+  "reason": "Exact post-approval SQLite snapshot is larger than pre-approval simulation; generator never dispatched; source and request unchanged."
+}

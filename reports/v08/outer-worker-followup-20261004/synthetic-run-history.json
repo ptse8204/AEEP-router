@@ -1,0 +1,22 @@
+{
+  "schema_version": "aeep.synthetic-probe-run-history.v1",
+  "runs": [
+    {
+      "sequence": 1,
+      "cases_passed": 8,
+      "elapsed_seconds": 0.277514,
+      "result": "passed",
+      "evidence": "Observed original outcomes.json in root tool output before report correction. Original file was overwritten by the author during the subsequent synthetic rerun; this summary is not an original-file hash attestation.",
+      "timestamp_note": "First started_at label recorded end-of-run time."
+    },
+    {
+      "sequence": 2,
+      "cases_passed": 8,
+      "elapsed_seconds": 0.283394,
+      "result": "passed",
+      "outcomes_sha256": "ceff48e8e2a869bb5ac2b4b1273cccc03e64b2f4a8198ddefece4bb15736e491",
+      "changes": "Accurate start timestamp, definition/script hash fields, and explicit minimum delayed-cleanup assertion. No production source, trial definitions or historical campaign records changed."
+    }
+  ],
+  "limits": "Two runs of the same eight synthetic cases, not 16 independent cases. Total measured probe execution 0.560908 seconds. No live assessment or qualification result."
+}

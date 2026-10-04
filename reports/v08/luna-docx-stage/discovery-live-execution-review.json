@@ -1,0 +1,71 @@
+{
+  "schema_version": "aeep.live-discovery-check-plan.v1",
+  "prepared_at": "2026-10-03T00:35:16.629987+00:00",
+  "status": "approved_after_campaign",
+  "execution_authorized": true,
+  "authority_basis": "Routine finite assessment-definition and scope review under the recorded September25/27 delegation; no cash spending, artifact upload, credentials or automatic admission. Final exact review/reservation follows campaign terminal.",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "endpoint_selection": "Documented public default selected by coordinating reviewer after requesting operator preference; explicit operator response may override before execution.",
+  "documentation_url": "https://agenticresourcediscovery.org/ref_implementations/",
+  "other_documented_choice": "https://agentfinder.github.com/api/v1",
+  "config": {
+    "schema_version": "discovery.config.v1",
+    "sources": [
+      {
+        "source_id": "ard-huggingface",
+        "kind": "ard",
+        "base_url": "https://huggingface-hf-discover.hf.space",
+        "allow_remote": true,
+        "artifact_types": []
+      }
+    ],
+    "max_results": 5,
+    "timeout_seconds": 10
+  },
+  "request": {
+    "public_query": "docx",
+    "source_ids": [
+      "ard-huggingface"
+    ],
+    "limit": 5,
+    "artifact_types": []
+  },
+  "existing_api": "DiscoveryService.from_config(store,config).search(request)",
+  "request_bounds": {
+    "HTTP_method": "POST",
+    "relative_path": "/search",
+    "federation": "none",
+    "pages": 1,
+    "max_response_bytes": 1000000,
+    "redirects": false,
+    "referrals_followed": false,
+    "artifact_fetches": false,
+    "trust_documents_fetched": false,
+    "fallback": false
+  },
+  "assessment_limits": {
+    "max_operations": 1,
+    "max_model_turns": 0,
+    "max_elapsed_seconds": 30,
+    "max_cash_usd": 0
+  },
+  "replay_allowed": false,
+  "must_follow_current_campaign_terminal": true,
+  "canonical_manifest_edit_required": false,
+  "claim_limits": [
+    "Documentation lists the endpoint; availability and AEEP client compatibility have not been observed.",
+    "Returned metadata remains provider claims and inert.",
+    "No automatic match or association to the pinned SkillsBench DOCX subject. Exact local artifact and external identity need separate review.",
+    "A live discovery result alone cannot qualify or admit a candidate."
+  ],
+  "reviewed_at": "2026-10-03T06:00:02.982619+00:00",
+  "prepared_plan_sha256": "e2f7c09c2aba823b9d4efb1ee8bd561adbe8b8616992736c2fade10e510c540b",
+  "campaign_terminal_record_path": "successor-qualification-terminal.json",
+  "campaign_terminal_record_sha256": "0ce50cefa63205a0ac27a86807286f3936b96c22b91a92fbb8dd40c6a6dad6ef",
+  "assessment_reservation": {
+    "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+    "operation_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:live_ard_discovery_20261003"
+  },
+  "execution_api": "DiscoveryService.from_config(store, DiscoveryConfig).search(DiscoveryRequest); asyncio outer timeout 20 seconds; actual elapsed finalized in finally; no retry.",
+  "post_report_cost_lineage": "Separate cost on the existing onboarding grant; no qualification report alteration."
+}

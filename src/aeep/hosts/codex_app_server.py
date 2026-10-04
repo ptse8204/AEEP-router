@@ -149,6 +149,7 @@ class CodexAppServerTransport:
         self._dynamic_tasks: set[asyncio.Task[None]] = set()
         self.dynamic_tool_handler: Callable[[JsonObject], Awaitable[JsonObject]] | None = None
         self.dynamic_tool_context: contextvars.Context | None = None
+        self.dynamic_tool_observer: Callable[[str], None] | None = None
         self._fatal: BaseException | None = None
         self._failure_event = asyncio.Event()
         self._closing = False
@@ -351,11 +352,18 @@ class CodexAppServerTransport:
             raise CodexProtocolError("duplicate App Server server-request ID")
         self._server_request_ids.add(request_id)
         if method == "item/tool/call" and self.dynamic_tool_handler is not None:
+            observer = self.dynamic_tool_observer
+            if observer is not None:
+                observer("requested")
             if self._dynamic_tasks:
+                if observer is not None:
+                    observer("concurrent_rejected")
                 await self._write({"id": request_id, "error": {"code": -32602, "message": "dynamic task call already pending"}})
+                if observer is not None:
+                    observer("concurrent_response_written")
                 return
             handler = self.dynamic_tool_handler
-            task = asyncio.create_task(self._answer_dynamic_tool(request_id, params, handler),
+            task = asyncio.create_task(self._answer_dynamic_tool(request_id, params, handler, observer),
                 context=self.dynamic_tool_context.copy() if self.dynamic_tool_context is not None else None)
             self._dynamic_tasks.add(task)
             task.add_done_callback(self._dynamic_tasks.discard)
@@ -386,21 +394,33 @@ class CodexAppServerTransport:
         await self._write({"id": request_id, "result": response})
 
     async def _answer_dynamic_tool(self, request_id: str | int, params: JsonObject,
-                                   handler: Callable[[JsonObject], Awaitable[JsonObject]]) -> None:
+                                   handler: Callable[[JsonObject], Awaitable[JsonObject]],
+                                   observer: Callable[[str], None] | None = None) -> None:
         try:
+            if observer is not None:
+                observer("handler_started")
             result = await handler(params)
+            if observer is not None:
+                observer("handler_completed")
             await self._write({"id": request_id, "result": result})
+            if observer is not None:
+                observer("response_written")
         except asyncio.CancelledError:
             raise
         except (ConfigurationError, InputValidationError, ValueError, TypeError, TimeoutError):
+            if observer is not None:
+                observer("rejected")
             with suppress(CodexProtocolError, BrokenPipeError):
                 await self._write({"id": request_id, "error": {"code": -32602, "message": "dynamic task call rejected"}})
+                if observer is not None:
+                    observer("response_written")
         except BaseException:
             self._fail(CodexProtocolError("dynamic task callback failed"))
 
     async def cancel_dynamic_tools(self) -> None:
         self.dynamic_tool_handler = None
         self.dynamic_tool_context = None
+        self.dynamic_tool_observer = None
         tasks = tuple(self._dynamic_tasks)
         for task in tasks:
             task.cancel()
@@ -862,7 +882,7 @@ class CodexAppServerAdapter:
                     kind: EventKind = "permission.requested" if decision is None else "permission.granted" if decision else "permission.denied"
                     journal.append(kind, f"{kind}:{digest}", action_digest=digest.removeprefix("sha256:"))
                 self.transport.approval_observer = observe_approval
-            collector = _TurnCollector(max_output_bytes=context.config.max_message_bytes, journal=journal)
+            collector = _TurnCollector(max_output_bytes=context.config.max_message_bytes, journal=journal, started=started)
             unsubscribe = self.transport.subscribe(collector.handle)
             boundary_reference = None
             dynamic_session = None
@@ -918,8 +938,10 @@ class CodexAppServerAdapter:
                     thread_params["dynamicTools"] = binding.declarations()
                     self.transport.dynamic_tool_handler = dynamic_session.call
                     self.transport.dynamic_tool_context = contextvars.copy_context()
+                    self.transport.dynamic_tool_observer = collector.observe_callback
                 elif self.dynamic_tools_factory is not None:
                     raise ConfigurationError("environment verification unavailable: dynamic task composition is unbound")
+                collector.stage = "starting_thread"
                 thread_response = await self.transport.request("thread/start", thread_params)
                 if context.workspace is not None:
                     profile = thread_response.get("activePermissionProfile")
@@ -939,6 +961,7 @@ class CodexAppServerAdapter:
                     actual_model if isinstance(actual_model, str) else selected.id
                 )
                 if invocation is not None:
+                    collector.stage = "verifying_inventory"
                     tool = await verify_thread_inventory(self.transport, thread_id, invocation)
                 boundary_reference = context.invocation_check() if context.invocation_check is not None else None
                 if context.expected_runtime_digest is not None and (invocation is not None or context.invocation_check is not None) and (
@@ -948,18 +971,22 @@ class CodexAppServerAdapter:
                     raise ConfigurationError("environment verification unavailable: current verified worker boundary is required")
                 if invocation is not None and invocation.mode == "mcp_tool":
                     from .codex_invocation import call_mcp
+                    collector.stage = "calling_mcp_tool"
                     raw = await call_mcp(self.transport, context, thread_id, tool, started)
+                    collector.stage = "mcp_tool_completed"
                     raw.metadata["host_runtime_digest"] = runtime_digest
                     if boundary_reference is not None:
                         raw.metadata["boundary_digest"] = boundary_reference
                     return raw
                 if context.config.input_tree is not None:
+                    collector.stage = "transferring_input"
                     files = context.request.input.get("files")
                     if self._worker is None or self._worker_process_id is None or not isinstance(files, list):
                         raise ConfigurationError("worker input tree unavailable")
                     await self._worker.artifact(self._worker_process_id, name="case-tree", limit=100000,
                         files=files, timeout=max(0.001, context.config.timeout_seconds - (time.monotonic() - started)))
                 if context.config.artifact is not None:
+                    collector.stage = "transferring_input"
                     artifact = context.config.artifact
                     data = context.request.input.get(artifact.input_field)
                     if self._worker is None or self._worker_process_id is None or not isinstance(data, str):
@@ -986,6 +1013,7 @@ class CodexAppServerAdapter:
                     turn_params["outputSchema"] = context.output_schema
                 if context.invocation_check is not None and context.invocation_check() != boundary_reference:
                     raise ConfigurationError("environment verification unavailable: boundary changed before dispatch")
+                collector.stage = "starting_turn"
                 turn_response = await self.transport.request("turn/start", turn_params)
                 turn = turn_response.get("turn")
                 turn_id = turn.get("id") if isinstance(turn, dict) else None
@@ -995,6 +1023,8 @@ class CodexAppServerAdapter:
                 if dynamic_session is not None:
                     dynamic_session.bind_turn(turn_id)
                 self._attempts[context.attempt_id] = (thread_id, turn_id)
+                if collector.stage == "starting_turn":
+                    collector.stage = "awaiting_turn_completion"
                 if dynamic_session is not None:
                     failed = asyncio.create_task(self.transport._failure_event.wait())
                     try:
@@ -1027,8 +1057,10 @@ class CodexAppServerAdapter:
                     }
                 )
             except (TimeoutError, asyncio.CancelledError):
+                progress = collector.progress_json()
                 await self._interrupt_known(context.attempt_id)
                 raw = self._partial_execution(collector, ExecutionStatus.TIMEOUT, started)
+                raw.metadata["host_progress"] = progress
                 return raw
             except (CodexProtocolError, CodexRequestError, ConfigurationError) as exc:
                 raw = self._partial_execution(collector, ExecutionStatus.FAILED, started)
@@ -1044,6 +1076,9 @@ class CodexAppServerAdapter:
                 raw.metadata["host_tools_used"] = json.dumps(sorted(collector.tools_used))
                 return raw
             finally:
+                progress = raw.metadata.get("host_progress", collector.progress_json()) if raw is not None else collector.progress_json()
+                if raw is not None:
+                    raw.metadata["host_progress"] = progress
                 if dynamic_session is not None:
                     dynamic_session.close()
                     try:
@@ -1058,6 +1093,7 @@ class CodexAppServerAdapter:
                             raw.error_type = 'DYNAMIC_TASK_CLEANUP_UNCONFIRMED'
                 unsubscribe()
                 self.transport.approval_observer = None
+                self.transport.dynamic_tool_observer = None
                 self.transport.approval_handler = None
                 self.transport.approval_ceiling = SideEffect.NONE
             resources, accounting = turn_accounting(
@@ -1094,6 +1130,7 @@ class CodexAppServerAdapter:
                 error_type="HOST_IDENTITY_DRIFT" if drifted else None if status is ExecutionStatus.SUCCESS else "CODEX_TURN_FAILED",
                 error_message=result.error,
                 metadata={
+                    "host_progress": progress,
                     **({"dynamic_tools_digest": dynamic_session.expected_digest,
                         "dynamic_tool_calls": len(dynamic_session._calls),
                         "dynamic_callback_evidence": dynamic_session.evidence,
@@ -1131,7 +1168,8 @@ class CodexAppServerAdapter:
             status=status, resources=resources, accounting=accounting,
             error_type="TIMEOUT" if status == ExecutionStatus.TIMEOUT else "ProtocolError",
             error_message="Codex execution ended before complete evidence was available",
-            metadata={"execution_stream_complete": False, "actual_model": collector.actual_model, "model_turn_count": int(collector.turn_id is not None), "tool_call_count": collector.tool_count},
+            metadata={"execution_stream_complete": False, "actual_model": collector.actual_model, "model_turn_count": int(collector.turn_id is not None), "tool_call_count": collector.tool_count,
+                      "host_progress": collector.progress_json()},
         )
 
     async def interrupt(self, attempt_id: str) -> None:
@@ -1168,7 +1206,14 @@ class CodexAppServerAdapter:
 
 
 class _TurnCollector:
-    def __init__(self, *, max_output_bytes: int, journal: EventJournal | None = None) -> None:
+    def __init__(self, *, max_output_bytes: int, journal: EventJournal | None = None, started: float | None = None) -> None:
+        self.started = time.monotonic() if started is None else started
+        self.stage = "preparing_thread"
+        self.callback_counts = dict.fromkeys(("requested", "handler_completed", "response_written", "rejected"), 0)
+        self.callback_last_elapsed_seconds: dict[str, float] = {}
+        self.last_event: str | None = None
+        self.last_item_type: str | None = None
+        self.last_event_elapsed_seconds: float | None = None
         self.journal = journal
         self.max_output_bytes = max_output_bytes
         self.thread_id: str | None = None
@@ -1184,12 +1229,42 @@ class _TurnCollector:
         self.error: CodexProtocolError | None = None
         self.future: asyncio.Future[CodexTurnResult] = asyncio.get_running_loop().create_future()
 
+    def observe_callback(self, event: str) -> None:
+        counter = event.removeprefix("concurrent_")
+        if counter in self.callback_counts:
+            self.callback_counts[counter] = min(self.callback_counts[counter] + 1, 2**31 - 1)
+            self.callback_last_elapsed_seconds[counter] = max(0, time.monotonic() - self.started)
+        if not event.startswith("concurrent_") and event != "requested":
+            self.stage = {"handler_started": "callback_running", "handler_completed": "writing_callback_response",
+                          "response_written": "awaiting_turn_completion", "rejected": "writing_callback_response"}[event]
+
+    def progress(self) -> JsonObject:
+        # A written response means the local pipe drained, not peer acknowledgement.
+        return {"stage": self.stage, "elapsed_seconds": max(0, time.monotonic() - self.started),
+                "callback_counts": self.callback_counts.copy(), "last_event": self.last_event,
+                "callback_last_elapsed_seconds": self.callback_last_elapsed_seconds.copy(),
+                "last_item_type": self.last_item_type, "last_event_elapsed_seconds": self.last_event_elapsed_seconds,
+                "final_message_received": bool(self.final_parts or self.output_parts),
+                "turn_completion_received": self.terminal is not None}
+
+    def progress_json(self) -> str:
+        # Fixed keys, bounded counters and allowlisted values fit scalar receipt metadata.
+        return json.dumps(self.progress(), separators=(",", ":"), allow_nan=False)
+
     def handle(self, method: str, params: JsonObject) -> None:
         if self.thread_id is not None and params.get("threadId") not in {None, self.thread_id}:
             return
         event_turn = params.get("turnId")
         if self.turn_id is not None and event_turn not in {None, self.turn_id}:
             return
+        if method in {"item/started", "item/completed", "item/agentMessage/delta", "item/reasoning/textDelta",
+                      "item/reasoning/summaryTextDelta", "thread/tokenUsage/updated", "model/rerouted", _TERMINAL_METHOD}:
+            self.last_event = method
+            item = params.get("item")
+            item_type = item.get("type") if isinstance(item, dict) else None
+            self.last_item_type = item_type if isinstance(item_type, str) and item_type in {
+                "agentMessage", "reasoning", "commandExecution", "fileChange", "mcpToolCall", "dynamicToolCall"} else None
+            self.last_event_elapsed_seconds = max(0, time.monotonic() - self.started)
         if self.journal is not None and method in {"item/started", "item/completed"}:
             item = params.get("item")
             if isinstance(item, dict) and isinstance(item.get("id"), str):
@@ -1248,6 +1323,7 @@ class _TurnCollector:
                     self._reject("duplicate terminal event")
                 return
             self.terminal = marker
+            self.stage = "turn_completed"
             output_text = "".join(self.final_parts or self.output_parts)
             if len(output_text.encode()) > self.max_output_bytes:
                 self._reject("Codex output exceeds configured message limit")

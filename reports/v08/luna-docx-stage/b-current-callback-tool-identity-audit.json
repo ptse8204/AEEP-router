@@ -1,0 +1,36 @@
+{
+  "schema_version": "aeep.callback-tool-identity-audit.v1",
+  "observed_at": "2026-10-03T09:48:17.775052+00:00",
+  "host_receipt_digest": "d62c74b0480f862be1162100802ee88cb89aeed0144f0af8db8234cba0c37a13",
+  "status": "passed",
+  "canonical_receipt_tools_used": [
+    "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+    "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+  ],
+  "exact_preimage_matches": [
+    {
+      "identity": {
+        "type": "commandExecution",
+        "server": "",
+        "tool": ""
+      },
+      "digest": "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135"
+    },
+    {
+      "identity": {
+        "type": "dynamicToolCall",
+        "server": "",
+        "tool": "aeep_recipe_f468b36bc594"
+      },
+      "digest": "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+    }
+  ],
+  "implementation": "src/aeep/hosts/codex_app_server.py:1236,1358",
+  "limitations": [
+    "commandExecution identifies a category; it does not reveal command arguments",
+    "server is absent in this normalized dynamicToolCall; exact callback binding separately establishes namespace",
+    "Tool arguments and results were not read or disclosed"
+  ],
+  "canonical_mutations": false,
+  "model_turns": 0
+}

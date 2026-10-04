@@ -1,0 +1,106 @@
+--- a/src/aeep/hosts/codex_pair_inspection.py
++++ b/src/aeep/hosts/codex_pair_inspection.py
+@@ -46,6 +46,13 @@
+ # All paths are synthetic canaries or reviewed public dependencies. No auth files.
+ CHECK = '''import hashlib,io,json,pathlib
+ import pandas,openpyxl
++if DOCX_PROBE:
++ import docx
++ from docx import Document
++ document=Document();document.add_paragraph('synthetic AEEP DOCX roundtrip')
++ docx_buffer=io.BytesIO();document.save(docx_buffer)
++ reopened=Document(io.BytesIO(docx_buffer.getvalue()))
++ docx_roundtrip=[paragraph.text for paragraph in reopened.paragraphs]==['synthetic AEEP DOCX roundtrip']
+ p=pathlib.Path
+ result={}
+ for label,name in PATHS.items():
+@@ -57,6 +64,9 @@
+ book=openpyxl.load_workbook(io.BytesIO(buf.getvalue()))
+ result['shared_workbook_roundtrip']=book.active['A3'].value==7
+ result['pandas']=pandas.__version__;result['openpyxl']=openpyxl.__version__
++if DOCX_PROBE:
++ result['python-docx']=docx.__version__
++ result['python_docx_roundtrip']=docx_roundtrip
+ skill=p('/opt/dependencies/plugin/skills/spreadsheets/SKILL.md')
+ if skill.is_symlink() or any(parent.is_symlink() for parent in skill.parents):raise ValueError('unsafe candidate path')
+ result['candidate_skill_sha256']=hashlib.sha256(skill.read_bytes()).hexdigest() if skill.is_file() else None
+@@ -106,6 +116,9 @@
+ CANDIDATE_PATHS = {'/opt/dependencies/plugin/skills/spreadsheets/SKILL.md',
+                    '/etc/codex/skills/spreadsheets/SKILL.md', '/opt/dependencies/runtime'}
+ SKILL_PROFILES: dict[str, tuple[str, str, str, set[str]]] = {
++    'docx:1': ('/opt/dependencies/plugin/skills/docx/SKILL.md',
++               '/etc/codex/skills/docx/SKILL.md', '/opt/dependencies/plugin/skills/docx',
++               {'docx'}),
+     'spreadsheets:1': ('/opt/dependencies/plugin/skills/spreadsheets/SKILL.md',
+                        '/etc/codex/skills/spreadsheets/SKILL.md', '/opt/dependencies/runtime',
+                        {'Spreadsheets', 'spreadsheets:Spreadsheets'}),
+@@ -117,7 +130,7 @@
+ 
+ class WorkerPairInspection(StrictModel):
+     schema_version: Literal['assessment.worker-pair-inspection.v1', 'assessment.worker-pair-inspection.v2', 'assessment.worker-pair-inspection.v3'] = 'assessment.worker-pair-inspection.v1'
+-    profile: Literal['spreadsheets:1', 'ponytail:1'] = 'spreadsheets:1'
++    profile: Literal['spreadsheets:1', 'ponytail:1', 'docx:1'] = 'spreadsheets:1'
+     control: ExecutorSpec
+     treatment: ExecutorSpec
+     # The differential definition remains separately reviewed; paths cannot be
+@@ -131,11 +144,12 @@
+         differential = self.differential
+         skill_path, alias_path, directory, names = SKILL_PROFILES[self.profile]
+         extended = self.schema_version.endswith('.v3')
++        shared_version_names = {'pandas', 'openpyxl', 'python-docx'} if self.profile == 'docx:1' else {'pandas', 'openpyxl'}
+         if ((not extended and self.profile != 'spreadsheets:1')
+                 or set(differential.candidate_paths) != {skill_path, alias_path, directory}
+                 or not set(differential.candidate_aliases).issubset(names)
+                 or (extended and not differential.candidate_aliases)
+-                or set(self.shared_versions) != {'pandas','openpyxl'}):
++                or set(self.shared_versions) != shared_version_names):
+             raise ValueError('paired probe requires its exact reviewed skill profile')
+         workers = []
+         for spec in (self.control,self.treatment):
+@@ -289,13 +303,14 @@
+     requirements = inspect.get('configRequirements/read',{})
+     active = facts['active_policy']
+     versions = all(observed.get(name)==version for name,version in definition.shared_versions.items())
++    docx_roundtrip = (definition.profile != 'docx:1' or observed.get('python_docx_roundtrip') is True)
+     allowed_mounts = [m for m in meta['mounts'] if m.get('Type') in {'volume','bind'}]
+     mount_ok = (len(allowed_mounts)==1 and allowed_mounts[0].get('Type')=='volume'
+                 and allowed_mounts[0].get('Name')==worker.credential_volume and allowed_mounts[0].get('Destination')=='/worker/auth')
+     return {
+         'allowed_tool': {'workspace_write':inspect['sandbox_command']['workspace_write'] is True,
+-                         'dependencies':observed['shared_workbook_roundtrip'] is True and versions and (not expected
+-                             or definition.profile == 'ponytail:1'
++                         'dependencies':observed['shared_workbook_roundtrip'] is True and versions and docx_roundtrip and (not expected
++                             or definition.profile in {'ponytail:1', 'docx:1'}
+                              or facts.get('dependencies')=={'authoring_helper':True,'artifact_tool_csv':True})},
+         'denied_tool': {'credential_read_denied':observed['credential_canary']=='denied'},
+         'cross_worker': {'own_readable':observed['own_workspace']=='readable','other_absent':observed['other_workspace']=='absent'},
+@@ -316,10 +331,15 @@
+     }
+ 
+ 
+-def filesystem_observation(value: dict[str, Any]) -> dict[str, Any]:
++def filesystem_observation(value: dict[str, Any], profile: str = 'spreadsheets:1') -> dict[str, Any]:
++    if profile not in SKILL_PROFILES:
++        raise ConfigurationError('unknown paired skill profile')
+     statuses = {'own_workspace','other_workspace','credential_canary','external_answer'}
+     booleans = {'shared_workbook_roundtrip','candidate_alias','candidate_runtime'}
+     versions = {'pandas','openpyxl'}
++    if profile == 'docx:1':
++        booleans.add('python_docx_roundtrip')
++        versions.add('python-docx')
+     if (set(value) != statuses | booleans | versions | {'candidate_skill_sha256'}
+             or any(value[key] not in {'readable','empty','directory','denied','absent'} for key in statuses)
+             or any(type(value[key]) is not bool for key in booleans)
+@@ -507,10 +527,10 @@
+                     for index in range(2):
+                         paths = {'own_workspace':'/workspace/'+markers[index],'other_workspace':'/workspace/'+markers[1-index],
+                                  'credential_canary':'/worker/auth/'+canary,'external_answer':str(answer)}
+-                        program = CHECK.replace('PATHS',repr(paths))
++                        program = CHECK.replace('PATHS',repr(paths)).replace('DOCX_PROBE',str(definition.profile == 'docx:1'))
+                         for old, new in zip(SKILL_PROFILES['spreadsheets:1'][:3], SKILL_PROFILES[definition.profile][:3], strict=True):
+                             program = program.replace(repr(old), repr(new))
+-                        facts[index]['filesystem'] = filesystem_observation(await observed_command(index,'filesystem',program))
++                        facts[index]['filesystem'] = filesystem_observation(await observed_command(index,'filesystem',program), definition.profile)
+                     if definition.profile == 'spreadsheets:1':
+                         dependencies = await observed_command(1,'dependencies',DEPENDENCY,30000)
+                         if set(dependencies)!={'authoring_helper','artifact_tool_csv'} or any(type(v) is not bool for v in dependencies.values()):

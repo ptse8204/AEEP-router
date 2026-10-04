@@ -1,0 +1,102 @@
+{
+  "schema_version": "aeep.synthetic-workflow-linkage-review.v1",
+  "date": "2026-10-02",
+  "status": "staged_not_executed",
+  "scope": "One reports-only synthetic lifecycle runner; no source, test, example, integration, grant, campaign, Docker, model, network, authentication, or global configuration changes.",
+  "policy_read": {
+    "path": "docs/ASSESSMENT_TESTING.md",
+    "lines": "1-846 (full file read)",
+    "sha256": "c0448f7ecacfdb5392cf9c5bbe06c971a1ebe460f9e159f7c5ee22b88884e997",
+    "governing_sections": [
+      "Authorization and evidence: temporary scoped authority, no inferred measurements, admission needs current qualification and independent evidence.",
+      "Five test layers: offline assessment lifecycle versus real boundary and live acceptance; runtime and image must be explicitly pinned.",
+      "Completion and rollback: lifecycle fixtures cannot claim real benefit; never force a real candidate to win.",
+      "Incremental-capability experiments: negative real results are valid; controlled fixtures prove lifecycle only.",
+      "Exact task-profile and native command boundary sections: reviewed exact backend and scope remain enforced at activation and dispatch."
+    ]
+  },
+  "runner": {
+    "path": "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py",
+    "sha256": "59d768579bceab6adffb3f09cac7adce2b4eb3e859c16187089ff7ba8460335c",
+    "lines": 548,
+    "execution_command_after_campaign_terminal": "PYTHONPATH=src AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex python3 reports/v08/luna-docx-stage/discovery_profile_bridge_check.py",
+    "static_validation": "Built-in ast.parse succeeded after the recorded corrections; no AEEP project modules were imported, and the runner, tests and campaign were not executed.",
+    "launcher": {
+      "required_environment_variable": "AEEP_NATIVE_CODEX",
+      "resolved_path": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+      "required_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+      "fallback_or_mock": false
+    },
+    "process_supervision": "No process-level watchdog is implemented in the staged file. Its asyncio timeout and cleanup wait are cooperative only. The exact child command must be run by the coordinating agent under external owned-process supervision; if that is unavailable, defer execution. A flushed started JSON record prints the unique temporary directory and pinned launcher identity before the async run, without task contents, so the supervisor can retain the exact resource on timeout."
+  },
+  "definition": {
+    "label": "synthetic lifecycle evidence; not live benefit or backend-transfer evidence",
+    "candidate_and_baseline": "Both are configured COMMAND executors before assessment with the same NativeSandboxConfig, project root, read roots, CSV implementation, argv-literal stdin-JSON contract, 5-second command timeout and 65,536-byte output cap. The candidate starts disabled. The baseline runs the same CSV program after an explicit 1.0-second delay. Both are pinned to the exact resolved native launcher and digest; native sandbox network access uses the default-disabled setting.",
+    "plan": "Existing AssessmentService direct CSV plan, with the repository's fixed 8 qualification / 28 training / 105 holdout cases and no threshold or case changes.",
+    "journey": [
+      "Search one local fixture registry candidate; no remote source is configured.",
+      "The synthetic harness explicitly selects the fixed local plain-text fixture artifact after discovery, then calls operator intake and reviews the exact intake digest; no candidate package code is executed. This exercises the explicit selection boundary but is not evidence of a human operator interaction.",
+      "Confirm lookup returns assess/applicable_admission_missing before assessment.",
+      "Propose and run the existing assessment against the two predeclared native-sandbox COMMAND routes.",
+      "Call ordinary AssessmentService.admit only if the completed report itself passes qualification and reports useful_within_scope. Otherwise emit assessment_not_admitted and stop without creating an admission or profile dispatch.",
+      "For a real admission, require positive lookup to name its executor, admission and fingerprint; create and review an exact-fingerprint TaskScope and task-service CapabilityProfile; bind and invoke the existing scoped task service.",
+      "Require the task receipt to carry the same executor, assessment_admission_id and sha256-prefixed fingerprint; capture that receipt, leave host context and inventory unknown, and confirm stored capture excludes the synthetic input/output canary.",
+      "Revoke that exact admission; require lookup restriction naming the same admission, reject a pre-revocation stale decision, confirm profile/scope review, expiry and attempt capacity still hold, then require a fresh task-service NoRouteError without new successful receipt or invocation-start evidence. Uninstall the local activation and close the Router."
+    ],
+    "synthetic_fixture_authority": "A fresh random platform-temp directory contains its own Manifest, SQLite authority store, assessment records and temporary grant (1000 operations, 12000 elapsed seconds, zero model turns/cash, four-hour expiry). It does not read, copy, reset, amend or reuse the canonical onboarding or release grant/ledger.",
+    "admission_guard": "The runner makes no admission claim before the standard AssessmentService report and never calls admit for an unqualified or non-useful report. A noisy or negative result remains not_admitted; it is not changed to force the profile path.",
+    "finite_bounds": {
+      "assessment_operations": 1000,
+      "assessment_accounted_elapsed_seconds": 12000,
+      "model_turns": 0,
+      "cash_usd": 0,
+      "command_timeout_seconds_each": 5,
+      "baseline_delay_seconds_each": 1.0,
+      "cancellation_cleanup_wait_seconds": 45,
+      "budget_preview_gate": "Before granting the temporary local authority, require the existing full-campaign reservation preview to have no gaps and fit within the declared operation, elapsed, zero-turn and zero-cash ceilings.",
+      "asyncio_coroutine_deadline_seconds": 2700,
+      "cooperative_cancellation_cleanup_wait_seconds": 45,
+      "temporary_tree_observed_bytes_threshold": 2147483648,
+      "temporary_tree_observed_entries_threshold": 20000,
+      "temporary_tree_sampling_interval_seconds": 1,
+      "temporary_tree_threshold_is_hard_quota": false,
+      "deadline_and_cleanup_semantics": "The async deadline and cancellation wait are cooperative. asyncio.run can wait again for unfinished cancellation tasks; this runner alone does not impose a process-level hard wall or guarantee child cleanup."
+    },
+    "temporary_artifacts": "The runner prints a unique temporary-directory path, elapsed time, sampled high-water bytes/entries, and final size on normal completion. The one-second watcher skips only disappeared entries and stops after an observed threshold breach; it cannot prevent transient overshoot. Success, non-admission and failure trees are retained for review. The 45-second cancellation wait is cooperative; if it expires, or an outer supervisor cannot verify that this run\u2019s owned native descendants have ended, preserve the directory and classify the attempt as incomplete. A flushed started record exposes the unique temporary path and pinned launcher identity before assessment begins.",
+    "run_precondition": "Do not execute during frozen campaign session 37153. After it is terminal, the coordinating agent must recheck the host reserve (at least 50 GiB available using the approved macOS capacity measure), source freeze, exact launcher path/hash and current native-boundary authorization. Launch the exact child command below only under an outer process supervisor with its own wall deadline, which tracks only this run\u2019s owned process/creation-time identities, allows cooperative Router cleanup first, terminates only verified owned descendants after bounded grace, and confirms no native launcher/task process remains. If that supervisor cannot bound cleanup or account for a surviving process, do not declare a terminal run or remove its temporary tree.",
+    "training_request_scope": "Select the first plan TRAINING case whose variation is plain; never take a holdout input. Change only the unique ordinary ASCII data cell Ada to AEEP_XHIGH_BRIDGE_CANARY, retain delimiter and CSV structure, compute the expected answer using reference_csv, and require recipe_features to remain identical and already present in the plan feature combinations before lookup or task dispatch. This request does not widen applicability.",
+    "exact_profile_revocation_checks": "TaskScope allows 4 attempts, enough for the positive call, stale decision, fresh denial and one spare. Revocation checks require exact reviewed profile/scope, live expiry and spare attempts before and after stale-decision rejection. The new call must return structuredContent.error_type NoRouteError and must not increase successful receipt or invocation-start counts for that task scope and executor. Revoked lookup must identify the same admission ID."
+  },
+  "static_feasibility": {
+    "result": "feasible without changing candidate backend after admission",
+    "reason": "The runner puts a native-sandbox COMMAND candidate and COMMAND baseline in the manifest before AssessmentService planning. Its command kind/configuration and boundary digest remain unchanged in the plan, admission fingerprint, TaskScope fingerprint, actual task dispatch and receipt. CapabilityProfile does not itself store an admission ID; the bridge checks the current router admission at lookup, activation and dispatch, and checks the admission ID on the receipt.",
+    "references": [
+      "reports/v08/luna-docx-stage/workflow-linkage-audit.json: profile_backend_feasibility and smallest_next_check",
+      "tests/test_v08_discovery_lifecycle.py:40-53 (existing native COMMAND task-profile shape), 75-146 (local discovery/profile lifecycle), 151-234 (separate positive synthetic admission linkage)",
+      "src/aeep/assessment/service.py:157-278, 946-1098 (plan binds route fingerprints; normal run and admission path)",
+      "src/aeep/router.py:5345-5370, 5395-5458, 5914-5945 (trial router, exact task scope/applicability, dispatch)",
+      "src/aeep/executors/command.py:106-124 (native-sandbox COMMAND task-scope requirements)",
+      "src/aeep/assessment/applicability.py:26-123 (dispatch-time admission and exact request applicability)",
+      "src/aeep/profiles.py:105-118, 222-270 (profile binds scope and preflight/activation/service binding)",
+      "src/aeep/configuration_profile.py:157-195 (capture accepts only receipts inside the exact profile scope)",
+      "src/aeep/tasks.py:136-156 (activation calls scope and profile enforcement)"
+    ],
+    "remaining_uncertainty": [
+      "No staged code was executed. The installed sandbox may reject the exact future runtime/environment; that outcome must be retained rather than bypassed.",
+      "The synthetic comparison may fail qualification or may not establish useful_within_scope. In that case the honest result is no admission and no profile/use linkage for this run.",
+      "Even a complete positive run proves only this synthetic local command lifecycle. It establishes no real candidate usefulness, native model performance, host-wide isolation, production support, or equivalence to the earlier Python controlled fixture.",
+      "The staged runner has no hard process-level deadline or child-tree supervisor of its own. Its async timeout and cleanup wait are cooperative. No runtime should start until the coordinating agent supplies the external owned-process supervision and verifies cleanup."
+    ]
+  },
+  "static_review_corrections": [
+    "Receipt executor fingerprint comparison preserves the sha256: prefix on the receipt and compares it to the prefix plus the admission bare digest.",
+    "The task request comes from the first plain training case, changes only the unique ordinary ASCII Ada cell to a fixed ASCII canary, and requires recipe_features equality and membership in the plan training-derived joint feature combinations.",
+    "TaskScope allows 4 attempts, enough for the positive call, stale decision, fresh denial and one spare. Revocation checks require exact reviewed profile/scope, live expiry and spare attempts before and after stale-decision rejection. The new call must return structuredContent.error_type NoRouteError and must not increase successful receipt or invocation-start counts for that task scope and executor.",
+    "Revoked lookup must name the exact admission that was revoked.",
+    "Failures expose only a fixed stage tag, exception type, fixed failure code, and this runner source file/line/function; raw exception text, task inputs, and outputs are omitted.",
+    "The temporary-tree watcher skips only entries/directories that disappear during a scan. Its one-second sampled high-water threshold stops on an observed breach; it is not a filesystem quota or a hard peak bound.",
+    "The 2700-second asyncio deadline and 45-second cancellation grace are cooperative only. asyncio.run may still wait during cancellation, so an outer coordinator process supervisor and owned-descendant cleanup are mandatory before execution."
+  ],
+  "review_state": "staged_not_executed; parent review and post-campaign external process supervision required",
+  "root_counter_review": "Before revocation, require the receipt and invocation counters to observe the successful scoped call. Compare both stale-decision and fresh task-service rejection against those same pre-revocation counts, so a broken zero-only query or an invocation during stale rejection cannot pass."
+}

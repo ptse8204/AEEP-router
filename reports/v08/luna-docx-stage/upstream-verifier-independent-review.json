@@ -1,0 +1,85 @@
+{
+  "schema_version": "assessment.skillsbench-docx-upstream-verifier-independent-review.v1",
+  "verdict": "prepared_inert_no_blocker",
+  "docs_read": [
+    "AGENTS.md",
+    "docs/ASSESSMENT_TESTING.md",
+    "reports/v08/luna-docx-stage/upstream-verifier-audit.json"
+  ],
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "license": {
+    "name": "Apache-2.0",
+    "pinned_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/LICENSE",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "staged_unchanged": true
+  },
+  "verification": {
+    "exact_upstream_verifier_sha256": "913b9a3ebe579aed9c8f876dededea4d6a957eca9fbd0d9e8f043719cfb8cf05",
+    "pytest_assertions": 18,
+    "python_docx": "1.1.2",
+    "pytest": "8.4.1",
+    "public_fixture_index": 0,
+    "artifact_sha256": "e5ba556c1b7ef19620b8b3963710714218d0eb21b61ec0ba4964a35be60c42c7"
+  },
+  "stages": {
+    "wheel_fetch": {
+      "operations": 1,
+      "seconds": 60,
+      "download_work_deadline_seconds": 50,
+      "per_wheel_hard_subprocess_timeout_seconds": 10
+    },
+    "verifier_image_build": {
+      "operations": 1,
+      "seconds": 180,
+      "raw_growth_bytes_max": 1000000000,
+      "important_capacity_before_bytes": 54687091200
+    },
+    "upstream_assertions": {
+      "operations": 1,
+      "seconds": 30
+    }
+  },
+  "same_grant_cost_lineage": "All three post-campaign stages require independent pre-reserved operations on onboarding; each runner records its plan/id and finalizes through AssessmentRepository. No counter reset, retry, blanket cleanup, trial image mutation, or candidate turn.",
+  "hard_gates": "All execution reviews start inert. Each requires a separately reviewed post-campaign terminal-record path+SHA, validates the referenced result SHA at runtime, and requires the exact pre-reserved operation. The run binds the image ID from a passing build result.",
+  "base_binding_limit": "The Dockerfile FROM uses a local control tag; before/after image-ID checks detect a changed tag after build but cannot exclude a transient concurrent retag. The review does not call this immutable.",
+  "limits_and_claims": {
+    "task_agent_or_model_calls": 0,
+    "authentication_access": false,
+    "trial_image_modified": false,
+    "canonical_grant_mutated_during_prep": false,
+    "wheels_downloaded": false,
+    "image_built": false,
+    "container_run": false,
+    "source_files_changed": false
+  },
+  "files": {
+    "upstream-verifier-stage.json": "8009ffa6e4bcad46457909a0db100a8d3cb75d7b12144ed9d36420f47640ec1c",
+    "prepare-upstream-verifier.py": "be26525d30e47d191d385145c4ab508c78daf1f5726dfc94b0f903e0d8273f14",
+    "upstream-verifier-image-plan.json": "1de69bb87e8b1bd9261344d45cd345cbc1199fb9988f9eb87e840591164ed623",
+    "verifier-image-context/Dockerfile.verifier": "6a4181f1fe323aaaf69cf143570963b02d40977a1f752be981dbd25a9dafdfcb",
+    "verifier-image-context/requirements-verifier.lock": "2c125370f6e87b8003f95a8625d714ca335706e8255adf7f3b753400f051dabd",
+    "fetch-verifier-wheels.py": "1b749fca4358178e8021af2f7780e393ec400b5c8ae1c78f38bdb2f4313dfdb8",
+    "download-one-verifier-wheel.py": "5941580a9997d6f8a63a7e3a0fa69be7c1f487973a67c3c5cd1357be693f1bfa",
+    "build-upstream-verifier-image.py": "b3770cb80154bf70d431cc5d7fb41c1a12891b220e97120486d96712b548accc",
+    "run-upstream-verifier.py": "910479f01deff2d165450602dad9470125a95e7ea101e786ead3dfafb793d565",
+    "upstream-verifier-wheel-fetch-review.json": "61b738ce4a7273cf713081c3b9cea0707345fd7497367ae470cd0adafee29dd5",
+    "upstream-verifier-build-review.json": "e040bce179f42ad59a0d890d215812ebb97cc2bf520466a81196388c3b01852f",
+    "upstream-verifier-execution-review.json": "60cdc8a6c7176d1ff65f85fde06c8be0147c2fa573cabc6774d144b61e4e58eb"
+  },
+  "artifacts": [
+    "upstream-verifier-context/",
+    "upstream-verifier-stage.json",
+    "prepare-upstream-verifier.py",
+    "upstream-verifier-image-plan.json",
+    "verifier-image-context/Dockerfile.verifier",
+    "verifier-image-context/requirements-verifier.lock",
+    "fetch-verifier-wheels.py",
+    "download-one-verifier-wheel.py",
+    "build-upstream-verifier-image.py",
+    "run-upstream-verifier.py",
+    "upstream-verifier-wheel-fetch-review.json",
+    "upstream-verifier-build-review.json",
+    "upstream-verifier-execution-review.json"
+  ]
+}

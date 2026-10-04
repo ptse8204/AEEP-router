@@ -9,7 +9,7 @@ from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
-from pydantic import Field
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer
 
 from .assessment.identity import file_digest
 from .assessment.models import Digest, content_digest
@@ -40,6 +40,17 @@ class TaskActivation(StrictModel):
     manifest_path: str
     # Only an AEEP-owned, newly created overlay is supported. User host config is never copied.
     original_value: None = None
+    capability_profile_digest: Digest | None = None
+    host_binding: bool = True
+
+    @model_serializer(mode='wrap')
+    def preserve_legacy_profile(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+        result: dict[str, object] = handler(self)
+        if self.capability_profile_digest is None:
+            result.pop('capability_profile_digest', None)
+        if self.host_binding:
+            result.pop('host_binding', None)
+        return result
 
 
 class TaskLifecycleEvent(StrictModel):
@@ -114,6 +125,11 @@ def require_activation(router: Router, identity: str) -> TaskActivation:
         raise ConfigurationError('project Codex MCP entry changed or is absent')
     if not _configuration_matches(router, record):
         raise ConfigurationError('task manifest changed; activate its reviewed configuration again')
+    if record.capability_profile_digest is not None:
+        from .profiles import require_profile
+        profile = require_profile(router, record.capability_profile_digest, record.scope_digest)
+        if record.host_binding != (profile.host == 'codex-project'):
+            raise ConfigurationError('task activation host binding differs from its reviewed profile')
     return record
 
 
@@ -124,24 +140,31 @@ def _scope_ready(router: Router, digest: str) -> None:
         if not router.registry.contains(executor_id):
             raise ConfigurationError('task scope names an unavailable executor')
         spec = router.registry.get(executor_id)
-        router._require_active_spec(spec, check_activation=False)
+        router._require_active_spec(spec, check_activation=False, configuration_only=True)
         router._require_task_scope(spec, activating=True)
 
 
-def activate(router: Router, scope_id: str, *, replace: str | None = None) -> TaskActivation:
+def activate(router: Router, scope_id: str, *, replace: str | None = None,
+             capability_profile_digest: str | None = None, host_binding: bool = True) -> TaskActivation:
     repo = AssessmentRepository(router.store)
     scope = TaskScope.model_validate(repo.get('task_scope', scope_id))
+    if capability_profile_digest is not None:
+        from .profiles import require_profile
+        profile = require_profile(router, capability_profile_digest, content_digest(scope))
+        if host_binding != (profile.host == 'codex-project'):
+            raise ConfigurationError('task activation host binding differs from its reviewed profile')
     _scope_ready(router, content_digest(scope))
     assert router.manifest_path is not None
     previous = _record(router, replace) if replace else None
     if previous and _read(_path(previous)) != _applied(previous):
         raise ConfigurationError('previous task overlay changed; replacement requires conflict resolution')
     record = TaskActivation(scope_digest=content_digest(scope), manifest_digest=content_digest(router.manifest),
-        manifest_path=str(router.manifest_path), manifest_file_digest=_manifest_file_digest(router.manifest_path))
+        manifest_path=str(router.manifest_path), manifest_file_digest=_manifest_file_digest(router.manifest_path),
+        capability_profile_digest=capability_profile_digest, host_binding=host_binding)
     repo.put('task_activation', record.activation_id, record)  # Durable intent before touching disk.
     path = _path(record)
     path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-    if record.manifest_file_digest is not None:
+    if record.host_binding and record.manifest_file_digest is not None:
         install_binding(router, record)
     with router.store._immediate_transaction() as connection:
         if previous and _read(_path(previous)) != _applied(previous):
@@ -164,6 +187,9 @@ def change_state(router: Router, identity: str, operation: Literal['pause', 'sto
     repo = AssessmentRepository(router.store)
     digest = content_digest(record)
     if operation == 'resume':
+        if record.capability_profile_digest is not None:
+            from .profiles import require_profile
+            require_profile(router, record.capability_profile_digest, record.scope_digest)
         _scope_ready(router, record.scope_digest)
         if not _configuration_matches(router, record) or _read(_path(record)) != _applied(record):
             raise ConfigurationError('task configuration changed or is absent; resume rejected')
@@ -225,7 +251,7 @@ def inspect(router: Router, identity: str) -> dict[str, object]:
     binding = get_binding(router, record)
     try:
         host_contents = read_config(Path(binding.config_path)) if binding else None
-        codex_entry = ('in_process_only' if binding is None and record.manifest_file_digest is None
+        codex_entry = ('in_process_only' if binding is None and (not record.host_binding or record.manifest_file_digest is None)
                        else 'none' if binding is None else entry_state(binding, host_contents))
     except ConfigurationError:
         codex_entry = 'conflict'

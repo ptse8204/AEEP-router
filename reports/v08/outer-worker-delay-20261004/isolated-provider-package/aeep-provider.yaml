@@ -1,0 +1,444 @@
+apiVersion: aeep.dev/v0.6
+kind: ProviderPackage
+metadata:
+  package_id: fixture.provider.package
+  version: 0.6.0
+  issued_at: '2026-08-21T00:00:00Z'
+  expires_at: '2027-08-21T00:00:00Z'
+  description: Synthetic AEEP v0.6 provider-package fixture.
+  labels: {}
+spec:
+  provider:
+    provider_id: fixture.provider
+    display_name: Fixture Provider
+    description: null
+    publisher:
+      name: AEEP fixtures
+      subject: fixture:aep-v06
+      contact: null
+    homepage: null
+    source_repository: null
+    keys:
+    - key_id: fixture-publisher
+      algorithm: ed25519
+      public_key: A6EHv_POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg
+      roles:
+      - package_publisher
+      valid_from: '2026-08-21T00:00:00Z'
+      valid_until: '2027-08-21T00:00:00Z'
+      revocation_hint: null
+    - key_id: fixture-verifier
+      algorithm: ed25519
+      public_key: cSZR9FC6BbY4mLme9fe6RWMujiUn9_cVzWcexAJMxR4
+      roles:
+      - independent_verifier
+      valid_from: '2026-08-21T00:00:00Z'
+      valid_until: '2027-08-21T00:00:00Z'
+      revocation_hint: null
+  compatibility:
+    aeep_min: 0.5.0
+    aeep_max_exclusive: 0.7.0
+    python: '>=3.11'
+    platforms:
+    - any
+    protocols:
+    - aeep-provider-package-v2
+  capabilities:
+  - namespace: text
+    name: statistics
+    version: '1'
+    authority: null
+    owner: null
+    status: active
+    replaced_by: null
+    compatible_versions: []
+    description: Return deterministic character, word, and line counts.
+    input_schema:
+      type: object
+      properties:
+        text:
+          type: string
+      required:
+      - text
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters:
+          type: integer
+        words:
+          type: integer
+        lines:
+          type: integer
+      required:
+      - characters
+      - words
+      - lines
+      additionalProperties: false
+    side_effect: none
+  routes:
+  - route_id: fixture.command.text-statistics
+    capability: text.statistics@1
+    input_schema:
+      type: object
+      properties:
+        text:
+          type: string
+      required:
+      - text
+      additionalProperties: false
+    output_schema:
+      type: object
+      properties:
+        characters:
+          type: integer
+        words:
+          type: integer
+        lines:
+          type: integer
+      required:
+      - characters
+      - words
+      - lines
+      additionalProperties: false
+    executor:
+      kind: command
+      description: Packaged deterministic text statistics command.
+      side_effect: none
+      locality: local
+      requires_network: false
+      data_residency: []
+      idempotent: true
+      resource_pool: null
+      validators: []
+      config:
+        argv:
+        - $PYTHON
+        - -m
+        - aeep.examples.text_stats_cli
+        - '{input.text}'
+        output:
+          type: json
+        inherit_env: false
+        executable_identity: python:>=3.11:aeep.examples.text_stats_cli
+    declared_fingerprint:
+      profile: aeep-route-v1
+      algorithm: sha256
+      value: sha256:dfef149319564fff1c29851bfc7b3eef7df143a401606f3ba0157c180afbeceb
+    artifact_bindings: []
+    static_estimate:
+      resources:
+        monetary_usd: 0.0
+        latency_ms: 100.0
+        cpu_ms: 0.0
+        memory_mb_seconds: 0.0
+        peak_memory_mb: 0.0
+        gpu_ms: 0.0
+        network_bytes: 0
+        context_tokens: 0
+        input_tokens: 0
+        cached_input_tokens: 0
+        cache_write_input_tokens: 0
+        output_tokens: 0
+        reasoning_output_tokens: 0
+        subscription_units: 0.0
+      cash:
+        amount_usd: null
+        upper_bound_usd: null
+        evidence:
+          status: unavailable
+          source: unavailable
+          trust: untrusted
+          evidence_id: null
+          source_reference: null
+          digest: null
+          observed_at: null
+      subscription_usage: []
+      success_probability: 0.95
+      quality_score: 0.95
+      risk_score: 0.05
+      confidence: 0.2
+      source: static
+      sample_size: 0
+      uncertainty: null
+    tags: []
+  artifacts:
+  - artifact_id: qualification
+    digest: sha256:6eabd3682159818098c5c7d5a4cc41d92de8cec1b9f7298860fdb5a7debb3c85
+    media_type: application/vnd.aeep.qualification-report+json;version=1
+    size_bytes: 656
+    location:
+      path: evidence/qualification.json
+      uri: null
+      oci: null
+    required: true
+    compression: none
+    purpose: qualification
+  - artifact_id: benchmark
+    digest: sha256:21be1a76d9c9cabafc3235e6a14ae5bf2be26ab960cef2360e192922cb7edf96
+    media_type: application/vnd.aeep.benchmark-campaign+json;version=1
+    size_bytes: 159431
+    location:
+      path: evidence/benchmark.json
+      uri: null
+      oci: null
+    required: true
+    compression: none
+    purpose: benchmark
+  - artifact_id: rate-card
+    digest: sha256:84783a6a7bff585402de3e41e5308b082de9ddd42c45b20f79b2049844dc41e8
+    media_type: application/vnd.aeep.rate-card-snapshot+json;version=1
+    size_bytes: 929
+    location:
+      path: evidence/rate-card.json
+      uri: null
+      oci: null
+    required: false
+    compression: none
+    purpose: rate_card
+  - artifact_id: comparison
+    digest: sha256:04afcf8e11d32e856d0c275839eb5bb5bbbe6017581547bee75350aad1bc4259
+    media_type: application/vnd.aeep.comparison-report+json;version=1
+    size_bytes: 873
+    location:
+      path: evidence/comparison.json
+      uri: null
+      oci: null
+    required: false
+    compression: none
+    purpose: comparison
+  evidence:
+  - evidence_id: fixture-qualification
+    evidence_type: qualification_report
+    artifact_id: qualification
+    subject:
+      route_id: fixture.command.text-statistics
+      capability: text.statistics@1
+      route_fingerprint: sha256:dfef149319564fff1c29851bfc7b3eef7df143a401606f3ba0157c180afbeceb
+      workload_digest: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      executor_artifact_digests: []
+      model_identity: null
+      protocol_identity: aeep-provider-package-v1
+      environment_class: portable
+    producer:
+      producer_id: fixture.verifier
+      role: independent_verifier
+      key_id: fixture-verifier
+    authority_class: independent_lab
+    cohort:
+      profile: aeep-evidence-cohort-v1
+      provider_version: 0.6.0
+      model_version: null
+      region: null
+      account_tier: null
+      adapter_type: command
+      adapter_version: '1'
+      action_feature_profile: aeep-action-features-v1
+      validator_digest: sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+      cache_namespace: null
+      period_start: '2026-08-21T00:00:00Z'
+      period_end: '2026-08-22T00:00:00Z'
+      economic_evidence_level: attested
+    trust_claim: attested
+    validity:
+      issued_at: '2026-08-21T00:00:00Z'
+      not_before: null
+      expires_at: '2027-02-17T00:00:00Z'
+    summary:
+      success:
+        trials: 3
+        successes: 3
+    summary_digest: sha256:cc7ed14dc93a7bbd2c63b6d220b7decaed3c0c0149203d621f4f50f9e86023f7
+    attestations:
+    - attestation_id: attest-fixture-qualification
+      algorithm: ed25519
+      key_id: fixture-verifier
+      role: independent_verifier
+      payload_type: application/vnd.aeep.evidence-attestation+json;version=1
+      digest: sha256:eed46bd775cc2f8f89660b6c8d6f62931b494908d0b872e7a231a1c6c47636cb
+      signature: 9RfYZSBBTx9SzNbQst7knoQQZ-9tTxDWmRvPdeUlOo-Sy47jtogL2r2wnEuufZ_5_cLS-1rhNnU9nSyaadKlAA
+      issued_at: '2026-08-21T00:00:00Z'
+  - evidence_id: fixture-benchmark
+    evidence_type: benchmark_campaign
+    artifact_id: benchmark
+    subject:
+      route_id: fixture.command.text-statistics
+      capability: text.statistics@1
+      route_fingerprint: sha256:dfef149319564fff1c29851bfc7b3eef7df143a401606f3ba0157c180afbeceb
+      workload_digest: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      executor_artifact_digests: []
+      model_identity: null
+      protocol_identity: aeep-provider-package-v1
+      environment_class: portable
+    producer:
+      producer_id: fixture.verifier
+      role: independent_verifier
+      key_id: fixture-verifier
+    authority_class: independent_lab
+    cohort:
+      profile: aeep-evidence-cohort-v1
+      provider_version: 0.6.0
+      model_version: null
+      region: null
+      account_tier: null
+      adapter_type: command
+      adapter_version: '1'
+      action_feature_profile: aeep-action-features-v1
+      validator_digest: sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+      cache_namespace: null
+      period_start: '2026-08-21T00:00:00Z'
+      period_end: '2026-08-22T00:00:00Z'
+      economic_evidence_level: attested
+    trust_claim: attested
+    validity:
+      issued_at: '2026-08-21T00:00:00Z'
+      not_before: null
+      expires_at: '2027-02-17T00:00:00Z'
+    summary:
+      sample_size: 100
+      success:
+        trials: 100
+        successes: 100
+      tokens:
+        input_tokens: 0
+        output_tokens: 0
+      latency:
+        median_ms: 18
+      cost:
+        actual_cash_usd: '0'
+    summary_digest: sha256:44f04866ac6f21b3d8c0ca217daaead55271ba838d0b34f7459959620b63fe24
+    attestations:
+    - attestation_id: attest-fixture-benchmark
+      algorithm: ed25519
+      key_id: fixture-verifier
+      role: independent_verifier
+      payload_type: application/vnd.aeep.evidence-attestation+json;version=1
+      digest: sha256:3cd932dbc42d6ed4c8bfc0f4bfae6d3be894f4932bd0ac4dc022bdfd31adf6e0
+      signature: PONvsI1pkRjayXpJ3sZwNJxY6sdn8R-Nof2HQIm_TOXkXKXR5JTix4uPmc6y0jMKdWTLJpABiEnMu8xCg9UuDg
+      issued_at: '2026-08-21T00:00:00Z'
+  - evidence_id: fixture-rate-card
+    evidence_type: rate_card_snapshot
+    artifact_id: rate-card
+    subject:
+      route_id: fixture.command.text-statistics
+      capability: text.statistics@1
+      route_fingerprint: sha256:dfef149319564fff1c29851bfc7b3eef7df143a401606f3ba0157c180afbeceb
+      workload_digest: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      executor_artifact_digests: []
+      model_identity: null
+      protocol_identity: aeep-provider-package-v1
+      environment_class: portable
+    producer:
+      producer_id: fixture.verifier
+      role: independent_verifier
+      key_id: fixture-verifier
+    authority_class: independent_lab
+    cohort:
+      profile: aeep-evidence-cohort-v1
+      provider_version: 0.6.0
+      model_version: null
+      region: null
+      account_tier: null
+      adapter_type: command
+      adapter_version: '1'
+      action_feature_profile: aeep-action-features-v1
+      validator_digest: sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+      cache_namespace: null
+      period_start: '2026-08-21T00:00:00Z'
+      period_end: '2026-08-22T00:00:00Z'
+      economic_evidence_level: attested
+    trust_claim: attested
+    validity:
+      issued_at: '2026-08-21T00:00:00Z'
+      not_before: null
+      expires_at: '2027-02-17T00:00:00Z'
+    summary:
+      snapshot_id: rate_37d414c1fde6f6b89bf15ddcadd8b35fd4088c2367f0bfc88374b9c9833d5643
+    summary_digest: sha256:64986f1137e6b06d1ee4706f3480bbd409dc6efdad0ed45851445bcbcb852f7d
+    attestations:
+    - attestation_id: attest-fixture-rate-card
+      algorithm: ed25519
+      key_id: fixture-verifier
+      role: independent_verifier
+      payload_type: application/vnd.aeep.evidence-attestation+json;version=1
+      digest: sha256:39b86c61ee1983dc47294d31b2068c509a0d445f779bb6b6efc1b16dc2c8c8e6
+      signature: TQzdn6cLcK6VNHjJJZVKFyPZiRKM8kbrKb4c9d4myjORyvy5A7SkjQk-i5ia4BXwjaetYgj4VGq18Dm4RhXGCg
+      issued_at: '2026-08-21T00:00:00Z'
+  - evidence_id: fixture-comparison
+    evidence_type: comparison_report
+    artifact_id: comparison
+    subject:
+      route_id: fixture.command.text-statistics
+      capability: text.statistics@1
+      route_fingerprint: sha256:dfef149319564fff1c29851bfc7b3eef7df143a401606f3ba0157c180afbeceb
+      workload_digest: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      executor_artifact_digests: []
+      model_identity: null
+      protocol_identity: aeep-provider-package-v1
+      environment_class: portable
+    producer:
+      producer_id: fixture.verifier
+      role: independent_verifier
+      key_id: fixture-verifier
+    authority_class: independent_lab
+    cohort:
+      profile: aeep-evidence-cohort-v1
+      provider_version: 0.6.0
+      model_version: null
+      region: null
+      account_tier: null
+      adapter_type: command
+      adapter_version: '1'
+      action_feature_profile: aeep-action-features-v1
+      validator_digest: sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+      cache_namespace: null
+      period_start: '2026-08-21T00:00:00Z'
+      period_end: '2026-08-22T00:00:00Z'
+      economic_evidence_level: attested
+    trust_claim: attested
+    validity:
+      issued_at: '2026-08-21T00:00:00Z'
+      not_before: null
+      expires_at: '2027-02-17T00:00:00Z'
+    summary:
+      paired_trials: 50
+    summary_digest: sha256:5485864fb1828b8429cd11e4b9e40a7df3172fbb77642d8b564ad2d17059b3f0
+    attestations:
+    - attestation_id: attest-fixture-comparison
+      algorithm: ed25519
+      key_id: fixture-verifier
+      role: independent_verifier
+      payload_type: application/vnd.aeep.evidence-attestation+json;version=1
+      digest: sha256:988da862e75ac92ebcf70e920121a4bbcbdcfee5afbf9b7e5e375487f16eebaf
+      signature: xb912u8wgpiInyCzw94kBFIbScm0tfYw1X6tcM3W788cwbEgsFL2x9ZGCF6LgaW_9iac9jywQM3CD_bJlBv2Cg
+      issued_at: '2026-08-21T00:00:00Z'
+  smoke_tests:
+  - smoke_id: fixture-text-statistics-smoke
+    route_id: fixture.command.text-statistics
+    mode: cold_then_warm
+    safety: read_only
+    input:
+      text: one two
+    expected:
+      output_schema_only: true
+    timeout_ms: 5000
+    max_executions: 2
+    max_cash: null
+    max_tokens: null
+  extensions:
+    x-aeep-fixture:
+      non_production: true
+integrity:
+  canonicalization: RFC8785
+  digest_algorithm: sha256
+  payload_scope: apiVersion+kind+metadata+spec
+  digest: sha256:96ffad39a239ed623014d6b2f5a253a845d100a1f08e82749e6b5a5faa879543
+signatures:
+- signature_id: fixture-publisher-signature
+  algorithm: ed25519
+  key_id: fixture-publisher
+  role: package_publisher
+  payload_type: application/vnd.aeep.provider-package-digest+json;version=1
+  digest: sha256:96ffad39a239ed623014d6b2f5a253a845d100a1f08e82749e6b5a5faa879543
+  signature: adrs_VZONXtjQ43JWDw0ju9xKrErmaep309fPUi0_yxZByZY-S2yiFJN7PFhh_LTCSYjrkN1B6UP1fAQcz98DQ
+  issued_at: '2026-08-21T00:00:00Z'

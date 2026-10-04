@@ -1,0 +1,119 @@
+{
+  "audit_scope": "Read-only exact operation records, result digests, onboarding counters, and filtered Docker state. No auth state, credentials, model transcripts or task content read.",
+  "audited_at": "2026-10-03T08:56:01.161515Z",
+  "canonical_operations": [
+    {
+      "ledger_payload_hashes_verified": true,
+      "measured_elapsed_seconds": 2.058614583918825,
+      "operation_id": "capacity:planning_b_treatment_capacity_449b_19027f56",
+      "operation_measurement_digest": "daf8049541e81a6a6efc8e396d1921eb6213a5afcc8158e48d75b509afce95dd",
+      "operation_start_digest": "fbd32bc93cdc4ce49c725eea20f4417cd8018156371b1e3f1f95a3c74cae266e",
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "started_at": "2026-10-03T08:53:05.369740Z",
+      "state": "complete"
+    },
+    {
+      "ledger_payload_hashes_verified": true,
+      "measured_elapsed_seconds": 2.652950500138104,
+      "operation_id": "conformance_probe_2261e300a89844dc83b0795ff9436c4c:proxy_start",
+      "operation_measurement_digest": "7fa8ceebc3ba72d3dc8d88e201e8ec87d30a180bf6a1b60a4d5807dd1723a601",
+      "operation_start_digest": "2eacf4496b3345af3c5bcf90f998023bd3d97d836ef401276cc9e3a57252a61f",
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "started_at": "2026-10-03T08:53:02.637609Z",
+      "state": "complete"
+    },
+    {
+      "ledger_payload_hashes_verified": true,
+      "measured_elapsed_seconds": 2.6507214999292046,
+      "operation_id": "conformance_probe_2261e300a89844dc83b0795ff9436c4c:proxy_stop",
+      "operation_measurement_digest": "8f918cd6f920c9f82c069d5ea4a6100b97867297844cd9fede07190fffbaba30",
+      "operation_start_digest": "2fa5782d8640ad3e5476d30a474d1b9fbe71d769fbafeaf64a60c3bd26cb1dc1",
+      "reservation": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 60.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "started_at": "2026-10-03T08:53:02.643505Z",
+      "state": "complete"
+    }
+  ],
+  "capacity_result": {
+    "actual_cash_cost_usd": null,
+    "capacity_digest": "sha256:f58b28d9a6754982b851cd8012a4de3528348d63ce1c44d4e334e48ea9fd282d",
+    "cash_ceiling_usd": 0,
+    "cleanup_confirmed": true,
+    "container_name": "aeep-f8cfc3c747334643be7920409cd99b3a",
+    "elapsed_seconds": 2.058614583918825,
+    "method": "account/rateLimits/read",
+    "model_turns": 0,
+    "observed_at": "2026-10-03T08:53:07.246055Z",
+    "operation_id": "capacity:planning_b_treatment_capacity_449b_19027f56",
+    "path": "reports/v08/luna-docx-stage/b-treatment-capacity-result.json",
+    "request_digest": "5910caadc65f9a2a7c1b14ed015cdd1b9a179751547484e2a5f2ed2fec8f0e70",
+    "resource_id": "codex.self",
+    "sha256": "261d4e5a15f5ac25c745efc19836e15556bbb25d8dc76053ef0866d1ceef7191",
+    "source_unchanged": true,
+    "stage": "capacity_introspection",
+    "status": "passed",
+    "subscription_usage": "unknown; not read by this operation",
+    "window_count": 1,
+    "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+    "worker_process_id": "host-worker_e9773d0cb23d4c52aea407dca501901a"
+  },
+  "docker_cleanup": {
+    "capacity_worker_filtered_name": "aeep-f8cfc3c747334643be7920409cd99b3a",
+    "capacity_worker_matches": [],
+    "exact_proxy_current_state": {
+      "Id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+      "Image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+      "Running": false
+    },
+    "running_container_count": 0,
+    "worker_absent_from_all_containers": true
+  },
+  "financial_status": "cash ceiling is zero; actual cash/subscription use was not measured by these operations",
+  "onboarding_counters_after": {
+    "cash_usd": "0.0",
+    "elapsed_seconds": 98849.49280148535,
+    "model_turns": 2691,
+    "operations": 9238,
+    "revoked": 0
+  },
+  "policy": "docs/ASSESSMENT_TESTING.md",
+  "proxy_lifecycle_result": {
+    "actual_cash_cost_usd": null,
+    "capacity_refresh_passed": true,
+    "capacity_result_sha256": "261d4e5a15f5ac25c745efc19836e15556bbb25d8dc76053ef0866d1ceef7191",
+    "cash_ceiling_usd": 0,
+    "cleanup_operation_settled": true,
+    "error_type": null,
+    "model_turns": 0,
+    "path": "reports/v08/luna-docx-stage/b-treatment-capacity-proxy-lifecycle-result.json",
+    "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "proxy_restored_stopped": true,
+    "proxy_running_wall_seconds": 4.823155124904588,
+    "proxy_start_elapsed_seconds": 2.652950500138104,
+    "proxy_stop_elapsed_seconds": 2.6507214999292046,
+    "request_digest": "7f01ddd6d2e65c234e5f90b0f306e1a1af31237fe95f1c071dde9991e534cbab",
+    "request_id": "conformance_probe_2261e300a89844dc83b0795ff9436c4c",
+    "review_sha256": "cbcb908308ae565882fdb6598fb4d40f58855826535360f54a477b0a7a4520c6",
+    "sha256": "6a5dad68fff744af196c9a3e19621e8793045924e2156d0d5c5b3c893e4d98ae",
+    "source_unchanged": true,
+    "start_operation_settled": true,
+    "status": "passed",
+    "subscription_usage": "unknown; not read by these operations"
+  },
+  "schema_version": "aeep.b-capacity-terminal-audit.v1",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad"
+}

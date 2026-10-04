@@ -1,0 +1,192 @@
+{
+  "cases": [
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [],
+      "artifact_sha256_recorded": false,
+      "call_order": [
+        "inner.return_timeout",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "inner_timeout_skips_artifact",
+      "check": "passed",
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 0.000842,
+      "exception_type": null,
+      "progress_preserved": true,
+      "progress_value": "{\"stage\":\"turn_completed\",\"turn_completion_received\":true}",
+      "returned_error_type": "TIMEOUT",
+      "returned_status": "timeout"
+    },
+    {
+      "artifact_bytes_recorded": 16,
+      "artifact_calls": [
+        "synthetic-output.txt"
+      ],
+      "artifact_sha256_recorded": true,
+      "call_order": [
+        "inner.return_success",
+        "worker.artifact.start",
+        "worker.artifact.done",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "success_artifact_succeeds",
+      "check": "passed",
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 0.000353,
+      "exception_type": null,
+      "progress_preserved": true,
+      "progress_value": "{\"stage\":\"turn_completed\",\"turn_completion_received\":true}",
+      "returned_error_type": null,
+      "returned_status": "success"
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [
+        "synthetic-output.txt"
+      ],
+      "artifact_sha256_recorded": false,
+      "call_order": [
+        "inner.return_success",
+        "worker.artifact.start",
+        "worker.artifact.configuration_error",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "success_artifact_configuration_error",
+      "check": "passed",
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 8.9e-05,
+      "exception_type": null,
+      "progress_preserved": true,
+      "progress_value": "{\"stage\":\"turn_completed\",\"turn_completion_received\":true}",
+      "returned_error_type": "WORKER_ARTIFACT_FAILED",
+      "returned_status": "failed"
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [
+        "synthetic-output.txt"
+      ],
+      "artifact_sha256_recorded": null,
+      "call_order": [
+        "inner.return_success",
+        "worker.artifact.start",
+        "worker.artifact.cancelled",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "cancel_while_artifact_pending",
+      "check": "passed",
+      "cleanup_confirmed": null,
+      "elapsed_seconds": 0.000156,
+      "exception_type": "CancelledError",
+      "progress_preserved": null,
+      "progress_value": null,
+      "returned_error_type": null,
+      "returned_status": null
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [],
+      "artifact_sha256_recorded": null,
+      "call_order": [
+        "inner.return_timeout",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.cancelled"
+      ],
+      "case_id": "cancel_while_cleanup_pending",
+      "check": "passed",
+      "cleanup_confirmed": null,
+      "elapsed_seconds": 0.000138,
+      "exception_type": "CancelledError",
+      "progress_preserved": null,
+      "progress_value": null,
+      "returned_error_type": null,
+      "returned_status": null
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [],
+      "artifact_sha256_recorded": false,
+      "call_order": [
+        "inner.return_timeout",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "delayed_cleanup_after_timeout",
+      "check": "passed",
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 0.0521,
+      "exception_type": null,
+      "progress_preserved": true,
+      "progress_value": "{\"stage\":\"turn_completed\",\"turn_completion_received\":true}",
+      "returned_error_type": "TIMEOUT",
+      "returned_status": "timeout"
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [],
+      "artifact_sha256_recorded": false,
+      "call_order": [
+        "inner.pending",
+        "inner.caught_outer_cancellation_as_timeout",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "outer_deadline_inner_converts_cancellation_to_timeout",
+      "check": "passed",
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 0.103773,
+      "exception_type": null,
+      "progress_preserved": true,
+      "progress_value": "{\"stage\":\"turn_completed\",\"turn_completion_received\":true}",
+      "returned_error_type": "TIMEOUT",
+      "returned_status": "timeout"
+    },
+    {
+      "artifact_bytes_recorded": null,
+      "artifact_calls": [
+        "synthetic-output.txt"
+      ],
+      "artifact_sha256_recorded": null,
+      "call_order": [
+        "inner.return_success",
+        "worker.artifact.start",
+        "worker.artifact.cancelled",
+        "transport.close",
+        "worker.cleanup.start",
+        "worker.cleanup.done"
+      ],
+      "case_id": "outer_deadline_during_artifact_propagates_timeout_error",
+      "check": "passed",
+      "cleanup_confirmed": null,
+      "elapsed_seconds": 0.102482,
+      "exception_type": "TimeoutError",
+      "progress_preserved": null,
+      "progress_value": null,
+      "returned_error_type": null,
+      "returned_status": null
+    }
+  ],
+  "definition_sha256": "b5307317f98a5828361df9e413e65204dc6a1404636c720506a72c6bf50a98ba",
+  "elapsed_seconds": 0.283394,
+  "git_head": "c0609f0e1839ea17bbd4871c028e84e75e26970e",
+  "interpretation_limit": "These are synthetic current-code wrapper outcomes. They do not reconstruct, explain, or alter any historical timeout trial.",
+  "probe_kind": "offline synthetic adapter/worker behavior; no model, Codex process, Docker or network",
+  "probe_sha256": "d2157823983057fe0fb303f78c0d54c0c281d65cace98503ed5c1cd1e6dc41fa",
+  "schema_version": "aeep.outer-worker-followup.outcomes.v1",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "source_digest_after": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "started_at": "2026-10-04T09:20:15Z",
+  "status": "passed"
+}

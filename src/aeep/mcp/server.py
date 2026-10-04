@@ -19,6 +19,7 @@ import os
 import sys
 from collections.abc import AsyncIterator, Mapping
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
@@ -180,6 +181,7 @@ class AEEPToolService:
         profile: str = "legacy",
         task_scope: str | None = None,
         task_activation: str | None = None,
+        discovery_config: Path | None = None,
     ) -> None:
         self.router = router
         # These are operator-controlled ceilings. Tool-call arguments are
@@ -189,6 +191,19 @@ class AEEPToolService:
         if profile not in {"legacy", "assessment", "task"}:
             raise ConfigurationError("unknown tool profile")
         self.profile = profile
+        self.discovery = None
+        if discovery_config is not None:
+            from ..discovery_service import DiscoveryConfig, DiscoveryService
+            if profile == 'task':
+                raise ConfigurationError('task profile cannot perform external discovery')
+            with discovery_config.open('rb') as stream:
+                configuration_bytes = stream.read(65_537)
+            if len(configuration_bytes) > 65_536:
+                raise ConfigurationError('discovery configuration exceeds 64 KiB')
+            self.discovery = DiscoveryService.from_config(
+                router.store, DiscoveryConfig.model_validate_json(configuration_bytes),
+                base_directory=discovery_config.resolve().parent,
+            )
         if task_activation is not None:
             from ..assessment.models import content_digest
             from ..tasks import require_activation
@@ -223,11 +238,31 @@ class AEEPToolService:
                     scope = TaskScope.model_validate(AssessmentRepository(self.router.store).get('task_scope', self.router._task_scope_digest))
                     specs = [spec for spec in specs if scope.executor_fingerprints.get(spec.id) == executor_fingerprint(spec)]
                 return declarations(self.router.store, tasks_only=True, capabilities={spec.capability for spec in specs})
-            return declarations(self.router.store, tasks_only=self.profile == 'task')
-        return export_tools("mcp")
+            return [item for item in declarations(self.router.store)
+                    if item['name'] != 'aeep_discover_resources' or self.discovery is not None]
+        return [item for item in export_tools("mcp")
+                if item['name'] != 'aeep_discover_resources' or self.discovery is not None]
 
     async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            if name in {'aeep_discover_resources', 'aeep_lookup_capability'}:
+                from ..registry import validate_json
+                declaration = _tool_by_name(self.list_tools(), name)
+                if declaration is None:
+                    raise ConfigurationError('capability preparation tool is not enabled')
+                validate_json(arguments, declaration['inputSchema'], label=name)
+                if name == 'aeep_discover_resources':
+                    from ..discovery import DiscoveryRequest
+                    if self.discovery is None:
+                        raise ConfigurationError('discovery requires operator-configured sources')
+                    result = await self.discovery.search(DiscoveryRequest.model_validate(arguments))
+                    return _tool_result(result.model_dump(mode='json'))
+                from ..capability_lifecycle import AdmissionLookupRequest, CapabilityLifecycle
+                lookup = AdmissionLookupRequest.model_validate(arguments)
+                admission_decision = CapabilityLifecycle.from_router(self.router).lookup(
+                    lookup.candidate_id, lookup.request, intake_id=lookup.intake_id,
+                )
+                return _tool_result(admission_decision.model_dump(mode='json'))
             if self.profile in {"assessment", "task"}:
                 from ..assessment.tools import call
                 return await call(self, name, arguments)
@@ -462,6 +497,7 @@ async def serve_stdio(
     profile: str = "legacy",
     task_scope: str | None = None,
     task_activation: str | None = None,
+    discovery_config: Path | None = None,
 ) -> None:
     """Run until stdin closes."""
 
@@ -474,6 +510,7 @@ async def serve_stdio(
             profile=profile,
             task_scope=task_scope,
             task_activation=task_activation,
+            discovery_config=discovery_config,
         )
     )
     max_bytes = max(1024, int(max_message_bytes))
@@ -522,6 +559,7 @@ def create_http_app(
     profile: str = "legacy",
     task_scope: str | None = None,
     task_activation: str | None = None,
+    discovery_config: Path | None = None,
 ) -> Any:
     """Create an optional FastAPI app without making FastAPI a base dependency."""
 
@@ -545,6 +583,7 @@ def create_http_app(
         profile=profile,
         task_scope=task_scope,
         task_activation=task_activation,
+        discovery_config=discovery_config,
     )
     protocol = MCPProtocolApp(service)
 

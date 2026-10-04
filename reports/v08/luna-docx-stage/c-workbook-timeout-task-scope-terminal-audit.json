@@ -1,0 +1,391 @@
+{
+  "assessment_id": "assessment_a9369479529649cdab7a21b971dbabbc",
+  "database_path_refs": {
+    "campaign_db": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments/plan_143001e5f4be4fd9b17f78d797340b70/campaign.sqlite3",
+    "native_project_db": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/state.db"
+  },
+  "method": {
+    "campaign_db": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments/plan_143001e5f4be4fd9b17f78d797340b70/campaign.sqlite3",
+    "campaign_scan": "Scalar metadata only: trial_id/state/status/phase/times/wall/outer receipt IDs/ok/valid/correctness/model-usage/error/failure-code fields; found exactly five timeout rows.",
+    "connections": "SQLite mode=ro with PRAGMA query_only=ON; read transactions only; no writes",
+    "excluded": [
+      "case inputs",
+      "outputs",
+      "expected answers",
+      "holdout content",
+      "prompt/protocol text",
+      "error messages",
+      "authentication state",
+      "provider usage payloads"
+    ],
+    "native_checks": "Only the five exact indexed scopes and their exact campaign time windows were used. Checked the scope record/review, native receipt and decision-matched attempt metadata, task_scope_digest, terminal_receipt_ids and validity/status/timestamps.",
+    "native_db": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/state.db"
+  },
+  "observed_at": "2026-10-03T15:59:27.950388Z",
+  "plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+  "prior_four_row_audit": {
+    "path": "reports/v08/luna-docx-stage/c-workbook-timeout-task-scope-audit.json",
+    "sha256": "761c6fdc93112182718512a458d7cbe007cfa3f97b0a0f50f8b1254a67b60ef0"
+  },
+  "references": [
+    {
+      "path": "reports/v08/luna-docx-stage/c-workbook-qualification-scopes-20261003-v3.json",
+      "sha256": "0d7771514b600699d4373f1cbc2d94285357420e296c1b66a80a84621d21e626"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/c-current-profile-v1.json",
+      "sha256": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/c-workbook-first-training-timeout.json",
+      "sha256": "92ec786c9dca8b602c2f4d59172d61ad888a03bb23baff70088d1b659ad1d3bf"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/c-workbook-first-holdout-timeout.json",
+      "sha256": "afd236415145691cf94b03a627515e49e0e8b8976c1c604918636014a3762145"
+    }
+  ],
+  "schema_version": "aeep.c-workbook-timeout-task-scope-terminal-audit.v1",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "summary": {
+    "all_outer_rows_model_usage_complete": false,
+    "completed_outer_timeout_rows": 5,
+    "exact_task_scope_digest_matches": 5,
+    "interpretation": "For each exact timeout trial, the pre-reviewed READ scope maps from the scope index to its canonical task_scope record. The matching native attempt stores that same scope digest and its terminal receipt ID; the sole matching native child receipt in the trial window is successful and task/output-valid. It ends before the outer candidate-host timeout receipt. This establishes scoped native invocation and completion, not success of the outer trial or a particular named model-facing tool choice.",
+    "limits": "All five trial rows have model_usage_complete=false. Actual model-turn/token/cash usage is incomplete and no zero-usage claim is made. This timeout audit is not a qualification or value judgment.",
+    "native_child_successes": 5,
+    "outer_stall_cause": "unknown; stored status and elapsed time do not identify the precise cause"
+  },
+  "trials": [
+    {
+      "campaign_outer_receipt": {
+        "ended_at": "2026-10-03T14:04:25.356085Z",
+        "error_type": "timeout",
+        "executor_fingerprint": "sha256:f8ea30f9c929c4e2a17c409febbf6c73f573f0e225f944604efa6e8a57788eb6",
+        "executor_id": "b.luna.aeep",
+        "receipt_id": "rcpt_46ad65ce4a4e48dd891841b5fbb591db",
+        "started_at": "2026-10-03T14:01:04.194865Z",
+        "status": "timeout"
+      },
+      "campaign_trial": {
+        "correctness_failed": false,
+        "db_state": "complete",
+        "ended_at": "2026-10-03T14:04:25.360458Z",
+        "error_type": null,
+        "execution_failure_codes": [],
+        "model_usage_complete": false,
+        "ok": false,
+        "started_at": "2026-10-03T14:01:01.690691Z",
+        "status": "timeout",
+        "valid": false,
+        "wall_time_ms": 203497.82125023194
+      },
+      "native_child_attempt": {
+        "attempt_id": "attempt_5188e253dd474d4faebd00f0919a2ca3",
+        "decision_id": "dec_6bf5510bc4e34222a6ba87714f8120f2",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED",
+        "task_scope_digest": "f55d5ef76f173afa40b7e6d4a0b1a3ffec8888ebcfe75d6d38414fec3b22c0ec",
+        "task_scope_digest_matches_reviewed_scope": true,
+        "terminal_receipt_ids": [
+          "rcpt_1395b806010641b8b9160185874ecad8"
+        ]
+      },
+      "native_child_receipt": {
+        "capability": "assessment.workbook@1",
+        "decision_id": "dec_6bf5510bc4e34222a6ba87714f8120f2",
+        "ended_at": "2026-10-03T14:01:34.726708+00:00",
+        "ended_before_outer_trial_end_seconds": 170.63375,
+        "error_type": null,
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "output_valid": true,
+        "receipt_id": "rcpt_1395b806010641b8b9160185874ecad8",
+        "started_at": "2026-10-03T14:01:31.802051+00:00",
+        "status": "success",
+        "task_valid": true
+      },
+      "phase": "measurement",
+      "reviewed_task_scope": {
+        "approval_ceiling": "read",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "expires_at": "2026-10-04T04:16:58.196690Z",
+        "max_attempt_seconds": 10.0,
+        "max_attempts": 1,
+        "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+        "record_digest_matches_index": true,
+        "review_approved_at": "2026-10-03T13:36:35.913554+00:00",
+        "review_revoked": false,
+        "scope_digest": "f55d5ef76f173afa40b7e6d4a0b1a3ffec8888ebcfe75d6d38414fec3b22c0ec",
+        "scope_id": "bqual_1f583cd045c5422b1d8d17aff7274c96ad9ece88"
+      },
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-training-3_b.luna.aeep_fresh-worker_0"
+    },
+    {
+      "campaign_outer_receipt": {
+        "ended_at": "2026-10-03T15:18:28.286628Z",
+        "error_type": "timeout",
+        "executor_fingerprint": "sha256:f8ea30f9c929c4e2a17c409febbf6c73f573f0e225f944604efa6e8a57788eb6",
+        "executor_id": "b.luna.aeep",
+        "receipt_id": "rcpt_38c5a0cab52b43638aa0dfb7a2200c24",
+        "started_at": "2026-10-03T15:15:07.152337Z",
+        "status": "timeout"
+      },
+      "campaign_trial": {
+        "correctness_failed": false,
+        "db_state": "complete",
+        "ended_at": "2026-10-03T15:18:28.289433Z",
+        "error_type": null,
+        "execution_failure_codes": [],
+        "model_usage_complete": false,
+        "ok": false,
+        "started_at": "2026-10-03T15:15:04.595002Z",
+        "status": "timeout",
+        "valid": false,
+        "wall_time_ms": 203474.53533299267
+      },
+      "native_child_attempt": {
+        "attempt_id": "attempt_1189d98aedf940e294205bb629ef72c6",
+        "decision_id": "dec_3127d43858d94587a9e9ab7a797df9d2",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED",
+        "task_scope_digest": "a5cd602f249a564a14de4e2226a12f655fe8279481843cb5062b057f4850a929",
+        "task_scope_digest_matches_reviewed_scope": true,
+        "terminal_receipt_ids": [
+          "rcpt_c45245523ace44e9ac2c570ff19417c7"
+        ]
+      },
+      "native_child_receipt": {
+        "capability": "assessment.workbook@1",
+        "decision_id": "dec_3127d43858d94587a9e9ab7a797df9d2",
+        "ended_at": "2026-10-03T15:15:33.751596+00:00",
+        "ended_before_outer_trial_end_seconds": 174.537837,
+        "error_type": null,
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "output_valid": true,
+        "receipt_id": "rcpt_c45245523ace44e9ac2c570ff19417c7",
+        "started_at": "2026-10-03T15:15:30.855095+00:00",
+        "status": "success",
+        "task_valid": true
+      },
+      "phase": "holdout",
+      "reviewed_task_scope": {
+        "approval_ceiling": "read",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "expires_at": "2026-10-04T04:16:58.196690Z",
+        "max_attempt_seconds": 10.0,
+        "max_attempts": 1,
+        "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+        "record_digest_matches_index": true,
+        "review_approved_at": "2026-10-03T13:36:35.928706+00:00",
+        "review_revoked": false,
+        "scope_digest": "a5cd602f249a564a14de4e2226a12f655fe8279481843cb5062b057f4850a929",
+        "scope_id": "bqual_a51065779ef6bac7774ef6999f92217d0fcc1147"
+      },
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-65_b.luna.aeep_fresh-worker_0"
+    },
+    {
+      "campaign_outer_receipt": {
+        "ended_at": "2026-10-03T15:23:38.084304Z",
+        "error_type": "timeout",
+        "executor_fingerprint": "sha256:f8ea30f9c929c4e2a17c409febbf6c73f573f0e225f944604efa6e8a57788eb6",
+        "executor_id": "b.luna.aeep",
+        "receipt_id": "rcpt_c5d0bf310fbb4233897c58ecc5220943",
+        "started_at": "2026-10-03T15:20:16.917951Z",
+        "status": "timeout"
+      },
+      "campaign_trial": {
+        "correctness_failed": false,
+        "db_state": "complete",
+        "ended_at": "2026-10-03T15:23:38.088616Z",
+        "error_type": null,
+        "execution_failure_codes": [],
+        "model_usage_complete": false,
+        "ok": false,
+        "started_at": "2026-10-03T15:20:14.461290Z",
+        "status": "timeout",
+        "valid": false,
+        "wall_time_ms": 203462.47141598724
+      },
+      "native_child_attempt": {
+        "attempt_id": "attempt_ff6f21782e824c6db97407af01485766",
+        "decision_id": "dec_52389eebf3eb45f4b69b5665a99d7d77",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED",
+        "task_scope_digest": "e5e51dc3054d270d4032c31ad9a61f810f2653e7c5a275cbb98f709296bda045",
+        "task_scope_digest_matches_reviewed_scope": true,
+        "terminal_receipt_ids": [
+          "rcpt_83e0bc3418904ec881db88f6d43135c7"
+        ]
+      },
+      "native_child_receipt": {
+        "capability": "assessment.workbook@1",
+        "decision_id": "dec_52389eebf3eb45f4b69b5665a99d7d77",
+        "ended_at": "2026-10-03T15:21:11.941295+00:00",
+        "ended_before_outer_trial_end_seconds": 146.147321,
+        "error_type": null,
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "output_valid": true,
+        "receipt_id": "rcpt_83e0bc3418904ec881db88f6d43135c7",
+        "started_at": "2026-10-03T15:21:08.974634+00:00",
+        "status": "success",
+        "task_valid": true
+      },
+      "phase": "holdout",
+      "reviewed_task_scope": {
+        "approval_ceiling": "read",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "expires_at": "2026-10-04T04:16:58.196690Z",
+        "max_attempt_seconds": 10.0,
+        "max_attempts": 1,
+        "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+        "record_digest_matches_index": true,
+        "review_approved_at": "2026-10-03T13:36:35.929498+00:00",
+        "review_revoked": false,
+        "scope_digest": "e5e51dc3054d270d4032c31ad9a61f810f2653e7c5a275cbb98f709296bda045",
+        "scope_id": "bqual_dbcd1f7f9d84cff1443fc049d64530a3acb19862"
+      },
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-70_b.luna.aeep_fresh-worker_0"
+    },
+    {
+      "campaign_outer_receipt": {
+        "ended_at": "2026-10-03T15:33:01.347163Z",
+        "error_type": "timeout",
+        "executor_fingerprint": "sha256:f8ea30f9c929c4e2a17c409febbf6c73f573f0e225f944604efa6e8a57788eb6",
+        "executor_id": "b.luna.aeep",
+        "receipt_id": "rcpt_3540b13b50e444919a39876b5213c8ef",
+        "started_at": "2026-10-03T15:29:40.157310Z",
+        "status": "timeout"
+      },
+      "campaign_trial": {
+        "correctness_failed": false,
+        "db_state": "complete",
+        "ended_at": "2026-10-03T15:33:01.350900Z",
+        "error_type": null,
+        "execution_failure_codes": [],
+        "model_usage_complete": false,
+        "ok": false,
+        "started_at": "2026-10-03T15:29:37.650235Z",
+        "status": "timeout",
+        "valid": false,
+        "wall_time_ms": 203468.15787511878
+      },
+      "native_child_attempt": {
+        "attempt_id": "attempt_0d011b3d8d0c403785fff16fa7644bb2",
+        "decision_id": "dec_d2a055e7e49b4806be1ddc027753a8b2",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED",
+        "task_scope_digest": "dfcfa03fb43d99a197ce73856499750548a50a0a9f0ec783688f68b41693d526",
+        "task_scope_digest_matches_reviewed_scope": true,
+        "terminal_receipt_ids": [
+          "rcpt_1f4055d9a3314a4e83184776cd4781ca"
+        ]
+      },
+      "native_child_receipt": {
+        "capability": "assessment.workbook@1",
+        "decision_id": "dec_d2a055e7e49b4806be1ddc027753a8b2",
+        "ended_at": "2026-10-03T15:30:12.168959+00:00",
+        "ended_before_outer_trial_end_seconds": 169.181941,
+        "error_type": null,
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "output_valid": true,
+        "receipt_id": "rcpt_1f4055d9a3314a4e83184776cd4781ca",
+        "started_at": "2026-10-03T15:30:09.253911+00:00",
+        "status": "success",
+        "task_valid": true
+      },
+      "phase": "holdout",
+      "reviewed_task_scope": {
+        "approval_ceiling": "read",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "expires_at": "2026-10-04T04:16:58.196690Z",
+        "max_attempt_seconds": 10.0,
+        "max_attempts": 1,
+        "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+        "record_digest_matches_index": true,
+        "review_approved_at": "2026-10-03T13:36:35.934587+00:00",
+        "review_revoked": false,
+        "scope_digest": "dfcfa03fb43d99a197ce73856499750548a50a0a9f0ec783688f68b41693d526",
+        "scope_id": "bqual_ee93930230534741f015960972f510ae6a9cfa33"
+      },
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-100_b.luna.aeep_fresh-worker_0"
+    },
+    {
+      "campaign_outer_receipt": {
+        "ended_at": "2026-10-03T15:46:32.980777Z",
+        "error_type": "timeout",
+        "executor_fingerprint": "sha256:f8ea30f9c929c4e2a17c409febbf6c73f573f0e225f944604efa6e8a57788eb6",
+        "executor_id": "b.luna.aeep",
+        "receipt_id": "rcpt_88e7118cde6d47eb99d6eb9950fc5a3d",
+        "started_at": "2026-10-03T15:43:11.960991Z",
+        "status": "timeout"
+      },
+      "campaign_trial": {
+        "correctness_failed": false,
+        "db_state": "complete",
+        "ended_at": "2026-10-03T15:46:32.984107Z",
+        "error_type": null,
+        "execution_failure_codes": [],
+        "model_usage_complete": false,
+        "ok": false,
+        "started_at": "2026-10-03T15:43:09.302319Z",
+        "status": "timeout",
+        "valid": false,
+        "wall_time_ms": 203465.1660420932
+      },
+      "native_child_attempt": {
+        "attempt_id": "attempt_e804bce9193c4415a2e30c25d016c135",
+        "decision_id": "dec_bdb5b11cd8434cc8a3d2a2b19dbb3869",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED",
+        "task_scope_digest": "8b04634162341293654398af257a20bbd66e42dd0c708a12433cb0722241856e",
+        "task_scope_digest_matches_reviewed_scope": true,
+        "terminal_receipt_ids": [
+          "rcpt_d993a2db93fe421696d7232e748b39c4"
+        ]
+      },
+      "native_child_receipt": {
+        "capability": "assessment.workbook@1",
+        "decision_id": "dec_bdb5b11cd8434cc8a3d2a2b19dbb3869",
+        "ended_at": "2026-10-03T15:43:50.155153+00:00",
+        "ended_before_outer_trial_end_seconds": 162.828954,
+        "error_type": null,
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "output_valid": true,
+        "receipt_id": "rcpt_d993a2db93fe421696d7232e748b39c4",
+        "started_at": "2026-10-03T15:43:47.234425+00:00",
+        "status": "success",
+        "task_valid": true
+      },
+      "phase": "holdout",
+      "reviewed_task_scope": {
+        "approval_ceiling": "read",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "expires_at": "2026-10-04T04:16:58.196690Z",
+        "max_attempt_seconds": 10.0,
+        "max_attempts": 1,
+        "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+        "record_digest_matches_index": true,
+        "review_approved_at": "2026-10-03T13:36:35.932514+00:00",
+        "review_revoked": false,
+        "scope_digest": "8b04634162341293654398af257a20bbd66e42dd0c708a12433cb0722241856e",
+        "scope_id": "bqual_ac9664c14a0512be7b8127057f10a04acb66e947"
+      },
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-88_b.luna.aeep_fresh-worker_0"
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+{
+  "recorded_at": "2026-10-02T19:09:33.912879+00:00",
+  "purpose": "Bounded software and native evidence; controlled Luna performance remains unmeasured",
+  "source_digest": "4520a09e95b67e9de9db2540ee0b1339c68e22dbcb6a285620b20816db0e4e49",
+  "test_definition_review": {
+    "authority": [
+      "docs/ASSESSMENT_TESTING.md",
+      "reports/v08/conformance-completion-approval.json",
+      "reports/v08/remaining-program-budget-approval-20260927.json"
+    ],
+    "user_instruction": "Continue evidence with Luna at xhigh; supersedes earlier test deferral",
+    "files": {
+      "tests/test_v08_discovery_lifecycle.py": "c20de74b2a591faf56198c7cb2683014303c26dd5df3552d98bcd55a27d84d24",
+      "tests/test_v08_skillsbench_recipe.py": "45f7fd09ad5426595fbdaee44268d42f0e42281f12bcb72d56bb4ab9ee2711b1"
+    },
+    "campaign_thresholds_changed": false
+  },
+  "agents": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "xhigh",
+    "roles": [
+      "luna_evidence",
+      "luna_recipe_evidence"
+    ],
+    "evidence_type": "development agents writing/running checks; not isolated comparative trial workers",
+    "development_token_usage": null
+  },
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 AEEP_VERIFY_OFFLINE=1 PYTHONPATH=src python3 -m pytest -p no:cacheprovider tests/test_v08_skillsbench_offer_letter.py tests/test_v08_ard.py tests/test_v08_three_way.py tests/test_v08_skillsbench_recipe.py",
+      "exit_code": 0,
+      "passed": 44,
+      "elapsed_seconds": 2.29
+    },
+    {
+      "command": "AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex PYTHONPATH=src python3 -m pytest -q tests/test_v08_discovery_lifecycle.py",
+      "exit_code": 0,
+      "passed": 2,
+      "reported_by": "luna_evidence"
+    },
+    {
+      "command": "AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex PYTHONPATH=src python3 -m pytest -q tests/test_v08_task_profile.py::test_actual_native_allow_deny_and_network_boundary",
+      "exit_code": 0,
+      "passed": 1,
+      "reported_by": "luna_evidence"
+    },
+    {
+      "command": "PYTHONPATH=src python3 -m pytest -q tests/test_v08_discovery_lifecycle.py (AEEP_NATIVE_CODEX unset)",
+      "exit_code": 0,
+      "passed": 1,
+      "skipped": 1,
+      "reported_by": "luna_evidence"
+    },
+    {
+      "command": "python3 -m compileall -q src examples tests",
+      "exit_code": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 scripts/generate_schemas.py --check",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m ruff check src scripts integrations/assessment-runtime",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m ruff check tests/test_v08_discovery_lifecycle.py tests/test_v08_skillsbench_recipe.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m mypy src/aeep",
+      "exit_code": 0,
+      "checked_files": 137
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "distinct_tests_passed": 47,
+  "observed": [
+    "Local discovery and inert intake return assess/keep-current without creating grant, assessment job or admission.",
+    "A separately reviewed synthetic task-service profile executes CSV through real native sandbox; profile review revocation blocks follow-up dispatch and activation uninstalls.",
+    "Existing actual native regression verifies synthetic filesystem and network denials.",
+    "SkillsBench software generator yields 141 distinct inputs with balanced seven-variation 8/28/105 splits; identical development seed reproduces output.",
+    "V3 grader accepts reference-generated and independent bundled literal artifacts and rejects declared fault artifacts.",
+    "Changed pinned input fails closed; changed embedded program source changes exact recipe digest."
+  ],
+  "retained_failures": [
+    {
+      "kind": "native test fixture setup",
+      "error": "sandbox-exec: execvp() of '/Library/Frameworks/Python.framework/Versions/3.13/bin/python3' failed: Operation not permitted",
+      "direct_probe_exit_code": 71,
+      "resolution": "Added explicit interpreter sys.prefix read root, matching existing native test pattern. Production policy unchanged."
+    }
+  ],
+  "native_runtime": {
+    "path": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+    "version": "codex-cli 0.154.0",
+    "sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc"
+  },
+  "grant": {
+    "before": {
+      "id": "onboarding",
+      "revoked": 0,
+      "operations": 8681,
+      "model_turns": 2546,
+      "elapsed_seconds": 75258.72103060992,
+      "cash_usd": "0.0"
+    },
+    "after": {
+      "id": "onboarding",
+      "revoked": 0,
+      "operations": 8681,
+      "model_turns": 2546,
+      "elapsed_seconds": 75258.72103060992,
+      "cash_usd": "0.0"
+    },
+    "unchanged": true,
+    "effective_expiry": "2026-10-25T23:59:00+00:00",
+    "limits": {
+      "max_operations": 50000,
+      "max_model_turns": 6000,
+      "max_elapsed_seconds": 604800.0,
+      "max_cash_usd": "0"
+    },
+    "allowed_destinations": [
+      "local",
+      "codex"
+    ],
+    "remote_disclosure": false
+  },
+  "storage": {
+    "free_bytes": 49747144704,
+    "required_reserve_bytes": 53687091200,
+    "large_runs_held": true,
+    "cleanup_performed": false,
+    "candidates_for_review": [
+      "Docker reports 5.287 GB reclaimable build cache; ownership/obsolescence not established",
+      "Docker reports 18.67 GB reclaimable image data; shared layers/current/rollback references require exact review"
+    ],
+    "persistent_volumes_preserved": true
+  },
+  "runtime_preflight": {
+    "docker_reachable": true,
+    "model_proxy": "aeep-reviewed-model-proxy is stopped",
+    "historical_model_inventory": "reports/v08/worker1592-successor/conformance-result.json advertises gpt-6-luna xhigh in both workers; no fresh availability claim",
+    "existing_images": {
+      "control": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+      "treatment": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "assessment_runtime": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7"
+    },
+    "images_containers_volumes_created": []
+  },
+  "remaining": [
+    "Required full pytest and full branch coverage remain unrun on current implementation while host storage is below reserve.",
+    "No protected SkillsBench materialization, independent contained grader validation or official upstream verifier run.",
+    "No controlled Luna xhigh candidate trial, fresh model/effort runtime observation, qualification, marginal value, admission or release claim.",
+    "Fresh source-bound worker definitions/conformance required; prior workbook worker cannot stand in for a reviewed DOCX candidate comparison.",
+    "Complete cloud-only composed execution remains unverified and requires replacing the Mac-only native executor plus fresh evidence."
+  ],
+  "holdout_note": "Seed 29 generated inputs here are exposed developer fixtures, not future campaign holdout evidence.",
+  "skillsbench_definition": {
+    "recipe_digest": "f760c9f03d3e728e6566dd8ddb48d960aee5b8ac81ec7192a44f3dffd296f3fe",
+    "recipe_id": "skillsbench-offer-letter-adapted-v1",
+    "variations": [
+      "relocation_yes",
+      "relocation_no",
+      "unicode_names",
+      "xml_escaping",
+      "long_fields",
+      "numeric_boundaries",
+      "date_boundaries"
+    ],
+    "counts": {
+      "screening": 8,
+      "training": 28,
+      "holdout": 105
+    },
+    "template_families": [
+      "skillsbench-offer-letter:pinned-template"
+    ],
+    "independent_literals": 2,
+    "transformed_literals": 1,
+    "fault_outputs": 3,
+    "executor_digests": {
+      "generator": "c55317e4a8a3bd721c5a2bd2ffbf643375b38ced5fddf71a5ec115690a6c671c",
+      "reference": "35856df8d20641b60ef6cd8657e5e369715823ec60ad996174acb96e7f66f498",
+      "grader": "13065505778a90770bbc6bcd9732c17f6687b97bc4f2e82ddeb09221fae19561"
+    },
+    "official_reproduction": false,
+    "canonical_review_or_materialization_created": false
+  },
+  "successor": {
+    "recorded_at": "2026-10-02T19:21:17.050857+00:00",
+    "source_digest": "4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66",
+    "test_definition_sha256": "95383479fb099579621651f5d6c21fc9320d923bd636da2ee86009111e2e00a8",
+    "authority": "Same September25/27 standing test-definition delegation; synthetic fixture only",
+    "checks": [
+      {
+        "command": "PYTHONPATH=src python3 -m pytest -q tests/test_v08_discovery_lifecycle.py --basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-discovery-admission-20261002",
+        "exit_code": 0,
+        "passed": 2,
+        "skipped": 1,
+        "reported_by": "luna_evidence"
+      },
+      {
+        "command": "python3 -m ruff check tests/test_v08_discovery_lifecycle.py",
+        "exit_code": 0
+      },
+      {
+        "command": "python3 -m compileall -q src examples tests",
+        "exit_code": 0
+      },
+      {
+        "command": "AEEP_NATIVE_CODEX=/Users/edwintse/.local/bin/codex PYTHONPATH=src python3 -m pytest -vv tests/test_v08_discovery_lifecycle.py::test_discovery_lifecycle_with_installed_native_sandbox --basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-native-capture-20261002",
+        "exit_code": 0,
+        "passed": 1,
+        "reported_by": "luna_evidence"
+      }
+    ],
+    "observed": [
+      "Real synthetic AssessmentService.run/admit evidence feeds CapabilityLifecycle.lookup; ordinary dispatch receipt binds to the same admission; post-revocation lookup restricts it. No applicability or admission result is stubbed.",
+      "Portable task-profile capture stores invocation observation, leaves host context/inventory/preservation unknown, and omits the known CSV payload/output.",
+      "The successor receipt-capture assertions also passed through the real pinned native sandbox."
+    ],
+    "limits": [
+      "The synthetic baseline is deliberately delayed 20ms; no real plugin benefit follows.",
+      "Python fixture admission is separate from native task-profile permission; qualification is not transferred."
+    ],
+    "retained_failures": [
+      {
+        "command": "PYTHONPATH=src python3 -m pytest -q tests/test_v08_discovery_lifecycle.py --basetemp=/tmp/aeep-luna-discovery-admission-20261002",
+        "exit_code": 1,
+        "passed": 1,
+        "failed": 1,
+        "skipped": 1,
+        "reason": "Portable scoped project under system /tmp is correctly rejected by NativeSandboxConfig. Same definitions passed from supported platform temporary directory."
+      }
+    ],
+    "owned_temporaries": [
+      {
+        "path": "/tmp/aeep-luna-discovery-admission-20261002",
+        "size_kib": 318256,
+        "cleanup": "removed after terminal pytest and no open handles reported by lsof",
+        "removal_verified_by_parent": true
+      },
+      {
+        "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-discovery-admission-20261002",
+        "size_kib": 318268,
+        "synthetic_fixture_size_kib": 317440,
+        "cleanup": "removed after terminal pytest and no open handles reported by lsof",
+        "removal_verified_by_parent": true
+      },
+      {
+        "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-native-capture-20261002",
+        "size_kib": 828,
+        "cleanup": "removed after terminal pytest and no open handles reported by lsof",
+        "removal_verified_by_parent": true
+      }
+    ],
+    "completed_at": "2026-10-02T19:23:10.165425+00:00",
+    "source_unchanged": true,
+    "diagnostics": [
+      "Ruff initially reported import order in the expanded test; corrected and final check passed."
+    ],
+    "total_distinct_tests_across_checkpoints": 48,
+    "production_code_changed": false,
+    "free_bytes_after_cleanup": 49615192064,
+    "canonical_grant_after": {
+      "id": "onboarding",
+      "revoked": 0,
+      "operations": 8681,
+      "model_turns": 2546,
+      "elapsed_seconds": 75258.72103060992,
+      "cash_usd": "0.0"
+    },
+    "canonical_grant_unchanged": true
+  },
+  "blocked_audit": {
+    "observed_at": "2026-10-02T19:24:52.959006+00:00",
+    "previous_turn_classification": "progress: new positive synthetic admission/capture evidence, exact reports and completed temporary cleanup",
+    "source_unchanged": true,
+    "canonical_grant_unchanged": true,
+    "free_bytes": 49590157312,
+    "required_reserve_bytes": 53687091200,
+    "same_storage_blocker_seen_in_at_least_three_consecutive_goal_turns": true,
+    "workers_or_tests_still_running": false,
+    "remaining_work": "Full current-source validation, protected SkillsBench pipeline and fresh controlled Luna xhigh conformance/comparison evidence.",
+    "why_no_further_run": "Bounded independent checks are complete. Remaining execution requires storage headroom; original stopped worker/model proxy is not a live process to wait on.",
+    "cleanup_state": "All three completed task-created temporary roots removed and verified; Docker images/cache/volumes and canonical assessment data preserved. Reclaimable Docker data has not been verified disposable.",
+    "unblock": "Restore at least 50 GiB free plus the measured run allowance on the host, or supply an approved existing filesystem/runtime with sufficient capacity. Preserve the canonical grant and fresh boundary requirements."
+  },
+  "storage_measurement_correction": {
+    "observed_at": "2026-10-02T19:29:57.097793+00:00",
+    "reason": "User challenged storage quota interpretation; rechecked raw filesystem, APFS and Foundation capacity APIs.",
+    "volume": "/System/Volumes/Data",
+    "apfs_volume_capacity_quota_bytes": 0,
+    "apfs_volume_capacity_reserve_bytes": 0,
+    "ordinary_available_bytes": 49565863936,
+    "available_for_important_usage_bytes": 233858032494,
+    "available_for_opportunistic_usage_bytes": 39425671168,
+    "total_capacity_bytes": 994662584320,
+    "query": "Foundation NSURL.getResourceValue:forKey:error: for volume capacity keys; diskutil apfs list -plist; df -k; os.statvfs",
+    "interpretation": "Previous roughly46GiB reading accurately measured already-free capacity, but omitted macOS reclaimable capacity. It is not a Codex or APFS volume quota and does not establish a hard inability to allocate more. The50GiB threshold came from user-supplied AGENTS instructions, interpreted conservatively as already-free space.",
+    "policy_unchanged": true,
+    "files_or_snapshots_deleted": false,
+    "prior_audit_retained": true,
+    "references": [
+      "https://support.apple.com/en-ie/guide/disk-utility/dskutl1005/mac",
+      "https://developer.apple.com/documentation/foundation/urlresourcekey/volumeavailablecapacityforimportantusagekey"
+    ]
+  }
+}

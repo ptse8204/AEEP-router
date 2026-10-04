@@ -1,0 +1,16 @@
+COMMAND: python3 -m ruff check tests/test_cli.py tests/test_integrations_mcp.py tests/test_mcp_executor_http.py tests/test_p0_usefulness.py tests/test_v08_assessment.py tests/test_codex_dynamic_tools.py
+ENV LUNA_SOURCE_MANIFEST=reports/v08/luna-full-validation-20261002/source-before-focused.sha256
+ENV TMPDIR=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/
+invalid-syntax: Unexpected indentation
+   --> tests/test_codex_dynamic_tools.py:323:1
+    |
+321 | …     monkeypatch.setattr(NativeSandboxConfig, 'model_validate', lambda value: SimpleNamespace(single_process=True, validate_single_p…
+322 | …     monkeypatch.setattr('aeep.hosts.codex_sandbox.native_backend_digest', lambda value: 'same-backend')
+323 | …         monkeypatch.setattr(
+    ^^^^^^^^^^^^
+324 | …             router,
+325 | …             '_require_active_spec',
+    |
+
+Found 1 error.
+EXIT_CODE: 1

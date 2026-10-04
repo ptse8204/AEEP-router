@@ -1,0 +1,50 @@
+{
+  "execution_review_sha256": "5da44e968110e19a9e06fc181163f3e57efae77b64aaede75720589143b82e40",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "request_ids": {
+    "control": "conformance_probe_ba968d4d85714473be9b20188cee120f",
+    "treatment": "conformance_probe_37bcc0d4f4f9427e8e4acbca1b42bcb7"
+  },
+  "connectivity_only": true,
+  "qualification": false,
+  "admission": false,
+  "proxy_was_running": false,
+  "worker_attempts": [
+    {
+      "role": "control",
+      "request_id": "conformance_probe_ba968d4d85714473be9b20188cee120f",
+      "probe_id": "probe_0bbb3f5cae454a7abfc6734d85a156c3",
+      "worker_digest": "ee094db533da80db8039203f7f4ab851731d166deef75984de9ef90380e345f3",
+      "connected": true
+    },
+    {
+      "role": "treatment",
+      "request_id": "conformance_probe_37bcc0d4f4f9427e8e4acbca1b42bcb7",
+      "probe_id": "probe_307d0f02ef584918a24f9052b8d8516f",
+      "worker_digest": "d02f13864bfa8fcd62447e6f8729b85f9538e87d7155507eb510de3324cb61c6",
+      "connected": true
+    }
+  ],
+  "proxy_restored": true,
+  "model_turns_reserved_for_probes": 2,
+  "cash_ceiling_usd": 0,
+  "replay_allowed": false,
+  "safe_diagnostics": [
+    {
+      "executor_id": "skillsbench.docx.connectivity.control",
+      "status": "success",
+      "recognized_categories": [],
+      "raw_error_retained": false
+    },
+    {
+      "executor_id": "skillsbench.docx.connectivity.treatment",
+      "status": "success",
+      "recognized_categories": [],
+      "raw_error_retained": false
+    }
+  ],
+  "proxy_lifecycle_wall_seconds": 26.008069374831393,
+  "source_unchanged": true,
+  "full_task_conformance": false,
+  "candidate_skill_used": false
+}

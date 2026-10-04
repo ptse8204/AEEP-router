@@ -1,0 +1,10 @@
+# Independent verifier derivative. The source image ID is checked by the
+# separate build review; this tag must not be reused for either trial arm.
+FROM aeep-skillsbench-docx-control:luna-xhigh-20261002
+USER root
+COPY wheels/ /tmp/verifier-wheels/
+COPY requirements-verifier.lock /tmp/requirements-verifier.lock
+RUN python3 -m pip install --no-cache-dir --no-index --find-links=/tmp/verifier-wheels --require-hashes -r /tmp/requirements-verifier.lock \
+    && python3 -c "import importlib.metadata as m, pytest, sys; assert sys.version_info[:2] == (3, 13); assert pytest.__version__ == '8.4.1'; assert m.version('python-docx') == '1.1.2'" \
+    && rm -rf /tmp/verifier-wheels /tmp/requirements-verifier.lock
+USER 65534:65534

@@ -1,0 +1,44 @@
+{
+  "review_type": "independent_read_only_setup_runner_review",
+  "source_pin": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "reviewed_files": {
+    "reports/v08/luna-docx-stage/b-native-setup-v3.py": "1262795ce870f95c9dc452ff0a7be136036154a4ff3887612b87105442b53aaa",
+    "reports/v08/luna-docx-stage/b-native-setup-v3-review.json": "ab4f78de528080b8684d8d608786d15a5b8aa616755d7f9033957ac0c44ef7b5",
+    "reports/v08/luna-docx-stage/b-native-workbook-producer-final.py": "4d5db1fd761882f90bbaff5d1a6c392e2bab185a248f4a981399f95ee8aa539d",
+    "docs/ASSESSMENT_TESTING.md": "832523e4a06c7de78621f7ead45afccc2959ec26600b75ba798dc1992f071760",
+    "src/aeep/assessment/extensions.py": "dbd50a08ef0fcd5596a55a7ad047006f9402a08ab8ef6f3d4a7c4619b5a25ef0",
+    "src/aeep/assessment/boundary.py": "b71f2f10a9a0c876c8b967245a1d064ebc36307425b0984b2c7bdf3d2a9554fc"
+  },
+  "prepared_request_id": "conformance_probe_cdbd4c9430374cfb8555771735f4a6c6",
+  "proposed_execution_bounds": {
+    "operations": 1,
+    "seconds": 120,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "project_bytes_max": 1073741824
+  },
+  "verdict": "no_execution_blocker_found",
+  "deadline_review": {
+    "result": "v2 finding resolved for the setup-operation window",
+    "evidence": "The monotonic start is established before installing a 120-second ITIMER_REAL; the timer is armed before approval, authorization, dependency verification, and reservation. It remains active through producer setup, project-store close, operation settlement, result persistence, and canonical-store close. Deadline expiry propagates without intentionally converting an unresolved reservation into a settled success; the exclusive started marker prevents blind replay.",
+    "measurement_scope": "The result explicitly measures through project-store close and excludes final ledger/report bookkeeping; whole_system_cost_complete is false. It does not claim full system cost. The timer can interrupt finalization, in which case the durable ledger and one-shot marker must be read before any recovery; no automatic retry is allowed."
+  },
+  "preparation_review": {
+    "classification": "inert_definition_and_request_preparation",
+    "finding": "The prepare path persists schema-validated definitions and an inert request before execution reservation. This matches existing extensions.prepare and boundary.prepare_model_probe request-preparation patterns and the policy distinction that a proposal/request is not approval or execution. It creates no project, invokes no producer setup, and starts no task, model, or worker.",
+    "preparation_resource_cost": "unknown; no duration or resource measurement was available to this read-only review. Do not infer zero or change grant counters. Carry any required preparation-cost lineage forward according to the assessment policy."
+  },
+  "execution_safety": {
+    "project_target": "fresh exact external path; existing path rejected and never reset",
+    "storage_guard": "requires at least 51 GiB free and caps project footprint at 1 GiB",
+    "callback_execution": false,
+    "evidence": "Producer document() constructs dynamic-tool wrappers and reads declarations only; setup does not invoke handlers, task execution, model turns, or workers.",
+    "replay_handling": "exclusive started marker plus unique operation reservation; preserve partial project and durable operation state after timeout or uncertain finalization",
+    "other_material_blockers": []
+  },
+  "measurement_limitations": [
+    "Static preflight, prerequisite-log checks, and canonical Router bootstrap occur before the measured setup window; their resource cost is unknown here.",
+    "Final ledger/report bookkeeping is outside the elapsed measurement scope, as stated in the runner result; the report explicitly marks whole-system cost incomplete."
+  ],
+  "review_scope": "Read-only static review. No runner execution, imports, worker/model/auth access, Docker use, grant reservation, canonical-store access, or cleanup was performed by this review."
+}

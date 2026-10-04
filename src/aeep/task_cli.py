@@ -11,6 +11,7 @@ from typing import Literal, cast
 
 import typer
 
+from . import profiles
 from .assessment.models import content_digest
 from .assessment.repository import AssessmentRepository
 from .errors import AEEPError
@@ -33,6 +34,55 @@ def define_scope(ctx: typer.Context, file: Path) -> None:
     scope = TaskScope.model_validate_json(file.read_bytes())
     digest = AssessmentRepository(ctx.obj.store).put('task_scope', scope.scope_id, scope)
     typer.echo(json.dumps(dict(scope_id=scope.scope_id, digest=digest, reviewed=False)))
+
+
+@app.command('profile-from-scope')
+def profile_from_scope(ctx: typer.Context, scope: str, profile_id: str = typer.Option(..., '--profile-id')) -> None:
+    """Export an inert capability profile from an existing task scope."""
+    typer.echo(profiles.from_scope(ctx.obj, scope, profile_id=profile_id).model_dump_json(indent=2))
+
+
+@app.command('define-profile')
+def define_profile(ctx: typer.Context, file: Path) -> None:
+    """Store an inert profile; review its exact digest with assess review."""
+    profile = profiles.CapabilityProfile.model_validate_json(file.read_bytes())
+    digest = profiles.define(ctx.obj, profile)
+    typer.echo(json.dumps(dict(profile_id=profile.profile_id, digest=digest, reviewed=False)))
+
+
+@app.command('profile-compile')
+def compile_profile(ctx: typer.Context, profile: str) -> None:
+    """Resolve configured components and unsupported controls without activation."""
+    typer.echo(json.dumps(profiles.compile_profile(ctx.obj, profile)))
+
+
+@app.command('profile-preflight')
+def preflight_profile(ctx: typer.Context, profile: str) -> None:
+    """Inspect profile bindings, required reviews and activation blockers."""
+    typer.echo(json.dumps(profiles.preflight(ctx.obj, profile)))
+
+
+@app.command('profile-diff')
+def diff_profiles(ctx: typer.Context, before: str, after: str) -> None:
+    """Compare stored declarations; effective host differences require evidence."""
+    typer.echo(json.dumps(profiles.diff_profiles(profiles.load(ctx.obj, before), profiles.load(ctx.obj, after))))
+
+
+@app.command('profile-inspect')
+def inspect_profile(ctx: typer.Context, profile: str, activation: str | None = typer.Option(None, '--activation')) -> None:
+    """Inspect the profile and optionally its activation and recorded use."""
+    typer.echo(json.dumps(profiles.inspect(ctx.obj, profile, activation_id=activation)))
+
+
+@app.command('activate-profile')
+def activate_profile(ctx: typer.Context, profile: str, replace: str | None = None) -> None:
+    """Activate an exactly reviewed profile under its existing task authority."""
+    try:
+        record = profiles.activate(ctx.obj, profile, replace=replace)
+        typer.echo(json.dumps(profiles.inspect(ctx.obj, profile, activation_id=record.activation_id)))
+    except (AEEPError, ValueError, OSError) as exc:
+        from .cli import _fail
+        _fail(exc, compact=True)
 
 
 @app.command('activate')
@@ -70,6 +120,21 @@ def define_reconciliation(ctx: typer.Context, file: Path) -> None:
     record = TaskReconciliation.model_validate_json(file.read_bytes())
     digest = AssessmentRepository(ctx.obj.store).put('task_reconciliation', content_digest(record), record)
     typer.echo(json.dumps(dict(digest=digest, reviewed=False)))
+
+
+@app.command('profile-capture')
+def capture_profile(
+    ctx: typer.Context, profile: str,
+    activation: str | None = typer.Option(None, '--activation'),
+    receipt: list[str] = typer.Option([], '--receipt'),
+) -> None:
+    """Record content-free configuration and selected receipt observations."""
+    from .configuration_profile import capture
+    try:
+        typer.echo(capture(ctx.obj, profile, activation, receipt).model_dump_json())
+    except (AEEPError, ValueError, OSError) as exc:
+        from .cli import _fail
+        _fail(exc, compact=True)
 
 
 @app.command('reconcile')

@@ -82,7 +82,6 @@
           "items": {
             "type": "string"
           },
-          "minItems": 1,
           "title": "Candidate Paths",
           "type": "array"
         },
@@ -92,6 +91,16 @@
           },
           "title": "Candidate Aliases",
           "type": "array"
+        },
+        "candidate_dynamic_tools": {
+          "patternProperties": {
+            "^dynamic:[A-Za-z][A-Za-z0-9_]{0,63}:[A-Za-z][A-Za-z0-9_]{0,63}$": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            }
+          },
+          "title": "Candidate Dynamic Tools",
+          "type": "object"
         }
       },
       "required": [

@@ -1,0 +1,58 @@
+{
+  "schema_version": "assessment.b-composed-worker-collector-review.v1",
+  "status": "static_review_ready",
+  "scope": "Report-local inert worker-component collector for the discovery/AEEP two-role comparison; not run and not evidence of completed B execution.",
+  "collector": {
+    "path": "reports/v08/luna-docx-stage/b-composed-worker-collector.py",
+    "sha256": "fd74eaf373377ec6572b45a521b3212719c5f5a3929ecfa4011e2245d363f9ae",
+    "source_digest_guard": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+    "static_checks": {
+      "python_ast_parse": "pass",
+      "main_entrypoint": false,
+      "imports_or_runtime_calls_executed_during_review": false,
+      "models_workers_docker_or_canonical_state_touched": false
+    }
+  },
+  "adapted_reference": {
+    "path": "reports/v08/original-three-way-profile/collect-composed-workers-5fff.py",
+    "sha256": "6f16f95e09201b2fa507f6dd3933686f325817360f78eafcaf239804cfda8630",
+    "modified": false
+  },
+  "contract": {
+    "common_inventory": "Exactly {spreadsheets_bundle: digest(SharedSpreadsheetsDefinition)}; no historical codex/runtime inventory keys are copied.",
+    "physical_support": "Both roles require the same immutable image, canonical /opt/dependencies/plugin/skills/spreadsheets/SKILL.md hash, runtime path, pandas/openpyxl versions, and exact enabled supporting-skill/tool inventory. Supporting skills are restricted to the reviewed Spreadsheets alias name at the canonical /opt path; supporting tools are empty and native_catalog is false.",
+    "filesystem_alias": "The worker CHECK probe independently requires /etc/codex/skills/spreadsheets/SKILL.md to exist and resolve to the canonical /opt skill. The /etc alias is not a configured supporting path or reviewed_files entry; current isolated_config requires reviewed worker-file lookup and does not support that path as a configured skill.",
+    "dynamic_difference": "The collector uses dynamic_candidate_access_observation with each exact reviewed binding and declaration. Effective role inventory is the reviewed common Spreadsheets descriptor plus the observed callback binding inventory; only the treatment adds the exact candidate tool. Declaration evidence does not claim model exposure or use.",
+    "dependencies": "The two existing Spreadsheets helper probes must pass in each role and measured physical observations must match across the shared immutable image. Their dependency metadata is not independently hash-pinned by this collector.",
+    "output": "Per-role worker inspection records and supporting boundary probes only. It strips any nested full_conformance item and does not construct BoundaryConformance, qualification, admission, or value results."
+  },
+  "review_findings": [
+    {
+      "status": "addressed",
+      "finding": "Configured skill path must be canonical /opt because isolated_config validates it against immutable reviewed_files; the /etc alias is only an independently observed symlink resolving to the canonical skill."
+    },
+    {
+      "status": "addressed",
+      "finding": "Common inventory is constrained to the Spreadsheets descriptor digest, and actual support inventory is checked against each role's reviewed profile and worker observations."
+    },
+    {
+      "status": "bounded",
+      "finding": "Dependency package metadata is compared between roles on the same exact image and the existing behavior probes must pass; the collector makes no claim that dependency hashes are independently reviewed pins."
+    }
+  ],
+  "historical_context": {
+    "path": "reports/v08/original-three-way-profile/current-composed-worker-component-assembly.json",
+    "observation_limit": "The retained assembly describes a static invocation skill_path at the canonical /opt path and its reviewed_files hash. It is not an actual enabled-catalog runtime observation and is not reused as one."
+  },
+  "three_way_integration": {
+    "status": "not_reviewed_or_claimed_by_this_collector",
+    "pending_source_checks": [
+      "Normal-role support requirements must be compared according to the reviewed three-way contract, not forced equal to discovery/AEEP support inventories.",
+      "The candidate worker must be validated against the normal worker as required by the reviewed three-way identity contract."
+    ]
+  },
+  "not_performed": [
+    "No imports, pytest, lint, model calls, worker starts, Docker commands, network, credentials, grants, or canonical database mutations.",
+    "No B trial execution, full conformance assembly, qualification, or admission."
+  ]
+}

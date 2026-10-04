@@ -1,0 +1,66 @@
+{
+  "schema_version": "assessment.skillsbench-docx-upstream-verifier-execution-review.v1",
+  "status": "prepared_not_authorized",
+  "execution_authorized": false,
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "campaign_terminal_record_path": null,
+  "campaign_terminal_record_sha256": null,
+  "runner_sha256": "910479f01deff2d165450602dad9470125a95e7ea101e786ead3dfafb793d565",
+  "stage_manifest_sha256": "8009ffa6e4bcad46457909a0db100a8d3cb75d7b12144ed9d36420f47640ec1c",
+  "stage_hashes": {
+    "upstream-verifier-context/verifier/test_outputs.py": "913b9a3ebe579aed9c8f876dededea4d6a957eca9fbd0d9e8f043719cfb8cf05",
+    "upstream-verifier-context/verifier/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "upstream-verifier-context/input/offer_letter_filled.docx": "e5ba556c1b7ef19620b8b3963710714218d0eb21b61ec0ba4964a35be60c42c7",
+    "upstream-verifier-context/input/employee_data.json": "64dcb6aad2423051a638efefc85d1b47d306718e462342281553bf00082870c0"
+  },
+  "verifier_build_result_sha256": null,
+  "verifier_image_id": null,
+  "image_tag": "aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002",
+  "upstream": {
+    "repository": "benchflow-ai/skillsbench",
+    "commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "verifier_path": "tasks/offer-letter-generator/verifier/test_outputs.py",
+    "verifier_sha256": "913b9a3ebe579aed9c8f876dededea4d6a957eca9fbd0d9e8f043719cfb8cf05",
+    "license": "Apache-2.0",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fixed_public_literal": {
+    "fixture_source": "integrations/assessment-runtime/skillsbench-offer-letter-fixtures.json",
+    "fixture_index": 0,
+    "variation": "relocation_yes",
+    "artifact_sha256": "e5ba556c1b7ef19620b8b3963710714218d0eb21b61ec0ba4964a35be60c42c7",
+    "employee_data_sha256": "64dcb6aad2423051a638efefc85d1b47d306718e462342281553bf00082870c0"
+  },
+  "pytest_assertion_cases": 18,
+  "expected_pytest_version": "8.4.1",
+  "expected_python_docx_version": "1.1.2",
+  "base_image_id": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+  "mounts": {
+    "input": "/root:readonly",
+    "verifier": "/verifier:readonly"
+  },
+  "container": {
+    "network": "none",
+    "read_only_rootfs": true,
+    "user": "65534:65534",
+    "memory_bytes": 536870912,
+    "cpus": 1,
+    "pids_limit": 32,
+    "tmpfs": "/tmp:rw,noexec,nosuid,nodev,size=32m",
+    "remove_after_run": false
+  },
+  "limits": {
+    "max_operations": 1,
+    "max_seconds": 30,
+    "max_model_turns": 0,
+    "max_cash_usd": 0
+  },
+  "assessment_reservation": {
+    "plan_id": null,
+    "operation_id": null
+  },
+  "authorization_id": "onboarding",
+  "must_run_after_campaign_terminal": true,
+  "model_or_authentication_calls": false,
+  "compatibility_limit": "Direct run of the exact upstream test module on one fixed public literal artifact only. Not an official SkillsBench reproduction, task-agent run, generated holdout, qualification or admission. Does not exercise test.sh, uv installation, CTRF, reward-file behavior, failure cases, or broader corpus coverage."
+}

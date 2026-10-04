@@ -1,0 +1,110 @@
+{
+  "observed_at": "2026-10-04T09:12:49.657367+00:00",
+  "method": "Read wheel entries in memory and compare exact bytes / Python AST; do not install or run historical package.",
+  "historical_record": "reports/v08/luna-c-supplemental-validation-20261003/supplemental-results.json",
+  "historical_record_sha256": "f8447aceb2075550ec4f2749f25c18ba374b05cfc9d32b6516a921993301edda",
+  "historical_source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "wheel": {
+    "path": "reports/v08/luna-c-supplemental-validation-20261003/package-build-output/aeep_agent_router-0.8.0-py3-none-any.whl",
+    "sha256": "8452205838bfcb2bf0a98d81d0c1960118e68e02d09ab7e7455939865a7be15f",
+    "size_bytes": 1444616
+  },
+  "current_source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "files": {
+    "aeep/hosts/codex_app_server.py": {
+      "historical_sha256": "c6b7a0d882b041d8c1f34fc32a21f36516d2bc33d79ab3733308799b4980d4f6",
+      "current_sha256": "8e58c0e98afe4cbf9f965ecf247fa92629e384e86c0ab40a6c415f11a5f18067",
+      "identical": false
+    },
+    "aeep/hosts/workers.py": {
+      "historical_sha256": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "current_sha256": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "identical": true
+    },
+    "aeep/executors/managed_host.py": {
+      "historical_sha256": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+      "current_sha256": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+      "identical": true
+    },
+    "aeep/router.py": {
+      "historical_sha256": "379ea6eb6bfb6f20cc024596022c7d95be43e2597626b5118bd7cbc3b0a37031",
+      "current_sha256": "09f06eb8541d0026e19cd8a11fadfea2cd1c8f0662ad9f10444537e1e701286b",
+      "identical": false
+    },
+    "aeep/benchmarking.py": {
+      "historical_sha256": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+      "current_sha256": "141a8f6d2ce18a872fa4f6f5010f1637cd9a1a384f51a9864beff03c7433707d",
+      "identical": true
+    },
+    "aeep/execution.py": {
+      "historical_sha256": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+      "current_sha256": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+      "identical": true
+    },
+    "aeep/assessment/containment.py": {
+      "historical_sha256": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+      "current_sha256": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+      "identical": true
+    }
+  },
+  "methods": {
+    "CodexAppServerAdapter.execute": {
+      "ast_identical": true,
+      "historical_lines": [
+        764,
+        819
+      ],
+      "current_lines": [
+        784,
+        839
+      ]
+    },
+    "CodexAppServerTransport.close": {
+      "ast_identical": true,
+      "historical_lines": [
+        453,
+        492
+      ],
+      "current_lines": [
+        473,
+        512
+      ]
+    },
+    "CodexAppServerAdapter._partial_execution": {
+      "ast_identical": false,
+      "historical_lines": [
+        1125,
+        1135
+      ],
+      "current_lines": [
+        1162,
+        1173
+      ]
+    },
+    "Router._invoke_controlled": {
+      "ast_identical": true,
+      "historical_lines": [
+        5519,
+        5526
+      ],
+      "current_lines": [
+        5520,
+        5527
+      ]
+    },
+    "Router._save_receipt": {
+      "ast_identical": true,
+      "historical_lines": [
+        731,
+        767
+      ],
+      "current_lines": [
+        732,
+        768
+      ]
+    }
+  },
+  "storage_free_gib": 135.78099822998047,
+  "limitations": "AST equality binds inspected methods only. It does not reconstruct missing live timestamps or prove which cancellation deadline fired.",
+  "router_change": "Only addition relative to historical wheel is host_progress in the scalar metadata allowlist; execution and receipt error sanitization unchanged."
+}

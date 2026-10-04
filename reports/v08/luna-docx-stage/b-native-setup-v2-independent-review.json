@@ -1,0 +1,33 @@
+{
+  "review_type": "independent_read_only_setup_runner_review",
+  "source_pin": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "reviewed_files": {
+    "reports/v08/luna-docx-stage/b-native-setup-v2.py": "ca15e41d9ecf61c21867e8877af64ddf76671806fc157e2851039f8b3ba51e7f",
+    "reports/v08/luna-docx-stage/b-native-setup-v2-review.json": "85b378715425c20415e3e94e00a2f06d4c1a2cb0a191e5be42afd87fac9c8f49",
+    "reports/v08/luna-docx-stage/b-native-workbook-producer-final.py": "4d5db1fd761882f90bbaff5d1a6c392e2bab185a248f4a981399f95ee8aa539d"
+  },
+  "policy_read": "docs/ASSESSMENT_TESTING.md",
+  "proposed_bounds": {
+    "operations": 1,
+    "seconds": 120,
+    "model_turns": 0,
+    "cash_usd": 0
+  },
+  "verdict": "hold_for_finite_deadline_accounting_fix",
+  "findings": [
+    {
+      "severity": "blocker",
+      "location": "b-native-setup-v2.py:185,211-232",
+      "detail": "The SIGALRM deadline is armed only after approval, authorization, dependency verification, and reservation, and is disabled at the start of finally. Project-router close, finish_operation, result persistence, and canonical-store close therefore have no enforced deadline. elapsed_seconds is sampled before finish_operation and excludes its duration. A slow or stuck cleanup/finalization can exceed the reviewed 120 seconds and the persisted elapsed charge can understate actual time, so this is not a hard whole-operation bound or complete elapsed accounting.",
+      "required_fix": "Apply one absolute monotonic deadline across setup and cleanup/finalization; retain bounded cleanup time within the same 120-second ceiling, record the final measured elapsed duration, and leave the operation/result failed or accounting-unknown if settlement cannot be confirmed. Do not report successful setup or settled accounting after an exceeded deadline."
+    }
+  ],
+  "reviewed_behavior": {
+    "callback_handler_execution": false,
+    "evidence": "Producer document() constructs CodexDynamicTools task-service wrappers and reads each definition()['tools']; no service call/handler is invoked. Setup imports the producer, creates the fresh local project, and writes declarations only; it starts no task/model/worker trial.",
+    "source_and_path_pins": "The runner checks the exact source and producer hashes, canonical manifest hash/database inode, fresh project path, and disk reserve before execution.",
+    "replay_guard": "The runner uses exclusive creation of a started marker and repository reservation uses a unique operation id; preserve marker and any partial project after an uncertain attempt.",
+    "other_material_findings": []
+  },
+  "review_scope": "Read-only static review. No runner execution, imports, worker/model/auth access, Docker use, grant reservation, canonical-store mutation, or cleanup was performed by this review."
+}

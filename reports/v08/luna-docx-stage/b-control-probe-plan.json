@@ -1,0 +1,108 @@
+{
+  "allowance_reserved": false,
+  "callback_probe": {
+    "callback_timeout_seconds": 10.0,
+    "callback_tool": "fixed_workbook",
+    "cash_ceiling_usd": 0,
+    "cleanup_allowance_seconds": 5.0,
+    "expected_output_or_later_rows_read": false,
+    "input_digest": "f7ef188dad768538b171d56cdf655801a45489c6fed6d88b8257284a54520beb",
+    "max_assessment_operations": 1,
+    "max_callback_calls": 1,
+    "max_elapsed_seconds": 208.0,
+    "max_model_turns": 1,
+    "model_id": "gpt-6-luna",
+    "no_invocation_outcome": "inconclusive; preserve result and do not replay",
+    "public_fixture_path": "/Users/edwintse/Documents/aeep-agent-router/integrations/assessment-runtime/workbook-grader-fixtures.json",
+    "public_fixture_sha256": "e1342eb43a3daac7ef1dd59ab121d4b1e4f77d07ab8595e4639fc5b8b7c7e5be",
+    "reasoning_effort": "xhigh",
+    "record_index": 0,
+    "worker_timeout_seconds": 203.0
+  },
+  "canonical_definitions_persisted": false,
+  "component_digest": "5438e3aae178909d6d7c765b1590c05308a343d26e8c467097435ba1b1149e8d",
+  "control": {
+    "callback_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+    "callback_exposure": "optional; instruction remains unchanged",
+    "callback_tool_names": [
+      "fixed_workbook"
+    ],
+    "credential_volume": "aeep-auth-incremental-control",
+    "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+    "executor_id": "b.luna.discovery",
+    "invocation_mode": "turn",
+    "model_id": "gpt-6-luna",
+    "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+    "reasoning_effort": "xhigh",
+    "task_instruction": "Complete the workbook task described in {input}. Read the supplied input workbook and write the requested output workbook. You may use available local tools, skills or workbook helpers as useful. Preserve the content required by the task. Return only {\"completed\": true} once the output workbook is written and checked, or {\"completed\": false} if you cannot complete the task. Do not include workbook bytes or base64 in your final answer.",
+    "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345",
+    "worker_image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53"
+  },
+  "execution_authorized": false,
+  "input_pins": {
+    "/Users/edwintse/Documents/aeep-agent-router/integrations/assessment-runtime/workbook-grader-fixtures.json": "e1342eb43a3daac7ef1dd59ab121d4b1e4f77d07ab8595e4639fc5b8b7c7e5be",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-current-profile-v2.json": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-native-components-v4-result.json": "2cafc12642b19d0dddb158f614da19bed96d2dc39ea8657375ccc55965230ad4",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-native-components-v4-review.json": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-native-setup-v3-result.json": "45f2344b74181d79ca284c8d3d3adc3d8d73a3c9edd1ccc51ef6993ed2968752",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-worker-components-terminal-audit.json": "81ca6e006016204a07977bd137066a2352311839664cf500f9859ac27b49e60a",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-worker-components-v2-result.json": "0552cf86620985194c5bd9d1252e88819667730ff9004efc1b82510b98696379",
+    "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-worker-proxy-lifecycle-v3-result.json": "1153138d250c32d7720852561936bc0a6d3d5a06293203fe4de444a739cdc5e5"
+  },
+  "native_probe_set": {
+    "cash_ceiling_usd": 0,
+    "definitions_must_be_fresh": true,
+    "max_assessment_operations": 1,
+    "max_elapsed_seconds": 40.0,
+    "max_model_turns": 0,
+    "max_native_attempt_seconds": 10.0,
+    "max_native_attempts": 2,
+    "native_backend_component_digest": "7be9c342d3d026bee66e7ce1317aa53a85082faf9cad0b10d5fd4c9d79a878a5",
+    "old_treatment_probes_satisfy_control": false,
+    "required_probe_names": [
+      "native_boundary",
+      "protected_state",
+      "callback_lifecycle"
+    ],
+    "selected_worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345",
+    "template_result_sha256": "2cafc12642b19d0dddb158f614da19bed96d2dc39ea8657375ccc55965230ad4",
+    "template_review_sha256": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31"
+  },
+  "native_project": {
+    "database_path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/state.db",
+    "manifest_path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/aeep.json",
+    "manifest_sha256": "11707d498ce6a285c85c0e7c90314e9f24ff355e1be987021898896e9e920d60",
+    "preserve_consumed_scope": {
+      "scope_digest": "01182a6f178c9cd33b7b90e7eb4d1d068dd7c397bc47641acc982c3937909177",
+      "scope_id": "current-composed-workbook"
+    },
+    "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+    "proposed_new_scope": {
+      "approval_ceiling": "read",
+      "executor_fingerprints": {
+        "native.composed.workbook": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4"
+      },
+      "expiry": "generated once at reviewed setup; 15 minute horizon",
+      "max_attempt_seconds": 10.0,
+      "max_attempts": 1,
+      "reuse_or_reset": false,
+      "scope_id": "b-control-callback-20261003"
+    }
+  },
+  "plan_helper_sha256": "e655f33f156f8f7b086ebca1b69c031ac141a54c64320d9ad871dc9732f5fe39",
+  "prerequisites": {
+    "admission": false,
+    "fresh_control_worker_capacity": "required immediately before the model attempt; not present in this plan",
+    "full_conformance": false,
+    "new_scope_and_probe_records": "must be prepared/reviewed in a separate approved setup step; not persisted here",
+    "proxy": "exact proxy must be started under its separately reviewed lifecycle and stopped afterward",
+    "qualification": false,
+    "value_trial": false
+  },
+  "prior_costs": "retain all existing same-grant operations; no reset or refund",
+  "profile_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-current-profile-v2.json",
+  "profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+  "schema_version": "assessment.b-control-probe-plan.v1",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "status": "inert_proposal"
+}

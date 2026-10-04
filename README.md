@@ -1,48 +1,96 @@
 # AEEP Agent Router
 
-AEEP helps an agent choose an approved tool for a specific task. It checks
-permissions and applicable evidence before execution, then records the result,
-verification and resource use. It also tests whether an added skill or plugin
-helps compared with the tools the agent already has.
+> **Active development — use at your own risk.** AEEP is experimental and may
+> break, including workflows that currently work. Updates may introduce breaking
+> changes to APIs, configuration and stored data. Backward compatibility is not
+> guaranteed.
 
-```mermaid
-flowchart LR
-    A[Exact action] --> B{AEEP policy gate}
-    B -->|Reject| C[No execution]
-    B -->|Select| D[One compatible route]
-    D --> E[Validated result + receipt]
-```
+AEEP lets an AI agent use approved tools for specific tasks. It checks permissions,
+selects a compatible implementation, runs the action and records what happened.
+It can also test whether a skill or plugin improves results compared with the
+tools the agent already has.
 
-The host agent plans the work. AEEP handles the choice of implementation for each
-bounded action, using local policy and evidence without another routing-model
-call. Routes can use Python, CLI, HTTP, MCP, browser or subscription-backed
-execution. Hard constraints exclude unsafe or unaffordable routes before scoring.
-The host keeps its normal discovery and progressive disclosure behavior.
+The agent still plans the work. AEEP handles individual actions, such as running
+a text calculation or a reviewed workbook operation. A **route** connects an action
+to an **executor**, the implementation that performs it. Executors can use Python,
+CLI commands, HTTP, MCP, a browser or a subscription-backed agent. AEEP excludes
+routes that violate permissions or resource limits before ranking the remaining
+choices. Selection uses local rules and evidence, without another model call.
 
-## Current status
+## When to use it
 
-**Status:** AEEP 0.8 is in development. The tested native workflow runs on macOS in a Codex
-session without a container stack. A reviewed project scope limits which
-capabilities it can use, their permissions, attempt count, expiry and execution
-time. Users can inspect, pause, stop or undo AEEP-owned configuration changes.
+| Use case | Why AEEP is useful | Evidence and limits |
+|---|---|---|
+| Run a known, repeatable operation | Once the action is known, call its tool directly without asking a model to select it again. | Both approaches returned correct results for 20 matched `text.stats@1` actions. This does not measure natural-language planning. |
+| Give an agent limited access to a project tool | Restrict the tool, permissions, attempt count, runtime and expiry; inspect or withdraw access later. | Two native workbook tasks passed independent checks. Support is limited to the reviewed workbook operations. |
+| Evaluate a skill before enabling automatic use | Test correctness and compare optional access with the agent's existing tools. Keep failed results available for review. | The DOCX and composed workbook studies completed and did not qualify. General benefit remains unproven. |
+| Explain and recover from execution | Record the selected tool, outcome, verification and measured resource use in a **receipt**. Track interrupted attempts before allowing more work. | Software and controlled workflow tests cover accounting, revocation and recovery; live failures and missing measurements remain visible. |
 
-The native path has completed small and larger workbook tasks with independent
-checks of the requested changes and declared preservation requirements. It
-returns concise explanations from recorded receipts. Workbook support covers the
-reviewed operations; it does not establish preservation of arbitrary workbooks,
-macros or external links.
+## How it works
 
-The latest recorded software run passed 1,160 tests, with 15 skipped, and all
-21 native/software checks. Combined statement and branch coverage was 82.33%.
-The 12 container checks failed while Docker was unresponsive. Full live
-qualification and human usability remain incomplete, so this is not a completed
-0.8 product release. The [plan coverage record](reports/v08/plan-coverage.md)
-tracks results and remaining work separately.
+1. Find a candidate tool, skill or plugin through configured discovery. Registry
+   results are suggestions; finding one does not install or enable it.
+2. Record the exact local files and the executor that will run them. Review these
+   definitions before execution. This preparation step is called **intake**.
+3. Test the candidate. **Qualification** checks whether it meets the task's
+   correctness requirements. A separate comparison checks whether optional access
+   improves an already capable agent's results or resource use.
+4. Approve automatic use only for the tested conditions. This approval is an
+   **admission**. A **task scope** separately limits the permitted executor,
+   permissions, attempts, runtime and expiry. Activate the reviewed project profile
+   to make those scoped tools available to the host agent.
+5. Run ordinary tasks. The agent requests an action; AEEP checks current permission
+   and evidence, selects an eligible route, and records its result and receipt.
+   Ordinary routing does not need assessment workers.
+6. Inspect the receipts or withdraw access. Pause or uninstall the project profile,
+   or revoke an admission to prevent further use through that approval.
 
-## What the live workbook test found
+A controlled test exercised this sequence through revocation and cleanup. A live
+registry search returned four candidates, but none matched the selected
+SkillsBench skill. A failed qualification prevents that candidate from advancing
+to automatic use; it does not erase the test results.
 
-Both native Codex and Codex with AEEP completed the same two workbook tasks and
-passed independent grading:
+See the [discovery and intake commands](docs/INTEGRATIONS.md#discovery-intake-and-local-evidence-lookup)
+and [project setup and controls](docs/ASSESSMENT.md#project-local-task-operation).
+The [assessment guide](docs/ASSESSMENT.md) covers recipes, finite resource
+approvals, comparisons, SQLite migration and remaining accounting work.
+`aeep verify assessment-product` reports offline checks separately from live
+Codex evidence. Controlled agent comparisons require separate reviewed workers.
+
+## Test results and current limits
+
+**Status:** AEEP 0.8 is in development. Its tested native workflow runs in a Codex session on
+macOS without a container stack. Users can inspect, pause, stop or undo AEEP-owned
+project configuration changes. A completed 0.8 product release still requires the
+remaining live comparison and adoption checks.
+
+| Test | Recorded result | What it establishes |
+|---|---|---|
+| Software suite, October 4 | 1,219 passed under coverage, 21 skipped; 81.89% combined statement and branch coverage | The tested software behavior passed. Skipped checks remain unverified by this run. |
+| Native workbook tasks | Both native Codex and Codex with AEEP passed 2/2 tasks | The requested changes and declared preservation requirements were checked independently. |
+| Known deterministic tool | Both approaches passed 20/20 matched actions, with 20/20 verified executions | Direct routing worked for the measured `text.stats@1` action class. |
+| SkillsBench DOCX qualification, Luna/xhigh | 137/141 passed; two text-preservation failures and two timeouts | The candidate did not qualify. A separate pinned public-fixture verifier passed 18/18 assertions. |
+| Composed workbook qualification, Luna/xhigh | 136/141 passed; five timeouts, including four holdouts | The report records `insufficient_evidence`; the workflow did not qualify. |
+
+In all five composed workbook timeouts, the native workbook operation completed
+successfully and produced a valid child receipt. The surrounding agent workflow
+failed to finish before its deadline. The cause of that delay is under
+investigation; successful child execution does not make the full trial a pass.
+
+The real three-way comparison of normal agent use, discovery alone, and discovery
+plus AEEP remains unrun. Missing resource measurements prevent a savings claim
+for these qualification studies. General workbook preservation, macros, external
+links and population-wide usability are outside the demonstrated results.
+
+The [evidence guide](docs/EVIDENCE.md) describes the tests, useful cases and limits.
+The [plan coverage record](reports/v08/plan-coverage.md) contains exact run
+references, historical environment failures and remaining work.
+
+## Measured examples
+
+### Native workbook comparison
+
+Both approaches completed the same two workbook tasks and passed independent grading.
 
 | Measurement | Native Codex | Codex with AEEP |
 |---|---:|---:|
@@ -52,54 +100,21 @@ passed independent grading:
 | Observed CPU time | 2.148 s | 3.550 s |
 | Provider-reported total tokens | 123,203 | 60,201 |
 
-AEEP was faster and used fewer reported tokens in this pair, but used more peak
-memory and CPU. The pair ran in a fixed order with AEEP invocation required. It
-passed the resource budgets set for this workload; it does not establish general
-savings or the benefit of optional capability selection. Provider cash and
+AEEP finished faster and used fewer reported tokens in this pair, with higher
+peak memory and CPU use. The runs used a fixed order and required AEEP invocation.
+They passed the resource budgets set for this workload; they do not establish
+general savings or the benefit of optional tool selection. Provider cash and
 subscription consumption were unavailable. See the
 [comparison](reports/v08/native-model-resource-evaluation-5fff-comparison.json)
 and [resource acceptance record](reports/v08/native-model-resource-evaluation-5fff-acceptance-interpretation.json).
 
 Four separate autonomy scenarios produced one verified task completion and three
-safe stops. Ordinary work and the paused case passed their fixed conditions.
+safe stops. Ordinary work and the paused case met their fixed conditions.
 Permission-expansion and recovery cases stopped safely but failed two strict
-response or behavior conditions. Those failures remain recorded in the
+response or behavior conditions. See the
 [scenario audit](reports/v08/native-sol61-autonomy-four-scenarios-5fff-canonical-audit.json).
 
-## Project operation and plugin assessment
-
-For the native workflow, follow
-[project-local operation](docs/ASSESSMENT.md#project-local-task-operation).
-Activation, pause/stop, rollback and task responses share the existing router,
-approvals, durable attempts and receipts.
-
-Assessment runs separately from ordinary tasks. Select a local subject, review
-its recipe and implementation mapping, authorize finite resources, then run the
-comparison. A candidate can lose without making the campaign incomplete. Scoped
-automatic use remains reversible.
-
-The [assessment guide](docs/ASSESSMENT.md) covers commands, supported recipes,
-SQLite migration and unfinished integration and accounting work. Run
-`aeep verify assessment-product` to inspect offline checks separately from live
-Codex evidence. Controlled agent comparisons require the reviewed assessment
-workers; ordinary routing continues without them.
-
-## Other supported paths
-
-- Host-native routing keeps implementation and router schemas out of model
-  context when the host supplies the exact action.
-- The managed OpenAI/ChatGPT subscription adapter uses the official local Codex
-  App Server. Codex owns authentication and model discovery.
-- Capacity reservations and execution attempts support durable recovery across
-  providers.
-- Provider packages require signatures, evidence, smoke checks and explicit
-  activation; failed checks leave them inactive.
-- Economic routing records hard limits, approvals and usage receipts, with
-  recovery for interrupted work.
-- The x402 capacity contract is offline. Live marketplace networking is disabled
-  by default.
-
-## Earlier deterministic-tool result
+### Direct execution of a known tool
 
 An earlier test compared model-driven tool selection with direct routing when the
 exact deterministic tool and structured action were already known.
@@ -113,15 +128,14 @@ exact deterministic tool and structured action were already known.
 | Median latency | 8,324.9 ms | 5.47 ms |
 
 Both sides were installed before measurement. Codex received the exact command
-and could not discover or install anything. It still used a model/tool/model
-loop. AEEP received the structured `text.stats@1` action and invoked the same
-Python function without a provider call.
+and could not discover or install anything. It used a model/tool/model loop.
+AEEP received the structured `text.stats@1` action and invoked the same Python
+function without a provider call.
 
-This result applies to the measured `text.stats@1` action class. It does not
-measure installation, natural-language intent recognition or work requiring
-model judgment. Codex totals include its full host context; the meter cannot
-attribute every token to an individual schema. Unknown usage stays unknown, and
-local conformance does not establish live-market readiness. See the
+This measures the execution of that action class, excluding installation,
+natural-language intent recognition and work requiring model judgment. Codex
+totals include its full host context; the meter cannot attribute every token to
+an individual schema. Unknown usage remains unknown. See the
 [method, exclusions, and raw accounting](reports/v06/codex/tool-ready-campaign.md).
 
 ## Quick start
@@ -146,40 +160,47 @@ Preview the decision without executing:
 aeep route text.stats --input '{"text":"hello world"}'
 ```
 
-## Connect an agent host
+## Connect an agent
 
-Use `aeep host-bridge` for host-native pre-model routing. DeepSeek Harness has a
-bundled adapter in [`integrations/dsh-aeep-router`](integrations/dsh-aeep-router/).
+Use `aeep host-bridge` when the host supplies an exact action before a model call.
+This keeps implementation and router schemas out of model context. DeepSeek
+Harness has a bundled adapter in
+[`integrations/dsh-aeep-router`](integrations/dsh-aeep-router/).
+A local MCP server is available for model-facing integration. See
+[integration guidance](docs/INTEGRATIONS.md).
 
-A local MCP server is also available when model-facing integration is required.
-See [integration guidance](docs/INTEGRATIONS.md).
+The managed OpenAI/ChatGPT subscription adapter uses the official local Codex
+App Server. Codex owns authentication and model discovery. Capacity reservations
+and durable execution attempts support recovery across providers. Provider
+packages require signatures, evidence, smoke checks and explicit activation;
+failed checks leave them inactive. See [provider packages](docs/PROVIDER_PACKAGES.md).
 
 ## Permissions and data
 
-- Hard constraints run before scoring.
-- Requests cannot loosen manifest policy.
-- Imported routes are inert until qualified and activated.
+- Hard constraints run before scoring; requests cannot loosen manifest policy.
+- Imported routes remain inactive until qualified and activated.
 - Writes and payments require operator approval.
 - Inputs and outputs are not persisted by default.
 - Commands use argv arrays, never shell interpolation.
 - Personal subscription capacity is `SELF_ONLY` and cannot be resold or used to
   issue an external entitlement.
-- Marketplace/x402 networking and value movement are absent and disabled by
-  default.
+- Economic routing records limits, approvals and usage receipts, including
+  interrupted work. The x402 capacity contract is offline; marketplace networking
+  and value movement are absent and disabled by default. Local conformance does
+  not establish live-market readiness.
 
 ## Documentation
 
-- [Specification](SPEC.md)
-- [Architecture](ARCHITECTURE.md)
-- [Security](SECURITY.md)
-- [Provider packages](docs/PROVIDER_PACKAGES.md)
-- [Evidence reuse](docs/EVIDENCE_REUSE.md)
-- [Economic accounting](docs/ACCOUNTING.md)
+- [Evidence guide](docs/EVIDENCE.md) and [implementation status](reports/v08/plan-coverage.md)
+- [Specification](SPEC.md), [architecture](ARCHITECTURE.md) and [security](SECURITY.md)
+- [Evidence reuse](docs/EVIDENCE_REUSE.md) and [economic accounting](docs/ACCOUNTING.md)
 - [Migration to 0.7](docs/MIGRATION_0.7.md)
-- [Examples](examples/quickstart/README.md)
-- [Changelog](CHANGELOG.md)
+- [Examples](examples/quickstart/README.md) and [changelog](CHANGELOG.md)
 
 ## Development
+
+Read the [assessment testing policy](docs/ASSESSMENT_TESTING.md) before changing or
+running assessment, execution-adapter or release-verification work.
 
 ```bash
 pip install -e '.[dev,http-server]'
@@ -192,6 +213,3 @@ aeep verify router-complete --profile all --strict --json
 ```
 
 Licensed under [Apache-2.0](LICENSE).
-
-Read the [assessment testing policy](docs/ASSESSMENT_TESTING.md) before changing or running
-assessment, execution-adapter or release-verification work in this repository.

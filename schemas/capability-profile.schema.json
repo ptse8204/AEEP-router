@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "ProfileComponent": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Component Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        },
+        "content_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "executor",
+            "skill",
+            "server",
+            "file",
+            "hook",
+            "dependency",
+            "package"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 128,
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "executor_id": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executor Id"
+        },
+        "removal": {
+          "default": "available",
+          "enum": [
+            "available",
+            "deferred",
+            "hidden",
+            "call_blocked",
+            "absent"
+          ],
+          "title": "Removal",
+          "type": "string"
+        },
+        "discoverable": {
+          "default": false,
+          "title": "Discoverable",
+          "type": "boolean"
+        },
+        "exposed": {
+          "default": false,
+          "title": "Exposed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "component_id",
+        "resource_id",
+        "content_digest",
+        "kind"
+      ],
+      "title": "ProfileComponent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.capability-profile.v1",
+      "default": "aeep.capability-profile.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "profile_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "tool_schema_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Tool Schema Digest",
+      "type": "string"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/ProfileComponent"
+      },
+      "maxItems": 128,
+      "minItems": 1,
+      "title": "Components",
+      "type": "array"
+    },
+    "host": {
+      "default": "codex-project",
+      "enum": [
+        "codex-project",
+        "task-service"
+      ],
+      "title": "Host",
+      "type": "string"
+    },
+    "intended_model": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intended Model"
+    },
+    "intended_effort": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intended Effort"
+    },
+    "strict_isolation": {
+      "default": false,
+      "title": "Strict Isolation",
+      "type": "boolean"
+    },
+    "required_host_features": {
+      "items": {
+        "enum": [
+          "catalog_filtering",
+          "schema_exposure",
+          "skill_file_exclusion",
+          "call_enforcement",
+          "filesystem_isolation",
+          "network_isolation",
+          "credential_scope",
+          "hooks",
+          "context_reset",
+          "resource_observability"
+        ],
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Required Host Features",
+      "type": "array"
+    }
+  },
+  "required": [
+    "profile_id",
+    "scope_digest",
+    "manifest_digest",
+    "tool_schema_digest",
+    "components"
+  ],
+  "title": "CapabilityProfile",
+  "type": "object"
+}

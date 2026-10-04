@@ -1,0 +1,50 @@
+{
+  "schema_version": "aeep.b-qualification-callback-composition-static-review.v1",
+  "reviewed_at": "2026-10-03",
+  "status": "changes_requested_before_execution",
+  "policy_read": "docs/ASSESSMENT_TESTING.md",
+  "reviewed_file": {
+    "path": "reports/v08/luna-docx-stage/b-qualification-callback-composition.py",
+    "sha256": "18ed620ded3b4e082552ecc78dfc59ce0bf2bd86985779a0506f99ce5af14d3a",
+    "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "static_only": true,
+    "executed_or_imported": false
+  },
+  "verified_design": {
+    "qualification_trial_shape": "Derives the existing BenchmarkRunner trial ID format from a single candidate route, FRESH_WORKER, one repetition and exact 8/28/105 stage counts; it reads case IDs/split labels only and does not read case payloads.",
+    "scope_preparation": "Requires the reviewed plan to match canonical storage and no campaign job to exist, reserves one finite setup operation (1 operation, 0 model turns, 600 seconds, $0 ceiling), refuses any existing deterministic per-trial scope, and constructs per-trial READ scopes for exactly one attempt and 10 seconds.",
+    "existing_composition": "Uses the existing native dynamic operator union factory and pinned workbook producer, not a new benchmark engine.",
+    "callback_lineage": "Resolves only scope-index keys derived from the qualification plan and requires the exact plan's active assessment plus a currently reserved trial operation.",
+    "cleanup_order": "BenchmarkRunner closes FRESH_WORKER routers in its per-trial finally after _execute_trial returns; _execute_trial saves and calls after_trial before returning. The wrapper closes the App Server adapter and then owned task Routers, so inner routers are cleaned after callback/post-call processing.",
+    "writable_state": "The helper stores only task_scope records and review marks in the task project's Router store. It does not copy case or output payloads. Partial preparation is retained and rejected on replay rather than resetting state."
+  },
+  "blocking_findings": [
+    {
+      "id": "scope_index_integrity",
+      "severity": "high",
+      "location": "install_treatment_factory and services_for_trial",
+      "finding": "The producer emits scope_index_digest, but installation never recomputes/verifies it. Dispatch trusts scope_id and scope_digest from the supplied index; it does not verify the deterministic scope ID or require the exact READ / one-attempt / 10-second / executor-fingerprint scope contract against the current native spec. A modified index pointing to another valid reviewed scope can therefore bypass the intended per-trial authority limits.",
+      "minimum_fix": "Verify the canonical index digest before installing the factory; require each exact trial's deterministic scope ID; and at dispatch assert the scope ID, READ ceiling, attempt/time bounds, project root, unexpired exact expiry and executor_fingerprints == {native_spec.id: executor_fingerprint(native_spec)}."
+    },
+    {
+      "id": "scope_expiry_upper_bound",
+      "severity": "medium",
+      "location": "prepare_trial_scopes expiry checks",
+      "finding": "The helper requires expiry after caller-supplied campaign_end and no later than grant expiry, but it does not validate campaign_end is future or impose a short maximum lifetime. Since the grant may outlast the campaign substantially, unused reviewed scopes could remain live long after trial completion.",
+      "minimum_fix": "Bind campaign_end into the returned scope index and enforce a small explicit post-campaign cleanup grace and future-time check, while retaining the existing grant-expiry ceiling."
+    }
+  ],
+  "operational_limits": [
+    "Preparation is non-idempotent: a partial scope set remains in the task project and cannot be replayed. The invoking runner must retain and account for the failed setup operation and inspect partial state before any successor plan.",
+    "The service builder check pins its source file path/hash; the executing wrapper must supply the actual imported `services` function from that pinned file, not a dynamically substituted callable.",
+    "No trial, holdout, worker, model, Docker, canonical grant, or network activity was performed for this review."
+  ],
+  "references": {
+    "scope_model": "src/aeep/models.py:3266",
+    "scope_dispatch_enforcement": "src/aeep/router.py:5379",
+    "existing_factory": "reports/v08/original-three-way-profile/native-dynamic-operator-composition.py:65",
+    "trial_id_construction": "src/aeep/benchmarking.py:1883",
+    "fresh_worker_cleanup": "src/aeep/benchmarking.py:1913",
+    "after_trial_order": "src/aeep/benchmarking.py:1720"
+  }
+}

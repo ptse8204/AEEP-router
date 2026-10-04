@@ -1,0 +1,241 @@
+{
+  "accounting_scope": "operation start through local native router close; canonical settlement/report writing excluded",
+  "accounting_status": "raw child receipts retained separately; no aggregate accounting inferred",
+  "attempt_digests": [
+    "18d218d9bfcbeabe3b402cfa2000b899e6bdec87742ce74bf1a3f770afa11474",
+    "63505e88326114277b9865c33c376c4aa58c2008a52ca46b81eeff4d78f72a82"
+  ],
+  "boundary_probes_complete": true,
+  "cancel_helper_response": {
+    "is_error": true,
+    "ok": false,
+    "status": "timeout"
+  },
+  "cleanup_confirmed": true,
+  "elapsed_seconds": 0.9891002499498427,
+  "execution_evidence_by_executor": {
+    "c.native.component.cancel.treatment": "7f55b9db4b78cc84c4bcaed95ff079d1405379b08a92fbd6a737b5f15e0e3343",
+    "c.native.component.guard.treatment": "36be2fe3f5feb85e86630b82e4091694f075676f1c5e9006a7479e4da452a2f3"
+  },
+  "execution_evidence_digests": [
+    "36be2fe3f5feb85e86630b82e4091694f075676f1c5e9006a7479e4da452a2f3",
+    "7f55b9db4b78cc84c4bcaed95ff079d1405379b08a92fbd6a737b5f15e0e3343"
+  ],
+  "execution_evidence_receipt_ids": [
+    "rcpt_db2064d9f8dc4bf08b2838efda164ea7",
+    "rcpt_35abcbfd0ce44dd9bafe22152a9b5aaa"
+  ],
+  "full_conformance": false,
+  "host_callback_observed": false,
+  "main_close_confirmed": true,
+  "model_turns": 0,
+  "native_attempts": 2,
+  "native_backend_receipt_executor_ids": [
+    "c.native.component.guard.treatment",
+    "c.native.component.guard.treatment",
+    "c.native.component.cancel.treatment",
+    "c.native.component.guard.treatment",
+    "c.native.component.cancel.treatment"
+  ],
+  "observations": {
+    "callback_lifecycle": {
+      "cancel_requested": true,
+      "fixed_helper_returned_timeout": true,
+      "host_eof_observed": false,
+      "owned_non_zombie_processes_gone": true,
+      "read_attempt_failed_retry_eligible": true,
+      "ready_line_observed": true,
+      "single_cancel_attempt": true,
+      "timeout_receipt_persisted": true
+    },
+    "native_boundary": {
+      "database_denied": true,
+      "fork_errno": "35",
+      "hard_nproc": "0:0",
+      "marker": "post_exec",
+      "network_denied": true,
+      "private_denied": true,
+      "raise_denied": true,
+      "session_leader": true,
+      "spawn_errno": "35"
+    },
+    "protected_state": {
+      "database_denied": true,
+      "private_denied": true,
+      "witness_unchanged": true
+    }
+  },
+  "observer_direct_child_candidates": [
+    {
+      "executable_name": "codex",
+      "matches_native_binary": true,
+      "pid": 97020,
+      "ppid": 97015
+    }
+  ],
+  "observer_process_chain": [
+    {
+      "pid": 97023,
+      "ppid": 97020
+    },
+    {
+      "pid": 97020,
+      "ppid": 97015
+    },
+    {
+      "pid": 97015,
+      "ppid": 31096
+    },
+    {
+      "pid": 31096,
+      "ppid": 31038
+    },
+    {
+      "pid": 31038,
+      "ppid": 1
+    },
+    {
+      "pid": 1,
+      "ppid": 0
+    },
+    {
+      "pid": 0,
+      "ppid": 0
+    }
+  ],
+  "operation_id": "c-native-components:conformance_c_native_components_treatment_50de",
+  "operation_settled": true,
+  "probe_child_evidence_digests": {
+    "callback_lifecycle": [
+      "7f55b9db4b78cc84c4bcaed95ff079d1405379b08a92fbd6a737b5f15e0e3343"
+    ],
+    "native_boundary": [
+      "36be2fe3f5feb85e86630b82e4091694f075676f1c5e9006a7479e4da452a2f3"
+    ],
+    "protected_state": [
+      "36be2fe3f5feb85e86630b82e4091694f075676f1c5e9006a7479e4da452a2f3"
+    ]
+  },
+  "probe_child_receipt_digests": {
+    "callback_lifecycle": [
+      "94d244dc99a3c38071834300588b79d21fc1a6088b27fd5fdda213fbf59356af"
+    ],
+    "native_boundary": [
+      "6ab94ab301c70c2e85fc182277095384ba99c0a5f4212af18d7de91a57d4216c"
+    ],
+    "protected_state": [
+      "6ab94ab301c70c2e85fc182277095384ba99c0a5f4212af18d7de91a57d4216c"
+    ]
+  },
+  "protected_state": {
+    "canary_sha256_before_after": [
+      "839477443fe66f6316d6319d29dc7384e45703870df65851cca1be0ccff57ba2",
+      "839477443fe66f6316d6319d29dc7384e45703870df65851cca1be0ccff57ba2"
+    ],
+    "project_database_sha256_before_after": [
+      "e61ca634c90a6cbb0016b5240c17c9412f638cbc9a7601bb6c54a26ffebcfe4e",
+      "e61ca634c90a6cbb0016b5240c17c9412f638cbc9a7601bb6c54a26ffebcfe4e"
+    ]
+  },
+  "protected_state_unchanged": true,
+  "ready_observation": {
+    "line_digest": "e4be299ee7084a88e77088180eee8bcd9f31d91c616a947e7aea29507d557bea",
+    "pid": 97023,
+    "processes": [
+      {
+        "created_at": 1791029841.804257,
+        "name": "python3.12",
+        "pid": 97023
+      },
+      {
+        "created_at": 1791029841.764845,
+        "name": "codex",
+        "pid": 97020
+      }
+    ]
+  },
+  "receipt_by_executor": {
+    "c.native.component.cancel.treatment": "94d244dc99a3c38071834300588b79d21fc1a6088b27fd5fdda213fbf59356af",
+    "c.native.component.guard.treatment": "6ab94ab301c70c2e85fc182277095384ba99c0a5f4212af18d7de91a57d4216c"
+  },
+  "receipt_digests": [
+    "6ab94ab301c70c2e85fc182277095384ba99c0a5f4212af18d7de91a57d4216c",
+    "94d244dc99a3c38071834300588b79d21fc1a6088b27fd5fdda213fbf59356af"
+  ],
+  "receipt_resources": [
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [],
+        "subscription_usage": [],
+        "tool_footprint": null
+      },
+      "executor_id": "c.native.component.guard.treatment",
+      "receipt_id": "rcpt_db2064d9f8dc4bf08b2838efda164ea7",
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 47,
+        "cpu_ms": 105.33174799999999,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 319.819041993469,
+        "memory_mb_seconds": 8.202655671302637,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 123.953125,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "status": "success"
+    },
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [],
+        "subscription_usage": [],
+        "tool_footprint": null
+      },
+      "executor_id": "c.native.component.cancel.treatment",
+      "receipt_id": "rcpt_35abcbfd0ce44dd9bafe22152a9b5aaa",
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 12,
+        "cpu_ms": 112.89612399999999,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 336.6954578086734,
+        "memory_mb_seconds": 10.832232191020012,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 124.84375,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "status": "timeout"
+    }
+  ],
+  "request_id": "conformance_c_native_components_treatment_50de",
+  "resource_claim": "receipt values are retained as serialized; default zero fields do not establish zero consumption",
+  "resource_totals_complete": false,
+  "result_status": "pass",
+  "review_sha256": "30393e827fceaea3c20c0bede4cf3abc37caae896523fcc54b052730ff7f5526",
+  "schema_version": "c-native-components-result.treatment.v1",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "source_unchanged": true,
+  "supervisor_probe_digests": {
+    "callback_lifecycle": "1a79d370fff714d787c12d550c522eb76015f17a4731e11970b1bfb8e184e97f",
+    "native_boundary": "67645bccc1ed289931ba9cb908f8177647791adf21cc22dc33419b516bb9ecd5",
+    "protected_state": "77b28f268e13fb1afee8af4c6b464f69bbce7b96c4e477e776cad84fafcce7fd"
+  },
+  "whole_system_cost_complete": false
+}

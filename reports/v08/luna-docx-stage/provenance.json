@@ -1,0 +1,27 @@
+{
+  "kind": "pinned SkillsBench offer-letter input inspection; preparation only",
+  "upstream_commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "inputs": {
+    "offer_letter_template.docx": {
+      "url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/environment/offer_letter_template.docx",
+      "sha256": "34a2fe42f5799f35b9543af63d712b9e28cc93f97847528c3fbfe76071f60d15",
+      "bytes": 38686,
+      "zip_valid": true,
+      "zip_members": 19,
+      "uncompressed_bytes": 834777
+    },
+    "employee_data.json": {
+      "url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/environment/employee_data.json",
+      "sha256": "64dcb6aad2423051a638efefc85d1b47d306718e462342281553bf00082870c0",
+      "bytes": 774
+    }
+  },
+  "runtime_observation": "The already installed bundled Python 3.12 contains python-docx and lxml; no installation performed.",
+  "execution_performed": false,
+  "official_reproduction": false,
+  "next_review": [
+    "Confirm exact task instructions and document template/data mapping.",
+    "Build bounded artifact input/output and independent correct/fault fixtures with trusted grader separate from task worker.",
+    "Run an explicitly labelled exploratory adaptation before any 141-case qualification plan; retain 30-second local program cap unless separately reviewed."
+  ]
+}

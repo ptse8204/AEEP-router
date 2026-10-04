@@ -1,0 +1,75 @@
+{
+  "actual_cash_cost_usd": null,
+  "adapter_id": "codex-app-server:b-luna-aeep",
+  "capacity": {
+    "canonical_digest": "sha256:fb76e995bde26597f46c4f50a758d86d28043df1592876bc9769efffa4ab8a70",
+    "observation_id": "capacity_3adc2633f38a4057921185b44efd2440",
+    "observed_at": "2026-10-04T22:56:17.755017Z",
+    "redacted_provider_metadata": {
+      "reset_credits_available": 3
+    },
+    "resource_id": "codex.self",
+    "source": "codex_app_server",
+    "windows": [
+      {
+        "allowance": null,
+        "confidence": 0.95,
+        "duration_seconds": 604800,
+        "evidence": [
+          {
+            "confidence": 0.95,
+            "evidence_id": "capacity-evidence_2d85a8074f664608bbca579c833ecd2c",
+            "observed_at": "2026-10-04T22:56:17.754952Z",
+            "source": "codex_app_server_rate_limits",
+            "source_digest": "sha256:50847265a3129fc97f3ad3d878cb67ed8f34410d73bacd7c2e8d8414adff2595"
+          }
+        ],
+        "exhausted": false,
+        "hard_limit": true,
+        "remaining": null,
+        "reset_at": "2026-10-09T21:13:21Z",
+        "unit": "provider_unit",
+        "used_percent": "72",
+        "window_id": "codex:primary"
+      }
+    ]
+  },
+  "capacity_digest": "sha256:fb76e995bde26597f46c4f50a758d86d28043df1592876bc9769efffa4ab8a70",
+  "capacity_max_age_seconds": 1800,
+  "cash_ceiling_usd": 0,
+  "cleanup_confirmed": true,
+  "component_execution_evidence_digest": "1fb02c9c00bae2e035a44d16e5b56433ca5161a64beb5b02d6e813bc4ecda700",
+  "component_identity_digest": "5e19056062e506f8694f38b781827cc4bc5ccddb5a9ed70a411648dc05023275",
+  "component_request_id": "conformance_probe_6ca1e3c10c364e67b5db81b34f964a0a",
+  "component_result_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-worker-components-result-v2.json",
+  "component_result_sha256": "0481cefd577e9251fb918d9cdd6a86d1ae6e146a1d89fe63e6bcb4177788aa75",
+  "container_name": "aeep-022e5c6c8cf9a8305cb6c58b82b38d0f",
+  "definition_digest": "e44998e97ba5ab9424a37d667f8e301b3160f523316531f04d472aed43dcf959",
+  "elapsed_seconds": 2.1248981249518692,
+  "error_type": null,
+  "execution_evidence_digest": null,
+  "executor_id": "b.luna.aeep",
+  "host_receipt_applicable": false,
+  "host_receipt_digest": null,
+  "max_model_turns_reserved": 0,
+  "max_operations_reserved": 1,
+  "method": "account/rateLimits/read",
+  "model_turns": 0,
+  "operation_id": "capacity:planning_delay_capacity_e6b71a_19027f56_20261004",
+  "operation_measurement_digest": "bf763ef09e91cc5c3fe180445de078419dfd364a624cb29ca1b8ef62d81ac51f",
+  "operation_start_digest": "7a6effa6b03389eface0fdf73b0d373504c203c525fea466c9a87aca4a065324",
+  "plan_id": "planning_delay_capacity_e6b71a_19027f56_20261004",
+  "profile_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-current-profile-v2.json",
+  "profile_sha256": "ac096d106954d86433f4743333ac7004765a9dbc2db229c9fbecc5efa3db2eb8",
+  "proxy_lifecycle_owned_here": false,
+  "replay_allowed": false,
+  "request_digest": "89dbdbead8b8543d6147c525a488d65227ffd0bc8d75b529de81cda22a77f150",
+  "schema_version": "aeep.capacity-refresh-result.v1",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "source_unchanged": true,
+  "stage": "capacity_introspection",
+  "status": "passed",
+  "subscription_usage": "unknown; not read by this operation",
+  "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+  "worker_process_id": "host-worker_5fb5f9b301cc4c8c8869523fef4ead0f"
+}

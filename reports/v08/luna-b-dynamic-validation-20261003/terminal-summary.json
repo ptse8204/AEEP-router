@@ -1,0 +1,203 @@
+{
+  "recorded_at": "2026-10-03T07:19:35.711187+00:00",
+  "source_digest": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+  "status": "all_13_commands_passed",
+  "commands": [
+    {
+      "name": "04-compileall-retry",
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log_sha256": "17fea2685f1b5cc3d97f6c9f1f86ad73ccacc4caf7fa240eed8a0d1dc592eef1"
+    },
+    {
+      "name": "05-schema-check-retry",
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_sha256": "066e5807bee6835c2c7ad8eef4234f63796ee7ae2bf02af7e557d8dc2e2430c4"
+    },
+    {
+      "name": "06-focused-retry",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v08_dynamic_differential.py",
+        "tests/test_v08_three_way.py",
+        "tests/test_v08_incremental.py",
+        "tests/test_v08_conformance.py",
+        "tests/test_codex_composed_inspection.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "a0f166bcfb74b7ba6743c8d279276a46ada53887bf6628dd335dd78fcadc4a1e"
+    },
+    {
+      "name": "07-policy",
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d79c7f9ba4d0ff3f425ca4df88e49f20da995f500cfcd836577a7ee5e14cc2d7"
+    },
+    {
+      "name": "08-ruff",
+      "command": [
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "examples"
+      ],
+      "exit_code": 0,
+      "log_sha256": "cd223c1704178e5e13591f92e4450376d5de4207c0c0bc5a42d769cb0d48c35d"
+    },
+    {
+      "name": "09-mypy",
+      "command": [
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "f3a04949204c07692d8a4c11e8f810357d4bf57d3390aa953553a63de33c0649"
+    },
+    {
+      "name": "10-pytest",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "exit_code": 0,
+      "log_sha256": "c9a7094a5f636dc68b3dbdfc8c6ea7ee98fc80e317014c944a2bfcb45b816fb7"
+    },
+    {
+      "name": "11-coverage-run",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "exit_code": 0,
+      "log_sha256": "c14c7d76d52cf5204851b3a884dcf40497d3c48092e16795f1093487307eb5b3"
+    },
+    {
+      "name": "12-coverage-report",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "log_sha256": "91dab931607fb8cd80fba8829b513b0e1c21ae7eb2872a415b92605c74aac246"
+    },
+    {
+      "name": "13-coverage-json",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "--data-file=reports/v08/luna-b-dynamic-validation-20261003/coverage.data",
+        "-o",
+        "reports/v08/luna-b-dynamic-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0519bce3ebd24a06a9c27e9af681ed14d0dbaa7878058c019324bce095a61b30"
+    },
+    {
+      "name": "14-critical-coverage",
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/luna-b-dynamic-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "2807302972f93b6d32e92bdb307cf7a72b5b2238800c4b8975853b3f6189d8ec"
+    },
+    {
+      "name": "15-assessment-coverage",
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/luna-b-dynamic-validation-20261003/coverage.json"
+      ],
+      "exit_code": 0,
+      "log_sha256": "052d065b30b9995e112943a02a1e2915f7a15b25316b812eec5815eb199bd031"
+    }
+  ],
+  "test_results": {
+    "10-pytest": "1197 passed, 21 skipped, 1 warning in 548.44s (0:09:08)",
+    "11-coverage-run": "1197 passed, 21 skipped, 1 warning in 831.64s (0:13:51)"
+  },
+  "coverage_totals": {
+    "covered_lines": 25906,
+    "num_statements": 30386,
+    "percent_covered": 81.78520660751924,
+    "percent_covered_display": "82",
+    "missing_lines": 4480,
+    "excluded_lines": 245,
+    "percent_statements_covered": 85.2563680642401,
+    "percent_statements_covered_display": "85",
+    "num_branches": 10416,
+    "num_partial_branches": 2268,
+    "covered_branches": 7464,
+    "missing_branches": 2952,
+    "percent_branches_covered": 71.6589861751152,
+    "percent_branches_covered_display": "72"
+  },
+  "gate_logs": {
+    "14-critical-coverage": "<unset>\nApp Server transport: 309/338 branches (91.42%)\ntransferability: 30/30 branches (100.00%)\nunified attempt recovery: 24/24 branches (100.00%)\nx402 conformance: 15/16 branches (93.75%)\nReceiptStore.reserve_capacity: 12/12 branches (100.00%)\nReceiptStore.claim_capacity_reservation: 12/12 branches (100.00%)\nReceiptStore.release_capacity_reservation: 8/8 branches (100.00%)\nReceiptStore._transition_attempt_capacity_locked: 13/14 branches (92.86%)",
+    "15-assessment-coverage": "<unset>\nconfigured setup scope: 26/28 branches (92.86%)\ncurrent grant validity: 2/2 branches (100.00%)\nreviewed grader diagnostics: 4/4 branches (100.00%)\npaired inspection authority: 16/16 branches (100.00%)\nworker inspection authority: 4/4 branches (100.00%)\nworker inspection cleanup: 8/8 branches (100.00%)\noperator sign-in authority: 11/12 branches (91.67%)\npilot cost lineage: 12/12 branches (100.00%)\npilot calibration scope: 10/10 branches (100.00%)\nconformance bootstrap authority: 21/22 branches (95.45%)\npilot holdout separation: 4/4 branches (100.00%)\ndifferential environment: 18/20 branches (90.00%)\nbudget amendment: 10/10 branches (100.00%)\nincremental utility: 9/10 branches (90.00%)\nutility measurements: 6/6 branches (100.00%)\npaired utility decisions: 13/14 branches (92.86%)\nboundary verification: 26/26 branches (100.00%)\nproduction worker binding: 14/14 branches (100.00%)\nscope amendment transaction: 21/22 branches (95.45%)\ncapability eligibility: 2/2 branches (100.00%)\napplicability: 29/32 branches (90.62%)\nauthorization: 6/6 branches (100.00%)\ndurable budget reservation: 6/6 branches (100.00%)\nbudget completion: 12/12 branches (100.00%)\natomic admission: 23/24 branches (95.83%)"
+  },
+  "skipped_checks": [
+    "SKIPPED [1] tests/test_v08_discovery_lifecycle.py:237: explicit native launcher required",
+    "SKIPPED [1] tests/test_v08_executable_recipes.py:96: requires reviewed local container runtime",
+    "SKIPPED [1] tests/test_v08_live.py:23: requires explicitly selected authorized live evidence",
+    "SKIPPED [1] tests/test_v08_live.py:29: requires explicitly selected authorized live evidence",
+    "SKIPPED [1] tests/test_v08_managed_workers.py:227: requires explicitly configured local container runtime",
+    "SKIPPED [2] tests/test_v08_managed_workers.py:436: pinned catalog relay image and offline worker specs required",
+    "SKIPPED [1] tests/test_v08_native_process.py:119: explicit installed workbook Python required",
+    "SKIPPED [1] tests/test_v08_offline_pair.py:64: requires explicit offline Codex pair",
+    "SKIPPED [1] tests/test_v08_real_container.py:20: requires an explicitly configured local release container",
+    "SKIPPED [1] tests/test_v08_real_container.py:61: requires an explicitly configured local release container",
+    "SKIPPED [1] tests/test_v08_real_container.py:128: requires an explicitly configured local release container",
+    "SKIPPED [1] tests/test_v08_real_container.py:152: requires an explicitly configured local release container",
+    "SKIPPED [1] tests/test_v08_task_lifecycle.py:276: explicit native launcher required",
+    "SKIPPED [1] tests/test_v08_task_profile.py:413: explicit native launcher required",
+    "SKIPPED [1] tests/test_v08_task_profile.py:476: explicit native launcher and existing workbook Python required",
+    "SKIPPED [1] tests/test_v08_workbook.py:85: requires a pinned offline workbook recipe runtime",
+    "SKIPPED [1] tests/test_v08_workbook.py:121: requires a pinned offline image with openpyxl 3.1.5",
+    "SKIPPED [1] tests/test_v08_workbook_native.py:138: installed workbook runtime opt-in",
+    "SKIPPED [1] tests/test_v08_worker_inspection.py:68: requires explicit offline Codex worker specs",
+    "SKIPPED [1] tests/test_v08_workers.py:205: set AEEP_CODEX_EXECUTABLE for authorized no-model Codex conformance"
+  ],
+  "runtime_scope": "Offline software validation. Explicit live/native/container opt-ins unset; no candidate qualification or value campaign.",
+  "remaining_findings": "Two three-role validator issues were found in parallel static preparation and are recorded in b-three-role-validator-amendment.json; these passing tests do not cover those missing cases.",
+  "initial_failures_retained": [
+    "03-focused.log: two new fixture assertion failures, corrected in tests before this source freeze"
+  ],
+  "temporary_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-b-validation-20261003",
+  "temporary_cleanup_performed": false
+}

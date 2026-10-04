@@ -1,0 +1,85 @@
+{
+  "schema_version": "b.workbook-qualification-materialization-canonical-audit.v1",
+  "audited_at": "2026-10-03T11:10:20Z",
+  "policy_read": "docs/ASSESSMENT_TESTING.md",
+  "method": "Read-only selected SQLite metadata and accounting records; no case-set payload or truth fields read.",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "materializer_sha256": "26adf6bd763230d83dc61194058f91aae2afdbfaeed3587d379dd08535ceaf75",
+  "result_path": "reports/v08/luna-docx-stage/b-workbook-qualification-materialization-result.json",
+  "result_sha256": "8afdc3d94b0bcc8c34f801eaba6a6aeb0673511ffe7d3ffdde84586a0908b61e",
+  "request_review_sha256": "d43a235e67026ea20ebfaa57fc18114a9d8d732751a8c2fd7d971cc69addaf12",
+  "request_id": "recipe_generation_a0c2096ac8b4438f8f2facb7c7d7850d",
+  "canonical_metadata": {
+    "materialization_request_record_digest": "536d6395f6e8948103d8783b19871be28f2813f7ec7ad07cc9cb4d84a2411f13",
+    "case_set_record_digest": "4cb752e8cf93a6362a0a853c17cb835317763c2b0cd441e56be2b5116982e665",
+    "operation_id": "recipe_generation_a0c2096ac8b4438f8f2facb7c7d7850d-generator",
+    "operation_start_record_digest": "c0d6cf1cfe9cd702abbe090b90e311050ee4dac6b16949e4ab90dcd18824f628",
+    "operation_measurement_record_digest": "51340cd8df795a83f980ec53a538dcec75dfbb32278be9d795bb3836d1bb6b4c",
+    "operation_state": "complete",
+    "stage": "recipe_generation",
+    "reservation": {
+      "operations": 1,
+      "seconds": 35.0,
+      "model_turns": 0,
+      "cash_usd": "0"
+    },
+    "measured_elapsed_seconds": 3.937243124935776,
+    "operation_resources": null,
+    "accounting": {
+      "model_usage_entries": 0,
+      "subscription_usage_entries": 0,
+      "cash_status": "unavailable",
+      "cash_components": [],
+      "tool_footprint": null
+    }
+  },
+  "grant_delta_reported_by_materializer": {
+    "operations": 1,
+    "model_turns": 0,
+    "elapsed_seconds_from_before_after": 3.9372431249297034,
+    "cash_usd": "0.0"
+  },
+  "case_set_reported_by_materializer": {
+    "digest_matches_canonical_metadata": true,
+    "case_count": 141,
+    "split_counts": {
+      "qualification": 8,
+      "training": 28,
+      "holdout": 105
+    },
+    "distinct_inputs": 141
+  },
+  "source_and_profile": {
+    "runner_reported_source_unchanged": true,
+    "runner_reported_profile_unchanged": true,
+    "request_review_profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+    "profile_sha256_at_audit": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a"
+  },
+  "cleanup_and_cost_limits": {
+    "runner_reported_coordinator_closed": true,
+    "container_cleanup_independently_confirmed": false,
+    "whole_system_cost_complete": false,
+    "winner_or_admission_claim": false
+  },
+  "audit_boundary": {
+    "independently_verified": [
+      "request, case-set, operation-start, and operation-measurement record digests",
+      "canonical operation state, stage, reservation, elapsed measurement, and resource/accounting summary",
+      "case-set canonical digest equals the digest reported by the materializer",
+      "current profile file hash equals the request review's profile hash"
+    ],
+    "runner_report_only": [
+      "source_unchanged flag",
+      "case count, split counts, and unique-input count",
+      "grant before/after counters",
+      "coordinator close result"
+    ],
+    "not_established": [
+      "case payload contents or truth correctness (intentionally not read)",
+      "independent reconstruction of split counts or unique inputs",
+      "independent container removal confirmation",
+      "whole-system resource cost completeness",
+      "qualification, admission, candidate benefit, or value"
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "DiscoverySourceConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "ard",
+            "fixture"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "base_url": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Url"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "fallback_path": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fallback Path"
+        },
+        "allow_remote": {
+          "default": false,
+          "title": "Allow Remote",
+          "type": "boolean"
+        },
+        "artifact_types": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Artifact Types",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "kind"
+      ],
+      "title": "DiscoverySourceConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "discovery.config.v1",
+      "default": "discovery.config.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/DiscoverySourceConfig"
+      },
+      "maxItems": 8,
+      "title": "Sources",
+      "type": "array"
+    },
+    "max_results": {
+      "default": 20,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Max Results",
+      "type": "integer"
+    },
+    "timeout_seconds": {
+      "default": 10,
+      "exclusiveMinimum": 0,
+      "maximum": 30,
+      "title": "Timeout Seconds",
+      "type": "number"
+    }
+  },
+  "title": "DiscoveryConfig",
+  "type": "object"
+}

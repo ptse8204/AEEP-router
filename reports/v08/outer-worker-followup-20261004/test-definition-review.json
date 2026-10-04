@@ -1,0 +1,118 @@
+{
+  "schema_version": "aeep.outer-worker-followup.test-definition-review.v1",
+  "reviewed_at": "2026-10-04",
+  "model": {
+    "name": "Luna",
+    "reasoning_effort": "xhigh"
+  },
+  "authority": {
+    "basis": [
+      "Standing operator delegation in docs/ASSESSMENT_TESTING.md, dated 2026-09-25 and expanded 2026-09-27, covers routine test-definition changes and finite amendments.",
+      "Current user instruction: continue investigation with a bounded offline diagnostic experiment."
+    ],
+    "scope": "Synthetic local diagnostics only; no campaign reservation, budget amendment, live service, disclosure, credential access, source change, test change, or historical-record rewrite."
+  },
+  "source": {
+    "verification_source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+    "git_head_observed": "c0609f0e1839ea17bbd4871c028e84e75e26970e",
+    "source_scope": "The verification source digest is the binding. Git HEAD is recorded separately because the worktree contains preserved uncommitted changes."
+  },
+  "objective": "Observe how the frozen Codex adapter wrapper and, if feasible, the actual ManagedHostExecutor outer wait_for distinguish returned TIMEOUT RawExecution values from raised exceptions, and what metadata survives artifact and cleanup stages.",
+  "definitions": {
+    "adapter_wrapper": {
+      "subject": "CodexAppServerAdapter.execute from the frozen source, with its private _execute replaced by a synthetic coroutine and a fake transport and fake worker.",
+      "artifact": {
+        "input_field": "source",
+        "output_field": "result",
+        "input_name": "synthetic-input.txt",
+        "output_name": "synthetic-output.txt",
+        "max_bytes": 128
+      },
+      "worker_output": {
+        "data": "synthetic-output",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "size": 16
+      },
+      "progress_metadata": "A fixed synthetic scalar JSON string with stage turn_completed and one boolean; probe whether the wrapper preserves it unchanged.",
+      "cases": [
+        {
+          "id": "inner_timeout_skips_artifact",
+          "inner_result": "RawExecution(TIMEOUT, error_type=TIMEOUT, output=None)",
+          "artifact_behavior": "If called, return synthetic data and record the call.",
+          "cleanup_behavior": "Immediate success.",
+          "expected_observations": ["artifact is skipped", "transport close and worker cleanup are called", "wrapper returns TIMEOUT with error_type TIMEOUT and progress metadata"]
+        },
+        {
+          "id": "success_artifact_succeeds",
+          "inner_result": "RawExecution(SUCCESS, output={result: inner})",
+          "artifact_behavior": "Immediate synthetic data response.",
+          "cleanup_behavior": "Immediate success.",
+          "expected_observations": ["artifact output replaces the inner output", "artifact digest and byte count are recorded", "transport close and worker cleanup precede return"]
+        },
+        {
+          "id": "success_artifact_configuration_error",
+          "inner_result": "RawExecution(SUCCESS, output={result: inner})",
+          "artifact_behavior": "Raise ConfigurationError with a synthetic message.",
+          "cleanup_behavior": "Immediate success.",
+          "expected_observations": ["wrapper returns FAILED with error_type WORKER_ARTIFACT_FAILED and output None", "transport close and worker cleanup are called", "progress metadata remains available"]
+        },
+        {
+          "id": "cancel_while_artifact_pending",
+          "inner_result": "RawExecution(SUCCESS, output={result: inner})",
+          "artifact_behavior": "Signal entry, then await indefinitely until the outer probe task is canceled.",
+          "cleanup_behavior": "Immediate success after transport close.",
+          "expected_observations": ["wrapper propagates CancelledError", "artifact cancellation is recorded", "transport close and worker cleanup run in order", "no RawExecution is returned"]
+        },
+        {
+          "id": "cancel_while_cleanup_pending",
+          "inner_result": "RawExecution(TIMEOUT, error_type=TIMEOUT, output=None)",
+          "artifact_behavior": "Skipped because inner result is TIMEOUT.",
+          "cleanup_behavior": "Signal entry, then await indefinitely until the outer probe task is canceled.",
+          "expected_observations": ["wrapper propagates CancelledError", "cleanup cancellation is recorded", "no RawExecution is returned"]
+        },
+        {
+          "id": "delayed_cleanup_after_timeout",
+          "inner_result": "RawExecution(TIMEOUT, error_type=TIMEOUT, output=None)",
+          "artifact_behavior": "Skipped because inner result is TIMEOUT.",
+          "cleanup_behavior": "Sleep 0.05 seconds, then succeed.",
+          "expected_observations": ["return occurs after delayed cleanup", "wrapper still returns TIMEOUT with error_type TIMEOUT", "progress metadata is byte-for-byte unchanged"]
+        }
+      ]
+    },
+    "managed_host_outer_wait_for": {
+      "subject": "The actual ManagedHostExecutor.execute implementation using the same real CodexAppServerAdapter, start/ExecutionHandle path, fake transport and fake worker.",
+      "timeout_seconds": 0.1,
+      "cases": [
+        {
+          "id": "outer_deadline_inner_converts_cancellation_to_timeout",
+          "synthetic_inner_behavior": "Wait until canceled, catch CancelledError, and return RawExecution(TIMEOUT, error_type=TIMEOUT, output=None) with the fixed synthetic progress string.",
+          "artifact_behavior": "Skipped because the returned inner RawExecution is TIMEOUT.",
+          "cleanup_behavior": "Immediate success.",
+          "expected_observations": ["actual ManagedHostExecutor wait_for returns the translated RawExecution", "returned status and error_type are TIMEOUT", "transport close and worker cleanup complete"]
+        },
+        {
+          "id": "outer_deadline_during_artifact_propagates_timeout_error",
+          "synthetic_inner_behavior": "Return RawExecution(SUCCESS) immediately.",
+          "artifact_behavior": "Signal entry, then await indefinitely until ManagedHostExecutor's wait_for cancels the ExecutionHandle task.",
+          "cleanup_behavior": "Immediate success after transport close.",
+          "expected_observations": ["actual ManagedHostExecutor raises TimeoutError", "artifact cancellation and worker cleanup are recorded", "no RawExecution or host_progress is returned"]
+        }
+      ]
+    }
+  },
+  "limits": {
+    "total_wall_seconds": 20,
+    "script_outer_timeout_seconds": 18,
+    "maximum_normal_delay_seconds": 0.1,
+    "maximum_each_case_wait_seconds": 1,
+    "maximum_report_bytes": 1048576,
+          "temporary_files": "None; the probe script, definition review, JSON outcome, and concise findings are retained under this report directory.",
+    "external_effects": "No model call, Codex login, Docker, network, credential inspection, campaign mutation, source/test mutation, or historical report mutation."
+  },
+  "recording": {
+    "script": "probe_outer_worker.py",
+    "outcomes": "outcomes.json",
+    "fields": ["case_id", "elapsed_seconds", "call_order", "returned_status", "returned_error_type", "exception_type", "artifact_calls", "cleanup_confirmed", "progress_preserved", "progress_value"],
+    "interpretation": "Synthetic current-code behavior only. The probe is not historical proof and cannot explain or repair a historical campaign result."
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.admission-decision.v1",
+      "default": "aeep.admission-decision.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "admit",
+        "reject",
+        "restrict",
+        "assess",
+        "inconclusive",
+        "expired"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "next_action": {
+      "enum": [
+        "use_admitted_capability",
+        "assess_candidate",
+        "keep_current_environment"
+      ],
+      "title": "Next Action",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "explanation": {
+      "title": "Explanation",
+      "type": "string"
+    },
+    "intake_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intake Id"
+    },
+    "executor_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executor Id"
+    },
+    "admission_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Admission Id"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "evidence_cohort": {
+      "additionalProperties": true,
+      "title": "Evidence Cohort",
+      "type": "object"
+    },
+    "contributor_provenance": {
+      "additionalProperties": true,
+      "title": "Contributor Provenance",
+      "type": "object"
+    },
+    "historical_comparisons": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Historical Comparisons",
+      "type": "array"
+    },
+    "unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "disposition",
+    "next_action",
+    "reason_codes",
+    "explanation"
+  ],
+  "title": "AdmissionDecision",
+  "type": "object"
+}

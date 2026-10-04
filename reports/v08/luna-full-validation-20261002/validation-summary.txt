@@ -1,0 +1,21 @@
+Validation outcome
+
+1. `python3 -m compileall -q src examples tests`: PASS, exit 0; see `01-compileall.log`.
+2. `python3 scripts/generate_schemas.py --check`: PASS, exit 0; see `02-schema-check.log`.
+3. `AEEP_VERIFY_OFFLINE=1 python3 -m pytest` with isolated platform-temp/cache settings: FAIL, 1,136 passed, 24 failed, 21 skipped, 1 warning in 574.53s; see complete `03-pytest.log`.
+4. `AEEP_VERIFY_OFFLINE=1 python3 -m coverage run --branch -m pytest`: NOT RUN because the full pytest command failed, per the stop-before-repeat instruction.
+5. `python3 -m coverage report -m`: NOT RUN because no new coverage run was performed.
+
+Failure groups (contract triage pending; do not classify these as production regressions without review):
+
+- Eleven exact tool-set/count assertions are stale against newly exported discovery/lookup tools: `tests/test_cli.py::test_cli_tools_and_tool_call`; six `tests/test_integrations_mcp.py::test_tool_schema_exports[...]` cases; `test_protocol_modern_discover_and_list`; `tests/test_mcp_executor_http.py::test_create_http_app_auth_and_modern_header_validation`; `tests/test_p0_usefulness.py::test_mcp_server_import_discovers_tools`; and `tests/test_v08_assessment.py::test_focused_tools_do_not_expose_operator_arguments`.
+- Nine local HTTP/MCP/market-server integration checks fail in the requested offline test mode. A representative traceback shows `tests/conftest.py`'s `guarded_connect` denying a localhost connection with “completion verification attempted a network connection”: four HTTP executor cases, `test_mcp_executor_http_and_sse`, three MCP HTTP client transport cases, and `test_authenticated_process_serves_quote_and_prepared_http_execution`.
+- `tests/test_codex_dynamic_tools.py::test_reviewed_binding_rejects_changed_scope_program_or_missing_executor[fresh]` has a test monkeypatch `lambda spec: None` that rejects the new `configuration_only=True` keyword with TypeError.
+- `tests/test_mcp_executor_http.py::test_mcp_http_client_excludes_invalid_x_mcp_header_tool` expected a RuntimeWarning but none was emitted.
+- Both parameterizations of `tests/test_v08_codex_invocation.py::test_skill_recursion_uses_identity_not_ancestor_name` failed because the expected ConfigurationError was not raised; contract review needed.
+
+Storage and source guard:
+
+- Important-usage capacity was 236,521,341,806 bytes before validation and 230,423,540,590 bytes after pytest; ordinary NSURL volume capacity was 51,901,059,072 and 45,777,178,624 bytes respectively. `df -h` reported 48 GiB before and 43 GiB after. The test/temp root peaked at 5,771,028 KiB (under 30 GiB); important-usage free capacity stayed above the 80 GiB reserve-plus-temporary threshold.
+- 266 Python files across `src`, `examples`, and `tests` had identical before/after hashes; the monitor detected no source change.
+- The full pytest log is retained. No coverage artifacts were created by this run.

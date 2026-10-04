@@ -1,0 +1,126 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "log_stem": "16-economic-evidence-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "log_stem": "17-dsh-campaign-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "log_stem": "18-dsh-live-safety-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "log_stem": "19-dsh-live-comparison-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "log_stem": "20-dsh-native-plan-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "log_stem": "21-job-application-check"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "aeep",
+        "provider",
+        "verify",
+        "reports/v08/luna-c-supplemental-validation-20261003/isolated-provider-package/aeep-provider.yaml",
+        "-m",
+        "reports/v08/luna-c-supplemental-validation-20261003/isolated-provider-package/aeep.yaml",
+        "--compact"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "isolation_note": "Provider package, manifest, database, artifact root, and trust store were copied under this report directory; the original example database was not passed to the verifier.",
+      "log_stem": "22-provider-verify-isolated"
+    },
+    {
+      "argv": [
+        "npm",
+        "--prefix",
+        "integrations/dsh-aeep-router",
+        "test"
+      ],
+      "environment": {
+        "npm_config_offline": "true",
+        "npm_config_update_notifier": "false"
+      },
+      "log_stem": "23-node-integration"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "reports/v08/luna-c-supplemental-validation-20261003/package-build-output"
+      ],
+      "log_stem": "24-python-build"
+    },
+    {
+      "argv": [
+        "python3",
+        "reports/v08/luna-b-three-role-validation-20261003/check_router_completion_artifacts.py"
+      ],
+      "log_stem": "25-router-locked-artifacts",
+      "note": "Read-only lock-artifact digest half of router-complete; avoids repeating pytest compatibility nodes."
+    }
+  ],
+  "provider_isolation": {
+    "isolated_database": "reports/v08/luna-c-supplemental-validation-20261003/isolated-provider-package/.aeep/provider-package-demo.db",
+    "isolated_database_sha256_before": "2ff030e995469745aeb39fe62b618beb7ce6c65026e3e9ed260812c2bfcfcb2d",
+    "isolated_manifest": "reports/v08/luna-c-supplemental-validation-20261003/isolated-provider-package/aeep.yaml",
+    "original_database": "examples/provider_package/.aeep/provider-package-demo.db",
+    "original_database_sha256_before": "2ff030e995469745aeb39fe62b618beb7ce6c65026e3e9ed260812c2bfcfcb2d",
+    "original_manifest": "examples/provider_package/aeep.yaml",
+    "provider_package_sha256": "d0fb723328838e7ae44057ac8b223e84035a0b3a5acfa0d08d2314d450d0a851",
+    "trusted_keys_sha256": "9e9ab46694b562940bd74da3c79ef32e8a1623567d8718d0db59616592d884d6"
+  },
+  "recorded_at_utc": "2026-10-03T12:46:50.349263+00:00",
+  "router_complete": {
+    "full_command_run": false,
+    "reason": "The all-profile command repeats compatibility pytest nodes already covered by the recorded full pytest; its distinct lock-artifact component was checked with the report-local read-only checker."
+  },
+  "scope": "Offline CI proof/check commands from the retained prior supplemental manifest plus current-source Node integration, wheel/sdist build, and lock-artifact verification. No full pytest or coverage rerun, installs, network, Docker, model, grant, trial, or credential actions.",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "storage_before_available_bytes": 148263415808,
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71"
+}

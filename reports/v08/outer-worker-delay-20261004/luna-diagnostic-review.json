@@ -1,0 +1,56 @@
+{
+  "schema_version": "aeep.outer-worker-delay.progress-diagnostic-review.v1",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "model": {
+    "name": "Luna",
+    "reasoning_effort": "xhigh"
+  },
+  "review_scope": {
+    "files": [
+      "src/aeep/hosts/codex_app_server.py",
+      "src/aeep/router.py",
+      "tests/test_codex_progress_persistence.py",
+      "tests/test_codex_dynamic_tools.py",
+      "docs/ASSESSMENT_TESTING.md"
+    ],
+    "mode": "read-only source and test inspection; no live calls; no source or test edits; no tests run by this review"
+  },
+  "facts": [
+    {
+      "topic": "progress payload privacy and shape",
+      "finding": "The Codex progress producer serializes a fixed set of fields: enum-like stage/method/item-type labels, aggregate counters, elapsed durations, and booleans. It does not include protocol text, task/answer content, callback arguments, item IDs, or authentication material. Item types and event methods are allowlisted; counters are capped; JSON serialization rejects non-finite numbers.",
+      "limits": "This describes the current producer. Router persistence checks the metadata key and scalar type, not the JSON schema or maximum string length. Treat that as a diagnostic persistence convention, not a content-security guarantee."
+    },
+    {
+      "topic": "callback counters and response-written meaning",
+      "finding": "requested increments on each dynamic tool-call request, including concurrent calls. handler_started changes stage to callback_running but is not a counter. handler_completed means the handler returned a result object; rejected counts controlled callback rejection paths. response_written increments after the transport write and local stdin drain returns. Concurrent rejection error replies also increment response_written.",
+      "limits": "Counters aggregate across requests and are not correlated per call; they cannot establish which response was written for which callback. Local pipe drain is not peer acknowledgement or proof the host accepted the result."
+    },
+    {
+      "topic": "final message and terminal flags",
+      "finding": "final_message_received becomes true after a completed agentMessage with a string text in either explicit final_answer phase or the supported legacy unphased path. Commentary is excluded. turn_completion_received means a valid terminal notification with a string status was received.",
+      "limits": "final_message_received does not establish non-empty content, parse/schema/grader success, or final task success. turn_completion_received does not expose the terminal status and can be true for a failed or interrupted turn."
+    },
+    {
+      "topic": "timeout snapshot timing",
+      "finding": "The timeout/cancellation branch captures progress before sending turn/interrupt, then preserves that snapshot through finally. It describes collector state when the timeout/cancellation was caught, before interrupt and shutdown.",
+      "limits": "Notifications arriving during interrupt/cleanup can be absent from this snapshot. elapsed_seconds and event elapsed values are relative to _execute start, not the campaign outer-worker start."
+    },
+    {
+      "topic": "outer wrapper coverage",
+      "finding": "CodexAppServerAdapter.execute performs worker output-artifact retrieval after _execute returns, then closes transport and cleans up the worker. The progress snapshot is produced inside _execute and is not advanced through artifact retrieval or cleanup.",
+      "limits": "An artifact failure can leave a turn-complete snapshot that predates the failed transfer. Cancellation during artifact retrieval or cleanup can prevent the wrapper from returning its RawExecution, so receipt metadata may lack host_progress. This instrumentation does not cover the complete outer worker lifecycle and does not identify a post-turn transfer/cleanup stall."
+    },
+    {
+      "topic": "receipt persistence and focused test",
+      "finding": "Router._safe_receipt_metadata retains host_progress when it is a scalar string. test_codex_progress_persistence.py verifies a synthetic JSON string survives database reopen and that a different metadata key is filtered. Dynamic-tool tests separately exercise producer behavior and secret nonappearance.",
+      "limits": "The persistence test does not run the App Server producer through an actual router execution; producer and persistence are tested separately."
+    }
+  ],
+  "documentation_boundary": "Use these fields as bounded progress observations. Do not claim peer acknowledgement, turn success from turn_completion_received, task success from final_message_received, or complete outer-wrapper/postprocessing instrumentation. No live repair or future-call conformance is established by this review.",
+  "related_evidence": {
+    "historical_metadata_audit": "../luna-docx-stage/c-workbook-callback-delay-metadata-diagnostic.json",
+    "implementation_review": "implementation-review.json",
+    "documentation": "../../../docs/EVIDENCE.md"
+  }
+}

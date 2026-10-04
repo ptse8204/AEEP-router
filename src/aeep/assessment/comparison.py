@@ -113,6 +113,15 @@ def validate_incremental_hosts(candidate: ExecutorSpec, baseline: ExecutorSpec,
     excluded = {"adapter_id", "managed_worker", "invocation"}
     if base_worker is None or base.invocation is None or base.invocation.mode != "turn":
         raise ConfigurationError("incremental control requires an isolated candidate-free turn environment")
+    if experiment.stage == "aeep_value":
+        three_way_workers = [binding_from_config(item.managed_host_config().managed_worker) for item in members]
+        if any(worker is None for worker in three_way_workers):
+            raise ConfigurationError("three-way arms require isolated worker bindings")
+        for index, worker in enumerate(three_way_workers):
+            assert worker is not None
+            for other in three_way_workers[index + 1:]:
+                assert other is not None
+                validate_worker_pair(worker, other)
     for member in members:
         config = member.managed_host_config()
         worker = binding_from_config(config.managed_worker)
@@ -134,7 +143,11 @@ def validate_incremental_hosts(candidate: ExecutorSpec, baseline: ExecutorSpec,
         if not normal and (invocation.local_profile != base.invocation.local_profile
                 or invocation.native_catalog != base.invocation.native_catalog):
             raise ConfigurationError("incremental arms differ in shared local/catalog profiles")
-        if invocation.supporting_skills != base.invocation.supporting_skills:
+        if normal and experiment.stage == "aeep_value":
+            reviewed_skills = {skill.path: skill for skill in base.invocation.supporting_skills}
+            if any(reviewed_skills.get(skill.path) != skill for skill in invocation.supporting_skills):
+                raise ConfigurationError("three-way normal supporting skills must be an exact subset of discovery skills")
+        elif invocation.supporting_skills != base.invocation.supporting_skills:
             raise ConfigurationError("incremental arms differ in reviewed background skills")
         if member.id == candidate.id:
             dynamic_candidate = (invocation.mode == "dynamic_tool"

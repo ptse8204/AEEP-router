@@ -1,0 +1,141 @@
+{
+  "audit_scope": "Read-only current-code/API seam map. No source changes, imports, tests, model or worker calls, Docker, grant access, or holdout reads.",
+  "current_implementation_seams": [
+    {
+      "evidence": "CodexDynamicTools definitions are operator-composed; review rechecks stored digest, exact worker and implementation, artifact, current capability profile, TaskScope executor fingerprints, active specs and native single-process backend. task_service allows task-profile AEEPToolService or FixedHelperService only, bounds callback limits by scope, and binds artifact names/limits without model paths. DynamicToolSession binds one exact thread/turn/call/outer attempt, validates schemas, links receipt/scope evidence, bounds calls/deadline and rejects replay.",
+      "lines": "39-100,139-179,182-250,272-369",
+      "path": "src/aeep/hosts/codex_dynamic_tools.py"
+    },
+    {
+      "evidence": "Operator factory installs the dynamic callback in the host App Server; worker receives reviewed declarations and calls return to coordinator-owned code. It is not a model shell route.",
+      "lines": "353-414,495-525,900-929,1046-1062",
+      "path": "src/aeep/hosts/codex_app_server.py"
+    },
+    {
+      "evidence": "FixedHelperService dispatches the reviewed task scope through fixed selection. AssessmentCallbackAuthority requires the live canonical reservation and outer invoking attempt, checks exact binding/scope and claims a callback once; it uses the existing reservation rather than a second allowance.",
+      "lines": "23-105,108-270",
+      "path": "src/aeep/assessment/fixed_helper.py"
+    },
+    {
+      "evidence": "ComposedPairDefinition binds two Codex App Server roles, callback/native backend digests, shared executor settings and common tools/skills. Verification requires current reviewed binding and real host receipt/callback/child evidence. It is a pair contract, not a three-role value constructor.",
+      "lines": "754-797,849-905",
+      "path": "src/aeep/hosts/codex_pair_inspection.py"
+    },
+    {
+      "evidence": "Current source/worker/profile conformance is required per executor; two-role differential is keyed to baseline/candidate records; aeep_value additionally checks ThreeWayAccessDefinition and conformance for normal, discovery and AEEP roles. Current candidate_access shape is only definition_digest plus candidate_available boolean.",
+      "lines": "30-64,149-185,192-243,246-305",
+      "path": "src/aeep/assessment/boundary.py"
+    }
+  ],
+  "governing_policy": "docs/ASSESSMENT_TESTING.md",
+  "historical_runtime_evidence_limit": {
+    "evidence": [
+      "reports/v08/original-three-way-profile/current-composed-callback-parent-review.json",
+      "reports/v08/original-three-way-profile/current-composed-ready-summary.json",
+      "reports/v08/original-three-way-profile/current-composed-canonical-independent-audit.json",
+      "reports/v08/original-three-way-profile/current-composed-profiles.json",
+      "reports/v08/original-three-way-profile/current-composed-native-components-5fff-independent-review.json"
+    ],
+    "finding": "A prior one-turn gpt-6.1-sol/medium callback and canonical child audit establish historical callback operation, but aggregate full_conformance=false; other profiles are source ade3b4e\u2026 or 5fffda8\u2026 and the latter is static-only. They do not prove current-source Luna/xhigh three-role conformance."
+  },
+  "next_exact_preparation": [
+    "Make the minimal typed dynamic-candidate conformance extension above; preserve the separate existing physical-skill profile unchanged.",
+    "Then freeze normal/discovery/AEEP Luna/xhigh role specs using the existing images where their exact contents fit, unique worker/config identities per role, exact candidate and callback bindings, equal discovery/AEEP Spreadsheets access, and role-specific inventories.",
+    "Generate fresh execution-backed per-role conformance; a discovery/AEEP composed request must prove the exact dynamic differential and callback child receipt. Assemble reviewed DifferentialEnvironment plus ThreeWayAccessDefinition and verify through existing boundary functions.",
+    "Only then call AssessmentService.propose/budget_preview for a fresh required-exposure qualification. A value plan remains conditional on its same-source, same-candidate passing qualification and disjoint holdouts."
+  ],
+  "no_action_taken": [
+    "No source edits or tests",
+    "No runtime, worker, model, Docker, grant or canonical state operations",
+    "No candidate switch and no DOCX holdout access"
+  ],
+  "pinned_candidate_and_workers": {
+    "external_candidate": {
+      "profile": "spreadsheets:1",
+      "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+      "worker_path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md"
+    },
+    "historical_images_present": {
+      "discovery_candidate_present": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "normal_candidate_absent": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d"
+    },
+    "reuse_limit": "The immutable treatment image can in principle back distinct discovery and AEEP worker bindings, avoiding an assumed new image build because the dynamic callback is coordinator-side. Never reuse a worker identity/container/configuration as two roles; validate the distinct worker pair and freshly prove exact inventories, model/effort, callback and cleanup. Historical image presence does not establish current Luna/xhigh conformance."
+  },
+  "schema_version": "luna.current_callback_three_role_seam_map.v1",
+  "specific_unimplemented_contract_seam": {
+    "evidence": [
+      {
+        "fact": "DifferentialEnvironment requires nonempty candidate_paths; these are validated as absolute worker paths.",
+        "lines": "322-340",
+        "path": "src/aeep/assessment/models.py"
+      },
+      {
+        "fact": "WorkerPairInspection is specifically a physical skill differential: exact skill paths/aliases, treatment image pins skill, and dynamic_tools_digest is rejected. candidate_access observes skill inventory/hash.",
+        "lines": "131-195,199-212",
+        "path": "src/aeep/hosts/codex_pair_inspection.py"
+      },
+      {
+        "fact": "Current composed collector requires composed.differential == physical_inventory_definition.differential, then computes candidate access from physical skill probes and a dynamic declaration acknowledgement; it explicitly records inherited physical candidate differences as a value confounder.",
+        "lines": "17-34,61-97,138-212",
+        "path": "reports/v08/original-three-way-profile/collect-composed-workers-5fff.py"
+      },
+      {
+        "fact": "Generic differential/three-way verification accepts only the boolean candidate_available tied to the differential-definition digest; it cannot bind a pathless dynamic declaration as the AEEP-only candidate.",
+        "lines": "178-185,232-238",
+        "path": "src/aeep/assessment/boundary.py"
+      }
+    ],
+    "finding": "No existing differential/conformance contract faithfully represents an AEEP-only dynamic callback candidate while discovery and AEEP both retain identical physical Spreadsheets access. This is narrower than (and separate from) the already implemented trusted callback authority.",
+    "minimal_required_extension": "Add an explicit candidate target kind to the existing differential/probe path: physical_skill retains current nonempty exact path rules; dynamic_tool binds exact dynamic:<namespace>:<tool>, declaration SHA and reviewed callback binding, and permits no physical candidate paths only in that typed case. Add an execution-backed candidate_access observation that verifies exact tool declaration presence/absence for discovery/AEEP while separately proving their physical Spreadsheets inventories are identical. Update the composed worker-component collector so the callback differential can be dynamic-only while physical skill inventory is checked as common state, rather than requiring the two differential definitions to be equal. Do not synthesize fake paths or relabel the existing physical Spreadsheets difference as common."
+  },
+  "supersedes": {
+    "correction": "The earlier claim that a protected model-callable task-only endpoint is missing is stale. Current operator-installed App Server dynamic callbacks can wrap only task-profile AEEPToolService or FixedHelperService under a bound TaskScope. The old model-shell CLI route remains unsuitable; do not carry its shared-process authority flaw into the trusted callback finding.",
+    "path": "reports/v08/luna-docx-stage/post-evidence-b-readiness.json",
+    "sha256": "b75dcb73e259dd08bfd7ab8ef6222926529ae4116134fee7dbdca773ca6ecd5e"
+  },
+  "three_role_contract_from_existing_models": {
+    "inventory_mapping": "ThreeWayAccessDefinition.normal_inventory and discovery_inventory must be disjoint and union to DifferentialEnvironment.control_inventory; external_candidate_inventory (the Spreadsheets candidate) is already inside that control inventory. DifferentialEnvironment.candidate_inventory must contain only the AEEP-specific callback candidate; treatment_inventory is control plus that candidate. Map all three executor IDs to exact worker_digests, configuration_digests, and AssessmentEnvironment.conformance_digests.",
+    "plan_path": "Use direct typed ExecutorSpec / ReviewedMapping / IncrementalExperiment construction and AssessmentService.propose; no production three-role convenience builder is needed. Qualification is a fresh two-arm discovery-versus-AEEP plan with required exposure and current exact pair evidence. Value is a new experiment.v2 stage=aeep_value plan, optional exposure, normal_host, three_way_access_digest, exact passing qualification_report_digest and feasible_challengers=[normal_host.executor_id]; use disjoint holdouts and exact budget_preview. Do not derive plans from onboarding.incremental_host_routes or use WorkerPairInspection as the B profile builder.",
+    "roles": {
+      "aeep": "Plan candidate via mode=dynamic_tool with exact namespace/tool/tool SHA, reviewed dynamic_tools_digest and exposure required for qualification, optional for aeep_value; retain the exact same external Spreadsheets candidate and ordinary tools as discovery.",
+      "discovery": "Plan baseline via mode=turn; exact external Spreadsheets skill/capability is available; same user constraints, model gpt-6-luna and xhigh effort as AEEP role.",
+      "normal": "Third challenger via IncrementalExperiment.normal_host; ManagedHostInvocation mode=turn with candidate-discovery profile absent; inventory is ordinary shared tools only."
+    },
+    "typed_models": [
+      {
+        "lines": "2312-2367,2385-2414",
+        "path": "src/aeep/models.py",
+        "types": [
+          "ManagedHostInvocation",
+          "ManagedHostExecutorConfig"
+        ]
+      },
+      {
+        "lines": "322-406",
+        "path": "src/aeep/assessment/models.py",
+        "types": [
+          "DifferentialEnvironment",
+          "ThreeWayAccessDefinition",
+          "IncrementalExperiment"
+        ]
+      },
+      {
+        "api": "validate_incremental_hosts",
+        "lines": "103-146",
+        "path": "src/aeep/assessment/comparison.py"
+      },
+      {
+        "apis": [
+          "AssessmentService.propose",
+          "AssessmentService.budget_preview",
+          "AssessmentService._verify_three_way_qualification",
+          "AssessmentService._verify_incremental_evidence",
+          "AssessmentService.run"
+        ],
+        "lines": "157-345,425-488,768-870,946-",
+        "path": "src/aeep/assessment/service.py"
+      }
+    ]
+  },
+  "verification_source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1"
+}

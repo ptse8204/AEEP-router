@@ -326,8 +326,19 @@ class DifferentialEnvironment(StrictModel):
     control_inventory: dict[str, Digest]
     treatment_inventory: dict[str, Digest]
     candidate_inventory: dict[str, Digest] = Field(min_length=1)
-    candidate_paths: list[str] = Field(min_length=1)
+    candidate_paths: list[str]
     candidate_aliases: list[str] = Field(default_factory=list)
+    candidate_dynamic_tools: dict[
+        Annotated[str, Field(pattern=r"^dynamic:[A-Za-z][A-Za-z0-9_]{0,63}:[A-Za-z][A-Za-z0-9_]{0,63}$")],
+        Digest,
+    ] = Field(default_factory=dict)
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.candidate_dynamic_tools:
+            result.pop("candidate_dynamic_tools", None)
+        return result
 
     @model_validator(mode="after")
     def exact_difference(self) -> DifferentialEnvironment:
@@ -337,6 +348,12 @@ class DifferentialEnvironment(StrictModel):
             raise ValueError("treatment inventory must equal control plus the candidate bundle")
         if any(not Path(path).is_absolute() or ".." in Path(path).parts for path in self.candidate_paths):
             raise ValueError("candidate paths must be bounded absolute worker paths")
+        if self.candidate_dynamic_tools:
+            if (self.candidate_paths or self.candidate_aliases
+                    or self.candidate_inventory != self.candidate_dynamic_tools):
+                raise ValueError("dynamic candidates require exact tool inventory and no physical paths or aliases")
+        elif not self.candidate_paths:
+            raise ValueError("physical candidates require bounded worker paths")
         return self
 
 

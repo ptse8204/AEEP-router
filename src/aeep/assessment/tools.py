@@ -94,6 +94,11 @@ def declarations(store: ReceiptStore | None = None, *, tasks_only: bool = False,
             # also supports failed/delegated outcomes with no task output.
             schema['properties']['output'] = {}
             item['outputSchema'] = schema
+    else:
+        from ..integrations.tool_schemas import capability_tools
+        result.extend(dict(name=item['name'], description=item['description'],
+                           inputSchema=item['schema'], annotations=item['annotations'])
+                      for item in capability_tools())
     return result
 
 

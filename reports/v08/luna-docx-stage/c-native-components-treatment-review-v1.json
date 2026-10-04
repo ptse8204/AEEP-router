@@ -1,0 +1,75 @@
+{
+  "callback_document_digests": {
+    "control": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+    "treatment": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4"
+  },
+  "callback_requirement": {
+    "detail": "This native-only operation does not invoke the host-issued callback. The callback declaration digests are linkage only; actual host invocation evidence remains a separate gate.",
+    "status": "required_unobserved"
+  },
+  "canary_path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/c-native-components-treatment-private-canary",
+  "cancellation_semantics_rationale": "The native cancellation contract returns a TIMEOUT after terminating/EOF-closing the owned native command, rather than propagating CancelledError. The pinned test asserts execute_single_process returns timed_out after task.cancel() (tests/test_v08_native_process.py:85-96); the native host adapter handles cancellation as timed_out (src/aeep/hosts/codex_native_process.py:159-180), and CommandExecutor returns TIMEOUT (src/aeep/executors/command.py:413-424). For an idempotent READ, the router marks TIMEOUT FAILED; it reserves INDETERMINATE for writes or non-retry-eligible/managed-host timeouts (src/aeep/router.py:798-800, 901-911). This probe claims neither write recovery nor host EOF.",
+  "canonical_manifest_sha256": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+  "database_path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/state.db",
+  "definition_digest": "fc50ea769a29794b519e37f5ded8200748a61c3b6893d21fe937dcbcd0c99797",
+  "definition_id": "c-native-components-treatment-50de",
+  "driver_sha256": "341ccee860bc8be24bae1cb3893a07ea3392694d39e77f551b92b33b6d20c220",
+  "execution_authorized": true,
+  "expected_callback_lifecycle_partial": {
+    "cancel_requested": true,
+    "fixed_helper_returned_timeout": true,
+    "host_eof_observed": false,
+    "owned_non_zombie_processes_gone": true,
+    "read_attempt_failed_retry_eligible": true,
+    "ready_line_observed": true,
+    "single_cancel_attempt": true,
+    "timeout_receipt_persisted": true
+  },
+  "expected_native_boundary": {
+    "database_denied": true,
+    "fork_errno": "35",
+    "hard_nproc": "0:0",
+    "marker": "post_exec",
+    "network_denied": true,
+    "private_denied": true,
+    "raise_denied": true,
+    "session_leader": true,
+    "spawn_errno": "35"
+  },
+  "full_conformance": false,
+  "limits": {
+    "max_cash_usd": 0,
+    "max_elapsed_seconds": 40.0,
+    "max_model_turns": 0,
+    "max_operations": 1,
+    "native_attempt_seconds": 10.0,
+    "native_attempts": 2
+  },
+  "local_database_path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/c-native-components-treatment-local.sqlite3",
+  "manifest_sha256": "11707d498ce6a285c85c0e7c90314e9f24ff355e1be987021898896e9e920d60",
+  "native_backend_digest": "7be9c342d3d026bee66e7ce1317aa53a85082faf9cad0b10d5fd4c9d79a878a5",
+  "probe_definition_digests": {
+    "callback_lifecycle": "46d3f927e5b05c8dd5d86a6f2f8347f6a880037f7dde38c892c330f1071f5544",
+    "native_boundary": "10e9a9c62bd225ed30d8ff1fdeeced1a6fac853b356d7b6104df35e4ebd9e19b",
+    "protected_state": "48ac9eb4d0e362746b6356f855bcc5c7bee973443c411f90ccebf70483a6fdb9"
+  },
+  "producer_sha256": "a38ede5f7272d0d2e368b4566e94174828fa16fdc49779d189e26536dc8c864d",
+  "project": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003",
+  "request_digest": "376072231256adec2f99f2e94e25fee481ab9e1f917f4263dddc565113cc40e6",
+  "request_id": "conformance_c_native_components_treatment_50de",
+  "result_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/c-native-components-treatment-result-v1.json",
+  "schema_version": "c-native-components-review.treatment.v1",
+  "selected_worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+  "setup_result_sha256": "45f2344b74181d79ca284c8d3d3adc3d8d73a3c9edd1ccc51ef6993ed2968752",
+  "setup_review_sha256": "ab4f78de528080b8684d8d608786d15a5b8aa616755d7f9033957ac0c44ef7b5",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "stage": "native_component_inspection",
+  "worker_digests": {
+    "control": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345",
+    "treatment": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+  },
+  "software_validation_sha256": "83253844421646b2f2bdb841e1a1e8125491def211cde368aded4ec8199da6aa",
+  "parent_authority": "September 25/27 standing finite assessment delegation",
+  "parent_reviewed_at": "2026-10-03T12:16:56.062721+00:00",
+  "prepared_review_sha256": "2d79440a012ee829cd2abec407a50c218da844a71fc89a1a38ef0464ffb06dad"
+}

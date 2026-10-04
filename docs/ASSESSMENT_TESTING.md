@@ -145,6 +145,28 @@ worker conditions. Feasible stronger baselines must not dominate an admission.
 
 ### Original three-way AEEP-value experiment
 
+The October 3 finite amendment represents a dynamic task callback as an exact
+tool identity and declaration digest, without inventing a physical skill path.
+Discovery and AEEP arms retain equal physical Spreadsheets access. Dynamic
+candidate-access evidence must resolve the reviewed callback, its worker and
+effective inventory; an availability flag or declaration acknowledgement alone
+cannot establish composed conformance or model exposure. Historical physical
+skill definitions retain their serialization and evidence meaning. This change
+requires fresh source-bound conformance and qualification; it does not modify
+the completed negative DOCX study, thresholds, grants or spending authority.
+The exact implementation scope is recorded in
+[the amendment](../reports/v08/luna-docx-stage/b-dynamic-access-amendment.json).
+
+The follow-up October 3 review checks independence between every pair of the
+three workers. The normal arm may omit only supporting skills whose exact
+`skill:<name>` and file digest belong to the reviewed external-discovery inventory.
+That inventory must be contained in the discovery-only inventory and absent from
+the normal inventory. Normal cannot add or alter supports; discovery and AEEP
+retain identical supports. The existing per-role configuration and execution-backed
+conformance checks remain required. The [validator amendment](../reports/v08/luna-docx-stage/b-three-role-validator-amendment.json)
+records why the earlier equality rule and baseline-only worker comparisons needed
+this correction. Historical four-arm rules remain unchanged.
+
 The September 30 finite amendment adds `assessment.experiment.v2` with stage
 `aeep_value` for the original normal-host / discovery-host /
 equivalent-discovery-plus-AEEP comparison. The discovery-plus-AEEP route is the
@@ -225,6 +247,14 @@ in control fails verification. Spreadsheets still requires its authoring-helper
 and artifact-tool probes. Ponytail has no separate execution dependency beyond
 the common environment. These probes verify availability and containment, not
 whether a model selected or followed a skill.
+
+The October 2 finite amendment adds the pinned SkillsBench `docx:1` profile to
+paired inspection v3. Both workers must report the reviewed python-docx version
+and pass the same fixed, synthetic in-memory DOCX roundtrip, in addition to the
+existing shared-library and boundary checks. Only treatment receives the exact
+reviewed skill and aliases. The probe contains no task template, employee data,
+oracle, generator or grader. Earlier profiles retain their existing requirements;
+this availability check cannot qualify the skill or establish its benefit.
 
 Native-catalog release checks bind the treatment's discovery facts to its actual
 trial receipts. Control arms need no invented candidate-discovery facts. Missing
@@ -312,6 +342,17 @@ Cumulative usage snapshots replace earlier snapshots within that stream; never
 sum them or add them again to the completed receipt. Exec decodes bounded JSONL
 while the process runs and persists normalized events as they arrive. A killed worker can still omit later usage, so retained events
 do not establish complete accounting or authorize replay of an uncertain attempt.
+
+The October 3 cost-link repair adds `assessment.boundary-probe.v2`. A nested
+probe names the canonical start digest of its charged parent operation. Cost
+collection checks that operation's completed state, measurement, grant, worker
+and reviewed probe definition. The callback adapter also checks the parent
+against its verified callback claim. Bootstrap environments may differ from the
+later campaign environment. V1 records retain their direct attempt lookup and
+serialized meaning; missing historical links remain missing. New evidence must
+use the repaired source and fresh probes. This repair creates no extra child
+charge and changes no qualification threshold or assessment allowance. Its scope
+is recorded in [the amendment](../reports/v08/luna-docx-stage/b-boundary-cost-link-amendment-20261003.json).
 
 Reviewed record-template recipes must include at least two independent literal
 input/output fixtures in `generator_config.independent_fixtures`. The campaign

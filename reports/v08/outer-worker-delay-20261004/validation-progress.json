@@ -1,0 +1,79 @@
+[
+  {
+    "name": "01-compile",
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "returncode": 0,
+    "guard": null,
+    "elapsed_seconds": 0.07955462508834898,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "02-schemas",
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "guard": null,
+    "elapsed_seconds": 0.7326735001988709,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "03-policy",
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "guard": null,
+    "elapsed_seconds": 0.20504149980843067,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "04-ruff",
+    "argv": [
+      "ruff",
+      "check",
+      "src",
+      "tests",
+      "examples"
+    ],
+    "returncode": 0,
+    "guard": null,
+    "elapsed_seconds": 0.012946041068062186,
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "name": "05-mypy",
+    "argv": [
+      "mypy",
+      "src"
+    ],
+    "returncode": 0,
+    "guard": null,
+    "elapsed_seconds": 1.3883255410473794,
+    "log_sha256": "1aeeb2c4ee773199b40b81ab2a64c281afac8e659d6eebc9152450ab548c15ac"
+  },
+  {
+    "name": "06-pytest",
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "-ra"
+    ],
+    "returncode": 1,
+    "guard": null,
+    "elapsed_seconds": 544.6600145830307,
+    "log_sha256": "24aad4ca9d4cee8c8ebe873b0bbcf9539d8434d1689217243b46fd3807ebcb26"
+  }
+]

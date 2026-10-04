@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-03T11:53:33.012657+00:00",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "authority": "docs/ASSESSMENT_TESTING.md standing September 25/27 delegation",
+  "files": {
+    "src/aeep/assessment/boundary.py": "3a94a72b09909d43651d1608943eb28509bfa9971a01ca7af8048b02bb3ccd0f",
+    "src/aeep/assessment/service.py": "be6b96861c45417c26ec2c3730ef524f6d182489001bcdc371f4ca4b74ea9dc2",
+    "src/aeep/hosts/codex_pair_inspection.py": "c844117db10e618014007c19df3c65f5aa0a69c5e23678904227474d7e3deec3",
+    "tests/test_v08_boundary_costs.py": "0eec20b0a567bf9bcfa1f878343b00c52c15a58fa5a13d74da1a3bc354f4bc4e",
+    "tests/test_v08_composed_cost_binding.py": "1bb0fb35729eb1da120f725183904d5b2cefe934fd868efc73b88ec036586a2e",
+    "schemas/assessment-boundary-probe.schema.json": "c373237f8a4d5e175991f786637cf1066a5356e573a61b49cf406143c0b30b1e"
+  },
+  "reviewers": [
+    "root",
+    "luna_worker_readiness",
+    "luna_evidence"
+  ],
+  "review_result": "no outstanding blocker in focused review",
+  "focused_tests": {
+    "passed": 10,
+    "scope": [
+      "explicit parent charge",
+      "settled same-grant canonical measurement",
+      "worker and definition binding",
+      "legacy serialization and direct lookup",
+      "real composed callback verifier binding"
+    ]
+  },
+  "bootstrap_environment": "Request environment may differ from later campaign; exact operation-to-request lineage remains required.",
+  "full_software_validation": "running; reports/v08/luna-c-boundary-cost-validation-20261003",
+  "ordinary_free_bytes": 160169627648,
+  "required_reserve_bytes": 53687091200,
+  "runtime_conformance": "not renewed",
+  "qualification": "not executed",
+  "historical_evidence_modified": false,
+  "cleanup_performed": false
+}

@@ -1,0 +1,680 @@
+{
+  "canonical_database_snapshot": {
+    "canonical_writes": false,
+    "operation_reservations": 0,
+    "path": ".aeep/live-review-v3/aeep.sqlite3",
+    "read_only": true,
+    "simulation": "SQLite backup to :memory:; proposed records/review marks inserted there only"
+  },
+  "canonical_references": {
+    "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+    "callback_evidence_digest": "7765098f6fdcc5e7daaed0ca8a750849836aaeb1bf6759b7b716958c0df1e23a",
+    "callback_probe_digest": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+    "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+    "host_receipt_digest": "d62c74b0480f862be1162100802ee88cb89aeed0144f0af8db8234cba0c37a13",
+    "host_tool_hashes": [
+      "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+      "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+    ],
+    "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+    "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+    "probe_digests_by_name": {
+      "allowed_tool": "9bfd9b30bd8ef4e9bceb671925186ae2e3b48f19e5bd44bd302cb28a37d2e8fb",
+      "answers": "d6af47b9e8150e7da48c8fb67203c49d19c83ae4491c431287432378c54befa1",
+      "callback_authority": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+      "callback_lifecycle": "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+      "candidate_access": "4b14acec1d167863261f1a7f8f9a2047fecdfe016db6c73955ae1c9c1ff37bb9",
+      "candidate_network": "d6cd34d342e93c2fefb61ba57b592786163a43726db0df5ba9a25339c49a73e3",
+      "cleanup": "80c230b9ea909426c37b18c6ab298e8c89f010bc635bd47cd9e4e7a5d1a8d29f",
+      "configuration": "07780dd9d73c3d8b3fb4099e7e15595a10ea0d4bf968a2703472068b6ce5a369",
+      "credential_canary": "a674a7313b9eca9fa73bc59e242e0d9d901abe03b5eca6a27bc0f393e646105e",
+      "cross_worker": "ea3738b97fb550de389a5c2d08573e9ef5caf131c1bcfa7698a40f0a4e4b0a27",
+      "denied_tool": "c526b29bccde889805196df239adeb2cff0961d9fdd48fd2d6992c935dc0c136",
+      "events": "9501406ce3d24dfa7c088ccf29ac63061328c39f74ee718bd74533a2d8a3951d",
+      "native_boundary": "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+      "protected_state": "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616",
+      "resource_limits": "d573dca2d98d1c26045ab0bc68175b874817ad7b1f4df1ff39203af4c89f08a4"
+    },
+    "runtime_policy_parent_digest": "ae102dd55ef470a8c6520fe256a664ae239dc8d44bd6c70ca23913a4aa12d5cc",
+    "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+    "worker_pair_inspection": {
+      "digest": "be2be639df96c541de6d7d14b1b6ce14ea6a0b794648477d945970e642f76339",
+      "id": "pair-inspection:conformance_probe_bf48e94ea8b6458baadcb19a8f0325e0"
+    }
+  },
+  "conformance_record": {
+    "digest": "a64f82baa7431a3d54ca4145f10ec584836563d232794b13b528a46d595053f0",
+    "document": {
+      "adapter": "codex-app-server:b-luna-aeep",
+      "adapter_version": "1",
+      "advertised_tools": [
+        "dynamic:workbook:aeep_recipe_f468b36bc594",
+        "dynamic:workbook:fixed_workbook",
+        "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+        "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a",
+        "skill:spreadsheets:Spreadsheets",
+        "spreadsheets_bundle"
+      ],
+      "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+      "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+      "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+      "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+      "conformance_id": "b-treatment-boundary-conformance-20261003-449b",
+      "effective_inventory": {
+        "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+        "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+        "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+        "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+      },
+      "effective_policy_digest": "114aa62371022e1243de1741c98df15b50b32522e4b8af9319a3c90cd7c383a3",
+      "enforcement_definition_digest": "476f9c529015ae3b7b103f59c22e190dd4a4a6366403d4a510d3fe309e63a1d5",
+      "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+      "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+      "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+      "permitted_tools": [
+        "dynamic:workbook:aeep_recipe_f468b36bc594",
+        "dynamic:workbook:fixed_workbook",
+        "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+        "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a",
+        "skill:spreadsheets:Spreadsheets",
+        "spreadsheets_bundle"
+      ],
+      "probe_digests": [
+        "9bfd9b30bd8ef4e9bceb671925186ae2e3b48f19e5bd44bd302cb28a37d2e8fb",
+        "c526b29bccde889805196df239adeb2cff0961d9fdd48fd2d6992c935dc0c136",
+        "ea3738b97fb550de389a5c2d08573e9ef5caf131c1bcfa7698a40f0a4e4b0a27",
+        "d6af47b9e8150e7da48c8fb67203c49d19c83ae4491c431287432378c54befa1",
+        "07780dd9d73c3d8b3fb4099e7e15595a10ea0d4bf968a2703472068b6ce5a369",
+        "d6cd34d342e93c2fefb61ba57b592786163a43726db0df5ba9a25339c49a73e3",
+        "a674a7313b9eca9fa73bc59e242e0d9d901abe03b5eca6a27bc0f393e646105e",
+        "d573dca2d98d1c26045ab0bc68175b874817ad7b1f4df1ff39203af4c89f08a4",
+        "80c230b9ea909426c37b18c6ab298e8c89f010bc635bd47cd9e4e7a5d1a8d29f",
+        "9501406ce3d24dfa7c088ccf29ac63061328c39f74ee718bd74533a2d8a3951d",
+        "4b14acec1d167863261f1a7f8f9a2047fecdfe016db6c73955ae1c9c1ff37bb9",
+        "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+        "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+        "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+        "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616"
+      ],
+      "reviewed_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+      "schema_version": "assessment.boundary-conformance.v3",
+      "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+      "used_tools": [
+        "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+        "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+      ],
+      "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+    }
+  },
+  "input_pins": {
+    "reports/v08/luna-docx-stage/b-current-callback-execution-review-v2.json": "e29e4b171001daa9b60076a5c7a7b9bcf39dcc6885570510068c0394450dad56",
+    "reports/v08/luna-docx-stage/b-current-callback-proxy-lifecycle-result.json": "f417ff7576722d6b7a1466fd26c0923454427c89ad4b596271a8986c19933b73",
+    "reports/v08/luna-docx-stage/b-current-callback-result-v2.json": "deea583086869129974e63f81bc0e3875fb8666e1f92a921aec338a24d6d8c20",
+    "reports/v08/luna-docx-stage/b-current-callback-terminal-audit.json": "60f5302e40e509002672f813d24d3586552902ffe44e94627d3e9c97e11fefb0",
+    "reports/v08/luna-docx-stage/b-current-callback-tool-identity-audit.json": "1890f69529682630fc5568c3014a9accefe4efe276f124789a0ec2ece4406cf4",
+    "reports/v08/luna-docx-stage/b-current-profile-v2.json": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+    "reports/v08/luna-docx-stage/b-native-components-v4-result.json": "2cafc12642b19d0dddb158f614da19bed96d2dc39ea8657375ccc55965230ad4",
+    "reports/v08/luna-docx-stage/b-native-components-v4-review.json": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31",
+    "reports/v08/luna-docx-stage/b-native-components-v4-terminal-audit.json": "f20365ccbac94858a425b6f77b2c94105d1da706631ce42275226eaae5905b88",
+    "reports/v08/luna-docx-stage/b-worker-components-execution-review-v3.json": "d4215be9e3d202f6e1e32fb1d0cfb22d6646def742e72d36ba2018333c43a21c",
+    "reports/v08/luna-docx-stage/b-worker-components-v2-result.json": "0552cf86620985194c5bd9d1252e88819667730ff9004efc1b82510b98696379"
+  },
+  "limitations": [
+    "Treatment worker conformance only; not qualification, admission or benefit.",
+    "Receipt hash identity proves the AEEP dynamic tool was called; commandExecution category is observed but its arguments/results are unavailable.",
+    "Control actual callback is still needed before differential or three-way conformance.",
+    "No canonical row or review mark was written."
+  ],
+  "required_human_review": [
+    {
+      "digest": "114aa62371022e1243de1741c98df15b50b32522e4b8af9319a3c90cd7c383a3",
+      "kind": "effective_policy_definition"
+    },
+    {
+      "digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+      "kind": "reviewed_inventory"
+    },
+    {
+      "digest": "476f9c529015ae3b7b103f59c22e190dd4a4a6366403d4a510d3fe309e63a1d5",
+      "kind": "enforcement_definition"
+    },
+    {
+      "digest": "a64f82baa7431a3d54ca4145f10ec584836563d232794b13b528a46d595053f0",
+      "kind": "boundary_conformance"
+    }
+  ],
+  "review_documents": {
+    "114aa62371022e1243de1741c98df15b50b32522e4b8af9319a3c90cd7c383a3": {
+      "document": {
+        "definition": {
+          "adapter": "codex-app-server:b-luna-aeep",
+          "adapter_version": "1",
+          "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+          "callback_receipt_tool_hashes": [
+            "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+            "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+          ],
+          "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+          "effective_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+          "executor_id": "b.luna.aeep",
+          "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+          "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+          "invocation": {
+            "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+            "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+            "exposure": "required",
+            "local_profile": "capable_local",
+            "mode": "dynamic_tool",
+            "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+            "native_catalog": false,
+            "server": "workbook",
+            "supporting_skills": [
+              {
+                "name": "spreadsheets:Spreadsheets",
+                "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+              }
+            ],
+            "tool": "aeep_recipe_f468b36bc594",
+            "tool_sha256": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+          },
+          "model_constraint": {
+            "allowed_model_ids": [
+              "gpt-6-luna"
+            ],
+            "minimum_context_tokens": null,
+            "required_capabilities": []
+          },
+          "observed_active_policy": {
+            "approval_never": true,
+            "cwd_matches": true,
+            "profile_matches": true
+          },
+          "purpose": "Current exact B treatment effective policy, joining active runtime policy to invocation and native callback.",
+          "reasoning_efforts": [
+            "xhigh"
+          ],
+          "resource_limits": {
+            "approval_ceiling": "read",
+            "cpu_count": 1.0,
+            "memory_mb": 1024,
+            "process_limit": 64,
+            "store_output": false,
+            "store_prompt": false,
+            "timeout_seconds": 203.0
+          },
+          "runtime_policy_parent_digest": "ae102dd55ef470a8c6520fe256a664ae239dc8d44bd6c70ca23913a4aa12d5cc",
+          "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+          "tool_identity_by_hash": {
+            "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135": {
+              "server": "",
+              "tool": "",
+              "type": "commandExecution"
+            },
+            "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a": {
+              "server": "",
+              "tool": "aeep_recipe_f468b36bc594",
+              "type": "dynamicToolCall"
+            }
+          },
+          "unknowns": [
+            "commandExecution arguments/results unavailable",
+            "no qualification, admission, correctness, or benefit claim"
+          ],
+          "worker_dependencies_digest": "3f1569c2846d110614374ac5e2fe173f11c5c12c8ac1c0723ce1e6e52aae00c9",
+          "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+        }
+      },
+      "kind": "effective_policy_definition"
+    },
+    "476f9c529015ae3b7b103f59c22e190dd4a4a6366403d4a510d3fe309e63a1d5": {
+      "document": {
+        "definition": {
+          "actual_callback": {
+            "cleanup_confirmed": true,
+            "evidence_digest": "7765098f6fdcc5e7daaed0ca8a750849836aaeb1bf6759b7b716958c0df1e23a",
+            "host_receipt_digest": "d62c74b0480f862be1162100802ee88cb89aeed0144f0af8db8234cba0c37a13",
+            "host_tool_hashes": [
+              "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+              "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+            ],
+            "model_id": "gpt-6-luna",
+            "payload_recorded": false,
+            "probe_digest": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+            "reasoning_effort": "xhigh",
+            "result_sha256": "deea583086869129974e63f81bc0e3875fb8666e1f92a921aec338a24d6d8c20",
+            "terminal_audit_sha256": "60f5302e40e509002672f813d24d3586552902ffe44e94627d3e9c97e11fefb0",
+            "tool_identity_audit_sha256": "1890f69529682630fc5568c3014a9accefe4efe276f124789a0ec2ece4406cf4",
+            "tool_identity_by_hash": {
+              "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135": {
+                "server": "",
+                "tool": "",
+                "type": "commandExecution"
+              },
+              "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a": {
+                "server": "",
+                "tool": "aeep_recipe_f468b36bc594",
+                "type": "dynamicToolCall"
+              }
+            },
+            "turns_observed": 1
+          },
+          "implementation_sha256": {
+            "src/aeep/assessment/boundary.py": "b71f2f10a9a0c876c8b967245a1d064ebc36307425b0984b2c7bdf3d2a9554fc",
+            "src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+            "src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+            "src/aeep/assessment/models.py": "cdb0c89e2edb4d498b4aedc3ec075a373c741acd3dd695f6e2e1c5456854435e",
+            "src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+            "src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+            "src/aeep/executors/managed_host.py": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+            "src/aeep/hosts/codex_app_server.py": "c6b7a0d882b041d8c1f34fc32a21f36516d2bc33d79ab3733308799b4980d4f6",
+            "src/aeep/hosts/codex_dynamic_tools.py": "112668113a9d455c05c2d99400aad552da5a2fefb598e2279c79a42ec985170a",
+            "src/aeep/hosts/codex_invocation.py": "da0ecad7713e54484e1e447602650caed370c2c44b88e60b69776ed9df4bc9fb",
+            "src/aeep/hosts/codex_pair_inspection.py": "c1d47250cb81b7923e85450680ca9a2bfbb1bab70cc75922bc146deac05dbf3b",
+            "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+            "src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+            "src/aeep/router.py": "379ea6eb6bfb6f20cc024596022c7d95be43e2597626b5118bd7cbc3b0a37031",
+            "src/aeep/tasks.py": "8465e6cc2e86e3fe705f0de5658d62c43749d5fb3546761e3fbcea9f3f5505ca"
+          },
+          "invocation": {
+            "adapter": "codex-app-server:b-luna-aeep",
+            "approval_ceiling": "read",
+            "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+            "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+            "executor_id": "b.luna.aeep",
+            "mode": "dynamic_tool",
+            "model_ids": [
+              "gpt-6-luna"
+            ],
+            "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+            "reasoning_efforts": [
+              "xhigh"
+            ],
+            "server": "workbook",
+            "timeout_seconds": 203.0,
+            "tool": "aeep_recipe_f468b36bc594",
+            "tool_sha256": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+          },
+          "native_components": {
+            "cleanup_confirmed": true,
+            "evidence_digests": [
+              "8e2a35c7799e6e49386537dbd4de045383421444bc7a6e8e300015dbb379b39a",
+              "8f615c460a9c6a3051ff20230a23ecdbe28cfdb45bd1269d051680434013b62f"
+            ],
+            "model_turns": 0,
+            "probe_digests": {
+              "callback_lifecycle": "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+              "native_boundary": "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+              "protected_state": "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616"
+            },
+            "result_sha256": "2cafc12642b19d0dddb158f614da19bed96d2dc39ea8657375ccc55965230ad4",
+            "review_sha256": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31"
+          },
+          "probe_evidence": [
+            {
+              "definition_digest": "43ee611a97eeefd2a2b0f88bd1db652b5567e4854d15ecad33e9b51732de5952",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "allowed_tool",
+              "observed": {
+                "dependencies": true,
+                "workspace_write": true
+              },
+              "probe_digest": "9bfd9b30bd8ef4e9bceb671925186ae2e3b48f19e5bd44bd302cb28a37d2e8fb",
+              "probe_id": "probe_3fc5bac15557464782cfb79092b8256b"
+            },
+            {
+              "definition_digest": "87f92d962c1cfd56c3f3d7360ffd37dc0a606c479537b3a35e2b179398c1c10e",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "denied_tool",
+              "observed": {
+                "credential_read_denied": true
+              },
+              "probe_digest": "c526b29bccde889805196df239adeb2cff0961d9fdd48fd2d6992c935dc0c136",
+              "probe_id": "probe_c0578f2055ab4bf9adf738396f1c2188"
+            },
+            {
+              "definition_digest": "7fbd738643f64befb9e96e28b9b709079e17d38bab6f433e4447b035ebcb8fb8",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "cross_worker",
+              "observed": {
+                "other_absent": true,
+                "own_readable": true
+              },
+              "probe_digest": "ea3738b97fb550de389a5c2d08573e9ef5caf131c1bcfa7698a40f0a4e4b0a27",
+              "probe_id": "probe_84d01b8a092a45ba9e0bc46fa1dd51c9"
+            },
+            {
+              "definition_digest": "b7fa32e4cc27ca34ba035c819e8345ec7a365b4f133012606a92cdd56bedca7d",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "answers",
+              "observed": {
+                "external_answer_blocked": true
+              },
+              "probe_digest": "d6af47b9e8150e7da48c8fb67203c49d19c83ae4491c431287432378c54befa1",
+              "probe_id": "probe_ae338d5091aa40868079c4d7c8736f2b"
+            },
+            {
+              "definition_digest": "f5b18ee4aec0b87e4acbd238af3b923e19cd6952dfad98cade6fb27de2ae9f1f",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "configuration",
+              "observed": {
+                "active_policy": true,
+                "disabled_features": true,
+                "immutable_image": true,
+                "requirements": true
+              },
+              "probe_digest": "07780dd9d73c3d8b3fb4099e7e15595a10ea0d4bf968a2703472068b6ce5a369",
+              "probe_id": "probe_bea43874c7f3440c969e4f0ba6a7cd33"
+            },
+            {
+              "definition_digest": "473ecf6e42c1b3e72a403a0075319d6ca13e8f25f9721eafe1c19b68b6e75a97",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "candidate_network",
+              "observed": {
+                "direct_denied": true,
+                "proxy_denied": true
+              },
+              "probe_digest": "d6cd34d342e93c2fefb61ba57b592786163a43726db0df5ba9a25339c49a73e3",
+              "probe_id": "probe_23098b3daedd460fb57e7975a3247fc7"
+            },
+            {
+              "definition_digest": "8f32019634f00d4ed0ec3484667f83d9f744b7d33771e15babb6618563fec860",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "credential_canary",
+              "observed": {
+                "denied": true,
+                "removed": true,
+                "seeded": true
+              },
+              "probe_digest": "a674a7313b9eca9fa73bc59e242e0d9d901abe03b5eca6a27bc0f393e646105e",
+              "probe_id": "probe_b1167bc6268f4894b191f183029eab83"
+            },
+            {
+              "definition_digest": "3bab0d6ad414b63e0f972782fe3374f6700137cca5eb06620dc9665ab94904cc",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "resource_limits",
+              "observed": {
+                "cpu": true,
+                "memory": true,
+                "mounts": true,
+                "processes": true
+              },
+              "probe_digest": "d573dca2d98d1c26045ab0bc68175b874817ad7b1f4df1ff39203af4c89f08a4",
+              "probe_id": "probe_d912fe8cff1d4ee39f516e754aac3712"
+            },
+            {
+              "definition_digest": "5202802e60ec891b3e76d26d2fd30a555bce5450abd3db04207a1d04c747f1a4",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "cleanup",
+              "observed": {
+                "command_stopped": true,
+                "worker_removed": true
+              },
+              "probe_digest": "80c230b9ea909426c37b18c6ab298e8c89f010bc635bd47cd9e4e7a5d1a8d29f",
+              "probe_id": "probe_fe0662f44f55404ea3ead0273651c071"
+            },
+            {
+              "definition_digest": "44f306e947e7c0600cb587c205f662db23417cd82ff057e15d53028385f36070",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "events",
+              "observed": {
+                "command_responses_complete": true
+              },
+              "probe_digest": "9501406ce3d24dfa7c088ccf29ac63061328c39f74ee718bd74533a2d8a3951d",
+              "probe_id": "probe_436051baafd6410c9b7372dcd2dbb5c1"
+            },
+            {
+              "definition_digest": "832a89f8e07844393570fdc982367ed991fd9ff46d19fa6b27c962b55e3ed9b1",
+              "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+              "name": "candidate_access",
+              "observed": {
+                "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+                "candidate_available": true,
+                "candidate_kind": "dynamic_tool",
+                "candidate_tools_digest": "ff6ab96edf664402a8424c0f6c00ec8d8a94526e3a338884d92e9a4f199783f7",
+                "definition_digest": "57af9b71f05881d4109f1c4b44594433816228df3fe368aaf65c7588b7cb4dbe"
+              },
+              "probe_digest": "4b14acec1d167863261f1a7f8f9a2047fecdfe016db6c73955ae1c9c1ff37bb9",
+              "probe_id": "probe_d9b2036e005d47f69a89834869f6cc3d"
+            },
+            {
+              "definition_digest": "5ec6163aaf6b18fc9f02e0a2df2f112f67d71c18ee3911b4ffc6eb2609e373f6",
+              "execution_evidence_digest": "7765098f6fdcc5e7daaed0ca8a750849836aaeb1bf6759b7b716958c0df1e23a",
+              "name": "callback_authority",
+              "observed": {
+                "callback_origin": "native_app_server",
+                "native_callback_observed": true
+              },
+              "probe_digest": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+              "probe_id": "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b"
+            },
+            {
+              "definition_digest": "de6f424f92ac062e84a991fc4b06c088bae508e8aa6cc929f7c7eeeaeb65c724",
+              "execution_evidence_digest": "19b0dd2fe92bedf074c034d4d1ef16f997711ea010a03c37421e62ac546d8590",
+              "name": "native_boundary",
+              "observed": {
+                "fork_errno": "35",
+                "hard_nproc": "0:0",
+                "marker": "post_exec",
+                "network_denied": true,
+                "raise_denied": true,
+                "session_leader": true,
+                "spawn_errno": "35"
+              },
+              "probe_digest": "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+              "probe_id": "probe_conformance_b_native_components_v4_449b_native_boundary"
+            },
+            {
+              "definition_digest": "e7a672cc46d773ab3163dace9644b2f2fe7884c1c21d903b4f6841afd2e296b4",
+              "execution_evidence_digest": "4c5776606a4c70da38d157f3236186a540858ac0f01fdd6868a81515dc046eaa",
+              "name": "callback_lifecycle",
+              "observed": {
+                "cancel_requested": true,
+                "fixed_helper_returned_timeout": true,
+                "host_eof_observed": false,
+                "owned_non_zombie_processes_gone": true,
+                "read_attempt_failed_retry_eligible": true,
+                "ready_line_observed": true,
+                "single_cancel_attempt": true,
+                "timeout_receipt_persisted": true
+              },
+              "probe_digest": "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+              "probe_id": "probe_conformance_b_native_components_v4_449b_callback_lifecycle"
+            },
+            {
+              "definition_digest": "ac73a3a83aaca04d23f0087f44b9383f7acc1803c86fc300155f3571c7b65b11",
+              "execution_evidence_digest": "e9e31dc42fda3720ab9a9c7d31045c15112a42f680369006c42bf6299d56874a",
+              "name": "protected_state",
+              "observed": {
+                "database_denied": true,
+                "private_denied": true,
+                "witness_unchanged": true
+              },
+              "probe_digest": "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616",
+              "probe_id": "probe_conformance_b_native_components_v4_449b_protected_state"
+            }
+          ],
+          "purpose": "Source-current treatment worker enforcement evidence; proposal for operator review.",
+          "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+          "unknowns": {
+            "admission": false,
+            "benefit": false,
+            "cash_cost_usd": null,
+            "command_arguments_or_results": null,
+            "qualification": false,
+            "subscription_usage": null,
+            "task_correctness": null
+          },
+          "worker": {
+            "binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "cpu_count": 1.0,
+            "dependencies_digest": "3f1569c2846d110614374ac5e2fe173f11c5c12c8ac1c0723ce1e6e52aae00c9",
+            "digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+            "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+            "image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+            "memory_mb": 1024,
+            "platform": "linux/arm64",
+            "process_limit": 64
+          },
+          "worker_pair_inspection": {
+            "active_policy": {
+              "approval_never": true,
+              "cwd_matches": true,
+              "profile_matches": true
+            },
+            "candidate_access": {
+              "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+              "candidate_available": true,
+              "candidate_kind": "dynamic_tool",
+              "candidate_tools_digest": "ff6ab96edf664402a8424c0f6c00ec8d8a94526e3a338884d92e9a4f199783f7",
+              "definition_digest": "57af9b71f05881d4109f1c4b44594433816228df3fe368aaf65c7588b7cb4dbe"
+            },
+            "component_probes_match": true,
+            "digest": "be2be639df96c541de6d7d14b1b6ce14ea6a0b794648477d945970e642f76339",
+            "effective_inventory": {
+              "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+              "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+              "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+              "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+            },
+            "effective_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+            "execution_evidence_digest": "fe5cbf7240532619cf315ee8064ae8a52e9f020286b363f460a6a1e780f4d9e4",
+            "id": "pair-inspection:conformance_probe_bf48e94ea8b6458baadcb19a8f0325e0",
+            "model_turns": 0,
+            "physical_spreadsheets": {
+              "alias_path": "/etc/codex/skills/spreadsheets/SKILL.md",
+              "aliases": {
+                "spreadsheets:Spreadsheets": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md"
+              },
+              "dependencies": {
+                "artifact_tool_csv": true,
+                "authoring_helper": true
+              },
+              "disabled_apps": [],
+              "enabled_skills": [
+                {
+                  "dependencies_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                  "name": "spreadsheets:Spreadsheets",
+                  "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md"
+                }
+              ],
+              "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+              "runtime_path": "/opt/dependencies/runtime",
+              "runtime_present": true,
+              "skill_path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+              "skill_sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+              "supporting_servers": {},
+              "versions": {
+                "openpyxl": "3.1.5",
+                "pandas": "2.3.2"
+              }
+            }
+          }
+        }
+      },
+      "kind": "enforcement_definition"
+    },
+    "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a": {
+      "document": {
+        "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+        "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+        "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+        "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+      },
+      "kind": "reviewed_inventory"
+    },
+    "a64f82baa7431a3d54ca4145f10ec584836563d232794b13b528a46d595053f0": {
+      "document": {
+        "adapter": "codex-app-server:b-luna-aeep",
+        "adapter_version": "1",
+        "advertised_tools": [
+          "dynamic:workbook:aeep_recipe_f468b36bc594",
+          "dynamic:workbook:fixed_workbook",
+          "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+          "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a",
+          "skill:spreadsheets:Spreadsheets",
+          "spreadsheets_bundle"
+        ],
+        "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+        "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+        "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+        "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+        "conformance_id": "b-treatment-boundary-conformance-20261003-449b",
+        "effective_inventory": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "effective_policy_digest": "114aa62371022e1243de1741c98df15b50b32522e4b8af9319a3c90cd7c383a3",
+        "enforcement_definition_digest": "476f9c529015ae3b7b103f59c22e190dd4a4a6366403d4a510d3fe309e63a1d5",
+        "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+        "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+        "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+        "permitted_tools": [
+          "dynamic:workbook:aeep_recipe_f468b36bc594",
+          "dynamic:workbook:fixed_workbook",
+          "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+          "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a",
+          "skill:spreadsheets:Spreadsheets",
+          "spreadsheets_bundle"
+        ],
+        "probe_digests": [
+          "9bfd9b30bd8ef4e9bceb671925186ae2e3b48f19e5bd44bd302cb28a37d2e8fb",
+          "c526b29bccde889805196df239adeb2cff0961d9fdd48fd2d6992c935dc0c136",
+          "ea3738b97fb550de389a5c2d08573e9ef5caf131c1bcfa7698a40f0a4e4b0a27",
+          "d6af47b9e8150e7da48c8fb67203c49d19c83ae4491c431287432378c54befa1",
+          "07780dd9d73c3d8b3fb4099e7e15595a10ea0d4bf968a2703472068b6ce5a369",
+          "d6cd34d342e93c2fefb61ba57b592786163a43726db0df5ba9a25339c49a73e3",
+          "a674a7313b9eca9fa73bc59e242e0d9d901abe03b5eca6a27bc0f393e646105e",
+          "d573dca2d98d1c26045ab0bc68175b874817ad7b1f4df1ff39203af4c89f08a4",
+          "80c230b9ea909426c37b18c6ab298e8c89f010bc635bd47cd9e4e7a5d1a8d29f",
+          "9501406ce3d24dfa7c088ccf29ac63061328c39f74ee718bd74533a2d8a3951d",
+          "4b14acec1d167863261f1a7f8f9a2047fecdfe016db6c73955ae1c9c1ff37bb9",
+          "8834ac91ca297b6e3ccb7e61453b243156265d42c6a585550d5fada658a77c6b",
+          "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+          "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+          "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616"
+        ],
+        "reviewed_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+        "schema_version": "assessment.boundary-conformance.v3",
+        "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+        "used_tools": [
+          "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+          "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a"
+        ],
+        "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+      },
+      "kind": "boundary_conformance"
+    }
+  },
+  "schema_version": "assessment.b-treatment-boundary-conformance-proposal.v1",
+  "simulation_preflight": {
+    "admission": false,
+    "canonical_database_mutations": false,
+    "kind": "in_memory_simulation_only",
+    "qualification": false,
+    "status": "pass",
+    "verified_probe_count": 15,
+    "verified_probe_names": [
+      "allowed_tool",
+      "denied_tool",
+      "cross_worker",
+      "answers",
+      "configuration",
+      "candidate_network",
+      "credential_canary",
+      "resource_limits",
+      "cleanup",
+      "events",
+      "candidate_access",
+      "callback_authority",
+      "native_boundary",
+      "callback_lifecycle",
+      "protected_state"
+    ],
+    "verified_schema_version": "assessment.boundary-conformance.v3"
+  },
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "status": "inert_proposal_unreviewed"
+}

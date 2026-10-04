@@ -1,0 +1,60 @@
+{
+  "record_type": "supplemental_offline_ci_results_correction",
+  "recorded_at_utc": "2026-10-03T07:54:22Z",
+  "purpose": "Supply the actual result timestamp and outcomes for the supplemental command manifest without silently changing the original manifest.",
+  "manifest": {
+    "path": "reports/v08/luna-b-three-role-validation-20261003/supplemental-commands.json",
+    "sha256": "487b50aa3a2356ad73d53a474726a7dc3ded4f1dfdd8de89f77f1957728a9b8f",
+    "recorded_at_value": "2026-10-03T00:00:00Z",
+    "timestamp_interpretation": "Date-only placeholder; this is not the execution time. This correction records the actual completion time above."
+  },
+  "frozen_inputs": {
+    "verification_source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+    "wrapper": "reports/v08/luna-b-three-role-validation-20261003/run_check_retry.py",
+    "wrapper_sha256": "4b24f7dd0002be136f23aa6d5453d99b08f8f5d2a7c343481f2c38335a7f4eef"
+  },
+  "storage": {
+    "before_ordinary_available_bytes": 167165120512,
+    "before_important_usage_available_bytes": 326566866542,
+    "after_ordinary_available_bytes": 163263598592,
+    "after_important_usage_available_bytes": 322664431214,
+    "ordinary_reserve_bytes": 53687091200,
+    "temporary_root_sampled_size_kib_after_checks": 11619440,
+    "report_directory_sampled_size_kib_before_this_correction": 3448,
+    "cleanup": "No temporary or report resources were removed."
+  },
+  "commands": [
+    {"log": "16-economic-evidence-check.log", "sha256": "dd5e5fa80eb4daca3b84e06d5c8d4bbd4d12ade4d4a605f21a953360dfcf1180", "result": "pass", "details": "Deterministic check: 420 trials across 30 repetitions; required economic gates and safety invariants passed."},
+    {"log": "17-dsh-campaign-check.log", "sha256": "22524ab192fc5cc52735864d20e0ca0dce6c9b1c777f115412bba18722cccb9e", "result": "pass", "details": "Campaign gates passed."},
+    {"log": "18-dsh-live-safety-check.log", "sha256": "3c7d1abd181bd09a43339c7ae356ca6811e10e5d7747e2f38c7c8909d057747d", "result": "pass", "details": "Existing safety report passed its check; 6 turns."},
+    {"log": "19-dsh-live-comparison-check.log", "sha256": "10e14cd4cc7ca6c9605ca83cb4928d59d760146ae2723b3dbffccee8500ab00d", "result": "pass", "details": "Existing comparison report passed its check; 6 trials."},
+    {"log": "20-dsh-native-plan-check.log", "sha256": "51ac34cc8c9b8c0da45e24d36b8ae9fe7b707ec7636c7db4c78e29dbbf124b71", "result": "pass", "details": "Plan check passed; 30 main cases and 90 planned trials; separate user approval remains required for execution."},
+    {"log": "21-job-application-check.log", "sha256": "1f2ac28121490d3b6ab3fa48bd6cd020da7f73484f56c04c78ceb2e5ed06ef4c", "result": "pass", "details": "Campaign gates passed."},
+    {"log": "22-provider-verify.log", "sha256": "ede004532ef56bd09d42496bb709a17752aea89770bddb9999ac688820ee28dd", "result": "pass", "details": "Provider package integrity, signature, and identity trust verified."},
+    {"log": "23-node-integration.log", "sha256": "316cbd22b675ec525f4bb38977ad6384678df945f349f81306b74b11b47d6c4f", "result": "pass", "details": "Existing Node integration suite: 13 passed, 0 failed, 0 skipped; npm offline mode was enabled and existing node_modules were reused."},
+    {"log": "24-python-build.log", "sha256": "4d5f59f98e022dd19642d392858e2b998d110918239783a0ee563bb95988f984", "result": "pass", "details": "Built with python3 -m build --no-isolation; no dependency install. Wheel and sdist are listed below."},
+    {"log": "25-router-locked-artifacts.log", "sha256": "716b5a906b57377935fa3ea4797f906a92c6abd53756f389c8b66b55a88b4056", "result": "failed_report_script_path", "details": "The first report-local checker used the wrong repository-root parent index and raised FileNotFoundError for Documents/src/aeep/verification.py. Failure retained."},
+    {"log": "26-router-locked-artifacts-retry.log", "sha256": "2ed79ee2b4bede0ccea719075f4cf2e9391fe5b0d77e3c3ba520b592612148a8", "result": "pass", "details": "After correcting only the report-local checker root from REPORT.parents[3] to REPORT.parents[2], all 56 selected check specs, 45 unique test IDs, and 23 unique locked artifacts matched."}
+  ],
+  "router_complete": {
+    "full_command_run": false,
+    "reason": "The all-profile command reruns compatibility pytest nodes already included in the full pytest suite. The report-local checker covers its separate lock-digest component without imports or test execution.",
+    "checker_path": "reports/v08/luna-b-three-role-validation-20261003/check_router_completion_artifacts.py",
+    "checker_sha256_after_correction": "3012a9aa6a1d67265de0463ba720238407bec4064e5f31c9e79ca10be615b5b9"
+  },
+  "build_artifacts": [
+    {"path": "reports/v08/luna-b-three-role-validation-20261003/package-build-output/aeep_agent_router-0.8.0-py3-none-any.whl", "size_bytes": 1443181, "sha256": "3450ce259043dc5b2febf4ec18a9488a5c5837d775f0c76fc442abc5c31d2a69"},
+    {"path": "reports/v08/luna-b-three-role-validation-20261003/package-build-output/aeep_agent_router-0.8.0.tar.gz", "size_bytes": 1602596, "sha256": "582e7d4435267eccb63b95dae30b840d53316af1792330a32f79d0595b242fc3"}
+  ],
+  "observed_example_database_change": {
+    "path": "examples/provider_package/.aeep/provider-package-demo.db",
+    "sha256_before": "51a5291506d5ac59496eb09e56f7c2b670de5ae9c8c5efdbfada6b1b599368da",
+    "sha256_after": "2ff030e995469745aeb39fe62b618beb7ce6c65026e3e9ed260812c2bfcfcb2d",
+    "note": "The provider verification command changed this example database. Its contents were not inspected and it was not restored or rerun. This is not the canonical live-review database."
+  },
+  "limits": [
+    "Full pytest and branch coverage were handled in the separately recorded frozen-source validation; this supplemental run did not repeat them.",
+    "No Docker, network install, worker, model, trial, grant, or credential operation was performed."
+  ]
+}

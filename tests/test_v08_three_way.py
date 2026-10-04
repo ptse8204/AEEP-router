@@ -6,8 +6,10 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 from test_v08_incremental import environment
+from test_v08_managed_workers import binding as worker_binding
 
 from aeep.assessment.boundary import BoundaryConformance, BoundaryProbe, require_three_way_access
+from aeep.assessment.comparison import validate_incremental_hosts
 from aeep.assessment.models import (
     IncrementalExperiment,
     ThreeWayAccessDefinition,
@@ -16,6 +18,7 @@ from aeep.assessment.models import (
 )
 from aeep.assessment.repository import AssessmentRepository
 from aeep.errors import ConfigurationError
+from aeep.models import ExecutorSpec, ReviewedHostSkill
 from aeep.store import ReceiptStore
 
 pytestmark = pytest.mark.assessment_contract
@@ -65,6 +68,93 @@ def test_historical_exact_json_and_three_role_version():
         IncrementalExperiment.model_validate(
             {**old.model_dump(), "normal_host": value().normal_host.model_dump()}
         )
+
+
+def _three_way_host(role, *, mode="turn", worker_id=None, credential_volume=None, skills=()):
+    worker = worker_binding(credential_volume=credential_volume or "aeep-auth-" + role).model_copy(
+        update={"worker_id": worker_id or "worker-" + role}
+    )
+    invocation = {"mode": mode, "supporting_skills": [skill.model_dump(mode="json") for skill in skills]}
+    if mode == "skill":
+        invocation.update(skill_name="Candidate", skill_path="/opt/candidate/SKILL.md",
+                          skill_sha256="e" * 64, exposure="optional")
+    spec = ExecutorSpec(
+        id=role,
+        capability="assessment.workbook@1",
+        kind="host_managed",
+        resource_pool="three-way",
+        description="Static three-way comparison fixture",
+        config={
+            "adapter_id": "codex-app-server:three-way",
+            "argv": ["/opt/codex", "app-server"],
+            "instructions": "Same frozen task instructions.",
+            "timeout_seconds": 60,
+            "managed_worker": worker.model_dump(mode="json"),
+            "invocation": invocation,
+        },
+    )
+    return spec
+
+
+def _validate_three_way_hosts(*, normal_skills=(), normal_worker_id=None,
+                              normal_volume=None, baseline_skills=None, candidate_skills=None):
+    discovery_skill = ReviewedHostSkill(name="Spreadsheets", path="/opt/discovery/SKILL.md", sha256="a" * 64)
+    baseline_skills = (discovery_skill,) if baseline_skills is None else baseline_skills
+    candidate_skills = baseline_skills if candidate_skills is None else candidate_skills
+    candidate = _three_way_host("candidate", mode="skill", skills=candidate_skills)
+    baseline = _three_way_host("baseline", skills=baseline_skills)
+    normal = _three_way_host("normal", skills=normal_skills, worker_id=normal_worker_id,
+                             credential_volume=normal_volume)
+    validate_incremental_hosts(candidate, baseline, {"normal": normal}, value())
+
+
+def test_aeep_value_all_three_workers_are_pairwise_independent():
+    _validate_three_way_hosts()
+    with pytest.raises(ConfigurationError, match="independent"):
+        _validate_three_way_hosts(normal_worker_id="worker-candidate")
+    with pytest.raises(ConfigurationError, match="independent"):
+        _validate_three_way_hosts(normal_volume="aeep-auth-candidate")
+
+
+def test_aeep_value_normal_may_omit_discovery_support_only():
+    _validate_three_way_hosts(normal_skills=())
+    extra = ReviewedHostSkill(name="Unreviewed", path="/opt/unreviewed/SKILL.md", sha256="b" * 64)
+    with pytest.raises(ConfigurationError, match="exact subset"):
+        _validate_three_way_hosts(normal_skills=(extra,))
+    drifted = ReviewedHostSkill(name="Spreadsheets", path="/opt/discovery/SKILL.md", sha256="c" * 64)
+    with pytest.raises(ConfigurationError, match="exact subset"):
+        _validate_three_way_hosts(normal_skills=(drifted,))
+
+
+def test_historical_four_arm_value_still_requires_equal_supporting_skills():
+    skill = ReviewedHostSkill(name="Spreadsheets", path="/opt/discovery/SKILL.md", sha256="a" * 64)
+    candidate = _three_way_host("candidate", mode="skill", skills=(skill,))
+    baseline = _three_way_host("baseline", skills=(skill,))
+    high = _three_way_host("high", skills=(skill,))
+    high.config["timeout_seconds"] = 120
+    high.config["reasoning_efforts"] = ["high"]
+    for spec in (candidate, baseline):
+        spec.config["reasoning_efforts"] = ["low"]
+    reusable = _three_way_host("reusable", skills=(skill,))
+    reusable.config["reasoning_efforts"] = ["low"]
+    experiment = IncrementalExperiment(
+        stage="marginal_value",
+        exposure="optional",
+        environment=environment(),
+        utility=value().utility,
+        higher_compute={"executor_id": "high", "fingerprint": "4" * 64, "dependencies": {}},
+        reusable_tool={"executor_id": "reusable", "fingerprint": "5" * 64, "dependencies": {}},
+        reusable_artifact_digest="6" * 64,
+        reusable_build_operation_ids=["build-op"],
+        qualification_report_digest="7" * 64,
+        feasible_challengers=["high", "reusable"],
+    )
+    dependencies = {"high": high, "reusable": reusable}
+    validate_incremental_hosts(candidate, baseline, dependencies, experiment)
+    reusable.config["invocation"]["supporting_skills"] = []
+    with pytest.raises(ConfigurationError, match="reviewed background skills"):
+        validate_incremental_hosts(candidate, baseline, dependencies, experiment)
+
 
 
 @pytest.fixture
@@ -142,7 +232,8 @@ def access_fixture(tmp_path, monkeypatch):
     # This unit tests semantic bindings; actual execution-backed conformance remains
     # covered independently by test_v08_conformance and require_managed_boundaries.
     original_get = repo.get
-    mapping = SimpleNamespace(subjects=[SimpleNamespace(id=r) for r in boundaries])
+    mapping = SimpleNamespace(subjects=[SimpleNamespace(id=r, managed_host_config=lambda: SimpleNamespace(
+        invocation=SimpleNamespace(supporting_skills=()))) for r in boundaries])
     monkeypatch.setattr("aeep.assessment.models.ReviewedMapping.model_validate", lambda _v: mapping)
     monkeypatch.setattr(
         repo,
@@ -154,15 +245,125 @@ def access_fixture(tmp_path, monkeypatch):
         "aeep.assessment.boundary.require_managed_boundaries",
         lambda _repo, _env, specs, ids: calls.append(([s.id for s in specs], ids)),
     )
-    yield repo, plan, env, access, boundaries, bind, calls
+    yield repo, plan, env, access, boundaries, bind, calls, mapping
     store.close()
 
 
+def _bind_support_inventory(repo, plan, env, access, records, bind, mapping, *,
+                            baseline_names=("Spreadsheets",), normal_names=(),
+                            external_names=("Spreadsheets",)):
+    skill_digests = {"Spreadsheets": "a" * 64, "Background": "d" * 64}
+    skills = {
+        name: ReviewedHostSkill(name=name, path=f"/opt/{name.lower()}/SKILL.md", sha256=digest)
+        for name, digest in skill_digests.items()
+    }
+    normal_inventory = {"python": "b" * 64}
+    discovery_inventory = {"skill:" + name: skill_digests[name] for name in baseline_names}
+    external_inventory = {"skill:" + name: skill_digests[name] for name in external_names}
+    control_inventory = {**normal_inventory, **discovery_inventory}
+    candidate_inventory = plan.comparison.experiment.environment.candidate_inventory
+    treatment_inventory = {**control_inventory, **candidate_inventory}
+    experiment = plan.comparison.experiment
+    experiment.environment = experiment.environment.model_copy(update={
+        "control_inventory": control_inventory,
+        "treatment_inventory": treatment_inventory,
+    })
+    access = ThreeWayAccessDefinition(
+        normal_inventory=normal_inventory,
+        discovery_inventory=discovery_inventory,
+        external_candidate_inventory=external_inventory,
+        worker_digests=access.worker_digests,
+        configuration_digests=access.configuration_digests,
+    )
+    access_records = {
+        "normal": normal_names,
+        "baseline": baseline_names,
+        "candidate": baseline_names,
+    }
+    mapping.subjects = [
+        SimpleNamespace(
+            id=role,
+            managed_host_config=lambda names=names: SimpleNamespace(
+                invocation=SimpleNamespace(supporting_skills=tuple(skills[name] for name in names))
+            ),
+        )
+        for role, names in access_records.items()
+    ]
+    inventories = {
+        "normal": normal_inventory,
+        "baseline": control_inventory,
+        "candidate": treatment_inventory,
+    }
+    updated_records = {}
+    for role, inventory in inventories.items():
+        old = records[role]
+        probe = BoundaryProbe(
+            probe_id="support-" + role,
+            name="candidate_access",
+            implementation_digest="a" * 64,
+            worker_digest=old.worker_digest,
+            execution_evidence_digest="b" * 64,
+            observed={
+                "definition_digest": content_digest(experiment.environment),
+                "candidate_available": role == "candidate",
+            },
+        )
+        probe_ref = repo.put("boundary_probe", "support-" + role, probe)
+        updated_records[role] = old.model_copy(update={
+            "reviewed_inventory_digest": content_digest(inventory),
+            "advertised_tools": list(inventory),
+            "permitted_tools": list(inventory),
+            "effective_inventory": inventory,
+            "probe_digests": [probe_ref],
+        })
+    bind(access, records=updated_records)
+    return access
+
+
 def test_three_actual_role_bindings_reach_existing_boundary_gate(access_fixture):
-    repo, plan, env, _access, _records, _bind, calls = access_fixture
+    repo, plan, env, _access, _records, _bind, calls, _mapping = access_fixture
     require_three_way_access(repo, env, plan)
     assert calls[0][0] == ["normal", "baseline", "candidate"]
     assert set(calls[0][1]) == set(calls[0][0])
+
+
+def test_three_way_boundary_joins_only_omitted_external_discovery_skill(access_fixture):
+    repo, plan, env, access, records, bind, calls, mapping = access_fixture
+    _bind_support_inventory(repo, plan, env, access, records, bind, mapping)
+    require_three_way_access(repo, env, plan)
+    assert calls
+
+
+def test_three_way_boundary_rejects_omitted_non_candidate_support(access_fixture):
+    repo, plan, env, access, records, bind, calls, mapping = access_fixture
+    _bind_support_inventory(
+        repo, plan, env, access, records, bind, mapping,
+        baseline_names=("Spreadsheets", "Background"),
+        external_names=("Spreadsheets",),
+    )
+    with pytest.raises(ConfigurationError, match="omitted supports"):
+        require_three_way_access(repo, env, plan)
+    assert not calls
+
+
+@pytest.mark.parametrize("fault", ["wrong_skill_hash", "external_already_normal"])
+def test_three_way_external_support_must_match_discovery_only(access_fixture, fault):
+    repo, plan, env, access, records, bind, calls, mapping = access_fixture
+    access = _bind_support_inventory(repo, plan, env, access, records, bind, mapping)
+    external = dict(access.external_candidate_inventory)
+    if fault == "wrong_skill_hash":
+        external["skill:Spreadsheets"] = "9" * 64
+    else:
+        # Matching a control inventory entry is insufficient when normal already has it.
+        external["python"] = access.normal_inventory["python"]
+    changed = access.model_copy(update={"external_candidate_inventory": external})
+    digest = repo.put("three_way_access", content_digest(changed), changed)
+    repo.review(digest)
+    plan.comparison.experiment.three_way_access_digest = digest
+    plan.definition_digests = [digest]
+    with pytest.raises(ConfigurationError, match="discovery or external candidate"):
+        require_three_way_access(repo, env, plan)
+    assert not calls
 
 
 @pytest.mark.parametrize(
@@ -180,7 +381,7 @@ def test_three_actual_role_bindings_reach_existing_boundary_gate(access_fixture)
     ],
 )
 def test_false_or_unbound_three_way_access_fails_closed(access_fixture, fault):
-    repo, plan, env, access, records, bind, calls = access_fixture
+    repo, plan, env, access, records, bind, calls, _mapping = access_fixture
     if fault == "fake_equal":
         plan.comparison.experiment.three_way_access_digest = "9" * 64
         plan.definition_digests = ["9" * 64]

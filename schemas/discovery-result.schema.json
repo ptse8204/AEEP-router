@@ -1,0 +1,349 @@
+{
+  "$defs": {
+    "DiscoverySourceRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "discovery.source.v1",
+          "default": "discovery.source.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_record_id": {
+          "title": "Source Record Id",
+          "type": "string"
+        },
+        "discovery_id": {
+          "title": "Discovery Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "adapter_id": {
+          "title": "Adapter Id",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "query_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Query Digest",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "fallback",
+            "failed",
+            "timeout",
+            "skipped"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "candidate_digests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Digests",
+          "type": "array"
+        },
+        "elapsed_ms": {
+          "minimum": 0,
+          "title": "Elapsed Ms",
+          "type": "number"
+        },
+        "cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cash Usd"
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_record_id",
+        "discovery_id",
+        "source_id",
+        "adapter_id",
+        "created_at",
+        "query_digest",
+        "status",
+        "elapsed_ms"
+      ],
+      "title": "DiscoverySourceRecord",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "PackageLocatorKind": {
+      "enum": [
+        "local",
+        "https",
+        "repository"
+      ],
+      "title": "PackageLocatorKind",
+      "type": "string"
+    },
+    "ProviderPackageLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/PackageLocatorKind"
+        },
+        "value": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "subdirectory": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subdirectory"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "ProviderPackageLocator",
+      "type": "object"
+    },
+    "RegistryCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "registry_candidate_id": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Registry Candidate Id",
+          "type": "string"
+        },
+        "adapter_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Adapter Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Description",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Tags",
+          "type": "array"
+        },
+        "source_repository": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Repository"
+        },
+        "package_locator": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProviderPackageLocator"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "remote_endpoint": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remote Endpoint"
+        },
+        "provenance": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Provenance",
+          "type": "object"
+        },
+        "marketplace_labels": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Marketplace Labels",
+          "type": "object"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "raw_metadata_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Raw Metadata Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry_candidate_id",
+        "adapter_id",
+        "name",
+        "retrieved_at",
+        "raw_metadata_digest"
+      ],
+      "title": "RegistryCandidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "discovery.result.v1",
+      "default": "discovery.result.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "discovery_id": {
+      "title": "Discovery Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "query_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Query Digest",
+      "type": "string"
+    },
+    "candidate_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Ids",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/RegistryCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "source_records": {
+      "items": {
+        "$ref": "#/$defs/DiscoverySourceRecord"
+      },
+      "title": "Source Records",
+      "type": "array"
+    },
+    "elapsed_ms": {
+      "minimum": 0,
+      "title": "Elapsed Ms",
+      "type": "number"
+    }
+  },
+  "required": [
+    "discovery_id",
+    "created_at",
+    "query_digest",
+    "elapsed_ms"
+  ],
+  "title": "DiscoveryResult",
+  "type": "object"
+}

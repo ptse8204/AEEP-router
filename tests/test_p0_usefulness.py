@@ -245,6 +245,7 @@ async def test_mcp_server_import_discovers_tools(tmp_path):
         "aeep_estimate_route_prices",
         "aeep_get_metrics",
         "aeep_list_capabilities",
+        "aeep_lookup_capability",
         "aeep_record_outcome",
         "aeep_request_quotes",
         "aeep_route_action",

@@ -70,7 +70,7 @@ class BoundaryProbeDefinition(StrictModel):
 
 
 class BoundaryProbe(StrictModel):
-    schema_version: Literal["assessment.boundary-probe.v1"] = "assessment.boundary-probe.v1"
+    schema_version: Literal["assessment.boundary-probe.v1", "assessment.boundary-probe.v2"] = "assessment.boundary-probe.v1"
     probe_id: str
     name: str
     implementation_digest: Digest
@@ -78,12 +78,21 @@ class BoundaryProbe(StrictModel):
     execution_evidence_digest: Digest
     observed: dict[str, str | int | bool]
     host_receipt_digest: Digest | None = None
+    charged_operation_digest: Digest | None = None
+
+    @model_validator(mode='after')
+    def versioned_cost_binding(self) -> BoundaryProbe:
+        if self.schema_version.endswith('.v2') != (self.charged_operation_digest is not None):
+            raise ValueError('boundary probe v2 requires an exact charged operation digest')
+        return self
 
     @model_serializer(mode='wrap')
     def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
         result: dict[str, object] = handler(self)
         if self.host_receipt_digest is None:
             result.pop('host_receipt_digest', None)
+        if self.charged_operation_digest is None:
+            result.pop('charged_operation_digest', None)
         return result
 
 
@@ -146,6 +155,84 @@ class DifferentialConformance(StrictModel):
     treatment_conformance_digest: Digest
 
 
+def require_candidate_access(repository: AssessmentRepository, boundary: BoundaryConformance,
+                             expected: DifferentialEnvironment, *, available: bool) -> None:
+    """Bind access observations to the candidate representation and reviewed worker.
+
+    Callers separately require execution-backed boundary conformance. Dynamic
+    access additionally resolves the actual reviewed declaration; a claimed
+    availability flag cannot stand in for the callback contract.
+    """
+    probes = [BoundaryProbe.model_validate(repository.get("boundary_probe", item))
+              for item in boundary.probe_digests
+              if repository.get("boundary_probe", item).get("name") == "candidate_access"]
+    observation: dict[str, str | int | bool] = {
+        "definition_digest": content_digest(expected), "candidate_available": available,
+    }
+    if len(probes) != 1:
+        raise ConfigurationError("candidate availability probe must be present and unique")
+    probe = probes[0]
+    if expected.candidate_dynamic_tools:
+        from ..hosts.codex_invocation import contract_digest
+
+        binding_digest = boundary.callback_binding_digest
+        if (boundary.schema_version not in {"assessment.boundary-conformance.v2", "assessment.boundary-conformance.v3"}
+                or boundary.effective_inventory is None
+                or probe.worker_digest != boundary.worker_digest
+                or type(probe.observed.get("candidate_available")) is not bool):
+            raise ConfigurationError("dynamic candidate access requires the exact worker")
+        observed_inventory = {key: value for key, value in boundary.effective_inventory.items()
+                              if key.startswith("dynamic:")}
+        inventory: dict[str, str] = {}
+        if binding_digest is None:
+            if available or boundary.schema_version != "assessment.boundary-conformance.v2" or observed_inventory:
+                raise ConfigurationError("plain worker cannot claim dynamic candidate access")
+        else:
+            if boundary.schema_version != "assessment.boundary-conformance.v3":
+                raise ConfigurationError("dynamic declaration requires composed conformance")
+            document = repository.get("codex_dynamic_tools", binding_digest)
+            with repository.store._lock:
+                review = repository.store._connection.execute(
+                    "SELECT revoked FROM assessment_reviews WHERE digest=?", (binding_digest,)).fetchone()
+            identity = document.get("identity")
+            if (content_digest(document) != binding_digest or review is None or review[0]
+                    or not isinstance(identity, dict) or identity.get("worker_digest") != boundary.worker_digest):
+                raise ConfigurationError("dynamic candidate declaration is unreviewed or changed")
+            namespace, tools = document.get("namespace"), document.get("tools")
+            if (not isinstance(namespace, str) or not isinstance(tools, list) or not tools
+                    or any(not isinstance(item, dict) or not isinstance(item.get("name"), str) for item in tools)):
+                raise ConfigurationError("dynamic candidate declaration is malformed")
+            inventory = {f"dynamic:{namespace}:{item['name']}": contract_digest(item) for item in tools}
+            if len(inventory) != len(tools) or inventory != observed_inventory:
+                raise ConfigurationError("dynamic declaration differs from the effective tool inventory")
+        candidates = expected.candidate_dynamic_tools
+        present = {key: inventory[key] for key in candidates if key in inventory}
+        if present != (candidates if available else {}):
+            raise ConfigurationError("dynamic candidate target or availability differs")
+        observation.update(candidate_kind="dynamic_tool",
+                           candidate_tools_digest=content_digest(candidates),
+                           callback_binding_digest=binding_digest or "absent")
+    if probe.observed != observation:
+        raise ConfigurationError("candidate availability probe does not bind the reviewed candidate")
+
+
+def require_dynamic_candidate_target(spec: ExecutorSpec, boundary: BoundaryConformance,
+                                     expected: DifferentialEnvironment, *, available: bool) -> None:
+    """Join the candidate definition to the actual invocation, including absence."""
+    if not expected.candidate_dynamic_tools:
+        return
+    target = spec.managed_host_config().invocation
+    if target is None or target.dynamic_tools_digest != boundary.callback_binding_digest:
+        raise ConfigurationError("dynamic candidate invocation binding differs")
+    if available:
+        key = f"dynamic:{target.server}:{target.tool}"
+        if (target.mode != "dynamic_tool"
+                or expected.candidate_dynamic_tools.get(key) != target.tool_sha256):
+            raise ConfigurationError("invocation does not target the reviewed dynamic candidate")
+    elif target.mode != "turn":
+        raise ConfigurationError("control invocation must leave dynamic candidate unavailable")
+
+
 def require_differential(repository: AssessmentRepository, environment: AssessmentEnvironment,
                          plan: AssessmentPlan) -> None:
     """Differential evidence supplements each worker's enforcement evidence."""
@@ -167,6 +254,12 @@ def require_differential(repository: AssessmentRepository, environment: Assessme
             or record.control_conformance_digest != (environment.conformance_digests or {}).get(plan.baseline_id)
             or record.treatment_conformance_digest != (environment.conformance_digests or {}).get(plan.candidate_id)):
         raise ConfigurationError("differential conformance differs from the reviewed experiment")
+    specs = {}
+    if expected.candidate_dynamic_tools:
+        from .models import ReviewedMapping
+
+        mapping = ReviewedMapping.model_validate(repository.get("mapping", plan.mapping_digest))
+        specs = {spec.id: spec for spec in mapping.subjects}
     for identity, expected_inventory in ((record.control_conformance_digest, expected.control_inventory),
                                          (record.treatment_conformance_digest, expected.treatment_inventory)):
         boundary = BoundaryConformance.model_validate(repository.get("boundary_conformance", identity))
@@ -175,14 +268,14 @@ def require_differential(repository: AssessmentRepository, environment: Assessme
             raise ConfigurationError("effective inventory differs from the differential definition")
         require_conformance(repository, identity, source_digest=boundary.source_digest,
                             worker_digest=boundary.worker_digest, identity_digest=boundary.identity_digest)
-        absence = next((BoundaryProbe.model_validate(repository.get("boundary_probe", item)) for item in boundary.probe_digests
-                        if repository.get("boundary_probe", item).get("name") == "candidate_access"), None)
-        expected_access = identity == record.treatment_conformance_digest
-        # The probe binds all paths and aliases, not a caller-supplied success bit.
-        if absence is None or absence.observed != {
-            "definition_digest": content_digest(expected), "candidate_available": expected_access,
-        }:
-            raise ConfigurationError("candidate availability probe does not bind the reviewed paths and aliases")
+        require_candidate_access(repository, boundary, expected,
+                                 available=identity == record.treatment_conformance_digest)
+        if expected.candidate_dynamic_tools:
+            available = identity == record.treatment_conformance_digest
+            role = plan.candidate_id if available else plan.baseline_id
+            if role not in specs:
+                raise ConfigurationError("dynamic candidate executor mapping is missing")
+            require_dynamic_candidate_target(specs[role], boundary, expected, available=available)
 
 
     if plan.comparison.experiment.stage == 'aeep_value':
@@ -207,7 +300,7 @@ def require_three_way_access(repository: AssessmentRepository, environment: Asse
     expected = experiment.environment
     if (set(access.normal_inventory) & set(access.discovery_inventory)
             or expected.control_inventory != access.normal_inventory | access.discovery_inventory
-            or any(expected.control_inventory.get(key) != value for key, value in access.external_candidate_inventory.items())
+            or any(access.discovery_inventory.get(key) != value for key, value in access.external_candidate_inventory.items())
             or set(access.external_candidate_inventory) & set(expected.candidate_inventory)):
         raise ConfigurationError('three-way discovery or external candidate access differs')
     roles = [experiment.normal_host.executor_id, plan.baseline_id, plan.candidate_id]
@@ -218,6 +311,7 @@ def require_three_way_access(repository: AssessmentRepository, environment: Asse
     inventories = [access.normal_inventory, expected.control_inventory, expected.treatment_inventory]
     identities = {}
     selected = []
+    supporting_skills = {}
     for role, inventory in zip(roles, inventories, strict=True):
         conformance = (environment.conformance_digests or {}).get(role)
         if role not in specs or conformance is None:
@@ -230,14 +324,22 @@ def require_three_way_access(repository: AssessmentRepository, environment: Asse
                 or boundary.reviewed_inventory_digest != content_digest(inventory)):
             raise ConfigurationError('three-way effective worker/access binding differs')
         if role == experiment.normal_host.executor_id:
-            absence = next((BoundaryProbe.model_validate(repository.get('boundary_probe', item))
-                            for item in boundary.probe_digests
-                            if repository.get('boundary_probe', item).get('name') == 'candidate_access'), None)
-            if absence is None or absence.observed != {
-                    'definition_digest': content_digest(expected), 'candidate_available': False}:
-                raise ConfigurationError('normal host intervention absence differs')
+            require_candidate_access(repository, boundary, expected, available=False)
+        require_dynamic_candidate_target(specs[role], boundary, expected,
+                                         available=role == plan.candidate_id)
+        target = specs[role].managed_host_config().invocation
+        if target is None:
+            raise ConfigurationError('three-way supporting skill profile is missing')
+        supporting_skills[role] = target.supporting_skills
         identities[role] = boundary.identity_digest
         selected.append(specs[role])
+    shared = {skill.path: skill for skill in supporting_skills[plan.baseline_id]}
+    normal = {skill.path: skill for skill in supporting_skills[experiment.normal_host.executor_id]}
+    if (supporting_skills[plan.candidate_id] != supporting_skills[plan.baseline_id]
+            or any(shared.get(path) != skill for path, skill in normal.items())
+            or any(access.external_candidate_inventory.get('skill:' + skill.name) != skill.sha256
+                   for path, skill in shared.items() if path not in normal)):
+        raise ConfigurationError('three-way omitted supports require exact external discovery skill bindings')
     # Validates current source, actual configured immutable worker, binary, config,
     # reviewed enforcement and every execution-backed probe for all three roles.
     require_managed_boundaries(repository, environment, selected, identities)

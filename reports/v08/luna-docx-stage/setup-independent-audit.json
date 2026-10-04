@@ -1,0 +1,137 @@
+{
+  "schema_version": "assessment.docx-image-setup-independent-audit.v1",
+  "verdict": "pass_with_fresh_run_hardening_note",
+  "read_only_audit": true,
+  "reviewed_setup_review_sha256": "5f4e2c114948ba0cacc4f254c3b4d9bb82b3b80c7ff55c89d0bb592019d75d9d",
+  "setup_result_sha256": "96c4f2a9285b05d7646608ea27d345ec25eabb289d1206b5903d7cb853dc4040",
+  "source_digest": {
+    "expected": "060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293",
+    "result": "060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293",
+    "unchanged": true
+  },
+  "authorization_guard": {
+    "optimized_wrong_review_hash_test": "rejected before start marker, grant mutation, or download",
+    "observed": {
+      "exit_code": 1,
+      "failure": "RuntimeError: exact review hash required",
+      "setup_started_marker_present": false,
+      "grant_counters_unchanged": true,
+      "downloaded_files": []
+    },
+    "accepted_review_sha256": "5f4e2c114948ba0cacc4f254c3b4d9bb82b3b80c7ff55c89d0bb592019d75d9d"
+  },
+  "operation": {
+    "id": "conformance_probe_647794442d494ec0a83192e20ddca1af:skillsbench_docx_image_setup",
+    "state": "complete",
+    "start_record_digest": "66770a80d02551f91370e6758b2ad1c9ce9cc6b9ee14c8c8fd45b17465d7ece0",
+    "measurement_record_digest": "2a8adaed64506c85bcee3b5053c3bc505b7be9de334190b0c8fb8db97e3bb2d7",
+    "reserved": {
+      "operations": 1,
+      "model_turns": 0,
+      "elapsed_seconds": 600,
+      "cash_usd": "0"
+    },
+    "measured_elapsed_seconds": 73.80988745810464,
+    "model_turns": 0,
+    "cash_usd": "0",
+    "grant_revoked": false
+  },
+  "grant_counters": {
+    "before": {
+      "operations": 8684,
+      "model_turns": 2546,
+      "elapsed_seconds": 75265.82207736,
+      "cash_usd": "0.0"
+    },
+    "after": {
+      "operations": 8685,
+      "model_turns": 2546,
+      "elapsed_seconds": 75339.63196481811,
+      "cash_usd": "0.0"
+    },
+    "delta": {
+      "operations": 1,
+      "model_turns": 0,
+      "elapsed_seconds": 73.80988745811,
+      "cash_usd": "0.0"
+    }
+  },
+  "build": {
+    "complete": true,
+    "download_bytes": 5049844,
+    "pull": false,
+    "build_network": "none",
+    "platform": "linux/arm64",
+    "base_image_id": "sha256:85fa95d74a3124ea35015e747645fe85be03277bee04598675928a822987532d",
+    "images": [
+      {
+        "role": "control",
+        "tag": "aeep-skillsbench-docx-control:luna-xhigh-20261002",
+        "image_id": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "repo_digest": "aeep-skillsbench-docx-control@sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "runtime_user": "65534:65534"
+      },
+      {
+        "role": "treatment",
+        "tag": "aeep-skillsbench-docx-treatment:luna-xhigh-20261002",
+        "image_id": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "repo_digest": "aeep-skillsbench-docx-treatment@sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "runtime_user": "65534:65534"
+      }
+    ],
+    "metadata_check": "Both images are linux/arm64; Docker RootFS metadata has an identical 24-layer prefix, with treatment adding two layers for the pinned skill and alias.",
+    "worker_or_model_started": false,
+    "runtime_containers_active_before_and_after": 0,
+    "cleanup_performed": false,
+    "images_and_build_cache_preserved": true,
+    "candidate_cpu_and_memory_usage": {
+      "cpu_ms": null,
+      "memory_bytes": null,
+      "status": "unmeasured"
+    }
+  },
+  "storage": {
+    "approved_capacity_measure": "NSURLVolumeAvailableCapacityForImportantUsageKey",
+    "important_usage_bytes_before": 232640750446,
+    "important_usage_bytes_after": 231820571502,
+    "required_floor_bytes": 53687091200,
+    "setup_allowance_bytes": 3000000000,
+    "important_usage_floor_including_allowance_bytes": 56687091200,
+    "important_usage_capacity_remaining_above_floor_bytes": 175133480302,
+    "ordinary_disk_free_bytes_before": 47996137472,
+    "ordinary_disk_free_bytes_after": 47174828032,
+    "ordinary_disk_free_delta_bytes": 821309440,
+    "raw_growth_limit_bytes": 3000000000,
+    "raw_growth_within_limit": true,
+    "interpretation": "Foundation important-usage capacity was the accepted reserve basis; ordinary df free bytes are reported separately and were already below 50 GiB before setup. Do not describe the raw df value as meeting a 50 GiB reserve.",
+    "docker_system_df_before": {
+      "images_count": 169,
+      "images_logical_gb": 35.94,
+      "build_cache_count": 356,
+      "build_cache_logical_gb": 15.72,
+      "active_containers": 0
+    },
+    "docker_system_df_after": {
+      "images_count": 171,
+      "images_logical_gb": 35.97,
+      "build_cache_count": 362,
+      "build_cache_logical_gb": 15.76,
+      "active_containers": 0
+    },
+    "physical_reclaim_or_unique_layer_bytes": "unknown"
+  },
+  "fresh_run_hardening_note": {
+    "finding": "The current download stage checks the 600-second deadline after each 256 KiB read while each urllib socket operation can block up to 30 seconds. A slow-trickle response in a future fresh run could cross the reservation ceiling before the next deadline check; repository accounting revokes the grant if measured elapsed exceeds the 600-second reservation.",
+    "current_run_impact": "No overrun occurred: all three verified wheel downloads completed within seconds and the setup completed in 73.809887 seconds.",
+    "next_fresh_run": "Before any fresh retry/new setup, use one absolute deadline or shorter work deadline with finalization margin and remaining-time-bounded network/build waits. Do not rerun this completed setup or remove its wheels, images, logs, markers, database evidence, or build cache."
+  },
+  "claim_boundary": "Image setup only. These images still require the separately reviewed fresh paired inspection and any later conformance/trial gates; build success is not worker conformance, candidate benefit, qualification or admission.",
+  "audit_actions": {
+    "source_edits": false,
+    "builds": false,
+    "containers_started": false,
+    "models": false,
+    "authentication_access": false,
+    "canonical_database_writes": false
+  }
+}

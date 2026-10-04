@@ -1,0 +1,76 @@
+{
+  "actual_cash_cost_usd": null,
+  "adapter_id": "codex-app-server:b-luna-discovery",
+  "capacity": {
+    "canonical_digest": "sha256:fbaf193b9ea393ba126f7cd9548ea95de5f224dac401db6d77426f13bc6a9df1",
+    "observation_id": "capacity_48983ebd921b4fad96a41b4e632401ea",
+    "observed_at": "2026-10-03T09:52:11.686712Z",
+    "redacted_provider_metadata": {
+      "reset_credits_available": 3
+    },
+    "resource_id": "codex.self",
+    "source": "codex_app_server",
+    "windows": [
+      {
+        "allowance": null,
+        "confidence": 0.95,
+        "duration_seconds": 604800,
+        "evidence": [
+          {
+            "confidence": 0.95,
+            "evidence_id": "capacity-evidence_9c090840385d48fba53b1e4587c83553",
+            "observed_at": "2026-10-03T09:52:11.686538Z",
+            "source": "codex_app_server_rate_limits",
+            "source_digest": "sha256:1f812cbc30bfc45c49c21e1c988562bdf150c8879de29d888b8243be30871a19"
+          }
+        ],
+        "exhausted": false,
+        "hard_limit": true,
+        "remaining": null,
+        "reset_at": "2026-10-09T21:13:21Z",
+        "unit": "provider_unit",
+        "used_percent": "40",
+        "window_id": "codex:primary"
+      }
+    ]
+  },
+  "capacity_digest": "sha256:fbaf193b9ea393ba126f7cd9548ea95de5f224dac401db6d77426f13bc6a9df1",
+  "capacity_max_age_seconds": 1800,
+  "cash_ceiling_usd": 0,
+  "cleanup_confirmed": true,
+  "component_execution_evidence_digest": "cab5c4072b3a20ae2248d2a0ed9c9a9a94f0ad8e94dbea518174f3fc5eb02adb",
+  "component_identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+  "component_request_id": "conformance_probe_6be2797fa71d4134ba4b1611ee460ab7",
+  "component_result_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-worker-components-v2-result.json",
+  "component_result_sha256": "0552cf86620985194c5bd9d1252e88819667730ff9004efc1b82510b98696379",
+  "container_name": "aeep-d34bd34625583f2cb785a4d8cdc7796b",
+  "definition_digest": "6160bbf60f0665e456192ae13fb9360952eac6e3856a843c076056e5202326ce",
+  "elapsed_seconds": 2.9390529999509454,
+  "error_type": null,
+  "execution_evidence_digest": null,
+  "executor_id": "b.luna.discovery",
+  "host_receipt_applicable": false,
+  "host_receipt_digest": null,
+  "max_model_turns_reserved": 0,
+  "max_operations_reserved": 1,
+  "method": "account/rateLimits/read",
+  "model_turns": 0,
+  "operation_id": "capacity:planning_b_control_capacity_449b_e15b7ee0",
+  "operation_measurement_digest": "1e486cc5c0ad4b44f2e08ab86743c35480384ffa879a63a2154286e97992ef02",
+  "operation_start_digest": "ea869c7d284f43a8618c47fd1d915bf37712955ed57c5338b93f8f79e162519d",
+  "plan_id": "planning_b_control_capacity_449b_e15b7ee0",
+  "profile_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-current-profile-v2.json",
+  "profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+  "proxy_lifecycle_owned_here": false,
+  "replay_allowed": false,
+  "request_digest": "7f7d3717338724b111c88be5157725c45012bd1e012e7684d48dac1dd60cd686",
+  "role": "control",
+  "schema_version": "aeep.capacity-refresh-result.v1",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "source_unchanged": true,
+  "stage": "capacity_introspection",
+  "status": "passed",
+  "subscription_usage": "unknown; not read by this operation",
+  "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345",
+  "worker_process_id": "host-worker_3346889137ac40b0ae6d4cf79cea92f1"
+}

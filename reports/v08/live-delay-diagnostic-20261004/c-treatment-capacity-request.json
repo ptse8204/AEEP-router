@@ -1,0 +1,1219 @@
+{
+  "definition": {
+    "adapter_id": "codex-app-server:b-luna-aeep",
+    "auth_state_access": false,
+    "base_request_digest": "6556562eb81609a33bff2e6b3f0cf900427297183f1fd5a5211e1094f66c5085",
+    "cash_ceiling_usd": 0,
+    "component_result_sha256": "0481cefd577e9251fb918d9cdd6a86d1ae6e146a1d89fe63e6bcb4177788aa75",
+    "executor_id": "b.luna.aeep",
+    "max_age_seconds": 1800,
+    "maximum_elapsed_seconds": 60,
+    "maximum_model_turns": 0,
+    "maximum_operations": 1,
+    "method": "account/rateLimits/read",
+    "prepare_script_sha256": "c8914783c1cd3266a39b17cbe919250a0c8e463e88f1139192beaf5a91c59ea3",
+    "profile_sha256": "ac096d106954d86433f4743333ac7004765a9dbc2db229c9fbecc5efa3db2eb8",
+    "proxy_lifecycle_owned_here": false,
+    "resource_id": "codex.self",
+    "runner_sha256": "01e6f643aa144ef1e86cde59438127b4b20e961b9ff1b384ce6e0933d03a0d75",
+    "schema_version": "aeep.capacity-refresh-definition.v1",
+    "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+    "task_turn": false,
+    "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+  },
+  "definition_digest": "e44998e97ba5ab9424a37d667f8e301b3160f523316531f04d472aed43dcf959",
+  "operation_id": "capacity:planning_delay_capacity_e6b71a_19027f56_20261004",
+  "request": {
+    "authorization_id": "onboarding",
+    "definition_digests": [
+      "9cf8ae7d4a66a05197fa670ec1b9bd2017fa571cba8d2ede0cd344772d29917f",
+      "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+      "f95efb06248457ef9f72b31420fd1a58914512569fa534af29346da03e551e4e",
+      "6c5465f7b406cdcaaeb8405ef3d9cb020852389c50af47f5ec790936e5a11c11",
+      "5e3b4a16902658cc4cc467f92ae389cd957b4ea837c1bc22d95d1d9b6759097a",
+      "bf500fb25b63f78d735fabaf85e1f6ac9ad5ae3e91411fb98f709b805beb225f",
+      "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4",
+      "ae12b5260d6d902a4c588436b59f84d75f9d551def0eda468c7b56a0dcdd4fe9",
+      "8772aeacf85b58114dc1baad843f4da03d40560eae6ec18459bcd887c1a29389",
+      "63df65e0b1337002f50cbcbf2af2d5c70bf4429c7d6fe9258e4dc54ad9cbbfcd",
+      "3e516c144f7cf2177e02c00570c4412c13e34d938138c63a2ae923e922f0bfef",
+      "5cdf3e78d00a4daff2add9897ffa88810ad887cb640a95b5fb69a751ed542ca8",
+      "9dcbc2d1477e041639f655276db2d4af60c71b5d058ea592bf93fb3b4ffdcd9b",
+      "1417b4e5d9e325311cca66713f85f66867d6042da5e2f6444c3457ac9e129892",
+      "2464cb7485a07ee270c8d03da0044ef04482b8616d9d3efd2c7358a1c6949d2e",
+      "70466079a0ed9122540132eaf80b4169c312b82ccbf4b42a7b269c210c8cb1df",
+      "d3dde55618bca938e2f4d68e7c45def006efe9a899791059717363200fc211ce",
+      "dbf8f1e5be01ed9659a02c96a6066d94e4462c234859c2537a03849759e88458",
+      "e2a14716e988c3db385e97d4831e301f4fcc0b5e0c36e90923ff05b8ee102aa9",
+      "4ab1ef9812cffb7040c3d6f6217e825eaee3eab8f12d1df85a8373d074ba2ec9",
+      "e44998e97ba5ab9424a37d667f8e301b3160f523316531f04d472aed43dcf959"
+    ],
+    "environment_digest": "f95efb06248457ef9f72b31420fd1a58914512569fa534af29346da03e551e4e",
+    "executable_dependencies": {
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-current-profile-v2.json": "ac096d106954d86433f4743333ac7004765a9dbc2db229c9fbecc5efa3db2eb8",
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-prepare-treatment-capacity-v1.py": "c8914783c1cd3266a39b17cbe919250a0c8e463e88f1139192beaf5a91c59ea3",
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-run-treatment-capacity-v1.py": "01e6f643aa144ef1e86cde59438127b4b20e961b9ff1b384ce6e0933d03a0d75",
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-worker-components-execution-review-v2.json": "a3b1f07b210c299cd5edd96c20fb4f086960a41b00659a9d4649189b01dfd3c0",
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-worker-components-preparation-v2.json": "f8cf01401f228e9cf42260454208f9015dcfeb46382f0ffcf215acbccae58b41",
+      "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/c-worker-components-result-v2.json": "0481cefd577e9251fb918d9cdd6a86d1ae6e146a1d89fe63e6bcb4177788aa75",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/models.py": "cdb0c89e2edb4d498b4aedc3ec075a373c741acd3dd695f6e2e1c5456854435e",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/assessment/verification.py": "bbd76de1661bfa0364f0d2d6b1221d9ae4b3abc76462704e9f5bdd90ce1c223c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/capacity/models.py": "ce4c7e29f45c8e8cfe84452861c21a809f9c9edabc120e5004b6fa1babeae22c",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_accounting.py": "9820372959a1ca8f202f7b7190eb9a543121fb56508f7caaf047e63d7687df42",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_app_server.py": "8e58c0e98afe4cbf9f965ecf247fa92629e384e86c0ab40a6c415f11a5f18067",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/codex_pair_inspection.py": "c844117db10e618014007c19df3c65f5aa0a69c5e23678904227474d7e3deec3",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/router.py": "09f06eb8541d0026e19cd8a11fadfea2cd1c8f0662ad9f10444537e1e701286b",
+      "/Users/edwintse/Documents/aeep-agent-router/src/aeep/store.py": "82ca2a3934eb6a5e8a14e440f68ec9f8e34d0e8ab89d572aa71805cdba36e75f"
+    },
+    "mapping_digest": "e44998e97ba5ab9424a37d667f8e301b3160f523316531f04d472aed43dcf959",
+    "plan_id": "planning_delay_capacity_e6b71a_19027f56_20261004",
+    "planner": {
+      "capability": "assessment.workbook@1",
+      "config": {
+        "adapter_id": "codex-app-server:b-luna-aeep",
+        "adapter_options": {
+          "experimental_api": true
+        },
+        "approval_ceiling": "read",
+        "argv": [
+          "/opt/codex/codex",
+          "app-server"
+        ],
+        "artifact": {
+          "input_field": "workbook_b64",
+          "input_name": "input.xlsx",
+          "max_bytes": 150000,
+          "output_field": "workbook_b64",
+          "output_name": "output.xlsx"
+        },
+        "environment_allowlist": [],
+        "executable_sha256": null,
+        "instructions": "Complete the workbook task described in {input}. Read the supplied input workbook and write the requested output workbook. You may use available local tools, skills or workbook helpers as useful. Preserve the content required by the task. Return only {\"completed\": true} once the output workbook is written and checked, or {\"completed\": false} if you cannot complete the task. Do not include workbook bytes or base64 in your final answer.",
+        "invocation": {
+          "dynamic_tools_digest": "ae12b5260d6d902a4c588436b59f84d75f9d551def0eda468c7b56a0dcdd4fe9",
+          "exposure": "required",
+          "local_profile": "capable_local",
+          "mode": "dynamic_tool",
+          "native_catalog": false,
+          "server": "workbook",
+          "skill_name": null,
+          "skill_path": null,
+          "skill_sha256": null,
+          "supporting_skills": [
+            {
+              "name": "spreadsheets:Spreadsheets",
+              "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+              "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+            }
+          ],
+          "tool": "aeep_recipe_f468b36bc594",
+          "tool_sha256": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+        },
+        "managed_worker": {
+          "binary": "/opt/codex/codex",
+          "binary_sha256": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+          "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+          "cpu_count": 1.0,
+          "credential_volume": "aeep-auth-incremental-treatment",
+          "dependencies_digest": "3f1569c2846d110614374ac5e2fe173f11c5c12c8ac1c0723ce1e6e52aae00c9",
+          "image": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+          "memory_mb": 1024,
+          "model_proxy_url": "http://172.18.0.2:3128",
+          "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+          "permissions_profile": "aeep",
+          "platform": "linux/arm64",
+          "process_limit": 64,
+          "reviewed_files": {
+            "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+          },
+          "runtime": "/usr/local/bin/docker",
+          "schema_version": "execution.worker.v2",
+          "seccomp_profile": {
+            "archMap": [
+              {
+                "architecture": "SCMP_ARCH_X86_64",
+                "subArchitectures": [
+                  "SCMP_ARCH_X86",
+                  "SCMP_ARCH_X32"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_AARCH64",
+                "subArchitectures": [
+                  "SCMP_ARCH_ARM"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_MIPS64",
+                "subArchitectures": [
+                  "SCMP_ARCH_MIPS",
+                  "SCMP_ARCH_MIPS64N32"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_MIPS64N32",
+                "subArchitectures": [
+                  "SCMP_ARCH_MIPS",
+                  "SCMP_ARCH_MIPS64"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_MIPSEL64",
+                "subArchitectures": [
+                  "SCMP_ARCH_MIPSEL",
+                  "SCMP_ARCH_MIPSEL64N32"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_MIPSEL64N32",
+                "subArchitectures": [
+                  "SCMP_ARCH_MIPSEL",
+                  "SCMP_ARCH_MIPSEL64"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_S390X",
+                "subArchitectures": [
+                  "SCMP_ARCH_S390"
+                ]
+              },
+              {
+                "architecture": "SCMP_ARCH_RISCV64",
+                "subArchitectures": null
+              },
+              {
+                "architecture": "SCMP_ARCH_LOONGARCH64",
+                "subArchitectures": null
+              }
+            ],
+            "defaultAction": "SCMP_ACT_ERRNO",
+            "defaultErrnoRet": 1,
+            "syscalls": [
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "names": [
+                  "accept",
+                  "accept4",
+                  "access",
+                  "adjtimex",
+                  "alarm",
+                  "bind",
+                  "brk",
+                  "cachestat",
+                  "capget",
+                  "capset",
+                  "chdir",
+                  "chmod",
+                  "chown",
+                  "chown32",
+                  "clock_adjtime",
+                  "clock_adjtime64",
+                  "clock_getres",
+                  "clock_getres_time64",
+                  "clock_gettime",
+                  "clock_gettime64",
+                  "clock_nanosleep",
+                  "clock_nanosleep_time64",
+                  "close",
+                  "close_range",
+                  "connect",
+                  "copy_file_range",
+                  "creat",
+                  "dup",
+                  "dup2",
+                  "dup3",
+                  "epoll_create",
+                  "epoll_create1",
+                  "epoll_ctl",
+                  "epoll_ctl_old",
+                  "epoll_pwait",
+                  "epoll_pwait2",
+                  "epoll_wait",
+                  "epoll_wait_old",
+                  "eventfd",
+                  "eventfd2",
+                  "execve",
+                  "execveat",
+                  "exit",
+                  "exit_group",
+                  "faccessat",
+                  "faccessat2",
+                  "fadvise64",
+                  "fadvise64_64",
+                  "fallocate",
+                  "fanotify_mark",
+                  "fchdir",
+                  "fchmod",
+                  "fchmodat",
+                  "fchmodat2",
+                  "fchown",
+                  "fchown32",
+                  "fchownat",
+                  "fcntl",
+                  "fcntl64",
+                  "fdatasync",
+                  "fgetxattr",
+                  "flistxattr",
+                  "flock",
+                  "fork",
+                  "fremovexattr",
+                  "fsetxattr",
+                  "fstat",
+                  "fstat64",
+                  "fstatat64",
+                  "fstatfs",
+                  "fstatfs64",
+                  "fsync",
+                  "ftruncate",
+                  "ftruncate64",
+                  "futex",
+                  "futex_requeue",
+                  "futex_time64",
+                  "futex_wait",
+                  "futex_waitv",
+                  "futex_wake",
+                  "futimesat",
+                  "getcpu",
+                  "getcwd",
+                  "getdents",
+                  "getdents64",
+                  "getegid",
+                  "getegid32",
+                  "geteuid",
+                  "geteuid32",
+                  "getgid",
+                  "getgid32",
+                  "getgroups",
+                  "getgroups32",
+                  "getitimer",
+                  "getpeername",
+                  "getpgid",
+                  "getpgrp",
+                  "getpid",
+                  "getppid",
+                  "getpriority",
+                  "getrandom",
+                  "getresgid",
+                  "getresgid32",
+                  "getresuid",
+                  "getresuid32",
+                  "getrlimit",
+                  "get_robust_list",
+                  "getrusage",
+                  "getsid",
+                  "getsockname",
+                  "getsockopt",
+                  "get_thread_area",
+                  "gettid",
+                  "gettimeofday",
+                  "getuid",
+                  "getuid32",
+                  "getxattr",
+                  "getxattrat",
+                  "inotify_add_watch",
+                  "inotify_init",
+                  "inotify_init1",
+                  "inotify_rm_watch",
+                  "io_cancel",
+                  "ioctl",
+                  "io_destroy",
+                  "io_getevents",
+                  "io_pgetevents",
+                  "io_pgetevents_time64",
+                  "ioprio_get",
+                  "ioprio_set",
+                  "io_setup",
+                  "io_submit",
+                  "ipc",
+                  "kill",
+                  "landlock_add_rule",
+                  "landlock_create_ruleset",
+                  "landlock_restrict_self",
+                  "lchown",
+                  "lchown32",
+                  "lgetxattr",
+                  "link",
+                  "linkat",
+                  "listen",
+                  "listmount",
+                  "listxattr",
+                  "listxattrat",
+                  "llistxattr",
+                  "_llseek",
+                  "lremovexattr",
+                  "lseek",
+                  "lsetxattr",
+                  "lstat",
+                  "lstat64",
+                  "madvise",
+                  "map_shadow_stack",
+                  "membarrier",
+                  "memfd_create",
+                  "memfd_secret",
+                  "mincore",
+                  "mkdir",
+                  "mkdirat",
+                  "mknod",
+                  "mknodat",
+                  "mlock",
+                  "mlock2",
+                  "mlockall",
+                  "mmap",
+                  "mmap2",
+                  "mprotect",
+                  "mq_getsetattr",
+                  "mq_notify",
+                  "mq_open",
+                  "mq_timedreceive",
+                  "mq_timedreceive_time64",
+                  "mq_timedsend",
+                  "mq_timedsend_time64",
+                  "mq_unlink",
+                  "mremap",
+                  "mseal",
+                  "msgctl",
+                  "msgget",
+                  "msgrcv",
+                  "msgsnd",
+                  "msync",
+                  "munlock",
+                  "munlockall",
+                  "munmap",
+                  "name_to_handle_at",
+                  "nanosleep",
+                  "newfstatat",
+                  "_newselect",
+                  "open",
+                  "openat",
+                  "openat2",
+                  "pause",
+                  "pidfd_open",
+                  "pidfd_send_signal",
+                  "pipe",
+                  "pipe2",
+                  "pkey_alloc",
+                  "pkey_free",
+                  "pkey_mprotect",
+                  "poll",
+                  "ppoll",
+                  "ppoll_time64",
+                  "prctl",
+                  "pread64",
+                  "preadv",
+                  "preadv2",
+                  "prlimit64",
+                  "process_mrelease",
+                  "pselect6",
+                  "pselect6_time64",
+                  "pwrite64",
+                  "pwritev",
+                  "pwritev2",
+                  "read",
+                  "readahead",
+                  "readlink",
+                  "readlinkat",
+                  "readv",
+                  "recv",
+                  "recvfrom",
+                  "recvmmsg",
+                  "recvmmsg_time64",
+                  "recvmsg",
+                  "remap_file_pages",
+                  "removexattr",
+                  "removexattrat",
+                  "rename",
+                  "renameat",
+                  "renameat2",
+                  "restart_syscall",
+                  "riscv_hwprobe",
+                  "rmdir",
+                  "rseq",
+                  "rt_sigaction",
+                  "rt_sigpending",
+                  "rt_sigprocmask",
+                  "rt_sigqueueinfo",
+                  "rt_sigreturn",
+                  "rt_sigsuspend",
+                  "rt_sigtimedwait",
+                  "rt_sigtimedwait_time64",
+                  "rt_tgsigqueueinfo",
+                  "sched_getaffinity",
+                  "sched_getattr",
+                  "sched_getparam",
+                  "sched_get_priority_max",
+                  "sched_get_priority_min",
+                  "sched_getscheduler",
+                  "sched_rr_get_interval",
+                  "sched_rr_get_interval_time64",
+                  "sched_setaffinity",
+                  "sched_setattr",
+                  "sched_setparam",
+                  "sched_setscheduler",
+                  "sched_yield",
+                  "seccomp",
+                  "select",
+                  "semctl",
+                  "semget",
+                  "semop",
+                  "semtimedop",
+                  "semtimedop_time64",
+                  "send",
+                  "sendfile",
+                  "sendfile64",
+                  "sendmmsg",
+                  "sendmsg",
+                  "sendto",
+                  "setfsgid",
+                  "setfsgid32",
+                  "setfsuid",
+                  "setfsuid32",
+                  "setgid",
+                  "setgid32",
+                  "setgroups",
+                  "setgroups32",
+                  "setitimer",
+                  "setpgid",
+                  "setpriority",
+                  "setregid",
+                  "setregid32",
+                  "setresgid",
+                  "setresgid32",
+                  "setresuid",
+                  "setresuid32",
+                  "setreuid",
+                  "setreuid32",
+                  "setrlimit",
+                  "set_robust_list",
+                  "setsid",
+                  "setsockopt",
+                  "set_thread_area",
+                  "set_tid_address",
+                  "setuid",
+                  "setuid32",
+                  "setxattr",
+                  "setxattrat",
+                  "shmat",
+                  "shmctl",
+                  "shmdt",
+                  "shmget",
+                  "shutdown",
+                  "sigaltstack",
+                  "signalfd",
+                  "signalfd4",
+                  "sigprocmask",
+                  "sigreturn",
+                  "socketcall",
+                  "socketpair",
+                  "splice",
+                  "stat",
+                  "stat64",
+                  "statfs",
+                  "statfs64",
+                  "statmount",
+                  "statx",
+                  "symlink",
+                  "symlinkat",
+                  "sync",
+                  "sync_file_range",
+                  "syncfs",
+                  "sysinfo",
+                  "tee",
+                  "tgkill",
+                  "time",
+                  "timer_create",
+                  "timer_delete",
+                  "timer_getoverrun",
+                  "timer_gettime",
+                  "timer_gettime64",
+                  "timer_settime",
+                  "timer_settime64",
+                  "timerfd_create",
+                  "timerfd_gettime",
+                  "timerfd_gettime64",
+                  "timerfd_settime",
+                  "timerfd_settime64",
+                  "times",
+                  "tkill",
+                  "truncate",
+                  "truncate64",
+                  "ugetrlimit",
+                  "umask",
+                  "uname",
+                  "unlink",
+                  "unlinkat",
+                  "uretprobe",
+                  "utime",
+                  "utimensat",
+                  "utimensat_time64",
+                  "utimes",
+                  "vfork",
+                  "vmsplice",
+                  "wait4",
+                  "waitid",
+                  "waitpid",
+                  "write",
+                  "writev"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "minKernel": "4.8"
+                },
+                "names": [
+                  "process_vm_readv",
+                  "process_vm_writev",
+                  "ptrace"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_LT",
+                    "value": 38
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 39
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 41
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 42
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 43
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 44
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 45
+                  }
+                ],
+                "names": [
+                  "socket"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 0
+                  }
+                ],
+                "names": [
+                  "personality"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 8
+                  }
+                ],
+                "names": [
+                  "personality"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 131072
+                  }
+                ],
+                "names": [
+                  "personality"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 131080
+                  }
+                ],
+                "names": [
+                  "personality"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_EQ",
+                    "value": 4294967295
+                  }
+                ],
+                "names": [
+                  "personality"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "ppc64le"
+                  ]
+                },
+                "names": [
+                  "sync_file_range2",
+                  "swapcontext"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "arm",
+                    "arm64"
+                  ]
+                },
+                "names": [
+                  "arm_fadvise64_64",
+                  "arm_sync_file_range",
+                  "sync_file_range2",
+                  "breakpoint",
+                  "cacheflush",
+                  "set_tls"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "amd64",
+                    "x32"
+                  ]
+                },
+                "names": [
+                  "arch_prctl"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "amd64",
+                    "x32",
+                    "x86"
+                  ]
+                },
+                "names": [
+                  "modify_ldt"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "s390",
+                    "s390x"
+                  ]
+                },
+                "names": [
+                  "s390_pci_mmio_read",
+                  "s390_pci_mmio_write",
+                  "s390_runtime_instr"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "arches": [
+                    "riscv64"
+                  ]
+                },
+                "names": [
+                  "riscv_flush_icache"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_DAC_READ_SEARCH"
+                  ]
+                },
+                "names": [
+                  "open_by_handle_at"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_ADMIN"
+                  ]
+                },
+                "names": [
+                  "bpf",
+                  "clone",
+                  "clone3",
+                  "fanotify_init",
+                  "fsconfig",
+                  "fsmount",
+                  "fsopen",
+                  "fspick",
+                  "lookup_dcookie",
+                  "lsm_get_self_attr",
+                  "lsm_list_modules",
+                  "lsm_set_self_attr",
+                  "mount",
+                  "mount_setattr",
+                  "move_mount",
+                  "open_tree",
+                  "perf_event_open",
+                  "quotactl",
+                  "quotactl_fd",
+                  "setdomainname",
+                  "sethostname",
+                  "setns",
+                  "syslog",
+                  "umount",
+                  "umount2",
+                  "unshare"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_MASKED_EQ",
+                    "value": 2114060288
+                  }
+                ],
+                "excludes": {
+                  "arches": [
+                    "s390",
+                    "s390x"
+                  ],
+                  "caps": [
+                    "CAP_SYS_ADMIN"
+                  ]
+                },
+                "names": [
+                  "clone"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 1,
+                    "op": "SCMP_CMP_MASKED_EQ",
+                    "value": 2114060288
+                  }
+                ],
+                "comment": "s390 parameter ordering for clone is different",
+                "excludes": {
+                  "caps": [
+                    "CAP_SYS_ADMIN"
+                  ]
+                },
+                "includes": {
+                  "arches": [
+                    "s390",
+                    "s390x"
+                  ]
+                },
+                "names": [
+                  "clone"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ERRNO",
+                "errnoRet": 38,
+                "excludes": {
+                  "caps": [
+                    "CAP_SYS_ADMIN"
+                  ]
+                },
+                "names": [
+                  "clone3"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_BOOT"
+                  ]
+                },
+                "names": [
+                  "reboot"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_CHROOT"
+                  ]
+                },
+                "names": [
+                  "chroot"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_MODULE"
+                  ]
+                },
+                "names": [
+                  "delete_module",
+                  "init_module",
+                  "finit_module"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_PACCT"
+                  ]
+                },
+                "names": [
+                  "acct"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_PTRACE"
+                  ]
+                },
+                "names": [
+                  "kcmp",
+                  "pidfd_getfd",
+                  "process_madvise",
+                  "process_vm_readv",
+                  "process_vm_writev",
+                  "ptrace"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_RAWIO"
+                  ]
+                },
+                "names": [
+                  "iopl",
+                  "ioperm"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_TIME"
+                  ]
+                },
+                "names": [
+                  "settimeofday",
+                  "stime",
+                  "clock_settime",
+                  "clock_settime64"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_TTY_CONFIG"
+                  ]
+                },
+                "names": [
+                  "vhangup"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYS_NICE"
+                  ]
+                },
+                "names": [
+                  "get_mempolicy",
+                  "mbind",
+                  "set_mempolicy",
+                  "set_mempolicy_home_node"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_SYSLOG"
+                  ]
+                },
+                "names": [
+                  "syslog"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_BPF"
+                  ]
+                },
+                "names": [
+                  "bpf"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "includes": {
+                  "caps": [
+                    "CAP_PERFMON"
+                  ]
+                },
+                "names": [
+                  "perf_event_open"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "names": [
+                  "unshare",
+                  "mount",
+                  "umount2",
+                  "pivot_root",
+                  "sethostname",
+                  "setdomainname",
+                  "setns"
+                ]
+              },
+              {
+                "action": "SCMP_ACT_ALLOW",
+                "args": [
+                  {
+                    "index": 0,
+                    "op": "SCMP_CMP_MASKED_EQ",
+                    "value": 268435456,
+                    "valueTwo": 268435456
+                  }
+                ],
+                "names": [
+                  "clone"
+                ]
+              }
+            ]
+          },
+          "socket": "/Users/edwintse/.docker/run/docker.sock",
+          "worker_id": "b-luna-aeep-20261003"
+        },
+        "max_message_bytes": 16777216,
+        "model_constraints": {
+          "allowed_model_ids": [
+            "gpt-6-luna"
+          ],
+          "minimum_context_tokens": null,
+          "required_capabilities": []
+        },
+        "output_mode": "json",
+        "reasoning_efforts": [
+          "xhigh"
+        ],
+        "redaction_policy": "default",
+        "sandbox_policy": "workspace_write",
+        "store_output": false,
+        "store_prompt": false,
+        "timeout_seconds": 203.0,
+        "working_directory": null,
+        "working_directory_policy": "inherit"
+      },
+      "data_residency": [],
+      "description": "Unapproved workbook timing pilot treatment",
+      "enabled": false,
+      "estimate": {
+        "cash": {
+          "amount_usd": "0.0",
+          "evidence": {
+            "digest": null,
+            "evidence_id": null,
+            "observed_at": null,
+            "source": "static_estimate",
+            "source_reference": null,
+            "status": "complete",
+            "trust": "self_asserted"
+          },
+          "upper_bound_usd": "0.0"
+        },
+        "confidence": 0.5,
+        "quality_score": 0.95,
+        "resources": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "context_tokens": 0,
+          "cpu_ms": 0.0,
+          "gpu_ms": 0.0,
+          "input_tokens": 0,
+          "latency_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "monetary_usd": 0.0,
+          "network_bytes": 0,
+          "output_tokens": 0,
+          "peak_memory_mb": 0.0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "risk_score": 0.05,
+        "sample_size": 0,
+        "source": "static",
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "uncertainty": null
+      },
+      "id": "b.luna.aeep",
+      "idempotent": true,
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "row_bound": {
+            "maximum": 32,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "task": {
+            "const": "Clean Data rows: preserve first occurrence of each ID; discard rows with invalid numeric quantity/price; missing numbers become zero. Preserve order and ID text. Normalize dates to YYYY-MM-DD text. Set Amount to a relative Quantity*Price formula on every retained row. Write Summary!A1=\"Total\" and Summary!B1=SUM(Data!E2:E<last-row>). Preserve other sheets and their values. Keep all Data header cells bold. Save an XLSX with recalculated formula caches; return its base64 bytes as workbook_b64. No macros or external links."
+          },
+          "variation": {
+            "enum": [
+              "mixed_types_dates",
+              "missing_invalid",
+              "duplicates",
+              "multiple_sheets",
+              "formulas",
+              "structure_formatting",
+              "unicode_sparse"
+            ]
+          },
+          "workbook_b64": {
+            "maxLength": 200000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "workbook_b64",
+          "task",
+          "variation",
+          "row_bound"
+        ],
+        "type": "object"
+      },
+      "kind": "host_managed",
+      "locality": "local",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "workbook_b64": {
+            "maxLength": 200000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "workbook_b64"
+        ],
+        "type": "object"
+      },
+      "provider_id": null,
+      "requires_network": false,
+      "resource_pool": "codex.self",
+      "safe_to_auto_execute": true,
+      "side_effect": "read",
+      "tags": [],
+      "validators": []
+    },
+    "recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+    "schema_version": "assessment.planning.v1",
+    "subject_digest": "9cf8ae7d4a66a05197fa670ec1b9bd2017fa571cba8d2ede0cd344772d29917f"
+  },
+  "request_digest": "89dbdbead8b8543d6147c525a488d65227ffd0bc8d75b529de81cda22a77f150",
+  "schema_version": "aeep.capacity-refresh-request.v1",
+  "stage": "capacity_introspection"
+}

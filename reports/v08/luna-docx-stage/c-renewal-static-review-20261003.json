@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-10-03T12:09:07.139390+00:00",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "authority": "docs/ASSESSMENT_TESTING.md standing September 25/27 delegation",
+  "files": {
+    "c-current-profile-v1.json": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449",
+    "c-composed-worker-collector-v1.py": "d72e535205b374b5e1df5c2a93f225fb7ef5d1b164f28754f2c66c6830bc251a",
+    "c-prepare-worker-components-v1.py": "087ebb13ca074eb93c105def31eefb927976d16a3a169a6a61410397b1f295ed",
+    "c-run-worker-components-v1.py": "9f559f43b2deda9c6804ba41dd17309a4a6cb5d441e8e54332258030951dc97e",
+    "c-native-component-definitions-control-v1.py": "fe534014a858236472baf0c9e5928341e4f036eb410c8584277362fcf1c1a21f",
+    "c-native-component-definitions-treatment-v1.py": "a38ede5f7272d0d2e368b4566e94174828fa16fdc49779d189e26536dc8c864d",
+    "c-run-native-components-control-v1.py": "3b76ce934073e99fe1ec4af89bfed8c6984ec18d058e45c905538c2ac0421355",
+    "c-run-native-components-treatment-v1.py": "341ccee860bc8be24bae1cb3893a07ea3392694d39e77f551b92b33b6d20c220",
+    "c-qualification-callback-composition.py": "11cd96ce19c11019482664c46461ab7f96ca575539de6f3ee3ad835c20fea060"
+  },
+  "reviewed_changes": [
+    "Preserve B evidence and source-independent worker/native behavior.",
+    "Bind C collectors to fresh source and canonical parent operation start digests.",
+    "Refresh runtime dependency hashes inherited from historical native setup.",
+    "C per-trial qualification composition changes only source/profile pins and labels; native behavior/producer remain exact."
+  ],
+  "checks": [
+    "Root inspected worker/helper diffs",
+    "Agent AST and undefined-name checks passed",
+    "Root native canonical request dependency verification passed for 146 paths per request",
+    "C qualification composition exact profile/native behavior check and Ruff passed"
+  ],
+  "worker_preparation_sha256": "dbe20b7caf643fb6db5fa314bfe2ada5d457987ac02395d330f1fe6039828ecc",
+  "native_prepared_requests": [
+    "conformance_c_native_components_control_50de",
+    "conformance_c_native_components_treatment_50de"
+  ],
+  "grant_counters_unchanged": {
+    "operations": 9250,
+    "model_turns": 2693,
+    "elapsed_seconds": 99016.12943519372,
+    "cash_usd": "0.0"
+  },
+  "runtime_started": false,
+  "approval_status": "Runtime execution reviews pending full software validation",
+  "image_builds": 0,
+  "image_pulls": 0,
+  "credential_access": false
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py", line 684, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py", line 670, in main
+    return _self_check()
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py", line 650, in _self_check
+    raise RuntimeError("self_check_timeout_cleanup_failed "
+                       + json.dumps(diagnostic, sort_keys=True))
+RuntimeError: self_check_timeout_cleanup_failed {"cleanup_issues": [], "cleanup_state": "verified_for_observed_identities", "observed_process_count": 2, "observed_process_states": ["gone", "gone"], "protocol_issue": "non_json_output", "started_record_seen": true, "stop_reason": "child_runtime_deadline"}

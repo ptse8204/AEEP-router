@@ -1,0 +1,156 @@
+{
+  "analysis_mode": "read-only; no retries, model calls, or source changes",
+  "host_progress": {
+    "callback_handler_completed": 1,
+    "callback_rejected": 0,
+    "callback_requested": 1,
+    "callback_response_written": 1,
+    "callback_response_written_elapsed_seconds": 16.043366374913603,
+    "final_message_received": false,
+    "last_event": "item/started",
+    "last_event_elapsed_seconds": 198.46513266698457,
+    "last_item_type": "reasoning",
+    "response_to_last_event_seconds": 182.42176629207097,
+    "response_to_snapshot_seconds": 183.0278689591214,
+    "response_written_semantics": "local pipe drained; it does not establish peer acknowledgement",
+    "snapshot_elapsed_seconds": 199.071235334035,
+    "stage": "awaiting_turn_completion",
+    "turn_completion_received": false
+  },
+  "input_admissibility": {
+    "audit_path": "reports/v08/live-delay-diagnostic-20261004/first-input-domain-audit.json",
+    "fractional_numbers": true,
+    "interpretation": "The fresh input was rejected by the native task validator before output comparison; its child receipt success is executor-level success, not task success.",
+    "native_input_domain": "rejected",
+    "reference_or_output_grader_executed": false
+  },
+  "native_child": {
+    "attempt_id": "attempt_e4db306e54134b23a84c7882e8f60df2",
+    "attempt_terminal_state": "FAILED",
+    "execution_event_kinds": [
+      "execution.started",
+      "execution.completed"
+    ],
+    "execution_evidence_complete": true,
+    "execution_evidence_digest": "a6d7364d0c6dc3858f29137766b325f0f09429cb3137a1db9c55de6c7e4eb76b",
+    "execution_success": true,
+    "output_valid": true,
+    "receipt_id": "rcpt_836ef71ed65c41838554ce76a8b24559",
+    "schema_valid": true,
+    "scope_record_matches_diagnostic_result": true,
+    "status": "success",
+    "task_scope_digest": "f2c0959f4f234adb0c7abdb3c4358cbfb349e997e7f2655ec6f218f4c012aa58",
+    "task_scope_id": "delay-diagnostic-callback-20261004-v1",
+    "task_valid": false
+  },
+  "outer_evidence": {
+    "both_records_resolve_to_same_receipt_id": "rcpt_0fdfda059edc4484b855c086e93ec2d3",
+    "callback_claim_binding_matches_request_operation_scope": true,
+    "callback_claim_id": "b0e289838e06c36a841aeb96e2007d7c4a7ad4c46e317890b39dc79c594ab278",
+    "callback_claim_record_digest": "47ff5e0066908380a76b56ab7b5d8018e781441d6645504a96c2d0c722e27f2e",
+    "digest_note": "Two digest-addressed records have identical parsed JSON values but different IDs; preserve both references and do not count them as separate executions.",
+    "dynamic_action_digest": "a549215033afe64e4fe26c7780bc4b2a206fd0e706386d38a59f7dddc85657ca",
+    "dynamic_complete_events": 1,
+    "event_count": 97,
+    "event_kind_counts": {
+      "action.completed": 39,
+      "action.started": 40,
+      "execution.failed": 1,
+      "execution.started": 1,
+      "message.received": 1,
+      "usage.reported": 15
+    },
+    "execution_evidence_complete": false,
+    "execution_evidence_digest": "0121386c4e91e68597966eaae5296311898952a14d4f1ed47ecf0a934fc56c6c",
+    "outer_attempt_digest": "5ee70b00a37c9eece4d1a18b7b18044ff7b2e2303bf7b6919e2dd4c67cef9510",
+    "outer_attempt_id": "attempt_82a3e0a6a8304f80baec5aa12019cfe0",
+    "outer_attempt_terminal_state": "INDETERMINATE",
+    "outer_attempt_transitions": [
+      "CREATED->CLAIMED",
+      "CLAIMED->RESERVED",
+      "RESERVED->INVOKING",
+      "INVOKING->VALIDATING",
+      "VALIDATING->SETTLING",
+      "SETTLING->INDETERMINATE"
+    ],
+    "parsed_record_fields_equal": true,
+    "receipt_record_digest": "d9b4abbc0ce423d4861452c71242a288dff6b0d99149aa643011c5bd32c0c126",
+    "reparsed_outer_receipt_record_digest": "8d247327ff4fde488b10f889549d28f7e5874456c1354293bacf7e3378d89cbf"
+  },
+  "outer_result": {
+    "artifact_retrieval": "skipped on timeout by current success-only wrapper branch; not independently timed",
+    "cleanup_confirmed": true,
+    "dynamic_cleanup_confirmed": true,
+    "final_artifact_metadata_present": false,
+    "host_failure_code": null,
+    "model_turn_count": 1,
+    "operation_settled": true,
+    "receipt_digest": "d9b4abbc0ce423d4861452c71242a288dff6b0d99149aa643011c5bd32c0c126",
+    "receipt_elapsed_seconds": 199.992146,
+    "receipt_ended_at": "2026-10-04T23:02:40.975157+00:00",
+    "receipt_id": "rcpt_0fdfda059edc4484b855c086e93ec2d3",
+    "receipt_started_at": "2026-10-04T22:59:20.983011+00:00",
+    "receipt_status": "timeout",
+    "status": "timeout",
+    "total_elapsed_seconds": 203.23082208400592
+  },
+  "query_scope": {
+    "databases": [
+      "review-pinned canonical AEEP store",
+      "exact fresh outer database",
+      "exact pinned native project database"
+    ],
+    "excluded": "No task, answer, workbook cell, output, tool argument, protocol body, or authentication values are included.",
+    "sqlite": "mode=ro; PRAGMA query_only=ON",
+    "tables_and_fields": [
+      "assessment_records: kind,id,digest for exact receipt, attempt, evidence, callback-claim digests; selected JSON metadata fields only",
+      "receipts: receipt_id,status,started_at,ended_at,executor_id,action_id,executor_fingerprint,cohort_digest",
+      "execution_attempts: attempt_id,state,executor_id,updated_at,action_digest",
+      "execution_attempt_transitions: from_state,to_state,version,occurred_at",
+      "execution evidence: complete,attempt_id,events[].kind,count and dynamic-complete prefix count; action digest only",
+      "receipt metadata: host_progress, model_turn_count, cleanup flag, failure code and execution-evidence reference",
+      "native receipt validation booleans: execution_success,schema_valid,output_valid,task_valid"
+    ]
+  },
+  "request_id": "conformance_probe_17ffbc14f98146619659c1cdec1660b2",
+  "request_scope": "one fresh treatment-only Luna/xhigh diagnostic; not historical replay, qualification, or holdout",
+  "schema_version": "assessment.live-delay-first-run-metadata-audit.v1",
+  "serialization_note": {
+    "canonical_result_error_type": "PydanticUserError",
+    "failure_stage": "receipt_verification",
+    "failure_summary": "receipt_verification:ConfigurationError",
+    "final_record_stage": "canonical_result_persistence_unconfirmed",
+    "interpretation": "Separate post-receipt report persistence failure; it does not change the canonical outer receipt status=timeout or explain the long host wait."
+  },
+  "source_artifacts": {
+    "diagnostic_result": {
+      "path": "reports/v08/live-delay-diagnostic-20261004/diagnostic-result.json",
+      "sha256": "249c2c86f14a2f21596fa9154d983e8d39c575a49b39c9f9526b64bfe534ee07"
+    },
+    "input_domain_audit": {
+      "path": "reports/v08/live-delay-diagnostic-20261004/first-input-domain-audit.json",
+      "sha256": "d8b76d33cdc72ee6d6c1ecae5ce2f4ef615744f2982c6709d2b3598c4beb9c16"
+    },
+    "phase_analysis": {
+      "path": "reports/v08/live-delay-diagnostic-20261004/phase-analysis.json",
+      "sha256": "0f408d0af5765b1ae1895f51b651dc367ecc747aa0f3b7963be77f39fdf9f1c5"
+    }
+  },
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "source_refs": [
+    "reports/v08/live-delay-diagnostic-20261004/diagnostic-result.json",
+    "reports/v08/live-delay-diagnostic-20261004/phase-analysis.json",
+    "reports/v08/live-delay-diagnostic-20261004/first-input-domain-audit.json",
+    "src/aeep/hosts/codex_app_server.py:392-410 (handler/response write)",
+    "src/aeep/hosts/codex_app_server.py:1242-1249 (progress fields and pipe-drained semantics)",
+    "src/aeep/hosts/codex_app_server.py:801-813 (artifact retrieval only for SUCCESS)"
+  ],
+  "supported_conclusion": "This diagnostic observed one callback handler completion and local response write, followed about 182.4 seconds later by a reasoning item-start event; the host turn wait then timed out without collector-observed final-message or turn-completion markers. The native helper result was task-invalid, so this is a failed-helper continuation case, not a reproduction of the five historical task-valid child cases.",
+  "unknowns": [
+    "Why the host continued after the callback response was written.",
+    "Whether any peer acknowledgement occurred; the progress marker only records local pipe drain.",
+    "Per-event timing/order for all action and usage events after the callback; the journal summary lacks those timestamps.",
+    "Exact allocation of the approximately 3.24-second difference between host receipt duration and diagnostic total to cleanup/accounting or other wrapper work.",
+    "Historical timeout cause; this fresh task-invalid input does not reproduce the valid-child condition."
+  ]
+}

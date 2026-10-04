@@ -1,0 +1,22 @@
+{
+  "schema_version": "assessment.live-delay-result-recovery-reproduction.v1",
+  "runner_sha256": "2c02948928087ae2de43a8c313b71f273a986c9dea797a387c11e56921bd1f4c",
+  "result_sha256": "249c2c86f14a2f21596fa9154d983e8d39c575a49b39c9f9526b64bfe534ee07",
+  "result_digest": "46f33e2c35dc4b669f0b0975eb7b211af886be4e18e7196c360ee61e218e7855",
+  "database_opened": false,
+  "host_or_model_execution": false,
+  "unregistered_module": {
+    "error_type": "PydanticUserError",
+    "error_code": "class-not-fully-defined",
+    "explanation": "`RunnerResult` is not fully defined; you should define `Any`, then call `RunnerResult.model_rebuild()`."
+  },
+  "registered_module": {
+    "validated": true,
+    "result_digest": "46f33e2c35dc4b669f0b0975eb7b211af886be4e18e7196c360ee61e218e7855",
+    "serialized_result_unchanged": true,
+    "status": "failed",
+    "host_status": "timeout",
+    "canonical_error_retained": "PydanticUserError"
+  },
+  "cause": "The proxy loaded diagnostic-run.py with exec_module without registering its module name in sys.modules. Pydantic could not resolve postponed Any annotations on the locally declared RunnerResult model. Registering the same frozen module resolves the namespace; no helper/source or result changes are needed."
+}

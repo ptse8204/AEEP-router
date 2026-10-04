@@ -2782,6 +2782,7 @@ def tool_call(
     profile: str = typer.Option('legacy', '--profile', help='legacy, assessment, or task'),
     task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID'),
     task_activation: str | None = typer.Option(None, '--task-activation'),
+    discovery_config: Path | None = typer.Option(None, '--discovery-config', help='Operator-selected discovery sources and public-query limits.'),
     text: bool = typer.Option(False, '--text', help='Concise task result; JSON remains the default.'),
 ) -> None:
     """Invoke an AEEP tool over deterministic JSON without running an MCP server."""
@@ -2812,6 +2813,7 @@ def tool_call(
                     profile=profile,
                     task_scope=task_scope,
                     task_activation=task_activation,
+                    discovery_config=discovery_config,
                 ).call(name, _mapping(arguments, name="arguments")),
             )
         )
@@ -2855,7 +2857,7 @@ def tools_export(
         help="mcp, openai-responses, openai-chat, anthropic, deepseek, or zai",
     ),
     compact: bool = typer.Option(False, "--compact"),
-    profile: str = typer.Option('legacy', '--profile', help='legacy or task; built-in declarations only'),
+    profile: str = typer.Option('legacy', '--profile', help='legacy, assessment, or task; built-in declarations only'),
 ) -> None:
     """Export the AEEP agent tools in a provider-native declaration format."""
 
@@ -3724,12 +3726,13 @@ def evidence_revalue(
 @registry_app.command("search")
 def registry_search(
     query: str,
-    registry: str = typer.Option("mcp", "--registry"),
+    registry: str = typer.Option("ard", "--registry"),
     base_url: str | None = typer.Option(None, '--base-url', help='Explicit public ARD registry base URL.'),
     fixture: Path | None = typer.Option(None, "--fixture"),
     catalog: str | None = typer.Option(None, "--catalog"),
     token_env: str | None = typer.Option(None, "--token-env"),
     limit: int = typer.Option(20, "--limit", min=1, max=100),
+    envelope: bool = typer.Option(False, "--envelope", help="Include persisted discovery/source records and measured elapsed time."),
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
@@ -3739,7 +3742,6 @@ def registry_search(
         FixtureRegistryAdapter,
         MCPCommunityRegistryAdapter,
         PackageRegistryAdapter,
-        RegistryQuery,
         SmitheryRegistryAdapter,
     )
 
@@ -3766,13 +3768,78 @@ def registry_search(
             adapter = SmitheryRegistryAdapter(token_env=token_env)
         else:
             raise typer.BadParameter("registry must be fixture, ard, mcp, docker, or smithery")
-        results = _run(adapter.search(RegistryQuery(query=query, limit=limit)))
-        for item in results:
-            router.store.save_registry_candidate(item)
-        if isinstance(adapter, ARDRegistryAdapter):
-            for warning in adapter.warnings:
+        from .discovery import DiscoveryRequest
+        from .discovery_service import DiscoveryService
+        discovery = DiscoveryService(router.store, {registry: adapter},
+            allowed_remote_sources=() if registry == 'fixture' else (registry,), max_results=limit)
+        result = _run(discovery.search(DiscoveryRequest(public_query=query, source_ids=[registry], limit=limit)))
+        for source in result.source_records:
+            for warning in source.warnings:
                 typer.echo(warning, err=True)
-        _emit(results, compact=compact)
+        _emit(result if envelope else result.candidates, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@registry_app.command('show-discovery')
+def registry_show_discovery(
+    discovery_id: str,
+    manifest: Path | None = typer.Option(None, '--manifest', '-m'),
+    compact: bool = typer.Option(False, '--compact'),
+) -> None:
+    """Read a persisted search, including source status and unknown costs."""
+    from .discovery_service import DiscoveryService
+    router = Router.from_manifest(manifest)
+    try:
+        _emit(DiscoveryService(router.store, {}).get(discovery_id), compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@candidate_app.command('intake')
+def candidate_intake(
+    candidate_id: str,
+    location: Path,
+    kind: str = typer.Option('plugin', '--kind'),
+    mapping: Path | None = typer.Option(None, '--mapping'),
+    manifest: Path | None = typer.Option(None, '--manifest', '-m'),
+    compact: bool = typer.Option(False, '--compact'),
+) -> None:
+    """Bind inert registry metadata to operator-selected local artifact bytes."""
+    from .assessment.models import ReviewedMapping, content_digest
+    from .capability_lifecycle import CapabilityLifecycle
+    router = Router.from_manifest(manifest)
+    try:
+        intake = CapabilityLifecycle.from_router(router).inspect_candidate(
+            candidate_id, location, kind=kind,
+            mapping=ReviewedMapping.model_validate_json(mapping.read_bytes()) if mapping else None,
+        )
+        _emit({'intake': intake.model_dump(mode='json'), 'digest': content_digest(intake),
+               'reviewed': False}, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
+        _fail(exc, compact=compact)
+    finally:
+        _run(router.close())
+
+
+@evidence_app.command('lookup')
+def evidence_lookup(
+    candidate_id: str,
+    intake_id: str | None = typer.Option(None, '--intake'),
+    request: str | None = typer.Option(None, '--request', help='ActionRequest JSON/YAML or @file; never persisted.'),
+    manifest: Path | None = typer.Option(None, '--manifest', '-m'),
+    compact: bool = typer.Option(False, '--compact'),
+) -> None:
+    """Return scoped evidence advice without starting an assessment or execution."""
+    from .capability_lifecycle import CapabilityLifecycle
+    router = Router.from_manifest(manifest)
+    try:
+        action = ActionRequest.model_validate(_read_data(request, default={})) if request else None
+        _emit(CapabilityLifecycle.from_router(router).lookup(candidate_id, action, intake_id=intake_id), compact=compact)
     except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
     finally:
@@ -3981,6 +4048,7 @@ def serve(
     profile: str = typer.Option("legacy", "--profile", help="legacy, assessment, or task (no assessment controls)"),
     task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID; never a tool argument.'),
     task_activation: str | None = typer.Option(None, '--task-activation'),
+    discovery_config: Path | None = typer.Option(None, '--discovery-config', help='Operator-selected discovery sources and public-query limits.'),
     transport: str = typer.Option("stdio", "--transport", help="stdio or http"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m", envvar="AEEP_MANIFEST"),
     approve: SideEffect = typer.Option(
@@ -4006,6 +4074,7 @@ def serve(
                     profile=profile,
                     task_scope=task_scope,
                     task_activation=task_activation,
+                    discovery_config=discovery_config,
                     approved_side_effect=approve,
                     allow_unsafe_executor=approve_unsafe_executor,
                 )
@@ -4034,6 +4103,7 @@ def serve(
         profile=profile,
         task_scope=task_scope,
         task_activation=task_activation,
+        discovery_config=discovery_config,
         approved_side_effect=approve,
         allow_unsafe_executor=approve_unsafe_executor,
     )

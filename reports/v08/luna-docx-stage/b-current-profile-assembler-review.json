@@ -1,0 +1,58 @@
+{
+  "schema_version": "luna.b_current_profile_assembler_static_review.v1",
+  "status": "static_review_pass_prepared_inert",
+  "source_digest": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "policy_read": "docs/ASSESSMENT_TESTING.md",
+  "scope": "Pure two-role discovery-versus-AEEP qualification component assembly only. Does not create plans, conformance, qualification, three-way access, or execution authority.",
+  "files": {
+    "reports/v08/luna-docx-stage/b-current-profile-assembler.py": "0191ad8f6a0a84c4c254361a6de0354fa599b28f0efd997f0247ec7fd28e9d6f",
+    "reports/v08/luna-docx-stage/b-composed-worker-collector.py": "fd74eaf373377ec6572b45a521b3212719c5f5a3929ecfa4011e2245d363f9ae",
+    "reports/v08/luna-docx-stage/b-native-workbook-producer-9d09.py": "2f780a333654e42a71b664ea4670db71ed03e8657364961f3aa5a5d0bd38d5ae",
+    "reports/v08/luna-docx-stage/b-native-workbook-producer-9d09-review.json": "171516eb49a736ac98f0c946a23cade8dc950023bcfe8014ae006f50154a05d4",
+    "reports/v08/original-three-way-profile/assemble-current-composed-request.py": "e0a48251c10393cec2dbd75fe6b7626b78c8d7623eca9ab1dafcd6e583445ad5",
+    "reports/v08/original-three-way-profile/current-composed-profiles.json": "7d030283cb32280916ee6740ef7971eab8441e51fbeb232cc96690c05616dd5f",
+    "src/aeep/assessment/models.py": "cdb0c89e2edb4d498b4aedc3ec075a373c741acd3dd695f6e2e1c5456854435e",
+    "src/aeep/assessment/boundary.py": "b5e230fd40b6e259d4cdbcdf672f9ff2feb8673c2db221bf524fbd0c6a12165c",
+    "src/aeep/hosts/codex_pair_inspection.py": "c1d47250cb81b7923e85450680ca9a2bfbb1bab70cc75922bc146deac05dbf3b",
+    "src/aeep/hosts/codex_dynamic_tools.py": "112668113a9d455c05c2d99400aad552da5a2fefb598e2279c79a42ec985170a",
+    "src/aeep/hosts/codex_invocation.py": "da0ecad7713e54484e1e447602650caed370c2c44b88e60b69776ed9df4bc9fb",
+    "src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+    "src/aeep/assessment/verification.py": "bbd76de1661bfa0364f0d2d6b1221d9ae4b3abc76462704e9f5bdd90ce1c223c"
+  },
+  "input_contract": {
+    "profile_document": "Must carry source_digest equal to this source pin, a current pair.control/pair.treatment of complete ExecutorSpec documents, and exactly current callback_documents_by_role for those two profiles.",
+    "callback_bindings": "Must be fresh operator-produced callback documents for the supplied current worker digests. The helper compares the current CodexDynamicTools implementation fingerprint, one call/10 seconds, READ authority, exact 1-attempt/10-second scope limits, artifact binding, and declaration digests. It never instantiates a callback service or calls its handler.",
+    "shared_spreadsheets_definition": "Exact b-shared-spreadsheets.v1 descriptor: pinned current worker image; canonical /opt Spreadsheets skill; separate /etc symlink path; /opt runtime; exactly one allowed alias name mapped to the canonical /opt file; exact skill digest; pandas/openpyxl versions; both required dependency expectations.",
+    "shared_physical_skill_inventory": "Caller must pass discovery and aeep maps that are each exactly {canonical /opt skill path: reviewed skill SHA}. This is expected metadata, not an observation; the worker collector must independently establish actual inventory and /etc alias resolution.",
+    "common_inventory": "Emitted exactly as {spreadsheets_bundle: content_digest(shared_spreadsheets_definition)} for the report-local WorkerComponentDefinition contract.",
+    "selected_worker": "Required exact worker digest for the treatment/AEEP role. Other selections reject.",
+    "qualification_exposure": "Required argument must be exactly required; treatment invocation must target the single declaration actually added between control and treatment callbacks."
+  },
+  "checks_in_assembler": [
+    "Verifies current source digest before assembly.",
+    "Requires both exact Luna/xhigh profiles to share the descriptor image, reviewed skill digest/files, model/effort and shared physical skills; validate_worker_pair checks distinct two-role worker identities and credential volumes.",
+    "Derives callback inventories from exact declarations; validates current implementation fingerprint, matching worker and artifact, exact one-call/10-second READ scope; requires control declarations unchanged and treatment to add exactly one tool.",
+    "Builds and validates DifferentialEnvironment with no physical candidate path and the dynamic-only candidate delta.",
+    "Builds and validates ComposedPairDefinition and emits the worker collector component shape."
+  ],
+  "prerequisites_before_later_setup_or_campaign": [
+    "A separate exact reviewed same-grant setup must supply fresh B worker configs and callback documents; do not reuse the old eaa profile as current evidence or fabricate scope/backend identities.",
+    "The shared task instructions must be identical and neutral/optional-capable so they remain valid for later optional-exposure value trials; the assembler preserves rather than rewrites supplied instructions.",
+    "Fresh execution-backed boundary and composed callback observations, independent review, protected grader and a separate required-exposure 8/28/105 qualification plan remain necessary. This assembly is not any of those.",
+    "A later normal/discovery/AEEP value definition requires separate three-role evidence and all-pairs worker identity/credential-volume checks; this assembler is deliberately two-role only.",
+    "If production source changes, this helper rejects the changed digest and needs a new exact source-bound review."
+  ],
+  "static_validation": {
+    "ruff": "python3 -m ruff check --select F821,F823 on the assembler and source-repinned producer: pass",
+    "ast": "ast.parse on those two report-local scripts: pass",
+    "imports_or_tests_executed": false,
+    "runtime_or_workers_started": false,
+    "model_or_auth_calls": false,
+    "docker_or_canonical_state_mutation": false
+  },
+  "limitations": [
+    "The historical current-composed-profiles.json and original producer are design references only; their source digest is older and their physical-skill delta is not reused.",
+    "A self-asserted inventory or declaration digest does not prove permissions, model exposure, host-issued callback behavior, conformance, task success or qualification.",
+    "A separately identified comparison.py three-role validation gap is outside this two-role assembler and blocks later three-way value preparation until addressed under a new source freeze."
+  ]
+}

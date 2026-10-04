@@ -1,0 +1,26 @@
+{
+  "schema_version": "luna.b_native_workbook_producer_source_repin_review.v1",
+  "status": "prepared_inert_source_repin_only",
+  "execution_authorized": false,
+  "policy": "docs/ASSESSMENT_TESTING.md",
+  "source_digest": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "historical_source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "historical_producer_path": "reports/v08/luna-docx-stage/b-native-workbook-producer.py",
+  "historical_producer_sha256": "6418d61c4ea1d7009da74ad731e958cd6f3241cb3df8722ca74ba49177666b16",
+  "current_producer_path": "reports/v08/luna-docx-stage/b-native-workbook-producer-9d09.py",
+  "current_producer_sha256": "2f780a333654e42a71b664ea4670db71ed03e8657364961f3aa5a5d0bd38d5ae",
+  "change": "Byte-for-byte copy of historical report-local producer with only its exact source pin changed to the frozen current source. No behavior, paths, runtime pins, task recipe, grant, or authority changed.",
+  "prerequisites_before_setup": [
+    "separate exact finite setup review and same-grant reserved operation",
+    "verify current frozen source pin and producer file hash",
+    "supply a fresh explicit project path outside the repository with an existing parent",
+    "verify exact pinned Codex binary and Python runtime hashes before any project creation"
+  ],
+  "actions_not_performed": [
+    "setup/reopen",
+    "imports or tests",
+    "model/worker/runtime/Docker/auth use",
+    "canonical assessment/grant mutation",
+    "project creation or file writes outside this report-local copy"
+  ]
+}

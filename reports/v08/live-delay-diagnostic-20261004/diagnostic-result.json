@@ -1,0 +1,118 @@
+{
+  "admission": false,
+  "callback_binding_digest": "ae12b5260d6d902a4c588436b59f84d75f9d551def0eda468c7b56a0dcdd4fe9",
+  "canonical_result_error_type": "PydanticUserError",
+  "capacity_age_seconds_at_start": 180.045566,
+  "capacity_result_sha256": "84703e5aa0279bfdd31c30d2b291017b604517a86b8e5bada5504fd2c4f12578",
+  "cash_ceiling_usd": 0,
+  "cash_cost_usd": null,
+  "charged_operation_digest": "326d3c148144243ecca17959e767bb1ccbbb0b185693d80a40d44fd328d38f0b",
+  "cleanup_confirmed": true,
+  "diagnostic_only": true,
+  "elapsed_seconds": 203.23082208400592,
+  "error_type": "PydanticUserError",
+  "evidence_digest": null,
+  "failure_stage": "receipt_verification",
+  "failure_summary": "receipt_verification:ConfigurationError",
+  "full_conformance": false,
+  "holdout": false,
+  "host_accounting": {
+    "cash": {
+      "components": [],
+      "status": "unavailable"
+    },
+    "model_usage": [
+      {
+        "access_channel": "subscription",
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 264960,
+        "evidence": {
+          "digest": null,
+          "evidence_id": null,
+          "observed_at": "2026-10-04T23:02:40.825960Z",
+          "source": "provider_report",
+          "source_reference": null,
+          "status": "partial",
+          "trust": "self_asserted"
+        },
+        "input_tokens": 303694,
+        "model": "gpt-6-luna",
+        "output_tokens": 8947,
+        "provider": "openai",
+        "reasoning_output_tokens": 6096
+      }
+    ],
+    "subscription_usage": [
+      {
+        "consumed": null,
+        "included_or_paid": "unknown",
+        "provider": "openai",
+        "rate_snapshot_id": null,
+        "resource_pool": "codex.self",
+        "source": {
+          "digest": null,
+          "evidence_id": null,
+          "observed_at": null,
+          "source": "unavailable",
+          "source_reference": null,
+          "status": "unavailable",
+          "trust": "untrusted"
+        },
+        "unit": "provider_unit",
+        "usage_fingerprint": null
+      }
+    ],
+    "tool_footprint": null
+  },
+  "host_execution_success": null,
+  "host_failure_code": null,
+  "host_progress": "{\"stage\":\"awaiting_turn_completion\",\"elapsed_seconds\":199.071235334035,\"callback_counts\":{\"requested\":1,\"handler_completed\":1,\"response_written\":1,\"rejected\":0},\"last_event\":\"item/started\",\"callback_last_elapsed_seconds\":{\"requested\":14.72486733389087,\"handler_completed\":16.043329834006727,\"response_written\":16.043366374913603},\"last_item_type\":\"reasoning\",\"last_event_elapsed_seconds\":198.46513266698457,\"final_message_received\":false,\"turn_completion_received\":false}",
+  "host_receipt_digest": "d9b4abbc0ce423d4861452c71242a288dff6b0d99149aa643011c5bd32c0c126",
+  "host_receipt_status": "timeout",
+  "host_resources": {
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 264960,
+    "context_tokens": 0,
+    "cpu_ms": 0.0,
+    "gpu_ms": 0.0,
+    "input_tokens": 303694,
+    "latency_ms": 199076.657458907,
+    "memory_mb_seconds": 0.0,
+    "monetary_usd": 0.0,
+    "network_bytes": 0,
+    "output_tokens": 8947,
+    "peak_memory_mb": 0.0,
+    "reasoning_output_tokens": 6096,
+    "subscription_units": 0.0
+  },
+  "input_digest": "c7ed4a9fe4dd6cd2b2cf1c0cbf2d994ee3f37a2eb22a731a47acd8edc0c582b2",
+  "model_turn_count_observed": 1,
+  "model_turns_reserved": 1,
+  "operation_id": "composed:conformance_probe_17ffbc14f98146619659c1cdec1660b2",
+  "operation_measurement_digest": "34aca820b373c66900175d128e524b5d38ea241228dd041fadd16f820ecb8b0b",
+  "operation_settled": true,
+  "operation_start_digest": "326d3c148144243ecca17959e767bb1ccbbb0b185693d80a40d44fd328d38f0b",
+  "outer_attempt_digests": [
+    "5ee70b00a37c9eece4d1a18b7b18044ff7b2e2303bf7b6919e2dd4c67cef9510"
+  ],
+  "outer_database": "/private/tmp/aeep-live-delay-20261004-7de1cdac379e4a02870d5da682a2315c/outer.sqlite3",
+  "outer_receipt_digests": [
+    "8d247327ff4fde488b10f889549d28f7e5874456c1354293bacf7e3378d89cbf"
+  ],
+  "partial_execution_evidence_digest": "0121386c4e91e68597966eaae5296311898952a14d4f1ed47ecf0a934fc56c6c",
+  "payload_recorded": false,
+  "probe_digest": null,
+  "qualification": false,
+  "request_digest": "363c89bc6677e80d99732b6907538167c6f9a7714c52624edfdb2c0241d95348",
+  "request_id": "conformance_probe_17ffbc14f98146619659c1cdec1660b2",
+  "result_status": "failed",
+  "review_sha256": "deac4b33bb57399220f7ed37072d32749f1a56a5cd4b75562b1e56263a7941fb",
+  "schema_version": "assessment.live-delay-diagnostic-result.v1",
+  "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+  "source_unchanged": true,
+  "stage": "canonical_result_persistence_unconfirmed",
+  "task_scope_digest": "f2c0959f4f234adb0c7abdb3c4358cbfb349e997e7f2655ec6f218f4c012aa58",
+  "task_scope_id": "delay-diagnostic-callback-20261004-v1",
+  "value_trial": false,
+  "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+}

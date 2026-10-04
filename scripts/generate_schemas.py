@@ -44,6 +44,7 @@ from aeep.benchmarking import (
     EconomicProofCampaignReport,
     ReleaseProofReport,
 )
+from aeep.capability_lifecycle import AdmissionDecision, AdmissionLookupRequest, CandidateIntake
 from aeep.capacity import (
     CapacityAuthorizationEvidence,
     CapacityObservation,
@@ -53,8 +54,16 @@ from aeep.capacity import (
     EntitlementRedemptionReceipt,
     ExecutionEntitlement,
 )
+from aeep.configuration_profile import ConfigurationObservation
 from aeep.conformance import ProviderConformanceReport
-from aeep.discovery import RegistryCandidate
+from aeep.discovery import (
+    DiscoveryRequest,
+    DiscoveryResult,
+    DiscoverySourceRecord,
+    ExternalResourceIdentity,
+    RegistryCandidate,
+)
+from aeep.discovery_service import DiscoveryConfig, DiscoveryQueryRecord
 from aeep.execution import ExecutionEvent, ExecutionEvidence, ExecutorCapabilities
 from aeep.hosts.codex_inspection import WorkerInspectionResult
 from aeep.hosts.codex_pair_inspection import ComposedPairDefinition, WorkerPairInspection
@@ -132,6 +141,7 @@ from aeep.models import (
     TraceProfileReport,
     UsageStatement,
 )
+from aeep.profiles import CapabilityProfile
 from aeep.proofs import (
     DSHLiveComparisonReport,
     DSHLiveProofReport,
@@ -161,6 +171,17 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "discovery-request.schema.json": DiscoveryRequest,
+    "discovery-result.schema.json": DiscoveryResult,
+    "discovery-source.schema.json": DiscoverySourceRecord,
+    "discovery-query.schema.json": DiscoveryQueryRecord,
+    "discovery-config.schema.json": DiscoveryConfig,
+    "external-resource-identity.schema.json": ExternalResourceIdentity,
+    "candidate-intake.schema.json": CandidateIntake,
+    "admission-lookup.schema.json": AdmissionLookupRequest,
+    "admission-decision.schema.json": AdmissionDecision,
+    "capability-profile.schema.json": CapabilityProfile,
+    "configuration-observation.schema.json": ConfigurationObservation,
     "codex-native-sandbox.schema.json": NativeSandboxConfig,
     "task-scope.schema.json": TaskScope,
     "task-activation.schema.json": TaskActivation,

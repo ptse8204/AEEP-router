@@ -1,0 +1,376 @@
+{
+  "created_at_utc": "2026-10-02T22:42:52.469035+00:00",
+  "data_handling": {
+    "authentication_state_read": false,
+    "database_opened_read_only": true,
+    "raw_transcripts_or_command_environment_read": false,
+    "worker_event_fields": [
+      "container_id",
+      "name",
+      "image",
+      "occurred_at_utc",
+      "action"
+    ]
+  },
+  "execution_review": {
+    "path": "reports/v08/luna-docx-stage/root-connectivity-execution-review.json",
+    "sha256": "5da44e968110e19a9e06fc181163f3e57efae77b64aaede75720589143b82e40"
+  },
+  "grant_after_snapshot": {
+    "cash_usd_recorded": "0.0",
+    "elapsed_seconds": 75420.64234381681,
+    "grant_id": "onboarding",
+    "model_turns": 2549,
+    "note": "Read-only counter snapshot after both attempts; shared grant counters are cumulative, not attributed solely to this run.",
+    "operations": 8694,
+    "revoked": false
+  },
+  "prior_const_schema_failure": {
+    "execution_review_sha256": "131180bd1dc29dbffc8370dfea2283247764451635e0aad79340d9eddf84ab2f",
+    "failure_cause_confirmed": false,
+    "operation_measurement": {
+      "accounting": {
+        "actual_cash_usd": "unknown",
+        "cash_components_count": 0,
+        "cash_status": "unavailable",
+        "model_usage": [],
+        "subscription_usage": [
+          {
+            "consumed": null,
+            "included_or_paid": "unknown",
+            "provider": "openai",
+            "resource_pool": "codex.self",
+            "source_status": "unavailable",
+            "unit": "provider_unit"
+          }
+        ]
+      },
+      "elapsed_seconds": 4.180089249974117,
+      "operation_id": "probe:conformance_probe_bf72de50e7174cef847199ffd2a11546",
+      "operation_measurement_digest": "9693906babc437f24f0913f1aaf6af47183f2062f2a98129d8d60eb07c0a9c51",
+      "operation_start_digest": "6ef8e8f52a3f139e6d92271d2b42bd366b0b23191a593bd036ec36b480c07ffc",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 65.0,
+        "max_model_turns": 1,
+        "max_operations": 1
+      },
+      "resources": {
+        "cpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 1676.4509589411318,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "started_at": "2026-10-02T22:17:12.443315Z",
+      "state": "complete"
+    },
+    "request": {
+      "definition_digest": "fdacaed91dd558146ca1107727efacf8edd3e05697e69868f73c13ad6c029402",
+      "request_id": "conformance_probe_bf72de50e7174cef847199ffd2a11546"
+    },
+    "result_path": "reports/v08/luna-docx-stage/connectivity-result.json",
+    "result_sha256": "e856d0a69ba227edd1e123a75e7df4f00c2329712d4e712328e21460484693f1",
+    "status": "ConfigurationError; treatment not attempted; no BoundaryProbe record; no model usage or model identifier persisted."
+  },
+  "result": {
+    "path": "reports/v08/luna-docx-stage/root-connectivity-result.json",
+    "sha256": "34bb93af2b589cfe309c3a8947add63a3248c999d27352b2f374249d9f03c14c",
+    "source_unchanged": true
+  },
+  "reviewer_correction": "A prior concern incorrectly checked hosts.base.ManagedHostExecutionContext. The runner wraps aeep.executors.managed_host.ManagedHostExecutor.execute, whose outer ExecutionContext includes spec; no diagnostic AttributeError occurred. Both fixed diagnostics recorded status=success and retained no raw error message.",
+  "schema_version": "luna-connectivity-canonical-audit.v1",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "typed_run": {
+    "actual_cash_and_subscription_usage": "Cash status unavailable with no components; subscription consumed amount/source unavailable. The review/result establishes a $0 cash ceiling, not measured $0 actual cost.",
+    "observations": {
+      "typed_control": {
+        "boundary_probe_record_digest": "6dc6e3f4f825e96375ccf0bf11fb0e8e360ea1c86de27ceb2d13983ace1da6fd",
+        "execution_evidence": {
+          "adapter": "ManagedHostExecutor",
+          "cancellation_confirmed": false,
+          "complete": true,
+          "content_digest": "5fd8eab858a983b663f7aa7bc65ad066bf876e13a99a0d1f9ef957ab0740135a",
+          "event_kinds": [
+            "execution.started",
+            "artifact.created",
+            "artifact.created",
+            "execution.completed"
+          ],
+          "record_id": "84cc7833578450d5a73bc1af91387e489c56fb44fafd8fb5fa827241a938e498"
+        },
+        "execution_evidence_content_digest": "5fd8eab858a983b663f7aa7bc65ad066bf876e13a99a0d1f9ef957ab0740135a",
+        "observed": {
+          "connected": true
+        },
+        "probe_id": "probe_0bbb3f5cae454a7abfc6734d85a156c3",
+        "worker_digest": "ee094db533da80db8039203f7f4ab851731d166deef75984de9ef90380e345f3"
+      },
+      "typed_treatment": {
+        "boundary_probe_record_digest": "88423298e14fedd80604ee42d8401f7e6ad3fd4ea81822bdc530619c30e09830",
+        "execution_evidence": {
+          "adapter": "ManagedHostExecutor",
+          "cancellation_confirmed": false,
+          "complete": true,
+          "content_digest": "f4464756aa1c0ecf029d139a56fac0536a3824aeda0496ccf5688f3c410cf997",
+          "event_kinds": [
+            "execution.started",
+            "artifact.created",
+            "artifact.created",
+            "execution.completed"
+          ],
+          "record_id": "9eaa8781a2fb5c75fb865442d05cae8e9850e44dc377fdb0762bc152793c4dcb"
+        },
+        "execution_evidence_content_digest": "f4464756aa1c0ecf029d139a56fac0536a3824aeda0496ccf5688f3c410cf997",
+        "observed": {
+          "connected": true
+        },
+        "probe_id": "probe_307d0f02ef584918a24f9052b8d8516f",
+        "worker_digest": "d02f13864bfa8fcd62447e6f8729b85f9538e87d7155507eb510de3324cb61c6"
+      }
+    },
+    "operation_measurements": {
+      "typed_control": {
+        "accounting": {
+          "actual_cash_usd": "unknown",
+          "cash_components_count": 0,
+          "cash_status": "unavailable",
+          "model_usage": [
+            {
+              "access_channel": "subscription",
+              "evidence_status": "complete",
+              "input_tokens": 6502,
+              "model": "gpt-6-luna",
+              "output_tokens": 39,
+              "provider": "openai",
+              "reasoning_output_tokens": 22
+            }
+          ],
+          "subscription_usage": [
+            {
+              "consumed": null,
+              "included_or_paid": "unknown",
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "source_status": "unavailable",
+              "unit": "provider_unit"
+            }
+          ]
+        },
+        "elapsed_seconds": 6.484766958048567,
+        "operation_id": "probe:conformance_probe_ba968d4d85714473be9b20188cee120f",
+        "operation_measurement_digest": "64d99e9e79dbf2220a6a1bb9a280d42c5f7c767e72d87cac1b967a0392511bf2",
+        "operation_start_digest": "4da5712bb4d2f2b3c0235539c8c173f067f704d21cbc3aa5c1a851510caa76f4",
+        "reserved": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 65.0,
+          "max_model_turns": 1,
+          "max_operations": 1
+        },
+        "resources": {
+          "cpu_ms": 0.0,
+          "input_tokens": 6502,
+          "latency_ms": 3720.4388331156224,
+          "network_bytes": 0,
+          "output_tokens": 39,
+          "subscription_units": 0.0
+        },
+        "started_at": "2026-10-02T22:34:09.762128Z",
+        "state": "complete"
+      },
+      "typed_treatment": {
+        "accounting": {
+          "actual_cash_usd": "unknown",
+          "cash_components_count": 0,
+          "cash_status": "unavailable",
+          "model_usage": [
+            {
+              "access_channel": "subscription",
+              "evidence_status": "complete",
+              "input_tokens": 6550,
+              "model": "gpt-6-luna",
+              "output_tokens": 45,
+              "provider": "openai",
+              "reasoning_output_tokens": 28
+            }
+          ],
+          "subscription_usage": [
+            {
+              "consumed": null,
+              "included_or_paid": "unknown",
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "source_status": "unavailable",
+              "unit": "provider_unit"
+            }
+          ]
+        },
+        "elapsed_seconds": 9.582213749876246,
+        "operation_id": "probe:conformance_probe_37bcc0d4f4f9427e8e4acbca1b42bcb7",
+        "operation_measurement_digest": "9e4aea8a299a3b00bf2f1391ffdff4589a049ad7b24b97194a2f5043db622617",
+        "operation_start_digest": "de5a3285f41b5de53f5e814900595087c7ce2fe136814867ef64ee1873e9c178",
+        "reserved": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 65.0,
+          "max_model_turns": 1,
+          "max_operations": 1
+        },
+        "resources": {
+          "cpu_ms": 0.0,
+          "input_tokens": 6550,
+          "latency_ms": 6661.844667047262,
+          "network_bytes": 0,
+          "output_tokens": 45,
+          "subscription_units": 0.0
+        },
+        "started_at": "2026-10-02T22:34:16.954893Z",
+        "state": "complete"
+      }
+    },
+    "proxy_lifecycle_operation": {
+      "accounting": {
+        "actual_cash_usd": "unknown",
+        "cash_components_count": 0,
+        "cash_status": "unavailable",
+        "model_usage": [],
+        "subscription_usage": []
+      },
+      "elapsed_seconds": 26.00650933291763,
+      "operation_id": "conformance_probe_0cf574ad541c4ac6823e9f83f4205c46:connectivity_proxy_lifecycle",
+      "operation_measurement_digest": "dee0929444438c840752a2360b34b009d9f565d0a372fdf1bd64d876c92e2c6f",
+      "operation_start_digest": "5b82e42c2f1a44993ffa8d68d3d5ec61754650b17266f6ecd6b0b25815af2727",
+      "request_definition_digest": "bc2b765fe3443931c73c45e027bebddfc782a1871c5286b6c0fb175774a62b6a",
+      "request_id": "conformance_probe_0cf574ad541c4ac6823e9f83f4205c46",
+      "reserved": {
+        "max_cash_usd": "0",
+        "max_elapsed_seconds": 600.0,
+        "max_model_turns": 0,
+        "max_operations": 1
+      },
+      "resources": {
+        "cpu_ms": null,
+        "input_tokens": null,
+        "latency_ms": null,
+        "network_bytes": null,
+        "output_tokens": null,
+        "subscription_units": null
+      },
+      "started_at": "2026-10-02T22:34:05.860136Z",
+      "state": "complete"
+    },
+    "proxy_restoration": {
+      "id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+      "id_prefix_matches_review": true,
+      "image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+      "image_matches_review": true,
+      "name": "aeep-reviewed-model-proxy",
+      "network_matches_review": true,
+      "result_proxy_restored": true,
+      "running": false
+    },
+    "remaining_task_image_container_counts": {
+      "control": 0,
+      "treatment": 0
+    },
+    "request_ids": {
+      "typed_control": "conformance_probe_ba968d4d85714473be9b20188cee120f",
+      "typed_treatment": "conformance_probe_37bcc0d4f4f9427e8e4acbca1b42bcb7"
+    },
+    "request_records": {
+      "typed_control": {
+        "definition_digest": "c6853ae814e76c16e2f0a136c0c8a08ed013914667038dfebcced4050fbdcf67",
+        "request_id": "conformance_probe_ba968d4d85714473be9b20188cee120f"
+      },
+      "typed_treatment": {
+        "definition_digest": "b9e541c81d4f12a3b535393c208c6575dbe124676ef1d7fbbceb06d97ceef9a6",
+        "request_id": "conformance_probe_37bcc0d4f4f9427e8e4acbca1b42bcb7"
+      }
+    },
+    "result_flags": {
+      "admission": false,
+      "candidate_skill_used": false,
+      "cash_ceiling_usd": 0,
+      "connectivity_only": true,
+      "full_task_conformance": false,
+      "model_turns_reserved_for_probes": 2,
+      "proxy_lifecycle_wall_seconds": 26.008069374831393,
+      "proxy_restored": true,
+      "proxy_was_running": false,
+      "qualification": false,
+      "replay_allowed": false
+    },
+    "worker_container_events": [
+      {
+        "action": "create",
+        "container_id": "3e3224f2c944e303d547acf3ae0850cfe99b50dfcbae3d5b1b0f5e679cb8cc34",
+        "image": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "name": "aeep-80134204ad84fc70352c4e405c3a9db0",
+        "occurred_at_utc": "2026-10-02T22:34:09+00:00"
+      },
+      {
+        "action": "attach",
+        "container_id": "3e3224f2c944e303d547acf3ae0850cfe99b50dfcbae3d5b1b0f5e679cb8cc34",
+        "image": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "name": "aeep-80134204ad84fc70352c4e405c3a9db0",
+        "occurred_at_utc": "2026-10-02T22:34:09+00:00"
+      },
+      {
+        "action": "start",
+        "container_id": "3e3224f2c944e303d547acf3ae0850cfe99b50dfcbae3d5b1b0f5e679cb8cc34",
+        "image": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "name": "aeep-80134204ad84fc70352c4e405c3a9db0",
+        "occurred_at_utc": "2026-10-02T22:34:09+00:00"
+      },
+      {
+        "action": "die",
+        "container_id": "3e3224f2c944e303d547acf3ae0850cfe99b50dfcbae3d5b1b0f5e679cb8cc34",
+        "image": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "name": "aeep-80134204ad84fc70352c4e405c3a9db0",
+        "occurred_at_utc": "2026-10-02T22:34:16+00:00"
+      },
+      {
+        "action": "destroy",
+        "container_id": "3e3224f2c944e303d547acf3ae0850cfe99b50dfcbae3d5b1b0f5e679cb8cc34",
+        "image": "sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27",
+        "name": "aeep-80134204ad84fc70352c4e405c3a9db0",
+        "occurred_at_utc": "2026-10-02T22:34:16+00:00"
+      },
+      {
+        "action": "create",
+        "container_id": "89eba7cbb846dd3336f56ef657f600cb5adf3e8d72993defa29d382230929f2e",
+        "image": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "name": "aeep-d8fe56c2ed709888a1f695b1467cf524",
+        "occurred_at_utc": "2026-10-02T22:34:17+00:00"
+      },
+      {
+        "action": "attach",
+        "container_id": "89eba7cbb846dd3336f56ef657f600cb5adf3e8d72993defa29d382230929f2e",
+        "image": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "name": "aeep-d8fe56c2ed709888a1f695b1467cf524",
+        "occurred_at_utc": "2026-10-02T22:34:17+00:00"
+      },
+      {
+        "action": "start",
+        "container_id": "89eba7cbb846dd3336f56ef657f600cb5adf3e8d72993defa29d382230929f2e",
+        "image": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "name": "aeep-d8fe56c2ed709888a1f695b1467cf524",
+        "occurred_at_utc": "2026-10-02T22:34:17+00:00"
+      },
+      {
+        "action": "die",
+        "container_id": "89eba7cbb846dd3336f56ef657f600cb5adf3e8d72993defa29d382230929f2e",
+        "image": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "name": "aeep-d8fe56c2ed709888a1f695b1467cf524",
+        "occurred_at_utc": "2026-10-02T22:34:26+00:00"
+      },
+      {
+        "action": "destroy",
+        "container_id": "89eba7cbb846dd3336f56ef657f600cb5adf3e8d72993defa29d382230929f2e",
+        "image": "sha256:8022fd8a6252ff93410697a47972806c9b230a845a7da3f647fc1899b7b0fdf2",
+        "name": "aeep-d8fe56c2ed709888a1f695b1467cf524",
+        "occurred_at_utc": "2026-10-02T22:34:26+00:00"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "authority": "September25/27 standing finite plan-definition delegation in docs/ASSESSMENT_TESTING.md",
+  "reviewed_at": "2026-10-03T11:28:33.572338+00:00",
+  "runner_sha256": "3fb3dcd3dcc4b7962b7b7ff461e4fb5c8524827244bfedd8daba4ab033ad6e71",
+  "action": "Prepare inert ordinary workbook qualification plan only",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "stage": "qualification",
+  "exposure": "required",
+  "structure": "workflow",
+  "seed": 2026100301,
+  "counts": {
+    "qualification": 8,
+    "training": 28,
+    "holdout": 105
+  },
+  "utility": {
+    "benefit_dimensions": [
+      "wall_time_ms"
+    ],
+    "guardrail_dimensions": [
+      "wall_time_ms"
+    ],
+    "minimum_resource_benefit": 0.1,
+    "minimum_success_gain": 0.05,
+    "maximum_resource_regression": 0.1,
+    "family_error_rate": 0.05
+  },
+  "pure_profile_choices_and_pins": "passed",
+  "runtime_execution_authorized": false,
+  "new_model_turns": 0,
+  "notes": [
+    "Preparation uses existing propose and cost-lineage APIs; measured proposal cost is retained by the existing setup-cost path.",
+    "No generator or model trial replay; exact plan and full finite runtime budget require subsequent parent review.",
+    "Immutable definition bytes remain in canonical coordinator storage; review output contains digests only."
+  ]
+}

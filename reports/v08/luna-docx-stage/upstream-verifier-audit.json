@@ -1,0 +1,150 @@
+{
+  "schema_version": "assessment.skillsbench-docx-upstream-verifier-audit.v1",
+  "purpose": "Read-only source review and finite offline compatibility-check plan; no build or verifier execution.",
+  "upstream_pin": {
+    "repository": "benchflow-ai/skillsbench",
+    "commit": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "task": "offer-letter-generator",
+    "verifier_path": "tasks/offer-letter-generator/verifier/test_outputs.py",
+    "verifier_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/offer-letter-generator/verifier/test_outputs.py",
+    "verifier_sha256": "913b9a3ebe579aed9c8f876dededea4d6a957eca9fbd0d9e8f043719cfb8cf05",
+    "verifier_bytes": 4397,
+    "test_script_path": "tasks/offer-letter-generator/verifier/test.sh",
+    "test_script_sha256": "cd7165610dcfe25434330d06c9e9de7b2ee2ea0f80d41865c5ad91e8d83a3cbb",
+    "test_script_bytes": 630
+  },
+  "upstream_verifier_behavior": {
+    "files": {
+      "output": "/root/offer_letter_filled.docx",
+      "employee_data": "/root/employee_data.json"
+    },
+    "opens_output_with": "python-docx Document()",
+    "checks": [
+      "DOCX exists and parses through python-docx",
+      "no {{...}} uppercase placeholders in extracted text",
+      "10 parameterized split-placeholder values present",
+      "6 parameterized nested-table values present",
+      "relocation IF/END markers removed while pinned Yes amount and days remain"
+    ],
+    "pytest_assertion_cases": 18,
+    "test_script_behavior": "Installs curl, downloads uv 0.9.7, runs uvx with pytest 8.4.1, pytest-json-ctrf 0.3.5 and python-docx 1.1.2; writes CTRF and reward artifacts. Not suitable for offline protected execution."
+  },
+  "current_adaptation_coverage": {
+    "verifier_semantics": "Adapted stdlib OOXML grader covers the upstream content assertions and adds document preservation, OOXML/package bounds and safety, plus relocation No and Unicode literal cases. The protected run passed 6 positive and 9 negative decisions.",
+    "remaining_unverified_upstream_behavior": [
+      "The exact correct output has not been opened by python-docx 1.1.2 inside the protected task image.",
+      "The upstream absolute-path contract and pinned employee-data file have not been exercised together by test_outputs.py.",
+      "The upstream pytest wrapper, CTRF serialization and reward-file behavior are not covered by the direct adapted grader."
+    ],
+    "claim_boundary": "A direct run of the pinned test module would be a one-artifact verifier-compatibility check, not an official SkillsBench task reproduction, candidate assessment, qualification or admission."
+  },
+  "fixed_reference": {
+    "fixture_source": "integrations/assessment-runtime/skillsbench-offer-letter-fixtures.json",
+    "fixture_source_sha256": "f856e8ec8c7c79cebdbc55f590ac14016ee77b2c2462abe2f2d08988aa2494d4",
+    "fixture_index": 0,
+    "variation": "relocation_yes",
+    "artifact_source_field": "fixtures[0].document_b64",
+    "decoded_offer_letter_filled_docx_sha256": "e5ba556c1b7ef19620b8b3963710714218d0eb21b61ec0ba4964a35be60c42c7",
+    "decoded_artifact_bytes": 39173,
+    "employee_data_source": "reports/v08/skillsbench-offer-letter-pinned/employee_data.json",
+    "employee_data_sha256": "64dcb6aad2423051a638efefc85d1b47d306718e462342281553bf00082870c0",
+    "employee_data_bytes": 774,
+    "employee_data_matches_fixture": true,
+    "template_source_sha256": "34a2fe42f5799f35b9543af63d712b9e28cc93f97847528c3fbfe76071f60d15",
+    "note": "Use only this already-reviewed public literal correct artifact and pinned employee data; no generator, model, holdout or candidate output."
+  },
+  "finite_offline_check_plan": {
+    "status": "proposed_not_executed",
+    "image": "After the matched DOCX common/control image is built and reviewed, derive a separate verifier-only image from its immutable digest. Keep pytest out of the matched control/treatment pair images; add only hash-locked pytest==8.4.1 and required wheels to the verifier derivative. python-docx==1.1.2 is inherited from the common DOCX layer. Do not use or claim an image digest until recorded after build.",
+    "source_staging": "Stage the exact upstream test_outputs.py bytes at a private readonly verifier directory only after checking the pinned raw URL against the recorded SHA-256. Do not edit or wrap the test module.",
+    "input_staging": "Materialize fixtures[0].document_b64 as offer_letter_filled.docx and copy the exact pinned employee_data.json into a private directory. Set directory mode 0555 and files 0444 for UID/GID 65534.",
+    "container_mounts": [
+      "Bind the two-file input directory readonly to /root, matching the official constants.",
+      "Bind a verifier-only directory containing test_outputs.py readonly to /verifier."
+    ],
+    "direct_argv": [
+      "<configured-container-runtime>",
+      "--host",
+      "unix://<configured-container-socket>",
+      "run",
+      "--rm",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--user",
+      "65534:65534",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--cpus=1",
+      "--memory=512m",
+      "--memory-swap=512m",
+      "--pids-limit=32",
+      "--tmpfs",
+      "/tmp:rw,noexec,nosuid,nodev,size=32m",
+      "--mount",
+      "type=bind,src=<private-input-dir>,dst=/root,readonly",
+      "--mount",
+      "type=bind,src=<private-verifier-dir>,dst=/verifier,readonly",
+      "--entrypoint",
+      "python3",
+      "<verifier-only-image-by-digest>",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "/verifier/test_outputs.py"
+    ],
+    "environment": [
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+      "PYTHONDONTWRITEBYTECODE=1"
+    ],
+    "runner_requirements": "Construct argv directly without a shell; capture bounded pytest output; enforce a 30-second wall timeout; do not mount the repository, home, canonical database, task oracle, Docker socket into the container, or any writable case directory.",
+    "accounting_ceiling": {
+      "operations": 1,
+      "seconds": 30,
+      "model_turns": 0,
+      "cash_usd": 0
+    },
+    "container_executor_fit": "Current ContainerExecutor is not a direct fit: it binds each permitted host directory to the same path inside the container and refuses protected host roots; it cannot bind a private fixture directory to /root and verifier source to /verifier. Use a narrowly scoped, shell-free report runner for these exact readonly mounts, with separate review before execution.",
+    "expected_result": "18 upstream assertion cases pass against this single fixed public literal artifact; record pytest stdout, image digest, source/data/artifact hashes and elapsed time. No CTRF or reward file is produced; that harness behavior remains outside scope."
+  },
+  "source_review": {
+    "verdict": "pass_no_blocker",
+    "reviewed_source_tree_digest": "060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293",
+    "files": [
+      "src/aeep/hosts/codex_pair_inspection.py",
+      "src/aeep/hosts/codex_invocation.py"
+    ],
+    "findings": [],
+    "review_notes": [
+      "DOCX pair profile is gated to schema v3; default spreadsheet profile and its exact shared-version keys remain unchanged.",
+      "The new python-docx version and roundtrip are required in both roles; treatment candidate inventory/access checks and control absence checks remain present.",
+      "Recursive AEEP skill detection retains both the old and current bundled skill digests. Existing tests cover the current digest; explicit old-digest regression coverage is a minor non-blocking gap."
+    ]
+  },
+  "readiness_image_plan_review": {
+    "verdict": "no_blocker_in_reviewed_plan_and_context",
+    "reviewed_files": [
+      "reports/v08/luna-docx-stage/image-build-plan.json",
+      "reports/v08/luna-docx-stage/image-context/Dockerfile.docx",
+      "reports/v08/luna-docx-stage/image-context/requirements-docx.lock",
+      "reports/v08/luna-docx-stage/image-context/docx/SKILL.md"
+    ],
+    "checks": [
+      "Pinned Linux arm64 base image ID and repository digest are locally present and match by Docker metadata.",
+      "Control and treatment share the same hash-locked common package layer; treatment adds only the pinned skill file and symlink alias.",
+      "Package installation is offline (--no-index with wheel hashes); planned builds use pull=false and network=none.",
+      "The build plan retains new tags, one operation, zero turns/cash, finite time and disk-growth caps, and the 50 GiB host reserve."
+    ],
+    "stage_limitation": "At this inspection there is no setup/build runner script in luna-docx-stage yet; only the plan, Dockerfile, lock, pinned skill, patch, and profile test are present. Review the concrete argv/cleanup/evidence runner before execution."
+  },
+  "actions_performed": {
+    "network_source_read": true,
+    "build": false,
+    "container_run": false,
+    "model": false,
+    "authentication_access": false,
+    "source_edit": false
+  }
+}

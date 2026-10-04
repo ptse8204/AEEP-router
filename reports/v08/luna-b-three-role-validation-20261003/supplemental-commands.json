@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-03T00:00:00Z",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+  "wrapper": "reports/v08/luna-b-three-role-validation-20261003/run_check_retry.py",
+  "wrapper_sha256": "4b24f7dd0002be136f23aa6d5453d99b08f8f5d2a7c343481f2c38335a7f4eef",
+  "scope": "Supplemental offline CI checks only. Full pytest/branch coverage and their gates are already separately running or recorded. No installs, network, Docker, model, grant, trial, or credential actions.",
+  "commands": [
+    {"log_stem": "16-economic-evidence-check", "argv": ["python3", "examples/economic_evidence/campaign.py", "--repetitions", "30", "--check", "--require-gates"]},
+    {"log_stem": "17-dsh-campaign-check", "argv": ["python3", "examples/dsh_campaign/campaign.py", "--check"]},
+    {"log_stem": "18-dsh-live-safety-check", "argv": ["python3", "examples/dsh_campaign/live_campaign.py", "--check-report", "reports/v05/dsh/live-safety.json"]},
+    {"log_stem": "19-dsh-live-comparison-check", "argv": ["python3", "examples/dsh_campaign/live_campaign.py", "--check-comparison", "reports/v05/dsh/live-comparison.json"]},
+    {"log_stem": "20-dsh-native-plan-check", "argv": ["python3", "examples/dsh_campaign/live_campaign.py", "--check-native-plan"]},
+    {"log_stem": "21-job-application-check", "argv": ["python3", "examples/job_application/campaign.py", "--check"]},
+    {"log_stem": "22-provider-verify", "argv": ["python3", "-m", "aeep", "provider", "verify", "examples/provider_package/aeep-provider.yaml", "-m", "examples/provider_package/aeep.yaml", "--compact"]},
+    {"log_stem": "23-node-integration", "argv": ["npm", "--prefix", "integrations/dsh-aeep-router", "test"], "environment": {"npm_config_offline": "true", "npm_config_update_notifier": "false"}},
+    {"log_stem": "24-python-build", "argv": ["python3", "-m", "build", "--no-isolation", "--outdir", "reports/v08/luna-b-three-role-validation-20261003/package-build-output"]},
+    {"log_stem": "25-router-locked-artifacts", "argv": ["python3", "reports/v08/luna-b-three-role-validation-20261003/check_router_completion_artifacts.py"], "note": "Do not run router-complete: its all profile repeats compatibility pytest nodes already included in full pytest. This small read-only check covers the separate artifact-lock digest component only."}
+  ],
+  "router_complete_distinction": {
+    "not_run": true,
+    "reason": "verify_router_complete(profile=all) invokes selected compatibility pytest nodes, which the full pytest suite covers; running it would repeat those tests.",
+    "separate_component": "the report-local read-only checker evaluates the current lock digests for every artifact selected by profile=all without importing AEEP or running tests."
+  },
+  "storage_before": {
+    "df_available_bytes": 167165120512,
+    "important_usage_available_bytes": 326566866542,
+    "df_source": "df -k .",
+    "important_usage_source": "storage_probe.py"
+  },
+  "result": "prepared"
+}

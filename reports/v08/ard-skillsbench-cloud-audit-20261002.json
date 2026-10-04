@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-02",
+  "scope": "Requested implementation audit and cloud feasibility; focused offline checks only",
+  "git_commit": "c0609f0e1839ea17bbd4871c028e84e75e26970e",
+  "verification_source_digest": "b37a3d3d18ac6d775558634fa4d435ac54a7b011c0a531e137726f169d568eca",
+  "file_sha256": {
+    "src/aeep/discovery.py": "ef6cda4764bb181190e844cf578bf85d63a194d1780100134f3871278aa16058",
+    "src/aeep/assessment/intake.py": "415235b9364b4843b8088a8270621d0ff1ada09c2940af243c8b53b182a037f7",
+    "src/aeep/assessment/models.py": "bd751456dd21199f333ae88284af54ae6341c340e023a813dfb782409a5a36df",
+    "src/aeep/assessment/service.py": "91f24b93b7d7b2ed97a09e00c9fcbe81ec67d046070d8b52c29100b33b4ad921",
+    "src/aeep/assessment/reporting.py": "17583d07faf144793ba30297eeceb1e114883467ffc7626e2c84058583951a73",
+    "src/aeep/assessment/applicability.py": "a145bbe971f25fd737ee17479034d492d5a838693c4822d2557ef63022e167ef",
+    "src/aeep/assessment/skillsbench_offer_letter.py": "d713b17ef8538a43c3a51d02e7a3756f566c792087e492716a5d9e5020df8eb7",
+    "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+    "tests/test_v08_skillsbench_offer_letter.py": "294728766fbb8f0901f009ea63c0627995fab2db20636ac736fa9ba06f2f1956",
+    "tests/test_v08_ard.py": "1cb4a6a31f00f3c282763cccb406272ffb7917ff92e0e4bee8fc83ff0dd71aa2",
+    "tests/test_v08_three_way.py": "9cfc8d85357efe6428a3bde5fa40a0129ecbff1eef89a48b5a023fa8afc311b3",
+    "reports/v08/skillsbench-protected-handoff/prepare.py": "32d34f8d7309ea9c5cae50465ec4137b42cd8070542630af997a906434dd9fbf",
+    "reports/v08/skillsbench-protected-handoff/result.json": "62bda8f89f9711485c20f1506c933160dc21383837df6fb84cc1f668698c8ef3",
+    ".github/workflows/ci.yml": "9887653bfc8d2dce850241cbe33db5c5c2900c503c3ddb320a9df61a34e2a4de"
+  },
+  "tests": {
+    "command": "AEEP_VERIFY_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m pytest -q -p no:cacheprovider tests/test_v08_skillsbench_offer_letter.py tests/test_v08_ard.py tests/test_v08_three_way.py",
+    "exit_code": 0,
+    "collected_by_module": {
+      "tests/test_v08_skillsbench_offer_letter.py": 9,
+      "tests/test_v08_ard.py": 9,
+      "tests/test_v08_three_way.py": 23
+    },
+    "passed": 41,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Software checks, not new model experiments or SkillsBench reproduction"
+  },
+  "free_bytes_observed": 42075234304,
+  "required_host_reserve_bytes": 53687091200,
+  "new_model_turns": 0,
+  "assessment_campaigns_started": 0,
+  "cloud_resources_created": [],
+  "images_created": [],
+  "dependency_installs": [],
+  "source_changed": false,
+  "canonical_ledger_accessed": false,
+  "canonical_ledger_changed": false,
+  "existing_changes_preserved": [
+    "reports/v08/plan-coverage.md",
+    "reports/v08/validation-temporary-cleanup-20261002.json"
+  ],
+  "cloud_runtime_tested": false,
+  "cloud_account_access_verified": false,
+  "official_sources": [
+    "https://learn.chatgpt.com/docs/environments/cloud-environment",
+    "https://learn.chatgpt.com/docs/auth",
+    "https://developers.openai.com/api/docs/guides/agents-api/environments/self-hosted",
+    "https://developers.openai.com/api/docs/guides/agents-api/overview"
+  ]
+}

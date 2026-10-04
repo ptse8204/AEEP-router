@@ -1,0 +1,116 @@
+diff --git a/src/aeep/assessment/comparison.py b/src/aeep/assessment/comparison.py
+--- a/src/aeep/assessment/comparison.py
++++ b/src/aeep/assessment/comparison.py
+@@ -111,7 +111,16 @@ def validate_incremental_hosts(candidate: ExecutorSpec, baseline: ExecutorSpec,
+     base_worker = binding_from_config(base.managed_worker)
+     excluded = {"adapter_id", "managed_worker", "invocation"}
+     if base_worker is None or base.invocation is None or base.invocation.mode != "turn":
+         raise ConfigurationError("incremental control requires an isolated candidate-free turn environment")
++    if experiment.stage == "aeep_value":
++        three_way_workers = [binding_from_config(item.managed_host_config().managed_worker) for item in members]
++        if any(worker is None for worker in three_way_workers):
++            raise ConfigurationError("three-way arms require isolated worker bindings")
++        for index, worker in enumerate(three_way_workers):
++            assert worker is not None
++            for other in three_way_workers[index + 1:]:
++                assert other is not None
++                validate_worker_pair(worker, other)
+     for member in members:
+         config = member.managed_host_config()
+         worker = binding_from_config(config.managed_worker)
+@@ -135,8 +145,12 @@ def validate_incremental_hosts(candidate: ExecutorSpec, baseline: ExecutorSpec,
+         normal = experiment.normal_host is not None and member.id == experiment.normal_host.executor_id
+         if not normal and (invocation.local_profile != base.invocation.local_profile
+                 or invocation.native_catalog != base.invocation.native_catalog):
+             raise ConfigurationError("incremental arms differ in shared local/catalog profiles")
+-        if invocation.supporting_skills != base.invocation.supporting_skills:
++        if normal and experiment.stage == "aeep_value":
++            reviewed_skills = {skill.path: skill for skill in base.invocation.supporting_skills}
++            if any(reviewed_skills.get(skill.path) != skill for skill in invocation.supporting_skills):
++                raise ConfigurationError("three-way normal supporting skills must be an exact subset of discovery skills")
++        elif invocation.supporting_skills != base.invocation.supporting_skills:
+             raise ConfigurationError("incremental arms differ in reviewed background skills")
+         if member.id == candidate.id:
+             dynamic_candidate = (invocation.mode == "dynamic_tool"
+diff --git a/tests/test_v08_three_way.py b/tests/test_v08_three_way.py
+--- a/tests/test_v08_three_way.py
++++ b/tests/test_v08_three_way.py
+@@ -6,6 +6,8 @@ from types import SimpleNamespace
+ import pytest
+ from pydantic import ValidationError
+ from test_v08_incremental import environment
++from test_v08_managed_workers import binding as worker_binding
+ 
++from aeep.assessment.comparison import validate_incremental_hosts
+ from aeep.assessment.boundary import BoundaryConformance, BoundaryProbe, require_three_way_access
+ from aeep.assessment.models import (
+     IncrementalExperiment,
+@@ -14,6 +16,7 @@ from aeep.assessment.models import (
+     content_digest,
+ )
+ from aeep.assessment.repository import AssessmentRepository
++from aeep.models import ExecutorSpec, ReviewedHostSkill
+ from aeep.errors import ConfigurationError
+ from aeep.store import ReceiptStore
+@@ -44,5 +47,61 @@ def test_historical_exact_json_and_three_role_version():
+         )
+ 
+ 
++def _three_way_host(role, *, mode="turn", worker_id=None, credential_volume=None, skills=()):
++    worker = worker_binding(credential_volume=credential_volume or "aeep-auth-" + role).model_copy(
++        update={"worker_id": worker_id or "worker-" + role}
++    )
++    invocation = {"mode": mode, "supporting_skills": [skill.model_dump(mode="json") for skill in skills]}
++    if mode == "skill":
++        invocation.update(skill_name="Candidate", skill_path="/opt/candidate/SKILL.md",
++                          skill_sha256="e" * 64, exposure="optional")
++    spec = ExecutorSpec(
++        id=role,
++        capability="assessment.workbook@1",
++        kind="host_managed",
++        resource_pool="three-way",
++        description="Static three-way comparison fixture",
++        config={
++            "adapter_id": "codex-app-server:three-way",
++            "argv": ["/opt/codex", "app-server"],
++            "instructions": "Same frozen task instructions.",
++            "timeout_seconds": 60,
++            "managed_worker": worker.model_dump(mode="json"),
++            "invocation": invocation,
++        },
++    )
++    return spec
++
++
++def _validate_three_way_hosts(*, normal_skills=(), normal_worker_id=None,
++                              normal_volume=None, baseline_skills=None, candidate_skills=None):
++    discovery_skill = ReviewedHostSkill(name="Spreadsheets", path="/opt/discovery/SKILL.md", sha256="a" * 64)
++    baseline_skills = (discovery_skill,) if baseline_skills is None else baseline_skills
++    candidate_skills = baseline_skills if candidate_skills is None else candidate_skills
++    candidate = _three_way_host("candidate", mode="skill", skills=candidate_skills)
++    baseline = _three_way_host("baseline", skills=baseline_skills)
++    normal = _three_way_host("normal", skills=normal_skills, worker_id=normal_worker_id,
++                             credential_volume=normal_volume)
++    validate_incremental_hosts(candidate, baseline, {"normal": normal}, value())
++
++
++def test_aeep_value_all_three_workers_are_pairwise_independent():
++    _validate_three_way_hosts()
++    with pytest.raises(ConfigurationError, match="independent"):
++        _validate_three_way_hosts(normal_worker_id="worker-candidate")
++    with pytest.raises(ConfigurationError, match="independent"):
++        _validate_three_way_hosts(normal_volume="aeep-auth-candidate")
++
++
++def test_aeep_value_normal_may_omit_discovery_support_only():
++    _validate_three_way_hosts(normal_skills=())
++    extra = ReviewedHostSkill(name="Unreviewed", path="/opt/unreviewed/SKILL.md", sha256="b" * 64)
++    with pytest.raises(ConfigurationError, match="exact subset"):
++        _validate_three_way_hosts(normal_skills=(extra,))
++    drifted = ReviewedHostSkill(name="Spreadsheets", path="/opt/discovery/SKILL.md", sha256="c" * 64)
++    with pytest.raises(ConfigurationError, match="exact subset"):
++        _validate_three_way_hosts(normal_skills=(drifted,))
++
++
+ @pytest.fixture
+ def access_fixture(tmp_path, monkeypatch):

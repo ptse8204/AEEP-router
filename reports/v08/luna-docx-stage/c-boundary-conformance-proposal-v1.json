@@ -1,0 +1,654 @@
+{
+  "canonical_database_snapshot": {
+    "canonical_writes": 0,
+    "path": ".aeep/live-review-v3/aeep.sqlite3",
+    "read_only": true,
+    "simulation": "SQLite backup to :memory:; proposed review rows inserted there only"
+  },
+  "control": {
+    "canonical_references": {
+      "callback_binding_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+      "callback_evidence_digest": "5a1dceab298b8e91d36575e28663b3942bb85cb1897e3f4e7cff12dc523d6408",
+      "callback_probe_digest": "c22af73b26b4174f44311ae0697b483dc833eb4cb1ee04067c75759ef827ef47",
+      "component_digest": "5438e3aae178909d6d7c765b1590c05308a343d26e8c467097435ba1b1149e8d",
+      "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+      "host_receipt_digest": "21d2d7a922958a9e1c9a947776c92f02354f3f4f222d43b8df091badd9169b4d",
+      "identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+      "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+      "probe_digests_by_name": {
+        "allowed_tool": "6252d27f7f691228edfdae61eff4de393613ec7d418d9ad831186c22c0fe84f2",
+        "answers": "6c5917542fab94b3ee2c56c0c971fe5f185a9eb09a1f570610733a7137eac3b6",
+        "callback_authority": "c22af73b26b4174f44311ae0697b483dc833eb4cb1ee04067c75759ef827ef47",
+        "callback_lifecycle": "747da62341c093e4bcc3c430de293963f38fdaa5938051a14b85a4d3ebbb6ca0",
+        "candidate_access": "7d8c3e5b8af175f0397fefdf04a7d74251c9f16d87319702b337b0aa40aca32b",
+        "candidate_network": "39c6bab7e10b78703e7d3317019dd15e249fdb46d6199e08e9a98c88876087e0",
+        "cleanup": "a6b1e3aca75a3ff56955be616201a63bb4626a4ee0c779416f0823827d852c49",
+        "configuration": "3d8ebe39e877ace0bd8dde167835b9524fbb30db4044d7bff8fc8800bddc32c4",
+        "credential_canary": "4ea8e8ce6c8706e1ed133b3616cb0d881f6c3839d34c0b6424a3e80d1d85d283",
+        "cross_worker": "ee56ca7aad067f31f7b471cf2f3362d8b635b233195535652cd040ae6292bbc2",
+        "denied_tool": "69cb77fea8bb8ccf18a3730fc1cb80fb3daf3b28c41fcf74b96cf1d41f3e4b02",
+        "events": "1e5517f450d811a1d07d894db702d27c4e1897ea191ba50adddbdff7e53dc6a8",
+        "native_boundary": "44702bade909f42799d939858a07dfee72c3072f7365fb75178592a7334c9513",
+        "protected_state": "c19f6afcfc3a60d57702d7acbac524b55a8eb0af62265c895f797379caaa45bc",
+        "resource_limits": "a094d4841738c0d47e6ab3893165cf3f0b12c94e1c125bdf9e5d28733fc0b221"
+      },
+      "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+    },
+    "conformance_record": {
+      "digest": "1b7fe4c370e3850fea06128308487ab91a93e54687d5b05660b189faae47bf6f",
+      "document": {
+        "adapter": "codex-app-server:b-luna-discovery",
+        "adapter_version": "1",
+        "advertised_tools": [],
+        "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+        "callback_binding_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+        "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+        "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+        "conformance_id": "c-control-boundary-conformance-20261003-50de",
+        "effective_inventory": {
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "effective_policy_digest": "4f262fc1bd307ef98041988aaaebd447dc4d2ca5ebfef254111837166bbdf0cd",
+        "enforcement_definition_digest": "88bef3351a4e3edcd7487282fffed234ee0f05aa25eee708e59f7b4fdb088f2a",
+        "identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+        "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+        "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+        "permitted_tools": [],
+        "probe_digests": [
+          "6252d27f7f691228edfdae61eff4de393613ec7d418d9ad831186c22c0fe84f2",
+          "6c5917542fab94b3ee2c56c0c971fe5f185a9eb09a1f570610733a7137eac3b6",
+          "c22af73b26b4174f44311ae0697b483dc833eb4cb1ee04067c75759ef827ef47",
+          "747da62341c093e4bcc3c430de293963f38fdaa5938051a14b85a4d3ebbb6ca0",
+          "7d8c3e5b8af175f0397fefdf04a7d74251c9f16d87319702b337b0aa40aca32b",
+          "39c6bab7e10b78703e7d3317019dd15e249fdb46d6199e08e9a98c88876087e0",
+          "a6b1e3aca75a3ff56955be616201a63bb4626a4ee0c779416f0823827d852c49",
+          "3d8ebe39e877ace0bd8dde167835b9524fbb30db4044d7bff8fc8800bddc32c4",
+          "4ea8e8ce6c8706e1ed133b3616cb0d881f6c3839d34c0b6424a3e80d1d85d283",
+          "ee56ca7aad067f31f7b471cf2f3362d8b635b233195535652cd040ae6292bbc2",
+          "69cb77fea8bb8ccf18a3730fc1cb80fb3daf3b28c41fcf74b96cf1d41f3e4b02",
+          "1e5517f450d811a1d07d894db702d27c4e1897ea191ba50adddbdff7e53dc6a8",
+          "44702bade909f42799d939858a07dfee72c3072f7365fb75178592a7334c9513",
+          "c19f6afcfc3a60d57702d7acbac524b55a8eb0af62265c895f797379caaa45bc",
+          "a094d4841738c0d47e6ab3893165cf3f0b12c94e1c125bdf9e5d28733fc0b221"
+        ],
+        "reviewed_inventory_digest": "7ab4e62555bdb0d4cfcad632d3f884ff8e6d9e4f33b9ef6b92b070ace528438e",
+        "schema_version": "assessment.boundary-conformance.v3",
+        "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+        "used_tools": [],
+        "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+      }
+    },
+    "review_documents": {
+      "1b7fe4c370e3850fea06128308487ab91a93e54687d5b05660b189faae47bf6f": {
+        "document": {
+          "adapter": "codex-app-server:b-luna-discovery",
+          "adapter_version": "1",
+          "advertised_tools": [],
+          "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+          "callback_binding_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+          "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+          "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+          "conformance_id": "c-control-boundary-conformance-20261003-50de",
+          "effective_inventory": {
+            "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+            "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+            "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+          },
+          "effective_policy_digest": "4f262fc1bd307ef98041988aaaebd447dc4d2ca5ebfef254111837166bbdf0cd",
+          "enforcement_definition_digest": "88bef3351a4e3edcd7487282fffed234ee0f05aa25eee708e59f7b4fdb088f2a",
+          "identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+          "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+          "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+          "permitted_tools": [],
+          "probe_digests": [
+            "6252d27f7f691228edfdae61eff4de393613ec7d418d9ad831186c22c0fe84f2",
+            "6c5917542fab94b3ee2c56c0c971fe5f185a9eb09a1f570610733a7137eac3b6",
+            "c22af73b26b4174f44311ae0697b483dc833eb4cb1ee04067c75759ef827ef47",
+            "747da62341c093e4bcc3c430de293963f38fdaa5938051a14b85a4d3ebbb6ca0",
+            "7d8c3e5b8af175f0397fefdf04a7d74251c9f16d87319702b337b0aa40aca32b",
+            "39c6bab7e10b78703e7d3317019dd15e249fdb46d6199e08e9a98c88876087e0",
+            "a6b1e3aca75a3ff56955be616201a63bb4626a4ee0c779416f0823827d852c49",
+            "3d8ebe39e877ace0bd8dde167835b9524fbb30db4044d7bff8fc8800bddc32c4",
+            "4ea8e8ce6c8706e1ed133b3616cb0d881f6c3839d34c0b6424a3e80d1d85d283",
+            "ee56ca7aad067f31f7b471cf2f3362d8b635b233195535652cd040ae6292bbc2",
+            "69cb77fea8bb8ccf18a3730fc1cb80fb3daf3b28c41fcf74b96cf1d41f3e4b02",
+            "1e5517f450d811a1d07d894db702d27c4e1897ea191ba50adddbdff7e53dc6a8",
+            "44702bade909f42799d939858a07dfee72c3072f7365fb75178592a7334c9513",
+            "c19f6afcfc3a60d57702d7acbac524b55a8eb0af62265c895f797379caaa45bc",
+            "a094d4841738c0d47e6ab3893165cf3f0b12c94e1c125bdf9e5d28733fc0b221"
+          ],
+          "reviewed_inventory_digest": "7ab4e62555bdb0d4cfcad632d3f884ff8e6d9e4f33b9ef6b92b070ace528438e",
+          "schema_version": "assessment.boundary-conformance.v3",
+          "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+          "used_tools": [],
+          "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+        },
+        "kind": "boundary_conformance"
+      },
+      "4f262fc1bd307ef98041988aaaebd447dc4d2ca5ebfef254111837166bbdf0cd": {
+        "document": {
+          "definition": {
+            "adapter": "codex-app-server:b-luna-discovery",
+            "adapter_version": "1",
+            "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+            "callback_binding_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+            "callback_evidence_digest": "5a1dceab298b8e91d36575e28663b3942bb85cb1897e3f4e7cff12dc523d6408",
+            "candidate_access_probe_digest": "7d8c3e5b8af175f0397fefdf04a7d74251c9f16d87319702b337b0aa40aca32b",
+            "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "configuration_probe_digest": "3d8ebe39e877ace0bd8dde167835b9524fbb30db4044d7bff8fc8800bddc32c4",
+            "effective_inventory_digest": "7ab4e62555bdb0d4cfcad632d3f884ff8e6d9e4f33b9ef6b92b070ace528438e",
+            "executor_id": "b.luna.discovery",
+            "host_receipt_digest": "21d2d7a922958a9e1c9a947776c92f02354f3f4f222d43b8df091badd9169b4d",
+            "identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+            "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+            "invocation": {
+              "dynamic_tools_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+              "local_profile": "capable_local",
+              "mode": "turn",
+              "native_catalog": false,
+              "server": null,
+              "skill_name": null,
+              "skill_path": null,
+              "skill_sha256": null,
+              "supporting_skills": [
+                {
+                  "name": "spreadsheets:Spreadsheets",
+                  "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+                  "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+                }
+              ],
+              "tool": null,
+              "tool_sha256": null
+            },
+            "model_turn_count_observed": 1,
+            "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+            "role": "control",
+            "schema_version": "assessment.c-effective-policy-evidence.v1",
+            "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+            "unknowns": [
+              "model-facing advertised tool inventory is not asserted by this record",
+              "task-level tool use is not inferred from profile declarations"
+            ],
+            "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+          }
+        },
+        "kind": "effective_policy_definition"
+      },
+      "7ab4e62555bdb0d4cfcad632d3f884ff8e6d9e4f33b9ef6b92b070ace528438e": {
+        "document": {
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "kind": "reviewed_inventory"
+      },
+      "88bef3351a4e3edcd7487282fffed234ee0f05aa25eee708e59f7b4fdb088f2a": {
+        "document": {
+          "definition": {
+            "callback_result_sha256": "0b8a73542b2006dce615644e624b7f673ca12800dd2252f1e687a5490af4c243",
+            "component_result_sha256": "bf63a9e452f80ad0b38c97a06be28f94b428d755e9897f74f060dff7177d8ea7",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "identity_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+            "implementation_sha256": {
+              "src/aeep/assessment/boundary.py": "3a94a72b09909d43651d1608943eb28509bfa9971a01ca7af8048b02bb3ccd0f",
+              "src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+              "src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+              "src/aeep/assessment/models.py": "cdb0c89e2edb4d498b4aedc3ec075a373c741acd3dd695f6e2e1c5456854435e",
+              "src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+              "src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+              "src/aeep/executors/managed_host.py": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+              "src/aeep/hosts/codex_app_server.py": "c6b7a0d882b041d8c1f34fc32a21f36516d2bc33d79ab3733308799b4980d4f6",
+              "src/aeep/hosts/codex_dynamic_tools.py": "112668113a9d455c05c2d99400aad552da5a2fefb598e2279c79a42ec985170a",
+              "src/aeep/hosts/codex_invocation.py": "da0ecad7713e54484e1e447602650caed370c2c44b88e60b69776ed9df4bc9fb",
+              "src/aeep/hosts/codex_pair_inspection.py": "c844117db10e618014007c19df3c65f5aa0a69c5e23678904227474d7e3deec3",
+              "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+              "src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+              "src/aeep/router.py": "379ea6eb6bfb6f20cc024596022c7d95be43e2597626b5118bd7cbc3b0a37031",
+              "src/aeep/tasks.py": "8465e6cc2e86e3fe705f0de5658d62c43749d5fb3546761e3fbcea9f3f5505ca"
+            },
+            "native_result_sha256": "3610832bfca31774196d8fc0a519f597b94ffa2b6744ca355db0ae8dcc9247bf",
+            "operation_start_digests": {
+              "allowed_tool": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "answers": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "callback_authority": "b2889a9ecd7ae8476186108b9243fcfc3eac48cb47cab7cc6723c03895f1df61",
+              "callback_lifecycle": "6284ab7fc72b21db80fb032fe6062a90b3cabffdbd755dd9c836784e4be365ba",
+              "candidate_access": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "candidate_network": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "cleanup": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "configuration": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "credential_canary": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "cross_worker": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "denied_tool": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "events": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0",
+              "native_boundary": "6284ab7fc72b21db80fb032fe6062a90b3cabffdbd755dd9c836784e4be365ba",
+              "protected_state": "6284ab7fc72b21db80fb032fe6062a90b3cabffdbd755dd9c836784e4be365ba",
+              "resource_limits": "052604a2f3a9a9411366f0578f4798c331f889acd163bf975318dd8ebab28da0"
+            },
+            "probe_digests_by_name": {
+              "allowed_tool": "6252d27f7f691228edfdae61eff4de393613ec7d418d9ad831186c22c0fe84f2",
+              "answers": "6c5917542fab94b3ee2c56c0c971fe5f185a9eb09a1f570610733a7137eac3b6",
+              "callback_authority": "c22af73b26b4174f44311ae0697b483dc833eb4cb1ee04067c75759ef827ef47",
+              "callback_lifecycle": "747da62341c093e4bcc3c430de293963f38fdaa5938051a14b85a4d3ebbb6ca0",
+              "candidate_access": "7d8c3e5b8af175f0397fefdf04a7d74251c9f16d87319702b337b0aa40aca32b",
+              "candidate_network": "39c6bab7e10b78703e7d3317019dd15e249fdb46d6199e08e9a98c88876087e0",
+              "cleanup": "a6b1e3aca75a3ff56955be616201a63bb4626a4ee0c779416f0823827d852c49",
+              "configuration": "3d8ebe39e877ace0bd8dde167835b9524fbb30db4044d7bff8fc8800bddc32c4",
+              "credential_canary": "4ea8e8ce6c8706e1ed133b3616cb0d881f6c3839d34c0b6424a3e80d1d85d283",
+              "cross_worker": "ee56ca7aad067f31f7b471cf2f3362d8b635b233195535652cd040ae6292bbc2",
+              "denied_tool": "69cb77fea8bb8ccf18a3730fc1cb80fb3daf3b28c41fcf74b96cf1d41f3e4b02",
+              "events": "1e5517f450d811a1d07d894db702d27c4e1897ea191ba50adddbdff7e53dc6a8",
+              "native_boundary": "44702bade909f42799d939858a07dfee72c3072f7365fb75178592a7334c9513",
+              "protected_state": "c19f6afcfc3a60d57702d7acbac524b55a8eb0af62265c895f797379caaa45bc",
+              "resource_limits": "a094d4841738c0d47e6ab3893165cf3f0b12c94e1c125bdf9e5d28733fc0b221"
+            },
+            "purpose": "C control composed-worker enforcement evidence; inert proposal only",
+            "schema_version": "assessment.c-enforcement-evidence.v1",
+            "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+            "unknowns": [
+              "bounded C probes do not establish qualification, admission, or value"
+            ],
+            "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+          }
+        },
+        "kind": "enforcement_definition"
+      }
+    },
+    "simulation_preflight": {
+      "admission": false,
+      "candidate_available": false,
+      "canonical_database_writes": 0,
+      "qualification": false,
+      "require_candidate_access": "passed_in_memory_only",
+      "require_conformance": "passed_in_memory_only",
+      "status": "passed",
+      "value_trial": false,
+      "verified_probe_count": 15,
+      "verified_probe_names": [
+        "allowed_tool",
+        "answers",
+        "callback_authority",
+        "callback_lifecycle",
+        "candidate_access",
+        "candidate_network",
+        "cleanup",
+        "configuration",
+        "credential_canary",
+        "cross_worker",
+        "denied_tool",
+        "events",
+        "native_boundary",
+        "protected_state",
+        "resource_limits"
+      ]
+    }
+  },
+  "differential_conformance": {
+    "digest": "48f91fe4d9ea37cecd385fa095bba560db7a0b74944a1a049bbe43034bae67f0",
+    "document": {
+      "control_conformance_digest": "1b7fe4c370e3850fea06128308487ab91a93e54687d5b05660b189faae47bf6f",
+      "definition": {
+        "candidate_aliases": [],
+        "candidate_dynamic_tools": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+        },
+        "candidate_inventory": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+        },
+        "candidate_paths": [],
+        "control_inventory": {
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "shared_definition_digest": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4",
+        "treatment_inventory": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        }
+      },
+      "schema_version": "assessment.differential-conformance.v1",
+      "treatment_conformance_digest": "227f3be41eda52ce6dec78564118dec997aaf92870fe877d5d29a40d96cef9ad"
+    },
+    "require_differential": "passed_in_memory_only"
+  },
+  "input_pins": {
+    "reports/v08/luna-docx-stage/c-control-callback-execution-review-v1.json": "32812578abb3333732e761e1917889c3628c00b93a508b05ae6387e35a2fe0a7",
+    "reports/v08/luna-docx-stage/c-control-callback-proxy-result.json": "fed8fe9cae6dc4c3dea993676c5523475de7ad9dcd26dff1c2a8726bc752ac5c",
+    "reports/v08/luna-docx-stage/c-control-callback-proxy-review.json": "570fd45221eda6f24e97014b2349f68956ed64f8c1fd1c40455daedaafbb6ac5",
+    "reports/v08/luna-docx-stage/c-control-callback-result-v1.json": "0b8a73542b2006dce615644e624b7f673ca12800dd2252f1e687a5490af4c243",
+    "reports/v08/luna-docx-stage/c-control-capacity-parent-execution-review.json": "1013fbc7582ac8e82d3da9a81c9867a5cdb93132c7729d07eb7b078afb30b3bc",
+    "reports/v08/luna-docx-stage/c-control-capacity-proxy-result.json": "87100d6d2a80fabecfdbe48317d1e0308caf7fda637135e16911feedefaf7ec7",
+    "reports/v08/luna-docx-stage/c-control-capacity-proxy-review.json": "2ed4f0084427dc5e1fc2c6ac59f387dbe97b9cd11d38728925cfcae3b9c638fb",
+    "reports/v08/luna-docx-stage/c-control-capacity-result.json": "27863c786b9e96e4db4554d32da0d1f0b8de73e71f49068889dc7378e964e3d0",
+    "reports/v08/luna-docx-stage/c-control-capacity-review.json": "30c713a75bd7aff349d57a064039022918b8b71907fd1dd17e40c2486cbb417c",
+    "reports/v08/luna-docx-stage/c-current-callback-execution-review-v1.json": "a2b7e0f8bbada3e55cc5bda546e7ee4ff64f96a42c064e286a4a6fa44be47b39",
+    "reports/v08/luna-docx-stage/c-current-callback-result-v1.json": "5cc85fcad2da0c65632db2e355481249bdb0448082558852df56b6cbe1a7ad68",
+    "reports/v08/luna-docx-stage/c-current-profile-v1.json": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449",
+    "reports/v08/luna-docx-stage/c-native-components-control-result-v1.json": "3610832bfca31774196d8fc0a519f597b94ffa2b6744ca355db0ae8dcc9247bf",
+    "reports/v08/luna-docx-stage/c-native-components-control-review-v1.json": "4f39b77b6919a72d7d264923f10f63e8cc6447cbd673e40cdbb8212bb2906cf3",
+    "reports/v08/luna-docx-stage/c-native-components-treatment-result-v1.json": "7617467963424679365c8b876e4e14cd9ef95adf8a43f93d55154d239053932a",
+    "reports/v08/luna-docx-stage/c-native-components-treatment-review-v1.json": "30393e827fceaea3c20c0bede4cf3abc37caae896523fcc54b052730ff7f5526",
+    "reports/v08/luna-docx-stage/c-proxy-bracket.py": "c5191472516fc591e28b08ce575efa59b47903758a6e05f7fa625f61d7dd31ba",
+    "reports/v08/luna-docx-stage/c-treatment-callback-proxy-result.json": "d40e7f5c5660ad11e685d99dd550e09d1207aa3f8d1eb6a9d02f51b16045913f",
+    "reports/v08/luna-docx-stage/c-treatment-callback-proxy-review.json": "eb72b9af4dce77af37171d8ec302b0ba6b62bb9aaad8edd20493831c96ec0330",
+    "reports/v08/luna-docx-stage/c-treatment-capacity-parent-execution-review.json": "6a036e7139b0da9730dbbde0b6cc68ea7c739754c73cc8274b61f0657147691b",
+    "reports/v08/luna-docx-stage/c-treatment-capacity-proxy-result.json": "68d90ba94b82ff73d7eb83da4002f6e4ebc724c669a5b723933b948a122d087b",
+    "reports/v08/luna-docx-stage/c-treatment-capacity-proxy-review.json": "ffaa0829c7c1c3f06298989d7024717ea34c460a9a17af17cbb272eab1cadcc4",
+    "reports/v08/luna-docx-stage/c-treatment-capacity-result.json": "e773792aa37051473f9ee2bb448f9a2944b779e9c38174614ffb74ec37a2dfae",
+    "reports/v08/luna-docx-stage/c-treatment-capacity-review.json": "e6c382e3f256e55e92ae319c0cf5c49441922d68b66b5bdd58a043e885682614",
+    "reports/v08/luna-docx-stage/c-worker-components-execution-review-v1.json": "2517dcb9b918677f54db9c9e3532f6aa9ff6bcd9b0a711b00967a9d0d816cf9c",
+    "reports/v08/luna-docx-stage/c-worker-components-result-v1.json": "bf63a9e452f80ad0b38c97a06be28f94b428d755e9897f74f060dff7177d8ea7",
+    "reports/v08/luna-docx-stage/c-worker-components-v3-proxy-result.json": "095cb95225e92cb82075eebc225c248b761633586deb1f4f17886ac7356922ad",
+    "reports/v08/luna-docx-stage/c-worker-components-v3-proxy-review.json": "6f66997a1a2a72c6513f7d3136e4c46cdcbc971976bdcf0de66d5a2dbfeeb96f"
+  },
+  "limitations": [
+    "Proposal only; exact review under standing operator delegation and a separate apply step remain required.",
+    "Probe evidence is bounded to the exact C worker, native and callback operations.",
+    "Model-facing advertised tools and broader task-level tool use are not inferred.",
+    "This record does not qualify, admit or establish value for any candidate."
+  ],
+  "profile_sha256": "8d3f49299452a7b4ea1e8cbc46abcd6ef8b81989ca24e131b35fbc8ed6bcd449",
+  "schema_version": "assessment.c-boundary-conformance-proposal.v1",
+  "simulation_preflight": {
+    "admission": false,
+    "canonical_database_writes": 0,
+    "differential_definition_digest": "57af9b71f05881d4109f1c4b44594433816228df3fe368aaf65c7588b7cb4dbe",
+    "model_turns": 0,
+    "probe_count_per_role": 15,
+    "qualification": false,
+    "role_count": 2,
+    "status": "passed",
+    "value_trial": false
+  },
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "status": "inert_proposal_unreviewed",
+  "treatment": {
+    "canonical_references": {
+      "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+      "callback_evidence_digest": "da620159c56d5d4db9e15c369aeb1a73a708330aacbb6075fb50fb6089eef650",
+      "callback_probe_digest": "b7e5084b71667b2930a117bb7413bcdea1ace189cf94413d4acc5ca31dfc4d8c",
+      "component_digest": "5438e3aae178909d6d7c765b1590c05308a343d26e8c467097435ba1b1149e8d",
+      "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+      "host_receipt_digest": "83407fb227940117db957039ffc24887a12b96c894b54d0e777b0934ac492848",
+      "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+      "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+      "probe_digests_by_name": {
+        "allowed_tool": "e91c84a8871f204c2eb3c5f41175be81a4be696248d4868456e1e7ceedfc0b1f",
+        "answers": "10491d3513e6cbb9f1f1f39e39c3cd57eefb43dc4236c98c579c82239bb046a4",
+        "callback_authority": "b7e5084b71667b2930a117bb7413bcdea1ace189cf94413d4acc5ca31dfc4d8c",
+        "callback_lifecycle": "1a79d370fff714d787c12d550c522eb76015f17a4731e11970b1bfb8e184e97f",
+        "candidate_access": "a6c6e593cfeb31278ab2c48e807b0c6e244a6ed26d78c3a8564c156184927056",
+        "candidate_network": "3360a9b780f37183f475f4c1d9aa41e90d8993721210b7cbb1e3a4e0dd48236e",
+        "cleanup": "77502a10542a5d7d258b438048d4a96e5f4dac118b664049d762d285a73ed03b",
+        "configuration": "c1ec07c6b3ec94160d129cd0ca19e59ff58d1644874d6f80bd829a6d9ec14ae7",
+        "credential_canary": "2a90d1da6d0eba2841e63243f59972eaaef0ec81ad29f8c84c1dc6dc7214151d",
+        "cross_worker": "d5035c3bc6f89f0de3ebf6376cbd075f8438084fa0d4e7f56435a3a2b1012eac",
+        "denied_tool": "62bbe4a97256077eb83ca52d30d6ccd63bb1f2accb85e9c987f3637e044713ab",
+        "events": "71f4372b4d72c15ec8fd0d1c96282ae98e7171ab2402f856e8617f5e4f8f8fd3",
+        "native_boundary": "67645bccc1ed289931ba9cb908f8177647791adf21cc22dc33419b516bb9ecd5",
+        "protected_state": "77b28f268e13fb1afee8af4c6b464f69bbce7b96c4e477e776cad84fafcce7fd",
+        "resource_limits": "23382aff7877d884184ddd3379a16bed9fbeedc985f93f867100010b7e028dc5"
+      },
+      "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+    },
+    "conformance_record": {
+      "digest": "227f3be41eda52ce6dec78564118dec997aaf92870fe877d5d29a40d96cef9ad",
+      "document": {
+        "adapter": "codex-app-server:b-luna-aeep",
+        "adapter_version": "1",
+        "advertised_tools": [],
+        "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+        "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+        "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+        "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+        "conformance_id": "c-treatment-boundary-conformance-20261003-50de",
+        "effective_inventory": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "effective_policy_digest": "45e5754e3a5803a4a93d4e9403163e094ae99a5e9e413a802b6191e68dd9dc2e",
+        "enforcement_definition_digest": "0c90485b8376d86a741e9546100dc432eb03c30270dd7e54639fa7be8d7f62e2",
+        "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+        "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+        "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+        "permitted_tools": [],
+        "probe_digests": [
+          "e91c84a8871f204c2eb3c5f41175be81a4be696248d4868456e1e7ceedfc0b1f",
+          "10491d3513e6cbb9f1f1f39e39c3cd57eefb43dc4236c98c579c82239bb046a4",
+          "b7e5084b71667b2930a117bb7413bcdea1ace189cf94413d4acc5ca31dfc4d8c",
+          "1a79d370fff714d787c12d550c522eb76015f17a4731e11970b1bfb8e184e97f",
+          "a6c6e593cfeb31278ab2c48e807b0c6e244a6ed26d78c3a8564c156184927056",
+          "3360a9b780f37183f475f4c1d9aa41e90d8993721210b7cbb1e3a4e0dd48236e",
+          "77502a10542a5d7d258b438048d4a96e5f4dac118b664049d762d285a73ed03b",
+          "c1ec07c6b3ec94160d129cd0ca19e59ff58d1644874d6f80bd829a6d9ec14ae7",
+          "2a90d1da6d0eba2841e63243f59972eaaef0ec81ad29f8c84c1dc6dc7214151d",
+          "d5035c3bc6f89f0de3ebf6376cbd075f8438084fa0d4e7f56435a3a2b1012eac",
+          "62bbe4a97256077eb83ca52d30d6ccd63bb1f2accb85e9c987f3637e044713ab",
+          "71f4372b4d72c15ec8fd0d1c96282ae98e7171ab2402f856e8617f5e4f8f8fd3",
+          "67645bccc1ed289931ba9cb908f8177647791adf21cc22dc33419b516bb9ecd5",
+          "77b28f268e13fb1afee8af4c6b464f69bbce7b96c4e477e776cad84fafcce7fd",
+          "23382aff7877d884184ddd3379a16bed9fbeedc985f93f867100010b7e028dc5"
+        ],
+        "reviewed_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+        "schema_version": "assessment.boundary-conformance.v3",
+        "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+        "used_tools": [],
+        "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+      }
+    },
+    "review_documents": {
+      "0c90485b8376d86a741e9546100dc432eb03c30270dd7e54639fa7be8d7f62e2": {
+        "document": {
+          "definition": {
+            "callback_result_sha256": "5cc85fcad2da0c65632db2e355481249bdb0448082558852df56b6cbe1a7ad68",
+            "component_result_sha256": "bf63a9e452f80ad0b38c97a06be28f94b428d755e9897f74f060dff7177d8ea7",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+            "implementation_sha256": {
+              "src/aeep/assessment/boundary.py": "3a94a72b09909d43651d1608943eb28509bfa9971a01ca7af8048b02bb3ccd0f",
+              "src/aeep/assessment/conformance.py": "4c3053ff4573c5c5a6fdceb37dfe4c39c215d169b71e417a45928b92193bd3e0",
+              "src/aeep/assessment/identity.py": "a249b4c42078f39daa1008495023512f003e4cae8c69225bb3e51976ae678eee",
+              "src/aeep/assessment/models.py": "cdb0c89e2edb4d498b4aedc3ec075a373c741acd3dd695f6e2e1c5456854435e",
+              "src/aeep/assessment/repository.py": "0a9659a0632b1ace29eb10a63391732b120ff570456937dfbb9ef6df5e4c85f7",
+              "src/aeep/execution.py": "fcf83e2a56bb100ec883a048ac68f14b2b2abff4ad87cbf968ec03c776801878",
+              "src/aeep/executors/managed_host.py": "2b71fe11bff894d26aa87466173af024bbdf823ccbc18a469b5442b15628febb",
+              "src/aeep/hosts/codex_app_server.py": "c6b7a0d882b041d8c1f34fc32a21f36516d2bc33d79ab3733308799b4980d4f6",
+              "src/aeep/hosts/codex_dynamic_tools.py": "112668113a9d455c05c2d99400aad552da5a2fefb598e2279c79a42ec985170a",
+              "src/aeep/hosts/codex_invocation.py": "da0ecad7713e54484e1e447602650caed370c2c44b88e60b69776ed9df4bc9fb",
+              "src/aeep/hosts/codex_pair_inspection.py": "c844117db10e618014007c19df3c65f5aa0a69c5e23678904227474d7e3deec3",
+              "src/aeep/hosts/codex_sandbox.py": "e9b05acf0982f32d8e6e91da2e30cd1935481e95130c800e98e85a368c47c7a0",
+              "src/aeep/hosts/workers.py": "135a46cb50c93ded2e9faf3d78ab111b21dc7f31f011027d2fe52e70afe09556",
+              "src/aeep/router.py": "379ea6eb6bfb6f20cc024596022c7d95be43e2597626b5118bd7cbc3b0a37031",
+              "src/aeep/tasks.py": "8465e6cc2e86e3fe705f0de5658d62c43749d5fb3546761e3fbcea9f3f5505ca"
+            },
+            "native_result_sha256": "7617467963424679365c8b876e4e14cd9ef95adf8a43f93d55154d239053932a",
+            "operation_start_digests": {
+              "allowed_tool": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "answers": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "callback_authority": "a92138c90442cc4806e5ae65477971ed2376d1b1d367c46a5dbd264d82013541",
+              "callback_lifecycle": "f2d6bad3fad83fe3d5046570b892e87f91dfea19ceb807f8cee2fc0cc802d40e",
+              "candidate_access": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "candidate_network": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "cleanup": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "configuration": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "credential_canary": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "cross_worker": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "denied_tool": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "events": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175",
+              "native_boundary": "f2d6bad3fad83fe3d5046570b892e87f91dfea19ceb807f8cee2fc0cc802d40e",
+              "protected_state": "f2d6bad3fad83fe3d5046570b892e87f91dfea19ceb807f8cee2fc0cc802d40e",
+              "resource_limits": "ee52e4a948cecb6555412860854875500ee18934dc8749ef189bd47c59124175"
+            },
+            "probe_digests_by_name": {
+              "allowed_tool": "e91c84a8871f204c2eb3c5f41175be81a4be696248d4868456e1e7ceedfc0b1f",
+              "answers": "10491d3513e6cbb9f1f1f39e39c3cd57eefb43dc4236c98c579c82239bb046a4",
+              "callback_authority": "b7e5084b71667b2930a117bb7413bcdea1ace189cf94413d4acc5ca31dfc4d8c",
+              "callback_lifecycle": "1a79d370fff714d787c12d550c522eb76015f17a4731e11970b1bfb8e184e97f",
+              "candidate_access": "a6c6e593cfeb31278ab2c48e807b0c6e244a6ed26d78c3a8564c156184927056",
+              "candidate_network": "3360a9b780f37183f475f4c1d9aa41e90d8993721210b7cbb1e3a4e0dd48236e",
+              "cleanup": "77502a10542a5d7d258b438048d4a96e5f4dac118b664049d762d285a73ed03b",
+              "configuration": "c1ec07c6b3ec94160d129cd0ca19e59ff58d1644874d6f80bd829a6d9ec14ae7",
+              "credential_canary": "2a90d1da6d0eba2841e63243f59972eaaef0ec81ad29f8c84c1dc6dc7214151d",
+              "cross_worker": "d5035c3bc6f89f0de3ebf6376cbd075f8438084fa0d4e7f56435a3a2b1012eac",
+              "denied_tool": "62bbe4a97256077eb83ca52d30d6ccd63bb1f2accb85e9c987f3637e044713ab",
+              "events": "71f4372b4d72c15ec8fd0d1c96282ae98e7171ab2402f856e8617f5e4f8f8fd3",
+              "native_boundary": "67645bccc1ed289931ba9cb908f8177647791adf21cc22dc33419b516bb9ecd5",
+              "protected_state": "77b28f268e13fb1afee8af4c6b464f69bbce7b96c4e477e776cad84fafcce7fd",
+              "resource_limits": "23382aff7877d884184ddd3379a16bed9fbeedc985f93f867100010b7e028dc5"
+            },
+            "purpose": "C treatment composed-worker enforcement evidence; inert proposal only",
+            "schema_version": "assessment.c-enforcement-evidence.v1",
+            "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+            "unknowns": [
+              "bounded C probes do not establish qualification, admission, or value"
+            ],
+            "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+          }
+        },
+        "kind": "enforcement_definition"
+      },
+      "227f3be41eda52ce6dec78564118dec997aaf92870fe877d5d29a40d96cef9ad": {
+        "document": {
+          "adapter": "codex-app-server:b-luna-aeep",
+          "adapter_version": "1",
+          "advertised_tools": [],
+          "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+          "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+          "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+          "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+          "conformance_id": "c-treatment-boundary-conformance-20261003-50de",
+          "effective_inventory": {
+            "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+            "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+            "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+            "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+          },
+          "effective_policy_digest": "45e5754e3a5803a4a93d4e9403163e094ae99a5e9e413a802b6191e68dd9dc2e",
+          "enforcement_definition_digest": "0c90485b8376d86a741e9546100dc432eb03c30270dd7e54639fa7be8d7f62e2",
+          "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+          "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+          "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+          "permitted_tools": [],
+          "probe_digests": [
+            "e91c84a8871f204c2eb3c5f41175be81a4be696248d4868456e1e7ceedfc0b1f",
+            "10491d3513e6cbb9f1f1f39e39c3cd57eefb43dc4236c98c579c82239bb046a4",
+            "b7e5084b71667b2930a117bb7413bcdea1ace189cf94413d4acc5ca31dfc4d8c",
+            "1a79d370fff714d787c12d550c522eb76015f17a4731e11970b1bfb8e184e97f",
+            "a6c6e593cfeb31278ab2c48e807b0c6e244a6ed26d78c3a8564c156184927056",
+            "3360a9b780f37183f475f4c1d9aa41e90d8993721210b7cbb1e3a4e0dd48236e",
+            "77502a10542a5d7d258b438048d4a96e5f4dac118b664049d762d285a73ed03b",
+            "c1ec07c6b3ec94160d129cd0ca19e59ff58d1644874d6f80bd829a6d9ec14ae7",
+            "2a90d1da6d0eba2841e63243f59972eaaef0ec81ad29f8c84c1dc6dc7214151d",
+            "d5035c3bc6f89f0de3ebf6376cbd075f8438084fa0d4e7f56435a3a2b1012eac",
+            "62bbe4a97256077eb83ca52d30d6ccd63bb1f2accb85e9c987f3637e044713ab",
+            "71f4372b4d72c15ec8fd0d1c96282ae98e7171ab2402f856e8617f5e4f8f8fd3",
+            "67645bccc1ed289931ba9cb908f8177647791adf21cc22dc33419b516bb9ecd5",
+            "77b28f268e13fb1afee8af4c6b464f69bbce7b96c4e477e776cad84fafcce7fd",
+            "23382aff7877d884184ddd3379a16bed9fbeedc985f93f867100010b7e028dc5"
+          ],
+          "reviewed_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+          "schema_version": "assessment.boundary-conformance.v3",
+          "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+          "used_tools": [],
+          "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+        },
+        "kind": "boundary_conformance"
+      },
+      "45e5754e3a5803a4a93d4e9403163e094ae99a5e9e413a802b6191e68dd9dc2e": {
+        "document": {
+          "definition": {
+            "adapter": "codex-app-server:b-luna-aeep",
+            "adapter_version": "1",
+            "binary_digest": "113aa5d5952a6fd3950a88323219747d0c91978ebee948509a540c8a460e59a3",
+            "callback_binding_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+            "callback_evidence_digest": "da620159c56d5d4db9e15c369aeb1a73a708330aacbb6075fb50fb6089eef650",
+            "candidate_access_probe_digest": "a6c6e593cfeb31278ab2c48e807b0c6e244a6ed26d78c3a8564c156184927056",
+            "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "configuration_probe_digest": "c1ec07c6b3ec94160d129cd0ca19e59ff58d1644874d6f80bd829a6d9ec14ae7",
+            "effective_inventory_digest": "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a",
+            "executor_id": "b.luna.aeep",
+            "host_receipt_digest": "83407fb227940117db957039ffc24887a12b96c894b54d0e777b0934ac492848",
+            "identity_digest": "a1b17b8a5e862851ef540dc805e11f9ff45b69a7377423b37a21613512aad782",
+            "image_digest": "sha256:af37cdb28b380f9a01d16af4853680860f3c5a7c84f972e8f9d36dc53ac87e53",
+            "invocation": {
+              "dynamic_tools_digest": "1841c05c2adb1c2db9d10cf5a88ecd48c7fa759c5a6d3d246f575324daa276c4",
+              "exposure": "required",
+              "local_profile": "capable_local",
+              "mode": "dynamic_tool",
+              "native_catalog": false,
+              "server": "workbook",
+              "skill_name": null,
+              "skill_path": null,
+              "skill_sha256": null,
+              "supporting_skills": [
+                {
+                  "name": "spreadsheets:Spreadsheets",
+                  "path": "/opt/dependencies/plugin/skills/spreadsheets/SKILL.md",
+                  "sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5"
+                }
+              ],
+              "tool": "aeep_recipe_f468b36bc594",
+              "tool_sha256": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a"
+            },
+            "model_turn_count_observed": 1,
+            "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+            "role": "treatment",
+            "schema_version": "assessment.c-effective-policy-evidence.v1",
+            "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+            "unknowns": [
+              "model-facing advertised tool inventory is not asserted by this record",
+              "task-level tool use is not inferred from profile declarations"
+            ],
+            "worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0"
+          }
+        },
+        "kind": "effective_policy_definition"
+      },
+      "7dc6cf0d15fa774412a045ebb34f1a812bdf6a15f6c1491c062e32680320983a": {
+        "document": {
+          "dynamic:workbook:aeep_recipe_f468b36bc594": "8a9718a505a5991a26e3fa60c6cef3b810a38e1a2859c5930953117e6b6a8e8a",
+          "dynamic:workbook:fixed_workbook": "b51c5013cf212f497376a4bd01d82b620a295c4ad424fd2241947ff766a2ae28",
+          "skill:spreadsheets:Spreadsheets": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "spreadsheets_bundle": "b68dad50ecc7d31d77ecf437984307b12580ee85569c00598479f212f27229a4"
+        },
+        "kind": "reviewed_inventory"
+      }
+    },
+    "simulation_preflight": {
+      "admission": false,
+      "candidate_available": true,
+      "canonical_database_writes": 0,
+      "qualification": false,
+      "require_candidate_access": "passed_in_memory_only",
+      "require_conformance": "passed_in_memory_only",
+      "status": "passed",
+      "value_trial": false,
+      "verified_probe_count": 15,
+      "verified_probe_names": [
+        "allowed_tool",
+        "answers",
+        "callback_authority",
+        "callback_lifecycle",
+        "candidate_access",
+        "candidate_network",
+        "cleanup",
+        "configuration",
+        "credential_canary",
+        "cross_worker",
+        "denied_tool",
+        "events",
+        "native_boundary",
+        "protected_state",
+        "resource_limits"
+      ]
+    }
+  }
+}

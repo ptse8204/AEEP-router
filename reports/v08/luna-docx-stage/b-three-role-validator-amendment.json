@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-03T07:16:04.194676+00:00",
+  "authority": "September 25/27 standing delegation for finite assessment definitions and implementation; user continuation of original B evidence goal",
+  "source_before": "9d09d61a152e79eaf01f8c51f9039f06468e13d07ad304544eb302ad3b39d751",
+  "status": "root scope reviewed; code patch pending completion of active frozen-source validation",
+  "findings": [
+    "validate_incremental_hosts compares each non-baseline worker only against baseline, leaving candidate versus normal worker/credential reuse unchecked.",
+    "Its unconditional supporting-skills equality rejects the intended normal arm that omits the externally discovered Spreadsheets support available equally to discovery and AEEP."
+  ],
+  "approved_scope": [
+    "For experiment.v2 aeep_value, enforce independence for every pair of controlled role workers, including separate credential storage.",
+    "Permit the normal arm only an exact subset of the baseline supporting skills; reject additions or changed name/path/hash. Keep discovery and AEEP supporting skills identical and retain the exact reviewed ThreeWayAccessDefinition plus current per-role effective-inventory/configuration conformance gate.",
+    "Add focused regression cases for valid omitted discovery support, invalid normal additions/drift, and candidate/normal worker or credential collisions. Keep historical four-arm behavior unchanged.",
+    "Freeze the resulting source and run required checks before producing fresh live evidence. Update inert helper pins only after final source is stable."
+  ],
+  "unchanged": [
+    "No runtime, model, worker, sign-in or paid-service action authorized by this code-change scope.",
+    "Existing grants/counters, failed DOCX evidence, utility thresholds, 8/28/105 design and protected fresh holdouts.",
+    "Required qualification exposure and optional value exposure; same ordinary task instructions and shared helper."
+  ],
+  "prepared_setup_on_old_source": "b-native-setup-review.json; remains unapproved and unexecuted; do not run after source change."
+}

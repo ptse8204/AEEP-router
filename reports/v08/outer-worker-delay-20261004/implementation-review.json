@@ -1,0 +1,39 @@
+{
+  "schema_version": "aeep.implementation-review.v1",
+  "reviewed_at": "2026-10-04T07:55:10.035679+00:00",
+  "authority": "User October 4 request to diagnose outer workflow delays; standing September25/27 finite test-definition delegation in docs/ASSESSMENT_TESTING.md.",
+  "scope": [
+    "Content-free per-invocation progress metadata in src/aeep/hosts/codex_app_server.py",
+    "Offline stdio regressions for callback reply followed by missing turn completion, rejection, cancellation, and state isolation",
+    "README plain-language rewrite and docs/EVIDENCE.md supported-use-case guide"
+  ],
+  "reason": "Five recorded timeouts each have valid completed native child receipts; retained records do not yet identify exact later failure. Preserve local observed phase without task contents.",
+  "unchanged": [
+    "Historical five timeouts and negative qualification",
+    "Deadlines, reasoning model, thresholds and allowance counters",
+    "Approval ceilings and all eligibility checks",
+    "No retry, new campaign, live call, credential access or cloud provisioning"
+  ],
+  "evidence_boundary": "Response written means local pipe drain, not host acknowledgement. Offline scripted tests do not qualify or establish live repair. Code changes invalidate source-bound live conformance for future runs; retain prior source50de as historical.",
+  "source_before": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "validation": "AGENTS required compile/schema/fullpytest/coverage plus policy/lint/type/CI/package checks; isolated output paths",
+  "storage_free_gib": 152.53606414794922,
+  "amendments": [
+    {
+      "reviewed_at": "2026-10-04T08:11:51.529971+00:00",
+      "authority": "Same standing finite test-definition delegation and current user diagnosis request.",
+      "scope": [
+        "Allowlist compact JSON string host_progress in Router receipt metadata, matching existing scalar metadata contract.",
+        "Offline SQLite receipt close/reopen regression proving progress persists and unrelated task content is filtered.",
+        "Preserve callback_running if a callback arrives before turn/start response."
+      ],
+      "reason": "Targeted tests and integration review found progress loss during persistence and early-callback stage overwrite. No eligibility, timeout or historical result changes."
+    },
+    {
+      "reviewed_at": "2026-10-04T08:21:55.469725+00:00",
+      "scope": "Restore required **Status:** AEEP 0.8 README marker after version-consistency regression.",
+      "validation": "Initial full pytest: 1218 passed, 1 failed, 21 skipped, 1 warning. Preserve 06-pytest.log and first validation-progress.json. Rerun version-consistency test, then full suite under branch coverage plus remaining checks; no source or test change.",
+      "source_digest_unchanged": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6"
+    }
+  ]
+}

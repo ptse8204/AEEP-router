@@ -43,6 +43,24 @@
       "default": null,
       "title": "Original Value",
       "type": "null"
+    },
+    "capability_profile_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Capability Profile Digest"
+    },
+    "host_binding": {
+      "default": true,
+      "title": "Host Binding",
+      "type": "boolean"
     }
   },
   "required": [

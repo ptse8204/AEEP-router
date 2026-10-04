@@ -1,0 +1,58 @@
+Frozen-source successor verification, authorized by root against source digest
+060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293.
+
+Commands, in order:
+1. python3 -m compileall -q src examples tests
+2. PYTHONPATH=src python3 scripts/generate_schemas.py --check
+3. python3 -m pytest
+4. python3 -m coverage run --branch -m pytest (only if command 3 passes)
+5. python3 -m coverage report -m (only if command 4 passes)
+
+The run_check.py wrapper records each command's output and exit code. Test
+commands use isolated TMPDIR and pytest --basetemp/cache paths under
+/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-successor-20261002.
+For the coverage commands, COVERAGE_FILE is this report directory's
+coverage.data. AEEP_VERIFY_OFFLINE and explicit live, native, and container
+opt-in variables are removed; PYTEST_ADDOPTS is set only for the selected
+pytest basetemp and cache paths. The wrapper checks the global
+verification_source_digest before and after each command and every 30 seconds
+during execution. It stops if combined test-temp plus retained report data
+exceeds 30 GiB or if macOS important-usage free capacity falls below 80 GiB.
+The previous report directory is preserved without replacement.
+
+The first successor full pytest failed only because the current v08 completion
+lock still pinned the old bytes for the revised `tests/test_p0_usefulness.py`.
+Root reviewed and recorded the exact old/new artifact digests and updated the
+current v08 pin in `reports/v08/verification-lock.json`; the historical v07
+lock is unchanged. The retry uses `run_check_retry.py`, expects source digest
+060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293 and lock
+SHA-256 2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71,
+and records both digests before, during and after each command. Its separate
+test root is `/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-retry-20261002`.
+
+Retry commands, in order:
+1. `python3 -m pytest tests/test_v07_completion_verifier.py::test_core_verifier_executes_tests_and_checks_locked_digests`
+2. If command 1 passes, repeat `python3 -m pytest`.
+3. If command 2 passes, run `python3 -m coverage run --branch -m pytest`.
+4. If command 3 passes, run `python3 -m coverage report -m`.
+
+After the authorized single assessment-contract marker was added to
+`tests/test_v08_docx_pair_inspection.py`, the final source digest is
+eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1 and the
+current v08 verification-lock SHA-256 remains
+2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71. These
+checks are recorded separately from the earlier successful full test and
+coverage artifacts.
+
+Final marker-bound checks, in order, using `run_check_final.py` and a separate
+temp root:
+1. `python3 scripts/check_assessment_policy.py`
+2. `python3 -m compileall -q src examples tests`
+3. `PYTHONPATH=src python3 scripts/generate_schemas.py --check`
+4. `python3 -m pytest tests/test_v08_docx_pair_inspection.py`
+5. If all pass, `python3 -m pytest`
+6. If command 5 passes, `python3 -m coverage run --branch -m pytest`
+7. If command 6 passes, `python3 -m coverage report -m`
+8. If command 7 passes, export a new JSON report from
+   `coverage-after-marker.data` and run the existing critical and assessment
+   coverage gate scripts against it without rerunning tests.

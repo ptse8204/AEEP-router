@@ -1,0 +1,59 @@
+{
+  "schema_version": "assessment.independent-review.v1",
+  "verdict": "pass",
+  "reviewed_review_sha256": "1f9ee8a0c9fa1d30fb0da1b5bff304d97ef3f1c5cb16c5bd13c4c233480885b8",
+  "source_digest": "4f70a60d084714514aa19a9beb54d38fe68721b6eaa5c1a884d132111fbd6d66",
+  "runner_sha256": "ef0c87743fc3406c1386d5b084560b6f471c72ad522a0f1938f471063f436cf4",
+  "runtime_dependency_hashes_match": 137,
+  "scope": {
+    "authorization_id": "onboarding",
+    "image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "maximum_operations": 4,
+    "maximum_grader_batches": 3,
+    "maximum_reserved_seconds": 140,
+    "maximum_model_turns": 0,
+    "maximum_cash_usd": 0,
+    "work": "Three reviewed literal reference outputs and independent grader checks only; no generation, holdouts, candidate trials, qualification, or admission."
+  },
+  "canonical_grant_read_only_snapshot": {
+    "limits": {
+      "operations": 50000,
+      "model_turns": 6000,
+      "elapsed_seconds": 604800,
+      "cash_usd": 0
+    },
+    "used": {
+      "operations": 8681,
+      "model_turns": 2546,
+      "elapsed_seconds": 75258.72103060992,
+      "cash_usd": 0
+    },
+    "revoked": false,
+    "other_reserved_operations": [
+      {
+        "id": "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client",
+        "stage": "ui_client",
+        "reserved_operations": 1,
+        "reserved_model_turns": 1,
+        "reserved_seconds": 200
+      },
+      {
+        "id": "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+        "stage": "report_generation",
+        "reserved_operations": 1,
+        "reserved_model_turns": 0,
+        "reserved_seconds": 30
+      }
+    ],
+    "main_database_file_unchanged": true
+  },
+  "checks": [
+    "Review, runner, source, and all 137 runtime dependency hashes match the supplied exact digests.",
+    "The reviewed output schema caps document_b64 at 200000 characters; the preparation placeholder is therefore a conservative upper bound for grader batching.",
+    "Each call uses the existing authorize/reserve path for one operation and timeout plus five seconds; deterministic operation IDs and the exclusive started marker refuse blind replay.",
+    "The runner invokes only the reference and grader; it does not invoke the generator or any model-facing service."
+  ],
+  "execution_performed": false,
+  "finding": null,
+  "reviewer_note": "The read-only SQLite counter query opened the WAL database and created an empty aeep.sqlite3-wal and 32 KiB aeep.sqlite3-shm sidecar. They were left in place; the main database file was unchanged."
+}

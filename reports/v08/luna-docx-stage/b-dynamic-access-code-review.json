@@ -1,0 +1,62 @@
+{
+  "adapter_observation_path": {
+    "dynamic_evidence": "The helper binds exact CodexDynamicTools.inventory(), binding digest, worker digest, successful thread/start + active permission profile, zero turns/calls and model exposure=unknown. Keep that meaning as declaration acceptance only. In the final worker record, combine the observed dynamic_inventory with independently observed external skill/tool inventory; do not synthesize it from the expected definition alone.",
+    "model_use": "Keep model visibility/use unknown in the zero-turn declaration probe. Full composed v3 conformance must still include the actual model callback host receipt, successful required candidate invocation for qualification, child attempt/receipt lineage, cleanup and protected-state checks.",
+    "reuse": "Do not copy the report-local ~400-line worker collector. Reuse the current composed collector\u2019s authorization/reservation/worker lifecycle and its inspect_dynamic_declaration call; wire dynamic_candidate_access_observation into only the candidate_access probe path.",
+    "shared_spreadsheets": "Use the existing worker inventory plus filesystem probe to collect exact Spreadsheets skill digest/path/alias/runtime on discovery and AEEP and require equality; bind this common physical inventory through ThreeWayAccessDefinition.external_candidate_inventory and both role effective inventories. The existing WorkerPairInspection candidate-absence/presence assertion is not reusable for those roles."
+  },
+  "amendment": "reports/v08/luna-docx-stage/b-dynamic-access-amendment.json",
+  "compatibility_review": {
+    "legacy_serialization": "candidate_dynamic_tools is omitted when empty; the old candidate_paths nonempty invariant is re-expressed in exact_difference for physical definitions; no direct legacy change found in reviewed diff.",
+    "missing_focused_checks": "Diff contains no dedicated adversarial tests for malformed/mixed dynamic targets, partial candidate declaration, normal-role no-callback absence, invocation-target mismatch, or legacy serialization equality. Add targeted offline checks and schema check before source freeze as amendment requires."
+  },
+  "findings": [
+    {
+      "detail": "When expected.candidate_dynamic_tools is nonempty, require_candidate_access always requires BoundaryConformance v3, callback_binding_digest, and dynamic effective_inventory. require_three_way_access invokes it on the normal role with available=False, although a legitimate normal turn profile may have v2 conformance and no callback. Thus a no-AEEP normal challenger cannot satisfy the new aeep_value access check.",
+      "evidence": [
+        "src/aeep/assessment/boundary.py:149-200",
+        "src/aeep/assessment/boundary.py:261-286"
+      ],
+      "minimal_fix": "For available=False, support a v2/plain boundary with no callback only if its exact current effective inventory contains none of the candidate dynamic keys and its execution-backed candidate_access probe records the dynamic candidate absent. Keep v3 reviewed-binding checks mandatory for roles that expose dynamic tools; do not require a dummy callback on normal.",
+      "severity": "high",
+      "title": "Plain normal role is rejected for dynamic-candidate three-way access"
+    },
+    {
+      "detail": "The verifier proves that the reviewed callback declaration contains the candidate key/hash, but does not compare the selected profile invocation server/tool/tool_sha256 with candidate_dynamic_tools. ComposedPairDefinition checks dynamic_tool mode and binding digest, while the runtime checks the selected target against the binding inventory. This leaves the frozen differential target unjoined to the selected invocation at review time; optional-exposure conformance may not force that exact candidate call.",
+      "evidence": [
+        "src/aeep/assessment/boundary.py:169-200",
+        "src/aeep/hosts/codex_pair_inspection.py:754-797",
+        "src/aeep/hosts/codex_pair_inspection.py:849-881",
+        "src/aeep/hosts/codex_app_server.py:915-917,1017-1021"
+      ],
+      "minimal_fix": "In the shared verifier, resolve the selected spec from verify_composed_binding and require available=True to have mode=dynamic_tool with exact namespace/tool key and tool SHA equal to the sole reviewed candidate target. For unavailable controls, verify their selected mode cannot target any candidate key. Retain runtime checks as defense in depth.",
+      "severity": "high",
+      "title": "Declaration presence is not joined to the selected candidate target"
+    },
+    {
+      "detail": "dynamic_candidate_access_observation is a useful pure formatter/checker, but no current caller invokes it. Existing composed_observations still starts from WorkerPairInspection physical candidate_access and only changes candidate_available to inconsistent on declaration failure. It does not add candidate_kind, candidate_tools_digest, callback_binding_digest, or dynamic inventory to the emitted boundary record; current output therefore cannot pass the new verifier.",
+      "evidence": [
+        "src/aeep/hosts/codex_pair_inspection.py:638-697",
+        "src/aeep/hosts/codex_pair_inspection.py:700-735",
+        "reports/v08/original-three-way-profile/collect-composed-workers-5fff.py:17-34,61-97,285-313"
+      ],
+      "severity": "high",
+      "title": "New adapter observation is not consumed; current collector still emits physical-skill shape"
+    },
+    {
+      "detail": "WorkerPairInspection remains correctly skill-specific and rejects dynamic_tools_digest; WorkerComponentDefinition also requires its physical differential equal the composed differential. Reusing it for B would preserve the Spreadsheets skill as a treatment-only confounder instead of proving it common to discovery and AEEP.",
+      "evidence": [
+        "src/aeep/hosts/codex_pair_inspection.py:142-195,199-212",
+        "reports/v08/original-three-way-profile/collect-composed-workers-5fff.py:20,61-65,89-97"
+      ],
+      "severity": "medium",
+      "title": "The same composed collector still requires a physical treatment-only Spreadsheets difference"
+    }
+  ],
+  "next_step": "Fix normal-role absence and exact invocation-target binding; wire the helper into the current report-local composed collection path and separately collect equal physical Spreadsheets access. Then add focused adversarial tests and regenerate/check schemas before any fresh current-source conformance.",
+  "policy": "docs/ASSESSMENT_TESTING.md",
+  "review_scope": "Read-only review of root dynamic candidate contract and adapter collector path. No source edits or runtime/model/Docker/canonical operations; no tests run.",
+  "schema_version": "luna.dynamic_candidate_contract_review.v1",
+  "source_actions_taken": [],
+  "verdict": "Contract direction is additive and legacy physical-skill semantics appear preserved, but the current consumer path has two concrete verifier/profile issues and no collector wiring yet."
+}

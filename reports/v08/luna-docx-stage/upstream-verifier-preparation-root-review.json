@@ -1,0 +1,35 @@
+{
+  "schema_version": "aeep.upstream-verifier-preparation-root-review.v1",
+  "reviewed_at": "2026-10-03T00:17:02.899801+00:00",
+  "status": "prepared_reviewed_execution_pending_campaign_terminal",
+  "execution_authorized": false,
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "aggregate_review_sha256": "1c6e8891e72449072cd0d74f754c1c1286c2701a432868a3f21069a201ac93a1",
+  "reviewed_corrections": [
+    "Whole-operation deadline with cleanup allowance; actual elapsed charged without clipping",
+    "Source and staged-input hashes recomputed; unsuccessful accounting prevents a pass",
+    "Container name assigned before use; exact 60/180/30-second reservations required",
+    "Wheel downloads reject redirects and use per-wheel subprocess deadlines",
+    "Base image tag ID checked before/after build; built image ID bound to verifier execution",
+    "Only owned verifier container may be stopped; stopped container and partial failures retained"
+  ],
+  "checks": {
+    "ruff_F821_F823": "passed",
+    "python_AST": "passed",
+    "JSON_parse": "passed",
+    "all_12_aggregate_file_hashes": "matched"
+  },
+  "run_claim": false,
+  "next_actions": [
+    "Verify campaign process terminal and canonical result/cleanup; bind an exact terminal evidence record",
+    "Recheck host capacity and Docker usage before build",
+    "Under standing Sep25/27 authority, reserve and review separate same-grant fetch/build/run operations; retain all cost lineage",
+    "Execute each once, inspect canonical measurements and bounded results before proceeding to dependent action"
+  ],
+  "limitations": [
+    "One fixed public artifact, 18 exact upstream pytest assertions; no official SkillsBench reproduction claim",
+    "Mutable FROM tag with before/after checks does not exclude an unobserved transient concurrent retag",
+    "No upstream test.sh, CTRF or reward-file harness exercised",
+    "No model, qualification, comparative benefit or admission evidence supplied by this compatibility check"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": "b.workbook-qualification-materialization-plan-review.v1",
+  "runner_sha256": "26adf6bd763230d83dc61194058f91aae2afdbfaeed3587d379dd08535ceaf75",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+  "workbook_recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+  "environment": {
+    "environment_id": "b-workbook-qualification-20261003",
+    "kind": "container",
+    "identity": {
+      "purpose": "Offline workbook generation and grading; Luna/xhigh AEEP native callback qualification"
+    },
+    "network": false,
+    "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+    "cpu_count": 1.0,
+    "memory_mb": 512,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [],
+    "conformance_digests": {
+      "b.luna.discovery": "7632e4e25199b30824b6a44c6e2f17f7a17fc472d6323e6b7f17002ed79fabf6",
+      "b.luna.aeep": "abad8dc45bfb899a0e70a94bd8765585c073bb4c29b9dd2540673d5c21438f50"
+    },
+    "differential_conformance_digest": "6437408490c796217702ba612748a021b88aab519fe565fe658d6909bb92db88"
+  },
+  "paired_conformance_digest": "6437408490c796217702ba612748a021b88aab519fe565fe658d6909bb92db88",
+  "seed": 2026100301,
+  "seed_uniqueness_metadata": {
+    "existing_request_count": 27,
+    "matching_seed_count": 0
+  },
+  "maximum_operations": 1,
+  "maximum_reserved_seconds": 35,
+  "maximum_model_turns": 0,
+  "maximum_cash_usd": 0,
+  "split_counts": {
+    "qualification": 8,
+    "training": 28,
+    "holdout": 105
+  },
+  "database_bytes_at_prepare": 188719856,
+  "database_bytes_upper": 288719856,
+  "storage_allowance_bytes": 677439712,
+  "execution_authorized": false,
+  "canonical_request_prepared": true
+}

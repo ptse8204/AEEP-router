@@ -1,0 +1,70 @@
+{
+  "schema_version": "aeep.b-qualification-callback-composition-static-review.v2",
+  "reviewed_at": "2026-10-03",
+  "status": "static_review_pass_with_execution_review_condition",
+  "policy_read": "docs/ASSESSMENT_TESTING.md",
+  "reviewed_file": {
+    "path": "reports/v08/luna-docx-stage/b-qualification-callback-composition.py",
+    "sha256": "82f602d92a19d8020931d344ad0ce05c7bcccdf9b64908b0723a786c250591e7",
+    "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "ast_and_ruff": "reported pass by the author; not rerun in this review",
+    "helper_execution": false,
+    "router_initialization": false,
+    "canonical_database_access": false,
+    "worker_model_docker_or_trial_activity": false
+  },
+  "offline_pin_check": {
+    "method": "Called only require_frozen_inputs() with PYTHONDONTWRITEBYTECODE=1 and PYTHONPATH=src; did not construct Router or open a database. Separately parsed executor ID/kind/adapter metadata from the canonical manifest with Python stdlib JSON.",
+    "result": "passed",
+    "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+    "native_setup_result_sha256": "45f2344b74181d79ca284c8d3d3adc3d8d73a3c9edd1ccc51ef6993ed2968752",
+    "native_project_manifest_sha256": "11707d498ce6a285c85c0e7c90314e9f24ff355e1be987021898896e9e920d60",
+    "selected_treatment_worker_matches_profile": true,
+    "native_project": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003"
+  },
+  "canonical_manifest_factory_seam": {
+    "manifest_path": ".aeep/live-review-v3/aeep.json",
+    "manifest_sha256": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+    "metadata_only_parse": true,
+    "managed_executor_specs": [
+      {"id": "codex.csv", "adapter_id": "codex-app-server"},
+      {"id": "codex.text", "adapter_id": "codex-app-server"},
+      {"id": "codex.search", "adapter_id": "codex-app-server"}
+    ],
+    "profile_roles": {
+      "control": {"id": "b.luna.discovery", "adapter_id": "codex-app-server:b-luna-discovery"},
+      "treatment": {"id": "b.luna.aeep", "adapter_id": "codex-app-server:b-luna-aeep"}
+    },
+    "review": "Router.from_manifest constructs ordinary managed adapters. The helper's register_factory call leaves those adapters untouched; the campaign Router must use the existing clone_factories path so a fresh Router configures all manifest specs with the factory. The new factory returns the ordinary App Server adapter for every noncandidate spec and composes only the exact candidate. This addresses the earlier codex.csv rejection without replacing adapters or altering the manifest."
+  },
+  "verified_controls": {
+    "qualification_ids": "Matches existing BenchmarkRunner trial ID construction for the exact single-candidate required-exposure FRESH_WORKER suite: 8 qualification, 28 training and 105 holdout IDs. Only case IDs and split labels are read; case payloads are not accessed.",
+    "scope_creation": "One deterministic, reviewed READ task scope per trial; exact native executor fingerprint, one attempt, 10 seconds, exact project root and exact expiry. Existing scope IDs cause refusal; no allowance/database reset or replay path.",
+    "setup_operation": "One reserved setup operation, one operation, zero model turns, $0 cash ceiling, 600-second cap; installer requires its canonical operation to be complete with finite measured elapsed time within the cap.",
+    "scope_index": "Canonical self-digest, exact key set, exact entry shape, operation/profile/source pins and deterministic scope IDs are verified. At dispatch the selected stored scope's digest, READ ceiling, attempt/time bounds, executor fingerprint, project, expiry and active review are checked.",
+    "reservation_binding": "The callback is only composed for one of the exact derived trial operation IDs while the assessment is running and that operation is reserved for the same plan and trial stage.",
+    "existing_factory": "Reuses native-dynamic-operator-composition.union_operator_factory and the SHA-pinned existing workbook services builder; no new campaign engine is added.",
+    "cleanup": "For FRESH_WORKER, BenchmarkRunner closes each Router in a finally after _execute_trial and after_trial complete. The wrapper closes the App Server adapter then all owned task Routers, so cleanup follows callback/post-call evidence verification.",
+    "trial_data": "The helper stores scope metadata/reviews in the native task project's Router store; it does not read trial inputs, holdout data, outputs, answers or grader oracles."
+  },
+  "execution_review_condition": {
+    "finding": "Scope expiry is fixed at campaign_end + 900 seconds and capped by grant expiry, but campaign_end is a caller-supplied timestamp. The helper checks that it is future, but does not derive or independently cap it from the plan's 141-case reservation bounds.",
+    "required_binding": "The separate scope-preparation/execution review must pin campaign_end to a conservative finite upper bound covering setup, generator, grader, routers, cleanup and every one of the 141 trial reservations. If that exact value is not reviewed, do not execute preparation."
+  },
+  "references": {
+    "task_scope_model": "src/aeep/models.py:3266",
+    "router_scope_checks": "src/aeep/router.py:5379",
+    "router_initializes_managed_hosts": "src/aeep/router.py:459",
+    "factory_registry_clone": "src/aeep/hosts/registry.py:35",
+    "factory_group_configuration": "src/aeep/hosts/registry.py:41",
+    "existing_union_factory": "reports/v08/original-three-way-profile/native-dynamic-operator-composition.py:65",
+    "benchmark_trial_id": "src/aeep/benchmarking.py:1883",
+    "after_trial": "src/aeep/benchmarking.py:1720",
+    "fresh_worker_router_close": "src/aeep/benchmarking.py:1913"
+  },
+  "limitations": [
+    "No campaign plan, scope preparation, Router, canonical database, worker, Docker container, model call, or task was run for this review.",
+    "The source-bound inputs and callback composition path passed static/offline pin checks only; this does not establish campaign qualification, admission or value."
+  ]
+}

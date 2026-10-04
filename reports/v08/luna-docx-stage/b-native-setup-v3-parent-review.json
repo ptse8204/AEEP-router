@@ -1,0 +1,40 @@
+{
+  "recorded_at": "2026-10-03T07:48:01.444087+00:00",
+  "authority": "September 25/27 standing finite setup delegation and user continuation",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "files": {
+    "b-native-setup-v3.py": "1262795ce870f95c9dc452ff0a7be136036154a4ff3887612b87105442b53aaa",
+    "b-native-setup-v3-review.json": "ab4f78de528080b8684d8d608786d15a5b8aa616755d7f9033957ac0c44ef7b5",
+    "b-native-workbook-producer-final.py": "4d5db1fd761882f90bbaff5d1a6c392e2bab185a248f4a981399f95ee8aa539d",
+    "b-materialize-profile.py": "c236f5878af8f971327eb9f71284fcb77739d6b84b11fa9d80ccc50f9f9ae588",
+    "b-current-profile-assembler-v2.py": "779e82268861ab8db604fa6573c6fe084e73d8bb34655a523cc3baabe1efa84d"
+  },
+  "status": "scope reviewed; execution awaits final source-bound checks and independent runner review",
+  "allowed_actions": [
+    "Execute the exact v3 zero-turn native project setup once, reserving 1 operation and 120 seconds on onboarding before setup.",
+    "After a successful settled setup only, run the pure materializer using the exact result and callback declarations."
+  ],
+  "limits": {
+    "setup_operations": 1,
+    "setup_seconds": 120,
+    "model_turns": 0,
+    "task_calls": 0,
+    "worker_launches": 0,
+    "cash_usd": 0,
+    "project_bytes": 1073741824
+  },
+  "reason": "Create actual native project and declaration identities needed for current-source composed worker conformance. No trial or admission is established.",
+  "reviewed_semantics": [
+    "One SIGALRM deadline covers approval/reservation through finalization; expired setup preserves started marker and unresolved reservation.",
+    "Elapsed ledger measurement covers start through project-store close. Final ledger/report bookkeeping and inert metadata preparation are unmeasured; whole-system cost remains incomplete.",
+    "Only inert definition records were prepared before reservation; no generator, worker, project setup or model ran. This follows existing define/prepare request machinery.",
+    "The exact existing canonical manifest and database inode are checked; preserve counters, prior reviews and partial project on failure.",
+    "Materializer checks successful settled setup, exact current source and declarations; shared physical access remains unobserved until the worker inspection."
+  ],
+  "required_next": [
+    "Current-source worker component inspection",
+    "Native boundary/cancellation and host-issued callback conformance",
+    "Matching qualification with fresh protected cases",
+    "Three independent-role value comparison with optional invocation"
+  ]
+}

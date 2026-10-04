@@ -1,0 +1,586 @@
+{
+  "schema_version": "aeep.workbook-callback-delay-metadata-diagnostic.v1",
+  "observed_at": "2026-10-04",
+  "assessment_id": "assessment_a9369479529649cdab7a21b971dbabbc",
+  "plan_id": "plan_143001e5f4be4fd9b17f78d797340b70",
+  "source_audit": {
+    "path": "reports/v08/luna-docx-stage/c-workbook-timeout-task-scope-terminal-audit.json",
+    "sha256": "75a4ee30a5b400090684d363a9c5bd886fe537b1aae00952a1853acbe0339a1a"
+  },
+  "scope": "Read-only, bounded metadata review of the five audited timeout trials and one passing holdout trial (73).",
+  "connections": {
+    "sqlite_mode": "ro",
+    "query_only": true,
+    "campaign_db_ref": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/.aeep/assessments/plan_143001e5f4be4fd9b17f78d797340b70/campaign.sqlite3",
+    "native_db_ref": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003/.aeep/state.db"
+  },
+  "exact_fields_read": {
+    "campaign.trials": [
+      "trial_id",
+      "state",
+      "payload_json selected fields: phase,status,ok,valid,wall_time_ms,model_usage_complete,receipt_ids"
+    ],
+    "campaign.trial_stores": [
+      "trial_id",
+      "database_path"
+    ],
+    "campaign.trial_receipts": [
+      "receipt_id",
+      "payload_json selected fields: status,started_at,ended_at,metadata.model_turn_count,metadata.tool_call_count,metadata.response_bytes,metadata.dynamic_cleanup_confirmed,metadata.execution_evidence_digest"
+    ],
+    "trial_store.assessment_records": [
+      "kind",
+      "digest",
+      "payload_json selected fields from execution_evidence: attempt_id,journal_id,complete,events[].sequence,kind,source_id,action_digest,evidence_ref"
+    ],
+    "native.receipts": [
+      "receipt_id",
+      "executor_id",
+      "started_at",
+      "ended_at",
+      "status",
+      "payload_json selected fields: decision_id,task_valid,output_valid,error_type,metadata.attempt_id"
+    ]
+  },
+  "timeouts": [
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-training-3_b.luna.aeep_fresh-worker_0",
+      "phase": "measurement",
+      "campaign_state": "complete",
+      "campaign_status": "timeout",
+      "outer_receipt_id": "rcpt_46ad65ce4a4e48dd891841b5fbb591db",
+      "outer_status": "timeout",
+      "outer_started_at": "2026-10-03T14:01:04.194865Z",
+      "outer_ended_at": "2026-10-03T14:04:25.356085Z",
+      "outer_wall_time_ms": 203497.82125023194,
+      "model_usage_complete": false,
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 8,
+        "response_bytes": 4,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "bab8ca7ea15e9dc61540c3c30c1a3a9d07ab93d7efc7c69a35033458a34fb0d0",
+      "execution_evidence": {
+        "record_digest": "bab8ca7ea15e9dc61540c3c30c1a3a9d07ab93d7efc7c69a35033458a34fb0d0",
+        "attempt_id": "attempt_9c4a5e3d16a744cfa058199653f36695",
+        "journal_id": "4904c3eb4d454bf599bffcdede52dbe8",
+        "complete": false,
+        "event_count": 53,
+        "event_kind_counts": {
+          "action.completed": 20,
+          "action.started": 21,
+          "execution.failed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 9
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 15,
+            "kind": "action.completed",
+            "call_digest": "9cae9e7c1aa0bd77e5558d23e442d9fd9cd93daa7c8fc424c2b3d9e07b24bee2"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 52,
+          "kind": "execution.failed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 14,
+          "action_completed_count": 14,
+          "usage_reported_count": 8,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.failed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 13,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "9cae9e7c1aa0bd77e5558d23e442d9fd9cd93daa7c8fc424c2b3d9e07b24bee2",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 14,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "9cae9e7c1aa0bd77e5558d23e442d9fd9cd93daa7c8fc424c2b3d9e07b24bee2",
+            "evidence_ref": "7aaf2a5654a66868de9c7ae9495c0c048bafc5f88810c8e8c12676d43ab37759"
+          },
+          {
+            "sequence": 15,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "9cae9e7c1aa0bd77e5558d23e442d9fd9cd93daa7c8fc424c2b3d9e07b24bee2",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_1395b806010641b8b9160185874ecad8",
+        "status": "success",
+        "started_at": "2026-10-03T14:01:31.802051+00:00",
+        "ended_at": "2026-10-03T14:01:34.726708+00:00",
+        "ended_before_outer_end_seconds": 170.63375,
+        "task_valid": true,
+        "output_valid": true
+      }
+    },
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-65_b.luna.aeep_fresh-worker_0",
+      "phase": "holdout",
+      "campaign_state": "complete",
+      "campaign_status": "timeout",
+      "outer_receipt_id": "rcpt_38c5a0cab52b43638aa0dfb7a2200c24",
+      "outer_status": "timeout",
+      "outer_started_at": "2026-10-03T15:15:07.152337Z",
+      "outer_ended_at": "2026-10-03T15:18:28.286628Z",
+      "outer_wall_time_ms": 203474.53533299267,
+      "model_usage_complete": false,
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 5,
+        "response_bytes": 4,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "9ae6d87e85b1e3e81110fc2dffa0ed23c608fcadaf0efc8288cd5523745f2132",
+      "execution_evidence": {
+        "record_digest": "9ae6d87e85b1e3e81110fc2dffa0ed23c608fcadaf0efc8288cd5523745f2132",
+        "attempt_id": "attempt_d7cefab1e2c64dcf8012bb8d55b9fbe6",
+        "journal_id": "117a8d956c114b08aa61ef581dcbfab4",
+        "complete": false,
+        "event_count": 42,
+        "event_kind_counts": {
+          "action.completed": 16,
+          "action.started": 16,
+          "execution.failed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 7
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 15,
+            "kind": "action.completed",
+            "call_digest": "d69c03bdac57cfde8bb1528d268fc9d9740293f97f4b4e4b235f5370faf4a942"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 41,
+          "kind": "execution.failed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 9,
+          "action_completed_count": 10,
+          "usage_reported_count": 6,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.failed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 13,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "d69c03bdac57cfde8bb1528d268fc9d9740293f97f4b4e4b235f5370faf4a942",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 14,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "d69c03bdac57cfde8bb1528d268fc9d9740293f97f4b4e4b235f5370faf4a942",
+            "evidence_ref": "bbe7eb3918b9d5c1e3466f1b1aa3eb3c066c4d7d739304a7c96615a67196d555"
+          },
+          {
+            "sequence": 15,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "d69c03bdac57cfde8bb1528d268fc9d9740293f97f4b4e4b235f5370faf4a942",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_c45245523ace44e9ac2c570ff19417c7",
+        "status": "success",
+        "started_at": "2026-10-03T15:15:30.855095+00:00",
+        "ended_at": "2026-10-03T15:15:33.751596+00:00",
+        "ended_before_outer_end_seconds": 174.537837,
+        "task_valid": true,
+        "output_valid": true
+      }
+    },
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-70_b.luna.aeep_fresh-worker_0",
+      "phase": "holdout",
+      "campaign_state": "complete",
+      "campaign_status": "timeout",
+      "outer_receipt_id": "rcpt_c5d0bf310fbb4233897c58ecc5220943",
+      "outer_status": "timeout",
+      "outer_started_at": "2026-10-03T15:20:16.917951Z",
+      "outer_ended_at": "2026-10-03T15:23:38.084304Z",
+      "outer_wall_time_ms": 203462.47141598724,
+      "model_usage_complete": false,
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 11,
+        "response_bytes": 4,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "2ab96db03626da30ce1ad8069ff0398250bdc8d1996eb608dee6ec04531c6724",
+      "execution_evidence": {
+        "record_digest": "2ab96db03626da30ce1ad8069ff0398250bdc8d1996eb608dee6ec04531c6724",
+        "attempt_id": "attempt_6a6bc79bb2d94ae1a80c7dd0b5ad1bb2",
+        "journal_id": "3b9a51a64588496a905457e6bcca1a74",
+        "complete": false,
+        "event_count": 63,
+        "event_kind_counts": {
+          "action.completed": 25,
+          "action.started": 25,
+          "execution.failed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 10
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 24,
+            "kind": "action.completed",
+            "call_digest": "67e4f7fe1d96b673873c0fadaad321a0a5143383c7cb32bcbcf86d127c90a18e"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 62,
+          "kind": "execution.failed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 14,
+          "action_completed_count": 15,
+          "usage_reported_count": 8,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.failed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 22,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "67e4f7fe1d96b673873c0fadaad321a0a5143383c7cb32bcbcf86d127c90a18e",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 23,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "67e4f7fe1d96b673873c0fadaad321a0a5143383c7cb32bcbcf86d127c90a18e",
+            "evidence_ref": "3b2819f3bde53e73679bd727cda8d58b16728cd5fccb6c3e317b924eda923129"
+          },
+          {
+            "sequence": 24,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "67e4f7fe1d96b673873c0fadaad321a0a5143383c7cb32bcbcf86d127c90a18e",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_83e0bc3418904ec881db88f6d43135c7",
+        "status": "success",
+        "started_at": "2026-10-03T15:21:08.974634+00:00",
+        "ended_at": "2026-10-03T15:21:11.941295+00:00",
+        "ended_before_outer_end_seconds": 146.147321,
+        "task_valid": true,
+        "output_valid": true
+      }
+    },
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-100_b.luna.aeep_fresh-worker_0",
+      "phase": "holdout",
+      "campaign_state": "complete",
+      "campaign_status": "timeout",
+      "outer_receipt_id": "rcpt_3540b13b50e444919a39876b5213c8ef",
+      "outer_status": "timeout",
+      "outer_started_at": "2026-10-03T15:29:40.157310Z",
+      "outer_ended_at": "2026-10-03T15:33:01.347163Z",
+      "outer_wall_time_ms": 203468.15787511878,
+      "model_usage_complete": false,
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 6,
+        "response_bytes": 4,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "896f1d8daa40b916e591206a69b2a708b4ea70aba37167d4dd47083673f3288f",
+      "execution_evidence": {
+        "record_digest": "896f1d8daa40b916e591206a69b2a708b4ea70aba37167d4dd47083673f3288f",
+        "attempt_id": "attempt_de88db7327194963b343dac187b1d3d0",
+        "journal_id": "99d5e10b9c674c0bba4e063e85397f2e",
+        "complete": false,
+        "event_count": 48,
+        "event_kind_counts": {
+          "action.completed": 19,
+          "action.started": 19,
+          "execution.failed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 7
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 15,
+            "kind": "action.completed",
+            "call_digest": "488c9abf2bc4de5154d8dff7199873eb18339980bee2a0b2b7112b148897dd2f"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 47,
+          "kind": "execution.failed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 12,
+          "action_completed_count": 13,
+          "usage_reported_count": 6,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.failed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 13,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "488c9abf2bc4de5154d8dff7199873eb18339980bee2a0b2b7112b148897dd2f",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 14,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "488c9abf2bc4de5154d8dff7199873eb18339980bee2a0b2b7112b148897dd2f",
+            "evidence_ref": "540cabbdf49214e77908f704e4bb2cb20ddedd6874c9b641132609f26bb8d68e"
+          },
+          {
+            "sequence": 15,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "488c9abf2bc4de5154d8dff7199873eb18339980bee2a0b2b7112b148897dd2f",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_1f4055d9a3314a4e83184776cd4781ca",
+        "status": "success",
+        "started_at": "2026-10-03T15:30:09.253911+00:00",
+        "ended_at": "2026-10-03T15:30:12.168959+00:00",
+        "ended_before_outer_end_seconds": 169.181941,
+        "task_valid": true,
+        "output_valid": true
+      }
+    },
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-88_b.luna.aeep_fresh-worker_0",
+      "phase": "holdout",
+      "campaign_state": "complete",
+      "campaign_status": "timeout",
+      "outer_receipt_id": "rcpt_88e7118cde6d47eb99d6eb9950fc5a3d",
+      "outer_status": "timeout",
+      "outer_started_at": "2026-10-03T15:43:11.960991Z",
+      "outer_ended_at": "2026-10-03T15:46:32.980777Z",
+      "outer_wall_time_ms": 203465.1660420932,
+      "model_usage_complete": false,
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 4,
+        "response_bytes": 4,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "35bdf75251f4b03ed7033de99caa8d48602bc3af66398a5f8a9acd2b93a94769",
+      "execution_evidence": {
+        "record_digest": "35bdf75251f4b03ed7033de99caa8d48602bc3af66398a5f8a9acd2b93a94769",
+        "attempt_id": "attempt_6f56f0449d9b442f94a2ba3e6e59606b",
+        "journal_id": "79077370d7b04f62bc584ffb0fc286a6",
+        "complete": false,
+        "event_count": 37,
+        "event_kind_counts": {
+          "action.completed": 14,
+          "action.started": 15,
+          "execution.failed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 5
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 15,
+            "kind": "action.completed",
+            "call_digest": "596c74c49f4780195e9e8b279d451b67c569db159ab12db6b720c5a525d80f40"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 36,
+          "kind": "execution.failed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 8,
+          "action_completed_count": 8,
+          "usage_reported_count": 4,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.failed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 13,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "596c74c49f4780195e9e8b279d451b67c569db159ab12db6b720c5a525d80f40",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 14,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "596c74c49f4780195e9e8b279d451b67c569db159ab12db6b720c5a525d80f40",
+            "evidence_ref": "7c7a392e388e334636ceca5166834e98a62bc8fce5d497e3494ee9546f4edf1d"
+          },
+          {
+            "sequence": 15,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "596c74c49f4780195e9e8b279d451b67c569db159ab12db6b720c5a525d80f40",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_d993a2db93fe421696d7232e748b39c4",
+        "status": "success",
+        "started_at": "2026-10-03T15:43:47.234425+00:00",
+        "ended_at": "2026-10-03T15:43:50.155153+00:00",
+        "ended_before_outer_end_seconds": 162.828954,
+        "task_valid": true,
+        "output_valid": true
+      }
+    }
+  ],
+  "passing_comparators": [
+    {
+      "trial_id": "trial_plan_143001e5f4be4fd9b17f78d797340b70_recipe_generation_fba076846c6c42abb85d72cb67c820f5-holdout-73_b.luna.aeep_fresh-worker_0",
+      "phase": "holdout",
+      "status": "success",
+      "ok": true,
+      "valid": true,
+      "wall_time_ms": 154099.7697499115,
+      "model_usage_complete": true,
+      "outer_receipt_id": "rcpt_c710d4972da6412a87e0d7e1f3b7d4e6",
+      "outer_status": "success",
+      "outer_started_at": "2026-10-03T15:54:10.933702Z",
+      "outer_ended_at": "2026-10-03T15:56:42.854856Z",
+      "receipt_counts": {
+        "model_turn_count": 1,
+        "tool_call_count": 7,
+        "response_bytes": 8260,
+        "dynamic_cleanup_confirmed": true
+      },
+      "execution_evidence_digest": "45ab91063a90c7927fcd6027f43cff69b673272325086e63b22f0619d8cebb72",
+      "execution_evidence": {
+        "record_digest": "45ab91063a90c7927fcd6027f43cff69b673272325086e63b22f0619d8cebb72",
+        "attempt_id": "attempt_5a77d4feb79c4b1fbc8d2f76c2dbcc7d",
+        "journal_id": "e583aea631a342ff81bcf62048837f65",
+        "complete": true,
+        "event_count": 60,
+        "event_kind_counts": {
+          "action.completed": 24,
+          "action.started": 24,
+          "execution.completed": 1,
+          "execution.started": 1,
+          "message.received": 1,
+          "usage.reported": 9
+        },
+        "dynamic_complete_events": [
+          {
+            "sequence": 15,
+            "kind": "action.completed",
+            "call_digest": "ef700ecd34b3b279b7d18a3b7377ffcec1679844287453dcef7b1fb103ec5511"
+          }
+        ],
+        "terminal_event": {
+          "sequence": 59,
+          "kind": "execution.completed"
+        },
+        "after_dynamic_complete": {
+          "action_started_count": 17,
+          "action_completed_count": 18,
+          "usage_reported_count": 8,
+          "message_received_count": 0,
+          "other_event_counts": {
+            "execution.completed": 1
+          }
+        },
+        "dynamic_callback_events": [
+          {
+            "sequence": 13,
+            "event_kind": "action.started",
+            "callback_phase": "dynamic-start",
+            "action_digest": "ef700ecd34b3b279b7d18a3b7377ffcec1679844287453dcef7b1fb103ec5511",
+            "evidence_ref": null
+          },
+          {
+            "sequence": 14,
+            "event_kind": "message.received",
+            "callback_phase": "dynamic-link",
+            "action_digest": "ef700ecd34b3b279b7d18a3b7377ffcec1679844287453dcef7b1fb103ec5511",
+            "evidence_ref": "14eeb70fa99bf7a2dc3e066cf9a2d1c1e196afffdb0515acbdf4167039c58aab"
+          },
+          {
+            "sequence": 15,
+            "event_kind": "action.completed",
+            "callback_phase": "dynamic-complete",
+            "action_digest": "ef700ecd34b3b279b7d18a3b7377ffcec1679844287453dcef7b1fb103ec5511",
+            "evidence_ref": null
+          }
+        ]
+      },
+      "native_child_receipt": {
+        "receipt_id": "rcpt_c43f6f7a3a5b45c586e9ed39a8154553",
+        "status": "success",
+        "started_at": "2026-10-03T15:54:37.285039+00:00",
+        "ended_at": "2026-10-03T15:54:40.227757+00:00",
+        "ended_before_outer_end_seconds": 122.627,
+        "task_valid": true,
+        "output_valid": true
+      }
+    }
+  ],
+  "findings": {
+    "dynamic_callback_handler_completion": "All five timeout streams retain dynamic-start, linked message.received, and dynamic-complete. The dynamic-complete event is action.completed and shares the callback digest.",
+    "post_callback_activity": "Every timeout stream has later action.started/action.completed events and usage.reported snapshots. These item action events carry only opaque hashes; their item/tool/reasoning/final-answer types cannot be recovered.",
+    "callback_reply_and_ack": "No response-written or peer-acknowledgement marker is present in persisted canonical event evidence. The dynamic-complete marker is emitted by the handler before the transport writes its reply, so it does not establish that the reply was sent or acknowledged.",
+    "turn_and_final_item": "The canonical stream has no explicit turn/completed or final_answer phase marker. Adapter source shows terminal notification validation and opaque item action events, but does not persist the notification or item type. Absence from this journal is not evidence that the host did not emit turn/completed.",
+    "timeout_terminal": "Each timeout evidence record is complete=false and ends with execution.failed; outer model_usage_complete is false. The journals have sequence order but no event timestamps, so they do not locate the point when progress stopped.",
+    "passed_comparison": "The passed holdout-73 child receipt ended 122.627 seconds before successful outer completion and the outer journal still reached execution.completed after many post-callback events. A long interval after native task completion alone does not identify the timeout cause.",
+    "postprocessing": "The retained canonical events do not expose artifact/postprocessing stages after the native receipt. Receipt validity confirms child task/output validation; it does not reveal which host-side postprocessing or turn-completion wait consumed the remaining interval."
+  },
+  "source_code_refs": [
+    "src/aeep/hosts/codex_dynamic_tools.py: DynamicToolSession.call appends dynamic-complete before returning the callback result.",
+    "src/aeep/hosts/codex_app_server.py: CodexAppServerTransport._answer_dynamic_tool writes the callback result after handler completion; historical canonical item starts/completions carry opaque action hashes.",
+    "Initial October 4 implementation review found that nested host_progress metadata would be discarded by Router._safe_receipt_metadata. This was a defect in the new diagnostics, not an explanation of the historical live timeout."
+  ],
+  "diagnostic_change": {
+    "source_digest": "e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6",
+    "summary": "Adapter now snapshots content-free progress before timeout interruption and encodes it as compact JSON text. Router retains this scalar field in receipts. Early callback stage is preserved across the turn/start response.",
+    "validation_record": "reports/v08/outer-worker-delay-20261004/validation-terminal.json",
+    "historical_interpretation": "No live replay or timeout reclassification. New progress fields cannot reconstruct missing historical timestamps or event types."
+  }
+}

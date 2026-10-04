@@ -1,0 +1,51 @@
+{
+  "assessment_id": "assessment_b7304a6d072c4aae98e45839200e9055",
+  "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "canonical_database": ".aeep/live-review-v3/.aeep/assessments/plan_b3ccf1dccc4043129ad213eb7a50e6d4/campaign.sqlite3",
+  "interpretation": "Successful task execution with an independently graded correctness failure. The whitelisted text_preserved code means the extracted document text differs from the template text after the declared substitutions. No task input, output, oracle or model transcript was inspected. The exact edit or cause is not established.",
+  "qualification_consequence": "The frozen zero-correctness-failure rule cannot be satisfied by this campaign. Await its canonical terminal report; no threshold, case, candidate, source or retry policy is changed.",
+  "downstream_consequence": "Do not prepare or run a marginal-value stage referencing this campaign as successful qualification. Independent upstream-verifier compatibility and the separately labelled synthetic lifecycle fixture remain useful and eligible for later review.",
+  "source_refs": [
+    "src/aeep/assessment/reporting.py:35-58",
+    "src/aeep/benchmarking.py:1563-1579",
+    "integrations/assessment-runtime/skillsbench_offer_letter_grader.py:43-45",
+    "src/aeep/assessment/skillsbench_offer_letter.py:116-125"
+  ],
+  "campaign_terminal": false,
+  "observed_at": "2026-10-03T03:39:24.513218+00:00",
+  "failed_trials": [
+    {
+      "trial_id": "trial_plan_b3ccf1dccc4043129ad213eb7a50e6d4_recipe_generation_1a7ece1f6fd3455d98288fe8b4a867f1-holdout-26_skillsbench.docx.qualification.treatment_fresh-worker_0",
+      "case_id": "recipe_generation_1a7ece1f6fd3455d98288fe8b4a867f1-holdout-26",
+      "phase": "holdout",
+      "state": "complete",
+      "started_at": "2026-10-03T03:34:42.081344Z",
+      "ended_at": "2026-10-03T03:37:14.963588Z",
+      "ok": true,
+      "valid": false,
+      "correctness_failed": true,
+      "failure_category": "task_failure",
+      "failure_stage": "grading",
+      "model_usage_complete": true,
+      "retry_fallback_count": 0,
+      "intervention_count": 0,
+      "receipt_ids": [
+        "rcpt_1729f1f0af9f4eb898bd9f1a55742bcf"
+      ],
+      "wall_time_ms": 151414.20733300038,
+      "case_validation": [
+        {
+          "kind": "callback",
+          "valid": false,
+          "quality_score": 0.0,
+          "detail": "text_preserved",
+          "trust": "verified"
+        }
+      ],
+      "canonical_trial_payload_sha256": "8308bdc5db811708f6ce2742443106c69e148eaf210804bc97d6de4198ac32b4"
+    }
+  ],
+  "earlier_failure_record": "successor-first-holdout-failure.json",
+  "earlier_failure_record_sha256": "9692fa9748577e390b8359a3e6bd520b5528cc9761f9f5cf8e7778e90d8a9d69"
+}

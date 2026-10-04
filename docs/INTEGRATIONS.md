@@ -114,6 +114,184 @@ The managed subscription adapter uses the official Codex App Server protocol,
 not MCP, for Codex-owned authentication, runtime model/quota discovery, and one
 bounded turn. Official reference: <https://learn.chatgpt.com/docs/app-server>
 
+## Native-control compatibility
+
+The task-scoped profile in `aeep.profiles` currently enforces AEEP task-service
+schema exposure and calls. It does not apply the wider Codex controls below to
+the user's running host. `profile-compile` and `profile-preflight` expose this
+limit and reject strict whole-host isolation, native artifact exclusion or
+requested model/effort changes. The matrix also describes the existing separate
+managed-host invocation adapter; its capabilities must not be attributed to the
+new task profile.
+
+For an execution-local assessment composition, export a profile with
+`host: "task-service"`, store it with `task define-profile`, and review its exact
+digest. `aeep.profiles.bind_service(router, profile_id)` returns an activation and
+the ordinary task service without installing a Codex project entry. The caller
+owns teardown through the same task controls. A fixed-helper control can receive
+that reviewed activation through `FixedHelperService(..., task_activation=...)`.
+Its existing campaign reservation and fixed dispatch still apply.
+
+Before reviewing a dynamic callback binding, set its operator-owned identity's
+`capability_profile_behavior_digest` from
+`CodexDynamicTools.profile_behavior(service)`. Construction and callbacks check
+that pin, the exact profile review and the current activation. Fresh execution
+scope IDs do not replace behavior evidence or reset used allowances. Existing
+unprofiled campaign definitions retain their original contract; no historical
+result is promoted by this integration.
+
+`aeep task --manifest MANIFEST profile-capture PROFILE --activation ACTIVATION
+--receipt RECEIPT` saves a content-free configuration observation. Repeat
+`--receipt` for up to 100 selected, exactly scoped receipts. Compiled schema
+bytes, requested permission, observed invocation, task verification and measured
+resources remain separate. This is not a complete host-use census or a measure
+of comparative benefit.
+
+`aeep assess --manifest MANIFEST skillsbench-definition` exports the pinned
+offer-letter adaptation and its contained generator/reference/grader definition.
+Bundled inputs work in installed packages; `--asset-root PATH` additionally
+checks an existing pinned upstream copy. The definition has seven variations of
+one template, balanced 8/28/105 generation, and explicit Yes/No relocation
+semantics. It requires the existing review, protected grader validation and
+materialization steps before any trial. It is not an official SkillsBench score.
+
+Research date: October 2, 2026. The local `codex --version` command returned
+`codex-cli 0.154.0`. This observes the executable version only. The official
+documentation below is a dated documentation snapshot, not a claim that every
+method was exercised on this binary. No host configuration, sign-in state or
+plugin installation was changed during this inspection.
+
+| Source/interface | Version and scope | Documented behavior | AEEP implementation and limits | Fallback |
+|---|---|---|---|---|
+| ARD `POST /search` | v0.91, exact [ADR-010 pin](adr/ADR-010-ard-discovery-boundary.md) | Entry discovery with optional filters and federation | Bounded client subset; candidates remain inert; no upstream conformance observation | Explicit local fixture or manual intake |
+| Codex `mcp_servers.<id>.enabled`, `enabled_tools`, `disabled_tools` | Docs reviewed against local 0.154.0; process/configuration scope | Server enablement, tool allowlist, then denylist | `hosts/codex_invocation.py` compiles selected server/tool overrides and compares thread inventory; catalog agreement alone cannot prove process containment | Reject unsupported strict use |
+| Codex `skills.config` | Same version record; skill folder path | Per-skill enablement | Exact skill content and dependencies are checked before invocation; disabling does not delete files or erase loaded instructions | Fresh reviewed context and independent filesystem boundary |
+| Codex project and plugin controls | Same version record; trusted project/configuration layers | Plugin-scoped MCP enablement, allow/deny lists and approval modes | Compiler targets `plugins.<plugin>.mcp_servers.<server>`; it does not install or uninstall plugins | Operator configuration outside the model toolset |
+| App Server `skills/config/write` | Documentation snapshot; path scope | Enable or disable a skill | No production dependency on mutating a shared user's skill configuration | Invocation-local overrides |
+| App Server `config/mcpServer/reload` | Documentation snapshot; loaded threads | Reload configuration and queue refresh | Acknowledgement cannot establish immediate revocation or context erasure; not used as an AEEP authority barrier | Revoke AEEP authority before cleanup; fresh process/context |
+| App Server `config/read` | Documentation snapshot; layered on-disk state | Resolve effective stored configuration | Existing worker inspection reads selected policy facts; requested state alone is insufficient | Stop when effective state cannot be established |
+| App Server `mcpServerStatus/list`, `skills/list`, `app/installed` | Documentation snapshot; thread/inventory scope | Inspect MCP inventory, skills and callable app state | Existing invocation/inspection code bounds pagination and omits authentication details from retained inventory; no fresh enforcement observation in this build | Fail closed on incomplete or conflicting inventory |
+| App Server `plugin/list`, `plugin/read`, `plugin/install`, `plugin/uninstall` | Documentation snapshot | Under development; production clients should not call them | Excluded from production dependencies | Reviewed native configuration and inert local intake |
+
+Configuration semantics come from the official
+[configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference).
+Method descriptions and the plugin-method restriction come from the official
+[App Server reference](https://learn.chatgpt.com/docs/app-server).
+These sources provide interface documentation, not AEEP qualification evidence.
+
+Codex applies layered configuration and administrator requirements. CLI overrides
+have highest configuration precedence, but cannot override enforced requirements.
+Project configuration loads only for trusted projects. AEEP must preserve user
+and administrator policy when compiling its narrower controls. See
+[configuration precedence](https://learn.chatgpt.com/docs/config-file/config-basic).
+
+Record support separately for catalog filtering, schema exposure, skill/file
+exclusion, dispatch enforcement, filesystem/network isolation, credential scope,
+hooks, fresh context and resource observation. A tool filter controls only its
+own call surface. General-purpose shell access, aliases, other servers, readable
+package files or existing conversation history can defeat stronger exclusion
+claims. AEEP's strict profiles must reject those unresolved boundaries.
+
+### Other OpenAI runtimes
+
+The Responses API has three distinct controls. MCP `allowed_tools` narrows
+imported server tools; function `tool_choice` restrictions constrain eligible
+calls among supplied definitions; `tool_search` with `defer_loading` postpones
+definition loading while leaving discovery possible. None establishes candidate
+artifact absence. See the official [MCP guide](https://developers.openai.com/api/docs/guides/tools-connectors-mcp),
+[function calling guide](https://developers.openai.com/api/docs/guides/function-calling)
+and [tool search guide](https://developers.openai.com/api/docs/guides/tools-tool-search).
+Responses adapters remain optional and separately authorized; configuring them
+must not replace subscription execution with paid API calls.
+
+The [Agents SDK integration guide](https://developers.openai.com/api/docs/guides/agents/integrations-observability)
+places local/private MCP connection ownership in the SDK application's runtime.
+The steering plan names `MCPServerManager` and static/dynamic `tool_filter` as
+possible connection/exposure helpers. Their exact Python SDK version and method
+contracts have not been verified in this checkout, so AEEP does not depend on
+them. Any later adapter must pin and inspect those interfaces before use. Such
+helpers would not evaluate plugin value or control an existing Codex/ChatGPT
+session. No externally callable ChatGPT internal plugin manager is assumed.
+
+### Cloud deployment boundary
+
+The provider-neutral discovery, intake, evidence and routing code can be
+developed and packaged on Linux. Deployment still needs a reviewed executor and
+an operator-owned durable store. The native task backend in
+`hosts/codex_sandbox.py` and `hosts/codex_native_process.py` explicitly requires
+macOS. Its evidence and profiles cannot be transferred to a Linux cloud host by
+changing paths or copying the database.
+
+A cloud Linux VM is a possible home for the existing container-worker design,
+provided its operator supplies the reviewed runtime, isolated workers, persistent
+ledger and permitted model connection. This is an architecture fit, not a tested
+deployment. A complete cloud-only replacement of the current Mac callback path
+requires an implemented Linux execution boundary and fresh applicable evidence.
+Mac production acceptance must still be measured on the Mac target.
+
+The current official [cloud environments guide](https://learn.chatgpt.com/docs/environments/cloud-environments)
+describes Codex cloud configuration. The earlier singular
+[cloud-environment page](https://learn.chatgpt.com/docs/environments/cloud-environment)
+now documents legacy Code Review, Linear and GitHub environments. Neither page
+establishes availability of AEEP's required nested container boundary, protected
+sign-in arrangement or durable campaign storage for this account. Those remain
+deployment prerequisites. AEEP must not copy Codex authentication state, reset
+grant counters or assume cloud storage is a sandbox for trial tools.
+
+No cloud service was provisioned or benchmark run for this implementation
+increment. The [coverage record](../reports/v08/plan-coverage.md) tracks the
+implementation and outstanding evidence separately.
+
+## Discovery, intake and local evidence lookup
+
+Search uses ARD by default and requires an explicit endpoint. Supply a public
+capability phrase, never a private task description. The endpoint below is a
+placeholder to replace with an operator-approved registry:
+
+```bash
+aeep registry search "document editing" --base-url https://registry.example.org --envelope --manifest aeep.yaml
+aeep registry search "document editing" --registry fixture --fixture candidates.json --envelope --manifest aeep.yaml
+aeep registry show-discovery DISCOVERY_ID --manifest aeep.yaml
+aeep candidate intake CANDIDATE_ID /absolute/path/to/reviewed-skill --kind skill --manifest aeep.yaml
+aeep evidence lookup CANDIDATE_ID --intake INTAKE_ID --request @action.json --manifest aeep.yaml
+```
+
+`--envelope` returns durable source/result references, timing and unknown costs.
+The candidate list remains the default output. Intake inspects only the explicit
+local artifact; it never follows a discovery URL or installs code. `--mapping`
+can name a reviewed-mapping JSON file. Intake and mapping definitions require
+their own exact reviews through `aeep assess review`; creation does not review
+them. Lookup returns conditional evidence, reasons and a next action. It performs
+no assessment or execution, and ordinary execution rechecks authority.
+
+An operator can make bounded discovery available to a non-task service with
+`aeep serve --discovery-config discovery.json --manifest aeep.yaml`. A minimal
+offline configuration is:
+
+```json
+{
+  "schema_version": "discovery.config.v1",
+  "sources": [{"source_id": "local", "kind": "fixture", "path": "candidates.json"}],
+  "max_results": 20,
+  "timeout_seconds": 10
+}
+```
+
+For ARD, a source uses `kind: "ard"`, `base_url`, and explicit
+`allow_remote: true`; it may also name `artifact_types` and a local
+`fallback_path`. Model arguments cannot add sources, grant network disclosure or
+raise these ceilings. The configured service exposes `aeep_discover_resources`;
+`aeep_lookup_capability` reads local evidence. The task-only profile exposes
+neither preparation tool.
+
+For an existing task scope, use `aeep task --manifest aeep.yaml profile-from-scope SCOPE_ID --profile-id PROFILE_ID` to export an inert
+profile, `define-profile` to save it, and `profile-compile`, `profile-diff` or
+`profile-preflight` to inspect it. Review the exact returned profile digest using
+`aeep assess --manifest aeep.yaml review DIGEST` before `activate-profile`. Activation
+retains the scope's durable allowances and review requirements. `profile-inspect`
+reports intended configuration separately from observed use; missing host
+exposure or installation evidence stays unknown.
+
 ## Claude Code
 
 Project `.mcp.json`:

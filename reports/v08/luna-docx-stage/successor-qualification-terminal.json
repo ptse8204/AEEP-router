@@ -1,0 +1,86 @@
+{
+  "observed_at": "2026-10-03T05:50:24.937191+00:00",
+  "terminal": true,
+  "assessment_id": "assessment_b7304a6d072c4aae98e45839200e9055",
+  "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "qualification_status": "correctness_failed",
+  "canonical_outcome": "unsuitable",
+  "qualification_passed": false,
+  "cleanup_verified": true,
+  "cleanup_scope": "Runner exit code 0; exact reviewed proxy is stopped, setup and cleanup operations are complete, and docker ps reports zero running containers. No resources were deleted by this audit.",
+  "result_path": "successor-qualification-result.json",
+  "result_sha256": "f6560524c6e4de43046ab09c777bd05e1827b74bfc9b99c190a9965ccb911971",
+  "canonical_job": {
+    "id": "assessment_b7304a6d072c4aae98e45839200e9055",
+    "plan_id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4",
+    "state": "complete",
+    "report_id": "fit_fa7c4604d5d448fe9e4ce12c363ce315",
+    "started_at": "2026-10-02T23:20:04.649158+00:00",
+    "error_code": null
+  },
+  "report_id": "fit_fa7c4604d5d448fe9e4ce12c363ce315",
+  "canonical_report_digest": "4f715ad987f1694607aac42c0524a0d7985770687539e48949f4f6eced30a25f",
+  "canonical_report_payload_sha256": "69b8c73c4e3ebbf71b257a4924efee3cf707ebb117a41a12c7a5b35929636432",
+  "counts": {
+    "total": 141,
+    "passes": 137,
+    "correctness_failures": 2,
+    "invocation_timeouts": 2,
+    "distinct_holdout_cases": 105,
+    "holdout_passes": 101,
+    "provider_usage_complete_flags": 139,
+    "retries": 0,
+    "interventions": 0
+  },
+  "measurement_coverage": {
+    "local.cpu_ms": "0/141",
+    "local.gpu_ms": "0/141",
+    "local.memory_mb_seconds": "0/141",
+    "local.network_bytes": "0/141",
+    "model.openai.gpt-6-luna.subscription.cache_write_input_tokens": "0/141",
+    "model.openai.gpt-6-luna.subscription.cached_input_tokens": "0/141",
+    "model.openai.gpt-6-luna.subscription.input_tokens": "0/141",
+    "model.openai.gpt-6-luna.subscription.output_tokens": "0/141",
+    "model.openai.gpt-6-luna.subscription.reasoning_output_tokens": "0/141",
+    "subscription.openai.codex.self.provider_unit": "0/141"
+  },
+  "measurement_interpretation": "Provider usage-complete flags are not independently measured resource coverage. The canonical report records 0/141 for the listed resource dimensions; missing totals, actual cash and subscription-unit consumption remain unknown. No benefit or savings claim follows from qualification.",
+  "grant_after": {
+    "operations": 9218,
+    "model_turns": 2691,
+    "elapsed_seconds": 98777.1941294435,
+    "cash_usd": "0.0"
+  },
+  "proxy_operations": [
+    {
+      "id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:reviewed_proxy_cleanup",
+      "state": "complete"
+    },
+    {
+      "id": "plan_b3ccf1dccc4043129ad213eb7a50e6d4:reviewed_proxy_setup",
+      "state": "complete"
+    }
+  ],
+  "post_report_cleanup_cost_separately_retained": true,
+  "admission_count_for_docx_executors": 0,
+  "downstream_value_authorized_by_this_campaign": false,
+  "failure_records": [
+    {
+      "path": "successor-first-holdout-failure.json",
+      "sha256": "9692fa9748577e390b8359a3e6bd520b5528cc9761f9f5cf8e7778e90d8a9d69"
+    },
+    {
+      "path": "successor-second-holdout-failure.json",
+      "sha256": "9d081e5b8226f11648236d435b4fa1f38062560102cca721dbcf6500e467f3c1"
+    },
+    {
+      "path": "successor-first-holdout-timeout.json",
+      "sha256": "b40645b841fda1eb2153d8c05ab55e472e49ea2dc62dcdbc1b733f6886da37fb"
+    },
+    {
+      "path": "successor-second-holdout-timeout.json",
+      "sha256": "ff0c046763b38dcdfe7f5bb49f0601581b86db6f9c724f66877cd8278fcc4604"
+    }
+  ]
+}

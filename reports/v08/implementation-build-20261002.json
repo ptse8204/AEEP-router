@@ -1,0 +1,100 @@
+{
+  "record_type": "implementation_build",
+  "date": "2026-10-02",
+  "base_commit": "c0609f0e1839ea17bbd4871c028e84e75e26970e",
+  "verification_source_digest": "bb55d5cd1486440d703f1325cdfdbb610c637036092213d0701325bb53a29446",
+  "scope": "Build implementation only; experimental execution and test suites deferred by operator.",
+  "checks": [
+    {
+      "command": "python3 -m compileall -q src examples tests",
+      "result": "passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 scripts/generate_schemas.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m ruff check src scripts/generate_schemas.py integrations/assessment-runtime/skillsbench_offer_letter_program.py integrations/assessment-runtime/skillsbench_offer_letter_grader.py --output-format concise",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m mypy src",
+      "result": "passed",
+      "source_files": 137
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m aeep.cli task --help",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "module_self_checks": {
+    "aeep.capability_lifecycle": "passed",
+    "aeep.profiles": "passed",
+    "aeep.configuration_profile": "passed",
+    "aeep.assessment.skillsbench_recipe": "passed; schema validation and compilation only"
+  },
+  "deferred": [
+    "pytest",
+    "coverage",
+    "upstream ARD fixture conformance",
+    "protected grader validation",
+    "recipe materialization",
+    "fresh worker conformance and qualification",
+    "live comparisons and task execution",
+    "human comprehension",
+    "cloud deployment and Linux native executor replacement"
+  ],
+  "campaigns_run": false,
+  "model_calls": 0,
+  "new_qualification": false,
+  "new_admission": false,
+  "release_ready": false,
+  "cloud_only_runtime_verified": false,
+  "changed_implementation_files": {
+    "integrations/assessment-runtime/skillsbench-offer-letter-fixtures.json": "f856e8ec8c7c79cebdbc55f590ac14016ee77b2c2462abe2f2d08988aa2494d4",
+    "integrations/assessment-runtime/skillsbench_offer_letter_grader.py": "71917f8cf5ac264ce9bc928702c6460d5b11b39ba5ab17c49d9806d8efedda99",
+    "integrations/assessment-runtime/skillsbench_offer_letter_program.py": "094cdfe5db2f251063bdab593c434b1338353b44ea1d7c5bb87401e69dd061cc",
+    "schemas/admission-decision.schema.json": "cf18b818b497e566e1eefb52f15d96d73b13ff61f105dae7de6fdf7c7d6d8406",
+    "schemas/admission-lookup.schema.json": "4d07112f027f4a13d342073bb6cbb2cd8267b92085cc157029bf57450f4a5147",
+    "schemas/candidate-intake.schema.json": "3edc9e4196f671fdd7ad0514d11a9c483c74b97c303f1bd79171d08930527c0c",
+    "schemas/capability-profile.schema.json": "3712fe4fa373132089f753eb95935bcbe13deae13d692f4f6c01f3e90b0bd1c5",
+    "schemas/configuration-observation.schema.json": "7172468acabddc4a5558e72dcd60c7afb41f2dc8531bc4c07f66b6a63ae819d4",
+    "schemas/discovery-config.schema.json": "baf08235d79d8e68fda54af79aea61b2713ed1a5ce75718bc71599a7eaab7ff3",
+    "schemas/discovery-query.schema.json": "30114209b49161140e8a6de424523f2e596e17067b0e139eec14119fe495d35c",
+    "schemas/discovery-request.schema.json": "c05fd6e163b67274ae542db24a71bc1d5d93e34e5cafe9cb7611190e766ca54a",
+    "schemas/discovery-result.schema.json": "9175a60bd50794ef0e6c15d36eb62fdc9a76290ade0a59483b3015fdabe3e56b",
+    "schemas/discovery-source.schema.json": "86cb72f3b6721b6b50da3b2567054b11cde4cd8a7b5c22d5878ab172233bdcab",
+    "schemas/external-resource-identity.schema.json": "1c4fcf63f423bcb2130c1d43d6f5023cffbdb52779881c4b520686bbdd828c42",
+    "schemas/task-activation.schema.json": "5cc867b8b9b8604d65fde0476a1968c8d6e13e78a855f0aeadfecb5bded160e1",
+    "schemas/tools.anthropic.json": "096f5aa8a07bdf2e235f4f0742f0d28cc7d522bece1b0bde5d0d9513869bb32f",
+    "schemas/tools.assessment.mcp.json": "9c395cbffc3b88684c9e68ec77244d2bb20ed2bdb7615ad7dd6365a0c8558b94",
+    "schemas/tools.deepseek.json": "4dd865741e0c9f84230487ab153e45d853ff95488d59b478a0885ac187519c47",
+    "schemas/tools.mcp.json": "0bde97497470d58bbb9c5e93f38bdffe1b38ce0853be226d0e0747655a1d1e76",
+    "schemas/tools.openai-chat.json": "4dd865741e0c9f84230487ab153e45d853ff95488d59b478a0885ac187519c47",
+    "schemas/tools.openai-responses.json": "99165cf317e29b890ccc85810509f9653d3e71f4c65d059738f24f2d6243f316",
+    "schemas/tools.zai.json": "4dd865741e0c9f84230487ab153e45d853ff95488d59b478a0885ac187519c47",
+    "scripts/generate_schemas.py": "e93b9e8ff5d3ffcb4bea8d5d3bd0403321c7c2dcbc8d590714bae6d9a0d50789",
+    "src/aeep/assessment/applicability.py": "5aa12753f2345691a6f4130a4f4f79c131dce2e981f195532cb75bdac93f6847",
+    "src/aeep/assessment/cli.py": "ec612ceb31c35d20f1ed276f173746bd404aa1337a9cf4f3c284a8dff4af7885",
+    "src/aeep/assessment/fixed_helper.py": "c2ba0a24ff80dd780546e993e3df2831be54117870a489a5e7ce89328342ada1",
+    "src/aeep/assessment/skillsbench_recipe.py": "afb196c7a210bc44241de523c2da4b5680216ea3bab0f0a2324930441fca48d0",
+    "src/aeep/assessment/tools.py": "bca3f521b20cefac05ee3c6386d4f2dcc3f56bb3c6457a2613d0e4845540ed2c",
+    "src/aeep/capability_lifecycle.py": "c70479f724dcb0069bd6889a6f31e222d424ccbcb30f657695c3cbea0031f301",
+    "src/aeep/cli.py": "1078a181b401ef73064f9401423a47af01e168f1e60be90abd16c2cab2958043",
+    "src/aeep/configuration_profile.py": "eedda822ab40b2d593aa5d57ece042facc850cdb208c5377a8a3d1ff1d0c0527",
+    "src/aeep/discovery.py": "f84a4081de5605d55b5c360e8f08ee51b0957b900bbdf4a0174829bdca0c13e0",
+    "src/aeep/discovery_service.py": "73869342569ccb03fa00c2d732add5a1a857738ec418486ca5c1ff3f8ba4d1af",
+    "src/aeep/hosts/codex_dynamic_tools.py": "112668113a9d455c05c2d99400aad552da5a2fefb598e2279c79a42ec985170a",
+    "src/aeep/integrations/tool_schemas.py": "94aa781797440fdbb774038df12774ea811f3832c4e975104f7a54c1326cb27f",
+    "src/aeep/mcp/server.py": "269fc8ec8447e984753cc258f0dcb2d49a5a22d34462c1c2273b364b3f24bba1",
+    "src/aeep/profiles.py": "057f05f91a430eea6436db3eb68aaa162d797fbb4cd318a0ed6963669b1c7dab",
+    "src/aeep/router.py": "379ea6eb6bfb6f20cc024596022c7d95be43e2597626b5118bd7cbc3b0a37031",
+    "src/aeep/store.py": "82ca2a3934eb6a5e8a14e440f68ec9f8e34d0e8ab89d572aa71805cdba36e75f",
+    "src/aeep/task_cli.py": "a04fac36001e99c72fc781f7cf3bb983fc389d4ad2797d5ada2b52dc55684096",
+    "src/aeep/tasks.py": "8465e6cc2e86e3fe705f0de5658d62c43749d5fb3546761e3fbcea9f3f5505ca"
+  }
+}

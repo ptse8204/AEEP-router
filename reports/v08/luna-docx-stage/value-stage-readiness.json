@@ -1,0 +1,62 @@
+{
+  "schema_version": "aeep.value-stage-readiness.v1",
+  "scope": "Read-only static/API audit; no model calls, worker starts, Docker calls, tests, downloads, grant changes, source changes, or holdout-content reads.",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "qualification_gate": {
+    "required": "Use only the terminal, canonical successful qualification report/job from the fresh successor. The first plan/report is insufficient_evidence and cannot qualify. Require completed job with no error_code, current AssessmentRunBinding source digest, independent grader evidence, and fit_report qualification_passed.",
+    "status_reference": "reports/v08/plan-coverage.md:276-310 records the failed first report and the disjoint successor; do not use the failed report or its holdouts as value inputs.",
+    "no_reuse": "Materialize a new value-stage RecipeCaseSet with a new seed/environment and 8/28/105 splits; keep its 105 holdouts disjoint from every earlier case set. The reusable builder may consume only the successful qualification plan's 28 training inputs."
+  },
+  "existing_path": {
+    "stage": "marginal_value",
+    "exposure": "optional",
+    "structure": "controlled_agent",
+    "reason": "This is the existing four-arm optional-candidate comparison. aeep_value is the distinct normal/discovery/discovery-plus-AEEP three-way contract and disallows higher_compute/reusable_tool.",
+    "api": "AssessmentService.propose with IncrementalExperiment, after exact definitions are reviewed; then the existing budget_preview/enqueue/run path.",
+    "source_refs": [
+      "docs/ASSESSMENT_TESTING.md:440-470",
+      "src/aeep/assessment/models.py:353-410",
+      "src/aeep/assessment/service.py:331-349"
+    ]
+  },
+  "frozen_definitions_needed": {
+    "four_roles": ["control", "treatment", "higher", "reusable"],
+    "route_builder": "aeep assess incremental-routes / onboarding.incremental_host_routes; freeze four distinct worker identities, same adapter, shared task instructions/supporting skills, same model, permissions, worker libraries and task contract. Candidate skill and aliases appear only in treatment. All four routes are executed; feasible_challengers affects the dominance gate and cannot be used to skip an unsupported arm.",
+    "candidate": "Copy the reviewed treatment skill invocation but set exposure=optional and local_profile=capable_local. Keep candidate paths, aliases, inventory difference and shared python-docx support exactly as qualified; control, higher and reusable remain candidate-free turn profiles.",
+    "higher_compute": "Normal arms stay gpt-6-luna/xhigh. The two existing image catalogs advertise reasoning efforts low/medium/high/xhigh/max; max is the next effort after xhigh. Freeze the higher arm as the same gpt-6-luna model with reasoning_efforts=[max] and exactly twice the normal task deadline, with no other host-config changes. Re-inspect the exact fresh value worker catalogs before marking this arm feasible. Existing evidence: pair-result.json SHA-256 aab0ba4602dad5c17692ff1a039ec08ba93560a71ab484b8f4b2887b12f3cf6e; worker inspection record digests 3f112beb6835c3addb90ecd158c442903e48df82a73870586f0c190805e02ea4 and d0a23d95393ec380f5795b2e24d1750eeef0fd81b3346fd89609c8829dc24c9b. These are advertised catalog facts, not a max-effort trial or fresh value-profile proof.",
+    "reusable": "Use planning.prepare_reusable(training_plan_id=<successful qualification plan>, planner_id=<candidate-free control>, environment=<reviewed control environment>). It freezes only the 28 training inputs and emits inert source/usage under a separately reserved builder operation. Review the generated source, bind its SHA in the immutable reusable worker, then review a ReusableBaselineArtifact containing the exact worker-file hashes, training-input digests, executor fingerprint and completed same-grant build-operation IDs. Never expose candidate code or holdouts to the builder.",
+    "source_refs": [
+      "src/aeep/assessment/onboarding.py:128-183",
+      "src/aeep/assessment/planning.py:106-173,196-230",
+      "src/aeep/assessment/models.py:378-410,430-435",
+      "src/aeep/assessment/service.py:862-893"
+    ]
+  },
+  "fresh_boundary_and_lineage": {
+    "boundary": "Bind current-source conformance digests to all four exact value executors in AssessmentEnvironment.conformance_digests. Each needs current worker/image/binary/configuration/inventory/identity and all required probes. The differential record must bind the exact control and optional-treatment conformance records and the unchanged qualified DifferentialEnvironment (shared definition, candidate inventory, paths and aliases). Higher and reusable controls also need their own exact worker conformance. Do not reuse the qualification workers' records for new worker identities.",
+    "service_checks": "_verify_incremental_evidence requires the same authorization, subject and recipe, exact prior qualification experiment environment, current run source binding, grader validation, fit_report qualification, canonical completed-job row and holdout separation. require_managed_boundaries validates every mapped worker; require_differential validates control/treatment inventories and candidate absence/presence.",
+    "costs": "The value plan must link the successful qualification report digest, reusable build operation IDs, new planning/preparation IDs and all fresh boundary bootstrap operations. _cost_sources includes setup_cost_ids, planning/preparation request IDs, reusable build IDs, prior report ledgers and boundary bootstrap costs. The qualification runner's proxy cleanup is charged after its report and therefore is absent from that report ledger; plan-coverage.md:262-289 explicitly requires adding that cleanup operation to later economic lineage. Bind it explicitly in the value plan's setup_cost_ids (or an exact equivalent existing cost record) so it is counted once.",
+    "budget": "Recompute AssessmentService.budget_preview after freezing the value plan and every new preparation/boundary definition. Four managed-host arms over 141 cases imply 564 minimum task turns, plus the separately bounded reusable-builder turn; this is arithmetic, not an approved reservation or usage estimate. Preserve the existing grant and zero-cash ceiling; do not rely on the qualification plan's 728-operation/141-turn preview for the value stage.",
+    "source_refs": [
+      "src/aeep/assessment/service.py:796-891,899-939",
+      "src/aeep/assessment/boundary.py:30-65,153-185",
+      "src/aeep/assessment/comparison.py:107-145",
+      "reports/v08/plan-coverage.md:262-289"
+    ]
+  },
+  "discovery_intake_association": {
+    "finding": "DiscoveryResult/DiscoverySourceRecord retain discovery IDs and candidate IDs/digests. CandidateIntake binds a candidate snapshot/external identity to a local subject digest and optional mapping digest, but has no discovery_id/source_record_id. AssessmentPlan binds subject/mapping digests but has no intake_id. CapabilityLifecycle.lookup can join an intake to admissions/reports by exact subject digest (and mapping digest when present), but no real SkillsBench discovery→intake→qualified report/admission journey is recorded yet.",
+    "existing_subject_operator_path": "A locally prepared subject can be associated without claiming it was created by the CLI intake command: fetch the already registered RegistryCandidate for the exact candidate_id; construct CandidateIntake using that candidate, its exact candidate snapshot digest and external_resource_identity, and the existing stored subject_id/content_digest (plus the exact mapping digest if used); store it through AssessmentRepository.put('candidate_intake', intake.intake_id, intake); then review content_digest(intake) through AssessmentRepository.review. CandidateIntake's validator checks only candidate snapshot/external identity, so the operator must independently verify that subject_id/digest resolve to the intended persisted subject. This uses the existing model/repository APIs, not a dedicated high-level 'intake existing subject' method. It records a reviewed operator association to a local subject, not proof that the discovered candidate produced those bytes or that discovery historically caused qualification.",
+    "minimum_evidence_path": "For an integrated discovery claim, preserve the exact DiscoveryResult/source-candidate reference; create and review a CandidateIntake binding the selected candidate snapshot to the exact operator-selected local subject (the existing-subject constructor/repository path above is supported); use that same subject and mapping in qualification/value; then call lookup with the same intake_id and verify its report/admission references. The exact digest join is supported; first-class discovery-to-plan lineage and causal provenance are not.",
+    "source_refs": [
+      "src/aeep/discovery.py:226-252",
+      "src/aeep/discovery_service.py:210-236",
+      "src/aeep/capability_lifecycle.py:86-103,150-179,181-240",
+      "src/aeep/assessment/repository.py:29-63",
+      "src/aeep/cli.py:3803-3823",
+      "src/aeep/assessment/models.py:55-64,506-528",
+      "reports/v08/plan-coverage.md:318-320"
+    ]
+  },
+  "readiness_conclusion": "No value plan is ready until the current qualification successor reaches a successful canonical terminal report. The existing marginal_value API can then express the optional skill comparison without production changes, provided fresh four-role boundaries, a reviewed training-only reusable artifact, disjoint value cases, exact cost lineage (including post-report cleanup), and a successful current xhigh/max availability check are frozen first. Discovery-to-intake attribution remains a separate evidence gap."
+}

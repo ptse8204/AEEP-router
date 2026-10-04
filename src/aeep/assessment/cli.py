@@ -150,6 +150,13 @@ def workbook_definition() -> None:
     emit(workbook_recipe())
 
 
+@app.command("skillsbench-definition")
+def skillsbench_definition(asset_root: Path | None = typer.Option(None, "--asset-root")) -> None:
+    """Export the inert, pinned SkillsBench offer-letter adaptation for review."""
+    from .skillsbench_recipe import skillsbench_offer_letter_recipe
+    emit(skillsbench_offer_letter_recipe(asset_root))
+
+
 @app.command("generate-cases")
 def generate_cases(ctx: typer.Context, request: str) -> None:
     """Execute an exact reviewed recipe under an existing grant."""

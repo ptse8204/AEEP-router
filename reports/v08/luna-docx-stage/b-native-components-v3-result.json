@@ -1,0 +1,197 @@
+{
+  "accounting_scope": "operation start through local native router close; canonical settlement/report writing excluded",
+  "accounting_status": "raw child receipts retained separately; no aggregate accounting inferred",
+  "attempt_digests": [
+    "24a8c06712a5143668b38f6e5b0f8f997534eb64cd2bbe24421428bd2df343be",
+    "00510dd6b67536c053241c903f1b88070c23ee366400ee2889e4c97572776e87"
+  ],
+  "boundary_probes_complete": false,
+  "cleanup_confirmed": false,
+  "elapsed_seconds": 0.9761783748399466,
+  "error_sha256": "995803536504df5eedf62d1084b0f7f521ba192fc980fc5176fe4db967114db6",
+  "error_type": "RuntimeError",
+  "execution_evidence_by_executor": {
+    "b.native.component.cancel": "abe7311c725d5afc878b7f55651c6ce4485008cab0f610c5d00bad57e6a06d16",
+    "b.native.component.guard": "8ce4bc288be6621fa1b20dad2f870f056681025fac8e81bf08be80ccfc9d550a"
+  },
+  "execution_evidence_digests": [
+    "8ce4bc288be6621fa1b20dad2f870f056681025fac8e81bf08be80ccfc9d550a",
+    "abe7311c725d5afc878b7f55651c6ce4485008cab0f610c5d00bad57e6a06d16"
+  ],
+  "execution_evidence_receipt_ids": [
+    "rcpt_49cea27a5f4b44f5ad5bdebfd74a334e",
+    "rcpt_2555861108414b28ace448aa43dc9bc1"
+  ],
+  "full_conformance": false,
+  "host_callback_observed": false,
+  "main_close_confirmed": true,
+  "model_turns": 0,
+  "native_attempts": 2,
+  "native_backend_receipt_executor_ids": [
+    "b.native.component.guard",
+    "b.native.component.guard",
+    "b.native.component.cancel"
+  ],
+  "observations": {
+    "native_boundary": {
+      "database_denied": true,
+      "fork_errno": "35",
+      "hard_nproc": "0:0",
+      "marker": "post_exec",
+      "network_denied": true,
+      "private_denied": true,
+      "raise_denied": true,
+      "session_leader": true,
+      "spawn_errno": "35"
+    },
+    "protected_state": {
+      "database_denied": true,
+      "private_denied": true,
+      "witness_unchanged": true
+    }
+  },
+  "observer_direct_child_candidates": [
+    {
+      "executable_name": "codex",
+      "matches_native_binary": true,
+      "pid": 74111,
+      "ppid": 74106
+    }
+  ],
+  "observer_process_chain": [
+    {
+      "pid": 74114,
+      "ppid": 74111
+    },
+    {
+      "pid": 74111,
+      "ppid": 74106
+    },
+    {
+      "pid": 74106,
+      "ppid": 31096
+    },
+    {
+      "pid": 31096,
+      "ppid": 31038
+    },
+    {
+      "pid": 31038,
+      "ppid": 1
+    },
+    {
+      "pid": 1,
+      "ppid": 0
+    },
+    {
+      "pid": 0,
+      "ppid": 0
+    }
+  ],
+  "operation_id": "b-native-components:conformance_b_native_components_v3_449b",
+  "operation_settled": true,
+  "protected_state": {
+    "canary_sha256_before_after": [
+      "be347961c35e5a6a056cea713796f9fe74675e55bca25c8e894db0f153ed0377",
+      "be347961c35e5a6a056cea713796f9fe74675e55bca25c8e894db0f153ed0377"
+    ],
+    "project_database_sha256_before_after": [
+      "259caf7f136af3d6c0611d7f30405f28232a928d1ca9d078a08d0af0f6e678c3",
+      "259caf7f136af3d6c0611d7f30405f28232a928d1ca9d078a08d0af0f6e678c3"
+    ]
+  },
+  "protected_state_unchanged": true,
+  "ready_observation": {
+    "line_digest": "40517ca089421b6e1a2dcb3ff53c2252ad2984271615b017c453a7c186db9257",
+    "pid": 74114,
+    "processes": [
+      {
+        "created_at": 1791017462.654706,
+        "name": "python3.12",
+        "pid": 74114
+      },
+      {
+        "created_at": 1791017462.616833,
+        "name": "codex",
+        "pid": 74111
+      }
+    ]
+  },
+  "receipt_by_executor": {
+    "b.native.component.cancel": "868c8a21fe652be13464109c14e22ebe8c4cc7a59a660a80cbc372562cbb6776",
+    "b.native.component.guard": "0066621186a95aa61681b45eb501cf6d04667436373c228f1d74036e78609c3e"
+  },
+  "receipt_digests": [
+    "0066621186a95aa61681b45eb501cf6d04667436373c228f1d74036e78609c3e",
+    "868c8a21fe652be13464109c14e22ebe8c4cc7a59a660a80cbc372562cbb6776"
+  ],
+  "receipt_resources": [
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [],
+        "subscription_usage": [],
+        "tool_footprint": null
+      },
+      "executor_id": "b.native.component.guard",
+      "receipt_id": "rcpt_49cea27a5f4b44f5ad5bdebfd74a334e",
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 47,
+        "cpu_ms": 124.07837199999999,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 329.49324999935925,
+        "memory_mb_seconds": 8.197700171658653,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 123.328125,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      }
+    },
+    {
+      "accounting": {
+        "cash": {
+          "components": [],
+          "status": "unavailable"
+        },
+        "model_usage": [],
+        "subscription_usage": [],
+        "tool_footprint": null
+      },
+      "executor_id": "b.native.component.cancel",
+      "receipt_id": "rcpt_2555861108414b28ace448aa43dc9bc1",
+      "resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 12,
+        "cpu_ms": 105.176166,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 321.62066688761115,
+        "memory_mb_seconds": 10.42211240765755,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 119.875,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      }
+    }
+  ],
+  "request_id": "conformance_b_native_components_v3_449b",
+  "resource_claim": "receipt values are retained as serialized; default zero fields do not establish zero consumption",
+  "resource_totals_complete": false,
+  "result_status": "fail",
+  "review_sha256": "3021fa6e2b42493019224b2076232fb9f36a3214885ed29a165be15398f0b11e",
+  "schema_version": "b-native-components-result.v3",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "source_unchanged": true,
+  "whole_system_cost_complete": false
+}

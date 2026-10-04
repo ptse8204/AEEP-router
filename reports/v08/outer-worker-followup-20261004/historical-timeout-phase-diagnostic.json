@@ -1,0 +1,328 @@
+{
+  "evidence_refs": [
+    {
+      "path": "reports/v08/luna-docx-stage/c-workbook-timeout-task-scope-terminal-audit.json",
+      "sha256": "75a4ee30a5b400090684d363a9c5bd886fe537b1aae00952a1853acbe0339a1a"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/c-workbook-callback-delay-metadata-diagnostic.json",
+      "sha256": "d23a76eabf295444f57e5a89c3679547861d15c853137809708a217bb0682782"
+    },
+    {
+      "path": "reports/v08/luna-c-supplemental-validation-20261003/supplemental-results.json",
+      "sha256": "f8447aceb2075550ec4f2749f25c18ba374b05cfc9d32b6516a921993301edda"
+    },
+    {
+      "path": "reports/v08/outer-worker-followup-20261004/historical-source-comparison.json",
+      "sha256": "0293269b8ae6e64f35cef539b3048581c320fe078117860f99dfcca374b24f06"
+    }
+  ],
+  "exact_query_fields": {
+    "campaign.trial_receipts": [
+      "receipt_id",
+      "payload_json selected fields: status,error_type,started_at,ended_at,actual_resources.latency_ms,metadata.adapter_id,protocol_version,invocation_guard_ms,response_bytes,model_turn_count,tool_call_count,dynamic_cleanup_confirmed,execution_evidence_digest, and presence-only checks for output_schema_bytes,result_bytes,thread_identity_digest,turn_identity_digest,host_runtime_digest,worker_cleanup_confirmed,catalog_metrics,capability_discovery"
+    ],
+    "campaign.trial_stores": [
+      "trial_id",
+      "database_path"
+    ],
+    "campaign.trials": [
+      "trial_id",
+      "state",
+      "payload_json selected fields: phase,status,ok,valid,wall_time_ms,model_usage_complete,receipt_ids"
+    ],
+    "excluded": [
+      "task/answer/output content",
+      "event payloads",
+      "error messages",
+      "protocol text",
+      "authentication",
+      "provider usage payloads"
+    ],
+    "recorded_assessment_records_schema": [
+      "kind",
+      "id",
+      "digest",
+      "payload_json"
+    ],
+    "sqlite_mode": "mode=ro; PRAGMA query_only=ON; SELECT only, exact campaign receipt ids from prior audit",
+    "trial_store.assessment_records": [
+      "kind",
+      "id",
+      "digest",
+      "payload_json selected execution_evidence fields: attempt_id,journal_id,complete,events[].sequence,kind,source_id,action_digest,evidence_ref; events have no timestamps"
+    ]
+  },
+  "findings": [
+    "All five outer receipts are status=timeout,error_type=timeout; enclosing campaign rows are finalized (state=complete) but status=timeout and model_usage_complete=false. Campaign state complete means record finalization, not an App Server turn-completion marker.",
+    "All five timeout evidence streams have dynamic-start, linked message.received, and dynamic-complete, followed by action started/completed and usage.reported events. The terminal journal event is execution.failed and evidence complete=false.",
+    "Timeout receipts omit all five terminal-result metadata fields present in holdout-73: output_schema_bytes,result_bytes,thread_identity_digest,turn_identity_digest,host_runtime_digest. Together with status=timeout and historical _partial_execution semantics, this supports the timeout partial branch rather than an interrupted-terminal result path.",
+    "Artifact retrieval cannot explain these returned TIMEOUT statuses under the matched wrapper because retrieval runs only for SUCCESS. Wrapper cleanup can consume time after the timeout partial is created, but cleanup failure would rewrite status to FAILED.",
+    "Receipt interval-minus-actual_resources.latency is 2.136-2.610s across timeouts and 2.205s for holdout-73. Since latency stamping has a metrics_scope-dependent cleanup boundary and that setting is not retained, the difference neither bounds cleanup duration nor locates the remaining delay.",
+    "Canonical evidence has no App Server final-item or turn/completed marker, reply-write marker, or peer-ack marker. Missing markers do not establish that a notification was absent. Event rows have sequence order but no timestamps."
+  ],
+  "historical_source_binding": {
+    "built_wheel": {
+      "path": "reports/v08/luna-c-supplemental-validation-20261003/package-build-output/aeep_agent_router-0.8.0-py3-none-any.whl",
+      "sha256": "8452205838bfcb2bf0a98d81d0c1960118e68e02d09ab7e7455939865a7be15f",
+      "size_bytes": 1444616
+    },
+    "comparison_record": "reports/v08/outer-worker-followup-20261004/historical-source-comparison.json",
+    "comparison_record_sha256": "0293269b8ae6e64f35cef539b3048581c320fe078117860f99dfcca374b24f06",
+    "method": "Wheel source inspected in memory only; methods compared by AST. Historical adapter.execute and CodexAppServerTransport.close are AST-identical to current; _partial_execution differs with added progress metadata. Historical campaign receipt has no wheel SHA, so available source is bound to pre-run source digest but not binary-attested to the live process.",
+    "receipt_reported_protocol_version": "aeep-agent-router/0.159.2 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+    "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+    "source_digest_after": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+    "source_digest_before": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+    "source_record": "reports/v08/luna-c-supplemental-validation-20261003/supplemental-results.json",
+    "source_record_sha256": "f8447aceb2075550ec4f2749f25c18ba374b05cfc9d32b6516a921993301edda"
+  },
+  "limitations": [
+    "Retained evidence identifies the timeout partial path at _execute granularity, not the precise operation within _execute or which timeout/cancellation initiated it. It cannot establish whether App Server had emitted a terminal notification.",
+    "The event journal is a provider-neutral action/accounting journal; execution.failed is not an App Server turn status.",
+    "No exact phase timing can be reconstructed from sequence-only event rows. Native child end times establish only that each scoped child completed before the outer receipt ended.",
+    "The campaign receipt has no worker-cleanup confirmation field or artifact-retrieval phase field. Successful cleanup is inferred from the returned timeout status and matched source control flow, not read as a persisted boolean.",
+    "The package version in the receipt is consistent with the saved 0.8.0 wheel, but receipt does not store wheel SHA; exact live binary identity is not proven."
+  ],
+  "observed_at_utc": "2026-10-04T09:19:25.687873+00:00",
+  "passing_comparator": {
+    "actual_resources_latency_ms": 149716.615,
+    "campaign_model_usage_complete": true,
+    "dynamic_cleanup_confirmed": true,
+    "interval_minus_latency_ms": 2204.539,
+    "invocation_guard_ms": 461.399,
+    "model_turn_count": 1,
+    "native_child_ended_before_outer_receipt_end_seconds": 122.627,
+    "receipt_error_type": null,
+    "receipt_id": "rcpt_c710d4972da6412a87e0d7e1f3b7d4e6",
+    "receipt_interval_ms": 151921.154,
+    "receipt_status": "success",
+    "response_bytes": 8260,
+    "terminal_result_metadata_present": {
+      "host_runtime_digest": true,
+      "output_schema_bytes": true,
+      "result_bytes": true,
+      "thread_identity_digest": true,
+      "turn_identity_digest": true
+    },
+    "tool_call_count": 7,
+    "trial": "holdout-73",
+    "trial_status": "success",
+    "worker_cleanup_confirmed_persisted": false
+  },
+  "schema_version": "aeep.outer-worker-followup-phase-diagnostic.v1",
+  "scope": "Read-only diagnosis of the five exact workbook timeout receipts, their normalized execution evidence, and one passing holdout-73 comparator. No task, answer, output, protocol payload/text, authentication, or provider-usage payload was read.",
+  "source_semantics": {
+    "cleanup_inference": "In this matched wrapper flow, a returned TIMEOUT receipt implies worker cleanup returned truthy: false cleanup changes status to FAILED, while interruption before wrapper return would not yield this RawExecution receipt in the finalized trial path. The receipt does not persist worker_cleanup_confirmed itself. dynamic_cleanup_confirmed is a different in-turn callback-session fact.",
+    "historical_lines": {
+      "CodexAppServerAdapter._execute_timeout_catch": "1029-1031; TimeoutError or CancelledError creates a TIMEOUT partial execution.",
+      "CodexAppServerAdapter._partial_execution": "1125-1135; stamps latency from _execute start, marks execution_stream_complete false, retains model/turn/tool counts.",
+      "CodexAppServerAdapter.execute": "764-819; invokes _execute, artifact retrieval is guarded by raw.status == SUCCESS, then transport close and worker cleanup run in finally; cleanup false rewrites result to FAILED/WORKER_CLEANUP_UNCONFIRMED."
+    },
+    "historical_wheel_member": "aeep/hosts/codex_app_server.py",
+    "latency_semantics": "For timeout partials, actual_resources.latency_ms is stamped inside _partial_execution before _execute finally handles dynamic-session cleanup. The outer wrapper overwrites it after worker cleanup only when transport.metrics_scope is non-null. That setting is absent from retained receipt fields, so interval-minus-latency cannot be attributed to cleanup.",
+    "status_mapping": "The stored outer receipt reports lowercase timeout; receipt status/error_type alone does not expose whether the inner exception was TimeoutError or CancelledError."
+  },
+  "timeouts": [
+    {
+      "actual_resources_latency_ms": 198912.006,
+      "dynamic_cleanup_confirmed": true,
+      "dynamic_complete_sequence": 15,
+      "execution_evidence_complete": false,
+      "interval_minus_latency_ms": 2249.214,
+      "invocation_guard_ms": 466.634,
+      "journal_event_count": 53,
+      "journal_terminal_event": "execution.failed",
+      "model_turn_count": 1,
+      "post_callback_counts": {
+        "action_completed_count": 14,
+        "action_started_count": 14,
+        "message_received_count": 0,
+        "other_event_counts": {
+          "execution.failed": 1
+        },
+        "usage_reported_count": 8
+      },
+      "receipt_ended_at": "2026-10-03T14:04:25.356085Z",
+      "receipt_error_type": "timeout",
+      "receipt_id": "rcpt_46ad65ce4a4e48dd891841b5fbb591db",
+      "receipt_interval_ms": 201161.22,
+      "receipt_started_at": "2026-10-03T14:01:04.194865Z",
+      "receipt_status": "timeout",
+      "response_bytes": 4,
+      "terminal_result_metadata_present": {
+        "host_runtime_digest": false,
+        "output_schema_bytes": false,
+        "result_bytes": false,
+        "thread_identity_digest": false,
+        "turn_identity_digest": false
+      },
+      "tool_call_count": 8,
+      "trial": "training-3",
+      "trial_model_usage_complete": false,
+      "trial_state": "complete",
+      "trial_status": "timeout",
+      "worker_cleanup_confirmed_persisted": false
+    },
+    {
+      "actual_resources_latency_ms": 198524.553,
+      "dynamic_cleanup_confirmed": true,
+      "dynamic_complete_sequence": 15,
+      "execution_evidence_complete": false,
+      "interval_minus_latency_ms": 2609.738,
+      "invocation_guard_ms": 461.363,
+      "journal_event_count": 42,
+      "journal_terminal_event": "execution.failed",
+      "model_turn_count": 1,
+      "post_callback_counts": {
+        "action_completed_count": 10,
+        "action_started_count": 9,
+        "message_received_count": 0,
+        "other_event_counts": {
+          "execution.failed": 1
+        },
+        "usage_reported_count": 6
+      },
+      "receipt_ended_at": "2026-10-03T15:18:28.286628Z",
+      "receipt_error_type": "timeout",
+      "receipt_id": "rcpt_38c5a0cab52b43638aa0dfb7a2200c24",
+      "receipt_interval_ms": 201134.291,
+      "receipt_started_at": "2026-10-03T15:15:07.152337Z",
+      "receipt_status": "timeout",
+      "response_bytes": 4,
+      "terminal_result_metadata_present": {
+        "host_runtime_digest": false,
+        "output_schema_bytes": false,
+        "result_bytes": false,
+        "thread_identity_digest": false,
+        "turn_identity_digest": false
+      },
+      "tool_call_count": 5,
+      "trial": "holdout-65",
+      "trial_model_usage_complete": false,
+      "trial_state": "complete",
+      "trial_status": "timeout",
+      "worker_cleanup_confirmed_persisted": false
+    },
+    {
+      "actual_resources_latency_ms": 198874.118,
+      "dynamic_cleanup_confirmed": true,
+      "dynamic_complete_sequence": 24,
+      "execution_evidence_complete": false,
+      "interval_minus_latency_ms": 2292.235,
+      "invocation_guard_ms": 473.769,
+      "journal_event_count": 63,
+      "journal_terminal_event": "execution.failed",
+      "model_turn_count": 1,
+      "post_callback_counts": {
+        "action_completed_count": 15,
+        "action_started_count": 14,
+        "message_received_count": 0,
+        "other_event_counts": {
+          "execution.failed": 1
+        },
+        "usage_reported_count": 8
+      },
+      "receipt_ended_at": "2026-10-03T15:23:38.084304Z",
+      "receipt_error_type": "timeout",
+      "receipt_id": "rcpt_c5d0bf310fbb4233897c58ecc5220943",
+      "receipt_interval_ms": 201166.353,
+      "receipt_started_at": "2026-10-03T15:20:16.917951Z",
+      "receipt_status": "timeout",
+      "response_bytes": 4,
+      "terminal_result_metadata_present": {
+        "host_runtime_digest": false,
+        "output_schema_bytes": false,
+        "result_bytes": false,
+        "thread_identity_digest": false,
+        "turn_identity_digest": false
+      },
+      "tool_call_count": 11,
+      "trial": "holdout-70",
+      "trial_model_usage_complete": false,
+      "trial_state": "complete",
+      "trial_status": "timeout",
+      "worker_cleanup_confirmed_persisted": false
+    },
+    {
+      "actual_resources_latency_ms": 198879.616,
+      "dynamic_cleanup_confirmed": true,
+      "dynamic_complete_sequence": 15,
+      "execution_evidence_complete": false,
+      "interval_minus_latency_ms": 2310.237,
+      "invocation_guard_ms": 458.377,
+      "journal_event_count": 48,
+      "journal_terminal_event": "execution.failed",
+      "model_turn_count": 1,
+      "post_callback_counts": {
+        "action_completed_count": 13,
+        "action_started_count": 12,
+        "message_received_count": 0,
+        "other_event_counts": {
+          "execution.failed": 1
+        },
+        "usage_reported_count": 6
+      },
+      "receipt_ended_at": "2026-10-03T15:33:01.347163Z",
+      "receipt_error_type": "timeout",
+      "receipt_id": "rcpt_3540b13b50e444919a39876b5213c8ef",
+      "receipt_interval_ms": 201189.853,
+      "receipt_started_at": "2026-10-03T15:29:40.157310Z",
+      "receipt_status": "timeout",
+      "response_bytes": 4,
+      "terminal_result_metadata_present": {
+        "host_runtime_digest": false,
+        "output_schema_bytes": false,
+        "result_bytes": false,
+        "thread_identity_digest": false,
+        "turn_identity_digest": false
+      },
+      "tool_call_count": 6,
+      "trial": "holdout-100",
+      "trial_model_usage_complete": false,
+      "trial_state": "complete",
+      "trial_status": "timeout",
+      "worker_cleanup_confirmed_persisted": false
+    },
+    {
+      "actual_resources_latency_ms": 198883.829,
+      "dynamic_cleanup_confirmed": true,
+      "dynamic_complete_sequence": 15,
+      "execution_evidence_complete": false,
+      "interval_minus_latency_ms": 2135.957,
+      "invocation_guard_ms": 466.902,
+      "journal_event_count": 37,
+      "journal_terminal_event": "execution.failed",
+      "model_turn_count": 1,
+      "post_callback_counts": {
+        "action_completed_count": 8,
+        "action_started_count": 8,
+        "message_received_count": 0,
+        "other_event_counts": {
+          "execution.failed": 1
+        },
+        "usage_reported_count": 4
+      },
+      "receipt_ended_at": "2026-10-03T15:46:32.980777Z",
+      "receipt_error_type": "timeout",
+      "receipt_id": "rcpt_88e7118cde6d47eb99d6eb9950fc5a3d",
+      "receipt_interval_ms": 201019.786,
+      "receipt_started_at": "2026-10-03T15:43:11.960991Z",
+      "receipt_status": "timeout",
+      "response_bytes": 4,
+      "terminal_result_metadata_present": {
+        "host_runtime_digest": false,
+        "output_schema_bytes": false,
+        "result_bytes": false,
+        "thread_identity_digest": false,
+        "turn_identity_digest": false
+      },
+      "tool_call_count": 4,
+      "trial": "holdout-88",
+      "trial_model_usage_complete": false,
+      "trial_state": "complete",
+      "trial_status": "timeout",
+      "worker_cleanup_confirmed_persisted": false
+    }
+  ]
+}

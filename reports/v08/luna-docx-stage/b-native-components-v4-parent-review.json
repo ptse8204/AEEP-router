@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-03T08:59:12.532205+00:00",
+  "authority": "Standing September 25/27 finite assessment delegation and current continue instruction",
+  "prepared_review_sha256": "478931dffc623cafca258d667bc301c79fd473f7d28b73d394773dc970a70bdc",
+  "approved_review_sha256": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31",
+  "driver_sha256": "6103d623505c8420b1b90df33297ba8772ea5229f570ca72f858e6473694dcc8",
+  "decision": "approve exact READ cancellation contract probe amendment",
+  "limits": {
+    "max_cash_usd": 0,
+    "max_elapsed_seconds": 40.0,
+    "max_model_turns": 0,
+    "max_operations": 1,
+    "native_attempt_seconds": 10.0,
+    "native_attempts": 2
+  },
+  "rationale": "Native cancellation intentionally returns TIMEOUT after cleanup; router records idempotent READ TIMEOUT as FAILED. Prior exception/INDETERMINATE assertion applied the wrong contract. This successor checks timeout/error, durable failed attempt, consumed attempt and owned process disappearance.",
+  "source_evidence": [
+    "tests/test_v08_native_process.py:85-96",
+    "src/aeep/hosts/codex_native_process.py:159-180",
+    "src/aeep/executors/command.py:413-424",
+    "src/aeep/router.py:901-911"
+  ],
+  "independent_review": "luna_recipe_review at Luna/xhigh agrees; v2/v3 results and costs preserved",
+  "unchanged": [
+    "Production source",
+    "Qualification and holdout thresholds",
+    "WRITE/non-retry-eligible recovery barrier",
+    "Model allowance zero",
+    "One operation and two native attempts"
+  ],
+  "not_claimed": [
+    "Host EOF observation",
+    "WRITE recovery proof",
+    "Full composed conformance",
+    "Qualification or benefit"
+  ]
+}

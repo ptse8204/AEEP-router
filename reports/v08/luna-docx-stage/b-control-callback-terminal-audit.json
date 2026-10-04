@@ -1,0 +1,225 @@
+{
+  "audit_scope": "Read-only strict composed-callback audit of the actual control host receipt and canonical child lineage; no replay, worker/model call, payload inspection, auth access, or canonical write.",
+  "audited_at": "2026-10-03T10:23:37.763824+00:00",
+  "canonical_links": {
+    "callback_binding_digest": "c2e2f8d21a5c791f707da9d1ae83257c4feb99a3e94559d6bca7bfcd127a1c16",
+    "callback_call_digest": "7d494f93a71d64eef47a649afbbc82f14ab572dfc841c9035fd0255292c4a54c",
+    "callback_claim_digest": "543f118c1983826b0264c691fa68944eed7209f6be08f1d4c269dbe465998eb0",
+    "callback_evidence_digest": "e95dc80c547d3303575454389fe6799d774e3d8169b43a88e689b3ff9f9adeab",
+    "child_attempts": [
+      {
+        "attempt_id": "attempt_56492324e53347e4a53f3298c5fcff93",
+        "digest": "cfb94e62640d584d8702628bae084bbcd718b4dbdedd353bf2e9419eea71bbef",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "state": "COMPLETED"
+      }
+    ],
+    "child_receipts": [
+      {
+        "digest": "77e169fc11f96d470ccb76c958144ffe48b08e496a040a1549d6135985af4add",
+        "executor_fingerprint": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4",
+        "executor_id": "native.composed.workbook",
+        "receipt_id": "rcpt_04fd2dd30d3a4a979b76b0f50e4f9313",
+        "status": "success"
+      }
+    ],
+    "composed_definition_digest": "5124b0de3c686a20290443f0580137add30f07070311ab3786a044bed47d0202",
+    "control_probe_digest": "d373684205d629ab5e91538ace382487a27bd4f15e59f366dc1072e5ba29438a",
+    "control_probe_id": "composed-probe_287d3436efa74b7eb8b46ba0f4eae937",
+    "execution_evidence_digest": "cfd0eda5c1b90a64593a6955b1627aa03160eb0e76eed64948c2dad42b5ea506",
+    "host_attempt_digest": "52f8a81cda78a7e05c8270210a57b0f67e1fc5cef7e3fc85c3a566569df769b1",
+    "host_attempt_id": "attempt_0e2502009cc24e579a582d5d4cb8eb74",
+    "host_receipt_digest": "d6a73e70b12f7dd9feb91bf493ed45f355ffa90fff3a35efaba9821b211b2d70",
+    "host_receipt_id": "rcpt_b0c5ccbb7e0542988aec5a4fc8d4035a",
+    "native_backend_digest": "5c3f016cdf6ee992218e15ebb262a447e7c8ec4353c320e25e58b7617cbebd6d",
+    "operation_id": "composed:conformance_probe_eadcb4eee1a04e0dafa86cf8ffd9fba9",
+    "request_digest": "a3b890b02552c898ead35da8be9d240693bc5889053e9797bc92008277e629a4",
+    "request_id": "conformance_probe_eadcb4eee1a04e0dafa86cf8ffd9fba9",
+    "task_scope_digest": "9e9cf68ee78737ea51c2dbc0597a860da95fc65e0209cd1afd47a21b7310495b",
+    "task_scope_id": "b-control-callback-20261003",
+    "worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345"
+  },
+  "canonical_read_method": {
+    "auth_state_read": false,
+    "canonical_writes": false,
+    "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+    "mode": "SQLite URI mode=ro; PRAGMA query_only=ON",
+    "queries": "Exact request/probe/evidence/receipt/claim/scope/attempt/operation digests plus one indexed-shape boundary_conformance query for this exact worker and callback binding.",
+    "task_payload_or_tool_arguments_results_read_or_emitted": false
+  },
+  "cleanup": {
+    "callback_cleanup_confirmed": true,
+    "callback_error_type": null,
+    "callback_failure_stage": null,
+    "proxy_restored_stopped": true,
+    "proxy_router_closed": true,
+    "proxy_start_operation_settled": true,
+    "proxy_stop_operation_settled": true
+  },
+  "evidence_files": {
+    "canonical_manifest_sha256": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+    "control_proxy_result": {
+      "path": "reports/v08/luna-docx-stage/b-control-callback-proxy-lifecycle-result.json",
+      "sha256": "8191138d3897085964b2575dd9cbc6e82e7ebd34114f67ad1ca6bbe75ce7268e"
+    },
+    "control_result": {
+      "path": "reports/v08/luna-docx-stage/b-control-callback-result.json",
+      "sha256": "2174d46764c57f526004f3ddc10d1c1c8d9c7bb9e1c88633cf867c76569be380"
+    },
+    "execution_review": {
+      "path": "reports/v08/luna-docx-stage/b-control-callback-execution-review.json",
+      "sha256": "bf1c15b5f84513c7a6ef43078359dc8c59173002e05fe64b597268b4a4e57e90"
+    },
+    "preparation": {
+      "path": "reports/v08/luna-docx-stage/b-control-callback-preparation.json",
+      "sha256": "fe176270a8fabc647b0e88ee533c280984f684e7f365d4bfdd5b1711c1b7f536"
+    },
+    "treatment_conformance_proposal": {
+      "path": "reports/v08/luna-docx-stage/b-treatment-boundary-conformance-proposal.json",
+      "sha256": "0c1ebcd30ff2472bb9205f17d8714daabc09671734edcddfc1e39a7b9ea72881"
+    },
+    "treatment_tool_identity_audit": {
+      "path": "reports/v08/luna-docx-stage/b-current-callback-tool-identity-audit.json",
+      "sha256": "1890f69529682630fc5568c3014a9accefe4efe276f124789a0ec2ece4406cf4"
+    }
+  },
+  "limits": [
+    "This verifies one synthetic native host-issued control callback and its exact child lineage only.",
+    "The callback is not a performance/value result and does not establish candidate benefit, qualification, admission, or full environment conformance.",
+    "Actual cash cost and subscription capacity consumption remain unknown; zero is only the reviewed cash ceiling.",
+    "Treatment tool identity audit is separate evidence for the treatment receipt; control receipt independently matched fixed_workbook."
+  ],
+  "operation_budgets_and_settlement": {
+    "callback_elapsed_seconds": 66.81490745791234,
+    "operations": [
+      {
+        "measured_cash_usd": null,
+        "measured_elapsed_seconds": 2.8726009170059115,
+        "measured_turns": null,
+        "operation_id": "conformance_probe_5c7e39f87b1c4f95930b9345be90f807:proxy_start",
+        "reservation": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 60.0,
+          "max_model_turns": 0,
+          "max_operations": 1
+        },
+        "stage": "reviewed_proxy_setup",
+        "state": "complete"
+      },
+      {
+        "measured_cash_usd": null,
+        "measured_elapsed_seconds": 66.81490745791234,
+        "measured_turns": null,
+        "operation_id": "composed:conformance_probe_eadcb4eee1a04e0dafa86cf8ffd9fba9",
+        "reservation": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 208.0,
+          "max_model_turns": 1,
+          "max_operations": 1
+        },
+        "stage": "composed_pair_inspection",
+        "state": "complete"
+      },
+      {
+        "measured_cash_usd": null,
+        "measured_elapsed_seconds": 2.293496917001903,
+        "measured_turns": null,
+        "operation_id": "conformance_probe_5c7e39f87b1c4f95930b9345be90f807:proxy_stop",
+        "reservation": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 60.0,
+          "max_model_turns": 0,
+          "max_operations": 1
+        },
+        "stage": "reviewed_proxy_cleanup",
+        "state": "complete"
+      }
+    ],
+    "proxy_running_wall_seconds": 69.30259325006045,
+    "total_cash_ceiling_usd": 0.0,
+    "total_model_turns_reserved": 1,
+    "total_operations_reserved": 3,
+    "total_reserved_elapsed_seconds": 328.0
+  },
+  "runtime_and_usage": {
+    "actual_cash_cost_usd_from_proxy_record": null,
+    "actual_model": "gpt-6-luna",
+    "adapter_id": "codex-app-server:b-luna-discovery",
+    "adapter_turn_effort_selected_and_sent": "xhigh",
+    "cash_ceiling_usd": 0,
+    "cash_cost_usd": null,
+    "executor_fingerprint": "sha256:258aff0f2aa84c82ddda3934ed6f24f24c732b4fefb6a5c9f0dd99fbe5e0256c",
+    "executor_id": "b.luna.discovery",
+    "host_runtime_digest": "5338ba8d3616a59da912068f548a6c96feb91537a0aac5361e84a66acf4ba5a8",
+    "model_turn_count_observed": 1,
+    "model_turns_reserved": 1,
+    "profile_reasoning_effort": "xhigh",
+    "reasoning_effort_receipt_acknowledgement": "not a separate persisted receipt field; adapter selected/sent the sole configured xhigh effort",
+    "subscription_usage": "unknown; not read by these operations"
+  },
+  "schema_version": "aeep.b-control-callback-terminal-audit.v1",
+  "source": {
+    "after_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "before_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "expected_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+    "unchanged": true
+  },
+  "task_scope": {
+    "approval_ceiling": "read",
+    "executor_fingerprints": {
+      "native.composed.workbook": "sha256:658eb48482ecca3a53a7099b85a307f377f07061c186918334bc321343a653e4"
+    },
+    "max_attempt_seconds": 10.0,
+    "max_attempts": 1,
+    "project_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-b-native-final-20261003"
+  },
+  "tool_identity": {
+    "control_callback_declared_tool_names": [
+      "fixed_workbook"
+    ],
+    "control_callback_namespace": "workbook",
+    "control_dynamic_call_count": 1,
+    "control_dynamic_callback_tool_observed": "fixed_workbook",
+    "control_exact_preimages": [
+      {
+        "digest": "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135",
+        "identity": "commandExecution"
+      },
+      {
+        "digest": "sha256:237f58fb6e18bf08bd17eeb647d7d57b66e3372da9e3eb6ba6e91a6c9900d79a",
+        "identity": "dynamicToolCall:fixed_workbook"
+      }
+    ],
+    "control_host_receipt_digest": "d6a73e70b12f7dd9feb91bf493ed45f355ffa90fff3a35efaba9821b211b2d70",
+    "control_host_tools_used_hashes": [
+      "sha256:237f58fb6e18bf08bd17eeb647d7d57b66e3372da9e3eb6ba6e91a6c9900d79a",
+      "sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135"
+    ],
+    "limitations": [
+      "commandExecution category hash has no arguments",
+      "normalized dynamicToolCall identity omits server; namespace is tied by exact callback declaration",
+      "tool arguments and results were not read or disclosed"
+    ],
+    "treatment_dynamic_tool_identity_matches": [
+      {
+        "digest": "sha256:f29ce194240c35f03f8794a9d6a7fc639a8a03a89ca0f99a0a831c0bea0ae14a",
+        "identity": {
+          "server": "",
+          "tool": "aeep_recipe_f468b36bc594",
+          "type": "dynamicToolCall"
+        }
+      }
+    ],
+    "treatment_receipt_tool_identity_audit_sha256": "1890f69529682630fc5568c3014a9accefe4efe276f124789a0ec2ece4406cf4"
+  },
+  "verification": {
+    "full_conformance_created_or_claimed": false,
+    "persisted_boundary_conformance_rows_matching_control": 0,
+    "qualification_or_admission_created_or_claimed": false,
+    "record_mode": "ephemeral exact-linkage view from current canonical pair/profile, callback, receipt, worker and backend; not a persisted BoundaryConformance record",
+    "strict_verify_composed_binding": "passed",
+    "strict_verify_composed_callback": "passed",
+    "verifier": "src/aeep/hosts/codex_pair_inspection.py:verify_composed_callback"
+  }
+}

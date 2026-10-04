@@ -1,0 +1,50 @@
+{
+  "schema_version": "b.workbook-qualification-materialization-static-review.v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": "Luna xhigh",
+  "script_path": "reports/v08/luna-docx-stage/b-workbook-qualification-materialize-20261003.py",
+  "script_sha256": "26adf6bd763230d83dc61194058f91aae2afdbfaeed3587d379dd08535ceaf75",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "profile_path": "reports/v08/luna-docx-stage/b-current-profile-v2.json",
+  "profile_sha256": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+  "recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+  "environment_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "seed": 2026100301,
+  "assessment_shape": {
+    "qualification": 8,
+    "training": 28,
+    "holdout": 105
+  },
+  "reserved_limits": {
+    "operations": 1,
+    "seconds": 35,
+    "model_turns": 0,
+    "cash_usd": 0
+  },
+  "static_checks": {
+    "ast_parse": "pass",
+    "ruff_F821_F823_F401_I": "pass",
+    "exact_source_profile_and_manifest_digest_guards": "pass",
+    "canonical_database_device_inode_guard": "pass",
+    "current_workbook_recipe_and_B_profile_bindings": "pass",
+    "read_only_seed_uniqueness_preflight": "pass",
+    "separate_prepare_approve_execute_phases_and_one_shot_markers": "pass",
+    "case_payloads_excluded_from_emitted_results": "pass",
+    "reuse_of_existing_materialize_api": "pass",
+    "container_executor_pull_policy": "pass"
+  },
+  "evidence_basis": [
+    "The helper pins the current source, profile, recipe, worker digests, and control/treatment/differential conformance digests.",
+    "The pinned environment is offline and uses the exact workbook image; src/aeep/assessment/containment.py constructs Docker run with --pull=never.",
+    "The helper calls the existing extensions.prepare and extensions.materialize paths. It checks one 8/28/105 case set with unique inputs and emits identifiers, counts, and digests rather than case contents.",
+    "The repository put path rejects a conflicting existing record identity, and the helper reads the existing recipe by its pinned digest before preparation."
+  ],
+  "limits_and_conditions": [
+    "Review is static only. No prepare, approve, execute, Docker, worker, model, or canonical-store operation was performed by this reviewer.",
+    "The helper's storage check is a pre-execution free-space gate, not a continuously enforced filesystem quota. The operator must confirm available free space covers the 50 GiB reserve plus the reviewed allowance immediately before execution.",
+    "Historical image references are explicitly marked as not proving current local image presence. The pinned executor uses --pull=never, so a missing image should fail closed; current presence is for the operator to verify without pulling.",
+    "The result explicitly does not independently attest Docker container cleanup or whole-system resource completeness; those remain separate evidence."
+  ],
+  "review_outcome": "static_review_pass_with_execution_preconditions",
+  "execution_authorized_by_this_review": false
+}

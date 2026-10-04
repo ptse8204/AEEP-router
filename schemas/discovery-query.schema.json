@@ -1,0 +1,71 @@
+{
+  "additionalProperties": false,
+  "description": "Persist only the public phrase's digest, never task content or cursor text.",
+  "properties": {
+    "schema_version": {
+      "const": "discovery.query.v1",
+      "default": "discovery.query.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "discovery_id": {
+      "title": "Discovery Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "query_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Query Digest",
+      "type": "string"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "limit": {
+      "title": "Limit",
+      "type": "integer"
+    },
+    "cursor_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cursor Digest"
+    },
+    "artifact_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Artifact Types",
+      "type": "array"
+    },
+    "timeout_seconds": {
+      "title": "Timeout Seconds",
+      "type": "number"
+    }
+  },
+  "required": [
+    "discovery_id",
+    "created_at",
+    "query_digest",
+    "source_ids",
+    "limit",
+    "artifact_types",
+    "timeout_seconds"
+  ],
+  "title": "DiscoveryQueryRecord",
+  "type": "object"
+}

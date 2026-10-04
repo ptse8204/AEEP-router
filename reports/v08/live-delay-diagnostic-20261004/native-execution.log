@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/run-native-components-treatment.py", line 867, in <module>
+    main()
+    ~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/run-native-components-treatment.py", line 862, in main
+    result = asyncio.run(execute(args.review_sha))
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/run-native-components-treatment.py", line 364, in execute
+    review = load_review(review_sha)
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/run-native-components-treatment.py", line 310, in load_review
+    require(review.get("execution_authorized") is True, "exact review has not been authorized for execution")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/live-delay-diagnostic-20261004/run-native-components-treatment.py", line 52, in require
+    raise RuntimeError(message)
+RuntimeError: exact review has not been authorized for execution

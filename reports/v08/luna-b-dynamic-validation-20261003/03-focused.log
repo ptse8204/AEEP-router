@@ -1,0 +1,184 @@
+COMMAND: python3 -m pytest -q tests/test_v08_dynamic_differential.py tests/test_v08_three_way.py tests/test_v08_incremental.py tests/test_v08_conformance.py tests/test_codex_composed_inspection.py
+EXPECTED_VERIFICATION_SOURCE_DIGEST: 241ceb32dd8e6b22e11dec36ed808eee8ac43497b2a743ce4c2985bff57d1343
+VERIFICATION_LOCK_SHA256_BEFORE: 2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71
+ENV AEEP_VERIFY_OFFLINE=<unset>
+ENV PYTEST_ADDOPTS=--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-b-validation-20261003/pytest-03-focused -o cache_dir=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-b-dynamic-validation-20261003/pytest-cache-03-focused
+ENV TMPDIR=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-b-validation-20261003/tmp-03-focused
+ENV COVERAGE_FILE=<unset>
+..........................FF............................................ [ 90%]
+........                                                                 [100%]
+=================================== FAILURES ===================================
+___________ test_dynamic_candidate_rejects_probe_from_another_worker ___________
+
+dynamic_pair = {'control_binding_digest': 'd47a039e544afbe9a92c0be543c8c241cdef4f8938efeb909b26f10bc35e7aa2', 'control_boundary': Bou...dd7b8731fc98046b42943a2'}), 'repository': <aeep.assessment.repository.AssessmentRepository object at 0x1094318b0>, ...}
+
+    def test_dynamic_candidate_rejects_probe_from_another_worker(dynamic_pair):
+        repository = dynamic_pair["repository"]
+        boundary = _with_probe(
+            repository,
+            dynamic_pair["treatment_boundary"],
+            expected=dynamic_pair["expected"],
+            available=True,
+            worker_digest="9" * 64,
+        )
+    
+        with pytest.raises(ConfigurationError, match="exact composed worker"):
+>           require_candidate_access(repository, boundary, dynamic_pair["expected"], available=True)
+
+tests/test_v08_dynamic_differential.py:674: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repository = <aeep.assessment.repository.AssessmentRepository object at 0x1094318b0>
+boundary = BoundaryConformance(schema_version='assessment.boundary-conformance.v3', conformance_id='fixture-99999999', source_dig...ffffffffffffffffffffff', composed_definition_digest='0000000000000000000000000000000000000000000000000000000000000000')
+expected = DifferentialEnvironment(shared_definition_digest='5555555555555555555555555555555555555555555555555555555555555555', c...amic_tools={'dynamic:workbook:aeep_workbook_task': '5252c6b7d133fbef120c41d93f6411ba5afd0ac40dd7b8731fc98046b42943a2'})
+
+    def require_candidate_access(repository: AssessmentRepository, boundary: BoundaryConformance,
+                                 expected: DifferentialEnvironment, *, available: bool) -> None:
+        """Bind access observations to the candidate representation and reviewed worker.
+    
+        Callers separately require execution-backed boundary conformance. Dynamic
+        access additionally resolves the actual reviewed declaration; a claimed
+        availability flag cannot stand in for the callback contract.
+        """
+        probes = [BoundaryProbe.model_validate(repository.get("boundary_probe", item))
+                  for item in boundary.probe_digests
+                  if repository.get("boundary_probe", item).get("name") == "candidate_access"]
+        observation: dict[str, str | int | bool] = {
+            "definition_digest": content_digest(expected), "candidate_available": available,
+        }
+        if len(probes) != 1:
+            raise ConfigurationError("candidate availability probe must be present and unique")
+        probe = probes[0]
+        if expected.candidate_dynamic_tools:
+            from ..hosts.codex_invocation import contract_digest
+    
+            binding_digest = boundary.callback_binding_digest
+            if (boundary.schema_version not in {"assessment.boundary-conformance.v2", "assessment.boundary-conformance.v3"}
+                    or boundary.effective_inventory is None
+                    or probe.worker_digest != boundary.worker_digest
+                    or type(probe.observed.get("candidate_available")) is not bool):
+                raise ConfigurationError("dynamic candidate access requires the exact worker")
+            observed_inventory = {key: value for key, value in boundary.effective_inventory.items()
+                                  if key.startswith("dynamic:")}
+            inventory: dict[str, str] = {}
+            if binding_digest is None:
+                if available or boundary.schema_version != "assessment.boundary-conformance.v2" or observed_inventory:
+                    raise ConfigurationError("plain worker cannot claim dynamic candidate access")
+            else:
+                if boundary.schema_version != "assessment.boundary-conformance.v3":
+                    raise ConfigurationError("dynamic declaration requires composed conformance")
+                document = repository.get("codex_dynamic_tools", binding_digest)
+                with repository.store._lock:
+                    review = repository.store._connection.execute(
+                        "SELECT revoked FROM assessment_reviews WHERE digest=?", (binding_digest,)).fetchone()
+                identity = document.get("identity")
+                if (content_digest(document) != binding_digest or review is None or review[0]
+                        or not isinstance(identity, dict) or identity.get("worker_digest") != boundary.worker_digest):
+>                   raise ConfigurationError("dynamic candidate declaration is unreviewed or changed")
+E                   aeep.errors.ConfigurationError: dynamic candidate declaration is unreviewed or changed
+
+src/aeep/assessment/boundary.py:191: ConfigurationError
+
+During handling of the above exception, another exception occurred:
+
+dynamic_pair = {'control_binding_digest': 'd47a039e544afbe9a92c0be543c8c241cdef4f8938efeb909b26f10bc35e7aa2', 'control_boundary': Bou...dd7b8731fc98046b42943a2'}), 'repository': <aeep.assessment.repository.AssessmentRepository object at 0x1094318b0>, ...}
+
+    def test_dynamic_candidate_rejects_probe_from_another_worker(dynamic_pair):
+        repository = dynamic_pair["repository"]
+        boundary = _with_probe(
+            repository,
+            dynamic_pair["treatment_boundary"],
+            expected=dynamic_pair["expected"],
+            available=True,
+            worker_digest="9" * 64,
+        )
+    
+>       with pytest.raises(ConfigurationError, match="exact composed worker"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'exact composed worker'
+E         Actual message: 'dynamic candidate declaration is unreviewed or changed'
+
+tests/test_v08_dynamic_differential.py:673: AssertionError
+__ test_dynamic_candidate_requires_exact_effective_inventory_and_unique_probe __
+
+dynamic_pair = {'control_binding_digest': 'd47a039e544afbe9a92c0be543c8c241cdef4f8938efeb909b26f10bc35e7aa2', 'control_boundary': Bou...dd7b8731fc98046b42943a2'}), 'repository': <aeep.assessment.repository.AssessmentRepository object at 0x109431c70>, ...}
+
+    def test_dynamic_candidate_requires_exact_effective_inventory_and_unique_probe(dynamic_pair):
+        repository = dynamic_pair["repository"]
+        expected = dynamic_pair["expected"]
+        treatment = dynamic_pair["treatment_boundary"]
+        extra = {**treatment.effective_inventory, "dynamic:workbook:unreviewed": "a" * 64}
+        with pytest.raises(ConfigurationError, match="effective tool inventory"):
+            require_candidate_access(
+                repository,
+                treatment.model_copy(update={"effective_inventory": extra}),
+                expected,
+                available=True,
+            )
+    
+        with pytest.raises(ConfigurationError, match="one exact probe"):
+>           require_candidate_access(
+                repository,
+                treatment.model_copy(update={"probe_digests": treatment.probe_digests * 2}),
+                expected,
+                available=True,
+            )
+
+tests/test_v08_dynamic_differential.py:691: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repository = <aeep.assessment.repository.AssessmentRepository object at 0x109431c70>
+boundary = BoundaryConformance(schema_version='assessment.boundary-conformance.v3', conformance_id='fixture-22222222', source_dig...ffffffffffffffffffffff', composed_definition_digest='0000000000000000000000000000000000000000000000000000000000000000')
+expected = DifferentialEnvironment(shared_definition_digest='5555555555555555555555555555555555555555555555555555555555555555', c...amic_tools={'dynamic:workbook:aeep_workbook_task': '5252c6b7d133fbef120c41d93f6411ba5afd0ac40dd7b8731fc98046b42943a2'})
+
+    def require_candidate_access(repository: AssessmentRepository, boundary: BoundaryConformance,
+                                 expected: DifferentialEnvironment, *, available: bool) -> None:
+        """Bind access observations to the candidate representation and reviewed worker.
+    
+        Callers separately require execution-backed boundary conformance. Dynamic
+        access additionally resolves the actual reviewed declaration; a claimed
+        availability flag cannot stand in for the callback contract.
+        """
+        probes = [BoundaryProbe.model_validate(repository.get("boundary_probe", item))
+                  for item in boundary.probe_digests
+                  if repository.get("boundary_probe", item).get("name") == "candidate_access"]
+        observation: dict[str, str | int | bool] = {
+            "definition_digest": content_digest(expected), "candidate_available": available,
+        }
+        if len(probes) != 1:
+>           raise ConfigurationError("candidate availability probe must be present and unique")
+E           aeep.errors.ConfigurationError: candidate availability probe must be present and unique
+
+src/aeep/assessment/boundary.py:164: ConfigurationError
+
+During handling of the above exception, another exception occurred:
+
+dynamic_pair = {'control_binding_digest': 'd47a039e544afbe9a92c0be543c8c241cdef4f8938efeb909b26f10bc35e7aa2', 'control_boundary': Bou...dd7b8731fc98046b42943a2'}), 'repository': <aeep.assessment.repository.AssessmentRepository object at 0x109431c70>, ...}
+
+    def test_dynamic_candidate_requires_exact_effective_inventory_and_unique_probe(dynamic_pair):
+        repository = dynamic_pair["repository"]
+        expected = dynamic_pair["expected"]
+        treatment = dynamic_pair["treatment_boundary"]
+        extra = {**treatment.effective_inventory, "dynamic:workbook:unreviewed": "a" * 64}
+        with pytest.raises(ConfigurationError, match="effective tool inventory"):
+            require_candidate_access(
+                repository,
+                treatment.model_copy(update={"effective_inventory": extra}),
+                expected,
+                available=True,
+            )
+    
+>       with pytest.raises(ConfigurationError, match="one exact probe"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'one exact probe'
+E         Actual message: 'candidate availability probe must be present and unique'
+
+tests/test_v08_dynamic_differential.py:690: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_dynamic_differential.py::test_dynamic_candidate_rejects_probe_from_another_worker
+FAILED tests/test_v08_dynamic_differential.py::test_dynamic_candidate_requires_exact_effective_inventory_and_unique_probe
+EXIT_CODE: 1
+VERIFICATION_SOURCE_DIGEST_AFTER: 241ceb32dd8e6b22e11dec36ed808eee8ac43497b2a743ce4c2985bff57d1343
+VERIFICATION_LOCK_SHA256_AFTER: 2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71

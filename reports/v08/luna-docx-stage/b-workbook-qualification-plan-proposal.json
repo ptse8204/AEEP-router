@@ -1,0 +1,230 @@
+{
+  "admission": false,
+  "amendment": {
+    "amendment_id": "amendment_2e6738ad4c2c4e27aaf0501fe5a4c5dc",
+    "authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "authorization_id": "onboarding",
+    "environment_digests": [
+      "a1e9359a11b28704b16f40dc153995b99b1b2396006ac57d55a446114415f8f0"
+    ],
+    "issued_at": "2026-10-03T11:28:34.781458Z",
+    "recipe_digests": [
+      "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599"
+    ],
+    "reviewed_digests": [
+      "110000a1cd3c8ca3b36bc72b4a11142007ebedf1f79601e6a95e68398faba76c",
+      "29081efe94dd4020bbe232e93b62d07f1dd804c0a9ea2a8e405459313535fc37",
+      "4cb752e8cf93a6362a0a853c17cb835317763c2b0cd441e56be2b5116982e665",
+      "a1e9359a11b28704b16f40dc153995b99b1b2396006ac57d55a446114415f8f0",
+      "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+      "ce306f6cbe990c874aa6db6c55e42fcededc9d88e043bc82421c276a4466eaca",
+      "dad00d7823347881b4c30edb948f3c82a957c69e88deb9ef21b20645a3d03376"
+    ],
+    "schema_version": "assessment.scope-amendment.v1",
+    "subject_digests": [
+      "ce306f6cbe990c874aa6db6c55e42fcededc9d88e043bc82421c276a4466eaca"
+    ]
+  },
+  "authority": "Delegated finite assessment-plan preparation; exact later review required before execution.",
+  "blocked_reasons": [],
+  "boundary_and_differential_verified": true,
+  "budget_preview": {
+    "adapter_eligibility": [
+      {
+        "adapter": "codex-app-server:b-luna-aeep",
+        "adapter_version": "1",
+        "eligible": true,
+        "executor_id": "b.luna.aeep",
+        "managed_worker_configured": true,
+        "missing_capabilities": [],
+        "permission_verification": "checked_separately_before_invocation",
+        "support_status": "experimental"
+      }
+    ],
+    "campaign_allowance": {
+      "authorization_changed": false,
+      "automatic_retries": 0,
+      "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls.",
+      "fits_remaining": null,
+      "gaps": [
+        "preparation cost lineage is incomplete or belongs to another grant"
+      ],
+      "prior_operations": [],
+      "scope": "fresh_campaign_reservations",
+      "stages": [
+        {
+          "calls_minimum": 141,
+          "calls_upper": 141,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 29328.0,
+          "model_turns": 141,
+          "operations_upper": 141,
+          "stage": "trial"
+        },
+        {
+          "calls_minimum": 0,
+          "calls_upper": 0,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 0.0,
+          "model_turns": 0,
+          "operations_upper": 0,
+          "stage": "warmup"
+        },
+        {
+          "calls_minimum": 142,
+          "calls_upper": 142,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 4260,
+          "model_turns": 0,
+          "operations_upper": 142,
+          "stage": "router_setup"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 30,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "grader_validation"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 30,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "report_generation"
+        },
+        {
+          "calls_minimum": 2,
+          "calls_upper": 2,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 70.0,
+          "model_turns": 0,
+          "operations_upper": 2,
+          "stage": "grader_reference"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 353,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 12355.0,
+          "model_turns": 0,
+          "operations_upper": 353,
+          "stage": "grader_probe"
+        },
+        {
+          "calls_minimum": 0,
+          "calls_upper": 141,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 4935.0,
+          "model_turns": 0,
+          "operations_upper": 141,
+          "stage": "recipe_grading"
+        },
+        {
+          "calls_minimum": 1,
+          "calls_upper": 1,
+          "cash_reservation_upper_usd": "0",
+          "elapsed_reservation_upper_seconds": 0.07312320778146386,
+          "model_turns": 0,
+          "operations_upper": 1,
+          "stage": "generation_and_proposal"
+        }
+      ],
+      "upper_allowance": {
+        "cash_usd": "0",
+        "elapsed_seconds": 51008.07312320778,
+        "model_turns": 141,
+        "operations": 782
+      }
+    },
+    "evaluation_stage": "qualification",
+    "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced.",
+    "measurement_concurrency": 1,
+    "minimum_trial_model_turns": 141,
+    "model_worker_profile_count": 1,
+    "purpose": "assessment",
+    "remaining": {
+      "cash_usd": "0",
+      "elapsed_seconds": 505783.8705648063,
+      "model_turns": 3307,
+      "operations": 40750
+    },
+    "screening_trial_model_turns": 8,
+    "trial_elapsed_upper_seconds": 29328.0,
+    "workers": [
+      {
+        "executor_id": "b.luna.aeep",
+        "model_worker_profiles": [
+          "codex-app-server:b-luna-aeep"
+        ],
+        "role": "candidate"
+      }
+    ]
+  },
+  "candidate_exposure": "required_for_qualification",
+  "canonical_store": {
+    "database_device": 16777231,
+    "database_inode": 166293865,
+    "manifest_sha256": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb"
+  },
+  "case_count": 141,
+  "case_definitions_embedded": false,
+  "case_set_digest": "4cb752e8cf93a6362a0a853c17cb835317763c2b0cd441e56be2b5116982e665",
+  "component_digest": "5438e3aae178909d6d7c765b1590c05308a343d26e8c467097435ba1b1149e8d",
+  "conformance_digests": {
+    "b.luna.aeep": "abad8dc45bfb899a0e70a94bd8765585c073bb4c29b9dd2540673d5c21438f50",
+    "b.luna.discovery": "7632e4e25199b30824b6a44c6e2f17f7a17fc472d6323e6b7f17002ed79fabf6"
+  },
+  "control_worker_digest": "e15b7ee0ecabb077cc64ba80f724c739bc51bda8dc71d4038efc92f7678df345",
+  "definition_digests": [
+    "110000a1cd3c8ca3b36bc72b4a11142007ebedf1f79601e6a95e68398faba76c",
+    "29081efe94dd4020bbe232e93b62d07f1dd804c0a9ea2a8e405459313535fc37",
+    "4cb752e8cf93a6362a0a853c17cb835317763c2b0cd441e56be2b5116982e665",
+    "a1e9359a11b28704b16f40dc153995b99b1b2396006ac57d55a446114415f8f0",
+    "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+    "ce306f6cbe990c874aa6db6c55e42fcededc9d88e043bc82421c276a4466eaca",
+    "dad00d7823347881b4c30edb948f3c82a957c69e88deb9ef21b20645a3d03376"
+  ],
+  "differential_conformance_digest": "6437408490c796217702ba612748a021b88aab519fe565fe658d6909bb92db88",
+  "environment_digest": "a1e9359a11b28704b16f40dc153995b99b1b2396006ac57d55a446114415f8f0",
+  "execution_authorized": false,
+  "holdout_content_emitted": false,
+  "input_sha256": {
+    "callback_composition": "82f602d92a19d8020931d344ad0ce05c7bcccdf9b64908b0723a786c250591e7",
+    "materialization_plan_review": "3c43fa5414c96dfd787611a79498c88a10cadf9903424e9196884a4feb82ef93",
+    "materialization_request_review": "d43a235e67026ea20ebfaa57fc18114a9d8d732751a8c2fd7d971cc69addaf12",
+    "materialization_result": "8afdc3d94b0bcc8c34f801eaba6a6aeb0673511ffe7d3ffdde84586a0908b61e",
+    "materializer": "26adf6bd763230d83dc61194058f91aae2afdbfaeed3587d379dd08535ceaf75",
+    "paired_conformance_milestone": "62eb51f6d3ff65999309f7701917d2e37c5995061de3062e01a73a92b57a6c7f",
+    "profile": "28ed2a514083beda4ef3fc1fbcfa6320f5fabe2b8dcde74dddac7d7bb489c79a",
+    "workbook_producer": "4d5db1fd761882f90bbaff5d1a6c392e2bab185a248f4a981399f95ee8aa539d"
+  },
+  "materialization_request_id": "recipe_generation_a0c2096ac8b4438f8f2facb7c7d7850d",
+  "model": "gpt-6-luna",
+  "not_enqueued": true,
+  "plan_digest": "29081efe94dd4020bbe232e93b62d07f1dd804c0a9ea2a8e405459313535fc37",
+  "plan_id": "plan_3ea3e6a57d9c4571bd29bc513efde3de",
+  "preparation_elapsed_seconds": 0.7706663748249412,
+  "qualification": false,
+  "reasoning_effort": "xhigh",
+  "recipe_digest": "a3e6a7a2954118ff1034fb53f65bc0ef6e61a94cfe9df082fdb7df4c0cbd9599",
+  "runner_sha256": "3fb3dcd3dcc4b7962b7b7ff461e4fb5c8524827244bfedd8daba4ab033ad6e71",
+  "schema_version": "b.workbook-qualification-plan-proposal.v1",
+  "seed": 2026100301,
+  "selected_worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "split_counts": {
+    "holdout": 105,
+    "qualification": 8,
+    "training": 28
+  },
+  "status": "proposal_prepared",
+  "structure": "workflow",
+  "subject_digest": "ce306f6cbe990c874aa6db6c55e42fcededc9d88e043bc82421c276a4466eaca",
+  "treatment_worker_digest": "19027f56cdc99fc9b728dc2bf7af597f33c6a0d8f4b5d71d19739aa512a56df0",
+  "whole_system_cost_complete": false
+}

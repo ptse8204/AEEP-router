@@ -1,0 +1,185 @@
+{
+  "recorded_at": "2026-10-03T12:16:21.256021+00:00",
+  "status": "passed",
+  "source_digest": "50de999eb8fcd15ffef056c6b67db9f1dc0e491a3b32a3f236bbd81cd52651f7",
+  "verification_lock_sha256": "2fc3c9cd8b21ca23f175e5465d6b83c8d139388a3d513bbb50347221ed74bf71",
+  "commands_sha256": "35d2afb8c5fe440b1ffb4a3db68fe65f0c2719bd236239b15906b5978785ac97",
+  "commands": [
+    {
+      "name": "04-compileall-retry",
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.5753180410247296
+    },
+    {
+      "name": "05-schema-check-retry",
+      "command": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "wall_seconds": 1.2039006249979138
+    },
+    {
+      "name": "06-focused-retry",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_v08_boundary_costs.py",
+        "tests/test_v08_composed_cost_binding.py",
+        "tests/test_v08_conformance.py",
+        "tests/test_codex_composed_inspection.py"
+      ],
+      "returncode": 0,
+      "wall_seconds": 4.754637542180717
+    },
+    {
+      "name": "07-policy",
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.6901925420388579
+    },
+    {
+      "name": "08-ruff",
+      "command": [
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "examples"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.4986146669834852
+    },
+    {
+      "name": "09-mypy",
+      "command": [
+        "mypy",
+        "src"
+      ],
+      "returncode": 0,
+      "wall_seconds": 2.147681958042085
+    },
+    {
+      "name": "10-pytest",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "returncode": 0,
+      "wall_seconds": 553.1718183332123
+    },
+    {
+      "name": "11-coverage-run",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-ra"
+      ],
+      "returncode": 0,
+      "wall_seconds": 833.9188804167788
+    },
+    {
+      "name": "12-coverage-report",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "returncode": 0,
+      "wall_seconds": 1.728212125133723
+    },
+    {
+      "name": "13-coverage-json",
+      "command": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "--data-file=reports/v08/luna-c-boundary-cost-validation-20261003/coverage.data",
+        "-o",
+        "reports/v08/luna-c-boundary-cost-validation-20261003/coverage.json"
+      ],
+      "returncode": 0,
+      "wall_seconds": 2.1794084578286856
+    },
+    {
+      "name": "14-critical-coverage",
+      "command": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "reports/v08/luna-c-boundary-cost-validation-20261003/coverage.json"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.5320957498624921
+    },
+    {
+      "name": "15-assessment-coverage",
+      "command": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "reports/v08/luna-c-boundary-cost-validation-20261003/coverage.json"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.5262979581020772
+    }
+  ],
+  "logs": {
+    "04-compileall-retry": "2bfcfea3f4bd9f2a2d44a5ec0228f4585424f172d9b2f5f965eac8476408993a",
+    "05-schema-check-retry": "12836387a9ad1bccedb0b47b1d69eb272816baa25c3ce2e0b0e5514b130eaa0d",
+    "06-focused-retry": "54b2f9369d9ce29d8824e43bd6f24f370fd22ff66e3381916736180f2efbabf7",
+    "07-policy": "06719e0ddfad84693c23389cde329b831d1427cf72cd5b82be29aab9ad88df24",
+    "08-ruff": "32d85775b0d64bec83a6b4f50a9530f8d877ccb8feb9af3cacc937bc2d0bc3b8",
+    "09-mypy": "d931f3f1ef0825595741604dc0f9709f57d851ab4803b32b8ac005d9e9d352f7",
+    "10-pytest": "7fedb09cf03c13de6ff7a487e9c49b975c5338099e6eb8e003920b383bc74469",
+    "11-coverage-run": "ffa031d91459f9f8cb1addd7fd5411f91cc096d53d8d297ce74a440482b1e067",
+    "12-coverage-report": "6da6639f146543cda98cbd58f1bd936be06e492d0521c10dc8c8b83a2dc8a658",
+    "13-coverage-json": "dc28ae8c174cdb283ba9285c0e468d1ff89a16cc890f55df5209b0ff6606ece8",
+    "14-critical-coverage": "aa620c24ce4c6a37254633e106e39d791bf459e4b680fb6894307a5c98da8e2b",
+    "15-assessment-coverage": "12d3d5cc5f070fe25d85fbe3bfb8526a69949678038fb068cde4fcb85b869e8c"
+  },
+  "pytest": {
+    "passed": 1214,
+    "skipped": 21,
+    "warnings": 1,
+    "seconds": 551.9
+  },
+  "branch_coverage_run": {
+    "passed": 1214,
+    "skipped": 21,
+    "warnings": 1,
+    "seconds": 832.1
+  },
+  "coverage_percent": 81.8666145311469,
+  "critical_coverage_gate": "passed",
+  "assessment_coverage_gate": "passed",
+  "ordinary_free_bytes": 148541014016,
+  "temporary_root": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-c-boundary-cost-validation-20261003",
+  "live_model_turns": 0,
+  "credential_access": false,
+  "source_unchanged": true,
+  "live_conformance": "not renewed by software tests"
+}

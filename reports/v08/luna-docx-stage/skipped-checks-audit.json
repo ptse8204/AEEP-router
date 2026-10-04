@@ -1,0 +1,111 @@
+{
+  "audit": {
+    "date": "2026-10-02",
+    "method": "Read-only review of retained pytest logs, pytest node-id caches, run manifest, policy, plan record, and static skip guards. No test collection, imports, or reruns were performed.",
+    "policy_read": "docs/ASSESSMENT_TESTING.md",
+    "frozen_verification_source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1"
+  },
+  "final_validation": {
+    "plain_pytest": {
+      "command": "python3 -m pytest",
+      "result": "1163 passed, 21 skipped, 1 warning in 591.86s",
+      "evidence": "reports/v08/luna-full-validation-successor-20261002/15-pytest-marker.log:1-7,49-53",
+      "sha256": "fbcafea8efb98cbcc9f2ecbd0e454f8d93476aac6e545473405b1317b03e5551"
+    },
+    "branch_coverage_pytest": {
+      "command": "python3 -m coverage run --branch -m pytest",
+      "result": "1163 passed, 21 skipped, 1 warning in 899.33s",
+      "evidence": "reports/v08/luna-full-validation-successor-20261002/16-coverage-run-marker.log:1-7,60-64",
+      "sha256": "d4ec36f71afe8f17d034988284b928340193cc608a074ebeb4d5aa8910cb4f3f"
+    },
+    "collection_cache": {
+      "count": 1184,
+      "evidence": [
+        "reports/v08/luna-full-validation-successor-20261002/pytest-cache-15-pytest-marker/v/cache/nodeids",
+        "reports/v08/luna-full-validation-successor-20261002/pytest-cache-16-coverage-run-marker/v/cache/nodeids"
+      ]
+    }
+  },
+  "skip_identification": {
+    "exact_skipped_node_ids_and_reasons": "Not recoverable from retained q-mode output. The logs report aggregate counts and progress glyphs, but no per-test skip summary or reasons. The cache files contain node IDs only, not outcomes; this audit does not join glyph positions to cache order.",
+    "direct_log_observation": "Both full runs report 21 skipped; the final plain pytest progress output contains skip glyphs but no node IDs or reasons.",
+    "static_guard_inventory": [
+      {
+        "gate": "Selected live evidence",
+        "static_condition": "tests/test_v08_live.py applies a module-level skipif when AEEP_LIVE_MANIFEST is absent; it defines one codex_conformance test and one live_acceptance test.",
+        "run_configuration": "The run manifest says explicit live opt-in variables were removed.",
+        "assessment": "These two tests are expected to be skipped under the recorded configuration; the q-mode log does not print their individual skip reasons.",
+        "references": [
+          "reports/v08/luna-full-validation-successor-20261002/commands.txt:15-17",
+          "tests/test_v08_live.py:11,23-33"
+        ]
+      },
+      {
+        "gate": "Pinned real-container boundary",
+        "static_condition": "tests/test_v08_real_container.py applies a module-level skipif when AEEP_CONTAINER_IMAGE is absent. Other opt-in container cases are declared in the executable-recipe and workbook tests.",
+        "run_configuration": "The run manifest says explicit container opt-in variables were removed.",
+        "assessment": "These are static candidates for the aggregate skips; the available logs do not establish the exact skipped-node set.",
+        "references": [
+          "reports/v08/luna-full-validation-successor-20261002/commands.txt:15-17",
+          "tests/test_v08_real_container.py:17-21",
+          "tests/test_v08_executable_recipes.py:96",
+          "tests/test_v08_workbook.py:87,121-123"
+        ]
+      },
+      {
+        "gate": "Local native and offline worker conformance",
+        "static_condition": "Several tests require AEEP_NATIVE_CODEX, AEEP_NATIVE_WORKBOOK_PYTHON, AEEP_INSPECTION_FIXTURE_SPECS, or AEEP_CODEX_EXECUTABLE; native-process cases also check for an installed Mac runtime.",
+        "run_configuration": "The run manifest says explicit native opt-in variables were removed. It does not enumerate every worker-fixture variable or the installed-runtime presence check.",
+        "assessment": "These are static candidates only; exact skipped cases and reasons are not attributed from the aggregate log.",
+        "references": [
+          "reports/v08/luna-full-validation-successor-20261002/commands.txt:15-17",
+          "tests/test_v08_discovery_lifecycle.py:237-240",
+          "tests/test_v08_task_profile.py:414,477-478",
+          "tests/test_v08_workbook_native.py:138-140",
+          "tests/test_v08_offline_pair.py:64-68",
+          "tests/test_v08_worker_inspection.py:68-72",
+          "tests/test_v08_workers.py:203-207",
+          "tests/test_v08_native_process.py:34-40,119-123"
+        ]
+      }
+    ]
+  },
+  "evidence_mapping": {
+    "observed": [
+      "The final software suite and branch-coverage run completed with the aggregate counts above; coverage report and both existing coverage gates are recorded separately in validation-summary-final.txt:21-29.",
+      "An earlier bounded software checkpoint recorded portable and real-native discovery lifecycle checks and a native filesystem/network boundary check. This is separate historical software evidence, not a result of the final full-suite run or model qualification.",
+      "The initial plan-coverage snapshot read during this audit said 15/28 DOCX training cases; that was a checkpoint, not current status. The plan now records 18/28 training cases at 2026-10-03T00:28:29.677755+00:00, with session 37153 continuing; this is separate from the skipped pytest tests.",
+      "The earlier DOCX pair result records 11 control and 11 treatment probe digests (22 total), matching probes and paired checks passing, zero model turns, and full_conformance=false, qualification=false, admission=false. It is bound to source 060fbefd55ff1c73256520a0c1e3d0de0e029755b75437cf7a93d7b68335e293 and is separate from the 21 skipped test cases.",
+      "The current-source boundary application records 11 verified boundary probes for each arm (22 total), differential linkage matching, and full-plan differential verification still pending; it records zero model turns and no qualification or admission. This does not substitute for full task conformance or skipped tests.",
+      "The current-source typed connectivity result records connectivity_only=true, two model turns reserved for probes, proxy restored, full_task_conformance=false, qualification=false, and admission=false. The canonical audit binds that result to source eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1; actual cash/subscription usage is unavailable in that audit. These connectivity/conformance observations are distinct from the pytest skips.",
+      "The later exact successor proposal records boundaries_and_differential_verified=true with no blocked reasons for plan_b3ccf1dccc4043129ad213eb7a50e6d4 on the frozen current source. This supersedes the earlier component record's pending full-plan check, without turning skipped tests into passes or establishing qualification."
+    ],
+    "remaining": [
+      "Live model-driven qualification, marginal value, and native-catalog evidence remain distinct gates; the current DOCX training/holdout work is unfinished.",
+      "Actual pinned-container and fresh worker conformance evidence are not established by this default full-suite run; skipped checks do not count as passes.",
+      "Cloud-only execution still lacks a replacement for the composed Mac-native backend and fresh boundary evidence."
+    ],
+    "policy_basis": [
+      "docs/ASSESSMENT_TESTING.md:340-357 defines offline contract/lifecycle, actual-boundary, conformance, and live-acceptance layers and the explicit opt-ins.",
+      "docs/ASSESSMENT_TESTING.md:364-377 says to report lifecycle, live acceptance, savings, and production support separately and that skipped tests cannot establish production readiness.",
+      "docs/ASSESSMENT_TESTING.md:418-429 limits controlled-fixture results to lifecycle behavior.",
+      "reports/v08/plan-coverage.md:1-9,19-64 records the current DOCX checkpoint, earlier bounded native software checks, unfinished live gates, and cloud-boundary limitation."
+    ],
+    "additional_evidence_refs": [
+      "reports/v08/luna-docx-stage/pair-result.json#/pair (11 control plus 11 treatment probe digests; paired checks passed, full conformance false)",
+      "reports/v08/luna-docx-stage/boundary-apply-result.json#/verified_boundaries (11 verified probes per arm; differential linkage matched; full-plan differential verification pending)",
+      "reports/v08/luna-docx-stage/root-connectivity-canonical-audit.json#/typed_run/result_flags (typed connectivity-only result; two reserved probe turns; no full task conformance)",
+      "reports/v08/luna-docx-stage/root-connectivity-result.json (underlying typed connectivity result; SHA-256 34bb93af2b589cfe309c3a8947add63a3248c999d27352b2f374249d9f03c14c)",
+      {
+        "path": "reports/v08/luna-docx-stage/successor-qualification-review.json",
+        "sha256": "bd9e7b34d980605a7430381d67a265eb2be39b528a8509648bddd98ec900b8fe",
+        "fields": [
+          "source_digest",
+          "plan_id",
+          "boundaries_and_differential_verified",
+          "blocked_reasons"
+        ]
+      }
+    ]
+  }
+}

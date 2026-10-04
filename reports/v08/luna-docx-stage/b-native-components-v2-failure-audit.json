@@ -1,0 +1,74 @@
+{
+  "confirmed_failure_cause": {
+    "basis": "Root read-only process metadata confirmed PID 0 exe() raises psutil.AccessDenied; task-local cancel receipt is FAILED with 47 stdout bytes, zero stderr, and no readiness record.",
+    "correctness": "The v2 cancellation component is negative/failed. It is not a passing boundary result and does not establish cancellation cleanup.",
+    "summary": "The v2 stdout observer called Process.exe() on every ancestor before testing its parent PID. On this host the walk reached protected PID 0, whose exe() raises psutil.AccessDenied. The native notification layer converts observer exceptions to NATIVE_COMMAND_PROTOCOL_FAILED; the outer wrapper retained only the later readiness-not-observed error."
+  },
+  "elapsed_seconds": 1.032658708980307,
+  "full_conformance": false,
+  "guard_observations": {
+    "database_denied": true,
+    "fork_errno": "35",
+    "hard_nproc": "0:0",
+    "marker": "post_exec",
+    "network_denied": true,
+    "private_denied": true,
+    "raise_denied": true,
+    "session_leader": true,
+    "spawn_errno": "35"
+  },
+  "model_turns": 0,
+  "native_attempts": 2,
+  "operation_id": "b-native-components:conformance_b_native_components_v2_449b",
+  "operation_settled": true,
+  "post_failure_process_state": "Root reports no matching python3.12/sandbox-exec processes remain; no process was signaled by this audit.",
+  "preservation": "V2 result, receipt rows, attempts, task-local SQLite database and sidecars are preserved. No replay or cleanup performed.",
+  "protected_state_observation": {
+    "database_denied": true,
+    "private_denied": true,
+    "witness_unchanged": true
+  },
+  "request_id": "conformance_b_native_components_v2_449b",
+  "result_path": "reports/v08/luna-docx-stage/b-native-components-v2-result.json",
+  "result_sha256": "366ecb6a1a850e1a0fe0c9b46d839e58cf66d609be4cdea838762a81fa57d915",
+  "result_status": "fail",
+  "review_sha256": "1a93b9692b2bc2af2036ca018886cb2c70efdf3c8d30dafd0291748c424397a9",
+  "schema_version": "b-native-components-v2-failure-audit.v1",
+  "successor": {
+    "definition_id": "b-native-components-v3-449b",
+    "driver": "reports/v08/luna-docx-stage/b-run-native-components-v3.py",
+    "execution_authorized": false,
+    "fresh_project_local_paths": [
+      ".aeep/b-native-components-v3-private-canary",
+      ".aeep/b-native-components-v3-local.sqlite3"
+    ],
+    "observer_fix": "First collect a bounded pid/ppid-only chain. Only call exe() after ppid equals the current supervisor PID, preserving the exact direct-child executable, process-group and session checks. On observer exception, persist bounded stage/type/message and safe chain before re-raising.",
+    "producer": "reports/v08/luna-docx-stage/b-native-component-definitions-v3.py",
+    "request_id": "conformance_b_native_components_v3_449b",
+    "result_path": "reports/v08/luna-docx-stage/b-native-components-v3-result.json",
+    "review_path": "reports/v08/luna-docx-stage/b-native-components-v3-review.json"
+  },
+  "task_local_receipts": [
+    {
+      "attempt_state": "COMPLETED",
+      "executor_id": "b.native.component.guard",
+      "latency_ms": 398.8271248526871,
+      "receipt_status": "success",
+      "stderr_bytes": 0,
+      "stdout_bytes": 205
+    },
+    {
+      "attempt_state": "FAILED",
+      "executor_id": "b.native.component.cancel",
+      "latency_ms": 308.14391607418656,
+      "receipt_status": "failed",
+      "stderr_bytes": 0,
+      "stdout_bytes": 47
+    }
+  ],
+  "v2_outer_error": {
+    "message": "independent native cancellation readiness was not observed",
+    "sha256": "31eb55c3904411ca20a9ad8cd4908a46b4208fc41a9fe4d981ee4b4cb42dc710",
+    "type": "RuntimeError"
+  }
+}

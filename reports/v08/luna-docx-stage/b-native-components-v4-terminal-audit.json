@@ -1,0 +1,163 @@
+{
+  "audit_scope": "read-only canonical audit of the V4 native component inspection; not full conformance or qualification",
+  "canonical_probe_count": 3,
+  "child_attempts": [
+    {
+      "attempt_id": "attempt_55146580e15d4fb1a5937beaab638be8",
+      "digest": "b9b9fed9e7a8f504cce8dedffa25d3b8dcbd194092e76055e2c21b17865039ca",
+      "executor_id": "b.native.component.guard",
+      "idempotent": true,
+      "retry_eligible": true,
+      "side_effect": "read",
+      "state": "COMPLETED"
+    },
+    {
+      "attempt_id": "attempt_55766cbb1cef472b991f94d685ba3d46",
+      "digest": "d4ac67f7799a298940382d00e5d5337dcc40a0163e42cb45141f132ecbf10ac6",
+      "executor_id": "b.native.component.cancel",
+      "idempotent": true,
+      "retry_eligible": true,
+      "side_effect": "read",
+      "state": "FAILED"
+    }
+  ],
+  "child_receipts": [
+    {
+      "actual_resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 47,
+        "cpu_ms": 163.334581,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 353.5275000613183,
+        "memory_mb_seconds": 7.957931622964679,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 116.265625,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash_status": "unavailable",
+      "digest": "5f912eed53794dc2d24fb83f5e4f60015fd87f1399575e1daf2d4d8dcf917f8a",
+      "error_type": null,
+      "executor_id": "b.native.component.guard",
+      "receipt_id": "rcpt_d91085329a304951a2a43d082f56b365",
+      "status": "success"
+    },
+    {
+      "actual_resources": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "context_tokens": 12,
+        "cpu_ms": 104.489374,
+        "gpu_ms": 0.0,
+        "input_tokens": 0,
+        "latency_ms": 322.6320000831038,
+        "memory_mb_seconds": 10.320011733161664,
+        "monetary_usd": 0.0,
+        "network_bytes": 0,
+        "output_tokens": 0,
+        "peak_memory_mb": 123.640625,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash_status": "unavailable",
+      "digest": "2175f98805ce3ad49051d6d616ab428fff0a079591a33cae3b0faaedc9d2bb0f",
+      "error_type": "timeout",
+      "executor_id": "b.native.component.cancel",
+      "receipt_id": "rcpt_e945d4dd7b5d4cec8a4f406d860fec4c",
+      "status": "timeout"
+    }
+  ],
+  "cleanup_confirmed": true,
+  "cumulative_grant_counters_after": {
+    "cash_usd": "0.0",
+    "elapsed_seconds": 98850.49842406833,
+    "model_turns": 2691,
+    "operations": 9239,
+    "revoked": false
+  },
+  "database_bytes": 187977728,
+  "database_path": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+  "full_conformance": false,
+  "host_callback_observed": false,
+  "limitations": [
+    "Raw child receipt resource vectors retained; no aggregate resource or cash measurement inferred.",
+    "This pass verifies three native component probes only; full boundary conformance remains false.",
+    "Host callback and host EOF were not observed."
+  ],
+  "operation": {
+    "accounting": "unavailable",
+    "counter_note": "grant row is cumulative; this audit attributes only the operation reservation and its measured elapsed time",
+    "elapsed_seconds": 1.005622582975775,
+    "grant_id": "onboarding",
+    "measurement_digest": "6d8a41c5df001856510654d1404f1b4919a0109ffc94a4f8194ccf5b15d0581d",
+    "operation_id": "b-native-components:conformance_b_native_components_v4_449b",
+    "reserved": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 40.0,
+      "max_model_turns": 0,
+      "max_operations": 1
+    },
+    "resource_vector": null,
+    "state": "complete"
+  },
+  "probes": [
+    {
+      "child_execution_evidence_digest": "8f615c460a9c6a3051ff20230a23ecdbe28cfdb45bd1269d051680434013b62f",
+      "child_receipt_digest": "2175f98805ce3ad49051d6d616ab428fff0a079591a33cae3b0faaedc9d2bb0f",
+      "definition_digest": "e7a672cc46d773ab3163dace9644b2f2fe7884c1c21d903b4f6841afd2e296b4",
+      "evidence_links_child_and_observation_and_terminal_event": true,
+      "execution_evidence_digest": "4c5776606a4c70da38d157f3236186a540858ac0f01fdd6868a81515dc046eaa",
+      "name": "callback_lifecycle",
+      "observed_matches_definition": true,
+      "probe_digest": "55aeb30c60afe44b9b5d4d54b559812402d336ba543843e1bddeba3f284810e9",
+      "worker_digest_matches_review": true
+    },
+    {
+      "child_execution_evidence_digest": "8e2a35c7799e6e49386537dbd4de045383421444bc7a6e8e300015dbb379b39a",
+      "child_receipt_digest": "5f912eed53794dc2d24fb83f5e4f60015fd87f1399575e1daf2d4d8dcf917f8a",
+      "definition_digest": "de6f424f92ac062e84a991fc4b06c088bae508e8aa6cc929f7c7eeeaeb65c724",
+      "evidence_links_child_and_observation_and_terminal_event": true,
+      "execution_evidence_digest": "19b0dd2fe92bedf074c034d4d1ef16f997711ea010a03c37421e62ac546d8590",
+      "name": "native_boundary",
+      "observed_matches_definition": true,
+      "probe_digest": "d10bd263f3c7831d390314ae45f3d7bfe07107d29b43593772e4a2005667b85e",
+      "worker_digest_matches_review": true
+    },
+    {
+      "child_execution_evidence_digest": "8e2a35c7799e6e49386537dbd4de045383421444bc7a6e8e300015dbb379b39a",
+      "child_receipt_digest": "5f912eed53794dc2d24fb83f5e4f60015fd87f1399575e1daf2d4d8dcf917f8a",
+      "definition_digest": "ac73a3a83aaca04d23f0087f44b9383f7acc1803c86fc300155f3571c7b65b11",
+      "evidence_links_child_and_observation_and_terminal_event": true,
+      "execution_evidence_digest": "e9e31dc42fda3720ab9a9c7d31045c15112a42f680369006c42bf6299d56874a",
+      "name": "protected_state",
+      "observed_matches_definition": true,
+      "probe_digest": "5b4c25867194dfcb5fa0f9fcbfb0034e537123e5ca76b5437504280223b5f616",
+      "worker_digest_matches_review": true
+    }
+  ],
+  "protected_state_files": {
+    "canary": {
+      "exists": true,
+      "sha256": "be347961c35e5a6a056cea713796f9fe74675e55bca25c8e894db0f153ed0377",
+      "sha256_matches_before_and_after": true
+    },
+    "project_database": {
+      "exists": true,
+      "sha256": "259caf7f136af3d6c0611d7f30405f28232a928d1ca9d078a08d0af0f6e678c3",
+      "sha256_matches_before_and_after": true
+    }
+  },
+  "resource_totals_complete": false,
+  "result_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-native-components-v4-result.json",
+  "result_sha256": "2cafc12642b19d0dddb158f614da19bed96d2dc39ea8657375ccc55965230ad4",
+  "review_path": "/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-docx-stage/b-native-components-v4-review.json",
+  "review_sha256": "2a8823bfa8fff767a73e791f0e27277290e82ce5ed4b56d583f19f1c204a4c31",
+  "schema_version": "b-native-components-terminal-audit.v1",
+  "source_digest": "449b2e2f6b3602107613503781a22330bbede25d7aee4ad2f67b753cbd2f31ad",
+  "source_unchanged_reported": true,
+  "status": "pass"
+}

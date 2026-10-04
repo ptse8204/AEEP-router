@@ -1,0 +1,50 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.verifier
+#1 transferring dockerfile: 773B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/aeep-skillsbench-docx-control:luna-xhigh-20261002
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/aeep-skillsbench-docx-control:luna-xhigh-20261002@sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27
+#4 resolve docker.io/library/aeep-skillsbench-docx-control:luna-xhigh-20261002@sha256:4817f921c3001597acd0fc3d22f35f1f0ee012dda866bdd1ac66bd386cc6de27 done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 1.69MB 0.0s done
+#5 DONE 0.0s
+
+#6 [2/4] COPY wheels/ /tmp/verifier-wheels/
+#6 DONE 0.0s
+
+#7 [3/4] COPY requirements-verifier.lock /tmp/requirements-verifier.lock
+#7 DONE 0.0s
+
+#8 [4/4] RUN python3 -m pip install --no-cache-dir --no-index --find-links=/tmp/verifier-wheels --require-hashes -r /tmp/requirements-verifier.lock     && python3 -c "import importlib.metadata as m, pytest, sys; assert sys.version_info[:2] == (3, 13); assert pytest.__version__ == '8.4.1'; assert m.version('python-docx') == '1.1.2'"     && rm -rf /tmp/verifier-wheels /tmp/requirements-verifier.lock
+#8 0.282 Looking in links: /tmp/verifier-wheels
+#8 0.284 Processing /tmp/verifier-wheels/iniconfig-2.1.0-py3-none-any.whl (from -r /tmp/requirements-verifier.lock (line 1))
+#8 0.286 Processing /tmp/verifier-wheels/packaging-25.0-py3-none-any.whl (from -r /tmp/requirements-verifier.lock (line 2))
+#8 0.287 Processing /tmp/verifier-wheels/pluggy-1.6.0-py3-none-any.whl (from -r /tmp/requirements-verifier.lock (line 3))
+#8 0.289 Processing /tmp/verifier-wheels/pygments-2.19.2-py3-none-any.whl (from -r /tmp/requirements-verifier.lock (line 4))
+#8 0.292 Processing /tmp/verifier-wheels/pytest-8.4.1-py3-none-any.whl (from -r /tmp/requirements-verifier.lock (line 5))
+#8 0.324 Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
+#8 0.850 
+#8 0.851 Successfully installed iniconfig-2.1.0 packaging-25.0 pluggy-1.6.0 pygments-2.19.2 pytest-8.4.1
+#8 0.851 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 DONE 1.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.3s done
+#9 exporting manifest sha256:44ecff42cc4d62d0552965a80b1743725821197002dab05143b430ee36c90f78 done
+#9 exporting config sha256:7e0906cda91884e2d3320425fb24b18992d8f438d14895aec03e553c91a1c7dc done
+#9 exporting attestation manifest sha256:20f6defc6aabc3181276c514ee963ae06979f0649413baa0edf1677e40f2270d done
+#9 exporting manifest list sha256:7d5c98e4ad4bcdab74f314f0452d776711e62525a94922b5a01c7d39caef072c done
+#9 naming to docker.io/library/aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002 done
+#9 unpacking to docker.io/library/aeep-skillsbench-docx-verifier:upstream-9a1f4dd-20261002 0.1s done
+#9 DONE 0.5s

@@ -1,0 +1,167 @@
+{
+  "audit_id": "luna-read-only-discovery-profile-bridge-audit-2026-10-03",
+  "audited_at_utc": "2026-10-03T06:15:03Z",
+  "status": "read_only_synthetic_lifecycle_audit_complete_with_limits",
+  "evidence_class": "synthetic local integration only",
+  "policy": {
+    "path": "docs/ASSESSMENT_TESTING.md",
+    "sha256": "c0448f7ecacfdb5392cf9c5bbe06c971a1ebe460f9e159f7c5ee22b88884e997"
+  },
+  "evidence_artifacts": [
+    {
+      "path": "reports/v08/luna-docx-stage/discovery-profile-bridge-supervisor-result.jsonl",
+      "sha256": "4ec6786b0809cbc70f4fe7042d4a8a419ed809e62324f04d21373c808b997dcd"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/workflow-linkage-bridge-execution-review.json",
+      "sha256": "b531a08c590cc92567e6ac3bec7fe85518c87cb70b719aa5d25a7f341ebb5b03"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/successor-qualification-terminal.json",
+      "sha256": "0ce50cefa63205a0ac27a86807286f3936b96c22b91a92fbb8dd40c6a6dad6ef"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py",
+      "sha256": "59d768579bceab6adffb3f09cac7adce2b4eb3e859c16187089ff7ba8460335c"
+    },
+    {
+      "path": "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py",
+      "sha256": "bfe09ad43e49b9e552410028280d637391ac11c4aed2646a29600b5676aaf5d1"
+    },
+    {
+      "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx/aeep.json",
+      "sha256": "0bfc8e75ae10d2bd3854e274b8c0839b36a0c99892886c0ca7e4e6416727828c"
+    },
+    {
+      "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx/.aeep/state.sqlite3",
+      "sha256": "a427d2e2f098d335ea05e13ac3a0292c2b33961fd85d95cb6590434b1d6ab72a"
+    },
+    {
+      "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx/discovery-candidates.json",
+      "sha256": "cfe90fa02649c4e9cbe776799d007012e0da8c5aa123dd017288e463e2595250"
+    },
+    {
+      "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx/selected-plugin.txt",
+      "sha256": "2c9000db15494c666620db9286445ea273a882bb84c937088daf7f33368509d3"
+    }
+  ],
+  "frozen_source": {
+    "verification_source_digest_before_and_after": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+    "supervisor_source_guard_problem": null,
+    "interpretation": "The supervisor record reports identical frozen source digests and no source-guard failure. This audit did not recompute the repository-wide digest."
+  },
+  "native_boundary": {
+    "backend": "command with argv_literal=true and stdin_json=true",
+    "candidate_executor_id": "fixture.native-csv-candidate",
+    "candidate_route_and_plan_fingerprint_bare_sha256": "be865a5c2edfafe185a9af5078390f2ccde05801bbb753a8b666f6a614273ce9",
+    "native_sandbox_launcher": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+    "native_sandbox_launcher_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+    "notes": [
+      "The discovered registry item is synthetic metadata; its local selected artifact explicitly says no plugin code is executed. The fixture explicitly maps that intake subject to the COMMAND candidate above.",
+      "The same bare behavior fingerprint appears in the assessment plan route binding, route-candidate row, and admission. The reviewed task scope and receipt use the normalized sha256: prefix of that fingerprint.",
+      "Both assessment arms use the native sandbox configuration. The baseline is deliberately delayed by one second in the staged runner; this result cannot establish real capability benefit or transfer container evidence to native execution."
+    ]
+  },
+  "lineage_checks": {
+    "discovery": {
+      "discovery_result_id": "discovery_53f1d2a7e00442788f84ccd247236d65",
+      "returned_registry_candidate_id": "fixture.native-csv-helper",
+      "registry_adapter": "fixture",
+      "registry_raw_metadata_digest": "sha256:a51758e48b76503cac0058271655ee8e7996c219a7e4d8c0dc2e8480e05589fa",
+      "intake_id": "intake_d4be93148cac49e9ba43f545a2a22aaf",
+      "intake_registry_candidate_id": "fixture.native-csv-helper",
+      "intake_subject_digest": "fc893f072e429147c4bab1d7de904dce6d50aca37ae8a3ba8a6a987a719feba5",
+      "evidence": "Persisted discovery-result and candidate-intake records carry the selected registry identity; the staged runner creates the local fixture source and explicitly performs selected intake (runner lines 208-249)."
+    },
+    "assessment_and_admission": {
+      "plan_id": "plan_6777489e1957480e901da9063e85e2c7",
+      "plan_candidate_id": "fixture.native-csv-candidate",
+      "plan_candidate_fingerprint": "be865a5c2edfafe185a9af5078390f2ccde05801bbb753a8b666f6a614273ce9",
+      "plan_subject_digest_matches_intake": true,
+      "assessment_job_state": "complete",
+      "report_id": "fit_c217d399710147a9b9d130dea47fd18d",
+      "report_record_outcome": "useful_within_scope",
+      "report_record_qualification_passed": true,
+      "report_plan_digest_matches_persisted_plan_record": true,
+      "admission_id": "admission_37033ff0a8ee4442bbc2969c227506ed",
+      "admission_report_id": "fit_c217d399710147a9b9d130dea47fd18d",
+      "admission_subject_digest_matches_intake": true,
+      "admission_candidate_fingerprint_matches_plan": true,
+      "evidence": "Read-only metadata from the isolated fixture database; runner lines 244-307 bind intake to the fixed plan and zero-model/zero-cash reservation, and lines 333-347 assert the positive admission lookup identity and fingerprint."
+    },
+    "profile_dispatch_receipt_capture": {
+      "task_scope_id": "synthetic-native-profile",
+      "task_scope_digest": "e040775739105b1e9e2e3c32c06d15dedca7fefaa9fcea96d79955843c7f365e",
+      "scope_executor_fingerprint": "sha256:be865a5c2edfafe185a9af5078390f2ccde05801bbb753a8b666f6a614273ce9",
+      "profile_id": "synthetic-native-profile",
+      "profile_host": "task-service",
+      "profile_scope_digest_matches": true,
+      "receipt_id": "rcpt_85d8215cfba84ef6bf3a3704a7e54c94",
+      "receipt_status": "success",
+      "receipt_executor_id": "fixture.native-csv-candidate",
+      "receipt_executor_fingerprint": "sha256:be865a5c2edfafe185a9af5078390f2ccde05801bbb753a8b666f6a614273ce9",
+      "receipt_admission_id": "admission_37033ff0a8ee4442bbc2969c227506ed",
+      "receipt_task_scope_digest_matches": true,
+      "capture_id": "configuration_e557914601154b958823bf1ab0b59d12",
+      "capture_references_receipt": true,
+      "capture_invocation_started": true,
+      "capture_actual_host_context_tokens": null,
+      "capture_actual_visible_inventory": "unavailable",
+      "known_synthetic_canary_absent_from_capture_record": true,
+      "evidence": "Persisted task-scope/profile/receipt/observation metadata agrees. Runner lines 350-385 perform reviewed profile preflight, dispatch, admission-bound receipt assertions, and capture assertions; the runner also checks that the observation did not persist the modified task text or expected output. This audit read only the known canary membership and allowlisted observation fields, not task input/output payloads."
+    },
+    "revocation_and_teardown": {
+      "persisted_admission_revoked": true,
+      "revoked_lookup_reason_in_child_terminal": "admission_revoked",
+      "stale_decision_id": "dec_1f225bd30852416c9ed74aa14c48c754",
+      "stale_decision_selected_executor": "fixture.native-csv-candidate",
+      "fresh_task_service_error_type_asserted_by_runner": "NoRouteError",
+      "final_scoped_success_receipts": 1,
+      "final_scoped_invocations": 1,
+      "task_lifecycle_events": ["activate", "uninstall"],
+      "runner_teardown_assertion": "teardown() returned overlay=absent; otherwise the runner raises",
+      "evidence": "The admission table records revoked=1; the final database contains one successful scoped receipt and one invocation. Runner lines 387-425 compare those counts before and after stale and fresh rejection, assert NoRouteError and require no increase. Lines 439-444 run teardown in finally and fail unless the overlay is absent; the persisted task_lifecycle records include uninstall."
+    }
+  },
+  "synthetic_authority_and_resources": {
+    "manifest_database": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx/.aeep/state.sqlite3",
+    "only_grant_in_fixture_database": {
+      "id": "synthetic-bridge-only",
+      "revoked": false,
+      "operations_spent": 569,
+      "model_turns_spent": 0,
+      "elapsed_seconds_spent": 209.69414912629873,
+      "cash_usd_spent": "0"
+    },
+    "assessment_operations": {"complete": 569},
+    "reservation_upper_bound": {"operations": 569, "elapsed_seconds": 11370.069147832925, "model_turns": 0, "cash_usd": "0"},
+    "temporary_tree": {
+      "path": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-profile-bridge-8rk3mkmx",
+      "final_sampled_bytes": 326512563,
+      "sampled_high_water_bytes": 329776075,
+      "sampled_high_water_entries": 296,
+      "retained": true
+    },
+    "isolation_limit": "This audit verified the manifest points at this distinct temporary database and that its only grant row is synthetic-bridge-only. It did not read or compare the canonical onboarding ledger."
+  },
+  "supervisor_and_cleanup": {
+    "supervisor_status": "synthetic_lifecycle_complete_observed_tree_only",
+    "runner_exit_code": 0,
+    "runner_terminal_status": "lifecycle_complete",
+    "parent_elapsed_seconds": 213.668,
+    "cleanup_state": "verified_for_observed_identities",
+    "cleanup_issues": [],
+    "observed_process_identity_count": 379,
+    "observed_process_states": {"gone": 379},
+    "protocol_issue": null,
+    "process_tree_completeness": "unknown; polling cannot prove no detached or missed child",
+    "resource_limit_semantics": "The tree size is sampled high-water monitoring with stop-on-observed-breach, not a hard filesystem quota."
+  },
+  "audit_method_and_limits": [
+    "Read docs/ASSESSMENT_TESTING.md and inspected the pinned review/result records, staged runner source, exact retained fixture manifest, and targeted SQLite metadata using SQLite mode=ro. No project modules or tests were imported or run.",
+    "No task input, output, holdout, oracle, raw receipt payload, canonical grant/database, model call, Docker job, or new trial was read or executed.",
+    "The child terminal status and persisted records establish the synthetic lifecycle path. Fresh-denial response, count equality before/after revocation, and overlay=absent are runner assertions whose successful completion is reflected by runner exit 0; the before/after values and response body are not durably retained as separate evidence.",
+    "The route-candidate row remains status=active after the assessment admission is revoked. The gate checked here is the admission-aware lifecycle lookup and task-service dispatch path, not mutation of that independent route-candidate status.",
+    "The synthetic report's qualification_passed=true and useful_within_scope status are not real candidate qualification, admitted production utility, model competence, live skill benefit, resource acceptance, or evidence transfer between container and native backends."
+  ]
+}

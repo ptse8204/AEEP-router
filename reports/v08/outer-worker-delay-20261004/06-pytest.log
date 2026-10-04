@@ -1,0 +1,76 @@
+........................................................................ [  5%]
+........................................................................ [ 11%]
+........................................................................ [ 17%]
+........................................................................ [ 23%]
+........................................................................ [ 29%]
+........................................................................ [ 34%]
+........................................................................ [ 40%]
+........................................................................ [ 46%]
+........................................................................ [ 52%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 69%]
+................................s......................................s [ 75%]
+...................................ss..........s.........ss........s.... [ 81%]
+......s...............................................................ss [ 87%]
+ss.........................................s............................ [ 92%]
+......ss.................................ss............s....s........... [ 98%]
+........sF......                                                         [100%]
+=================================== FAILURES ===================================
+____________ test_package_and_documentation_versions_are_consistent ____________
+
+    def test_package_and_documentation_versions_are_consistent():
+        with (ROOT / "pyproject.toml").open("rb") as source:
+            project_version = tomllib.load(source)["project"]["version"]
+        assert project_version == __version__
+    
+        protocol_version = project_version.rsplit(".", 1)[0]
+        economic_protocol_version = "0.5"
+        markers = {
+            "README.md": f"**Status:** AEEP {protocol_version}",
+            "SPEC.md": f"# AEEP {protocol_version} protocol specification",
+            "docs/ACCOUNTING.md": f"AEEP {economic_protocol_version} keeps",
+            "examples/economic_evidence/README.md": (
+                f"# AEEP {economic_protocol_version} deterministic economic-evidence proof"
+            ),
+            "examples/economic_evidence/report.md": (
+                f"# AEEP {economic_protocol_version} economic evidence proof"
+            ),
+            "examples/proof/README.md": f"# AEEP {protocol_version} proof assets",
+        }
+        for path, marker in markers.items():
+>           assert marker in (ROOT / path).read_text(encoding="utf-8")
+E           AssertionError: assert '**Status:** AEEP 0.8' in '# AEEP Agent Router\n\nAEEP lets an AI agent use approved tools for specific tasks. It checks permissions,\nselects a...verage.json\naeep verify router-complete --profile all --strict --json\n```\n\nLicensed under [Apache-2.0](LICENSE).\n'
+E            +  where '# AEEP Agent Router\n\nAEEP lets an AI agent use approved tools for specific tasks. It checks permissions,\nselects a...verage.json\naeep verify router-complete --profile all --strict --json\n```\n\nLicensed under [Apache-2.0](LICENSE).\n' = read_text(encoding='utf-8')
+E            +    where read_text = (PosixPath('/Users/edwintse/Documents/aeep-agent-router') / 'README.md').read_text
+
+tests/test_version_consistency.py:35: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_v08_discovery_lifecycle.py:237: explicit native launcher required
+SKIPPED [1] tests/test_v08_executable_recipes.py:96: requires reviewed local container runtime
+SKIPPED [1] tests/test_v08_live.py:23: requires explicitly selected authorized live evidence
+SKIPPED [1] tests/test_v08_live.py:29: requires explicitly selected authorized live evidence
+SKIPPED [1] tests/test_v08_managed_workers.py:227: requires explicitly configured local container runtime
+SKIPPED [2] tests/test_v08_managed_workers.py:436: pinned catalog relay image and offline worker specs required
+SKIPPED [1] tests/test_v08_native_process.py:119: explicit installed workbook Python required
+SKIPPED [1] tests/test_v08_offline_pair.py:64: requires explicit offline Codex pair
+SKIPPED [1] tests/test_v08_real_container.py:20: requires an explicitly configured local release container
+SKIPPED [1] tests/test_v08_real_container.py:61: requires an explicitly configured local release container
+SKIPPED [1] tests/test_v08_real_container.py:128: requires an explicitly configured local release container
+SKIPPED [1] tests/test_v08_real_container.py:152: requires an explicitly configured local release container
+SKIPPED [1] tests/test_v08_task_lifecycle.py:276: explicit native launcher required
+SKIPPED [1] tests/test_v08_task_profile.py:413: explicit native launcher required
+SKIPPED [1] tests/test_v08_task_profile.py:476: explicit native launcher and existing workbook Python required
+SKIPPED [1] tests/test_v08_workbook.py:85: requires a pinned offline workbook recipe runtime
+SKIPPED [1] tests/test_v08_workbook.py:121: requires a pinned offline image with openpyxl 3.1.5
+SKIPPED [1] tests/test_v08_workbook_native.py:138: installed workbook runtime opt-in
+SKIPPED [1] tests/test_v08_worker_inspection.py:68: requires explicit offline Codex worker specs
+SKIPPED [1] tests/test_v08_workers.py:205: set AEEP_CODEX_EXECUTABLE for authorized no-model Codex conformance
+FAILED tests/test_version_consistency.py::test_package_and_documentation_versions_are_consistent
+1 failed, 1218 passed, 21 skipped, 1 warning in 543.89s (0:09:03)

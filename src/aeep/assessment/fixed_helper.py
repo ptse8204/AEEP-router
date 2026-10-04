@@ -25,13 +25,26 @@ class FixedHelperService:
 
     def __init__(self, router: Router, executor_id: str, *, task_scope: str,
                  declaration: dict[str, Any], check: Callable[[], str],
-                 approved_side_effect: SideEffect = SideEffect.READ) -> None:
+                 approved_side_effect: SideEffect = SideEffect.READ,
+                 task_activation: str | None = None) -> None:
         self.router = router
         self.executor_id = executor_id
         self._check = check
         self._binding = check()
         if not isinstance(self._binding, str) or re.fullmatch(r"[a-f0-9]{64}", self._binding) is None:
             raise ConfigurationError("fixed helper requires an exact current authority digest")
+        if task_activation is not None:
+            from ..models import TaskScope
+            from ..tasks import require_activation
+            from .models import content_digest
+            from .repository import AssessmentRepository
+            activation = require_activation(router, task_activation)
+            scope = TaskScope.model_validate(AssessmentRepository(router.store).get('task_scope', task_scope))
+            if activation.scope_digest != content_digest(scope):
+                raise ConfigurationError('fixed helper activation belongs to another task scope')
+            if router._task_activation_digest not in {None, content_digest(activation)}:
+                raise ConfigurationError('fixed helper cannot replace session activation')
+            router._task_activation_digest = content_digest(activation)
         scope_ceiling = router.bind_task_scope(task_scope)
         self.approved_side_effect = min(approved_side_effect, scope_ceiling, key=lambda level: level.rank)
         spec = router.registry.get(executor_id)
@@ -46,6 +59,17 @@ class FixedHelperService:
         self._require_current()
 
     def _require_current(self) -> None:
+        if self.router._task_activation_digest is not None:
+            from ..tasks import require_activation
+            activation = require_activation(self.router, self.router._task_activation_digest)
+            if activation.scope_digest != self.router._task_scope_digest:
+                raise ConfigurationError('fixed helper activation scope changed')
+            if activation.capability_profile_digest is not None:
+                from ..profiles import load
+                from .models import content_digest
+                profile = load(self.router, activation.capability_profile_digest)
+                if content_digest({'tools': [self._declaration]}) != profile.tool_schema_digest:
+                    raise ConfigurationError('fixed helper declarations differ from the reviewed capability profile')
         if self._check() != self._binding:
             raise ConfigurationError("fixed helper campaign binding changed")
         spec = self.router.registry.get(self.executor_id)

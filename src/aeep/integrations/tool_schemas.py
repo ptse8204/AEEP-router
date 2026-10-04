@@ -238,19 +238,40 @@ _BASE_TOOLS: list[dict[str, Any]] = [
 ]
 
 
+def capability_tools() -> list[dict[str, Any]]:
+    """Preparation and local evidence tools share the runtime's typed requests."""
+    from ..capability_lifecycle import AdmissionLookupRequest
+    from ..discovery import DiscoveryRequest
+
+    return [
+        {
+            'name': 'aeep_discover_resources',
+            'description': 'Search operator-configured sources using public terms only. Returns inert untrusted metadata; never installs, qualifies, activates or assesses a resource.',
+            'schema': DiscoveryRequest.model_json_schema(),
+            'annotations': {'readOnlyHint': True, 'idempotentHint': False},
+        },
+        {
+            'name': 'aeep_lookup_capability',
+            'description': 'Look up local, scoped evidence for an inspected candidate. Returns an applicable admission or a reason to assess or keep the current environment. Never starts an assessment or grants authority; dispatch rechecks applicability.',
+            'schema': AdmissionLookupRequest.model_json_schema(),
+            'annotations': {'readOnlyHint': True, 'idempotentHint': True},
+        },
+    ]
+
+
 def neutral_tools() -> list[dict[str, Any]]:
     """Return provider-neutral declarations (`name`, `description`, `schema`)."""
 
-    return deepcopy(_BASE_TOOLS)
+    return deepcopy([*_BASE_TOOLS, *capability_tools()])
 
 
 def export_tools(format: ToolFormat, *, profile: str = 'legacy') -> list[dict[str, Any]]:
     """Export equivalent declarations in the selected provider's native shape."""
 
     tools = neutral_tools()
-    if profile == 'task':
+    if profile in {'task', 'assessment'}:
         from ..assessment.tools import declarations
-        declarations_list = declarations(tasks_only=True)
+        declarations_list = declarations(tasks_only=profile == 'task')
         if format == 'mcp':
             return declarations_list
         tools = [{'name': item['name'], 'description': item['description'],

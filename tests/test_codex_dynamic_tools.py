@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import sys
 from pathlib import Path
 
@@ -18,13 +19,13 @@ TOOL = {'name': 'fixed', 'description': 'Fixed synthetic value operation.',
                          'required': ['value'], 'additionalProperties': False}}
 
 
-def binding(handler=None, *, ceiling='read', timeout=1, max_calls=1):
+def binding(handler=None, *, ceiling='read', timeout=1, max_calls=1, tool=TOOL):
     calls = []
     async def call(name, arguments):
         calls.append((name, arguments))
         return {'isError': False, 'structuredContent': arguments}
     holder = {}
-    value = CodexDynamicTools(namespace='task', tools=[TOOL], identity={
+    value = CodexDynamicTools(namespace='task', tools=[tool], identity={
         'worker_digest': 'a' * 64, 'native_backend_digest': 'b' * 64,
         'implementation_digest': 'c' * 64, 'approval_ceiling': ceiling},
         max_calls=max_calls, timeout_seconds=timeout, call=handler or call,
@@ -214,6 +215,125 @@ async def test_adapter_requires_completed_callback_and_cancels_partial_effects(m
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(('mode', 'expected_counts', 'has_final', 'last_item'), [
+    ('reply-stall', {'requested': 1, 'handler_completed': 1, 'response_written': 1, 'rejected': 0}, False, 'dynamicToolCall'),
+    ('reject-stall', {'requested': 1, 'handler_completed': 0, 'response_written': 1, 'rejected': 1}, False, 'dynamicToolCall'),
+    ('final-stall', {'requested': 1, 'handler_completed': 1, 'response_written': 1, 'rejected': 0}, True, 'agentMessage'),
+])
+async def test_timeout_progress_reports_stdio_evidence_without_content(
+        monkeypatch, mode, expected_counts, has_final, last_item):
+    from copy import deepcopy
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock
+
+    from aeep.hosts.base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
+    from aeep.hosts.codex_app_server import CodexAppServerAdapter
+    from aeep.models import ActionRequest, ExecutionStatus
+
+    async def call(name, args):
+        if mode == 'reject-stall':
+            assert args['marker'] == 'SYNTHETIC_ARGUMENT_SECRET'
+            raise ValueError('SYNTHETIC_HANDLER_ERROR_SECRET')
+        return {'isError': False, 'structuredContent': args}
+
+    tool = deepcopy(TOOL)
+    if mode == 'reject-stall':
+        tool['inputSchema']['properties']['marker'] = {'type': 'string'}
+    value, _ = binding(call, tool=tool)
+    fixture = Path(__file__).parent / 'fixtures/fake_codex_dynamic_tools.py'
+    argv = (sys.executable, '-u', str(fixture), mode)
+    invocation = ManagedHostInvocation(mode='dynamic_tool', server='task', tool='fixed',
+        tool_sha256=value.inventory()['dynamic:task:fixed'], dynamic_tools_digest=value.digest,
+        exposure='required')
+    config = ManagedHostExecutorConfig(adapter_id='codex-app-server', argv=argv,
+        instructions='fixed', invocation=invocation, timeout_seconds=.15)
+    host = CodexAppServerAdapter(argv=argv, resource_id='fixture', principal_salt=b'fixture',
+        options=AppServerOptions(experimental_api=True), dynamic_tools_factory=lambda ctx, adapter: value)
+    host._worker = SimpleNamespace(digest=lambda: 'a' * 64, reviewed_files={})
+    host.probe = AsyncMock(return_value=HostProbe(adapter_id='codex-app-server', status=HostProbeStatus.READY))
+    host.list_models = AsyncMock(return_value=[HostModel(id='fixture')])
+    monkeypatch.setattr('aeep.hosts.codex_app_server.inventory', AsyncMock(return_value={'skills': [], 'apps': [], 'servers': []}))
+    monkeypatch.setattr('aeep.hosts.codex_app_server.verify_thread_inventory', AsyncMock(return_value=None))
+    ctx = ManagedHostExecutionContext(request=ActionRequest(capability='fixed', input={}),
+        instruction='fixed', config=config, attempt=1, attempt_id='timeout-progress')
+    try:
+        raw = await host._execute(ctx)
+        assert raw.status is ExecutionStatus.TIMEOUT
+        progress = json.loads(raw.metadata['host_progress'])
+        assert progress['callback_counts'] == expected_counts
+        assert progress['stage'] == 'awaiting_turn_completion'
+        assert progress['last_event'] == 'item/completed'
+        assert progress['last_item_type'] == last_item
+        assert progress['final_message_received'] is has_final
+        assert progress['turn_completion_received'] is False
+        assert progress['elapsed_seconds'] >= progress['last_event_elapsed_seconds'] >= 0
+        assert not any(secret in str(progress) for secret in (
+            'SYNTHETIC_THREAD_ID', 'SYNTHETIC_TURN_ID', 'SYNTHETIC_CALLBACK_ID',
+            'SYNTHETIC_ARGUMENT_SECRET', 'SYNTHETIC_HANDLER_ERROR_SECRET',
+            'SYNTHETIC_ITEM_ID', 'SYNTHETIC_FINAL_ID', 'SYNTHETIC_FINAL_TEXT_SECRET',
+            'SYNTHETIC_CALLBACK_ERROR_SECRET'))
+    finally:
+        await host.transport.close()
+
+
+@pytest.mark.asyncio
+async def test_canceled_turn_cleans_up_pending_callback_and_keeps_timeout_progress(monkeypatch):
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock
+
+    from aeep.hosts.base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
+    from aeep.hosts.codex_app_server import CodexAppServerAdapter
+    from aeep.models import ActionRequest, ExecutionStatus
+
+    entered, cancelled = asyncio.Event(), asyncio.Event()
+
+    async def call(name, args):
+        entered.set()
+        try:
+            await asyncio.Event().wait()
+        finally:
+            cancelled.set()
+
+    value, _ = binding(call, timeout=5)
+    fixture = Path(__file__).parent / 'fixtures/fake_codex_dynamic_tools.py'
+    argv = (sys.executable, '-u', str(fixture), 'pending-stall')
+    invocation = ManagedHostInvocation(mode='dynamic_tool', server='task', tool='fixed',
+        tool_sha256=value.inventory()['dynamic:task:fixed'], dynamic_tools_digest=value.digest,
+        exposure='required')
+    config = ManagedHostExecutorConfig(adapter_id='codex-app-server', argv=argv,
+        instructions='fixed', invocation=invocation, timeout_seconds=5)
+    host = CodexAppServerAdapter(argv=argv, resource_id='fixture', principal_salt=b'fixture',
+        options=AppServerOptions(experimental_api=True), dynamic_tools_factory=lambda ctx, adapter: value)
+    host._worker = SimpleNamespace(digest=lambda: 'a' * 64, reviewed_files={})
+    host.probe = AsyncMock(return_value=HostProbe(adapter_id='codex-app-server', status=HostProbeStatus.READY))
+    host.list_models = AsyncMock(return_value=[HostModel(id='fixture')])
+    monkeypatch.setattr('aeep.hosts.codex_app_server.inventory', AsyncMock(return_value={'skills': [], 'apps': [], 'servers': []}))
+    monkeypatch.setattr('aeep.hosts.codex_app_server.verify_thread_inventory', AsyncMock(return_value=None))
+    ctx = ManagedHostExecutionContext(request=ActionRequest(capability='fixed', input={}),
+        instruction='fixed', config=config, attempt=1, attempt_id='cancel-progress')
+    task = asyncio.create_task(host._execute(ctx))
+    try:
+        await asyncio.wait_for(entered.wait(), 2)
+        task.cancel()
+        raw = await task
+        assert raw.status is ExecutionStatus.TIMEOUT
+        assert raw.metadata['dynamic_cleanup_confirmed'] is True
+        assert cancelled.is_set()
+        progress = json.loads(raw.metadata['host_progress'])
+        assert progress['stage'] == 'callback_running', progress
+        assert progress['callback_counts'] == {
+            'requested': 1, 'handler_completed': 0, 'response_written': 0, 'rejected': 0}
+        assert progress['last_event'] is None
+        assert progress['final_message_received'] is False
+        assert progress['turn_completion_received'] is False
+    finally:
+        if not task.done():
+            task.cancel()
+            await asyncio.gather(task, return_exceptions=True)
+        await host.transport.close()
+
+
+@pytest.mark.asyncio
 async def test_callback_identity_link_is_retained_before_output_rejection():
     from aeep.execution import EventJournal
     from aeep.hosts.codex_dynamic_tools import current_dynamic_call
@@ -320,7 +440,11 @@ def test_reviewed_binding_rejects_changed_scope_program_or_missing_executor(tmp_
         from aeep.hosts.codex_sandbox import NativeSandboxConfig
         monkeypatch.setattr(NativeSandboxConfig, 'model_validate', lambda value: SimpleNamespace(single_process=True, validate_single_process=lambda: None))
         monkeypatch.setattr('aeep.hosts.codex_sandbox.native_backend_digest', lambda value: 'same-backend')
-        monkeypatch.setattr(router, '_require_active_spec', lambda spec: None)
+        monkeypatch.setattr(
+            router,
+            '_require_active_spec',
+            lambda spec, *, check_activation=True, configuration_only=False: None,
+        )
         value.identity['native_backend_digest'] = contract_digest({spec.id: 'same-backend'})
         value.digest = contract_digest(value.definition())
         router.store._connection.execute('INSERT INTO assessment_reviews VALUES (?, ?, 0)', (value.digest, utc_now().isoformat()))

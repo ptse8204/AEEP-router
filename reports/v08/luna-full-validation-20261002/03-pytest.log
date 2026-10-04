@@ -1,0 +1,1474 @@
+COMMAND: python3 -m pytest
+ENV AEEP_VERIFY_OFFLINE=1
+ENV PYTEST_ADDOPTS=--basetemp=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main -o cache_dir=/Users/edwintse/Documents/aeep-agent-router/reports/v08/luna-full-validation-20261002/pytest-cache-main
+ENV TMPDIR=/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/tmp-main
+.F...................................................F.................. [  6%]
+FFF.......F...........................FFFFFF.F....................F.FFFF [ 12%]
+F......................F................................................ [ 18%]
+........................................................................ [ 24%]
+.............................................F.......................... [ 30%]
+........................................................................ [ 36%]
+........................................................................ [ 42%]
+........................................................................ [ 48%]
+................................................................MONITOR elapsed_seconds=30 temp_bytes=97091584 report_bytes=61440 combined_bytes=97153024 important_usage_bytes=236407567214
+........ [ 54%]
+........................................................................ [ 60%]
+............................................MONITOR elapsed_seconds=60 temp_bytes=243499008 report_bytes=77824 combined_bytes=243576832 important_usage_bytes=236253414254
+.....MONITOR elapsed_seconds=90 temp_bytes=638783488 report_bytes=77824 combined_bytes=638861312 important_usage_bytes=235854787438
+MONITOR elapsed_seconds=120 temp_bytes=1269280768 report_bytes=77824 combined_bytes=1269358592 important_usage_bytes=235224306542
+.MONITOR elapsed_seconds=150 temp_bytes=1684504576 report_bytes=77824 combined_bytes=1684582400 important_usage_bytes=234801849198
+....F.MONITOR elapsed_seconds=180 temp_bytes=2074148864 report_bytes=77824 combined_bytes=2074226688 important_usage_bytes=234389341038
+..............MONITOR elapsed_seconds=210 temp_bytes=2437824512 report_bytes=77824 combined_bytes=2437902336 important_usage_bytes=234020356974
+.. [ 67%]
+...............FF....................................................... [ 73%]
+..............MONITOR elapsed_seconds=240 temp_bytes=2739933184 report_bytes=77824 combined_bytes=2740011008 important_usage_bytes=233714537326
+..MONITOR elapsed_seconds=270 temp_bytes=3098718208 report_bytes=77824 combined_bytes=3098796032 important_usage_bytes=233341051758
+.sMONITOR elapsed_seconds=300 temp_bytes=3433885696 report_bytes=77824 combined_bytes=3433963520 important_usage_bytes=233008620398
+MONITOR elapsed_seconds=330 temp_bytes=3742588928 report_bytes=77824 combined_bytes=3742666752 important_usage_bytes=232696075118
+MONITOR elapsed_seconds=360 temp_bytes=4043300864 report_bytes=77824 combined_bytes=4043378688 important_usage_bytes=232345928558
+.s.....MONITOR elapsed_seconds=391 temp_bytes=4316823552 report_bytes=77824 combined_bytes=4316901376 important_usage_bytes=232092050286
+.......................MONITOR elapsed_seconds=421 temp_bytes=4582567936 report_bytes=77824 combined_bytes=4582645760 important_usage_bytes=231815852910
+.......ss..........s.... [ 79%]
+.....ss..MONITOR elapsed_seconds=451 temp_bytes=4791971840 report_bytes=77824 combined_bytes=4792049664 important_usage_bytes=231569273710
+......s..........s............................................. [ 85%]
+.MONITOR elapsed_seconds=481 temp_bytes=4930568192 report_bytes=77824 combined_bytes=4930646016 important_usage_bytes=231425086318
+..MONITOR elapsed_seconds=511 temp_bytes=5309222912 report_bytes=77824 combined_bytes=5309300736 important_usage_bytes=231041844078
+......MONITOR elapsed_seconds=541 temp_bytes=5654859776 report_bytes=77824 combined_bytes=5654937600 important_usage_bytes=230692549486
+.........ssss.........................................s........ [ 91%]
+.........MONITOR elapsed_seconds=571 temp_bytes=5883432960 report_bytes=77824 combined_bytes=5883510784 important_usage_bytes=230458258286
+.................ss..........................ss............s... [ 97%]
+.s...................s.......                                            [100%]
+=================================== FAILURES ===================================
+_________________________ test_cli_tools_and_tool_call _________________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_cli_tools_and_tool_call0')
+
+    def test_cli_tools_and_tool_call(tmp_path):
+        manifest = tmp_path / "aeep.yaml"
+        assert runner.invoke(app, ["init", str(manifest)]).exit_code == 0
+        result = runner.invoke(app, ["tools", "export", "anthropic", "--compact"])
+        assert result.exit_code == 0
+>       assert {tool["name"] for tool in json.loads(result.stdout)["tools"]} == {
+            "aeep_execute_action",
+            "aeep_estimate_route_prices",
+            "aeep_get_metrics",
+            "aeep_list_capabilities",
+            "aeep_record_outcome",
+            "aeep_request_quotes",
+            "aeep_route_action",
+            "aeep_show_prepared_decision",
+            "aeep_show_quote",
+            "aeep_show_settlement",
+        }
+E       AssertionError: assert {'aeep_discov...ability', ...} == {'aeep_estima..._quotes', ...}
+E         
+E         Extra items in the left set:
+E         'aeep_lookup_capability'
+E         'aeep_discover_resources'
+E         Use -v to get more diff
+
+tests/test_cli.py:45: AssertionError
+_ test_reviewed_binding_rejects_changed_scope_program_or_missing_executor[fresh] _
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_reviewed_binding_rejects_3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d08e200>
+change = 'fresh'
+
+    @pytest.mark.parametrize('change', ['limits', 'program', 'missing', 'fresh'])
+    def test_reviewed_binding_rejects_changed_scope_program_or_missing_executor(tmp_path, monkeypatch, change):
+        from datetime import timedelta
+        from types import SimpleNamespace
+    
+        from aeep.assessment.onboarding import reference_spec
+        from aeep.assessment.repository import AssessmentRepository
+        from aeep.economic.prepared import executor_fingerprint
+        from aeep.models import ExecutorKind, Manifest, TaskScope, utc_now
+        from aeep.router import Router
+        spec = reference_spec('csv').model_copy(update={'kind': ExecutorKind.COMMAND,
+            'config': {'argv': [sys.executable, '-I', '-c', 'print(1)'], 'argv_literal': True}})
+        router = Router(Manifest(database=str(tmp_path/'state.db'), executors=[spec]), manifest_path=tmp_path.resolve()/'manifest.json')
+        repo = AssessmentRepository(router.store)
+        scope = TaskScope(scope_id='bound', project_root=str(tmp_path.resolve()),
+            executor_fingerprints={spec.id: executor_fingerprint(spec)}, max_attempts=1,
+            max_attempt_seconds=1, expires_at=utc_now()+timedelta(minutes=5))
+        digest = repo.put('task_scope', scope.scope_id, scope)
+        repo.review(digest)
+        router.bind_task_scope(scope.scope_id)
+        value, _ = binding()
+        value.identity.update(scope_limits={'max_attempts': 1, 'max_attempt_seconds': 1}, executor_fingerprints=scope.executor_fingerprints,
+                              implementation_digest=value.implementation_digest())
+        value.digest = __import__('aeep.hosts.codex_invocation', fromlist=['contract_digest']).contract_digest(value.definition())
+        original_get = repo.get
+        monkeypatch.setattr(repo, 'get', lambda kind, key: value.definition() if kind == 'codex_dynamic_tools' else original_get(kind, key))
+        router.store._connection.execute('INSERT INTO assessment_reviews(digest, approved_at, revoked) VALUES (?, ?, 0)', (value.digest, utc_now().isoformat()))
+        router.store._connection.commit()
+        if change == 'limits':
+            other = scope.model_copy(update={'scope_id': 'other', 'max_attempts': 2})
+            other_digest = repo.put('task_scope', other.scope_id, other)
+            repo.review(other_digest)
+            router._task_scope_digest = other_digest
+        elif change == 'program':
+            changed = spec.model_copy(update={'config': {**spec.config, 'argv': [sys.executable, '-I', '-c', 'print(2)']}})
+            monkeypatch.setattr(router.registry, 'all', lambda: [changed])
+        elif change == 'missing':
+            monkeypatch.setattr(router.registry, 'all', lambda: [])
+        else:
+            from aeep.hosts.codex_invocation import contract_digest
+            from aeep.hosts.codex_sandbox import NativeSandboxConfig
+            monkeypatch.setattr(NativeSandboxConfig, 'model_validate', lambda value: SimpleNamespace(single_process=True, validate_single_process=lambda: None))
+            monkeypatch.setattr('aeep.hosts.codex_sandbox.native_backend_digest', lambda value: 'same-backend')
+            monkeypatch.setattr(router, '_require_active_spec', lambda spec: None)
+            value.identity['native_backend_digest'] = contract_digest({spec.id: 'same-backend'})
+            value.digest = contract_digest(value.definition())
+            router.store._connection.execute('INSERT INTO assessment_reviews VALUES (?, ?, 0)', (value.digest, utc_now().isoformat()))
+            router.store._connection.commit()
+            for index in range(2):
+                fresh = scope.model_copy(update={'scope_id': f'fresh-{index}'})
+                fresh_digest = repo.put('task_scope', fresh.scope_id, fresh)
+                repo.review(fresh_digest)
+                router._task_scope_digest = fresh_digest
+>               assert value.require_reviewed_binding(repo, worker=SimpleNamespace(digest=lambda: 'a'*64), service=SimpleNamespace(router=router)) == value.digest
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_codex_dynamic_tools.py:333: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.hosts.codex_dynamic_tools.CodexDynamicTools object at 0x10f517b10>
+repository = <aeep.assessment.repository.AssessmentRepository object at 0x10f3c4f50>
+
+    def require_reviewed_binding(self, repository: Any, *, worker: Any,
+                                 service: Any, artifact: Any = None) -> str:
+        """Resolve the actual protected composition, not a supplied success bit."""
+        from ..assessment.repository import AssessmentRepository
+        from ..economic.prepared import executor_fingerprint
+        from ..models import ExecutorKind, TaskScope
+        from .codex_sandbox import NativeSandboxConfig, native_backend_digest
+        self._require_profile_behavior(service, self.identity)
+        document = repository.get('codex_dynamic_tools', self.digest)
+        with repository.store._lock:
+            review = repository.store._connection.execute(
+                'SELECT revoked FROM assessment_reviews WHERE digest=?', (self.digest,)).fetchone()
+        if (document != self.definition() or review is None or review[0]
+                or worker.digest() != self.identity['worker_digest']
+                or self.implementation_digest() != self.identity['implementation_digest']
+                or self.identity.get('artifact') != (artifact.model_dump(mode='json') if artifact else None)):
+            raise ConfigurationError('dynamic task composition is unreviewed or changed')
+        scope = TaskScope.model_validate(AssessmentRepository(service.router.store).get(
+            'task_scope', service.router._task_scope_digest))
+        limits = self.identity.get('scope_limits', {})
+        if (self.identity.get('executor_fingerprints') != scope.executor_fingerprints
+                or scope.max_attempts > limits.get('max_attempts', 0)
+                or scope.max_attempt_seconds > limits.get('max_attempt_seconds', 0)):
+            raise ConfigurationError('dynamic task scope or executor binding differs')
+        backends = {}
+        for spec in service.router.registry.all():
+            if spec.id not in scope.executor_fingerprints:
+                continue
+            if scope.executor_fingerprints[spec.id] != executor_fingerprint(spec):
+                raise ConfigurationError('dynamic task executor fingerprint differs')
+>           service.router._require_active_spec(spec, configuration_only=True)
+E           TypeError: test_reviewed_binding_rejects_changed_scope_program_or_missing_executor.<locals>.<lambda>() got an unexpected keyword argument 'configuration_only'
+
+src/aeep/hosts/codex_dynamic_tools.py:169: TypeError
+_____________________ test_http_executor_local_allowlisted _____________________
+
+text_schema = {'additionalProperties': False, 'properties': {'text': {'type': 'string'}}, 'required': ['text'], 'type': 'object'}
+stats_schema = {'additionalProperties': False, 'properties': {'characters': {'type': 'integer'}, 'lines': {'type': 'integer'}, 'words': {'type': 'integer'}}, 'required': ['characters', 'words', 'lines'], 'type': 'object'}
+
+    @pytest.mark.asyncio
+    async def test_http_executor_local_allowlisted(text_schema, stats_schema):
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            executor = ExecutorSpec(
+                id="http",
+                capability="text.stats",
+                kind=ExecutorKind.HTTP,
+                description="http",
+                input_schema=text_schema,
+                output_schema=stats_schema,
+                estimate=RouteEstimate(resources=ResourceVector(latency_ms=100)),
+                side_effect=SideEffect.NONE,
+                locality=Locality.LAN,
+                requires_network=True,
+                config={
+                    "url": f"http://127.0.0.1:{server.server_port}/stats",
+                    "method": "POST",
+                    "json": {"text": "{input.text}"},
+                    "allowed_hosts": ["127.0.0.1"],
+                    "allow_private_networks": True,
+                    "output": {"type": "json", "path": "result"},
+                },
+            )
+            router = Router(manifest_with(executor))
+            outcome = await router.execute(
+                ActionRequest(capability="text.stats", input={"text": "a b c"})
+            )
+>           assert outcome.ok
+E           AssertionError: assert False
+E            +  where False = ExecutionOutcome(ok=False, status=<ExecutionStatus.FAILED: 'failed'>, output=None, decision=RouteDecision(decision_id=...262322426, 'exit_code': None, 'attempt_id': 'attempt_05805432de134814b3cd5a69c100eff8'})], delegated_instructions=None).ok
+
+tests/test_executors.py:159: AssertionError
+___________ test_http_executor_renders_prepared_execution_ids[json] ____________
+
+body_field = 'json'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("body_field", ["json", "body"])
+    async def test_http_executor_renders_prepared_execution_ids(body_field):
+        received: dict[str, object] = {}
+    
+        class Handler(BaseHTTPRequestHandler):
+            def do_POST(self):
+                length = int(self.headers.get("content-length", "0"))
+                received["query"] = parse_qs(urlparse(self.path).query)
+                received["body"] = self.rfile.read(length).decode()
+                body = json.dumps(
+                    {
+                        "output": "ok",
+                        "usage_statement": {"usage_statement_id": "usage-1"},
+                    }
+                ).encode()
+                self.send_response(200)
+                self.send_header("content-type", "application/json")
+                self.send_header("content-length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+    
+            def log_message(self, *_):
+                return
+    
+        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            identifiers = {
+                "prepared_id": "prepared-1",
+                "quote_id": "quote-1",
+                "attempt_id": "attempt-1",
+            }
+            template = {key: f"{{{key}}}" for key in identifiers}
+            config = {
+                "url": f"http://127.0.0.1:{server.server_port}/execute",
+                "method": "POST",
+                "query": template,
+                "allowed_hosts": ["127.0.0.1"],
+                "allow_private_networks": True,
+                "output": {"type": "json", "path": "output"},
+            }
+            config[body_field] = template if body_field == "json" else "{prepared_id}"
+            spec = ExecutorSpec(
+                id=f"http-{body_field}",
+                capability="prepared.http@1",
+                kind=ExecutorKind.HTTP,
+                description="prepared HTTP binding",
+                input_schema={"type": "object"},
+                side_effect=SideEffect.NONE,
+                locality=Locality.LAN,
+                requires_network=True,
+                config=config,
+            )
+            request = ActionRequest(capability=spec.capability, input={})
+            context = ExecutionContext(
+                request=request,
+                spec=spec,
+                estimate=spec.estimate,
+                attempt=1,
+                **identifiers,
+            )
+    
+            raw = await HTTPExecutor().execute(context)
+    
+>           assert raw.status.value == "success"
+E           AssertionError: assert 'failed' == 'success'
+E             
+E             - success
+E             + failed
+
+tests/test_executors.py:234: AssertionError
+___________ test_http_executor_renders_prepared_execution_ids[body] ____________
+
+body_field = 'body'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("body_field", ["json", "body"])
+    async def test_http_executor_renders_prepared_execution_ids(body_field):
+        received: dict[str, object] = {}
+    
+        class Handler(BaseHTTPRequestHandler):
+            def do_POST(self):
+                length = int(self.headers.get("content-length", "0"))
+                received["query"] = parse_qs(urlparse(self.path).query)
+                received["body"] = self.rfile.read(length).decode()
+                body = json.dumps(
+                    {
+                        "output": "ok",
+                        "usage_statement": {"usage_statement_id": "usage-1"},
+                    }
+                ).encode()
+                self.send_response(200)
+                self.send_header("content-type", "application/json")
+                self.send_header("content-length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+    
+            def log_message(self, *_):
+                return
+    
+        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            identifiers = {
+                "prepared_id": "prepared-1",
+                "quote_id": "quote-1",
+                "attempt_id": "attempt-1",
+            }
+            template = {key: f"{{{key}}}" for key in identifiers}
+            config = {
+                "url": f"http://127.0.0.1:{server.server_port}/execute",
+                "method": "POST",
+                "query": template,
+                "allowed_hosts": ["127.0.0.1"],
+                "allow_private_networks": True,
+                "output": {"type": "json", "path": "output"},
+            }
+            config[body_field] = template if body_field == "json" else "{prepared_id}"
+            spec = ExecutorSpec(
+                id=f"http-{body_field}",
+                capability="prepared.http@1",
+                kind=ExecutorKind.HTTP,
+                description="prepared HTTP binding",
+                input_schema={"type": "object"},
+                side_effect=SideEffect.NONE,
+                locality=Locality.LAN,
+                requires_network=True,
+                config=config,
+            )
+            request = ActionRequest(capability=spec.capability, input={})
+            context = ExecutionContext(
+                request=request,
+                spec=spec,
+                estimate=spec.estimate,
+                attempt=1,
+                **identifiers,
+            )
+    
+            raw = await HTTPExecutor().execute(context)
+    
+>           assert raw.status.value == "success"
+E           AssertionError: assert 'failed' == 'success'
+E             
+E             - success
+E             + failed
+
+tests/test_executors.py:234: AssertionError
+_______________ test_http_executor_reuses_bounded_output_parsers _______________
+
+    @pytest.mark.asyncio
+    async def test_http_executor_reuses_bounded_output_parsers():
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            executor = ExecutorSpec(
+                id="http-regex",
+                capability="markdown.title",
+                kind=ExecutorKind.HTTP,
+                description="http regex",
+                output_schema={"type": "string"},
+                side_effect=SideEffect.READ,
+                locality=Locality.LAN,
+                requires_network=True,
+                config={
+                    "url": f"http://127.0.0.1:{server.server_port}/README.md",
+                    "allowed_hosts": ["127.0.0.1"],
+                    "allow_private_networks": True,
+                    "output": {"type": "regex", "pattern": r"^#\s+(.+?)\s*$", "group": 1},
+                },
+            )
+            router = Router(manifest_with(executor))
+            outcome = await router.execute(ActionRequest(capability="markdown.title"))
+>           assert outcome.ok
+E           AssertionError: assert False
+E            +  where False = ExecutionOutcome(ok=False, status=<ExecutionStatus.FAILED: 'failed'>, output=None, decision=RouteDecision(decision_id=...232871294, 'exit_code': None, 'attempt_id': 'attempt_44124d9e6a304056b328f495d9f4602e'})], delegated_instructions=None).ok
+
+tests/test_executors.py:456: AssertionError
+__________________ test_tool_schema_exports[mcp-inputSchema] ___________________
+
+format = 'mcp', key = 'inputSchema'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________ test_tool_schema_exports[openai-responses-parameters] _____________
+
+format = 'openai-responses', key = 'parameters'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choo...': 'string'}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+________________ test_tool_schema_exports[openai-chat-function] ________________
+
+format = 'openai-chat', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+_______________ test_tool_schema_exports[anthropic-input_schema] _______________
+
+format = 'anthropic', key = 'input_schema'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choo...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+_________________ test_tool_schema_exports[deepseek-function] __________________
+
+format = 'deepseek', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________________ test_tool_schema_exports[zai-function] ____________________
+
+format = 'zai', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 10
+E       AssertionError: assert 12 == 10
+E        +  where 12 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________________ test_protocol_modern_discover_and_list ____________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_protocol_modern_discover_0')
+
+    def test_protocol_modern_discover_and_list(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        router = Router.from_manifest(manifest)
+        app = MCPProtocolApp(AEEPToolService(router))
+    
+        async def exercise():
+            meta = {
+                "io.modelcontextprotocol/protocolVersion": MODERN_VERSION,
+                "io.modelcontextprotocol/clientInfo": {"name": "test", "version": "1"},
+                "io.modelcontextprotocol/clientCapabilities": {},
+            }
+            discover = await app.handle(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "server/discover",
+                    "params": {"_meta": meta},
+                }
+            )
+            assert MODERN_VERSION in discover["result"]["supportedVersions"]
+            assert discover["result"]["resultType"] == "complete"
+            assert discover["result"]["cacheScope"] == "private"
+            assert "io.modelcontextprotocol/serverInfo" in discover["result"]["_meta"]
+            listed = await app.handle(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/list",
+                    "params": {"_meta": meta},
+                }
+            )
+            assert len(listed["result"]["tools"]) == 10
+            assert listed["result"]["resultType"] == "complete"
+            assert listed["result"]["ttlMs"] > 0
+            assert listed["result"]["cacheScope"] == "private"
+            ping = await app.handle(
+                {"jsonrpc": "2.0", "id": 3, "method": "ping", "params": {"_meta": meta}}
+            )
+            assert ping["error"]["code"] == -32601
+            await router.close()
+    
+>       asyncio.run(exercise())
+
+tests/test_integrations_mcp.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:194: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:720: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def exercise():
+        meta = {
+            "io.modelcontextprotocol/protocolVersion": MODERN_VERSION,
+            "io.modelcontextprotocol/clientInfo": {"name": "test", "version": "1"},
+            "io.modelcontextprotocol/clientCapabilities": {},
+        }
+        discover = await app.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "server/discover",
+                "params": {"_meta": meta},
+            }
+        )
+        assert MODERN_VERSION in discover["result"]["supportedVersions"]
+        assert discover["result"]["resultType"] == "complete"
+        assert discover["result"]["cacheScope"] == "private"
+        assert "io.modelcontextprotocol/serverInfo" in discover["result"]["_meta"]
+        listed = await app.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 2,
+                "method": "tools/list",
+                "params": {"_meta": meta},
+            }
+        )
+>       assert len(listed["result"]["tools"]) == 10
+E       AssertionError: assert 11 == 10
+E        +  where 11 = len([{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_integrations_mcp.py:98: AssertionError
+________________________ test_mcp_executor_http_and_sse ________________________
+
+    @pytest.mark.asyncio
+    async def test_mcp_executor_http_and_sse():
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _MCPHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            url = f"http://127.0.0.1:{server.server_port}/mcp"
+            spec = ExecutorSpec(
+                id="mcp-http",
+                capability="text.stats",
+                kind=ExecutorKind.MCP,
+                description="mcp http",
+                input_schema=INPUT,
+                output_schema=OUTPUT,
+                estimate=RouteEstimate(resources=ResourceVector(latency_ms=100)),
+                side_effect=SideEffect.NONE,
+                locality=Locality.LAN,
+                requires_network=True,
+                config={
+                    "transport": "http",
+                    "url": url,
+                    "allowed_hosts": ["127.0.0.1"],
+                    "allow_private_networks": True,
+                    "tool": "text_stats",
+                    "arguments": {"text": "{input.text}"},
+                },
+            )
+            router = Router(manifest_with(spec))
+            try:
+                outcome = await router.execute(
+                    ActionRequest(capability="text.stats", input={"text": "a b"})
+                )
+>               assert outcome.ok
+E               AssertionError: assert False
+E                +  where False = ExecutionOutcome(ok=False, status=<ExecutionStatus.FAILED: 'failed'>, output=None, decision=RouteDecision(decision_id=...624519825, 'exit_code': None, 'attempt_id': 'attempt_76655e71a9ae487a860f2a2291ec7223'})], delegated_instructions=None).ok
+
+tests/test_mcp_executor_http.py:323: AssertionError
+____________ test_create_http_app_auth_and_modern_header_validation ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_create_http_app_auth_and_0')
+
+    def test_create_http_app_auth_and_modern_header_validation(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        app = create_http_app(str(manifest), bearer_token="secret", max_body_bytes=1024)
+        with TestClient(app) as client:
+            assert client.get("/healthz").json()["ok"] is True
+            message = {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "tools/list",
+                "params": {"_meta": _modern_meta()},
+            }
+            assert client.post("/mcp", json=message).status_code == 401
+            assert (
+                client.post(
+                    "/mcp",
+                    json=message,
+                    headers={**_modern_headers("tools/list"), "Origin": "https://evil.test"},
+                ).status_code
+                == 403
+            )
+            assert (
+                client.post(
+                    "/mcp",
+                    content=b"x" * 2048,
+                    headers={"Authorization": "Bearer secret", "Content-Type": "application/json"},
+                ).status_code
+                == 413
+            )
+            missing = client.post("/mcp", json=message, headers={"Authorization": "Bearer secret"})
+            assert missing.status_code == 400
+            assert missing.json()["error"]["code"] == -32020
+    
+            response = client.post("/mcp", json=message, headers=_modern_headers("tools/list"))
+            assert response.status_code == 200
+            result = response.json()["result"]
+>           assert len(result["tools"]) == 10
+E           AssertionError: assert 11 == 10
+E            +  where 11 = len([{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_mcp_executor_http.py:427: AssertionError
+________ test_mcp_http_client_mirrors_x_mcp_headers_and_encodes_values _________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/edwintse/Documents/aeep-agent-router/tests/test_mcp_executor_http.py", line 519, in test_mcp_http_client_mirrors_x_mcp_headers_and_encodes_values
+  |     listed = await client.list_tools()
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 653, in list_tools
+  |     return self._filter_and_cache_tools(await self._request("tools/list", {}))
+  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 588, in _request
+  |     await self.connect()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 509, in connect
+  |     response, _, _, _, status = await self._post(discover, method="server/discover")
+  |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 454, in _post
+  |     async with self._client.stream(
+  |                ~~~~~~~~~~~~~~~~~~~^
+  |         "POST", self.url, content=payload, headers=headers
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as response:
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 214, in __aenter__
+  |     return await anext(self.gen)
+  |            ^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1583, in stream
+  |     response = await self.send(
+  |                ^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+  |     response = await self._send_handling_auth(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+  |     response = await self._send_handling_redirects(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+  |     response = await self._send_single_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+  |     response = await transport.handle_async_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+  |     resp = await self._pool.handle_async_request(req)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+  |     raise exc from None
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+  |     response = await connection.handle_async_request(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         pool_request.request
+  |         ^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+  |     raise exc
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+  |     stream = await self._connect(request)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+  |     stream = await self._network_backend.connect_tcp(**kwargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+  |     return await self._backend.connect_tcp(
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<5 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 115, in connect_tcp
+  |     stream: anyio.abc.ByteStream = await anyio.connect_tcp(
+  |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 227, in connect_tcp
+  |     async with create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 767, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     )
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 175, in try_connect
+    |     stream = await asynclib.connect_tcp(remote_host, remote_port, local_address)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2581, in connect_tcp
+    |     await get_running_loop().create_connection(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         StreamProtocol, host, port, local_addr=local_address
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ),
+    |     ^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1136, in create_connection
+    |     sock = await self._connect_sock(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         exceptions, addrinfo, laddr_infos)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1039, in _connect_sock
+    |     await self.sock_connect(sock, address)
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 641, in sock_connect
+    |     return await fut
+    |            ^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 649, in _sock_connect
+    |     sock.connect(address)
+    |     ~~~~~~~~~~~~^^^^^^^^^
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 37, in guarded_connect
+    |     return denied(sock, address)
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 27, in denied
+    |     raise AssertionError("completion verification attempted a network connection")
+    | AssertionError: completion verification attempted a network connection
+    +------------------------------------
+___________ test_mcp_http_client_excludes_invalid_x_mcp_header_tool ____________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/edwintse/Documents/aeep-agent-router/tests/test_mcp_executor_http.py", line 548, in test_mcp_http_client_excludes_invalid_x_mcp_header_tool
+  |     listed = await client.list_tools()
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 653, in list_tools
+  |     return self._filter_and_cache_tools(await self._request("tools/list", {}))
+  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 588, in _request
+  |     await self.connect()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 509, in connect
+  |     response, _, _, _, status = await self._post(discover, method="server/discover")
+  |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 454, in _post
+  |     async with self._client.stream(
+  |                ~~~~~~~~~~~~~~~~~~~^
+  |         "POST", self.url, content=payload, headers=headers
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as response:
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 214, in __aenter__
+  |     return await anext(self.gen)
+  |            ^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1583, in stream
+  |     response = await self.send(
+  |                ^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+  |     response = await self._send_handling_auth(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+  |     response = await self._send_handling_redirects(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+  |     response = await self._send_single_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+  |     response = await transport.handle_async_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+  |     resp = await self._pool.handle_async_request(req)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+  |     raise exc from None
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+  |     response = await connection.handle_async_request(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         pool_request.request
+  |         ^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+  |     raise exc
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+  |     stream = await self._connect(request)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+  |     stream = await self._network_backend.connect_tcp(**kwargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+  |     return await self._backend.connect_tcp(
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<5 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 115, in connect_tcp
+  |     stream: anyio.abc.ByteStream = await anyio.connect_tcp(
+  |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 227, in connect_tcp
+  |     async with create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 767, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     )
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 175, in try_connect
+    |     stream = await asynclib.connect_tcp(remote_host, remote_port, local_address)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2581, in connect_tcp
+    |     await get_running_loop().create_connection(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         StreamProtocol, host, port, local_addr=local_address
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ),
+    |     ^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1136, in create_connection
+    |     sock = await self._connect_sock(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         exceptions, addrinfo, laddr_infos)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1039, in _connect_sock
+    |     await self.sock_connect(sock, address)
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 641, in sock_connect
+    |     return await fut
+    |            ^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 649, in _sock_connect
+    |     sock.connect(address)
+    |     ~~~~~~~~~~~~^^^^^^^^^
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 37, in guarded_connect
+    |     return denied(sock, address)
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 27, in denied
+    |     raise AssertionError("completion verification attempted a network connection")
+    | AssertionError: completion verification attempted a network connection
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/tests/test_mcp_executor_http.py", line 547, in test_mcp_http_client_excludes_invalid_x_mcp_header_tool
+    with pytest.warns(RuntimeWarning, match="excluding invalid MCP tool"):
+         ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/recwarn.py", line 319, in __exit__
+    fail(
+    ~~~~^
+        f"DID NOT WARN. No warnings of type {self.expected_warning} were emitted.\n"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        f" Emitted warnings: {found_str()}."
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: DID NOT WARN. No warnings of type (<class 'RuntimeWarning'>,) were emitted.
+ Emitted warnings: [].
+
+During handling of the above exception, another exception occurred:
+
+    @pytest.mark.asyncio
+    async def test_mcp_http_client_excludes_invalid_x_mcp_header_tool():
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _MCPHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        _MCPHandler.invalid_header_tool = True
+        try:
+            client = MCPHTTPClient(url=f"http://127.0.0.1:{server.server_port}/mcp")
+            try:
+>               with pytest.warns(RuntimeWarning, match="excluding invalid MCP tool"):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT WARN. No warnings of type (<class 'RuntimeWarning'>,) were emitted.
+E                Emitted warnings: [].
+
+tests/test_mcp_executor_http.py:547: Failed
+_______________ test_mcp_http_client_rejects_oversized_response ________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/edwintse/Documents/aeep-agent-router/tests/test_mcp_executor_http.py", line 571, in test_mcp_http_client_rejects_oversized_response
+  |     await client.list_tools()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 653, in list_tools
+  |     return self._filter_and_cache_tools(await self._request("tools/list", {}))
+  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 588, in _request
+  |     await self.connect()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 509, in connect
+  |     response, _, _, _, status = await self._post(discover, method="server/discover")
+  |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 454, in _post
+  |     async with self._client.stream(
+  |                ~~~~~~~~~~~~~~~~~~~^
+  |         "POST", self.url, content=payload, headers=headers
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as response:
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 214, in __aenter__
+  |     return await anext(self.gen)
+  |            ^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1583, in stream
+  |     response = await self.send(
+  |                ^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+  |     response = await self._send_handling_auth(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+  |     response = await self._send_handling_redirects(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+  |     response = await self._send_single_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+  |     response = await transport.handle_async_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+  |     resp = await self._pool.handle_async_request(req)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+  |     raise exc from None
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+  |     response = await connection.handle_async_request(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         pool_request.request
+  |         ^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+  |     raise exc
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+  |     stream = await self._connect(request)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+  |     stream = await self._network_backend.connect_tcp(**kwargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+  |     return await self._backend.connect_tcp(
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<5 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 115, in connect_tcp
+  |     stream: anyio.abc.ByteStream = await anyio.connect_tcp(
+  |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 227, in connect_tcp
+  |     async with create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 767, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     )
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 175, in try_connect
+    |     stream = await asynclib.connect_tcp(remote_host, remote_port, local_address)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2581, in connect_tcp
+    |     await get_running_loop().create_connection(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         StreamProtocol, host, port, local_addr=local_address
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ),
+    |     ^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1136, in create_connection
+    |     sock = await self._connect_sock(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         exceptions, addrinfo, laddr_infos)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1039, in _connect_sock
+    |     await self.sock_connect(sock, address)
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 641, in sock_connect
+    |     return await fut
+    |            ^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 649, in _sock_connect
+    |     sock.connect(address)
+    |     ~~~~~~~~~~~~^^^^^^^^^
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 37, in guarded_connect
+    |     return denied(sock, address)
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 27, in denied
+    |     raise AssertionError("completion verification attempted a network connection")
+    | AssertionError: completion verification attempted a network connection
+    +------------------------------------
+_______________ test_mcp_http_client_rejects_wrong_content_type ________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/edwintse/Documents/aeep-agent-router/tests/test_mcp_executor_http.py", line 590, in test_mcp_http_client_rejects_wrong_content_type
+  |     await client.list_tools()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 653, in list_tools
+  |     return self._filter_and_cache_tools(await self._request("tools/list", {}))
+  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 588, in _request
+  |     await self.connect()
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 509, in connect
+  |     response, _, _, _, status = await self._post(discover, method="server/discover")
+  |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/mcp/client.py", line 454, in _post
+  |     async with self._client.stream(
+  |                ~~~~~~~~~~~~~~~~~~~^
+  |         "POST", self.url, content=payload, headers=headers
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as response:
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 214, in __aenter__
+  |     return await anext(self.gen)
+  |            ^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1583, in stream
+  |     response = await self.send(
+  |                ^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+  |     response = await self._send_handling_auth(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+  |     response = await self._send_handling_redirects(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+  |     response = await self._send_single_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+  |     response = await transport.handle_async_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+  |     resp = await self._pool.handle_async_request(req)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+  |     raise exc from None
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+  |     response = await connection.handle_async_request(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         pool_request.request
+  |         ^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+  |     raise exc
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+  |     stream = await self._connect(request)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+  |     stream = await self._network_backend.connect_tcp(**kwargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+  |     return await self._backend.connect_tcp(
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<5 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 115, in connect_tcp
+  |     stream: anyio.abc.ByteStream = await anyio.connect_tcp(
+  |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 227, in connect_tcp
+  |     async with create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 767, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     )
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 175, in try_connect
+    |     stream = await asynclib.connect_tcp(remote_host, remote_port, local_address)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2581, in connect_tcp
+    |     await get_running_loop().create_connection(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         StreamProtocol, host, port, local_addr=local_address
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ),
+    |     ^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1136, in create_connection
+    |     sock = await self._connect_sock(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         exceptions, addrinfo, laddr_infos)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1039, in _connect_sock
+    |     await self.sock_connect(sock, address)
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 641, in sock_connect
+    |     return await fut
+    |            ^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 649, in _sock_connect
+    |     sock.connect(address)
+    |     ~~~~~~~~~~~~^^^^^^^^^
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 37, in guarded_connect
+    |     return denied(sock, address)
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 27, in denied
+    |     raise AssertionError("completion verification attempted a network connection")
+    | AssertionError: completion verification attempted a network connection
+    +------------------------------------
+____________________ test_mcp_server_import_discovers_tools ____________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_mcp_server_import_discove0')
+
+    @pytest.mark.asyncio
+    async def test_mcp_server_import_discovers_tools(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        descriptor = await import_mcp_server(
+            provider_id="local-aeep",
+            transport="stdio",
+            endpoint=sys.executable,
+            args=["-m", "aeep", "serve", "--transport", "stdio", "-m", str(manifest)],
+            capability_prefix="imported",
+        )
+>       assert {executor.config["tool"] for executor in descriptor.executors} == {
+            "aeep_execute_action",
+            "aeep_estimate_route_prices",
+            "aeep_get_metrics",
+            "aeep_list_capabilities",
+            "aeep_record_outcome",
+            "aeep_request_quotes",
+            "aeep_route_action",
+            "aeep_show_prepared_decision",
+            "aeep_show_quote",
+            "aeep_show_settlement",
+        }
+E       AssertionError: assert {'aeep_estima...outcome', ...} == {'aeep_estima..._quotes', ...}
+E         
+E         Extra items in the left set:
+E         'aeep_lookup_capability'
+E         Use -v to get more diff
+
+tests/test_p0_usefulness.py:243: AssertionError
+_____ test_authenticated_process_serves_quote_and_prepared_http_execution ______
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/edwintse/Documents/aeep-agent-router/tests/test_v04_market_server.py", line 244, in test_authenticated_process_serves_quote_and_prepared_http_execution
+  |     response = await health_client.get(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^
+  |         f"{base_url}/health", timeout=0.2
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1768, in get
+  |     return await self.request(
+  |            ^^^^^^^^^^^^^^^^^^^
+  |     ...<9 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1540, in request
+  |     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+  |     response = await self._send_handling_auth(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<4 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+  |     response = await self._send_handling_redirects(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+  |     response = await self._send_single_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+  |     response = await transport.handle_async_request(request)
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+  |     resp = await self._pool.handle_async_request(req)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+  |     raise exc from None
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+  |     response = await connection.handle_async_request(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         pool_request.request
+  |         ^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+  |     raise exc
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+  |     stream = await self._connect(request)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+  |     stream = await self._network_backend.connect_tcp(**kwargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+  |     return await self._backend.connect_tcp(
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<5 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 115, in connect_tcp
+  |     stream: anyio.abc.ByteStream = await anyio.connect_tcp(
+  |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ...<3 lines>...
+  |     )
+  |     ^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 227, in connect_tcp
+  |     async with create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 767, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     )
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_core/_sockets.py", line 175, in try_connect
+    |     stream = await asynclib.connect_tcp(remote_host, remote_port, local_address)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2581, in connect_tcp
+    |     await get_running_loop().create_connection(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         StreamProtocol, host, port, local_addr=local_address
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ),
+    |     ^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1136, in create_connection
+    |     sock = await self._connect_sock(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         exceptions, addrinfo, laddr_infos)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 1039, in _connect_sock
+    |     await self.sock_connect(sock, address)
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 641, in sock_connect
+    |     return await fut
+    |            ^^^^^^^^^
+    |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py", line 649, in _sock_connect
+    |     sock.connect(address)
+    |     ~~~~~~~~~~~~^^^^^^^^^
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 37, in guarded_connect
+    |     return denied(sock, address)
+    |   File "/Users/edwintse/Documents/aeep-agent-router/tests/conftest.py", line 27, in denied
+    |     raise AssertionError("completion verification attempted a network connection")
+    | AssertionError: completion verification attempted a network connection
+    +------------------------------------
+_____________ test_focused_tools_do_not_expose_operator_arguments ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_focused_tools_do_not_expo0')
+
+    async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
+        router, _service, _plan, _grant = setup_assessment(tmp_path)
+        try:
+            service = AEEPToolService(router, profile="assessment")
+            names = {tool["name"] for tool in service.list_tools()}
+>           assert names == {
+                "aeep_csv",
+                "aeep_text",
+                "aeep_search",
+                "aeep_assessment_start",
+                "aeep_assessment_status",
+                "aeep_assessment_report",
+                "aeep_assessment_cancel",
+                "aeep_assessment_generate_definition",
+                "aeep_assessment_structures",
+                "aeep_assessment_select_structure",
+                "aeep_assessment_budget",
+                "aeep_assessment_options",
+                "aeep_assessment_setup",
+                "aeep_assessment_generate_cases",
+            }
+E           AssertionError: assert {'aeep_assess..._report', ...} == {'aeep_assess..._report', ...}
+E             
+E             Extra items in the left set:
+E             'aeep_lookup_capability'
+E             Use -v to get more diff
+
+tests/test_v08_assessment.py:596: AssertionError
+_________ test_skill_recursion_uses_identity_not_ancestor_name[False] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_skill_recursion_uses_iden0')
+supporting = False
+
+    @pytest.mark.parametrize('supporting', [False, True])
+    def test_skill_recursion_uses_identity_not_ancestor_name(tmp_path, supporting):
+        from aeep.models import ReviewedHostSkill
+    
+        path = tmp_path / 'aeep-parent' / 'parse' / 'SKILL.md'
+        path.parent.mkdir(parents=True)
+        path.write_text('A separate reviewed parser skill.')
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        target = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=digest))
+        assert isolated_config(catalog(path), target)['skills.config'][0]['enabled'] is True
+    
+        bundled = Path(__file__).resolve().parents[1] / 'integrations/aeep/skills/assess-plugin/SKILL.md'
+        path.write_bytes(bundled.read_bytes())
+        renamed_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        renamed = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=renamed_digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=renamed_digest))
+>       with pytest.raises(ConfigurationError, match='recursive'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'aeep.errors.ConfigurationError'>
+
+tests/test_v08_codex_invocation.py:60: Failed
+__________ test_skill_recursion_uses_identity_not_ancestor_name[True] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-luna-full-validation-20261002/pytest-main/test_skill_recursion_uses_iden1')
+supporting = True
+
+    @pytest.mark.parametrize('supporting', [False, True])
+    def test_skill_recursion_uses_identity_not_ancestor_name(tmp_path, supporting):
+        from aeep.models import ReviewedHostSkill
+    
+        path = tmp_path / 'aeep-parent' / 'parse' / 'SKILL.md'
+        path.parent.mkdir(parents=True)
+        path.write_text('A separate reviewed parser skill.')
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        target = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=digest))
+        assert isolated_config(catalog(path), target)['skills.config'][0]['enabled'] is True
+    
+        bundled = Path(__file__).resolve().parents[1] / 'integrations/aeep/skills/assess-plugin/SKILL.md'
+        path.write_bytes(bundled.read_bytes())
+        renamed_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        renamed = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=renamed_digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=renamed_digest))
+>       with pytest.raises(ConfigurationError, match='recursive'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'aeep.errors.ConfigurationError'>
+
+tests/test_v08_codex_invocation.py:60: Failed
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_cli_tools_and_tool_call - AssertionError: asse...
+FAILED tests/test_codex_dynamic_tools.py::test_reviewed_binding_rejects_changed_scope_program_or_missing_executor[fresh]
+FAILED tests/test_executors.py::test_http_executor_local_allowlisted - Assert...
+FAILED tests/test_executors.py::test_http_executor_renders_prepared_execution_ids[json]
+FAILED tests/test_executors.py::test_http_executor_renders_prepared_execution_ids[body]
+FAILED tests/test_executors.py::test_http_executor_reuses_bounded_output_parsers
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[mcp-inputSchema]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[openai-responses-parameters]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[openai-chat-function]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[anthropic-input_schema]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[deepseek-function]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[zai-function]
+FAILED tests/test_integrations_mcp.py::test_protocol_modern_discover_and_list
+FAILED tests/test_mcp_executor_http.py::test_mcp_executor_http_and_sse - Asse...
+FAILED tests/test_mcp_executor_http.py::test_create_http_app_auth_and_modern_header_validation
+FAILED tests/test_mcp_executor_http.py::test_mcp_http_client_mirrors_x_mcp_headers_and_encodes_values
+FAILED tests/test_mcp_executor_http.py::test_mcp_http_client_excludes_invalid_x_mcp_header_tool
+FAILED tests/test_mcp_executor_http.py::test_mcp_http_client_rejects_oversized_response
+FAILED tests/test_mcp_executor_http.py::test_mcp_http_client_rejects_wrong_content_type
+FAILED tests/test_p0_usefulness.py::test_mcp_server_import_discovers_tools - ...
+FAILED tests/test_v04_market_server.py::test_authenticated_process_serves_quote_and_prepared_http_execution
+FAILED tests/test_v08_assessment.py::test_focused_tools_do_not_expose_operator_arguments
+FAILED tests/test_v08_codex_invocation.py::test_skill_recursion_uses_identity_not_ancestor_name[False]
+FAILED tests/test_v08_codex_invocation.py::test_skill_recursion_uses_identity_not_ancestor_name[True]
+24 failed, 1136 passed, 21 skipped, 1 warning in 574.53s (0:09:34)
+EXIT_CODE: 1

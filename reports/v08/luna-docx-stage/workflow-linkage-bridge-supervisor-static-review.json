@@ -1,0 +1,39 @@
+{
+  "status": "static_review_complete_execution_deferred",
+  "execution_authorized": false,
+  "reviewer": "Luna/xhigh",
+  "supervisor_path": "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py",
+  "supervisor_sha256": "5684417bc289c3636f6de43f7bc11b68f2d2df21e196d58b3752dae99d6db181",
+  "runner_path": "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py",
+  "runner_sha256": "59d768579bceab6adffb3f09cac7adce2b4eb3e859c16187089ff7ba8460335c",
+  "source_digest": "eaad5bc7b30f3671284b1d7291a4483ff0d87399c2ea13a298be4006bc717ee1",
+  "assessment_testing_path": "docs/ASSESSMENT_TESTING.md",
+  "assessment_testing_sha256": "c0448f7ecacfdb5392cf9c5bbe06c971a1ebe460f9e159f7c5ee22b88884e997",
+  "static_checks": {
+    "ruff": {
+      "command": "ruff check reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py",
+      "result": "passed"
+    },
+    "ast_parse": {
+      "command": "python3 -c 'import ast; from pathlib import Path; ast.parse(Path(\"reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py\").read_text())'",
+      "result": "passed; no project code imported"
+    }
+  },
+  "reviewed_contract": {
+    "terminal_gate": "Requires the explicitly supplied SHA-256 of workflow-linkage-bridge-execution-review.json; the approval binds this supervisor and runner, and a stage-local terminal record binds the exact qualification result path and SHA-256.",
+    "qualification_status": "Requires the exact campaign assessment/source and correctness_failed terminal status; it does not require successful qualification.",
+    "campaign_cleanup": "Requires terminal cleanup_verified, proxy_restored, and source_unchanged evidence.",
+    "child_protocol": "A successful supervisor result requires no protocol issue, both started and terminal records, and an identical temporary_directory in both records.",
+    "source_integrity": "Rehashes source after the child exits and fails closed on a changed or unavailable digest.",
+    "process_cleanup": "Uses one monotonic parent deadline and exact PID/create_time checks; pre-cleanup observation failures still enter escalation, and cleanup drains without invoking the record writer.",
+    "limitations": "Observed-process cleanup is not proof of complete containment; polling cannot detect every detached or missed child, and sampled temporary-tree size is not a filesystem quota."
+  },
+  "source_refs": [
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:103-138",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:341-377",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:446-489",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_supervisor.py:556-592",
+    "reports/v08/luna-docx-stage/discovery_profile_bridge_check.py:494-538"
+  ],
+  "runtime_validation": "not_run; await campaign terminal record and approved execution review"
+}
