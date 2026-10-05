@@ -594,6 +594,7 @@ async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
         service = AEEPToolService(router, profile="assessment")
         names = {tool["name"] for tool in service.list_tools()}
         assert names == {
+            "aeep_stack_propose", "aeep_stack_inspect", "aeep_stack_optimize", "aeep_stack_preflight",
             "aeep_csv",
             "aeep_text",
             "aeep_search",
@@ -610,7 +611,7 @@ async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
             "aeep_assessment_generate_cases",
             "aeep_lookup_capability",
         }
-        assert len(AEEPToolService(router).list_tools()) == 11
+        assert len(AEEPToolService(router).list_tools()) == 15
         response = await service.call("aeep_csv", {"text": "a,b\nx,y\n", "delimiter": ","})
         assert not response.get("isError")
         response = await service.call(

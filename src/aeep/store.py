@@ -83,7 +83,7 @@ from .provider_package import (
 )
 from .qualification import QualificationReport, RouteCandidate
 
-LATEST_DATABASE_SCHEMA = 8
+LATEST_DATABASE_SCHEMA = 9
 
 _V08_ASSESSMENT_SCHEMA = (
     "CREATE TABLE IF NOT EXISTS host_correlation_keys (id TEXT PRIMARY KEY, key BLOB NOT NULL)",
@@ -1333,6 +1333,9 @@ class ReceiptStore:
                     for statement in _V08_ASSESSMENT_SCHEMA:
                         self._connection.execute(statement)
                     version = 8
+                if version < 9:
+                    self._connection.execute("CREATE TABLE IF NOT EXISTS stack_runs (proposal_id TEXT PRIMARY KEY, input_digest TEXT NOT NULL, state TEXT NOT NULL, attempts INTEGER NOT NULL CHECK(attempts >= 0), deadline TEXT NOT NULL, progress_json TEXT NOT NULL)")
+                    version = 9
                 self._connection.execute(f"PRAGMA user_version={version}")
                 if self._connection.execute("PRAGMA foreign_key_check").fetchall():
                     raise sqlite3.IntegrityError(
@@ -1386,7 +1389,7 @@ class ReceiptStore:
         snapshot = ReceiptStore(path)
         tables = (
             "assessment_records", "assessment_reviews", "assessment_grants", "assessment_admissions",
-            "host_correlation_keys", "route_candidates", "qualification_reports", "rate_card_snapshots",
+            "stack_runs", "host_correlation_keys", "route_candidates", "qualification_reports", "rate_card_snapshots",
             "provider_signing_keys", "provider_packages", "provider_package_signatures",
             "content_artifacts", "provider_package_artifacts", "evidence_records",
             "evidence_acceptances", "smoke_test_reports", "candidate_verification_snapshots",

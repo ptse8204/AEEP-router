@@ -1,0 +1,68 @@
+[
+  {
+    "name": "compile",
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.076
+  },
+  {
+    "name": "schemas",
+    "command": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.944
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.065
+  },
+  {
+    "name": "mypy",
+    "command": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.334
+  },
+  {
+    "name": "policy",
+    "command": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.176
+  },
+  {
+    "name": "pytest-final",
+    "command": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 555.249
+  }
+]

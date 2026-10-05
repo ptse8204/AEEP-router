@@ -286,3 +286,17 @@ These commands do not reproduce the live studies. Follow the
 [assessment testing policy](ASSESSMENT_TESTING.md) for pinned environments,
 reviewed definitions, finite budgets and separate live checks. Existing completed
 campaigns and consumed task scopes must not be replayed as fresh evidence.
+
+## Stack planning evidence
+
+The [stack implementation record](../reports/v08/stack-implementation-checklist.md)
+separates software tests, offline domain fixtures and actual free provider checks.
+The fixtures check an edit timeline, grouped report and referenced facts. They do
+not generate production video, fetch live research or establish marginal benefit.
+
+Sanitized existing-connection checks and a pinned local-runtime observation are in
+`reports/v08/stack-readiness/`. Their scope and source digests are part of the
+record. They do not prove a new operator-completed sign-in handoff, credential-bound
+metered billing readiness or provider task quality. Those release gates remain
+open. Current-source stack tests do not renew historical live qualifications or
+production conformance evidence.

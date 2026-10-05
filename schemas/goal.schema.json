@@ -1,0 +1,554 @@
+{
+  "$defs": {
+    "ActionConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cost Usd"
+        },
+        "max_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Latency Ms"
+        },
+        "max_cpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Cpu Ms"
+        },
+        "max_memory_mb_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Memory Mb Seconds"
+        },
+        "max_peak_memory_mb": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Peak Memory Mb"
+        },
+        "max_gpu_ms": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Gpu Ms"
+        },
+        "max_network_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Network Bytes"
+        },
+        "max_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Context Tokens"
+        },
+        "min_success_probability": {
+          "default": 0.7,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Success Probability",
+          "type": "number"
+        },
+        "min_quality_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Quality Score",
+          "type": "number"
+        },
+        "max_risk_score": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Max Risk Score",
+          "type": "number"
+        },
+        "max_side_effect": {
+          "$ref": "#/$defs/SideEffect",
+          "default": "read"
+        },
+        "allow_network": {
+          "default": true,
+          "title": "Allow Network",
+          "type": "boolean"
+        },
+        "require_local": {
+          "default": false,
+          "title": "Require Local",
+          "type": "boolean"
+        },
+        "allowed_executor_kinds": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ExecutorKind"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Kinds"
+        },
+        "allowed_executor_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Executor Ids"
+        },
+        "denied_executor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Denied Executor Ids",
+          "type": "array"
+        },
+        "allowed_data_residency": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Allowed Data Residency"
+        }
+      },
+      "title": "ActionConstraints",
+      "type": "object"
+    },
+    "ArtifactContract": {
+      "additionalProperties": false,
+      "properties": {
+        "semantic_type": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Semantic Type",
+          "type": "string"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "value_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Schema"
+        },
+        "encoding": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Encoding"
+        },
+        "max_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Bytes"
+        },
+        "max_width": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Width"
+        },
+        "max_height": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Height"
+        },
+        "max_duration_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Duration Seconds"
+        },
+        "locality": {
+          "anyOf": [
+            {
+              "enum": [
+                "local",
+                "remote"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locality"
+        },
+        "confidentiality": {
+          "anyOf": [
+            {
+              "enum": [
+                "public",
+                "private",
+                "restricted"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidentiality"
+        }
+      },
+      "required": [
+        "semantic_type"
+      ],
+      "title": "ArtifactContract",
+      "type": "object"
+    },
+    "ExecutorKind": {
+      "enum": [
+        "command",
+        "python",
+        "http",
+        "mcp",
+        "host",
+        "host_managed",
+        "delegate"
+      ],
+      "title": "ExecutorKind",
+      "type": "string"
+    },
+    "SideEffect": {
+      "enum": [
+        "none",
+        "read",
+        "write",
+        "destructive",
+        "financial"
+      ],
+      "title": "SideEffect",
+      "type": "string"
+    },
+    "StackBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "source_node": {
+          "title": "Source Node",
+          "type": "string"
+        },
+        "source_port": {
+          "title": "Source Port",
+          "type": "string"
+        },
+        "target_port": {
+          "title": "Target Port",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_node",
+        "source_port",
+        "target_port"
+      ],
+      "title": "StackBinding",
+      "type": "object"
+    },
+    "StackLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cash_usd": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "title": "Max Cash Usd"
+        },
+        "max_attempts": {
+          "default": 64,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "max_attempt_seconds": {
+          "default": 60,
+          "exclusiveMinimum": 0,
+          "maximum": 3600,
+          "title": "Max Attempt Seconds",
+          "type": "number"
+        },
+        "max_elapsed_seconds": {
+          "default": 3600,
+          "exclusiveMinimum": 0,
+          "maximum": 86400,
+          "title": "Max Elapsed Seconds",
+          "type": "number"
+        },
+        "retry_reserve": {
+          "default": 0,
+          "maximum": 9,
+          "minimum": 0,
+          "title": "Retry Reserve",
+          "type": "integer"
+        }
+      },
+      "title": "StackLimits",
+      "type": "object"
+    },
+    "TaskNode": {
+      "additionalProperties": false,
+      "properties": {
+        "node_id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "capability": {
+          "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ArtifactContract"
+          },
+          "maxProperties": 32,
+          "title": "Inputs",
+          "type": "object"
+        },
+        "outputs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ArtifactContract"
+          },
+          "maxProperties": 32,
+          "title": "Outputs",
+          "type": "object"
+        },
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/StackBinding"
+          },
+          "maxItems": 32,
+          "title": "Bindings",
+          "type": "array"
+        },
+        "depends_on": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Depends On",
+          "type": "array"
+        },
+        "verification_required": {
+          "default": true,
+          "title": "Verification Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "node_id",
+        "capability"
+      ],
+      "title": "TaskNode",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.goal.v1",
+      "default": "aeep.goal.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "goal_id": {
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Goal Id",
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/TaskNode"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    },
+    "deliverables": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "title": "Deliverables",
+      "type": "array"
+    },
+    "constraints": {
+      "$ref": "#/$defs/ActionConstraints"
+    },
+    "limits": {
+      "$ref": "#/$defs/StackLimits"
+    },
+    "policy": {
+      "default": "balanced",
+      "maxLength": 100,
+      "title": "Policy",
+      "type": "string"
+    },
+    "propose_only": {
+      "default": true,
+      "title": "Propose Only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "goal_id",
+    "nodes",
+    "deliverables"
+  ],
+  "title": "GoalSpec",
+  "type": "object"
+}

@@ -259,10 +259,30 @@ def capability_tools() -> list[dict[str, Any]]:
     ]
 
 
+def stack_run_tool() -> dict[str, Any]:
+    from ..stack_models import StackRunRequest
+    return {'name': 'aeep_stack_run',
+            'description': 'Run an exactly reviewed stack within an already active task scope. Cannot create authority, install, pay, or resume uncertain work.',
+            'inputSchema': StackRunRequest.model_json_schema(),
+            'annotations': {'readOnlyHint': False, 'idempotentHint': False}}
+
+
+def stack_tools() -> list[dict[str, Any]]:
+    """Inert preparation only. Approval, setup checks and execution stay operator-side."""
+    from ..stack_models import GoalSpec, StackOptimizeRequest, StackReference
+    return [{'name': name, 'description': description, 'schema': schema,
+             'annotations': {'readOnlyHint': True, 'idempotentHint': True}}
+            for name, description, schema in [
+                ('aeep_stack_propose', 'Propose an inert compatible stack from semantic requirements only. No task payloads, execution, installation or authority changes.', GoalSpec.model_json_schema()),
+                ('aeep_stack_inspect', 'Inspect a stored immutable stack proposal.', StackReference.model_json_schema()),
+                ('aeep_stack_optimize', 'Create an inert successor using another configured policy.', StackOptimizeRequest.model_json_schema()),
+                ('aeep_stack_preflight', 'Recheck stack assumptions and report setup and approval blockers. Grants no authority.', StackReference.model_json_schema())]]
+
+
 def neutral_tools() -> list[dict[str, Any]]:
     """Return provider-neutral declarations (`name`, `description`, `schema`)."""
 
-    return deepcopy([*_BASE_TOOLS, *capability_tools()])
+    return deepcopy([*_BASE_TOOLS, *capability_tools(), *stack_tools()])
 
 
 def export_tools(format: ToolFormat, *, profile: str = 'legacy') -> list[dict[str, Any]]:

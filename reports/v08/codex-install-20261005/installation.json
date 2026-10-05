@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-05",
+  "authority": "Explicit user request: install, document, record a demo, push all work, and keep installation updated through a marketplace or fallback. Routine check-definition changes use September 25/27 standing authority.",
+  "plugin_id": "aeep@aeep-router",
+  "plugin_version": "0.8.1",
+  "runtime_version": "0.8.0",
+  "runtime_path": "~/.local/share/aeep/venv",
+  "manifest_path": "~/.config/aeep/config.yaml",
+  "profile": "legacy",
+  "recording": {
+    "duration_seconds": 27,
+    "source": "macOS Terminal window capture",
+    "edits": "Trimmed, title bar cropped, scaled, encoded as MP4 and GIF",
+    "model_turns": 0,
+    "paid_calls": 0,
+    "raw_temporary_directory": "/tmp/aeep-readme-recording-20261005"
+  },
+  "automation": {
+    "id": "update-aeep-router",
+    "status": "ACTIVE",
+    "schedule": "Daily 09:00 America/Vancouver",
+    "mechanism": "Codex thread heartbeat; requires the app scheduler to be available"
+  },
+  "review": "Add launcher setup/argv test; preserve renamed-skill recursion protection by adding the current bundled skill SHA-256 while retaining historical pins. No qualification thresholds, historical evidence or assessment budgets changed.",
+  "initial_focused_failure": "Two existing recursion tests rejected the first skill change because its new bytes lacked a pinned fingerprint. Added its exact fingerprint; focused tests passed afterward.",
+  "host_inventory_limitation": "Standalone Codex App Server inventory could not initialize because the existing unrelated node_repl transport configuration is unsupported by that CLI. No unrelated settings changed. Installed plugin listed enabled; direct installed-cache MCP startup and harmless execution passed. Restart the desktop host to load new plugin tools.",
+  "files": {
+    "docs/media/aeep-demo.mp4": {
+      "bytes": 126295,
+      "sha256": "1f29f6094dfee38891e3fd2e0acb878bc933fa11739ec7836cce74c9f91b748f"
+    },
+    "docs/media/aeep-demo.gif": {
+      "bytes": 133958,
+      "sha256": "b493db66f1ccc8a4a0aff820e03ce47760a5f9c9408cf957616189822c7f7c75"
+    },
+    "integrations/aeep/.codex-plugin/plugin.json": {
+      "bytes": 811,
+      "sha256": "791eb45c04cd63cbdbf5b823ed017718617aa3c137537bc3ead903397dd53861"
+    },
+    "integrations/aeep/.mcp.json": {
+      "bytes": 132,
+      "sha256": "cc190757c1466ec8424d5ae178487ea9a10783a0971f0f62adbb0649443d3e6c"
+    },
+    "integrations/aeep/serve.py": {
+      "bytes": 650,
+      "sha256": "8001c84f1f27be9557225f0b02b546043b03d1ad65c61f312eade11421794c9f"
+    },
+    "integrations/aeep/skills/assess-plugin/SKILL.md": {
+      "bytes": 4830,
+      "sha256": "c87c9d22e22aba152fd56b796ec74dc85fc07366c91e0958f1040c2638fdd8b6"
+    }
+  },
+  "host_free_bytes": 128321351680,
+  "resources_retained": [
+    ".venv/",
+    "~/.local/share/aeep/venv/",
+    "~/.config/aeep/config.yaml",
+    "~/.config/aeep/.aeep/aeep.db",
+    "build/",
+    "/tmp/aeep-readme-recording-20261005"
+  ],
+  "docker_operations": false,
+  "cleanup_performed": false,
+  "legacy_mcp_handshake": {
+    "passed": true,
+    "tool_count": 15
+  }
+}

@@ -399,3 +399,19 @@ Copy [`../skills/aeep-router`](../skills/aeep-router) into the host's supported 
 5. use `benchmark` only during explicit calibration.
 
 The skill uses `python -m aeep` and JSON output, so it does not depend on shell aliases or prose scraping.
+
+## Stack service integration
+
+Use `aeep.stack_planning.StackService` for inert planning and
+`aeep.stack_runtime.StackRuntime` for operator-controlled execution. The host
+supplies semantic graphs, separately retains actual task values and presents
+preflight's consolidated setup and review requirements. Shared preparation schemas
+are exported for MCP and supported provider formats. The optional
+`tools.stack-task.mcp.json` includes execution; existing task schemas stay unchanged.
+
+Enable `stack_execution` explicitly in a reviewed capability profile (or generate
+it with `aeep task profile-from-scope --stack-execution`). Activation still requires
+an applicable native scope. A host-managed setup adapter needs an explicitly
+versioned trusted callback; inject its `ProviderSetupService` into `StackService`.
+Unsupported callbacks are blockers. [The stack guide](STACK_PLANNING.md) provides
+CLI examples and recovery constraints.

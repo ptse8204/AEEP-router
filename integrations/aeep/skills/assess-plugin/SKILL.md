@@ -3,9 +3,17 @@ name: assess-plugin
 description: Help select a local plugin, propose a reviewed AEEP assessment, inspect its evidence, and use the approved task tools.
 ---
 
-Use AEEP's task tool when its documented contract matches the user's task. Each
-task tool executes once; AEEP selects the implementation. Do not call a separate
-routing tool first. These tools do not intercept unrelated Codex calls.
+The marketplace installation exposes the standard router and inert stack tools.
+For ordinary work, use `aeep_list_capabilities` to inspect available actions,
+`aeep_route_action` to preview a decision, and `aeep_execute_action` to execute it.
+Show the result and receipt. Do not infer qualification or payment authority
+from installation. An explicit propose-only request stops before execution.
+
+The assessment tools below require a separately configured assessment-profile
+server and its reviewed definitions and grants. If those tools are absent,
+explain the setup requirement; do not simulate them. In that profile, use the
+focused task tool directly when its contract matches the task. These tools do
+not intercept unrelated Codex calls.
 
 For assessment onboarding:
 

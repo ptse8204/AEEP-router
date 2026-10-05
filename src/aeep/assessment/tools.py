@@ -33,7 +33,7 @@ def reviewed_recipes(store: ReceiptStore | None) -> dict[str, RecipeDefinition]:
 
 
 def declarations(store: ReceiptStore | None = None, *, tasks_only: bool = False,
-                 capabilities: set[str] | None = None) -> list[dict[str, Any]]:
+                 capabilities: set[str] | None = None, include_stack: bool = False) -> list[dict[str, Any]]:
     result: list[dict[str, Any]] = []
     result.extend([
         {'name': 'aeep_assessment_options', 'description': 'List existing operator-selected subjects, recipes, environments and configured routes under a current grant. Does not inspect files or approve execution.',
@@ -94,11 +94,14 @@ def declarations(store: ReceiptStore | None = None, *, tasks_only: bool = False,
             # also supports failed/delegated outcomes with no task output.
             schema['properties']['output'] = {}
             item['outputSchema'] = schema
+        if include_stack:
+            from ..integrations.tool_schemas import stack_run_tool
+            result.append(stack_run_tool())
     else:
-        from ..integrations.tool_schemas import capability_tools
+        from ..integrations.tool_schemas import capability_tools, stack_tools
         result.extend(dict(name=item['name'], description=item['description'],
                            inputSchema=item['schema'], annotations=item['annotations'])
-                      for item in capability_tools())
+                      for item in [*capability_tools(), *stack_tools()])
     return result
 
 

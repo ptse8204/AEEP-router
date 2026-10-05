@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "description": "Exact operator observation; cannot settle an uncertain external operation.",
+  "properties": {
+    "schema_version": {
+      "const": "aeep.stack-recovery.v1",
+      "default": "aeep.stack-recovery.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "recovery_id": {
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Recovery Id",
+      "type": "string"
+    },
+    "proposal_id": {
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "node_id": {
+      "title": "Node Id",
+      "type": "string"
+    },
+    "output_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Digest",
+      "type": "string"
+    },
+    "receipt_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Receipt Ids",
+      "type": "array"
+    },
+    "coordinator_stopped": {
+      "const": true,
+      "title": "Coordinator Stopped",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recovery_id",
+    "proposal_id",
+    "node_id",
+    "output_digest",
+    "receipt_ids",
+    "coordinator_stopped"
+  ],
+  "title": "StackRecovery",
+  "type": "object"
+}

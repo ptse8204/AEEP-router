@@ -1,5 +1,33 @@
 # 0.8 plan coverage and remaining work
 
+The October 5 installation follow-up adds the `aeep-router` repository marketplace,
+a fixed-path local launcher, README installation/update prompts, and an actual
+terminal recording. The operator explicitly requested installation, automatic
+updates and publication of this work to origin. A dedicated Python runtime and
+new default manifest are installed; no existing manifest or credentials were
+replaced. The current bundled skill fingerprint was added to the existing
+recursion guard, retaining historical pins. [Installation records](codex-install-20261005/installation.json)
+cover the exact change, resources, successful installed-server call and scheduled
+daily updater. [Final validation](codex-install-20261005/summary.md) passed 1,267 tests with
+21 skipped, 82.08% coverage, and both required coverage gates.
+This installation does not close provider onboarding or comparative-value gates.
+
+The October 4–5 stack implementation extends `db0d854215e227ab003b584b18a6cc3408c2eb83`
+under the operator's explicit implementation request. [The implementation
+checklist](stack-implementation-checklist.md) records the ordered gates and
+remaining work; [ADR-011](../../docs/adr/ADR-011-stack-synthesis-preflight.md)
+defines the boundary. This increment does not alter historical qualifications,
+assessment allowances or payment authority. Real provider onboarding remains a
+separate gate from offline software tests.
+The implementation now includes inert synthesis, pinned free execution, durable
+recovery, source-bound setup checks and explicit stack task-profile opt-in.
+[Final validation](stack-validation-20261005/summary.md) passed 1,266 tests with
+21 skipped, reached 82% overall coverage, and passed the required coverage,
+policy, lint, type, compatibility and packaging checks. Earlier failures remain
+recorded; [provider observations](stack-readiness/host-connections.json) show the
+remaining actual-onboarding gap. No paid provider execution or comparative benefit
+is claimed.
+
 The [October 4 live delay diagnostic](live-delay-diagnostic-20261004/findings.md)
 renewed 22 worker and three native boundary checks on source `e6b71acb…`, then ran
 Luna/xhigh twice with fresh scopes. The first new input contained unsupported

@@ -29,7 +29,7 @@ from aeep.router import Router
 )
 def test_tool_schema_exports(format, key):
     tools = export_tools(format)
-    assert len(tools) == 12
+    assert len(tools) == 16
     tool_names = {
         tool.get("name", tool.get("function", {}).get("name")) for tool in tools
     }
@@ -103,7 +103,7 @@ def test_protocol_modern_discover_and_list(tmp_path):
             }
         )
         names = {tool["name"] for tool in listed["result"]["tools"]}
-        assert len(names) == 11
+        assert len(names) == 15
         assert "aeep_lookup_capability" in names
         assert "aeep_discover_resources" not in names
         assert listed["result"]["resultType"] == "complete"

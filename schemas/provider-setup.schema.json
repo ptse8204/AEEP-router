@@ -1,0 +1,187 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.provider-setup.v1",
+      "default": "aeep.provider-setup.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "setup_id": {
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Setup Id",
+      "type": "string"
+    },
+    "adapter": {
+      "enum": [
+        "https-readiness",
+        "local-runtime",
+        "host-managed"
+      ],
+      "title": "Adapter",
+      "type": "string"
+    },
+    "adapter_revision": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Adapter Revision"
+    },
+    "endpoint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Endpoint"
+    },
+    "secret_env": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Secret Env"
+    },
+    "executable": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executable"
+    },
+    "executable_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executable Digest"
+    },
+    "version_args": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 8,
+      "title": "Version Args",
+      "type": "array"
+    },
+    "auth_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Auth Url"
+    },
+    "billing_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Billing Url"
+    },
+    "documentation_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Documentation Url"
+    },
+    "billing_credit_pointer": {
+      "anyOf": [
+        {
+          "pattern": "^/[^\\s]{1,200}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Billing Credit Pointer"
+    },
+    "required_checks": {
+      "default": [
+        "connectivity"
+      ],
+      "items": {
+        "enum": [
+          "connectivity",
+          "authentication",
+          "billing",
+          "runtime"
+        ],
+        "type": "string"
+      },
+      "title": "Required Checks",
+      "type": "array"
+    },
+    "non_charging": {
+      "default": false,
+      "title": "Non Charging",
+      "type": "boolean"
+    },
+    "timeout_seconds": {
+      "default": 10,
+      "exclusiveMinimum": 0,
+      "maximum": 30,
+      "title": "Timeout Seconds",
+      "type": "number"
+    },
+    "valid_seconds": {
+      "default": 300,
+      "maximum": 3600,
+      "minimum": 1,
+      "title": "Valid Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "setup_id",
+    "adapter"
+  ],
+  "title": "ProviderSetupDefinition",
+  "type": "object"
+}

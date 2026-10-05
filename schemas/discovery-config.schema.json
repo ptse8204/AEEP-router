@@ -12,10 +12,54 @@
         "kind": {
           "enum": [
             "ard",
-            "fixture"
+            "fixture",
+            "mcp",
+            "docker",
+            "smithery",
+            "package"
           ],
           "title": "Kind",
           "type": "string"
+        },
+        "catalog": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Catalog"
+        },
+        "command": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Command"
+        },
+        "token_env": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Token Env"
         },
         "base_url": {
           "anyOf": [

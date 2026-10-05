@@ -1,0 +1,35 @@
+{
+  "review": "../stack-provider-readiness-review.json",
+  "observations": [
+    {
+      "provider": "Hugging Face",
+      "source": "host connector hugging_face_hf_whoami",
+      "calls": 1,
+      "authenticated": true,
+      "existing_oauth_connection": true,
+      "billing_balance": "unknown",
+      "api_key_setup": "not tested",
+      "new_signin_handoff": "not tested"
+    },
+    {
+      "provider": "Figma",
+      "source": "host connector figma_whoami",
+      "calls": 1,
+      "authenticated": true,
+      "observed_seat": "View",
+      "observed_tier": "starter",
+      "authoring_access": "not established by this check",
+      "billing_balance": "unknown",
+      "new_signin_handoff": "not tested"
+    }
+  ],
+  "cash_charging_operations": 0,
+  "raw_account_details_retained": false,
+  "credentials_read_or_copied": false,
+  "release_gate": "incomplete",
+  "remaining": [
+    "Operator-completed sign-in handoff through the selected host integration",
+    "A selected metered provider with an operator-bound API secret and documented non-charging billing-readiness endpoint",
+    "Standalone AEEP-to-provider integration evidence; host connector success alone does not supply it"
+  ]
+}

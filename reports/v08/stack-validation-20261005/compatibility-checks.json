@@ -1,0 +1,103 @@
+[
+  {
+    "name": "economic-contract",
+    "command": [
+      "python3",
+      "examples/economic_evidence/campaign.py",
+      "--repetitions",
+      "30",
+      "--check",
+      "--require-gates"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.566
+  },
+  {
+    "name": "dsh-contract",
+    "command": [
+      "python3",
+      "examples/dsh_campaign/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.416
+  },
+  {
+    "name": "dsh-safety",
+    "command": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-report",
+      "reports/v05/dsh/live-safety.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.435
+  },
+  {
+    "name": "dsh-comparison",
+    "command": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-comparison",
+      "reports/v05/dsh/live-comparison.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.437
+  },
+  {
+    "name": "dsh-native-plan",
+    "command": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-native-plan"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.438
+  },
+  {
+    "name": "job-contract",
+    "command": [
+      "python3",
+      "examples/job_application/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.426
+  },
+  {
+    "name": "provider-package",
+    "command": [
+      "python3",
+      "-m",
+      "aeep",
+      "provider",
+      "verify",
+      "examples/provider_package/aeep-provider.yaml",
+      "-m",
+      "examples/provider_package/aeep.yaml",
+      "--compact"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.531
+  },
+  {
+    "name": "stack-demo",
+    "command": [
+      "python3",
+      "examples/stacks/demo.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.666
+  },
+  {
+    "name": "node-integration",
+    "command": [
+      "npm",
+      "--prefix",
+      "integrations/dsh-aeep-router",
+      "test"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.36
+  }
+]

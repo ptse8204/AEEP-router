@@ -17,6 +17,101 @@ CLI commands, HTTP, MCP, a browser or a subscription-backed agent. AEEP excludes
 routes that violate permissions or resource limits before ranking the remaining
 choices. Selection uses local rules and evidence, without another model call.
 
+## Watch it run
+
+[![AEEP terminal recording: preview a route, execute it, inspect a receipt, and run three offline stacks](docs/media/aeep-demo.gif)](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
+
+[Watch the MP4](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
+· [Commands and transcript](docs/media/README.md)
+· [Install in Codex](#install-in-codex)
+
+This records actual local commands. The stack examples use synthetic media, data
+and research fixtures; the media result is an edit timeline, not a generated video.
+The recording omits private desktop content and uses no paid provider calls.
+
+## Install in Codex
+
+On macOS or Linux, install Python 3.11+ and the Codex CLI, then run:
+
+```bash
+git clone https://github.com/ptse8204/AEEP-router.git
+cd AEEP-router
+python3 -m venv "$HOME/.local/share/aeep/venv"
+"$HOME/.local/share/aeep/venv/bin/python" -m pip install .
+"$HOME/.local/share/aeep/venv/bin/aeep" init "$HOME/.config/aeep/config.yaml"
+codex plugin marketplace add ptse8204/AEEP-router --ref main
+codex plugin add aeep@aeep-router
+```
+
+This adds the repository's **AEEP Router** marketplace and installs its plugin.
+It uses a dedicated Python environment and a local manifest with a working
+`text.stats` example. Keep an existing manifest if `init` reports that it already
+exists. Installation does not approve new capabilities, assessments or payments.
+The core launcher uses the standard router profile; assessment and scoped task
+profiles still require their own setup.
+
+Restart Codex after installation, then open a new chat. In the CLI, `/mcp` shows
+active servers. In the desktop app, find AEEP in the Plugins directory. The plugin
+uses the dedicated environment directly, so the app needs no virtualenv activation.
+[Codex marketplace documentation](https://developers.openai.com/plugins/build/plugins)
+explains the Git-backed installation and refresh commands. This repository
+marketplace is separate from OpenAI's public plugin directory.
+
+### Try it in conversation
+
+Ask Codex:
+
+> Use AEEP to list the available capabilities. Preview a route for counting the
+> characters, words and lines in "hello world". Explain the selection before
+> running anything.
+
+Then:
+
+> Execute that text.stats action through AEEP. Show the result, selected executor,
+> verification status and receipt ID.
+
+The bundled example returns **11 characters, 2 words and 1 line**. To explore the
+stack planner, ask:
+
+> Help me describe my task as a GoalSpec and propose an AEEP stack using only
+> configured capabilities. Keep cash at zero, report missing providers and
+> compatibility blockers, and stop after the proposal.
+
+An installation starts with the text example, not an unrestricted tool catalog.
+Use the [stack guide](docs/STACK_PLANNING.md) to add reviewed capabilities and run
+the media, data and research demonstrations.
+
+### Keep it updated
+
+There are two parts to update: the Python runtime and the marketplace plugin.
+From a clean `main` checkout, run:
+
+```bash
+git pull --ff-only origin main
+"$HOME/.local/share/aeep/venv/bin/python" -m pip install .
+"$HOME/.local/share/aeep/venv/bin/aeep" doctor
+codex plugin marketplace upgrade aeep-router
+codex plugin add aeep@aeep-router
+```
+
+Restart Codex to load the updated server. Keep your manifest and receipt database;
+do not rerun `init` or overwrite them. Stop on a failed command, local edits or a
+diverged branch. Review the changelog before updating: AEEP is experimental.
+
+For automatic updates, ask Codex to create a daily automation:
+
+> Every day, check origin/main for this AEEP checkout. If there is an update,
+> preserve at least 50 GiB free, require a clean main branch and fast-forward only.
+> Validate the update, install it into ~/.local/share/aeep/venv, run aeep doctor,
+> refresh only the aeep-router marketplace and reinstall aeep@aeep-router.
+> Preserve my manifest, receipts, grants and credentials. Stop on failures or
+> migration requirements. Notify me when an update is installed or needs attention;
+> stay quiet when nothing changed. Remind me to restart Codex after an update.
+
+This schedules updates through Codex while its scheduler is available; plugin
+startup itself does not download or install code. To disconnect the plugin, run
+`codex plugin remove aeep@aeep-router`; disable any update automation separately.
+
 ## When to use it
 
 | Use case | Why AEEP is useful | Evidence and limits |
@@ -66,7 +161,7 @@ remaining live comparison and adoption checks.
 
 | Test | Recorded result | What it establishes |
 |---|---|---|
-| Software suite, October 4 | 1,219 passed under coverage, 21 skipped; 81.89% combined statement and branch coverage | The tested software behavior passed. Skipped checks remain unverified by this run. |
+| [Software suite, October 5](reports/v08/codex-install-20261005/summary.md) | 1,267 passed under coverage, 21 skipped; 82.08% combined statement and branch coverage | The tested software behavior passed. Skipped checks remain unverified by this run. |
 | Native workbook tasks | Both native Codex and Codex with AEEP passed 2/2 tasks | The requested changes and declared preservation requirements were checked independently. |
 | Known deterministic tool | Both approaches passed 20/20 matched actions, with 20/20 verified executions | Direct routing worked for the measured `text.stats@1` action class. |
 | SkillsBench DOCX qualification, Luna/xhigh | 137/141 passed; two text-preservation failures and two timeouts | The candidate did not qualify. A separate pinned public-fixture verifier passed 18/18 assertions. |
@@ -213,3 +308,15 @@ aeep verify router-complete --profile all --strict --json
 ```
 
 Licensed under [Apache-2.0](LICENSE).
+
+## Stack proposals
+
+AEEP can select implementations for a host-supplied semantic task graph. The
+planner checks typed edges, configured converters, policy and aggregate estimates;
+the runtime executes reviewed free local configurations and records progress.
+`aeep stack` exposes proposal, preflight, assembly and recovery controls.
+
+The [stack guide](docs/STACK_PLANNING.md) includes runnable media, data and
+research fixtures. They validate offline composition and recovery. Actual provider
+onboarding is still an open release gate: existing authenticated connection checks
+do not establish a new sign-in journey or credential-bound billing readiness.

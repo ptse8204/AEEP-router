@@ -9,7 +9,7 @@ from __future__ import annotations
 from graphlib import CycleError, TopologicalSorter
 from typing import TYPE_CHECKING, Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .assessment.models import Digest, content_digest
 from .assessment.repository import AssessmentRepository
@@ -62,6 +62,15 @@ class CapabilityProfile(StrictModel):
     intended_model: str | None = Field(default=None, min_length=1, max_length=200)
     intended_effort: str | None = Field(default=None, min_length=1, max_length=100)
     strict_isolation: bool = False
+    stack_execution: bool = False
+
+    @model_serializer(mode='wrap')
+    def preserve_existing_profiles(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+        result: dict[str, object] = handler(self)
+        if not self.stack_execution:
+            result.pop('stack_execution', None)
+        return result
+
     required_host_features: list[Literal['catalog_filtering', 'schema_exposure', 'skill_file_exclusion',
         'call_enforcement', 'filesystem_isolation', 'network_isolation', 'credential_scope',
         'hooks', 'context_reset', 'resource_observability']] = Field(default_factory=list, max_length=10)
@@ -102,18 +111,19 @@ def _reviewed(router: Router, digest: str) -> bool:
     return row is not None and not row[0]
 
 
-def _tools(router: Router, scope: TaskScope) -> list[dict[str, Any]]:
+def _tools(router: Router, scope: TaskScope, *, include_stack: bool = False) -> list[dict[str, Any]]:
     capabilities = {router.registry.get(key).capability for key, fingerprint in scope.executor_fingerprints.items()
                     if router.registry.contains(key) and executor_fingerprint(router.registry.get(key)) == fingerprint}
-    return declarations(router.store, tasks_only=True, capabilities=capabilities)
+    return declarations(router.store, tasks_only=True, capabilities=capabilities, include_stack=include_stack)
 
 
 def from_scope(router: Router, scope_id: str, *, profile_id: str,
-               host: Literal['codex-project', 'task-service'] = 'codex-project') -> CapabilityProfile:
+               host: Literal['codex-project', 'task-service'] = 'codex-project',
+               stack_execution: bool = False) -> CapabilityProfile:
     """Build an inert default profile; saving/review/activation remain explicit."""
     scope = TaskScope.model_validate(AssessmentRepository(router.store).get('task_scope', scope_id))
-    return CapabilityProfile(profile_id=profile_id, host=host, scope_digest=content_digest(scope),
-        manifest_digest=content_digest(router.manifest), tool_schema_digest=content_digest({'tools': _tools(router, scope)}),
+    return CapabilityProfile(profile_id=profile_id, host=host, stack_execution=stack_execution, scope_digest=content_digest(scope),
+        manifest_digest=content_digest(router.manifest), tool_schema_digest=content_digest({'tools': _tools(router, scope, include_stack=stack_execution)}),
         components=[ProfileComponent(component_id=key, resource_id=key, content_digest=fingerprint.removeprefix('sha256:'),
             kind='executor', executor_id=key, exposed=True) for key, fingerprint in sorted(scope.executor_fingerprints.items())])
 
@@ -141,7 +151,7 @@ def compile_profile(router: Router, profile: CapabilityProfile | str) -> dict[st
     selected = {item.executor_id for item in profile.components if item.kind == 'executor' and item.removal == 'available'}
     if selected != set(scope.executor_fingerprints):
         blockers.append('available profile executors must exactly match task authority')
-    tools = _tools(router, scope)
+    tools = _tools(router, scope, include_stack=profile.stack_execution)
     selected_capabilities = {router.registry.get(key).capability for key in selected
                              if key is not None and router.registry.contains(key)}
     if not tools:
@@ -196,7 +206,7 @@ def compile_profile(router: Router, profile: CapabilityProfile | str) -> dict[st
                     blockers.append(f'{key}: executor exceeds task approval ceiling')
                 if not spec.enabled:
                     blockers.append(f'{key}: executor disabled')
-                if not declarations(router.store, tasks_only=True, capabilities={spec.capability}):
+                if not profile.stack_execution and not declarations(router.store, tasks_only=True, capabilities={spec.capability}):
                     blockers.append(f'{key}: capability has no supported task tool definition')
             item.update(capability=spec.capability, allowed_operation=spec.capability,
                 side_effect=spec.side_effect.value, requires_network=spec.requires_network,

@@ -37,9 +37,10 @@ def define_scope(ctx: typer.Context, file: Path) -> None:
 
 
 @app.command('profile-from-scope')
-def profile_from_scope(ctx: typer.Context, scope: str, profile_id: str = typer.Option(..., '--profile-id')) -> None:
+def profile_from_scope(ctx: typer.Context, scope: str, profile_id: str = typer.Option(..., '--profile-id'),
+                       stack_execution: bool = False) -> None:
     """Export an inert capability profile from an existing task scope."""
-    typer.echo(profiles.from_scope(ctx.obj, scope, profile_id=profile_id).model_dump_json(indent=2))
+    typer.echo(profiles.from_scope(ctx.obj, scope, profile_id=profile_id, stack_execution=stack_execution).model_dump_json(indent=2))
 
 
 @app.command('define-profile')

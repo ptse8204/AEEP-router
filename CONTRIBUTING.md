@@ -37,3 +37,12 @@ independent of any model vendor, payment rail, or marketplace.
 
 Read the [assessment testing policy](docs/ASSESSMENT_TESTING.md) before changing or running
 assessment, execution-adapter or release-verification work in this repository.
+
+## Stack changes
+
+Read [STACK_PLANNING.md](docs/STACK_PLANNING.md) and
+[ADR-011](docs/adr/ADR-011-stack-synthesis-preflight.md) before extending the planner
+or setup boundary. Keep planning inert and keep vendor behavior in adapters.
+Record exact implementation reviews, tests and remaining gates in
+`reports/v08/plan-coverage.md`. Run the repository checks plus the stack fixture
+suite. A mocked provider check cannot satisfy the real onboarding gate.

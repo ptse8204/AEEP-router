@@ -48,6 +48,7 @@ from .models import (
     SubscriptionResource,
 )
 from .router import Router
+from .stack_cli import app as stack_app
 from .task_cli import app as task_app
 from .version import __version__
 
@@ -80,6 +81,7 @@ capacity_app = typer.Typer(help="Inspect provider-neutral capacity state.")
 verify_app = typer.Typer(help="Run digest-bound executable completion checks.")
 app.add_typer(assessment_app, name="assess")
 app.add_typer(task_app, name='task')
+app.add_typer(stack_app, name='stack')
 
 
 @app.command("init-assessment")
@@ -3736,42 +3738,18 @@ def registry_search(
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
-    from .discovery import (
-        ARDRegistryAdapter,
-        DockerCatalogAdapter,
-        FixtureRegistryAdapter,
-        MCPCommunityRegistryAdapter,
-        PackageRegistryAdapter,
-        SmitheryRegistryAdapter,
-    )
+    from .discovery import DiscoveryRequest
+    from .discovery_service import DiscoveryConfig, DiscoveryService, DiscoverySourceConfig
 
     router = Router.from_manifest(manifest)
     try:
-        adapter: PackageRegistryAdapter
-        if registry == 'ard':
-            if base_url is None:
-                raise typer.BadParameter('ARD requires --base-url; the query must contain only public search terms')
-            adapter = ARDRegistryAdapter(base_url, fallback=FixtureRegistryAdapter(fixture) if fixture else None)
-        elif registry == "fixture":
-            if fixture is None:
-                raise typer.BadParameter("fixture registry requires --fixture")
-            adapter = FixtureRegistryAdapter(fixture)
-        elif registry == "mcp":
-            adapter = MCPCommunityRegistryAdapter()
-        elif registry == "docker":
-            if catalog is None:
-                raise typer.BadParameter("Docker registry requires --catalog")
-            adapter = DockerCatalogAdapter(catalog)
-        elif registry == "smithery":
-            if token_env is None:
-                raise typer.BadParameter("Smithery registry requires --token-env")
-            adapter = SmitheryRegistryAdapter(token_env=token_env)
-        else:
-            raise typer.BadParameter("registry must be fixture, ard, mcp, docker, or smithery")
-        from .discovery import DiscoveryRequest
-        from .discovery_service import DiscoveryService
-        discovery = DiscoveryService(router.store, {registry: adapter},
-            allowed_remote_sources=() if registry == 'fixture' else (registry,), max_results=limit)
+        source = DiscoverySourceConfig.model_validate(dict(
+            source_id=registry, kind=registry,
+            base_url=base_url or ('https://registry.modelcontextprotocol.io' if registry == 'mcp' else None),
+            path=str(fixture) if fixture and registry in {'fixture', 'package'} else None,
+            fallback_path=str(fixture) if fixture and registry == 'ard' else None,
+            catalog=catalog, token_env=token_env, allow_remote=registry not in {'fixture', 'package'}))
+        discovery = DiscoveryService.from_config(router.store, DiscoveryConfig(sources=[source], max_results=limit))
         result = _run(discovery.search(DiscoveryRequest(public_query=query, source_ids=[registry], limit=limit)))
         for source in result.source_records:
             for warning in source.warnings:

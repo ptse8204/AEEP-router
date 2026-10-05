@@ -77,3 +77,12 @@ Classify missing ARD concepts before extending the adapter:
   be optional and cannot silently change the pinned compatibility contract.
 
 Use the source pin and boundary in `docs/adr/ADR-010-ard-discovery-boundary.md`.
+
+## Stack implementation
+
+Follow `docs/STACK_PLANNING.md` and ADR-011 when changing stack orchestration.
+Keep task inputs and output contents transient, selected executors fingerprint-bound,
+and successor consumption continuous. Do not infer provider setup, admission or
+payment authority from discovery or connectivity. Preserve existing task profiles;
+stack execution is an explicit reviewed opt-in. Keep real onboarding gaps in the
+implementation checklist linked from `reports/v08/plan-coverage.md`.

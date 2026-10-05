@@ -19,10 +19,13 @@ from .discovery import (
     DiscoveryRequest,
     DiscoveryResult,
     DiscoverySourceRecord,
+    DockerCatalogAdapter,
     FixtureRegistryAdapter,
+    MCPCommunityRegistryAdapter,
     PackageRegistryAdapter,
     RegistryCandidate,
     RegistryQuery,
+    SmitheryRegistryAdapter,
     _metadata_digest,
     candidate_artifact_type,
     external_resource_identity,
@@ -34,7 +37,10 @@ from .store import ReceiptStore
 
 class DiscoverySourceConfig(StrictModel):
     source_id: str = Field(min_length=1, max_length=100)
-    kind: Literal['ard', 'fixture']
+    kind: Literal['ard', 'fixture', 'mcp', 'docker', 'smithery', 'package']
+    catalog: str | None = Field(default=None, max_length=2048)
+    command: str | None = Field(default=None, max_length=4096)
+    token_env: str | None = Field(default=None, pattern=r'^[A-Za-z_][A-Za-z0-9_]*$', max_length=200)
     base_url: str | None = Field(default=None, max_length=2048)
     path: str | None = Field(default=None, max_length=4096)
     fallback_path: str | None = Field(default=None, max_length=4096)
@@ -43,15 +49,26 @@ class DiscoverySourceConfig(StrictModel):
 
     @model_validator(mode='after')
     def source_shape(self) -> DiscoverySourceConfig:
-        if self.kind == 'fixture':
+        if self.kind in {'fixture', 'package'}:
             if not self.path or self.base_url is not None or self.fallback_path is not None or self.allow_remote:
-                raise ValueError('fixture discovery requires only a local path')
-        elif not self.base_url or self.path is not None:
-            raise ValueError('ARD discovery requires a base URL and optional local fallback')
-        else:
+                raise ValueError('local discovery requires only a local path')
+        elif self.kind in {'ard', 'mcp'}:
+            if not self.base_url or self.path is not None:
+                raise ValueError('remote discovery requires an explicit base URL')
             url = httpx.URL(self.base_url)
             if url.scheme != 'https' or not url.host or url.userinfo or url.query or url.fragment:
-                raise ValueError('ARD discovery requires a credential-free HTTPS base URL')
+                raise ValueError('discovery requires a credential-free HTTPS base URL')
+            if self.kind == 'mcp' and self.fallback_path:
+                raise ValueError('MCP fallback is not supported')
+        elif self.kind == 'docker':
+            if not self.catalog or self.base_url or self.path or self.fallback_path:
+                raise ValueError('Docker discovery requires a catalog')
+        elif not self.token_env or self.base_url or self.path or self.fallback_path:
+            raise ValueError('Smithery discovery requires an operator secret reference')
+        if self.kind != 'docker' and (self.catalog or self.command):
+            raise ValueError('catalog and command belong to Docker sources only')
+        if self.kind != 'smithery' and self.token_env:
+            raise ValueError('token_env belongs to Smithery sources only')
         return self
 
 
@@ -91,19 +108,7 @@ class DiscoveryService:
     ) -> DiscoveryService:
         adapters: dict[str, PackageRegistryAdapter] = {}
         for source in config.sources:
-            if source.kind == 'fixture':
-                assert source.path is not None
-                adapters[source.source_id] = FixtureRegistryAdapter(
-                    base_directory / source.path, allowed_types=tuple(source.artifact_types),
-                )
-            else:
-                assert source.base_url is not None
-                adapters[source.source_id] = ARDRegistryAdapter(
-                    source.base_url,
-                    fallback=FixtureRegistryAdapter(base_directory / source.fallback_path)
-                    if source.fallback_path else None,
-                    allowed_types=tuple(source.artifact_types),
-                )
+            adapters[source.source_id] = discovery_adapter(source, base_directory=base_directory)
         return cls(store, adapters,
                    allowed_remote_sources=tuple(source.source_id for source in config.sources if source.allow_remote),
                    max_results=config.max_results, timeout_seconds=config.timeout_seconds)
@@ -140,7 +145,7 @@ class DiscoveryService:
             if adapter is None:
                 raise ConfigurationError('discovery source is not configured')
             # Only an exact fixture adapter is known to perform no network calls.
-            if type(adapter) is not FixtureRegistryAdapter and source not in self.allowed_remote_sources:
+            if type(adapter) not in {FixtureRegistryAdapter, LocalPackageAdapter} and source not in self.allowed_remote_sources:
                 raise ConfigurationError('discovery source requires operator remote-query authority')
             if (isinstance(adapter, ARDRegistryAdapter) and adapter.fallback is not None
                     and type(adapter.fallback) is not FixtureRegistryAdapter):
@@ -258,3 +263,44 @@ def _self_check() -> None:
 
 if __name__ == '__main__':
     _self_check()
+
+
+class LocalPackageAdapter:
+    """Read an explicit local package; never fetch artifacts or activate routes."""
+    adapter_id = 'local-package'
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+
+    async def search(self, query: RegistryQuery) -> list[RegistryCandidate]:
+        from .provider_package import ProviderPackage, load_provider_package
+        def read_package() -> tuple[ProviderPackage, Path]:
+            if self.path.stat().st_size > 1048576:
+                raise ConfigurationError('local provider package metadata exceeds 1 MiB')
+            return load_provider_package(self.path)
+        package, _ = await asyncio.to_thread(read_package)
+        name = package.spec.provider.provider_id
+        if query.query.casefold() not in name.casefold():
+            return []
+        digest = _metadata_digest(package.model_dump(mode='json'))
+        return [RegistryCandidate(registry_candidate_id='package_' + digest.removeprefix('sha256:')[:32],
+            adapter_id=self.adapter_id, name=name, description='Operator-selected local provider package',
+            retrieved_at=utc_now(), raw_metadata_digest=digest,
+            provenance={'package_digest': digest})]
+
+
+def discovery_adapter(source: DiscoverySourceConfig, *, base_directory: Path = Path('.')) -> PackageRegistryAdapter:
+    """Canonical factory. Only operator configuration chooses code and destinations."""
+    if source.kind == 'fixture':
+        return FixtureRegistryAdapter(base_directory / str(source.path), allowed_types=tuple(source.artifact_types))
+    if source.kind == 'package':
+        return LocalPackageAdapter(base_directory / str(source.path))
+    if source.kind == 'ard':
+        return ARDRegistryAdapter(str(source.base_url),
+            fallback=FixtureRegistryAdapter(base_directory / source.fallback_path) if source.fallback_path else None,
+            allowed_types=tuple(source.artifact_types))
+    if source.kind == 'mcp':
+        return MCPCommunityRegistryAdapter(base_url=str(source.base_url))
+    if source.kind == 'docker':
+        return DockerCatalogAdapter(str(source.catalog), command=source.command)
+    return SmitheryRegistryAdapter(token_env=str(source.token_env))

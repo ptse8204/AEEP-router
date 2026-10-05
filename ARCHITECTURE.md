@@ -593,3 +593,19 @@ share the bounded stdio transport; the adapter verifies their scope and monotoni
 history, binds canonical event digests and retains partial receipt metadata.
 The coordinator does not interpret native metric names when ranking or admitting
 routes. Counts and injection events do not establish complete discovery evidence.
+
+## Stack orchestration
+
+`stack_models.py` contains the provider-neutral goal, artifact, proposal and
+preflight contracts. `stack_planning.py` applies existing eligibility and policy
+scoring to configured candidates. It compiles pinned configurations into transient
+`WorkflowRequest` objects. `stack_runtime.py` uses the workflow engine and durable
+`ReceiptStore` progress; it does not own another executor or approval system.
+`provider_setup.py` keeps non-charging readiness and operator handoffs separate
+from routing and admission.
+
+The canonical discovery adapter factory lives in `discovery_service.py`.
+`legacy_discovery.py` preserves the old provider-registry interfaces through
+compatibility re-exports. Ordinary routing does not enter stack search.
+[ADR-011](docs/adr/ADR-011-stack-synthesis-preflight.md) records the boundary and
+[STACK_PLANNING.md](docs/STACK_PLANNING.md) describes current support and gaps.

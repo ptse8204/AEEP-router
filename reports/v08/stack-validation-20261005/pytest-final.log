@@ -1,0 +1,585 @@
+........................................................................ [  5%]
+........................................................................ [ 11%]
+........................................................................ [ 16%]
+........................................................................ [ 22%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 39%]
+........................................................................ [ 44%]
+........................................................................ [ 50%]
+........................................................................ [ 56%]
+...F.................................................................... [ 61%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+.....s......................................s........................... [ 78%]
+........ss..........s.........ss........s..........s.................... [ 84%]
+...........................................ssss......................... [ 89%]
+................s..................................ss................... [ 95%]
+..............ss............s....s...................s.......            [100%]
+=================================== FAILURES ===================================
+_________ test_core_verifier_executes_tests_and_checks_locked_digests __________
+
+    def test_core_verifier_executes_tests_and_checks_locked_digests():
+        report = verify_router_complete(profile="core")
+>       assert report.profiles["core"] is CompletionStatus.PASS, report.model_dump_json(indent=2)
+E       AssertionError: {
+E           "schema": "aeep-router-completion-v1",
+E           "version": "0.7.0",
+E           "revision": "db0d854215e227ab003b584b18a6cc3408c2eb83",
+E           "generated_at": "2026-10-05T01:37:55.033873Z",
+E           "profiles": {
+E             "core": "FAIL",
+E             "openai": "SKIP",
+E             "marketplace_contract": "SKIP",
+E             "marketplace_live": "DISABLED"
+E           },
+E           "checks": [
+E             {
+E               "id": "exact-versioned-capability",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_version_consistency.py::test_legacy_manifest_versions_remain_supported"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_version_consistency.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:ebeee792708a4a5ce368df9a3bfc5233b10c9eb95a264884bbdd1429c1bdaf38"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "input-output-schema-validation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_router_execution.py::test_invalid_output_without_fallback_has_failed_outcome"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_router_execution.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "hard-policy-before-scoring",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_models_policy_scoring.py::test_hard_constraints_reject_before_scoring"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_models_policy_scoring.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9be7471108001513fe17f4c4975680f9d4ece49d967475bb4fe1f1a895ff7e69"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "request-cannot-weaken-policy",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_models_policy_scoring.py::test_merge_constraints_never_weakens_policy"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_models_policy_scoring.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9be7471108001513fe17f4c4975680f9d4ece49d967475bb4fe1f1a895ff7e69"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "route-qualification-activation-drift",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v03_qualification_workflow.py::test_candidate_requires_qualification_activation_and_suspends_on_drift"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v03_qualification_workflow.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:dca5f7ad13c1e0e0ecf2e11fd4c43cb968915228e14227e806799adc5eccf050"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "deterministic-ranking-tie-breaking",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_completion_verifier.py::test_router_tie_breaks_by_executor_id"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_completion_verifier.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:da1d86ca62771a74a731d189c1978177eb6341c826ba99c496c767fbc5935bf2"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "baseline-abstention",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_router_execution.py::test_router_abstains_when_gain_is_below_configured_overhead"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_router_execution.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "idempotency",
+E               "profile": "core",
+E               "required": true,
+E               "status": "FAIL",
+E               "test_ids": [
+E                 "tests/test_p0_usefulness.py::test_idempotency_replays_receipt_without_reexecuting_output"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_p0_usefulness.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:90cc5be49f2e1b55158d36f130312a6d59d8e20d6b8d8256da81cc4d5198b234"
+E               ],
+E               "reason": "artifact digest mismatch: tests/test_p0_usefulness.py"
+E             },
+E             {
+E               "id": "unified-attempt-transitions",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_execution_attempts.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:baa862a8ebaef8350e23067755bd3b4b989d47c7599d12be00214688af753fb2"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "crash-recovery-no-blind-duplicate",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_execution_attempts.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:baa862a8ebaef8350e23067755bd3b4b989d47c7599d12be00214688af753fb2"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "receipt-accounting-integrity",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v04_accounting.py::test_subscription_usage_stays_separate_from_cash"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v04_accounting.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:8fe98a6cf7fdf709aef26dcd3c410f545636d60c8d6b4835d0dbbb6570c93a5b"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "privacy-defaults",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_router_execution.py::test_persisted_decision_redacts_sensitive_input_and_context"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_router_execution.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9892a0aa1fc70d0b8b8b6184ebd8d86f2da6caf769ab8d8821ae31f04d9a29ab"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "managed-prompt-output-privacy",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_security.py::test_default_database_omits_managed_prompt_and_output"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_security.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:d81fc23a70680a0e2df9dfbb855f6579bdd17161165eccb31db7e42e22cc5f6e"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "old-manifest-database-compatibility",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v04_store_migrations.py::test_unversioned_legacy_database_migrates_without_data_loss"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v04_store_migrations.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:16e33fe0ace6525814508e3416c03d973bf1082949380d8877970bdaf4ca62e2"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "database-migration-rollback",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v04_store_migrations.py::test_failed_migration_rolls_back_as_one_transaction"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v04_store_migrations.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:16e33fe0ace6525814508e3416c03d973bf1082949380d8877970bdaf4ca62e2"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "offline-operation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_host_native_routing.py::test_exact_local_bypass_makes_no_model_call"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_host_native_routing.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:e0416f275f72c8a9688cff9754ecc8c30082bceb04e4499365961aa28347878a"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "offline-verifier-network-guard",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_security.py::test_verifier_subprocess_enables_offline_guard"
+E               ],
+E               "evidence_ids": [
+E                 "tests/conftest.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:577469a12b9f7c1280e0ee23b4d43c166fb6c8b053bdfcaf3b050c0ec3352fd5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "committed-secret-scan",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_security.py::test_committed_fixture_reports_contain_no_secret_patterns"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_v07_security.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:d81fc23a70680a0e2df9dfbb855f6579bdd17161165eccb31db7e42e22cc5f6e"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "generated-schema-consistency",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_generated_artifacts.py::test_checked_in_schemas_are_current"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_generated_artifacts.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:4f64cfaf3cc5c58197f8eeefbb6e5e75ac990c3f4628724dd9c73c5bd4ee6f2b"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "critical-module-branch-coverage",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_release_gate.py::test_critical_module_branch_coverage"
+E               ],
+E               "evidence_ids": [
+E                 "scripts/check_critical_coverage.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:c46294107e821d292fa55a009b7ee352b7ea4fac04fb14bda6900302f887ed69"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-before-claim",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-after-claim",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-after-cash-reservation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v04_payments.py::test_manager_reserve_is_durably_idempotent_and_recovers_lost_response"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-after-capacity-reservation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_capacity.py::test_capacity_reservation_release_and_replay_are_atomic"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-before-external-invocation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-after-app-server-turn-start",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_managed_crash_is_indeterminate_and_same_decision_cannot_duplicate"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-during-streamed-output",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_codex_subscription_adapter.py::test_turn_failure_modes_fail_closed"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-before-validation",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_fault_at_every_state_is_durable"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-during-settlement",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v04_payments.py::test_settlement_adapter_failure_preserves_indeterminate_reservation"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-after-partial-release",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_x402_capacity_binding.py::test_local_batch_conformance_is_complete_and_offline"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "fault-during-recovery",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_v07_execution_attempts.py::test_recovery_inspects_external_state_and_never_retries_invoking_attempt"
+E               ],
+E               "evidence_ids": [
+E                 "reports/v07/fault-injection.json"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:9545330d331c550a961378a07624995d098f44f2dba8bfa733cc50c7a389dfb5"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "managed-capacity-admission",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_managed_capacity_reservations.py::test_shared_capacity_blocks_concurrent_invocation_and_releases"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_managed_capacity_reservations.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:648997f94199d0e04f942496d4145cba4e8fac40910d625b5e4c3e0fa2f1100b"
+E               ],
+E               "reason": ""
+E             },
+E             {
+E               "id": "uncertain-capacity-retention",
+E               "profile": "core",
+E               "required": true,
+E               "status": "PASS",
+E               "test_ids": [
+E                 "tests/test_managed_capacity_reservations.py::test_uncertain_managed_execution_keeps_capacity_beyond_expiry"
+E               ],
+E               "evidence_ids": [
+E                 "tests/test_managed_capacity_reservations.py"
+E               ],
+E               "artifact_digests": [
+E                 "sha256:648997f94199d0e04f942496d4145cba4e8fac40910d625b5e4c3e0fa2f1100b"
+E               ],
+E               "reason": ""
+E             }
+E           ],
+E           "router_core_ready": false,
+E           "openai_adapter_ready": false,
+E           "openai_live_verified": false,
+E           "marketplace_contract_ready": false,
+E           "marketplace_live_enabled": false,
+E           "release_ready": false
+E         }
+E       assert <CompletionStatus.FAIL: 'FAIL'> is <CompletionStatus.PASS: 'PASS'>
+E        +  where <CompletionStatus.PASS: 'PASS'> = CompletionStatus.PASS
+
+tests/test_v07_completion_verifier.py:42: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v07_completion_verifier.py::test_core_verifier_executes_tests_and_checks_locked_digests
+1 failed, 1263 passed, 21 skipped, 1 warning in 554.47s (0:09:14)

@@ -1,0 +1,110 @@
+{
+  "tool_names": [
+    "aeep_list_capabilities",
+    "aeep_route_action",
+    "aeep_execute_action",
+    "aeep_record_outcome",
+    "aeep_estimate_route_prices",
+    "aeep_request_quotes",
+    "aeep_get_metrics",
+    "aeep_show_prepared_decision",
+    "aeep_show_quote",
+    "aeep_show_settlement",
+    "aeep_lookup_capability",
+    "aeep_stack_propose",
+    "aeep_stack_inspect",
+    "aeep_stack_optimize",
+    "aeep_stack_preflight"
+  ],
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"ok\": true, \"status\": \"success\", \"output\": {\"characters\": 11, \"words\": 2, \"lines\": 1}, \"decision\": {\"decision_id\": \"dec_8ed8e08181304492a425f4bad5a76ec6\", \"action_id\": \"act_57354c5b616d47fcbc507376923c7e1e\", \"capability\": \"text.stats\", \"selected\": \"builtin.text-stats\", \"disposition\": \"SELECTED\", \"bypass_reason\": null, \"reason\": \"lowest feasible burden under balanced\", \"alternatives\": [{\"executor_id\": \"cli.text-stats\", \"kind\": \"command\", \"score\": 0.09230052726733147, \"delta\": 0.12188683906508069}, {\"executor_id\": \"host.text-stats\", \"kind\": \"host\", \"score\": 0.5005910396085108, \"delta\": 0.53017735140626}], \"rejected\": 0}, \"receipts\": [{\"receipt_id\": \"rcpt_70d4cb2d21ab4e5a80b0cd8b86ee0f57\", \"executor_id\": \"builtin.text-stats\", \"status\": \"success\", \"resources\": {\"monetary_usd\": 0.0, \"latency_ms\": 0.0915410928428173, \"cpu_ms\": 0.10352400000004924, \"memory_mb_seconds\": 0.0, \"peak_memory_mb\": 0.0, \"gpu_ms\": 0.0, \"network_bytes\": 0, \"context_tokens\": 10, \"input_tokens\": 0, \"cached_input_tokens\": 0, \"cache_write_input_tokens\": 0, \"output_tokens\": 0, \"reasoning_output_tokens\": 0, \"subscription_units\": 0.0}, \"valid\": true, \"error\": null}], \"instructions\": null}"
+      }
+    ],
+    "isError": false,
+    "structuredContent": {
+      "ok": true,
+      "status": "success",
+      "output": {
+        "characters": 11,
+        "words": 2,
+        "lines": 1
+      },
+      "decision": {
+        "decision_id": "dec_8ed8e08181304492a425f4bad5a76ec6",
+        "action_id": "act_57354c5b616d47fcbc507376923c7e1e",
+        "capability": "text.stats",
+        "selected": "builtin.text-stats",
+        "disposition": "SELECTED",
+        "bypass_reason": null,
+        "reason": "lowest feasible burden under balanced",
+        "alternatives": [
+          {
+            "executor_id": "cli.text-stats",
+            "kind": "command",
+            "score": 0.09230052726733147,
+            "delta": 0.12188683906508069
+          },
+          {
+            "executor_id": "host.text-stats",
+            "kind": "host",
+            "score": 0.5005910396085108,
+            "delta": 0.53017735140626
+          }
+        ],
+        "rejected": 0
+      },
+      "receipts": [
+        {
+          "receipt_id": "rcpt_70d4cb2d21ab4e5a80b0cd8b86ee0f57",
+          "executor_id": "builtin.text-stats",
+          "status": "success",
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0915410928428173,
+            "cpu_ms": 0.10352400000004924,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 10,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "valid": true,
+          "error": null
+        }
+      ],
+      "instructions": null
+    },
+    "_meta": {
+      "org.aeep/usage": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0915410928428173,
+        "cpu_ms": 0.10352400000004924,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 10,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "aeep-agent-router",
+        "version": "0.8.0"
+      }
+    },
+    "resultType": "complete"
+  }
+}

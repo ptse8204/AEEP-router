@@ -161,7 +161,15 @@ from aeep.provider_package import (
     ProviderPackage,
     SmokeTestReport,
 )
+from aeep.provider_setup import ProviderSetupDefinition, ProviderSetupObservation
 from aeep.qualification import QualificationReport, RouteCandidate
+from aeep.stack_models import (
+    ArtifactContract,
+    GoalSpec,
+    StackPreflight,
+    StackProposal,
+    StackRecovery,
+)
 from aeep.tasks import TaskActivation, TaskReconciliation
 from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
@@ -180,6 +188,13 @@ MODEL_FILES = {
     "candidate-intake.schema.json": CandidateIntake,
     "admission-lookup.schema.json": AdmissionLookupRequest,
     "admission-decision.schema.json": AdmissionDecision,
+    "goal.schema.json": GoalSpec,
+    "artifact-contract.schema.json": ArtifactContract,
+    "stack-proposal.schema.json": StackProposal,
+    "stack-recovery.schema.json": StackRecovery,
+    "stack-preflight.schema.json": StackPreflight,
+    "provider-setup.schema.json": ProviderSetupDefinition,
+    "provider-setup-observation.schema.json": ProviderSetupObservation,
     "capability-profile.schema.json": CapabilityProfile,
     "configuration-observation.schema.json": ConfigurationObservation,
     "codex-native-sandbox.schema.json": NativeSandboxConfig,
@@ -349,6 +364,7 @@ def generated() -> dict[Path, str]:
     for filename, tool_format in TOOL_FILES.items():
         values[SCHEMA_DIR / filename] = _encoded({"tools": export_tools(tool_format)})
     values[SCHEMA_DIR / "tools.assessment.mcp.json"] = _encoded({"tools": assessment_tools()})
+    values[SCHEMA_DIR / "tools.stack-task.mcp.json"] = _encoded({"tools": assessment_tools(tasks_only=True, include_stack=True)})
     values[SCHEMA_DIR / "tools.task.mcp.json"] = _encoded({"tools": assessment_tools(tasks_only=True)})
     return values
 

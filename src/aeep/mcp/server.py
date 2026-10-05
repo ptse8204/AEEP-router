@@ -191,6 +191,7 @@ class AEEPToolService:
         if profile not in {"legacy", "assessment", "task"}:
             raise ConfigurationError("unknown tool profile")
         self.profile = profile
+        self.stack_execution = False
         self.discovery = None
         if discovery_config is not None:
             from ..discovery_service import DiscoveryConfig, DiscoveryService
@@ -211,6 +212,9 @@ class AEEPToolService:
                 raise ConfigurationError('task activation requires the task profile and cannot be combined with another scope')
             activation = require_activation(router, task_activation)
             router._task_activation_digest = content_digest(activation)
+            if activation.capability_profile_digest:
+                from ..profiles import load
+                self.stack_execution = load(router, activation.capability_profile_digest).stack_execution
             task_scope = activation.scope_digest
         if task_scope is not None:
             if profile != 'task':
@@ -237,7 +241,8 @@ class AEEPToolService:
                     from ..models import TaskScope
                     scope = TaskScope.model_validate(AssessmentRepository(self.router.store).get('task_scope', self.router._task_scope_digest))
                     specs = [spec for spec in specs if scope.executor_fingerprints.get(spec.id) == executor_fingerprint(spec)]
-                return declarations(self.router.store, tasks_only=True, capabilities={spec.capability for spec in specs})
+                return declarations(self.router.store, tasks_only=True, capabilities={spec.capability for spec in specs},
+                                    include_stack=self.stack_execution)
             return [item for item in declarations(self.router.store)
                     if item['name'] != 'aeep_discover_resources' or self.discovery is not None]
         return [item for item in export_tools("mcp")
@@ -245,6 +250,31 @@ class AEEPToolService:
 
     async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            if name.startswith('aeep_stack_'):
+                from ..registry import validate_json
+                from ..stack_models import GoalSpec, StackPreflight, StackProposal
+                from ..stack_planning import StackService
+                declaration = _tool_by_name(self.list_tools(), name)
+                if declaration is None:
+                    raise ConfigurationError('stack preparation tool is not enabled')
+                validate_json(arguments, declaration['inputSchema'], label=name)
+                service = StackService(self.router)
+                if name == 'aeep_stack_run':
+                    from ..stack_runtime import StackRuntime
+                    if self.profile != 'task' or self.router._task_activation_digest is None:
+                        raise ConfigurationError('stack execution requires an active task binding')
+                    return _tool_result(await StackRuntime(service).run(arguments['proposal_id'], arguments['inputs'],
+                        approved_side_effect=self.approved_side_effect))
+                stack_result: StackProposal | StackPreflight
+                if name == 'aeep_stack_propose':
+                    stack_result = service.propose(GoalSpec.model_validate(arguments))
+                elif name == 'aeep_stack_inspect':
+                    stack_result = service.inspect(arguments['proposal_id'])
+                elif name == 'aeep_stack_optimize':
+                    stack_result = service.optimize(arguments['proposal_id'], arguments['policy'])
+                else:
+                    stack_result = service.preflight(arguments['proposal_id'])
+                return _tool_result(stack_result.model_dump(mode='json'))
             if name in {'aeep_discover_resources', 'aeep_lookup_capability'}:
                 from ..registry import validate_json
                 declaration = _tool_by_name(self.list_tools(), name)

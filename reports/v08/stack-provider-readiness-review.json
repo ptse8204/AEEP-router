@@ -1,0 +1,21 @@
+{
+  "review_date": "2026-10-04",
+  "authority": "Operator implementation request: real onboarding and non-charging checks; no paid task execution",
+  "selection": "Existing host-exposed provider tools selected by the implementing agent",
+  "checks": [
+    {"provider": "Hugging Face", "tool": "hugging_face_hf_whoami", "purpose": "Existing connection authentication readiness", "maximum_calls": 1},
+    {"provider": "Figma", "tool": "figma_whoami", "purpose": "Existing connection authentication and advertised plan readiness", "maximum_calls": 1},
+    {"provider": "local Python", "adapter": "local-runtime", "purpose": "Pinned executable --version only", "maximum_calls": 1}
+  ],
+  "cash_ceiling_usd": 0,
+  "model_turns": 0,
+  "task_payload_disclosure": false,
+  "credential_access": "Host tools own authentication; do not read or copy credentials",
+  "retention": "Record tool outcome and readiness only; omit account names, email addresses, plan IDs and raw responses",
+  "limitations": [
+    "An existing connection does not test a new sign-in handoff",
+    "Plan membership is not billing balance, available credits or spending authority",
+    "Host connector observations are not proof of a configured standalone AEEP remote adapter",
+    "These checks are not assessment trials, qualification or admission"
+  ]
+}

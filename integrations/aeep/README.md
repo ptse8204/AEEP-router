@@ -1,18 +1,21 @@
 # AEEP Codex plugin
 
-Install the AEEP Python package, then make an operator manifest available through
-the existing project `aeep.yaml` lookup or `~/.config/aeep/config.yaml`. The local
-MCP server runs `aeep serve --transport stdio --profile assessment`.
-For an initialized assessment workspace, set the MCP process's `AEEP_MANIFEST`
-environment variable to the absolute path of its `aeep.json`, or add
-`--manifest /absolute/path/to/aeep.json` to the server's locally configured args.
+Install from the `aeep-router` repository marketplace with the commands in
+[the main README](../../README.md#install-in-codex). The plugin starts the existing
+stdio MCP server through `serve.py`, using the dedicated runtime at
+`~/.local/share/aeep/venv` and the operator manifest at
+`~/.config/aeep/config.yaml`. Missing setup stops startup with a diagnostic on
+stderr. Startup never installs dependencies or updates code.
 
-The plugin includes three task tools, onboarding instructions, and bounded tools
-to start, inspect, report on and cancel assessments. Reviewed declarative recipe
-definitions add task tools to this profile. `--profile legacy` retains the existing exports.
+The default profile exposes ordinary routing, receipts and inert stack planning.
+It does not intercept unrelated Codex tools. The manifest starts with local
+`text.stats`; other capabilities need operator configuration and their applicable
+reviews. Assessment and scoped task profiles remain separate: see
+[the integration guide](../../docs/INTEGRATIONS.md) and
+[assessment guide](../../docs/ASSESSMENT.md).
 
-The plugin selects implementations behind its own tools. It does not replace
-unrelated Codex tools or provide access to Codex authentication state. See
-[the assessment guide](../../docs/ASSESSMENT.md) for the supported local assessment
-path. Live Codex assessment remains a separate release gate. Local container boundaries
-and crash recovery have explicit opt-in release tests.
+Update both the Python runtime and the marketplace using the main README's
+commands. Bump the plugin manifest version when changing bundled plugin files;
+refreshing a marketplace does not itself install Python dependencies. Reopen Codex
+after an update. Do not edit installed cache files or replace existing manifests,
+receipts, approvals or credentials.

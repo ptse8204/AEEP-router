@@ -1,0 +1,95 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.provider-setup-observation.v1",
+      "default": "aeep.provider-setup-observation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "check_id": {
+      "title": "Check Id",
+      "type": "string"
+    },
+    "observation_id": {
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "setup_id": {
+      "title": "Setup Id",
+      "type": "string"
+    },
+    "definition_digest": {
+      "title": "Definition Digest",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "checks": {
+      "additionalProperties": {
+        "enum": [
+          "ready",
+          "blocked",
+          "unknown"
+        ],
+        "type": "string"
+      },
+      "propertyNames": {
+        "enum": [
+          "connectivity",
+          "authentication",
+          "billing",
+          "runtime"
+        ]
+      },
+      "title": "Checks",
+      "type": "object"
+    },
+    "elapsed_ms": {
+      "minimum": 0,
+      "title": "Elapsed Ms",
+      "type": "number"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "cancelled",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "cash_usd": {
+      "const": 0,
+      "default": 0,
+      "title": "Cash Usd",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "check_id",
+    "setup_id",
+    "definition_digest",
+    "expires_at",
+    "checks",
+    "elapsed_ms",
+    "status"
+  ],
+  "title": "ProviderSetupObservation",
+  "type": "object"
+}

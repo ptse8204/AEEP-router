@@ -241,6 +241,7 @@ async def test_mcp_server_import_discovers_tools(tmp_path):
         capability_prefix="imported",
     )
     assert {executor.config["tool"] for executor in descriptor.executors} == {
+        "aeep_stack_propose", "aeep_stack_inspect", "aeep_stack_optimize", "aeep_stack_preflight",
         "aeep_execute_action",
         "aeep_estimate_route_prices",
         "aeep_get_metrics",

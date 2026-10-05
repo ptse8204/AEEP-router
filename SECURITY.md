@@ -398,3 +398,24 @@ Task-command and supporting-integration access to the collector still require
 verified enforcement; receipt observations do not grant themselves trust or
 complete discovery status. Fresh telemetry settings need effective-policy review
 and cannot widen the authorized remote destinations.
+
+## Stack and setup boundaries
+
+Treat goal metadata and discovery descriptions as untrusted data. Hosts must keep
+private prompts and values out of persistent goal metadata and public capability
+queries. A selected executor is fingerprint-bound; runtime inputs cannot broaden
+the proposal's executor set. Exact proposal review does not grant a task scope or
+raise a side-effect ceiling. Stack execution is opt-in in an already reviewed,
+activated capability profile. Models have no setup, review or amendment tool.
+
+Default progress records retain no output contents. Resume requires matching
+artifacts; uncertain operations are not automatically replayed. The first runtime
+accepts confirmed-free operations and serializes dispatch. It does not claim
+containment for untrusted in-process Python or remote production support.
+
+Provider readiness definitions bind reviewed adapter code and exact destinations.
+HTTPS checks disable redirects and proxy environment inheritance, bound response
+bytes and store only readiness states. Local runtime checks pin an executable hash
+and argv. Sign-in stays with the provider/host; Codex authentication is never read.
+Provider setup is not qualification or permission to spend. Unsupported installers
+remain explicit blockers. See [STACK_PLANNING.md](docs/STACK_PLANNING.md).

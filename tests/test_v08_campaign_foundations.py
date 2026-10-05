@@ -281,7 +281,8 @@ def test_schema_seven_migration_and_private_host_key_survive_reopen(tmp_path):
     with ReceiptStore(database) as store:
         key = store.host_principal_key()
         assert len(key) == 32
-        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == 8
+        from aeep.store import LATEST_DATABASE_SCHEMA
+        assert store._connection.execute("PRAGMA user_version").fetchone()[0] == LATEST_DATABASE_SCHEMA
         snapshot = store.campaign_snapshot()
         assert snapshot.host_principal_key() == key
         assert not snapshot.list_receipts()

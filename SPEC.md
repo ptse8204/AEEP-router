@@ -965,3 +965,26 @@ not permissions, usage accounting or comparative evidence by itself. Collectors
 MUST omit raw export payloads and unknown attributes. Receipts MUST preserve
 missing discovery facts as unknown; a closed local collector MUST NOT imply
 complete upstream export or establish that a candidate was not used.
+
+## Stack contracts
+
+The additive `aeep.goal.v1`, `aeep.stack-proposal.v1` and
+`aeep.stack-preflight.v1` contracts describe host-supplied semantic graphs,
+content-addressed configurations and current execution requirements. Artifact
+schemas are in `schemas/artifact-contract.schema.json`. Setup definitions and
+observations use `aeep.provider-setup.v1` and
+`aeep.provider-setup-observation.v1`.
+
+Proposal construction must not execute task actions, install providers, access
+credentials or acquire payment authority. Unknown compatibility blocks a path.
+A successor must preserve execution consumption when adopted through amendment.
+Materialized task values are transient; durable progress contains digests and
+receipt references. First-release execution requires confirmed-free local or
+host-delegated operations. Task scope v1 retains its native command boundary.
+A reviewed capability profile can explicitly opt into `stack_execution`; omission
+preserves existing profile serialization and tool exposure.
+
+[The stack guide](docs/STACK_PLANNING.md) specifies the conservative compatibility
+subset, bounded search, command flow and incomplete release gates. Ordinary
+workflow callers keep the existing routing behavior; the internal
+`require_prepared` option lets stacks request input-bound free preparation.

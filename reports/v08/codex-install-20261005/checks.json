@@ -1,0 +1,128 @@
+[
+  {
+    "name": "compile",
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/aeep"
+    ],
+    "exit_code": 0,
+    "seconds": 0.06
+  },
+  {
+    "name": "schemas",
+    "command": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.78
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.03
+  },
+  {
+    "name": "mypy",
+    "command": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 1.91
+  },
+  {
+    "name": "policy",
+    "command": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.18
+  },
+  {
+    "name": "pytest",
+    "command": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 548.64
+  },
+  {
+    "name": "coverage-run",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 830.93
+  },
+  {
+    "name": "coverage-report",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0,
+    "seconds": 1.26
+  },
+  {
+    "name": "coverage-json",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "reports/v08/codex-install-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 1.68
+  },
+  {
+    "name": "critical-coverage",
+    "command": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "reports/v08/codex-install-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04
+  },
+  {
+    "name": "assessment-coverage",
+    "command": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "reports/v08/codex-install-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04
+  }
+]

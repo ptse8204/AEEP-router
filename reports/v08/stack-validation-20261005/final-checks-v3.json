@@ -1,0 +1,127 @@
+[
+  {
+    "name": "compile-v3",
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.066
+  },
+  {
+    "name": "schemas-v3",
+    "command": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.759
+  },
+  {
+    "name": "ruff-v3",
+    "command": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.033
+  },
+  {
+    "name": "mypy-v3",
+    "command": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.136
+  },
+  {
+    "name": "policy-v3",
+    "command": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.181
+  },
+  {
+    "name": "pytest-final-v3",
+    "command": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 554.243
+  },
+  {
+    "name": "coverage-run",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 847.269
+  },
+  {
+    "name": "coverage-report",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.282
+  },
+  {
+    "name": "coverage-json",
+    "command": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "reports/v08/stack-validation-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.672
+  },
+  {
+    "name": "critical-coverage",
+    "command": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "reports/v08/stack-validation-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.038
+  },
+  {
+    "name": "assessment-coverage",
+    "command": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "reports/v08/stack-validation-20261005/coverage.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.038
+  }
+]

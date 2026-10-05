@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.stack-preflight.v1",
+      "default": "aeep.stack-preflight.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "proposal_id": {
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "proposal_digest": {
+      "title": "Proposal Digest",
+      "type": "string"
+    },
+    "ready": {
+      "title": "Ready",
+      "type": "boolean"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "scope_requirements": {
+      "additionalProperties": true,
+      "title": "Scope Requirements",
+      "type": "object"
+    },
+    "setup_requirements": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Setup Requirements",
+      "type": "array"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "proposal_digest",
+    "ready"
+  ],
+  "title": "StackPreflight",
+  "type": "object"
+}

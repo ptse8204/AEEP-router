@@ -6687,6 +6687,7 @@ class Router:
         payment_approved: bool = False,
         human_approved: bool = False,
         allow_unsafe_executor: bool = False,
+        require_prepared: bool = False,
         _initial_outputs: dict[str, Any] | None = None,
         _initial_receipts: list[ExecutionReceipt] | None = None,
     ) -> WorkflowExecutionOutcome:
@@ -6694,7 +6695,8 @@ class Router:
 
         Economic networking uses request-bound preparation for only the current
         dependency-resolved wave.  Offline manifests retain the legacy
-        deterministic ``route``/``execute`` path.
+        deterministic ``route``/``execute`` path unless ``require_prepared``
+        requests the same input-bound preparation boundary for a free stack.
         """
 
         workflow = (
@@ -6753,7 +6755,7 @@ class Router:
                     error="workflow has no executable ready step",
                 )
 
-            if self.manifest.economic_evidence.enabled:
+            if self.manifest.economic_evidence.enabled or require_prepared:
                 currency = self.manifest.economic_evidence.settlement_currency
                 if workflow.budget.max_cash_usd is not None and currency != "USD":
                     return self._workflow_result(
