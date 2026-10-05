@@ -1,6 +1,6 @@
 # AEEP walkthrough recording
 
-[Play the 27-second MP4](aeep-demo.mp4) or view the [animated preview](aeep-demo.gif).
+[27-second MP4](aeep-demo.mp4) or view the [animated preview](aeep-demo.gif).
 Recorded on October 5, 2026 in a dedicated macOS Terminal window, using the
 installed AEEP runtime. The video is cropped to terminal content and trimmed;
 output is real. `jq` selects fields for readability. No model turn or paid API

@@ -19,7 +19,8 @@
     "id": "update-aeep-router",
     "status": "ACTIVE",
     "schedule": "Daily 09:00 America/Vancouver",
-    "mechanism": "Codex thread heartbeat; requires the app scheduler to be available"
+    "mechanism": "Codex thread heartbeat; requires the app scheduler to be available",
+    "comparison": "origin/main against installed runtime revision, not checkout HEAD"
   },
   "review": "Add launcher setup/argv test; preserve renamed-skill recursion protection by adding the current bundled skill SHA-256 while retaining historical pins. No qualification thresholds, historical evidence or assessment budgets changed.",
   "initial_focused_failure": "Two existing recursion tests rejected the first skill change because its new bytes lacked a pinned fingerprint. Added its exact fingerprint; focused tests passed afterward.",
@@ -64,5 +65,7 @@
   "legacy_mcp_handshake": {
     "passed": true,
     "tool_count": 15
-  }
+  },
+  "marketplace_source": "https://github.com/ptse8204/AEEP-router.git",
+  "marketplace_refresh_verified": true
 }

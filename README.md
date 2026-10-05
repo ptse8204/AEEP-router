@@ -21,7 +21,7 @@ choices. Selection uses local rules and evidence, without another model call.
 
 [![AEEP terminal recording: preview a route, execute it, inspect a receipt, and run three offline stacks](docs/media/aeep-demo.gif)](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
 
-[Watch the MP4](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
+[MP4 recording](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
 · [Commands and transcript](docs/media/README.md)
 · [Install in Codex](#install-in-codex)
 
@@ -100,13 +100,15 @@ diverged branch. Review the changelog before updating: AEEP is experimental.
 
 For automatic updates, ask Codex to create a daily automation:
 
-> Every day, check origin/main for this AEEP checkout. If there is an update,
+> Every day, compare origin/main with the revision installed in my AEEP runtime,
+> even if this checkout already contains the new code. If there is an update,
 > preserve at least 50 GiB free, require a clean main branch and fast-forward only.
 > Validate the update, install it into ~/.local/share/aeep/venv, run aeep doctor,
 > refresh only the aeep-router marketplace and reinstall aeep@aeep-router.
 > Preserve my manifest, receipts, grants and credentials. Stop on failures or
 > migration requirements. Notify me when an update is installed or needs attention;
-> stay quiet when nothing changed. Remind me to restart Codex after an update.
+> stay quiet when nothing changed. Record the installed revision only after
+> successful checks. Remind me to restart Codex after an update.
 
 This schedules updates through Codex while its scheduler is available; plugin
 startup itself does not download or install code. To disconnect the plugin, run

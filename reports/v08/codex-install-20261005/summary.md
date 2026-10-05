@@ -34,3 +34,9 @@ fingerprints, resources and recording provenance. Historical skill fingerprints
 remain in the recursion guard alongside the new bundled-skill fingerprint.
 No credential files, grants or existing manifests were replaced. No Docker
 operations, paid calls, provider setup, model assessments or cleanup were run.
+
+The published GitHub marketplace was installed and refreshed successfully. Its
+cache matches the published plugin files, and MCP startup passed again. See
+`published-installation.json`. The daily updater compares origin/main with the
+installed-runtime revision, including when the development checkout is already
+current. The README, marketplace catalog, GIF and MP4 each returned HTTP 200.
