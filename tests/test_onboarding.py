@@ -376,11 +376,25 @@ def test_claude_native_setup_uses_reviewed_local_snapshot_and_rejects_retry_edit
     monkeypatch.setattr(module, '_run', execute)
     monkeypatch.setattr(module, 'require_space', lambda *args: None)
     monkeypatch.setattr(module.shutil, 'which', lambda name: '/usr/bin/' + name)
+    monkeypatch.setattr(module.subprocess, 'check_output', lambda *args, **kwargs: b'')
     try:
         AssessmentRepository(router.store).review(review['digest'])
         with pytest.raises(ConfigurationError, match='interruption'):
             apply(router, review['digest'])
         snapshot = Path(review['destination']) / 'claude-catalog'
+        retained = snapshot.with_name('retained-snapshot')
+        snapshot.rename(retained)
+        outside = tmp_path / 'outside'
+        snapshot.symlink_to(outside, target_is_directory=True)
+        with pytest.raises(ConfigurationError, match='differs'):
+            apply(router, review['digest'], retry_failed=True)
+        assert not outside.exists()
+        snapshot.unlink()
+        retained.rename(snapshot)
+        monkeypatch.setattr(module.subprocess, 'check_output', lambda *args, **kwargs: b' M plugin\n')
+        with pytest.raises(ConfigurationError, match='checkout was edited'):
+            apply(router, review['digest'], retry_failed=True)
+        monkeypatch.setattr(module.subprocess, 'check_output', lambda *args, **kwargs: b'')
         installed_skill = snapshot / 'plugin/skills/SKILL.md'
         installed_skill.write_text('unreviewed edit')
         with pytest.raises(ConfigurationError, match='differs'):

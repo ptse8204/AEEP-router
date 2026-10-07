@@ -237,6 +237,9 @@ def apply(router: Router, digest: str, *, retry_failed: bool = False) -> dict[st
                 if not checkout.exists():
                     _run([git, '-c', 'core.hooksPath=/dev/null', 'clone', '--no-checkout', '--', plan.package, str(checkout)], root)
                 _run([git, '-c', 'core.hooksPath=/dev/null', 'checkout', '--detach', str(plan.version)], checkout)
+                if subprocess.check_output([git, '-c', 'core.fsmonitor=false', 'status', '--porcelain', '--untracked-files=all'],
+                                           cwd=checkout, timeout=30):
+                    raise ConfigurationError('pinned checkout was edited; preserved for inspection before retry')
                 inspect_native_catalog(checkout, plan)
                 scope = ['--scope', 'project'] if connection.host == 'claude' else []
                 native_source = str(checkout)
@@ -253,7 +256,7 @@ def apply(router: Router, digest: str, *, retry_failed: bool = False) -> dict[st
                     if any(p.is_symlink() for p in plugin.rglob('*')):
                         raise ConfigurationError('native plugin symlinks require separate reviewed setup')
                     snapshot = root / 'claude-catalog'
-                    if not snapshot.exists():
+                    if not snapshot.exists() and not snapshot.is_symlink():
                         shutil.copytree(plugin, snapshot / 'plugin')
                     copied = snapshot / 'plugin'
                     expected = {p.relative_to(plugin) for p in plugin.rglob('*') if p.is_file()}
