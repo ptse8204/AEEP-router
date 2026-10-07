@@ -186,7 +186,7 @@ def test_boundary_probe_detects_ignored_restrictions(tmp_path, monkeypatch, enfo
         target = Path(argv[-1])
         if enforced and not target.is_relative_to(cwd):
             return subprocess.CompletedProcess(argv, 1, b"", b"Operation not permitted")
-        if Path(argv[-2]).name == "touch":
+        if Path(argv[-2]).stem.lower() == "touch":
             target.touch()
             return subprocess.CompletedProcess(argv, 0, b"", b"")
         return subprocess.CompletedProcess(argv, 0, target.read_bytes(), b"")

@@ -8,6 +8,7 @@ import io
 import json
 import os
 import subprocess
+import sys
 import zipfile
 from datetime import timedelta
 from pathlib import Path
@@ -62,6 +63,7 @@ def test_unreviewed_input_and_output_mutations_reject(where, member, edit):
 
 
 @pytest.mark.parametrize('faulty', [False, True])
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_fresh_task_service_uses_reviewed_builtin_without_callback_injection(tmp_path, monkeypatch, faulty):
     recipe = workbook_recipe()
     assert recipe.extension is not None

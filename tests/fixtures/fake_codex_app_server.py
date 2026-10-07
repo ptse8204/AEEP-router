@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import argparse
 import copy
+import io
 import json
 import os
 import sys
 import time
+from contextlib import redirect_stdout
 from typing import Any
 
 
@@ -215,9 +217,18 @@ def turn_started(request: dict[str, Any], scenario: str) -> None:
             accepted = "error" in reply
         terminal("completed" if accepted else "failed")
         return
-    successful_events(conflicting_usage=scenario == "conflicting-usage")
-    if scenario == "duplicate-terminal":
-        terminal()
+    if scenario in {"conflicting-usage", "duplicate-terminal"}:
+        # Deliver the invalid terminal burst together; do not race a later write
+        # against the caller returning a result it has already observed.
+        burst = io.StringIO()
+        with redirect_stdout(burst):
+            successful_events(conflicting_usage=scenario == "conflicting-usage")
+            if scenario == "duplicate-terminal":
+                terminal()
+        sys.stdout.write(burst.getvalue())
+        sys.stdout.flush()
+    else:
+        successful_events()
 
 
 def main() -> None:

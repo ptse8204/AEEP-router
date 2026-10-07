@@ -40,7 +40,8 @@ from aeep.models import (
 from aeep.router import Router
 from aeep.tasks import TaskActivation, activate, change_state, inspect, require_activation
 
-pytestmark = pytest.mark.assessment_lifecycle
+pytestmark = [pytest.mark.assessment_lifecycle,
+              pytest.mark.skipif(sys.platform == "win32", reason="project task activation requires POSIX; Windows uses WSL")]
 
 
 @pytest.fixture

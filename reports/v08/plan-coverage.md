@@ -14,8 +14,9 @@ The same run exposed a hard-coded Docker executable in a construction-only
 fixture and Linux native-policy fixtures under forbidden system temp roots.
 The fixture uses the current Python executable; CI uses its runner-owned temp
 directory. Native sandbox policy and assessment thresholds remain unchanged.
-Windows-target mypy passes locally; actual runner verification and full required
-checks remain pending. No release, human testing, or paid provider call is included.
+The [Windows CI repair record](windows-ci-20261007/summary.md) records the
+passing local suite/coverage gates, successful Linux jobs, native Windows failure
+counts, and the second portability repair awaiting runner verification. No release, human testing, or paid provider call is included.
 
 
 ## October 7: WSL and remaining host/provider checks

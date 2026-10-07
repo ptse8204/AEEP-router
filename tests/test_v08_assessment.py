@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import asyncio
 import json
 import re
+import time
 from datetime import timedelta
 
 import pytest
@@ -37,8 +37,9 @@ from aeep.validators import ValidationContext, run_validators
 pytestmark = pytest.mark.assessment_lifecycle
 
 
-async def slow_csv(text, delimiter):
-    await asyncio.sleep(0.004)
+def slow_csv(text, delimiter):
+    # Both fixture arms use the same thread-pool dispatch path.
+    time.sleep(0.02)
     return reference_csv(text, delimiter)
 
 
@@ -46,8 +47,8 @@ def custom_record(text):
     return {"record": dict(re.findall(r"(id|name) = (value-[a-f0-9]{24})", text))}
 
 
-async def slow_record(text):
-    await asyncio.sleep(0.004)
+def slow_record(text):
+    time.sleep(0.02)
     return custom_record(text)
 
 

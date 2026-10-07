@@ -25,6 +25,7 @@ from decimal import (
     InvalidOperation,
 )
 from enum import StrEnum
+from pathlib import PurePosixPath
 from typing import Annotated, Any, ClassVar, Literal, TypeAlias
 from uuid import uuid4
 
@@ -2304,7 +2305,7 @@ class ReviewedHostSkill(StrictModel):
 
     @model_validator(mode="after")
     def absolute_skill(self) -> ReviewedHostSkill:
-        if not os.path.isabs(self.path) or os.path.basename(self.path) != "SKILL.md" or ".." in self.path.split("/"):
+        if not (os.path.isabs(self.path) or PurePosixPath(self.path).is_absolute()) or os.path.basename(self.path) != "SKILL.md" or ".." in self.path.split("/"):
             raise ValueError("supporting skill requires an exact absolute SKILL.md path")
         return self
 
@@ -2353,7 +2354,7 @@ class ManagedHostInvocation(StrictModel):
             raise ValueError("supporting tool identities must be unique")
         tool = (self.server, self.tool, self.tool_sha256)
         if self.mode == "skill":
-            if not all(skill) or any(tool) or not os.path.isabs(self.skill_path or "") or os.path.basename(self.skill_path or "") != "SKILL.md":
+            if not all(skill) or any(tool) or not (os.path.isabs(self.skill_path or "") or PurePosixPath(self.skill_path or "").is_absolute()) or os.path.basename(self.skill_path or "") != "SKILL.md":
                 raise ValueError("skill invocation requires an exact absolute path and content digest")
         elif self.mode in {"mcp_tool", "dynamic_tool"}:
             if not all(tool) or any(skill):
@@ -2452,7 +2453,9 @@ class ManagedHostExecutorConfig(StrictModel):
             raise ValueError("artifact transport requires a managed worker and JSON output")
         if self.worker_workspace is not None and self.invocation is None:
             raise ValueError("temporary workers require an explicit reviewed invocation")
-        if not os.path.isabs(self.argv[0]):
+        absolute_executable = (PurePosixPath(self.argv[0]).is_absolute()
+                               if self.managed_worker is not None else os.path.isabs(self.argv[0]))
+        if not absolute_executable:
             raise ValueError("managed-host executable must be an absolute path")
         if any(not item or "\x00" in item for item in self.argv):
             raise ValueError("managed-host argv entries must be non-empty and NUL-free")

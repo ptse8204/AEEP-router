@@ -1,4 +1,5 @@
 """A composed callback charge must bind to its canonical parent operation."""
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -41,7 +42,7 @@ def _callback_case(*, charge_parent: bool):
         resource_pool="codex.self",
         config=ManagedHostExecutorConfig(
             adapter_id="codex-app-server:1",
-            argv=("/usr/bin/codex", "app-server"),
+            argv=(sys.executable, "app-server"),
             instructions="Synthetic verifier fixture only.",
             invocation=ManagedHostInvocation(
                 mode="dynamic_tool",

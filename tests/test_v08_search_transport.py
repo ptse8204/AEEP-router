@@ -110,6 +110,7 @@ def test_invalid_tree_is_rejected_before_any_write(tmp_path, files):
     assert list(tmp_path.iterdir()) == []
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 def test_tree_transfer_preserves_unicode_and_refuses_overwrite_or_symlink(tmp_path):
     files = [{'path':'nested/λ.txt','text':'\u03b1\nλ\n'}, {'path':'empty','text':''}]
     result = transfer(tmp_path, files)

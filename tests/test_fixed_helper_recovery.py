@@ -26,6 +26,7 @@ from aeep.router import Router
 
 
 @pytest.mark.parametrize("failure", ["exit", "timeout"])
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_fixed_partial_write_requires_recovery_after_restart(tmp_path, monkeypatch, failure):
     root = tmp_path.resolve()
     data = root / 'data'

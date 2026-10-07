@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 from dataclasses import replace
 from pathlib import Path
 
@@ -504,6 +505,7 @@ async def test_catalog_metrics_worker_binding_is_exact_and_metadata_never_implie
 
 
 @pytest.mark.parametrize('fault', ['none', 'bad_export', 'forged_frame', 'malformed_frame'])
+@pytest.mark.skipif(not hasattr(os, 'killpg'), reason='worker relay requires POSIX process groups')
 def test_catalog_metrics_real_http_and_stdio_relay(tmp_path, fault):
     import subprocess
     import sys
@@ -524,8 +526,11 @@ response=connection.getresponse(); status=response.status; response.read(); conn
 print(FRAME,flush=True)
 '''.replace('BODY',repr(b'{"invalid":NaN}' if fault=='bad_export' else json.dumps(body).encode()))
        .replace('FRAME',repr('not json' if fault=='malformed_frame' else json.dumps({'method':NOTIFICATION,'params':{}}) if fault=='forged_frame' else json.dumps({'method':'fixture/status','params':{'ok':True}}))))
-    program = 'import sys; from aeep.hosts.codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
-    result = subprocess.run([sys.executable,'-c',program,sys.executable,str(child),scope],input=b'',capture_output=True,timeout=10)
+    from aeep.hosts import codex_metrics
+    # Match worker-launch: import the standalone stdlib relay, not all of AEEP.
+    program = 'import sys; sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
+    relay_directory = str(Path(codex_metrics.__file__).parent)
+    result = subprocess.run([sys.executable,'-c',program,relay_directory,sys.executable,str(child),scope],input=b'',capture_output=True,timeout=10)
     frames = [json.loads(line) for line in result.stdout.splitlines()]
     observations = [validate_snapshot(frame['params'],scope) for frame in frames if frame['method']==NOTIFICATION]
     assert observations and observations[-1]['collector_closed'] and not observations[-1]['delivery_complete']
@@ -541,6 +546,7 @@ print(FRAME,flush=True)
     assert b'PRIVATE_' not in result.stdout and b'fixture-skill' not in result.stdout
 
 
+@pytest.mark.skipif(not hasattr(os, 'killpg'), reason='worker relay requires POSIX process groups')
 def test_catalog_metrics_relay_termination_cleans_up_child(tmp_path):
     import os
     import subprocess
@@ -549,8 +555,11 @@ def test_catalog_metrics_relay_termination_cleans_up_child(tmp_path):
     scope = 'aeep-metrics-'+'e'*32
     child = tmp_path/'host.py'
     child.write_text('import json,os,time\nprint(json.dumps({"method":"ready","params":{"pid":os.getpid()}}),flush=True)\ntime.sleep(60)\n')
-    program = 'import sys; from aeep.hosts.codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
-    process = subprocess.Popen([sys.executable,'-c',program,sys.executable,str(child),scope],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+    from aeep.hosts import codex_metrics
+    # Match worker-launch: import the standalone stdlib relay, not all of AEEP.
+    program = 'import sys; sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
+    relay_directory = str(Path(codex_metrics.__file__).parent)
+    process = subprocess.Popen([sys.executable,'-c',program,relay_directory,sys.executable,str(child),scope],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
     try:
         ready = json.loads(process.stdout.readline())
         pid = ready['params']['pid']

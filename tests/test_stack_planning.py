@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import sys
 from datetime import timedelta
 
 import pytest
@@ -450,6 +451,7 @@ async def test_completed_receipt_can_recover_lost_checkpoint_without_replay(monk
         await router.close()
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 def test_reviewed_stack_task_profile_is_explicit_and_keeps_operator_ceiling(tmp_path, monkeypatch):
     import sys
 

@@ -148,6 +148,7 @@ async def _run_lifecycle(tmp_path, *, native_launcher: str | None = None, monkey
         await router.close()
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_local_discovery_intake_and_reviewed_task_profile_lifecycle(tmp_path, monkeypatch):
     await _run_lifecycle(tmp_path, monkeypatch=monkeypatch)
 

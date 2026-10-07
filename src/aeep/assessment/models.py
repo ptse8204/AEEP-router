@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from decimal import Decimal
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Annotated, Any, Literal
 
 from pydantic import (
@@ -346,7 +346,7 @@ class DifferentialEnvironment(StrictModel):
                 or self.treatment_inventory != {**self.control_inventory, **self.candidate_inventory}
                 or set(self.candidate_aliases) & set(self.control_inventory)):
             raise ValueError("treatment inventory must equal control plus the candidate bundle")
-        if any(not Path(path).is_absolute() or ".." in Path(path).parts for path in self.candidate_paths):
+        if any(not PurePosixPath(path).is_absolute() or ".." in PurePosixPath(path).parts for path in self.candidate_paths):
             raise ValueError("candidate paths must be bounded absolute worker paths")
         if self.candidate_dynamic_tools:
             if (self.candidate_paths or self.candidate_aliases

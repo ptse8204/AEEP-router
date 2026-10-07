@@ -59,6 +59,7 @@ async def test_native_single_process_timeout_and_normal_error(tmp_path):
 
 def test_single_process_missing_runtime_and_drift_rejected(tmp_path, monkeypatch):
     monkeypatch.setattr('aeep.hosts.codex_sandbox.sys.platform', 'darwin')
+    monkeypatch.setattr('aeep.hosts.codex_sandbox.os.geteuid', lambda: 1000, raising=False)
     b = NativeSandboxConfig(binary=str(tmp_path / 'codex'), binary_sha256='sha256:'+'a'*64,
                            project_root=str(tmp_path), single_process=True)
     with pytest.raises(ConfigurationError, match='pinned Python'):

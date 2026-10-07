@@ -51,7 +51,9 @@ def test_reviewed_security_profile_is_private_bounded_and_shared_by_arms(tmp_pat
     with pytest.raises(ConfigurationError, match="snapshot"):
         worker.argv(("exec",), execution_id="case")
     snapshot = worker.prepare_security(tmp_path)
-    assert snapshot is not None and snapshot.stat().st_mode & 0o777 == 0o400
+    assert snapshot is not None and not snapshot.stat().st_mode & 0o200
+    if os.name == "posix":
+        assert snapshot.stat().st_mode & 0o777 == 0o400
     argv = worker.argv(("exec",), execution_id="case", security_path=snapshot)
     assert "seccomp=" + str(snapshot) in argv
     assert "type=bind" not in " ".join(argv)
@@ -323,7 +325,7 @@ async def test_artifact_prompt_uses_paths_and_exec_start_rejects_transport():
             assert context.request.input['workbook_b64'] == 'secret-encoded-input'
             return RawExecution(status=ExecutionStatus.SUCCESS, output={})
 
-    config = {'adapter_id':'fixture','argv':[sys.executable], 'instructions':'Task {input}; action {action}', 'managed_worker':binding().model_dump(),
+    config = {'adapter_id':'fixture','argv':[binding().binary], 'instructions':'Task {input}; action {action}', 'managed_worker':binding().model_dump(),
         'artifact':{'input_field':'workbook_b64','output_field':'workbook_b64','input_name':'input.xlsx','output_name':'output.xlsx'}}
     spec = ExecutorSpec(id='fixture',capability='fixture',kind='host_managed',resource_pool='pool',description='fixture',config=config)
     registry = ManagedHostRegistry()

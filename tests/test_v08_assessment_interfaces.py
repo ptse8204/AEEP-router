@@ -46,7 +46,12 @@ async def test_completed_worker_exit_preserves_admission_when_reading_report(tmp
         env={**os.environ, "PYTHONPATH": os.pathsep.join([str(root / "src"), str(root / "tests")])},
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
     )
-    _out, errors = await asyncio.wait_for(process.communicate(), timeout=60)
+    try:
+        _out, errors = await asyncio.wait_for(process.communicate(), timeout=180)
+    finally:
+        if process.returncode is None:
+            process.kill()
+            await asyncio.wait_for(process.communicate(), timeout=10)
     assert process.returncode == 0, errors.decode()
     router = Router.from_manifest(manifest_file)
     try:

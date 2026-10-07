@@ -21,6 +21,8 @@ def forbidden(*args, **kwargs):
 
 @pytest.fixture
 def fixed(tmp_path, monkeypatch):
+    if sys.platform == "win32":
+        pytest.skip("native task integration requires POSIX; Windows uses WSL")
     root = tmp_path.resolve()
     monkeypatch.setattr(NativeSandboxConfig, "argv", lambda self, command: command)
     monkeypatch.setattr(Router, "route", forbidden)

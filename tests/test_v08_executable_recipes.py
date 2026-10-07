@@ -83,8 +83,8 @@ def setup(tmp_path, monkeypatch, *, recipe=None, real=False):
     service.repository.put("recipe", recipe.recipe_id, recipe)
     environment = AssessmentEnvironment(environment_id="recipe-container", kind="container", identity={},
         container_image=os.environ.get("AEEP_CONTAINER_IMAGE", "sha256:" + "1" * 64),
-        container_runtime=os.environ.get("AEEP_CONTAINER_RUNTIME", "/fixture/docker"),
-        container_socket=os.environ.get("AEEP_CONTAINER_SOCKET", "/fixture/docker.sock"))
+        container_runtime=os.environ.get("AEEP_CONTAINER_RUNTIME", os.path.abspath("/fixture/docker")),
+        container_socket=os.environ.get("AEEP_CONTAINER_SOCKET", os.path.abspath("/fixture/docker.sock")))
     request = prepare(service, subject_id=subject.subject_id, recipe_id=recipe.recipe_id,
         authorization_id="fixture-grant", environment=environment, seed=19)
     service.repository.grant(AssessmentAuthorization(authorization_id="fixture-grant",

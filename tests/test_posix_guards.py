@@ -35,3 +35,21 @@ async def test_process_guards_reject_before_launch(monkeypatch):
     monkeypatch.delattr(os, 'getsid', raising=False)
     with pytest.raises(ConfigurationError, match='POSIX'):
         await execute_single_process(None, [], {}, None, 1, 100)
+
+
+def test_worker_executable_uses_linux_paths_and_local_executable_uses_host_paths(monkeypatch):
+    import ntpath
+    from types import SimpleNamespace
+
+    import aeep.models as models
+
+    monkeypatch.setattr(models, 'os', SimpleNamespace(path=ntpath))
+    fields = {'adapter_id': 'fixture', 'instructions': 'fixture', 'argv': ['/opt/codex/codex']}
+    worker = models.ManagedHostExecutorConfig(**fields, managed_worker={'worker_id': 'fixture'})
+    assert worker.argv == ('/opt/codex/codex',)
+    with pytest.raises(ValueError, match='absolute'):
+        models.ManagedHostExecutorConfig(**fields)
+    fields['argv'] = [r'C:\tools\codex.exe']
+    assert models.ManagedHostExecutorConfig(**fields).argv == tuple(fields['argv'])
+    with pytest.raises(ValueError, match='absolute'):
+        models.ManagedHostExecutorConfig(**fields, managed_worker={'worker_id': 'fixture'})

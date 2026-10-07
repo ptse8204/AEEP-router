@@ -242,7 +242,7 @@ def test_search_mapping_reads_bounded_files_and_rejects_escape(tmp_path):
 
     root = tmp_path / "root"
     root.mkdir()
-    (root / "answer.txt").write_text("other\nneedle\n")
+    (root / "answer.txt").write_text("other\nneedle\n", encoding="utf-8", newline="")
     spec = host_spec("search", Path(sys.executable), root)
     request = ActionRequest(capability=spec.capability, input={"root": str(root), "query": "needle", "path": "."})
     context = ExecutionContext(spec=spec, request=request, estimate=spec.estimate, attempt=1)

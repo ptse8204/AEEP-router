@@ -100,6 +100,7 @@ async def test_untrusted_executor_cannot_hide_component_charges(tmp_path, monkey
         await router.close()
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_scoped_dispatch_rechecks_pause_expiry_drift_and_attempt_allowance(tmp_path, monkeypatch):
     root = tmp_path.resolve()
     boundary = NativeSandboxConfig(binary=str(root / 'fixture-launcher'), binary_sha256='sha256:' + 'a'*64,
@@ -235,6 +236,7 @@ def test_native_sandbox_pins_launcher_and_keeps_argv_and_config_local(tmp_path):
         NativeSandboxConfig.model_validate({**config.model_dump(), 'write_roots': [str(tmp_path.resolve())]})
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 def test_native_sandbox_unicode_paths_compile_as_toml(tmp_path):
     root = (tmp_path / 'project-😀').resolve()
     root.mkdir()
@@ -245,6 +247,7 @@ def test_native_sandbox_unicode_paths_compile_as_toml(tmp_path):
     assert parsed['permissions']['aeep-native-task']['filesystem'][str(root / 'inputs-😀')] == 'read'
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 def test_native_sandbox_denies_implicit_temp_and_declared_subtrees(tmp_path):
     root = tmp_path.resolve()
     denied = root / 'private'
@@ -266,6 +269,7 @@ def test_native_sandbox_denies_implicit_temp_and_declared_subtrees(tmp_path):
         config.model_copy(update={'read_roots': [str(root / 'input{old}')]}).permission_overrides()
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 def test_native_policy_change_invalidates_reviewed_route_and_receipt_identity(tmp_path, monkeypatch):
     import aeep.hosts.codex_sandbox as sandbox
 
@@ -308,6 +312,7 @@ def test_native_environment_requires_literal_reviewed_scratch(tmp_path):
             config.validate_environment(value)
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_native_dispatch_hashes_once_after_authority_check(tmp_path, monkeypatch):
     binary = tmp_path / 'codex'
     binary.write_bytes(b'fixture')
@@ -340,6 +345,7 @@ async def test_native_dispatch_hashes_once_after_authority_check(tmp_path, monke
 
 
 @pytest.mark.parametrize('failure', ['exit', 'timeout'])
+@pytest.mark.skipif(sys.platform == "win32", reason="native task integration requires POSIX; Windows uses WSL")
 async def test_scoped_partial_write_requires_recovery_after_restart(tmp_path, monkeypatch, failure):
     root = tmp_path.resolve()
     data = root / 'data'

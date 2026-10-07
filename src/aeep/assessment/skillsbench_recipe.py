@@ -57,8 +57,8 @@ def skillsbench_offer_letter_recipe(asset_root: Path | None = None) -> RecipeDef
                 existing._pinned_bytes(asset_root / name,
                     hashlib.sha256(assets['original_files'][name].encode()).hexdigest(), 20000)
         data = json.loads(data_bytes)
-        program = (root / 'skillsbench_offer_letter_program.py').read_text()
-        grader = (root / 'skillsbench_offer_letter_grader.py').read_text()
+        program = (root / 'skillsbench_offer_letter_program.py').read_text(encoding="utf-8")
+        grader = (root / 'skillsbench_offer_letter_grader.py').read_text(encoding="utf-8")
         literals = assets['fixtures']
         fixtures = []
         for item in literals:

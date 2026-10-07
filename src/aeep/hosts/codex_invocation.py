@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Protocol
 
 from ..errors import ConfigurationError
@@ -172,9 +172,10 @@ def isolated_config(catalog: dict[str, Any], target: ManagedHostInvocation, *, v
     skill_config = []
     supporting = {item.path: item for item in target.supporting_skills}
     found_supporting: set[str] = set()
+    skill_path_type = PurePosixPath if reviewed_worker_files is not None or verified_worker_skill else Path
     for skill in catalog["skills"]:
         path = skill["path"]
-        if not isinstance(path, str) or not Path(path).is_absolute():
+        if not isinstance(path, str) or not skill_path_type(path).is_absolute():
             raise ConfigurationError("Codex skill has no explicit absolute path")
         selected = (
             target.mode == "skill"
@@ -214,7 +215,7 @@ def isolated_config(catalog: dict[str, Any], target: ManagedHostInvocation, *, v
                 raise ConfigurationError("supporting skill dependencies require a reviewed workflow mapping")
             found_supporting.add(path)
             selected = True
-        skill_config.append({"path": str(Path(path).parent), "enabled": selected})
+        skill_config.append({"path": str(skill_path_type(path).parent), "enabled": selected})
     if found_supporting != set(supporting):
         raise ConfigurationError("reviewed supporting skill is absent from host inventory")
     overrides["skills.config"] = skill_config

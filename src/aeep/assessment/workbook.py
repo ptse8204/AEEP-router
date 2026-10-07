@@ -91,11 +91,11 @@ def workbook_recipe() -> RecipeDefinition:
     if not root.is_dir():
         root = Path(sysconfig.get_path('data')) / 'share' / 'aeep' / 'integrations' / 'assessment-runtime'
     try:
-        program = (root / 'workbook_program.py').read_text()
-        grader = (root / 'workbook_grader.py').read_text()
+        program = (root / 'workbook_program.py').read_text(encoding="utf-8")
+        grader = (root / 'workbook_grader.py').read_text(encoding="utf-8")
         fixtures = [RecipeLiteralFixture(input=item['input'], output=item['expected'], grader_output=item['output'])
-                    for item in json.loads((root / 'workbook-grader-fixtures.json').read_text())]
-        faults = list(json.loads((root / 'workbook-faults.json').read_text()).values())
+                    for item in json.loads((root / 'workbook-grader-fixtures.json').read_text(encoding="utf-8"))]
+        faults = list(json.loads((root / 'workbook-faults.json').read_text(encoding="utf-8")).values())
     except (OSError, ValueError) as exc:
         raise ConfigurationError('installed workbook recipe assets are unavailable') from exc
 
