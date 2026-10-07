@@ -52,9 +52,9 @@ jobs:
       - name: Exercise installer inside WSL
         shell: pwsh
         run: |
-          $source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WORKSPACE").Trim()
-          $release = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()
-          wsl -d Ubuntu-24.04 -u root -- bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"
+          $source = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:GITHUB_WORKSPACE").Trim()
+          $release = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()
+          wsl -d Ubuntu-24.04 -u root --exec bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"
           if ($LASTEXITCODE) { throw 'WSL installer acceptance failed' }
           Get-PSDrive -PSProvider FileSystem | Select-Object Name, Free, Used | ConvertTo-Json | Set-Content wsl-evidence/windows-storage-after.json
       - uses: actions/upload-artifact@v4

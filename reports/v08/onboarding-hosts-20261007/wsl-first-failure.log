@@ -1,0 +1,46 @@
+wsl (1)	Exercise installer inside WSL	﻿2026-10-07T07:50:40.8158987Z ##[group]Run $source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WORKSPACE").Trim()
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8160039Z ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WORKSPACE").Trim()^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8160719Z ^[[36;1m$release = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8161470Z ^[[36;1mwsl -d Ubuntu-24.04 -u root -- bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8162123Z ^[[36;1mif ($LASTEXITCODE) { throw 'WSL installer acceptance failed' }^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8162925Z ^[[36;1mGet-PSDrive -PSProvider FileSystem | Select-Object Name, Free, Used | ConvertTo-Json | Set-Content wsl-evidence/windows-storage-after.json^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8239272Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8239654Z env:
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8239831Z   WSL_UTF8: 1
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8240049Z   AEEP_CHECK_ROOT: D:\aeep-wsl-1-37589689634
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8240476Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8240962Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8241431Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8241859Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8242284Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:40.8242613Z ##[endgroup]
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:41.2672501Z wslpath: D:aAEEP-routerAEEP-router
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.8726011Z ^[[31;1mInvalidOperation: ^[[0mD:\a\_temp\f9cd5fab-1d8d-4a1a-9433-c34eaec1c2b3.ps1:2^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.8726998Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.8728313Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   2 | ^[[0m ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WOR^[[0m …^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.8729204Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.8730298Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mYou cannot call a method on a null-valued expression.^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:50:45.9288572Z ##[error]Process completed with exit code 1.
+wsl (2)	Exercise installer inside WSL	﻿2026-10-07T07:50:37.0330551Z ##[group]Run $source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WORKSPACE").Trim()
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0331736Z ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WORKSPACE").Trim()^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0333091Z ^[[36;1m$release = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0334314Z ^[[36;1mwsl -d Ubuntu-24.04 -u root -- bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0335410Z ^[[36;1mif ($LASTEXITCODE) { throw 'WSL installer acceptance failed' }^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0336717Z ^[[36;1mGet-PSDrive -PSProvider FileSystem | Select-Object Name, Free, Used | ConvertTo-Json | Set-Content wsl-evidence/windows-storage-after.json^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0442986Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0443329Z env:
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0443490Z   WSL_UTF8: 1
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0443695Z   AEEP_CHECK_ROOT: D:\aeep-wsl-2-37589689634
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0444531Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0444995Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0445449Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0445840Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0446225Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:37.0446524Z ##[endgroup]
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.1244985Z wslpath: D:aAEEP-routerAEEP-router
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.4468063Z ^[[31;1mInvalidOperation: ^[[0mD:\a\_temp\4b8f6312-2110-4ba7-adf6-e3df8e6220a3.ps1:2^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.4469083Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.4469891Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   2 | ^[[0m ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root -- wslpath -u "$env:GITHUB_WOR^[[0m …^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.4471113Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.4472749Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mYou cannot call a method on a null-valued expression.^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:50:44.5127303Z ##[error]Process completed with exit code 1.
