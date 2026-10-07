@@ -1,6 +1,7 @@
 # Windows CI repair — October 7, 2026
 
-Source under verification: `dee2792bd3e9f4ba9213f936ea90ab7c23c5c02a`.
+Current source under verification: `41531fc93c0f2db49f43b0bc20f4b8075375ed52`.
+The earlier phase results below apply to their linked revisions.
 
 - POSIX-only file and process operations reject missing primitives before effects.
   Artifact reads retain the portable fallback; symlink protections remain enabled
@@ -90,3 +91,47 @@ fixtures, exact LF canaries, and search input fixtures were corrected. The trust
 SkillsBench software test writes its identical contained source to a temporary
 UTF-8 file, avoiding Windows' command-line limit without changing the recipe or
 its container execution contract. Native Windows still needs another smoke run.
+
+## Full local verification and remaining runner check
+
+On frozen revision `074a60eccf565ee2653e838a24ccffaa0f005fe3`, ordinary pytest
+passed 1,293 tests with 21 skipped (607.18 seconds). Branch coverage passed the
+same tests (928.27 seconds); critical and assessment coverage gates pass. The
+`final-*` files in this directory retain that revision's results. Compile, schema,
+Ruff, native and Windows-target typing, and policy checks also passed.
+
+[Run 37677142838](https://github.com/ptse8204/AEEP-router/actions/runs/37677142838)
+passed the native Windows portability smoke, DSH, and real container boundaries
+(61 passed, six skipped). Its macOS suite passed 1,273 tests with 37 skipped but
+still timed out in four relay cases. The diagnostic run
+[37680861506](https://github.com/ptse8204/AEEP-router/actions/runs/37680861506)
+placed the stall in HTTP server initialization. The loopback collector now binds
+without HTTPServer's unnecessary reverse-DNS lookup. The relay tests reject any
+attempt to resolve the server name, retain their 10-second deadline, and emit a
+stack trace on a stall. All 31 focused relay/primitive checks pass locally.
+
+The diagnostic run was canceled after its completed macOS failure was retrieved.
+[Run 37681197389](https://github.com/ptse8204/AEEP-router/actions/runs/37681197389)
+checks the follow-up. Native Windows setup remains outside the supported
+macOS/Linux/WSL onboarding scope; unsupported protected operations fail closed.
+No security policy, campaign threshold, or provider admission was relaxed.
+
+The follow-up macOS early relay gate passed on Actions. Exact follow-up review
+under the standing delegation (software regression checks, not campaign evidence):
+
+- `src/aeep/hosts/codex_metrics.py`: `d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1`
+- `tests/test_v08_codex_invocation.py`: `fe66e8d00c08fb777a340cab9adfff9d73d78613394e9493e2b698cd57115070`
+- `tests/test_v08_skillsbench_recipe.py`: `9f7a192a507a584f9543c8292501166ee50d702ab1ded4dc1ffeefad0fcf66fb`
+- `tests/test_v08_managed_workers.py`: `767d4866dac1dab77fe125e09962996f03850fb7ee5b450e24d35872498baa4d`
+- `tests/test_posix_guards.py`: `ef7117c136e5b44b2e88ce69aaf5e614a453dd25285e02e977b7cebd9d296c66`
+
+Linux 3.11 and 3.12 each passed 1,276 tests with 37 skipped and failed only the
+new Windows-path simulation: `ntpath.isabs('/opt/...')` differs before Python
+3.13. The simulation now uses `PureWindowsPath.is_absolute` consistently across
+Python versions; six focused guards pass. Production validation is unchanged.
+Linux 3.13 passed 1,277 tests, 37 skipped, and coverage (81%), then rejected the
+changed fake-server fixture's old lock digest. The exact fixture review and prior
+lock are retained here; only its active digest was updated. All required strict
+router compatibility checks pass locally with the reviewed fixture.
+
+Updated `tests/test_posix_guards.py`: `ea531187a2f7411050e6170de0bd466593a826ff046a198ddfed4052ab21e922`.

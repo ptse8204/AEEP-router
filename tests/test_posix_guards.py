@@ -38,12 +38,13 @@ async def test_process_guards_reject_before_launch(monkeypatch):
 
 
 def test_worker_executable_uses_linux_paths_and_local_executable_uses_host_paths(monkeypatch):
-    import ntpath
+    from pathlib import PureWindowsPath
     from types import SimpleNamespace
 
     import aeep.models as models
 
-    monkeypatch.setattr(models, 'os', SimpleNamespace(path=ntpath))
+    windows_paths = SimpleNamespace(isabs=lambda value: PureWindowsPath(value).is_absolute())
+    monkeypatch.setattr(models, 'os', SimpleNamespace(path=windows_paths))
     fields = {'adapter_id': 'fixture', 'instructions': 'fixture', 'argv': ['/opt/codex/codex']}
     worker = models.ManagedHostExecutorConfig(**fields, managed_worker={'worker_id': 'fixture'})
     assert worker.argv == ('/opt/codex/codex',)
