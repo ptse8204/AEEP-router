@@ -10,9 +10,6 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    env:
-      # Native-policy fixtures must not request access beneath /tmp or /var/tmp.
-      TMPDIR: ${{ runner.temp }}
     strategy:
       fail-fast: false
       matrix:
@@ -43,11 +40,16 @@ jobs:
       - run: python examples/job_application/campaign.py --check
       - run: aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact
       - run: coverage run --branch -m pytest
+        env:
+          # Native-policy fixtures must not request access beneath /tmp or /var/tmp.
+          TMPDIR: ${{ runner.temp }}
       - run: coverage json -o reports/v08/coverage.json
       - run: python scripts/check_critical_coverage.py reports/v08/coverage.json
       - run: python scripts/check_assessment_coverage.py reports/v08/coverage.json
       - run: coverage report -m
       - run: aeep verify router-complete --profile all --strict --json
+        env:
+          TMPDIR: ${{ runner.temp }}
       - run: python -m build
 
   dsh-plugin:
