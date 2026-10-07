@@ -528,7 +528,7 @@ print(FRAME,flush=True)
        .replace('FRAME',repr('not json' if fault=='malformed_frame' else json.dumps({'method':NOTIFICATION,'params':{}}) if fault=='forged_frame' else json.dumps({'method':'fixture/status','params':{'ok':True}}))))
     from aeep.hosts import codex_metrics
     # Match worker-launch: import the standalone stdlib relay, not all of AEEP.
-    program = 'import faulthandler,sys; faulthandler.dump_traceback_later(5); sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
+    program = 'import faulthandler,socket,sys; faulthandler.dump_traceback_later(5); socket.getfqdn=lambda *a: sys.exit(99); sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
     relay_directory = str(Path(codex_metrics.__file__).parent)
     result = subprocess.run([sys.executable,'-c',program,relay_directory,sys.executable,str(child),scope],input=b'',capture_output=True,timeout=10)
     frames = [json.loads(line) for line in result.stdout.splitlines()]
@@ -557,7 +557,7 @@ def test_catalog_metrics_relay_termination_cleans_up_child(tmp_path):
     child.write_text('import json,os,time\nprint(json.dumps({"method":"ready","params":{"pid":os.getpid()}}),flush=True)\ntime.sleep(60)\n')
     from aeep.hosts import codex_metrics
     # Match worker-launch: import the standalone stdlib relay, not all of AEEP.
-    program = 'import faulthandler,sys; faulthandler.dump_traceback_later(5); sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
+    program = 'import faulthandler,socket,sys; faulthandler.dump_traceback_later(5); socket.getfqdn=lambda *a: sys.exit(99); sys.path.insert(0,sys.argv.pop(1)); from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))'
     relay_directory = str(Path(codex_metrics.__file__).parent)
     process = subprocess.Popen([sys.executable,'-c',program,relay_directory,sys.executable,str(child),scope],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
     try:

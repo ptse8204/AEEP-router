@@ -14,6 +14,7 @@ import subprocess
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import TCPServer
 from typing import Any
 
 NOTIFICATION = 'aeep/catalogMetrics'
@@ -174,7 +175,15 @@ def relay(argv: list[str], scope: str) -> int:
             self.end_headers()
             self.wfile.write(b'{}')
 
-    server = HTTPServer(('127.0.0.1', 0), Handler)
+    class LoopbackServer(HTTPServer):
+        def server_bind(self) -> None:
+            # This collector uses a literal loopback address; reverse DNS is unnecessary
+            # and can block startup on hosts without a working resolver.
+            TCPServer.server_bind(self)
+            self.server_name = 'localhost'
+            self.server_port = self.server_address[1]
+
+    server = LoopbackServer(('127.0.0.1', 0), Handler)
     thread = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': .05}, daemon=True)
     thread.start()
     endpoint = f'http://127.0.0.1:{server.server_port}/v1/metrics'
