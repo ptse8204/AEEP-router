@@ -80,7 +80,7 @@ async def test_worker_binary_not_host_dependency_and_environment_cannot_leak():
     with pytest.raises(ConfigurationError, match="inherited"):
         CodexExecAdapter(wrong)
     wrong.config["environment_allowlist"] = []
-    wrong.config["argv"] = [sys.executable]
+    wrong.config["argv"] = ["/opt/other/codex"]
     with pytest.raises(ConfigurationError, match="exact binary"):
         CodexExecAdapter(wrong)
     await host.close()
@@ -295,7 +295,7 @@ async def test_artifact_read_failure_preserves_usage_and_cleans_worker(monkeypat
     host.transport.close = AsyncMock()
     raw = RawExecution(status=ExecutionStatus.SUCCESS, output={'completed': True}, resources=ResourceVector(output_tokens=7))
     monkeypatch.setattr(host, '_execute', AsyncMock(side_effect=lambda context: raw.model_copy(deep=True)))
-    config = ManagedHostExecutorConfig(adapter_id='fixture', argv=[sys.executable], instructions='fixture', managed_worker={},
+    config = ManagedHostExecutorConfig(adapter_id='fixture', argv=['/opt/fixture'], instructions='fixture', managed_worker={},
         artifact={'input_field':'workbook_b64','output_field':'workbook_b64','input_name':'input.xlsx','output_name':'output.xlsx'})
     ctx = ManagedHostExecutionContext(request=ActionRequest(capability='fixture'), instruction='fixture', config=config, attempt=1, attempt_id='fixture')
     result = await host.execute(ctx)
