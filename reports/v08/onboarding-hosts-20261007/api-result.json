@@ -1,0 +1,42 @@
+{
+  "scope": "Actual application bridge dispatch; no model request or provider credentials",
+  "before": [
+    "aeep_list_capabilities",
+    "aeep_route_action",
+    "aeep_discover_resources",
+    "aeep_lookup_capability",
+    "aeep_stack_propose",
+    "aeep_stack_inspect",
+    "aeep_stack_optimize",
+    "aeep_stack_preflight",
+    "aeep_discovery_status",
+    "aeep_stack_recommend"
+  ],
+  "after": [
+    "aeep_list_capabilities",
+    "aeep_route_action",
+    "aeep_discover_resources",
+    "aeep_lookup_capability",
+    "aeep_stack_propose",
+    "aeep_stack_inspect",
+    "aeep_stack_optimize",
+    "aeep_stack_preflight",
+    "aeep_stack_recommend"
+  ],
+  "denied": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"error\": \"tool denied for this connection\", \"error_type\": \"ConfigurationError\"}"
+      }
+    ],
+    "isError": true,
+    "structuredContent": {
+      "error": "tool denied for this connection",
+      "error_type": "ConfigurationError"
+    }
+  },
+  "status": "passed",
+  "runnable_example": "schema export passed; missing credentials reject before network/model request",
+  "paid_provider_status": "unverified; no credentials or paid request"
+}

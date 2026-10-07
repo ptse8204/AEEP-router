@@ -1,5 +1,43 @@
 # 0.8 plan coverage and remaining work
 
+## October 7: WSL and remaining host/provider checks
+
+The operator requested WSL and remaining host/provider checks, authorized GitHub
+Actions and a push to the repository, and deferred human testing. The
+[host check record](onboarding-hosts-20261007/summary.md) keeps actual host evidence
+separate from mocks, provider claims and paid execution.
+
+Actual WSL 1 and WSL 2 on Windows Server 2025 passed the isolated installer journey.
+The runs found a Windows packaging bug: generated shell scripts had CRLF line
+endings. The builder now writes the exact bytes used for its checksum. A follow-up
+workflow puts build dependencies and caches on the filesystem checked for space.
+
+Installed Claude Code 2.1.292 and DSH's Cordis/MCP services passed connection
+inventory and reload checks. DSH rejected a stale declaration after revocation;
+the connection-bound API bridge did too. Claude's native permission declaration
+was written/restored, but no model turn tested its enforcement. Its MCP inventory
+still lists a tool denied by native permissions; AEEP supplies selective visibility.
+
+A native Claude marketplace check found that its remote `ref` accepts branches
+and tags, not arbitrary commits. Claude setup now creates a disclosed AEEP-owned
+local catalog containing only the plugin from the reviewed commit. Real native
+installation, inventory import, skill disable/restore and file equality passed.
+Retry rejects edited plugin copies. Microsoft Learn's public HTTPS MCP passed
+modern negotiation, tool listing and a read-only documentation search.
+
+The [repair review](onboarding-hosts-20261007/repair-review.json) records the finite
+changes under standing authority. Both full local runs passed 1,287 tests with
+21 skipped. Combined coverage is 81.32%; both required branch gates passed.
+Compile, schema, lint, typing, policy, compatibility and all 13 DSH JavaScript
+checks passed. An Actions lifecycle fixture had a machine-specific Docker path;
+its two cases pass locally after the portable-executable repair, with the same
+assertions. The repaired assessment-boundary job passed in Actions; Linux/macOS
+matrix jobs remain in progress in the saved CI status. Native
+Windows CI reports POSIX-only type errors; native Windows remains outside this
+macOS/Linux/WSL delivery. Paid provider execution, protected sign-in, model-mediated
+host permission checks and first-time human usability remain unverified. No release
+was published, no production agent configuration changed, and no paid call ran.
+
 
 ## October 6: onboarding, recommendations and agent controls
 

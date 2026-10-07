@@ -1,0 +1,61 @@
+{
+  checks: [
+    'actual Cordis tools service receives distinct server inventories',
+    'actual DSH dispatch succeeds then rejects stale declaration after revocation',
+    'reload hides denied tool; restore keeps other connection denied'
+  ],
+  initial: [
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_list_capabilities',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_route_action',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_discover_resources',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_lookup_capability',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_propose',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_inspect',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_optimize',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_preflight',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_discovery_status',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_recommend',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_list_capabilities',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_route_action',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_discover_resources',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_lookup_capability',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_propose',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_inspect',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_optimize',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_preflight',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_recommend'
+  ],
+  call: {
+    isError: false,
+    content: [ [Object] ],
+    value: { content: [Array], structuredContent: [Object] }
+  },
+  denied: {
+    isError: true,
+    error: {
+      message: 'MCP error -32602: Unknown tool: aeep_discovery_status'
+    },
+    content: [ [Object] ]
+  },
+  reloaded: [
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_list_capabilities',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_route_action',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_discover_resources',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_lookup_capability',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_propose',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_inspect',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_optimize',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_preflight',
+    'mcp__aeep_f44e64e75f3948e9f73f__aeep_stack_recommend',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_list_capabilities',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_route_action',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_discover_resources',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_lookup_capability',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_propose',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_inspect',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_optimize',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_preflight',
+    'mcp__aeep_8ed3f6ad685b959ead70__aeep_stack_recommend'
+  ],
+  status: 'passed'
+}

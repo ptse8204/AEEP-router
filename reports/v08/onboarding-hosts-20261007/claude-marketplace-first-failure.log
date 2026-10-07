@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/component_setup.py", line 90, in _run
+    subprocess.run(argv, cwd=cwd, check=True, timeout=300, stdin=subprocess.DEVNULL,
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/aeep-host-checks-20261007/bin/claude', 'plugin', 'marketplace', 'add', 'anthropics/claude-plugins-official#d4226d062928f8d9505dbdeadd10217d23361052', '--scope', 'project']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-hosts-20261007/claude-marketplace-probe.py", line 20, in <module>
+    record['setup']=apply(router,preview['digest'],retry_failed=True);assert record['setup']['status']=='installed'
+                    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/component_setup.py", line 244, in apply
+    _run([host, 'plugin', 'marketplace', 'add', native_source, *scope], Path(connection.project))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/component_setup.py", line 93, in _run
+    raise ConfigurationError('component setup command failed; inspect package state before explicitly retrying') from exc
+aeep.errors.ConfigurationError: component setup command failed; inspect package state before explicitly retrying

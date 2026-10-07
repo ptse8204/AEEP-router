@@ -1,0 +1,57 @@
+{
+  "host_version": "2.1.292",
+  "scope": "Actual Claude MCP inventory control calls only; no model turn or sign-in",
+  "checks": [],
+  "initial": {
+    "mcpServers": [
+      {
+        "name": "aeep_alpha",
+        "status": "failed",
+        "error": "Connection closed",
+        "config": {
+          "type": "stdio",
+          "command": "/Users/edwintse/Documents/aeep-agent-router/.venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/alpha.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project"
+      },
+      {
+        "name": "aeep_beta",
+        "status": "failed",
+        "error": "Connection closed",
+        "config": {
+          "type": "stdio",
+          "command": "/Users/edwintse/Documents/aeep-agent-router/.venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/beta.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project"
+      }
+    ]
+  },
+  "status": "failed",
+  "error": "AssertionError()"
+}

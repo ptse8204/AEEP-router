@@ -1,0 +1,526 @@
+{
+  "host_version": "2.1.292",
+  "scope": "Actual Claude MCP inventory control calls only; no model turn or sign-in",
+  "checks": [
+    "distinct inventories in actual Claude host",
+    "AEEP denial absent after host reload; native permission details retained",
+    "restore preserves other connection denial"
+  ],
+  "initial": {
+    "mcpServers": [
+      {
+        "name": "aeep_alpha",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/alpha.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discovery_status",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "aeep_beta",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/beta.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "denied": {
+    "mcpServers": [
+      {
+        "name": "aeep_alpha",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/alpha.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "aeep_beta",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/beta.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "restored": {
+    "mcpServers": [
+      {
+        "name": "aeep_alpha",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/alpha.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discovery_status",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "aeep_beta",
+        "status": "connected",
+        "serverInfo": {
+          "name": "aeep-agent-router",
+          "version": "0.8.2"
+        },
+        "config": {
+          "type": "stdio",
+          "command": "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/bin/python",
+          "args": [
+            "-I",
+            "-m",
+            "aeep",
+            "serve",
+            "--manifest",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/config.yaml",
+            "--connection",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/connections/beta.json",
+            "--discovery-config",
+            "/private/tmp/aeep-host-checks-20261007/claude/home/aeep/discovery.json"
+          ]
+        },
+        "scope": "project",
+        "source": "project",
+        "tools": [
+          {
+            "name": "aeep_list_capabilities",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_route_action",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_discover_resources",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_lookup_capability",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_propose",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_inspect",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_optimize",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_preflight",
+            "annotations": {
+              "readOnly": true
+            }
+          },
+          {
+            "name": "aeep_stack_recommend",
+            "annotations": {
+              "readOnly": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "status": "passed"
+}

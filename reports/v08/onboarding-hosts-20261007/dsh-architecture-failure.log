@@ -1,0 +1,107 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path; from aeep.onboarding import initialize,connect; from aeep.access import change_access; p=Path('/tmp/aeep-host-checks-20261007/dsh/project');p.mkdir(parents=True,exist_ok=True); initialize();connect('alpha','dsh',p);connect('beta','dsh',p);change_access('beta','aeep_discovery_status',False)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py", line 3, in <module>
+    from .accounting import (
+    ...<7 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py", line 12, in <module>
+    from .models import (
+    ...<27 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py", line 31, in <module>
+    from pydantic import (
+    ...<11 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/__init__.py", line 5, in <module>
+    from ._migration import getattr_migration
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/_migration.py", line 4, in <module>
+    from pydantic.warnings import PydanticDeprecatedSince20
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/warnings.py", line 5, in <module>
+    from .version import version_short
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/version.py", line 7, in <module>
+    from pydantic_core import __version__ as __pydantic_core_version__
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/__init__.py", line 8, in <module>
+    from ._pydantic_core import (
+    ...<21 lines>...
+    )
+ImportError: dlopen(/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so, 0x0002): tried: '/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (mach-o file, but is an incompatible architecture (have 'arm64', need 'x86_64')), '/System/Volumes/Preboot/Cryptexes/OS/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (no such file), '/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (mach-o file, but is an incompatible architecture (have 'arm64', need 'x86_64'))
+node:internal/errors:983
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /Users/edwintse/Documents/aeep-agent-router/.venv/bin/python -c from pathlib import Path; from aeep.onboarding import initialize,connect; from aeep.access import change_access; p=Path('/tmp/aeep-host-checks-20261007/dsh/project');p.mkdir(parents=True,exist_ok=True); initialize();connect('alpha','dsh',p);connect('beta','dsh',p);change_access('beta','aeep_discovery_status',False)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path; from aeep.onboarding import initialize,connect; from aeep.access import change_access; p=Path('/tmp/aeep-host-checks-20261007/dsh/project');p.mkdir(parents=True,exist_ok=True); initialize();connect('alpha','dsh',p);connect('beta','dsh',p);change_access('beta','aeep_discovery_status',False)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/__init__.py", line 3, in <module>
+    from .accounting import (
+    ...<7 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/accounting.py", line 12, in <module>
+    from .models import (
+    ...<27 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/src/aeep/models.py", line 31, in <module>
+    from pydantic import (
+    ...<11 lines>...
+    )
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/__init__.py", line 5, in <module>
+    from ._migration import getattr_migration
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/_migration.py", line 4, in <module>
+    from pydantic.warnings import PydanticDeprecatedSince20
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/warnings.py", line 5, in <module>
+    from .version import version_short
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic/version.py", line 7, in <module>
+    from pydantic_core import __version__ as __pydantic_core_version__
+  File "/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/__init__.py", line 8, in <module>
+    from ._pydantic_core import (
+    ...<21 lines>...
+    )
+ImportError: dlopen(/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so, 0x0002): tried: '/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (mach-o file, but is an incompatible architecture (have 'arm64', need 'x86_64')), '/System/Volumes/Preboot/Cryptexes/OS/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (no such file), '/Users/edwintse/Documents/aeep-agent-router/.venv/lib/python3.13/site-packages/pydantic_core/_pydantic_core.cpython-313-darwin.so' (mach-o file, but is an incompatible architecture (have 'arm64', need 'x86_64'))
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:916:11)
+    at execFileSync (node:child_process:952:15)
+    at file:///private/tmp/aeep-host-checks-20261007/hosts/probe-dsh.mjs:12:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(2633) [Uint8Array] [
+       84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,
+      111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,
+       97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,
+       32,  70, 105, 108, 101,  32,  34,  60, 115, 116, 114, 105,
+      110, 103,  62,  34,  44,  32, 108, 105, 110, 101,  32,  49,
+       44,  32, 105, 110,  32,  60, 109, 111, 100, 117, 108, 101,
+       62,  10,  32,  32,  32,  32, 102, 114, 111, 109,  32, 112,
+       97, 116, 104, 108, 105,  98,  32, 105, 109, 112, 111, 114,
+      116,  32,  80,  97,
+      ... 2533 more items
+    ]
+  ],
+  pid: 83952,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(2633) [Uint8Array] [
+     84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,
+    111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,
+     97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,
+     32,  70, 105, 108, 101,  32,  34,  60, 115, 116, 114, 105,
+    110, 103,  62,  34,  44,  32, 108, 105, 110, 101,  32,  49,
+     44,  32, 105, 110,  32,  60, 109, 111, 100, 117, 108, 101,
+     62,  10,  32,  32,  32,  32, 102, 114, 111, 109,  32, 112,
+     97, 116, 104, 108, 105,  98,  32, 105, 109, 112, 111, 114,
+    116,  32,  80,  97,
+    ... 2533 more items
+  ]
+}
+
+Node.js v22.23.2

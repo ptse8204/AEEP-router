@@ -1,0 +1,672 @@
+﻿2026-10-07T08:15:48.6877911Z Current runner version: '2.337.0'
+2026-10-07T08:15:48.6897377Z ##[group]Runner Image Provisioner
+2026-10-07T08:15:48.6898104Z Hosted Compute Agent
+2026-10-07T08:15:48.6898545Z Version: 20260901.588
+2026-10-07T08:15:48.6898920Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-07T08:15:48.6899336Z Build Date: 2026-09-01T19:56:44Z
+2026-10-07T08:15:48.6899788Z Worker ID: {c8da1deb-bc26-416b-a3d2-c2c0d99dec27}
+2026-10-07T08:15:48.6900239Z Azure Region: centralus
+2026-10-07T08:15:48.6900611Z ##[endgroup]
+2026-10-07T08:15:48.6901496Z ##[group]Operating System
+2026-10-07T08:15:48.6901854Z Ubuntu
+2026-10-07T08:15:48.6902206Z 24.04.5
+2026-10-07T08:15:48.6902545Z LTS
+2026-10-07T08:15:48.6902933Z ##[endgroup]
+2026-10-07T08:15:48.6903273Z ##[group]Runner Image
+2026-10-07T08:15:48.6903632Z Image: ubuntu-24.04
+2026-10-07T08:15:48.6904006Z Version: 20260927.320.1
+2026-10-07T08:15:48.6904816Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-07T08:15:48.6905810Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-07T08:15:48.6906439Z ##[endgroup]
+2026-10-07T08:15:48.6907134Z ##[group]GITHUB_TOKEN Permissions
+2026-10-07T08:15:48.6908559Z Contents: read
+2026-10-07T08:15:48.6909182Z Metadata: read
+2026-10-07T08:15:48.6909529Z ##[endgroup]
+2026-10-07T08:15:48.6910822Z Secret source: Actions
+2026-10-07T08:15:48.6911458Z Cache mode: write
+2026-10-07T08:15:48.6911870Z Prepare workflow directory
+2026-10-07T08:15:48.7443366Z Prepare all required actions
+2026-10-07T08:15:48.7475595Z Getting action download info
+2026-10-07T08:15:49.0238475Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-07T08:15:49.3654476Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-07T08:15:49.8972225Z Complete job name: assessment-boundaries
+2026-10-07T08:15:49.9513162Z ##[group]Run actions/checkout@v4
+2026-10-07T08:15:49.9513612Z with:
+2026-10-07T08:15:49.9513878Z   repository: ptse8204/AEEP-router
+2026-10-07T08:15:49.9516556Z   token: ***
+2026-10-07T08:15:49.9516814Z   ssh-strict: true
+2026-10-07T08:15:49.9517076Z   ssh-user: git
+2026-10-07T08:15:49.9517341Z   persist-credentials: true
+2026-10-07T08:15:49.9517633Z   clean: true
+2026-10-07T08:15:49.9517898Z   sparse-checkout-cone-mode: true
+2026-10-07T08:15:49.9518207Z   fetch-depth: 1
+2026-10-07T08:15:49.9518465Z   fetch-tags: false
+2026-10-07T08:15:49.9518738Z   show-progress: true
+2026-10-07T08:15:49.9519003Z   lfs: false
+2026-10-07T08:15:49.9519262Z   submodules: false
+2026-10-07T08:15:49.9519538Z   set-safe-directory: true
+2026-10-07T08:15:49.9519839Z   allow-unsafe-pr-checkout: false
+2026-10-07T08:15:49.9520240Z ##[endgroup]
+2026-10-07T08:15:50.0206941Z Syncing repository: ptse8204/AEEP-router
+2026-10-07T08:15:50.0208531Z ##[group]Getting Git version info
+2026-10-07T08:15:50.0209335Z Working directory is '/home/runner/work/AEEP-router/AEEP-router'
+2026-10-07T08:15:50.0210380Z [command]/usr/bin/git version
+2026-10-07T08:15:50.0273117Z git version 2.55.0
+2026-10-07T08:15:50.0276403Z ##[endgroup]
+2026-10-07T08:15:50.0291411Z Temporarily overriding HOME='/home/runner/work/_temp/53bd0f2a-9310-4fcd-be61-a3ece0bc6e5a' before making global git config changes
+2026-10-07T08:15:50.0292737Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-07T08:15:50.0293743Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AEEP-router/AEEP-router
+2026-10-07T08:15:50.0661567Z Deleting the contents of '/home/runner/work/AEEP-router/AEEP-router'
+2026-10-07T08:15:50.0670218Z ##[group]Initializing the repository
+2026-10-07T08:15:50.0673453Z [command]/usr/bin/git init /home/runner/work/AEEP-router/AEEP-router
+2026-10-07T08:15:50.0864709Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-07T08:15:50.0865994Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-07T08:15:50.0867331Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-07T08:15:50.0868046Z hint: call:
+2026-10-07T08:15:50.0868873Z hint:
+2026-10-07T08:15:50.0869368Z hint: 	git config --global init.defaultBranch <name>
+2026-10-07T08:15:50.0869931Z hint:
+2026-10-07T08:15:50.0870471Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-07T08:15:50.0871358Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-07T08:15:50.0872064Z hint:
+2026-10-07T08:15:50.0872446Z hint: 	git branch -m <name>
+2026-10-07T08:15:50.0872908Z hint:
+2026-10-07T08:15:50.0873515Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-07T08:15:50.0874829Z Initialized empty Git repository in /home/runner/work/AEEP-router/AEEP-router/.git/
+2026-10-07T08:15:50.0877141Z [command]/usr/bin/git remote add origin https://github.com/ptse8204/AEEP-router
+2026-10-07T08:15:50.0967580Z ##[endgroup]
+2026-10-07T08:15:50.0968352Z ##[group]Disabling automatic garbage collection
+2026-10-07T08:15:50.0968977Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-07T08:15:50.1163926Z ##[endgroup]
+2026-10-07T08:15:50.1164651Z ##[group]Setting up auth
+2026-10-07T08:15:50.1169019Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-07T08:15:50.1196954Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-07T08:15:50.1503497Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-07T08:15:50.1531302Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-07T08:15:50.1704890Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-07T08:15:50.1733230Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-07T08:15:50.1947232Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-07T08:15:50.2747557Z ##[endgroup]
+2026-10-07T08:15:50.2748999Z ##[group]Fetching the repository
+2026-10-07T08:15:50.2757195Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +34bb25e4c228beaf0e157d19fbdc558c2ecd8a3c:refs/remotes/origin/codex/onboarding-host-checks
+2026-10-07T08:15:52.3320424Z From https://github.com/ptse8204/AEEP-router
+2026-10-07T08:15:52.3321481Z  * [new ref]         34bb25e4c228beaf0e157d19fbdc558c2ecd8a3c -> origin/codex/onboarding-host-checks
+2026-10-07T08:15:52.3323314Z ##[endgroup]
+2026-10-07T08:15:52.3323669Z ##[group]Determining the checkout info
+2026-10-07T08:15:52.3326998Z ##[endgroup]
+2026-10-07T08:15:52.3330421Z [command]/usr/bin/git sparse-checkout disable
+2026-10-07T08:15:52.3376808Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-07T08:15:52.3403480Z ##[group]Checking out the ref
+2026-10-07T08:15:52.3411924Z [command]/usr/bin/git checkout --progress --force -B codex/onboarding-host-checks refs/remotes/origin/codex/onboarding-host-checks
+2026-10-07T08:15:53.0323879Z Switched to a new branch 'codex/onboarding-host-checks'
+2026-10-07T08:15:53.0327333Z branch 'codex/onboarding-host-checks' set up to track 'origin/codex/onboarding-host-checks'.
+2026-10-07T08:15:53.0396370Z ##[endgroup]
+2026-10-07T08:15:53.0438247Z [command]/usr/bin/git log -1 --format=%H
+2026-10-07T08:15:53.0462538Z 34bb25e4c228beaf0e157d19fbdc558c2ecd8a3c
+2026-10-07T08:15:53.0661752Z ##[group]Run actions/setup-python@v5
+2026-10-07T08:15:53.0661943Z with:
+2026-10-07T08:15:53.0662062Z   python-version: 3.13
+2026-10-07T08:15:53.0662189Z   cache: pip
+2026-10-07T08:15:53.0662302Z   check-latest: false
+2026-10-07T08:15:53.0663888Z   token: ***
+2026-10-07T08:15:53.0664009Z   update-environment: true
+2026-10-07T08:15:53.0664147Z   allow-prereleases: false
+2026-10-07T08:15:53.0664279Z   freethreaded: false
+2026-10-07T08:15:53.0664404Z ##[endgroup]
+2026-10-07T08:15:53.1883978Z ##[group]Installed versions
+2026-10-07T08:15:53.2159367Z (node:2106) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T08:15:53.2160064Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T08:15:53.2160464Z Successfully set up CPython (3.13.15)
+2026-10-07T08:15:53.2160923Z ##[endgroup]
+2026-10-07T08:15:53.6295150Z [command]/opt/hostedtoolcache/Python/3.13.15/x64/bin/pip cache dir
+2026-10-07T08:15:53.9208289Z /home/runner/.cache/pip
+2026-10-07T08:15:54.0754877Z pip cache is not found
+2026-10-07T08:15:54.0957245Z ##[group]Run python -m pip install -e '.[dev,http-server]'
+2026-10-07T08:15:54.0957528Z [36;1mpython -m pip install -e '.[dev,http-server]'[0m
+2026-10-07T08:15:54.1195909Z shell: /usr/bin/bash -e {0}
+2026-10-07T08:15:54.1196107Z env:
+2026-10-07T08:15:54.1196288Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:15:54.1196568Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-07T08:15:54.1196806Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:15:54.1197026Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:15:54.1197238Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:15:54.1197454Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-07T08:15:54.1197635Z ##[endgroup]
+2026-10-07T08:15:54.6573816Z Obtaining file:///home/runner/work/AEEP-router/AEEP-router
+2026-10-07T08:15:54.6591699Z   Installing build dependencies: started
+2026-10-07T08:15:55.4195293Z   Installing build dependencies: finished with status 'done'
+2026-10-07T08:15:55.4199978Z   Checking if build backend supports build_editable: started
+2026-10-07T08:15:55.6906041Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-10-07T08:15:55.6913486Z   Getting requirements to build editable: started
+2026-10-07T08:15:55.9532217Z   Getting requirements to build editable: finished with status 'done'
+2026-10-07T08:15:55.9539707Z   Preparing editable metadata (pyproject.toml): started
+2026-10-07T08:15:56.1096396Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2026-10-07T08:15:56.4425267Z Collecting cryptography<47,>=43 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.5038310Z   Downloading cryptography-46.0.7-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+2026-10-07T08:15:56.6962818Z Collecting httpx<1,>=0.27 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.7064343Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-10-07T08:15:56.7372840Z Collecting jsonschema<5,>=4.22 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.7469213Z   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-07T08:15:56.7694924Z Collecting opentelemetry-api<2,>=1.25 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.7792297Z   Downloading opentelemetry_api-1.45.1-py3-none-any.whl.metadata (1.4 kB)
+2026-10-07T08:15:56.8260923Z Collecting psutil<8,>=5.9 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.8361168Z   Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (22 kB)
+2026-10-07T08:15:56.9014852Z Collecting pydantic<3,>=2.8 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.9113205Z   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+2026-10-07T08:15:56.9629512Z Collecting PyYAML<7,>=6 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:56.9725474Z   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-07T08:15:56.9908109Z Collecting rfc8785<0.2,>=0.1.4 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.0003308Z   Downloading rfc8785-0.1.4-py3-none-any.whl.metadata (3.4 kB)
+2026-10-07T08:15:57.0223356Z Collecting typer<1,>=0.12 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.0325631Z   Downloading typer-0.27.3-py3-none-any.whl.metadata (16 kB)
+2026-10-07T08:15:57.0661642Z Collecting fastapi<1,>=0.115 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.0756966Z   Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+2026-10-07T08:15:57.1012725Z Collecting uvicorn<1,>=0.30 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.1109954Z   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+2026-10-07T08:15:57.3456558Z Collecting coverage<8,>=7.6 (from coverage[toml]<8,>=7.6; extra == "dev"->aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.3556905Z   Downloading coverage-7.16.2-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.2 kB)
+2026-10-07T08:15:57.3855619Z Collecting pytest<10,>=8.2 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.3957944Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-10-07T08:15:57.4186586Z Collecting pytest-asyncio<2,>=0.24 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.4285358Z   Downloading pytest_asyncio-1.4.0-py3-none-any.whl.metadata (4.1 kB)
+2026-10-07T08:15:57.5966105Z Collecting ruff<1,>=0.9 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.6065409Z   Downloading ruff-0.16.10-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+2026-10-07T08:15:57.6963490Z Collecting mypy<2,>=1.13 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.7062730Z   Downloading mypy-1.20.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-07T08:15:57.7258176Z Collecting build<2,>=1.2 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.7353499Z   Downloading build-1.6.1-py3-none-any.whl.metadata (5.6 kB)
+2026-10-07T08:15:57.7558465Z Collecting types-jsonschema>=4.22 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.7657047Z   Downloading types_jsonschema-4.26.0.20261006-py3-none-any.whl.metadata (1.9 kB)
+2026-10-07T08:15:57.7880342Z Collecting types-psutil>=5.9 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.7975823Z   Downloading types_psutil-7.2.2.20260906-py3-none-any.whl.metadata (1.8 kB)
+2026-10-07T08:15:57.8248894Z Collecting types-PyYAML>=6 (from aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.8342720Z   Downloading types_pyyaml-6.0.12.20260906-py3-none-any.whl.metadata (1.8 kB)
+2026-10-07T08:15:57.8401688Z Collecting packaging>=24.0 (from build<2,>=1.2->aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.8409864Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-10-07T08:15:57.8562620Z Collecting pyproject_hooks (from build<2,>=1.2->aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.8658076Z   Downloading pyproject_hooks-1.3.3-py3-none-any.whl.metadata (1.3 kB)
+2026-10-07T08:15:57.9267477Z Collecting cffi>=2.0.0 (from cryptography<47,>=43->aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.9362666Z   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+2026-10-07T08:15:57.9604552Z Collecting starlette>=0.46.0 (from fastapi<1,>=0.115->aeep-agent-router==0.8.2)
+2026-10-07T08:15:57.9699292Z   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+2026-10-07T08:15:57.9907897Z Collecting typing-extensions>=4.8.0 (from fastapi<1,>=0.115->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.0002320Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-07T08:15:58.0199695Z Collecting typing-inspection>=0.4.2 (from fastapi<1,>=0.115->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.0295085Z   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+2026-10-07T08:15:58.0461108Z Collecting annotated-doc>=0.0.2 (from fastapi<1,>=0.115->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.0556206Z   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+2026-10-07T08:15:58.0776131Z Collecting anyio (from httpx<1,>=0.27->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.0870150Z   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+2026-10-07T08:15:58.1078487Z Collecting certifi (from httpx<1,>=0.27->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.1173576Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-07T08:15:58.1365601Z Collecting httpcore==1.* (from httpx<1,>=0.27->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.1461746Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-10-07T08:15:58.1664431Z Collecting idna (from httpx<1,>=0.27->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.1760844Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+2026-10-07T08:15:58.1944704Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.27->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.2040520Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-10-07T08:15:58.2411468Z Collecting attrs>=22.2.0 (from jsonschema<5,>=4.22->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.2508482Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-07T08:15:58.2696670Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema<5,>=4.22->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.2799465Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-07T08:15:58.3012460Z Collecting referencing>=0.28.4 (from jsonschema<5,>=4.22->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.3108259Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-07T08:15:58.4502644Z Collecting rpds-py>=0.25.0 (from jsonschema<5,>=4.22->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.4601705Z   Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-07T08:15:58.4786930Z Collecting mypy_extensions>=1.0.0 (from mypy<2,>=1.13->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.4882390Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2026-10-07T08:15:58.5058277Z Collecting pathspec>=1.0.0 (from mypy<2,>=1.13->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.5173273Z   Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+2026-10-07T08:15:58.5909883Z Collecting librt>=0.8.0 (from mypy<2,>=1.13->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.6007440Z   Downloading librt-0.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+2026-10-07T08:15:58.6194724Z Collecting annotated-types>=0.6.0 (from pydantic<3,>=2.8->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.6289324Z   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+2026-10-07T08:15:58.9573692Z Collecting pydantic-core==2.46.5 (from pydantic<3,>=2.8->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.9673759Z   Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-10-07T08:15:58.9870159Z Collecting iniconfig>=1.0.1 (from pytest<10,>=8.2->aeep-agent-router==0.8.2)
+2026-10-07T08:15:58.9966399Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-10-07T08:15:59.0151008Z Collecting pluggy<2,>=1.5 (from pytest<10,>=8.2->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.0246122Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-10-07T08:15:59.0453001Z Collecting pygments>=2.7.2 (from pytest<10,>=8.2->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.0548896Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-07T08:15:59.0786103Z Collecting shellingham>=1.3.0 (from typer<1,>=0.12->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.0881555Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+2026-10-07T08:15:59.1135946Z Collecting rich>=13.8.0 (from typer<1,>=0.12->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.1230840Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+2026-10-07T08:15:59.1449161Z Collecting click>=7.0 (from uvicorn<1,>=0.30->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.1544089Z   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-10-07T08:15:59.1734986Z Collecting pycparser (from cffi>=2.0.0->cryptography<47,>=43->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.1830751Z   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+2026-10-07T08:15:59.2074147Z Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer<1,>=0.12->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.2170407Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-07T08:15:59.2373514Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer<1,>=0.12->aeep-agent-router==0.8.2)
+2026-10-07T08:15:59.2468632Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2026-10-07T08:15:59.2657526Z Downloading build-1.6.1-py3-none-any.whl (31 kB)
+2026-10-07T08:15:59.2772003Z Downloading coverage-7.16.2-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (257 kB)
+2026-10-07T08:15:59.3038708Z Downloading cryptography-46.0.7-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+2026-10-07T08:15:59.3769970Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 61.9 MB/s  0:00:00
+2026-10-07T08:15:59.3882365Z Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+2026-10-07T08:15:59.4001091Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-10-07T08:15:59.4116719Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-10-07T08:15:59.4229892Z Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+2026-10-07T08:15:59.4343622Z Downloading mypy-1.20.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (14.7 MB)
+2026-10-07T08:15:59.5679340Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.7/14.7 MB 110.0 MB/s  0:00:00
+2026-10-07T08:15:59.5778272Z Downloading opentelemetry_api-1.45.1-py3-none-any.whl (60 kB)
+2026-10-07T08:15:59.5898624Z Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+2026-10-07T08:15:59.6010477Z Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+2026-10-07T08:15:59.6126942Z Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-10-07T08:15:59.6253915Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 160.4 MB/s  0:00:00
+2026-10-07T08:15:59.6348847Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-10-07T08:15:59.6465031Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-10-07T08:15:59.6572851Z Downloading pytest_asyncio-1.4.0-py3-none-any.whl (16 kB)
+2026-10-07T08:15:59.6681442Z Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+2026-10-07T08:15:59.6720157Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 232.2 MB/s  0:00:00
+2026-10-07T08:15:59.6814570Z Downloading rfc8785-0.1.4-py3-none-any.whl (9.2 kB)
+2026-10-07T08:15:59.6921691Z Downloading ruff-0.16.10-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.4 MB)
+2026-10-07T08:15:59.7482553Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 186.8 MB/s  0:00:00
+2026-10-07T08:15:59.7582531Z Downloading typer-0.27.3-py3-none-any.whl (123 kB)
+2026-10-07T08:15:59.7697368Z Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+2026-10-07T08:15:59.7921723Z Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+2026-10-07T08:15:59.8027284Z Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-10-07T08:15:59.8135974Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-07T08:15:59.8246260Z Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+2026-10-07T08:15:59.8358015Z Downloading click-8.5.0-py3-none-any.whl (125 kB)
+2026-10-07T08:15:59.8468558Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2026-10-07T08:15:59.8579201Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-10-07T08:15:59.8685795Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-07T08:15:59.8798600Z Downloading librt-0.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (531 kB)
+2026-10-07T08:15:59.8831760Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 531.7/531.7 kB 140.9 MB/s  0:00:00
+2026-10-07T08:15:59.8926442Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2026-10-07T08:15:59.8947473Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+2026-10-07T08:15:59.9041257Z Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+2026-10-07T08:15:59.9149318Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-10-07T08:15:59.9282344Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 83.4 MB/s  0:00:00
+2026-10-07T08:15:59.9377879Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-07T08:15:59.9486436Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+2026-10-07T08:15:59.9599911Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+2026-10-07T08:15:59.9710402Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2026-10-07T08:15:59.9817530Z Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (370 kB)
+2026-10-07T08:16:00.0044847Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+2026-10-07T08:16:00.0152500Z Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+2026-10-07T08:16:00.0261521Z Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-10-07T08:16:00.0373240Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+2026-10-07T08:16:00.0482028Z Downloading types_jsonschema-4.26.0.20261006-py3-none-any.whl (16 kB)
+2026-10-07T08:16:00.0589566Z Downloading types_psutil-7.2.2.20260906-py3-none-any.whl (33 kB)
+2026-10-07T08:16:00.0697400Z Downloading types_pyyaml-6.0.12.20260906-py3-none-any.whl (21 kB)
+2026-10-07T08:16:00.0803785Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-07T08:16:00.0911608Z Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-10-07T08:16:00.1018794Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-07T08:16:00.1128793Z Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+2026-10-07T08:16:00.1236452Z Downloading pyproject_hooks-1.3.3-py3-none-any.whl (10 kB)
+2026-10-07T08:16:00.2090504Z Building wheels for collected packages: aeep-agent-router
+2026-10-07T08:16:00.2096853Z   Building editable for aeep-agent-router (pyproject.toml): started
+2026-10-07T08:16:00.3981783Z   Building editable for aeep-agent-router (pyproject.toml): finished with status 'done'
+2026-10-07T08:16:00.3985202Z   Created wheel for aeep-agent-router: filename=aeep_agent_router-0.8.2-0.editable-py3-none-any.whl size=12966 sha256=0113d046f10de34714d39701e9d69cd6bc21fbf6c15dbae4a2f3046501263436
+2026-10-07T08:16:00.3986228Z   Stored in directory: /tmp/pip-ephem-wheel-cache-3y2mynlq/wheels/ea/07/d9/da7ebfbbb45ddfe01e14b6211bee9057768f6a01145906ec54
+2026-10-07T08:16:00.4003027Z Successfully built aeep-agent-router
+2026-10-07T08:16:00.4561772Z Installing collected packages: typing-extensions, types-PyYAML, types-psutil, shellingham, ruff, rpds-py, rfc8785, PyYAML, pyproject_hooks, pygments, pycparser, psutil, pluggy, pathspec, packaging, mypy_extensions, mdurl, librt, iniconfig, idna, h11, coverage, click, certifi, attrs, annotated-types, annotated-doc, uvicorn, typing-inspection, referencing, pytest, pydantic-core, opentelemetry-api, mypy, markdown-it-py, httpcore, cffi, build, anyio, types-jsonschema, starlette, rich, pytest-asyncio, pydantic, jsonschema-specifications, httpx, cryptography, typer, jsonschema, fastapi, aeep-agent-router
+2026-10-07T08:16:05.1633658Z 
+2026-10-07T08:16:05.1666633Z Successfully installed PyYAML-6.0.3 aeep-agent-router-0.8.2 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 build-1.6.1 certifi-2026.7.22 cffi-2.1.1 click-8.5.0 coverage-7.16.2 cryptography-46.0.7 fastapi-0.142.2 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 librt-0.16.0 markdown-it-py-4.2.0 mdurl-0.1.2 mypy-1.20.2 mypy_extensions-1.1.0 opentelemetry-api-1.45.1 packaging-26.3 pathspec-1.1.1 pluggy-1.6.0 psutil-7.2.2 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 pyproject_hooks-1.3.3 pytest-9.1.1 pytest-asyncio-1.4.0 referencing-0.37.0 rfc8785-0.1.4 rich-15.0.0 rpds-py-2026.9.1 ruff-0.16.10 shellingham-1.5.4 starlette-1.7.0 typer-0.27.3 types-PyYAML-6.0.12.20260906 types-jsonschema-4.26.0.20261006 types-psutil-7.2.2.20260906 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0
+2026-10-07T08:16:05.4540381Z ##[group]Run docker build --iidfile /tmp/aeep-image-id integrations/assessment-runtime
+2026-10-07T08:16:05.4540770Z [36;1mdocker build --iidfile /tmp/aeep-image-id integrations/assessment-runtime[0m
+2026-10-07T08:16:05.4593919Z shell: /usr/bin/bash -e {0}
+2026-10-07T08:16:05.4594062Z env:
+2026-10-07T08:16:05.4594216Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:05.4594458Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-07T08:16:05.4594691Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:05.4594899Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:05.4595106Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:05.4595316Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-07T08:16:05.4595511Z ##[endgroup]
+2026-10-07T08:16:06.0098246Z #0 building with "default" instance using docker driver
+2026-10-07T08:16:06.0098614Z 
+2026-10-07T08:16:06.0098699Z #1 [internal] load build definition from Dockerfile
+2026-10-07T08:16:06.0098883Z #1 transferring dockerfile: 404B done
+2026-10-07T08:16:06.0099041Z #1 DONE 0.0s
+2026-10-07T08:16:06.0099106Z 
+2026-10-07T08:16:06.0099275Z #2 [auth] library/python:pull token for registry-1.docker.io
+2026-10-07T08:16:06.1607838Z #2 DONE 0.0s
+2026-10-07T08:16:06.1607965Z 
+2026-10-07T08:16:06.1608262Z #3 [internal] load metadata for docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0
+2026-10-07T08:16:06.4727896Z #3 DONE 0.6s
+2026-10-07T08:16:06.6102005Z 
+2026-10-07T08:16:06.6102436Z #4 [internal] load .dockerignore
+2026-10-07T08:16:06.6102731Z #4 transferring context: 2B done
+2026-10-07T08:16:06.6102937Z #4 DONE 0.0s
+2026-10-07T08:16:06.6103036Z 
+2026-10-07T08:16:06.6103362Z #5 [1/3] FROM docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0
+2026-10-07T08:16:06.6104076Z #5 resolve docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0 done
+2026-10-07T08:16:06.6104693Z #5 sha256:3d9fb74714202c0d9ba7af2ca3e226fec5647f73cefc725b7ff37338bc1b59ec 0B / 1.29MB 0.1s
+2026-10-07T08:16:06.6105215Z #5 sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23 0B / 11.91MB 0.1s
+2026-10-07T08:16:06.6105866Z #5 sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0 10.37kB / 10.37kB done
+2026-10-07T08:16:06.6106421Z #5 sha256:37134a49d21d2120e4c4d73bb76f8a4ab9aef31f096f7ec2ead48c2feead4332 1.75kB / 1.75kB done
+2026-10-07T08:16:06.6106951Z #5 sha256:b2bb53ac7b6fbe78a48c95b7c15130ea21de1674fc683fbc93158b0c23826823 5.52kB / 5.52kB done
+2026-10-07T08:16:06.6107459Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 1.05MB / 29.83MB 0.1s
+2026-10-07T08:16:06.8100954Z #5 sha256:3d9fb74714202c0d9ba7af2ca3e226fec5647f73cefc725b7ff37338bc1b59ec 1.29MB / 1.29MB 0.2s done
+2026-10-07T08:16:06.8101535Z #5 sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23 4.19MB / 11.91MB 0.3s
+2026-10-07T08:16:06.8101889Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.3s
+2026-10-07T08:16:06.8102224Z #5 sha256:4a43a40b039e72c4176e2fcbb0c08f42be7ff4e6a07722417801c9147b67bfb2 250B / 250B 0.3s
+2026-10-07T08:16:06.9760253Z #5 sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23 11.91MB / 11.91MB 0.4s
+2026-10-07T08:16:06.9760914Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.3s done
+2026-10-07T08:16:06.9761470Z #5 sha256:4a43a40b039e72c4176e2fcbb0c08f42be7ff4e6a07722417801c9147b67bfb2 250B / 250B 0.3s done
+2026-10-07T08:16:06.9762052Z #5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0.1s
+2026-10-07T08:16:07.0763600Z #5 sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23 11.91MB / 11.91MB 0.4s done
+2026-10-07T08:16:07.5264856Z #5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0.6s done
+2026-10-07T08:16:07.5265478Z #5 extracting sha256:3d9fb74714202c0d9ba7af2ca3e226fec5647f73cefc725b7ff37338bc1b59ec 0.1s done
+2026-10-07T08:16:11.9439744Z #5 extracting sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23
+2026-10-07T08:16:12.4214732Z #5 extracting sha256:264ba3d8ae19c964ad7ebecdd4379a348cc08c7898b50d08d7884127a78fdb23 0.3s done
+2026-10-07T08:16:12.5419868Z #5 extracting sha256:4a43a40b039e72c4176e2fcbb0c08f42be7ff4e6a07722417801c9147b67bfb2
+2026-10-07T08:16:12.7128902Z #5 extracting sha256:4a43a40b039e72c4176e2fcbb0c08f42be7ff4e6a07722417801c9147b67bfb2 done
+2026-10-07T08:16:12.7129397Z #5 DONE 6.1s
+2026-10-07T08:16:12.7129600Z 
+2026-10-07T08:16:12.7130323Z #6 [2/3] RUN python3 -m pip install --no-cache-dir 'cryptography>=43,<47' 'httpx>=0.27,<1' 'jsonschema>=4.22,<5' 'opentelemetry-api>=1.25,<2' 'psutil>=5.9,<8' 'pydantic>=2.8,<3' 'PyYAML>=6,<7' 'rfc8785>=0.1.4,<0.2' 'typer>=0.12,<1' 'openpyxl==3.1.5'
+2026-10-07T08:16:13.7851878Z #6 1.223 Collecting cryptography<47,>=43
+2026-10-07T08:16:13.8855613Z #6 1.264   Downloading cryptography-46.0.7-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+2026-10-07T08:16:13.8856106Z #6 1.285 Collecting httpx<1,>=0.27
+2026-10-07T08:16:13.8856307Z #6 1.294   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-10-07T08:16:13.8856517Z #6 1.314 Collecting jsonschema<5,>=4.22
+2026-10-07T08:16:13.8856730Z #6 1.324   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-07T08:16:14.0264122Z #6 1.343 Collecting opentelemetry-api<2,>=1.25
+2026-10-07T08:16:14.0264447Z #6 1.352   Downloading opentelemetry_api-1.45.1-py3-none-any.whl.metadata (1.4 kB)
+2026-10-07T08:16:14.0264690Z #6 1.393 Collecting psutil<8,>=5.9
+2026-10-07T08:16:14.0264998Z #6 1.403   Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (22 kB)
+2026-10-07T08:16:14.0265342Z #6 1.464 Collecting pydantic<3,>=2.8
+2026-10-07T08:16:14.1441842Z #6 1.474   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+2026-10-07T08:16:14.1442394Z #6 1.517 Collecting PyYAML<7,>=6
+2026-10-07T08:16:14.1443146Z #6 1.527   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-07T08:16:14.1443818Z #6 1.543 Collecting rfc8785<0.2,>=0.1.4
+2026-10-07T08:16:14.1444167Z #6 1.554   Downloading rfc8785-0.1.4-py3-none-any.whl.metadata (3.4 kB)
+2026-10-07T08:16:14.1446373Z #6 1.582 Collecting typer<1,>=0.12
+2026-10-07T08:16:14.2761134Z #6 1.594   Downloading typer-0.27.3-py3-none-any.whl.metadata (16 kB)
+2026-10-07T08:16:14.2761539Z #6 1.620 Collecting openpyxl==3.1.5
+2026-10-07T08:16:14.2761889Z #6 1.630   Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+2026-10-07T08:16:14.2762286Z #6 1.645 Collecting et-xmlfile (from openpyxl==3.1.5)
+2026-10-07T08:16:14.2762714Z #6 1.654   Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+2026-10-07T08:16:14.2763113Z #6 1.714 Collecting cffi>=2.0.0 (from cryptography<47,>=43)
+2026-10-07T08:16:14.3830040Z #6 1.724   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+2026-10-07T08:16:14.3830592Z #6 1.742 Collecting anyio (from httpx<1,>=0.27)
+2026-10-07T08:16:14.3830947Z #6 1.751   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+2026-10-07T08:16:14.3831302Z #6 1.769 Collecting certifi (from httpx<1,>=0.27)
+2026-10-07T08:16:14.3831666Z #6 1.779   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-07T08:16:14.3832053Z #6 1.795 Collecting httpcore==1.* (from httpx<1,>=0.27)
+2026-10-07T08:16:14.3832414Z #6 1.804   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-10-07T08:16:14.3832746Z #6 1.821 Collecting idna (from httpx<1,>=0.27)
+2026-10-07T08:16:14.6151989Z #6 1.831   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+2026-10-07T08:16:14.6152919Z #6 1.847 Collecting attrs>=22.2.0 (from jsonschema<5,>=4.22)
+2026-10-07T08:16:14.6153476Z #6 1.857   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-07T08:16:14.6153882Z #6 1.872 Collecting jsonschema-specifications>=2023.03.6 (from jsonschema<5,>=4.22)
+2026-10-07T08:16:14.6154374Z #6 1.881   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-07T08:16:14.6154794Z #6 1.901 Collecting referencing>=0.28.4 (from jsonschema<5,>=4.22)
+2026-10-07T08:16:14.6155151Z #6 1.910   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-07T08:16:14.6155512Z #6 2.053 Collecting rpds-py>=0.25.0 (from jsonschema<5,>=4.22)
+2026-10-07T08:16:14.8291017Z #6 2.064   Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-07T08:16:14.8291674Z #6 2.082 Collecting typing-extensions>=4.5.0 (from opentelemetry-api<2,>=1.25)
+2026-10-07T08:16:14.8292227Z #6 2.092   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-07T08:16:14.8292708Z #6 2.107 Collecting annotated-types>=0.6.0 (from pydantic<3,>=2.8)
+2026-10-07T08:16:14.8293112Z #6 2.117   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+2026-10-07T08:16:15.0608411Z #6 2.499 Collecting pydantic-core==2.46.5 (from pydantic<3,>=2.8)
+2026-10-07T08:16:15.1736960Z #6 2.509   Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-10-07T08:16:15.1737543Z #6 2.525 Collecting typing-inspection>=0.4.2 (from pydantic<3,>=2.8)
+2026-10-07T08:16:15.1737976Z #6 2.535   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+2026-10-07T08:16:15.1738366Z #6 2.552 Collecting shellingham>=1.3.0 (from typer<1,>=0.12)
+2026-10-07T08:16:15.1738750Z #6 2.563   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+2026-10-07T08:16:15.1739094Z #6 2.586 Collecting rich>=13.8.0 (from typer<1,>=0.12)
+2026-10-07T08:16:15.1739342Z #6 2.596   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+2026-10-07T08:16:15.1739577Z #6 2.612 Collecting annotated-doc>=0.0.2 (from typer<1,>=0.12)
+2026-10-07T08:16:15.2816967Z #6 2.622   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+2026-10-07T08:16:15.2817326Z #6 2.637 Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.27)
+2026-10-07T08:16:15.2817568Z #6 2.647   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-10-07T08:16:15.2817817Z #6 2.663 Collecting pycparser (from cffi>=2.0.0->cryptography<47,>=43)
+2026-10-07T08:16:15.2818078Z #6 2.672   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+2026-10-07T08:16:15.2818344Z #6 2.691 Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer<1,>=0.12)
+2026-10-07T08:16:15.2818605Z #6 2.700   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-07T08:16:15.2818882Z #6 2.720 Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.8.0->typer<1,>=0.12)
+2026-10-07T08:16:15.4158111Z #6 2.730   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-07T08:16:15.4158787Z #6 2.746 Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer<1,>=0.12)
+2026-10-07T08:16:15.4159414Z #6 2.755   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2026-10-07T08:16:15.4159877Z #6 2.770 Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+2026-10-07T08:16:15.4160325Z #6 2.797 Downloading cryptography-46.0.7-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+2026-10-07T08:16:15.5215378Z #6 2.854    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 93.5 MB/s  0:00:00
+2026-10-07T08:16:15.5215973Z #6 2.864 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-10-07T08:16:15.5216275Z #6 2.876 Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+2026-10-07T08:16:15.5216517Z #6 2.887 Downloading opentelemetry_api-1.45.1-py3-none-any.whl (60 kB)
+2026-10-07T08:16:15.5216868Z #6 2.898 Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+2026-10-07T08:16:15.5217712Z #6 2.908 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+2026-10-07T08:16:15.5218147Z #6 2.924 Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-10-07T08:16:15.5218668Z #6 2.927    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 1.3 GB/s  0:00:00
+2026-10-07T08:16:15.5219145Z #6 2.939 Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+2026-10-07T08:16:15.5219698Z #6 2.940    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 1.3 GB/s  0:00:00
+2026-10-07T08:16:15.5220025Z #6 2.950 Downloading rfc8785-0.1.4-py3-none-any.whl (9.2 kB)
+2026-10-07T08:16:15.5220328Z #6 2.960 Downloading typer-0.27.3-py3-none-any.whl (123 kB)
+2026-10-07T08:16:15.6299155Z #6 2.969 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-10-07T08:16:15.6299561Z #6 2.979 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+2026-10-07T08:16:15.6299982Z #6 2.988 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-10-07T08:16:15.6300275Z #6 2.998 Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-07T08:16:15.6300558Z #6 3.008 Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+2026-10-07T08:16:15.6300826Z #6 3.017 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2026-10-07T08:16:15.6301065Z #6 3.027 Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-07T08:16:15.6301313Z #6 3.036 Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-07T08:16:15.6301519Z #6 3.046 Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+2026-10-07T08:16:15.6301717Z #6 3.057 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-10-07T08:16:15.6302217Z #6 3.059    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 1.4 GB/s  0:00:00
+2026-10-07T08:16:15.6302445Z #6 3.068 Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+2026-10-07T08:16:15.8486993Z #6 3.078 Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2026-10-07T08:16:15.8487472Z #6 3.087 Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (370 kB)
+2026-10-07T08:16:15.8487809Z #6 3.096 Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+2026-10-07T08:16:15.8488062Z #6 3.106 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-07T08:16:15.8488404Z #6 3.115 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-10-07T08:16:15.8488633Z #6 3.125 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-10-07T08:16:15.8488834Z #6 3.134 Downloading idna-3.20-py3-none-any.whl (69 kB)
+2026-10-07T08:16:15.8489128Z #6 3.144 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-07T08:16:15.8489350Z #6 3.153 Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+2026-10-07T08:16:15.8489568Z #6 3.163 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+2026-10-07T08:16:15.8490485Z #6 3.287 Installing collected packages: typing-extensions, shellingham, rpds-py, rfc8785, PyYAML, pygments, pycparser, psutil, mdurl, idna, h11, et-xmlfile, certifi, attrs, annotated-types, annotated-doc, typing-inspection, referencing, pydantic-core, opentelemetry-api, openpyxl, markdown-it-py, httpcore, cffi, anyio, rich, pydantic, jsonschema-specifications, httpx, cryptography, typer, jsonschema
+2026-10-07T08:16:17.5277456Z #6 4.966 
+2026-10-07T08:16:17.6806914Z #6 4.968 Successfully installed PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 certifi-2026.7.22 cffi-2.1.1 cryptography-46.0.7 et-xmlfile-2.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 markdown-it-py-4.2.0 mdurl-0.1.2 openpyxl-3.1.5 opentelemetry-api-1.45.1 psutil-7.2.2 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 referencing-0.37.0 rfc8785-0.1.4 rich-15.0.0 rpds-py-2026.9.1 shellingham-1.5.4 typer-0.27.3 typing-extensions-4.16.0 typing-inspection-0.4.4
+2026-10-07T08:16:17.6810268Z #6 4.968 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-10-07T08:16:18.0106180Z #6 DONE 5.4s
+2026-10-07T08:16:18.1689243Z 
+2026-10-07T08:16:18.1689736Z #7 [3/3] WORKDIR /tmp
+2026-10-07T08:16:18.1689995Z #7 DONE 0.0s
+2026-10-07T08:16:18.1690103Z 
+2026-10-07T08:16:18.1690185Z #8 exporting to image
+2026-10-07T08:16:18.1690378Z #8 exporting layers
+2026-10-07T08:16:19.0053663Z #8 exporting layers 1.0s done
+2026-10-07T08:16:19.0172038Z #8 writing image sha256:96753083dd1e3401445eb50816121c011d512a16ddb198f54e626e34621f0632 done
+2026-10-07T08:16:19.0172461Z #8 DONE 1.0s
+2026-10-07T08:16:19.0237873Z ##[group]Run export AEEP_CONTAINER_IMAGE="$(cat /tmp/aeep-image-id)"
+2026-10-07T08:16:19.0238176Z [36;1mexport AEEP_CONTAINER_IMAGE="$(cat /tmp/aeep-image-id)"[0m
+2026-10-07T08:16:19.0238395Z [36;1mexport AEEP_WORKBOOK_IMAGE="$AEEP_CONTAINER_IMAGE"[0m
+2026-10-07T08:16:19.0238610Z [36;1mexport AEEP_CONTAINER_RUNTIME="$(command -v docker)"[0m
+2026-10-07T08:16:19.0238821Z [36;1mexport AEEP_CONTAINER_SOCKET=/var/run/docker.sock[0m
+2026-10-07T08:16:19.0239011Z [36;1mpython -m pytest -m assessment_boundary[0m
+2026-10-07T08:16:19.0293293Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-07T08:16:19.0293477Z env:
+2026-10-07T08:16:19.0293623Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:19.0293850Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-07T08:16:19.0294077Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:19.0294317Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:19.0294523Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-07T08:16:19.0294733Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-07T08:16:19.0294908Z ##[endgroup]
+2026-10-07T08:24:59.4453846Z .........FF.............sss...s.......................s...........s      [100%]
+2026-10-07T08:24:59.4454122Z =================================== FAILURES ===================================
+2026-10-07T08:24:59.4455505Z ___________ test_app_server_private_policy_snapshot_lifetime[False] ____________
+2026-10-07T08:24:59.4455862Z 
+2026-10-07T08:24:59.4456034Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa121797d80>
+2026-10-07T08:24:59.4456361Z cleanup_fails = False
+2026-10-07T08:24:59.4456472Z 
+2026-10-07T08:24:59.4456568Z     @pytest.mark.parametrize('cleanup_fails', [False, True])
+2026-10-07T08:24:59.4456833Z     async def test_app_server_private_policy_snapshot_lifetime(monkeypatch, cleanup_fails):
+2026-10-07T08:24:59.4457136Z         from aeep.hosts.codex_app_server import CodexAppServerAdapter
+2026-10-07T08:24:59.4457314Z     
+2026-10-07T08:24:59.4457564Z         worker = binding(schema_version='execution.worker.v2', seccomp_profile={'defaultAction':'SCMP_ACT_ERRNO','syscalls':[]})
+2026-10-07T08:24:59.4458001Z         spec = ExecutorSpec(id='worker', capability='fixture', kind='host_managed', resource_pool='pool', description='policy lifecycle fixture',
+2026-10-07T08:24:59.4458477Z             config={'adapter_id':'codex-app-server','argv':[worker.binary,'app-server'],'instructions':'fixture','managed_worker':worker.model_dump(mode='json')})
+2026-10-07T08:24:59.4458788Z     
+2026-10-07T08:24:59.4458906Z         async def cleanup(self, execution_id):
+2026-10-07T08:24:59.4459061Z             assert execution_id
+2026-10-07T08:24:59.4459194Z             if cleanup_fails:
+2026-10-07T08:24:59.4459346Z                 raise RuntimeError('cleanup unavailable')
+2026-10-07T08:24:59.4459503Z             return True
+2026-10-07T08:24:59.4459613Z     
+2026-10-07T08:24:59.4459756Z         monkeypatch.setattr(ManagedWorkerBinding,'cleanup',cleanup)
+2026-10-07T08:24:59.4460313Z >       host = CodexAppServerAdapter.from_executor(spec,principal_salt=b'fixture-only')
+2026-10-07T08:24:59.4460549Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-07T08:24:59.4460670Z 
+2026-10-07T08:24:59.4460728Z tests/test_v08_managed_workers.py:160: 
+2026-10-07T08:24:59.4460899Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-07T08:24:59.4461099Z src/aeep/hosts/codex_app_server.py:608: in from_executor
+2026-10-07T08:24:59.4461269Z     adapter = cls(
+2026-10-07T08:24:59.4461401Z src/aeep/hosts/codex_app_server.py:541: in __init__
+2026-10-07T08:24:59.4461581Z     self.transport = CodexAppServerTransport(
+2026-10-07T08:24:59.4461758Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-07T08:24:59.4461878Z 
+2026-10-07T08:24:59.4462148Z self = <aeep.hosts.codex_app_server.CodexAppServerTransport object at 0x7fa121b9a350>
+2026-10-07T08:24:59.4462467Z argv = ('/usr/local/bin/docker', '--host', 'unix:///tmp/docker.sock', 'run', '--pull=never', '--rm', ...)
+2026-10-07T08:24:59.4462743Z environment_allowlist = (), cwd = None, max_message_bytes = 1048576
+2026-10-07T08:24:59.4462991Z max_stderr_bytes = 65536, request_timeout = 30, executable_sha256 = None
+2026-10-07T08:24:59.4463272Z options = AppServerOptions(experimental_api=False, catalog_metrics=False, expected_user_agent=None)
+2026-10-07T08:24:59.4463464Z 
+2026-10-07T08:24:59.4463507Z     def __init__(
+2026-10-07T08:24:59.4463611Z         self,
+2026-10-07T08:24:59.4463720Z         argv: tuple[str, ...],
+2026-10-07T08:24:59.4463840Z         *,
+2026-10-07T08:24:59.4463961Z         environment_allowlist: tuple[str, ...] = (),
+2026-10-07T08:24:59.4464120Z         cwd: str | None = None,
+2026-10-07T08:24:59.4464252Z         max_message_bytes: int = 1_048_576,
+2026-10-07T08:24:59.4464401Z         max_stderr_bytes: int = 65_536,
+2026-10-07T08:24:59.4464543Z         request_timeout: float = 30,
+2026-10-07T08:24:59.4464691Z         executable_sha256: str | None = None,
+2026-10-07T08:24:59.4464848Z         options: AppServerOptions | None = None,
+2026-10-07T08:24:59.4465017Z     ) -> None:
+2026-10-07T08:24:59.4465145Z         if not argv or not Path(argv[0]).is_absolute():
+2026-10-07T08:24:59.4465387Z             raise ConfigurationError("Codex App Server executable must be an absolute argv path")
+2026-10-07T08:24:59.4465637Z         if any(not part or "\x00" in part for part in argv):
+2026-10-07T08:24:59.4466150Z             raise ConfigurationError("Codex App Server argv entries must be non-empty and NUL-free")
+2026-10-07T08:24:59.4466508Z         self.argv = argv
+2026-10-07T08:24:59.4466734Z         self.environment_allowlist = environment_allowlist
+2026-10-07T08:24:59.4466906Z         self.cwd = cwd
+2026-10-07T08:24:59.4467038Z         self.max_message_bytes = max_message_bytes
+2026-10-07T08:24:59.4467204Z         self.max_stderr_bytes = max_stderr_bytes
+2026-10-07T08:24:59.4467361Z         self.request_timeout = request_timeout
+2026-10-07T08:24:59.4467518Z         if executable_sha256 is not None and (
+2026-10-07T08:24:59.4467665Z             len(executable_sha256) != 71
+2026-10-07T08:24:59.4467823Z             or not executable_sha256.startswith("sha256:")
+2026-10-07T08:24:59.4467973Z             or any(
+2026-10-07T08:24:59.4468091Z                 character not in "0123456789abcdef"
+2026-10-07T08:24:59.4468252Z                 for character in executable_sha256[7:]
+2026-10-07T08:24:59.4468395Z             )
+2026-10-07T08:24:59.4468492Z         ):
+2026-10-07T08:24:59.4468665Z             raise ConfigurationError("Codex executable digest must be sha256 lowercase hex")
+2026-10-07T08:24:59.4468997Z         self.options = options or AppServerOptions()
+2026-10-07T08:24:59.4469203Z         self.executable_sha256 = executable_sha256
+2026-10-07T08:24:59.4469358Z         executable = Path(self.argv[0])
+2026-10-07T08:24:59.4469544Z         if not executable.is_file() or not os.access(executable, os.X_OK):
+2026-10-07T08:24:59.4469804Z >           raise ConfigurationError("Codex App Server executable is not an executable file")
+2026-10-07T08:24:59.4470210Z E           aeep.errors.ConfigurationError: Codex App Server executable is not an executable file
+2026-10-07T08:24:59.4470393Z 
+2026-10-07T08:24:59.4470473Z src/aeep/hosts/codex_app_server.py:131: ConfigurationError
+2026-10-07T08:24:59.4470697Z ____________ test_app_server_private_policy_snapshot_lifetime[True] ____________
+2026-10-07T08:24:59.4470845Z 
+2026-10-07T08:24:59.4470950Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa121be0ff0>
+2026-10-07T08:24:59.4471142Z cleanup_fails = True
+2026-10-07T08:24:59.4471211Z 
+2026-10-07T08:24:59.4471294Z     @pytest.mark.parametrize('cleanup_fails', [False, True])
+2026-10-07T08:24:59.4471545Z     async def test_app_server_private_policy_snapshot_lifetime(monkeypatch, cleanup_fails):
+2026-10-07T08:24:59.4471900Z         from aeep.hosts.codex_app_server import CodexAppServerAdapter
+2026-10-07T08:24:59.4472073Z     
+2026-10-07T08:24:59.4472313Z         worker = binding(schema_version='execution.worker.v2', seccomp_profile={'defaultAction':'SCMP_ACT_ERRNO','syscalls':[]})
+2026-10-07T08:24:59.4472797Z         spec = ExecutorSpec(id='worker', capability='fixture', kind='host_managed', resource_pool='pool', description='policy lifecycle fixture',
+2026-10-07T08:24:59.4473271Z             config={'adapter_id':'codex-app-server','argv':[worker.binary,'app-server'],'instructions':'fixture','managed_worker':worker.model_dump(mode='json')})
+2026-10-07T08:24:59.4473584Z     
+2026-10-07T08:24:59.4473694Z         async def cleanup(self, execution_id):
+2026-10-07T08:24:59.4473843Z             assert execution_id
+2026-10-07T08:24:59.4473973Z             if cleanup_fails:
+2026-10-07T08:24:59.4474119Z                 raise RuntimeError('cleanup unavailable')
+2026-10-07T08:24:59.4474272Z             return True
+2026-10-07T08:24:59.4474378Z     
+2026-10-07T08:24:59.4474529Z         monkeypatch.setattr(ManagedWorkerBinding,'cleanup',cleanup)
+2026-10-07T08:24:59.4474785Z >       host = CodexAppServerAdapter.from_executor(spec,principal_salt=b'fixture-only')
+2026-10-07T08:24:59.4475019Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-07T08:24:59.4475134Z 
+2026-10-07T08:24:59.4475189Z tests/test_v08_managed_workers.py:160: 
+2026-10-07T08:24:59.4475354Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-07T08:24:59.4475550Z src/aeep/hosts/codex_app_server.py:608: in from_executor
+2026-10-07T08:24:59.4475880Z     adapter = cls(
+2026-10-07T08:24:59.4476043Z src/aeep/hosts/codex_app_server.py:541: in __init__
+2026-10-07T08:24:59.4476221Z     self.transport = CodexAppServerTransport(
+2026-10-07T08:24:59.4476395Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-07T08:24:59.4476512Z 
+2026-10-07T08:24:59.4476641Z self = <aeep.hosts.codex_app_server.CodexAppServerTransport object at 0x7fa121b99450>
+2026-10-07T08:24:59.4476950Z argv = ('/usr/local/bin/docker', '--host', 'unix:///tmp/docker.sock', 'run', '--pull=never', '--rm', ...)
+2026-10-07T08:24:59.4477221Z environment_allowlist = (), cwd = None, max_message_bytes = 1048576
+2026-10-07T08:24:59.4477445Z max_stderr_bytes = 65536, request_timeout = 30, executable_sha256 = None
+2026-10-07T08:24:59.4477726Z options = AppServerOptions(experimental_api=False, catalog_metrics=False, expected_user_agent=None)
+2026-10-07T08:24:59.4477920Z 
+2026-10-07T08:24:59.4477963Z     def __init__(
+2026-10-07T08:24:59.4478065Z         self,
+2026-10-07T08:24:59.4478174Z         argv: tuple[str, ...],
+2026-10-07T08:24:59.4478293Z         *,
+2026-10-07T08:24:59.4478411Z         environment_allowlist: tuple[str, ...] = (),
+2026-10-07T08:24:59.4478566Z         cwd: str | None = None,
+2026-10-07T08:24:59.4478696Z         max_message_bytes: int = 1_048_576,
+2026-10-07T08:24:59.4478839Z         max_stderr_bytes: int = 65_536,
+2026-10-07T08:24:59.4478980Z         request_timeout: float = 30,
+2026-10-07T08:24:59.4479122Z         executable_sha256: str | None = None,
+2026-10-07T08:24:59.4479376Z         options: AppServerOptions | None = None,
+2026-10-07T08:24:59.4479522Z     ) -> None:
+2026-10-07T08:24:59.4479649Z         if not argv or not Path(argv[0]).is_absolute():
+2026-10-07T08:24:59.4479891Z             raise ConfigurationError("Codex App Server executable must be an absolute argv path")
+2026-10-07T08:24:59.4480144Z         if any(not part or "\x00" in part for part in argv):
+2026-10-07T08:24:59.4480395Z             raise ConfigurationError("Codex App Server argv entries must be non-empty and NUL-free")
+2026-10-07T08:24:59.4480620Z         self.argv = argv
+2026-10-07T08:24:59.4480765Z         self.environment_allowlist = environment_allowlist
+2026-10-07T08:24:59.4480923Z         self.cwd = cwd
+2026-10-07T08:24:59.4481055Z         self.max_message_bytes = max_message_bytes
+2026-10-07T08:24:59.4481296Z         self.max_stderr_bytes = max_stderr_bytes
+2026-10-07T08:24:59.4481453Z         self.request_timeout = request_timeout
+2026-10-07T08:24:59.4481611Z         if executable_sha256 is not None and (
+2026-10-07T08:24:59.4481759Z             len(executable_sha256) != 71
+2026-10-07T08:24:59.4481915Z             or not executable_sha256.startswith("sha256:")
+2026-10-07T08:24:59.4482063Z             or any(
+2026-10-07T08:24:59.4482180Z                 character not in "0123456789abcdef"
+2026-10-07T08:24:59.4482340Z                 for character in executable_sha256[7:]
+2026-10-07T08:24:59.4482481Z             )
+2026-10-07T08:24:59.4482580Z         ):
+2026-10-07T08:24:59.4482751Z             raise ConfigurationError("Codex executable digest must be sha256 lowercase hex")
+2026-10-07T08:24:59.4482983Z         self.options = options or AppServerOptions()
+2026-10-07T08:24:59.4483151Z         self.executable_sha256 = executable_sha256
+2026-10-07T08:24:59.4483305Z         executable = Path(self.argv[0])
+2026-10-07T08:24:59.4483490Z         if not executable.is_file() or not os.access(executable, os.X_OK):
+2026-10-07T08:24:59.4483748Z >           raise ConfigurationError("Codex App Server executable is not an executable file")
+2026-10-07T08:24:59.4484051Z E           aeep.errors.ConfigurationError: Codex App Server executable is not an executable file
+2026-10-07T08:24:59.4484232Z 
+2026-10-07T08:24:59.4484312Z src/aeep/hosts/codex_app_server.py:131: ConfigurationError
+2026-10-07T08:24:59.4484506Z =============================== warnings summary ===============================
+2026-10-07T08:24:59.4484775Z ../../../../../opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/fastapi/testclient.py:1
+2026-10-07T08:24:59.4485294Z   /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+2026-10-07T08:24:59.5381097Z     from starlette.testclient import TestClient as TestClient  # noqa
+2026-10-07T08:24:59.5381419Z 
+2026-10-07T08:24:59.5381600Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-07T08:24:59.5381882Z =========================== short test summary info ============================
+2026-10-07T08:24:59.5382440Z FAILED tests/test_v08_managed_workers.py::test_app_server_private_policy_snapshot_lifetime[False] - aeep.errors.ConfigurationError: Codex App Server executable is not an executable file
+2026-10-07T08:24:59.5383058Z FAILED tests/test_v08_managed_workers.py::test_app_server_private_policy_snapshot_lifetime[True] - aeep.errors.ConfigurationError: Codex App Server executable is not an executable file
+2026-10-07T08:24:59.5383497Z 2 failed, 59 passed, 6 skipped, 1241 deselected, 1 warning in 518.93s (0:08:38)
+2026-10-07T08:24:59.6918360Z ##[error]Process completed with exit code 1.
+2026-10-07T08:24:59.7005061Z Post job cleanup.
+2026-10-07T08:24:59.7510904Z [command]/usr/bin/git version
+2026-10-07T08:24:59.7539746Z git version 2.55.0
+2026-10-07T08:24:59.7560562Z Temporarily overriding HOME='/home/runner/work/_temp/0658e673-7452-4185-a4b5-86cc9743aadb' before making global git config changes
+2026-10-07T08:24:59.7561496Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-07T08:24:59.7563959Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AEEP-router/AEEP-router
+2026-10-07T08:24:59.7590700Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-07T08:24:59.7616061Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-07T08:24:59.7812934Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-07T08:24:59.7850523Z http.https://github.com/.extraheader
+2026-10-07T08:24:59.7856314Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-07T08:24:59.7881409Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-07T08:24:59.8074971Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-07T08:24:59.8103140Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-07T08:24:59.8392455Z Cleaning up orphan processes
+2026-10-07T08:24:59.8583057Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
