@@ -29,16 +29,24 @@ jobs:
           if (!$target) { throw 'No runner filesystem has 55 GiB free; preserve the 50 GiB reserve.' }
           $root = Join-Path $target.Root "aeep-wsl-${{ matrix.version }}-$env:GITHUB_RUN_ID"
           New-Item -ItemType Directory $root | Out-Null
+          New-Item -ItemType Directory "$root/tmp" | Out-Null
           "AEEP_CHECK_ROOT=$root" >> $env:GITHUB_ENV
+          "PIP_CACHE_DIR=$root/pip-cache" >> $env:GITHUB_ENV
+          "UV_CACHE_DIR=$root/uv-cache" >> $env:GITHUB_ENV
+          "TEMP=$root/tmp" >> $env:GITHUB_ENV
+          "TMP=$root/tmp" >> $env:GITHUB_ENV
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Build versioned candidate
         shell: pwsh
         run: |
-          python -m pip install '.[dev]' 'uv==0.8.22'
+          python -m venv "$env:AEEP_CHECK_ROOT/build-env"
+          if ($LASTEXITCODE) { throw 'Build environment creation failed' }
+          $python = "$env:AEEP_CHECK_ROOT/build-env/Scripts/python.exe"
+          & $python -m pip install '.[dev]' 'uv==0.8.22'
           if ($LASTEXITCODE) { throw 'Build dependencies failed' }
-          python scripts/build_installer.py --uv (Get-Command uv).Source --tag v0.8.2 --output "$env:AEEP_CHECK_ROOT/release"
+          & $python scripts/build_installer.py --uv "$env:AEEP_CHECK_ROOT/build-env/Scripts/uv.exe" --tag v0.8.2 --output "$env:AEEP_CHECK_ROOT/release"
           if ($LASTEXITCODE) { throw 'Release build failed' }
       - name: Install Ubuntu in actual WSL
         shell: pwsh
