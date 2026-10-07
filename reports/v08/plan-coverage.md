@@ -42,7 +42,13 @@ directory. Native sandbox policy and assessment thresholds remain unchanged.
 The [Windows CI repair record](windows-ci-20261007/summary.md) records the
 passing local suite/coverage gates, completed runner failures and their repairs.
 The current branch passes the expanded portability smoke on Windows, macOS and
-all Linux Python versions; full matrix validation is still running. No release, human testing, or paid provider call is included.
+all Linux Python versions. The full Windows worker check now passes with the
+standard subprocess harness and a bounded 15-minute wait; its earlier 3-minute
+limit was too short for the observed runner. The latest Windows full run has one planning-fixture timeout; its success-path
+deadline is corrected within the existing grant. Both Windows branch gates pass;
+the overall floor now uses combined platform evidence for Windows while
+Linux/macOS keep individual floors. Full matrix validation remains in progress,
+with macOS, all Linux versions, DSH and containment checks passed. No release, human testing, or paid provider call is included.
 
 
 ## October 7: WSL and remaining host/provider checks

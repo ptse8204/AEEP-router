@@ -59,6 +59,8 @@ async def test_bounded_planning_requires_review_and_only_installs_inactive_candi
     spec = ExecutorSpec(id="planner", capability="planning.definition@1", kind="host_managed", description="Configured planner", config=managed_config(), resource_pool=RESOURCE_ID, side_effect=SideEffect.READ)
     spec.estimate = python_spec("reference", "builtins:len").estimate
     spec.config["max_message_bytes"] = 100000
+    # Review/admission fixture, not a one-second transport deadline test.
+    spec.config["timeout_seconds"] = 30
     router = Router(Manifest(database=":memory:", resources=[SubscriptionResource(id=RESOURCE_ID, provider="openai", product="codex")], executors=[spec]))
     service = AssessmentService(router, tmp_path / "assessment")
     path = tmp_path / "SKILL.md"

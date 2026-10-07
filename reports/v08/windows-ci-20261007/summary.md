@@ -1,9 +1,25 @@
 # Windows CI repair — October 7, 2026
 
-Current source under verification: `9017ddb8c6897430ed0b5231863c1df836392712`.
+Current source under verification: `47f20ee6d84814980717df68886cc3971ce7df25`.
+
+[Current run 37692178403](https://github.com/ptse8204/AEEP-router/actions/runs/37692178403)
+has passed the focused Windows worker-completion step in 4 minutes 33 seconds.
+macOS and all three Linux Python versions passed full tests, coverage, strict
+verification and package builds. DSH and real containment checks also passed;
+Windows completed with 1,211 passed, 102 skipped and one planning-fixture
+timeout. The shared fixture inherited a one-second transport limit even though
+this test checks review and admission; the fake adapter returned successfully
+but the outer deadline expired. The previous 180-second worker harness bound was too short for
+this runner; the assessment definitions and admission criteria remain unchanged.
+
+The containment job built image
+`sha256:9122af3a60e0e81dcd4a41c44846fa5e4f8cadbbf43ff5cfd2c2eae0fdcf4fec`
+on its ephemeral GitHub runner, recording its identity in `/tmp/aeep-image-id`.
+It passed 61 tests with six skipped. No local Docker resources were created.
+
 The earlier phase results below apply to their linked revisions.
 
-[Current run 37683540502](https://github.com/ptse8204/AEEP-router/actions/runs/37683540502)
+[Previous run 37683540502](https://github.com/ptse8204/AEEP-router/actions/runs/37683540502)
 passed the expanded portability smoke on all five matrix entries. All Linux
 versions and macOS are fully green: 1,277 tests passed, 37 skipped, 81% coverage,
 both branch gates, strict router verification and package builds. DSH and real
@@ -174,9 +190,35 @@ operation limits and campaign thresholds are unchanged. This fixture remains
 software lifecycle evidence only. The change is reviewed under the standing
 finite test-definition delegation.
 
-CI now prints test names and slow-test durations and retains coverage artifacts.
+CI now prints test-module progress and slow-test durations and retains coverage artifacts.
 JSON export does not enforce a floor; the existing final report still enforces
 80%, and both 90% branch gates remain unchanged. The full-suite step has a
 120-minute upper bound. No platform's coverage floor was lowered.
 
 Reviewed `tests/test_v08_assessment_interfaces.py`: `0069bfa1c8cce641766d3eca2b9b07a1c7405a456a8010dc3ae313ed1c5e7721`.
+
+## Final planning fixture and cross-platform coverage review
+
+Under the standing finite test-definition delegation, the review/admission fixture
+now binds a 30-second planner deadline before preparing and reviewing the request.
+Its existing 60-second grant, two-operation limit, one-model-turn limit, subject
+drift checks, boundary checks and inactive-candidate assertions are unchanged.
+The dedicated one-second transport deadline tests are unchanged. Both fixture
+cases pass locally from a temporary source copy outside protected Codex storage.
+The managed worktree itself was correctly rejected by executable identity checks
+because it lives below `.codex`; no protection was bypassed.
+
+The retained Windows coverage artifact from run 37692178403 measures 76.3073%
+overall; every critical and assessment 90% branch gate passes. POSIX-only native
+execution and configuration paths are deliberately unavailable on native Windows.
+Coverage.py path aliases combine the actual platform observations without excluding
+source files. Combining this Windows artifact with the same revision's Linux 3.13
+artifact measures 80.6800%. The default 80% floor and both 90% gates remain.
+Linux/macOS continue enforcing their individual overall floors. Windows reports
+its individual total without an overall floor; a new required dependent job
+enforces the unchanged overall floor across the successful platform matrix.
+This explicitly changes the scope of that coverage check, not the measured data.
+No native Windows onboarding support or POSIX behavior is inferred from it.
+
+Compile, schema freshness, assessment policy and focused lint pass. The planning
+cases are added to the early CI portability smoke. The next full run is pending.
