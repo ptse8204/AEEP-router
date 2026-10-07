@@ -41,7 +41,8 @@ def main() -> None:
         stream.add(bundle, arcname='bundle')
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
     script = (root / 'scripts/install.sh').read_text().replace('@RELEASE_BASE@', f'https://github.com/ptse8204/AEEP-router/releases/download/{args.tag}').replace('@BUNDLE_SHA256@', digest)
-    (args.output / 'install.sh').write_text(script)
+    # Keep the shell script byte-identical to its checksum on Windows too.
+    (args.output / 'install.sh').write_bytes(script.encode('utf-8'))
     (args.output / 'SHA256SUMS').write_text(f'{digest}  aeep-bundle.tar.gz\n' + hashlib.sha256(script.encode()).hexdigest() + '  install.sh\n')
     print(f'Prepared {args.output}; publication and clean-source live platform checks remain separate.')
 

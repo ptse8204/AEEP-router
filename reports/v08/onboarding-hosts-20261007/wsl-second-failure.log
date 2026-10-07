@@ -1,0 +1,50 @@
+wsl (1)	Exercise installer inside WSL	﻿2026-10-07T07:53:50.2037517Z ##[group]Run $source = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:GITHUB_WORKSPACE").Trim()
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2038373Z ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:GITHUB_WORKSPACE").Trim()^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2039074Z ^[[36;1m$release = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2040484Z ^[[36;1mwsl -d Ubuntu-24.04 -u root --exec bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2041161Z ^[[36;1mif ($LASTEXITCODE) { throw 'WSL installer acceptance failed' }^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2041913Z ^[[36;1mGet-PSDrive -PSProvider FileSystem | Select-Object Name, Free, Used | ConvertTo-Json | Set-Content wsl-evidence/windows-storage-after.json^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2122326Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2122693Z env:
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2122864Z   WSL_UTF8: 1
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2123072Z   AEEP_CHECK_ROOT: D:\aeep-wsl-1-37590036569
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2123496Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2123972Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2124446Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2124886Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2125303Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:50.2125633Z ##[endgroup]
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:55.3087508Z Linux runnervmfi6oq 4.4.0-26100-Microsoft #33438-Microsoft Fri Jan 01 08:00:00 PST 2016 x86_64 x86_64 x86_64 GNU/Linux
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:55.3154916Z /usr/bin/curl
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:55.3352830Z /mnt/d/aeep-wsl-1-37590036569/release/install.sh: 3: set: Illegal option -
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6203184Z ^[[31;1mException: ^[[0mD:\a\_temp\eddbc82c-0976-4fa6-95ab-37d25faf98ad.ps1:5^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6204154Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6205059Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   5 | ^[[0m if ($LASTEXITCODE) { ^[[36;1mthrow 'WSL installer acceptance failed'^[[0m }^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6206484Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6207878Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mWSL installer acceptance failed^[[0m
+wsl (1)	Exercise installer inside WSL	2026-10-07T07:53:56.6746631Z ##[error]Process completed with exit code 1.
+wsl (2)	Exercise installer inside WSL	﻿2026-10-07T07:53:51.3262872Z ##[group]Run $source = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:GITHUB_WORKSPACE").Trim()
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3264125Z ^[[36;1m$source = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:GITHUB_WORKSPACE").Trim()^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3265148Z ^[[36;1m$release = (wsl -d Ubuntu-24.04 -u root --exec wslpath -u "$env:AEEP_CHECK_ROOT/release").Trim()^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3266317Z ^[[36;1mwsl -d Ubuntu-24.04 -u root --exec bash "$source/scripts/check_wsl.sh" "$release" "$source" "$source/wsl-evidence"^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3267359Z ^[[36;1mif ($LASTEXITCODE) { throw 'WSL installer acceptance failed' }^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3268587Z ^[[36;1mGet-PSDrive -PSProvider FileSystem | Select-Object Name, Free, Used | ConvertTo-Json | Set-Content wsl-evidence/windows-storage-after.json^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3360060Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3360430Z env:
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3360611Z   WSL_UTF8: 1
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3360833Z   AEEP_CHECK_ROOT: D:\aeep-wsl-2-37590036569
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3361238Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3361701Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3362142Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3362559Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3362947Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:51.3363260Z ##[endgroup]
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:58.6993839Z Linux runnervmfi6oq 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:58.7059649Z /usr/bin/curl
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:58.7235587Z /mnt/d/aeep-wsl-2-37590036569/release/install.sh: 3: set: Illegal option -
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.0733434Z ^[[31;1mException: ^[[0mD:\a\_temp\8f6bb56a-4c69-4128-b0d7-b39624bf6363.ps1:5^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.0734265Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.0735055Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   5 | ^[[0m if ($LASTEXITCODE) { ^[[36;1mthrow 'WSL installer acceptance failed'^[[0m }^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.0736130Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.0737142Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mWSL installer acceptance failed^[[0m
+wsl (2)	Exercise installer inside WSL	2026-10-07T07:53:59.1296516Z ##[error]Process completed with exit code 1.
