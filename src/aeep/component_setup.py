@@ -257,9 +257,9 @@ def apply(router: Router, digest: str, *, retry_failed: bool = False) -> dict[st
                         shutil.copytree(plugin, snapshot / 'plugin')
                     copied = snapshot / 'plugin'
                     expected = {p.relative_to(plugin) for p in plugin.rglob('*') if p.is_file()}
-                    actual = {p.relative_to(copied) for p in copied.rglob('*') if p.is_file()}
+                    copied_files = {p.relative_to(copied) for p in copied.rglob('*') if p.is_file()}
                     if (snapshot.is_symlink() or copied.is_symlink() or any(p.is_symlink() for p in snapshot.rglob('*'))
-                            or actual != expected or any(not filecmp.cmp(plugin / p, copied / p, shallow=False) for p in expected)):
+                            or copied_files != expected or any(not filecmp.cmp(plugin / p, copied / p, shallow=False) for p in expected)):
                         raise ConfigurationError('Claude snapshot differs from the reviewed plugin; preserved for inspection before retry')
                     catalog_path = snapshot / '.claude-plugin/marketplace.json'
                     local_catalog = {'name': result['native_marketplace'], 'owner': {'name': 'AEEP reviewed local snapshot'},
