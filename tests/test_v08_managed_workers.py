@@ -147,6 +147,8 @@ async def test_app_server_private_policy_snapshot_lifetime(monkeypatch, cleanup_
     from aeep.hosts.codex_app_server import CodexAppServerAdapter
 
     worker = binding(schema_version='execution.worker.v2', seccomp_profile={'defaultAction':'SCMP_ACT_ERRNO','syscalls':[]})
+    # This lifecycle fixture never launches its runtime; use an existing executable on every host.
+    worker = worker.model_copy(update={'runtime': sys.executable})
     spec = ExecutorSpec(id='worker', capability='fixture', kind='host_managed', resource_pool='pool', description='policy lifecycle fixture',
         config={'adapter_id':'codex-app-server','argv':[worker.binary,'app-server'],'instructions':'fixture','managed_worker':worker.model_dump(mode='json')})
 
