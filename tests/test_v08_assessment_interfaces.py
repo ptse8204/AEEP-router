@@ -20,6 +20,7 @@ pytestmark = pytest.mark.assessment_lifecycle
 async def test_completed_worker_exit_preserves_admission_when_reading_report(tmp_path, monkeypatch):
     import asyncio
     import os
+    import subprocess
     import sys
     from pathlib import Path
 
@@ -41,19 +42,17 @@ async def test_completed_worker_exit_preserves_admission_when_reading_report(tmp
         source.store._connection.backup(destination)
     await source.close()
     root = (await asyncio.to_thread(Path(__file__).resolve)).parents[1]
-    process = await asyncio.create_subprocess_exec(
-        sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest_file),
-        "--directory", str(assessment.directory), "--assessment", identity,
+    # This runs the full frozen assessment, not just process startup. Hosted
+    # Windows filesystem checks can take several minutes. subprocess.run owns
+    # termination and pipe cleanup if the finite harness deadline is exceeded.
+    process = await asyncio.to_thread(
+        subprocess.run,
+        [sys.executable, "-m", "aeep.assessment.worker", "--manifest", str(manifest_file),
+         "--directory", str(assessment.directory), "--assessment", identity],
         env={**os.environ, "PYTHONPATH": os.pathsep.join([str(root / "src"), str(root / "tests")])},
-        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+        capture_output=True, timeout=900, check=False,
     )
-    try:
-        _out, errors = await asyncio.wait_for(process.communicate(), timeout=180)
-    finally:
-        if process.returncode is None:
-            process.kill()
-            await asyncio.wait_for(process.communicate(), timeout=10)
-    assert process.returncode == 0, errors.decode()
+    assert process.returncode == 0, process.stderr.decode()
     router = Router.from_manifest(manifest_file)
     try:
         assessment = AssessmentService(router, assessment.directory)

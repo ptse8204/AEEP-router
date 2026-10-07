@@ -1,7 +1,16 @@
 # Windows CI repair — October 7, 2026
 
-Current source under verification: `41531fc93c0f2db49f43b0bc20f4b8075375ed52`.
+Current source under verification: `9017ddb8c6897430ed0b5231863c1df836392712`.
 The earlier phase results below apply to their linked revisions.
+
+[Current run 37683540502](https://github.com/ptse8204/AEEP-router/actions/runs/37683540502)
+passed the expanded portability smoke on all five matrix entries. All Linux
+versions and macOS are fully green: 1,277 tests passed, 37 skipped, 81% coverage,
+both branch gates, strict router verification and package builds. DSH and real
+container boundaries (61 passed, six skipped) also pass. The unusually long
+Windows attempt was canceled to retrieve its partial log: 997 passed, 40 skipped,
+one worker-harness timeout, with the remaining tests interrupted. Superseded runs 37681197389 and 37682832761 were
+canceled after their useful completed results were retained.
 
 - POSIX-only file and process operations reject missing primitives before effects.
   Artifact reads retain the portable fallback; symlink protections remain enabled
@@ -151,3 +160,23 @@ subsequent changes are reviewed fixtures, CI ordering, and verification records.
 - `tests/test_v08_codex_invocation.py`: `f2b144f61a3ccc05a0661ffc60837edb278b2e229dc1ac6b2573cc105e7fab07`
 
 - `tests/test_v08_assessment_interfaces.py`: `b917cf27ecaffc1d960a8da195cbe55bf303ddd02ea505e3369d6298f11d1cc6`
+
+## Windows worker harness deadline review
+
+The canceled run made steady progress through assessment tests at roughly half
+the previous runner's speed: the 60–65% segment took about 28 minutes versus
+15 minutes previously. It did not establish a production deadlock. The worker
+lifecycle fixture's fixed 180-second deadline expired during a full frozen
+assessment. Its child now uses standard `subprocess.run` through `asyncio.to_thread`,
+which owns termination and pipe cleanup, with a finite 900-second harness bound.
+The assessment's cases, repetitions, admission assertions, execution grants,
+operation limits and campaign thresholds are unchanged. This fixture remains
+software lifecycle evidence only. The change is reviewed under the standing
+finite test-definition delegation.
+
+CI now prints test names and slow-test durations and retains coverage artifacts.
+JSON export does not enforce a floor; the existing final report still enforces
+80%, and both 90% branch gates remain unchanged. The full-suite step has a
+120-minute upper bound. No platform's coverage floor was lowered.
+
+Reviewed `tests/test_v08_assessment_interfaces.py`: `0069bfa1c8cce641766d3eca2b9b07a1c7405a456a8010dc3ae313ed1c5e7721`.

@@ -1,5 +1,24 @@
 # 0.8 plan coverage and remaining work
 
+## October 7: documentation refresh and authoring rules
+
+The operator approved the documentation implementation plan. The
+[documentation refresh record](documentation-refresh-20261007/summary.md) tracks
+the audit, corrections, local authoring-tool pins, validation and remaining gates.
+The README now starts with agent connection; the docs index organizes tutorials,
+how-to guides, reference and explanations. Active guides/examples have specific
+entry points and navigation. AGENTS.md delegates durable documentation guidance
+to CONTRIBUTING.md, including evidence checks and the installed humanizer skill.
+Local Markdown and offline-link targets leave CI and runtime behavior unchanged.
+
+Historical reports, ADRs, assessment policy, packaged skills and the existing
+Windows CI edits remain intact. Integration README edits change the verification
+source binding; old live evidence keeps its original revision and cannot qualify
+this one. Source-bound live validation, the unrun three-way comparison and the
+human-usability gate remain open. Documentation and repository checks are pending
+in the linked record; no publication or live provider call is included.
+
+
 ## October 7: native Windows CI repair in progress
 
 The operator requested continuing the Windows CI repair and push. The initial
@@ -15,8 +34,9 @@ fixture and Linux native-policy fixtures under forbidden system temp roots.
 The fixture uses the current Python executable; CI uses its runner-owned temp
 directory. Native sandbox policy and assessment thresholds remain unchanged.
 The [Windows CI repair record](windows-ci-20261007/summary.md) records the
-passing local suite/coverage gates, successful Linux jobs, native Windows failure
-counts, and the second portability repair awaiting runner verification. No release, human testing, or paid provider call is included.
+passing local suite/coverage gates, completed runner failures and their repairs.
+The current branch passes the expanded portability smoke on Windows, macOS and
+all Linux Python versions; full matrix validation is still running. No release, human testing, or paid provider call is included.
 
 
 ## October 7: WSL and remaining host/provider checks
