@@ -31,6 +31,8 @@ except ImportError:  # Ordinary CLI imports remain portable on Windows.
 
 
 def _read(path: Path) -> bytes | None:
+    if not hasattr(os, "O_NOFOLLOW"):
+        raise ConfigurationError("project configuration requires macOS or Linux/WSL")
     try:
         descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
     except FileNotFoundError:
@@ -80,7 +82,7 @@ def config_path(record: TaskActivation) -> Path:
 @contextmanager
 def _codex_lock(record: TaskActivation) -> Iterator[None]:
     # A stable project lock also serializes activations backed by different databases.
-    if fcntl is None:
+    if fcntl is None or not hasattr(os, "O_NOFOLLOW"):
         raise ConfigurationError('project Codex binding requires a POSIX host')
     path = lock_path(record)
     descriptor = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
@@ -120,6 +122,8 @@ def entry_state(binding: TaskCodexBinding, contents: bytes | None) -> str:
 
 
 def _replace_codex_bytes(path: Path, before: bytes | None, after: bytes | None) -> None:
+    if not hasattr(os, "fchmod") or not hasattr(os, "O_NOFOLLOW"):
+        raise ConfigurationError("project configuration requires macOS or Linux/WSL")
     if after is None:
         if _read(path) != before:
             raise ConfigurationError('project Codex configuration changed during cleanup')

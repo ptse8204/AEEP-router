@@ -10,6 +10,9 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      # Native-policy fixtures must not request access beneath /tmp or /var/tmp.
+      TMPDIR: ${{ runner.temp }}
     strategy:
       fail-fast: false
       matrix:

@@ -84,6 +84,8 @@ def _path(record: TaskActivation) -> Path:
 
 
 def _read(path: Path) -> bytes | None:
+    if not hasattr(os, "O_NOFOLLOW"):
+        raise ConfigurationError("task overlays require macOS or Linux/WSL")
     try:
         descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
     except FileNotFoundError:

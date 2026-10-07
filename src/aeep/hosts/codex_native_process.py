@@ -59,6 +59,9 @@ async def execute_single_process(boundary: Any, argv: list[str], environment: di
                                  stdin: bytes | None, timeout: float, max_output: int,
                                  observer: Any = None) -> NativeCommandResult:
     from ..executors.command import _monitor_process, _ProcessMetrics
+    getpgid, getsid = getattr(os, "getpgid", None), getattr(os, "getsid", None)
+    if getpgid is None or getsid is None:
+        raise ConfigurationError("native command requires POSIX process ownership checks")
     boundary.validate_single_process()
     if stdin is not None and len(stdin) > 1_048_576:
         raise ConfigurationError('single-process command input exceeds 1 MiB')
@@ -106,8 +109,8 @@ async def execute_single_process(boundary: Any, argv: list[str], environment: di
             candidate = psutil.Process(int(identity))
             server = psutil.Process(transport._process.pid)
             if (server not in candidate.parents()
-                    or os.getpgid(candidate.pid) != candidate.pid
-                    or os.getsid(candidate.pid) != candidate.pid):
+                    or getpgid(candidate.pid) != candidate.pid
+                    or getsid(candidate.pid) != candidate.pid):
                 raise CodexProtocolError('native command ownership or session changed')
             owned_target = candidate
             guard_bytes = len(prefix)

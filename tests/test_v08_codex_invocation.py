@@ -467,7 +467,7 @@ async def test_catalog_metrics_worker_binding_is_exact_and_metadata_never_implie
     from aeep.hosts.codex_app_server import CodexAppServerAdapter
     from aeep.models import ExecutionStatus, ExecutorSpec, RawExecution
 
-    worker = binding()
+    worker = binding().model_copy(update={"runtime": sys.executable})
     spec = ExecutorSpec(id='metrics',capability='fixture',kind='host_managed',resource_pool='pool',description='metrics fixture',
         config={'adapter_id':'codex-app-server','argv':[worker.binary,'app-server'],'instructions':'fixture',
                 'adapter_options':{'catalog_metrics':True},'managed_worker':worker.model_dump(mode='json')})

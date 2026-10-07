@@ -131,6 +131,9 @@ class Metrics:
 
 def relay(argv: list[str], scope: str) -> int:
     """Supervise one fresh host and export only the bounded, content-free snapshot."""
+    if not hasattr(os, "killpg") or not hasattr(signal, "SIGKILL"):
+        raise ValueError("catalog metrics relay requires a POSIX host")
+    killpg, sigkill = os.killpg, signal.SIGKILL
     metrics = Metrics(scope)
     output_lock = threading.Lock()
 
@@ -187,7 +190,7 @@ def relay(argv: list[str], scope: str) -> int:
                                    env=environment, start_new_session=True)
         def stop(_signum: int, _frame: Any) -> None:
             if process is not None and process.poll() is None:
-                os.killpg(process.pid, signal.SIGTERM)
+                killpg(process.pid, signal.SIGTERM)
         signal.signal(signal.SIGTERM, stop)
         signal.signal(signal.SIGINT, stop)
         assert process.stdout is not None
@@ -203,7 +206,7 @@ def relay(argv: list[str], scope: str) -> int:
         code = process.wait()
     finally:
         if process is not None and process.poll() is None:
-            os.killpg(process.pid, signal.SIGKILL)
+            killpg(process.pid, sigkill)
             process.wait()
         server.shutdown()
         thread.join(timeout=3)

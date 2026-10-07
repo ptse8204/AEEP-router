@@ -1,5 +1,23 @@
 # 0.8 plan coverage and remaining work
 
+## October 7: native Windows CI repair in progress
+
+The operator requested continuing the Windows CI repair and push. The initial
+run [37596098967](https://github.com/ptse8204/AEEP-router/actions/runs/37596098967)
+failed Windows type checking on POSIX-only APIs. Protected configuration reads,
+writes, locks and process supervision now reject unavailable primitives before
+side effects; artifact reads retain their existing portable fallback. No security
+flag is replaced with zero. `tests/test_posix_guards.py` records the exact local
+regression review under the standing test-definition delegation.
+
+The same run exposed a hard-coded Docker executable in a construction-only
+fixture and Linux native-policy fixtures under forbidden system temp roots.
+The fixture uses the current Python executable; CI uses its runner-owned temp
+directory. Native sandbox policy and assessment thresholds remain unchanged.
+Windows-target mypy passes locally; actual runner verification and full required
+checks remain pending. No release, human testing, or paid provider call is included.
+
+
 ## October 7: WSL and remaining host/provider checks
 
 The operator requested WSL and remaining host/provider checks, authorized GitHub

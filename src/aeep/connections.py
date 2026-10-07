@@ -38,7 +38,7 @@ def connection_path(identity: str) -> Path:
 def file_lock(path: Path) -> Iterator[None]:
     """Serialize cooperating operator writers; dispatch only reads atomic files."""
     from .hosts.codex_project import fcntl
-    if fcntl is None:
+    if fcntl is None or not hasattr(os, "O_NOFOLLOW"):
         raise ConfigurationError('connection management requires macOS or Linux/WSL')
     path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     if path.parent.resolve() != path.parent:
