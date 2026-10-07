@@ -69,10 +69,11 @@ def preview(router: Router, plan: ComponentSetup) -> dict[str, Any]:
     directory = config_root() / 'packages' / digest
     return {'digest': digest, 'candidate': candidate.name, 'source': plan.package, 'version': plan.version,
             'destination': str(directory), 'connection': plan.connection_id,
+            'native_marketplace': f'aeep-reviewed-{digest[:16]}' if connection.host == 'claude' and plan.kind == 'marketplace' else plan.marketplace,
             'metadata_review': candidate.model_dump(mode='json'),
             'command_policy': 'Exact package/version and executable above; argv only, no catalog-supplied commands.',
             'effects': ['Download pinned package and dependencies',
-                        ('Native Codex user-scope plugin registration can affect other projects' if connection.host == 'codex' else 'Native Claude plugin and marketplace registration in the selected project') if plan.kind == 'marketplace' else 'Write owned host connection',
+                        ('Native Codex user-scope plugin registration can affect other projects' if connection.host == 'codex' else 'Register an AEEP-owned local catalog containing only the pinned plugin, in Claude project scope; upstream updates require a new review') if plan.kind == 'marketplace' else 'Write owned host connection',
                         'Plugin hooks may execute when the host loads a native plugin' if plan.kind == 'marketplace' else
                         'Package lifecycle scripts enabled' if plan.lifecycle_scripts else 'Package lifecycle/build scripts disabled'],
             'readiness': 'Installation does not qualify a route, establish output compatibility, sign in, or authorize paid execution.'}
@@ -239,10 +240,37 @@ def apply(router: Router, digest: str, *, retry_failed: bool = False) -> dict[st
                 inspect_native_catalog(checkout, plan)
                 scope = ['--scope', 'project'] if connection.host == 'claude' else []
                 native_source = str(checkout)
-                if connection.host == 'claude' and plan.package.removesuffix('.git') == 'https://github.com/anthropics/claude-plugins-official':
-                    native_source = f'anthropics/claude-plugins-official#{plan.version}'
+                if connection.host == 'claude':
+                    # Claude's remote ref accepts branches/tags, not arbitrary commits.
+                    # A local reviewed snapshot also avoids claiming an official catalog name.
+                    import filecmp
+
+                    from .marketplaces import MarketplaceAdapter, _relative
+                    catalog, _, _ = MarketplaceAdapter(str(checkout), local=True).local_metadata()
+                    entry = next(e for e in catalog['plugins'] if e['name'] == plan.plugin)
+                    source = entry['source']
+                    plugin = checkout / _relative(source if isinstance(source, str) else source['path'])
+                    if any(p.is_symlink() for p in plugin.rglob('*')):
+                        raise ConfigurationError('native plugin symlinks require separate reviewed setup')
+                    snapshot = root / 'claude-catalog'
+                    if not snapshot.exists():
+                        shutil.copytree(plugin, snapshot / 'plugin')
+                    copied = snapshot / 'plugin'
+                    expected = {p.relative_to(plugin) for p in plugin.rglob('*') if p.is_file()}
+                    actual = {p.relative_to(copied) for p in copied.rglob('*') if p.is_file()}
+                    if (snapshot.is_symlink() or copied.is_symlink() or any(p.is_symlink() for p in snapshot.rglob('*'))
+                            or actual != expected or any(not filecmp.cmp(plugin / p, copied / p, shallow=False) for p in expected)):
+                        raise ConfigurationError('Claude snapshot differs from the reviewed plugin; preserved for inspection before retry')
+                    catalog_path = snapshot / '.claude-plugin/marketplace.json'
+                    local_catalog = {'name': result['native_marketplace'], 'owner': {'name': 'AEEP reviewed local snapshot'},
+                                     'plugins': [{**entry, 'source': './plugin'}]}
+                    saved_catalog = _read(catalog_path)
+                    if saved_catalog and json.loads(saved_catalog) != local_catalog:
+                        raise ConfigurationError('Claude snapshot catalog was edited; preserved')
+                    write_json(catalog_path, local_catalog, before=saved_catalog)
+                    native_source = str(snapshot)
                 _run([host, 'plugin', 'marketplace', 'add', native_source, *scope], Path(connection.project))
-                _run([host, 'plugin', 'add' if connection.host == 'codex' else 'install', f'{plan.plugin}@{plan.marketplace}', *scope], Path(connection.project))
+                _run([host, 'plugin', 'add' if connection.host == 'codex' else 'install', f'{plan.plugin}@{result["native_marketplace"]}', *scope], Path(connection.project))
             result = {'digest': digest, 'status': 'installed', 'destination': str(root),
                       'execution': 'not admitted; host connection only',
                       'connection_state': 'application handoff required; inspect the owned MCP descriptor' if connection.host == 'deepseek-api' else 'native connection configured; reload and verify',

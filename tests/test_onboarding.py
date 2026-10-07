@@ -336,3 +336,65 @@ def test_claude_supported_marketplace_inventory_is_importable(tmp_path, monkeypa
         {'name': 'team', 'source': 'github', 'repo': 'team/plugins'},
         {'name': 'hosted', 'source': 'claudeai', 'marketplaceId': 'private-id'}]).encode()))
     assert known_marketplaces('claude') == [{'name': 'team', 'location': 'team/plugins'}]
+
+
+def test_claude_native_setup_uses_reviewed_local_snapshot_and_rejects_retry_edits(tmp_path, monkeypatch):
+    import aeep.component_setup as module
+    from aeep.assessment.repository import AssessmentRepository
+    from aeep.component_setup import ComponentSetup, apply, define
+    from aeep.discovery import RegistryCandidate, _metadata_digest
+    from aeep.models import utc_now
+
+    project = prepare(tmp_path, monkeypatch)
+    connection = connect('claude', 'claude', project)
+    router = Router.from_manifest(connection.manifest)
+    entry = {'name': 'safe', 'source': './plugins/safe'}
+    candidate = RegistryCandidate(registry_candidate_id='native-fixture', adapter_id='fixture', name='safe',
+        raw_metadata_digest=_metadata_digest(entry), retrieved_at=utc_now())
+    router.store.save_registry_candidate(candidate)
+    plan = ComponentSetup(connection_id='claude', candidate_id=candidate.registry_candidate_id,
+        candidate_digest=candidate.raw_metadata_digest, kind='marketplace',
+        package='https://github.com/anthropics/claude-plugins-official', version='a' * 40,
+        plugin='safe', marketplace='claude-plugins-official')
+    review = define(router, plan)
+    calls = []
+    fail_install = True
+
+    def execute(argv, cwd):
+        calls.append(argv)
+        if 'clone' in argv:
+            checkout = Path(argv[-1])
+            (checkout / '.claude-plugin').mkdir(parents=True)
+            (checkout / '.claude-plugin/marketplace.json').write_text(json.dumps({
+                'name': plan.marketplace, 'plugins': [entry]}))
+            (checkout / 'plugins/safe/skills').mkdir(parents=True)
+            (checkout / 'plugins/safe/skills/SKILL.md').write_text('reviewed content')
+        if 'install' in argv and fail_install:
+            raise ConfigurationError('simulated native interruption')
+
+    from pathlib import Path
+    monkeypatch.setattr(module, '_run', execute)
+    monkeypatch.setattr(module, 'require_space', lambda *args: None)
+    monkeypatch.setattr(module.shutil, 'which', lambda name: '/usr/bin/' + name)
+    try:
+        AssessmentRepository(router.store).review(review['digest'])
+        with pytest.raises(ConfigurationError, match='interruption'):
+            apply(router, review['digest'])
+        snapshot = Path(review['destination']) / 'claude-catalog'
+        installed_skill = snapshot / 'plugin/skills/SKILL.md'
+        installed_skill.write_text('unreviewed edit')
+        with pytest.raises(ConfigurationError, match='differs'):
+            apply(router, review['digest'], retry_failed=True)
+        assert installed_skill.read_text() == 'unreviewed edit'
+        installed_skill.write_text('reviewed content')
+        fail_install = False
+        result = apply(router, review['digest'], retry_failed=True)
+        assert result['status'] == 'installed'
+        assert ['marketplace', 'add', str(snapshot), '--scope', 'project'] == calls[-2][2:]
+        assert calls[-1][-3:] == [f'safe@{review["native_marketplace"]}', '--scope', 'project']
+        local_catalog = json.loads((snapshot / '.claude-plugin/marketplace.json').read_text())
+        assert local_catalog['name'] == review['native_marketplace']
+        assert local_catalog['plugins'] == [{**entry, 'source': './plugin'}]
+        assert apply(router, review['digest']) == result
+    finally:
+        asyncio.run(router.close())

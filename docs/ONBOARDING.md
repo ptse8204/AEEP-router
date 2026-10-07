@@ -95,6 +95,10 @@ scripts are disabled by default; Python source builds are disabled. Native plugi
 sources and unresolved native plugin dependencies require a separate handoff.
 Claude uses project scope; Codex native installation uses user scope and can
 affect other projects. [Claude documents these scopes](https://code.claude.com/docs/en/plugins/cli-reference).
+For Claude, AEEP copies the selected plugin from the reviewed commit into an
+owned local catalog named `aeep-reviewed-…`. The preview shows that name.
+This preserves the commit pin because Claude's remote catalog references accept
+branches and tags. Upstream updates require a new setup review.
 Native plugin hooks may run when the host loads the plugin and are part of the review.
 
 Native component connections are separate from AEEP's execution router. Configure
