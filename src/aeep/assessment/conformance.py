@@ -92,7 +92,7 @@ def probe_workers(codex: Path) -> dict[str, Any]:
         base = Path(root)
         for role in ("baseline", "candidate"):
             (base / role).mkdir()
-            (base / role / "canary").write_text("aeep controlled fixture\n")
+            (base / role / "canary").write_text("aeep controlled fixture\n", encoding="utf-8", newline="")
         for role, other in (("baseline", "candidate"), ("candidate", "baseline")):
             cwd = base / role
             probes = {

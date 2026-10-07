@@ -39,7 +39,7 @@ def mapped(approved_root, **changes):
 
 async def test_mapping_keeps_search_work_in_worker_and_never_prompts_host_paths(tmp_path):
     (tmp_path/'nested').mkdir()
-    (tmp_path/'nested'/'λ.txt').write_text('\u03b1\nλ\n', encoding='utf-8')
+    (tmp_path/'nested'/'λ.txt').write_text('\u03b1\nλ\n', encoding='utf-8', newline='')
     ctx = mapped(tmp_path, path='../outside')
     assert ctx.request.input == {'query':'λ', 'path':'../outside', 'files':[{'path':'nested/λ.txt','text':'\u03b1\nλ\n'}]}
     assert ctx.spec.required_capabilities == ('input_tree',)

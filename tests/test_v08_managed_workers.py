@@ -16,7 +16,7 @@ pytestmark = pytest.mark.assessment_boundary
 
 
 def binding(**changes):
-    return ManagedWorkerBinding(worker_id="candidate", runtime="/usr/local/bin/docker", socket=changes.pop("socket", "/tmp/docker.sock"),
+    return ManagedWorkerBinding(worker_id="candidate", runtime=changes.pop("runtime", sys.executable), socket=changes.pop("socket", "/tmp/docker.sock"),
         image="sha256:" + "1" * 64, platform="linux/arm64", binary="/opt/codex",
         binary_sha256="2" * 64, configuration_digest="3" * 64, dependencies_digest="4" * 64,
         **changes)
@@ -138,7 +138,7 @@ async def test_shared_managed_executor_rechecks_revocation_after_probe():
     registry = ManagedHostRegistry()
     registry.register('fixture',Fixture())
     spec = ExecutorSpec(id='fixture',capability='fixture',kind='host_managed',resource_pool='pool',description='authority fixture',
-        config={'adapter_id':'fixture','argv':['/fixture/host'],'instructions':'fixture'})
+        config={'adapter_id':'fixture','argv':[sys.executable],'instructions':'fixture'})
     with pytest.raises(ConfigurationError,match='revoked during preparation'):
         await ManagedHostExecutor(registry).execute(ExecutionContext(request=ActionRequest(capability='fixture'),
             spec=spec,estimate=RouteEstimate(),attempt=1,invocation_check=check))

@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
+import tempfile
 from collections import Counter
 from pathlib import Path
 
@@ -21,13 +23,19 @@ pytestmark = pytest.mark.assessment_contract
 
 
 def _run(executor, payload: dict) -> dict:
-    result = subprocess.run(
-        executor.config['argv'],
-        input=json.dumps(payload, ensure_ascii=False).encode(),
-        capture_output=True,
-        timeout=30,
-        check=True,
-    )
+    # Run the identical contained source from a file: Windows limits argv to 32 KiB.
+    argv = executor.config['argv']
+    assert argv[1:3] == ['-I', '-c']
+    with tempfile.TemporaryDirectory(prefix='aeep-recipe-test-') as directory:
+        program = Path(directory) / 'fixture.py'
+        program.write_text(argv[3], encoding='utf-8', newline='')
+        result = subprocess.run(
+            [sys.executable, '-I', '-X', 'utf8', str(program), *argv[4:]],
+            input=json.dumps(payload, ensure_ascii=False).encode(),
+            capture_output=True,
+            timeout=30,
+            check=True,
+        )
     return json.loads(result.stdout)
 
 

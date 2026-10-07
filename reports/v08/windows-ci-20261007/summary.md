@@ -79,3 +79,14 @@ Additional exact reviewed definitions:
 - `tests/test_posix_guards.py`: `73d71d4a03c537e8d7233443078fc620740e680f1b433d96035d66c24cb02b2c`
 - `tests/test_v08_assessment_interfaces.py`: `ec2cc58a4b83bd0e37fef8c7a82175323118f861c25cf43ce852dc877934dfeb`
 - `tests/fixtures/fake_codex_app_server.py`: `620b757fc63bccbdfdbd5f1c666e225058e69a36132ae51b71fff4c245998cde`
+
+## Windows smoke follow-up
+
+Run 37676416239 narrowed the smoke failures to seven (127 passed, seven skipped).
+Runtime executable paths are now validated on the coordinator platform; worker
+binaries and Unix socket paths retain POSIX semantics. The shared fixture uses
+the current Python executable for its non-launching runtime. Local executable
+fixtures, exact LF canaries, and search input fixtures were corrected. The trusted
+SkillsBench software test writes its identical contained source to a temporary
+UTF-8 file, avoiding Windows' command-line limit without changing the recipe or
+its container execution contract. Native Windows still needs another smoke run.

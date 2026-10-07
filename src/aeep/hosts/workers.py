@@ -157,8 +157,10 @@ class ManagedWorkerBinding(StrictModel):
                 raise ValueError("worker seccomp profile must deny by default")
             if len(self.security_bytes()) > 131072:
                 raise ValueError("worker seccomp profile is too large")
-        for value in (self.runtime, self.socket, self.binary):
-            if not PurePosixPath(value).is_absolute() or ".." in PurePosixPath(value).parts or any(c in value for c in "\x00\n,"):
+        for value, path in ((self.runtime, Path(self.runtime)),
+                            (self.socket, PurePosixPath(self.socket)),
+                            (self.binary, PurePosixPath(self.binary))):
+            if not path.is_absolute() or ".." in path.parts or any(c in value for c in "\x00\n,"):
                 raise ValueError("worker paths must be explicit absolute paths")
         if self.reviewed_files is not None:
             if not self.reviewed_files or len(self.reviewed_files) > 2000:

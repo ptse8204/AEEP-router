@@ -53,3 +53,17 @@ def test_worker_executable_uses_linux_paths_and_local_executable_uses_host_paths
     assert models.ManagedHostExecutorConfig(**fields).argv == tuple(fields['argv'])
     with pytest.raises(ValueError, match='absolute'):
         models.ManagedHostExecutorConfig(**fields, managed_worker={'worker_id': 'fixture'})
+
+
+def test_container_runtime_is_a_host_path_while_binary_and_socket_are_posix(monkeypatch):
+    from pathlib import PureWindowsPath
+
+    from test_v08_managed_workers import binding
+
+    import aeep.hosts.workers as workers
+
+    monkeypatch.setattr(workers, 'Path', PureWindowsPath)
+    worker = binding(runtime=r'C:\tools\docker.exe')
+    assert worker.binary == '/opt/codex' and worker.socket == '/tmp/docker.sock'
+    with pytest.raises(ValueError, match='explicit absolute'):
+        binding(runtime='/opt/docker')
