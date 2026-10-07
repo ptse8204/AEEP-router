@@ -40,10 +40,7 @@ jobs:
       - run: python examples/job_application/campaign.py --check
       - run: aeep provider verify examples/provider_package/aeep-provider.yaml -m examples/provider_package/aeep.yaml --compact
       - name: Check portability before the full suite
-        run: python -m pytest tests/test_posix_guards.py tests/test_v08_managed_workers.py tests/test_v08_pair_inspection.py tests/test_v08_three_way.py tests/test_v08_workbook.py tests/test_v08_skillsbench_recipe.py tests/test_v08_search_transport.py tests/test_v08_workers.py
-      - name: Check macOS metrics relay before the full suite
-        if: runner.os == 'macOS'
-        run: python -m pytest tests/test_v08_codex_invocation.py -k catalog_metrics_real_http --maxfail=1
+        run: python -m pytest tests/test_posix_guards.py tests/test_v08_codex_invocation.py tests/test_v08_assessment_interfaces.py::test_agent_setup_requires_reviewed_experiment_and_matching_capable_workers tests/test_v08_managed_workers.py tests/test_v08_pair_inspection.py tests/test_v08_three_way.py tests/test_v08_workbook.py tests/test_v08_skillsbench_recipe.py tests/test_v08_search_transport.py tests/test_v08_workers.py
       - run: coverage run --branch -m pytest
         env:
           # Native-policy fixtures must not request access beneath /tmp or /var/tmp.

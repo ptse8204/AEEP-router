@@ -135,3 +135,19 @@ lock are retained here; only its active digest was updated. All required strict
 router compatibility checks pass locally with the reviewed fixture.
 
 Updated `tests/test_posix_guards.py`: `ea531187a2f7411050e6170de0bd466593a826ff046a198ddfed4052ab21e922`.
+
+The completed Windows suite on 074a60e passed 1,209 tests, skipped 102 and failed
+three fixtures (2,815.50 seconds). The local-executor negative fixture now uses
+`sys.executable` after removing its worker binding. Background-skill fixtures
+keep local and Linux worker catalog paths distinct. The no-coordinator-fallback
+test now presents a valid worker path with a matching coordinator file and still
+requires rejection without reviewed worker evidence. All 26 affected invocation
+and setup tests pass locally. They are included in the early portability gate.
+
+On source 41531fc, local ordinary pytest passed 1,293 tests, 21 skipped (605.95
+seconds), and branch coverage passed the same suite (931.02 seconds). The only
+subsequent changes are reviewed fixtures, CI ordering, and verification records.
+
+- `tests/test_v08_codex_invocation.py`: `f2b144f61a3ccc05a0661ffc60837edb278b2e229dc1ac6b2573cc105e7fab07`
+
+- `tests/test_v08_assessment_interfaces.py`: `b917cf27ecaffc1d960a8da195cbe55bf303ddd02ea505e3369d6298f11d1cc6`

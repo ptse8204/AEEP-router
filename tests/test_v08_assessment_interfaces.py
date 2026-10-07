@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import sys
 from datetime import timedelta
 
 import pytest
@@ -489,6 +490,7 @@ async def test_agent_setup_requires_reviewed_experiment_and_matching_capable_wor
         with pytest.raises(ConfigurationError, match='selected plugin'):
             prepare_setup(service, request)
         routes[1].config['managed_worker'] = None
+        routes[1].config['argv'] = [sys.executable]
         with pytest.raises(ConfigurationError, match='legacy read-only'):
             prepare_setup(service, request)
         assert router.store._connection.execute('SELECT count(*) FROM assessment_operations').fetchone()[0] == 0

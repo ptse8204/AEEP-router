@@ -309,12 +309,15 @@ def test_reviewed_background_skills_keep_native_catalog_bounded(tmp_path):
     target = ManagedHostInvocation(mode='turn',local_profile='capable_local',native_catalog=True,supporting_skills=[reviewed])
     data = catalog(path)
     assert isolated_config(data,target)['skills.config'] == [{'path':str(tmp_path),'enabled':True}]
+    worker_skill = reviewed.model_copy(update={'path': '/opt/background/SKILL.md'})
+    worker_target = target.model_copy(update={'supporting_skills': (worker_skill,)})
+    worker_data = catalog(worker_skill.path)
     with pytest.raises(ConfigurationError,match='changed'):
-        isolated_config(data,target,reviewed_worker_files={})
+        isolated_config(worker_data,worker_target,reviewed_worker_files={})
     path.write_text('changed')
     with pytest.raises(ConfigurationError,match='changed'):
         isolated_config(data,target)
-    assert isolated_config(data,target,reviewed_worker_files={str(path):reviewed.sha256})['skills.config'][0]['enabled']
+    assert isolated_config(worker_data,worker_target,reviewed_worker_files={worker_skill.path:reviewed.sha256})['skills.config'][0]['enabled']
     data['skills'] = []
     with pytest.raises(ConfigurationError,match='absent'):
         isolated_config(data,target)
@@ -362,12 +365,15 @@ async def test_registered_process_policy_and_pinned_model_cannot_drift():
         await host.close()
 
 
-def test_worker_candidate_never_falls_back_to_coordinator_skill(tmp_path):
+def test_worker_candidate_never_falls_back_to_coordinator_skill(tmp_path, monkeypatch):
     path = tmp_path / 'SKILL.md'
     path.write_text('coordinator copy')
-    target = ManagedHostInvocation(mode='skill',skill_name='parse',skill_path=str(path),skill_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    worker_path = '/opt/plugin/SKILL.md'
+    # A coordinator file exists even when no matching worker file was reviewed.
+    monkeypatch.setattr('aeep.hosts.codex_invocation.Path', lambda _value: path)
+    target = ManagedHostInvocation(mode='skill',skill_name='parse',skill_path=worker_path,skill_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
     with pytest.raises(ConfigurationError,match='changed'):
-        isolated_config(catalog(path),target,reviewed_worker_files={})
+        isolated_config(catalog(worker_path),target,reviewed_worker_files={})
 
 
 def catalog_payload(scope, *, skill='fixture-skill', value='1'):
