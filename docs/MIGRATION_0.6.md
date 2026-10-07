@@ -1,5 +1,11 @@
 # Migrating to AEEP 0.6
 
+For operators upgrading a manifest, database or package to the 0.6 contract.
+This guide documents that transition; it is not a fresh-install guide. Back up
+the existing database first. Use [onboarding](ONBOARDING.md#start) for a new
+installation and the [version index](README.md#version-specific-compatibility)
+for adjacent transitions.
+
 AEEP 0.6 keeps SQLite schema version 5 and all readable manifest versions. It
 changes the default provider-package wire version to `aeep.dev/v0.6` and adds
 estimate uncertainty, router abstention, signed provider discovery, conformance

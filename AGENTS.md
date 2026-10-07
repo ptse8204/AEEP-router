@@ -30,6 +30,22 @@ python3 -m coverage run --branch -m pytest
 python3 -m coverage report -m
 ```
 
+## Documentation
+
+Follow the [documentation checklist](CONTRIBUTING.md#documentation) when writing
+or updating prose. Audit commands and claims against code and completed evidence
+first. Keep the README focused on first use, maintain the documentation index,
+and separate implementation, measured results, experiments and remaining gates.
+Preserve existing paths, referenced anchors, historical records and versioned
+contract meanings. Update affected guides with behavior changes.
+
+Use the installed humanizer skill in embedded mode when a substantive draft
+needs it. The prose pass must preserve commands, data and technical contracts;
+verify command corrections separately. Run `make docs-check` and record unresolved
+discrepancies in `reports/v08/plan-coverage.md`. Documentation review cannot close
+human-usability, live-comparison or release gates. Read the testing policy before
+changing fingerprinted integration documentation; preserve old evidence bindings.
+
 ## Invariants
 
 - Hard constraints are evaluated before scores.

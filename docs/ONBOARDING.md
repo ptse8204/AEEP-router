@@ -1,12 +1,48 @@
 # Set up AEEP and control agent access
 
+[Documentation index](README.md).
+
 AEEP uses your existing agent to understand the task. It searches catalog metadata,
 records a comparison, and helps you configure selected components. A recommendation
 can include tools you have not installed. It does not grant execution authority.
 
+<details>
+<summary>Contents</summary>
+
+- [Start](#start)
+- [Search and compare](#search-and-compare)
+- [Configure a selected component](#configure-a-selected-component)
+- [Control tools per agent](#control-tools-per-agent)
+- [Repair, update and remove](#repair-update-and-remove)
+- [Release preparation and verification](#release-preparation-and-verification)
+
+</details>
+
 ## Start
 
-For a source checkout with AEEP installed, run `aeep setup` in your project.
+Install from source on macOS or Linux/WSL with Python 3.11 or newer, Git, and
+the agent application you want to connect. Sign-in stays with that application.
+From a terminal:
+
+```bash
+git clone https://github.com/ptse8204/AEEP-router.git
+cd AEEP-router
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e .
+```
+
+Keep this virtual environment: setup records its absolute Python path in the
+host connection. Activate it again when using the source checkout's CLI. The
+installer's fixed launcher, described below, is a separate installation path.
+
+From the project you want the agent to work in, run:
+
+```bash
+aeep setup
+aeep doctor --setup
+```
+
 Choose Codex, Claude Code, DeepSeek Harness, or an API application. Setup offers
 existing marketplaces reported by the selected host and an optional repository,
 HTTPS catalog URL, or local catalog directory. Review the summary once.
@@ -24,10 +60,24 @@ WSL is not an onboarding target. It keeps 50 GiB free, uses checksum-pinned uv
 Agent applications and sign-in remain your responsibility. No background service,
 third-party plugin installation, paid call, or assessment campaign starts at setup.
 
-Run `aeep` for the guided menu. If your shell does not include `~/.local/bin`, use
-`~/.local/bin/aeep`; virtualenv activation is unnecessary. Restart connected agents
+Run `aeep` for the guided menu. With an installer-managed runtime, use
+`~/.local/bin/aeep` if that directory is absent from `PATH`; virtualenv activation
+is unnecessary for that launcher. Restart connected agents
 and open a new session to load the planning skill. `aeep agents launch CONNECTION`
 opens the selected project; for DSH it supplies the generated Cordis MCP overlay.
+
+Expect a named connection and a ready local service in `doctor --setup`.
+Effective host exposure can remain unverified until the host reloads and uses
+the connection; a successful self-check alone does not prove model visibility.
+For API applications, wire the generated descriptor into the application loop.
+Try a public search first:
+
+> Use AEEP to search the configured catalogs for video narration tools. Report
+> named candidates, their sources and any setup still required.
+
+Search results are metadata. They neither install components nor enable execution.
+For another project, choose a distinct connection name using
+[per-agent controls](#control-tools-per-agent).
 
 ## Search and compare
 

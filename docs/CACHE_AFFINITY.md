@@ -1,5 +1,12 @@
 # AEEP 0.5 cache-affinity routing
 
+For developers reviewing optional cache-aware ranking. This 0.5 subsystem
+contract remains applicable in 0.8. See [accounting](ACCOUNTING.md) for token
+provenance and [architecture](../ARCHITECTURE.md#static-priors-and-observations)
+for the difference between priors and observations.
+
+[Documentation index](README.md).
+
 `cache_affinity_v1` is disabled by default and affects soft ranking only. Hard
 latency, token, cash, and capacity feasibility always use the cold estimate.
 

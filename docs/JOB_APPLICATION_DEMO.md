@@ -1,5 +1,12 @@
 # AEEP 0.5 job-application sandbox
 
+For contributors inspecting a synthetic end-to-end approval and recovery
+fixture. Use the [example instructions](../examples/job_application/README.md)
+to check retained artifacts. This is a sandbox design, not an application-submission
+service or evidence about real hiring outcomes.
+
+[Documentation index](README.md).
+
 The job proof is a deterministic safety campaign, not a planner or live job
 submission feature.
 

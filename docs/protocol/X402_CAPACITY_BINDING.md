@@ -1,5 +1,12 @@
 # AEEP local x402 capacity binding
 
+For implementers checking the local compatibility contract. Install AEEP
+before running the offline proof below. See
+[accounting](../ACCOUNTING.md) for capacity versus cash and
+[ADR-009](../adr/ADR-009-x402-compatibility-boundary.md) for the adopted boundary.
+
+[Documentation index](../README.md).
+
 The AEEP 0.7 binding implements only offline x402 v2 batch semantics:
 `commit -> accumulate -> redeem/reconcile`. It carries a resource-specific unit,
 backing-resource fingerprint, exact action and beneficiary binding, maximum

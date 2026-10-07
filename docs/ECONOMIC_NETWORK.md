@@ -1,5 +1,12 @@
 # Economic evidence exchange
 
+For readers evaluating the economic protocol boundary. Start with
+[accounting](ACCOUNTING.md) for evidence meanings and the
+[operator guide](ECONOMIC_OPERATOR_GUIDE.md) for commands. The versioned
+features below do not establish a live marketplace or grant spending authority.
+
+[Documentation index](README.md).
+
 AEEP 0.5 adds portable signed provider evidence while retaining provider-neutral economics. It is not a cryptocurrency,
 blockchain, transferable token, public storefront, payment custodian, provider
 payout service, or autonomous tool marketplace.
@@ -38,6 +45,17 @@ optional billing reconciliation
 Marketplace evidence never qualifies or activates a route. AEEP retains exact
 capability matching, security policy, task-valid success, local token/resource
 measurement, subscription accounting, approval, and final selection.
+
+<details>
+<summary>Contents</summary>
+
+- [Disabled by default](#disabled-by-default)
+- [What signatures establish](#what-signatures-establish)
+- [Provider supply](#provider-supply)
+- [Buyer and settlement boundary](#buyer-and-settlement-boundary)
+- [Roadmap boundary](#roadmap-boundary)
+
+</details>
 
 ## Disabled by default
 

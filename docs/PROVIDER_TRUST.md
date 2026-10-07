@@ -1,5 +1,12 @@
 # AEEP 0.6 provider trust
 
+For operators assigning signer roles and scope. This 0.6 trust contract remains
+supported; its version does not identify the latest AEEP release. See
+[provider packages](PROVIDER_PACKAGES.md) for package validation and
+[the operator guide](ECONOMIC_OPERATOR_GUIDE.md#2-establish-provider-trust) for setup.
+
+[Documentation index](README.md).
+
 An embedded key can verify a package revision's integrity. Its identity remains
 `self_asserted` until local policy pins the key.
 

@@ -6,8 +6,12 @@ installed AEEP runtime. The video is cropped to terminal content and trimmed;
 output is real. `jq` selects fields for readability. No model turn or paid API
 call runs in this demonstration.
 
-After [installing AEEP](../../README.md#install-in-codex), run these commands from
-the repository checkout:
+The recording used the installer-managed runtime and default manifest. Its
+exact commands are below. For a source installation, activate the environment
+from [setup](../ONBOARDING.md#start), omit the `export PATH` line, and pass
+`--manifest examples/quickstart/aeep.yaml` to each route/run command. That fixture
+selects `python.text-stats` rather than the recording's `builtin.text-stats`.
+Run from the repository checkout:
 
 ```bash
 export PATH="$HOME/.local/share/aeep/venv/bin:$PATH"
@@ -31,6 +35,6 @@ and research (4). Each node produces a receipt. These are offline fixtures: the
 media fixture produces an edit timeline, and research uses fixed source text.
 They do not demonstrate provider onboarding, paid generation or comparative benefit.
 
-In Codex, use the two conversational prompts in the README to try the same local
-text action through the marketplace plugin. The recording shows the CLI, not a
-simulated Codex conversation.
+For a host connection, follow [guided setup](../ONBOARDING.md#start) and its
+public catalog-search prompt. A new connection allows planning and search;
+executing an action requires its separate authority. The recording shows the CLI.

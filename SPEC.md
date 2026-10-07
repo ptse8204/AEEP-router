@@ -1,5 +1,10 @@
 # AEEP 0.8 protocol specification
 
+For implementers checking protocol and versioned contract requirements.
+Use the [architecture](ARCHITECTURE.md) for design rationale and
+[documentation index](docs/README.md) for operational guides. Subsystem wire
+versions are independent of the installed Python package version.
+
 AEEP is an open, provider-neutral contract for measuring and choosing execution
 routes for bounded agent actions. It works with existing MCP/HTTP/CLI transports
 and payment systems; it does not replace them.
@@ -39,6 +44,68 @@ not rewritten. A task result contains task output and sanitized existing decisio
 receipt, accounting and recovery fields. Unknown verification remains unknown;
 execution success alone MUST NOT imply preservation, isolation or savings.
 Legacy/assessment outputs and historical attempt serialization remain compatible.
+
+<details>
+<summary>Contents</summary>
+
+- [1. Goals](#1-goals)
+- [2. Non-goals](#2-non-goals)
+- [3. Capability](#3-capability)
+- [4. ActionRequest](#4-actionrequest)
+- [5. ExecutorSpec](#5-executorspec)
+- [6. Raw resources](#6-raw-resources)
+- [7. RouteEstimate](#7-routeestimate)
+- [8. Feasibility](#8-feasibility)
+- [9. Ranking](#9-ranking)
+- [10. Runtime approval](#10-runtime-approval)
+- [11. Execution and validation](#11-execution-and-validation)
+- [12. Fallback](#12-fallback)
+- [13. ExecutionReceipt](#13-executionreceipt)
+- [14. Historical learning](#14-historical-learning)
+- [15. Persistence and minimization](#15-persistence-and-minimization)
+- [16. Benchmarking](#16-benchmarking)
+- [17. Agent tools](#17-agent-tools)
+- [18. MCP transport](#18-mcp-transport)
+- [19. Subscription resources and hosts](#19-subscription-resources-and-hosts)
+- [20. Legacy quotes and signed receipts](#20-legacy-quotes-and-signed-receipts)
+- [21. Provider discovery and trust](#21-provider-discovery-and-trust)
+- [22. Counterfactual profiling](#22-counterfactual-profiling)
+- [23. Payments, budgets, and ledger events](#23-payments-budgets-and-ledger-events)
+- [24. Provider supply](#24-provider-supply)
+- [25. Existing-agent profiling](#25-existing-agent-profiling)
+- [26. Versioning](#26-versioning)
+- [27. Economic evidence](#27-economic-evidence)
+- [28. Rate cards](#28-rate-cards)
+- [29. Qualification lifecycle](#29-qualification-lifecycle)
+- [30. Workflows and campaigns](#30-workflows-and-campaigns)
+- [31. Economic primitive types](#31-economic-primitive-types)
+- [32. Canonicalization and signatures](#32-canonicalization-and-signatures)
+- [33. Capability offers](#33-capability-offers)
+- [34. Quote requests and disclosure](#34-quote-requests-and-disclosure)
+- [35. Bounded quotes](#35-bounded-quotes)
+- [36. Quote acquisition and scoring](#36-quote-acquisition-and-scoring)
+- [37. Prepared route decisions](#37-prepared-route-decisions)
+- [38. Reservation, settlement, and budget](#38-reservation-settlement-and-budget)
+- [39. Usage statements and billable amount](#39-usage-statements-and-billable-amount)
+- [40. Settlement, uncertainty, and recovery](#40-settlement-uncertainty-and-recovery)
+- [41. Reconciliation and evidence hierarchy](#41-reconciliation-and-evidence-hierarchy)
+- [42. Market aggregates](#42-market-aggregates)
+- [43. Workflows and fallback with economic evidence](#43-workflows-and-fallback-with-economic-evidence)
+- [44. Persistence and compatibility](#44-persistence-and-compatibility)
+- [45. Provider packages](#45-provider-packages)
+- [46. Canonicalization transition](#46-canonicalization-transition)
+- [47. Portable evidence and smoke](#47-portable-evidence-and-smoke)
+- [48. Cache affinity](#48-cache-affinity)
+- [49. Registry discovery](#49-registry-discovery)
+- [50. Durable approvals and proof campaigns](#50-durable-approvals-and-proof-campaigns)
+- [51. Capacity and transferability](#51-capacity-and-transferability)
+- [52. Managed-host execution](#52-managed-host-execution)
+- [53. Tool Search coexistence](#53-tool-search-coexistence)
+- [54. x402 compatibility](#54-x402-compatibility)
+- [Assessment contracts (0.8, versioned independently)](#assessment-contracts-08-versioned-independently)
+- [Stack contracts](#stack-contracts)
+
+</details>
 
 ## 1. Goals
 
@@ -925,7 +992,6 @@ redeem/reconcile semantics. It is disabled by default and performs no live
 networking or value movement. Resource-specific capacity is not cash. A
 `SELF_ONLY` resource MUST fail before commitment serialization, and settlement
 evidence MUST NOT qualify or activate an implementation.
-
 
 ## Assessment contracts (0.8, versioned independently)
 

@@ -1,5 +1,12 @@
 # Provider economic evidence integration
 
+For provider developers implementing signed quote and usage handlers. Install
+the source checkout and understand [accounting](ACCOUNTING.md) before adapting
+the example code. Use the [local reference service](../examples/economic_market/README.md)
+for development; its public test keys cannot establish production trust.
+
+[Documentation index](README.md).
+
 A provider can publish AEEP 0.5 economic evidence without adopting AEEP route
 qualification, scoring, payment custody, or the complete router. The protocol is
 transport-neutral and works behind HTTP, MCP, a CLI broker, or a hosted-agent
@@ -10,6 +17,20 @@ router nor requires provider-side route policy, and no separate minimal provider
 package is published yet. Providers using other languages or fewer dependencies
 can implement the generated 0.5 schemas, RFC 8785 vectors, and Ed25519 envelopes
 directly.
+
+<details>
+<summary>Contents</summary>
+
+- [Provider responsibilities](#provider-responsibilities)
+- [Keys and canonical signatures](#keys-and-canonical-signatures)
+- [Lightweight Python helper](#lightweight-python-helper)
+- [Quote request privacy](#quote-request-privacy)
+- [HTTP reference surface](#http-reference-surface)
+- [Usage and settlement are different](#usage-and-settlement-are-different)
+- [Market aggregates](#market-aggregates)
+- [Compatibility and conformance](#compatibility-and-conformance)
+
+</details>
 
 ## Provider responsibilities
 

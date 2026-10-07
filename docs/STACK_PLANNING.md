@@ -1,5 +1,12 @@
 # Stack planning and execution
 
+For operators and developers composing an explicit task graph from configured
+executors. Install the source checkout and run the fixtures from the repository
+root. For catalog search and component recommendations, start with
+[onboarding](ONBOARDING.md#search-and-compare).
+
+[Documentation index](README.md).
+
 The host interprets the user's task and submits a `GoalSpec`: deliverable node
 IDs, a semantic DAG, typed ports, bindings, constraints and verification needs.
 Private task values arrive separately when execution starts. AEEP selects from
@@ -12,6 +19,18 @@ A reviewed, active stack-enabled task profile can cover the selected configurati
 without another proposal review. Otherwise review uses the existing exact-definition
 review command. Explicit proposal revocation still blocks execution. No stack operation
 can create an admission, grant or payment approval.
+
+<details>
+<summary>Contents</summary>
+
+- [Try the offline journey](#try-the-offline-journey)
+- [Configuration search](#configuration-search)
+- [Authority and recovery](#authority-and-recovery)
+- [Provider setup](#provider-setup)
+- [Discovery and interfaces](#discovery-and-interfaces)
+- [Release evidence](#release-evidence)
+
+</details>
 
 ## Try the offline journey
 

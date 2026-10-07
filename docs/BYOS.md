@@ -1,10 +1,17 @@
 # Bring your own subscription
 
+For operators configuring existing subscription resources. Start with
+[onboarding](ONBOARDING.md#start) for a host connection; use this guide when
+selecting delegated or managed execution and interpreting quota signals.
+
+[Documentation index](README.md).
+
 AEEP can route work through resources you already have: ChatGPT/Codex, Claude/Claude Code, local models, MCP servers, and local software. It never extracts consumer credentials or converts subscription capacity into currency.
 
 ## Codex or ChatGPT
 
-1. Install AEEP with `pip install aeep-agent-router` (or `pip install -e .` from source).
+1. [Install from source](ONBOARDING.md#start) with Python 3.11 or newer.
+   Keep the environment available to the host.
 2. Copy `examples/subscriptions/openai-codex-app-server.yaml` and replace the
    absolute Codex executable path. Keep argv as an array.
 3. Run `aeep hosts codex doctor`, `account`, `models`, and `quota` against the

@@ -1,8 +1,42 @@
 # Security policy and deployment guidance
 
+For operators enabling execution and contributors reviewing trust boundaries.
+Read this before approving a new route. The [documentation index](docs/README.md)
+links setup and assessment procedures; the controls below remain authoritative.
+
 AEEP can launch commands, call remote services, and advise another agent. Its
 manifest and database control these operations, so protect both as
 security-sensitive assets.
+
+<details>
+<summary>Contents</summary>
+
+- [Supported version](#supported-version)
+- [Reporting](#reporting)
+- [Trust boundaries](#trust-boundaries)
+- [Command execution](#command-execution)
+- [Project task lifecycle](#project-task-lifecycle)
+- [HTTP/SSRF](#httpssrf)
+- [MCP](#mcp)
+- [Side effects](#side-effects)
+- [Secrets](#secrets)
+- [Outcome integrity and history poisoning](#outcome-integrity-and-history-poisoning)
+- [Subscription resources](#subscription-resources)
+- [Registries and imported providers](#registries-and-imported-providers)
+- [DeepSeek Harness host adapter](#deepseek-harness-host-adapter)
+- [RFC 8785 cutover](#rfc-8785-cutover)
+- [Cache affinity and approvals](#cache-affinity-and-approvals)
+- [Economic evidence](#economic-evidence)
+- [Payments and budgets](#payments-and-budgets)
+- [Economic evidence threat model](#economic-evidence-threat-model)
+- [Benchmarking](#benchmarking)
+- [Data policy](#data-policy)
+- [Resource exhaustion](#resource-exhaustion)
+- [Dependency and release hygiene](#dependency-and-release-hygiene)
+- [Assessment authorization (0.8)](#assessment-authorization-08)
+- [Stack and setup boundaries](#stack-and-setup-boundaries)
+
+</details>
 
 ## Supported version
 
@@ -320,7 +354,6 @@ Before production:
 - run tests on supported Python versions;
 - review optional HTTP-server dependencies;
 - restrict who can edit manifests and policies.
-
 
 ## Assessment authorization (0.8)
 

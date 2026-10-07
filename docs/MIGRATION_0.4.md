@@ -1,8 +1,26 @@
 # Migrating to AEEP 0.4
 
+For operators upgrading a manifest, database or package to the 0.4 contract.
+This guide documents that transition; it is not a fresh-install guide. Back up
+the existing database first. Use [onboarding](ONBOARDING.md#start) for a new
+installation and the [version index](README.md#version-specific-compatibility)
+for adjacent transitions.
+
 AEEP 0.4 extends the existing offline router. It accepts manifests from 0.1,
 0.15, 0.2, and 0.3 and retains legacy quotes, receipts, and payment objects.
 `route()` continues to run without contacting an economic provider.
+
+<details>
+<summary>Contents</summary>
+
+- [Before upgrading](#before-upgrading)
+- [Database migration](#database-migration)
+- [Manifest and configuration](#manifest-and-configuration)
+- [Behavioral compatibility](#behavioral-compatibility)
+- [Trust-store migration](#trust-store-migration)
+- [Rollback](#rollback)
+
+</details>
 
 ## Before upgrading
 

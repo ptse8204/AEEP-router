@@ -1,17 +1,18 @@
 # AEEP 0.5 deterministic economic-evidence proof
 
+For contributors verifying the economic-accounting fixture. Install AEEP and
+run from the repository root. Use the `--check --require-gates` command first
+to inspect retained results. Regeneration writes reports and is a separate step.
+The paid amounts below belong to a synthetic local ledger; no real money moves.
+
+[Documentation index](../../docs/README.md).
+
 This campaign tests AEEP's prepared-routing path. The paid
 trials call `Router.prepare_route()`, reserve the signed maximum, call
 `Router.execute_prepared()`, verify provider usage, settle the measured charge, and release the
 remainder. It uses only the in-process reference provider, deterministic test keys, a local
 prepaid ledger, and synthetic text. It does not need external credentials or persist action
 payloads.
-
-Run the measured campaign from the repository root:
-
-```bash
-PYTHONPATH=src python examples/economic_evidence/campaign.py --repetitions 30
-```
 
 Validate the checked, sanitized artifacts without rerunning transports:
 
@@ -56,3 +57,11 @@ condition/repetition cases. A separate two-step prepared workflow trial is repor
 See [report.json](report.json) for exact per-trial evidence and [report.md](report.md) for the
 human-readable proof. IDs in those artifacts are deterministic pseudonyms; raw input and random
 runtime identifiers are not included.
+
+## Regenerate synthetic reports
+
+Use a separate checkout to retain the original measurements, then run:
+
+```bash
+PYTHONPATH=src python examples/economic_evidence/campaign.py --repetitions 30
+```

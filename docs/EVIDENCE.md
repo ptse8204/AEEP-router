@@ -1,14 +1,34 @@
 # Tests, use cases and known limits
 
+[Documentation index](README.md).
+
 AEEP has demonstrated direct execution of known structured tasks, scoped native
-workbook execution, and reversible access controls. Its October 4 software and
-integration checks passed on the source recorded below. The larger Luna qualification studies found
+workbook execution, and reversible access controls. Completed software checks
+apply to their recorded revisions. The larger Luna qualification studies found
 failures and did not approve either candidate for automatic use.
 
 This guide explains those results and the use cases they support. Each result
 applies to the source, task and environment in its linked record. The
 [plan coverage record](../reports/v08/plan-coverage.md) keeps the full history,
 including failed attempts and remaining work.
+
+<details>
+<summary>Contents</summary>
+
+- [Use cases supported by evidence](#use-cases-supported-by-evidence)
+- [Software checks](#software-checks)
+- [Worker and native execution checks](#worker-and-native-execution-checks)
+- [Native workbook execution](#native-workbook-execution)
+- [Live completion diagnostic](#live-completion-diagnostic)
+- [Direct execution of a known text operation](#direct-execution-of-a-known-text-operation)
+- [Discovery, approval and removal](#discovery-approval-and-removal)
+- [Completed studies that did not qualify](#completed-studies-that-did-not-qualify)
+- [Diagnosing completion timeouts](#diagnosing-completion-timeouts)
+- [Remaining evidence](#remaining-evidence)
+- [Run the developer checks](#run-the-developer-checks)
+- [Stack planning evidence](#stack-planning-evidence)
+
+</details>
 
 ## Use cases supported by evidence
 
@@ -26,8 +46,22 @@ general skill quality or a speed improvement for every user.
 
 ## Software checks
 
+The [October 7 local verification record](../reports/v08/windows-ci-20261007/summary.md)
+reports 1,293 passed and 21 skipped in both ordinary pytest and branch coverage
+on source `41531fc`, with both required coverage gates passing. Its runner results
+and subsequent fixture changes are recorded separately. Native Windows CI does
+not establish supported native Windows onboarding; the setup target remains
+macOS and Linux/WSL. These are recorded software results, not a new verification
+of this documentation revision or a completed release.
+
+The documentation refresh has its own [validation record](../reports/v08/documentation-refresh-20261007/summary.md).
+Changes to fingerprinted integration READMEs require new applicable evidence
+before a historical live result can be applied to the new source.
+
+### Earlier diagnostic validation
+
 The [October 4 validation record](../reports/v08/outer-worker-delay-20261004/validation-terminal.json)
-binds the current diagnostic implementation to source
+binds the October 4 diagnostic implementation to source
 `e6b71acba487280dfe50057d17379e5994c9113bc651a262935474f656a5dba6`.
 
 | Check | Recorded result |
@@ -51,7 +85,7 @@ plus 28 focused boundary-cost and conformance integration checks.
 Its [supplemental record](../reports/v08/luna-c-supplemental-validation-20261003/supplemental-results.json)
 retains ten additional offline checks. Those results remain historical.
 Skipped opt-in tests are not passing live tests. Software checks do not establish
-model reliability or production readiness. The current-source diagnostic below renews
+model reliability or production readiness. The dated diagnostic below renewed
 the boundaries needed for its narrow scope; a full paired assessment still needs
 its own applicable conformance evidence.
 
@@ -111,6 +145,12 @@ savings. Process sampling can miss short-lived activity; provider cash,
 subscription consumption and whole-machine costs were unavailable. The recipe
 also excludes macros and external links.
 
+Four separate native autonomy scenarios produced one verified task completion
+and three safe stops. Ordinary work and the paused case passed their fixed
+conditions. Permission-expansion and recovery cases stopped safely but failed
+two strict response or behavior conditions. See the
+[scenario audit](../reports/v08/native-sol61-autonomy-four-scenarios-5fff-canonical-audit.json).
+
 ## Live completion diagnostic
 
 An [October 4 diagnostic](../reports/v08/live-delay-diagnostic-20261004/findings.md)
@@ -139,6 +179,7 @@ action and selected the same Python function directly.
 |---|---:|---:|
 | Exact results and verified tool executions | 20/20 | 20/20 |
 | Provider input plus output tokens | 584,449 | 0 |
+| Median tokens per action | 28,888 | 0 |
 | Median wall time | 8,324.9 ms | 5.47 ms |
 
 The [method and accounting record](../reports/v06/codex/tool-ready-campaign.md)

@@ -1,5 +1,12 @@
 # Plugin assessment in AEEP 0.8
 
+This guide is for operators preparing a reviewed comparison or scoped task tool.
+For a first connection, use [onboarding](ONBOARDING.md); ordinary setup does not
+require an assessment campaign. Read the [testing policy](ASSESSMENT_TESTING.md)
+before running the operator commands here.
+
+[Documentation index](README.md).
+
 Use assessment to compare a capability with the tools an agent already has.
 AEEP records the reviewed comparison and its authorization separately from
 production routing. Ordinary tasks can run without an assessment worker.
@@ -11,6 +18,25 @@ Selected subject → recipe and mapping review → standing authorization
 Task tool → applicability and policy checks → approved implementation
 → validation and production receipt
 ```
+
+<details>
+<summary>Contents</summary>
+
+- [Project-local task operation](#project-local-task-operation)
+- [Available implementation](#available-implementation)
+- [Configured assessment setup](#configured-assessment-setup)
+- [Legacy initializer](#legacy-initializer)
+- [Explicit host and container execution](#explicit-host-and-container-execution)
+- [Remaining release gates](#remaining-release-gates)
+- [Historical live validation on Codex 0.154.0](#historical-live-validation-on-codex-01540)
+- [Migration and rollback](#migration-and-rollback)
+- [Choosing a comparison structure](#choosing-a-comparison-structure)
+- [Host conformance is a separate gate](#host-conformance-is-a-separate-gate)
+- [Test layers and release evidence](#test-layers-and-release-evidence)
+- [Historical temporary-directory diagnostics](#historical-temporary-directory-diagnostics)
+- [Incremental-capability revision](#incremental-capability-revision)
+
+</details>
 
 ## Project-local task operation
 
@@ -448,9 +474,9 @@ arguments and tool results remain excluded from receipts.
 The current Codex adapter can check paginated advertised inventories and request
 exact supporting-tool allowlists. These checks alone do not attest the model's
 complete execution boundary or prevent reads of benchmark answers outside the
-workspace. Scoped model trials therefore return
-`environment_verification_unavailable` before `turn/start` until that boundary
-can be established. An empty inventory is not an exception. Direct host-owned MCP
+workspace. Scoped model trials return
+`environment_verification_unavailable` before `turn/start` when the required
+boundary cannot be established. An empty inventory is not an exception. Direct host-owned MCP
 dispatch does not start a model turn. Legacy unscoped turn execution remains
 available under its existing policy.
 
@@ -483,7 +509,6 @@ comparison outcomes and keeps missing host evidence as an open gate. Add
 this is an instruction to run checks, not a supplied success flag. Add
 `--real-container` for the configured container checks. `--strict` fails while any
 release gate is open. Demonstrated savings remain separate from product readiness.
-
 
 ## Historical temporary-directory diagnostics
 

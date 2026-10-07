@@ -1,9 +1,34 @@
 # Economic evidence operator guide
 
+For operators who have installed AEEP and reviewed an exact manifest, trust
+store and execution ceiling. Run commands from the repository root or replace
+example paths with absolute paths. Begin with offline validation; networking,
+provider execution and payment approval remain separate decisions.
+
+[Documentation index](README.md).
+
 This guide covers AEEP 0.5 economic evidence plus AEEP 0.7 subscription capacity
 operations for already qualified and active routes. It does not qualify routes,
 grant approval, move real money, or turn a provider quote into permission to
 execute.
+
+<details>
+<summary>Contents</summary>
+
+- [Subscription-native diagnostics](#subscription-native-diagnostics)
+- [1. Validate offline](#1-validate-offline)
+- [2. Establish provider trust](#2-establish-provider-trust)
+- [3. Configure a bounded network path](#3-configure-a-bounded-network-path)
+- [4. Declare quote disclosure](#4-declare-quote-disclosure)
+- [5. Import and inspect evidence](#5-import-and-inspect-evidence)
+- [6. Prepare, review, then execute](#6-prepare-review-then-execute)
+- [7. Inspect settlement and reconciliation](#7-inspect-settlement-and-reconciliation)
+- [8. Recovery runbook](#8-recovery-runbook)
+- [9. Key and endpoint incidents](#9-key-and-endpoint-incidents)
+- [10. Reference service](#10-reference-service)
+- [Current limitations](#current-limitations)
+
+</details>
 
 ## Subscription-native diagnostics
 

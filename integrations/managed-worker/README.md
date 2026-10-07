@@ -1,5 +1,12 @@
 # Managed worker image contract
 
+For operators preparing controlled assessment environments, not ordinary
+host connections. Read the [testing policy](../../docs/ASSESSMENT_TESTING.md)
+first. Check host free space and Docker usage before builds; keep at least
+50 GiB free, pin all resources, and retain current and rollback images.
+
+[Documentation index](../../docs/README.md).
+
 Build two immutable Linux images from the same reviewed base and Codex binary.
 Place `worker-launch` at `/opt/aeep/worker-launch` with executable permissions,
 reviewed Codex `-c` overrides (a JSON string array) at
@@ -25,6 +32,17 @@ The image contract and process arguments are not conformance evidence. The
 canonical [testing policy](../../docs/ASSESSMENT_TESTING.md) requires actual
 boundary and host checks before model assessment. Fresh process launch is
 implemented; reuse across cases requires separate reviewed lifecycle evidence.
+
+<details>
+<summary>Contents</summary>
+
+- [Linux build and security profiles](#linux-build-and-security-profiles)
+- [Capable local comparison images](#capable-local-comparison-images)
+- [Model connectivity review](#model-connectivity-review)
+- [Paired offline boundary probe](#paired-offline-boundary-probe)
+- [Local catalog metrics](#local-catalog-metrics)
+
+</details>
 
 ## Linux build and security profiles
 

@@ -1,5 +1,12 @@
 # AEEP 0.6 provider packages
 
+For publishers and operators exchanging an inert capability package. Install
+AEEP and run the examples from the repository root. Read
+[provider trust](PROVIDER_TRUST.md) and [evidence reuse](EVIDENCE_REUSE.md)
+before treating a valid signature as useful routing evidence.
+
+[Documentation index](README.md).
+
 `aeep-provider.yaml` publishes provider identity, exact capability contracts,
 inert route declarations, content-addressed artifacts, evidence references, and
 bounded smoke definitions. It never grants activation or approval.

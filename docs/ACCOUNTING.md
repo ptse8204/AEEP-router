@@ -1,5 +1,11 @@
 # AEEP economic accounting
 
+Use this reference when interpreting route estimates, receipts or campaign reports.
+For operational commands, see the [economic operator guide](ECONOMIC_OPERATOR_GUIDE.md).
+The 0.5 accounting contract remains part of the current router.
+
+[Documentation index](README.md).
+
 AEEP 0.5 keeps resource use and its supporting evidence in separate ledgers.
 It does not combine them into a universal dollar score.
 
@@ -33,6 +39,18 @@ one resource, execution, maximum quantity, unit, expiry, idempotency key, claim
 token, and compare-and-set version. Unknown availability cannot authorize an
 external entitlement. Release or redemption changes only the capacity ledger;
 it never implies a refund, payment, sale, or public exchange rate.
+
+<details>
+<summary>Contents</summary>
+
+- [Estimate versus actual](#estimate-versus-actual)
+- [Evidence hierarchy](#evidence-hierarchy)
+- [Unknown and confirmed zero](#unknown-and-confirmed-zero)
+- [One charge, several stages](#one-charge-several-stages)
+- [Native meters and rate cards](#native-meters-and-rate-cards)
+- [Campaigns and reporting](#campaigns-and-reporting)
+
+</details>
 
 ## Estimate versus actual
 

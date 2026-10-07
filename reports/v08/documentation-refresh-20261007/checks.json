@@ -1,0 +1,589 @@
+{
+  "recorded_at_utc": "2026-10-07T22:13:31.954203+00:00",
+  "starting_head": "9017ddb8c6897430ed0b5231863c1df836392712",
+  "final_head": "47f20ee6d84814980717df68886cc3971ce7df25",
+  "final_source_digest": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+  "initial_core_run": {
+    "source_before": "28274fd6773951926d6dd34a45c6659c88a02271e5aaba835f595674f495c525",
+    "environment_selectors_removed": [],
+    "checks": [
+      {
+        "name": "compile",
+        "argv": [
+          "python3",
+          "-m",
+          "compileall",
+          "-q",
+          "src",
+          "examples",
+          "tests"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.074,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/compile.log"
+      },
+      {
+        "name": "schemas",
+        "argv": [
+          "python3",
+          "scripts/generate_schemas.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.971,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/schemas.log"
+      },
+      {
+        "name": "ruff",
+        "argv": [
+          "python3",
+          "-m",
+          "ruff",
+          "check",
+          "."
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.076,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/ruff.log"
+      },
+      {
+        "name": "mypy",
+        "argv": [
+          "python3",
+          "-m",
+          "mypy",
+          "src"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 8.215,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/mypy.log"
+      },
+      {
+        "name": "policy",
+        "argv": [
+          "python3",
+          "scripts/check_assessment_policy.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.198,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/policy.log"
+      },
+      {
+        "name": "pytest",
+        "argv": [
+          "python3",
+          "-m",
+          "pytest",
+          "-o",
+          "cache_dir=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/pytest-cache"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 683.235,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/pytest.log"
+      },
+      {
+        "name": "coverage-tests",
+        "argv": [
+          "python3",
+          "-m",
+          "coverage",
+          "run",
+          "--branch",
+          "-m",
+          "pytest",
+          "-o",
+          "cache_dir=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/pytest-cache"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 993.031,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage-tests.log"
+      },
+      {
+        "name": "coverage-report",
+        "argv": [
+          "python3",
+          "-m",
+          "coverage",
+          "report",
+          "-m"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.362,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage-report.log"
+      },
+      {
+        "name": "coverage-json",
+        "argv": [
+          "python3",
+          "-m",
+          "coverage",
+          "json",
+          "-o",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage.json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.803,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage-json.log"
+      },
+      {
+        "name": "critical-coverage",
+        "argv": [
+          "python3",
+          "scripts/check_critical_coverage.py",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage.json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.048,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/critical-coverage.log"
+      },
+      {
+        "name": "assessment-coverage",
+        "argv": [
+          "python3",
+          "scripts/check_assessment_coverage.py",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/coverage.json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.043,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/assessment-coverage.log"
+      },
+      {
+        "name": "node",
+        "argv": [
+          "node",
+          "--test",
+          "integrations/dsh-aeep-router/test.mjs"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.856,
+        "log": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/node.log"
+      }
+    ],
+    "source_after": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+    "source_unchanged": false
+  },
+  "fresh_ordinary_run": {
+    "source_before": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 649.789,
+    "source_after": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+    "source_unchanged": true
+  },
+  "concurrent_workspace_change": {
+    "head": "47f20ee6d84814980717df68886cc3971ce7df25",
+    "source_before": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+    "changed_outside_documentation": {
+      ".github/workflows/ci.yml": {
+        "before": "fcf44008adfae108e9cd7d7edf8386b5b613d1d5c47900353fa9933815ae2b6d",
+        "after": "01cef9ac0c0a54947ac4d0a62db9e4bbb27ad86c304ee037f48683ac7c7348fd"
+      },
+      "tests/test_v08_assessment_interfaces.py": {
+        "before": "b917cf27ecaffc1d960a8da195cbe55bf303ddd02ea505e3369d6298f11d1cc6",
+        "after": "0069bfa1c8cce641766d3eca2b9b07a1c7405a456a8010dc3ae313ed1c5e7721"
+      },
+      "reports/v08/windows-ci-20261007/summary.md": {
+        "before": "674196c5bb5773e8d09f6b60b4344898917f216d20cf4f1ae9d447270ce664d6",
+        "after": "ede5651b2717cee7fba342fd425ecf9cbde7365b85654bc3cd18e0c1d460018a"
+      }
+    },
+    "coverage_started_after_fixture_change": true,
+    "checks": [
+      {
+        "name": "compile-current",
+        "argv": [
+          "python3",
+          "-m",
+          "compileall",
+          "-q",
+          "src",
+          "examples",
+          "tests"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.128
+      },
+      {
+        "name": "ruff-current",
+        "argv": [
+          "python3",
+          "-m",
+          "ruff",
+          "check",
+          "."
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.258
+      },
+      {
+        "name": "policy-current",
+        "argv": [
+          "python3",
+          "scripts/check_assessment_policy.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.238
+      },
+      {
+        "name": "version-current",
+        "argv": [
+          "python3",
+          "-m",
+          "pytest",
+          "tests/test_version_consistency.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.006
+      },
+      {
+        "name": "worker-fixture-current",
+        "argv": [
+          "python3",
+          "-m",
+          "pytest",
+          "tests/test_v08_assessment_interfaces.py::test_completed_worker_exit_preserves_admission_when_reading_report"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 40.049
+      }
+    ],
+    "source_after": "05aa06e6d8f35f8c0e2d5dd7275e54f29f2348a99b97e96fd9ecca6f98be9a37",
+    "source_unchanged": true
+  },
+  "proof_compatibility_build_checks": {
+    "free_gib_before_build": 74.03,
+    "checks": [
+      {
+        "name": "economic-proof",
+        "argv": [
+          "python3",
+          "examples/economic_evidence/campaign.py",
+          "--repetitions",
+          "30",
+          "--check",
+          "--require-gates"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.593
+      },
+      {
+        "name": "dsh-campaign",
+        "argv": [
+          "python3",
+          "examples/dsh_campaign/campaign.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.462
+      },
+      {
+        "name": "dsh-live-safety-record",
+        "argv": [
+          "python3",
+          "examples/dsh_campaign/live_campaign.py",
+          "--check-report",
+          "reports/v05/dsh/live-safety.json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.473
+      },
+      {
+        "name": "dsh-live-comparison-record",
+        "argv": [
+          "python3",
+          "examples/dsh_campaign/live_campaign.py",
+          "--check-comparison",
+          "reports/v05/dsh/live-comparison.json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.458
+      },
+      {
+        "name": "dsh-native-plan",
+        "argv": [
+          "python3",
+          "examples/dsh_campaign/live_campaign.py",
+          "--check-native-plan"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.455
+      },
+      {
+        "name": "job-campaign",
+        "argv": [
+          "python3",
+          "examples/job_application/campaign.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.452
+      },
+      {
+        "name": "provider-package",
+        "argv": [
+          "python3",
+          "-m",
+          "aeep",
+          "provider",
+          "verify",
+          "examples/provider_package/aeep-provider.yaml",
+          "-m",
+          "examples/provider_package/aeep.yaml",
+          "--compact"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.567
+      },
+      {
+        "name": "router-compatibility",
+        "argv": [
+          "python3",
+          "-c",
+          "from pathlib import Path; from aeep.verification import verify_router_complete, strict_failure; r=verify_router_complete(profile='all',root=Path.cwd()); Path('/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/router-compatibility.json').write_text(r.model_dump_json(indent=2)+'\\n'); print(r.profiles); raise SystemExit(strict_failure(r))"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 8.618
+      },
+      {
+        "name": "build",
+        "argv": [
+          "python3",
+          "-m",
+          "build",
+          "--outdir",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/package-build-output"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 3.641
+      }
+    ]
+  },
+  "documentation": {
+    "files": 47,
+    "markdownlint_cli2": "0.23.3",
+    "lychee": "0.24.2",
+    "offline_links": {
+      "total": 493,
+      "unique": 336,
+      "successful": 463,
+      "excludes": 30,
+      "errors": 0
+    },
+    "exact_version_guard_passed": true,
+    "sha256": {
+      "README.md": "2c591fdec28ad2d25d5f2fd6c89b8ad87cb6a9e521debb726cbddc49e19fdb22",
+      "AGENTS.md": "05b3413e6aedc45e70e09d638a0b7746a260a833d1f1669fe5dbdc09827a2fde",
+      "CLAUDE.md": "6b97d006c3a38f2ab6e7b2145e3b79dadd5377fd53a9330c2ffb66e577c4590e",
+      "CONTRIBUTING.md": "4b3e6b0f95f2b112985721df481ab9927f999bea8da67ef79f0317d2039308e8",
+      "CODE_OF_CONDUCT.md": "0c4d7c6893a82a21cba644cc2e88ea026534858ba292160854d392c23acf9912",
+      "ARCHITECTURE.md": "9513680e59cc2f711ebe123c62b0e3f8ab0e27f8682eaa8a39af93c77af02cf5",
+      "SPEC.md": "c24dc0a8064e4c9aa5ed89a446b2d102d54dc6c5db522ddc01520c9e3f96cd3f",
+      "SECURITY.md": "584b439fecc4ef5b16943a6ee59a540396724c9aa76f280c3e4c937fd9cc39bf",
+      "docs/ACCOUNTING.md": "3939147a0914d4b17b1e293c6d42813cc9a3508464b84e6a4ee7e4a94368e26e",
+      "docs/ASSESSMENT.md": "7eaaee5b31c94390288dd6670dfbeedf2c86b4def349bef7792224bdf83fae79",
+      "docs/BYOS.md": "78888b6a48ca388cf2a6816fe368d7510286fa5c8e192d60a6d6bd5d06e38520",
+      "docs/CACHE_AFFINITY.md": "5a76408d32b4bfc944cc7e12c30c6032a574c15faed54ceb4a9a7b35c8657479",
+      "docs/DSH_VALIDATION.md": "0b18f9dd90e557ad71cf11d000b8a98d9ea6d9919ff9c3701b599f806f5b9c50",
+      "docs/ECONOMIC_NETWORK.md": "47cc926a0d2a67139a63975c7c29235a1331d1f7053d8c3db3132347fb9ae718",
+      "docs/ECONOMIC_OPERATOR_GUIDE.md": "903606f775abb50a9d5172ea5f528ab5327140444166ab555644d884ff6f8434",
+      "docs/EVIDENCE.md": "9c1be1efa972da7c1b5c910ee63f8aafbdf881d89d1a49968d7eb200869190c0",
+      "docs/EVIDENCE_REUSE.md": "8e628a4851ef54b1b0b20f98d0fe7d6a90123391a85788f6e6fa934bab26fb51",
+      "docs/INTEGRATIONS.md": "b4453d977dfde91b302b667c6310e22f05bd20124f4d75268afff218cf92131c",
+      "docs/JOB_APPLICATION_DEMO.md": "afc3bda0591edc811242062ed6d18f8dffe20a0ed7a2c369dc1c71af28d1dc0e",
+      "docs/MIGRATION_0.4.md": "76331b7e86f366961884278acc6201ef40a0a028750b0b9e82a98a32226f5fb8",
+      "docs/MIGRATION_0.5.md": "d1bc30edea8a496a8663c82f7dc69217f5833a5b93b35367fc7616473c3ba20b",
+      "docs/MIGRATION_0.6.md": "abcb77b5181876a30040f8ea53c16873b95392761fa86bf738b8eb08a4ec3544",
+      "docs/MIGRATION_0.7.md": "2eea58dc4d3e5c9ef9531e6408317d3a5f63b4b6f496c197e922229419460fb3",
+      "docs/ONBOARDING.md": "5b70ea8d76c67336fe716da3b7df2a2ed537c899c3ee29c0064ab5e93140b01b",
+      "docs/PROVIDER_INTEGRATION.md": "1f8bded081815dfeee7f9b373d954ff63b112bb2e4ec075991f9dfd26212f9c2",
+      "docs/PROVIDER_PACKAGES.md": "56a8c41f17d9af2d4f3ba976e28e3dd9ebc172d2f784bdc36d798b77d652fa56",
+      "docs/PROVIDER_TRUST.md": "b5e0e9911cb1e3ceb5f8950c1a43d76d932da5ee9a7a79935db888ce3917b55b",
+      "docs/README.md": "77b167a1fc2e91bccd198a5e4792833225ad369562870285fb2cb2c3d6e0648f",
+      "docs/STACK_PLANNING.md": "f7780634a2156719efc3db82e809bc2accbd394b4fed4daefa1e1ee7125fbd48",
+      "docs/THREAT_MODEL.md": "07a68331f07c362b30063c0d2ff22176fb97764d31eee5f5e299b5f6b1ef17f7",
+      "docs/media/README.md": "147c89ee33f09ee918816264dd1c523a9662e0ab7ecdcd7666077be749271995",
+      "docs/protocol/X402_CAPACITY_BINDING.md": "b4614ac076c4b8f9ee28d4eccc8ae47f3232b02cd267a91bc8852336513d017b",
+      "examples/dsh_campaign/README.md": "89c6f1d7e16a75dbd5233e1cb35315566f88442cbbc7189873f91ceeaa0c58d1",
+      "examples/economic_evidence/README.md": "5de9f0411ef532ff96f8584552f521a56275f6d596ca211ae487eafcc30f22de",
+      "examples/economic_market/README.md": "2ea8fc0359e9976d6aeae93546535ea6057726f3bde3d0684da97ea4671cfdd5",
+      "examples/github/README.md": "20d984a52818520d8d0f7bd46f7b4bd83e81fd58f5b11a2556b71e8df020b1eb",
+      "examples/http/README.md": "eea2863c74f8287397d85167035c7ee13b091ef383f1fddd16217742a6736942",
+      "examples/job_application/README.md": "741b7daec4e7c9ce797e4d8b8f88b4e68ed4f4d852795434d27d448f0a5b881e",
+      "examples/mcp/README.md": "597e412fa8c81736ba9039992096a8e8f051a9306f7997c1c7bf7a1211890530",
+      "examples/native_website/README.md": "6d7f216100322defe5dd10492a3b2904f67eecdbdb3a699433a08331ac1160da",
+      "examples/proof/README.md": "19c856a5d46b4dc35d136ff039b002e356f314c0534a8d127e63491e607963a3",
+      "examples/provider_package/README.md": "11377b327b9159af2f9f30e97e1ef57850c1f672c65d97a95d1f56980e5cb7b3",
+      "examples/quickstart/README.md": "daa262ac615f10a357f448a2ec51dc6297714b3616215be5c12ce6e22f68fa2a",
+      "examples/subscriptions/README.md": "06bd0d950093aff8e2061268829e8ea2b261d4102375b01d662b2fc4f178e393",
+      "integrations/aeep/README.md": "7bdd3a14ff9b34ef21da75b47831b0d3c4309337320304414191e7649204a7e9",
+      "integrations/dsh-aeep-router/README.md": "76460b6e0f818d14f16c3cfa75a03cd9b4e37070fb3b7b2af61a25b876ba1780",
+      "integrations/managed-worker/README.md": "7b5784f9ccb1875797b0206b3800a64e92b52d4650bf829a6cf6c62c58feddec",
+      "Makefile": "57f64d4767251f891b0fe78ebb4ef7270f3523e9c6d7672ffb858baba84e24da",
+      ".lychee.toml": "d721d660f4da4389633458a44d1d31e0aa10b846e92b252d727f524526387aec",
+      ".markdownlint-cli2.jsonc": "8be1b00b080919d13da4100aad39b553e95ed7bb7d58cc62b79e4ba873206c72"
+    }
+  },
+  "coverage_totals": {
+    "covered_lines": 28259,
+    "num_statements": 33306,
+    "percent_covered": 81.32027485275745,
+    "percent_covered_display": "81",
+    "missing_lines": 5047,
+    "excluded_lines": 253,
+    "percent_statements_covered": 84.84657419083649,
+    "percent_statements_covered_display": "85",
+    "num_branches": 11518,
+    "num_partial_branches": 2508,
+    "covered_branches": 8192,
+    "missing_branches": 3326,
+    "percent_branches_covered": 71.12345893384268,
+    "percent_branches_covered_display": "71"
+  },
+  "navigation_and_code_preservation": {
+    "activeFiles": 47,
+    "missingFromIndex": [],
+    "failures": [],
+    "exactOriginalCodeBlocksPreserved": 123,
+    "reorganizedCodeBlocks": [
+      "examples/dsh_campaign/README.md",
+      "examples/job_application/README.md"
+    ],
+    "allOriginalCodeLinesPreserved": true,
+    "allOriginalReferenceTextPreserved": true
+  },
+  "initial_preservation_audit": {
+    "head": "9017ddb8c6897430ed0b5231863c1df836392712",
+    "changed_tracked_files": [
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "CONTRIBUTING.md",
+      "Makefile",
+      "README.md",
+      "SECURITY.md",
+      "SPEC.md",
+      "docs/ACCOUNTING.md",
+      "docs/ASSESSMENT.md",
+      "docs/BYOS.md",
+      "docs/CACHE_AFFINITY.md",
+      "docs/DSH_VALIDATION.md",
+      "docs/ECONOMIC_NETWORK.md",
+      "docs/ECONOMIC_OPERATOR_GUIDE.md",
+      "docs/EVIDENCE.md",
+      "docs/EVIDENCE_REUSE.md",
+      "docs/INTEGRATIONS.md",
+      "docs/JOB_APPLICATION_DEMO.md",
+      "docs/MIGRATION_0.4.md",
+      "docs/MIGRATION_0.5.md",
+      "docs/MIGRATION_0.6.md",
+      "docs/MIGRATION_0.7.md",
+      "docs/ONBOARDING.md",
+      "docs/PROVIDER_INTEGRATION.md",
+      "docs/PROVIDER_PACKAGES.md",
+      "docs/PROVIDER_TRUST.md",
+      "docs/STACK_PLANNING.md",
+      "docs/THREAT_MODEL.md",
+      "docs/media/README.md",
+      "docs/protocol/X402_CAPACITY_BINDING.md",
+      "examples/dsh_campaign/README.md",
+      "examples/economic_evidence/README.md",
+      "examples/economic_market/README.md",
+      "examples/github/README.md",
+      "examples/http/README.md",
+      "examples/job_application/README.md",
+      "examples/mcp/README.md",
+      "examples/native_website/README.md",
+      "examples/proof/README.md",
+      "examples/provider_package/README.md",
+      "examples/quickstart/README.md",
+      "examples/subscriptions/README.md",
+      "integrations/aeep/README.md",
+      "integrations/dsh-aeep-router/README.md",
+      "integrations/managed-worker/README.md",
+      "reports/v08/plan-coverage.md"
+    ],
+    "immutable_files_preserved": 4638,
+    "preexisting_plan_coverage_suffix_preserved": true,
+    "preexisting_windows_summary_preserved": true,
+    "source_before_documentation": "1cd695b8eaf41a6a081b9fa3c1f675e158fa6573e4ad70b05139142fbc8d1ef9",
+    "source_after_documentation": "28274fd6773951926d6dd34a45c6659c88a02271e5aaba835f595674f495c525"
+  },
+  "safe_example_executions": [
+    {
+      "file": "http-run.json",
+      "ok": true,
+      "status": "success",
+      "output": {
+        "characters": 7,
+        "words": 2,
+        "lines": 1
+      }
+    },
+    {
+      "file": "mcp-run.json",
+      "ok": true,
+      "status": "success",
+      "output": {
+        "characters": 13,
+        "words": 3,
+        "lines": 1
+      }
+    },
+    {
+      "file": "quickstart-run.json",
+      "ok": true,
+      "status": "success",
+      "output": {
+        "characters": 7,
+        "words": 2,
+        "lines": 1
+      }
+    }
+  ],
+  "package_artifacts": [
+    {
+      "file": "aeep_agent_router-0.8.2-py3-none-any.whl",
+      "sha256": "94e186b4b44f2d02caaa9ca5e278fc52f70f94a7ac1470b505d664e325b06e5b",
+      "bytes": 1572290
+    },
+    {
+      "file": "aeep_agent_router-0.8.2.tar.gz",
+      "sha256": "d09c5418c88332b24306f1b2b6735831a4b4f7b72c02898a29022c244c52ce80",
+      "bytes": 1745882
+    }
+  ],
+  "final_build_exit_code": 0,
+  "task_resources_root": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_",
+  "preview_server_and_tab_closed": true,
+  "free_gib_after_checks": 64.38,
+  "logs_sha256": {
+    "docs-check-final.log": "7cf77a005a6df79b9398773097941f2817c2ca78840eec146010d6f9d5c84787",
+    "lychee-version-guard.log": "bf1629106ac9a8c34cf08178ab22f667aaa5a2ae8497cacdc13e9bd903c89443",
+    "compile-current.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ruff-current.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "mypy.log": "467364859149a6d51b16354d7d71beef180cec376644e32fbdc65429522ad603",
+    "policy-current.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "version-current.log": "149e983c325e1215d8fe411fd58fb9c0fa38bc5dfa119c4a6a92d44ee61e3e10",
+    "worker-fixture-current.log": "5ae9674486754ca3de9ad3aec051f90d3b18f62d798d203554d861c69758e373",
+    "pytest.log": "a722c5851f14b64da32ddad0b25e9a8967f1692513651c30c936e5312b492ff9",
+    "pytest-current.log": "74e190bb9cc32ab56a0a141f439996e1f9560c5cc8a7cb61a272b7c51227d111",
+    "coverage-tests.log": "889da4f1fa8c296bacb7a5538af426446e1369c20d268020051c5f4ed20cc558",
+    "coverage-report.log": "f22a9f598494aede475e2b43792d90a2ae33a6fd8fb5766249380771061dff7c",
+    "critical-coverage.log": "77549615bf1bb3ab5751ae24e057d4e330285911f054e5cf5a7d7adcca526a33",
+    "assessment-coverage.log": "160837997aa51a888fa283d16e07a946f4707fbb491b66963ba1750df5dda06e",
+    "node.log": "ba1ce7b275e6a433a2140439aa2660738bd25806b09e3df471980bedfc29eb1d",
+    "economic-proof.log": "ca3689caf6fbaf8433095ab3dc9d3581e61bc0b99b8a1d363a525047f7ae00a4",
+    "dsh-campaign.log": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8",
+    "dsh-live-safety-record.log": "e248519aba472a0a75510e4608782ec06b5aeb4acace9d6c8630d7651f403d92",
+    "dsh-live-comparison-record.log": "0453ab8103b70437b3a29632b4e660496d03e8f5c1dc14950f242b4274f51c4d",
+    "dsh-native-plan.log": "a3514433ddfe1f8c6219ed94832c1d238be5ad0994e0df3d1f4d8ebc3a5e1be9",
+    "job-campaign.log": "12839fb269f5b05357a03f398b24c4adf076f9d91d5a195fb8ea15677ef560b8",
+    "provider-package.log": "76c1b86cd87a8098461d8a560a8c87b079866eae7b4471042640ed01fd200226",
+    "router-compatibility.log": "d5c39d7d9cfde2b53f0e72999f2c5fc3cd8a00d65d6d0d934b00ff11d335b44f",
+    "build-final.log": "5208d82555b14a1cb6975cafe947a0b53ac9f23ea27a60ac496d87b11b611ab9"
+  }
+}

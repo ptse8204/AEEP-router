@@ -15,8 +15,14 @@ Historical reports, ADRs, assessment policy, packaged skills and the existing
 Windows CI edits remain intact. Integration README edits change the verification
 source binding; old live evidence keeps its original revision and cannot qualify
 this one. Source-bound live validation, the unrun three-way comparison and the
-human-usability gate remain open. Documentation and repository checks are pending
-in the linked record; no publication or live provider call is included.
+human-usability gate remain open. Local documentation checks pass for 47 files.
+Both final full suites pass 1,293 tests with 21 skipped; combined coverage is
+81.32%, both required branch gates pass, and Node/proof/build checks pass.
+The linked record distinguishes the concurrent Windows CI/fixture commit and
+preserves the earlier source-drift observation. Manual external-link review
+confirmed the DeepSeek guide in its official index, but direct retrieval timed
+out; reachability remains unverified. No publication or live provider call is
+included.
 
 
 ## October 7: native Windows CI repair in progress

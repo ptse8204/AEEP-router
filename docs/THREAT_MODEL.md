@@ -1,8 +1,29 @@
 # AEEP 0.7 managed-host and economic evidence threat model
 
+For developers and operators reviewing managed-host and economic trust
+boundaries. The 0.7 controls below remain relevant to the current router. Read
+[the security policy](../SECURITY.md) for repository-wide controls and
+[assessment testing](ASSESSMENT_TESTING.md) for experiment authority.
+
+[Documentation index](README.md).
+
 This document describes threats and controls for managed-host execution and
 economic evidence. It complements `SECURITY.md` and provides neither a
 penetration-test report nor production certification.
+
+<details>
+<summary>Contents</summary>
+
+- [Security objectives](#security-objectives)
+- [Assets](#assets)
+- [Trust boundaries and actors](#trust-boundaries-and-actors)
+- [0.7 managed-host and entitlement controls](#07-managed-host-and-entitlement-controls)
+- [Data flow and enforcement points](#data-flow-and-enforcement-points)
+- [Threats and mitigations](#threats-and-mitigations)
+- [Residual risks](#residual-risks)
+- [Deployment checklist](#deployment-checklist)
+
+</details>
 
 ## Security objectives
 

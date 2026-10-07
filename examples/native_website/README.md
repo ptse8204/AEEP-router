@@ -1,5 +1,7 @@
 # Fixed local website task service
 
+[Documentation index](../../docs/README.md) · [Scoped task operations](../../docs/ASSESSMENT.md#project-local-task-operation).
+
 This operator-owned example completes two fixed HTML edits and verifies their
 files independently in a fresh CLI or MCP process. It reuses `AEEPToolService`,
 reviewed task scopes, the native single-process command boundary, durable

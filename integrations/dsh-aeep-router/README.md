@@ -1,5 +1,12 @@
 # AEEP host-native router for DeepSeek Harness
 
+For DeepSeek Harness integrators. Use [guided setup](../../docs/ONBOARDING.md#start)
+for a searchable named MCP connection; this native bridge instead handles an
+exact semantic action before the host model call. Run package commands from
+this directory, and configure the manifest before dispatch.
+
+[Documentation index](../../docs/README.md).
+
 This Cordis plugin routes before a model sees a tool catalog. A human or host
 submits one exact action through DSH's native command registry:
 

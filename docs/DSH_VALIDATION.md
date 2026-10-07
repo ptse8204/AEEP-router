@@ -1,5 +1,12 @@
 # AEEP 0.6 DSH validation
 
+For contributors checking the DSH fixtures and interpreting retained results.
+Install the source checkout first and run commands from the repository root.
+Use [the native bridge](../integrations/dsh-aeep-router/README.md) to integrate
+a host; the historical MCP comparison below is a negative control.
+
+[Documentation index](README.md).
+
 The deterministic DSH fixture compares a model-suggested route, static AEEP,
 signed shared evidence, and shared evidence plus local/cache adaptation. DSH
 handles host integration and usage reporting. The router core does not depend on it.

@@ -1,6 +1,18 @@
 # Agent integration guide
 
-AEEP 0.7 exposes ten operations through MCP, provider-native function tools, and a plain JSON CLI. The MCP endpoint supports stateless `2026-07-28` clients and legacy initialized clients. Applications that manage their own model/tool loop can use the provider-native schemas:
+[Documentation index](README.md).
+
+For a new host connection, start with [guided setup](ONBOARDING.md#start).
+This guide is for developers configuring a manual MCP connection, native dispatch
+or an application's model/tool loop. Install AEEP first and review the manifest
+before enabling execution.
+
+The exposed tools depend on the selected legacy, assessment or task profile,
+configured discovery and connection allowlist. Named connections start with
+planning and search access; the list below describes the ten legacy routing and
+economic operations retained from 0.7, not every tool in 0.8. The MCP endpoint
+supports stateless `2026-07-28` clients and legacy initialized clients.
+Applications that manage their own model/tool loop can use provider-native schemas:
 
 - `aeep_list_capabilities`
 - `aeep_route_action`
@@ -18,6 +30,30 @@ The three economic inspection tools read already-persisted, sanitized records. T
 Financial acceptance, reservations, captures, releases, refunds, and reconciliation are operator-only and are not model tools. Raw action input, output, credentials, and external billing references are not returned by the economic inspection tools.
 
 The same routing contract applies across agent hosts. Each host manages its sandbox and approval UI; AEEP separately enforces manifest constraints and the execution ceiling configured by the operator.
+
+Use [per-agent controls](ONBOARDING.md#control-tools-per-agent) for named
+connections, [project-local task operation](ASSESSMENT.md#project-local-task-operation)
+for scoped execution, and [native-control compatibility](#native-control-compatibility)
+for the limits of host filtering. A ready server does not establish isolation.
+
+<details>
+<summary>Contents</summary>
+
+- [Preferred host-native dispatch](#preferred-host-native-dispatch)
+- [Start a local MCP server](#start-a-local-mcp-server)
+- [ChatGPT desktop and Codex](#chatgpt-desktop-and-codex)
+- [Native-control compatibility](#native-control-compatibility)
+- [Discovery, intake and local evidence lookup](#discovery-intake-and-local-evidence-lookup)
+- [Claude Code](#claude-code)
+- [OpenClaw](#openclaw)
+- [OpenAI Responses API](#openai-responses-api)
+- [Anthropic Messages API](#anthropic-messages-api)
+- [DeepSeek](#deepseek)
+- [Z.AI / GLM](#zai--glm)
+- [Agent skills](#agent-skills)
+- [Stack service integration](#stack-service-integration)
+
+</details>
 
 ## Preferred host-native dispatch
 
@@ -390,7 +426,8 @@ Official references:
 
 ## Agent skills
 
-Copy [`../skills/aeep-router`](../skills/aeep-router) into the host's supported skills directory. The included `SKILL.md` teaches the agent to:
+Copy `skills/aeep-router` from the repository into the host's supported skills
+directory. The included [SKILL.md](../skills/aeep-router/SKILL.md) teaches the agent to:
 
 1. list or route before executing when alternatives are unclear;
 2. pass current quota and resource pressure in `context.compute`;

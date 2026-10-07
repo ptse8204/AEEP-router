@@ -1,5 +1,12 @@
 # Local economic evidence reference service
 
+For provider developers testing on loopback. Run from the repository root
+with the HTTP extra installed, as shown below. Use two terminals and stop the
+server when finished. The payment approvals here apply only to the example
+ledger; do not reuse its keys or unauthenticated mode for a real provider.
+
+[Documentation index](../../docs/README.md).
+
 This service demonstrates AEEP 0.5 offers, request-bound quotes, provider usage,
 billing reconciliation, and privacy-safe aggregates. It is an in-memory local
 example: its deterministic private key is public test material and must never be

@@ -1,5 +1,13 @@
 # AEEP 0.8 proof assets
 
+For operators inspecting controlled proof assets and dated results. Install
+AEEP before checking the manifests. Docker and model campaigns need the exact
+reviewed environments and authority described below; do not rerun them merely
+to reproduce a documentation example. Before builds or image pulls, check host
+space and Docker usage, keep 50 GiB free, and preserve current/rollback resources.
+
+[Documentation index](../../docs/README.md).
+
 These assets preserve the qualification, accounting, campaign, workflow, and
 release-gate paths introduced before 0.4. The `fixture.*` routes are hermetic
 harness tests and must never be described as live model evidence. The 0.4

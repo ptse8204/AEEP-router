@@ -1,5 +1,11 @@
 # Subscription-aware routing
 
+For operators exploring quota-sensitive selection. Install AEEP and run from
+the repository root. The routing previews below do not invoke a model; managed
+Codex execution is a separate, reviewed operation.
+
+[Documentation index](../../docs/README.md).
+
 This demo compares the current Claude session, represented as a host-owned subscription resource, with local execution. It needs no model API key.
 
 ```bash
@@ -32,3 +38,10 @@ Those commands are non-billable diagnostics. Running the managed route starts
 one Codex model turn, subject to both AEEP and Codex approval ceilings. The
 example discovers models at runtime, stores neither prompt nor output, and marks
 personal capacity `self_only`.
+
+## Expected result and limits
+
+Compare selected routes and rejection reasons between the two previews. The
+quota override is a declared scenario, not a provider observation or a refund.
+See [subscription setup](../../docs/BYOS.md) for credential ownership and
+[accounting](../../docs/ACCOUNTING.md) for unknown versus zero usage.

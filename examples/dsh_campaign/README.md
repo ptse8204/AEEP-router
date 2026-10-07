@@ -1,5 +1,12 @@
 # AEEP 0.6 DSH proofs
 
+For contributors checking the DSH proof definitions. Install the source
+checkout and run from the repository root. Start with the `--check` commands
+to validate retained artifacts; commands without that flag regenerate reports.
+Live runs require the separate approval and environment described below.
+
+[Documentation index](../../docs/README.md).
+
 This fixture compares a model-suggested route with static, shared-evidence, and
 locally adaptive AEEP routing. It uses only local synthetic routes and stores no
 prompt content. Reports in `reports/v05/dsh/` cover static and JS-rendered
@@ -8,7 +15,6 @@ reuse, rate-card revaluation, cache reset/eviction, package tampering, and
 fixed-seed route ordering.
 
 ```bash
-PYTHONPATH=src python examples/dsh_campaign/campaign.py
 PYTHONPATH=src python examples/dsh_campaign/campaign.py --check
 ```
 
@@ -75,3 +81,12 @@ The comparison report uses six fresh read-only sessions to compare direct model
 counting with one AEEP `text.stats` call. Correctness improved, but token use
 increased. The report retains that negative savings result; it does not treat
 it as a campaign failure or evidence that AEEP saves tokens.
+
+## Regenerate synthetic reports
+
+Use a separate checkout when regenerating the fixture so the retained reports
+remain available for comparison:
+
+```bash
+PYTHONPATH=src python examples/dsh_campaign/campaign.py
+```

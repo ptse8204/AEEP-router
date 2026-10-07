@@ -1,5 +1,11 @@
 # Migrating to AEEP 0.5
 
+For operators upgrading a manifest, database or package to the 0.5 contract.
+This guide documents that transition; it is not a fresh-install guide. Back up
+the existing database first. Use [onboarding](ONBOARDING.md#start) for a new
+installation and the [version index](README.md#version-specific-compatibility)
+for adjacent transitions.
+
 AEEP 0.5 adds signed provider packages, RFC 8785 signatures, portable evidence,
 cache-affinity scoring, durable approvals, and SQLite schema version 5. Existing
 manifest versions `0.1`, `0.15`, `0.2`, `0.3`, and `0.4` remain readable.

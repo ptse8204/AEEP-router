@@ -1,5 +1,38 @@
 # Architecture and design decisions
 
+For contributors understanding how discovery, assessment, routing and execution
+fit together. Start with the [documentation index](docs/README.md) for user
+journeys; use [the specification](SPEC.md) for normative contracts.
+
+<details>
+<summary>Contents</summary>
+
+- [Discovery and admission boundary](#discovery-and-admission-boundary)
+- [Native task increment (steering amendment v1)](#native-task-increment-steering-amendment-v1)
+- [Placement in an agent stack](#placement-in-an-agent-stack)
+- [Why a semantic action rather than a tool name](#why-a-semantic-action-rather-than-a-tool-name)
+- [Why raw resources rather than one credit](#why-raw-resources-rather-than-one-credit)
+- [Why feasibility precedes scoring](#why-feasibility-precedes-scoring)
+- [Expected cost per success](#expected-cost-per-success)
+- [Locality and current state](#locality-and-current-state)
+- [Static priors and observations](#static-priors-and-observations)
+- [Execution boundaries](#execution-boundaries)
+- [Persistence](#persistence)
+- [Agent interfaces](#agent-interfaces)
+- [Existing-agent instrumentation](#existing-agent-instrumentation)
+- [Calibration](#calibration)
+- [Qualification and workflows](#qualification-and-workflows)
+- [Economic accounting](#economic-accounting)
+- [Economic interoperability](#economic-interoperability)
+- [Prepared economic routing](#prepared-economic-routing)
+- [Economic persistence](#economic-persistence)
+- [Future extension points](#future-extension-points)
+- [Provider-package supply chain (0.6)](#provider-package-supply-chain-06)
+- [Assessment boundary (0.8)](#assessment-boundary-08)
+- [Stack orchestration](#stack-orchestration)
+
+</details>
+
 ## Discovery and admission boundary
 
 [ADR-010](docs/adr/ADR-010-ard-discovery-boundary.md) selects ARD as the primary
@@ -542,7 +575,6 @@ Version 0.6 adds explicit evidence authority/cohort declarations, signed
 provider discovery, and provider conformance checks. A v0.5 package remains
 readable, but evidence that lacks the new declarations is accepted only as a
 low-confidence prior and cannot qualify a route.
-
 
 ## Assessment boundary (0.8)
 
