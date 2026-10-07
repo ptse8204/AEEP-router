@@ -29,7 +29,7 @@ from aeep.router import Router
 )
 def test_tool_schema_exports(format, key):
     tools = export_tools(format)
-    assert len(tools) == 16
+    assert len(tools) == 18
     tool_names = {
         tool.get("name", tool.get("function", {}).get("name")) for tool in tools
     }
@@ -103,7 +103,7 @@ def test_protocol_modern_discover_and_list(tmp_path):
             }
         )
         names = {tool["name"] for tool in listed["result"]["tools"]}
-        assert len(names) == 15
+        assert len(names) == 17
         assert "aeep_lookup_capability" in names
         assert "aeep_discover_resources" not in names
         assert listed["result"]["resultType"] == "complete"
@@ -260,7 +260,7 @@ async def test_economic_mcp_surface_is_read_only_sanitized_and_listed():
                 }
             )
 
-    router = cast(Any, SimpleNamespace(store=Store()))
+    router = cast(Any, SimpleNamespace(store=Store(), _connection_guard=None))
     service = AEEPToolService(router)
     listed = {tool["name"]: tool for tool in service.list_tools()}
     safe_names = {

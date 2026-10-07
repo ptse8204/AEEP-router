@@ -43,6 +43,7 @@ def test_cli_tools_and_tool_call(tmp_path):
     result = runner.invoke(app, ["tools", "export", "anthropic", "--compact"])
     assert result.exit_code == 0
     assert {tool["name"] for tool in json.loads(result.stdout)["tools"]} == {
+        "aeep_stack_recommend", "aeep_discovery_status",
         "aeep_stack_propose",
         "aeep_stack_inspect",
         "aeep_stack_optimize",

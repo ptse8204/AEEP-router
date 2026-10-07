@@ -2318,6 +2318,374 @@
         "readOnlyHint": true,
         "idempotentHint": true
       }
+    },
+    {
+      "name": "aeep_discovery_status",
+      "description": "List configured searchable sources and setup guidance without contacting providers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "aeep_stack_recommend",
+      "description": "Search configured catalogs and compare named options for public task stages. Host capabilities and web findings remain claims. Does not install, grant access or execute.",
+      "inputSchema": {
+        "$defs": {
+          "HostCapability": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Name",
+                "type": "string"
+              },
+              "description": {
+                "maxLength": 1000,
+                "title": "Description",
+                "type": "string"
+              },
+              "kind": {
+                "default": "tool",
+                "enum": [
+                  "tool",
+                  "skill",
+                  "hook"
+                ],
+                "title": "Kind",
+                "type": "string"
+              },
+              "availability": {
+                "default": "unknown",
+                "enum": [
+                  "configured",
+                  "observed",
+                  "unknown"
+                ],
+                "title": "Availability",
+                "type": "string"
+              },
+              "source": {
+                "maxLength": 2048,
+                "minLength": 1,
+                "title": "Source",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "description",
+              "source"
+            ],
+            "title": "HostCapability",
+            "type": "object"
+          },
+          "JsonValue": {},
+          "PackageLocatorKind": {
+            "enum": [
+              "local",
+              "https",
+              "repository"
+            ],
+            "title": "PackageLocatorKind",
+            "type": "string"
+          },
+          "ProviderPackageLocator": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "$ref": "#/$defs/PackageLocatorKind"
+              },
+              "value": {
+                "maxLength": 2048,
+                "minLength": 1,
+                "title": "Value",
+                "type": "string"
+              },
+              "subdirectory": {
+                "anyOf": [
+                  {
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Subdirectory"
+              }
+            },
+            "required": [
+              "kind",
+              "value"
+            ],
+            "title": "ProviderPackageLocator",
+            "type": "object"
+          },
+          "RecommendationStage": {
+            "additionalProperties": false,
+            "properties": {
+              "stage_id": {
+                "pattern": "^[a-z0-9_-]{1,80}$",
+                "title": "Stage Id",
+                "type": "string"
+              },
+              "purpose": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Purpose",
+                "type": "string"
+              },
+              "search_terms": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 6,
+                "minItems": 1,
+                "title": "Search Terms",
+                "type": "array"
+              },
+              "capability": {
+                "anyOf": [
+                  {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Capability"
+              },
+              "preferred_candidate": {
+                "anyOf": [
+                  {
+                    "maxLength": 300,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Preferred Candidate"
+              },
+              "selection_reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Selection Reason"
+              }
+            },
+            "required": [
+              "stage_id",
+              "purpose",
+              "search_terms"
+            ],
+            "title": "RecommendationStage",
+            "type": "object"
+          },
+          "RegistryCandidate": {
+            "additionalProperties": false,
+            "properties": {
+              "registry_candidate_id": {
+                "maxLength": 300,
+                "minLength": 1,
+                "title": "Registry Candidate Id",
+                "type": "string"
+              },
+              "adapter_id": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Adapter Id",
+                "type": "string"
+              },
+              "name": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Name",
+                "type": "string"
+              },
+              "description": {
+                "default": "",
+                "maxLength": 4096,
+                "title": "Description",
+                "type": "string"
+              },
+              "version": {
+                "anyOf": [
+                  {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Version"
+              },
+              "tags": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 100,
+                "title": "Tags",
+                "type": "array"
+              },
+              "source_repository": {
+                "anyOf": [
+                  {
+                    "maxLength": 2048,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Source Repository"
+              },
+              "package_locator": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/ProviderPackageLocator"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "remote_endpoint": {
+                "anyOf": [
+                  {
+                    "maxLength": 2048,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Remote Endpoint"
+              },
+              "provenance": {
+                "additionalProperties": {
+                  "$ref": "#/$defs/JsonValue"
+                },
+                "title": "Provenance",
+                "type": "object"
+              },
+              "marketplace_labels": {
+                "additionalProperties": {
+                  "$ref": "#/$defs/JsonValue"
+                },
+                "title": "Marketplace Labels",
+                "type": "object"
+              },
+              "retrieved_at": {
+                "format": "date-time",
+                "title": "Retrieved At",
+                "type": "string"
+              },
+              "raw_metadata_digest": {
+                "pattern": "^sha256:[a-f0-9]{64}$",
+                "title": "Raw Metadata Digest",
+                "type": "string"
+              }
+            },
+            "required": [
+              "registry_candidate_id",
+              "adapter_id",
+              "name",
+              "retrieved_at",
+              "raw_metadata_digest"
+            ],
+            "title": "RegistryCandidate",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "host": {
+            "enum": [
+              "codex",
+              "claude",
+              "dsh",
+              "deepseek-api"
+            ],
+            "title": "Host",
+            "type": "string"
+          },
+          "stages": {
+            "items": {
+              "$ref": "#/$defs/RecommendationStage"
+            },
+            "maxItems": 16,
+            "minItems": 1,
+            "title": "Stages",
+            "type": "array"
+          },
+          "priorities": {
+            "default": [
+              "quality",
+              "setup"
+            ],
+            "items": {
+              "enum": [
+                "quality",
+                "cost",
+                "privacy",
+                "setup",
+                "speed"
+              ],
+              "type": "string"
+            },
+            "title": "Priorities",
+            "type": "array"
+          },
+          "host_capabilities": {
+            "items": {
+              "$ref": "#/$defs/HostCapability"
+            },
+            "maxItems": 100,
+            "title": "Host Capabilities",
+            "type": "array"
+          },
+          "web_candidates": {
+            "items": {
+              "$ref": "#/$defs/RegistryCandidate"
+            },
+            "maxItems": 30,
+            "title": "Web Candidates",
+            "type": "array"
+          }
+        },
+        "required": [
+          "host",
+          "stages"
+        ],
+        "title": "RecommendationRequest",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
     }
   ]
 }

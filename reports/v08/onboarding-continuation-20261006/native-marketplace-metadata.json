@@ -1,0 +1,25 @@
+{
+  "revision": "7732f6859674debf3c2d2ba97bfdba72607e20ab",
+  "source": "https://github.com/ptse8204/AEEP-router",
+  "catalog_url": "https://raw.githubusercontent.com/ptse8204/AEEP-router/7732f6859674debf3c2d2ba97bfdba72607e20ab/.agents/plugins/marketplace.json",
+  "catalog": {
+    "name": "aeep-router",
+    "interface": {
+      "displayName": "AEEP Router"
+    },
+    "plugins": [
+      {
+        "name": "aeep",
+        "source": {
+          "source": "local",
+          "path": "./integrations/aeep"
+        },
+        "policy": {
+          "installation": "AVAILABLE",
+          "authentication": "ON_INSTALL"
+        },
+        "category": "Productivity"
+      }
+    ]
+  }
+}

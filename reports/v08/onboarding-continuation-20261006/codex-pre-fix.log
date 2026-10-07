@@ -1,0 +1,116 @@
+{
+  "scope": "Isolated Codex App Server, no model request, no sign-in or existing auth state",
+  "binary": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+  "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "version": "codex-cli 0.154.0",
+  "workspace": "/private/tmp/aeep-onboarding-continuation/codex-v2",
+  "checks": [
+    "two actual host connections expose different inventories",
+    "actual Codex tool call succeeds before revocation",
+    "cached host declaration cannot bypass live AEEP revocation",
+    "native disabled_tools and AEEP denial both survive host reload",
+    "restoring alpha leaves beta denial intact"
+  ],
+  "initial_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_discovery_status",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "revocation_error": {
+    "code": -32602,
+    "message": "Unknown tool: aeep_discovery_status"
+  },
+  "filtered_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "restored_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_discovery_status",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "status": "failed",
+  "error": "ConfigurationError('connection revoked; modified host entry preserved')"
+}
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-continuation-20261006/codex-probe.py", line 103, in <module>
+    asyncio.run(main())
+  File "/private/tmp/aeep-onboarding-build/release-final-check/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-build/release-final-check/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-build/release-final-check/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-continuation-20261006/codex-probe.py", line 92, in main
+    await asyncio.to_thread(disconnect, 'alpha')
+  File "/private/tmp/aeep-onboarding-build/release-final-check/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-build/release-final-check/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aeep-onboarding-build/release-final-check/home/data/venv/lib/python3.12/site-packages/aeep/onboarding.py", line 173, in disconnect
+    raise ConfigurationError('connection revoked; modified host entry preserved')
+aeep.errors.ConfigurationError: connection revoked; modified host entry preserved

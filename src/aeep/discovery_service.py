@@ -37,7 +37,7 @@ from .store import ReceiptStore
 
 class DiscoverySourceConfig(StrictModel):
     source_id: str = Field(min_length=1, max_length=100)
-    kind: Literal['ard', 'fixture', 'mcp', 'docker', 'smithery', 'package']
+    kind: Literal['ard', 'fixture', 'mcp', 'docker', 'smithery', 'package', 'marketplace']
     catalog: str | None = Field(default=None, max_length=2048)
     command: str | None = Field(default=None, max_length=4096)
     token_env: str | None = Field(default=None, pattern=r'^[A-Za-z_][A-Za-z0-9_]*$', max_length=200)
@@ -49,7 +49,15 @@ class DiscoverySourceConfig(StrictModel):
 
     @model_validator(mode='after')
     def source_shape(self) -> DiscoverySourceConfig:
-        if self.kind in {'fixture', 'package'}:
+        if self.kind == 'marketplace':
+            from .marketplaces import public_url
+            if bool(self.path) == bool(self.base_url) or self.fallback_path:
+                raise ValueError('marketplace requires one local path or HTTPS URL')
+            if self.base_url:
+                public_url(self.base_url)
+            elif self.allow_remote:
+                raise ValueError('local marketplace cannot allow remote access')
+        elif self.kind in {'fixture', 'package'}:
             if not self.path or self.base_url is not None or self.fallback_path is not None or self.allow_remote:
                 raise ValueError('local discovery requires only a local path')
         elif self.kind in {'ard', 'mcp'}:
@@ -145,7 +153,9 @@ class DiscoveryService:
             if adapter is None:
                 raise ConfigurationError('discovery source is not configured')
             # Only an exact fixture adapter is known to perform no network calls.
-            if type(adapter) not in {FixtureRegistryAdapter, LocalPackageAdapter} and source not in self.allowed_remote_sources:
+            from .marketplaces import MarketplaceAdapter
+            local_marketplace = type(adapter) is MarketplaceAdapter and adapter.local
+            if type(adapter) not in {FixtureRegistryAdapter, LocalPackageAdapter} and not local_marketplace and source not in self.allowed_remote_sources:
                 raise ConfigurationError('discovery source requires operator remote-query authority')
             if (isinstance(adapter, ARDRegistryAdapter) and adapter.fallback is not None
                     and type(adapter.fallback) is not FixtureRegistryAdapter):
@@ -196,10 +206,10 @@ class DiscoveryService:
                     found = [RegistryCandidate.model_validate(item.model_dump()) for item in found]
                     for item in found:
                         external_resource_identity(item)
-                    if isinstance(adapter, ARDRegistryAdapter):
+                    if hasattr(adapter, 'warnings'):
                         source_record.warnings.extend(adapter.warnings)
-                        if 'ARD unavailable or unsupported; returning configured local candidates' in adapter.warnings:
-                            source_record.status = 'fallback'
+                    if isinstance(adapter, ARDRegistryAdapter) and 'ARD unavailable or unsupported; returning configured local candidates' in adapter.warnings:
+                        source_record.status = 'fallback'
                 except TimeoutError:
                     source_record.status = 'timeout'
                     source_record.warnings.append('Discovery source exceeded its deadline')
@@ -291,6 +301,9 @@ class LocalPackageAdapter:
 
 def discovery_adapter(source: DiscoverySourceConfig, *, base_directory: Path = Path('.')) -> PackageRegistryAdapter:
     """Canonical factory. Only operator configuration chooses code and destinations."""
+    if source.kind == 'marketplace':
+        from .marketplaces import MarketplaceAdapter
+        return MarketplaceAdapter(str(base_directory / source.path) if source.path else str(source.base_url), local=bool(source.path))
     if source.kind == 'fixture':
         return FixtureRegistryAdapter(base_directory / str(source.path), allowed_types=tuple(source.artifact_types))
     if source.kind == 'package':

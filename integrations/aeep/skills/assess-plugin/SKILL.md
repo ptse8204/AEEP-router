@@ -3,11 +3,30 @@ name: assess-plugin
 description: Help select a local plugin, propose a reviewed AEEP assessment, inspect its evidence, and use the approved task tools.
 ---
 
-The marketplace installation exposes the standard router and inert stack tools.
-For ordinary work, use `aeep_list_capabilities` to inspect available actions,
-`aeep_route_action` to preview a decision, and `aeep_execute_action` to execute it.
-Show the result and receipt. Do not infer qualification or payment authority
-from installation. An explicit propose-only request stops before execution.
+For ordinary task planning, inspect `aeep_discovery_status` and local capabilities,
+then inspect the host's available skills and tools. The local AEEP registry is not
+an inventory of everything the host can do. If sources are missing, explain
+`aeep setup` and `aeep catalogs add`; do not claim there are no suitable plugins.
+
+Decompose the goal into public stages. Use `aeep_discover_resources` and
+`aeep_stack_recommend` to search and compare named candidates, including alternatives.
+Use short capability terms: the MCP Registry searches names. When catalogs have
+poor coverage, use available host web search for official documentation and public
+repositories, and submit sourced web candidates as unverified claims. Never send
+private task contents, scripts, paths or credentials to discovery.
+
+Compare task fit, host and artifact compatibility, quality evidence, cost, privacy
+and setup effort. Explain the preferred component for each stage. No metadata
+claim is measured benefit or execution authority. Show `recommendation_ready`,
+`setup_required`, or `blocked` accurately. Only an executable proposal with current
+preflight can be ready to run. For an educational video cover inspection, script,
+recording, narration, editing, captions and quality review; word count alone is not
+a video stack. Offer `aeep stack setup guided CANDIDATE --connection NAME` for
+operator-reviewed setup. Do not install or change grants through model tools.
+
+For bounded execution, preview with `aeep_route_action`, execute only permitted
+routes with `aeep_execute_action`, and report the actual result and receipt.
+An explicit propose-only request stops before execution.
 
 The assessment tools below require a separately configured assessment-profile
 server and its reviewed definitions and grants. If those tools are absent,

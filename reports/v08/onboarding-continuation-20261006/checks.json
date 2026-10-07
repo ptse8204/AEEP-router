@@ -1,0 +1,105 @@
+[
+  {
+    "check": "compile",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "schemas",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "policy",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "ruff",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "ruff",
+      "check",
+      "src",
+      "tests"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "pytest",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "coverage-tests",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "coverage-report",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "coverage-json",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "reports/v08/onboarding-continuation-20261006/coverage.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "critical-coverage",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_critical_coverage.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "assessment-coverage",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_assessment_coverage.py"
+    ],
+    "exit_code": 1
+  }
+]

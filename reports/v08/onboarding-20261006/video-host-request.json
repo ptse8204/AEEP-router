@@ -1,0 +1,185 @@
+{
+  "host": "codex",
+  "priorities": [
+    "quality",
+    "setup"
+  ],
+  "stages": [
+    {
+      "stage_id": "inspection",
+      "purpose": "Inspect a website feature",
+      "search_terms": [
+        "inspection"
+      ],
+      "preferred_candidate": "web-video-playwright-mcp",
+      "selection_reason": "Inspect the actual interface before describing it."
+    },
+    {
+      "stage_id": "storyboard",
+      "purpose": "Write a factual script and storyboard",
+      "search_terms": [
+        "storyboard"
+      ],
+      "preferred_candidate": "host:Connected agent",
+      "selection_reason": "Use the existing agent for script drafting and storyboard decisions."
+    },
+    {
+      "stage_id": "capture",
+      "purpose": "Record the feature walkthrough",
+      "search_terms": [
+        "capture"
+      ],
+      "preferred_candidate": "web-video-playwright-video",
+      "selection_reason": "Capture the real browser workflow rather than substitute generated UI."
+    },
+    {
+      "stage_id": "narration",
+      "purpose": "Produce narrated audio",
+      "search_terms": [
+        "narration"
+      ],
+      "preferred_candidate": "web-video-elevenlabs",
+      "selection_reason": "The official MCP integration provides a sourced narration candidate; credentials, current terms and voice quality need review."
+    },
+    {
+      "stage_id": "editing",
+      "purpose": "Compose motion and edited video",
+      "search_terms": [
+        "motion"
+      ],
+      "preferred_candidate": "web-video-remotion",
+      "selection_reason": "Use a documented agent skill for programmatic video composition; inspect rendering and licensing requirements."
+    },
+    {
+      "stage_id": "captions",
+      "purpose": "Produce readable timed captions",
+      "search_terms": [
+        "transcription"
+      ],
+      "preferred_candidate": "web-video-whisper",
+      "selection_reason": "Use transcription as a candidate for captions, then check wording and alignment."
+    },
+    {
+      "stage_id": "review",
+      "purpose": "Review the completed video",
+      "search_terms": [
+        "review"
+      ],
+      "preferred_candidate": "host:Connected agent",
+      "selection_reason": "Combine visual review with FFprobe technical checks; neither metadata nor word count proves visual quality."
+    }
+  ],
+  "host_capabilities": [
+    {
+      "name": "Connected agent",
+      "kind": "skill",
+      "description": "Script and storyboard drafting plus visual review planning.",
+      "source": "Current host agent; capability report, not measured task performance",
+      "availability": "observed"
+    }
+  ],
+  "web_candidates": [
+    {
+      "registry_candidate_id": "web-video-playwright-mcp",
+      "adapter_id": "host-web-search",
+      "name": "Playwright MCP",
+      "description": "Website inspection and browser automation.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://github.com/microsoft/playwright-mcp",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665150Z",
+      "raw_metadata_digest": "sha256:15c658a033b3c1b5da5899906105c886cd924be19bd4c787bff5ba262b4b2492"
+    },
+    {
+      "registry_candidate_id": "web-video-playwright-video",
+      "adapter_id": "host-web-search",
+      "name": "Playwright video recording",
+      "description": "Browser screen capture through the Playwright video recording API.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://playwright.dev/python/docs/videos",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665929Z",
+      "raw_metadata_digest": "sha256:1166b8b80d5b17710d488b00e7ba962fb460192d802ef55bcb471940ca2685d0"
+    },
+    {
+      "registry_candidate_id": "web-video-elevenlabs",
+      "adapter_id": "host-web-search",
+      "name": "ElevenLabs MCP",
+      "description": "Speech synthesis for narrated audio and narration.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://github.com/elevenlabs/elevenlabs-mcp",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665952Z",
+      "raw_metadata_digest": "sha256:b88744fa2d793690fe8f3209415949e49e6f1b5e5a06b42d04664074244900b3"
+    },
+    {
+      "registry_candidate_id": "web-video-remotion",
+      "adapter_id": "host-web-search",
+      "name": "Remotion Agent Skills",
+      "description": "Video composition, editing and motion using agent instructions and programmatic rendering.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://www.remotion.dev/docs/ai/skills",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665967Z",
+      "raw_metadata_digest": "sha256:99a7d0a6a70974c7a03686113cf23732ddcd79eee7c0f36ea302ae4acadfaac5"
+    },
+    {
+      "registry_candidate_id": "web-video-whisper",
+      "adapter_id": "host-web-search",
+      "name": "Whisper",
+      "description": "Audio transcription for captions; verify timing and recognition accuracy.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://github.com/openai/whisper",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665980Z",
+      "raw_metadata_digest": "sha256:6bc707e7190e794684d40f662a2f577c1b9f45c5603d352eeb141f08ff43b78a"
+    },
+    {
+      "registry_candidate_id": "web-video-ffprobe",
+      "adapter_id": "host-web-search",
+      "name": "FFprobe",
+      "description": "Technical review of media stream and container metadata; human visual review is still required.",
+      "version": null,
+      "tags": [],
+      "source_repository": "https://ffmpeg.org/ffprobe.html",
+      "package_locator": null,
+      "remote_endpoint": null,
+      "provenance": {
+        "basis": "Public primary documentation inspected by the host; no installation, measured quality or pricing claim."
+      },
+      "marketplace_labels": {},
+      "retrieved_at": "2026-10-06T23:39:49.665995Z",
+      "raw_metadata_digest": "sha256:eddf15161d44e93091588fd6882d729cff39006c042cec3a328ea3666089013c"
+    }
+  ]
+}

@@ -25,6 +25,7 @@ from .config import find_manifest, load_manifest, write_default_manifest
 from .errors import AEEPError, ApprovalRequired, ConfigurationError
 from .executors.python import load_callable
 from .integrations import export_tools
+from .management_cli import register as register_management
 from .models import (
     ActionConstraints,
     ActionContext,
@@ -55,7 +56,7 @@ from .version import __version__
 app = typer.Typer(
     name="aeep",
     help="Profile and route agent actions across Python, CLI, HTTP, MCP, and host agents.",
-    no_args_is_help=True,
+    no_args_is_help=False,
     pretty_exceptions_enable=False,
 )
 tools_app = typer.Typer(help="Export AEEP as native tools for agent providers.")
@@ -82,6 +83,9 @@ verify_app = typer.Typer(help="Run digest-bound executable completion checks.")
 app.add_typer(assessment_app, name="assess")
 app.add_typer(task_app, name='task')
 app.add_typer(stack_app, name='stack')
+
+
+register_management(app)
 
 
 @app.command("init-assessment")
@@ -477,10 +481,17 @@ def init(
 @app.command()
 def doctor(
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    setup_status: bool = typer.Option(False, '--setup'),
+    json_output: bool = typer.Option(False, '--json'),
     compact: bool = typer.Option(False, "--compact"),
 ) -> None:
     """Validate the manifest and check local integration prerequisites."""
 
+    if setup_status:
+        from .management_cli import show
+        from .onboarding import check_setup
+        show(check_setup(), json_output)
+        return
     try:
         parsed, manifest_path = load_manifest(manifest)
         checks: list[dict[str, Any]] = []
@@ -2474,6 +2485,7 @@ def route(
 @app.command("host-bridge")
 def host_bridge(
     manifest: Path | None = typer.Option(None, "--manifest", "-m"),
+    connection: Path | None = typer.Option(None, '--connection'),
     integration_id: str = typer.Option("host-native-v1", "--integration-id"),
     max_input_bytes: int = typer.Option(
         262_144, "--max-input-bytes", min=1_024, max=1_048_576
@@ -2492,6 +2504,7 @@ def host_bridge(
             sys.stdin.buffer,
             sys.stdout.buffer,
             integration_id=integration_id,
+            connection=connection,
             max_input_bytes=max_input_bytes,
             max_output_bytes=max_output_bytes,
         )
@@ -2785,6 +2798,7 @@ def tool_call(
     task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID'),
     task_activation: str | None = typer.Option(None, '--task-activation'),
     discovery_config: Path | None = typer.Option(None, '--discovery-config', help='Operator-selected discovery sources and public-query limits.'),
+    connection: Path | None = typer.Option(None, '--connection', help='Operator-owned agent connection; never a model argument.'),
     text: bool = typer.Option(False, '--text', help='Concise task result; JSON remains the default.'),
 ) -> None:
     """Invoke an AEEP tool over deterministic JSON without running an MCP server."""
@@ -2816,6 +2830,7 @@ def tool_call(
                     task_scope=task_scope,
                     task_activation=task_activation,
                     discovery_config=discovery_config,
+                    connection=connection,
                 ).call(name, _mapping(arguments, name="arguments")),
             )
         )
@@ -2858,14 +2873,24 @@ def tools_export(
         ...,
         help="mcp, openai-responses, openai-chat, anthropic, deepseek, or zai",
     ),
+    connection: Path | None = typer.Option(None, '--connection'),
     compact: bool = typer.Option(False, "--compact"),
     profile: str = typer.Option('legacy', '--profile', help='legacy, assessment, or task; built-in declarations only'),
 ) -> None:
     """Export the AEEP agent tools in a provider-native declaration format."""
 
     try:
-        _emit({"tools": export_tools(format, profile=profile)}, compact=compact)  # type: ignore[arg-type]
-    except ValueError as exc:
+        exported = export_tools(format, profile=profile)  # type: ignore[arg-type]
+        if connection:
+            from .integrations.connected_tools import ConnectedTools
+            bridge = ConnectedTools(connection)
+            try:
+                allowed = [tool['name'] for tool in bridge.service.list_tools()]
+            finally:
+                asyncio.run(bridge.close())
+            exported = [item for item in exported if item.get('name', item.get('function', {}).get('name')) in allowed]
+        _emit({'tools': exported}, compact=compact)
+    except (AEEPError, ValueError, OSError) as exc:
         _fail(exc, compact=compact)
 
 
@@ -4027,6 +4052,7 @@ def serve(
     task_scope: str | None = typer.Option(None, '--task-scope', help='Operator-reviewed task scope ID; never a tool argument.'),
     task_activation: str | None = typer.Option(None, '--task-activation'),
     discovery_config: Path | None = typer.Option(None, '--discovery-config', help='Operator-selected discovery sources and public-query limits.'),
+    connection: Path | None = typer.Option(None, '--connection', help='Operator-owned agent connection; never a model argument.'),
     transport: str = typer.Option("stdio", "--transport", help="stdio or http"),
     manifest: Path | None = typer.Option(None, "--manifest", "-m", envvar="AEEP_MANIFEST"),
     approve: SideEffect = typer.Option(
@@ -4053,6 +4079,7 @@ def serve(
                     task_scope=task_scope,
                     task_activation=task_activation,
                     discovery_config=discovery_config,
+                    connection=connection,
                     approved_side_effect=approve,
                     allow_unsafe_executor=approve_unsafe_executor,
                 )
@@ -4082,6 +4109,7 @@ def serve(
         task_scope=task_scope,
         task_activation=task_activation,
         discovery_config=discovery_config,
+        connection=connection,
         approved_side_effect=approve,
         allow_unsafe_executor=approve_unsafe_executor,
     )

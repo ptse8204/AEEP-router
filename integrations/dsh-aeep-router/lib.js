@@ -162,6 +162,7 @@ export class BridgeClient {
     if (this.child) return;
     const args = [
       ...(this.config.aeepArgs ?? []), "host-bridge", "--manifest", this.config.manifest,
+      ...(this.config.connection ? ["--connection", this.config.connection] : []),
       "--integration-id", this.config.integrationId ?? "dsh-native-v2",
       "--max-input-bytes", String(this.config.maxInputBytes ?? 262_144),
       "--max-output-bytes", String(this.config.maxOutputBytes ?? 262_144),

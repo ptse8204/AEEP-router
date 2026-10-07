@@ -1,0 +1,43 @@
+{
+  "name": "@modelcontextprotocol/server-memory",
+  "version": "2026.8.31",
+  "description": "MCP server for enabling memory for Claude through a knowledge graph",
+  "repository": {
+    "url": "git+https://github.com/modelcontextprotocol/servers.git",
+    "type": "git"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "bin": {
+    "mcp-server-memory": "dist/index.js"
+  },
+  "scripts": {
+    "test": "vitest run --coverage",
+    "build": "tsc && shx chmod +x dist/*.js",
+    "watch": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "engines": null,
+  "dist": {
+    "shasum": "809f9f4c7e30e5c4e0b34ad0a3781c40664c0bfa",
+    "tarball": "https://registry.npmjs.org/@modelcontextprotocol/server-memory/-/server-memory-2026.8.31.tgz",
+    "fileCount": 3,
+    "integrity": "sha512-ljj/3S4aGjxdNSQWw6gucKKGnTLdBPWxzapyY/MT2tOVyZwvxChvevXSLPwx59nKJAlVpUVW+cOlnVRXRwiqMQ==",
+    "signatures": [
+      {
+        "sig": "MEUCIQCJf22DbvE43u4HCsHl82ULhdPfwpaTWoAtT8p8G3imaQIgB6S34IP0ZXwES9POgq6rILEynldeYRYKFXuo3E4yR6M=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "attestations": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@modelcontextprotocol%2fserver-memory@2026.8.31",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "unpackedSize": 31899
+  },
+  "metadata_url": "https://registry.npmjs.org/@modelcontextprotocol%2Fserver-memory/latest"
+}

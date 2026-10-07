@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/scripts/check_assessment_coverage.py", line 62, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/edwintse/Documents/aeep-agent-router/scripts/check_assessment_coverage.py", line 48, in main
+    for path, data in json.loads(Path(sys.argv[1]).read_text())["files"].items()
+                                      ~~~~~~~~^^^
+IndexError: list index out of range

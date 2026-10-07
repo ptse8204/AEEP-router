@@ -1,0 +1,38 @@
+--- prior-candidate/src/aeep/access.py
++++ src/aeep/access.py
+@@ -86,7 +86,7 @@
+     if start is None:
+         raise ConfigurationError('server needs an explicit MCP table before adopting its tool filter')
+     body = ''.join(lines[start + 1:end])
+-    matches = list(re.finditer(r'(?m)^\s*disabled_tools\s*=.*(?:\n|$)', body))
++    matches = list(re.finditer(r'(?m)^[ \t]*disabled_tools[ \t]*=.*(?:\n|$)', body))
+     if matches:
+         match = matches[0]
+         try:
+@@ -134,7 +134,13 @@
+         previous = json.loads(retained) if retained else None
+         if deny:
+             updated = list(dict.fromkeys([*(old or []), rule]))
+-            record = {'path': str(path), 'rule': rule, 'previously_present': rule in (old or []), 'active': True}
++            # Carry the absent-field origin across rules so either restore order works.
++            siblings = [json.loads(_read(p) or b'{}') for p in journal.parent.glob('*.json')]
++            originally_absent = old is None or any(
++                row.get('active') and row.get('path') == str(path) and row.get('server') == server
++                and row.get('filter_was_absent') for row in siblings)
++            record = {'path': str(path), 'server': server, 'rule': rule,
++                      'previously_present': rule in (old or []), 'filter_was_absent': originally_absent, 'active': True}
+             if previous and previous['active']:
+                 record = previous
+             write_json(journal, record, before=retained)
+@@ -143,7 +149,10 @@
+                 raise ConfigurationError('this rule was not adopted by AEEP')
+             updated = list(old or []) if previous['previously_present'] else [x for x in (old or []) if x != rule]
+         if value.host == 'codex':
+-            after = _codex_filter(raw, server, updated)
++            replacement: list[str] | None = updated
++            if not deny and not updated and previous and previous.get('filter_was_absent') and rule in (old or []):
++                replacement = None
++            after = raw if updated == old or (not deny and rule not in (old or [])) else _codex_filter(raw, server, replacement)
+         else:
+             parsed.setdefault('permissions', {})['deny'] = updated
+             after = (json.dumps(parsed, indent=2) + '\n').encode()

@@ -35,6 +35,7 @@ export const Config = z.object({
   aeepCommand: z.string().required(),
   aeepArgs: z.array(z.string()).default([]),
   manifest: z.string().required(),
+  connection: z.string(),
   workspace: z.string().required(),
   integrationId: z.string().default("dsh-native-v2"),
   modelCapability: z.string().required(),

@@ -1,5 +1,57 @@
 # 0.8 plan coverage and remaining work
 
+
+## October 6: onboarding, recommendations and agent controls
+
+The operator explicitly requested implementation of the one-command setup,
+catalog discovery, recommendation and per-agent access plan. Implementation uses
+existing router checks, discovery adapters, immutable assessment records and Typer;
+no planning model or background service was added. Version 0.8.2 assets are prepared
+locally; nothing was published or installed into the operator's active configuration.
+
+| Delivery step | Implemented | Evidence and remaining gate |
+|---|---|---|
+| Connection/access enforcement | Named Codex, Claude, DSH and API connections; current-file tool filters; exact executor fingerprints checked by shared routing/dispatch; guarded API declarations/calls and DSH bridge | Automated revocation, stale declaration, generic route, API and DSH overlay checks. Isolated installed Codex 0.154.0 inventory, native filter reload, real call, revocation, restore and disconnect passed; Claude/DSH live exposure remains unverified |
+| Catalog discovery | Default MCP Registry and Anthropic official metadata, Claude/Codex Git/HTTPS/local readers, host inventory import, bounded search, stale fallback and source errors; existing ARD/Smithery/Docker retained | Real search returned 26 candidates; MCP query timeouts coexist with successful results. No candidate code ran during discovery. Real Codex inventory import through the setup wizard and subsequent local catalog search passed |
+| Recommendations | Immutable semantic recommendations separate from executable stacks; host-reported availability, source/evidence/readiness, named options, host selection reasons, unknown quality/cost/privacy and web candidate intake | Seven-stage controlled regression plus a packaged live-source comparison name every stage; no generated video or measured quality claim |
+| Component setup/adoption | Reviewed pinned npm/Python/native marketplace and HTTPS setup, argv commands, owned environments, interrupted-install journal and explicit retry; native deny-rule adoption/restore | Pinned Python time and npm memory packages installed in owned isolated environments and passed read-only MCP checks in explicit legacy mode. Native Codex installation of the pinned published 0.8.1 plugin passed; native Claude installation and provider authentication remain unverified. API descriptors still need application wiring and normal intake/admission |
+| Installer/CLI/docs | Guided menu, setup and repair, source management, controls, update/uninstall, uv/Python fallback, checksum release packaging, isolated-home acceptance driver and macOS/Linux workflow | Actual macOS arm64, macOS x86_64 under Rosetta, and Linux arm64/x86_64 container install/rerun/edit-preservation/deny/restore/disconnect/uninstall passed. Real failed-setup recovery and scripted terminal menus passed. WSL, physical x86 hardware and first-time human usability remain unverified; x86 checks used emulation. Public download command withheld pending publication and platform checks |
+
+[User setup guide](../../docs/ONBOARDING.md),
+[final installer result](onboarding-20261006/installer-final-result.json),
+[live discovery](onboarding-20261006/discovery-live.json),
+[seven-stage video comparison](onboarding-20261006/video-check.md), and
+[release candidate/resource record](onboarding-20261006/release-candidate.json)
+retain the concrete evidence. Default third-party installation, paid calls,
+automatic assessment campaigns and new credential access remain off.
+
+The [exact test review](onboarding-20261006/test-review.json) covers the new
+connection/onboarding regressions and additive inventory expectations under the
+standing delegation. The [active verification-lock review](onboarding-20261006/verification-lock-review.json)
+updates only the imported inventory fixture digest; historical locks and campaign
+evidence remain unchanged. Initial source-edit-overlapping failures are retained;
+the four affected source-bound assessment checks passed together on unchanged
+implementation. Both final full runs passed 1,282 tests with 21 skipped; coverage is 81.25%,
+with both required branch gates passing. The 13 DSH JavaScript tests and 56
+applicable router compatibility checks passed. Exact results are recorded in
+[the validation summary](onboarding-20261006/summary.md).
+
+The continued [live onboarding checks](onboarding-continuation-20261006/summary.md)
+found and repaired a Codex restoration bug: AEEP's removed deny rule left an
+empty native filter, causing disconnect to reject its own entry. Four regressions
+cover restore order and preservation of operator edits. The rebuilt candidate is
+`dist/v0.8.2-onboarding-continuation`; the exact [review](onboarding-continuation-20261006/review.json)
+and [resources](onboarding-continuation-20261006/resources.json) retain the
+additional evidence and scope. No model call, sign-in, production configuration
+change or release publication occurred. Both post-repair full runs passed 1,286 tests with 21 skipped; coverage is 81.26% and both required branch gates passed against the new report.
+
+The earlier stack checklist's generic provider-installation gap is partly closed
+by reviewed component setup. This does not close metered billing, login, actual
+provider output compatibility, other native-host visibility, controlled comparisons or
+the separate human usability gate. Unmanaged agent connections are reported as
+unknown, not isolated. Uninstall retains runtime and evidence directories for
+inspection under the storage policy.
+
 The October 5 installation follow-up adds the `aeep-router` repository marketplace,
 a fixed-path local launcher, README installation/update prompts, and an actual
 terminal recording. The operator explicitly requested installation, automatic

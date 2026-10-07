@@ -23,96 +23,63 @@ choices. Selection uses local rules and evidence, without another model call.
 
 [MP4 recording](https://github.com/ptse8204/AEEP-router/raw/refs/heads/main/docs/media/aeep-demo.mp4)
 · [Commands and transcript](docs/media/README.md)
-· [Install in Codex](#install-in-codex)
+· [Set up AEEP](#set-up-agents-and-searchable-catalogs)
 
 This records actual local commands. The stack examples use synthetic media, data
 and research fixtures; the media result is an edit timeline, not a generated video.
 The recording omits private desktop content and uses no paid provider calls.
 
-## Install in Codex
+## Set up agents and searchable catalogs
 
-On macOS or Linux, install Python 3.11+ and the Codex CLI, then run:
+AEEP now has guided setup, named agent connections, catalog search, stack
+recommendations and per-agent access controls. Your agent still plans the task;
+AEEP does not add another planning model call.
 
-```bash
-git clone https://github.com/ptse8204/AEEP-router.git
-cd AEEP-router
-python3 -m venv "$HOME/.local/share/aeep/venv"
-"$HOME/.local/share/aeep/venv/bin/python" -m pip install .
-"$HOME/.local/share/aeep/venv/bin/aeep" init "$HOME/.config/aeep/config.yaml"
-codex plugin marketplace add ptse8204/AEEP-router --ref main
-codex plugin add aeep@aeep-router
-```
-
-This adds the repository's **AEEP Router** marketplace and installs its plugin.
-It uses a dedicated Python environment and a local manifest with a working
-`text.stats` example. Keep an existing manifest if `init` reports that it already
-exists. Installation does not approve new capabilities, assessments or payments.
-The core launcher uses the standard router profile; assessment and scoped task
-profiles still require their own setup.
-
-Restart Codex after installation, then open a new chat. In the CLI, `/mcp` shows
-active servers. In the desktop app, find AEEP in the Plugins directory. The plugin
-uses the dedicated environment directly, so the app needs no virtualenv activation.
-[Codex marketplace documentation](https://developers.openai.com/plugins/build/plugins)
-explains the Git-backed installation and refresh commands. This repository
-marketplace is separate from OpenAI's public plugin directory.
-
-### Try it in conversation
-
-Ask Codex:
-
-> Use AEEP to list the available capabilities. Preview a route for counting the
-> characters, words and lines in "hello world". Explain the selection before
-> running anything.
-
-Then:
-
-> Execute that text.stats action through AEEP. Show the result, selected executor,
-> verification status and receipt ID.
-
-The bundled example returns **11 characters, 2 words and 1 line**. To explore the
-stack planner, ask:
-
-> Help me describe my task as a GoalSpec and propose an AEEP stack using only
-> configured capabilities. Keep cash at zero, report missing providers and
-> compatibility blockers, and stop after the proposal.
-
-An installation starts with the text example, not an unrestricted tool catalog.
-Use the [stack guide](docs/STACK_PLANNING.md) to add reviewed capabilities and run
-the media, data and research demonstrations.
-
-### Keep it updated
-
-There are two parts to update: the Python runtime and the marketplace plugin.
-From a clean `main` checkout, run:
+If AEEP is already installed, run this in your project:
 
 ```bash
-git pull --ff-only origin main
-"$HOME/.local/share/aeep/venv/bin/python" -m pip install .
-"$HOME/.local/share/aeep/venv/bin/aeep" doctor
-codex plugin marketplace upgrade aeep-router
-codex plugin add aeep@aeep-router
+aeep setup
 ```
 
-Restart Codex to load the updated server. Keep your manifest and receipt database;
-do not rerun `init` or overwrite them. Stop on a failed command, local edits or a
-diverged branch. Review the changelog before updating: AEEP is experimental.
+Choose Codex, Claude Code, DeepSeek Harness or an API application. Setup configures
+the connection, planning instructions and two searchable catalogs: the Official
+MCP Registry and Anthropic's official plugin marketplace. You can import an
+existing marketplace or add one during setup. Review the changes, restart the
+selected hosts, and open a new session.
 
-For automatic updates, ask Codex to create a daily automation:
+Then ask your agent:
 
-> Every day, compare origin/main with the revision installed in my AEEP runtime,
-> even if this checkout already contains the new code. If there is an update,
-> preserve at least 50 GiB free, require a clean main branch and fast-forward only.
-> Validate the update, install it into ~/.local/share/aeep/venv, run aeep doctor,
-> refresh only the aeep-router marketplace and reinstall aeep@aeep-router.
-> Preserve my manifest, receipts, grants and credentials. Stop on failures or
-> migration requirements. Notify me when an update is installed or needs attention;
-> stay quiet when nothing changed. Record the installed revision only after
-> successful checks. Remind me to restart Codex after an update.
+> Use AEEP to recommend a high-quality narrated educational-video stack. Inspect
+> my existing tools, search catalogs and public sources, compare named candidates
+> for every stage, and explain what needs setup.
 
-This schedules updates through Codex while its scheduler is available; plugin
-startup itself does not download or install code. To disconnect the plugin, run
-`codex plugin remove aeep@aeep-router`; disable any update automation separately.
+Use `aeep` to open the menu, or run:
+
+```bash
+aeep discover video narration
+aeep catalogs add team owner/repository
+aeep agents list
+aeep access show codex
+aeep access deny codex aeep_stack_recommend
+aeep access allow codex aeep_stack_recommend
+aeep doctor --setup
+```
+
+Catalog search does not install plugins. New connections allow planning and
+search; execution requires separate operator controls and existing authority.
+A word count is supporting information, not a complete video stack.
+
+**Installer release status:** the versioned installer builder and local bundle
+installation path are available in this checkout. The public latest-release
+installation command is intentionally withheld until the assets are published
+and verified on the supported platforms. See [setup and release instructions](docs/ONBOARDING.md)
+for local builds, guided component installation, agent controls and recovery.
+Publication remains a separate release action.
+
+For source development, Python 3.11+ can install this checkout with
+`python3 -m pip install -e '.[dev,http-server]'`, followed by `aeep setup`.
+Keep existing manifests and receipts when updating. No virtualenv activation or
+manual manifest editing is needed when using the built installer.
 
 ## When to use it
 

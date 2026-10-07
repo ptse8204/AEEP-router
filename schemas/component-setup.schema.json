@@ -1,0 +1,108 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.component-setup.v1",
+      "default": "aeep.component-setup.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "connection_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,80}$",
+      "title": "Connection Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "candidate_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Candidate Digest",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "npm",
+        "python",
+        "https-mcp",
+        "marketplace"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "package": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Package",
+      "type": "string"
+    },
+    "version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Version"
+    },
+    "executable": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9_-]{1,100}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Executable"
+    },
+    "plugin": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9_-]{1,100}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Plugin"
+    },
+    "marketplace": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9_-]{1,100}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Marketplace"
+    },
+    "lifecycle_scripts": {
+      "default": false,
+      "title": "Lifecycle Scripts",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "connection_id",
+    "candidate_id",
+    "candidate_digest",
+    "kind",
+    "package"
+  ],
+  "title": "ComponentSetup",
+  "type": "object"
+}

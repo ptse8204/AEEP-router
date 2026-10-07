@@ -290,6 +290,8 @@ class Router:
             else configured_unlimited and unlimited_economic_budget
         )
         self.manifest_path = Path(manifest_path).resolve() if manifest_path else None
+        from .connections import ConnectionGuard
+        self._connection_guard: ConnectionGuard | None = None
         self._route_activation_lock = RLock()
         self._trial_fingerprints: dict[str, str] = {}
         self._trial_deadline: float | None = None
@@ -5419,6 +5421,11 @@ class Router:
 
     def _require_active_spec(self, spec: ExecutorSpec, request: ActionRequest | None = None, *,
                              check_activation: bool = True, configuration_only: bool = False) -> None:
+        if self._connection_guard is not None:
+            try:
+                self._connection_guard.require_executor(spec)
+            except ConfigurationError as exc:
+                raise NoRouteError(str(exc)) from exc
         if configuration_only and (request is not None or self._task_scope_digest is None):
             raise ConfigurationError('configuration-only validation requires a bound task scope and no action')
         if check_activation and self._task_activation_digest is not None:

@@ -30,7 +30,8 @@ def find_manifest(explicit: str | Path | None = None) -> Path:
         candidate = Path.cwd() / name
         if candidate.is_file():
             return candidate.resolve()
-    user_path = Path.home() / ".config" / "aeep" / "config.yaml"
+    from .connections import config_root
+    user_path = config_root() / "config.yaml"
     if user_path.is_file():
         return user_path.resolve()
     raise ConfigurationError(

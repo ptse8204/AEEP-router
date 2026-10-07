@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-continuation-20261006/components-probe.py", line 63, in <module>
+    checked = asyncio.run(check(entry, tool, arguments))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-continuation/mac-final/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-continuation/mac-final/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/aeep-onboarding-continuation/mac-final/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-continuation-20261006/components-probe.py", line 32, in check
+    names = sorted(t['name'] for t in (await client.list_tools()).result['tools'])
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/mcp/client.py", line 341, in list_tools
+    return await self._request("tools/list", {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/mcp/client.py", line 295, in _request
+    await self.connect()
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/mcp/client.py", line 219, in connect
+    raise ProtocolError("MCP modern discovery did not return a supported protocol")
+aeep.errors.ProtocolError: MCP modern discovery did not return a supported protocol

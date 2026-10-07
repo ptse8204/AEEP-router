@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "workspace": "/private/tmp/aeep-onboarding-continuation/components",
+  "components": [
+    {
+      "kind": "python",
+      "package": "mcp-server-time",
+      "version": "2026.8.18",
+      "setup": {
+        "digest": "01288fa5291054ba7c839583f0cc6c6f630c365b8af1ddf36ed5d7b07a6aa796",
+        "status": "installed",
+        "destination": "/private/tmp/aeep-onboarding-continuation/components/home/aeep/packages/01288fa5291054ba7c839583f0cc6c6f630c365b8af1ddf36ed5d7b07a6aa796",
+        "execution": "not admitted; host connection only",
+        "connection_state": "application handoff required; inspect the owned MCP descriptor",
+        "access_boundary": "Native component connection is separate from AEEP routing; use explicit adoption for native filters.",
+        "next_step": "Restart host, inspect exposed tools, then intake/map and preflight before AEEP execution."
+      },
+      "probe": {
+        "protocol_mode": "explicit legacy",
+        "protocol": "2025-11-25",
+        "tools": [
+          "convert_time",
+          "get_current_time"
+        ],
+        "read_only_call": "get_current_time",
+        "call_result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"timezone\": \"UTC\",\n  \"datetime\": \"2026-10-07T00:04:42+00:00\",\n  \"day_of_week\": \"Wednesday\",\n  \"is_dst\": false\n}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      "lifecycle_scripts": false,
+      "repeat_apply": "idempotent"
+    },
+    {
+      "kind": "npm",
+      "package": "@modelcontextprotocol/server-memory",
+      "version": "2026.8.31",
+      "setup": {
+        "digest": "306d04fd187dc4d65c4edc2da33ed41b8d415f3a41d808f8001b5391f0da9816",
+        "status": "installed",
+        "destination": "/private/tmp/aeep-onboarding-continuation/components/home/aeep/packages/306d04fd187dc4d65c4edc2da33ed41b8d415f3a41d808f8001b5391f0da9816",
+        "execution": "not admitted; host connection only",
+        "connection_state": "application handoff required; inspect the owned MCP descriptor",
+        "access_boundary": "Native component connection is separate from AEEP routing; use explicit adoption for native filters.",
+        "next_step": "Restart host, inspect exposed tools, then intake/map and preflight before AEEP execution."
+      },
+      "probe": {
+        "protocol_mode": "explicit legacy",
+        "protocol": "2025-11-25",
+        "tools": [
+          "add_observations",
+          "create_entities",
+          "create_relations",
+          "delete_entities",
+          "delete_observations",
+          "delete_relations",
+          "open_nodes",
+          "read_graph",
+          "search_nodes"
+        ],
+        "read_only_call": "read_graph",
+        "call_result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"entities\": [],\n  \"relations\": []\n}"
+            }
+          ],
+          "structuredContent": {
+            "entities": [],
+            "relations": []
+          }
+        }
+      },
+      "lifecycle_scripts": false,
+      "repeat_apply": "idempotent"
+    }
+  ],
+  "scope": "Application descriptors plus direct isolated MCP checks; no API model loop or routing admission"
+}

@@ -425,7 +425,7 @@ def test_create_http_app_auth_and_modern_header_validation(tmp_path):
         assert response.status_code == 200
         result = response.json()["result"]
         names = {tool["name"] for tool in result["tools"]}
-        assert len(names) == 15
+        assert len(names) == 17
         assert "aeep_lookup_capability" in names
         assert "aeep_discover_resources" not in names
         assert result["resultType"] == "complete"

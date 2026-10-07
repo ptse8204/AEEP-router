@@ -1,0 +1,67 @@
+Downloading cpython-3.12.11-macos-aarch64-none (download) (15.8MiB)
+ Downloading cpython-3.12.11-macos-aarch64-none (download)
+warning: Failed to patch the install name of the dynamic library for /tmp/aeep-onboarding-continuation/recovery/home/data/python/cpython-3.12.11-macos-aarch64-none/bin/python3.12. This may cause issues when building Python native extensions.
+Using CPython 3.12.11
+Creating virtual environment at: /tmp/aeep-onboarding-continuation/recovery/home/data/staging.OhMF6T3D/venv
+Using Python 3.12.11 environment at: /tmp/aeep-onboarding-continuation/recovery/home/data/staging.OhMF6T3D/venv
+Resolved 30 packages in 159ms
+Downloading pygments (1.2MiB)
+Downloading pydantic-core (1.8MiB)
+Downloading cryptography (6.8MiB)
+ Downloading pygments
+ Downloading pydantic-core
+ Downloading cryptography
+Prepared 30 packages in 1.67s
+Installed 30 packages in 36ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + cryptography==46.0.7
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.20
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + opentelemetry-api==1.45.1
+ + psutil==7.2.2
+ + pycparser==3.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pyyaml==6.0.3
+ + referencing==0.37.0
+ + rfc8785==0.1.4
+ + rich==15.0.0
+ + rpds-py==2026.9.1
+ + shellingham==1.5.4
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+Using Python 3.12.11 environment at: /private/tmp/aeep-onboarding-continuation/recovery/home/data/staging.OhMF6T3D/venv
+Resolved 1 package in 1ms
+Prepared 1 package in 45ms
+Installed 1 package in 34ms
+ + aeep-agent-router==0.8.2 (from file:///Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-onboarding-continuation/bundle/aeep_agent_router-0.8.2-py3-none-any.whl)
+0.8.2
+Usage: python -m aeep setup [OPTIONS]
+Try 'python -m aeep setup --help' for help.
+╭─ Error ──────────────────────────────────────────────────────────────────────╮
+│ Invalid value: project directory does not exist                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-onboarding-continuation/bundle/finish_install.py", line 77, in <module>
+    main()
+  File "/Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-onboarding-continuation/bundle/finish_install.py", line 60, in main
+    run_setup(active / 'bin/python')
+  File "/Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-onboarding-continuation/bundle/finish_install.py", line 72, in run_setup
+    subprocess.run(command, check=True)
+  File "/tmp/aeep-onboarding-continuation/recovery/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/private/tmp/aeep-onboarding-continuation/recovery/home/data/venv/bin/python', '-I', '-m', 'aeep', 'setup', '--agent', 'deepseek-api', '--yes', '--project', '/tmp/aeep-onboarding-continuation/recovery/missing-project']' returned non-zero exit status 2.
+Installer staging retained for inspection: /tmp/aeep-onboarding-continuation/recovery/home/data/staging.OhMF6T3D

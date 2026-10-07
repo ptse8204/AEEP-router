@@ -1,0 +1,2302 @@
+Linux x86_64
+Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [50.0 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1808 kB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1545 kB]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1943 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+Get:10 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1323 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2138 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [56.2 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2165 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1701 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [36.0 kB]
+Get:18 http://archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Packages [671 B]
+Get:19 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.0 kB]
+Fetched 33.2 MB in 5s (6888 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libbrotli1 libcurl4t64 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3
+  libkrb5support0 libldap2 libnghttp2-14 libpsl5t64 librtmp1 libsasl2-2
+  libsasl2-modules-db libssh-4 libssl3t64 openssl
+Suggested packages:
+  krb5-doc krb5-user
+Recommended packages:
+  krb5-locales libldap-common publicsuffix libsasl2-modules
+The following NEW packages will be installed:
+  ca-certificates curl libbrotli1 libcurl4t64 libgssapi-krb5-2 libk5crypto3
+  libkeyutils1 libkrb5-3 libkrb5support0 libldap2 libnghttp2-14 libpsl5t64
+  librtmp1 libsasl2-2 libsasl2-modules-db libssh-4 openssl
+The following packages will be upgraded:
+  libssl3t64
+1 upgraded, 17 newly installed, 0 to remove and 35 not upgraded.
+Need to get 5256 kB of archives.
+After this operation, 8281 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libssl3t64 amd64 3.0.13-0ubuntu3.16 [1945 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssl amd64 3.0.13-0ubuntu3.16 [1004 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 ca-certificates all 20260601~24.04.1 [139 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libkrb5support0 amd64 1.20.1-6ubuntu2.10 [34.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libk5crypto3 amd64 1.20.1-6ubuntu2.10 [81.9 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libkeyutils1 amd64 1.6.3-3build1 [9490 B]
+Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libkrb5-3 amd64 1.20.1-6ubuntu2.10 [348 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgssapi-krb5-2 amd64 1.20.1-6ubuntu2.10 [143 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libnghttp2-14 amd64 1.59.0-1ubuntu0.4 [74.6 kB]
+Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libpsl5t64 amd64 0.21.2-1.1build1 [57.1 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libbrotli1 amd64 1.1.0-2build2 [331 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-5ubuntu3.1 [20.4 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-5ubuntu3.1 [53.2 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libldap2 amd64 2.6.10+dfsg-0ubuntu0.24.04.1 [198 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2build7 [56.3 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libssh-4 amd64 0.10.6-2ubuntu0.5 [191 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.15 [343 kB]
+Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.15 [227 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 5256 kB in 2s (2117 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4381 files and directories currently installed.)
+Preparing to unpack .../libssl3t64_3.0.13-0ubuntu3.16_amd64.deb ...
+Unpacking libssl3t64:amd64 (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.11) ...
+Setting up libssl3t64:amd64 (3.0.13-0ubuntu3.16) ...
+Selecting previously unselected package openssl.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4381 files and directories currently installed.)
+Preparing to unpack .../00-openssl_3.0.13-0ubuntu3.16_amd64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.16) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../01-ca-certificates_20260601~24.04.1_all.deb ...
+Unpacking ca-certificates (20260601~24.04.1) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../02-libkrb5support0_1.20.1-6ubuntu2.10_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.20.1-6ubuntu2.10) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../03-libk5crypto3_1.20.1-6ubuntu2.10_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.20.1-6ubuntu2.10) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../04-libkeyutils1_1.6.3-3build1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.6.3-3build1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../05-libkrb5-3_1.20.1-6ubuntu2.10_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.20.1-6ubuntu2.10) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../06-libgssapi-krb5-2_1.20.1-6ubuntu2.10_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.20.1-6ubuntu2.10) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../07-libnghttp2-14_1.59.0-1ubuntu0.4_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.59.0-1ubuntu0.4) ...
+Selecting previously unselected package libpsl5t64:amd64.
+Preparing to unpack .../08-libpsl5t64_0.21.2-1.1build1_amd64.deb ...
+Unpacking libpsl5t64:amd64 (0.21.2-1.1build1) ...
+Selecting previously unselected package libbrotli1:amd64.
+Preparing to unpack .../09-libbrotli1_1.1.0-2build2_amd64.deb ...
+Unpacking libbrotli1:amd64 (1.1.0-2build2) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../10-libsasl2-modules-db_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../11-libsasl2-2_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Selecting previously unselected package libldap2:amd64.
+Preparing to unpack .../12-libldap2_2.6.10+dfsg-0ubuntu0.24.04.1_amd64.deb ...
+Unpacking libldap2:amd64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../13-librtmp1_2.4+20151223.gitfa8646d.1-2build7_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build7) ...
+Selecting previously unselected package libssh-4:amd64.
+Preparing to unpack .../14-libssh-4_0.10.6-2ubuntu0.5_amd64.deb ...
+Unpacking libssh-4:amd64 (0.10.6-2ubuntu0.5) ...
+Selecting previously unselected package libcurl4t64:amd64.
+Preparing to unpack .../15-libcurl4t64_8.5.0-2ubuntu10.15_amd64.deb ...
+Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.15) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../16-curl_8.5.0-2ubuntu10.15_amd64.deb ...
+Unpacking curl (8.5.0-2ubuntu10.15) ...
+Setting up libkeyutils1:amd64 (1.6.3-3build1) ...
+Setting up libbrotli1:amd64 (1.1.0-2build2) ...
+Setting up libpsl5t64:amd64 (0.21.2-1.1build1) ...
+Setting up libnghttp2-14:amd64 (1.59.0-1ubuntu0.4) ...
+Setting up libkrb5support0:amd64 (1.20.1-6ubuntu2.10) ...
+Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build7) ...
+Setting up libk5crypto3:amd64 (1.20.1-6ubuntu2.10) ...
+Setting up libsasl2-2:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Setting up libkrb5-3:amd64 (1.20.1-6ubuntu2.10) ...
+Setting up openssl (3.0.13-0ubuntu3.16) ...
+Setting up libldap2:amd64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+Setting up ca-certificates (20260601~24.04.1) ...
+Updating certificates in /etc/ssl/certs...
+121 added, 0 removed; done.
+Setting up libgssapi-krb5-2:amd64 (1.20.1-6ubuntu2.10) ...
+Setting up libssh-4:amd64 (0.10.6-2ubuntu0.5) ...
+Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.15) ...
+Setting up curl (8.5.0-2ubuntu10.15) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Processing triggers for ca-certificates (20260601~24.04.1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Downloading cpython-3.12.11-linux-x86_64-gnu (download) (31.1MiB)
+ Downloading cpython-3.12.11-linux-x86_64-gnu (download)
+Using CPython 3.12.11
+Creating virtual environment at: /evidence/home/data/staging.43ojJTDP/venv
+Using Python 3.12.11 environment at: /evidence/home/data/staging.43ojJTDP/venv
+Resolved 30 packages in 528ms
+Downloading pygments (1.2MiB)
+Downloading pydantic-core (2.0MiB)
+Downloading cryptography (4.3MiB)
+ Downloading pydantic-core
+ Downloading cryptography
+ Downloading pygments
+Prepared 30 packages in 540ms
+Installed 30 packages in 658ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + cryptography==46.0.7
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.20
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + opentelemetry-api==1.45.1
+ + psutil==7.2.2
+ + pycparser==3.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pyyaml==6.0.3
+ + referencing==0.37.0
+ + rfc8785==0.1.4
+ + rich==15.0.0
+ + rpds-py==2026.9.1
+ + shellingham==1.5.4
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+Using Python 3.12.11 environment at: /evidence/home/data/staging.43ojJTDP/venv
+Resolved 1 package in 46ms
+Prepared 1 package in 108ms
+Installed 1 package in 433ms
+ + aeep-agent-router==0.8.2 (from file:///release/bundle/aeep_agent_router-0.8.2-py3-none-any.whl)
+0.8.2
+Connections:
+  connection: deepseek-api | host: deepseek-api | enabled: True | effective_host_exposure: unverified | pending_reload: True | agent_software: application-owned | service_tools: ['aeep_list_capabilities', 'aeep_route_action', 'aeep_discover_resources', 'aeep_lookup_capability', 'aeep_stack_propose', 'aeep_stack_inspect', 'aeep_stack_optimize', 'aeep_stack_preflight', 'aeep_discovery_status', 'aeep_stack_recommend'] | service: ready
+Catalog checks:
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_2c43b388fdaf4627bb42d6ae727b1314 | discovery_id: discovery_d9186a5d5da0422aa2e38aa11a35b047 | source_id: mcp-registry | adapter_id: mcp-community | created_at: 2026-10-07T00:12:41.632868Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['mcp_2b9980fc1b118b25d4fdcb98d45097f0', 'mcp_472caab115426941b8e5719418d78c4b', 'mcp_07c277fc83f0d791282d90b817f2dcc1', 'mcp_bc22dce8dbab238dd4d5cbaf55c00ff4', 'mcp_a17f62496c2e4b44b45f34416ae73237', 'mcp_1d8cc940a505d9fe06af2c9c1dded394', 'mcp_67d8cc19465cf7d9ae267a3a7242aea5', 'mcp_da72278800e9333bce841085f9d54d82', 'mcp_e171c698646b4f89066a0929b499dd4e', 'mcp_4004eb3f1c7d3fb3703e2e6235bc6183', 'mcp_bdc219efdc88e8a7a6231ad218a347db', 'mcp_8972098dfe268a87797c742bbbfc019c', 'mcp_a5b6b4b98aae73984f14e1c0e1e2c964'] | candidate_digests: ['sha256:6d1e012f2917401a1880d6097a41e731a5011b689bb7f44381133a430654147b', 'sha256:4e3020ee38ddb7d36d42e197226b07a0e7f188e7a279859451f5a9ff28c47d36', 'sha256:ccb4ea441d93facd7662b9565119dcf6173fde747e4cb9ba2b8e29c378bcf08e', 'sha256:4fb2db3582214f1b45318073f70a6d417525b496aa99df6e47323bea9ebc71dc', 'sha256:2086249d457d0c9b8ddc239495d55661e733dfd553594357a5fd6bf12cc8e49e', 'sha256:3e2eadccef4971ea412526cc49e74352c5465a09bb0ed955855cb3e074bfdde0', 'sha256:53b89acf002a628b577472639cb14623c04be68def5cdf43ce109f3294ec686b', 'sha256:56ddf1044a3ba2fb529620ce5dd1bc5ab06482a116a88b53282e19c325e26dee', 'sha256:b22d537d6c9ee35cd0b0bd2126b3e09c496ffbba810817f1a54958d694448507', 'sha256:dd31c46f1558eaa1f8a9f15648230272e2af6c513698f93a93f4e2c552746d99', 'sha256:7d5d572b28598ef18393b6a0fb2225682716ee23acee3b5f45d409adf67bd39b', 'sha256:a53096fcd4ac2b487a44679dab0cf1647c73ff4050e5cabe8a5d93a9226ea5c7', 'sha256:3118ac89395a9ea0c5c82fee16933bed17da22348f256ae4b0d0d926af91b6f5'] | elapsed_ms: 8044.43354398245 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_8412d03d1b25400ab71fdad824f4ab49 | discovery_id: discovery_d76b5e18011f4222bf9c94196b2869a9 | source_id: anthropic-plugins | adapter_id: plugin-marketplace | created_at: 2026-10-07T00:12:49.678762Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['marketplace_dadc8d2810b8975ecab7f1f29bb9cb76'] | candidate_digests: ['sha256:370dcffebf9d0de0dcea2ebddd241fcce1969f9ef17836ea8a1cf6c3ae97120b'] | elapsed_ms: 282.7991660160478 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+Catalog warnings:
+  Registry descriptions are claims. No candidate was installed, qualified or enabled.
+Candidate count: 14
+Scope: AEEP connection enforcement; other host paths are not isolated
+Restart connected hosts. Try: Use AEEP to recommend a narrated educational-video stack. Search catalogs and compare named tools.
+Installed AEEP. Run /evidence/home/.local/bin/aeep to open the menu. Restart connected agents.
+Add ~/.local/bin to PATH to use the short aeep command; the full path works now.
+Installer staging retained for inspection: /evidence/home/data/staging.43ojJTDP
+Downloading cpython-3.12.11-linux-x86_64-gnu (download) (31.1MiB)
+ Downloading cpython-3.12.11-linux-x86_64-gnu (download)
+Using CPython 3.12.11
+Creating virtual environment at: /evidence/journey/home/data/staging.ycnbIj4u/venv
+Using Python 3.12.11 environment at: /evidence/journey/home/data/staging.ycnbIj4u/venv
+Resolved 30 packages in 708ms
+Downloading pygments (1.2MiB)
+Downloading pydantic-core (2.0MiB)
+Downloading cryptography (4.3MiB)
+ Downloading pydantic-core
+ Downloading cryptography
+ Downloading pygments
+Prepared 30 packages in 507ms
+Installed 30 packages in 687ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + cryptography==46.0.7
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.20
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + opentelemetry-api==1.45.1
+ + psutil==7.2.2
+ + pycparser==3.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pyyaml==6.0.3
+ + referencing==0.37.0
+ + rfc8785==0.1.4
+ + rich==15.0.0
+ + rpds-py==2026.9.1
+ + shellingham==1.5.4
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+Using Python 3.12.11 environment at: /evidence/journey/home/data/staging.ycnbIj4u/venv
+Resolved 1 package in 48ms
+Prepared 1 package in 114ms
+Installed 1 package in 467ms
+ + aeep-agent-router==0.8.2 (from file:///release/bundle/aeep_agent_router-0.8.2-py3-none-any.whl)
+0.8.2
+Connections:
+  connection: deepseek-api | host: deepseek-api | enabled: True | effective_host_exposure: unverified | pending_reload: True | agent_software: application-owned | service_tools: ['aeep_list_capabilities', 'aeep_route_action', 'aeep_discover_resources', 'aeep_lookup_capability', 'aeep_stack_propose', 'aeep_stack_inspect', 'aeep_stack_optimize', 'aeep_stack_preflight', 'aeep_discovery_status', 'aeep_stack_recommend'] | service: ready
+Catalog checks:
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_c99ec52be263442cb907f2f81df2ddfe | discovery_id: discovery_46065a03afad4ae88fb320ee0bb6b072 | source_id: mcp-registry | adapter_id: mcp-community | created_at: 2026-10-07T00:13:01.486352Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['mcp_2b9980fc1b118b25d4fdcb98d45097f0', 'mcp_472caab115426941b8e5719418d78c4b', 'mcp_07c277fc83f0d791282d90b817f2dcc1', 'mcp_bc22dce8dbab238dd4d5cbaf55c00ff4', 'mcp_a17f62496c2e4b44b45f34416ae73237', 'mcp_1d8cc940a505d9fe06af2c9c1dded394', 'mcp_67d8cc19465cf7d9ae267a3a7242aea5', 'mcp_da72278800e9333bce841085f9d54d82', 'mcp_e171c698646b4f89066a0929b499dd4e', 'mcp_4004eb3f1c7d3fb3703e2e6235bc6183', 'mcp_bdc219efdc88e8a7a6231ad218a347db', 'mcp_8972098dfe268a87797c742bbbfc019c', 'mcp_a5b6b4b98aae73984f14e1c0e1e2c964'] | candidate_digests: ['sha256:3817f7e1140ca53b91500c60e8abfab902af77a16de26247e0af028c1e4d76d5', 'sha256:ea3a7bcadbc2889880f37ecd506b30df4b4128faf4820bee9973ca708fe86fd1', 'sha256:38f8c45019312ea2b4a695f4aaca42b1b2e6de9459b446f5759fd2f26d22ad08', 'sha256:7258dcdc10113d13b8999b6b2e4ff82980e318369f526e60cf692af9869e106a', 'sha256:da30f912b0d34f2128b16ab385f79d5667393fc68e33d1ea3e0fdb3d09cb7c81', 'sha256:1a67865ba04878f850d85a825404ec93511480dad2b9ebb2e1ffa59bc9e5ded7', 'sha256:fac128318193f15718ee5f8d894635742fca5bc469468ec8ef75c787e6fb1d2d', 'sha256:02baac1d1c22e113c1a0cc523e56acc62c6a771d342344ff6999412b4d9a4c09', 'sha256:28161828e3eff165a91b44f180ffa631b8f753c7c0c6e826c6ca28004f848bdc', 'sha256:212283ccff319cd371cbef94336aacbac8b9d31ce5961a255a6b5c1e854285d1', 'sha256:2b294b8f85060a01001c5c90791a93d0fd374b09adb9a824b91364ecaca5405d', 'sha256:da3e941c9c6031d1056b67fdb1fee5649ce9e4fe6eeb347f6ad5aba397296c35', 'sha256:a71823dae9f21b4e32efc234fab5f2183576844189e7e464b3770856f26e8e26'] | elapsed_ms: 1298.7482089956757 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_d91e9a6a98594784980f5d3df172d452 | discovery_id: discovery_e35bb152e4fb4faf9844438b632bcd34 | source_id: anthropic-plugins | adapter_id: plugin-marketplace | created_at: 2026-10-07T00:13:02.786985Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['marketplace_dadc8d2810b8975ecab7f1f29bb9cb76'] | candidate_digests: ['sha256:c2db6839570db73c08e9d68e2550520644438ed7b7c000527f60b44d3d6a241f'] | elapsed_ms: 93.91758299898356 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+Catalog warnings:
+  Registry descriptions are claims. No candidate was installed, qualified or enabled.
+Candidate count: 14
+Scope: AEEP connection enforcement; other host paths are not isolated
+Restart connected hosts. Try: Use AEEP to recommend a narrated educational-video stack. Search catalogs and compare named tools.
+Installed AEEP. Run /evidence/journey/home/.local/bin/aeep to open the menu. Restart connected agents.
+Add ~/.local/bin to PATH to use the short aeep command; the full path works now.
+Installer staging retained for inspection: /evidence/journey/home/data/staging.ycnbIj4u
+
+Using CPython 3.12.11
+Creating virtual environment at: /evidence/journey/home/data/staging.ARH6S6H6/venv
+Using Python 3.12.11 environment at: /evidence/journey/home/data/staging.ARH6S6H6/venv
+Resolved 30 packages in 90ms
+Installed 30 packages in 732ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + cryptography==46.0.7
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.20
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + opentelemetry-api==1.45.1
+ + psutil==7.2.2
+ + pycparser==3.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pyyaml==6.0.3
+ + referencing==0.37.0
+ + rfc8785==0.1.4
+ + rich==15.0.0
+ + rpds-py==2026.9.1
+ + shellingham==1.5.4
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+Using Python 3.12.11 environment at: /evidence/journey/home/data/staging.ARH6S6H6/venv
+Resolved 1 package in 50ms
+Installed 1 package in 485ms
+ + aeep-agent-router==0.8.2 (from file:///release/bundle/aeep_agent_router-0.8.2-py3-none-any.whl)
+0.8.2
+Connections:
+  connection: deepseek-api | host: deepseek-api | enabled: True | effective_host_exposure: unverified | pending_reload: True | agent_software: application-owned | service_tools: ['aeep_list_capabilities', 'aeep_route_action', 'aeep_discover_resources', 'aeep_lookup_capability', 'aeep_stack_propose', 'aeep_stack_inspect', 'aeep_stack_optimize', 'aeep_stack_preflight', 'aeep_discovery_status', 'aeep_stack_recommend'] | service: ready
+Catalog checks:
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_4f26a044a0954248a380d25f57c7baaa | discovery_id: discovery_6fd1a69e30384c30aec32440eeeafcb1 | source_id: mcp-registry | adapter_id: mcp-community | created_at: 2026-10-07T00:13:09.730170Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['mcp_2b9980fc1b118b25d4fdcb98d45097f0', 'mcp_472caab115426941b8e5719418d78c4b', 'mcp_07c277fc83f0d791282d90b817f2dcc1', 'mcp_bc22dce8dbab238dd4d5cbaf55c00ff4', 'mcp_a17f62496c2e4b44b45f34416ae73237', 'mcp_1d8cc940a505d9fe06af2c9c1dded394', 'mcp_67d8cc19465cf7d9ae267a3a7242aea5', 'mcp_da72278800e9333bce841085f9d54d82', 'mcp_e171c698646b4f89066a0929b499dd4e', 'mcp_4004eb3f1c7d3fb3703e2e6235bc6183', 'mcp_bdc219efdc88e8a7a6231ad218a347db', 'mcp_8972098dfe268a87797c742bbbfc019c', 'mcp_a5b6b4b98aae73984f14e1c0e1e2c964'] | candidate_digests: ['sha256:5d373f327beeea33ad8de2eed2e89f05b477a6cbe2f8715ac649c896a8c08b3e', 'sha256:d6b203b64c7554e70059d39ef3a5e24688a56ac4b3c26be4af3cb18eb7cdaee4', 'sha256:f693be39deb5e6aaf315e73d79f1b106c1100df536276e9867bc2570678c30c2', 'sha256:10d3c38992b33d487105c404fb321557ffe8fa2c60397d9705b2285089e8df83', 'sha256:f893d0ac51ca3c1cc6c5c013e35303deb67d1671c807295e4fa46dd5b592201c', 'sha256:06c46857c9c9eb0ce538a202e4228182fb5aeb671424612df746c6a5a70bad09', 'sha256:e778816a9beff763739a93d67c635440648bfd6bd35d1cb866faff9bf6694916', 'sha256:83630a57c8c7a47ee48b4f04e673db563d5ca42e75cf8ef98a5351208db61528', 'sha256:b70b7ca61af7dc06362020296104b36403c30e64db7f9b41635c7ded72461d45', 'sha256:55d32afdd9b484a724ffc4960a9421ffe5d64c2e1eac606deacd87ea6057bfb3', 'sha256:8262ddd13216c5698743bec2de5b361c340bfd2d9881ed859e29ea64643938c8', 'sha256:fb481cdf1cf36105aec0bd5130e75fcc6f3969e1b5dacd1481ef17833af82b6f', 'sha256:fb24ec9262a5d266d979133ff2d0b199db1280195f030334ca0591c014be0c3a'] | elapsed_ms: 1105.2930839941837 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+  schema_version: discovery.source.v1 | source_record_id: discovery_source_3d03e256fb1e459e9ea5a7d63324595c | discovery_id: discovery_a5a3e716a29742c98d0f11e45224a727 | source_id: anthropic-plugins | adapter_id: plugin-marketplace | created_at: 2026-10-07T00:13:10.838680Z | query_digest: sha256:71bde8d7d8128799e1afa6f825310777e80fdecaa2e6042716b6d33c114cc1db | status: complete | candidate_ids: ['marketplace_dadc8d2810b8975ecab7f1f29bb9cb76'] | candidate_digests: ['sha256:a987385f1bc9e28f492005e38dcbb3a291b0bcb450ba99362e371143dc315ba9'] | elapsed_ms: 110.91887499787845 | cash_usd: None | input_tokens: None | output_tokens: None | warnings: []
+Catalog warnings:
+  Registry descriptions are claims. No candidate was installed, qualified or enabled.
+Candidate count: 14
+Scope: AEEP connection enforcement; other host paths are not isolated
+Restart connected hosts. Try: Use AEEP to recommend a narrated educational-video stack. Search catalogs and compare named tools.
+Installer staging retained for inspection: /evidence/journey/home/data/staging.ARH6S6H6
+
+{
+  "connection": "deepseek-api",
+  "host": "deepseek-api",
+  "project": "/evidence/journey/project",
+  "connection_state": "configured",
+  "native_controls": [],
+  "tools": [
+    {
+      "name": "aeep_list_capabilities",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_route_action",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_execute_action",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_record_outcome",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_estimate_route_prices",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_request_quotes",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_get_metrics",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_prepared_decision",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_quote",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_settlement",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_discover_resources",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_lookup_capability",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_propose",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_inspect",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_optimize",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_preflight",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_discovery_status",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_recommend",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    }
+  ],
+  "executors": [
+    {
+      "name": "builtin.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "cli.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "host.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    }
+  ],
+  "host_exposure": "pending reload; unverified",
+  "unmanaged_alternative_access": "unknown; use aeep agents inspect",
+  "skills_and_hooks": "host controls; loaded instructions require a new session"
+}
+
+{
+  "connection": "deepseek-api",
+  "host": "deepseek-api",
+  "project": "/evidence/journey/project",
+  "connection_state": "configured",
+  "native_controls": [],
+  "tools": [
+    {
+      "name": "aeep_list_capabilities",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_route_action",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_execute_action",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_record_outcome",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_estimate_route_prices",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_request_quotes",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_get_metrics",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_prepared_decision",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_quote",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_settlement",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_discover_resources",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_lookup_capability",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_propose",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_inspect",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_optimize",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_preflight",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_discovery_status",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_recommend",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    }
+  ],
+  "executors": [
+    {
+      "name": "builtin.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "cli.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "host.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    }
+  ],
+  "host_exposure": "pending reload; unverified",
+  "unmanaged_alternative_access": "unknown; use aeep agents inspect",
+  "skills_and_hooks": "host controls; loaded instructions require a new session"
+}
+
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_list_capabilities",
+        "description": "List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choosing an action.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "default": ""
+            },
+            "prefix": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "cursor": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "include_executors": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_route_action",
+        "description": "Profile and rank feasible execution routes for an agent action without executing it. Returns estimates, hard-constraint rejections, score components, and the selected route.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "capability": {
+              "type": "string",
+              "description": "Stable semantic action name, for example text.stats or github.issue.create."
+            },
+            "input": {
+              "type": "object",
+              "description": "JSON input passed to the selected executor.",
+              "additionalProperties": true
+            },
+            "policy": {
+              "type": "string",
+              "default": "balanced",
+              "description": "Routing policy name: balanced, cheapest, fastest, resource_saver, reliable, or a manifest policy."
+            },
+            "constraints": {
+              "type": "object",
+              "description": "Optional hard budget, latency, compute, privacy, and safety constraints.",
+              "additionalProperties": true
+            },
+            "context": {
+              "type": "object",
+              "description": "Optional current quota/capacity, state-locality, sensitivity, and trace context.",
+              "additionalProperties": true
+            },
+            "idempotency_key": {
+              "type": "string",
+              "maxLength": 256,
+              "description": "Stable key that prevents duplicate execution of the same action."
+            },
+            "detail": {
+              "type": "string",
+              "enum": [
+                "compact",
+                "full"
+              ],
+              "default": "compact"
+            }
+          },
+          "required": [
+            "capability",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_discover_resources",
+        "description": "Search operator-configured sources using public terms only. Returns inert untrusted metadata; never installs, qualifies, activates or assesses a resource.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "const": "discovery.request.v1",
+              "default": "discovery.request.v1",
+              "title": "Schema Version",
+              "type": "string"
+            },
+            "public_query": {
+              "maxLength": 500,
+              "minLength": 1,
+              "title": "Public Query",
+              "type": "string"
+            },
+            "source_ids": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "minItems": 1,
+              "title": "Source Ids",
+              "type": "array"
+            },
+            "limit": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "cursor": {
+              "anyOf": [
+                {
+                  "maxLength": 1000,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Cursor"
+            },
+            "artifact_types": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 32,
+              "title": "Artifact Types",
+              "type": "array"
+            }
+          },
+          "required": [
+            "public_query",
+            "source_ids"
+          ],
+          "title": "DiscoveryRequest",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_lookup_capability",
+        "description": "Look up local, scoped evidence for an inspected candidate. Returns an applicable admission or a reason to assess or keep the current environment. Never starts an assessment or grants authority; dispatch rechecks applicability.",
+        "parameters": {
+          "$defs": {
+            "ActionConstraints": {
+              "additionalProperties": false,
+              "properties": {
+                "max_cost_usd": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Cost Usd"
+                },
+                "max_latency_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Latency Ms"
+                },
+                "max_cpu_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Cpu Ms"
+                },
+                "max_memory_mb_seconds": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Memory Mb Seconds"
+                },
+                "max_peak_memory_mb": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Peak Memory Mb"
+                },
+                "max_gpu_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Gpu Ms"
+                },
+                "max_network_bytes": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Network Bytes"
+                },
+                "max_context_tokens": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Context Tokens"
+                },
+                "min_success_probability": {
+                  "default": 0.7,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Min Success Probability",
+                  "type": "number"
+                },
+                "min_quality_score": {
+                  "default": 0.5,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Min Quality Score",
+                  "type": "number"
+                },
+                "max_risk_score": {
+                  "default": 0.5,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Max Risk Score",
+                  "type": "number"
+                },
+                "max_side_effect": {
+                  "$ref": "#/$defs/SideEffect",
+                  "default": "read"
+                },
+                "allow_network": {
+                  "default": true,
+                  "title": "Allow Network",
+                  "type": "boolean"
+                },
+                "require_local": {
+                  "default": false,
+                  "title": "Require Local",
+                  "type": "boolean"
+                },
+                "allowed_executor_kinds": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "$ref": "#/$defs/ExecutorKind"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Executor Kinds"
+                },
+                "allowed_executor_ids": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Executor Ids"
+                },
+                "denied_executor_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Denied Executor Ids",
+                  "type": "array"
+                },
+                "allowed_data_residency": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Data Residency"
+                }
+              },
+              "title": "ActionConstraints",
+              "type": "object"
+            },
+            "ActionContext": {
+              "additionalProperties": false,
+              "properties": {
+                "data_sensitivity": {
+                  "$ref": "#/$defs/DataSensitivity",
+                  "default": "internal"
+                },
+                "state_locality": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/Locality"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "preferred_region": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Preferred Region"
+                },
+                "compute": {
+                  "$ref": "#/$defs/ComputeAvailability"
+                },
+                "labels": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Labels",
+                  "type": "object"
+                },
+                "traceparent": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Traceparent"
+                },
+                "subscription_quotas": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/SubscriptionQuota"
+                  },
+                  "title": "Subscription Quotas",
+                  "type": "object"
+                },
+                "cache_affinity": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/CacheRoutingContext"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "title": "ActionContext",
+              "type": "object"
+            },
+            "ActionRequest": {
+              "additionalProperties": false,
+              "properties": {
+                "action_id": {
+                  "title": "Action Id",
+                  "type": "string"
+                },
+                "capability": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "title": "Capability",
+                  "type": "string"
+                },
+                "input": {
+                  "additionalProperties": true,
+                  "title": "Input",
+                  "type": "object"
+                },
+                "policy": {
+                  "default": "balanced",
+                  "title": "Policy",
+                  "type": "string"
+                },
+                "constraints": {
+                  "$ref": "#/$defs/ActionConstraints"
+                },
+                "context": {
+                  "$ref": "#/$defs/ActionContext"
+                },
+                "idempotency_key": {
+                  "anyOf": [
+                    {
+                      "maxLength": 256,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Idempotency Key"
+                }
+              },
+              "required": [
+                "capability"
+              ],
+              "title": "ActionRequest",
+              "type": "object"
+            },
+            "CacheRoutingContext": {
+              "additionalProperties": false,
+              "properties": {
+                "cache_scope_key_hmac": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "title": "Cache Scope Key Hmac",
+                  "type": "string"
+                },
+                "provider": {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "title": "Provider",
+                  "type": "string"
+                },
+                "model": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "title": "Model",
+                  "type": "string"
+                },
+                "integration_adapter": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "title": "Integration Adapter",
+                  "type": "string"
+                },
+                "route_id": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "title": "Route Id",
+                  "type": "string"
+                },
+                "stable_prefix_digest_hmac": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "title": "Stable Prefix Digest Hmac",
+                  "type": "string"
+                },
+                "previous_state_digest_hmac": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[a-f0-9]{64}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Previous State Digest Hmac"
+                },
+                "common_prefix_tokens_estimate": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Common Prefix Tokens Estimate",
+                  "type": "integer"
+                },
+                "eligible_cached_tokens_estimate": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Eligible Cached Tokens Estimate",
+                  "type": "integer"
+                },
+                "recent_cache_read_tokens": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Recent Cache Read Tokens",
+                  "type": "integer"
+                },
+                "recent_cache_write_tokens": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Recent Cache Write Tokens",
+                  "type": "integer"
+                },
+                "recent_cache_miss_tokens": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Recent Cache Miss Tokens",
+                  "type": "integer"
+                },
+                "observed_hits": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Observed Hits",
+                  "type": "integer"
+                },
+                "observed_attempts": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Observed Attempts",
+                  "type": "integer"
+                },
+                "last_seen_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Last Seen At"
+                },
+                "compaction_generation": {
+                  "default": 0,
+                  "minimum": 0,
+                  "title": "Compaction Generation",
+                  "type": "integer"
+                },
+                "context_reset_reason": {
+                  "anyOf": [
+                    {
+                      "maxLength": 200,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Context Reset Reason"
+                }
+              },
+              "required": [
+                "cache_scope_key_hmac",
+                "provider",
+                "model",
+                "integration_adapter",
+                "route_id",
+                "stable_prefix_digest_hmac"
+              ],
+              "title": "CacheRoutingContext",
+              "type": "object"
+            },
+            "ComputeAvailability": {
+              "additionalProperties": false,
+              "description": "Resources available to the caller at routing time.\n\nThese values are optional because agents often know context-window or quota\nheadroom that the local process cannot detect.",
+              "properties": {
+                "available_memory_mb": {
+                  "anyOf": [
+                    {
+                      "exclusiveMinimum": 0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Available Memory Mb"
+                },
+                "available_cpu_fraction": {
+                  "anyOf": [
+                    {
+                      "exclusiveMinimum": 0.0,
+                      "maximum": 1.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Available Cpu Fraction"
+                },
+                "available_gpu_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Available Gpu Ms"
+                },
+                "context_tokens_remaining": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Context Tokens Remaining"
+                },
+                "monetary_budget_remaining_usd": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Monetary Budget Remaining Usd"
+                },
+                "network_metered": {
+                  "default": false,
+                  "title": "Network Metered",
+                  "type": "boolean"
+                }
+              },
+              "title": "ComputeAvailability",
+              "type": "object"
+            },
+            "DataSensitivity": {
+              "enum": [
+                "public",
+                "internal",
+                "confidential",
+                "restricted"
+              ],
+              "title": "DataSensitivity",
+              "type": "string"
+            },
+            "ExecutorKind": {
+              "enum": [
+                "command",
+                "python",
+                "http",
+                "mcp",
+                "host",
+                "host_managed",
+                "delegate"
+              ],
+              "title": "ExecutorKind",
+              "type": "string"
+            },
+            "Locality": {
+              "enum": [
+                "in_process",
+                "local",
+                "lan",
+                "internet"
+              ],
+              "title": "Locality",
+              "type": "string"
+            },
+            "QuotaSource": {
+              "enum": [
+                "user",
+                "host",
+                "official_cli",
+                "rate_limit",
+                "heuristic",
+                "observed"
+              ],
+              "title": "QuotaSource",
+              "type": "string"
+            },
+            "QuotaState": {
+              "description": "Private opportunity-cost signal for a non-transferable subscription.",
+              "enum": [
+                "abundant",
+                "normal",
+                "tight",
+                "critical",
+                "exhausted",
+                "unknown"
+              ],
+              "title": "QuotaState",
+              "type": "string"
+            },
+            "SideEffect": {
+              "enum": [
+                "none",
+                "read",
+                "write",
+                "destructive",
+                "financial"
+              ],
+              "title": "SideEffect",
+              "type": "string"
+            },
+            "SubscriptionQuota": {
+              "additionalProperties": false,
+              "properties": {
+                "state": {
+                  "$ref": "#/$defs/QuotaState",
+                  "default": "unknown"
+                },
+                "reset_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Reset At"
+                },
+                "observed_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Observed At"
+                },
+                "confidence": {
+                  "default": 0.5,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Confidence",
+                  "type": "number"
+                },
+                "source": {
+                  "$ref": "#/$defs/QuotaSource",
+                  "default": "user"
+                },
+                "unit": {
+                  "default": "provider_unit",
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "title": "Unit",
+                  "type": "string"
+                },
+                "allowance_units": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowance Units"
+                },
+                "remaining_units": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Remaining Units"
+                },
+                "used_percent": {
+                  "anyOf": [
+                    {
+                      "maximum": 100.0,
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Used Percent"
+                },
+                "window_duration_seconds": {
+                  "anyOf": [
+                    {
+                      "exclusiveMinimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Window Duration Seconds"
+                },
+                "window_count": {
+                  "default": 1,
+                  "minimum": 1,
+                  "title": "Window Count",
+                  "type": "integer"
+                },
+                "evidence_digest": {
+                  "anyOf": [
+                    {
+                      "pattern": "^sha256:[a-f0-9]{64}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Evidence Digest"
+                }
+              },
+              "title": "SubscriptionQuota",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "candidate_id": {
+              "maxLength": 300,
+              "minLength": 1,
+              "title": "Candidate Id",
+              "type": "string"
+            },
+            "intake_id": {
+              "anyOf": [
+                {
+                  "maxLength": 300,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Intake Id"
+            },
+            "request": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ActionRequest"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "candidate_id"
+          ],
+          "title": "AdmissionLookupRequest",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_stack_propose",
+        "description": "Propose an inert compatible stack from semantic requirements only. No task payloads, execution, installation or authority changes.",
+        "parameters": {
+          "$defs": {
+            "ActionConstraints": {
+              "additionalProperties": false,
+              "properties": {
+                "max_cost_usd": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Cost Usd"
+                },
+                "max_latency_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Latency Ms"
+                },
+                "max_cpu_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Cpu Ms"
+                },
+                "max_memory_mb_seconds": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Memory Mb Seconds"
+                },
+                "max_peak_memory_mb": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Peak Memory Mb"
+                },
+                "max_gpu_ms": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Gpu Ms"
+                },
+                "max_network_bytes": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Network Bytes"
+                },
+                "max_context_tokens": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Context Tokens"
+                },
+                "min_success_probability": {
+                  "default": 0.7,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Min Success Probability",
+                  "type": "number"
+                },
+                "min_quality_score": {
+                  "default": 0.5,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Min Quality Score",
+                  "type": "number"
+                },
+                "max_risk_score": {
+                  "default": 0.5,
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "title": "Max Risk Score",
+                  "type": "number"
+                },
+                "max_side_effect": {
+                  "$ref": "#/$defs/SideEffect",
+                  "default": "read"
+                },
+                "allow_network": {
+                  "default": true,
+                  "title": "Allow Network",
+                  "type": "boolean"
+                },
+                "require_local": {
+                  "default": false,
+                  "title": "Require Local",
+                  "type": "boolean"
+                },
+                "allowed_executor_kinds": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "$ref": "#/$defs/ExecutorKind"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Executor Kinds"
+                },
+                "allowed_executor_ids": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Executor Ids"
+                },
+                "denied_executor_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Denied Executor Ids",
+                  "type": "array"
+                },
+                "allowed_data_residency": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Allowed Data Residency"
+                }
+              },
+              "title": "ActionConstraints",
+              "type": "object"
+            },
+            "ArtifactContract": {
+              "additionalProperties": false,
+              "properties": {
+                "semantic_type": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "title": "Semantic Type",
+                  "type": "string"
+                },
+                "media_type": {
+                  "anyOf": [
+                    {
+                      "maxLength": 200,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Media Type"
+                },
+                "value_schema": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Value Schema"
+                },
+                "encoding": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Encoding"
+                },
+                "max_bytes": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Bytes"
+                },
+                "max_width": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Width"
+                },
+                "max_height": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Height"
+                },
+                "max_duration_seconds": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Max Duration Seconds"
+                },
+                "locality": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "local",
+                        "remote"
+                      ],
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Locality"
+                },
+                "confidentiality": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "public",
+                        "private",
+                        "restricted"
+                      ],
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Confidentiality"
+                }
+              },
+              "required": [
+                "semantic_type"
+              ],
+              "title": "ArtifactContract",
+              "type": "object"
+            },
+            "ExecutorKind": {
+              "enum": [
+                "command",
+                "python",
+                "http",
+                "mcp",
+                "host",
+                "host_managed",
+                "delegate"
+              ],
+              "title": "ExecutorKind",
+              "type": "string"
+            },
+            "SideEffect": {
+              "enum": [
+                "none",
+                "read",
+                "write",
+                "destructive",
+                "financial"
+              ],
+              "title": "SideEffect",
+              "type": "string"
+            },
+            "StackBinding": {
+              "additionalProperties": false,
+              "properties": {
+                "source_node": {
+                  "title": "Source Node",
+                  "type": "string"
+                },
+                "source_port": {
+                  "title": "Source Port",
+                  "type": "string"
+                },
+                "target_port": {
+                  "title": "Target Port",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_node",
+                "source_port",
+                "target_port"
+              ],
+              "title": "StackBinding",
+              "type": "object"
+            },
+            "StackLimits": {
+              "additionalProperties": false,
+              "properties": {
+                "max_cash_usd": {
+                  "anyOf": [
+                    {
+                      "minimum": 0.0,
+                      "type": "number"
+                    },
+                    {
+                      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                      "type": "string"
+                    }
+                  ],
+                  "default": "0",
+                  "title": "Max Cash Usd"
+                },
+                "max_attempts": {
+                  "default": 64,
+                  "maximum": 1000,
+                  "minimum": 1,
+                  "title": "Max Attempts",
+                  "type": "integer"
+                },
+                "max_attempt_seconds": {
+                  "default": 60,
+                  "exclusiveMinimum": 0,
+                  "maximum": 3600,
+                  "title": "Max Attempt Seconds",
+                  "type": "number"
+                },
+                "max_elapsed_seconds": {
+                  "default": 3600,
+                  "exclusiveMinimum": 0,
+                  "maximum": 86400,
+                  "title": "Max Elapsed Seconds",
+                  "type": "number"
+                },
+                "retry_reserve": {
+                  "default": 0,
+                  "maximum": 9,
+                  "minimum": 0,
+                  "title": "Retry Reserve",
+                  "type": "integer"
+                }
+              },
+              "title": "StackLimits",
+              "type": "object"
+            },
+            "TaskNode": {
+              "additionalProperties": false,
+              "properties": {
+                "node_id": {
+                  "maxLength": 100,
+                  "pattern": "^[A-Za-z0-9_.:-]+$",
+                  "title": "Node Id",
+                  "type": "string"
+                },
+                "capability": {
+                  "pattern": "^[a-z0-9][a-z0-9_.-]*@[0-9]+(?:\\.[0-9]+){0,2}$",
+                  "title": "Capability",
+                  "type": "string"
+                },
+                "inputs": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/ArtifactContract"
+                  },
+                  "maxProperties": 32,
+                  "title": "Inputs",
+                  "type": "object"
+                },
+                "outputs": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/ArtifactContract"
+                  },
+                  "maxProperties": 32,
+                  "title": "Outputs",
+                  "type": "object"
+                },
+                "bindings": {
+                  "items": {
+                    "$ref": "#/$defs/StackBinding"
+                  },
+                  "maxItems": 32,
+                  "title": "Bindings",
+                  "type": "array"
+                },
+                "depends_on": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 64,
+                  "title": "Depends On",
+                  "type": "array"
+                },
+                "verification_required": {
+                  "default": true,
+                  "title": "Verification Required",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "node_id",
+                "capability"
+              ],
+              "title": "TaskNode",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "const": "aeep.goal.v1",
+              "default": "aeep.goal.v1",
+              "title": "Schema Version",
+              "type": "string"
+            },
+            "goal_id": {
+              "maxLength": 100,
+              "pattern": "^[A-Za-z0-9_.:-]+$",
+              "title": "Goal Id",
+              "type": "string"
+            },
+            "nodes": {
+              "items": {
+                "$ref": "#/$defs/TaskNode"
+              },
+              "maxItems": 64,
+              "minItems": 1,
+              "title": "Nodes",
+              "type": "array"
+            },
+            "deliverables": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "minItems": 1,
+              "title": "Deliverables",
+              "type": "array"
+            },
+            "constraints": {
+              "$ref": "#/$defs/ActionConstraints"
+            },
+            "limits": {
+              "$ref": "#/$defs/StackLimits"
+            },
+            "policy": {
+              "default": "balanced",
+              "maxLength": 100,
+              "title": "Policy",
+              "type": "string"
+            },
+            "propose_only": {
+              "default": true,
+              "title": "Propose Only",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "goal_id",
+            "nodes",
+            "deliverables"
+          ],
+          "title": "GoalSpec",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_stack_inspect",
+        "description": "Inspect a stored immutable stack proposal.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "proposal_id": {
+              "title": "Proposal Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "proposal_id"
+          ],
+          "title": "StackReference",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_stack_optimize",
+        "description": "Create an inert successor using another configured policy.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "proposal_id": {
+              "title": "Proposal Id",
+              "type": "string"
+            },
+            "policy": {
+              "title": "Policy",
+              "type": "string"
+            }
+          },
+          "required": [
+            "proposal_id",
+            "policy"
+          ],
+          "title": "StackOptimizeRequest",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_stack_preflight",
+        "description": "Recheck stack assumptions and report setup and approval blockers. Grants no authority.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "proposal_id": {
+              "title": "Proposal Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "proposal_id"
+          ],
+          "title": "StackReference",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "aeep_discovery_status",
+        "description": "List configured searchable sources and setup guidance without contacting providers.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
+
+{
+  "connection": "deepseek-api",
+  "host": "deepseek-api",
+  "project": "/evidence/journey/project",
+  "connection_state": "configured",
+  "native_controls": [],
+  "tools": [
+    {
+      "name": "aeep_list_capabilities",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_route_action",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_execute_action",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_record_outcome",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_estimate_route_prices",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_request_quotes",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_get_metrics",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_prepared_decision",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_quote",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_show_settlement",
+      "visible_in_aeep": false,
+      "call_allowed_by_connection": false
+    },
+    {
+      "name": "aeep_discover_resources",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_lookup_capability",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_propose",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_inspect",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_optimize",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_preflight",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_discovery_status",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    },
+    {
+      "name": "aeep_stack_recommend",
+      "visible_in_aeep": true,
+      "call_allowed_by_connection": true
+    }
+  ],
+  "executors": [
+    {
+      "name": "builtin.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "cli.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    },
+    {
+      "name": "host.text-stats",
+      "registered": true,
+      "allowed_by_connection": false,
+      "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+    }
+  ],
+  "host_exposure": "pending reload; unverified",
+  "unmanaged_alternative_access": "unknown; use aeep agents inspect",
+  "skills_and_hooks": "host controls; loaded instructions require a new session"
+}
+
+{
+  "connection": "deepseek-api",
+  "status": "disconnected",
+  "receipts_and_grants": "preserved",
+  "host_reload": "required"
+}
+
+Status: disconnected
+Connections:
+Preserved: runtimes, selected third-party packages, receipts, grants and recovery records
+Cleanup: Inspect AEEP-owned retained runtime directories before removing them.
+

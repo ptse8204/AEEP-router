@@ -37,6 +37,9 @@ JSONRPC_VERSION = "2.0"
 HEADER_MISMATCH = -32020
 _SERVER_INFO_KEY = "io.modelcontextprotocol/serverInfo"
 _INSTRUCTIONS = (
+    "For task planning, inspect aeep_discovery_status and host capabilities, then use aeep_stack_recommend. "
+    "Search configured catalogs and use host web search for gaps. Compare named tools and skills; no metadata establishes admission. "
+    "A recommendation is not execution readiness. Keep public stages separate from private task values. "
     "Use aeep_route_action to inspect alternatives and aeep_execute_action to execute. "
     "Report a selected host-delegated route exactly once with aeep_record_outcome. "
     "Economic evidence tools are read-only inspection operations; they cannot approve or settle."
@@ -182,8 +185,11 @@ class AEEPToolService:
         task_scope: str | None = None,
         task_activation: str | None = None,
         discovery_config: Path | None = None,
+        connection: Path | None = None,
     ) -> None:
         self.router = router
+        from ..connections import bind_connection
+        self.connection = bind_connection(router, connection) if connection else router._connection_guard
         # These are operator-controlled ceilings. Tool-call arguments are
         # untrusted model output and therefore cannot elevate approvals.
         self.approved_side_effect = approved_side_effect
@@ -193,6 +199,7 @@ class AEEPToolService:
         self.profile = profile
         self.stack_execution = False
         self.discovery = None
+        self.discovery_path = discovery_config
         if discovery_config is not None:
             from ..discovery_service import DiscoveryConfig, DiscoveryService
             if profile == 'task':
@@ -230,7 +237,7 @@ class AEEPToolService:
                     'verification limits and recovery state. No assessment or approval controls are exposed.')
         return _INSTRUCTIONS
 
-    def list_tools(self) -> list[dict[str, Any]]:
+    def _list_tools(self) -> list[dict[str, Any]]:
         if self.profile in {"assessment", "task"}:
             from ..assessment.tools import declarations
             if self.profile == 'task':
@@ -248,8 +255,32 @@ class AEEPToolService:
         return [item for item in export_tools("mcp")
                 if item['name'] != 'aeep_discover_resources' or self.discovery is not None]
 
+    def list_tools(self) -> list[dict[str, Any]]:
+        tools = self._list_tools()
+        if self.connection is not None:
+            allowed = self.connection.current().allowed_tools
+            tools = [tool for tool in tools if tool['name'] in allowed]
+        return tools
+
     async def call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         try:
+            if self.connection is not None:
+                self.connection.require_tool(name)
+                if _tool_by_name(self.list_tools(), name) is None:
+                    raise ConfigurationError('tool is not exposed by this service')
+            if name == 'aeep_discovery_status':
+                from ..catalogs import read_catalogs, source_status
+                if arguments:
+                    raise ConfigurationError('discovery status takes no arguments')
+                return _tool_result(source_status(read_catalogs(self.discovery_path)) if self.discovery_path else {'sources': [], 'next_step': 'Run aeep setup and connect discovery configuration.'})
+            if name == 'aeep_stack_recommend':
+                from ..catalogs import read_catalogs
+                from ..discovery_service import DiscoveryConfig
+                from ..recommendations import RecommendationRequest, recommend
+                if _tool_by_name(self.list_tools(), name) is None:
+                    raise ConfigurationError('recommendation tool is not enabled')
+                return _tool_result((await recommend(self.router, RecommendationRequest.model_validate(arguments),
+                    config=read_catalogs(self.discovery_path) if self.discovery_path else DiscoveryConfig())).model_dump(mode='json'))
             if name.startswith('aeep_stack_'):
                 from ..registry import validate_json
                 from ..stack_models import GoalSpec, StackPreflight, StackProposal
@@ -528,6 +559,7 @@ async def serve_stdio(
     task_scope: str | None = None,
     task_activation: str | None = None,
     discovery_config: Path | None = None,
+    connection: Path | None = None,
 ) -> None:
     """Run until stdin closes."""
 
@@ -541,6 +573,7 @@ async def serve_stdio(
             task_scope=task_scope,
             task_activation=task_activation,
             discovery_config=discovery_config,
+            connection=connection,
         )
     )
     max_bytes = max(1024, int(max_message_bytes))
@@ -590,6 +623,7 @@ def create_http_app(
     task_scope: str | None = None,
     task_activation: str | None = None,
     discovery_config: Path | None = None,
+    connection: Path | None = None,
 ) -> Any:
     """Create an optional FastAPI app without making FastAPI a base dependency."""
 
@@ -614,6 +648,7 @@ def create_http_app(
         task_scope=task_scope,
         task_activation=task_activation,
         discovery_config=discovery_config,
+        connection=connection,
     )
     protocol = MCPProtocolApp(service)
 

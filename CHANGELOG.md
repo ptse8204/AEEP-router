@@ -1,6 +1,18 @@
 # Changelog
 
-## Unreleased — 0.8.0
+## Unreleased — 0.8.2
+
+### Guided onboarding and capability recommendations
+
+- Add named agent connections and dispatch-enforced tool/executor restrictions.
+- Configure searchable MCP and plugin catalogs, with metadata-only marketplace
+  readers, bounded searches and labelled cached results.
+- Record sourced stack recommendations separately from executable proposals.
+- Add guided component setup, reversible native deny rules, a CLI menu and a
+  connection-bound DeepSeek API bridge.
+- Prepare checksum-verified installer assets for macOS and Linux/WSL. Publication,
+  platform acceptance and live host verification remain separate gates.
+
 
 ### 0.8 assessment implementation (release gates remain open)
 

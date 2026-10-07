@@ -1,0 +1,849 @@
+.F...F.................................................................. [  5%]
+............................................FFFFFF.F....F............... [ 11%]
+..F.................................F................................... [ 16%]
+........................................................................ [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 44%]
+........................................................................ [ 50%]
+........................................................................ [ 55%]
+........................................................................ [ 61%]
+..........................................F............................. [ 66%]
+...........FF........................................................... [ 72%]
+..............Fs......................................s.....F........... [ 77%]
+..................ss..........s.........ss........s..........s.......... [ 83%]
+......................................F.....F........ssss............... [ 88%]
+..........................s..................................ss......... [ 94%]
+........................ss............s....s...................sF......  [100%]
+=================================== FAILURES ===================================
+_________________________ test_cli_tools_and_tool_call _________________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_cli_tools_and_tool_call0')
+
+    def test_cli_tools_and_tool_call(tmp_path):
+        manifest = tmp_path / "aeep.yaml"
+        assert runner.invoke(app, ["init", str(manifest)]).exit_code == 0
+        result = runner.invoke(app, ["tools", "export", "anthropic", "--compact"])
+        assert result.exit_code == 0
+>       assert {tool["name"] for tool in json.loads(result.stdout)["tools"]} == {
+            "aeep_stack_propose",
+            "aeep_stack_inspect",
+            "aeep_stack_optimize",
+            "aeep_stack_preflight",
+            "aeep_discover_resources",
+            "aeep_execute_action",
+            "aeep_estimate_route_prices",
+            "aeep_get_metrics",
+            "aeep_list_capabilities",
+            "aeep_lookup_capability",
+            "aeep_record_outcome",
+            "aeep_request_quotes",
+            "aeep_route_action",
+            "aeep_show_prepared_decision",
+            "aeep_show_quote",
+            "aeep_show_settlement",
+        }
+E       AssertionError: assert {'aeep_discov...ilities', ...} == {'aeep_discov...ability', ...}
+E         
+E         Extra items in the left set:
+E         'aeep_stack_recommend'
+E         'aeep_discovery_status'
+E         Use -v to get more diff
+
+tests/test_cli.py:45: AssertionError
+________________ test_input_file_constraints_and_machine_errors ________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_input_file_constraints_an0')
+
+    def test_input_file_constraints_and_machine_errors(tmp_path):
+        manifest = _init(tmp_path)
+        data = tmp_path / "input.yaml"
+        data.write_text("text: one two\n")
+        result = runner.invoke(
+            app,
+            [
+                "route",
+                "text.stats",
+                "--input",
+                f"@{data}",
+                "--require-local",
+                "--no-network",
+                "--max-cost-usd",
+                "0.01",
+                "--max-latency-ms",
+                "1000",
+                "--max-context-tokens",
+                "100",
+                "--max-peak-memory-mb",
+                "1000",
+                "--max-side-effect",
+                "read",
+                "--context",
+                '{"compute":{"context_tokens_remaining":1000}}',
+                "-m",
+                str(manifest),
+                "--compact",
+            ],
+        )
+        assert result.exit_code == 0, result.output
+    
+        malformed = runner.invoke(
+            app, ["route", "text.stats", "-i", "not-json", "-m", str(manifest), "--compact"]
+        )
+        assert malformed.exit_code != 0
+    
+        unknown_tool = runner.invoke(
+            app,
+            ["tool-call", "missing", "-a", "{}", "-m", str(manifest), "--compact"],
+        )
+        assert unknown_tool.exit_code == 4
+>       assert "unknown tool" in unknown_tool.stdout
+E       assert 'unknown tool' in '{"error":"tool is not exposed by this service","error_type":"ConfigurationError"}\n'
+E        +  where '{"error":"tool is not exposed by this service","error_type":"ConfigurationError"}\n' = <Result SystemExit(4)>.stdout
+
+tests/test_cli_extended.py:109: AssertionError
+__________________ test_tool_schema_exports[mcp-inputSchema] ___________________
+
+format = 'mcp', key = 'inputSchema'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________ test_tool_schema_exports[openai-responses-parameters] _____________
+
+format = 'openai-responses', key = 'parameters'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choo...': 'string'}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+________________ test_tool_schema_exports[openai-chat-function] ________________
+
+format = 'openai-chat', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+_______________ test_tool_schema_exports[anthropic-input_schema] _______________
+
+format = 'anthropic', key = 'input_schema'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executors before choo...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+_________________ test_tool_schema_exports[deepseek-function] __________________
+
+format = 'deepseek', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________________ test_tool_schema_exports[zai-function] ____________________
+
+format = 'zai', key = 'function'
+
+    @pytest.mark.parametrize(
+        "format,key",
+        [
+            ("mcp", "inputSchema"),
+            ("openai-responses", "parameters"),
+            ("openai-chat", "function"),
+            ("anthropic", "input_schema"),
+            ("deepseek", "function"),
+            ("zai", "function"),
+        ],
+    )
+    def test_tool_schema_exports(format, key):
+        tools = export_tools(format)
+>       assert len(tools) == 16
+E       AssertionError: assert 18 == 16
+E        +  where 18 = len([{'function': {'description': 'List semantic capabilities and their available CLI, Python, HTTP, MCP, or host executor...ems': {...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}}, 'type': 'function'}, ...])
+
+tests/test_integrations_mcp.py:32: AssertionError
+____________________ test_protocol_modern_discover_and_list ____________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_protocol_modern_discover_0')
+
+    def test_protocol_modern_discover_and_list(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        router = Router.from_manifest(manifest)
+        app = MCPProtocolApp(AEEPToolService(router))
+    
+        async def exercise():
+            meta = {
+                "io.modelcontextprotocol/protocolVersion": MODERN_VERSION,
+                "io.modelcontextprotocol/clientInfo": {"name": "test", "version": "1"},
+                "io.modelcontextprotocol/clientCapabilities": {},
+            }
+            discover = await app.handle(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "server/discover",
+                    "params": {"_meta": meta},
+                }
+            )
+            assert MODERN_VERSION in discover["result"]["supportedVersions"]
+            assert discover["result"]["resultType"] == "complete"
+            assert discover["result"]["cacheScope"] == "private"
+            assert "io.modelcontextprotocol/serverInfo" in discover["result"]["_meta"]
+            listed = await app.handle(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/list",
+                    "params": {"_meta": meta},
+                }
+            )
+            names = {tool["name"] for tool in listed["result"]["tools"]}
+            assert len(names) == 15
+            assert "aeep_lookup_capability" in names
+            assert "aeep_discover_resources" not in names
+            assert listed["result"]["resultType"] == "complete"
+            assert listed["result"]["ttlMs"] > 0
+            assert listed["result"]["cacheScope"] == "private"
+            ping = await app.handle(
+                {"jsonrpc": "2.0", "id": 3, "method": "ping", "params": {"_meta": meta}}
+            )
+            assert ping["error"]["code"] == -32601
+            await router.close()
+    
+>       asyncio.run(exercise())
+
+tests/test_integrations_mcp.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:194: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:720: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def exercise():
+        meta = {
+            "io.modelcontextprotocol/protocolVersion": MODERN_VERSION,
+            "io.modelcontextprotocol/clientInfo": {"name": "test", "version": "1"},
+            "io.modelcontextprotocol/clientCapabilities": {},
+        }
+        discover = await app.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "server/discover",
+                "params": {"_meta": meta},
+            }
+        )
+        assert MODERN_VERSION in discover["result"]["supportedVersions"]
+        assert discover["result"]["resultType"] == "complete"
+        assert discover["result"]["cacheScope"] == "private"
+        assert "io.modelcontextprotocol/serverInfo" in discover["result"]["_meta"]
+        listed = await app.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 2,
+                "method": "tools/list",
+                "params": {"_meta": meta},
+            }
+        )
+        names = {tool["name"] for tool in listed["result"]["tools"]}
+>       assert len(names) == 15
+E       AssertionError: assert 17 == 15
+E        +  where 17 = len({'aeep_discovery_status', 'aeep_estimate_route_prices', 'aeep_execute_action', 'aeep_get_metrics', 'aeep_list_capabilities', 'aeep_lookup_capability', ...})
+
+tests/test_integrations_mcp.py:106: AssertionError
+_________ test_economic_mcp_surface_is_read_only_sanitized_and_listed __________
+
+    @pytest.mark.asyncio
+    async def test_economic_mcp_surface_is_read_only_sanitized_and_listed():
+        from types import SimpleNamespace
+        from typing import Any, cast
+    
+        class Record:
+            def __init__(self, payload):
+                self.payload = payload
+    
+            def model_dump(self, *, mode):
+                assert mode == "json"
+                return self.payload
+    
+        class Store:
+            def get_prepared_decision(self, prepared_id):
+                return Record(
+                    {
+                        "prepared_id": prepared_id,
+                        "state": "PREPARED",
+                        "disclosed_quote_features": {
+                            "input_bytes": 12,
+                            "access_token": "must-not-leak",
+                        },
+                        "input": {"resume": "must-not-leak"},
+                    }
+                )
+    
+            def get_bounded_quote(self, quote_id):
+                return Record(
+                    {
+                        "quote_id": quote_id,
+                        "maximum_amount": {"amount": "0.0050", "currency": "USD"},
+                        "evidence_level": "SIGNED_QUOTE",
+                        "authorization": "must-not-leak",
+                    }
+                )
+    
+            def get_settlement_receipt(self, settlement_id):
+                return Record(
+                    {
+                        "settlement_id": settlement_id,
+                        "captured_amount": {"amount": "0.0038", "currency": "USD"},
+                        "released_amount": {"amount": "0.0012", "currency": "USD"},
+                        "external_reference": "must-not-leak",
+                    }
+                )
+    
+        router = cast(Any, SimpleNamespace(store=Store()))
+>       service = AEEPToolService(router)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_integrations_mcp.py:264: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.mcp.server.AEEPToolService object at 0x10d3896d0>
+router = namespace(store=<test_integrations_mcp.test_economic_mcp_surface_is_read_only_sanitized_and_listed.<locals>.Store object at 0x10ce57770>)
+
+    def __init__(
+        self,
+        router: Router,
+        *,
+        approved_side_effect: SideEffect = SideEffect.READ,
+        allow_unsafe_executor: bool = False,
+        profile: str = "legacy",
+        task_scope: str | None = None,
+        task_activation: str | None = None,
+        discovery_config: Path | None = None,
+        connection: Path | None = None,
+    ) -> None:
+        self.router = router
+        from ..connections import bind_connection
+>       self.connection = bind_connection(router, connection) if connection else router._connection_guard
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute '_connection_guard'
+
+src/aeep/mcp/server.py:189: AttributeError
+____________ test_create_http_app_auth_and_modern_header_validation ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_create_http_app_auth_and_0')
+
+    def test_create_http_app_auth_and_modern_header_validation(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        app = create_http_app(str(manifest), bearer_token="secret", max_body_bytes=1024)
+        with TestClient(app) as client:
+            assert client.get("/healthz").json()["ok"] is True
+            message = {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "tools/list",
+                "params": {"_meta": _modern_meta()},
+            }
+            assert client.post("/mcp", json=message).status_code == 401
+            assert (
+                client.post(
+                    "/mcp",
+                    json=message,
+                    headers={**_modern_headers("tools/list"), "Origin": "https://evil.test"},
+                ).status_code
+                == 403
+            )
+            assert (
+                client.post(
+                    "/mcp",
+                    content=b"x" * 2048,
+                    headers={"Authorization": "Bearer secret", "Content-Type": "application/json"},
+                ).status_code
+                == 413
+            )
+            missing = client.post("/mcp", json=message, headers={"Authorization": "Bearer secret"})
+            assert missing.status_code == 400
+            assert missing.json()["error"]["code"] == -32020
+    
+            response = client.post("/mcp", json=message, headers=_modern_headers("tools/list"))
+            assert response.status_code == 200
+            result = response.json()["result"]
+            names = {tool["name"] for tool in result["tools"]}
+>           assert len(names) == 15
+E           AssertionError: assert 17 == 15
+E            +  where 17 = len({'aeep_discovery_status', 'aeep_estimate_route_prices', 'aeep_execute_action', 'aeep_get_metrics', 'aeep_list_capabilities', 'aeep_lookup_capability', ...})
+
+tests/test_mcp_executor_http.py:428: AssertionError
+____________________ test_mcp_server_import_discovers_tools ____________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_mcp_server_import_discove0')
+
+    @pytest.mark.asyncio
+    async def test_mcp_server_import_discovers_tools(tmp_path):
+        manifest = write_default_manifest(tmp_path / "aeep.yaml")
+        descriptor = await import_mcp_server(
+            provider_id="local-aeep",
+            transport="stdio",
+            endpoint=sys.executable,
+            args=["-m", "aeep", "serve", "--transport", "stdio", "-m", str(manifest)],
+            capability_prefix="imported",
+        )
+>       assert {executor.config["tool"] for executor in descriptor.executors} == {
+            "aeep_stack_propose", "aeep_stack_inspect", "aeep_stack_optimize", "aeep_stack_preflight",
+            "aeep_execute_action",
+            "aeep_estimate_route_prices",
+            "aeep_get_metrics",
+            "aeep_list_capabilities",
+            "aeep_lookup_capability",
+            "aeep_record_outcome",
+            "aeep_request_quotes",
+            "aeep_route_action",
+            "aeep_show_prepared_decision",
+            "aeep_show_quote",
+            "aeep_show_settlement",
+        }
+E       AssertionError: assert {'aeep_discov...ability', ...} == {'aeep_estima...outcome', ...}
+E         
+E         Extra items in the left set:
+E         'aeep_stack_recommend'
+E         'aeep_discovery_status'
+E         Use -v to get more diff
+
+tests/test_p0_usefulness.py:243: AssertionError
+_____________ test_focused_tools_do_not_expose_operator_arguments ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_focused_tools_do_not_expo0')
+
+    async def test_focused_tools_do_not_expose_operator_arguments(tmp_path):
+        router, _service, _plan, _grant = setup_assessment(tmp_path)
+        try:
+            service = AEEPToolService(router, profile="assessment")
+            names = {tool["name"] for tool in service.list_tools()}
+            assert names == {
+                "aeep_stack_propose", "aeep_stack_inspect", "aeep_stack_optimize", "aeep_stack_preflight",
+                "aeep_csv",
+                "aeep_text",
+                "aeep_search",
+                "aeep_assessment_start",
+                "aeep_assessment_status",
+                "aeep_assessment_report",
+                "aeep_assessment_cancel",
+                "aeep_assessment_generate_definition",
+                "aeep_assessment_structures",
+                "aeep_assessment_select_structure",
+                "aeep_assessment_budget",
+                "aeep_assessment_options",
+                "aeep_assessment_setup",
+                "aeep_assessment_generate_cases",
+                "aeep_lookup_capability",
+            }
+>           assert len(AEEPToolService(router).list_tools()) == 15
+E           AssertionError: assert 17 == 15
+E            +  where 17 = len([{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...])
+E            +    where [{'annotations': {'idempotentHint': True, 'readOnlyHint': True}, 'description': 'List semantic capabilities and their ...}, 'type': 'array'}, ...}, 'required': ['capability', 'input'], 'type': 'object'}, 'name': 'aeep_request_quotes'}, ...] = list_tools()
+E            +      where list_tools = <aeep.mcp.server.AEEPToolService object at 0x10d5b3a00>.list_tools
+E            +        where <aeep.mcp.server.AEEPToolService object at 0x10d5b3a00> = AEEPToolService(<aeep.router.Router object at 0x10ecc5f90>)
+
+tests/test_v08_assessment.py:614: AssertionError
+_________ test_skill_recursion_uses_identity_not_ancestor_name[False] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_skill_recursion_uses_iden0')
+supporting = False
+
+    @pytest.mark.parametrize('supporting', [False, True])
+    def test_skill_recursion_uses_identity_not_ancestor_name(tmp_path, supporting):
+        from aeep.models import ReviewedHostSkill
+    
+        path = tmp_path / 'aeep-parent' / 'parse' / 'SKILL.md'
+        path.parent.mkdir(parents=True)
+        path.write_text('A separate reviewed parser skill.')
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        target = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=digest))
+        assert isolated_config(catalog(path), target)['skills.config'][0]['enabled'] is True
+    
+        bundled = Path(__file__).resolve().parents[1] / 'integrations/aeep/skills/assess-plugin/SKILL.md'
+        path.write_bytes(bundled.read_bytes())
+        renamed_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        renamed = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=renamed_digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=renamed_digest))
+>       with pytest.raises(ConfigurationError, match='recursive'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'aeep.errors.ConfigurationError'>
+
+tests/test_v08_codex_invocation.py:60: Failed
+__________ test_skill_recursion_uses_identity_not_ancestor_name[True] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_skill_recursion_uses_iden1')
+supporting = True
+
+    @pytest.mark.parametrize('supporting', [False, True])
+    def test_skill_recursion_uses_identity_not_ancestor_name(tmp_path, supporting):
+        from aeep.models import ReviewedHostSkill
+    
+        path = tmp_path / 'aeep-parent' / 'parse' / 'SKILL.md'
+        path.parent.mkdir(parents=True)
+        path.write_text('A separate reviewed parser skill.')
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        target = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=digest))
+        assert isolated_config(catalog(path), target)['skills.config'][0]['enabled'] is True
+    
+        bundled = Path(__file__).resolve().parents[1] / 'integrations/aeep/skills/assess-plugin/SKILL.md'
+        path.write_bytes(bundled.read_bytes())
+        renamed_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        renamed = (ManagedHostInvocation(mode='turn', supporting_skills=[
+            ReviewedHostSkill(name='parse', path=str(path), sha256=renamed_digest)]) if supporting else
+            ManagedHostInvocation(mode='skill', skill_name='parse', skill_path=str(path), skill_sha256=renamed_digest))
+>       with pytest.raises(ConfigurationError, match='recursive'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'aeep.errors.ConfigurationError'>
+
+tests/test_v08_codex_invocation.py:60: Failed
+______ test_synthetic_controlled_admission_lookup_dispatch_and_revocation ______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_synthetic_controlled_admi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10bb2a7b0>
+
+    async def test_synthetic_controlled_admission_lookup_dispatch_and_revocation(tmp_path, monkeypatch):
+        from aeep.assessment.models import AssessmentPlan, AssessmentReport
+        from aeep.router import Router
+    
+        fixture_dir = (tmp_path / "controlled-fixture").resolve()
+        original_admit = AssessmentService.admit
+        original_execute = Router.execute
+        observed = {"armed": False}
+    
+        def admit_with_local_intake(service, report_id):
+            admission = original_admit(service, report_id)
+            report = AssessmentReport.model_validate(service.repository.get("report", report_id))
+            plan = AssessmentPlan.model_validate(service.repository.get("plan", report.plan_digest))
+            assert admission.executor_id == plan.candidate_id
+            assert admission.subject_digest == plan.subject_digest
+            candidate = RegistryCandidate(
+                registry_candidate_id="controlled-fixture.csv-helper",
+                adapter_id="controlled-fixture",
+                name="Synthetic controlled CSV helper",
+                description="Local lifecycle fixture; not a real plugin or benefit claim.",
+                version="fixture-only",
+                package_locator={"kind": "local", "value": "fixture.txt"},
+                provenance={"entry": {"type": "plugin"}},
+                retrieved_at=utc_now(),
+                raw_metadata_digest=_metadata_digest({"purpose": "synthetic controlled fixture"}),
+            )
+            service.router.store.save_registry_candidate(candidate)
+            lifecycle = CapabilityLifecycle(service)
+            intake = lifecycle.inspect_candidate(candidate.registry_candidate_id, fixture_dir / "fixture.txt")
+            service.repository.review(content_digest(intake))
+            observed.update(
+                armed=True, router=service.router, lifecycle=lifecycle,
+                candidate_id=candidate.registry_candidate_id, intake_id=intake.intake_id,
+                admission_id=admission.admission_id, capability=plan.suite.domain,
+                input=plan.suite.cases[0].action.input,
+            )
+            return admission
+    
+        async def lookup_then_execute(router, request_or_decision, **kwargs):
+            if (observed.get("armed") and router is observed["router"]
+                    and isinstance(request_or_decision, ActionRequest)
+                    and request_or_decision.capability == observed["capability"]
+                    and request_or_decision.input == observed["input"]):
+                decision = observed["lifecycle"].lookup(
+                    observed["candidate_id"], request_or_decision, intake_id=observed["intake_id"],
+                )
+                assert decision.disposition == "admit", decision.reason_codes
+                assert decision.next_action == "use_admitted_capability"
+                assert decision.executor_id == "fixture.candidate"
+                assert decision.admission_id == observed["admission_id"]
+                observed.update(lookup=decision, request=request_or_decision.model_copy(deep=True))
+                result = await original_execute(router, request_or_decision, **kwargs)
+                receipt = result.receipts[-1]
+                assert receipt.executor_id == decision.executor_id
+                assert receipt.metadata.get("assessment_admission_id") == decision.admission_id
+                observed.update(receipt_id=receipt.receipt_id)
+                observed["armed"] = False
+                return result
+            return await original_execute(router, request_or_decision, **kwargs)
+    
+        monkeypatch.setattr(AssessmentService, "admit", admit_with_local_intake)
+        monkeypatch.setattr(Router, "execute", lookup_then_execute)
+>       record = await run_controlled_fixture(fixture_dir)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v08_discovery_lifecycle.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/aeep/assessment/controlled_fixture.py:86: in run
+    admission = service.admit(report.report_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_v08_discovery_lifecycle.py:165: in admit_with_local_intake
+    admission = original_admit(service, report_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x10d655240>
+report_id = 'fit_3a1180eb769b4a08810d5dbf6b3f754f'
+
+    def admit(self, report_id: str) -> ScopedAdmission:
+        report = AssessmentReport.model_validate(self.repository.get("report", report_id))
+        plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+        campaign = BenchmarkCampaignReport.model_validate(
+            self.repository.get("campaign", report.campaign_digest)
+        )
+        ledger = AssessmentOperationLedger.model_validate(self.repository.get("operation_ledger", report.operation_ledger_digest)) if report.operation_ledger_digest else None
+        verified = fit_report(plan, recipe, campaign, ledger=ledger)
+        if (
+            verified.outcome != "useful_within_scope"
+            or not verified.qualification_passed
+            or report.outcome != verified.outcome
+        ):
+>           raise ConfigurationError(
+                "admission requires passed qualification and a measured benefit"
+            )
+E           aeep.errors.ConfigurationError: admission requires passed qualification and a measured benefit
+
+src/aeep/assessment/service.py:592: ConfigurationError
+___________ test_reviewed_diagnostics_survive_the_contained_campaign ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_reviewed_diagnostics_surv0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d157380>
+
+    async def test_reviewed_diagnostics_survive_the_contained_campaign(tmp_path, monkeypatch):
+        recipe = definition()
+        assert recipe.extension is not None
+        raw = recipe.extension.model_dump()
+        for key in ('generator', 'grader', 'reference'):
+            raw[key]['config']['argv_literal'] = True
+        raw['grader']['config']['argv'][2] = (
+            "import json,sys; p=json.load(sys.stdin); "
+            "v=[e['output']==e['expected'] for e in p['examples']]; "
+            "print(json.dumps({'valid':v,'failure_codes':[None if ok else 'wrong_count' for ok in v]}))"
+        )
+        recipe.extension = ExecutableRecipeExtension.model_validate({**raw,
+            'schema_version': 'assessment.recipe-extension.v3',
+            'truth_schema': recipe.output_schema, 'failure_codes': ['wrong_count']})
+        router, service, recipe, request, environment = setup(tmp_path, monkeypatch, recipe=recipe)
+        try:
+            spec = router.registry.get('candidate').model_copy(deep=True)
+            spec.config['argv'][2] = "print('{\"count\":-1}')"
+            router.registry.replace(spec)
+            for digest in request.definition_digests:
+                service.repository.review(digest)
+            cases = await materialize(service, request.plan_id)
+            assert all(case.validators[0].config['failure_codes'] == ['wrong_count'] for case in cases.cases)
+            plan = service.propose(subject_id=request.subject_digest, family=recipe.recipe_id,
+                candidate_id='candidate', baseline_id='baseline', authorization_id=request.authorization_id,
+                environment=environment, seed=request.seed, case_set_id=request.plan_id)
+            for digest in plan.definition_digests:
+                service.repository.review(digest)
+            report = await service.run(service.enqueue(plan.plan_id))
+            assert not report.qualification_passed and report.grader_validation_digest
+            import json
+            import sqlite3
+            with sqlite3.connect(service.directory / plan.plan_id / 'campaign.sqlite3') as db:
+                trials = [json.loads(row[0]) for row in db.execute('SELECT payload_json FROM trials')]
+>           assert any(t['case_validation'][0]['detail'] == 'wrong_count' for t in trials if t['correctness_failed'])
+E           assert False
+E            +  where False = any(<generator object test_reviewed_diagnostics_survive_the_contained_campaign.<locals>.<genexpr> at 0x10df98450>)
+
+tests/test_v08_executable_recipes.py:231: AssertionError
+____________ test_calibrated_main_executes_without_recharging_pilot ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_calibrated_main_executes_0')
+
+    async def test_calibrated_main_executes_without_recharging_pilot(tmp_path):
+        router, service, original, grant = setup_assessment(tmp_path)
+        environment = AssessmentEnvironment.model_validate(service.repository.get('environment', original.environment_digest))
+        options = dict(subject_id=original.subject_digest, family='csv',
+            candidate_id=original.candidate_id, baseline_id=original.baseline_id,
+            authorization_id=grant.authorization_id, environment=environment)
+        try:
+            pilot = service.propose(**options, seed=123, pilot=PilotPolicy())
+            for digest in pilot.definition_digests:
+                service.repository.review(digest)
+            report = await service.run(service.enqueue(pilot.plan_id))
+            timing = timing_preview(service, report.report_id)
+            prior_ledger = service.repository.operation_ledger(pilot.plan_id)
+            for spec in router.manifest.executors:
+                spec.config['timeout_seconds'] = timing['proposed_normal_deadline_seconds']
+                router.registry.replace(spec)
+            with pytest.raises(ConfigurationError, match='route changed'):
+                timing_preview(service, report.report_id)
+            main = service.propose(**options, seed=456, pilot_report_id=report.report_id)
+            assert main.schema_version == 'assessment.plan.v6' and not main.blocked_reasons
+            with pytest.raises(ConfigurationError, match='review'):
+                service.enqueue(main.plan_id)
+            for digest in main.definition_digests:
+                service.repository.review(digest)
+            result = await service.run(service.enqueue(main.plan_id))
+>           assert result.distinct_holdout_cases == 105 and result.qualification_passed
+E           AssertionError: assert (44 == 105)
+E            +  where 44 = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='direct', candid...ocked_or_budget_exhausted'], created_at=datetime.datetime(2026, 10, 6, 23, 8, 4, 256467, tzinfo=datetime.timezone.utc)).distinct_holdout_cases
+
+tests/test_v08_pilot.py:235: AssertionError
+____ test_search_workflow_assessment_binds_cases_and_preserves_constraints _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-881/test_search_workflow_assessmen0')
+
+    async def test_search_workflow_assessment_binds_cases_and_preserves_constraints(tmp_path):
+        from aeep.assessment.adapters import WorkflowAdapter
+        from aeep.qualification import behavior_fingerprint
+        from aeep.workflow import WorkflowRequest
+    
+        recipe = shipped_recipe("search")
+        first = python_spec("input", "test_v08_planning:search_input", capability="search.input@1")
+        second = python_spec("extract", "aeep.assessment.recipes:reference_search", capability="search.extract@1")
+        workflow = WorkflowRequest.model_validate({
+            "workflow_id": "reviewed-search", "input": {"root": "", "query": "", "path": ""},
+            "steps": [
+                {"step_id": "input", "action": {"capability": first.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [first.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key} for key in ("root", "query", "path")]},
+                {"step_id": "extract", "depends_on": ["input"], "action": {"capability": second.capability, "input": {"root": "", "query": "", "path": ""}, "constraints": {"allowed_executor_ids": [second.id]}}, "bindings": [{"target_path": "/" + key, "source_path": "/" + key, "source_step_id": "input"} for key in ("root", "query", "path")]},
+            ], "outputs": [{"name": "result", "step_id": "extract", "path": ""}],
+        })
+        candidate = python_spec("workflow", "aeep.assessment.adapters:workflow_target", capability=recipe.capability)
+        adapter = WorkflowAdapter(workflow=workflow, case_input_bindings={"/" + key: "/" + key for key in ("root", "query", "path")}, executor_fingerprints={spec.id: behavior_fingerprint(spec) for spec in (first, second)})
+        candidate.config["assessment_workflow"] = adapter.model_dump(mode="json")
+        candidate.config["assessment_adapter"] = {"output_pointer": "/result"}
+        baseline = python_spec("baseline", "test_v08_planning:slow_search", capability=recipe.capability)
+        router = Router(manifest_with(candidate, baseline, first, second))
+        service = AssessmentService(router, tmp_path / "assessment")
+        plugin = tmp_path / "plugin.txt"
+        plugin.write_text("reviewed workflow fixture")
+        subject = service.inspect_local(plugin)
+        environment = AssessmentEnvironment(environment_id="local", kind="trusted_local", identity={"approved_root": str(tmp_path)})
+        plan = service.propose(subject_id=subject.subject_id, family="search", candidate_id=candidate.id, baseline_id=baseline.id, authorization_id="grant", environment=environment)
+        for digest in plan.definition_digests:
+            service.repository.review(digest)
+        service.repository.grant(AssessmentAuthorization(authorization_id="grant", subject_digests=[plan.subject_digest], recipe_digests=[plan.recipe_digest], environment_digests=[plan.environment_digest], limits=AssessmentLimits(max_operations=1000, max_elapsed_seconds=20000), expires_at=utc_now() + timedelta(hours=1)))
+        try:
+            report = await service.run(service.enqueue(plan.plan_id))
+>           assert report.qualification_passed, report.explanations
+E           AssertionError: ['Correctness counts distinct held-out cases; repetitions measure variability.', 'Latency includes routing and grading...resh. Conditions are never pooled.', 'Benefits apply to the complete reviewed workflow, not to the plugin alone.', ...]
+E           assert False
+E            +  where False = AssessmentReport(comparison=AssessmentComparison(schema_version='assessment.comparison.v1', structure='workflow', cand...cked_or_budget_exhausted'], created_at=datetime.datetime(2026, 10, 6, 23, 8, 35, 332906, tzinfo=datetime.timezone.utc)).qualification_passed
+
+tests/test_v08_planning.py:212: AssertionError
+____________ test_package_and_documentation_versions_are_consistent ____________
+
+    def test_package_and_documentation_versions_are_consistent():
+        with (ROOT / "pyproject.toml").open("rb") as source:
+            project_version = tomllib.load(source)["project"]["version"]
+>       assert project_version == __version__
+E       AssertionError: assert '0.8.2' == '0.8.0'
+E         
+E         - 0.8.0
+E         ?     ^
+E         + 0.8.2
+E         ?     ^
+
+tests/test_version_consistency.py:18: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_cli_tools_and_tool_call - AssertionError: asse...
+FAILED tests/test_cli_extended.py::test_input_file_constraints_and_machine_errors
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[mcp-inputSchema]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[openai-responses-parameters]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[openai-chat-function]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[anthropic-input_schema]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[deepseek-function]
+FAILED tests/test_integrations_mcp.py::test_tool_schema_exports[zai-function]
+FAILED tests/test_integrations_mcp.py::test_protocol_modern_discover_and_list
+FAILED tests/test_integrations_mcp.py::test_economic_mcp_surface_is_read_only_sanitized_and_listed
+FAILED tests/test_mcp_executor_http.py::test_create_http_app_auth_and_modern_header_validation
+FAILED tests/test_p0_usefulness.py::test_mcp_server_import_discovers_tools - ...
+FAILED tests/test_v08_assessment.py::test_focused_tools_do_not_expose_operator_arguments
+FAILED tests/test_v08_codex_invocation.py::test_skill_recursion_uses_identity_not_ancestor_name[False]
+FAILED tests/test_v08_codex_invocation.py::test_skill_recursion_uses_identity_not_ancestor_name[True]
+FAILED tests/test_v08_discovery_lifecycle.py::test_synthetic_controlled_admission_lookup_dispatch_and_revocation
+FAILED tests/test_v08_executable_recipes.py::test_reviewed_diagnostics_survive_the_contained_campaign
+FAILED tests/test_v08_pilot.py::test_calibrated_main_executes_without_recharging_pilot
+FAILED tests/test_v08_planning.py::test_search_workflow_assessment_binds_cases_and_preserves_constraints
+FAILED tests/test_version_consistency.py::test_package_and_documentation_versions_are_consistent
+20 failed, 1254 passed, 21 skipped, 1 warning in 550.66s (0:09:10)

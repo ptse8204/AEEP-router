@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "RecommendationOption": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence_basis": {
+          "enum": [
+            "configured",
+            "host_reported",
+            "registry_claim",
+            "web_claim"
+          ],
+          "title": "Evidence Basis",
+          "type": "string"
+        },
+        "readiness": {
+          "enum": [
+            "configured",
+            "host_reported",
+            "setup_required",
+            "incompatible"
+          ],
+          "title": "Readiness",
+          "type": "string"
+        },
+        "compatibility": {
+          "default": "unknown",
+          "enum": [
+            "supported_host_claim",
+            "incompatible_host",
+            "unknown"
+          ],
+          "title": "Compatibility",
+          "type": "string"
+        },
+        "quality": {
+          "default": "unknown; inspect samples or applicable assessment evidence",
+          "title": "Quality",
+          "type": "string"
+        },
+        "cost": {
+          "default": "unknown; check current provider terms",
+          "title": "Cost",
+          "type": "string"
+        },
+        "privacy": {
+          "default": "unknown; check data flow and provider terms",
+          "title": "Privacy",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "next_action": {
+          "title": "Next Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "name",
+        "source",
+        "reason",
+        "evidence_basis",
+        "readiness",
+        "next_action"
+      ],
+      "title": "RecommendationOption",
+      "type": "object"
+    },
+    "StageRecommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "stage_id": {
+          "title": "Stage Id",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "preferred": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Preferred"
+        },
+        "options": {
+          "items": {
+            "$ref": "#/$defs/RecommendationOption"
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stage_id",
+        "purpose",
+        "preferred",
+        "options",
+        "blockers"
+      ],
+      "title": "StageRecommendation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.stack-recommendation.v1",
+      "default": "aeep.stack-recommendation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "recommendation_id": {
+      "title": "Recommendation Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "host": {
+      "title": "Host",
+      "type": "string"
+    },
+    "priorities": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Priorities",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "recommendation_ready",
+        "setup_required",
+        "blocked"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "stages": {
+      "items": {
+        "$ref": "#/$defs/StageRecommendation"
+      },
+      "title": "Stages",
+      "type": "array"
+    },
+    "search_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Search Ids",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recommendation_id",
+    "created_at",
+    "host",
+    "priorities",
+    "status",
+    "stages",
+    "search_ids",
+    "warnings"
+  ],
+  "title": "StackRecommendation",
+  "type": "object"
+}

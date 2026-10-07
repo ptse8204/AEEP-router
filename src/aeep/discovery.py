@@ -356,11 +356,13 @@ class MCPCommunityRegistryAdapter:
         client: httpx.AsyncClient | None = None,
         clock: Any | None = None,
     ) -> None:
+        self.warnings: list[str] = []
         self.base_url = base_url.rstrip("/")
         self.client = client
         self.clock = clock or (lambda: datetime.now(UTC))
 
     async def search(self, query: RegistryQuery) -> list[RegistryCandidate]:
+        self.warnings = []
         parameters: dict[str, str | int] = {
             "search": query.query,
             "limit": query.limit,
@@ -382,11 +384,14 @@ class MCPCommunityRegistryAdapter:
             trust_env=False,
         )
         try:
-            response = await client.get(url, headers={"accept": "application/json"})
-            response.raise_for_status()
-            if len(response.content) > 1_000_000:
-                raise ProtocolError("MCP registry response exceeds 1 MiB")
-            value = response.json()
+            async with client.stream('GET', url, headers={"accept": "application/json"}) as response:
+                response.raise_for_status()
+                body = bytearray()
+                async for chunk in response.aiter_bytes():
+                    body.extend(chunk)
+                    if len(body) > 1_000_000:
+                        raise ProtocolError("MCP registry response exceeds 1 MiB")
+                value = json.loads(body)
         except (httpx.HTTPError, json.JSONDecodeError) as exc:
             raise ProtocolError("MCP registry search failed") from exc
         finally:
@@ -395,6 +400,10 @@ class MCPCommunityRegistryAdapter:
         servers = value.get("servers") if isinstance(value, dict) else None
         if not isinstance(servers, list):
             raise ProtocolError("MCP registry response requires servers")
+        metadata = value.get("metadata", {})
+        cursor = metadata.get("nextCursor") if isinstance(metadata, dict) else None
+        if cursor or len(servers) > query.limit:
+            self.warnings.append("Results truncated; query a narrower name or supply the registry cursor")
         return [self._candidate(item) for item in servers[: query.limit] if isinstance(item, dict)]
 
     def _candidate(self, item: dict[str, Any]) -> RegistryCandidate:

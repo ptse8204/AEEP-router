@@ -10,9 +10,12 @@ def main() -> None:
     manifest = Path.home() / ".config/aeep/config.yaml"
     if not runtime.is_file() or not manifest.is_file():
         sys.exit("AEEP setup is incomplete. Follow README.md: Install in Codex.")
-    os.execv(str(runtime), [str(runtime), "-m", "aeep", "serve",
-                           "--transport", "stdio", "--profile", "legacy",
-                           "--manifest", str(manifest)])
+    args = [str(runtime), "-m", "aeep", "serve", "--transport", "stdio",
+            "--profile", "legacy", "--manifest", str(manifest)]
+    discovery = manifest.parent / "discovery.json"
+    if discovery.is_file():
+        args.extend(["--discovery-config", str(discovery)])
+    os.execv(str(runtime), args)
 
 
 if __name__ == "__main__":

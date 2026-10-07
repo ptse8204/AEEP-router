@@ -54,8 +54,10 @@ from aeep.capacity import (
     EntitlementRedemptionReceipt,
     ExecutionEntitlement,
 )
+from aeep.component_setup import ComponentSetup
 from aeep.configuration_profile import ConfigurationObservation
 from aeep.conformance import ProviderConformanceReport
+from aeep.connections import AgentConnection
 from aeep.discovery import (
     DiscoveryRequest,
     DiscoveryResult,
@@ -163,6 +165,7 @@ from aeep.provider_package import (
 )
 from aeep.provider_setup import ProviderSetupDefinition, ProviderSetupObservation
 from aeep.qualification import QualificationReport, RouteCandidate
+from aeep.recommendations import RecommendationRequest, StackRecommendation
 from aeep.stack_models import (
     ArtifactContract,
     GoalSpec,
@@ -179,6 +182,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "agent-connection.schema.json": AgentConnection,
+    "component-setup.schema.json": ComponentSetup,
+    "recommendation-request.schema.json": RecommendationRequest,
+    "stack-recommendation.schema.json": StackRecommendation,
     "discovery-request.schema.json": DiscoveryRequest,
     "discovery-result.schema.json": DiscoveryResult,
     "discovery-source.schema.json": DiscoverySourceRecord,

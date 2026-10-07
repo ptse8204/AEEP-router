@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aeep-agent-router"
-version = "0.8.0"
+version = "0.8.2"
 description = "Host-native, provider-neutral routing that filters infeasible agent actions before model and tool execution."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -56,6 +56,7 @@ where = ["src"]
 aeep = ["py.typed"]
 
 [tool.setuptools.data-files]
+"share/aeep/examples" = ["examples/video-recommendation.json", "examples/deepseek_connection.py"]
 "share/aeep/skills/aeep-minimal" = ["skills/aeep-minimal/SKILL.md"]
 "share/aeep/skills/aeep-minimal/agents" = ["skills/aeep-minimal/agents/openai.yaml"]
 "share/aeep/skills/aeep-router" = ["skills/aeep-router/SKILL.md"]

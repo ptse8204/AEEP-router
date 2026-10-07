@@ -1,0 +1,93 @@
+{
+  "release": "/Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-onboarding-continuation",
+  "artifact_sha256": {
+    "install.sh": "a080f1e40563ac1f09468b2eac172e988445d5b75140877286175d82c318e6d9",
+    "SHA256SUMS": "697f2aff11831b657221367fd61ad5cc3e9b6e08a2733b5fdb547a41736e2113",
+    "aeep-bundle.tar.gz": "a5ac904aa84eaf010c42710e7d5b57639e0fc953bbface16eb2833d29fa63382"
+  },
+  "release_metadata": {
+    "tag": "v0.8.2",
+    "revision": "7732f6859674debf3c2d2ba97bfdba72607e20ab",
+    "source_dirty": true,
+    "wheel": "aeep_agent_router-0.8.2-py3-none-any.whl",
+    "python": "3.12.11",
+    "uv": "0.8.22",
+    "uv_targets": {
+      "darwin-arm64": "aarch64-apple-darwin",
+      "darwin-x86_64": "x86_64-apple-darwin",
+      "linux-aarch64": "aarch64-unknown-linux-gnu",
+      "linux-x86_64": "x86_64-unknown-linux-gnu"
+    },
+    "files": {
+      "finish_install.py": "0b75ffcd3a0170b9e106179482e9b592f727ad18678faf4b277ac12ece9a7982",
+      "requirements.txt": "e33ff5e4b32815ce2b4891ccc64c33300c83729f919b8f264aa3219e8533e884",
+      "aeep_agent_router-0.8.2-py3-none-any.whl": "f2e84945a225e4e523721b9722c6391c11c4d87da4f84fa942bcd1b8ac9df4a6"
+    }
+  },
+  "free_gib": 103.15465545654297,
+  "image_id": "sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48",
+  "image_tag": "mcr.microsoft.com/playwright:v1.61.1-noble",
+  "new_images_or_volumes": false,
+  "image_build_or_pull": false,
+  "containers_created": [
+    {
+      "id": "6d9e67d65ea8eccba1cfc10165ed28bc15ecf6ae2c334ba3e046e3279ab09231",
+      "name": "aeep-onboarding-linux-20261006",
+      "image_id": "sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "id": "c35c338e80b95159c8cca8daf5bcccb4f1ef74a8032932a8b0907cb66a879c73",
+      "name": "aeep-onboarding-linux-final-20261006",
+      "image_id": "sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48",
+      "status": "exited",
+      "exit_code": 0
+    },
+    {
+      "id": "0acf8a3e3d6110f342742b760bc43f5a1b68ce8ee0f23723804a907c33afbc78",
+      "name": "aeep-onboarding-linux-x86-20261006",
+      "image_id": "sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90",
+      "status": "exited",
+      "exit_code": 0
+    }
+  ],
+  "retained_root": "/tmp/aeep-onboarding-continuation",
+  "workspaces": [
+    "/tmp/aeep-onboarding-continuation/linux-final",
+    "/tmp/aeep-onboarding-continuation/recovery",
+    "/tmp/aeep-onboarding-continuation/codex",
+    "/tmp/aeep-onboarding-continuation/linux-x86",
+    "/tmp/aeep-onboarding-continuation/components",
+    "/tmp/aeep-onboarding-continuation/mac-final",
+    "/tmp/aeep-onboarding-continuation/macos-x86",
+    "/tmp/aeep-onboarding-continuation/linux",
+    "/tmp/aeep-onboarding-continuation/menu",
+    "/tmp/aeep-onboarding-continuation/native-marketplace",
+    "/tmp/aeep-onboarding-continuation/codex-final",
+    "/tmp/aeep-onboarding-continuation/codex-v2"
+  ],
+  "publication": "not performed",
+  "production_host_configuration": "unchanged",
+  "images_reused": [
+    {
+      "tag": "mcr.microsoft.com/playwright:v1.61.1-noble",
+      "image_id": "sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48",
+      "architecture": "arm64"
+    },
+    {
+      "tag": "ubuntu:24.04",
+      "repository_digest": "ubuntu@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90",
+      "platform_image_id": "sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90",
+      "architecture": "amd64 under emulation"
+    }
+  ],
+  "linux_package_inventory_sha256": "9704eef2d225c5cbf1dd263f5edd0caa687f524797ed0679d09229d25cb80f52",
+  "native_plugin": {
+    "source_revision": "7732f6859674debf3c2d2ba97bfdba72607e20ab",
+    "plugin_version": "0.8.1",
+    "home": "/private/tmp/aeep-onboarding-continuation/native-marketplace/home/.codex"
+  },
+  "preflight": "One auto-removed, read-only/no-network image preflight preceded retained containers; Docker event buffer did not retain its ID.",
+  "retained_size": "3.5G\t/tmp/aeep-onboarding-continuation"
+}

@@ -75,6 +75,8 @@ class HostBridge:
     async def handle(self, payload: dict[str, Any]) -> tuple[dict[str, Any], bool]:
         request_id = _request_id(payload)
         operation = payload.get("op")
+        if self.router._connection_guard is not None and operation in {'route', 'record'}:
+            self.router._connection_guard.require_tool('aeep_route_action' if operation == 'route' else 'aeep_record_outcome')
         if operation == "ping":
             _only(payload, {"id", "op"})
             result: dict[str, Any] = {"version": __version__}
@@ -167,10 +169,14 @@ def run_host_bridge(
     integration_id: str = _DEFAULT_HOST_INTEGRATION,
     max_input_bytes: int,
     max_output_bytes: int,
+    connection: Path | None = None,
 ) -> int:
     """Serve sequential bridge requests while retaining one event loop and Router."""
 
     router = Router.from_manifest(manifest)
+    if connection:
+        from .connections import bind_connection
+        bind_connection(router, connection)
     bridge = HostBridge(router, integration_id=integration_id)
     loop = asyncio.new_event_loop()
     try:

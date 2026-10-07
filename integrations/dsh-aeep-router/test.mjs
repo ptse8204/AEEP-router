@@ -126,6 +126,7 @@ test("campaign fixtures provide compact output without changing canonical contra
 
 test("persistent bridge multiplexes requests through one child", async () => {
   const program = `
+    if (!process.argv.includes('--connection') || !process.argv.includes('/reviewed/connection.json')) process.exit(2);
     if (!process.argv.includes('--integration-id') || !process.argv.includes('dsh-native-v2')) process.exit(2);
     let buffer = '';
     process.stdin.setEncoding('utf8');
@@ -141,7 +142,7 @@ test("persistent bridge multiplexes requests through one child", async () => {
       }
     });
   `;
-  const bridge = new BridgeClient({ ...config, aeepArgs: ["-e", program, "--"] });
+  const bridge = new BridgeClient({ ...config, connection: "/reviewed/connection.json", aeepArgs: ["-e", program, "--"] });
   assert.deepEqual(parseDecision(await bridge.request("route", { capability: "x", input: {} })), { decisionId: "d", executorId: "e" });
   await bridge.request("ping");
   assert.equal(bridge.spawnCount, 1);

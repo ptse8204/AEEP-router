@@ -1,0 +1,109 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.agent-connection.v1",
+      "default": "aeep.agent-connection.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "connection_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,80}$",
+      "title": "Connection Id",
+      "type": "string"
+    },
+    "host": {
+      "enum": [
+        "codex",
+        "claude",
+        "dsh",
+        "deepseek-api"
+      ],
+      "title": "Host",
+      "type": "string"
+    },
+    "project": {
+      "title": "Project",
+      "type": "string"
+    },
+    "manifest": {
+      "title": "Manifest",
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "allowed_tools": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "executor_fingerprints": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 256,
+      "title": "Executor Fingerprints",
+      "type": "object"
+    },
+    "host_configuration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host Configuration"
+    },
+    "host_entry": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host Entry"
+    },
+    "host_applied": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host Applied"
+    },
+    "pending_reload": {
+      "default": true,
+      "title": "Pending Reload",
+      "type": "boolean"
+    },
+    "owns_planning_skill": {
+      "default": false,
+      "title": "Owns Planning Skill",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "connection_id",
+    "host",
+    "project",
+    "manifest"
+  ],
+  "title": "AgentConnection",
+  "type": "object"
+}

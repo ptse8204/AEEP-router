@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: schema digests ignore object key order
+ok 1 - schema digests ignore object key order
+  ---
+  duration_ms: 2.366417
+  type: 'test'
+  ...
+# Subtest: legacy CLI transport remains measurable
+ok 2 - legacy CLI transport remains measurable
+  ---
+  duration_ms: 146.863
+  type: 'test'
+  ...
+# Subtest: action hints are exact bounded JSON
+ok 3 - action hints are exact bounded JSON
+  ---
+  duration_ms: 0.785667
+  type: 'test'
+  ...
+# Subtest: assembly exposes only admitted schemas and removes hidden guidance
+ok 4 - assembly exposes only admitted schemas and removes hidden guidance
+  ---
+  duration_ms: 0.231042
+  type: 'test'
+  ...
+# Subtest: invalid mappings and hidden baselines fail before registration
+ok 5 - invalid mappings and hidden baselines fail before registration
+  ---
+  duration_ms: 0.64
+  type: 'test'
+  ...
+# Subtest: transparent substitution still requires the exact output contract
+ok 6 - transparent substitution still requires the exact output contract
+  ---
+  duration_ms: 0.359
+  type: 'test'
+  ...
+# Subtest: read_url adapter preserves true HTTP facts and canonical shape
+ok 7 - read_url adapter preserves true HTTP facts and canonical shape
+  ---
+  duration_ms: 0.728333
+  type: 'test'
+  ...
+# Subtest: campaign fixtures provide compact output without changing canonical contracts
+ok 8 - campaign fixtures provide compact output without changing canonical contracts
+  ---
+  duration_ms: 0.915
+  type: 'test'
+  ...
+# Subtest: persistent bridge multiplexes requests through one child
+ok 9 - persistent bridge multiplexes requests through one child
+  ---
+  duration_ms: 140.781084
+  type: 'test'
+  ...
+# Subtest: a failed bridge request is not retried and a later request may restart
+ok 10 - a failed bridge request is not retried and a later request may restart
+  ---
+  duration_ms: 167.38725
+  type: 'test'
+  ...
+# Subtest: bridge record sends only bounded trusted telemetry fields
+ok 11 - bridge record sends only bounded trusted telemetry fields
+  ---
+  duration_ms: 0.6075
+  type: 'test'
+  ...
+# Subtest: legacy transport kills timeout and rejects oversized input
+ok 12 - legacy transport kills timeout and rejects oversized input
+  ---
+  duration_ms: 30.030708
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 706.521959

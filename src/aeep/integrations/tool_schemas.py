@@ -282,7 +282,8 @@ def stack_tools() -> list[dict[str, Any]]:
 def neutral_tools() -> list[dict[str, Any]]:
     """Return provider-neutral declarations (`name`, `description`, `schema`)."""
 
-    return deepcopy([*_BASE_TOOLS, *capability_tools(), *stack_tools()])
+    from ..recommendations import recommendation_tools
+    return deepcopy([*_BASE_TOOLS, *capability_tools(), *stack_tools(), *recommendation_tools()])
 
 
 def export_tools(format: ToolFormat, *, profile: str = 'legacy') -> list[dict[str, Any]]:

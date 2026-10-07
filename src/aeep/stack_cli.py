@@ -25,7 +25,7 @@ def emit(value: Any) -> None:
 
 
 @app.callback()
-def configure(ctx: typer.Context, manifest: Path = typer.Option(..., '--manifest', '-m')) -> None:
+def configure(ctx: typer.Context, manifest: Path | None = typer.Option(None, '--manifest', '-m')) -> None:
     router = Router.from_manifest(manifest)
     ctx.obj = StackService(router)
     ctx.call_on_close(lambda: asyncio.run(router.close()))
@@ -113,3 +113,56 @@ def define_recovery(ctx: typer.Context, definition: Path) -> None:
 @app.command()
 def reconcile(ctx: typer.Context, recovery: str, artifact: Path) -> None:
     emit(StackRuntime(ctx.obj).reconcile(recovery, json.loads(artifact.read_bytes())))
+
+
+@app.command('recommend')
+def recommend_command(ctx: typer.Context, goal: Path, json_output: bool = typer.Option(False, '--json')) -> None:
+    """Compare discovered options; goal contains public stages, never private task values."""
+    from .management_cli import show
+    from .recommendations import RecommendationRequest, recommend
+    show(asyncio.run(recommend(ctx.obj.router, RecommendationRequest.model_validate_json(goal.read_bytes()))), json_output)
+
+
+@app.command('recommendation')
+def show_recommendation(ctx: typer.Context, identity: str) -> None:
+    emit(ctx.obj.repository.get('stack_recommendation', identity))
+
+
+@setup_app.command('component')
+def component_setup(ctx: typer.Context, definition: Path,
+                    yes: bool = typer.Option(False, '--yes', '-y'),
+                    retry_failed: bool = False) -> None:
+    """Preview, review and install one pinned component; never admit or execute it."""
+    from .component_setup import ComponentSetup, apply, define
+    result = define(ctx.obj.router, ComponentSetup.model_validate_json(definition.read_bytes()))
+    emit(result)
+    if yes or typer.confirm('Review this exact setup and apply it?', default=False):
+        ctx.obj.repository.review(result['digest'])
+        emit(apply(ctx.obj.router, result['digest'], retry_failed=retry_failed))
+
+
+@setup_app.command('guided')
+def guided_setup(ctx: typer.Context, candidate: str, connection: str = typer.Option(...)) -> None:
+    """Configure a discovered candidate without writing a definition file by hand."""
+    from .component_setup import ComponentSetup, apply, define
+    item = ctx.obj.router.store.get_registry_candidate(candidate)
+    if item is None:
+        raise typer.BadParameter('unknown candidate; run aeep discover first')
+    emit({'candidate': item.name, 'description': item.description, 'provenance': item.provenance,
+          'warning': 'Metadata is untrusted. Review package identity and hook effects before installation.'})
+    kind = typer.prompt('Setup type (npm, python, https-mcp, marketplace)')
+    package = typer.prompt('Exact package name, repository URL, or HTTPS MCP endpoint')
+    values = dict(connection_id=connection, candidate_id=candidate, candidate_digest=item.raw_metadata_digest,
+                  kind=kind, package=package)
+    if kind != 'https-mcp':
+        values['version'] = typer.prompt('Exact Git commit' if kind == 'marketplace' else 'Exact package version')
+    if kind == 'marketplace':
+        values['plugin'] = typer.prompt('Plugin name', default=item.name)
+        values['marketplace'] = typer.prompt('Marketplace name', default=str(item.provenance.get('marketplace', '')))
+    elif kind in {'npm', 'python'}:
+        values['executable'] = typer.prompt('Installed executable name')
+    result = define(ctx.obj.router, ComponentSetup.model_validate(values))
+    emit(result)
+    if typer.confirm('Review this exact setup and apply it?', default=False):
+        ctx.obj.repository.review(result['digest'])
+        emit(apply(ctx.obj.router, result['digest']))

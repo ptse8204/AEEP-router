@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/component_setup.py", line 90, in _run
+    subprocess.run(argv, cwd=cwd, check=True, timeout=300, stdin=subprocess.DEVNULL,
+  File "/private/tmp/aeep-onboarding-continuation/mac-final/home/data/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/edwintse/.local/bin/codex', 'plugin', 'marketplace', 'add', '/private/tmp/aeep-onboarding-continuation/native-marketplace/home/aeep/packages/ac5c69007c802afe41730a26af79b2ea3701f9ca2d4873253686c6e4b9d86b4a/repository']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-agent-router/reports/v08/onboarding-continuation-20261006/native-marketplace-probe.py", line 34, in <module>
+    installed=apply(router,preview['digest'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/component_setup.py", line 244, in apply
+    _run([host, 'plugin', 'marketplace', 'add', native_source, *scope], Path(connection.project))
+  File "/tmp/aeep-onboarding-continuation/mac-final/home/data/venv/lib/python3.12/site-packages/aeep/component_setup.py", line 93, in _run
+    raise ConfigurationError('component setup command failed; inspect package state before explicitly retrying') from exc
+aeep.errors.ConfigurationError: component setup command failed; inspect package state before explicitly retrying

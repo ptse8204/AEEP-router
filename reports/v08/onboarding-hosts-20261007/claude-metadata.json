@@ -1,0 +1,43 @@
+{
+  "name": "@anthropic-ai/claude-code",
+  "version": "2.1.292",
+  "bin": {
+    "claude": "bin/claude.exe"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {},
+  "optionalDependencies": {
+    "@anthropic-ai/claude-code-linux-x64": "2.1.292",
+    "@anthropic-ai/claude-code-win32-x64": "2.1.292",
+    "@anthropic-ai/claude-code-darwin-x64": "2.1.292",
+    "@anthropic-ai/claude-code-linux-arm64": "2.1.292",
+    "@anthropic-ai/claude-code-win32-arm64": "2.1.292",
+    "@anthropic-ai/claude-code-darwin-arm64": "2.1.292",
+    "@anthropic-ai/claude-code-linux-x64-musl": "2.1.292",
+    "@anthropic-ai/claude-code-linux-arm64-musl": "2.1.292"
+  },
+  "peerDependencies": null,
+  "scripts": {
+    "prepare": "node -e \"if (!process.env.AUTHORIZED) { console.error('ERROR: Direct publishing is not allowed.\\nPlease see the release workflow documentation to publish this package.'); process.exit(1); }\"",
+    "postinstall": "node install.cjs"
+  },
+  "dist": {
+    "shasum": "ecf88deee4c6b1b099d14a8571f1d5cad2ff1897",
+    "tarball": "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.292.tgz",
+    "fileCount": 7,
+    "integrity": "sha512-ptT9UcOsyR2VLNgfHgF87To8B7tCrZktIpYC4dEGt+9MG42NAWsljEGBZ3spdHcJ2akednszESVNti7hWxZrJg==",
+    "signatures": [
+      {
+        "sig": "MEUCIFtNUeOJXlceFmOE19MHWZhjUy7LcoHxsfzfAeAG8ChLAiEAxs8HK9MMRQjCFRzCpe/r868wwqnRy/FLgQvWyd3JSKQ=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "sig": "MEUCIEjqVNSi6YIKyWA9tjfSlJChiRjpRScul1frPK9k7GKJAiEAwg2JeNCgU4bC2dw1zvEXVBPgG13iSL5fw9f7xQ2K8G0=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "unpackedSize": 188525
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated Codex App Server, no model request, no sign-in or existing auth state",
+  "binary": "/Users/edwintse/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+  "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "version": "codex-cli 0.154.0",
+  "workspace": "/private/tmp/aeep-onboarding-continuation/codex-final",
+  "checks": [
+    "two actual host connections expose different inventories",
+    "actual Codex tool call succeeds before revocation",
+    "cached host declaration cannot bypass live AEEP revocation",
+    "native disabled_tools and AEEP denial both survive host reload",
+    "restoring alpha leaves beta denial intact",
+    "disconnected entries absent after host reload"
+  ],
+  "initial_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_discovery_status",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "revocation_error": {
+    "code": -32602,
+    "message": "Unknown tool: aeep_discovery_status"
+  },
+  "filtered_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "restored_inventory": {
+    "aeep_alpha": [
+      "aeep_discover_resources",
+      "aeep_discovery_status",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ],
+    "aeep_beta": [
+      "aeep_discover_resources",
+      "aeep_list_capabilities",
+      "aeep_lookup_capability",
+      "aeep_route_action",
+      "aeep_stack_inspect",
+      "aeep_stack_optimize",
+      "aeep_stack_preflight",
+      "aeep_stack_propose",
+      "aeep_stack_recommend"
+    ]
+  },
+  "status": "passed"
+}

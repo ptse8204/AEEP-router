@@ -1,0 +1,29 @@
+name: Installer acceptance (no publication)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install '.[dev]' 'uv==0.8.22'
+      - run: python scripts/build_installer.py --uv "$(command -v uv)" --tag v0.8.2 --output "$RUNNER_TEMP/aeep-release"
+      - run: python scripts/check_installer.py --release "$RUNNER_TEMP/aeep-release" --workspace "$RUNNER_TEMP/aeep-installer-check"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: installer-${{ matrix.os }}
+          path: |
+            ${{ runner.temp }}/aeep-release/install.sh
+            ${{ runner.temp }}/aeep-release/aeep-bundle.tar.gz
+            ${{ runner.temp }}/aeep-release/SHA256SUMS
+            ${{ runner.temp }}/aeep-installer-check/result.json

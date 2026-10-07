@@ -1,6 +1,6 @@
 # AEEP legacy router compatibility
 
-Revision: `db0d854215e227ab003b584b18a6cc3408c2eb83`
+Revision: `7732f6859674debf3c2d2ba97bfdba72607e20ab`
 Release ready: `true`
 
 | Check | Profile | Status |

@@ -1,0 +1,257 @@
+{
+  "status": "passed",
+  "workspace": "/private/tmp/aeep-onboarding-continuation/menu",
+  "checks": [
+    "interactive setup",
+    "add local marketplace from menu",
+    "deny from menu",
+    "explain denied access",
+    "restore from menu",
+    "check setup from menu"
+  ],
+  "human_usability": "unverified; scripted terminal interaction",
+  "denied": {
+    "connection": "deepseek-api",
+    "host": "deepseek-api",
+    "project": "/private/tmp/aeep-onboarding-continuation/menu/project",
+    "connection_state": "configured",
+    "native_controls": [],
+    "tools": [
+      {
+        "name": "aeep_list_capabilities",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_route_action",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_execute_action",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_record_outcome",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_estimate_route_prices",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_request_quotes",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_get_metrics",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_prepared_decision",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_quote",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_settlement",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_discover_resources",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_lookup_capability",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_propose",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_inspect",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_optimize",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_preflight",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_discovery_status",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_recommend",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      }
+    ],
+    "executors": [
+      {
+        "name": "builtin.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      },
+      {
+        "name": "cli.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      },
+      {
+        "name": "host.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      }
+    ],
+    "host_exposure": "pending reload; unverified",
+    "unmanaged_alternative_access": "unknown; use aeep agents inspect",
+    "skills_and_hooks": "host controls; loaded instructions require a new session"
+  },
+  "restored": {
+    "connection": "deepseek-api",
+    "host": "deepseek-api",
+    "project": "/private/tmp/aeep-onboarding-continuation/menu/project",
+    "connection_state": "configured",
+    "native_controls": [],
+    "tools": [
+      {
+        "name": "aeep_list_capabilities",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_route_action",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_execute_action",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_record_outcome",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_estimate_route_prices",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_request_quotes",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_get_metrics",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_prepared_decision",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_quote",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_show_settlement",
+        "visible_in_aeep": false,
+        "call_allowed_by_connection": false
+      },
+      {
+        "name": "aeep_discover_resources",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_lookup_capability",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_propose",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_inspect",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_optimize",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_preflight",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_discovery_status",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      },
+      {
+        "name": "aeep_stack_recommend",
+        "visible_in_aeep": true,
+        "call_allowed_by_connection": true
+      }
+    ],
+    "executors": [
+      {
+        "name": "builtin.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      },
+      {
+        "name": "cli.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      },
+      {
+        "name": "host.text-stats",
+        "registered": true,
+        "allowed_by_connection": false,
+        "execution_authority": "subject to existing policy, reviews, scope and runtime approval"
+      }
+    ],
+    "host_exposure": "pending reload; unverified",
+    "unmanaged_alternative_access": "unknown; use aeep agents inspect",
+    "skills_and_hooks": "host controls; loaded instructions require a new session"
+  }
+}
