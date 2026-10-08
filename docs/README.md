@@ -110,7 +110,7 @@ Follow the [V2 checkpoint state](aeep-toolkit/STATE.md) for the evaluation-focus
 rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
 These development records do not establish live benefit or release readiness.
 
-- [Toolkit installation preview](aeep-toolkit/PREVIEW.md): inspect selected dependencies and blockers without installation.
+- [Toolkit installation preview and doctor](aeep-toolkit/PREVIEW.md): inspect proposed dependencies and read project connection metadata without starting services.
 - [Toolkit architecture decision](aeep-toolkit/ARCHITECTURE_LOCK.md): upstream component assignments, confirmed delivery and actual integration boundaries.
 - [Original handoff audit](aeep-toolkit/HANDOFF_AUDIT.md): ZIP omissions, implementation gaps and corrected research status.
 

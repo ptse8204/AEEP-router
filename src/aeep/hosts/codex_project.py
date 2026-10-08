@@ -34,7 +34,7 @@ def _read(path: Path) -> bytes | None:
     if not hasattr(os, "O_NOFOLLOW"):
         raise ConfigurationError("project configuration requires macOS or Linux/WSL")
     try:
-        descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+        descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     except FileNotFoundError:
         return None
     except OSError as exc:

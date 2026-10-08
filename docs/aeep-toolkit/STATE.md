@@ -401,3 +401,36 @@ Homebrew Python lacks the project dependencies. No package was installed to fix
 that PATH mismatch. The upstream runtime remains the approved private `rebuild`
 environment. Temporary initial bridge runs remain under
 `/tmp/aeep-toolkit-receipt-demo-01` and `-02`; no live calls or grant changes ran.
+
+
+### Continuation: read-only project doctor
+
+C01 reconciliation is committed as `1eb11cd`; the C04 receipt bridge as `67cc2cf`;
+its POSIX CI inclusion as `9a3eab8`. Continuing safe work, C03 now adds
+`aeep-toolkit doctor --host ... --project ...`, reusing `onboarding.inventory`
+without calling the state-creating `check_setup`. Twelve new cases cover existing
+host formats, secret exclusion, malformed metadata, missing projects and zero
+process/network/store effects; the full focused toolkit suite passes 62 cases.
+Configured/enabled facts remain distinct from unknown installation, exposure and
+qualification. C03 is still IN_PROGRESS.
+
+The first validation driver's ordinary run passed 1,343 tests. Its coverage began
+before the doctor change and is superseded as a final-tree result. Preserve its
+logs and source-change record; do not claim whole-tree stability. Final validation
+will run on the completed doctor and receipt bridge together. During that first
+run, the standalone receipt reader/template also received metadata hardening and
+explicit artifact links; its 18 dedicated checks and fresh actual upstream run
+at `reports/toolkit-v2/receipt-showcase-verified` passed on the final bridge source.
+
+The loopback preview now serves that verified report only in session 18321 at
+`http://127.0.0.1:8765/`; earlier owned preview processes were stopped. Existing
+Docker image IDs were inspected read-only for future reuse; no image was built,
+pulled, run or removed. See `existing-worker-inventory.json` in the bridge checks.
+
+
+The first bridge driver's two legacy suites both finished (1,343 passes, 21 skips),
+but its coverage/source snapshot is superseded because safe doctor development
+continued during it. `source-stability.json` records the drift. The final combined
+validation is separate under `reports/toolkit-v2/c03/doctor-validation`; never
+substitute the earlier coverage for the final source. No source changes are
+planned during the replacement run.

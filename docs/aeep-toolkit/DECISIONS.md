@@ -168,3 +168,25 @@ The finite regression review covers failed and timed-out coordinator processes,
 receipt/artifact drift, both arms, independent verification, and synthetic-only
 normalization. Existing test-definition delegation applies. No grant, historical
 receipt, candidate package, host setting or live budget is changed.
+
+### D23: 2026-10-08, reuse onboarding's read-only inventory for toolkit doctor
+
+The existing `onboarding.inventory` already reads project connection metadata
+without starting services. Reuse it for `aeep-toolkit doctor`; do not call
+`check_setup`, which constructs Router/store instances. Return only bounded names,
+configuration/enabled facts and explicit unknown installation, live exposure and
+qualification states. A digest of the sanitized observation is provenance for
+that view, not proof of installed package integrity. This implements one C03/C06
+diagnostic step without new dependencies, host configuration writes or authority.
+
+Finite checks cover each existing host format, disabled and malformed entries,
+secret-field exclusion, missing configurations, and absence of process/network/
+store effects. They use the existing test-definition delegation.
+
+The inventory path exposed a blocking FIFO open in the shared project-config
+reader. Add `O_NONBLOCK` before its existing regular-file/hard-link/size checks;
+all callers retain their validation and regular-file behavior. The new diagnostic
+translates legacy configuration errors into a bounded CLI error and remains
+explicitly unsupported where `O_NOFOLLOW` is unavailable. A real named-pipe and
+symlink check covers refusal without reading their content. Historical host
+bindings are not requalified by this change.

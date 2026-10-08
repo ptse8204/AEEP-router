@@ -3927,3 +3927,13 @@ model measurements stay unavailable. General adapter dispatch, per-trial worker
 receipts, C03-C13 acceptance and live/release gates remain open. Existing experiment
 evidence and the unrelated original-checkout changes are preserved. See
 [STATE.md](../../docs/aeep-toolkit/STATE.md) for current verification progress.
+
+
+The continuation adds a read-only toolkit doctor through existing onboarding
+inventory. Twelve focused cases cover the four host formats, missing/malformed
+metadata, secret exclusion and absence of service effects. The shared project
+configuration reader now opens nonblocking before rejecting non-regular files,
+so a named pipe cannot hang inventory; normal file validation is preserved.
+The first bridge coverage run is superseded after this source change. Combined
+final checks live in `reports/toolkit-v2/c03/doctor-validation`. Historical host
+and live experiment bindings remain unchanged and are not requalified here.

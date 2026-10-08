@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import stat
@@ -34,6 +35,37 @@ def read_json(path: Path) -> Any:
     return json.loads(raw)
 
 
+def doctor(host: str, project: Path) -> dict[str, Any]:
+    if host not in {'codex', 'claude', 'dsh', 'deepseek-api'}:
+        raise ValueError('unsupported host')
+    # check_setup initializes Router/store state; inventory only reads configuration.
+    from aeep.errors import ConfigurationError
+    from aeep.onboarding import inventory
+
+    project = project.resolve(strict=True)
+    if not project.is_dir():
+        raise ValueError('doctor requires a project directory')
+    try:
+        observed = inventory(host, project)
+    except (AttributeError, ConfigurationError) as exc:
+        raise ValueError('invalid host inventory') from exc
+    if len(observed) > 256:
+        raise ValueError('host inventory exceeds the bounded view')
+    connections = []
+    for item in observed:
+        name = item.get('name')
+        if not isinstance(name, str) or not 0 < len(name) <= 200 or not name.isprintable():
+            raise ValueError('invalid connection name')
+        connections.append({'name': name, 'configured': True,
+                            'enabled_in_configuration': item.get('enabled') if type(item.get('enabled')) is bool else None,
+                            'installed': None, 'live_exposure': None, 'qualified': None})
+    facts = {'host': host, 'project': str(project), 'connections': connections,
+             'source': 'aeep.onboarding.inventory', 'status': 'configuration_only'}
+    return {**facts, 'observation_sha256': hashlib.sha256(
+        json.dumps(facts, sort_keys=True, separators=(',', ':')).encode()).hexdigest(),
+        'notice': 'Configuration only: no host process, network probe, authentication check or qualification ran. A configured connection does not prove installation or effective access.'}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog='aeep-toolkit')
     sub = parser.add_subparsers(dest='command', required=True)
@@ -45,8 +77,14 @@ def main(argv: list[str] | None = None) -> int:
             command.add_argument('--select', action='append', default=[])
             command.add_argument('--policy', type=Path, required=True)
             command.add_argument('--observations', type=Path)
+    diagnostic = sub.add_parser('doctor', help='Read project connection metadata without starting services')
+    diagnostic.add_argument('--host', choices=('codex', 'claude', 'dsh', 'deepseek-api'), required=True)
+    diagnostic.add_argument('--project', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'doctor':
+            print(json.dumps(doctor(args.host, args.project), indent=2))
+            return 0
         registry = ExtensionRegistry.model_validate(read_json(args.registry)) if args.registry else ExtensionRegistry(extensions=())
         if args.command == 'list':
             roles = PROFILES[args.profile]['roles']
@@ -63,6 +101,8 @@ def main(argv: list[str] | None = None) -> int:
         print(result.model_dump_json(indent=2))
         return 2 if result.blockers else 0
     except (OSError, ValueError, TypeError, KeyError, ValidationError):
+        if args.command == 'doctor':
+            parser.exit(2, 'Cannot inspect project inventory; use macOS/Linux/WSL and valid regular project configuration files.\n')
         # Parse errors can contain secret-bearing user values; do not echo them.
         parser.exit(2, 'Cannot read or validate toolkit metadata; check the supplied files and schemas.\n')
 

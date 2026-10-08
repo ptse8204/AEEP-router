@@ -1,8 +1,8 @@
 # Review a proposed toolkit installation
 
 Preview the components and permissions before changing your machine. The toolkit
-now lists three profiles and checks explicitly selected artifact manifests. It
-performs no installation, network lookup, host configuration read or activation.
+now lists three profiles and checks explicitly selected artifact manifests. The list/plan commands
+perform no installation, network lookup, host configuration read or activation.
 
 Run from the source checkout without installing a package:
 
@@ -50,3 +50,22 @@ as shown to suppress interpreter bytecode-cache writes as well.
 
 The preview fixture under `tests/fixtures/toolkit` is synthetic software evidence.
 It does not establish installation readiness for any real evaluator.
+
+
+## Inspect project connection configuration
+
+```bash
+PYTHONPATH=src python3 -B -m aeep_toolkit doctor --host codex --project /path/to/project
+```
+
+On macOS or Linux/WSL, choose `codex`, `claude`, `dsh` or `deepseek-api`. The command reuses the existing
+onboarding inventory and returns bounded connection names and configuration
+states. It starts no Router, database, host process or network probe. Environment
+values, commands and credentials are excluded. Missing configurations are reported
+as an empty observation; no directory or configuration is created.
+
+`configured` and `enabled_in_configuration` describe the file that was read.
+`installed`, `live_exposure` and `qualified` remain unknown. The observation hash
+binds the sanitized view; it does not authenticate installed binaries or turn this
+view into an installation permission. The general package inventory and reviewed
+installer bridge remain unfinished.
