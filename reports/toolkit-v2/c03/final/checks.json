@@ -1,0 +1,140 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.07182879210449755,
+    "log": "reports/toolkit-v2/c03/final/check-01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.0290897090453655,
+    "log": "reports/toolkit-v2/c03/final/check-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 633.3336146669462,
+    "log": "reports/toolkit-v2/c03/final/check-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 927.7438597499859,
+    "log": "reports/toolkit-v2/c03/final/check-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0,
+    "seconds": 1.405707333004102,
+    "log": "reports/toolkit-v2/c03/final/check-05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c03/final/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 1.854097707895562,
+    "log": "reports/toolkit-v2/c03/final/check-06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c03/final/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04033729201182723,
+    "log": "reports/toolkit-v2/c03/final/check-07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c03/final/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.03951624990440905,
+    "log": "reports/toolkit-v2/c03/final/check-08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.2105186248663813,
+    "log": "reports/toolkit-v2/c03/final/check-09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5834623749833554,
+    "log": "reports/toolkit-v2/c03/final/check-10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.17737858393229544,
+    "log": "reports/toolkit-v2/c03/final/check-11.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "build",
+      "--no-isolation",
+      "--outdir",
+      "/tmp/aeep-toolkit-v2-c03-final-dist"
+    ],
+    "exit_code": 0,
+    "seconds": 2.066879249876365,
+    "log": "reports/toolkit-v2/c03/final/check-12.log"
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "evidence_kind": "synthetic",
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "-B",
+    "-m",
+    "aeep_toolkit",
+    "plan",
+    "essentials",
+    "--registry",
+    "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-toolkit-c03-snapshot-0gazi0fq/registry.json",
+    "--policy",
+    "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-toolkit-c03-snapshot-0gazi0fq/policy.json",
+    "--select",
+    "engine"
+  ],
+  "exit_code": 0,
+  "before": {
+    "policy.json": {
+      "kind": "file",
+      "sha256": "091e3c3529ab004e3902dd36600a4472c3815a58bdba4b078be3a7fec1eeb657"
+    },
+    "protected": {
+      "kind": "directory"
+    },
+    "protected/auth.json": {
+      "kind": "file",
+      "sha256": "74fcc97465c449e197055034772d222393e4b273e297a78c7bd8f5e5581e43c5"
+    },
+    "registry.json": {
+      "kind": "file",
+      "sha256": "381216e3c8aa8b70e61d94a8ef97614b160db661a3786f967c253ab4abe5343d"
+    }
+  },
+  "after": {
+    "policy.json": {
+      "kind": "file",
+      "sha256": "091e3c3529ab004e3902dd36600a4472c3815a58bdba4b078be3a7fec1eeb657"
+    },
+    "protected": {
+      "kind": "directory"
+    },
+    "protected/auth.json": {
+      "kind": "file",
+      "sha256": "74fcc97465c449e197055034772d222393e4b273e297a78c7bd8f5e5581e43c5"
+    },
+    "registry.json": {
+      "kind": "file",
+      "sha256": "381216e3c8aa8b70e61d94a8ef97614b160db661a3786f967c253ab4abe5343d"
+    }
+  },
+  "unchanged": true,
+  "configuration_created": false,
+  "canary_in_output": false,
+  "fixture_directory_removed_on_exit": true,
+  "scope": "Explicit temporary fixture tree, including synthetic host configuration. Does not attest whole-host sandboxing."
+}
