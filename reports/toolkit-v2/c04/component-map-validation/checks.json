@@ -1,0 +1,81 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.06,
+    "log": "reports/toolkit-v2/c04/component-map-validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.98,
+    "log": "reports/toolkit-v2/c04/component-map-validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 639.38,
+    "log": "reports/toolkit-v2/c04/component-map-validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 918.77,
+    "log": "reports/toolkit-v2/c04/component-map-validation/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.33,
+    "log": "reports/toolkit-v2/c04/component-map-validation/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/tmp/aeep-toolkit-v2-component-map-coverage.json"
+    ],
+    "returncode": 0,
+    "log": "reports/toolkit-v2/c04/component-map-validation/critical.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/tmp/aeep-toolkit-v2-component-map-coverage.json"
+    ],
+    "returncode": 0,
+    "log": "reports/toolkit-v2/c04/component-map-validation/assessment.log"
+  }
+]

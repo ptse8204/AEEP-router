@@ -25,8 +25,8 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '75d1961'
-last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-c03-final.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
+last_verified_commit: '9bccd94'
+last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-component-map.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1343 passed, 21 skipped; 81.50% combined coverage; both required branch gates and all 12 final quality/build commands passed. Separate stack checks: 10 passed plus fresh upstream fixture execution.'
 next_action: 'Use integrations/toolkit as the executable development foundation. Connect the qualified fixture artifact path to the general EvaluatorAdapter and existing controlled-worker/receipt boundary; continue C03-C06 acceptance without claiming the demo completes them.'
 blocked_actions: []
@@ -328,3 +328,14 @@ ToolHive remains the optional MCP isolation component; it is not replaced by the
 existing comparative-trial workers. The runtime remains fixture-only, with the
 same unfinished C03-C13 gates. No additional optional package was installed by
 this clarification.
+
+The component-map implementation is committed as `9bccd94`. Its ten dedicated
+tests and repeated actual upstream synthetic run passed. All five required
+repository checks passed again; ordinary and coverage runs each recorded 1,343
+passes, 21 skips and the existing Starlette warning. Combined coverage remains
+81.50%; both branch-coverage gates passed. That percentage covers the configured
+core packages, not the standalone development integration. Source hashes stayed
+unchanged during verification. Exact commands and scope are in
+[the correction review](../../reports/toolkit-v2/c04/component-map-review.json)
+and its linked logs. No validation process remains running. The loopback report
+preview remains available; all outstanding C03-C13 gates remain open.

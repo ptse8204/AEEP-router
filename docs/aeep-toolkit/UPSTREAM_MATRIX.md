@@ -97,3 +97,15 @@ outputs before presenting success. Source, package and output hashes are in
 [the C04 summary](../../reports/toolkit-v2/c04/stack-summary.json). This qualifies
 the fixed local engineering demo only. Controlled real-host dispatch, general
 normalization, canonical accounting and comparative model value remain unqualified.
+
+## Operator-restated integration scope
+
+D20 records the operator's 14 component assignments in
+[the architecture map](ARCHITECTURE_LOCK.md#operator-specified-component-map).
+The C01 table's DEFER entries describe the initial evaluator selection; they do
+not remove those optional integrations from the implementation plan. Waza,
+SkillRank core, the MCP benchmark packs, ToolHive, observability and workflow
+adapters remain separate targets with unfinished compatibility checks.
+GitHub Sponsors is the initial external developer-support mechanism; no local
+payment service is required. A developer-specific link still needs attributable
+source evidence before the report offers it.

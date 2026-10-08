@@ -3895,3 +3895,6 @@ status. Optional components remain separately selectable implementation targets;
 catalog entries are not working adapters. This correction adds no live evidence
 or new qualified backend. See the
 [component-map review](../toolkit-v2/c04/component-map-review.json).
+The correction at `9bccd94` passed all five required checks: both full runs
+recorded 1,343 passes and 21 skips, with 81.50% combined coverage and both required
+branch gates passing. The standalone stack's ten checks passed separately.
