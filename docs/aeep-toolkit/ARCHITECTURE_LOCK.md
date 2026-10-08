@@ -9,11 +9,42 @@ reference, previews setup and trial expenses, runs an authorized comparison, and
 writes a private HTML/Markdown report. The report must be useful when the result
 is no benefit, a regression or insufficient evidence.
 
+## Operator-specified component map
+
+The operator restated these 14 assignments. They govern component selection and
+must not be collapsed into a generic extension list. Optional means selectively
+installed and qualified, not automatically outside the implementation scope.
+The local fake-harness demonstration covers only part of the primary engine row.
+
+| Function | Preferred solution | Implementation responsibility |
+|---|---|---|
+| Primary evaluation engine | agent-skill-eval | Test first; verify Codex integration and isolation |
+| Evaluation fallback | Existing AEEP BenchmarkRunner | Reuse if external evaluators fail requirements |
+| Additional evaluation | Microsoft Waza | Optional extension |
+| Skill discovery and evaluation | SkillRank core | Optional integration; verify licensing |
+| MCP benchmarking | MCPMark, MCP-Universe | Optional benchmark packs |
+| Security scanning | Cisco Skill Scanner | Optional security extension |
+| MCP isolation | ToolHive | Optional execution extension |
+| Telemetry | OpenTelemetry + existing AEEP instrumentation | Reuse existing code |
+| Advanced observability | Langfuse or Phoenix | Optional extension |
+| Workflow execution | LangGraph | Optional orchestration |
+| Workflow generation | EvoAgentX | Optional architecture proposer |
+| Workflow optimization | AFlow | Optional optimizer |
+| Routing | Existing AEEP Router | Preserve as optional extension |
+| Developer compensation | GitHub Sponsors | Initial external support mechanism |
+
+ToolHive's MCP isolation and AEEP's paired-trial worker isolation are separate
+responsibilities. GitHub Sponsors is an external support link after developer
+identity is verified; it does not require an AEEP payout service. Source review
+and catalog presence are not working integrations. The executable manifest and
+showcase expose an actual status for each row.
+
 ## First delivery stack
 
-These are implementation choices under D13, D16 and D18. Only the CLI delivery
-choice has separate operator confirmation. Upstream runtime compatibility remains
-unverified; the table describes the target stack rather than completed features.
+The operator selected the component assignments above and local CLI/report
+delivery. The boundaries below implement those choices under D13, D16, D18 and
+D20. Upstream real-host compatibility remains unverified; the table describes
+the target stack rather than completed features.
 
 | Layer | Software and responsibility | Implementation boundary |
 |---|---|---|

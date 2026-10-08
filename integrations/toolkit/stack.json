@@ -87,7 +87,94 @@
       "LangGraph",
       "EvoAgentX / AFlow",
       "Microsoft Agent Framework",
-      "AEEP Router / StackRuntime"
+      "AEEP Router / StackRuntime",
+      "GitHub Sponsors (external developer support link)"
     ]
-  }
+  },
+  "recommended_components": [
+    {
+      "function": "Primary evaluation engine",
+      "preferred_solution": "agent-skill-eval",
+      "responsibility": "Test first; verify Codex integration and isolation",
+      "status": "Synthetic CLI verified; Codex and isolation unverified"
+    },
+    {
+      "function": "Evaluation fallback",
+      "preferred_solution": "Existing AEEP BenchmarkRunner",
+      "responsibility": "Reuse if external evaluators fail requirements",
+      "status": "Legacy implementation preserved; V2 bridge unfinished"
+    },
+    {
+      "function": "Additional evaluation",
+      "preferred_solution": "Microsoft Waza",
+      "responsibility": "Optional extension",
+      "status": "Source reviewed; V2 adapter absent"
+    },
+    {
+      "function": "Skill discovery and evaluation",
+      "preferred_solution": "SkillRank core",
+      "responsibility": "Optional integration; verify licensing",
+      "status": "Source reviewed; V2 adapter and license closure unfinished"
+    },
+    {
+      "function": "MCP benchmarking",
+      "preferred_solution": "MCPMark, MCP-Universe",
+      "responsibility": "Optional benchmark packs",
+      "status": "Source reviewed; packs not integrated"
+    },
+    {
+      "function": "Security scanning",
+      "preferred_solution": "Cisco Skill Scanner",
+      "responsibility": "Optional security extension",
+      "status": "Source reviewed; scanner not integrated"
+    },
+    {
+      "function": "MCP isolation",
+      "preferred_solution": "ToolHive",
+      "responsibility": "Optional execution extension",
+      "status": "Source reviewed; MCP runtime not integrated"
+    },
+    {
+      "function": "Telemetry",
+      "preferred_solution": "OpenTelemetry + existing AEEP instrumentation",
+      "responsibility": "Reuse existing code",
+      "status": "Existing implementation; not connected to this demo"
+    },
+    {
+      "function": "Advanced observability",
+      "preferred_solution": "Langfuse or Phoenix",
+      "responsibility": "Optional extension",
+      "status": "Source reviewed; exporters not integrated"
+    },
+    {
+      "function": "Workflow execution",
+      "preferred_solution": "LangGraph",
+      "responsibility": "Optional orchestration",
+      "status": "Source reviewed; workflow adapter absent"
+    },
+    {
+      "function": "Workflow generation",
+      "preferred_solution": "EvoAgentX",
+      "responsibility": "Optional architecture proposer",
+      "status": "Source reviewed; proposer adapter absent"
+    },
+    {
+      "function": "Workflow optimization",
+      "preferred_solution": "AFlow",
+      "responsibility": "Optional optimizer",
+      "status": "Source reviewed; optimizer adapter absent"
+    },
+    {
+      "function": "Routing",
+      "preferred_solution": "Existing AEEP Router",
+      "responsibility": "Preserve as optional extension",
+      "status": "Legacy implementation preserved; V2 extension unfinished"
+    },
+    {
+      "function": "Developer compensation",
+      "preferred_solution": "GitHub Sponsors",
+      "responsibility": "Initial external support mechanism",
+      "status": "Support-link integration and developer verification unfinished"
+    }
+  ]
 }

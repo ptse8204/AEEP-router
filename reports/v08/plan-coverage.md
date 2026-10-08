@@ -3888,3 +3888,10 @@ the bridge rejects incomplete runs. This is an executable development stack,
 not passed Docker-host conformance, canonical receipt integration or live value.
 C03's full ordinary and coverage suites each passed 1,343 tests with 21 skips;
 combined coverage was 81.50%, with both required branch gates passing.
+
+The operator's 14 component assignments now appear individually in the V2 stack
+manifest and showcase, including GitHub Sponsors. Each has its actual integration
+status. Optional components remain separately selectable implementation targets;
+catalog entries are not working adapters. This correction adds no live evidence
+or new qualified backend. See the
+[component-map review](../toolkit-v2/c04/component-map-review.json).

@@ -94,6 +94,10 @@ class StackTests(unittest.TestCase):
         stack.report(output, stack.manifest(), {"versions": {"agent-skill-eval": "0.7.0"}}, stack.collect(self.root), {})
         self.assertEqual(stack.read(output / "evidence.json")["outcome"], "NOT_ASSESSED")
         self.assertIn("synthetic", (output / "index.html").read_text().lower())
+        components = stack.manifest()["recommended_components"]
+        self.assertEqual(len(components), 14)
+        self.assertIn("GitHub Sponsors", (output / "index.html").read_text())
+        self.assertTrue(all(item["preferred_solution"] in (output / "index.html").read_text() for item in components))
         for name, expected in stack.read(output / "artifact-hashes.json").items():
             self.assertEqual(stack.digest(output / name), expected)
 

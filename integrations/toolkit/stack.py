@@ -200,6 +200,10 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
     (output / "report.md").write_text("\n".join(markdown) + "\n")
     template = (BASE / "report.html").read_text()
     page = template.replace("{{ROWS}}", "".join(table)).replace("{{PACKAGES}}", str(len(facts["versions"])))
+    components = "".join("<tr>" + "".join(f"<td>{html.escape(item[key])}</td>" for key in
+                                         ("function", "preferred_solution", "responsibility", "status")) + "</tr>"
+                         for item in stack["recommended_components"])
+    page = page.replace("{{COMPONENTS}}", components)
     page = page.replace("{{REVISION}}", html.escape(stack["evaluator"]["source_revision"]))
     (output / "index.html").write_text(page)
     artifacts = {str(p.relative_to(output)): digest(p) for p in sorted(output.rglob("*")) if p.is_file()}

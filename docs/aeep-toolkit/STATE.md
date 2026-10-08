@@ -316,3 +316,15 @@ only `reports/toolkit-v2/stack-showcase`. Its browser tab is marked as a deliver
 Stop that owned preview process when no longer needed. Runtime removal is scoped
 to these task-owned directories; preserve original checkout work and all historical
 production evidence. No build, model trial or background implementation is running.
+
+## Operator-restated component map
+
+The operator restated the 14 preferred component assignments, including GitHub
+Sponsors for initial developer support. The development manifest and showcase
+now enumerate each assignment and its actual integration status. The earlier
+showcase omitted Sponsors and grouped several different responsibilities; that
+was a presentation/scope error, not evidence that those integrations were complete.
+ToolHive remains the optional MCP isolation component; it is not replaced by the
+existing comparative-trial workers. The runtime remains fixture-only, with the
+same unfinished C03-C13 gates. No additional optional package was installed by
+this clarification.

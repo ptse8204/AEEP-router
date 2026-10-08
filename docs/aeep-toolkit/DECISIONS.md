@@ -124,3 +124,13 @@ The original nine-wheel scratch supplement was replaced by a fully isolated
 24-wheel runtime for reproducibility. Existing host packages remain unchanged.
 The observed all-error/zero-exit upstream run is retained; successful fixture runs
 do not establish controlled Docker workers, canonical receipts or model benefit.
+
+### D20: 2026-10-08, operator's 14 component assignments are explicit
+
+The operator restated the preferred solutions and responsibilities. Encode all
+14 in the development manifest and render them directly in the showcase with
+actual status. Restore the omitted GitHub Sponsors support mechanism, retain
+BenchmarkRunner as fallback, and keep workflow execution/proposal/optimization
+and MCP/trial isolation distinct. Optional status is not completion or permission
+to replace a named upstream with new internal infrastructure. This presentation
+correction does not implement the outstanding adapters or install other packages.
