@@ -1,0 +1,48 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-B",
+      "-m",
+      "aeep_toolkit",
+      "--help"
+    ],
+    "returncode": 0,
+    "log": "cli-help.txt"
+  },
+  {
+    "argv": [
+      "python3",
+      "-B",
+      "-m",
+      "aeep_toolkit",
+      "list",
+      "full"
+    ],
+    "returncode": 0,
+    "log": "catalog.txt"
+  },
+  {
+    "argv": [
+      "python3",
+      "-B",
+      "integrations/toolkit/stack.py",
+      "plan"
+    ],
+    "returncode": 0,
+    "log": "stack-plan.txt"
+  },
+  {
+    "argv": [
+      "/Library/Developer/CommandLineTools/usr/bin/make",
+      "docs-check",
+      "LYCHEE=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/lychee/lychee-aarch64-apple-darwin/lychee"
+    ],
+    "returncode": 0,
+    "log": "docs-check.log",
+    "documents": 62,
+    "lint_errors": 0,
+    "local_link_errors": 0,
+    "external_urls_fetched": false
+  }
+]

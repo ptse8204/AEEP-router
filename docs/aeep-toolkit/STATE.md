@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 preview passed its software checks; its installer integration is unfinished. C04 now has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. The original-ZIP audit reopened C01 because its required per-candidate review worksheet was not complete. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,10 +9,10 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C03
+current_checkpoint: C01
 checkpoint_status:
   C00: PASS
-  C01: PASS
+  C01: IN_PROGRESS
   C02: PASS
   C03: IN_PROGRESS
   C04: IN_PROGRESS
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '9bccd94'
 last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-component-map.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1343 passed, 21 skipped; 81.50% combined coverage; both required branch gates and all 12 final quality/build commands passed. Separate stack checks: 10 passed plus fresh upstream fixture execution.'
-next_action: 'Use integrations/toolkit as the executable development foundation. Connect the qualified fixture artifact path to the general EvaluatorAdapter and existing controlled-worker/receipt boundary; continue C03-C06 acceptance without claiming the demo completes them.'
+next_action: 'Read HANDOFF_AUDIT.md and reconcile the restored C01 per-candidate worksheet using existing source pins and explicit unknowns. Continue the upstream EvaluatorAdapter and C03-C06 user journey; do not replace them with another stack presentation or internal framework.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -339,3 +339,27 @@ unchanged during verification. Exact commands and scope are in
 [the correction review](../../reports/toolkit-v2/c04/component-map-review.json)
 and its linked logs. No validation process remains running. The loopback report
 preview remains available; all outstanding C03-C13 gates remain open.
+
+## Original ZIP audit and corrected research status
+
+The operator requested a fresh audit of the supplied archive. All ten files were
+read directly and all nine imported planning documents compared with `d97086d`.
+The archive and each preserved original have recorded SHA-256 hashes under
+`reports/toolkit-v2/handoff-audit`. [HANDOFF_AUDIT.md](HANDOFF_AUDIT.md) reconciles
+the document changes, all fourteen checkpoints and all fourteen acceptance
+examples with actual source and existing evidence.
+
+The C01 rewrite had omitted GitHub Sponsors, the already-deferred Archestra
+research entry, the eleven-item candidate worksheet and the license/bundling
+principle. These are restored. The underlying master, acceptance and continuation
+instructions survived import; they were not missing from the workspace. The
+implementation misapplied their reuse-first direction and over-presented the
+fixed evaluator demo. D21 records the correction.
+
+C01 is IN_PROGRESS until the restored worksheet is reconciled for each mandatory
+candidate. Its earlier PASS/source-review journal entries are retained as history,
+not the current status. This correction does not invalidate existing pins,
+baseline tests or C02 schemas, and does not authorize additional installations.
+The audit itself changes no executable source. C03-C13 remain open. The next
+implementation remains the upstream adapter and complete evaluation journey;
+there is no pending architecture question for the operator.

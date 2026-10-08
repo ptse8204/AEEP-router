@@ -134,3 +134,21 @@ BenchmarkRunner as fallback, and keep workflow execution/proposal/optimization
 and MCP/trial isolation distinct. Optional status is not completion or permission
 to replace a named upstream with new internal infrastructure. This presentation
 correction does not implement the outstanding adapters or install other packages.
+
+### D21: 2026-10-08, audit original requirements before resuming implementation
+
+The original ZIP was reread in full at the operator's request. All nine planning
+files had been imported, but the C01 matrix rewrite omitted Sponsors, the
+already-deferred Archestra entry and the detailed review worksheet. Restore those
+requirements and preserve exact archive snapshots and checkout diffs. Reopen C01
+while completing its required per-candidate review; retain existing source facts
+and historical test evidence. The master plan already specified the upstream
+stack, local reports and continuous safe implementation. It did not require the
+operator to choose a new architecture before the external adapter was tested.
+
+[The audit](HANDOFF_AUDIT.md) records incomplete setup, adapter, comparison,
+three-family journey and optional-pack work separately from actual omissions.
+Keep the development demo's fixed evidence format out of the production contract;
+connect the existing reviewed installer, receipts and workers through the common
+adapter. Conditional optional integrations remain visible. Archestra remains
+deferred research, and no new third-party execution is authorized by this audit.

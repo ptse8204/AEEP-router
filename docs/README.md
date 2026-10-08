@@ -111,6 +111,7 @@ rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
 These development records do not establish live benefit or release readiness.
 
 - [Toolkit installation preview](aeep-toolkit/PREVIEW.md): inspect selected dependencies and blockers without installation.
-- [Toolkit architecture decision](aeep-toolkit/ARCHITECTURE_LOCK.md): confirmed delivery and proposed shared execution boundary.
+- [Toolkit architecture decision](aeep-toolkit/ARCHITECTURE_LOCK.md): upstream component assignments, confirmed delivery and actual integration boundaries.
+- [Original handoff audit](aeep-toolkit/HANDOFF_AUDIT.md): ZIP omissions, implementation gaps and corrected research status.
 
 - [Executable toolkit development stack](../integrations/toolkit/README.md): pinned setup, upstream fixture run and local report.

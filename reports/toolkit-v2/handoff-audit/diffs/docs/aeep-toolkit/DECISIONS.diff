@@ -1,0 +1,121 @@
+--- ZIP/docs/aeep-toolkit/DECISIONS.md
++++ checkout/docs/aeep-toolkit/DECISIONS.md
+@@ -19,6 +19,7 @@
+ ## Decision entry template
+ 
+ ### DNN — YYYY-MM-DD — [title]
++
+ - **Status:** proposed / accepted / superseded / blocked
+ - **Problem & product impact:**
+ - **Alternatives:** (reuse / wrap / write / defer)
+@@ -26,3 +27,110 @@
+ - **Decision and rationale:**
+ - **Consequences, migration, rollback:**
+ - **Checkpoint linkage:** Cnn
++
++### D12: 2026-10-08, retain authority and isolate package imports
++
++Accepted for C00/C02. Keep the current receipt store, assessment repository,
++accounting and controlled runner. Add versioned evaluation records as views and
++references; do not migrate or re-sign historical evidence. The inventory found
++eager package exports importing routing and host modules. A minimal import path
++must be verified before claiming Essentials independence. Existing callers and
++serialized records remain compatible.
++
++### D13: 2026-10-08, evaluator candidate and fallback
++
++Accepted source-level decision for C01; runtime qualification remains open.
++Inspect agent-skill-eval 0.7.0 at `59de161f657b82bfaf8f6abe83dfff38552deb21`
++through a narrow adapter first. Its optional invocation matches the question, but
++its workspace and final-output accounting do not meet AEEP controls by themselves.
++Use AEEP's existing runner as the fallback. Waza's Copilot coupling and SkillRank's
++forced prompt increase first-adapter scope. The pinned source matrix records the
++comparison. No external engine is installed, enabled or approved by this decision.
++
++### D14: 2026-10-08, additive contracts before engines
++
++Accepted implementation scope for C02. Reuse Pydantic, receipt references and existing accounting semantics. Introduce only extension metadata,
++adapter capabilities and content-free evaluation/report envelopes. Validators
++check structure and consistency; a claimed evidence reference never authenticates
++itself. Repository resolution and trust checks remain mandatory before a report
++can claim verified billing, independent verification or conformance. No new ledger,
++planner, process manager or exporter is needed for these contracts.
++
++### D15: 2026-10-08, independent imports within the existing distribution
++
++Accepted for C02. Place inert models in `src/aeep_toolkit`, using installed
++Pydantic with the existing extra-field and finite-number validation policy.
++Importing `aeep.models` first executes the broad legacy initializer. A temporary
++lazy-export experiment exposed an order-dependent provider-package/economic
++import cycle. That experiment was not applied. A separate namespace costs one
++small model base and preserves every legacy export. Setuptools already discovers
++packages under `src`; no distribution split or new dependency is needed. Test
++minimal imports in a fresh process and include this namespace in branch coverage.
++Rollback removes the new namespace and its schema exports without rewriting any
++legacy record.
++
++### D16: 2026-10-08, local CLI delivery confirmed by operator
++
++Accepted by the operator in this continuation: local Python CLI with static
++HTML/Markdown reports first; a browser interface may follow. Keep the small core
++independent of deployment UI, with existing receipt/accounting storage behind
++adapters. No hosted database, web service or cloud deployment is needed for the
++first product. Controlled comparative execution still needs separately reviewed
++workers. This decision adds no installation, credential, model or release authority.
++
++### D17: 2026-10-08, pure preview before installer integration
++
++Accepted C03 implementation scope. Existing `component_setup.preview` requires a
++Router/store, and its package installer does not lock transitive artifacts. Reuse
++its existing operator review and recovery path later; do not call it from a dry
++run. Add a pure dependency/permission preview using C02 records, installed
++Pydantic and the existing canonical JSON digest convention, plus a small argparse entry point. It consumes explicit metadata,
++never imports extension code, invokes package managers or opens host configuration.
++A source pin without an artifact/dependency review stays blocked. Three profiles
++filter available roles; Full does not select anything automatically. Actual apply
++remains unavailable until exact effects can pass the existing installer authority
++checks. Tests cover dependency closure, policy conflicts and zero side effects.
++
++### D18: 2026-10-08, restore external evaluator first
++
++Accepted correction following the operator's objection. Withdraw the proposed
++shared execution-service extraction and the associated architecture question.
++Legacy Router coupling is a fallback limitation, not evidence against the preferred
++external candidate. Follow D13: prepare and run the bounded agent-skill-eval spike
++with its existing fake harness before choosing additional internal infrastructure.
++A catalog entry, schema or synthetic adapter double is not upstream integration.
++No new runner, installer or workflow engine is justified by the current evidence.
++Keep the local CLI/report choice under D16. C03 stays unfinished and C04 remains
++unqualified until their recorded acceptance checks pass.
++
++### D19: 2026-10-08, executable development stack in one integration directory
++
++Accepted implementation under the operator's request to actually build and
++showcase the stack, following the concrete bounded setup review. Consolidate
++`integrations/toolkit` around the published agent-skill-eval wheel, a complete
++24-wheel lock, standard venv/pip setup and its actual CLI. All 16 evaluator source
++files match the C01 pin. The private setup was authorized by this follow-up; no
++new live, credentials, cloud or release authority is inferred.
++
++Reuse the upstream scheduler, fake harness, deterministic graders and report
++command. Add a development-only bridge that verifies the fixed synthetic suite
++and renders the stack/evidence report. Its commands cannot select live models or
++arbitrary candidates. This is not the general EvaluatorAdapter or an alternative
++approval/installation service. Ten finite offline tests cover failure, subject
++drift, exposure, missing runs, grading disagreement, timeout and report labels.
++The existing test-definition delegation applies to those tests.
++
++The original nine-wheel scratch supplement was replaced by a fully isolated
++24-wheel runtime for reproducibility. Existing host packages remain unchanged.
++The observed all-error/zero-exit upstream run is retained; successful fixture runs
++do not establish controlled Docker workers, canonical receipts or model benefit.
++
++### D20: 2026-10-08, operator's 14 component assignments are explicit
++
++The operator restated the preferred solutions and responsibilities. Encode all
++14 in the development manifest and render them directly in the showcase with
++actual status. Restore the omitted GitHub Sponsors support mechanism, retain
++BenchmarkRunner as fallback, and keep workflow execution/proposal/optimization
++and MCP/trial isolation distinct. Optional status is not completion or permission
++to replace a named upstream with new internal infrastructure. This presentation
++correction does not implement the outstanding adapters or install other packages.

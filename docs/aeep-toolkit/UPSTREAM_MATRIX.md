@@ -48,6 +48,17 @@ its checkpoint. No mutable-HEAD installer is approved.
 | [FoundationAgents/AFlow @ 3f457218fc71](https://github.com/FoundationAgents/AFlow/tree/3f457218fc716093fe53f6df8a5d5e6379d66346) | DEFER optimizer | MIT | Python run.py optimizer for selected datasets; model-driven search is metered. No need to duplicate it inside core; data/dependency rights unknown. |
 | [microsoft/agent-framework @ 2d9cc3f8ae46](https://github.com/microsoft/agent-framework/tree/2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b) | DEFER executor | MIT | Python/.NET provider SDKs and workflows. External bounded adapter only after version and permission compatibility; does not replace evidence layer. |
 
+## Restored handoff entries
+
+The original matrix also contained these two rows. They were omitted when the
+C01 research table replaced it. Their roles below come from the handoff; this
+audit does not establish new upstream compatibility or license facts.
+
+| Component | Handoff role | Current evidence and disposition |
+|---|---|---|
+| [Archestra](https://github.com/archestra-ai/archestra) | Research competitor or external integration; already DEFERRED in the ZIP | Restore as deferred research, not a default package. The handoff flags AGPL/enterprise terms; exact source, license and compatibility remain unverified. |
+| [GitHub Sponsors](https://github.com/sponsors) | External authorized support link | Restore the C12 support target. Developer attribution, authorized links and applicable eligibility remain unfinished; no local payout service is proposed. |
+
 ## Existing software retained
 
 - AEEP `BenchmarkRunner` and `AssessmentService` at
@@ -109,3 +120,21 @@ adapters remain separate targets with unfinished compatibility checks.
 GitHub Sponsors is the initial external developer-support mechanism; no local
 payment service is required. A developer-specific link still needs attributable
 source evidence before the report offers it.
+
+## C01 required decision worksheet (complete for every mandatory candidate)
+
+- Canonical upstream URL, release and commit SHA; last maintenance, open issues relevant to selected integration.
+- License of code, benchmark datasets, registry, assets and transitive packages, with compliant redistributability summary.
+- Exact host CLI/SDK versions supported, OS, architecture and authentication model; verify in installed environment.
+- Exposed entry point: library import, subprocess CLI with machine output, JSONL protocol, MCP or HTTP.
+- Supported candidate types: `SKILL.md`, MCP, plugin bundle, API, arbitrary executable (not all should be assumed equivalent).
+- Comparison semantics: natural selection vs forced; ordinary tools visible to both arms; controls for state, outputs, evaluator independence, permissions and context.
+- Observed metrics and missingness: token categories, wall clock, source, actual/estimated cash, retries, failures, tool exposure/usage.
+- Side-effect containment, setup/teardown, crash/restart, parallelism, resource limits, test cost.
+- Dependency footprint and user install preview data; rollback/uninstall constraints.
+- Integration proof: offline conformance or real-host evidence and exact logs; status YES/NO/UNKNOWN, not marketing copy.
+- Final choice: REUSE (existing AEEP), WRAP (external), REPLACE, KEEP, ARCHIVE, or DEFER, with rationale, risks and migration plan.
+
+## Principle
+
+A package being open source does not imply its hosted service, datasets, benchmark tasks or pretrained assets can be bundled or sold. Optional adapters can interface with externally installed software without redistributing its implementation; still check interface terms and user consent.

@@ -3898,3 +3898,13 @@ or new qualified backend. See the
 The correction at `9bccd94` passed all five required checks: both full runs
 recorded 1,343 passes and 21 skips, with 81.50% combined coverage and both required
 branch gates passing. The standalone stack's ten checks passed separately.
+
+The subsequent [original-ZIP audit](../../docs/aeep-toolkit/HANDOFF_AUDIT.md)
+read all ten archive files and compared all nine imported documents against
+`d97086d`. It found two omitted matrix rows and the lost C01 review worksheet;
+these are restored, with Archestra retaining its original deferred research role.
+C01 is reopened as IN_PROGRESS for the incomplete per-candidate review. Existing
+source pins, C00/C02 evidence and all historical v0.8 gates remain unchanged.
+The architecture-index description also incorrectly referenced the withdrawn
+shared-service proposal and is corrected. Unfinished V2 integrations, setup,
+comparison, developer support and release gates remain explicit in the audit.
