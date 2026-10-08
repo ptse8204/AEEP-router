@@ -79,13 +79,14 @@ does not establish the separate-container boundary required for real comparisons
 
 The fixture batch now uses the existing `CommandExecutor`, execution journal,
 `ExecutionReceipt`, `ReceiptStore` and `AssessmentRepository`. No Router instance
-or routing configuration is created. One coordinator receipt is referenced by the
+or routing configuration is created. A fixed-executor selection decision is stored before dispatch, without route
+ranking. Its immutable snapshot binds the coordinator receipt, which is referenced by the
 four C02 `EvaluationRun` records in `toolkit-evidence.json`. `toolkit-comparison.json`
 remains `NOT_ASSESSED`. Process resources in the receipt are not individual model
 measurements. Failed/timed-out commands retain their receipt without retrying.
 
 `receipts.py` normalizes only checked synthetic records. The `verify` command
-resolves the bundle against stored definitions, its receipt snapshot and artifact
+resolves the bundle against stored definitions, its selection and receipt snapshots, and artifact
 hashes through a read-only SQLite connection. It refuses an unfinished WAL and
 does not create a missing database. These are local provenance checks, not signed
 third-party attestations or production assessment authorization.
@@ -116,3 +117,9 @@ Failed demos retain it and write `failure.json` for inspection. To remove a
 development installation, remove only the runtime and report directories you
 created after confirming their ownership. There are no persistent services,
 global configuration edits or model credentials in this stack.
+
+
+Earlier receipt showcases retain the weaker pre-selection-binding format and the
+source revision that verified it. They remain historical synthetic artifacts.
+The current verifier requires a stored matching selection decision; use the
+recorded older bridge revision when reproducing an earlier validation result.

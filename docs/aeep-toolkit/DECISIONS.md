@@ -190,3 +190,16 @@ translates legacy configuration errors into a bounded CLI error and remains
 explicitly unsupported where `O_NOFOLLOW` is unavailable. A real named-pipe and
 symlink check covers refusal without reading their content. Historical host
 bindings are not requalified by this change.
+
+
+### D24: 2026-10-08, bind coordinator receipts to recorded selection decisions
+
+The first fixture bridge used an explicit placeholder decision ID because it did
+not route. Replace that placeholder with the existing `RouteDecision` record for
+the fixed reviewed executor, using `BYPASS_ROUTER` / `pinned_executor` and no
+ranking. Save it before dispatch and retain an immutable assessment-record
+snapshot. The verifier resolves action and selected-executor identity through
+that decision as well as the receipt and artifact hashes. A changed decision is
+rejected. This adds no Router instance, selection algorithm or execution authority.
+Earlier fixture reports remain source-bound historical records; they do not
+satisfy the stronger new verification merely by retaining the same schema names.

@@ -113,6 +113,19 @@ class ReceiptTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "receipt changed"):
             receipts.verify(self.output)
 
+    def test_changed_selection_decision_rejected(self):
+        self.normalized()
+        store = ReceiptStore(str(self.output / "receipts.sqlite3"))
+        try:
+            receipt = store.list_receipts()[0]
+            decision = store.get_decision(receipt.decision_id)
+            decision.selected_executor_id = "unrelated-executor"
+            store.save_decision(decision)
+        finally:
+            store.close()
+        with self.assertRaisesRegex(ValueError, "selection decision changed"):
+            receipts.verify(self.output)
+
     def test_changed_bundle_and_live_verdict_rejected(self):
         self.normalized()
         path = self.output / "toolkit-evidence.json"

@@ -1,0 +1,129 @@
+{
+  "skill_name": "format-json",
+  "skill_hash": "11b5f4bf69cdb39b377c5b07fef964a2e8d8b6b8230a4dd1b2d9c54ab7967ad4",
+  "iteration": 1,
+  "run_id": "acaef291",
+  "agents": [
+    "fake"
+  ],
+  "eval_ids": [
+    "format",
+    "adjacent"
+  ],
+  "side_effect_levels": [
+    "static"
+  ],
+  "runs_per_case": 1,
+  "with_baseline": true,
+  "duration_seconds": 0.5,
+  "pass_rates": {
+    "fake_with_skill": 1.0,
+    "fake_without_skill": 0.5
+  },
+  "runs_completed": 4,
+  "runs_failed_grading": 1,
+  "failed_runs": [
+    {
+      "eval_id": "format",
+      "agent": "fake",
+      "with_skill": false,
+      "run_index": 1,
+      "pass_rate": 0.0,
+      "side_effect_level": "static",
+      "failed_assertions": [
+        "The output contains `formatted-json-ok`"
+      ]
+    }
+  ],
+  "errors": [],
+  "skipped_runs": [],
+  "tokens": {
+    "input": 4,
+    "cached": 0,
+    "non_cached_input": 4,
+    "output": 0,
+    "reasoning_output": null,
+    "total": 4,
+    "cached_pct": 0.0
+  },
+  "cost": {
+    "total_usd": 0.0,
+    "runs_with_cost": 4,
+    "runs_total": 4
+  },
+  "stability": {
+    "groups": [
+      {
+        "eval_id": "adjacent",
+        "agent": "fake",
+        "with_skill": false,
+        "runs": 1,
+        "full_passes": 1,
+        "failures": 0,
+        "flaky": false,
+        "failed_assertions": {}
+      },
+      {
+        "eval_id": "adjacent",
+        "agent": "fake",
+        "with_skill": true,
+        "runs": 1,
+        "full_passes": 1,
+        "failures": 0,
+        "flaky": false,
+        "failed_assertions": {}
+      },
+      {
+        "eval_id": "format",
+        "agent": "fake",
+        "with_skill": false,
+        "runs": 1,
+        "full_passes": 0,
+        "failures": 1,
+        "flaky": false,
+        "failed_assertions": {
+          "The output contains `formatted-json-ok`": 1
+        }
+      },
+      {
+        "eval_id": "format",
+        "agent": "fake",
+        "with_skill": true,
+        "runs": 1,
+        "full_passes": 1,
+        "failures": 0,
+        "flaky": false,
+        "failed_assertions": {}
+      }
+    ],
+    "flaky_groups": [],
+    "flaky_count": 0
+  },
+  "cleanup": {
+    "source_repo_provider": null,
+    "source_repo_project": null,
+    "remote_branches": [],
+    "pr_numbers": [],
+    "merge_request_numbers": [],
+    "workspaces": 0
+  },
+  "skill_size": {
+    "files": 1,
+    "bytes": 156,
+    "words": 19,
+    "skill_md": {
+      "bytes": 156,
+      "words": 19,
+      "body_words": 9
+    },
+    "content_files": [
+      {
+        "path": "SKILL.md",
+        "bytes": 156,
+        "words": 19,
+        "sha256": "cf00158162842a953220c517df1e9b1582227a42c9abc10a2d17efc9a16fe79e"
+      }
+    ]
+  },
+  "hooks": {}
+}

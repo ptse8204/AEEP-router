@@ -13,6 +13,8 @@ from aeep.models import (
     ExecutionReceipt,
     ExecutionStatus,
     ExecutorSpec,
+    PolicyConfig,
+    RouteDecision,
     SideEffect,
     StrictModel,
     utc_now,
@@ -45,6 +47,15 @@ async def execute(argv: list[str], cwd: Path, env: dict, database: Path) -> tupl
                 "inherit_env": False, "timeout_seconds": 120, "max_output_bytes": 1000000},
     )
     request = ActionRequest(capability=spec.capability, input={})
+    decision = RouteDecision(action=request, policy=PolicyConfig(name="reviewed-fixture", fallback={"enabled": False, "max_attempts": 1}),
+                             selected_executor_id=spec.id, disposition="BYPASS_ROUTER", bypass_reason="pinned_executor",
+                             explanation="Fixed reviewed synthetic coordinator; no route ranking or model execution")
+    store = ReceiptStore(str(database))
+    try:
+        store.save_decision(decision)
+        decision_ref = AssessmentRepository(store).put("toolkit_fixture_decision", decision.decision_id, decision)
+    finally:
+        store.close()
     started = utc_now()
     executor = CommandExecutor()
     context = ExecutionContext(request=request, spec=spec, estimate=spec.estimate, attempt=1,
@@ -54,13 +65,13 @@ async def execute(argv: list[str], cwd: Path, env: dict, database: Path) -> tupl
     finally:
         await executor.close()
     receipt = ExecutionReceipt(
-        decision_id="fixture:no-routing-decision", action_id=request.action_id,
+        decision_id=decision.decision_id, action_id=request.action_id,
         capability=spec.capability, executor_id=spec.id, executor_kind=spec.kind,
         status=raw.status, started_at=started, ended_at=utc_now(), estimated=spec.estimate,
         actual_resources=raw.resources, accounting=raw.accounting,
         execution_success=raw.status == ExecutionStatus.SUCCESS,
         error_type=raw.error_type,
-        metadata={"evidence_kind": "synthetic", "scope": "upstream coordinator batch only",
+        metadata={"evidence_kind": "synthetic", "scope": "upstream coordinator batch only", "decision_ref": decision_ref,
                   "execution_evidence": raw.metadata["execution_evidence"]},
     )
     store = ReceiptStore(str(database))
@@ -180,6 +191,14 @@ def verify(output: Path) -> EvidenceBundle:
         snapshot = record("toolkit_fixture_receipt", exported.receipt_id)
         if receipt is None or content_digest(receipt) != content_digest(snapshot) or receipt != exported:
             raise ValueError("Coordinator receipt changed or is missing")
+        decision_record = record("toolkit_fixture_decision", receipt.decision_id)
+        row = connection.execute("SELECT payload_json FROM decisions WHERE decision_id=?", (receipt.decision_id,)).fetchone()
+        decision = RouteDecision.model_validate_json(row[0]) if row else None
+        if (decision is None or content_digest(decision) != content_digest(decision_record)
+                or content_digest(decision) != receipt.metadata.get("decision_ref")
+                or decision.selected_executor_id != receipt.executor_id
+                or decision.action.action_id != receipt.action_id):
+            raise ValueError("Coordinator selection decision changed or is missing")
         for run in bundle.runs:
             if (run.plan_ref != comparison.plan_ref or run.evidence_kind != "synthetic"
                     or run.receipt_refs != (content_digest(receipt),)):
