@@ -22,5 +22,128 @@
     "exit_code": 0,
     "seconds": 0.8729591660667211,
     "log": "reports/toolkit-v2/c00/check-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 627.4904533338267,
+    "log": "reports/toolkit-v2/c00/check-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 958.8403988750651,
+    "log": "reports/toolkit-v2/c00/check-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0,
+    "seconds": 1.3813773328438401,
+    "log": "reports/toolkit-v2/c00/check-05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "reports/toolkit-v2/c00/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 1.7919042920693755,
+    "log": "reports/toolkit-v2/c00/check-06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "reports/toolkit-v2/c00/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04368854081258178,
+    "log": "reports/toolkit-v2/c00/check-07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "reports/toolkit-v2/c00/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.039626749930903316,
+    "log": "reports/toolkit-v2/c00/check-08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.23961679195053875,
+    "log": "reports/toolkit-v2/c00/check-09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5696006671059877,
+    "log": "reports/toolkit-v2/c00/check-10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.18272625003010035,
+    "log": "reports/toolkit-v2/c00/check-11.log"
+  },
+  {
+    "argv": [
+      "node",
+      "--test",
+      "integrations/dsh-aeep-router/test.mjs",
+      "integrations/dsh-aeep-router/runtime.test.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.878795542055741,
+    "log": "reports/toolkit-v2/c00/check-12.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "build",
+      "--no-isolation"
+    ],
+    "exit_code": 0,
+    "seconds": 2.2408320419490337,
+    "log": "reports/toolkit-v2/c00/check-13.log"
   }
 ]

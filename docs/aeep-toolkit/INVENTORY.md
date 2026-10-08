@@ -20,7 +20,10 @@ runtime there. Ordinary pytest recorded 116 failures, 1,177 passes and 21 skips.
 The replacement worktree leaves that protection unchanged. Keep both attempts;
 the path failure does not justify relaxing credential protections.
 
-Python is 3.13.1 on macOS arm64. The free-space snapshot is above the required
+Python is 3.13.1 on macOS arm64. The global Python distribution metadata reports
+AEEP 0.5.0, while this source tree is 0.8.2; checks explicitly use `PYTHONPATH=src`
+or pytest’s configured source path. Neither the global package nor the separate
+desktop runtime is upgraded by this task. The free-space snapshot is above the required
 50 GiB reserve. No images, containers, services or dependencies were installed.
 The existing authoring tools and Python environment are reused. Current results
 and exact commands are in [checks.json](../../reports/toolkit-v2/c00/checks.json).
