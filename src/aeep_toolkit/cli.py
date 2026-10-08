@@ -16,12 +16,14 @@ from .models import ExtensionRegistry
 
 
 def read_json(path: Path) -> Any:
-    if path.is_symlink() or path.name in {'auth.json', 'credentials.json'} or path.name.startswith('.env'):
+    if path.is_symlink() or path.name.casefold() in {'auth.json', 'credentials.json'} or path.name.casefold().startswith('.env'):
         raise ValueError('credential files and metadata symlinks are excluded')
     resolved = path.resolve(strict=True)
     protected = Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex'))).resolve()
-    if resolved.is_relative_to(protected) or '.codex' in resolved.parts:
+    if resolved.is_relative_to(protected) or any(part.casefold() == '.codex' for part in resolved.parts):
         raise ValueError('Codex state is excluded from toolkit metadata')
+    if protected.exists() and any(parent.samefile(protected) for parent in resolved.parents):
+        raise ValueError('Codex state aliases are excluded from toolkit metadata')
     fd = os.open(resolved, os.O_RDONLY | os.O_NONBLOCK | getattr(os, 'O_NOFOLLOW', 0))
     with os.fdopen(fd, 'rb') as handle:
         if not stat.S_ISREG(os.fstat(handle.fileno()).st_mode):

@@ -192,3 +192,49 @@ def test_metadata_reader_excludes_authentication_and_symlinks_before_open(tmp_pa
     for path in (secret, named, link):
         with pytest.raises(ValueError):
             read_json(path)
+
+
+def test_dependency_order_is_stable_across_hash_seeds():
+    program = """from aeep_toolkit.models import ExtensionRegistry
+from aeep_toolkit.installation import preview,manifest_digest
+from test_toolkit_installation import manifest,policy
+children=[manifest(name,role='support') for name in ('left','right','middle')]
+parent=manifest(dependencies=[{'extension_id':x.extension_id,'manifest_sha256':manifest_digest(x)} for x in children])
+items=[parent,*children]
+print(preview(ExtensionRegistry(extensions=tuple(items)),('engine',),policy(*items)).model_dump_json())
+"""
+    root = Path(__file__).resolve().parents[1]
+    results = []
+    for seed in ('1', '2', '3'):
+        result = subprocess.run([sys.executable, '-B', '-c', program],
+            capture_output=True, text=True, check=True,
+            env={**os.environ, 'PYTHONPATH': os.pathsep.join([str(root/'src'), str(root/'tests')]), 'PYTHONHASHSEED': seed})
+        results.append(result.stdout)
+    assert len(set(results)) == 1
+
+
+def test_credential_case_aliases_are_rejected_before_open(tmp_path, monkeypatch):
+    protected = tmp_path / 'CustomHome'
+    protected.mkdir()
+    (protected/'metadata.json').write_text('{}')
+    upper = tmp_path/'AUTH.JSON'
+    upper.write_text('{}')
+    monkeypatch.setenv('CODEX_HOME', str(protected))
+    def forbidden(*args, **kwargs):
+        pytest.fail('reserved metadata alias opened')
+    monkeypatch.setattr(os, 'open', forbidden)
+    with pytest.raises(ValueError):
+        read_json(upper)
+    alias = tmp_path/'customhome'/'metadata.json'
+    if alias.exists():
+        with pytest.raises(ValueError):
+            read_json(alias)
+
+
+def test_essentials_can_disclose_required_isolation_dependency():
+    worker = manifest('worker', role='isolation')
+    engine = manifest(dependencies=[{'extension_id': 'worker', 'manifest_sha256': manifest_digest(worker)}])
+    result = preview(ExtensionRegistry(extensions=(worker, engine)), ('engine',), policy(worker, engine))
+    assert result.status == 'ready_for_review'
+    assert [item.manifest.extension_id for item in result.items] == ['worker', 'engine']
+    assert not result.execution_authorized

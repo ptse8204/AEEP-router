@@ -12,7 +12,7 @@ from pydantic import model_validator
 from .models import ContractModel, Count, Digest, ExtensionManifest, ExtensionRegistry, Identifier
 
 PROFILES = {
-    "essentials": {"name": "Evaluation Essentials", "roles": ("evaluator", "benchmark", "support")},
+    "essentials": {"name": "Evaluation Essentials", "roles": ("evaluator", "benchmark", "support", "isolation")},
     "evaluation": {"name": "Evaluation Toolkit", "roles": ("evaluator", "benchmark", "support", "catalog", "scanner", "observability", "isolation")},
     "full": {"name": "Full Toolkit", "roles": ("evaluator", "benchmark", "support", "catalog", "scanner", "observability", "isolation", "router", "orchestrator")},
 }
@@ -158,7 +158,7 @@ def preview(
                 failures.append(f"dependency manifest mismatch: {dependency.extension_id}")
             pending.append(dependency.extension_id)
     try:
-        order = list(TopologicalSorter(graph).static_order())
+        order = list(TopologicalSorter({name: sorted(deps) for name, deps in graph.items()}).static_order())
     except CycleError:
         global_problems.append("dependency cycle; no installation order is valid")
         order = sorted(graph)

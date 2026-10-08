@@ -1,0 +1,32 @@
+{
+  "source_commit": "a534023",
+  "dependency_order_across_seeds": [
+    {
+      "seed": "1",
+      "order": "left,right,middle,engine"
+    },
+    {
+      "seed": "2",
+      "order": "left,middle,right,engine"
+    },
+    {
+      "seed": "3",
+      "order": "left,middle,right,engine"
+    },
+    {
+      "seed": "4",
+      "order": "middle,left,right,engine"
+    },
+    {
+      "seed": "5",
+      "order": "middle,right,left,engine"
+    }
+  ],
+  "order_stable": false,
+  "credential_filename_case": {
+    "synthetic_filename": "AUTH.JSON",
+    "exit_code": 0,
+    "accepted_empty_fixture": true
+  },
+  "action": "Fix deterministic topological ordering and reject case-insensitive reserved credential names before final C03 validation."
+}

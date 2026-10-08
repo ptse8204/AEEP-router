@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 is next. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 preview is implemented and undergoing verification; its installer integration is unfinished. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '91f74de3f9a5fa2a9dbb708686bd8bc55ac8568c'
 last_check_command: 'COVERAGE_FILE=.coverage-toolkit PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1319 passed, 21 skipped; 81.41% combined coverage; both required branch gates and all recorded quality/build checks passed.'
-next_action: 'Implement C03 pure installer preview: read INSTALLATION_DESIGN.md, component_setup.py and onboarding.py; first freeze dependency and no-effect tests. No third-party install is authorized.'
+next_action: 'Finish source-bound C03 verification. Obtain the requested shared-service architecture choice before connecting evaluator/installer authority. See ARCHITECTURE_LOCK.md.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -169,8 +169,8 @@ These are future prerequisites, not reasons to stop C03-C06 offline work.
 | 2026-10-08 | C01 | PASS / source review | 92be11c | `UPSTREAM_MATRIX.md`; 55 retained source hashes verified | Executable qualification remains C04 |
 | 2026-10-08 | C02 | PASS / OFFLINE contracts | 91f74de | `reports/toolkit-v2/c02/summary.json` and `acceptance.md` | C03 pure preview |
 
-This session ends at the verified C02 boundary. C03 is safe and eligible, with
-source findings above, but its implementation has not begun. Host conformance,
+The prior session ended at the verified C02 boundary. The continuation below
+starts C03 from those source findings. Host conformance,
 live value, human usability and release remain TODO for V2. No work runs in the
 background. Use `git status --short` and the source-hash record before continuing;
 do not repeat the full C00 audit or completed checks unless relevant source changes.
@@ -181,3 +181,33 @@ Operator requests continuous implementation until genuine intervention is needed
 and confirms local CLI plus HTML/Markdown reports first (D16). C03 implementation
 has started under D17. Prior completed evidence remains source-bound to its
 recorded commits; new changes require new checks before checkpoint PASS.
+
+## Current continuation evidence
+
+C03 source commit: `a534023`. The pure preview and local CLI now exist, with
+47 focused tests passing. Catalog records retain 18 upstream pins plus two legacy
+AEEP roles and stay blocked where artifacts or conformance are unavailable.
+`reports/toolkit-v2/c03` contains the finite review, dry-run fixture snapshots,
+source hashes and progressive check logs. Full regression/coverage is running;
+source is frozen while it runs. Supplemental Node/proof/docs checks passed.
+
+C03 is still IN_PROGRESS: real installed-state observations and the reviewed
+installer bridge are not connected. Metadata declarations do not authenticate
+installed state. Profile dependency closure must be finalized with the selected
+evaluator and its mandatory controlled-worker support. No install command or
+V2 runtime qualification is advertised.
+
+Local CLI delivery is confirmed. The operator was asked to choose strict shared
+execution/evidence extraction (recommended) versus a temporary Router-backed
+compatibility path. [ARCHITECTURE_LOCK.md](ARCHITECTURE_LOCK.md) states the concrete
+boundaries and [the source audit](../../reports/toolkit-v2/c04/extraction-audit.json)
+shows why wrapping BenchmarkRunner alone does not meet strict separation.
+This choice affects C03's authority bridge and C04-C06, not the independent pure
+preview validation already underway. Do not infer selection of the temporary
+legacy exception from silence.
+
+C03 follow-up reproduced unstable sibling ordering and case-sensitive credential
+filename exclusion in the first preview revision. The initial full validation was
+interrupted and retained. Corrections and three regression checks now pass all
+50 focused cases; authoritative replacement validation uses
+`reports/toolkit-v2/c03/final`. Never count the interrupted run as PASS.
