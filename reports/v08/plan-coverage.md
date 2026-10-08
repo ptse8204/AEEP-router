@@ -25,7 +25,7 @@ out; reachability remains unverified. No publication or live provider call is
 included.
 
 
-## October 7: native Windows CI repair in progress
+## October 7: native Windows CI repair verified
 
 The operator requested continuing the Windows CI repair and push. The initial
 run [37596098967](https://github.com/ptse8204/AEEP-router/actions/runs/37596098967)
@@ -41,14 +41,21 @@ The fixture uses the current Python executable; CI uses its runner-owned temp
 directory. Native sandbox policy and assessment thresholds remain unchanged.
 The [Windows CI repair record](windows-ci-20261007/summary.md) records the
 passing local suite/coverage gates, completed runner failures and their repairs.
-The current branch passes the expanded portability smoke on Windows, macOS and
-all Linux Python versions. The full Windows worker check now passes with the
-standard subprocess harness and a bounded 15-minute wait; its earlier 3-minute
-limit was too short for the observed runner. The latest Windows full run has one planning-fixture timeout; its success-path
-deadline is corrected within the existing grant. Both Windows branch gates pass;
-the overall floor now uses combined platform evidence for Windows while
-Linux/macOS keep individual floors. Full matrix validation remains in progress,
-with macOS, all Linux versions, DSH and containment checks passed. No release, human testing, or paid provider call is included.
+[CI run 37702262153](https://github.com/ptse8204/AEEP-router/actions/runs/37702262153)
+is fully green at `8e4958f`: Windows passed 1,212 tests, each Linux/macOS entry
+passed 1,277, and DSH plus real containment passed. Strict verification, package
+builds and both 90% branch gates pass on every platform. Windows reports 76.37%
+overall; the unchanged 80% overall floor now uses combined platform evidence
+(80.69%) for Windows. Linux/macOS retain and pass their individual floors.
+The bounded worker harness and planning-fixture deadline fixes preserve the
+assessment definitions, grants and admission assertions.
+
+Fresh installer acceptance also passed on this revision on macOS, Linux, actual
+WSL 1 and actual WSL 2, including managed Python fallback, rerun, access denial,
+restore, disconnect and uninstall. Candidate assets and exact results are retained
+in the linked record. These checks establish neither native Windows onboarding
+support nor live model-mediated permission enforcement. No release, human testing,
+or paid provider call is included.
 
 
 ## October 7: WSL and remaining host/provider checks

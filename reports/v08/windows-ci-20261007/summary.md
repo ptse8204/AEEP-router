@@ -1,8 +1,40 @@
 # Windows CI repair — October 7, 2026
 
-Current source under verification: `47f20ee6d84814980717df68886cc3971ce7df25`.
+Verified implementation source: `8e4958f4830a1461fd80b46b8c55ebb7e79182c9`.
 
-[Current run 37692178403](https://github.com/ptse8204/AEEP-router/actions/runs/37692178403)
+[Run 37702262153](https://github.com/ptse8204/AEEP-router/actions/runs/37702262153)
+passed all eight jobs: five platform/Python entries, DSH, real containment and
+combined coverage. Windows passed 1,212 tests with 102 skipped in 5,030.45 seconds;
+macOS and each Linux Python version passed 1,277 tests with 37 skipped. All
+platforms passed strict router verification, package build and both 90% branch
+coverage gates. Windows reports 76.3698% overall; the combined platform result is
+80.6911%, passing the unchanged 80% floor without excluding source files.
+Linux/macOS also retain and pass their individual overall floors.
+The documentation commit `22f636a` is preserved in this source. Documentation
+checks pass: 47 linted files, 493 link occurrences, zero local-link errors.
+
+The latest containment image is
+`sha256:3db45bed84a56859c093ae6463710aa96ae56a1d114bd5e0bca48751feeb3bca`;
+61 tests passed, six skipped, 1,247 deselected in 476.22 seconds. It was built
+only on the ephemeral GitHub runner; no local Docker resources were created.
+
+A local archive-only test run passed 1,291 tests with 21 skipped; two checks failed
+because the archive lacked Git metadata. Restoring the exact source commit's Git
+metadata in that temporary copy made both checks pass (6.38 seconds), without a
+code change. The subsequent complete branch-coverage run passed: 1,293 passed, 21 skipped,
+one existing warning in 933.46 seconds. Overall coverage is
+81.3113510619311%; both 90% branch gates pass. Its checkout
+is `/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-final-ci-6mln0t3p`.
+The smaller initial planning-only copy is
+`/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-windows-planning-xja_gs9t`.
+These are task-owned temporary resources. Free space was 71 GiB before creating
+the full test checkout, above the 50 GiB reserve.
+
+## Previous complete platform run
+
+Source: `47f20ee6d84814980717df68886cc3971ce7df25`.
+
+[Previous run 37692178403](https://github.com/ptse8204/AEEP-router/actions/runs/37692178403)
 has passed the focused Windows worker-completion step in 4 minutes 33 seconds.
 macOS and all three Linux Python versions passed full tests, coverage, strict
 verification and package builds. DSH and real containment checks also passed;
@@ -222,3 +254,37 @@ No native Windows onboarding support or POSIX behavior is inferred from it.
 
 Compile, schema freshness, assessment policy and focused lint pass. The planning
 cases are added to the early CI portability smoke. The next full run is pending.
+
+## Fresh installer acceptance at the pushed revision
+
+[Installer run 37705592213](https://github.com/ptse8204/AEEP-router/actions/runs/37705592213)
+passed on macOS and Linux at `8e4958f4830a1461fd80b46b8c55ebb7e79182c9`.
+Both check managed Python fallback, installation, rerun, user-edit preservation,
+denial and filtered exports, restore, disconnect and uninstall. Their result files
+and checksums are retained beside this record; downloaded installer/bundle bytes
+match every entry in SHA256SUMS. Versioned v0.8.2 candidate assets remain GitHub
+Actions artifacts and local temporary copies, not a published release. Live agent
+checks remain explicitly unverified in these installer records. [WSL run 37705589571](https://github.com/ptse8204/AEEP-router/actions/runs/37705589571)
+also passed on actual WSL 1 and WSL 2. Both report the same eight successful
+installer checks, with live agent checks still unverified. Their exact kernel,
+release manifest, checksum and storage records are retained in separate folders.
+The release manifests name revision `8e4958f` and truthfully retain
+`source_dirty: true`: the workflow creates untracked `wsl-evidence/` before its
+build. These are acceptance candidates, not clean published release artifacts.
+The selected D: filesystem retained over 144 GiB free after each WSL journey;
+the workflow avoids C:, which is below the reserve.
+
+## Final delivery
+
+The final evidence-only commit updates this record and plan coverage; it changes
+no executable, workflow, dependency or test definition from verified `8e4958f`.
+The full CI result is retained in `ci-result.json`. A repeat of the same long CI
+suite is unnecessary for this evidence-only update. No release was published.
+Human testing remains deferred to the operator; live model-mediated host
+permissions and paid provider execution remain unverified.
+
+Checksum-verified candidate assets are also saved locally in
+`/Users/edwintse/Documents/aeep-agent-router/dist/v0.8.2-ci-8e4958f`, with a
+provenance manifest. The macOS/Linux release manifests report a clean source
+checkout at `8e4958f`; the WSL acceptance manifests preserve their dirty flags
+as explained above. No credential or production agent configuration was changed.
