@@ -1,0 +1,64 @@
+{
+  "skill_name": "format-json",
+  "skill_hash": "11b5f4bf69cdb39b377c5b07fef964a2e8d8b6b8230a4dd1b2d9c54ab7967ad4",
+  "skill_size": {
+    "files": 1,
+    "bytes": 156,
+    "words": 19,
+    "skill_md": {
+      "bytes": 156,
+      "words": 19,
+      "body_words": 9
+    },
+    "content_files": [
+      {
+        "path": "SKILL.md",
+        "bytes": 156,
+        "words": 19,
+        "sha256": "cf00158162842a953220c517df1e9b1582227a42c9abc10a2d17efc9a16fe79e"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": "format",
+      "prompt": "Format this JSON: {\"status\":\"ok\"}.",
+      "expected_output": "formatted JSON",
+      "files": [],
+      "assertions": [
+        "The output contains `formatted-json-ok`"
+      ],
+      "should_trigger": true,
+      "force_skill_invocation": false,
+      "stage_files": false,
+      "side_effect_level": "static",
+      "side_effect_contract": null
+    },
+    {
+      "id": "adjacent",
+      "prompt": "Return the baseline status.",
+      "expected_output": "baseline output",
+      "files": [],
+      "assertions": [
+        "The output contains `baseline output`"
+      ],
+      "should_trigger": true,
+      "force_skill_invocation": false,
+      "stage_files": false,
+      "side_effect_level": "static",
+      "side_effect_contract": null
+    }
+  ],
+  "source_repo": null,
+  "selected_eval_ids": [],
+  "selected_side_effect_levels": [],
+  "side_effect_counts": {
+    "static": 2
+  },
+  "grader": {
+    "model": "",
+    "base_url": null,
+    "key_file": null,
+    "allowed_models": null
+  }
+}

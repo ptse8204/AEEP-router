@@ -68,8 +68,8 @@
     },
     {
       "name": "SQLite canonical receipts",
-      "state": "not_connected",
-      "role": "Existing AEEP store; fixture artifacts here remain local files."
+      "state": "fixture_batch_connected",
+      "role": "Existing AEEP executor/store: one coordinator receipt; per-trial model accounting remains unconnected."
     }
   ],
   "extensions": {
@@ -176,5 +176,12 @@
       "responsibility": "Initial external support mechanism",
       "status": "Support-link integration and developer verification unfinished"
     }
-  ]
+  ],
+  "fixture_source": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "6764861901aef9e7ea991e13f4f979a233da43f8",
+    "artifact_sha256": "cf00158162842a953220c517df1e9b1582227a42c9abc10a2d17efc9a16fe79e",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored synthetic fixture; no third-party benchmark data."
+  }
 }

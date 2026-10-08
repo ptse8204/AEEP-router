@@ -24,7 +24,15 @@ a runtime directory that does not already exist.
 ```bash
 python3 integrations/toolkit/stack.py plan
 python3 integrations/toolkit/stack.py setup --runtime /tmp/aeep-toolkit-runtime
-python3 integrations/toolkit/stack.py demo --runtime /tmp/aeep-toolkit-runtime --output /tmp/aeep-toolkit-report
+PYTHONPATH=src python3 integrations/toolkit/stack.py demo --runtime /tmp/aeep-toolkit-runtime --output /tmp/aeep-toolkit-report
+```
+
+The coordinator uses the repository's existing Python dependencies, while the
+external evaluator stays in its private locked runtime. Verify saved results
+without running the evaluator again:
+
+```bash
+PYTHONPATH=src python3 integrations/toolkit/stack.py verify --output /tmp/aeep-toolkit-report
 ```
 
 Open `/tmp/aeep-toolkit-report/index.html`. The Markdown report, normalized fixture
@@ -66,10 +74,24 @@ does not establish the separate-container boundary required for real comparisons
 | `stack.py` | Standard venv/pip bootstrap and a thin bridge to the upstream CLI |
 | `fixtures/` | Synthetic skill and two cases; not real benchmark evidence |
 | `report.html` | Static local showcase template; no remote fonts or scripts |
-| `test_stack.py` | Failure, provenance, exposure, output and timeout checks |
+| `receipts.py` | Existing executor/store bridge and C02 fixture normalization |
+| `test_stack.py`, `test_receipts.py` | Failure, provenance, exposure, output and read-only verification checks |
 
-The next connections are the existing AEEP controlled workers and canonical
-receipt store, followed by the general comparison/report engine. Keep this fixed
+The fixture batch now uses the existing `CommandExecutor`, execution journal,
+`ExecutionReceipt`, `ReceiptStore` and `AssessmentRepository`. No Router instance
+or routing configuration is created. One coordinator receipt is referenced by the
+four C02 `EvaluationRun` records in `toolkit-evidence.json`. `toolkit-comparison.json`
+remains `NOT_ASSESSED`. Process resources in the receipt are not individual model
+measurements. Failed/timed-out commands retain their receipt without retrying.
+
+`receipts.py` normalizes only checked synthetic records. The `verify` command
+resolves the bundle against stored definitions, its receipt snapshot and artifact
+hashes through a read-only SQLite connection. It refuses an unfinished WAL and
+does not create a missing database. These are local provenance checks, not signed
+third-party attestations or production assessment authorization.
+
+The next connections are the existing controlled workers and reviewed live
+assessment dispatch, followed by the general comparison/report engine. Keep this fixed
 development demo separate from approved live assessment dispatch. Do not grow it
 into a second experiment runner or approval system.
 
@@ -81,7 +103,7 @@ Linux/Windows locks, live hosts and release qualification remain open.
 ## Verify and remove
 
 ```bash
-python3 -m unittest discover -s integrations/toolkit -p 'test_*.py' -v
+PYTHONPATH=src python3 -m unittest discover -s integrations/toolkit -p 'test_*.py' -v
 python3 -m ruff check integrations/toolkit
 ```
 

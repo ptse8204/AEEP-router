@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import hashlib
 import html
 import json
@@ -32,6 +33,8 @@ def manifest() -> dict:
     for name, expected in {data["lock_file"]: data["lock_sha256"], **data["fixtures"]}.items():
         if digest(BASE / name) != expected:
             raise ValueError("Stack inputs changed; review and regenerate the lock before execution")
+    if data["fixture_source"]["artifact_sha256"] != data["fixtures"]["fixtures/format-json/SKILL.md"]:
+        raise ValueError("Fixture provenance does not match the reviewed candidate")
     return data
 
 
@@ -179,9 +182,10 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
     evidence = {"schema": "aeep.development-demo.v1", "evidence_kind": "synthetic",
                 "outcome": "NOT_ASSESSED", "model_benefit": "Not assessed by fake-harness runs",
                 "evaluator": stack["evaluator"], "environment": facts, "sandbox_checks": checks,
-                "container_conformance": False, "canonical_receipts_connected": False, "runs": rows,
+                "container_conformance": False, "canonical_receipts_connected": (output / "coordinator-receipt.json").exists(),
+                "receipt_scope": "coordinator process only; no per-trial model accounting", "runs": rows,
                 "implementation_sha256": {name: digest(BASE / name) for name in
-                                          ("stack.py", "stack.json", "report.html", "packages.json", stack["lock_file"])}}
+                                          ("stack.py", "receipts.py", "stack.json", "report.html", "packages.json", stack["lock_file"])}}
     (output / "evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
     markdown = ["# AEEP development stack", "", "**Synthetic fixtures. Real model benefit: NOT ASSESSED.**", "",
                 "The pinned external evaluator ran both arms. AEEP independently checked each fixture output.", "",
@@ -196,7 +200,7 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
                      f"<td>{'Available' if row['exposed'] else 'Absent'}</td></tr>")
     markdown += ["", "The formatting difference is engineered into upstream's fake harness; it is not a measured skill benefit.",
                  "Model tokens, model time and actual billing are unavailable. Upstream fixture constants remain only in raw artifacts.",
-                 "Docker worker conformance, canonical receipt integration and live trials are not established."]
+                 "The batch has a canonical coordinator receipt; per-trial model accounting, Docker worker conformance and live trials remain unestablished."]
     (output / "report.md").write_text("\n".join(markdown) + "\n")
     template = (BASE / "report.html").read_text()
     page = template.replace("{{ROWS}}", "".join(table)).replace("{{PACKAGES}}", str(len(facts["versions"])))
@@ -223,7 +227,9 @@ def demo(runtime: Path, output: Path, stack: dict) -> None:
                 "--evals", str(root / "input/format-json/evals/evals.json"), "--agent", "fake",
                 "--workspace", str(root / "output"), "--grader-model", "", "--baseline", "--runs", "1",
                 "--concurrency", "1", "--retries", "0", "--timeout", "30"]
-        log = command([*prefix, *args], cwd=root, env=env)
+        import receipts
+
+        log, receipt_id = asyncio.run(receipts.execute([*prefix, *args], root, env, output / "receipts.sqlite3"))
         (output / "upstream.log").write_text(log)
         iteration = root / "output/format-json-workspace/iteration-1"
         rows = collect(iteration)  # The upstream CLI may exit zero even if every trial errored.
@@ -231,6 +237,13 @@ def demo(runtime: Path, output: Path, stack: dict) -> None:
         upstream_report = command([*prefix, "-m", "agent_skill_eval", "report", "--workspace",
                                    str(root / "output/format-json-workspace"), "--format", "markdown"], cwd=root, env=env)
         (output / "upstream-report.md").write_text(upstream_report)
+        receipts.normalize(
+            output, stack, facts, rows, read(BASE / "fixtures/format-json/evals/evals.json"),
+            receipt_id, digest(root / "fixture.sb"),
+            hashlib.sha256((BASE / "stack.py").read_bytes() + (BASE / "receipts.py").read_bytes()).hexdigest(),
+            {str(p.relative_to(output)): digest(p) for p in sorted((output / "upstream").rglob("*")) if p.is_file()},
+        )
+        receipts.verify(output)
         shutil.rmtree(root)
         (output / "execution.json").write_text(json.dumps({"scratch": str(root), "status": "complete",
                                                            "argv": args, "scratch_removed": True}, indent=2) + "\n")
@@ -250,8 +263,15 @@ def main() -> None:
     run = sub.add_parser("demo", help="Run only the pinned synthetic suite and write a local report")
     run.add_argument("--runtime", type=Path, required=True)
     run.add_argument("--output", type=Path, required=True)
+    verify = sub.add_parser("verify", help="Resolve saved synthetic evidence without executing upstream")
+    verify.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
+        if args.action == "verify":
+            import receipts
+            bundle = receipts.verify(args.output.expanduser().resolve())
+            print(f"Verified {len(bundle.runs)} synthetic records and coordinator receipt; model benefit NOT_ASSESSED")
+            return
         stack = manifest()
         if args.action == "plan":
             print(json.dumps(stack, indent=2))
@@ -263,6 +283,8 @@ def main() -> None:
         else:
             demo(runtime, args.output.expanduser().resolve(), stack)
     except (OSError, ValueError, KeyError) as error:
+        if args.action == "verify":
+            parser.exit(2, "Cannot verify recorded fixture evidence; metadata or provenance is invalid.\n")
         parser.exit(2, f"{error}\n")
 
 
