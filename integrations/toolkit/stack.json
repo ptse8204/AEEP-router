@@ -1,0 +1,93 @@
+{
+  "schema": "aeep.development-stack.v1",
+  "platform": "macos-arm64-python3.13",
+  "purpose": "Run the real external evaluator with synthetic fixtures and inspect the resulting evidence.",
+  "evaluator": {
+    "package": "agent-skill-eval",
+    "version": "0.7.0",
+    "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+    "wheel_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
+    "source_files": {
+      "agent_skill_eval/__init__.py": "cea726bf89140d96cd24fe459bf58988801e3c1cbbc0da57cad577821ddd44fe",
+      "agent_skill_eval/__main__.py": "c9ddeaab5083783ab6f90721dd6ef063c4ee78c5cfdd989ceb22168c7e6ca2f4",
+      "agent_skill_eval/cli.py": "7877e62d8a3fd5aa821c1359e721a2bbf8fff5429bb856995bc7ee394a4a3c0f",
+      "agent_skill_eval/fixtures.py": "5adc40b3f9f91d7d4d7599ee0f890a59058b0881505c46a8a2f0d7145435234c",
+      "agent_skill_eval/git_state.py": "d06f4cda0f859fa038f0da9799aabb54cc371d83995a939cf725eb79cc3f8f32",
+      "agent_skill_eval/graders/__init__.py": "28d30ab74122cc45ea9d4b98191fb59698e8b4b71d41e694e5702de8bb122c7a",
+      "agent_skill_eval/harnesses/__init__.py": "348b9cc731fb6470a6dfe38000c090bb743094cdc183156e27ba2b37a8a11bb0",
+      "agent_skill_eval/hooks.py": "6a47adab2c6037dfcc15b2a831085c03b68f73e9d31cfae7c22bf796e0eefe39",
+      "agent_skill_eval/models.py": "210f95b99f035092564d5503da7e228b4a1d13c9c4f96f5744ce22df8b6b443c",
+      "agent_skill_eval/openrouter.py": "eec81fb1714cae82d276626884184e23ca718098adef3ad4cbf009a3b84373c2",
+      "agent_skill_eval/progress.py": "369f0c0e00fd38e19ef1327d022861ce543d10632ea859843cabbbe8b77fc807",
+      "agent_skill_eval/runner.py": "a37df1cddbfcf4d0437835c2f582ee539724758d9d257f86ac47e8c39484ca27",
+      "agent_skill_eval/skills.py": "977cb376bfdd2954361abf5fa39abb657aa2b2613443cac122da35a36fdf9c64",
+      "agent_skill_eval/summary.py": "035ef3946a8f92d3c0822caaa7f407745e7ec5299af8cd8290605cebe7f140ff",
+      "agent_skill_eval/validation.py": "ddf201c8564b8671693a054033f8ead3ebced257b817a7f28d9201605720c874",
+      "agent_skill_eval/workspace.py": "a2969a72e74860d6c0117e8506819cd4e79c5061ee5bc191501a025bf47224e3"
+    }
+  },
+  "lock_file": "requirements-macos-arm64-py313.lock",
+  "lock_sha256": "c54cbd26fc9442b6ec408b9f2ce3c16e455046fdd19e1dcad8734618178fd026",
+  "fixtures": {
+    "fixtures/format-json/SKILL.md": "cf00158162842a953220c517df1e9b1582227a42c9abc10a2d17efc9a16fe79e",
+    "fixtures/format-json/evals/evals.json": "700a92984fb9089014c70008e01986d03f7a5dbfcc2420c786c70aa63a9c36a4"
+  },
+  "execution": {
+    "agent": "fake",
+    "model_grading": false,
+    "baseline": true,
+    "retries": 0,
+    "network": "denied",
+    "container_conformance": false
+  },
+  "layers": [
+    {
+      "name": "Python CLI + pinned environment",
+      "state": "implemented",
+      "role": "One entry point and a complete 24-wheel dependency lock."
+    },
+    {
+      "name": "agent-skill-eval 0.7.0",
+      "state": "fixture_verified",
+      "role": "Upstream control/treatment scheduling, skill setup and deterministic grading."
+    },
+    {
+      "name": "AEEP artifact checks",
+      "state": "fixture_verified",
+      "role": "Reject incomplete runs; preserve provenance and synthetic evidence labels."
+    },
+    {
+      "name": "HTML / Markdown report",
+      "state": "fixture_verified",
+      "role": "Inspect the running stack and both arms of each fixture."
+    },
+    {
+      "name": "Docker controlled workers",
+      "state": "not_connected",
+      "role": "Existing AEEP assets; required before real comparative trials."
+    },
+    {
+      "name": "SQLite canonical receipts",
+      "state": "not_connected",
+      "role": "Existing AEEP store; fixture artifacts here remain local files."
+    }
+  ],
+  "extensions": {
+    "evaluation": [
+      "Cisco Skill Scanner",
+      "ARD / MCP Registry",
+      "SkillsBench",
+      "OpenTelemetry"
+    ],
+    "full": [
+      "Waza / SkillRank",
+      "MCPMark / MCP-Universe",
+      "Langfuse / Phoenix",
+      "ToolHive",
+      "LangGraph",
+      "EvoAgentX / AFlow",
+      "Microsoft Agent Framework",
+      "AEEP Router / StackRuntime"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS_FOR_FIXED_SYNTHETIC_DEVELOPMENT_STACK_ONLY",
+  "checkpoint": "C04 IN_PROGRESS",
+  "upstream_version": "0.7.0",
+  "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+  "independently_verified_trial_records": 4,
+  "real_model_benefit": "NOT_ASSESSED",
+  "isolated_packages": 24,
+  "fresh_setup_and_repeat_demo": true,
+  "source_and_report_hashes_verified": true,
+  "tests": {
+    "command": "python3 -m unittest discover -s integrations/toolkit -p 'test_*.py' -v",
+    "passed": 10
+  },
+  "legacy_checks": "reports/toolkit-v2/c03/summary.json",
+  "host_python_unchanged": {
+    "openai": null,
+    "anyio": "4.8.0"
+  },
+  "remaining": [
+    "General EvaluatorAdapter",
+    "Docker controlled-worker integration/conformance",
+    "Canonical receipt integration",
+    "General comparison engine",
+    "Real model trials",
+    "Cross-platform installers",
+    "Release approval"
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:8765/",
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "mobile_content_width": 390,
+    "console_errors_or_warnings": 0,
+    "full_toolkit_disclosure": "opened successfully"
+  },
+  "runtime": "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+  "retained_scratch_root": "/private/tmp/aeep-ase-c04-tt14mj6r",
+  "retained_scratch_kib": 182396,
+  "live_preview": "Loopback-only Python static server, tool session 16821; no public deployment"
+}

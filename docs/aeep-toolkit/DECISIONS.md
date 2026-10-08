@@ -102,3 +102,25 @@ A catalog entry, schema or synthetic adapter double is not upstream integration.
 No new runner, installer or workflow engine is justified by the current evidence.
 Keep the local CLI/report choice under D16. C03 stays unfinished and C04 remains
 unqualified until their recorded acceptance checks pass.
+
+### D19: 2026-10-08, executable development stack in one integration directory
+
+Accepted implementation under the operator's request to actually build and
+showcase the stack, following the concrete bounded setup review. Consolidate
+`integrations/toolkit` around the published agent-skill-eval wheel, a complete
+24-wheel lock, standard venv/pip setup and its actual CLI. All 16 evaluator source
+files match the C01 pin. The private setup was authorized by this follow-up; no
+new live, credentials, cloud or release authority is inferred.
+
+Reuse the upstream scheduler, fake harness, deterministic graders and report
+command. Add a development-only bridge that verifies the fixed synthetic suite
+and renders the stack/evidence report. Its commands cannot select live models or
+arbitrary candidates. This is not the general EvaluatorAdapter or an alternative
+approval/installation service. Ten finite offline tests cover failure, subject
+drift, exposure, missing runs, grading disagreement, timeout and report labels.
+The existing test-definition delegation applies to those tests.
+
+The original nine-wheel scratch supplement was replaced by a fully isolated
+24-wheel runtime for reproducibility. Existing host packages remain unchanged.
+The observed all-error/zero-exit upstream run is retained; successful fixture runs
+do not establish controlled Docker workers, canonical receipts or model benefit.

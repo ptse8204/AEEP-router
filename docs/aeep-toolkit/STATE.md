@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 preview is implemented and undergoing verification; its installer integration is unfinished. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 preview passed its software checks; its installer integration is unfinished. C04 now has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,14 +25,12 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '91f74de3f9a5fa2a9dbb708686bd8bc55ac8568c'
-last_check_command: 'COVERAGE_FILE=.coverage-toolkit PYTHONPATH=src python3 -m coverage run --branch -m pytest'
-last_check_result: '1319 passed, 21 skipped; 81.41% combined coverage; both required branch gates and all recorded quality/build checks passed.'
-next_action: 'Finish source-bound C03 verification and prepare the pinned agent-skill-eval C04 spike. The proposed Router extraction is withdrawn; no architecture answer is pending. See ARCHITECTURE_LOCK.md.'
-blocked_actions:
-  - 'Pinned agent-skill-eval fixture execution and private wheel installation await the specific C04 review response.'
-missing_permissions:
-  - 'Approve only reports/toolkit-v2/c04/SPIKE_REVIEW.md; no live, credentials, paid calls or release authority requested.'
+last_verified_commit: '75d1961'
+last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-c03-final.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
+last_check_result: '1343 passed, 21 skipped; 81.50% combined coverage; both required branch gates and all 12 final quality/build commands passed. Separate stack checks: 10 passed plus fresh upstream fixture execution.'
+next_action: 'Use integrations/toolkit as the executable development foundation. Connect the qualified fixture artifact path to the general EvaluatorAdapter and existing controlled-worker/receipt boundary; continue C03-C06 acceptance without claiming the demo completes them.'
+blocked_actions: []
+missing_permissions: []
 unknowns:
   - 'No upstream evaluators have been compatibility-qualified inside AEEP.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
@@ -271,3 +269,50 @@ third-party execution question remains pending; this clarification is not approv
 
 C03's ordinary full pytest completed with exit 0 in 633.33 seconds. Coverage and
 remaining validation are still running; consult the progressive final checks.
+
+## Executable development stack delivered
+
+The operator's follow-up requested actually building and showcasing the stack
+after the concrete private setup was described. That authorizes the bounded local
+fixture build; the earlier execution question is no longer pending. D19 records
+the scope and full private dependency closure. No live model, credential, public
+service or release authority was inferred.
+
+`integrations/toolkit/` is the single development entry point: a complete 24-wheel
+lock, standard private venv setup, exact upstream source/fixture pins, real
+agent-skill-eval CLI execution, independent fixed-fixture checks and HTML/Markdown
+report generation. Both a first environment and a fresh rebuild ran the four
+expected trial records. Ten dedicated offline checks passed. The
+[showcase](../../reports/toolkit-v2/stack-showcase/index.html) links actual upstream
+artifacts; the [summary](../../reports/toolkit-v2/c04/stack-summary.json) states
+source hashes, scope, checks and remaining integrations. The synthetic metrics
+are not imported as actual model observations.
+
+The first sandbox probe mistakenly tested socket allocation instead of connection
+denial; its failure is retained. The corrected connection/home/write probes pass.
+The first upstream CLI returned zero despite four Git initialization failures;
+those artifacts remain under C04. Using the existing Command Line Tools Git
+directly fixed the fixture run without changing the sandbox. The bridge now
+rejects missing, mismatched or unverified trial artifacts regardless of CLI exit.
+
+C03 source at `75d1961` stayed unchanged during both full suites: 1,343 passed,
+21 skipped, 81.50% combined coverage, both branch gates and all 12 final commands
+passed. Supplemental Node/proof checks passed. Its temporary Node link is removed;
+no validation process remains running. C03 remains IN_PROGRESS because the general
+installed inventory and reviewed production installer bridge are unfinished.
+
+C04 remains IN_PROGRESS. The development demo is not the general EvaluatorAdapter,
+a controlled Docker comparison, canonical assessment receipts, or a C06-complete
+user journey. The next work uses this tested upstream path instead of creating
+a replacement runner. General evidence normalization/comparison and worker/receipt
+integration remain safe implementation work; real-host execution needs its own
+conformance and applicable authority.
+
+Local resources: private runtimes and retained probe evidence under
+`/private/tmp/aeep-ase-c04-tt14mj6r` (about 178 MiB observed; no global package
+changes); the useful reproducible runtime is its `rebuild` child. A loopback-only
+static report server runs in tool session 16821 at `http://127.0.0.1:8765/`, serving
+only `reports/toolkit-v2/stack-showcase`. Its browser tab is marked as a deliverable.
+Stop that owned preview process when no longer needed. Runtime removal is scoped
+to these task-owned directories; preserve original checkout work and all historical
+production evidence. No build, model trial or background implementation is running.

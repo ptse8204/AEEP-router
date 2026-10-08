@@ -1,0 +1,26 @@
+Valid: 2 eval(s) for skill 'format-json'
+Side-effect levels: static=2
+All 2 assertion(s) match deterministic patterns
+Strict eval design warnings:
+  - suite has no negative or missing-input control case
+  [eval=format agent=fake config=with_skill] started
+Error running format-fake-with-r1: Command '['git', 'init', '-b', 'main']' 
+returned non-zero exit status 69.
+  [eval=format agent=fake config=without_skill] started
+  [eval=adjacent agent=fake config=with_skill] started
+Error running format-fake-without-r1: Command '['git', 'init', '-b', 'main']' 
+returned non-zero exit status 69.
+  [eval=adjacent agent=fake config=without_skill] started
+Error running adjacent-fake-with-r1: Command '['git', 'init', '-b', 'main']' 
+returned non-zero exit status 69.
+Error running adjacent-fake-without-r1: Command '['git', 'init', '-b', 'main']' 
+returned non-zero exit status 69.
+  Running evals... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100%
+Warning: no with/without-skill delta for fake — all of its runs in one config 
+errored
+
+Results saved to 
+/private/tmp/aeep-ase-c04-tt14mj6r/output/format-json-workspace/iteration-1
+
+Done! Results in: 
+/private/tmp/aeep-ase-c04-tt14mj6r/output/format-json-workspace/iteration-1

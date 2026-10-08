@@ -70,10 +70,12 @@ optimizer, tracing server, registry service or payout system is part of this bui
 
 ## What exists and what is being built next
 
-The independent contracts and a partial non-mutating setup preview exist.
-The current V2 evaluator integration, controlled comparison, report generation
-and installation journey are unfinished. Source research and fixture tests do
-not establish a working toolkit.
+The independent contracts, partial non-mutating setup preview and an executable
+[development stack](../../integrations/toolkit/README.md) exist. The development
+stack uses the actual pinned external package, verifies its fixed synthetic trials
+and writes the [local showcase](../../reports/toolkit-v2/stack-showcase/index.html).
+General V2 evaluator dispatch, controlled real-agent comparison, canonical receipts
+and the complete installation journey remain unfinished.
 
 The next product deliverable is one continuous, fixture-labeled journey from
 candidate input through the actual upstream evaluator to an AEEP comparison
@@ -93,8 +95,8 @@ records coupling, not a justification for a new execution architecture.
 
 ## Next implementation proof
 
-Use agent-skill-eval's existing fake harness and deterministic graders for a
-bounded no-charge engineering spike. Inspect its actual control/treatment
+The bounded engineering spike now runs agent-skill-eval's existing fake harness
+and deterministic graders through the consolidated development stack. Inspect its actual control/treatment
 artifacts, optional exposure, failures and missing telemetry before writing the
 small adapter. Retain upstream orchestration where it works. Add only the AEEP
 validation and controlled-worker integration that the acceptance gates require.

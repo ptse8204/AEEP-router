@@ -1,0 +1,25 @@
+{
+  "skill_name": "format-json",
+  "evals": [
+    {
+      "id": "format",
+      "prompt": "Format this JSON: {\"status\":\"ok\"}.",
+      "expected_output": "formatted JSON",
+      "side_effect_level": "static",
+      "force_skill_invocation": false,
+      "assertions": [
+        "The output contains `formatted-json-ok`"
+      ]
+    },
+    {
+      "id": "adjacent",
+      "prompt": "Return the baseline status.",
+      "expected_output": "baseline output",
+      "side_effect_level": "static",
+      "force_skill_invocation": false,
+      "assertions": [
+        "The output contains `baseline output`"
+      ]
+    }
+  ]
+}

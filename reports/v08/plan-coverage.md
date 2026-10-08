@@ -3877,3 +3877,14 @@ integration target remains agent-skill-eval under D13/D18. The
 [architecture record](../../docs/aeep-toolkit/ARCHITECTURE_LOCK.md) distinguishes
 source review from working integrations. No further architecture answer is pending.
 No new live, human-usability or release gate closes.
+
+The operator subsequently requested an actual consolidated stack. The
+[development integration](../../integrations/toolkit/README.md) now installs a
+complete pinned agent-skill-eval environment and executes its real CLI with
+synthetic fixtures. The [local showcase](../toolkit-v2/stack-showcase/index.html)
+links normalized fixture evidence and original upstream artifacts. The initial
+Git-path failure returned exit zero from upstream and is retained separately;
+the bridge rejects incomplete runs. This is an executable development stack,
+not passed Docker-host conformance, canonical receipt integration or live value.
+C03's full ordinary and coverage suites each passed 1,343 tests with 21 skips;
+combined coverage was 81.50%, with both required branch gates passing.

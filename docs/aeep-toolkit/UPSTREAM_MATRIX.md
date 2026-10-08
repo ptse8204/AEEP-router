@@ -78,3 +78,22 @@ Research-only scratch files are retained at
 `/tmp/aeep-toolkit-v2-source-review`; they are not a dependency, executable path or
 vendored source. Re-fetch using the immutable URLs and verify the recorded hashes
 if that temporary directory is gone.
+
+## Subsequent C04 executable development evidence
+
+The operator requested an actual consolidated stack after reviewing the bounded
+fixture setup. The agent-skill-eval 0.7.0 wheel, SHA-256
+`5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f`,
+matches all 16 reviewed Python source files. The
+[development stack](../../integrations/toolkit/README.md) installs a full
+24-wheel closure in a private environment and runs the actual upstream CLI,
+fake harness, deterministic graders and Markdown report. A fresh rebuild also
+completed the four expected synthetic trial records. No upstream source patch
+or vendored runner was needed.
+
+The first invocation exposed a zero-exit/all-trials-error behavior; its artifacts
+are retained. The AEEP bridge independently checks expected records and fixture
+outputs before presenting success. Source, package and output hashes are in
+[the C04 summary](../../reports/toolkit-v2/c04/stack-summary.json). This qualifies
+the fixed local engineering demo only. Controlled real-host dispatch, general
+normalization, canonical accounting and comparative model value remain unqualified.

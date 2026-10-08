@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "sandbox-exec",
+    "reviewed fixture profile",
+    "python",
+    "synthetic boundary probes"
+  ],
+  "exit_code": 1,
+  "stdout": "{\"home_read_denied\": true, \"scratch_write\": true, \"outside_write_denied\": true}\n",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 11, in <module>\n    assert result=={'home_read_denied':True,'network_denied':True,'scratch_write':True,'outside_write_denied':True}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}
