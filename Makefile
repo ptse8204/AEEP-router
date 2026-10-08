@@ -4,7 +4,7 @@
 DOCS_FILES := README.md AGENTS.md CLAUDE.md CONTRIBUTING.md CODE_OF_CONDUCT.md \
 	ARCHITECTURE.md SPEC.md SECURITY.md \
 	$(filter-out docs/ASSESSMENT_TESTING.md docs/ROADMAP_0.7.md,$(wildcard docs/*.md)) \
-	docs/media/README.md $(wildcard docs/protocol/*.md) \
+	docs/media/README.md $(wildcard docs/protocol/*.md docs/aeep-toolkit/*.md) \
 	$(wildcard examples/*/README.md integrations/*/README.md)
 LYCHEE ?= lychee
 

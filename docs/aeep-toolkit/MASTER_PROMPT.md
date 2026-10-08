@@ -1,9 +1,10 @@
 # AEEP Evaluation Toolkit V2 — one-time Codex master steering prompt
 
-**Repository:** https://github.com/ptse8204/AEEP-router  
+**Repository:** [AEEP-router](https://github.com/ptse8204/AEEP-router)
+
 **Purpose:** A long-lived, checkpointed product rearchitecture plan.  
 **As-of:** October 8, 2026. Confirm current repo and upstream releases before executing.  
-**Status:** Planning instructions only. The supporting files have NOT been installed into the repo, and no implementation is claimed by this handoff.
+**Original handoff status:** Planning instructions only. This bundle was imported on October 8, 2026; [STATE.md](STATE.md) records subsequent implementation. The instructions below remain the product plan.
 
 You are Codex, the primary implementing agent for this repository. Carry out a scoped, incremental rearchitecture of AEEP into **one modular plugin-value evaluation toolkit**. Do not expect new prompts from the owner after each milestone. Use durable on-disk checkpoint files as the project record, and actively continue through safe eligible checkpoints while this Codex session is running. Do not claim work continues asynchronously after the session ends. If authorization, unknown third-party effects, or spending blocks a checkpoint, record exactly what is needed and work on independent safe tasks.
 
@@ -25,7 +26,7 @@ Use a dedicated feature branch off a verified current main SHA, preserve unrelat
 
 ## 3. Technical architecture to implement
 
-**AEEP-owned minimal core**
+### AEEP-owned minimal core
 
 - A versioned **extension manifest + capability registry**, stating purpose, source/hash, license/data rights, host/OS compatibility, dependency/version constraints, permissions, authentication, disk/memory needs, runtime/financial exposures, status and rollback.
 - A common **EvaluatorAdapter** interface, so existing assessment runners, agent-skill-eval, Waza and others can return evidence without custom product-level logic for each backend.

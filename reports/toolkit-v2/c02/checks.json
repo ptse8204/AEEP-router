@@ -1,0 +1,138 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.06474287481978536,
+    "log": "reports/toolkit-v2/c02/check-01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.0286822910420597,
+    "log": "reports/toolkit-v2/c02/check-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 648.9654041661415,
+    "log": "reports/toolkit-v2/c02/check-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 0,
+    "seconds": 948.0725192080718,
+    "log": "reports/toolkit-v2/c02/check-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 0,
+    "seconds": 1.43221424985677,
+    "log": "reports/toolkit-v2/c02/check-05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "reports/toolkit-v2/c02/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 1.8518317500129342,
+    "log": "reports/toolkit-v2/c02/check-06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "reports/toolkit-v2/c02/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04273950005881488,
+    "log": "reports/toolkit-v2/c02/check-07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "reports/toolkit-v2/c02/coverage.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04161091707646847,
+    "log": "reports/toolkit-v2/c02/check-08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.1994153328705579,
+    "log": "reports/toolkit-v2/c02/check-09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "seconds": 0.3227047498803586,
+    "log": "reports/toolkit-v2/c02/check-10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.1830724999308586,
+    "log": "reports/toolkit-v2/c02/check-11.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "build",
+      "--no-isolation"
+    ],
+    "exit_code": 0,
+    "seconds": 2.1826514590065926,
+    "log": "reports/toolkit-v2/c02/check-12.log"
+  }
+]

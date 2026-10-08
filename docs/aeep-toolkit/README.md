@@ -3,7 +3,7 @@
 **Plan date:** 2026-10-08  
 **Target:** `https://github.com/ptse8204/AEEP-router`  
 **Track:** evidence-first modularization, preserving the existing repository and historical evidence.  
-**Implementation status:** PLANNED; no code implementation or live study is claimed by this handoff.
+**Implementation status:** C00/C01 audit records and the C02 contract implementation are on the feature branch. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
 
 ## Mission (fixed unless the owner changes it)
 

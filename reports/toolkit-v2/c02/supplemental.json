@@ -1,0 +1,104 @@
+[
+  {
+    "argv": [
+      "node",
+      "--test",
+      "integrations/dsh-aeep-router/test.mjs",
+      "integrations/dsh-aeep-router/runtime.test.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.825512875104323,
+    "log": "reports/toolkit-v2/c02/supplemental-01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/economic_evidence/campaign.py",
+      "--repetitions",
+      "30",
+      "--check",
+      "--require-gates"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5744627080857754,
+    "log": "reports/toolkit-v2/c02/supplemental-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4571726662106812,
+    "log": "reports/toolkit-v2/c02/supplemental-03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-report",
+      "reports/v05/dsh/live-safety.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.44848758284933865,
+    "log": "reports/toolkit-v2/c02/supplemental-04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-comparison",
+      "reports/v05/dsh/live-comparison.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4570416670758277,
+    "log": "reports/toolkit-v2/c02/supplemental-05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-native-plan"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4455397909041494,
+    "log": "reports/toolkit-v2/c02/supplemental-06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/job_application/campaign.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.4783784579485655,
+    "log": "reports/toolkit-v2/c02/supplemental-07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "aeep",
+      "provider",
+      "verify",
+      "examples/provider_package/aeep-provider.yaml",
+      "-m",
+      "examples/provider_package/aeep.yaml",
+      "--compact"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5827156251762062,
+    "log": "reports/toolkit-v2/c02/supplemental-08.log"
+  },
+  {
+    "argv": [
+      "/Library/Developer/CommandLineTools/usr/bin/make",
+      "docs-check",
+      "LYCHEE=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/lychee/lychee-aarch64-apple-darwin/lychee"
+    ],
+    "exit_code": 0,
+    "seconds": 2.181547834072262,
+    "log": "reports/toolkit-v2/c02/supplemental-09.log"
+  }
+]

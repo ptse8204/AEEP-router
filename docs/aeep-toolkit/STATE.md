@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00 inventory/baseline and C01 source review passed. C02 contracts are implemented; final integrated coverage is running.
+**Status as of 2026-10-08:** C00, C01 and C02 passed their offline gates. C03 is next. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,11 +9,11 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C02
+current_checkpoint: C03
 checkpoint_status:
   C00: PASS
   C01: PASS
-  C02: IN_PROGRESS
+  C02: PASS
   C03: TODO
   C04: TODO
   C05: TODO
@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: null
-last_check_command: null
-last_check_result: null
-next_action: 'Finish frozen-source C02 verification, then continue C03 non-mutating installer preview. C01 PASS is source review only.'
+last_verified_commit: '91f74de3f9a5fa2a9dbb708686bd8bc55ac8568c'
+last_check_command: 'COVERAGE_FILE=.coverage-toolkit PYTHONPATH=src python3 -m coverage run --branch -m pytest'
+last_check_result: '1319 passed, 21 skipped; 81.41% combined coverage; both required branch gates and all recorded quality/build checks passed.'
+next_action: 'Implement C03 pure installer preview: read INSTALLATION_DESIGN.md, component_setup.py and onboarding.py; first freeze dependency and no-effect tests. No third-party install is authorized.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -66,18 +66,27 @@ installation or C04 conformance. This does not pass a live gate.
 | UTC date | Checkpoint | Status | Commit | Verified evidence | Outstanding action |
 |---|---|---|---|---|---|
 | 2026-10-08 | C00 | IN_PROGRESS | 2755e49 | Inventory, initial failed-location logs, ongoing baseline | Finish source-bound baseline |
-| 2026-10-08 | C01 | PASS (source review) | Commit containing this record | 17 immutable repository pins and hashed source files | C04 executable conformance remains open |
+| 2026-10-08 | C01 | PASS (source review) | 92be11c | 17 immutable repository pins and hashed source files | C04 executable conformance remains open |
 
-## C02 implementation handoff
+## C02 completed implementation
 
 Code is in `src/aeep_toolkit/models.py`, with 26 synthetic tests and seven schema
 exports through the existing generator. `CONTRACTS.md` describes trust limits.
 No existing runtime module changed. `pyproject.toml` includes the new namespace
-in coverage. Full final checks are running under `reports/toolkit-v2/c02`; they
-use `.coverage-toolkit` so the completed C00 baseline cannot overwrite them.
-Do not edit executable source while these checks run. Verify source-hashes and
-source-stability records, then inspect every exit code before updating status.
+in coverage. Both final full runs passed 1,319 tests, with 21 skips and one existing
+Starlette dependency warning. Combined line/branch coverage was 81.41%; the new
+model module reached 98.48%. Both required coverage gates, Ruff, mypy, schemas,
+policy, retained proof checks, Node tests and wheel/sdist builds passed.
+[The C02 summary](../../reports/toolkit-v2/c02/summary.json) binds the exact logs,
+source commit and build artifacts. Executable source stayed unchanged throughout.
+The expanded documentation check covers 58 documents and passed with no lint or
+local-link errors. External URLs were not fetched by the offline link checker.
 
+The checks use `.coverage-toolkit` separately from the C00 data. Both local
+coverage databases and JSON files are ignored; committed text reports, hashes and
+gate outputs retain the results. The temporary Node dependency symlink was removed
+without touching the original installed tree. No verification process remains
+running for this checkpoint.
 C00 ordinary pytest: 1,293 passed, 21 skipped, one existing dependency warning in
 626.52 seconds. Initial failures under `.codex` remain retained. C00 coverage was
 collected before the new tests existed; it describes the legacy source only.
@@ -100,6 +109,16 @@ commit/README hash is not a downloadable package artifact hash. An unresolved
 external candidate belongs in the blocked catalog, not a fabricated install plan.
 Essentials' package dependency footprint is still a C06/C13 requirement; an
 independent import test alone does not establish minimal installation.
+
+The C03 source follow-up found that `component_setup.apply` pins the selected
+npm/Python version but does not supply a complete transitive artifact-hash lock.
+Do not treat that path as a fully verified V2 installer. Preserve its existing
+review/journal behavior, then either enforce the V2 resolved lock before effects
+or expose the proposed install as blocked. `onboarding.inventory` returns bounded
+connection names/control states; `check_setup` constructs a Router and is unsuitable
+for the promised zero-write preview. The first new preview tests should intercept
+process/network calls and compare filesystem/config snapshots, including failure
+cases for missing dependencies, cycles, stale hashes and incompatible policy.
 
 The managed worktree under `.codex` was archived after its
 failed-location logs and research were copied. The app artifact list confirmed archival. The implementation worktree remains
@@ -127,3 +146,31 @@ later quality/build commands also saw the additive C02 contracts.
 [The summary](../../reports/toolkit-v2/c00/summary.json) binds exact logs and scope.
 The original checkout status still matches the initial snapshot. Retained failures
 and skipped real-boundary tests remain separate; no live or release gate closes.
+
+## Future authority gates
+
+- C03 may implement and test a pure preview now. Executing a third-party installer
+  needs review of the exact artifact, complete dependency effects and requested
+  permissions; C01 source research does not grant that authority.
+- C07 needs a new frozen V2 comparison plan, applicable controlled-worker
+  conformance and specific operator-approved model/billing allowances. None was
+  created or used in C00-C02. Existing campaign grants must not be reset or reused
+  by assumption.
+- C13 needs the remaining functionality, compatibility and human checks, followed
+  by explicit release/publication review. No release or push occurred here.
+
+These are future prerequisites, not reasons to stop C03-C06 offline work.
+
+## Verified checkpoint journal and resumption boundary
+
+| UTC date | Checkpoint | Status / tier | Implementation or evidence commit | Evidence | Next |
+|---|---|---|---|---|---|
+| 2026-10-08 | C00 | PASS / OFFLINE | c7033b1; baseline 8b015bf | `reports/toolkit-v2/c00/summary.json` | Source audit complete |
+| 2026-10-08 | C01 | PASS / source review | 92be11c | `UPSTREAM_MATRIX.md`; 55 retained source hashes verified | Executable qualification remains C04 |
+| 2026-10-08 | C02 | PASS / OFFLINE contracts | 91f74de | `reports/toolkit-v2/c02/summary.json` and `acceptance.md` | C03 pure preview |
+
+This session ends at the verified C02 boundary. C03 is safe and eligible, with
+source findings above, but its implementation has not begun. Host conformance,
+live value, human usability and release remain TODO for V2. No work runs in the
+background. Use `git status --short` and the source-hash record before continuing;
+do not repeat the full C00 audit or completed checks unless relevant source changes.

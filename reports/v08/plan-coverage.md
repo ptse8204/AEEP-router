@@ -3847,3 +3847,21 @@ is [STATE.md](../../docs/aeep-toolkit/STATE.md), with separate evidence under
 remain unchanged. The initial managed-worktree path was rejected by the existing
 Codex-state fingerprint guard; verification now uses an isolated worktree outside
 `.codex`. No V2 live, human-usability or release gate has passed.
+
+
+C00-C02 now pass their V2 offline gates: inventory/baseline, pinned upstream source
+review, and inert versioned extension/evidence contracts. The
+[C02 verification record](../toolkit-v2/c02/summary.json) records 1,319 passes and
+21 skips in both full runs, 81.41% combined coverage, required branch gates,
+quality/policy/schema checks, retained proofs, Node checks and package builds.
+Executable source remained unchanged; legacy runtime and schemas are preserved.
+The documentation check now includes all toolkit documents (58 total), with no
+lint or local-link errors. Imported formatting failures are retained in the V2
+record and corrected; no documentation discrepancy remains from these checks.
+
+C03 pure installation preview is the next unimplemented checkpoint. C04-C13,
+upstream runtime qualification, authenticated evidence resolution, a minimal
+Essentials installation, host conformance, live value, human comprehension and
+release remain open. Existing package-version setup lacks the complete transitive
+artifact-hash lock required for V2 install readiness. No external installation,
+model trial, grant modification, push or publication occurred in this increment.

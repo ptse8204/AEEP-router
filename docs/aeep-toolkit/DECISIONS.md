@@ -19,6 +19,7 @@ These are **proposed steering decisions**, not claims of implemented features. A
 ## Decision entry template
 
 ### DNN — YYYY-MM-DD — [title]
+
 - **Status:** proposed / accepted / superseded / blocked
 - **Problem & product impact:**
 - **Alternatives:** (reuse / wrap / write / defer)

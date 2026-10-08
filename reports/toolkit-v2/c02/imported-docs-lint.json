@@ -1,0 +1,22 @@
+{
+  "command": [
+    "npx",
+    "--offline",
+    "markdownlint-cli2@0.23.3",
+    "--config",
+    ".markdownlint-cli2.jsonc",
+    "docs/aeep-toolkit/*.md"
+  ],
+  "initial_exit_code": 1,
+  "files": 11,
+  "issues": 18,
+  "affected": {
+    "docs/aeep-toolkit/CHECKPOINTS.md": "14 MD022 missing blank lines after headings",
+    "docs/aeep-toolkit/DECISIONS.md": "MD022 heading and MD032 list blank lines",
+    "docs/aeep-toolkit/MASTER_PROMPT.md": "MD034 bare URL; MD036 emphasis used as heading"
+  },
+  "repair": "Formatting only; source text, instructions, commands and URL targets preserved.",
+  "repaired_exit_code": 0,
+  "remaining_issues": 0,
+  "maintenance": "Makefile docs-check now includes all toolkit Markdown files."
+}

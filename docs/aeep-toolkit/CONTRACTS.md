@@ -46,11 +46,11 @@ Existing exports remain unchanged. This is one distribution and one repository;
 no new dependency, server or database is introduced. The full Essentials journey
 still requires C03-C06.
 
-## Remaining C02 checks
+## Verified C02 scope
 
 The inert registry rejects duplicate IDs and looks up explicit extensions.
 Bundle validation binds candidate bytes and rejects unsupported host/adapter
 identities or telemetry. Twenty-six focused checks pass on integrated source;
-full checks are running under `reports/toolkit-v2/c02`. C02 remains IN_PROGRESS
-until they finish. Canonical evidence resolution belongs to C04/C05; no reference
-is trusted merely because these schemas accept it.
+full verification passed; see `reports/toolkit-v2/c02/summary.json`. Canonical
+evidence resolution belongs to C04/C05; no reference is trusted merely because
+these schemas accept it.
