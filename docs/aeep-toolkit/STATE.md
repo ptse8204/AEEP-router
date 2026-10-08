@@ -12,7 +12,7 @@ implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
 current_checkpoint: C00
 checkpoint_status:
   C00: IN_PROGRESS
-  C01: TODO
+  C01: PASS
   C02: TODO
   C03: TODO
   C04: TODO
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: null
 last_check_command: null
 last_check_result: null
-next_action: 'Finish baseline checks in /Users/edwintse/Documents/aeep-toolkit-v2; inspect reports/toolkit-v2/c00/checks.json. Continue source research C01.'
+next_action: 'Finish C00 baseline; implement C02 contracts under D14. C01 PASS is source selection only, no runtime qualification.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -53,3 +53,17 @@ unknowns:
 - Baseline commands are running in the replacement worktree; inspect `checks.json` and log tails before repeating them.
 - Read-only upstream research is under `reports/toolkit-v2/c01`. No third-party code installed or executed.
 - No live trial, grant amendment, credentials, payment, publication or host configuration change authorized by these records.
+
+## C01 checkpoint record
+
+C01 source investigation passed. Exact pins, license scope, observed interfaces
+and remaining unknowns are in `UPSTREAM_MATRIX.md` and `reports/toolkit-v2/c01`.
+Agent-skill-eval is the first external candidate; AEEP is the fallback (D13).
+No candidate is runtime-qualified. Unresolved transitive dependencies, installed
+host compatibility, footprint, issue triage and rollback must be checked before
+installation or C04 conformance. This does not pass a live gate.
+
+| UTC date | Checkpoint | Status | Commit | Verified evidence | Outstanding action |
+|---|---|---|---|---|---|
+| 2026-10-08 | C00 | IN_PROGRESS | 2755e49 | Inventory, initial failed-location logs, ongoing baseline | Finish source-bound baseline |
+| 2026-10-08 | C01 | PASS (source review) | Commit containing this record | 17 immutable repository pins and hashed source files | C04 executable conformance remains open |

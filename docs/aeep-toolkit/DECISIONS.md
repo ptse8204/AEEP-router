@@ -26,3 +26,32 @@ These are **proposed steering decisions**, not claims of implemented features. A
 - **Decision and rationale:**
 - **Consequences, migration, rollback:**
 - **Checkpoint linkage:** Cnn
+
+### D12: 2026-10-08, retain authority and isolate package imports
+
+Accepted for C00/C02. Keep the current receipt store, assessment repository,
+accounting and controlled runner. Add versioned evaluation records as views and
+references; do not migrate or re-sign historical evidence. The inventory found
+eager package exports importing routing and host modules. A minimal import path
+must be verified before claiming Essentials independence. Existing callers and
+serialized records remain compatible.
+
+### D13: 2026-10-08, evaluator candidate and fallback
+
+Accepted source-level decision for C01; runtime qualification remains open.
+Inspect agent-skill-eval 0.7.0 at `59de161f657b82bfaf8f6abe83dfff38552deb21`
+through a narrow adapter first. Its optional invocation matches the question, but
+its workspace and final-output accounting do not meet AEEP controls by themselves.
+Use AEEP's existing runner as the fallback. Waza's Copilot coupling and SkillRank's
+forced prompt increase first-adapter scope. The pinned source matrix records the
+comparison. No external engine is installed, enabled or approved by this decision.
+
+### D14: 2026-10-08, additive contracts before engines
+
+Accepted implementation scope for C02. Reuse Pydantic, existing canonical JSON,
+receipt references and accounting semantics. Introduce only extension metadata,
+adapter capabilities and content-free evaluation/report envelopes. Validators
+check structure and consistency; a claimed evidence reference never authenticates
+itself. Repository resolution and trust checks remain mandatory before a report
+can claim verified billing, independent verification or conformance. No new ledger,
+planner, process manager or exporter is needed for these contracts.
