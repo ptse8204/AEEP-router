@@ -107,6 +107,10 @@ PYTHONPATH=src python3 -m unittest discover -s integrations/toolkit -p 'test_*.p
 python3 -m ruff check integrations/toolkit
 ```
 
+CI runs the bridge's offline checks on its existing Linux/macOS matrix. These
+checks use local subprocess fixtures; they do not install or invoke the external
+evaluator. The actual upstream demo remains qualified only on the recorded Mac.
+
 Successful demos remove only their newly created worker scratch directory.
 Failed demos retain it and write `failure.json` for inspection. To remove a
 development installation, remove only the runtime and report directories you
