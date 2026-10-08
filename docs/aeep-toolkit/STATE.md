@@ -257,3 +257,17 @@ The task-owned Node dependency symlink under
 after checks finish, preserving its original-checkout target. New full-check logs
 remain uncommitted while being written. Preserve the interrupted validation logs
 and the original checkout's unrelated edits.
+
+### Product-stack clarification
+
+The operator requested a concrete product and stack explanation, rather than
+another checkpoint-only response. ARCHITECTURE_LOCK.md now maps the complete
+skill-to-report journey to Python/Pydantic, agent-skill-eval, existing Docker worker
+controls, SQLite/artifact storage, comparison/reporting and the three selectable
+profiles. The external-dispatch integration is unresolved; no broad refactor is
+authorized by this design. The next product deliverable is the complete synthetic
+journey, not merely a successful upstream smoke test. The original bounded
+third-party execution question remains pending; this clarification is not approval.
+
+C03's ordinary full pytest completed with exit 0 in 633.33 seconds. Coverage and
+remaining validation are still running; consult the progressive final checks.
