@@ -1,0 +1,57 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "exit_code": 0,
+    "log": "reports/toolkit-v2/c00/check-1.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "reports/toolkit-v2/c00/check-2.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 1,
+    "log": "reports/toolkit-v2/c00/check-3.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "exit_code": 1,
+    "log": "reports/toolkit-v2/c00/check-4.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "exit_code": 2,
+    "log": "reports/toolkit-v2/c00/check-5.log"
+  }
+]

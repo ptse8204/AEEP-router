@@ -1,0 +1,95 @@
+                                                                                
+ Usage: python -m aeep [OPTIONS] COMMAND [ARGS]...                              
+                                                                                
+ Profile and route agent actions across Python, CLI, HTTP, MCP, and host        
+ agents.                                                                        
+                                                                                
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.      │
+│ --show-completion             Show completion for the current shell, to copy │
+│                               it or customize the installation.              │
+│ --help                        Show this message and exit.                    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ update                                                                       │
+│ uninstall                                                                    │
+│ setup                                                                        │
+│ discover                                                                     │
+│ init-assessment  Create a selected-plugin assessment and exact review        │
+│                  bundle; execute nothing.                                    │
+│ version          Print the package version.                                  │
+│ init             Create a runnable manifest with equivalent Python and CLI   │
+│                  routes.                                                     │
+│ doctor           Validate the manifest and check local integration           │
+│                  prerequisites.                                              │
+│ list             List capabilities and configured execution routes.          │
+│ search           Search capabilities without loading every executor into the │
+│                  response.                                                   │
+│ policies         List built-in and manifest-defined policies.                │
+│ metrics          Summarize execution savings and subscription capacity       │
+│                  conserved.                                                  │
+│ quote            Request bounded static/provider quotes without accepting    │
+│                  payment.                                                    │
+│ run-prepared     Execute one immutable prepared route after rechecking its   │
+│                  original action.                                            │
+│ accept-quote     Explicitly accept one stored quote; this is not exposed as  │
+│                  a model tool.                                               │
+│ sign-receipt     Sign a persisted receipt with the operator-configured local │
+│                  identity.                                                   │
+│ counterfactual   Show feasible routes that could have avoided observed cost  │
+│                  or scarcity.                                                │
+│ reputation       Aggregate measured or verified outcomes; provider claims    │
+│                  are excluded.                                               │
+│ reserve-payment  Reserve funds under the operator budget and financial       │
+│                  approval ceiling.                                           │
+│ capture-payment  Capture a previously approved reservation after delivery.   │
+│ refund-payment   Refund a captured payment through the configured adapter.   │
+│ route            Rank execution alternatives without invoking one.           │
+│ host-bridge      Serve the bounded local JSONL protocol used by native host  │
+│                  adapters.                                                   │
+│ run              Route, invoke, validate, persist a receipt, and safely fall │
+│                  back.                                                       │
+│ benchmark        Execute alternatives sequentially to calibrate actual       │
+│                  cost/time/compute.                                          │
+│ history          Inspect persisted decisions or observed execution receipts. │
+│ show             Fetch one persisted decision or receipt.                    │
+│ record           Record the actual outcome of a delegated                    │
+│                  browser/model/computer-use route.                           │
+│ tool-call        Invoke an AEEP tool over deterministic JSON without running │
+│                  an MCP server.                                              │
+│ publish          Generate a local provider descriptor; network publication   │
+│                  is registry-specific.                                       │
+│ serve            Expose AEEP as an MCP server for ChatGPT/Codex, Claude, or  │
+│                  OpenClaw.                                                   │
+│ assess           Propose, review and run bounded plugin assessments.         │
+│ task             Enable, inspect, pause and remove project-local task        │
+│                  activations.                                                │
+│ stack            Propose compatible configurations, inspect setup, and       │
+│                  execute reviewed stacks.                                    │
+│ agents           Connect agents and inspect or adopt native tool controls.   │
+│ access           Restrict tool exposure and calls without enlarging          │
+│                  execution authority.                                        │
+│ catalogs         Manage searchable metadata sources; never install their     │
+│                  plugins automatically.                                      │
+│ tools            Export AEEP as native tools for agent providers.            │
+│ import           Import existing CLI, MCP, or OpenAPI capabilities.          │
+│ subscriptions    Manage user-owned model and tool subscriptions.             │
+│ quota            Set or observe subscription quota pressure.                 │
+│ skill            Install the packaged AEEP skill into an agent host.         │
+│ ingest           Ingest traces from existing agent runtimes.                 │
+│ candidate        Qualify and activate inert imported routes.                 │
+│ provider         Validate, digest, verify, and sign provider packages.       │
+│ evidence         Inspect accepted portable provider evidence.                │
+│ registry         Search bounded provider-package registry metadata.          │
+│ workflow         Run caller-authored bounded workflows.                      │
+│ campaign         Run isolated repeated benchmark campaigns.                  │
+│ offer            Inspect and import signed capability offers.                │
+│ economic         Prepare routes and inspect economic evidence.               │
+│ settlement       Inspect and reconcile settlement evidence.                  │
+│ market           Run the local reference economic market.                    │
+│ x402             Run optional offline x402 capacity conformance.             │
+│ hosts            Inspect locally configured managed hosts.                   │
+│ capacity         Inspect provider-neutral capacity state.                    │
+│ verify           Run digest-bound executable completion checks.              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+

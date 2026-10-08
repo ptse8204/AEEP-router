@@ -1,0 +1,58 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "log": "quality-1.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "log": "quality-2.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "exit_code": 0,
+    "log": "quality-3.log"
+  },
+  {
+    "argv": [
+      "make",
+      "docs-check"
+    ],
+    "exit_code": 69,
+    "log": "quality-4.log"
+  },
+  {
+    "argv": [
+      "node",
+      "--test",
+      "integrations/dsh-aeep-router/test/plugin.test.js"
+    ],
+    "exit_code": 1,
+    "log": "quality-5.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "aeep",
+      "--help"
+    ],
+    "exit_code": 0,
+    "log": "quality-6.log"
+  }
+]

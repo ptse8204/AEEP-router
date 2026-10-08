@@ -103,3 +103,9 @@ remaining-gate record. The [0.8 evidence index](../reports/v08/README.md) and
 [changelog](../CHANGELOG.md) retain earlier results. The [0.7 roadmap](ROADMAP_0.7.md)
 and [0.7 upgrade status](upgrade/STATUS.md) are historical records, not current
 release promises. Adopted ADRs and historical reports keep their original bytes.
+
+## Evaluation toolkit development
+
+Follow the [V2 checkpoint state](aeep-toolkit/STATE.md) for the evaluation-focused
+rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
+These development records do not establish live benefit or release readiness.

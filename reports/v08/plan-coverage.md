@@ -3838,3 +3838,12 @@ run, 81.32% coverage and both required branch gates, policy/version/schema
 checks, retained proofs, integration tests and wheel/sdist builds. The verification
 source remained unchanged during both full test runs. Exact results are in the
 linked revision record.
+
+## October 8: evaluation toolkit V2 track started
+
+The operator requested the checkpointed rearchitecture. Its authoritative state
+is [STATE.md](../../docs/aeep-toolkit/STATE.md), with separate evidence under
+[toolkit-v2](../toolkit-v2/c00/checks.json). Historical campaigns and budget counters
+remain unchanged. The initial managed-worktree path was rejected by the existing
+Codex-state fingerprint guard; verification now uses an isolated worktree outside
+`.codex`. No V2 live, human-usability or release gate has passed.
