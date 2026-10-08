@@ -1,0 +1,44 @@
+{
+  "repository": "FoundationAgents/AFlow",
+  "url": "https://api.github.com/repos/FoundationAgents/AFlow/issues?state=open&sort=updated&direction=desc&per_page=30",
+  "observed_at": "2026-10-08T22:47:20.760801+00:00",
+  "scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+  "issues": [
+    {
+      "number": 42,
+      "title": "livecodebench loader pickle.loads an unsigned dataset; optimizer __import__'s generated graph.py unsandboxed",
+      "url": "https://github.com/FoundationAgents/AFlow/issues/42",
+      "updated_at": "2026-08-03T14:32:52Z",
+      "body_excerpt": "## What\n\nTwo RCE primitives, both at commit `3f457218fc716093fe53f6df8a5d5e6379d66346` on `main` (FoundationAgents/AFlow).\n\n1. `benchmarks/livecodebench.py:142` deserializes each row's `private_test_cases` with `pickle.loads(zlib.decompress(base64.b64decode(...)))` in the `except` branch of the plain-JSON parse at `:139` \u2014 the handler for records whose `private_test_cases` is not valid JSON. The full base64->zlib->pickle chain is a real decode path, not a defensive stub. The dataset comes from an unsigned Google-Drive URL (`data/download_data.py:70`) and is `tar.extractall`'d at `:34`; neither `download_data.py` nor `livecodebench.py` calls `hashlib` or verifies a sha256/signature.\n2. `scripts/optimizer_utils/graph_utils.py:31` does `__import__(graph_module_name, fromlist=[\"\"])` on the round's `graph.py`, which `write_graph_files` (`:115`) writes from the LLM graph response into `workspace/<dataset>/workflows/round_N/` (matched by the `.gitignore` `/workspace` entry, so newly generated rounds are untracked). Module-top-level code runs in-process, unsandboxed, as the AFlow user.\n\n## How to reproduce\n\n### 1. Pickle on unsigned dataset (exact decode chain from `livecodebench.py:142-146`)\n\n```\npython - <<'PY'\nimport base64, zlib, pickle, secrets, os\nnonce = \"canary-\" + secrets.token_hex(6)\nclass G:\n    def __reduce__(self):\n        return (os.system, (f\"printf {nonce} > /tmp/lcb_canary_{nonce}\",))\nblob = base64.b64encode(zlib.compress(pickle.dumps(G())))\npickle.loads(zlib.decompress(base64.b64decode(blob)))   # livecodebench.py:142\nprint(\"hit:\", os.path.exists(f\"/tmp/lcb_canary_{nonce}\"))\nPY\n```\n\nObserved: `hit: True`. The `__reduce__` gadget fired during unpickle, on the identical chain the loader runs for any record whose `private_test_cases` reaches the `:142` branch. Those bytes originate from the Drive tarball that `download_data.py:34` extracts with no checksum.\n\n### 2. `__import__` of generated graph.py (real `GraphUtils.write_graph_files` + `load_graph`)\n\n```\ngit clone https://github.com/FoundationAgents/AFlow\ncd AFlow\ngit checkout 3f457218fc716093fe53f6df8a5d5e6379d66346\npip install -r requirements.txt     # no setup.py/pyproject.toml exists; run from this repo root\n                                     # tree-sitter==0.23.2 is pinned and may fail to build on Python 3.12+; if so, `pip install tree-sitter` unpinned\n\nexport NONCE=\"canary-$(python -c 'import secrets;print(secrets.token_hex(6))')\"\nPYTHONPATH=. python - <<'PY'\nimport os, sys\nsys.path.insert"
+    },
+    {
+      "number": 41,
+      "title": "Question on the Test operator and HumanEval evaluation",
+      "url": "https://github.com/FoundationAgents/AFlow/issues/41",
+      "updated_at": "2026-07-31T03:53:39Z",
+      "body_excerpt": "First of all, thank you for your excellent work!\n\nI have a question regarding the **Test** operator and the evaluation on the **HumanEval** benchmark.\n\nWhile reading the source code, I noticed that the **Test** operator appears to execute HumanEval's unit tests during inference. From my understanding, this means the supervisor can observe the test results during the generation process, which seems to leak information from the evaluation set. If that's the case, I wonder whether the reported **pass@1** metric is still a valid measure of generalization.\n\nThe relevant code I found is here:\nhttps://github.com/FoundationAgents/AFlow/blob/3f457218fc716093fe53f6df8a5d5e6379d66346/scripts/operators.py#L271\n\nCould you clarify the motivation behind this design? Is this behavior intentional, or could it be an implementation bug? I may have misunderstood the implementation, so I'd appreciate any clarification.\n\nThanks again for making this project available. I really enjoyed reading the code, and I look forward to your response!\n"
+    },
+    {
+      "number": 39,
+      "title": "Problem on Test set",
+      "url": "https://github.com/FoundationAgents/AFlow/issues/39",
+      "updated_at": "2026-02-25T15:49:26Z",
+      "body_excerpt": "From the paper, AFlow is trying to generate a optimized workflow from the val set of benchmarks, and then test the generated workflow on the test set. However, it seems you only have the code for optimizing on val set? Even if I uncomment optimizer.optimize(\"Test\") in run.py, it is hardcoded to run the test set by using the round 1 workflow instead of final optimized workflow?"
+    },
+    {
+      "number": 37,
+      "title": "Add LiveCodeBench to datasets_to_download",
+      "url": "https://github.com/FoundationAgents/AFlow/issues/37",
+      "updated_at": "2025-11-25T06:32:27Z",
+      "body_excerpt": "Hi! Thank you for contributing the whole project to the open source! I'd like to run AFlow on more benchmark dataset like LiveCodeBench with its lastest release. However, I can't find LiveCodeBench data in the 'datasets_to_download' for the datasets/templete (they should be in aflow_data.tar.gz/initial_rounds.tar.gz on Google Drive) or resutls (results.tar.gz on Google Drive).\n\nRecently, would you like have a milestone for supporting more benchemark like LiveCodeBench?\n\nThank you."
+    },
+    {
+      "number": 3,
+      "title": "Replicate AFlow with a lighter version.",
+      "url": "https://github.com/FoundationAgents/AFlow/issues/3",
+      "updated_at": "2025-04-03T07:41:48Z",
+      "body_excerpt": "Hi everyone, we have finished the refactor of aflow, and now you can use it with a lighter version without metagpt's dependency.\n\nConfigure the code with https://github.com/FoundationAgents/AFlow/pull/2.\n\nWe'll update a better version in the next few days."
+    }
+  ],
+  "page_items": 6
+}

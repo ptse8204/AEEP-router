@@ -152,3 +152,19 @@ Keep the development demo's fixed evidence format out of the production contract
 connect the existing reviewed installer, receipts and workers through the common
 adapter. Conditional optional integrations remain visible. Archestra remains
 deferred research, and no new third-party execution is authorized by this audit.
+
+### D22: 2026-10-08, connect upstream fixture execution to existing receipts
+
+The operator approved the audit correction. Reuse `CommandExecutor`, execution
+journals, `ExecutionReceipt`, `ReceiptStore` and `AssessmentRepository` for the
+bounded agent-skill-eval fixture batch. Agent-skill-eval continues to schedule and
+grade its trials; no new runner, approval database or routing configuration is
+needed. Add only the translation from checked fixture artifacts to C02 records.
+A batch receipt describes coordinator execution, not individual model usage.
+Keep model metrics unavailable and worker containment unverified. This increment
+is fixture-only; it neither implements live dispatch nor completes C04.
+
+The finite regression review covers failed and timed-out coordinator processes,
+receipt/artifact drift, both arms, independent verification, and synthetic-only
+normalization. Existing test-definition delegation applies. No grant, historical
+receipt, candidate package, host setting or live budget is changed.

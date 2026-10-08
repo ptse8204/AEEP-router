@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. The original-ZIP audit reopened C01 because its required per-candidate review worksheet was not complete. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. C01 source selection is reconciled against the ZIP: all 21 responsibilities have the required worksheet fields, bounded issue triage and explicit runtime unknowns. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,10 +9,10 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C01
+current_checkpoint: C03
 checkpoint_status:
   C00: PASS
-  C01: IN_PROGRESS
+  C01: PASS
   C02: PASS
   C03: IN_PROGRESS
   C04: IN_PROGRESS
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '9bccd94'
 last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-component-map.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1343 passed, 21 skipped; 81.50% combined coverage; both required branch gates and all 12 final quality/build commands passed. Separate stack checks: 10 passed plus fresh upstream fixture execution.'
-next_action: 'Read HANDOFF_AUDIT.md and reconcile the restored C01 per-candidate worksheet using existing source pins and explicit unknowns. Continue the upstream EvaluatorAdapter and C03-C06 user journey; do not replace them with another stack presentation or internal framework.'
+next_action: 'Finish receipt-bridge verification, then continue C03 installed inventory and the C04 general upstream adapter with existing reviewed workers. The recorded fixture batch now uses canonical receipts and C02 evidence, but is not general live dispatch. Continue the C03-C06 journey without another architecture question.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -363,3 +363,41 @@ baseline tests or C02 schemas, and does not authorize additional installations.
 The audit itself changes no executable source. C03-C13 remain open. The next
 implementation remains the upstream adapter and complete evaluation journey;
 there is no pending architecture question for the operator.
+
+## C01 worksheet reconciliation and C04 receipt connection
+
+The operator authorized the audit correction. All 21 original responsibilities
+now have the eleven required source-review fields in
+`reports/toolkit-v2/c01/review-worksheet.json`. Seventeen bounded GitHub issue
+snapshots record relevant reported concerns and their limits. Exact source pins
+remain unchanged; unknown installed compatibility, transitive/data rights and
+rollback remain explicit future installation/conformance gates. Agent-skill-eval
+stays preferred, BenchmarkRunner stays fallback, optional components stay visible.
+C01 returns to PASS for source selection only; no new runtime qualification is
+inferred. The earlier omission and reopening remain in this journal.
+
+The C04 development bridge now launches the pinned evaluator through the existing
+`CommandExecutor` and stores a canonical coordinator receipt, execution journal,
+immutable fixture records and a C02 `EvidenceBundle` in the existing store. It
+creates no Router instance, routing configuration, second runner or new database
+schema. All four runs reference one batch receipt; that receipt is not individual
+model accounting. Synthetic token/time constants remain unavailable, and the
+comparison stays NOT_ASSESSED. General `EvaluatorAdapter` dispatch, independent
+controlled workers and real-host accounting are still unfinished.
+
+Seventeen dedicated checks pass, including real subprocess recording, retained
+failure/timeout receipts, artifact/receipt/bundle drift and read-only verification.
+A filesystem snapshot caught SQLite WAL sidecars in the initial read-only reader;
+verification now requires a closed snapshot and uses immutable read-only access.
+Fresh actual upstream artifacts are in `reports/toolkit-v2/receipt-showcase`.
+Historical showcases were preserved. Source is frozen during required checks in
+`reports/toolkit-v2/c04/receipt-bridge-validation`; do not infer full PASS until
+`checks.json` and `source-stability.json` finish. Driver:
+`/tmp/aeep-toolkit-receipt-checks.py`, tool session 38828.
+
+The coordinator checks use the existing Python at
+`/Library/Frameworks/Python.framework/Versions/3.13/bin/python3`; the shell's
+Homebrew Python lacks the project dependencies. No package was installed to fix
+that PATH mismatch. The upstream runtime remains the approved private `rebuild`
+environment. Temporary initial bridge runs remain under
+`/tmp/aeep-toolkit-receipt-demo-01` and `-02`; no live calls or grant changes ran.

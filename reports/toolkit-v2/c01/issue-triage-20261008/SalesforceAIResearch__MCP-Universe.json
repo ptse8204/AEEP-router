@@ -1,0 +1,121 @@
+{
+  "repository": "SalesforceAIResearch/MCP-Universe",
+  "url": "https://api.github.com/repos/SalesforceAIResearch/MCP-Universe/issues?state=open&sort=updated&direction=desc&per_page=30",
+  "observed_at": "2026-10-08T22:47:21.239875+00:00",
+  "scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+  "issues": [
+    {
+      "number": 74,
+      "title": "Optional EvalPort export for benchmark results (task.py / evaluator.py / runner.py)",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/74",
+      "updated_at": "2026-08-25T04:00:54Z",
+      "body_excerpt": "Hi maintainers \u2014 nice framework, especially the `func -> func -> op` evaluator chain in `mcpuniverse/evaluator/functions.py` for pulling fields out of nested agent output.\n\nI maintain [EvalPort](https://github.com/adhabnr-ux/evalport), an open interchange format (`TestCase`/`Grader`/`Result`/`ResultSet`/`GraderResult`, JSON Schema + zero-dep Python/TS SDKs) for moving eval data between frameworks. I think MCP-Universe's task/evaluator/benchmark model maps cleanly onto it, and wanted to float a small, optional standalone adapter rather than open a PR unannounced.\n\n**The mapping**, using your actual classes:\n\n| MCP-Universe | EvalPort |\n|---|---|\n| `TaskConfig.question` | `TestCase.input` |\n| `TaskConfig.category` | `TestCase.tags` |\n| `TaskConfig.mcp_servers`, `output_format` | `TestCase.metadata` (no direct schema field) |\n| `EvaluatorConfig` (`func`, `op`, `value`, `op_args`, `desc`) | `Grader` (`id`, `type`, `params`, `description`) |\n| `EvaluationResult` (`passed`, `reason`, `error`) per evaluator | `GraderResult` (`grader_id`, `score`, `passed`, `reason`) |\n| `BenchmarkResult.task_results[task_id][\"evaluation_results\"]` | `ResultSet.results[i].grader_results` |\n| `BenchmarkResult.task_trace_ids[task_id]` | `Result.metadata.trace_id` |\n\nTwo honest gaps, not glossed over:\n- `EvaluatorConfig` has no stable `id`, only `func`/`desc` \u2014 the adapter would synthesize `f\"{task_id}_eval_{i}\"`.\n- Your `func` chain (`\"json -> get(key)\"` etc.) isn't a 1:1 match for any of EvalPort's well-known grader types (`json_path`, `contains`, ...) \u2014 cleanest is a `custom` grader with `params.handler=\"mcpuniverse:func_chain\"` carrying the original `func`/`op`/`value`/`op_args`, so nothing is lost or misrepresented as something it isn't.\n\nSketch (untested, illustrative):\n\n```python\nfrom openeval.types import OPENEVAL_VERSION\n\ndef evaluator_to_grader(task_id: str, i: int, ev: EvaluatorConfig) -> dict:\n    return {\n        \"id\": f\"{task_id}_eval_{i}\",\n        \"type\": \"custom\",\n        \"description\": ev.desc,\n        \"params\": {\n            \"handler\": \"mcpuniverse:func_chain\",\n            \"func\": ev.func, \"op\": ev.op, \"value\": ev.value, \"op_args\": ev.op_args,\n        },\n    }\n\ndef benchmark_result_to_resultset(result: BenchmarkResult, run_id: str, started_at: str) -> dict:\n    results = []\n    for task_id, task_data in result.task_results.items():\n        eval_results = task_data[\"evaluation_results\"]  # List[EvaluationResult]\n        grader_results = [{\n            \"grader_id\": f\""
+    },
+    {
+      "number": 71,
+      "title": "Proposal: Financial-Analysis task over a live remote MCP server (equity-comp ISO/AMT optimizer)",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/71",
+      "updated_at": "2026-06-22T23:10:08Z",
+      "body_excerpt": "## Proposal: a Financial-Analysis task driven by a live remote MCP server (equity-comp ISO/AMT optimizer)\n\nI'd like to contribute a new task to the Financial-Analysis domain and a server entry for **OptionsAhoy**, a public MCP server for equity-compensation tax/trade planning. Opening this first per CONTRIBUTING, to check it's a fit before I sign the CLA and open a PR.\n\n### Why it fits MCP-Universe well\n- **Real remote MCP, no auth.** `https://optionsahoy.com/mcp` is a live streamable-HTTP MCP server (no API key), so it plugs into the `http_url` \u2192 `streamablehttp_client` path with empty headers. No mock, no credentials to provision for graders.\n- **Deterministic numeric ground truth.** The tools return exact, reproducible figures, so the task scores with your first-class numeric evaluators (`=`, `>=`, `<=`) \u2014 no LLM judge needed.\n- **Adjacent to the existing Financial-Analysis domain.**\n\n### Example task (one of several possible)\nA multi-year incentive stock option (ISO) exercise-planning scenario: given a fixed grant/income/state, the agent must call the `amt_iso_optimize` tool and report the optimizer's outputs. Stable, input-independent ground-truth anchor for the documented scenario: **`crossoverShares = 1583`** (verified live, byte-identical across repeated calls and across the MCP tool vs the REST endpoint). Secondary numeric checks (e.g. optimized net-final-value) are available with all inputs pinned.\n\n### Tools available on the server (7)\n`amt_iso_optimize`, `nso_calculate`, `rsu_sell_vs_hold`, `concentration_analyze`, `protective_put_price`, `qsbs_check`, `equity_funding_plan` \u2014 federal + 50-state tax modeling.\n\nDocs: https://optionsahoy.com/for-agents \u00b7 OpenAPI: https://optionsahoy.com/openapi.json\n\nWould a PR adding (a) the server entry and (b) one or more such tasks be welcome? Happy to follow your task-JSON + evaluator format and sign the CLA.\n"
+    },
+    {
+      "number": 65,
+      "title": "New benchmarking engine",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/65",
+      "updated_at": "2026-04-21T10:57:33Z",
+      "body_excerpt": "Hi! Over the past couple of months, I\u2019ve been working on a reimplementation inspired by your benchmark:\n\nhttps://github.com/deeppavlov/mcp-evals\n\nMy goals were:\n\n* to make it easier to customize and use by building it around the Pydantic-AI framework for LLM agents\n* to apply modern development practices, including enabling safer workflows where LLM agents can write and review benchmark tasks\n* to preserve and build upon the original benchmark content\n\nSo far, I\u2019ve recreated two domains originated from MCPMark: file system and PostgreSQL.\n\nIf this sounds interesting, I\u2019d really appreciate your feedback. I\u2019d also be glad to explore possible collaboration or alignment with your work.\n\nThanks for creating and sharing this benchmark\u2014it\u2019s been very inspiring!\n"
+    },
+    {
+      "number": 61,
+      "title": "Question: `create_object` scale behavior of BlenderMCPServer \u2014 possible mismatch with evaluation checks?",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/61",
+      "updated_at": "2026-03-30T09:29:19Z",
+      "body_excerpt": "\nHi, first of all thanks for providing this real-world MCP benchmark \u2014 it's been really helpful for evaluating agent capabilities.\n\nWhile running the benchmark, I noticed something a bit confusing about the Blender MCP server's `create_object` implementation, and wanted to raise it here in case it's an oversight.\n\n## What I observed\n\nIn `blender_task_0001`, the agent calls `create_object` with `scale: [5, 5, 5]` to create the Floor object:\n\n```json\n{\n  \"tool_name\": \"create_object\",\n  \"arguments\": {\n    \"type\": \"PLANE\",\n    \"name\": \"Floor\",\n    \"scale\": [5, 5, 5]\n  }\n}\n```\n\nThe tool returns successfully, but the `check_file_content` evaluator reports:\n\n> Object 'Floor': Expected scale (5.0, 5.0, 5.0), found (1.0, 1.0, 1.0).\n\n## What seems to be happening\n\nIt looks like the current `create_object` implementation passes `scale` directly to `bpy.ops.mesh.primitive_plane_add(scale=...)`:\n\n```python\n# blender_addon.py L316-317\nelif type == \"PLANE\":\n    bpy.ops.mesh.primitive_plane_add(location=location, rotation=rotation, scale=scale)\n```\n\nFrom what I can tell, Blender's `primitive_xxx_add(scale=...)` parameter bakes the scale into the mesh vertex coordinates rather than setting `obj.scale`. After creation, `obj.scale` remains `(1, 1, 1)`:\n\n```python\nimport bpy, mathutils\nbpy.ops.mesh.primitive_plane_add(scale=mathutils.Vector((5.0, 5.0, 5.0)))\nprint(bpy.context.object.scale)  # <Vector (1.0000, 1.0000, 1.0000)>\n```\n\nThis means the evaluation checks (which read `obj.scale`) would always see `(1, 1, 1)` regardless of what the agent passes.\n\n## Potentially affected tasks\n\nIf my understanding is correct, the following tasks may have scale checks that can't pass through the `create_object` tool:\n\n| Task | Object | Expected Scale |\n|------|--------|---------------|\n| tid_1 | Floor | (5.0, 5.0, 5.0) |\n| tid_2 | Star | (3.0, 3.0, 3.0) |\n| tid_2 | Planet | (0.5, 0.5, 0.5) |\n| tid_2 | Moon | (0.1, 0.1, 0.1) |\n| tid_2 | Satellite | (0.05, 0.05, 0.05) |\n| tid_3 | PathCircle | (3.0, 3.0, 3.0) |\n| tid_3 | Tracer | (0.2, 0.2, 0.2) |\n| tid_4 | RimLight | (0.5, 0.5, 0.5) |\n| tid_6 | RustedCube | (5.0, 5.0, 0.2) |\n| tid_7 | BrickCube | (5.0, 10.0, 2.0) |\n| tid_8 | WoodCube | (4.0, 6.0, 2.0) |\n| tid_9 | ConcreteCube | (15.0, 15.0, 2.0) |\n| tid_16 | Attachment | (0.3, 0.3, 0.3) |\n| tid_17 | Ground | (10.0, 10.0, 10.0) |\n\n## Possible fix\n\nWould it make sense to set `obj.scale` after creation instead of passing it to the add operator? Something like:\n\n```python\nbpy.ops.mesh.primitiv"
+    },
+    {
+      "number": 57,
+      "title": "Missing Fully Async Mode in RL Integration",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/57",
+      "updated_at": "2026-03-23T09:35:42Z",
+      "body_excerpt": "Thanks for the amazing work on enabling RL training! @ChiYeungLaw \n\nSince the fully async mode for RL is still WIP, there will be an import error when initing verl. Ref: https://github.com/SalesforceAIResearch/MCP-Universe/blob/625c2606dcc94c4e6c2844bcee8815525204d5fe/mcpuniverse/rl/integrations/verl/__init__.py#L21\n\nPlease consider temporarily use try-catch to fix it, and remove the try-catch block when fully async mode is merged. Also, the dependency list needs to be updated for RL integration. \n\nThanks!\n"
+    },
+    {
+      "number": 53,
+      "title": "Reproducibility - request for model outputs of MCP-Universe leaderboard",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/53",
+      "updated_at": "2026-02-23T19:44:52Z",
+      "body_excerpt": "Hello, could you please make available the model outputs (for e.g. via a Drive folder as shared by [this](https://github.com/MASWorks/X-MAS#:~:text=Note%20that%20we%20release%20the%20experimental%20results%20of%20the%20X%2DMAS%2DBench%20in%20Google%20Drive.%20You%20can%20download%20the%20.zip%20file%20named%20results.zip%20to%20the%20%22./X%2DMAS%2DBench/results/%22%20path%20and%20unzip%20it.) git repo) for all the models on the leaderboard, so that we can consume the model outputs for analysis instead of running the models over the full dataset again? \n\nThis would also help address multiple pending reproducibility issues. \n\nThanks!"
+    },
+    {
+      "number": 49,
+      "title": "MCP universe tests are failing with latest claude-opus and claude-sonet model fails with 'temperature and top_p cannot both be specified' error",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/49",
+      "updated_at": "2026-01-26T16:27:00Z",
+      "body_excerpt": "Since Opus 4.1 Anthropic has been enforcing its recommendation that temperature and top_p should not be both specified.\n\n```\n{'error': {'message': '{\"message\":\"`temperature` and `top_p` cannot both be specified for this model. Please use only one.\"}. \nReceived Model Group=claude-opus-4-5-20251101\\nAvailable Model Group Fallbacks=None', 'type': 'None', 'param': 'None', 'code': '400'}}\n```"
+    },
+    {
+      "number": 48,
+      "title": "Inquire about the version number of mcp-server used when publishing the paper.",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/48",
+      "updated_at": "2026-01-21T06:29:49Z",
+      "body_excerpt": "I would like to inquire about whether the version numbers of each mcp-server were recorded when evaluating the scores of various LLMs in this paper (https://arxiv.org/abs/2508.14704). \n\nWhen reproducing this project, I found that mcp-servers such as those for GitHub and Notion are updated very frequently. \nAdditionally, I recently came across this commit in the repository (https://github.com/SalesforceAIResearch/MCP-Universe/commit/67fa625dada068d2b9e98a1d8f34de327c261d37), which fixes the version number of the GitHub mcp-server to 0.5.0. \n\nDoes this mean that the evaluation of this repository should be based on a specific set of mcp-server version numbers?"
+    },
+    {
+      "number": 46,
+      "title": "request help in reproducing the results",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/46",
+      "updated_at": "2026-01-14T16:45:00Z",
+      "body_excerpt": "Hi, \n\nThank you for your great work! I'm trying to get the results of GPT-5.1 with ReAct which should have similar performance to GPT-5 reported in the paper. Unfortunately, I don't have have access to GPT-5.\n\nHowever, I only got 25.78 overall success rate and 45.67 average evaluator score, which are much inferior than the reported 43.72 and 60.23, respectively.\n\nI was thinking the reasoning effort may affect the results a lot, would like to know the used reasoning effort setting in the evaluation. I was using the default setting \"medium\" for benchmarking GPT-5.1.\n\nThank you!\n\n"
+    },
+    {
+      "number": 45,
+      "title": "Cannot reproduce leaderboard score for gpt-oss-120B (OpenRouter, function-call)",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/45",
+      "updated_at": "2026-01-05T04:06:10Z",
+      "body_excerpt": "Hi maintainers,\n\nThanks for releasing MCP-Universe and the leaderboard.\n\nI\u2019m trying to reproduce the leaderboard result for **gpt-oss-120B (OpenRouter, function-call)** using the **official evaluation script**, but I consistently obtain a score that is **significantly lower** than what is reported on the leaderboard. Since the gap is large and stable across runs, I\u2019d like to confirm whether there are any undocumented settings or differences in tool / function-call configuration.\n\n---\n\n### Evaluation setup\n\n- Model: gpt-oss-120B (OpenRouter)\n- Invocation mode: function-call\n- Evaluation method: official evaluation script in the repository\n- Sampling parameters: temperature / top_p / max_tokens  \n  (kept exactly the same as the default / official configuration; no modifications)\n- Max iterations: 50\n- Number of runs: 3\n\n---\n\n### Results\n\n- Leaderboard score: \u2248 **24.44**\n- My reproduced score: \u2248 **11**\n- The reproduced score is stable across multiple runs and does not appear to be an occasional fluctuation.\n\n---\n\n### What I have already verified\n\n- I am using the original evaluation code without local modifications.\n- Model outputs are returned as proper **function-call** structures (not text fallbacks).\n- Multiple runs yield consistent results.\n- Sampling parameters match the official configuration.\n\n---\n\n### Questions / clarifications I\u2019m hoping to get\n\n1. **Function-call / tool configuration**\n   - Does the leaderboard evaluation use any settings that are not explicitly documented in the repository, such as:\n     - strict vs relaxed function-call parsing\n     - specific tool-choice strategies (e.g., `auto` vs `required`)\n     - a specific version of the tool schema\n     - retry or auto-repair mechanisms for failed tool calls?\n   - When function-call parsing fails, is fallback allowed, or is the step counted as a failure?\n\n2. **OpenRouter routing**\n   - Is the leaderboard run pinned to a **specific OpenRouter provider route**?\n   - If not, could differences between providers significantly affect function-call success rates and final scores?\n\n3. **google-maps MCP server version**\n   - Which **google-maps MCP server version** was used for the leaderboard evaluation?\n   - Is the google-maps tool implementation currently in the repository exactly the same as the one used during the leaderboard run?\n   - Is it possible that:\n     - the leaderboard used an older / modified / private version of the google-maps MCP server, or\n     - the tool schema or response form"
+    },
+    {
+      "number": 41,
+      "title": "Questions about fraction calculation methods",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/41",
+      "updated_at": "2026-01-04T02:39:37Z",
+      "body_excerpt": "Thank you for your work. Could you please explain how the financial analysis score is calculated? When I run deepseek-v3.2-exp locally, I get passed=37 and not passed=17, but the leaderboard score for deepseek-v3.2-exp is 45. No matter how I calculate it, we can't seem to match."
+    },
+    {
+      "number": 44,
+      "title": "can't use yfinance mcp-server",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/44",
+      "updated_at": "2026-01-03T13:10:58Z",
+      "body_excerpt": "Action: get_historical_stock_prices on yfinance\n\nResult: Error: getting historical stock prices for MSFT: Too Many Requests. Rate limited. Try after a while."
+    },
+    {
+      "number": 30,
+      "title": "Is headless / Linux cloud-server execution supported for the Blender benchmark?",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/30",
+      "updated_at": "2025-11-19T11:42:31Z",
+      "body_excerpt": "**Body**  \nHi maintainers, first of all thank you for open-sourcing this great project!  \nI\u2019m trying to run the Blender benchmark on a **headless Ubuntu cloud server** (no display, no X11/Wayland) and would like to double-check whether this is an officially supported scenario.\n\n### Environment  \n- OS: Ubuntu 22.04 LTS (cloud image, no GUI)  \n- Blender: 4.4.0 official Linux build (`/opt/blender-4.4.0`)  \n- MCP plug-in: installed and enabled as `blender_mcp.py` (v 0.3)  \n- Python: Blender-bundled 3.11  \n\n### What I have done  \n1. Copied the add-on to `~/.config/blender/4.4/scripts/addons/`  \n2. Enabled it via `blender --background --python-expr \"import bpy; bpy.ops.preferences.addon_enable(module='blender_mcp'); bpy.ops.wm.save_userpref()\"`  \n3. Confirmed `blender_mcp` appears in `bpy.context.preferences.addons`  \n4. Started Blender in background mode and kept the process alive (`screen`, infinite `while True: time.sleep(1)`)  \n\n### Observation  \n- The console shows:  \n  ```\n  BlenderMCP addon registered with permanent server  \n  BlenderMCP addon unregistered  \n  ```\n  but **no TCP port is opened** (`netstat -tln` is empty) and the MCP client immediately gets  \n  ```\n  [Errno 111] Connection refused  \n  ```\n- The same add-on works on my local Windows/Mac machine with GUI.  \n\n### Question  \nIs running the benchmark (and the MCP server) under **pure headless Linux** an officially supported use-case?  \nIf yes, could you point me to:  \n- the recommended start-up flags / environment variables  \n- the default listen port / transport settings  \n- any minimal example script that keeps the server alive without GUI  \n\nIf not, it would be helpful to state this limitation in the README so that other cloud users know in advance.  \n\nThanks again for your hard work, and looking forward to your guidance!\n\n---\n\n**Labels suggestion**  \n`question` `headless` `linux` `documentation`  \n\n---\n"
+    },
+    {
+      "number": 26,
+      "title": "Environent Setup Issue",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/26",
+      "updated_at": "2025-11-19T11:38:35Z",
+      "body_excerpt": "hi, I am working on the setup of the benchmark, but I get some challenges.\n\n- The init test failed to process response. While I am replacing the openai client to azure openai client, I think it should be the same usage.\n```\npython test.py \n2025-10-19 19:24:59,507.507 2408844 Service:weather INFO [main():130] Starting the MCP server\n[10/19/25 19:24:59] INFO     Processing request of type ListToolsRequest                                                                                            server.py:624\n2025-10-19 19:24:59,539.539 2408667 Benchmark INFO [run():218] Running task: dummy/tasks/weather_1.json\n2025-10-19 19:25:05,746.746 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a INFO [call_tool():433] Executing tool get_forecast of server weather\n2025-10-19 19:25:05,746.746 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a INFO [call_tool():435] With arguments: {'latitude': 37.7749, 'longitude': -122.4194}\n2025-10-19 19:25:05,746.746 2408667 MCPClient INFO [execute_tool():205] Executing get_forecast...\n[10/19/25 19:25:05] INFO     Processing request of type CallToolRequest                                                                                             server.py:624\n                    INFO     HTTP Request: GET https://api.weather.gov/points/37.7749,-122.4194 \"HTTP/1.1 200 OK\"                                                 _client.py:1740\n[10/19/25 19:25:10] INFO     HTTP Request: GET https://api.weather.gov/gridpoints/MTR/85,105/forecast \"HTTP/1.1 200 OK\"                                           _client.py:1740\n2025-10-19 19:25:30,234.234 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a ERROR [_execute():273] Failed to process response: Invalid response format\n2025-10-19 19:25:42,097.097 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a ERROR [_execute():273] Failed to process response: Invalid response format\n2025-10-19 19:25:53,884.884 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a ERROR [_execute():273] Failed to process response: Invalid response format\n2025-10-19 19:26:14,204.204 2408667 ReAct:a3f7621e-e804-435e-9a5b-60e56cff111a ERROR [_execute():273] Failed to process response: Invalid response format\n2025-10-19 19:26:14,205.205 2408667 Benchmark INFO [run():273] Resetting task dummy/tasks/weather_1.json\n2025-10-19 19:26:14,205.205 2408667 Benchmark INFO [run():276] Finished resetting task dummy/tasks/weather_1.json\n```\nAnd I check the trace log, it seems to be related **Conflicting response format expectations:**\n\n1. *"
+    },
+    {
+      "number": 19,
+      "title": "About task's creation",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/19",
+      "updated_at": "2025-10-08T14:38:05Z",
+      "body_excerpt": "Thank you for your clear description of the MCP task design process. To better understand your validation methodology, I\u2019d appreciate clarification on a few points:\n\n1. What specific criteria or procedures did you use during cross-validation to assess a task\u2019s **feasibility, ambiguity, and correctness**? Was there a formal checklist or scoring rubric?  \n2. If a task was deemed \u201csimple\u201d during validation (e.g., solvable by an LLM without MCP, or consistently solved by MCP within five retries), was it directly discarded and replaced, or handled through another process?  \n3. Which specific LLM(s) were used in this evaluation?\n\nThank you in advance for your time and clarification!"
+    },
+    {
+      "number": 9,
+      "title": "How to obtain the SR,AE and AS indicators of overall in table3 of the paper\uff0cand Success rate across different types of evaluators on  MCP-Universe benchmark in table 4",
+      "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/9",
+      "updated_at": "2025-09-22T13:38:40Z",
+      "body_excerpt": ""
+    }
+  ],
+  "page_items": 30
+}

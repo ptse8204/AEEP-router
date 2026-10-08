@@ -1,0 +1,121 @@
+{
+  "repository": "ANative-Lab/EvoAgentX",
+  "url": "https://api.github.com/repos/ANative-Lab/EvoAgentX/issues?state=open&sort=updated&direction=desc&per_page=30",
+  "observed_at": "2026-10-08T22:47:20.760662+00:00",
+  "scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+  "issues": [
+    {
+      "number": 287,
+      "title": "[Security] SQL injection in get_collection_info via unsanitized collection_name",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/287",
+      "updated_at": "2026-10-08T07:48:23Z",
+      "body_excerpt": "## Summary\n\n`DatabasePostgreSQL.get_collection_info()` interpolates its `collection_name`\nargument directly into an SQL string, allowing SQL injection if that argument is\nexternally controlled.\n\n## Details\n\n**Affected component:** `evoagentx/tools/database_postgresql.py`\n**Affected function:** `get_collection_info(self, collection_name)`\n\nLine 896 builds the query with an f-string:\n\n```python\n:896  cur.execute(f\"SELECT COUNT(*) as row_count FROM {collection_name}\")\n```\n\n**Key observation \u2014 the same function already does it correctly 2 lines below:**\n\n```python\n:898  cur.execute(\"SELECT column_name, data_type FROM information_schema.columns \"\n                   \"WHERE table_name = %s\", (collection_name,))\n```\n\nThe same parameter, in the same function, is parameterized at line 898 and\ninterpolated at line 896. This suggests the omission rather than an intentional\ndesign choice.\n\nThe `database_*` classes are exposed as tools for LLM/Agent invocation, so\n`collection_name` originates from model output rather than a trusted caller.\n\n## PoC\n\n```python\ndb = DatabasePostgreSQL(...)   # initialized per project docs\ndb.get_collection_info(\"x; DROP TABLE users; --\")\n```\n\nThe injected fragment is concatenated verbatim into the statement executed at line 896.\n\nAn equivalent test that reads data without modifying it:\n\n```python\ndb.get_collection_info(\"information_schema.tables WHERE table_name='users'--\")\n```\n\n## Impact\n\n- **Attack complexity:** low \u2014 requires being able to invoke the tool, i.e. influencing\n  model output (indirect prompt injection, or a user of the agent itself)\n- **Privileges required:** none at the HTTP layer; the statement executes with the\n  database account configured for the deployment\n- **Confidentiality impact:** read access to whatever the database account can read\n  (credentials, user data)\n- **Integrity / availability:** depends on the database account's grants; if the\n  account is write-capable, this escalates to data modification and deletion\n\n## Suggested fix\n\nParameterize line 896:\n\n```python\ncur.execute(\"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = %s\",\n            (collection_name,))\n```\n\nNote that `:898` already queries `information_schema.tables`. Reusing that result\navoids the second query entirely:\n\n```python\n# :898 already fetched the row set; derive the count from it instead of\n# interpolating the name into another statement.\n```\n\nMore generally, identifiers such as table names cannot be passed as bound\nparame"
+    },
+    {
+      "number": 275,
+      "title": "[Bug] single_generate_async has no retry, unlike single_generate, in OpenAILLM/LiteLLMModel/OpenRouterLLM",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/275",
+      "updated_at": "2026-09-02T03:51:01Z",
+      "body_excerpt": "### Describe the Bug\n\n`single_generate_async` has no retry, unlike its sync sibling `single_generate`, in all three\nconcrete LLM clients: `OpenAILLM` (`evoagentx/models/openai_model.py`), `LiteLLMModel`\n(`evoagentx/models/litellm_model.py`), and `OpenRouterLLM` (`evoagentx/models/openrouter_model.py`).\nEach `single_generate` carries `@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))`,\nbut the matching `single_generate_async` right below it has no decorator and just re-raises any\nexception as a `RuntimeError` on the first failure. `AliyunLLM`, `SiliconFlowLLM`, and `NovitaLLM`\nsubclass `OpenAILLM` without overriding either method, so they inherit the same gap.\n\nThis matters most for `batch_generate_async` (`evoagentx/models/base_model.py`, `asyncio.gather`\nover per-message tasks), the path concurrent multi-agent workflows go through, since it has zero\nresilience against the transient rate-limit or timeout errors the sync path was deliberately\nhardened against.\n\n### Operating System\n\nUbuntu 22.04 (also reproduces on any OS, this is a pure logic bug, not platform-specific)\n\n### Python Version\n\n3.11.9\n\n### Steps to Reproduce\n\n1. Install the package at current `main` (`fd6b9a63`).\n2. Run this against the real, unmodified `OpenAILLM` class, with the underlying client mocked\n   to raise once and then succeed:\n\n```python\nfrom unittest.mock import MagicMock\nfrom evoagentx.models.openai_model import OpenAILLM\nfrom evoagentx.models.model_configs import OpenAILLMConfig\n\nllm = OpenAILLM(config=OpenAILLMConfig(model=\"gpt-4o-mini\", openai_key=\"sk-test\"))\n\ncalls = {\"n\": 0}\ndef flaky(*a, **kw):\n    calls[\"n\"] += 1\n    if calls[\"n\"] == 1:\n        raise RuntimeError(\"transient error\")\n    resp = MagicMock()\n    resp.choices = [MagicMock(message=MagicMock(content=\"ok\", tool_calls=None))]\n    return resp\n\nfake_client = MagicMock()\nfake_client.chat.completions.create = flaky\nllm._client = fake_client\nllm.ensure_client = lambda: fake_client\nprint(llm.single_generate(messages=[{\"role\": \"user\", \"content\": \"hi\"}]))\n# succeeds after 2 calls, tenacity retried the transient error\n```\n\n3. Do the same for `single_generate_async` (async `flaky`, `llm._async_client` /\n   `llm.ensure_async_client`) and await it.\n\n### Logs or Screenshots\n\n```\n[sync]  single_generate succeeded after 2 calls -> 'ok'\n[async] single_generate_async raised after 1 call(s): Error during single_generate_async of OpenAILLM: transient error\n```\n\nThe sync call retries and recovers. The as"
+    },
+    {
+      "number": 273,
+      "title": "[Bug] concurrent Evaluator workers share the same Agent.short_term_memory across benchmark examples",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/273",
+      "updated_at": "2026-08-26T14:54:01Z",
+      "body_excerpt": "### Describe the Bug\n\nWhen `Evaluator.evaluate(...)` runs with `num_workers > 1`, concurrent benchmark examples share one `Agent.short_term_memory` buffer, so messages from one example's execution leak into another example's LLM context.\n\n`Evaluator._create_new_agent_manager()` (evoagentx/evaluators/evaluator.py) builds what looks like a fresh per-thread `AgentManager`:\n\n```python\nnew_manager = AgentManager(agents=self.agent_manager.agents, storage_handler=self.agent_manager.storage_handler)\n```\n\n`agents=self.agent_manager.agents` passes the existing list of `Agent` objects, so the \"new\" manager holds references to the SAME `Agent` instances, not copies. `_async_execute_workflow_graph` does the same thing for the asyncio path. Every `Agent.short_term_memory` write (`_prepare_execution`, `_create_output_message` in evoagentx/agents/agent.py) and read (`get_action_inputs`) then operates on the one shared 5-message deque with no lock, so two examples running in parallel interleave their messages into each other's context.\n\n`Agent.clear_short_term_memory()` exists but is not called anywhere in the codebase, so nothing resets the buffer between examples either.\n\n### Operating System\n\nLinux (Docker python:3.11-slim), reproduces independent of OS\n\n### Python Version\n\n3.11\n\n### Steps to Reproduce\n\nConfirmed against current `main` (`fd6b9a63`), `pip install evoagentx[tools,rag]`:\n\n```python\nfrom evoagentx.agents.agent import Agent\nfrom evoagentx.agents.agent_manager import AgentManager\nfrom evoagentx.core.message import Message\nimport threading, time\n\nbase_agent = Agent(name=\"worker\", description=\"shared worker\", is_human=True)\nmgr_main = AgentManager(agents=[base_agent])\n\n# mirrors Evaluator._create_new_agent_manager(): AgentManager(agents=self.agent_manager.agents)\nmgr_a = AgentManager(agents=mgr_main.agents)\nmgr_b = AgentManager(agents=mgr_main.agents)\nagent_a, agent_b = mgr_a.agents[0], mgr_b.agents[0]\nprint(\"same Agent object:\", agent_a is agent_b)  # True, not an independent copy\n\nresults = {}\ndef run_example(example_id, agent):\n    for i in range(5):\n        agent.short_term_memory.add_messages([Message(content=f\"EXAMPLE_{example_id}_msg{i}\", agent=\"worker\")])\n        time.sleep(0.01)\n    results[example_id] = [m.content for m in agent.short_term_memory.get(n=agent.n)]\n\nta = threading.Thread(target=run_example, args=(\"A\", agent_a))\ntb = threading.Thread(target=run_example, args=(\"B\", agent_b))\nta.start(); tb.start(); ta.join(); tb.join()\nprint(results)\n```\n\n"
+    },
+    {
+      "number": 271,
+      "title": "[Bug] Repeated field heading in title parse mode corrupts the next field and breaks parsing",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/271",
+      "updated_at": "2026-08-16T19:20:05Z",
+      "body_excerpt": "### Describe the Bug\n\nIn `LLMOutputParser` title parse mode (`parse_mode=\"title\"`), a recognized field heading that appears twice in the model output is not treated as a new section on its second occurrence. The repeated heading and its value get appended to the previous field's text, so the parser feeds a combined string like `1\\n## count\\n2` to the typed field. For `int`, `float`, `list`, and `dict` fields this raises a `ValueError` and aborts the whole structured parse; for `bool` and `str` fields it silently returns a wrong value.\n\nThe cause is in `_parse_title_content` in `evoagentx/models/base_model.py`. `output_titles` is built from the declared attributes, and `is_output_title` matches a line against that list. When a heading is first seen the code calls `output_titles.remove(title)`, using removal as the duplicate detector. On a second occurrence of the same heading the title is no longer in the list, so `is_output_title` returns `(False, None)` and the `else` branch appends the heading line plus its body to `current_attr_lines`. When the section closes, `process_lines` joins those lines and passes the combined string to `parse_data_from_text`, which then fails (or, for `bool`/`str`, coerces the wrong text).\n\nHEAD permalink (default branch `main`): https://github.com/EvoAgentX/EvoAgentX/blob/fd6b9a6352afc933b170e595bfb3dc5a28d9571a/evoagentx/models/base_model.py#L496-L534\n\n### Operating System\n\nNot OS specific. Confirmed by reading and locally reproducing the parsing logic on the current default branch (`main`, commit `fd6b9a6`).\n\n### Python Version\n\nNot version specific.\n\n### Steps to Reproduce\n\n1. Define a title-mode parser subclass with an `int` field `count`, a `bool` field `enabled`, and a `str` field `label`.\n2. Parse this content in title mode:\n   ```\n   ## count\n   1\n   ## count\n   2\n   ## enabled\n   true\n   ## label\n   alpha\n   ```\n3. Observe that parsing raises `ValueError: Cannot parse text: '1\\n## count\\n2' into int data!`, because the repeated `## count` heading was folded into the first `count` value instead of starting a new section.\n4. Repeat with a duplicated `## enabled` heading and observe the boolean silently resolves to the wrong value (no error), and with a duplicated `## label` heading the string field silently returns the corrupted concatenation (for example `alpha\\n## label\\nbeta`).\n\n### Logs or Screenshots\n\n```\nValueError: Cannot parse text: '1\\n## count\\n2' into int data!\n```\n\n### Additional Context\n\nThe trigger is a mod"
+    },
+    {
+      "number": 142,
+      "title": "[Feature] <A list of recommended models>",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/142",
+      "updated_at": "2026-08-11T01:25:34Z",
+      "body_excerpt": "### Describe the Feature\n\nI found that some models constantly failed with the workflow generation. Would it be possible to provide a list of models that are recommended by EAX team with high successful rate?\n\n### Why is this feature needed?\n\nRequest A list of recommended models\n\n### Proposed Solution\n\n_No response_\n\n### Alternatives Considered\n\n_No response_\n\n### Additional Context\n\n_No response_"
+    },
+    {
+      "number": 266,
+      "title": "Proposal: optional Milvus vector store backend for RAG storage",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/266",
+      "updated_at": "2026-07-17T03:40:41Z",
+      "body_excerpt": "Hi maintainers,\n\nI noticed EvoAgentX already has a vector-store abstraction in the RAG storage area, including a `VectorStoreBase` shape and `VectorStoreType` selection. From a quick read, FAISS seems to be the only currently enabled backend, while Qdrant appears in config/documentation hints.\n\nWould you be open to expanding this backend abstraction and adding Milvus as an optional vector store?\n\nA possible scoped approach:\n\n1. Keep FAISS as the default local backend.\n2. Clarify the backend registry / factory path for third-party vector stores.\n3. Add a Milvus backend behind an optional dependency and config value.\n4. Support Milvus Lite for local development, plus Milvus server / Zilliz Cloud for larger deployments.\n5. Add focused tests for backend selection and search behavior.\n\nThis would let users scale the same RAG workflow from local FAISS to a managed or server-backed vector database without changing the higher-level EvoAgentX APIs. Would this direction be welcome?"
+    },
+    {
+      "number": 220,
+      "title": "[Question] Update Optimizer?",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/220",
+      "updated_at": "2026-04-26T12:48:50Z",
+      "body_excerpt": "### Your Question\n\nAre there plans to add support for the[ alphaevolve](https://github.com/algorithmicsuperintelligence/openevolve/tree/main?tab=readme-ov-file#quick-start) algorithm to the optimizer? This optimization algorithm seems to perform very well.\n\n### Additional Context (Optional)\n\n_No response_"
+    },
+    {
+      "number": 227,
+      "title": "[Question] A new research direction for EvoAgentX",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/227",
+      "updated_at": "2026-03-19T09:28:41Z",
+      "body_excerpt": "\n@fangjy6  @X-iZhang \n\ni have question  currently EvoAgentX framework is very well thought process you guys have worked on but the core problem with this \n--> unconstrained agent evolution(Exploration) leads to behavioral drift, hallucination, and cost blowup\n\nWhat i'm thinking  we can introduce  a new formulation over EvoAgentX \n\n## Constrained Evolutionary Agent Optimization (CEAO)\n\n- training the mutation policy with DPO/GRPO so the mutator learns to propose better offspring  can be a novel in  this, and that way  we can constrain the cost blownup issue, hallucination rate  while agents mutate, and behavioural drift   \n\n\nWhat's your thought in this  can we have a talk ?  i want to know  i want to work on this with you guys  \n\n### Additional Context (Optional)\n\n_No response_"
+    },
+    {
+      "number": 219,
+      "title": "[Question] Why hasn\u2019t the GEPA branch been merged into main?",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/219",
+      "updated_at": "2026-01-13T12:11:43Z",
+      "body_excerpt": "### Your Question\n\nI noticed that the GEPA optimizer in the DSPy project is reported to outperform reinforcement learning\u2013based approaches, so I was interested in evaluating its effectiveness.\n\nHowever, when checking the repository, I found that main is about 25 commits ahead of feature/gepa, while feature/gepa is only 1 commit ahead of main. This made me wonder why the GEPA branch has not been merged into main, given that it represents a newer optimization algorithm.\n\nCould you share the reason behind this? For example, is it due to stability concerns, ongoing experiments, API changes, or other design considerations?\n\nThanks in advance for the clarification.\n\n### Additional Context (Optional)\n\n_No response_"
+    },
+    {
+      "number": 211,
+      "title": "[Question] security contact",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/211",
+      "updated_at": "2025-11-26T15:47:34Z",
+      "body_excerpt": "### Your Question\n\nI think i might have found a security concern in evoagentx - i didn't found a possibility to issue a security issue or security.md or security contact\n\n### Additional Context (Optional)\n\n_No response_"
+    },
+    {
+      "number": 130,
+      "title": "[Bug] Workflow output truncated when writing to HTML file (shopping assistant)",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/130",
+      "updated_at": "2025-08-31T07:43:16Z",
+      "body_excerpt": "### Describe the Bug\n\nThe same run that prints valid HTML to console produces a partially written HTML file when saving to disk.\n\n### Operating System\n\nWindows11\n\n### Python Version\n\n3.12\n\n### Steps to Reproduce\n\n1.\tExecute the shopping assistant workflow; print HTML to console.\n2.\tSave the workflow output to an HTML file in the same flow.\n\n\n### Logs or Screenshots\n\nExpected\n Complete HTML written to file.\nActual\n File writing is interrupted; output is incomplete. \n\n\n### Additional Context\n\nEnvironment / Context\n Shopping assistant scenario with an example input of \u201crecommend headphones under 500 RMB\u201d. \nSuggested Fix\n\u2022\tEnsure writes are awaited/flushed; use context managers and flush() before closing.\n\u2022\tIf multi-threaded, guard against premature process exit; if async, await file ops.\nPriority\n P1"
+    },
+    {
+      "number": 131,
+      "title": "[Bug] litellm async HTTP client not closed (resource leak warning)",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/131",
+      "updated_at": "2025-08-31T07:40:51Z",
+      "body_excerpt": "### Describe the Bug\n\nEach run emits a warning that the async HTTP client was not properly closed.\n\n### Operating System\n\nWindows11\n\n### Python Version\n\n3.12\n\n### Steps to Reproduce\n\nRun the litellm workflow\n\n### Logs or Screenshots\n\nExpected\n No unclosed-client warnings; graceful teardown.\nActual\n Warning surfaced after workflow execution. \n\n\n### Additional Context\n\nSuggested Fix\n\u2022\tUse client context managers or a shared lifecycle with explicit aclose() at shutdown (e.g., atexit handler).\nPriority\n P1\n"
+    },
+    {
+      "number": 132,
+      "title": "[Bug] workflow_graph.display() blocks execution, preventing live status tracking",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/132",
+      "updated_at": "2025-08-31T07:40:36Z",
+      "body_excerpt": "### Describe the Bug\n\nGraph display is modal; subsequent steps cannot run until the window is closed.\n\n### Operating System\n\nWindows11\n\n### Python Version\n\n3.12\n\n### Steps to Reproduce\n\nRun the workflow\n\n### Logs or Screenshots\n\nExpected\n Non-blocking display (or a \u201clive view\u201d toggle) so users can watch node status updates in real time.\nActual\n Execution is blocked until display is closed. \n\n\n### Additional Context\n\nSuggested Fix\n\u2022\tRun display in a separate thread/process; or provide a non-blocking mode and a handle to close/refresh.\nPriority\n P2"
+    },
+    {
+      "number": 111,
+      "title": "Collaborative Proposal: Literature Assistant agent",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/111",
+      "updated_at": "2025-07-21T07:16:59Z",
+      "body_excerpt": "As a researcher, I plan to build a scientific-literature assistant with evoagentX that offers two main features:\nKeyword-based daily monitoring: users supply key phrases, and the agent automatically searches Google Scholar for the newest matching papers, then delivers concise abstracts. \nTargeted journal alerts: users select a set of journals, and the agent continuously fetches and summarizes the latest abstracts from those titles. \nIn the future, I plan to enrich the agent with additional functions beyond the two core ones and package it as a WeChat Mini-Program or mobile app. If the evoagentX team finds this proposal worthwhile, I would be delighted to co-develop it with you."
+    },
+    {
+      "number": 105,
+      "title": "[Feature] Integrate Mas_Zero",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/105",
+      "updated_at": "2025-07-12T13:53:47Z",
+      "body_excerpt": "### Describe the Feature\n\nTarget:\n\n- Integrate mas zero into EvoagentX\n\n### Why is this feature needed?\n\nIntegrating MAS-ZERO can facilitate the development of automatic workflow generation.\n\n### Proposed Solution\n\n_No response_\n\n### Alternatives Considered\n\n_No response_\n\n### Additional Context\n\n_No response_"
+    },
+    {
+      "number": 71,
+      "title": "[Improvement] <Support LM studio for local llm>",
+      "url": "https://github.com/ANative-Lab/EvoAgentX/issues/71",
+      "updated_at": "2025-06-18T07:06:37Z",
+      "body_excerpt": "### Describe the Feature\n\nNeed add api_key for LM studio, and make it work\n\n### Why is this feature needed?\n\nUsers care and make our platform power\n\n### Proposed Solution\n\n_No response_\n\n### Alternatives Considered\n\n_No response_\n\n### Additional Context\n\n_No response_"
+    }
+  ],
+  "page_items": 28
+}

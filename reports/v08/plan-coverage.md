@@ -3908,3 +3908,22 @@ source pins, C00/C02 evidence and all historical v0.8 gates remain unchanged.
 The architecture-index description also incorrectly referenced the withdrawn
 shared-service proposal and is corrected. Unfinished V2 integrations, setup,
 comparison, developer support and release gates remain explicit in the audit.
+
+
+### Toolkit V2: ZIP correction and upstream receipt bridge (October 8)
+
+C01's omitted worksheet is reconciled across all 21 original responsibilities;
+source-only selection is PASS with explicit installation/runtime unknowns.
+Agent-skill-eval remains the preferred engine. The fixed upstream demo now uses
+existing command execution, journals and receipt/assessment-record storage, then
+exports C02 evidence with one coordinator receipt. It does not instantiate Router
+or replace the upstream scheduler. Seventeen dedicated checks and a fresh actual
+fake-harness run pass; required full verification is in progress under
+`reports/toolkit-v2/c04/receipt-bridge-validation`.
+
+The initial verification reader created SQLite sidecars; a filesystem snapshot
+caught this and the reader now requires a closed immutable snapshot. Missing
+model measurements stay unavailable. General adapter dispatch, per-trial worker
+receipts, C03-C13 acceptance and live/release gates remain open. Existing experiment
+evidence and the unrelated original-checkout changes are preserved. See
+[STATE.md](../../docs/aeep-toolkit/STATE.md) for current verification progress.

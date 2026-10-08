@@ -1,0 +1,916 @@
+{
+  "schema": "aeep.upstream-review-worksheet.v1",
+  "scope": "C01 source selection, not runtime qualification. Eleven required worksheet fields retained for all 21 original responsibilities.",
+  "ard_boundary": {
+    "source": "https://github.com/ards-project/ard-spec",
+    "revision": "b76f235a8f461876ad4f1e77abd0eb0eb302b48d",
+    "license": "Apache-2.0",
+    "review": "docs/adr/ADR-010-ard-discovery-boundary.md",
+    "decision": "KEEP existing adopted v0.91; newer commits do not change contract."
+  },
+  "entries": [
+    {
+      "component": "tardigrde/agent-skill-eval",
+      "source_and_maintenance": {
+        "repository": "https://github.com/tardigrde/agent-skill-eval",
+        "revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+        "commit_date": "2026-07-10T15:03:10Z",
+        "release_observation": {
+          "tag_name": "v0.7.0",
+          "published_at": "2026-07-10T15:03:13Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/tardigrde/agent-skill-eval/releases/tag/v0.7.0"
+        },
+        "source_record": "reports/toolkit-v2/c01/tardigrde__agent-skill-eval.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/tardigrde__agent-skill-eval.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Fake harness observed on macOS arm64/Python 3.13.1, package 0.7.0, no authentication. Codex/Claude/OpenCode exact installed compatibility UNKNOWN.",
+      "entry_point": "Python >=3.11; CLI JSON artifacts, Codex/Claude/OpenCode subprocesses. Typer/Pydantic/OpenAI/Rich/PyYAML/dotenv. Optional skill prompt supported; temporary Git workspace is not independent containment.",
+      "candidate_types": "SKILL.md",
+      "comparison_semantics": "Optional exposure unless force_skill_invocation is enabled. Same task in both arms; coordinator holds graders. Separate controlled workers not implemented.",
+      "metrics_and_missingness": "Fake token/time constants excluded. Coordinator receipt records process resources separately. Missing model usage/billing remains null. Pinned parser defaults missing counters to zero and retains final attempt only; do not import those as full observations.",
+      "containment_recovery": "Actual synthetic local sandbox denies network/home reads/outside writes; upstream zero-exit trial failures independently rejected. Timeout/failure receipts tested. Separate worker isolation, coordinator-crash recovery and live-host conformance UNKNOWN.",
+      "footprint_install_rollback": "24 hash-locked wheels; about 68 MiB private runtime observed. Global packages unchanged. Successful fixture scratch removed; failed scratch retained. Rollback is removal of owned runtime; crash cleanup UNKNOWN.",
+      "integration_proof": {
+        "fixture_execution": "YES",
+        "production_qualification": "NO",
+        "evidence": "reports/toolkit-v2/receipt-showcase; reports/toolkit-v2/c04/stack-summary.json"
+      },
+      "disposition": {
+        "decision": "WRAP candidate",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "microsoft/waza",
+      "source_and_maintenance": {
+        "repository": "https://github.com/microsoft/waza",
+        "revision": "774df00a4f04fb5d193548a2cf3f45470fe285bb",
+        "commit_date": "2026-10-05T18:18:19Z",
+        "release_observation": {
+          "tag_name": "azd-ext-microsoft-azd-waza_0.38.9",
+          "published_at": "2026-10-05T18:11:53Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/microsoft/waza/releases/tag/azd-ext-microsoft-azd-waza_0.38.9"
+        },
+        "source_record": "reports/toolkit-v2/c01/microsoft__waza.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/microsoft__waza.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 11,
+            "url": "https://github.com/microsoft/waza/issues/11",
+            "reported_concern": "Bring Your Own Model \u2014 Ollama, OpenAI, Anthropic, OpenCode engines"
+          },
+          {
+            "number": 544,
+            "url": "https://github.com/microsoft/waza/issues/544",
+            "reported_concern": "Add opt-in Copilot-native sandboxing for evaluations"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT; bundled CLI separate license",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Go CLI; Copilot SDK/backend. No installed Waza/host compatibility proof; authentication and bundled Copilot CLI terms need selected-engine review.",
+      "entry_point": "Go CLI; Copilot SDK types in ExecutionRequest. Bundled Copilot CLI extracts to cache. Other engine portability needs proof; do not install for first Codex evaluator.",
+      "candidate_types": "SKILL.md and custom .agent.md",
+      "comparison_semantics": "Copilot SDK request/tool policy inspected. Natural selection and exact Codex integration UNKNOWN; permission callbacks do not establish OS isolation.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Private binary/cache footprint, full binary dependency rights and rollback UNKNOWN; do not run bundled extraction by default.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "buildbetter-app/skillrank",
+      "source_and_maintenance": {
+        "repository": "https://github.com/buildbetter-app/skillrank",
+        "revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+        "commit_date": "2026-10-06T15:03:43Z",
+        "release_observation": {
+          "tag_name": "v0.1.5",
+          "published_at": "2026-07-30T05:49:17Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/buildbetter-app/skillrank/releases/tag/v0.1.5"
+        },
+        "source_record": "reports/toolkit-v2/c01/buildbetter-app__skillrank.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/buildbetter-app__skillrank.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT crates; Elastic-2.0 registry/web",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Rust CLI/core; agent subprocess support is source-only. Exact CLI versions/platform/authentication UNKNOWN.",
+      "entry_point": "Rust CLI/core. Agent runner forces treatment invocation, truncates CLI version to major.minor, defaults failed usage fields. Direct launch and timeout child kill need containment/accounting review.",
+      "candidate_types": "SKILL.md; catalog metadata",
+      "comparison_semantics": "Inspected agent runner forces treatment invocation; unsuitable as primary optional-invocation comparison unchanged. Search remains a separate integration.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Rust build and binary footprint/transitive rights UNKNOWN. Do not bundle registry/web under core MIT assumption.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER evaluator; optional catalog candidate",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "benchflow-ai/skillsbench",
+      "source_and_maintenance": {
+        "repository": "https://github.com/benchflow-ai/skillsbench",
+        "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+        "commit_date": "2026-07-23T19:04:59Z",
+        "release_observation": {
+          "tag_name": "v1.1",
+          "published_at": "2026-06-14T23:16:44Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/benchflow-ai/skillsbench/releases/tag/v1.1"
+        },
+        "source_record": "reports/toolkit-v2/c01/benchflow-ai__skillsbench.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/benchflow-ai__skillsbench.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 1045,
+            "url": "https://github.com/benchflow-ai/skillsbench/issues/1045",
+            "reported_concern": "Tasks Failing when using Codex agent with the skill file"
+          },
+          {
+            "number": 1021,
+            "url": "https://github.com/benchflow-ai/skillsbench/issues/1021",
+            "reported_concern": "Remove target-output leakage from video-silence-remover skills"
+          },
+          {
+            "number": 1022,
+            "url": "https://github.com/benchflow-ai/skillsbench/issues/1022",
+            "reported_concern": "Remove task-specific answer values from edit-pdf skills"
+          },
+          {
+            "number": 1018,
+            "url": "https://github.com/benchflow-ai/skillsbench/issues/1018",
+            "reported_concern": "Remove answer leakage from dapt-intrusion-detection skills and clarify detection contract"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0 repository; per-task rights still review",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Existing selected DOCX adapter evidence retained; new task/model/platform combinations UNKNOWN.",
+      "entry_point": "Harbor/Docker task, solution, verifier directories. Existing AEEP DOCX adapter/recipe already available; preserve historical negative study and original source pin.",
+      "candidate_types": "Selected benchmark tasks and graders",
+      "comparison_semantics": "Reuse existing task mapping and independently reviewed verifiers. Task-level oracle leakage/rights must be checked; do not pool benchmark families.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Harbor/Docker task setup; per-task images, dependencies and teardown differ. No new dataset/image download authorized.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "REUSE selected existing adapter",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "eval-sys/mcpmark",
+      "source_and_maintenance": {
+        "repository": "https://github.com/eval-sys/mcpmark",
+        "revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "commit_date": "2026-06-12T10:57:10Z",
+        "release_observation": {
+          "tag_name": "v1.2.0",
+          "published_at": "2025-09-20T09:14:09Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/eval-sys/mcpmark/releases/tag/v1.2.0"
+        },
+        "source_record": "reports/toolkit-v2/c01/eval-sys__mcpmark.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/eval-sys__mcpmark.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 273,
+            "url": "https://github.com/eval-sys/mcpmark/issues/273",
+            "reported_concern": "Postgres state restore can silently accept a failed pg_restore (case-sensitive \"ERROR\" check)"
+          },
+          {
+            "number": 270,
+            "url": "https://github.com/eval-sys/mcpmark/issues/270",
+            "reported_concern": "CI verifier's 300 s poll cannot fit inside `task_manager`'s 300 s subprocess timeout"
+          },
+          {
+            "number": 245,
+            "url": "https://github.com/eval-sys/mcpmark/issues/245",
+            "reported_concern": "How does MCPMark handle MCP server version changes (Notion / GitHub MCP)?"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0 repository; service/data terms separate",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python plus service-specific MCP backends/credentials. Exact installed compatibility UNKNOWN.",
+      "entry_point": "Python pipeline; external MCP services and credentials vary by task. Verified task revision supersedes old scoring. Import only selected pinned tasks after license and verifier review.",
+      "candidate_types": "MCP benchmark task packs",
+      "comparison_semantics": "Import only reviewed task/verifier pairs; service reset, credentials and optional tool exposure require task-specific conformance.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "External service state, image/data size, reset guarantees and rollback UNKNOWN; no bulk pack install.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "SalesforceAIResearch/MCP-Universe",
+      "source_and_maintenance": {
+        "repository": "https://github.com/SalesforceAIResearch/MCP-Universe",
+        "revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+        "commit_date": "2026-10-08T01:29:21Z",
+        "release_observation": {
+          "tag_name": "v1.1.3",
+          "published_at": "2026-03-25T05:32:23Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/SalesforceAIResearch/MCP-Universe/releases/tag/v1.1.3"
+        },
+        "source_record": "reports/toolkit-v2/c01/SalesforceAIResearch__MCP-Universe.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/SalesforceAIResearch__MCP-Universe.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 53,
+            "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/53",
+            "reported_concern": "Reproducibility - request for model outputs of MCP-Universe leaderboard"
+          },
+          {
+            "number": 49,
+            "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/49",
+            "reported_concern": "MCP universe tests are failing with latest claude-opus and claude-sonet model fails with 'temperature and top_p cannot both be specified' error"
+          },
+          {
+            "number": 48,
+            "url": "https://github.com/SalesforceAIResearch/MCP-Universe/issues/48",
+            "reported_concern": "Inquire about the version number of mcp-server used when publishing the paper."
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0 LICENSE.txt; task/asset terms unknown",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python >=3.10; task-specific Docker servers and credentials. Exact installed compatibility UNKNOWN.",
+      "entry_point": "Python >=3.10; Dockerized MCP servers and benchmark modules. Requires service-specific credentials and setup; too much surface for Essentials.",
+      "candidate_types": "MCP benchmark tasks",
+      "comparison_semantics": "Benchmark scores do not transfer to user tasks. Pin MCP server and evaluator together; independent reset/grading required.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Heavy service-specific setup; measured footprint, dependency closure and rollback UNKNOWN.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "ALEX-nlp/OpenSkillEval",
+      "source_and_maintenance": {
+        "repository": "https://github.com/ALEX-nlp/OpenSkillEval",
+        "revision": "d0e109283eee79216284cdf09ee59bf63239fb13",
+        "commit_date": "2026-06-15T02:14:07Z",
+        "release_observation": null,
+        "source_record": "reports/toolkit-v2/c01/ALEX-nlp__OpenSkillEval.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/ALEX-nlp__OpenSkillEval.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0 code; CC-BY-NC-4.0 dataset",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python runner; model/VLM provider credentials. Installed host compatibility UNKNOWN.",
+      "entry_point": "Python runner with artifact tasks and model/VLM judging. Dataset redistribution excluded from commercial bundle; judge spend and worker conformance unknown.",
+      "candidate_types": "Artifact benchmark tasks; research method",
+      "comparison_semantics": "Model/VLM judging requires separate judge authority and verification. Dataset is excluded from commercial redistribution.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Code and data rights differ. Data download, judge spend and worker/teardown compatibility UNKNOWN.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER data; research reference",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "cisco-ai-defense/skill-scanner",
+      "source_and_maintenance": {
+        "repository": "https://github.com/cisco-ai-defense/skill-scanner",
+        "revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+        "commit_date": "2026-10-05T18:47:16Z",
+        "release_observation": {
+          "tag_name": "2.2.1",
+          "published_at": "2026-10-05T16:30:15Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/cisco-ai-defense/skill-scanner/releases/tag/2.2.1"
+        },
+        "source_record": "reports/toolkit-v2/c01/cisco-ai-defense__skill-scanner.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/cisco-ai-defense__skill-scanner.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 254,
+            "url": "https://github.com/cisco-ai-defense/skill-scanner/issues/254",
+            "reported_concern": "[BUG] --adjudicate: verdicts are cut off at the 200-token cap when claude-sonnet-5 thinks (8 to 12 of 25 calls on one finding)"
+          },
+          {
+            "number": 252,
+            "url": "https://github.com/cisco-ai-defense/skill-scanner/issues/252",
+            "reported_concern": "promptguard: PG_PII_CREDIT_CARD matches digits inside decimal fractions and reports them as CRITICAL"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python >=3.11 CLI/SDK. Static mode and model-provider auth differ; installed compatibility UNKNOWN.",
+      "entry_point": "Python >=3.11 CLI/SDK. Static and model-backed analyzers have different network/credential/cost requirements. Findings are risk evidence, not safety or containment.",
+      "candidate_types": "SKILL.md and skill directory scanning",
+      "comparison_semantics": "Scanner findings are risk observations, never comparative success or containment. Static and model-backed scans must be distinct.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Dependency closure, static-only footprint and rollback UNKNOWN. Review any model-backed analyzer separately.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "WRAP optional candidate",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "modelcontextprotocol/registry",
+      "source_and_maintenance": {
+        "repository": "https://github.com/modelcontextprotocol/registry",
+        "revision": "970df037919faa70456dde08c295473002d850e5",
+        "commit_date": "2026-10-08T10:18:35Z",
+        "release_observation": {
+          "tag_name": "v1.8.1",
+          "published_at": "2026-08-06T23:35:18Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/modelcontextprotocol/registry/releases/tag/v1.8.1"
+        },
+        "source_record": "reports/toolkit-v2/c01/modelcontextprotocol__registry.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/modelcontextprotocol__registry.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 1676,
+            "url": "https://github.com/modelcontextprotocol/registry/issues/1676",
+            "reported_concern": "Search returns superseded version records alongside latest ones, oldest first"
+          },
+          {
+            "number": 1629,
+            "url": "https://github.com/modelcontextprotocol/registry/issues/1629",
+            "reported_concern": "server.json: no way to select a specific bin when an npm package exposes multiple executables"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0/MIT transition; docs CC-BY-4.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Existing AEEP /v0.1/servers client; public metadata read. No registry server install.",
+      "entry_point": "Use existing bounded /v0.1/servers client. Hosting Go/PostgreSQL registry is unnecessary; discovery grants no execution authority.",
+      "candidate_types": "Inert MCP server metadata",
+      "comparison_semantics": "Discovery does not qualify candidates or authorize execution. Preserve existing bounded pagination, parsing and source provenance.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Reuse existing HTTP client; no PostgreSQL/Go registry service needed. Provider setup remains explicit.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "KEEP existing client",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "open-telemetry/semantic-conventions",
+      "source_and_maintenance": {
+        "repository": "https://github.com/open-telemetry/semantic-conventions",
+        "revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+        "commit_date": "2026-10-07T21:40:06Z",
+        "release_observation": {
+          "tag_name": "v1.44.0",
+          "published_at": "2026-08-04T20:00:58Z",
+          "target_commitish": "e10a930844c6951757a43b849d364f7d056ac32b",
+          "html_url": "https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.44.0"
+        },
+        "source_record": "reports/toolkit-v2/c01/open-telemetry__semantic-conventions.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/open-telemetry__semantic-conventions.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 4187,
+            "url": "https://github.com/open-telemetry/semantic-conventions/issues/4187",
+            "reported_concern": "GenAI: silent timeouts are not expressible in agent spans"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Existing opentelemetry-api dependency; GenAI conventions source-pinned. Export destinations/authentication not configured.",
+      "entry_point": "Keep installed OTel API; pin semantic interpretation in adapters. Exporter destination/privacy and GenAI field stability require C10 review; no server needed.",
+      "candidate_types": "Telemetry conventions; no executable candidate",
+      "comparison_semantics": "Reuse existing minimized instrumentation; semantic names/units and availability do not establish observations or independent grading.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "No telemetry server required. Exporter-specific footprint, licenses and revocation remain C10 work.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "REUSE conventions",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "langfuse/langfuse",
+      "source_and_maintenance": {
+        "repository": "https://github.com/langfuse/langfuse",
+        "revision": "c106bb3d945323688e6f6079f65fb0ab28203b53",
+        "commit_date": "2026-10-08T16:38:41Z",
+        "release_observation": {
+          "tag_name": "v4.55.0",
+          "published_at": "2026-10-08T13:36:14Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/langfuse/langfuse/releases/tag/v4.55.0"
+        },
+        "source_record": "reports/toolkit-v2/c01/langfuse__langfuse.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/langfuse__langfuse.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT except ee paths; third-party terms separate",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "HTTP/SDK; service authentication must be operator-configured. Installed SDK/server versions UNKNOWN.",
+      "entry_point": "HTTP/SDK observability integration; self-hosted multi-service stack is optional. Prompts/output must remain excluded unless explicit consent.",
+      "candidate_types": "Optional trace export target",
+      "comparison_semantics": "Export minimized receipt-derived facts only; prompts/output opt-in. Backend displays do not establish independent evidence.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Self-hosted multi-service requirements and SDK closure UNKNOWN; choose only one observability target when needed.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER external exporter",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "Arize-ai/phoenix",
+      "source_and_maintenance": {
+        "repository": "https://github.com/Arize-ai/phoenix",
+        "revision": "4b1fa58bc7d6bd4d43d4034bac9a9a2a1def79a4",
+        "commit_date": "2026-10-08T18:14:09Z",
+        "release_observation": {
+          "tag_name": "arize-phoenix-evals-v3.9.1",
+          "published_at": "2026-10-08T03:15:45Z",
+          "target_commitish": "856100b356dda9551f8ded1e64e622b60efebdc8",
+          "html_url": "https://github.com/Arize-ai/phoenix/releases/tag/arize-phoenix-evals-v3.9.1"
+        },
+        "source_record": "reports/toolkit-v2/c01/Arize-ai__phoenix.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/Arize-ai__phoenix.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Elastic-2.0 server",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "OTel-compatible external target; exact SDK/server/authentication compatibility UNKNOWN.",
+      "entry_point": "OTel observability server, not required core. License limits hosted/managed service use; no assumption of MIT packaging.",
+      "candidate_types": "Optional trace export target",
+      "comparison_semantics": "Alternative to Langfuse, not another mandatory core service. Trace facts require original source provenance.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Elastic-2.0 server terms; optional SDK/export interface rights and measured footprint UNKNOWN.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER external exporter",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "stacklok/toolhive",
+      "source_and_maintenance": {
+        "repository": "https://github.com/stacklok/toolhive",
+        "revision": "33ba170aad633e20520f380500a45cd158f24aed",
+        "commit_date": "2026-10-08T17:07:51Z",
+        "release_observation": {
+          "tag_name": "v0.51.4",
+          "published_at": "2026-09-27T16:20:54Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/stacklok/toolhive/releases/tag/v0.51.4"
+        },
+        "source_record": "reports/toolkit-v2/c01/stacklok__toolhive.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/stacklok__toolhive.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 6720,
+            "url": "https://github.com/stacklok/toolhive/issues/6720",
+            "reported_concern": "Audit records outcome=success for JSON-RPC error bodies over 512 bytes"
+          },
+          {
+            "number": 4048,
+            "url": "https://github.com/stacklok/toolhive/issues/4048",
+            "reported_concern": "Distinguish tool discovery from tool invocation in authorization and audit"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Go CLI; Docker/Podman and OIDC/OAuth integrations. Exact installed platform/engine/credential boundary UNKNOWN.",
+      "entry_point": "Go CLI with Docker/Podman MCP runtime, OIDC/OAuth and exporters. Container availability does not prove AEEP worker/credential separation.",
+      "candidate_types": "MCP runtime/gateway",
+      "comparison_semantics": "MCP isolation remains distinct from comparative agent workers. Tool catalog filtering is not process/network containment.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Image graph, persistent volumes, daemon footprint and safe revocation/rollback UNKNOWN; no image pulls.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER runtime adapter",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "langchain-ai/langgraph",
+      "source_and_maintenance": {
+        "repository": "https://github.com/langchain-ai/langgraph",
+        "revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+        "commit_date": "2026-10-07T23:17:02Z",
+        "release_observation": {
+          "tag_name": "cli==0.4.33",
+          "published_at": "2026-10-07T13:38:46Z",
+          "target_commitish": "736a18eaab6d80eed54d4c842c1297c8c87fef80",
+          "html_url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.33"
+        },
+        "source_record": "reports/toolkit-v2/c01/langchain-ai__langgraph.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/langchain-ai__langgraph.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 9240,
+            "url": "https://github.com/langchain-ai/langgraph/issues/9240",
+            "reported_concern": "Clarify that durability modes do not imply exactly-once external side effects"
+          },
+          {
+            "number": 8039,
+            "url": "https://github.com/langchain-ai/langgraph/issues/8039",
+            "reported_concern": "durability=\"sync\": put_writes/put persistence order is unenforced, so post-crash recovery (replay vs re-execute) is host-dependent"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python API; executor-specific providers/authentication. Installed graph API compatibility UNKNOWN.",
+      "entry_point": "Python graph API; dynamic durable workflows differ from serial AEEP DAG. Retain external bounded execution until mappings and authority checks exist.",
+      "candidate_types": "Dynamic workflows",
+      "comparison_semantics": "Keep bounded external delegation; loops, parallelism and resume are not equivalent to the existing serial AEEP DAG.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Optional package closure and checkpoint state ownership UNKNOWN; no mandatory persistence server.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER workflow adapter",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "ANative-Lab/EvoAgentX",
+      "source_and_maintenance": {
+        "repository": "https://github.com/ANative-Lab/EvoAgentX",
+        "revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+        "commit_date": "2026-08-27T09:40:02Z",
+        "release_observation": {
+          "tag_name": "v0.1.4",
+          "published_at": "2026-06-28T10:24:06Z",
+          "target_commitish": "main",
+          "html_url": "https://github.com/ANative-Lab/EvoAgentX/releases/tag/v0.1.4"
+        },
+        "source_record": "reports/toolkit-v2/c01/ANative-Lab__EvoAgentX.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/ANative-Lab__EvoAgentX.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 273,
+            "url": "https://github.com/ANative-Lab/EvoAgentX/issues/273",
+            "reported_concern": "[Bug] concurrent Evaluator workers share the same Agent.short_term_memory across benchmark examples"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python model-backed proposer; API credentials require explicit selected-provider setup. Installed compatibility UNKNOWN.",
+      "entry_point": "Python model-backed workflow generation/optimization; API keys and generated code require separately bounded execution and cost authority.",
+      "candidate_types": "Workflow proposals/generated code",
+      "comparison_semantics": "Proposal is inert until reviewed; no generated code execution or model spend inferred. Do not trust shared memory as isolation.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Generation/optimization cost, dependencies and rollback UNKNOWN; no generated code bundled.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER proposer",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "FoundationAgents/AFlow",
+      "source_and_maintenance": {
+        "repository": "https://github.com/FoundationAgents/AFlow",
+        "revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+        "commit_date": "2025-12-25T06:46:56Z",
+        "release_observation": {
+          "unavailable": "HTTP Error 404: Not Found"
+        },
+        "source_record": "reports/toolkit-v2/c01/FoundationAgents__AFlow.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/FoundationAgents__AFlow.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 42,
+            "url": "https://github.com/FoundationAgents/AFlow/issues/42",
+            "reported_concern": "livecodebench loader pickle.loads an unsigned dataset; optimizer __import__'s generated graph.py unsandboxed"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python run.py; paid model search. Exact host/platform compatibility UNKNOWN.",
+      "entry_point": "Python run.py optimizer for selected datasets; model-driven search is metered. No need to duplicate it inside core; data/dependency rights unknown.",
+      "candidate_types": "Workflow optimization candidates",
+      "comparison_semantics": "Optimizer experiment definitions/verifiers require review. Treat generated code and downloaded datasets as untrusted inputs.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "Dependency/data closure and search footprint UNKNOWN. Do not deserialize or execute downloaded/generated code on host.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER optimizer",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "microsoft/agent-framework",
+      "source_and_maintenance": {
+        "repository": "https://github.com/microsoft/agent-framework",
+        "revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+        "commit_date": "2026-10-08T17:29:29Z",
+        "release_observation": {
+          "tag_name": "python-1.21.0",
+          "published_at": "2026-10-08T10:27:26Z",
+          "target_commitish": "91ab44faa4824a30247d00c341f3498ba46b1ca3",
+          "html_url": "https://github.com/microsoft/agent-framework/releases/tag/python-1.21.0"
+        },
+        "source_record": "reports/toolkit-v2/c01/microsoft__agent-framework.json",
+        "issue_record": "reports/toolkit-v2/c01/issue-triage-20261008/microsoft__agent-framework.json",
+        "issue_scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+        "selected_reports": [
+          {
+            "number": 9204,
+            "url": "https://github.com/microsoft/agent-framework/issues/9204",
+            "reported_concern": "Python: [Bug]: MCP tools/call retry can duplicate non-idempotent side effects after connection loss"
+          }
+        ],
+        "issue_applicability": "Reports are unverified upstream claims, not reproduced defects at the pinned source. Empty selection does not mean no known issues."
+      },
+      "rights": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "host_platform_authentication": "Python/.NET SDKs; provider-specific authentication. Exact installed compatibility UNKNOWN.",
+      "entry_point": "Python/.NET provider SDKs and workflows. External bounded adapter only after version and permission compatibility; does not replace evidence layer.",
+      "candidate_types": "Optional workflow executor",
+      "comparison_semantics": "External bounded adapter only; authority, retries and side effects remain AEEP-controlled. No implicit graph equivalence.",
+      "metrics_and_missingness": "No new model token/time/cash observations imported. Exact source/units, cached/reasoning overlap, retry completeness and actual billing remain UNKNOWN until the selected adapter is qualified; not applicable to inert catalog/convention roles.",
+      "containment_recovery": "No new execution or containment claim. Existing AEEP boundaries remain authoritative for existing adapters. Require selected-version worker independence, cleanup/recovery, concurrency, permissions and finite resource caps before execution.",
+      "footprint_install_rollback": "SDK closure, checkpoint/state footprint and rollback UNKNOWN; no mandatory framework dependency.",
+      "integration_proof": {
+        "fixture_execution": "NO new V2 execution",
+        "production_qualification": "NO",
+        "evidence": "Source record above; existing selected AEEP evidence stays bound to historical plans"
+      },
+      "disposition": {
+        "decision": "DEFER executor",
+        "migration": "Keep optional and disabled until its installer/adapter checks pass. Preserve legacy routes and evidence. Do not replace this component with a new internal framework."
+      }
+    },
+    {
+      "component": "Existing AEEP BenchmarkRunner",
+      "source_and_maintenance": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+        "source_record": "docs/aeep-toolkit/INVENTORY.md",
+        "issue_scope": "Local gaps and existing proofs reviewed in reports/v08/plan-coverage.md; no new GitHub issue triage."
+      },
+      "rights": {
+        "observed": "Apache-2.0 repository; existing dependency/data terms remain separate.",
+        "redistribution": "Existing distribution unchanged; no new third-party data."
+      },
+      "host_platform_authentication": "Existing managed-host/native adapters retain their exact backend bindings and host-owned authentication; V2 compatibility is not inherited.",
+      "entry_point": "src/aeep/assessment/service.py; src/aeep/benchmarking.py",
+      "candidate_types": "Existing reviewed executor/plugin/skill mappings; not arbitrary code.",
+      "comparison_semantics": "Existing reviewed definitions, budgets, separate controlled workers, grading and receipts. No silent evaluator switch during a campaign.",
+      "metrics_and_missingness": "Reuse ExecutionReceipt/ResourceAccounting. Preserve raw dimensions and actual/estimated/unknown distinctions; no new model evidence.",
+      "containment_recovery": "Existing source-bound boundary/lifecycle tests retained. V2 external harness still needs independent conformance.",
+      "footprint_install_rollback": "Reuse existing modules/store; avoid broad extraction. Full minimal-package footprint and installer rollback remain C03/C06/C13 work.",
+      "integration_proof": {
+        "fixture_execution": "YES legacy baseline",
+        "production_qualification": "UNKNOWN for new V2 path",
+        "evidence": "reports/toolkit-v2/c00/summary.json; reports/v08/plan-coverage.md"
+      },
+      "disposition": {
+        "decision": "REUSE fallback",
+        "migration": "Existing reviewed definitions, budgets, separate controlled workers, grading and receipts. No silent evaluator switch during a campaign."
+      }
+    },
+    {
+      "component": "Existing AEEP Router / StackRuntime",
+      "source_and_maintenance": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+        "source_record": "docs/aeep-toolkit/INVENTORY.md",
+        "issue_scope": "Local gaps and existing proofs reviewed in reports/v08/plan-coverage.md; no new GitHub issue triage."
+      },
+      "rights": {
+        "observed": "Apache-2.0 repository; existing dependency/data terms remain separate.",
+        "redistribution": "Existing distribution unchanged; no new third-party data."
+      },
+      "host_platform_authentication": "Existing managed-host/native adapters retain their exact backend bindings and host-owned authentication; V2 compatibility is not inherited.",
+      "entry_point": "src/aeep/router.py; src/aeep/stack_runtime.py; src/aeep/stack_planning.py",
+      "candidate_types": "Existing reviewed executor/plugin/skill mappings; not arbitrary code.",
+      "comparison_semantics": "Preserve native task execution, existing host adapters, receipt accounting and serial stack semantics; no new routing requirement for Essentials.",
+      "metrics_and_missingness": "Reuse ExecutionReceipt/ResourceAccounting. Preserve raw dimensions and actual/estimated/unknown distinctions; no new model evidence.",
+      "containment_recovery": "Existing source-bound boundary/lifecycle tests retained. V2 external harness still needs independent conformance.",
+      "footprint_install_rollback": "Reuse existing modules/store; avoid broad extraction. Full minimal-package footprint and installer rollback remain C03/C06/C13 work.",
+      "integration_proof": {
+        "fixture_execution": "YES legacy baseline",
+        "production_qualification": "UNKNOWN for new V2 path",
+        "evidence": "reports/toolkit-v2/c00/summary.json; reports/v08/plan-coverage.md"
+      },
+      "disposition": {
+        "decision": "KEEP optional",
+        "migration": "Preserve native task execution, existing host adapters, receipt accounting and serial stack semantics; no new routing requirement for Essentials."
+      }
+    },
+    {
+      "component": "Archestra",
+      "source_and_maintenance": {
+        "repository": "https://github.com/archestra-ai/archestra",
+        "revision": null,
+        "release_observation": null,
+        "issue_scope": "Not reviewed: deferred research / external-link-only role; no installable artifact selected."
+      },
+      "rights": {
+        "observed": "UNKNOWN exact Archestra code/enterprise terms; original handoff flags AGPL.",
+        "redistribution": "No bundle proposed."
+      },
+      "host_platform_authentication": "Not applicable to current deferred/link-only role.",
+      "entry_point": "Original handoff already deferred competitor research; no package proposed.",
+      "candidate_types": "Not an evaluation candidate.",
+      "comparison_semantics": "Not a comparative evaluator.",
+      "metrics_and_missingness": "No measurements or cash transfer asserted.",
+      "containment_recovery": "No execution, credentials or service setup.",
+      "footprint_install_rollback": "No local installation; a future integration needs separate artifact/terms review.",
+      "integration_proof": {
+        "fixture_execution": "NO",
+        "production_qualification": "NO",
+        "evidence": "Original ZIP matrix; docs/aeep-toolkit/HANDOFF_AUDIT.md"
+      },
+      "disposition": {
+        "decision": "DEFER",
+        "migration": "Original handoff already deferred competitor research; no package proposed."
+      }
+    },
+    {
+      "component": "GitHub Sponsors",
+      "source_and_maintenance": {
+        "repository": "https://github.com/sponsors",
+        "revision": null,
+        "release_observation": null,
+        "issue_scope": "Not reviewed: deferred research / external-link-only role; no installable artifact selected."
+      },
+      "rights": {
+        "observed": "External hosted service terms; no software or data redistribution.",
+        "redistribution": "No bundle proposed."
+      },
+      "host_platform_authentication": "Not applicable to current deferred/link-only role.",
+      "entry_point": "External maintainer-authorized donation link; no payout or payment service.",
+      "candidate_types": "Not an evaluation candidate.",
+      "comparison_semantics": "Not a comparative evaluator.",
+      "metrics_and_missingness": "No measurements or cash transfer asserted.",
+      "containment_recovery": "No execution, credentials or service setup.",
+      "footprint_install_rollback": "No local installation; a future integration needs separate artifact/terms review.",
+      "integration_proof": {
+        "fixture_execution": "NO",
+        "production_qualification": "NO",
+        "evidence": "Original ZIP matrix; docs/aeep-toolkit/HANDOFF_AUDIT.md"
+      },
+      "disposition": {
+        "decision": "KEEP external link",
+        "migration": "External maintainer-authorized donation link; no payout or payment service."
+      }
+    }
+  ]
+}

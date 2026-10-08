@@ -1,0 +1,135 @@
+{
+  "repository": "benchflow-ai/skillsbench",
+  "url": "https://api.github.com/repos/benchflow-ai/skillsbench/issues?state=open&sort=updated&direction=desc&per_page=30",
+  "observed_at": "2026-10-08T22:47:21.255535+00:00",
+  "scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+  "issues": [
+    {
+      "number": 1057,
+      "title": "Task proposal: reward-free causal proxy audit with reusable statistical skills",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1057",
+      "updated_at": "2026-10-06T03:49:56Z",
+      "body_excerpt": "## Proposal and fit\n\nI am Shi Bo (Boston University), working on causal inference and imitation learning. I would like to contribute a native SkillsBench task adapted from my `causal-proxy-audit` research workflow. Before opening a task PR, I would appreciate feedback on fit, provenance and the current contributor policy. Please move this to Discussions if that is the preferred venue.\n\nThe professional workflow is a research-methods audit of an imitation policy learned from demonstrations with delayed, imperfect proxy measurements and no observed rewards. The solver produces an executable auditor and structured, checkable results: signed-bridge identification certificates, assumption-indexed partial-identification bounds, whole-trajectory uncertainty, certified randomized minimax-regret decisions, and episode-held-out adversarial-estimator diagnostics. Researchers performing off-policy causal analyses need to distinguish a successful observed fit from justified causal identification, and distinguish measurement-channel stability from changes in latent prevalence.\n\nI propose three reusable skills covering (1) linear identification and proxy-assumption audits, (2) episode-aware statistical estimation, and (3) robust optimization certificates. They would contain general mathematical/procedural guidance, not instance answers, fixture seeds or hidden-test access. The study would compare the same agent/model and frozen package with and without runtime-injected skills. I understand that an agent simply failing is not evidence that the skills help.\n\nVerification uses a separately implemented numerical reference and certificate checks, not an LLM judge. The input fixtures are explicitly synthetic, designed to make latent-identification cases and numerical edge cases independently checkable; they are not presented as clinical records. The task/oracle/verifier require CPU-only Python/NumPy/SciPy and no paid APIs or external data credentials.\n\n## Existing source and disclosure\n\nThe source is my Terminal-Bench-Science proposal, https://github.com/harbor-framework/terminal-bench-science/pull/1042, currently pinned at `ba54777ff573d9a58df867c7b736abdfc440932f` in `shibo769/terminal-bench-science`. This would be an openly attributed adaptation, not an independently new benchmark instance. The source carries Apache-2.0 licensing and an explicit authoring disclosure:\nhttps://github.com/shibo769/terminal-bench-science/blob/ba54777ff573d9a58df867c7b736abdfc440932f/tasks/mathe"
+    },
+    {
+      "number": 1050,
+      "title": "[xlsx-recover-data] Ground truth and verifier disagree on Growth Analysis!B8 expected value",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1050",
+      "updated_at": "2026-08-16T08:18:24Z",
+      "body_excerpt": "## Description\n\nThe `xlsx-recover-data` task has an inconsistency between the ground truth and verifier expectation for the following cell:\n\n```\n\nGrowth Analysis!B8\n\n```\n\n(`Science Avg Budget`)\n\nThe task currently defines different expected values depending on whether the ground truth files or the verifier tests are used.\n\n## Ground truth\n\nThe following files define the ground truth value:\n\n```\n\ntasks/xlsx-recover-data/environment/groundtruth/answers.txt\n\ntasks/xlsx-recover-data/environment/groundtruth/create_incomplete_xlsx.py\n\n```\n\nThe expected value is:\n\n```\n\nGrowth Analysis!B8 = 7610.3\n\n```\n\nThis value is based on the calculation:\n\n```\n\nAverage Annual Budget (FY2019-FY2024)\n\n```\n\nUsing the yearly values:\n\n```\n\n6906, 7139, 7301, 7614, 8262, 8440\n\n```\n\nThe calculation is:\n\n```\n\n(6906 + 7139 + 7301 + 7614 + 8262 + 8440) / 6\n= 7610.333...\n\u2248 7610.3\n\n```\n\nTherefore, according to the task ground truth and generation logic, the recovered value should be:\n\n```\n\n7610.3\n\n```\n\n## Verifier\n\nHowever, the verifier expects a different value.\n\nFile:\n\n```\n\ntasks/xlsx-recover-data/verifier/test_outputs.py\n\n````\n\nCurrent check:\n\n```python\nGROWTH_VALUES = [\n    ...\n    (\"B8\", 7444.4, \"Science Avg Budget\"),\n]\n````\n\nThe value `7444.4` corresponds to:\n\n```\n(6906 + 7139 + 7301 + 7614 + 8262) / 5\n= 7444.4\n```\n\nwhich uses only FY2019-FY2023 and excludes FY2024.\n\n## Impact\n\nThe task currently has conflicting correctness criteria:\n\n* Following the ground truth produces:\n\n```\n7610.3\n```\n\n* Passing the verifier requires:\n\n```\n7444.4\n```\n\nA solution cannot satisfy both the ground truth and verifier simultaneously.\n\n## Suggested fix\n\nPlease make the ground truth and verifier consistent.\n\nIf FY2019-FY2024 is the intended calculation range, update:\n\n```\ntasks/xlsx-recover-data/verifier/test_outputs.py\n```\n\nto expect:\n\n```python\n(\"B8\", 7610.3, \"Science Avg Budget\")\n```\n\nOtherwise, update the ground truth generation logic to consistently use the FY2019-FY2023 range.\n\nIt would also be helpful to explicitly document the fiscal year range used for \"Average Annual Budget\" in the task description to avoid ambiguity."
+    },
+    {
+      "number": 1049,
+      "title": "Eligibility question: GitHub submission path for Agent Skill Lift?",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1049",
+      "updated_at": "2026-08-12T04:36:26Z",
+      "body_excerpt": "I am evaluating the live $20,000 Agent Skill Lift challenge as an independent participant. I maintain a standard-library-only agent trace safety verifier with deterministic, content-addressed receipts and seeded safe/unsafe controls: https://github.com/Nickgonzales76017/bonfyre-agent-trace-verifier\n\nThe competition is currently listed on Kaggle, but I do not have an authenticated Kaggle submission session available. Is Kaggle rule acceptance and submission the exclusive entry route, or is there an organizer-approved GitHub-based path for submitting an independently maintained safety-verifier skill and its reproducibility evidence?\n\nI will not prepare or claim a competition entry unless an official route exists. If Kaggle is exclusive, a short confirmation is enough and I will close this path."
+    },
+    {
+      "number": 1047,
+      "title": "`weighted-gdp-calc`: verifier CSV fallback is off by 8 rows, formula-only submissions always score 0",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1047",
+      "updated_at": "2026-08-11T15:46:44Z",
+      "body_excerpt": "For [`weighted-gdp-calc`](https://github.com/benchflow-ai/skillsbench/tree/main/tasks/weighted-gdp-calc), the task asks for Excel formulas. To grade formulas, the verifier converts the workbook to CSV and looks cells up by row number. That conversion silently drops the 8 empty rows at the top of the sheet, so every lookup is 8 rows off, and correct workbooks fail.\n\n- Rows 1 to 8 of the Task sheet are empty. The CSV exporter skips empty leading rows.\n- [load_csv_data()](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/weighted-gdp-calc/verifier/test_outputs.py#L63) assumes [CSV line 1 = sheet row 1](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/weighted-gdp-calc/verifier/test_outputs.py#L84). After the drop, CSV line n is really sheet row n+8.\n- The CSV path only runs when the workbook has no precomputed values, i.e. exactly when the agent wrote formulas (as instructed) and didn't recalculate the file. So today the task grades \"did the agent recalculate\", not \"is the spreadsheet right\", and it's all or nothing: compliant correct answers get 0.\n\nWorth noting: the task's own oracle ([oracle/solve.sh](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/weighted-gdp-calc/oracle/solve.sh)) sidesteps this entirely by writing hardcoded values with openpyxl instead of the formulas the instruction requires. So the compliant formula path was never exercised by the reference solution, which is likely how this went unnoticed.\n\nSame bug class as #894, where the exporter dropped an empty leading column and everything read one column off. #896 fixed that by locating columns by label instead of position; the same fix works here for rows. Happy to PR it.\n\nRelated: #945 is the other way formula submissions fail on this task."
+    },
+    {
+      "number": 1048,
+      "title": "`weighted-gdp-calc`: instruction says years are in row 10, they're in row 9",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1048",
+      "updated_at": "2026-08-11T15:36:36Z",
+      "body_excerpt": "[task.md](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/weighted-gdp-calc/task.md?plain=1#L47) says to match on \"year (in row 10)\", but in [gdp.xlsx](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/weighted-gdp-calc/environment/gdp.xlsx) the year headers (and their blue highlight) are in row 9 (H9:L9). Row 10 is empty.\n\nAgents that trust the instruction and point their MATCH at row 10 get #N/A everywhere. One word fix: 10 \u2192 9."
+    },
+    {
+      "number": 1046,
+      "title": "Publish verifiable provenance for the v1.1 task manifest release asset",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1046",
+      "updated_at": "2026-08-09T16:16:38Z",
+      "body_excerpt": "## Request\n\nCould you publish verifiable build provenance for the following SkillsBench\nv1.1 release asset?\n\n- Asset: `skillsbench-v1.1-task-manifest.json`\n- Size: `73717` bytes\n- SHA-256: `0aa87c4d4f64c33db74b20e770f4b4a77dc21911e81a8ffd50cbb84ac7a4cc6f`\n- Release tag: `v1.1`\n- Tag object: `a30b2ac88c8f1fd1c77385be6b4dea204ca9eb69`\n- Source commit: `b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af`\n\nAt the time of checking, the annotated tag is unsigned, the release reports\n`immutable=false`, and GitHub's repository attestation endpoint returns 404\nfor the asset digest. The workflows present at the tagged commit do not appear\nto generate artifact provenance.\n\n## Requested verification outcome\n\nAny implementation is welcome if it lets consumers independently verify:\n\n1. a SLSA provenance statement carried in a DSSE/Sigstore bundle whose subject\n   is the exact asset digest above;\n2. the GitHub Actions OIDC issuer and workflow identity that produced it;\n3. the source repository and exact source commit;\n4. the builder identity and workflow revision;\n5. Rekor transparency-log inclusion and its verification chain; and\n6. a successful command that also binds the signer workflow and source commit,\n   such as:\n\n   `gh attestation verify skillsbench-v1.1-task-manifest.json --repo benchflow-ai/skillsbench --signer-workflow <publisher-confirmed-workflow> --source-digest b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af --predicate-type https://slsa.dev/provenance/v1`\n\nAs an additional integrity measure, could the release be made immutable, or\ncould the manifest generator and deterministic inputs be published at the\nsource commit so the release asset can be reproduced byte-for-byte?\n\nThis request is limited to artifact provenance. It does not ask the\nattestation to establish task safety, benchmark quality, or fitness for a\nspecific downstream use.\n\nThank you."
+    },
+    {
+      "number": 1045,
+      "title": "Tasks Failing when using Codex agent with the skill file",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1045",
+      "updated_at": "2026-08-06T18:44:38Z",
+      "body_excerpt": "I am running the tasks using a Codex agent with the skill files, but most of them fail or take a very long time without completing the tasks. I ran 13 tasks, where 6 of them failed (1-3 tests failed), and the other 2 tasks took a very long time (more than 30 minutes) without completing the tasks. I am using the following command to run the tasks:\nbench eval run --tasks-dir ./<task-name>  \\\n  --agent codex-acp \\\n  --model gpt-5.2 \\\n  --skill-mode with-skill \\\n  --sandbox docker \\\n  --skills-dir ./<task-name>/environment/skills/\n\nPlease let me know if that's expected or if there is any issue with my setup."
+    },
+    {
+      "number": 1041,
+      "title": "[Bug] Terminal-frame sampling guidance conflicts with dynamic egomotion oracle",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1041",
+      "updated_at": "2026-07-27T06:07:46Z",
+      "body_excerpt": "## Description\n\nThe sampling-and-indexing skill currently presents terminal-frame inclusion in a way that can lead an agent to append the final valid frame even when the task contract does not require endpoint retention.\n\nFor dynamic-object-aware-egomotion, the task specifies a 5 FPS sampling rate but does not require retaining an off-grid terminal frame. The oracle uses a fixed-stride grid, while the verifier requires the predicted motion-frame set and mask count to match the ground truth exactly.\n\nFor the bundled 207-frame, 60 FPS video:\n\n- Sampling interval: 60 / 5 = 12\n- Oracle sample IDs: 0, 12, ..., 204, for 18 sampled frames\n- Appending frame 206 produces 19 sampled frames\n\nAn agent following the terminal-frame example can therefore generate one extra motion interval or mask and fail exact verifier alignment despite following the provided skill guidance.\n\n## Expected behavior\n\nTerminal-frame retention should be explicit:\n\n- Append the final valid frame only when the task contract explicitly requires it.\n- Otherwise, preserve the fixed-stride sampling grid.\n\n## Related pull request\n\nPR #1036 updates the skill pseudocode to make terminal-frame inclusion opt-in and documents the two policies."
+    },
+    {
+      "number": 1023,
+      "title": "Make citation-check no-skill reproducible without unrestricted network",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1023",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, the no-skill PTY-32 row produced 19 Crossref DNS failures because the task declares public network while official sandbox-user egress is loopback-only. The scored pass is quarantined as experiment-fidelity failure; with-skill completed from packaged guidance.\n\nPrepackage immutable citation metadata or define an allowlisted proxy contract so no-skill runs are fair and reproducible."
+    },
+    {
+      "number": 1021,
+      "title": "Remove target-output leakage from video-silence-remover skills",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1021",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, PTY-32 semantic audit found task skills expose the 221-second opening, pause count, and exact target duration/report values. The with-skill row is quarantined as package leakage; the no-skill attempt separately ended in ACP runtime failure.\n\nReplace task-specific values with reusable editing guidance and add leakage/oracle regression tests."
+    },
+    {
+      "number": 1020,
+      "title": "Specify CRS publicly for earthquake-plate-calculation",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1020",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, the no-skill PTY-32 row failed 7/8 because the public prompt does not specify the CRS, while the verifier requires EPSG:4087 available only through the task skill. The no-skill row is quarantined; with-skill is publishable.\n\nMove the required CRS/coordinate contract into task-visible inputs or make the verifier CRS-agnostic, then add paired-mode regression coverage."
+    },
+    {
+      "number": 1022,
+      "title": "Remove task-specific answer values from edit-pdf skills",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1022",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, PTY-32 semantic audit found the edit-pdf skill embeds the task exact old/new ID values and masked output. The with-skill row is quarantined as package leakage, while no-skill remains publishable.\n\nRewrite the skill as general PDF editing guidance and add a leakage regression test before rerun."
+    },
+    {
+      "number": 1019,
+      "title": "Expose FJSP repair policy required by verifier",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1019",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, the no-skill manufacturing-fjsp-optimization row failed because the verifier enforces right-shift/minimal-repair rules that are present only in the skill, not the public prompt/policy. The no-skill row is quarantined; with-skill remains a publishable model fail.\n\nMake the verifier-required repair policy task-visible and add paired-mode regression coverage."
+    },
+    {
+      "number": 1018,
+      "title": "Remove answer leakage from dapt-intrusion-detection skills and clarify detection contract",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1018",
+      "updated_at": "2026-07-15T23:01:07Z",
+      "body_excerpt": "At source a8a7b339, PTY-32 semantic audit found the with-skill catalog exposes exact dataset metrics and the resulting classification. The no-skill prompt also leaves detection thresholds/bucketing and bidirectional-flow counting ambiguous. Both trial-2 rows are quarantined.\n\nFix the agent-visible contract and make skills general rather than answer-bearing; add oracle/verifier regression canaries before rerun."
+    },
+    {
+      "number": 1007,
+      "title": "python-scala-translation exposes a complete implementation in the agent image",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1007",
+      "updated_at": "2026-07-13T06:40:05Z",
+      "body_excerpt": "## Problem\n\nSkillsBench v1.1 task `python-scala-translation` copies `environment/localtest` into the agent-visible image:\n\n```dockerfile\nCOPY localtest /root/localtest\n```\n\n`/root/localtest` contains a complete Scala implementation/project. This violates verifier isolation and the clean-sandbox requirement even when a particular trajectory does not inspect the directory.\n\n## Experiment evidence\n\nGPT-5.6-SOL MAX + OpenHands trial-1 reruns produced otherwise complete artifacts in both modes:\n\n- no-skill `python-scala-translation__bf371f3c`: verifier reward 0; the agent did not access `/root/localtest`, but strict semantic review rejected publication because the solution artifact was readable.\n- with-skill `python-scala-translation__bbc2ae41`: verifier reward 1; the agent also did not access `/root/localtest`, but the same task-image contamination applies.\n\nSource snapshot: SkillsBench v1.1 commit `b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af`.\n\n## Expected fix\n\nRemove the complete implementation from the agent image. If `localtest` is needed for grading, move it into verifier-only resources that are mounted only after agent termination. Add a regression check proving the agent phase cannot read reference implementations or answer-bearing files.\n\nAll affected rows should be rerun after the corrected task package is released.\n"
+    },
+    {
+      "number": 998,
+      "title": "Package shock-analysis-demand data and specify verifier layout rules",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/998",
+      "updated_at": "2026-07-12T22:10:47Z",
+      "body_excerpt": "The official MAX no-skill run could not access required IMF/GeoStat data, and the verifier hides layout, units, and exact bell-shape requirements. Package immutable data or define allowlisted sources, make output/layout/unit criteria public, align verifier/oracle, and rerun both modes.\n\n_This issue was created by Codex on behalf of Bingran You._"
+    },
+    {
+      "number": 1004,
+      "title": "A length-matched placebo condition for SkillsBench (the \"more context\" control from your limitations section)",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1004",
+      "updated_at": "2026-07-12T20:38:30Z",
+      "body_excerpt": "Your limitations section already names this: observed gains could partly reflect more context, and the fix you call for is a length-matched baseline. I want to build that condition.\n\nI run a public harness for pre-registered skill evals ([MrBinnacle/skill-harness](https://github.com/MrBinnacle/skill-harness)). My data so far comes from the opposite end of yours: on well-specified tasks under frontier models, all six of my published pre-registered screens hit ceiling, with no measurable skill benefit ([case study](https://github.com/MrBinnacle/skill-harness/blob/main/docs/case-studies/double-ceiling-structurally-unmeasured.md), [retirement log](https://github.com/MrBinnacle/skills/blob/main/RETIRED.md)). Your +16.6pp and my ceilings can both be true. A placebo arm plus difficulty stratification is the cheapest way to find out what separates them.\n\nConcretely: bare / curated-skill / placebo on a difficulty-screened subset of the v1.1 roster. Pre-registered, hash committed before any result (my standing practice), placebo docs published verbatim before the run.\n\nTwo questions:\n\n1. Would you want this upstream as a skill-mode plus experiment config, or run first as an external replication?\n2. Is here or Discord the right place to design the placebo generation rule?"
+    },
+    {
+      "number": 1003,
+      "title": "Accept valid http.request_header in suricata-custom-exfil verifier",
+      "url": "https://github.com/benchflow-ai/skillsbench/issues/1003",
+      "updated_at": "2026-07-12T20:34:49Z",
+      "body_excerpt": "The official MAX no-skill rollout passed all behavioral cases, but the verifier rejected valid Suricata `http.request_header` syntax. Align accepted keyword syntax with Suricata semantics, add regression coverage, validate oracle/no-op, and rerun the no-skill row.\n\n_This issue was created by Codex on behalf of Bingran You._"
+    }
+  ],
+  "page_items": 30
+}

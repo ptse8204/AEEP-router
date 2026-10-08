@@ -1,0 +1,23 @@
+{
+  "repository": "langfuse/langfuse",
+  "url": "https://api.github.com/repos/langfuse/langfuse/issues?state=open&sort=updated&direction=desc&per_page=30",
+  "observed_at": "2026-10-08T22:47:22.197349+00:00",
+  "scope": "First page of 30 most recently updated open issues/PRs only; not exhaustive.",
+  "issues": [
+    {
+      "number": 18494,
+      "title": "Make bar charts the default visualization for event charts",
+      "url": "https://github.com/langfuse/langfuse/issues/18494",
+      "updated_at": "2026-10-08T18:46:40Z",
+      "body_excerpt": "Bar charts provide a clearer default view for event counts over time, especially when using a breakdown. Make the bar chart the default chart type when switching the events table to chart view; users can still select another visualization.\n\nCurrent line-chart default:\n(image will be added)\n\nProposed bar-chart default:\n(image will be added)"
+    },
+    {
+      "number": 17600,
+      "title": "Azure AD B2C sign-in fails: Account model missing not_before and id_token_expires_in",
+      "url": "https://github.com/langfuse/langfuse/issues/17600",
+      "updated_at": "2026-10-08T14:38:53Z",
+      "body_excerpt": "## Describe the bug\n\nSigning in with **Azure AD B2C** as a custom OAuth provider (`AUTH_CUSTOM_*`) fails at account creation, after authentication has already succeeded. The browser lands back on `/auth/sign-in?error=Callback`.\n\nB2C returns two fields in its token response that the `Account` model does not have \u2014 `not_before` and `id_token_expires_in` \u2014 so `prisma.account.create()` rejects the call:\n\n```\nerror prisma:error\nInvalid `prisma.account.create()` invocation:\n\n{\n  data: {\n    provider: \"custom\",\n    type: \"oauth\",\n    providerAccountId: \"<redacted>\",\n    id_token: \"<redacted>\",\n    token_type: \"Bearer\",\n    not_before: <redacted>,\n    ~~~~~~~~~~\n    id_token_expires_in: 3600,\n    ...\n  }\n}\n\nerror [NEXT_AUTH] adapter_error_linkAccount\nerror [NEXT_AUTH] OAUTH_CALLBACK_HANDLER_ERROR\n```\n\nNotably the OAuth flow itself is fine \u2014 B2C authenticates the user, the ID token carries a valid `email` claim, and Auth.js accepts the issuer. Only the persistence step fails, so no account is ever created and sign-in can never succeed.\n\nThis appears to be the same shape as #2468 (GitLab, unknown `created_at`).\n\n## To reproduce\n\n1. Register an application in an Azure AD B2C tenant with a sign-up/sign-in user flow, and add `https://<langfuse-host>/api/auth/callback/custom` as a redirect URI.\n2. Configure the custom provider:\n   ```\n   AUTH_CUSTOM_CLIENT_ID=<client id>\n   AUTH_CUSTOM_CLIENT_SECRET=<client secret>\n   AUTH_CUSTOM_ISSUER=https://<tenant>.b2clogin.com/<tenant>.onmicrosoft.com/<policy>/v2.0\n   AUTH_CUSTOM_NAME=<display name>\n   ```\n3. Click the provider button on the sign-in page and complete authentication.\n4. Sign-in fails with `error=Callback`; the container log shows the Prisma error above.\n\n## Expected behaviour\n\nThe account is created and the user is signed in, as with the other supported providers.\n\n## Suggested fix\n\nTwo nullable columns on `Account`, following the existing precedent for provider-specific fields:\n\n`packages/shared/prisma/schema.prisma`\n\n```prisma\n  not_before               Int?    // Azure AD B2C\n  id_token_expires_in      Int?    // Azure AD B2C\n```\n\nand a migration mirroring `20231223230008_accounts_add_cols_azure_ad_auth`:\n\n```sql\n-- AlterTable\nALTER TABLE \"Account\" ADD COLUMN     \"not_before\" INTEGER,\nADD COLUMN     \"id_token_expires_in\" INTEGER;\n```\n\nThe model already carries `expires_in` / `ext_expires_in` (`20231223230008_accounts_add_cols_azure_ad_auth`), `refresh_token_expires_in` (`20240913185822_...`) and `created_at // G"
+    }
+  ],
+  "page_items": 30
+}

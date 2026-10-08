@@ -138,3 +138,37 @@ source evidence before the report offers it.
 ## Principle
 
 A package being open source does not imply its hosted service, datasets, benchmark tasks or pretrained assets can be bundled or sold. Optional adapters can interface with externally installed software without redistributing its implementation; still check interface terms and user consent.
+
+## Restored worksheet reconciled
+
+[The completed source-review worksheet](../../reports/toolkit-v2/c01/review-worksheet.json)
+addresses all eleven required fields for each of the original 21 responsibilities,
+including the two existing AEEP roles, Archestra and Sponsors. ARD retains the
+separate adopted pin in ADR-010. Source pins, release observations and maintenance
+dates remain distinct. Unknown installed compatibility, binary dependency rights,
+footprint and rollback are explicit; they block installation/qualification, not
+recording the source-selection decision.
+
+The [bounded issue review](../../reports/toolkit-v2/c01/issue-triage-20261008/README.md)
+retains the first 30 recently updated open issue/PR entries for each of the 17
+external repositories. Reports about Waza sandboxing, benchmark verifier/reset
+behavior, workflow retries/shared state and telemetry interpretation identify
+checks for future adapters. These are upstream reports, not reproduced defects
+at every pinned revision. An empty page or selected-issue list is not a clean
+bill of health.
+
+The first-evaluator comparison remains:
+
+| Candidate | What supports reuse | Why it is or is not first |
+|---|---|---|
+| agent-skill-eval | Actual pinned CLI, optional skill exposure, both fake-harness arms and deterministic graders now execute; existing AEEP command executor/store record the coordinator | Preferred external candidate. Keep its scheduler; connect separate workers and complete host accounting before live use. |
+| Waza | Source exposes evaluation/custom-agent workflows and a mock engine | Optional next evaluator. Reviewed execution types use Copilot SDK; exact Codex compatibility and containment remain unproved. |
+| SkillRank core | MIT local core/search with a separate registry license | Optional discovery/evaluation integration. Inspected treatment forces invocation, so it cannot supply the primary natural-selection experiment unchanged. |
+| AEEP BenchmarkRunner | Existing controlled workers, frozen plans, independent grading and durable budgets/receipts | Explicit fallback if external requirements cannot be met. No fallback campaign has been started or switched mid-run. |
+
+The [recorded fixture run](../../reports/toolkit-v2/receipt-showcase/report.md)
+now exports C02 evidence plus one canonical coordinator receipt. The local
+resolver checks the receipt, immutable record snapshots and artifact hashes.
+The receipt covers the evaluator process, not per-trial model accounting.
+C04 remains unfinished; this does not establish general `EvaluatorAdapter`
+dispatch, controlled workers, live-host compatibility or benchmark benefit.
