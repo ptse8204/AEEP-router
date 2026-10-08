@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "ExtensionDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "extension_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Extension Id",
+          "type": "string"
+        },
+        "manifest_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Manifest Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "extension_id",
+        "manifest_sha256"
+      ],
+      "title": "ExtensionDependency",
+      "type": "object"
+    },
+    "ExtensionManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "aeep.toolkit.extension.v1",
+          "default": "aeep.toolkit.extension.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "extension_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Extension Id",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "evaluator",
+            "benchmark",
+            "scanner",
+            "catalog",
+            "observability",
+            "isolation",
+            "router",
+            "orchestrator",
+            "support"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/SourcePin"
+        },
+        "hosts": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Hosts",
+          "type": "array"
+        },
+        "platforms": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Platforms",
+          "type": "array"
+        },
+        "dependencies": {
+          "items": {
+            "$ref": "#/$defs/ExtensionDependency"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "permissions": {
+          "$ref": "#/$defs/ExtensionPermissions"
+        },
+        "disk_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Disk Bytes"
+        },
+        "memory_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Bytes"
+        },
+        "install_effects": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Install Effects",
+          "type": "array"
+        },
+        "rollback": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Rollback",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "not_installed",
+            "blocked",
+            "experimental",
+            "qualified"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "qualification_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Qualification Ref"
+        },
+        "blockers": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "extension_id",
+        "purpose",
+        "role",
+        "source",
+        "hosts",
+        "platforms",
+        "dependencies",
+        "permissions",
+        "disk_bytes",
+        "memory_bytes",
+        "install_effects",
+        "rollback",
+        "status"
+      ],
+      "title": "ExtensionManifest",
+      "type": "object"
+    },
+    "ExtensionPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "network_destinations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Network Destinations",
+          "type": "array"
+        },
+        "filesystem_scope": {
+          "enum": [
+            "none",
+            "workspace",
+            "user",
+            "system",
+            "unknown"
+          ],
+          "title": "Filesystem Scope",
+          "type": "string"
+        },
+        "authentication": {
+          "enum": [
+            "none",
+            "host_owned",
+            "operator_setup",
+            "unknown"
+          ],
+          "title": "Authentication",
+          "type": "string"
+        },
+        "financial_exposure": {
+          "enum": [
+            "none",
+            "subscription_unpriced",
+            "metered",
+            "unknown"
+          ],
+          "title": "Financial Exposure",
+          "type": "string"
+        }
+      },
+      "required": [
+        "network_destinations",
+        "filesystem_scope",
+        "authentication",
+        "financial_exposure"
+      ],
+      "title": "ExtensionPermissions",
+      "type": "object"
+    },
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.registry.v1",
+      "default": "aeep.toolkit.registry.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "extensions": {
+      "items": {
+        "$ref": "#/$defs/ExtensionManifest"
+      },
+      "title": "Extensions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "extensions"
+  ],
+  "title": "ExtensionRegistry",
+  "type": "object"
+}

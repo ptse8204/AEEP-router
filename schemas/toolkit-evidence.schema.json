@@ -1,0 +1,534 @@
+{
+  "$defs": {
+    "AdapterCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "aeep.toolkit.adapter.v1",
+          "default": "aeep.toolkit.adapter.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "adapter_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Adapter Id",
+          "type": "string"
+        },
+        "implementation_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Implementation Sha256",
+          "type": "string"
+        },
+        "hosts": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Hosts",
+          "type": "array"
+        },
+        "candidate_types": {
+          "items": {
+            "enum": [
+              "skill",
+              "mcp",
+              "plugin",
+              "tool"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Candidate Types",
+          "type": "array"
+        },
+        "optional_invocation": {
+          "title": "Optional Invocation",
+          "type": "boolean"
+        },
+        "telemetry": {
+          "items": {
+            "enum": [
+              "tokens",
+              "agent_wall_seconds",
+              "verification_wall_seconds",
+              "setup_wall_seconds"
+            ],
+            "type": "string"
+          },
+          "title": "Telemetry",
+          "type": "array"
+        },
+        "containment": {
+          "enum": [
+            "unverified",
+            "controlled_workers"
+          ],
+          "title": "Containment",
+          "type": "string"
+        },
+        "conformance_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conformance Ref"
+        }
+      },
+      "required": [
+        "adapter_id",
+        "implementation_sha256",
+        "hosts",
+        "candidate_types",
+        "optional_invocation",
+        "telemetry",
+        "containment"
+      ],
+      "title": "AdapterCapabilities",
+      "type": "object"
+    },
+    "EvaluationRun": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "aeep.toolkit.run.v1",
+          "default": "aeep.toolkit.run.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "plan_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Ref",
+          "type": "string"
+        },
+        "candidate_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Candidate Sha256",
+          "type": "string"
+        },
+        "adapter_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Adapter Sha256",
+          "type": "string"
+        },
+        "host": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Host",
+          "type": "string"
+        },
+        "host_version": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Host Version",
+          "type": "string"
+        },
+        "model": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Model",
+          "type": "string"
+        },
+        "effort": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Effort",
+          "type": "string"
+        },
+        "shared_environment_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Shared Environment Sha256",
+          "type": "string"
+        },
+        "worker_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Worker Sha256",
+          "type": "string"
+        },
+        "task_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Task Sha256",
+          "type": "string"
+        },
+        "task_family": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Task Family",
+          "type": "string"
+        },
+        "verifier_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Verifier Sha256",
+          "type": "string"
+        },
+        "prompt_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Prompt Sha256",
+          "type": "string"
+        },
+        "arm": {
+          "enum": [
+            "control",
+            "treatment"
+          ],
+          "title": "Arm",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "optional",
+            "forced_diagnostic"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "candidate_exposed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Candidate Exposed"
+        },
+        "candidate_invoked": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Candidate Invoked"
+        },
+        "verification": {
+          "enum": [
+            "pass",
+            "fail",
+            "skipped",
+            "unknown"
+          ],
+          "title": "Verification",
+          "type": "string"
+        },
+        "verification_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verification Ref"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed",
+            "timeout",
+            "indeterminate"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "retries": {
+          "minimum": 0,
+          "title": "Retries",
+          "type": "integer"
+        },
+        "evidence_kind": {
+          "enum": [
+            "synthetic",
+            "replay",
+            "live"
+          ],
+          "title": "Evidence Kind",
+          "type": "string"
+        },
+        "receipt_refs": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Receipt Refs",
+          "type": "array"
+        },
+        "tokens": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TokenObservation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "agent_wall_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Wall Seconds"
+        },
+        "verification_wall_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verification Wall Seconds"
+        },
+        "setup_wall_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Setup Wall Seconds"
+        },
+        "timing_source_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timing Source Ref"
+        },
+        "cash_accounting_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cash Accounting Ref"
+        }
+      },
+      "required": [
+        "run_id",
+        "plan_ref",
+        "candidate_sha256",
+        "adapter_sha256",
+        "host",
+        "host_version",
+        "model",
+        "effort",
+        "shared_environment_sha256",
+        "worker_sha256",
+        "task_sha256",
+        "task_family",
+        "verifier_sha256",
+        "prompt_sha256",
+        "arm",
+        "mode",
+        "candidate_exposed",
+        "candidate_invoked",
+        "verification",
+        "status",
+        "retries",
+        "evidence_kind",
+        "receipt_refs"
+      ],
+      "title": "EvaluationRun",
+      "type": "object"
+    },
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    },
+    "TokenObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "source_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
+        "cached_input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cached Input Tokens"
+        },
+        "reasoning_output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoning Output Tokens"
+        },
+        "cached_semantics": {
+          "enum": [
+            "included_in_input",
+            "separate",
+            "unknown"
+          ],
+          "title": "Cached Semantics",
+          "type": "string"
+        },
+        "reasoning_semantics": {
+          "enum": [
+            "included_in_output",
+            "separate",
+            "unknown"
+          ],
+          "title": "Reasoning Semantics",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_ref",
+        "cached_semantics",
+        "reasoning_semantics"
+      ],
+      "title": "TokenObservation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.evidence.v1",
+      "default": "aeep.toolkit.evidence.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/SourcePin"
+    },
+    "adapter": {
+      "$ref": "#/$defs/AdapterCapabilities"
+    },
+    "runs": {
+      "items": {
+        "$ref": "#/$defs/EvaluationRun"
+      },
+      "title": "Runs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "candidate",
+    "adapter",
+    "runs"
+  ],
+  "title": "EvidenceBundle",
+  "type": "object"
+}

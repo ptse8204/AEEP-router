@@ -1,0 +1,93 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.adapter.v1",
+      "default": "aeep.toolkit.adapter.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "adapter_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Adapter Id",
+      "type": "string"
+    },
+    "implementation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Sha256",
+      "type": "string"
+    },
+    "hosts": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Hosts",
+      "type": "array"
+    },
+    "candidate_types": {
+      "items": {
+        "enum": [
+          "skill",
+          "mcp",
+          "plugin",
+          "tool"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Candidate Types",
+      "type": "array"
+    },
+    "optional_invocation": {
+      "title": "Optional Invocation",
+      "type": "boolean"
+    },
+    "telemetry": {
+      "items": {
+        "enum": [
+          "tokens",
+          "agent_wall_seconds",
+          "verification_wall_seconds",
+          "setup_wall_seconds"
+        ],
+        "type": "string"
+      },
+      "title": "Telemetry",
+      "type": "array"
+    },
+    "containment": {
+      "enum": [
+        "unverified",
+        "controlled_workers"
+      ],
+      "title": "Containment",
+      "type": "string"
+    },
+    "conformance_ref": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conformance Ref"
+    }
+  },
+  "required": [
+    "adapter_id",
+    "implementation_sha256",
+    "hosts",
+    "candidate_types",
+    "optional_invocation",
+    "telemetry",
+    "containment"
+  ],
+  "title": "AdapterCapabilities",
+  "type": "object"
+}

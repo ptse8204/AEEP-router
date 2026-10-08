@@ -9,11 +9,11 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C00
+current_checkpoint: C02
 checkpoint_status:
   C00: IN_PROGRESS
   C01: PASS
-  C02: TODO
+  C02: IN_PROGRESS
   C03: TODO
   C04: TODO
   C05: TODO
@@ -67,3 +67,23 @@ installation or C04 conformance. This does not pass a live gate.
 |---|---|---|---|---|---|
 | 2026-10-08 | C00 | IN_PROGRESS | 2755e49 | Inventory, initial failed-location logs, ongoing baseline | Finish source-bound baseline |
 | 2026-10-08 | C01 | PASS (source review) | Commit containing this record | 17 immutable repository pins and hashed source files | C04 executable conformance remains open |
+
+## C02 implementation handoff
+
+Code is in `src/aeep_toolkit/models.py`, with 26 synthetic tests and seven schema
+exports through the existing generator. `CONTRACTS.md` describes trust limits.
+No existing runtime module changed. `pyproject.toml` includes the new namespace
+in coverage. Full final checks are running under `reports/toolkit-v2/c02`; they
+use `.coverage-toolkit` so the still-running C00 baseline cannot overwrite them.
+Do not edit executable source while these checks run. Verify source-hashes and
+source-stability records, then inspect every exit code before updating status.
+
+C00 ordinary pytest: 1,293 passed, 21 skipped, one existing dependency warning in
+626.52 seconds. Initial failures under `.codex` remain retained. C00 coverage was
+collected before the new tests existed; it describes the legacy source only.
+The final C02 run checks the integrated tree separately. No fixture is live evidence.
+
+Temporary drafts and import experiment: `/tmp/aeep-toolkit-v2-contracts.py`,
+`/tmp/aeep-toolkit-v2-tests.py`, `/tmp/aeep-toolkit-v2-init.py` and
+`/tmp/aeep-toolkit-v2-contract-check`. The initializer experiment is rejected;
+never copy it into production. The checked-in source is authoritative.

@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.developer.v1",
+      "default": "aeep.toolkit.developer.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourcePin"
+    },
+    "identity": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Identity",
+      "type": "string"
+    },
+    "assertion_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Assertion Ref",
+      "type": "string"
+    },
+    "support_url": {
+      "anyOf": [
+        {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Support Url"
+    },
+    "support_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "donation",
+            "purchase"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Support Kind"
+    }
+  },
+  "required": [
+    "source",
+    "identity",
+    "assertion_ref"
+  ],
+  "title": "DeveloperIdentity",
+  "type": "object"
+}

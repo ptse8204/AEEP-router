@@ -1,0 +1,70 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.comparison.v1",
+      "default": "aeep.toolkit.comparison.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "evidence_bundle_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Bundle Ref",
+      "type": "string"
+    },
+    "plan_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Ref",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "DEMONSTRATED_BENEFIT",
+        "DEMONSTRATED_REGRESSION",
+        "NO_DEMONSTRATED_MATERIAL_DIFFERENCE",
+        "INCONCLUSIVE",
+        "NOT_ASSESSED"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "evidence_kind": {
+      "enum": [
+        "synthetic",
+        "replay",
+        "live"
+      ],
+      "title": "Evidence Kind",
+      "type": "string"
+    },
+    "analysis_ref": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Analysis Ref"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "evidence_bundle_ref",
+    "plan_ref",
+    "outcome",
+    "evidence_kind",
+    "limitations"
+  ],
+  "title": "ComparisonReport",
+  "type": "object"
+}

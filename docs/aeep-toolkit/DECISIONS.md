@@ -48,10 +48,22 @@ comparison. No external engine is installed, enabled or approved by this decisio
 
 ### D14: 2026-10-08, additive contracts before engines
 
-Accepted implementation scope for C02. Reuse Pydantic, existing canonical JSON,
-receipt references and accounting semantics. Introduce only extension metadata,
+Accepted implementation scope for C02. Reuse Pydantic, receipt references and existing accounting semantics. Introduce only extension metadata,
 adapter capabilities and content-free evaluation/report envelopes. Validators
 check structure and consistency; a claimed evidence reference never authenticates
 itself. Repository resolution and trust checks remain mandatory before a report
 can claim verified billing, independent verification or conformance. No new ledger,
 planner, process manager or exporter is needed for these contracts.
+
+### D15: 2026-10-08, independent imports within the existing distribution
+
+Accepted for C02. Place inert models in `src/aeep_toolkit`, using installed
+Pydantic with the existing extra-field and finite-number validation policy.
+Importing `aeep.models` first executes the broad legacy initializer. A temporary
+lazy-export experiment exposed an order-dependent provider-package/economic
+import cycle. That experiment was not applied. A separate namespace costs one
+small model base and preserves every legacy export. Setuptools already discovers
+packages under `src`; no distribution split or new dependency is needed. Test
+minimal imports in a fresh process and include this namespace in branch coverage.
+Rollback removes the new namespace and its schema exports without rewriting any
+legacy record.

@@ -177,11 +177,27 @@ from aeep.tasks import TaskActivation, TaskReconciliation
 from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
+from aeep_toolkit.models import (
+    AdapterCapabilities,
+    ComparisonReport,
+    DeveloperIdentity,
+    EvaluationRun,
+    EvidenceBundle,
+    ExtensionManifest,
+    ExtensionRegistry,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-adapter.schema.json": AdapterCapabilities,
+    "toolkit-comparison.schema.json": ComparisonReport,
+    "toolkit-developer.schema.json": DeveloperIdentity,
+    "toolkit-run.schema.json": EvaluationRun,
+    "toolkit-evidence.schema.json": EvidenceBundle,
+    "toolkit-extension.schema.json": ExtensionManifest,
+    "toolkit-registry.schema.json": ExtensionRegistry,
     "agent-connection.schema.json": AgentConnection,
     "component-setup.schema.json": ComponentSetup,
     "recommendation-request.schema.json": RecommendationRequest,
