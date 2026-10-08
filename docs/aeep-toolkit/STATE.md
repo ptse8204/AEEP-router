@@ -15,7 +15,7 @@ checkpoint_status:
   C01: PASS
   C02: PASS
   C03: IN_PROGRESS
-  C04: TODO
+  C04: IN_PROGRESS
   C05: TODO
   C06: TODO
   C07: TODO
@@ -29,8 +29,10 @@ last_verified_commit: '91f74de3f9a5fa2a9dbb708686bd8bc55ac8568c'
 last_check_command: 'COVERAGE_FILE=.coverage-toolkit PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1319 passed, 21 skipped; 81.41% combined coverage; both required branch gates and all recorded quality/build checks passed.'
 next_action: 'Finish source-bound C03 verification and prepare the pinned agent-skill-eval C04 spike. The proposed Router extraction is withdrawn; no architecture answer is pending. See ARCHITECTURE_LOCK.md.'
-blocked_actions: []
-missing_permissions: []
+blocked_actions:
+  - 'Pinned agent-skill-eval fixture execution and private wheel installation await the specific C04 review response.'
+missing_permissions:
+  - 'Approve only reports/toolkit-v2/c04/SPIKE_REVIEW.md; no live, credentials, paid calls or release authority requested.'
 unknowns:
   - 'No upstream evaluators have been compatibility-qualified inside AEEP.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
@@ -233,3 +235,25 @@ scratch effects. Metadata resolution completed; no upstream execution or install
 occurred. The operator has been asked for that specific third-party execution
 authority. While pending, complete C03 verification and inspect adapter/report
 interfaces; do not assume permission or substitute a fake AEEP runner.
+
+### Handoff after the reuse-first correction
+
+Correction and bounded review committed as `d26fa0a`. Documentation validation
+passed: 60 documents, zero lint issues and zero local-link errors; external links
+were not fetched. C04 is IN_PROGRESS with source review and a concrete execution
+review prepared, not a runtime-qualified adapter. The execution response remains
+pending; do not infer approval from the architecture confirmation.
+
+The C03 validation driver is still running: PID 76258, command
+`python3 /tmp/aeep-toolkit-v2-c03-final-checks.py`, tool session 27297. At handoff,
+compile and schema checks passed; ordinary pytest was incomplete. Its sequential
+coverage/quality/build checks have not yet reported. Read
+`reports/toolkit-v2/c03/final/checks.json` and `source-stability.json` when present.
+Source remains `75d1961` for these checks; the correction changes documentation
+and review artifacts only. Do not start a duplicate validation or claim PASS.
+
+The task-owned Node dependency symlink under
+`integrations/dsh-aeep-router/node_modules` is still present. Remove only that link
+after checks finish, preserving its original-checkout target. New full-check logs
+remain uncommitted while being written. Preserve the interrupted validation logs
+and the original checkout's unrelated edits.
