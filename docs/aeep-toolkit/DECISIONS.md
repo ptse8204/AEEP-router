@@ -90,3 +90,15 @@ A source pin without an artifact/dependency review stays blocked. Three profiles
 filter available roles; Full does not select anything automatically. Actual apply
 remains unavailable until exact effects can pass the existing installer authority
 checks. Tests cover dependency closure, policy conflicts and zero side effects.
+
+### D18: 2026-10-08, restore external evaluator first
+
+Accepted correction following the operator's objection. Withdraw the proposed
+shared execution-service extraction and the associated architecture question.
+Legacy Router coupling is a fallback limitation, not evidence against the preferred
+external candidate. Follow D13: prepare and run the bounded agent-skill-eval spike
+with its existing fake harness before choosing additional internal infrastructure.
+A catalog entry, schema or synthetic adapter double is not upstream integration.
+No new runner, installer or workflow engine is justified by the current evidence.
+Keep the local CLI/report choice under D16. C03 stays unfinished and C04 remains
+unqualified until their recorded acceptance checks pass.

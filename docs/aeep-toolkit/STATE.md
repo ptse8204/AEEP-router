@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '91f74de3f9a5fa2a9dbb708686bd8bc55ac8568c'
 last_check_command: 'COVERAGE_FILE=.coverage-toolkit PYTHONPATH=src python3 -m coverage run --branch -m pytest'
 last_check_result: '1319 passed, 21 skipped; 81.41% combined coverage; both required branch gates and all recorded quality/build checks passed.'
-next_action: 'Finish source-bound C03 verification. Obtain the requested shared-service architecture choice before connecting evaluator/installer authority. See ARCHITECTURE_LOCK.md.'
+next_action: 'Finish source-bound C03 verification and prepare the pinned agent-skill-eval C04 spike. The proposed Router extraction is withdrawn; no architecture answer is pending. See ARCHITECTURE_LOCK.md.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -197,17 +197,39 @@ installed state. Profile dependency closure must be finalized with the selected
 evaluator and its mandatory controlled-worker support. No install command or
 V2 runtime qualification is advertised.
 
-Local CLI delivery is confirmed. The operator was asked to choose strict shared
-execution/evidence extraction (recommended) versus a temporary Router-backed
-compatibility path. [ARCHITECTURE_LOCK.md](ARCHITECTURE_LOCK.md) states the concrete
-boundaries and [the source audit](../../reports/toolkit-v2/c04/extraction-audit.json)
-shows why wrapping BenchmarkRunner alone does not meet strict separation.
-This choice affects C03's authority bridge and C04-C06, not the independent pure
-preview validation already underway. Do not infer selection of the temporary
-legacy exception from silence.
+Local CLI delivery is confirmed. A proposed shared-service extraction question
+was withdrawn under D18. [ARCHITECTURE_LOCK.md](ARCHITECTURE_LOCK.md) records the
+correction; the [legacy source audit](../../reports/toolkit-v2/c04/extraction-audit.json)
+is retained as a coupling observation, not an architecture decision. Continue
+with the preferred external evaluator spike; no architecture choice is pending.
 
 C03 follow-up reproduced unstable sibling ordering and case-sensitive credential
 filename exclusion in the first preview revision. The initial full validation was
 interrupted and retained. Corrections and three regression checks now pass all
 50 focused cases; authoritative replacement validation uses
 `reports/toolkit-v2/c03/final`. Never count the interrupted run as PASS.
+
+## October 8 correction: upstream integration before internal refactoring
+
+The operator challenged the lack of working upstream integrations. The proposed
+shared-service extraction and its two-option architecture question are withdrawn.
+The source audit establishes legacy coupling; it does not establish that extracting
+Router is preferable to integrating the external candidate. No extraction was
+implemented. D13 remains the evaluator decision: test agent-skill-eval first.
+D16 remains confirmed: local Python CLI and HTML/Markdown reports. No further
+architecture choice is required to prepare the bounded external spike.
+
+C03 remains IN_PROGRESS, and C04 has no executable qualification yet. The catalog
+and synthetic tests do not demonstrate an upstream integration. Prepare exact
+pinned upstream commands, dependencies, fixture-only effects and authority scope
+before execution; use the external runner's existing fake harness for engineering
+checks. Keep controlled real-host conformance separate. Do not replace this spike
+with another custom runner, installer, workflow engine or broad Router refactor.
+
+The [bounded upstream spike review](../../reports/toolkit-v2/c04/SPIKE_REVIEW.md)
+now specifies agent-skill-eval's actual fake-harness CLI, 17 hashed source/test
+files, nine hash-locked dependency wheels, two synthetic fixtures and private
+scratch effects. Metadata resolution completed; no upstream execution or install
+occurred. The operator has been asked for that specific third-party execution
+authority. While pending, complete C03 verification and inspect adapter/report
+interfaces; do not assume permission or substitute a fake AEEP runner.

@@ -1,0 +1,111 @@
+{
+  "source_sha256": "4c33c498d4d0e4d0bcb6623a7be82b8bf384ebe4ea2d9a1ca1c22e5d6b69a6f0",
+  "source_path": "src/aeep/router.py",
+  "class_method_count": 108,
+  "execution_dependencies": {
+    "__init__": {
+      "line": 256,
+      "end_line": 475,
+      "self_calls": [
+        "_configured_quote_provider"
+      ]
+    },
+    "execute_fixed": {
+      "line": 5879,
+      "end_line": 5920,
+      "self_calls": [
+        "_decision_digest",
+        "_ensure_open",
+        "_fill_runtime_context",
+        "_persist_decision",
+        "_policy_for",
+        "_require_active_spec",
+        "execute"
+      ]
+    },
+    "execute": {
+      "line": 5922,
+      "end_line": 6449,
+      "self_calls": [
+        "_advance_attempt",
+        "_cache_receipt",
+        "_can_fallback",
+        "_candidate_order",
+        "_create_claimed_attempt",
+        "_decision_digest",
+        "_economic_now",
+        "_effective_policy_digest",
+        "_ensure_open",
+        "_invoke_controlled",
+        "_observe_receipt",
+        "_policy_for",
+        "_quota_materially_changed",
+        "_require_active_spec",
+        "_save_receipt",
+        "_snapshot_managed_capacity",
+        "_subscription_quota",
+        "_terminal_attempt_state",
+        "execute",
+        "route",
+        "route_with_discovery",
+        "suspend_candidate"
+      ]
+    },
+    "_invoke_controlled": {
+      "line": 5527,
+      "end_line": 5534,
+      "self_calls": [
+        "_invoke_controlled_authorized"
+      ]
+    },
+    "_invoke_controlled_authorized": {
+      "line": 5536,
+      "end_line": 5645,
+      "self_calls": [
+        "_executor_for",
+        "_require_active_spec",
+        "_resolve_host_identity",
+        "_trial_check"
+      ]
+    },
+    "_require_active_spec": {
+      "line": 5422,
+      "end_line": 5498,
+      "self_calls": [
+        "_executor_for",
+        "_provider_package_ingestor",
+        "_require_task_scope",
+        "suspend_candidate"
+      ]
+    },
+    "_require_task_scope": {
+      "line": 5398,
+      "end_line": 5420,
+      "self_calls": [
+        "_executor_for"
+      ]
+    },
+    "_create_claimed_attempt": {
+      "line": 772,
+      "end_line": 813,
+      "self_calls": [
+        "_economic_now"
+      ]
+    },
+    "_save_receipt": {
+      "line": 734,
+      "end_line": 770,
+      "self_calls": [
+        "_bind_receipt_evidence",
+        "_safe_receipt_metadata"
+      ]
+    },
+    "close": {
+      "line": 8008,
+      "end_line": 8018,
+      "self_calls": []
+    }
+  },
+  "interpretation": "Legacy Router coupling is observed. The recommendation to extract services before the external evaluator spike is withdrawn under D18. No runtime spike, extraction or conformance was performed.",
+  "original_interpretation": "The existing fixed-dispatch path still shares Router construction, policy, attempts, admission and receipts. Extract shared services; do not bypass guards or relabel inheritance as strict separation. No runtime spike or conformance was performed."
+}

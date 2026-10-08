@@ -3865,3 +3865,15 @@ Essentials installation, host conformance, live value, human comprehension and
 release remain open. Existing package-version setup lacks the complete transitive
 artifact-hash lock required for V2 install readiness. No external installation,
 model trial, grant modification, push or publication occurred in this increment.
+
+
+The October 8 continuation confirms local CLI/report delivery and implements C03's
+pure dependency/permission preview in `a534023`. Forty-seven focused synthetic
+checks pass; full source-bound validation is underway under
+[the C03 record](../toolkit-v2/c03/review.json). Real installed-state and installer
+integration remain unfinished, so C03 is not marked PASS. The proposed Router
+service extraction was withdrawn following the operator's correction: the first
+integration target remains agent-skill-eval under D13/D18. The
+[architecture record](../../docs/aeep-toolkit/ARCHITECTURE_LOCK.md) distinguishes
+source review from working integrations. No further architecture answer is pending.
+No new live, human-usability or release gate closes.
