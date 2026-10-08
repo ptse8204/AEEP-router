@@ -2,10 +2,13 @@
 
 [Documentation index](README.md).
 
+Connect AEEP to your existing agent so it can request an action while the router
+handles implementation selection and execution limits. The agent keeps its own
+planning and model loop.
+
 For a new host connection, start with [guided setup](ONBOARDING.md#start).
-This guide is for developers configuring a manual MCP connection, native dispatch
-or an application's model/tool loop. Install AEEP first and review the manifest
-before enabling execution.
+Developers can use the manual MCP, native dispatch and application integrations
+below. Install AEEP and review the manifest before enabling execution.
 
 The exposed tools depend on the selected legacy, assessment or task profile,
 configured discovery and connection allowlist. Named connections start with
@@ -57,6 +60,10 @@ for the limits of host filtering. A ready server does not establish isolation.
 
 ## Preferred host-native dispatch
 
+Once your agent knows which action it needs, let AEEP choose among its registered
+implementations. This avoids asking the model to choose those implementations
+in a separate routing round.
+
 Once the host has classified an action, call AEEP with the bounded
 `ActionRequest`. AEEP can select a local implementation deterministically without
 a model call. When the action needs model judgment, native Tool Search or the
@@ -83,7 +90,9 @@ campaign are separate operator-approved steps.
 
 ## Start a local MCP server
 
-Use an absolute interpreter and manifest path so GUI applications do not depend on a shell's working directory or `PATH`:
+Expose the configured AEEP tools to an MCP client. Use an absolute interpreter
+and manifest path so GUI applications do not depend on a shell's working
+directory or `PATH`:
 
 ```bash
 /absolute/path/to/.venv/bin/python -m aeep serve \
@@ -151,6 +160,10 @@ not MCP, for Codex-owned authentication, runtime model/quota discovery, and one
 bounded turn. Official reference: <https://learn.chatgpt.com/docs/app-server>
 
 ## Native-control compatibility
+
+Check the boundary a connection actually controls before relying on a tool
+filter. Restricting AEEP calls and isolating the whole host require different
+controls; this section maps their support and limits.
 
 The task-scoped profile in `aeep.profiles` currently enforces AEEP task-service
 schema exposure and calls. It does not apply the wider Codex controls below to
@@ -279,6 +292,9 @@ increment. The [coverage record](../reports/v08/plan-coverage.md) tracks the
 implementation and outstanding evidence separately.
 
 ## Discovery, intake and local evidence lookup
+
+Find a candidate, inspect the selected artifact and check whether existing
+evidence applies before deciding on assessment or execution.
 
 Search uses ARD by default and requires an explicit endpoint. Supply a public
 capability phrase, never a private task description. The endpoint below is a

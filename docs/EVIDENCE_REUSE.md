@@ -1,7 +1,10 @@
 # AEEP 0.6 portable evidence reuse
 
-For consumers deciding whether a provider artifact applies to a local route.
-Read [provider trust](PROVIDER_TRUST.md) first; use the
+Use applicable evidence from elsewhere as a starting point when evaluating a
+local route. AEEP checks what that evidence covers, then gives local observations
+more weight as they accumulate.
+
+Read [provider trust](PROVIDER_TRUST.md) first and use the
 [package guide](PROVIDER_PACKAGES.md) to validate and ingest artifacts. The 0.6
 wire contract is distinct from the installed AEEP package version.
 

@@ -3822,3 +3822,19 @@ AEEP_NATIVE_AUTONOMY_EXACT_REVIEW=49aecf8411e2779e69f2bf99826561dbe7148e4cbaf18b
 The [canonical accounting and outcome audit](native-sol61-autonomy-four-scenarios-5fff-canonical-audit.json), SHA `07b19ba5847fec7e5707bcaf4fdc4cd7f548a31f8ef26c4c568b5c8a9a139925`, read the retained task stores and existing assessment ledger. It confirmed eight completed operations, four model turns,112.168799seconds including setup (111.003048seconds for model operations), below all reviewed ceilings. Provider-reported usage totals428907input tokens,299136cached input,2303output and140reasoning; total431210tokens. The approved cash ceiling and grant cash counter remain zero; actual model cash is unavailable and consumed subscription units are unknown. Child raw resource dimensions remain in canonical receipts and the audit; overlapping child time was not charged as another operation.
 
 Every case recorded zero necessary approvals, zero unnecessary approval/input prompts, zero interventions, no final unresolved attempts, confirmed owned cleanup/accounting and unchanged source. One case verified workbook completion; three were safe stops, with successful reconciliation only in the recovery fixture. The native/model window was released after the fourth terminal cleanup. Requested model identity remains independently unobserved (`actual_model:null`). Automated wording checks do not measure human comprehension; process-tree sampling and unknown ambient/network effects remain explicit. These shared-host integrations do not establish isolation, qualification, marginal value, human usability or whole-plan readiness.
+
+## Documentation workflow revision (October 8, 2026)
+
+The operator requested a concise rewrite that leads with the intended effect on
+the user's workflow. Updated 45 active documents and the durable authoring
+instructions. Commands, normative contract bodies and historical evidence are
+preserved. The [revision record](documentation-workflow-20261008/summary.md)
+tracks validation and the changed integration-document source binding; applicable
+live evidence needs renewal. This editorial pass closes no qualification,
+live-comparison, human-usability or release gate.
+
+Local checks passed: 47 active documents, 1,293 tests with 21 skips in each full
+run, 81.32% coverage and both required branch gates, policy/version/schema
+checks, retained proofs, integration tests and wheel/sdist builds. The verification
+source remained unchanged during both full test runs. Exact results are in the
+linked revision record.

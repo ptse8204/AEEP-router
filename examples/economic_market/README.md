@@ -1,9 +1,12 @@
 # Local economic evidence reference service
 
-For provider developers testing on loopback. Run from the repository root
-with the HTTP extra installed, as shown below. Use two terminals and stop the
-server when finished. The payment approvals here apply only to the example
-ledger; do not reuse its keys or unauthenticated mode for a real provider.
+Try the provider side of a priced action: publish an offer, return a bounded
+quote and report usage after execution. The loopback service gives developers
+a complete local flow to inspect before adapting their own service.
+
+Run from the repository root with the HTTP extra installed, using two terminals.
+Stop the server afterward. Payment approvals apply only to the example ledger;
+do not reuse its keys or unauthenticated mode for a real provider.
 
 [Documentation index](../../docs/README.md).
 

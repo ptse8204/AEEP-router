@@ -1,10 +1,13 @@
 # AEEP 0.6 provider-package fixture
 
-For operators learning the package lifecycle. Install AEEP and run from the
-repository root. Start with `provider verify`; it should validate the fixture
-and its evidence without activating a route. Later commands change the local
-router database. Regenerating the fixture rewrites signed assets, so it is
-separate from verification. Its public test keys are not production trust.
+Follow a shared capability from package verification to approved local use.
+This fixture shows how an operator can inspect signed artifacts, test the route
+and explicitly activate it.
+
+Install AEEP and run from the repository root. Start with `provider verify`;
+it checks the package without activating a route. Later commands change the
+local database. Regeneration rewrites signed assets, so keep it separate from
+verification. The public test keys are not production trust.
 
 [Documentation index](../../docs/README.md).
 

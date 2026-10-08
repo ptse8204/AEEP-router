@@ -1,9 +1,13 @@
 # AEEP 0.5 cache-affinity routing
 
-For developers reviewing optional cache-aware ranking. This 0.5 subsystem
-contract remains applicable in 0.8. See [accounting](ACCOUNTING.md) for token
-provenance and [architecture](../ARCHITECTURE.md#static-priors-and-observations)
-for the difference between priors and observations.
+Repeated work may reuse cached context. Cache-aware ranking lets that expected
+reuse influence the choice among routes that already meet your limits, while
+retaining the cold estimate for hard checks.
+
+This optional 0.5 subsystem contract remains applicable in 0.8. Developers can
+use [accounting](ACCOUNTING.md) to trace token measurements and
+[architecture](../ARCHITECTURE.md#static-priors-and-observations) to distinguish
+configured estimates from observations.
 
 [Documentation index](README.md).
 

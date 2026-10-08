@@ -1,7 +1,10 @@
 # Economic evidence exchange
 
-For readers evaluating the economic protocol boundary. Start with
-[accounting](ACCOUNTING.md) for evidence meanings and the
+Compare a provider's bounded price offer with the charge recorded after the
+work runs. Signed economic evidence is intended to make those costs inspectable
+across providers while leaving spending decisions with the operator.
+
+Start with [accounting](ACCOUNTING.md) to interpret the evidence and the
 [operator guide](ECONOMIC_OPERATOR_GUIDE.md) for commands. The versioned
 features below do not establish a live marketplace or grant spending authority.
 

@@ -1,8 +1,11 @@
 # MCP executor example
 
-For developers trying an actual local stdio transport. Install AEEP and run
-from the repository root with this environment available to child processes.
-The example needs no remote server, model account or credential.
+Use an MCP tool through AEEP and inspect its verified result and context
+overhead. This example runs a local text-statistics server, giving developers
+a small transport integration to try before connecting a larger service.
+
+Install AEEP and run from the repository root with the environment available
+to child processes. No remote server, model account or credential is needed.
 
 [Documentation index](../../docs/README.md).
 

@@ -1,7 +1,10 @@
 # AEEP local x402 capacity binding
 
-For implementers checking the local compatibility contract. Install AEEP
-before running the offline proof below. See
+Track a bounded capacity commitment through use and reconciliation. This local
+binding lets implementers test the x402 batch mapping without a live service or
+value transfer.
+
+Install AEEP before running the offline proof. See
 [accounting](../ACCOUNTING.md) for capacity versus cash and
 [ADR-009](../adr/ADR-009-x402-compatibility-boundary.md) for the adopted boundary.
 

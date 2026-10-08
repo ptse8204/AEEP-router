@@ -1,16 +1,19 @@
 # Stack planning and execution
 
-For operators and developers composing an explicit task graph from configured
-executors. Install the source checkout and run the fixtures from the repository
-root. For catalog search and component recommendations, start with
-[onboarding](ONBOARDING.md#search-and-compare).
+Use a stack when completing the work needs several capabilities in sequence.
+Your agent supplies the plan; AEEP chooses eligible implementations and checks
+that each step can pass its output to the next within your limits.
+
+Operators and developers can try the local fixtures below after source
+installation. Run them from the repository root. To find components first,
+start with [onboarding](ONBOARDING.md#search-and-compare).
 
 [Documentation index](README.md).
 
-The host interprets the user's task and submits a `GoalSpec`: deliverable node
-IDs, a semantic DAG, typed ports, bindings, constraints and verification needs.
-Private task values arrive separately when execution starts. AEEP selects from
-configured eligible executors; it does not make another model call.
+The plan is a `GoalSpec`: a graph of steps, their inputs and outputs, the required
+deliverables, constraints and verification needs. The host supplies it without
+private task values, which arrive when execution starts. AEEP selects from
+configured eligible executors without another model call.
 
 `StackService` provides `propose`, `inspect`, `optimize`, `preflight` and
 `compile`. `StackRuntime` provides `assemble`, `run` and `amend`. Proposals and
@@ -33,6 +36,9 @@ can create an admission, grant or payment approval.
 </details>
 
 ## Try the offline journey
+
+Try a small stack before configuring your own workflow. This demo runs media,
+data and research fixtures locally and checks the declared outputs.
 
 ```bash
 PYTHONPATH=src python3 examples/stacks/demo.py
@@ -71,6 +77,9 @@ new digest. `optimize PROPOSAL_ID --policy cost` also creates a successor.
 
 ## Configuration search
 
+Choose implementations that fit both the task and one another. A fast step is
+useful only if it meets your limits and produces an output the next step can use.
+
 Executors declare typed ports under `config.stack.inputs` and
 `config.stack.outputs`, plus optional `config.stack.setup_ids`. These are
 operator configuration, not registry instructions. A callable host or delegate
@@ -106,6 +115,9 @@ production adapters, and physical resource ceilings requiring a new containment
 boundary remain separate gates. Subscription usage is never converted to cash.
 
 ## Authority and recovery
+
+Review the selected configuration before running it. If execution stops, retain
+completed work and resolve uncertain effects before attempting recovery.
 
 Assembly can reuse a specified reviewed capability profile with the exact
 executor fingerprints. Its existing activation and native task scope still

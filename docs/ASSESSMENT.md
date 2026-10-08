@@ -1,15 +1,18 @@
 # Plugin assessment in AEEP 0.8
 
-This guide is for operators preparing a reviewed comparison or scoped task tool.
-For a first connection, use [onboarding](ONBOARDING.md); ordinary setup does not
-require an assessment campaign. Read the [testing policy](ASSESSMENT_TESTING.md)
-before running the operator commands here.
+Use assessment to decide whether a new capability earns a place in your agent's
+workflow. Compare it with the tools the agent already has, including the effort
+and resources needed to add it. A useful outcome can be keeping the existing tools.
+
+For a first connection, use [onboarding](ONBOARDING.md). Operators preparing a
+comparison or scoped task tool should read the [testing policy](ASSESSMENT_TESTING.md)
+before running the commands here.
 
 [Documentation index](README.md).
 
-Use assessment to compare a capability with the tools an agent already has.
-AEEP records the reviewed comparison and its authorization separately from
-production routing. Ordinary tasks can run without an assessment worker.
+Assessment runs separately from ordinary work so trials and their costs stay
+distinct from production history. AEEP records the comparison and its reviewed
+authorization; ordinary tasks can run without an assessment worker.
 
 ```text
 Selected subject → recipe and mapping review → standing authorization
@@ -40,11 +43,14 @@ Task tool → applicability and policy checks → approved implementation
 
 ## Project-local task operation
 
-The native task path runs on demand on the tested macOS/Codex profile. It reuses
-existing route qualification and approvals; reviewing a task scope does not
-qualify a new route. Configure an eligible native command and a scope conforming
-to schemas/task-scope.schema.json. The scope binds the project, exact executor
+Give an agent a useful project tool with a defined allowance, then inspect,
+pause or remove that access through the same task controls. The native path runs
+on demand on the tested macOS/Codex profile and reuses existing route approvals.
+
+Configure an eligible native command and a scope conforming to
+schemas/task-scope.schema.json. The scope binds the project, exact executor
 fingerprints, permission ceiling, expiry, attempt allowance and time cap.
+Reviewing it does not qualify a new route.
 
 These operator commands were exercised in the
 [retained CLI journey](../reports/v08/steering-v1-delivery-validation/final/cli-journey.json):
@@ -173,6 +179,10 @@ not undo revocation. The scope marker remains, preventing a route from becoming
 unrestricted when it loses admission.
 
 ## Configured assessment setup
+
+Prepare a comparison from the routes and workers your operator has already
+configured. The setup flow returns what is available and identifies missing
+configuration before trials begin.
 
 After an operator has selected the local subject, configured the routes and
 workers, stored the recipe and environment, and granted finite scope, setup can
@@ -414,10 +424,11 @@ baselines remain available. Historical assessment records are retained.
 
 ## Choosing a comparison structure
 
-Choose the structure when initiating an assessment, separately for each plugin,
-capability and environment. AEEP recommends `direct` for callable implementations,
-`controlled_agent` for skills with separable dependencies, and `workflow` for
-complete workflows. Recommendations never approve dependency metadata.
+Choose what you want the comparison to tell you: how a callable implementation
+performs, whether a skill helps an agent, or how a complete workflow performs.
+Set that structure at the start for each plugin, capability and environment.
+AEEP recommends `direct`, `controlled_agent` or `workflow` accordingly;
+recommendations never approve dependency metadata.
 
 - `direct` compares a callable implementation with the configured baseline and
   deterministic reference, where present.

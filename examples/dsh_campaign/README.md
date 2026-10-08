@@ -1,9 +1,12 @@
 # AEEP 0.6 DSH proofs
 
-For contributors checking the DSH proof definitions. Install the source
-checkout and run from the repository root. Start with the `--check` commands
-to validate retained artifacts; commands without that flag regenerate reports.
-Live runs require the separate approval and environment described below.
+Inspect whether routing through AEEP changes correctness, resource use and
+execution overhead in a DeepSeek Harness workflow. Start with the local fixtures
+and retained comparisons before considering a live run.
+
+Install the source checkout and run from the repository root. `--check` validates
+retained artifacts; commands without that flag regenerate reports. Live runs
+require the separate approval and environment described below.
 
 [Documentation index](../../docs/README.md).
 

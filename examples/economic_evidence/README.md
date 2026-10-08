@@ -1,9 +1,12 @@
 # AEEP 0.5 deterministic economic-evidence proof
 
-For contributors verifying the economic-accounting fixture. Install AEEP and
-run from the repository root. Use the `--check --require-gates` command first
+Trace a bounded charge from its quote through reservation, execution and
+settlement. This local fixture lets contributors check that accounting retains
+both the amount captured and the unused amount released.
+
+Install AEEP and run from the repository root. Start with `--check --require-gates`
 to inspect retained results. Regeneration writes reports and is a separate step.
-The paid amounts below belong to a synthetic local ledger; no real money moves.
+Paid amounts belong to a synthetic ledger; no real money moves.
 
 [Documentation index](../../docs/README.md).
 

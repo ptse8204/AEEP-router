@@ -1,10 +1,15 @@
 # AEEP documentation
 
-Start with [setup](ONBOARDING.md) to connect your agent. AEEP searches configured
-catalogs and routes approved actions under operator limits. Assessment is a
-separate, reviewed workflow; connecting an agent does not approve new tools.
+AEEP aims to help your agent find useful capabilities and put approved ones to
+work, with less manual tool selection and limits you control. These guides take
+you from connecting an agent to evaluating tools and running approved work.
+
+Start with [setup](ONBOARDING.md). Once connected, search for capabilities,
+review what they need and choose your next step below.
 
 ## Tutorials
+
+Try the workflow on a small task before configuring your own tools.
 
 | Try | Result |
 |---|---|
@@ -14,6 +19,8 @@ separate, reviewed workflow; connecting an agent does not approve new tools.
 | [Offline stacks](STACK_PLANNING.md#try-the-offline-journey) | Compose media, data and research fixtures with explicit verification limits. |
 
 ## How-to guides
+
+Choose the part of your workflow you want to set up or change.
 
 | Task | Guide |
 |---|---|
@@ -49,6 +56,8 @@ regenerating reports is a different operation.
 
 ## Reference
 
+Use these contracts when building an integration or checking exact behavior.
+
 - [Protocol specification](../SPEC.md) and [ActionRequest schema](../schemas/action-request.schema.json)
 - [Economic accounting](ACCOUNTING.md)
 - [Provider packages](PROVIDER_PACKAGES.md), [provider trust](PROVIDER_TRUST.md) and [portable evidence reuse](EVIDENCE_REUSE.md)
@@ -69,6 +78,8 @@ applicable transition and back up before upgrading:
 - [Migration to 0.7](MIGRATION_0.7.md)
 
 ## Explanations and evidence
+
+Understand the design choices and the results behind them.
 
 - [Architecture and design decisions](../ARCHITECTURE.md)
 - [Tests, useful cases and known limits](EVIDENCE.md)

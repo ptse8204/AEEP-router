@@ -1,8 +1,12 @@
 # Security policy and deployment guidance
 
-For operators enabling execution and contributors reviewing trust boundaries.
-Read this before approving a new route. The [documentation index](docs/README.md)
-links setup and assessment procedures; the controls below remain authoritative.
+Delegate work while retaining control over what may run, which data it can
+reach and what it may spend. These boundaries guide route approval and recovery
+when an action's effects are uncertain.
+
+Operators and contributors should read this policy before approving a new route.
+The [documentation index](docs/README.md) links setup and assessment procedures;
+the controls below remain authoritative.
 
 AEEP can launch commands, call remote services, and advise another agent. Its
 manifest and database control these operations, so protect both as

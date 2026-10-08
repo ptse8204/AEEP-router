@@ -2,9 +2,9 @@
 
 [Documentation index](README.md).
 
-AEEP uses your existing agent to understand the task. It searches catalog metadata,
-records a comparison, and helps you configure selected components. A recommendation
-can include tools you have not installed. It does not grant execution authority.
+Connect AEEP to your agent so you can start with a task, find suitable tools and
+review what they need before using them. Your agent plans the work; AEEP helps
+with catalog search, component setup and access controls.
 
 <details>
 <summary>Contents</summary>
@@ -19,6 +19,9 @@ can include tools you have not installed. It does not grant execution authority.
 </details>
 
 ## Start
+
+Setup creates a named connection for planning and search. Try a public search
+before choosing any additional components to install or allow.
 
 Install from source on macOS or Linux/WSL with Python 3.11 or newer, Git, and
 the agent application you want to connect. Sign-in stays with that application.
@@ -81,6 +84,9 @@ For another project, choose a distinct connection name using
 
 ## Search and compare
 
+Describe the capability your task needs and compare the available options.
+Search gives you candidates and setup requirements to discuss with your agent.
+
 ```bash
 aeep catalogs list
 aeep catalogs add team owner/repository
@@ -109,7 +115,7 @@ In your connected agent, ask:
 > website feature. Inspect existing tools, search catalogs and public sources,
 > compare named candidates for every stage, and explain what needs setup.
 
-The stages must cover website inspection, scripting/storyboarding, screen capture,
+For this video example, the stages must cover website inspection, scripting/storyboarding, screen capture,
 narration, editing/motion, captions, and quality review. `text.stats` can count
 script words; it cannot establish that the video workflow is complete.
 
@@ -132,6 +138,9 @@ commands retain their contracts. Recommendation records never become executable
 just because a package was installed.
 
 ## Configure a selected component
+
+Turn a selected candidate into a configured component. Review the proposed
+installation or connection before it changes your environment.
 
 ```bash
 aeep stack setup guided CANDIDATE_ID --connection codex
@@ -159,6 +168,9 @@ need an explicit handoff. A failed or interrupted package installation is retain
 for inspection; retry requires `stack setup component DEFINITION --retry-failed`.
 
 ## Control tools per agent
+
+Give each project or agent the access it needs. Named connections let you inspect
+and withdraw AEEP tool access independently.
 
 ```bash
 aeep agents list
@@ -201,9 +213,10 @@ dispatch guard.
 
 ## Repair, update and remove
 
-Rerun setup to repair unchanged AEEP-owned entries. It stops on conflicting user
-edits and preserves existing manifests, grants and receipts. Multiple projects
-should use distinct connection names through `agents connect`.
+Keep control as your setup changes. Rerun setup to repair unchanged AEEP-owned
+entries; it preserves manifests, grants and receipts and stops on conflicting
+user edits. Use distinct connection names through `agents connect` for multiple
+projects.
 
 ```bash
 aeep agents disconnect reviewer
@@ -219,6 +232,9 @@ unknown files. Updates require published checksum-verified installer assets;
 unpublished assets cannot be downloaded with `aeep update`.
 
 ## Release preparation and verification
+
+For maintainers preparing an installer, build and check the assets locally
+before publishing a download command.
 
 The public one-command download is a release interface, not yet a verified
 published installation route. Do not advertise the latest-release curl command

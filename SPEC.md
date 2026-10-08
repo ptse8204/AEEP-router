@@ -1,7 +1,10 @@
 # AEEP 0.8 protocol specification
 
-For implementers checking protocol and versioned contract requirements.
-Use the [architecture](ARCHITECTURE.md) for design rationale and
+A shared execution contract lets an agent request an action while different
+implementations remain comparable and subject to the same limits. This reference
+defines that contract for implementers.
+
+Use the [architecture](ARCHITECTURE.md) for design rationale and the
 [documentation index](docs/README.md) for operational guides. Subsystem wire
 versions are independent of the installed Python package version.
 

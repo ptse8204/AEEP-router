@@ -1,9 +1,13 @@
 # AEEP 0.6 provider trust
 
-For operators assigning signer roles and scope. This 0.6 trust contract remains
-supported; its version does not identify the latest AEEP release. See
-[provider packages](PROVIDER_PACKAGES.md) for package validation and
-[the operator guide](ECONOMIC_OPERATOR_GUIDE.md#2-establish-provider-trust) for setup.
+Decide whose signed claims your router may accept and what each signer is
+allowed to attest. Explicit roles keep package provenance separate from evidence
+about correctness or resource use.
+
+This 0.6 trust contract remains supported; its version does not identify the
+latest AEEP release. See [provider packages](PROVIDER_PACKAGES.md) for validation
+and [the operator guide](ECONOMIC_OPERATOR_GUIDE.md#2-establish-provider-trust)
+for setup.
 
 [Documentation index](README.md).
 

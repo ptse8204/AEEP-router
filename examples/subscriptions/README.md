@@ -1,8 +1,11 @@
 # Subscription-aware routing
 
-For operators exploring quota-sensitive selection. Install AEEP and run from
-the repository root. The routing previews below do not invoke a model; managed
-Codex execution is a separate, reviewed operation.
+See how remaining subscription capacity can influence the choice between
+an agent session and a local tool. Preview the decision under normal and
+critical quota pressure without making a model call.
+
+Install AEEP and run from the repository root. Managed Codex execution is a
+separate, reviewed operation.
 
 [Documentation index](../../docs/README.md).
 

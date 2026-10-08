@@ -1,7 +1,10 @@
 # AEEP 0.6 DSH validation
 
-For contributors checking the DSH fixtures and interpreting retained results.
-Install the source checkout first and run commands from the repository root.
+Check how routing choices affect a DeepSeek Harness workflow, including the
+overhead AEEP adds. These fixtures let contributors inspect the comparison
+method and retained results before considering a live campaign.
+
+Install the source checkout and run commands from the repository root.
 Use [the native bridge](../integrations/dsh-aeep-router/README.md) to integrate
 a host; the historical MCP comparison below is a negative control.
 

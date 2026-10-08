@@ -1,8 +1,11 @@
 # Bring your own subscription
 
-For operators configuring existing subscription resources. Start with
-[onboarding](ONBOARDING.md#start) for a host connection; use this guide when
-selecting delegated or managed execution and interpreting quota signals.
+Put the subscriptions and local tools you already have to work. AEEP can take
+remaining capacity into account when choosing a route, helping you reserve
+scarce usage for work that needs it.
+
+Start with [onboarding](ONBOARDING.md#start) for a host connection. Use this guide
+to configure delegated or managed execution and understand its quota signals.
 
 [Documentation index](README.md).
 

@@ -1,8 +1,12 @@
 # GitHub default branch demo
 
-Install AEEP and Git, then run from this repository checkout. Preview the
-decision before executing and inspect the selected implementation. Public HTTP
-needs network access; MCP and delegated alternatives need their own setup.
+Ask for a repository's default branch without choosing the implementation
+first. This example shows how AEEP can use an existing local checkout or select
+another eligible route for the same action.
+
+Install AEEP and Git, then run from this checkout. Preview the choice before
+execution. Public HTTP needs network access; MCP and delegated alternatives
+need their own setup.
 
 [Documentation index](../../docs/README.md).
 

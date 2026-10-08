@@ -31,6 +31,11 @@ coverage report -m
 Start with the [documentation index](docs/README.md). Follow
 [Diátaxis](https://diataxis.fr/): keep tutorials, how-to guides, reference and
 explanations distinct, using existing paths where possible.
+Lead with what AEEP is meant to change in the reader's workflow: less manual
+tool selection, useful capabilities and execution within limits they control.
+Present these as goals, with measured results in the evidence guide. Each
+section should explain why a step matters before introducing its mechanisms.
+Keep paragraphs short and use examples to illustrate the general workflow.
 The README should explain the product and get a reader connected to an agent;
 benchmark tables and engineering history belong in linked evidence records.
 

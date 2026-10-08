@@ -1,8 +1,11 @@
 # HTTP executor example
 
-For developers trying a local HTTP executor. Install AEEP, run from the
-repository root, and leave port 8787 available. Keep the server terminal open
-while running the client; stop it with Ctrl-C when finished.
+Put an HTTP service behind the same routing and receipt interface as a local
+tool. This example runs a text-statistics service on loopback so you can inspect
+the request's result and recorded usage.
+
+Install AEEP, run from the repository root and leave port 8787 available. Keep
+the server terminal open while using the client; stop it with Ctrl-C afterward.
 
 [Documentation index](../../docs/README.md).
 

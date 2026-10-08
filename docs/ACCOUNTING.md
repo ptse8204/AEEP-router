@@ -1,7 +1,11 @@
 # AEEP economic accounting
 
-Use this reference when interpreting route estimates, receipts or campaign reports.
-For operational commands, see the [economic operator guide](ECONOMIC_OPERATOR_GUIDE.md).
+See what an action used and what it cost before deciding whether to use that
+route again. AEEP keeps cash, subscription capacity and other resources separate
+so you can judge the trade-offs using your own priorities.
+
+Use this reference to read estimates, receipts and campaign reports, or follow
+the [economic operator guide](ECONOMIC_OPERATOR_GUIDE.md) for commands.
 The 0.5 accounting contract remains part of the current router.
 
 [Documentation index](README.md).

@@ -2,15 +2,15 @@
 
 [Documentation index](README.md).
 
-AEEP has demonstrated direct execution of known structured tasks, scoped native
-workbook execution, and reversible access controls. Completed software checks
-apply to their recorded revisions. The larger Luna qualification studies found
-failures and did not approve either candidate for automatic use.
+AEEP aims to improve the work your agent can do with the tools available to it.
+Use this guide to judge how far the recorded results support that goal and which
+questions still need testing.
 
-This guide explains those results and the use cases they support. Each result
-applies to the source, task and environment in its linked record. The
-[plan coverage record](../reports/v08/plan-coverage.md) keeps the full history,
-including failed attempts and remaining work.
+Recorded checks cover known text operations, scoped native workbook tasks and
+reversible access controls. The larger Luna studies found failures and did not
+approve either candidate for automatic use. Each result applies to its linked
+source, task and environment. The [plan coverage record](../reports/v08/plan-coverage.md)
+retains the full history, including failed attempts and remaining work.
 
 <details>
 <summary>Contents</summary>

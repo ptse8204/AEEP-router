@@ -1,9 +1,12 @@
 # AEEP 0.5 job-application sandbox
 
-For contributors inspecting a synthetic end-to-end approval and recovery
-fixture. Use the [example instructions](../examples/job_application/README.md)
-to check retained artifacts. This is a sandbox design, not an application-submission
-service or evidence about real hiring outcomes.
+An uncertain submission should not become a duplicate submission. This sandbox
+shows how approval, idempotency and recovery work together when an action has
+consequences that cannot safely be repeated.
+
+Contributors can use the [example instructions](../examples/job_application/README.md)
+to check the retained synthetic artifacts. This design does not submit real
+applications or measure hiring outcomes.
 
 [Documentation index](README.md).
 

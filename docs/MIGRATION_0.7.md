@@ -1,9 +1,9 @@
 # Migrating to AEEP 0.7
 
-For operators upgrading a manifest, database or package to the 0.7 contract.
-This guide documents that transition; it is not a fresh-install guide. Back up
-the existing database first. Use [onboarding](ONBOARDING.md#start) for a new
-installation and the [version index](README.md#version-specific-compatibility)
+Keep existing routes and records usable while adopting the 0.7 contract.
+This guide covers the changes operators need to review for that transition.
+Back up the database before upgrading. Use [onboarding](ONBOARDING.md#start)
+for a new installation and the [version index](README.md#version-specific-compatibility)
 for adjacent transitions.
 
 AEEP 0.7 preserves manifests, receipts, and SQLite databases from 0.1 through

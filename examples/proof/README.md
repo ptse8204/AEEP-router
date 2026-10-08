@@ -1,10 +1,13 @@
 # AEEP 0.8 proof assets
 
-For operators inspecting controlled proof assets and dated results. Install
-AEEP before checking the manifests. Docker and model campaigns need the exact
-reviewed environments and authority described below; do not rerun them merely
-to reproduce a documentation example. Before builds or image pulls, check host
-space and Docker usage, keep 50 GiB free, and preserve current/rollback resources.
+Trace a routing claim back to its controlled task, execution receipts and
+comparison conditions. These assets let operators inspect how qualification
+and resource accounting support a result.
+
+Install AEEP before checking manifests. Docker and model campaigns require the
+reviewed environments and authority below; do not rerun them just to follow
+the documentation. Before builds or image pulls, check host space and Docker
+usage, keep 50 GiB free, and preserve current and rollback resources.
 
 [Documentation index](../../docs/README.md).
 

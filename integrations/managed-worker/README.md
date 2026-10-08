@@ -1,9 +1,13 @@
 # Managed worker image contract
 
-For operators preparing controlled assessment environments, not ordinary
-host connections. Read the [testing policy](../../docs/ASSESSMENT_TESTING.md)
-first. Check host free space and Docker usage before builds; keep at least
-50 GiB free, pin all resources, and retain current and rollback images.
+Compare an agent's existing tools with a candidate addition in separate,
+controlled environments. Matching the shared tools and isolating each worker
+helps keep the comparison about the capability being evaluated.
+
+Operators preparing assessment workers must read the
+[testing policy](../../docs/ASSESSMENT_TESTING.md) first. Ordinary host connections
+do not need these workers. Before builds, check free space and Docker usage;
+keep 50 GiB free, pin all resources, and retain current and rollback images.
 
 [Documentation index](../../docs/README.md).
 

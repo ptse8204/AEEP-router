@@ -1,9 +1,12 @@
 # AEEP 0.7 managed-host and economic evidence threat model
 
-For developers and operators reviewing managed-host and economic trust
-boundaries. The 0.7 controls below remain relevant to the current router. Read
-[the security policy](../SECURITY.md) for repository-wide controls and
-[assessment testing](ASSESSMENT_TESTING.md) for experiment authority.
+Before giving a route access to data or spending authority, trace where an
+untrusted claim could affect execution. This guide maps those risks to controls
+for managed hosts and economic evidence.
+
+The 0.7 controls remain relevant to the current router. Developers and operators
+should also read [the security policy](../SECURITY.md) for repository-wide
+controls and [assessment testing](ASSESSMENT_TESTING.md) for experiment authority.
 
 [Documentation index](README.md).
 

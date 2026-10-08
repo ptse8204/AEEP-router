@@ -1,9 +1,13 @@
 # Provider economic evidence integration
 
-For provider developers implementing signed quote and usage handlers. Install
-the source checkout and understand [accounting](ACCOUNTING.md) before adapting
-the example code. Use the [local reference service](../examples/economic_market/README.md)
-for development; its public test keys cannot establish production trust.
+Give operators a bounded price before work starts and a signed usage statement
+afterward. Providers can add this evidence to an existing service while keeping
+their own transport and execution system.
+
+Install the source checkout and read [accounting](ACCOUNTING.md) before adapting
+the quote and usage handlers. Develop against the
+[local reference service](../examples/economic_market/README.md); its public test
+keys cannot establish production trust.
 
 [Documentation index](README.md).
 

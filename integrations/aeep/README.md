@@ -1,9 +1,12 @@
 # AEEP Codex plugin
 
-For a new source checkout, use [guided setup](../../docs/ONBOARDING.md#start).
+Make AEEP's routing and planning tools available in Codex while keeping the
+existing agent workflow. This `aeep-router` marketplace plugin launches an
+operator-installed dedicated runtime.
+
+For a source checkout, use [guided setup](../../docs/ONBOARDING.md#start).
 It registers that environment's interpreter and a named connection directly.
-This directory instead contains the `aeep-router` marketplace plugin's fixed
-launcher for an operator-installed dedicated runtime. The plugin starts the existing
+The marketplace plugin uses a fixed launcher. The plugin starts the existing
 stdio MCP server through `serve.py`, using the dedicated runtime at
 `~/.local/share/aeep/venv` and the operator manifest at
 `~/.config/aeep/config.yaml`. Missing setup stops startup with a diagnostic on

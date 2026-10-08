@@ -1,8 +1,12 @@
 # Architecture and design decisions
 
-For contributors understanding how discovery, assessment, routing and execution
-fit together. Start with the [documentation index](docs/README.md) for user
-journeys; use [the specification](SPEC.md) for normative contracts.
+AEEP is designed to help an agent turn a plan into approved execution without
+making the user choose every implementation by hand. The host plans the work;
+AEEP evaluates configured choices, enforces limits and retains execution evidence.
+
+This guide explains how those parts fit together and why the boundaries matter.
+Contributors can use [the specification](SPEC.md) for normative contracts and
+the [documentation index](docs/README.md) for user journeys.
 
 <details>
 <summary>Contents</summary>
@@ -34,6 +38,9 @@ journeys; use [the specification](SPEC.md) for normative contracts.
 </details>
 
 ## Discovery and admission boundary
+
+Finding a capability should give the operator something to evaluate. Approval
+to use it comes later, after its artifact, evidence and intended scope are known.
 
 [ADR-010](docs/adr/ADR-010-ard-discovery-boundary.md) selects ARD as the primary
 external discovery protocol, with local/manual sources and other adapters kept
@@ -125,6 +132,9 @@ those declarations. Scoped managed-host admission and subsequent routing require
 current conformance for the configured worker, identity and adapter.
 
 ## Placement in an agent stack
+
+The agent turns the user's goal into actions. AEEP handles the choice of
+implementation for those actions, so planning and execution policy stay separate.
 
 ```text
 agent planner / user intent

@@ -34,7 +34,10 @@ python3 -m coverage report -m
 
 Follow the [documentation checklist](CONTRIBUTING.md#documentation) when writing
 or updating prose. Audit commands and claims against code and completed evidence
-first. Keep the README focused on first use, maintain the documentation index,
+first. Lead user-facing prose with the intended effect on the workflow and why
+it helps; explain mechanisms after that purpose is clear. Describe aspirations
+as goals and keep measured claims tied to evidence. Keep prose short. Keep the
+README focused on first use, maintain the documentation index,
 and separate implementation, measured results, experiments and remaining gates.
 Preserve existing paths, referenced anchors, historical records and versioned
 contract meanings. Update affected guides with behavior changes.

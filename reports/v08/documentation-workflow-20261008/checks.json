@@ -1,0 +1,356 @@
+{
+  "date": "2026-10-08",
+  "branch": "main",
+  "head": "0881455bb0fc1ef0416c46fa12903b0f54b9ced3",
+  "core": {
+    "source_before": "67737187ddfff12e3555c00eaceff4709b82d7be78e8754968b1fd35022d247e",
+    "head": "0881455bb0fc1ef0416c46fa12903b0f54b9ced3",
+    "checks": [
+      {
+        "name": "compile",
+        "command": [
+          "python3",
+          "-m",
+          "compileall",
+          "-q",
+          "src",
+          "examples",
+          "tests"
+        ],
+        "exit_code": 0,
+        "seconds": 0.11
+      },
+      {
+        "name": "schemas",
+        "command": [
+          "python3",
+          "scripts/generate_schemas.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.8
+      },
+      {
+        "name": "pytest",
+        "command": [
+          "python3",
+          "-m",
+          "pytest"
+        ],
+        "exit_code": 0,
+        "seconds": 600.0
+      },
+      {
+        "name": "coverage-tests",
+        "command": [
+          "python3",
+          "-m",
+          "coverage",
+          "run",
+          "--branch",
+          "-m",
+          "pytest"
+        ],
+        "exit_code": 0,
+        "seconds": 892.77
+      },
+      {
+        "name": "coverage-report",
+        "command": [
+          "python3",
+          "-m",
+          "coverage",
+          "report",
+          "-m"
+        ],
+        "exit_code": 0,
+        "seconds": 1.33
+      },
+      {
+        "name": "coverage-json",
+        "command": [
+          "python3",
+          "-m",
+          "coverage",
+          "json",
+          "-o",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-voice-20261008-guz7pllz/coverage.json"
+        ],
+        "exit_code": 0,
+        "seconds": 1.79
+      },
+      {
+        "name": "critical-coverage",
+        "command": [
+          "python3",
+          "scripts/check_critical_coverage.py",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-voice-20261008-guz7pllz/coverage.json"
+        ],
+        "exit_code": 0,
+        "seconds": 0.04
+      },
+      {
+        "name": "assessment-coverage",
+        "command": [
+          "python3",
+          "scripts/check_assessment_coverage.py",
+          "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-voice-20261008-guz7pllz/coverage.json"
+        ],
+        "exit_code": 0,
+        "seconds": 0.04
+      }
+    ],
+    "source_after": "67737187ddfff12e3555c00eaceff4709b82d7be78e8754968b1fd35022d247e",
+    "source_unchanged": true
+  },
+  "supporting_checks": [
+    {
+      "name": "policy",
+      "command": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2
+    },
+    {
+      "name": "versions",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/test_version_consistency.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.68
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.2
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "seconds": 0.58
+    },
+    {
+      "name": "node",
+      "command": [
+        "node",
+        "--test",
+        "integrations/dsh-aeep-router/test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.82
+    },
+    {
+      "name": "economic-proof",
+      "command": [
+        "python3",
+        "examples/economic_evidence/campaign.py",
+        "--repetitions",
+        "30",
+        "--check",
+        "--require-gates"
+      ],
+      "exit_code": 0,
+      "seconds": 0.43
+    },
+    {
+      "name": "dsh-proof",
+      "command": [
+        "python3",
+        "examples/dsh_campaign/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.42
+    },
+    {
+      "name": "dsh-safety",
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-report",
+        "reports/v05/dsh/live-safety.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.43
+    },
+    {
+      "name": "dsh-comparison",
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-comparison",
+        "reports/v05/dsh/live-comparison.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.43
+    },
+    {
+      "name": "dsh-native-plan",
+      "command": [
+        "python3",
+        "examples/dsh_campaign/live_campaign.py",
+        "--check-native-plan"
+      ],
+      "exit_code": 0,
+      "seconds": 0.43
+    },
+    {
+      "name": "jobs-proof",
+      "command": [
+        "python3",
+        "examples/job_application/campaign.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.44
+    },
+    {
+      "name": "provider-package",
+      "command": [
+        "aeep",
+        "provider",
+        "verify",
+        "examples/provider_package/aeep-provider.yaml",
+        "-m",
+        "examples/provider_package/aeep.yaml",
+        "--compact"
+      ],
+      "exit_code": 0,
+      "seconds": 0.52
+    },
+    {
+      "name": "build",
+      "command": [
+        "python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-voice-20261008-guz7pllz/dist"
+      ],
+      "exit_code": 0,
+      "seconds": 2.03,
+      "final_prose_verified": true
+    },
+    {
+      "name": "docs-check",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/make",
+        "docs-check",
+        "LYCHEE=/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-refresh-20261007-v3gcsw1_/lychee/lychee-aarch64-apple-darwin/lychee"
+      ],
+      "exit_code": 0,
+      "seconds": 1.92,
+      "final_prose_verified": true
+    }
+  ],
+  "coverage_totals": {
+    "covered_lines": 28259,
+    "num_statements": 33306,
+    "percent_covered": 81.32027485275745,
+    "percent_covered_display": "81",
+    "missing_lines": 5047,
+    "excluded_lines": 253,
+    "percent_statements_covered": 84.84657419083649,
+    "percent_statements_covered_display": "85",
+    "num_branches": 11518,
+    "num_partial_branches": 2508,
+    "covered_branches": 8192,
+    "missing_branches": 3326,
+    "percent_branches_covered": 71.12345893384268,
+    "percent_branches_covered_display": "71"
+  },
+  "legacy_router_compatibility": {
+    "profiles": {
+      "core": "PASS",
+      "openai": "PASS",
+      "marketplace_contract": "PASS",
+      "marketplace_live": "DISABLED"
+    },
+    "required_checks": 56,
+    "required_failures": [],
+    "live_checks": [
+      {
+        "id": "openai-live-account-proof",
+        "status": "SKIP"
+      },
+      {
+        "id": "live-marketplace-networking",
+        "status": "DISABLED"
+      }
+    ]
+  },
+  "preservation": {
+    "changed_documents": 45,
+    "unchanged_code_fences": 133,
+    "existing_headings_retained_or_aliased": true,
+    "external_url_targets_unchanged": true,
+    "specification_and_security_body_unchanged": true,
+    "source_before": "4c19ad6a9ea186c660b8e37db1baf188e159700d405425eec64a4babb9e5a8a3",
+    "source_after": "67737187ddfff12e3555c00eaceff4709b82d7be78e8754968b1fd35022d247e",
+    "readme_words_before": 862,
+    "readme_words_after": 731,
+    "temporary_directory": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-docs-voice-20261008-guz7pllz",
+    "new_dependencies": false,
+    "docker_resources_created": false,
+    "unchanged_other_tracked_markdown_files": 76,
+    "plan_coverage_original_bytes_preserved": true,
+    "all_tracked_changes_are_markdown": true
+  },
+  "packages": {
+    "wheel_markdown_files_verified": 40,
+    "sdist_root_documents_verified": 6,
+    "artifacts": [
+      {
+        "file": "aeep_agent_router-0.8.2-py3-none-any.whl",
+        "bytes": 1574261,
+        "sha256": "2bb255ce334b3cfd466897e914583c6ea9a1da87801deb58e14a67f1427755d8"
+      },
+      {
+        "file": "aeep_agent_router-0.8.2.tar.gz",
+        "bytes": 1743290,
+        "sha256": "c564949c8993a09c4265a781ac297e463539ab2cb144f562cdc21fd0274421b3"
+      }
+    ]
+  },
+  "rendered_review": [
+    "README workflow and setup shortcut",
+    "documentation index tables",
+    "onboarding",
+    "loaded demo GIF"
+  ],
+  "preview_closed": true,
+  "live_trials_run": false,
+  "runtime_or_ci_changes": false,
+  "free_gib_after": 68.83,
+  "validation_log_sha256": "65fb07aba6ef9f4a43799285e853af2ecaa354fbe96318a901cc78c08017a655",
+  "final_report_checks": {
+    "markdownlint_exit_code": 0,
+    "lychee_exit_code": 0,
+    "local_links_ok": 2,
+    "git_diff_check_exit_code": 0
+  },
+  "preview_resources": {
+    "url": "http://127.0.0.1:64957/README.md",
+    "server_closed": true,
+    "temporary_browser_tab_closed": true
+  }
+}

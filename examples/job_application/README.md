@@ -1,6 +1,9 @@
 # AEEP 0.5 job-application sandbox proof
 
-For contributors checking approval, idempotency and recovery in a local fixture.
+Check that an uncertain submission stops for recovery instead of being submitted
+again. This local sandbox lets contributors inspect approval, duplicate protection
+and reconciliation using fake jobs and applicants.
+
 Install AEEP and run from the repository root. Start with `--check` to validate
 the retained report; the command without it regenerates historical output files.
 

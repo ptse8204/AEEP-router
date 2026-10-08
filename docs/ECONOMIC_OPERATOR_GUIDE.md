@@ -1,9 +1,12 @@
 # Economic evidence operator guide
 
-For operators who have installed AEEP and reviewed an exact manifest, trust
-store and execution ceiling. Run commands from the repository root or replace
-example paths with absolute paths. Begin with offline validation; networking,
-provider execution and payment approval remain separate decisions.
+Review a route's maximum charge before execution, then inspect what was used,
+captured and released afterward. This guide takes operators through that
+process and the recovery steps for an uncertain outcome.
+
+Install AEEP and review the exact manifest, trust store and execution ceiling.
+Run commands from the repository root or use absolute paths. Begin offline;
+networking, execution and payment approval remain separate decisions.
 
 [Documentation index](README.md).
 

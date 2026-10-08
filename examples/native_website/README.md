@@ -2,11 +2,13 @@
 
 [Documentation index](../../docs/README.md) · [Scoped task operations](../../docs/ASSESSMENT.md#project-local-task-operation).
 
-This operator-owned example completes two fixed HTML edits and verifies their
-files independently in a fresh CLI or MCP process. It reuses `AEEPToolService`,
-reviewed task scopes, the native single-process command boundary, durable
-attempts and receipts, and the existing callback validator. It adds no core API
-or callback importer.
+Give an agent a narrowly approved website task, then check the changed files
+independently. This operator-owned fixture completes two fixed HTML edits through
+a fresh CLI or MCP process and checks that a user file survives the later edit.
+
+It reuses `AEEPToolService`, reviewed task scopes, the native single-process
+command boundary, durable attempts and receipts, and the existing callback
+validator. It adds no core API or callback importer.
 
 The fixture is synthetic. It does not establish arbitrary website support,
 browser rendering, live model competence, publishing readiness, qualification,

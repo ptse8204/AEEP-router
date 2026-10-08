@@ -1,9 +1,12 @@
 # AEEP host-native router for DeepSeek Harness
 
-For DeepSeek Harness integrators. Use [guided setup](../../docs/ONBOARDING.md#start)
-for a searchable named MCP connection; this native bridge instead handles an
-exact semantic action before the host model call. Run package commands from
-this directory, and configure the manifest before dispatch.
+Choose the implementation for a known action before the next model call.
+This native bridge lets DeepSeek Harness expose one canonical tool while AEEP
+handles the reviewed implementation choices behind it.
+
+For a searchable named MCP connection, use [guided setup](../../docs/ONBOARDING.md#start).
+Integrators using this bridge should run package commands from this directory
+and configure the manifest before dispatch.
 
 [Documentation index](../../docs/README.md).
 

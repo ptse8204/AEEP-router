@@ -1,8 +1,10 @@
 # Quickstart example
 
-For a first local execution after [source installation](../../docs/ONBOARDING.md#start).
-Run these commands from the repository root. The example uses local tools and
-requires no model account. `route` previews the decision; `run` executes it.
+See how an action becomes a routing decision, a result and an execution receipt.
+This small text task lets you try the full local path before connecting an agent.
+
+After [source installation](../../docs/ONBOARDING.md#start), run from the repository
+root. No model account is needed. `route` previews the decision; `run` executes it.
 
 [Documentation index](../../docs/README.md).
 
