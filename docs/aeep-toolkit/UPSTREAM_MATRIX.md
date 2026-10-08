@@ -172,3 +172,11 @@ resolver checks the receipt, immutable record snapshots and artifact hashes.
 The receipt covers the evaluator process, not per-trial model accounting.
 C04 remains unfinished; this does not establish general `EvaluatorAdapter`
 dispatch, controlled workers, live-host compatibility or benchmark benefit.
+
+The Waza release metadata check also resolves the exact macOS arm64 asset hash
+and tag source under `reports/toolkit-v2/c01/waza-release-*.json`. The observed
+0.38.9 release tag points to `e534d149d89ae77ea158469fb4d2003804b2ee76`, not the
+reviewed branch pin `774df00a4f04fb5d193548a2cf3f45470fe285bb`. Retain that distinction
+when preparing a binary spike; neither the release label nor a nearby source
+commit proves the binary's compatibility. No Waza archive was downloaded,
+installed or executed by this metadata check.

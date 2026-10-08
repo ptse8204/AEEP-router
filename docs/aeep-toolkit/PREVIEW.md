@@ -51,7 +51,6 @@ as shown to suppress interpreter bytecode-cache writes as well.
 The preview fixture under `tests/fixtures/toolkit` is synthetic software evidence.
 It does not establish installation readiness for any real evaluator.
 
-
 ## Inspect project connection configuration
 
 ```bash

@@ -191,7 +191,6 @@ explicitly unsupported where `O_NOFOLLOW` is unavailable. A real named-pipe and
 symlink check covers refusal without reading their content. Historical host
 bindings are not requalified by this change.
 
-
 ### D24: 2026-10-08, bind coordinator receipts to recorded selection decisions
 
 The first fixture bridge used an explicit placeholder decision ID because it did

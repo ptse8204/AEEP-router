@@ -105,8 +105,10 @@ The independent contracts, partial non-mutating setup preview and an executable
 [development stack](../../integrations/toolkit/README.md) exist. The development
 stack uses the actual pinned external package, verifies its fixed synthetic trials
 and writes the [local showcase](../../reports/toolkit-v2/stack-showcase/index.html).
-General V2 evaluator dispatch, controlled real-agent comparison, canonical receipts
-and the complete installation journey remain unfinished.
+The fixed synthetic batch now uses the existing command executor, selection
+decision, journal and receipt store, and exports C02 evidence. General V2 evaluator
+dispatch, per-trial worker receipts, controlled real-agent comparison and the
+complete installation journey remain unfinished.
 
 The next product deliverable is one continuous, fixture-labeled journey from
 candidate input through the actual upstream evaluator to an AEEP comparison

@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '9bccd94'
-last_check_command: 'COVERAGE_FILE=/tmp/aeep-toolkit-v2-component-map.coverage PYTHONPATH=src python3 -m coverage run --branch -m pytest'
-last_check_result: '1343 passed, 21 skipped; 81.50% combined coverage; both required branch gates and all 12 final quality/build commands passed. Separate stack checks: 10 passed plus fresh upstream fixture execution.'
-next_action: 'Finish receipt-bridge verification, then continue C03 installed inventory and the C04 general upstream adapter with existing reviewed workers. The recorded fixture batch now uses canonical receipts and C02 evidence, but is not general live dispatch. Continue the C03-C06 journey without another architecture question.'
+last_verified_commit: '44da49f'
+last_check_command: 'Framework Python 3.13; /tmp/aeep-toolkit-doctor-final-checks.py; commands and logs in reports/toolkit-v2/c03/doctor-validation/checks.json'
+last_check_result: '1355 passed, 21 skipped in each core suite; 81.52% combined coverage; both required branch gates and all 11 recorded commands passed. Standalone bridge: 19 tests and fresh upstream fixture execution passed. Core source stable; two bridge files changed and verified separately.'
+next_action: 'Continue C03 installed-package inventory and reviewed setup/rollback, then C04 per-trial controlled-worker dispatch through the pinned upstream harness seam. Project configuration inventory and coordinator receipt verification are implemented; neither proves installation or worker conformance. Complete the candidate-to-report C03-C06 journey without another architecture question.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -402,7 +402,6 @@ that PATH mismatch. The upstream runtime remains the approved private `rebuild`
 environment. Temporary initial bridge runs remain under
 `/tmp/aeep-toolkit-receipt-demo-01` and `-02`; no live calls or grant changes ran.
 
-
 ### Continuation: read-only project doctor
 
 C01 reconciliation is committed as `1eb11cd`; the C04 receipt bridge as `67cc2cf`;
@@ -427,10 +426,72 @@ The loopback preview now serves that verified report only in session 18321 at
 Docker image IDs were inspected read-only for future reuse; no image was built,
 pulled, run or removed. See `existing-worker-inventory.json` in the bridge checks.
 
-
 The first bridge driver's two legacy suites both finished (1,343 passes, 21 skips),
 but its coverage/source snapshot is superseded because safe doctor development
 continued during it. `source-stability.json` records the drift. The final combined
 validation is separate under `reports/toolkit-v2/c03/doctor-validation`; never
 substitute the earlier coverage for the final source. No source changes are
 planned during the replacement run.
+
+### Selection-bound receipt verification
+
+The doctor is committed as `56ff281`. The subsequent bridge correction `44da49f`
+stores the existing `RouteDecision` before the fixed coordinator dispatch and
+binds its immutable snapshot to the receipt. Verification now resolves that
+selection, the receipt, C02 records and upstream artifact hashes. Nineteen
+standalone tests pass, including rejection of a changed selection. A fresh actual
+upstream fake-harness run is preserved in
+`reports/toolkit-v2/receipt-bound-showcase`; its four records verify with the
+current bridge. Prior reports retain their original source and weaker evidence
+format. None of these results establishes individual agent measurements.
+
+Final core validation uses the existing Framework Python 3.13 and is recorded in
+`reports/toolkit-v2/c03/doctor-validation`. Its ordinary suite passed 1,355 tests
+with 21 skips. Core source/tests stayed fixed; only the two standalone bridge
+files changed during that driver and received the separate final checks above.
+Read the driver's completed results before asserting coverage or quality PASS.
+Do not describe this as whole-tree source stability. The source bindings and
+verification scope are in `selection-review.json` and
+`selection-source-hashes.json` under the receipt-bridge validation directory.
+
+The current loopback preview serves only `receipt-bound-showcase` in tool session
+43386 at `http://127.0.0.1:8765/`. No package installation, image/container change,
+model request, credential access or publication was needed for this correction.
+The Waza asset review records its release-tag source separately from the reviewed
+branch source; no Waza binary has run. Original-checkout edits remain untouched.
+
+Next open `src/aeep_toolkit/installation.py`, `src/aeep/component_setup.py` and
+the pinned upstream `agent_skill_eval/harnesses/__init__.py`. Reuse the existing
+installation journal and assessment authority. The existing MCP installer also
+registers a connection, so it cannot be applied unchanged to an evaluator-only
+package. The upstream `HARNESSES`/`get_harness` seam is source-inspected; a general
+adapter must bind each scheduled trial to its reviewed worker and receipt before
+it may claim isolation. Preserve upstream scheduling and grading rather than
+adding a replacement runner. No new architecture decision is pending.
+
+### Completed correction validation
+
+All eleven commands in `c03/doctor-validation/checks.json` finished successfully.
+Ordinary and branch-coverage suites each passed 1,355 tests with 21 skips and the
+existing Starlette dependency warning. Compilation, schema generation checks,
+both branch-coverage gates, Ruff, assessment-policy checks and mypy passed. Core
+coverage totals and the exact scope are in `coverage-summary.json`; standalone
+bridge coverage is recorded separately. This does not change the skipped live,
+platform or release gates. The first superseded driver remains preserved.
+
+The final core source is `56ff281`; final standalone bridge source is `44da49f`.
+The core driver's source-stability record lists only the two bridge files changed
+while it ran; its core source/tests did not change. Current bridge/fixture hashes
+match `selection-source-hashes.json`, nineteen bridge checks pass and the latest
+saved upstream run verifies. No validation process remains running. The loopback
+static preview remains available; it performs no background implementation.
+
+C00/C01/C02 retain their scoped PASS. C03/C04 remain IN_PROGRESS and C05-C13
+remain open. The next action above is safe implementation work, not a request for
+another steering prompt. Retain the approved private runtime and existing worker
+assets; do not reinstall them merely because the chat context changed.
+
+Documentation checks passed on the completed handoff: 62 Markdown files, zero
+lint issues and zero link errors (66 configured exclusions). See
+`c03/doctor-validation/docs-completed.log`. No documentation discrepancy remains
+from this correction; the unfinished product and evidence gates above remain open.

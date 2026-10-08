@@ -3937,3 +3937,18 @@ so a named pipe cannot hang inventory; normal file validation is preserved.
 The first bridge coverage run is superseded after this source change. Combined
 final checks live in `reports/toolkit-v2/c03/doctor-validation`. Historical host
 and live experiment bindings remain unchanged and are not requalified here.
+
+
+The completed correction has source commits `56ff281` (doctor/shared reader) and
+`44da49f` (selection-bound receipt bridge). Final ordinary and coverage suites each
+passed 1,355 tests with 21 skips; both required branch gates and all eleven
+recorded verification commands passed. Nineteen standalone bridge checks and the
+fresh actual upstream fake-harness run also passed. The current report is
+[receipt-bound-showcase](../toolkit-v2/receipt-bound-showcase/index.html).
+
+Core source stayed fixed during final validation. Its source-change record lists
+two standalone bridge files, which have separate final hashes and checks in
+`c04/receipt-bridge-validation/selection-review.json`; do not claim whole-tree
+stability. The earlier driver's coverage remains superseded. C03/C04 acceptance,
+general managed dispatch, full installer/comparison work and live/release gates
+remain open. No historical evidence or original-checkout user edits were changed.

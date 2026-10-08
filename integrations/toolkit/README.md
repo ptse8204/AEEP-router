@@ -118,7 +118,6 @@ development installation, remove only the runtime and report directories you
 created after confirming their ownership. There are no persistent services,
 global configuration edits or model credentials in this stack.
 
-
 Earlier receipt showcases retain the weaker pre-selection-binding format and the
 source revision that verified it. They remain historical synthetic artifacts.
 The current verifier requires a stored matching selection decision; use the

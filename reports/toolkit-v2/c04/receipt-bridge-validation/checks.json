@@ -1,0 +1,117 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.32,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.89,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 622.67,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 883.4,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.29,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/tmp/aeep-toolkit-receipt-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 1.7,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/tmp/aeep-toolkit-receipt-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/tmp/aeep-toolkit-receipt-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "returncode": 0,
+    "seconds": 0.03,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.17,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/09.log"
+  }
+]

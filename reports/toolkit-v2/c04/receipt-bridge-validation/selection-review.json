@@ -1,0 +1,61 @@
+{
+  "scope": "Final C03 project doctor and C04 fixed upstream receipt connection; not complete C03/C04 acceptance",
+  "source_commit": "44da49f32c3ff953957c0491440a77e54551ecba",
+  "core_source_commit": "56ff281",
+  "core_validation_directory": "reports/toolkit-v2/c03/doctor-validation",
+  "core_validation_status": "PASS: all 11 recorded commands completed successfully; ordinary and coverage suites each 1355 passed, 21 skipped, one existing Starlette warning.",
+  "standalone_tests": {
+    "passed": 19,
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/selection-tests.log",
+    "coverage_scope": "Standalone integration unit tests only; actual upstream execution not instrumented. Per-file result in selection-coverage.log; total includes tests."
+  },
+  "upstream": {
+    "name": "agent-skill-eval",
+    "version": "0.7.0",
+    "source": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+    "runtime": "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+    "report": "reports/toolkit-v2/receipt-bound-showcase",
+    "checked_synthetic_trials": 4,
+    "coordinator_receipts": 1,
+    "selection_decisions": 1,
+    "model_measurements": false,
+    "live_benefit": "NOT_ASSESSED"
+  },
+  "verification": {
+    "log": "reports/toolkit-v2/c04/receipt-bridge-validation/selection-verify.log",
+    "passed": true,
+    "read_only_snapshot_test": true
+  },
+  "core_driver_source_drift": {
+    "changed": [
+      "integrations/toolkit/receipts.py",
+      "integrations/toolkit/test_receipts.py"
+    ],
+    "interpretation": "Core src/tests/scripts/pyproject unchanged; bridge changed separately and has final independent tests and actual upstream execution. Do not claim whole-tree stability."
+  },
+  "new_installations": false,
+  "docker_changes": false,
+  "paid_or_live_calls": false,
+  "credential_access": false,
+  "remaining": [
+    "General reviewed-plan EvaluatorAdapter and per-trial controlled workers",
+    "Installed-package inventory and reviewed setup/rollback bridge",
+    "Arbitrary candidate and three-family comparison journey",
+    "C05 comparison analysis",
+    "Optional external integrations",
+    "Live, usability and release gates"
+  ],
+  "historical_records": "review.json and final-bridge-source-hashes.json precede selection binding. Their running-validation and source-stability statements are historical; the first core driver was superseded after doctor/core changes, as its source-stability.json records.",
+  "core_coverage_percent": 81.51924940533874,
+  "additional_checks": [
+    "Current standalone source compiles; Ruff passes.",
+    "Current loopback response matches receipt-bound-showcase/index.html byte-for-byte."
+  ],
+  "documentation_checks": {
+    "passed": true,
+    "markdown_files": 62,
+    "link_errors": 0,
+    "excluded_links": 66,
+    "log": "reports/toolkit-v2/c03/doctor-validation/docs-completed.log"
+  }
+}
