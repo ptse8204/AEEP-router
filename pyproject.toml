@@ -48,12 +48,14 @@ dev = [
 
 [project.scripts]
 aeep = "aeep.cli:app"
+aeep-toolkit = "aeep_toolkit.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 aeep = ["py.typed"]
+aeep_toolkit = ["catalog.json"]
 
 [tool.setuptools.data-files]
 "share/aeep/examples" = ["examples/video-recommendation.json", "examples/deepseek_connection.py"]

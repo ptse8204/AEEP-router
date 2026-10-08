@@ -14,7 +14,7 @@ checkpoint_status:
   C00: PASS
   C01: PASS
   C02: PASS
-  C03: TODO
+  C03: IN_PROGRESS
   C04: TODO
   C05: TODO
   C06: TODO
@@ -174,3 +174,10 @@ source findings above, but its implementation has not begun. Host conformance,
 live value, human usability and release remain TODO for V2. No work runs in the
 background. Use `git status --short` and the source-hash record before continuing;
 do not repeat the full C00 audit or completed checks unless relevant source changes.
+
+## Continuation started October 8
+
+Operator requests continuous implementation until genuine intervention is needed
+and confirms local CLI plus HTML/Markdown reports first (D16). C03 implementation
+has started under D17. Prior completed evidence remains source-bound to its
+recorded commits; new changes require new checks before checkpoint PASS.

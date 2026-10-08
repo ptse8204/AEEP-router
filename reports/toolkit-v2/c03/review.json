@@ -1,0 +1,25 @@
+{
+  "authority": "User continuation request and standing routine offline test-definition delegation",
+  "scope": "C03 pure preview, explicitly supplied metadata and source-reviewed blocked catalog; no package manager, host configuration mutation or candidate execution",
+  "files": {
+    "src/aeep_toolkit/installation.py": "c51d702df0e70e57d1456e9f63bd03768756a7d3fef89882e18eca4f174bfbdd",
+    "src/aeep_toolkit/cli.py": "c596f5aae1fcb47c7bb38190de418ae0d17b99b28751a739f7240f3b166cd248",
+    "src/aeep_toolkit/__main__.py": "bd045ddd5242d002f692dac452be9afba38deef5cde541a5fc074bfef5987b91",
+    "src/aeep_toolkit/catalog.json": "45226d47b1b57d2e7c478d18dee09e9f0ae8b4afe865dd8438ea54dc1fa4c472",
+    "tests/test_toolkit_installation.py": "756fd1ff8e27e5452f52489fd7fd56148dbe1423f0cc014477b184adf0650e21",
+    "tests/fixtures/toolkit/preview.json": "24637fceea18301c4a10575ce35205a1782da6824dcd04b867758bb5f113f469",
+    "scripts/generate_schemas.py": "10187bcf8ccc3fe4ab303b33d0f8348484b4164f4782c444620d4f7f3ef6a9b4",
+    "pyproject.toml": "c5a47cdb51d1449408d2e87a3956ebbb7eecdb1328f6ef791decf2108d9eae25"
+  },
+  "focused_result": "47 passed; Ruff/mypy passed",
+  "initial_development_findings": [
+    "Synthetic child-process import check initially lacked PYTHONPATH: 1 failed, 45 passed; corrected explicit source path.",
+    "Catalog import initially expected revision on ARD record; now preserves adopted_revision instead of assuming observed HEAD."
+  ],
+  "remaining": [
+    "Full checks",
+    "Existing installer bridge and authenticated installed inventory are not connected; C03 acceptance remains IN_PROGRESS.",
+    "C04 architecture choice requested: extract shared execution/evidence services or retain temporary legacy Router backend."
+  ],
+  "free_bytes_before_builds": 113983623168
+}

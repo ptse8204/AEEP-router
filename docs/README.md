@@ -109,3 +109,5 @@ release promises. Adopted ADRs and historical reports keep their original bytes.
 Follow the [V2 checkpoint state](aeep-toolkit/STATE.md) for the evaluation-focused
 rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
 These development records do not establish live benefit or release readiness.
+
+- [Toolkit installation preview](aeep-toolkit/PREVIEW.md): inspect selected dependencies and blockers without installation.

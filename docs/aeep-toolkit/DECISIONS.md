@@ -68,3 +68,25 @@ packages under `src`; no distribution split or new dependency is needed. Test
 minimal imports in a fresh process and include this namespace in branch coverage.
 Rollback removes the new namespace and its schema exports without rewriting any
 legacy record.
+
+### D16: 2026-10-08, local CLI delivery confirmed by operator
+
+Accepted by the operator in this continuation: local Python CLI with static
+HTML/Markdown reports first; a browser interface may follow. Keep the small core
+independent of deployment UI, with existing receipt/accounting storage behind
+adapters. No hosted database, web service or cloud deployment is needed for the
+first product. Controlled comparative execution still needs separately reviewed
+workers. This decision adds no installation, credential, model or release authority.
+
+### D17: 2026-10-08, pure preview before installer integration
+
+Accepted C03 implementation scope. Existing `component_setup.preview` requires a
+Router/store, and its package installer does not lock transitive artifacts. Reuse
+its existing operator review and recovery path later; do not call it from a dry
+run. Add a pure dependency/permission preview using C02 records, installed
+Pydantic and the existing canonical JSON digest convention, plus a small argparse entry point. It consumes explicit metadata,
+never imports extension code, invokes package managers or opens host configuration.
+A source pin without an artifact/dependency review stays blocked. Three profiles
+filter available roles; Full does not select anything automatically. Actual apply
+remains unavailable until exact effects can pass the existing installer authority
+checks. Tests cover dependency closure, policy conflicts and zero side effects.

@@ -1,0 +1,65 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "extension_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Extension Id",
+      "type": "string"
+    },
+    "installed": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Installed"
+    },
+    "enabled": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Enabled"
+    },
+    "manifest_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Sha256"
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Ref"
+    }
+  },
+  "required": [
+    "extension_id"
+  ],
+  "title": "InstalledObservation",
+  "type": "object"
+}

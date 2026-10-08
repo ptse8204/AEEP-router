@@ -1,0 +1,113 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "host": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Host",
+      "type": "string"
+    },
+    "platform": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Platform",
+      "type": "string"
+    },
+    "allowed_licenses": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Licenses",
+      "type": "array"
+    },
+    "allowed_data_rights": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Data Rights",
+      "type": "array"
+    },
+    "allowed_network_destinations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Network Destinations",
+      "type": "array"
+    },
+    "allowed_filesystem_scopes": {
+      "default": [
+        "none"
+      ],
+      "items": {
+        "enum": [
+          "none",
+          "workspace",
+          "user",
+          "system"
+        ],
+        "type": "string"
+      },
+      "title": "Allowed Filesystem Scopes",
+      "type": "array"
+    },
+    "allowed_authentication": {
+      "default": [
+        "none"
+      ],
+      "items": {
+        "enum": [
+          "none",
+          "host_owned",
+          "operator_setup"
+        ],
+        "type": "string"
+      },
+      "title": "Allowed Authentication",
+      "type": "array"
+    },
+    "allowed_financial_exposure": {
+      "default": [
+        "none"
+      ],
+      "items": {
+        "enum": [
+          "none",
+          "subscription_unpriced",
+          "metered"
+        ],
+        "type": "string"
+      },
+      "title": "Allowed Financial Exposure",
+      "type": "array"
+    },
+    "free_disk_bytes": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Free Disk Bytes"
+    },
+    "reviewed_dependency_manifests": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Reviewed Dependency Manifests",
+      "type": "array"
+    }
+  },
+  "required": [
+    "host",
+    "platform"
+  ],
+  "title": "PreviewPolicy",
+  "type": "object"
+}

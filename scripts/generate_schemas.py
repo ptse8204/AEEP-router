@@ -177,6 +177,7 @@ from aeep.tasks import TaskActivation, TaskReconciliation
 from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
+from aeep_toolkit.installation import InstallationPreview, InstalledObservation, PreviewPolicy
 from aeep_toolkit.models import (
     AdapterCapabilities,
     ComparisonReport,
@@ -191,6 +192,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-installation-preview.schema.json": InstallationPreview,
+    "toolkit-preview-policy.schema.json": PreviewPolicy,
+    "toolkit-installed-observation.schema.json": InstalledObservation,
     "toolkit-adapter.schema.json": AdapterCapabilities,
     "toolkit-comparison.schema.json": ComparisonReport,
     "toolkit-developer.schema.json": DeveloperIdentity,

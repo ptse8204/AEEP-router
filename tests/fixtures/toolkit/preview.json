@@ -1,0 +1,118 @@
+{
+  "schema_version": "aeep.toolkit.installation-preview.v1",
+  "profile": "essentials",
+  "selected": [
+    "engine"
+  ],
+  "items": [
+    {
+      "manifest": {
+        "schema_version": "aeep.toolkit.extension.v1",
+        "extension_id": "helper",
+        "purpose": "Synthetic offline fixture",
+        "role": "support",
+        "source": {
+          "repository": "https://example.org/fixture",
+          "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "license_expression": "MIT",
+          "data_rights": "fixture-only"
+        },
+        "hosts": [
+          "codex"
+        ],
+        "platforms": [
+          "darwin-arm64"
+        ],
+        "dependencies": [],
+        "permissions": {
+          "network_destinations": [],
+          "filesystem_scope": "none",
+          "authentication": "none",
+          "financial_exposure": "none"
+        },
+        "disk_bytes": 10,
+        "memory_bytes": 20,
+        "install_effects": [
+          "Fixture only; no executable installer"
+        ],
+        "rollback": "No change has been applied",
+        "status": "experimental",
+        "qualification_ref": null,
+        "blockers": []
+      },
+      "manifest_sha256": "795c733949feb297147687a65550252fd76de648815df9f15837da9e1e327970",
+      "selection": "dependency",
+      "observation": {
+        "extension_id": "helper",
+        "installed": null,
+        "enabled": null,
+        "manifest_sha256": null,
+        "source_ref": null
+      },
+      "blockers": []
+    },
+    {
+      "manifest": {
+        "schema_version": "aeep.toolkit.extension.v1",
+        "extension_id": "engine",
+        "purpose": "Synthetic offline fixture",
+        "role": "evaluator",
+        "source": {
+          "repository": "https://example.org/fixture",
+          "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "license_expression": "MIT",
+          "data_rights": "fixture-only"
+        },
+        "hosts": [
+          "codex"
+        ],
+        "platforms": [
+          "darwin-arm64"
+        ],
+        "dependencies": [
+          {
+            "extension_id": "helper",
+            "manifest_sha256": "795c733949feb297147687a65550252fd76de648815df9f15837da9e1e327970"
+          }
+        ],
+        "permissions": {
+          "network_destinations": [],
+          "filesystem_scope": "none",
+          "authentication": "none",
+          "financial_exposure": "none"
+        },
+        "disk_bytes": 10,
+        "memory_bytes": 20,
+        "install_effects": [
+          "Fixture only; no executable installer"
+        ],
+        "rollback": "No change has been applied",
+        "status": "experimental",
+        "qualification_ref": null,
+        "blockers": []
+      },
+      "manifest_sha256": "76671087515ada6e909f974a023ffdaab1387087ddbd7f08c905576bd1d84482",
+      "selection": "direct",
+      "observation": {
+        "extension_id": "engine",
+        "installed": null,
+        "enabled": null,
+        "manifest_sha256": null,
+        "source_ref": null
+      },
+      "blockers": []
+    }
+  ],
+  "blockers": [],
+  "known_disk_bytes": 20,
+  "disk_complete": true,
+  "status": "ready_for_review",
+  "execution_authorized": false,
+  "limitations": [
+    "Metadata and supplied observations are declarations, not authenticated installation or conformance evidence.",
+    "Memory figures are per component; simultaneous runtime consumption is unmeasured.",
+    "This preview performs no installation and cannot authorize execution or spending."
+  ]
+}
