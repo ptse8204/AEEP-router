@@ -22,8 +22,8 @@ repository under your user home for the synthetic home-read-denial probe; choose
 a runtime directory that does not already exist.
 
 ```bash
-python3 integrations/toolkit/stack.py plan
-python3 integrations/toolkit/stack.py setup --runtime /tmp/aeep-toolkit-runtime
+PYTHONPATH=src python3 -B integrations/toolkit/stack.py plan
+PYTHONPATH=src python3 integrations/toolkit/stack.py setup --runtime /tmp/aeep-toolkit-runtime
 PYTHONPATH=src python3 integrations/toolkit/stack.py demo --runtime /tmp/aeep-toolkit-runtime --output /tmp/aeep-toolkit-report
 ```
 
@@ -75,7 +75,8 @@ does not establish the separate-container boundary required for real comparisons
 | `fixtures/` | Synthetic skill and two cases; not real benchmark evidence |
 | `report.html` | Static local showcase template; no remote fonts or scripts |
 | `receipts.py` | Existing executor/store bridge and C02 fixture normalization |
-| `test_stack.py`, `test_receipts.py` | Failure, provenance, exposure, output and read-only verification checks |
+| `runtime.py` | Read-only package metadata and pinned evaluator source inspection |
+| `test_stack.py`, `test_receipts.py`, `test_runtime.py` | Failure, provenance, exposure, output and read-only verification checks |
 
 The fixture batch now uses the existing `CommandExecutor`, execution journal,
 `ExecutionReceipt`, `ReceiptStore` and `AssessmentRepository`. No Router instance
@@ -122,3 +123,25 @@ Earlier receipt showcases retain the weaker pre-selection-binding format and the
 source revision that verified it. They remain historical synthetic artifacts.
 The current verifier requires a stored matching selection decision; use the
 recorded older bridge revision when reproducing an earlier validation result.
+
+## Inspect an existing runtime
+
+```bash
+PYTHONPATH=src python3 -B integrations/toolkit/stack.py inventory --runtime /tmp/aeep-toolkit-runtime
+PYTHONPATH=src python3 -B integrations/toolkit/stack.py plan --runtime /tmp/aeep-toolkit-runtime
+```
+
+These commands read package metadata and compare the sixteen evaluator source
+files with their reviewed hashes. They do not start the selected interpreter,
+import its packages, run startup hooks, connect to a service or change the runtime.
+The plan includes all 24 locked packages, their versions, hashes, declared licenses
+and dependency requirements. A mismatch returns a blocked result and exit code 2.
+The same inspection runs before the fixed fixture demo; each new report includes
+`runtime-inventory.json`.
+
+Matching metadata does not verify dependency binaries or the Python interpreter.
+Those remain explicit unknowns, as do host compatibility and containment. Bootstrap
+pip is listed separately. Unexpected distributions and Python startup hooks block
+fixture dispatch; source drift, linked files and malformed metadata also fail
+closed. The general reviewed installer and production runtime verification remain
+unfinished. Inspection does not authorize installing or executing a new package.

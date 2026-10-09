@@ -495,3 +495,24 @@ Documentation checks passed on the completed handoff: 62 Markdown files, zero
 lint issues and zero link errors (66 configured exclusions). See
 `c03/doctor-validation/docs-completed.log`. No documentation discrepancy remains
 from this correction; the unfinished product and evidence gates above remain open.
+
+## Read-only installed-runtime inventory
+
+The next C03 increment replaces the development bridge's pre-sandbox interpreter
+probe with bounded filesystem inspection. `stack.py inventory --runtime` and
+`plan --runtime` report all 24 locked packages, declared versions/licenses,
+dependency requirements and the sixteen pinned evaluator source hashes. Package
+metadata is now hash-bound to the existing wheel lock. Source matches remain
+separate from unknown dependency/interpreter integrity and host conformance.
+Unexpected distributions, startup hooks, changed source and unsafe metadata block
+fixture dispatch. The shared metadata reader also rejects hard links.
+
+Thirty-one standalone tests and 63 focused core tests pass. Both actual inspection
+commands left the existing runtime's 7,105-entry snapshot unchanged. A fresh
+actual upstream fake-harness run and receipt verification passed at
+`reports/toolkit-v2/runtime-inventory-showcase`. Commands and observations are in
+`reports/toolkit-v2/c03/runtime-inventory`. No package/image installation, model
+request or credential access was needed. D25 records the finite test review.
+C03 remains IN_PROGRESS: general reviewed installation/rollback and other
+extension runtimes are still unfinished. Required full verification follows on
+fixed source; do not transfer the previous run's coverage to this increment.

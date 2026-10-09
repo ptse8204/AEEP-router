@@ -1,0 +1,33 @@
+{
+  "scope": "Actual approved private runtime; no installed interpreter or package was executed by inventory/plan",
+  "commands": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-B",
+        "integrations/toolkit/stack.py",
+        "inventory",
+        "--runtime",
+        "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild"
+      ],
+      "returncode": 0,
+      "output": "installed-runtime.json"
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-B",
+        "integrations/toolkit/stack.py",
+        "plan",
+        "--runtime",
+        "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild"
+      ],
+      "returncode": 0,
+      "output": "preview-with-runtime.json"
+    }
+  ],
+  "entries": 7105,
+  "before_sha256": "6857726c4bceb53007e2faa1fc7d22fd77794758bc082eb9bc38995e31971b59",
+  "after_sha256": "6857726c4bceb53007e2faa1fc7d22fd77794758bc082eb9bc38995e31971b59",
+  "unchanged": true
+}

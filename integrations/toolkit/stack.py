@@ -17,6 +17,8 @@ import tempfile
 import venv
 from pathlib import Path
 
+from aeep_toolkit.cli import read_json
+
 BASE = Path(__file__).resolve().parent
 
 
@@ -25,16 +27,21 @@ def digest(path: Path) -> str:
 
 
 def read(path: Path) -> dict:
-    return json.loads(path.read_text())
+    return read_json(path)
 
 
 def manifest() -> dict:
     data = read(BASE / "stack.json")
-    for name, expected in {data["lock_file"]: data["lock_sha256"], **data["fixtures"]}.items():
+    for name, expected in {data["lock_file"]: data["lock_sha256"], "packages.json": data["packages_sha256"], **data["fixtures"]}.items():
         if digest(BASE / name) != expected:
             raise ValueError("Stack inputs changed; review and regenerate the lock before execution")
     if data["fixture_source"]["artifact_sha256"] != data["fixtures"]["fixtures/format-json/SKILL.md"]:
         raise ValueError("Fixture provenance does not match the reviewed candidate")
+    packages = read(BASE / "packages.json")
+    expected_lock = {f"{item['name']}=={item['version']} --hash=sha256:{item['sha256']}" for item in packages}
+    lines = (BASE / data["lock_file"]).read_text().splitlines()
+    if set(lines) != expected_lock or len(lines) != len(packages):
+        raise ValueError("Package inventory does not match the complete wheel lock")
     return data
 
 
@@ -60,19 +67,11 @@ def command(argv: list[str], *, cwd: Path, env: dict | None = None, timeout: int
 
 
 def verify_runtime(runtime: Path, stack: dict) -> dict:
-    packages = json.loads((BASE / "packages.json").read_text())
-    expected = {item["name"]: item["version"] for item in packages}
-    script = """import importlib.metadata as m,hashlib,json,sys
-versions={name:m.version(name) for name in json.loads(sys.argv[1])}
-dist=m.distribution('agent-skill-eval')
-hashes={name:hashlib.sha256(dist.locate_file(name).read_bytes()).hexdigest()
-        for name in json.loads(sys.argv[2])}
-print(json.dumps({'versions':versions,'source_files':hashes,'python':sys.version}))
-"""
-    facts = json.loads(command([str(runtime / "bin/python"), "-I", "-B", "-c", script,
-                                json.dumps(expected), json.dumps(stack["evaluator"]["source_files"])], cwd=BASE))
-    if facts["versions"] != expected or facts["source_files"] != stack["evaluator"]["source_files"]:
-        raise ValueError("Installed dependencies or evaluator source do not match the stack lock")
+    from runtime import inspect_runtime
+
+    facts = inspect_runtime(runtime, stack, read(BASE / "packages.json"))
+    if facts["blockers"]:
+        raise ValueError("Installed runtime differs from reviewed metadata/source; inspect inventory before execution")
     return facts
 
 
@@ -185,7 +184,7 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
                 "container_conformance": False, "canonical_receipts_connected": (output / "coordinator-receipt.json").exists(),
                 "receipt_scope": "coordinator process only; no per-trial model accounting", "runs": rows,
                 "implementation_sha256": {name: digest(BASE / name) for name in
-                                          ("stack.py", "receipts.py", "stack.json", "report.html", "packages.json", stack["lock_file"])}}
+                                          ("stack.py", "receipts.py", "runtime.py", "stack.json", "report.html", "packages.json", stack["lock_file"])}}
     (output / "evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
     markdown = ["# AEEP development stack", "", "**Synthetic fixtures. Real model benefit: NOT ASSESSED.**", "",
                 "The pinned external evaluator ran both arms. AEEP independently checked each fixture output.", "",
@@ -217,6 +216,7 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
 def demo(runtime: Path, output: Path, stack: dict) -> None:
     facts = verify_runtime(runtime, stack)
     output.mkdir(parents=True, exist_ok=False)
+    (output / "runtime-inventory.json").write_text(json.dumps(facts, indent=2) + "\n")
     root = Path(tempfile.mkdtemp(prefix="aeep-stack-fixture-", dir="/tmp")).resolve()
     (output / "execution.json").write_text(json.dumps({"scratch": str(root), "status": "started"}) + "\n")
     try:
@@ -240,7 +240,7 @@ def demo(runtime: Path, output: Path, stack: dict) -> None:
         receipts.normalize(
             output, stack, facts, rows, read(BASE / "fixtures/format-json/evals/evals.json"),
             receipt_id, digest(root / "fixture.sb"),
-            hashlib.sha256((BASE / "stack.py").read_bytes() + (BASE / "receipts.py").read_bytes()).hexdigest(),
+            hashlib.sha256(b"".join((BASE / name).read_bytes() for name in ("stack.py", "receipts.py", "runtime.py"))).hexdigest(),
             {str(p.relative_to(output)): digest(p) for p in sorted((output / "upstream").rglob("*")) if p.is_file()},
         )
         receipts.verify(output)
@@ -257,7 +257,10 @@ def demo(runtime: Path, output: Path, stack: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="action", required=True)
-    sub.add_parser("plan", help="Print the complete development stack without effects")
+    plan = sub.add_parser("plan", help="Print the complete development stack without effects")
+    plan.add_argument("--runtime", type=Path, help="Include a read-only installed-runtime observation")
+    inventory = sub.add_parser("inventory", help="Read runtime package metadata and evaluator hashes without starting it")
+    inventory.add_argument("--runtime", type=Path, required=True)
     install = sub.add_parser("setup", help="Install the reviewed lock into a new private runtime")
     install.add_argument("--runtime", type=Path, required=True)
     run = sub.add_parser("demo", help="Run only the pinned synthetic suite and write a local report")
@@ -274,7 +277,20 @@ def main() -> None:
             return
         stack = manifest()
         if args.action == "plan":
-            print(json.dumps(stack, indent=2))
+            result = {**stack, "package_inventory": read(BASE / "packages.json")}
+            if args.runtime is not None:
+                from runtime import inspect_runtime
+                result["runtime_inventory"] = inspect_runtime(args.runtime.expanduser().resolve(), stack, result["package_inventory"])
+            print(json.dumps(result, indent=2))
+            if result.get("runtime_inventory", {}).get("blockers"):
+                raise SystemExit(2)
+            return
+        if args.action == "inventory":
+            from runtime import inspect_runtime
+            facts = inspect_runtime(args.runtime.expanduser().resolve(), stack, read(BASE / "packages.json"))
+            print(json.dumps(facts, indent=2))
+            if facts["blockers"]:
+                raise SystemExit(2)
             return
         require_host()
         runtime = args.runtime.expanduser().resolve()
@@ -283,8 +299,8 @@ def main() -> None:
         else:
             demo(runtime, args.output.expanduser().resolve(), stack)
     except (OSError, ValueError, KeyError) as error:
-        if args.action == "verify":
-            parser.exit(2, "Cannot verify recorded fixture evidence; metadata or provenance is invalid.\n")
+        if args.action in {"verify", "inventory", "plan"}:
+            parser.exit(2, "Cannot validate toolkit evidence or runtime metadata; check the selected files and source pins.\n")
         parser.exit(2, f"{error}\n")
 
 

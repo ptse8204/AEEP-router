@@ -202,3 +202,21 @@ that decision as well as the receipt and artifact hashes. A changed decision is
 rejected. This adds no Router instance, selection algorithm or execution authority.
 Earlier fixture reports remain source-bound historical records; they do not
 satisfy the stronger new verification merely by retaining the same schema names.
+
+### D25: 2026-10-08, inspect the selected runtime without starting it
+
+Reuse the toolkit's bounded metadata reader and Python's standard email parser
+for installed distribution metadata. The development bridge currently starts the
+selected interpreter before containment simply to read versions. Replace that
+probe with filesystem inspection of the pinned runtime, package metadata and the
+sixteen reviewed evaluator source files. Expose the same result through an
+`inventory` command. Bind package metadata to the existing hash lock; do not add
+another package manager, installer journal or execution authority.
+
+Metadata matches do not attest dependency code, the interpreter or containment.
+Report those limits and reject unexpected startup hooks, duplicate distributions,
+source drift, linked/special files and mismatched versions before fixture dispatch.
+The finite regression review covers zero process/network/configuration effects,
+malicious metadata, missing distributions and exact lock/manifest binding under
+the existing test-definition delegation. This does not authorize another package
+installation or qualify a real host. Existing runtime and evidence remain intact.

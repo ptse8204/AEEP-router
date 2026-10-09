@@ -68,3 +68,12 @@ as an empty observation; no directory or configuration is created.
 binds the sanitized view; it does not authenticate installed binaries or turn this
 view into an installation permission. The general package inventory and reviewed
 installer bridge remain unfinished.
+
+## Inspect the pinned development evaluator
+
+The [development stack](../../integrations/toolkit/README.md#inspect-an-existing-runtime)
+now supplies a read-only runtime inventory and includes it in `plan --runtime`.
+It reports the complete locked package list, observed metadata versions and exact
+evaluator source hashes. It does not execute the selected Python interpreter.
+Metadata matches do not establish dependency integrity or host conformance; the
+general extension installer remains unfinished.

@@ -84,6 +84,13 @@ class StackTests(unittest.TestCase):
         with patch.object(stack, "digest", return_value="wrong"), self.assertRaisesRegex(ValueError, "changed"):
             stack.manifest()
 
+    def test_package_inventory_is_bound_to_exact_lock(self):
+        original = stack.read
+        packages = original(stack.BASE / "packages.json")
+        packages[0]["version"] = "99.0.0"
+        with patch.object(stack, "read", side_effect=lambda path: packages if path.name == "packages.json" else original(path)), self.assertRaisesRegex(ValueError, "wheel lock"):
+            stack.manifest()
+
     def test_timeout_terminates_command(self):
         with self.assertRaisesRegex(ValueError, "timed out"):
             stack.command([sys.executable, "-c", "import time; time.sleep(10)"], cwd=self.root, timeout=0.1)

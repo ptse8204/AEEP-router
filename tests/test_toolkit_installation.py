@@ -238,3 +238,11 @@ def test_essentials_can_disclose_required_isolation_dependency():
     assert result.status == 'ready_for_review'
     assert [item.manifest.extension_id for item in result.items] == ['worker', 'engine']
     assert not result.execution_authorized
+
+
+def test_metadata_reader_rejects_hardlinked_input(tmp_path):
+    source = tmp_path / 'input.json'
+    source.write_text('{"synthetic":true}')
+    os.link(source, tmp_path / 'alias.json')
+    with pytest.raises(ValueError, match='hard links'):
+        read_json(source)

@@ -16,7 +16,7 @@ from .installation import PROFILES, InstalledObservation, PreviewPolicy, preview
 from .models import ExtensionRegistry
 
 
-def read_json(path: Path) -> Any:
+def read_bytes(path: Path) -> bytes:
     if path.is_symlink() or path.name.casefold() in {'auth.json', 'credentials.json'} or path.name.casefold().startswith('.env'):
         raise ValueError('credential files and metadata symlinks are excluded')
     resolved = path.resolve(strict=True)
@@ -27,12 +27,17 @@ def read_json(path: Path) -> Any:
         raise ValueError('Codex state aliases are excluded from toolkit metadata')
     fd = os.open(resolved, os.O_RDONLY | os.O_NONBLOCK | getattr(os, 'O_NOFOLLOW', 0))
     with os.fdopen(fd, 'rb') as handle:
-        if not stat.S_ISREG(os.fstat(handle.fileno()).st_mode):
-            raise ValueError('metadata must be a regular file')
+        info = os.fstat(handle.fileno())
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise ValueError('metadata must be a regular file without hard links')
         raw = handle.read(1024 * 1024 + 1)
     if len(raw) > 1024 * 1024:
         raise ValueError('metadata exceeds the 1 MiB limit')
-    return json.loads(raw)
+    return raw
+
+
+def read_json(path: Path) -> Any:
+    return json.loads(read_bytes(path))
 
 
 def doctor(host: str, project: Path) -> dict[str, Any]:

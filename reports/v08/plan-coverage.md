@@ -3952,3 +3952,12 @@ two standalone bridge files, which have separate final hashes and checks in
 stability. The earlier driver's coverage remains superseded. C03/C04 acceptance,
 general managed dispatch, full installer/comparison work and live/release gates
 remain open. No historical evidence or original-checkout user edits were changed.
+
+The next V2 increment adds read-only installed-runtime inventory: 24 locked
+package metadata records and sixteen pinned evaluator source files, without
+starting the selected interpreter. Its 31 standalone and 63 focused core tests
+pass; actual inventory/preview commands leave 7,105 runtime entries unchanged.
+A fresh synthetic upstream run is in
+[the inventory showcase](../toolkit-v2/runtime-inventory-showcase/index.html).
+Full regression verification remains pending for this source. General installer,
+worker-conformance and live/release gates are unchanged.
