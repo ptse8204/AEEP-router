@@ -1,0 +1,14 @@
+SIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements
+   --> integrations/toolkit/test_setup.py:106:9
+    |
+104 |               stack.setup(protected, self.selected)
+105 |           self.assertFalse(protected.parent.exists())
+106 | /         with patch.dict(os.environ, {"CODEX_HOME": str(self.root / "protected-state")}):
+107 | |             with self.assertRaisesRegex(ValueError, "outside Codex"):
+    | |_____________________________________________________________________^
+108 |                   stack.setup(self.root / "protected-state" / "runtime", self.selected)
+109 |           self.assertFalse((self.root / "protected-state").exists())
+    |
+help: Combine `with` statements
+
+Found 1 error.

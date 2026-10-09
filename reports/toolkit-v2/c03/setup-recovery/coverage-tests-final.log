@@ -1,0 +1,18 @@
+......................F..................
+======================================================================
+FAIL: test_concurrent_journal_edit_is_preserved (test_setup.SetupTests.test_concurrent_journal_edit_is_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/test_setup.py", line 103, in test_concurrent_journal_edit_is_preserved
+    install.assert_not_called()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 938, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'command' to not have been called. Called 1 times.
+Calls: [call(['/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/tmpiytrdrin/new-parent/runtime/bin/python', '-I', '-m', 'ensurepip', '--upgrade', '--default-pip'], cwd=PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/tmpiytrdrin/new-parent/runtime'), env={'PATH': '/bin:/usr/bin', 'HOME': '/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/tmpiytrdrin/new-parent/runtime', 'PYTHONNOUSERSITE': '1', 'PIP_CONFIG_FILE': '/dev/null', 'LC_ALL': 'en_US.UTF-8'})].
+
+----------------------------------------------------------------------
+Ran 41 tests in 1.125s
+
+FAILED (failures=1)
+Installed and verified 1 pinned packages in /private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/tmpb1_cf79f/new-parent/runtime

@@ -1,0 +1,13 @@
+{
+  "scope": "Read-only source inspection; modified installer was tested with doubles, not a new package installation",
+  "source_path": "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild/lib/python3.13/site-packages/pip/_internal/configuration.py",
+  "sha256": "5e4022052d21a73b0cf8b17442ee61bcf58efc1b3aefea1029160506e31b112b",
+  "observed_behavior": "_load_config_files returns before loading configurations when PIP_CONFIG_FILE is os.devnull, including isolated mode",
+  "fixture_runtime_preserved": true,
+  "new_package_or_image_installations": 0,
+  "source_lines": [
+    247,
+    253
+  ],
+  "observation_phase": "Before the subsequent actual setup replay"
+}

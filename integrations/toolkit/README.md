@@ -148,3 +148,23 @@ pip is listed separately. Unexpected distributions and Python startup hooks bloc
 fixture dispatch; source drift, linked files and malformed metadata also fail
 closed. The general reviewed installer and production runtime verification remain
 unfinished. Inspection does not authorize installing or executing a new package.
+
+## Interrupted development setup
+
+Setup checks free space before creating its target and writes
+`installation-state.json` before creating the environment. The record binds the
+lock, package metadata and destination, then records creating, bootstrapping, installing,
+installed or failed state. Interrupted setup leaves the last recorded phase;
+existing environments are never retried or overwritten automatically. Concurrent
+edits to the journal are preserved by the existing AEEP atomic writer.
+
+Pip receives a minimal environment, an explicit public index, disabled config
+and cache loading, a complete hash lock and an installation-report destination.
+Pip bootstrap and installation both receive that minimal environment and use
+Python isolated mode. Deterministic tests cover failure and concurrent edits.
+A fresh real setup installed all 24 expected wheel hashes, ran the four fixture
+records and passed receipt verification. Its 7,108-entry tree stayed unchanged
+after the demo; that temporary runtime was removed. The original runtime remains
+available. Evidence is in `reports/toolkit-v2/c03/setup-recovery` from the repo root.
+General reviewed apply, conflict-preserving uninstall and other platforms remain
+unfinished. Inspect failed state before any manual cleanup.

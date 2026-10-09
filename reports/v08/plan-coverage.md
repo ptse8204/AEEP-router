@@ -3990,3 +3990,17 @@ excludes from its skill hash. D27 tightens the fixed fixture bridge to an exact
 allowlist and byte capture; the original source and historical reports remain
 unchanged. Evidence and the unpublished issue draft are in
 `../toolkit-v2/c04/nested-payload-probe`. General candidate qualification is open.
+
+D28 improves development setup recovery using existing space/CAS helpers.
+Forty-one integration tests pass; installer failure, interrupt and journal-conflict
+cases use deterministic doubles. No new package installation was performed.
+The retained upstream runtime remains available. General reviewed apply/uninstall
+and live controlled-worker qualification remain open.
+
+The subsequent D19-scope setup replay passed against the same 24 locked wheels
+and then ran the actual upstream fixture with four verified records. The new
+runtime tree remained unchanged and only that temporary environment was removed.
+`../toolkit-v2/c03/setup-recovery/replay.json` records hashes, resources and cleanup.
+The original runtime/cache remain; no new model, credential or release authority
+was used. General reviewed apply/uninstall and controlled-worker integration
+remain open. An intermediate journal-conflict test failure was fixed and retained.

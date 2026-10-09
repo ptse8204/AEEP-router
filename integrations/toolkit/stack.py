@@ -99,18 +99,56 @@ def verify_runtime(runtime: Path, stack: dict) -> dict:
 
 
 def setup(runtime: Path, stack: dict) -> None:
-    if runtime.exists():
+    from aeep.component_setup import require_space
+    from aeep.connections import write_json
+    from aeep.errors import ConfigurationError
+
+    if runtime.exists() or runtime.is_symlink():
         raise ValueError("Choose a new runtime directory; existing environments are preserved")
-    runtime.parent.mkdir(parents=True, exist_ok=True)
-    if shutil.disk_usage(runtime.parent).free < 50 * 1024**3 + 500 * 1024**2:
-        raise ValueError("Insufficient space on the runtime filesystem")
-    venv.EnvBuilder(with_pip=True).create(runtime)
-    log = command([str(runtime / "bin/python"), "-m", "pip", "--isolated", "install",
-                   "--only-binary=:all:", "--no-deps", "--require-hashes", "-r",
-                   str(BASE / stack["lock_file"])], cwd=BASE, timeout=300)
-    (runtime / "installation.log").write_text(log)
-    facts = verify_runtime(runtime, stack)
-    (runtime / "aeep-stack.json").write_text(json.dumps(facts, indent=2) + "\n")
+    protected = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).resolve()
+    if (runtime.resolve() != runtime or runtime.is_relative_to(protected)
+            or any(part.casefold() == ".codex" for part in runtime.parts)):
+        raise ValueError("Choose a canonical runtime path outside Codex state")
+    try:
+        require_space(runtime, 500 * 1024**2)
+    except ConfigurationError as error:
+        raise ValueError(str(error)) from error
+    runtime.mkdir(parents=True, exist_ok=False, mode=0o700)
+    journal = runtime / "installation-state.json"
+    state = {"schema": "aeep.development-installation.v1", "runtime": str(runtime),
+             "lock_sha256": stack["lock_sha256"], "packages_sha256": stack["packages_sha256"],
+             "status": "creating", "automatic_retry": False}
+
+    def record(status: str, before: bytes | None) -> bytes:
+        state["status"] = status
+        try:
+            write_json(journal, state, before=before)
+        except ConfigurationError as error:
+            raise ValueError("Installation journal changed or is unsafe; preserve it for inspection") from error
+        return (json.dumps(state, indent=2) + "\n").encode()
+
+    written = record("creating", None)
+    env = {"PATH": os.defpath, "HOME": str(runtime), "PYTHONNOUSERSITE": "1",
+           "PIP_CONFIG_FILE": os.devnull, "LC_ALL": "en_US.UTF-8"}
+    try:
+        venv.EnvBuilder(with_pip=False).create(runtime)
+        written = record("bootstrapping", written)
+        bootstrap = command([str(runtime / "bin/python"), "-I", "-m", "ensurepip", "--upgrade", "--default-pip"],
+                            cwd=runtime, env=env)
+        (runtime / "bootstrap.log").write_text(bootstrap)
+        written = record("installing", written)
+        log = command([str(runtime / "bin/python"), "-I", "-B", "-m", "pip", "--isolated",
+                       "--disable-pip-version-check", "install", "--index-url", "https://pypi.org/simple",
+                       "--no-cache-dir", "--only-binary=:all:", "--no-deps", "--require-hashes",
+                       "--report", str(runtime / "pip-installation.json"), "-r",
+                       str(BASE / stack["lock_file"])], cwd=BASE, env=env, timeout=300)
+        (runtime / "installation.log").write_text(log)
+        facts = verify_runtime(runtime, stack)
+        (runtime / "aeep-stack.json").write_text(json.dumps(facts, indent=2) + "\n")
+    except BaseException:
+        record("failed", written)
+        raise
+    record("installed", written)
     print(f"Installed and verified {len(facts['versions'])} pinned packages in {runtime}")
 
 

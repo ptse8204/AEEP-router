@@ -592,3 +592,35 @@ run with four normalized records and receipt verification. The current source
 report is `reports/toolkit-v2/bound-payload-showcase`. The C05 ordinary full suite
 passed 1,383 tests with 21 skips; branch coverage is still running. Preserve the
 separate source scopes when recording the final result.
+
+## C03 development setup recovery
+
+D28 reuses the existing disk-space and atomic JSON helpers to record private
+setup state before package installation. Existing/failed runtimes cannot be
+automatically overwritten or retried; concurrent journal edits are preserved.
+Pip configuration, cache and inherited provider environment are excluded.
+Forty-one standalone checks pass using installer doubles for setup; no new
+package installation is claimed. A fresh real upstream fixture run on the
+retained runtime is recorded separately. General extension apply/uninstall and
+other-platform installation remain unfinished. The full core verification still
+uses unchanged C05 source; these further integration changes are checked separately.
+
+### Completed setup replay under existing D19 authority
+
+The subsequent replay performed the same approved 24-wheel private installation
+on final setup code. All installed archive hashes matched the lock; the fresh
+runtime ran the actual upstream fixture and passed four-record receipt
+verification. Its 7,108-entry snapshot was unchanged after execution. The test
+runtime `/private/tmp/aeep-toolkit-setup-replay-fza0ph0f/runtime` and empty parent
+were removed after that comparison; the original runtime and wheel cache remain.
+The target filesystem retained more than 50 GiB free. Exact results, pip report,
+journal and file snapshot are in `c03/setup-recovery/replay.json` and adjacent
+artifacts. This is bounded fresh-setup/manual-cleanup evidence, not a general
+conflict-preserving uninstall command. No model call, credential access, image
+pull, container launch or release occurred.
+
+The final integration tests passed 41 cases. An intermediate failure showed that
+a concurrent journal edit needed checking before pip bootstrap; the bootstrapping
+state transition now performs that CAS check first. Failed test/lint logs are
+retained beside the passing `coverage-tests-checked.log` and `ruff-checked.log`.
+The fresh source-bound report is `reports/toolkit-v2/setup-replayed-showcase`.

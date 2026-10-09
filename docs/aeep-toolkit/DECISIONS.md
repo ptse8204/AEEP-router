@@ -255,3 +255,23 @@ extra files/directories and special files, then stage only captured hash-checked
 bytes. This replaces the broad fixture-directory copy; it is not a general
 candidate installer or an upstream patch. The source directory and existing
 reports remain intact. Add finite negative tests and rerun the real fixed demo.
+
+### D28: 2026-10-08, preserve failed setup state with existing helpers
+
+The private development installer needs a record before effects and must check
+space before creating parent directories. Reuse `component_setup.require_space`
+and the existing compare-and-swap JSON writer. Keep standard venv/pip and the
+same approved 24-wheel lock; add no package manager or installation service.
+Record creating/bootstrapping/installing/installed/failed state, exact input hashes and target.
+An existing or interrupted runtime remains protected from automatic retry.
+Use an explicit public index, disabled pip configuration/cache/version checks and
+a minimal environment so installation does not inherit provider credentials or
+write the user's normal pip cache. The initial check used deterministic installer doubles for failures before and
+after effects; the subsequent real replay is recorded below.
+General extension policy, rollback and cross-platform qualification remain open.
+
+The subsequent setup replay reused D19 authority for the same 24 pinned wheels,
+private scope and finite fixture workload. No package, privilege, model, billing
+or credential scope was added. After hash verification and the fixture run, only
+the new unchanged temporary runtime was removed; the original runtime and wheel
+cache remain. The runtime-free unit tests are not the evidence for this replay.

@@ -1,0 +1,12 @@
+B023 Function definition does not bind loop variable `failure`
+  --> integrations/toolkit/test_setup.py:84:24
+   |
+82 | …     with self.subTest(failure=failure), patch.object(stack.venv, "EnvBuilder"), patch.object(stack, "command", return_value="synthet…
+83 | …         def fail_at_stage(argv, **_):
+84 | …             if failure == ("bootstrap" if "ensurepip" in argv else "install"):
+   |                  ^^^^^^^
+85 | …                 raise ValueError("synthetic")
+86 | …             return "synthetic"
+   |
+
+Found 1 error.
