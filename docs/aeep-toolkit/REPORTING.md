@@ -63,9 +63,9 @@ the same future task mix and success rates, excludes evaluation overhead, and
 is not a confidence-supported production forecast. Source records marked synthetic
 remain synthetic throughout these calculations.
 
-Confidence intervals and overall value verdicts still require the existing
-reviewed analysis. Evaluation overhead remains separate in that path. This
-increment does not complete C05's comparison-analysis acceptance checks.
+Confidence intervals and overall value verdicts come from the existing reviewed
+analysis, which the managed backend now includes and verifies as described below.
+Evaluation overhead remains separate from task-run costs.
 
 The controlled development fixture now supplies a stronger, separate path:
 `integrations/toolkit/verify_controlled.py` resolves each trial's receipt, redacted
@@ -73,8 +73,8 @@ selection decision, durable execution events, independently graded output and
 operation accounting. It checks all expected positions from the plan frozen before
 dispatch and recomputes existing AEEP `fit_report`. Its generated HTML/Markdown
 reports remain explicitly synthetic. The three-case user journey returns insufficient
-evidence with the existing qualification thresholds unchanged. General live
-campaign binding and complete inferential reporting remain open.
+evidence with the existing qualification thresholds unchanged. The managed backend supplies canonical inferential reporting; current live
+worker qualification and the V2 comparative study remain open.
 
 A stopped controlled fixture also produces a partial report when its receipt
 store remains writable. It lists missing expected positions and unresolved
@@ -106,3 +106,7 @@ intervals, guardrails, measurement coverage, costs and trial-position coverage i
 HTML/Markdown. It reproduces retained statistics and costs before exporting.
 Missing measurements and incomplete cost lineage remain unknown; its recorded
 service verdict is separate from the descriptive summary and release readiness.
+
+For local sharing, use the [minimized export preview](README.md#prepare-a-local-sharing-preview).
+It publishes nothing and omits private identifiers; aggregates and digests can
+still identify a study. It does not elevate a supplied record's trust tier.

@@ -1,0 +1,30 @@
+{
+  "schema_version": "aeep.toolkit.evidence.v1",
+  "candidate": {
+    "repository": "https://github.com/DietrichGebert/ponytail",
+    "revision": "1d95ff7d39de12d87014ea40d4e22201bddc501b",
+    "artifact_sha256": "28db736a30751c76ae4f8649e5f810ae086213f7e15ad601e692b6f87188117e",
+    "license_expression": "MIT",
+    "data_rights": "Source-declared MIT for pinned repository code; no task dataset redistribution claim."
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "aeep.benchmark-runner.codex",
+    "implementation_sha256": "59b1fb9ce16aa333f94eb3445e64536175a6492263f0cc866b9fb42561fc9c0c",
+    "hosts": [
+      "codex"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": true,
+    "telemetry": [
+      "tokens",
+      "agent_wall_seconds",
+      "verification_wall_seconds"
+    ],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "runs": []
+}

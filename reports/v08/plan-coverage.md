@@ -4161,3 +4161,19 @@ decision or demonstrated budget shortage.
 D48/D49 now integrate a local minimized sharing preview and correct stale
 catalog status. Targeted checks passed 62 tests; full verification follows.
 No authenticated developer identity, publication or live efficacy is claimed.
+
+V2 source `f3b7f50` is undergoing full checks; an earlier import-order interruption
+is retained separately. The read-only C07 audit found both selected historical
+Ponytail images available, the existing reviewed proxy stopped, and no applicable
+current-source conformance. These are concrete preparation gaps, not evidence
+that credentials, a new architecture or fresh routine budget approval are needed.
+See `../toolkit-v2/c07/worker-readiness/result.json`.
+
+V2 C04/C05 engineering gates now PASS on `f3b7f50`: both suites passed 1,532
+tests / 21 skips, 82% coverage, both branch gates, all driver/supplemental checks,
+13 Node tests and docs. Fresh six-worker upstream and two-worker zero-turn native
+checks passed with cleanup. No authenticated V2 comparison or release gate closes.
+C06's exact 33-wheel installation review remains pending, with a prepared driver;
+no runtime was installed. C12's local export and source-declared support preview
+are implemented. The pinned old candidate source was recovered without altering
+the installed newer skill. Current details are in `docs/aeep-toolkit/STATE.md`.

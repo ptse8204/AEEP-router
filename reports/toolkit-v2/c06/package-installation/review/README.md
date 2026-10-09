@@ -25,3 +25,20 @@ After checks, use the existing installer snapshot to verify the whole runtime is
 unchanged before removal. A changed tree must be preserved. Keep the sibling
 journal and exact command/results record. The previous artifact collection and
 agent-skill-eval runtime remain untouched.
+
+`run_review.py` is the prepared test driver. With no execution flag it checks
+only the pinned review and wheel hashes. Use the reviewed Framework Python:
+
+```bash
+PYTHONPATH=src /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -B \
+  reports/toolkit-v2/c06/package-installation/review/run_review.py
+```
+
+After the operator answers the pending installation review, the driver accepts
+`--execute-reviewed-digest` with the exact digest in `review.json`. This flag is
+not authorization by itself. It checks installed help, candidate inspection,
+metadata preview and all three report formats, then verifies that the installed
+scripted backend reports its checkout requirement. Removal uses the existing
+whole-tree conflict check. An interrupted or changed installation is preserved.
+The driver does not test the later sharing-preview feature because this reviewed
+wheel is deliberately still bound to source `5386064`.

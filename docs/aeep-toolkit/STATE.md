@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** C00-C03 retain recorded PASS. The actual agent-skill-eval scripted path now completes the candidate/preview/six-worker/verified-report journey. The managed fallback connects existing assessment execution and canonical analysis. D46-D47 correct explicit memory uncertainty and seeded analysis reproducibility; source `5386064` passed 1,527 ordinary tests with 21 skips, and the coverage suite also passed. The complete 33-wheel package installation review is prepared and pending operator response. Authenticated V2 trials, optional extension qualification and release gates remain open. Earlier stopping was unfinished engineering, not a pending architecture decision or demonstrated budget shortage.
+**Status as of 2026-10-09:** C00-C05 have recorded PASS at their source-review/software tiers. C04 is an engineering gate, not authenticated host conformance. The real upstream scripted journey and existing managed fallback are implemented. Source `f3b7f50` passed both 1,532-test suites with 21 skips, coverage and all required checks. C06's exact 33-wheel private installation review awaits the operator response; its driver is ready. Optional-pack and source-bound live-study preparation continue, while live efficacy, human usability and release remain open. Earlier stopping was unfinished engineering, not a pending architecture decision or demonstrated budget shortage.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,26 +9,26 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C04
+current_checkpoint: C06
 checkpoint_status:
   C00: PASS
   C01: PASS
   C02: PASS
   C03: PASS
-  C04: IN_PROGRESS
-  C05: IN_PROGRESS
+  C04: PASS
+  C05: PASS
   C06: IN_PROGRESS
-  C07: TODO
-  C08: TODO
-  C09: TODO
-  C10: TODO
+  C07: IN_PROGRESS
+  C08: IN_PROGRESS
+  C09: IN_PROGRESS
+  C10: IN_PROGRESS
   C11: TODO
-  C12: TODO
+  C12: IN_PROGRESS
   C13: TODO
-last_verified_commit: '538606417ea93be6e82c431011c4f209a68ceb81'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/analysis-reproduction/validation/checks.json'
-last_check_result: '1527 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks and docs passed. Sources unchanged; 12 scripted and four native zero-turn workers passed with cleanup.'
-next_action: 'Integrate reviewed D48 portable-summary and D49 catalog corrections with tests; preserve the pending exact installation review and prepare native study scope under existing authority.'
+last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
+last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
+next_action: 'Resolve the pending exact C06 private installation review, then use its prepared run_review.py driver without substituting newer wheels. Continue fresh canonical C07 definitions/conformance through existing delegated scope and accounting; preserve the retained engineering conclusion.'
 blocked_actions:
   - 'New 33-wheel private AEEP installation test awaits the exact operator review; independent safe work continues.'
 missing_permissions:
@@ -36,7 +36,7 @@ missing_permissions:
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
-  - 'C01 pins source and primary licenses; transitive distribution rights, installed compatibility and resources still need C03/C04 checks.'
+  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The general private package installation test remains a C06 gate.'
 ```
 
 ## Append-only checkpoint journal
@@ -1191,3 +1191,80 @@ reporting, preview and installer checks passed 62 tests. Full checks are next;
 D47 remains the last fully verified source. The catalog separates experimental
 scripted/managed integrations from unqualified options without inferring installed
 or enabled state. No publication, ownership verification or installation occurred.
+
+### Current D48-D49 verification and worker-readiness audit
+
+Source `f3b7f50` is frozen for full verification. A first run on `993c0f8` was
+interrupted after a repository import-order finding; its partial logs are retained
+in `c12/portable-integration/interrupted-import-order`, not counted as a pass.
+The corrected test import order is the only change in `f3b7f50`. Driver
+`/tmp/aeep-toolkit-d49-checks.py`, session 99899, writes replacement evidence in
+`c12/portable-integration/validation`. Eight supplemental checks and docs passed.
+
+The canonical read-only audit in `c07/worker-readiness` identifies reusable
+Ponytail 4.10.0 skill-only definitions and both available pinned Linux images.
+Their existing internal network has no attached container; the exact reviewed
+model proxy is stopped. No current-source conformance record matches either
+image. Restore/verify that existing lifecycle with accounted preparation before
+any live call. No missing credential or new architecture decision is inferred.
+The historical required-exposure qualification is not a V2 optional-access plan;
+fresh scope and holdouts remain engineering work under standing review authority.
+
+The exact installation question is still pending. The proposed wheel remains
+bound to `5386064`, not the later sharing-preview source. Preserve its digest and
+private artifact directory; approval for that review must not silently install a
+different wheel. No installer, credential access or live trial ran.
+
+The selected historical Ponytail skill now has a matching immutable upstream
+source and source-declared donation link: `c12/developer-source` binds v4.10.0
+to commit `1d95ff7d39de12d87014ea40d4e22201bddc501b`, verifies the skill hash
+and records package/license/funding metadata. No ownership or payment attestation
+is claimed. The installed host version is 5.1.0 and its old 4.10.0 cache path is
+absent; do not transfer historical evidence or silently replace worker contents.
+
+The missing 4.10.0 cache source has been recovered as an inert private capture
+from the immutable upstream commit, using the existing CandidatePayload helper.
+`c07/worker-readiness/candidate-capture.json` records its exact path, matching
+6,637-byte skill hash, accompanying license and capture-only elapsed/CPU costs.
+No candidate was installed or executed and no canonical subject was silently
+changed. The normal intake/scope review must bind the new location and retain
+those setup costs before future execution. The host's 5.1.0 installation is intact.
+
+The pending installation now has a prepared `run_review.py` driver. Its default
+read-only mode reverified all 33 wheel hashes and the unchanged review digest.
+No destination exists. An operator response is still required for its execution
+flag; it cannot be inferred from successful preview or elapsed waiting time.
+
+### C04/C05 engineering acceptance and D48-D49 verification complete
+
+The [acceptance audit](../../reports/toolkit-v2/c05/analysis-reproduction/acceptance.md)
+maps C04/C05 exit checks to actual upstream execution, native bounded probes,
+partial-failure evidence and analysis regressions. Both software gates are PASS.
+Authenticated conformance, live value, human comprehension and release remain open.
+
+Source `f3b7f50` passed ordinary pytest (1,532 passed, 21 skipped, 620.03 seconds)
+and coverage pytest (the same counts, 952.55 seconds), with 82% overall coverage.
+All 12 driver checks, both branch gates, eight supplemental proof/build checks,
+13 Node tests and docs passed. The existing Starlette/httpx warning remains.
+Source stability is unchanged. Session 99899 finished; no validation is active.
+Exact results and retained interruptions are under `c12/portable-integration`.
+
+Six fresh upstream scripted workers verified six receipts without constructing
+Router; two native zero-turn workers passed and cleaned up. No provider trial
+ran. A relocated replay wrapper initially resolved the wrong parent directory;
+its import failure occurred before worker dispatch and is retained separately.
+The corrected replay passed; it did not change production code.
+
+The local export command, explicit source/developer disclosure and catalog
+correction are delivered. Private and disclosed previews of the real pinned
+Ponytail source contain zero observations and remain NOT_ASSESSED. They are
+separate from the synthetic six-trial export. No result was published. C12's
+remaining product acceptance depends on C06; optional packs remain unqualified
+where their executable checks have not run.
+
+The exact C06 review remains pending with the original 33 wheel hashes intact
+and the destination absent. Its driver is ready; no approval is inferred. That
+review targets `5386064`, so its installed-CLI test cannot claim to verify the
+later sharing command. Worker execution continues to require reviewed checkout
+assets. Preserve the existing receipt databases, pending historical operations,
+old negative results, model proxy and all unrelated Docker/user resources.

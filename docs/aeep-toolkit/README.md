@@ -3,7 +3,7 @@
 **Plan date:** 2026-10-08  
 **Target:** `https://github.com/ptse8204/AEEP-router`  
 **Track:** evidence-first modularization, preserving the existing repository and historical evidence.  
-**Implementation status:** C00-C03 have recorded passes. The upstream scripted journey and existing managed fallback are implemented; remaining acceptance gates stay open. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
+**Implementation status:** C00-C05 have recorded passes at their source-review/software tiers. The upstream scripted journey and existing managed fallback are implemented; remaining acceptance gates stay open. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
 
 ## Mission (fixed unless the owner changes it)
 

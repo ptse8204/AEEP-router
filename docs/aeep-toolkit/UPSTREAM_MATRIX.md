@@ -254,3 +254,15 @@ selection is not a conformance PASS. The managed adapter is integrated and passe
 - Installed OpenTelemetry API 1.44.0 produced a non-recording span with no trace ID
   in a fresh default process (`c10/telemetry-audit`). This is not an exporter audit
   or evidence that all measurements are available.
+
+### Pinned candidate provenance and support follow-up
+
+Ponytail tag v4.10.0 resolves to `1d95ff7d39de12d87014ea40d4e22201bddc501b`.
+Its skill file hash matches the existing selected worker's
+`1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2`.
+The pinned package declares DietrichGebert as author and MIT licensing; its
+FUNDING.yml supplies GitHub Sponsors account DietrichGebert. Exact URLs, hashes
+and a validated source/developer assertion are in `c12/developer-source`. This
+is attributable repository metadata, not legal ownership or payment verification.
+The host currently has Ponytail 5.1.0; these pins and historical studies do not
+apply to that newer installed version. No candidate code was executed.

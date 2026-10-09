@@ -50,7 +50,7 @@ the target stack rather than completed features.
 |---|---|---|
 | User interface | Local Python CLI; Pydantic for validated inputs | AEEP connects candidate intake, preview, evaluation and reporting. |
 | Scripted evaluation | agent-skill-eval 0.7.0, source `59de161f657b82bfaf8f6abe83dfff38552deb21` | Connected upstream scheduler and graders dispatch fixed trials into separate AEEP workers. No model-value claim. |
-| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. Software verification on `40a8b7a` passed; subsequent analysis corrections are under verification. Authenticated V2 conformance remains open. |
+| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. The integrated source `f3b7f50` passed full software verification. Authenticated V2 conformance remains open. |
 | Actual agent | Codex first, using existing host integration | Preserve the normal tools in both arms. Host/model versions and settings must match. |
 | Execution boundary | Docker and existing AEEP managed-worker/assessment-runtime assets | Separate control and treatment workers protect grading inputs. Actual scripted upstream dispatch and cleanup are recorded; native command inspection is separate from live conformance. |
 | Review and accounting | Existing AEEP assessment definitions, finite allowances and receipts | Reuse current authority and recovery behavior; preserve historical records. |
@@ -59,9 +59,9 @@ the target stack rather than completed features.
 | Report | Local static HTML and Markdown | Explain results, uncertainty, applicability, permissions and developer attribution. |
 | Setup | Existing component setup/recovery plus pinned Python environments | Preview the selected dependency closure and configuration effects, then apply only the reviewed changes. |
 
-The engine adapter must demonstrate that the upstream runner can use the existing
-controlled boundary without pulling optional Router configuration into Essentials.
-That is a bounded integration question to test. It does not justify extracting
+The scripted adapter has demonstrated upstream dispatch through the existing
+controlled boundary without constructing Router. Managed-model conformance
+remains a separate gate. It does not justify extracting
 Router services in advance or inventing another evaluation framework. Keep the
 legacy runner as an explicitly recorded fallback; it does not automatically pass
 Essentials' independence requirement.
@@ -140,8 +140,8 @@ records coupling, not a justification for a new execution architecture.
 
 ## Next implementation proof
 
-Finish source-bound verification of the analysis repair and the reviewed private
-package installation/removal. Then bind the exact live study to the existing
+Complete the exact reviewed private package installation/removal after the
+pending operator response. Then bind the exact live study to the existing
 canonical grant and current authenticated worker conformance. Routine finite
 scope/budget amendments are already delegated; do not invent a new architecture
 or budget-approval blocker. Credentials, wider disclosure, cash and release retain
