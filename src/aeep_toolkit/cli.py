@@ -90,6 +90,9 @@ def main(argv: list[str] | None = None) -> int:
     report = sub.add_parser('report', help='Summarize normalized records without executing an evaluator')
     report.add_argument('--evidence', type=Path, required=True)
     report.add_argument('--format', choices=('json', 'markdown', 'html'), default='markdown')
+    report.add_argument('--accounting', type=Path, help='Digest-keyed receipt records; contents are not authenticated by this command')
+    report.add_argument('--currency', default='USD')
+    report.add_argument('--recurring-fee', type=Path, help='Explicit decimal amount/period/source_ref scenario; not an incurred charge')
     install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
     install_plan.add_argument('--preview', type=Path, required=True)
     install_plan.add_argument('--policy', type=Path, required=True)
@@ -128,7 +131,9 @@ def main(argv: list[str] | None = None) -> int:
                 raise ValueError('installation safety check failed') from error
         if args.command == 'report':
             from .reporting import render, summarize
-            print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence))), args.format), end='')
+            print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence)),
+                                  accounting_records=read_json(args.accounting) if args.accounting else None,
+                                  currency=args.currency, recurring_fee=read_json(args.recurring_fee) if args.recurring_fee else None), args.format), end='')
             return 0
         if args.command == 'doctor':
             print(json.dumps(doctor(args.host, args.project), indent=2))

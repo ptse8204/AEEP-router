@@ -37,11 +37,31 @@ case list. A complete pair missing from the supplied bundle is undetectable.
 Use the development stack's separate `verify` command to resolve its fixed
 synthetic receipt/artifact records before inspecting them.
 
-Confidence intervals, actual billing, recurring fees, cost per verified success
-and break-even remain unknown. The existing reviewed assessment reporting and
-accounting path must supply those conclusions; a reference to a record is not
-an observation. Synthetic and replay results cannot establish real model value.
-This increment does not complete C05's comparison-analysis acceptance checks.
+By default, cash and break-even remain unknown. To inspect resolved receipt
+accounting, add `--accounting receipts.json --currency USD`. The file maps each
+receipt content digest to its complete receipt JSON. The command checks those
+hashes and uses existing AEEP cash resolution. It rejects shared receipts or
+charges across runs, missing retry receipts and workflow summary receipts.
+Incomplete, estimated, conflicting or different-currency accounting stays unknown.
+Hash consistency does not authenticate the source or billing provider.
+
+Cost per verified success includes failed-run costs. It is unavailable with zero
+successes, missing grades or incomplete price coverage. For an explicit scenario,
+add `--recurring-fee fee.json`, containing a decimal-string `amount`, a `period`
+of `month` or `year`, and a 64-character hexadecimal `source_ref`. The currency
+is the selected report currency. This records a supplied price assumption; it
+does not verify a developer's price or create a charge.
+
+Break-even divides that fee by the observed difference in cost per verified
+success, rounded up to whole successes per fee period. It requires a complete
+matched cohort, positive difference and no observed success regression. It assumes
+the same future task mix and success rates, excludes evaluation overhead, and
+is not a confidence-supported production forecast. Source records marked synthetic
+remain synthetic throughout these calculations.
+
+Confidence intervals and overall value verdicts still require the existing
+reviewed analysis. Evaluation overhead remains separate in that path. This
+increment does not complete C05's comparison-analysis acceptance checks.
 
 The controlled development fixture now supplies a stronger, separate path:
 `integrations/toolkit/verify_controlled.py` resolves each trial's receipt, redacted

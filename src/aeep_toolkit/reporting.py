@@ -59,7 +59,12 @@ def arm_summary(runs: list[EvaluationRun]) -> dict[str, Any]:
     }
 
 
-def summarize(bundle: EvidenceBundle) -> dict[str, Any]:
+def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | None = None,
+              currency: str = "USD", recurring_fee: dict[str, str] | None = None) -> dict[str, Any]:
+    if recurring_fee is not None and accounting_records is None:
+        raise ValueError("fee scenarios require receipt accounting")
+    if accounting_records is not None:
+        cash_summary(list(bundle.runs), accounting_records, currency, recurring_fee)
     groups: dict[tuple[Any, ...], list[EvaluationRun]] = defaultdict(list)
     for run in bundle.runs:
         groups[tuple(getattr(run, field) for field in COHORT_FIELDS)].append(run)
@@ -71,7 +76,8 @@ def summarize(bundle: EvidenceBundle) -> dict[str, Any]:
             tasks: dict[str, list[EvaluationRun]] = defaultdict(list)
             for run in selected:
                 tasks[run.task_sha256].append(run)
-            pairs, rejected = [], []
+            pairs: list[dict[str, EvaluationRun]] = []
+            rejected = []
             for task, trials in sorted(tasks.items()):
                 reasons = []
                 arms = Counter(run.arm for run in trials)
@@ -107,12 +113,17 @@ def summarize(bundle: EvidenceBundle) -> dict[str, Any]:
                 sum(int(pair["treatment"].verification == "pass") - int(pair["control"].verification == "pass")
                     for pair in graded) / len(graded) if graded and len(graded) == len(pairs) and not rejected else None
             )
+            cash = None
+            if accounting_records is not None:
+                cash = cash_summary(selected, accounting_records, currency, recurring_fee)
+                cash['break_even_scenario'] = fee_break_even(pairs, cash) if not rejected else None
             families.append({
                 "task_family": family, "observed_tasks": len(tasks), "observed_pairs": len(pairs),
                 "graded_pairs": len(graded), "rejected_tasks": rejected,
-                "arms": {arm: arm_summary([run for run in selected if run.arm == arm]) for arm in ("control", "treatment")},
+                "arms": {arm: arm_summary([run for run in selected if run.arm == arm]) | ({"actual_cash": cash["arms"][arm]["complete_total"], "cost_per_verified_success": cash["arms"][arm]["cost_per_verified_success"]} if cash else {}) for arm in ("control", "treatment")},
                 "success_rate_treatment_minus_control": success_difference,
                 "metric_differences": differences,
+                **({"cash": cash} if cash is not None else {}),
             })
         cohorts.append({"binding": dict(zip(COHORT_FIELDS, key, strict=True)), "families": families})
     raw = json.dumps(bundle.model_dump(mode="json"), sort_keys=True, separators=(",", ":"), allow_nan=False)
@@ -126,7 +137,7 @@ def summarize(bundle: EvidenceBundle) -> dict[str, Any]:
             "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
             "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
             "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
-            "Confidence, billing, recurring fees and break-even require the existing reviewed analysis and accounting path; references alone are insufficient.",
+            "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit.",
         ],
     }
     # Finite individual measurements can overflow during aggregation.
@@ -155,7 +166,15 @@ def render(summary: dict[str, Any], format: str) -> str:
                     lines.append(f"  {metric}: {values['known_runs']}/{values['total_runs']} measured; total {total}; observed median {observed}.")
             for rejected in family["rejected_tasks"]:
                 lines.append(f"Unpaired task {rejected['task_sha256']}: {' '.join(rejected['reasons'])}")
-            lines += ["Actual cash, cost per verified success, recurring fees and break-even: unknown.", ""]
+            if 'cash' in family:
+                cash = family['cash']
+                lines.append(f"Cash currency: {cash['currency']}; evidence kind: {binding['evidence_kind']}.")
+                for arm, amounts in cash['arms'].items():
+                    lines.append(f"{arm.title()} cash: {amounts['complete_total'] or 'unknown'}; cost per verified success: {amounts['cost_per_verified_success'] or 'unknown'}.")
+                lines.append("Recurring-fee scenario: " + json.dumps(cash['break_even_scenario']))
+                lines += [cash['notice'], ""]
+            else:
+                lines += ["Actual cash, cost per verified success, recurring fees and break-even: unknown.", ""]
     lines += ["Limits", *summary["limitations"]]
     text = "\n".join(lines) + "\n"
     if format == "markdown":
@@ -169,3 +188,88 @@ def render(summary: dict[str, Any], format: str) -> str:
                 'font:16px/1.6 system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>'
                 '<main><h1>AEEP evidence summary</h1><pre>' + html.escape(text) + '</pre></main></html>\n')
     raise ValueError("unsupported report format")
+
+
+def cash_summary(runs: list[EvaluationRun], records: dict[str, Any], currency: str,
+                 fee: dict[str, str] | None = None) -> dict[str, Any]:
+    from decimal import Decimal
+
+    from aeep.accounting import aggregate_accounting
+    from aeep.assessment.models import content_digest
+    from aeep.models import ExecutionReceipt
+    if not re.fullmatch(r'[A-Z]{3}', currency):
+        raise ValueError('invalid currency')
+    if fee is not None:
+        if set(fee) != {'amount', 'period', 'source_ref'} or fee['period'] not in {'month', 'year'} or not re.fullmatch(r'[a-f0-9]{64}', fee['source_ref']):
+            raise ValueError('fee needs exact period and source reference')
+        if not isinstance(fee['amount'], str) or not re.fullmatch(r'[0-9]{1,18}(?:\.[0-9]{1,18})?', fee['amount']):
+            raise ValueError('fee must be a bounded decimal string')
+        amount = Decimal(fee['amount'])
+        if not amount.is_finite() or amount < 0:
+            raise ValueError('fee must be finite and non-negative')
+    receipts: dict[str, Decimal | None] = {}
+    seen_ids: set[str] = set()
+    seen_charges: set[str] = set()
+    arms = {}
+    for run in runs:
+        if len(run.receipt_refs) < run.retries + 1:
+            raise ValueError('retry receipts are incomplete')
+        items = []
+        for ref in run.receipt_refs:
+            if ref not in records:
+                raise ValueError('missing referenced cash receipt')
+            receipt = ExecutionReceipt.model_validate(records[ref])
+            if content_digest(receipt) != ref or receipt.receipt_id in seen_ids:
+                raise ValueError('changed or shared receipt; accounting attribution is ambiguous')
+            seen_ids.add(receipt.receipt_id)
+            # Workflow summaries already include component charges. Do not count a component twice.
+            component_ids = receipt.metadata.get('component_receipt_ids')
+            if component_ids:
+                raise ValueError('provide independent terminal receipts, not workflow summaries')
+            items.append(receipt)
+        accounting = aggregate_accounting(items)
+        charges = {c.charge_id for c in accounting.cash.components}
+        if charges & seen_charges:
+            raise ValueError('shared charge across runs; cost attribution is ambiguous')
+        seen_charges.update(charges)
+        value = accounting.cash.actual_cash_cost(currency) if run.status != 'indeterminate' else None
+        receipts[run.run_id] = value
+    for arm in ('control', 'treatment'):
+        selected = [run for run in runs if run.arm == arm]
+        values = [receipts[run.run_id] for run in selected]
+        known = [v for v in values if v is not None]
+        total = sum(known, Decimal(0)) if selected and len(known) == len(values) else None
+        successes = sum(run.verification == 'pass' for run in selected)
+        graded = bool(selected) and all(run.verification in {'pass', 'fail'} for run in selected)
+        arms[arm] = {'known_runs':len(known), 'total_runs':len(selected),
+                     'known_subtotal':str(sum(known, Decimal(0))) if known else None,
+                     'complete_total':str(total) if total is not None else None,
+                     'cost_per_verified_success':str(total/successes) if total is not None and graded and successes else None}
+    return {'currency':currency, 'arms':arms, 'fee_scenario':fee,
+            'evaluation_overhead_cash':None,
+            'notice':'Receipt contents must be resolved by the caller. Hash consistency is not billing attestation. Fees are supplied scenarios, not observed charges; evaluation overhead is separate.'}
+
+
+def fee_break_even(pairs: list[dict[str, EvaluationRun]], cash: dict[str, Any]) -> dict[str, Any] | None:
+    from decimal import ROUND_CEILING, Decimal
+
+
+    # Only a complete matched cohort with complete grades can supply a descriptive scenario.
+    if not pairs or cash['fee_scenario'] is None or any(run.verification not in {'pass','fail'} for pair in pairs for run in pair.values()):
+        return None
+    control_successes = sum(pair['control'].verification == 'pass' for pair in pairs)
+    treatment_successes = sum(pair['treatment'].verification == 'pass' for pair in pairs)
+    if not control_successes or treatment_successes < control_successes:
+        return None
+    control = cash['arms']['control']['cost_per_verified_success']
+    treatment = cash['arms']['treatment']['cost_per_verified_success']
+    if control is None or treatment is None:
+        return None
+    difference = Decimal(control) - Decimal(treatment)
+    if difference <= 0:
+        return None
+    amount = Decimal(cash['fee_scenario']['amount'])
+    return {'observed_cost_per_success_control_minus_treatment':str(difference),
+            'verified_successes_per_fee_period':int((amount/difference).to_integral_value(rounding=ROUND_CEILING)),
+            'period':cash['fee_scenario']['period'],
+            'interpretation':'Scenario using observed cost per verified success, including failed-run costs. Assumes the same future task mix and success rates; not a confidence-supported forecast. Excludes assessment overhead.'}

@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '4ddf045'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/general-installer/validation-final/checks.json'
 last_check_result: '1419 passed, 21 skipped in each full suite; 81.6868% combined coverage; both branch gates, all 11 driver checks, standalone 48-test integration, Node tests, docs and builds passed. Source stayed fixed at 4ddf045. C03 remains IN_PROGRESS for D34 preflight corrections.'
-next_action: 'Finish source-bound verification at 4ddf045 and audit C03 exit checks. General wheel installation/removal and fixed upstream per-trial dispatch are implemented. Continue receipt-backed comparison costs, then connect exact candidate intake to the general controlled adapter and three-family C06 journey. No architecture decision or general implementation permission is pending.'
+next_action: 'Verify the integrated D34 installer preflight correction and D33 receipt-backed cash report. Then complete general controlled candidate dispatch and the three-family C06 journey. Existing AssessmentService/BenchmarkRunner own authority, budgets, worker checks and accounting; avoid duplicating those controls. No architecture decision is pending.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -771,3 +771,20 @@ The `4ddf045` verification completed: both full suites passed 1,419 tests with
 The combined coverage was 81.6868%. The coverage run took 905.73 seconds.
 No validation process remains for that source. C03 stays IN_PROGRESS because the
 subsequent audit identified D34; passing existing tests does not erase that gap.
+
+### Integrated preflight correction and descriptive costs
+
+D34 now uses installed `packaging==24.2` for actual platform/wheel tags, Python
+requirements and dependency closure. Pip dependency discovery is disabled; active
+URL requirements and extras fail before effects. Case-insensitive archive
+collisions and startup-hook aliases are rejected. No new package was downloaded
+or installed to develop this correction. The library's local source/license
+hashes are retained under `c03/preflight-correction`.
+
+The report CLI now accepts digest-keyed receipt records and explicit recurring-fee
+scenarios. It reuses existing cash resolution, includes failed-run costs and keeps
+unknown billing, missing grades, zero successes and quality regressions from
+creating a break-even claim. Supplied records remain unauthenticated; synthetic
+amounts remain synthetic. Full integrated verification must finish before a new
+checkpoint PASS. General candidate dispatch and C05 inferential integration remain
+unfinished engineering work.

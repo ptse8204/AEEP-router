@@ -4035,3 +4035,10 @@ General candidate/Codex dispatch and live conformance remain unimplemented or
 unverified. First ordinary suite: 1,409 passed/21 skipped. Coverage was deliberately
 interrupted to harden disk reservations; final verification is running separately.
 No historical live claim or release gate is upgraded by these fixture results.
+
+The `4ddf045` toolkit source passed both full suites (1,419 passed, 21 skipped),
+all eleven required driver checks and both coverage gates with unchanged source.
+The C03 audit then found the platform/dependency gaps recorded as D34. Current
+changes correct those checks using existing packaging 24.2, prohibit pip dependency
+discovery, and add descriptive receipt-backed cost/fee scenarios. Their full
+verification is pending; no old evidence or live threshold was changed.
