@@ -59,8 +59,9 @@ error. That observed failure is retained in the C04 evidence.
 The child uses a fresh home, disabled dotenv/global Git configuration and a
 macOS sandbox denying network connections, home reads and writes outside scratch.
 Synthetic probes must pass before upstream runs. Each command has a timeout;
-timeout stops its process group. The script accepts only the pinned synthetic
-suite, not arbitrary candidates, hooks, model choices or provider credentials.
+timeout stops its process group. The script accepts only the two pinned fixture files and their parent
+directories, captures their checked bytes before staging, and rejects extra or
+linked payload. It accepts no arbitrary suite, not arbitrary candidates, hooks, model choices or provider credentials.
 
 The report excludes upstream fake token/time/cost constants from model
 measurements. Fixture outcomes cannot establish skill benefit. This local sandbox

@@ -2,6 +2,8 @@
 
 import hashlib
 import json
+import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -90,6 +92,61 @@ class StackTests(unittest.TestCase):
         packages[0]["version"] = "99.0.0"
         with patch.object(stack, "read", side_effect=lambda path: packages if path.name == "packages.json" else original(path)), self.assertRaisesRegex(ValueError, "wheel lock"):
             stack.manifest()
+
+    def test_unlisted_payload_is_rejected_even_when_upstream_would_not_hash_it(self):
+        selected = stack.manifest()
+        base = self.root / "source"
+        shutil.copytree(stack.BASE / "fixtures", base / "fixtures")
+        for extra in ("resources/evals/answer.txt", "resources/.git/config", "extra.txt"):
+            with self.subTest(extra=extra), patch.object(stack, "BASE", base):
+                path = base / "fixtures/format-json" / extra
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("synthetic marker")
+                with self.assertRaisesRegex(ValueError, "Unlisted"):
+                    stack.fixture_payload(selected)
+                path.unlink()
+                if (base / "fixtures/format-json/resources").exists():
+                    shutil.rmtree(base / "fixtures/format-json/resources")
+
+    def test_fixture_capture_rejects_links_special_files_drift_and_missing_files(self):
+        selected = stack.manifest()
+        base = self.root / "source"
+        shutil.copytree(stack.BASE / "fixtures", base / "fixtures")
+        path = base / "fixtures/format-json/SKILL.md"
+        original = path.read_bytes()
+        with patch.object(stack, "BASE", base):
+            captured = stack.fixture_payload(selected)
+            self.assertEqual(captured[Path("fixtures/format-json/SKILL.md")], original)
+            path.write_text("changed")
+            with self.assertRaisesRegex(ValueError, "bytes changed"):
+                stack.fixture_payload(selected)
+            path.unlink()
+            with self.assertRaisesRegex(ValueError, "incomplete"):
+                stack.fixture_payload(selected)
+            other = self.root / "other"
+            other.write_bytes(original)
+            path.symlink_to(other)
+            with self.assertRaisesRegex(ValueError, "linked"):
+                stack.fixture_payload(selected)
+            path.unlink()
+            os.link(other, path)
+            with self.assertRaisesRegex(ValueError, "hard links"):
+                stack.fixture_payload(selected)
+            path.unlink()
+            os.mkfifo(path)
+            with self.assertRaisesRegex(ValueError, "regular file"):
+                stack.fixture_payload(selected)
+
+    def test_fixture_roots_and_declared_paths_are_bounded(self):
+        selected = stack.manifest()
+        for name in ("", "/tmp/fixture", "fixtures/../other", "other/file"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Invalid"):
+                stack.fixture_payload({**selected, "fixtures": {name: "a" * 64}})
+        base = self.root / "source"
+        base.mkdir()
+        (base / "fixtures").symlink_to(stack.BASE / "fixtures", target_is_directory=True)
+        with patch.object(stack, "BASE", base), self.assertRaisesRegex(ValueError, "ordinary directory"):
+            stack.fixture_payload(selected)
 
     def test_timeout_terminates_command(self):
         with self.assertRaisesRegex(ValueError, "timed out"):

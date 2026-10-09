@@ -180,3 +180,14 @@ reviewed branch pin `774df00a4f04fb5d193548a2cf3f45470fe285bb`. Retain that dist
 when preparing a binary spike; neither the release label nor a nearby source
 commit proves the binary's compatibility. No Waza archive was downloaded,
 installed or executed by this metadata check.
+
+## Installed-payload hash gap observed in C04
+
+The pinned 0.7.0 `SkillInstaller` copies nested `evals`, `.git` and cache
+directories while excluding them from its content hash. The sandboxed synthetic
+probe in `reports/toolkit-v2/c04/nested-payload-probe` reproduced the mismatch;
+an unpublished issue draft accompanies it. The fixed AEEP demo now stages only
+two manifest-bound files and rejects unlisted entries. General candidate payload
+identity needs its own adapter check or a reviewed upstream correction before
+qualification. This finding leaves the preferred candidate selected and its
+live/controlled-worker status unqualified.

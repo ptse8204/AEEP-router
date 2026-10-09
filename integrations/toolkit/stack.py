@@ -17,7 +17,7 @@ import tempfile
 import venv
 from pathlib import Path
 
-from aeep_toolkit.cli import read_json
+from aeep_toolkit.cli import read_bytes, read_json
 
 BASE = Path(__file__).resolve().parent
 
@@ -30,11 +30,34 @@ def read(path: Path) -> dict:
     return read_json(path)
 
 
+def fixture_payload(stack: dict) -> dict[Path, bytes]:
+    expected = {Path(name) for name in stack["fixtures"]}
+    if not expected or any(not p.parts or p.is_absolute() or ".." in p.parts or p.parts[0] != "fixtures" for p in expected):
+        raise ValueError("Invalid pinned fixture paths")
+    allowed = expected | {parent for path in expected for parent in path.parents if parent != Path(".")}
+    seen = {Path("fixtures")}
+    root = BASE / "fixtures"
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("Fixture root must be an ordinary directory")
+    for path in root.rglob("*"):
+        relative = path.relative_to(BASE)
+        if path.is_symlink() or relative not in allowed or (relative not in expected and not path.is_dir()):
+            raise ValueError("Unlisted or linked fixture payload; upstream execution refused")
+        seen.add(relative)
+    if seen != allowed:
+        raise ValueError("Pinned fixture payload is incomplete")
+    payload = {path: read_bytes(BASE / path) for path in sorted(expected)}
+    if any(hashlib.sha256(raw).hexdigest() != stack["fixtures"][str(path)] for path, raw in payload.items()):
+        raise ValueError("Pinned fixture bytes changed before staging")
+    return payload
+
+
 def manifest() -> dict:
     data = read(BASE / "stack.json")
-    for name, expected in {data["lock_file"]: data["lock_sha256"], "packages.json": data["packages_sha256"], **data["fixtures"]}.items():
+    for name, expected in {data["lock_file"]: data["lock_sha256"], "packages.json": data["packages_sha256"]}.items():
         if digest(BASE / name) != expected:
             raise ValueError("Stack inputs changed; review and regenerate the lock before execution")
+    fixture_payload(data)
     if data["fixture_source"]["artifact_sha256"] != data["fixtures"]["fixtures/format-json/SKILL.md"]:
         raise ValueError("Fixture provenance does not match the reviewed candidate")
     packages = read(BASE / "packages.json")
@@ -222,12 +245,16 @@ def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dic
 
 def demo(runtime: Path, output: Path, stack: dict) -> None:
     facts = verify_runtime(runtime, stack)
+    payload = fixture_payload(stack)
     output.mkdir(parents=True, exist_ok=False)
     (output / "runtime-inventory.json").write_text(json.dumps(facts, indent=2) + "\n")
     root = Path(tempfile.mkdtemp(prefix="aeep-stack-fixture-", dir="/tmp")).resolve()
     (output / "execution.json").write_text(json.dumps({"scratch": str(root), "status": "started"}) + "\n")
     try:
-        shutil.copytree(BASE / "fixtures", root / "input")
+        for path, raw in payload.items():
+            destination = root / "input" / path.relative_to("fixtures")
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(raw)
         prefix, env = sandbox(root, runtime)
         checks = probe(prefix, env, root)
         args = ["-m", "agent_skill_eval", "run", "--skill", str(root / "input/format-json"),

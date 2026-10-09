@@ -3984,3 +3984,9 @@ adapter. It separates exact cohorts and task families, rejects ambiguous pairs
 and reports measurement coverage without a value verdict. Twenty-seven focused
 tests pass; full verification follows. D26 records scope and remaining inference
 and accounting work. No execution authority, campaign result or old evidence changes.
+
+A bounded upstream probe found agent-skill-eval 0.7.0 installs nested files it
+excludes from its skill hash. D27 tightens the fixed fixture bridge to an exact
+allowlist and byte capture; the original source and historical reports remain
+unchanged. Evidence and the unpublished issue draft are in
+`../toolkit-v2/c04/nested-payload-probe`. General candidate qualification is open.

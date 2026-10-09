@@ -239,3 +239,19 @@ duplicate arms, worse success with fewer tokens, overlapping token categories,
 zero successes, long-tail timings and escaped report content under the standing
 finite-test delegation. Unresolved billing references and plugin fees stay
 unknown; neither metadata nor fixture outcomes can establish cash savings.
+
+### D27: 2026-10-08, reject unbound fixture payload before upstream dispatch
+
+A sandboxed probe of pinned agent-skill-eval 0.7.0 reproduced a mismatch:
+`content_hash` excludes nested `evals`, `.git` and `__pycache__`, while `install`
+copies those nested directories. Evidence and an unpublished issue draft are in
+`reports/toolkit-v2/c04/nested-payload-probe`. No real answers or private files
+were used. Keep the preferred evaluator; this finding does not justify silently
+switching backends or calling its whole interface qualified.
+
+The fixed development demo must accept only the two manifest-bound fixture files
+and their parent directories. Reuse the bounded metadata reader, reject links,
+extra files/directories and special files, then stage only captured hash-checked
+bytes. This replaces the broad fixture-directory copy; it is not a general
+candidate installer or an upstream patch. The source directory and existing
+reports remain intact. Add finite negative tests and rerun the real fixed demo.

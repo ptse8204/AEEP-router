@@ -573,3 +573,22 @@ The existing reviewed campaign analysis remains the intended inference path.
 C05 is IN_PROGRESS; full comparison math and accounting remain unfinished.
 Focused reporting checks passed 27 tests. The complete repository verification
 is being run on the final implementation; its outcome must be recorded separately.
+
+### Upstream nested-payload finding and bounded fixture correction
+
+The actual pinned `SkillInstaller` copies nested evals/.git/cache directories
+that its content hash excludes. A synthetic probe reproduced the mismatch in
+the existing network-denied sandbox; its temporary scratch was removed. Evidence
+and an unpublished upstream issue draft are in `c04/nested-payload-probe`.
+No real private files, answers, models or containers were involved. D27 records
+the corrective scope: reject unlisted fixture entries and stage only captured,
+hash-checked bytes. This is an integration-only change during the C05 full
+validation; core Python and core tests stayed fixed. Verify the final bridge
+separately and do not claim whole-tree source stability. Arbitrary candidate
+payload verification and controlled-worker conformance remain unfinished.
+
+The final fixture guard passed 35 standalone tests and a fresh actual upstream
+run with four normalized records and receipt verification. The current source
+report is `reports/toolkit-v2/bound-payload-showcase`. The C05 ordinary full suite
+passed 1,383 tests with 21 skips; branch coverage is still running. Preserve the
+separate source scopes when recording the final result.
