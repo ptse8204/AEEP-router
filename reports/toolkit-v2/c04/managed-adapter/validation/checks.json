@@ -1,0 +1,139 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 1.89,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.07,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.86,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 580.39,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 910.87,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.47,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/tmp/aeep-toolkit-d42-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 1.87,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/tmp/aeep-toolkit-d42-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/tmp/aeep-toolkit-d42-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "returncode": 0,
+    "seconds": 0.07,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.18,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "returncode": 0,
+    "seconds": 0.59,
+    "log": "reports/toolkit-v2/c04/managed-adapter/validation/11.log"
+  }
+]

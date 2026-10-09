@@ -1,0 +1,53 @@
+{
+  "source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+  "verified_sources": {
+    "pyproject.toml": {
+      "url": "https://raw.githubusercontent.com/cisco-ai-defense/skill-scanner/c3d7fd9fee50cf2ea45f0b381eb61f857360f825/pyproject.toml",
+      "sha256": "627ebc9c748e40b0db65145725e41e6a20827b62bc5a53f208e2fce7c8a0fce5",
+      "bytes": 9710
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/cisco-ai-defense/skill-scanner/c3d7fd9fee50cf2ea45f0b381eb61f857360f825/README.md",
+      "sha256": "3b6c2e4f7a4c1bdd0d624c66d9ecb1ea4f44689ef08412b619f0ffe97b4dcfba",
+      "bytes": 24292
+    }
+  },
+  "distribution": "cisco-ai-skill-scanner",
+  "python_requires": ">=3.11,<3.15",
+  "required_dependencies": [
+    "PyYAML>=6.0,<7",
+    "python-frontmatter>=1.1,<2",
+    "rich>=14.0,<15",
+    "textual>=7.0,<9",
+    "tabulate>=0.9,<1",
+    "pydantic>=2.10,<3",
+    "protobuf>=5.29,<7",
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.34,<1",
+    "python-multipart>=0.0.31,<0.1",
+    "yara-x>=1.10,<2",
+    "python-dotenv>=1.0,<2",
+    "httpx>=0.27,<1",
+    "magika>=1.0,<2",
+    "pdfid>=1.1,<2",
+    "oletools>=0.60,<1",
+    "confusable-homoglyphs>=3.3,<4",
+    "anthropic>=0.50,<1",
+    "openai>=2.0,<3",
+    "litellm>=1.89.7,<2",
+    "click>=8.3.3",
+    "urllib3>=2.8.0,<3",
+    "pyjwt>=2.15.0,<3"
+  ],
+  "entrypoint": "skill_scanner.cli.cli:main",
+  "proposed_scope": "Optional static scan only; no LLM, VirusTotal, AI Defense, OSV, custom rules, repository fetching or server flags. Needs package/source binding and isolated runtime before execution.",
+  "installed": false,
+  "executed": false,
+  "findings_are": "Advice, never containment or proof of safety.",
+  "remaining": [
+    "Resolve release wheel to reviewed source and full transitive artifact closure",
+    "Review package effects, licenses, wheel contents and resource footprint",
+    "Bind captured candidate bytes and a zero-network zero-credential runtime",
+    "Qualify structured-output normalization on benign and malicious synthetic fixtures"
+  ]
+}

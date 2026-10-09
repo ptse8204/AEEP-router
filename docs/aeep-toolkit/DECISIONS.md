@@ -545,3 +545,58 @@ gaps, while original costs and auxiliary-arm records remain authoritative. No
 new storage, scheduler, grant, host launcher or statistical engine is introduced.
 Draft code and tests currently live outside the checkout while D41's required
 verification runs. They do not establish actual worker or live-model conformance.
+
+## D43 — Show and reproduce the existing managed comparison analysis
+
+Reuse `fit_report` for intervals, utility guardrails, challenger comparisons and
+assessment costs. The first managed export saved those facts only in JSON;
+connect them to the existing static renderer. Keep the canonical verdict separate
+from the descriptive summary, and do not promote it to a new toolkit qualification
+or release claim. No statistical engine, exporter dependency or service is added.
+
+Reproduce the stored statistical fields, not just its verdict. Recompute costs
+from the complete campaign and ledger, preserving the assessment service's
+explicit missing-preparation-cost downgrade. Count expected trial positions from
+the frozen suite and retain missing, unexpected and duplicate positions. Show
+uncertainty, measurement coverage and unresolved operations alongside the result.
+Use each case's existing template-family identity for normalized task slices.
+
+The finite synthetic review adds altered-statistic/cost rejection, unknown-cost
+preservation and readable-report checks. Draft code stays outside the checkout
+until D42's source-bound full verification finishes. It authorizes no model call,
+new software installation, credentials or release.
+
+## D44 — Give both existing backends one explicit CLI entry point
+
+Extend `aeep-toolkit` with `eval scripted` and `eval managed`; preserve their
+existing plan/run/report arguments and direct entry points. The selected backend
+is mandatory and never changes after failure. The managed path calls the existing
+module; the scripted path invokes the fixed repository-owned bridge with the
+current Python interpreter and argv only, keeping its imports in a separate
+process. Neither path introduces a runner, scheduler or hosted service.
+
+The scripted backend remains checkout-only until its development assets have a
+reviewed distributable package. If those assets are absent, report unavailable;
+do not silently substitute the managed backend or install anything. The plan
+helper disables bytecode writes and retains the existing read-only preview.
+Tests cover explicit selection, fixed argv, backend absence and propagated failure.
+
+## D45 — Install AEEP's existing shared assets inside its private runtime
+
+The real 0.8.2 wheel failed `check_wheel`: its 309 packaged documentation/example
+assets use wheel data relocation, which the first private installer rejected.
+The source-bound failure and archive sizes are in
+`reports/toolkit-v2/c06/package-installation/pre-change-audit.json`. This is an
+installer gap, not a permission or architecture blocker.
+
+Keep standard venv/pip and preserve the legacy package contents. Permit only
+`aeep_agent_router-VERSION.data/data/share/aeep/...` for the exactly reviewed
+`aeep-agent-router` wheel and version. Pip places those files inside the new
+private prefix. Other relocation schemes, distributions, versions, traversal,
+startup hooks and links remain rejected. The existing whole-tree snapshot also
+covers these assets, so a user edit prevents removal rather than being erased.
+
+The finite fixture review covers real private installation/removal of a synthetic
+AEEP-named wheel and rejection of other relocation paths. It introduces no new
+installer, package manager or live execution. The dependency artifact review and
+an actual complete package installation remain separate checks.

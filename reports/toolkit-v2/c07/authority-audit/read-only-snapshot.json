@@ -1,0 +1,50 @@
+{
+  "observed_at": "2026-10-09T21:04:57.364320+00:00",
+  "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+  "access": "SQLite mode=ro; selected grant/counter metadata only",
+  "grant": {
+    "id": "onboarding",
+    "revoked": 0,
+    "operations": 9730,
+    "model_turns": 2838,
+    "elapsed_seconds": 107877.87661648821,
+    "cash_usd": "0.0"
+  },
+  "latest_budget_amendment_id": "budget_amendment_d2dab42de4b84f11bda3af1797757440",
+  "effective_limits": {
+    "max_operations": 50000,
+    "max_model_turns": 6000,
+    "max_elapsed_seconds": 604800.0,
+    "max_cash_usd": "0"
+  },
+  "expires_at": "2026-10-25T23:59:00Z",
+  "operation_states": [
+    {
+      "state": "complete",
+      "count": 9728
+    },
+    {
+      "state": "reserved",
+      "count": 2
+    }
+  ],
+  "remaining_at_observation": {
+    "operations": 40270,
+    "model_turns": 3162,
+    "elapsed_seconds": 496922.1233835118
+  },
+  "authority_source": "reports/v08/remaining-program-budget-approval-20260927.json",
+  "conclusion": "Budget absence or exhaustion is not established. Routine finite amendments are delegated; do not ask for duplicate routine budget approval. Exact V2 subject/recipe/environment scope, current conformance and credential/setup applicability still require review before live work.",
+  "effects": {
+    "model_calls": 0,
+    "credential_reads": 0,
+    "grant_mutations": 0,
+    "counter_resets": 0,
+    "historical_recovery": false
+  },
+  "limitations": [
+    "This snapshot is not a reservation, new grant or verified V2 execution plan. Re-read canonical state before any later reservation.",
+    "No credential volume, Codex authentication state or login status was inspected.",
+    "Historical reserved operations are preserved and have not been reconciled."
+  ]
+}

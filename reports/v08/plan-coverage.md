@@ -4114,3 +4114,16 @@ cohorts, source identity and independent graders bind normalized observations;
 missing evidence remains an explicit gap. Targeted checks passed 120 tests.
 Full checks and source-current native compatibility remain pending. No live
 trial, sign-in or new package ran. See `docs/aeep-toolkit/MANAGED_EVALUATION.md`.
+
+V2 D42 ordinary regression passed 1,493 tests with 21 skips; coverage is still
+running against `40a8b7a`. Four fresh zero-turn native command workers passed and
+cleaned up (`reports/toolkit-v2/c04/managed-native-recheck`), without credentials,
+model calls or release qualification. D43 prepares readable canonical analysis
+and exact statistic/cost reproduction; its draft checks are not integrated proof.
+
+V2 source `40a8b7a` is fully checked: both core suites passed 1,493 tests with 21
+skips; all driver, branch-coverage, supplemental proof/build and documentation
+checks passed with unchanged executable source. The Router-disabled upstream
+journey verified six scripted workers and exact-name cleanup. A read-only current
+grant audit found headroom, so budget absence is not a demonstrated blocker;
+exact V2 scope/conformance remains to be prepared. D43-D45 drafts stay pending.

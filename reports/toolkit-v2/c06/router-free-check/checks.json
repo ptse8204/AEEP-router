@@ -1,0 +1,82 @@
+[
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/no_router.py",
+      "plan",
+      "--candidate",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/format-json",
+      "--suite",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/suite.json",
+      "--source",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/source.json",
+      "--runtime",
+      "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/result",
+      "--image",
+      "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "--docker",
+      "/usr/local/bin/docker",
+      "--socket",
+      "/Users/edwintse/.docker/run/docker.sock"
+    ],
+    "returncode": 0,
+    "seconds": 0.6517322498839349,
+    "log": "plan.json"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/no_router.py",
+      "run",
+      "--candidate",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/format-json",
+      "--suite",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/suite.json",
+      "--source",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/source.json",
+      "--runtime",
+      "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/result",
+      "--image",
+      "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "--docker",
+      "/usr/local/bin/docker",
+      "--socket",
+      "/Users/edwintse/.docker/run/docker.sock",
+      "--reviewed-digest",
+      "7089a46ed4da7519fe555f72416f98278eab957f115a345e97eb329de8d8bd1d"
+    ],
+    "returncode": 0,
+    "seconds": 6.242235083132982,
+    "log": "run.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/no_router.py",
+      "report",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/router-free-check/result"
+    ],
+    "returncode": 0,
+    "seconds": 0.4392903749831021,
+    "log": "verification.json"
+  },
+  {
+    "argv": [
+      "/usr/local/bin/docker",
+      "ps",
+      "-a",
+      "--filter",
+      "name=aeep-toolkit",
+      "--format",
+      "{{.Names}}"
+    ],
+    "returncode": 0,
+    "seconds": 0.04214454209432006,
+    "log": "worker-cleanup.log"
+  }
+]

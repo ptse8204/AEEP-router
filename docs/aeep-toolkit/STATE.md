@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '34fae07'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/missing-token-correction/validation/checks.json'
-last_check_result: '1465 passed, 21 skipped in each core suite; all 12 driver checks, both branch gates and eight supplemental proof/build checks passed. Documentation passed. Source stayed unchanged. No native or model call was needed for D41.'
-next_action: 'Run required checks on the integrated D40/D42 managed bridge; verify native command compatibility under a new finite zero-turn review, then continue remaining C04-C06 gaps. Earlier stopping was unfinished engineering, not missing architecture or permission.'
+last_verified_commit: '40a8b7a'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/managed-adapter/validation/checks.json'
+last_check_result: '1493 passed, 21 skipped in both core suites; all 12 driver checks, both branch gates, eight supplemental proof/build checks and docs passed. Source unchanged. Four native zero-turn workers and six scripted Router-disabled workers passed; cleanup confirmed.'
+next_action: 'Integrate the checked D43/D44/D45 drafts: readable canonical analysis, unified explicit-backend CLI and bounded own-package data installation. Then verify that integrated source and prepare the complete package-installation review. Earlier stopping was unfinished engineering, not missing architecture or permission.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -1038,3 +1038,59 @@ The Makefile already discovers toolkit documentation through a wildcard; the
 integration helper's mistaken explicit-list assertion required no Makefile edit.
 Required full checks are next. No V2 model execution, credential action or live
 value claim has occurred. Engineering continues without another steering prompt.
+
+### D42 ordinary regression and refreshed native command proof
+
+Source `40a8b7a` passed the ordinary suite: 1,493 passed, 21 skipped, one existing
+Starlette/httpx warning in 579.63 seconds. Coverage and the remaining driver checks
+are still active under session 50320; do not record them as passed yet. The source
+remains frozen. Four credential-free native workers also passed the bounded pair
+and sandbox inspection and cleaned up; exact pins and limits are under
+`reports/toolkit-v2/c04/managed-native-recheck`. These used zero model turns and
+establish no authenticated conformance or live comparison.
+
+D43's reporting draft in `/tmp/aeep-toolkit-d43` passes 34 focused synthetic checks
+and shadow-source mypy. It reuses the existing analysis and adds readable
+intervals, guardrails, costs and trial coverage. Source integration and full
+verification are pending. Do not copy its scratch-only `conftest.py` into tests.
+The optional discovery audit confirmed existing `DiscoveryService`, ARD, MCP
+Registry and marketplace clients; no replacement service or new external package
+has been built or installed. Continue the critical reporting path first.
+
+### Read-only C07 authority audit; preserve the stopping conclusion
+
+The canonical `onboarding` grant is unrevoked. The read-only snapshot in
+`reports/toolkit-v2/c07/authority-audit/read-only-snapshot.json` observed 9,730
+operations, 2,838 turns and 107,877.87661648821 seconds against the existing
+50,000 / 6,000 / 604,800 ceilings, expiring October 25. Two historical operations
+remain reserved. No counters, grant, job or credential state were changed.
+
+The standing September 27 authority already delegates routine finite budget
+amendments. Do not treat absent *new* V2 budget paperwork as proof that the user
+must approve routine budget again. Prepare an exact V2 definition, inspect its
+scope and current worker conformance, and determine what remains outside existing
+authority. Numerical headroom alone does not authorize it. The earlier stop was
+unfinished engineering; this audit does not retroactively turn it into a budget
+or infrastructure blocker. Re-read the live ledger before any reservation and
+never copy/reset it or reconcile historical work by assumption.
+
+The Router-disabled C06 replay on `40a8b7a` passed six actual upstream scripted
+trials with independent artifact verification. Exact worker-name inspection
+confirmed cleanup. See `reports/toolkit-v2/c06/router-free-check`; the initial
+prefix-only cleanup query was insufficient and is explicitly superseded by its
+exact-name audit. This proves no Router construction in that journey, not a
+minimal separate distribution, live candidate value or full worker conformance.
+
+### D42 source-bound verification completed
+
+Both core runs on `40a8b7a` passed 1,493 tests with 21 skips; ordinary pytest took
+579.63 seconds and coverage pytest took 909.38 seconds. All 12 driver commands,
+both branch gates, eight supplemental proof/build checks and documentation checks
+passed. `source-stability.json` confirms unchanged executable sources. Coverage
+reported 82% overall. The existing Starlette/httpx warning remains.
+
+No D42 validation process remains. Drafts D43/D44/D45 now have 38 focused
+report/CLI checks and 49 installer checks passing outside the checkout. Integrate
+only `managed.py`, `reporting.py`, `cli.py`, `install_runtime.py`, the two new test
+files and the revised installer test; never copy scratch conftest. The changes
+need their own repository verification and actual CLI replay.

@@ -236,4 +236,4 @@ D40 selects the existing AEEP AssessmentService/BenchmarkRunner fallback for the
 first managed-model adapter. Agent-skill-eval remains the working scripted
 backend. No live campaign has begun or changed engine. AEEP's existing App Server
 parser also needs D41's partial-usage correction before qualification; fallback
-selection is not a conformance PASS. The new managed adapter remains unfinished.
+selection is not a conformance PASS. The managed adapter is integrated and passed full software checks on `40a8b7a`. It reuses the existing service, grants and workers; four fresh zero-turn native command workers passed. Actual V2 managed-model qualification remains open.
