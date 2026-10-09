@@ -35,7 +35,7 @@ def strings(value):
   for item in value:yield from strings(item)
 observed=[]
 for file in private.rglob('*.json'):observed.extend(strings(json.loads(file.read_text())))
-with sqlite3.connect('file:'+str(private/'receipts.sqlite3')+'?mode=ro',uri=True) as db:
+with sqlite3.connect('file:'+str(private/'receipts.sqlite3')+'?mode=ro&immutable=1',uri=True) as db:
  for table in ('assessment_records','receipts','decisions'):
   for row in db.execute('SELECT payload_json FROM '+table):observed.extend(strings(json.loads(row[0])))
 suite=json.loads((ROOT/'private-suite.json').read_text())
