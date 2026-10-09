@@ -246,3 +246,30 @@ def test_metadata_reader_rejects_hardlinked_input(tmp_path):
     os.link(source, tmp_path / 'alias.json')
     with pytest.raises(ValueError, match='hard links'):
         read_json(source)
+
+
+def test_unknown_memory_needs_explicit_policy_and_remains_unknown():
+    item = manifest(memory_bytes=None)
+    registry = ExtensionRegistry(extensions=(item,))
+    ordinary = policy(item)
+    assert 'allow_unknown_memory' not in ordinary.model_dump(mode='json')
+    rejected = preview(registry, ('engine',), ordinary)
+    assert any('memory requirement unknown' in reason for reason in rejected.blockers)
+    accepted = preview(registry, ('engine',), ordinary.model_copy(update={'allow_unknown_memory': True}))
+    assert not accepted.blockers and accepted.items[0].manifest.memory_bytes is None
+    assert any('accepts unknown memory' in reason for reason in accepted.limitations)
+    assert not accepted.execution_authorized
+    assert ordinary.model_copy(update={'allow_unknown_memory': True}).model_dump()['allow_unknown_memory'] is True
+
+
+def test_unknown_memory_acknowledgement_does_not_relax_disk_or_permissions():
+    item = manifest(memory_bytes=None, disk_bytes=None)
+    result = preview(ExtensionRegistry(extensions=(item,)), ('engine',), policy(item, allow_unknown_memory=True))
+    assert any('disk requirement unknown' in reason for reason in result.blockers)
+
+
+@pytest.mark.parametrize('value', ['true', 1, None])
+def test_unknown_memory_acknowledgement_requires_an_actual_boolean(value):
+    item = manifest()
+    with pytest.raises(ValueError):
+        policy(item, allow_unknown_memory=value)

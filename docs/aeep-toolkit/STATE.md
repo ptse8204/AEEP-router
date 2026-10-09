@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '40a8b7a'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/managed-adapter/validation/checks.json'
 last_check_result: '1493 passed, 21 skipped in both core suites; all 12 driver checks, both branch gates, eight supplemental proof/build checks and docs passed. Source unchanged. Four native zero-turn workers and six scripted Router-disabled workers passed; cleanup confirmed.'
-next_action: 'Finish source-bound verification of integrated D43-D45; replay the explicit CLI and prepare the exact complete package-installation review. Retain the conclusion that earlier stopping was unfinished engineering, not missing architecture or permission.'
+next_action: 'Verify integrated D46-D47 corrections; rebuild the own wheel and prepare the exact complete package-installation review. Retain the conclusion that earlier stopping was unfinished engineering, not missing architecture or permission.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -1110,3 +1110,28 @@ D43-D45 normal-import checks passed 205 tests and 24 subtests in 8.74 seconds;
 Ruff, mypy and diff whitespace checks passed. The retained log is
 `reports/toolkit-v2/c06/delivery-integration/targeted.log`. Full verification and
 a fresh CLI replay remain required before treating this source as verified.
+
+### D46-D47 correction and retained interrupted verification
+
+Source `3f1f886` passed 1,518 ordinary tests with 21 skips. Its coverage run was
+intentionally interrupted after 977 tests to incorporate a reproduced bootstrap
+ordering defect; it did not pass. Exact commands, interruption and unchanged-source
+record are under `c06/delivery-integration/validation`. The replacement verification
+must cover the corrected source. D46 adds explicit unknown-memory acknowledgment;
+D47 stabilizes existing analysis and preserves conservative condition costs.
+
+The unified CLI replay completed six synthetic upstream trials, verified six
+receipts, retained no task outputs and confirmed all six exact worker names were
+removed (`c06/unified-cli-replay`). No live efficacy is established. Read-only
+inspection of the complete 33-wheel local package closure passed archive/platform
+and dependency checks; 14,833,954 artifact bytes were fetched, no installation.
+The current own-wheel hash predates D46-D47 and must be rebuilt before installation.
+The lower disk reservation is 729,602,918 bytes; memory remains unknown. Exact
+artifact/license metadata and paths are under `c06/package-installation`.
+
+D46-D47 targeted repository checks passed 129 tests in 13.83 seconds. Initial
+new-test drafts had missing required fixture limits and an incorrect assertion
+attribute; both were corrected before that run. Ruff import/unused-variable
+findings were corrected; mypy passed 163 source files. Generated preview and runtime
+installation schemas were refreshed for the new explicit policy field. Full
+source-bound checks remain required.

@@ -600,3 +600,28 @@ The finite fixture review covers real private installation/removal of a syntheti
 AEEP-named wheel and rejection of other relocation paths. It introduces no new
 installer, package manager or live execution. The dependency artifact review and
 an actual complete package installation remain separate checks.
+
+## D46 — Disclose unknown memory without inventing a requirement
+
+Keep the preview's default block for unknown memory. Add one explicit operator
+policy acknowledgment, `allow_unknown_memory`, bound into the exact installation
+review when true. False is omitted from serialization to preserve existing review
+hashes. This acknowledges uncertainty only; disk reserve, licenses, permissions,
+artifact closure and execution authority remain separate requirements. Runtime
+memory stays null until measured. No automatic installation is authorized.
+
+## D47 — Reproduce analysis independent of input ordering
+
+The retained synthetic probe in `reports/toolkit-v2/c05/analysis-reproduction`
+reproduced different bootstrap bounds for identical cases and seed after reversing
+case order. Sort case and family identities in the existing `paired_interval`
+helper. Its callers, thresholds, resampling count and grouping stay unchanged.
+Historical reports keep their original source bindings; this correction needs
+fresh verification and cannot rewrite their results.
+
+Preserve unknown condition-level break-even values from the existing service:
+condition reports precede completion of the reporting operation, while the root
+costs are finalized afterward. Require every reported numeric condition cost and
+all statistical fields to reproduce. Synthetic regressions exercise that actual
+cost-finalization sequence and reject altered numeric values. This finite test
+amendment uses the standing assessment delegation; it performs no live trial.

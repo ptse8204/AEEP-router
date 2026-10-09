@@ -155,3 +155,10 @@ at every depth. The same captured files supply later private staging, so exclude
 files cannot escape the identity check and reach a worker. Links, special files,
 credentials, ambiguous paths and oversized payloads are refused. This does not
 install the candidate in a host or certify its safety or benefit.
+
+Unknown memory blocks preview by default. An operator may explicitly set
+`allow_unknown_memory: true` in the preview policy to acknowledge that uncertainty.
+The acknowledgment is included in the exact review digest and the preview's
+limitations; memory remains null. It does not waive disk reserve, package or
+permission checks, or authorize execution. Existing policies omit the false
+value when serialized, preserving prior installation review hashes.

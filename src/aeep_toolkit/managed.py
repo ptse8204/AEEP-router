@@ -202,11 +202,29 @@ class AEEPAssessmentAdapter:
         for field in (
             "distinct_holdout_cases", "distinct_paired_cases", "correctness_failures",
             "execution_failures", "tested_variations", "paired_measurement_cases",
-            "paired_savings", "savings_interval", "condition_comparisons", "utility_evidence",
+            "paired_savings", "savings_interval", "utility_evidence",
             "host_runtime_digests", "deterministic_reference_comparison", "measurement_coverage",
         ):
             if getattr(report, field) != getattr(reproduced, field):
                 raise ConfigurationError("canonical comparison statistics do not reproduce")
+        saved_conditions = report.condition_comparisons or {}
+        fresh_conditions = reproduced.condition_comparisons or {}
+        if saved_conditions.keys() != fresh_conditions.keys():
+            raise ConfigurationError("canonical comparison statistics do not reproduce")
+        for condition, expected_condition in fresh_conditions.items():
+            saved = saved_conditions[condition]
+            if not isinstance(saved, dict) or saved.keys() != expected_condition.keys():
+                raise ConfigurationError("canonical comparison statistics do not reproduce")
+            for field, expected_value in expected_condition.items():
+                if field != 'break_even_uses':
+                    if saved[field] != expected_value:
+                        raise ConfigurationError("canonical comparison statistics do not reproduce")
+                    continue
+                # Condition costs precede completion of the report's own charged operation.
+                costs = saved[field]
+                if (not isinstance(costs, dict) or costs.keys() != expected_value.keys()
+                        or any(value is not None and value != expected_value[key] for key, value in costs.items())):
+                    raise ConfigurationError("canonical condition costs do not reproduce")
         incomplete_costs = "Preparation cost lineage is incomplete; known incurred usage is retained." in report.explanations
         expected_usage = dict(reproduced.measured_usage)
         expected_break_even = dict(reproduced.break_even_uses)

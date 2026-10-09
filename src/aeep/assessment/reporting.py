@@ -244,7 +244,7 @@ def paired_interval(
     # Resample template families, then independent cases within each family.
     aggregate = mean if success_rate else median
     families: dict[str, list[float]] = defaultdict(list)
-    for case, values in differences.items():
+    for case, values in sorted(differences.items()):
         family = template_families.get(case) if template_families is not None else case.rsplit("-", 1)[0]
         if family is None:
             return None, []
@@ -253,7 +253,7 @@ def paired_interval(
     if len(differences) < minimum:
         return savings, []
     rng = random.Random(seed)
-    groups = list(families.values())
+    groups = [families[family] for family in sorted(families)]
     estimates = sorted(
         aggregate(
             [

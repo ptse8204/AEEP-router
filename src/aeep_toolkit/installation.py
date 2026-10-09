@@ -5,9 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 from graphlib import CycleError, TopologicalSorter
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .models import ContractModel, Count, Digest, ExtensionManifest, ExtensionRegistry, Identifier
 
@@ -53,6 +53,15 @@ class PreviewPolicy(ContractModel):
     allowed_authentication: tuple[Literal["none", "host_owned", "operator_setup"], ...] = ("none",)
     allowed_financial_exposure: tuple[Literal["none", "subscription_unpriced", "metered"], ...] = ("none",)
     free_disk_bytes: Count | None = None
+    allow_unknown_memory: bool = Field(default=False, strict=True)
+
+    @model_serializer(mode='wrap')
+    def preserve_existing_reviews(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if not self.allow_unknown_memory:
+            value.pop('allow_unknown_memory', None)
+        return value
+
     # Operator-supplied metadata review, never a grant or execution approval.
     reviewed_dependency_manifests: tuple[Digest, ...] = ()
 
@@ -141,7 +150,7 @@ def preview(
                 failures.append(f"{label} outside preview policy or unknown")
         if manifest.disk_bytes is None:
             failures.append("disk requirement unknown")
-        if manifest.memory_bytes is None:
+        if manifest.memory_bytes is None and not policy.allow_unknown_memory:
             failures.append("memory requirement unknown")
         if manifest.status == "blocked" or manifest.blockers:
             failures.append("extension is blocked: " + "; ".join(manifest.blockers))
@@ -174,12 +183,15 @@ def preview(
     elif policy.free_disk_bytes - known_disk < 50 * 1024**3:
         global_problems.append("selected stack would cross the 50 GiB free-space reserve")
     blockers = tuple(global_problems + [f"{item.manifest.extension_id}: {reason}" for item in items for reason in item.blockers])
-    return InstallationPreview(
+    result = InstallationPreview(
         profile=profile, selected=selected, items=items, blockers=blockers,
         known_disk_bytes=known_disk,
         disk_complete=all(item.manifest.disk_bytes is not None for item in items) and len(items) == len(graph),
         status="blocked" if blockers else "ready_for_review",
     )
+    if policy.allow_unknown_memory and any(item.manifest.memory_bytes is None for item in items):
+        result.limitations += ("The operator preview policy accepts unknown memory requirements; actual runtime memory remains unmeasured.",)
+    return result
 
 
 def require_compatible(plan: InstallationPreview) -> None:

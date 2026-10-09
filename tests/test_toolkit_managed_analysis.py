@@ -86,3 +86,55 @@ async def test_service_cost_lineage_downgrade_is_preserved(tmp_path,monkeypatch)
         assert summary['managed_analysis']['measured_usage']['assessment_wall_time_ms'] is None
     finally:
         await router.close()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('tamper', [False, True])
+async def test_condition_costs_preserve_service_report_operation_timing(tmp_path, monkeypatch, tamper):
+    from test_v08_comparisons import trial
+
+    from aeep.assessment.models import (
+        AssessmentLimits,
+        AssessmentOperation,
+        AssessmentOperationLedger,
+        content_digest,
+    )
+    from aeep.assessment.reporting import apply_assessment_costs, fit_report
+    from aeep.benchmarking import BenchmarkCampaignReport
+
+    router, service, adapter, _path, _ = prepared(tmp_path, monkeypatch)
+    try:
+        trials = [trial(case.case_id, route, 1 if route == 'candidate' else 2)
+                  for case in adapter.plan.suite.cases if case.split.value == 'holdout'
+                  for route in ('candidate', 'baseline')]
+        for item in trials:
+            item.host_models = {item.route_id: 'synthetic-model'}
+        campaign = BenchmarkCampaignReport(
+            run_id='cost-timing', suite_id=adapter.plan.suite.suite_id,
+            domain=adapter.plan.suite.domain, trials=trials,
+            deterministic_tools_available=True, pricing_snapshot_ids=[],
+            frozen_holdout_decisions={}, summaries=[], baseline_deltas=[],
+            oracles=[], subscription_conservation=[])
+        ledger = AssessmentOperationLedger(plan_id=adapter.plan.plan_id, operations=[
+            AssessmentOperation(operation_id='report', plan_id=adapter.plan.plan_id,
+                                stage='report', reserved=AssessmentLimits(max_operations=1, max_elapsed_seconds=1))])
+        report = fit_report(adapter.plan, adapter.recipe, campaign, ledger=ledger)
+        condition = next(iter(report.condition_comparisons))
+        assert report.condition_comparisons[condition]['break_even_uses']['wall_time_ms'] is None
+        ledger.operations[0].elapsed_seconds = 0.1
+        apply_assessment_costs(report, campaign, ledger)
+        fresh = fit_report(adapter.plan, adapter.recipe, campaign, ledger=ledger)
+        assert fresh.condition_comparisons[condition]['break_even_uses']['wall_time_ms'] > 0
+        if tamper:
+            report.condition_comparisons[condition]['break_even_uses']['wall_time_ms'] = 999999
+        service.repository.put('campaign', campaign.run_id, campaign)
+        service.repository.put('operation_ledger', content_digest(ledger), ledger)
+        service.repository.put('report', report.report_id, report)
+        if tamper:
+            with pytest.raises(ConfigurationError, match='condition costs do not reproduce'):
+                adapter.normalize(report.report_id)
+        else:
+            adapter.normalize(report.report_id)
+            assert adapter.details['assessment_analysis']['condition_comparisons'][condition]['break_even_uses']['wall_time_ms'] is None
+    finally:
+        await router.close()

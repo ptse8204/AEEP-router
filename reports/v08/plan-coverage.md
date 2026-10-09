@@ -4133,3 +4133,12 @@ reproduction, one explicit-backend evaluation CLI, and private installation of
 AEEP's existing shared assets. Normal-import targeted checks passed 205 tests and
 24 subtests. Ruff/mypy passed; full source-bound regression/coverage is next.
 No new model call, credential access or external package installation occurred.
+
+V2 D46-D47 repair seeded bootstrap ordering in the shared analysis and accept only
+conservative unknown condition costs from the service's report-operation timing.
+An explicit preview acknowledgment can disclose unknown memory without fabricating
+a requirement or granting installation. Source `3f1f886` passed 1,518 ordinary
+tests / 21 skips; coverage was deliberately interrupted, not passed. Replacement
+source-bound verification follows. Six unified CLI synthetic trials and exact-name
+cleanup passed. The 33-wheel package closure was inspected but not installed;
+see `../toolkit-v2/c06/package-installation`. Historical evidence is unchanged.

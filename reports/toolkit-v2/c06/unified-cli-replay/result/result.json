@@ -1,0 +1,409 @@
+{
+  "schema": "aeep.toolkit.controlled-fixture.v1",
+  "evidence_kind": "synthetic",
+  "definition_ref": "a0da9139a182f08b40cbb93d0f75b8d0cf43b606c9699e972d3d7fb8b365dc29",
+  "outputs_retained": false,
+  "environment": {
+    "environment_id": "toolkit-offline-fixture",
+    "kind": "container",
+    "identity": {
+      "purpose": "upstream synthetic dispatch"
+    },
+    "network": false,
+    "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "cpu_count": 1.0,
+    "memory_mb": 256,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [
+      "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-ase-worker-source-g901okuj"
+    ]
+  },
+  "trials": [
+    {
+      "case": "trivial-edit",
+      "arm": "treatment",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:trivial-edit:treatment",
+      "receipt_id": "rcpt_4fcd49d4878c425691645fa0342bda00",
+      "receipt_ref": "3a64d0e3d1a9f99f92de653a954b8431078dce1e36899d5485f85b7221158838",
+      "execution_success": true,
+      "worker_name": "aeep-b124a2b3702e38168b0f66dc7dac67cf",
+      "candidate_exposed": true,
+      "payload_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "output_sha256": "2adc007f450256519375d970a92c57fe0a1dfb89535c44d2a1e5724201b27e3c"
+    },
+    {
+      "case": "trivial-edit",
+      "arm": "control",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:trivial-edit:control",
+      "receipt_id": "rcpt_ef0b50b70a22458682500faf824c4477",
+      "receipt_ref": "de89765c708a6acfbe79b88e0232e087bdaa313d44fdc0723e8ade6225623598",
+      "execution_success": true,
+      "worker_name": "aeep-5cc065a65222012228386a3e037922c6",
+      "candidate_exposed": false,
+      "payload_sha256": null,
+      "output_sha256": "2adc007f450256519375d970a92c57fe0a1dfb89535c44d2a1e5724201b27e3c"
+    },
+    {
+      "case": "complex-edit",
+      "arm": "treatment",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:complex-edit:treatment",
+      "receipt_id": "rcpt_08816a25942d48e999d1a20bcfc5be53",
+      "receipt_ref": "3102cd60dd40d3cf2199ab92e352f08881c7ec353500c771a82235ec45b17412",
+      "execution_success": true,
+      "worker_name": "aeep-7d68e625d6a97ae0e73d0f27f3d2978e",
+      "candidate_exposed": true,
+      "payload_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "output_sha256": "aabab8c62b3d42dd76374a15097626b4c7ee06a1243ee3ca99100fe978e53181"
+    },
+    {
+      "case": "complex-edit",
+      "arm": "control",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:complex-edit:control",
+      "receipt_id": "rcpt_7e2a044079e643ff94f3e7a007a9d018",
+      "receipt_ref": "c5a834950622e2b17172f9e58d0f2e05a599983f6dce42ad3d4efda8992edc0a",
+      "execution_success": true,
+      "worker_name": "aeep-e241a1d8a112c1c6ec14824b42a0f460",
+      "candidate_exposed": false,
+      "payload_sha256": null,
+      "output_sha256": "aabab8c62b3d42dd76374a15097626b4c7ee06a1243ee3ca99100fe978e53181"
+    },
+    {
+      "case": "adjacent",
+      "arm": "treatment",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:adjacent:treatment",
+      "receipt_id": "rcpt_7903105530904c2984e78291bdce7d5a",
+      "receipt_ref": "972efea55dae7c6b7921138ea4fd04c44e7e0353ae76e43bb2e3a82c076e07f9",
+      "execution_success": true,
+      "worker_name": "aeep-b0ac98e133c06ca6567aea68fe3dce6b",
+      "candidate_exposed": true,
+      "payload_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "output_sha256": "8763e45c4fe6ac48b4d96f60f368610033933131639df8832cdd62e920469ed2"
+    },
+    {
+      "case": "adjacent",
+      "arm": "control",
+      "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:adjacent:control",
+      "receipt_id": "rcpt_bcf027681f8347f0b122d58e6d9ccc92",
+      "receipt_ref": "647dc55d7f650b76bca15ffc6c8bdb35d59ab1119112b6d89df93dab2190bfef",
+      "execution_success": true,
+      "worker_name": "aeep-f560a99728147efc117e39c77569f22e",
+      "candidate_exposed": false,
+      "payload_sha256": null,
+      "output_sha256": "8763e45c4fe6ac48b4d96f60f368610033933131639df8832cdd62e920469ed2"
+    }
+  ],
+  "verified_upstream_rows": [
+    {
+      "case": "trivial-edit",
+      "arm": "without_skill",
+      "verified": true,
+      "exposed": false,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-trivial-edit/fake/without_skill"
+    },
+    {
+      "case": "trivial-edit",
+      "arm": "with_skill",
+      "verified": true,
+      "exposed": true,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-trivial-edit/fake/with_skill"
+    },
+    {
+      "case": "complex-edit",
+      "arm": "without_skill",
+      "verified": true,
+      "exposed": false,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-complex-edit/fake/without_skill"
+    },
+    {
+      "case": "complex-edit",
+      "arm": "with_skill",
+      "verified": true,
+      "exposed": true,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-complex-edit/fake/with_skill"
+    },
+    {
+      "case": "adjacent",
+      "arm": "without_skill",
+      "verified": true,
+      "exposed": false,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-adjacent/fake/without_skill"
+    },
+    {
+      "case": "adjacent",
+      "arm": "with_skill",
+      "verified": true,
+      "exposed": true,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-adjacent/fake/with_skill"
+    }
+  ],
+  "ledger": {
+    "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+    "operations": [
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:adjacent:control",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:16.340856Z",
+        "elapsed_seconds": 0.7192982919514179,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 700.4355420358479,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:adjacent:treatment",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:15.463445Z",
+        "elapsed_seconds": 0.7344754578080028,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 714.8992500733584,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:complex-edit:control",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:14.573229Z",
+        "elapsed_seconds": 0.7504655830562115,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 732.3891660198569,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:complex-edit:treatment",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:13.689693Z",
+        "elapsed_seconds": 0.7469484170433134,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 727.2894158959389,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:trivial-edit:control",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:12.743667Z",
+        "elapsed_seconds": 0.7951504171360284,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 774.7900830581784,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7:trivial-edit:treatment",
+        "plan_id": "planning_d5f60b8d55dc4ecbb4030871d9dab7c7",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T21:22:11.370611Z",
+        "elapsed_seconds": 1.219485207926482,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 1195.6641669385135,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Real agent/credential conformance is not established.",
+    "Upstream fake token/time constants are excluded from model observations.",
+    "No live assessment grant was created, replaced or reset."
+  ]
+}
