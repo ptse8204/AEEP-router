@@ -1,0 +1,157 @@
+{
+  "source_commit": "5c647dd",
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests",
+        "integrations/toolkit"
+      ],
+      "returncode": 0,
+      "seconds": 0.08,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/00.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "seconds": 1.04,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/01.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest"
+      ],
+      "returncode": 0,
+      "seconds": 622.57,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/02.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "returncode": 0,
+      "seconds": 910.84,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/03.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "returncode": 0,
+      "seconds": 1.36,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/04.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/tmp/aeep-toolkit-runtime-inventory-coverage.json"
+      ],
+      "returncode": 0,
+      "seconds": 1.78,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/05.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_critical_coverage.py",
+        "/tmp/aeep-toolkit-runtime-inventory-coverage.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.04,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/06.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_coverage.py",
+        "/tmp/aeep-toolkit-runtime-inventory-coverage.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.04,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/07.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "returncode": 0,
+      "seconds": 0.07,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/08.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.18,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/09.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "returncode": 0,
+      "seconds": 0.79,
+      "log": "reports/toolkit-v2/c03/runtime-inventory/validation/10.log"
+    }
+  ],
+  "coverage": {
+    "covered_lines": 28682,
+    "num_statements": 33737,
+    "percent_covered": 81.52487501927016,
+    "percent_covered_display": "82",
+    "missing_lines": 5055,
+    "excluded_lines": 256,
+    "percent_statements_covered": 85.01645078104158,
+    "percent_statements_covered_display": "85",
+    "num_branches": 11670,
+    "num_partial_branches": 2514,
+    "covered_branches": 8336,
+    "missing_branches": 3334,
+    "percent_branches_covered": 71.43101970865467,
+    "percent_branches_covered_display": "71"
+  },
+  "source_stability": {
+    "unchanged": false,
+    "changed": [
+      "integrations/toolkit/report.html"
+    ]
+  },
+  "standalone_tests": 31,
+  "core_tests": 1356,
+  "core_skipped": 21,
+  "scope": "Offline software and synthetic upstream execution only; C03/C04 incomplete"
+}

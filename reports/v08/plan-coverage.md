@@ -3961,3 +3961,20 @@ A fresh synthetic upstream run is in
 [the inventory showcase](../toolkit-v2/runtime-inventory-showcase/index.html).
 Full regression verification remains pending for this source. General installer,
 worker-conformance and live/release gates are unchanged.
+
+The read-only dependency artifact audit additionally matched 2,906 installed
+payload files against the exact 24 locked wheel hashes (7,467,556 archive bytes).
+Generated entrypoints, bytecode caches, unlisted files and the interpreter remain
+outside this proof. It performed no installation or package execution; see
+`reports/toolkit-v2/c03/runtime-inventory/wheel-audit.json`. The latest synthetic
+report is `reports/toolkit-v2/runtime-inspected-showcase`; its command examples
+were corrected during browser verification. Ordinary full tests passed 1,356
+cases with 21 skips; coverage/quality verification is still pending.
+
+Runtime-inventory verification completed: both full suites passed 1,356 tests
+with 21 skips, 81.524875% combined coverage and both authority branch gates.
+All eleven commands in `../toolkit-v2/c03/runtime-inventory/validation/checks.json`
+passed. Python source stayed fixed; the report command-example correction was
+verified in a fresh upstream fixture run and browser check. The separate wheel
+audit matched 2,906 payload files from 24 exact archives, excluding generated
+scripts, caches, unlisted files and the interpreter. C03/C04 remain unfinished.

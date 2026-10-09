@@ -1,0 +1,132 @@
+{
+  "receipt_id": "rcpt_10602b1c2f004e4cacc49e37aabf7c32",
+  "decision_id": "dec_592fddf240c2456cbe2f952ac19c482e",
+  "action_id": "act_9401e600064049739eb8a0eb0c4f1c9b",
+  "capability": "toolkit.fixture.batch",
+  "executor_id": "toolkit.fixture.coordinator",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-10-09T00:41:34.538116Z",
+  "ended_at": "2026-10-09T00:41:35.969377Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 1430.5582919623703,
+    "cpu_ms": 631.2067519999999,
+    "memory_mb_seconds": 77.31399720159607,
+    "peak_memory_mb": 66.640625,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 313,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "evidence_kind": "synthetic",
+    "scope": "upstream coordinator batch only",
+    "decision_ref": "3d4cf69384e2cbc03e51fe9de73cdc42f51da68bd1328e2ab594f057447f7905",
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_9401e600064049739eb8a0eb0c4f1c9b",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "391febe37d644f7dabe2b51c4a38b3b4",
+          "attempt_id": "act_9401e600064049739eb8a0eb0c4f1c9b",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "391febe37d644f7dabe2b51c4a38b3b4",
+          "attempt_id": "act_9401e600064049739eb8a0eb0c4f1c9b",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "391febe37d644f7dabe2b51c4a38b3b4"
+    }
+  }
+}

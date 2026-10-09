@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '44da49f'
-last_check_command: 'Framework Python 3.13; /tmp/aeep-toolkit-doctor-final-checks.py; commands and logs in reports/toolkit-v2/c03/doctor-validation/checks.json'
-last_check_result: '1355 passed, 21 skipped in each core suite; 81.52% combined coverage; both required branch gates and all 11 recorded commands passed. Standalone bridge: 19 tests and fresh upstream fixture execution passed. Core source stable; two bridge files changed and verified separately.'
-next_action: 'Continue C03 installed-package inventory and reviewed setup/rollback, then C04 per-trial controlled-worker dispatch through the pinned upstream harness seam. Project configuration inventory and coordinator receipt verification are implemented; neither proves installation or worker conformance. Complete the candidate-to-report C03-C06 journey without another architecture question.'
+last_verified_commit: '5c647dd'
+last_check_command: 'Framework Python 3.13; commands and logs in reports/toolkit-v2/c03/runtime-inventory/validation/checks.json'
+last_check_result: '1356 passed, 21 skipped in each core suite; 81.52% combined coverage; both required branch gates and all 11 commands passed. Standalone bridge: 31 tests and fresh upstream fixture execution passed. Python source stable; report.html command examples changed and verified separately.'
+next_action: 'Continue C03 reviewed setup/rollback, then C04 per-trial controlled-worker dispatch through the pinned upstream harness seam. Project configuration inventory and coordinator receipt verification are implemented; neither proves installation or worker conformance. Complete the candidate-to-report C03-C06 journey without another architecture question.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -516,3 +516,49 @@ request or credential access was needed. D25 records the finite test review.
 C03 remains IN_PROGRESS: general reviewed installation/rollback and other
 extension runtimes are still unfinished. Required full verification follows on
 fixed source; do not transfer the previous run's coverage to this increment.
+
+### Runtime inventory validation and dependency artifact audit
+
+Implementation is committed as `5c647dd`. The ordinary full suite passed 1,356
+tests with 21 skips; branch coverage and remaining quality checks are running in
+`c03/runtime-inventory/validation`. Driver:
+`/tmp/aeep-toolkit-runtime-inventory-checks.py`, tool session 7775. Core and Python
+bridge source stayed fixed. Browser verification found two report command examples
+missing `PYTHONPATH`; only `report.html` changed after validation began. A fresh
+upstream run with that correction is in `reports/toolkit-v2/runtime-inspected-showcase`.
+Do not overwrite the preceding report or claim whole-tree source stability.
+
+A separate read-only artifact audit checked the exact 24 locked wheels against
+the existing runtime: 2,906 archive payload files matched. It downloaded no new
+versions, installed nothing and executed no package code. The 7,467,556-byte wheel
+cache is `/private/tmp/aeep-toolkit-wheel-audit-ofr3udoo`; retain it for later reuse.
+Exact hashes, original/final audit scripts and exclusions are in
+`c03/runtime-inventory/wheel-audit.json` and adjacent records. RECORD, generated
+console scripts, bytecode caches, unlisted files and the interpreter are outside
+that proof. License files are hashed for review, not a redistribution approval.
+The product inventory's integrity unknowns are not silently upgraded by this
+separate audit.
+
+Read-only C04 findings are recorded in `c04/worker-seam-review.json`. Upstream
+`get_harness` is the per-trial integration point; its post-run budget checks cannot
+replace existing AEEP reservations. Retain existing managed-worker controls and
+keep grading inputs outside trial workers. A Docker daemon socket must not be
+exposed to the evaluator coordinator to bypass this integration. No container or
+image was provisioned. The existing image was inspected by exact ID only.
+
+The current preview is tool session 41767 at `http://127.0.0.1:8765/`, serving only
+`runtime-inspected-showcase`. Its inventory link and corrected commands were
+checked in the browser; the screenshot and matching HTTP byte hashes are in the
+runtime-inventory evidence directory. No human-usability gate is inferred.
+
+### Completed runtime-inventory verification
+
+Both full suites passed 1,356 tests with 21 skips and one existing Starlette
+deprecation warning. Combined coverage was 81.524875%; both required branch
+gates passed. All eleven commands in `validation/checks.json` succeeded, including
+schemas, compileall, Ruff, policy and mypy. The driver completed; no test remains
+running. Python source stayed fixed at `5c647dd`; `report.html` alone changed,
+and the fresh upstream execution, artifact verification and browser check cover
+that command-example correction. Standalone tests passed 31 cases; runtime.py
+reached 93% combined coverage in that separate run. Neither result establishes
+worker conformance or live model value. C03/C04 remain IN_PROGRESS.

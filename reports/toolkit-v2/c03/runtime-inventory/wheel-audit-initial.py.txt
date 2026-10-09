@@ -1,0 +1,54 @@
+import hashlib,json,shutil,tempfile,urllib.request,zipfile
+from pathlib import Path,PurePosixPath
+from concurrent.futures import ThreadPoolExecutor
+root=Path('/Users/edwintse/Documents/aeep-toolkit-v2')
+packages=json.loads((root/'integrations/toolkit/packages.json').read_text())
+runtime=Path('/private/tmp/aeep-ase-c04-tt14mj6r/rebuild/lib/python3.13/site-packages')
+assert shutil.disk_usage('/private/tmp').free >= 50*1024**3+128*1024**2
+output=Path(tempfile.mkdtemp(prefix='aeep-toolkit-wheel-audit-',dir='/private/tmp'))
+report=root/'reports/toolkit-v2/c03/runtime-inventory/wheel-audit.json'
+report.write_text(json.dumps({'status':'started','directory':str(output),'scope':'Read-only pinned wheel/installed file comparison; no package execution or installation'})+'\n')
+def member_path(name):
+ p=PurePosixPath(name)
+ if p.is_absolute() or '..' in p.parts or not p.parts or any(x.casefold() in {'.codex','auth.json','credentials.json'} for x in p.parts):
+  raise ValueError('unsafe wheel member')
+ return p
+for bad in ('../outside','/outside','.codex/auth.json'):
+ try: member_path(bad)
+ except ValueError: pass
+ else: raise AssertionError('unsafe path accepted')
+def inspect(item):
+ url=item['url'];assert url.startswith('https://files.pythonhosted.org/packages/')
+ path=output/url.rsplit('/',1)[-1]
+ existing=Path('/private/tmp/aeep-ase-c04-tt14mj6r')/path.name
+ reused=existing.is_file() and hashlib.sha256(existing.read_bytes()).hexdigest()==item['sha256']
+ if reused: raw=existing.read_bytes()
+ else:
+  with urllib.request.urlopen(url,timeout=30) as response:
+   assert response.geturl().startswith('https://files.pythonhosted.org/packages/')
+   raw=response.read(16*1024*1024+1)
+  assert len(raw)<=16*1024*1024,'wheel exceeds per-artifact limit'
+ assert hashlib.sha256(raw).hexdigest()==item['sha256'],'archive hash mismatch'
+ path.write_bytes(raw)
+ matched=[];different=[];missing=[];excluded=[];licenses={}
+ with zipfile.ZipFile(path) as archive:
+  infos=archive.infolist()
+  assert len(infos)<=20000 and sum(x.file_size for x in infos)<=128*1024*1024
+  for info in infos:
+   member=member_path(info.filename)
+   if info.is_dir(): continue
+   if member.name=='RECORD' or '.data' in member.parts[0]:
+    excluded.append(str(member));continue
+   target=runtime/str(member)
+   assert target.resolve().is_relative_to(runtime) and not target.is_symlink(),'linked installed payload'
+   expected=hashlib.sha256(archive.read(info)).hexdigest()
+   if 'license' in member.name.casefold() or 'copying' in member.name.casefold(): licenses[str(member)]=expected
+   if not target.is_file(): missing.append(str(member))
+   elif hashlib.sha256(target.read_bytes()).hexdigest()!=expected: different.append(str(member))
+   else: matched.append(str(member))
+ return {'name':item['name'],'version':item['version'],'url':url,'wheel_sha256':item['sha256'],'archive_bytes':len(raw),'reused_existing_archive':reused,'declared_license':item['license'],'license_file_sha256':licenses,'matched_file_count':len(matched),'matched_paths_sha256':hashlib.sha256(json.dumps(sorted(matched)).encode()).hexdigest(),'different':different,'missing':missing,'excluded':excluded}
+with ThreadPoolExecutor(max_workers=4) as pool: results=list(pool.map(inspect,packages))
+assert sum(x['archive_bytes'] for x in results)<=128*1024*1024
+record={'status':'PASS' if all(not x['different'] and not x['missing'] for x in results) else 'MISMATCH','directory':str(output),'scope':'Pinned archive payload files match installed files; no package execution or installation','packages':results,'archive_bytes':sum(x['archive_bytes'] for x in results),'matched_files':sum(x['matched_file_count'] for x in results),'limitations':['RECORD and .data relocation entries excluded. Generated console scripts, bytecode caches, unlisted files and interpreter are not attested.','License files are hashed for review; metadata/license presence is not a complete redistribution-rights determination.','A filesystem observation is not host conformance or execution permission.']}
+report.write_text(json.dumps(record,indent=2)+'\n')
+print(json.dumps({k:v for k,v in record.items() if k!='packages'},indent=2))

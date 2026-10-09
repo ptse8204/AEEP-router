@@ -41,8 +41,8 @@
     <div class="table-wrap"><table><caption>Preferred solutions supplied by the operator</caption><thead><tr><th scope="col">Function</th><th scope="col">Preferred solution</th><th scope="col">Integration responsibility</th><th scope="col">Actual status</th></tr></thead><tbody>{{COMPONENTS}}</tbody></table></div>
     <p class="note">ToolHive serves MCP isolation. The existing AEEP controlled workers separately serve paired agent-trial isolation; they do not replace ToolHive's role. LangGraph executes workflows, EvoAgentX proposes them, and AFlow optimizes them. Each remains a distinct optional integration.</p>
   </section>
-  <section class="reproduce"><div><h2>Build from one directory.</h2><p>Run from the repository root on macOS arm64 with Python 3.13 and Command Line Tools. Setup creates a new private environment. Demo accepts only the pinned synthetic suite.</p></div><pre>python3 integrations/toolkit/stack.py plan
-python3 integrations/toolkit/stack.py setup \
+  <section class="reproduce"><div><h2>Build from one directory.</h2><p>Run from the repository root on macOS arm64 with Python 3.13 and Command Line Tools. Setup creates a new private environment. Demo accepts only the pinned synthetic suite.</p></div><pre>PYTHONPATH=src python3 -B integrations/toolkit/stack.py plan
+PYTHONPATH=src python3 integrations/toolkit/stack.py setup \
   --runtime /tmp/aeep-toolkit-runtime
 PYTHONPATH=src python3 integrations/toolkit/stack.py demo \
   --runtime /tmp/aeep-toolkit-runtime \

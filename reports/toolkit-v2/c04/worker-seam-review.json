@@ -1,0 +1,46 @@
+{
+  "scope": "Read-only C04 integration seam inspection; no worker launched or qualified",
+  "upstream": {
+    "version": "0.7.0",
+    "revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+    "files": {
+      "runner.py": "a37df1cddbfcf4d0437835c2f582ee539724758d9d257f86ac47e8c39484ca27",
+      "harnesses/__init__.py": "348b9cc731fb6470a6dfe38000c090bb743094cdc183156e27ba2b37a8a11bb0"
+    }
+  },
+  "existing_container_executor": {
+    "path": "src/aeep/assessment/containment.py",
+    "sha256": "573a2dd195d12c47bf7dfef371e7dfc7d4dfac4df0aafdc9daf88187804cbcc0",
+    "image_inspected": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "image_presence_is_conformance": false
+  },
+  "observed_seams": [
+    {
+      "upstream": "HARNESSES / get_harness",
+      "requirement": "Supply a pinned harness implementation that dispatches only a pre-reserved trial to its exact existing managed worker; retain upstream scheduling."
+    },
+    {
+      "upstream": "AgentHarness.run(prompt, output_dir)",
+      "requirement": "Transfer only the current prompt and workspace. Keep suite expected outputs, graders and future cases outside the worker."
+    },
+    {
+      "upstream": "EvalRunner._build_prompt",
+      "finding": "force_skill_invocation=false preserves the same prompt across arms; retain this setting for value trials."
+    },
+    {
+      "upstream": "EvalRunner._check_budget",
+      "finding": "Upstream budget enforcement is post-run. It cannot replace AEEP pre-dispatch authorization/reservation or uncertainty recovery."
+    },
+    {
+      "upstream": "EvalRunner.run task construction",
+      "finding": "The CLI baseline flag adds control trials to treatment trials; a complete runner inside one worker cannot establish separate arm isolation."
+    }
+  ],
+  "reuse_limits": [
+    "ContainerExecutor preserves the local pinned-image command boundary but is not itself the managed capable-agent conformance proof.",
+    "Its cleanup and accounting semantics must be retained; Docker client CPU/RSS cannot become agent resource observations.",
+    "Do not expose a Docker daemon socket to the untrusted evaluator coordinator to make a harness callback work.",
+    "Common coordinator dependencies and trusted dispatch integration need an exact reviewed closure; the current private evaluator environment contains no full AEEP runtime."
+  ],
+  "next_safe_work": "Resolve per-trial dispatch through the existing managed-host adapter and assessment repository; test before authorizing any new runtime provisioning or real-host execution."
+}
