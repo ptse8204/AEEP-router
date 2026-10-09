@@ -98,6 +98,15 @@ def rate_limit_observation(payload: dict[str, Any], *, resource_id: str) -> Capa
     )
 
 
+TOKEN_FIELDS = {
+    'inputTokens': 'input_tokens',
+    'cachedInputTokens': 'cached_input_tokens',
+    'cacheWriteInputTokens': 'cache_write_input_tokens',
+    'outputTokens': 'output_tokens',
+    'reasoningOutputTokens': 'reasoning_output_tokens',
+}
+
+
 def turn_accounting(
     token_usage: dict[str, int] | None,
     *,
@@ -111,10 +120,15 @@ def turn_accounting(
         source=MeasurementEvidence(),
         included_or_paid=SubscriptionCharge.UNKNOWN,
     )
-    if token_usage is None or model is None:
+    if token_usage is None:
         return ResourceVector(), ResourceAccounting(subscription_usage=[subscription])
+    counts = {field: token_usage[wire] for wire, field in TOKEN_FIELDS.items() if wire in token_usage}
+    resources = ResourceVector(**counts)
+    # Legacy usage requires parent totals; keep isolated known counts in raw resources.
+    if model is None or not {'input_tokens', 'output_tokens'} <= counts.keys():
+        return resources, ResourceAccounting(subscription_usage=[subscription])
     evidence = MeasurementEvidence(
-        status=EvidenceStatus.COMPLETE,
+        status=EvidenceStatus.COMPLETE if len(counts) == len(TOKEN_FIELDS) else EvidenceStatus.PARTIAL,
         source=EvidenceSource.PROVIDER_REPORT,
         trust=TrustLevel.SELF_ASSERTED,
         observed_at=datetime.now(UTC),
@@ -129,13 +143,6 @@ def turn_accounting(
         output_tokens=token_usage.get("outputTokens", 0),
         reasoning_output_tokens=token_usage.get("reasoningOutputTokens", 0),
         evidence=evidence,
-    )
-    resources = ResourceVector(
-        input_tokens=usage.input_tokens,
-        cached_input_tokens=usage.cached_input_tokens,
-        cache_write_input_tokens=usage.cache_write_input_tokens,
-        output_tokens=usage.output_tokens,
-        reasoning_output_tokens=usage.reasoning_output_tokens,
     )
     return resources, ResourceAccounting(
         subscription_usage=[subscription],

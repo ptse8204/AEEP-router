@@ -4089,3 +4089,12 @@ No model turn, authentication action or release occurred. The installed upstream
 Codex parser defaults absent usage to zero; D40 selects the existing AEEP
 fallback for the first managed-model adapter. Its own missing-field correction
 (D41) is still a draft. Engineering remains eligible without user intervention.
+
+### Toolkit managed-host accounting correction (D41)
+
+Missing App Server usage fields no longer become complete zero measurements.
+Legacy numeric resource defaults remain for compatibility; partial accounting
+and observed-field metadata distinguish unknown values. Malformed later usage
+stops the protocol while retaining incurred counts. Synthetic protocol tests
+pass (87 related checks); full source-bound verification is pending. No current
+source live/production gate is closed by those fixtures.

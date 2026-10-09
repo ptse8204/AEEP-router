@@ -42,7 +42,7 @@ from ..models import (
     new_id,
 )
 from .base import HostModel, HostProbe, HostProbeStatus, ManagedHostExecutionContext
-from .codex_accounting import rate_limit_observation, turn_accounting
+from .codex_accounting import TOKEN_FIELDS, rate_limit_observation, turn_accounting
 from .codex_invocation import (
     inventory,
     isolated_config,
@@ -1102,6 +1102,9 @@ class CodexAppServerAdapter:
                 resource_pool=self.resource_id,
             )
             resources.latency_ms = (time.monotonic() - started) * 1000
+            if collector.usage_incomplete:
+                for usage in accounting.model_usage:
+                    usage.evidence.status = EvidenceStatus.PARTIAL
             status = (
                 ExecutionStatus.FAILED if dynamic_cleanup_unconfirmed else
                 ExecutionStatus.SUCCESS
@@ -1143,6 +1146,7 @@ class CodexAppServerAdapter:
                     "host_runtime_digest": actual_runtime,
                     **({"boundary_digest": boundary_reference} if boundary_reference is not None else {}),
                     "model_turn_count": 1,
+                    "codex_token_fields": json.dumps(sorted(result.token_usage or {}) if not collector.usage_incomplete else []),
                     "tool_selection_rounds": None,
                     "implementation_schema_bytes": None,
                     "output_schema_bytes": output_schema_bytes,
@@ -1169,6 +1173,7 @@ class CodexAppServerAdapter:
             error_type="TIMEOUT" if status == ExecutionStatus.TIMEOUT else "ProtocolError",
             error_message="Codex execution ended before complete evidence was available",
             metadata={"execution_stream_complete": False, "actual_model": collector.actual_model, "model_turn_count": int(collector.turn_id is not None), "tool_call_count": collector.tool_count,
+                      "codex_token_fields": json.dumps(sorted(collector.token_usage or {})),
                       "host_progress": collector.progress_json()},
         )
 
@@ -1220,6 +1225,7 @@ class _TurnCollector:
         self.turn_id: str | None = None
         self.actual_model: str | None = None
         self.token_usage: dict[str, int] | None = None
+        self.usage_incomplete = False
         self.output_parts: list[str] = []
         self.final_parts: list[str] = []
         self.tool_count = 0
@@ -1281,17 +1287,22 @@ class _TurnCollector:
             token_usage = params.get("tokenUsage")
             total = token_usage.get("total") if isinstance(token_usage, dict) else None
             parsed = _token_usage(total)
-            if parsed is not None:
-                if self.terminal is not None and self.terminal[1] != parsed:
-                    self._reject("conflicting terminal token usage")
-                    return
-                if self.journal is not None and self.token_usage != parsed:
-                    _, accounting = turn_accounting(parsed, model=self.actual_model or "unresolved", resource_pool="unknown")
-                    for usage in accounting.model_usage:
-                        usage.evidence.status = EvidenceStatus.PARTIAL
-                    self.journal.append("usage.reported", f"usage:{self.journal.journal_id}:{len(self.journal.items)}",
-                                        accounting=accounting, accounting_mode="cumulative")
-                self.token_usage = parsed
+            if parsed is None:
+                self.usage_incomplete = True
+                if total not in (None, {}):
+                    self._reject("invalid token usage observation")
+                return
+            self.usage_incomplete = False
+            if self.terminal is not None and self.terminal[1] != parsed:
+                self._reject("conflicting terminal token usage")
+                return
+            if self.journal is not None and self.token_usage != parsed:
+                _, accounting = turn_accounting(parsed, model=self.actual_model or "unresolved", resource_pool="unknown")
+                for usage in accounting.model_usage:
+                    usage.evidence.status = EvidenceStatus.PARTIAL
+                self.journal.append("usage.reported", f"usage:{self.journal.journal_id}:{len(self.journal.items)}",
+                                    accounting=accounting, accounting_mode="cumulative")
+            self.token_usage = parsed
         elif method == "item/completed":
             item = params.get("item")
             if isinstance(item, dict):
@@ -1415,20 +1426,10 @@ def _approval_side_effect(method: str, params: Mapping[str, Any]) -> SideEffect:
 def _token_usage(value: object) -> dict[str, int] | None:
     if not isinstance(value, dict):
         return None
-    keys = (
-        "inputTokens",
-        "cachedInputTokens",
-        "cacheWriteInputTokens",
-        "outputTokens",
-        "reasoningOutputTokens",
-        "totalTokens",
-    )
-    result = {
-        key: raw
-        for key in keys
-        if isinstance((raw := value.get(key, 0)), int) and not isinstance(raw, bool) and raw >= 0
-    }
-    return result if len(result) == len(keys) else None
+    result = {key: value[key] for key in (*TOKEN_FIELDS, 'totalTokens') if key in value}
+    if not result or any(type(raw) is not int or raw < 0 for raw in result.values()):
+        return None
+    return result
 
 
 def _message_digest(value: object) -> str:

@@ -90,3 +90,13 @@ run with observations is `INCONCLUSIVE` about real value; a stopped run with no
 observed trial is `NOT_ASSESSED`. The readable report shows the engineering
 comparison status separately from the unassessed real-model value. Earlier
 artifacts retain their original format and evidence meaning.
+
+## Missing native token measurements
+
+New Codex App Server receipts retain the exact supplied token-field names in
+`codex_token_fields`. Missing categories leave accounting partial; legacy numeric
+defaults are not observations. A missing final snapshot leaves the final field
+list empty while retaining earlier raw counts as partial evidence. Unknown model
+identity likewise preserves known raw counts without inventing model accounting.
+Historical receipts retain their original bytes and source bindings. The toolkit
+must not infer zero usage from an older receipt without field-level evidence.

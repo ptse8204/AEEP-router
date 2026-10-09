@@ -713,6 +713,7 @@ class Router:
             "tool",
             "tool_call_count",
             "model_turn_count",
+            "codex_token_fields",
             "tool_selection_rounds",
             "implementation_schema_bytes",
             "output_schema_bytes",

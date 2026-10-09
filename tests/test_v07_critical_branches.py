@@ -419,6 +419,8 @@ async def test_turn_collector_rejects_unbound_or_oversized_events():
     collector.handle("model/rerouted", {"threadId": "other", "toModel": "ignored"})
     collector.handle("model/rerouted", {"turnId": "other", "toModel": "ignored"})
     collector.handle("thread/tokenUsage/updated", {"tokenUsage": {"total": "bad"}})
+    with pytest.raises(CodexProtocolError, match="invalid token usage"):
+        await collector.future
     collector.handle("item/completed", {"item": None})
     collector.handle("item/completed", {"item": {"type": "agentMessage", "text": 1}})
     assert collector.actual_model is None and collector.output_parts == []

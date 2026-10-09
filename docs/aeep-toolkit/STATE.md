@@ -962,3 +962,17 @@ checks passed, as did the native command probes and supplemental checks.
 D41's expanded outside-checkout draft passes 53 related tests, including missing
 final usage and observed counts without a resolved model. Integrate next; these
 protocol fixtures are not live model evidence.
+
+### D41 integrated; required full validation next
+
+The shared App Server parser now preserves absent token categories and marks
+partial usage accordingly. A malformed later snapshot fails protocol validation
+without erasing earlier counts. A missing final snapshot cannot reuse earlier
+counts as complete final usage. Unknown model identity also preserves observed
+raw counts. Sanitized receipt metadata records only supplied field names; no
+receipt schema or historical record changed. Seventeen new tests plus existing
+related checks passed together (87 tests). Focused Ruff and mypy passed.
+Exact test authority and scope are in `c04/missing-token-correction/review.json`.
+No live calls, worker launch, credential action or installer was needed.
+Run the full checks on this source before treating D41 as verified. Continue the
+D40 adapter draft independently; unfinished integration remains engineering work.
