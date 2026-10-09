@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import hashlib
 import json
 import os
@@ -110,11 +111,48 @@ def main(argv: list[str] | None = None) -> int:
         operation.add_argument('--reviewed-digest', required=True)
     candidate = sub.add_parser('candidate', help='Inspect exact local skill payload without executing or installing it')
     candidate.add_argument('path', type=Path)
+    discovery = sub.add_parser('discover', help='Search explicitly configured sources and retain provenance; never install candidates')
+    discovery.add_argument('--config', type=Path, required=True)
+    discovery.add_argument('--store', type=Path, required=True, help='Discovery provenance database (this command writes records)')
+    discovery.add_argument('--source', action='append', required=True)
+    discovery.add_argument('--query', required=True, help='Public search phrase, never private task material')
+    discovery.add_argument('--limit', type=int, default=20)
+    upstream = sub.add_parser('import-report', help='Read upstream observations; never execute software or qualify claims')
+    upstream.add_argument('backend', choices=('waza', 'cisco-skill-scanner'))
+    upstream.add_argument('--input', type=Path, required=True)
+    upstream.add_argument('--revision', required=True, help='Exact supported source revision asserted by the supplier')
+    upstream.add_argument('--candidate-sha256', required=True, help='Supplied candidate binding, not independently verified')
+    upstream.add_argument('--format', choices=('json', 'markdown', 'html'), default='json')
     evaluation = sub.add_parser('eval', help='Run an explicitly selected existing evaluation backend')
     evaluation.add_argument('backend', choices=('scripted', 'managed'))
     evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
     args = parser.parse_args(argv)
     try:
+        if args.command == 'import-report':
+            from .external import import_result, render_import
+            print(render_import(import_result(read_bytes(args.input), args.backend, revision=args.revision,
+                                              candidate_sha256=args.candidate_sha256), args.format))
+            return 0
+        if args.command == 'discover':
+            from aeep.discovery import DiscoveryRequest
+            from aeep.discovery_service import DiscoveryConfig, DiscoveryService
+            from aeep.errors import AEEPError
+            from aeep.store import ReceiptStore
+
+            config = DiscoveryConfig.model_validate(read_json(args.config))
+            request = DiscoveryRequest(public_query=args.query, source_ids=args.source, limit=args.limit)
+            if not set(request.source_ids).issubset(source.source_id for source in config.sources):
+                raise ValueError('discovery source is unavailable')
+            store = ReceiptStore(args.store)
+            try:
+                service = DiscoveryService.from_config(store, config, base_directory=args.config.resolve().parent)
+                result = asyncio.run(service.search(request))
+                print(result.model_dump_json(indent=2))
+                return 0 if all(record.status in {'complete', 'fallback'} for record in result.source_records) else 2
+            except AEEPError as exc:
+                raise ValueError('discovery unavailable or outside configured authority') from exc
+            finally:
+                store.close()
         if args.command == 'eval':
             if args.backend == 'managed':
                 from .managed import main as managed_main

@@ -4177,3 +4177,14 @@ C06's exact 33-wheel installation review remains pending, with a prepared driver
 no runtime was installed. C12's local export and source-declared support preview
 are implemented. The pinned old candidate source was recovered without altering
 the installed newer skill. Current details are in `docs/aeep-toolkit/STATE.md`.
+
+### Toolkit integration continuation — October 9
+
+Latest operator steering prioritizes integrated engineering with focused checks,
+then one complete verification cycle. The pending 33-wheel installation review
+blocks that exact old-source install only. D50 connects the toolkit discovery
+command to existing DiscoveryService/provenance storage and adds minimized Waza
+and Cisco report imports. Thirteen synthetic focused tests pass; imports are
+unverified observations and never qualify a candidate. No upstream installation,
+model call, grant reset, credential access or release occurred. See toolkit
+STATE.md and `reports/toolkit-v2/integration-completion/interface-sources.json`.

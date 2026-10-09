@@ -652,3 +652,18 @@ unqualified external options remain blocked. Catalog metadata cannot activate an
 extension or replace its exact installation review. Update the old all-blocked
 fixture assertion when integrating; preserve the explicit unqualified native-host
 and live-evidence limitations. The draft remains outside source during validation.
+
+## D50 — Connect optional software through its existing interfaces
+
+Reuse DiscoveryService and its canonical provenance store for explicit toolkit
+search, without constructing Router. Reuse upstream machine-readable outputs for
+scanner and additional evaluator imports; preserve raw artifact digests and
+source pins, and keep external claims separate from independently verified
+EvaluationRun receipts. An imported pass or no-findings result cannot qualify a
+candidate. Do not import optional packages during ordinary toolkit startup.
+
+Add only the adapter code needed for these boundaries. No second discovery,
+scanner, evaluator, telemetry server or workflow engine is justified. Exact
+upstream contract checks and synthetic hostile-input tests are routine delegated
+definition work; they do not authorize executing those packages. Full regression
+is deferred until integrated implementation, per the latest operator instruction.

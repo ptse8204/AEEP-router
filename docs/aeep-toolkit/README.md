@@ -96,3 +96,42 @@ contract and requires that flag plus an exact source match. Ownership and suppor
 links remain unverified assertions. Donation links are optional support; purchase
 links do not establish a price or permission to pay. The preview retains synthetic
 labels and unknown measurements and makes no independent efficacy claim.
+
+## Search and inspect optional upstream results
+
+Discovery reuses the existing configured ARD, MCP Registry and local readers. It
+writes provenance to the database you select, but never downloads or executes a
+candidate. Relative catalog paths resolve beside the discovery configuration.
+Remote queries require `allow_remote` in the operator's configuration; use only
+public search phrases. This command is not an installation preview.
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit discover \
+  --config /absolute/discovery.json --store /absolute/discovery.sqlite3 \
+  --source local --query 'CSV helper'
+```
+
+An absent source is unavailable. Upstream verification badges are metadata, not
+AEEP admission. The existing `DiscoveryConfig` schema bounds sources, results
+and deadlines; the CLI returns a failure status when a source fails or times out.
+
+`import-report` reads Waza or Cisco Skill Scanner JSON without installing or
+executing either tool. Supply the exact supported upstream revision and candidate
+hash; both remain supplier assertions. For example, a Waza 0.38.9 source result:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit import-report waza \
+  --input /absolute/waza-results.json \
+  --revision e534d149d89ae77ea158469fb4d2003804b2ee76 \
+  --candidate-sha256 CANDIDATE_SHA256 --format html
+```
+
+Replace `CANDIDATE_SHA256` with the captured candidate's 64-character SHA-256.
+Use `cisco-skill-scanner` with revision
+`c3d7fd9fee50cf2ea45f0b381eb61f857360f825` for a single-skill JSON scan.
+Formats are `json`, `markdown` and `html`; output goes to stdout. Imports omit
+paths, prompts, outputs and diagnostic text. Missing usage remains unknown;
+cached Waza diagnostics are not added to session billing. Scanner suppressions
+and analyzer failures remain visible as counts. No imported status establishes
+independent verification, worker isolation, safety, cost savings or permission
+to execute. These are report adapters, not qualified execution backends.

@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
 last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
-next_action: 'Resolve the pending exact C06 private installation review, then use its prepared run_review.py driver without substituting newer wheels. Continue fresh canonical C07 definitions/conformance through existing delegated scope and accounting; preserve the retained engineering conclusion.'
+next_action: 'Complete toolkit discovery and optional upstream adapters with focused checks. Defer broad regression and new package installation review until integrated source is ready. Pending 33-wheel installation blocks only that exact old-source installation; continue all independent engineering.'
 blocked_actions:
   - 'New 33-wheel private AEEP installation test awaits the exact operator review; independent safe work continues.'
 missing_permissions:
@@ -1268,3 +1268,31 @@ review targets `5386064`, so its installed-CLI test cannot claim to verify the
 later sharing command. Worker execution continues to require reviewed checkout
 assets. Preserve the existing receipt databases, pending historical operations,
 old negative results, model proxy and all unrelated Docker/user resources.
+
+## October 9 integration-first continuation
+
+The operator explicitly directs completion of the product and applicable upstream
+adapters before another full regression/coverage/build cycle. Use focused checks
+per change, then perform required integrated checks once the source is ready.
+The old 33-wheel review remains pending and cannot validate subsequent source.
+No new installation, third-party execution, credential, cash or release authority
+is inferred. Earlier stopping was unfinished engineering, not a demonstrated
+architecture or budget blocker. Historical grants and negative evidence remain
+unchanged. Current source changes will make prior full-suite evidence historical.
+
+### D50 discovery and upstream report adapters
+
+Implemented `discover` over existing DiscoveryService/ReceiptStore, without
+Router or candidate execution. Added pinned Waza 1.0–1.4 JSON and Cisco
+single-skill JSON import adapters with minimized HTML/Markdown/JSON reports.
+Imports remain supplied/unverified and cannot become canonical grades, receipts,
+safety verdicts or benefit claims. Source interfaces and hashes are retained in
+`reports/toolkit-v2/integration-completion/interface-sources.json`.
+
+Focused verification: Framework Python 3.13, `python3 -m pytest
+ tests/test_toolkit_discovery.py tests/test_toolkit_external.py`: 13 passed in
+0.10s. These synthetic interface tests cover missing/partial usage, cached and
+error records, suppressions, failed analyzers, changed schema/pins, duplicate
+JSON/tasks, negative/nonfinite metrics and no process/network effects. Upstream
+packages were not executed. C08/C09 remain IN_PROGRESS pending actual selected
+runtime qualification; prior full-suite evidence is historical, not current.
