@@ -1,0 +1,539 @@
+"""Optional bridge to the existing reviewed AEEP assessment service.
+
+No grants, workers, scheduling or inference are implemented here. Canonical
+assessment records retain all costs, including trials that cannot be normalized.
+"""
+
+from __future__ import annotations
+
+import json
+import sqlite3
+from pathlib import Path
+from typing import Any
+
+from aeep.assessment import verification
+from aeep.assessment.boundary import require_conformance
+from aeep.assessment.models import (
+    AssessmentOperationLedger,
+    AssessmentPlan,
+    AssessmentReport,
+    AssessmentRunBinding,
+    AssessmentSubject,
+    RecipeDefinition,
+    ReviewedMapping,
+    content_digest,
+)
+from aeep.assessment.reporting import fit_report
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.verification import verification_source_digest
+from aeep.benchmarking import BenchmarkCampaignReport, BenchmarkTrial
+from aeep.errors import ConfigurationError
+from aeep.estimator import evidence_cohort_digest
+from aeep.hosts.codex_accounting import TOKEN_FIELDS
+from aeep.models import ExecutionReceipt, ExecutionStatus, ExecutorKind
+from aeep_toolkit.models import (
+    AdapterCapabilities,
+    EvaluationRun,
+    EvidenceBundle,
+    SourcePin,
+    TokenObservation,
+)
+
+
+def plan_preview(plan: AssessmentPlan, source: SourcePin) -> dict[str, Any]:
+    """Pure file-based review; no Router, database, recovery or host initialization."""
+    capabilities = AdapterCapabilities(
+        adapter_id="aeep.benchmark-runner.codex",
+        implementation_sha256=verification_source_digest(
+            Path(verification.__file__).resolve().parents[3]
+        ),
+        hosts=("codex",),
+        candidate_types=("skill",),
+        optional_invocation=True,
+        telemetry=("tokens", "agent_wall_seconds", "verification_wall_seconds"),
+        containment="unverified",
+    )
+    binding = {
+        "plan_sha256": content_digest(plan),
+        "source": source.model_dump(mode="json"),
+        "adapter": capabilities.model_dump(mode="json"),
+    }
+    return {
+        **binding,
+        "review_sha256": content_digest(binding),
+        "plan_id": plan.plan_id,
+        "authorization_id": plan.authorization_id,
+        "blocked_reasons": plan.blocked_reasons,
+        "notice": "File-based review only. Source association, current grant, worker conformance and available budget are checked by the existing service before execution.",
+    }
+
+
+class AEEPAssessmentAdapter:
+    """Bind one existing plan; a source pin is attribution, never authorization."""
+
+    def __init__(self, service: AssessmentService, plan_id: str, source: SourcePin):
+        self.service, self.source = service, source.model_copy(deep=True)
+        self.root = Path(verification.__file__).resolve().parents[3]
+        self.plan = AssessmentPlan.model_validate(service.repository.get("plan", plan_id))
+        if not self.plan.plan_id or Path(self.plan.plan_id).name != self.plan.plan_id or self.plan.plan_id in {'.', '..'}:
+            raise ConfigurationError('assessment identity is not a bounded directory name')
+        self.mapping = ReviewedMapping.model_validate(
+            service.repository.get("mapping", self.plan.mapping_digest)
+        )
+        self.recipe = RecipeDefinition.model_validate(
+            service.repository.get("recipe", self.plan.recipe_digest)
+        )
+        subject = AssessmentSubject.model_validate(
+            service.repository.get("subject", self.plan.subject_digest)
+        )
+        for value, expected in (
+            (self.mapping, self.plan.mapping_digest),
+            (self.recipe, self.plan.recipe_digest),
+            (subject, self.plan.subject_digest),
+        ):
+            if content_digest(value) != expected:
+                raise ConfigurationError("canonical assessment definition digest mismatch")
+        comparison = self.plan.comparison
+        if (
+            comparison is None
+            or comparison.structure != "controlled_agent"
+            or comparison.experiment is None
+        ):
+            raise ConfigurationError(
+                "toolkit managed adapter requires a reviewed controlled-agent experiment"
+            )
+        if any(
+            spec.kind != ExecutorKind.MANAGED_HOST
+            for spec in (self.mapping.candidate, self.mapping.baseline)
+        ):
+            raise ConfigurationError("primary arms must be managed hosts")
+        invocation = self.mapping.candidate.managed_host_config().invocation
+        if (
+            subject.kind not in {"skill", "plugin"}
+            or invocation is None
+            or invocation.mode != "skill"
+            or invocation.skill_sha256 not in subject.dependency_digests.values()
+            or source.artifact_sha256 != content_digest(subject.dependency_digests)
+        ):
+            raise ConfigurationError(
+                "source artifact must match the reviewed skill and inspected subject"
+            )
+        self.capabilities = AdapterCapabilities.model_validate(
+            plan_preview(self.plan, self.source)["adapter"]
+        )
+        self.details: dict[str, Any] = {}
+        self.accounting_records: dict[str, Any] = {}
+
+    @property
+    def review_digest(self) -> str:
+        return content_digest(
+            {
+                "plan_sha256": content_digest(self.plan),
+                "source": self.source.model_dump(mode="json"),
+                "adapter": self.capabilities.model_dump(mode="json"),
+            }
+        )
+
+    def preview(self) -> dict[str, Any]:
+        """Read already-open local records; never enqueue, recover or start a host."""
+        with self.service.router.store._lock:
+            row = self.service.router.store._connection.execute(
+                "SELECT id, state, report_id, error_code FROM assessment_jobs WHERE plan_id=? ORDER BY rowid DESC LIMIT 1",
+                (self.plan.plan_id,),
+            ).fetchone()
+        return {
+            "review_sha256": self.review_digest,
+            "plan_id": self.plan.plan_id,
+            "plan_sha256": content_digest(self.plan),
+            "source": self.source.model_dump(mode="json"),
+            "backend": self.capabilities.model_dump(mode="json"),
+            "job": dict(row) if row else None,
+            "notice": "Existing reviews, grant and worker conformance still apply. Preview grants no execution authority.",
+        }
+
+    async def evaluate(self, reviewed_plan_id: str) -> EvidenceBundle:
+        if reviewed_plan_id != self.review_digest:
+            raise ConfigurationError("exact source, plan and adapter review required")
+        if verification_source_digest(self.root) != self.capabilities.implementation_sha256:
+            raise ConfigurationError("adapter implementation changed after preview")
+        current = AssessmentPlan.model_validate(
+            self.service.repository.get("plan", self.plan.plan_id)
+        )
+        if current != self.plan:
+            raise ConfigurationError("reviewed plan changed")
+        # The service owns all authorization, reservation, execution and recovery.
+        report = await self.service.run(self.service.enqueue(self.plan.plan_id))
+        return self.normalize(report.report_id)
+
+    def normalize(self, report_id: str) -> EvidenceBundle:
+        repository = self.service.repository
+        report = AssessmentReport.model_validate(repository.get("report", report_id))
+        if report.plan_digest != content_digest(self.plan):
+            raise ConfigurationError("report belongs to a different reviewed plan")
+        binding = AssessmentRunBinding.model_validate(
+            repository.get("run_binding", self.plan.plan_id)
+        )
+        if (
+            binding.plan_id != self.plan.plan_id
+            or binding.source_digest != self.capabilities.implementation_sha256
+            or verification_source_digest(self.root) != binding.source_digest
+        ):
+            raise ConfigurationError("report belongs to another source revision")
+        campaign = BenchmarkCampaignReport.model_validate(
+            repository.get("campaign", report.campaign_digest)
+        )
+        ledger = AssessmentOperationLedger.model_validate(
+            repository.get("operation_ledger", report.operation_ledger_digest or "")
+        )
+        if (
+            content_digest(campaign) != report.campaign_digest
+            or content_digest(ledger) != report.operation_ledger_digest
+            or ledger.plan_id != self.plan.plan_id
+            or campaign.suite_id != self.plan.suite.suite_id
+        ):
+            raise ConfigurationError("campaign or accounting digest mismatch")
+        reproduced = fit_report(self.plan, self.recipe, campaign, ledger=ledger)
+        if report.outcome != "insufficient_evidence" and (
+            reproduced.outcome,
+            reproduced.qualification_passed,
+        ) != (report.outcome, report.qualification_passed):
+            raise ConfigurationError("canonical comparison does not reproduce")
+        path = Path(binding.campaign_path).resolve(strict=True)
+        if path != self.service.directory / self.plan.plan_id / "campaign.sqlite3":
+            raise ConfigurationError("campaign receipt store is outside its plan directory")
+        with sqlite3.connect(path.as_uri() + "?mode=ro", uri=True) as connection:
+            receipts = {
+                row[0]: (row[1], ExecutionReceipt.model_validate_json(row[2]))
+                for row in connection.execute(
+                    "SELECT receipt_id, trial_id, payload_json FROM trial_receipts"
+                )
+            }
+            trial_stores = dict(connection.execute('SELECT trial_id, database_path FROM trial_stores'))
+        runs, gaps, auxiliary = [], [], []
+        self.accounting_records = {}
+        for trial in campaign.trials:
+            if trial.route_id not in {self.plan.candidate_id, self.plan.baseline_id}:
+                auxiliary.append(trial.trial_id)
+                continue
+            try:
+                if len(trial.receipt_ids) != 1:
+                    raise ConfigurationError("requires one canonical primary receipt")
+                bound_trial, receipt = receipts[trial.receipt_ids[0]]
+                if (
+                    bound_trial != trial.trial_id
+                    or receipt.receipt_id != trial.receipt_ids[0]
+                    or receipt.executor_id != trial.route_id
+                ):
+                    raise ConfigurationError("receipt is bound to another trial or route")
+                original_path = Path(trial_stores[trial.trial_id]).resolve(strict=True)
+                if original_path.parent != self.service.directory / self.plan.plan_id / 'attempts':
+                    raise ConfigurationError('original receipt store is outside the plan attempts directory')
+                with sqlite3.connect(original_path.as_uri() + '?mode=ro', uri=True) as original:
+                    row = original.execute('SELECT payload_json FROM receipts WHERE receipt_id=?', (receipt.receipt_id,)).fetchone()
+                if row is None or content_digest(ExecutionReceipt.model_validate_json(row[0])) != content_digest(receipt):
+                    raise ConfigurationError('campaign receipt differs from the original retained receipt')
+                self.accounting_records[content_digest(receipt)] = receipt.model_dump(mode='json')
+                runs.append(self._run(trial, receipt))
+            except (ConfigurationError, ValueError, TypeError, KeyError, OSError, sqlite3.Error) as exc:
+                gaps.append(
+                    {
+                        "trial_id": trial.trial_id,
+                        "reason": str(exc)
+                        if isinstance(exc, ConfigurationError)
+                        else "canonical receipt or normalization contract unavailable",
+                    }
+                )
+        self.details = {
+            "plan_sha256": content_digest(self.plan),
+            "report_sha256": content_digest(report),
+            "campaign_sha256": report.campaign_digest,
+            "operation_ledger_sha256": report.operation_ledger_digest,
+            "canonical_trials": len(campaign.trials),
+            "normalized_primary_trials": len(runs),
+            "normalization_gaps": gaps,
+            "auxiliary_trial_ids": auxiliary,
+            "assessment_analysis": report.model_dump(mode="json"),
+            "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
+            "notice": "All primary and auxiliary costs remain in the canonical ledger. Normalization alone is not efficacy or release qualification.",
+        }
+        return EvidenceBundle(candidate=self.source, adapter=self.capabilities, runs=tuple(runs))
+
+    def _run(self, trial: BenchmarkTrial, receipt: ExecutionReceipt) -> EvaluationRun:
+        comparison = self.plan.comparison
+        assert comparison is not None and comparison.experiment is not None
+        metadata = receipt.metadata
+        keys = (
+            "protocol_version",
+            "actual_model",
+            "worker_digest",
+            "host_runtime_digest",
+            "boundary_digest",
+            "task_instruction_sha256",
+        )
+        if receipt.executor_kind != ExecutorKind.MANAGED_HOST or any(
+            not isinstance(metadata.get(key), str) or not metadata[key] for key in keys
+        ):
+            raise ConfigurationError(
+                "observed host, model, worker, boundary or task-prompt binding unavailable"
+            )
+        if type(metadata.get("model_turn_count")) is not int or metadata["model_turn_count"] != 1:
+            raise ConfigurationError("no single observed managed model turn")
+        require_conformance(
+            self.service.repository,
+            metadata["boundary_digest"],
+            source_digest=self.capabilities.implementation_sha256,
+            worker_digest=metadata["worker_digest"],
+            identity_digest=metadata["host_runtime_digest"],
+        )
+        spec = (
+            self.mapping.candidate
+            if trial.route_id == self.plan.candidate_id
+            else self.mapping.baseline
+        )
+        config = spec.managed_host_config()
+        expected_binding = evidence_cohort_digest(spec, receipt.action_features, metadata['host_runtime_digest'])
+        if (receipt.executor_fingerprint, receipt.cohort_digest) != expected_binding:
+            raise ConfigurationError('receipt executor or runtime cohort differs from the frozen route')
+        if (
+            config.adapter_id.split(":")[0] != "codex-app-server"
+            or len(config.reasoning_efforts) != 1
+        ):
+            raise ConfigurationError("requires one pinned Codex effort")
+        case = next((case for case in self.plan.suite.cases if case.case_id == trial.case_id), None)
+        if case is None or trial.route_fingerprint != self.plan.route_fingerprints.get(
+            trial.route_id
+        ):
+            raise ConfigurationError("trial is outside the frozen case or route binding")
+        receipt_ref = content_digest(receipt)
+        if any(
+            getattr(receipt.actual_resources, field) != getattr(trial.actual_resources, field)
+            for field in TOKEN_FIELDS.values()
+        ):
+            raise ConfigurationError("receipt usage differs from canonical trial measurements")
+        if (
+            trial.status != receipt.status
+            or trial.host_models is None
+            or trial.host_models.get(trial.route_id) != metadata["actual_model"]
+            or trial.host_runtime_digests.get(trial.route_id) != metadata["host_runtime_digest"]
+        ):
+            raise ConfigurationError(
+                "receipt status or observed identity differs from canonical trial"
+            )
+        observed = json.loads(metadata.get("codex_token_fields", "[]"))
+        if not isinstance(observed, list) or any(
+            not isinstance(key, str) or key not in {*TOKEN_FIELDS, "totalTokens"}
+            for key in observed
+        ):
+            raise ConfigurationError("invalid token observation mask")
+        tokens = None
+        if observed and receipt.status == ExecutionStatus.SUCCESS:
+            counts = {
+                field: getattr(receipt.actual_resources, field) if wire in observed else None
+                for wire, field in TOKEN_FIELDS.items()
+                if field != "cache_write_input_tokens"
+            }
+            tokens = TokenObservation(
+                source_ref=receipt_ref,
+                cached_semantics="included_in_input",
+                reasoning_semantics="included_in_output",
+                **counts,
+            )
+        discovery = trial.capability_discovery or {}
+        if discovery != (metadata.get("capability_discovery") or {}):
+            raise ConfigurationError("candidate discovery differs from its canonical receipt")
+        status = (
+            "completed"
+            if receipt.status == ExecutionStatus.SUCCESS
+            else "timeout"
+            if receipt.status == ExecutionStatus.TIMEOUT
+            else "indeterminate"
+            if receipt.status
+            in {ExecutionStatus.UNKNOWN, ExecutionStatus.HOST_SELECTED, ExecutionStatus.DELEGATED}
+            else "failed"
+        )
+        verification = "unknown"
+        graded = (
+            bool(case.validators)
+            and len(trial.case_validation) == len(case.validators)
+            and all(
+                result.kind == validator.kind and type(result.valid) is bool
+                for result, validator in zip(trial.case_validation, case.validators, strict=True)
+            )
+        )
+        if graded:
+            passed = all(result.valid is True for result in trial.case_validation)
+            if passed != trial.valid:
+                raise ConfigurationError(
+                    "trial verification disagrees with its independent grader results"
+                )
+            verification = (
+                "pass" if passed and status == "completed" else "fail" if not passed else "unknown"
+            )
+        return EvaluationRun.model_validate(
+            dict(
+                run_id=trial.trial_id,
+                plan_ref=content_digest(self.plan),
+                candidate_sha256=self.source.artifact_sha256,
+                adapter_sha256=self.capabilities.implementation_sha256,
+                host="codex",
+                host_version=metadata["protocol_version"],
+                model=metadata["actual_model"],
+                effort=config.reasoning_efforts[0],
+                shared_environment_sha256=comparison.experiment.environment.shared_definition_digest,
+                worker_sha256=metadata["worker_digest"],
+                task_sha256=content_digest(case),
+                task_family=self.recipe.recipe_id,
+                verifier_sha256=self.plan.recipe_digest,
+                prompt_sha256=metadata["task_instruction_sha256"],
+                arm="treatment" if trial.route_id == self.plan.candidate_id else "control",
+                mode="optional"
+                if comparison.experiment.exposure == "optional"
+                else "forced_diagnostic",
+                candidate_exposed=discovery.get("exposed"),
+                candidate_invoked=discovery.get("invoked"),
+                verification=verification,
+                verification_ref=content_digest(trial) if verification != "unknown" else None,
+                status=status,
+                retries=trial.retry_fallback_count,
+                evidence_kind="live",
+                receipt_refs=(receipt_ref,),
+                tokens=tokens,
+                agent_wall_seconds=trial.wall_time_ms / 1000
+                if trial.wall_time_ms is not None
+                else None,
+                verification_wall_seconds=trial.grading_wall_time_ms / 1000
+                if trial.grading_wall_time_ms is not None
+                else None,
+                timing_source_ref=content_digest(trial),
+                cash_accounting_ref=receipt_ref,
+            )
+        )
+
+
+def main() -> None:
+    import argparse
+    import asyncio
+
+    from aeep.router import Router
+    from aeep_toolkit.cli import read_json
+    from aeep_toolkit.reporting import render, summarize
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="operation", required=True)
+    for name in ("plan", "run", "report"):
+        command = commands.add_parser(name)
+        command.add_argument("--plan", type=Path, required=True)
+        command.add_argument("--source", type=Path, required=True)
+        if name != "plan":
+            command.add_argument("--manifest", type=Path, required=True)
+            command.add_argument("--directory", type=Path)
+            command.add_argument("--output", type=Path, required=True)
+        if name == "run":
+            command.add_argument("--reviewed-digest", required=True)
+        if name == "report":
+            command.add_argument("--report-id", required=True)
+    args = parser.parse_args()
+    try:
+        plan = AssessmentPlan.model_validate(read_json(args.plan))
+        source = SourcePin.model_validate(read_json(args.source))
+        preview = plan_preview(plan, source)
+        if args.operation == "plan":
+            print(json.dumps(preview, indent=2))
+            return
+        if args.operation == "run" and args.reviewed_digest != preview["review_sha256"]:
+            raise ConfigurationError("exact review differs")
+
+        async def execute() -> None:
+            router = Router.from_manifest(args.manifest)
+            try:
+                service = AssessmentService(
+                    router,
+                    args.directory or args.manifest.resolve().parent / ".aeep" / "assessments",
+                )
+                adapter = AEEPAssessmentAdapter(service, plan.plan_id, source)
+                if content_digest(adapter.plan) != content_digest(plan):
+                    raise ConfigurationError("supplied plan differs from canonical record")
+                args.output.mkdir(mode=0o700, parents=False, exist_ok=False)
+                state = args.output / "operation.json"
+                state.write_text(
+                    json.dumps(
+                        {"state": "started", "plan_id": plan.plan_id, "operation": args.operation}
+                    )
+                    + "\n"
+                )
+                try:
+                    bundle = (
+                        await adapter.evaluate(args.reviewed_digest)
+                        if args.operation == "run"
+                        else adapter.normalize(args.report_id)
+                    )
+                    summary = summarize(bundle, accounting_records=adapter.accounting_records)
+                    summary["limitations"].extend(
+                        [
+                            f"Canonical campaign: {adapter.details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "
+                            f"{len(adapter.details['normalization_gaps'])} normalization gaps; {len(adapter.details['auxiliary_trial_ids'])} auxiliary trials.",
+                            "The tables describe normalized primary trials only. Full assessment analysis and all operation-cost references remain in managed-evidence.json.",
+                            *[
+                                f"Unnormalized trial {item['trial_id']}: {item['reason']}"
+                                for item in adapter.details["normalization_gaps"]
+                            ],
+                        ]
+                    )
+                    for name, document in (
+                        ("toolkit-evidence", bundle.model_dump(mode="json")),
+                        ("managed-evidence", adapter.details),
+                        ("accounting-records", adapter.accounting_records),
+                        ("summary", summary),
+                    ):
+                        with (args.output / (name + ".json")).open("x") as handle:
+                            json.dump(document, handle, indent=2, allow_nan=False)
+                            handle.write("\n")
+                    for format, suffix in (("markdown", "md"), ("html", "html")):
+                        with (args.output / ("report." + suffix)).open("x") as handle:
+                            handle.write(render(summary, format))
+                    state.write_text(
+                        json.dumps(
+                            {
+                                "state": "exported",
+                                "plan_id": plan.plan_id,
+                                "normalization_gaps": len(adapter.details["normalization_gaps"]),
+                            }
+                        )
+                        + "\n"
+                    )
+                    print(
+                        json.dumps(
+                            {
+                                "output": str(args.output),
+                                "report_id": adapter.details["assessment_analysis"]["report_id"],
+                                "normalized_trials": len(bundle.runs),
+                                "normalization_gaps": len(adapter.details["normalization_gaps"]),
+                                "release_ready": False,
+                            }
+                        )
+                    )
+                except BaseException:
+                    state.write_text(
+                        json.dumps(
+                            {
+                                "state": "incomplete",
+                                "plan_id": plan.plan_id,
+                                "notice": "Inspect canonical assessment state and retained costs before further execution. No automatic retry.",
+                            }
+                        )
+                        + "\n"
+                    )
+                    raise
+            finally:
+                await router.close()
+
+        asyncio.run(execute())
+    except (ConfigurationError, ValueError, OSError, sqlite3.Error):
+        parser.exit(
+            2,
+            "Managed evaluation could not complete; inspect the canonical assessment and supplied metadata. No automatic retry.\n",
+        )
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.1, pytest-9.0.3, pluggy-1.6.0
+rootdir: /tmp/aeep-toolkit-managed-integration
+plugins: asyncio-1.4.0, anyio-4.8.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+../../../../tmp/aeep-toolkit-managed-integration/test_managed.py ....    [100%]
+
+=============================== warnings summary ===============================
+tests/test_v08_assessment.py:37
+  /Users/edwintse/Documents/aeep-toolkit-v2/tests/test_v08_assessment.py:37: PytestUnknownMarkWarning: Unknown pytest.mark.assessment_lifecycle - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    pytestmark = pytest.mark.assessment_lifecycle
+
+tests/test_v08_comparisons.py:24
+  /Users/edwintse/Documents/aeep-toolkit-v2/tests/test_v08_comparisons.py:24: PytestUnknownMarkWarning: Unknown pytest.mark.assessment_contract - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    pytestmark = pytest.mark.assessment_contract
+
+tests/test_v08_incremental.py:20
+  /Users/edwintse/Documents/aeep-toolkit-v2/tests/test_v08_incremental.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.assessment_contract - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    pytestmark = pytest.mark.assessment_contract
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 4 passed, 3 warnings in 0.81s =========================

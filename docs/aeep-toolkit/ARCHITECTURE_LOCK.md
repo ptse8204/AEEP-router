@@ -50,7 +50,7 @@ the target stack rather than completed features.
 |---|---|---|
 | User interface | Local Python CLI; Pydantic for validated inputs | AEEP connects candidate intake, preview, evaluation and reporting. |
 | Scripted evaluation | agent-skill-eval 0.7.0, source `59de161f657b82bfaf8f6abe83dfff38552deb21` | Connected upstream scheduler and graders dispatch fixed trials into separate AEEP workers. No model-value claim. |
-| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The thin adapter draft reuses existing authority and execution; integration and live conformance remain open. |
+| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. Full verification and live conformance remain open. |
 | Actual agent | Codex first, using existing host integration | Preserve the normal tools in both arms. Host/model versions and settings must match. |
 | Execution boundary | Docker and existing AEEP managed-worker/assessment-runtime assets | Separate control and treatment workers; protect grading inputs. External-harness dispatch integration must be proven. |
 | Review and accounting | Existing AEEP assessment definitions, finite allowances and receipts | Reuse current authority and recovery behavior; preserve historical records. |

@@ -116,3 +116,6 @@ These development records do not establish live benefit or release readiness.
 - [Original handoff audit](aeep-toolkit/HANDOFF_AUDIT.md): ZIP omissions, implementation gaps and corrected research status.
 
 - [Executable toolkit development stack](../integrations/toolkit/README.md): pinned setup, upstream fixture run and local report.
+
+- [Toolkit managed evaluation](aeep-toolkit/MANAGED_EVALUATION.md): review an
+  existing plan, use the AEEP fallback and inspect canonical report exports.

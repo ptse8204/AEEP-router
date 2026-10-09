@@ -1,0 +1,18 @@
+
+==================================== ERRORS ====================================
+________________________ ERROR collecting test session _________________________
+ImportError while importing test module '/tmp/aeep-toolkit-managed-integration/test_managed.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/aeep-toolkit-managed-integration/test_managed.py:9: in <module>
+    from test_v08_assessment import setup_assessment
+tests/test_v08_assessment.py:9: in <module>
+    from conftest import manifest_with, python_spec
+E   ImportError: cannot import name 'manifest_with' from 'conftest' (/tmp/aeep-toolkit-managed-integration/conftest.py)
+=========================== short test summary info ============================
+ERROR 
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.11s

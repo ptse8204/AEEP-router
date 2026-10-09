@@ -714,6 +714,7 @@ class Router:
             "tool_call_count",
             "model_turn_count",
             "codex_token_fields",
+            "task_instruction_sha256",
             "tool_selection_rounds",
             "implementation_schema_bytes",
             "output_schema_bytes",
@@ -726,11 +727,18 @@ class Router:
             "enforcement_backend_digest",
             "task_scope_digest",
         }
-        return {
+        retained: dict[str, Any] = {
             key: value
             for key, value in metadata.items()
             if key in allowed and isinstance(value, (str, int, float, bool, type(None)))
         }
+        discovery = metadata.get("capability_discovery")
+        if isinstance(discovery, dict):
+            retained["capability_discovery"] = {
+                key: discovery.get(key) if type(discovery.get(key)) is bool else None
+                for key in ("exposed", "retrieved", "invoked")
+            }
+        return retained
 
     def _save_receipt(self, receipt: ExecutionReceipt) -> None:
         existing = self.store.get_receipt(receipt.receipt_id)

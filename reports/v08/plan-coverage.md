@@ -4104,3 +4104,13 @@ both branch gates, schemas, Ruff, mypy, policy, eight supplemental proof/build
 checks and docs. Source stability is recorded under
 `reports/toolkit-v2/c04/missing-token-correction/validation`. No native/model
 turn ran in these checks. D40/D42 integration is next, with separate evidence.
+
+### Managed toolkit bridge integrated (D40/D42)
+
+The optional CLI wraps existing reviewed assessment execution and canonical
+reports. File-based preview opens no database or host. Prompt hashes and bounded
+discovery facts survive receipt sanitization. Original receipt stores, runtime
+cohorts, source identity and independent graders bind normalized observations;
+missing evidence remains an explicit gap. Targeted checks passed 120 tests.
+Full checks and source-current native compatibility remain pending. No live
+trial, sign-in or new package ran. See `docs/aeep-toolkit/MANAGED_EVALUATION.md`.

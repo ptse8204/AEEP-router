@@ -1,0 +1,23 @@
+...........F.....                                                        [100%]
+=================================== FAILURES ===================================
+___ test_actual_managed_task_instruction_is_hashed_without_content_retention ___
+
+    @pytest.mark.asyncio
+    async def test_actual_managed_task_instruction_is_hashed_without_content_retention():
+        host = adapter()
+        current = context()
+        registry = ManagedHostRegistry()
+        registry.register(current.config.adapter_id, host)
+        executor = ManagedHostExecutor(registry)
+>       spec = ExecutorSpec(id='fixture', capability=current.request.capability, kind='host_managed',
+            description='Synthetic App Server prompt binding fixture',
+            input_schema={'type':'object'}, output_schema={'type':'object'},
+            config=current.config.model_dump(mode='json'))
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutorSpec
+E         Value error, managed-host executors require resource_pool [type=value_error, input_value={'id': 'fixture', 'capabi...essment_adapter': None}}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+/tmp/aeep-toolkit-managed-integration/test_prompt_binding.py:20: ValidationError
+=========================== short test summary info ============================
+FAILED ::test_actual_managed_task_instruction_is_hashed_without_content_retention
+1 failed, 16 passed in 1.09s

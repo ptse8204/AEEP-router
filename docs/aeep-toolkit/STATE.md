@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '34fae07'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/missing-token-correction/validation/checks.json'
 last_check_result: '1465 passed, 21 skipped in each core suite; all 12 driver checks, both branch gates and eight supplemental proof/build checks passed. Documentation passed. Source stayed unchanged. No native or model call was needed for D41.'
-next_action: 'Integrate and verify D41 missing-token correction, then connect the D40 AEEP fallback using existing assessment execution and authority. The prior stop was unfinished engineering; no architecture decision or user intervention is pending for this work.'
+next_action: 'Run required checks on the integrated D40/D42 managed bridge; verify native command compatibility under a new finite zero-turn review, then continue remaining C04-C06 gaps. Earlier stopping was unfinished engineering, not missing architecture or permission.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -1025,3 +1025,16 @@ Ordinary pytest: 1,465 passed, 21 skipped in 579.02 seconds. Coverage pytest:
 dependency warning. Source stayed unchanged. Eight supplemental proof/build
 checks and documentation checks passed. Integrate D40/D42 now; its temporary
 source has 28 passing focused tests but still needs ordinary repository checks.
+
+### D40/D42 integrated in the repository
+
+The managed bridge, CLI, prompt hash and sanitized discovery retention are now
+in the checkout. All 120 targeted repository tests passed in 8.14 seconds, using
+the normal imports rather than temporary loaders. Source attribution binds the
+complete inspected file map; canonical trial copies must match their original
+receipt stores. The report shows normalization gaps and preserves full ledger
+references. No grant, worker launcher or statistical engine was duplicated.
+The Makefile already discovers toolkit documentation through a wildcard; the
+integration helper's mistaken explicit-list assertion required no Makefile edit.
+Required full checks are next. No V2 model execution, credential action or live
+value claim has occurred. Engineering continues without another steering prompt.

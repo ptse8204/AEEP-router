@@ -69,3 +69,7 @@ The [three-case offline journey](../../examples/toolkit_offline/README.md) now
 connects a reviewed captured candidate to the upstream evaluator, individual
 controlled workers and a verified HTML/Markdown report. Its outcomes are scripted;
 real-host value remains unassessed.
+
+The optional [managed evaluation bridge](MANAGED_EVALUATION.md) connects existing
+reviewed skill plans to the AEEP fallback, using the same workers and grants.
+Its file-based preview is inert. Native value and release gates remain open.

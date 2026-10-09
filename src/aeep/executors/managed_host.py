@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 
 from ..hosts import HostProbeStatus, ManagedHostExecutionContext, ManagedHostRegistry
@@ -68,6 +69,7 @@ class ManagedHostExecutor(BaseExecutor):
             finally:
                 if not handle.task.done():
                     await adapter.interrupt(attempt_id)
+        raw.metadata["task_instruction_sha256"] = hashlib.sha256(instruction.encode()).hexdigest()
         if raw.status is ExecutionStatus.REJECTED:
             raw.metadata.setdefault("host_failure_code", "host_request_rejected")
         try:
