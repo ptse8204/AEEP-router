@@ -525,3 +525,23 @@ as observations. Retain supplied counts. Use the existing partial-evidence contr
 records, widening worker access or adding a new accounting service. Exact source
 pins distinguish the correction from historical receipts. Native conformance and
 a live campaign remain required after implementation.
+
+## D42 — Bind native normalization to recorded task instructions and discovery
+
+Reuse `ManagedHostExecutor`'s rendered instruction and persist only its SHA-256.
+This binds the shared task prompt without retaining task content or pretending
+that a case-definition hash is the prompt. Candidate exposure remains a separate
+observation. Preserve only `exposed`, `retrieved` and `invoked` boolean-or-unknown
+fields when sanitizing discovery metadata; discard extra fields and payloads.
+The existing benchmark already consumes those observations, but its receipt
+filter previously removed the dictionary.
+
+The optional D40 adapter reads canonical plans, campaign receipts and the full
+operation ledger, then invokes the existing assessment service only after an
+exact source/plan/implementation review. Candidate identity binds the complete
+inspected dependency-hash map; the reviewed SKILL hash must occur in that map.
+Missing identity, prompt or conformance references produce explicit normalization
+gaps, while original costs and auxiliary-arm records remain authoritative. No
+new storage, scheduler, grant, host launcher or statistical engine is introduced.
+Draft code and tests currently live outside the checkout while D41's required
+verification runs. They do not establish actual worker or live-model conformance.

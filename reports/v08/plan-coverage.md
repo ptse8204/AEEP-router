@@ -4098,3 +4098,9 @@ and observed-field metadata distinguish unknown values. Malformed later usage
 stops the protocol while retaining incurred counts. Synthetic protocol tests
 pass (87 related checks); full source-bound verification is pending. No current
 source live/production gate is closed by those fixtures.
+
+D41 full verification now passed on `34fae07`: both 1,465-test runs, 21 skips,
+both branch gates, schemas, Ruff, mypy, policy, eight supplemental proof/build
+checks and docs. Source stability is recorded under
+`reports/toolkit-v2/c04/missing-token-correction/validation`. No native/model
+turn ran in these checks. D40/D42 integration is next, with separate evidence.

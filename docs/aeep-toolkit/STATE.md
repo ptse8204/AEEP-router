@@ -25,14 +25,14 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '29e1599'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/report-completion/validation/checks.json'
-last_check_result: '1448 passed, 21 skipped in each core suite; all 12 driver checks and both coverage gates passed with unchanged source. Fresh 13-worker replay, nine tamper checks, four native command-probe workers, supplemental proofs and Node tests passed. No model trial ran.'
+last_verified_commit: '34fae07'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/missing-token-correction/validation/checks.json'
+last_check_result: '1465 passed, 21 skipped in each core suite; all 12 driver checks, both branch gates and eight supplemental proof/build checks passed. Documentation passed. Source stayed unchanged. No native or model call was needed for D41.'
 next_action: 'Integrate and verify D41 missing-token correction, then connect the D40 AEEP fallback using existing assessment execution and authority. The prior stop was unfinished engineering; no architecture decision or user intervention is pending for this work.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
-  - 'No upstream evaluators have been compatibility-qualified inside AEEP.'
+  - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
   - 'C01 pins source and primary licenses; transitive distribution rights, installed compatibility and resources still need C03/C04 checks.'
 ```
@@ -976,3 +976,52 @@ Exact test authority and scope are in `c04/missing-token-correction/review.json`
 No live calls, worker launch, credential action or installer was needed.
 Run the full checks on this source before treating D41 as verified. Continue the
 D40 adapter draft independently; unfinished integration remains engineering work.
+
+### D40/D42 managed fallback draft during D41 verification
+
+D41 source is committed as `34fae07`; full verification is active under
+`/tmp/aeep-toolkit-d41-checks.py` (tool session 74340). Keep its source frozen.
+The next adapter draft is in `/tmp/aeep-toolkit-managed-integration`, including
+`managed.py`, a drafted executor prompt hash, receipt filter and synthetic tests.
+The first 11 tests pass for read-only preview, service authorization denial,
+interruption without retry, missing evidence and five receipt-tampering cases.
+Tests explicitly stub source/conformance and do not prove a native model result.
+The scratch `conftest.py` must never enter the repository. Continue reviewing
+and testing before integration. There is still no user intervention required.
+
+### D41 ordinary checks passed; D40/D42 draft reaches CLI and report export
+
+The full ordinary D41 suite passed 1,465 tests with 21 skips in 579.02 seconds.
+Coverage remains active. Eight supplemental proof/package checks passed using
+existing dependencies and `build --no-isolation`; no new package was installed.
+The fallback draft now passes 25 focused tests. It includes a file-based plan
+command with no Router/database creation, reviewed service dispatch, canonical
+report export, interruption/no-retry checks, tamper rejection and independent
+grader handling. Its missing-token measurements remain unknown rather than zero.
+The actual subprocess prompt-binding fixture passes. A temporary loader needed
+its existing fixture helpers exposed, and a missing fixture resource-pool field
+was corrected; retained draft logs distinguish those failures from host evidence.
+Shadow-source mypy passes all 163 source files after explicitly typing the
+sanitized discovery dictionary. These are drafts outside the frozen checkout;
+finish D41 coverage, then integrate and verify them. Never copy scratch conftest.
+
+The D40/D42 draft now passes 28 focused tests and shadow-source mypy across
+163 source files. It checks campaign copies against original receipts from the
+existing plan-specific attempt stores, rejects escaped store paths, and binds
+candidate provenance to all inspected dependency hashes. CLI exports retain
+normalization gaps in the readable reports. The temporary draft documentation is
+`/tmp/aeep-toolkit-managed-integration/MANAGED_EVALUATION.md`. On integration,
+copy `managed.py` to `src/aeep_toolkit/managed.py`, the drafted executor/filter to
+their existing modules, and tests to `tests/test_toolkit_managed.py` and
+`tests/test_toolkit_prompt_binding.py`; replace the test's scratch `import managed`
+with `from aeep_toolkit import managed`. Do not copy scratch conftest or temporary
+loader code. Recheck the integrated source; none of these stubs is live evidence.
+
+### D41 source-bound verification complete
+
+Source `34fae07` passed every required driver command and both coverage gates.
+Ordinary pytest: 1,465 passed, 21 skipped in 579.02 seconds. Coverage pytest:
+1,465 passed, 21 skipped in 883.37 seconds. Both retain the existing Starlette
+dependency warning. Source stayed unchanged. Eight supplemental proof/build
+checks and documentation checks passed. Integrate D40/D42 now; its temporary
+source has 28 passing focused tests but still needs ordinary repository checks.
