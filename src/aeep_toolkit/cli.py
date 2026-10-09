@@ -94,6 +94,10 @@ def main(argv: list[str] | None = None) -> int:
     report.add_argument('--accounting', type=Path, help='Digest-keyed receipt records; contents are not authenticated by this command')
     report.add_argument('--currency', default='USD')
     report.add_argument('--recurring-fee', type=Path, help='Explicit decimal amount/period/source_ref scenario; not an incurred charge')
+    portable = sub.add_parser('export-preview', help='Prepare a minimized local sharing document; never publishes')
+    portable.add_argument('--evidence', type=Path, required=True)
+    portable.add_argument('--disclose-source', action='store_true', help='Include supplied public source metadata in the preview')
+    portable.add_argument('--developer', type=Path, help='Exact-source developer assertion; requires --disclose-source and remains unverified')
     install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
     install_plan.add_argument('--preview', type=Path, required=True)
     install_plan.add_argument('--policy', type=Path, required=True)
@@ -143,6 +147,14 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             except ConfigurationError as error:
                 raise ValueError('installation safety check failed') from error
+        if args.command == 'export-preview':
+            from .models import DeveloperIdentity
+            from .reporting import portable_summary
+            exported = portable_summary(EvidenceBundle.model_validate(read_json(args.evidence)),
+                                      disclose_source=args.disclose_source,
+                                      developer=DeveloperIdentity.model_validate(read_json(args.developer)) if args.developer else None)
+            print(json.dumps(exported, indent=2, allow_nan=False))
+            return 0
         if args.command == 'report':
             from .reporting import render, summarize
             print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence)),
@@ -159,7 +171,7 @@ def main(argv: list[str] | None = None) -> int:
             data = {'profile': PROFILES[args.profile]['name'], 'selected': [],
                     'catalog': [item for item in known if item['role'] in roles],
                     'provided_manifests': [item.model_dump(mode='json') for item in registry.extensions if item.role in roles],
-                    'notice': 'Source-reviewed catalog only. Installed/enabled state is unknown; artifact manifests and runtime qualification remain required.'}
+                    'notice': 'Catalog entries describe their recorded integration scope. Installed/enabled state is unknown; exact installation manifests and applicable runtime qualification remain required.'}
             print(json.dumps(data, indent=2))
             return 0
         observations = tuple(InstalledObservation.model_validate(item) for item in read_json(args.observations)) if args.observations else ()

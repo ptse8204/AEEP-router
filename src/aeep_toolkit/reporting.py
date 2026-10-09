@@ -11,7 +11,7 @@ from decimal import Decimal
 from statistics import mean, median
 from typing import Any
 
-from .models import EvaluationRun, EvidenceBundle, TokenObservation
+from .models import DeveloperIdentity, EvaluationRun, EvidenceBundle, TokenObservation
 
 COHORT_FIELDS = (
     "plan_ref", "candidate_sha256", "adapter_sha256", "host", "host_version",
@@ -336,3 +336,48 @@ def fee_break_even(pairs: list[dict[str, EvaluationRun]], cash: dict[str, Any]) 
             'verified_successes_per_fee_period':int((amount/difference).to_integral_value(rounding=ROUND_CEILING)),
             'period':cash['fee_scenario']['period'],
             'interpretation':'Scenario using observed cost per verified success, including failed-run costs. Assumes the same future task mix and success rates; not a confidence-supported forecast. Excludes assessment overhead.'}
+
+def portable_summary(bundle: EvidenceBundle, *, disclose_source: bool = False,
+                     developer: DeveloperIdentity | None = None) -> dict[str, Any]:
+    """Prepare minimized local sharing bytes; this neither publishes nor authenticates."""
+    summary = summarize(bundle)
+    if developer is not None and (not disclose_source or developer.source != bundle.candidate):
+        raise ValueError('developer assertion requires the exact disclosed candidate source')
+    cohorts = []
+    for index, cohort in enumerate(summary['cohorts'], 1):
+        binding = json.dumps(cohort['binding'], sort_keys=True, separators=(',', ':'), allow_nan=False)
+        families = []
+        for number, family in enumerate(cohort['families'], 1):
+            families.append({
+                'family': number,
+                **{key: family[key] for key in ('observed_tasks', 'observed_pairs', 'graded_pairs',
+                    'success_rate_treatment_minus_control', 'metric_differences')},
+                'rejected_tasks': len(family['rejected_tasks']),
+                'arms': {arm: {key: values[key] for key in ('runs', 'execution', 'verification',
+                         'candidate_invoked', 'metrics')} for arm, values in family['arms'].items()},
+            })
+        cohorts.append({'cohort': index, 'scope_sha256': hashlib.sha256(binding.encode()).hexdigest(),
+                        'evidence_kind': cohort['binding']['evidence_kind'], 'families': families})
+    document = {
+        'schema': 'aeep.toolkit.portable-summary.v1',
+        'outcome': 'NOT_ASSESSED', 'trust': 'unverified_supplied_records',
+        'source_bundle_sha256': summary['evidence_sha256'],
+        'candidate_sha256': bundle.candidate.artifact_sha256,
+        'adapter_sha256': bundle.adapter.implementation_sha256,
+        'cohorts': cohorts,
+        'source': bundle.candidate.model_dump(mode='json') if disclose_source else None,
+        'developer': ({'assertion': developer.model_dump(mode='json'),
+                       'status': 'operator_supplied_unverified',
+                       'notice': 'Ownership and destination are unverified. A donation is optional support; a purchase link is not price or payment authority.'}
+                      if developer else None),
+        'publication_performed': False,
+        'limitations': [
+            'Prepared locally for review; no publication or independent reproduction is established.',
+            'Task labels, prompts, paths, run IDs, receipt references and host/model names are omitted. Digests and aggregate measurements may still identify a study; this is not guaranteed anonymity.',
+            'Scope hashes retain cohort separation but require the private source records to interpret applicability or reproduce results.',
+            'Synthetic and replay results cannot establish real-host benefit. Unknown measurements remain unknown.',
+            'Any disclosed source or developer metadata is an explicit supplied assertion, not verified ownership or authorization to pay.',
+        ],
+    }
+    payload = json.dumps(document, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+    return {'content_sha256': hashlib.sha256(payload).hexdigest(), 'document': document}

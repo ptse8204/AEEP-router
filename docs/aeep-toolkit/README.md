@@ -3,7 +3,7 @@
 **Plan date:** 2026-10-08  
 **Target:** `https://github.com/ptse8204/AEEP-router`  
 **Track:** evidence-first modularization, preserving the existing repository and historical evidence.  
-**Implementation status:** C00/C01 audit records and the C02 contract implementation are on the feature branch. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
+**Implementation status:** C00-C03 have recorded passes. The upstream scripted journey and existing managed fallback are implemented; remaining acceptance gates stay open. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
 
 ## Mission (fixed unless the owner changes it)
 
@@ -73,3 +73,26 @@ real-host value remains unassessed.
 The optional [managed evaluation bridge](MANAGED_EVALUATION.md) connects existing
 reviewed skill plans to the AEEP fallback, using the same workers and grants.
 Its file-based preview is inert. Native value and release gates remain open.
+
+## Prepare a local sharing preview
+
+From the repository checkout, minimize a normalized evidence bundle before
+deciding what to share:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit export-preview \
+  --evidence /absolute/toolkit-evidence.json
+```
+
+The command prints content-addressed JSON and publishes nothing. It omits task
+labels, prompts, paths, run identifiers, receipt references and host/model names.
+Cohort hashes keep incompatible measurements separate; private source records
+are still needed to interpret their applicability. Aggregate measurements and
+digests can identify a study, so this is not guaranteed anonymity.
+
+Add `--disclose-source` to include the supplied candidate source metadata. An
+optional `--developer /absolute/developer.json` uses the existing DeveloperIdentity
+contract and requires that flag plus an exact source match. Ownership and support
+links remain unverified assertions. Donation links are optional support; purchase
+links do not establish a price or permission to pay. The preview retains synthetic
+labels and unknown measurements and makes no independent efficacy claim.

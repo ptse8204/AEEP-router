@@ -1183,3 +1183,11 @@ review still awaits a response. No model call, sign-in or new installation ran.
 The next integration is D48/D49, whose out-of-checkout draft and six focused
 checks are retained in `c12/portable-preview`. Its source needs new verification;
 D47 evidence remains bound to its commit.
+
+### D48-D49 integrated for verification
+
+The local sharing preview and corrected catalog are now integrated. Focused
+reporting, preview and installer checks passed 62 tests. Full checks are next;
+D47 remains the last fully verified source. The catalog separates experimental
+scripted/managed integrations from unqualified options without inferring installed
+or enabled state. No publication, ownership verification or installation occurred.

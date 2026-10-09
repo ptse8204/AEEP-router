@@ -157,9 +157,12 @@
     "role": "evaluator",
     "repository": "https://github.com/tardigrde/agent-skill-eval",
     "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
-    "status": "blocked",
-    "artifact_sha256": null,
-    "reason": "Source inspection only; no complete artifact/dependency lock or V2 runtime qualification."
+    "status": "experimental",
+    "artifact_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
+    "reason": "Pinned 0.7.0 scripted integration ran separate controlled fixture workers. Native Codex launch/token contract is unqualified; D40 selects the existing AEEP fallback for managed-model evaluation.",
+    "installed": null,
+    "enabled": null,
+    "qualification": "scripted_engineering_only"
   },
   {
     "id": "aeep-router",
@@ -174,9 +177,12 @@
     "id": "aeep-evaluator",
     "role": "evaluator",
     "repository": "https://github.com/ptse8204/AEEP-router",
-    "source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
-    "status": "blocked",
+    "source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+    "status": "experimental",
     "artifact_sha256": null,
-    "reason": "Existing controlled runner is the fallback candidate; V2 adapter conformance and complete artifact manifest remain required."
+    "reason": "Managed skill adapter and canonical reports reuse AssessmentService/BenchmarkRunner. Current authenticated worker conformance and V2 live comparison remain unverified.",
+    "installed": null,
+    "enabled": null,
+    "qualification": "software_tests_only"
   }
 ]

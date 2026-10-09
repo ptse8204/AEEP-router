@@ -164,7 +164,11 @@ def test_cli_full_catalog_is_inert_and_lists_pinned_sources(capsys):
     output = json.loads(capsys.readouterr().out)
     assert len(output['catalog']) == 20
     assert output['selected'] == []
-    assert all(item['status'] == 'blocked' and item['artifact_sha256'] is None for item in output['catalog'])
+    entries = {item['id']: item for item in output['catalog']}
+    assert entries['agent-skill-eval']['status'] == 'experimental'
+    assert entries['agent-skill-eval']['qualification'] == 'scripted_engineering_only'
+    assert entries['aeep-evaluator']['qualification'] == 'software_tests_only'
+    assert all(item['status'] == 'blocked' for item in output['catalog'] if item['id'] not in {'agent-skill-eval', 'aeep-evaluator'})
     assert all(len(item['source_revision']) == 40 for item in output['catalog'])
 
 
