@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -14,6 +15,7 @@ from aeep_toolkit.cli import main
 from aeep_toolkit.installation import preview
 from aeep_toolkit.models import ExtensionRegistry
 
+pytestmark = pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks')
 
 def installation(tmp_path, *, extra=None, requires=''):
     wheelhouse = tmp_path / 'wheels'
@@ -189,3 +191,24 @@ def test_cli_journey(tmp_path, capsys, monkeypatch):
     for operation in ('install', 'remove'):
         assert main([operation, '--installation', str(document), '--reviewed-digest', output['review_sha256']]) == 0
         assert json.loads(capsys.readouterr().out)['status'] == ('installed' if operation == 'install' else 'removed')
+
+
+def test_actual_wheel_sizes_cannot_be_understated_by_manifest(tmp_path, monkeypatch):
+    from aeep import component_setup
+    plan = installation(tmp_path)
+    fake_install(monkeypatch)
+    seen = []
+    monkeypatch.setattr(component_setup, 'require_space', lambda path, size: seen.append(size))
+    runtime.apply(plan, runtime.digest(plan))
+    assert seen[0] > 500 * 1024**2 + plan.preview.known_disk_bytes
+    monkeypatch.setattr(runtime.shutil, 'disk_usage', lambda path: type('Disk', (), {'free': 50 * 1024**3 + 500 * 1024**2})())
+    with pytest.raises(ValueError, match='actual wheel closure'):
+        runtime.prepare(plan.preview, plan.policy, tmp_path/'other', Path(plan.wheelhouse), plan.wheels)
+
+
+def test_unsupported_nofollow_platform_is_explicit(tmp_path, monkeypatch):
+    target = tmp_path/'file'
+    target.write_text('fixture')
+    monkeypatch.delattr(runtime.os, 'O_NOFOLLOW')
+    with pytest.raises(ValueError, match='macOS or Linux'):
+        runtime.file_digest(target)

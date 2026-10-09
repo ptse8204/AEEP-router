@@ -291,3 +291,72 @@ current tree before removing only that owned runtime; edited or added entries
 block removal. Preserve the journal after removal. Test drift, conflicting state,
 space, interruption and offline replay under the standing finite-test delegation.
 This authorizes engineering checks, not installation of new third-party packages.
+
+### D30: 2026-10-09, test upstream scheduling through separate existing workers
+
+Keep agent-skill-eval's scheduler and deterministic graders in its existing
+sandboxed private runtime. A fixed fake-harness shim requests one trial over
+bounded stdin/stdout. The trusted AEEP parent validates the current fixed case and
+arm, reserves through AssessmentRepository before dispatch, and uses
+ContainerExecutor with one fresh, network-disabled worker for each of four trials.
+The coordinator receives no Docker socket, receipt store or authority interface.
+Only the worker adapter and three hash-checked upstream Python modules are mounted;
+case instructions and the optional fixed skill arrive transiently over stdin.
+
+This finite engineering check reuses the installed image
+`sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7`,
+Docker `/usr/local/bin/docker`, local socket
+`/Users/edwintse/.docker/run/docker.sock`, 256 MiB/one CPU/64 processes per worker,
+zero model turns, zero paid calls and at most four 65-second reservations. There
+is no image pull/build, new package or credential access. It uses an explicitly
+synthetic operation ledger, not a new live allowance or reset of an existing
+assessment grant. Record actual retained failures and source hashes. Successful
+execution proves per-trial plumbing only; capable Codex workers, live conformance
+and general candidate intake remain independent gates.
+
+The first actual controlled fixture dispatched four separate containers and kept
+four receipts/reservations; cleanup inspection found none remaining. Unit review
+then exposed that ReceiptStore itself does not redact actions (Router normally
+does). The bridge now saves a redacted decision explicitly and uses the existing
+per-event persistence sink before dispatch. The first synthetic evidence remains
+historical and is not upgraded to the repaired privacy/event behavior. Separate
+worker-source staging from the coordinator's writable sandbox before the next run.
+
+The approved 24-wheel closure was also replayed through the general C03 installer
+using the retained local wheel cache. Install, idempotent verification and removal
+of the unchanged runtime succeeded. The sibling journal is retained; the original
+evaluator runtime and cache are untouched. Two missing metadata license labels
+were resolved from license files inside the already pinned wheels, with hashes
+recorded. Resource preview figures are conservative installation allowances and
+archive sizes, not runtime measurements or savings.
+
+### D31: 2026-10-09, bind the controlled fixture to existing comparison analysis
+
+Use the existing AssessmentPlan/RecipeDefinition/BenchmarkCampaignReport and
+`assessment.reporting.fit_report` for the next fixture report. Freeze expected
+case/arm positions before dispatch, retain the existing 100-case qualification
+and 20-pair resource thresholds, resolve each worker receipt and hash-check its
+independently graded output, then export the C02 bundle and HTML/Markdown report.
+The fixed two-case suite cannot qualify; synthetic model tokens, model duration
+and billing remain unavailable. The typed holdout positions exercise the analysis
+contract only and are not real held-out observations. No inference engine or new
+acceptance threshold is introduced. General live campaign binding, cost/price
+analysis and controlled Codex conformance remain open.
+
+### D32: 2026-10-09, harden actual installation space and candidate payload identity
+
+Installer review found that declared disk estimates could understate a wheel
+closure. Derive the reservation from staged/expanded wheel bytes and allocation
+rounding plus bootstrap headroom; declarations cannot reduce it. Preserve the
+completed ordinary suite at f454a00 and the intentionally interrupted coverage
+run, then verify the corrected source. Unsupported no-follow platforms must fail
+explicitly; their POSIX installer tests are skipped rather than failing Windows CI.
+
+The reproduced upstream candidate hash/copy mismatch also needs a general intake
+boundary. Reuse the toolkit's bounded metadata reader and standard filesystem
+operations to capture a local SKILL.md payload, excluding evals/Git/cache trees
+from both hashing and staging. Reject links, special files, credentials, excessive
+payloads and ambiguous paths. Stage captured bytes only, and expose a content-free
+inspection through the existing CLI. No candidate code executes or host skill
+installation occurs. This is a small adapter guard around the preferred upstream,
+not another skill installer or evaluator. Finite checks remain delegated.

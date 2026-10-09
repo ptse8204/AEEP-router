@@ -669,6 +669,7 @@
       "default": [
         "Create a new private Python environment and sibling installation journal/lock.",
         "Install only reviewed local wheels; no index, source builds, host activation or sign-in.",
+        "Reserve staged/expanded wheel bytes and 500 MiB bootstrap headroom above the 50 GiB host reserve.",
         "Keep failed/interrupted state; no automatic retry. Preserve the journal on removal.",
         "Remove only a completely unchanged owned runtime; preserve conflicts for inspection."
       ],

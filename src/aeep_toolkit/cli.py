@@ -100,8 +100,14 @@ def main(argv: list[str] | None = None) -> int:
         operation = sub.add_parser(name, help='Operator-only private runtime installation/removal')
         operation.add_argument('--installation', type=Path, required=True)
         operation.add_argument('--reviewed-digest', required=True)
+    candidate = sub.add_parser('candidate', help='Inspect exact local skill payload without executing or installing it')
+    candidate.add_argument('path', type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'candidate':
+            from .candidate import inspect
+            print(json.dumps(inspect(args.path.absolute()).describe(), indent=2))
+            return 0
         if args.command in {'install-plan', 'install', 'remove'}:
             from aeep.errors import ConfigurationError
 

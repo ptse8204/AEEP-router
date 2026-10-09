@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. C01 source selection is reconciled against the ZIP: all 21 responsibilities have the required worksheet fields, bounded issue triage and explicit runtime unknowns. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo with an exact fixture payload guard. C05 now reports normalized pair validity and measurement coverage. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its ordinary full suite passed and coverage checks are running. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. General candidate/Codex dispatch, complete comparison economics and C06-C13 remain unfinished. No V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -697,3 +697,47 @@ regression passes. Ruff and mypy passed for the toolkit before the final small
 input-hardening additions; full required verification is next. C03 remains
 IN_PROGRESS pending complete checks and replay of the approved evaluator closure.
 No new third-party package, image, model call or host configuration was installed.
+
+### October 9 controlled-worker and analysis evidence
+
+The actual pinned agent-skill-eval scheduler dispatched both arms of both fixed
+cases through four separate local Docker workers. `reports/toolkit-v2/c04/controlled-trials`
+retains every replay, intermediate test failure and its charges. Attempt 1 predates
+the decision-redaction/event-persistence repair; attempt 2 predates separating
+worker source from coordinator-write scope. Attempt 3 checks that separation.
+Attempt 4 connects the predeclared fixture positions to existing `fit_report`.
+Attempt 5 also binds the descriptive report for read-only integrity verification.
+These remain synthetic records, not capable-agent conformance or live holdouts.
+
+The fixed suite retains the existing 100-case/20-pair thresholds and returns
+insufficient evidence. Each C02 run names its individual worker receipt. Model
+tokens, model wall time, billing and savings remain unavailable. Seven focused
+bridge/analysis tests pass, including authority, budget, replay, failed output,
+interruption, redacted persistence and missing/changed analysis inputs.
+
+The approved 24-wheel closure installed from the existing local cache through the
+general installer, passed idempotent verification and was removed with the owned
+journal retained. Exact plan, wheel/license hashes and replay results are under
+`reports/toolkit-v2/c03/general-installer`. Original runtime/cache and all unrelated
+user work remain intact. The ordinary full suite passed 1,409 tests with 21 skips;
+coverage and remaining required checks are still running under tool session 13190
+and `/tmp/aeep-toolkit-general-installer-checks.py`. Do not claim those checks pass
+until the progressive result and source-stability records say so.
+
+### Space and candidate-intake hardening
+
+The first full ordinary suite passed 1,409 tests at f454a00. Its coverage run was
+intentionally interrupted during review, before changing source: actual wheel
+sizes must set the disk reservation even when metadata understates them. The
+retained validation directory records exit 2 for that interrupted run; it is not
+a coverage PASS. The corrected installer includes measured archive/expanded byte
+bounds and explicit unsupported-platform handling. A fresh complete verification
+will use a separate `validation-final` directory.
+
+General local candidate inspection now captures a bounded SKILL.md tree, hashes
+exactly the files it stages and excludes nested evals/Git/cache data from both.
+Eight synthetic regressions cover the observed upstream copy/hash defect, links,
+credentials, changed captured bytes and content-free CLI output. Twenty-eight
+installer lifecycle tests pass after space/portability hardening. No arbitrary
+candidate has been executed; connecting this intake to managed Codex dispatch
+remains engineering work, not a permission blocker.

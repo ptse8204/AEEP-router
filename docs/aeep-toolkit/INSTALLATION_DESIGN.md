@@ -125,3 +125,21 @@ This is an operator CLI, not a model-facing installation tool. Its digest binds
 reviewed inputs; it is not a signature or third-party qualification. Non-wheel
 extensions and new platform/package combinations still require their own reviewed
 installation and compatibility proof. Installed does not mean enabled or qualified.
+
+The space preflight derives a lower reservation from actual wheel archive and
+expanded sizes (including allocation rounding and staging), plus 500 MiB bootstrap
+headroom. A smaller manifest estimate cannot lower this reservation. This is an
+installation planning bound, not a measured runtime footprint.
+
+## Inspect candidate bytes separately
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit.cli candidate /absolute/skill/SKILL.md
+```
+
+The command prints file hashes and a whole-payload identity without printing skill
+contents or executing code. It excludes `evals`, `.git` and `__pycache__` directories
+at every depth. The same captured files supply later private staging, so excluded
+files cannot escape the identity check and reach a worker. Links, special files,
+credentials, ambiguous paths and oversized payloads are refused. This does not
+install the candidate in a host or certify its safety or benefit.

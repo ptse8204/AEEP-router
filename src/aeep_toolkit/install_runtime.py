@@ -46,6 +46,7 @@ class RuntimeInstallation(ContractModel):
     effects: tuple[str, ...] = (
         'Create a new private Python environment and sibling installation journal/lock.',
         'Install only reviewed local wheels; no index, source builds, host activation or sign-in.',
+        'Reserve staged/expanded wheel bytes and 500 MiB bootstrap headroom above the 50 GiB host reserve.',
         'Keep failed/interrupted state; no automatic retry. Preserve the journal on removal.',
         'Remove only a completely unchanged owned runtime; preserve conflicts for inspection.',
     )
@@ -91,6 +92,8 @@ def canonical(path: str) -> Path:
 
 def file_digest(path: Path) -> str:
     # Read with no-follow/nonblocking checks before hashing binaries or package bytes.
+    if not hasattr(os, 'O_NOFOLLOW'):
+        raise ValueError('private runtime installation requires macOS or Linux/WSL')
     fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
     with os.fdopen(fd, 'rb') as handle:
         info = os.fstat(handle.fileno())
@@ -99,7 +102,7 @@ def file_digest(path: Path) -> str:
         return hashlib.file_digest(handle, 'sha256').hexdigest()
 
 
-def check_wheel(path: Path, wheel: Wheel) -> None:
+def check_wheel(path: Path, wheel: Wheel) -> int:
     if file_digest(path) != wheel.sha256:
         raise ValueError('wheel artifact changed')
     with zipfile.ZipFile(path) as archive:
@@ -121,6 +124,8 @@ def check_wheel(path: Path, wheel: Wheel) -> None:
         headers = BytesParser().parsebytes(archive.read(metadata[0]), headersonly=True)
         if (headers.get_all('Name') != [wheel.name] or headers.get_all('Version') != [wheel.version]):
             raise ValueError('wheel metadata differs from reviewed identity')
+        # Include allocation rounding, staging and unpacking; manifest estimates cannot shrink this bound.
+        return 3 * (path.stat().st_size + sum((e.file_size // 4096 + 1) * 4096 for e in entries))
 
 
 def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
@@ -134,8 +139,9 @@ def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
                                  interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
                                  python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
                                  wheels=wheels)
-    for wheel in wheels:
-        check_wheel(source / wheel.filename, wheel)
+    required = max(plan.known_disk_bytes, 500 * 1024**2 + sum(check_wheel(source / w.filename, w) for w in wheels))
+    if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+        raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
     return result
 
 
@@ -214,9 +220,9 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
     root, journal = paths(plan)
     source = canonical(plan.wheelhouse)
     # Validate every artifact and reserve before any destination/journal effects.
-    for wheel in plan.wheels:
-        check_wheel(source / wheel.filename, wheel)
-    require_space(root, max(plan.preview.known_disk_bytes, 500 * 1024**2))
+    required = max(plan.preview.known_disk_bytes,
+                   500 * 1024**2 + sum(check_wheel(source / w.filename, w) for w in plan.wheels))
+    require_space(root, required)
     if (root.exists() or root.is_symlink()) and not journal.exists():
         raise ValueError('destination already exists; preserved')
     with file_lock(journal):

@@ -168,3 +168,46 @@ after the demo; that temporary runtime was removed. The original runtime remains
 available. Evidence is in `reports/toolkit-v2/c03/setup-recovery` from the repo root.
 General reviewed apply, conflict-preserving uninstall and other platforms remain
 unfinished. Inspect failed state before any manual cleanup.
+
+## Separate controlled fixture workers
+
+The development bridge can now keep agent-skill-eval's scheduler and graders
+while dispatching each fixed fake-harness trial through the existing AEEP
+ContainerExecutor. The trusted parent reserves each trial in AssessmentRepository
+before dispatch. Four fresh, network-disabled containers produce four receipts;
+the evaluator coordinator has no Docker socket or approval interface.
+
+The existing pinned local image and private evaluator runtime are prerequisites.
+This command does not build or pull an image or sign in:
+
+```bash
+PYTHONPATH=src python3 integrations/toolkit/controlled.py \
+  --runtime /absolute/private-evaluator-runtime \
+  --output /absolute/new-fixture-output \
+  --image sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7 \
+  --docker /usr/local/bin/docker \
+  --socket /Users/edwintse/.docker/run/docker.sock
+PYTHONPATH=src python3 integrations/toolkit/verify_controlled.py /absolute/new-fixture-output
+```
+
+Use Framework Python 3.13 and the actual paths reviewed for this Mac. The source
+pins and fixed cases remain in `stack.json`. The worker receives only its current
+prompt and optional skill text. The mounted worker source is outside the
+coordinator's writable sandbox. Expected answers, future cases, the receipt store
+and authentication state are not passed to workers.
+
+The output includes upstream artifacts, `receipts.sqlite3`, `toolkit-evidence.json`,
+`assessment-analysis.json`, `summary.json` and HTML/Markdown reports. The read-only
+verifier resolves canonical receipts, redacted decisions, durable events, grading
+bindings and operation accounting, then recomputes `fit_report`. These are local
+integrity checks, not independent signatures or published attestations.
+
+The existing 100-case qualification and 20-pair resource thresholds remain in
+force. This two-case synthetic suite returns insufficient evidence. Upstream fake
+usage constants never become model observations. Worker operation elapsed time
+is accounting overhead, not model latency or savings. A failed or unresolved
+operation stops further dispatch and retains its reservation/evidence.
+
+This proves the fixed upstream-to-container connection. It does not yet provide
+arbitrary candidate intake, capable Codex worker conformance, live comparative
+value, recurring-fee economics or the complete three-family Essentials journey.
