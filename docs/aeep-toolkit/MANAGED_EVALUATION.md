@@ -21,7 +21,7 @@ The candidate's reviewed SKILL.md hash must also occur in that map. Repository
 and license attribution are operator-supplied assertions, not proof of ownership.
 
 ```bash
-PYTHONPATH=src python3 -m aeep_toolkit.managed plan \
+PYTHONPATH=src python3 -m aeep_toolkit eval managed plan \
   --plan /absolute/reviewed-plan.json \
   --source /absolute/reviewed-source.json
 ```
@@ -36,7 +36,7 @@ grant is current, that a budget remains, or that worker conformance passes.
 After reviewing that exact binding and the existing assessment authority:
 
 ```bash
-PYTHONPATH=src python3 -m aeep_toolkit.managed run \
+PYTHONPATH=src python3 -m aeep_toolkit eval managed run \
   --plan /absolute/reviewed-plan.json \
   --source /absolute/reviewed-source.json \
   --manifest /absolute/aeep.yaml \
@@ -73,7 +73,7 @@ observed; installed candidate files are not a substitute.
 To regenerate exports from a completed canonical report without dispatching:
 
 ```bash
-PYTHONPATH=src python3 -m aeep_toolkit.managed report \
+PYTHONPATH=src python3 -m aeep_toolkit eval managed report \
   --plan /absolute/reviewed-plan.json \
   --source /absolute/reviewed-source.json \
   --manifest /absolute/aeep.yaml \
@@ -87,3 +87,22 @@ signature or independent attestation. The descriptive report does not adjudicate
 live efficacy or close the release gate; the original assessment analysis remains
 available alongside it. Synthetic tests of this adapter establish software
 behavior only, even when their fixture records simulate native-host metadata.
+
+## Canonical analysis in the readable report
+
+HTML and Markdown also show the existing assessment verdict, distinct holdouts,
+paired-case counts, uncertainty intervals, utility guardrails, challenger results,
+condition-specific comparisons and operation costs. The bridge recomputes these
+statistics from the retained campaign and rejects mismatches. The service's
+explicit incomplete-preparation-cost downgrade remains unknown.
+
+Expected positions come from the frozen suite, including its conditions and
+repetitions. Missing, unexpected and duplicate positions and unresolved operations
+remain visible. Per-task descriptive slices use the case's template family. Their
+current contract rejects repetitions it cannot pair; the separate canonical
+analysis retains the established repeated-case analysis.
+
+A canonical service verdict is not an independent attestation or release approval.
+The descriptive summary remains `NOT_ASSESSED`. Resource break-even uses from the
+assessment are separate from a plugin-price scenario and never imply billed-cash
+savings. The original `python3 -m aeep_toolkit.managed` entry point still works.

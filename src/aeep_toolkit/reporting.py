@@ -179,6 +179,29 @@ def render(summary: dict[str, Any], format: str) -> str:
             lines += [f"Worker-operation elapsed seconds, known subtotal: {analysis['worker_operation_seconds_known']}; measured operations: {analysis['worker_operations_measured']}/{analysis['worker_operations_reserved']}.",
                       "Worker-operation time is assessment overhead, not model latency or a complete evaluation-cost total."]
         lines.append("")
+    managed = summary.get("managed_analysis")
+    if managed is not None:
+        lines += ["Canonical managed assessment",
+                  f"Recorded outcome: {managed['outcome']}; qualification passed: {managed['qualification_passed']}.",
+                  f"Analysis: {managed['analysis_ref']}; campaign: {managed['campaign_ref']}; operation ledger: {managed['operation_ledger_ref']}.",
+                  f"Distinct holdouts: {managed['distinct_holdout_cases']}; distinct paired cases: {managed['distinct_paired_cases']}.",
+                  f"Correctness failures: {managed['correctness_failures']}; execution failures: {managed['execution_failures']}.",
+                  f"Expected trial positions: {managed['expected_trial_positions']}; missing: {managed['missing_trial_positions']}; unexpected: {managed['unexpected_trial_positions']}; duplicate: {managed['duplicate_trial_positions']}.",
+                  f"Unresolved operations: {managed['unresolved_operations']}.",
+                  managed['timing_scope'],
+                  "Positive paired resource differences mean control used more. Success gains use treatment minus control. Intervals and guardrails retain the frozen analysis policy."]
+        for label, key in (
+            ("Paired measurement coverage", "paired_measurement_cases"),
+            ("Paired resource differences", "paired_savings"),
+            ("Uncertainty intervals", "savings_interval"),
+            ("Separate worker conditions", "condition_comparisons"),
+            ("Utility, guardrails and challengers", "utility_evidence"),
+            ("Assessment usage, including known subtotals", "measured_usage"),
+            ("Measurement coverage", "measurement_coverage"),
+            ("Assessment resource break-even uses", "break_even_uses"),
+        ):
+            lines.append(label + ": " + json.dumps(managed[key], sort_keys=True, allow_nan=False))
+        lines += ["Null means unavailable. Resource break-even is not billed-cash savings or a plugin-price forecast.", ""]
     for index, cohort in enumerate(summary["cohorts"], 1):
         binding = cohort["binding"]
         lines += [f"Cohort {index}: {binding['host']} {json.dumps(binding['host_version'])} / {binding['model']} / {binding['effort']}",

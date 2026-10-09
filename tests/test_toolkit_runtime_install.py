@@ -17,26 +17,28 @@ from aeep_toolkit.models import ExtensionRegistry
 
 pytestmark = pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks')
 
-def installation(tmp_path, *, extra=None, requires='', filename='aeep_installer_fixture-1.0-py3-none-any.whl', selected_platform=None):
+def installation(tmp_path, *, extra=None, requires='', filename=None, selected_platform=None, name='aeep-installer-fixture'):
     wheelhouse = tmp_path / 'wheels'
     wheelhouse.mkdir()
     selected_platform = selected_platform or sorted(runtime.host_platforms())[0]
+    prefix = name.replace('-', '_')
+    filename = filename or f'{prefix}-1.0-py3-none-any.whl'
     wheel = wheelhouse / filename
     entries = {
         'aeep_installer_fixture/__init__.py': 'VALUE = "synthetic"\n',
-        'aeep_installer_fixture-1.0.dist-info/METADATA': 'Metadata-Version: 2.1\nName: aeep-installer-fixture\nVersion: 1.0\n' + requires,
-        'aeep_installer_fixture-1.0.dist-info/WHEEL': 'Wheel-Version: 1.0\nGenerator: AEEP synthetic test\nRoot-Is-Purelib: true\nTag: py3-none-any\n',
+        f'{prefix}-1.0.dist-info/METADATA': f'Metadata-Version: 2.1\nName: {name}\nVersion: 1.0\n' + requires,
+        f'{prefix}-1.0.dist-info/WHEEL': 'Wheel-Version: 1.0\nGenerator: AEEP synthetic test\nRoot-Is-Purelib: true\nTag: py3-none-any\n',
     } | (extra or {})
-    record = 'aeep_installer_fixture-1.0.dist-info/RECORD'
+    record = f'{prefix}-1.0.dist-info/RECORD'
     entries[record] = ''.join(f'{name},,\n' for name in [*entries, record])
     with zipfile.ZipFile(wheel, 'w') as archive:
-        for name, value in entries.items():
-            archive.writestr(name, value)
+        for entry, value in entries.items():
+            archive.writestr(entry, value)
     sha = hashlib.sha256(wheel.read_bytes()).hexdigest()
     item = manifest(platforms=(selected_platform,), source=manifest().source.model_dump() | {'artifact_sha256': sha})
     rules = policy(item, platform=selected_platform)
     selection = preview(ExtensionRegistry(extensions=(item,)), ('engine',), rules)
-    wheels = (runtime.Wheel(extension_id='engine', filename=filename, name='aeep-installer-fixture', version='1.0', sha256=sha),)
+    wheels = (runtime.Wheel(extension_id='engine', filename=filename, name=name, version='1.0', sha256=sha),)
     return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
 
 
@@ -247,3 +249,44 @@ def test_applied_pip_command_cannot_resolve_new_dependencies(tmp_path,monkeypatc
     runtime.apply(plan,runtime.digest(plan))
     install = next(argv for argv in commands if 'install' in argv)
     assert '--no-index' in install and '--no-deps' in install and '--require-hashes' in install
+
+
+def test_own_shared_data_installs_only_inside_private_runtime_and_preserves_edits(tmp_path):
+    plan = installation(tmp_path, name='aeep-agent-router', extra={
+        'aeep_agent_router-1.0.data/data/share/aeep/examples/demo.txt': 'owned example',
+    })
+    identity = runtime.digest(plan)
+    state = runtime.apply(plan, identity)
+    root = Path(plan.destination)
+    example = root / 'share/aeep/examples/demo.txt'
+    assert state['status'] == 'installed' and example.read_text() == 'owned example'
+    assert not (tmp_path / 'share').exists()
+    example.write_text('user-edited example')
+    with pytest.raises(ValueError, match='preserved'):
+        runtime.remove(plan, identity)
+    assert example.read_text() == 'user-edited example'
+    example.write_text('owned example')
+    assert runtime.remove(plan, identity)['status'] == 'removed'
+    assert not root.exists()
+
+
+@pytest.mark.parametrize('path', [
+    'aeep_agent_router-1.0.data/scripts/python',
+    'aeep_agent_router-1.0.data/purelib/sitecustomize.py',
+    'aeep_agent_router-1.0.data/data/bin/python',
+    'aeep_agent_router-1.0.data/data/share/other/example.txt',
+    'aeep_agent_router-1.0.data/data/share/aeep/../outside.txt',
+    'aeep_agent_router-1.0.data/data/share/aeep/nested.data/file',
+    'aeep_agent_router-2.0.data/data/share/aeep/example.txt',
+])
+def test_own_data_exception_does_not_allow_other_relocations(tmp_path, path):
+    with pytest.raises(ValueError, match='unsupported'):
+        installation(tmp_path, name='aeep-agent-router', extra={path: 'rejected'})
+    assert not (tmp_path / 'runtime').exists()
+
+
+def test_other_packages_cannot_claim_aeep_shared_data_layout(tmp_path):
+    with pytest.raises(ValueError, match='unsupported'):
+        installation(tmp_path, extra={
+            'aeep_agent_router-1.0.data/data/share/aeep/example.txt': 'rejected',
+        })

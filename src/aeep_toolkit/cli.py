@@ -8,6 +8,7 @@ import json
 import os
 import stat
 import subprocess
+import sys
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -105,8 +106,21 @@ def main(argv: list[str] | None = None) -> int:
         operation.add_argument('--reviewed-digest', required=True)
     candidate = sub.add_parser('candidate', help='Inspect exact local skill payload without executing or installing it')
     candidate.add_argument('path', type=Path)
+    evaluation = sub.add_parser('eval', help='Run an explicitly selected existing evaluation backend')
+    evaluation.add_argument('backend', choices=('scripted', 'managed'))
+    evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
     args = parser.parse_args(argv)
     try:
+        if args.command == 'eval':
+            if args.backend == 'managed':
+                from .managed import main as managed_main
+                managed_main(args.arguments)
+                return 0
+            script = Path(__file__).resolve().parents[2] / 'integrations/toolkit/evaluate.py'
+            if not script.is_file():
+                parser.exit(2, 'The scripted backend requires the reviewed repository checkout; it is unavailable in this installation.\n')
+            # Keep the upstream development bridge's module namespace in its own process.
+            return subprocess.run([sys.executable, '-B', str(script), *args.arguments], check=False).returncode
         if args.command == 'candidate':
             from .candidate import inspect
             print(json.dumps(inspect(args.path.absolute()).describe(), indent=2))

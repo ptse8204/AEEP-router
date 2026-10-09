@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '40a8b7a'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/managed-adapter/validation/checks.json'
 last_check_result: '1493 passed, 21 skipped in both core suites; all 12 driver checks, both branch gates, eight supplemental proof/build checks and docs passed. Source unchanged. Four native zero-turn workers and six scripted Router-disabled workers passed; cleanup confirmed.'
-next_action: 'Integrate the checked D43/D44/D45 drafts: readable canonical analysis, unified explicit-backend CLI and bounded own-package data installation. Then verify that integrated source and prepare the complete package-installation review. Earlier stopping was unfinished engineering, not missing architecture or permission.'
+next_action: 'Finish source-bound verification of integrated D43-D45; replay the explicit CLI and prepare the exact complete package-installation review. Retain the conclusion that earlier stopping was unfinished engineering, not missing architecture or permission.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -1094,3 +1094,19 @@ report/CLI checks and 49 installer checks passing outside the checkout. Integrat
 only `managed.py`, `reporting.py`, `cli.py`, `install_runtime.py`, the two new test
 files and the revised installer test; never copy scratch conftest. The changes
 need their own repository verification and actual CLI replay.
+
+### D43-D45 integrated; verification pending
+
+The managed readable report now includes canonical intervals, guardrails, trial
+coverage and costs, with reproduction checks. Both backends are available under
+`aeep-toolkit eval` with explicit selection. The private installer accepts the
+reviewed AEEP wheel's exact-version `share/aeep` assets while preserving all other
+relocation exclusions and user-edit protection. New and existing targeted tests
+are being run through normal repository imports. No external package was
+installed by copying these drafts; the actual complete dependency installation
+review remains next. D42 proof stays bound to `40a8b7a`.
+
+D43-D45 normal-import checks passed 205 tests and 24 subtests in 8.74 seconds;
+Ruff, mypy and diff whitespace checks passed. The retained log is
+`reports/toolkit-v2/c06/delivery-integration/targeted.log`. Full verification and
+a fresh CLI replay remain required before treating this source as verified.

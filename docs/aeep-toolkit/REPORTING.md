@@ -100,3 +100,9 @@ list empty while retaining earlier raw counts as partial evidence. Unknown model
 identity likewise preserves known raw counts without inventing model accounting.
 Historical receipts retain their original bytes and source bindings. The toolkit
 must not infer zero usage from an older receipt without field-level evidence.
+
+The [managed backend](MANAGED_EVALUATION.md) now includes canonical assessment
+intervals, guardrails, measurement coverage, costs and trial-position coverage in
+HTML/Markdown. It reproduces retained statistics and costs before exporting.
+Missing measurements and incomplete cost lineage remain unknown; its recorded
+service verdict is separate from the descriptive summary and release readiness.

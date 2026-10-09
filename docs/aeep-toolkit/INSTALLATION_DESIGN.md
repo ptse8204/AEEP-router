@@ -112,7 +112,11 @@ The installed `packaging` 24.2 library checks wheel tags, Python requirements an
 the complete selected dependency closure before effects. Pip installs with
 `--no-deps --no-index` and checks installed dependencies afterward. Active direct
 URLs and dependency extras are rejected. Source builds,
-Python startup hooks and wheel `.data` relocation are unsupported and rejected.
+Python startup hooks and general wheel `.data` relocation are rejected. The
+reviewed `aeep-agent-router` wheel may place its exact-version
+`.data/data/share/aeep/...` documentation and examples inside the private runtime.
+Other distributions, versions and relocation schemes remain unsupported; these
+shared assets participate in the same whole-tree edit-preservation checks.
 No host connection is written or enabled. The 50 GiB free-space reserve is checked
 before effects, with at least 500 MiB installation headroom.
 

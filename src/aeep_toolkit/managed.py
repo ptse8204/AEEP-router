@@ -26,7 +26,7 @@ from aeep.assessment.models import (
 from aeep.assessment.reporting import fit_report
 from aeep.assessment.service import AssessmentService
 from aeep.assessment.verification import verification_source_digest
-from aeep.benchmarking import BenchmarkCampaignReport, BenchmarkTrial
+from aeep.benchmarking import BenchmarkCampaignReport, BenchmarkPhase, BenchmarkTrial
 from aeep.errors import ConfigurationError
 from aeep.estimator import evidence_cohort_digest
 from aeep.hosts.codex_accounting import TOKEN_FIELDS
@@ -198,6 +198,33 @@ class AEEPAssessmentAdapter:
             reproduced.qualification_passed,
         ) != (report.outcome, report.qualification_passed):
             raise ConfigurationError("canonical comparison does not reproduce")
+        # Service failure may downgrade the verdict, never rewrite measured statistics.
+        for field in (
+            "distinct_holdout_cases", "distinct_paired_cases", "correctness_failures",
+            "execution_failures", "tested_variations", "paired_measurement_cases",
+            "paired_savings", "savings_interval", "condition_comparisons", "utility_evidence",
+            "host_runtime_digests", "deterministic_reference_comparison", "measurement_coverage",
+        ):
+            if getattr(report, field) != getattr(reproduced, field):
+                raise ConfigurationError("canonical comparison statistics do not reproduce")
+        incomplete_costs = "Preparation cost lineage is incomplete; known incurred usage is retained." in report.explanations
+        expected_usage = dict(reproduced.measured_usage)
+        expected_break_even = dict(reproduced.break_even_uses)
+        if incomplete_costs:
+            expected_usage["assessment_wall_time_ms"] = None
+            expected_break_even = {key: None for key in expected_break_even}
+        if report.measured_usage != expected_usage or report.break_even_uses != expected_break_even:
+            raise ConfigurationError("canonical comparison costs do not reproduce")
+        expected = {
+            (case.case_id, route.route_id, condition.value, repetition)
+            for case in self.plan.suite.cases
+            for route in self.plan.suite.routes
+            for condition in self.plan.suite.conditions
+            for repetition in range(self.plan.suite.repetitions)
+        }
+        observed = [(trial.case_id, trial.route_id, trial.condition.value, trial.repetition)
+                    for trial in campaign.trials if trial.phase != BenchmarkPhase.SETUP]
+        positions = set(observed)
         path = Path(binding.campaign_path).resolve(strict=True)
         if path != self.service.directory / self.plan.plan_id / "campaign.sqlite3":
             raise ConfigurationError("campaign receipt store is outside its plan directory")
@@ -249,6 +276,11 @@ class AEEPAssessmentAdapter:
             "campaign_sha256": report.campaign_digest,
             "operation_ledger_sha256": report.operation_ledger_digest,
             "canonical_trials": len(campaign.trials),
+            "expected_trial_positions": len(expected),
+            "missing_trial_positions": len(expected - positions),
+            "unexpected_trial_positions": len(positions - expected),
+            "duplicate_trial_positions": len(observed) - len(positions),
+            "unresolved_operations": sum(item.elapsed_seconds is None for item in ledger.operations),
             "normalized_primary_trials": len(runs),
             "normalization_gaps": gaps,
             "auxiliary_trial_ids": auxiliary,
@@ -382,7 +414,7 @@ class AEEPAssessmentAdapter:
                 shared_environment_sha256=comparison.experiment.environment.shared_definition_digest,
                 worker_sha256=metadata["worker_digest"],
                 task_sha256=content_digest(case),
-                task_family=self.recipe.recipe_id,
+                task_family=case.template_family or self.recipe.recipe_id,
                 verifier_sha256=self.plan.recipe_digest,
                 prompt_sha256=metadata["task_instruction_sha256"],
                 arm="treatment" if trial.route_id == self.plan.candidate_id else "control",
@@ -410,13 +442,55 @@ class AEEPAssessmentAdapter:
         )
 
 
-def main() -> None:
+
+def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -> dict[str, Any]:
+    """Present the reused analysis separately from unauthenticated descriptive input."""
+    from .reporting import summarize
+
+    summary = summarize(bundle, accounting_records=adapter.accounting_records)
+    details = adapter.details
+    analysis = AssessmentReport.model_validate(details["assessment_analysis"])
+    summary["managed_analysis"] = {
+        "analysis_ref": details["report_sha256"],
+        "plan_ref": details["plan_sha256"],
+        "campaign_ref": details["campaign_sha256"],
+        "operation_ledger_ref": details["operation_ledger_sha256"],
+        "outcome": analysis.outcome,
+        "qualification_passed": analysis.qualification_passed,
+        "distinct_holdout_cases": analysis.distinct_holdout_cases,
+        "distinct_paired_cases": analysis.distinct_paired_cases,
+        "correctness_failures": analysis.correctness_failures,
+        "execution_failures": analysis.execution_failures,
+        **{key: details[key] for key in (
+            "expected_trial_positions", "missing_trial_positions", "unexpected_trial_positions",
+            "duplicate_trial_positions", "unresolved_operations")},
+        "paired_measurement_cases": analysis.paired_measurement_cases,
+        "paired_savings": analysis.paired_savings,
+        "savings_interval": analysis.savings_interval,
+        "condition_comparisons": analysis.condition_comparisons,
+        "utility_evidence": analysis.utility_evidence,
+        "measured_usage": analysis.measured_usage,
+        "measurement_coverage": analysis.measurement_coverage,
+        "break_even_uses": analysis.break_even_uses,
+        "timing_scope": details["timing_scope"],
+    }
+    summary["limitations"].extend([
+        f"Canonical campaign: {details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "
+        f"{len(details['normalization_gaps'])} normalization gaps; {len(details['auxiliary_trial_ids'])} auxiliary trials.",
+        "Canonical analysis includes its frozen conditions, repetitions and auxiliary arms. Descriptive tables below cover only normalized primary trials; they cannot replace the complete campaign or cost ledger.",
+        "The canonical verdict is the assessment service's recorded conclusion, not a new toolkit qualification, independent attestation or release approval.",
+        *[f"Unnormalized trial {item['trial_id']}: {item['reason']}" for item in details['normalization_gaps']],
+    ])
+    return summary
+
+
+def main(argv: list[str] | None = None) -> None:
     import argparse
     import asyncio
 
     from aeep.router import Router
     from aeep_toolkit.cli import read_json
-    from aeep_toolkit.reporting import render, summarize
+    from aeep_toolkit.reporting import render
 
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="operation", required=True)
@@ -432,7 +506,7 @@ def main() -> None:
             command.add_argument("--reviewed-digest", required=True)
         if name == "report":
             command.add_argument("--report-id", required=True)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
         plan = AssessmentPlan.model_validate(read_json(args.plan))
         source = SourcePin.model_validate(read_json(args.source))
@@ -467,18 +541,7 @@ def main() -> None:
                         if args.operation == "run"
                         else adapter.normalize(args.report_id)
                     )
-                    summary = summarize(bundle, accounting_records=adapter.accounting_records)
-                    summary["limitations"].extend(
-                        [
-                            f"Canonical campaign: {adapter.details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "
-                            f"{len(adapter.details['normalization_gaps'])} normalization gaps; {len(adapter.details['auxiliary_trial_ids'])} auxiliary trials.",
-                            "The tables describe normalized primary trials only. Full assessment analysis and all operation-cost references remain in managed-evidence.json.",
-                            *[
-                                f"Unnormalized trial {item['trial_id']}: {item['reason']}"
-                                for item in adapter.details["normalization_gaps"]
-                            ],
-                        ]
-                    )
+                    summary = comparison_summary(adapter, bundle)
                     for name, document in (
                         ("toolkit-evidence", bundle.model_dump(mode="json")),
                         ("managed-evidence", adapter.details),

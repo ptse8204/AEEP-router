@@ -118,9 +118,15 @@ def check_wheel(path: Path, wheel: Wheel) -> int:
             raise ValueError('wheel exceeds bounds or contains duplicate paths')
         for entry in entries:
             name = Path(entry.filename)
+            # pip places this reviewed AEEP data below the private venv's share directory.
+            owned_data = (
+                wheel.name == 'aeep-agent-router'
+                and name.parts[:4] == (f'aeep_agent_router-{wheel.version}.data', 'data', 'share', 'aeep')
+                and not any(part.casefold().endswith('.data') for part in name.parts[1:])
+            )
             if (not name.parts or str(name) != entry.filename.rstrip('/') or name.is_absolute() or '..' in name.parts or '\\' in entry.filename
                     or stat.S_ISLNK(entry.external_attr >> 16)
-                    or any(part.casefold().endswith('.data') for part in name.parts)
+                    or (any(part.casefold().endswith('.data') for part in name.parts) and not owned_data)
                     or name.suffix.casefold() == '.pth' or any(Path(part).stem.casefold() in {'sitecustomize', 'usercustomize', 'pip'} for part in name.parts)):
                 raise ValueError('wheel contains unsupported paths or interpreter startup hooks')
         metadata = [name for name in names if len(Path(name).parts) == 2 and name.endswith('.dist-info/METADATA')]

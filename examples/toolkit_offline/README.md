@@ -32,7 +32,7 @@ AE_TOOLKIT_OPTIONS=(
   --docker /usr/local/bin/docker
   --socket /Users/edwintse/.docker/run/docker.sock
 )
-PYTHONPATH=src python3 -B integrations/toolkit/evaluate.py plan "${AE_TOOLKIT_OPTIONS[@]}"
+PYTHONPATH=src python3 -B -m aeep_toolkit eval scripted plan "${AE_TOOLKIT_OPTIONS[@]}"
 ```
 
 The preview binds the captured candidate, suite, runtime inventory, adapter
@@ -40,8 +40,8 @@ sources, image and output destination. Review it, then pass its `review_sha256`
 value to the run command:
 
 ```bash
-PYTHONPATH=src python3 integrations/toolkit/evaluate.py run "${AE_TOOLKIT_OPTIONS[@]}"   --reviewed-digest REVIEW_SHA256_FROM_PLAN
-PYTHONPATH=src python3 -B integrations/toolkit/evaluate.py report   --output "$PWD/aeep-offline-result"
+PYTHONPATH=src python3 -m aeep_toolkit eval scripted run "${AE_TOOLKIT_OPTIONS[@]}"   --reviewed-digest REVIEW_SHA256_FROM_PLAN
+PYTHONPATH=src python3 -B -m aeep_toolkit eval scripted report   --output "$PWD/aeep-offline-result"
 ```
 
 Open `aeep-offline-result/report.html` or read `report.md`. The source-bound
@@ -80,3 +80,10 @@ results. Run the same `report` command to verify those records. Do not replay in
 that output directory or treat an unresolved operation as refunded allowance.
 The partial report's worker-operation elapsed subtotal is assessment overhead;
 model time and full evaluation cost remain separate unknowns.
+
+Both evaluation backends are accessible through `aeep-toolkit eval`: choose
+`scripted` for this upstream fake-harness journey or `managed` for an existing
+reviewed native assessment. No failure switches engines. Scripted execution
+currently requires this repository checkout; an installation without its assets
+reports unavailable. The original `integrations/toolkit/evaluate.py` commands
+remain valid. No installation or model call is triggered by selecting a backend.

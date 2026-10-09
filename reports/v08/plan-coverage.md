@@ -4127,3 +4127,9 @@ checks passed with unchanged executable source. The Router-disabled upstream
 journey verified six scripted workers and exact-name cleanup. A read-only current
 grant audit found headroom, so budget absence is not a demonstrated blocker;
 exact V2 scope/conformance remains to be prepared. D43-D45 drafts stay pending.
+
+V2 D43-D45 are integrated: readable canonical analysis with statistic/cost
+reproduction, one explicit-backend evaluation CLI, and private installation of
+AEEP's existing shared assets. Normal-import targeted checks passed 205 tests and
+24 subtests. Ruff/mypy passed; full source-bound regression/coverage is next.
+No new model call, credential access or external package installation occurred.
