@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its ordinary full suite passed and coverage checks are running. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. General candidate/Codex dispatch, complete comparison economics and C06-C13 remain unfinished. No V2 live efficacy or release claim is established.
+**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its corrected preflight passed both full suites and coverage gates. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. General candidate/Codex dispatch, complete comparison economics and C06-C13 remain unfinished. No V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,15 +9,15 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C03
+current_checkpoint: C04
 checkpoint_status:
   C00: PASS
   C01: PASS
   C02: PASS
-  C03: IN_PROGRESS
+  C03: PASS
   C04: IN_PROGRESS
   C05: IN_PROGRESS
-  C06: TODO
+  C06: IN_PROGRESS
   C07: TODO
   C08: TODO
   C09: TODO
@@ -25,9 +25,9 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '4ddf045'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/general-installer/validation-final/checks.json'
-last_check_result: '1419 passed, 21 skipped in each full suite; 81.6868% combined coverage; both branch gates, all 11 driver checks, standalone 48-test integration, Node tests, docs and builds passed. Source stayed fixed at 4ddf045. C03 remains IN_PROGRESS for D34 preflight corrections.'
+last_verified_commit: '29dff45'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/preflight-correction/validation/checks.json'
+last_check_result: '1444 passed, 21 skipped in each full suite; both branch coverage gates, all 11 driver checks, standalone 48-test integration, Node 13 tests, docs (64 files, 571 links, zero errors) and builds passed. Source remained unchanged. General synthetic adapter increment now needs its own checks.'
 next_action: 'Verify the integrated D34 installer preflight correction and D33 receipt-backed cash report. Then complete general controlled candidate dispatch and the three-family C06 journey. Existing AssessmentService/BenchmarkRunner own authority, budgets, worker checks and accounting; avoid duplicating those controls. No architecture decision is pending.'
 blocked_actions: []
 missing_permissions: []
@@ -788,3 +788,48 @@ creating a break-even claim. Supplied records remain unauthenticated; synthetic
 amounts remain synthetic. Full integrated verification must finish before a new
 checkpoint PASS. General candidate dispatch and C05 inferential integration remain
 unfinished engineering work.
+
+The new `29dff45` ordinary suite passed 1,444 tests with 21 skips in 637.00 seconds.
+Coverage and the remaining gates are running under tool session 86777, driver
+`/tmp/aeep-toolkit-preflight-correction-checks.py`; retain its source snapshot.
+The corrected 24-wheel replay also passed and retained its removal journal at
+`/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-general-installer-replay-f8evt07j`.
+The controlled receipt cost example stays unknown; a separate example uses
+explicitly invented bill/fee inputs to test arithmetic, never measured savings.
+
+The next upstream adapter increment is being developed separately in
+`/tmp/aeep-toolkit-general-adapter` while this verification runs. It is not yet
+integrated or a checkpoint PASS. It captures arbitrary local candidate payloads
+and bounded reviewed suites, stages exact treatment bytes, keeps prompts
+transient, and adds real scripted file edits for the future three-family offline
+journey. The existing 38 focused draft/bridge tests pass. Run a fresh source-bound
+Docker replay after integration; unit fixtures are not worker conformance.
+
+### D34/D33 verification completed
+
+The corrected installer and receipt-cost reporting at `29dff45` passed both full
+suites (1,444 passed, 21 skipped), all 11 checks, both coverage gates and eight
+supplemental proof/build commands. The private 24-wheel replay, repeat verification
+and unchanged-runtime removal passed. Evidence is under
+`reports/toolkit-v2/c03/preflight-correction`; synthetic cash arithmetic is separately
+labeled under `reports/toolkit-v2/c05/cash-report`. No model or billing calls ran.
+
+The next integration now includes all toolkit tests in the default pytest suite
+and switches the standalone CI invocation to pytest so function-style regression
+tests cannot silently go uncollected. C06 remains in progress until actual replay.
+
+### General offline journey: executed, verification pending
+
+C03 passes its OFFLINE gate with the D34 regression, exact local-wheel replay,
+non-mutating preview tests and conflict-preserving removal evidence above.
+This does not qualify installed evaluators for real hosts.
+
+The D35 adapter completed two three-case runs through agent-skill-eval 0.7.0:
+12 distinct Docker workers, all removed. One run explicitly retains synthetic
+outputs; the other uses the default of no content retention. The audit resolved
+all receipts, checked treatment payload hashes, scanned decoded saved records
+for task content, and rejected six tampering cases. See
+`reports/toolkit-v2/c06/offline-journey/audit.json` and both CLI transcripts.
+A following import-format-only correction changes the adapter source hash; the
+reviewed plans preserve the exact executed bytes. Full regression verification
+for this increment remains pending. C04/C05/C06 remain IN_PROGRESS.

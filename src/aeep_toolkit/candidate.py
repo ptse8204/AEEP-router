@@ -9,9 +9,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .cli import read_bytes
-from .install_runtime import canonical
-
 EXCLUDED = frozenset({'evals', '.git', '__pycache__'})
 
 
@@ -44,6 +41,8 @@ class CandidatePayload:
                 'executed':False, 'notice':'Local byte identity only; no developer verification, installation, safety or value qualification.'}
 
     def stage(self, destination: Path) -> None:
+        from .install_runtime import canonical
+
         self.describe()
         canonical(str(destination))
         if destination.exists():
@@ -57,6 +56,9 @@ class CandidatePayload:
 
 
 def inspect(path: Path) -> CandidatePayload:
+    from .cli import read_bytes
+    from .install_runtime import canonical
+
     root = path.parent if path.name == 'SKILL.md' else path
     canonical(str(root))
     if not root.is_dir():

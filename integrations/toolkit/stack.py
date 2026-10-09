@@ -198,8 +198,8 @@ print(json.dumps(checks))
     return facts
 
 
-def collect(iteration: Path) -> list[dict]:
-    suite = read(BASE / "fixtures/format-json/evals/evals.json")
+def collect(iteration: Path, suite: dict | None = None, files: dict[str, bytes] | None = None) -> list[dict]:
+    suite = suite if suite is not None else read(BASE / "fixtures/format-json/evals/evals.json")
     rows = []
     subjects = set()
     expected_paths = set()
@@ -216,12 +216,17 @@ def collect(iteration: Path) -> list[dict]:
                 raise ValueError("Incomplete or mismatched upstream trial")
             subjects.add(meta["skill_hash"])
             output = (directory / "outputs/output.txt").read_text()
-            needle = case["assertions"][0].split("`")[1]
-            passed = needle in output
+            if case['prompt'].startswith('AEEP_SYNTHETIC_EDIT_V1\n'):
+                artifact = json.loads(output)
+                if (set(artifact) != {'files','file_tree_sha256'} or not isinstance(artifact['files'],dict)
+                        or any(not isinstance(k,str) or not isinstance(v,str) for k,v in artifact['files'].items())
+                        or hashlib.sha256(json.dumps(artifact['files'],sort_keys=True,separators=(',',':')).encode()).hexdigest() != artifact['file_tree_sha256']):
+                    raise ValueError('edited artifact differs from independently calculated digest')
+            observed = [assertion.split("`")[1] in output for assertion in case["assertions"]]
+            passed = all(observed)
             assertions = grading["assertion_results"]
-            if (len(assertions) != 1 or assertions[0]["skipped"]
-                    or assertions[0]["method"] != "deterministic"
-                    or assertions[0]["passed"] is not passed):
+            if (len(assertions) != len(observed) or any(item["skipped"] or item["method"] != "deterministic"
+                    or item["passed"] is not expected for item,expected in zip(assertions,observed,strict=True))):
                 raise ValueError("Independent fixture check disagrees with upstream grading")
             trajectory = json.loads((directory / "trajectory.json").read_text())
             exposed = any(event["event"] == "skill_installed" for event in trajectory)
@@ -231,8 +236,11 @@ def collect(iteration: Path) -> list[dict]:
                          "exposed": exposed, "candidate_invoked": None,
                          "model_tokens": None, "model_wall_seconds": None, "actual_cash": None,
                          "evidence_kind": "synthetic", "artifact": str(directory.relative_to(iteration))})
-    skill = (BASE / "fixtures/format-json/SKILL.md").read_bytes()
-    expected_subject = hashlib.sha256(b"SKILL.md\0" + skill + b"\0").hexdigest()
+    files = files if files is not None else {"SKILL.md":(BASE / "fixtures/format-json/SKILL.md").read_bytes()}
+    identity = hashlib.sha256()
+    for name,raw in sorted(files.items()):
+        identity.update(name.encode()+b"\0"+raw+b"\0")
+    expected_subject = identity.hexdigest()
     if subjects != {expected_subject} or set(iteration.rglob("run_meta.json")) != expected_paths:
         raise ValueError("Missing, extra or differently pinned trials")
     return rows

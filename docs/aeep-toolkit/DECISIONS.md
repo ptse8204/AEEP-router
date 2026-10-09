@@ -397,3 +397,30 @@ The source also needs case-insensitive archive collision and startup-hook checks
 for macOS. Preserve failed-install journals and existing user-edit protection.
 This is a corrective implementation decision, not permission for new third-party
 installation, model calls or changes to the selected delivery architecture.
+
+## D35 — Generalize the upstream offline adapter without adding a runner
+
+Reuse the existing controlled ASE bridge for candidate payloads and bounded
+reviewed suites. The development adapter implements the C02 evaluator interface;
+ASE still schedules and grades, and existing AEEP reservations, container
+execution, receipts and analysis retain their jobs. Candidate hashes and staged
+bytes must agree in both the parent and worker, including bundled resources.
+
+Keep candidate instructions uninterpreted in this scripted mode. A finite suite
+has at most 16 unique cases, two arms, zero model turns and no network. Its explicit
+review binds candidate/source metadata, suite, runtime, adapter source, image and
+output location. Each engineering replay records its own incurred operations;
+no existing live grant is replaced or reset. This scope does not authorize a
+real Codex trial or general third-party code execution.
+
+General task prompts and upstream transcripts remain transient. Output retention
+is off by default and, when selected, belongs to the reviewed plan. Verification
+must distinguish checking retained artifacts from resolving canonical grading
+records without retained contents. The original fixed synthetic records remain
+unchanged.
+
+For C06, use deterministic file-edit fixtures that actually edit files and
+preserve unrelated content. Independently check the resulting artifacts against
+literal expected results. Do not rename a formatting prompt “complex” when the
+fake harness ignores the requested work. The suite must remain prominently
+synthetic and cannot establish real candidate value or capable-Codex conformance.

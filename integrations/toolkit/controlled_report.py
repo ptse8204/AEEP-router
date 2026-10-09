@@ -37,7 +37,7 @@ def freeze(repository, request, suite, spec):
         route_fingerprints={arm:content_digest(spec) for arm in ('control','treatment')},
         suite=BenchmarkSuite(suite_id=request.plan_id, domain='synthetic-upstream-harness', repetitions=1,
             routes=[{'route_id':arm,'executor_id':arm} for arm in ('control','treatment')], conditions=['fresh-worker'],
-            cases=[BenchmarkCase(case_id=c['id'], split='holdout', action=ActionRequest(capability=spec.capability,input={'prompt':c['prompt']}),
+            cases=[BenchmarkCase(case_id=c['id'], split='holdout', action=ActionRequest(capability=spec.capability,input={'prompt_sha256':content_digest({'prompt':c['prompt']})}),
                                  variation=c['id'],template_family=c['id']) for c in suite['evals']]),
         applicability={'evidence_kind':['synthetic']}, comparison=comparison, feature_combinations=[{'fixture':True}])
     repository.put('toolkit_analysis_plan', request.plan_id, plan)
@@ -46,7 +46,7 @@ def freeze(repository, request, suite, spec):
     return plan, recipe
 
 
-def create(output, repository, plan, recipe, definition, environment, results, rows):
+def create(output, repository, plan, recipe, definition, environment, results, rows, *, artifact_root=None):
     cases = {case.case_id:case for case in plan.suite.cases}
     expected = {(case,arm) for case in cases for arm in ('control','treatment')}
     if (len(results) != len(expected) or {(r['case'],r['arm']) for r in results} != expected
@@ -57,7 +57,7 @@ def create(output, repository, plan, recipe, definition, environment, results, r
         raise ValueError('grading positions differ from frozen plan')
     trials, runs = [], []
     source = SourcePin(**definition.facts['stack']['fixture_source'])
-    adapter_hash = content_digest(definition)
+    adapter_hash = definition.facts.get('review_sha256') or content_digest(definition)
     verifier_hash = hashlib.sha256(read_bytes(Path(__file__).resolve())).hexdigest()
     adapter = AdapterCapabilities(adapter_id='agent-skill-eval.controlled-fixture', implementation_sha256=adapter_hash,
         hosts=('fake',),candidate_types=('skill',),optional_invocation=True,telemetry=(),containment='unverified')
@@ -70,7 +70,7 @@ def create(output, repository, plan, recipe, definition, environment, results, r
                 or content_digest(frozen_receipt) != result['receipt_ref'] or not receipt.execution_success
                 or receipt.metadata.get('case') != result['case'] or receipt.metadata.get('arm') != result['arm']):
             raise ValueError('worker receipt differs from canonical trial')
-        artifact = output/'upstream'/row['artifact']/'outputs/output.txt'
+        artifact = (artifact_root if artifact_root is not None else output/'upstream')/row['artifact']/'outputs/output.txt'
         if hashlib.sha256(read_bytes(artifact)).hexdigest() != result['output_sha256']:
             raise ValueError('graded output differs from worker result')
         verification = FixtureRecord(facts={'row':row,'output_sha256':result['output_sha256'], 'verifier_sha256':verifier_hash})
@@ -85,7 +85,7 @@ def create(output, repository, plan, recipe, definition, environment, results, r
             adapter_sha256=adapter_hash,host='fake',host_version='agent-skill-eval-0.7.0',model='synthetic-no-model',effort='none',
             shared_environment_sha256=content_digest(environment),worker_sha256=content_digest({'environment':content_digest(environment),'worker':result['worker_name']}),
             task_sha256=content_digest(case),task_family=result['case'],verifier_sha256=verifier_hash,
-            prompt_sha256=content_digest(case.action.input),arm=result['arm'],mode='optional',
+            prompt_sha256=case.action.input['prompt_sha256'],arm=result['arm'],mode='optional',
             candidate_exposed=result['candidate_exposed'],candidate_invoked=None,verification='pass' if row['verified'] else 'fail',
             verification_ref=verification_ref,status='completed',retries=0,evidence_kind='synthetic',receipt_refs=(result['receipt_ref'],)))
     campaign = BenchmarkCampaignReport(run_id=plan.plan_id,suite_id=plan.suite.suite_id,domain=plan.suite.domain,

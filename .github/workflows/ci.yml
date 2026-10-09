@@ -46,7 +46,7 @@ jobs:
         run: python -m pytest tests/test_v08_assessment_interfaces.py::test_completed_worker_exit_preserves_admission_when_reading_report
       - name: Check offline toolkit bridge
         if: runner.os != 'Windows'
-        run: python -m unittest discover -s integrations/toolkit -p 'test_*.py' -v
+        run: python -m pytest integrations/toolkit
       - run: coverage run --branch -m pytest -v --durations=20
         timeout-minutes: 120
         env:

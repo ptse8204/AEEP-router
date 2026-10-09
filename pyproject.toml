@@ -90,7 +90,7 @@ aeep_toolkit = ["catalog.json"]
 [tool.pytest.ini_options]
 addopts = "-q"
 asyncio_mode = "auto"
-testpaths = ["tests"]
+testpaths = ["tests", "integrations/toolkit"]
 markers = [
   "native_boundary: opt-in native Codex sandbox allow/deny probes without model calls",
   "assessment_contract: offline recipe, mapping and protocol contracts",

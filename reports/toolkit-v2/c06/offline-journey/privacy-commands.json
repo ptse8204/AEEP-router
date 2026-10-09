@@ -1,0 +1,65 @@
+[
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "integrations/toolkit/evaluate.py",
+      "plan",
+      "--candidate",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/format-json",
+      "--suite",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/offline-journey/private-suite.json",
+      "--source",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/source.json",
+      "--runtime",
+      "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/offline-journey/private-output",
+      "--image",
+      "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "--docker",
+      "/usr/local/bin/docker",
+      "--socket",
+      "/Users/edwintse/.docker/run/docker.sock"
+    ],
+    "returncode": 0,
+    "log": "privacy-plan.json"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "integrations/toolkit/evaluate.py",
+      "run",
+      "--candidate",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/format-json",
+      "--suite",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/offline-journey/private-suite.json",
+      "--source",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/examples/toolkit_offline/source.json",
+      "--runtime",
+      "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/offline-journey/private-output",
+      "--image",
+      "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "--docker",
+      "/usr/local/bin/docker",
+      "--socket",
+      "/Users/edwintse/.docker/run/docker.sock",
+      "--reviewed-digest",
+      "5a6e2f27ea6b03b19d17e79b203a703e235ea7e0a6094920d8edf0bd353bcf52"
+    ],
+    "returncode": 0,
+    "log": "privacy-run.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "integrations/toolkit/evaluate.py",
+      "report",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/offline-journey/private-output"
+    ],
+    "returncode": 0,
+    "log": "privacy-verification.json"
+  }
+]

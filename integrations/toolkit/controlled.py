@@ -14,8 +14,18 @@ from datetime import timedelta
 from pathlib import Path
 
 import controlled_report
+from definition import Inputs, digest
 from receipts import FixtureRecord
-from stack import BASE, collect, fixture_payload, manifest, probe, sandbox, verify_runtime
+from stack import (
+    BASE,
+    collect,
+    fixture_payload,
+    manifest,
+    probe,
+    require_host,
+    sandbox,
+    verify_runtime,
+)
 
 from aeep.assessment.containment import ContainerExecutor
 from aeep.assessment.models import (
@@ -45,7 +55,7 @@ SOURCE_NAMES = ('agent_skill_eval/__init__.py', 'agent_skill_eval/models.py',
 
 
 class TrialBridge:
-    def __init__(self, repository, request, environment, spec, cases, skill):
+    def __init__(self, repository, request, environment, spec, cases, skill, check_current=lambda: None):
         self.repository = repository
         self.request = request
         self.environment = environment
@@ -53,8 +63,14 @@ class TrialBridge:
         self.cases = cases
         self.skill = skill
         self.results = []
+        self.check_current = check_current
+
+    def authorize(self):
+        self.check_current()
+        self.repository.authorize(self.request)
 
     async def dispatch(self, message):
+        self.check_current()
         if (set(message) != {'kind', 'prompt', 'treatment'} or message['kind'] != 'trial'
                 or type(message['treatment']) is not bool or message['prompt'] not in self.cases):
             raise ValueError('unreviewed trial request')
@@ -84,14 +100,17 @@ class TrialBridge:
         executor = ContainerExecutor(self.environment)
         context = ExecutionContext(request=action, spec=self.spec, estimate=self.spec.estimate, attempt=1,
                                    attempt_id=operation, approved_side_effect=SideEffect.WRITE,
-                                   invocation_check=lambda: self.repository.authorize(self.request) and None)
+                                   invocation_check=self.authorize)
         with persist_execution_events(lambda journal, event: self.repository.put('execution_event', f'{journal}:{event.sequence}', event)):
             raw = await (await executor.start(context)).task
         observation = raw.output if isinstance(raw.output, dict) else {}
-        valid = (set(observation) == {'output', 'candidate_exposed', 'uid', 'python_available', 'shell_available'}
+        valid = (set(observation) in ({'output', 'candidate_exposed', 'uid', 'python_available', 'shell_available'},
+                                      {'output', 'candidate_exposed', 'payload_sha256', 'uid', 'python_available', 'shell_available'})
                  and isinstance(observation.get('output'), str) and len(observation['output']) <= 32768
                  and observation.get('candidate_exposed') is message['treatment'] and observation.get('uid') == 65534
                  and observation.get('python_available') is True and observation.get('shell_available') is True)
+        if isinstance(self.skill,dict):
+            valid = valid and 'payload_sha256' in observation and observation['payload_sha256'] == (self.skill['sha256'] if message['treatment'] else None)
         if raw.status == ExecutionStatus.SUCCESS and not valid:
             raw.status, raw.error_type = ExecutionStatus.FAILED, 'FIXTURE_PROTOCOL_ERROR'
         receipt = ExecutionReceipt(decision_id=decision.decision_id, action_id=action.action_id, capability=self.spec.capability,
@@ -106,6 +125,7 @@ class TrialBridge:
         facts = {'case': case, 'arm': arm, 'operation_id': operation, 'receipt_id': receipt.receipt_id,
                  'receipt_ref': receipt_ref, 'execution_success': receipt.execution_success,
                  'worker_name': raw.metadata.get('container_name'), 'candidate_exposed': observation.get('candidate_exposed'),
+                 'payload_sha256': observation.get('payload_sha256'),
                  'output_sha256': hashlib.sha256(observation.get('output', '').encode()).hexdigest() if valid else None}
         self.repository.put('toolkit_controlled_result', operation, FixtureRecord(facts=facts))
         self.repository.finish_operation(operation, elapsed_seconds=time.monotonic()-clock,
@@ -116,10 +136,47 @@ class TrialBridge:
         return {'output': observation['output']}
 
 
-async def execute(runtime: Path, output: Path, environment: AssessmentEnvironment):
+def preview(runtime: Path, output: Path, environment: AssessmentEnvironment, inputs: Inputs):
+    from aeep_toolkit.install_runtime import canonical
+    inputs.verify()
+    canonical(str(output))
+    if output.resolve() != output or output.exists() or not output.parent.is_dir():
+        raise ValueError('evaluation output must be a new canonical directory with an existing parent')
+    files = [BASE/name for name in ('controlled.py','controlled_engine.py','controlled_fixture_worker.py',
+                                    'controlled_report.py','stack.py','definition.py','synthetic_edit.py')]
+    files.extend(BASE.parents[1]/'src/aeep_toolkit'/name for name in ('candidate.py','__init__.py'))
+    return {'schema':'aeep.toolkit.synthetic-evaluation-plan.v1','inputs':inputs.binding(),
+            'runtime':str(runtime),'runtime_inventory':verify_runtime(runtime,manifest()),
+            'output':str(output),'environment':environment.model_dump(mode='json'),
+            'source_hashes':{p.name:hashlib.sha256(read_bytes(p)).hexdigest() for p in files},
+            'effects':'Run only scripted trials in separate offline containers; no model, credential or billing calls.'}
+
+
+async def execute(runtime: Path, output: Path, environment: AssessmentEnvironment,
+                  inputs: Inputs | None = None, reviewed_digest: str | None = None):
     stack = manifest()
     facts = verify_runtime(runtime, stack)
-    payload = fixture_payload(stack)
+    review = preview(runtime,output,environment,inputs) if inputs is not None else None
+    if review is not None and reviewed_digest != digest(review):
+        raise ValueError('exact synthetic evaluation review required before effects')
+    if inputs is None:
+        payload = fixture_payload(stack)
+        skill_name = 'format-json'
+    else:
+        skill_name = inputs.suite.skill_name
+        payload = {Path('fixtures')/skill_name/name:raw for name,raw in inputs.candidate.files.items()}
+        payload[Path('fixtures')/skill_name/'evals/evals.json'] = json.dumps(inputs.suite.upstream()).encode()
+        stack = stack | {'fixture_source':inputs.source.model_dump(mode='json')}
+    fixture = Path('fixtures')/skill_name
+    suite = json.loads(payload[fixture/'evals/evals.json'])
+    trial_count = 2*len(suite['evals'])
+    def source_bytes(path):
+        raw = read_bytes(path)
+        if review is not None and hashlib.sha256(raw).hexdigest() != review['source_hashes'][path.name]:
+            raise ValueError('reviewed adapter source changed before staging')
+        return raw
+
+    require_host()
     if environment.network or environment.read_only_roots:
         raise ValueError('fixed fixture requires network disabled and no operator mounts')
     if await asyncio.to_thread(output.exists):
@@ -134,7 +191,7 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(raw)
         coordinator = root/'controlled_engine.py'
-        coordinator.write_bytes(read_bytes(BASE/'controlled_engine.py'))
+        coordinator.write_bytes(source_bytes(BASE/'controlled_engine.py'))
         worker_source = await asyncio.to_thread(Path(worker_temp).resolve)
         for name in SOURCE_NAMES:
             raw = read_bytes(runtime/'lib/python3.13/site-packages'/name)
@@ -143,8 +200,14 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
             target = worker_source/name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(raw)
+        core_source = BASE.parents[1]/'src/aeep_toolkit'
+        for name in ('__init__.py','candidate.py'):
+            target = worker_source/'aeep_toolkit'/name
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(source_bytes(core_source/name))
+        (worker_source/'synthetic_edit.py').write_bytes(source_bytes(BASE/'synthetic_edit.py'))
         worker = worker_source/'controlled_fixture_worker.py'
-        worker.write_bytes(read_bytes(BASE/'controlled_fixture_worker.py'))
+        worker.write_bytes(source_bytes(BASE/'controlled_fixture_worker.py'))
         # Read-only mount only the adapter and three pinned upstream modules, never suite/grader/receipt files.
         environment = environment.model_copy(update={'read_only_roots': [str(worker_source)]})
         spec = ExecutorSpec(id='toolkit.fixture.worker', capability='toolkit.fixture.trial', kind='command',
@@ -157,15 +220,17 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
             repository = AssessmentRepository(store)
             definition = FixtureRecord(facts={'stack': stack, 'runtime_inventory': facts, 'spec': spec.model_dump(mode='json'),
                                               'source_hashes': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                                                                for p in (BASE/'controlled.py', coordinator, worker)},
-                                              'limits': {'trials': 4, 'model_turns': 0, 'cash': 0},
+                                                                for p in (BASE/'controlled.py', BASE/'stack.py', coordinator, worker,
+                                                                          worker_source/'synthetic_edit.py',worker_source/'aeep_toolkit/candidate.py',worker_source/'aeep_toolkit/__init__.py')},
+                                              'limits': {'trials': trial_count, 'model_turns': 0, 'cash': 0},
+                                              'review':review, 'review_sha256':digest(review) if review else None,
                                               'scope': 'synthetic harness dispatch; not real-agent conformance'})
             definition_ref = repository.put('toolkit_controlled_definition', 'fixture', definition)
             environment_ref = repository.put('environment', 'fixture', environment)
             # This is an explicit zero-turn engineering fixture, never a replacement for a live assessment grant.
             grant = AssessmentAuthorization(subject_digests=[definition_ref], recipe_digests=[definition_ref],
                                              environment_digests=[environment_ref],
-                                             limits=AssessmentLimits(max_operations=4, max_model_turns=0, max_elapsed_seconds=260),
+                                             limits=AssessmentLimits(max_operations=trial_count, max_model_turns=0, max_elapsed_seconds=65*trial_count),
                                              expires_at=utc_now()+timedelta(hours=1))
             repository.grant(grant)
             repository.review(definition_ref)
@@ -174,17 +239,17 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
                                                  mapping_digest=definition_ref, environment_digest=environment_ref,
                                                  authorization_id=grant.authorization_id, definition_digests=[definition_ref], planner=spec)
             repository.put('toolkit_controlled_request', request.plan_id, request)
-            suite = json.loads(payload[Path('fixtures/format-json/evals/evals.json')])
             analysis_plan, recipe = controlled_report.freeze(repository, request, suite, spec)
             bridge = TrialBridge(repository, request, environment, spec,
                                  {case['prompt']: case['id'] for case in suite['evals']},
-                                 payload[Path('fixtures/format-json/SKILL.md')].decode())
+                                 inputs.worker_payload() if inputs is not None else payload[fixture/'SKILL.md'].decode(),
+                                 check_current=inputs.verify if inputs is not None else lambda: None)
             with (root/'coordinator.stderr').open('wb') as errors:
-                process = await asyncio.create_subprocess_exec(*prefix, str(coordinator), str(root/'fixtures/format-json'),
+                process = await asyncio.create_subprocess_exec(*prefix, str(coordinator), str(root/fixture),
                             str(root/'runs'), env=env, cwd=root, stdin=asyncio.subprocess.PIPE,
                             stdout=asyncio.subprocess.PIPE, stderr=errors, limit=65536, start_new_session=True)
                 try:
-                    for _ in range(5):
+                    for _ in range(trial_count+1):
                         line = await asyncio.wait_for(process.stdout.readline(), timeout=90)
                         message = json.loads(line)
                         if message == {'kind': 'done'}:
@@ -201,16 +266,26 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
                         os.killpg(process.pid, signal.SIGKILL)
                         await process.wait()
                     errors.flush()
-                    shutil.copyfile(root/'coordinator.stderr', output/'coordinator.stderr')
-            iteration = root/'runs/format-json-workspace/iteration-1'
-            rows = collect(iteration)
-            if len(bridge.results) != 4 or len({r['worker_name'] for r in bridge.results}) != 4:
+                    diagnostic = read_bytes(root/'coordinator.stderr')
+                    (output/'coordinator-diagnostic.json').write_text(json.dumps({
+                        'returncode':process.returncode,'bytes':len(diagnostic),
+                        'sha256':hashlib.sha256(diagnostic).hexdigest(),
+                        'contents_retained':False})+'\n')
+            iteration = root/'runs'/f'{skill_name}-workspace'/'iteration-1'
+            rows = collect(iteration,suite,inputs.candidate.files if inputs is not None else None)
+            if len(bridge.results) != trial_count or len({r['worker_name'] for r in bridge.results}) != trial_count:
                 raise ValueError('missing or shared controlled workers')
-            shutil.copytree(iteration, output/'upstream')
-            controlled_report.create(output, repository, analysis_plan, recipe, definition, environment, bridge.results, rows)
+            # General task prompts and upstream transcripts remain transient.
+            retained = inputs is None or inputs.suite.retain_outputs
+            for row in rows if retained else []:
+                relative = Path(row['artifact'])/'outputs/output.txt'
+                destination = output/'upstream'/relative
+                destination.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(iteration/relative,destination)
+            controlled_report.create(output, repository, analysis_plan, recipe, definition, environment, bridge.results, rows, artifact_root=iteration)
             ledger = repository.operation_ledger(request.plan_id)
             result = {'schema': 'aeep.toolkit.controlled-fixture.v1', 'evidence_kind': 'synthetic',
-                      'definition_ref': definition_ref, 'environment': environment.model_dump(mode='json'),
+                      'definition_ref': definition_ref, 'outputs_retained':retained, 'environment': environment.model_dump(mode='json'),
                       'trials': bridge.results, 'verified_upstream_rows': rows, 'ledger': ledger.model_dump(mode='json'),
                       'limitations': ['Real agent/credential conformance is not established.',
                                       'Upstream fake token/time constants are excluded from model observations.',

@@ -116,6 +116,25 @@ class ControlledTests(unittest.TestCase):
             self.dispatch(self.message(True))
         self.assertEqual(self.calls, [])
 
+    def test_missing_or_wrong_payload_identity_is_charged_and_rejected(self):
+        self.bridge.skill = {'name':'fixture','sha256':'a'*64,'files':{}}
+        with self.assertRaises(ValueError):
+            self.dispatch(self.message(True))
+        operation = self.repo.operation_ledger(self.request.plan_id).operations[0]
+        self.assertIsNotNone(operation.elapsed_seconds)
+        self.assertFalse(self.repo.get('toolkit_controlled_result', operation.operation_id)['facts']['execution_success'])
+
+    def test_timeout_receipt_remains_and_prevents_next_worker(self):
+        async def timed_out(_executor, context):
+            return RawExecution(status=ExecutionStatus.TIMEOUT, error_type='TIMEOUT')
+        with patch.object(controlled.ContainerExecutor, 'execute', timed_out), self.assertRaises(ValueError):
+            asyncio.run(self.bridge.dispatch(self.message()))
+        operation = self.repo.operation_ledger(self.request.plan_id).operations[0]
+        self.assertIsNotNone(operation.elapsed_seconds)
+        with self.assertRaises(ValueError):
+            self.dispatch(self.message(True))
+        self.assertEqual(self.calls, [])
+
     def test_existing_analysis_binds_complete_positions_and_receipts(self):
         suite = {'evals':[{'id':'case','prompt':'current prompt'}]}
         plan, recipe = controlled_report.freeze(self.repo, self.request, suite, self.spec)

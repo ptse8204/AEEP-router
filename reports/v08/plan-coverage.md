@@ -4042,3 +4042,15 @@ The C03 audit then found the platform/dependency gaps recorded as D34. Current
 changes correct those checks using existing packaging 24.2, prohibit pip dependency
 discovery, and add descriptive receipt-backed cost/fee scenarios. Their full
 verification is pending; no old evidence or live threshold was changed.
+
+### Toolkit general offline adapter increment
+
+The D34 installer and D33 receipt-cost code at `29dff45` passed both complete
+suites (1,444 passed, 21 skipped), both branch gates, documentation checks and
+builds. C03 passes OFFLINE acceptance only. D35 then completed two synthetic
+three-case journeys through the pinned upstream scheduler/grader and 12 separate
+AEEP container workers. All workers were removed; default content retention and
+six evidence-tampering checks passed. Exact evidence is in
+`../toolkit-v2/c06/offline-journey`. Full checks for that adapter increment remain
+pending. C04-C06, real-host value, human comprehension and release remain open.
+No architecture or permission blocker caused the earlier implementation stop.
