@@ -1,0 +1,30 @@
+{
+  "skill_name": "format-json",
+  "retain_outputs": true,
+  "evals": [
+    {
+      "id": "trivial-edit",
+      "prompt": "AEEP_SYNTHETIC_EDIT_V1\n{\"files\": {\"hello.txt\": \"helo\\n\"}, \"replacements\": [{\"file\": \"hello.txt\", \"new\": \"hello\", \"old\": \"helo\"}]}",
+      "expected_output": "Verified scripted file edits; no model efficacy evidence.",
+      "assertions": [
+        "The output contains `0f01c53f7423c6a0a56dd1fa338869bb8df6e837bfe4c0b802144e4077bd1fc6`"
+      ]
+    },
+    {
+      "id": "complex-edit",
+      "prompt": "AEEP_SYNTHETIC_EDIT_V1\n{\"files\": {\"NOTES.txt\": \"Do not change this.\\n\", \"client.py\": \"from service import price\\nresult = price(3)\\n\", \"service.py\": \"# preserve\\ndef price(x):\\n    return x * 2\\n\"}, \"replacements\": [{\"file\": \"service.py\", \"new\": \"def total_price(x):\", \"old\": \"def price(x):\"}, {\"file\": \"client.py\", \"new\": \"import total_price\", \"old\": \"import price\"}, {\"file\": \"client.py\", \"new\": \"total_price(3)\", \"old\": \"price(3)\"}]}",
+      "expected_output": "Verified scripted file edits; no model efficacy evidence.",
+      "assertions": [
+        "The output contains `ad195fa8052e7e3516c9a710ebdeb3aad70bfe892a6ebfb026f602b265997ea6`"
+      ]
+    },
+    {
+      "id": "adjacent",
+      "prompt": "AEEP_SYNTHETIC_EDIT_V1\n{\"files\": {\"notes.txt\": \"ordinary baseline task\\n\"}, \"replacements\": []}",
+      "expected_output": "Verified scripted file edits; no model efficacy evidence.",
+      "assertions": [
+        "The output contains `2ed37f418a5f6a39e22ef15b53e3a58448374c1911c7e138f95561bc74defcc0`"
+      ]
+    }
+  ]
+}

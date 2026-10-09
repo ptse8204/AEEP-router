@@ -1,0 +1,86 @@
+[
+  {
+    "argv": [
+      "python3",
+      "examples/economic_evidence/campaign.py",
+      "--repetitions",
+      "30",
+      "--check",
+      "--require-gates"
+    ],
+    "returncode": 0,
+    "seconds": 0.431
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/campaign.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.403
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-report",
+      "reports/v05/dsh/live-safety.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.413
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-comparison",
+      "reports/v05/dsh/live-comparison.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.404
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/dsh_campaign/live_campaign.py",
+      "--check-native-plan"
+    ],
+    "returncode": 0,
+    "seconds": 0.411
+  },
+  {
+    "argv": [
+      "python3",
+      "examples/job_application/campaign.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.411
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "aeep",
+      "provider",
+      "verify",
+      "examples/provider_package/aeep-provider.yaml",
+      "-m",
+      "examples/provider_package/aeep.yaml",
+      "--compact"
+    ],
+    "returncode": 0,
+    "seconds": 0.512
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "build",
+      "--no-isolation"
+    ],
+    "returncode": 0,
+    "seconds": 2.035
+  }
+]

@@ -95,7 +95,7 @@ async def probe(path: Path) -> dict[str, Any]:
             for index, (_worker, adapter) in enumerate(active):
                 paths = {'own_workspace':'/workspace/'+names[index], 'other_workspace':'/workspace/'+names[1-index],
                          'credential_canary':'/worker/auth/'+canary, 'external_answer':str(answer)}
-                observed = await command(adapter, CHECK.replace('PATHS', repr(paths)))
+                observed = await command(adapter, CHECK.replace('PATHS', repr(paths)).replace('DOCX_PROBE', 'False'))
                 role = names[index].split('-')[0]
                 result['workers'][role]['observed'] = observed
                 tree = await command(adapter, "import pathlib,json;print(json.dumps({'text':pathlib.Path('/workspace/case-tree/nested/λ.txt').read_text()}))")

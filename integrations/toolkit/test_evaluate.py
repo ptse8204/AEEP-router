@@ -40,3 +40,12 @@ def test_changed_candidate_cannot_dispatch_under_prior_review(tmp_path,monkeypat
     with pytest.raises(ValueError,match='changed'):
         asyncio.run(selected.evaluate(selected.capabilities.implementation_sha256))
     assert not selected.output.exists()
+
+
+def test_changed_aeep_source_requires_a_new_review_before_any_effect(tmp_path,monkeypatch):
+    selected=adapter(tmp_path,monkeypatch)
+    assert len(selected.plan['aeep_source_sha256'])==64
+    monkeypatch.setattr(controlled.assessment_verification,'verification_source_digest',lambda root:'b'*64)
+    with pytest.raises(ValueError,match='exact synthetic evaluation review'):
+        asyncio.run(selected.evaluate(selected.capabilities.implementation_sha256))
+    assert not selected.output.exists()

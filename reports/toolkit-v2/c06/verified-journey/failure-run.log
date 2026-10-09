@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/evaluate.py", line 64, in <module>
+    main()
+    ~~~~^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/evaluate.py", line 59, in main
+    bundle=asyncio.run(adapter.evaluate(args.reviewed_digest))
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/evaluate.py", line 27, in evaluate
+    await controlled.execute(self.runtime,self.output,self.environment,self.inputs,reviewed_plan_id)
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/controlled.py", line 258, in execute
+    response = await bridge.dispatch(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/integrations/toolkit/controlled.py", line 135, in dispatch
+    raise ValueError('controlled worker failed; receipt and charge retained')
+ValueError: controlled worker failed; receipt and charge retained

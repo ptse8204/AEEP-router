@@ -443,3 +443,47 @@ This is a finite zero-turn engineering amendment under the standing testing
 assignment. It does not add model calls, install packages, change thresholds or
 create an authorization blocker. The current draft remains outside the checkout
 while the prior source revision finishes its full checks.
+
+## D37 — Complete descriptive means and bind the reused implementation
+
+The reporting contract requires mean differences as well as medians. Add matched
+control/treatment means, their mean difference and a relative fraction only when
+the measured control mean is positive. Use the same measured pairs in both arms;
+missing observations and a zero denominator cannot become zero savings. Preserve
+unknown confidence intervals until a reviewed analysis supplies them. Show the
+source/version, verified-success delta and invocation counts in readable reports
+as well as JSON. Render very large percentages without overflowing finite values.
+
+Reuse `verification_source_digest` to bind the AEEP implementation used by the
+controlled adapter, alongside its existing worker/engine source hashes. Also
+bind the operator entry point and verifier. A changed implementation must require
+a new preview review before any evaluation effect. These additions require no
+new statistical framework, package or external service. Draft tests pass outside
+the checkout while the preceding source revision finishes verification.
+
+## D38 — Repair the existing offline native probe's template selection
+
+The actual credential-free pair launched both pinned Codex workers but failed
+in paired observations. `CHECK` now contains a `DOCX_PROBE` placeholder; the
+standalone offline workbook probe omitted its substitution. The main managed
+inspection path already substitutes it. A corrected copy sets it to `False`,
+leaving worker policy and the workbook-only fixture unchanged.
+
+That corrected copy passed the full existing probe: private input trees, canary
+and external-answer exclusion, shared library versions, treatment-only candidate
+presence, dependency execution, interruption and cleanup. Exact original failure,
+corrected source, image/binary/configuration pins and results are under
+`reports/toolkit-v2/c04/native-offline-recheck`. Four temporary workers across the
+two attempts were removed. No model turn, sign-in, credential volume, network,
+image pull or build was used. Integrate the one-line correction and retain both
+results. This is partial unauthenticated command evidence, not full conformance.
+
+## D39 — Emit the existing comparison contract from controlled reports
+
+The controlled path already recomputes AEEP analysis and retains its canonical
+inputs. Export the C02 `ComparisonReport` alongside that analysis, binding the
+bundle, frozen plan and analysis references. Reuse those contracts and the
+existing verifier; no new inference engine is needed. Synthetic runs remain
+inconclusive about real value, and a run with no observed trial is not assessed.
+The readable report must show this scope explicitly. Keep prior artifacts valid;
+new exports require the additional canonical comparison record and digest check.

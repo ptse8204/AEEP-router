@@ -27,6 +27,7 @@ from stack import (
     verify_runtime,
 )
 
+from aeep.assessment import verification as assessment_verification
 from aeep.assessment.containment import ContainerExecutor
 from aeep.assessment.models import (
     AssessmentAuthorization,
@@ -143,10 +144,11 @@ def preview(runtime: Path, output: Path, environment: AssessmentEnvironment, inp
     if output.resolve() != output or output.exists() or not output.parent.is_dir():
         raise ValueError('evaluation output must be a new canonical directory with an existing parent')
     files = [BASE/name for name in ('controlled.py','controlled_engine.py','controlled_fixture_worker.py',
-                                    'controlled_report.py','stack.py','definition.py','synthetic_edit.py')]
+                                    'controlled_report.py','stack.py','definition.py','synthetic_edit.py','evaluate.py','verify_controlled.py')]
     files.extend(BASE.parents[1]/'src/aeep_toolkit'/name for name in ('candidate.py','__init__.py'))
     return {'schema':'aeep.toolkit.synthetic-evaluation-plan.v1','inputs':inputs.binding(),
             'runtime':str(runtime),'runtime_inventory':verify_runtime(runtime,manifest()),
+            'aeep_source_sha256':assessment_verification.verification_source_digest(Path(assessment_verification.__file__).parents[3]),
             'output':str(output),'environment':environment.model_dump(mode='json'),
             'source_hashes':{p.name:hashlib.sha256(read_bytes(p)).hexdigest() for p in files},
             'effects':'Run only scripted trials in separate offline containers; no model, credential or billing calls.'}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "aeep.toolkit.evidence.v1",
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "aed44be8219243c854401dd38de0953a279743d0",
+    "artifact_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored synthetic fixture; local commit, not a published dataset."
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "agent-skill-eval.controlled-fixture",
+    "implementation_sha256": "492c76e86a541dee4c44a1c05dbdc4e792bbae35c4bf685a2b2971c0ebf6a742",
+    "hosts": [
+      "fake"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": true,
+    "telemetry": [],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "runs": [
+    {
+      "schema_version": "aeep.toolkit.run.v1",
+      "run_id": "rcpt_be6c7baeea1048458d247c18283b4b0c",
+      "plan_ref": "9986dcfdefb649aba95c1e9a1eaa3e2f1909220a387a105b7efb31725c6d3139",
+      "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "adapter_sha256": "492c76e86a541dee4c44a1c05dbdc4e792bbae35c4bf685a2b2971c0ebf6a742",
+      "host": "fake",
+      "host_version": "agent-skill-eval-0.7.0",
+      "model": "synthetic-no-model",
+      "effort": "none",
+      "shared_environment_sha256": "d34f4f5b79a6fa13d8de87f56f508deb94b41121d271772684cbd21129a26817",
+      "worker_sha256": "9fcc50fcd7f0bf62098436c42d5a08b6c8cf01764cb6c73b1818ecb84ff84b56",
+      "task_sha256": "7439cc97e4f30358340aec025edbb09bcbd484264f77af517bf31bedd7a6856d",
+      "task_family": "trivial-edit",
+      "verifier_sha256": "71cf0bc61703a72e0cc43a227a85e42aefed3abd06f8f5879d4b67a2ca65e56c",
+      "prompt_sha256": "5977e4f0e757534d6877508a04de9bc8e428804a8fede8ebe6f0392c37998c60",
+      "arm": "treatment",
+      "mode": "optional",
+      "candidate_exposed": null,
+      "candidate_invoked": null,
+      "verification": "unknown",
+      "verification_ref": "6906e191f1eb2bfa799e02d8b992dfb1cac0c80f34cf1e331b3efcb6898078cc",
+      "status": "failed",
+      "retries": 0,
+      "evidence_kind": "synthetic",
+      "receipt_refs": [
+        "0935c054b85b93070075edb5829c19c8d6912924ce3f7a2fe12a020d4678d16e"
+      ],
+      "tokens": null,
+      "agent_wall_seconds": null,
+      "verification_wall_seconds": null,
+      "setup_wall_seconds": null,
+      "timing_source_ref": null,
+      "cash_accounting_ref": null
+    }
+  ]
+}

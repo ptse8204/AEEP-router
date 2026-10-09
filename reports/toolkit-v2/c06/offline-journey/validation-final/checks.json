@@ -1,0 +1,139 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 1.72,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.06,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.85,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 591.67,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 880.46,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.3,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/tmp/aeep-toolkit-c06-final-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 1.75,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/tmp/aeep-toolkit-c06-final-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/tmp/aeep-toolkit-c06-final-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "returncode": 0,
+    "seconds": 0.06,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.17,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "returncode": 0,
+    "seconds": 0.28,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation-final/11.log"
+  }
+]

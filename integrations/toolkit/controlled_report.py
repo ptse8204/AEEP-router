@@ -15,7 +15,13 @@ from aeep.assessment.reporting import fit_report
 from aeep.benchmarking import BenchmarkCampaignReport, BenchmarkCase, BenchmarkSuite, BenchmarkTrial
 from aeep.models import ActionRequest
 from aeep_toolkit.cli import read_bytes
-from aeep_toolkit.models import AdapterCapabilities, EvaluationRun, EvidenceBundle, SourcePin
+from aeep_toolkit.models import (
+    AdapterCapabilities,
+    ComparisonReport,
+    EvaluationRun,
+    EvidenceBundle,
+    SourcePin,
+)
 from aeep_toolkit.reporting import render, summarize
 
 
@@ -106,7 +112,14 @@ def create(output, repository, plan, recipe, definition, environment, results, r
     analysis_ref = repository.put('toolkit_controlled_analysis',plan.plan_id,analysis)
     bundle = EvidenceBundle(candidate=source,adapter=adapter,runs=tuple(runs))
     bundle_ref = repository.put('toolkit_controlled_bundle',plan.plan_id,FixtureRecord(facts=bundle.model_dump(mode='json')))
+    comparison = ComparisonReport(evidence_bundle_ref=bundle_ref, plan_ref=content_digest(plan),
+        outcome='INCONCLUSIVE' if results else 'NOT_ASSESSED', evidence_kind='synthetic', analysis_ref=analysis_ref,
+        limitations=('Scripted engineering trials cannot establish real candidate value.',
+                     'Existing qualification and paired-case thresholds remain unchanged.'))
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, FixtureRecord(facts=comparison.model_dump(mode='json')))
     summary = summarize(bundle)
+    summary['comparison'] = comparison.model_dump(mode='json')
+    summary['comparison_ref'] = comparison_ref
     summary['reviewed_analysis'] = {'plan_ref':content_digest(plan),'analysis_ref':analysis_ref,'campaign_ref':campaign_ref,'bundle_ref':bundle_ref,
         'outcome':analysis.outcome,'qualification_passed':False,'minimum_holdout_cases':recipe.minimum_holdout_cases,
         'minimum_paired_cases':recipe.minimum_paired_cases,'expected_trial_positions':len(expected),
@@ -121,7 +134,7 @@ def create(output, repository, plan, recipe, definition, environment, results, r
         summary['limitations'].insert(0,'Execution stopped. Missing results and unknown grades are not successes; incurred and unresolved operations remain in the ledger. No retry was performed.')
     summary['limitations'].insert(0,'Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned '+analysis.outcome+'. No model measurements are supplied.')
     repository.put('toolkit_controlled_summary',plan.plan_id,FixtureRecord(facts=summary))
-    for name,value in [('toolkit-evidence',bundle.model_dump(mode='json')),('assessment-analysis',analysis.model_dump(mode='json')),('summary',summary)]:
+    for name,value in [('toolkit-evidence',bundle.model_dump(mode='json')),('assessment-analysis',analysis.model_dump(mode='json')),('comparison',comparison.model_dump(mode='json')),('summary',summary)]:
         (output/(name+'.json')).write_text(json.dumps(value,indent=2)+'\n')
     for fmt,suffix in [('html','html'),('markdown','md')]:
         (output/('report.'+suffix)).write_text(render(summary,fmt))

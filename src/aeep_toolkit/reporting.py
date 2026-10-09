@@ -7,7 +7,8 @@ import html
 import json
 import re
 from collections import Counter, defaultdict
-from statistics import median
+from decimal import Decimal
+from statistics import mean, median
 from typing import Any
 
 from .models import EvaluationRun, EvidenceBundle, TokenObservation
@@ -97,14 +98,22 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
                     pairs.append({run.arm: run for run in trials})
             differences = {}
             for metric in METRICS:
-                values = []
+                values, controls, treatments = [], [], []
                 for pair in pairs:
                     control = measurement(pair["control"], metric)
                     treatment = measurement(pair["treatment"], metric)
                     if control is not None and treatment is not None:
                         values.append(control - treatment)
+                        controls.append(control)
+                        treatments.append(treatment)
+                control_mean = mean(controls) if controls else None
+                treatment_mean = mean(treatments) if treatments else None
+                difference_mean = mean(values) if values else None
                 differences[metric] = {
                     "measured_pairs": len(values), "observed_pairs": len(pairs),
+                    "mean_observed_control": control_mean, "mean_observed_treatment": treatment_mean,
+                    "mean_control_minus_treatment": difference_mean,
+                    "relative_mean_control_minus_treatment": difference_mean / control_mean if difference_mean is not None and control_mean else None,
                     "median_control_minus_treatment": median(values) if values else None,
                     "confidence_interval": None,
                 }
@@ -131,6 +140,8 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
         "schema": "aeep.toolkit.descriptive-summary.v1",
         "evidence_sha256": hashlib.sha256(raw.encode()).hexdigest(),
         "outcome": "NOT_ASSESSED", "cohorts": cohorts,
+        "candidate": bundle.candidate.model_dump(mode="json"),
+        "adapter": bundle.adapter.model_dump(mode="json"),
         "limitations": [
             "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
             "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
@@ -150,6 +161,15 @@ def render(summary: dict[str, Any], format: str) -> str:
         return json.dumps(summary, indent=2, allow_nan=False) + "\n"
     lines = ["AEEP evidence summary", "", "Value verdict: NOT_ASSESSED", "",
              "Descriptive records only. Unknown is not zero; fewer resources do not establish benefit.", ""]
+    if 'candidate' in summary:
+        source = summary['candidate']
+        lines += [f"Candidate source: {json.dumps(source['repository'])}",
+                  f"Revision: {source['revision']}; payload SHA-256: {source['artifact_sha256']}",
+                  "Source metadata is supplied provenance, not verified developer ownership.", ""]
+    if 'comparison' in summary:
+        comparison = summary['comparison']
+        lines += [f"Engineering comparison status: {comparison['outcome']}; evidence: {comparison['evidence_kind']}.",
+                  *comparison['limitations'], ""]
     analysis = summary.get('reviewed_analysis')
     if analysis is not None:
         lines += [f"Existing AEEP analysis: {analysis['outcome']}; source: {analysis['analysis_ref']}",
@@ -166,13 +186,24 @@ def render(summary: dict[str, Any], format: str) -> str:
         for family in cohort["families"]:
             lines += [f"Task family: {family['task_family']}",
                       f"Observed pairs: {family['observed_pairs']}; rejected tasks: {len(family['rejected_tasks'])}"]
+            delta = family['success_rate_treatment_minus_control']
+            shown_delta = f'{delta * 100:+.4g} percentage points' if delta is not None else 'unknown'
+            lines += [f"Verified-success difference, treatment minus control: {shown_delta}; graded pairs: {family['graded_pairs']}/{family['observed_pairs']}.",
+                      "Observed differences are descriptive; no confidence-supported conclusion follows from them."]
             for arm, facts in family["arms"].items():
                 counts = facts["verification"]
                 lines.append(f"{arm.title()}: {counts['pass']} passed, {counts['fail']} failed, {counts['skipped']} skipped, {counts['unknown']} unknown.")
+                invoked = facts['candidate_invoked']
+                lines.append(f"  Candidate use: {invoked['yes']} observed, {invoked['no']} observed absent, {invoked['unknown']} unknown.")
                 for metric, values in facts["metrics"].items():
                     total = values['complete_total'] if values['complete_total'] is not None else 'unknown'
                     observed = values['median_observed'] if values['median_observed'] is not None else 'unknown'
                     lines.append(f"  {metric}: {values['known_runs']}/{values['total_runs']} measured; total {total}; observed median {observed}.")
+            for metric, difference in family['metric_differences'].items():
+                if difference['measured_pairs']:
+                    relative = difference.get('relative_mean_control_minus_treatment')
+                    percent = f'{Decimal(str(relative)) * 100:.4g}%' if relative is not None else 'unknown'
+                    lines.append(f"  Paired {metric}: mean control minus treatment {difference.get('mean_control_minus_treatment', 'unknown')}; relative mean difference {percent}; median difference {difference['median_control_minus_treatment']}; measured pairs {difference['measured_pairs']}/{difference['observed_pairs']}.")
             for rejected in family["rejected_tasks"]:
                 lines.append(f"Unpaired task {rejected['task_sha256']}: {' '.join(rejected['reasons'])}")
             if 'cash' in family:

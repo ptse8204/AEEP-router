@@ -16,7 +16,7 @@ from aeep.assessment.reporting import fit_report
 from aeep.benchmarking import BenchmarkCampaignReport
 from aeep.models import ExecutionReceipt, RouteDecision
 from aeep_toolkit.cli import read_bytes, read_json
-from aeep_toolkit.models import EvidenceBundle
+from aeep_toolkit.models import ComparisonReport, EvidenceBundle
 
 
 def verify(output):
@@ -64,6 +64,16 @@ def verify(output):
             raise ValueError('incomplete result differs from canonical completion record')
         if record('toolkit_controlled_summary',plan.plan_id) != {'facts':summary}:
             raise ValueError('summary changed')
+        if 'comparison' in summary or 'comparison_ref' in summary:
+            comparison = ComparisonReport.model_validate(summary['comparison'])
+            if (record('toolkit_controlled_comparison', summary['comparison_ref']) != {'facts':comparison.model_dump(mode='json')}
+                    or read_json(output/'comparison.json') != comparison.model_dump(mode='json')
+                    or comparison.evidence_bundle_ref != analysis_facts['bundle_ref']
+                    or comparison.plan_ref != content_digest(plan)
+                    or comparison.analysis_ref != analysis_facts['analysis_ref']
+                    or comparison.evidence_kind != 'synthetic'
+                    or comparison.outcome != ('INCONCLUSIVE' if bundle.runs else 'NOT_ASSESSED')):
+                raise ValueError('comparison differs from canonical evidence or synthetic scope')
         recipe = RecipeDefinition.model_validate(record('recipe',plan.recipe_digest))
         environment = record('environment',plan.environment_digest)
         if result['environment'] != environment:

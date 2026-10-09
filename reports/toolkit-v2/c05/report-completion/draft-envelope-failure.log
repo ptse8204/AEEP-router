@@ -1,0 +1,349 @@
+.....F...........................................F...........FFF...... [ 60%]
+..............................................     [100%]
+=================================== FAILURES ===================================
+__________ test_empty_partial_comparison_resolves_to_frozen_analysis ___________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_empty_partial_comparison_resolves_to_frozen_analysis(fixture):
+>       summary = report(fixture)
+                  ^^^^^^^^^^^^^^^
+
+/tmp/aeep-toolkit-c05-finalisation/test_comparison.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/toolkit/test_partial.py:28: in report
+    return controlled_report.create(Path(case.temp.name),case.repo,plan,recipe,definition,case.bridge.environment,case.bridge.results,[],incomplete=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/aeep-toolkit-c05-finalisation/controlled_report.py:113: in create
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, comparison)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:35: in put
+    return self._put(connection, kind, identity, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:39: in _put
+    digest = content_digest(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/models.py:36: in content_digest
+    json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x1099ef890>
+o = ComparisonReport(schema_version='aeep.toolkit.comparison.v1', evidence_bundle_ref='870981791683da01d2d2e9232f6b5f60358...trials cannot establish real candidate value.', 'Existing qualification and paired-case thresholds remain unchanged.'))
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ComparisonReport is not JSON serializable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:180: TypeError
+_ ControlledTests.test_existing_analysis_binds_complete_positions_and_receipts _
+
+self = <test_controlled.ControlledTests testMethod=test_existing_analysis_binds_complete_positions_and_receipts>
+
+    def test_existing_analysis_binds_complete_positions_and_receipts(self):
+        suite = {'evals':[{'id':'case','prompt':'current prompt'}]}
+        plan, recipe = controlled_report.freeze(self.repo, self.request, suite, self.spec)
+        self.dispatch(self.message())
+        self.dispatch(self.message(True))
+        output = Path(self.temp.name)
+        rows = []
+        for arm in ('control','treatment'):
+            artifact = output/'upstream'/arm/'outputs'
+            artifact.mkdir(parents=True)
+            (artifact/'output.txt').write_text('synthetic output')
+            rows.append({'case':'case','arm':'with_skill' if arm=='treatment' else 'without_skill',
+                         'artifact':arm,'verified':True})
+        definition = FixtureRecord(facts={'stack':stack.manifest()})
+        args = (output,self.repo,plan,recipe,definition,self.bridge.environment)
+>       summary = controlled_report.create(*args,self.bridge.results,rows)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+integrations/toolkit/test_controlled.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/aeep-toolkit-c05-finalisation/controlled_report.py:113: in create
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, comparison)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:35: in put
+    return self._put(connection, kind, identity, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:39: in _put
+    digest = content_digest(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/models.py:36: in content_digest
+    json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x109aae570>
+o = ComparisonReport(schema_version='aeep.toolkit.comparison.v1', evidence_bundle_ref='b3407d3c5bba166766b85980c84b56fb537...trials cannot establish real candidate value.', 'Existing qualification and paired-case thresholds remain unchanged.'))
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ComparisonReport is not JSON serializable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:180: TypeError
+__________________ test_failure_keeps_cost_and_unknown_grade ___________________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_failure_keeps_cost_and_unknown_grade(fixture):
+        async def failed(_executor,context):
+            return RawExecution(status=ExecutionStatus.TIMEOUT,error_type='TIMEOUT')
+        with patch.object(controlled.ContainerExecutor,'execute',failed),pytest.raises(ValueError):
+            asyncio.run(fixture.bridge.dispatch(fixture.message()))
+>       summary=report(fixture)
+                ^^^^^^^^^^^^^^^
+
+integrations/toolkit/test_partial.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/toolkit/test_partial.py:28: in report
+    return controlled_report.create(Path(case.temp.name),case.repo,plan,recipe,definition,case.bridge.environment,case.bridge.results,[],incomplete=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/aeep-toolkit-c05-finalisation/controlled_report.py:113: in create
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, comparison)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:35: in put
+    return self._put(connection, kind, identity, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:39: in _put
+    digest = content_digest(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/models.py:36: in content_digest
+    json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x109afd9a0>
+o = ComparisonReport(schema_version='aeep.toolkit.comparison.v1', evidence_bundle_ref='d7ff95e1d0431b6398c6316f84967585ed0...trials cannot establish real candidate value.', 'Existing qualification and paired-case thresholds remain unchanged.'))
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ComparisonReport is not JSON serializable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:180: TypeError
+_______ test_interruption_keeps_unresolved_operation_and_missing_trials ________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_interruption_keeps_unresolved_operation_and_missing_trials(fixture):
+        async def interrupted(_executor,context):
+            raise RuntimeError('lost worker')
+        with patch.object(controlled.ContainerExecutor,'execute',interrupted),pytest.raises(RuntimeError):
+            asyncio.run(fixture.bridge.dispatch(fixture.message()))
+>       summary=report(fixture)
+                ^^^^^^^^^^^^^^^
+
+integrations/toolkit/test_partial.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/toolkit/test_partial.py:28: in report
+    return controlled_report.create(Path(case.temp.name),case.repo,plan,recipe,definition,case.bridge.environment,case.bridge.results,[],incomplete=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/aeep-toolkit-c05-finalisation/controlled_report.py:113: in create
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, comparison)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:35: in put
+    return self._put(connection, kind, identity, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:39: in _put
+    digest = content_digest(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/models.py:36: in content_digest
+    json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x10978da30>
+o = ComparisonReport(schema_version='aeep.toolkit.comparison.v1', evidence_bundle_ref='870981791683da01d2d2e9232f6b5f60358...trials cannot establish real candidate value.', 'Existing qualification and paired-case thresholds remain unchanged.'))
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ComparisonReport is not JSON serializable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:180: TypeError
+________ test_forged_exposure_is_not_promoted_to_a_partial_observation _________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_forged_exposure_is_not_promoted_to_a_partial_observation(fixture):
+        async def forged(_executor,context):
+            return RawExecution(status=ExecutionStatus.SUCCESS,output={
+                'output':'untrusted','candidate_exposed':True,'uid':65534,
+                'python_available':True,'shell_available':True})
+        with patch.object(controlled.ContainerExecutor,'execute',forged),pytest.raises(ValueError):
+            asyncio.run(fixture.bridge.dispatch(fixture.message()))
+>       summary=report(fixture)
+                ^^^^^^^^^^^^^^^
+
+integrations/toolkit/test_partial.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+integrations/toolkit/test_partial.py:28: in report
+    return controlled_report.create(Path(case.temp.name),case.repo,plan,recipe,definition,case.bridge.environment,case.bridge.results,[],incomplete=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/aeep-toolkit-c05-finalisation/controlled_report.py:113: in create
+    comparison_ref = repository.put('toolkit_controlled_comparison', plan.plan_id, comparison)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:35: in put
+    return self._put(connection, kind, identity, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/repository.py:39: in _put
+    digest = content_digest(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+src/aeep/assessment/models.py:36: in content_digest
+    json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:261: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x109afdeb0>
+o = ComparisonReport(schema_version='aeep.toolkit.comparison.v1', evidence_bundle_ref='a3cce0c786c48c441005798fafcd2b5aff6...trials cannot establish real candidate value.', 'Existing qualification and paired-case thresholds remain unchanged.'))
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type ComparisonReport is not JSON serializable
+
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py:180: TypeError
+=========================== short test summary info ============================
+FAILED ::test_empty_partial_comparison_resolves_to_frozen_analysis - TypeErro...
+FAILED integrations/toolkit/test_controlled.py::ControlledTests::test_existing_analysis_binds_complete_positions_and_receipts
+FAILED integrations/toolkit/test_partial.py::test_failure_keeps_cost_and_unknown_grade
+FAILED integrations/toolkit/test_partial.py::test_interruption_keeps_unresolved_operation_and_missing_trials
+FAILED integrations/toolkit/test_partial.py::test_forged_exposure_is_not_promoted_to_a_partial_observation

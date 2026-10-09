@@ -9,7 +9,10 @@ import stack
 import test_controlled
 from receipts import FixtureRecord
 
+from aeep.assessment.models import content_digest
 from aeep.models import ExecutionStatus, RawExecution
+from aeep_toolkit.cli import read_json
+from aeep_toolkit.models import ComparisonReport
 
 
 @pytest.fixture
@@ -69,3 +72,16 @@ def test_forged_exposure_is_not_promoted_to_a_partial_observation(fixture):
     summary=report(fixture)
     assert summary['outcome']=='NOT_ASSESSED'
     assert fixture.bridge.results[0]['candidate_exposed'] is None
+
+
+def test_empty_partial_comparison_resolves_to_frozen_analysis(fixture):
+    summary = report(fixture)
+    comparison = ComparisonReport.model_validate(read_json(Path(fixture.temp.name)/'comparison.json'))
+    assert comparison.outcome == 'NOT_ASSESSED'
+    assert comparison.evidence_kind == 'synthetic'
+    assert comparison.evidence_bundle_ref == summary['reviewed_analysis']['bundle_ref']
+    assert comparison.plan_ref == summary['reviewed_analysis']['plan_ref']
+    assert comparison.analysis_ref == summary['reviewed_analysis']['analysis_ref']
+    assert content_digest({'facts':comparison.model_dump(mode='json')}) == summary['comparison_ref']
+    assert fixture.repo.get('toolkit_controlled_comparison', summary['comparison_ref']) == {'facts':comparison.model_dump(mode='json')}
+    assert 'Engineering comparison status: NOT_ASSESSED' in (Path(fixture.temp.name)/'report.md').read_text()

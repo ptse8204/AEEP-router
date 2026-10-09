@@ -4063,3 +4063,17 @@ D36 now adds partial reports for failed/interrupted synthetic trials, including
 missing expected positions and unresolved operations. A separate draft replay
 verified one actual failed Docker worker and cleanup. Fresh complete checks for
 the integrated correction are required; no live or release gate is closed.
+
+The integrated D36 source `f4e66cd` passed both core suites (1,444 passed,
+21 skipped), all 12 validation commands, both branch gates and eight additional
+proof/build checks. Its source stayed unchanged. Thirteen actual scripted
+workers exercised retained/private/failure reporting; the parent interruption
+fixture launched no worker. All reports verified and all workers were removed.
+
+D37-D39 now add paired means, readable success/provenance/use information,
+whole-core review binding and a canonical C02 comparison export. Focused checks
+passed 120 tests with one opt-in native skip and 24 subtests. The existing
+credential-free native probe also needed a missing template substitution; its
+corrected copy passed, and the production correction is now integrated. Full
+verification and source-bound replays for these new bytes are next. V2 live
+conformance/value, complete comparison reporting and release remain open.

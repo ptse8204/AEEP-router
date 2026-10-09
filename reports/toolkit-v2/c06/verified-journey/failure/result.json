@@ -1,0 +1,87 @@
+{
+  "schema": "aeep.toolkit.controlled-fixture.v1",
+  "evidence_kind": "synthetic",
+  "state": "incomplete",
+  "failure_code": "ValueError",
+  "definition_ref": "eb31ab325bdfc70995d59c24328108a61bfd66c3aabf5e6d96ee7122bf7db0f0",
+  "outputs_retained": false,
+  "environment": {
+    "environment_id": "toolkit-offline-fixture",
+    "kind": "container",
+    "identity": {
+      "purpose": "upstream synthetic dispatch"
+    },
+    "network": false,
+    "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "cpu_count": 1.0,
+    "memory_mb": 256,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [
+      "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-ase-worker-source-v16sud84"
+    ]
+  },
+  "trials": [
+    {
+      "case": "trivial-edit",
+      "arm": "treatment",
+      "operation_id": "planning_e4ec5ebd1a7d410ea63858c0640c3a02:trivial-edit:treatment",
+      "receipt_id": "rcpt_be6c7baeea1048458d247c18283b4b0c",
+      "receipt_ref": "0935c054b85b93070075edb5829c19c8d6912924ce3f7a2fe12a020d4678d16e",
+      "execution_success": false,
+      "worker_name": "aeep-331e21f290a8399d26786b99c36df27f",
+      "candidate_exposed": null,
+      "payload_sha256": null,
+      "output_sha256": null
+    }
+  ],
+  "verified_upstream_rows": [],
+  "ledger": {
+    "plan_id": "planning_e4ec5ebd1a7d410ea63858c0640c3a02",
+    "operations": [
+      {
+        "operation_id": "planning_e4ec5ebd1a7d410ea63858c0640c3a02:trivial-edit:treatment",
+        "plan_id": "planning_e4ec5ebd1a7d410ea63858c0640c3a02",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T19:28:28.194820Z",
+        "elapsed_seconds": 0.6920181668829173,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 672.7711660787463,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Execution stopped without retry; unknown grades remain unknown.",
+    "Real agent conformance and live benefit are not established."
+  ]
+}

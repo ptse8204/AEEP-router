@@ -63,13 +63,13 @@
     },
     {
       "name": "Docker controlled workers",
-      "state": "not_connected",
-      "role": "Existing AEEP assets; required before real comparative trials."
+      "state": "scripted_trials_verified",
+      "role": "Separate offline workers for each upstream scripted trial; capable-model conformance remains open."
     },
     {
       "name": "SQLite canonical receipts",
-      "state": "fixture_batch_connected",
-      "role": "Existing AEEP executor/store: one coordinator receipt; per-trial model accounting remains unconnected."
+      "state": "per_trial_connected",
+      "role": "Existing AEEP reservations, per-trial receipts, execution events and partial reports; model accounting is unassessed."
     }
   ],
   "extensions": {
@@ -96,7 +96,7 @@
       "function": "Primary evaluation engine",
       "preferred_solution": "agent-skill-eval",
       "responsibility": "Test first; verify Codex integration and isolation",
-      "status": "Synthetic CLI verified; Codex and isolation unverified"
+      "status": "Pinned scheduler and graders dispatch scripted trials into separate workers; Codex model integration remains unqualified"
     },
     {
       "function": "Evaluation fallback",

@@ -28,8 +28,12 @@ Each arm shows execution and grading counts. Token totals respect explicit cache
 and reasoning overlap semantics. Unknown categories do not become zero. Timing
 and token summaries distinguish a known subtotal from a complete total and show
 measurement coverage, medians and maxima in JSON. Agent, verification and setup
-times stay separate. JSON also includes descriptive differences for measured
-pairs; these do not override task failures or establish benefit.
+times stay separate. Matched measurements show control and treatment means,
+mean and median differences, and the relative mean difference when the control
+mean is positive. Both means use the same measured pairs. A zero control mean
+leaves the relative difference unknown. Reports also show the verified-success
+difference in percentage points and observed/absent/unknown candidate-use counts.
+These observations do not override task failures or establish benefit.
 
 The verdict is always `NOT_ASSESSED`. This command validates record structure,
 not the referenced receipts, worker conformance, grading evidence or expected
@@ -68,9 +72,9 @@ The controlled development fixture now supplies a stronger, separate path:
 selection decision, durable execution events, independently graded output and
 operation accounting. It checks all expected positions from the plan frozen before
 dispatch and recomputes existing AEEP `fit_report`. Its generated HTML/Markdown
-reports remain explicitly synthetic. The two-case suite returns insufficient
+reports remain explicitly synthetic. The three-case user journey returns insufficient
 evidence with the existing qualification thresholds unchanged. General live
-campaign binding and the remaining economics acceptance cases are still open.
+campaign binding and complete inferential reporting remain open.
 
 A stopped controlled fixture also produces a partial report when its receipt
 store remains writable. It lists missing expected positions and unresolved
@@ -78,3 +82,11 @@ operations, keeps unknown grading results unknown, and preserves prior charges.
 The verifier checks its immutable completion record before accepting a partial
 result. A failed reporting write leaves the original exception and receipt store
 for inspection. There is no automatic retry.
+
+New controlled runs also export `comparison.json` using the C02 comparison
+contract. Its references resolve to the canonical bundle, frozen plan and AEEP
+analysis. The verifier checks the exported bytes and those references. A scripted
+run with observations is `INCONCLUSIVE` about real value; a stopped run with no
+observed trial is `NOT_ASSESSED`. The readable report shows the engineering
+comparison status separately from the unassessed real-model value. Earlier
+artifacts retain their original format and evidence meaning.

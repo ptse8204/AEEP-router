@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '29dff45'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/preflight-correction/validation/checks.json'
-last_check_result: '1444 passed, 21 skipped in each full suite; both branch coverage gates, all 11 driver checks, standalone 48-test integration, Node 13 tests, docs (64 files, 571 links, zero errors) and builds passed. Source remained unchanged. General synthetic adapter increment now needs its own checks.'
-next_action: 'Finish checks for the executed three-family offline adapter, then integrate D36 partial failure reporting from /tmp/aeep-toolkit-partial-report and exercise its actual worker failure. Continue general comparison and real-host integration using existing AssessmentService/BenchmarkRunner; no architecture decision is pending.'
+last_verified_commit: 'f4e66cd'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c06/offline-journey/validation-final/checks.json'
+last_check_result: '1444 passed, 21 skipped in each core suite; 70 integration tests and 24 subtests; all 12 driver checks, both coverage gates and eight supplemental proof/build checks passed. Source stayed unchanged. D37-D39 now need their own verification.'
+next_action: 'Verify D37-D39 report/source bindings and the corrected native probe on the integrated source, retain actual replays, then continue general comparison and real-host integration. The prior stop was unfinished engineering; no architecture decision is pending.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -869,3 +869,53 @@ all new function-style tests while preserving the existing Windows exclusion.
 D36 partial reporting is now integrated from its separately exercised draft.
 A fresh full check is required; the preceding successful suite does not qualify
 these new bytes. No external intervention is required for this correction.
+
+### Integrated D36 replays completed
+
+Source `f4e66cd` completed retained-output and default-private runs (six workers
+each), an intentional invalid-edit failure (one worker, no second dispatch), and
+an injected interruption after reservation (no worker launched). The latter
+retains one unresolved operation. Every saved report passed read-only verification;
+all 13 Docker workers were removed. Eight tampering checks passed. Source-bound
+transcripts and totals are in `reports/toolkit-v2/c06/verified-journey`.
+
+The first new audit assertion incorrectly expected a payload observation from a
+failed treatment worker; the runtime correctly marked that observation unknown.
+The assertion was corrected without changing runtime code or recorded evidence.
+Its failure is recorded in `audit-correction.json`. The full regression and
+coverage driver for `f4e66cd` is still running in `/tmp/aeep-toolkit-c06-final-checks.py`.
+No architecture choice or new external permission is needed for this work.
+
+### Native worker reuse: observed failure and corrected-copy pass
+
+The existing offline pair at `reports/v08/offline-inspection-fixture-specs.json`
+was available locally. A fresh run launched both real Codex workers, then failed
+because the standalone workbook probe left `DOCX_PROBE` unset in its shared
+program template. A corrected copy passed all fixed observations and cleanup.
+The production source correction is intentionally pending until the current
+full suite finishes. D38 and `reports/toolkit-v2/c04/native-offline-recheck`
+record exact evidence. Do not call this full host conformance or a model trial.
+
+D37 drafts in `/tmp/aeep-toolkit-c05-finalisation` add the missing descriptive
+means and reuse the existing full AEEP verification source digest in the adapter
+review. Three focused draft tests pass; the files are not integrated yet.
+Next: finish `f4e66cd` checks, integrate D37 plus the one-line D38 correction,
+then verify that exact source. Safe engineering remains; no new permission is
+currently required. The earlier stop remains an implementation gap, distinct
+from this newly observed and diagnosed probe bug.
+
+### Integrated D36 verification passed; D37-D39 now integrated
+
+Source `f4e66cd` passed both core suites: 1,444 tests and 21 skips each.
+Coverage completed in 879.15 seconds; both branch gates and all 12 driver
+commands passed. Source hashes stayed unchanged. Eight supplemental proof/build
+checks and the retained/private/failure/interruption replays passed. Exact logs
+remain under `c06/offline-journey/validation-final` and `c06/verified-journey`.
+
+D37 adds paired means, readable provenance/success/use counts and complete AEEP
+source binding. D38 applies the one-line native probe correction. D39 emits the
+existing comparison contract from canonical controlled evidence. An initial
+D39 draft failed because the legacy store accepts its own model base; it now
+uses the same `FixtureRecord` envelope already used for C02 bundles. The focused
+drafts pass after that repair. Full checks and actual replays on the integrated
+source are next. No new package, service, live call or credential action is needed.

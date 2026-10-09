@@ -1,0 +1,505 @@
+{
+  "review_sha256": "492c76e86a541dee4c44a1c05dbdc4e792bbae35c4bf685a2b2971c0ebf6a742",
+  "plan": {
+    "schema": "aeep.toolkit.synthetic-evaluation-plan.v1",
+    "inputs": {
+      "candidate": {
+        "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+        "files": {
+          "SKILL.md": "693924858cb5447be6dd0e6b9d43dd9c9fcb38bfce6b0d85bb0db347af7e9a06",
+          "resources/guidance.txt": "d25f953390dea431c1bed43295780611d9b889213ad962978986b0117965d772"
+        },
+        "payload_bytes": 303,
+        "excluded_directories": [
+          ".git",
+          "__pycache__",
+          "evals"
+        ],
+        "executed": false,
+        "notice": "Local byte identity only; no developer verification, installation, safety or value qualification."
+      },
+      "suite_sha256": "c4891b7ebe8029c23cf66c6636a5a2f74387716f69d2890a91d677caabd2554e",
+      "source": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "aed44be8219243c854401dd38de0953a279743d0",
+        "artifact_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+        "license_expression": "Apache-2.0",
+        "data_rights": "Repository-authored synthetic fixture; local commit, not a published dataset."
+      },
+      "cases": 1,
+      "trials": 2,
+      "retain_outputs": false,
+      "model_turns": 0,
+      "evidence_kind": "synthetic",
+      "notice": "Scripted harness checks only; candidate instructions are not interpreted by a model."
+    },
+    "runtime": "/private/tmp/aeep-ase-c04-tt14mj6r/rebuild",
+    "runtime_inventory": {
+      "versions": {
+        "agent-skill-eval": "0.7.0",
+        "typer": "0.27.1",
+        "pydantic": "2.12.0",
+        "rich": "15.0.0",
+        "PyYAML": "6.0.2",
+        "python-dotenv": "1.1.1",
+        "openai": "3.26.1",
+        "pydantic_core": "2.41.1",
+        "anyio": "4.15.1",
+        "httpx2": "2.13.1",
+        "httpcore2": "2.13.1",
+        "jiter": "0.17.0",
+        "Pygments": "2.21.0",
+        "typing_extensions": "4.16.0",
+        "annotated-doc": "0.0.5",
+        "annotated-types": "0.8.0",
+        "h11": "0.16.0",
+        "idna": "3.20",
+        "markdown-it-py": "4.2.0",
+        "mdurl": "0.1.2",
+        "shellingham": "1.5.4",
+        "truststore": "0.10.4",
+        "typing-inspection": "0.4.4",
+        "sniffio": "1.3.1"
+      },
+      "source_files": {
+        "agent_skill_eval/__init__.py": "cea726bf89140d96cd24fe459bf58988801e3c1cbbc0da57cad577821ddd44fe",
+        "agent_skill_eval/__main__.py": "c9ddeaab5083783ab6f90721dd6ef063c4ee78c5cfdd989ceb22168c7e6ca2f4",
+        "agent_skill_eval/cli.py": "7877e62d8a3fd5aa821c1359e721a2bbf8fff5429bb856995bc7ee394a4a3c0f",
+        "agent_skill_eval/fixtures.py": "5adc40b3f9f91d7d4d7599ee0f890a59058b0881505c46a8a2f0d7145435234c",
+        "agent_skill_eval/git_state.py": "d06f4cda0f859fa038f0da9799aabb54cc371d83995a939cf725eb79cc3f8f32",
+        "agent_skill_eval/graders/__init__.py": "28d30ab74122cc45ea9d4b98191fb59698e8b4b71d41e694e5702de8bb122c7a",
+        "agent_skill_eval/harnesses/__init__.py": "348b9cc731fb6470a6dfe38000c090bb743094cdc183156e27ba2b37a8a11bb0",
+        "agent_skill_eval/hooks.py": "6a47adab2c6037dfcc15b2a831085c03b68f73e9d31cfae7c22bf796e0eefe39",
+        "agent_skill_eval/models.py": "210f95b99f035092564d5503da7e228b4a1d13c9c4f96f5744ce22df8b6b443c",
+        "agent_skill_eval/openrouter.py": "eec81fb1714cae82d276626884184e23ca718098adef3ad4cbf009a3b84373c2",
+        "agent_skill_eval/progress.py": "369f0c0e00fd38e19ef1327d022861ce543d10632ea859843cabbbe8b77fc807",
+        "agent_skill_eval/runner.py": "a37df1cddbfcf4d0437835c2f582ee539724758d9d257f86ac47e8c39484ca27",
+        "agent_skill_eval/skills.py": "977cb376bfdd2954361abf5fa39abb657aa2b2613443cac122da35a36fdf9c64",
+        "agent_skill_eval/summary.py": "035ef3946a8f92d3c0822caaa7f407745e7ec5299af8cd8290605cebe7f140ff",
+        "agent_skill_eval/validation.py": "ddf201c8564b8671693a054033f8ead3ebced257b817a7f28d9201605720c874",
+        "agent_skill_eval/workspace.py": "a2969a72e74860d6c0117e8506819cd4e79c5061ee5bc191501a025bf47224e3"
+      },
+      "python_configuration": "3.13.1",
+      "packages": [
+        {
+          "name": "agent-skill-eval",
+          "expected_version": "0.7.0",
+          "observed_version": "0.7.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
+          "requires_dist": [
+            "openai>=1.0",
+            "pydantic>=2.0",
+            "python-dotenv>=1.0",
+            "pyyaml>=6.0",
+            "rich>=13.0",
+            "typer>=0.12",
+            "pytest-cov>=5.0; extra == 'dev'",
+            "pytest>=8.0; extra == 'dev'",
+            "ruff>=0.4; extra == 'dev'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "typer",
+          "expected_version": "0.27.1",
+          "observed_version": "0.27.1",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "53150287edd11baeb4e4722c8e394fcdf8181c0ae89485cba8d25c778d5edd56",
+          "requires_dist": [
+            "shellingham>=1.3.0",
+            "rich>=13.8.0",
+            "annotated-doc>=0.0.2",
+            "colorama; platform_system == \"Windows\""
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "pydantic",
+          "expected_version": "2.12.0",
+          "observed_version": "2.12.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "f6a1da352d42790537e95e83a8bdfb91c7efbae63ffd0b86fa823899e807116f",
+          "requires_dist": [
+            "annotated-types>=0.6.0",
+            "pydantic-core==2.41.1",
+            "typing-extensions>=4.14.1",
+            "typing-inspection>=0.4.2",
+            "email-validator>=2.0.0; extra == 'email'",
+            "tzdata; (python_version >= '3.9' and platform_system == 'Windows') and extra == 'timezone'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "rich",
+          "expected_version": "15.0.0",
+          "observed_version": "15.0.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb",
+          "requires_dist": [
+            "ipywidgets (>=7.5.1,<9) ; extra == \"jupyter\"",
+            "markdown-it-py (>=2.2.0)",
+            "pygments (>=2.13.0,<3.0.0)"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "PyYAML",
+          "expected_version": "6.0.2",
+          "observed_version": "6.0.2",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "50187695423ffe49e2deacb8cd10510bc361faac997de9efef88badc3bb9e2d1",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "python-dotenv",
+          "expected_version": "1.1.1",
+          "observed_version": "1.1.1",
+          "metadata_matches": true,
+          "license": "BSD-3-Clause",
+          "wheel_sha256": "31f23644fe2602f88ff55e1f5c79ba497e01224ee7737937930c448e4d0e24dc",
+          "requires_dist": [
+            "click>=5.0; extra == \"cli\""
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "openai",
+          "expected_version": "3.26.1",
+          "observed_version": "3.26.1",
+          "metadata_matches": true,
+          "license": "Apache-2.0",
+          "wheel_sha256": "6a05a4615c678922aa16a1a560cfbe059cb20d5b7ab9753d0bf38b41fce1c67a",
+          "requires_dist": [
+            "anyio<5,>=4.10.0",
+            "httpx2<3,>=2.12.0",
+            "jiter<1,>=0.16.0",
+            "pydantic!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3,>=1.10.13",
+            "sniffio",
+            "typing-extensions<5,>=4.14",
+            "aiohttp>=3.14.3; extra == 'aiohttp'",
+            "botocore<2,>=1.40.0; extra == 'bedrock'",
+            "urllib3<3,>=2.7.0; extra == 'bedrock'",
+            "numpy>=1; extra == 'datalib'",
+            "pandas>=1.2.3; extra == 'datalib'",
+            "websockets<16,>=13; extra == 'realtime'",
+            "numpy>=2.0.2; extra == 'voice-helpers'",
+            "sounddevice>=0.5.1; extra == 'voice-helpers'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "pydantic_core",
+          "expected_version": "2.41.1",
+          "observed_version": "2.41.1",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "9cebf1ca35f10930612d60bd0f78adfacee824c30a880e3534ba02c207cceceb",
+          "requires_dist": [
+            "typing-extensions>=4.14.1"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "anyio",
+          "expected_version": "4.15.1",
+          "observed_version": "4.15.1",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101",
+          "requires_dist": [
+            "exceptiongroup>=1.0.2; python_version < \"3.11\"",
+            "idna>=2.8",
+            "typing_extensions>=4.16.0; python_version < \"3.15\"",
+            "trio>=0.32.0; extra == \"trio\""
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "httpx2",
+          "expected_version": "2.13.1",
+          "observed_version": "2.13.1",
+          "metadata_matches": true,
+          "license": "BSD-3-Clause",
+          "wheel_sha256": "6dff50fabc270ee5fd25d845d0b078ed20564579744d6d962850975996d2f9a4",
+          "requires_dist": [
+            "anyio>=4.10; sys_platform != 'emscripten'",
+            "httpcore2==2.13.1; sys_platform != 'emscripten'",
+            "httpx2-jsfetch; sys_platform == 'emscripten' and python_version >= '3.12'",
+            "idna>=3.18",
+            "truststore>=0.10; sys_platform != 'emscripten'",
+            "typing-extensions>=4.5.0; python_version < '3.13'",
+            "brotli>=1.2.0; (platform_python_implementation == 'CPython') and extra == 'brotli'",
+            "brotlicffi>=1.2.0.2; (platform_python_implementation != 'CPython') and extra == 'brotli'",
+            "click>=8.4.2; extra == 'cli'",
+            "pygments==2.*; extra == 'cli'",
+            "rich<16,>=10; extra == 'cli'",
+            "h2<5,>=3; extra == 'http2'",
+            "socksio==1.*; extra == 'socks'",
+            "wsproto>=1.2; extra == 'ws'",
+            "backports-zstd>=1.0.0; (python_version <= '3.13') and extra == 'zstd'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "httpcore2",
+          "expected_version": "2.13.1",
+          "observed_version": "2.13.1",
+          "metadata_matches": true,
+          "license": "BSD-3-Clause",
+          "wheel_sha256": "e1e05d4f25f7d7d496bfb96748f6f4b67657b03da069b3a68c36069f3db73d0a",
+          "requires_dist": [
+            "h11>=0.16",
+            "truststore>=0.10",
+            "anyio<5.0,>=4.5.0; extra == 'asyncio'",
+            "h2<5,>=3; extra == 'http2'",
+            "socksio==1.*; extra == 'socks'",
+            "trio<1.0,>=0.34.0; extra == 'trio'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "jiter",
+          "expected_version": "0.17.0",
+          "observed_version": "0.17.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "ec89771f4272b989487a6364e519db6bbaba323e8bbf949ac89a45ea9c18b7a3",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "Pygments",
+          "expected_version": "2.21.0",
+          "observed_version": "2.21.0",
+          "metadata_matches": true,
+          "license": "BSD-2-Clause",
+          "wheel_sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+          "requires_dist": [
+            "colorama>=0.4.6; extra == 'windows-terminal'"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "typing_extensions",
+          "expected_version": "4.16.0",
+          "observed_version": "4.16.0",
+          "metadata_matches": true,
+          "license": "PSF-2.0",
+          "wheel_sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "annotated-doc",
+          "expected_version": "0.0.5",
+          "observed_version": "0.0.5",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "annotated-types",
+          "expected_version": "0.8.0",
+          "observed_version": "0.8.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "h11",
+          "expected_version": "0.16.0",
+          "observed_version": "0.16.0",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "idna",
+          "expected_version": "3.20",
+          "observed_version": "3.20",
+          "metadata_matches": true,
+          "license": "BSD-3-Clause",
+          "wheel_sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+          "requires_dist": [
+            "ruff >= 0.16.0 ; extra == \"all\"",
+            "mypy >= 1.11.2 ; extra == \"all\"",
+            "ty >= 0.0.37 ; extra == \"all\"",
+            "pytest >= 8.3.2 ; extra == \"all\"",
+            "hypothesis >= 6.141.1 ; extra == \"all\"",
+            "coverage >= 7.10.0 ; extra == \"all\""
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "markdown-it-py",
+          "expected_version": "4.2.0",
+          "observed_version": "4.2.0",
+          "metadata_matches": true,
+          "license": null,
+          "wheel_sha256": "9f7ebbcd14fe59494226453aed97c1070d83f8d24b6fc3a3bcf9a38092641c4a",
+          "requires_dist": [
+            "mdurl~=0.1",
+            "psutil ; extra == \"benchmarking\"",
+            "pytest ; extra == \"benchmarking\"",
+            "pytest-benchmark ; extra == \"benchmarking\"",
+            "commonmark~=0.9 ; extra == \"compare\"",
+            "markdown~=3.4 ; extra == \"compare\"",
+            "mistletoe~=1.0 ; extra == \"compare\"",
+            "mistune~=3.0 ; extra == \"compare\"",
+            "panflute~=2.3 ; extra == \"compare\"",
+            "markdown-it-pyrs ; extra == \"compare\"",
+            "linkify-it-py>=1,<3 ; extra == \"linkify\"",
+            "mdit-py-plugins>=0.5.0 ; extra == \"plugins\"",
+            "gprof2dot ; extra == \"profiling\"",
+            "mdit-py-plugins>=0.5.0 ; extra == \"rtd\"",
+            "myst-parser ; extra == \"rtd\"",
+            "pyyaml ; extra == \"rtd\"",
+            "sphinx ; extra == \"rtd\"",
+            "sphinx-copybutton ; extra == \"rtd\"",
+            "sphinx-design ; extra == \"rtd\"",
+            "sphinx-book-theme~=1.0 ; extra == \"rtd\"",
+            "jupyter_sphinx ; extra == \"rtd\"",
+            "ipykernel ; extra == \"rtd\"",
+            "coverage ; extra == \"testing\"",
+            "pytest ; extra == \"testing\"",
+            "pytest-cov ; extra == \"testing\"",
+            "pytest-regressions ; extra == \"testing\"",
+            "pytest-timeout ; extra == \"testing\"",
+            "requests ; extra == \"testing\""
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "mdurl",
+          "expected_version": "0.1.2",
+          "observed_version": "0.1.2",
+          "metadata_matches": true,
+          "license": null,
+          "wheel_sha256": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "shellingham",
+          "expected_version": "1.5.4",
+          "observed_version": "1.5.4",
+          "metadata_matches": true,
+          "license": "ISC License",
+          "wheel_sha256": "7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "truststore",
+          "expected_version": "0.10.4",
+          "observed_version": "0.10.4",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "adaeaecf1cbb5f4de3b1959b42d41f6fab57b2b1666adb59e89cb0b53361d981",
+          "requires_dist": [],
+          "artifact_integrity": null
+        },
+        {
+          "name": "typing-inspection",
+          "expected_version": "0.4.4",
+          "observed_version": "0.4.4",
+          "metadata_matches": true,
+          "license": "MIT",
+          "wheel_sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+          "requires_dist": [
+            "typing-extensions>=4.15.0"
+          ],
+          "artifact_integrity": null
+        },
+        {
+          "name": "sniffio",
+          "expected_version": "1.3.1",
+          "observed_version": "1.3.1",
+          "metadata_matches": true,
+          "license": "MIT OR Apache-2.0",
+          "wheel_sha256": "2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2",
+          "requires_dist": [],
+          "artifact_integrity": null
+        }
+      ],
+      "metadata_sha256": {
+        "PyYAML-6.0.2.dist-info/METADATA": "f7ea1d141e6c7aee2918f704bfb13c8b2c4d179d7fb8a9da3468cb021cf696da",
+        "agent_skill_eval-0.7.0.dist-info/METADATA": "7c0e38d86ddea4a3b7e5b34c2277789c217f85d0ea17850a6b7a830e9cbcb6ed",
+        "annotated_doc-0.0.5.dist-info/METADATA": "8c24d70c5d9153d22123353a906042fd7603df2d15c2196290b0f8a962558c46",
+        "annotated_types-0.8.0.dist-info/METADATA": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+        "anyio-4.15.1.dist-info/METADATA": "043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81",
+        "h11-0.16.0.dist-info/METADATA": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+        "httpcore2-2.13.1.dist-info/METADATA": "37a0ea0674e98b7c3a1f99c17d9bb5457de27a0f93c8b6560c9d17d525139abb",
+        "httpx2-2.13.1.dist-info/METADATA": "b75b03a003b5593e000907cf7239fcc3f688b8f17db4ecff883d11221ea988fc",
+        "idna-3.20.dist-info/METADATA": "dbd8c14c1e4ca1e0c9824a6dbc7cbbf78884f38eb52d91148cd3025f671e4b85",
+        "jiter-0.17.0.dist-info/METADATA": "738fc5b25c7cbaf81392886a95661322888c5691205b57a0975a1da1f62e3ea7",
+        "markdown_it_py-4.2.0.dist-info/METADATA": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+        "mdurl-0.1.2.dist-info/METADATA": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+        "openai-3.26.1.dist-info/METADATA": "304ea482d344d5cf55e70016d86476811ba0685f759dfbd43d22f0647128f493",
+        "pip-24.3.1.dist-info/METADATA": "57c88234ad4661b0bcd8f5ac2ccb0048387d00ee2f7a871194ce0f9fdab62852",
+        "pydantic-2.12.0.dist-info/METADATA": "08ac4e8b33e3ae12d39623d6a04aee3aa761562dac820fc83810d8bf1e8626f3",
+        "pydantic_core-2.41.1.dist-info/METADATA": "d2fa940d51ba037546da8a7d0b33132336b7231affa6f70bc1fcd8151fcbd62e",
+        "pygments-2.21.0.dist-info/METADATA": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+        "python_dotenv-1.1.1.dist-info/METADATA": "7442ef48a5f067e35b40a01efa4fae24cf2486654df1933dd81e6dc98f34d726",
+        "rich-15.0.0.dist-info/METADATA": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+        "shellingham-1.5.4.dist-info/METADATA": "183d80220a37493262795739dd357cc5bb3f49bd390cc9198d5180e5451a07fa",
+        "sniffio-1.3.1.dist-info/METADATA": "0b318b57098edeccf585e60a889a6b6a7b5c4086f3a9aa62eff76a1d3cee12d9",
+        "truststore-0.10.4.dist-info/METADATA": "509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b",
+        "typer-0.27.1.dist-info/METADATA": "d71011dc4b250b9670d91fbae7882d707a9ef93b22a527d90992a962a5759601",
+        "typing_extensions-4.16.0.dist-info/METADATA": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+        "typing_inspection-0.4.4.dist-info/METADATA": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da"
+      },
+      "bootstrap_pip_version": "24.3.1",
+      "unexpected_distributions": [],
+      "startup_hooks_present": false,
+      "blockers": [],
+      "status": "metadata_and_evaluator_source_match",
+      "limitations": [
+        "Distribution versions and Python configuration are declarations, not runtime execution observations.",
+        "Only the listed evaluator source files are checked against reviewed source hashes.",
+        "Dependency/interpreter integrity, effective host access and worker containment are not established."
+      ]
+    },
+    "output": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c06/verified-journey/failure",
+    "environment": {
+      "environment_id": "toolkit-offline-fixture",
+      "kind": "container",
+      "identity": {
+        "purpose": "upstream synthetic dispatch"
+      },
+      "network": false,
+      "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "cpu_count": 1.0,
+      "memory_mb": 256,
+      "process_limit": 64,
+      "container_runtime": "/usr/local/bin/docker",
+      "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+      "read_only_roots": []
+    },
+    "source_hashes": {
+      "controlled.py": "3834fa98409f1a1b092ee19cd50a1a74629cdffb4667b07c2ed29e1cd790fc34",
+      "controlled_engine.py": "a21ac3da42fd5471d2c6dd363fd8d39f7b4da73632ff8983e5c7ced2b8327822",
+      "controlled_fixture_worker.py": "bc67cd688452195b8a8e7d2763ace9dfbf5d8c656a96e624c60b44db188db8e2",
+      "controlled_report.py": "71cf0bc61703a72e0cc43a227a85e42aefed3abd06f8f5879d4b67a2ca65e56c",
+      "stack.py": "db239d0fa445f2bce2d6f3034d8e1a9cf23546d4cd5725b69544d56a22a92170",
+      "definition.py": "47f4e0ad7597008a4a7630a985efb1babb49be844451aa3da907f74287f57dca",
+      "synthetic_edit.py": "1ba9624ce1e3a70a1194ff81ba6c2847f93ced74619b01a19fb7d8ed56e57abf",
+      "candidate.py": "01e10ceb13d1bdcc29935cd52c8e6078fa2fa8ebc0d5bed0b26848022dfbb46a",
+      "__init__.py": "e3e0a8045da2fd5d00e5e7efe07da25155b8e7b2e3b7d8a49affcea1a785af73"
+    },
+    "effects": "Run only scripted trials in separate offline containers; no model, credential or billing calls."
+  }
+}
