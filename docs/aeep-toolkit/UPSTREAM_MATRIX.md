@@ -222,3 +222,18 @@ hashes, arguments, receipts and audits are under
 This adapter implements the C02 interface for scripted offline execution. A model
 does not interpret the candidate; Codex compatibility remains unqualified. No
 fallback campaign or new optional-engine installation was started.
+
+## October 9 managed-backend selection after executable contract checks
+
+The installed 0.7.0 Codex parser and command builder were exercised without
+launching Codex. Missing primary usage became zero; the default command inherits
+the caller environment and has no paired managed-worker binding. The exact
+synthetic observations and pins are under
+`reports/toolkit-v2/c04/codex-harness-contract`. This does not assert that an
+actual credential leak or model failure occurred.
+
+D40 selects the existing AEEP AssessmentService/BenchmarkRunner fallback for the
+first managed-model adapter. Agent-skill-eval remains the working scripted
+backend. No live campaign has begun or changed engine. AEEP's existing App Server
+parser also needs D41's partial-usage correction before qualification; fallback
+selection is not a conformance PASS. The new managed adapter remains unfinished.

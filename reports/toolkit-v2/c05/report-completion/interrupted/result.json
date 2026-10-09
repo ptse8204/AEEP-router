@@ -1,0 +1,51 @@
+{
+  "schema": "aeep.toolkit.controlled-fixture.v1",
+  "evidence_kind": "synthetic",
+  "state": "incomplete",
+  "failure_code": "RuntimeError",
+  "definition_ref": "1502f00e3eed54f011fa99912ddf3c91df0dd5af9e3aaa1bfebac66963adbbe0",
+  "outputs_retained": false,
+  "environment": {
+    "environment_id": "toolkit-offline-fixture",
+    "kind": "container",
+    "identity": {
+      "purpose": "injected interruption; no worker launch"
+    },
+    "network": false,
+    "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "cpu_count": 1.0,
+    "memory_mb": 256,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [
+      "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-ase-worker-source-pnrpb2rc"
+    ]
+  },
+  "trials": [],
+  "verified_upstream_rows": [],
+  "ledger": {
+    "plan_id": "planning_8c698a1ab39b466e97e8a30fa4e63916",
+    "operations": [
+      {
+        "operation_id": "planning_8c698a1ab39b466e97e8a30fa4e63916:trivial-edit:treatment",
+        "plan_id": "planning_8c698a1ab39b466e97e8a30fa4e63916",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T19:56:06.489774Z",
+        "elapsed_seconds": null,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  "limitations": [
+    "Execution stopped without retry; unknown grades remain unknown.",
+    "Real agent conformance and live benefit are not established."
+  ]
+}

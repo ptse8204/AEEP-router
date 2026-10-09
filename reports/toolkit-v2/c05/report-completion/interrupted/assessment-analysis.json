@@ -1,0 +1,82 @@
+{
+  "comparison": {
+    "schema_version": "assessment.comparison.v1",
+    "structure": "direct",
+    "candidate": {
+      "executor_id": "treatment",
+      "fingerprint": "11ac98cc6210ba853bf33e023005ad06ffc035ab13425782025ac9dfe137441b",
+      "dependencies": {},
+      "host_config": null
+    },
+    "baseline": {
+      "executor_id": "control",
+      "fingerprint": "11ac98cc6210ba853bf33e023005ad06ffc035ab13425782025ac9dfe137441b",
+      "dependencies": {},
+      "host_config": null
+    },
+    "reference": null,
+    "primary_metric": "wall_time_ms",
+    "primary_condition": "fresh-worker"
+  },
+  "feature_combinations": [
+    {
+      "fixture": true
+    }
+  ],
+  "schema_version": "assessment.report.v2",
+  "report_id": "fit_76bbf4cc3fa041bbb5639878fb859604",
+  "plan_digest": "24a7c3f024beb928c89feed67521adcf8e6fe2d13b137560b9881a2cbc5437ef",
+  "outcome": "insufficient_evidence",
+  "qualification_passed": false,
+  "distinct_holdout_cases": 0,
+  "distinct_paired_cases": 0,
+  "correctness_failures": 0,
+  "execution_failures": 0,
+  "tested_variations": [],
+  "condition_comparisons": {
+    "fresh-worker": {
+      "paired_savings": {
+        "wall_time_ms": null
+      },
+      "savings_interval": {},
+      "paired_measurement_cases": {
+        "wall_time_ms": 0
+      },
+      "break_even_uses": {
+        "wall_time_ms": null
+      }
+    }
+  },
+  "measured_usage": {
+    "campaign_wall_time_ms": null,
+    "known_campaign_wall_time_ms": 0.0,
+    "known_overhead_wall_time_ms": 0.0,
+    "assessment_wall_time_ms": null,
+    "included_routing_overhead_ms": null,
+    "included_invocation_guard_ms": null
+  },
+  "measurement_coverage": {},
+  "paired_measurement_cases": {
+    "wall_time_ms": 0
+  },
+  "paired_savings": {
+    "wall_time_ms": null
+  },
+  "savings_interval": {},
+  "break_even_uses": {
+    "wall_time_ms": null
+  },
+  "estimated_production_savings": {},
+  "campaign_digest": "2f9d909f7eca61def3f19dcc6040e1afecc2d6bbe5d740f49433d2a05cf64aec",
+  "operation_ledger_digest": "6cb721224ab5390f9ecbccc65894b965fe57d6344fbffd7d531f361644097e4b",
+  "host_runtime_digests": {},
+  "deterministic_reference_comparison": {},
+  "explanations": [
+    "Correctness counts distinct held-out cases; repetitions measure variability.",
+    "Latency includes routing and grading. The interval resamples template families and cases.",
+    "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+    "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+    "Comparison structure: direct; admission uses wall time under fresh-worker. Conditions are never pooled."
+  ],
+  "created_at": "2026-10-09T19:56:06.493250Z"
+}

@@ -1,0 +1,130 @@
+{
+  "comparison": {
+    "schema_version": "assessment.comparison.v1",
+    "structure": "direct",
+    "candidate": {
+      "executor_id": "treatment",
+      "fingerprint": "26e2e6f82372a24fbe93464076c9bd09a751ece525f12227f5be171eaddccde8",
+      "dependencies": {},
+      "host_config": null
+    },
+    "baseline": {
+      "executor_id": "control",
+      "fingerprint": "26e2e6f82372a24fbe93464076c9bd09a751ece525f12227f5be171eaddccde8",
+      "dependencies": {},
+      "host_config": null
+    },
+    "reference": null,
+    "primary_metric": "wall_time_ms",
+    "primary_condition": "fresh-worker"
+  },
+  "feature_combinations": [
+    {
+      "fixture": true
+    }
+  ],
+  "schema_version": "assessment.report.v2",
+  "report_id": "fit_727401ae71ce40169d852c9e8ab0e4eb",
+  "plan_digest": "b7b85e29d210d426aec3108dc0f0320d6ba8a67499f9933c3113577dbeadc7de",
+  "outcome": "insufficient_evidence",
+  "qualification_passed": false,
+  "distinct_holdout_cases": 1,
+  "distinct_paired_cases": 0,
+  "correctness_failures": 0,
+  "execution_failures": 1,
+  "tested_variations": [
+    "trivial-edit"
+  ],
+  "condition_comparisons": {
+    "fresh-worker": {
+      "paired_savings": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null
+      },
+      "savings_interval": {},
+      "paired_measurement_cases": {
+        "wall_time_ms": 0,
+        "local.cpu_ms": 0,
+        "local.gpu_ms": 0,
+        "local.memory_mb_seconds": 0,
+        "local.network_bytes": 0
+      },
+      "break_even_uses": {
+        "wall_time_ms": null,
+        "local.cpu_ms": null,
+        "local.gpu_ms": null,
+        "local.memory_mb_seconds": null,
+        "local.network_bytes": null
+      }
+    }
+  },
+  "measured_usage": {
+    "campaign_wall_time_ms": null,
+    "known_campaign_wall_time_ms": 0.0,
+    "known_overhead_wall_time_ms": 0.0,
+    "assessment_wall_time_ms": null,
+    "included_routing_overhead_ms": null,
+    "included_invocation_guard_ms": null,
+    "known_campaign_subtotal.local.cpu_ms": null,
+    "campaign_total.local.cpu_ms": null,
+    "known_overhead_subtotal.local.cpu_ms": null,
+    "assessment_total.local.cpu_ms": null,
+    "known_campaign_subtotal.local.gpu_ms": null,
+    "campaign_total.local.gpu_ms": null,
+    "known_overhead_subtotal.local.gpu_ms": null,
+    "assessment_total.local.gpu_ms": null,
+    "known_campaign_subtotal.local.memory_mb_seconds": null,
+    "campaign_total.local.memory_mb_seconds": null,
+    "known_overhead_subtotal.local.memory_mb_seconds": null,
+    "assessment_total.local.memory_mb_seconds": null,
+    "known_campaign_subtotal.local.network_bytes": null,
+    "campaign_total.local.network_bytes": null,
+    "known_overhead_subtotal.local.network_bytes": null,
+    "assessment_total.local.network_bytes": null
+  },
+  "measurement_coverage": {
+    "local.cpu_ms": "0/1",
+    "local.gpu_ms": "0/1",
+    "local.memory_mb_seconds": "0/1",
+    "local.network_bytes": "0/1"
+  },
+  "paired_measurement_cases": {
+    "wall_time_ms": 0,
+    "local.cpu_ms": 0,
+    "local.gpu_ms": 0,
+    "local.memory_mb_seconds": 0,
+    "local.network_bytes": 0
+  },
+  "paired_savings": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null
+  },
+  "savings_interval": {},
+  "break_even_uses": {
+    "wall_time_ms": null,
+    "local.cpu_ms": null,
+    "local.gpu_ms": null,
+    "local.memory_mb_seconds": null,
+    "local.network_bytes": null
+  },
+  "estimated_production_savings": {},
+  "campaign_digest": "b196a5049ef7d4d03167dc53ff4ebd6b671127241a6a6e70587d63072f58b536",
+  "operation_ledger_digest": "b6fda94f58227a10d7c473398e428f9b796186d1090d45adbc7ddb8bb53ab825",
+  "host_runtime_digests": {},
+  "deterministic_reference_comparison": {},
+  "explanations": [
+    "Correctness counts distinct held-out cases; repetitions measure variability.",
+    "Latency includes routing and grading. The interval resamples template families and cases.",
+    "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+    "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+    "Comparison structure: direct; admission uses wall time under fresh-worker. Conditions are never pooled.",
+    "Execution or environment failures are separate from incorrect output; no correctness conclusion is drawn from a missing result."
+  ],
+  "created_at": "2026-10-09T19:54:54.193485Z"
+}

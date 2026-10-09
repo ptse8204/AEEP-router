@@ -1,0 +1,73 @@
+{
+  "schema": "aeep.toolkit.descriptive-summary.v1",
+  "evidence_sha256": "864aa67c5acc6d9dba627a3ee6384e71e6ec053b13fe4f92485b10a7fecbc765",
+  "outcome": "NOT_ASSESSED",
+  "cohorts": [],
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "aed44be8219243c854401dd38de0953a279743d0",
+    "artifact_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored synthetic fixture; local commit, not a published dataset."
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "agent-skill-eval.controlled-fixture",
+    "implementation_sha256": "43c2fea8090a4b4793afd88357229be75e24d4c902b3325e6d4bd3968a304c46",
+    "hosts": [
+      "fake"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": true,
+    "telemetry": [],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "limitations": [
+    "Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned insufficient_evidence. No model measurements are supplied.",
+    "Execution stopped. Missing results and unknown grades are not successes; incurred and unresolved operations remain in the ledger. No retry was performed.",
+    "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
+    "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
+    "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
+    "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+    "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
+    "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit."
+  ],
+  "comparison": {
+    "schema_version": "aeep.toolkit.comparison.v1",
+    "evidence_bundle_ref": "8d4cae7d35e9716ce8def004efb5b0be4e48b930f221105dcd70fbb1fee1b897",
+    "plan_ref": "24a7c3f024beb928c89feed67521adcf8e6fe2d13b137560b9881a2cbc5437ef",
+    "outcome": "NOT_ASSESSED",
+    "evidence_kind": "synthetic",
+    "analysis_ref": "324600ca07991e752759e3a575762f2479fb7fe15a9f78285bda6340ffb88db3",
+    "limitations": [
+      "Scripted engineering trials cannot establish real candidate value.",
+      "Existing qualification and paired-case thresholds remain unchanged."
+    ]
+  },
+  "comparison_ref": "e9ef538a1c9319355f236edba391dc1164f86afc94e9071b71759c5bdc2a577c",
+  "reviewed_analysis": {
+    "plan_ref": "24a7c3f024beb928c89feed67521adcf8e6fe2d13b137560b9881a2cbc5437ef",
+    "analysis_ref": "324600ca07991e752759e3a575762f2479fb7fe15a9f78285bda6340ffb88db3",
+    "campaign_ref": "2f9d909f7eca61def3f19dcc6040e1afecc2d6bbe5d740f49433d2a05cf64aec",
+    "bundle_ref": "8d4cae7d35e9716ce8def004efb5b0be4e48b930f221105dcd70fbb1fee1b897",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "minimum_holdout_cases": 100,
+    "minimum_paired_cases": 20,
+    "expected_trial_positions": 2,
+    "matched_receipts": 0,
+    "missing_trial_positions": 2,
+    "unresolved_operations": 1,
+    "worker_operation_seconds_known": 0,
+    "worker_operations_measured": 0,
+    "worker_operations_reserved": 1,
+    "model_tokens": null,
+    "model_wall_seconds": null,
+    "actual_cash": null,
+    "cost_per_verified_success": null,
+    "recurring_fee_break_even": null
+  }
+}

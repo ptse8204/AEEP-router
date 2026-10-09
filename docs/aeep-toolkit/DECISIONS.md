@@ -487,3 +487,41 @@ existing verifier; no new inference engine is needed. Synthetic runs remain
 inconclusive about real value, and a run with no observed trial is not assessed.
 The readable report must show this scope explicitly. Keep prior artifacts valid;
 new exports require the additional canonical comparison record and digest check.
+
+## D40 — Select the existing AEEP fallback for the first managed-model adapter
+
+The pinned agent-skill-eval 0.7.0 Codex harness was exercised without running
+Codex: empty events, a completion without usage, and partial usage all produced
+zero output tokens. Its default command inherits the caller environment and
+uses workspace-write, with no paired managed-worker binding. Exact parser and
+command-builder observations are in `c04/codex-harness-contract`. These are
+reproduced contract gaps, not an observed credential leak or a failed model call.
+
+Keep the working upstream scripted adapter. Select the plan's explicit AEEP
+BenchmarkRunner/AssessmentService fallback for the first managed-model adapter.
+Those existing services already own pre-trial identity, boundary verification,
+reservation, canonical events, grading and uncertain-operation recovery. A thin
+adapter can expose their reviewed plans and evidence without duplicating those
+controls in a second runner. This decision precedes any V2 live campaign; no
+campaign has switched engines after a result. Revisit the upstream managed path
+when an independently qualified shim or upstream change supplies these contracts.
+
+The fallback must not copy grants or reset allowances. It can run only an existing
+reviewed job through `AssessmentService.run`, preserve every canonical failure
+and cost, and label missing normalization fields explicitly. Source association
+must be reviewed before execution. It does not grant protected sign-in, model
+spend, remote disclosure or automatic admission. No architecture choice is pending.
+
+## D41 — Preserve missing fields in the existing App Server usage path
+
+Follow-up review found a related legacy bug: `_token_usage` fills absent fields
+with zero, then `turn_accounting` labels that record complete. Repair this before
+qualifying the D40 fallback. Keep only supplied finite non-negative integers;
+missing fields must produce partial authoritative evidence. The legacy resource
+vector has numeric defaults, so preserve its wire contract and identify supplied
+fields explicitly in sanitized receipt metadata. Toolkit normalization must use
+that field list and evidence completeness, never treat compatibility defaults
+as observations. Retain supplied counts. Use the existing partial-evidence contract, without rewriting old
+records, widening worker access or adding a new accounting service. Exact source
+pins distinguish the correction from historical receipts. Native conformance and
+a live campaign remain required after implementation.

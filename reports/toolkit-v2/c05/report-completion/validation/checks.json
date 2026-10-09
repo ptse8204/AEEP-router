@@ -1,0 +1,139 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 1.75,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.06,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.8,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 584.14,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/03.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 873.87,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/04.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.3,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/05.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/tmp/aeep-toolkit-d37-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 1.72,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/06.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_critical_coverage.py",
+      "/tmp/aeep-toolkit-d37-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/07.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_coverage.py",
+      "/tmp/aeep-toolkit-d37-coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/08.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "returncode": 0,
+    "seconds": 0.06,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/09.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.17,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/10.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "returncode": 0,
+    "seconds": 0.29,
+    "log": "reports/toolkit-v2/c05/report-completion/validation/11.log"
+  }
+]

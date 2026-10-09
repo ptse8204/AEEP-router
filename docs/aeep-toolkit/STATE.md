@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: 'f4e66cd'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c06/offline-journey/validation-final/checks.json'
-last_check_result: '1444 passed, 21 skipped in each core suite; 70 integration tests and 24 subtests; all 12 driver checks, both coverage gates and eight supplemental proof/build checks passed. Source stayed unchanged. D37-D39 now need their own verification.'
-next_action: 'Verify D37-D39 report/source bindings and the corrected native probe on the integrated source, retain actual replays, then continue general comparison and real-host integration. The prior stop was unfinished engineering; no architecture decision is pending.'
+last_verified_commit: '29e1599'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/report-completion/validation/checks.json'
+last_check_result: '1448 passed, 21 skipped in each core suite; all 12 driver checks and both coverage gates passed with unchanged source. Fresh 13-worker replay, nine tamper checks, four native command-probe workers, supplemental proofs and Node tests passed. No model trial ran.'
+next_action: 'Integrate and verify D41 missing-token correction, then connect the D40 AEEP fallback using existing assessment execution and authority. The prior stop was unfinished engineering; no architecture decision or user intervention is pending for this work.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -919,3 +919,46 @@ D39 draft failed because the legacy store accepts its own model base; it now
 uses the same `FixtureRecord` envelope already used for C02 bundles. The focused
 drafts pass after that repair. Full checks and actual replays on the integrated
 source are next. No new package, service, live call or credential action is needed.
+
+### First managed-model backend selected after the upstream contract probe
+
+D40 selects the documented AEEP fallback for the first managed-model adapter.
+The installed upstream parser reproduced missing-usage-as-zero, and its command
+builder supplies no paired-worker binding. Agent-skill-eval remains the working
+scripted backend. No V2 live job has started or changed engine. Continue a thin
+adapter around the existing reviewed `AssessmentService.run`; do not recreate
+its execution or authorization logic. Preserve missing identity/usage and all
+failed or interrupted costs. The current D37-D39 full verification remains active
+under `/tmp/aeep-toolkit-d37-checks.py` (tool session 18102); develop the next
+adapter outside the frozen source until those checks complete.
+
+### Report replay and managed-parser correction in progress
+
+Source `29e1599` passed its ordinary core suite: 1,448 tests, 21 skips, in
+583.42 seconds. Coverage remains active under session 18102; do not mark it
+passed yet. The fresh retained/private/failed/interrupted reports verified,
+including nine tampering checks. All 13 scripted workers were removed. Four
+credential-free native workers exercised the corrected pair probe and sandbox
+inspection; both passed with cleanup. No model, sign-in or package action ran.
+The first integrated probe command omitted the repository root from PYTHONPATH
+and failed before any worker launch; the corrected command used `src:.`.
+
+D41 drafts are in `/tmp/aeep-toolkit-managed-adapter`. Thirteen new parser tests
+and the existing related checks pass together: 49 tests, including a completed
+fake App Server response with missing usage and a malformed later usage event.
+These are draft protocol fixtures, not a native/model result. The draft preserves
+the legacy resource vector and uses partial accounting plus observed-field
+metadata to prevent numeric defaults from becoming measurements. It has not been
+integrated. Complete the current source-bound validation first, then integrate
+D41 and continue the D40 adapter. No new intervention is required for that work.
+
+### D37-D39 full verification complete
+
+Source `29e1599` passed all 12 driver commands, both branch-coverage gates,
+1,448 tests and 21 skips in each core run. Coverage pytest took 872.54 seconds;
+the source-stability record confirms no executable source changed. The earlier
+active-session notes are now historical. Replay, tampering, privacy and cleanup
+checks passed, as did the native command probes and supplemental checks.
+D41's expanded outside-checkout draft passes 53 related tests, including missing
+final usage and observed counts without a resolved model. Integrate next; these
+protocol fixtures are not live model evidence.

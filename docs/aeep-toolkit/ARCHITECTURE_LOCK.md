@@ -115,8 +115,8 @@ conformance and full comparison analysis remain unfinished.
 
 The [offline journey](../../examples/toolkit_offline/README.md) records actual
 upstream scheduling/grading, six individual workers and a report. A second run
-checks default content privacy. Error reporting and general comparison analysis
-are the next implementation work. Real-host qualification and a separately
+checks default content privacy. Partial failure reports now retain charges and unresolved operations. General
+comparison analysis and managed-model normalization remain implementation work. Real-host qualification and a separately
 authorized live study follow; synthetic results cannot establish plugin benefit.
 
 ## Withdrawn proposal
@@ -140,3 +140,13 @@ validation and controlled-worker integration that the acceptance gates require.
 External execution needs the exact reviewed scope. Fixture success will not
 qualify host isolation, establish model savings or close C07. Broad internal
 refactoring is not a prerequisite for preparing or reviewing this spike.
+
+## First managed-model backend: recorded fallback
+
+D40 selects the existing AEEP AssessmentService/BenchmarkRunner for the first
+managed-model adapter after executable checks reproduced upstream missing-usage
+and worker-binding gaps. The actual agent-skill-eval scripted integration remains
+available. The fallback reuses existing controlled Codex execution, grading,
+reservations and receipts; it does not add a runner or new infrastructure.
+A follow-up audit found a related partial-usage bug in AEEP's App Server adapter,
+which D41 must fix before qualification. No V2 live comparison has started.

@@ -4077,3 +4077,15 @@ credential-free native probe also needed a missing template substitution; its
 corrected copy passed, and the production correction is now integrated. Full
 verification and source-bound replays for these new bytes are next. V2 live
 conformance/value, complete comparison reporting and release remain open.
+
+### Toolkit V2 report/source binding verification (2026-10-09)
+
+Toolkit branch source `29e1599` passed both full core suites (1,448 passed,
+21 skipped), both coverage gates, schemas, Ruff, mypy and assessment policy.
+Evidence: `reports/toolkit-v2/c05/report-completion/validation/checks.json`.
+The new scripted replay used 13 disposable workers with confirmed cleanup and
+nine tamper checks; four native offline command-probe workers also cleaned up.
+No model turn, authentication action or release occurred. The installed upstream
+Codex parser defaults absent usage to zero; D40 selects the existing AEEP
+fallback for the first managed-model adapter. Its own missing-field correction
+(D41) is still a draft. Engineering remains eligible without user intervention.
