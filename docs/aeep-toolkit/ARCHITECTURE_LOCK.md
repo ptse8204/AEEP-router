@@ -50,9 +50,9 @@ the target stack rather than completed features.
 |---|---|---|
 | User interface | Local Python CLI; Pydantic for validated inputs | AEEP connects candidate intake, preview, evaluation and reporting. |
 | Scripted evaluation | agent-skill-eval 0.7.0, source `59de161f657b82bfaf8f6abe83dfff38552deb21` | Connected upstream scheduler and graders dispatch fixed trials into separate AEEP workers. No model-value claim. |
-| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. Full verification and live conformance remain open. |
+| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. Software verification on `40a8b7a` passed; subsequent analysis corrections are under verification. Authenticated V2 conformance remains open. |
 | Actual agent | Codex first, using existing host integration | Preserve the normal tools in both arms. Host/model versions and settings must match. |
-| Execution boundary | Docker and existing AEEP managed-worker/assessment-runtime assets | Separate control and treatment workers; protect grading inputs. External-harness dispatch integration must be proven. |
+| Execution boundary | Docker and existing AEEP managed-worker/assessment-runtime assets | Separate control and treatment workers protect grading inputs. Actual scripted upstream dispatch and cleanup are recorded; native command inspection is separate from live conformance. |
 | Review and accounting | Existing AEEP assessment definitions, finite allowances and receipts | Reuse current authority and recovery behavior; preserve historical records. |
 | Evidence storage | Existing SQLite receipt store and content-addressed local artifacts | Normalize upstream evidence with source references; task contents remain transient by default. |
 | Comparison | AEEP evidence checks and task-family analysis, reusing existing analysis helpers where applicable | Match conditions, handle missing measurements, compare verified success/time/tokens and supported costs. This is the product-specific work. |
@@ -100,25 +100,33 @@ capabilities and evidence. Integration must preserve each engine's actual graph
 semantics; unsupported behavior stays blocked. No duplicate graph engine,
 optimizer, tracing server, registry service or payout system is part of this build.
 
-## What exists and what is being built next
+## What works now
 
-The independent contracts, partial non-mutating setup preview and an executable
-[development stack](../../integrations/toolkit/README.md) exist. The development
-stack uses the actual pinned external package, verifies its fixed synthetic trials
-and writes the [local showcase](../../reports/toolkit-v2/stack-showcase/index.html).
-The fixed synthetic batch now uses the existing command executor, selection
-decision, journal and receipt store, and exports C02 evidence. A subsequent controlled fixture bridge now dispatches each upstream fake-harness
-trial into a separate existing Docker worker, retaining individual reservations,
-receipts and durable events. Selected local wheel closures can be installed and
-removed with conflict checks. The configured offline adapter now accepts a captured candidate and bounded suite.
-It completed the three-case synthetic candidate-to-report journey. Capable-agent
-conformance and full comparison analysis remain unfinished.
+The [offline journey](../../examples/toolkit_offline/README.md) accepts captured
+candidate bytes, previews the exact trial plan, dispatches the real
+agent-skill-eval scheduler into six separate workers, verifies canonical receipts
+and writes HTML/Markdown. The unified `aeep-toolkit eval scripted` entry point
+completed that journey with default task-output retention disabled. The separate
+Router-disabled replay proves this path does not construct Router.
 
-The [offline journey](../../examples/toolkit_offline/README.md) records actual
-upstream scheduling/grading, six individual workers and a report. A second run
-checks default content privacy. Partial failure reports now retain charges and unresolved operations. General
-comparison analysis and managed-model normalization remain implementation work. Real-host qualification and a separately
-authorized live study follow; synthetic results cannot establish plugin benefit.
+The [managed bridge](MANAGED_EVALUATION.md) connects existing reviewed skill plans
+to AssessmentService and BenchmarkRunner. It preserves their grants, workers,
+grading and accounting, and reproduces canonical statistics before exporting
+readable intervals, guardrails, costs and coverage. This implementation has
+synthetic regression evidence and zero-turn native worker checks; it has no new
+V2 authenticated-model comparison or efficacy result.
+
+The general private installer handles selected, hash-locked wheel closures and
+removes only an unchanged owned environment. The complete 33-wheel AEEP package
+closure has passed artifact/dependency inspection; its bounded installation test
+awaits the exact operator review. The separate 24-wheel agent-skill-eval runtime
+already has recorded installation and fixture-execution evidence.
+
+Existing registry readers and OpenTelemetry instrumentation remain the optional
+discovery and telemetry foundations. A local discovery replay confirms inert
+results, recorded provenance and unavailable/unauthorized-source rejection. Waza,
+Cisco scanning, hosted telemetry and external workflow integrations still need
+their own executable qualification. Catalog presence is not that qualification.
 
 ## Withdrawn proposal
 
@@ -132,15 +140,12 @@ records coupling, not a justification for a new execution architecture.
 
 ## Next implementation proof
 
-The bounded engineering spike now runs agent-skill-eval's existing fake harness
-and deterministic graders through the consolidated development stack. Inspect its actual control/treatment
-artifacts, optional exposure, failures and missing telemetry before writing the
-existing adapter further. Retain upstream orchestration where it works. Add only the AEEP
-validation and controlled-worker integration that the acceptance gates require.
-
-External execution needs the exact reviewed scope. Fixture success will not
-qualify host isolation, establish model savings or close C07. Broad internal
-refactoring is not a prerequisite for preparing or reviewing this spike.
+Finish source-bound verification of the analysis repair and the reviewed private
+package installation/removal. Then bind the exact live study to the existing
+canonical grant and current authenticated worker conformance. Routine finite
+scope/budget amendments are already delegated; do not invent a new architecture
+or budget-approval blocker. Credentials, wider disclosure, cash and release retain
+their own boundaries. Independent optional-extension work continues meanwhile.
 
 ## First managed-model backend: recorded fallback
 
@@ -150,4 +155,4 @@ and worker-binding gaps. The actual agent-skill-eval scripted integration remain
 available. The fallback reuses existing controlled Codex execution, grading,
 reservations and receipts; it does not add a runner or new infrastructure.
 A follow-up audit found a related partial-usage bug in AEEP's App Server adapter,
-which D41 must fix before qualification. No V2 live comparison has started.
+which D41 corrected and regression-tested. No V2 live comparison has started.

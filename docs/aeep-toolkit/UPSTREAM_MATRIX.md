@@ -237,3 +237,20 @@ first managed-model adapter. Agent-skill-eval remains the working scripted
 backend. No live campaign has begun or changed engine. AEEP's existing App Server
 parser also needs D41's partial-usage correction before qualification; fallback
 selection is not a conformance PASS. The managed adapter is integrated and passed full software checks on `40a8b7a`. It reuses the existing service, grants and workers; four fresh zero-turn native command workers passed. Actual V2 managed-model qualification remains open.
+
+## October 9 executable and source follow-up
+
+- Agent-skill-eval's explicit CLI completed six fresh synthetic trials on source
+  `5386064`, with verified receipts, default content minimization and exact worker
+  cleanup (`reports/toolkit-v2/c06/verified-journey`). Native Codex remains the D40
+  fallback path; these results do not change upstream native qualification.
+- Existing DiscoveryService passed an inert local replay with source authority
+  enforced (`reports/toolkit-v2/c08/local-discovery`). Cisco remains source-only.
+- Waza release 0.38.9 points to `e534d149d89ae77ea158469fb4d2003804b2ee76`,
+  distinct from the C01 source pin. The four inspected execution/CLI source files
+  match byte-for-byte across those commits. Its exact Darwin/Linux arm64 archive
+  metadata is retained, but no binary was downloaded or executed; binary/source
+  correspondence and runtime qualification remain open (`c09/waza-review`).
+- Installed OpenTelemetry API 1.44.0 produced a non-recording span with no trace ID
+  in a fresh default process (`c10/telemetry-audit`). This is not an exporter audit
+  or evidence that all measurements are available.

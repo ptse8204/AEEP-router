@@ -1,0 +1,247 @@
+--- a/src/aeep_toolkit/reporting.py
++++ b/src/aeep_toolkit/reporting.py
+@@ -11,7 +11,7 @@
+ from statistics import mean, median
+ from typing import Any
+ 
+-from .models import EvaluationRun, EvidenceBundle, TokenObservation
++from .models import DeveloperIdentity, EvaluationRun, EvidenceBundle, TokenObservation
+ 
+ COHORT_FIELDS = (
+     "plan_ref", "candidate_sha256", "adapter_sha256", "host", "host_version",
+@@ -336,3 +336,48 @@
+             'verified_successes_per_fee_period':int((amount/difference).to_integral_value(rounding=ROUND_CEILING)),
+             'period':cash['fee_scenario']['period'],
+             'interpretation':'Scenario using observed cost per verified success, including failed-run costs. Assumes the same future task mix and success rates; not a confidence-supported forecast. Excludes assessment overhead.'}
++
++def portable_summary(bundle: EvidenceBundle, *, disclose_source: bool = False,
++                     developer: DeveloperIdentity | None = None) -> dict[str, Any]:
++    """Prepare minimized local sharing bytes; this neither publishes nor authenticates."""
++    summary = summarize(bundle)
++    if developer is not None and (not disclose_source or developer.source != bundle.candidate):
++        raise ValueError('developer assertion requires the exact disclosed candidate source')
++    cohorts = []
++    for index, cohort in enumerate(summary['cohorts'], 1):
++        binding = json.dumps(cohort['binding'], sort_keys=True, separators=(',', ':'), allow_nan=False)
++        families = []
++        for number, family in enumerate(cohort['families'], 1):
++            families.append({
++                'family': number,
++                **{key: family[key] for key in ('observed_tasks', 'observed_pairs', 'graded_pairs',
++                    'success_rate_treatment_minus_control', 'metric_differences')},
++                'rejected_tasks': len(family['rejected_tasks']),
++                'arms': {arm: {key: values[key] for key in ('runs', 'execution', 'verification',
++                         'candidate_invoked', 'metrics')} for arm, values in family['arms'].items()},
++            })
++        cohorts.append({'cohort': index, 'scope_sha256': hashlib.sha256(binding.encode()).hexdigest(),
++                        'evidence_kind': cohort['binding']['evidence_kind'], 'families': families})
++    document = {
++        'schema': 'aeep.toolkit.portable-summary.v1',
++        'outcome': 'NOT_ASSESSED', 'trust': 'unverified_supplied_records',
++        'source_bundle_sha256': summary['evidence_sha256'],
++        'candidate_sha256': bundle.candidate.artifact_sha256,
++        'adapter_sha256': bundle.adapter.implementation_sha256,
++        'cohorts': cohorts,
++        'source': bundle.candidate.model_dump(mode='json') if disclose_source else None,
++        'developer': ({'assertion': developer.model_dump(mode='json'),
++                       'status': 'operator_supplied_unverified',
++                       'notice': 'Ownership and destination are unverified. A donation is optional support; a purchase link is not price or payment authority.'}
++                      if developer else None),
++        'publication_performed': False,
++        'limitations': [
++            'Prepared locally for review; no publication or independent reproduction is established.',
++            'Task labels, prompts, paths, run IDs, receipt references and host/model names are omitted. Digests and aggregate measurements may still identify a study; this is not guaranteed anonymity.',
++            'Scope hashes retain cohort separation but require the private source records to interpret applicability or reproduce results.',
++            'Synthetic and replay results cannot establish real-host benefit. Unknown measurements remain unknown.',
++            'Any disclosed source or developer metadata is an explicit supplied assertion, not verified ownership or authorization to pay.',
++        ],
++    }
++    payload = json.dumps(document, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
++    return {'content_sha256': hashlib.sha256(payload).hexdigest(), 'document': document}
+--- a/src/aeep_toolkit/cli.py
++++ b/src/aeep_toolkit/cli.py
+@@ -94,6 +94,10 @@
+     report.add_argument('--accounting', type=Path, help='Digest-keyed receipt records; contents are not authenticated by this command')
+     report.add_argument('--currency', default='USD')
+     report.add_argument('--recurring-fee', type=Path, help='Explicit decimal amount/period/source_ref scenario; not an incurred charge')
++    portable = sub.add_parser('export-preview', help='Prepare a minimized local sharing document; never publishes')
++    portable.add_argument('--evidence', type=Path, required=True)
++    portable.add_argument('--disclose-source', action='store_true', help='Include supplied public source metadata in the preview')
++    portable.add_argument('--developer', type=Path, help='Exact-source developer assertion; requires --disclose-source and remains unverified')
+     install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
+     install_plan.add_argument('--preview', type=Path, required=True)
+     install_plan.add_argument('--policy', type=Path, required=True)
+@@ -143,6 +147,14 @@
+                 return 0
+             except ConfigurationError as error:
+                 raise ValueError('installation safety check failed') from error
++        if args.command == 'export-preview':
++            from .models import DeveloperIdentity
++            from .reporting import portable_summary
++            exported = portable_summary(EvidenceBundle.model_validate(read_json(args.evidence)),
++                                      disclose_source=args.disclose_source,
++                                      developer=DeveloperIdentity.model_validate(read_json(args.developer)) if args.developer else None)
++            print(json.dumps(exported, indent=2, allow_nan=False))
++            return 0
+         if args.command == 'report':
+             from .reporting import render, summarize
+             print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence)),
+@@ -159,7 +171,7 @@
+             data = {'profile': PROFILES[args.profile]['name'], 'selected': [],
+                     'catalog': [item for item in known if item['role'] in roles],
+                     'provided_manifests': [item.model_dump(mode='json') for item in registry.extensions if item.role in roles],
+-                    'notice': 'Source-reviewed catalog only. Installed/enabled state is unknown; artifact manifests and runtime qualification remain required.'}
++                    'notice': 'Catalog entries describe their recorded integration scope. Installed/enabled state is unknown; exact installation manifests and applicable runtime qualification remain required.'}
+             print(json.dumps(data, indent=2))
+             return 0
+         observations = tuple(InstalledObservation.model_validate(item) for item in read_json(args.observations)) if args.observations else ()
+--- a/src/aeep_toolkit/catalog.json
++++ b/src/aeep_toolkit/catalog.json
+@@ -157,9 +157,12 @@
+     "role": "evaluator",
+     "repository": "https://github.com/tardigrde/agent-skill-eval",
+     "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+-    "status": "blocked",
+-    "artifact_sha256": null,
+-    "reason": "Source inspection only; no complete artifact/dependency lock or V2 runtime qualification."
++    "status": "experimental",
++    "artifact_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
++    "reason": "Pinned 0.7.0 scripted integration ran separate controlled fixture workers. Native Codex launch/token contract is unqualified; D40 selects the existing AEEP fallback for managed-model evaluation.",
++    "installed": null,
++    "enabled": null,
++    "qualification": "scripted_engineering_only"
+   },
+   {
+     "id": "aeep-router",
+@@ -174,9 +177,12 @@
+     "id": "aeep-evaluator",
+     "role": "evaluator",
+     "repository": "https://github.com/ptse8204/AEEP-router",
+-    "source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+-    "status": "blocked",
++    "source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
++    "status": "experimental",
+     "artifact_sha256": null,
+-    "reason": "Existing controlled runner is the fallback candidate; V2 adapter conformance and complete artifact manifest remain required."
++    "reason": "Managed skill adapter and canonical reports reuse AssessmentService/BenchmarkRunner. Current authenticated worker conformance and V2 live comparison remain unverified.",
++    "installed": null,
++    "enabled": null,
++    "qualification": "software_tests_only"
+   }
+ ]
+--- a/tests/test_toolkit_installation.py
++++ b/tests/test_toolkit_installation.py
+@@ -164,7 +164,11 @@
+     output = json.loads(capsys.readouterr().out)
+     assert len(output['catalog']) == 20
+     assert output['selected'] == []
+-    assert all(item['status'] == 'blocked' and item['artifact_sha256'] is None for item in output['catalog'])
++    entries = {item['id']: item for item in output['catalog']}
++    assert entries['agent-skill-eval']['status'] == 'experimental'
++    assert entries['agent-skill-eval']['qualification'] == 'scripted_engineering_only'
++    assert entries['aeep-evaluator']['qualification'] == 'software_tests_only'
++    assert all(item['status'] == 'blocked' for item in output['catalog'] if item['id'] not in {'agent-skill-eval', 'aeep-evaluator'})
+     assert all(len(item['source_revision']) == 40 for item in output['catalog'])
+ 
+ 
+--- /dev/null
++++ b/tests/test_toolkit_portable.py
+@@ -0,0 +1,98 @@
++"""Synthetic sharing checks, not independent evidence or developer verification."""
++
++import hashlib
++import json
++
++import pytest
++from aeep_toolkit.models import DeveloperIdentity
++from aeep_toolkit.reporting import portable_summary
++from test_toolkit_reporting import bundle
++
++
++def test_portable_minimizes_private_names_and_keeps_measurement_unknowns():
++    value = bundle(task_family="PRIVATE_PROJECT", host_version="PRIVATE_HOST")
++    result = portable_summary(value)
++    text = json.dumps(result)
++    assert "PRIVATE_" not in text and "example.org" not in text
++    assert result["document"]["source"] is None
++    assert result["document"]["trust"] == "unverified_supplied_records"
++    assert not result["document"]["publication_performed"]
++    assert all(
++        f["arms"]["treatment"]["metrics"]["tokens"]["complete_total"] is None
++        for c in result["document"]["cohorts"]
++        for f in c["families"]
++    )
++    assert (
++        result["content_sha256"]
++        == hashlib.sha256(
++            json.dumps(
++                result["document"],
++                sort_keys=True,
++                separators=(",", ":"),
++                allow_nan=False,
++            ).encode()
++        ).hexdigest()
++    )
++    assert portable_summary(value) == result
++
++
++def test_support_assertion_requires_explicit_source_disclosure_and_exact_binding():
++    value = bundle()
++    developer = DeveloperIdentity(
++        source=value.candidate,
++        identity="fixture",
++        assertion_ref="f" * 64,
++        support_url="https://github.com/sponsors/fixture",
++        support_kind="donation",
++    )
++    with pytest.raises(ValueError):
++        portable_summary(value, developer=developer)
++    result = portable_summary(value, developer=developer, disclose_source=True)
++    assert result["document"]["developer"]["status"] == "operator_supplied_unverified"
++    assert result["document"]["developer"]["assertion"]["support_kind"] == "donation"
++    developer.source = developer.source.model_copy(update={"artifact_sha256": "f" * 64})
++    with pytest.raises(ValueError):
++        portable_summary(value, developer=developer, disclose_source=True)
++
++
++def test_minimized_export_preserves_incompatible_cohorts():
++    result = portable_summary(bundle(model="different"))["document"]
++    assert len(result["cohorts"]) == 2
++    assert len({c["scope_sha256"] for c in result["cohorts"]}) == 2
++    assert all(c["families"][0]["observed_pairs"] == 0 for c in result["cohorts"])
++
++
++def test_cli_sharing_preview_is_local_and_does_not_mutate_inputs(
++    tmp_path, capsys, monkeypatch
++):
++    import socket
++    import subprocess
++
++    from aeep_toolkit.cli import main
++
++    path = tmp_path / "evidence.json"
++    path.write_text(bundle().model_dump_json())
++    before = path.read_bytes()
++
++    def denied(*args, **kwargs):
++        raise AssertionError("preview executed or accessed network")
++
++    monkeypatch.setattr(socket, "socket", denied)
++    monkeypatch.setattr(subprocess, "Popen", denied)
++    assert main(["export-preview", "--evidence", str(path)]) == 0
++    output = json.loads(capsys.readouterr().out)
++    assert output == portable_summary(bundle())
++    assert path.read_bytes() == before and list(tmp_path.iterdir()) == [path]
++
++
++def test_catalog_distinguishes_working_adapters_from_unqualified_options(capsys):
++    from aeep_toolkit.cli import main
++
++    assert main(["list", "full"]) == 0
++    value = json.loads(capsys.readouterr().out)
++    entries = {item["id"]: item for item in value["catalog"]}
++    assert value["selected"] == []
++    assert entries["agent-skill-eval"]["qualification"] == "scripted_engineering_only"
++    assert entries["agent-skill-eval"]["installed"] is None
++    assert entries["aeep-evaluator"]["qualification"] == "software_tests_only"
++    assert entries["waza"]["status"] == "blocked"

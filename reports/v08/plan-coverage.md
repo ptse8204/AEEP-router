@@ -4142,3 +4142,18 @@ tests / 21 skips; coverage was deliberately interrupted, not passed. Replacement
 source-bound verification follows. Six unified CLI synthetic trials and exact-name
 cleanup passed. The 33-wheel package closure was inspected but not installed;
 see `../toolkit-v2/c06/package-installation`. Historical evidence is unchanged.
+
+V2 source `5386064` ordinary suite passed 1,527 tests / 21 skips; coverage remains
+active. The exact 33-wheel private installation review is awaiting operator response
+and does not block independent read-only work. Existing discovery and default
+OpenTelemetry probes are recorded under `../toolkit-v2/c08/local-discovery` and
+`../toolkit-v2/c10/telemetry-audit`. The C12 export prototype remains outside the
+checkout; four synthetic checks are not production or independent evidence.
+
+V2 source `5386064` now passed both full 1,527-test suites with 21 skips, 82%
+coverage, all required branch/quality/proof/build checks and 582 documentation
+links. Executable sources stayed unchanged. Twelve scripted and four native
+zero-turn workers passed with cleanup; live qualification remains open. Exact
+private installation approval remains pending. D48/D49 is the next safe code
+integration; the earlier stop was unfinished engineering, not an architecture
+decision or demonstrated budget shortage.

@@ -1,0 +1,24 @@
+{
+  "source_commit": "5386064",
+  "pair_passed": true,
+  "pair_elapsed_seconds": 5.7451483339536935,
+  "sandbox_inspection": "1 passed in 4.80s",
+  "commands": [
+    [
+      "python3",
+      "reports/toolkit-v2/c04/native-current/run.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "pytest",
+      "tests/test_v08_worker_inspection.py::test_real_offline_codex_inspection_uses_sandbox_without_credentials"
+    ]
+  ],
+  "environment": {
+    "PYTHONPATH": "src:.",
+    "AEEP_INSPECTION_FIXTURE_SPECS": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/v08/offline-inspection-fixture-specs.json"
+  },
+  "model_turns": 0,
+  "full_conformance": false
+}

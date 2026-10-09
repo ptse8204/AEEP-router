@@ -625,3 +625,30 @@ costs are finalized afterward. Require every reported numeric condition cost and
 all statistical fields to reproduce. Synthetic regressions exercise that actual
 cost-finalization sequence and reject altered numeric values. This finite test
 amendment uses the standing assessment delegation; it performs no live trial.
+
+## D48 — Prepare private portable summaries with existing report contracts
+
+Reuse the existing EvidenceBundle summary and DeveloperIdentity contract. A local
+`export-preview` can omit task labels, paths, host/model names, receipt references
+and run identifiers while retaining separate cohort hashes and aggregate unknowns.
+Content addressing proves byte identity only. The initial trust status remains
+unverified; no hash, supplied source or owner assertion proves independent review.
+Source/developer disclosure requires explicit selection and exact candidate binding.
+A supplied donation link is not a mandatory plugin fee or payment instruction.
+
+The prototype stays outside executable source during D47 validation. Four finite
+synthetic tests cover minimization, deterministic hashes, cohort separation,
+source mismatch and no network/process/write effects. Publication, authenticated
+developer identity and public reproducibility remain separate gates. No new
+hosting, attestation, identity or payment service is justified.
+
+## D49 — Correct stale catalog wording without inferring installation
+
+The static catalog still calls agent-skill-eval source-only despite its recorded
+scripted dispatch, and describes the implemented managed bridge as merely a
+candidate. The reviewed draft marks these integration scopes experimental, binds
+the known upstream wheel hash, and retains unknown installed/enabled state. Other
+unqualified external options remain blocked. Catalog metadata cannot activate an
+extension or replace its exact installation review. Update the old all-blocked
+fixture assertion when integrating; preserve the explicit unqualified native-host
+and live-evidence limitations. The draft remains outside source during validation.

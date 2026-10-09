@@ -1,0 +1,46 @@
+{
+  "source_revision": "774df00a4f04fb5d193548a2cf3f45470fe285bb",
+  "files": [
+    {
+      "path": "internal/execution/mock.go",
+      "url": "https://raw.githubusercontent.com/microsoft/waza/774df00a4f04fb5d193548a2cf3f45470fe285bb/internal/execution/mock.go",
+      "sha256": "22154d4a897552abaaa62a019d9241dfbcc9fe0ab466c0ee5730672586d9ce0a",
+      "bytes": 5102
+    },
+    {
+      "path": "internal/execution/engine.go",
+      "url": "https://raw.githubusercontent.com/microsoft/waza/774df00a4f04fb5d193548a2cf3f45470fe285bb/internal/execution/engine.go",
+      "sha256": "a65c1f8ef45c82238ebad2d58d53451faabab146b22fbc818421257c0bd7df8b",
+      "bytes": 10759
+    },
+    {
+      "path": "internal/execution/workspace.go",
+      "url": "https://raw.githubusercontent.com/microsoft/waza/774df00a4f04fb5d193548a2cf3f45470fe285bb/internal/execution/workspace.go",
+      "sha256": "19ec996b55eb415d2e4d3fdccd43739d92d34cfc1351f04aa473cb50a3bcff2e",
+      "bytes": 1350
+    },
+    {
+      "path": "cmd/waza/cmd_run.go",
+      "url": "https://raw.githubusercontent.com/microsoft/waza/774df00a4f04fb5d193548a2cf3f45470fe285bb/cmd/waza/cmd_run.go",
+      "sha256": "292bbc74cec15f017810b3cbb280a89bd41330dddf7bd1cd92c3feb4841954ed",
+      "bytes": 69646
+    },
+    {
+      "path": "internal/models/eval.go",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ],
+  "execution_performed": false,
+  "local_inspection_directory": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-waza-source-xtsrk9rv",
+  "findings": [
+    "Mock engine exists and returns no session usage; normalize model token/cash observations as unavailable.",
+    "Mock engine can clone configured Git resources; a bounded fixture must forbid them and enforce container network denial.",
+    "Ordinary run can upload outcomes or file issues when configured; private integration must not inherit project or user configuration.",
+    "The run path selects a MockEngine when the reviewed configuration engine type is mock; no implicit fallback from a model executor is acceptable."
+  ],
+  "remaining": [
+    "No Waza binary installed or executed.",
+    "Exact release binary/source association and complete runtime license/containment review pending.",
+    "No benchmark pack copied or qualified."
+  ]
+}

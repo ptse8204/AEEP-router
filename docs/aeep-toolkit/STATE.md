@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its corrected preflight passed both full suites and coverage gates. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. Captured-candidate synthetic dispatch now works. Capable Codex dispatch, complete comparison analysis and C06-C13 acceptance remain unfinished. No V2 live efficacy or release claim is established.
+**Status as of 2026-10-09:** C00-C03 retain recorded PASS. The actual agent-skill-eval scripted path now completes the candidate/preview/six-worker/verified-report journey. The managed fallback connects existing assessment execution and canonical analysis. D46-D47 correct explicit memory uncertainty and seeded analysis reproducibility; source `5386064` passed 1,527 ordinary tests with 21 skips, and the coverage suite also passed. The complete 33-wheel package installation review is prepared and pending operator response. Authenticated V2 trials, optional extension qualification and release gates remain open. Earlier stopping was unfinished engineering, not a pending architecture decision or demonstrated budget shortage.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,12 +25,14 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '40a8b7a'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c04/managed-adapter/validation/checks.json'
-last_check_result: '1493 passed, 21 skipped in both core suites; all 12 driver checks, both branch gates, eight supplemental proof/build checks and docs passed. Source unchanged. Four native zero-turn workers and six scripted Router-disabled workers passed; cleanup confirmed.'
-next_action: 'Verify integrated D46-D47 corrections; rebuild the own wheel and prepare the exact complete package-installation review. Retain the conclusion that earlier stopping was unfinished engineering, not missing architecture or permission.'
-blocked_actions: []
-missing_permissions: []
+last_verified_commit: '538606417ea93be6e82c431011c4f209a68ceb81'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/analysis-reproduction/validation/checks.json'
+last_check_result: '1527 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks and docs passed. Sources unchanged; 12 scripted and four native zero-turn workers passed with cleanup.'
+next_action: 'Integrate reviewed D48 portable-summary and D49 catalog corrections with tests; preserve the pending exact installation review and prepare native study scope under existing authority.'
+blocked_actions:
+  - 'New 33-wheel private AEEP installation test awaits the exact operator review; independent safe work continues.'
+missing_permissions:
+  - 'Pending installation review digest 092e19571b5471a01cc14983096ea67b9074ad963486e6423915e04f563d96cf; see c06/package-installation/review.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
@@ -1135,3 +1137,49 @@ attribute; both were corrected before that run. Ruff import/unused-variable
 findings were corrected; mypy passed 163 source files. Generated preview and runtime
 installation schemas were refreshed for the new explicit policy field. Full
 source-bound checks remain required.
+
+### Active source verification and independent preparation
+
+`5386064` ordinary pytest passed 1,527 tests with 21 skips and the existing
+Starlette/httpx warning in 622.98 seconds. Coverage is running under session
+92704, driver `/tmp/aeep-toolkit-d47-checks.py`; do not mark it passed yet.
+Executable source remains frozen. Eight supplemental checks run under session
+47641. The new private installation review is in
+`reports/toolkit-v2/c06/package-installation/review`; the operator question is
+pending. No new runtime was installed and no response is inferred from elapsed time.
+
+The existing DiscoveryService completed an inert local-catalog replay with no
+network or child processes; unconfigured and unauthorized sources failed closed
+and no assessment job/grant/admission was created. Evidence is in
+`c08/local-discovery`. The fresh-process OpenTelemetry check recorded no active
+span/exporter and a null trace ID (`c10/telemetry-audit`); it does not audit other
+applications' exporters. Waza source/binary metadata follow-up is under
+`c09/waza-review`; no binary was downloaded or run.
+
+A minimized sharing prototype in `/tmp/aeep-toolkit-next` passes four synthetic
+checks and mypy for its two changed files. Its local demo and exact draft hashes
+are in `c12/portable-preview`. It is not integrated or fully verified; source and
+developer disclosure are explicit and unverified. No actual developer identity or
+support destination has been authenticated. Integrate only reviewed `cli.py` and
+`reporting.py` changes plus tests, never the whole scratch package. A separate
+catalog draft corrects stale source-only wording for the working ASE adapter;
+its repository test still expects all entries blocked and needs deliberate update.
+
+### D46-D47 complete source-bound verification
+
+Source `5386064` passed both full suites: 1,527 tests and 21 skips each, with
+82% overall coverage. All 12 driver commands, both branch gates, eight
+supplemental proof/build checks and 582 documentation links passed. The source
+stability record is unchanged. Sessions 92704 and 47641 finished successfully;
+no validation remains active. Earlier interrupted coverage remains interrupted.
+
+Twelve current-source scripted workers completed two six-trial CLI journeys,
+including the Router-disabled replay; six receipts per journey verified and all
+exact worker names were removed. Four native zero-turn workers passed their
+bounded checks and cleanup. These establish software behavior, not authenticated
+worker conformance or live candidate benefit. The new 33-wheel installation
+review still awaits a response. No model call, sign-in or new installation ran.
+
+The next integration is D48/D49, whose out-of-checkout draft and six focused
+checks are retained in `c12/portable-preview`. Its source needs new verification;
+D47 evidence remains bound to its commit.

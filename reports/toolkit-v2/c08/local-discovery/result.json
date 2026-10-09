@@ -1,0 +1,84 @@
+{
+  "source_commit": "538606417ea93be6e82c431011c4f209a68ceb81",
+  "kind": "synthetic_local_discovery",
+  "working_directory": "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-discovery-proof-41fncp9n",
+  "result": {
+    "schema_version": "discovery.result.v1",
+    "discovery_id": "discovery_4863a84517f643d1b8bdf4b6df3ca3fc",
+    "created_at": "2026-10-09T21:34:30.662604Z",
+    "query_digest": "sha256:bf7f8fd935a3a5a846c5596ecedcf8443dc7e918e652e1e56f2d89c9a449626d",
+    "candidate_ids": [
+      "synthetic-skill"
+    ],
+    "candidates": [
+      {
+        "registry_candidate_id": "synthetic-skill",
+        "adapter_id": "fixture",
+        "name": "Synthetic CSV helper",
+        "description": "Untrusted fixture metadata",
+        "version": "1.0",
+        "tags": [],
+        "source_repository": null,
+        "package_locator": {
+          "kind": "https",
+          "value": "https://example.invalid/never-run.zip",
+          "subdirectory": null
+        },
+        "remote_endpoint": null,
+        "provenance": {
+          "entry": {
+            "type": "skill",
+            "verified": true
+          }
+        },
+        "marketplace_labels": {},
+        "retrieved_at": "2026-10-09T21:34:30.661801Z",
+        "raw_metadata_digest": "sha256:361ec021245c21f9a3bf923be0c9f995f7e1f365f8046aad8352bd81e390519c"
+      }
+    ],
+    "source_records": [
+      {
+        "schema_version": "discovery.source.v1",
+        "source_record_id": "discovery_source_416e1f8426aa453e809ea7e4cfb5a7c0",
+        "discovery_id": "discovery_4863a84517f643d1b8bdf4b6df3ca3fc",
+        "source_id": "local",
+        "adapter_id": "fixture",
+        "created_at": "2026-10-09T21:34:30.659582Z",
+        "query_digest": "sha256:bf7f8fd935a3a5a846c5596ecedcf8443dc7e918e652e1e56f2d89c9a449626d",
+        "status": "complete",
+        "candidate_ids": [
+          "synthetic-skill"
+        ],
+        "candidate_digests": [
+          "sha256:52f5f5e8a3cb3792ae967a531630177defcafb74d7ceca895ff098ddbc4610ff"
+        ],
+        "elapsed_ms": 2.760916016995907,
+        "cash_usd": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "warnings": []
+      }
+    ],
+    "elapsed_ms": 3.7293341010808945
+  },
+  "rejections": {
+    "unconfigured": "discovery source is not configured",
+    "remote-denied": "discovery source requires operator remote-query authority"
+  },
+  "assessment_counts": {
+    "assessment_jobs": 0,
+    "assessment_grants": 0,
+    "assessment_admissions": 0
+  },
+  "candidate_code_executed": false,
+  "network_or_child_process_calls": 0,
+  "source_hashes": {
+    "src/aeep/discovery.py": "c4f1cc934b8bb2d12a233407cf304083fe51a6585a17d378dd4e3253710f4e9e",
+    "src/aeep/discovery_service.py": "b79f1e1bee96190541314c3ccc9a79976c087ad9bbee62954b358e862996b431"
+  },
+  "limitations": [
+    "Not a remote registry conformance result.",
+    "Scanner is not installed or qualified.",
+    "Metadata claims do not authorize candidate installation."
+  ]
+}
