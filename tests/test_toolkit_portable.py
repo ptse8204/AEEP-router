@@ -4,9 +4,10 @@ import hashlib
 import json
 
 import pytest
+from test_toolkit_reporting import bundle
+
 from aeep_toolkit.models import DeveloperIdentity
 from aeep_toolkit.reporting import portable_summary
-from test_toolkit_reporting import bundle
 
 
 def test_portable_minimizes_private_names_and_keeps_measurement_unknowns():
