@@ -220,3 +220,22 @@ The finite regression review covers zero process/network/configuration effects,
 malicious metadata, missing distributions and exact lock/manifest binding under
 the existing test-definition delegation. This does not authorize another package
 installation or qualify a real host. Existing runtime and evidence remain intact.
+
+### D26: 2026-10-08, connect normalized evidence to descriptive reports
+
+Use the C04 fixture adapter's C02 records to produce reusable local JSON,
+Markdown and HTML summaries. The existing `assessment.reporting.fit_report`
+and `paired_interval` remain the inference path: they require reviewed campaign,
+recipe, holdout and ledger inputs that a standalone EvidenceBundle does not
+resolve. Do not invent substitutes or issue a benefit verdict from declared
+references. The small `aeep_toolkit.reporting` module groups exact cohorts,
+checks observed pairs and reports counts, token categories and timing coverage.
+It performs no execution, installs or remote lookups. All verdicts remain
+NOT_ASSESSED until the existing reviewed-analysis path is connected.
+
+This is safe independent C05 work on the standardized C04 fixtures, while C03/C04
+remain open. Test unknown/missing evidence, mismatched hosts and prompts,
+duplicate arms, worse success with fewer tokens, overlapping token categories,
+zero successes, long-tail timings and escaped report content under the standing
+finite-test delegation. Unresolved billing references and plugin fees stay
+unknown; neither metadata nor fixture outcomes can establish cash savings.

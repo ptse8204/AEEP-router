@@ -111,6 +111,7 @@ rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
 These development records do not establish live benefit or release readiness.
 
 - [Toolkit installation preview and doctor](aeep-toolkit/PREVIEW.md): inspect proposed dependencies and read project connection metadata without starting services.
+- [Toolkit evidence summaries](aeep-toolkit/REPORTING.md): pair validity, measurement coverage and local JSON/Markdown/HTML output.
 - [Toolkit architecture decision](aeep-toolkit/ARCHITECTURE_LOCK.md): upstream component assignments, confirmed delivery and actual integration boundaries.
 - [Original handoff audit](aeep-toolkit/HANDOFF_AUDIT.md): ZIP omissions, implementation gaps and corrected research status.
 

@@ -13,7 +13,7 @@ from typing import Any
 from pydantic import ValidationError
 
 from .installation import PROFILES, InstalledObservation, PreviewPolicy, preview
-from .models import ExtensionRegistry
+from .models import EvidenceBundle, ExtensionRegistry
 
 
 def read_bytes(path: Path) -> bytes:
@@ -85,8 +85,15 @@ def main(argv: list[str] | None = None) -> int:
     diagnostic = sub.add_parser('doctor', help='Read project connection metadata without starting services')
     diagnostic.add_argument('--host', choices=('codex', 'claude', 'dsh', 'deepseek-api'), required=True)
     diagnostic.add_argument('--project', type=Path, required=True)
+    report = sub.add_parser('report', help='Summarize normalized records without executing an evaluator')
+    report.add_argument('--evidence', type=Path, required=True)
+    report.add_argument('--format', choices=('json', 'markdown', 'html'), default='markdown')
     args = parser.parse_args(argv)
     try:
+        if args.command == 'report':
+            from .reporting import render, summarize
+            print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence))), args.format), end='')
+            return 0
         if args.command == 'doctor':
             print(json.dumps(doctor(args.host, args.project), indent=2))
             return 0

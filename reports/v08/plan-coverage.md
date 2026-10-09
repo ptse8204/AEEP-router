@@ -3978,3 +3978,9 @@ passed. Python source stayed fixed; the report command-example correction was
 verified in a fresh upstream fixture run and browser check. The separate wheel
 audit matched 2,906 payload files from 24 exact archives, excluding generated
 scripts, caches, unlisted files and the interpreter. C03/C04 remain unfinished.
+
+C05 descriptive reporting now uses the C02 evidence bundle and C04 fixture
+adapter. It separates exact cohorts and task families, rejects ambiguous pairs
+and reports measurement coverage without a value verdict. Twenty-seven focused
+tests pass; full verification follows. D26 records scope and remaining inference
+and accounting work. No execution authority, campaign result or old evidence changes.

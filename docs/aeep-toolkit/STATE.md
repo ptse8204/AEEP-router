@@ -16,7 +16,7 @@ checkpoint_status:
   C02: PASS
   C03: IN_PROGRESS
   C04: IN_PROGRESS
-  C05: TODO
+  C05: IN_PROGRESS
   C06: TODO
   C07: TODO
   C08: TODO
@@ -562,3 +562,14 @@ and the fresh upstream execution, artifact verification and browser check cover
 that command-example correction. Standalone tests passed 31 cases; runtime.py
 reached 93% combined coverage in that separate run. Neither result establishes
 worker conformance or live model value. C03/C04 remain IN_PROGRESS.
+
+## C05 descriptive reporting increment
+
+D26 connects normalized C02 records to local JSON, Markdown and HTML summaries.
+Exact cohorts and task families stay separate; invalid pairs remain visible.
+Token overlap semantics, missing grades and partial timing coverage are explicit.
+No confidence, actual billing or value verdict is inferred from metadata.
+The existing reviewed campaign analysis remains the intended inference path.
+C05 is IN_PROGRESS; full comparison math and accounting remain unfinished.
+Focused reporting checks passed 27 tests. The complete repository verification
+is being run on the final implementation; its outcome must be recorded separately.

@@ -35,7 +35,9 @@ without running the evaluator again:
 PYTHONPATH=src python3 integrations/toolkit/stack.py verify --output /tmp/aeep-toolkit-report
 ```
 
-Open `/tmp/aeep-toolkit-report/index.html`. The Markdown report, normalized fixture
+Open `/tmp/aeep-toolkit-report/index.html`. Its Evidence summary link opens the
+[normalized-record report](../../docs/aeep-toolkit/REPORTING.md), with task-family
+counts, pair validation and measurement coverage. The Markdown report, normalized fixture
 evidence, original upstream artifacts and hashes sit beside it. An existing output
 directory is never overwritten; use another name for a repeat run.
 

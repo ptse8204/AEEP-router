@@ -71,6 +71,20 @@ class ReceiptTests(unittest.TestCase):
         self.assertTrue(all(r.tokens is None and r.agent_wall_seconds is None and r.cash_accounting_ref is None for r in bundle.runs))
         self.assertEqual(len({r.receipt_refs for r in bundle.runs}), 1)
 
+    def test_report_uses_normalized_bundle_and_preserves_unknown_metrics(self):
+        self.normalized()
+        stack.report(self.output, stack.manifest(), {"versions": {}}, stack.collect(self.output / "upstream"), {})
+        summary = stack.read(self.output / "toolkit-summary.json")
+        self.assertEqual(summary["outcome"], "NOT_ASSESSED")
+        self.assertEqual(len(summary["cohorts"][0]["families"]), 2)
+        for family in summary["cohorts"][0]["families"]:
+            for arm in family["arms"].values():
+                self.assertIsNone(arm["metrics"]["tokens"]["complete_total"])
+        hashes = stack.read(self.output / "artifact-hashes.json")
+        for suffix in ("json", "md", "html"):
+            name = f"toolkit-summary.{suffix}"
+            self.assertEqual(hashes[name], stack.digest(self.output / name))
+
     def test_verification_is_read_only_and_missing_store_is_not_created(self):
         self.normalized()
         before = {str(p.relative_to(self.output)): stack.digest(p) for p in self.output.rglob("*") if p.is_file()}

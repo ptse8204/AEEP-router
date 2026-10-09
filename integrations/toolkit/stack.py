@@ -178,6 +178,13 @@ def collect(iteration: Path) -> list[dict]:
 
 
 def report(output: Path, stack: dict, facts: dict, rows: list[dict], checks: dict) -> None:
+    if (output / "toolkit-evidence.json").exists():
+        from aeep_toolkit.models import EvidenceBundle
+        from aeep_toolkit.reporting import render, summarize
+
+        summary = summarize(EvidenceBundle.model_validate(read(output / "toolkit-evidence.json")))
+        for format, suffix in (("json", "json"), ("markdown", "md"), ("html", "html")):
+            (output / f"toolkit-summary.{suffix}").write_text(render(summary, format))
     evidence = {"schema": "aeep.development-demo.v1", "evidence_kind": "synthetic",
                 "outcome": "NOT_ASSESSED", "model_benefit": "Not assessed by fake-harness runs",
                 "evaluator": stack["evaluator"], "environment": facts, "sandbox_checks": checks,
