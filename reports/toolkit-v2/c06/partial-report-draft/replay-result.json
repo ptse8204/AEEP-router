@@ -1,0 +1,7 @@
+{
+  "layout": "/private/tmp/aeep-toolkit-partial-layout-kztkiny8",
+  "run_returncode": 1,
+  "verify_returncode": 1,
+  "verification": "",
+  "diagnostic": "Traceback (most recent call last):\n  File \"/private/tmp/aeep-toolkit-partial-layout-kztkiny8/integrations/toolkit/evaluate.py\", line 64, in <module>\n    main()\n    ~~~~^^\n  File \"/private/tmp/aeep-toolkit-partial-layout-kztkiny8/integrations/toolkit/evaluate.py\", line 50, in main\n    print(json.dumps(verify(args.output),indent=2))\n                     ~~~~~~^^^^^^^^^^^^^\n  File \"/private/tmp/aeep-toolkit-partial-layout-kztkiny8/integrations/toolkit/verify_controlled.py\", line 24, in verify\n    result = read_json(output/'result.json')\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep_toolkit/cli.py\", line 42, in read_json\n    return json.loads(read_bytes(path))\n                      ~~~~~~~~~~^^^^^^\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep_toolkit/cli.py\", line 24, in read_bytes\n    resolved = path.resolve(strict=True)\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 670, in resolve\n    return self.with_segments(os.path.realpath(self, strict=strict))\n                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen posixpath>\", line 445, in realpath\nFileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/aeep-toolkit-partial-layout-kztkiny8/failure-output/result.json'\n"
+}

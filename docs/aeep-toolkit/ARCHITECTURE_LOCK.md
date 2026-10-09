@@ -109,13 +109,14 @@ The fixed synthetic batch now uses the existing command executor, selection
 decision, journal and receipt store, and exports C02 evidence. A subsequent controlled fixture bridge now dispatches each upstream fake-harness
 trial into a separate existing Docker worker, retaining individual reservations,
 receipts and durable events. Selected local wheel closures can be installed and
-removed with conflict checks. General V2 evaluator dispatch, capable-agent
-conformance and the complete candidate-to-report journey remain unfinished.
+removed with conflict checks. The configured offline adapter now accepts a captured candidate and bounded suite.
+It completed the three-case synthetic candidate-to-report journey. Capable-agent
+conformance and full comparison analysis remain unfinished.
 
-The next product deliverable is one continuous, fixture-labeled journey from
-candidate input through the actual upstream evaluator to an AEEP comparison
-report. The prepared upstream fake-harness run is the first integration check in
-that work, not the completed deliverable. Real-host qualification and a separately
+The [offline journey](../../examples/toolkit_offline/README.md) records actual
+upstream scheduling/grading, six individual workers and a report. A second run
+checks default content privacy. Error reporting and general comparison analysis
+are the next implementation work. Real-host qualification and a separately
 authorized live study follow; synthetic results cannot establish plugin benefit.
 
 ## Withdrawn proposal
@@ -133,7 +134,7 @@ records coupling, not a justification for a new execution architecture.
 The bounded engineering spike now runs agent-skill-eval's existing fake harness
 and deterministic graders through the consolidated development stack. Inspect its actual control/treatment
 artifacts, optional exposure, failures and missing telemetry before writing the
-small adapter. Retain upstream orchestration where it works. Add only the AEEP
+existing adapter further. Retain upstream orchestration where it works. Add only the AEEP
 validation and controlled-worker integration that the acceptance gates require.
 
 External execution needs the exact reviewed scope. Fixture success will not

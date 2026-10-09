@@ -209,3 +209,16 @@ staging, then bind existing AEEP analysis. The final read-only verifier rejects
 altered summaries, artifacts, receipts, events and accounting. Model measurements
 and cash remain unknown. General candidate inspection now hashes exactly the
 payload it stages, excluding nested evals/Git/cache directories from both.
+
+## October 9 captured-candidate replay
+
+The configured adapter now uses the same pinned scheduler and grader with a
+captured `SKILL.md` tree, including resources. Its treatment workers independently
+rehash the staged payload. The three-case public fixture and a separate default
+privacy replay completed 12 workers, with all workers removed. Exact source
+hashes, arguments, receipts and audits are under
+`reports/toolkit-v2/c06/offline-journey`. The primary upstream remains selected.
+
+This adapter implements the C02 interface for scripted offline execution. A model
+does not interpret the candidate; Codex compatibility remains unqualified. No
+fallback campaign or new optional-engine installation was started.

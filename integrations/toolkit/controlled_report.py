@@ -46,15 +46,16 @@ def freeze(repository, request, suite, spec):
     return plan, recipe
 
 
-def create(output, repository, plan, recipe, definition, environment, results, rows, *, artifact_root=None):
+def create(output, repository, plan, recipe, definition, environment, results, rows, *, artifact_root=None, incomplete=False):
     cases = {case.case_id:case for case in plan.suite.cases}
     expected = {(case,arm) for case in cases for arm in ('control','treatment')}
-    if (len(results) != len(expected) or {(r['case'],r['arm']) for r in results} != expected
-            or len(rows) != len(expected)):
-        raise ValueError('missing or duplicate expected trial positions')
+    positions = {(r['case'],r['arm']) for r in results}
     graded = {(r['case'],'treatment' if r['arm']=='with_skill' else 'control'):r for r in rows}
-    if set(graded) != expected:
-        raise ValueError('grading positions differ from frozen plan')
+    if (len(positions) != len(results) or not positions <= expected
+            or len(graded) != len(rows) or not set(graded) <= positions
+            or any(r['arm'] not in {'with_skill','without_skill'} for r in rows)
+            or (not incomplete and (positions != expected or set(graded) != expected))):
+        raise ValueError('missing, duplicate or unreviewed trial positions')
     trials, runs = [], []
     source = SourcePin(**definition.facts['stack']['fixture_source'])
     adapter_hash = definition.facts.get('review_sha256') or content_digest(definition)
@@ -62,32 +63,38 @@ def create(output, repository, plan, recipe, definition, environment, results, r
     adapter = AdapterCapabilities(adapter_id='agent-skill-eval.controlled-fixture', implementation_sha256=adapter_hash,
         hosts=('fake',),candidate_types=('skill',),optional_invocation=True,telemetry=(),containment='unverified')
     for result in results:
-        row = graded[result['case'],result['arm']]
+        row = graded.get((result['case'],result['arm']))
         operation = result['operation_id']
         receipt = repository.store.get_receipt(result['receipt_id'])
         frozen_receipt = repository.get('toolkit_controlled_receipt', operation)
         if (receipt is None or content_digest(receipt) != result['receipt_ref']
-                or content_digest(frozen_receipt) != result['receipt_ref'] or not receipt.execution_success
+                or content_digest(frozen_receipt) != result['receipt_ref']
+                or (not incomplete and not receipt.execution_success)
                 or receipt.metadata.get('case') != result['case'] or receipt.metadata.get('arm') != result['arm']):
             raise ValueError('worker receipt differs from canonical trial')
-        artifact = (artifact_root if artifact_root is not None else output/'upstream')/row['artifact']/'outputs/output.txt'
-        if hashlib.sha256(read_bytes(artifact)).hexdigest() != result['output_sha256']:
-            raise ValueError('graded output differs from worker result')
+        if row is not None:
+            artifact = (artifact_root if artifact_root is not None else output/'upstream')/row['artifact']/'outputs/output.txt'
+            if not receipt.execution_success or hashlib.sha256(read_bytes(artifact)).hexdigest() != result['output_sha256']:
+                raise ValueError('graded output differs from worker result')
         verification = FixtureRecord(facts={'row':row,'output_sha256':result['output_sha256'], 'verifier_sha256':verifier_hash})
         verification_ref = repository.put('toolkit_controlled_verification', operation, verification)
+        passed = row['verified'] if row is not None else None
         trials.append(BenchmarkTrial(trial_id=operation,run_id=plan.plan_id,suite_id=plan.suite.suite_id,
             case_id=result['case'],route_id=result['arm'],route_fingerprint=plan.route_fingerprints[result['arm']],
-            condition='fresh-worker',repetition=0,phase='holdout',state='complete',ok=True,valid=row['verified'],
-            status='success',correctness_failed=not row['verified'],receipt_ids=[receipt.receipt_id],
+            condition='fresh-worker',repetition=0,phase='holdout',state='complete' if receipt.execution_success else 'failed',
+            ok=receipt.execution_success,valid=passed,status=receipt.status,
+            correctness_failed=not passed if passed is not None else None,receipt_ids=[receipt.receipt_id],
             accounting=receipt.accounting))
         case = cases[result['case']]
+        status = {'success':'completed','failed':'failed','rejected':'failed','timeout':'timeout'}.get(receipt.status.value,'indeterminate')
         runs.append(EvaluationRun(run_id=receipt.receipt_id,plan_ref=content_digest(plan),candidate_sha256=source.artifact_sha256,
             adapter_sha256=adapter_hash,host='fake',host_version='agent-skill-eval-0.7.0',model='synthetic-no-model',effort='none',
             shared_environment_sha256=content_digest(environment),worker_sha256=content_digest({'environment':content_digest(environment),'worker':result['worker_name']}),
             task_sha256=content_digest(case),task_family=result['case'],verifier_sha256=verifier_hash,
             prompt_sha256=case.action.input['prompt_sha256'],arm=result['arm'],mode='optional',
-            candidate_exposed=result['candidate_exposed'],candidate_invoked=None,verification='pass' if row['verified'] else 'fail',
-            verification_ref=verification_ref,status='completed',retries=0,evidence_kind='synthetic',receipt_refs=(result['receipt_ref'],)))
+            candidate_exposed=result['candidate_exposed'],candidate_invoked=None,
+            verification='unknown' if passed is None else 'pass' if passed else 'fail',
+            verification_ref=verification_ref,status=status,retries=0,evidence_kind='synthetic',receipt_refs=(result['receipt_ref'],)))
     campaign = BenchmarkCampaignReport(run_id=plan.plan_id,suite_id=plan.suite.suite_id,domain=plan.suite.domain,
         deterministic_tools_available=True,pricing_snapshot_ids=[],frozen_holdout_decisions={},trials=trials,
         summaries=[],baseline_deltas=[],oracles=[],subscription_conservation=[])
@@ -100,11 +107,18 @@ def create(output, repository, plan, recipe, definition, environment, results, r
     bundle = EvidenceBundle(candidate=source,adapter=adapter,runs=tuple(runs))
     bundle_ref = repository.put('toolkit_controlled_bundle',plan.plan_id,FixtureRecord(facts=bundle.model_dump(mode='json')))
     summary = summarize(bundle)
-    summary['reviewed_analysis'] = {'analysis_ref':analysis_ref,'campaign_ref':campaign_ref,'bundle_ref':bundle_ref,
+    summary['reviewed_analysis'] = {'plan_ref':content_digest(plan),'analysis_ref':analysis_ref,'campaign_ref':campaign_ref,'bundle_ref':bundle_ref,
         'outcome':analysis.outcome,'qualification_passed':False,'minimum_holdout_cases':recipe.minimum_holdout_cases,
         'minimum_paired_cases':recipe.minimum_paired_cases,'expected_trial_positions':len(expected),
-        'matched_receipts':len(results),'model_tokens':None,'model_wall_seconds':None,'actual_cash':None,
+        'matched_receipts':len(results),'missing_trial_positions':len(expected-positions),
+        'unresolved_operations':sum(operation.elapsed_seconds is None for operation in ledger.operations),
+        'worker_operation_seconds_known':sum(operation.elapsed_seconds for operation in ledger.operations if operation.elapsed_seconds is not None),
+        'worker_operations_measured':sum(operation.elapsed_seconds is not None for operation in ledger.operations),
+        'worker_operations_reserved':len(ledger.operations),
+        'model_tokens':None,'model_wall_seconds':None,'actual_cash':None,
         'cost_per_verified_success':None,'recurring_fee_break_even':None}
+    if incomplete:
+        summary['limitations'].insert(0,'Execution stopped. Missing results and unknown grades are not successes; incurred and unresolved operations remain in the ledger. No retry was performed.')
     summary['limitations'].insert(0,'Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned '+analysis.outcome+'. No model measurements are supplied.')
     repository.put('toolkit_controlled_summary',plan.plan_id,FixtureRecord(facts=summary))
     for name,value in [('toolkit-evidence',bundle.model_dump(mode='json')),('assessment-analysis',analysis.model_dump(mode='json')),('summary',summary)]:

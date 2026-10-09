@@ -4054,3 +4054,12 @@ six evidence-tampering checks passed. Exact evidence is in
 `../toolkit-v2/c06/offline-journey`. Full checks for that adapter increment remain
 pending. C04-C06, real-host value, human comprehension and release remain open.
 No architecture or permission blocker caused the earlier implementation stop.
+
+The configured offline adapter passed its ordinary run (1,511 tests, 21 skips,
+24 subtests). A later platform-skip conftest caused 27 coverage collection errors;
+that uncommitted hook was removed and the original default testpaths restored.
+The explicit integration pytest command remains in CI. Failure logs are retained.
+D36 now adds partial reports for failed/interrupted synthetic trials, including
+missing expected positions and unresolved operations. A separate draft replay
+verified one actual failed Docker worker and cleanup. Fresh complete checks for
+the integrated correction are required; no live or release gate is closed.

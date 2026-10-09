@@ -64,3 +64,8 @@ No timeline promises; advance only on passing checkpoint evidence. The goal is a
 > "Is this spreadsheet skill worth installing in my existing Codex setup?"
 
 The user submits a candidate path or URL, reviews prerequisites and permitted setup, sees the proposed tests and budget, and receives a report separating small-cell edits from complex workbooks. The report shows verification outcomes, actual/estimated tokens and time, retries, uncertainty, missing measurements, purchase/break-even implications where supported, and developer attribution. AEEP may legitimately say *no demonstrated benefit*, *worse*, *inconclusive*, or *not assessable*.
+
+The [three-case offline journey](../../examples/toolkit_offline/README.md) now
+connects a reviewed captured candidate to the upstream evaluator, individual
+controlled workers and a verified HTML/Markdown report. Its outcomes are scripted;
+real-host value remains unassessed.

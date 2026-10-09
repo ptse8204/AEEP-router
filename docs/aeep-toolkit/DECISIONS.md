@@ -424,3 +424,22 @@ preserve unrelated content. Independently check the resulting artifacts against
 literal expected results. Do not rename a formatting prompt “complex” when the
 fake harness ignores the requested work. The suite must remain prominently
 synthetic and cannot establish real candidate value or capable-Codex conformance.
+
+## D36 — Report stopped synthetic runs through existing analysis
+
+A worker failure currently preserves its canonical receipt or unresolved
+reservation but stops before generating the ordinary report. Extend the same
+controlled reporting path to emit an explicitly incomplete result. Reuse
+`fit_report`, the operation ledger and C02 records for observed trials; do not
+add another recovery engine or retry an uncertain operation.
+
+Keep unknown grades unknown, count missing expected positions, retain elapsed
+charges and show unresolved operations separately. Bind the stopped result to
+an immutable completion record before accepting it in the read-only verifier.
+Invalid worker observations must not become exposure evidence. A failed partial
+report must preserve the original failure and receipt store for inspection.
+
+This is a finite zero-turn engineering amendment under the standing testing
+assignment. It does not add model calls, install packages, change thresholds or
+create an authorization blocker. The current draft remains outside the checkout
+while the prior source revision finishes its full checks.

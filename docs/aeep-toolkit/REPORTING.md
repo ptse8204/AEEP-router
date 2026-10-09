@@ -71,3 +71,10 @@ dispatch and recomputes existing AEEP `fit_report`. Its generated HTML/Markdown
 reports remain explicitly synthetic. The two-case suite returns insufficient
 evidence with the existing qualification thresholds unchanged. General live
 campaign binding and the remaining economics acceptance cases are still open.
+
+A stopped controlled fixture also produces a partial report when its receipt
+store remains writable. It lists missing expected positions and unresolved
+operations, keeps unknown grading results unknown, and preserves prior charges.
+The verifier checks its immutable completion record before accepting a partial
+result. A failed reporting write leaves the original exception and receipt store
+for inspection. There is no automatic retry.

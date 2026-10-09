@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its corrected preflight passed both full suites and coverage gates. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. General candidate/Codex dispatch, complete comparison economics and C06-C13 remain unfinished. No V2 live efficacy or release claim is established.
+**Status as of 2026-10-09:** C00-C02 retain their recorded PASS. C03 now includes selected local-wheel installation and conflict-preserving removal; its corrected preflight passed both full suites and coverage gates. C04 now dispatches the actual upstream fake harness into separate Docker workers with per-trial reservations, receipts and durable events. C05 connects those fixed trials to existing AEEP analysis and local reports. Captured-candidate synthetic dispatch now works. Capable Codex dispatch, complete comparison analysis and C06-C13 acceptance remain unfinished. No V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: '29dff45'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/preflight-correction/validation/checks.json'
 last_check_result: '1444 passed, 21 skipped in each full suite; both branch coverage gates, all 11 driver checks, standalone 48-test integration, Node 13 tests, docs (64 files, 571 links, zero errors) and builds passed. Source remained unchanged. General synthetic adapter increment now needs its own checks.'
-next_action: 'Verify the integrated D34 installer preflight correction and D33 receipt-backed cash report. Then complete general controlled candidate dispatch and the three-family C06 journey. Existing AssessmentService/BenchmarkRunner own authority, budgets, worker checks and accounting; avoid duplicating those controls. No architecture decision is pending.'
+next_action: 'Finish checks for the executed three-family offline adapter, then integrate D36 partial failure reporting from /tmp/aeep-toolkit-partial-report and exercise its actual worker failure. Continue general comparison and real-host integration using existing AssessmentService/BenchmarkRunner; no architecture decision is pending.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -833,3 +833,39 @@ for task content, and rejected six tampering cases. See
 A following import-format-only correction changes the adapter source hash; the
 reviewed plans preserve the exact executed bytes. Full regression verification
 for this increment remains pending. C04/C05/C06 remain IN_PROGRESS.
+
+### Continued engineering after the successful journey
+
+D36 addresses a real reporting gap: failed or interrupted dispatch retained its
+receipt/reservation but did not emit the ordinary partial report. Three draft
+regression tests pass for timeout charges, unresolved interruption and rejected
+exposure observations. Draft files are in `/tmp/aeep-toolkit-partial-report` and
+are not yet integrated or qualified. Do not mistake that draft for a completed
+checkpoint. The successful adapter's full regression run is still active.
+
+The D36 draft also completed a real, zero-turn Docker failure replay from a
+separate copied source layout. One worker failed on a deliberately ambiguous
+literal edit, no second worker was started, and the partial report resolved one
+receipt, two expected positions, zero verified outputs and insufficient evidence.
+Cleanup confirmed that worker was removed. Evidence and executed source bytes
+are in `reports/toolkit-v2/c06/partial-report-draft`. This is still draft evidence,
+not verification of the current checkout's failure path.
+
+The first draft replay was refused before a worker launch because its copied
+source was under `/private/tmp`, outside the home-denial probe's documented
+location. The corrected replay used a task-owned source directory beneath the
+user home. Both attempts are retained. No credential or model request occurred.
+
+### Integration test collection correction
+
+The ordinary suite at `98d6965` passed 1,511 tests, 21 skips and 24 subtests.
+A subsequent uncommitted platform-skip conftest shadowed the repository's shared
+`conftest` helpers, so coverage stopped during collection with 27 import errors.
+Both logs remain under `c06/offline-journey/validation`; coverage did not pass.
+The conflicting hook was removed. Keep the original default testpaths and run
+`pytest integrations/toolkit` explicitly in CI and local validation. This collects
+all new function-style tests while preserving the existing Windows exclusion.
+
+D36 partial reporting is now integrated from its separately exercised draft.
+A fresh full check is required; the preceding successful suite does not qualify
+these new bytes. No external intervention is required for this correction.

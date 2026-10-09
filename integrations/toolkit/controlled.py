@@ -124,8 +124,8 @@ class TrialBridge:
         receipt_ref = self.repository.put('toolkit_controlled_receipt', operation, receipt)
         facts = {'case': case, 'arm': arm, 'operation_id': operation, 'receipt_id': receipt.receipt_id,
                  'receipt_ref': receipt_ref, 'execution_success': receipt.execution_success,
-                 'worker_name': raw.metadata.get('container_name'), 'candidate_exposed': observation.get('candidate_exposed'),
-                 'payload_sha256': observation.get('payload_sha256'),
+                 'worker_name': raw.metadata.get('container_name'), 'candidate_exposed': observation.get('candidate_exposed') if valid else None,
+                 'payload_sha256': observation.get('payload_sha256') if valid else None,
                  'output_sha256': hashlib.sha256(observation.get('output', '').encode()).hexdigest() if valid else None}
         self.repository.put('toolkit_controlled_result', operation, FixtureRecord(facts=facts))
         self.repository.finish_operation(operation, elapsed_seconds=time.monotonic()-clock,
@@ -216,6 +216,7 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
                                     'timeout_seconds': 60, 'max_output_bytes': 65536, 'output': {'type': 'json'}},
                             side_effect=SideEffect.WRITE, idempotent=False)
         store = ReceiptStore(str(output/'receipts.sqlite3'))
+        bridge = None
         try:
             repository = AssessmentRepository(store)
             definition = FixtureRecord(facts={'stack': stack, 'runtime_inventory': facts, 'spec': spec.model_dump(mode='json'),
@@ -290,8 +291,28 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
                       'limitations': ['Real agent/credential conformance is not established.',
                                       'Upstream fake token/time constants are excluded from model observations.',
                                       'No live assessment grant was created, replaced or reset.']}
+            repository.put('toolkit_controlled_completion',request.plan_id,FixtureRecord(facts=result))
             (output/'result.json').write_text(json.dumps(result, indent=2)+'\n')
             return result
+        except BaseException as error:
+            if bridge is not None:
+                # Preserve the original exception if recording incomplete evidence also fails.
+                try:
+                    controlled_report.create(output, repository, analysis_plan, recipe, definition,
+                                             environment, bridge.results, [], incomplete=True)
+                    ledger = repository.operation_ledger(request.plan_id)
+                    result = {'schema':'aeep.toolkit.controlled-fixture.v1','evidence_kind':'synthetic',
+                              'state':'incomplete','failure_code':type(error).__name__,
+                              'definition_ref':definition_ref,'outputs_retained':False,
+                              'environment':environment.model_dump(mode='json'),'trials':bridge.results,
+                              'verified_upstream_rows':[],'ledger':ledger.model_dump(mode='json'),
+                              'limitations':['Execution stopped without retry; unknown grades remain unknown.',
+                                             'Real agent conformance and live benefit are not established.']}
+                    repository.put('toolkit_controlled_completion',request.plan_id,FixtureRecord(facts=result))
+                    (output/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+                except Exception as reporting_error:
+                    error.add_note('Partial reporting failed: '+type(reporting_error).__name__+'; inspect the retained receipt store.')
+            raise
         finally:
             store.close()
 

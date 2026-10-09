@@ -1,6 +1,13 @@
 # AEEP development stack
 
-Build the pinned external evaluator and follow a complete synthetic trial through
+Use the [three-case offline journey](../../examples/toolkit_offline/README.md)
+to select a captured candidate, review its trial plan, run separate workers and
+verify a local report. It uses agent-skill-eval 0.7.0 for scheduling and grading,
+with existing AEEP execution, accounting and analysis. Real Codex trials remain
+unqualified.
+
+The original fixed development demo below builds the pinned external evaluator
+and follows a synthetic trial through
 to an inspectable HTML/Markdown report. This directory is the reproducible local
 foundation for the V2 integration. Its demo executes agent-skill-eval itself;
 the agent and task outcomes are synthetic.
@@ -95,10 +102,9 @@ hashes through a read-only SQLite connection. It refuses an unfinished WAL and
 does not create a missing database. These are local provenance checks, not signed
 third-party attestations or production assessment authorization.
 
-The next connections are the existing controlled workers and reviewed live
-assessment dispatch, followed by the general comparison/report engine. Keep this fixed
-development demo separate from approved live assessment dispatch. Do not grow it
-into a second experiment runner or approval system.
+The controlled adapter described below adds per-trial workers and existing AEEP
+analysis. Reviewed live-host dispatch and complete comparison analysis remain
+unfinished. This fixed demo remains separate from live assessment execution.
 
 The [architecture record](../../docs/aeep-toolkit/ARCHITECTURE_LOCK.md) maps the
 Essentials, Evaluation Toolkit and Full Toolkit profiles. Optional scanner,
@@ -108,7 +114,7 @@ Linux/Windows locks, live hosts and release qualification remain open.
 ## Verify and remove
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s integrations/toolkit -p 'test_*.py' -v
+PYTHONPATH=src python3 -m pytest integrations/toolkit
 python3 -m ruff check integrations/toolkit
 ```
 
@@ -146,8 +152,10 @@ Matching metadata does not verify dependency binaries or the Python interpreter.
 Those remain explicit unknowns, as do host compatibility and containment. Bootstrap
 pip is listed separately. Unexpected distributions and Python startup hooks block
 fixture dispatch; source drift, linked files and malformed metadata also fail
-closed. The general reviewed installer and production runtime verification remain
-unfinished. Inspection does not authorize installing or executing a new package.
+closed. The [general private installer](../../docs/aeep-toolkit/INSTALLATION_DESIGN.md#implemented-private-wheel-runtime)
+provides reviewed local-wheel installation and conflict-preserving removal.
+Production runtime qualification remains open. Inspection does not authorize
+installing or executing a new package.
 
 ## Interrupted development setup
 
@@ -166,8 +174,9 @@ A fresh real setup installed all 24 expected wheel hashes, ran the four fixture
 records and passed receipt verification. Its 7,108-entry tree stayed unchanged
 after the demo; that temporary runtime was removed. The original runtime remains
 available. Evidence is in `reports/toolkit-v2/c03/setup-recovery` from the repo root.
-General reviewed apply, conflict-preserving uninstall and other platforms remain
-unfinished. Inspect failed state before any manual cleanup.
+The separate private installer supports reviewed apply and conflict-preserving
+removal. Other platform qualifications remain unfinished. Inspect failed state
+before any manual cleanup.
 
 ## Separate controlled fixture workers
 
@@ -196,7 +205,7 @@ prompt and optional skill text. The mounted worker source is outside the
 coordinator's writable sandbox. Expected answers, future cases, the receipt store
 and authentication state are not passed to workers.
 
-The output includes upstream artifacts, `receipts.sqlite3`, `toolkit-evidence.json`,
+The output includes retained synthetic output files, `receipts.sqlite3`, `toolkit-evidence.json`,
 `assessment-analysis.json`, `summary.json` and HTML/Markdown reports. The read-only
 verifier resolves canonical receipts, redacted decisions, durable events, grading
 bindings and operation accounting, then recomputes `fit_report`. These are local
@@ -208,6 +217,15 @@ usage constants never become model observations. Worker operation elapsed time
 is accounting overhead, not model latency or savings. A failed or unresolved
 operation stops further dispatch and retains its reservation/evidence.
 
-This proves the fixed upstream-to-container connection. It does not yet provide
-arbitrary candidate intake, capable Codex worker conformance, live comparative
-value, recurring-fee economics or the complete three-family Essentials journey.
+The configurable `evaluate.py` adapter adds captured local skills and resources,
+a bounded suite of up to 16 cases, and an exact review before dispatch. See the
+[three-case journey](../../examples/toolkit_offline/README.md) for its commands.
+Its interface implements the core `EvaluatorAdapter` contract for the scripted
+host only. Output retention defaults off; retaining outputs is part of the review.
+Nested evaluation files stay outside the worker payload.
+
+Two three-case replays completed with 12 distinct workers and verified cleanup.
+Default content retention and six evidence-tampering checks passed. The
+[receipt-cost report](../../docs/aeep-toolkit/REPORTING.md) also supports explicitly
+supplied recurring-fee scenarios. Capable Codex worker conformance, live value,
+complete statistical reporting and release qualification remain open.

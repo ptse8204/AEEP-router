@@ -1,0 +1,51 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 0.1,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.93,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 591.18,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 2,
+    "seconds": 2.03,
+    "log": "reports/toolkit-v2/c06/offline-journey/validation/03.log"
+  }
+]

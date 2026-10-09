@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.1, pytest-9.0.3, pluggy-1.6.0
+rootdir: /tmp/aeep-toolkit-partial-report
+plugins: asyncio-1.4.0, anyio-4.8.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 11 items
+
+../../../../tmp/aeep-toolkit-partial-report/test_partial.py .........FF  [100%]
+
+=================================== FAILURES ===================================
+__________________ test_failure_keeps_cost_and_unknown_grade ___________________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_failure_keeps_cost_and_unknown_grade(fixture):
+        async def failed(_executor,context):
+            return RawExecution(status=ExecutionStatus.TIMEOUT,error_type='TIMEOUT')
+>       with patch.object(controlled.ContainerExecutor,'execute',failed),pytest.raises(ValueError):
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+/tmp/aeep-toolkit-partial-report/test_partial.py:31: Failed
+_______ test_interruption_keeps_unresolved_operation_and_missing_trials ________
+
+fixture = <test_controlled.ControlledTests testMethod=test_bad_worker_output_charged_and_stops_other_arm>
+
+    def test_interruption_keeps_unresolved_operation_and_missing_trials(fixture):
+        async def interrupted(_executor,context):
+            raise RuntimeError('lost worker')
+>       with patch.object(controlled.ContainerExecutor,'execute',interrupted),pytest.raises(RuntimeError):
+                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'RuntimeError'>
+
+/tmp/aeep-toolkit-partial-report/test_partial.py:45: Failed
+=========================== short test summary info ============================
+FAILED ../../../../tmp/aeep-toolkit-partial-report/test_partial.py::test_failure_keeps_cost_and_unknown_grade
+FAILED ../../../../tmp/aeep-toolkit-partial-report/test_partial.py::test_interruption_keeps_unresolved_operation_and_missing_trials
+========================= 2 failed, 9 passed in 0.17s ==========================

@@ -150,6 +150,15 @@ def render(summary: dict[str, Any], format: str) -> str:
         return json.dumps(summary, indent=2, allow_nan=False) + "\n"
     lines = ["AEEP evidence summary", "", "Value verdict: NOT_ASSESSED", "",
              "Descriptive records only. Unknown is not zero; fewer resources do not establish benefit.", ""]
+    analysis = summary.get('reviewed_analysis')
+    if analysis is not None:
+        lines += [f"Existing AEEP analysis: {analysis['outcome']}; source: {analysis['analysis_ref']}",
+                  f"Expected trial positions: {analysis['expected_trial_positions']}; receipts: {analysis['matched_receipts']}.",
+                  f"Missing trial positions: {analysis.get('missing_trial_positions', 'unknown')}; unresolved operations: {analysis.get('unresolved_operations', 'unknown')}."]
+        if 'worker_operation_seconds_known' in analysis:
+            lines += [f"Worker-operation elapsed seconds, known subtotal: {analysis['worker_operation_seconds_known']}; measured operations: {analysis['worker_operations_measured']}/{analysis['worker_operations_reserved']}.",
+                      "Worker-operation time is assessment overhead, not model latency or a complete evaluation-cost total."]
+        lines.append("")
     for index, cohort in enumerate(summary["cohorts"], 1):
         binding = cohort["binding"]
         lines += [f"Cohort {index}: {binding['host']} {json.dumps(binding['host_version'])} / {binding['model']} / {binding['effort']}",
