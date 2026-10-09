@@ -7,6 +7,8 @@ import hashlib
 import json
 import os
 import stat
+import subprocess
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -88,8 +90,36 @@ def main(argv: list[str] | None = None) -> int:
     report = sub.add_parser('report', help='Summarize normalized records without executing an evaluator')
     report.add_argument('--evidence', type=Path, required=True)
     report.add_argument('--format', choices=('json', 'markdown', 'html'), default='markdown')
+    install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
+    install_plan.add_argument('--preview', type=Path, required=True)
+    install_plan.add_argument('--policy', type=Path, required=True)
+    install_plan.add_argument('--wheels', type=Path, required=True)
+    install_plan.add_argument('--wheelhouse', type=Path, required=True)
+    install_plan.add_argument('--destination', type=Path, required=True)
+    for name in ('install', 'remove'):
+        operation = sub.add_parser(name, help='Operator-only private runtime installation/removal')
+        operation.add_argument('--installation', type=Path, required=True)
+        operation.add_argument('--reviewed-digest', required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command in {'install-plan', 'install', 'remove'}:
+            from aeep.errors import ConfigurationError
+
+            from .install_runtime import RuntimeInstallation, Wheel, apply, digest, prepare, remove
+            from .installation import InstallationPreview
+            try:
+                if args.command == 'install-plan':
+                    installation = prepare(InstallationPreview.model_validate(read_json(args.preview)),
+                                           PreviewPolicy.model_validate(read_json(args.policy)), args.destination,
+                                           args.wheelhouse, tuple(Wheel.model_validate(w) for w in read_json(args.wheels)))
+                    install_result = {'review_sha256': digest(installation), 'installation': installation.model_dump(mode='json')}
+                else:
+                    installation = RuntimeInstallation.model_validate(read_json(args.installation)['installation'])
+                    install_result = (apply if args.command == 'install' else remove)(installation, args.reviewed_digest)
+                print(json.dumps(install_result, indent=2))
+                return 0
+            except ConfigurationError as error:
+                raise ValueError('installation safety check failed') from error
         if args.command == 'report':
             from .reporting import render, summarize
             print(render(summarize(EvidenceBundle.model_validate(read_json(args.evidence))), args.format), end='')
@@ -112,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
                          profile=args.profile, observations=observations)
         print(result.model_dump_json(indent=2))
         return 2 if result.blockers else 0
-    except (OSError, ValueError, TypeError, KeyError, ValidationError):
+    except (OSError, ValueError, TypeError, KeyError, ValidationError, subprocess.SubprocessError, zipfile.BadZipFile):
         if args.command == 'doctor':
             parser.exit(2, 'Cannot inspect project inventory; use macOS/Linux/WSL and valid regular project configuration files.\n')
         # Parse errors can contain secret-bearing user values; do not echo them.

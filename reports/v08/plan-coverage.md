@@ -4015,3 +4015,13 @@ scope. C03/C04/C05 remain IN_PROGRESS; C06-C13 remain TODO. No validation is run
 Final documentation check passed 63 files and 571 links with zero errors and
 66 configured exclusions. No new documentation discrepancy is outstanding; the
 implementation and live/release gates listed in toolkit STATE remain open.
+
+### Toolkit V2 October 9 continuation
+
+The previous V2 handoff stopped with safe engineering work remaining; no external
+blocker or architecture decision caused it. Preserve that conclusion in toolkit
+STATE.md. C03 now connects selected manifests to an operator-reviewed private
+wheel installation and conflict-preserving removal. It reuses standard venv/pip,
+component_setup's space reserve and the existing durable file helpers. Validation
+is in progress; C04 controlled-agent dispatch and C05 inference remain open.
+Historical live evidence is unchanged; no V2 live or release gate closes here.

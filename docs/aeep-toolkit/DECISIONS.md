@@ -275,3 +275,19 @@ private scope and finite fixture workload. No package, privilege, model, billing
 or credential scope was added. After hash verification and the fixture run, only
 the new unchanged temporary runtime was removed; the original runtime and wheel
 cache remain. The runtime-free unit tests are not the evidence for this replay.
+
+### D29: 2026-10-09, connect selected manifests to reversible private installation
+
+The operator directs continued implementation after the explicit finding that the
+previous stop was premature. Reuse standard venv/pip, the existing space check,
+file lock and compare-and-swap writer. Generalize installation to an explicitly
+selected manifest closure and local hash-locked wheels; do not add a package
+manager, Router configuration, remote installer or host activation. Bind the
+review to the complete plan, destination, interpreter and wheel contents.
+
+Retain durable failure state and refuse implicit retries. Since the destination
+must originally be absent, uninstall compares its complete applied tree with the
+current tree before removing only that owned runtime; edited or added entries
+block removal. Preserve the journal after removal. Test drift, conflicting state,
+space, interruption and offline replay under the standing finite-test delegation.
+This authorizes engineering checks, not installation of new third-party packages.

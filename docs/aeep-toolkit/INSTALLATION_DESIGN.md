@@ -80,3 +80,48 @@ Do not claim these commands exist now. Prefer existing `aeep setup`, `aeep stack
 - Essentials works without any optional orchestration/router/marketplace/hosted tracing component.
 - Full profile displays compatibility status rather than silently substituting an unavailable engine.
 - Offline mode, timeouts, interrupted install, insufficient space, changed artifacts and unapproved expenses all fail closed.
+
+## Implemented private wheel runtime
+
+The local CLI can now prepare, install and remove a selected Python wheel closure.
+Use the same registry selection and policy as `plan`; supply a wheel inventory
+with `extension_id`, `filename`, `name`, `version` and `sha256` for every selected
+component and dependency. Each wheel hash must match its manifest. Preparation
+reads local wheels and the interpreter without starting either or writing files.
+The destination must be absent and its parent must already exist.
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit.cli install-plan \
+  --preview selected-preview.json --policy policy.json --wheels wheels.json \
+  --wheelhouse /absolute/reviewed-wheels --destination /absolute/new-runtime
+```
+
+Save that output as `installation.json`. Review its complete selected manifests,
+policy, wheel inventory, interpreter and destination. The operator command then
+requires the exact `review_sha256` from that document:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit.cli install \
+  --installation installation.json --reviewed-digest REVIEWED_SHA256
+PYTHONPATH=src python3 -m aeep_toolkit.cli remove \
+  --installation installation.json --reviewed-digest REVIEWED_SHA256
+```
+
+Installation uses standard venv/pip with only staged, hash-checked local wheels.
+Pip resolves the closure offline and checks installed dependencies. Source builds,
+Python startup hooks and wheel `.data` relocation are unsupported and rejected.
+No host connection is written or enabled. The 50 GiB free-space reserve is checked
+before effects, with at least 500 MiB installation headroom.
+
+The sibling `.aeep-install.json` journal and lock remain after removal. Repeating
+a successful install verifies the complete recorded runtime tree before returning
+its prior result. Failure or interruption requires inspection; it cannot silently
+retry. Removal requires the exact applied file bytes, modes, directories and
+symlink targets. Stop processes using the runtime first. Changed files, additions
+(including caches), hard links and special files block removal and are preserved.
+An interrupted removal stays unresolved rather than authorizing a broad cleanup.
+
+This is an operator CLI, not a model-facing installation tool. Its digest binds
+reviewed inputs; it is not a signature or third-party qualification. Non-wheel
+extensions and new platform/package combinations still require their own reviewed
+installation and compatibility proof. Installed does not mean enabled or qualified.
