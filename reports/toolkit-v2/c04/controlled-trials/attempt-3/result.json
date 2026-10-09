@@ -1,0 +1,280 @@
+{
+  "schema": "aeep.toolkit.controlled-fixture.v1",
+  "evidence_kind": "synthetic",
+  "definition_ref": "58f791de7bdc94892c2c2bb6bb86cfed1ec7647df40ee24da2cb6c1ee9b57f02",
+  "environment": {
+    "environment_id": "toolkit-offline-fixture",
+    "kind": "container",
+    "identity": {
+      "purpose": "upstream synthetic dispatch"
+    },
+    "network": false,
+    "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "cpu_count": 1.0,
+    "memory_mb": 256,
+    "process_limit": 64,
+    "container_runtime": "/usr/local/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": [
+      "/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-ase-worker-source-k4xv1h6s"
+    ]
+  },
+  "trials": [
+    {
+      "case": "format",
+      "arm": "treatment",
+      "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:format:treatment",
+      "receipt_id": "rcpt_565044cdb04b48339dc60d5b23e94bac",
+      "receipt_ref": "48eb63c52c9b99cf558476900b0866c7086963842e8929e85c243564360249be",
+      "execution_success": true,
+      "worker_name": "aeep-68fae868d6315bbc63b96b6ab55b2424",
+      "candidate_exposed": true,
+      "output_sha256": "3d8dc9ab6f2d6da77724ac5308554c4da9333a2dde12ccc09d2d2398ba3bcc24"
+    },
+    {
+      "case": "format",
+      "arm": "control",
+      "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:format:control",
+      "receipt_id": "rcpt_52dfa6bf184b476b98c39d4c701422fa",
+      "receipt_ref": "a644c2632794c1760c08f430355544f154a3c21d497525005b73b313ab0b7e06",
+      "execution_success": true,
+      "worker_name": "aeep-c8c3a7bdfdeb039fff9e328766d891da",
+      "candidate_exposed": false,
+      "output_sha256": "6a977ddcedb246f598964fdb3b9f75d5a75efc03781e50bd42f6b1ee50025ae8"
+    },
+    {
+      "case": "adjacent",
+      "arm": "treatment",
+      "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:adjacent:treatment",
+      "receipt_id": "rcpt_e2a113e770a64c56bf5bc2a1fb334817",
+      "receipt_ref": "28c9854723b1b8e655691600ecad76f84d5ff004579e5561c13bc741339138e7",
+      "execution_success": true,
+      "worker_name": "aeep-77c85109af3bc89d609f3e4215dcecd5",
+      "candidate_exposed": true,
+      "output_sha256": "6a977ddcedb246f598964fdb3b9f75d5a75efc03781e50bd42f6b1ee50025ae8"
+    },
+    {
+      "case": "adjacent",
+      "arm": "control",
+      "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:adjacent:control",
+      "receipt_id": "rcpt_752236eb05424be5ba4160a3fb781fc9",
+      "receipt_ref": "860d4558b6aa519ff72b93132145a30162f82692ff147222ddbd664219d12970",
+      "execution_success": true,
+      "worker_name": "aeep-3b7d4b280f55e65f60c0f5523ced0d25",
+      "candidate_exposed": false,
+      "output_sha256": "6a977ddcedb246f598964fdb3b9f75d5a75efc03781e50bd42f6b1ee50025ae8"
+    }
+  ],
+  "verified_upstream_rows": [
+    {
+      "case": "format",
+      "arm": "without_skill",
+      "verified": false,
+      "exposed": false,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-format/fake/without_skill"
+    },
+    {
+      "case": "format",
+      "arm": "with_skill",
+      "verified": true,
+      "exposed": true,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-format/fake/with_skill"
+    },
+    {
+      "case": "adjacent",
+      "arm": "without_skill",
+      "verified": true,
+      "exposed": false,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-adjacent/fake/without_skill"
+    },
+    {
+      "case": "adjacent",
+      "arm": "with_skill",
+      "verified": true,
+      "exposed": true,
+      "candidate_invoked": null,
+      "model_tokens": null,
+      "model_wall_seconds": null,
+      "actual_cash": null,
+      "evidence_kind": "synthetic",
+      "artifact": "eval-adjacent/fake/with_skill"
+    }
+  ],
+  "ledger": {
+    "plan_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4",
+    "operations": [
+      {
+        "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:adjacent:control",
+        "plan_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T17:56:33.847470Z",
+        "elapsed_seconds": 0.7922149170190096,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 772.7194998878986,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:adjacent:treatment",
+        "plan_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T17:56:32.761320Z",
+        "elapsed_seconds": 0.9150450839661062,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 893.3863751590252,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:format:control",
+        "plan_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T17:56:31.290378Z",
+        "elapsed_seconds": 1.2675958750769496,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 1239.5519588608295,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4:format:treatment",
+        "plan_id": "planning_d38f63c3e3a74bb98d9de3bae520aad4",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 65.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-09T17:56:29.649510Z",
+        "elapsed_seconds": 1.4397083329968154,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 1397.5275829434395,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Real agent/credential conformance is not established.",
+    "Upstream fake token/time constants are excluded from model observations.",
+    "No live assessment grant was created, replaced or reset."
+  ]
+}

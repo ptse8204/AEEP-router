@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '0353188'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/descriptive-report/validation/checks.json plus reports/toolkit-v2/c03/setup-recovery'
-last_check_result: '1383 passed, 21 skipped in both full suites; 81.59% combined coverage; both branch gates and all 11 commands passed. Core source and tests stayed fixed at 5cb863e. Final integration: 41 tests, fresh 24-wheel setup, actual upstream fixture, receipt verification and unchanged-runtime cleanup passed. Integration changes verified separately; see source-scope record.'
-next_action: 'Continue C03 general reviewed apply and conflict-preserving uninstall, then C04 per-trial controlled-worker dispatch through the upstream harness seam. The development setup has a successful fresh replay and failure journal; it is not the general installer. Enforce exact installed candidate payload identity after the observed upstream hash gap. Connect existing reviewed assessment analysis to C05 summaries, then complete the candidate-to-report C06 journey without another architecture question.'
+last_verified_commit: '4ddf045'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c03/general-installer/validation-final/checks.json'
+last_check_result: '1419 passed, 21 skipped in each full suite; 81.6868% combined coverage; both branch gates, all 11 driver checks, standalone 48-test integration, Node tests, docs and builds passed. Source stayed fixed at 4ddf045. C03 remains IN_PROGRESS for D34 preflight corrections.'
+next_action: 'Finish source-bound verification at 4ddf045 and audit C03 exit checks. General wheel installation/removal and fixed upstream per-trial dispatch are implemented. Continue receipt-backed comparison costs, then connect exact candidate intake to the general controlled adapter and three-family C06 journey. No architecture decision or general implementation permission is pending.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -741,3 +741,33 @@ credentials, changed captured bytes and content-free CLI output. Twenty-eight
 installer lifecycle tests pass after space/portability hardening. No arbitrary
 candidate has been executed; connecting this intake to managed Codex dispatch
 remains engineering work, not a permission blocker.
+
+### Current verification and next reporting increment
+
+The final ordinary suite at `4ddf045` passed 1,419 tests with 21 skips and one
+existing dependency warning in 637.35 seconds. The corresponding coverage run and
+remaining gates are still running under tool session 94691; do not mark them
+passed prematurely. The current driver is
+`/tmp/aeep-toolkit-general-installer-final-checks.py`.
+
+The hardened installer replay again installed the same 24 reviewed wheels from
+the existing cache, verified idempotence and removed the unchanged runtime. It
+retained its journal at
+`/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-general-installer-replay-749ebinz`.
+The original runtime and cache remain unchanged. The final documentation check
+passed 63 files and 571 links with zero errors; wheel/sdist builds also passed.
+See the new `replay-final`, `docs-final.log` and `build-final.log` evidence under
+`reports/toolkit-v2/c03/general-installer`.
+
+The next cost-report change is staged for development under
+`/tmp/aeep-toolkit-economics-draft`, outside the fixed implementation being
+verified. These drafts are not shipped features or checkpoint evidence. They
+reuse existing cash resolution, preserve failed-run costs, reject shared charges,
+and keep explicit recurring-fee scenarios separate from observed billing and
+statistical benefit. Integrate and verify before claiming support.
+
+The `4ddf045` verification completed: both full suites passed 1,419 tests with
+21 skips, all eleven driver commands passed, and source hashes stayed unchanged.
+The combined coverage was 81.6868%. The coverage run took 905.73 seconds.
+No validation process remains for that source. C03 stays IN_PROGRESS because the
+subsequent audit identified D34; passing existing tests does not erase that gap.

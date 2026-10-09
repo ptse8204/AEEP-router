@@ -1,0 +1,337 @@
+{
+  "schema": "aeep.toolkit.descriptive-summary.v1",
+  "evidence_sha256": "2e1b61625b88e8e548755472afe69768c0d05e97c1aca417b128d900f182e622",
+  "outcome": "NOT_ASSESSED",
+  "cohorts": [
+    {
+      "binding": {
+        "plan_ref": "b23e9514ff65df4de55f8f9ba262058c3ce1ad0f0d7710aaa92f02f27f51f2e5",
+        "candidate_sha256": "cf00158162842a953220c517df1e9b1582227a42c9abc10a2d17efc9a16fe79e",
+        "adapter_sha256": "d2ef83f2fab07e86b73f6038baf897a80d29c5438843cc5d32024699b00d0bdc",
+        "host": "fake",
+        "host_version": "agent-skill-eval-0.7.0",
+        "model": "synthetic-no-model",
+        "effort": "none",
+        "shared_environment_sha256": "4f689d4d904a6ecc7f699728e510673ce9d90707edab186ee478b71dc8f6ce66",
+        "verifier_sha256": "081e4240ea1518aa8900598dc7d1c82726f3f4621899e5e12fa7bc412b735380",
+        "mode": "optional",
+        "evidence_kind": "synthetic"
+      },
+      "families": [
+        {
+          "task_family": "adjacent",
+          "observed_tasks": 1,
+          "observed_pairs": 1,
+          "graded_pairs": 1,
+          "rejected_tasks": [],
+          "arms": {
+            "control": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": 0.0,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          }
+        },
+        {
+          "task_family": "format",
+          "observed_tasks": 1,
+          "observed_pairs": 1,
+          "graded_pairs": 1,
+          "rejected_tasks": [],
+          "arms": {
+            "control": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 0,
+                "fail": 1,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": 1.0,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned insufficient_evidence. No model measurements are supplied.",
+    "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
+    "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
+    "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
+    "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+    "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
+    "Confidence, billing, recurring fees and break-even require the existing reviewed analysis and accounting path; references alone are insufficient."
+  ],
+  "reviewed_analysis": {
+    "analysis_ref": "da824b6d1a80142272343377665fe16be43baedef9280bd5d1a921e43b986729",
+    "campaign_ref": "12545107f6dec78260fecf99a4310955328c5c89f5a0d0ebb28e7bf0c8108cda",
+    "bundle_ref": "04dd3ba1c157e890be1947a34c14e0b41a3271fb80c2285b6d3a48e795e178f6",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "minimum_holdout_cases": 100,
+    "minimum_paired_cases": 20,
+    "expected_trial_positions": 4,
+    "matched_receipts": 4,
+    "model_tokens": null,
+    "model_wall_seconds": null,
+    "actual_cash": null,
+    "cost_per_verified_success": null,
+    "recurring_fee_break_even": null
+  }
+}

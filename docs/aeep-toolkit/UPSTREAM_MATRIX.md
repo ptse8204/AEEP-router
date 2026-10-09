@@ -191,3 +191,21 @@ two manifest-bound files and rejects unlisted entries. General candidate payload
 identity needs its own adapter check or a reviewed upstream correction before
 qualification. This finding leaves the preferred candidate selected and its
 live/controlled-worker status unqualified.
+
+## October 9 per-trial integration proof
+
+The actual pinned agent-skill-eval scheduler and graders now dispatch the fixed
+fake harness through AEEP ContainerExecutor. The trusted parent reserves before
+each trial, retains an individual receipt and durable events, and validates the
+current case/arm. Worker source is outside the coordinator's writable sandbox;
+the coordinator has no Docker socket. Both arms use the same pinned image, Python
+and shell. These facts establish the fixed synthetic dispatch path, not capable
+Codex conformance or safe arbitrary candidate execution.
+
+Five bounded engineering replays retain 20 trial workers and their operation
+charges under `reports/toolkit-v2/c04/controlled-trials`; cleanup inspection found
+none remaining. Later replays repair redaction, event persistence and source
+staging, then bind existing AEEP analysis. The final read-only verifier rejects
+altered summaries, artifacts, receipts, events and accounting. Model measurements
+and cash remain unknown. General candidate inspection now hashes exactly the
+payload it stages, excluding nested evals/Git/cache directories from both.

@@ -42,3 +42,12 @@ and break-even remain unknown. The existing reviewed assessment reporting and
 accounting path must supply those conclusions; a reference to a record is not
 an observation. Synthetic and replay results cannot establish real model value.
 This increment does not complete C05's comparison-analysis acceptance checks.
+
+The controlled development fixture now supplies a stronger, separate path:
+`integrations/toolkit/verify_controlled.py` resolves each trial's receipt, redacted
+selection decision, durable execution events, independently graded output and
+operation accounting. It checks all expected positions from the plan frozen before
+dispatch and recomputes existing AEEP `fit_report`. Its generated HTML/Markdown
+reports remain explicitly synthetic. The two-case suite returns insufficient
+evidence with the existing qualification thresholds unchanged. General live
+campaign binding and the remaining economics acceptance cases are still open.

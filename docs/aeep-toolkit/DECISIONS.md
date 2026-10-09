@@ -360,3 +360,40 @@ payloads and ambiguous paths. Stage captured bytes only, and expose a content-fr
 inspection through the existing CLI. No candidate code executes or host skill
 installation occurs. This is a small adapter guard around the preferred upstream,
 not another skill installer or evaluator. Finite checks remain delegated.
+
+## D33 — Resolve existing accounting for descriptive cost reports
+
+Reuse `aggregate_accounting` and `CashAccounting.actual_cash_cost` for receipt
+amounts, currency checks, charge reconciliation and unavailable evidence. Add the
+small cost-per-verified-success calculation to the existing toolkit reporting
+module; do not add another billing service or statistical engine. Include failed
+run costs and refuse ambiguous shared receipts/charges or missing retry receipts.
+
+A supplied monthly/yearly fee is an explicitly sourced scenario, not an observed
+charge or payment authorization. Its descriptive break-even uses cost per verified
+success, requires complete matched accounting and no observed success regression,
+and states the unchanged-workload assumption. No confidence-supported benefit or
+real price verification follows from a JSON field or content hash. Existing
+reviewed AEEP analysis retains statistical conclusions and assessment overhead.
+This decision authorizes implementation tests, not paid calls or a new evaluator.
+
+## D34 — Check wheel compatibility and dependencies before installer effects
+
+The C03 audit found two gaps in `4ddf045`: platform strings were matched between
+policy and manifests without checking wheel compatibility, and `--no-index`
+alone did not prevent direct-URL dependencies. Keep C03 IN_PROGRESS until repaired
+and verified. No unsafe URL wheel was installed during this work.
+
+Reuse the already installed `packaging` 24.2 library for wheel tags, versions,
+Python requirements and dependency markers. Do not write another resolver.
+Check the complete supplied closure before creating runtime state, reject active
+URL requirements and dependency extras, and pass `--no-deps` to pip. The reviewed
+24-wheel evaluator closure passes the new read-only check. Private install preview
+must refuse platforms where tag discovery would spawn a compatibility probe.
+The intended support is macOS with an unambiguous version and glibc Linux;
+Windows and musl private installation remain explicitly unsupported.
+
+The source also needs case-insensitive archive collision and startup-hook checks
+for macOS. Preserve failed-install journals and existing user-edit protection.
+This is a corrective implementation decision, not permission for new third-party
+installation, model calls or changes to the selected delivery architecture.

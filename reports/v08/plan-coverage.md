@@ -4025,3 +4025,13 @@ wheel installation and conflict-preserving removal. It reuses standard venv/pip,
 component_setup's space reserve and the existing durable file helpers. Validation
 is in progress; C04 controlled-agent dispatch and C05 inference remain open.
 Historical live evidence is unchanged; no V2 live or release gate closes here.
+
+The October 9 follow-through now has actual separate-container dispatch for the
+pinned upstream fake harness, individual receipts and pre-dispatch reservations,
+redacted decisions and durable events. Existing AEEP comparison analysis consumes
+the frozen fixture positions and returns insufficient evidence. Five local replays
+retain all 20 worker operations; cleanup confirms none of those containers remain.
+General candidate/Codex dispatch and live conformance remain unimplemented or
+unverified. First ordinary suite: 1,409 passed/21 skipped. Coverage was deliberately
+interrupted to harden disk reservations; final verification is running separately.
+No historical live claim or release gate is upgraded by these fixture results.

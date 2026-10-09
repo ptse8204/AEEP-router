@@ -1,0 +1,50 @@
+[
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "returncode": 0,
+    "seconds": 0.07,
+    "log": "reports/toolkit-v2/c03/general-installer/validation/00.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.92,
+    "log": "reports/toolkit-v2/c03/general-installer/validation/01.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 625.1,
+    "log": "reports/toolkit-v2/c03/general-installer/validation/02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 2,
+    "seconds": 430.46,
+    "log": "reports/toolkit-v2/c03/general-installer/validation/03.log"
+  }
+]
