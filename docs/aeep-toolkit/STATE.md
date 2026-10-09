@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. C01 source selection is reconciled against the ZIP: all 21 responsibilities have the required worksheet fields, bounded issue triage and explicit runtime unknowns. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
+**Status as of 2026-10-08:** C00 and C02 retain their recorded offline PASS. C01 source selection is reconciled against the ZIP: all 21 responsibilities have the required worksheet fields, bounded issue triage and explicit runtime unknowns. Existing source findings remain valid. C03 preview passed its software checks; its installer integration is unfinished. C04 has an executable upstream development demo with an exact fixture payload guard. C05 now reports normalized pair validity and measurement coverage. The evaluation journey and C03-C13 remain unfinished; no V2 live efficacy or release claim is established.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,10 +25,10 @@ checkpoint_status:
   C11: TODO
   C12: TODO
   C13: TODO
-last_verified_commit: '5c647dd'
-last_check_command: 'Framework Python 3.13; commands and logs in reports/toolkit-v2/c03/runtime-inventory/validation/checks.json'
-last_check_result: '1356 passed, 21 skipped in each core suite; 81.52% combined coverage; both required branch gates and all 11 commands passed. Standalone bridge: 31 tests and fresh upstream fixture execution passed. Python source stable; report.html command examples changed and verified separately.'
-next_action: 'Continue C03 reviewed setup/rollback, then C04 per-trial controlled-worker dispatch through the pinned upstream harness seam. Project configuration inventory and coordinator receipt verification are implemented; neither proves installation or worker conformance. Complete the candidate-to-report C03-C06 journey without another architecture question.'
+last_verified_commit: '0353188'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c05/descriptive-report/validation/checks.json plus reports/toolkit-v2/c03/setup-recovery'
+last_check_result: '1383 passed, 21 skipped in both full suites; 81.59% combined coverage; both branch gates and all 11 commands passed. Core source and tests stayed fixed at 5cb863e. Final integration: 41 tests, fresh 24-wheel setup, actual upstream fixture, receipt verification and unchanged-runtime cleanup passed. Integration changes verified separately; see source-scope record.'
+next_action: 'Continue C03 general reviewed apply and conflict-preserving uninstall, then C04 per-trial controlled-worker dispatch through the upstream harness seam. The development setup has a successful fresh replay and failure journal; it is not the general installer. Enforce exact installed candidate payload identity after the observed upstream hash gap. Connect existing reviewed assessment analysis to C05 summaries, then complete the candidate-to-report C06 journey without another architecture question.'
 blocked_actions: []
 missing_permissions: []
 unknowns:
@@ -624,3 +624,38 @@ a concurrent journal edit needed checking before pip bootstrap; the bootstrappin
 state transition now performs that CAS check first. Failed test/lint logs are
 retained beside the passing `coverage-tests-checked.log` and `ruff-checked.log`.
 The fresh source-bound report is `reports/toolkit-v2/setup-replayed-showcase`.
+
+## Verified continuation state after setup recovery and descriptive reports
+
+Core implementation and tests stayed fixed at `5cb863e` through both complete
+runs: 1,383 passed, 21 skipped and one existing Starlette deprecation warning.
+Combined coverage was 81.591766%; the new reporting module reached 100%. Both
+required branch gates, schemas, compileall, Ruff, assessment policy and mypy
+passed. All eleven results are in `c05/descriptive-report/validation/checks.json`.
+The driver completed; no validation remains running.
+
+The final integration code is `0353188`. `stack.py` and `test_stack.py` changed
+during core verification, and `test_setup.py` was added. Those changes were
+verified by 41 standalone tests, final compilation/lint, the actual same-pin
+installation replay, four-record upstream fixture run, receipt verification and
+unchanged-runtime cleanup. The 302 recorded core/test/script/config files stayed
+unchanged. Do not describe this as a wholly unchanged source tree.
+
+C00/C01/C02 retain their scoped PASS. C03/C04/C05 remain IN_PROGRESS; C06-C13
+remain TODO. General installation/removal, arbitrary candidate intake, controlled
+per-trial dispatch and inferential/accounting integration are unfinished code,
+not fabricated permission blockers. No architecture decision is pending. Live
+model execution and release still require their later exact review.
+
+Keep `/private/tmp/aeep-ase-c04-tt14mj6r/rebuild` and the 7.1 MiB wheel cache
+`/private/tmp/aeep-toolkit-wheel-audit-ofr3udoo`. The newer setup-replay runtime was
+removed after its unchanged-tree check. Other temporary probe/demo scratch was
+removed by its owning operation. Existing unrelated checkout changes remain
+untouched in `/Users/edwintse/Documents/aeep-agent-router`.
+
+The current loopback preview is tool session 18722 at `http://127.0.0.1:8765/`,
+serving only `reports/toolkit-v2/setup-replayed-showcase`. The browser was refreshed;
+HTML/inventory responses match saved artifact hashes. The final screenshot and
+HTTP checks are in `c05/descriptive-report`. Documentation checks passed 63 files
+and 571 links with zero errors and 66 configured exclusions. This is not a human
+usability exercise or an external release.

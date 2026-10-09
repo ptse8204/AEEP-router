@@ -4004,3 +4004,14 @@ runtime tree remained unchanged and only that temporary environment was removed.
 The original runtime/cache remain; no new model, credential or release authority
 was used. General reviewed apply/uninstall and controlled-worker integration
 remain open. An intermediate journal-conflict test failure was fixed and retained.
+
+Final C05/core checks passed 1,383 tests with 21 skips in both runs, 81.591766%
+combined coverage, both branch gates and all eleven recorded commands. Reporting
+module coverage was 100%. Core source stayed fixed at `5cb863e`; final integration
+source `0353188` was checked separately with 41 tests and actual setup/demo/receipt
+verification. `../toolkit-v2/c05/descriptive-report/summary.json` records source
+scope. C03/C04/C05 remain IN_PROGRESS; C06-C13 remain TODO. No validation is running.
+
+Final documentation check passed 63 files and 571 links with zero errors and
+66 configured exclusions. No new documentation discrepancy is outstanding; the
+implementation and live/release gates listed in toolkit STATE remain open.
