@@ -17,10 +17,10 @@ from aeep_toolkit.models import ExtensionRegistry
 
 pytestmark = pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks')
 
-def installation(tmp_path, *, extra=None, requires=''):
+def installation(tmp_path, *, extra=None, requires='', filename='aeep_installer_fixture-1.0-py3-none-any.whl', selected_platform=None):
     wheelhouse = tmp_path / 'wheels'
     wheelhouse.mkdir()
-    filename = 'aeep_installer_fixture-1.0-py3-none-any.whl'
+    selected_platform = selected_platform or sorted(runtime.host_platforms())[0]
     wheel = wheelhouse / filename
     entries = {
         'aeep_installer_fixture/__init__.py': 'VALUE = "synthetic"\n',
@@ -33,8 +33,8 @@ def installation(tmp_path, *, extra=None, requires=''):
         for name, value in entries.items():
             archive.writestr(name, value)
     sha = hashlib.sha256(wheel.read_bytes()).hexdigest()
-    item = manifest(source=manifest().source.model_dump() | {'artifact_sha256': sha})
-    rules = policy(item)
+    item = manifest(platforms=(selected_platform,), source=manifest().source.model_dump() | {'artifact_sha256': sha})
+    rules = policy(item, platform=selected_platform)
     selection = preview(ExtensionRegistry(extensions=(item,)), ('engine',), rules)
     wheels = (runtime.Wheel(extension_id='engine', filename=filename, name='aeep-installer-fixture', version='1.0', sha256=sha),)
     return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
@@ -90,15 +90,21 @@ def test_unsafe_wheel_rejected_before_effects(tmp_path, extra):
     assert not (tmp_path/'runtime').exists()
 
 
-def test_incomplete_dependency_lock_fails_offline_and_keeps_journal(tmp_path):
-    plan = installation(tmp_path, requires='Requires-Dist: aeep-fixture-absent-dependency==7.0\n')
-    with pytest.raises(subprocess.CalledProcessError):
-        runtime.apply(plan, runtime.digest(plan))
-    _, state = runtime.load_state(runtime.paths(plan)[1])
-    assert state['status'] == 'failed'
-    with pytest.raises(ValueError, match='no automatic retry'):
-        runtime.apply(plan, runtime.digest(plan))
-    assert Path(plan.destination).exists()
+@pytest.mark.parametrize('requires', [
+    'Requires-Dist: aeep-fixture-absent-dependency==7.0\n',
+    'Requires-Dist: aeep-installer-fixture>=99\n',
+    'Requires-Dist: aeep-installer-fixture @ https://example.invalid/unreviewed.whl\n',
+    'Requires-Dist: aeep-installer-fixture[unreviewed]\n',
+    'Requires-Python: >=99\n',
+])
+def test_dependency_and_python_conflicts_fail_before_effects(tmp_path, monkeypatch, requires):
+    import socket
+    monkeypatch.setattr(subprocess, 'Popen', lambda *a, **k: pytest.fail('preview executed a process'))
+    monkeypatch.setattr(socket, 'socket', lambda *a, **k: pytest.fail('preview opened network'))
+    with pytest.raises(ValueError):
+        installation(tmp_path, requires=requires)
+    assert not (tmp_path/'runtime').exists()
+    assert not list(tmp_path.glob('*.aeep-install.json'))
 
 
 @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
@@ -212,3 +218,32 @@ def test_unsupported_nofollow_platform_is_explicit(tmp_path, monkeypatch):
     monkeypatch.delattr(runtime.os, 'O_NOFOLLOW')
     with pytest.raises(ValueError, match='macOS or Linux'):
         runtime.file_digest(target)
+
+
+@pytest.mark.parametrize('changes', [
+    {'filename':'aeep_installer_fixture-1.0-py2-none-any.whl'},
+    {'selected_platform':'not-this-host'},
+    {'extra':{'aeep_installer_fixture-1.0.dist-info/WHEEL':'Wheel-Version: 1.0\nTag: cp27-cp27m-win32\n'}},
+    {'extra':{'PIP/__init__.py':'untrusted'}},
+    {'extra':{'SITEcustomize.py':'untrusted'}},
+    {'extra':{'aeep_installer_fixture/other.py':'one','aeep_installer_fixture/OTHER.py':'two'}},
+])
+def test_incompatible_tags_platform_and_case_collisions_never_apply(tmp_path,changes):
+    with pytest.raises(ValueError):
+        installation(tmp_path,**changes)
+    assert not (tmp_path/'runtime').exists()
+
+
+def test_inactive_extra_dependency_does_not_force_installation(tmp_path):
+    plan = installation(tmp_path,requires='Requires-Dist: absent; extra == "unused"\n')
+    assert len(plan.wheels) == 1
+
+
+def test_applied_pip_command_cannot_resolve_new_dependencies(tmp_path,monkeypatch):
+    plan = installation(tmp_path)
+    fake_install(monkeypatch)
+    commands = []
+    monkeypatch.setattr(runtime,'run',lambda argv,root:commands.append(argv))
+    runtime.apply(plan,runtime.digest(plan))
+    install = next(argv for argv in commands if 'install' in argv)
+    assert '--no-index' in install and '--no-deps' in install and '--require-hashes' in install

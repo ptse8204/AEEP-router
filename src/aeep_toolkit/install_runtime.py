@@ -17,6 +17,11 @@ from email.parser import BytesParser
 from pathlib import Path
 from typing import Any, Literal
 
+from packaging.requirements import Requirement
+from packaging.specifiers import SpecifierSet
+from packaging.tags import parse_tag, sys_tags
+from packaging.utils import parse_wheel_filename
+from packaging.version import Version
 from pydantic import Field, model_validator
 
 from .installation import InstallationPreview, PreviewPolicy, preview, require_compatible
@@ -108,15 +113,15 @@ def check_wheel(path: Path, wheel: Wheel) -> int:
     with zipfile.ZipFile(path) as archive:
         entries = archive.infolist()
         names = [entry.filename for entry in entries]
-        if (len(names) != len(set(names)) or len(names) > 20000
+        if (len(names) != len({name.rstrip('/').casefold() for name in names}) or len(names) > 20000
                 or sum(entry.file_size for entry in entries) > 512 * 1024**2):
             raise ValueError('wheel exceeds bounds or contains duplicate paths')
         for entry in entries:
             name = Path(entry.filename)
-            if (name.is_absolute() or '..' in name.parts or '\\' in entry.filename
+            if (not name.parts or str(name) != entry.filename.rstrip('/') or name.is_absolute() or '..' in name.parts or '\\' in entry.filename
                     or stat.S_ISLNK(entry.external_attr >> 16)
-                    or any(part.endswith('.data') for part in name.parts)
-                    or name.suffix == '.pth' or any(Path(part).stem in {'sitecustomize', 'usercustomize', 'pip'} for part in name.parts)):
+                    or any(part.casefold().endswith('.data') for part in name.parts)
+                    or name.suffix.casefold() == '.pth' or any(Path(part).stem.casefold() in {'sitecustomize', 'usercustomize', 'pip'} for part in name.parts)):
                 raise ValueError('wheel contains unsupported paths or interpreter startup hooks')
         metadata = [name for name in names if len(Path(name).parts) == 2 and name.endswith('.dist-info/METADATA')]
         if len(metadata) != 1 or archive.getinfo(metadata[0]).file_size > 1024**2:
@@ -126,6 +131,62 @@ def check_wheel(path: Path, wheel: Wheel) -> int:
             raise ValueError('wheel metadata differs from reviewed identity')
         # Include allocation rounding, staging and unpacking; manifest estimates cannot shrink this bound.
         return 3 * (path.stat().st_size + sum((e.file_size // 4096 + 1) * 4096 for e in entries))
+
+
+def host_platforms() -> set[str]:
+    system = 'macos' if sys.platform == 'darwin' else sys.platform
+    machine = platform.machine()
+    return {f'{sys.platform}-{machine}', f'{system}-{machine}-python{sys.version_info.major}.{sys.version_info.minor}'}
+
+
+def check_closure(source: Path, wheels: tuple[Wheel, ...], selected_platform: str) -> int:
+    if selected_platform not in host_platforms():
+        raise ValueError('declared installation platform differs from this host')
+    # packaging can launch a compatibility probe on legacy macOS or musl; preview must never do so.
+    if sys.platform == 'darwin':
+        mac_version = platform.mac_ver()[0]
+        if not mac_version or mac_version.startswith('10.16'):
+            raise ValueError('ambiguous macOS version; process-free compatibility preview unavailable')
+    elif sys.platform == 'linux':
+        try:
+            libc = os.confstr('CS_GNU_LIBC_VERSION')
+        except (OSError, ValueError):
+            libc = None
+        if not libc:
+            raise ValueError('process-free wheel preview currently requires glibc on Linux')
+    else:
+        raise ValueError('private runtime installation requires macOS or glibc Linux')
+    supported = set(sys_tags())
+    versions = {normalize(w.name): Version(w.version) for w in wheels}
+    required = 0
+    for wheel in wheels:
+        required += check_wheel(source / wheel.filename, wheel)
+        name, version, _, tags = parse_wheel_filename(wheel.filename)
+        if name != normalize(wheel.name) or version != versions[normalize(wheel.name)] or not tags & supported:
+            raise ValueError('wheel filename identity or platform is incompatible')
+        with zipfile.ZipFile(source / wheel.filename) as archive:
+            metadata = next(n for n in archive.namelist() if len(Path(n).parts) == 2 and n.endswith('.dist-info/METADATA'))
+            headers = BytesParser().parsebytes(archive.read(metadata), headersonly=True)
+            wheel_metadata = metadata.removesuffix('METADATA') + 'WHEEL'
+            if archive.getinfo(wheel_metadata).file_size > 1024**2:
+                raise ValueError('wheel tag metadata exceeds bounds')
+            wheel_headers = BytesParser().parsebytes(archive.read(wheel_metadata), headersonly=True)
+            declared_tags = {tag for raw in wheel_headers.get_all('Tag', []) for tag in parse_tag(raw)}
+            if wheel_headers.get_all('Wheel-Version') != ['1.0'] or declared_tags != tags:
+                raise ValueError('wheel tag metadata differs from filename or has an unsupported version')
+        python = headers.get_all('Requires-Python', [])
+        if len(python) > 1 or (python and not SpecifierSet(python[0]).contains(platform.python_version(), prereleases=True)):
+            raise ValueError('wheel requires a different Python version')
+        for raw in headers.get_all('Requires-Dist', []):
+            requirement = Requirement(raw)
+            if requirement.marker and not requirement.marker.evaluate({'extra': ''}):
+                continue
+            if requirement.url or requirement.extras:
+                raise ValueError('direct URL dependencies and dependency extras require a separate reviewed closure')
+            dependency = versions.get(normalize(requirement.name))
+            if dependency is None or not requirement.specifier.contains(dependency, prereleases=True):
+                raise ValueError('wheel dependency is missing or incompatible with the selected closure')
+    return required
 
 
 def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
@@ -139,7 +200,7 @@ def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
                                  interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
                                  python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
                                  wheels=wheels)
-    required = max(plan.known_disk_bytes, 500 * 1024**2 + sum(check_wheel(source / w.filename, w) for w in wheels))
+    required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
     if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
         raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
     return result
@@ -221,7 +282,7 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
     source = canonical(plan.wheelhouse)
     # Validate every artifact and reserve before any destination/journal effects.
     required = max(plan.preview.known_disk_bytes,
-                   500 * 1024**2 + sum(check_wheel(source / w.filename, w) for w in plan.wheels))
+                   500 * 1024**2 + check_closure(source, plan.wheels, plan.policy.platform))
     require_space(root, required)
     if (root.exists() or root.is_symlink()) and not journal.exists():
         raise ValueError('destination already exists; preserved')
@@ -256,7 +317,7 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
             python = str(root / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python'))
             run([python, '-I', '-B', '-m', 'ensurepip', '--upgrade', '--default-pip'], root)
             run([python, '-I', '-B', '-m', 'pip', '--isolated', '--disable-pip-version-check',
-                 'install', '--no-index', '--find-links', str(stage), '--no-cache-dir', '--only-binary=:all:',
+                 'install', '--no-deps', '--no-index', '--find-links', str(stage), '--no-cache-dir', '--only-binary=:all:',
                  '--require-hashes', '--no-compile', '-r', str(lock)], root)
             run([python, '-I', '-B', '-m', 'pip', '--isolated', '--disable-pip-version-check', 'check'], root)
             state.update(status='installed', applied_tree_sha256=snapshot(root), enabled=False, qualified=False)

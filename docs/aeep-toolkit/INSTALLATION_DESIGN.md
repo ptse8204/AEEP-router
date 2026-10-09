@@ -108,7 +108,10 @@ PYTHONPATH=src python3 -m aeep_toolkit.cli remove \
 ```
 
 Installation uses standard venv/pip with only staged, hash-checked local wheels.
-Pip resolves the closure offline and checks installed dependencies. Source builds,
+The installed `packaging` 24.2 library checks wheel tags, Python requirements and
+the complete selected dependency closure before effects. Pip installs with
+`--no-deps --no-index` and checks installed dependencies afterward. Active direct
+URLs and dependency extras are rejected. Source builds,
 Python startup hooks and wheel `.data` relocation are unsupported and rejected.
 No host connection is written or enabled. The 50 GiB free-space reserve is checked
 before effects, with at least 500 MiB installation headroom.
@@ -120,6 +123,11 @@ retry. Removal requires the exact applied file bytes, modes, directories and
 symlink targets. Stop processes using the runtime first. Changed files, additions
 (including caches), hard links and special files block removal and are preserved.
 An interrupted removal stays unresolved rather than authorizing a broad cleanup.
+
+Private installation supports macOS with an unambiguous version and glibc Linux.
+It refuses tag-discovery paths that would spawn a compatibility probe, including
+musl and legacy macOS version ambiguity. Windows private installation remains
+unsupported. Archive paths are checked for case-insensitive collisions.
 
 This is an operator CLI, not a model-facing installation tool. Its digest binds
 reviewed inputs; it is not a signature or third-party qualification. Non-wheel
