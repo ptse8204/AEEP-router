@@ -1,0 +1,16 @@
+{"evidence_kind": "first_party_offline_fixture_validation", "model_calls": 0, "candidate_execution": false, "literal_checks": 3, "generated_cases_checked": 141, "rejected_artifact_mutations": 566, "excluded_live_seeds": [7, 8], "live_qualification": false, "source_sha256": {"freeze_recipe.py": "f2cd71f5cb64a510e1ac6ed0f99a254843525d31d2a442f2d13c9100f08c5fbb", "grader.py": "5090e8071053a143c73c32edd687a3261860089918fcee9c7b0b2db0c57bc2c8", "check_pack.py": "3df07619cb3057045e2a07dbc6d821d5c2863905f001c972fd9fbe3d695f7645", "generator.py": "042ece2a3fbe13a45494132633106e5183299868405a109987ea2b3ca32e3cf2", "reference.py": "c39fa90dbcaff4db1faf8205ca8d3e34015906314ec93d23314633dba4931128"}}
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/edit-study-preparation/freeze_recipe.py", line 25, in <module>
+    extension = ExecutableRecipeExtension(generator=spec('generator'), reference=spec('reference'), grader=spec('grader'), independent_fixtures=fixtures, transformed_fixtures=[transformed], fault_outputs=[{}, {'files': {}, 'answer': None}], feature_rules={'family': RecipeFeatureRule(path='/family', operation='enum', values=['easy', 'multi_file', 'adjacent']), 'variation': RecipeFeatureRule(path='/variation', operation='enum', values=variations)}, variation_features={v: {'family': v.rsplit('-', 1)[0], 'variation': v} for v in variations}, template_families=['edit:easy', 'edit:multi_file', 'edit:adjacent'])
+                                                    ~~~~^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/edit-study-preparation/freeze_recipe.py", line 24, in spec
+    return ExecutorSpec(id='toolkit.edit.'+role, capability='assessment.edit@1', kind=ExecutorKind.COMMAND, input_schema={'type': 'object'}, output_schema={'type': 'object'}, config={'argv': ['python3', '-c', source], 'argv_literal': True, 'stdin_json': True, 'timeout_seconds': 15, 'max_output_bytes': 1000000, 'output': {'type': 'json'}}, estimate={'cash': {'amount_usd': '0', 'upper_bound_usd': '0'}})
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pydantic/main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for ExecutorSpec
+description
+  Field required [type=missing, input_value={'id': 'toolkit.edit.gene...upper_bound_usd': '0'}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+estimate.cash
+  Value error, a cash amount requires evidence [type=value_error, input_value={'amount_usd': '0', 'upper_bound_usd': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error

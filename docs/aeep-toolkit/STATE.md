@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-10 UTC:** Source `d2c406f` passed the real text qualification: 141 successful cases, including 105 distinct holdouts, with no missing positions or unresolved campaign operations. The toolkit exported all 141 trials with zero normalization gaps. The canonical value verdict remains `insufficient_evidence`: qualification supplies no control pairs. Its token counts are provider-reported, not independently observed measurements. Ordinary pytest passed 1,561 tests with 21 skips; coverage resumed after a recorded storage preflight. The training-only builder completed; its exact generated-tool execution review awaits approval. The updated wheel installation and older-fixture cleanup reviews await exact operator approval. Human comprehension and release remain open.
+**Status as of 2026-10-10 UTC:** Source `d2c406f` passed both full suites (1,561 tests, 21 skips each), 82% coverage, both branch gates, all 12 driver checks and docs. Source stability passed. C06's six-worker current-source offline journey and cleanup passed. Real text qualification passed 141 cases, including 105 distinct holdouts; no optional-use benefit is established. The three-family editing recipe passed offline and contained checks and fresh task-worker conformance. Its 141-turn qualification is prepared but not enqueued: the reviewed storage allowance is short by 12.12 GiB. Exact older-fixture cleanup, current-wheel installation and generated-text-tool execution questions remain pending. Human comprehension and release remain open.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,7 +9,7 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C06
+current_checkpoint: C07
 checkpoint_status:
   C00: PASS
   C01: PASS
@@ -17,24 +17,27 @@ checkpoint_status:
   C03: PASS
   C04: PASS
   C05: PASS
-  C06: IN_PROGRESS
+  C06: PASS
   C07: IN_PROGRESS
   C08: IN_PROGRESS
   C09: PASS
   C10: IN_PROGRESS
   C11: PASS
-  C12: IN_PROGRESS
-  C13: TODO
-last_verified_commit: 'a9ed7b91a76ae1ffc3ace75d4255ec8c314d19b8'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v2/checks.json'
-last_check_result: '1559 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Version-specific 15-check private installation and six scripted workers passed with cleanup.'
-next_action: 'Inspect builder-result.json and validation-v3 before further execution. Review generated source as inert text, prepare its exact contained validation/image review, and continue the four-arm comparison only after applicable authority and storage checks. Never replay a started request.'
+  C12: PASS
+  C13: IN_PROGRESS
+last_verified_commit: 'd2c406f'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
+last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel installation still pending.'
+next_action: 'Check pending exact approvals. If older-fixture cleanup is approved, run its guarded cleanup and recheck the editing qualification storage allowance before one-shot execution. If generated-tool or package review is approved, execute only its exact prepared driver. No broad verification process remains active.'
 blocked_actions:
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
+  - 'Three-family qualification storage allowance requires 69.77 GiB free; measured 57.65 GiB. Pending exact inactive-fixture cleanup may cover the shortfall.'
+  - 'Generated text tool remains inert pending exact execution approval.'
   - 'Release/publication remains unauthorized.'
 missing_permissions:
   - 'Current d2c406f wheel: exact package digest aa8d1bba0f7deb637f3d7607dc61ea526c88d080306b078427c2b9e652082114 awaits approval.'
-  - 'Older fixture cleanup is optional pending exact approval; no old root removed.'
+  - 'Older fixture cleanup review a4d200fdae041764b496da3d932759a96ce7aa23cc582e2d6473c43f6af8fc0a is pending; no old root removed.'
+  - 'Generated-tool training review 5cef99b50379e48a9c159a2032b27a950d3d766753a12d246ca850f478b83844 is pending; no generated code executed.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
@@ -1467,3 +1470,43 @@ preflight. Review SHA-256:
 `5cef99b50379e48a9c159a2032b27a950d3d766753a12d246ca850f478b83844`.
 No training worker started. The builder reservation-summary discrepancy is
 retained in its README; actual counters and exact definitions were unchanged.
+
+### Current integrated verification complete; C06 and C12 accepted
+
+Both source-bound full suites passed 1,561 tests with 21 skips; coverage is 82%.
+All 12 driver checks, both branch gates and docs passed. The source remained
+unchanged. The two owned completed pytest fixture roots were removed after
+confirming their owners exited and retaining passing logs; no older root was
+removed. No regression process remains active. The current-source six-worker
+router-prohibited replay passed and all workers were removed. C06 is PASS for
+the offline journey. C12 is PASS for private portable export and source-asserted
+support links; it supplies no developer ownership attestation or publication.
+The new wheel still needs its artifact-specific installation check.
+
+C08/C10 supported discovery and trace-preview paths have installed checks from
+`a9ed7b9`, plus current source tests. Their current-package verification remains
+pending the exact `d2c406f` wheel approval. Scanner execution, hosted telemetry
+and ToolHive deployment remain explicitly unqualified/unselected, not missing
+core dependencies. C13 remains open for actual human comprehension, comparative
+value/resource evidence, supported-platform scope and an operator release decision.
+
+### Three-family editing study ready except storage
+
+[Fixture and boundary evidence](../../reports/toolkit-v2/c07/edit-study-preparation/README.md)
+records easy literal edits, bounded multi-file refactors and adjacent counting
+without file changes. Three independent literals, 141 generated cases and 566
+artifact mutations passed local checks. Existing offline-container execution
+verified 141 reference agreements and rejected 141 empty outputs. Fresh task
+profiles passed 11 probes each with cleanup and restored proxy. No new model
+turn ran for this recipe.
+
+Qualification plan `plan_0a8359a155184098ad3ba790f8a77f55` is prepared with
+141 turns, fresh seed 2026101003 and unchanged acceptance thresholds. Scope
+review uses the standing delegation. Its measured snapshot is 7,356,416 bytes;
+285 potential snapshots plus the retained 64 MiB margin require 74,909,696,000
+free bytes including the 50 GiB reserve. Available space was 61,896,175,616 bytes.
+The campaign was not enqueued. The pending 12.52 GiB exact old-fixture cleanup
+may cover this 12.12 GiB shortfall; capacity must be checked again afterward.
+Prepared execution-review SHA-256 is
+`98f878a69f511d9da151c3416e04cf73f2be35a51d4574b64a8fd35fca7ab81c`.
+Never replay a started request. Text qualification does not qualify this recipe.

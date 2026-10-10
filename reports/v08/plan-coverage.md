@@ -4258,3 +4258,20 @@ under the recorded storage allowance. The current wheel and older-fixture cleanu
 reviews are still pending. Builder request `planning_0fbf780af6f1436dba258c7386c11240`
 uses only current training inputs; generated source cannot execute before review.
 Human comprehension, optional-access value studies and release remain open.
+
+### D57 verification and three-family preparation complete
+
+The current source passed ordinary and coverage pytest (1,561 passed, 21 skipped
+each), 82% coverage, both branch gates and all 12 checks. Docs passed. Current
+source remained unchanged. The six-worker router-prohibited offline replay
+passed with cleanup. C06 and C12 applicable offline acceptance are complete;
+current-wheel installation still awaits exact approval. C09 Waza mock conformance
+and C11 bounded LangGraph/legacy routing acceptance are recorded separately.
+
+The [editing recipe](../toolkit-v2/c07/edit-study-preparation/README.md) passed
+first-party fixture and contained-program checks, plus fresh managed-worker
+boundary probes. Its 141-turn qualification plan is not enqueued: the retained
+storage allowance is 12.12 GiB short. Pending exact cleanup covers 12.52 GiB of
+inactive synthetic roots; none was removed. Generated text-tool execution,
+current wheel installation and human comprehension remain pending. New fixture
+checks supply no live performance or token/cash savings evidence.
