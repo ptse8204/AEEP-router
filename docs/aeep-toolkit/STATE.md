@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-10 UTC:** The approved `a9ed7b9` wheel passed 15 sandboxed checks and removal. Its two full suites passed 1,559 tests with 21 skips, 82% coverage, both branch gates and all 12 driver checks. The live schema failure is corrected by an explicit Codex prompt-schema option; 132 focused tests passed. Both fresh worker profiles passed all 11 probes. New plan `plan_1eed14b65d3741bca8b92d99edfa63fe` is running; its first five screening receipts passed schema and task validation with observed token fields. No qualification or value verdict is claimed while the campaign is active. Full checks are running for source `d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0`. Human comprehension and release remain open.
+**Status as of 2026-10-10 UTC:** Source `d2c406f` passed the real text qualification: 141 successful cases, including 105 distinct holdouts, with no missing positions or unresolved campaign operations. The toolkit exported all 141 trials with zero normalization gaps. The canonical value verdict remains `insufficient_evidence`: qualification supplies no control pairs. Its token counts are provider-reported, not independently observed measurements. Ordinary pytest passed 1,561 tests with 21 skips; coverage resumed after a recorded storage preflight. The training-only builder completed; its exact generated-tool execution review awaits approval. The updated wheel installation and older-fixture cleanup reviews await exact operator approval. Human comprehension and release remain open.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -20,19 +20,21 @@ checkpoint_status:
   C06: IN_PROGRESS
   C07: IN_PROGRESS
   C08: IN_PROGRESS
-  C09: IN_PROGRESS
+  C09: PASS
   C10: IN_PROGRESS
-  C11: IN_PROGRESS
+  C11: PASS
   C12: IN_PROGRESS
   C13: TODO
 last_verified_commit: 'a9ed7b91a76ae1ffc3ace75d4255ec8c314d19b8'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v2/checks.json'
 last_check_result: '1559 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Version-specific 15-check private installation and six scripted workers passed with cleanup.'
-next_action: 'Inspect the active prompt-schema qualification and validation-v3 processes/results before any source edit or new model call. Complete analysis from canonical results; never replay a started request. Then continue eligible comparative work.'
+next_action: 'Inspect builder-result.json and validation-v3 before further execution. Review generated source as inert text, prepare its exact contained validation/image review, and continue the four-arm comparison only after applicable authority and storage checks. Never replay a started request.'
 blocked_actions:
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
-missing_permissions: []
+missing_permissions:
+  - 'Current d2c406f wheel: exact package digest aa8d1bba0f7deb637f3d7607dc61ea526c88d080306b078427c2b9e652082114 awaits approval.'
+  - 'Older fixture cleanup is optional pending exact approval; no old root removed.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
@@ -1395,3 +1397,73 @@ performance experiment. Do not use these screening timings as value evidence.
 The finished v2 suite and separately approved installation describe the pre-option
 source. The first docs command lacked Lychee in PATH; rerunning with the existing
 pinned binary passed. No new authoring software was installed.
+
+### Active storage guard during D57 verification
+
+Driver PID 55604 (`/tmp/aeep-toolkit-integrated-checks-v3.py`) is deliberately
+SIGSTOP-paused before it can start coverage. Its current child PID 55659 runs
+ordinary pytest to completion. Free space reached 58 GiB. Wait for that child to
+finish, retain its log/result, then remove only its verified temporary fixture
+root `.../T/pytest-of-edwintse/pytest-1174` if the suite passed; its `.lock` named
+55659. Recheck free space before SIGCONT-resuming the driver. Do not remove the
+active root early or delete unrelated pytest roots, assessment records, volumes
+or Docker storage. See `validation-v3/storage-guard.json`. Qualification retains
+its separate 51 GiB admission stop and continues under its original reviewed cap.
+
+Ordinary v3 pytest completed: 1,561 passed, 21 skipped. Its own temporary root
+`pytest-1174` was removed only after the process exited and the passing log was
+retained, recovering about 5.7 GiB. The parent remains paused before coverage.
+Exact cleanup approval is pending for three older inactive synthetic-fixture
+roots (`pytest-908`, `pytest-911`, `pytest-1003`, 12.5 GiB), with metadata checks in
+`reports/toolkit-v2/integration-completion/cleanup-review/review.json` (SHA-256
+`a4d200fdae041764b496da3d932759a96ce7aa23cc582e2d6473c43f6af8fc0a`).
+Their absent lock-owner PIDs were verified; no old root has been deleted.
+Qualification remains active and independent of this pending cleanup decision.
+
+### D57 completed qualification and training-only baseline preparation
+
+Plan `plan_1eed14b65d3741bca8b92d99edfa63fe` completed as report
+`fit_e045c77bc9e24bc9bb93d2f53efb2640`: qualification passed, 141 successful
+trials, 105 distinct holdouts, zero missing positions and zero unresolved campaign
+operations. Source was unchanged and the proxy returned to its stopped state.
+The [actual toolkit report](../../reports/toolkit-v2/c07/text-prompt-schema-review/report/report.html)
+contains 141 normalized trials and zero normalization gaps. No paired value
+evidence exists. Provider-reported token fields are retained as such; the
+canonical resource-coverage calculation does not treat self-asserted usage as
+observed measurements. Cash, subscription-unit and whole-host resource totals
+remain unknown.
+
+Fresh candidate-absent builder checks passed all 11 probes for each worker, with
+cleanup and unchanged source. Review `e7685a6c68911e7413119bdce63c0349911d77444bb260f0a75e5c53fe46800f`
+authorizes one existing-model construction call on the same grant, using only
+the current qualification's 28 training inputs. Request
+`planning_0fbf780af6f1436dba258c7386c11240` completed successfully. Generated code stays inert
+until its separate review; this does not authorize execution of new code.
+
+The completed ordinary test root was removed as recorded above. Coverage resumed
+with the measured previous 6,100,062,208-byte fixture footprint plus 1 GiB margin
+and the 50 GiB reserve; see `validation-v3/coverage-resume.json`. The three older
+fixture roots remain untouched while their cleanup question is pending.
+
+### C09 and C11 applicable engineering acceptance
+
+C09 passes for Waza 0.38.9 mock execution and report import: six actual outcomes
+were checked inside the approved sandbox, normalized into equivalent reports,
+and cleaned up. Upstream's neutral exit one remains a failed process receipt.
+No real-model Waza qualification, source-to-binary build attestation or public
+benchmark data rights are inferred. Unsupported packs remain unavailable.
+
+C11 passes for optional legacy routing and bounded LangGraph integration: four
+actual sandboxed fixtures (three graph completions and one expected rejection)
+passed their boundary checks; the private 38-wheel runtime was removed. Legacy
+Router/Stack tests pass in the 1,561-test ordinary suite, and Essentials has a
+separate router-prohibited replay. This does not support arbitrary generated
+workflows, delegated credentials or unselected optimizers. See the
+[acceptance map](../../reports/toolkit-v2/integration-completion/acceptance-map.md).
+
+Generated-tool training plan `plan_35da27e6045a4b5ebe38f7702ee46131` is prepared
+and blocked only on exact new-code execution approval plus its runtime storage
+preflight. Review SHA-256:
+`5cef99b50379e48a9c159a2032b27a950d3d766753a12d246ca850f478b83844`.
+No training worker started. The builder reservation-summary discrepancy is
+retained in its README; actual counters and exact definitions were unchanged.

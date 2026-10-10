@@ -1,0 +1,16 @@
+{
+  "source_commit": "d2c406fca9eda159b482d28c711162c2fb1a36bd",
+  "installation_sha256": "124d5235c24ea052d8ef8e1d557edb839849617d480f71d6ed60f8647dd9f71f",
+  "driver_sha256": "fc4d8857475d530ed7da28d4d6a12d333d177d67b519dfe1b94d5781a382a3ab",
+  "inputs": {
+    "reports/toolkit-v2/c06/verified-journey/result/toolkit-evidence.json": "491b49fa49f50778d5c0f946485759e75a7f35a2f93728d09f52843f8fd82459",
+    "reports/toolkit-v2/integration-completion/waza-review-v4/execution/receipt.json": "515eb09f4b9b642ee9c5475b48f9b0bfda2bcbaef36741b38433ef8a55a70bc3",
+    "reports/toolkit-v2/integration-completion/waza-review-v4/execution/results.json": "288b028122eb0e3a5381dcb2e35f8123a7f4926adb8b5775bfad9d2555d660eb",
+    "examples/toolkit_offline/format-json/SKILL.md": "693924858cb5447be6dd0e6b9d43dd9c9fcb38bfce6b0d85bb0db347af7e9a06",
+    "examples/toolkit_offline/format-json/resources/guidance.txt": "d25f953390dea431c1bed43295780611d9b889213ad962978986b0117965d772",
+    "examples/toolkit_offline/format-json/resources/evals/excluded-answer.txt": "1af6dfbb2f4f4cde5b907c3606c7d0306c7e8732d97d7477f9f8c35f342d3a42"
+  },
+  "effects": "Install current AEEP wheel plus 32 unchanged pinned dependencies in a new private environment. Run 15 sandboxed offline CLI/identity checks; retain outputs; remove unchanged runtime and owned scratch. No activation, network in CLI, workers, models, credentials or services.",
+  "limits": "Existing installer reservation above 50 GiB; 60 sec per CLI command; memory unknown explicitly retained; no live qualification.",
+  "change": "Only the first-party AEEP wheel changes: explicit reviewed Codex prompt-schema mode and its guide. All32 dependency wheels are byte-identical to the approved and completed test. Same15 no-model sandboxed checks and exact removal. Prior wheel evidence retained. The installed identity check also verifies the default and explicit schema-mode option without starting Codex."
+}

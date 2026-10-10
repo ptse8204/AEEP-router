@@ -7,7 +7,7 @@ telemetry server or database service.
 | Function | Implemented path | Evidence and limit |
 |---|---|---|
 | Primary evaluation | agent-skill-eval 0.7.0 scripted bridge | Historical separate synthetic worker proof; Codex harness remains unqualified |
-| Managed evaluation | Existing AssessmentService / BenchmarkRunner | Plan/run/report and receipt validation; current authenticated conformance still required |
+| Managed evaluation | Existing AssessmentService / BenchmarkRunner | Plan/run/report and receipt validation; current text qualification passed; optional-use value remains open |
 | Discovery | Existing ARD, MCP Registry and local readers | CLI source permissions, deadlines and provenance tested; no candidate execution |
 | Additional evaluation | Waza 0.38.9 JSON adapter | Six actual mock outcomes and normalized reports; no model qualification |
 | Security | Cisco single-skill JSON adapter | Findings, suppressions and analyzer failures retained; scanner runtime unqualified |
@@ -62,6 +62,9 @@ private runtime. The wheel SHA-256 is
 `a95e0966f6d84733b698ea0dd3e7bed8fe4f9b6c0d1ea4dc5ac9a69afd06801c`.
 This evidence applies to that artifact only.
 
-The [text trial](../c07/text-task-review/README.md) reached a real model turn and
-stopped at a response-schema rejection. No live benefit is established. Human
-comprehension, broader platform support and release remain unassessed.
+The [initial text trial](../c07/text-task-review/README.md) stopped at a
+response-schema rejection. Its failure and costs are retained. After the adapter
+correction, [fresh qualification](../c07/text-prompt-schema-review/README.md)
+passed all 141 cases, including 105 distinct holdouts. No live benefit is
+established. Human comprehension, broader platform support and release remain
+unassessed. The current adapter wheel awaits its separate installation approval.

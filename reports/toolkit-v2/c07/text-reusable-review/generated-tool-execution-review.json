@@ -1,0 +1,27 @@
+{
+  "purpose": "Execute the exact generated text tool on 28 original training inputs against 28 independent reference calls in the existing offline container. No model calls, installation, credentials, network, image builds or holdouts. Retain all results including failures. Later model use or derivative images are outside this request.",
+  "source_digest": "d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0",
+  "source_sha256": "97220f5d020a7912070f52ef89079c48df7d2ebf00d184b9b8b9cd1a968a1bc2",
+  "training_review_sha256": "1df011d66b82286d64e6acbe26e7d7134ddf2e71c9904d227ad83d6ae3735af0",
+  "training_runner_sha256": "6e094bda4fde80cde11c61ca900c8bbbfc65ec895becb77d820fb5c3165dbfb6",
+  "plan_id": "plan_35da27e6045a4b5ebe38f7702ee46131",
+  "budget": {
+    "operations": 117,
+    "model_turns": 0,
+    "elapsed_seconds": 4570.113099959213,
+    "cash_usd": "0"
+  },
+  "additional_storage_preflight": {
+    "operations": 1,
+    "elapsed_seconds": 30
+  },
+  "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "minimum_free_bytes": 59055800320,
+  "storage_rules": "Measure scoped snapshot and require 57 * (snapshot + 64 MiB) plus 50 GiB reserve before enqueue; stop new work below 51 GiB. No cleanup of older resources.",
+  "static_findings": [
+    "Read entire source: json/sys only, stdin/stdout; no filesystem, network, subprocess, eval or dynamic import.",
+    "Semantic differences remain: bare requested labels are ignored and both leading/trailing spaces/tabs are stripped; the independent reference has different rules. Do not edit the tool or grader to improve results.",
+    "Only original training inputs are dispatched; held-out cases and expected outputs remain outside candidate containers. Training accuracy may be imperfect; later reusable arm keeps tool use optional."
+  ],
+  "authorization": "Pending explicit user response under latest pasted request boundary; routine definition review alone does not authorize new generated code execution."
+}

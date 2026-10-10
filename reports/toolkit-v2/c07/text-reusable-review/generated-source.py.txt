@@ -1,0 +1,63 @@
+"""Extract requested, case-sensitive labels from line-oriented text.
+
+A labeled line has the form 'label: value'. Labels match exactly;
+values have surrounding spaces and tabs removed. Lines without a
+colon and unrequested labels are ignored. Missing fields are omitted.
+Duplicate requested labels invalidate the entire input.
+"""
+import json
+import sys
+
+
+def extract_fields(data):
+    """Return {'fields': {...}} or {'error': 'invalid_input'}."""
+    invalid = {"error": "invalid_input"}
+    if not isinstance(data, dict) or set(data) != {"text", "fields"}:
+        return invalid
+    text, fields = data["text"], data["fields"]
+    if not isinstance(text, str) or len(text) > 100000:
+        return invalid
+    if not isinstance(fields, list) or not 1 <= len(fields) <= 100:
+        return invalid
+    if any(not isinstance(field, str) for field in fields):
+        return invalid
+    requested = set(fields)
+    if len(requested) != len(fields):
+        return invalid
+
+    found = {}
+    for line in text.splitlines():
+        label, separator, value = line.partition(":")
+        if not separator or label not in requested:
+            continue
+        if label in found:
+            return invalid
+        found[label] = value.strip(" \t")
+    return {"fields": {field: found[field] for field in fields if field in found}}
+
+
+def _reject_constant(value):
+    raise ValueError("Invalid JSON constant")
+
+
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Duplicate JSON member")
+        result[key] = value
+    return result
+
+
+def main():
+    try:
+        data = json.load(sys.stdin, parse_constant=_reject_constant,
+                         object_pairs_hook=_unique_object)
+        result = extract_fields(data)
+    except (ValueError, UnicodeError, RecursionError):
+        result = {"error": "invalid_input"}
+    sys.stdout.write(json.dumps(result, ensure_ascii=True) + "\n")
+
+
+if __name__ == "__main__":
+    main()

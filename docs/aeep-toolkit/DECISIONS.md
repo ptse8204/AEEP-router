@@ -751,3 +751,11 @@ structured envelope. No schema converter, evaluator or retry mechanism is added.
 Renew configuration/source-bound conformance and use a fresh plan and cases;
 preserve the failed plans, costs, recipe, grader and thresholds. See the
 [actual diagnosis](../../reports/toolkit-v2/c07/text-task-review/README.md).
+
+The later historical `.json-local` profiles already avoided this provider limit
+by setting executor `output_schema` to null and retaining a required local schema
+validator. Those profiles and results remain valid for their original scope.
+The new option keeps the public output contract in its normal field and makes
+the provider transport choice explicit. Both paths reuse existing local validation;
+neither changes the recipe or grader. The initial renewed profile was selected
+from the older pre-workaround plan, which caused an avoidable failed turn.

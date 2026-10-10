@@ -17,12 +17,18 @@ September 25/27 authority and original grant. It freezes a new plan and seed,
 with at most 141 model turns and no automatic retry. Required candidate exposure
 checks correctness; it cannot demonstrate optional choice or benefit.
 
-The campaign is active. Read `qualification-result.json` when present, otherwise
-inspect the existing job `assessment_f4520c24bfc04ecca66e34ec7c67cd30` without
-restarting it. The runner owns proxy restoration and cleanup. Do not alter source
-while it runs or replay its request. Screening receipts initially passed schema
-and task validation and included token fields; this is not a terminal verdict.
+The [completed campaign](qualification-result.json) passed all 141 cases, including
+105 distinct holdouts, with no correctness or execution failures. All expected
+trial positions are present. The proxy returned to its prior stopped state and
+source stability passed. The [toolkit report](report/report.html) normalized all
+141 trials without gaps.
 
-The full software checks run concurrently. These qualification timings are not
+The canonical value verdict remains `insufficient_evidence`: there are no control
+pairs in this qualification. Token fields retain provider-reported provenance;
+they do not satisfy independently observed resource coverage. Billed cash,
+subscription units and whole-host resource totals remain unknown.
+
+The full software checks ran concurrently. These qualification timings are not
 comparative performance evidence. Task outputs, credentials and expected answers
-are not saved in this report directory.
+are not saved in the exported report. The separately stored reviewed plan retains
+its protected fixture definitions and is not a public evidence export.

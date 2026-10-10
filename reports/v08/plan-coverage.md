@@ -4239,3 +4239,22 @@ value verdict is inferred. The pre-correction full suite finished: 1,559 passed,
 21 skipped in both runs, 82% coverage and all 12 checks passed. Current-source full
 checks run separately; source stays frozen during qualification. Details and
 resumption instructions are in toolkit STATE.md under D57.
+
+## Toolkit D57 text qualification — October 10, 2026
+
+Source `d2c406f` / digest `d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0`
+completed all 141 text qualification cases, including 105 distinct holdouts.
+Report `fit_e045c77bc9e24bc9bb93d2f53efb2640` passed qualification with no
+execution/correctness failures or missing positions. The toolkit normalized all
+141 trials without gaps. [Actual report](../toolkit-v2/c07/text-prompt-schema-review/report/report.html).
+The value verdict remains insufficient evidence; no control comparison or savings
+claim is supplied by qualification. Provider-reported token counts remain
+self-asserted and do not satisfy observed-resource coverage. Cash and other
+unmeasured dimensions remain unknown. Proxy restoration and source stability
+passed. Prior schema-rejection failures and their costs remain intact.
+
+Ordinary pytest passed 1,561 tests with 21 skips. Coverage is running separately
+under the recorded storage allowance. The current wheel and older-fixture cleanup
+reviews are still pending. Builder request `planning_0fbf780af6f1436dba258c7386c11240`
+uses only current training inputs; generated source cannot execute before review.
+Human comprehension, optional-access value studies and release remain open.
