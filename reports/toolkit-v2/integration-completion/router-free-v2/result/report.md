@@ -1,0 +1,98 @@
+````text
+AEEP evidence summary
+
+Value verdict: NOT_ASSESSED
+
+Descriptive records only. Unknown is not zero; fewer resources do not establish benefit.
+
+Candidate source: "https://github.com/ptse8204/AEEP-router"
+Revision: aed44be8219243c854401dd38de0953a279743d0; payload SHA-256: c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6
+Source metadata is supplied provenance, not verified developer ownership.
+
+Engineering comparison status: INCONCLUSIVE; evidence: synthetic.
+Scripted engineering trials cannot establish real candidate value.
+Existing qualification and paired-case thresholds remain unchanged.
+
+Existing AEEP analysis: insufficient_evidence; source: e8af2f0d58d4190cae172ab61fffa634faa2ce79bc342ed75e804c885abeb6b5
+Expected trial positions: 6; receipts: 6.
+Missing trial positions: 0; unresolved operations: 0.
+Worker-operation elapsed seconds, known subtotal: 4.590107623953372; measured operations: 6/6.
+Worker-operation time is assessment overhead, not model latency or a complete evaluation-cost total.
+
+Cohort 1: fake "agent-skill-eval-0.7.0" / synthetic-no-model / none
+Evidence: synthetic; plan: 5044895830ef823cc7335a734247bf1909e961316423d1ca7726e82de169f387
+
+Task family: adjacent
+Observed pairs: 1; rejected tasks: 0
+Verified-success difference, treatment minus control: +0 percentage points; graded pairs: 1/1.
+Observed differences are descriptive; no confidence-supported conclusion follows from them.
+Control: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Treatment: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Actual cash, cost per verified success, recurring fees and break-even: unknown.
+
+Task family: complex-edit
+Observed pairs: 1; rejected tasks: 0
+Verified-success difference, treatment minus control: +0 percentage points; graded pairs: 1/1.
+Observed differences are descriptive; no confidence-supported conclusion follows from them.
+Control: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Treatment: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Actual cash, cost per verified success, recurring fees and break-even: unknown.
+
+Task family: trivial-edit
+Observed pairs: 1; rejected tasks: 0
+Verified-success difference, treatment minus control: +0 percentage points; graded pairs: 1/1.
+Observed differences are descriptive; no confidence-supported conclusion follows from them.
+Control: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Treatment: 1 passed, 0 failed, 0 skipped, 0 unknown.
+  Candidate use: 0 observed, 0 observed absent, 1 unknown.
+  tokens: 0/1 measured; total unknown; observed median unknown.
+  agent_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  verification_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+  setup_wall_seconds: 0/1 measured; total unknown; observed median unknown.
+Actual cash, cost per verified success, recurring fees and break-even: unknown.
+
+Inspection references
+[{"arm": "treatment", "receipt_refs": ["3df9c5b35fcad56a70e7ed52e7ecab1926bfb06f44a163f690f4b19d72b3b6b9"], "task_sha256": "091f6cb9284646dce27f669fdfb8806abb427c996ee2a70b158c56a58548268e", "verification_ref": "bf1f2b20270d6c3102d70268973a9a1d3f4c7dac38540f9cae99f21950b06780"}, {"arm": "control", "receipt_refs": ["e54212e939f7ff06180c85201da22c2bec9f6128f2b0cfacf8a6d7d0ca62b78a"], "task_sha256": "091f6cb9284646dce27f669fdfb8806abb427c996ee2a70b158c56a58548268e", "verification_ref": "6fd6ee41c26c4fb3f56046eab5bba0ea528db95a5823f44f108270080f3f48b4"}, {"arm": "treatment", "receipt_refs": ["5b70ce8878cfd4e9cb84fae2cac2e105497ac8fcc14365fb4c315627df5d32e2"], "task_sha256": "97d893796613c85271cf6980db42bf951cee3a76e90084267ef310530626dad9", "verification_ref": "4812fdaeeb2488b02afa831d1801a28d0e4d586f8401a42297b9b19af24bd0f0"}, {"arm": "control", "receipt_refs": ["d2e1093e3376457f610f0549d2e6cd2cc001c353eb5aed6c08223e1e81d0fd04"], "task_sha256": "97d893796613c85271cf6980db42bf951cee3a76e90084267ef310530626dad9", "verification_ref": "46393ca09d121ed87ea2ee1911d4d6f436e9b247d96e9ec10e59fe299122eeab"}, {"arm": "treatment", "receipt_refs": ["d8cc2068ff0c4003254e05b8fd122d0fc97e6ac989d040b22e724efb8e5f9129"], "task_sha256": "86391866647fcd2ed2ca4e47c3f8bf23ccab88f6820dc5ce5b83232b61f94e46", "verification_ref": "f1aa15f0f7ab9185eb82086032b1e62e40f2b37568fbcdf15d38d5cc5ca7d92c"}, {"arm": "control", "receipt_refs": ["ec8f0f64ab4b62034018ff8d29ea9f43a616e0cbf85d7d1a93b0a858e2fe6c45"], "task_sha256": "86391866647fcd2ed2ca4e47c3f8bf23ccab88f6820dc5ce5b83232b61f94e46", "verification_ref": "7201bc545ee19d3394d77c42bf80cb070d88bd7c8ca0106cb313901ef71353cd"}]
+
+Limits
+Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned insufficient_evidence. No model measurements are supplied.
+Scripted scope: separate network-disabled workers receive only their current case; treatment also receives the captured candidate. No model, credential or billing calls are permitted.
+This evaluation creates its result directory and temporary workers. It does not activate a host connection or persistent service, so there is no ongoing service to pause after completion. A different run needs its own exact plan review.
+Stop this foreground run with Ctrl-C; interruption does not prove cleanup. Preserve the result directory and receipts.sqlite3. Do not replay execution into it or refund unresolved operations.
+Inspect without dispatch: aeep-toolkit eval scripted report --output /absolute/result-directory. Receipt references resolve in receipts.sqlite3; result.json identifies recorded workers and output retention. Retained outputs are under upstream; otherwise only hashes and grading records remain.
+If verification fails, records are missing, or an operation is unresolved, stop and give the operator the plan reference, operation IDs and verifier error. There is no automatic reconciliation or resume for this scripted backend. Any cleanup must identify the exact owned worker; preserve unrelated containers and evidence.
+Private package removal is separate: use the installation record and aeep-toolkit remove --help for its exact-review controls. Stop runtime users first; preserve edited runtime files for inspection.
+Artifact contents and file changes are not included in these normalized records. Resolve receipt and verification references in the originating run; grades alone do not describe edits.
+Access ceilings, spending permission, pending approvals and activation state are not established by this summary. Consult the exact reviewed plan and installation record before further execution.
+Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.
+Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.
+Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.
+Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.
+Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.
+Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit.
+````

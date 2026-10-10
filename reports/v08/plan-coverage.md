@@ -4217,3 +4217,17 @@ corrected full verification remains in progress. The operator-requested
 [GPT-6.1 Sol review](../toolkit-v2/c13/human-comprehension/agent-review.md) found
 missing authority/control guidance and inspection/recovery directions. Agent
 review does not close the human-comprehension gate. No release is authorized.
+
+### Toolkit text schema boundary — October 10 UTC
+
+The approved corrected-report wheel (`a9ed7b9`) passed 15 sandboxed checks and
+was removed. Fresh source-bound task profiles passed 11 probes per worker.
+Actual text qualification then failed its first model turn. A separate fresh
+one-call diagnostic matched response-schema rejection; raw errors were not
+persisted. The recipe has general JSON Schema constructs outside Codex's
+structured-output subset. Both calls remain charged and the proxy was restored.
+See [the exact evidence](../toolkit-v2/c07/text-task-review/README.md).
+Full pytest passed 1,559 tests with 21 skips; coverage is ongoing. The next
+adapter correction requires new source-bound conformance and a new plan, without
+changing the recipe, grader or acceptance thresholds. Human comprehension and
+release remain separate open gates.

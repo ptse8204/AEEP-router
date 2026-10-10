@@ -1,0 +1,146 @@
+{
+  "a37bbf462a04ff0778086c0e59a359aeabcadbf6e78dd29b654c812f1b3acf95": {
+    "receipt_id": "rcpt_2573d78df1f7459da6d4be61976318e3",
+    "decision_id": "dec_e302b6cc15d74bf689c76452f462e41f",
+    "action_id": "act_94ecb0a5b69e4c24a687bdadf0b98b06",
+    "capability": "assessment.text@1",
+    "executor_id": "text-phase-final.treatment",
+    "executor_kind": "host_managed",
+    "status": "failed",
+    "attempt": 1,
+    "started_at": "2026-10-10T00:30:49.288691Z",
+    "ended_at": "2026-10-10T00:30:52.977117Z",
+    "estimated": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": "0.0",
+        "upper_bound_usd": "0.0",
+        "evidence": {
+          "status": "complete",
+          "source": "static_estimate",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "executor_fingerprint": "sha256:29067e9ad5022891ac4f0e2965afd7faa42d5ba8d93f90cc60e938279d3235bf",
+    "cohort_digest": "sha256:25360bec4673be344fd2a84620b7734336de5a7cff93678e1bd0712d51d7de61",
+    "action_features": {
+      "input_bytes": 115,
+      "input_items": 5,
+      "text_characters": 81,
+      "max_depth": 2,
+      "size_bucket": "2^6"
+    },
+    "actual_resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 2249.205666128546,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "accounting": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [
+        {
+          "provider": "openai",
+          "resource_pool": "codex.self",
+          "unit": "provider_unit",
+          "consumed": null,
+          "source": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          },
+          "included_or_paid": "unknown",
+          "rate_snapshot_id": null,
+          "usage_fingerprint": null
+        }
+      ],
+      "model_usage": [],
+      "tool_footprint": null
+    },
+    "cache_affinity": null,
+    "approval_id": null,
+    "transport_success": false,
+    "execution_success": null,
+    "schema_valid": null,
+    "task_valid": null,
+    "quality_score": null,
+    "validation_results": [],
+    "output_valid": null,
+    "error_type": "execution_failed",
+    "error_message": "execution_failed",
+    "trace_id": null,
+    "metadata": {
+      "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":2.249150708084926,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":2.249017291003838,\"final_message_received\":false,\"turn_completion_received\":true}",
+      "actual_model": "gpt-6-astra",
+      "host_runtime_digest": "45d67c85e00bdf8d224bb75058e78fc123afa56a712c5b22f04d49fcd4b752c1",
+      "boundary_digest": "bab658fde3c951ce9591160d0244f0543e1aaad4da0f7c72c3ffee622e7f2cf7",
+      "model_turn_count": 1,
+      "codex_token_fields": "[]",
+      "tool_selection_rounds": null,
+      "implementation_schema_bytes": null,
+      "output_schema_bytes": 264,
+      "result_bytes": 2,
+      "tool_call_count": 0,
+      "host_tools_used": "[]",
+      "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+      "host_available_tools": "unknown",
+      "approval_evidence_digest": null,
+      "thread_identity_digest": "sha256:684a91625cbd15f25c71d7be75b55f5565fd385e5608d10daeedce229ab979da",
+      "turn_identity_digest": "sha256:d2dfc9b2e673039f0c0faa1209adb36b18c287848635716d9bcf5dc849cd8d85",
+      "worker_digest": "3a44839e9a4e5dedaf3f64842fd80ecaa16c2f4327ce8d981d4be4a86b1bb544",
+      "execution_evidence_digest": "f74c53a7454d5d3e4dacb1e221b67fda04fce929f32d7c15b895859a999f234a",
+      "task_instruction_sha256": "d73899844cb7ba8a75b6b7e8477ca793095b00b46b7ed795b1853ee7f8060df8",
+      "adapter_id": "codex-app-server:text-phase-final-treatment",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "response_bytes": 2,
+      "invocation_guard_ms": 96.24129300937057,
+      "exit_code": null,
+      "attempt_id": "attempt_51ee66e27c174bd0bb9dc8fd6a6a1e21"
+    }
+  }
+}

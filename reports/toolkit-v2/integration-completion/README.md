@@ -56,6 +56,12 @@ workspace was removed. See [checks](waza-review-v4/execution/checks.json) and
 [cleanup](waza-review-v4/execution/cleanup.json).
 No neutral result is promoted to a benefit or successful process receipt.
 
-Actual live benefit, human comprehension, broader platform support and release
-remain unassessed. The old 33-wheel review is retained for history; it cannot
-validate current code. A fresh wheel review follows the integrated source checks.
+The operator-approved [corrected-report package check](package-review-report-correction/execution/)
+passed all 15 offline checks for the wheel built from `a9ed7b9`, then removed its
+private runtime. The wheel SHA-256 is
+`a95e0966f6d84733b698ea0dd3e7bed8fe4f9b6c0d1ea4dc5ac9a69afd06801c`.
+This evidence applies to that artifact only.
+
+The [text trial](../c07/text-task-review/README.md) reached a real model turn and
+stopped at a response-schema rejection. No live benefit is established. Human
+comprehension, broader platform support and release remain unassessed.

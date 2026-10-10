@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** The approved current-source AEEP wheel test passed 15 sandboxed checks and removed its private runtime; LangGraph and Waza conformance evidence remains scoped to their recorded fixtures. Six separate router-free scripted workers passed, and both existing model workers passed connectivity with proxy restoration. Full regression found one stale Waza catalog assertion (1,557 passed, 21 skipped); the corrected assertion and report comprehension changes passed 46 focused checks. Final regression is running again against the frozen correction. The GPT-6.1 Sol review is agent evidence only; the human gate remains unmeasured. Task-profile conformance and live comparison remain unfinished engineering, not a demonstrated architecture or budget shortage.
+**Status as of 2026-10-10 UTC:** The approved `a9ed7b9` wheel passed all 15 sandboxed checks and its runtime was removed. Fresh task-profile conformance passed on both existing workers. The first actual text qualification stopped after one model turn; a separate one-call diagnostic classified the error as a response-schema rejection. Both retained their costs and restored the proxy. Full pytest passed 1,559 tests with 21 skips; coverage is still running on unchanged source. The next change is a reviewed Codex prompt-schema option that preserves the recipe, local validator and grader. Live comparison remains unfinished engineering; this is not a demonstrated architecture, credential or budget shortage.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
 last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
-next_action: 'Finish corrected-source regression, renew task-profile conformance, and prepare preregistered managed comparison using the existing grant. Preserve the a408a75 installation evidence as version-specific.'
+next_action: 'Finish frozen-source coverage; implement/test explicit Codex prompt-schema mode; renew task-profile conformance and freeze a new text plan with fresh cases. Never replay the failed qualification or diagnostic.'
 blocked_actions:
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
@@ -36,7 +36,7 @@ missing_permissions: []
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
-  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The a408a75 installation test passed; later report changes are not covered by that wheel test.'
+  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The a9ed7b9 corrected-report wheel passed its separately approved installation check; subsequent source changes require new evidence.'
 ```
 
 ## Append-only checkpoint journal
@@ -1348,3 +1348,24 @@ The operator requested GPT-6.1 Sol review instead of answering the comprehension
 exercise. [Its findings](../../reports/toolkit-v2/c13/human-comprehension/agent-review.md)
 are product feedback, not human responses. Original presented hashes remain
 in the exercise record. Later report changes require a separate exercise.
+
+## D57 — Actual text execution and response-schema diagnosis
+
+The [failed qualification and diagnostic](../../reports/toolkit-v2/c07/text-task-review/README.md)
+record real managed calls on source `a9ed7b9`, after both profiles passed all 11
+boundary probes. The qualification produced no answer and no holdout result.
+The separately reviewed diagnostic retained only an error category, hash and
+byte count. It matched schema rejection, not the configured credential, quota
+or model-availability categories. Proxy restoration was confirmed in both runs.
+The ledger now retains 9,759 operations and 2,842 turns; no counters were reset.
+
+The exact final package approval `4c800ed3e29a29429e33cc1d7b37d96c02c506fa474e0eb986b15aec24ab2d2a`
+was executed: 15 checks passed and private runtime/scratch were removed.
+[Package evidence](../../reports/toolkit-v2/integration-completion/package-review-report-correction/execution/summary.json)
+and the [six-worker replay](../../reports/toolkit-v2/integration-completion/router-free-v2/verification.json)
+apply to `a9ed7b9`. The requested GPT-6.1 Sol re-review found all three report
+issues addressed; it is still agent review, not human comprehension evidence.
+
+Prepared next-review drivers are in `reports/toolkit-v2/c07/text-prompt-schema-review`.
+They are inert so far. Implement and test the option before preparing requests.
+The prior requests, plan, failed outcome and diagnostic must remain unchanged.

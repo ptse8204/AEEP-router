@@ -70,3 +70,42 @@ recorded separately. Keep this review out of unaided/helped response counts.
 
 Skipped live operation, rendered-browser interaction and tests as instructed.
 Risk: source inspection cannot establish human comprehension or recovery success.
+
+## Follow-up: corrected result at a9ed7b9
+
+Read-only review of `integration-completion/router-free-v2/result/report.html`
+and its Markdown counterpart, plus the revised offline README. The original
+review above and the exercise records/hashes remain unchanged.
+
+The three gaps now have supported answers or explicit limits:
+
+- **Authority and controls:** `report.md:84-89` states the worker boundary,
+  forbids model/credential/billing calls, explains that no persistent service
+  is activated, gives Ctrl-C interruption guidance, and directs private runtime
+  removal to its separate exact-review controls. `:91` explicitly says this
+  summary does not establish ceilings or pending approvals. This is a clear
+  boundary, rather than implied authority from unknown cash.
+- **Changes and inspection:** `report.md:79-80` includes receipt and verification
+  references; `:87,90` identifies the originating database, result metadata,
+  retention location and the absence of content/change descriptions. This
+  privacy-limited result cannot describe discarded edits, and now says so.
+  The README's task descriptions remain available at `:3-15`. This closes the
+  misleading omission; concrete change reconstruction remains unavailable for
+  this run because `result.json:5` records `outputs_retained: false`.
+- **Failure recovery:** `report.md:86-88` and `README.md:77-91` give a non-dispatch
+  inspection command, evidence to preserve, operator escalation details and
+  an explicit absence of automatic reconciliation/resume. Recorded worker
+  names and operation IDs are present in `result.json:27-91`. This is a usable
+  escalation path; it does not claim that interruption proves cleanup.
+
+Command spelling matches the implementation: `aeep-toolkit` is the entry point
+in `pyproject.toml:52-54`; `eval scripted` dispatches to the existing adapter
+(`src/aeep_toolkit/cli.py:129-131,163-174`), whose `report --output` branch calls
+verification without dispatch (`integrations/toolkit/evaluate.py:46-51`).
+`remove --help` describes `--installation` and `--reviewed-digest`
+(`src/aeep_toolkit/cli.py:111-114`). No command was executed for this review.
+
+No additional execution defect found in these corrections. Human acceptance
+remains unmeasured; this follow-up is an agent review, not a participant response.
+Skipped tests, rendered-browser interaction and live recovery as instructed.
+Risk: supported escalation text does not prove successful recovery or human use.
