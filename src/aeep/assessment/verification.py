@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import sysconfig
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
@@ -42,6 +43,26 @@ class AssessmentProductVerification(StrictModel):
 
 
 def verification_source_digest(repository: Path) -> str:
+    if repository == Path(__file__).resolve().parents[3] and not (repository / 'src/aeep').is_dir():
+        # Installed wheels have no checkout tree; bind their actual code and assets.
+        package_root = Path(__file__).resolve().parents[2]
+        assets = Path(sysconfig.get_path('data')) / 'share/aeep/integrations'
+        roots = {'aeep': package_root / 'aeep', 'aeep_toolkit': package_root / 'aeep_toolkit',
+                 'integrations': assets}
+        if any(not root.is_dir() or root.is_symlink() for root in roots.values()):
+            raise ConfigurationError('installed assessment source or execution assets are unavailable')
+        digest = hashlib.sha256(b'aeep.installed-source.v1\0')
+        for label, root in sorted(roots.items()):
+            for path in sorted(root.rglob('*')):
+                relative = path.relative_to(root)
+                if '__pycache__' in relative.parts:
+                    continue
+                if path.is_symlink():
+                    raise ConfigurationError('installed assessment source cannot contain links')
+                if path.is_file():
+                    digest.update((label + '/' + relative.as_posix()).encode() + b'\0')
+                    digest.update(hashlib.sha256(path.read_bytes()).digest())
+        return digest.hexdigest()
     digest = hashlib.sha256()
     paths = [repository / "pyproject.toml"]
     for directory in ("src", "tests", "integrations/aeep", "integrations/assessment-runtime", "integrations/managed-worker", "scripts"):

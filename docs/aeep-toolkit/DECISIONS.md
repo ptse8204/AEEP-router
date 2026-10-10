@@ -667,3 +667,74 @@ scanner, evaluator, telemetry server or workflow engine is justified. Exact
 upstream contract checks and synthetic hostile-input tests are routine delegated
 definition work; they do not authorize executing those packages. Full regression
 is deferred until integrated implementation, per the latest operator instruction.
+
+## D51 — Ship the existing scripted bridge as package assets
+
+Use the existing setuptools data-file layout and sysconfig data-root fallback
+used by workbook/SkillsBench assets. Package the current bridge, lock, metadata
+and fixed fixtures instead of adding another evaluator or requiring a checkout.
+Resolve candidate source from the imported toolkit package, not a guessed src
+directory. Installed assessment identity must hash the actual AEEP namespaces
+and execution assets with a distinct installed-format prefix; it must never
+return the SHA of an empty checkout. Preserve checkout digest meaning unchanged.
+Installed and checkout conformance remain different and cannot be transferred.
+
+Focused checks cover changed installed code/assets, missing assets, legacy
+checkout identity, CLI fallback selection and packaged asset inventory. Actual
+new-wheel installation and worker conformance still need their exact review.
+The earlier 33-wheel review cannot validate this behavior.
+
+## D52 — Keep the external graph engine inside an existing executor
+
+C11 needs one real external workflow fixture, not another graph framework.
+Provide an operator-owned JSON worker using LangGraph's StateGraph and conditional
+edges. AEEP treats the entire dynamic graph as one bounded command, with the
+existing executor's authority, timeout, accounting and receipt boundary. It does
+not translate loops into an AEEP DAG or expose arbitrary import/code paths.
+Only the finite text fixture is implemented; checkpoint persistence, generated
+code, concurrent subagents, resumable graphs and provider tools are unsupported.
+A real installed-library run awaits its exact private runtime review. Synthetic
+API tests alone cannot satisfy external workflow conformance.
+
+## D53 — Reuse OTLP and the existing MCP transport
+
+Choose Langfuse's documented OTLP/HTTP JSON ingestion interface for optional
+observability. Add a minimized receipt-to-OTLP preview to existing telemetry;
+reuse existing HTTP execution/authority if an operator later configures an
+export destination. No SDK/server/database or auto-export is required. Preserve
+raw resource dimensions as AEEP attributes, not guessed GenAI or cash fields.
+Receipt timestamps describe the recorded operation, never a reconstructed model
+trace. Supplied receipts stay unverified. Export keys/destination/disclosure
+approval are absent, so no remote call is authorized by the preview.
+
+ToolHive exposes MCP endpoints already handled by MCPExecutor's Streamable HTTP
+transport. Keep that adapter and exact executor review instead of adding a
+second MCP client or provisioning daemon. ToolHive startup, images, identity,
+network policy and removal need their own selected deployment review; endpoint
+connectivity alone cannot establish MCP isolation or paired-agent conformance.
+Phoenix is an alternative server under different license terms, not a second
+mandatory telemetry stack. Neither exporter nor ToolHive is runtime-qualified.
+
+## D54 — Review private wheel scripts without broad data relocation
+
+Preparing the LangGraph closure failed before installation: jsonpointer 3.2.0
+and jsonpatch 1.34 ship three ordinary CLI scripts in the wheel `scripts` scheme.
+Retain the rejection evidence. Support this standard private-venv placement only
+for a wheel's exact normalized distribution/version directory and a plain command
+basename. Reject interpreter/pip/activation overrides, nested paths and collisions
+between wheels or generated entry points. All other third-party data relocation
+remains denied. The wheel hash and displayed command inventory bind the effect;
+no script runs during preview or becomes a global command. Installation still
+requires the exact reviewed closure, and removal retains snapshot protection.
+
+## D55 — Verify actual Waza comparison semantics
+
+The approved Waza artifact uses a platform-specific executable basename. Retain
+the initial pre-execution rejection and routine fixture amendment. Actual mock
+runs then exposed a wrong driver assumption: Waza deliberately exits one for
+neutral or negative baseline comparisons. Pinned cmd_run.go confirms this.
+Preserve the failed process receipt, require the exact neutral diagnostic and
+all six raw outcomes, and normalize without a benefit claim. The importer also
+now treats is_baseline as an outer comparison flag; the nested object is control.
+V4 passed this contract and removed the private executable/workspace. No model
+ran. The failed attempts remain evidence, not qualifying runs or refunded work.

@@ -1,0 +1,14 @@
+{
+  "archive_url": "https://github.com/microsoft/waza/releases/download/azd-ext-microsoft-azd-waza_0.38.9/microsoft-azd-waza-darwin-arm64.zip",
+  "archive_sha256": "277517374f1e44419b21f7d2d1eea61b5d4602456ef343f2c86858a81aca72e8",
+  "archive_bytes": 69972519,
+  "driver_sha256": "66e5c2fc79e3d0c800b67b2e451f8ad5e15492d2b30f1931549d9faf0d43e6c9",
+  "spec_sha256": "3bf84fce21498978e26d012d5f927569d4a8e2aea6a9ff5eb10ab03493fc7ad6",
+  "expected_runs": 6,
+  "model_calls": 0,
+  "runtime_installation": false,
+  "effects": "Download exact 69,972,519-byte Waza archive, extract one pinned executable in private scratch, version probe and one mock baseline run (3 cases per arm), normalize reports, retain receipt, remove scratch.",
+  "boundary": "Existing macOS sandbox denies network, host home and writes outside scratch. Fresh HOME, no inherited provider configuration. Uses existing approved ASE Python only for fixed boundary probes.",
+  "limits": "1 GiB free above 50 GiB host reserve; binary <=400 MiB; version 30 sec, mock batch 90 sec, fixed probe 120 sec; no candidate code, model, keys, remote graders or services.",
+  "limitations": "Mock backend engineering conformance only. Not separate real-agent worker qualification, benefit or binary/source equivalence."
+}

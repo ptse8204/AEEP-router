@@ -135,3 +135,20 @@ cached Waza diagnostics are not added to session billing. Scanner suppressions
 and analyzer failures remain visible as counts. No imported status establishes
 independent verification, worker isolation, safety, cost savings or permission
 to execute. These are report adapters, not qualified execution backends.
+
+## Preview a trace without exporting it
+
+`trace-preview --receipt /absolute/receipt.json` prints a minimized OTLP/HTTP JSON
+body for the recorded execution. It reads no exporter credentials and sends
+nothing. Only observed local resource dimensions are included; absent counters
+stay absent. The supplied receipt is unverified. Langfuse is the selected optional
+OTLP destination, but no destination or disclosure permission is configured.
+
+The packaged CLI now includes the existing scripted evaluator bridge and fixed
+fixtures. It still requires the separately reviewed agent-skill-eval runtime and
+worker image; installing Essentials does not install or authorize those tools.
+The installed-source fingerprint covers actual package code and execution assets,
+so checkout conformance cannot be reused for a wheel installation.
+
+[Current upstream dispositions](../../reports/toolkit-v2/integration-completion/README.md)
+distinguish report import, bounded executable conformance and remaining live gates.

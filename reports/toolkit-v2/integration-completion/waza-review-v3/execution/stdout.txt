@@ -1,0 +1,62 @@
+Running benchmark: aeep-waza-mock
+Skill: aeep-fixture
+Engine: mock
+Model: mock
+
+
+════════════════════════════════════════════════════════════════
+PASS 1: Skills-Enabled Run
+════════════════════════════════════════════════════════════════
+✓ [1/3] case-0
+✓ [2/3] case-1
+✓ [3/3] case-2
+
+════════════════════════════════════════════════════════════════
+PASS 2: Skills Baseline (skills stripped)
+════════════════════════════════════════════════════════════════
+✓ [1/3] case-0
+✓ [2/3] case-1
+✓ [3/3] case-2
+
+════════════════════════════════════════════════════════════════
+SKILL IMPACT ANALYSIS
+════════════════════════════════════════════════════════════════
+Overall Performance Delta:
+  With Skills:    100.0% (3/3 tasks passed)
+  Without Skills: 100.0% (3/3 tasks passed)
+  Impact:         no change
+
+Per-Task Breakdown:
+  • case-0                         [NEUTRAL]  100% → 100% (+0pp)
+  • case-1                         [NEUTRAL]  100% → 100% (+0pp)
+  • case-2                         [NEUTRAL]  100% → 100% (+0pp)
+
+Verdict: Skills have NEUTRAL IMPACT (no net change)
+════════════════════════════════════════════════════════════════
+===================================================
+ BENCHMARK RESULTS
+===================================================
+
+Total Tests:    3
+Succeeded:      3
+Failed:         0
+Errors:         0
+Success Rate:   100.0%
+Aggregate Score: 1.00
+Min Score:      1.00
+Max Score:      1.00
+Std Dev:        0.0000
+Duration:       1ms
+
+---------------------------------------------------
+ PER-TASK BREAKDOWN
+---------------------------------------------------
+  ✓ case-0 [passed]
+      pass_rate=100.0%  avg=1.00  min=1.00  max=1.00  stddev=0.0000  avg_dur=0ms
+  ✓ case-1 [passed]
+      pass_rate=100.0%  avg=1.00  min=1.00  max=1.00  stddev=0.0000  avg_dur=0ms
+  ✓ case-2 [passed]
+      pass_rate=100.0%  avg=1.00  min=1.00  max=1.00  stddev=0.0000  avg_dur=0ms
+
+
+Results saved to: /private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-waza-reviewed-k2iwocd8/results.json

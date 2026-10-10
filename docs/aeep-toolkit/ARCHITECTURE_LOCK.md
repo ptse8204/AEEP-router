@@ -156,3 +156,11 @@ available. The fallback reuses existing controlled Codex execution, grading,
 reservations and receipts; it does not add a runner or new infrastructure.
 A follow-up audit found a related partial-usage bug in AEEP's App Server adapter,
 which D41 corrected and regression-tested. No V2 live comparison has started.
+
+The integrated adapters retain this boundary: Waza/Cisco JSON imports are inert,
+LangGraph's finite graph runs wholly inside CommandExecutor, and OTLP preparation
+uses existing telemetry without a service. Toolkit discovery calls existing
+readers with configured source authority. The wheel ships the existing scripted
+bridge as data assets; installed verification hashes actual code/assets rather
+than an absent checkout. Exact upstream executable evidence and exclusions are
+linked from `reports/toolkit-v2/integration-completion/README.md`.

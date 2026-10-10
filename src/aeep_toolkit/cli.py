@@ -10,6 +10,7 @@ import os
 import stat
 import subprocess
 import sys
+import sysconfig
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -99,6 +100,8 @@ def main(argv: list[str] | None = None) -> int:
     portable.add_argument('--evidence', type=Path, required=True)
     portable.add_argument('--disclose-source', action='store_true', help='Include supplied public source metadata in the preview')
     portable.add_argument('--developer', type=Path, help='Exact-source developer assertion; requires --disclose-source and remains unverified')
+    trace_preview = sub.add_parser('trace-preview', help='Prepare minimized OTLP/HTTP JSON from a receipt; no exporter or network')
+    trace_preview.add_argument('--receipt', type=Path, required=True)
     install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
     install_plan.add_argument('--preview', type=Path, required=True)
     install_plan.add_argument('--policy', type=Path, required=True)
@@ -128,6 +131,10 @@ def main(argv: list[str] | None = None) -> int:
     evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
     args = parser.parse_args(argv)
     try:
+        if args.command == 'trace-preview':
+            from aeep.telemetry import receipt_otlp_preview
+            print(json.dumps(receipt_otlp_preview(read_json(args.receipt)), indent=2, allow_nan=False))
+            return 0
         if args.command == 'import-report':
             from .external import import_result, render_import
             print(render_import(import_result(read_bytes(args.input), args.backend, revision=args.revision,
@@ -160,7 +167,9 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             script = Path(__file__).resolve().parents[2] / 'integrations/toolkit/evaluate.py'
             if not script.is_file():
-                parser.exit(2, 'The scripted backend requires the reviewed repository checkout; it is unavailable in this installation.\n')
+                script = Path(sysconfig.get_path('data')) / 'share/aeep/integrations/toolkit/evaluate.py'
+            if not script.is_file():
+                parser.exit(2, 'The scripted backend assets are missing; it is unavailable in this installation.\n')
             # Keep the upstream development bridge's module namespace in its own process.
             return subprocess.run([sys.executable, '-B', str(script), *args.arguments], check=False).returncode
         if args.command == 'candidate':
@@ -213,10 +222,10 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(data, indent=2))
             return 0
         observations = tuple(InstalledObservation.model_validate(item) for item in read_json(args.observations)) if args.observations else ()
-        result = preview(registry, tuple(args.select), PreviewPolicy.model_validate(read_json(args.policy)),
+        installation_preview = preview(registry, tuple(args.select), PreviewPolicy.model_validate(read_json(args.policy)),
                          profile=args.profile, observations=observations)
-        print(result.model_dump_json(indent=2))
-        return 2 if result.blockers else 0
+        print(installation_preview.model_dump_json(indent=2))
+        return 2 if installation_preview.blockers else 0
     except (OSError, ValueError, TypeError, KeyError, ValidationError, subprocess.SubprocessError, zipfile.BadZipFile):
         if args.command == 'doctor':
             parser.exit(2, 'Cannot inspect project inventory; use macOS/Linux/WSL and valid regular project configuration files.\n')

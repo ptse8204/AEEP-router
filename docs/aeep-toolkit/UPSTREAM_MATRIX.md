@@ -266,3 +266,15 @@ and a validated source/developer assertion are in `c12/developer-source`. This
 is attributable repository metadata, not legal ownership or payment verification.
 The host currently has Ponytail 5.1.0; these pins and historical studies do not
 apply to that newer installed version. No candidate code was executed.
+
+## Integration completion update (October 9)
+
+The [current dispositions](../../reports/toolkit-v2/integration-completion/README.md)
+and [21-responsibility review update](../../reports/toolkit-v2/integration-completion/upstream-review-update.json)
+apply over the immutable C01 worksheet. Four actual LangGraph fixtures and six
+Waza mock outcomes now have pinned executable evidence and cleanup records.
+Cisco report import, configured discovery and local OTLP preview are implemented;
+their scope does not imply installed scanner/exporter/deployment conformance.
+The update records specific task-mapping, data-rights, optional-choice and
+execution-boundary reasons for excluded integrations. Original source reviews,
+failed attempts and historical live results retain their original meanings.

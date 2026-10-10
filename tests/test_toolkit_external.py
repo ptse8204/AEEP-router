@@ -4,6 +4,7 @@ import json
 import socket
 import subprocess
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
@@ -33,7 +34,8 @@ def imported(data, backend='waza'):
 
 def test_waza_preserves_missingness_and_does_not_sum_duplicate_session_usage():
     data = waza()
-    data['baseline_outcome'] = {**deepcopy(data), 'is_baseline': True}
+    data['baseline_outcome'] = deepcopy(data)
+    data['is_baseline'] = True
     result = imported(data)
     observed = result['observations']
     run = observed['runs'][0]
@@ -43,6 +45,7 @@ def test_waza_preserves_missingness_and_does_not_sum_duplicate_session_usage():
     assert run['candidate_exposed'] is None
     assert run['verified_outcome'] == 'unknown'
     assert observed['baseline']['role_claim'] == 'baseline'
+    assert observed['role_claim'] == 'candidate'
     assert observed['token_total'] is None and observed['actual_cash'] is None
     assert result['outcome'] == 'NOT_ASSESSED'
     assert result['artifact_sha256'] == hashlib.sha256(json.dumps(data).encode()).hexdigest()
@@ -50,6 +53,20 @@ def test_waza_preserves_missingness_and_does_not_sum_duplicate_session_usage():
         rendered = render_import(result, format)
         assert 'PRIVATE_' not in rendered and 'private-task' not in rendered
         assert '<script>' not in rendered
+
+
+def test_actual_pinned_waza_mock_report_retains_both_arms_and_unknown_usage():
+    path = Path(__file__).resolve().parents[1] / 'reports/toolkit-v2/integration-completion/waza-review-v4/execution/results.json'
+    result = import_result(path.read_bytes(), 'waza', revision=PINS['waza'], candidate_sha256='a'*64)
+    observed = result['observations']
+    assert observed['role_claim'] == 'candidate'
+    assert observed['baseline']['role_claim'] == 'baseline'
+    for arm in (observed, observed['baseline']):
+        assert arm['reported_task_statuses'] == {'passed': 3}
+        assert len(arm['runs']) == 3
+        assert all(run['reported_usage'] is None for run in arm['runs'])
+        assert arm['actual_cash'] is None and arm['token_total'] is None
+    assert result['outcome'] == 'NOT_ASSESSED'
 
 
 @pytest.mark.parametrize('mutation', ['version', 'negative', 'boolean', 'duplicate', 'nested', 'nan'])

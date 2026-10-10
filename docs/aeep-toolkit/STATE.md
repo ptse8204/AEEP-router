@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** C00-C05 have recorded PASS at their source-review/software tiers. C04 is an engineering gate, not authenticated host conformance. The real upstream scripted journey and existing managed fallback are implemented. Source `f3b7f50` passed both 1,532-test suites with 21 skips, coverage and all required checks. C06's exact 33-wheel private installation review awaits the operator response; its driver is ready. Optional-pack and source-bound live-study preparation continue, while live efficacy, human usability and release remain open. Earlier stopping was unfinished engineering, not a pending architecture decision or demonstrated budget shortage.
+**Status as of 2026-10-09:** Integration work now includes CLI discovery, Waza and Cisco report adapters, packaged scripted execution assets, installed-source identity, minimized OTLP preview and a bounded LangGraph worker. The approved LangGraph test passed four actual sandboxed fixtures and removed its runtime. Waza passed six mock outcome checks with its neutral-result exit retained; its workspace was removed. Focused checks pass; the final integrated regression and current-source wheel review are next. Historical full-suite evidence at `f3b7f50` does not validate these changes. Live efficacy, human usability and release remain open. Earlier stopping was unfinished engineering, not a demonstrated architecture or budget shortage.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -22,13 +22,13 @@ checkpoint_status:
   C08: IN_PROGRESS
   C09: IN_PROGRESS
   C10: IN_PROGRESS
-  C11: TODO
+  C11: IN_PROGRESS
   C12: IN_PROGRESS
   C13: TODO
 last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
 last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
-next_action: 'Complete toolkit discovery and optional upstream adapters with focused checks. Defer broad regression and new package installation review until integrated source is ready. Pending 33-wheel installation blocks only that exact old-source installation; continue all independent engineering.'
+next_action: 'Commit integrated implementation, run final required checks, and prepare current-source wheel installation review. Continue C07 fresh definitions and worker readiness independently of installation approval.'
 blocked_actions:
   - 'New 33-wheel private AEEP installation test awaits the exact operator review; independent safe work continues.'
 missing_permissions:
@@ -1296,3 +1296,31 @@ error records, suppressions, failed analyzers, changed schema/pins, duplicate
 JSON/tasks, negative/nonfinite metrics and no process/network effects. Upstream
 packages were not executed. C08/C09 remain IN_PROGRESS pending actual selected
 runtime qualification; prior full-suite evidence is historical, not current.
+
+## Integrated upstream completion — D51–D55
+
+Parent `9b77e39`. Packaged the existing scripted bridge, bound installed source
+identity, added receipt OTLP preview and a finite LangGraph command worker.
+Standard private wheel scripts now have exact basename/bootstrap/collision checks;
+no global commands are installed. Initial LangGraph closure rejection is retained.
+
+Exact operator approval `8c38eeded1adfe1ecd0ad365653669699d3ac755b96c655c9ebc7cbe30bcdf28`
+covered the 38-wheel LangGraph test: four actual fixtures passed all boundary
+probes; unchanged runtime removed. Exact Waza approval
+`018d7f5634484756c1743a5db7ae1b852d384312b8510aa29e67948a0e2ddef4`
+covered the pinned executable and six mocks. Routine definition amendments fixed
+the archive basename, retained stderr, and expected its source-confirmed neutral
+exit. V4 verified six passing outcomes and normalized reports; process exit one
+remains a failed process receipt, not a benefit. Private workspace removed.
+
+Evidence, source hashes, per-wheel licenses and explicit exclusions for all
+original responsibilities: `reports/toolkit-v2/integration-completion/`.
+No additional install approval was inferred from either upstream test.
+
+Focused command: Framework Python 3.13, `PYTHONPATH=src python3 -m pytest`
+with installation, packaged-assets, runtime-install, trace, external, discovery
+and LangGraph fixture modules: **106 passed in 6.86s**. After actual Waza arm
+mapping correction, external module: **11 passed in 0.06s**. Ruff passed; mypy
+passed 164 source files after correcting ConfigParser typing and a CLI variable
+collision. Earlier failures are engineering corrections, not suppressed results.
+Full integrated checks and current-source package installation remain pending.

@@ -4188,3 +4188,16 @@ and Cisco report imports. Thirteen synthetic focused tests pass; imports are
 unverified observations and never qualify a candidate. No upstream installation,
 model call, grant reset, credential access or release occurred. See toolkit
 STATE.md and `reports/toolkit-v2/integration-completion/interface-sources.json`.
+
+## Toolkit integrated upstream completion (D51–D55)
+
+The [integration evidence](../toolkit-v2/integration-completion/README.md) records
+packaged scripted assets, installed-source identity, OTLP preview, private wheel
+script validation and actual approved upstream tests. LangGraph: four bounded
+fixtures passed and runtime removed. Waza: six mock outcomes normalized with
+neutral exit one preserved; executable workspace removed. Failed driver attempts
+remain recorded. No live-benefit, human-usability or release gate is closed.
+106 focused tests, then 11 Waza importer tests passed; Ruff and mypy passed.
+Final integrated regression and current-source wheel install are still pending.
+The old 33-wheel review is neither approval for new software nor a project-wide
+blocker. Exact upstream exclusions reference the original 21-responsibility audit.

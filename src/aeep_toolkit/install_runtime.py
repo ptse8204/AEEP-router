@@ -1,6 +1,7 @@
 """Reviewed, offline wheel installation into an exclusively owned private runtime."""
 from __future__ import annotations
 
+import configparser
 import hashlib
 import json
 import os
@@ -107,6 +108,35 @@ def file_digest(path: Path) -> str:
         return hashlib.file_digest(handle, 'sha256').hexdigest()
 
 
+def wheel_commands(path: Path, wheel: Wheel) -> tuple[str, ...]:
+    """Inventory private venv scripts; reject bootstrap overrides and collisions."""
+    names: list[str] = []
+    prefix = f'{normalize(wheel.name).replace("-", "_")}-{wheel.version}.data/scripts/'
+    with zipfile.ZipFile(path) as archive:
+        for name in archive.namelist():
+            if name.startswith(prefix) and not name.endswith('/'):
+                names.append(name.removeprefix(prefix))
+            if name.endswith('.dist-info/entry_points.txt'):
+                if archive.getinfo(name).file_size > 1024**2:
+                    raise ValueError('wheel command metadata exceeds bounds')
+                parser = configparser.ConfigParser(interpolation=None)
+                parser.optionxform = str  # type: ignore[method-assign, assignment]
+                try:
+                    parser.read_string(archive.read(name).decode('utf-8'))
+                except configparser.Error as exc:
+                    raise ValueError('invalid wheel command metadata') from exc
+                for group in ('console_scripts', 'gui_scripts'):
+                    if parser.has_section(group):
+                        names.extend(parser[group])
+    for name in names:
+        if (not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', name)
+                or name.casefold().startswith(('python', 'pip', 'activate', 'deactivate'))):
+            raise ValueError('unsupported wheel command: bootstrap override or unsafe name')
+    if len({name.casefold() for name in names}) != len(names):
+        raise ValueError('wheel command names collide')
+    return tuple(sorted(names))
+
+
 def check_wheel(path: Path, wheel: Wheel) -> int:
     if file_digest(path) != wheel.sha256:
         raise ValueError('wheel artifact changed')
@@ -124,9 +154,11 @@ def check_wheel(path: Path, wheel: Wheel) -> int:
                 and name.parts[:4] == (f'aeep_agent_router-{wheel.version}.data', 'data', 'share', 'aeep')
                 and not any(part.casefold().endswith('.data') for part in name.parts[1:])
             )
+            private_script = (len(name.parts) == 3
+                and name.parts[:2] == (f'{normalize(wheel.name).replace("-", "_")}-{wheel.version}.data', 'scripts'))
             if (not name.parts or str(name) != entry.filename.rstrip('/') or name.is_absolute() or '..' in name.parts or '\\' in entry.filename
                     or stat.S_ISLNK(entry.external_attr >> 16)
-                    or (any(part.casefold().endswith('.data') for part in name.parts) and not owned_data)
+                    or (any(part.casefold().endswith('.data') for part in name.parts) and not (owned_data or private_script))
                     or name.suffix.casefold() == '.pth' or any(Path(part).stem.casefold() in {'sitecustomize', 'usercustomize', 'pip'} for part in name.parts)):
                 raise ValueError('wheel contains unsupported paths or interpreter startup hooks')
         metadata = [name for name in names if len(Path(name).parts) == 2 and name.endswith('.dist-info/METADATA')]
@@ -135,6 +167,7 @@ def check_wheel(path: Path, wheel: Wheel) -> int:
         headers = BytesParser().parsebytes(archive.read(metadata[0]), headersonly=True)
         if (headers.get_all('Name') != [wheel.name] or headers.get_all('Version') != [wheel.version]):
             raise ValueError('wheel metadata differs from reviewed identity')
+        wheel_commands(path, wheel)
         # Include allocation rounding, staging and unpacking; manifest estimates cannot shrink this bound.
         return 3 * (path.stat().st_size + sum((e.file_size // 4096 + 1) * 4096 for e in entries))
 
@@ -165,8 +198,13 @@ def check_closure(source: Path, wheels: tuple[Wheel, ...], selected_platform: st
     supported = set(sys_tags())
     versions = {normalize(w.name): Version(w.version) for w in wheels}
     required = 0
+    commands: set[str] = set()
     for wheel in wheels:
         required += check_wheel(source / wheel.filename, wheel)
+        selected_commands = {name.casefold() for name in wheel_commands(source / wheel.filename, wheel)}
+        if commands & selected_commands:
+            raise ValueError('selected wheels overwrite the same private runtime command')
+        commands.update(selected_commands)
         name, version, _, tags = parse_wheel_filename(wheel.filename)
         if name != normalize(wheel.name) or version != versions[normalize(wheel.name)] or not tags & supported:
             raise ValueError('wheel filename identity or platform is incompatible')

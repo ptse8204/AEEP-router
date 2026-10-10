@@ -290,3 +290,30 @@ def test_other_packages_cannot_claim_aeep_shared_data_layout(tmp_path):
         installation(tmp_path, extra={
             'aeep_agent_router-1.0.data/data/share/aeep/example.txt': 'rejected',
         })
+
+
+def test_private_wheel_scripts_install_and_remove_without_global_commands(tmp_path):
+    plan = installation(tmp_path, extra={'aeep_installer_fixture-1.0.data/scripts/fixture-helper': '#!python\nprint("synthetic")\n'})
+    assert runtime.wheel_commands(Path(plan.wheelhouse)/plan.wheels[0].filename, plan.wheels[0]) == ('fixture-helper',)
+    review = runtime.digest(plan)
+    runtime.apply(plan, review)
+    assert (Path(plan.destination)/'bin/fixture-helper').is_file()
+    assert runtime.remove(plan, review)['status'] == 'removed'
+
+
+@pytest.mark.parametrize('name', ['python3', 'pip3', 'activate', 'nested/tool', '../escape'])
+def test_private_scripts_cannot_override_bootstrap_or_escape(tmp_path, name):
+    with pytest.raises(ValueError):
+        installation(tmp_path, extra={'aeep_installer_fixture-1.0.data/scripts/'+name: '#!python\n'})
+
+
+def test_entry_points_cannot_override_bootstrap_or_duplicate_wheel_scripts(tmp_path):
+    for index, entries in enumerate((
+        {'aeep_installer_fixture-1.0.dist-info/entry_points.txt': '[console_scripts]\npython = fixture:main\n'},
+        {'aeep_installer_fixture-1.0.data/scripts/helper': '#!python\n',
+         'aeep_installer_fixture-1.0.dist-info/entry_points.txt': '[console_scripts]\nhelper = fixture:main\n'},
+    )):
+        root = tmp_path/str(index)
+        root.mkdir()
+        with pytest.raises(ValueError):
+            installation(root, extra=entries)

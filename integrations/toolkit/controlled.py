@@ -49,6 +49,7 @@ from aeep.models import (
     utc_now,
 )
 from aeep.store import ReceiptStore
+from aeep_toolkit import candidate as candidate_module
 from aeep_toolkit.cli import read_bytes
 
 SOURCE_NAMES = ('agent_skill_eval/__init__.py', 'agent_skill_eval/models.py',
@@ -145,7 +146,7 @@ def preview(runtime: Path, output: Path, environment: AssessmentEnvironment, inp
         raise ValueError('evaluation output must be a new canonical directory with an existing parent')
     files = [BASE/name for name in ('controlled.py','controlled_engine.py','controlled_fixture_worker.py',
                                     'controlled_report.py','stack.py','definition.py','synthetic_edit.py','evaluate.py','verify_controlled.py')]
-    files.extend(BASE.parents[1]/'src/aeep_toolkit'/name for name in ('candidate.py','__init__.py'))
+    files.extend(Path(candidate_module.__file__).parent/name for name in ('candidate.py','__init__.py'))
     return {'schema':'aeep.toolkit.synthetic-evaluation-plan.v1','inputs':inputs.binding(),
             'runtime':str(runtime),'runtime_inventory':verify_runtime(runtime,manifest()),
             'aeep_source_sha256':assessment_verification.verification_source_digest(Path(assessment_verification.__file__).parents[3]),
@@ -202,7 +203,7 @@ async def execute(runtime: Path, output: Path, environment: AssessmentEnvironmen
             target = worker_source/name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(raw)
-        core_source = BASE.parents[1]/'src/aeep_toolkit'
+        core_source = Path(candidate_module.__file__).parent
         for name in ('__init__.py','candidate.py'):
             target = worker_source/'aeep_toolkit'/name
             target.parent.mkdir(parents=True,exist_ok=True)

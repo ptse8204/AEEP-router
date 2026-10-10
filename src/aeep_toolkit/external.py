@@ -73,7 +73,7 @@ def _hash(value: Any) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
 
 
-def _waza(data: dict[str, Any]) -> dict[str, Any]:
+def _waza(data: dict[str, Any], role: str = 'candidate') -> dict[str, Any]:
     source = WazaResult.model_validate(data)
     if len({task.test_id for task in source.tasks}) != len(source.tasks):
         raise ValueError('duplicate Waza tasks')
@@ -89,7 +89,7 @@ def _waza(data: dict[str, Any]) -> dict[str, Any]:
                 'reported_usage': run.usage.model_dump() if run.usage else None,
                 'verified_outcome': 'unknown', 'candidate_exposed': None, 'candidate_invoked': None,
             })
-    return {'role_claim': 'baseline' if source.is_baseline else 'candidate',
+    return {'role_claim': role,
             'evaluation_ref': _hash(source.eval_id), 'tasks': len(source.tasks), 'runs': runs,
             'reported_task_statuses': dict(Counter(task.status for task in source.tasks)),
             'billing_scope': 'unresolved_evaluation_sessions', 'actual_cash': None,
@@ -98,7 +98,7 @@ def _waza(data: dict[str, Any]) -> dict[str, Any]:
 
 def import_result(raw: bytes, backend: str, *, revision: str, candidate_sha256: str) -> dict[str, Any]:
     """A local supplied-source assertion; hashes prove identity, not execution or safety."""
-    if len(raw) > 1024 * 1024 or revision != PINS.get(backend):
+    if backend not in PINS or len(raw) > 1024 * 1024 or revision != PINS[backend]:
         raise ValueError('unsupported report size or upstream revision')
     from pydantic import TypeAdapter
     TypeAdapter(Digest).validate_python(candidate_sha256)
@@ -120,9 +120,13 @@ def import_result(raw: bytes, backend: str, *, revision: str, candidate_sha256: 
         observations = _waza(data)
         if data.get('baseline_outcome') is not None:
             baseline = data['baseline_outcome']
-            if not isinstance(baseline, dict) or baseline.get('is_baseline') is not True or baseline.get('baseline_outcome') is not None:
+            # Upstream is_baseline flags the outer comparison, not the control arm.
+            if (data.get('is_baseline') is not True or not isinstance(baseline, dict)
+                    or baseline.get('is_baseline', False) is not False or baseline.get('baseline_outcome') is not None):
                 raise ValueError('unsupported nested Waza baseline')
-            observations['baseline'] = _waza(baseline)
+            observations['baseline'] = _waza(baseline, 'baseline')
+        elif data.get('is_baseline'):
+            raise ValueError('Waza comparison is missing its baseline')
         limitations = [
             'Imported status is an upstream claim, not an independent AEEP grade.',
             'Runs, cached diagnostics and evaluation session usage are not added together.',
@@ -150,7 +154,7 @@ def import_result(raw: bytes, backend: str, *, revision: str, candidate_sha256: 
         'source_revision_asserted': revision, 'candidate_sha256_asserted': candidate_sha256,
         'artifact_sha256': hashlib.sha256(raw).hexdigest(), 'trust': 'supplied_unverified',
         'outcome': 'NOT_ASSESSED', 'execution_performed': False, 'observations': observations,
-        'limitations': limitations + ['Paths, names, prompts, outputs and diagnostic text are omitted; digests can still identify a study.'],
+        'limitations': [*limitations, 'Paths, names, prompts, outputs and diagnostic text are omitted; digests can still identify a study.'],
     }
     return {**result, 'content_sha256': _hash(result)}
 

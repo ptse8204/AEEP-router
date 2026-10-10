@@ -168,7 +168,12 @@ def test_cli_full_catalog_is_inert_and_lists_pinned_sources(capsys):
     assert entries['agent-skill-eval']['status'] == 'experimental'
     assert entries['agent-skill-eval']['qualification'] == 'scripted_engineering_only'
     assert entries['aeep-evaluator']['qualification'] == 'software_tests_only'
-    assert all(item['status'] == 'blocked' for item in output['catalog'] if item['id'] not in {'agent-skill-eval', 'aeep-evaluator'})
+    assert entries['langgraph']['qualification'] == 'bounded_workflow_fixture_only'
+    assert entries['skill-scanner']['qualification'] == 'report_import_only'
+    assert entries['langfuse']['qualification'] == 'otlp_preview_only'
+    assert entries['mcpmark']['status'] == 'blocked'
+    assert all(item.get('installed') is None and item.get('enabled') is None for item in output['catalog'])
+    assert not any(item['status'] == 'qualified' for item in output['catalog'])
     assert all(len(item['source_revision']) == 40 for item in output['catalog'])
 
 
