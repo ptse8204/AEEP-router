@@ -1,0 +1,105 @@
+{
+  "profile": "Evaluation Essentials",
+  "selected": [],
+  "catalog": [
+    {
+      "id": "openskilleval",
+      "role": "benchmark",
+      "repository": "https://github.com/ALEX-nlp/OpenSkillEval",
+      "source_revision": "d0e109283eee79216284cdf09ee59bf63239fb13",
+      "status": "blocked",
+      "artifact_sha256": null,
+      "reason": "Code Apache-2.0; benchmark data CC-BY-NC-4.0. Commercial redistribution is not cleared; no data copied or grader executed.",
+      "qualification": "excluded_dataset_rights",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "mcp-universe",
+      "role": "benchmark",
+      "repository": "https://github.com/SalesforceAIResearch/MCP-Universe",
+      "source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "status": "blocked",
+      "artifact_sha256": null,
+      "reason": "Selected uppercase task differs from MCPMark in file count and required word-count outputs. Shared external asset lacks a recorded immutable hash and separate redistribution clearance; no pack copied.",
+      "qualification": "excluded_task_mapping",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "skillsbench",
+      "role": "benchmark",
+      "repository": "https://github.com/benchflow-ai/skillsbench",
+      "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "status": "experimental",
+      "artifact_sha256": null,
+      "reason": "Existing pinned DOCX benchmark adapter and historical negative evidence retained. No new V2 live qualification or transfer to unrelated hosts/tasks.",
+      "qualification": "existing_adapter_only",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "mcpmark",
+      "role": "benchmark",
+      "repository": "https://github.com/eval-sys/mcpmark",
+      "source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "status": "blocked",
+      "artifact_sha256": null,
+      "reason": "Selected file_context/uppercase instructions require only uppercase conversion while verifier additionally requires answer.txt word counts. External file_context.zip lacks recorded immutable hash/data-rights clearance; no asset or grader copied.",
+      "qualification": "excluded_task_mapping",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "waza",
+      "role": "evaluator",
+      "repository": "https://github.com/microsoft/waza",
+      "source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+      "status": "experimental",
+      "artifact_sha256": "277517374f1e44419b21f7d2d1eea61b5d4602456ef343f2c86858a81aca72e8",
+      "reason": "Pinned 0.38.9 executable completed six sandboxed mock outcomes and JSON/Markdown/HTML normalization; neutral comparison exit 1 preserved. Executable workspace removed. Real-agent isolation, authentication and benefit remain unqualified.",
+      "qualification": "mock_engineering_only",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "toolhive",
+      "role": "isolation",
+      "repository": "https://github.com/stacklok/toolhive",
+      "source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+      "status": "blocked",
+      "artifact_sha256": null,
+      "reason": "Existing MCPExecutor Streamable HTTP can consume a reviewed ToolHive endpoint. No selected daemon/image identity, network policy, installation/removal plan or paired-worker conformance; endpoint support alone is not isolation.",
+      "qualification": "deployment_not_selected",
+      "installed": null,
+      "enabled": null
+    },
+    {
+      "id": "agent-skill-eval",
+      "role": "evaluator",
+      "repository": "https://github.com/tardigrde/agent-skill-eval",
+      "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+      "status": "experimental",
+      "artifact_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
+      "reason": "Pinned 0.7.0 scripted integration ran separate controlled fixture workers. Native Codex launch/token contract is unqualified; D40 selects the existing AEEP fallback for managed-model evaluation.",
+      "installed": null,
+      "enabled": null,
+      "qualification": "scripted_engineering_only"
+    },
+    {
+      "id": "aeep-evaluator",
+      "role": "evaluator",
+      "repository": "https://github.com/ptse8204/AEEP-router",
+      "source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+      "status": "experimental",
+      "artifact_sha256": null,
+      "reason": "Managed skill adapter and canonical reports reuse AssessmentService/BenchmarkRunner. Current authenticated worker conformance and V2 live comparison remain unverified.",
+      "installed": null,
+      "enabled": null,
+      "qualification": "software_tests_only"
+    }
+  ],
+  "provided_manifests": [],
+  "notice": "Catalog entries describe their recorded integration scope. Installed/enabled state is unknown; exact installation manifests and applicable runtime qualification remain required."
+}
+{"installed_source_digest": "24cc610ffb89c0e2bea1a1b966275f775c2ed8008463242b408e50155977ef9d", "router_imported": false}

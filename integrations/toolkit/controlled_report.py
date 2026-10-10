@@ -130,6 +130,14 @@ def create(output, repository, plan, recipe, definition, environment, results, r
         'worker_operations_reserved':len(ledger.operations),
         'model_tokens':None,'model_wall_seconds':None,'actual_cash':None,
         'cost_per_verified_success':None,'recurring_fee_break_even':None}
+    summary['limitations'][:0] = [
+        'Scripted scope: separate network-disabled workers receive only their current case; treatment also receives the captured candidate. No model, credential or billing calls are permitted.',
+        'This evaluation creates its result directory and temporary workers. It does not activate a host connection or persistent service, so there is no ongoing service to pause after completion. A different run needs its own exact plan review.',
+        'Stop this foreground run with Ctrl-C; interruption does not prove cleanup. Preserve the result directory and receipts.sqlite3. Do not replay execution into it or refund unresolved operations.',
+        'Inspect without dispatch: aeep-toolkit eval scripted report --output /absolute/result-directory. Receipt references resolve in receipts.sqlite3; result.json identifies recorded workers and output retention. Retained outputs are under upstream; otherwise only hashes and grading records remain.',
+        'If verification fails, records are missing, or an operation is unresolved, stop and give the operator the plan reference, operation IDs and verifier error. There is no automatic reconciliation or resume for this scripted backend. Any cleanup must identify the exact owned worker; preserve unrelated containers and evidence.',
+        'Private package removal is separate: use the installation record and aeep-toolkit remove --help for its exact-review controls. Stop runtime users first; preserve edited runtime files for inspection.',
+    ]
     if incomplete:
         summary['limitations'].insert(0,'Execution stopped. Missing results and unknown grades are not successes; incurred and unresolved operations remain in the ledger. No retry was performed.')
     summary['limitations'].insert(0,'Each synthetic trial resolves to its own canonical worker receipt; existing AEEP fit_report returned '+analysis.outcome+'. No model measurements are supplied.')

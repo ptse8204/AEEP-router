@@ -96,4 +96,6 @@ def test_catalog_distinguishes_working_adapters_from_unqualified_options(capsys)
     assert entries["agent-skill-eval"]["qualification"] == "scripted_engineering_only"
     assert entries["agent-skill-eval"]["installed"] is None
     assert entries["aeep-evaluator"]["qualification"] == "software_tests_only"
-    assert entries["waza"]["status"] == "blocked"
+    assert entries["waza"]["status"] == "experimental"
+    assert entries["waza"]["qualification"] == "mock_engineering_only"
+    assert entries["waza"]["installed"] is None

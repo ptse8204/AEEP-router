@@ -142,7 +142,14 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
         "outcome": "NOT_ASSESSED", "cohorts": cohorts,
         "candidate": bundle.candidate.model_dump(mode="json"),
         "adapter": bundle.adapter.model_dump(mode="json"),
+        "inspection_references": [
+            {"task_sha256": run.task_sha256, "arm": run.arm,
+             "receipt_refs": list(run.receipt_refs), "verification_ref": run.verification_ref}
+            for run in bundle.runs
+        ],
         "limitations": [
+            "Artifact contents and file changes are not included in these normalized records. Resolve receipt and verification references in the originating run; grades alone do not describe edits.",
+            "Access ceilings, spending permission, pending approvals and activation state are not established by this summary. Consult the exact reviewed plan and installation record before further execution.",
             "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
             "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
             "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
@@ -238,6 +245,8 @@ def render(summary: dict[str, Any], format: str) -> str:
                 lines += [cash['notice'], ""]
             else:
                 lines += ["Actual cash, cost per verified success, recurring fees and break-even: unknown.", ""]
+    if summary.get("inspection_references"):
+        lines += ["Inspection references", json.dumps(summary["inspection_references"], sort_keys=True), ""]
     lines += ["Limits", *summary["limitations"]]
     text = "\n".join(lines) + "\n"
     if format == "markdown":

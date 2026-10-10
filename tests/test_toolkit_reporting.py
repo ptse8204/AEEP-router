@@ -189,3 +189,15 @@ def test_terminal_control_codes_in_declared_version_are_escaped():
     output = render(summarize(bundle(host_version="\x1b[2J")), "markdown")
     assert "\x1b" not in output
     assert "\\u001b" in output
+
+
+def test_report_exposes_inspection_references_without_inventing_authority():
+    report = summarize(bundle())
+    assert report["inspection_references"][0] == {
+        "task_sha256": D, "arm": "control", "receipt_refs": [D], "verification_ref": D,
+    }
+    for format in ("json", "markdown", "html"):
+        text = render(report, format)
+        assert "pending approvals" in text
+        assert "grades alone do not describe edits" in text
+        assert D in text

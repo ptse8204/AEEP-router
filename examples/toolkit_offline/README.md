@@ -78,12 +78,23 @@ If a worker fails, dispatch stops and keeps the incurred or unresolved operation
 The partial report shows expected positions, receipts, unknown grades and missing
 results. Run the same `report` command to verify those records. Do not replay into
 that output directory or treat an unresolved operation as refunded allowance.
+If verification fails or reports an unresolved operation, stop and give the
+operator the plan reference, operation IDs from `result.json` and the verifier
+error. Keep `receipts.sqlite3` and the whole result directory. This backend has
+no automatic reconciliation or resume command; do not clear the ledger or retry
+the same operation. Inspect any remaining worker by its exact recorded identity
+before authorizing cleanup. Preserve unrelated containers.
+
+This foreground evaluation enables no persistent service. To interrupt an active
+run, use Ctrl-C, then follow the inspection procedure above; interruption alone
+does not prove worker cleanup. After completion there is no service to pause.
+The result directory is retained evidence, not an installed runtime.
+
 The partial report's worker-operation elapsed subtotal is assessment overhead;
 model time and full evaluation cost remain separate unknowns.
 
 Both evaluation backends are accessible through `aeep-toolkit eval`: choose
 `scripted` for this upstream fake-harness journey or `managed` for an existing
-reviewed native assessment. No failure switches engines. Scripted execution
-currently requires this repository checkout; an installation without its assets
-reports unavailable. The original `integrations/toolkit/evaluate.py` commands
+reviewed native assessment. No failure switches engines. Scripted execution uses the packaged assets when installed, or the checkout
+assets during development. A runtime missing those assets reports unavailable. The original `integrations/toolkit/evaluate.py` commands
 remain valid. No installation or model call is triggered by selecting a backend.

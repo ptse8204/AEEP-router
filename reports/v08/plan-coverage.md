@@ -4201,3 +4201,19 @@ remain recorded. No live-benefit, human-usability or release gate is closed.
 Final integrated regression and current-source wheel install are still pending.
 The old 33-wheel review is neither approval for new software nor a project-wide
 blocker. Exact upstream exclusions reference the original 21-responsibility audit.
+
+### Toolkit V2 integration verification and comprehension correction (2026-10-09)
+
+The approved a408a75 private-wheel test passed 15 sandboxed checks, including
+packaged CLI assets and installed source identity, then removed the runtime.
+Six fresh router-free scripted workers passed; two managed workers passed
+connectivity and restored the existing proxy. These results are version-specific
+and do not establish task qualification or marginal value. See
+[toolkit state](../../docs/aeep-toolkit/STATE.md#d56-integration-verification-and-agent-comprehension-review).
+
+Final pytest found one stale Waza status assertion: 1,557 passed, 21 skipped.
+The assertion and report comprehension correction passed 46 focused tests;
+corrected full verification remains in progress. The operator-requested
+[GPT-6.1 Sol review](../toolkit-v2/c13/human-comprehension/agent-review.md) found
+missing authority/control guidance and inspection/recovery directions. Agent
+review does not close the human-comprehension gate. No release is authorized.

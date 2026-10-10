@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-09:** Integration work now includes CLI discovery, Waza and Cisco report adapters, packaged scripted execution assets, installed-source identity, minimized OTLP preview and a bounded LangGraph worker. The approved LangGraph test passed four actual sandboxed fixtures and removed its runtime. Waza passed six mock outcome checks with its neutral-result exit retained; its workspace was removed. Focused checks pass; the final integrated regression and current-source wheel review are next. Historical full-suite evidence at `f3b7f50` does not validate these changes. Live efficacy, human usability and release remain open. Earlier stopping was unfinished engineering, not a demonstrated architecture or budget shortage.
+**Status as of 2026-10-09:** The approved current-source AEEP wheel test passed 15 sandboxed checks and removed its private runtime; LangGraph and Waza conformance evidence remains scoped to their recorded fixtures. Six separate router-free scripted workers passed, and both existing model workers passed connectivity with proxy restoration. Full regression found one stale Waza catalog assertion (1,557 passed, 21 skipped); the corrected assertion and report comprehension changes passed 46 focused checks. Final regression is running again against the frozen correction. The GPT-6.1 Sol review is agent evidence only; the human gate remains unmeasured. Task-profile conformance and live comparison remain unfinished engineering, not a demonstrated architecture or budget shortage.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,15 +28,15 @@ checkpoint_status:
 last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
 last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
-next_action: 'Commit integrated implementation, run final required checks, and prepare current-source wheel installation review. Continue C07 fresh definitions and worker readiness independently of installation approval.'
+next_action: 'Finish corrected-source regression, renew task-profile conformance, and prepare preregistered managed comparison using the existing grant. Preserve the a408a75 installation evidence as version-specific.'
 blocked_actions:
-  - 'New 33-wheel private AEEP installation test awaits the exact operator review; independent safe work continues.'
-missing_permissions:
-  - 'Pending installation review digest 092e19571b5471a01cc14983096ea67b9074ad963486e6423915e04f563d96cf; see c06/package-installation/review.'
+  - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
+  - 'Release/publication remains unauthorized.'
+missing_permissions: []
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
-  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The general private package installation test remains a C06 gate.'
+  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The a408a75 installation test passed; later report changes are not covered by that wheel test.'
 ```
 
 ## Append-only checkpoint journal
@@ -1324,3 +1324,27 @@ mapping correction, external module: **11 passed in 0.06s**. Ruff passed; mypy
 passed 164 source files after correcting ConfigParser typing and a CLI variable
 collision. Earlier failures are engineering corrections, not suppressed results.
 Full integrated checks and current-source package installation remain pending.
+
+## D56 integration verification and agent comprehension review
+
+The operator approved the exact a408a75 package review. All 15 offline sandboxed
+checks passed and the private runtime was removed; see
+[package result](../../reports/toolkit-v2/integration-completion/package-review-v3/execution/summary.json).
+The two earlier driver failures remain recorded. The old 5386064 review was not
+executed and is superseded for current delivery.
+
+The new six-worker router-free fixture passed with output retention disabled.
+Both existing Codex workers passed fresh zero-turn boundary probes and one
+connectivity turn each; the existing proxy was restored. These builder-profile
+observations do not qualify the task profile or prove candidate benefit.
+
+The initial final regression retained one failed stale catalog expectation,
+1,557 passed and 21 skipped. The report correction adds inspection references
+and explicit unknown authority, plus scripted stop/recovery guidance. The
+46 focused checks passed. The corrected full suite is recorded separately in
+`integration-completion/validation-v2`; do not overwrite the first run.
+
+The operator requested GPT-6.1 Sol review instead of answering the comprehension
+exercise. [Its findings](../../reports/toolkit-v2/c13/human-comprehension/agent-review.md)
+are product feedback, not human responses. Original presented hashes remain
+in the exercise record. Later report changes require a separate exercise.
