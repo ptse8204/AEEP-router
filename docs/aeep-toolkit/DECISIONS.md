@@ -738,3 +738,16 @@ all six raw outcomes, and normalize without a benefit claim. The importer also
 now treats is_baseline as an outer comparison flag; the nested object is control.
 V4 passed this contract and removed the private executable/workspace. No model
 ran. The failed attempts remain evidence, not qualifying runs or refunded work.
+
+## D57 — Preserve general output contracts at the Codex boundary
+
+An actual text qualification and a separate one-call diagnostic found a response
+schema rejection before any task answer. The recipe's general JSON Schema cannot
+be sent unchanged through Codex's restricted structured-output interface.
+Keep the existing adapter and add an explicit reviewed `output_schema_mode`:
+`structured` remains the default; `prompt` sends the same schema as an instruction
+and relies on the existing local validator. Artifact completion keeps its fixed
+structured envelope. No schema converter, evaluator or retry mechanism is added.
+Renew configuration/source-bound conformance and use a fresh plan and cases;
+preserve the failed plans, costs, recipe, grader and thresholds. See the
+[actual diagnosis](../../reports/toolkit-v2/c07/text-task-review/README.md).

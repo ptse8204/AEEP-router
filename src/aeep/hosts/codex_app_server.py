@@ -14,7 +14,7 @@ from contextlib import suppress
 from dataclasses import replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any, TypeAlias
+from typing import Any, Literal, TypeAlias
 
 from pydantic import Field
 
@@ -87,6 +87,7 @@ class CodexRequestError(RuntimeError):
 class AppServerOptions(StrictModel):
     experimental_api: bool = False
     catalog_metrics: bool = False
+    output_schema_mode: Literal["structured", "prompt"] = "structured"
     expected_user_agent: str | None = Field(default=None, min_length=1, max_length=1000)
 
 
@@ -1010,7 +1011,14 @@ class CodexAppServerAdapter:
                     turn_params["outputSchema"] = {"type": "object", "properties": {"completed": {"type": "boolean"}},
                                                    "required": ["completed"], "additionalProperties": False}
                 elif context.output_schema is not None:
-                    turn_params["outputSchema"] = context.output_schema
+                    if self.transport.options.output_schema_mode == "prompt":
+                        # General JSON Schema can exceed Codex's structured-output subset.
+                        turn_params["input"][0]["text"] += (
+                            "\nReturn only JSON satisfying this output schema:\n"
+                            + json.dumps(context.output_schema, separators=(",", ":"), ensure_ascii=False)
+                        )
+                    else:
+                        turn_params["outputSchema"] = context.output_schema
                 if context.invocation_check is not None and context.invocation_check() != boundary_reference:
                     raise ConfigurationError("environment verification unavailable: boundary changed before dispatch")
                 collector.stage = "starting_turn"

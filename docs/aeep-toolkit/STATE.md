@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-10 UTC:** The approved `a9ed7b9` wheel passed all 15 sandboxed checks and its runtime was removed. Fresh task-profile conformance passed on both existing workers. The first actual text qualification stopped after one model turn; a separate one-call diagnostic classified the error as a response-schema rejection. Both retained their costs and restored the proxy. Full pytest passed 1,559 tests with 21 skips; coverage is still running on unchanged source. The next change is a reviewed Codex prompt-schema option that preserves the recipe, local validator and grader. Live comparison remains unfinished engineering; this is not a demonstrated architecture, credential or budget shortage.
+**Status as of 2026-10-10 UTC:** The approved `a9ed7b9` wheel passed 15 sandboxed checks and removal. Its two full suites passed 1,559 tests with 21 skips, 82% coverage, both branch gates and all 12 driver checks. The live schema failure is corrected by an explicit Codex prompt-schema option; 132 focused tests passed. Both fresh worker profiles passed all 11 probes. New plan `plan_1eed14b65d3741bca8b92d99edfa63fe` is running; its first five screening receipts passed schema and task validation with observed token fields. No qualification or value verdict is claimed while the campaign is active. Full checks are running for source `d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0`. Human comprehension and release remain open.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,10 +25,10 @@ checkpoint_status:
   C11: IN_PROGRESS
   C12: IN_PROGRESS
   C13: TODO
-last_verified_commit: 'f3b7f50ba20375ffb23614bb6017b03f22e19258'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/c12/portable-integration/validation/checks.json'
-last_check_result: '1532 passed, 21 skipped in both suites; 82% coverage, all 12 driver checks, both branch gates, eight supplemental checks, 13 Node tests and docs passed. Sources unchanged; six scripted and two native zero-turn workers passed with cleanup.'
-next_action: 'Finish frozen-source coverage; implement/test explicit Codex prompt-schema mode; renew task-profile conformance and freeze a new text plan with fresh cases. Never replay the failed qualification or diagnostic.'
+last_verified_commit: 'a9ed7b91a76ae1ffc3ace75d4255ec8c314d19b8'
+last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v2/checks.json'
+last_check_result: '1559 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Version-specific 15-check private installation and six scripted workers passed with cleanup.'
+next_action: 'Inspect the active prompt-schema qualification and validation-v3 processes/results before any source edit or new model call. Complete analysis from canonical results; never replay a started request. Then continue eligible comparative work.'
 blocked_actions:
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
@@ -1369,3 +1369,29 @@ issues addressed; it is still agent review, not human comprehension evidence.
 Prepared next-review drivers are in `reports/toolkit-v2/c07/text-prompt-schema-review`.
 They are inert so far. Implement and test the option before preparing requests.
 The prior requests, plan, failed outcome and diagnostic must remain unchanged.
+
+### D57 correction now executing
+
+`src/aeep/hosts/codex_app_server.py` adds the explicit provider option without
+changing the default structured mode or general AEEP schemas. Invalid prompt-mode
+outputs still fail Router validation. The 27 adapter/prompt/managed-host tests
+and 105 invocation/dynamic-tool/pair tests passed, along with focused Ruff/mypy.
+The initial boundary-test command named a nonexistent file; its collection error
+is retained alongside the corrected passing run.
+
+[Fresh review records](../../reports/toolkit-v2/c07/text-prompt-schema-review/README.md)
+bind source `d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0`.
+Both workers passed all 11 probes and cleanup. Qualification execution review
+`6e1539cdea405c090b4645e3b20fe39661b494752b9008e8163217eeb8d80c72`
+starts assessment `assessment_f4520c24bfc04ecca66e34ec7c67cd30` on the same grant.
+It has a finite 141-turn bound, fresh seed 2026101001, unchanged recipe/grader,
+required candidate exposure and no automatic retry. First five screening receipts
+passed; wait for the actual terminal result. `run-qualification.py` owns cleanup
+and a 51 GiB storage stop; do not kill its parent or restart it merely to poll.
+
+The verification driver `/tmp/aeep-toolkit-integrated-checks-v3.py` is running
+separately. Qualification overlap with software checks is not a comparative
+performance experiment. Do not use these screening timings as value evidence.
+The finished v2 suite and separately approved installation describe the pre-option
+source. The first docs command lacked Lychee in PATH; rerunning with the existing
+pinned binary passed. No new authoring software was installed.

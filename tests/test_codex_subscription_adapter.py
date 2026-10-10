@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import builtins
+import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -234,6 +235,51 @@ async def test_approval_requires_both_host_decision_and_aeep_ceiling():
     finally:
         await read_host.close()
         await write_host.close()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("expected_characters", [3, 4])
+async def test_prompt_schema_preserves_contract_and_local_validation(expected_characters):
+    schema = {"type": "object", "oneOf": [
+        {"properties": {"characters": {"const": expected_characters}},
+         "required": ["characters"], "additionalProperties": False},
+        {"properties": {"error": {"const": "invalid_input"}},
+         "required": ["error"], "additionalProperties": False},
+    ]}
+    spec = ExecutorSpec(id="prompt-schema", capability="text.length@1",
+        kind=ExecutorKind.MANAGED_HOST, description="Offline general schema fixture",
+        input_schema={"type": "object"}, output_schema=schema,
+        side_effect=SideEffect.NONE, resource_pool=RESOURCE_ID,
+        config={**managed_config(), "adapter_options": {"output_schema_mode": "prompt"}})
+    host = CodexAppServerAdapter.from_executor(spec, principal_salt=b"fixture-salt")
+    original_request = host.transport.request
+    turns = []
+
+    async def request(method, params):
+        if method == "turn/start":
+            turns.append(params)
+            assert "outputSchema" not in params
+            instruction, encoded = params["input"][0]["text"].split(
+                "\nReturn only JSON satisfying this output schema:\n")
+            assert instruction == "Count characters in abc"
+            assert json.loads(encoded) == schema
+        return await original_request(method, params)
+
+    host.transport.request = request
+    router = Router(Manifest(database=":memory:", executors=[spec], resources=[
+        SubscriptionResource(id=RESOURCE_ID, provider="openai", product="codex")
+    ]), managed_host_adapters={"codex-app-server": host})
+    try:
+        outcome = await router.execute(ActionRequest(capability="text.length@1", input={"text": "abc"}))
+        assert len(turns) == 1
+        assert outcome.ok is (expected_characters == 3)
+        assert outcome.receipts[0].schema_valid is (expected_characters == 3)
+        assert outcome.receipts[0].metadata["output_schema_bytes"] == 0
+        assert spec.output_schema == schema
+        changed = spec.managed_host_config().model_copy(update={"adapter_options": None})
+        assert changed.process_binding() != spec.managed_host_config().process_binding()
+    finally:
+        await router.close()
 
 
 @pytest.mark.asyncio

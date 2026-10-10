@@ -4231,3 +4231,11 @@ Full pytest passed 1,559 tests with 21 skips; coverage is ongoing. The next
 adapter correction requires new source-bound conformance and a new plan, without
 changing the recipe, grader or acceptance thresholds. Human comprehension and
 release remain separate open gates.
+
+The Codex schema correction now has 132 focused passing tests and fresh paired
+conformance (11 probes each). A new 141-turn qualification is active; five initial
+screening receipts passed with token observations. No terminal qualification or
+value verdict is inferred. The pre-correction full suite finished: 1,559 passed,
+21 skipped in both runs, 82% coverage and all 12 checks passed. Current-source full
+checks run separately; source stays frozen during qualification. Details and
+resumption instructions are in toolkit STATE.md under D57.

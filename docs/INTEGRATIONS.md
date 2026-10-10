@@ -159,6 +159,15 @@ The managed subscription adapter uses the official Codex App Server protocol,
 not MCP, for Codex-owned authentication, runtime model/quota discovery, and one
 bounded turn. Official reference: <https://learn.chatgpt.com/docs/app-server>
 
+For a general JSON Schema outside Codex's structured-output subset, a reviewed
+App Server executor can set `adapter_options.output_schema_mode` to `prompt`.
+The adapter sends the unchanged schema as a JSON-response instruction; AEEP still
+validates the returned value locally. This does not promise provider-enforced
+schema adherence. The default `structured` mode and the artifact completion
+envelope keep using `outputSchema`. Changing this option changes the executor
+binding and requires applicable fresh evidence; a failed turn is never retried
+automatically. This option does not change Codex Exec.
+
 ## Native-control compatibility
 
 Check the boundary a connection actually controls before relying on a tool
