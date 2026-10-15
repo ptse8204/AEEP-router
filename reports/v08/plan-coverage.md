@@ -4313,3 +4313,15 @@ would leave 38.05 GiB still needed to reach 70 GiB. A safe cleanup sufficient fo
 the campaigns has not been identified. Existing training approval persists, source
 is unchanged, required images are present and neither plan has a job. No model,
 install or build ran. The missing pinned Lychee check remains unresolved.
+
+### Historical image identification — no deletion
+
+The [22-image review](../toolkit-v2/integration-completion/generated-image-review-20261015/README.md)
+identifies 18 removal candidates and four CSV images to preserve for an interrupted
+historical assessment. None of the 22 is referenced by either pending V2 plan or
+any existing container. Source retention was verified for all 22. The candidates'
+summed displayed size is 19.13 GB, but Docker reports only 1.42 MB unique to them;
+there are no extra layers shared solely within the candidate group. Actual host
+recovery is unmeasured and may be smaller or zero. No Docker mutation, campaign
+launch or gate closure occurred. The storage blocker remains. Documentation
+validation still cannot complete without the missing pinned Lychee checker.

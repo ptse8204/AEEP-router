@@ -1585,3 +1585,21 @@ Read-only preflight confirmed unchanged source, required images present, no jobs
 for the training/editing plans, and the proxy stopped. Training approval remains
 recorded; capacity still blocks execution. Obtain owner-confirmed obsolete data
 or a separately reviewed storage destination before expanding cleanup scope.
+
+### Historical generated-tool images identified; no deletion
+
+The operator requested identification only for 22 older generated-tool images.
+[The image review](../../reports/toolkit-v2/integration-completion/generated-image-review-20261015/README.md)
+marks 18 as removal candidates and preserves four CSV images linked to an
+indeterminate, interrupted historical assessment. All 22 have zero container
+references, and neither remaining V2 plan depends on them. Canonical generated
+source and build evidence are retained for all 22; deleting a historical image
+would still remove its immediately runnable copy.
+
+The 18 candidates show 19.13 GB of summed image size but only 1,422,061 bytes
+(1.42 MB) of Docker-reported unique storage. Layer analysis found no additional
+layers shared only within that group. This is not measured host reclamation;
+cache and snapshots may retain blocks. Removing these images cannot resolve the
+storage shortage. No Docker object or assessment state was changed. Keep the
+four recovery images, current V2 images and other resources outside this scope.
+Fresh reference checks are required before any later authorized removal.
