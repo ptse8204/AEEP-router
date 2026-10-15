@@ -1,0 +1,202 @@
+{
+  "schema": "aeep.cleanup-review.v1",
+  "client_date": "2026-10-15",
+  "observed_utc": "2026-10-15T21:03:14.899667+00:00",
+  "status": "PREPARED_NOT_APPROVED_NOT_EXECUTED",
+  "user_request": "Prepare another specific cleanup review to reach 70 GiB while preserving work and backups.",
+  "free_bytes_at_review": 31391309824,
+  "target_free_bytes": 75161927680,
+  "required_additional_bytes": 43770617856,
+  "entries": [
+    {
+      "path": "/Users/edwintse/.cache/winetricks/win7sp1",
+      "owner_kind": "Winetricks downloaded Windows 7 service-pack installers",
+      "device": 16777231,
+      "inode": 39114220,
+      "uid": 501,
+      "metadata_sha256": "181cb77a1dd781a6f5727e17f41663f4d1948f1ad178a1c1efec476e2d60c405",
+      "entries": 2,
+      "allocated_bytes": 1511010304,
+      "logical_file_bytes": 1511004592,
+      "file_sha256": [
+        {
+          "relative_path": "windows6.1-KB976932-X64.exe",
+          "sha256": "f4d1d418d91b1619688a482680ee032ffd2b65e420c6d2eaecf8aa3762aa64c8"
+        },
+        {
+          "relative_path": "windows6.1-KB976932-X86.exe",
+          "sha256": "e5449839955a22fc4dd596291aff1433b998f9797e1c784232226aba1f8abd97"
+        }
+      ],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/.cache/winetricks/win7sp1"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Removes cached installers only. Future Wine setup may need to download them again; offline availability is lost."
+    },
+    {
+      "path": "/Users/edwintse/.cache/winetricks/win2ksp4",
+      "owner_kind": "Winetricks downloaded Windows 2000 service-pack installer",
+      "device": 16777231,
+      "inode": 39114692,
+      "uid": 501,
+      "metadata_sha256": "83f3266df97b288daa45093ffe77770e893fcc7b3dbf544c11730e76797094d0",
+      "entries": 1,
+      "allocated_bytes": 135479296,
+      "logical_file_bytes": 135477136,
+      "file_sha256": [
+        {
+          "relative_path": "W2KSP4_EN.EXE",
+          "sha256": "167bb78d4adc957cc39fb4902517e1f32b1e62092353be5f8fb9ee647642de7e"
+        }
+      ],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/.cache/winetricks/win2ksp4"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Removes cached installer only; installed Wine prefixes remain untouched. Future redownload availability is not verified."
+    },
+    {
+      "path": "/Users/edwintse/.cache/trivy/trivy/db",
+      "owner_kind": "Trivy vulnerability database cache",
+      "device": 16777231,
+      "inode": 146851882,
+      "uid": 501,
+      "metadata_sha256": "8311f19062b16b31c1a87d28394eb85f13541b81f3738729214f461975644866",
+      "entries": 2,
+      "allocated_bytes": 1241550848,
+      "logical_file_bytes": 1231286421,
+      "file_sha256": [
+        {
+          "relative_path": "metadata.json",
+          "sha256": "fe2641a60b294e1f9508538e98a50f1a1dbece3475a724dd7c29948bc52cd1d9"
+        },
+        {
+          "relative_path": "trivy.db",
+          "sha256": "f4c88fccb466cd06c9330102993ace1e65d6e4d7125d3a39b12da878aa5ac867"
+        }
+      ],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/.cache/trivy/trivy/db"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Future scans must refresh the database; offline scans requiring this cache will be unavailable until then."
+    },
+    {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.mypy_cache",
+      "owner_kind": "Ignored AEEP type-check cache",
+      "device": 16777231,
+      "inode": 180955703,
+      "uid": 501,
+      "metadata_sha256": "080b3852537cc4d39cece4b85e7cce765d1904ba1b51c81ba88d6b33f8c2b2d6",
+      "entries": 4,
+      "allocated_bytes": 28385280,
+      "logical_file_bytes": 27496672,
+      "file_sha256": [],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.mypy_cache"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Next type check rebuilds the cache."
+    },
+    {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.pytest_cache",
+      "owner_kind": "Ignored AEEP pytest cache",
+      "device": 16777231,
+      "inode": 180905693,
+      "uid": 501,
+      "metadata_sha256": "816ac992413babe513fc4056b94fa6d19a988792b9591ed3c98da2e36a39b237",
+      "entries": 7,
+      "allocated_bytes": 196608,
+      "logical_file_bytes": 179354,
+      "file_sha256": [],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.pytest_cache"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Loses last-failed and cached node-selection hints; committed test reports and canonical evidence remain."
+    },
+    {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.ruff_cache",
+      "owner_kind": "Ignored AEEP lint cache",
+      "device": 16777231,
+      "inode": 180951117,
+      "uid": 501,
+      "metadata_sha256": "48b48e3bc7b265f3c09d55ba492e101d8777e973f64527cde9c08fb484edb049",
+      "entries": 31,
+      "allocated_bytes": 139264,
+      "logical_file_bytes": 27102,
+      "file_sha256": [],
+      "open_file_probe": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "+D",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.ruff_cache"
+        ],
+        "returncode": 1,
+        "stdout_empty": true,
+        "stderr_empty": true
+      },
+      "side_effect": "Next lint run rebuilds the cache."
+    }
+  ],
+  "allocated_bytes_total": 2916761600,
+  "reclaimed_bytes_guaranteed": 0,
+  "best_case_free_bytes_if_all_allocated_blocks_reclaimed": 34308071424,
+  "best_case_remaining_shortfall_bytes": 40853856256,
+  "target_achievable_with_this_review": false,
+  "guards_before_any_future_removal": [
+    "Explicit approval of this exact review digest; no removal authorized by preparation request.",
+    "Recheck canonical path, device/inode/uid, complete metadata inventory and recorded file hashes. Abort on any change.",
+    "Recheck no open files and no active Wine/Winetricks/Trivy/pytest/mypy/Ruff operation; coordinate if another operation may begin.",
+    "Remove only these six exact cache roots. Do not follow symlinks, glob siblings or broaden the list.",
+    "Record per-root deletion and actual free space; do not equate allocation with reclaimed space or repeat completed removals.",
+    "Never alter backups, persistent volumes, repositories, assessment evidence, pinned images or Docker.raw."
+  ],
+  "excluded": [
+    "All Time Machine/APFS snapshots and backups.",
+    "All Docker containers including stopped containers, images, persistent volumes, networks and build cache.",
+    "All canonical AEEP assessment databases, receipts, grants and historical evidence.",
+    "VS Code staged update: its pending-update status is unknown.",
+    "Codex runtimes/authentication and browser/application caches: required runtime or unknown ownership.",
+    "Other project temporary release directories and Sweet Saver Fare recovery/state: active/retained work.",
+    "Original handoff archive, Downloads, Git worktrees and installed application/runtime trees."
+  ],
+  "next_step": "This list cannot reach 70 GiB, even under full reclamation. Obtain owner-confirmed obsolete non-backup data or additional usable storage; do not delete protected data to make the target."
+}

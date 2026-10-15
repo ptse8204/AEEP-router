@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-15:** The approved current-source wheel passed all 15 sandboxed offline CLI checks; its private runtime and scratch were removed. The three exact approved inactive pytest roots were removed. Their deletion did not establish reclaimed disk space. Source remains `d2c406f`, with both full suites previously passing 1,561 tests, 21 skips, 82% coverage and all required checks. C08 configured discovery and C10 local telemetry preview now have current installed evidence and removal. Generated-tool training is approved but unstarted. Free space is 41.38 GiB, below the 50 GiB reserve; training requires 55 GiB and three-family qualification 69.77 GiB. No campaign or verification process is running; the model proxy is stopped. Live optional-use value, actual human comprehension and release remain open.
+**Status as of 2026-10-15:** The approved current-source wheel passed all 15 sandboxed offline CLI checks; its private runtime and scratch were removed. The three exact approved inactive pytest roots were removed. Their deletion did not establish reclaimed disk space. Source remains `d2c406f`, with both full suites previously passing 1,561 tests, 21 skips, 82% coverage and all required checks. C08 configured discovery and C10 local telemetry preview now have current installed evidence and removal. Generated-tool training is approved but unstarted. Latest cleanup-review free space is 29.24 GiB, below the 50 GiB reserve; training requires 55 GiB and three-family qualification 69.77 GiB. No campaign or verification process is running; the model proxy is stopped. Live optional-use value, actual human comprehension and release remain open.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -30,7 +30,7 @@ last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-compl
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
 next_action: 'Restore available storage first. Training approval remains valid for its exact unchanged review; do not request it again. At over 55 GiB, recheck its source/artifact/grant guards and execute the prepared training driver once. At least 69.77 GiB plus a fresh snapshot check is required for the editing qualification. Never replay completed cleanup or installation.'
 blocked_actions:
-  - 'Host free space is 41.38 GiB, below the 50 GiB reserve. Training requires 55 GiB; editing qualification requires at least 69.77 GiB and fresh snapshot verification.'
+  - 'Latest cleanup-review free space is 29.24 GiB, below the 50 GiB reserve. Training requires 55 GiB; editing qualification requires at least 69.77 GiB and fresh snapshot verification.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
 missing_permissions:
@@ -1563,3 +1563,25 @@ No dependencies were installed below the storage reserve. Restore the existing
 pinned checker, or review its exact replacement once space permits, and rerun
 `make docs-check`. Production source did not change, so the previous full test
 and coverage evidence remains applicable.
+
+### Additional cleanup review prepared; no deletion authorized
+
+The operator requested a specific further cleanup review while preserving work
+and backups. [The review](../../reports/toolkit-v2/integration-completion/cleanup-review-20261015/README.md)
+identifies six inactive cache roots totaling 2.72 GiB: three downloaded Windows
+installers, Trivy's vulnerability database and ignored AEEP test/type/lint caches.
+Exact metadata/file hashes and pre-removal guards are in its `review.json`.
+No resource in the new review was deleted. It requires a new exact approval;
+the earlier three-directory approval does not apply to these paths.
+
+At review time 29.24 GiB was free. Even complete reclamation of all six caches
+would leave 38.05 GiB still needed to reach 70 GiB. No safe 70 GiB cleanup has
+been established. Preserve all backups, Docker objects/volumes/build cache,
+canonical evidence, active recovery work and unknown ownership. Docker's generic
+reclaimable figures do not establish safe task-specific deletions. No privileged
+reclamation helper, disk resize or relocation was performed.
+
+Read-only preflight confirmed unchanged source, required images present, no jobs
+for the training/editing plans, and the proxy stopped. Training approval remains
+recorded; capacity still blocks execution. Obtain owner-confirmed obsolete data
+or a separately reviewed storage destination before expanding cleanup scope.

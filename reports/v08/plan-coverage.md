@@ -4302,3 +4302,14 @@ validation found no missing targets in 451 local links across edited documents;
 it does not cover fragments or replace the required checker. See
 [the documentation record](../toolkit-v2/integration-completion/documentation-verification-20261015.json).
 No dependency installation or campaign launch occurred below the storage reserve.
+
+### Additional storage review — no deletion
+
+The [exact cache-only review](../toolkit-v2/integration-completion/cleanup-review-20261015/README.md)
+records six inactive roots occupying 2.72 GiB. It preserves all work, backups,
+Docker images/containers/volumes/cache and canonical assessment evidence. The
+review is not approved or executed. Free space was 29.24 GiB; even full recovery
+would leave 38.05 GiB still needed to reach 70 GiB. A safe cleanup sufficient for
+the campaigns has not been identified. Existing training approval persists, source
+is unchanged, required images are present and neither plan has a job. No model,
+install or build ran. The missing pinned Lychee check remains unresolved.
