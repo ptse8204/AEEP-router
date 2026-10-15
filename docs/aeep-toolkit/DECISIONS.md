@@ -759,3 +759,14 @@ The new option keeps the public output contract in its normal field and makes
 the provider transport choice explicit. Both paths reuse existing local validation;
 neither changes the recipe or grader. The initial renewed profile was selected
 from the older pre-workaround plan, which caused an avoidable failed turn.
+
+## D58 — Retain exact approval while storage blocks execution
+
+The operator approved inactive-fixture cleanup, the current wheel check and the
+generated-tool training review. Record approval separately from their immutable
+review documents. Completed cleanup and installation must not be replayed.
+Training approval remains valid for the same artifacts; capacity is a separate
+precondition. Do not lower the 50 GiB reserve, shrink the reviewed allowance to
+fit available space, or remove backups and unrelated Docker resources under the
+fixture-only cleanup scope. Record deleted allocation separately from reclaimed
+free space. No execution architecture or upstream selection changes.

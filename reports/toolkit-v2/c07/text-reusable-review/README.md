@@ -12,8 +12,9 @@ These are findings to retain, not reasons to alter the frozen grader or silently
 repair the tool. A reusable baseline may offer an imperfect optional tool; its
 actual training results must be disclosed before later experimental use.
 
-The [exact execution review](generated-tool-execution-review.json) is pending
-operator approval. It uses AssessmentService and BenchmarkRunner to compare
+The [exact execution review](generated-tool-execution-review.json) was approved;
+[the approval record](../../integration-completion/operator-approval-continuation.json)
+binds its unchanged hash. Execution is blocked by available storage. It uses AssessmentService and BenchmarkRunner to compare
 28 training cases against the independent reference in the existing offline
 container. It includes no holdouts, model calls, credentials or installation.
 The full automatically generated proposal stays inert; only the separately

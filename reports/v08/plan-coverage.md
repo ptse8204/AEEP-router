@@ -4275,3 +4275,30 @@ storage allowance is 12.12 GiB short. Pending exact cleanup covers 12.52 GiB of
 inactive synthetic roots; none was removed. Generated text-tool execution,
 current wheel installation and human comprehension remain pending. New fixture
 checks supply no live performance or token/cash savings evidence.
+
+### October 15 Toolkit V2 approval recovery
+
+The operator approved exact inactive-fixture cleanup, the current `d2c406f` wheel
+check and generated-tool training. Cleanup removed only the three reviewed roots.
+The wheel passed 15 sandboxed offline CLI checks and its private runtime/scratch
+were removed. C08 configured discovery and C10 local telemetry-preview acceptance
+now have current installed evidence; scanner execution, remote export and ToolHive
+remain outside that qualified scope. See [the installation result](../toolkit-v2/integration-completion/package-review-schema-correction/execution/summary.json).
+
+[Recovery verification](../toolkit-v2/integration-completion/continuation-verification-20261015.json)
+found unchanged executable source and zero jobs for the prepared training and
+editing plans. Their approvals must not be requested again. Host free space is
+41.38 GiB, below the 50 GiB reserve; training needs over 55 GiB and editing
+qualification at least 69.77 GiB plus a fresh snapshot check. Deleted fixture
+allocation did not translate into measured reclaimed space. Backups and Docker
+resources were preserved. Actual human comprehension, comparative value/resource
+evidence and release remain open. No production code changed in this recovery;
+prior full verification remains applicable. Documentation checks are recorded in
+the continuation evidence after the state update.
+
+Recovery documentation lint passed for 65 files. `make docs-check` remains
+incomplete because its pinned Lychee 0.24.2 executable is missing. Supplemental
+validation found no missing targets in 451 local links across edited documents;
+it does not cover fragments or replace the required checker. See
+[the documentation record](../toolkit-v2/integration-completion/documentation-verification-20261015.json).
+No dependency installation or campaign launch occurred below the storage reserve.

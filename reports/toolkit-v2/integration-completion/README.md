@@ -67,4 +67,7 @@ response-schema rejection. Its failure and costs are retained. After the adapter
 correction, [fresh qualification](../c07/text-prompt-schema-review/README.md)
 passed all 141 cases, including 105 distinct holdouts. No live benefit is
 established. Human comprehension, broader platform support and release remain
-unassessed. The current adapter wheel awaits its separate installation approval.
+unassessed. The current adapter wheel passed its separately approved 15 sandboxed checks;
+[its result](package-review-schema-correction/execution/summary.json) confirms
+private runtime and scratch removal. Training execution is approved but remains
+unstarted because host free space is below the required reserve.

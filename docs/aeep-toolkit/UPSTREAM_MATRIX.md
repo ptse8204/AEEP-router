@@ -278,3 +278,12 @@ their scope does not imply installed scanner/exporter/deployment conformance.
 The update records specific task-mapping, data-rights, optional-choice and
 execution-boundary reasons for excluded integrations. Original source reviews,
 failed attempts and historical live results retain their original meanings.
+
+### October 15 installed-path verification
+
+The exact `d2c406f` package passed 15 sandboxed offline CLI checks, including
+configured discovery, Waza import and local trace/export previews. Its private
+runtime was removed unchanged. [The installation record](../../reports/toolkit-v2/integration-completion/package-review-schema-correction/execution/summary.json)
+updates package compatibility only; it does not qualify upstream scanners,
+remote exporters or additional host platforms. Waza and LangGraph retain the
+previously recorded bounded executable evidence. No upstream version changed.

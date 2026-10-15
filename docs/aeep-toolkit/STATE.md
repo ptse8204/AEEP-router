@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-10 UTC:** Source `d2c406f` passed both full suites (1,561 tests, 21 skips each), 82% coverage, both branch gates, all 12 driver checks and docs. Source stability passed. C06's six-worker current-source offline journey and cleanup passed. Real text qualification passed 141 cases, including 105 distinct holdouts; no optional-use benefit is established. The three-family editing recipe passed offline and contained checks and fresh task-worker conformance. Its 141-turn qualification is prepared but not enqueued: the reviewed storage allowance is short by 12.12 GiB. Exact older-fixture cleanup, current-wheel installation and generated-text-tool execution questions remain pending. Human comprehension and release remain open.
+**Status as of 2026-10-15:** The approved current-source wheel passed all 15 sandboxed offline CLI checks; its private runtime and scratch were removed. The three exact approved inactive pytest roots were removed. Their deletion did not establish reclaimed disk space. Source remains `d2c406f`, with both full suites previously passing 1,561 tests, 21 skips, 82% coverage and all required checks. C08 configured discovery and C10 local telemetry preview now have current installed evidence and removal. Generated-tool training is approved but unstarted. Free space is 41.38 GiB, below the 50 GiB reserve; training requires 55 GiB and three-family qualification 69.77 GiB. No campaign or verification process is running; the model proxy is stopped. Live optional-use value, actual human comprehension and release remain open.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -19,29 +19,27 @@ checkpoint_status:
   C05: PASS
   C06: PASS
   C07: IN_PROGRESS
-  C08: IN_PROGRESS
+  C08: PASS
   C09: PASS
-  C10: IN_PROGRESS
+  C10: PASS
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
-last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel installation still pending.'
-next_action: 'Check pending exact approvals. If older-fixture cleanup is approved, run its guarded cleanup and recheck the editing qualification storage allowance before one-shot execution. If generated-tool or package review is approved, execute only its exact prepared driver. No broad verification process remains active.'
+last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
+next_action: 'Restore available storage first. Training approval remains valid for its exact unchanged review; do not request it again. At over 55 GiB, recheck its source/artifact/grant guards and execute the prepared training driver once. At least 69.77 GiB plus a fresh snapshot check is required for the editing qualification. Never replay completed cleanup or installation.'
 blocked_actions:
+  - 'Host free space is 41.38 GiB, below the 50 GiB reserve. Training requires 55 GiB; editing qualification requires at least 69.77 GiB and fresh snapshot verification.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
-  - 'Three-family qualification storage allowance requires 69.77 GiB free; measured 57.65 GiB. Pending exact inactive-fixture cleanup may cover the shortfall.'
-  - 'Generated text tool remains inert pending exact execution approval.'
   - 'Release/publication remains unauthorized.'
 missing_permissions:
-  - 'Current d2c406f wheel: exact package digest aa8d1bba0f7deb637f3d7607dc61ea526c88d080306b078427c2b9e652082114 awaits approval.'
-  - 'Older fixture cleanup review a4d200fdae041764b496da3d932759a96ce7aa23cc582e2d6473c43f6af8fc0a is pending; no old root removed.'
-  - 'Generated-tool training review 5cef99b50379e48a9c159a2032b27a950d3d766753a12d246ca850f478b83844 is pending; no generated code executed.'
+  - 'The exact cleanup, current wheel and generated-tool training reviews were approved. Cleanup and installation completed; training has not started.'
+  - 'Further backup or unrelated-resource removal is outside the exact cleanup approval.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
   - 'No new live cost/token benefit comparison was performed for this plan.'
-  - 'Optional extensions still need applicable installed compatibility, resource and distribution-rights checks. The a9ed7b9 corrected-report wheel passed its separately approved installation check; subsequent source changes require new evidence.'
+  - 'The d2c406f wheel passed its exact installed checks. Optional scanner execution, hosted export and ToolHive deployment remain unqualified; resource and distribution-rights limits remain explicit.'
 ```
 
 ## Append-only checkpoint journal
@@ -1510,3 +1508,58 @@ may cover this 12.12 GiB shortfall; capacity must be checked again afterward.
 Prepared execution-review SHA-256 is
 `98f878a69f511d9da151c3416e04cf73f2be35a51d4574b64a8fd35fca7ab81c`.
 Never replay a started request. Text qualification does not qualify this recipe.
+
+### October 15 recovery: approvals executed and storage measured
+
+The [operator approval](../../reports/toolkit-v2/integration-completion/operator-approval-continuation.json)
+covers the three exact pending reviews. The [cleanup result](../../reports/toolkit-v2/integration-completion/cleanup-review/cleanup-result.json)
+confirms all three inactive roots were removed after identity, inventory and
+absent-owner checks. No backup, Docker resource or unrelated file was removed.
+The recorded 12.52 GiB allocated size is not a measured recovery of free space.
+Twenty-four Time Machine snapshots were present at cleanup; their contribution
+to retained blocks was not established.
+
+The [current wheel result](../../reports/toolkit-v2/integration-completion/package-review-schema-correction/execution/summary.json)
+records 15 passing sandboxed checks and removal of its private runtime/scratch.
+C08 is PASS for configured discovery with source authority and inert candidate
+listing. C10 is PASS for installed OpenTelemetry/local trace preview and private
+runtime removal. Neither status qualifies scanner execution, remote export or a
+ToolHive deployment. No model, credential or network use occurred in the wheel check.
+
+[Recovery verification](../../reports/toolkit-v2/integration-completion/continuation-verification-20261015.json)
+confirmed unchanged executable source, absent runtime and zero jobs for both
+prepared plans. Grant counters remain 10,065 operations, 2,984 model turns and
+109,370.46004532883 recorded seconds; no counters were reset. Recorded cash usage
+is not proof of total provider billing. The existing proxy was observed stopped.
+
+Free space was 44,429,561,856 bytes (41.38 GiB). Restoring the 50 GiB reserve alone
+is insufficient for either campaign. The training review still requires over
+55 GiB; editing qualification requires at least 74,909,696,000 bytes (69.77 GiB)
+and a fresh scoped-snapshot check. Obtain capacity or an exact further cleanup
+scope before either launch. The existing training approval remains effective;
+its immutable review still says pending because that pre-approval artifact must
+retain its hash. This journal and the operator approval supersede that status.
+
+Once capacity is available, use the already reviewed drivers from the worktree:
+
+```bash
+PATH=/Library/Frameworks/Python.framework/Versions/3.13/bin:$PATH PYTHONPATH=src python3 reports/toolkit-v2/c07/text-reusable-review/run-training.py 5cef99b50379e48a9c159a2032b27a950d3d766753a12d246ca850f478b83844
+PATH=/Library/Frameworks/Python.framework/Versions/3.13/bin:$PATH PYTHONPATH=src python3 reports/toolkit-v2/c07/edit-study-preparation/run-qualification.py 98f878a69f511d9da151c3416e04cf73f2be35a51d4574b64a8fd35fca7ab81c
+```
+
+Run sequentially, rechecking capacity and unused-plan state before each. Existing
+driver guards also check exact source, definitions, grant allowance and runtime
+identity. Neither command was started during this recovery. Subsequent reusable
+image creation and model use are outside the training-only approval and require
+their own concrete review. Do not repair the frozen generated tool to improve its
+training score. Preserve failures and the independent reference.
+
+Documentation validation for this recovery: Markdown lint passed for 65 files.
+`make docs-check` could not complete because the previously pinned Lychee 0.24.2
+executable is no longer present. A supplemental check found no missing targets
+among 451 local links in edited documents; it does not replace fragment checking.
+See [the validation record](../../reports/toolkit-v2/integration-completion/documentation-verification-20261015.json).
+No dependencies were installed below the storage reserve. Restore the existing
+pinned checker, or review its exact replacement once space permits, and rerun
+`make docs-check`. Production source did not change, so the previous full test
+and coverage evidence remains applicable.
