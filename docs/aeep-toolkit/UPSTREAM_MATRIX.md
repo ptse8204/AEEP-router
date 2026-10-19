@@ -299,3 +299,24 @@ or API cause remains unknown. [The current record](../../reports/toolkit-v2/inte
 supersedes earlier storage-only readiness descriptions. Resolve the worker before
 reviewing a fresh campaign; no backend or model substitution is authorized by
 this failure.
+
+### October 19 readiness repaired; no upstream pin changed
+
+The existing model proxy was OOM-killed under its 128 MiB cap. The reviewed
+512 MiB/no-swap cap passed network health and restored both workers' readiness,
+pinned model and existing identities. A separate public connectivity turn
+succeeded. No Codex binary, upstream evaluator, image or dependency changed.
+The editing preparation had also lost the already supported prompt output mode;
+new definitions restore it in both arms and have fresh paired boundary evidence.
+[The repair record](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/README.md)
+keeps the first-trial failures, measurements and inference limits separate from
+qualification and optional-access value results.
+
+The October 19 generated editing-tool validation added no upstream dependency or
+version change. It uses standard-library Python in the existing pinned runtime;
+its 28-input result is training evidence only. The source/usage hashes and two
+exact derivative image IDs are recorded under
+`reports/toolkit-v2/c07/edit-reusable-20261019`. The approved packaging correction
+uses existing chmod and does not install software or execute the generated tool
+during image construction. Optional model use still requires frozen value-stage
+definitions and current boundary evidence.

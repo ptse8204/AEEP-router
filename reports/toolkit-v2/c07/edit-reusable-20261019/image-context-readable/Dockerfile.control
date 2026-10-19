@@ -1,0 +1,5 @@
+FROM aeep-edit-reusable-base-control:3360c74f1be036ba
+USER root
+COPY --chmod=0444 tool.py USAGE.txt /opt/dependencies/reusable/
+RUN ["/bin/chmod", "0555", "/opt/dependencies/reusable"]
+USER 65534:65534

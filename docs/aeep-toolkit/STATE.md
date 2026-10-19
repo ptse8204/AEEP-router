@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19:** Storage is sufficient: initial preflight measured 166.45 GiB free and required images remain present. The approved generated-tool training check completed: generated tool 24/28 correct, independent reference 28/28, zero execution failures and zero model turns. The three-family editing qualification stopped on its first trial with a host preflight rejection; the remaining 140 cases did not run. A subsequent zero-model diagnostic isolated a failing `account/rateLimits/read` RPC in the pinned Codex worker. Underlying capacity, connectivity or API cause remains unknown; a generic rate-limit error classification is not proof of exhausted quota. No campaign is running and the proxy is restored. No paired value result, human comprehension or release decision exists. Source remains `d2c406f`; broad regressions and wheel installation were not repeated.
+**Status as of 2026-10-19:** Worker readiness is repaired: the proxy's 128 MiB cap caused OOM; its reviewed 512 MiB/no-swap cap and both worker readiness checks passed. Both editing profiles retain D57 prompt output mode and passed 11 boundary probes each. Qualification `plan_a26f0d5197c849ec86aed1b7d2969579` is RUNNING under assessment `assessment_b68a3a6ac3a94d50b95d13af1c8cc1e3`, tool session `33494`; never replay the driver or stop its proxy. The training-only builder completed, and its frozen source passed all 28 training inputs against 28 independent reference calls. Both generated-tool and permission-correction reviews were explicitly approved. Corrected derivative images `58610193…` and `fc874797…` passed layer/configuration/hash/mode checks. The first COPY-only image is retained as a failed packaging artifact. Value, higher-compute and reusable paired inspections are prepared; run them after qualification restores the proxy, then assemble their boundaries and freeze the fresh four-arm value plan. Production source, graders, thresholds, model and grant ceilings remain unchanged.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,14 +28,14 @@ checkpoint_status:
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Resolve the pinned worker account/rateLimits/read readiness RPC failure with a content-free diagnostic; do not infer quota exhaustion. Then review any worker/source correction and prepare a fresh qualification plan/case set. Never replay the terminal editing job. Complete task-matched optional-use four-arm comparison after qualification. Storage is no longer blocking; prior training is complete.'
+next_action: 'Observe running qualification assessment_b68a3a6ac3a94d50b95d13af1c8cc1e3 via existing session33494 or canonical job/result records; never replay it. Both new generated-tool/image approvals have been used. After qualification passes and restores the proxy, run prepared pair reviews in edit-value-20261019, edit-higher-20261019 and edit-reusable-pair-20261019 sequentially, assemble boundaries, then run edit-value-20261019/prepare-value.py once. Fresh seed 2026101904 and four arms remain preregistered. Never replay completed training, builder or image drivers.'
 blocked_actions:
-  - 'Pinned Codex worker readiness fails at account/rateLimits/read. The editing qualification stopped after one rejected trial; cause needs classification before a fresh plan can run.'
+  - 'Corrected editing qualification is running; optional-use comparison awaits its result and approved generated-tool worker preparation.'
   - 'Optional-use comparison still lacks completed task-matched trials, reusable-tool worker lineage and complete resource evidence.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
 missing_permissions:
-  - 'Exact cleanup, current wheel and generated-tool training approvals have all been used. Training is complete; later generated-tool image creation/model exposure requires its own concrete review.'
+  - 'Current generated editing source, corrected images and optional exposure have exact approvals; no additional intervention is pending for those operations.'
   - 'Further backup or unrelated-resource removal is outside the exact cleanup approval.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
@@ -1682,3 +1682,144 @@ No broad regression or packaged install was repeated in this resumption. The 21
 focused launch/recovery guard checks cover prior-trial rejection, unresolved
 accounting, exact preparation lineage and remaining allowance; they are software
 checks, not comparative-value evidence.
+
+### October 19 proxy OOM repair and output-profile regression
+
+[Detailed zero-model diagnosis](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/readiness-result.json)
+classified the readiness error as network transport, not an explicit quota or
+authentication rejection. A no-credential control-image probe confirmed the
+reviewed proxy IP but got TCP connection refusal. Docker reports that exact
+proxy container was OOM-killed (exit137) about 0.3 seconds after start.
+
+[The exact repair review](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/proxy-repair-review.json)
+changed only the existing stopped proxy's memory from 128 MiB to 512 MiB and combined
+memory/swap cap to 512 MiB (no swap). Image, ID, network, filesystem and permissions
+are unchanged. It preserves original values and rolls back on failed health.
+The [result](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/proxy-repair-result.json)
+passed TCP, CONNECT200 and TLS1.3, with 189,833,216 bytes measured proxy cgroup peak.
+The 512 MiB cap is retained; the proxy was restored stopped and the new diagnostic
+worker removed. No image, volume, credential or host Docker setting changed.
+
+[Both worker readiness checks](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/paired-readiness-result.json)
+passed with unchanged boundary identities and `gpt-6-astra`; reported capacity
+was 17% used, not exhausted. No models ran in these checks.
+
+Fresh plan `plan_16fb057af234452e91214c6829348d29`, seed 2026101901,
+used the durable exact subject and 141 cases disjoint from the previous plan.
+One preparation validation error (integer environment identity value) occurred
+before generation; its corrected successor reuses the already inspected subject.
+The qualification then completed as `fit_0fedf41c912d4817b8f4cee770429740`,
+`insufficient_evidence`: one failed invocation, zero correctness findings and
+zero holdouts. No cases were retried. Source and proxy state were restored.
+
+A separate exact reviewed one-turn public-input conformance diagnostic succeeded
+with provider token fields. It is not a task or qualification result. The
+[definition audit](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/editing-profile-regression.json)
+shows editing-profile preparation inherited pre-D57 mappings and dropped prompt
+output mode. The confirmed regression will be corrected in new definitions, with
+fresh pair conformance and disjoint cases. Backend invalid-schema attribution
+remains an inference because the failed task's raw error was not retained. No
+new production code, threshold relaxation, spending authority or installation
+was introduced. Current code source remains `d2c406f` / `d05541e90d2e...`.
+
+### October 19 corrected prompt profiles ready; training-only builder active
+
+[The corrected profiles](../../reports/toolkit-v2/c07/edit-study-prompt-20261019/profile-correction-review.json)
+inherit the passed D57 mappings and assert prompt mode in both arms before effects.
+Both actual workers passed all 11 probes and cleanup; new canonical boundary and
+differential records are in that directory. No worker image, ordinary tool,
+permission, task, grader or utility threshold changed.
+
+Fresh qualification `plan_a26f0d5197c849ec86aed1b7d2969579` has 141 cases from
+seed 2026101903, disjoint from both prior failed plans. It is not yet enqueued.
+Its [exact execution review](../../reports/toolkit-v2/c07/edit-study-prompt-20261019/qualification-execution-review.json)
+SHA-256 is `9e1e51a77887a85a19ca56ccb60e80265e9d801cd9e58b0245828c99b78cae12`.
+It verifies the corrected output mode, proxy memory repair, current grant and
+fresh storage envelope before a single enqueue. Value seed 2026101904 remains
+separate.
+
+Builder `planning_af53936c9ca94871ad823695b516944b` uses only those 28 training
+inputs and task contract, never expected outputs, holdouts or candidate source.
+Its exact already-conformed candidate-absent builder profile is reused without
+configuration drift. The one-turn execution review is
+`a2555d8604cc7ddccb5ae7a53c3b35bc6954004efdc5cc194f39bc3c6f4accb7`.
+The existing-model call is active in tool session `63520`. Read its durable result
+before any continuation; do not rerun the started driver. Generated source stays
+inert until separately reviewed under the operator's exact untrusted-execution
+boundary. Construction is frozen before qualification/value holdouts are seen.
+
+No production source changed; this work does not require another broad software
+or installed-package verification cycle. Exact repair/probe evidence and failed
+preparation/launch records are retained. No new claim of qualification, value,
+human usability or release follows.
+
+## C07 live recovery execution — 2026-10-19
+
+The proxy repair and profile correction are operational definition changes, not
+production-source changes. The root OOM diagnosis, before/after settings, network
+checks, paired readiness and public one-turn diagnostic are retained in
+`reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019`.
+The failed successor plan `plan_16fb057af234452e91214c6829348d29` remains terminal
+with its incurred usage. No failed task was replayed.
+
+The corrected pair preserves the passed D57 mapping and prompt output mode in
+both arms. Both workers passed all 11 probes with cleanup. Qualification review
+`9e1e51a77887a85a19ca56ccb60e80265e9d801cd9e58b0245828c99b78cae12`
+was executed once: fresh seed 2026101903, 141 cases, disjoint from both failed
+plans, same recipe and thresholds. The active driver owns the proxy until its
+finally block restores it. Interim successes do not close the gate.
+
+The builder completed `reusable-build:planning_af53936c9ca94871ad823695b516944b`
+using only the original 28 training inputs and task contract. Its source SHA-256
+is `3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6`.
+Source and usage text remain inert. Static inspection found standard-library
+stdin/stdout transformation without file opening, subprocesses or network code.
+Usage requests Python 3.11, while the existing reviewed runtime is Python 3.13;
+any contained result will establish only bounded-case behavior on that runtime.
+No new Python installation is proposed.
+
+Manual v2 training diagnostic `plan_e85e4d34533b4f79bfb4ea6b8fb1c5bb` binds those
+exact construction inputs and the independent reference. It does not modify the
+origin's materialized case set or claim qualification. Its upper reservation is
+173 operations, 4,890 seconds and zero model turns, plus one 30-second snapshot
+preflight. The generated-tool review covers this diagnostic, two COPY-only
+derivatives and optional exposure in the later frozen four-arm study. The review
+is pending; no generated code, image build or value-stage model call has run.
+All work stays on the original grant without resetting its counters.
+
+### Approved generated-tool training and image completion
+
+The user approved exact source review `dbc2dda6…` and the later directory-mode
+correction `1484c3ba…`. Training report `fit_640455fa005842b58690a82b8407ae3a`
+records 28/28 generated-tool and 28/28 reference successes, with zero model turns
+and no holdouts. Its `insufficient_evidence` outcome is expected for a training
+diagnostic; it is not a tool qualification or admission.
+
+The first COPY-only control derivative made the new directory mode 0444, which
+blocked traversal. It remains retained and cannot enter trials. The approved
+correction runs only existing `/bin/chmod 0555` on that directory during build.
+Source and usage bytes are unchanged; files remain root-owned 0444. The final
+images preserve both base layer prefixes, add only copy/permission layers and
+retain the original final image configuration:
+
+- Control: `sha256:586101933e7afc95790675efdcac4fc437cdbd7e92a2b5f7e3d65b4a86c79f4d`.
+- Boundary-only treatment: `sha256:fc874797d0872384bc7c52d5a5678b1959609551766e3e8bf49416efbd6f2daf`.
+
+A driver initially reused the old terminal image operation ID and was rejected
+before building anything. A recorded routine accounting-definition correction
+uses fresh IDs without changing the approved contexts, method or ceilings. The
+completed result is `edit-reusable-20261019/images-readable-accounted-result.json`.
+The public metadata diagnosis also records one initial nonroot observation that
+was not pre-reserved, plus its measured tool wall time; do not hide that accounting
+discrepancy or present it as advance reservation. Both owned diagnostic containers
+were removed. No older resource, volume, image or backup was deleted.
+
+The value-stage preregistration fixes an identical conditional optional-tool
+availability notice in all four arms. Only the reusable worker contains that
+tool. Value model work will run after setup jobs finish. No value case has been
+materialized, no comparison model turn has started and no benefit is established.
+
+Recovery verification: 29 report drivers parse; Makefile's 65-file Markdown lint
+passed. Full docs-check remains open because Lychee 0.24.2 is unavailable; exact
+output is retained in worker-readiness-repair-20261019/docs-check-recovery.log.
+No production source changed and broad regression/package checks were not rerun.

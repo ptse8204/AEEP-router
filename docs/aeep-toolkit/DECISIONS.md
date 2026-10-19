@@ -790,3 +790,36 @@ A separate zero-model probe isolated a failing `account/rateLimits/read` RPC.
 Classify that failure before assuming quota exhaustion, requesting credentials or
 changing architecture. A successor campaign needs a fresh plan and disjoint cases.
 See [the resumption record](../../reports/toolkit-v2/integration-completion/resumption-20261019/README.md).
+
+## D60 — Repair the task proxy's measured memory shortage
+
+The exact existing proxy was OOM-killed under 128 MiB before accepting TCP.
+A reviewed reversible change raises only its cap to 512 MiB with no swap.
+Startup/health peak was 189,833,216 bytes; TCP/CONNECT/TLS and both worker
+readiness checks then passed. Keep its image, network and access policy fixed.
+Record this supporting-runtime footprint separately from candidate resources.
+No new worker architecture or authentication access is needed. See
+[the repair](../../reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/README.md).
+
+## D61 — Inherit the passed output-mode profile, not the failed predecessor
+
+Editing-profile preparation replaced D57's passed mappings with an older plan
+and lost prompt output mode. Construct fresh task profiles from the passed
+`plan_1eed14b65d3741bca8b92d99edfa63fe` mappings and assert prompt mode in both
+arms before effects. Refresh their configuration-bound pair evidence and use
+fresh disjoint case sets. Keep recipe, grader, model, candidate and thresholds
+fixed. The production adapter already implements this mode; no new protocol or
+default behavior is needed. Preserve both failed plans and their costs. Build
+any reusable challenger only from the new frozen training inputs, before value
+holdouts, and keep generated source inert until its exact execution review.
+
+### D62 — Preserve the generated editing tool and its training limits
+
+The candidate-absent builder's exact source passed 28 original training inputs
+against an independent reference. Preserve the bytes and imperfect platform
+scope: usage asks for Python 3.11, while the bounded validation used the existing
+Python 3.13 image. The user approved source 3360c74f… and optional exposure, then
+approved a directory-only packaging correction after COPY made it non-traversable.
+The new images preserve their base layers and final configurations. Freeze both
+image IDs, generated source/usage hashes and construction-input lineage before
+value holdouts. Training success cannot establish efficacy or justify source edits.

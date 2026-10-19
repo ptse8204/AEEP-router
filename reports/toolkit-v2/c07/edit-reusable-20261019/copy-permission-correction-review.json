@@ -1,0 +1,120 @@
+{
+  "purpose": "Correct only generated-tool image directory permissions after the first COPY-only image failed nonroot readability. Frozen tool/usage bytes, base images and later approved optional exposure are unchanged.",
+  "authorization": "Pending exact operator approval because this adds one trusted chmod RUN step to each previously COPY-only Dockerfile.",
+  "source_digest": "d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0",
+  "source_sha256": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6",
+  "usage_sha256": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a",
+  "training_review_sha256": "8289a7529ec7e0c7b3f4e1c53b577537d6730887b905ca05a99a386d25a1069a",
+  "training_runner_sha256": "e6d106b595de903857dd000df44577a9f0019258cd89f26b32a548176d3f6be6",
+  "plan_id": "plan_e85e4d34533b4f79bfb4ea6b8fb1c5bb",
+  "budget": {
+    "operations": 173,
+    "model_turns": 0,
+    "elapsed_seconds": 4890.0,
+    "cash_usd": "0"
+  },
+  "additional_storage_preflight": {
+    "operations": 1,
+    "elapsed_seconds": 30
+  },
+  "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "minimum_free_bytes": 59055800320,
+  "storage_rules": "Before each operation inspect host free bytes and Docker usage. Training snapshot envelope 57*(measured snapshot+64MiB), plus50GiB reserve; stop new dispatch below51GiB. Builds require50GiB reserve+2GiB image allowance. No prior-resource cleanup.",
+  "training_scope": {
+    "training_inputs": 28,
+    "reference_calls": 28,
+    "holdouts": 0,
+    "model_turns": 0,
+    "network": false,
+    "host_home_access": false,
+    "credentials": false,
+    "timeouts_seconds": 30,
+    "memory_mb": 512,
+    "read_only_root": true,
+    "cpu_count": 1,
+    "process_limit": 64,
+    "maximum_campaign_seconds": 5000,
+    "replay": false,
+    "qualification": false
+  },
+  "image_scope": {
+    "count": 2,
+    "base_images": {
+      "control": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "treatment": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023"
+    },
+    "context_hashes": {
+      "Dockerfile.treatment": "fee7c262582ea7e60ba6688f911c71fb14a66e728cb04c841dd65df6c9fdfffd",
+      "tool.py": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6",
+      "Dockerfile.control": "f9c139b8bd81b136cf226663d30ae542bd194e87cb17793cb4a7706f6808da87",
+      "USAGE.txt": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a"
+    },
+    "base_tags": {
+      "control": "aeep-edit-reusable-base-control:3360c74f1be036ba",
+      "treatment": "aeep-edit-reusable-base-treatment:3360c74f1be036ba"
+    },
+    "output_tags": {
+      "control": "aeep-toolkit-edit-reusable-control:3360c74f1be036ba-readable",
+      "treatment": "aeep-toolkit-edit-reusable-treatment:3360c74f1be036ba-readable"
+    },
+    "worker_files": {
+      "/opt/dependencies/reusable/tool.py": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6",
+      "/opt/dependencies/reusable/USAGE.txt": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a"
+    },
+    "method": "Use the same exact local base IDs; COPY exact frozen bytes, run only existing /bin/chmod 0555 on the new directory, return to65534:65534. No generated-source execution, installation, pulls, network or credential mounts during build/inspection. Require base layer prefix plus exactly two added layers, unchanged final image config, files0444/root-owned and directory0555 before use.",
+    "maximum_operations": 2,
+    "maximum_elapsed_seconds": 1200,
+    "cleanup": "Retain verified images for remaining work and rollback. Remove only new owned ephemeral workers; never touch older images, volumes or backups."
+  },
+  "later_execution_scope": {
+    "qualification_required": true,
+    "source_unchanged": true,
+    "source_may_be_repaired": false,
+    "maximum_no_model_worker_inspections": 8,
+    "maximum_no_model_reserved_seconds": 3600,
+    "comparison_stage": "marginal_value",
+    "value_seed": 2026101904,
+    "fresh_cases_disjoint_from_qualification": true,
+    "cases_per_arm": 141,
+    "arms": [
+      "ordinary capable control",
+      "same model plus optional Ponytail4.10.0",
+      "gpt-6-astra high effort with406second deadline",
+      "same medium model plus optional exact generated tool"
+    ],
+    "maximum_model_turns": 564,
+    "normal_deadline_seconds": 203,
+    "higher_deadline_seconds": 406,
+    "maximum_campaign_reserved_seconds": 200000,
+    "cash_usd": 0,
+    "original_grant": "onboarding; preserve all counters and expiry",
+    "network": "Existing reviewed model proxy only; no new destinations. Tool itself has no network access.",
+    "credential_handling": "Existing protected worker volumes managed by Codex; no agent reading or copying authentication.",
+    "review_gate": "Freeze exact post-build image IDs, worker bindings, conformance, tool lineage, utility and fresh cases before study enqueue. Candidate use and tool use optional. No automatic source edits, retries, admission or publication."
+  },
+  "static_findings": [
+    "Source read in full: io/json/sys/tokenize only; stdin/stdout data transformation, no file opening, network, subprocess, eval or dynamic imports.",
+    "Usage requests Python 3.11. This experiment uses the already reviewed Python 3.13 image; record compatibility only for its bounded training cases, without a Python 3.11 compatibility claim.",
+    "No source or grader repair after results. Preserve imperfect or failed training evidence. Reusable model arm remains optional.",
+    "The original 28 construction inputs are reused intentionally. This manual v2 diagnostic does not alter the frozen qualification case set and cannot qualify or admit the tool."
+  ],
+  "current_free_gib": 161.802,
+  "rollback": "No host package activation or dependency installation. Ephemeral workers are removed by existing runner. Keep exact new image IDs pending completion; later removal requires verifying all container references and explicit cleanup authority.",
+  "original_operation_review_sha256": "dbc2dda63cff7586a0a0d9a699021085e1b9b4c9f619c54a54d90da7047d6d4b",
+  "runner_sha256": "8e13b0864baa1698d9bf29037c35ee868b3e4228cf61f2938c9411ff846f604e",
+  "new_execution_scope": {
+    "operations": 2,
+    "model_turns": 0,
+    "elapsed_seconds_upper": 1200,
+    "cash_usd": 0,
+    "retry_failed_campaigns": false,
+    "generated_source_changes": false,
+    "context_delta": "Two Dockerfiles add USER root; existing /bin/chmod 0555 on new directory; USER65534:65534. Source and usage hashes unchanged."
+  },
+  "retained_failed_image": {
+    "tag": "aeep-toolkit-edit-reusable-control:3360c74f1be036ba",
+    "image_id": "sha256:1c2b3fa906c8a7073b1b66176a5f43d02a9cf081f36ed235b7fb2d9cb1cf8e44",
+    "use_for_trials": false,
+    "deletion_authorized_by_this_review": false
+  }
+}

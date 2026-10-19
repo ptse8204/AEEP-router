@@ -1,0 +1,103 @@
+{
+  "purpose": "Approve the exact frozen generated editing tool for its training diagnostic, COPY-only worker derivatives, contained conformance and optional exposure in the bounded four-arm marginal-value study. All study definitions still require exact recorded reviews; this request grants no admission or release.",
+  "authorization": "Pending explicit user approval. The earlier text-tool source approval does not cover these different bytes. The pasted request excludes untrusted software execution from blanket continuation authority.",
+  "source_digest": "d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0",
+  "source_sha256": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6",
+  "usage_sha256": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a",
+  "training_review_sha256": "8289a7529ec7e0c7b3f4e1c53b577537d6730887b905ca05a99a386d25a1069a",
+  "training_runner_sha256": "e6d106b595de903857dd000df44577a9f0019258cd89f26b32a548176d3f6be6",
+  "plan_id": "plan_e85e4d34533b4f79bfb4ea6b8fb1c5bb",
+  "budget": {
+    "operations": 173,
+    "model_turns": 0,
+    "elapsed_seconds": 4890.0,
+    "cash_usd": "0"
+  },
+  "additional_storage_preflight": {
+    "operations": 1,
+    "elapsed_seconds": 30
+  },
+  "container_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "minimum_free_bytes": 59055800320,
+  "storage_rules": "Before each operation inspect host free bytes and Docker usage. Training snapshot envelope 57*(measured snapshot+64MiB), plus50GiB reserve; stop new dispatch below51GiB. Builds require50GiB reserve+2GiB image allowance. No prior-resource cleanup.",
+  "training_scope": {
+    "training_inputs": 28,
+    "reference_calls": 28,
+    "holdouts": 0,
+    "model_turns": 0,
+    "network": false,
+    "host_home_access": false,
+    "credentials": false,
+    "timeouts_seconds": 30,
+    "memory_mb": 512,
+    "read_only_root": true,
+    "cpu_count": 1,
+    "process_limit": 64,
+    "maximum_campaign_seconds": 5000,
+    "replay": false,
+    "qualification": false
+  },
+  "image_scope": {
+    "count": 2,
+    "base_images": {
+      "control": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "treatment": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023"
+    },
+    "context_hashes": {
+      "Dockerfile.control": "7d9bb8b79f19522ff89ebe96340729f24245f0dccafb53142a23d03d906d8bcb",
+      "Dockerfile.treatment": "e47c777002c936254779fb1f311f600324ed38c7016dec0e2230a8264a3cb844",
+      "USAGE.txt": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a",
+      "tool.py": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6"
+    },
+    "base_tags": {
+      "control": "aeep-edit-reusable-base-control:3360c74f1be036ba",
+      "treatment": "aeep-edit-reusable-base-treatment:3360c74f1be036ba"
+    },
+    "output_tags": {
+      "control": "aeep-toolkit-edit-reusable-control:3360c74f1be036ba",
+      "treatment": "aeep-toolkit-edit-reusable-treatment:3360c74f1be036ba"
+    },
+    "worker_files": {
+      "/opt/dependencies/reusable/tool.py": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6",
+      "/opt/dependencies/reusable/USAGE.txt": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a"
+    },
+    "method": "Exact local base IDs, COPY only, no RUN, installation, pull or network. Inspect base layer prefix, unchanged image config, exact file hashes and root ownership/read-only modes before use. Record resulting image IDs. Treatment derivative is for paired boundary verification only; candidate-absent control derivative enters reusable model arm.",
+    "maximum_operations": 2,
+    "maximum_elapsed_seconds": 1200,
+    "cleanup": "Retain verified images for remaining work and rollback. Remove only new owned ephemeral workers; never touch older images, volumes or backups."
+  },
+  "later_execution_scope": {
+    "qualification_required": true,
+    "source_unchanged": true,
+    "source_may_be_repaired": false,
+    "maximum_no_model_worker_inspections": 8,
+    "maximum_no_model_reserved_seconds": 3600,
+    "comparison_stage": "marginal_value",
+    "value_seed": 2026101904,
+    "fresh_cases_disjoint_from_qualification": true,
+    "cases_per_arm": 141,
+    "arms": [
+      "ordinary capable control",
+      "same model plus optional Ponytail4.10.0",
+      "gpt-6-astra high effort with406second deadline",
+      "same medium model plus optional exact generated tool"
+    ],
+    "maximum_model_turns": 564,
+    "normal_deadline_seconds": 203,
+    "higher_deadline_seconds": 406,
+    "maximum_campaign_reserved_seconds": 200000,
+    "cash_usd": 0,
+    "original_grant": "onboarding; preserve all counters and expiry",
+    "network": "Existing reviewed model proxy only; no new destinations. Tool itself has no network access.",
+    "credential_handling": "Existing protected worker volumes managed by Codex; no agent reading or copying authentication.",
+    "review_gate": "Freeze exact post-build image IDs, worker bindings, conformance, tool lineage, utility and fresh cases before study enqueue. Candidate use and tool use optional. No automatic source edits, retries, admission or publication."
+  },
+  "static_findings": [
+    "Source read in full: io/json/sys/tokenize only; stdin/stdout data transformation, no file opening, network, subprocess, eval or dynamic imports.",
+    "Usage requests Python 3.11. This experiment uses the already reviewed Python 3.13 image; record compatibility only for its bounded training cases, without a Python 3.11 compatibility claim.",
+    "No source or grader repair after results. Preserve imperfect or failed training evidence. Reusable model arm remains optional.",
+    "The original 28 construction inputs are reused intentionally. This manual v2 diagnostic does not alter the frozen qualification case set and cannot qualify or admit the tool."
+  ],
+  "current_free_gib": 161.802,
+  "rollback": "No host package activation or dependency installation. Ephemeral workers are removed by existing runner. Keep exact new image IDs pending completion; later removal requires verifying all container references and explicit cleanup authority."
+}

@@ -1,0 +1,31 @@
+{
+  "client_date": "2026-10-19",
+  "authority": "Standing exact routine test-definition and finite assessment delegation September25/27. Existing reviewed worker, proxy and host-owned authentication; zero model turns or paid calls.",
+  "plan_id": "plan_0a8359a155184098ad3ba790f8a77f55",
+  "plan_digest": "817d56dd3fb0c20ef5f39956b1baa54ff97fbaa3c2998eae4ae77adae6848309",
+  "executor_digest": "4d2846fd27ddc04c9a417cec4c10be74f98d4c8398ce238218ce9c34ee029ecb",
+  "source_digest": "d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0",
+  "runner_sha256": "c917fe84828daf049fc9923a6af626112aa34087f4efe5182d1d20e46eb6a72a",
+  "operation_limit": 1,
+  "elapsed_limit_seconds": 180,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "scope": "Change only exact stopped task-owned proxy memory cap from 128 MiB to 512 MiB and combined memory/swap cap to 512 MiB (no swap). Preserve container/image/network/permissions/configuration. Run one no-credential read-only worker with existing image for bounded TCP CONNECT TLS health against chatgpt.com only. Record proxy cgroup memory peak. Restore stopped proxy; retain cap only if health passes, else roll back original memory caps. No model, auth state, installation, new image or host Docker configuration.",
+  "post_report_costs_retained_separately": true,
+  "predecessor_result_sha256": "310a77d6c8050f65e19ca30e5e505b8d6b265da8c19a1cd927480587db3a7ab6",
+  "program_sha256": "f9278375c79266a4e6bd46faddb31869cd9003f237bd7753e74ecba5b76bef45",
+  "image": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+  "container_name": "aeep-toolkit-proxy-repair-check-20261019",
+  "maximum_operations": 1,
+  "maximum_seconds": 180,
+  "maximum_model_turns": 0,
+  "memory_before": {
+    "Memory": 134217728,
+    "MemorySwap": 268435456
+  },
+  "memory_after": {
+    "Memory": 536870912,
+    "MemorySwap": 536870912
+  },
+  "reason": "Exact proxy was OOMKilled (exit137) in 0.3 seconds; private IP correct, TCP refused. Other running containers use under 1 GiB of 7.75 GiB Docker VM memory."
+}

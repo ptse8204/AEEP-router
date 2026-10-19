@@ -4358,3 +4358,73 @@ grant ceiling changed. Broad regressions and installed-package checks were not
 repeated. C07 comparative value, C13 resource/human/platform/release evidence and
 the missing pinned Lychee check remain open. No new architecture choice is needed
 for the immediate worker-readiness repair.
+
+### October 19: readiness repaired; task-profile correction next
+
+[Exact repair evidence](../toolkit-v2/integration-completion/worker-readiness-repair-20261019/proxy-repair-result.json)
+confirmed the task proxy was OOM-killed under128MiB and refused TCP connections.
+Its reviewed cap is512MiB with no swap; measured proxy peak189,833,216bytes.
+Image, network, permissions and ID are unchanged. Both unchanged worker profiles
+subsequently passed readiness, model selection and identity checks. The proxy
+is stopped between runs; temporary diagnostic workers were removed. No host
+configuration, credential, volume, new image or production code changed.
+
+The fresh141-case editing qualification stopped on its first turn without an
+answer (`fit_0fedf41c912d4817b8f4cee770429740`); no correctness or holdout result
+follows. Its seed2026101901 cases were disjoint from the earlier failed plan.
+A separate one-turn public connectivity probe succeeded. Definition audit found
+the editing profiles had lost the verified D57 prompt output mode by inheriting
+older mappings. The next correction keeps tasks/graders/thresholds fixed, uses
+new prompt-mode worker profiles and refreshes their fingerprint-bound evidence
+before new disjoint cases. No terminal campaign or diagnostic is replayed.
+
+Fresh prompt-mode profiles now pass all 11 probes per worker with cleanup.
+Qualification `plan_a26f0d5197c849ec86aed1b7d2969579` uses fresh seed 2026101903,
+141 inputs disjoint from both failed plans and unchanged acceptance. The exact
+training-only builder is currently active before those holdouts; only the 28
+training inputs and task contract are available to it, with source kept inert.
+No new production code, image, upstream pin, installer or broad regression run
+was introduced. Read current toolkit state and durable results before resuming.
+
+### Toolkit C07 resumed execution — 2026-10-19
+
+Worker readiness is fixed: exact task proxy OOM at 128 MiB, measured peak 181 MiB,
+reviewed 512 MiB/no-swap limit, successful network and paired readiness checks.
+Both editing profiles now preserve D57 prompt output mode and passed 11 probes
+each. Qualification `plan_a26f0d5197c849ec86aed1b7d2969579` is running once under
+assessment `assessment_b68a3a6ac3a94d50b95d13af1c8cc1e3`; observe existing session 33494
+or canonical records, never replay the driver. First 34 recorded trials succeeded;
+qualification and comparison remain open pending terminal evidence.
+
+The candidate-absent builder is complete, not active: one charged call on 28
+training inputs, frozen generated source 3360c74f… and no source execution.
+The exact new-source review is
+`reports/toolkit-v2/c07/edit-reusable-20261019/operation-review.json`,
+SHA-256 `dbc2dda63cff7586a0a0d9a699021085e1b9b4c9f619c54a54d90da7047d6d4b`.
+An asynchronous approval request is pending under the user's explicit untrusted
+execution boundary. It covers the 28-input offline diagnostic, COPY-only images
+and optional source exposure in the later four-arm study. The earlier text-tool
+approval does not cover this source. Qualification continues independently.
+Production source remains d05541e9…; broad regression and package checks are not
+repeated for these operational records. Full docs-check still needs missing
+Lychee 0.24.2; cached targeted Markdown lint is available.
+
+The generated editing source and image-permission correction are now explicitly
+approved. Training completed 28/28 generated and 28/28 reference successes, no
+model turns or holdouts. Both corrected derivative images passed their public
+file/layer/configuration checks; exact IDs and retained failures are in
+`reports/toolkit-v2/c07/edit-reusable-20261019`. Qualification remains active.
+Three value-stage pair definitions are prepared, not executed. The comparison
+will use four frozen arms and fresh seed 2026101904 after canonical qualification
+passes. One public metadata observation lacked advance reservation; its exact
+accounting discrepancy is retained in copy-permission-diagnosis.json.
+
+Recovery verification: all 29 operational Python drivers parsed. Repository
+`make docs-check` passed Markdown lint for 65 in-scope files, then stopped because
+Lychee 0.24.2 is absent. Log:
+`reports/toolkit-v2/integration-completion/worker-readiness-repair-20261019/docs-check-recovery.log`.
+A separate overbroad lint invocation included this historical plan record and
+reported its existing blank-line/fence conventions; it is outside Makefile's
+documentation scope. No historical prose was reformatted to hide those findings.
+Production source remains unchanged; no full software or installed-wheel rerun
+was repeated for these operational records.

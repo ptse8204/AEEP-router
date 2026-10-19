@@ -1,0 +1,26 @@
+{
+  "source_unchanged": true,
+  "profiles": [
+    {
+      "plan_id": "plan_1eed14b65d3741bca8b92d99edfa63fe",
+      "candidate_id": "text-prompt-schema.treatment",
+      "adapter_options": {
+        "experimental_api": true,
+        "output_schema_mode": "prompt"
+      },
+      "output_schema_dynamic_files": false
+    },
+    {
+      "plan_id": "plan_16fb057af234452e91214c6829348d29",
+      "candidate_id": "toolkit-edit-qualification.treatment",
+      "adapter_options": {
+        "experimental_api": true
+      },
+      "output_schema_dynamic_files": true
+    }
+  ],
+  "cause": "The editing-profile preparation replaced the prompt-schema pair with mappings from the older plan_d634949396264514b929eda14e505743. This drops output_schema_mode=prompt. Dynamic file-key schema is then submitted as native structured output instead of using the established D57 prompt contract.",
+  "evidence_limit": "Failed task turn raw error was not persisted; public-input plain turn succeeded. Output-mode regression is directly observed in definitions; backend invalid-schema attribution is inferred, not a retained error observation.",
+  "repair": "Construct fresh task profiles from the passed prompt-schema plan; assert equal prompt mode in both arms. Refresh fingerprint-bound pair conformance and use fresh plans/cases. No grader, task, utility or threshold change.",
+  "prior_failed_plan_retained": "plan_16fb057af234452e91214c6829348d29"
+}

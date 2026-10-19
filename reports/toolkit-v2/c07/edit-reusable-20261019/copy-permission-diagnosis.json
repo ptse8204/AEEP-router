@@ -1,0 +1,36 @@
+{
+  "operation_id": "plan_e85e4d34533b4f79bfb4ea6b8fb1c5bb:copy_tar_permission_diagnosis",
+  "facts": [
+    {
+      "path": "reusable",
+      "mode": "0o444",
+      "uid": 0,
+      "type": "directory",
+      "sha256": null
+    },
+    {
+      "path": "reusable/USAGE.txt",
+      "mode": "0o444",
+      "uid": 0,
+      "type": "regular",
+      "sha256": "6bd8ecd361974bd94ee6d343e4d39c0e747c5b038634b4563c3ce4ba3b69360a"
+    },
+    {
+      "path": "reusable/tool.py",
+      "mode": "0o444",
+      "uid": 0,
+      "type": "regular",
+      "sha256": "3360c74f1be036ba1e61ceb1ba3cf362d7258c11dbd2cbde5d7672fe4e38e2f6"
+    }
+  ],
+  "generated_source_executed": false,
+  "auth_or_volumes_mounted": false,
+  "diagnostic_workers_removed": true,
+  "initial_unreserved_observation": {
+    "tool_wall_seconds": 0.112110291,
+    "measurement_source": "exec_command tool reported wall_time_seconds for prior nonroot diagnostic command",
+    "accounting_gap": "Initial metadata probe was not pre-reserved; this discrepancy is retained."
+  },
+  "first_host_command_failure": "System Python had no pydantic; no reservation, service or container started.",
+  "root_stat_observation": "Charged prior operation copy_permission_diagnosis also failed traversal because all capabilities were dropped; its stopped owned container was inspected through Docker public-file tar metadata and removed."
+}

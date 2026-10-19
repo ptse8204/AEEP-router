@@ -1,0 +1,37 @@
+{
+  "review_sha256": "3f6f9d94c29c6b7473f5dc3b550d2b553c41270fd1e181da833fdeeaa77e1912",
+  "model_calls": 0,
+  "credential_mounts": 0,
+  "image": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+  "container_name": "aeep-toolkit-proxy-repair-check-20261019",
+  "memory_before": {
+    "Memory": 134217728,
+    "MemorySwap": 268435456
+  },
+  "memory_after": {
+    "Memory": 536870912,
+    "MemorySwap": 536870912
+  },
+  "actual_proxy_address": "172.18.0.2",
+  "expected_proxy_address": "172.18.0.2",
+  "proxy_address_matches_review": true,
+  "network_checks": {
+    "checks": [
+      {
+        "proxy_address": "172.18.0.2",
+        "tcp_connected": true,
+        "connect_status": 200,
+        "tls_verified": true,
+        "tls_version": "TLSv1.3"
+      }
+    ],
+    "credentials_present": false,
+    "model_calls": 0
+  },
+  "repair_verified": true,
+  "proxy_cgroup_memory_peak_bytes": 189833216,
+  "worker_removed": true,
+  "memory_change_retained": true,
+  "proxy_restored": true,
+  "source_unchanged": true
+}

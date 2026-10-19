@@ -1,0 +1,19 @@
+"""Prepare a single public-input model diagnostic through existing conformance APIs."""
+import asyncio,hashlib,json,pathlib
+from aeep.router import Router
+from aeep.models import ExecutorSpec,ManagedHostInvocation,ManagedHostExecutorConfig
+from aeep.assessment.models import AssessmentAuthorization,AssessmentScopeAmendment,content_digest
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.boundary import BoundaryProbeDefinition,prepare_model_probe
+from aeep.assessment.verification import verification_source_digest
+ROOT=pathlib.Path(__file__).resolve().parents[4];OUT=pathlib.Path(__file__).parent
+async def main():
+ assert not (OUT/'turn-diagnostic-review.json').exists();source=verification_source_digest(ROOT);assert source=='d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0'
+ base=pathlib.Path('/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3');r=Router.from_manifest(base/'aeep.json');s=AssessmentService(r,base/'.aeep/assessments');q=s.repository
+ try:
+  config=json.loads((ROOT/'reports/toolkit-v2/c07/edit-study-preparation/qualification-execution-review.json').read_text());pair=q.get('worker_pair_definition',config['pair_definition_digest']);spec=ExecutorSpec.model_validate(pair['control']);cfg=spec.managed_host_config().model_dump(mode='json');cfg.update(instructions='Connectivity diagnosis only. Do not read files or use tools, skills, apps or external services. Return exactly this JSON object: {"connected":true}.',timeout_seconds=60,invocation=ManagedHostInvocation(mode='turn').model_dump(mode='json'),artifact=None,input_tree=None,worker_workspace=None,assessment_adapter=None,store_prompt=False,store_output=False);spec.config=ManagedHostExecutorConfig.model_validate(cfg).model_dump(mode='json');spec.id='toolkit-repair-public-turn-diagnostic';spec.capability='aeep.conformance.connectivity@1';spec.input_schema={'type':'object','properties':{},'additionalProperties':False};spec.output_schema={'type':'object','properties':{'connected':{'const':True}},'required':['connected'],'additionalProperties':False}
+  definition=BoundaryProbeDefinition(name='model_connectivity',executor=spec,expected={'connected':True});request=prepare_model_probe(s,source_plan_id='plan_16fb057af234452e91214c6829348d29',definition=definition)
+  ds=set(request.definition_digests)|{content_digest(request),request.subject_digest};documents={d:json.loads(r.store._connection.execute('SELECT payload_json FROM assessment_records WHERE digest=?',(d,)).fetchone()[0]) for d in ds};grant=AssessmentAuthorization.model_validate(q.get('authorization','onboarding'));amend=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[request.subject_digest],recipe_digests=[request.recipe_digest],environment_digests=[request.environment_digest],reviewed_digests=sorted(ds))
+  review={'authority':'Standing September25/27 exact routine diagnostic and finite scope delegation; current worker-repair instruction.','source_digest':source,'request':request.model_dump(mode='json'),'definitions':documents,'amendment':amend.model_dump(mode='json'),'scope':'One public empty-input connectivity turn in exact existing candidate-absent control worker, no task or holdout. Capture bounded error flags/hash only, never raw messages, outputs, account data or credentials. Restore worker/proxy. No replay or qualification claim.','maximum_model_turns':1,'maximum_model_seconds':65,'maximum_lifecycle_operations':1,'maximum_lifecycle_seconds':120,'cash_usd':0,'proxy_memory_bytes':536870912,'preparation_runner_sha256':hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()};(OUT/'turn-diagnostic-review.json').write_text(json.dumps(review,indent=2)+'\n');print(json.dumps({'request_id':request.plan_id,'maximum_model_turns':1,'task_inputs':0}))
+ finally:await r.close()
+asyncio.run(main())

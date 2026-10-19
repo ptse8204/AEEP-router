@@ -1,0 +1,97 @@
+"""Prepare actual text qualification worker observations; no worker or model starts."""
+import hashlib
+import json
+from pathlib import Path
+
+from aeep.assessment.boundary import BoundaryProbeDefinition
+from aeep.assessment.identity import runtime_dependencies
+from aeep.assessment.models import AssessmentAuthorization, AssessmentEnvironment, AssessmentScopeAmendment, ConformanceProbeRequest, RecipeRuntimeBinding, content_digest
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.verification import verification_source_digest
+from aeep.hosts.codex_pair_inspection import WorkerPairInspection, prepare_pair
+from aeep.hosts.workers import binding_from_config
+from aeep.models import StrictModel, ExecutorSpec
+from aeep.assessment.recipes import shipped_recipe
+from aeep.router import Router
+
+ROOT=Path(__file__).resolve().parents[4];OUT=Path(__file__).resolve().parent;PRIOR=OUT.parent/'edit-study-preparation'
+CANONICAL=Path('/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3')
+
+class Definition(StrictModel):
+    values:dict
+
+assert not (OUT/'pair-review.json').exists()
+prior=json.loads((OUT.parent/'text-prompt-schema-review/pair-review.json').read_text())
+pair=WorkerPairInspection.model_validate(prior['definitions'][prior['pair_definition_digest']])
+from aeep.assessment.models import RecipeDefinition
+recipe=RecipeDefinition.model_validate_json((PRIOR/'recipe.json').read_text())
+source=verification_source_digest(ROOT)
+router=Router.from_manifest(CANONICAL/'aeep.json');service=AssessmentService(router,CANONICAL/'.aeep/assessments');repo=service.repository
+try:
+    prior=repo.get('plan','plan_a26f0d5197c849ec86aed1b7d2969579')
+    mapping=repo.get('mapping',prior['mapping_digest'])
+    pair=WorkerPairInspection.model_validate(pair.model_dump(mode='json') | {
+        'control':mapping['baseline'], 'treatment':mapping['candidate']})
+    built=json.loads((OUT.parent/'edit-reusable-20261019/images-readable-accounted-result.json').read_text())
+    training=json.loads((OUT.parent/'edit-reusable-20261019/training-summary.json').read_text())
+    assert built['passed'] and built['source_unchanged'] and built['source_digest']==source
+    assert all(v['calls']==v['success']==v['task_valid']==28 and not v['errors'] for v in training['counts'].values())
+    shared=Definition(values={'purpose':'Exact shared reusable tool in paired boundary workers; only candidate-absent derivative enters value reusable arm','original_shared_definition_digest':pair.differential.shared_definition_digest,'images':built['images'],'files':built['files'],'source_digest':source})
+    shared_digest=repo.put('shared_environment_definition',content_digest(shared),shared)
+    inventory={**pair.differential.control_inventory,'common_profile':shared_digest,'reusable_tool':content_digest(built['files'])}
+    differential=pair.differential.model_copy(update={'shared_definition_digest':shared_digest,'control_inventory':inventory,'treatment_inventory':{**inventory,**pair.differential.candidate_inventory}})
+    pair.differential=differential
+    for role in ('control','treatment'):
+        spec=getattr(pair,role);spec.id='toolkit-edit-reusable-pair-20261019.'+role
+        spec.capability=recipe.capability;spec.input_schema=recipe.input_schema;spec.output_schema=recipe.output_schema
+        spec.config['instructions']='If /opt/dependencies/reusable/USAGE.txt exists, you may inspect it and optionally use its frozen training-built tool. Otherwise solve with the available ordinary tools. '+recipe.description+' Return only the requested JSON. Input: {input}'
+        worker=spec.config['managed_worker'];worker['worker_id']='edit-reusable-'+role
+        worker['image']=built['images'][role]
+        worker['reviewed_files']={**(worker.get('reviewed_files') or {}),**built['files']}
+        worker['dependencies_digest']=content_digest({'base_dependencies_digest':worker['dependencies_digest'],'added_files':built['files']})
+        worker['credential_volume']='aeep-auth-incremental-'+('treatment' if role=='control' else 'control')
+        spec.config['adapter_id']='codex-app-server:edit-reusable-'+role
+        if role=='treatment':spec.config['invocation']['exposure']='optional'
+        assert spec.config['adapter_options']['output_schema_mode']=='prompt', 'Task profiles must preserve verified D57 prompt mode'
+    from aeep.assessment.models import AssessmentSubject
+    from aeep.assessment.identity import verify_subject
+    subject_path=ROOT/'reports/toolkit-v2/integration-completion/resumption-20261019/candidate-source/SKILL.md'
+    existing=router.store._connection.execute("SELECT id FROM assessment_records WHERE kind='subject' AND json_extract(payload_json,'$.location')=?",(str(subject_path),)).fetchone();assert existing
+    subject=AssessmentSubject.model_validate(repo.get('subject',existing[0]));verify_subject(subject)
+    assert subject.dependency_digests == {'SKILL.md':pair.candidate_skill_digest}
+    definitions={shared_digest:shared.model_dump(mode='json')}
+    def put(kind,value,identity=None):
+        d=content_digest(value);repo.put(kind,identity or d,value);definitions[d]=value.model_dump(mode='json');return d
+    sd=content_digest(subject);rd=put('recipe',recipe)
+    definitions[sd]=repo.get('subject',sd);definitions[rd]=repo.get('recipe',rd)
+    runtime=RecipeRuntimeBinding(dependencies=runtime_dependencies());runtime_digest=put('probe_runtime',runtime)
+    sources=[];environments=[]
+    built=json.loads((OUT.parent/'edit-reusable-20261019/images-readable-accounted-result.json').read_text())
+    training=json.loads((OUT.parent/'edit-reusable-20261019/training-summary.json').read_text())
+    assert built['passed'] and built['source_unchanged'] and built['source_digest']==source
+    assert all(v['calls']==v['success']==v['task_valid']==28 and not v['errors'] for v in training['counts'].values())
+    shared=Definition(values={'purpose':'Exact shared reusable tool in paired boundary workers; only candidate-absent derivative enters value reusable arm','original_shared_definition_digest':pair.differential.shared_definition_digest,'images':built['images'],'files':built['files'],'source_digest':source})
+    shared_digest=repo.put('shared_environment_definition',content_digest(shared),shared)
+    inventory={**pair.differential.control_inventory,'common_profile':shared_digest,'reusable_tool':content_digest(built['files'])}
+    differential=pair.differential.model_copy(update={'shared_definition_digest':shared_digest,'control_inventory':inventory,'treatment_inventory':{**inventory,**pair.differential.candidate_inventory}})
+    pair.differential=differential
+    for role in ('control','treatment'):
+        spec=getattr(pair,role);binding=binding_from_config(spec.managed_host_config().managed_worker);assert binding
+        env=AssessmentEnvironment(environment_id='toolkit-edit-reusable-pair-20261019-'+role,kind='codex_sandbox',identity={'purpose':'Current-source optional-exposure value profile; identical conditional tool-availability notice in both arms; no task/model turn','source_digest':source,'image':binding.image})
+        ed=put('environment',env);environments.append(ed)
+        mapping=BoundaryProbeDefinition(name='worker_inspection',executor=spec,expected={});md=put('boundary_probe_definition',mapping)
+        request=ConformanceProbeRequest(schema_version='assessment.conformance-request.v2',operation='worker_inspection',subject_digest=sd,recipe_digest=rd,mapping_digest=md,environment_digest=ed,authorization_id='onboarding',definition_digests=[sd,rd,ed,md,runtime_digest],worker_digest=binding.digest(),executable_dependencies=runtime.dependencies)
+        put('conformance_request',request,request.plan_id);sources.append(request.plan_id)
+    prepared=prepare_pair(service,*sources,pair)
+    definitions[prepared['pair_definition_digest']]=pair.model_dump(mode='json')
+    requests=[ConformanceProbeRequest.model_validate(v) for v in prepared['requests']]
+    for request in requests:
+        definitions[content_digest(request)]=request.model_dump(mode='json')
+        for d in request.definition_digests:
+            if d not in definitions:definitions[d]=repo.get('boundary_probe_definition',d)
+    grant=AssessmentAuthorization.model_validate(repo.get('authorization','onboarding'))
+    amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=content_digest(grant),subject_digests=[sd],recipe_digests=[rd],environment_digests=environments,reviewed_digests=list(definitions))
+    review={'authority':'Standing September25/27 routine exact definition and scope delegation; current continuous toolkit instruction','source_digest':source,'pair_definition_digest':prepared['pair_definition_digest'],'request_ids':[r.plan_id for r in requests],'requests':[r.model_dump(mode='json') for r in requests],'definitions':definitions,'amendment':amendment.model_dump(mode='json'),'maximum_operations':2,'maximum_model_turns':0,'maximum_reserved_seconds':480,'cash_usd':0,'authentication_state_access':False,'full_conformance':False,'scope_applied':False}
+    (OUT/'pair-review.json').write_text(json.dumps(review,indent=2)+'\n')
+    print(json.dumps({'source_digest':source,'request_ids':review['request_ids'],'workers_started':False}))
+finally:router.store.close()
