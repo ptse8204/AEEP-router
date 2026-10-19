@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-15:** The approved current-source wheel passed all 15 sandboxed offline CLI checks; its private runtime and scratch were removed. The three exact approved inactive pytest roots were removed. Their deletion did not establish reclaimed disk space. Source remains `d2c406f`, with both full suites previously passing 1,561 tests, 21 skips, 82% coverage and all required checks. C08 configured discovery and C10 local telemetry preview now have current installed evidence and removal. Generated-tool training is approved but unstarted. Latest cleanup-review free space is 29.24 GiB, below the 50 GiB reserve; training requires 55 GiB and three-family qualification 69.77 GiB. No campaign or verification process is running; the model proxy is stopped. Live optional-use value, actual human comprehension and release remain open.
+**Status as of 2026-10-19:** Storage is sufficient: initial preflight measured 166.45 GiB free and required images remain present. The approved generated-tool training check completed: generated tool 24/28 correct, independent reference 28/28, zero execution failures and zero model turns. The three-family editing qualification stopped on its first trial with a host preflight rejection; the remaining 140 cases did not run. A subsequent zero-model diagnostic isolated a failing `account/rateLimits/read` RPC in the pinned Codex worker. Underlying capacity, connectivity or API cause remains unknown; a generic rate-limit error classification is not proof of exhausted quota. No campaign is running and the proxy is restored. No paired value result, human comprehension or release decision exists. Source remains `d2c406f`; broad regressions and wheel installation were not repeated.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,13 +28,14 @@ checkpoint_status:
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Restore available storage first. Training approval remains valid for its exact unchanged review; do not request it again. At over 55 GiB, recheck its source/artifact/grant guards and execute the prepared training driver once. At least 69.77 GiB plus a fresh snapshot check is required for the editing qualification. Never replay completed cleanup or installation.'
+next_action: 'Resolve the pinned worker account/rateLimits/read readiness RPC failure with a content-free diagnostic; do not infer quota exhaustion. Then review any worker/source correction and prepare a fresh qualification plan/case set. Never replay the terminal editing job. Complete task-matched optional-use four-arm comparison after qualification. Storage is no longer blocking; prior training is complete.'
 blocked_actions:
-  - 'Latest cleanup-review free space is 29.24 GiB, below the 50 GiB reserve. Training requires 55 GiB; editing qualification requires at least 69.77 GiB and fresh snapshot verification.'
+  - 'Pinned Codex worker readiness fails at account/rateLimits/read. The editing qualification stopped after one rejected trial; cause needs classification before a fresh plan can run.'
+  - 'Optional-use comparison still lacks completed task-matched trials, reusable-tool worker lineage and complete resource evidence.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
 missing_permissions:
-  - 'The exact cleanup, current wheel and generated-tool training reviews were approved. Cleanup and installation completed; training has not started.'
+  - 'Exact cleanup, current wheel and generated-tool training approvals have all been used. Training is complete; later generated-tool image creation/model exposure requires its own concrete review.'
   - 'Further backup or unrelated-resource removal is outside the exact cleanup approval.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
@@ -1603,3 +1604,81 @@ cache and snapshots may retain blocks. Removing these images cannot resolve the
 storage shortage. No Docker object or assessment state was changed. Keep the
 four recovery images, current V2 images and other resources outside this scope.
 Fresh reference checks are required before any later authorized removal.
+
+### October 19 resumption: capacity cleared and acceptance work advanced
+
+The operator reports host cleanup completed. [Fresh preflight](../../reports/toolkit-v2/integration-completion/resumption-20261019/preflight.json)
+measured 178,724,843,520 free bytes (166.45 GiB), found required Docker images and
+no jobs for either pending plan. Two ignored Finder metadata files changed the
+source fingerprint. They were preserved under the worktree's ignored `.aeep`
+directory; with those outside source directories, the exact reviewed fingerprint
+`d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0`
+was restored. No tracked source changed. No further cleanup was performed.
+
+The [approved training result](../../reports/toolkit-v2/c07/text-reusable-review/training-result.json)
+is complete: 28 generated-tool and 28 independent-reference executions. Generated
+outputs passed 24/28, reference outputs 28/28; four correctness failures and zero
+execution failures. Canonical report `fit_9b8d53990a4348bca1004b54877635bd` records
+`unsuitable`, with no qualification, holdouts, model turns or admission. The frozen
+tool was not repaired. This closes its pending training check, not C07 value.
+
+The original editing runner stopped before enqueue: a completed storage preflight
+made the fresh-campaign budget preview indeterminate. Its successor accepts only
+that exact completed zero-turn operation with no job, and requires the unchanged
+full schedule plus lifecycle allowance to fit current remaining grant. Eleven
+focused guard checks passed. The successor then enqueued the plan but stopped
+before trial execution because its pinned subject file was absent from the
+original temporary source directory. The proxy was restored and no model call
+was made during either failed launch.
+
+The exact 6,637-byte skill file was recovered from its immutable upstream commit
+and verified against `1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2`.
+A durable source/license copy and [restoration record](../../reports/toolkit-v2/integration-completion/resumption-20261019/candidate-restoration.json)
+are retained. The frozen subject location was restored byte-for-byte; no install
+or activation occurred. All frozen dependency checks then passed.
+
+[The queued-job resumption review](../../reports/toolkit-v2/c07/edit-study-preparation/qualification-resumed-execution-review.json)
+uses the existing standing finite authority. It permits only the same queued job
+with no start time, report, error or prior trial, and exactly four completed
+zero-turn preparation operations. Ten focused checks rejected started jobs, prior
+trials, changed/unresolved operations and insufficient budgets. Prior costs remain
+charged. No plan, seed, worker, model, threshold or grant ceiling changed. Review
+SHA-256: `48d4cc745a2cc3853e3c609c0f2f33bfe877829f593b5a4cce5d9b024e9edbaf`.
+
+The resumed driver is running under tool session `48197`. Fresh storage envelope
+is 21,224,939,520 bytes plus the existing 50 GiB reserve; capacity fits. Do not
+replay a started driver. Read canonical job state and terminal output first.
+The first model reservation is recorded; no outcome is inferred while running.
+Production source remains unchanged. Broad regressions and wheel installation
+were not repeated. The missing pinned Lychee checker, human comprehension,
+resource/value evidence and operator release decision remain separate gates.
+
+### October 19 terminal qualification and current blocker
+
+The resumed qualification completed as `fit_81949be3b6e94089b9710cfeae22a4aa`,
+`insufficient_evidence`, with qualification false. One trial ended
+`environment_failure` at `preflight`, code `host_request_rejected`: zero verified
+outputs, zero correctness failures and one execution failure. The remaining 140
+cases did not run. One model turn was reserved; that does not establish completed
+inference. All incurred costs remain retained. The source stayed unchanged and
+the proxy returned to its stopped state. Never replay this terminal job or reuse
+its frozen case set in a successor plan.
+
+A [separate zero-model readiness review](../../reports/toolkit-v2/integration-completion/resumption-20261019/readiness-review.json)
+reserved one operation and 180 seconds on the same grant. It denied thread and
+turn creation and did not replay the task. [Its result](../../reports/toolkit-v2/integration-completion/resumption-20261019/readiness-result.json)
+records `CodexRequestError` from `account/rateLimits/read`; the adapter's probe
+returned `unsupported`. Only classification flags, byte count and error hash were
+retained. The rate-limit classification does not distinguish exhausted quota from
+a failure to retrieve rate-limit information. No raw account response, principal,
+error text, credentials or authentication output was stored. Proxy restoration
+and source stability passed.
+
+The current next engineering work is to obtain a more specific bounded diagnostic
+of that readiness RPC and fix the worker/API path. This is not a demonstrated
+need for a different architecture or a budget expansion. After any correction,
+review the exact worker/source binding and use a fresh plan and disjoint cases.
+No broad regression or packaged install was repeated in this resumption. The 21
+focused launch/recovery guard checks cover prior-trial rejection, unresolved
+accounting, exact preparation lineage and remaining allowance; they are software
+checks, not comparative-value evidence.

@@ -1,0 +1,24 @@
+{
+  "client_date": "2026-10-19",
+  "source_digest": "d05541e90d2e200ba1ea61b4169a8ebcdf62fd96217fdbe35a81e42accd4d1b0",
+  "production_source_changed": false,
+  "free_bytes": 176555311104,
+  "storage_blocked": false,
+  "current_blocker": "Pinned Codex worker readiness: account/rateLimits/read raises CodexRequestError. Probe returns unsupported and prevents model task generation. Underlying network/auth/capacity/API cause has not been established.",
+  "model_failure_is_not_a_correctness_failure": true,
+  "qualification_job_terminal": true,
+  "automatic_retry_authorized": false,
+  "grant_counters_after": [
+    10200,
+    2985,
+    109490.30310636107,
+    "0.0"
+  ],
+  "jobs_running": [],
+  "proxy_restored": true,
+  "architecture_decision_required_now": false,
+  "next_engineering": "Obtain a more specific content-free diagnostic of the rate-limit RPC failure and repair/qualify the exact worker readiness path. Prepare a fresh plan and disjoint case set before another qualification; never retry the terminal job.",
+  "value_study_remaining": true,
+  "human_comprehension_remaining": true,
+  "release_decision_remaining": true
+}

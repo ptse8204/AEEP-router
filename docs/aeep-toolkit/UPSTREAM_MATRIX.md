@@ -287,3 +287,15 @@ runtime was removed unchanged. [The installation record](../../reports/toolkit-v
 updates package compatibility only; it does not qualify upstream scanners,
 remote exporters or additional host platforms. Waza and LangGraph retain the
 previously recorded bounded executable evidence. No upstream version changed.
+
+### October 19 managed-worker readiness failure
+
+No upstream pin or production source changed. The prepared three-family managed
+qualification stopped on its first host preflight rejection. A separately charged
+zero-model probe reproduced a `CodexRequestError` at `account/rateLimits/read` in
+the existing Codex worker. This does not establish a new defect in agent-skill-eval,
+Waza, the candidate or the comparison math. The underlying capacity, connectivity
+or API cause remains unknown. [The current record](../../reports/toolkit-v2/integration-completion/resumption-20261019/README.md)
+supersedes earlier storage-only readiness descriptions. Resolve the worker before
+reviewing a fresh campaign; no backend or model substitution is authorized by
+this failure.

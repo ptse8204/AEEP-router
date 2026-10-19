@@ -4325,3 +4325,36 @@ there are no extra layers shared solely within the candidate group. Actual host
 recovery is unmeasured and may be smaller or zero. No Docker mutation, campaign
 launch or gate closure occurred. The storage blocker remains. Documentation
 validation still cannot complete without the missing pinned Lychee checker.
+
+### October 19: storage cleared; acceptance work resumed
+
+The [resumption record](../toolkit-v2/integration-completion/resumption-20261019/README.md)
+measured 166.45 GiB free and retained required image pins. Two Finder metadata
+files were preserved outside source directories, restoring the exact reviewed
+source digest without tracked source changes. Generated-tool training completed:
+24/28 correct versus 28/28 for the independent reference, four correctness errors,
+zero execution failures and zero model turns. Its `unsuitable` result is retained;
+no repair, qualification or admission follows.
+
+The editing launch exposed two preparation defects: a completed storage operation
+made the fresh-campaign preview indeterminate, and the frozen candidate's
+temporary source file was absent. Exact guarded successor reviews and 21 focused
+checks preserved no-replay, full-budget and completed-operation constraints. The
+pinned source was restored byte-for-byte and retained durably with its license.
+The same queued, unstarted job was resumed; no trial was repeated.
+
+Qualification then stopped on its first trial: `host_request_rejected`,
+`environment_failure`, preflight stage. No correctness finding or holdout result
+follows; 140 remaining cases were not run. The terminal report is
+`fit_81949be3b6e94089b9710cfeae22a4aa`. A subsequent zero-model probe isolated a
+failing `account/rateLimits/read` RPC, which makes the pinned Codex adapter
+unready. Its coarse rate-limit classification does not prove quota exhaustion.
+The next work is to classify and resolve this worker-readiness failure before a
+fresh plan and disjoint cases, followed by the optional-use comparison.
+
+The proxy is restored and no assessment job is active. Existing counters and all
+failed attempts remain intact. No production source, worker image, threshold or
+grant ceiling changed. Broad regressions and installed-package checks were not
+repeated. C07 comparative value, C13 resource/human/platform/release evidence and
+the missing pinned Lychee check remain open. No new architecture choice is needed
+for the immediate worker-readiness repair.

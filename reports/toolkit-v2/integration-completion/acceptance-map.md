@@ -7,7 +7,7 @@ specific to the wheel actually installed.
 | Gate | Evidence now available | Remaining requirement |
 |---|---|---|
 | C06 Essentials — PASS | [Six current-source workers](router-free-v3/verification.json), [cleanup](router-free-v3/cleanup-audit.json), [current wheel](package-review-schema-correction/execution/checks.json), 1,561 ordinary tests passed | Both full suites, coverage gates and all required source checks passed; current adapter wheel passed installation and removal |
-| C07 value | [141-case real qualification](../c07/text-prompt-schema-review/report/report.html), 105 distinct holdouts, [training-only builder](../c07/text-reusable-review/builder-result.json) | Training execution approved but storage-blocked; then fresh optional-use four-arm comparison and remaining easy/complex/adjacent families. No paired benefit measured |
+| C07 value | [141-case real qualification](../c07/text-prompt-schema-review/report/report.html), 105 distinct holdouts, [training-only builder](../c07/text-reusable-review/builder-result.json) | Training execution complete: generated 24/28, reference 28/28. Three-family qualification stopped at its first host-preflight rejection; a zero-model probe isolated failing account/rateLimits/read. Fresh qualification and optional-use four-arm value comparison remain. No paired benefit measured |
 | C08 discovery/security — PASS (configured discovery) | [Current installed discovery command](package-review-schema-correction/execution/checks.json), permission/provenance tests, Cisco import adapter | No scanner execution qualification. Current package checks passed; source readers and supplied security reports cannot establish candidate safety |
 | C09 additional evaluation — PASS | [Six Waza mock outcomes](waza-review-v4/execution/checks.json), [normalized report](waza-review-v4/execution/normalized.html), [cleanup](waza-review-v4/execution/cleanup.json) | Real-model Waza use remains unqualified; excluded benchmark packs retain rights and mapping blockers |
 | C10 telemetry/isolation — PASS (local preview) | [Current installed trace preview and removal](package-review-schema-correction/execution/checks.json), existing instrumentation; no required telemetry service | Langfuse/ToolHive deployment is unselected and unqualified. No actual exporter revocation or host-wide containment claimed |
@@ -22,9 +22,12 @@ to a locally reproduced source build was not established. C11 is limited to the
 reviewed LangGraph command fixtures and preserved legacy paths. Neither checkpoint
 supplies live efficacy evidence or grants permission to execute a discovered pack.
 
-The operator approved all three exact reviews. Package verification and cleanup
-completed; generated-source training remains unstarted because the host is below
-the storage reserve. The [recovery record](continuation-verification-20261015.json)
-binds these results. Existing grant usage and historical evidence remain intact.
+The operator approved all three exact reviews; package verification, cleanup and
+generated-source training are complete. Host storage is sufficient as of October
+19. The [current resumption record](resumption-20261019/README.md) supersedes the
+October 15 storage blocker. The current blocker is the pinned worker's failing
+account/rateLimits/read readiness RPC; underlying cause is not yet established.
+No active campaign or automatic retry remains. Grant history and old failures are
+preserved.
 C08 does not qualify Cisco execution. C10 covers local telemetry preparation and
 private package removal, with remote export and ToolHive deployment unselected.

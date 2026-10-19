@@ -770,3 +770,23 @@ precondition. Do not lower the 50 GiB reserve, shrink the reviewed allowance to
 fit available space, or remove backups and unrelated Docker resources under the
 fixture-only cleanup scope. Record deleted allocation separately from reclaimed
 free space. No execution architecture or upstream selection changes.
+
+## D59 — Resume only verified preparation, then stop on host readiness failure
+
+On October 19, storage was sufficient and production source still matched
+`d2c406f`. The editing launch guard incorrectly required a fresh-campaign preview
+with no prior operations after an already charged storage measurement. Keep the
+conservative production preview unchanged. An exact operational successor may
+accept only pinned, completed zero-model preparation, with the complete future
+schedule plus lifecycle allowance fitting the current ledger. Existing trials,
+uncertain operations and started jobs remain prohibited. The queued-job successor
+binds the same unstarted job and changes no tasks, threshold, model or worker.
+
+The restored candidate matches the frozen hash; its original temporary file was
+missing. Retain a durable licensed copy and bind future subjects to durable
+locations. Preserve both launch failures and their charges. After the first real
+trial was rejected at host preflight, stop the campaign and do not replay it.
+A separate zero-model probe isolated a failing `account/rateLimits/read` RPC.
+Classify that failure before assuming quota exhaustion, requesting credentials or
+changing architecture. A successor campaign needs a fresh plan and disjoint cases.
+See [the resumption record](../../reports/toolkit-v2/integration-completion/resumption-20261019/README.md).
