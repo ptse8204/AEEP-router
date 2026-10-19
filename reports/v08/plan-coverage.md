@@ -4428,3 +4428,14 @@ reported its existing blank-line/fence conventions; it is outside Makefile's
 documentation scope. No historical prose was reformatted to hide those findings.
 Production source remains unchanged; no full software or installed-wheel rerun
 was repeated for these operational records.
+
+Qualification is now complete: `fit_6d2f5e60d17d4e59b222ee91792cc3f9`,
+141 successful model trials, 105 distinct holdouts and zero report-normalization
+gaps. This is required-exposure correctness evidence, not value. All three final
+pairs passed 11 probes per worker and cleanup. The actual optional-use four-arm
+study is running as plan_f58ff0bf0ca640999ff2671ea82b94b5 /
+assessment_43ffec21822d441fa7b01e12c61e49d4 under continuation session 18470.
+Its 141 fresh cases are disjoint from qualification; 564 model calls is the ceiling.
+Storage preflight preserves more than 50 GiB after the full conservative envelope.
+No benefit/admission claim is available before terminal measurements and analysis.
+Do not replay any started driver or stop the value driver's proxy.

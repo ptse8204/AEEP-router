@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19:** Worker readiness is repaired: the proxy's 128 MiB cap caused OOM; its reviewed 512 MiB/no-swap cap and both worker readiness checks passed. Both editing profiles retain D57 prompt output mode and passed 11 boundary probes each. Qualification `plan_a26f0d5197c849ec86aed1b7d2969579` is RUNNING under assessment `assessment_b68a3a6ac3a94d50b95d13af1c8cc1e3`, tool session `33494`; never replay the driver or stop its proxy. The training-only builder completed, and its frozen source passed all 28 training inputs against 28 independent reference calls. Both generated-tool and permission-correction reviews were explicitly approved. Corrected derivative images `58610193…` and `fc874797…` passed layer/configuration/hash/mode checks. The first COPY-only image is retained as a failed packaging artifact. Value, higher-compute and reusable paired inspections are prepared; run them after qualification restores the proxy, then assemble their boundaries and freeze the fresh four-arm value plan. Production source, graders, thresholds, model and grant ceilings remain unchanged.
+**Status as of 2026-10-19:** Readiness is fixed and the corrected three-family qualification PASSED: report `fit_6d2f5e60d17d4e59b222ee91792cc3f9`, 141 successful model trials including 105 distinct holdouts, zero normalization gaps, clean proxy restoration. The canonical overall outcome remains `insufficient_evidence` because qualification alone is not comparative value. All three final profile pairs passed their 11 probes per worker and cleanup. The four-arm optional-use comparison is RUNNING: plan `plan_f58ff0bf0ca640999ff2671ea82b94b5`, assessment `assessment_43ffec21822d441fa7b01e12c61e49d4`, continuation tool session `18470`. It uses 141 fresh seed-2026101904 cases, four isolated profiles and at most 564 model turns. The one-shot value driver now owns the running proxy; never replay it or stop its proxy. Both generated-tool/image reviews were approved and consumed. The frozen tool passed 28 training inputs; final image IDs and retained packaging failures remain recorded. Production source, graders, thresholds, model and grant ceilings are unchanged.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,9 +28,9 @@ checkpoint_status:
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Observe running qualification assessment_b68a3a6ac3a94d50b95d13af1c8cc1e3 via existing session33494 or canonical job/result records; never replay it. Both new generated-tool/image approvals have been used. After qualification passes and restores the proxy, run prepared pair reviews in edit-value-20261019, edit-higher-20261019 and edit-reusable-pair-20261019 sequentially, assemble boundaries, then run edit-value-20261019/prepare-value.py once. Fresh seed 2026101904 and four arms remain preregistered. Never replay completed training, builder or image drivers.'
+next_action: 'Observe existing continuation session 18470 and edit-value-20261019/value-progress.json or canonical assessment43ffec21822d441fa7b01e12c61e49d4. Never rerun continue-study.py, run-value.py, preparation, paired inspections, builder, training or image operations. After its terminal result, export the exact value plan through aeep-toolkit eval managed report; analyze all four arms and the three preregistered families, measurement gaps and separate study setup costs; retain negative/inconclusive findings, update records and commit. No approval is pending for the running study.'
 blocked_actions:
-  - 'Corrected editing qualification is running; optional-use comparison awaits its result and approved generated-tool worker preparation.'
+  - 'Qualification passed. The four-arm optional-use comparison is running; its terminal measurements and complete analysis remain pending.'
   - 'Optional-use comparison still lacks completed task-matched trials, reusable-tool worker lineage and complete resource evidence.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
@@ -1823,3 +1823,37 @@ Recovery verification: 29 report drivers parse; Makefile's 65-file Markdown lint
 passed. Full docs-check remains open because Lychee 0.24.2 is unavailable; exact
 output is retained in worker-readiness-repair-20261019/docs-check-recovery.log.
 No production source changed and broad regression/package checks were not rerun.
+
+### Qualification passed; actual four-arm comparison started
+
+Qualification completed once as `fit_6d2f5e60d17d4e59b222ee91792cc3f9`.
+All 141 trials succeeded with valid task outputs, including 105 holdouts. The
+[exported report](../../reports/toolkit-v2/c07/edit-study-prompt-20261019/report/report.html)
+contains 141 normalized trials and zero gaps. `qualification_passed=true` does
+not make the overall value outcome positive; the canonical service correctly
+keeps `insufficient_evidence` for the required-exposure campaign.
+
+Three final pairs then passed all 11 probes per worker with cleanup and proxy
+restoration: normal optional-use control/treatment, high-effort control/helper,
+and immutable generated-tool control/helper. Only the candidate-absent helper
+profiles enter the high/reusable value arms. All four arms share the same task
+prompt and optional-tool availability notice; only reviewed candidate/tool
+availability and the preregistered high effort/deadline differ.
+
+Value plan `plan_f58ff0bf0ca640999ff2671ea82b94b5` has 141 fresh cases from
+seed 2026101904, disjoint from all prior editing campaigns. It freezes the original
+utility policy, optional candidate exposure, high effort at twice the 203-second
+deadline, and artifact-bound reusable-tool construction/training lineage.
+Its exact execution review is
+`01e40c4c92968bcf65484e80f40a7a19591a3ce20f20bcf425a0c2b261a9533b`.
+The maximum reservation is 1,698 operations, 564 model turns, 174,265.0614537499
+seconds and zero cash. These are ceilings, not observed consumption or an ETA.
+Fresh snapshot 10,137,600 bytes gives an 87,365,750,784-byte campaign envelope;
+81,282,207,744 bytes remain after that envelope, above the 50 GiB reserve.
+
+The active assessment is `assessment_43ffec21822d441fa7b01e12c61e49d4`.
+Continuation session 18470 owns its one-shot child driver; it will restore the
+proxy and write value-result.json. No comparison result or savings claim exists
+yet. Wait for terminal records and finish analysis; this is not a handoff stop.
+The first report-export invocation used an invalid `evaluation` subcommand and
+failed before effects; the corrected `eval managed report` completed.
