@@ -90,6 +90,7 @@ def main():
     for arm, fields in paired.items():
         lines.append(f"| {arm} | 105/105 | {fields['input_tokens']['median_reported']} | {fields['output_tokens']['median_reported']} | {fields['input_tokens']['mean_control_minus_arm']:.4f} |")
     lines += ['', 'Cached input is included in input; reasoning is included in output. Do not add them to the parent totals.', '',
+        'The higher reported input count does not prove full skill instruction loading or explain its cause.', '',
         'Candidate use was not collected in this completed study. The collector was disabled, and the router previously discarded its snapshot. The corrected implementation retains bounded snapshots and can verify a positive instruction-loading event against the exact skill and execution journal. Missing events stay unknown; instruction loading does not prove semantic use or causal benefit.', '',
         'The paired counts above are descriptive. They do not replace the frozen strict-token utility gate or establish savings.', '',
         'Source evidence: capture-audit.json, execution-journals.json and receipt-records.json in this directory. Original comparison files are unchanged.', '']

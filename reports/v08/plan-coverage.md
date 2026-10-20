@@ -4514,3 +4514,19 @@ The old comparison and frozen verdict are unchanged. Snapshot retention and
 managed report integration are implemented; 132 focused checks, Ruff and mypy
 passed. Full current-source regression and prospective collector conformance
 remain pending. No new model, installation, release or historical replay occurred.
+
+### Toolkit capture correction — current-source verification complete
+
+Source 44bdad9/33673d539a75… passed all 12 integrated checks. Both suites: 1587 passed,
+21 skipped; coverage 82%, both branch gates passed. Ruff, mypy, schemas and build
+passed. Documentation lint passed 67 files. The actual 564-run comparison and verdict
+remain unchanged; its 564 retained token captures now have journal/receipt consistency
+verification. Provider internal usage and old candidate use remain unverified.
+
+The exact pending three-action bundle is
+[capture-repair approval](../toolkit-v2/c07/capture-repair-20261019/approval-bundle.json),
+SHA-256 f8ca5c586241f06f14172fbbb27750bb0170f273191732716cb2bd810724342a.
+It gates the prospective local collector/maximum 4 diagnostic turns, changed-wheel
+installation check and 67-file pinned offline link check. No new model call, install,
+release, image cleanup or grant reset occurred. See
+[delivery status](../toolkit-v2/c07/capture-repair-20261019/delivery-status.json).

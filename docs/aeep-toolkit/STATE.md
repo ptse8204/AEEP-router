@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19, telemetry correction:** The operator reopened token capture and candidate-use engineering after the completed C07 campaign. The original 564-run comparison and its inconclusive efficacy result remain unchanged. Read-only audit now verifies all 564 journal-to-receipt token captures; provider usage remains independently unverified. Router snapshot retention and managed capture reporting are implemented, with 132 focused tests passing. Prospective native collector conformance and live capture remain pending an exact changed-boundary review. C13 remains open. No historical campaign or terminal driver is to be replayed. Continue current-source regression and concrete review preparation; the prior statement that no technical work remained is superseded by this request.
+**Status as of 2026-10-19, telemetry correction:** Capture repair is implemented at 44bdad9 / 33673d539a75…. All 564 original journal-to-receipt token captures passed the read-only audit; provider metering remains independently unverified. The router now retains bounded native metric snapshots, and managed reports verify positive instruction loading separately from semantic use. All 12 integrated checks passed: both suites 1,587 passed / 21 skipped, 82% coverage, both branch gates, Ruff, mypy and wheel/sdist build. Documentation lint passed 67 files; offline links and changed-wheel installation remain unexecuted. The exact three-action bundle f8ca5c586241f06f14172fbbb27750bb0170f273191732716cb2bd810724342a is pending explicit operator approval: collector boundary plus at most four public diagnostic turns, private changed-wheel verification, and pinned offline Lychee. No new model calls or installations occurred. Existing C07 comparison and inconclusive efficacy are unchanged; new-source live telemetry is unqualified. No architecture, new budget or credential decision is needed.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,16 +25,16 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: 'd2c406f'
-last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
-last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'SUPERSEDED by October19 telemetry correction below. Earlier action: await the actual human response recorded in c13/human-comprehension/editing-comparison-exercise.json, score it against the presented result and supported controls, then obtain the operator local-beta/release decision if wanted. All technical study/export/analysis/docs work is complete. Lychee review6a0cbb9d passed once with runtime removal. No active model driver, proxy or install remains for this study. Never replay terminal operations; no further tests are needed for unchanged source.'
+last_verified_commit: '44bdad98c1a6b2d845c4e084afe07bbf96a0073e'
+last_check_command: 'Framework Python3.13; reports/toolkit-v2/c07/capture-repair-20261019/validation/checks.json'
+last_check_result: 'All12 checks passed; both full suites1587 passed/21 skipped;82% coverage; branch gates,Ruff,mypy,wheel/sdist build. 67-file docs lint passed. Fresh installed-wheel and offline links pending exact approval.'
+next_action: 'Resolve the pending f8ca5c58 capture-repair bundle response. If approved, record all3 component approvals; run collector inspection once, assemble its exact current-source conformance, then at most4 gated public diagnostics. Run the package and Lychee checks once. Preserve counters and original studies. See capture-repair-20261019/RESUME.md.'
 blocked_actions:
   - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
   - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
   - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'All exact source/image/model operations for the completed study were approved; the offline Lychee review is also approved.'
+  - 'Old study approvals remain historical. Pending bundle f8ca5c58 covers only the new collector/4 diagnostics, changed wheel and67-file offline link check.'
   - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
@@ -2018,3 +2018,34 @@ conformance stub; those test-definition failures were corrected. These were not
 model-run or production failures. Full integrated regression is next, followed by
 exact prospective collector and changed-wheel reviews where necessary. Existing
 human/resource/release gates are preserved; they do not block this safe engineering.
+
+### Telemetry correction verification and pending execution
+
+Implementation commit `44bdad98c1a6b2d845c4e084afe07bbf96a0073e` has source digest
+`33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96`.
+All 12 integrated checks passed without source changes. Ordinary pytest: 1587 passed,
+21 skipped in 577.40s; coverage pytest: 1587 passed, 21 skipped in 878.81s; both retain
+one existing Starlette warning. Coverage 82%; both required branch gates passed.
+Compile, schemas, optional integration fixtures, Ruff, mypy 154 files and build
+passed. One integrated cycle followed the 132 focused checks. A metadata-template
+probe first used a nonexistent `.compatible` property, then omitted the first-party
+manifest from the reviewed inventory; both inert review-definition issues were
+corrected before preparing the actual review. No new broad regression was needed.
+
+The corrected wheel SHA-256 is
+`f1b9cef98c873c0fd3cda55a2a8585940f1890956f1b50aee42558a5843056f3`.
+It is built, not installed. Its new private wheelhouse contains only that own
+wheel. The earlier 33-wheel cache was purged; fetching the same 32 pinned dependency
+artifacts is explicit in the new package review. No dependency version changes.
+Host free space remains above 50 GiB; storage is not blocking work. No image, volume,
+backup or unrelated work was removed. Grant counters remain 3739 model turns,
+12,694 operations, 117913.08974463539 seconds, cash 0.
+
+The single approval question now binds `capture-repair-20261019/approval-bundle.json`
+(raw SHA-256 `f8ca5c586241f06f14172fbbb27750bb0170f273191732716cb2bd810724342a`).
+It contains the exact collector/4-turn envelope, changed-wheel and Lychee reviews.
+Routine definition reviews remain delegated. This is a new local-listener boundary
+and changed installation artifact, which the pasted continuation did not authorize
+by itself. No operator approval or execution marker exists yet. Follow RESUME.md;
+never replay the old terminal study or the earlier Lychee execution. The prior
+C13 human question remains unanswered and cannot be closed by an agent response.

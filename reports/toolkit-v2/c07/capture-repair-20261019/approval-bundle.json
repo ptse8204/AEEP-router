@@ -1,0 +1,39 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "purpose": "Finish the token/candidate capture correction and verify the changed package and documentation with one exact authorization.",
+  "source_commit": "44bdad98c1a6b2d845c4e084afe07bbf96a0073e",
+  "source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "actions": [
+    {
+      "name": "collector",
+      "review": "reports/toolkit-v2/c07/capture-repair-20261019/collector-operation-review.json",
+      "review_sha256": "e3dd38d12759228c6e58cf56b8d7a19e34b0c496734f30fb74d03a5634814820"
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-telemetry-20261019/operation-review.json",
+      "review_sha256": "b3179e6afe0e21df06f48df3746215fde268ea1bbab24f7ec8e09dcedd01ef44"
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-telemetry-review-20261019/operation-review.json",
+      "review_sha256": "4b551d07d2169f498b76a2af89ad490bd71bc64d07643b69252a3205a42b56f5"
+    }
+  ],
+  "scope_summary": [
+    "Reuse the two pinned worker images and existing proxy; no image pulls/builds. Start worker-local collectors, check the existing conformance probes plus actual collector access denial, then at most4 exact public diagnostic task turns only after conformance passes. Existing onboarding grant, $0 cash, no retries, no holdouts or admission claim.",
+    "Fetch the same32 exact dependency wheels if missing, install them plus the pinned corrected AEEP wheel privately, run15 offline CLI checks plus1 retained capture consistency check, then remove only its unchanged runtime.",
+    "Execute the same pinned Lychee0.24.2 binary in the existing network/home-denying sandbox for67 documents, retain logs, then remove its unchanged private runtime. No online link requests."
+  ],
+  "prohibited": [
+    "Credential reading/copying/login",
+    "New model destinations, hosted services or paid APIs",
+    "Historical campaign replays, evidence-threshold changes or manufactured savings",
+    "Removal of images, volumes, backups or unrelated work",
+    "Release, activation, publication or pushing"
+  ],
+  "why_approval_is_needed": "The user\u2019s pasted continuation excludes untrusted software execution, CONTINUATION.md gates service startup, and previous package approvals bind older AEEP wheel bytes. Routine definition reviews and finite model allowance within the existing grant are already delegated; no architecture or budget choice is being requested.",
+  "approval_record_rule": "An explicit approval of this bundle digest covers precisely these three component digests. Record that user response against each component before its runner executes.",
+  "approved": false,
+  "execution_started": false
+}
