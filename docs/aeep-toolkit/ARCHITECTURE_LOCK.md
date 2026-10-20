@@ -14,7 +14,9 @@ is no benefit, a regression or insufficient evidence.
 The operator restated these 14 assignments. They govern component selection and
 must not be collapsed into a generic extension list. Optional means selectively
 installed and qualified, not automatically outside the implementation scope.
-The local fake-harness demonstration covers only part of the primary engine row.
+The scripted upstream integration and managed fallback have separate evidence.
+The component table records responsibilities; the acceptance map records what
+has actually run.
 
 | Function | Preferred solution | Implementation responsibility |
 |---|---|---|
@@ -43,14 +45,14 @@ showcase expose an actual status for each row.
 
 The operator selected the component assignments above and local CLI/report
 delivery. The boundaries below implement those choices under D13, D16, D18 and
-D20. Upstream real-host compatibility remains unverified; the table describes
-the target stack rather than completed features.
+D20. The [acceptance map](../../reports/toolkit-v2/integration-completion/acceptance-map.md)
+separates implemented interfaces, executed fixtures and live measurements.
 
 | Layer | Software and responsibility | Implementation boundary |
 |---|---|---|
 | User interface | Local Python CLI; Pydantic for validated inputs | AEEP connects candidate intake, preview, evaluation and reporting. |
 | Scripted evaluation | agent-skill-eval 0.7.0, source `59de161f657b82bfaf8f6abe83dfff38552deb21` | Connected upstream scheduler and graders dispatch fixed trials into separate AEEP workers. No model-value claim. |
-| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. The integrated source `f3b7f50` passed full software verification. Authenticated V2 conformance remains open. |
+| First managed-model evaluation | Existing AEEP AssessmentService + BenchmarkRunner (D40 fallback) | Selected after the installed upstream Codex parser/launch contract failed requirements. The integrated CLI reuses existing authority and execution and exports canonical reports. Source `d2c406f` passed full software and installed-package checks. Current editing qualification passed 141 actual task trials; optional-use comparison is tracked in STATE.md. |
 | Actual agent | Codex first, using existing host integration | Preserve the normal tools in both arms. Host/model versions and settings must match. |
 | Execution boundary | Docker and existing AEEP managed-worker/assessment-runtime assets | Separate control and treatment workers protect grading inputs. Actual scripted upstream dispatch and cleanup are recorded; native command inspection is separate from live conformance. |
 | Review and accounting | Existing AEEP assessment definitions, finite allowances and receipts | Reuse current authority and recovery behavior; preserve historical records. |
@@ -59,12 +61,10 @@ the target stack rather than completed features.
 | Report | Local static HTML and Markdown | Explain results, uncertainty, applicability, permissions and developer attribution. |
 | Setup | Existing component setup/recovery plus pinned Python environments | Preview the selected dependency closure and configuration effects, then apply only the reviewed changes. |
 
-The scripted adapter has demonstrated upstream dispatch through the existing
-controlled boundary without constructing Router. Managed-model conformance
-remains a separate gate. It does not justify extracting
-Router services in advance or inventing another evaluation framework. Keep the
-legacy runner as an explicitly recorded fallback; it does not automatically pass
-Essentials' independence requirement.
+The scripted adapter dispatches through the existing controlled boundary without
+constructing Router. The managed fallback reuses AssessmentService and
+BenchmarkRunner. Each managed worker needs source-bound conformance and the
+reviewed grant; the scripted proof does not supply those permissions.
 
 ## The user journey
 
@@ -112,21 +112,24 @@ Router-disabled replay proves this path does not construct Router.
 The [managed bridge](MANAGED_EVALUATION.md) connects existing reviewed skill plans
 to AssessmentService and BenchmarkRunner. It preserves their grants, workers,
 grading and accounting, and reproduces canonical statistics before exporting
-readable intervals, guardrails, costs and coverage. This implementation has
-synthetic regression evidence and zero-turn native worker checks; it has no new
-V2 authenticated-model comparison or efficacy result.
+readable intervals, guardrails, costs and coverage. The corrected three-family
+qualification completed 141 valid real-model trials, including 105 holdouts.
+The optional-use four-arm comparison is running under its separate frozen plan.
+See [STATE.md](STATE.md) for the current terminal or active record. Qualification
+proves bounded correctness; comparative benefit remains a separate result.
 
 The general private installer handles selected, hash-locked wheel closures and
-removes only an unchanged owned environment. The complete 33-wheel AEEP package
-closure has passed artifact/dependency inspection; its bounded installation test
-awaits the exact operator review. The separate 24-wheel agent-skill-eval runtime
-already has recorded installation and fixture-execution evidence.
+removes only an unchanged owned environment. The current `d2c406f` package and
+32 dependency wheels passed 15 approved offline CLI checks; the private runtime
+and scratch were removed. The separate 24-wheel agent-skill-eval runtime has
+recorded installation and scripted fixture evidence.
 
-Existing registry readers and OpenTelemetry instrumentation remain the optional
-discovery and telemetry foundations. A local discovery replay confirms inert
-results, recorded provenance and unavailable/unauthorized-source rejection. Waza,
-Cisco scanning, hosted telemetry and external workflow integrations still need
-their own executable qualification. Catalog presence is not that qualification.
+Existing registry readers and OpenTelemetry instrumentation supply discovery
+and local telemetry preparation. Waza 0.38.9 ran six sandboxed mock outcomes;
+LangGraph 1.2.14 ran four sandboxed graph fixtures. Their private runtimes were
+removed. Cisco scanner execution, hosted export and ToolHive deployment remain
+unqualified. The [integration record](../../reports/toolkit-v2/integration-completion/README.md)
+explains the selected paths and each excluded component.
 
 ## Withdrawn proposal
 
@@ -140,12 +143,12 @@ records coupling, not a justification for a new execution architecture.
 
 ## Next implementation proof
 
-Complete the exact reviewed private package installation/removal after the
-pending operator response. Then bind the exact live study to the existing
-canonical grant and current authenticated worker conformance. Routine finite
-scope/budget amendments are already delegated; do not invent a new architecture
-or budget-approval blocker. Credentials, wider disclosure, cash and release retain
-their own boundaries. Independent optional-extension work continues meanwhile.
+Finish the running comparison, verify its retained receipts, report every arm
+and task family, and retain negative or inconclusive findings. Protocol token
+counts in this study are provider reports with self-asserted trust. The strict
+utility keeps them unavailable for verified savings and preserves its guardrails.
+The [worker guide](WORKER_READINESS.md) records the readiness and metric checks
+for future studies. Human comprehension and publication retain separate gates.
 
 ## First managed-model backend: recorded fallback
 
@@ -155,7 +158,9 @@ and worker-binding gaps. The actual agent-skill-eval scripted integration remain
 available. The fallback reuses existing controlled Codex execution, grading,
 reservations and receipts; it does not add a runner or new infrastructure.
 A follow-up audit found a related partial-usage bug in AEEP's App Server adapter,
-which D41 corrected and regression-tested. No V2 live comparison has started.
+which D41 corrected and regression-tested. Actual qualification and the current
+optional-value study now use that pinned fallback; the preferred upstream Codex
+harness remains unqualified.
 
 The integrated adapters retain this boundary: Waza/Cisco JSON imports are inert,
 LangGraph's finite graph runs wholly inside CommandExecutor, and OTLP preparation

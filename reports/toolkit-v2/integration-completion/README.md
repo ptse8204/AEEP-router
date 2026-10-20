@@ -7,7 +7,7 @@ telemetry server or database service.
 | Function | Implemented path | Evidence and limit |
 |---|---|---|
 | Primary evaluation | agent-skill-eval 0.7.0 scripted bridge | Historical separate synthetic worker proof; Codex harness remains unqualified |
-| Managed evaluation | Existing AssessmentService / BenchmarkRunner | Plan/run/report and receipt validation; current text qualification passed; optional-use value remains open |
+| Managed evaluation | Existing AssessmentService / BenchmarkRunner | Plan/run/report and receipt validation; three-family editing qualification passed 141/141; four-arm optional-use value running |
 | Discovery | Existing ARD, MCP Registry and local readers | CLI source permissions, deadlines and provenance tested; no candidate execution |
 | Additional evaluation | Waza 0.38.9 JSON adapter | Six actual mock outcomes and normalized reports; no model qualification |
 | Security | Cisco single-skill JSON adapter | Findings, suppressions and analyzer failures retained; scanner runtime unqualified |
@@ -69,5 +69,8 @@ passed all 141 cases, including 105 distinct holdouts. No live benefit is
 established. Human comprehension, broader platform support and release remain
 unassessed. The current adapter wheel passed its separately approved 15 sandboxed checks;
 [its result](package-review-schema-correction/execution/summary.json) confirms
-private runtime and scratch removal. Training execution is approved but remains
-unstarted because host free space is below the required reserve.
+private runtime and scratch removal. The editing training diagnostic completed 28/28 generated and 28/28 reference
+cases. Its approved immutable tool is optional in the current four-arm study.
+Storage is sufficient after the operator cleanup. The proxy OOM and copied-profile
+configuration failures are repaired; [STATE.md](../../../docs/aeep-toolkit/STATE.md)
+tracks the running comparison. Qualification and training do not establish value.

@@ -1897,3 +1897,24 @@ Assessment `assessment_f14eeca8e7e54a2c861d7022e75d718e` runs under tool session
 Fresh snapshot 10,141,696 bytes gives an 87,370,383,360-byte envelope and leaves
 79,918,837,760 bytes, above the 50 GiB reserve. Do not replay the driver or stop
 its proxy. Finish actual evidence and analysis; no positive claim is presumed.
+
+### Held-out comparison active; final analysis prepared
+
+Commit `460a22c` preserves the corrected plan, metric-trust distinction and exact
+approved link-check review. The study has reached holdout after 32 screening
+and 112 training arm runs; only completion and validity counts were inspected.
+No comparative resource effects were used to choose the analysis supplement.
+
+The supplemental all-four-arm receipt verifier and family summary driver is
+`edit-value-native-20261019/analyze-comparison.py`. Three pure self-checks passed;
+it has not opened outcome evidence or run final analysis. Its plan digest is
+`b3f23cbc7a5edd78376fcc47783ad422344d9568885469c97c0deee6819a1a7e`. It reuses the existing managed normalizer, verifies
+auxiliary receipt/source/cohort bindings, preserves phases and conditions, and
+exports a deduplicated supplemental setup ledger. Family tables are descriptive;
+formal verdicts stay in the frozen canonical analysis.
+
+The operator approved offline Lychee review `6a0cbb9d…`. Run its one-shot driver
+only after model comparison cleanup, then retain the documentation result and
+private-runtime removal. The current architecture/acceptance guides now reflect
+the repaired readiness, completed installation and actual qualification. These
+prose corrections do not change executable source or require another wheel.

@@ -119,3 +119,5 @@ These development records do not establish live benefit or release readiness.
 
 - [Toolkit managed evaluation](aeep-toolkit/MANAGED_EVALUATION.md): review an
   existing plan, use the AEEP fallback and inspect canonical report exports.
+- [Toolkit worker readiness](aeep-toolkit/WORKER_READINESS.md): positive proxy and
+  worker checks, metric provenance, frozen plans and recovery before live trials.
