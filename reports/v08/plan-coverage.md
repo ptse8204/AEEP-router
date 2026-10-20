@@ -1,5 +1,33 @@
 # 0.8 plan coverage and remaining work
 
+## October 19: Toolkit V2 actual comparison completed
+
+The repaired worker completed the fresh optional-use four-arm comparison once:
+564 valid task runs, including 105/105 holdout successes in each arm. The
+[actual report](../toolkit-v2/c07/edit-value-native-20261019/comparison.html) and
+[adjudication](../toolkit-v2/c07/edit-value-native-20261019/adjudication.md) replace
+readiness as the current issue. Candidate wall estimate 0.79% has corrected bounds
+-4.61% to +6.52%, below the frozen 10% benefit threshold. Success gain is zero;
+trusted token pairs and candidate-use telemetry are unavailable. Canonical
+INCONCLUSIVE is retained, with no admission or verified savings claim.
+
+The CLI normalized 282 primary runs without gaps; the supplement verified all 564
+original receipt/source/cohort/conformance bindings and exported 2,836 unique
+linked study operations, zero unresolved durations. Failed predecessors, the
+cancelled 46-call attempt, image corrections and the separately documented initial
+unreserved metadata observation remain included. Proxy cleanup and source checks
+passed. All study drivers are terminal; none may be replayed.
+
+[The local delivery decision](../toolkit-v2/c13/delivery-decision.md) and
+[footprint](../toolkit-v2/integration-completion/delivery-footprint-20261019.json)
+state the completed stack and remaining acceptance limits. Source remains
+`d2c406f`/`d05541e90d2e…`; existing 1,561-test suites, 82% coverage and current-wheel
+15-check installation/removal evidence are not rerun for unchanged code.
+C07 campaign completion passes with INCONCLUSIVE efficacy; C13 actual human,
+resource/applicability and publication gates remain open. A fresh human exercise
+uses the actual report; the earlier agent review cannot close it. Exact offline
+Lychee review 6a0cbb9d… is approved and runs after completed model work.
+
 ## October 7: documentation refresh and authoring rules
 
 The operator approved the documentation implementation plan. The
@@ -4457,3 +4485,15 @@ not independent measurements; actual held-out quality and wall time still need
 completion. Separately report provider token claims, observed wall times and
 all setup/partial-campaign costs. No additional model probes, worker checks,
 installations or broad verification cycles were run for this correction.
+
+## October 19: final V2 offline documentation gate passed
+
+The specifically approved Lychee 0.24.2 check completed once after the model study:
+66-file lint passed; 638 link occurrences, 445 unique, 572 OK, 66 excluded, 0 errors.
+Its network-denied private runtime was removed unchanged. See
+[the exact result](../toolkit-v2/integration-completion/lychee-review-20261019/execution-result.json)
+and [logs](../toolkit-v2/integration-completion/lychee-review-20261019/docs-check.log).
+External URL reachability is not established by this offline check.
+C13 now awaits actual human answers and the operator's scoped delivery decision;
+no study/worker/install remains active for this completed work. All unknown
+resource/use evidence and broader backend/platform limits remain explicit.

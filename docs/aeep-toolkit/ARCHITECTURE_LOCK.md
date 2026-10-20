@@ -114,7 +114,9 @@ to AssessmentService and BenchmarkRunner. It preserves their grants, workers,
 grading and accounting, and reproduces canonical statistics before exporting
 readable intervals, guardrails, costs and coverage. The corrected three-family
 qualification completed 141 valid real-model trials, including 105 holdouts.
-The optional-use four-arm comparison is running under its separate frozen plan.
+The optional-use four-arm comparison completed 564 valid runs under its separate
+frozen plan, with no demonstrated 10% time benefit and an inconclusive strict
+verdict.
 See [STATE.md](STATE.md) for the current terminal or active record. Qualification
 proves bounded correctness; comparative benefit remains a separate result.
 
@@ -143,8 +145,9 @@ records coupling, not a justification for a new execution architecture.
 
 ## Next implementation proof
 
-Finish the running comparison, verify its retained receipts, report every arm
-and task family, and retain negative or inconclusive findings. Protocol token
+The [completed comparison](../../reports/toolkit-v2/c07/edit-value-native-20261019/comparison.html)
+verifies every arm and task family, with negative and inconclusive findings
+retained. Finish the human comprehension and local delivery decision. Protocol token
 counts in this study are provider reports with self-asserted trust. The strict
 utility keeps them unavailable for verified savings and preserves its guardrails.
 The [worker guide](WORKER_READINESS.md) records the readiness and metric checks

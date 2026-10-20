@@ -834,3 +834,14 @@ partial campaign and all costs, then use fresh cases with the same approved
 workers and tool. Complete the task-quality/wall-time comparison and separately
 label raw reported tokens. Accept an inconclusive strict verdict rather than
 relabel evidence or weaken policy.
+
+### D64 — Finish the comparison and retain its inconclusive verdict
+
+The four-arm study completed 564 valid runs, including 105/105 holdout successes
+in each arm. Candidate time estimate 0.79% has corrected bounds -4.61% to +6.52%;
+there is no confidence-supported 10% benefit or task-success gain. Trusted token
+pairs are absent and candidate-specific discovery/use telemetry is unknown.
+Retain the canonical INCONCLUSIVE result, all assigned cases and failed setup
+costs. Do not relabel provider counts, remove guardrails or launch further studies
+to obtain a positive verdict. C07 completion passes; admission/efficacy does not.
+Use the actual report for the separate human exercise and local beta decision.

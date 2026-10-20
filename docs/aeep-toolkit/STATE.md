@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19:** Readiness is fixed and corrected three-family qualification PASSED: `fit_6d2f5e60d17d4e59b222ee91792cc3f9`, 141 successful trials including 105 distinct holdouts, zero normalization gaps. All final profile pairs passed 11 probes per worker. The first optional-value plan `plan_f58ff0bf0ca640999ff2671ea82b94b5` was stopped before holdouts after a static metric-binding audit: 46 successes (32 screening, 14 training), zero errors, terminal report `fit_15c30b16baac4dc2bf7597b6391d4294`, clean proxy restoration. Generic token names did not match native ledger keys. Separately, actual protocol token counts are complete provider reports with self-asserted trust; strict utility correctly leaves them unverified. Do not elevate trust or remove guardrails. The corrected fresh comparison is RUNNING: plan `plan_017bce61874c437296c66276e91876d6`, assessment `assessment_f14eeca8e7e54a2c861d7022e75d718e`, tool session `80373`, seed 2026101905. It reuses exact approved profiles/images/source/conformance, with unchanged tasks and thresholds; no further qualifier, worker or installer tests ran. Its driver owns the proxy. Finish held-out quality/wall-time comparison and separately label reported token counts; strict efficacy/admission may remain inconclusive. Production source and original grant ceilings/counters remain intact.
+**Status as of 2026-10-19:** C07 campaign completion PASSED; efficacy is INCONCLUSIVE. Readiness is repaired. Three-family qualification passed 141/141 tasks, including 105 disjoint holdouts. The optional-use four-arm comparison completed once as `fit_1dc2c008986c4096bbf0f23b7ce05e16`: all 564 task runs valid, including 105/105 holdout successes in every arm. All receipts verified, zero normalization or position gaps. Candidate wall-time estimate 0.79%, corrected interval -4.61% to +6.52%, below the frozen 10% benefit threshold; success gain zero. All protocol tokens are provider_report/self_asserted, with no trusted token pairs. Candidate-specific exposure/retrieval/invocation remains unknown. No benefit/admission is established. Supplemental costs retain 2,836 operations, zero unresolved durations, failed predecessors and the cancelled 46-call attempt. The proxy is stopped, its approved 512 MiB/no-swap cap retained; source remains d2c406f/d05541e90d2e…. Session80373 is terminal and must never be replayed. Current work is the actual human comprehension response and operator acceptance of the documented delivery limits; the exact approved offline Lychee check passed and its private runtime was removed. No new architecture, worker, installation or model trial is needed.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -9,7 +9,7 @@ repository: https://github.com/ptse8204/AEEP-router
 observed_main_sha_at_plan: 8b015bf0247d4d9f49038982c49f3711a2802d97
 plan_branch: codex/toolkit-v2-implementation
 implementation_base_sha: 8b015bf0247d4d9f49038982c49f3711a2802d97
-current_checkpoint: C07
+current_checkpoint: C13
 checkpoint_status:
   C00: PASS
   C01: PASS
@@ -18,29 +18,29 @@ checkpoint_status:
   C04: PASS
   C05: PASS
   C06: PASS
-  C07: IN_PROGRESS
+  C07: PASS
   C08: PASS
   C09: PASS
   C10: PASS
   C11: PASS
   C12: PASS
-  C13: IN_PROGRESS
+  C13: BLOCKED
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Observe session 80373 and edit-value-native-20261019/value-progress.json or canonical assessment_f14eeca8e7e54a2c861d7022e75d718e. Never replay any started driver. Earlier session18470 and plan_f58ff0bf0ca640999ff2671ea82b94b5 are terminal with 46 charged trials and no holdouts. Native-key correction review77559915… is running once. After terminal result, export its exact plan through aeep-toolkit eval managed report, analyze all four arms/three families with observed wall time and separately attributed provider token reports, preserve strict unknowns, include setup/partial-campaign costs, update records and commit. No new source installation, model, worker conformance or trust upgrade is needed.'
+next_action: 'Await the actual human response recorded in c13/human-comprehension/editing-comparison-exercise.json, score it against the presented result and supported controls, then obtain the operator local-beta/release decision if wanted. All technical study/export/analysis/docs work is complete. Lychee review6a0cbb9d passed once with runtime removal. No active model driver, proxy or install remains for this study. Never replay terminal operations; no further tests are needed for unchanged source.'
 blocked_actions:
-  - 'Qualification passed. Fresh native-key four-arm comparison is running; held-out measurements and complete analysis remain pending.'
-  - 'Optional-use comparison still lacks completed task-matched trials, reusable-tool worker lineage and complete resource evidence.'
-  - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
-  - 'Release/publication remains unauthorized.'
+  - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
+  - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
+  - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Current generated editing source, corrected images and optional exposure have exact approvals; no additional intervention is pending for those operations.'
-  - 'Further backup or unrelated-resource removal is outside the exact cleanup approval.'
+  - 'All exact source/image/model operations for the completed study were approved; the offline Lychee review is also approved.'
+  - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
 unknowns:
-  - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
-  - 'No completed held-out value verdict yet. Provider-reported token counts exist, but strict observed/verified token coverage is 0/141 in qualification; token-saving admission cannot be inferred from those reports.'
-  - 'The d2c406f wheel passed its exact installed checks. Optional scanner execution, hosted export and ToolHive deployment remain unqualified; resource and distribution-rights limits remain explicit.'
+  - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
+  - 'The completed study finds zero success gain and no 10% time benefit. Strict token pairs are 0/105; candidate-specific use and generated-tool invocation are unknown. Generalization beyond bounded mechanical tasks is unassessed.'
+  - 'The d2c406f wheel passed 15 installed checks. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
+
 ```
 
 ## Append-only checkpoint journal
@@ -1927,3 +1927,62 @@ holdout coverage, family/arm results, unchanged canonical intervals, raw-token
 provenance, failures, full linked study costs and supported control limits.
 The managed guide now explains provider-reported versus trusted token coverage.
 Final documentation lint/link validation remains scheduled after model cleanup.
+
+### C07 completed once; no further live run pending
+
+Report `fit_1dc2c008986c4096bbf0f23b7ce05e16` completed plan
+`plan_017bce61874c437296c66276e91876d6`: 32 screening, 112 training and 420 holdout
+arm runs, all valid. Every arm passed 105/105 holdouts across all three families.
+[The adjudication](../../reports/toolkit-v2/c07/edit-value-native-20261019/adjudication.md)
+and [four-arm report](../../reports/toolkit-v2/c07/edit-value-native-20261019/comparison.html)
+retain the actual results. Canonical paired wall estimate is 0.79% with corrected
+bounds -4.61% to +6.52%, below the 10% threshold; task-success gain is zero.
+Provider-reported token counts and missing candidate-use telemetry stay explicit.
+C07 PASS refers to campaign delivery; efficacy remains INCONCLUSIVE, no admission.
+
+The existing CLI exported282 primary trials with zero gaps; the frozen supplement
+verified all 564 original receipt/source/cohort/conformance bindings and complete
+positions. It exported 2,836 deduplicated operations, zero unresolved durations,
+9,924.50 known charged operation seconds, with overlapping intervals and the
+unreserved 0.112110291-second metadata observation separately explained. Source
+and grant history were preserved; proxy cleanup passed. All model sessions are
+terminal. Do not launch more conformance/qualification/install/model tests merely
+to seek a positive result.
+
+C13 now has a separate receipt-bound human exercise using the actual completed
+comparison, preserving the old exercise and requested agent review. No response
+has been invented. The post-study footprint inventory records 33 wheel artifacts,
+76,125,317 declared preview disk bytes, current source and local platform scope.
+Image metadata is read-only and makes no reclaimable-size claim; no image or
+volume was removed. The approved offline documentation check remains next.
+
+### Final technical delivery verified; actual human decision remains
+
+The exact approved offline Lychee review `6a0cbb9d…` ran after model cleanup.
+`make docs-check` passed: 66 Markdown files, zero lint issues, 638 link occurrences,
+445 unique links, 572 OK, 66 excluded and zero errors. Network access was denied.
+The pinned binary/profile/wrapper stayed unchanged and its owned private runtime
+was removed. Exact checked input hashes and logs remain in
+`integration-completion/lychee-review-20261019/execution-result.json` and
+`docs-check.log`. This entry records that completed check; it does not rewrite
+its input hashes or replay the checker. External URLs were not tested offline.
+
+The completed comparison, adjudication, canonical report export, all-four-arm
+receipt records, supplemental setup ledger, footprint and local delivery decision
+are retained. Final source still matches `d2c406f`/`d05541e90d2e…`; no application
+code, model, upstream pin or package artifact changed. Both required full suites,
+82% coverage and the exact current-source 15-check installation evidence remain
+bound to that executable source. Operational analysis/report drivers have their
+own self-checks and actual successful evidence verification; they are not claimed
+to be covered by the historical application coverage figure.
+
+C07 is PASS for campaign completion with INCONCLUSIVE efficacy. C13 is BLOCKED
+on actual human comprehension and the operator's acceptance/release decision.
+The already submitted five-question exercise uses the completed comparison;
+no participant response exists yet. The local delivery decision also lists
+trusted-resource, telemetry, platform and upstream-harness limits, so no positive
+efficacy, automatic admission or general production-readiness claim is made.
+There is no pending architecture selection, worker repair, installation or model
+comparison action. No image, persistent volume, backup or unrelated work was
+removed. Preserve these terminal records and await actual input rather than
+starting another test loop.

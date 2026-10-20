@@ -326,3 +326,11 @@ metric identifiers while retaining provider_report/self_asserted token provenanc
 That evidence is insufficient for independent token-saving admission, even when
 all protocol counts are present. Fresh value trials reuse the already-qualified
 profiles; qualification and conformance are not repeated for this definition fix.
+
+The corrected optional-use comparison is now complete through the existing AEEP
+fallback:564 valid actual Codex task runs,105 holdouts per arm, zero receipt gaps,
+source unchanged. Candidate wall bounds do not establish the frozen 10% benefit;
+strict token evidence and candidate-use telemetry remain unavailable. This adds
+bounded live comparison evidence without qualifying the upstream Codex harness,
+scanner, hosted telemetry, benchmark packs or other host platforms. No upstream
+pin changed. See the [four-arm result](../../reports/toolkit-v2/c07/edit-value-native-20261019/comparison.html).

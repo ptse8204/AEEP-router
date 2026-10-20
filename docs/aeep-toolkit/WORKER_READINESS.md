@@ -39,7 +39,7 @@ of that question.
 The [qualification report](../../reports/toolkit-v2/c07/edit-study-prompt-20261019/report/report.html)
 records 141 successful required-use trials. It establishes bounded task
 correctness, not optional-selection value. The
-[current state](STATE.md) identifies the running comparison and its one-shot
+[current state](STATE.md) identifies the terminal comparison and its completed one-shot
 driver; use those records to resume without repeating work.
 
 The [managed evaluation guide](MANAGED_EVALUATION.md) describes the existing CLI,
