@@ -4497,3 +4497,8 @@ External URL reachability is not established by this offline check.
 C13 now awaits actual human answers and the operator's scoped delivery decision;
 no study/worker/install remains active for this completed work. All unknown
 resource/use evidence and broader backend/platform limits remain explicit.
+
+Final evidence commit: `7795e36`. Git's staged whitespace check noted the captured
+Lychee log's final blank line; the original log is retained unchanged as evidence.
+The actual 66-file documentation check passed. No production-source discrepancy,
+new installation or live rerun is pending.

@@ -1986,3 +1986,9 @@ There is no pending architecture selection, worker repair, installation or model
 comparison action. No image, persistent volume, backup or unrelated work was
 removed. Preserve these terminal records and await actual input rather than
 starting another test loop.
+
+Evidence delivery commit: `7795e36` (`[AEEP-C07] Complete four-arm comparison and
+record bounded delivery`). The feature branch retains all completed results.
+The staged whitespace check flagged only the final blank line emitted by Lychee
+in its captured `docs-check.log`. That raw log is intentionally preserved; it is
+not a documentation lint/link failure. No source discrepancy or rerun follows.
