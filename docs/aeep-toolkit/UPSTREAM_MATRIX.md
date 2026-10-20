@@ -320,3 +320,9 @@ exact derivative image IDs are recorded under
 uses existing chmod and does not install software or execute the generated tool
 during image construction. Optional model use still requires frozen value-stage
 definitions and current boundary evidence.
+
+The value metric audit changes no upstream pin or adapter. It corrects native
+metric identifiers while retaining provider_report/self_asserted token provenance.
+That evidence is insufficient for independent token-saving admission, even when
+all protocol counts are present. Fresh value trials reuse the already-qualified
+profiles; qualification and conformance are not repeated for this definition fix.

@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19:** Readiness is fixed and the corrected three-family qualification PASSED: report `fit_6d2f5e60d17d4e59b222ee91792cc3f9`, 141 successful model trials including 105 distinct holdouts, zero normalization gaps, clean proxy restoration. The canonical overall outcome remains `insufficient_evidence` because qualification alone is not comparative value. All three final profile pairs passed their 11 probes per worker and cleanup. The four-arm optional-use comparison is RUNNING: plan `plan_f58ff0bf0ca640999ff2671ea82b94b5`, assessment `assessment_43ffec21822d441fa7b01e12c61e49d4`, continuation tool session `18470`. It uses 141 fresh seed-2026101904 cases, four isolated profiles and at most 564 model turns. The one-shot value driver now owns the running proxy; never replay it or stop its proxy. Both generated-tool/image reviews were approved and consumed. The frozen tool passed 28 training inputs; final image IDs and retained packaging failures remain recorded. Production source, graders, thresholds, model and grant ceilings are unchanged.
+**Status as of 2026-10-19:** Readiness is fixed and corrected three-family qualification PASSED: `fit_6d2f5e60d17d4e59b222ee91792cc3f9`, 141 successful trials including 105 distinct holdouts, zero normalization gaps. All final profile pairs passed 11 probes per worker. The first optional-value plan `plan_f58ff0bf0ca640999ff2671ea82b94b5` was stopped before holdouts after a static metric-binding audit: 46 successes (32 screening, 14 training), zero errors, terminal report `fit_15c30b16baac4dc2bf7597b6391d4294`, clean proxy restoration. Generic token names did not match native ledger keys. Separately, actual protocol token counts are complete provider reports with self-asserted trust; strict utility correctly leaves them unverified. Do not elevate trust or remove guardrails. The corrected fresh comparison is RUNNING: plan `plan_017bce61874c437296c66276e91876d6`, assessment `assessment_f14eeca8e7e54a2c861d7022e75d718e`, tool session `80373`, seed 2026101905. It reuses exact approved profiles/images/source/conformance, with unchanged tasks and thresholds; no further qualifier, worker or installer tests ran. Its driver owns the proxy. Finish held-out quality/wall-time comparison and separately label reported token counts; strict efficacy/admission may remain inconclusive. Production source and original grant ceilings/counters remain intact.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,9 +28,9 @@ checkpoint_status:
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Observe existing continuation session 18470 and edit-value-20261019/value-progress.json or canonical assessment43ffec21822d441fa7b01e12c61e49d4. Never rerun continue-study.py, run-value.py, preparation, paired inspections, builder, training or image operations. After its terminal result, export the exact value plan through aeep-toolkit eval managed report; analyze all four arms and the three preregistered families, measurement gaps and separate study setup costs; retain negative/inconclusive findings, update records and commit. No approval is pending for the running study.'
+next_action: 'Observe session 80373 and edit-value-native-20261019/value-progress.json or canonical assessment_f14eeca8e7e54a2c861d7022e75d718e. Never replay any started driver. Earlier session18470 and plan_f58ff0bf0ca640999ff2671ea82b94b5 are terminal with 46 charged trials and no holdouts. Native-key correction review77559915… is running once. After terminal result, export its exact plan through aeep-toolkit eval managed report, analyze all four arms/three families with observed wall time and separately attributed provider token reports, preserve strict unknowns, include setup/partial-campaign costs, update records and commit. No new source installation, model, worker conformance or trust upgrade is needed.'
 blocked_actions:
-  - 'Qualification passed. The four-arm optional-use comparison is running; its terminal measurements and complete analysis remain pending.'
+  - 'Qualification passed. Fresh native-key four-arm comparison is running; held-out measurements and complete analysis remain pending.'
   - 'Optional-use comparison still lacks completed task-matched trials, reusable-tool worker lineage and complete resource evidence.'
   - 'Human comprehension has no actual participant response; operator requested an agent review instead.'
   - 'Release/publication remains unauthorized.'
@@ -39,7 +39,7 @@ missing_permissions:
   - 'Further backup or unrelated-resource removal is outside the exact cleanup approval.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is not qualified. The first managed-model path uses the recorded AEEP fallback decision.'
-  - 'No new live cost/token benefit comparison was performed for this plan.'
+  - 'No completed held-out value verdict yet. Provider-reported token counts exist, but strict observed/verified token coverage is 0/141 in qualification; token-saving admission cannot be inferred from those reports.'
   - 'The d2c406f wheel passed its exact installed checks. Optional scanner execution, hosted export and ToolHive deployment remain unqualified; resource and distribution-rights limits remain explicit.'
 ```
 
@@ -1857,3 +1857,43 @@ proxy and write value-result.json. No comparison result or savings claim exists
 yet. Wait for terminal records and finish analysis; this is not a handoff stop.
 The first report-export invocation used an invalid `evaluation` subcommand and
 failed before effects; the corrected `eval managed report` completed.
+
+### Before-holdout metric audit and native-key successor
+
+The original utility definition used generic input/output token identifiers.
+`resource_measurements` emits provider/model/channel-qualified keys instead.
+A separate source-quality audit confirmed 141/141 protocol token observations,
+but their evidence is `complete/provider_report/self_asserted`. The policy
+correctly excludes those counts from observed/verified utility. The generic-key
+defect and the trust limitation are different issues. Correcting identifiers
+cannot upgrade evidence or establish verified token savings.
+
+The first value run was cancelled through AssessmentService, then completed
+cleanup/reporting normally: 46 successful calls (32 screening, 14 training), no
+holdouts, no errors, no grant revocation/reset and no repeated terminal call.
+All costs and `fit_15c30b16baac4dc2bf7597b6391d4294` remain retained. No comparison
+resource effects were used to choose the correction.
+
+The [finite definition amendment](../../reports/toolkit-v2/c07/edit-value-native-20261019/finite-definition-amendment-review.json)
+uses September 25/27 standing authority for routine exact definitions and finite
+assessment amendments. Same approved source, images, execution method, model and
+exposure; no new software/credential/disclosure/cash authority. The new campaign
+has at most 564 calls, retaining all 46 partial attempts on the original 6000-turn
+grant (combined ceiling 610 for these two value campaigns, no reset).
+
+Plan `plan_017bce61874c437296c66276e91876d6` uses fresh seed 2026101905 and 141 cases
+disjoint from qualification, both environment failures and the partial value
+plan. Three existing exact profile pairs and frozen tool lineage are reused;
+there are no additional conformance, qualification or installation runs.
+Thresholds, guardrails, task families, counts and optional exposure are unchanged.
+Only token identifiers now use native ledger names. Self-asserted counts remain
+self-asserted. The strict canonical utility may therefore remain inconclusive;
+actual held-out task quality and wall time are still needed for the comparison,
+with raw token reports separately attributed.
+
+The exact execution review is
+`77559915eb6d581756928e2fc1347983ade1086fa601e729edc1e0946d4871d6`.
+Assessment `assessment_f14eeca8e7e54a2c861d7022e75d718e` runs under tool session 80373.
+Fresh snapshot 10,141,696 bytes gives an 87,370,383,360-byte envelope and leaves
+79,918,837,760 bytes, above the 50 GiB reserve. Do not replay the driver or stop
+its proxy. Finish actual evidence and analysis; no positive claim is presumed.

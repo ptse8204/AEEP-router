@@ -3,7 +3,7 @@
 **Plan date:** 2026-10-08  
 **Target:** `https://github.com/ptse8204/AEEP-router`  
 **Track:** evidence-first modularization, preserving the existing repository and historical evidence.  
-**Implementation status:** C00-C05 have recorded passes at their source-review/software tiers. The upstream scripted journey and existing managed fallback are implemented; remaining acceptance gates stay open. See [STATE.md](STATE.md) for validation and remaining checkpoints. No V2 live study has run.
+**Implementation status:** C00-C06 and C08-C12 have recorded passes at their stated evidence tiers. The upstream scripted journey and managed fallback are implemented. The three-family live qualification passed 141 trials; its separate optional-use comparison is running. C07 efficacy and C13 acceptance remain open. See [STATE.md](STATE.md) for actual evidence, limitations and remaining gates, and [worker readiness](WORKER_READINESS.md) before starting another live study.
 
 ## Mission (fixed unless the owner changes it)
 

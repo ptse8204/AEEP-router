@@ -823,3 +823,14 @@ approved a directory-only packaging correction after COPY made it non-traversabl
 The new images preserve their base layers and final configurations. Freeze both
 image IDs, generated source/usage hashes and construction-input lineage before
 value holdouts. Training success cannot establish efficacy or justify source edits.
+
+### D63 — Bind native metric names without elevating provider claims
+
+Before value holdouts, correct generic token identifiers to the existing
+provider/model/channel-qualified ledger keys. Preserve declared dimensions,
+thresholds and guardrails. Protocol counts are provider_report/self_asserted;
+their presence cannot establish observed/verified usage. Retain the 46-call
+partial campaign and all costs, then use fresh cases with the same approved
+workers and tool. Complete the task-quality/wall-time comparison and separately
+label raw reported tokens. Accept an inconclusive strict verdict rather than
+relabel evidence or weaken policy.

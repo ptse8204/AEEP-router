@@ -4369,7 +4369,7 @@ subsequently passed readiness, model selection and identity checks. The proxy
 is stopped between runs; temporary diagnostic workers were removed. No host
 configuration, credential, volume, new image or production code changed.
 
-The fresh141-case editing qualification stopped on its first turn without an
+The fresh 141-case editing qualification stopped on its first turn without an
 answer (`fit_0fedf41c912d4817b8f4cee770429740`); no correctness or holdout result
 follows. Its seed2026101901 cases were disjoint from the earlier failed plan.
 A separate one-turn public connectivity probe succeeded. Definition audit found
@@ -4439,3 +4439,21 @@ Its 141 fresh cases are disjoint from qualification; 564 model calls is the ceil
 Storage preflight preserves more than 50 GiB after the full conservative envelope.
 No benefit/admission claim is available before terminal measurements and analysis.
 Do not replay any started driver or stop the value driver's proxy.
+
+The first optional-value run was stopped before holdouts after static metric
+audit: 46 successes (32 screening, 14 training), zero errors, source unchanged and
+proxy restored. Generic token dimension names did not match native ledger keys.
+Protocol counts are present but `provider_report/self_asserted`; strict utility
+correctly leaves them unverified. No trust promotion or guardrail removal.
+
+A routine finite definition amendment preserves those costs and the original
+6000-turn grant, reuses exact already-approved source/images/profiles/conformance,
+and starts one fresh 141-case comparison at most 564 calls. Corrected plan:
+`plan_017bce61874c437296c66276e91876d6`; assessment:
+`assessment_f14eeca8e7e54a2c861d7022e75d718e`; session 80373; seed 2026101905.
+Review 77559915… binds unchanged tasks/thresholds and native token identifiers.
+Formal efficacy may remain inconclusive because self-asserted token counts are
+not independent measurements; actual held-out quality and wall time still need
+completion. Separately report provider token claims, observed wall times and
+all setup/partial-campaign costs. No additional model probes, worker checks,
+installations or broad verification cycles were run for this correction.
