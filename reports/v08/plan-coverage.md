@@ -4502,3 +4502,15 @@ Final evidence commit: `7795e36`. Git's staged whitespace check noted the captur
 Lychee log's final blank line; the original log is retained unchanged as evidence.
 The actual 66-file documentation check passed. No production-source discrepancy,
 new installation or live rerun is pending.
+
+## October 19 toolkit telemetry correction — in progress
+
+The operator reopened tokens and candidate-use capture. D65 and
+[the telemetry guide](../../docs/aeep-toolkit/TELEMETRY_REPAIR.md) distinguish
+verified capture from provider metering trust. All 564 original token captures
+passed read-only journal/receipt binding checks in the separate
+[capture supplement](../toolkit-v2/c07/capture-repair-20261019/capture-audit.md).
+The old comparison and frozen verdict are unchanged. Snapshot retention and
+managed report integration are implemented; 132 focused checks, Ruff and mypy
+passed. Full current-source regression and prospective collector conformance
+remain pending. No new model, installation, release or historical replay occurred.

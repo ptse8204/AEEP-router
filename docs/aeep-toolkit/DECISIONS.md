@@ -845,3 +845,20 @@ Retain the canonical INCONCLUSIVE result, all assigned cases and failed setup
 costs. Do not relabel provider counts, remove guardrails or launch further studies
 to obtain a positive verdict. C07 completion passes; admission/efficacy does not.
 Use the actual report for the separate human exercise and local beta decision.
+
+### D65 — Repair capture verification and retain positive native loading evidence
+
+The operator reopened token and candidate-use telemetry after the completed study.
+The 564 original journals are available, so audit their capture chain read-only
+instead of spending model turns to recreate counts. Keep provider-report trust,
+the frozen utility result and the original report unchanged. A separate supplement
+records capture consistency and descriptive counts.
+
+Reuse the existing Codex OTLP collector and execution journal. The new toolkit
+helper checks those contracts and exports their evidence; it adds no collector,
+framework or dependency. General OTLP backends cannot recover omitted past events
+or attest OpenAI's internal meter. Preserve the bounded snapshot at the router,
+bind positive skill injection to the reviewed candidate and journal, and label it
+as instruction loading. Missing metrics cannot prove non-use; loading cannot prove
+semantic use. A prospective collector run needs exact review of its changed worker
+telemetry boundary before any new live check. No architecture choice is pending.

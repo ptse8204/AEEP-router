@@ -38,6 +38,7 @@ from aeep_toolkit.models import (
     SourcePin,
     TokenObservation,
 )
+from aeep_toolkit.telemetry import bound_journal, candidate_loading, capture_summary, token_capture
 
 
 def plan_preview(plan: AssessmentPlan, source: SourcePin) -> dict[str, Any]:
@@ -256,6 +257,8 @@ class AEEPAssessmentAdapter:
             trial_stores = dict(connection.execute('SELECT trial_id, database_path FROM trial_stores'))
         runs, gaps, auxiliary = [], [], []
         self.accounting_records = {}
+        captures = {}
+        journals = {}
         for trial in campaign.trials:
             if trial.route_id not in {self.plan.candidate_id, self.plan.baseline_id}:
                 auxiliary.append(trial.trial_id)
@@ -275,10 +278,23 @@ class AEEPAssessmentAdapter:
                     raise ConfigurationError('original receipt store is outside the plan attempts directory')
                 with sqlite3.connect(original_path.as_uri() + '?mode=ro', uri=True) as original:
                     row = original.execute('SELECT payload_json FROM receipts WHERE receipt_id=?', (receipt.receipt_id,)).fetchone()
+                    journal_row = (original.execute(
+                        "SELECT payload_json FROM assessment_records WHERE kind='execution_evidence' AND digest=?",
+                        (receipt.metadata["execution_evidence_digest"],)).fetchone()
+                        if receipt.metadata.get("execution_evidence_digest") else None)
                 if row is None or content_digest(ExecutionReceipt.model_validate_json(row[0])) != content_digest(receipt):
                     raise ConfigurationError('campaign receipt differs from the original retained receipt')
                 self.accounting_records[content_digest(receipt)] = receipt.model_dump(mode='json')
+                journal = bound_journal(receipt, json.loads(journal_row[0]) if journal_row else None)
+                invocation = (self.mapping.candidate if trial.route_id == self.plan.candidate_id
+                              else self.mapping.baseline).managed_host_config().invocation
+                capture = {"tokens": token_capture(receipt, journal),
+                           "candidate": candidate_loading(receipt, journal,
+                               skill_sha256=invocation.skill_sha256 if invocation else None)}
                 runs.append(self._run(trial, receipt))
+                captures[trial.trial_id] = capture
+                if journal is not None:
+                    journals[receipt.metadata["execution_evidence_digest"]] = journal.model_dump(mode="json")
             except (ConfigurationError, ValueError, TypeError, KeyError, OSError, sqlite3.Error) as exc:
                 gaps.append(
                     {
@@ -301,6 +317,9 @@ class AEEPAssessmentAdapter:
             "unresolved_operations": sum(item.elapsed_seconds is None for item in ledger.operations),
             "normalized_primary_trials": len(runs),
             "normalization_gaps": gaps,
+            "telemetry_capture": captures,
+            "telemetry_capture_summary": capture_summary(captures),
+            "execution_journals": journals,
             "auxiliary_trial_ids": auxiliary,
             "assessment_analysis": report.model_dump(mode="json"),
             "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
@@ -491,6 +510,7 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
         "measurement_coverage": analysis.measurement_coverage,
         "break_even_uses": analysis.break_even_uses,
         "timing_scope": details["timing_scope"],
+        "telemetry_capture": details["telemetry_capture_summary"],
     }
     summary["limitations"].extend([
         f"Canonical campaign: {details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "

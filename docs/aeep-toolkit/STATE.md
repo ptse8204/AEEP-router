@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19:** C07 campaign completion PASSED; efficacy is INCONCLUSIVE. Readiness is repaired. Three-family qualification passed 141/141 tasks, including 105 disjoint holdouts. The optional-use four-arm comparison completed once as `fit_1dc2c008986c4096bbf0f23b7ce05e16`: all 564 task runs valid, including 105/105 holdout successes in every arm. All receipts verified, zero normalization or position gaps. Candidate wall-time estimate 0.79%, corrected interval -4.61% to +6.52%, below the frozen 10% benefit threshold; success gain zero. All protocol tokens are provider_report/self_asserted, with no trusted token pairs. Candidate-specific exposure/retrieval/invocation remains unknown. No benefit/admission is established. Supplemental costs retain 2,836 operations, zero unresolved durations, failed predecessors and the cancelled 46-call attempt. The proxy is stopped, its approved 512 MiB/no-swap cap retained; source remains d2c406f/d05541e90d2e…. Session80373 is terminal and must never be replayed. Current work is the actual human comprehension response and operator acceptance of the documented delivery limits; the exact approved offline Lychee check passed and its private runtime was removed. No new architecture, worker, installation or model trial is needed.
+**Status as of 2026-10-19, telemetry correction:** The operator reopened token capture and candidate-use engineering after the completed C07 campaign. The original 564-run comparison and its inconclusive efficacy result remain unchanged. Read-only audit now verifies all 564 journal-to-receipt token captures; provider usage remains independently unverified. Router snapshot retention and managed capture reporting are implemented, with 132 focused tests passing. Prospective native collector conformance and live capture remain pending an exact changed-boundary review. C13 remains open. No historical campaign or terminal driver is to be replayed. Continue current-source regression and concrete review preparation; the prior statement that no technical work remained is superseded by this request.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -28,7 +28,7 @@ checkpoint_status:
 last_verified_commit: 'd2c406f'
 last_check_command: 'Framework Python 3.13; reports/toolkit-v2/integration-completion/validation-v3/checks.json'
 last_check_result: '1561 passed, 21 skipped in both suites; 82% coverage, both branch gates, all 12 driver checks and docs passed. Executable source unchanged. Six current-source scripted workers passed with cleanup. d2c406f wheel passed 15 sandboxed checks and private removal.'
-next_action: 'Await the actual human response recorded in c13/human-comprehension/editing-comparison-exercise.json, score it against the presented result and supported controls, then obtain the operator local-beta/release decision if wanted. All technical study/export/analysis/docs work is complete. Lychee review6a0cbb9d passed once with runtime removal. No active model driver, proxy or install remains for this study. Never replay terminal operations; no further tests are needed for unchanged source.'
+next_action: 'SUPERSEDED by October19 telemetry correction below. Earlier action: await the actual human response recorded in c13/human-comprehension/editing-comparison-exercise.json, score it against the presented result and supported controls, then obtain the operator local-beta/release decision if wanted. All technical study/export/analysis/docs work is complete. Lychee review6a0cbb9d passed once with runtime removal. No active model driver, proxy or install remains for this study. Never replay terminal operations; no further tests are needed for unchanged source.'
 blocked_actions:
   - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
   - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
@@ -1992,3 +1992,29 @@ record bounded delivery`). The feature branch retains all completed results.
 The staged whitespace check flagged only the final blank line emitted by Lychee
 in its captured `docs-check.log`. That raw log is intentionally preserved; it is
 not a documentation lint/link failure. No source discrepancy or rerun follows.
+
+## October 19 — token capture and candidate-loading correction in progress
+
+D65 reopens the engineering gap at the operator's request. All 564 original
+execution journals were resolved from their individual attempt databases, rather
+than the root repository. Each canonical and original receipt, journal hash,
+attempt, runtime, boundary, final cumulative accounting and five observed token
+fields matched. The separate `c07/capture-repair-20261019` supplement retains
+reproducible journals/receipts and descriptive paired counts. Zero model calls,
+zero changed historical comparison files and no policy or outcome changes.
+
+The router previously discarded native metric snapshots; it now retains validated
+bounded snapshots and scope. The adapter retains the resolved candidate identity.
+Managed normalization exports journal capture coverage and verified positive
+instruction loading separately from semantic invocation. No collector code,
+external dependency or frozen admission contract changed. Collector absence still
+cannot prove non-use. New implementation invalidates current-source qualification
+for new trials; the old campaign remains valid historical evidence for its own
+d2c406f/d05541e90d2e… source.
+
+Focused checks: 132 passed; Ruff passed; mypy passed 154 source files. Initial
+synthetic tests incorrectly used `EventJournal.events` and omitted the fixture
+conformance stub; those test-definition failures were corrected. These were not
+model-run or production failures. Full integrated regression is next, followed by
+exact prospective collector and changed-wheel reviews where necessary. Existing
+human/resource/release gates are preserved; they do not block this safe engineering.

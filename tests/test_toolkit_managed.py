@@ -118,7 +118,7 @@ def prepared(tmp_path, monkeypatch):
     return router, service, adapter, path, grant
 
 
-def record(service, adapter, path, *, missing_prompt=False):
+def record(service, adapter, path, *, missing_prompt=False, include_journals=False):
     trials = []
     for route in ("candidate", "baseline", "high"):
         trial = make_trial(adapter.plan.suite.cases[0].case_id, route)
@@ -152,6 +152,21 @@ def record(service, adapter, path, *, missing_prompt=False):
             actual_resources={"input_tokens": 7, "output_tokens": 3},
             metadata=metadata,
         )
+        journal = None
+        if include_journals:
+            from aeep.execution import EventJournal, ExecutionEvidence
+            from aeep.hosts.codex_accounting import TOKEN_FIELDS, turn_accounting
+            wire = dict.fromkeys(TOKEN_FIELDS, 0) | {"inputTokens":7, "outputTokens":3}
+            receipt.actual_resources, receipt.accounting = turn_accounting(wire, model="fixture-model", resource_pool="fixture")
+            receipt.metadata["codex_token_fields"] = json.dumps(sorted(wire))
+            receipt.metadata["attempt_id"] = route
+            stream = EventJournal(route)
+            stream.append("execution.started", "start")
+            stream.append("usage.reported", "turn-usage", accounting=receipt.accounting, accounting_mode="cumulative")
+            stream.append("execution.completed", "terminal")
+            journal = ExecutionEvidence(attempt_id=route, adapter="fixture", events=stream.items,
+                journal_id=stream.journal_id, complete=True, identity_digest="d"*64, boundary_digest="e"*64)
+            receipt.metadata["execution_evidence_digest"] = content_digest(journal)
         trial.receipt_ids = [receipt.receipt_id]
         from aeep.router import Router
         Router._bind_receipt_evidence(next(spec for spec in adapter.mapping.subjects if spec.id == route), receipt)
@@ -164,6 +179,10 @@ def record(service, adapter, path, *, missing_prompt=False):
         with sqlite3.connect(original_path) as original:
             original.execute('CREATE TABLE receipts(receipt_id TEXT PRIMARY KEY, payload_json TEXT)')
             original.execute('INSERT INTO receipts VALUES (?,?)', (receipt.receipt_id, receipt.model_dump_json()))
+            if journal:
+                original.execute('CREATE TABLE assessment_records(kind TEXT, digest TEXT, payload_json TEXT)')
+                original.execute('INSERT INTO assessment_records VALUES (?,?,?)',
+                    ('execution_evidence', content_digest(journal), journal.model_dump_json()))
         with sqlite3.connect(path) as connection:
             connection.execute('INSERT INTO trial_stores VALUES (?,?)', (trial.trial_id, str(original_path)))
             connection.execute(
@@ -190,6 +209,33 @@ def record(service, adapter, path, *, missing_prompt=False):
     service.repository.put("operation_ledger", content_digest(ledger), ledger)
     service.repository.put("report", report.report_id, report)
     return report
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("changed", [False, True])
+async def test_normalization_exports_bound_capture_and_rejects_changed_journals(tmp_path, monkeypatch, changed):
+    router, service, adapter, path, _grant = prepared(tmp_path, monkeypatch)
+    try:
+        monkeypatch.setattr(adapter_module, "require_conformance", lambda *args, **kwargs: None)
+        report = record(service, adapter, path, include_journals=True)
+        if changed:
+            with sqlite3.connect(path.parent / 'attempts/candidate.sqlite3') as original:
+                payload = json.loads(original.execute('SELECT payload_json FROM assessment_records').fetchone()[0])
+                payload['attempt_id'] = 'changed'
+                original.execute('UPDATE assessment_records SET payload_json=?', (json.dumps(payload),))
+        bundle = adapter.normalize(report.report_id)
+        count = 1 if changed else 2
+        assert len(bundle.runs) == count, adapter.details['normalization_gaps']
+        assert adapter.details['telemetry_capture_summary']['verified'] == count
+        assert len(adapter.details['execution_journals']) == count
+        assert len(adapter.details['normalization_gaps']) == int(changed)
+        from aeep_toolkit.managed import comparison_summary
+        from aeep_toolkit.reporting import render
+        summary = comparison_summary(adapter, bundle)
+        assert summary['managed_analysis']['telemetry_capture']['verified'] == count
+        assert 'not independent provider metering' in render(summary, 'html')
+    finally:
+        await router.close()
 
 
 @pytest.mark.asyncio

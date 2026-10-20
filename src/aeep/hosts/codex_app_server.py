@@ -822,6 +822,7 @@ class CodexAppServerAdapter:
                         cleaned = await self._worker.cleanup(self._worker_process_id) if self._worker_process_id else False
                 if self.transport.metrics_scope is not None:
                     raw.metadata['catalog_metrics'] = self.transport.catalog_metrics or metrics_snapshot(self.transport.metrics_scope)
+                    raw.metadata['catalog_metrics_scope'] = self.transport.metrics_scope
                     # Injection and catalog counts are supporting observations.
                     # They cannot prove candidate-specific exposure or non-use.
                     raw.metadata['capability_discovery'] = dict.fromkeys(('exposed', 'retrieved', 'invoked'))
@@ -1162,6 +1163,10 @@ class CodexAppServerAdapter:
                     "tool_call_count": result.tool_count,
                     "host_tools_used": json.dumps(sorted(collector.tools_used)),
                     "host_advertised_inventory_digest": collector.advertised_inventory_digest,
+                    **({"candidate_skill_name_sha256": hashlib.sha256(invocation.skill_name.encode()).hexdigest(),
+                        "candidate_skill_sha256": invocation.skill_sha256}
+                       if invocation is not None and invocation.mode == "skill" and invocation.skill_name
+                       and all(skill.name != invocation.skill_name for skill in invocation.supporting_skills) else {}),
                     "host_available_tools": "unknown",
                     "approval_evidence_digest": _message_digest(
                         {"digests": list(result.approval_digests)}

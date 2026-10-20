@@ -179,6 +179,9 @@ async def test_supported_invocation_restricts_inventory_and_keeps_usage(
         assert result.status == ExecutionStatus.SUCCESS
         assert result.output == {"characters": 3}
         assert result.metadata["model_turn_count"] == int(mode != "mcp_tool")
+        if mode == "skill":
+            assert result.metadata["candidate_skill_sha256"] == target.skill_sha256
+            assert result.metadata["candidate_skill_name_sha256"] == hashlib.sha256(b"parse").hexdigest()
         assert ("turn/start" in requests) is (mode != "mcp_tool")
         assert not {"plugin/list", "plugin/read", "config/read", "config/value/write"}.intersection(
             requests
@@ -506,6 +509,8 @@ async def test_catalog_metrics_worker_binding_is_exact_and_metadata_never_implie
     raw = await handle.task
     assert raw.metadata['capability_discovery'] == {'exposed':None,'retrieved':None,'invoked':None}
     assert raw.metadata['catalog_metrics']['observations'] and not raw.metadata['catalog_metrics']['collector_closed']
+    from aeep.router import Router
+    assert Router._safe_receipt_metadata(raw.metadata)['catalog_metrics'] == raw.metadata['catalog_metrics']
     assert any(event.kind=='message.received' for event in events)
     assert raw.resources.latency_ms > 0
 

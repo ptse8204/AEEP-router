@@ -198,6 +198,7 @@ def render(summary: dict[str, Any], format: str) -> str:
                   managed['timing_scope'],
                   "Positive paired resource differences mean control used more. Success gains use treatment minus control. Intervals and guardrails retain the frozen analysis policy."]
         for label, key in (
+            ("Journal capture verification (not independent provider metering)", "telemetry_capture"),
             ("Paired measurement coverage", "paired_measurement_cases"),
             ("Paired resource differences", "paired_savings"),
             ("Uncertainty intervals", "savings_interval"),
@@ -207,7 +208,8 @@ def render(summary: dict[str, Any], format: str) -> str:
             ("Measurement coverage", "measurement_coverage"),
             ("Assessment resource break-even uses", "break_even_uses"),
         ):
-            lines.append(label + ": " + json.dumps(managed[key], sort_keys=True, allow_nan=False))
+            if key in managed:
+                lines.append(label + ": " + json.dumps(managed[key], sort_keys=True, allow_nan=False))
         lines += ["Null means unavailable. Resource break-even is not billed-cash savings or a plugin-price forecast.", ""]
     for index, cohort in enumerate(summary["cohorts"], 1):
         binding = cohort["binding"]

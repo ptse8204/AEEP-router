@@ -714,6 +714,9 @@ class Router:
             "tool_call_count",
             "model_turn_count",
             "codex_token_fields",
+            "catalog_metrics_scope",
+            "candidate_skill_name_sha256",
+            "candidate_skill_sha256",
             "task_instruction_sha256",
             "tool_selection_rounds",
             "implementation_schema_bytes",
@@ -738,6 +741,12 @@ class Router:
                 key: discovery.get(key) if type(discovery.get(key)) is bool else None
                 for key in ("exposed", "retrieved", "invoked")
             }
+        metrics = metadata.get("catalog_metrics")
+        scope = retained.get("catalog_metrics_scope")
+        if isinstance(metrics, dict) and isinstance(scope, str):
+            from .hosts.codex_metrics import validate_snapshot
+
+            retained["catalog_metrics"] = validate_snapshot(metrics, scope)
         return retained
 
     def _save_receipt(self, receipt: ExecutionReceipt) -> None:

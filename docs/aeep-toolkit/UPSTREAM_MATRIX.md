@@ -1,5 +1,13 @@
 # Upstream source review and reuse decisions
 
+October 19 telemetry correction: D65 reuses the existing Codex 0.154.0 native
+OTLP collector and AEEP execution journal. No new telemetry dependency or hosted
+backend is selected. All 564 old token captures passed a retrospective consistency
+audit; provider metering trust is unchanged. Bounded snapshot retention and managed
+reporting are implemented. A new worker-local collector profile still needs exact
+boundary review and prospective conformance/live capture checks. See
+[the telemetry guide](TELEMETRY_REPAIR.md).
+
 C01 inspection, October 8, 2026. These are source pins, not installed or qualified
 binaries. No third-party source was executed. Machine records in
 [`reports/toolkit-v2/c01`](../../reports/toolkit-v2/c01/README.md) retain exact

@@ -74,6 +74,10 @@ The optional [managed evaluation bridge](MANAGED_EVALUATION.md) connects existin
 reviewed skill plans to the AEEP fallback, using the same workers and grants.
 Its file-based preview is inert. Native value and release gates remain open.
 
+[Token capture and candidate loading](TELEMETRY_REPAIR.md) explains the corrected
+retention path, the 564-run retrospective capture audit and the prospective live
+collector check. Capture verification does not upgrade provider metering trust.
+
 ## Prepare a local sharing preview
 
 From the repository checkout, minimize a normalized evidence bundle before
