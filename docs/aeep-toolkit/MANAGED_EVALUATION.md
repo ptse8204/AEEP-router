@@ -64,6 +64,13 @@ reports state how many trials could be normalized and list gaps. Auxiliary arms
 and unresolved costs remain in the complete canonical campaign and operation
 ledger; primary-arm tables do not replace that accounting.
 
+Keep screening, training and holdout results separate when making a value claim.
+Protocol token counts retain their receipt provenance. Complete
+`provider_report/self_asserted` usage can appear in descriptive tables while
+remaining unavailable to the strict observed/verified utility. A count being
+present does not establish verified token savings. Native metric names and
+preflight checks are described in [worker readiness](WORKER_READINESS.md).
+
 Missing host identity, task-prompt digest, current conformance or receipt binding
 produces an explicit gap. Missing token categories remain unknown. A timeout or
 execution failure is not a failed independent grader. Only recorded, matching

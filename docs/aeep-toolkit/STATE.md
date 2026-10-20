@@ -1918,3 +1918,12 @@ only after model comparison cleanup, then retain the documentation result and
 private-runtime removal. The current architecture/acceptance guides now reflect
 the repaired readiness, completed installation and actual qualification. These
 prose corrections do not change executable source or require another wheel.
+
+The all-four-arm HTML/Markdown presentation template is now prepared separately
+in `edit-value-native-20261019/render-comparison.py`; its format review pins the
+runner and states that no statistics or endpoints change. Escaping and unknown
+value self-checks passed without opening study evidence. The report will show
+holdout coverage, family/arm results, unchanged canonical intervals, raw-token
+provenance, failures, full linked study costs and supported control limits.
+The managed guide now explains provider-reported versus trusted token coverage.
+Final documentation lint/link validation remains scheduled after model cleanup.
