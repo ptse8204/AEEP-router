@@ -964,3 +964,18 @@ presented files. CLI calibration now measures 24 offline commands and shared-hos
 counters using existing monitoring. It does not establish production acceptance
 or justify a retrospective passing budget. Recommend only bounded local
 experimental handoff; release and production claims remain separate.
+
+### D74 — Qualify the bounded Mac CLI with prospective budgets
+
+Recommend the existing single-user foreground CLI with on-demand assessments,
+not a new service/infrastructure. Propose 256 MiB CLI RSS and 1/2-second p95
+intake/report targets before fresh inputs. Separate 30 local transactions from
+an optional exact-reviewed 12-turn resource-only batch. Retain whole-host,
+Docker VM, container and process measurements separately; no missing peak or
+contaminated baseline can pass. Targets are recommendations until accepted/frozen.
+Do not replay the old efficacy study or infer new model/install authority.
+
+Point human controls at the existing assess cancel/status and private remove
+interfaces. Cancellation stops subsequent trial scheduling, not in-flight effects.
+The assisted check runs help only and preserves all earlier human responses.
+No new core module, dependency, upstream pin or source behavior is required.

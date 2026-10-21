@@ -10,8 +10,10 @@ Both worker profiles pass containment; current source/wheel/docs checks passed.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
-A 24-command CLI resource characterization is complete,
-but the production whole-system resource gate remains unmet. No release is authorized.
+A 24-command CLI resource characterization is complete. Prospective production
+workload/budgets and an exact assisted control worksheet are now prepared. Two
+help commands passed without state changes; the actual participant control response
+and production resource execution remain pending. No release is authorized.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -37,12 +39,12 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
-last_check_command: 'capture-explicit-profile-20261021/completion-audit.json; capture-status.json; c13/cli-resource-profile-20261021/summary.json; c13/human-comprehension/editing-comparison-response-20261021.json'
-last_check_result: 'Four real captures verified; three independently graded passes and one ungraded callback failure. Bound explicit instruction-loading event verified. Both profiles pass 11 probe groups per worker. Five reservations charged, including one skip. Human report comprehension demonstrated after clarification; concrete control discovery partial. CLI characterization complete; no production acceptance claim.'
-next_action: 'Read reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md and c13/current-delivery-guide.md. Read the completed human follow-up separately from its first-response errors. Do not rerun terminal drivers, broad suites, installs or the original comparison. If production acceptance is requested, freeze its workload and resource budgets before new held-out work.'
+last_check_command: 'c13/production-readiness-20261021/control-command-checks.json; production-resource-proposal.json; verify-proposal.py; docs-check.log. Earlier source/capture acceptance remains bound to its original logs.'
+last_check_result: 'Production resource targets and exact assisted control worksheet prepared; two help commands passed without models, installs or state changes. Active-document lint passed 67 files; full docs-check stops because pinned Lychee is absent. New local paths/source/pins receive a separate first-party check. No new production-resource pass or execution authority.'
+next_action: 'Read reports/toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md and CONTROL_CHECK.md. Record the pending actual assisted control response. The resource targets are recommendations, not accepted execution authority. Before any qualification, freeze targets/data/driver/artifact pins and obtain applicable installation/model/service review; never replay prior terminal drivers or the old comparison.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
-  - 'Production whole-system resource acceptance lacks applicable frozen budgets and held-out measurements. CLI calibration cannot close it. Independent provider usage, optional candidate use and verified savings remain unproven.'
+  - 'Prospective resource proposal prepared: core 30 local transactions, optional separately reviewed 12-turn resource batch. Targets are not accepted or executed; full whole-system resource acceptance still lacks applicable frozen measurements. No efficacy claim.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
@@ -2341,3 +2343,24 @@ is demonstrated after clarification; the first response and errors remain intact
 No further scope response is pending. Concrete lifecycle control discovery remains
 partial, and the companion guide is a product correction rather than participant
 control-use evidence. No unaided, production-readiness or release claim follows.
+
+### October 21 C13 production recommendation and control worksheet
+
+The operator requested production workload/resource recommendations and exact
+control-check steps. [The proposal](../../reports/toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md)
+selects the already chosen local Mac CLI, up to 50 daily local operations and one
+reviewed assessment at a time. It proposes prospective latency, CPU, memory,
+network, storage and cleanup targets. It is not a passing budget applied to the
+old calibration, new execution authority or a release decision. A new core
+qualification uses 30 local transactions; at most 12 resource-only model turns
+would need their own exact review. No old comparison replay is required.
+
+[The control worksheet](../../reports/toolkit-v2/c13/production-readiness-20261021/CONTROL_CHECK.md)
+shows the existing assess cancel/status and private remove commands. Actual
+source inspection confirms cancellation is checked before each trial, not a
+forced in-flight termination or refund. The two help commands pass in a clean
+write/network/home-denied sandbox. The initial authoring check failed when rich
+could not read the denied repository cwd; unchanged commands passed from private
+scratch. Both logs/cause are retained; no source change or live operation occurred.
+An exact assisted human control exercise is prepared and awaiting the participant.
+The original exercise and all five presented-file hashes remain unchanged.

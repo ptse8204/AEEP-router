@@ -39,6 +39,26 @@ This recommendation does not supply operator release authorization. The original
 savings. The forced loading event does not establish voluntary use or benefit.
 No architecture, dependency, worker-readiness or installation choice is pending.
 
+## Proposed C13 production qualification
+
+The operator requested a workload/budget recommendation and exact control steps.
+The [proposal](production-readiness-20261021/PRODUCTION_WORKLOAD.md) targets the
+existing single-user Mac CLI: up to 50 local operations per day, one reviewed
+assessment at a time, no persistent Toolkit service. CLI targets are 256 MiB peak
+RSS, 1-second p95 intake/preview and 2-second p95 report rendering. Assessment mode
+keeps existing worker/proxy limits and targets a 4 GiB whole-host memory increase,
+with 6 GiB available before start, 2 GiB during operation and the 50 GiB disk reserve.
+These are proposed prospective targets, not measured passes or a new authorization.
+
+The bounded next qualification is 30 new local transactions with no models, then
+at most 12 separately reviewed resource-only model turns if needed. It cannot
+replace the original value study or mandatory qualification/holdout counts. The
+[control worksheet](production-readiness-20261021/CONTROL_CHECK.md) points to existing
+operator cancellation/status and exact private-runtime removal. Two help commands
+passed with network/writes/home denied; no live cancellation/removal occurred.
+The actual assisted participant control response is pending. No code, dependency,
+image, worker, model or grant changed in preparing this proposal.
+
 ## What the delivered stack does
 
 | Path | Actual evidence | Scope |
@@ -104,6 +124,11 @@ software test run. All C07 drivers are terminal and must never be replayed.
 The proxy is stopped with its approved 512 MiB/no-swap cap retained. Existing
 source-bound software and installation evidence remains valid; this increment
 changed only task definitions, analysis drivers, evidence and documentation.
+
+## Historical delivery snapshot
+
+The following statement retains its earlier documentation/exercise status; current
+source validation, actual responses and the new control exercise are described above.
 
 Final documentation validation passed on 66 recorded inputs with zero lint or
 local-link errors. The approved Lychee runtime was removed unchanged; its result

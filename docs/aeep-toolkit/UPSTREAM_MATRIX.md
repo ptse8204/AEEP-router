@@ -406,3 +406,13 @@ agent-skill-eval/Waza/LangGraph pins, existing native OTLP and Lychee 0.24.2 are
 unchanged. No hosted backend, new package or architecture is needed for the fix.
 The original value study is still INCONCLUSIVE. See [the completed capture
 handoff](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md).
+
+### October 21 C13 resource proposal — existing stack and controls
+
+The production recommendation retains the existing local CLI, scripted
+agent-skill-eval, managed fallback and on-demand workers. Installed psutil 6.1.1
+and Docker instrumentation remain selected; official documentation was consulted
+for CPU priming, cache fields and VM state, with no upgrade or service change.
+[The proposal](../../reports/toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md)
+sets prospective targets. Two first-party control-help commands passed, not a new
+upstream/model qualification. No previous optional adapter disposition changes.

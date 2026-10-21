@@ -1,0 +1,45 @@
+{
+  "purpose": "Verify documentation help commands only; not participant feedback or cancellation/removal execution.",
+  "checks": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-B",
+        "-m",
+        "aeep.cli",
+        "assess",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c00f450ef1bf6038519aceb7a8abfe77f145c1fd479388c8ba6e75a61736dbf5",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-B",
+        "-m",
+        "aeep_toolkit.cli",
+        "remove",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "b8666885d22c79dbefbfd654d8819cd15b3f7ebaba083d9a3e2c749dba233779",
+      "stderr_bytes": 0
+    }
+  ],
+  "sandbox": "Network/home denied except exact source; writes denied; clean private HOME and cwd.",
+  "models": 0,
+  "installations": 0,
+  "state_changes": 0,
+  "private_scratch_removed": true,
+  "wall_seconds": 0.9598529157228768,
+  "passed": true,
+  "temporary_resources": {
+    "created_count": 2,
+    "location_prefix": "/private/tmp/aeep-c13-help-",
+    "exact_random_paths": null,
+    "limitation": "The ad-hoc helper did not retain the two random path strings. Both TemporaryDirectory contexts exited without cleanup errors; the successful second directory was explicitly checked absent. No exact names or independent first-directory absence check is invented.",
+    "successful_directory_explicitly_absent": true
+  }
+}

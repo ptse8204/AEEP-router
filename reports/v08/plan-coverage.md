@@ -4763,3 +4763,49 @@ The staged whitespace check reports one exact exception: line 8 of retained
 `lychee-policy-format-review-20261021/docs-check.log` is a blank final line.
 Its raw bytes are preserved. [The exact check result and log hash](../toolkit-v2/c07/capture-explicit-profile-20261021/staged-whitespace-check.json)
 record this discrepancy; no prose or runtime-source whitespace issue remains.
+
+## Toolkit C13 October 21: production proposal and exact assisted controls
+
+The requested [workload/resource recommendation](../toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md)
+keeps the existing Mac CLI, private reports and on-demand controlled workers.
+Proposed targets cover bounded local latency/CPU/RSS, whole-host assessment load,
+network, storage and preserved reserves. A new 30-transaction core qualification
+is separate from at most 12 model turns for resource characterization. Neither is
+executed or authorized by the proposal; no completed comparison will be replayed.
+The old calibration is not relabeled as acceptance or a passing budget.
+
+[The exact control worksheet](../toolkit-v2/c13/production-readiness-20261021/CONTROL_CHECK.md)
+uses existing assess cancel/status and private remove. Source confirms cancel is
+checked before each trial; it is not proof of in-flight termination/reversal.
+The participant runs help only and supplies an actual assisted response. Two help
+commands passed with writes/network/unrelated-home denied and no Router/job/model
+or installation effects. Initial authoring sandbox failure denied rich's getcwd;
+unchanged commands passed from a clean private cwd. Logs and the exact correction
+are retained. This first-party documentation check changes no source, grant,
+dependency, image, candidate, destination or release authority.
+
+The original five human-presented file hashes and all eight approved positive
+execution inputs remain frozen. The participant control response and prospective
+resource qualification are still open; no agent answer supplies them.
+
+Current `make docs-check` passed 67-file Markdown lint after one new blank line was
+fixed, then stopped because Lychee 0.24.2 is absent from PATH. Both logs are retained;
+no binary was downloaded or installed. New/changed local paths and Markdown anchors
+receive the first-party proposal check. That does not replace Lychee or relabel
+the earlier approved link scan as checking these new inputs. The two new proposal/
+control guides passed their own Markdown lint. No broad source suite was rerun
+because runtime code, tests and packaged integration assets are unchanged.
+
+The proposed resource batch preserves the current diagnostic-profile 102-second
+per-task limit rather than the older comparison's 203-second limit. No existing
+approval ceiling is expanded. The authoring helper removed its two private scratch
+directories, but failed to retain their random path strings. The missing temporary directory names are recorded
+in control-command-checks.json; no names are invented and no unrelated cleanup
+is proposed. Final source/pin/local-link checks
+are independent of a human control response or production resource acceptance.
+
+Staged whitespace diagnostics are confined to the unchanged raw Rich help output:
+five padded lines and its final blank line. The exact stdout/hash and check output
+are retained in [the exception record](../toolkit-v2/c13/production-readiness-20261021/staged-whitespace-check.json).
+The human worksheet binds those raw bytes, so they are not normalized. No runtime
+source or prose whitespace issue is hidden by this exception.

@@ -1,0 +1,15 @@
+{
+  "purpose": "Local documentation command verification, not live assessment execution.",
+  "failed_command": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "-B",
+    "-m",
+    "aeep.cli",
+    "assess",
+    "--help"
+  ],
+  "cause": "The authoring sandbox denied the repository cwd; rich calls getcwd during import. No Router/job/cancel/removal or model was started.",
+  "correction": "Keep the same denied home/network/writes and exact source allowance, run with a new private scratch cwd outside the denied home. No software byte change.",
+  "retained_stderr": "assessment-control-help.stderr",
+  "authority": "Standing routine local test-definition delegation; no exact no-retry live operation is replayed."
+}

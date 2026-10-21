@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/__init__.py", line 12, in <module>
+    from .artifact_store import ContentArtifactStore, ResolvedArtifact
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/artifact_store.py", line 16, in <module>
+    import httpx
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/__init__.py", line 15, in <module>
+    from ._main import main
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/httpx/_main.py", line 11, in <module>
+    import rich.console
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/rich/__init__.py", line 17, in <module>
+    _IMPORT_CWD = os.path.abspath(os.getcwd())
+                                  ~~~~~~~~~^^
+PermissionError: [Errno 1] Operation not permitted

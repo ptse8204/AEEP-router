@@ -27,6 +27,10 @@ candidate use, project activation or background service. The reviewed proxy is
 stopped and the task workers have exited. There is no running comparison to pause
 and no native project activation to undo. Do not execute a terminal driver again.
 
+The [exact C13 control walkthrough](production-readiness-20261021/CONTROL_CHECK.md)
+shows the supported `assess cancel`, `assess status` and private `remove` interfaces.
+It asks you to run help only, without changing a completed job or installation.
+
 For a future interrupted managed run, preserve the canonical attempt, receipt,
 usage and partial effects. Stop new dispatch and use the existing assessment
 recovery path before considering another attempt. An error or cancellation does
@@ -55,6 +59,7 @@ resources still require applicable operator authority.
 experimental handoff. Production resource acceptance, demonstrated optional value
 and broader platform claims remain unmet. Both actual human responses are recorded:
 report scope/limits are understood after clarification, while concrete control
-discovery remains partial. Public release has not
-been authorized. This guide was added after that first response and cannot be
+discovery remains partial. The [production workload/resource proposal](production-readiness-20261021/PRODUCTION_WORKLOAD.md)
+recommends the next bounded qualification. Its targets and 12-turn resource batch
+are not execution authority. Public release has not been authorized. This guide was added after that first response and cannot be
 used to relabel it as unaided comprehension.

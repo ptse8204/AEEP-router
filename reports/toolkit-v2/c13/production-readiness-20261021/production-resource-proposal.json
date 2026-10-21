@@ -1,0 +1,118 @@
+{
+  "schema": "aeep.production-resource-proposal.v1",
+  "status": "RECOMMENDED_NOT_ACCEPTED_OR_EXECUTED",
+  "date_local": "2026-10-21",
+  "timezone": "America/Vancouver",
+  "authority": "Operator requested C13 workload/budget recommendations and exact control-check instructions. Standing delegation covers inert definitions, local command verification and documentation. This proposal grants no execution, installation, model, service, release or deletion authority.",
+  "delivery": "One operator on the existing 24 GiB Apple Silicon Mac; foreground Python CLI, local receipt SQLite and private HTML/Markdown. No always-on service or hosted database. Assessment workers remain separate Linux aarch64 containers.",
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "current_handoff_commit": "b63fb6d",
+  "wheel_sha256": "f31cc260477bcd30f41f2981f65aa0e0ee88aeadfdede634887ec396b79286cf",
+  "workload": {
+    "planning_envelope": "Up to 50 local candidate/preview/report operations per working day; at most one explicitly reviewed assessment campaign in progress. Capacity target, not observed user demand or model authority.",
+    "candidate_max_files": 512,
+    "candidate_max_bytes": 8388608,
+    "candidate_max_file_bytes": 1048576,
+    "candidate_max_tree_entries": 1024,
+    "normalized_report_max_bytes": 1048576,
+    "normalized_report_max_run_records": 200,
+    "core_commands": [
+      "list essentials",
+      "plan essentials with explicit reviewed metadata",
+      "candidate on inert local bytes",
+      "report on existing normalized evidence"
+    ],
+    "assessment": "One candidate, capable baseline and treatment in distinct reviewed worker profiles; model execution sequential. Candidate optional in value comparisons; required qualification separate. Excludes arbitrary repo debugging, extra challengers, generated-code training and hosted integrations from this resource proposal."
+  },
+  "targets": {
+    "interactive_wall_p95_seconds": 1.0,
+    "interactive_wall_max_seconds": 3.0,
+    "report_wall_p95_seconds": 2.0,
+    "report_wall_max_seconds": 5.0,
+    "cli_peak_rss_bytes": 268435456,
+    "interactive_cpu_seconds_max": 1.0,
+    "report_cpu_seconds_max": 2.0,
+    "background_aeep_processes_after_60_seconds": 0,
+    "background_aeep_listeners_after_60_seconds": 0,
+    "offline_network_bytes": 0,
+    "assessment_incremental_host_memory_max_bytes": 4294967296,
+    "assessment_incremental_host_cpu_mean_cores_max": 2.0,
+    "assessment_coordinator_peak_rss_bytes": 268435456,
+    "worker_memory_limit_mb_existing": 1024,
+    "proxy_memory_bytes_existing": 536870912,
+    "proxy_memory_swap_bytes_existing": 536870912,
+    "model_task_seconds_max_existing": 102,
+    "minimum_available_host_memory_before_bytes": 6442450944,
+    "minimum_available_host_memory_during_bytes": 2147483648,
+    "minimum_host_free_before_bytes": 59055800320,
+    "minimum_host_free_during_bytes": 53687091200,
+    "private_installed_runtime_max_bytes": 536870912,
+    "new_evidence_per_campaign_max_bytes": 1073741824,
+    "temporary_scratch_max_bytes": 2147483648,
+    "new_retained_evidence_review_at_bytes": 10737418240,
+    "resource_batch_worker_rx_plus_tx_max_bytes": 268435456,
+    "cash_authorization_usd": "0"
+  },
+  "enforcement": "Latency/CPU/whole-host/disk targets are proposed acceptance criteria, not claims of existing enforcement. Existing worker/proxy limits are preserved, not increased. A frozen future driver must implement gates/observations and fail closed on missing measurements.",
+  "prospective_qualification": {
+    "core_valid_transactions": 30,
+    "core_counts": {
+      "candidate": 10,
+      "preview": 10,
+      "report": 10
+    },
+    "core_max_models": 0,
+    "warmups": {
+      "candidate": 2,
+      "preview": 2,
+      "report": 2
+    },
+    "boundary_negative_checks_max": 6,
+    "core_max_cli_invocations_including_warmup_and_negative": 42,
+    "core_rounds": 3,
+    "core_before_baseline_seconds_each": 60,
+    "core_after_baseline_seconds_each": 60,
+    "input_freeze": "Accept targets first, then materialize and hash fresh sizes/content/order and exact command/output verifiers before any measured run. Existing 24-command calibration inputs never become holdout.",
+    "p95": "Nearest-rank per command class, no pooling preview/candidate with report; show all values. Ten observations per class do not establish population tail latency.",
+    "resource_only_model_turns_max": 12,
+    "resource_only_cases": 6,
+    "resource_only_design": "Two cases per each of three bounded editing families, one execution in each arm, sequential seed-balanced order; no holdouts, candidate qualification, admission, efficacy or savings claim.",
+    "resource_batch_wall_seconds_max": 3600,
+    "resource_batch_operations_max": 500,
+    "resource_batch_charged_operation_seconds_max": 12000,
+    "resource_batch_retries": 0,
+    "model_execution_authorized": false,
+    "private_reinstallation_authorized": false,
+    "review_required": "Fresh exact execution bundle with installed artifact/runtime target, data/driver pins, current conformance, current grant balance/expiry, final model/endpoint, collector coverage and teardown. Earlier five diagnostic reservations are terminal and cannot be reused.",
+    "old_comparison_replay": false
+  },
+  "measurement": {
+    "baseline": "Record whole-host CPU/memory/swap/network plus owned process trees and Docker VM/container counters before, during and after. Record Docker warm/cold state separately; no global Docker settings changes.",
+    "host_cpu": "Prime nonblocking CPU counters, discard first value; also retain cumulative CPU-time deltas. Whole-host percent converts to cores using observed logical CPU count.",
+    "host_memory": "Track aggregate host and owned resident memory separately; no sum of container RSS and Docker VM as physical memory. Baseline differences include other work; record an uninterpretable run if attribution is contaminated.",
+    "docker_memory": "Keep raw Docker API usage and cache fields; CLI cache-subtracted memory alone is insufficient for a host-memory claim.",
+    "process": "Retain exact argv identities, elapsed monotonic time, CPU time, sampled RSS and OS peak where available. Sampling alone cannot certify a hard peak ceiling; unavailable authoritative peak remains a gap.",
+    "network": "Offline commands denied network. Live worker RX+TX is its own dimension; proxy forwarded bytes retained separately, not added again. Whole-host traffic is not attributed as model traffic.",
+    "noise": "If baseline host CPU mean exceeds 0.25 logical cores or before/after available-memory medians differ by over 512 MiB, do not claim an attributable whole-system pass. Preserve contaminated run/costs; no automatic repeat.",
+    "energy": "Unknown unless a separately reviewed measurement is available; no privileged collector, battery-life, energy-efficiency or carbon claim.",
+    "tokens": "Preserve provider_report/self_asserted and raw categories; independent provider metering and trusted savings remain unproven. Subscription use is not cash savings."
+  },
+  "stop_rules": [
+    "Stop new dispatch on a target breach, evidence gap, identity drift or exhausted scope. An in-flight operation may need bounded completion and reconciliation; cancelling scheduling is not proof of termination.",
+    "No automatic retries, cap refunds, old-study relabeling or deletion of retained artifacts.",
+    "Keep at least 50 GiB free; stop new effects if the reserve or 2 GiB available-memory guard would be crossed. Do not close unrelated applications or alter Docker globally without the operator."
+  ],
+  "acceptance_scope": "A future passing core result covers only the declared local CLI envelope. The 12-turn batch can characterize assessment resources, not replace required 100+ holdouts or qualify a skill. C13/full production and release remain separate decisions.",
+  "basis": {
+    "calibration": "reports/toolkit-v2/c13/cli-resource-profile-20261021/summary.json",
+    "memory_and_time": "43 MiB sampled CLI maximum and ~0.13\u20130.14 s medians inform headroom, not proof of the proposed envelope. 256 MiB and 1/2-second p95 are usability targets proposed before fresh qualification.",
+    "storage": "Existing installer reservation remains authoritative; 512 MiB is a new acceptance target, not permission to force an oversized closure.",
+    "upstream_sources": [
+      "https://psutil.readthedocs.io/stable/index.html",
+      "https://docs.docker.com/reference/cli/docker/container/stats/",
+      "https://docs.docker.com/desktop/use-desktop/resource-saver/"
+    ],
+    "version_note": "Documentation consulted for metric semantics; installed psutil 6.1.1 and all existing package/image pins remain unchanged."
+  }
+}
