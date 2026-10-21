@@ -59,7 +59,8 @@ resources still require applicable operator authority.
 experimental handoff. Production resource acceptance, demonstrated optional value
 and broader platform claims remain unmet. Both actual human responses are recorded:
 report scope/limits are understood after clarification, while concrete control
-discovery remains partial. The [production workload/resource proposal](production-readiness-20261021/PRODUCTION_WORKLOAD.md)
-recommends the next bounded qualification. Its targets and 12-turn resource batch
-are not execution authority. Public release has not been authorized. This guide was added after that first response and cannot be
+discovery remains partial. The [corrected work priorities](value-priority-20261021/PRIORITIES.md) put comparative
+usefulness and selection first. The earlier [resource proposal](production-readiness-20261021/PRODUCTION_WORKLOAD.md)
+is a historical set of workload hypotheses, not the next campaign or hard product
+requirements. Public release has not been authorized. This guide was added after that first response and cannot be
 used to relabel it as unaided comprehension.

@@ -39,25 +39,28 @@ This recommendation does not supply operator release authorization. The original
 savings. The forced loading event does not establish voluntary use or benefit.
 No architecture, dependency, worker-readiness or installation choice is pending.
 
-## Proposed C13 production qualification
+## Current C13 priority: comparative usefulness and correct selection
 
-The operator requested a workload/budget recommendation and exact control steps.
-The [proposal](production-readiness-20261021/PRODUCTION_WORKLOAD.md) targets the
-existing single-user Mac CLI: up to 50 local operations per day, one reviewed
-assessment at a time, no persistent Toolkit service. CLI targets are 256 MiB peak
-RSS, 1-second p95 intake/preview and 2-second p95 report rendering. Assessment mode
-keeps existing worker/proxy limits and targets a 4 GiB whole-host memory increase,
-with 6 GiB available before start, 2 GiB during operation and the 50 GiB disk reserve.
-These are proposed prospective targets, not measured passes or a new authorization.
+The [operator correction and revised plan](value-priority-20261021/PRIORITIES.md)
+put candidate value, AEEP selection value and safe management ahead of optional
+infrastructure characterization. The earlier numeric SLOs are unaccepted workload
+hypotheses. The separate 30-command/12-turn resource campaign is not the default
+next step. Derive operational targets from actual representative work while
+preserving existing safety guards and reviewed experiment limits.
 
-The bounded next qualification is 30 new local transactions with no models, then
-at most 12 separately reviewed resource-only model turns if needed. It cannot
-replace the original value study or mandatory qualification/holdout counts. The
-[control worksheet](production-readiness-20261021/CONTROL_CHECK.md) points to existing
-operator cancellation/status and exact private-runtime removal. Two help commands
-passed with network/writes/home denied; no live cancellation/removal occurred.
-The actual assisted participant control response is pending. No code, dependency,
-image, worker, model or grant changed in preparing this proposal.
+The [retained-evidence audit](value-priority-20261021/historical-decision-audit.json)
+supports keeping the baseline for the tested scope. Because admission was disabled
+by design, it does not establish live selection quality. Two focused synthetic
+contract tests pass for admission/applicability/revocation and utility/dominance;
+their delayed baseline and constructed metrics are not real capability benefit.
+Representative repository-maintenance tasks, independent cases, applicable patch
+grading and frozen value/selection comparisons are the next substantive work.
+The current mechanical grader cannot establish arbitrary patch correctness.
+
+The existing [assisted control worksheet](production-readiness-20261021/CONTROL_CHECK.md)
+remains available. No participant response, new live authority or release approval
+is inferred from the operator's steering. The [prior operational proposal](production-readiness-20261021/production-resource-proposal.json)
+is preserved unchanged as history, with no new model/install execution.
 
 ## What the delivered stack does
 
@@ -113,7 +116,8 @@ No image, volume or backup was removed here.
 | Actual human comprehension | Actual first/follow-up responses recorded; report understanding demonstrated with help, concrete control discovery partial | Preserve both responses; use the companion control guide. Do not claim unaided control use or population-wide usability |
 | Positive efficacy/automatic use | Zero success gain, no supported 10% time benefit, missing trusted token guardrails and use telemetry | Retain INCONCLUSIVE and keep admission disabled. Any future study needs its own prospective measurement contract; no rerun is required to finish this report |
 | Broader platform/backend claims | V2 journey is observed on Darwin arm64 CLI and Linux aarch64 controlled workers; container evidence does not qualify native or other platforms | Limit the local handoff to the tested scope. Select and qualify another deployment only if it is wanted |
-| Whole-system resource acceptance | CLI characterization now measured; no accepted production workload/budget or applicable held-out resource trial | Freeze production workload and ceilings before any future acceptance run; retain energy/full-workload unknowns |
+| AEEP selection quality | Original campaign disabled admission; real selection-policy benefit was not measured | Compare frozen policies with the same capability inventory and authority on independent tasks; include correct abstention and decision overhead |
+| Whole-system resource acceptance | CLI characterization is limited and proposed numeric SLOs lack representative workload justification | Observe costs on relevant authorized work, then justify prospective operational targets; retain existing hard guards and unknowns |
 | Upstream real-agent head-to-head | Pinned agent-skill-eval Codex launch/token contract does not meet requirements; D40 fallback is implemented and tested | Retain the exclusion and preferred scripted integration. A different upstream contract needs a reviewed source/version and its own qualification |
 | Release/publication | No explicit release decision or disclosure permission for this delivery | Operator chooses whether to accept the bounded local handoff and, separately, whether to authorize a specific release. Nothing is pushed or published automatically |
 

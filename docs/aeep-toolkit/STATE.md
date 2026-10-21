@@ -10,10 +10,14 @@ Both worker profiles pass containment; current source/wheel/docs checks passed.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
-A 24-command CLI resource characterization is complete. Prospective production
-workload/budgets and an exact assisted control worksheet are now prepared. Two
-help commands passed without state changes; the actual participant control response
-and production resource execution remain pending. No release is authorized.
+The operator clarified that comparative usefulness and correct selection are the
+critical path. Infrastructure qualification remains separate. The earlier numeric
+resource targets are unaccepted workload hypotheses; the 30-command/12-turn plan
+is superseded as the next step. Existing safety guards and frozen reviews remain
+binding. A retained-evidence audit distinguishes appropriate abstention from
+unproven live selector behavior. Two targeted synthetic selection-contract tests
+passed; they do not supply new task-value evidence. Human control and release
+gates remain open, with no new model/install authority.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -39,12 +43,13 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
-last_check_command: 'c13/production-readiness-20261021/control-command-checks.json; production-resource-proposal.json; verify-proposal.py; docs-check.log. Earlier source/capture acceptance remains bound to its original logs.'
-last_check_result: 'Production resource targets and exact assisted control worksheet prepared; two help commands passed without models, installs or state changes. Active-document lint passed 67 files; full docs-check stops because pinned Lychee is absent. New local paths/source/pins receive a separate first-party check. No new production-resource pass or execution authority.'
-next_action: 'Read reports/toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md and CONTROL_CHECK.md. Record the pending actual assisted control response. The resource targets are recommendations, not accepted execution authority. Before any qualification, freeze targets/data/driver/artifact pins and obtain applicable installation/model/service review; never replay prior terminal drivers or the old comparison.'
+last_check_command: 'c13/value-priority-20261021/historical-decision-audit.json; selection-contract-result-v2.json; operator-steering.json. Resource proposal85a0c57 is historical/unaccepted.'
+last_check_result: 'Existing live comparison remains INCONCLUSIVE and admission was disabled by design, so it cannot establish live selection quality. Two synthetic admission/applicability/revocation and utility/dominance tests passed with zero models. Infrastructure targets are hypotheses, not hard product requirements.'
+next_action: 'Read reports/toolkit-v2/c13/value-priority-20261021/PRIORITIES.md. Prepare representative real-task/grader mapping and separate capability-value and equivalent-catalog selection comparisons. Source independent cases and freeze policies/thresholds before any fresh holdout. Do not run the superseded resource campaign or replay terminal studies. Observe operational costs on relevant authorized workloads; retain pending human control/release gates.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
-  - 'Prospective resource proposal prepared: core 30 local transactions, optional separately reviewed 12-turn resource batch. Targets are not accepted or executed; full whole-system resource acceptance still lacks applicable frozen measurements. No efficacy claim.'
+  - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Representative real-task snapshots, independent cases, patch grading/mapping and new frozen comparison definitions are not yet prepared or executed.'
+  - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
@@ -2364,3 +2369,31 @@ could not read the denied repository cwd; unchanged commands passed from private
 scratch. Both logs/cause are retained; no source change or live operation occurred.
 An exact assisted human control exercise is prepared and awaiting the participant.
 The original exercise and all five presented-file hashes remain unchanged.
+
+### October 21 operator correction: value and selection are the critical path
+
+The [exact operator steering](../../reports/toolkit-v2/c13/value-priority-20261021/operator-steering.json)
+prioritizes task-specific comparative value and correct selection. Infrastructure
+qualification is a separate adoption gate, not evidence for the central claim.
+[The revised priorities](../../reports/toolkit-v2/c13/value-priority-20261021/PRIORITIES.md)
+supersede the 30-command/12-turn resource campaign as next work. Earlier SLO
+numbers remain historical/unaccepted hypotheses. Existing hard guards, exact
+execution ceilings, frozen utility rules and negative/inconclusive evidence stay
+unchanged. No source, upstream pin, image, model, grant or release changed.
+
+[The retained decision audit](../../reports/toolkit-v2/c13/value-priority-20261021/historical-decision-audit.json)
+confirms baseline sufficiency for the tested recipes and missing comparative
+benefit. Admission was disabled by design, so non-admission cannot prove live
+AEEP selection quality. Two targeted synthetic contract checks passed (72.45 s):
+admission/applicability/revocation and utility/stronger-challenger dominance.
+Their deliberately slower fixture baseline is not real usefulness evidence.
+An initial collection-only sandbox failure and metadata-only correction are
+retained; no tests ran in the failed collection. Both exact owned scratch trees
+were subsequently verified and removed; no external resource was removed.
+
+Next prepare real repository-maintenance task/grader mapping, independently
+sourced cases and separate capability-value/selection-policy study definitions.
+Known prior incidents are development examples, not new holdouts. Observe
+infrastructure on relevant authorized work and justify SLOs from those workloads.
+The actual assisted control response, prospective live authority and public
+release remain separate requirements; this steering is not a control answer.

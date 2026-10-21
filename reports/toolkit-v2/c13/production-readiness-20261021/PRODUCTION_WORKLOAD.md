@@ -1,5 +1,14 @@
 # Recommended production workload and resource budgets
 
+**Superseded as the next-work recommendation.** The operator clarified that
+comparative usefulness and correct selection are the critical path. See the
+[revised priorities](../value-priority-20261021/PRIORITIES.md) and
+[proposal disposition](../value-priority-20261021/resource-proposal-disposition.json).
+The numeric targets below remain unaccepted workload hypotheses, not hard product
+requirements. The 30-command/12-turn resource campaign is not scheduled. Existing
+hard guards and frozen execution reviews remain binding. Original proposal text
+and headings are retained below for history.
+
 Run the first production target on this Mac as a single-user Python CLI with
 local receipts and private HTML/Markdown reports. Keep assessment containers on
 demand, one campaign at a time. This uses the stack already built: agent-skill-eval

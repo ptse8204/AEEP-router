@@ -979,3 +979,22 @@ Point human controls at the existing assess cancel/status and private remove
 interfaces. Cancellation stops subsequent trial scheduling, not in-flight effects.
 The assisted check runs help only and preserves all earlier human responses.
 No new core module, dependency, upstream pin or source behavior is required.
+
+### D75 — Prioritize comparative usefulness and evidence-based selection
+
+The operator clarified AEEP's purpose: evaluate, select and manage capabilities
+by demonstrated task-specific value. Infrastructure qualification is separate.
+D74's numeric resource targets are unaccepted hypotheses, not product requirements;
+its stand-alone 30-command/12-turn campaign is superseded as the default next work.
+Derive operational thresholds from representative task sizes, frequency, user
+latency tolerance and actual whole-system observations. Preserve established
+security/input guards, storage reserve, cash authority and frozen study limits.
+
+Separate candidate value from AEEP selection value and management safety. The
+existing live study is INCONCLUSIVE and disabled admission by design; it cannot
+prove independent live selection quality. Current synthetic contract checks test
+policy mechanics only. Prioritize representative real-task/grader mapping and
+frozen comparisons with equivalent inventories, credible baselines, correct
+abstention and decision overhead. No new service, dependency or core module is
+justified. Negative and inconclusive outcomes remain valid; do not tune holdouts
+or thresholds to obtain a positive result.

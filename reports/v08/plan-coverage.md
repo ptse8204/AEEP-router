@@ -4809,3 +4809,46 @@ five padded lines and its final blank line. The exact stdout/hash and check outp
 are retained in [the exception record](../toolkit-v2/c13/production-readiness-20261021/staged-whitespace-check.json).
 The human worksheet binds those raw bytes, so they are not normalized. No runtime
 source or prose whitespace issue is hidden by this exception.
+
+## Toolkit C13 October 21: operator correction prioritizes value and selection
+
+The [exact steering](../toolkit-v2/c13/value-priority-20261021/operator-steering.json)
+clarifies AEEP's purpose: evaluate, select and manage capabilities from demonstrated
+task-specific value. Infrastructure qualification remains separate and cannot
+validate that claim. [The revised priorities](../toolkit-v2/c13/value-priority-20261021/PRIORITIES.md)
+supersede the standalone 30-command/12-turn resource campaign. Earlier numeric
+budgets are unaccepted hypotheses, to be justified by representative workload
+observations. Existing hard guards, frozen utility thresholds, reviewed caps and
+unavailable measurements are preserved.
+
+The [retained comparison audit](../toolkit-v2/c13/value-priority-20261021/historical-decision-audit.json)
+confirms the appropriate report-level decision is to keep the capable baseline.
+The campaign disabled admission by design, so its non-admission cannot establish
+live selector correctness or benefit. No old campaign was replayed or current
+route/grant inspected or changed. Two focused existing synthetic tests passed in
+72.45 seconds: admission/applicability/revocation and incremental utility/dominance.
+Their delayed baseline/constructed measurements are software fixtures only.
+
+An initial sandbox collection failed on parent-directory metadata access before
+any test executed. The v2 exact routine amendment allows only ancestor metadata,
+keeps unrelated home contents/network denied, and bounds conftest discovery.
+Both failed/passed logs and exact scratch paths are retained. Two internal pytest
+current links were verified to target their own scratch tree before cleanup;
+only the two marked owned test trees were removed. No model, install, image,
+service, existing assessment grant or public release changed.
+
+The next comparative work needs representative repository-maintenance snapshots,
+independent cases, protected patch grading and frozen candidate-value/selection
+policy definitions with equivalent tool inventories. Known repair incidents may
+be development examples, not independent holdouts. Keep operational observations
+with relevant authorized workloads and document any separate measurement blocker.
+The pending actual control response remains a separate assisted human exercise.
+
+Documentation verification passed 67 active Markdown inputs and the four changed
+report guides. `make docs-check` then stopped because Lychee 0.24.2 remains absent;
+no installation or replay of its retired approved runtime occurred. A first-party
+local-link/anchor and source-pin check covers this steering increment separately.
+The original live-report files, five human-presented files, four control-worksheet
+bindings, eight positive-check inputs and historical resource proposal are retained.
+No full source suite was repeated because runtime source/tests/integration assets
+are unchanged; the two focused tests address the newly prioritized selection claim.

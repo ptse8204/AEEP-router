@@ -416,3 +416,13 @@ for CPU priming, cache fields and VM state, with no upgrade or service change.
 [The proposal](../../reports/toolkit-v2/c13/production-readiness-20261021/PRODUCTION_WORKLOAD.md)
 sets prospective targets. Two first-party control-help commands passed, not a new
 upstream/model qualification. No previous optional adapter disposition changes.
+
+### October 21 value/selection steering supersedes resource-first sequencing
+
+No upstream pin or adapter disposition changed. Keep agent-skill-eval's actual
+scripted scope, the managed fallback and existing policy/recipe/worker/report
+infrastructure. Comparative usefulness and selection behavior are now the critical
+path; infrastructure checks do not qualify either. New real-task snapshots,
+grader mapping and independent cases still need review. The prior 30-command/
+12-turn resource proposal is historical, not scheduled; arbitrary numeric SLOs
+are not adopted product requirements. See [the corrected priorities](../../reports/toolkit-v2/c13/value-priority-20261021/PRIORITIES.md).
