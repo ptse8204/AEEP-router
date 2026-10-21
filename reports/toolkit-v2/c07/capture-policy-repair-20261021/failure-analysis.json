@@ -1,0 +1,31 @@
+{
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "human_approved_bundle_sha256": "ec20db3b1c77fca1d22c147ba69a02e397909cefafa656486fb8ca38f531a717",
+  "routine_identity_amendment_sha256": "4d7b944f8ba56a62724bbfe31f9b02c87133f5eaf2ee7fbe17a70f8937352dac",
+  "identity_amendment_authority": "docs/ASSESSMENT_TESTING.md standing September25/27 delegation; accounting operation identity only, preserving exact human-approved artifacts/effects/ceilings.",
+  "build_result_sha256": "5cc67beded7a9d24da305d8f1da5bee51efa4277cf792b6bf693db9a58c6f8e5",
+  "what_failed": "BuildKit attempted Docker Hub metadata resolution for an existing local repository@digest parent; the registry denied access. Docker image inspect had resolved the same repository digest and showed no ONBUILD. Local inspect was insufficient to prove BuildKit source resolution.",
+  "stage": "control image FROM metadata, before COPY/image export/worker/collector/model",
+  "root_cause_limit": "The log proves failed registry resolution. Why this newly built namespaced parent missed local BuildKit resolution while the earlier parents succeeded is not established. Do not label credentials or missing images as the cause.",
+  "images_created": 0,
+  "workers_started": 0,
+  "model_turns": 0,
+  "successful_image_pull_evidenced": false,
+  "network_bytes": null,
+  "automatic_retry": false,
+  "proxy_started_by_bundle": false,
+  "independent_package_result": "15 installed CLI checks plus1 retained capture check passed;33 cached wheels;0 downloaded bytes;runtime/scratch removed.",
+  "independent_docs_result": "Pinned version check passed; docs-lint failed1 MD012 issue in STATE.md at2136. The link scan did not run. Runtime removed unchanged.",
+  "safe_correction": "Removed duplicate blank line;67-file cached offline docs-lint now passed. A fresh exact local-tag build/docs amendment is prepared, unexecuted. Current-source tests/wheel remain valid and will not be repeated.",
+  "metadata_followup": "One additional read-only operation retained both built parent IDs/tags/RepoDigests and absent ONBUILD. It then failed looking up an old untagged base as :latest; this incomplete check/cost remains, not a complete pass.",
+  "grant_after": [
+    12709,
+    3739,
+    117958.15766613325,
+    "0.0"
+  ],
+  "next_bundle_sha256": "3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2",
+  "original_study_replayed": false,
+  "release_or_admission": false
+}

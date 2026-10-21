@@ -4605,3 +4605,49 @@ source-bound package/docs/application evidence is retained rather than relabeled
 contains the scope and actual predecessor facts. No architecture, dependency,
 model, credential or evidence-policy change is proposed. Human/resource/release
 acceptance remains separate.
+
+## October21: approved bundle outcomes and next exact action
+
+Current source7707756/df8f0b9e… passed all12 integrated checks. Both full runs
+passed1589 tests with21 skips; displayed coverage82%, both branch gates passed.
+The current f31cc260… wheel passed15 offline CLI checks plus1 retained capture check
+using32 exact cached dependency wheels, with0 downloads; private runtime/scratch
+removal passed. Source remains unchanged. Do not repeat regression/coverage/build
+or package installation for this packaging-only amendment.
+
+The operator explicitly approved bundleec20db3b…. A pre-execution reused accounting
+ID was replaced under the standing routine-definition delegation; original bytes,
+approval and exact successor4d7b944f… remain retained. Collector execution failed
+BuildKit parent-source metadata resolution before COPY/image/worker creation.
+Docker image inspect had resolved the same name@digest and absent ONBUILD. BuildKit
+nevertheless attempted Docker Hub metadata and was denied. The actual resolver
+cause remains unknown; no sign-in is warranted and no successful pull is evidenced.
+No new model turns ran. The independent pinned docs check stopped on1 MD012
+blank-line issue before the link scan. Runtime removal passed. That formatting is
+corrected and67-file offline cached Markdown lint passes; the link scan is pending.
+
+[Failure analysis](../toolkit-v2/c07/capture-policy-repair-20261021/failure-analysis.json)
+and [final resource check](../toolkit-v2/c07/capture-policy-repair-20261021/final-resource-result.json)
+retain failures/costs, stopped proxy, exact parents and absent residual task workers.
+One earlier read-only metadata follow-up ended on an old untagged-base :latest lookup;
+its partial evidence and charge remain. Grant12,710 operations/3739 turns/
+117958.36763046728 operation seconds/cash0. Host free154124693504 bytes; no images,
+volumes, backups or unrelated work were removed. Historical study remains inconclusive.
+
+[The prepared local-tag/docs bundle](../toolkit-v2/c07/capture-local-tag-20261021/README.md),
+digest3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2, awaits the requested
+explicit amendment approval because both predecessor reviews forbid automatic retry.
+It binds the same collector/parent IDs through existing local tags, adds inherited
+configuration/layer checks, retains fresh containment before at most4 diagnostic
+turns, and repeats only the corrected-data docs check. All pins, six driver parses
+and fresh accounting identity passed preflight. No source, dependency, model,
+credential or spending change. Human comprehension, whole-host resource acceptance
+and release remain distinct external gates.
+
+Final status documentation passed67-file Markdown lint and the4 changed report
+guides passed their own lint. A first-party path check found no missing target
+among505 local links in9 changed guides/status records; it does not validate
+anchors or replace Lychee. Source and all pending review pins remain unchanged,
+as do the3 original comparison artifacts and2 human-exercise guides. The staged
+whitespace check flags only the retained BuildKit log's Dockerfile-rendering blank
+line (control-build.log:16). That raw failure evidence is preserved unchanged.

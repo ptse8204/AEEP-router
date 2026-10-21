@@ -1,0 +1,38 @@
+{
+  "checks": [
+    {
+      "role": "control",
+      "case": "explicit_request",
+      "input_schema_valid": true,
+      "explicit_instruction_reaches_rendered_prompt": true,
+      "configured_timeout_will_be": 102,
+      "model_calls": 0
+    },
+    {
+      "role": "control",
+      "case": "optional",
+      "input_schema_valid": true,
+      "explicit_instruction_reaches_rendered_prompt": false,
+      "configured_timeout_will_be": 102,
+      "model_calls": 0
+    },
+    {
+      "role": "treatment",
+      "case": "explicit_request",
+      "input_schema_valid": true,
+      "explicit_instruction_reaches_rendered_prompt": true,
+      "configured_timeout_will_be": 102,
+      "model_calls": 0
+    },
+    {
+      "role": "treatment",
+      "case": "optional",
+      "input_schema_valid": true,
+      "explicit_instruction_reaches_rendered_prompt": false,
+      "configured_timeout_will_be": 102,
+      "model_calls": 0
+    }
+  ],
+  "scope": "Pure input-schema/prompt-render checks; no plan approval, worker/conformance or Codex execution. The new preparation tightens both inherited203s timeouts to the reviewed102s ceiling.",
+  "actual_template_renderer_checked": true
+}

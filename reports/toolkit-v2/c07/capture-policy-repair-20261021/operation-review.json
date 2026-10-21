@@ -1,0 +1,111 @@
+{
+  "purpose": "One prospective test of the same-scope policy/telemetry launch correction, then up to four gated public capture tasks; no historical replay.",
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "collector_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+  "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+  "grader_runtime_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "existing_proxy": {
+    "proxy_name": "aeep-reviewed-model-proxy",
+    "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "proxy_image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+    "proxy_memory_bytes": 536870912,
+    "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6"
+  },
+  "model_and_effort": {
+    "model_id": "gpt-6-astra",
+    "reasoning_effort": "medium"
+  },
+  "builds": {
+    "control": {
+      "parent": "sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96",
+      "parent_reference": "aeep-toolkit-v2/capture-collector-20261021@sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96",
+      "onbuild": null,
+      "local_reference_verified": true,
+      "tag": "aeep-toolkit-v2/capture-policy-20261021:control",
+      "dockerfile_sha256": "ddde81f263df823b4bc5c37a146c144d213a62fc6db339f47b4764c838663289",
+      "collector_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3"
+    },
+    "treatment": {
+      "parent": "sha256:74056005c288c3475e1038c09f9682e95ee7471c96d64f994faf2a3a9c0c319b",
+      "parent_reference": "aeep-toolkit-v2/capture-collector-20261021@sha256:74056005c288c3475e1038c09f9682e95ee7471c96d64f994faf2a3a9c0c319b",
+      "onbuild": null,
+      "local_reference_verified": true,
+      "tag": "aeep-toolkit-v2/capture-policy-20261021:treatment",
+      "dockerfile_sha256": "cd083de840e375fe2c8ba004fcbd0b0e524e4efb293072470a311957a8a8413e",
+      "collector_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3"
+    }
+  },
+  "maximum_build_growth_bytes": 1073741824,
+  "minimum_host_reserve_bytes": 53687091200,
+  "inputs": {
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/prepare-collector.py": "0529056c41e63de78401878688301a9006c0f95d446089dc615c6a66300285e6",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/run-collector.py": "228163b13edcb53eb2d62b48a9b36976f90c078d9e04d73d6235439a63af4d09",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/run-checks.py": "c2a2983577e4657588f578e8916594cac2511c38ed8e58af55e404eb10ee2b97",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/prepare-bundle.py": "f41590bf8c6625805505fed5c2a32684d3cb7bc77652bc5351c6caa6f6bf172f",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/run-diagnostics.py": "9dfcf4f95fc5e053094457ac927778837a3f6ee81b18e5553459eb458a90e7b8",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/execute-bundle.py": "fc6cb5bacf061d2bc3e65a41bd77c477db7cecda0fa61a2b0251d77fedc9890c",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/assemble-collector-boundary.py": "a3a762760168171e9944642c1b634342e7ca29364fd2fa04a9466ed9ab65c93f",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/run-repair.py": "87affa85975229f5b976221c6fa34fee67257eb55084db4aced4bdd490a54541",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/diagnostic-tasks.json": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/diagnostic-input-preflight.json": "6b6657db5db1ac24b5942ac791ed9f47fa9a4a5fdbf90da1dffe98ae6d5d389d",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/image-metadata-result.json": "809b12c9192d3408236c44d9fb4dd272b8456a93e2bba52997266579cc751548",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/regression-before.log": "4dbe9bd03f35a76ff2139c494dc864ad36f4bf53a41291633014891723ae644b",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/focused.log": "b2ef6a2f986e8581e870a79816b952177b4501b8cd5a7dfef25b06c33bfac276",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/checks.json": "b3e75efd94e0b828ca950a134e16f323845da1b2776c2fe4f8bb97fe3e8263b4",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/source-stability.json": "5b47edd22ecb446115ad2f0f462a288093b51f9d07e56155e799820200a2062a",
+    "src/aeep/hosts/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/image-control/Dockerfile": "ddde81f263df823b4bc5c37a146c144d213a62fc6db339f47b4764c838663289",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/image-control/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/image-treatment/Dockerfile": "cd083de840e375fe2c8ba004fcbd0b0e524e4efb293072470a311957a8a8413e",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/image-treatment/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/09.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/08.log": "59dc835b09fa749bf1c2f3f7a3501cc6677a99cca36ece773baad08745557b57",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/00.log": "a08bd2ba2908147dca941e8db83b1c1883d551d18f78870590c02ff8c4b6e77a",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/01.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/03.log": "463bfe0471497d8ab08886a38da52171e94dd2e80138821b0d535b87b04e7e73",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/02.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/06.log": "4a65f87c3bc4473a14d2abfdb49f9a731452ca559f67ef75c69cc7ebe2ad24ed",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/07.log": "f88894cb084bb60370ed94016bfb259c38ff869167dcf9b3c2b11c2055f88695",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/11.log": "137b2e46a9c73ff9fb5c1a2e293ed3d88a352065eb30260358a0db521662425f",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/05.log": "b9f225cc8401a0c06664fea61877daa9fd038abb393243857d19a8cac75d18db",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/04.log": "00f10caaf3c8aaaad219b29eb9964c34be2d2fe4143b7d489d642d8e41359b38",
+    "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/10.log": "467364859149a6d51b16354d7d71beef180cec376644e32fbdc65429522ad603"
+  },
+  "prior_source_review": "capture-local-parent-20261021: approved builds/collector denial passed; effective-policy and treatment inventory conformance failed. All failures/costs retained.",
+  "source_change": "Move only telemetry -c options before app-server, after the existing global policy options. Synthetic regressions verify this launch contract; actual installed Codex behavior is unverified until this review runs.",
+  "actions": [
+    "Build two COPY-only derivatives of the two exact already-local parent images. Validate name@digest and absent ONBUILD instructions first. No RUN, pull, dependency install or new destination. Each fresh worker starts only its reviewed private loopback collector.",
+    "Resolve output image IDs and freeze exact current-source definitions under September25/27 authority. Tighten the inherited task timeout to the reviewed102-second cap in both arms.",
+    "Run one fresh two-worker inspection: the unchanged11 probe groups plus denial against each actual collector endpoint. Both must pass before any model turn.",
+    "Run the exact explicit-read-request pair first; complete token captures plus bound positive instruction loading gate the optional pair. Maximum4 task turns, no holdouts, new value study, admission or automatic retry.",
+    "Restore the existing proxy stopped and remove only new transient workers/private security scratch. Retain output tags/IDs, parents, old records, volumes, backups and unrelated work."
+  ],
+  "limits": {
+    "maximum_model_turns": 4,
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600,
+    "cash_usd": 0,
+    "minimum_host_free_bytes": 54760833024,
+    "maximum_diagnostic_task_seconds_each": 102,
+    "maximum_diagnostic_lifecycle_seconds": 1200,
+    "maximum_diagnostic_plans": 2,
+    "maximum_diagnostic_assessment_operations": 64,
+    "maximum_transient_model_workers": 4,
+    "maximum_build_operations": 1,
+    "maximum_build_seconds": 360,
+    "maximum_builds": 2
+  },
+  "forbidden": [
+    "Credential reading/copying/login",
+    "New hosted/persistent services, model destinations, paid calls or hosted telemetry",
+    "Changing source or dependencies during execution",
+    "More than4 task turns or automatic retries",
+    "Historical evidence/threshold changes",
+    "Image/volume/backup removal, activation, release, publication or pushing"
+  ],
+  "approval_record": "operator-approval.json; exact raw review hash, with explicit human wording and bundle lineage",
+  "execution_started": false
+}

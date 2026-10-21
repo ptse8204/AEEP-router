@@ -88,3 +88,19 @@ No collector or diagnostic model turn started. The new
 uses the existing local parent names with their unchanged immutable digests and
 checks them before building. Actual BuildKit resolution remains untested; explicit
 approval is needed because the failed predecessor forbids automatic retries.
+
+### Current October21 status
+
+The policy-launch correction in7707756 passed all12 source checks and its current
+wheel passed16 offline installed checks. Its approved collector image build then
+failed BuildKit registry metadata resolution before any image, worker or model
+started. No corrected live telemetry claim is supported yet. The independent docs
+check stopped at one blank-line lint error before scanning links; formatting is fixed.
+
+[The exact local-tag/docs amendment](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
+retains the same parent image IDs, collector bytes and four-turn cap. It checks
+parent identity/configuration/layers and requires fresh conformance before tasks.
+Its approval was requested because the failed exact reviews prohibit automatic
+retries. No source or package revision is needed. Historical564 captures still
+pass consistency verification, with provider-report provenance and original
+candidate loading unknown. No efficacy, admission or release claim changes.

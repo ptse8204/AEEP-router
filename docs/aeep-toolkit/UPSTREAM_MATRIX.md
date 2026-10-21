@@ -368,3 +368,16 @@ resolved correctly under read-only inspection and have no ONBUILD commands.
 requires approval under the prior no-retry rule. No upstream version, dependency,
 collector source, model or destination changes. The completed package/docs results
 and original comparison remain unchanged; live collector behavior is unqualified.
+
+### October21: current-source installation passes; no upstream replacement
+
+The current7707756 wheel passed15 offline CLI checks and1 retained capture-chain
+check with32 unchanged cached dependency pins and no downloads. Its private runtime
+was removed. The12 integrated source checks passed. No upstream version or license
+changed. Collector packaging failed local-parent resolution in BuildKit before
+worker/model execution; local image inspection did not predict that resolver result.
+The pinned docs attempt stopped at a blank-line lint error before its link scan;
+formatting is corrected and Markdown lint passes. The proposed
+[local-tag/docs amendment](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
+keeps parent IDs, collector bytes and Lychee0.24.2 unchanged. It is not yet executed.
+No dependency/framework change, hosted service or credential intervention is needed.

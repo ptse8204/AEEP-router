@@ -907,3 +907,19 @@ Codex parser semantics. Require fresh source-bound conformance before concluding
 that this correction resolves the observed failure. No guard or threshold is
 relaxed. New collector/wheel bytes require their own exact review after one
 integrated verification cycle. See [the engineering record](../../reports/toolkit-v2/c07/capture-policy-repair-20261021/README.md).
+
+### D69 — Preserve the terminal failures; propose existing local tags with ancestry checks
+
+The approved current-source wheel passed16 offline installed checks; no source,
+upstream pin or dependency correction is needed. The collector build failed before
+image creation because BuildKit looked up an existing local repository@digest in
+the registry. Docker inspect success alone did not prove BuildKit resolution.
+The fresh amendment uses the same two parent IDs via their existing local tags,
+checks them before and after building, and verifies inherited execution configuration
+and the exact parent filesystem-layer prefix plus one COPY layer. Treat the build
+as unverified until it runs. Do not infer a credential need or switch builders.
+The same pinned docs checker needs a fresh exact attempt after its lint-only
+blank-line failure. Keep the historical attempts and costs; no automatic retry.
+[The exact two-action bundle](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
+requires explicit approval under its predecessors' no-retry rules. No new package
+installation, full test cycle or original comparison replay is justified.

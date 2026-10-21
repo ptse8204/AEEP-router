@@ -1,5 +1,15 @@
 # Correct the local parent references
 
+## Latest October21 result
+
+These original proposal/execution records are historical. Source7707756 now passes
+all12 integrated checks and16 current-wheel offline checks. The later approved
+collector build failed BuildKit source resolution before image/worker/model creation;
+the independent docs attempt stopped on a blank-line lint error, now fixed.
+Continue only from [the local-tag/docs amendment](../capture-local-tag-20261021/README.md),
+bundle3b10b05e…, after its requested approval. Never replay this terminal driver.
+The original sections below retain their historical scope and counters.
+
 The operator approved review70c19b6e…, and the one-shot control build failed before
 creating an image. BuildKit interpreted the bare `FROM sha256:…` value as a Docker
 Hub repository named `library/sha256`. It attempted a registry metadata lookup,

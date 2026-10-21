@@ -1,0 +1,27 @@
+usage: aeep-toolkit [-h]
+                    {list,plan,doctor,report,export-preview,trace-preview,install-plan,install,remove,candidate,discover,import-report,eval} ...
+
+positional arguments:
+  {list,plan,doctor,report,export-preview,trace-preview,install-plan,install,remove,candidate,discover,import-report,eval}
+    doctor              Read project connection metadata without starting
+                        services
+    report              Summarize normalized records without executing an
+                        evaluator
+    export-preview      Prepare a minimized local sharing document; never
+                        publishes
+    trace-preview       Prepare minimized OTLP/HTTP JSON from a receipt; no
+                        exporter or network
+    install-plan        Review a selected closure of local wheels; no writes
+                        or execution
+    install             Operator-only private runtime installation/removal
+    remove              Operator-only private runtime installation/removal
+    candidate           Inspect exact local skill payload without executing or
+                        installing it
+    discover            Search explicitly configured sources and retain
+                        provenance; never install candidates
+    import-report       Read upstream observations; never execute software or
+                        qualify claims
+    eval                Run an explicitly selected existing evaluation backend
+
+options:
+  -h, --help            show this help message and exit

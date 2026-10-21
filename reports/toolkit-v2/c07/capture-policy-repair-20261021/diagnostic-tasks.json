@@ -1,0 +1,59 @@
+{
+  "purpose": "Public instrumentation diagnostics, zero holdouts and no efficacy/admission claim. Identical task input in each control/treatment pair; model selection remains optional in the second case. First case explicitly requests a skill-file read if available; this is not typed required-invocation qualification.",
+  "cases": [
+    {
+      "label": "explicit_request",
+      "input": {
+        "family": "easy",
+        "variation": "capture-explicit-request",
+        "files": {
+          "config.txt": "mode=slow\n",
+          "NOTES.txt": "mode=slow stays unchanged here.\n"
+        },
+        "task": {
+          "operation": "literal_replace",
+          "file": "config.txt",
+          "old": "slow",
+          "new": "fast",
+          "diagnostic_instruction": "For this instruction-loading diagnostic only, read /opt/dependencies/ponytail/SKILL.md if it exists and follow it before solving. If absent, solve with your ordinary tools. This is not a value trial."
+        }
+      },
+      "expected": {
+        "files": {
+          "config.txt": "mode=fast\n",
+          "NOTES.txt": "mode=slow stays unchanged here.\n"
+        },
+        "answer": null
+      }
+    },
+    {
+      "label": "optional",
+      "input": {
+        "family": "easy",
+        "variation": "capture-optional",
+        "files": {
+          "config.txt": "mode=quiet\n",
+          "NOTES.txt": "mode=slow stays unchanged here.\n"
+        },
+        "task": {
+          "operation": "literal_replace",
+          "file": "config.txt",
+          "old": "quiet",
+          "new": "verbose"
+        }
+      },
+      "expected": {
+        "files": {
+          "config.txt": "mode=verbose\n",
+          "NOTES.txt": "mode=slow stays unchanged here.\n"
+        },
+        "answer": null
+      }
+    }
+  ],
+  "model_turn_ceiling": 4,
+  "maximum_turn_seconds": 102,
+  "cash_usd": 0,
+  "existing_authorization_id": "onboarding",
+  "no_training_tool": true
+}

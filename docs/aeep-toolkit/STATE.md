@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21, policy repair in progress:** The operator approved local-parent amendment8056e725…. Both COPY-only image builds succeeded; both collector endpoints denied sandbox access. Pair conformance then failed the required disabled-feature checks and treatment inventory consistency. Both workers were removed and the proxy restored stopped; zero model turns ran. The relay mixed policy -c overrides before app-server with telemetry overrides after it. A narrow source correction keeps both in one scope. Two synthetic regression cases fail on the old ordering and pass after correction;117 focused checks passed. Actual Codex parsing and corrected conformance remain unverified. New source df8f0b9e5437… now needs one integrated verification cycle and an exact changed-collector/wheel review. Earlier package/docs results and the original inconclusive comparison retain their old source bindings. No pending architecture, model, dependency or credential choice.
+**Status as of 2026-10-21, approved bundle completed with two failures:** Source7707756 passed all12 integrated checks, including both1589-test runs and coverage gates. Its current wheel passed15 installed CLI checks plus1 retained capture-chain check, using32 exact cached dependencies with no downloads; the private runtime was removed. Human-approved bundleec20db3b… reached a terminal collector build failure: BuildKit attempted registry metadata for an existing local repository@digest and was denied before image creation. No collector/worker/model started. The independent docs check stopped on one STATE.md blank-line lint error before the link scan; formatting is corrected and67-file lint now passes. No source or wheel changed after verification. The fresh local-tag/docs amendment3b10b05e… is preflighted and awaiting the requested approval. The stopped proxy, unchanged parents, no residual task workers and host reserve were checked. The original study remains INCONCLUSIVE. No architecture, model, dependency or credential decision is pending.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -25,21 +25,21 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: '44bdad98c1a6b2d845c4e084afe07bbf96a0073e'
-last_check_command: 'Approved capture bundle: collector-result.json; package-review-telemetry-20261019/execution/summary.json; lychee-telemetry-review-20261019/execution-result.json'
-last_check_result: '8056e725 builds passed; collector access denied in both workers; canonical pair conformance failed disabled_features and treatment candidate inventory.0 model turns. Safe source correction passes2 new synthetic regression cases and117 focused checks; full new-source verification pending.'
-next_action: 'Complete capture-policy-repair-20261021/run-checks.py once for source df8f0b9e5437. Prepare one exact bundle for changed collector images/fresh conformance/maximum4 diagnostics and current wheel. Do not execute new collector bytes under older approvals or replay terminal drivers.'
+last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
+last_check_command: 'capture-policy-repair-20261021/validation/checks.json; package-review-policy-20261021/execution/summary.json; bundle-execution-results.json; final-resource-result.json'
+last_check_result: '12 integrated checks pass; ordinary and coverage1589 passed/21 skipped,82% displayed coverage,both branch gates. Current wheel16 offline checks pass. Collector build failed source resolution;0 model turns. Docs lint failure fixed;67-file lint pass, fresh link scan pending.'
+next_action: 'Await exact bundle3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2 approval. Follow capture-local-tag-20261021/README.md and run its pinned composite once. All earlier started drivers are terminal. Do not rebuild/reinstall the unchanged wheel or repeat source suites.'
 blocked_actions:
   - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
   - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
   - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Both70c19b6e and8056e725 were explicitly approved and executed to terminal/dependency stops. New collector bytes and resulting current wheel need a concrete exact review after integrated verification; maximum4 diagnostic turns remain unused.'
+  - 'ec20db3b was explicitly approved and executed. Its collector build and docs check failed terminally. Exact successor bundle3b10b05e for local-tag resolution and corrected docs data requires approval because the preceding reviews forbid automatic retries. The4 diagnostic turns remain unused.'
   - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The completed study finds zero success gain and no 10% time benefit. Strict token pairs are 0/105; candidate-specific use and generated-tool invocation are unknown. Generalization beyond bounded mechanical tasks is unassessed.'
-  - 'The corrected44bdad9 wheel passed15 installed CLI checks plus1 retained capture check. New-source live collector remains unqualified until corrected images pass. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
+  - 'The current7707756 wheel passed15 installed CLI checks plus1 retained capture check. Its live collector remains unqualified until the fresh images and checks pass. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
 
 ```
 
@@ -2133,7 +2133,6 @@ architecture is proposed. The predecessor's explicit no-retry rule requires
 approval of this concrete amendment before one fresh attempt. Original comparison,
 package/docs evidence and C13 human/resource/release gates remain unchanged.
 
-
 ### October21 — local-parent builds succeeded; effective-policy check failed
 
 The operator explicitly approved8056e725…. Both local reference/ONBUILD guards
@@ -2165,3 +2164,61 @@ is preserved for its own source. One required integrated cycle is next, then one
 exact bundle for the changed collector execution and changed wheel. No new model,
 installation or third-party execution is authorized by editing this source. The
 unchanged historical comparison and human/resource/release gates remain separate.
+
+### October21: current source and wheel pass; collector packaging/docs amendment pending
+
+The actual operator response approved bundleec20db3b…. Before launch, preflight
+found a copied completed build-operation ID. The routine accounting-identity
+amendment4d7b944f… uses the September25/27 delegation, keeps all human-approved
+software/effects/ceilings, and preserves both original review/runner bytes and
+actual human approval. No second human approval is claimed for that metadata edit.
+
+All12 integrated checks passed for7707756/source df8f0b9e…: ordinary1589 passed,
+21 skipped; coverage1589 passed,21 skipped;82% displayed coverage, both branch gates,
+compile, schemas, toolkit fixtures, Ruff, mypy and wheel/sdist. The wheel
+f31cc260477bcd30f41f2981f65aa0e0ee88aeadfdede634887ec396b79286cf
+then passed15 sandboxed CLI checks plus1 retained capture-chain check with32 exact
+cached dependency wheels, zero downloaded bytes. Its private runtime/scratch were
+removed. No new package build/installation or broad test cycle is needed for the
+unchanged source. The old study artifacts and their evidence meanings remain intact.
+
+The collector's control build failed before COPY/image export. Docker inspect
+resolved the existing parent name@digest and confirmed absent ONBUILD, but BuildKit
+attempted Docker Hub metadata and was denied. The actual resolver difference is
+unexplained; this does not establish a credential requirement or missing image.
+No image, collector worker or diagnostic model turn was created. Registry metadata
+bytes were not measured. Preserve the failed build and no-retry rule. The independent
+pinned docs check failed one MD012 blank-line issue in STATE.md before the link
+scan. The exact binary runtime was removed unchanged. The blank line is corrected;
+67-file cached offline Markdown lint passes. The old successful link scan remains
+historical and cannot turn this failed attempt into a pass.
+
+One metadata follow-up verified both current parent tags/IDs, then failed an old
+untagged-base :latest lookup; that incomplete result and charge are retained.
+A separate final read-only check passed: proxy stopped, exact parent tags/IDs
+unchanged with no ONBUILD, no containers referencing either new parent, and
+154124693504 bytes host free. No image/volume/backup/user-work removal occurred.
+Grant now12,710 operations,3739 logical task turns,117958.36763046728 operation
+seconds,cash0; all preceding costs remain. These are operation seconds, not whole-host
+resource acceptance or prospective user savings.
+
+[The exact local-tag/docs amendment](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
+is prepared under digest3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2.
+It keeps both parent IDs and collector bytes, uses their existing local tags,
+checks inherited execution configuration and exact filesystem-layer ancestry,
+and retains fresh conformance before at most4 public task turns. It reruns only
+the corrected-data offline docs check, with no package install. Six driver parses,
+all source/input/review pins and the fresh accounting ID passed preflight. Actual
+BuildKit local-tag resolution and corrected Codex conformance remain untested.
+The exact preceding reviews forbid automatic retries, so actual explicit approval
+was requested. No further architecture, model, dependency, credentials or spending
+choice is needed. C13 still needs actual human comprehension, frozen whole-host
+resource acceptance and a separate release decision; agent reviews cannot close them.
+
+Final status documentation passed67-file Markdown lint and the4 changed report
+guides passed their own lint. A first-party path check found no missing target
+among505 local links in9 changed guides/status records; it does not validate
+anchors or replace Lychee. Source and all pending review pins remain unchanged,
+as do the3 original comparison artifacts and2 human-exercise guides. The staged
+whitespace check flags only the retained BuildKit log's Dockerfile-rendering blank
+line (control-build.log:16). That raw failure evidence is preserved unchanged.

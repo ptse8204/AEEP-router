@@ -1,0 +1,53 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "runner_sha256": "fc6cb5bacf061d2bc3e65a41bd77c477db7cecda0fa61a2b0251d77fedc9890c",
+  "actions": [
+    {
+      "name": "collector",
+      "review": "reports/toolkit-v2/c07/capture-local-tag-20261021/operation-review.json",
+      "runner": "reports/toolkit-v2/c07/capture-local-tag-20261021/run-repair.py",
+      "maximum_seconds": 3600,
+      "terminal_result": "reports/toolkit-v2/c07/capture-local-tag-20261021/execution-result.json",
+      "pass_conditions": {
+        "build_passed": true,
+        "collector_passed": true,
+        "diagnostics_passed": true,
+        "diagnostic_records": 4,
+        "proxy_restored_stopped": true
+      },
+      "review_sha256": "5fddaf27a0df48374ed67217681ed0b62dfa31b41336ad791aa6c3daf4139068",
+      "started_marker": "execution-started.json"
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-policy-format-review-20261021/operation-review.json",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-policy-format-review-20261021/run-review.py",
+      "maximum_seconds": 240,
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-policy-format-review-20261021/execution-result.json",
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      },
+      "review_sha256": "91eb6606af0061ea5a9bb98eb56af1b9bdbd09b1568cbf3be9ca18fb58eb79cd",
+      "started_marker": "execution-started.json"
+    }
+  ],
+  "purpose": "One explicitly approved local-tag packaging amendment after the preceding terminal BuildKit metadata-resolution failure; unchanged collector and exact parent image identities, then the same gated maximum4 public capture tasks.",
+  "approved": false,
+  "execution_started": false,
+  "parent_approved_bundle_sha256": "ec20db3b1c77fca1d22c147ba69a02e397909cefafa656486fb8ca38f531a717",
+  "permissions": "Two exact-parent COPY-only images, fresh no-model conformance, at most4 gated existing-grant logical task turns; one same-binary offline docs check. No package installation or source correction.",
+  "outside_scope": [
+    "downloads",
+    "new dependencies/destinations",
+    "credentials/sign-in",
+    "cash spending",
+    "historical study replay",
+    "image/volume deletion",
+    "release/publication/activation"
+  ],
+  "approval_rule": "Explicit raw bundle approval binds these two raw reviews; retain the actual human response. Terminal predecessors cannot be replayed."
+}

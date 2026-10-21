@@ -1,0 +1,65 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "runner_sha256": "fc6cb5bacf061d2bc3e65a41bd77c477db7cecda0fa61a2b0251d77fedc9890c",
+  "actions": [
+    {
+      "name": "collector",
+      "review": "reports/toolkit-v2/c07/capture-policy-repair-20261021/operation-review.json",
+      "runner": "reports/toolkit-v2/c07/capture-policy-repair-20261021/run-repair.py",
+      "maximum_seconds": 3600,
+      "terminal_result": "reports/toolkit-v2/c07/capture-policy-repair-20261021/execution-result.json",
+      "pass_conditions": {
+        "build_passed": true,
+        "collector_passed": true,
+        "diagnostics_passed": true,
+        "diagnostic_records": 4,
+        "proxy_restored_stopped": true
+      },
+      "review_sha256": "5e4e1d487db64f58b8c0afb478beddf8fe2fbc0c0b1b97bae1e8870520138646",
+      "started_marker": "execution-started.json"
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-policy-20261021/operation-review.json",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-policy-20261021/run_review.py",
+      "maximum_seconds": 1800,
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-policy-20261021/execution/summary.json",
+      "pass_conditions": {
+        "installed_cli_checks": 15,
+        "installed_capture_checks": 1,
+        "runtime_removed": true,
+        "private_scratch_removed": true
+      },
+      "review_sha256": "b7afbd611b664645b66cc2e4eb5a22835138b618e05d2a9ca8b0d35174a342bb",
+      "started_marker": "execution-started.json"
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-policy-review-20261021/operation-review.json",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-policy-review-20261021/run-review.py",
+      "maximum_seconds": 240,
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-policy-review-20261021/execution-result.json",
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      },
+      "review_sha256": "f7fcc93cde03863bcb43649d70d54ff1b09982c05bc3988cac4e7cf4aa61c234",
+      "started_marker": "execution-started.json"
+    }
+  ],
+  "purpose": "Complete this source-bound correction with one exact execution review. The package and docs checks continue independently after collector failure.",
+  "permissions": "Collector:2 COPY-only images, fresh no-model conformance, at most4 existing-grant task turns. Package:33 exact cached wheels, no downloads,16 offline checks, owned removal. Docs:same pinned cached Lychee0.24.2,67 files,network/home denied,owned removal.",
+  "outside_scope": [
+    "Authentication intervention",
+    "New paid/model/telemetry destinations",
+    "Historical study replay or evidence-policy changes",
+    "Release, activation, publication or retained-resource cleanup"
+  ],
+  "why_approval_required": "The preceding exact reviews bind the earlier collector bytes and wheel. The user continuation excludes unreviewed software execution, and CONTINUATION.md requires applicable image/service authority. This bundle binds the changed collector and installed artifact; routine finite definitions/budget amendments remain delegated. No architecture, dependency or new spending decision is requested.",
+  "approval_rule": "Explicit approval of this raw bundle digest covers precisely the three listed raw component digests. Preserve actual human wording in bundle-operator-approval.json before executing.",
+  "approved": false,
+  "execution_started": false
+}
