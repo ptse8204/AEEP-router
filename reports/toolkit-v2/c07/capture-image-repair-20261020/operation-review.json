@@ -1,0 +1,82 @@
+{
+  "purpose": "Correct a proven stale collector inside two immutable images, then run one fresh collector inspection and at most four public capture tasks. No historical replay.",
+  "source_commit": "44bdad98c1a6b2d845c4e084afe07bbf96a0073e",
+  "source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "failed_approved_review_sha256": "e3dd38d12759228c6e58cf56b8d7a19e34b0c496734f30fb74d03a5634814820",
+  "failed_collector_result_sha256": "8a5729d623ab656fb71922ffd4e01e76d1ee9bebe417a6d81c018d7ff96c2225",
+  "root_cause": {
+    "expected_collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "actual_collector_sha256_in_both_images": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+    "launcher_behavior": "The reviewed_files hash check exits before launching the App Server when these differ. No model was started."
+  },
+  "builds": {
+    "control": {
+      "parent": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "tag": "aeep-toolkit-v2/capture-collector-20261020:control",
+      "dockerfile_sha256": "c7270519c54d17a0570baeeef1a00dcf90fe37d82a3aca45c3d62c4247c84b40",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1"
+    },
+    "treatment": {
+      "parent": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023",
+      "tag": "aeep-toolkit-v2/capture-collector-20261020:treatment",
+      "dockerfile_sha256": "232c303cd4916915ff265eeaf011103ce3f4f698690cf1eef16e8d4b2c78b8fd",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1"
+    }
+  },
+  "maximum_build_growth_bytes": 1073741824,
+  "minimum_host_reserve_bytes": 53687091200,
+  "inputs": {
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/prepare-collector.py": "7010f1321a0d76948fa6eeb135a4460bd4461d9a78dbd7613e8e98b46e16bbd9",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/run-collector.py": "8a70ec8333f8fb9923342e8f651d03cd8f3556f8a2a7e3aa1a19c8d742d99036",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/diagnostic-tasks.json": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/run-diagnostics.py": "2263cafb08420b581fc8b9d8b7004563405359931c825ec6bf4e8401f64fda4b",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/assemble-collector-boundary.py": "4b4cf93714c2dbf0d6dee105eefbc7a9461a66fde16e1ff0d97aec4e85654dc1",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/run-repair.py": "444cef18c65c8db4efcd87c745dd43975ff0a5059b4e2d01f95ae52f6937ab28",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/image-control/Dockerfile": "c7270519c54d17a0570baeeef1a00dcf90fe37d82a3aca45c3d62c4247c84b40",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/image-control/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/image-treatment/Dockerfile": "232c303cd4916915ff265eeaf011103ce3f4f698690cf1eef16e8d4b2c78b8fd",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/image-treatment/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-operation-review.json": "e3dd38d12759228c6e58cf56b8d7a19e34b0c496734f30fb74d03a5634814820",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-definitions.json": "f0133d911b1243e5e8620c92cdd22f0fe5dbac314b3b30fc9745dbf6d38755a5",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-result.json": "8a5729d623ab656fb71922ffd4e01e76d1ee9bebe417a6d81c018d7ff96c2225",
+    "reports/toolkit-v2/c07/capture-repair-20261019/image-content-v2-result.json": "ef663831ded80094399690a24ca1f345a559ac43d9e7ba0e9638d38e60d5192b",
+    "reports/toolkit-v2/c07/capture-repair-20261019/validation/source-stability.json": "a848aca914b3a381fa46cc0c92fd58ebd9b94e52af0f5c4733df936c27650c11",
+    "src/aeep/hosts/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1"
+  },
+  "actions": [
+    "Two local builds with exactly FROM and COPY; no RUN instruction, image pulls, network or installation. Only the already-reviewed collector replaces the stale file, with root ownership and mode0444; preserve every parent/rollback image.",
+    "Resolve and retain each resulting immutable image ID, prepare fresh exact definitions and scope under September25/27 authority, and bind the generated collector review to this parent approval before launch.",
+    "One fresh pair inspection with the same11 established probes and actual collector denied-access probe per worker. Preserve failed predecessor and all counters; no automatic retry.",
+    "Only after conformance passes, run the same explicit-request pair; only after complete captures and positive bound loading, run the optional pair. Four task turns total, no holdouts, no full comparison, no admission or threshold changes.",
+    "Restore the approved proxy stopped and remove only new transient workers/private security snapshots. Retain the two new image tags/IDs, reports, logs, old images, volumes, backups and unrelated user work."
+  ],
+  "limits": {
+    "maximum_model_turns": 4,
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600,
+    "cash_usd": 0,
+    "minimum_host_free_bytes": 54760833024,
+    "maximum_diagnostic_task_seconds_each": 102,
+    "maximum_diagnostic_lifecycle_seconds": 1200,
+    "maximum_diagnostic_plans": 2,
+    "maximum_diagnostic_assessment_operations": 64,
+    "maximum_transient_model_workers": 4,
+    "maximum_build_operations": 1,
+    "maximum_build_seconds": 360,
+    "maximum_builds": 2
+  },
+  "untrusted_execution": "Same reviewed Codex binary, launcher, dependencies and exact collector source; the two COPY-only outputs have new image IDs and require this explicit parent approval.",
+  "forbidden": [
+    "Credential reading/copying/login",
+    "New destinations, paid calls or hosted telemetry",
+    "New dependency installs or source repairs",
+    "More than four task turns or automatic retries",
+    "Changing the old comparison or evidence policy",
+    "Image/volume/backups removal, activation, release, publication or pushing"
+  ],
+  "approval_record": "operator-approval.json with approved=true and review_sha256 equal to this raw file SHA-256",
+  "why_new_approval": "The preceding exact bundle explicitly prohibited builds and automatic replay. This review permits only two narrowly specified COPY-only derived images plus a fresh gated inspection and the unused four-turn diagnostic allowance.",
+  "execution_started": false
+}

@@ -862,3 +862,21 @@ bind positive skill injection to the reviewed candidate and journal, and label i
 as instruction loading. Missing metrics cannot prove non-use; loading cannot prove
 semantic use. A prospective collector run needs exact review of its changed worker
 telemetry boundary before any new live check. No architecture choice is pending.
+
+### D66 — Correct stale collector image bytes before any diagnostic turn
+
+The operator approved the exact capture bundle. Its package and documentation
+checks passed; the collector check stopped before Codex initialization. Both
+approved images contain bb758886… while the reviewed-file guard requires the
+current d551e2f4… collector. The read-only public image-file audit establishes
+this mismatch. Do not weaken the guard, use the stale collector, request sign-in
+without evidence, or replay the terminal inspection.
+
+Prepare two COPY-only derived images with the already-reviewed collector. Bind
+both Dockerfiles, parent IDs, collector bytes, resulting output IDs and fresh exact
+definitions before running new conformance. Preserve the unused maximum four
+public diagnostic turns and the explicit-to-optional capture gate. Source, binary,
+dependencies, model, destination and old campaign remain fixed. The earlier bundle
+explicitly excluded builds/replay, so the concrete repair requires new approval.
+See [the repair review](../../reports/toolkit-v2/c07/capture-image-repair-20261020/README.md).
+No application rewrite, new framework or repeated broad test cycle is warranted.

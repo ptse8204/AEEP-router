@@ -1,0 +1,56 @@
+{
+  "cause": "Reviewed collector hash does not match collector bytes in either approved image. The exact launcher rejects reviewed-file drift before Codex initialization.",
+  "proof_kind": "Read-only exported public image bytes plus exact immutable launcher guard; no image code was executed by the audit.",
+  "image_export_format": "Docker exposes OCI manifest digests as image IDs; docker save manifest.json names separate configuration blobs. The first audit wrongly equated those hashes. The second retains both configurations and their identical selected public files.",
+  "configurations": {
+    "sha256:8c4ca5df77a6215a3934cd907e88efd5e205dbaa8e0381b83a74576add078800": {
+      "actual_collector_sha256": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+      "expected_collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "launcher_matches_current": true,
+      "reviewed_file_guard_would_reject": true
+    },
+    "sha256:da14e0544b6b5f92ad1c781778c84816ba2d2f105892769bd642cc0b6c315b08": {
+      "actual_collector_sha256": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+      "expected_collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "launcher_matches_current": true,
+      "reviewed_file_guard_would_reject": true
+    }
+  },
+  "source_unchanged": true,
+  "failed_collector": {
+    "model_turns": 0,
+    "operations": 3,
+    "proxy_restored_stopped": true,
+    "source_unchanged": true,
+    "first_failure_stage": "control:identity_policy",
+    "control_cleanup_confirmed": true,
+    "treatment_started": false
+  },
+  "read_only_audits": {
+    "operations": 2,
+    "containers_created": 0,
+    "software_executed_in_images": false,
+    "first_parser_failure_retained": true,
+    "second_parser_passed": true,
+    "archive_scratch_removed": true
+  },
+  "diagnostics": {
+    "executed": false,
+    "model_turns": 0,
+    "reason": "Required collector conformance failed; the dependent diagnostics remain gated."
+  },
+  "grant": [
+    12699,
+    3739,
+    117926.02837013267,
+    "0.0"
+  ],
+  "original_grant_model_turns": 3739,
+  "cash_spent": false,
+  "remaining_action": "reports/toolkit-v2/c07/capture-image-repair-20261020/operation-review.json",
+  "remaining_review_sha256": "70c19b6eb98a0b8c3878200243fb01a4e4f288a83b01369649ce09700e9204be",
+  "requires_new_approval": "Two COPY-only image builds and a fresh one-shot collector inspection; the approved predecessor expressly excluded builds and replay.",
+  "historical_comparison_unchanged": true,
+  "independent_provider_metering": "unknown",
+  "old_candidate_loading": "unknown; collector disabled in original campaign"
+}

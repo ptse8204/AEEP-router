@@ -342,3 +342,17 @@ strict token evidence and candidate-use telemetry remain unavailable. This adds
 bounded live comparison evidence without qualifying the upstream Codex harness,
 scanner, hosted telemetry, benchmark packs or other host platforms. No upstream
 pin changed. See the [four-arm result](../../reports/toolkit-v2/c07/edit-value-native-20261019/comparison.html).
+
+### October 20 local time — capture bundle exposed stale image collector
+
+No upstream pin or dependency changed. The corrected AEEP wheel passed 15 offline
+CLI checks and one retained-capture check with its 32 unchanged dependency pins.
+The exact 67-file offline documentation check passed; both private runtimes were
+removed. The collector check failed before model dispatch because the two pinned
+images contain an older collector than their newly reviewed file guard permits.
+The existing native OTLP implementation remains selected; the proposed correction
+copies its already-reviewed current bytes into two small derived image layers.
+[The exact repair](../../reports/toolkit-v2/c07/capture-image-repair-20261020/README.md)
+needs approval because the preceding bundle excluded builds and replay. No new
+backend, credential setup or model destination is required. The old study and
+its independently unverified provider counts remain unchanged.

@@ -4530,3 +4530,34 @@ It gates the prospective local collector/maximum 4 diagnostic turns, changed-whe
 installation check and 67-file pinned offline link check. No new model call, install,
 release, image cleanup or grant reset occurred. See
 [delivery status](../toolkit-v2/c07/capture-repair-20261019/delivery-status.json).
+
+
+## October 20 local time: approved bundle executed, collector packaging isolated
+
+The user explicitly approved bundle f8ca5c58…. The corrected44bdad9 wheel passed
+15 sandboxed offline CLI checks plus1 retained-capture check; the same32 dependency
+pins were used and its runtime removed. The pinned Lychee check passed67 documents,
+643 link occurrences/448 unique,576 OK/67 excluded/0 errors, with network denied.
+Its unchanged runtime was removed. These logs retain their exact pre-update input
+hashes; this subsequent status entry does not rewrite them.
+
+The collector check failed before any model turn. A read-only export of selected
+public files proved both images contain collector bb758886…, while the reviewed
+launcher guard requires current d551e2f4…. The first static parser wrongly equated
+OCI manifest IDs with configuration blob hashes; both its failure and corrected
+source audit are retained and charged. No container was provisioned or software
+executed inside either source audit. The collector/proxy preparation used3
+operations and source audits2 more. Grant now:12,699 operations,3739 model turns,
+117926.02837013267 operation seconds,cash0. Proxy stopped, control worker removed,
+treatment/diagnostics unstarted. No retained image, volume, backup or user work was
+removed. Source remains33673d539a75…; no broad source suite was replayed.
+
+[The exact prepared repair](../toolkit-v2/c07/capture-image-repair-20261020/README.md)
+contains two COPY-only Dockerfiles, the already-reviewed collector and pinned
+five-driver sequence. Review70c19b6e… requires new approval because the previous
+exact bundle forbade builds/replay. A fresh conformance pass gates the unchanged
+maximum4 public diagnostic turns. No architecture/cash/credential choice is needed.
+The 564-run study remains terminal and inconclusive; human/resource/release gates
+remain open. The complete [failure analysis](../toolkit-v2/c07/capture-repair-20261019/collector-failure-analysis.json)
+and [delivery status](../toolkit-v2/c07/capture-repair-20261019/delivery-status.json)
+provide the resumable evidence. The new repair has not executed.

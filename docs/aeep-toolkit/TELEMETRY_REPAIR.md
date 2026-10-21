@@ -63,3 +63,17 @@ inputs and finite model allowance before execution. Start with a small diagnosti
 keep optional-use checks separate from forced invocation. A successful diagnostic
 cannot repair the old campaign's missing candidate-use evidence or justify a new
 efficacy claim.
+
+### October 20 execution status
+
+The approved wheel and 67-file offline documentation checks passed. The first
+collector inspection failed before Codex initialized: both pinned images contain
+collector bb758886…, whereas their reviewed-file guard requires d551e2f4….
+No diagnostic model turn ran. The old comparison remains unchanged.
+
+[The prepared correction](../../reports/toolkit-v2/c07/capture-image-repair-20261020/README.md)
+replaces only that file in two COPY-only image layers, then requires fresh
+conformance before the maximum four public capture tasks. It needs explicit
+approval because the preceding exact review excluded builds and replay. The
+existing OTLP implementation and package pins are unchanged; no hosted backend
+or authentication intervention is needed to correct these image bytes.

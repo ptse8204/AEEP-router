@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-19, telemetry correction:** Capture repair is implemented at 44bdad9 / 33673d539a75…. All 564 original journal-to-receipt token captures passed the read-only audit; provider metering remains independently unverified. The router now retains bounded native metric snapshots, and managed reports verify positive instruction loading separately from semantic use. All 12 integrated checks passed: both suites 1,587 passed / 21 skipped, 82% coverage, both branch gates, Ruff, mypy and wheel/sdist build. Documentation lint passed 67 files; offline links and changed-wheel installation remain unexecuted. The exact three-action bundle f8ca5c586241f06f14172fbbb27750bb0170f273191732716cb2bd810724342a is pending explicit operator approval: collector boundary plus at most four public diagnostic turns, private changed-wheel verification, and pinned offline Lychee. No new model calls or installations occurred. Existing C07 comparison and inconclusive efficacy are unchanged; new-source live telemetry is unqualified. No architecture, new budget or credential decision is needed.
+**Status as of 2026-10-20 local time, approved capture bundle executed:** The corrected wheel passed 15 offline CLI checks and one capture-chain check, and the 67-file offline documentation check passed with zero errors. Both private runtimes were removed. Collector inspection failed before any model turn: both immutable images contain collector bb758886…, while the approved profile pins d551e2f4…. The launcher rejects that mismatch. A read-only public-file audit proves the packaging gap. A concrete two-image COPY-only correction and fresh gated inspection/maximum four diagnostic turns are prepared under review 70c19b6e…; the preceding bundle expressly excluded builds and replay, so new approval is required. Application source and all 12 integrated checks remain unchanged at 44bdad9/33673d539a75…. The original comparison and inconclusive verdict are preserved. No architecture, cash, credential or package-version choice is pending.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -26,20 +26,20 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '44bdad98c1a6b2d845c4e084afe07bbf96a0073e'
-last_check_command: 'Framework Python3.13; reports/toolkit-v2/c07/capture-repair-20261019/validation/checks.json'
-last_check_result: 'All12 checks passed; both full suites1587 passed/21 skipped;82% coverage; branch gates,Ruff,mypy,wheel/sdist build. 67-file docs lint passed. Fresh installed-wheel and offline links pending exact approval.'
-next_action: 'Resolve the pending f8ca5c58 capture-repair bundle response. If approved, record all3 component approvals; run collector inspection once, assemble its exact current-source conformance, then at most4 gated public diagnostics. Run the package and Lychee checks once. Preserve counters and original studies. See capture-repair-20261019/RESUME.md.'
+last_check_command: 'Approved capture bundle: collector-result.json; package-review-telemetry-20261019/execution/summary.json; lychee-telemetry-review-20261019/execution-result.json'
+last_check_result: 'Wheel15 CLI+1 capture checks passed;67-file offline docs passed,0 errors; runtimes removed. Collector failed stale image-file hash before Codex initialization;0 new model turns. Static source audit proves mismatch; unchanged-source12 integrated checks remain valid.'
+next_action: 'Obtain exact approval for COPY-only repair review70c19b6e; record actual response, then follow c07/capture-image-repair-20261020/README.md. Do not replay completed or failed old drivers. No broad regression or wheel rebuild for unchanged application source.'
 blocked_actions:
   - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
   - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
   - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Old study approvals remain historical. Pending bundle f8ca5c58 covers only the new collector/4 diagnostics, changed wheel and67-file offline link check.'
+  - 'Bundle f8ca5c58 was explicitly approved and executed to its dependency gate. New review70c19b6e covers two COPY-only image corrections plus fresh conformance and the unused maximum4 diagnostic turns; builds/replay were excluded by the previous approval.'
   - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The completed study finds zero success gain and no 10% time benefit. Strict token pairs are 0/105; candidate-specific use and generated-tool invocation are unknown. Generalization beyond bounded mechanical tasks is unassessed.'
-  - 'The d2c406f wheel passed 15 installed checks. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
+  - 'The corrected44bdad9 wheel passed15 installed CLI checks plus1 retained capture check. New-source live collector remains unqualified until corrected images pass. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
 
 ```
 
@@ -2049,3 +2049,55 @@ and changed installation artifact, which the pasted continuation did not authori
 by itself. No operator approval or execution marker exists yet. Follow RESUME.md;
 never replay the old terminal study or the earlier Lychee execution. The prior
 C13 human question remains unanswered and cannot be closed by an agent response.
+
+### October 20 local time — approved capture bundle and exact packaging blocker
+
+The user's actual response explicitly approved all three f8ca5c58… components.
+Their review/script/source pins were verified before retaining approval records.
+The corrected AEEP wheel plus the same 32 dependency pins installed privately;
+15 offline CLI checks and one retained-capture check passed. Downloaded dependency
+bytes: 13,208,799. Runtime and scratch removal passed. No model was called.
+The pinned offline docs check passed: 67 Markdown files, 643 link occurrences,
+448 unique, 576 OK, 67 excluded and zero errors, network denied. Its unchanged
+runtime was removed. These source-bound checks precede this status prose update;
+actual checked input hashes remain unchanged in their execution records.
+
+Collector execution stopped at control identity/policy before the first model
+turn. Both images retain collector bb758886…, whereas the exact reviewed profile
+requires d551e2f4…. The unchanged launcher rejects reviewed-file mismatches before
+starting Codex. The first read-only archive audit failed because it equated OCI
+manifest and configuration hashes. The corrected parser retained public launcher,
+configuration and collector files from both exported images; their collector
+hashes match each other and differ from the approved source. No containers or
+image software were started by these audits. Both failures and all costs remain.
+See [the failure analysis](../../reports/toolkit-v2/c07/capture-repair-20261019/collector-failure-analysis.json).
+
+The collector/proxy used three operations and the two source audits used one each.
+The canonical grant now records 12,699 operations, 3,739 model turns,
+117926.02837013267 operation seconds and cash 0. Counters were not reset. The proxy
+was restored stopped, the control worker was removed and treatment never started.
+The gated diagnostic runner was not invoked. No image, volume, backup or unrelated
+work was removed. Host reserve remains above 50 GiB.
+
+D66 prepares [the exact COPY-only correction](../../reports/toolkit-v2/c07/capture-image-repair-20261020/README.md),
+review 70c19b6eb98a0b8c3878200243fb01a4e4f288a83b01369649ce09700e9204be.
+It contains both Dockerfiles, unchanged collector bytes, all five pinned drivers
+and their syntax/input preflight. It permits no RUN/install/pull/network during
+build, retains both old parents, binds new output IDs before fresh conformance,
+and preserves the maximum four public diagnostic turns and no-retry rule.
+Execution is unstarted. New approval is necessary because the prior exact bundle
+excluded builds/replay. No new architecture or credential decision is required.
+Human comprehension, whole-host resource acceptance and release remain separate
+open gates; no actual participant answer or release authorization was supplied.
+
+
+Post-execution status prose passed the 67-file documentation lint. Its first pass
+caught four added double blank lines; those were corrected and both logs retained.
+New report/review links were checked locally with first-party path checks. The
+three original comparison artifacts were rehashed unchanged. The exact repair's
+16 input pins and all five driver syntax checks pass; it remains unexecuted.
+The completed Lychee run is not replayed for these status records.
+
+The staged whitespace check flags only Lychee’s captured final blank line in its
+raw docs-check.log. That evidence is preserved unchanged; the documentation check
+itself passed. No source or configuration discrepancy was found.
