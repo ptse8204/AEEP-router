@@ -1,0 +1,97 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_catalog_metrics_relay_preserves_global_policy_overrides[server_flags0] __
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1201/test_catalog_metrics_relay_pre0')
+server_flags = []
+
+    @pytest.mark.skipif(not hasattr(os, 'killpg'), reason='worker relay requires POSIX process groups')
+    @pytest.mark.parametrize('server_flags', [[], ['--stdio']])
+    def test_catalog_metrics_relay_preserves_global_policy_overrides(tmp_path, server_flags):
+        import subprocess
+        import sys
+    
+        from aeep.hosts import codex_metrics
+    
+        # A subcommand may replace inherited repeated options when given its own list.
+        # This synthetic host checks the launch contract, not installed Codex behavior.
+        child = tmp_path / 'host.py'
+        child.write_text('''import argparse,json
+    parser=argparse.ArgumentParser()
+    parser.add_argument('-c',action='append',default=[])
+    command=parser.add_subparsers(dest='command',required=True).add_parser('app-server')
+    command.add_argument('-c',action='append',default=argparse.SUPPRESS)
+    command.add_argument('--stdio',action='store_true')
+    values=dict(item.split('=',1) for item in parser.parse_args().c)
+    assert values['features.apps']=='false'
+    assert values['web_search']=='"disabled"'
+    assert values['analytics.enabled']=='true'
+    assert values['otel.log_user_prompt']=='false'
+    assert values['otel.exporter']=='"none"'
+    assert values['otel.trace_exporter']=='"none"'
+    print(json.dumps({'method':'fixture/policy','params':{'preserved':True}}),flush=True)
+    ''')
+        program = ('import sys; sys.path.insert(0,sys.argv.pop(1)); '
+                   'from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))')
+        scope = 'aeep-metrics-' + 'a' * 32
+        result = subprocess.run([
+            sys.executable, '-c', program, str(Path(codex_metrics.__file__).parent),
+            sys.executable, str(child), '-c', 'features.apps=false', '-c', 'web_search="disabled"',
+            '-c', 'analytics.enabled=false', '-c', 'otel.log_user_prompt=true',
+            'app-server', *server_flags, scope,
+        ], input=b'', capture_output=True, timeout=10)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: b''
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Library/Frameworks/Python.framework/Versions/3.13/bin/python3', '-c', 'import sys; sys.path.i...ches": 0, "overflow": false, "collector_closed": true, "delivery_complete": false, "observations": []}}\n', stderr=b'').returncode
+
+tests/test_v08_codex_invocation.py:625: AssertionError
+_ test_catalog_metrics_relay_preserves_global_policy_overrides[server_flags1] __
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1201/test_catalog_metrics_relay_pre1')
+server_flags = ['--stdio']
+
+    @pytest.mark.skipif(not hasattr(os, 'killpg'), reason='worker relay requires POSIX process groups')
+    @pytest.mark.parametrize('server_flags', [[], ['--stdio']])
+    def test_catalog_metrics_relay_preserves_global_policy_overrides(tmp_path, server_flags):
+        import subprocess
+        import sys
+    
+        from aeep.hosts import codex_metrics
+    
+        # A subcommand may replace inherited repeated options when given its own list.
+        # This synthetic host checks the launch contract, not installed Codex behavior.
+        child = tmp_path / 'host.py'
+        child.write_text('''import argparse,json
+    parser=argparse.ArgumentParser()
+    parser.add_argument('-c',action='append',default=[])
+    command=parser.add_subparsers(dest='command',required=True).add_parser('app-server')
+    command.add_argument('-c',action='append',default=argparse.SUPPRESS)
+    command.add_argument('--stdio',action='store_true')
+    values=dict(item.split('=',1) for item in parser.parse_args().c)
+    assert values['features.apps']=='false'
+    assert values['web_search']=='"disabled"'
+    assert values['analytics.enabled']=='true'
+    assert values['otel.log_user_prompt']=='false'
+    assert values['otel.exporter']=='"none"'
+    assert values['otel.trace_exporter']=='"none"'
+    print(json.dumps({'method':'fixture/policy','params':{'preserved':True}}),flush=True)
+    ''')
+        program = ('import sys; sys.path.insert(0,sys.argv.pop(1)); '
+                   'from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))')
+        scope = 'aeep-metrics-' + 'a' * 32
+        result = subprocess.run([
+            sys.executable, '-c', program, str(Path(codex_metrics.__file__).parent),
+            sys.executable, str(child), '-c', 'features.apps=false', '-c', 'web_search="disabled"',
+            '-c', 'analytics.enabled=false', '-c', 'otel.log_user_prompt=true',
+            'app-server', *server_flags, scope,
+        ], input=b'', capture_output=True, timeout=10)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: b''
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Library/Frameworks/Python.framework/Versions/3.13/bin/python3', '-c', 'import sys; sys.path.i...ches": 0, "overflow": false, "collector_closed": true, "delivery_complete": false, "observations": []}}\n', stderr=b'').returncode
+
+tests/test_v08_codex_invocation.py:625: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_codex_invocation.py::test_catalog_metrics_relay_preserves_global_policy_overrides[server_flags0]
+FAILED tests/test_v08_codex_invocation.py::test_catalog_metrics_relay_preserves_global_policy_overrides[server_flags1]

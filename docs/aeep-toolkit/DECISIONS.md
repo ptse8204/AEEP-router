@@ -880,3 +880,30 @@ dependencies, model, destination and old campaign remain fixed. The earlier bund
 explicitly excluded builds/replay, so the concrete repair requires new approval.
 See [the repair review](../../reports/toolkit-v2/c07/capture-image-repair-20261020/README.md).
 No application rewrite, new framework or repeated broad test cycle is warranted.
+
+### D67 — Resolve local image parents by repository name and immutable digest
+
+The approved COPY-only build failed because its bare sha256 parent was interpreted
+as a Docker Hub repository name. Preserve that terminal attempt and registry
+metadata failure; do not report its network traffic as zero or replay it. Use each
+already-local repository name followed by the same @sha256 digest. Require local
+resolution to the pinned ID and no ONBUILD instructions before either build.
+The charged metadata check passed both guards. This does not prove a build or
+collector result. The fresh reference-only amendment retains collector bytes,
+dependencies, model and the unused maximum4 public diagnostic turns. Its predecessor
+forbids automatic retries, so actual execution needs the exact amendment approval.
+See [the amendment](../../reports/toolkit-v2/c07/capture-local-parent-20261021/README.md).
+
+### D68 — Keep policy and metrics overrides in one CLI argument scope
+
+The corrected images start, and sandbox commands cannot reach their collectors.
+Effective disabled-feature verification nevertheless failed in both workers;
+treatment inventory stayed unverified. Preserve the failed conformance and stop
+before model diagnostics. The relay currently splits repeated -c options across
+both sides of the app-server subcommand. Move telemetry options before the
+subcommand, after the pinned policy options, while preserving forced no-log/no-trace
+settings. Synthetic regression tests establish that launch contract, not actual
+Codex parser semantics. Require fresh source-bound conformance before concluding
+that this correction resolves the observed failure. No guard or threshold is
+relaxed. New collector/wheel bytes require their own exact review after one
+integrated verification cycle. See [the engineering record](../../reports/toolkit-v2/c07/capture-policy-repair-20261021/README.md).

@@ -585,3 +585,45 @@ def test_catalog_metrics_relay_termination_cleans_up_child(tmp_path):
         if process.poll() is None:
             process.kill()
             process.wait(timeout=5)
+
+
+@pytest.mark.skipif(not hasattr(os, 'killpg'), reason='worker relay requires POSIX process groups')
+@pytest.mark.parametrize('server_flags', [[], ['--stdio']])
+def test_catalog_metrics_relay_preserves_global_policy_overrides(tmp_path, server_flags):
+    import subprocess
+    import sys
+
+    from aeep.hosts import codex_metrics
+
+    # A subcommand may replace inherited repeated options when given its own list.
+    # This synthetic host checks the launch contract, not installed Codex behavior.
+    child = tmp_path / 'host.py'
+    child.write_text('''import argparse,json
+parser=argparse.ArgumentParser()
+parser.add_argument('-c',action='append',default=[])
+command=parser.add_subparsers(dest='command',required=True).add_parser('app-server')
+command.add_argument('-c',action='append',default=argparse.SUPPRESS)
+command.add_argument('--stdio',action='store_true')
+values=dict(item.split('=',1) for item in parser.parse_args().c)
+assert values['features.apps']=='false'
+assert values['web_search']=='"disabled"'
+assert values['analytics.enabled']=='true'
+assert values['otel.log_user_prompt']=='false'
+assert values['otel.exporter']=='"none"'
+assert values['otel.trace_exporter']=='"none"'
+print(json.dumps({'method':'fixture/policy','params':{'preserved':True}}),flush=True)
+''')
+    program = ('import sys; sys.path.insert(0,sys.argv.pop(1)); '
+               'from codex_metrics import relay; raise SystemExit(relay(sys.argv[1:-1],sys.argv[-1]))')
+    scope = 'aeep-metrics-' + 'a' * 32
+    result = subprocess.run([
+        sys.executable, '-c', program, str(Path(codex_metrics.__file__).parent),
+        sys.executable, str(child), '-c', 'features.apps=false', '-c', 'web_search="disabled"',
+        '-c', 'analytics.enabled=false', '-c', 'otel.log_user_prompt=true',
+        'app-server', *server_flags, scope,
+    ], input=b'', capture_output=True, timeout=10)
+    assert result.returncode == 0, result.stderr
+    frames = [json.loads(line) for line in result.stdout.splitlines()]
+    assert frames[0] == {'method':'fixture/policy','params':{'preserved':True}}
+    final = codex_metrics.validate_snapshot(frames[-1]['params'], scope)
+    assert final['collector_closed'] and final['delivery_complete'] is False

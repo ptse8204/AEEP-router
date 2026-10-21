@@ -193,7 +193,9 @@ def relay(argv: list[str], scope: str) -> int:
     try:
         # The immutable worker config is already in argv and cannot override
         # these final telemetry settings. Task input remains on the original pipe.
-        command = [*argv, *(part for option in options for part in ('-c', option))]
+        # Keep policy and telemetry overrides in one CLI scope, before the subcommand.
+        boundary = argv.index('app-server') if 'app-server' in argv else len(argv)
+        command = [*argv[:boundary], *(part for option in options for part in ('-c', option)), *argv[boundary:]]
         environment = dict(os.environ, NO_PROXY='127.0.0.1', OTEL_METRIC_EXPORT_INTERVAL='1000', OTEL_METRIC_EXPORT_TIMEOUT='1000')
         process = subprocess.Popen(command, stdin=sys.stdin.buffer, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
                                    env=environment, start_new_session=True)

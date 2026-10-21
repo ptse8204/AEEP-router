@@ -356,3 +356,15 @@ copies its already-reviewed current bytes into two small derived image layers.
 needs approval because the preceding bundle excluded builds and replay. No new
 backend, credential setup or model destination is required. The old study and
 its independently unverified provider counts remain unchanged.
+
+### October 21 — builder source-reference failure; no upstream change
+
+The operator-approved COPY-only collector image attempt failed before creating an
+image. Bare sha256 FROM syntax became a Docker Hub source name and triggered a
+failed metadata lookup. No worker, collector or model started. The reference-only
+amendment uses the same parents' existing local repository digest names; both
+resolved correctly under read-only inspection and have no ONBUILD commands.
+[The prepared amendment](../../reports/toolkit-v2/c07/capture-local-parent-20261021/README.md)
+requires approval under the prior no-retry rule. No upstream version, dependency,
+collector source, model or destination changes. The completed package/docs results
+and original comparison remain unchanged; live collector behavior is unqualified.

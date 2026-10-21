@@ -4561,3 +4561,47 @@ The 564-run study remains terminal and inconclusive; human/resource/release gate
 remain open. The complete [failure analysis](../toolkit-v2/c07/capture-repair-20261019/collector-failure-analysis.json)
 and [delivery status](../toolkit-v2/c07/capture-repair-20261019/delivery-status.json)
 provide the resumable evidence. The new repair has not executed.
+
+## October21: approved collector build stopped on a source-reference error
+
+The operator approved exact70c19b6e…. Its control COPY-only build failed before
+COPY/image creation: BuildKit0.32.2 interpreted bare FROM sha256:<id> as Docker Hub
+library/sha256:<tag>. A registry metadata lookup failed despite --pull=false;
+--network=none governs RUN and did not prevent source resolution. No successful
+pull is evidenced; network bytes are unmeasured. No image, container worker,
+collector or model started. The failed log and [analysis](../toolkit-v2/c07/capture-image-repair-20261020/failure-analysis.json)
+are retained, without automatic retry. This was a prepared Dockerfile error.
+
+Two charged read-only metadata checks identified the already-local repository
+names and verified both corrected name@digest references resolve to the exact
+parents, with no ONBUILD commands. Grant now12,702 operations/3739 model turns/
+117929.59668288426 operation seconds/cash0; no reset. D67's
+[exact amendment](../toolkit-v2/c07/capture-local-parent-20261021/README.md), SHA-256
+8056e725cfb62949e4eb16f91bd7ad5a3e83c03ad296774af9ef227300e54bec, corrects those references and
+adds pre-build guards/fresh output IDs. Its22 pins and five script parses passed;
+actual corrected builds/conformance remain untested and unapproved. The previous
+explicit no-retry rule is the remaining execution-authority boundary. No new
+architecture, dependency, credential, model, spending or cleanup decision is needed.
+The original study and current-source package/docs/application test evidence are
+unchanged within their recorded scopes. No broad suite or installation was repeated.
+
+## October21: collector image starts; policy launch correction underway
+
+The operator approved8056e725…; both COPY-only builds passed. New IDs/tags are in
+[capture-local-parent build result](../toolkit-v2/c07/capture-local-parent-20261021/build-result.json).
+Both actual collector endpoint connections were denied. Canonical pair conformance
+still failed disabled-feature checks in both workers and treatment inventory
+consistency. Cleanup passed for both workers; proxy stopped;0 model turns.
+Grant12,706 operations/3739 model turns/117956.19509809231 seconds/cash0. Preserve
+all predecessors. The source/recipe was not repaired or retried inside that run.
+
+Subsequent safe engineering moves telemetry -c options into the same CLI scope as
+policy settings. Two synthetic subprocess cases fail before and pass after;117
+focused checks and targeted Ruff pass. Actual installed Codex parsing/conformance
+remain unverified. New source df8f0b9e5437…/collector9c3f22e3… needs one required
+integrated verification cycle and a new exact collector/wheel review. Earlier
+source-bound package/docs/application evidence is retained rather than relabeled.
+[The engineering record](../toolkit-v2/c07/capture-policy-repair-20261021/README.md)
+contains the scope and actual predecessor facts. No architecture, dependency,
+model, credential or evidence-policy change is proposed. Human/resource/release
+acceptance remains separate.

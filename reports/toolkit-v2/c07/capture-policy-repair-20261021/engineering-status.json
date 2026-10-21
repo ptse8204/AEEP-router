@@ -1,0 +1,74 @@
+{
+  "source_digest_after_safe_engineering": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "collector_sha256_after_safe_engineering": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+  "prior_source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "approved_parent_reference_review_executed": true,
+  "images_built": {
+    "control": {
+      "parent": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "tag": "aeep-toolkit-v2/capture-collector-20261021:control",
+      "dockerfile_sha256": "c4eafffaefb7ec94485dd903d3838efbc6c6992aeb26b5f74e367b9cefb09702",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "parent_reference": "aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "id": "sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96"
+    },
+    "treatment": {
+      "parent": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023",
+      "tag": "aeep-toolkit-v2/capture-collector-20261021:treatment",
+      "dockerfile_sha256": "299c2d4568a0a23c960ca148390c7ae1b6b8dc07c2ec62545e025ef85acb7f68",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "parent_reference": "aeep-edit-reusable-base-treatment@sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023",
+      "id": "sha256:74056005c288c3475e1038c09f9682e95ee7471c96d64f994faf2a3a9c0c319b"
+    }
+  },
+  "collector_endpoint_denied_in_both": true,
+  "model_turns": 0,
+  "passed_pair_conformance": false,
+  "failed_probe_fields": {
+    "both": [
+      "configuration.disabled_features"
+    ],
+    "treatment": [
+      "candidate_access.candidate_available"
+    ]
+  },
+  "positive_observations": [
+    "Immutable images and active per-thread policy",
+    "Workspace/dependency operation",
+    "Credential canary denial/removal",
+    "Cross-worker and answer exclusion",
+    "Proxy/direct network denial",
+    "Resource limits and mounts",
+    "Interruption, complete command responses and cleanup",
+    "Actual collector endpoint connection denied"
+  ],
+  "source_hypothesis": "The relay mixed repeated global -c arguments before app-server with telemetry -c arguments after it. Keep them in one scope, with telemetry settings last in that scope. The synthetic regression reproduces override replacement; actual Codex cause/fix remains unverified until fresh conformance.",
+  "safe_source_change": "Move only the existing telemetry arguments before the app-server subcommand after preexisting global options. No collector protocol, dependency or evidence threshold change.",
+  "synthetic_regression_before": "2 failed, recorded",
+  "focused_checks_after": {
+    "passed": 117,
+    "skipped": 0,
+    "scope": "Local synthetic/unit checks only; no installed Codex qualification"
+  },
+  "full_current_source_checks": "pending",
+  "proxy_restored_stopped": true,
+  "both_worker_cleanup_confirmed": true,
+  "grant_after_last_live_step": [
+    12706,
+    3739,
+    117956.19509809231,
+    "0.0"
+  ],
+  "no_additional_model_authority_used": true,
+  "read_only_upstream_source_research": {
+    "model_calls": 0,
+    "source_executed": false,
+    "raw_network_total_bytes": null,
+    "coordinator_research_elapsed_seconds": null,
+    "files": {
+      "reports/toolkit-v2/c07/capture-local-parent-20261021/upstream-source/message-processor.rs.txt": "2186e5e1ec407c66ff8627008c7f319d22aa76f68bccb6c04ed454b0b8f22fa8",
+      "reports/toolkit-v2/c07/capture-local-parent-20261021/upstream-source/config-override.rs.txt": "7edda8533dd3395b22214f140eb2c93a45b7dad2595635f57691099d408ce071",
+      "reports/toolkit-v2/c07/capture-local-parent-20261021/upstream-source/cli-main.rs.txt": "f0e8acde897400a65fd7904b15cf54088b0981a44126b05cb2a95b5700b2ab6b"
+    }
+  }
+}

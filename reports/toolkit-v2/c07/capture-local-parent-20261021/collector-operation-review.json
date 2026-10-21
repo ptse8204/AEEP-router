@@ -1,0 +1,71 @@
+{
+  "purpose": "Qualify the current-source local native OTLP collector boundary, then run at most four public capture diagnostics through the existing AssessmentService. Preserve original reports and utility policy; no new full comparison.",
+  "source_commit": "44bdad98c1a6b2d845c4e084afe07bbf96a0073e",
+  "source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "definitions_sha256": "29ac7fd1ef55cbfbb0606c899675469503e79ff21ecfb11688e86557f0418c04",
+  "runner_sha256": "8a70ec8333f8fb9923342e8f651d03cd8f3556f8a2a7e3aa1a19c8d742d99036",
+  "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+  "images": {
+    "control": "sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96",
+    "treatment": "sha256:74056005c288c3475e1038c09f9682e95ee7471c96d64f994faf2a3a9c0c319b"
+  },
+  "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+  "proxy_name": "aeep-reviewed-model-proxy",
+  "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+  "proxy_image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+  "proxy_memory_bytes": 536870912,
+  "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+  "proxy_inspect_format": "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"Running\":{{json .State.Running}},\"Memory\":{{json .HostConfig.Memory}},\"MemorySwap\":{{json .HostConfig.MemorySwap}},\"Networks\":{{json .NetworkSettings.Networks}}}",
+  "effects": [
+    "Reuse two existing immutable images; no pulls, builds or installs. The launcher rechecks the pinned collector and candidate bytes.",
+    "Start one ephemeral loopback-only metrics listener inside each fresh worker. No host port publishing, hosted telemetry, prompt logging or trace export.",
+    "Run the existing 11 conformance probes per worker plus a denied-access probe against that worker\u2019s actual collector port. Read only /proc/net/tcp listener addresses outside the native sandbox; never authentication files or process arguments.",
+    "Use and restore the exact existing stopped proxy with its approved 512 MiB/no-swap cap; no new endpoint or destination.",
+    "Retain numeric/hash-only evidence, existing grant accounting and cleanup receipts. Preserve images, volumes, old records and unrelated work."
+  ],
+  "limits": {
+    "maximum_model_turns": 4,
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600,
+    "cash_usd": 0,
+    "minimum_host_free_bytes": 54760833024,
+    "maximum_diagnostic_task_seconds_each": 102,
+    "maximum_diagnostic_lifecycle_seconds": 1200,
+    "maximum_diagnostic_plans": 2,
+    "maximum_diagnostic_assessment_operations": 64,
+    "maximum_transient_model_workers": 4
+  },
+  "approval_reason": "The previous study profiles had catalog_metrics disabled. CONTINUATION.md requires applicable authorization for service startup; the pasted continuation does not authorize new untrusted execution. This exact profile adds a local telemetry listener and changes the effective worker boundary.",
+  "not_authorized_by_this_review": [
+    "Any model work beyond the four exact public diagnostic task turns; any full comparison, holdout generation or automatic retry",
+    "Credentials inspection, login or copying",
+    "New installations, builds, images, external services or destinations",
+    "Evidence-threshold relaxation, admission, activation, release or publication"
+  ],
+  "authority_for_definition_changes": "September25/27 delegation covers these exact routine inert definitions and grant scope amendment; counters are not reset.",
+  "execution_started": false,
+  "approval_record": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/capture-local-parent-20261021/collector-operator-approval.json",
+  "diagnostics_runner_sha256": "2263cafb08420b581fc8b9d8b7004563405359931c825ec6bf4e8401f64fda4b",
+  "diagnostic_tasks_sha256": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+  "boundary_assembly_runner_sha256": "fdcb1014124eb3b52f135b0a3991465f5df4046d9b955acf723c532f5e313dd9",
+  "additional_runtime_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "phases": [
+    "Run the exact no-model pair inspection and actual collector denied-access probes.",
+    "After all probes pass, retain and review current-source conformance through the existing exact contracts under standing definition authority.",
+    "Freeze two legacy diagnostic plans using the two exact public cases in diagnostic-tasks.json. Each has one case and two workers, no holdouts or admission/comparison semantics.",
+    "Run the explicit read-request pair first. Run the optional pair only when its predecessor produced complete bound token captures and positive instruction-loading evidence. Maximum four task turns in total, no retries.",
+    "Retain source-bound journals, receipts, costs and unknown delivery/use fields. Restore the proxy stopped and remove only each new transient worker."
+  ],
+  "execution_preconditions": [
+    "Exact operator approval of this review digest.",
+    "Unchanged source, scripts, images, candidate and collector pins.",
+    "All current-source integrated checks pass.",
+    "Current grant remains valid and fits all reservations without resetting counters.",
+    "At least51GiB free before execution.",
+    "No model diagnostics before current-source worker conformance and actual collector access denial pass."
+  ],
+  "parent_repair_review_sha256": "8056e725cfb62949e4eb16f91bd7ad5a3e83c03ad296774af9ef227300e54bec",
+  "build_result_sha256": "c02b01b792b73dffbec7639884917292f54d735ca67ccb1b3923fc901c0fb686"
+}

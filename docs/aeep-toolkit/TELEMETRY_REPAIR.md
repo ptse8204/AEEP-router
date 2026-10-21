@@ -77,3 +77,14 @@ conformance before the maximum four public capture tasks. It needs explicit
 approval because the preceding exact review excluded builds and replay. The
 existing OTLP implementation and package pins are unchanged; no hosted backend
 or authentication intervention is needed to correct these image bytes.
+
+### October 21 image correction status
+
+The operator approved the two COPY-only image builds. The first build failed
+before image creation because the Dockerfile used a bare sha256 parent reference.
+BuildKit interpreted it as a Docker Hub repository and its metadata lookup failed.
+No collector or diagnostic model turn started. The new
+[reference-only amendment](../../reports/toolkit-v2/c07/capture-local-parent-20261021/README.md)
+uses the existing local parent names with their unchanged immutable digests and
+checks them before building. Actual BuildKit resolution remains untested; explicit
+approval is needed because the failed predecessor forbids automatic retries.

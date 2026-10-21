@@ -1,0 +1,107 @@
+{
+  "purpose": "Correct only BuildKit parent references after the terminal failed COPY-only attempt; same two local parent images and collector bytes, then fresh gated checks.",
+  "source_commit": "44bdad98c1a6b2d845c4e084afe07bbf96a0073e",
+  "source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "failed_approved_review_sha256": "e3dd38d12759228c6e58cf56b8d7a19e34b0c496734f30fb74d03a5634814820",
+  "failed_collector_result_sha256": "8a5729d623ab656fb71922ffd4e01e76d1ee9bebe417a6d81c018d7ff96c2225",
+  "root_cause": {
+    "expected_collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "actual_collector_sha256_in_both_images": "bb758886cabe5dbd6080e8bbdee4aa2aa3e5d800b7ed2d0729896f39e8fff275",
+    "launcher_behavior": "The reviewed_files hash check exits before launching the App Server when these differ. No model was started."
+  },
+  "builds": {
+    "control": {
+      "parent": "sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7",
+      "tag": "aeep-toolkit-v2/capture-collector-20261021:control",
+      "dockerfile_sha256": "c4eafffaefb7ec94485dd903d3838efbc6c6992aeb26b5f74e367b9cefb09702",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "parent_reference": "aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7"
+    },
+    "treatment": {
+      "parent": "sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023",
+      "tag": "aeep-toolkit-v2/capture-collector-20261021:treatment",
+      "dockerfile_sha256": "299c2d4568a0a23c960ca148390c7ae1b6b8dc07c2ec62545e025ef85acb7f68",
+      "collector_sha256": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+      "parent_reference": "aeep-edit-reusable-base-treatment@sha256:30d5907203610310b43aef734f5b6a0c08dce069022971e0065496c530b1f023"
+    }
+  },
+  "maximum_build_growth_bytes": 1073741824,
+  "minimum_host_reserve_bytes": 53687091200,
+  "inputs": {
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/prepare-collector.py": "20cb145f8196406c29ffa4f135dc17036bc048cb761a465aca646e5568d9bf87",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/run-collector.py": "8a70ec8333f8fb9923342e8f651d03cd8f3556f8a2a7e3aa1a19c8d742d99036",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/diagnostic-tasks.json": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/run-diagnostics.py": "2263cafb08420b581fc8b9d8b7004563405359931c825ec6bf4e8401f64fda4b",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/assemble-collector-boundary.py": "fdcb1014124eb3b52f135b0a3991465f5df4046d9b955acf723c532f5e313dd9",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/run-repair.py": "196a4e2cdbf40af4dcb8f4e742257642ab8cf0adfc4994290b58f665d5f21f53",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/image-control/Dockerfile": "c4eafffaefb7ec94485dd903d3838efbc6c6992aeb26b5f74e367b9cefb09702",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/image-control/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/image-treatment/Dockerfile": "299c2d4568a0a23c960ca148390c7ae1b6b8dc07c2ec62545e025ef85acb7f68",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/image-treatment/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/operation-review.json": "70c19b6eb98a0b8c3878200243fb01a4e4f288a83b01369649ce09700e9204be",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/build-result.json": "9e207be3506d86bc03cd69d1f8afe0dca2f121351afd5375f30f7ee887d13474",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/control-build.log": "3dcdcea03bb0e666973a80209d9206a967f903677ef3377a3bb003802d43ad9a",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/source-reference-audit-result.json": "2d91f21ef273546029615f9f07b12f92e1b6237716b53d063a2313b796e297be",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-operation-review.json": "e3dd38d12759228c6e58cf56b8d7a19e34b0c496734f30fb74d03a5634814820",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-definitions.json": "f0133d911b1243e5e8620c92cdd22f0fe5dbac314b3b30fc9745dbf6d38755a5",
+    "reports/toolkit-v2/c07/capture-repair-20261019/collector-result.json": "8a5729d623ab656fb71922ffd4e01e76d1ee9bebe417a6d81c018d7ff96c2225",
+    "reports/toolkit-v2/c07/capture-repair-20261019/validation/source-stability.json": "a848aca914b3a381fa46cc0c92fd58ebd9b94e52af0f5c4733df936c27650c11",
+    "src/aeep/hosts/codex_metrics.py": "d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/local-reference-probe-review.json": "4efe731840a1a7aa7dc6b5774d2bc966a85d74b4e7300f5eef1d910fc352475f",
+    "reports/toolkit-v2/c07/capture-local-parent-20261021/local-reference-probe-result.json": "748c60f02d56efb140671847034b59f011273e15d1c2c8412da90fae0da0ac8f",
+    "reports/toolkit-v2/c07/capture-image-repair-20261020/operator-approval.json": "48b4936b0752c266f96633cf94b137b4744e1d6be2bbd4eb5572bb60829964ef"
+  },
+  "actions": [
+    "Two local builds with exactly FROM and COPY; no RUN instruction, image pulls, network or installation. Only the already-reviewed collector replaces the stale file, with root ownership and mode0444; preserve every parent/rollback image.",
+    "Resolve and retain each resulting immutable image ID, prepare fresh exact definitions and scope under September25/27 authority, and bind the generated collector review to this parent approval before launch.",
+    "One fresh pair inspection with the same11 established probes and actual collector denied-access probe per worker. Preserve failed predecessor and all counters; no automatic retry.",
+    "Only after conformance passes, run the same explicit-request pair; only after complete captures and positive bound loading, run the optional pair. Four task turns total, no holdouts, no full comparison, no admission or threshold changes.",
+    "Restore the approved proxy stopped and remove only new transient workers/private security snapshots. Retain the two new image tags/IDs, reports, logs, old images, volumes, backups and unrelated user work."
+  ],
+  "limits": {
+    "maximum_model_turns": 4,
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600,
+    "cash_usd": 0,
+    "minimum_host_free_bytes": 54760833024,
+    "maximum_diagnostic_task_seconds_each": 102,
+    "maximum_diagnostic_lifecycle_seconds": 1200,
+    "maximum_diagnostic_plans": 2,
+    "maximum_diagnostic_assessment_operations": 64,
+    "maximum_transient_model_workers": 4,
+    "maximum_build_operations": 1,
+    "maximum_build_seconds": 360,
+    "maximum_builds": 2
+  },
+  "untrusted_execution": "Same reviewed Codex binary, launcher, dependencies and exact collector source; the two COPY-only outputs have new image IDs and require this explicit parent approval.",
+  "forbidden": [
+    "Credential reading/copying/login",
+    "New destinations, paid calls or hosted telemetry",
+    "New dependency installs or source repairs",
+    "More than four task turns or automatic retries",
+    "Changing the old comparison or evidence policy",
+    "Image/volume/backups removal, activation, release, publication or pushing"
+  ],
+  "approval_record": "operator-approval.json with approved=true and review_sha256 equal to this raw file SHA-256",
+  "why_new_approval": "The prior review explicitly prohibits automatic retries and pins invalid Dockerfile bytes. This exact amendment changes only source-reference syntax plus local-parent guards/fresh output paths, then permits one fresh attempt.",
+  "execution_started": false,
+  "failed_parent_reference_review_sha256": "70c19b6eb98a0b8c3878200243fb01a4e4f288a83b01369649ce09700e9204be",
+  "failed_parent_reference_result_sha256": "9e207be3506d86bc03cd69d1f8afe0dca2f121351afd5375f30f7ee887d13474",
+  "reference_correction": {
+    "before": "FROM sha256:<manifest-id> was parsed as Docker Hub repository library/sha256 with a tag.",
+    "after": "FROM existing-local-repository@sha256:<same-manifest-id>; each exact named digest must resolve locally to the approved parent before any build.",
+    "why": "The earlier Dockerfile syntax was wrong for this builder. No image, worker, collector or model started; the attempt is terminal and retained.",
+    "unchanged": [
+      "Both immutable parent IDs",
+      "Collector source/content hash and target mode0444",
+      "Exactly one FROM and one COPY, no RUN",
+      "Codex binary, launcher, dependencies, model and destination",
+      "Maximum4 public diagnostics, no holdouts or admission",
+      "No automatic retries or retained-resource cleanup"
+    ],
+    "unexpected_effect": "The failed predecessor attempted a Docker Hub metadata lookup despite --pull=false. No successful pull is evidenced; network bytes are unmeasured. --network=none controls RUN networking, not source resolution.",
+    "additional_guard": "Reserve the finite build/preflight operation before inspecting the existing parent reference and output tags. Require the exact local reference to resolve before building. Reject parent ONBUILD instructions; no hidden build command is allowed."
+  }
+}

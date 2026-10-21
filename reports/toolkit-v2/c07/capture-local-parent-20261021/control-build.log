@@ -1,0 +1,34 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 222B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7
+#2 DONE 1.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 11.89kB done
+#4 DONE 0.1s
+
+#5 [1/2] FROM docker.io/library/aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7
+#5 resolve docker.io/library/aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7
+#5 resolve docker.io/library/aeep-edit-reusable-base-control@sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7 0.7s done
+#5 CACHED
+
+#6 [2/2] COPY --chown=0:0 --chmod=0444 codex_metrics.py /opt/aeep/codex_metrics.py
+#6 DONE 0.1s
+
+#7 exporting to image
+#7 exporting layers 0.0s done
+#7 exporting manifest sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96 done
+#7 exporting config sha256:5cbe36f26ec16b6ea9ae1a1f779b2d09d1ca3767cd0882b7691c9db261412c02 0.0s done
+#7 naming to docker.io/aeep-toolkit-v2/capture-collector-20261021:control done
+#7 unpacking to docker.io/aeep-toolkit-v2/capture-collector-20261021:control 0.0s done
+#7 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/default/default/ffz2ia8n2pyb3ddx8c040sz8x

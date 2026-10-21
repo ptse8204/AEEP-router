@@ -1,0 +1,358 @@
+{
+  "review_sha256": "a30a0add139bd292850e128a378c75e3a11db3792d57d6df6119e96831760438",
+  "source_digest": "33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96",
+  "model_turns": 0,
+  "images_created": 0,
+  "installations": 0,
+  "raw_payloads_retained": false,
+  "telemetry_boundary_observations": {
+    "10284e1d90886a8e78f19a507a829bee73410f58e243e1999e74319d50f2b0e5": {
+      "collector_connection_denied": true,
+      "scope_sha256": "578ae0a2dd605a6ec79c3c0a543db8b65824e511e8b0062ed90b9018142d306b",
+      "program_sha256": "22ea9326c374ff390e0c2e896f0cf8fb512a3c504b7e14d3c482c67a07c06a19",
+      "native_command_path": true,
+      "port_is_private_ephemeral": true
+    },
+    "9f7168071023e34503df12b05591ff08ec881e050ab6705af89db5c60a0ac1d7": {
+      "collector_connection_denied": true,
+      "scope_sha256": "c34770000159c5b88148eb6a6595faf2598ead10d7388b5b53ab2358a8007436",
+      "program_sha256": "cc3c408e0e9367251c45df533b8ed4717225a214c6205c0be4b2274953d90fcd",
+      "native_command_path": true,
+      "port_is_private_ephemeral": true
+    }
+  },
+  "replay_allowed": false,
+  "full_conformance": false,
+  "initial_inspection": {
+    "codex-app-server:text-phase-final-control": {
+      "full_conformance": false,
+      "model_turns": 0,
+      "identity_digest": "00202fdb714a7f96c6c370351b689560ae8836e1edbc5a57375da806479de57a",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "models": [
+        {
+          "id": "gpt-6-astra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        },
+        "config/web_search": {
+          "present": false,
+          "matches": false,
+          "expected": "disabled"
+        },
+        "config/mcp_servers": {
+          "present": true,
+          "matches": true,
+          "expected": {}
+        },
+        "config/features/apps": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/memories": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/multi_agent": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/browser_use": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/computer_use": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        },
+        "requirements/allowedWebSearchModes": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "disabled"
+          ]
+        }
+      },
+      "advertised_inventory": {
+        "available": false,
+        "reason": "empty MCP configuration and disabled apps are not verified"
+      },
+      "sandbox_command": {
+        "workspace_write": true,
+        "configuration_write": "absent",
+        "proxy": "denied",
+        "direct": "denied"
+      },
+      "inspection_complete": true,
+      "collector_boundary": {
+        "collector_connection_denied": true,
+        "scope_sha256": "578ae0a2dd605a6ec79c3c0a543db8b65824e511e8b0062ed90b9018142d306b",
+        "program_sha256": "22ea9326c374ff390e0c2e896f0cf8fb512a3c504b7e14d3c482c67a07c06a19",
+        "native_command_path": true,
+        "port_is_private_ephemeral": true
+      }
+    },
+    "codex-app-server:text-phase-final-treatment": {
+      "full_conformance": false,
+      "model_turns": 0,
+      "identity_digest": "c0d26115fe446914bba73fef4e1f3ae033536d4edc78a30061dbd474691f8544",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "models": [
+        {
+          "id": "gpt-6-astra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        },
+        "config/web_search": {
+          "present": false,
+          "matches": false,
+          "expected": "disabled"
+        },
+        "config/mcp_servers": {
+          "present": true,
+          "matches": true,
+          "expected": {}
+        },
+        "config/features/apps": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/memories": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/multi_agent": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/browser_use": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        },
+        "config/features/computer_use": {
+          "present": false,
+          "matches": false,
+          "expected": false
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        },
+        "requirements/allowedWebSearchModes": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "disabled"
+          ]
+        }
+      },
+      "advertised_inventory": {
+        "available": false,
+        "reason": "empty MCP configuration and disabled apps are not verified"
+      },
+      "sandbox_command": {
+        "workspace_write": true,
+        "configuration_write": "absent",
+        "proxy": "denied",
+        "direct": "denied"
+      },
+      "inspection_complete": true,
+      "collector_boundary": {
+        "collector_connection_denied": true,
+        "scope_sha256": "c34770000159c5b88148eb6a6595faf2598ead10d7388b5b53ab2358a8007436",
+        "program_sha256": "cc3c408e0e9367251c45df533b8ed4717225a214c6205c0be4b2274953d90fcd",
+        "native_command_path": true,
+        "port_is_private_ephemeral": true
+      }
+    }
+  },
+  "pair": {
+    "pair_definition_digest": "936602fff0a312c04d32d3b1a6db703b25dd8487d3de826ef7d59b5bff8cde0c",
+    "model_turns": 0,
+    "full_conformance": false,
+    "workers": {
+      "control": {
+        "record_digest": "584c7106bb9ba986fa875dc44df4ba2dd9843eccaffddb4a8b5f3a84b7089855",
+        "probe_digests": [
+          "eb360978e357d42808a50f8a6bc3d4ee1eae56f54cf2351245a2743458c82f24",
+          "9b6f386c4ea7f5293d2407de26ea639dcb6316cf86c121d1b929ce64eab5e8f7",
+          "6aed138256df636f276fc3d27e926ed92566002ef40ffab0186399198e08b218",
+          "23d7db5825ae5364e0570953df4b23e65042ef4d0c1eedee62312766df6c7a8f",
+          "85796ef0bba1305b6b93d6f6f28eaaa858880e0f6d560f9f405a7d91f2a9b1a6",
+          "cb67c864c1926c022f905089e63dc7f18eb98744ec5770461f92e5187366ba2d",
+          "b957842abd87cc4c12851b4c8704663fc095ace0cdc865cfe1f87567628a4feb",
+          "e00ed58501c776b938b83d8811ab0eeeb7b117572e007a0fd40fa868613f18be",
+          "77f499917fe3a2a5cec38a12ff57e04017700868db1f7745773566dfd92ba9ae",
+          "686197c2c332d34379da3a5345907cf420b034f6cbad5850ddd9f513bf3a9fb1",
+          "8abfd8ecb0d75593c871b25df1728aa32617a293d9016a75f938a4c9b498606b"
+        ],
+        "probes_match": false
+      },
+      "treatment": {
+        "record_digest": "e4d0d43dd59d4bfc7e23bd43856e02f29d88b4066e51124cdfbbb6075629282f",
+        "probe_digests": [
+          "ef13f87eb794f0fdf500a3a9ce650ced5df9d2e316a2aa5c3b8e11661fabdca6",
+          "df48b8a8cfdac586189da87c92303b19af66b22fbbbf1eaa9c5fe635360840ef",
+          "bb34a70001056ce245ca70114df9b5bf8efd157c2e77578bf37c8c7d2c56300f",
+          "563c9c78c730ac6aa43a606468f09493c5325337692f8805d52d2666c11ae382",
+          "771e82343c0b1b8e88045ccc9a780e68b63da887e0d6955f204f52b9c58131e1",
+          "df1f35bfbd76f405ee9a8935e1e0ebebfef7f7b6838d29ca2fb1db677455a2f5",
+          "21aac5e8ede8ad1bd014d3eaf083869739046ef1c0c5a8428610d41b77b4e2a6",
+          "f3c9ff39e042387b52d9792b449e3eda126daf0682dc9a23cccb33deb3ef9229",
+          "6afe09e93c80e33e9dd89fd41f8fed9c3596ef0a7bb1cb0473562fc66ce37ab0",
+          "983976fa99a949529f92c0ea496a19945d7ce6959253511d688f26f6d1432fe2",
+          "2d3e4459cbfd8689059a5cba847bcd1b6b8e54adcb0d47cf3887b41148a84d3d"
+        ],
+        "probes_match": false
+      }
+    },
+    "probes_match": false
+  },
+  "passed": false,
+  "error_type": "AssertionError",
+  "proxy_restored_stopped": true,
+  "source_unchanged": true,
+  "grant_after": [
+    12706,
+    3739,
+    117956.19509809231,
+    "0.0"
+  ]
+}

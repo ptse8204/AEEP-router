@@ -1,5 +1,15 @@
 # Correct the collector file in the two worker images
 
+## Superseding October 21 state
+
+The operator approved this correction. Its one-shot build failed before image
+creation because bare FROM sha256 syntax became a Docker Hub repository lookup.
+Do not run this driver again. No image, worker, collector or diagnostic turn
+started. The approved attempt, failure and costs are retained. Continue from
+[the exact local-parent amendment](../capture-local-parent-20261021/README.md),
+review8056e725…, which is prepared but unapproved/unexecuted. The earlier sections
+below describe the historical proposal; the authoritative current state is STATE.md.
+
 The approved capture check stopped before Codex initialization. Both images contain
 collector `bb758886…`; the reviewed profile requires `d551e2f4…`. The immutable
 launcher rejects the mismatch. The source audit and failed operation are retained

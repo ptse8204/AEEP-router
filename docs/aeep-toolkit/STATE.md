@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-20 local time, approved capture bundle executed:** The corrected wheel passed 15 offline CLI checks and one capture-chain check, and the 67-file offline documentation check passed with zero errors. Both private runtimes were removed. Collector inspection failed before any model turn: both immutable images contain collector bb758886…, while the approved profile pins d551e2f4…. The launcher rejects that mismatch. A read-only public-file audit proves the packaging gap. A concrete two-image COPY-only correction and fresh gated inspection/maximum four diagnostic turns are prepared under review 70c19b6e…; the preceding bundle expressly excluded builds and replay, so new approval is required. Application source and all 12 integrated checks remain unchanged at 44bdad9/33673d539a75…. The original comparison and inconclusive verdict are preserved. No architecture, cash, credential or package-version choice is pending.
+**Status as of 2026-10-21, policy repair in progress:** The operator approved local-parent amendment8056e725…. Both COPY-only image builds succeeded; both collector endpoints denied sandbox access. Pair conformance then failed the required disabled-feature checks and treatment inventory consistency. Both workers were removed and the proxy restored stopped; zero model turns ran. The relay mixed policy -c overrides before app-server with telemetry overrides after it. A narrow source correction keeps both in one scope. Two synthetic regression cases fail on the old ordering and pass after correction;117 focused checks passed. Actual Codex parsing and corrected conformance remain unverified. New source df8f0b9e5437… now needs one integrated verification cycle and an exact changed-collector/wheel review. Earlier package/docs results and the original inconclusive comparison retain their old source bindings. No pending architecture, model, dependency or credential choice.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -27,14 +27,14 @@ checkpoint_status:
   C13: BLOCKED
 last_verified_commit: '44bdad98c1a6b2d845c4e084afe07bbf96a0073e'
 last_check_command: 'Approved capture bundle: collector-result.json; package-review-telemetry-20261019/execution/summary.json; lychee-telemetry-review-20261019/execution-result.json'
-last_check_result: 'Wheel15 CLI+1 capture checks passed;67-file offline docs passed,0 errors; runtimes removed. Collector failed stale image-file hash before Codex initialization;0 new model turns. Static source audit proves mismatch; unchanged-source12 integrated checks remain valid.'
-next_action: 'Obtain exact approval for COPY-only repair review70c19b6e; record actual response, then follow c07/capture-image-repair-20261020/README.md. Do not replay completed or failed old drivers. No broad regression or wheel rebuild for unchanged application source.'
+last_check_result: '8056e725 builds passed; collector access denied in both workers; canonical pair conformance failed disabled_features and treatment candidate inventory.0 model turns. Safe source correction passes2 new synthetic regression cases and117 focused checks; full new-source verification pending.'
+next_action: 'Complete capture-policy-repair-20261021/run-checks.py once for source df8f0b9e5437. Prepare one exact bundle for changed collector images/fresh conformance/maximum4 diagnostics and current wheel. Do not execute new collector bytes under older approvals or replay terminal drivers.'
 blocked_actions:
   - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
   - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
   - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Bundle f8ca5c58 was explicitly approved and executed to its dependency gate. New review70c19b6e covers two COPY-only image corrections plus fresh conformance and the unused maximum4 diagnostic turns; builds/replay were excluded by the previous approval.'
+  - 'Both70c19b6e and8056e725 were explicitly approved and executed to terminal/dependency stops. New collector bytes and resulting current wheel need a concrete exact review after integrated verification; maximum4 diagnostic turns remain unused.'
   - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
@@ -2090,7 +2090,6 @@ excluded builds/replay. No new architecture or credential decision is required.
 Human comprehension, whole-host resource acceptance and release remain separate
 open gates; no actual participant answer or release authorization was supplied.
 
-
 Post-execution status prose passed the 67-file documentation lint. Its first pass
 caught four added double blank lines; those were corrected and both logs retained.
 New report/review links were checked locally with first-party path checks. The
@@ -2101,3 +2100,68 @@ The completed Lychee run is not replayed for these status records.
 The staged whitespace check flags only Lychee’s captured final blank line in its
 raw docs-check.log. That evidence is preserved unchanged; the documentation check
 itself passed. No source or configuration discrepancy was found.
+
+### October 21 — approved COPY-only attempt failed before image creation
+
+The explicit operator approval is retained against review70c19b6e…. All16 pins,
+source and storage reserve passed preflight. BuildKit0.32.2/docker-driver parsed
+`FROM sha256:<manifest-id>` as Docker Hub `library/sha256:<tag>` and attempted a
+metadata lookup despite `--pull=false`. It failed before COPY; no image or worker
+was created, and no collector/model ran. The approved two-build sequence stopped
+at its first control build. No automatic retry occurred. Network bytes are not
+measured, and no successful image pull is evidenced. The raw log is retained;
+`--network=none` controls RUN networking and did not block source resolution.
+This is a Dockerfile-preparation error. No credentials or infrastructure choice
+is needed to correct it. See [the actual failure](../../reports/toolkit-v2/c07/capture-image-repair-20261020/failure-analysis.json).
+
+A charged read-only audit identified the existing local repository digest names.
+A second read-only check resolved both proposed `name@sha256:…` references to the
+same pinned parents and found no ONBUILD instructions. No tags, containers,
+images, configuration or credentials were changed by either metadata check.
+The three measured operations add 3.568312752 operation seconds; the grant now records
+12,702 operations,3,739 model turns,117929.59668288426 operation seconds and cash0.
+All previous usage remains. The maximum4 diagnostic turns are still unused.
+
+D67 prepares [the exact local-parent amendment](../../reports/toolkit-v2/c07/capture-local-parent-20261021/README.md),
+raw SHA-256 8056e725cfb62949e4eb16f91bd7ad5a3e83c03ad296774af9ef227300e54bec.
+It retains both parent IDs and collector bytes, corrects only FROM references,
+adds local-resolution/ONBUILD guards before building under the reservation, and
+uses fresh output tags/records. Its22 input pins and five driver syntax checks
+passed. Actual BuildKit resolution and the corrected collector remain untested.
+No new application source, dependency, model destination, threshold, wheel or
+architecture is proposed. The predecessor's explicit no-retry rule requires
+approval of this concrete amendment before one fresh attempt. Original comparison,
+package/docs evidence and C13 human/resource/release gates remain unchanged.
+
+
+### October21 — local-parent builds succeeded; effective-policy check failed
+
+The operator explicitly approved8056e725…. Both local reference/ONBUILD guards
+passed and both COPY-only builds succeeded. Exact new IDs/tags are retained in
+`capture-local-parent-20261021/build-result.json`: control311812e12680… and
+treatment74056005c288…. Existing parents and new outputs remain preserved.
+The fresh pair inspection observed denied access to both actual collector ports.
+It also verified immutable images, active thread policy, workspace/dependencies,
+credential canaries, cross-worker/answer exclusion, network denial, resource limits,
+interruption, command completion and cleanup. Its configuration probe failed
+`disabled_features` in both workers; treatment `candidate_available` was inconsistent
+because prerequisite advertised inventory was unavailable. No conformance pass,
+model turn, qualification, admission or efficacy is claimed. Both workers were
+removed and the proxy was restored stopped. Grant:12,706 operations,3739 model turns,
+117956.19509809231 operation seconds,cash0. All failed predecessors are retained.
+
+The safe engineering correction moves the relay's telemetry overrides into the
+same pre-subcommand scope as policy overrides. Collector hash is now
+9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3;
+source digestdf8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a.
+The two new synthetic host cases fail before the change and pass afterwards;
+117 focused checks and targeted Ruff pass. They do not prove installed Codex
+argument behavior or resolve prospective conformance. Actual upstream0.154.0 CLI
+source was inspected as inert data; hashes, Apache license and NOTICE are retained.
+Coordinator source-research time/network totals remain unmeasured.
+
+The new source invalidates current-source package/conformance claims. Old evidence
+is preserved for its own source. One required integrated cycle is next, then one
+exact bundle for the changed collector execution and changed wheel. No new model,
+installation or third-party execution is authorized by editing this source. The
+unchanged historical comparison and human/resource/release gates remain separate.

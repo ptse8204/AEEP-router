@@ -1,5 +1,15 @@
 # Resume the capture correction
 
+## Superseding October 21 state
+
+The operator approved this correction. Its one-shot build failed before image
+creation because bare FROM sha256 syntax became a Docker Hub repository lookup.
+Do not run this driver again. No image, worker, collector or diagnostic turn
+started. The approved attempt, failure and costs are retained. Continue from
+[the exact local-parent amendment](../capture-local-parent-20261021/README.md),
+review8056e725…, which is prepared but unapproved/unexecuted. The earlier sections
+below describe the historical proposal; the authoritative current state is STATE.md.
+
 Worktree: `/Users/edwintse/Documents/aeep-toolkit-v2`, branch
 `codex/toolkit-v2-implementation`. Source remains `44bdad9` /
 `33673d539a754550a7cb7dab0fbce30269fe008ff03bb629164600a86a7e0c96`.

@@ -1,0 +1,1274 @@
+{
+  "control": {
+    "record": {
+      "schema_version": "assessment.worker-inspection.v1",
+      "request_id": "conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+      "worker_digest": "10284e1d90886a8e78f19a507a829bee73410f58e243e1999e74319d50f2b0e5",
+      "execution_evidence_digest": "0a9d8470d7dfda0ecc24a394c0f131d00c37aef935859f739af7bea959d12f9c",
+      "observations": {
+        "full_conformance": false,
+        "model_turns": 0,
+        "inspection": {
+          "full_conformance": false,
+          "model_turns": 0,
+          "identity_digest": "00202fdb714a7f96c6c370351b689560ae8836e1edbc5a57375da806479de57a",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "models": [
+            {
+              "id": "gpt-6-astra",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-sol",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-terra",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-luna",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ]
+            }
+          ],
+          "config/read": {
+            "config/default_permissions": {
+              "present": false,
+              "matches": false,
+              "expected": "aeep"
+            },
+            "config/approval_policy": {
+              "present": false,
+              "matches": false,
+              "expected": "never"
+            },
+            "config/web_search": {
+              "present": false,
+              "matches": false,
+              "expected": "disabled"
+            },
+            "config/mcp_servers": {
+              "present": true,
+              "matches": true,
+              "expected": {}
+            },
+            "config/features/apps": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/memories": {
+              "present": true,
+              "matches": true,
+              "expected": false
+            },
+            "config/features/multi_agent": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/browser_use": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/computer_use": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            }
+          },
+          "configRequirements/read": {
+            "requirements/allowedPermissionProfiles": {
+              "present": true,
+              "matches": true,
+              "expected": {
+                "aeep": true
+              }
+            },
+            "requirements/allowedApprovalPolicies": {
+              "present": true,
+              "matches": true,
+              "expected": [
+                "never"
+              ]
+            },
+            "requirements/allowedWebSearchModes": {
+              "present": true,
+              "matches": true,
+              "expected": [
+                "disabled"
+              ]
+            }
+          },
+          "advertised_inventory": {
+            "available": false,
+            "reason": "empty MCP configuration and disabled apps are not verified"
+          },
+          "sandbox_command": {
+            "workspace_write": true,
+            "configuration_write": "absent",
+            "proxy": "denied",
+            "direct": "denied"
+          },
+          "inspection_complete": true,
+          "collector_boundary": {
+            "collector_connection_denied": true,
+            "scope_sha256": "578ae0a2dd605a6ec79c3c0a543db8b65824e511e8b0062ed90b9018142d306b",
+            "program_sha256": "22ea9326c374ff390e0c2e896f0cf8fb512a3c504b7e14d3c482c67a07c06a19",
+            "native_command_path": true,
+            "port_is_private_ephemeral": true
+          }
+        },
+        "active_policy": {
+          "profile_matches": true,
+          "approval_never": true,
+          "cwd_matches": true
+        },
+        "canary_attempted": true,
+        "canary_seeded": true,
+        "cgroups": {
+          "cpu.max": "100000 100000",
+          "memory.max": "1073741824",
+          "pids.max": "64"
+        },
+        "container": {
+          "image": "sha256:311812e126806a37295fd5c32cbe8c75356d2194697c06fcf6cdcaa145b3ff96",
+          "readonly": true,
+          "network": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+          "mounts": [
+            {
+              "Type": "volume",
+              "Name": "aeep-auth-incremental-control",
+              "Destination": "/worker/auth"
+            }
+          ]
+        },
+        "filesystem": {
+          "own_workspace": "readable",
+          "other_workspace": "absent",
+          "credential_canary": "denied",
+          "external_answer": "absent",
+          "shared_workbook_roundtrip": true,
+          "pandas": "2.3.2",
+          "openpyxl": "3.1.5",
+          "candidate_skill_sha256": null,
+          "candidate_alias": false,
+          "candidate_runtime": false
+        },
+        "canary_removed": true,
+        "cleanup_confirmed": true,
+        "command_stopped": true,
+        "collection_complete": true,
+        "probes_match": false,
+        "observed_probes": {
+          "allowed_tool": {
+            "workspace_write": true,
+            "dependencies": true
+          },
+          "denied_tool": {
+            "credential_read_denied": true
+          },
+          "cross_worker": {
+            "own_readable": true,
+            "other_absent": true
+          },
+          "answers": {
+            "external_answer_blocked": true
+          },
+          "configuration": {
+            "immutable_image": true,
+            "active_policy": true,
+            "requirements": true,
+            "disabled_features": false
+          },
+          "candidate_network": {
+            "proxy_denied": true,
+            "direct_denied": true
+          },
+          "credential_canary": {
+            "seeded": true,
+            "denied": true,
+            "removed": true
+          },
+          "resource_limits": {
+            "cpu": true,
+            "memory": true,
+            "processes": true,
+            "mounts": true
+          },
+          "cleanup": {
+            "worker_removed": true,
+            "command_stopped": true
+          },
+          "events": {
+            "command_responses_complete": true
+          },
+          "candidate_access": {
+            "definition_digest": "3392821cc7fd1da515638b9158cc9981c0eea93555bd4e108816f4540b517bf8",
+            "candidate_available": false
+          }
+        }
+      }
+    },
+    "journal": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+      "adapter": "codex-app-server:text-phase-final-control",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 1,
+          "kind": "action.started",
+          "source_id": "config/read-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 2,
+          "kind": "action.completed",
+          "source_id": "config/read-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 3,
+          "kind": "action.started",
+          "source_id": "configRequirements/read-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 4,
+          "kind": "action.completed",
+          "source_id": "configRequirements/read-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 5,
+          "kind": "action.started",
+          "source_id": "sandbox-command-start",
+          "action_digest": "e8d65f8894bd9a643b032eebd9cc2c8b26224a30d8e1c64a101153397234cf05",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 6,
+          "kind": "action.completed",
+          "source_id": "sandbox-command-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 7,
+          "kind": "action.started",
+          "source_id": "collector-access-start",
+          "action_digest": "22ea9326c374ff390e0c2e896f0cf8fb512a3c504b7e14d3c482c67a07c06a19",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 8,
+          "kind": "action.completed",
+          "source_id": "collector-access-complete",
+          "action_digest": "22ea9326c374ff390e0c2e896f0cf8fb512a3c504b7e14d3c482c67a07c06a19",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 9,
+          "kind": "artifact.created",
+          "source_id": "collector-denied-result",
+          "action_digest": null,
+          "evidence_ref": "bc498b5d8a0353b4cd2fef1f818f1cef738c6d040af797b1b8eaf6ab76f7de9f",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 10,
+          "kind": "action.started",
+          "source_id": "active-policy-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 11,
+          "kind": "action.completed",
+          "source_id": "active-policy-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 12,
+          "kind": "action.started",
+          "source_id": "seed-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 13,
+          "kind": "action.completed",
+          "source_id": "seed-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 14,
+          "kind": "action.started",
+          "source_id": "filesystem-start",
+          "action_digest": "c7144daaaf7a92dde086f58c6a900b55bb27b01084de63f955d2b4ebbb93d6af",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 15,
+          "kind": "action.completed",
+          "source_id": "filesystem-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 16,
+          "kind": "action.started",
+          "source_id": "interruption-start",
+          "action_digest": "02c5de7e4f18c9124b3f2ac055f31da657af9f846c6cd4d1aabfbe3fd22749a9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 17,
+          "kind": "cancellation.requested",
+          "source_id": "interruption-cancel",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 18,
+          "kind": "cancellation.confirmed",
+          "source_id": "interruption-stopped",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 19,
+          "kind": "artifact.created",
+          "source_id": "probe-allowed_tool",
+          "action_digest": null,
+          "evidence_ref": "8cdec7db3e440612f376a13bc155e6d6742f445b487125e7fcc39b141e5284d0",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 20,
+          "kind": "artifact.created",
+          "source_id": "probe-denied_tool",
+          "action_digest": null,
+          "evidence_ref": "9cdff5c46a2c2672a3c1d7e97fac7efe0701793e7ef3005757011b17e00e38ef",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 21,
+          "kind": "artifact.created",
+          "source_id": "probe-cross_worker",
+          "action_digest": null,
+          "evidence_ref": "5399a2efbc34018ee82a2eb2d003f75deaca89d127865815af589bb6c98997b3",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 22,
+          "kind": "artifact.created",
+          "source_id": "probe-answers",
+          "action_digest": null,
+          "evidence_ref": "8a28df920cc8f100210436c29bdb16edad904cff59c6414caa294a52e72b46ae",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 23,
+          "kind": "artifact.created",
+          "source_id": "probe-configuration",
+          "action_digest": null,
+          "evidence_ref": "7bb55ed9e10a05d9426e827b29a6d42d94ee25165473092ccd5296dd4805064c",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 24,
+          "kind": "artifact.created",
+          "source_id": "probe-candidate_network",
+          "action_digest": null,
+          "evidence_ref": "ba4d499702b486e55c96d82d8814f9aa50826b5a2f5c7c76e5d41ef1446dd423",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 25,
+          "kind": "artifact.created",
+          "source_id": "probe-credential_canary",
+          "action_digest": null,
+          "evidence_ref": "2fa185f4c9786d8358569e2e455587d95f87137cb0de7674d5d782d468afb700",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 26,
+          "kind": "artifact.created",
+          "source_id": "probe-resource_limits",
+          "action_digest": null,
+          "evidence_ref": "147f8f135b1288cd72c78868c8bb121b8bf6eb5e38b8bd2c298cdb721f8f9fcb",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 27,
+          "kind": "artifact.created",
+          "source_id": "probe-cleanup",
+          "action_digest": null,
+          "evidence_ref": "e50b1ece862d03bd44e095a9ef1628f337a3ff561131c0fcf40843e67a4fcd39",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 28,
+          "kind": "artifact.created",
+          "source_id": "probe-events",
+          "action_digest": null,
+          "evidence_ref": "461395164379fa7164d38727b87aef96e6ad4aae3f7a8ee46cf6ec5e6703a4c1",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 29,
+          "kind": "artifact.created",
+          "source_id": "probe-candidate_access",
+          "action_digest": null,
+          "evidence_ref": "c53aac6dc044b0ed9c7b2be8f551ee6c2675f3ec6e1a4bfbab6e1e021990d044",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 30,
+          "kind": "artifact.created",
+          "source_id": "observations",
+          "action_digest": null,
+          "evidence_ref": "d26e216d003f48cac5062e78226dd2250836f7ff9e985757b87cd9899ecccf8c",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "db3ebe5c56da4d0bad079db594d6ad81",
+          "attempt_id": "pair-inspection:conformance_probe_475529fcf3af45beaa6d413ca80f5aa2",
+          "sequence": 31,
+          "kind": "execution.failed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": true,
+      "identity_digest": "00202fdb714a7f96c6c370351b689560ae8836e1edbc5a57375da806479de57a",
+      "boundary_digest": "10284e1d90886a8e78f19a507a829bee73410f58e243e1999e74319d50f2b0e5",
+      "journal_id": "db3ebe5c56da4d0bad079db594d6ad81"
+    }
+  },
+  "treatment": {
+    "record": {
+      "schema_version": "assessment.worker-inspection.v1",
+      "request_id": "conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+      "worker_digest": "9f7168071023e34503df12b05591ff08ec881e050ab6705af89db5c60a0ac1d7",
+      "execution_evidence_digest": "b76640a41e7afb95b7f43fbf3626699f8c3ba255d971f1d300595b7c7cc7457c",
+      "observations": {
+        "full_conformance": false,
+        "model_turns": 0,
+        "inspection": {
+          "full_conformance": false,
+          "model_turns": 0,
+          "identity_digest": "c0d26115fe446914bba73fef4e1f3ae033536d4edc78a30061dbd474691f8544",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "models": [
+            {
+              "id": "gpt-6-astra",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-sol",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-terra",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "ultra"
+              ]
+            },
+            {
+              "id": "gpt-5.6-luna",
+              "reasoning_efforts": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ]
+            }
+          ],
+          "config/read": {
+            "config/default_permissions": {
+              "present": false,
+              "matches": false,
+              "expected": "aeep"
+            },
+            "config/approval_policy": {
+              "present": false,
+              "matches": false,
+              "expected": "never"
+            },
+            "config/web_search": {
+              "present": false,
+              "matches": false,
+              "expected": "disabled"
+            },
+            "config/mcp_servers": {
+              "present": true,
+              "matches": true,
+              "expected": {}
+            },
+            "config/features/apps": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/memories": {
+              "present": true,
+              "matches": true,
+              "expected": false
+            },
+            "config/features/multi_agent": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/browser_use": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            },
+            "config/features/computer_use": {
+              "present": false,
+              "matches": false,
+              "expected": false
+            }
+          },
+          "configRequirements/read": {
+            "requirements/allowedPermissionProfiles": {
+              "present": true,
+              "matches": true,
+              "expected": {
+                "aeep": true
+              }
+            },
+            "requirements/allowedApprovalPolicies": {
+              "present": true,
+              "matches": true,
+              "expected": [
+                "never"
+              ]
+            },
+            "requirements/allowedWebSearchModes": {
+              "present": true,
+              "matches": true,
+              "expected": [
+                "disabled"
+              ]
+            }
+          },
+          "advertised_inventory": {
+            "available": false,
+            "reason": "empty MCP configuration and disabled apps are not verified"
+          },
+          "sandbox_command": {
+            "workspace_write": true,
+            "configuration_write": "absent",
+            "proxy": "denied",
+            "direct": "denied"
+          },
+          "inspection_complete": true,
+          "collector_boundary": {
+            "collector_connection_denied": true,
+            "scope_sha256": "c34770000159c5b88148eb6a6595faf2598ead10d7388b5b53ab2358a8007436",
+            "program_sha256": "cc3c408e0e9367251c45df533b8ed4717225a214c6205c0be4b2274953d90fcd",
+            "native_command_path": true,
+            "port_is_private_ephemeral": true
+          }
+        },
+        "active_policy": {
+          "profile_matches": true,
+          "approval_never": true,
+          "cwd_matches": true
+        },
+        "canary_attempted": true,
+        "canary_seeded": true,
+        "cgroups": {
+          "cpu.max": "100000 100000",
+          "memory.max": "1073741824",
+          "pids.max": "64"
+        },
+        "container": {
+          "image": "sha256:74056005c288c3475e1038c09f9682e95ee7471c96d64f994faf2a3a9c0c319b",
+          "readonly": true,
+          "network": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+          "mounts": [
+            {
+              "Type": "volume",
+              "Name": "aeep-auth-incremental-treatment",
+              "Destination": "/worker/auth"
+            }
+          ]
+        },
+        "filesystem": {
+          "own_workspace": "readable",
+          "other_workspace": "absent",
+          "credential_canary": "denied",
+          "external_answer": "absent",
+          "shared_workbook_roundtrip": true,
+          "pandas": "2.3.2",
+          "openpyxl": "3.1.5",
+          "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+          "candidate_alias": true,
+          "candidate_runtime": true
+        },
+        "canary_removed": true,
+        "cleanup_confirmed": true,
+        "command_stopped": true,
+        "collection_complete": true,
+        "probes_match": false,
+        "observed_probes": {
+          "allowed_tool": {
+            "workspace_write": true,
+            "dependencies": true
+          },
+          "denied_tool": {
+            "credential_read_denied": true
+          },
+          "cross_worker": {
+            "own_readable": true,
+            "other_absent": true
+          },
+          "answers": {
+            "external_answer_blocked": true
+          },
+          "configuration": {
+            "immutable_image": true,
+            "active_policy": true,
+            "requirements": true,
+            "disabled_features": false
+          },
+          "candidate_network": {
+            "proxy_denied": true,
+            "direct_denied": true
+          },
+          "credential_canary": {
+            "seeded": true,
+            "denied": true,
+            "removed": true
+          },
+          "resource_limits": {
+            "cpu": true,
+            "memory": true,
+            "processes": true,
+            "mounts": true
+          },
+          "cleanup": {
+            "worker_removed": true,
+            "command_stopped": true
+          },
+          "events": {
+            "command_responses_complete": true
+          },
+          "candidate_access": {
+            "definition_digest": "3392821cc7fd1da515638b9158cc9981c0eea93555bd4e108816f4540b517bf8",
+            "candidate_available": "inconsistent"
+          }
+        }
+      }
+    },
+    "journal": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+      "adapter": "codex-app-server:text-phase-final-treatment",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 1,
+          "kind": "action.started",
+          "source_id": "config/read-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 2,
+          "kind": "action.completed",
+          "source_id": "config/read-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 3,
+          "kind": "action.started",
+          "source_id": "configRequirements/read-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 4,
+          "kind": "action.completed",
+          "source_id": "configRequirements/read-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 5,
+          "kind": "action.started",
+          "source_id": "sandbox-command-start",
+          "action_digest": "e8d65f8894bd9a643b032eebd9cc2c8b26224a30d8e1c64a101153397234cf05",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 6,
+          "kind": "action.completed",
+          "source_id": "sandbox-command-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 7,
+          "kind": "action.started",
+          "source_id": "collector-access-start",
+          "action_digest": "cc3c408e0e9367251c45df533b8ed4717225a214c6205c0be4b2274953d90fcd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 8,
+          "kind": "action.completed",
+          "source_id": "collector-access-complete",
+          "action_digest": "cc3c408e0e9367251c45df533b8ed4717225a214c6205c0be4b2274953d90fcd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 9,
+          "kind": "artifact.created",
+          "source_id": "collector-denied-result",
+          "action_digest": null,
+          "evidence_ref": "bc498b5d8a0353b4cd2fef1f818f1cef738c6d040af797b1b8eaf6ab76f7de9f",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 10,
+          "kind": "action.started",
+          "source_id": "active-policy-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 11,
+          "kind": "action.completed",
+          "source_id": "active-policy-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 12,
+          "kind": "action.started",
+          "source_id": "seed-start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 13,
+          "kind": "action.completed",
+          "source_id": "seed-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 14,
+          "kind": "action.started",
+          "source_id": "filesystem-start",
+          "action_digest": "fc35f8b8b25cef7d51ae894386360024e52570f7e68b75b0f6207b859b627d3d",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 15,
+          "kind": "action.completed",
+          "source_id": "filesystem-complete",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 16,
+          "kind": "action.started",
+          "source_id": "interruption-start",
+          "action_digest": "02c5de7e4f18c9124b3f2ac055f31da657af9f846c6cd4d1aabfbe3fd22749a9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 17,
+          "kind": "cancellation.requested",
+          "source_id": "interruption-cancel",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 18,
+          "kind": "cancellation.confirmed",
+          "source_id": "interruption-stopped",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 19,
+          "kind": "artifact.created",
+          "source_id": "probe-allowed_tool",
+          "action_digest": null,
+          "evidence_ref": "8cdec7db3e440612f376a13bc155e6d6742f445b487125e7fcc39b141e5284d0",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 20,
+          "kind": "artifact.created",
+          "source_id": "probe-denied_tool",
+          "action_digest": null,
+          "evidence_ref": "9cdff5c46a2c2672a3c1d7e97fac7efe0701793e7ef3005757011b17e00e38ef",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 21,
+          "kind": "artifact.created",
+          "source_id": "probe-cross_worker",
+          "action_digest": null,
+          "evidence_ref": "5399a2efbc34018ee82a2eb2d003f75deaca89d127865815af589bb6c98997b3",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 22,
+          "kind": "artifact.created",
+          "source_id": "probe-answers",
+          "action_digest": null,
+          "evidence_ref": "8a28df920cc8f100210436c29bdb16edad904cff59c6414caa294a52e72b46ae",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 23,
+          "kind": "artifact.created",
+          "source_id": "probe-configuration",
+          "action_digest": null,
+          "evidence_ref": "7bb55ed9e10a05d9426e827b29a6d42d94ee25165473092ccd5296dd4805064c",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 24,
+          "kind": "artifact.created",
+          "source_id": "probe-candidate_network",
+          "action_digest": null,
+          "evidence_ref": "ba4d499702b486e55c96d82d8814f9aa50826b5a2f5c7c76e5d41ef1446dd423",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 25,
+          "kind": "artifact.created",
+          "source_id": "probe-credential_canary",
+          "action_digest": null,
+          "evidence_ref": "2fa185f4c9786d8358569e2e455587d95f87137cb0de7674d5d782d468afb700",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 26,
+          "kind": "artifact.created",
+          "source_id": "probe-resource_limits",
+          "action_digest": null,
+          "evidence_ref": "147f8f135b1288cd72c78868c8bb121b8bf6eb5e38b8bd2c298cdb721f8f9fcb",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 27,
+          "kind": "artifact.created",
+          "source_id": "probe-cleanup",
+          "action_digest": null,
+          "evidence_ref": "e50b1ece862d03bd44e095a9ef1628f337a3ff561131c0fcf40843e67a4fcd39",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 28,
+          "kind": "artifact.created",
+          "source_id": "probe-events",
+          "action_digest": null,
+          "evidence_ref": "461395164379fa7164d38727b87aef96e6ad4aae3f7a8ee46cf6ec5e6703a4c1",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 29,
+          "kind": "artifact.created",
+          "source_id": "probe-candidate_access",
+          "action_digest": null,
+          "evidence_ref": "f2a57a3a0c45b97be8dd533b4165c25082971198be23b02ece315799084036f9",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 30,
+          "kind": "artifact.created",
+          "source_id": "observations",
+          "action_digest": null,
+          "evidence_ref": "234ebfaebc6c79a04938540940cc4f4de87c6fe67d7665b2e377213c3277e17b",
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "3c892840940b43d0b0f55a877f5d5a7e",
+          "attempt_id": "pair-inspection:conformance_probe_de66a7587c6a4576a2db6b61791a53ed",
+          "sequence": 31,
+          "kind": "execution.failed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": true,
+      "identity_digest": "c0d26115fe446914bba73fef4e1f3ae033536d4edc78a30061dbd474691f8544",
+      "boundary_digest": "9f7168071023e34503df12b05591ff08ec881e050ab6705af89db5c60a0ac1d7",
+      "journal_id": "3c892840940b43d0b0f55a877f5d5a7e"
+    }
+  }
+}

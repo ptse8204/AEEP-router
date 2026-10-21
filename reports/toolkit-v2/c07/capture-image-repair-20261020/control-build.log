@@ -1,0 +1,20 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 190B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7
+#2 ERROR: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+------
+ > [internal] load metadata for docker.io/library/sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7
+   2 |     COPY --chown=0:0 --chmod=0444 codex_metrics.py /opt/aeep/codex_metrics.py
+   3 |     
+--------------------
+ERROR: failed to build: failed to solve: sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7: failed to resolve source metadata for docker.io/library/sha256:4fa7164eab77de79c57ef4ff538d466be334f1cb582f8ebab7740489f5cd5ce7: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+
+View build details: docker-desktop://dashboard/build/default/default/ptlj78i99usqln6nyyyvbik53
