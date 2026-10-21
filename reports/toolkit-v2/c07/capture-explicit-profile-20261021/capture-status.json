@@ -1,0 +1,189 @@
+{
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "actual_model_receipts": 4,
+  "token_captures_verified": 4,
+  "charged_diagnostic_turn_reservations": 5,
+  "preflight_skipped_reservations_retained": 1,
+  "required_profile_conformance_passed": true,
+  "required_profile_probe_groups_each": 11,
+  "positive_loading_observed": true,
+  "instructions_loading_status": "Verified instructions loaded in the forced positive probe; optional-exposure loading and semantic use remain unknown.",
+  "candidate_nonuse_proven": false,
+  "independent_provider_metering": "unverified",
+  "task_correctness": {
+    "passed": 3,
+    "ungraded": 1
+  },
+  "rows": [
+    {
+      "label": "Initial control, grader binding failed",
+      "receipt_id": "rcpt_c69d963474ad48d28027b32fdf61e9a7",
+      "receipt_digest": "69089f0f6625d20abc4af5466d88571653f74e38220614f6a765a5031abb41ad",
+      "executor": "toolkit-capture-local-tag-20261021.control",
+      "input_tokens": 8071,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 33,
+      "reasoning_output_tokens": 0,
+      "capture": {
+        "status": "verified",
+        "receipt_ref": "69089f0f6625d20abc4af5466d88571653f74e38220614f6a765a5031abb41ad",
+        "journal_ref": "a3956bc2c4767cc2837b59cc10e0071191922837c9512b26246e1737e0079612",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "d56108ec5484f644855b7f3869c39caa0e16d8c725586cecc7eab05c0974592c",
+        "skill_sha256": null
+      },
+      "task_verification": "Unknown: grader callback not found",
+      "metric_batches": 8,
+      "collector_delivery_complete": false
+    },
+    {
+      "label": "Corrected control",
+      "receipt_id": "rcpt_ed5e39105e0f4f5e81b5cce4e6fb9871",
+      "receipt_digest": "159edbfd62389e89251b582a26d63220f48751038ab5d02c80373e9015af1957",
+      "executor": "toolkit-capture-local-tag-20261021.control",
+      "input_tokens": 8071,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 68,
+      "reasoning_output_tokens": 33,
+      "capture": {
+        "status": "verified",
+        "receipt_ref": "159edbfd62389e89251b582a26d63220f48751038ab5d02c80373e9015af1957",
+        "journal_ref": "dec08d35148d404b9c955f590485d3e18717a19930171ea197db1274ecf839d6",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "2179f9686eeb4f8ff68fa318302af2661fdc6590a2ef17063453eb50fa24a859",
+        "skill_sha256": null
+      },
+      "task_verification": "Passed independent grader",
+      "metric_batches": 6,
+      "collector_delivery_complete": false
+    },
+    {
+      "label": "Corrected treatment",
+      "receipt_id": "rcpt_b190d45b7b504fdfaf063eb0e5b444a4",
+      "receipt_digest": "71a121738de8fd30d743d998579bbcfb7205e6841c682dd47a4037f2980715ea",
+      "executor": "toolkit-capture-local-tag-20261021.treatment",
+      "input_tokens": 8282,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 70,
+      "reasoning_output_tokens": 35,
+      "capture": {
+        "status": "verified",
+        "receipt_ref": "71a121738de8fd30d743d998579bbcfb7205e6841c682dd47a4037f2980715ea",
+        "journal_ref": "f52636f7e8036057d9323d32c2ad7c7db01d76fcf60d72f593629f685a7d4324",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "6de5b2397f813c85d2b588fb3266c8a0f26393be5dd929705ba24a5db5104924",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+      },
+      "task_verification": "Passed independent grader",
+      "metric_batches": 7,
+      "collector_delivery_complete": false
+    },
+    {
+      "label": "Forced skill loading check",
+      "receipt_id": "rcpt_d46c3e87fd974baca304370cd8d1e50f",
+      "receipt_digest": "81577da3b77db7f357b8ddca1a6aea5738aa48b40ee963fd1ba6514d32ad852b",
+      "executor": "toolkit-capture-explicit-profile-20261021.treatment",
+      "input_tokens": 9932,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 55,
+      "reasoning_output_tokens": 20,
+      "capture": {
+        "status": "verified",
+        "receipt_ref": "81577da3b77db7f357b8ddca1a6aea5738aa48b40ee963fd1ba6514d32ad852b",
+        "journal_ref": "51d6a0391560813ab7898dfdd9c350788f95f6975b4599aed8c3437e90db166c",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "5aa338cfb7d1217f7405907873efa648d8e3b57ca4c444fd396268a35119a162",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+        "invoke_types": [
+          "explicit"
+        ]
+      },
+      "task_verification": "Passed independent grader",
+      "metric_batches": 9,
+      "collector_delivery_complete": false
+    }
+  ],
+  "historical_comparison": "Unchanged INCONCLUSIVE; no historical replay or trust promotion.",
+  "new_qualification_or_admission": false,
+  "proxy_stopped": true,
+  "grant_after_last_observation": [
+    12784,
+    3744,
+    118132.75897138286,
+    "0.0"
+  ],
+  "completed_positive_review_sha256": "ba27e521798f450581d66ba963bd9a764799474af1c64c137a83e00eb36fd91e",
+  "pending_additional_task_turns": 0,
+  "source_records": {
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/first-control-capture.json": "eacf2befc4dd520cf75b43452e21b6817b5bd06be4e9b19e99d8560beb6634cd",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/binding-diagnostic-result.json": "bd808ab9496c706df01c72a51b624b6f372fee1ce7cd0e006197b455992d688e",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/final-diagnostic-audit.json": "3ed1b8f859607beb9841556e6035c53d978e1a490b6c16c5b030356d3932630b",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/explicit-loading-result.json": "8f97a1377833019c07008c37efc99a62cf581028998a3e4683a26ec5883cbb08",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/collector-result.json": "1247e0b485648061fe77e772061f8bd39ea39b037a277d851b0644a6d2d5a4d8",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/boundary-result.json": "248be7478f68affe5cab1f4ce1f6e2ca360960c456d52a250d11720f6b3559b3",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/completion-audit.json": "817bae238ffb2c608e252a4cf02c79ec9d0bb9291c1fe98760d13254431de1be",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/positive-check-result.json": "14f26c1064373945ff8fa31dc86a4e4189d9e4117982743f1d83eb0833fa4ac4",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/positive-operator-approval.json": "749ee949baba1afe9cbbf0e2d888f1f7d0c0f9503dd2969d8329caa2ffa1d01d"
+  }
+}

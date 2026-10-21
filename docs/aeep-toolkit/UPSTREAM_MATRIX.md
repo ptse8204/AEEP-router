@@ -381,3 +381,28 @@ formatting is corrected and Markdown lint passes. The proposed
 [local-tag/docs amendment](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
 keeps parent IDs, collector bytes and Lychee0.24.2 unchanged. It is not yet executed.
 No dependency/framework change, hosted service or credential intervention is needed.
+
+### October21: existing native OTLP path verified through real captures
+
+No upstream pin, license or dependency changed. Two current collector images built
+and passed11-group containment with collector access denied. Three real model
+receipts have verified journal/token-capture consistency; the corrected pair passed
+independent task grading. The provider counts retain their original trust tier.
+Actual metric batches arrived, but no positive candidate injection was captured.
+A required-input probe failed its stale runtime identity before model dispatch;
+a fresh model-free required profile now passes. Its1-turn positive-check authority
+is pending because all4 earlier reservations remain charged. See
+[the current evidence](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md).
+The same Lychee0.24.2 offline docs check passed. No hosted observability stack,
+new evaluator or framework is needed for this correction.
+
+### October 21 completed positive diagnostic — no upstream change
+
+Four actual model token capture chains verify. A bound native positive injection
+event confirms reviewed Ponytail instructions loaded in the forced extra turn.
+Optional selection and semantic contribution remain unknown; provider reports
+retain their trust tier. Both current profiles pass containment. Source `7707756`,
+agent-skill-eval/Waza/LangGraph pins, existing native OTLP and Lychee 0.24.2 are
+unchanged. No hosted backend, new package or architecture is needed for the fix.
+The original value study is still INCONCLUSIVE. See [the completed capture
+handoff](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md).

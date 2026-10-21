@@ -923,3 +923,44 @@ blank-line failure. Keep the historical attempts and costs; no automatic retry.
 [The exact two-action bundle](../../reports/toolkit-v2/c07/capture-local-tag-20261021/README.md)
 requires explicit approval under its predecessors' no-retry rules. No new package
 installation, full test cycle or original comparison replay is justified.
+
+### D70 — Rebind diagnostic callbacks from the exact current case
+
+The copied diagnostic changed input/expected but retained an old hashed callback
+name. The model turn completed; grading could not run. Preserve that unknown task
+outcome and its cost. Reuse extensions.grader_name to bind the sole callback, check
+registration before enqueue, and retain any receipt before assertions. The exact
+routine definition correction changes no source, fixture, grader or threshold.
+The fresh two-turn pair passed independent grading and token-capture checks.
+
+### D71 — Required skill input needs its own exact runtime evidence
+
+The final typed-input positive probe changed runtime identity and correctly failed
+its old optional-profile boundary before model dispatch. Its reservation stays
+charged. Fresh model-free conformance using unchanged images now passes all11
+probe groups and collector denial for the exact required identity. Keep optional
+selection and forced loading distinct. The [one-turn positive check](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md)
+needs new explicit turn authority because the prior human cap4 is fully charged.
+No source or software installation change is needed. Do not infer loading/use
+from absent metrics or promote provider reports to independent measurements.
+
+### D72 — Verify forced loading without rewriting optional value evidence
+
+The exact operator-approved extra turn passed with a native `codex.skill.injected`
+event bound to the reviewed skill, runtime, receipt and journal. Four actual model
+capture chains now verify; three independent task grades pass and one earlier
+callback failure stays ungraded. Preserve all five charged reservations, including
+the preflight skip. No further model turn is needed for capture engineering.
+Optional selection/use and provider-internal metering remain unknown. Keep the
+original comparison INCONCLUSIVE and admission disabled.
+
+### D73 — Record actual comprehension errors and measured CLI limits
+
+The human answered all five questions. The first two describe the separate native
+workbook journey; control discovery is incomplete. Preserve the verbatim response,
+help context and scoring. A targeted follow-up after clarification is helped,
+never an unaided replacement. Add a companion guide without changing the frozen
+presented files. CLI calibration now measures 24 offline commands and shared-host
+counters using existing monitoring. It does not establish production acceptance
+or justify a retrospective passing budget. Recommend only bounded local
+experimental handoff; release and production claims remain separate.

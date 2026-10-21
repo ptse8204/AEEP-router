@@ -1,0 +1,426 @@
+{
+  "review_sha256": "2b9d32674d25a6ccabcbd96b1a14f4726006fab4d586ccd4399cf806cc3306ee",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "model_turns": 0,
+  "images_created": 0,
+  "installations": 0,
+  "raw_payloads_retained": false,
+  "telemetry_boundary_observations": {
+    "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846": {
+      "collector_connection_denied": true,
+      "scope_sha256": "5cd9bf278b6278e30a48207b44aa690542e1fa62d0737e1208dea3622ec72439",
+      "program_sha256": "1ace34504d7257f2f622e9f445f5b7ceb64d0e2d6cbe02c24e3aa9cf7d5ae2a8",
+      "native_command_path": true,
+      "port_is_private_ephemeral": true
+    },
+    "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c": {
+      "collector_connection_denied": true,
+      "scope_sha256": "981e81e611ed397282279adfc6649405cc14fd55c8f92c20a9961141698563b2",
+      "program_sha256": "f767fe2c2ea6200d8e3d75dbef90fe90d1e36d80e4dd8673588bbfc25537f349",
+      "native_command_path": true,
+      "port_is_private_ephemeral": true
+    }
+  },
+  "replay_allowed": false,
+  "full_conformance": false,
+  "initial_inspection": {
+    "codex-app-server:text-phase-final-control": {
+      "full_conformance": false,
+      "model_turns": 0,
+      "identity_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "models": [
+        {
+          "id": "gpt-6-astra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        },
+        "config/web_search": {
+          "present": true,
+          "matches": true,
+          "expected": "disabled"
+        },
+        "config/mcp_servers": {
+          "present": true,
+          "matches": true,
+          "expected": {}
+        },
+        "config/features/apps": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/memories": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/multi_agent": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/browser_use": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/computer_use": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        },
+        "requirements/allowedWebSearchModes": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "disabled"
+          ]
+        }
+      },
+      "advertised_inventory": {
+        "skills": [
+          {
+            "name": "imagegen",
+            "path": "/worker/auth/skills/.system/imagegen/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "openai-docs",
+            "path": "/worker/auth/skills/.system/openai-docs/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "plugin-creator",
+            "path": "/worker/auth/skills/.system/plugin-creator/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "review-agent",
+            "path": "/worker/auth/skills/.system/review-agent/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "skill-creator",
+            "path": "/worker/auth/skills/.system/skill-creator/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "skill-installer",
+            "path": "/worker/auth/skills/.system/skill-installer/SKILL.md",
+            "enabled": false
+          }
+        ],
+        "apps": [],
+        "servers": []
+      },
+      "sandbox_command": {
+        "workspace_write": true,
+        "configuration_write": "absent",
+        "proxy": "denied",
+        "direct": "denied"
+      },
+      "inspection_complete": true,
+      "collector_boundary": {
+        "collector_connection_denied": true,
+        "scope_sha256": "5cd9bf278b6278e30a48207b44aa690542e1fa62d0737e1208dea3622ec72439",
+        "program_sha256": "1ace34504d7257f2f622e9f445f5b7ceb64d0e2d6cbe02c24e3aa9cf7d5ae2a8",
+        "native_command_path": true,
+        "port_is_private_ephemeral": true
+      }
+    },
+    "codex-app-server:text-phase-final-treatment": {
+      "full_conformance": false,
+      "model_turns": 0,
+      "identity_digest": "e019fe1538f3b245cc7f2d890f7546ba16eb4166815c4dc1f86ff4ba72914b0f",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "models": [
+        {
+          "id": "gpt-6-astra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "ultra"
+          ]
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "reasoning_efforts": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        },
+        "config/web_search": {
+          "present": true,
+          "matches": true,
+          "expected": "disabled"
+        },
+        "config/mcp_servers": {
+          "present": true,
+          "matches": true,
+          "expected": {}
+        },
+        "config/features/apps": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/memories": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/multi_agent": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/browser_use": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        },
+        "config/features/computer_use": {
+          "present": true,
+          "matches": true,
+          "expected": false
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        },
+        "requirements/allowedWebSearchModes": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "disabled"
+          ]
+        }
+      },
+      "advertised_inventory": {
+        "skills": [
+          {
+            "name": "imagegen",
+            "path": "/worker/auth/skills/.system/imagegen/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "openai-docs",
+            "path": "/worker/auth/skills/.system/openai-docs/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "plugin-creator",
+            "path": "/worker/auth/skills/.system/plugin-creator/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "review-agent",
+            "path": "/worker/auth/skills/.system/review-agent/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "skill-creator",
+            "path": "/worker/auth/skills/.system/skill-creator/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "skill-installer",
+            "path": "/worker/auth/skills/.system/skill-installer/SKILL.md",
+            "enabled": false
+          },
+          {
+            "name": "ponytail",
+            "path": "/opt/dependencies/ponytail/SKILL.md",
+            "enabled": true
+          }
+        ],
+        "apps": [],
+        "servers": []
+      },
+      "sandbox_command": {
+        "workspace_write": true,
+        "configuration_write": "absent",
+        "proxy": "denied",
+        "direct": "denied"
+      },
+      "inspection_complete": true,
+      "collector_boundary": {
+        "collector_connection_denied": true,
+        "scope_sha256": "981e81e611ed397282279adfc6649405cc14fd55c8f92c20a9961141698563b2",
+        "program_sha256": "f767fe2c2ea6200d8e3d75dbef90fe90d1e36d80e4dd8673588bbfc25537f349",
+        "native_command_path": true,
+        "port_is_private_ephemeral": true
+      }
+    }
+  },
+  "pair": {
+    "pair_definition_digest": "40c4b2a99ed2852abc013afc9f6d38c3aa421df8d1ddb46c24355ee9da4d93a6",
+    "model_turns": 0,
+    "full_conformance": false,
+    "workers": {
+      "control": {
+        "record_digest": "d9e3d13ec7c9839536e80193e8dd7f740d6fc44f4d19afc2a0026a856af9154a",
+        "probe_digests": [
+          "1f133fe576109aab17fe0e702355c092df6acf55b0f80412de219d4a2994d93e",
+          "aef1c52791e00c8491460d24d0bf280add2d9960ddf5129a2ec0be998d8c81d9",
+          "344d6c236996a98b17d42bdfd989bc8052fb8282ec7043500b03bed12e47c5ee",
+          "6c5bd3c2a73a098e2ad71733e80dd4a050f457adb77b17d4a89c000e1d9ed1f2",
+          "422c92dd173ed94d1fdc5308fa3819257b4f6379d966081be2da19b4ae826ba9",
+          "66f9af6986526ad892e811233c7725b4f33d6b8ca9991dbfb5d821915809fab4",
+          "98c6907343f4e93ff36cc75a5589cec201bed36591360b1372cc4976d4df670a",
+          "ce9711022c01594593d68f20728d5096b387f24b1fb474013f923fa22b389b34",
+          "61ed8af9658ffd279c52dbe9b3faa818d26aa88885cc000d285605788a9167fb",
+          "96c8fb9e6e0c8509682b39b0720510a3b2f933624d5488c5b80af62051dbdd85",
+          "a95812e5ae099e081ca9141da5a26e53c0a75afb7465e61df4a3f63111d41a7f"
+        ],
+        "probes_match": true
+      },
+      "treatment": {
+        "record_digest": "ef50a881a53401c2d9a2fe5f539dd57da594db195e0a8a5df4cd47ddafd0789f",
+        "probe_digests": [
+          "47fe78fc5e4abbfde8d669143b19b31131822fd9e7759e81afeb738b75e2e720",
+          "b9cd24bf0e5bba50337270bcec230078b79be6ad21ee25f443f2ba1ee373df15",
+          "21fae267d86c586e045f85186d1af64298ed61fc1e5076a30b309c14cecca021",
+          "804dd59fcdebf553d2ff888bbfcc2764c17b7d6502e38395d3570d4562d1f66a",
+          "71808d303133c8ca42b5d10723a3050d934607f3eb398842bd65b6182d496089",
+          "c3683a143913de425dad0eb9beaf2cdf8704161624943665b7025788fdc6711e",
+          "6161a17e1c28507477ea21c0d736757509e3b6deca5c6e608f737195b8d0fd1d",
+          "50be34925b51bd11eb289be857021a60bb4b999e403b65eb094870fd68baf6dd",
+          "69212f4a54d53d82be464d8d6a9d195e9d916c89ff136e8e8e42bccd016210bf",
+          "f67d1d0665acb1db79947093cad7748234b491d0dca4e82bd3ec691a7c1b8efb",
+          "d33ed18dbb83e673e31c8f5aceec3bbb91822c128c24163b11301a28e190c42a"
+        ],
+        "probes_match": true
+      }
+    },
+    "probes_match": true
+  },
+  "passed": true,
+  "proxy_restored_stopped": true,
+  "source_unchanged": true,
+  "grant_after": [
+    12714,
+    3739,
+    117982.32029934227,
+    "0.0"
+  ]
+}

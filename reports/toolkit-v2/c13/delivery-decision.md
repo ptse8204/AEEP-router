@@ -1,20 +1,52 @@
 # Local delivery decision
 
-The local evaluation stack is implemented and its first completed four-arm model
-comparison is available. The evidence supports a bounded local experimental
-handoff. Public release and production benefit claims are NO_GO while the human
-check and broader resource/applicability requirements remain unmet. This is an
-engineering recommendation; no operator release decision or publication is
-implied.
+## Current October 21 verification
+
+The capture repair is complete. Four actual model receipts have verified token
+capture chains. Three tasks passed independent grading; an earlier callback-name
+failure remains ungraded. A native event verifies that the reviewed Ponytail
+instructions loaded in the separately approved forced diagnostic. Both optional
+and required profiles passed all 11 containment probe groups in each worker,
+including denial of task access to their collectors. Five diagnostic reservations
+remain charged: four actual model turns and one preflight skip. No further model
+approval is pending for this repair.
+
+Source `7707756` passed 12 integrated checks, including both 1,589-test suites with
+21 skips, displayed coverage 82% and both branch gates. Its wheel passed 16 offline
+installed checks with 32 cached dependencies, no downloads, and removal of the
+unchanged runtime. The pinned offline docs check passed 67 files with zero errors.
+It binds its actual inputs before later status prose. Source and dependencies
+have not changed during this operational correction.
+
+The actual human first response and helped follow-up are recorded. After scope
+clarification, the participant correctly identifies the comparison and its limits.
+The first response demonstrates spending/recovery principles; concrete control
+discovery remains partial. No unaided or population-wide usability claim follows.
+A [current delivery guide](current-delivery-guide.md) puts the relevant result and
+controls together. Original presented files are unchanged.
+
+The [CLI resource characterization](cli-resource-profile-20261021/summary.md)
+completed 24 offline commands. Median command wall time was about 0.13–0.14 seconds;
+maximum sampled process RSS was 42.66 MiB. Shared-host counters include unrelated
+work, and sampling can miss peaks. This is measured calibration, not production
+acceptance. Energy, full Codex/assessment usage and long-term evidence growth
+remain unknown; no passing budget was chosen retrospectively.
+
+The engineering recommendation is **LIMITED_BETA for a bounded local experimental
+handoff**. Full production/resource acceptance and public release remain NO_GO.
+This recommendation does not supply operator release authorization. The original
+564-task study remains INCONCLUSIVE, with no automatic admission or verified
+savings. The forced loading event does not establish voluntary use or benefit.
+No architecture, dependency, worker-readiness or installation choice is pending.
 
 ## What the delivered stack does
 
 | Path | Actual evidence | Scope |
 |---|---|---|
-| Local Python CLI, evidence and HTML/Markdown | Source `d2c406f`, package 0.8.2; both suites 1,561 passed/21 skipped, 82% coverage, all required source checks | Existing checked source unchanged by the operational repair/report work |
+| Local Python CLI, evidence and HTML/Markdown | Source `7707756`, package 0.8.2; both suites 1,589 passed/21 skipped, displayed coverage 82%, all required checks | Source unchanged by operational repair/report work; broader platforms unqualified |
 | agent-skill-eval 0.7.0 | Real upstream scripted scheduler through six isolated AEEP fixture workers; receipt verification and router-prohibited journey | Scripted engineering conformance; its Codex harness failed the pinned launch/usage requirements |
 | Existing AEEP managed fallback | 141/141 required-use qualification; 564/564 optional-use comparison task runs; zero receipt gaps | Separate controlled Codex workers, three bounded recipe families, fixed model/settings and finite grant |
-| Private installer/removal | Current source wheel plus 32 pinned dependencies passed 15 sandboxed checks; private runtime and scratch removed | Darwin arm64 evidence; no global activation or service |
+| Private installer/removal | Current source wheel plus 32 pinned dependencies passed 16 sandboxed checks; private runtime and scratch removed | Darwin arm64 evidence; no global activation or service |
 | Waza 0.38.9 | Six actual sandboxed mock outcomes and normalized reports; workspace removed | No real-model or efficacy qualification |
 | LangGraph 1.2.14 | Four sandboxed graph fixtures, including expected rejection; 38-wheel runtime removed | Bounded command adapter; arbitrary graph behavior unsupported |
 | Discovery, scanner reports and telemetry | Configured source readers, Cisco JSON import and minimized local OTLP preview | No candidate execution, qualified scanner, hosted exporter or ToolHive deployment |
@@ -58,10 +90,10 @@ No image, volume or backup was removed here.
 
 | Gate | Why it is open | Concrete next action |
 |---|---|---|
-| Actual human comprehension | Policy requires a participant's five answers; the earlier requested agent review cannot supply them | Operator reads the actual comparison report and responds to the pending five-question exercise. Record help and errors without inventing responses |
+| Actual human comprehension | Actual first/follow-up responses recorded; report understanding demonstrated with help, concrete control discovery partial | Preserve both responses; use the companion control guide. Do not claim unaided control use or population-wide usability |
 | Positive efficacy/automatic use | Zero success gain, no supported 10% time benefit, missing trusted token guardrails and use telemetry | Retain INCONCLUSIVE and keep admission disabled. Any future study needs its own prospective measurement contract; no rerun is required to finish this report |
 | Broader platform/backend claims | V2 journey is observed on Darwin arm64 CLI and Linux aarch64 controlled workers; container evidence does not qualify native or other platforms | Limit the local handoff to the tested scope. Select and qualify another deployment only if it is wanted |
-| Whole-system resource acceptance | No complete observed CPU/memory/network/energy baseline or prospectively passing production-resource budget | State unknowns. This inventory and observed proxy peak cannot substitute for a new applicable acceptance study |
+| Whole-system resource acceptance | CLI characterization now measured; no accepted production workload/budget or applicable held-out resource trial | Freeze production workload and ceilings before any future acceptance run; retain energy/full-workload unknowns |
 | Upstream real-agent head-to-head | Pinned agent-skill-eval Codex launch/token contract does not meet requirements; D40 fallback is implemented and tested | Retain the exclusion and preferred scripted integration. A different upstream contract needs a reviewed source/version and its own qualification |
 | Release/publication | No explicit release decision or disclosure permission for this delivery | Operator chooses whether to accept the bounded local handoff and, separately, whether to authorize a specific release. Nothing is pushed or published automatically |
 

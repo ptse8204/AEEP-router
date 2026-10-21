@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AEEP CLI resource profile</title><style>body{max-width:76rem;margin:2rem auto;padding:0 1rem;font:16px/1.6 system-ui}table{border-collapse:collapse;display:block;overflow-x:auto}td,th{padding:.6rem;border:1px solid #ccd4da}</style><main><h1>Current local CLI resource measurements</h1>
+<p>Twenty-four network-denied source-checkout commands completed on this Mac. They inspected inert synthetic metadata, listed Essentials, and rendered an existing synthetic report. No candidate code, evaluator worker, model, new package or service ran. The private scratch was removed after its immutable inputs and exact file set matched.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th style="text-align:right">Samples</th>
+<th style="text-align:right">Median wall seconds</th>
+<th style="text-align:right">Maximum wall seconds</th>
+<th style="text-align:right">Maximum sampled RSS MiB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>candidate</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0.143</td>
+<td style="text-align:right">0.151</td>
+<td style="text-align:right">42.66</td>
+</tr>
+<tr>
+<td>list</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0.129</td>
+<td style="text-align:right">0.133</td>
+<td style="text-align:right">40.92</td>
+</tr>
+<tr>
+<td>report</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0.132</td>
+<td style="text-align:right">0.143</td>
+<td style="text-align:right">42.14</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shared-host phase</th>
+<th style="text-align:right">Samples</th>
+<th style="text-align:right">Median CPU percent</th>
+<th style="text-align:right">Minimum available memory GiB</th>
+<th style="text-align:right">Minimum disk free GiB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">0.00</td>
+<td style="text-align:right">5.13</td>
+<td style="text-align:right">141.65</td>
+</tr>
+<tr>
+<td>cli</td>
+<td style="text-align:right">24</td>
+<td style="text-align:right">20.10</td>
+<td style="text-align:right">5.14</td>
+<td style="text-align:right">141.65</td>
+</tr>
+<tr>
+<td>after</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">14.25</td>
+<td style="text-align:right">5.11</td>
+<td style="text-align:right">141.57</td>
+</tr>
+</tbody>
+</table>
+<p>These shared-host observations include the profiler and unrelated work. Before/after differences cannot be attributed to the CLI. The child alone had network denied; aggregate host network counters are retained without claiming that traffic belongs to this task.</p>
+<p>Process sampling reuses the existing AEEP monitor and can miss short children or peaks. CPU is a sampled lower bound and resident sums can include shared pages. Kernel cumulative child ru_maxrss remains raw in its native platform units. These are Framework Python/source-checkout measurements, not an installed-wheel memory claim.</p>
+<p>This adds measured overhead to the older artifact-size inventory. It does not pass the production resource gate: no production workload, accepted resource ceilings or held-out resource trial was defined for this characterization. Whole Codex/assessment usage, energy and long-term retention growth remain unknown. No savings or billing amount is inferred.</p>
+<p>The operation reserved 26 bounded slots for 24 commands and two baseline windows, on the existing grant with zero model allowance. All reservations/costs remain. Full samples, aggregate counters, environment versions, hashes and limits are in result.json; this summary is derived from that exact file.</p>
+</main></html>

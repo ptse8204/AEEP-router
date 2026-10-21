@@ -1,0 +1,540 @@
+{
+  "declared_callback_name": "contained_recipe_f9f00b38946c6b7bd80ab057d1b3264956526dc6e2e16aa36a509dc4e71aeb92",
+  "registered_name_required_by_current_inputs": "contained_recipe_9651825827c71828032c6298c5703bc4d49f09ea03ed6f06d6e300266cbca599",
+  "mismatch_reproduced": true,
+  "receipt": {
+    "receipt_id": "rcpt_c69d963474ad48d28027b32fdf61e9a7",
+    "decision_id": "dec_76a5328290ac4bf68227202c5bc2438c",
+    "action_id": "act_3ee5c2e19f344785b989d8a17af4e837",
+    "capability": "assessment.edit@1",
+    "executor_id": "toolkit-capture-local-tag-20261021.control",
+    "executor_kind": "host_managed",
+    "status": "success",
+    "attempt": 1,
+    "started_at": "2026-10-21T19:55:53.922886Z",
+    "ended_at": "2026-10-21T19:56:00.075988Z",
+    "estimated": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": "0.0",
+        "upper_bound_usd": "0.0",
+        "evidence": {
+          "status": "complete",
+          "source": "static_estimate",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "executor_fingerprint": "sha256:b1606dbe2f69f41c5a3ec03e4d2104672302bcd28516a86b636bd9f28f88b068",
+    "cohort_digest": "sha256:f7e673e2832b3a72d27020969b458e404d1efbf0e81e2dbf3e1566436bce2494",
+    "action_features": {
+      "input_bytes": 453,
+      "input_items": 11,
+      "text_characters": 302,
+      "max_depth": 2,
+      "size_bucket": "2^8"
+    },
+    "actual_resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 4840.851000044495,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 8071,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 33,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "accounting": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [
+        {
+          "provider": "openai",
+          "resource_pool": "codex.self",
+          "unit": "provider_unit",
+          "consumed": null,
+          "source": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          },
+          "included_or_paid": "unknown",
+          "rate_snapshot_id": null,
+          "usage_fingerprint": null
+        }
+      ],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 8071,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 33,
+          "reasoning_output_tokens": 0,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": "2026-10-21T19:55:59.857844Z"
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "cache_affinity": null,
+    "approval_id": null,
+    "transport_success": true,
+    "execution_success": true,
+    "schema_valid": true,
+    "task_valid": true,
+    "quality_score": 1.0,
+    "validation_results": [
+      {
+        "kind": "schema",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "schema validation passed",
+        "trust": "observed"
+      }
+    ],
+    "output_valid": true,
+    "error_type": null,
+    "error_message": null,
+    "trace_id": null,
+    "metadata": {
+      "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":4.631044665817171,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":4.630898666102439,\"final_message_received\":true,\"turn_completion_received\":true}",
+      "actual_model": "gpt-6-astra",
+      "host_runtime_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+      "boundary_digest": "351895e14170255d981438758a0ab80a838c2ad4df63fff38babacc8dfb1d97d",
+      "model_turn_count": 1,
+      "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+      "tool_selection_rounds": null,
+      "implementation_schema_bytes": null,
+      "output_schema_bytes": 0,
+      "result_bytes": 100,
+      "tool_call_count": 0,
+      "host_tools_used": "[]",
+      "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+      "host_available_tools": "unknown",
+      "approval_evidence_digest": null,
+      "thread_identity_digest": "sha256:fdf436452888476bd9a7908e3068565ce083c2bb802b7cb39034ed1a89aae5d4",
+      "turn_identity_digest": "sha256:2826e217a56a78e720f7f9b1dd0f406e1a529df932feb311cef404ae7d0cf7ce",
+      "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+      "catalog_metrics_scope": "aeep-metrics-25f949a8028a834a5887a081cf81b31f",
+      "execution_evidence_digest": "a3956bc2c4767cc2837b59cc10e0071191922837c9512b26246e1737e0079612",
+      "task_instruction_sha256": "f0917f3a7ac51ab17e32a7f7d984c031b480cc0d6993cb5eb5660d68a8deec1f",
+      "adapter_id": "codex-app-server:text-phase-final-control",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "response_bytes": 106,
+      "invocation_guard_ms": 102.43741609156132,
+      "exit_code": null,
+      "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+      "capability_discovery": {
+        "exposed": null,
+        "retrieved": null,
+        "invoked": null
+      },
+      "catalog_metrics": {
+        "schema_version": "codex.catalog-metrics.v1",
+        "scope": "aeep-metrics-25f949a8028a834a5887a081cf81b31f",
+        "batches": 8,
+        "rejected_batches": 0,
+        "overflow": false,
+        "collector_closed": true,
+        "delivery_complete": false,
+        "observations": [
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 5.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 5.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          }
+        ]
+      }
+    }
+  },
+  "journal": {
+    "schema_version": "execution.evidence.v1",
+    "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+    "adapter": "ManagedHostExecutor",
+    "events": [
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 0,
+        "kind": "execution.started",
+        "source_id": "start",
+        "action_digest": null,
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 1,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:4d4740f53d3be4c9331746b2005b9c4e13815f6e511c18ab99cb1e16c8ccdb5d",
+        "action_digest": "4d4740f53d3be4c9331746b2005b9c4e13815f6e511c18ab99cb1e16c8ccdb5d",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 2,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:ee0815e8b55654a451380bdb2fd9ed9555b0adf54ebaef965d7a9d20bf90891f",
+        "action_digest": "ee0815e8b55654a451380bdb2fd9ed9555b0adf54ebaef965d7a9d20bf90891f",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 3,
+        "kind": "action.started",
+        "source_id": "adapter:sha256:ce254df40fc7af6b533f9aad1f810ed680a8624941d95c1c3bbb2bb22ded2230",
+        "action_digest": "a0a723f96ebea68986b803099382f8dbc7c916cacc07138cb0a7b3aab35ec787",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 4,
+        "kind": "action.completed",
+        "source_id": "adapter:sha256:6286d8aaada34298810f85f816fd2e0b00abaa40832411a22fd88f9a4a1a3ef3",
+        "action_digest": "a0a723f96ebea68986b803099382f8dbc7c916cacc07138cb0a7b3aab35ec787",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 5,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:0e00d9313a40c861f4d1af2c5f98b5b6c0af6f8c7e587aab47612be3e8bc0959",
+        "action_digest": "0e00d9313a40c861f4d1af2c5f98b5b6c0af6f8c7e587aab47612be3e8bc0959",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 6,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:e2b61126c73ce0db9cceadf8f81d2e0812c6ff636c4f0b0ad3037ddd70e8674c",
+        "action_digest": "e2b61126c73ce0db9cceadf8f81d2e0812c6ff636c4f0b0ad3037ddd70e8674c",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 7,
+        "kind": "action.started",
+        "source_id": "adapter:sha256:b5d37a6cff6087516074c35a8dfdde109057c865f15be1e3b4dde90266bc0a1e",
+        "action_digest": "e003b29ac33240db3f441ac007656c73b062e3b25338ce9def5fe6e5ec316aa3",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 8,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:49b909c71771520409567a72c6b41931af406651dcc864d29cc9c3f94ee0a510",
+        "action_digest": "49b909c71771520409567a72c6b41931af406651dcc864d29cc9c3f94ee0a510",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 9,
+        "kind": "action.completed",
+        "source_id": "adapter:sha256:64d522048b0b19ac2392446bffeddbe3a23509d84ddf7bc272d6e551d1130f37",
+        "action_digest": "6ea0641b1ed449a27462881ee3879c244f73d6a083d25d7142aa21ec23bba0f7",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 10,
+        "kind": "usage.reported",
+        "source_id": "adapter:usage:d0190b925f0e4563a56a17dd85518f2a:10",
+        "action_digest": null,
+        "evidence_ref": null,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "unknown",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 8071,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 33,
+              "reasoning_output_tokens": 0,
+              "evidence": {
+                "status": "partial",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-21T19:55:59.857255Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "accounting_mode": "cumulative"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 11,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:7dcceb1138fc271b635559ecfb9a1b58ef1e4250f3fc68e5c7c5aa44699e4959",
+        "action_digest": "7dcceb1138fc271b635559ecfb9a1b58ef1e4250f3fc68e5c7c5aa44699e4959",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 12,
+        "kind": "message.received",
+        "source_id": "adapter:catalog:d56108ec5484f644855b7f3869c39caa0e16d8c725586cecc7eab05c0974592c",
+        "action_digest": "d56108ec5484f644855b7f3869c39caa0e16d8c725586cecc7eab05c0974592c",
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 13,
+        "kind": "usage.reported",
+        "source_id": "adapter:turn-usage",
+        "action_digest": null,
+        "evidence_ref": null,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 8071,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 33,
+              "reasoning_output_tokens": 0,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-21T19:55:59.857844Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "accounting_mode": "cumulative"
+      },
+      {
+        "schema_version": "execution.event.v2",
+        "journal_id": "05aa528f742e4043887a9d95c4833915",
+        "attempt_id": "attempt_095fedd9e69042ddaaffb195bb484e2a",
+        "sequence": 14,
+        "kind": "execution.completed",
+        "source_id": "terminal",
+        "action_digest": null,
+        "evidence_ref": null,
+        "accounting": null,
+        "accounting_mode": "incremental"
+      }
+    ],
+    "complete": true,
+    "cancellation_confirmed": false,
+    "identity_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+    "boundary_digest": "351895e14170255d981438758a0ab80a838c2ad4df63fff38babacc8dfb1d97d",
+    "journal_id": "05aa528f742e4043887a9d95c4833915"
+  },
+  "tokens": {
+    "status": "verified",
+    "receipt_ref": "69089f0f6625d20abc4af5466d88571653f74e38220614f6a765a5031abb41ad",
+    "journal_ref": "a3956bc2c4767cc2837b59cc10e0071191922837c9512b26246e1737e0079612",
+    "known_fields": [
+      "input_tokens",
+      "cached_input_tokens",
+      "cache_write_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens"
+    ],
+    "provider_usage_independently_verified": false,
+    "source": "provider_report",
+    "trust": "self_asserted"
+  },
+  "candidate": {
+    "instructions_loaded": null,
+    "invoked": null,
+    "delivery_complete": false,
+    "snapshot_ref": "d56108ec5484f644855b7f3869c39caa0e16d8c725586cecc7eab05c0974592c",
+    "skill_sha256": null
+  },
+  "task_correctness": "unknown: grader callback was not found; successful model transport is not successful grading.",
+  "preparation_error_retained": "First local audit draft addressed validators[-1].config.name, but the callback is validators[0] and last validator is exact_match. KeyError occurred before file creation or any dispatch; corrected by selecting kind callback."
+}

@@ -77,3 +77,20 @@ tracks the completed comparison and remaining C13 gates. Qualification and
 training do not establish value. The actual comparison passed all task checks
 without demonstrating the frozen 10% time benefit; strict token/use evidence
 remains unavailable.
+
+## October 21 capture and acceptance update
+
+The [capture repair](../c07/capture-explicit-profile-20261021/capture-status.html)
+is complete: four real token capture chains verify, and a bound positive event
+establishes forced Ponytail instruction loading. Optional use and provider-internal
+metering remain unknown; the original comparison stays INCONCLUSIVE. No further
+model turn is needed for this repair. Current source `7707756`, its 16 installed
+checks and the pinned 67-file offline docs scan passed without new dependencies.
+
+The actual human first and helped follow-up responses are recorded. Report scope
+and limits are understood after clarification; concrete control discovery is partial. The [current delivery guide](../c13/current-delivery-guide.md)
+clarifies the journey and controls. The 24-command CLI resource characterization
+is complete but cannot close the production whole-system resource gate. See the
+[current decision](../c13/delivery-decision.md) and
+[acceptance map](acceptance-map.md). Earlier counters and pending statements above
+retain their historical scope; no terminal driver may be replayed.

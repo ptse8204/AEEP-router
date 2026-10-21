@@ -1,5 +1,15 @@
 # Policy-launch correction: verified source, terminal packaging failure
 
+## Latest current result
+
+The approved positive check passed. Four real token captures verify, three tasks
+passed independent grading, and a native event confirms instructions loaded in
+the forced Ponytail probe. Five reservations remain charged, including one
+preflight skip. No model approval is pending for this repair. Continue from
+[the completed capture handoff](../capture-explicit-profile-20261021/README.md).
+All earlier started drivers/jobs are terminal; never replay them. Original
+proposal, pending-approval and counter sections below are historical.
+
 Source7707756 keeps telemetry and policy overrides before app-server. Two synthetic
 regressions fail on the previous ordering and pass after correction. All12 integrated
 checks pass: both full suites1589 passed/21 skipped,82% displayed coverage, both

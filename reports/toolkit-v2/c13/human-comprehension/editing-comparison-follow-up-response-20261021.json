@@ -1,0 +1,30 @@
+{
+  "schema": "aeep.human-comprehension-follow-up-result.v1",
+  "recorded_at_utc": "2026-10-21T20:38:20Z",
+  "source": "actual operator response in current Codex conversation",
+  "question_call_id": "call_300188dcbaf14d05abee2803bad5a989",
+  "definition": "editing-comparison-follow-up-20261021.json",
+  "original_response": "editing-comparison-response-20261021.json",
+  "response_verbatim": "Based on the actual Four-arm Editing Comparison report, the Toolkit comprehension check should be answered as follows.\n1. What capability was added to the baseline?\nThe baseline was an ordinary Codex agent using gpt-6-astra at medium reasoning effort. The treatment made the third-party Ponytail 4.10.0 skill optionally available to that same agent, without requiring it to use the skill.\nThe study also tested two alternatives: increasing the model's reasoning effort and providing a task-specific generated Python tool.\nThe evaluation covered three bounded task families: simple file edits, Python identifier renaming across multiple files, and counting matching log lines.\n2. What conclusion does the comparison support?\nOrdinary agent\n105/105\nVerified successes\nOptional Ponytail\n105/105\nVerified successes\nAll four arms achieved 100% verified success on the 105 held-out tasks.\nThe paired comparison between Ponytail and the ordinary agent found:\n- \nSuccess improvement: 0 percentage points\n- \nEstimated wall-time improvement: 0.79%, with a corrected interval of \u22124.61% to +6.52%\n- \nFormal verdict: INCONCLUSIVE (insufficient_evidence)\nThe results establish that the baseline already completed every tested task successfully and that adding Ponytail did not demonstrate a statistically supported improvement under these conditions.\nThe separate required-use qualification passed 141/141 tasks, supporting functional qualification, but not incremental value over the baseline.\n3. What remains unknown?\nThe report does not establish:\n- \nWhether the agent actually exposed, retrieved, or invoked Ponytail during optional-use trials; those receipt fields were recorded as None\n- \nWhether Ponytail meaningfully reduces token consumption, because no trusted paired token measurements were available\n- \nWhether either the skill or generated tool provides monetary savings or recovers assessment costs\n- \nWhether the conclusions generalize to real repositories, complex debugging, other models, or broader programming tasks\n- \nWhether the generated tool was actually invoked, since invocation was not separately instrumented\nOverall interpretation: The study demonstrates that AEEP can execute and verify a controlled, four-arm capability comparison. It does not establish that adding Ponytail improves the agent's performance, nor does it prove that Ponytail has no value in other circumstances.\nConsequently, the candidate was not automatically admitted or activated. That is consistent with AEEP's evidence-based admission policy: a capability working correctly is not the same as demonstrating that adding it improves an existing agent environment.",
+  "presented_report": "reports/toolkit-v2/c07/edit-value-native-20261019/comparison.html",
+  "presented_report_sha256": "24dc552f8472e79d596a72c48426754e85ae76626ce409331a8beaa27c3504cb",
+  "category": "helped",
+  "help_context": "After original scope mismatch was identified and actual report linked again. Prior conversation summarized overall result. Current companion guide was also produced after the first response; do not claim unaided comprehension.",
+  "scores": [
+    {
+      "original_item": 1,
+      "supported": true,
+      "evidence": "Correctly identifies ordinary medium-effort Codex, optional Ponytail 4.10.0 and the higher-effort/generated-tool alternatives on three bounded recipe families."
+    },
+    {
+      "original_item": 2,
+      "supported": true,
+      "evidence": "Correctly gives all-arm 105/105, zero success gain, 0.79% point estimate with corrected interval, INCONCLUSIVE verdict, required-use qualification distinct from value, and missing trusted tokens/use/generalization/cash evidence."
+    }
+  ],
+  "report_scope_and_limits_comprehension": "demonstrated_after_clarification",
+  "authority_and_recovery": "First-response items 3/5 supported with prior context; preserved unchanged.",
+  "lifecycle_control_discovery": "First-response item 4 remains partial: safe preservation stated, exact current controls not located. Companion guide is a product correction, not evidence of participant use.",
+  "overall": "Human exercise now has actual first and helped follow-up responses. Report understanding demonstrated with help; independent control use and population usability not established. Production resource/release gates are separate.",
+  "release_or_production_approval": false
+}

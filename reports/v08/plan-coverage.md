@@ -4651,3 +4651,115 @@ anchors or replace Lychee. Source and all pending review pins remain unchanged,
 as do the3 original comparison artifacts and2 human-exercise guides. The staged
 whitespace check flags only the retained BuildKit log's Dockerfile-rendering blank
 line (control-build.log:16). That raw failure evidence is preserved unchanged.
+
+## October21: real capture chains verified; required runtime independently checked
+
+Human-approved bundle3b10b05e… built both local-tag COPY-only images. Parent IDs,
+Config and filesystem ancestry passed. Both worker profiles passed11 probes each
+and denied collector access; policy/inventory failures are resolved on the current
+launch. Offline docs passed67 files,658 occurrences,454 unique,591 OK,67 excluded,
+0 errors; its unchanged runtime was removed. The composite's missing local copy of
+an already verified source-stability record was fixed before any effect/reservation;
+original executable/review bytes stayed pinned and the preflight failure is retained.
+
+The initial1-turn diagnostic stopped on an inherited callback-name mismatch before
+grading. Its receipt/journal capture verifies but task correctness remains unknown.
+Delegated exact definitionba281c2d… uses existing grader_name and checks registered
+callbacks before enqueue. Its fresh control/treatment pair passed both independent
+grading and capture checks. No positive candidate injection arrived; loading/use
+remain unknown, not false. No optional pair or historical holdout replay occurred.
+
+The final reserved typed-input probe stopped before model dispatch on runtime
+identity drift. All4 original reservations remain charged:3 complete real model
+receipts and1 preflight skip. Read-only evidence reproduces the exact mismatch.
+A fresh model-free required-profile inspection now passes11 groups each, including
+collector denial, and binds actual treatment identity3d13ce70…. This retains the
+existing source, images, permissions, model and skill. No code/guard was relaxed.
+The wrong coordinating digest argument was rejected before any marker/reservation;
+the actual-hash launch and both logs remain recorded without an effectful retry.
+
+[The capture report](../toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md)
+separates verified capture consistency from independent provider metering and
+candidate use. The original564-task report remains inconclusive and unchanged.
+[The fresh one-turn review](../toolkit-v2/c07/capture-explicit-profile-20261021/README.md)
+(ba27e521798f450581d66ba963bd9a764799474af1c64c137a83e00eb36fd91e) awaits the requested extra-turn
+approval; the human4-turn ceiling cannot be refunded/reset. All8 pins, source,
+syntax, paths and current required boundary pass preflight. No rebuild, install,
+full suite, new service, credential, architecture or spending choice is needed.
+Human comprehension, whole-host resource acceptance and release remain separate.
+
+Final read-only check: proxy stopped with512MiB/no swap;0 containers reference the
+2 retained task images;152693895168 bytes host free. Grant12,748 operations,3743
+charged turns,118085.22697854927 operation seconds,cash0; no reset/deletion. Both
+new images and all parents, volumes, backups and unrelated work remain. New HTML
+preview was blocked by browser local-file URL policy; no workaround or visual-pass
+claim is made. Static structure checks and readable artifacts remain available.
+
+## Toolkit V2 October 21: live capture repair completed and human feedback recorded
+
+Source `7707756` remains unchanged with its 12 integrated and 16 current-wheel
+checks passed. The exact approved extra positive turn ran once and passed:
+four actual model capture chains verify; three tasks pass independent grading;
+one earlier callback failure is ungraded. A native positive event bound to the
+reviewed Ponytail skill establishes forced instruction loading. Both current
+profiles pass all 11 probe groups per worker plus actual collector denial. Five
+reservations remain charged, including one preflight skip. No new model approval
+is pending. The original comparison remains INCONCLUSIVE and admission disabled.
+See the [completed capture handoff](../toolkit-v2/c07/capture-explicit-profile-20261021/README.md).
+
+The actual human response is measured and preserved with scope/control errors;
+it describes a separate native/workbook journey in its first two answers.
+A helped follow-up is pending. It is neither a missing response nor a pass.
+The [response/scoring](../toolkit-v2/c13/human-comprehension/editing-comparison-feedback-20261021.md)
+and [companion guide](../toolkit-v2/c13/current-delivery-guide.md) preserve all frozen
+report/guide hashes. Agent review cannot replace this participant evidence.
+
+The [CLI resource profile](../toolkit-v2/c13/cli-resource-profile-20261021/summary.md)
+completed 24 offline commands with sampled process and shared-host counters,
+no models/new software. It characterizes this source CLI; production workload,
+accepted budgets, energy, complete assessment usage and retention remain unknown.
+No retrospective resource pass or savings is claimed. The delivery recommendation
+is LIMITED_BETA for bounded local experimentation, not an authorized public release.
+
+Final observed grant: 12,784 operations, 3,744 charged turns,
+118,132.75897138286 summed operation seconds, cash ledger 0.0. Proxy stopped at
+512 MiB/no swap, zero referencing containers for the two retained task images,
+151,944,278,016 bytes host free. Images, parents, volumes, backups and unrelated
+work remain. Browser local-file security blocked preview; no workaround was used
+and visual review remains unverified. The successful pinned 67-file offline docs
+scan binds its actual earlier inputs; later prose receives separate local checks.
+
+### October 21 human follow-up recorded
+
+The actual [helped follow-up](../toolkit-v2/c13/human-comprehension/editing-comparison-follow-up-response-20261021.json) correctly identifies optional Ponytail,
+the four arms, bounded recipes, all-arm 105/105 success, unchanged INCONCLUSIVE
+verdict and missing token/use/cash/generalization evidence. Report comprehension
+is demonstrated after clarification; the first response and errors remain intact.
+No further scope response is pending. Concrete lifecycle control discovery remains
+partial, and the companion guide is a product correction rather than participant
+control-use evidence. No unaided, production-readiness or release claim follows.
+
+### Final status-only verification scope
+
+Cached offline Markdown lint passed all 67 active documents and all 13 changed
+Toolkit report guides. An earlier broader invocation included this historical
+coverage ledger and found 39 pre-existing formatting issues plus one new blank
+line in the acceptance map. That new blank line is fixed. The raw failure log
+is retained; historical formatting/evidence is preserved under the existing
+active-document exclusion rather than rewriting it. No runtime source changed.
+
+The [final local record checker](../toolkit-v2/c07/capture-explicit-profile-20261021/verify-final-record.py)
+verifies source stability, all eight approved positive-check inputs, all five
+human-presented file hashes, capture/resource/human-result invariants, semantic
+HTML structure, and changed Markdown paths/anchors. Its
+[actual output](../toolkit-v2/c07/capture-explicit-profile-20261021/final-record-check.json)
+binds the checked file hashes and counts. This local check is not a new full
+Lychee or visual rendering result. The earlier approved 67-file offline scan
+remains attached to its original inputs; no terminal checker/runtime was replayed.
+Browser local-file preview remains blocked and unverified. No broader software,
+model, install, image or upstream-fixture run is justified by these status edits.
+
+The staged whitespace check reports one exact exception: line 8 of retained
+`lychee-policy-format-review-20261021/docs-check.log` is a blank final line.
+Its raw bytes are preserved. [The exact check result and log hash](../toolkit-v2/c07/capture-explicit-profile-20261021/staged-whitespace-check.json)
+record this discrepancy; no prose or runtime-source whitespace issue remains.

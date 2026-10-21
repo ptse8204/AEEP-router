@@ -104,3 +104,35 @@ Its approval was requested because the failed exact reviews prohibit automatic
 retries. No source or package revision is needed. Historical564 captures still
 pass consistency verification, with provider-report provenance and original
 candidate loading unknown. No efficacy, admission or release claim changes.
+
+### Latest capture result
+
+[The current diagnostic report](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md)
+verifies3 real model capture chains and2 independently graded task outcomes. Both
+collector profiles pass containment and task commands cannot reach the endpoints.
+No positive candidate injection event was retained in the optional-exposure turns;
+this does not establish non-use. One initial callback failure remains ungraded.
+
+A typed required-input probe was skipped on runtime identity drift before model
+dispatch. The fresh required profile now passes all11 probe groups in each worker,
+with the exact new identity bound. All4 original turn reservations remain charged.
+The prepared1-turn positive review needs explicit extra-turn authority. No source,
+image, dependency or installation correction remains. Positive loading, if observed,
+would still not prove voluntary use, semantic contribution or efficacy. The old
+564-task report and provider-report trust remain unchanged.
+
+### Completed positive diagnostic
+
+The approved extra turn passed. All four actual diagnostic captures match their
+original receipts/journals. Three tasks passed independent grading; the initial
+callback-name failure remains ungraded. The forced probe retained a native
+`codex.skill.injected` event with `status=ok` and `invoke_type=explicit`, bound to
+the exact reviewed skill and required runtime. This establishes instruction
+loading for that attempt. Collector export completeness is false; optional-use
+loading, semantic contribution and provider-internal usage remain unknown.
+
+All five reservations are retained, including the preflight skip. No further
+model approval is pending for this repair. Source and installed-wheel evidence
+remain unchanged. The original 564-task comparison cannot gain missing telemetry
+from new diagnostics. [The current report](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.html)
+keeps token retention, provider trust, forced loading and optional benefit separate.

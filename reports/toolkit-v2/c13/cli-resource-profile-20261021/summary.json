@@ -1,0 +1,64 @@
+{
+  "scope": "Darwin arm64 source-checkout CLI, existing Framework Python dependencies. Not installed-wheel or model/worker performance.",
+  "commands": [
+    {
+      "command": "candidate",
+      "samples": 8,
+      "median_wall_seconds": 0.142824083333835,
+      "max_wall_seconds": 0.15067958319559693,
+      "max_sampled_rss_mib": 42.65625
+    },
+    {
+      "command": "list",
+      "samples": 8,
+      "median_wall_seconds": 0.12913543777540326,
+      "max_wall_seconds": 0.13324599992483854,
+      "max_sampled_rss_mib": 40.921875
+    },
+    {
+      "command": "report",
+      "samples": 8,
+      "median_wall_seconds": 0.1321651462931186,
+      "max_wall_seconds": 0.14293149998411536,
+      "max_sampled_rss_mib": 42.140625
+    }
+  ],
+  "shared_host": [
+    {
+      "phase": "before",
+      "samples": 50,
+      "median_cpu_percent": 0.0,
+      "minimum_available_memory_gib": 5.12982177734375,
+      "minimum_disk_free_gib": 141.6510009765625
+    },
+    {
+      "phase": "cli",
+      "samples": 24,
+      "median_cpu_percent": 20.1,
+      "minimum_available_memory_gib": 5.140289306640625,
+      "minimum_disk_free_gib": 141.6497459411621
+    },
+    {
+      "phase": "after",
+      "samples": 50,
+      "median_cpu_percent": 14.25,
+      "minimum_available_memory_gib": 5.109588623046875,
+      "minimum_disk_free_gib": 141.5694122314453
+    }
+  ],
+  "characterization_complete": true,
+  "resource_acceptance": false,
+  "model_calls": 0,
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "result_sha256": "5cc5e18dffec298052994c32c074bb9964d1d19cfcf721fa65ed7e33272f7b30",
+  "limits": [
+    "Observed process samples can miss short children and peaks; CPU is a sampled lower bound.",
+    "Shared-host CPU/memory/network include this coordinator and unrelated user work; differences are not attributable CLI costs.",
+    "Only the child CLI has network denied. Host network byte deltas are not CLI traffic or model usage.",
+    "Kernel ru_maxrss is retained in native platform units and cumulative across these children; it is not a per-case memory figure.",
+    "Synthetic inert metadata and report fixtures; no evaluation worker, candidate code, model or service is exercised.",
+    "No predeclared production workload/acceptance budget or held-out resource trial; this cannot close the production resource gate.",
+    "Energy, whole Codex workload and long-term evidence growth remain unknown. No money, token or time savings claim."
+  ],
+  "scratch_removed": true
+}

@@ -1,5 +1,28 @@
 # Remaining delivery gates
 
+## Current October 21 update
+
+The capture repair is complete: four real diagnostic capture chains verify,
+three tasks passed independent grading and a bound event establishes forced
+Ponytail instruction loading. All five reservations remain charged, including
+one preflight skip. No model approval is pending for this repair. Current source
+`7707756` passed its integrated and 16 installed-wheel checks. See the
+[completed capture handoff](../c07/capture-explicit-profile-20261021/README.md).
+
+The actual human first and helped follow-up responses are now measured. Report
+scope/limits are understood after clarification; control discovery remains partial.
+[The exact feedback](../c13/human-comprehension/editing-comparison-feedback-20261021.md)
+remains separate from the earlier agent review. The
+[CLI resource profile](../c13/cli-resource-profile-20261021/summary.md) adds measured
+calibration, not production acceptance. The [current delivery decision](../c13/delivery-decision.md)
+recommends LIMITED_BETA for bounded local experimentation. Whole-system resource
+acceptance, optional efficacy, broader applicability and release remain unmet.
+
+## Historical October 19 snapshot
+
+The snapshot below retains its original source and then-pending human response.
+The update above supersedes those mutable delivery statuses.
+
 This map distinguishes working interfaces, executed compatibility checks and live
 value evidence. It applies to source `d2c406f`; installation evidence remains
 specific to the wheel actually installed.

@@ -1,5 +1,17 @@
 # Finish the approved collector correction using existing local parent tags
 
+## Current execution result
+
+Both images built, all 11 probe groups passed in each worker, and the offline docs
+check passed. The retained callback-name failure was corrected under standing
+definition authority; the fresh pair passed grading/capture checks. A required-input
+preflight skip retained its reservation. Fresh required-profile conformance and
+the separately approved one-turn positive check then passed. Four real captures
+verify and one bound event confirms forced instruction loading. All five reserved
+turns remain charged; no further model approval is pending. See [the completed
+handoff](../capture-explicit-profile-20261021/README.md). The original proposal
+below is historical; never replay this completed composite or its terminal jobs.
+
 The current source and wheel already pass their required checks. This amendment
 addresses the failed image-source reference and docs formatting only. It changes
 no application source, collector byte, dependency, model, destination or spending.

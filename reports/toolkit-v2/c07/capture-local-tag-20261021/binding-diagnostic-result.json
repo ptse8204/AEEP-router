@@ -1,0 +1,1114 @@
+{
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "review_sha256": "ba281c2d809f69873e817ced08ff47895c577ed4ddf117cb8564afb32e2b9c5d",
+  "new_model_turn_ceiling": 2,
+  "prior_diagnostic_turns": 1,
+  "approved_total_turn_ceiling": 4,
+  "holdouts": 0,
+  "admission": false,
+  "efficacy_claim": false,
+  "records": {
+    "trial_capture-suite_d5e99e28d0a14c43b752f0aec467baa5_capture-explicit_request_toolkit-capture-local-tag-20261021.control_fresh-worker_0": {
+      "tokens": {
+        "status": "verified",
+        "receipt_ref": "159edbfd62389e89251b582a26d63220f48751038ab5d02c80373e9015af1957",
+        "journal_ref": "dec08d35148d404b9c955f590485d3e18717a19930171ea197db1274ecf839d6",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "2179f9686eeb4f8ff68fa318302af2661fdc6590a2ef17063453eb50fa24a859",
+        "skill_sha256": null
+      },
+      "receipt": {
+        "receipt_id": "rcpt_ed5e39105e0f4f5e81b5cce4e6fb9871",
+        "decision_id": "dec_5fad9c480df04be1bcf79133701ab32d",
+        "action_id": "act_bbe89ce503954a45ac8d1e3d467acfc8",
+        "capability": "assessment.edit@1",
+        "executor_id": "toolkit-capture-local-tag-20261021.control",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-21T20:00:32.759657Z",
+        "ended_at": "2026-10-21T20:00:39.020739Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:b1606dbe2f69f41c5a3ec03e4d2104672302bcd28516a86b636bd9f28f88b068",
+        "cohort_digest": "sha256:f7e673e2832b3a72d27020969b458e404d1efbf0e81e2dbf3e1566436bce2494",
+        "action_features": {
+          "input_bytes": 453,
+          "input_items": 11,
+          "text_characters": 302,
+          "max_depth": 2,
+          "size_bucket": "2^8"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 5299.36037492007,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 8071,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 68,
+          "reasoning_output_tokens": 33,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 8071,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 68,
+              "reasoning_output_tokens": 33,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-21T20:00:38.776081Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":5.06174129107967,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":5.061547624878585,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+          "boundary_digest": "351895e14170255d981438758a0ab80a838c2ad4df63fff38babacc8dfb1d97d",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 0,
+          "result_bytes": 100,
+          "tool_call_count": 0,
+          "host_tools_used": "[]",
+          "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:3d9cb1c9e558e52394196342437ecbb54cdf01d1a10e9ab3190cb6dc3b4c605c",
+          "turn_identity_digest": "sha256:abf6e1d3d12062b00b17e2c8670065cd028389565f2cb9fa9b94e97393a472cf",
+          "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+          "catalog_metrics_scope": "aeep-metrics-b24d6e15c1f048bfa966a80b993b549c",
+          "execution_evidence_digest": "dec08d35148d404b9c955f590485d3e18717a19930171ea197db1274ecf839d6",
+          "task_instruction_sha256": "f0917f3a7ac51ab17e32a7f7d984c031b480cc0d6993cb5eb5660d68a8deec1f",
+          "adapter_id": "codex-app-server:text-phase-final-control",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 106,
+          "invocation_guard_ms": 101.23287467285991,
+          "exit_code": null,
+          "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-b24d6e15c1f048bfa966a80b993b549c",
+            "batches": 6,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              }
+            ]
+          }
+        }
+      },
+      "journal": {
+        "schema_version": "execution.evidence.v1",
+        "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+        "adapter": "ManagedHostExecutor",
+        "events": [
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 0,
+            "kind": "execution.started",
+            "source_id": "start",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 1,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:aab62730d43dc000f8048aeeac6bc91a9984ac769c10074c6442ecd7578eb6db",
+            "action_digest": "aab62730d43dc000f8048aeeac6bc91a9984ac769c10074c6442ecd7578eb6db",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 2,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:bfab3bbce81797e0c9abef3981004ec73f580dc923b6a38e5eaaf922de163d25",
+            "action_digest": "bfab3bbce81797e0c9abef3981004ec73f580dc923b6a38e5eaaf922de163d25",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 3,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:23a7f08bfd64e7eebcc0fd7ed0bc2e7a8b648f03240a1e2961ffa68ea2738b11",
+            "action_digest": "53001aaa050919409b86501a75fbb6351823a6cdb543e6df9d3f7ae551ba13ff",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 4,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:205a1b06c6f3e7eb1e2ad55cf8a2e641708136845ce96329e3de6bfa973f8b24",
+            "action_digest": "53001aaa050919409b86501a75fbb6351823a6cdb543e6df9d3f7ae551ba13ff",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 5,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:5cb9322f1b3e889bfeb7c90102837924b95582a3a9db10b3c4068187823e9f0b",
+            "action_digest": "5cb9322f1b3e889bfeb7c90102837924b95582a3a9db10b3c4068187823e9f0b",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 6,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:ecf588da965b549838099f37a4520fce264e7cfb9d8ec0f195c705247266dad0",
+            "action_digest": "cfafdd14cf520a9b8541fb21fdf89f55771c423aed3fb1cf75098b7758a60267",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 7,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:819f4365836124a282d6f19101a2d07c34af884deb99a32cce535f247c4ba6b7",
+            "action_digest": "cfafdd14cf520a9b8541fb21fdf89f55771c423aed3fb1cf75098b7758a60267",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 8,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:d2020ca6cbfe42d5808cefd5106e00deba6b8256fd645dada353182682d338a1",
+            "action_digest": "137e08ced9b43755cc68e672d06b04fa280e09e9a82e6df627cce50df6595e54",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 9,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:58f3e3e5e3f7fee4f9bf7cebd3ca64252b6c8451b6e034a7ee49e8ca44c73ca5",
+            "action_digest": "ebdfd9301a7ac1ef5af04f7794114a9bfba09c7422932a2b5b72e67630cb364f",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 10,
+            "kind": "usage.reported",
+            "source_id": "adapter:usage:8288e690719142f5b53d0dca78872ce5:10",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [
+                {
+                  "provider": "openai",
+                  "resource_pool": "unknown",
+                  "unit": "provider_unit",
+                  "consumed": null,
+                  "source": {
+                    "status": "unavailable",
+                    "source": "unavailable",
+                    "trust": "untrusted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": null
+                  },
+                  "included_or_paid": "unknown",
+                  "rate_snapshot_id": null,
+                  "usage_fingerprint": null
+                }
+              ],
+              "model_usage": [
+                {
+                  "provider": "openai",
+                  "model": "gpt-6-astra",
+                  "access_channel": "subscription",
+                  "input_tokens": 8071,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 68,
+                  "reasoning_output_tokens": 33,
+                  "evidence": {
+                    "status": "partial",
+                    "source": "provider_report",
+                    "trust": "self_asserted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": "2026-10-21T20:00:38.775229Z"
+                  }
+                }
+              ],
+              "tool_footprint": null
+            },
+            "accounting_mode": "cumulative"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 11,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:eb111270dd5a756669ad617f63bef6e5b8984cf647ab027297223c7e0e0ac4ad",
+            "action_digest": "eb111270dd5a756669ad617f63bef6e5b8984cf647ab027297223c7e0e0ac4ad",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 12,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:2179f9686eeb4f8ff68fa318302af2661fdc6590a2ef17063453eb50fa24a859",
+            "action_digest": "2179f9686eeb4f8ff68fa318302af2661fdc6590a2ef17063453eb50fa24a859",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 13,
+            "kind": "usage.reported",
+            "source_id": "adapter:turn-usage",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [
+                {
+                  "provider": "openai",
+                  "resource_pool": "codex.self",
+                  "unit": "provider_unit",
+                  "consumed": null,
+                  "source": {
+                    "status": "unavailable",
+                    "source": "unavailable",
+                    "trust": "untrusted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": null
+                  },
+                  "included_or_paid": "unknown",
+                  "rate_snapshot_id": null,
+                  "usage_fingerprint": null
+                }
+              ],
+              "model_usage": [
+                {
+                  "provider": "openai",
+                  "model": "gpt-6-astra",
+                  "access_channel": "subscription",
+                  "input_tokens": 8071,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 68,
+                  "reasoning_output_tokens": 33,
+                  "evidence": {
+                    "status": "complete",
+                    "source": "provider_report",
+                    "trust": "self_asserted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": "2026-10-21T20:00:38.776081Z"
+                  }
+                }
+              ],
+              "tool_footprint": null
+            },
+            "accounting_mode": "cumulative"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "08dfe656ac0a4d4da379954d8feb075a",
+            "attempt_id": "attempt_5862dbaa898d49f5b377e0e9258c9d8c",
+            "sequence": 14,
+            "kind": "execution.completed",
+            "source_id": "terminal",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          }
+        ],
+        "complete": true,
+        "cancellation_confirmed": false,
+        "identity_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+        "boundary_digest": "351895e14170255d981438758a0ab80a838c2ad4df63fff38babacc8dfb1d97d",
+        "journal_id": "08dfe656ac0a4d4da379954d8feb075a"
+      }
+    },
+    "trial_capture-suite_d5e99e28d0a14c43b752f0aec467baa5_capture-explicit_request_toolkit-capture-local-tag-20261021.treatment_fresh-worker_0": {
+      "tokens": {
+        "status": "verified",
+        "receipt_ref": "71a121738de8fd30d743d998579bbcfb7205e6841c682dd47a4037f2980715ea",
+        "journal_ref": "f52636f7e8036057d9323d32c2ad7c7db01d76fcf60d72f593629f685a7d4324",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "6de5b2397f813c85d2b588fb3266c8a0f26393be5dd929705ba24a5db5104924",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+      },
+      "receipt": {
+        "receipt_id": "rcpt_b190d45b7b504fdfaf063eb0e5b444a4",
+        "decision_id": "dec_c01cd97a367f410e9f0dbfc8e54dda66",
+        "action_id": "act_bbe89ce503954a45ac8d1e3d467acfc8",
+        "capability": "assessment.edit@1",
+        "executor_id": "toolkit-capture-local-tag-20261021.treatment",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-21T20:00:43.485144Z",
+        "ended_at": "2026-10-21T20:00:50.002536Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:ab412e98537cdf1021ae312482b12900190fd4d3c43fbac8c24abbceee193d5e",
+        "cohort_digest": "sha256:3d0cea49006e6d08bc896150593e3d4e21ad3f6fb69ddad7ab717ee050f700b6",
+        "action_features": {
+          "input_bytes": 453,
+          "input_items": 11,
+          "text_characters": 302,
+          "max_depth": 2,
+          "size_bucket": "2^8"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 5603.040582966059,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 8282,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 70,
+          "reasoning_output_tokens": 35,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 8282,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 70,
+              "reasoning_output_tokens": 35,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-21T20:00:49.786870Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":5.393168084323406,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":5.39289641706273,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "e019fe1538f3b245cc7f2d890f7546ba16eb4166815c4dc1f86ff4ba72914b0f",
+          "boundary_digest": "283d4afa86589b8e4fde5bb290415eff38b29257cea8c9d975cdf8dab6cb2f46",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 0,
+          "result_bytes": 100,
+          "tool_call_count": 0,
+          "host_tools_used": "[]",
+          "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+          "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+          "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:804b4704817c0ac61d8988108e0f6385ec17a89297f249c07fd68e2d2df5dc2e",
+          "turn_identity_digest": "sha256:eeb5e19408173e82cdc6576ba54d6a198f945fac272716d367683271ec0ef87e",
+          "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+          "catalog_metrics_scope": "aeep-metrics-fc60703b4f3e261a84b5021e9f037658",
+          "execution_evidence_digest": "f52636f7e8036057d9323d32c2ad7c7db01d76fcf60d72f593629f685a7d4324",
+          "task_instruction_sha256": "f0917f3a7ac51ab17e32a7f7d984c031b480cc0d6993cb5eb5660d68a8deec1f",
+          "adapter_id": "codex-app-server:text-phase-final-treatment",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 106,
+          "invocation_guard_ms": 92.81224897131324,
+          "exit_code": null,
+          "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-fc60703b4f3e261a84b5021e9f037658",
+            "batches": 7,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              }
+            ]
+          }
+        }
+      },
+      "journal": {
+        "schema_version": "execution.evidence.v1",
+        "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+        "adapter": "ManagedHostExecutor",
+        "events": [
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 0,
+            "kind": "execution.started",
+            "source_id": "start",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 1,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:864345ea08c1dc03ca2757d63c2324e13d43f582befa1634cc31e43101b66ffa",
+            "action_digest": "864345ea08c1dc03ca2757d63c2324e13d43f582befa1634cc31e43101b66ffa",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 2,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:6b7ad5536fc4688d1b853957dca5e167840ae6aef12ecf57ad7d8fd59c0f2bc0",
+            "action_digest": "6b7ad5536fc4688d1b853957dca5e167840ae6aef12ecf57ad7d8fd59c0f2bc0",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 3,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:686e1ed239676d4ff312fafaf2f4f8c376c84c3bc8a79114545fe35671f29ff7",
+            "action_digest": "f3c6bff50cc415717d56fe28eb5e9528cc3abf0fb4cec8655cb2de0a9f2b53a9",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 4,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:22d1b0c81b8e3f7c381a06b3f12893d031552323a0fae788f9f5e3656fe1a37a",
+            "action_digest": "f3c6bff50cc415717d56fe28eb5e9528cc3abf0fb4cec8655cb2de0a9f2b53a9",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 5,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:9a26c2fa2086462244fe7585a3ceb9c45101cdd8c9cc4ccf915c2ef422066c87",
+            "action_digest": "9a26c2fa2086462244fe7585a3ceb9c45101cdd8c9cc4ccf915c2ef422066c87",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 6,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:dac3bd9a8113c9433176f7e1f2f2fb89070ad49de678bb08a373459a0c67bf12",
+            "action_digest": "7ba1db676193766e96e739c1c463911ecd5479bfcd67bcb9429309c74b28c5f6",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 7,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:892f18cdada8066326d10047066eab46ce002b7372bd8c87be6bfede3227f247",
+            "action_digest": "7ba1db676193766e96e739c1c463911ecd5479bfcd67bcb9429309c74b28c5f6",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 8,
+            "kind": "action.started",
+            "source_id": "adapter:sha256:3d762609ef1e1b3262d9e831ab15e7355f509eceeafdee19aa1b066be828b1ea",
+            "action_digest": "b1e222d1df6ebf61f80b8c73e3bb4783a2bbcd6ff2f7b164976604bf26cfb0fd",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 9,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:b68c448419c63fdda128f7b4bd58c4500a1a4d02cf954f6234fd1f32b8cd4b82",
+            "action_digest": "b68c448419c63fdda128f7b4bd58c4500a1a4d02cf954f6234fd1f32b8cd4b82",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 10,
+            "kind": "action.completed",
+            "source_id": "adapter:sha256:89137b157cd958f0ae115c2f5fe8ec6bfa6f5b5c60f845a7a6c4e3f2d10819d8",
+            "action_digest": "b28f702a93c79839c5bfa4c6a307278770574715a601ded1d654f66c5c0952ab",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 11,
+            "kind": "usage.reported",
+            "source_id": "adapter:usage:21f4272b6f2e477482534368dbb77826:11",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [
+                {
+                  "provider": "openai",
+                  "resource_pool": "unknown",
+                  "unit": "provider_unit",
+                  "consumed": null,
+                  "source": {
+                    "status": "unavailable",
+                    "source": "unavailable",
+                    "trust": "untrusted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": null
+                  },
+                  "included_or_paid": "unknown",
+                  "rate_snapshot_id": null,
+                  "usage_fingerprint": null
+                }
+              ],
+              "model_usage": [
+                {
+                  "provider": "openai",
+                  "model": "gpt-6-astra",
+                  "access_channel": "subscription",
+                  "input_tokens": 8282,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 70,
+                  "reasoning_output_tokens": 35,
+                  "evidence": {
+                    "status": "partial",
+                    "source": "provider_report",
+                    "trust": "self_asserted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": "2026-10-21T20:00:49.785449Z"
+                  }
+                }
+              ],
+              "tool_footprint": null
+            },
+            "accounting_mode": "cumulative"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 12,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:42dd9b6dcf92a80e6b44042bc2413edb994ba8c316fac8c5c5ffe5e8b71d9aea",
+            "action_digest": "42dd9b6dcf92a80e6b44042bc2413edb994ba8c316fac8c5c5ffe5e8b71d9aea",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 13,
+            "kind": "message.received",
+            "source_id": "adapter:catalog:6de5b2397f813c85d2b588fb3266c8a0f26393be5dd929705ba24a5db5104924",
+            "action_digest": "6de5b2397f813c85d2b588fb3266c8a0f26393be5dd929705ba24a5db5104924",
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 14,
+            "kind": "usage.reported",
+            "source_id": "adapter:turn-usage",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": {
+              "cash": {
+                "status": "unavailable",
+                "components": []
+              },
+              "subscription_usage": [
+                {
+                  "provider": "openai",
+                  "resource_pool": "codex.self",
+                  "unit": "provider_unit",
+                  "consumed": null,
+                  "source": {
+                    "status": "unavailable",
+                    "source": "unavailable",
+                    "trust": "untrusted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": null
+                  },
+                  "included_or_paid": "unknown",
+                  "rate_snapshot_id": null,
+                  "usage_fingerprint": null
+                }
+              ],
+              "model_usage": [
+                {
+                  "provider": "openai",
+                  "model": "gpt-6-astra",
+                  "access_channel": "subscription",
+                  "input_tokens": 8282,
+                  "cached_input_tokens": 0,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 70,
+                  "reasoning_output_tokens": 35,
+                  "evidence": {
+                    "status": "complete",
+                    "source": "provider_report",
+                    "trust": "self_asserted",
+                    "evidence_id": null,
+                    "source_reference": null,
+                    "digest": null,
+                    "observed_at": "2026-10-21T20:00:49.786870Z"
+                  }
+                }
+              ],
+              "tool_footprint": null
+            },
+            "accounting_mode": "cumulative"
+          },
+          {
+            "schema_version": "execution.event.v2",
+            "journal_id": "50aecfe350df4aad90bf5586380cb43c",
+            "attempt_id": "attempt_ad4f0a10f8af4fffaf5fff0cae35e53f",
+            "sequence": 15,
+            "kind": "execution.completed",
+            "source_id": "terminal",
+            "action_digest": null,
+            "evidence_ref": null,
+            "accounting": null,
+            "accounting_mode": "incremental"
+          }
+        ],
+        "complete": true,
+        "cancellation_confirmed": false,
+        "identity_digest": "e019fe1538f3b245cc7f2d890f7546ba16eb4166815c4dc1f86ff4ba72914b0f",
+        "boundary_digest": "283d4afa86589b8e4fde5bb290415eff38b29257cea8c9d975cdf8dab6cb2f46",
+        "journal_id": "50aecfe350df4aad90bf5586380cb43c"
+      }
+    }
+  },
+  "plans": [
+    {
+      "label": "explicit_request",
+      "plan_id": "plan_d750cbe943444483a5242ffae48c2d7c",
+      "assessment_id": "assessment_2177031e774b4e429a8648c514610fdd",
+      "report_id": "fit_a82ccdebf2cb4bf2ba48920360da13bd"
+    }
+  ],
+  "optional_pair_skipped": "Only one approved turn remains after this corrected pair; the two-turn optional pair is not dispatched.",
+  "passed": true,
+  "proxy_restored_stopped": true,
+  "source_unchanged": true,
+  "grant_after": [
+    12735,
+    3742,
+    118057.11718721455,
+    "0.0"
+  ]
+}

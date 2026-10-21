@@ -1,0 +1,122 @@
+{
+  "purpose": "One prospective positive native instruction-loading check after exact required-input profile conformance passed. No comparison/qualification, holdouts, voluntary-use or efficacy claim.",
+  "source_commit": "77077562e1a63d45791c478066affba35dd8d10d",
+  "source_digest": "df8f0b9e54378de4b7096db191bee3bdb44082488832482800d7695f67a7019a",
+  "definitions_sha256": "6c2260e38ca89ef7f5e79e193215a9f6b47f602c390ee4c21704b740a2035a6f",
+  "runner_sha256": "228163b13edcb53eb2d62b48a9b36976f90c078d9e04d73d6235439a63af4d09",
+  "collector_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+  "images": {
+    "control": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+    "treatment": "sha256:388c8328ddebc8455e9cf484491fee89926fa212d2f1219f2fc88a48527b18ea"
+  },
+  "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+  "proxy_name": "aeep-reviewed-model-proxy",
+  "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+  "proxy_image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+  "proxy_memory_bytes": 536870912,
+  "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+  "proxy_inspect_format": "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"Running\":{{json .State.Running}},\"Memory\":{{json .HostConfig.Memory}},\"MemorySwap\":{{json .HostConfig.MemorySwap}},\"Networks\":{{json .NetworkSettings.Networks}}}",
+  "effects": [
+    "Reuse two existing immutable images; no pulls, builds or installs. The launcher rechecks the pinned collector and candidate bytes.",
+    "Start one ephemeral loopback-only metrics listener inside each fresh worker. No host port publishing, hosted telemetry, prompt logging or trace export.",
+    "Run the existing 11 conformance probes per worker plus a denied-access probe against that worker\u2019s actual collector port. Read only /proc/net/tcp listener addresses outside the native sandbox; never authentication files or process arguments.",
+    "Use and restore the exact existing stopped proxy with its approved 512 MiB/no-swap cap; no new endpoint or destination.",
+    "Retain numeric/hash-only evidence, existing grant accounting and cleanup receipts. Preserve images, volumes, old records and unrelated work."
+  ],
+  "limits": {
+    "maximum_model_turns": 1,
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600,
+    "cash_usd": 0,
+    "minimum_host_free_bytes": 54760833024,
+    "maximum_diagnostic_task_seconds_each": 102,
+    "maximum_diagnostic_lifecycle_seconds": 600,
+    "maximum_diagnostic_plans": 1,
+    "maximum_diagnostic_assessment_operations": 24,
+    "maximum_transient_model_workers": 4
+  },
+  "approval_reason": "The previous study profiles had catalog_metrics disabled. CONTINUATION.md requires applicable authorization for service startup; the pasted continuation does not authorize new untrusted execution. This exact profile adds a local telemetry listener and changes the effective worker boundary.",
+  "not_authorized_by_this_review": [
+    "Any model work beyond the four exact public diagnostic task turns; any full comparison, holdout generation or automatic retry",
+    "Credentials inspection, login or copying",
+    "New installations, builds, images, external services or destinations",
+    "Evidence-threshold relaxation, admission, activation, release or publication"
+  ],
+  "authority_for_definition_changes": "September25/27 delegation covers these exact routine inert definitions and grant scope amendment; counters are not reset.",
+  "execution_started": false,
+  "approval_record": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/capture-explicit-profile-20261021/collector-operator-approval.json",
+  "diagnostics_runner_sha256": "5014ff2d1bf775450a02d76a6a1c8b2ab54b6e13e205404ed0f319e65146ef71",
+  "diagnostic_tasks_sha256": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+  "boundary_assembly_runner_sha256": "02c7f589395d13fd37a369cf838cea8ebe5ab5edbf6409e313b8f8a2648e4a7f",
+  "additional_runtime_image": "sha256:b40522e4be1a398b9366333096d80066097f2784f04f3a0838256b057e9b6228",
+  "phases": [
+    "Run the exact no-model pair inspection and actual collector denied-access probes.",
+    "After all probes pass, retain and review current-source conformance through the existing exact contracts under standing definition authority.",
+    "Freeze two legacy diagnostic plans using the two exact public cases in diagnostic-tasks.json. Each has one case and two workers, no holdouts or admission/comparison semantics.",
+    "Run the explicit read-request pair first. Run the optional pair only when its predecessor produced complete bound token captures and positive instruction-loading evidence. Maximum four task turns in total, no retries.",
+    "Retain source-bound journals, receipts, costs and unknown delivery/use fields. Restore the proxy stopped and remove only each new transient worker."
+  ],
+  "execution_preconditions": [
+    "Exact operator approval of this review digest.",
+    "Unchanged source, scripts, images, candidate and collector pins.",
+    "All current-source integrated checks pass.",
+    "Current grant remains valid and fits all reservations without resetting counters.",
+    "At least51GiB free before execution.",
+    "No model diagnostics before current-source worker conformance and actual collector access denial pass."
+  ],
+  "parent_repair_review_sha256": "5fddaf27a0df48374ed67217681ed0b62dfa31b41336ad791aa6c3daf4139068",
+  "build_result_sha256": "d5ad986ab95ef5f27ed26c029909d816db414861f462943021ccf7c67e8ae2a8",
+  "authority": "Pending explicit operator approval: all4 previous diagnostic reservations remain charged; this is a distinct one-turn extension, no automatic retry or reset.",
+  "parent_profile_review_sha256": "dc4b44da273f64606d9ef767a4d46a08ad84f75cf0b65d48210059dd992ed477",
+  "maximum_model_turns": 1,
+  "actions": [
+    "Start only the existing stopped reviewed proxy; run one fresh treatment-only training diagnostic with typed required Ponytail input through AssessmentService using exact new3d13ce70 runtime boundary. The same public input and canonical independent grader remain.",
+    "Retain receipt/journal/token-capture/positive-loading evidence, failures and all grant usage; stop with unknown if no positive native injection is captured. Restore proxy stopped and remove transient worker only. No automatic retry."
+  ],
+  "approved": false,
+  "previous_human_approved_bundle_sha256": "3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2",
+  "previous_charged_diagnostic_turns": 4,
+  "previous_observed_model_turns": 3,
+  "required_runtime_identity": "3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097",
+  "current_boundaries": {
+    "control": {
+      "conformance_digest": "7603ca695573e11941f9e5335542543f0be81ebc9aad5432329437c13daf2607",
+      "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+      "identity_digest": "3933b091ebba7cb91a7fa956856b164dd4af0897fe2dd13e6cbdf174997b0641",
+      "verified_probe_count": 11
+    },
+    "treatment": {
+      "conformance_digest": "170ce250d94dca7e4006adf2eafbdf52726b9b51fff44d69b69e5d98a4444500",
+      "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+      "identity_digest": "3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097",
+      "verified_probe_count": 11
+    }
+  },
+  "boundary_result_sha256": "248be7478f68affe5cab1f4ce1f6e2ca360960c456d52a250d11720f6b3559b3",
+  "source_check_evidence": "reports/toolkit-v2/c07/capture-policy-repair-20261021/validation/source-stability.json",
+  "current_wheel_check": "reports/toolkit-v2/integration-completion/package-review-policy-20261021/execution/summary.json",
+  "why_new_approval": "The prior human-approved cap4 is fully charged, including the preflight-skipped task; it cannot be reset/refunded. Need authority for exactly1 further model turn. Source/image/collector/skill/engine/permissions/destination unchanged. Required runtime identity has now independently passed all11 probe groups and collector denial before dispatch.",
+  "forbidden": [
+    "new source or dependency change",
+    "build/pull/install/download",
+    "credentials/sign-in",
+    "new model/destination or cash",
+    "more than1 task turn",
+    "automatic retries",
+    "historical replay or efficacy/admission",
+    "image/volume/backup removal",
+    "release/publication"
+  ],
+  "exact_driver_inputs": {
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/run-positive-check.py": "5014ff2d1bf775450a02d76a6a1c8b2ab54b6e13e205404ed0f319e65146ef71",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/diagnostic-tasks.json": "cd44ac5c1aeb112114ef3e5b6b255e6ad3a60970bc51dd6f6dc38efbb859f512",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/collector-definitions.json": "6c2260e38ca89ef7f5e79e193215a9f6b47f602c390ee4c21704b740a2035a6f",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/collector-result.json": "1247e0b485648061fe77e772061f8bd39ea39b037a277d851b0644a6d2d5a4d8",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/boundary-result.json": "248be7478f68affe5cab1f4ce1f6e2ca360960c456d52a250d11720f6b3559b3",
+    "reports/toolkit-v2/c07/capture-explicit-profile-20261021/collector-operation-review.json": "f57d60e04c0eb2fdfcce1885c737049cd82adcdf34e4f67b2f5db641820b7b89",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/explicit-loading-result.json": "8f97a1377833019c07008c37efc99a62cf581028998a3e4683a26ec5883cbb08",
+    "reports/toolkit-v2/c07/capture-local-tag-20261021/final-diagnostic-audit.json": "3ed1b8f859607beb9841556e6035c53d978e1a490b6c16c5b030356d3932630b"
+  }
+}

@@ -1,6 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21, approved bundle completed with two failures:** Source7707756 passed all12 integrated checks, including both1589-test runs and coverage gates. Its current wheel passed15 installed CLI checks plus1 retained capture-chain check, using32 exact cached dependencies with no downloads; the private runtime was removed. Human-approved bundleec20db3b… reached a terminal collector build failure: BuildKit attempted registry metadata for an existing local repository@digest and was denied before image creation. No collector/worker/model started. The independent docs check stopped on one STATE.md blank-line lint error before the link scan; formatting is corrected and67-file lint now passes. No source or wheel changed after verification. The fresh local-tag/docs amendment3b10b05e… is preflighted and awaiting the requested approval. The stopped proxy, unchanged parents, no residual task workers and host reserve were checked. The original study remains INCONCLUSIVE. No architecture, model, dependency or credential decision is pending.
+**Status as of 2026-10-21: capture repair complete; acceptance feedback recorded.**
+Four real diagnostic turns have verified token capture chains. Three passed
+independent grading; the initial callback failure remains ungraded. The approved
+one-turn forced check captured a bound native Ponytail instruction-loading event.
+All five reservations remain charged, including one preflight skip. No new model,
+installation, rebuild, credential or architecture decision is needed for this repair.
+Both worker profiles pass containment; current source/wheel/docs checks passed.
+The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
+The actual human response and helped follow-up are recorded. Report scope and
+limits are understood after clarification; concrete control discovery is partial.
+A 24-command CLI resource characterization is complete,
+but the production whole-system resource gate remains unmet. No release is authorized.
 
 ```yaml
 schema: aeep.toolkit-progress.v1
@@ -26,21 +37,21 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
-last_check_command: 'capture-policy-repair-20261021/validation/checks.json; package-review-policy-20261021/execution/summary.json; bundle-execution-results.json; final-resource-result.json'
-last_check_result: '12 integrated checks pass; ordinary and coverage1589 passed/21 skipped,82% displayed coverage,both branch gates. Current wheel16 offline checks pass. Collector build failed source resolution;0 model turns. Docs lint failure fixed;67-file lint pass, fresh link scan pending.'
-next_action: 'Await exact bundle3b10b05ecae5b0dc27a5e02633454e8dcbcf9507ded14ae037d3759cedd506e2 approval. Follow capture-local-tag-20261021/README.md and run its pinned composite once. All earlier started drivers are terminal. Do not rebuild/reinstall the unchanged wheel or repeat source suites.'
+last_check_command: 'capture-explicit-profile-20261021/completion-audit.json; capture-status.json; c13/cli-resource-profile-20261021/summary.json; c13/human-comprehension/editing-comparison-response-20261021.json'
+last_check_result: 'Four real captures verified; three independently graded passes and one ungraded callback failure. Bound explicit instruction-loading event verified. Both profiles pass 11 probe groups per worker. Five reservations charged, including one skip. Human report comprehension demonstrated after clarification; concrete control discovery partial. CLI characterization complete; no production acceptance claim.'
+next_action: 'Read reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md and c13/current-delivery-guide.md. Read the completed human follow-up separately from its first-response errors. Do not rerun terminal drivers, broad suites, installs or the original comparison. If production acceptance is requested, freeze its workload and resource budgets before new held-out work.'
 blocked_actions:
-  - 'Actual human comprehension has no participant response; a separate exercise now uses the completed four-arm report. The earlier agent review is preserved and cannot close it.'
-  - 'Trusted tokens and whole-host resource acceptance remain unmeasured; no verified savings, automatic admission or production-efficacy claim.'
-  - 'Release/publication remains unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
+  - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
+  - 'Production whole-system resource acceptance lacks applicable frozen budgets and held-out measurements. CLI calibration cannot close it. Independent provider usage, optional candidate use and verified savings remain unproven.'
+  - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'ec20db3b was explicitly approved and executed. Its collector build and docs check failed terminally. Exact successor bundle3b10b05e for local-tag resolution and corrected docs data requires approval because the preceding reviews forbid automatic retries. The4 diagnostic turns remain unused.'
-  - 'Further backup, unrelated resource or retained-image removal is outside this task execution scope.'
+  - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
+  - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
-  - 'The completed study finds zero success gain and no 10% time benefit. Strict token pairs are 0/105; candidate-specific use and generated-tool invocation are unknown. Generalization beyond bounded mechanical tasks is unassessed.'
-  - 'The current7707756 wheel passed15 installed CLI checks plus1 retained capture check. Its live collector remains unqualified until the fresh images and checks pass. Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions remain explicit.'
-
+  - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
+  - 'The current wheel passed 16 installed checks. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
+  - 'Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions stay explicit.'
 ```
 
 ## Append-only checkpoint journal
@@ -2222,3 +2233,111 @@ anchors or replace Lychee. Source and all pending review pins remain unchanged,
 as do the3 original comparison artifacts and2 human-exercise guides. The staged
 whitespace check flags only the retained BuildKit log's Dockerfile-rendering blank
 line (control-build.log:16). That raw failure evidence is preserved unchanged.
+
+### October21: local tags resolve; capture checks and required profile pass
+
+The actual response approved bundle3b10b05e…. Its copied composite first lacked a
+local source-stability record; this read-only preflight failed before any marker
+or reservation. An unchanged copy of the already input-pinned validation record
+was staged at the expected path, with provenance retained and no executable/review
+change or verification rerun. The approved composite then ran once. Both COPY-only
+images built: control0c05b495931e… and treatment388c8328ddeb…. Parent IDs, inherited
+Config and exact parent filesystem layers passed; no installs, RUN, image deletion
+or model turn occurred during builds. Both workers passed11 probe groups including
+collector denial. The formerly missing disabled-feature/inventory checks now pass
+on the corrected launch scope. The offline docs check passed67 files,658 link
+occurrences,454 unique,591 OK,67 excluded,0 errors, and removed its unchanged runtime.
+
+The first diagnostic completed1 control model turn, then stopped because its
+callback name still hashed the old case input/expected. Grading did not run; output
+correctness stays unknown. The canonical report, receipt and failure remain. Its
+token capture verifies against the original journal, with provider-report provenance.
+Routine definition reviewba281c2d… fixes the sole callback with existing grader_name,
+checks registration before enqueue, and exports receipts before count assertions.
+It changes no source, grader, fixture, image, permission, model or threshold.
+The fresh two-turn pair passed the independent grader and both capture checks.
+No positive skill-injection metric arrived; candidate loading/use stay unknown.
+The optional two-turn pair was not dispatched because only1 turn remained.
+
+Routine positive-probe definition6a05117d… used that final1-turn reservation with
+required typed skill input and no control/value claim. It was skipped before model
+dispatch because required exposure changes runtime identity frome019fe15… to3d13ce70…;
+the existing optional-profile boundary correctly rejected the drift. A read-only
+recheck reproduces the exact mismatch. No receipt, token zero or successful task
+is invented for that skip. All4 human-approved reservations remain charged.
+
+Independent safe work reviewed and ran a fresh model-free required-profile pair
+inspection with the same immutable images/collector. Both11-group boundaries and
+actual collector denial pass; canonical assembly binds treatment identity
+3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097.
+A wrong coordinating digest argument was rejected before a marker/reservation;
+both that failure and the subsequent actual-hash invocation are retained. No
+side-effectful attempt was retried, no model ran in conformance, and no boundary
+was weakened. The proxy ended stopped; both task images have0 referencing containers.
+
+[The current capture report](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md)
+keeps3 completed real captures separate from the original564-task study. It records
+2 independently graded task passes and1 ungraded callback failure. Capture matching
+does not independently verify provider quantities or prove semantic use. The actual
+HTML browser preview was blocked by local-file URL policy; no workaround was
+attempted. Local HTML structure/data checks can supplement, not claim, visual review.
+
+[The one-turn positive review](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/README.md)
+is concrete under raw SHAba27e521798f450581d66ba963bd9a764799474af1c64c137a83e00eb36fd91e.
+Its8 pins, source, syntax, data paths and required boundary passed preflight.
+The prior human cap4 is exhausted, including the skipped reservation, so explicit
+1-turn authority was requested. No new source/wheel/image/dependency/service,
+credential, spending, architecture or destination decision is needed. Do not
+repeat full suites, install the unchanged wheel, replay a terminal driver, or
+change the old comparison. Whole-host acceptance, actual human comprehension and
+release remain distinct external gates; an agent review cannot supply human answers.
+
+Final observed grant12,748 operations,3743 charged turns,118085.22697854927 operation
+seconds,cash0. Host free152693895168 bytes. Proxy stopped at512MiB/no swap,0 containers
+reference either task image. Parents/output tags, volumes, backups and unrelated
+work are preserved. Operation intervals overlap; their sum is not elapsed study
+time, whole-host usage or prospective savings. Coordinator research/reporting
+measurements remain incomplete rather than fabricated.
+
+### October 21 completion: capture repair verified; actual human feedback measured
+
+The actual operator approved `ba27e521…` and its single extra turn ran once.
+[The canonical completion audit](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/completion-audit.json)
+verifies independent grading, complete retained token fields and a native positive
+instruction-loading event bound to the reviewed Ponytail skill. Four actual model
+turns have verified captures, three graded passes and one ungraded callback failure.
+Five reservations remain charged, including one skipped preflight. No model
+approval is pending. Prior failures, exact reviews, source and historical report
+bindings are retained; no full-study replay or source/package rerun occurred.
+
+The required treatment runtime identity is `3d13ce70…`; both current profiles pass
+11 containment probe groups per worker and deny access to their actual collectors.
+The proxy is stopped at 512 MiB/no swap; both output images and parents are retained,
+with no referencing containers. Host free was 151,944,278,016 bytes. Final observed
+grant: 12,784 operations, 3,744 charged turns, 118,132.75897138286 summed operation
+seconds, cash ledger 0.0. Overlaps and unavailable billing prevent elapsed-time or
+money-saving claims. No images, volumes, backups or unrelated work were removed.
+
+[The resource characterization](../../reports/toolkit-v2/c13/cli-resource-profile-20261021/summary.md)
+completed 24 network-denied source CLI commands and shared-host baseline samples.
+Maximum sampled process RSS was 42.66 MiB; wall medians were about 0.13–0.14 seconds.
+Sampling is incomplete and host counters include unrelated work. Production
+workload/budgets, energy and complete Codex/assessment usage remain unqualified.
+
+[The actual human response](../../reports/toolkit-v2/c13/human-comprehension/editing-comparison-feedback-20261021.md)
+is recorded verbatim with help and scope/control errors. A targeted helped
+follow-up is pending. C13 is not PASS. The [current delivery guide](../../reports/toolkit-v2/c13/current-delivery-guide.md)
+and [decision](../../reports/toolkit-v2/c13/delivery-decision.md) recommend bounded
+local experimental handoff. Production resource acceptance, optional efficacy,
+broader applicability and release authorization remain separate unmet requirements.
+No architecture, dependency, credential or repeated software test is the next step.
+
+### October 21 human follow-up recorded
+
+The actual [helped follow-up](../../reports/toolkit-v2/c13/human-comprehension/editing-comparison-follow-up-response-20261021.json) correctly identifies optional Ponytail,
+the four arms, bounded recipes, all-arm 105/105 success, unchanged INCONCLUSIVE
+verdict and missing token/use/cash/generalization evidence. Report comprehension
+is demonstrated after clarification; the first response and errors remain intact.
+No further scope response is pending. Concrete lifecycle control discovery remains
+partial, and the companion guide is a product correction rather than participant
+control-use evidence. No unaided, production-readiness or release claim follows.

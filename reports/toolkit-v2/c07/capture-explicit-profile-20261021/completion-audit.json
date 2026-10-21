@@ -1,0 +1,547 @@
+{
+  "report": {
+    "schema_version": "assessment.report.v1",
+    "report_id": "fit_73be202b3bcd41e5a6219f8cdf3f0e49",
+    "plan_digest": "7ba631c2471f0bfab7850dbab9adde978f0d365749886519ec516ab89ae03235",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "tested_variations": [],
+    "measured_usage": {
+      "campaign_wall_time_ms": 10539.608500432223,
+      "known_campaign_wall_time_ms": 10539.608500432223,
+      "known_overhead_wall_time_ms": 43459.122916683555,
+      "assessment_wall_time_ms": null,
+      "included_routing_overhead_ms": 3.174333367496729,
+      "included_invocation_guard_ms": 91.61166613921523,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 1966.622999999999,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": null,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "campaign_total.subscription.openai.codex.self.provider_unit": null,
+      "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "assessment_total.subscription.openai.codex.self.provider_unit": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/1",
+      "local.gpu_ms": "0/1",
+      "local.memory_mb_seconds": "0/1",
+      "local.network_bytes": "0/1",
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.output_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/1",
+      "subscription.openai.codex.self.provider_unit": "0/1"
+    },
+    "paired_measurement_cases": {
+      "wall_time_ms": 0,
+      "local.cpu_ms": 0,
+      "local.gpu_ms": 0,
+      "local.memory_mb_seconds": 0,
+      "local.network_bytes": 0,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+      "subscription.openai.codex.self.provider_unit": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "savings_interval": {},
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "estimated_production_savings": {},
+    "campaign_digest": "db9f5c69f19c837e3bd8f07368c629a7ccc4f6331b9429aaccd3ad0d9b7f75a1",
+    "operation_ledger_digest": "056d2e02c41c697bcfceffa3fa735659c8f56877c74dd3cb87bca9a2f21ffebe",
+    "grader_validation_digest": "f7e8c062744c6f685a0cba5436ec7e53db7879389a8f9b9285f53b9e0f051f20",
+    "host_runtime_digests": {
+      "toolkit-capture-explicit-profile-20261021.treatment": "3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097"
+    },
+    "deterministic_reference_comparison": {},
+    "explanations": [
+      "Correctness counts distinct held-out cases; repetitions measure variability.",
+      "Latency includes routing and grading. The interval resamples template families and cases.",
+      "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+      "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown."
+    ],
+    "created_at": "2026-10-21T20:16:10.078059Z"
+  },
+  "trials": [
+    {
+      "trial_id": "trial_capture-suite_c1e2adc68607434db9e2a5cae2a84340_capture-explicit_request_toolkit-capture-explicit-profile-20261021.treatment_fresh-worker_0",
+      "run_id": "run_f76b394caa638b386ce140c27753557b17ffe4b17a13997baf6391e8d9733247",
+      "suite_id": "capture-suite_c1e2adc68607434db9e2a5cae2a84340",
+      "case_id": "capture-explicit_request",
+      "route_id": "toolkit-capture-explicit-profile-20261021.treatment",
+      "route_fingerprint": "bc70e9824a626f47cded0f5a7706a31200fd93692b56d6ab5f6831c37f85cea3",
+      "condition": "fresh-worker",
+      "repetition": 0,
+      "phase": "measurement",
+      "state": "complete",
+      "started_at": "2026-10-21T20:15:57.772062Z",
+      "ended_at": "2026-10-21T20:16:09.973075Z",
+      "ok": true,
+      "valid": true,
+      "status": "success",
+      "wall_time_ms": 10539.608500432223,
+      "grading_wall_time_ms": 1429.3996249325573,
+      "routing_overhead_ms": 3.174333367496729,
+      "invocation_guard_ms": 91.61166613921523,
+      "actual_resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 10539.608500432223,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 9932,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 55,
+        "reasoning_output_tokens": 20,
+        "subscription_units": 0.0
+      },
+      "accounting": {
+        "cash": {
+          "status": "unavailable",
+          "components": []
+        },
+        "subscription_usage": [
+          {
+            "provider": "openai",
+            "resource_pool": "codex.self",
+            "unit": "provider_unit",
+            "consumed": null,
+            "source": {
+              "status": "unavailable",
+              "source": "unavailable",
+              "trust": "untrusted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            },
+            "included_or_paid": "unknown",
+            "rate_snapshot_id": null,
+            "usage_fingerprint": null
+          }
+        ],
+        "model_usage": [
+          {
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "access_channel": "subscription",
+            "input_tokens": 9932,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 55,
+            "reasoning_output_tokens": 20,
+            "evidence": {
+              "status": "complete",
+              "source": "provider_report",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": "2026-10-21T20:16:08.322574Z"
+            }
+          }
+        ],
+        "tool_footprint": null
+      },
+      "model_usage_complete": true,
+      "counterfactual_costs": [],
+      "receipt_ids": [
+        "rcpt_d46c3e87fd974baca304370cd8d1e50f"
+      ],
+      "host_runtime_digests": {
+        "toolkit-capture-explicit-profile-20261021.treatment": "3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097"
+      },
+      "host_models": {
+        "toolkit-capture-explicit-profile-20261021.treatment": "gpt-6-astra"
+      },
+      "case_validation": [
+        {
+          "kind": "callback",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "",
+          "trust": "verified"
+        },
+        {
+          "kind": "exact_match",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "",
+          "trust": "observed"
+        }
+      ],
+      "correctness_failed": false,
+      "execution_failure_codes": [],
+      "capability_discovery": {
+        "exposed": null,
+        "retrieved": null,
+        "invoked": null
+      },
+      "operation_count": 1,
+      "retry_fallback_count": 0,
+      "intervention_count": 0,
+      "cache_hit_verified": null,
+      "policy_score": 0.56234596298906,
+      "error_type": null,
+      "error_message": null
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "rcpt_d46c3e87fd974baca304370cd8d1e50f",
+      "decision_id": "dec_e515918c60df40f389aec0fd46adadee",
+      "action_id": "act_cd431e6eb79742b58c15080f54fbd6ab",
+      "capability": "assessment.edit@1",
+      "executor_id": "toolkit-capture-explicit-profile-20261021.treatment",
+      "executor_kind": "host_managed",
+      "status": "success",
+      "attempt": 1,
+      "started_at": "2026-10-21T20:16:02.276789Z",
+      "ended_at": "2026-10-21T20:16:08.539129Z",
+      "estimated": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": "0.0",
+          "upper_bound_usd": "0.0",
+          "evidence": {
+            "status": "complete",
+            "source": "static_estimate",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "executor_fingerprint": "sha256:bc70e9824a626f47cded0f5a7706a31200fd93692b56d6ab5f6831c37f85cea3",
+      "cohort_digest": "sha256:033ab7561e99557c9e96ed08e42c44cc1984094cf9980c52c42d51a343804fb3",
+      "action_features": {
+        "input_bytes": 453,
+        "input_items": 11,
+        "text_characters": 302,
+        "max_depth": 2,
+        "size_bucket": "2^8"
+      },
+      "actual_resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 5257.484707981348,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 9932,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 55,
+        "reasoning_output_tokens": 20,
+        "subscription_units": 0.0
+      },
+      "accounting": {
+        "cash": {
+          "status": "unavailable",
+          "components": []
+        },
+        "subscription_usage": [
+          {
+            "provider": "openai",
+            "resource_pool": "codex.self",
+            "unit": "provider_unit",
+            "consumed": null,
+            "source": {
+              "status": "unavailable",
+              "source": "unavailable",
+              "trust": "untrusted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            },
+            "included_or_paid": "unknown",
+            "rate_snapshot_id": null,
+            "usage_fingerprint": null
+          }
+        ],
+        "model_usage": [
+          {
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "access_channel": "subscription",
+            "input_tokens": 9932,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 55,
+            "reasoning_output_tokens": 20,
+            "evidence": {
+              "status": "complete",
+              "source": "provider_report",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": "2026-10-21T20:16:08.322574Z"
+            }
+          }
+        ],
+        "tool_footprint": null
+      },
+      "cache_affinity": null,
+      "approval_id": null,
+      "transport_success": true,
+      "execution_success": true,
+      "schema_valid": true,
+      "task_valid": true,
+      "quality_score": 1.0,
+      "validation_results": [
+        {
+          "kind": "schema",
+          "valid": true,
+          "quality_score": 1.0,
+          "detail": "schema validation passed",
+          "trust": "observed"
+        }
+      ],
+      "output_valid": true,
+      "error_type": null,
+      "error_message": null,
+      "trace_id": null,
+      "metadata": {
+        "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":5.047718333080411,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":5.04757250007242,\"final_message_received\":true,\"turn_completion_received\":true}",
+        "actual_model": "gpt-6-astra",
+        "host_runtime_digest": "3d13ce70b6385daea011d4432654f3e40c0e54d6f427c4627170e6c5b3833097",
+        "boundary_digest": "170ce250d94dca7e4006adf2eafbdf52726b9b51fff44d69b69e5d98a4444500",
+        "model_turn_count": 1,
+        "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+        "tool_selection_rounds": null,
+        "implementation_schema_bytes": null,
+        "output_schema_bytes": 0,
+        "result_bytes": 100,
+        "tool_call_count": 0,
+        "host_tools_used": "[]",
+        "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+        "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+        "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+        "host_available_tools": "unknown",
+        "approval_evidence_digest": null,
+        "thread_identity_digest": "sha256:a1f393d51c4f190edeccb993c9a40d60144e778b67181303e30c0db9e4ccd02c",
+        "turn_identity_digest": "sha256:0ed66dbc97a3da9f81585b0cf3299167cb40fcda4ef8d8f5cd758d1e56953b5c",
+        "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+        "catalog_metrics_scope": "aeep-metrics-ae3b60c973f6a056b6d16f5a8ea24bc3",
+        "execution_evidence_digest": "51d6a0391560813ab7898dfdd9c350788f95f6975b4599aed8c3437e90db166c",
+        "task_instruction_sha256": "f0917f3a7ac51ab17e32a7f7d984c031b480cc0d6993cb5eb5660d68a8deec1f",
+        "adapter_id": "codex-app-server:text-phase-final-treatment",
+        "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "response_bytes": 106,
+        "invocation_guard_ms": 91.61166613921523,
+        "exit_code": null,
+        "attempt_id": "attempt_01f6b625f3c84c4996b34e1a20628eb9",
+        "capability_discovery": {
+          "exposed": null,
+          "retrieved": null,
+          "invoked": null
+        },
+        "catalog_metrics": {
+          "schema_version": "codex.catalog-metrics.v1",
+          "scope": "aeep-metrics-ae3b60c973f6a056b6d16f5a8ea24bc3",
+          "batches": 9,
+          "rejected_batches": 0,
+          "overflow": false,
+          "collector_closed": true,
+          "delivery_complete": false,
+          "observations": [
+            {
+              "name": "codex.thread.skills.enabled_total",
+              "value": 0.0,
+              "count": 1,
+              "catalog_surface": "thread_context"
+            },
+            {
+              "name": "codex.thread.skills.enabled_total",
+              "value": 6.0,
+              "count": 1,
+              "catalog_surface": "host_world_state"
+            },
+            {
+              "name": "codex.thread.skills.kept_total",
+              "value": 6.0,
+              "count": 1,
+              "catalog_surface": "host_world_state"
+            },
+            {
+              "name": "codex.thread.skills.kept_total",
+              "value": 0.0,
+              "count": 1,
+              "catalog_surface": "thread_context"
+            },
+            {
+              "name": "codex.thread.skills.truncated",
+              "value": 0.0,
+              "count": 1,
+              "catalog_surface": "thread_context"
+            },
+            {
+              "name": "codex.thread.skills.truncated",
+              "value": 0.0,
+              "count": 1,
+              "catalog_surface": "host_world_state"
+            },
+            {
+              "name": "codex.skill.injected",
+              "value": 1,
+              "count": 1,
+              "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+              "status": "ok",
+              "invoke_type": "explicit"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "capture": {
+    "status": "verified",
+    "receipt_ref": "81577da3b77db7f357b8ddca1a6aea5738aa48b40ee963fd1ba6514d32ad852b",
+    "journal_ref": "51d6a0391560813ab7898dfdd9c350788f95f6975b4599aed8c3437e90db166c",
+    "known_fields": [
+      "input_tokens",
+      "cached_input_tokens",
+      "cache_write_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens"
+    ],
+    "provider_usage_independently_verified": false,
+    "source": "provider_report",
+    "trust": "self_asserted"
+  },
+  "candidate_loading": {
+    "instructions_loaded": true,
+    "invoked": null,
+    "delivery_complete": false,
+    "snapshot_ref": "5aa338cfb7d1217f7405907873efa648d8e3b57ca4c444fd396268a35119a162",
+    "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "invoke_types": [
+      "explicit"
+    ]
+  },
+  "presented_file_hashes_unchanged": true,
+  "proxy": {
+    "id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "running": false,
+    "memory": 536870912,
+    "memory_swap": 536870912
+  },
+  "images": {
+    "control": {
+      "tag": "aeep-toolkit-v2/capture-policy-local-tag-20261021:control",
+      "id": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+      "referencing_containers": []
+    },
+    "treatment": {
+      "tag": "aeep-toolkit-v2/capture-policy-local-tag-20261021:treatment",
+      "id": "sha256:388c8328ddebc8455e9cf484491fee89926fa212d2f1219f2fc88a48527b18ea",
+      "referencing_containers": []
+    }
+  },
+  "host_free_bytes": 151944278016,
+  "passed": true,
+  "wall_seconds": 0.250452124979347,
+  "grant_after": [
+    12784,
+    3744,
+    118132.75897138286,
+    "0.0"
+  ]
+}
