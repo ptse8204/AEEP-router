@@ -1,0 +1,195 @@
+{
+  "schema_version": "aeep.toolkit.selection-evaluation.v1",
+  "evidence_kind": "synthetic",
+  "plan_ref": "8888888888888888888888888888888888888888888888888888888888888888",
+  "inventory": {
+    "editing": "1111111111111111111111111111111111111111111111111111111111111111",
+    "logs": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "shared_environment_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+  "authority_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+  "model_settings_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+  "policies": {
+    "static": {
+      "definition_ref": "2755c7180d167758976212c52fb493b76b1ee320848ad478cad7d66f8af3eee5",
+      "inventory_sha256": "30c779866711bfd96844c4a0c4e3e902dd7d1f1471473a32f7765f074f51c8f1",
+      "shared_environment_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "authority_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "model_settings_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "always-abstain": {
+      "definition_ref": "d71a2c0042b16092f8268cf06bb0cd4a587b9e0bb0d98e893415aeb98e66f604",
+      "inventory_sha256": "30c779866711bfd96844c4a0c4e3e902dd7d1f1471473a32f7765f074f51c8f1",
+      "shared_environment_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "authority_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "model_settings_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "fixture-ideal": {
+      "definition_ref": "ac2ed4abed155d7b893a9f506569e4fec515c263532a76fe370e8717c44d6427",
+      "inventory_sha256": "30c779866711bfd96844c4a0c4e3e902dd7d1f1471473a32f7765f074f51c8f1",
+      "shared_environment_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "authority_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "model_settings_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "repair",
+      "task_sha256": "bb787e88f04e60327a375ea2790275c9ad890309ab6d5cd3a942353cd46cc5a3",
+      "family": "repair",
+      "eligible": [
+        "editing"
+      ],
+      "demonstrated_useful": [
+        "editing"
+      ],
+      "eligibility_ref": "6666666666666666666666666666666666666666666666666666666666666666",
+      "prior_value_ref": "7777777777777777777777777777777777777777777777777777777777777777",
+      "value_known": true
+    },
+    {
+      "case_id": "tiny",
+      "task_sha256": "6da3f836a8ddcd926d9482b885f518c4b3e480cff659373a733c0578a2736b91",
+      "family": "tiny",
+      "eligible": [
+        "editing"
+      ],
+      "demonstrated_useful": [],
+      "eligibility_ref": "6666666666666666666666666666666666666666666666666666666666666666",
+      "prior_value_ref": "7777777777777777777777777777777777777777777777777777777777777777",
+      "value_known": true
+    },
+    {
+      "case_id": "drifted",
+      "task_sha256": "7a512cffdce54e1110c53458c8f5cc7b5faf9aa3d85279234e9c3428469ab73a",
+      "family": "drifted",
+      "eligible": [],
+      "demonstrated_useful": [],
+      "eligibility_ref": "6666666666666666666666666666666666666666666666666666666666666666",
+      "prior_value_ref": "7777777777777777777777777777777777777777777777777777777777777777",
+      "value_known": true
+    },
+    {
+      "case_id": "unknown",
+      "task_sha256": "06871db87224e4fb8a3bd3d1ee4b186736b6e3a332f3f3ad02c16c8cfb1583dc",
+      "family": "unknown",
+      "eligible": [
+        "logs"
+      ],
+      "demonstrated_useful": [],
+      "eligibility_ref": "6666666666666666666666666666666666666666666666666666666666666666",
+      "prior_value_ref": null,
+      "value_known": false
+    }
+  ],
+  "decisions": [
+    {
+      "policy": "static",
+      "case_id": "repair",
+      "selected": "editing",
+      "decision_ref": "39fc134f7ed74d12f48885f93bb2e9898d2cddfb472ec2c2596e3d6985c4f393",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "tiny",
+      "selected": "editing",
+      "decision_ref": "0d9bc46fcaa770f7c1783bd19e05c3c3649a657f5f73fde0c5e259d909337621",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "drifted",
+      "selected": "editing",
+      "decision_ref": "86bd700a3f26dbfe5b35990581fe585ee44d414be3885a9f048f5d4f230f35e9",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "unknown",
+      "selected": "editing",
+      "decision_ref": "6a85b2035f80e097197cf924ac03d0d9e8f75611af86aab02f7770f2ad36c8b4",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "repair",
+      "selected": "editing",
+      "decision_ref": "c8818d19d6c13cc984b40e9b89ce295a508448ec64f8fdaff4ae0768882da198",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "tiny",
+      "selected": null,
+      "decision_ref": "0e7c5be02216bc56f6ed33f157f9708ae08a0e56a4d12fa1cd6d0461468aede4",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "drifted",
+      "selected": null,
+      "decision_ref": "c835ee64e7e27ddab57e08ec92bc7169b4a4086eff9b76759476debf3313a330",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "unknown",
+      "selected": null,
+      "decision_ref": "020253bc516fdb20ef59d6a98df6ffa15fbd947a57819704ffab160c9f8f9439",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "repair",
+      "selected": null,
+      "decision_ref": "27f78528f9ed25d47500cc7ca2cdafb5f0845a66061ea134987aa83aa46e86fb",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "tiny",
+      "selected": null,
+      "decision_ref": "1247a658911e3c613843d4487bf4af16966a03a7a972d63538a8013f3cbcaf85",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "drifted",
+      "selected": null,
+      "decision_ref": "b2ac6cfb738ef936b24588d2b98a311ca2bde5e590c7e510bb02a5331438ac68",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "unknown",
+      "selected": null,
+      "decision_ref": "3529141e2d73562fef5d374d490f26a1f1fd74d5a999ec283a86af8328e8160e",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    }
+  ]
+}

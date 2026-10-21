@@ -1,12 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21: capture repair complete; acceptance feedback recorded.**
+**Status as of 2026-10-21: repository-task grading and selection scoring implemented; source verification passed, exact offline execution review being prepared.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
 All five reservations remain charged, including one preflight skip. No new model,
 installation, rebuild, credential or architecture decision is needed for this repair.
-Both worker profiles pass containment; current source/wheel/docs checks passed.
+Both capture-repair worker profiles pass containment for source 7707756; its source/wheel/docs checks passed. New repository-grader applicability requires fresh evidence.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
@@ -45,19 +45,20 @@ checkpoint_status:
 last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
 last_check_command: 'c13/value-priority-20261021/historical-decision-audit.json; selection-contract-result-v2.json; operator-steering.json. Resource proposal85a0c57 is historical/unaccepted.'
 last_check_result: 'Existing live comparison remains INCONCLUSIVE and admission was disabled by design, so it cannot establish live selection quality. Two synthetic admission/applicability/revocation and utility/dominance tests passed with zero models. Infrastructure targets are hypotheses, not hard product requirements.'
-next_action: 'Read reports/toolkit-v2/c13/value-priority-20261021/PRIORITIES.md. Prepare representative real-task/grader mapping and separate capability-value and equivalent-catalog selection comparisons. Source independent cases and freeze policies/thresholds before any fresh holdout. Do not run the superseded resource campaign or replay terminal studies. Observe operational costs on relevant authorized workloads; retain pending human control/release gates.'
+next_action: 'Finish the stable-source verification in reports/toolkit-v2/c13/repository-value-20261021/validation-v2. Read REPOSITORY_EVALUATION.md. Prepare one exact execution bundle for contained grader checks, current-wheel installation and pinned offline docs. Source independent real-task cases before new live qualification/value or selection studies; no terminal study replay.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
-  - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Representative real-task snapshots, independent cases, patch grading/mapping and new frozen comparison definitions are not yet prepared or executed.'
+  - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'A new exact bundle is being prepared for 23 contained grader calls, 25 total canonical operations with 1240 reserved seconds, 18 private installed checks and the pinned offline docs checker. Zero models/cash/downloads; no execution yet.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
-  - 'The current wheel passed 16 installed checks. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
+  - 'The 7707756 wheel passed 16 installed checks; it does not validate the new repository-grader wheel. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
   - 'Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions stay explicit.'
 ```
 
@@ -2191,7 +2192,7 @@ amendment4d7b944f… uses the September25/27 delegation, keeps all human-approve
 software/effects/ceilings, and preserves both original review/runner bytes and
 actual human approval. No second human approval is claimed for that metadata edit.
 
-All12 integrated checks passed for7707756/source df8f0b9e…: ordinary1589 passed,
+All 12 integrated checks passed for7707756/source df8f0b9e…: ordinary1589 passed,
 21 skipped; coverage1589 passed,21 skipped;82% displayed coverage, both branch gates,
 compile, schemas, toolkit fixtures, Ruff, mypy and wheel/sdist. The wheel
 f31cc260477bcd30f41f2981f65aa0e0ee88aeadfdede634887ec396b79286cf
@@ -2284,7 +2285,7 @@ was weakened. The proxy ended stopped; both task images have0 referencing contai
 
 [The current capture report](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md)
 keeps3 completed real captures separate from the original564-task study. It records
-2 independently graded task passes and1 ungraded callback failure. Capture matching
+2 independently graded task passes and 1 ungraded callback failure. Capture matching
 does not independently verify provider quantities or prove semantic use. The actual
 HTML browser preview was blocked by local-file URL policy; no workaround was
 attempted. Local HTML structure/data checks can supplement, not claim, visual review.
@@ -2397,3 +2398,94 @@ Known prior incidents are development examples, not new holdouts. Observe
 infrastructure on relevant authorized work and justify SLOs from those workloads.
 The actual assisted control response, prospective live authority and public
 release remain separate requirements; this steering is not a control answer.
+
+### October 21 repository grader and separate selection evaluation implemented
+
+The operator requested actual grading and evaluation engineering. D76 adds
+`assessment.recipe-extension.v4` to the existing recipe/callback/container path.
+Only public task snapshots reach trial workers; protected coordinator answers
+are compared with separate fresh-container observations. Existing scientific
+value analysis, operations, receipts and accounting remain selected. Invalid
+patch paths, scope changes and input drift stop before code execution. Budget
+previews include up to 32 isolated behavior calls per graded output.
+
+Three source-pinned Apache-2.0 AEEP development adaptations cover a known CLI
+regression, a seeded cross-file accounting fault and a no-change callback audit.
+They are small extracted source tasks, not full-repository or independent
+holdout evidence. The development generator refuses campaign materialization.
+Assessment export checks distinct origins, template grouping, balanced families
+and separate 8/28/105 splits; development-exposed holdouts are rejected.
+
+The new selection contract checks a complete case/policy matrix and equivalent
+inventory, model, environment and authority. It records appropriate abstention,
+missed useful capability, ineligible/unnecessary selection, unknown value, task
+grading and decision overhead separately. Actual route-decision capture checks
+the frozen task digest. Supplied evidence references are not authenticated by the
+read-only importer; its result remains NOT_ASSESSED and cannot change admission.
+The saved `selection-software-*` records are explicitly synthetic scorer examples,
+including an ideal fixture policy; they are not live AEEP decisions.
+
+The corrected new focused suites pass 30 checks, including validly scoped semantic fault patches. The first stable source passed 1618 tests before that correction; its partial coverage was interrupted and remains historical. The corrected source has passed 1619 tests, 21 skipped and 1 existing warning; final integrated coverage/build checks are still running. Earlier corrections and an unsuccessful
+mixed lifecycle run are retained in the implementation review. Full required
+source validation is running against stable digest 4186325d5b654124122c15ce90ceaa157837e67c5e35450d3535b3f418a4ecf2 in
+`reports/toolkit-v2/c13/repository-value-20261021/validation-v2`. Do not edit runtime
+source during that sequence. Markdown lint passes on 69 active documents; full
+docs-check currently stops because the removed pinned Lychee executable is not
+available. No runtime installation, container, service, model or source cleanup
+was executed by this increment. Docker inventory was read only; the existing
+offline runtime image is sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7.
+
+Next: finish verification, commit coherent source, then prepare one exact review
+for the new no-model grader containment/checks, changed wheel and cached pinned
+docs checker. Earlier approvals are terminal. Independent task sourcing and
+future live study definitions remain separate work; retain the human control
+exercise and release gates. No resource-only campaign is scheduled.
+
+### D76 integrated verification complete; exact execution remains pending
+
+Corrected source digest: `4186325d5b654124122c15ce90ceaa157837e67c5e35450d3535b3f418a4ecf2`.
+All 12 integrated checks pass in
+`reports/toolkit-v2/c13/repository-value-20261021/validation-v2`: compile, schemas,
+toolkit fixtures, ordinary pytest 1619 passed/21 skipped/1 existing warning,
+coverage pytest with the same counts, displayed 82% coverage, both critical branch
+gates, Ruff, mypy and wheel/sdist builds. Full-source mypy additionally passes 167
+files. Existing Node dependencies were reused through one temporary link; all 13
+Node tests pass and that link is removed. No dependency installation occurred.
+
+Eight of nine supplemental CI checks pass. The policy checker reports an existing
+unchanged layering violation at `src/aeep/router.py:747`: core imports
+`.hosts.codex_metrics.validate_snapshot`. Router and checker bytes match the
+pre-existing HEAD; the import was introduced in 44bdad9. This new grader does not
+introduce or exercise that branch. Preserve the finding and move normalization
+behind the adapter boundary before release; do not suppress the check or remove
+validation. This is not an all-project-green claim.
+
+The first source 19cb8f55 passed 1618 tests before adding semantic faults; its
+coverage run was deliberately interrupted. Both that attempt and the corrected
+verification remain. The final grader requires validly scoped wrong-behavior
+patches, and canonical independent validation must reject them. Fresh dataset IDs
+preserve immutable definitions. Complete public input is bounded consistently
+with the existing structural extractor.
+
+Read-only source research identifies SWE-bench at 02e7a74ffd0b707aab73d203fe87bdc7c76afc8e
+and Verified metadata at c104f840cc67f8b6eec6f759ebc8b2693d585d4a.
+No source harness was installed, no upstream test suite was adapted or executed,
+and no task cohort was chosen. Data/project rights, footprint and full-repository
+adapter compatibility remain open. BugsInPy metadata reports no license and its
+upstream issue 94 records an unresolved question; no adoption/redistribution is
+claimed. Two viewed Astropy examples are recorded as exposed, not fresh holdouts.
+
+Next: commit coherent source and prepare the exact one-shot bundle. Its grader
+component has 23 contained calls (three boundary/freshness checks plus fixed
+reference, unchanged-snapshot and semantic-fault observations), 25 canonical
+operations, at most 1240 reserved seconds and zero models/cash. It counts parent
+validation/cleanup-inspection overhead without double counting inner operations.
+The other components use 33 exact cached wheels for 18 sandboxed installed checks
+and the exact cached Lychee 0.24.2 for offline documentation. No image pull/build,
+proxy, credentials, remote disclosure, publication or retained-resource removal.
+The private binary and actual contained grader have not run.
+
+C13 remains BLOCKED on applicable execution authority, independent real-task
+qualification/value/selection evidence, the existing layering gate, human control
+discovery and separate adoption/release requirements. No arbitrary resource SLO
+or standalone resource campaign is adopted.

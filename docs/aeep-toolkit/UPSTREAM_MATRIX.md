@@ -426,3 +426,19 @@ path; infrastructure checks do not qualify either. New real-task snapshots,
 grader mapping and independent cases still need review. The prior 30-command/
 12-turn resource proposal is historical, not scheduled; arbitrary numeric SLOs
 are not adopted product requirements. See [the corrected priorities](../../reports/toolkit-v2/c13/value-priority-20261021/PRIORITIES.md).
+
+### October 21 repository grading and selection implementation
+
+No upstream package pin changed. The managed path reuses the recorded
+agent-skill-eval Codex fallback: `AssessmentService`, `BenchmarkRunner`, recipe
+extensions, controlled containers and canonical receipts. Extension v4 adds
+protected repository behavioral grading; it does not replace the runner.
+Selection reporting uses the existing route-decision contract and scientific
+analysis remains in the existing assessment reports. Waza, LangGraph, routing
+and other optional integrations retain their recorded scope.
+
+Three Apache-2.0 source-pinned AEEP adaptations are development examples only.
+The new code does not qualify their worker boundary or establish any capability's
+benefit. Source tests are running; one exact no-model review will cover contained
+grader checks, the changed wheel and the existing pinned offline documentation
+checker. Independent real-task holdouts and live comparison remain open.

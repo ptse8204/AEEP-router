@@ -129,8 +129,24 @@ def main(argv: list[str] | None = None) -> int:
     evaluation = sub.add_parser('eval', help='Run an explicitly selected existing evaluation backend')
     evaluation.add_argument('backend', choices=('scripted', 'managed'))
     evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
+    repository_recipe = sub.add_parser('repository-recipe', help='Export a reviewed repository recipe definition; never executes code')
+    repository_recipe.add_argument('--cases', type=Path, required=True)
+    repository_recipe.add_argument('--assessment', action='store_true', help='Require distinct curated 8/28/105 campaign cases')
+    selection_report = sub.add_parser('selection-report', help='Score supplied policy decisions; never grants admission')
+    selection_report.add_argument('--evaluation', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'repository-recipe':
+            from aeep.assessment.repository_tasks import RepositoryCase
+            from aeep.assessment.repository_tasks import repository_recipe as export_recipe
+            cases = [RepositoryCase.model_validate(case) for case in read_json(args.cases)]
+            print(export_recipe(cases, assessment=args.assessment).model_dump_json(indent=2))
+            return 0
+        if args.command == 'selection-report':
+            from .selection import SelectionEvaluation, summarize_selection
+            print(json.dumps(summarize_selection(SelectionEvaluation.model_validate(read_json(args.evaluation))),
+                             indent=2, allow_nan=False))
+            return 0
         if args.command == 'trace-preview':
             from aeep.telemetry import receipt_otlp_preview
             print(json.dumps(receipt_otlp_preview(read_json(args.receipt)), indent=2, allow_nan=False))

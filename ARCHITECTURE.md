@@ -588,6 +588,14 @@ low-confidence prior and cannot qualify a route.
 
 ## Assessment boundary (0.8)
 
+The optional repository recipe reuses controlled execution for each behavioral
+probe and keeps correctness comparison in the coordinator. Candidate code runs
+only inside fresh offline containers; probes receive no expected answers or
+future cases. Reviewed semantic faults challenge the grader before candidate
+trials. Selection scoring consumes separate frozen decisions and prior-value
+labels; it cannot grant admission. This adds task-specific grading and analysis,
+not another execution or benchmarking service.
+
 `aeep.assessment` owns immutable definitions, operator reviews, authorizations,
 job state and comparative reports. Its service calls `BenchmarkRunner`, which
 executes through isolated `Router` instances. `ReceiptStore.campaign_snapshot`

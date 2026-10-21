@@ -63,9 +63,11 @@ def campaign_allowances(service: AssessmentService, plan: AssessmentPlan, *,
         upper_calls = (len(reference_inputs) + challenged * (10 + len(extension.fault_outputs))
                        + sum(fixture.grader_output is not None for fixture in literals)
                        if extension.truth_schema is not None else 1)
+        probes_per_output = 32 if extension.schema_version.endswith('.v4') else 1
+        upper_calls *= probes_per_output
         add('grader_probe', 1, upper_calls * (float(extension.grader.config['timeout_seconds']) + 5),
             upper_calls=upper_calls)
-        grading_calls = (assigned + warmups) * route_count
+        grading_calls = (assigned + warmups) * route_count * probes_per_output
         add('recipe_grading', 0, grading_calls * (float(extension.grader.config['timeout_seconds']) + 5),
             upper_calls=grading_calls)
     with service.router.store._lock:

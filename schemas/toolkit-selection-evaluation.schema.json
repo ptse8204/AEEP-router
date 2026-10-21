@@ -1,0 +1,277 @@
+{
+  "$defs": {
+    "SelectionCase": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "task_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Task Sha256",
+          "type": "string"
+        },
+        "family": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Family",
+          "type": "string"
+        },
+        "eligible": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "title": "Eligible",
+          "type": "array"
+        },
+        "demonstrated_useful": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "title": "Demonstrated Useful",
+          "type": "array"
+        },
+        "eligibility_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Eligibility Ref",
+          "type": "string"
+        },
+        "prior_value_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prior Value Ref"
+        },
+        "value_known": {
+          "title": "Value Known",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "case_id",
+        "task_sha256",
+        "family",
+        "eligible",
+        "demonstrated_useful",
+        "eligibility_ref",
+        "value_known"
+      ],
+      "title": "SelectionCase",
+      "type": "object"
+    },
+    "SelectionDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Policy",
+          "type": "string"
+        },
+        "case_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "selected": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Selected"
+        },
+        "decision_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Decision Ref",
+          "type": "string"
+        },
+        "decision_wall_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decision Wall Seconds"
+        },
+        "task_verified": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Verified"
+        },
+        "verification_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verification Ref"
+        }
+      },
+      "required": [
+        "policy",
+        "case_id",
+        "selected",
+        "decision_ref"
+      ],
+      "title": "SelectionDecision",
+      "type": "object"
+    },
+    "SelectionPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "definition_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Definition Ref",
+          "type": "string"
+        },
+        "inventory_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Inventory Sha256",
+          "type": "string"
+        },
+        "shared_environment_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Shared Environment Sha256",
+          "type": "string"
+        },
+        "authority_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Authority Sha256",
+          "type": "string"
+        },
+        "model_settings_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Model Settings Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "definition_ref",
+        "inventory_sha256",
+        "shared_environment_sha256",
+        "authority_sha256",
+        "model_settings_sha256"
+      ],
+      "title": "SelectionPolicy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.selection-evaluation.v1",
+      "default": "aeep.toolkit.selection-evaluation.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "evidence_kind": {
+      "enum": [
+        "synthetic",
+        "replay",
+        "live"
+      ],
+      "title": "Evidence Kind",
+      "type": "string"
+    },
+    "plan_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Ref",
+      "type": "string"
+    },
+    "inventory": {
+      "patternProperties": {
+        "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "title": "Inventory",
+      "type": "object"
+    },
+    "shared_environment_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Shared Environment Sha256",
+      "type": "string"
+    },
+    "authority_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Authority Sha256",
+      "type": "string"
+    },
+    "model_settings_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Model Settings Sha256",
+      "type": "string"
+    },
+    "policies": {
+      "patternProperties": {
+        "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+          "$ref": "#/$defs/SelectionPolicy"
+        }
+      },
+      "title": "Policies",
+      "type": "object"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/SelectionCase"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/SelectionDecision"
+      },
+      "maxItems": 50000,
+      "title": "Decisions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "evidence_kind",
+    "plan_ref",
+    "inventory",
+    "shared_environment_sha256",
+    "authority_sha256",
+    "model_settings_sha256",
+    "policies",
+    "cases",
+    "decisions"
+  ],
+  "title": "SelectionEvaluation",
+  "type": "object"
+}

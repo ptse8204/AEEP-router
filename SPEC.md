@@ -998,6 +998,16 @@ evidence MUST NOT qualify or activate an implementation.
 
 ## Assessment contracts (0.8, versioned independently)
 
+Repository behavioral grading uses `assessment.recipe-extension.v4` with the
+existing version-2 recipe and protected callback path. Each probe returns an
+untrusted JSON observation from a fresh offline container; the coordinator keeps
+expected answers and decides correctness. `assessment.repository-case.v1` binds
+public text snapshots, editable paths, protected checks, reference and semantic
+fault patches, provenance and dataset split. Malformed patch metadata is rejected
+before execution. Recipe validation must also reject reviewed wrong behavior.
+Versions 1–3 retain their existing result and serialization contracts. See
+[repository evaluation](docs/aeep-toolkit/REPOSITORY_EVALUATION.md).
+
 Assessment definitions, plans, authorizations, reports and scoped admissions use
 `assessment.*.v1` schema identifiers. Ordinary routing MUST NOT start assessments
 or contact a planning model. Model arguments MUST NOT create, expand or revoke

@@ -243,6 +243,8 @@ def callbacks(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDe
         expected = case.validators[-1].config["expected"]
 
         async def grade(context: ValidationContext, truth: dict[str, Any] = expected) -> ValidationResult:
+            if recipe.extension and recipe.extension.schema_version.endswith('.v4'):
+                return await repository_grade(service, plan, recipe, context.input, truth, context.output)
             reply, _elapsed = await invoke(service, plan, grader,
                 {"examples": [{"input": context.input, "output": context.output, "expected": truth}]}, stage="recipe_grading")
             assert recipe.extension is not None
@@ -250,6 +252,22 @@ def callbacks(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDe
 
         result[grader_name(case.action.input, expected)] = grade
     return result
+
+
+async def repository_grade(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDefinition,
+                           value: dict[str, Any], truth: dict[str, Any], output: Any,
+                           elapsed_times: list[float] | None = None) -> ValidationResult:
+    from .repository_tasks import grade_repository_output
+
+    assert recipe.extension is not None
+    observer = recipe.extension.grader
+
+    async def probe(payload: dict[str, Any]) -> Any:
+        reply, _ = await invoke(service, plan, observer, payload,
+            stage='repository_behavior_probe', elapsed_times=elapsed_times)
+        return reply
+
+    return await grade_repository_output(value, truth, output, probe)
 
 
 async def validate_grader(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDefinition,
@@ -296,6 +314,14 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
             for output in outputs)
         decisions.extend([True, *[False for _ in outputs[1:]]])
     observed: list[bool | None] = []
+    if extension.schema_version.endswith('.v4'):
+        for example in examples:
+            result = await repository_grade(service, plan, recipe, example['input'],
+                example['expected'], example['output'], program_seconds)
+            observed.append(result.valid)
+        if observed != decisions:
+            raise ConfigurationError('repository grader failed independent correctness/fault validation')
+        return literals, sum(not item for item in decisions)
     for batch in bounded_batches(examples) if extension.truth_schema is not None else [examples]:
         reply, _elapsed = await invoke(service, plan, extension.grader, {"examples": batch}, stage="grader_probe", elapsed_times=program_seconds)
         observed.extend(result.valid for result in grader_results(reply, extension, len(batch)))

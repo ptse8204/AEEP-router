@@ -1,0 +1,334 @@
+[
+  {
+    "schema_version": "assessment.repository-case.v1",
+    "input": {
+      "task_id": "aeep-cli-override-placement",
+      "task": "Repair global configuration option placement: append telemetry -c overrides after existing global options, before app-server when present. Preserve all argv elements and override order. Support commands with no app-server.",
+      "family": "regression-repair",
+      "files": {
+        "launch.py": "def command(argv, options):\n    return [*argv, *(part for option in options for part in ('-c', option))]\n",
+        "README.txt": "Extracted CLI argv construction; no process launching or network.\n"
+      },
+      "editable_paths": [
+        "launch.py"
+      ]
+    },
+    "truth": {
+      "input_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+      "checks": [
+        {
+          "name": "policy_and_telemetry",
+          "probe": {
+            "module": "launch.py",
+            "call": "command",
+            "args": [
+              [
+                "codex",
+                "-c",
+                "policy=locked",
+                "app-server",
+                "--listen",
+                "stdio://"
+              ],
+              [
+                "metrics=local"
+              ]
+            ]
+          },
+          "expected": [
+            "codex",
+            "-c",
+            "policy=locked",
+            "-c",
+            "metrics=local",
+            "app-server",
+            "--listen",
+            "stdio://"
+          ]
+        },
+        {
+          "name": "no_subcommand",
+          "probe": {
+            "module": "launch.py",
+            "call": "command",
+            "args": [
+              [
+                "codex"
+              ],
+              [
+                "a=1",
+                "b=2"
+              ]
+            ]
+          },
+          "expected": [
+            "codex",
+            "-c",
+            "a=1",
+            "-c",
+            "b=2"
+          ]
+        },
+        {
+          "name": "no_overrides",
+          "probe": {
+            "module": "launch.py",
+            "call": "command",
+            "args": [
+              [
+                "codex",
+                "app-server"
+              ],
+              []
+            ]
+          },
+          "expected": [
+            "codex",
+            "app-server"
+          ]
+        }
+      ]
+    },
+    "reference_patch": {
+      "base_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+      "files": {
+        "launch.py": "def command(argv, options):\n    boundary = argv.index('app-server') if 'app-server' in argv else len(argv)\n    return [*argv[:boundary], *(part for option in options for part in ('-c', option)), *argv[boundary:]]\n"
+      }
+    },
+    "fault_patches": [
+      {
+        "base_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+        "files": {
+          "launch.py": "def command(*args, **kwargs):\n    return None\n"
+        }
+      }
+    ],
+    "source_repository": "https://github.com/ptse8204/AEEP-router",
+    "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+    "source_path": "src/aeep/hosts/codex_metrics.py",
+    "source_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+    "license": "Apache-2.0",
+    "provenance": "Known October 21 incident. Narrow function extraction/adaptation of the command expression before 7707756 and its repair; public development example, never independent holdout. Full pre-repair source pin: 44bdad98c1a6b2d845c4e084afe07bbf96a0073e; source SHA-256 d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+    "split": "development",
+    "independent_case_id": "aeep-cli-override-placement",
+    "template_family": "aeep-cli-override-placement",
+    "used_for_development": true
+  },
+  {
+    "schema_version": "assessment.repository-case.v1",
+    "input": {
+      "task_id": "aeep-token-unknown-propagation",
+      "task": "Preserve the token_total contract through the public total API: unavailable counts must remain None; measured zero must remain zero. Do not double count included token categories. Preserve the core accounting implementation.",
+      "family": "contract-propagation",
+      "files": {
+        "counts.py": "from __future__ import annotations\ndef token_total(tokens: TokenObservation | None) -> int | None:\n    if tokens is None or tokens.input_tokens is None or tokens.output_tokens is None:\n        return None\n    total = tokens.input_tokens + tokens.output_tokens\n    for count, semantics in ((tokens.cached_input_tokens, tokens.cached_semantics),\n                             (tokens.reasoning_output_tokens, tokens.reasoning_semantics)):\n        if semantics == \"unknown\" or (semantics == \"separate\" and count is None):\n            return None\n        if semantics == \"separate\" and count is not None:\n            total += count\n    return total\n",
+        "api.py": "from types import SimpleNamespace\nimport counts\ndef total(value):\n    return counts.token_total(None if value is None else SimpleNamespace(**value)) or 0\n"
+      },
+      "editable_paths": [
+        "api.py"
+      ]
+    },
+    "truth": {
+      "input_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+      "checks": [
+        {
+          "name": "unknown_input",
+          "probe": {
+            "module": "api.py",
+            "call": "total",
+            "args": [
+              null
+            ]
+          },
+          "expected": null
+        },
+        {
+          "name": "included_categories",
+          "probe": {
+            "module": "api.py",
+            "call": "total",
+            "args": [
+              {
+                "input_tokens": 10,
+                "output_tokens": 4,
+                "cached_input_tokens": 5,
+                "reasoning_output_tokens": 2,
+                "cached_semantics": "included_in_input",
+                "reasoning_semantics": "included_in_output"
+              }
+            ]
+          },
+          "expected": 14
+        },
+        {
+          "name": "unknown_semantics",
+          "probe": {
+            "module": "api.py",
+            "call": "total",
+            "args": [
+              {
+                "input_tokens": 10,
+                "output_tokens": 4,
+                "cached_input_tokens": 5,
+                "reasoning_output_tokens": 2,
+                "cached_semantics": "unknown",
+                "reasoning_semantics": "included_in_output"
+              }
+            ]
+          },
+          "expected": null
+        },
+        {
+          "name": "measured_zero",
+          "probe": {
+            "module": "api.py",
+            "call": "total",
+            "args": [
+              {
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "cached_input_tokens": 0,
+                "reasoning_output_tokens": 0,
+                "cached_semantics": "included_in_input",
+                "reasoning_semantics": "included_in_output"
+              }
+            ]
+          },
+          "expected": 0
+        },
+        {
+          "name": "separate_categories",
+          "probe": {
+            "module": "api.py",
+            "call": "total",
+            "args": [
+              {
+                "input_tokens": 10,
+                "output_tokens": 4,
+                "cached_input_tokens": 5,
+                "reasoning_output_tokens": 2,
+                "cached_semantics": "separate",
+                "reasoning_semantics": "separate"
+              }
+            ]
+          },
+          "expected": 21
+        }
+      ]
+    },
+    "reference_patch": {
+      "base_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+      "files": {
+        "api.py": "from types import SimpleNamespace\nimport counts\ndef total(value):\n    return counts.token_total(None if value is None else SimpleNamespace(**value))\n"
+      }
+    },
+    "fault_patches": [
+      {
+        "base_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+        "files": {
+          "api.py": "def total(*args, **kwargs):\n    return None\n"
+        }
+      }
+    ],
+    "source_repository": "https://github.com/ptse8204/AEEP-router",
+    "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+    "source_path": "src/aeep_toolkit/reporting.py",
+    "source_sha256": "59d5d72323581c315d605620f4d7125b7d7db6b7880dbfc6fd8d3bf714d44a22",
+    "license": "Apache-2.0",
+    "provenance": "Actual pinned token_total source with a newly authored faulty cross-file caller. Seeded development reproduction of the repository accounting contract, not a historical bug claim or independently sourced benchmark.",
+    "split": "development",
+    "independent_case_id": "aeep-token-unknown-propagation",
+    "template_family": "aeep-token-unknown-propagation",
+    "used_for_development": true
+  },
+  {
+    "schema_version": "assessment.repository-case.v1",
+    "input": {
+      "task_id": "aeep-callback-binding-audit",
+      "task": "Audit grader_name: it must bind both the input and expected result with the canonical content digest. Preserve working behavior; make no change if this contract is already met.",
+      "family": "adjacent-no-change",
+      "files": {
+        "callbacks.py": "from __future__ import annotations\nfrom digest import content_digest\ndef grader_name(value: dict[str, Any], expected: dict[str, Any]) -> str:\n    return \"contained_recipe_\" + content_digest({\"input\": value, \"expected\": expected})\n",
+        "digest.py": "import hashlib, json\ndef content_digest(value):\n    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(\",\", \":\"), allow_nan=False).encode()).hexdigest()\n"
+      },
+      "editable_paths": [
+        "callbacks.py"
+      ]
+    },
+    "truth": {
+      "input_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+      "checks": [
+        {
+          "name": "literal",
+          "probe": {
+            "module": "callbacks.py",
+            "call": "grader_name",
+            "args": [
+              {
+                "text": "one"
+              },
+              {
+                "answer": 1
+              }
+            ]
+          },
+          "expected": "contained_recipe_548d0c5647c47434438eba9b9b2bb71c40275ad1f2a958fe482a8823ba7da369"
+        },
+        {
+          "name": "changed_input",
+          "probe": {
+            "module": "callbacks.py",
+            "call": "grader_name",
+            "args": [
+              {
+                "text": "two"
+              },
+              {
+                "answer": 1
+              }
+            ]
+          },
+          "expected": "contained_recipe_a5b58abbd8ce5b19af5c85281c2bcbbf6fa0c781c9009cccfeb35b969b4c5f5e"
+        },
+        {
+          "name": "changed_expected",
+          "probe": {
+            "module": "callbacks.py",
+            "call": "grader_name",
+            "args": [
+              {
+                "text": "one"
+              },
+              {
+                "answer": 2
+              }
+            ]
+          },
+          "expected": "contained_recipe_6281b9cf406735235ab210ddd5d34b378be517129db39f43f8b7b86f9b7c39c7"
+        }
+      ]
+    },
+    "reference_patch": {
+      "base_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+      "files": {}
+    },
+    "fault_patches": [
+      {
+        "base_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+        "files": {
+          "callbacks.py": "def grader_name(*args, **kwargs):\n    return None\n"
+        }
+      }
+    ],
+    "source_repository": "https://github.com/ptse8204/AEEP-router",
+    "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+    "source_path": "src/aeep/assessment/extensions.py",
+    "source_sha256": "dbd50a08ef0fcd5596a55a7ad047006f9402a08ab8ef6f3d4a7c4619b5a25ef0",
+    "license": "Apache-2.0",
+    "provenance": "Actual pinned grader_name with an equivalent stdlib digest helper. Known contract audit/negative control; no repair needed. Development example, not a fresh holdout.",
+    "split": "development",
+    "independent_case_id": "aeep-callback-binding-audit",
+    "template_family": "aeep-callback-binding-audit",
+    "used_for_development": true
+  }
+]

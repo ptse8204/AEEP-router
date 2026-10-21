@@ -1,0 +1,69 @@
+{
+  "purpose": "Read-only independent repository-workload source audit; no selected holdouts, harness installation or execution.",
+  "sources": {
+    "swebench_head": {
+      "url": "https://api.github.com/repos/SWE-bench/SWE-bench/commits/main",
+      "response_sha256": "c3feb7f516dd5cd06a7253dca98f178db262a89f63f022785e5732b691b0b190",
+      "bytes": 16334,
+      "revision": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "license": null,
+      "status": "metadata_only",
+      "code_executed": false
+    },
+    "swebench_repository": {
+      "url": "https://api.github.com/repos/SWE-bench/SWE-bench",
+      "response_sha256": "18ef1605cdae3ea95966037a9c2eb34b50894aae7ab5a628c57007cbeaa667ae",
+      "bytes": 6334,
+      "revision": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "status": "metadata_only",
+      "code_executed": false
+    },
+    "swebench_verified_dataset": {
+      "url": "https://huggingface.co/api/datasets/princeton-nlp/SWE-bench_Verified",
+      "response_sha256": "34b70cb9498642c856ca69bf558ccd4a6519a5788feff566dc4185c11994cff2",
+      "bytes": 1994,
+      "revision": "c104f840cc67f8b6eec6f759ebc8b2693d585d4a",
+      "license": null,
+      "status": "metadata_only",
+      "code_executed": false
+    },
+    "bugsinpy_repository": {
+      "url": "https://api.github.com/repos/soarsmu/BugsInPy",
+      "response_sha256": "7c11bc8adcc9a1950a86f838ab10ac00964289dddf3dd76715cbbb0a41a8a8f6",
+      "bytes": 5993,
+      "revision": null,
+      "license": null,
+      "status": "metadata_only",
+      "code_executed": false
+    },
+    "bugsinpy_head": {
+      "url": "https://api.github.com/repos/soarsmu/BugsInPy/commits/master",
+      "response_sha256": "7249f4c2daea85923d25d78e3f519ede209d24cb1ae39b8a56b7a662ad54df85",
+      "bytes": 7602,
+      "revision": "11c5f1eea954a42132cfd06bf257766a7963e0fd",
+      "license": null,
+      "status": "metadata_only",
+      "code_executed": false
+    }
+  },
+  "sources_consulted": [
+    "https://www.swebench.com/SWE-bench/guides/docker_setup/",
+    "https://github.com/soarsmu/BugsInPy/issues/94"
+  ],
+  "disposition": {
+    "swebench": "Candidate for an optional full-repository test-pack adapter, not a new core runner. Official Docker guide recommends120GB free; actual subset/image footprint and project/data rights need review, respecting the host50GiB reserve. Existing bounded callable grader does not implement upstream pytest suites.",
+    "bugsinpy": "Do not adopt or redistribute its framework/task metadata until licensing is verified. GitHub issue94 records an unresolved license question; repository license metadata alone is not a legal determination."
+  },
+  "contamination": "Public benchmark tasks are not secret. Record possible training contamination and keep gold/test patches outside task workers. No evidence of model generalization or capability value is supplied here.",
+  "viewed_public_examples_not_fresh_holdouts": [
+    "astropy__astropy-12907",
+    "astropy__astropy-13033"
+  ]
+}

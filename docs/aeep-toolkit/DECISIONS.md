@@ -998,3 +998,27 @@ frozen comparisons with equivalent inventories, credible baselines, correct
 abstention and decision overhead. No new service, dependency or core module is
 justified. Negative and inconclusive outcomes remain valid; do not tune holdouts
 or thresholds to obtain a positive result.
+
+### D76 — Grade bounded repository behavior and evaluate selection separately
+
+Extend the existing executable-recipe boundary with version 4. A submitted patch
+can replace only existing reviewed text files. Each behavioral check executes in
+a fresh offline `ContainerExecutor`; expected answers remain in the coordinator.
+The protected callback compares observed JSON behavior, rather than accepting a
+child's correctness verdict. Reuse canonical attempts, reservations, receipts,
+independent grader validation and existing scientific/reporting code. Versions
+1–3 retain their meanings. No new evaluator service or dependency is needed.
+
+Use pinned repository maintenance examples to develop the grader: the known CLI
+option regression, actual token accounting with a seeded caller fault, and a
+working callback contract. They are extracted development tasks, not independent
+holdouts or evidence of model usefulness. Require curated 8/28/105 splits for an
+assessment export; reject repeated origins and development-exposed holdouts.
+
+Score policy decisions in a separate complete matrix with identical inventory,
+model, environment and authority. Distinguish useful choices, ineligible or
+unnecessary choices, missed applicable value, abstention and unknown value.
+Preserve independent task grades and decision-time coverage. The importer does
+not authenticate evidence and cannot admit a capability. Infrastructure budgets
+remain separate. Source verification is in progress; contained checks and a
+current-wheel installation need a fresh exact execution review.

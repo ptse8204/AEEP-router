@@ -361,6 +361,19 @@ Before production:
 
 ## Assessment authorization (0.8)
 
+Repository patches are untrusted executable input. The optional v4 grader checks
+canonical input binding, reviewed editable paths and bounded text snapshots
+before using the existing offline container executor. Each behavior probe has a
+fresh process/container and receives only current files and probe arguments.
+Expected answers and future checks remain in the coordinator. Candidate code is
+never imported there. A child's verdict is not trusted; malformed or uncertain
+execution blocks assessment. Independent grader validation includes correctly
+bound patches with wrong behavior, as well as malformed metadata. The common
+runtime source is visible inside grader containers, so source curation must not
+treat answers already present there as independent secret holdouts. These bounded
+checks do not establish arbitrary repository preservation or general resistance
+to benchmark gaming.
+
 Installed plugin metadata, declared side effects and model-generated recipes are
 untrusted inputs. Reviews bind exact definitions; standing authorizations bind
 subjects, recipes, environments and finite ceilings. Model-facing tools cannot

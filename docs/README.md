@@ -106,6 +106,8 @@ release promises. Adopted ADRs and historical reports keep their original bytes.
 
 ## Evaluation toolkit development
 
+- [Repository usefulness and selection evaluations](aeep-toolkit/REPOSITORY_EVALUATION.md): bounded patch grading, source-pinned development tasks and separate policy-decision scoring.
+
 Follow the [V2 checkpoint state](aeep-toolkit/STATE.md) for the evaluation-focused
 rearchitecture and its [implementation inventory](aeep-toolkit/INVENTORY.md).
 These development records do not establish live benefit or release readiness.

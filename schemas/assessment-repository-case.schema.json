@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "RepositoryCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "probe": {
+          "additionalProperties": true,
+          "title": "Probe",
+          "type": "object"
+        },
+        "expected": {
+          "title": "Expected"
+        }
+      },
+      "required": [
+        "name",
+        "probe",
+        "expected"
+      ],
+      "title": "RepositoryCheck",
+      "type": "object"
+    },
+    "RepositoryInput": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Task Id",
+          "type": "string"
+        },
+        "task": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Task",
+          "type": "string"
+        },
+        "family": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Family",
+          "type": "string"
+        },
+        "files": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Files",
+          "type": "object"
+        },
+        "editable_paths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Editable Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task_id",
+        "task",
+        "family",
+        "files",
+        "editable_paths"
+      ],
+      "title": "RepositoryInput",
+      "type": "object"
+    },
+    "RepositoryPatch": {
+      "additionalProperties": false,
+      "properties": {
+        "base_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Base Sha256",
+          "type": "string"
+        },
+        "files": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 32,
+          "title": "Files",
+          "type": "object"
+        }
+      },
+      "required": [
+        "base_sha256",
+        "files"
+      ],
+      "title": "RepositoryPatch",
+      "type": "object"
+    },
+    "RepositoryTruth": {
+      "additionalProperties": false,
+      "properties": {
+        "input_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/RepositoryCheck"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "checks"
+      ],
+      "title": "RepositoryTruth",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Curated task and oracle; never send this whole record to a trial worker.",
+  "properties": {
+    "schema_version": {
+      "const": "assessment.repository-case.v1",
+      "default": "assessment.repository-case.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input": {
+      "$ref": "#/$defs/RepositoryInput"
+    },
+    "truth": {
+      "$ref": "#/$defs/RepositoryTruth"
+    },
+    "reference_patch": {
+      "$ref": "#/$defs/RepositoryPatch"
+    },
+    "fault_patches": {
+      "items": {
+        "$ref": "#/$defs/RepositoryPatch"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Fault Patches",
+      "type": "array"
+    },
+    "source_repository": {
+      "title": "Source Repository",
+      "type": "string"
+    },
+    "source_revision": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "license": {
+      "minLength": 1,
+      "title": "License",
+      "type": "string"
+    },
+    "provenance": {
+      "minLength": 1,
+      "title": "Provenance",
+      "type": "string"
+    },
+    "split": {
+      "default": "development",
+      "enum": [
+        "development",
+        "qualification",
+        "training",
+        "holdout"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "independent_case_id": {
+      "minLength": 1,
+      "title": "Independent Case Id",
+      "type": "string"
+    },
+    "template_family": {
+      "minLength": 1,
+      "title": "Template Family",
+      "type": "string"
+    },
+    "used_for_development": {
+      "default": true,
+      "title": "Used For Development",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "input",
+    "truth",
+    "reference_patch",
+    "fault_patches",
+    "source_repository",
+    "source_revision",
+    "source_path",
+    "source_sha256",
+    "license",
+    "provenance",
+    "independent_case_id",
+    "template_family"
+  ],
+  "title": "RepositoryCase",
+  "type": "object"
+}
