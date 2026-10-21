@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21: repository-task grading and selection scoring implemented; source verification passed, exact offline execution review being prepared.**
+**Status as of 2026-10-21: repository-task grading and selection scoring implemented; source verification passed; exact offline bundle 0d992ca9 awaits operator approval.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -42,17 +42,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: '77077562e1a63d45791c478066affba35dd8d10d'
-last_check_command: 'c13/value-priority-20261021/historical-decision-audit.json; selection-contract-result-v2.json; operator-steering.json. Resource proposal85a0c57 is historical/unaccepted.'
-last_check_result: 'Existing live comparison remains INCONCLUSIVE and admission was disabled by design, so it cannot establish live selection quality. Two synthetic admission/applicability/revocation and utility/dominance tests passed with zero models. Infrastructure targets are hypotheses, not hard product requirements.'
-next_action: 'Finish the stable-source verification in reports/toolkit-v2/c13/repository-value-20261021/validation-v2. Read REPOSITORY_EVALUATION.md. Prepare one exact execution bundle for contained grader checks, current-wheel installation and pinned offline docs. Source independent real-task cases before new live qualification/value or selection studies; no terminal study replay.'
+last_verified_commit: '9dabc5bd852853a49ab758eab68234ea6b64d17a'
+last_check_command: 'repository-value-20261021/validation-v2/checks.json; supplemental/checks.json; prepared-bundle-audit.json; preservation-audit.json'
+last_check_result: '1619 pytest passes, 21 skips, 1 existing warning in both ordinary/coverage runs; 82% coverage and both branch gates pass. All 12 integrated checks pass; full-source typing 167 files and Node 13 tests pass. Supplemental 8/9: unchanged router.py:747 provider import fails the layering checker. No new live efficacy or selection result; exact offline bundle pending.'
+next_action: 'Await actual human approval of approval-bundle.json SHA256 0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8. Record the verbatim response in bundle-operator-approval.json, then run run-bundle.py with that raw digest. Never replay a started component; unstarted independent components remain covered by this exact approval. After these checks, resolve the existing catalog-normalizer layering issue and prepare genuinely independent tasks, host mapping and frozen usefulness/selection plans. No historical study replay or arbitrary resource campaign.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'A new exact bundle is being prepared for 23 contained grader calls, 25 total canonical operations with 1240 reserved seconds, 18 private installed checks and the pinned offline docs checker. Zero models/cash/downloads; no execution yet.'
+  - 'Exact bundle 0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8 is pending human approval for 23 contained grader calls, 25 total canonical operations with 1240 reserved seconds, 18 private installed checks and the pinned offline docs checker. Zero models/cash/downloads; no execution yet.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
@@ -2192,7 +2192,7 @@ amendment4d7b944f… uses the September25/27 delegation, keeps all human-approve
 software/effects/ceilings, and preserves both original review/runner bytes and
 actual human approval. No second human approval is claimed for that metadata edit.
 
-All 12 integrated checks passed for7707756/source df8f0b9e…: ordinary1589 passed,
+All12 integrated checks passed for7707756/source df8f0b9e…: ordinary1589 passed,
 21 skipped; coverage1589 passed,21 skipped;82% displayed coverage, both branch gates,
 compile, schemas, toolkit fixtures, Ruff, mypy and wheel/sdist. The wheel
 f31cc260477bcd30f41f2981f65aa0e0ee88aeadfdede634887ec396b79286cf
@@ -2285,7 +2285,7 @@ was weakened. The proxy ended stopped; both task images have0 referencing contai
 
 [The current capture report](../../reports/toolkit-v2/c07/capture-explicit-profile-20261021/capture-status.md)
 keeps3 completed real captures separate from the original564-task study. It records
-2 independently graded task passes and 1 ungraded callback failure. Capture matching
+2 independently graded task passes and1 ungraded callback failure. Capture matching
 does not independently verify provider quantities or prove semantic use. The actual
 HTML browser preview was blocked by local-file URL policy; no workaround was
 attempted. Local HTML structure/data checks can supplement, not claim, visual review.
@@ -2489,3 +2489,37 @@ C13 remains BLOCKED on applicable execution authority, independent real-task
 qualification/value/selection evidence, the existing layering gate, human control
 discovery and separate adoption/release requirements. No arbitrary resource SLO
 or standalone resource campaign is adopted.
+
+### Exact offline bundle prepared; approval requested
+
+Code commit: 9dabc5bd852853a49ab758eab68234ea6b64d17a; source digest 4186325d5b654124122c15ce90ceaa157837e67c5e35450d3535b3f418a4ecf2.
+The actual new wheel SHA-256 is 681e820338033192ecce5830fc27016a557cccf186ca89637ecda3fba6388927.
+One exact raw approval bundle is available at
+`reports/toolkit-v2/c13/repository-value-20261021/approval-bundle.json`, SHA-256
+`0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8`.
+Its human review is `EXECUTION_REVIEW.md`; all component/driver hashes, all 33
+wheel hashes and the new wheel's modules match current source. Execution has not
+started. No approval is inferred from the question being displayed.
+
+Components: grader d0e30316a59791a7d97df8dcae7b84aa7d43a69890dc0a412663281c52741071;
+package b0bc7225cea932137920e622a933b05d6e52f6c73240d8554520d89a3d26261f;
+documentation 272bd01edf2552a112add1f05420efcd69164186eaf884ff73f3beb935c60a0a.
+The only new temporary resource prepared is the inert 33-wheel cache at
+`/private/tmp/aeep-repository-wheel-review-iz9kr_9q`; no runtime was installed.
+Preserve that cache until its exact review is resolved. The 32 dependency wheels
+are unchanged (13,208,799 cached bytes); there are no downloads.
+
+The permission question covers 23 contained grader calls, 25 grant operations,
+1240 reserved seconds, 18 private installed checks and the pinned offline docs
+checker. It authorizes no models, paid calls, credentials, new images, activation,
+release or retained-resource cleanup. The unchanged layering failure remains
+open; this engineering review does not waive it. Frozen five human-facing
+materials and the original inconclusive study remain byte-identical.
+
+To resume: read this latest record and the human review; inspect for an actual
+operator reply before creating any approval record. If approved, execute each
+listed component once and retain its actual receipts/results. Do not change
+runtime source while this bundle is pending or running. If the dispatcher fails,
+never replay started components; still-unstarted independent components retain
+the same exact approval. Current source/installation/receipt evidence must be
+refreshed after any later code change.

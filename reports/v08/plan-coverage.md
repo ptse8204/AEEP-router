@@ -3847,7 +3847,7 @@ AEEP_NATIVE_AUTONOMY_EXACT_REVIEW=49aecf8411e2779e69f2bf99826561dbe7148e4cbaf18b
 | [Paused scope](sol61-autonomy-paused-safe-stop-5fff-result.json) | PASS | One rejected scoped call, no execution attempt/receipt; safe stop with final reason `paused`. | 26.399821 |
 | [Unresolved write recovery](sol61-autonomy-unresolved-write-recovery-stop-5fff-result.json) | FAIL at `scenario_grading` | Safe stop after one seeded failed WRITE; barrier remained unresolved through model turn and no second child ran. Two identical approved-reader commands, both exit0, exceeded the frozen one-reader maximum. Reviewed effect inspection and canonical reconciliation subsequently succeeded, with no allowance reset or retry. | 27.031922 |
 
-The [canonical accounting and outcome audit](native-sol61-autonomy-four-scenarios-5fff-canonical-audit.json), SHA `07b19ba5847fec7e5707bcaf4fdc4cd7f548a31f8ef26c4c568b5c8a9a139925`, read the retained task stores and existing assessment ledger. It confirmed eight completed operations, four model turns,112.168799seconds including setup (111.003048seconds for model operations), below all reviewed ceilings. Provider-reported usage totals428907input tokens,299136cached input,2303output and 140reasoning; total431210tokens. The approved cash ceiling and grant cash counter remain zero; actual model cash is unavailable and consumed subscription units are unknown. Child raw resource dimensions remain in canonical receipts and the audit; overlapping child time was not charged as another operation.
+The [canonical accounting and outcome audit](native-sol61-autonomy-four-scenarios-5fff-canonical-audit.json), SHA `07b19ba5847fec7e5707bcaf4fdc4cd7f548a31f8ef26c4c568b5c8a9a139925`, read the retained task stores and existing assessment ledger. It confirmed eight completed operations, four model turns,112.168799seconds including setup (111.003048seconds for model operations), below all reviewed ceilings. Provider-reported usage totals428907input tokens,299136cached input,2303output and140reasoning; total431210tokens. The approved cash ceiling and grant cash counter remain zero; actual model cash is unavailable and consumed subscription units are unknown. Child raw resource dimensions remain in canonical receipts and the audit; overlapping child time was not charged as another operation.
 
 Every case recorded zero necessary approvals, zero unnecessary approval/input prompts, zero interventions, no final unresolved attempts, confirmed owned cleanup/accounting and unchanged source. One case verified workbook completion; three were safe stops, with successful reconciliation only in the recovery fixture. The native/model window was released after the fourth terminal cleanup. Requested model identity remains independently unobserved (`actual_model:null`). Automated wording checks do not measure human comprehension; process-tree sampling and unknown ambient/network effects remain explicit. These shared-host integrations do not establish isolation, qualification, marginal value, human usability or whole-plan readiness.
 
@@ -4608,8 +4608,8 @@ acceptance remains separate.
 
 ## October21: approved bundle outcomes and next exact action
 
-Current source 7707756/df8f0b9e… passed all12 integrated checks. Both full runs
-passed1589 tests with 21 skips; displayed coverage82%, both branch gates passed.
+Current source7707756/df8f0b9e… passed all12 integrated checks. Both full runs
+passed1589 tests with21 skips; displayed coverage82%, both branch gates passed.
 The current f31cc260… wheel passed15 offline CLI checks plus1 retained capture check
 using32 exact cached dependency wheels, with0 downloads; private runtime/scratch
 removal passed. Source remains unchanged. Do not repeat regression/coverage/build
@@ -4671,7 +4671,7 @@ remain unknown, not false. No optional pair or historical holdout replay occurre
 
 The final reserved typed-input probe stopped before model dispatch on runtime
 identity drift. All4 original reservations remain charged:3 complete real model
-receipts and 1 preflight skip. Read-only evidence reproduces the exact mismatch.
+receipts and1 preflight skip. Read-only evidence reproduces the exact mismatch.
 A fresh model-free required-profile inspection now passes11 groups each, including
 collector denial, and binds actual treatment identity3d13ce70…. This retains the
 existing source, images, permissions, model and skill. No code/guard was relaxed.
@@ -4892,3 +4892,9 @@ The source is ready for an exact non-release offline execution review; installed
 wheel, actual contained grader and pinned documentation checks remain unexecuted.
 Independent real-task holdouts, applicable live comparisons and human controls
 remain separate gates.
+
+Manual lint of the complete historical plan-coverage record reports 39 existing
+style issues outside the configured Makefile documentation scope. Its original
+prefix is preserved byte-for-byte; only the new addendum is linted separately.
+The configured 69 active documents and new execution review are checked on their
+current bytes. No historical whitespace/fence rewrite is used to obtain a pass.

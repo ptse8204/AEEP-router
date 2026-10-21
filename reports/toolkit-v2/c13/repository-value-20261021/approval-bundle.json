@@ -1,0 +1,83 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_digest": "4186325d5b654124122c15ce90ceaa157837e67c5e35450d3535b3f418a4ecf2",
+  "runner_sha256": "2a2924d045f7871085aed9cfac13d7466f296f09f0daac3e0be83b00c5b59421",
+  "actions": [
+    {
+      "name": "grader",
+      "review": "reports/toolkit-v2/c13/repository-value-20261021/grader-operation-review.json",
+      "review_sha256": "d0e30316a59791a7d97df8dcae7b84aa7d43a69890dc0a412663281c52741071",
+      "runner": "reports/toolkit-v2/c13/repository-value-20261021/run-grader-review.py",
+      "runner_sha256": "80ad64f05e1c7476f231975fc69561c9ff0b85a7402b8585863ea0e93392614c",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-value-20261021/run-grader-review.py",
+        "d0e30316a59791a7d97df8dcae7b84aa7d43a69890dc0a412663281c52741071"
+      ],
+      "approval_record": "reports/toolkit-v2/c13/repository-value-20261021/grader-operator-approval.json",
+      "started_marker": "reports/toolkit-v2/c13/repository-value-20261021/grader-execution-started.json",
+      "terminal_result": "reports/toolkit-v2/c13/repository-value-20261021/grader-execution-result.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "passed": true,
+        "contained_calls_started": 23,
+        "source_unchanged": true,
+        "host_canary_removed": true,
+        "containers_removed": true,
+        "ledger_operations": 25,
+        "elapsed_complete": true
+      }
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-repository-20261021/operation-review.json",
+      "review_sha256": "b0bc7225cea932137920e622a933b05d6e52f6c73240d8554520d89a3d26261f",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-repository-20261021/run_review.py",
+      "runner_sha256": "c03c852c12bda49c06ddfd4e3f629e5a89e34503b6f7861d642626cb62d9309d",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/package-review-repository-20261021/run_review.py",
+        "--execute-reviewed-digest",
+        "500a04b7e2896e4d3972fbe49c0186bc5ab62b07bfae6bae33246f840c8504de"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/package-review-repository-20261021/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/package-review-repository-20261021/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-repository-20261021/execution/summary.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "installed_cli_checks": 17,
+        "installed_capture_checks": 1,
+        "runtime_removed": true,
+        "private_scratch_removed": true
+      }
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/operation-review.json",
+      "review_sha256": "272bd01edf2552a112add1f05420efcd69164186eaf884ff73f3beb935c60a0a",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/run-review.py",
+      "runner_sha256": "c85b7c2369ef32a8153910e69b27be2ca0717f25fa9ecb8801499a9a0d103f63",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/run-review.py",
+        "272bd01edf2552a112add1f05420efcd69164186eaf884ff73f3beb935c60a0a"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-repository-review-20261021/execution-result.json",
+      "maximum_seconds": 240,
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      }
+    }
+  ],
+  "purpose": "Validate the new bounded repository grader and changed installation without a model campaign or release.",
+  "permissions": "23 offline contained observations through25 existing-grant operations, at most1240 reserved seconds;33 cached wheels and18 sandboxed offline installed checks; pinned cached Lychee0.24.2 offline documentation scan. No downloads, builds/pulls of images, model proxy, model turns, credentials, external services, cash, activation, publication or retained-resource deletion.",
+  "approval_reason": "The pasted continuation excludes untrusted software execution; CONTINUATION.md requires applicable container-provisioning authority. Earlier exact bundles are terminal and bind older artifacts. Routine definition review and finite grant scope amendments remain delegated; counters are preserved.",
+  "approval_rule": "One explicit human approval covers these three raw component digests, one execution attempt each. Do not replay a started component. A dispatcher failure does not revoke an unstarted independent component; it may run under this same approval after source/artifact checks.",
+  "known_existing_gate": "check_assessment_policy.py fails on the unchanged provider-specific import in router.py:747. This non-release engineering bundle does not waive or close that layering gate.",
+  "approved": false,
+  "execution_started": false
+}
