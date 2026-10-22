@@ -96,6 +96,79 @@ meanings are preserved. Budget previews conservatively reserve up to 32 containe
 probe calls per graded output, including grader validation. Actual operations
 and grader time remain separate from task time and task savings.
 
+## Prepare real repository test suites
+
+Extension v5 adds a separate source-archive path for real Python repository
+tasks. It reuses the existing worker artifact transport and a pinned SWE-rebench
+pytest parser. The initial upstream Loguru compatibility check passed its
+unchanged, published-repair and regression variants on source 5f4e318c. That
+result applies to one development task; the new v5 integration still requires
+source checks and fresh contained conformance before model trials.
+
+`RepositorySuiteCase` binds a small public task record to hash-checked assets:
+the original source archive, private test overlay, published patch artifact and
+exact runtime wheels. Record license/provenance and `origin_kind` as
+`upstream_issue`, `authored_control` or `synthetic_fixture`. The default is
+synthetic. A declared real origin is not an attestation. Keep reviewed public
+archives under one dedicated root, named `<sha256>.tar.gz`; keep tests, references
+and runtime wheels in a different protected directory.
+
+Export the inert definition from a configured source environment:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit.cli repository-suite-recipe \
+  --cases /path/to/development-cases.json \
+  > /tmp/aeep-repository-suite-recipe.json
+```
+
+Each cases file contains an array matching
+[the suite schema](../../schemas/assessment-repository-suite-case.schema.json).
+Repeat `--cases` for separate metadata files; the existing 1 MiB read limit
+applies to each file. Export reads reviewed assets but starts no worker or
+installer. It requires three development cases. `--assessment` additionally
+requires source-disjoint 8/28/105 cases; materialization enforces balanced
+holdout families. Development exports cannot generate campaign holdouts.
+
+The declarative host adapter uses `input_transform: repository_archive:1` and
+one `read_only_roots` entry naming the public asset directory. It loads only the
+current hash-named archive and adds `source_b64` and the canonical `base_sha256`.
+Use the existing artifact configuration with `input_field: source_b64`,
+`output_field: patch_b64`, `input_name: repository.tar.gz`,
+`output_name: patch.json` and `max_bytes: 650000`. The host sends the archive as
+a file, removes its base64 bytes from the prompt and provides input/output paths.
+Both arms receive the same instructions and artifact delivery.
+
+The agent unpacks the source into its private workspace and writes `patch.json`
+with the supplied base hash and replacement text for existing editable Python
+files. The artifact bridge returns that file as `patch_b64`. The coordinator
+rejects changed bindings, duplicate JSON keys, source escapes, new/deleted files,
+test/configuration edits and oversized patches before execution. It overlays
+the private tests and runs the reviewed pytest command in one fresh offline
+grader. The child returns test observations, not an authoritative verdict.
+
+Curated materialization copies reviewed metadata on one canonical operation.
+Published reference patches are data, not an independently executed generator;
+each is validated with the contained tests before candidate execution. V5 retains
+the legacy generator/reference executor slots but does not dispatch them. Budget
+previews count one possible grader call per output and no external reference
+calls. Grading remains assessment overhead, outside paired task wall time.
+
+The current byte/member limits protect the existing 2 MB container envelope and
+32 MiB temporary filesystem. They are transport/safety bounds, not accepted
+production latency or memory targets. Each archive is at most 650,000 compressed
+bytes, expands to at most 4,000,000 file bytes and has at most 1,000 regular files.
+The complete current-case payload must also fit the existing envelope; a large
+runtime closure can make a smaller archive unsupported. No installer or build
+backend runs in the grader. Tasks needing compiled dependencies, larger trees,
+different Python runtimes or a changed timeout remain unsupported until separately
+reviewed. Official upstream image equivalence is not claimed.
+
+Missing, skipped, errored or nonpassing required tests fail validation. A malformed
+transport or changed asset blocks assessment. Standard upstream log parsing and
+test suites do not prove resistance to adversarial output forgery or incomplete
+tests. Curate reproducible workloads and retain these limits in the report.
+The existing comparison and selection analysis below remain unchanged.
+
 ## Compare capability usefulness
 
 Store/review the exported recipe through the existing assessment interfaces,

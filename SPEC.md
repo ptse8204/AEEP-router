@@ -1008,6 +1008,18 @@ before execution. Recipe validation must also reject reviewed wrong behavior.
 Versions 1–3 retain their existing result and serialization contracts. See
 [repository evaluation](docs/aeep-toolkit/REPOSITORY_EVALUATION.md).
 
+`assessment.recipe-extension.v5` adds curated Python repository suites with
+`curated_repository:1` materialization. Cases MUST bind public source assets,
+protected test overlays, published reference patches, runtime wheels and upstream
+test identities by hash. Materialization is reviewed data copying on the existing
+grant, not synthetic case generation or an external program. The legacy generator
+and reference executor slots are not dispatched for v5. Published reference patches
+MUST be checked through the contained observer before candidate trials. Only the
+current public archive reaches an agent through the existing artifact transport.
+The protected coordinator checks patch scope and raw test observations; a child
+verdict MUST NOT establish correctness. Missing, skipped or errored required tests
+MUST NOT pass. Versions 1–4 retain their existing meanings and serialization.
+
 Assessment definitions, plans, authorizations, reports and scoped admissions use
 `assessment.*.v1` schema identifiers. Ordinary routing MUST NOT start assessments
 or contact a planning model. Model arguments MUST NOT create, expand or revoke

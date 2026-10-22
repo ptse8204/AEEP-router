@@ -113,3 +113,8 @@ A canonical service verdict is not an independent attestation or release approva
 The descriptive summary remains `NOT_ASSESSED`. Resource break-even uses from the
 assessment are separate from a plugin-price scenario and never imply billed-cash
 savings. The original `python3 -m aeep_toolkit.managed` entry point still works.
+
+For source-archive tasks, use the separately reviewed
+[repository suite mapping](REPOSITORY_EVALUATION.md#prepare-real-repository-test-suites).
+It reuses the existing single-file artifact bridge; a suite definition alone
+does not establish worker conformance, qualification or comparative usefulness.

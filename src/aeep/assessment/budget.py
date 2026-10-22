@@ -54,7 +54,8 @@ def campaign_allowances(service: AssessmentService, plan: AssessmentPlan, *,
         extension = recipe.extension
         literals = [*extension.independent_fixtures, *extension.transformed_fixtures]
         reference_inputs = [fixture.input for fixture in literals] + [case.action.input for case in [*suite.cases, *suite.warmup_cases]]
-        reference_calls = len(bounded_batches(reference_inputs)) if extension.truth_schema is not None else 1
+        reference_calls = (0 if extension.schema_version.endswith('.v5') else
+            len(bounded_batches(reference_inputs)) if extension.truth_schema is not None else 1)
         add('grader_reference', reference_calls,
             reference_calls * (float(extension.reference.config['timeout_seconds']) + 5))
         # Artifact output sizes and generated faults are unknown until reference execution.

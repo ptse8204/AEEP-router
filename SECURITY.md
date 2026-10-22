@@ -374,6 +374,17 @@ treat answers already present there as independent secret holdouts. These bounde
 checks do not establish arbitrary repository preservation or general resistance
 to benchmark gaming.
 
+Version-5 repository suites also reject unsafe archives, changed source/runtime
+assets, test/configuration edits and malformed base64 patch files. Only a single
+hash-named public source archive is projected from a reviewed asset root; private
+tests, reference repairs and other cases are not sent to the model worker.
+Expected test identities remain in the coordinator. Candidate source executes
+only in a fresh offline grader with the reviewed test overlay and cached wheels.
+Nonpassing or missing required results cannot establish correctness. The reused
+upstream parser and test suite are not proofs against malicious output forgery
+or incomplete tests. Assets and fixture-origin declarations require operator
+review; their hashes do not establish licensing or independence by themselves.
+
 Installed plugin metadata, declared side effects and model-generated recipes are
 untrusted inputs. Reviews bind exact definitions; standing authorizations bind
 subjects, recipes, environments and finite ceilings. Model-facing tools cannot

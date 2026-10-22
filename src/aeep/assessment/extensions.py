@@ -160,9 +160,26 @@ async def materialize(service: AssessmentService, request_id: str) -> RecipeCase
         return RecipeCaseSet.model_validate(service.repository.get("recipe_case_set", request_id))
     recipe = RecipeDefinition.model_validate(service.repository.get("recipe", request.recipe_digest))
     assert recipe.extension is not None
-    payload, _elapsed = await invoke(service, request, recipe.extension.generator,
-        {"seed": request.seed, "stages": [{"split": split.value, "count": count} for split, count in STAGES],
-         "variations": recipe.variations}, stage="recipe_generation", operation_id=f"{request_id}-generator")
+    if recipe.extension.schema_version.endswith('.v5'):
+        from .identity import verify_dependencies
+        from .repository_suites import curated_payload
+
+        require_environment(recipe, AssessmentEnvironment.model_validate(service.repository.get('environment', request.environment_digest)))
+        if (not request.runtime_dependencies or content_digest(RecipeRuntimeBinding(dependencies=request.runtime_dependencies))
+                not in request.definition_digests):
+            raise ConfigurationError('curated repository runtime must be frozen and reviewed')
+        verify_dependencies(request.runtime_dependencies)
+        operation = f'{request_id}-generator'
+        service.repository.reserve(request, operation, AssessmentLimits(max_operations=1, max_elapsed_seconds=30), stage='curated_case_materialization')
+        started = time.perf_counter()
+        try:
+            payload = curated_payload(recipe)
+        finally:
+            service.repository.finish_operation(operation, elapsed_seconds=time.perf_counter() - started)
+    else:
+        payload, _elapsed = await invoke(service, request, recipe.extension.generator,
+            {"seed": request.seed, "stages": [{"split": split.value, "count": count} for split, count in STAGES],
+             "variations": recipe.variations}, stage="recipe_generation", operation_id=f"{request_id}-generator")
     if not isinstance(payload, dict) or set(payload) != {"cases"} or not isinstance(payload["cases"], list) or len(payload["cases"]) != 141:
         raise ConfigurationError("recipe generator must return exactly 141 synthetic cases")
     cases = []
@@ -243,7 +260,7 @@ def callbacks(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDe
         expected = case.validators[-1].config["expected"]
 
         async def grade(context: ValidationContext, truth: dict[str, Any] = expected) -> ValidationResult:
-            if recipe.extension and recipe.extension.schema_version.endswith('.v4'):
+            if recipe.extension and recipe.extension.schema_version.endswith(('.v4', '.v5')):
                 return await repository_grade(service, plan, recipe, context.input, truth, context.output)
             reply, _elapsed = await invoke(service, plan, grader,
                 {"examples": [{"input": context.input, "output": context.output, "expected": truth}]}, stage="recipe_grading")
@@ -257,6 +274,7 @@ def callbacks(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDe
 async def repository_grade(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDefinition,
                            value: dict[str, Any], truth: dict[str, Any], output: Any,
                            elapsed_times: list[float] | None = None) -> ValidationResult:
+    from .repository_suites import grade_suite_output
     from .repository_tasks import grade_repository_output
 
     assert recipe.extension is not None
@@ -264,10 +282,12 @@ async def repository_grade(service: AssessmentService, plan: AssessmentPlan, rec
 
     async def probe(payload: dict[str, Any]) -> Any:
         reply, _ = await invoke(service, plan, observer, payload,
-            stage='repository_behavior_probe', elapsed_times=elapsed_times)
+            stage='repository_suite_probe' if recipe.extension and recipe.extension.schema_version.endswith('.v5') else 'repository_behavior_probe',
+            elapsed_times=elapsed_times)
         return reply
 
-    return await grade_repository_output(value, truth, output, probe)
+    grade = grade_suite_output if recipe.extension.schema_version.endswith('.v5') else grade_repository_output
+    return await grade(value, truth, output, probe)
 
 
 async def validate_grader(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDefinition,
@@ -287,13 +307,17 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
     truths = [case.validators[-1].config["expected"] for case in checked]
     outputs_from_reference = []
     inputs = [case.action.input for case in checked]
-    for batch in bounded_batches(inputs) if extension.truth_schema is not None else [inputs]:
-        reference, _elapsed = await invoke(service, plan, extension.reference,
-            {"inputs": batch}, stage="grader_reference", elapsed_times=program_seconds)
-        if (not isinstance(reference, dict) or set(reference) != {"outputs"}
-                or not isinstance(reference["outputs"], list) or len(reference["outputs"]) != len(batch)):
-            raise ConfigurationError("generator or independent reference disagrees with reviewed truth")
-        outputs_from_reference.extend(reference['outputs'])
+    if extension.schema_version.endswith('.v5'):
+        from .repository_suites import reference_outputs
+        outputs_from_reference = reference_outputs(recipe, inputs)
+    else:
+        for batch in bounded_batches(inputs) if extension.truth_schema is not None else [inputs]:
+            reference, _elapsed = await invoke(service, plan, extension.reference,
+                {"inputs": batch}, stage="grader_reference", elapsed_times=program_seconds)
+            if (not isinstance(reference, dict) or set(reference) != {"outputs"}
+                    or not isinstance(reference["outputs"], list) or len(reference["outputs"]) != len(batch)):
+                raise ConfigurationError("generator or independent reference disagrees with reviewed truth")
+            outputs_from_reference.extend(reference['outputs'])
     if extension.truth_schema is None and outputs_from_reference != truths:
         raise ConfigurationError("generator or independent reference disagrees with reviewed truth")
     examples: list[dict[str, Any]] = []
@@ -314,7 +338,7 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
             for output in outputs)
         decisions.extend([True, *[False for _ in outputs[1:]]])
     observed: list[bool | None] = []
-    if extension.schema_version.endswith('.v4'):
+    if extension.schema_version.endswith(('.v4', '.v5')):
         for example in examples:
             result = await repository_grade(service, plan, recipe, example['input'],
                 example['expected'], example['output'], program_seconds)

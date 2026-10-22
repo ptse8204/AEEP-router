@@ -132,10 +132,27 @@ def main(argv: list[str] | None = None) -> int:
     repository_recipe = sub.add_parser('repository-recipe', help='Export a reviewed repository recipe definition; never executes code')
     repository_recipe.add_argument('--cases', type=Path, required=True)
     repository_recipe.add_argument('--assessment', action='store_true', help='Require distinct curated 8/28/105 campaign cases')
+    repository_suite = sub.add_parser('repository-suite-recipe', help='Export a hash-bound repository suite; no execution or installation')
+    repository_suite.add_argument('--cases', type=Path, required=True, action='append', help='Repeat for bounded metadata files')
+    repository_suite.add_argument('--assessment', action='store_true', help='Require distinct curated 8/28/105 campaign cases')
     selection_report = sub.add_parser('selection-report', help='Score supplied policy decisions; never grants admission')
     selection_report.add_argument('--evaluation', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'repository-suite-recipe':
+            from aeep.assessment.repository_suites import (
+                RepositorySuiteCase,
+                repository_suite_recipe,
+            )
+            from aeep.errors import ConfigurationError
+
+            try:
+                suite_cases = [RepositorySuiteCase.model_validate(case) for path in args.cases for case in read_json(path)]
+                recipe = repository_suite_recipe(suite_cases, assessment=args.assessment)
+            except ConfigurationError as exc:
+                raise ValueError('invalid repository suite metadata') from exc
+            print(recipe.model_dump_json(indent=2))
+            return 0
         if args.command == 'repository-recipe':
             from aeep.assessment.repository_tasks import RepositoryCase
             from aeep.assessment.repository_tasks import repository_recipe as export_recipe

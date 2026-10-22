@@ -603,6 +603,18 @@ trials. Selection scoring consumes separate frozen decisions and prior-value
 labels; it cannot grant admission. This adds task-specific grading and analysis,
 not another execution or benchmarking service.
 
+The optional v5 suite pack keeps repository archives and protected assets in
+hash-bound coordinator files. Case records contain metadata and references, so
+each trial does not copy the whole corpus into its authority snapshot. The
+existing declarative mapper sends one public archive through the managed-host
+artifact transport. A protected callback merges only reviewed source edits with
+the test overlay and sends that current case to the existing offline container.
+The pack reuses the pinned SWE-rebench pytest parser and ordinary pytest. It
+introduces no runner service, database, model adapter or installer. Curated case
+materialization and published-reference reads use the existing operation ledger;
+test execution stays contained. Dataset and environment conformance remain
+separate from source implementation.
+
 `aeep.assessment` owns immutable definitions, operator reviews, authorizations,
 job state and comparative reports. Its service calls `BenchmarkRunner`, which
 executes through isolated `Router` instances. `ReceiptStore.campaign_snapshot`

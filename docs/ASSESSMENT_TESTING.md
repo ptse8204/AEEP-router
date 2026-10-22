@@ -448,6 +448,40 @@ unknown candidate resource measurements. Tests that replace containment with a
 local subprocess are lifecycle fixtures only; the opt-in real-container test
 runs the same recipe through actual Docker processes.
 
+### Curated repository suite amendment (October 22, 2026)
+
+The standing finite-definition delegation covers extension v5 and its curated
+repository pack. It reuses AssessmentService, BenchmarkRunner, artifact delivery,
+protected callbacks, attempts and the canonical grant. No campaign threshold,
+case count, cash ceiling or historical result changes. Source implementation
+tests and the earlier one-task upstream compatibility result do not qualify this
+new boundary or a model comparison.
+
+`curated_repository:1` materializes reviewed metadata for 8/28/105 source-disjoint
+cases instead of synthesizing repository issues. It reserves one existing ledger
+operation and binds current runtime source. A completed request returns its
+existing case set; failed or interrupted attempts are not replayed. Published
+reference patches are hash-bound data read within grader-validation overhead,
+then checked against the real contained tests for every case. The v5 generator
+and reference command slots remain serialized for compatibility but are not
+dispatched. Budget previews reserve no external reference calls for this mode.
+
+The agent receives only the current public archive and task. The protected
+coordinator checks the returned patch binding, source-only edit scope, private
+test overlay and wheel hashes before one fresh contained test observation per
+graded output. Expected test identities and reference repairs remain outside the
+model worker. Required results must all pass; missing, skipped and errored tests
+never supply a passing grade. Independent validation includes correctly bound,
+scoped nonempty fault patches. A malformed observation blocks assessment.
+
+Record upstream issue, authored control and synthetic-fixture origins separately.
+Origin declarations are metadata, not attestations. Inspect baseline/repair
+reproducibility, underlying licenses, dependency closures and possible source
+exposure before adopting a task. Keep development cases and related source
+origins outside subsequent holdouts. New untrusted execution still needs its
+applicable exact authority. This amendment authorizes no dependency installer,
+model call, worker provisioning, release or larger resource budget.
+
 ## Controlled release evidence
 
 Run `aeep verify controlled-fixture DIRECTORY` in a new output directory. It runs

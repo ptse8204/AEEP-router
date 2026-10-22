@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: correction bundle passed; a real upstream repository-grader check is prepared and awaiting exact execution approval.**
+**Status as of 2026-10-22: real upstream grader check passed; the reusable repository-suite pack is implemented and undergoing source verification.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -45,14 +45,14 @@ checkpoint_status:
 last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
 last_check_command: 'repository-audit-correction-20261021/completion-audit.json; rebench-grader-20261022/preparation-checks.json'
 last_check_result: 'Actual approval9aaa3f73 exercised once. Grader23 observations /25 canonical operations passed; all23 receipts/attempts and cleanup verified. Current wheel18 installed checks and pinned offline docs passed; both private runtimes removed. Source5f4e318c unchanged; zero model turns. Earlier failure and3 charges retained. Full source checks remain13/13 passed,1623 tests in each run,82% coverage and both branch gates.'
-next_action: 'Check for the actual human answer to upstream grader review56ca1751. If approved, record its verbatim text/digest and run rebench-grader-20261022/run.py once; no existing approved component needs replay. The six-call development scope reuses real Loguru tests and exact upstream grading functions, not models. Independently follow repository-cohort-20261022/WORKLOAD_PLAN.md: complete the real repository pack, curate reproducible licensed cohorts, freeze mappings/utility and fresh conformance before model qualification and value. Keep selection evaluation downstream of independent usefulness evidence and resource acceptance separate. Human control follow-up is pending.'
+next_action: 'Inspect repository-suite-integration-20261022/validation-v2/checks.json and source-check session85683 before starting work. Current source is fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa. Prior validation stopped before coverage after a needed src-layout correction; its1657-test pass is retained as incomplete/source-drift evidence. The corrected first-party process regression and all35 focused tests pass. Complete the13 configured checks and supplemental proofs/Node checks without source edits. Curate additional real development assets as data only, then prepare one exact changed-pack/wheel/docs execution bundle. The completed six-call approval is terminal. Human control follow-up remains pending.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Pending exact upstream grader review56ca1751c4774dbaa4b4b10d511727220bb93bef5d2fe2626b2329d32c3c64a5: six offline calls, eight existing-grant operations, 360 reserved seconds, seven cached wheels, zero models/cash. The actual question was presented; no answer or execution is recorded. This is external software execution, not an architecture choice.'
+  - 'None for completed upstream grader review56ca1751: actual approval exercised once; all six calls passed, eight operations charged and all owned containers removed. No future changed-pack execution, wheel installation or models are authorized by this terminal review. Continue first-party source verification and safe curation.'
   - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
@@ -2724,3 +2724,65 @@ workspace is preserved. No image, volume, retained runtime or backup was removed
 Continue only safe independent curation while approval is pending. Human control,
 real comparative usefulness, live selection quality, workload-derived resource
 acceptance and release remain separate open gates.
+
+
+### Approved upstream compatibility check completed; v5 integration started (2026-10-22)
+
+The actual answer “Approve this exact upstream grader check” to
+call_3eb9e79ab1724ad4832ffa20d92b76f5 approved raw review56ca1751. It ran once.
+Containment, two-container freshness and all three real Loguru variants passed.
+The unchanged tree failed exactly the two expected bug tests and passed22
+preservation tests. The published repair passed24/24. The deliberate uppercase
+regression retained the two bug passes and failed preservation. Six canonical
+receipts were reopened against completed attempts; all owned containers are
+absent and the unchanged canary was removed. Eight operations charged
+10.433598458301276 seconds; grant usage is12820 operations,3744 model turns and
+118173.03417946631 seconds, cash0.0. The original source5f4e318c scope remains
+attached to these results. This is one development task, not qualification or value.
+
+The reusable v5 suite pack is now implemented in repository_suites.py and the
+existing extensions/adapters/budget paths. Curated cases reference hash-bound
+public archives and protected test/reference/runtime assets. Existing managed-host
+artifact transport delivers one archive and returns a patch file; no new worker
+backend exists. A protected coordinator limits source edits and compares raw
+pytest observations; it never imports repository code or trusts a child verdict.
+The exact MIT-licensed upstream parser/enum bodies and license/provenance are
+packaged under integrations/assessment-runtime. Fixture origins default to
+synthetic; declarations are not attestations. Legacy v1–v4 meanings stay intact.
+
+Curated materialization reserves one existing operation and copies reviewed
+metadata into the ordinary case set. It retains8/28/105, origin/snapshot separation,
+current-runtime checks and replay protection. Published reference patches are
+read as pinned data during validation and tested before candidates; their legacy
+executor slots are not dispatched. Source archives remain outside per-operation
+authority snapshots. Resource acceptance and selection labels remain separate.
+
+Thirty-four first-party contract tests passed; the focused standard coverage run
+reports96% combined coverage for the new module. These are fabricated software
+fixtures, not benchmark evidence. An early test missed an import; that was fixed.
+A module-filtered coverage invocation failed during Decimal type initialization;
+the normal configured coverage invocation passed. Its root cause is not fully
+established and no monetary/accounting code was changed. Full configured checks
+are running on the frozen source; do not repeat them or edit source concurrently.
+The code, schema/CLI exports and affected guides are updated, but fresh external
+v5 conformance and current-wheel checks are not yet approved or run.
+
+
+### Src-layout correction before new external execution (2026-10-22)
+
+Static review of actual Click and Marshmallow source showed src/ layouts. The
+observer's root-only path could resolve an installed package instead of reviewed
+source. A first-party process regression failed before repair; it now verifies
+that reviewed src/ code takes precedence over a deliberately conflicting wheel
+module. No third-party parser, pytest or repository source executes in that test.
+All35 focused tests pass after prepending repository/src and repository root.
+
+The initial full run reports1657 passed,21 skipped and one existing warning in
+623.88 seconds, but its source changed for that correction. Its drift guard
+stopped before coverage, and the whole run remains INCOMPLETE. All logs are
+retained under validation/. A fresh source-frozen run is under validation-v2/;
+its session is85683. Do not reuse the incomplete run as final verification.
+Two additional development sources, Click3239 and Marshmallow2800, were read
+and license/archive pinned as inert data. They are excluded from later holdouts.
+Neither was installed or executed. Their src layout/dependency requirements are
+being checked before any exact execution review is prepared.

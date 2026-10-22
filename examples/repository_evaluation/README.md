@@ -1,5 +1,10 @@
 # Pinned repository development examples
 
+These examples exercise the v4 callable-snapshot path. The separate
+[v5 repository suite path](../../docs/aeep-toolkit/REPOSITORY_EVALUATION.md#prepare-real-repository-test-suites)
+uses hash-bound source archives and real pytest suites. Its source implementation
+and external conformance are separate from these fixtures.
+
 Use these examples to check the repository patch grader before preparing a real
 capability comparison. They cover a known CLI regression, a seeded cross-file
 accounting fault and a working callback contract that needs no change.

@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "SuiteAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 650000,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SuiteAsset",
+      "type": "object"
+    },
+    "SuiteInput": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Task Id",
+          "type": "string"
+        },
+        "task": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Task",
+          "type": "string"
+        },
+        "family": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Family",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "editable_paths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Editable Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task_id",
+        "task",
+        "family",
+        "source_sha256",
+        "editable_paths"
+      ],
+      "title": "SuiteInput",
+      "type": "object"
+    },
+    "SuiteTruth": {
+      "additionalProperties": false,
+      "properties": {
+        "input_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/SuiteAsset"
+        },
+        "tests": {
+          "$ref": "#/$defs/SuiteAsset"
+        },
+        "wheels": {
+          "items": {
+            "$ref": "#/$defs/SuiteAsset"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Wheels",
+          "type": "array"
+        },
+        "python": {
+          "pattern": "^3\\.(?:1[1-9]|[2-9][0-9])$",
+          "title": "Python",
+          "type": "string"
+        },
+        "pytest": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "title": "Pytest",
+          "type": "string"
+        },
+        "test_paths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Test Paths",
+          "type": "array"
+        },
+        "fail_to_pass": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5000,
+          "title": "Fail To Pass",
+          "type": "array"
+        },
+        "pass_to_pass": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5000,
+          "minItems": 1,
+          "title": "Pass To Pass",
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "source",
+        "tests",
+        "wheels",
+        "python",
+        "pytest",
+        "test_paths",
+        "fail_to_pass",
+        "pass_to_pass"
+      ],
+      "title": "SuiteTruth",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "assessment.repository-suite-case.v1",
+      "default": "assessment.repository-suite-case.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input": {
+      "$ref": "#/$defs/SuiteInput"
+    },
+    "truth": {
+      "$ref": "#/$defs/SuiteTruth"
+    },
+    "reference": {
+      "$ref": "#/$defs/SuiteAsset"
+    },
+    "fault_outputs": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Fault Outputs",
+      "type": "array"
+    },
+    "source_repository": {
+      "title": "Source Repository",
+      "type": "string"
+    },
+    "source_revision": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "independent_case_id": {
+      "minLength": 1,
+      "title": "Independent Case Id",
+      "type": "string"
+    },
+    "license": {
+      "minLength": 1,
+      "title": "License",
+      "type": "string"
+    },
+    "provenance": {
+      "minLength": 1,
+      "title": "Provenance",
+      "type": "string"
+    },
+    "origin_kind": {
+      "default": "synthetic_fixture",
+      "enum": [
+        "upstream_issue",
+        "authored_control",
+        "synthetic_fixture"
+      ],
+      "title": "Origin Kind",
+      "type": "string"
+    },
+    "split": {
+      "default": "development",
+      "enum": [
+        "development",
+        "qualification",
+        "training",
+        "holdout"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "used_for_development": {
+      "default": true,
+      "title": "Used For Development",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "input",
+    "truth",
+    "reference",
+    "fault_outputs",
+    "source_repository",
+    "source_revision",
+    "independent_case_id",
+    "license",
+    "provenance"
+  ],
+  "title": "RepositorySuiteCase",
+  "type": "object"
+}

@@ -60,6 +60,7 @@ Use these contracts when building an integration or checking exact behavior.
 
 - [Protocol specification](../SPEC.md) and [ActionRequest schema](../schemas/action-request.schema.json)
 - [Economic accounting](ACCOUNTING.md)
+- [Repository patch and pytest-suite evaluation](aeep-toolkit/REPOSITORY_EVALUATION.md)
 - [Provider packages](PROVIDER_PACKAGES.md), [provider trust](PROVIDER_TRUST.md) and [portable evidence reuse](EVIDENCE_REUSE.md)
 - [Cache affinity](CACHE_AFFINITY.md) and [offline x402 capacity binding](protocol/X402_CAPACITY_BINDING.md)
 - [Security policy](../SECURITY.md) and [threat model](THREAT_MODEL.md)

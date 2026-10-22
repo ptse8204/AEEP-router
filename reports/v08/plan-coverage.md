@@ -5025,3 +5025,43 @@ service, release or credential access is needed. The human control response rema
 pending. The prior docs scan retains its actual input hashes; these later journal
 and plan additions have local link/whitespace checks only, not a new external
 `make docs-check` run after its private checker was removed.
+
+
+## Toolkit C13 upstream grader passed and suite integration implemented (2026-10-22)
+
+Actual approval56ca1751 ran once successfully. Three boundary/state probes and
+three real Loguru source variants passed their expected tests. The baseline has
+two bug failures and22 preservation passes; the published repair passes24/24;
+the introduced regression preserves bug-test passes but fails preservation. All
+six canonical receipts bind completed attempts. Owned containers and the unchanged
+canary are absent. Eight operations charged10.433598458301276 seconds; canonical
+usage is12820 operations,3744 turns,118173.03417946631 seconds and0.0 cash. This
+is one development task on source5f4e318c, not qualification or capability value.
+The read-only receipt audit required the configured Framework Python/PYTHONPATH;
+its two environment invocation failures opened no receipts and charged nothing.
+
+The new v5 suite pack uses existing artifact delivery, assessment callbacks,
+contained execution and canonical accounting. Small curated metadata references
+hash-bound source/test/reference/runtime assets outside model workers. The
+coordinator rejects malformed/scope-changing patches, never imports repository
+code and requires every declared test to pass. The exact MIT upstream parser
+and license are packaged. Curated8/28/105 data materialization uses one canonical
+operation; published-reference data is tested before candidates. Legacy slots
+are retained but not dispatched for v5 generation/reference. Old versions retain
+their meanings. Source, schema, CLI and relevant guides are updated.
+
+Thirty-four focused software fixtures passed and targeted branch-aware coverage
+of the new module is96%. These fabricated fixtures cannot be real benchmark
+evidence. An early missing test import and three typing issues were corrected.
+A module-filtered coverage run failed during Decimal initialization; the standard
+configured coverage invocation passed. No accounting semantics were changed.
+Full required verification is running on source573257b2, with logs in
+`reports/toolkit-v2/c13/repository-suite-integration-20261022/validation/`.
+Do not repeat the terminal approval, edit source during verification, or infer
+fresh v5 worker conformance, installation or model authority.
+
+Continue preparing real development assets as inert data while the source checks
+run. The next exact external execution bundle must bind the final source, new
+wheel, concrete case assets and current document hashes. Human control, actual
+usefulness, live selection quality, workload-derived resource acceptance and
+release remain separate open gates.

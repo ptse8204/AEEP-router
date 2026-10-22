@@ -1,0 +1,380 @@
+{
+  "passed": true,
+  "review_sha256": "56ca1751c4774dbaa4b4b10d511727220bb93bef5d2fe2626b2329d32c3c64a5",
+  "source_digest": "5f4e318c7146419cf7c10f3c057e1b6fef6ea8fbc6f607e221759a67820ba9c6",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "results": [
+    {
+      "name": "boundary",
+      "passed": true,
+      "observations": {
+        "uid": 65534,
+        "host_visible": false,
+        "root_write": false,
+        "network": false
+      }
+    },
+    {
+      "name": "fresh_write",
+      "passed": true,
+      "observations": {
+        "previous_state": false
+      }
+    },
+    {
+      "name": "fresh_read",
+      "passed": true,
+      "observations": {
+        "previous_state": false
+      }
+    },
+    {
+      "name": "unchanged",
+      "passed": true,
+      "observations": {
+        "exit_code": 1,
+        "python": [
+          3,
+          13,
+          15
+        ],
+        "pytest": "8.3.5",
+        "statuses": {
+          "tests/test_add_option_format.py::test_format[a-Message:": "PASSED",
+          "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "PASSED",
+          "tests/test_add_option_format.py::test_format[c-{level}": "PASSED",
+          "tests/test_add_option_format.py::test_format[d-{message}": "PASSED",
+          "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "PASSED",
+          "tests/test_add_option_format.py::test_format[f-<lambda>-f": "PASSED",
+          "tests/test_add_option_format.py::test_progressive_format": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_without_exception": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_with_exception": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[True]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[False]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+          "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "FAILED",
+          "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "FAILED"
+        },
+        "resolved": "RESOLVED_NO",
+        "upstream_report": {
+          "FAIL_TO_PASS": {
+            "success": [],
+            "failure": [
+              "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch",
+              "tests/test_add_option_format.py::test_invalid_format_key_error_message_content"
+            ]
+          },
+          "PASS_TO_PASS": {
+            "success": [
+              "tests/test_add_option_format.py::test_format[a-Message:",
+              "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]",
+              "tests/test_add_option_format.py::test_format[c-{level}",
+              "tests/test_add_option_format.py::test_format[d-{message}",
+              "tests/test_add_option_format.py::test_format[e-<lambda>-e]",
+              "tests/test_add_option_format.py::test_format[f-<lambda>-f",
+              "tests/test_add_option_format.py::test_progressive_format",
+              "tests/test_add_option_format.py::test_function_format_without_exception",
+              "tests/test_add_option_format.py::test_function_format_with_exception",
+              "tests/test_add_option_format.py::test_invalid_format[-1]",
+              "tests/test_add_option_format.py::test_invalid_format[3.4]",
+              "tests/test_add_option_format.py::test_invalid_format[format2]",
+              "tests/test_add_option_format.py::test_invalid_markups[<red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</level><level>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</>]",
+              "tests/test_add_option_format.py::test_invalid_markups[<foobar>]",
+              "tests/test_add_option_format.py::test_markup_in_field[True]",
+              "tests/test_add_option_format.py::test_markup_in_field[False]",
+              "tests/test_add_option_format.py::test_invalid_format_builtin",
+              "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch",
+              "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format"
+            ],
+            "failure": []
+          },
+          "FAIL_TO_FAIL": {
+            "success": [],
+            "failure": []
+          },
+          "PASS_TO_FAIL": {
+            "success": [],
+            "failure": []
+          }
+        },
+        "required_nodes": 24,
+        "missing_nodes": [],
+        "log_sha256": "bb13cdf8c51e72b40e27acaf09f41ae7adf8601e261aec84523065f08b2f5240",
+        "log_bytes": 2791,
+        "archive_sha256": "980a31936b893d50a744ba1a894c52aa4ccd6af3d7c43822e8d66dc55f97b294",
+        "upstream_grading_sha256": "75864890590c92ebf76c2df9219672e874d1365a1f70b6b3571d13a895ab03f3"
+      }
+    },
+    {
+      "name": "published_repair",
+      "passed": true,
+      "observations": {
+        "exit_code": 0,
+        "python": [
+          3,
+          13,
+          15
+        ],
+        "pytest": "8.3.5",
+        "statuses": {
+          "tests/test_add_option_format.py::test_format[a-Message:": "PASSED",
+          "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "PASSED",
+          "tests/test_add_option_format.py::test_format[c-{level}": "PASSED",
+          "tests/test_add_option_format.py::test_format[d-{message}": "PASSED",
+          "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "PASSED",
+          "tests/test_add_option_format.py::test_format[f-<lambda>-f": "PASSED",
+          "tests/test_add_option_format.py::test_progressive_format": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_without_exception": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_with_exception": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[True]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[False]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "PASSED",
+          "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "PASSED"
+        },
+        "resolved": "RESOLVED_FULL",
+        "upstream_report": {
+          "FAIL_TO_PASS": {
+            "success": [
+              "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch",
+              "tests/test_add_option_format.py::test_invalid_format_key_error_message_content"
+            ],
+            "failure": []
+          },
+          "PASS_TO_PASS": {
+            "success": [
+              "tests/test_add_option_format.py::test_format[a-Message:",
+              "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]",
+              "tests/test_add_option_format.py::test_format[c-{level}",
+              "tests/test_add_option_format.py::test_format[d-{message}",
+              "tests/test_add_option_format.py::test_format[e-<lambda>-e]",
+              "tests/test_add_option_format.py::test_format[f-<lambda>-f",
+              "tests/test_add_option_format.py::test_progressive_format",
+              "tests/test_add_option_format.py::test_function_format_without_exception",
+              "tests/test_add_option_format.py::test_function_format_with_exception",
+              "tests/test_add_option_format.py::test_invalid_format[-1]",
+              "tests/test_add_option_format.py::test_invalid_format[3.4]",
+              "tests/test_add_option_format.py::test_invalid_format[format2]",
+              "tests/test_add_option_format.py::test_invalid_markups[<red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</level><level>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</>]",
+              "tests/test_add_option_format.py::test_invalid_markups[<foobar>]",
+              "tests/test_add_option_format.py::test_markup_in_field[True]",
+              "tests/test_add_option_format.py::test_markup_in_field[False]",
+              "tests/test_add_option_format.py::test_invalid_format_builtin",
+              "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch",
+              "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format"
+            ],
+            "failure": []
+          },
+          "FAIL_TO_FAIL": {
+            "success": [],
+            "failure": []
+          },
+          "PASS_TO_FAIL": {
+            "success": [],
+            "failure": []
+          }
+        },
+        "required_nodes": 24,
+        "missing_nodes": [],
+        "log_sha256": "2ae2116146d67059eb69950e495caec14be7b5b0c3d42b2c17bf916011bbdd12",
+        "log_bytes": 2262,
+        "archive_sha256": "4ebfa76b345a1a38eae46309faa512e53c4701d4f3411c1e72ec8c07e20f9179",
+        "upstream_grading_sha256": "75864890590c92ebf76c2df9219672e874d1365a1f70b6b3571d13a895ab03f3"
+      }
+    },
+    {
+      "name": "introduced_regression",
+      "passed": true,
+      "observations": {
+        "exit_code": 1,
+        "python": [
+          3,
+          13,
+          15
+        ],
+        "pytest": "8.3.5",
+        "statuses": {
+          "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "PASSED",
+          "tests/test_add_option_format.py::test_format[a-Message:": "FAILED",
+          "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "FAILED",
+          "tests/test_add_option_format.py::test_format[c-{level}": "FAILED",
+          "tests/test_add_option_format.py::test_format[d-{message}": "FAILED",
+          "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "FAILED",
+          "tests/test_add_option_format.py::test_format[f-<lambda>-f": "FAILED",
+          "tests/test_add_option_format.py::test_progressive_format": "FAILED",
+          "tests/test_add_option_format.py::test_function_format_without_exception": "FAILED",
+          "tests/test_add_option_format.py::test_function_format_with_exception": "FAILED",
+          "tests/test_add_option_format.py::test_markup_in_field[True]": "FAILED",
+          "tests/test_add_option_format.py::test_markup_in_field[False]": "FAILED",
+          "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "FAILED"
+        },
+        "resolved": "RESOLVED_NO",
+        "upstream_report": {
+          "FAIL_TO_PASS": {
+            "success": [
+              "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch",
+              "tests/test_add_option_format.py::test_invalid_format_key_error_message_content"
+            ],
+            "failure": []
+          },
+          "PASS_TO_PASS": {
+            "success": [
+              "tests/test_add_option_format.py::test_invalid_format[-1]",
+              "tests/test_add_option_format.py::test_invalid_format[3.4]",
+              "tests/test_add_option_format.py::test_invalid_format[format2]",
+              "tests/test_add_option_format.py::test_invalid_markups[<red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</red>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</level><level>]",
+              "tests/test_add_option_format.py::test_invalid_markups[</>]",
+              "tests/test_add_option_format.py::test_invalid_markups[<foobar>]",
+              "tests/test_add_option_format.py::test_invalid_format_builtin",
+              "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch"
+            ],
+            "failure": [
+              "tests/test_add_option_format.py::test_format[a-Message:",
+              "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]",
+              "tests/test_add_option_format.py::test_format[c-{level}",
+              "tests/test_add_option_format.py::test_format[d-{message}",
+              "tests/test_add_option_format.py::test_format[e-<lambda>-e]",
+              "tests/test_add_option_format.py::test_format[f-<lambda>-f",
+              "tests/test_add_option_format.py::test_progressive_format",
+              "tests/test_add_option_format.py::test_function_format_without_exception",
+              "tests/test_add_option_format.py::test_function_format_with_exception",
+              "tests/test_add_option_format.py::test_markup_in_field[True]",
+              "tests/test_add_option_format.py::test_markup_in_field[False]",
+              "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format"
+            ]
+          },
+          "FAIL_TO_FAIL": {
+            "success": [],
+            "failure": []
+          },
+          "PASS_TO_FAIL": {
+            "success": [],
+            "failure": []
+          }
+        },
+        "required_nodes": 24,
+        "missing_nodes": [],
+        "log_sha256": "a25cbb3e2784e64e60165b8c1f6cf2f245433ed2f8a64d570d69032a983f7ba6",
+        "log_bytes": 3866,
+        "archive_sha256": "9e84cebf6c1f548498d0cbc163aa90caab61e3435f8e304ac7c28b6b7a0d68f4",
+        "upstream_grading_sha256": "75864890590c92ebf76c2df9219672e874d1365a1f70b6b3571d13a895ab03f3"
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "name": "boundary",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-1",
+      "receipt_id": "rcpt_9a8b40a4ac87411c967afc6e0e7bfce2",
+      "receipt_ref": "ab32aa4f96bb340c0ccc7a46de0fd9a150490053c3ff926573d4a92697312e73",
+      "container_name": "aeep-3f193fe83f4ecfad15799b968404b943",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    },
+    {
+      "name": "fresh_write",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-2",
+      "receipt_id": "rcpt_8b2a41a30c83423281c1bc9dfcf33375",
+      "receipt_ref": "f83342bf676efec2162e980554726a737e3e12e981fec08d90d809d2eb152e3e",
+      "container_name": "aeep-e19d820c64fc4d5d0c4a29b1439138fa",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    },
+    {
+      "name": "fresh_read",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-3",
+      "receipt_id": "rcpt_a1839b8324114c5faf0b295367553663",
+      "receipt_ref": "710fd7a8023fb459c053f61334fb022ee8b9ab97cb5e13c6f673a6ee2c9b14eb",
+      "container_name": "aeep-698bf8e9a1f27c99424461a3df987cb0",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    },
+    {
+      "name": "unchanged",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-4",
+      "receipt_id": "rcpt_c67193e7d13b44368c0a41309661155f",
+      "receipt_ref": "78ebca620ea4b1872bb27d9200a626f2a21ae76934bc53fcdeddf6d0e6aa2195",
+      "container_name": "aeep-b64d24d3090eec1092eb9d16a7e1b785",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    },
+    {
+      "name": "published_repair",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-5",
+      "receipt_id": "rcpt_acc0ebea63c34ec4b377e1cff2a2298b",
+      "receipt_ref": "51e8b478d4188975fbe9194533e5901c4ea367c4fb5befc29f3bad29bf4e2acf",
+      "container_name": "aeep-1e036dda87e3a27587ee447fb8664711",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    },
+    {
+      "name": "introduced_regression",
+      "operation_id": "recipe_generation_72ce19e09ad94c1d91a83a74a1f1d1f0-call-6",
+      "receipt_id": "rcpt_86e629554a6a426081e21b34a2784ffb",
+      "receipt_ref": "dc3802df38bb5e5b69a06ad1f930328b4daad82a2679659d1267bd48b10a383a",
+      "container_name": "aeep-9ec295b6ca6db9080ada5d0823919a81",
+      "container_removed": true,
+      "environment_digest": "69c93869899c400e4a6a35819d515297885c257d246a9777c457767d65d565e7"
+    }
+  ],
+  "grant_before": [
+    12812,
+    3744,
+    118162.60058100801,
+    "0.0"
+  ],
+  "ledger_operations": 8,
+  "elapsed_complete": true,
+  "contained_calls_started": 6,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "grant_after": [
+    12820,
+    3744,
+    118173.03417946631,
+    "0.0"
+  ],
+  "canary_removed": true,
+  "elapsed_seconds": 10.495104500092566
+}

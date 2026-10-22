@@ -1075,3 +1075,32 @@ usefulness precedes selection labels. An inconclusive capability is not proven
 useless, and abstention alone is not selection benefit. Resource acceptance
 remains a separate workload-derived question. No threshold or grant counter
 changes. Preserve historical results and prospective token/use unknowns.
+
+
+### D79 — Curated repository suites reuse artifact delivery and protected grading
+
+The exact six-call upstream check56ca1751 passed on source5f4e318c. Its real
+Loguru baseline, published repair and preservation regression behaved as expected.
+That result justifies reusing pinned upstream pytest parsing and real test suites;
+it does not qualify a candidate or the new integration.
+
+Version5 adds hash-bound coordinator assets and small curated case records to the
+existing executable-recipe boundary. Existing managed-host artifacts deliver one
+public source archive and return a patch file. The protected coordinator checks
+base/scope and compares raw contained test observations with required test IDs.
+No new host protocol, runner, database, installer or required dependency is added.
+The MIT upstream parser/enum bodies, license and provenance are bundled explicitly.
+
+Curated generation and published-reference lookup are data operations on the
+existing ledger, not additional executable engines. The legacy extension slots
+remain serialized but are not dispatched for those v5 roles. Existing8/28/105,
+current-runtime checks, replay barriers, scoped semantic-fault validation and
+scientific thresholds remain binding. Origin declarations default to synthetic
+and do not authenticate source or independence. Transport/input safety bounds
+are not production resource acceptance budgets.
+
+The first34 focused software tests pass and targeted branch-aware coverage of
+the new module is96%. Full configured verification is running on source573257b2.
+Fresh external v5 conformance, installed-wheel checks and licensed independent
+cohorts remain open. No model study, installation, credential, release or larger
+spending permission follows from this source implementation decision.

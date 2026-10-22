@@ -485,3 +485,26 @@ validation and fresh controlled-worker conformance before model qualification.
 Keep the recorded agent-skill-eval fallback and optional Waza/LangGraph scopes.
 Do not install the entire SWE-bench dependency closure or pull mutable x86 images
 merely to run this bounded development check.
+
+
+### October22: upstream compatibility passed; reusable suite pack under verification
+
+Actual approval56ca1751 was exercised once. Six fresh offline calls passed: three
+containment/state probes and real Loguru unchanged/published-repair/regression
+variants against24 upstream test identities. Eight canonical operations charged
+10.433598458301276 seconds; model usage stayed3744 turns and cash0.0. Six
+completed attempts/receipts and physical container cleanup were independently
+reopened/checked. Exact evidence is in
+`reports/toolkit-v2/c13/rebench-grader-20261022/completion-audit.json`.
+
+The reusable v5 suite implementation now packages exact MIT-licensed TestStatus
+and parse_log_pytest bodies at the same upstream980d0cca pin, with license and
+body hashes. It uses standard pytest and exact cached wheel bytes in the existing
+grader boundary. The evaluator fallback, Waza, LangGraph and optional extension
+dispositions do not change. No upstream software was installed in this step.
+
+Source573257b2 is undergoing full verification. This is a pack integration under
+verification, not fresh external v5 conformance or an official SWE-rebench image
+reproduction. Comparative usefulness, selection quality and resource acceptance
+remain separate. Additional real development cases can be prepared as inert data;
+their software cannot run under the terminal one-task approval.

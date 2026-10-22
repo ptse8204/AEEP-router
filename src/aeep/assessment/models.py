@@ -84,7 +84,7 @@ class RecipeFeatureRule(StrictModel):
 
 
 class ExecutableRecipeExtension(StrictModel):
-    schema_version: Literal["assessment.recipe-extension.v1", "assessment.recipe-extension.v2", "assessment.recipe-extension.v3", "assessment.recipe-extension.v4"] = "assessment.recipe-extension.v1"
+    schema_version: Literal["assessment.recipe-extension.v1", "assessment.recipe-extension.v2", "assessment.recipe-extension.v3", "assessment.recipe-extension.v4", "assessment.recipe-extension.v5"] = "assessment.recipe-extension.v1"
     generator: ExecutorSpec
     grader: ExecutorSpec
     reference: ExecutorSpec
@@ -110,9 +110,9 @@ class ExecutableRecipeExtension(StrictModel):
     def contained_json_programs(self) -> ExecutableRecipeExtension:
         if (self.schema_version != 'assessment.recipe-extension.v1') != (self.truth_schema is not None):
             raise ValueError("semantic artifact grading requires extension v2/v3 and an explicit truth schema")
-        if (self.schema_version.endswith(('.v3', '.v4'))) != (self.failure_codes is not None):
+        if (self.schema_version.endswith(('.v3', '.v4', '.v5'))) != (self.failure_codes is not None):
             raise ValueError('reviewed failure codes require extension v3/v4')
-        if not self.schema_version.endswith(('.v3', '.v4')) and any(
+        if not self.schema_version.endswith(('.v3', '.v4', '.v5')) and any(
                 fixture.grader_output is not None for fixture in [*self.independent_fixtures, *self.transformed_fixtures]):
             raise ValueError('independent grader outputs require extension v3')
         if self.failure_codes is not None and len(set(self.failure_codes)) != len(self.failure_codes):
@@ -167,7 +167,8 @@ class RecipeDefinition(StrictModel):
     @model_validator(mode="after")
     def extension_contract(self) -> RecipeDefinition:
         if self.extension is not None:
-            if (self.schema_version != "assessment.recipe.v2" or self.generator != "contained_json:1" or self.grader != "contained_json:1"
+            generator = 'curated_repository:1' if self.extension.schema_version.endswith('.v5') else 'contained_json:1'
+            if (self.schema_version != "assessment.recipe.v2" or self.generator != generator or self.grader != "contained_json:1"
                     or self.extractor not in {"structural_json:1", "workbook_structure:1"}
                     or set(self.extension.variation_features) != set(self.variations)):
                 raise ValueError("executable recipe identifiers and reviewed variations must agree")

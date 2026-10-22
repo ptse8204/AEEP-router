@@ -35,6 +35,7 @@ from aeep.assessment.models import (
     ScopedAdmission,
     ThreeWayAccessDefinition,
 )
+from aeep.assessment.repository_suites import RepositorySuiteCase
 from aeep.assessment.repository_tasks import RepositoryCase
 from aeep.assessment.tools import declarations as assessment_tools
 from aeep.attempts import ExecutionAttempt
@@ -196,6 +197,7 @@ SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
     "assessment-repository-case.schema.json": RepositoryCase,
+    "assessment-repository-suite-case.schema.json": RepositorySuiteCase,
     "toolkit-selection-evaluation.schema.json": SelectionEvaluation,
     "toolkit-runtime-installation.schema.json": RuntimeInstallation,
     "toolkit-installation-preview.schema.json": InstallationPreview,
