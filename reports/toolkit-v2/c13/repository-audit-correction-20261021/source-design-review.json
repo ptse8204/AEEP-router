@@ -1,0 +1,38 @@
+{
+  "code_commit": "6e30868",
+  "source_digest": "5f4e318c7146419cf7c10f3c057e1b6fef6ea8fbc6f607e221759a67820ba9c6",
+  "scope": [
+    "src/aeep/router.py: core invokes generic host registry metadata boundary",
+    "src/aeep/hosts/registry.py: recognize existing catalog envelope and reuse unchanged Codex field validator",
+    "tests/test_toolkit_telemetry.py: four malformed/unknown-envelope cases fail at adapter and router boundaries",
+    "reports/toolkit-v2/c13/repository-audit-correction-20261021/run-grader-review.py: derive exact container name from canonical completed attempt, not omitted receipt metadata"
+  ],
+  "unchanged": [
+    "Receipt privacy allowlist and wire schemas",
+    "Codex validator and collector bytes",
+    "Candidate4.10.0, worker images, model settings and destinations",
+    "Grader task inputs, expected answers and semantic faults",
+    "Existing grant counters and scientific acceptance thresholds"
+  ],
+  "audit_regressions": 6,
+  "source_focused_checks": "Passed; initial mistyped test path collected no tests, then the corrected command passed. The full suite independently passed1623 tests.",
+  "source_full_checks": {
+    "integrated_checks": 13,
+    "all_passed": true,
+    "source_unchanged": true,
+    "pytest_passed_each_run": 1623,
+    "skipped_each_run": 21,
+    "warnings_each_run": 1,
+    "coverage_percent_displayed": 82,
+    "branch_gates": "both passed",
+    "mypy_source_files": 167
+  },
+  "new_dependency_versions": [],
+  "architecture_decision_required": false,
+  "unsupported_claims": [
+    "No full-repository SWE-bench adapter",
+    "No new optional skill-use observation",
+    "No real plugin benefit or live selection-value result",
+    "No resource acceptance or publication"
+  ]
+}

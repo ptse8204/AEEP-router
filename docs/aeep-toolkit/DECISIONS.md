@@ -1022,3 +1022,24 @@ Preserve independent task grades and decision-time coverage. The importer does
 not authenticate evidence and cannot admit a capability. Infrastructure budgets
 remain separate. Source verification is in progress; contained checks and a
 current-wheel installation need a fresh exact execution review.
+
+## D77 — Preserve minimized receipts and adapter-owned validation
+
+The first approved repository-grader review failed because its audit expected
+container image/name fields that stored receipts deliberately omit. Keep that
+privacy contract. Bind the receipt to its canonical completed attempt, executor
+fingerprint and terminal receipt list; derive the owned container name from the
+attempt ID. Treat the image as a reviewed environment binding, rather than claim
+it was observed in omitted receipt metadata. Keep the failed attempt and charges.
+
+Move versioned catalog-envelope validation behind the existing managed-host
+registry. Core routing calls that boundary; the registry recognizes the built-in
+Codex v1 envelope and delegates field validation to the existing validator. Unknown
+schemas and malformed observations still fail closed. No validator, measurement,
+receipt schema, optional-candidate policy or dependency version changes.
+
+The six audit regressions, both 1623-test full runs and all 13 integrated source
+checks pass. Fresh exact contained execution remains pending approval. The source-bound
+first-party lifecycle fixture passed admission/use, revocation, stale rejection
+and baseline selection; it supplies no real-plugin benefit or live policy-value
+claim. Evidence: `reports/toolkit-v2/c13/repository-audit-correction-20261021/`.

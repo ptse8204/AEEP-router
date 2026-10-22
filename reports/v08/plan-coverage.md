@@ -4917,3 +4917,48 @@ The failed result is unchanged and unreplayed. Fix the audit and existing
 provider-layering failure before proposing a new exact contained attempt.
 Usefulness, live selection, human control, resource acceptance and release stay
 separate and open; these checks do not support a benefit claim.
+
+
+## Toolkit C13 receipt-audit repair and management check
+
+Source 5f4e318c (commit 6e30868) moves catalog-envelope validation behind the
+managed-host registry and preserves the existing validator and receipt privacy.
+The policy checker passes. All nine supplemental checks, including 13 Node tests,
+pass. Six audit regressions bind the actual minimized receipt to its canonical
+attempt and reject misbindings; no container or canonical database mutation occurs
+in those regression checks.
+
+The fresh first-party controlled lifecycle fixture passed canonical verification
+of admission/use, revocation, stale-decision rejection and baseline selection.
+Its separate local fixture ledger leaves onboarding counters unchanged. Evidence
+is in `reports/toolkit-v2/c13/repository-audit-correction-20261021/` under
+`controlled-lifecycle-result.json` and `controlled-lifecycle-audit.json`.
+This is synthetic management evidence, not real plugin benefit or live selection
+value. Full source verification and the exact corrected contained execution
+review remain in progress. C13 and publication stay open.
+
+
+## Toolkit C13 corrected source verified; exact execution pending
+
+Source 5f4e318c, code commit 6e3086898721b9f43e292b4791416ca476c89ffc,
+passed both 1623-test runs, with 21 skips and one existing warning. Coverage
+reports 82%; both branch gates and all 13 integrated checks pass. All nine
+supplemental checks pass, including 13 Node tests. The source digest remained
+unchanged. The first new architecture lint found an extra blank line; it was
+corrected without changing executable source.
+
+The exact correction bundle is
+`reports/toolkit-v2/c13/repository-audit-correction-20261021/approval-bundle.json`,
+SHA-256 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20.
+It covers one fresh23-observation grader request,25 existing-grant operations,
+1240 reserved seconds,18 private installed checks on the changed wheel plus32
+cached dependencies, and the cached pinned offline docs scan. All33 wheel hashes
+and six relevant source modules match. No component has started or been approved.
+The previous failed request and all three charges remain; no historical replay.
+
+An inert mapping draft now separates optional comparison from required-use
+qualification. It inherits no prior conformance and is not a complete four-arm
+plan. Independent task cohorts, real usefulness and live selection-value evidence
+remain unfinished. The actual assisted human-control follow-up was presented;
+its recorded response remains pending. Resource acceptance and release remain
+separate. No architecture decision, cash or broader authority is requested.

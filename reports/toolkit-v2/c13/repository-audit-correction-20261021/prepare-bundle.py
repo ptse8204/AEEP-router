@@ -18,8 +18,8 @@ def sha(path):
 def main():
     assert not (HERE / 'approval-bundle.json').exists()
     assert json.loads((HERE / 'validation-v2/source-stability.json').read_text())['all_passed']
-    package = ROOT / 'reports/toolkit-v2/integration-completion/package-review-repository-20261021'
-    docs = ROOT / 'reports/toolkit-v2/integration-completion/lychee-repository-review-20261021'
+    package = ROOT / 'reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021'
+    docs = ROOT / 'reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021'
     assert json.loads((docs / 'sandbox-preflight.json').read_text())['passed']
     actions = []
     for name, directory, review_name, runner_name, approval_name, marker, terminal, seconds, conditions in [
@@ -45,11 +45,12 @@ def main():
             'pass_conditions': conditions})
     bundle = {'schema_version': 'aeep.operator-review-bundle.v1', 'source_digest': verification_source_digest(ROOT),
         'runner_sha256': sha(HERE / 'run-bundle.py'), 'actions': actions,
-        'purpose': 'Validate the new bounded repository grader and changed installation without a model campaign or release.',
-        'permissions': '23 offline contained observations through25 existing-grant operations, at most1240 reserved seconds;33 cached wheels and18 sandboxed offline installed checks; pinned cached Lychee0.24.2 offline documentation scan. No downloads, builds/pulls of images, model proxy, model turns, credentials, external services, cash, activation, publication or retained-resource deletion.',
+        'purpose': 'Complete protected grader conformance after correcting the receipt audit, and validate the adapter-boundary fix from the changed wheel; no model campaign or release.',
+        'permissions': '23 offline contained observations through 25 existing-grant operations, at most 1240 reserved seconds; 33 cached wheels and 18 sandboxed offline installed checks; pinned cached Lychee 0.24.2 offline documentation scan. No downloads, builds/pulls of images, model proxy, model turns, credentials, external services, cash, activation, publication or retained-resource deletion.',
         'approval_reason': 'The pasted continuation excludes untrusted software execution; CONTINUATION.md requires applicable container-provisioning authority. Earlier exact bundles are terminal and bind older artifacts. Routine definition review and finite grant scope amendments remain delegated; counters are preserved.',
         'approval_rule': 'One explicit human approval covers these three raw component digests, one execution attempt each. Do not replay a started component. A dispatcher failure does not revoke an unstarted independent component; it may run under this same approval after source/artifact checks.',
-        'known_existing_gate': 'check_assessment_policy.py fails on the unchanged provider-specific import in router.py:747. This non-release engineering bundle does not waive or close that layering gate.',
+        'previous_failed_attempt': 'Bundle 0d992ca9 grader review stopped after 1 observation because its audit expected omitted receipt metadata. The canonical attempt is COMPLETED and its derived owned container is absent. Preserve that failure and its 3 charges; this is one fresh source-bound correction attempt, never a replay of the previous plan ID.',
+        'audit_regression': 'receipt-audit-regression.json passes six checks against the actual minimized receipt, including five rejected misbindings. check_assessment_policy.py now passes with provider validation owned by the host registry.',
         'approved': False, 'execution_started': False}
     (HERE / 'approval-bundle.json').write_text(json.dumps(bundle, indent=2) + '\n')
     print(json.dumps({'bundle_sha256': sha(HERE / 'approval-bundle.json'), 'source_digest': bundle['source_digest'], 'execution_started': False}))

@@ -1,0 +1,32 @@
+{
+  "sources": {
+    "dataset_card": {
+      "url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified/raw/c104f840cc67f8b6eec6f759ebc8b2693d585d4a/README.md",
+      "sha256": "6edb58b1b2c44ce858426c4ebc90077827713b75cebc243661e4433c81fd57f5",
+      "bytes": 3336,
+      "code_executed": false
+    },
+    "harness_license": {
+      "url": "https://raw.githubusercontent.com/SWE-bench/SWE-bench/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e/LICENSE",
+      "sha256": "2bd2e08df7147f67a69b42c10efae09bd4bf119df397371036187d5dd1b02f57",
+      "bytes": 1159,
+      "code_executed": false
+    },
+    "task_schema": {
+      "url": "https://raw.githubusercontent.com/SWE-bench/SWE-bench/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e/swebench/harness/constants/python.py",
+      "error_type": "HTTPError",
+      "code_executed": false
+    }
+  },
+  "installation": false,
+  "harness_execution": false,
+  "selected_holdouts": [],
+  "findings": {
+    "harness_license": "Pinned SWE-bench LICENSE confirms MIT. That does not supply license terms for every underlying repository or dataset record.",
+    "verified_card": "The pinned dataset card lists 500 issue/PR pairs and gold/test patches, but declares no license field. Its prose says only issue/base are present despite the listed gold fields; inspect the actual versioned dataset schema before mapping.",
+    "data_boundary": "Never send patch, test_patch, FAIL_TO_PASS, PASS_TO_PASS, future cases or expected outcomes to the task worker. No dataset rows or task corpus have been downloaded or chosen.",
+    "compatibility": "SWE-bench is a possible optional full-repository test-pack adapter. The existing bounded Python-callable grader is not its harness and is not claimed compatible.",
+    "storage": "No storage shortage blocks this correction. No benchmark images are proposed or provisioned here. The upstream whole-suite recommendation cannot substitute for a measured subset footprint and the existing 50 GiB reserve.",
+    "scope": "Read-only metadata/source inspection. No upstream code, installer, harness or benchmark task executed."
+  }
+}

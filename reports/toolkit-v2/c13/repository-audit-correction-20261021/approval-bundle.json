@@ -1,0 +1,84 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_digest": "5f4e318c7146419cf7c10f3c057e1b6fef6ea8fbc6f607e221759a67820ba9c6",
+  "runner_sha256": "2a2924d045f7871085aed9cfac13d7466f296f09f0daac3e0be83b00c5b59421",
+  "actions": [
+    {
+      "name": "grader",
+      "review": "reports/toolkit-v2/c13/repository-audit-correction-20261021/grader-operation-review.json",
+      "review_sha256": "8b4f4902fcb1e22deedf710e91e87ea72dacb00e61c4f63bc3411fbe45e7c54c",
+      "runner": "reports/toolkit-v2/c13/repository-audit-correction-20261021/run-grader-review.py",
+      "runner_sha256": "8f5225e51b286a5d5a11ae36075edd6925171e3e949fc82d883f72ecf494167f",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-audit-correction-20261021/run-grader-review.py",
+        "8b4f4902fcb1e22deedf710e91e87ea72dacb00e61c4f63bc3411fbe45e7c54c"
+      ],
+      "approval_record": "reports/toolkit-v2/c13/repository-audit-correction-20261021/grader-operator-approval.json",
+      "started_marker": "reports/toolkit-v2/c13/repository-audit-correction-20261021/grader-execution-started.json",
+      "terminal_result": "reports/toolkit-v2/c13/repository-audit-correction-20261021/grader-execution-result.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "passed": true,
+        "contained_calls_started": 23,
+        "source_unchanged": true,
+        "host_canary_removed": true,
+        "containers_removed": true,
+        "ledger_operations": 25,
+        "elapsed_complete": true
+      }
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/operation-review.json",
+      "review_sha256": "16acb6b809f295ee39eec91a701230f32945be81b0692517b3d18fac29778c85",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/run_review.py",
+      "runner_sha256": "c03c852c12bda49c06ddfd4e3f629e5a89e34503b6f7861d642626cb62d9309d",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/run_review.py",
+        "--execute-reviewed-digest",
+        "d326616bb25e6b2c45903a4999ee2831e75257284aa67cd34008916cae4a6304"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-repository-audit-20261021/execution/summary.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "installed_cli_checks": 17,
+        "installed_capture_checks": 1,
+        "runtime_removed": true,
+        "private_scratch_removed": true
+      }
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/operation-review.json",
+      "review_sha256": "8a6489e778f321240ff86b8106b5427e37588af8894fa16875ed5144c2a333ff",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/run-review.py",
+      "runner_sha256": "c85b7c2369ef32a8153910e69b27be2ca0717f25fa9ecb8801499a9a0d103f63",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/run-review.py",
+        "8a6489e778f321240ff86b8106b5427e37588af8894fa16875ed5144c2a333ff"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-repository-audit-review-20261021/execution-result.json",
+      "maximum_seconds": 240,
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      }
+    }
+  ],
+  "purpose": "Complete protected grader conformance after correcting the receipt audit, and validate the adapter-boundary fix from the changed wheel; no model campaign or release.",
+  "permissions": "23 offline contained observations through 25 existing-grant operations, at most 1240 reserved seconds; 33 cached wheels and 18 sandboxed offline installed checks; pinned cached Lychee 0.24.2 offline documentation scan. No downloads, builds/pulls of images, model proxy, model turns, credentials, external services, cash, activation, publication or retained-resource deletion.",
+  "approval_reason": "The pasted continuation excludes untrusted software execution; CONTINUATION.md requires applicable container-provisioning authority. Earlier exact bundles are terminal and bind older artifacts. Routine definition review and finite grant scope amendments remain delegated; counters are preserved.",
+  "approval_rule": "One explicit human approval covers these three raw component digests, one execution attempt each. Do not replay a started component. A dispatcher failure does not revoke an unstarted independent component; it may run under this same approval after source/artifact checks.",
+  "previous_failed_attempt": "Bundle 0d992ca9 grader review stopped after 1 observation because its audit expected omitted receipt metadata. The canonical attempt is COMPLETED and its derived owned container is absent. Preserve that failure and its 3 charges; this is one fresh source-bound correction attempt, never a replay of the previous plan ID.",
+  "audit_regression": "receipt-audit-regression.json passes six checks against the actual minimized receipt, including five rejected misbindings. check_assessment_policy.py now passes with provider validation owned by the host registry.",
+  "approved": false,
+  "execution_started": false
+}

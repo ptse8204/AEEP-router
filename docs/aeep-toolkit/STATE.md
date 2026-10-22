@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21: approved offline bundle executed once; installed package and documentation passed; grader review stopped on an audit-script error after one observation.**
+**Status as of 2026-10-21: corrected audit and adapter boundary fully source-verified; exact correction bundle 9aaa3f73 is prepared and unexecuted.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -42,23 +42,23 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: '9dabc5bd852853a49ab758eab68234ea6b64d17a'
-last_check_command: 'repository-value-20261021/bundle-execution-result.json; failed-attempt-reconciliation.json'
-last_check_result: 'Exact bundle approved and executed once. Package 18 checks and offline docs passed. Grader stopped after 1 observation: minimized receipt metadata omits container_image/container_name. All 3 charged operations have elapsed measurements; canonical attempt COMPLETED and exact owned container absent. No replay or model calls.'
-next_action: 'Correct the review audit to bind the canonical attempt, executor fingerprint and frozen environment; preserve the failed run. Resolve catalog-normalizer layering through the host registry, verify source, then prepare one exact correction review. Independent real-task holdouts, host mapping and frozen live usefulness/selection plans remain required.'
+last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
+last_check_command: 'repository-audit-correction-20261021/validation-v2/source-stability.json; supplemental/summary.json; prepared-bundle-audit.json; controlled-lifecycle-audit.json'
+last_check_result: 'Source 5f4e318c: both full runs 1623 passed, 21 skipped, 1 existing warning; 82% coverage and both branch gates pass. All 13 integrated and 9 supplemental checks pass, including 13 Node tests. Six receipt-audit regressions and canonical synthetic lifecycle verification pass. Previous package/docs passed; old grader failure retained and reconciled. New exact bundle prepared; no new contained or installed execution.'
+next_action: 'Record actual human approval of approval-bundle.json SHA256 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20 in bundle-operator-approval.json; then run run-bundle.py with that raw digest. Never replay a started component. Retain the earlier failure and its charges. Independently curated workload cohorts and complete frozen four-arm/selection plans remain later scientific work. The three-profile repository mapping is inert and unqualified. Score only an actual human control response; its question is recorded separately.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Bundle 0d992ca9 is terminal: package/docs passed; grader audit failed. Its no-replay rule requires a new exact review before another contained grader attempt. Routine source corrections and finite definition amendments remain delegated.'
+  - 'Correction bundle 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20 awaits actual approval: 23 fresh offline observations, 25 existing-grant operations / 1240 reserved seconds, changed wheel plus 32 cached dependencies / 18 installed checks, cached offline docs checker. No models or downloads. Prior bundle is terminal; definitions and finite amendments remain delegated.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
-  - 'The 9dabc5b repository-grader wheel now passed 18 private installed checks; actual contained grading remains incomplete. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
+  - 'The 9dabc5b repository-grader wheel passed 18 private installed checks; this does not validate the changed 5f4e318c wheel. Actual contained grading remains incomplete. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
   - 'Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions stay explicit.'
 ```
 
@@ -2550,3 +2550,78 @@ allowlist; fix the audit using the canonical attempt and frozen environment.
 
 C13 remains BLOCKED. No candidate-value, selection-quality, resource-acceptance,
 human-control or release gate changes from these offline results.
+
+### Receipt-audit correction and fresh management fixture
+
+Code commit 6e30868; source digest
+5f4e318c7146419cf7c10f3c057e1b6fef6ea8fbc6f607e221759a67820ba9c6.
+The corrected review uses the canonical completed attempt, matching executor
+fingerprint and terminal receipt list to derive its owned container name. Six
+regression cases pass against the actual minimized receipt without changing the
+canonical database or starting a container. The existing privacy allowlist stays
+unchanged. Catalog telemetry validation now belongs to the built-in host registry;
+the existing provider validator and versioned envelope remain unchanged. The
+policy checker and all nine supplemental checks pass, including 13 Node tests.
+
+The fresh first-party controlled lifecycle fixture passed on this source. Its
+record is fit_0cba6072179b440896d4d4b188a350dd, admission
+admission_354158ef28ee409d80057592d0ac97b3, task receipt
+rcpt_efa82443850b44e997981b4e408ea85e. Canonical verification checks admission,
+use, revocation, stale-decision rejection and baseline selection. This synthetic
+fixture used a separate controlled-fixture-only local ledger; the existing
+onboarding counters remain exactly unchanged. Its approximately 3.5 MB workspace
+is retained under `.aeep/repository-audit-correction-20261021/controlled-lifecycle`.
+It is neither real candidate value nor a live selection-policy comparison.
+
+Full source checks are running; no current-source package install or fresh
+contained grader attempt has run. The earlier 4186325d package/docs results retain
+their original scope. A new exact correction review is being prepared. No model
+turn, download, image change, credential access, release or retained-resource
+cleanup was added. The six-probe first-party docs sandbox preflight passed and
+removed its owned scratch. The pinned documentation binary has not been rerun.
+
+### Corrected source verified and exact review frozen
+
+Both full runs passed 1623 tests, 21 skips and one existing warning. Coverage
+reports 82%; both critical branch gates pass. All 13 integrated checks pass,
+including the now-clean layering check, full-source mypy (167 files), schemas,
+Ruff and wheel/sdist builds. Source digest stayed 5f4e318c throughout. All nine
+supplemental checks pass, including 13 Node tests using existing dependencies;
+the temporary link was removed. Documentation lint found extra blank lines in the new architecture and appended
+decision/upstream prose; those lines were corrected. Failed logs remain. Current configured
+Markdown lint is checked separately from the pending pinned link scan.
+
+Exact correction bundle:
+`reports/toolkit-v2/c13/repository-audit-correction-20261021/approval-bundle.json`,
+SHA-256 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20.
+The readable review is EXECUTION_REVIEW.md. Components bind grader review
+8b4f4902fcb1e22deedf710e91e87ea72dacb00e61c4f63bc3411fbe45e7c54c,
+package review 16acb6b809f295ee39eec91a701230f32945be81b0692517b3d18fac29778c85,
+and docs review 8a6489e778f321240ff86b8106b5427e37588af8894fa16875ed5144c2a333ff.
+The new wheel SHA-256 is 11f798a762bdcdf7095164202d870822cc2374664764d508e4a25279087cae45.
+All 33 cached wheels and six relevant installed-source modules match exact pins.
+The inert cache is /private/tmp/aeep-repository-wheel-review-o6vuu_zv; preserve it
+until the review resolves. No runtime is installed. The fresh grader request is
+recipe_generation_924370040ba64561b68940a8999f584f; it is distinct from the failed
+request. No component has an approval record or started marker.
+
+The permission bound remains 23 offline observations, 25 canonical operations,
+at most 1240 reserved seconds, 18 private installed checks and one cached offline
+docs scan. The earlier three charges stay. No model, download, image build/pull,
+credential, cash, activation, publication or retained-resource deletion is included.
+After actual approval, save its verbatim text and raw bundle digest, then run the
+bundled driver once. A dispatcher failure does not revoke unstarted independent
+components, but started components cannot replay.
+
+Independent safe work produced an inert three-profile repository mapping with
+identical optional comparison instructions and schemas, plus a separate required
+qualification profile. It inherits no old conformance. Complete four-arm mapping
+still requires actual training data and its frozen reusable challenger. No new
+cohort or live study is claimed. The upstream source follow-up confirms the
+harness license and records dataset/source-rights and compatibility gaps without
+executing upstream code. The actual assisted control follow-up was presented
+through request_user_input_async and is recorded in
+`reports/toolkit-v2/c13/human-comprehension/control-followup-20261022.json`;
+no human response has been supplied. C13 stays BLOCKED. Resource targets remain
+workload hypotheses; the management fixture and source checks do not establish
+comparative usefulness, live selection value or resource acceptance.

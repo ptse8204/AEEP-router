@@ -442,3 +442,14 @@ The new code does not qualify their worker boundary or establish any capability'
 benefit. Source tests are running; one exact no-model review will cover contained
 grader checks, the changed wheel and the existing pinned offline documentation
 checker. Independent real-task holdouts and live comparison remain open.
+
+### Repository-workload source follow-up
+
+The pinned SWE-bench harness LICENSE confirms MIT. The pinned Verified dataset
+card lists 500 issue/PR pairs and gold/test fields but has no license declaration.
+Underlying repository and dataset rights still need a task-specific review before
+adoption or redistribution. No task rows, test harness or upstream code were
+executed; no holdout cohort was selected. The bounded callable grader is not a
+full-repository SWE-bench adapter. Exact read-only source hashes and exclusions are
+in `reports/toolkit-v2/c13/repository-audit-correction-20261021/independent-upstream-followup.json`.
+Agent-skill-eval and the recorded managed-path fallback remain unchanged.
