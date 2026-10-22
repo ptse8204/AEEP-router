@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21: repository-task grading and selection scoring implemented; source verification passed; exact offline bundle 0d992ca9 awaits operator approval.**
+**Status as of 2026-10-21: approved offline bundle executed once; installed package and documentation passed; grader review stopped on an audit-script error after one observation.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -43,22 +43,22 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '9dabc5bd852853a49ab758eab68234ea6b64d17a'
-last_check_command: 'repository-value-20261021/validation-v2/checks.json; supplemental/checks.json; prepared-bundle-audit.json; preservation-audit.json'
-last_check_result: '1619 pytest passes, 21 skips, 1 existing warning in both ordinary/coverage runs; 82% coverage and both branch gates pass. All 12 integrated checks pass; full-source typing 167 files and Node 13 tests pass. Supplemental 8/9: unchanged router.py:747 provider import fails the layering checker. No new live efficacy or selection result; exact offline bundle pending.'
-next_action: 'Await actual human approval of approval-bundle.json SHA256 0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8. Record the verbatim response in bundle-operator-approval.json, then run run-bundle.py with that raw digest. Never replay a started component; unstarted independent components remain covered by this exact approval. After these checks, resolve the existing catalog-normalizer layering issue and prepare genuinely independent tasks, host mapping and frozen usefulness/selection plans. No historical study replay or arbitrary resource campaign.'
+last_check_command: 'repository-value-20261021/bundle-execution-result.json; failed-attempt-reconciliation.json'
+last_check_result: 'Exact bundle approved and executed once. Package 18 checks and offline docs passed. Grader stopped after 1 observation: minimized receipt metadata omits container_image/container_name. All 3 charged operations have elapsed measurements; canonical attempt COMPLETED and exact owned container absent. No replay or model calls.'
+next_action: 'Correct the review audit to bind the canonical attempt, executor fingerprint and frozen environment; preserve the failed run. Resolve catalog-normalizer layering through the host registry, verify source, then prepare one exact correction review. Independent real-task holdouts, host mapping and frozen live usefulness/selection plans remain required.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Exact bundle 0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8 is pending human approval for 23 contained grader calls, 25 total canonical operations with 1240 reserved seconds, 18 private installed checks and the pinned offline docs checker. Zero models/cash/downloads; no execution yet.'
+  - 'Bundle 0d992ca9 is terminal: package/docs passed; grader audit failed. Its no-replay rule requires a new exact review before another contained grader attempt. Routine source corrections and finite definition amendments remain delegated.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
-  - 'The 7707756 wheel passed 16 installed checks; it does not validate the new repository-grader wheel. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
+  - 'The 9dabc5b repository-grader wheel now passed 18 private installed checks; actual contained grading remains incomplete. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
   - 'Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions stay explicit.'
 ```
 
@@ -2523,3 +2523,30 @@ runtime source while this bundle is pending or running. If the dispatcher fails,
 never replay started components; still-unstarted independent components retain
 the same exact approval. Current source/installation/receipt evidence must be
 refreshed after any later code change.
+
+### Approved offline bundle executed once (2026-10-22 UTC)
+
+The operator answered “Approve this exact offline bundle” for raw SHA-256
+0d992ca99434868472bb47bced1785fadc92488e73ca1573c2bfc1d841730cc8.
+`bundle-operator-approval.json` retains that response. Source digest 4186325d
+remained unchanged. The package passed 17 CLI checks and one retained capture
+check; its private runtime and scratch were removed. The pinned offline docs
+check passed and removed its unchanged runtime. No downloads or model calls ran.
+
+The grader review stopped on its first contained observation because its audit
+expected container_image/container_name in minimized stored receipt metadata.
+The actual receipt reports success, but the boundary assertion and remaining
+22 calls did not complete, so this is not a grader pass. Three canonical
+operations remain charged, all with measured elapsed time. Global usage moved
+from 12784 to 12787 operations, with 3744 model turns unchanged and elapsed
+118135.15962675912 seconds. The raw unavailable accounting fields remain unknown.
+
+Read-only reconciliation binds the receipt to canonical attempt
+attempt_020facbbd49643bcbf546faa7a75f88b, state COMPLETED. Its exact deterministic
+container name is absent from all running and stopped containers. The owned
+canary was removed. `failed-attempt-reconciliation.json` adds those observations
+without changing the failed result or replaying it. Keep the receipt privacy
+allowlist; fix the audit using the canonical attempt and frozen environment.
+
+C13 remains BLOCKED. No candidate-value, selection-quality, resource-acceptance,
+human-control or release gate changes from these offline results.

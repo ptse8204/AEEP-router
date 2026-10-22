@@ -4898,3 +4898,22 @@ style issues outside the configured Makefile documentation scope. Its original
 prefix is preserved byte-for-byte; only the new addendum is linted separately.
 The configured 69 active documents and new execution review are checked on their
 current bytes. No historical whitespace/fence rewrite is used to obtain a pass.
+
+
+## Toolkit C13 approved offline execution (2026-10-22 UTC)
+
+Bundle 0d992ca9 was explicitly approved and executed once on source 4186325d.
+The new wheel passed all 18 sandboxed installed checks; offline documentation
+passed. Both private runtimes were removed. The contained-grader review failed
+after its first observation because its audit expected metadata deliberately
+omitted from persisted receipts. Three operations retain their charges and
+elapsed measurements; no model calls occurred. The canonical attempt completed,
+and a read-only lookup confirmed its exact owned container is absent.
+
+Evidence is in `reports/toolkit-v2/c13/repository-value-20261021/`:
+`bundle-operator-approval.json`, `bundle-execution-result.json`,
+`grader-operation-ledger.json`, and `failed-attempt-reconciliation.json`.
+The failed result is unchanged and unreplayed. Fix the audit and existing
+provider-layering failure before proposing a new exact contained attempt.
+Usefulness, live selection, human control, resource acceptance and release stay
+separate and open; these checks do not support a benefit claim.
