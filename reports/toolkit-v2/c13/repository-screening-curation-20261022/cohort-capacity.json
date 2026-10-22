@@ -1,0 +1,70 @@
+{
+  "schema_version": "aeep.repository-cohort-capacity.v1",
+  "metadata_only": true,
+  "dataset_revision": "34d5a58864acf91613740a09ec5d205228dcfa39",
+  "pool_sha256": "853342d3cb7960bf6d65b576ec6e0097195f691215f5ed45410b4cb8bb8f00e3",
+  "inventory_sha256": "d6f6a0696c4752d8a0204afa7e43ee5f9c5af71dd0b165e9c82f2ff416a7e160",
+  "candidate_issues": 435,
+  "candidate_repositories": 243,
+  "excluded_counts": {
+    "required_test_outside_current_tests_directory_contract": 249,
+    "existing_metadata_blocker": 176
+  },
+  "family_issue_counts": {
+    "single-file-repair": 291,
+    "multi-file-repair": 144
+  },
+  "family_repository_counts": {
+    "single-file-repair": 184,
+    "multi-file-repair": 101
+  },
+  "balanced_planning_counts": {
+    "qualification": {
+      "single-file-repair": 3,
+      "multi-file-repair": 3,
+      "contract-audit": 2
+    },
+    "training": {
+      "single-file-repair": 9,
+      "multi-file-repair": 9,
+      "contract-audit": 10
+    },
+    "holdout": {
+      "single-file-repair": 35,
+      "multi-file-repair": 35,
+      "contract-audit": 35
+    }
+  },
+  "planning_counts_are_not_frozen_stages": true,
+  "necessary_repository_capacity_checks": {
+    "at_least_141_total": true,
+    "at_least_47_single_file": true,
+    "at_least_47_multi_file": true
+  },
+  "caveat": "These are necessary counts, not proof of a jointly assignable licensed/reproducible cohort. Audits must be authored from distinct corrected snapshots and separately verified, never relabeled buggy issues.",
+  "unresolved_per_case": [
+    "source archive/license/edit-scope review",
+    "runtime closure and adapted version applicability",
+    "published reference and original/counterexample reproduction",
+    "authored audit contract where applicable",
+    "repository-grouped stage independence and final balanced freeze"
+  ],
+  "next_execution_review": "operation-review.json",
+  "cases_adopted": 0,
+  "stage_assignments_frozen": 0,
+  "model_trials": 0,
+  "external_code_executed": false,
+  "critical_path": [
+    "Verify new workload references and counterexamples",
+    "Finish reproducible independent balanced8/28/105 cohorts",
+    "Freeze exact worker/candidate/model/metric definitions",
+    "Run required-use capability qualification",
+    "Run optional-use paired comparisons including stronger baseline and candidate-use capture",
+    "Evaluate actual AEEP selection against independent value evidence and equal-inventory alternatives"
+  ],
+  "separate_gates": [
+    "human control comprehension/use",
+    "workload-derived infrastructure resource acceptance",
+    "release authorization"
+  ]
+}

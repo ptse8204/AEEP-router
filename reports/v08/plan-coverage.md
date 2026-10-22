@@ -5100,3 +5100,63 @@ records; those formatting defects are corrected. Fresh offline link checking
 awaits the exact binary execution approval. Human control-use response, reproducible
 independent workloads, actual capability value, live selection outcomes,
 workload-derived resource acceptance and release remain separate open gates.
+
+
+### October22 execution: package/docs complete; one development fault uncertified
+
+Actual approvala2787cd8 ran once. The current-source wheel passed19 private
+installed checks and `make docs-check` passed with pinned cached Lychee0.24.2;
+actual document hashes are retained. Both owned runtimes were removed. No source,
+package or docs-binary check needs repeating for these report-only updates.
+
+The first grader attempt stopped after6 calls because my report assertion allowed
+only fault exit1/2; AEEP correctly returned invalid/missing at exit4. Both raw
+result and terminal failure are retained. Seven pure audit regressions pass.
+Actual approval6174f3e4 then executed the6 previously unstarted observations.
+Click3 variants and Marshmallow repair/original checks passed. The last import
+fault caused a protected protocol error before raw-reply retention. Its exact
+malformed field and candidate grade remain unknown; do not infer them from the
+outer process exit0 or turn that terminal attempt into PASS.
+
+All three repairs pass912 required identities. Originals fail11 bug identities
+and preserve901. Click also skips3 nonrequired identities. All12 canonical
+attempts/receipts were reopened, all owned containers are absent, and all16
+operations/25.252911291550845 charged seconds remain. Counters now12836 operations,
+3744 turns,118198.28709075786 seconds and0.0 cash. Product sourcefcd91dde is unchanged.
+
+Exact review89245763 prepares one new URL-validator bypass fault and bounded raw
+reply retention, with all190 identities required, five bug tests still passed
+and a preservation failure required. Seventeen static conditions pass; its actual
+approval is pending. It permits one call/3 operations/185 reserved seconds with
+no models, installs, docs reruns, downloads, images, credentials, cash or release.
+The older missing reply remains unresolved. Live value/selection, independent
+cohorts, human controls, workload-derived resource adequacy and release remain
+open, with the historical model comparison still INCONCLUSIVE.
+
+### October22: final development fault passed; independent workload review ready
+
+Actual review 89245763 ran once and passed. It observed all 190 required identities:
+122 passed,68 failed, with the five repaired bug tests still passed. AEEP rejected
+the URL-validation bypass as invalid/test_failure. The raw reply was saved before
+validation. The completed canonical attempt/receipt was reopened and its owned
+container was absent. Both earlier terminal failures and their charges remain.
+The lost import-fault reply is still unknown.
+
+The composed result covers 13 physical calls and 19 operations across 3 reviews,
+charging 28.10147966630757 seconds. Counters are 12839 operations, 3744 model turns,
+118201.13565913262 seconds and0.0 cash. Current source fcd91dde, installed-wheel 19
+checks and offline docs remain verified. No product source changed and no broad
+test, wheel reinstall or docs-binary rerun is needed for these progress records.
+
+Eight provisional, source-grounded cases from eight new repositories are prepared
+as inert data: four single-file repairs, two multi-file repairs and two authored
+correct-snapshot audits. Sixteen staged payloads and 68 assets verify. Twelve pure
+classifier checks pass; 368 reference test identities are specified, not executed.
+Their family mix is not the final balanced screening stage. The new finite exact
+review 4cfc412d awaits approval for at most 16 offline calls / 18 operations / 710 seconds.
+It excludes models, installers, downloads, image changes, docs reruns, credentials,
+cash, activation and release. Independent case failures are recorded without
+aborting unrelated cases; common accounting/authority/cleanup uncertainty stops
+dispatch. Full independent cohorts, capability qualification and comparative
+usefulness, live selection outcomes, actual human control use and separate
+workload-derived resource acceptance remain open.

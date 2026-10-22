@@ -1,0 +1,17 @@
+{
+  "draft": "prepared-cases.json",
+  "prepared_cases": 6,
+  "failed_entries": [
+    {
+      "id": "spulec__freezegun-582",
+      "reason": "The helper permitted omitted documentation only by .md/.rst/.txt suffix; this published repair also changes an extensionless CHANGELOG."
+    },
+    {
+      "id": "jsonpickle__jsonpickle-587",
+      "reason": "The published patch includes .gitignore, pre-commit revision bumps and Ruff-only pyproject settings in addition to its Python repair and release docs. These non-source paths were not in the helper whitelist."
+    }
+  ],
+  "correction": "Explicit case-specific source-only adaptation after static diff review. Keep original configuration, packaging and docs; apply only Python behavior changes. TOML comparison proves jsonpickle changes only Ruff config. No dependency, pytest option, core edit guard or scientific threshold changed.",
+  "original_draft_preserved": true,
+  "external_code_executed": false
+}

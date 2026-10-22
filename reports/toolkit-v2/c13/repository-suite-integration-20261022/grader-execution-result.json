@@ -1,0 +1,230 @@
+{
+  "passed": false,
+  "review_sha256": "d1d7395d051d7928510fa009daab5537211cdbb8958ece2846795cffe90135fe",
+  "source_digest": "fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "name": "boundary",
+      "passed": true,
+      "observations": {
+        "statuses": {
+          "tests/test_boundary.py::test_boundary": "PASSED"
+        },
+        "exit_code": 0,
+        "archive_sha256": "fb20115ef0880b94b8f62f5aced0e79232095e4b73d503d2f7fe9e1fc8561223",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    },
+    {
+      "name": "state_write",
+      "passed": true,
+      "observations": {
+        "statuses": {
+          "tests/test_boundary.py::test_state": "PASSED"
+        },
+        "exit_code": 0,
+        "archive_sha256": "28a7369edb400a427c460869fce59f321f7cf4260363abe7b8e99edc2ae8207d",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    },
+    {
+      "name": "state_read",
+      "passed": true,
+      "observations": {
+        "statuses": {
+          "tests/test_boundary.py::test_state": "PASSED"
+        },
+        "exit_code": 0,
+        "archive_sha256": "3d2d98d4adc92c2bf968e57c6a60ecb762020abdc490f5eb8df63301ee6b704a",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-reference",
+      "passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "",
+        "trust": "verified"
+      },
+      "observations": {
+        "statuses": {
+          "tests/test_add_option_format.py::test_format[a-Message:": "PASSED",
+          "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "PASSED",
+          "tests/test_add_option_format.py::test_format[c-{level}": "PASSED",
+          "tests/test_add_option_format.py::test_format[d-{message}": "PASSED",
+          "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "PASSED",
+          "tests/test_add_option_format.py::test_format[f-<lambda>-f": "PASSED",
+          "tests/test_add_option_format.py::test_progressive_format": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_without_exception": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_with_exception": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[True]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[False]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "PASSED",
+          "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "PASSED"
+        },
+        "exit_code": 0,
+        "archive_sha256": "ac9a036384bd2795766446694410ddce2b5e76b0d8149b37b4e791aa2164b486",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-unchanged",
+      "passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "test_failure",
+        "trust": "verified"
+      },
+      "observations": {
+        "statuses": {
+          "tests/test_add_option_format.py::test_format[a-Message:": "PASSED",
+          "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "PASSED",
+          "tests/test_add_option_format.py::test_format[c-{level}": "PASSED",
+          "tests/test_add_option_format.py::test_format[d-{message}": "PASSED",
+          "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "PASSED",
+          "tests/test_add_option_format.py::test_format[f-<lambda>-f": "PASSED",
+          "tests/test_add_option_format.py::test_progressive_format": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_without_exception": "PASSED",
+          "tests/test_add_option_format.py::test_function_format_with_exception": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[True]": "PASSED",
+          "tests/test_add_option_format.py::test_markup_in_field[False]": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+          "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "PASSED",
+          "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "FAILED",
+          "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "FAILED"
+        },
+        "exit_code": 1,
+        "archive_sha256": "33c01e84340daf80e5f2e00f186bfc5467e6a5ad572908bc42dd1d553f298088",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-semantic_fault",
+      "passed": false,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "missing_test",
+        "trust": "verified"
+      },
+      "observations": {
+        "statuses": {},
+        "exit_code": 4,
+        "archive_sha256": "b90fe275eab7a52c823eb8302a9307c433b36e54f89bbb0584331e06ab13758b",
+        "python": "3.13",
+        "pytest": "8.3.5"
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "name": "boundary",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-1",
+      "receipt_id": "rcpt_e2468e491b874349ba156db2c3f8f4e4",
+      "receipt_ref": "374dcc3c164f8a2ee50c2daa76f83c6b7704e4ba9d31ce63dd6dadb4f92e2f14",
+      "container_name": "aeep-35fb10ed4fb9be6176e4edff6e69458c",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    },
+    {
+      "name": "state_write",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-2",
+      "receipt_id": "rcpt_37b6ae7fc9d649afb75016651d64d66c",
+      "receipt_ref": "00df50ebfd9d55b421f3e593347c90e739068f75233e5e06930d52beb7702cdd",
+      "container_name": "aeep-187f3bac04307d02487baaf0194a9e15",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    },
+    {
+      "name": "state_read",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-3",
+      "receipt_id": "rcpt_8623f35ddd954ab78c5fb9fdd9af5e0f",
+      "receipt_ref": "213cdd926e56d70b60db8cbdb72d9de10ed3c9598a0903845c31dd6ecfe3d206",
+      "container_name": "aeep-ce756c07b1cfd33f0f1183b3c14986fc",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    },
+    {
+      "name": "delgan__loguru-1451-reference",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-4",
+      "receipt_id": "rcpt_d3a0f782efb740888ad1839579c1c857",
+      "receipt_ref": "c60f7af38df056a3f4bb5bfedb11f7ce3d432bd616c76e3d40242c3e85fce008",
+      "container_name": "aeep-3461c409ec27ba93a39a4f3dba1eb9b8",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    },
+    {
+      "name": "delgan__loguru-1451-unchanged",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-5",
+      "receipt_id": "rcpt_0d97c94679c54a11b13e9489511bdea7",
+      "receipt_ref": "0e1919884f30f440c07a4483b8f4bce94ed023c5bd8528ff3ae7f10460133a07",
+      "container_name": "aeep-3c7c312e36d98a8fede9a554c6770766",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    },
+    {
+      "name": "delgan__loguru-1451-semantic_fault",
+      "operation_id": "recipe_generation_a71ac46e6b354e58bfed5ec0fac6b815-call-6",
+      "receipt_id": "rcpt_5981b59eb04b4544b3d2111f9477f9d8",
+      "receipt_ref": "ad638284aeb12fdaabe6405e9351c0c50f4eb1d3f8d14207c092a1d7a4e3d9b6",
+      "container_name": "aeep-4c4ecbd82c92dacb771abd2cd098c553",
+      "container_removed": true,
+      "environment_digest": "3aa482e77112fd3d385148c4e008515e11da5f28cbfc17018717d8f24287c945"
+    }
+  ],
+  "grant_before": [
+    12820,
+    3744,
+    118173.03417946631,
+    "0.0"
+  ],
+  "error_type": "AssertionError",
+  "ledger_operations": 8,
+  "elapsed_complete": true,
+  "contained_calls_started": 6,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "grant_after": [
+    12828,
+    3744,
+    118184.57463979907,
+    "0.0"
+  ],
+  "canary_removed": true,
+  "elapsed_seconds": 11.658886957913637
+}

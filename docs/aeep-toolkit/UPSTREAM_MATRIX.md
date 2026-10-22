@@ -528,3 +528,45 @@ Exact bundle `a2787cd8` awaits approval for changed-pack conformance, current-wh
 installation checks and pinned offline docs. All components are unstarted.
 The agent-skill-eval fallback and other optional integration dispositions remain
 unchanged. Comparative usefulness and live selection have no new evidence.
+
+### October22 execution: three real repair/original pairs verified
+
+The current v5 observer ran Loguru, Click and Marshmallow in the pinned offline
+image. Published repairs passed912 required test identities. Original sources
+failed11 declared bug tests while preserving901 existing identities. Click's
+three nonrequired skips are separate. The Python/pytest adaptations remain
+explicit; this is not official upstream image equivalence or model qualification.
+
+The current wheel passed nineteen installed checks and pinned offline docs
+passed. Both private runtimes were removed. Two terminal grader-review failures
+are preserved: a report assertion on rejected pytest exit4, then a fail-closed
+protocol error on the last Marshmallow import fault. Its raw reply was not retained,
+so its malformed field and grade remain unknown. All twelve physical attempts
+and receipts were independently reopened; owned containers are absent.
+
+One reviewed semantic-fault replacement is pending at
+`reports/toolkit-v2/c13/repository-suite-semantic-fault-20261022/operation-review.json`.
+It changes deliberate source data and retains its next reply, with no product,
+upstream dependency, image, model, installer or docs-checker change. Reproducible
+independent cohorts and useful-capability/selection evidence remain open.
+
+### October22: development conformance complete; new workload curation prepared
+
+Actual approval `89245763` passed the new Marshmallow semantic-fault observation:
+all 190 identities observed, all five repaired bug tests still passed,68
+preservation failures and an invalid/test_failure grade. The bounded raw reply is
+retained. Across three attempts all 13 canonical receipts were reopened; owned
+containers are absent. Both earlier terminal failures remain preserved.
+
+Eight provisional cases reuse pinned SWE-rebench issue metadata and real tests
+from Python-markdownify, Python-Markdown, Mahjong, Dissect.cstruct, Mockito-python,
+Files-to-prompt, Freezegun and Jsonpickle. Exact commits, archive hashes, individual
+MIT/BSD-3-Clause/Apache-2.0 licenses and adaptation exclusions are retained in
+`reports/toolkit-v2/c13/repository-screening-curation-20261022/prepared-cases.json`.
+Metadata stays at `34d5a58864acf91613740a09ec5d205228dcfa39`; the reused MIT pytest
+parser stays at `980d0cca8aa4e73f1d9f894e906370bef8c4de8a`.
+Two cases are explicitly authored audits starting from published repaired source.
+Official BeautifulSoup4.12.3 and Soupsieve2.6 pure wheels were cached as inert data,
+with licenses and hashes; neither was installed or executed. Runtime reproduction
+under Python3.13/pytest8.3.5 is unverified and needs the exact new execution review.
+No upstream evaluator disposition, model result or admission changed.

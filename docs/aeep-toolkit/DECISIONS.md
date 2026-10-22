@@ -1124,3 +1124,49 @@ Continue with licensed reproducible cohorts, then required-use qualification and
 optional-use comparison. Selection labels require actual independent value
 results. Metadata candidates, working reference repairs and resource adequacy
 cannot supply those results. Existing frozen thresholds and counters stay intact.
+
+### D81 — Preserve failed attempts and replace only the uncertified fault datum
+
+Actual approvals a2787cd8 and6174f3e4 were exercised once. The changed wheel's
+nineteen private installed checks and the pinned offline docs check passed.
+All three real repairs pass their912 required identities; originals fail11 bug
+identities and preserve901. These development results establish no model benefit.
+
+The first review script mishandled a rejected fault's pytest exit4. A pure audit
+regression checks its correction. The next attempt's final import-fault reply
+failed protocol validation before raw reply retention. Preserve both terminal
+failures and all16 operation charges. The second malformed field and its grade
+remain unknown; a later result cannot repair that history.
+
+Review89245763 changes only the deliberate Marshmallow counterexample and its
+report driver. A leading return bypasses URL validation while keeping imports
+intact. Require all190 test identities, five bug tests still passed, at least one
+preservation failure and a valid invalid/test_failure result. Retain its bounded
+public-test reply before validation. No product, observer, dependency, positive
+case, permission ceiling or utility threshold changes. This is development data,
+not a frozen holdout revision. One fresh exact approval is required; no completed
+call, wheel check or docs binary is replayed.
+
+### D82 — Finish development conformance, then reproduce independent workloads
+
+Actual approval `89245763` completed the remaining semantic-fault check. All190
+required identities were observed, five repaired bug tests stayed passed and 68
+preservation tests failed. AEEP rejected the bypass as invalid/test_failure.
+The raw reply, canonical receipt and completed attempt are retained. Across the
+three approved attempts all 13 physical receipts were reopened and owned containers
+were absent. Preserve both earlier terminal failures and the lost reply as unknown.
+
+Continue with eight provisional cases from different repositories, excluding
+all four development repositories. Six use published source repairs; two are
+authored correct-snapshot audits with explicit byte-preservation contracts.
+Retain the real issue/test/repair provenance and source licenses. Their current
+4/2/2 family mix is a curation batch, not a balanced final screening stage.
+
+Review `4cfc412d` binds at most 16 offline reference/counterexample calls, 18
+operations and 710 reserved seconds. Reuse the exact source, observer, runtime,
+image and containment evidence. Do not reinstall the passed wheel or repeat docs
+execution. A nonreproducible case is recorded and excluded; independent cases
+continue after verified accounting and cleanup. Common authority, identity or
+lifecycle uncertainty stops dispatch. New third-party execution awaits its exact
+approval. No model, corpus adoption, value label, selection claim or resource
+acceptance follows from static preparation or reference reproduction.

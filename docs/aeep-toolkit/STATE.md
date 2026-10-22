@@ -1,12 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: upstream grader check passed; v5 repository-pack source checks passed; the exact combined execution review is awaiting approval.**
+**Status as of 2026-10-22: three-case repository development conformance, current installed wheel and docs passed; eight provisional screening candidates are prepared for reproduction.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
 All five reservations remain charged, including one preflight skip. The completed capture repair needs no further model turn, installation, rebuild,
 credential or architecture decision. The new repository-pack review is separate.
-The capture-repair profiles retain their source 7707756 scope. The bounded repository grader now has fresh offline conformance for source 5f4e318c on the fixed development cases; this is not live qualification or a full-repository grader.
+The capture-repair profiles retain their source 7707756 scope. The current repository grader has three-case offline development conformance on source `fcd91dde`. Independent runtime reproduction and model qualification remain separate.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
@@ -42,17 +42,20 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
-last_check_command: 'repository-suite-integration-20261022/verification-completion.json; prepared-bundle-audit.json; rebench-grader-20261022/completion-audit.json'
-last_check_result: 'Sourcefcd91dde:13/13 configured checks pass;1658 tests in each full run,21 skips,82% total coverage,both branch gates,9 supplemental proofs and13 Node tests pass. Wheel/sdist built; all33 cached wheel bytes and16 review-preparation conditions checked. New v5 containers, installed execution and offline link check remain unexecuted. Terminal56ca1751 prototype passed6 calls/8 operations on older source; no new model usage.'
-next_action: 'Read repository-suite-integration-20261022/approval-request.json and approval-bundle.json (SHA256 a2787cd8828ebbad3a06169c3df5793e0f43238ad4af57b026cac432a28fc739). Source verification session85683 is completed; do not repeat full tests on unchanged sourcefcd91dde. Await actual exact bundle approval, record its response, then execute run-bundle.py once with that digest. All components are currently unstarted. Audit actual receipts/attempts and cleanup afterward. Continue corpus curation and independent control follow-up; freeze no live campaign until reproducible independent workloads and applicable worker evidence exist.'
+last_verified_commit: '3557d88e65192e7409679d7654d95681d4aa8903'
+last_check_command: 'repository-suite-semantic-fault-20261022/composed-conformance.json; completion-audit.json; repository-screening-curation-20261022/prepared-cases.json'
+last_check_result: 'Actual89245763 approval used once; final fault observed190 identities, five bug tests passed and68 preservation tests failed; AEEP invalid/test_failure as required. Composed development conformance now covers3 real adapted cases and3 fault rejections. All13 physical attempts/receipts reopened;19 canonical operations across3 approved attempts charged28.10147966630757 seconds; all owned containers absent. Wheel19 checks and offline docs passed; private runtimes removed. Two terminal failures and old unretained reply UNKNOWN remain. Sourcefcd91dde unchanged; no models or cash. Eight provisional source-grounded screening cases prepared as inert data, not adopted or executed.'
+next_action: 'Review4cfc412d is concrete and awaiting actual user approval: repository-screening-curation-20261022/operation-review.json. Once approved, record the direct response in operator-approval.json, verify its SHA256 and execute run.py exactly once using Python3.13/PYTHONPATH=src. At most16 offline calls,18 operations,710 reserved seconds; no models/install/download/image/docs rerun. Skip an ineligible case and continue independent cases only after canonical accounting and cleanup verify. Reopen all receipts/attempts and reconcile counters afterward. Do not adopt/freeze this4/2/2 curation batch as the final balanced8-case screening stage. Reuse current source/wheel/docs checks. Continue independent141-case curation, qualification, usefulness and selection work under applicable authority.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Pending exact combined v5 reviewa2787cd8:12 fresh offline contained observations,14 existing-grant operations,630 reserved seconds; changed wheel plus32 cached dependencies and19 installed checks; pinned cached offline docs. No models, downloads, image changes, credentials, cash, activation or release. Actual response is not yet received.'
+  - 'Pending exact new eight-repository reproduction review4cfc412d5a08b93220bc318e55b85167c870d049f2350c983eda68a1cf18bb0b: at most16 contained calls/18 operations/710 reserved seconds; fresh untrusted source/test/pure-wheel execution and attempt-owned containers only. Actual approval has been requested but not received. No architecture choice, models, installs, downloads or cash.'
+  - 'None for completed89245763: actual exact approval exercised once and the semantic-fault check passed;3 operations charged. The grant is now12839 operations,3744 turns,118201.13565913262 seconds and0.0 cash. All three preceding reviews are terminal; no new source/runtime/model execution is authorized by them.'
+  - 'None for terminal six-call review6174f3e4: approved and all6 calls executed. Click3 variants and Marshmallow reference/original checked; last Marshmallow import-fault probe blocked at protocol validation with its raw reply unretained. Eight operations remain charged; no automatic retry.'
+  - 'None for terminal bundlea2787cd8: actual approval exercised; installed wheel19 checks and offline docs passed. Grader stopped after6 calls on a report-script exit-code defect; all8 operations and failed terminal result remain. No retry or future authority follows.'
   - 'None for completed upstream grader review56ca1751: actual approval exercised once; all six calls passed, eight operations charged and all owned containers removed. No future changed-pack execution, wheel installation or models are authorized by this terminal review. Continue first-party source verification and safe curation.'
   - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
@@ -2831,3 +2834,145 @@ corrected. The fresh full offline link check remains pending the exact binary
 execution approval. Public document inputs will be hashed at execution as stated
 in the review. Human control response, comparative usefulness, real selection
 outcomes, workload-derived resource acceptance and release remain open separately.
+
+## C13 — Approved bundle and six-call continuation executed; one fault remains
+
+Actual approvala2787cd8 was recorded and used once. The current wheel passed all
+nineteen private installed checks, including v5 export, exact installed module and
+parser/license bytes, and retained capture consistency. Pinned Lychee0.24.2 and
+`make docs-check` passed on the69 listed public documents. Both owned private
+runtimes were removed unchanged. No reinstall or docs-binary rerun is pending.
+These checks bind their actual document snapshot, before this evidence journal.
+
+The first grader component executed six calls and failed in my review script:
+AEEP correctly rejected the intentional Loguru import fault with invalid/missing
+and pytest exit4, but the script allowed only exit1/2. Its failed result remains
+unchanged. Seven pure audit regressions exercise the correction. The actual human
+then approved6174f3e4 for the six unstarted Click/Marshmallow observations. All six
+executed. Click reference/original/fault and Marshmallow reference/original passed
+their conformance checks. The last import-fault reply was rejected by the protected
+protocol validator before the driver retained it. Its exact malformed field and
+candidate grade remain unknown. The outer observer process exited0, which does
+not identify the inner test status. Do not invent a diagnosis or mark it passed.
+Both terminal failures remain in the records; neither approved attempt can replay.
+
+All three published repairs passed912 required test identities. The originals
+failed the expected11 bug identities and passed901 preservation identities.
+Click also had3 skipped nonrequired tests; these do not satisfy required results.
+The two completed fault grades are invalid. Twelve canonical attempts/receipts
+were reopened and all twelve owned containers are absent from running/stopped
+inventory. Sixteen operations charged25.252911291550845 seconds across both
+attempts; counters now12836 operations,3744 turns,118198.28709075786 seconds and0.0
+cash. No model turn, activation, image change, credential or release occurred.
+
+Review89245763 prepares exactly one new Marshmallow semantic counterexample.
+AST comparison verifies that its only change from the published repair is a
+leading `return value` in `URL.__call__`, bypassing validation without a deliberate
+import-time crash. All190 required identities must be observed, all5 bug tests
+must remain passed, at least one preservation test must fail, and AEEP must return
+invalid/test_failure with test exit1. Missing, malformed, error or skipped required
+results cannot satisfy this check. Its bounded public-test reply is retained before
+protocol validation so a failure is diagnosable. Seventeen static preparation
+conditions pass. The user question is pending; no call is started. This does not
+explain or repair the older lost reply. Product source, observer, dependencies,
+image, positive examples and utility thresholds remain unchanged.
+
+Current sourcefcd91dde still has all thirteen configured checks, both coverage
+gates, nineteen installed checks and the completed docs check; do not rerun broad
+checks for report-only changes. Independent licensed workloads, authored no-change
+controls, fresh applicable model-worker qualification, actual four-arm usefulness,
+selection outcomes, human controls and workload-derived resource acceptance remain
+open. The old model comparison remains INCONCLUSIVE and supplies no new labels.
+
+## C13 — Semantic-fault check completed; provisional screening curation advances
+
+Actual approval89245763 was exercised once. All190 Marshmallow test identities
+were observed; the five bug tests stayed passed,68 preservation tests failed,
+and AEEP returned invalid/test_failure at test exit1. The bounded reply is retained.
+The final canonical receipt/attempt was reopened and its owned container is absent.
+Three operations charged2.8485683747567236 seconds. Composed sourcefcd91dde
+conformance now has three real repair/original pairs and three invalid fault
+variants. Across all three approved attempts,13 physical calls and19 canonical
+operations charged28.10147966630757 seconds. Counters are12839 operations,3744
+turns,118201.13565913262 seconds and0.0 cash. The two failed terminal attempts and
+the old unretained protocol reply remain unchanged/unknown. No model, admission,
+comparison, image, installer, docs rerun or release occurred in this final check.
+
+Read-only curation then inspected20 pinned source archives, capped at650001 bytes
+each. Thirteen require further review; seven were excluded by compressed size,
+protected instruction paths or nonregular files. Total data read was5195006 bytes;
+no installer, repository source or test ran. Existing source/runtime bounds remain
+binding; these exclusions do not set production resource targets.
+
+Eight provisional screening records and16 inert payloads are now prepared:
+four single-file repairs, two multi-file repairs and two explicitly authored
+contract audits. The audits start from published corrected source and add a
+private unchanged-source guard, with original bug source as the negative. Their
+origin is authored_control, not relabelled upstream repair evidence. All eight
+repositories/origins are distinct and outside the four development repositories.
+This is not an adopted8/28/105 cohort; model workers have seen none of it.
+
+The first six-case private draft is retained. Two inert preparation assertions
+needed explicit scope review: an extensionless Freezegun CHANGELOG and Jsonpickle
+lint/editor settings in its published patch. Static diff/TOML checks confirm
+that Jsonpickle configuration changes are Ruff-only. The second draft applies
+only Python behavior changes and records omitted docs/lint paths, keeping original
+configuration and all test assertions. No product edit guard or utility threshold
+changed. The current preparation manifest points to private-v2 assets; no execution
+evidence was overwritten. New BeautifulSoup4.12.3 and SoupSieve2.6 official pure
+wheels were cached as184111 bytes of inert data with SHA/license records; nothing
+was installed or imported. Runtime reproduction remains the next permissioned step.
+
+### C13 current handoff: independent workload execution review ready
+
+The approved semantic-fault check is complete. Source `fcd91dde` remains unchanged;
+all thirteen configured source checks, both coverage gates, nineteen installed
+checks and pinned offline docs remain verified. Do not repeat them for report-only
+work. `repository-suite-semantic-fault-20261022/composed-conformance.json` records
+the accepted observations, thirteen reopened physical receipts, nineteen charged
+operations and preserved terminal failures. No new model benefit is demonstrated.
+
+`repository-screening-curation-20261022/operation-review.json` has SHA-256
+`4cfc412d5a08b93220bc318e55b85167c870d049f2350c983eda68a1cf18bb0b`. Its
+`preparation-checks.json` verifies eight distinct repository candidates, sixteen
+staged payloads, 68 assets, twelve pure classifier checks and 368 required test
+identities. Source and driver syntax/import checks pass without external execution.
+The private prepared data are under `.aeep/repository-screening-curation-20261022-v2`.
+The original six-case private draft/helper and preparation-failure explanation
+remain retained; the current prepared manifest describes the eight-case v2 data.
+
+The actual approval request is pending. This review permits at most sixteen
+contained reference/counterexample calls, eighteen operations and 710 reserved
+seconds on the existing grant. It uses the same image, observer, source and
+runtime with retained containment evidence. No model, installation, download,
+image build/pull, docs binary, credentials, cash, activation or release. A case's
+reference must reproduce before its negative runs. Record nonreproducible cases
+and continue independent cases only after canonical completion and cleanup
+verify. Stop all dispatch on common binding, authority, accounting or lifecycle
+uncertainty. Retain raw bounded public-test replies before protocol validation.
+One batch only; no automatic retries and no refund/reset of historical charges.
+
+These are provisional workloads, not a complete assessment. Their 4/2/2 family
+mix must not be silently adopted as the balanced screening stage. Full independent
+8/28/105 cohorts, required-use model qualification, optional-use comparison and
+actual selection outcomes remain the critical path. The separate human control
+response, workload-derived resource acceptance and release gates remain open.
+
+The wider pool audit in `repository-screening-curation-20261022/cohort-capacity.json`
+finds 435 metadata candidates from 243 repositories after the existing metadata
+filters and required `tests/` path contract. Single-file candidates span 184
+repositories and multi-file candidates span 101. These counts meet necessary pool
+size checks but do not establish a jointly assignable licensed/reproducible cohort.
+The explicit planning counts are 3/3/2 screening, 9/9/10 training and 35/35/35
+holdout across single-file, multi-file and authored audit tasks. These are inert
+planning counts, not frozen assignments or changed scientific thresholds.
+
+Current `make docs-lint` passes all 69 configured documents. Its first attempt
+found an extra blank line in this journal; that log is retained and the formatting
+was corrected. The driver syntax/import audit passes with `PYTHONPATH=src`; a
+follow-up invocation omitted that variable and loaded another installed package.
+Its setup failure and corrected invocation are recorded separately. No external
+subject code executed in either static check. Raw historical logs keep their
+original traceback whitespace. The completed offline link check applies to its
+retained pre-journal document snapshot; these progress-only additions do not
+repeat the checker binary or imply a fresh link-check result.

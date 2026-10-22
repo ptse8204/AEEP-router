@@ -1,0 +1,195 @@
+{
+  "source_digest": "fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa",
+  "evidence_kind": "real_upstream_development_conformance",
+  "model_tasks": 0,
+  "physical_contained_calls": 12,
+  "canonical_operations": 16,
+  "charged_elapsed_seconds": 25.252911291550845,
+  "grant_before": [
+    12820,
+    3744,
+    118173.03417946631,
+    "0.0"
+  ],
+  "grant_after": [
+    12836,
+    3744,
+    118198.28709075786,
+    "0.0"
+  ],
+  "completed_containment_probes": 3,
+  "published_reference_repairs_passed": 3,
+  "required_test_identities_passed_by_references": 912,
+  "nonrequired_click_tests_skipped": 3,
+  "original_bug_tests_failed_as_expected": 11,
+  "original_preservation_tests_passed": 901,
+  "fully_validated_fault_variants": 2,
+  "uncertified_fault_variant": "marshmallow-code__marshmallow-2800 import-time fault",
+  "uncertified_fault_reason": "Coordinator raised ConfigurationError for probe protocol before recording its raw reply. The canonical contained attempt completed, but its raw protocol cause and candidate grade remain unknown. Do not infer inner pytest status from the outer observer exit0.",
+  "original_component_terminal_results": [
+    "FAILED review-driver assertion on exit4; unchanged",
+    "FAILED malformed probe protocol; unchanged"
+  ],
+  "all_12_canonical_receipts_reopened": true,
+  "all_owned_containers_removed": true,
+  "private_package_checks_passed": 19,
+  "private_package_runtime_removed": true,
+  "offline_docs_check_passed": true,
+  "private_docs_runtime_removed": true,
+  "new_model_turns": 0,
+  "cash_delta": 0,
+  "qualification": false,
+  "comparative_usefulness": false,
+  "selection_improvement": false,
+  "observations": [
+    {
+      "name": "boundary",
+      "driver_cell_passed": true,
+      "grade": null,
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 1
+      }
+    },
+    {
+      "name": "state_write",
+      "driver_cell_passed": true,
+      "grade": null,
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 1
+      }
+    },
+    {
+      "name": "state_read",
+      "driver_cell_passed": true,
+      "grade": null,
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 1
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-reference",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "",
+        "trust": "verified"
+      },
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 24
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-unchanged",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "test_failure",
+        "trust": "verified"
+      },
+      "test_exit_code": 1,
+      "status_counts": {
+        "PASSED": 22,
+        "FAILED": 2
+      }
+    },
+    {
+      "name": "delgan__loguru-1451-semantic_fault",
+      "driver_cell_passed": false,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "missing_test",
+        "trust": "verified"
+      },
+      "test_exit_code": 4,
+      "status_counts": {}
+    },
+    {
+      "name": "pallets__click-3239-reference",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "",
+        "trust": "verified"
+      },
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 698,
+        "SKIPPED": 3
+      }
+    },
+    {
+      "name": "pallets__click-3239-unchanged",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "test_failure",
+        "trust": "verified"
+      },
+      "test_exit_code": 1,
+      "status_counts": {
+        "PASSED": 694,
+        "SKIPPED": 3,
+        "FAILED": 4
+      }
+    },
+    {
+      "name": "pallets__click-3239-semantic_fault",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "missing_test",
+        "trust": "verified"
+      },
+      "test_exit_code": 4,
+      "status_counts": {}
+    },
+    {
+      "name": "marshmallow-code__marshmallow-2800-reference",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "",
+        "trust": "verified"
+      },
+      "test_exit_code": 0,
+      "status_counts": {
+        "PASSED": 190
+      }
+    },
+    {
+      "name": "marshmallow-code__marshmallow-2800-unchanged",
+      "driver_cell_passed": true,
+      "grade": {
+        "kind": "callback",
+        "valid": false,
+        "quality_score": 0.0,
+        "detail": "test_failure",
+        "trust": "verified"
+      },
+      "test_exit_code": 1,
+      "status_counts": {
+        "PASSED": 185,
+        "FAILED": 5
+      }
+    }
+  ],
+  "next_review_sha256": "892457632ca9b6ebe279345b910ba7d320400f1a7addd4e5fc9577ffb7c8dc78"
+}
