@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: approved correction bundle passed grader, installed-wheel and documentation checks; independent repository-workload preparation is next.**
+**Status as of 2026-10-22: correction bundle passed; a real upstream repository-grader check is prepared and awaiting exact execution approval.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -43,15 +43,16 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
-last_check_command: 'repository-audit-correction-20261021/bundle-execution-result.json; completion-audit.json'
+last_check_command: 'repository-audit-correction-20261021/completion-audit.json; rebench-grader-20261022/preparation-checks.json'
 last_check_result: 'Actual approval9aaa3f73 exercised once. Grader23 observations /25 canonical operations passed; all23 receipts/attempts and cleanup verified. Current wheel18 installed checks and pinned offline docs passed; both private runtimes removed. Source5f4e318c unchanged; zero model turns. Earlier failure and3 charges retained. Full source checks remain13/13 passed,1623 tests in each run,82% coverage and both branch gates.'
-next_action: 'Prepare independently sourced repository workloads using upstream task packs. Source audit found SWE-bench Verified contamination/test-quality limits; inspect the newer licensed SWE-rebench pool and its pinned official harness before adapting or executing it. The existing v4 grader handles bounded callable snapshots, not full-repository pytest. Keep the mapping draft inert, freeze actual cohorts/graders/utility before any new model study, and prepare exact untrusted-software execution review only once concrete. Score only an actual human control response; the assisted question remains pending.'
+next_action: 'Check for the actual human answer to upstream grader review56ca1751. If approved, record its verbatim text/digest and run rebench-grader-20261022/run.py once; no existing approved component needs replay. The six-call development scope reuses real Loguru tests and exact upstream grading functions, not models. Independently follow repository-cohort-20261022/WORKLOAD_PLAN.md: complete the real repository pack, curate reproducible licensed cohorts, freeze mappings/utility and fresh conformance before model qualification and value. Keep selection evaluation downstream of independent usefulness evidence and resource acceptance separate. Human control follow-up is pending.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Pending exact upstream grader review56ca1751c4774dbaa4b4b10d511727220bb93bef5d2fe2626b2329d32c3c64a5: six offline calls, eight existing-grant operations, 360 reserved seconds, seven cached wheels, zero models/cash. The actual question was presented; no answer or execution is recorded. This is external software execution, not an architecture choice.'
   - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
@@ -2662,3 +2663,64 @@ The independent repository cohort and upstream full-repository grader are not ye
 implemented/qualified; the bounded v4 grader and inert mapping do not replace
 that work. Human control, comparative usefulness, live selection value, operational
 resource acceptance and release remain separate open gates.
+
+
+### Real upstream repository-grader preparation (2026-10-22)
+
+Completed bundle9aaa3f73 remains terminal and passed at evidence commit ac34468.
+Do not rerun its grader, wheel or docs components. Integrated executable source
+remains 5f4e318c; its 13 source checks and both 1623-test runs still apply.
+The new work consists of read-only source research and separately reviewed
+operation programs, not a changed package or a new evaluation engine.
+
+The pinned SWE-rebench leaderboard union has 860 unique issue IDs from 413
+repositories, seven shared repository/base-commit collisions and 47 cases without
+PASS_TO_PASS identities. Only 112 declare Python 3.13-family runtimes. None is an
+adopted case or frozen holdout. Source/response hashes, CC-BY-4.0 dataset rights,
+underlying-repository license requirements, runtime caveats and source exposures
+are recorded in `reports/toolkit-v2/c13/repository-cohort-20261022/`. Monthly
+partitions are not extra cases or dependable chronology. Temporal recency does
+not prove absence of training contamination. SWE-bench Verified is not selected
+as the default after the documented contamination/test-quality concern.
+
+A concrete no-model development pack now reuses actual Loguru source/tests and
+ten exact MIT-licensed upstream function/class bodies. Three fresh boundary/state
+observations precede unchanged, published-repair and introduced-regression runs
+against 24 required upstream test identities. The inspected Loguru and pgmpy IDs
+are excluded from later holdouts. Seven cached pure-Python wheels load privately
+without installation; the pytest8.3.5 adaptation and lack of official-image
+equivalence are explicit. Six preparation checks passed, including actual input
+transport size, all payload/wheel hashes, schema/source bindings, five malicious
+archive forms and exact unchanged upstream function bodies. External source has
+not executed. An inert Git preparation failure is preserved; no model or container
+was started, and postconditions now verify actual patch application.
+
+Exact review:
+`reports/toolkit-v2/c13/rebench-grader-20261022/operation-review.json`, raw SHA-256
+56ca1751c4774dbaa4b4b10d511727220bb93bef5d2fe2626b2329d32c3c64a5.
+It allows six contained calls, eight canonical operations and 360 reserved
+seconds on the same grant, zero model turns/cash, no downloads, builds/pulls,
+credentials, activation, release or retained-resource deletion. The actual
+approval question was presented; no human answer or start marker exists. Routine
+finite scope changes use standing delegation, but this external software
+execution is outside the preceding terminal bundle. After actual approval, save
+the response and digest in operator-approval.json and run the driver once.
+
+The workload plan separates capability value, selection quality and resources.
+The current callable grader and mapping draft are not a full-repository campaign.
+Complete its pack integration and independently curated source-disjoint cohorts
+before models. Preserve 8/28/105 and existing qualification/utility thresholds;
+source-grounded no-change controls need separate curation. Freeze a stronger
+compute baseline and a training-built reusable challenger. Selection labels need
+independent earlier value evidence; INCONCLUSIVE is not a useful/useless label.
+Actual token/use captures and unknowns must be retained prospectively. No full
+source regression was repeated on unchanged source. The earlier offline docs
+scan retains its exact input hashes; the later journal/plan additions have local
+link/whitespace checks only and have not rerun the removed external checker.
+
+Private data/cache: `.aeep/repository-cohort-20261022/`, including inert gold/test
+patches, seven wheels and prepared variants. The nested prepared-inert-failure-v1
+workspace is preserved. No image, volume, retained runtime or backup was removed.
+Continue only safe independent curation while approval is pending. Human control,
+real comparative usefulness, live selection quality, workload-derived resource
+acceptance and release remain separate open gates.

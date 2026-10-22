@@ -4985,3 +4985,43 @@ capability benefit, live selection value or resource acceptance. Continue indepe
 workload/upstream-grader preparation. The actual human control response and release
 approval remain separate. Do not repeat the completed bundle or broad source tests
 without a source change or a specific unresolved concern.
+
+
+## Toolkit C13 real repository workload preparation (2026-10-22)
+
+The completed correction bundle remains passed at ac34468. No package or
+integrated source changed after source5f4e318c verification; no broad regression
+or installed-wheel check was repeated. The current work is an optional benchmark
+pack preparation using existing assessment infrastructure.
+
+The pinned SWE-rebench leaderboard union contains 860 unique issue IDs and413
+repositories. Seven shared repository/base origins and47 missing preservation-test
+sets are recorded. Only112 declare Python3.13-family runtimes. This is a candidate
+pool, not860 independent adopted cases. No holdout is frozen. Dataset rights are
+CC-BY-4.0 with separate repository rights; the official fork's pinned grading
+source is MIT. Development Loguru source is independently license/archive pinned.
+Read-only provenance, source hashes, all task-ID metadata and limitations are in
+`reports/toolkit-v2/c13/repository-cohort-20261022/`.
+
+Prepared exact review56ca1751c4774dbaa4b4b10d511727220bb93bef5d2fe2626b2329d32c3c64a5
+permits six fresh offline calls, eight existing-grant operations and360 reserved
+seconds, with zero model turns/cash. It uses real upstream Loguru tests and exact
+MIT-licensed parser/resolution function bodies on unchanged, published-repair and
+regression variants, after three containment/state probes. Seven cached wheels
+load privately without installation. The adapted pytest version and lack of
+official-image equivalence are explicit. Six preparation checks passed, including
+transport, hashes, schemas, archive safety and exact function bodies. An inert
+Git preparation failure and its repaired postconditions remain recorded. No
+container, dependency installer, upstream code or model was executed in this step.
+The actual execution question was presented; no answer is recorded yet.
+
+`WORKLOAD_PLAN.md` separates prospective capability value, selection quality and
+resource acceptance. A full repository adapter and reproducible licensed cohorts
+still need engineering. Current callable fixtures, a mapping draft, public source
+metadata or this prepared review cannot close them. Keep scientific thresholds,
+8/28/105 stages, candidate-optional value trials, stronger baselines, prospective
+token/use capture and actual independent selection labels. No new architecture,
+service, release or credential access is needed. The human control response remains
+pending. The prior docs scan retains its actual input hashes; these later journal
+and plan additions have local link/whitespace checks only, not a new external
+`make docs-check` run after its private checker was removed.

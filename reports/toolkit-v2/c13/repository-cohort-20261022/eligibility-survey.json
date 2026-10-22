@@ -1,0 +1,95 @@
+{
+  "counts": {
+    "unique_issue_ids": 860,
+    "distinct_repositories": 413,
+    "same_repository_and_base_commit_collisions": 7,
+    "declared_python_3_13_family": 112,
+    "no_preinstall_or_environment_file": 670,
+    "empty_fail_to_pass": 0,
+    "empty_pass_to_pass": 47,
+    "development_exclusions": 2,
+    "adopted_cases": 0,
+    "frozen_holdouts": 0
+  },
+  "changed_source_file_counts": {
+    "1": 370,
+    "2": 290,
+    "3": 131,
+    "4": 35,
+    "5": 15,
+    "6": 4,
+    "7": 4,
+    "8": 7,
+    "9": 2,
+    "15": 1,
+    "23": 1
+  },
+  "overlap_groups": [
+    {
+      "repo": "pgmpy/pgmpy",
+      "base_commit": "4b1743dfefcc2b749517df68887ec783f009e5e7",
+      "instance_ids": [
+        "pgmpy__pgmpy-1905",
+        "pgmpy__pgmpy-1906"
+      ]
+    },
+    {
+      "repo": "sympy/sympy",
+      "base_commit": "f07466ae38d6f7985c4e9eec2c7dfff43fec3cf7",
+      "instance_ids": [
+        "sympy__sympy-27510",
+        "sympy__sympy-27524"
+      ]
+    },
+    {
+      "repo": "astropy/astropy",
+      "base_commit": "92b38aebbba6422890f1023031558f6df738e2a5",
+      "instance_ids": [
+        "astropy__astropy-17642",
+        "astropy__astropy-18005"
+      ]
+    },
+    {
+      "repo": "aunsiels/pyformlang",
+      "base_commit": "04d769ab7da44a7ae80eec49661c0b03fdcd0bac",
+      "instance_ids": [
+        "Aunsiels__pyformlang-32",
+        "Aunsiels__pyformlang-35"
+      ]
+    },
+    {
+      "repo": "berriai/litellm",
+      "base_commit": "11508c03391305296a8938a83de33a0ca52d9a61",
+      "instance_ids": [
+        "BerriAI__litellm-16320",
+        "BerriAI__litellm-16315"
+      ]
+    },
+    {
+      "repo": "narwhals-dev/narwhals",
+      "base_commit": "9ba58053305673582706004813777dfb260885fa",
+      "instance_ids": [
+        "narwhals-dev__narwhals-3480",
+        "narwhals-dev__narwhals-3478"
+      ]
+    },
+    {
+      "repo": "pyinfra-dev/pyinfra",
+      "base_commit": "185f7dbec96f8e1d5f7cfefe0f325f99ab73927a",
+      "instance_ids": [
+        "pyinfra-dev__pyinfra-1679_interface",
+        "pyinfra-dev__pyinfra-1665"
+      ]
+    }
+  ],
+  "data_issues": [
+    "Monthly split names are not reliable chronological cutoffs: an observed 2026_03 row has created_at in May 2026. Use pinned task metadata, not split-name freshness claims.",
+    "Unique issue IDs do not establish statistical independence. Group by repository and related origin; prevent overlapping source/issue/test exposure across stages.",
+    "All rows have declared pytest parsers, but dependency closures, CPU architecture compatibility, licenses and baseline/gold reproducibility are not yet established per task.",
+    "A nonempty FAIL_TO_PASS set describes bug-repair tasks. This pool alone supplies no independently established no-change controls.",
+    "Temporal recency is not proof against training contamination; public tasks remain exposed."
+  ],
+  "source_metadata_sha256": "853342d3cb7960bf6d65b576ec6e0097195f691215f5ed45410b4cb8bb8f00e3",
+  "external_code_executed": false,
+  "models": 0
+}

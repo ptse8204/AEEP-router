@@ -1043,3 +1043,35 @@ checks pass. Fresh exact contained execution remains pending approval. The sourc
 first-party lifecycle fixture passed admission/use, revocation, stale rejection
 and baseline selection; it supplies no real-plugin benefit or live policy-value
 claim. Evidence: `reports/toolkit-v2/c13/repository-audit-correction-20261021/`.
+
+
+### D78 — Reuse upstream repository tests before new model comparisons
+
+The approved correction bundle passed on source5f4e318c. Its bounded callable
+fixtures are development conformance, not a full-repository workload. Keep the
+existing managed fallback, assessment service, runner, controlled executors and
+receipts. Add a benchmark pack rather than another evaluator service.
+
+Use the pinned, CC-BY-4.0 SWE-rebench leaderboard pool as a candidate source.
+The union contains 860 unique issue IDs from 413 repositories; none is adopted
+yet. Review underlying repository rights and exact runtime closures. Shared
+origins and absent preservation tests remain exclusions to resolve. Do not infer
+independence, clean model exposure or chronological freshness from dataset labels.
+The documented SWE-bench Verified contamination/test-quality concern prevents
+using it as the default without a task-specific validity argument.
+
+First test the MIT-licensed upstream pytest parser/resolution functions against
+one real Loguru issue and its upstream tests in the existing pinned image.
+Seven exact cached wheels and a pytest8.3.5 runtime adaptation fit the current
+transport; this is not official-image equivalence. All inspected development
+tasks stay outside future holdouts. Six static preparation checks pass. Exact
+six-call execution review56ca1751 is pending approval; the previous terminal
+approval does not cover this external code. No architecture change is needed.
+
+Follow `reports/toolkit-v2/c13/repository-cohort-20261022/WORKLOAD_PLAN.md`.
+Complete the real repository pack, curate reproducible stage-disjoint cohorts
+and freeze all mappings and thresholds before new model calls. Comparative
+usefulness precedes selection labels. An inconclusive capability is not proven
+useless, and abstention alone is not selection benefit. Resource acceptance
+remains a separate workload-derived question. No threshold or grant counter
+changes. Preserve historical results and prospective token/use unknowns.

@@ -453,3 +453,35 @@ executed; no holdout cohort was selected. The bounded callable grader is not a
 full-repository SWE-bench adapter. Exact read-only source hashes and exclusions are
 in `reports/toolkit-v2/c13/repository-audit-correction-20261021/independent-upstream-followup.json`.
 Agent-skill-eval and the recorded managed-path fallback remain unchanged.
+
+
+### October 22: pinned SWE-rebench task/grader preparation
+
+The preceding correction bundle passed its 23 contained development observations,
+18 installed checks and pinned offline docs scan; no upstream engine disposition
+changed. Source5f4e318c remains the verified executable source.
+
+Read-only source review now covers `nebius/SWE-rebench-leaderboard` revision
+`34d5a58864acf91613740a09ec5d205228dcfa39` (dataset CC-BY-4.0; underlying repository
+licenses still apply), and its recommended MIT-licensed harness fork
+`SWE-rebench/SWE-bench-fork` at `980d0cca8aa4e73f1d9f894e906370bef8c4de8a`.
+The 860-row union has 413 repositories. Monthly splits are overlapping partitions,
+not additional independent cases. Public recency does not prove uncontaminated
+model evaluation. No cohort is frozen. Exact source/response hashes and caveats
+are in `reports/toolkit-v2/c13/repository-cohort-20261022/`.
+
+One Loguru development task uses base commit
+`2abeb0fa6d7be4b0455c6e0b580b1e9dab19005e`, with an exact MIT license and archive
+hash. A prepared compatibility check reuses ten unchanged upstream function/enum
+bodies, the real selected test module and 24 upstream test identities. It has
+three source variants and three containment/state probes. Seven pinned cached
+pure-Python wheels are inert; pytest8.3.5 instead of the suggested8.4.1 is a
+declared transport-driven adaptation, not an upstream equivalence claim.
+External code has not executed. Exact review56ca1751 is pending approval.
+
+The current callable-snapshot grader is not a full-repository pytest adapter.
+A successful development check must be followed by pack integration, task/runtime
+validation and fresh controlled-worker conformance before model qualification.
+Keep the recorded agent-skill-eval fallback and optional Waza/LangGraph scopes.
+Do not install the entire SWE-bench dependency closure or pull mutable x86 images
+merely to run this bounded development check.
