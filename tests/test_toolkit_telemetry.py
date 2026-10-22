@@ -10,6 +10,7 @@ from aeep.errors import ConfigurationError
 from aeep.execution import EventJournal, ExecutionEvidence
 from aeep.hosts.codex_accounting import TOKEN_FIELDS, turn_accounting
 from aeep.hosts.codex_metrics import snapshot
+from aeep.hosts.registry import ManagedHostRegistry
 from aeep.models import ExecutionReceipt, RouteEstimate
 from aeep.router import Router
 from aeep_toolkit.telemetry import bound_journal, candidate_loading, capture_summary, token_capture
@@ -52,6 +53,24 @@ def test_verified_capture_preserves_reported_trust_and_zero_categories():
     assert check["provider_usage_independently_verified"] is False
     from aeep.assessment.reporting import resource_measurements
     assert all(v is None for v in resource_measurements(receipt.accounting, receipt.actual_resources).values())
+
+
+@pytest.mark.parametrize("fault", ["schema", "scope", "content", "complete"])
+def test_receipt_adapter_boundary_rejects_unknown_or_unsafe_envelopes(fault):
+    scope = "aeep-metrics-" + "d" * 32
+    metric = snapshot(scope)
+    if fault == "schema":
+        metric["schema_version"] = "unregistered.catalog-metrics.v1"
+    elif fault == "scope":
+        metric["scope"] = "aeep-metrics-" + "e" * 32
+    elif fault == "content":
+        metric["raw_prompt"] = "must not be retained"
+    else:
+        metric["delivery_complete"] = True
+    with pytest.raises(ValueError):
+        ManagedHostRegistry.normalize_catalog_metrics(metric, scope)
+    with pytest.raises(ValueError):
+        Router._safe_receipt_metadata({"catalog_metrics": metric, "catalog_metrics_scope": scope})
 
 
 @pytest.mark.parametrize("missing", list(TOKEN_FIELDS))

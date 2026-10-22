@@ -659,3 +659,13 @@ The canonical discovery adapter factory lives in `discovery_service.py`.
 compatibility re-exports. Ordinary routing does not enter stack search.
 [ADR-011](docs/adr/ADR-011-stack-synthesis-preflight.md) records the boundary and
 [STACK_PLANNING.md](docs/STACK_PLANNING.md) describes current support and gaps.
+
+
+### Adapter-owned receipt telemetry
+
+The managed-host registry validates versioned catalog telemetry before the router
+persists it. The registry recognizes built-in envelopes explicitly and delegates
+their field validation to the corresponding adapter. Unknown schemas and malformed
+observations fail closed. This keeps provider-specific metric names and protocol
+validation out of routing while preserving receipt minimization and the original
+Codex envelope contract.

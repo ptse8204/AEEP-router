@@ -744,9 +744,7 @@ class Router:
         metrics = metadata.get("catalog_metrics")
         scope = retained.get("catalog_metrics_scope")
         if isinstance(metrics, dict) and isinstance(scope, str):
-            from .hosts.codex_metrics import validate_snapshot
-
-            retained["catalog_metrics"] = validate_snapshot(metrics, scope)
+            retained["catalog_metrics"] = ManagedHostRegistry.normalize_catalog_metrics(metrics, scope)
         return retained
 
     def _save_receipt(self, receipt: ExecutionReceipt) -> None:

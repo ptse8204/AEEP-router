@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterable
 from pathlib import Path
+from typing import Any
 
 from ..errors import ConfigurationError
 from ..execution import ExecutorCapabilities
@@ -12,6 +13,15 @@ from .base import ManagedHostAdapter
 
 
 class ManagedHostRegistry:
+    @staticmethod
+    def normalize_catalog_metrics(value: Any, scope: str) -> dict[str, Any]:
+        """Only built-in, versioned adapter envelopes may enter receipt metadata."""
+        from .codex_metrics import validate_snapshot
+
+        if not isinstance(value, dict) or value.get("schema_version") != "codex.catalog-metrics.v1":
+            raise ValueError("unsupported catalog metrics envelope")
+        return validate_snapshot(value, scope)
+
     def __init__(self) -> None:
         self._adapters: dict[str, ManagedHostAdapter] = {}
         self._factories: dict[str, Callable[[ExecutorSpec, bytes, Path | None], ManagedHostAdapter]] = {}
