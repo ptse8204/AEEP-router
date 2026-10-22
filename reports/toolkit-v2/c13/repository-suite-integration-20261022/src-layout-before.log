@@ -1,0 +1,36 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_observer_runs_reviewed_src_layout_with_first_party_shims _________
+
+    @pytest.mark.asyncio
+    async def test_observer_runs_reviewed_src_layout_with_first_party_shims():
+        """Real process regression, using no third-party parser, test runner or source."""
+        import subprocess
+        import sys
+        import zipfile
+    
+        wheel = io.BytesIO()
+        with zipfile.ZipFile(wheel, 'w') as archive:
+            archive.writestr('pytest.py', '__version__="8.3.5"\ndef main(argv):\n'
+                '    import fixture_target\n    assert fixture_target.value == 42\n'
+                '    print("FIRSTPARTY_SOURCE_OK")\n    return 0\n')
+        data = wheel.getvalue()
+        source = pack_files({'src/fixture_target/__init__.py': b'value = 42\n', 'tests/test_fixture.py': b'# fixture\n'})
+        payload = {'archive': base64.b64encode(source).decode(), 'archive_sha256': hashlib.sha256(source).hexdigest(),
+            'python': '.'.join(map(str, sys.version_info[:2])), 'pytest': '8.3.5', 'test_paths': ['tests/test_fixture.py'],
+            'wheels': [{'filename': 'pytest-fixture-py3-none-any.whl', 'sha256': hashlib.sha256(data).hexdigest(),
+                        'data': base64.b64encode(data).decode()}]}
+        # Replace the untrusted upstream parser with an explicitly first-party shim.
+        program = ('def parse_log_pytest(text, unused):\n'
+            '    return {"tests/test_fixture.py::test_source": "PASSED"} if "FIRSTPARTY_SOURCE_OK" in text else {}\n'
+            + (Path(__file__).resolve().parents[1] / 'integrations/assessment-runtime/repository_suite_program.py').read_text())
+        result = await asyncio.to_thread(subprocess.run, [sys.executable, '-B', '-c', program],
+            input=json.dumps(payload).encode(), capture_output=True, timeout=10, check=True)
+        observation = json.loads(result.stdout)
+>       assert observation['exit_code'] == 0 and observation['statuses'] == {'tests/test_fixture.py::test_source': 'PASSED'}
+E       assert (1 == 0)
+
+tests/test_repository_suites.py:419: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_repository_suites.py::test_observer_runs_reviewed_src_layout_with_first_party_shims
+1 failed in 0.14s

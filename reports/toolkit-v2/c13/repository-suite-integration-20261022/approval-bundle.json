@@ -1,0 +1,88 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_digest": "fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa",
+  "runner_sha256": "2a2924d045f7871085aed9cfac13d7466f296f09f0daac3e0be83b00c5b59421",
+  "actions": [
+    {
+      "name": "grader",
+      "review": "reports/toolkit-v2/c13/repository-suite-integration-20261022/grader-operation-review.json",
+      "review_sha256": "d1d7395d051d7928510fa009daab5537211cdbb8958ece2846795cffe90135fe",
+      "runner": "reports/toolkit-v2/c13/repository-suite-integration-20261022/run-grader-review.py",
+      "runner_sha256": "bbe4958f7491ead68e30ab0aa4b7f4c86fd2b218c76a1c8e5ada156b6dd619e7",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-suite-integration-20261022/run-grader-review.py",
+        "d1d7395d051d7928510fa009daab5537211cdbb8958ece2846795cffe90135fe"
+      ],
+      "approval_record": "reports/toolkit-v2/c13/repository-suite-integration-20261022/grader-operator-approval.json",
+      "started_marker": "reports/toolkit-v2/c13/repository-suite-integration-20261022/grader-execution-started.json",
+      "terminal_result": "reports/toolkit-v2/c13/repository-suite-integration-20261022/grader-execution-result.json",
+      "maximum_seconds": 1200,
+      "pass_conditions": {
+        "passed": true,
+        "contained_calls_started": 12,
+        "source_unchanged": true,
+        "canary_removed": true,
+        "containers_removed": true,
+        "ledger_operations": 14,
+        "elapsed_complete": true
+      }
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/operation-review.json",
+      "review_sha256": "3671972ae3e63282cefb959e1435d816b53bdcb0d4dc816db478da7fe06011ea",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/run_review.py",
+      "runner_sha256": "bbc771e911263b27101b3eacc9f0fef55433e79f8134250abbd13e09934e448d",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/run_review.py",
+        "--execute-reviewed-digest",
+        "d635224277d5da0e5e58048ecc7a74d977234cedf47929ee81253eb026ad9fa9"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-repository-suites-20261022/execution/summary.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "installed_cli_checks": 18,
+        "installed_capture_checks": 1,
+        "runtime_removed": true,
+        "private_scratch_removed": true
+      }
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/operation-review.json",
+      "review_sha256": "194485a058479598cac19c16a0d852b00d5ac682cc41884f6510c83cd7de6332",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/run-review.py",
+      "runner_sha256": "c85b7c2369ef32a8153910e69b27be2ca0717f25fa9ecb8801499a9a0d103f63",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/run-review.py",
+        "194485a058479598cac19c16a0d852b00d5ac682cc41884f6510c83cd7de6332"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-repository-suites-review-20261022/execution-result.json",
+      "maximum_seconds": 240,
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      }
+    }
+  ],
+  "purpose": "Validate the reusable v5 repository pack against three real development issues, then check its actual wheel and public documentation. This enables corpus adoption; it is not a model comparison or release.",
+  "permissions": "12 fresh offline containers through14 existing-grant operations, at most630 reserved seconds; current AEEP wheel plus32 unchanged cached dependencies and19 sandboxed installed checks; pinned cached Lychee0.24.2 offline docs check. Zero models, downloads, image builds/pulls, credentials, new destinations, cash, activation or release.",
+  "cleanup": "Remove only new attempt-owned containers, unchanged synthetic canary, private installed runtime/scratch and unchanged Lychee runtime. Retain inert caches, historical evidence, current/rollback images, volumes, backups, unrelated work and all accounting.",
+  "approval_reason": "The pasted continuation excludes untrusted software execution, and CONTINUATION.md requires applicable container-provisioning authority. Completed56ca1751 is terminal and binds the older one-case prototype; earlier wheel/docs approvals also bind older artifacts. Routine finite definitions and scope amendments remain delegated.",
+  "approval_rule": "One explicit human approval covers these three raw component digests, one attempt each. No replay of a started component. Independent unstarted package/docs components may continue if grader execution fails, after all source/artifact checks.",
+  "evidence_limits": [
+    "Three source-only single-file repairs are development calibration, not representative holdouts or capability qualification.",
+    "Published non-source edits are excluded by explicit task scope. Marshmallow Python3.11 is adapted to3.13; no official upstream runtime equivalence.",
+    "No comparative usefulness, token saving, monetary saving, automatic admission, production resource acceptance or selection improvement is inferred from these checks."
+  ],
+  "approved": false,
+  "execution_started": false
+}

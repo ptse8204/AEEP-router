@@ -1,0 +1,25 @@
+...........................F...                                          [100%]
+=================================== FAILURES ===================================
+________________________ test_truth_and_fault_contracts ________________________
+
+suite_cases = [RepositorySuiteCase(schema_version='assessment.repository-suite-case.v1', input=SuiteInput(task_id='fixture-0', task=...bricated first-party contract fixture. Not an independent real task.', split='development', used_for_development=True)]
+
+    def test_truth_and_fault_contracts(suite_cases):
+        case = suite_cases[0]
+        for update in ({'fail_to_pass': case.truth.pass_to_pass}, {'test_paths': ['../escape.py']},
+                       {'pass_to_pass': []}, {'fail_to_pass': ['tests/elsewhere.py::test_x']},
+                       {'fail_to_pass': ['tests/test_core.py::test_with spaces']}):
+            with pytest.raises(ValueError):
+                SuiteTruth.model_validate({**case.truth.model_dump(mode='json'), **update})
+        with pytest.raises(ValueError, match='faults'):
+            RepositorySuiteCase.model_validate({**case.model_dump(mode='json'), 'fault_outputs': [patch_artifact(
+                RepositoryPatch(base_sha256=case.truth.input_sha256, files={}))]})
+        with pytest.raises(ValueError):
+>           decode_patch({'patch_b64': base64.b64encode(b'{"files":{},"files":{}}').decode()})
+            ^^^^^^^^^^^^
+E           NameError: name 'decode_patch' is not defined
+
+tests/test_repository_suites.py:256: NameError
+=========================== short test summary info ============================
+FAILED tests/test_repository_suites.py::test_truth_and_fault_contracts - Name...
+1 failed, 30 passed in 1.00s

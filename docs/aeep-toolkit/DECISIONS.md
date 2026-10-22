@@ -1044,7 +1044,6 @@ first-party lifecycle fixture passed admission/use, revocation, stale rejection
 and baseline selection; it supplies no real-plugin benefit or live policy-value
 claim. Evidence: `reports/toolkit-v2/c13/repository-audit-correction-20261021/`.
 
-
 ### D78 — Reuse upstream repository tests before new model comparisons
 
 The approved correction bundle passed on source5f4e318c. Its bounded callable
@@ -1076,7 +1075,6 @@ useless, and abstention alone is not selection benefit. Resource acceptance
 remains a separate workload-derived question. No threshold or grant counter
 changes. Preserve historical results and prospective token/use unknowns.
 
-
 ### D79 — Curated repository suites reuse artifact delivery and protected grading
 
 The exact six-call upstream check56ca1751 passed on source5f4e318c. Its real
@@ -1104,3 +1102,25 @@ the new module is96%. Full configured verification is running on source573257b2.
 Fresh external v5 conformance, installed-wheel checks and licensed independent
 cohorts remain open. No model study, installation, credential, release or larger
 spending permission follows from this source implementation decision.
+
+### D80 — Separate v5 conformance from corpus and capability evidence
+
+Corrected source `fcd91dde` passes all thirteen configured source checks, both
+coverage gates and the retained proof/Node checks. A real-process regression
+checks `src/` import precedence. The earlier source run stopped at its drift guard
+and remains incomplete. No old execution result transfers to the changed pack.
+
+Use three real development issues to check v5 before adopting a cohort: Loguru,
+Click and Marshmallow. Their licenses, exact source revisions, pure wheel bytes,
+private test overlays and published source repairs are reviewed. All three are
+single-file repairs. Explicit source-only scope omits published documentation
+changes, and Marshmallow's Python3.11-to3.13 adaptation remains visible. Preserve
+all four inspected development repositories outside later stages.
+
+The new exact bundle binds twelve contained calls, the actual changed wheel and
+the cached offline documentation checker. It awaits its own execution approval;
+no model, credential, spending or architecture decision follows from source tests.
+Continue with licensed reproducible cohorts, then required-use qualification and
+optional-use comparison. Selection labels require actual independent value
+results. Metadata candidates, working reference repairs and resource adequacy
+cannot supply those results. Existing frozen thresholds and counters stay intact.

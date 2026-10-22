@@ -5065,3 +5065,38 @@ run. The next exact external execution bundle must bind the final source, new
 wheel, concrete case assets and current document hashes. Human control, actual
 usefulness, live selection quality, workload-derived resource acceptance and
 release remain separate open gates.
+
+
+### October22: corrected v5 source checks passed; exact execution review pending
+
+Current source `fcd91dde` in `3557d88` passes all thirteen configured checks:
+1,658 tests in each full run with21 real-boundary skips and the existing dependency
+warning,82.14% total coverage, both branch gates, Ruff, layering, mypy, schemas
+and wheel/sdist builds. Nine supplemental proofs and thirteen existing Node tests
+pass; the owned temporary dependency link is removed. The earlier run stopped
+before coverage on source drift after a needed src-layout correction and remains
+incomplete. No broad source check needs repeating on unchanged code.
+
+The new process regression proves reviewed `src/` code precedes conflicting wheel
+code. Real Loguru, Click and Marshmallow development data are prepared, not run:
+three single-file Python repairs with912 required test identities. Documentation
+edits are outside explicit task scope; Marshmallow Python3.11 is adapted to3.13.
+Licenses, official pure wheel bytes and source/test/reference assets are bound.
+Four inspected repositories are excluded from later stages. The metadata-only
+inventory has684 preliminary candidates, zero adopted cases, zero frozen holdouts
+and no validated no-change controls.
+
+The exact combined bundle `a2787cd8` covers12 fresh offline calls/14 canonical
+operations/630 reserved seconds, the changed wheel plus32 cached dependencies
+and19 sandboxed installed checks, and cached pinned offline docs. All sixteen
+bundle preparation audit conditions pass. Actual approval is pending, all three
+components are unstarted, and no models, installs, credentials, downloads, image
+changes, cash or release occurred in preparation. The earlier six-call approval
+is terminal and cannot cover these changed artifacts. Source and runtime records
+are under `reports/toolkit-v2/c13/repository-suite-integration-20261022`.
+
+Docs lint exposed repeated blank lines in the state, decision and upstream
+records; those formatting defects are corrected. Fresh offline link checking
+awaits the exact binary execution approval. Human control-use response, reproducible
+independent workloads, actual capability value, live selection outcomes,
+workload-derived resource acceptance and release remain separate open gates.

@@ -1,11 +1,11 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: real upstream grader check passed; the reusable repository-suite pack is implemented and undergoing source verification.**
+**Status as of 2026-10-22: upstream grader check passed; v5 repository-pack source checks passed; the exact combined execution review is awaiting approval.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
-All five reservations remain charged, including one preflight skip. No new model,
-installation, rebuild, credential or architecture decision is needed for this repair.
+All five reservations remain charged, including one preflight skip. The completed capture repair needs no further model turn, installation, rebuild,
+credential or architecture decision. The new repository-pack review is separate.
 The capture-repair profiles retain their source 7707756 scope. The bounded repository grader now has fresh offline conformance for source 5f4e318c on the fixed development cases; this is not live qualification or a full-repository grader.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
@@ -43,15 +43,16 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
-last_check_command: 'repository-audit-correction-20261021/completion-audit.json; rebench-grader-20261022/preparation-checks.json'
-last_check_result: 'Actual approval9aaa3f73 exercised once. Grader23 observations /25 canonical operations passed; all23 receipts/attempts and cleanup verified. Current wheel18 installed checks and pinned offline docs passed; both private runtimes removed. Source5f4e318c unchanged; zero model turns. Earlier failure and3 charges retained. Full source checks remain13/13 passed,1623 tests in each run,82% coverage and both branch gates.'
-next_action: 'Inspect repository-suite-integration-20261022/validation-v2/checks.json and source-check session85683 before starting work. Current source is fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa. Prior validation stopped before coverage after a needed src-layout correction; its1657-test pass is retained as incomplete/source-drift evidence. The corrected first-party process regression and all35 focused tests pass. Complete the13 configured checks and supplemental proofs/Node checks without source edits. Curate additional real development assets as data only, then prepare one exact changed-pack/wheel/docs execution bundle. The completed six-call approval is terminal. Human control follow-up remains pending.'
+last_check_command: 'repository-suite-integration-20261022/verification-completion.json; prepared-bundle-audit.json; rebench-grader-20261022/completion-audit.json'
+last_check_result: 'Sourcefcd91dde:13/13 configured checks pass;1658 tests in each full run,21 skips,82% total coverage,both branch gates,9 supplemental proofs and13 Node tests pass. Wheel/sdist built; all33 cached wheel bytes and16 review-preparation conditions checked. New v5 containers, installed execution and offline link check remain unexecuted. Terminal56ca1751 prototype passed6 calls/8 operations on older source; no new model usage.'
+next_action: 'Read repository-suite-integration-20261022/approval-request.json and approval-bundle.json (SHA256 a2787cd8828ebbad3a06169c3df5793e0f43238ad4af57b026cac432a28fc739). Source verification session85683 is completed; do not repeat full tests on unchanged sourcefcd91dde. Await actual exact bundle approval, record its response, then execute run-bundle.py once with that digest. All components are currently unstarted. Audit actual receipts/attempts and cleanup afterward. Continue corpus curation and independent control follow-up; freeze no live campaign until reproducible independent workloads and applicable worker evidence exist.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Pending exact combined v5 reviewa2787cd8:12 fresh offline contained observations,14 existing-grant operations,630 reserved seconds; changed wheel plus32 cached dependencies and19 installed checks; pinned cached offline docs. No models, downloads, image changes, credentials, cash, activation or release. Actual response is not yet received.'
   - 'None for completed upstream grader review56ca1751: actual approval exercised once; all six calls passed, eight operations charged and all owned containers removed. No future changed-pack execution, wheel installation or models are authorized by this terminal review. Continue first-party source verification and safe curation.'
   - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
@@ -2664,7 +2665,6 @@ implemented/qualified; the bounded v4 grader and inert mapping do not replace
 that work. Human control, comparative usefulness, live selection value, operational
 resource acceptance and release remain separate open gates.
 
-
 ### Real upstream repository-grader preparation (2026-10-22)
 
 Completed bundle9aaa3f73 remains terminal and passed at evidence commit ac34468.
@@ -2725,7 +2725,6 @@ Continue only safe independent curation while approval is pending. Human control
 real comparative usefulness, live selection quality, workload-derived resource
 acceptance and release remain separate open gates.
 
-
 ### Approved upstream compatibility check completed; v5 integration started (2026-10-22)
 
 The actual answer “Approve this exact upstream grader check” to
@@ -2767,7 +2766,6 @@ are running on the frozen source; do not repeat them or edit source concurrently
 The code, schema/CLI exports and affected guides are updated, but fresh external
 v5 conformance and current-wheel checks are not yet approved or run.
 
-
 ### Src-layout correction before new external execution (2026-10-22)
 
 Static review of actual Click and Marshmallow source showed src/ layouts. The
@@ -2786,3 +2784,50 @@ Two additional development sources, Click3239 and Marshmallow2800, were read
 and license/archive pinned as inert data. They are excluded from later holdouts.
 Neither was installed or executed. Their src layout/dependency requirements are
 being checked before any exact execution review is prepared.
+
+## C13 — Current repository-pack source verification and concrete execution review
+
+Current source `fcd91dde1cdc1baad2d9c4aaedbe477137a31b371dc6fac99662ea291893f2fa`
+is implemented in `3557d88`. All thirteen configured checks passed without source
+drift: 1,658 tests in each full run, 21 skips, the existing Starlette warning,
+82% total coverage, both branch gates, Ruff, layering policy, mypy and package
+builds. Nine supplemental proofs and all thirteen existing Node tests passed.
+The temporary Node link was removed. The first 1,657-test run remains incomplete
+because a needed src-layout correction changed source before coverage. The
+corrected real-process regression and thirty-five focused tests pass. The final
+source records are in `reports/toolkit-v2/c13/repository-suite-integration-20261022`.
+Do not rerun broad verification on unchanged code merely for another checkpoint.
+
+Three real source-only development cases are prepared: Loguru1451, Click3239 and
+Marshmallow2800, with 912 required test identities across three independent tasks.
+All repairs are single-file; they do not establish multi-file or no-change coverage.
+Click documentation and Marshmallow author/changelog edits are explicitly outside
+the declared task. Marshmallow is adapted from Python3.11 to3.13. Official pure
+wheels supply version metadata while reviewed source takes import precedence.
+All archives, source licenses, wheels, test overlays and reference data are bound.
+No repository code or upstream test has executed under the new v5 scope.
+
+The metadata audit leaves 684 preliminary repair candidates from357 repositories,
+with rights, source safety, dependencies and baseline/reference reproduction still
+unverified. There are no adopted campaign cases, frozen holdouts or authored
+no-change controls. Development repositories Loguru, Click, Marshmallow and pgmpy
+are excluded from later stages. No fixture or metadata count supplies value labels.
+
+Exact combined review `a2787cd8828ebbad3a06169c3df5793e0f43238ad4af57b026cac432a28fc739`
+is prepared and presented. It covers twelve fresh offline containers, fourteen
+canonical operations and at most630 reserved seconds, the changed wheel plus32
+unchanged cached dependencies with nineteen installed checks, and pinned cached
+Lychee0.24.2 offline docs. Sixteen preparation audit conditions pass; source
+and all component digests bind. It starts no models and changes no images,
+credentials, destinations, cash, activation or release. All components are
+unstarted pending the actual response. Independent package/docs may proceed
+under that same approval if grader execution fails. Started components cannot
+be replayed. The previous six-call approval56ca1751 remains terminal.
+
+Host free space exceeded90GiB; no cleanup is needed for this bundle. Docker usage
+is recorded without deleting images, containers, volumes, caches or backups.
+Initial docs lint found repeated blank lines; only those formatting defects are
+corrected. The fresh full offline link check remains pending the exact binary
+execution approval. Public document inputs will be hashed at execution as stated
+in the review. Human control response, comparative usefulness, real selection
+outcomes, workload-derived resource acceptance and release remain open separately.

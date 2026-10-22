@@ -5,6 +5,21 @@ with repository maintenance, and whether AEEP chooses it on tasks where it helps
 This plan is for the implementation coordinator. It does not authorize execution
 or claim that the cohort is ready.
 
+## October 22 continuation
+
+The exact upstream compatibility check passed all six contained calls. Its
+approval is terminal. The reusable v5 pack is implemented in commit `3557d88`
+and is undergoing current-source verification. Three real development cases
+are prepared: Loguru, Click and Marshmallow. They remain development-only;
+all related repositories and the inspected pgmpy source are excluded from later
+stages. The pending combined review covers fresh v5 conformance, the changed
+wheel and the offline documentation checker. No model execution is included.
+
+[Current pack record](../repository-suite-integration-20261022/README.md) gives
+source pins, adaptations and evidence limits. The older sequence below records
+the intended dependencies; steps 1 and implementation in step 2 have progressed.
+Cohort adoption, fresh v5 conformance and comparative usefulness remain open.
+
 ## Source and present status
 
 Use the public SWE-rebench issue pool as a candidate source, with its real base
@@ -141,7 +156,8 @@ memory budgets remain unaccepted hypotheses.
 
 ## Current intervention
 
-Only the exact six-call upstream development review needs an execution approval
-now. No infrastructure choice, credential access, model run, new image or paid
+The completed six-call upstream development approval is terminal. A new exact
+combined review is being prepared for the changed v5 pack, current wheel and
+offline docs checker. No infrastructure choice, credential access, model run, new image or paid
 service is requested. The human control response remains pending separately.
 Release and publication remain unauthorized.

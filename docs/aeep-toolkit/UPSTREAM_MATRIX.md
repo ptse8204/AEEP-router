@@ -454,7 +454,6 @@ full-repository SWE-bench adapter. Exact read-only source hashes and exclusions 
 in `reports/toolkit-v2/c13/repository-audit-correction-20261021/independent-upstream-followup.json`.
 Agent-skill-eval and the recorded managed-path fallback remain unchanged.
 
-
 ### October 22: pinned SWE-rebench task/grader preparation
 
 The preceding correction bundle passed its 23 contained development observations,
@@ -486,7 +485,6 @@ Keep the recorded agent-skill-eval fallback and optional Waza/LangGraph scopes.
 Do not install the entire SWE-bench dependency closure or pull mutable x86 images
 merely to run this bounded development check.
 
-
 ### October22: upstream compatibility passed; reusable suite pack under verification
 
 Actual approval56ca1751 was exercised once. Six fresh offline calls passed: three
@@ -508,3 +506,25 @@ verification, not fresh external v5 conformance or an official SWE-rebench image
 reproduction. Comparative usefulness, selection quality and resource acceptance
 remain separate. Additional real development cases can be prepared as inert data;
 their software cannot run under the terminal one-task approval.
+
+### October22: current v5 source verified; three-case execution prepared
+
+Source `fcd91dde` passes all thirteen configured source checks, 1,658 tests in
+each full run, both coverage gates and nine retained proof checks. All thirteen
+Node tests pass. The first source run stopped after a needed src-layout correction;
+its incomplete record is retained. The current source terminal record is
+`reports/toolkit-v2/c13/repository-suite-integration-20261022/validation-v2/source-stability.json`.
+
+The prepared v5 cases reuse real Loguru, Click and Marshmallow upstream tests.
+Loguru is MIT, Click BSD-3-Clause and Marshmallow MIT; task metadata is CC-BY-4.0.
+Pinned official pure wheels add Click8.3.2, Marshmallow3.25.1 and simplejson3.20.1
+as inert data. Embedded licenses and hashes are retained; nothing was installed
+or executed from them. Reviewed source precedes wheel code; project wheels
+supply version metadata. Python/pytest adaptations and omitted non-source edits
+remain explicit. The source-only development tasks are not official benchmark
+runs or a representative cohort.
+
+Exact bundle `a2787cd8` awaits approval for changed-pack conformance, current-wheel
+installation checks and pinned offline docs. All components are unstarted.
+The agent-skill-eval fallback and other optional integration dispositions remain
+unchanged. Comparative usefulness and live selection have no new evidence.

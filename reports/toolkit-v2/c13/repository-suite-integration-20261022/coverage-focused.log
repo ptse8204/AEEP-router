@@ -1,0 +1,47 @@
+............................F..                                          [100%]
+=================================== FAILURES ===================================
+_______ test_curated_materialization_uses_one_existing_ledger_operation ________
+
+suite_cases = [RepositorySuiteCase(schema_version='assessment.repository-suite-case.v1', input=SuiteInput(task_id='fixture-0', task=...bricated first-party contract fixture. Not an independent real task.', split='development', used_for_development=True)]
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1234/test_curated_materialization_u0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x111c9dd30>
+
+    @pytest.mark.asyncio
+    async def test_curated_materialization_uses_one_existing_ledger_operation(suite_cases, tmp_path, monkeypatch):
+        from aeep.assessment.extensions import materialize
+        from test_v08_executable_recipes import setup
+    
+        expanded = campaign_cases(suite_cases, tmp_path.resolve())
+        recipe = repository_suite_recipe(expanded, assessment=True)
+        assert len(curated_payload(recipe)['cases']) == 141
+>       router, service, _recipe, request, _env = setup(tmp_path, monkeypatch, recipe=recipe)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_repository_suites.py:293: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_v08_executable_recipes.py:76: in setup
+    candidate = program("candidate", CANDIDATE)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_v08_executable_recipes.py:45: in program
+    estimate=reference_spec("csv").estimate,
+             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+family = 'csv', directory = None
+
+    def reference_spec(family: str, directory: Path | None = None) -> ExecutorSpec:
+        recipe = shipped_recipe(family)
+>       return ExecutorSpec(id=f"reference.{family}", capability=recipe.capability, kind=ExecutorKind.PYTHON, description=recipe.description, input_schema=recipe.input_schema, output_schema=recipe.output_schema, side_effect=SideEffect.READ, config={"callable": f"aeep.assessment.recipes:reference_{family}", **({"assessment_adapter": {"read_only_roots": [str(directory)]}} if family == "search" and directory is not None else {})}, estimate=RouteEstimate(resources=ResourceVector(monetary_usd=0, latency_ms=5), confidence=0.5))
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       pydantic_core._pydantic_core.ValidationError: 2 validation errors for RouteEstimate
+E       cash.amount_usd
+E         Decimal input should be an integer, float, string or Decimal object [type=decimal_type, input_value=Decimal('0.0'), input_type=Decimal]
+E           For further information visit https://errors.pydantic.dev/2.12/v/decimal_type
+E       cash.upper_bound_usd
+E         Decimal input should be an integer, float, string or Decimal object [type=decimal_type, input_value=Decimal('0.0'), input_type=Decimal]
+E           For further information visit https://errors.pydantic.dev/2.12/v/decimal_type
+
+src/aeep/assessment/onboarding.py:45: ValidationError
+=========================== short test summary info ============================
+FAILED tests/test_repository_suites.py::test_curated_materialization_uses_one_existing_ledger_operation
+1 failed, 30 passed in 0.80s
