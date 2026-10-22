@@ -4962,3 +4962,26 @@ plan. Independent task cohorts, real usefulness and live selection-value evidenc
 remain unfinished. The actual assisted human-control follow-up was presented;
 its recorded response remains pending. Resource acceptance and release remain
 separate. No architecture decision, cash or broader authority is requested.
+
+
+## Toolkit C13 correction bundle completed (2026-10-22)
+
+Actual human approval9aaa3f73 was recorded and exercised once. All three components
+passed:23 contained observations through25 canonical operations,18 current-wheel
+installed checks, and pinned offline documentation. All23 canonical receipts bind
+completed attempts and all owned containers are absent. Both private runtimes and
+the host canary were removed. Source5f4e318c stayed unchanged. No model turns,
+dependency downloads, image builds/pulls, credentials, activation or release.
+
+The new operations record27.440954248886555 seconds against1235 reserved seconds;
+grant usage is12812 operations,3744 model turns and118162.60058100801 seconds.
+The earlier failed request and its three charges remain. Exact receipts, ledger,
+actual approval and physical cleanup audit are in
+`reports/toolkit-v2/c13/repository-audit-correction-20261021/completion-audit.json`.
+
+This closes the bounded development-grader conformance and current installed-wheel
+checks. It does not establish a real-task model comparison, full-repository grading,
+capability benefit, live selection value or resource acceptance. Continue independent
+workload/upstream-grader preparation. The actual human control response and release
+approval remain separate. Do not repeat the completed bundle or broad source tests
+without a source change or a specific unresolved concern.

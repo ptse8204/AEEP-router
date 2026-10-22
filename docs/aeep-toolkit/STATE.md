@@ -1,12 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-21: corrected audit and adapter boundary fully source-verified; exact correction bundle 9aaa3f73 is prepared and unexecuted.**
+**Status as of 2026-10-22: approved correction bundle passed grader, installed-wheel and documentation checks; independent repository-workload preparation is next.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
 All five reservations remain charged, including one preflight skip. No new model,
 installation, rebuild, credential or architecture decision is needed for this repair.
-Both capture-repair worker profiles pass containment for source 7707756; its source/wheel/docs checks passed. New repository-grader applicability requires fresh evidence.
+The capture-repair profiles retain their source 7707756 scope. The bounded repository grader now has fresh offline conformance for source 5f4e318c on the fixed development cases; this is not live qualification or a full-repository grader.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
@@ -43,22 +43,22 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '6e3086898721b9f43e292b4791416ca476c89ffc'
-last_check_command: 'repository-audit-correction-20261021/validation-v2/source-stability.json; supplemental/summary.json; prepared-bundle-audit.json; controlled-lifecycle-audit.json'
-last_check_result: 'Source 5f4e318c: both full runs 1623 passed, 21 skipped, 1 existing warning; 82% coverage and both branch gates pass. All 13 integrated and 9 supplemental checks pass, including 13 Node tests. Six receipt-audit regressions and canonical synthetic lifecycle verification pass. Previous package/docs passed; old grader failure retained and reconciled. New exact bundle prepared; no new contained or installed execution.'
-next_action: 'Record actual human approval of approval-bundle.json SHA256 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20 in bundle-operator-approval.json; then run run-bundle.py with that raw digest. Never replay a started component. Retain the earlier failure and its charges. Independently curated workload cohorts and complete frozen four-arm/selection plans remain later scientific work. The three-profile repository mapping is inert and unqualified. Score only an actual human control response; its question is recorded separately.'
+last_check_command: 'repository-audit-correction-20261021/bundle-execution-result.json; completion-audit.json'
+last_check_result: 'Actual approval9aaa3f73 exercised once. Grader23 observations /25 canonical operations passed; all23 receipts/attempts and cleanup verified. Current wheel18 installed checks and pinned offline docs passed; both private runtimes removed. Source5f4e318c unchanged; zero model turns. Earlier failure and3 charges retained. Full source checks remain13/13 passed,1623 tests in each run,82% coverage and both branch gates.'
+next_action: 'Prepare independently sourced repository workloads using upstream task packs. Source audit found SWE-bench Verified contamination/test-quality limits; inspect the newer licensed SWE-rebench pool and its pinned official harness before adapting or executing it. The existing v4 grader handles bounded callable snapshots, not full-repository pytest. Keep the mapping draft inert, freeze actual cohorts/graders/utility before any new model study, and prepare exact untrusted-software execution review only once concrete. Score only an actual human control response; the assisted question remains pending.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Correction bundle 9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20 awaits actual approval: 23 fresh offline observations, 25 existing-grant operations / 1240 reserved seconds, changed wheel plus 32 cached dependencies / 18 installed checks, cached offline docs checker. No models or downloads. Prior bundle is terminal; definitions and finite amendments remain delegated.'
+  - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
   - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
   - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
-  - 'The 9dabc5b repository-grader wheel passed 18 private installed checks; this does not validate the changed 5f4e318c wheel. Actual contained grading remains incomplete. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
+  - 'The 5f4e318c wheel passed18 installed checks, and its fixed development grader conformance passed23 observations. Full-repository grading and independent real-task qualification remain incomplete. Forced instruction loading and four retained capture chains verify, while voluntary use, semantic contribution, provider-internal metering, energy and production resource acceptance remain unknown.'
   - 'Scanner execution, hosted export and ToolHive deployment remain unqualified; benchmark rights/mapping exclusions stay explicit.'
 ```
 
@@ -2625,3 +2625,40 @@ through request_user_input_async and is recorded in
 no human response has been supplied. C13 stays BLOCKED. Resource targets remain
 workload hypotheses; the management fixture and source checks do not establish
 comparative usefulness, live selection value or resource acceptance.
+
+### Exact correction executed successfully (2026-10-22)
+
+The human answered “Approve this exact correction bundle” to question
+call_81b80198a9b44b7791286adc9f67b338, binding raw SHA-256
+9aaa3f73aeca2692361428d1b8eada3a9b3ff7b5ad6018dcb06b7811a19f6f20.
+The actual response is retained in bundle-operator-approval.json. The bundled
+three components ran once and all passed. Source 5f4e318c remained unchanged.
+
+The protected grader checked 15 fixed expectations through 23 fresh contained
+observations: containment/freshness, three reference patches, unchanged snapshots,
+invalid scopes and semantic faults. All 23 canonical receipts bind completed
+attempts; their owned containers are absent from running and stopped containers.
+The host canary was removed. Twenty-five canonical operations reserve 1235 seconds
+inside the approved 1240-second bound and record 27.440954248886555 elapsed seconds.
+The existing grant moves from 12787 to 12812 operations, with 3744 model turns
+unchanged and total elapsed 118162.60058100801 seconds. Cash ledger stays 0.0;
+raw unavailable accounting remains unavailable. The preceding failed request and
+its three charges remain unchanged. This is conformance on development cases,
+not a 23-task model benchmark or qualification.
+
+The current wheel passed 17 CLI/identity checks and one retained capture-chain
+check. All 32 dependency wheels came from the exact cache; no downloads occurred.
+The unchanged private runtime and scratch were removed. The cached pinned
+Lychee scan passed on its recorded public-document hashes and removed its runtime.
+Later progress-journal edits do not retroactively change that scan's inputs.
+No model, credential, image build/pull, activation, release or retained-resource
+cleanup occurred. All evidence is in
+`reports/toolkit-v2/c13/repository-audit-correction-20261021/`, including
+completion-audit.json and the per-component terminal results.
+
+Continue scientific workload preparation rather than repeat the completed bundle.
+Source inspection is now under `reports/toolkit-v2/c13/repository-cohort-20261022/`.
+The independent repository cohort and upstream full-repository grader are not yet
+implemented/qualified; the bounded v4 grader and inert mapping do not replace
+that work. Human control, comparative usefulness, live selection value, operational
+resource acceptance and release remain separate open gates.
