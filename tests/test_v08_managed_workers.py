@@ -305,6 +305,8 @@ async def test_artifact_read_failure_preserves_usage_and_cleans_worker(monkeypat
     result = await host.execute(ctx)
     assert result.error_type == 'WORKER_ARTIFACT_FAILED' and result.output is None
     assert result.resources.output_tokens == 7
+    assert result.metadata['host_failure_code'] == 'worker_artifact_failed'
+    assert result.metadata['worker_cleanup_confirmed'] is True
     assert cleanup.await_count == 2
 
 

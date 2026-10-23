@@ -668,6 +668,9 @@ class Router:
             "assessment_admission_id",
             "boundary_digest",
             "worker_digest",
+            "worker_cleanup_confirmed",
+            "artifact_sha256",
+            "artifact_bytes",
             "container_client_cpu_ms",
             "container_client_peak_memory_mb",
             "adapter_id",
@@ -735,6 +738,14 @@ class Router:
             for key, value in metadata.items()
             if key in allowed and isinstance(value, (str, int, float, bool, type(None)))
         }
+        if type(retained.get("worker_cleanup_confirmed")) is not bool:
+            retained.pop("worker_cleanup_confirmed", None)
+        artifact_hash = retained.get("artifact_sha256")
+        if not isinstance(artifact_hash, str) or not re.fullmatch(r"[a-f0-9]{64}", artifact_hash):
+            retained.pop("artifact_sha256", None)
+        artifact_bytes = retained.get("artifact_bytes")
+        if type(artifact_bytes) is not int or not 0 <= artifact_bytes <= 4_000_000:
+            retained.pop("artifact_bytes", None)
         discovery = metadata.get("capability_discovery")
         if isinstance(discovery, dict):
             retained["capability_discovery"] = {

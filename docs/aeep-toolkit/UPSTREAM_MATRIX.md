@@ -905,3 +905,41 @@ The remaining intervention is this exact execution approval because9f0bf880
 explicitly forbids automatic retry and the pasted continuation withholds general
 untrusted execution authority. No architecture decision is needed. See
 reports/toolkit-v2/c13/repository-model-fault-correction-20261023/README.md.
+
+## C13: corrected grader passed; task delivery and stop behavior failed
+
+Approvedd775e93e ran once on source59b9d61c. All15 independent grader validation
+calls passed and their bounded public replies are retained. The model phase
+then made five actual turns with indeterminate invocation failures and no external
+task grades. The coordinator requested supported cancellation after observing
+three failures;five turns were already dispatched/completed before it took effect.
+No sixth turn ran. All29 operations are complete and313.0355685814284 seconds remain
+charged. Grant13059operations,3749turns,118960.73761921376seconds,0cash. Owned grader
+containers and both reviewed worker images are absent from running/stopped
+containers;the existing proxy is stopped. No image,volume or backup was deleted.
+
+The audit proves the prepared instruction was constant across cases and omitted
+actual task text,base hash,editable paths and artifact paths. The archive transfer
+did not supply that missing task contract. This is a preparation defect,not an
+incorrect agent answer. Receipt metadata also filtered out cleanup confirmation
+and artifact hash/size. The exact original failure cause remains sanitized and
+unknown. Five token chains are partial with all five categories and provider_report/
+self_asserted provenance. Two treatment turns positively observed implicit Ponytail
+instruction loading;that supplies no task usefulness or selection evidence.
+
+Source78bf89bd repairs immediate stopping after an indeterminate trial,preserves
+safe cleanup/artifact metadata,and retains bounded artifact/cleanup failure codes.
+The39 targeted regressions passed with3 skips;Ruff,policy and mypy passed. Required
+full source/coverage verification is running in repository-task-delivery-20261023.
+Its product bytes are frozen until that run finishes. Old source59b9 runtime,wheel
+and worker records retain their original meanings;they do not qualify source78bf.
+
+New inert worker definitions append the existing{input} template. Six checks
+through the actual ManagedHostExecutor with a recording stub verify public task,
+base hash,editable paths and artifact paths,exclude archive/oracle bytes,and show
+three distinct case instruction hashes with equal control/treatment text. This
+is preparation evidence,not worker conformance. A separate five-case synthetic
+check reads external grades from bound canonical BenchmarkTrial.case_validation,
+rather than the earlier execution receipt's unknown task_valid. No model or grant
+operation was added by these first-party checks. Full usefulness/selection remains
+open;do not replay terminald775e93e or infer savings from these failures.

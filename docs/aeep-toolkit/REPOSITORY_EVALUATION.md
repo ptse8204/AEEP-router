@@ -218,6 +218,26 @@ easy and adjacent tasks, before proposing scope. Canonical `fit_report` analysis
 and the existing managed report own scientific conclusions. The new grader does
 not manufacture a positive comparison or authorize admission.
 
+Before starting workers, check the instruction produced by `ManagedHostExecutor`
+for every reviewed case and both roles. A manifest instruction that only describes
+the workflow does not deliver the case. Include the public task input through the
+existing template, for example `Current task JSON: {input}`. The artifact adapter
+removes archive bytes from that prompt and supplies `input_path` and `output_path`;
+the repository adapter supplies the canonical `base_sha256` and editable paths.
+Verify those values and the task text are present, while source bytes, protected
+tests and reference repairs remain absent. Both roles must receive the same
+instruction for a case, and distinct tasks must produce distinct instruction
+hashes. A recording fixture checks preparation only; actual receipts must bind
+the expected instruction hash before claiming delivered task execution.
+
+For separate grading, the canonical `BenchmarkTrial.case_validation` holds the
+independent callback result. An execution receipt's `task_valid` can remain unknown
+because that receipt predates the external grade. Bind the trial's receipt IDs and
+route before reporting its grade; do not copy a grade into an older receipt.
+An indeterminate invocation stops further assessment trials and retains its
+allowance. Safe cleanup and artifact hash/size metadata are retained, without
+artifact contents. Missing historical fields remain unknown.
+
 ## Evaluate selection independently
 
 `SelectionEvaluation` describes a complete case-by-policy matrix. Every policy

@@ -42,7 +42,7 @@ async def test_host_output_rejection_retains_incurred_usage(output):
     assert result.resources.cpu_ms == 3 and result.resources.latency_ms == 25
 
 
-@pytest.mark.parametrize("failure", ["probe", "execute", "specific_code"])
+@pytest.mark.parametrize("failure", ["probe", "execute", "specific_code", "indeterminate"])
 async def test_managed_rejection_stops_campaign_after_first_charged_trial(tmp_path, monkeypatch, failure):
     from aeep.executors.python import PythonExecutor
 
@@ -51,6 +51,9 @@ async def test_managed_rejection_stops_campaign_after_first_charged_trial(tmp_pa
 
     async def execute(_context):
         assert failure != "probe"
+        if failure == "indeterminate":
+            return RawExecution(status="failed", error_type="WORKER_ARTIFACT_FAILED",
+                                resources=ResourceVector(cpu_ms=3))
         return RawExecution(status="rejected", error_type="NO_COMPATIBLE_MODEL",
                             resources=ResourceVector(cpu_ms=3),
                             metadata={"host_failure_code": "environment_verification_unavailable"} if failure == "specific_code" else {})
@@ -61,7 +64,7 @@ async def test_managed_rejection_stops_campaign_after_first_charged_trial(tmp_pa
     context = ExecutionContext(spec=spec, request=ActionRequest(capability="test@1", input={"text": "hello"}), estimate=spec.estimate, attempt=1)
     raw = await ManagedHostExecutor(registry).execute(context)
     code = "environment_verification_unavailable" if failure == "specific_code" else "host_request_rejected"
-    assert raw.metadata["host_failure_code"] == code
+    assert raw.metadata.get("host_failure_code") == (None if failure == "indeterminate" else code)
     assert raw.resources.cpu_ms == (0 if failure == "probe" else 3)
 
     router, service, plan, _ = setup_assessment(tmp_path)

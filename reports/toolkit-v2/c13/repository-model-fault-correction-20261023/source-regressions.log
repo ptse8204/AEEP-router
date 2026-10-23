@@ -1,0 +1,120 @@
+....................F.Fs.........ss.......                               [100%]
+=================================== FAILURES ===================================
+_ test_app_server_named_worker_profile_is_acknowledged_but_not_conformance[absent] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1091c06e0>
+boundary = 'absent'
+
+    @pytest.mark.parametrize('boundary', ['absent', 'verified_fixture', 'revoked'])
+    async def test_app_server_named_worker_profile_is_acknowledged_but_not_conformance(monkeypatch, boundary):
+        from dataclasses import replace
+    
+        from test_codex_subscription_adapter import adapter, context
+    
+        from aeep.models import ManagedHostInvocation
+    
+        host = adapter()
+        host._worker = binding(schema_version='execution.worker.v2',permissions_profile='aeep')
+        original = host.transport.request
+        calls = []
+    
+        async def request(method, params=None, **kwargs):
+            calls.append(method)
+            if method in {'skills/list','mcpServerStatus/list'}:
+                return {'data':[]}
+            if method == 'app/installed':
+                return {'apps':[]}
+            result = await original(method,params,**kwargs)
+            if method == 'thread/start':
+                assert params['permissions'] == 'aeep' and 'sandbox' not in params
+                assert not any(key.startswith('permissions.') for key in params.get('config',{}))
+                result.update(cwd='/workspace',approvalPolicy='never',approvalsReviewer='user',activePermissionProfile={'id':'aeep','extends':None})
+            return result
+    
+        monkeypatch.setattr(host.transport,'request',request)
+        ctx = context()
+        config = ctx.config.model_copy(update={'invocation':ManagedHostInvocation()})
+        def check():
+            if boundary == 'revoked':
+                raise ConfigurationError('environment verification unavailable: fixture review revoked')
+            return 'a' * 64
+        try:
+            await host.probe()
+            identity = await host.resolve_identity(config)
+            raw = await host.execute(replace(ctx,config=config,expected_runtime_digest=identity,
+                invocation_check=check if boundary != 'absent' else None))
+            assert 'thread/start' in calls, raw.model_dump_json()
+            if boundary == 'verified_fixture':
+                # Callback injection tests protocol translation only, not real conformance.
+                assert 'turn/start' in calls and raw.metadata['boundary_digest'] == 'a' * 64
+                assert raw.metadata['model_turn_count'] == 1
+            else:
+                assert 'turn/start' not in calls
+>               assert raw.metadata['host_failure_code'] == 'environment_verification_unavailable'
+E               AssertionError: assert 'worker_cleanup_unconfirmed' == 'environment_...n_unavailable'
+E                 
+E                 - environment_verification_unavailable
+E                 + worker_cleanup_unconfirmed
+
+tests/test_v08_managed_workers.py:225: AssertionError
+_ test_app_server_named_worker_profile_is_acknowledged_but_not_conformance[revoked] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108df11d0>
+boundary = 'revoked'
+
+    @pytest.mark.parametrize('boundary', ['absent', 'verified_fixture', 'revoked'])
+    async def test_app_server_named_worker_profile_is_acknowledged_but_not_conformance(monkeypatch, boundary):
+        from dataclasses import replace
+    
+        from test_codex_subscription_adapter import adapter, context
+    
+        from aeep.models import ManagedHostInvocation
+    
+        host = adapter()
+        host._worker = binding(schema_version='execution.worker.v2',permissions_profile='aeep')
+        original = host.transport.request
+        calls = []
+    
+        async def request(method, params=None, **kwargs):
+            calls.append(method)
+            if method in {'skills/list','mcpServerStatus/list'}:
+                return {'data':[]}
+            if method == 'app/installed':
+                return {'apps':[]}
+            result = await original(method,params,**kwargs)
+            if method == 'thread/start':
+                assert params['permissions'] == 'aeep' and 'sandbox' not in params
+                assert not any(key.startswith('permissions.') for key in params.get('config',{}))
+                result.update(cwd='/workspace',approvalPolicy='never',approvalsReviewer='user',activePermissionProfile={'id':'aeep','extends':None})
+            return result
+    
+        monkeypatch.setattr(host.transport,'request',request)
+        ctx = context()
+        config = ctx.config.model_copy(update={'invocation':ManagedHostInvocation()})
+        def check():
+            if boundary == 'revoked':
+                raise ConfigurationError('environment verification unavailable: fixture review revoked')
+            return 'a' * 64
+        try:
+            await host.probe()
+            identity = await host.resolve_identity(config)
+            raw = await host.execute(replace(ctx,config=config,expected_runtime_digest=identity,
+                invocation_check=check if boundary != 'absent' else None))
+            assert 'thread/start' in calls, raw.model_dump_json()
+            if boundary == 'verified_fixture':
+                # Callback injection tests protocol translation only, not real conformance.
+                assert 'turn/start' in calls and raw.metadata['boundary_digest'] == 'a' * 64
+                assert raw.metadata['model_turn_count'] == 1
+            else:
+                assert 'turn/start' not in calls
+>               assert raw.metadata['host_failure_code'] == 'environment_verification_unavailable'
+E               AssertionError: assert 'worker_cleanup_unconfirmed' == 'environment_...n_unavailable'
+E                 
+E                 - environment_verification_unavailable
+E                 + worker_cleanup_unconfirmed
+
+tests/test_v08_managed_workers.py:225: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_v08_managed_workers.py::test_app_server_named_worker_profile_is_acknowledged_but_not_conformance[absent]
+FAILED tests/test_v08_managed_workers.py::test_app_server_named_worker_profile_is_acknowledged_but_not_conformance[revoked]
+2 failed, 37 passed, 3 skipped in 6.00s

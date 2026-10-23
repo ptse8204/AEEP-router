@@ -116,7 +116,8 @@ async def test_host_assessment_admission_history_and_account_drift(tmp_path, mon
     recipe = shipped_recipe("csv")
     candidate = python_spec("candidate", "aeep.assessment.recipes:reference_csv", capability=recipe.capability, input_schema=recipe.input_schema, output_schema=recipe.output_schema)
     # This fixture tests identity, not one-second process startup under CI load.
-    baseline = ExecutorSpec(id="baseline", capability=recipe.capability, kind="host_managed", description="Offline Codex comparison", resource_pool=RESOURCE_ID, side_effect=SideEffect.READ, config={**managed_config(), "timeout_seconds": 5, "invocation": {"mode": "turn"}}, estimate=candidate.estimate.model_copy(deep=True))
+    # The shared protocol fixture's 1 KiB cap rejects valid multi-column CSV output.
+    baseline = ExecutorSpec(id="baseline", capability=recipe.capability, kind="host_managed", description="Offline Codex comparison", resource_pool=RESOURCE_ID, side_effect=SideEffect.READ, config={**managed_config(), "timeout_seconds": 5, "max_message_bytes": 16_384, "invocation": {"mode": "turn"}}, estimate=candidate.estimate.model_copy(deep=True))
     router = Router(Manifest(database=":memory:", executors=[candidate, baseline], resources=[SubscriptionResource(id=RESOURCE_ID, provider="openai", product="codex")]))
     service = AssessmentService(router, tmp_path / "assessment")
     plugin = tmp_path / "plugin.txt"

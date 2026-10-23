@@ -1,10 +1,10 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-23: six-turn review9f0bf880 ended before models.
-Fresh worker isolation passed; grader validation used an obsolete Marshmallow
-fault. All15 operations/65.09651541616768 seconds remain charged,zero turns/cash.
-Correction reviewd775e93e is prepared with195 pinned assets and no execution.
-The provisional pool remains35 cases/20 repositories; C13 stays IN_PROGRESS.**
+**Status as of 2026-10-23: reviewd775e93e is terminal. Grader validation passed;
+five real task turns lacked the task contract and remain ungraded. All29 operations/
+313.0355685814284 seconds and5 turns remain charged;cash0. Source4cb0bf74 repairs
+stopping and metadata. Final full checks are running;new definitions are inert.
+The35-case pool and C13 usefulness/selection gates remain incomplete.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -46,17 +46,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '9b950b2'
+last_verified_commit: 'e319e2d'
 last_check_command: 'repository-model-journey-20261022/terminal-audit.json; repository-model-fault-correction-20261023/preparation-checks.json'
-last_check_result: 'Terminal9f0bf880:11groups per worker and collector denial passed;nine grader receipts/attempts match reconstructed payload digests;last call used old Marshmallow import fault. All15 operations complete,65.09651541616768seconds charged,zero model/cash,owned graders absent and proxy stopped. Grant13030operations/3744turns/118647.70205063233seconds/0cash. Correctiond775e93e prepared:195assets,seven budget/two observer guards,exact prior certified fault archive,unchanged worker fingerprints and source59b9.'
-next_action: 'Do not replay terminal9f0bf880. Read repository-model-fault-correction-20261023/README.md and exact reviewd775e93e. Record actual approval and run run-corrected.py once only if approved. It reuses unchanged fresh worker conformance and normally validates the corrected recipe before up to6 development task turns. Keep prior15 charges and retain bounded grader replies. Continue independent corpus work; full8/28/105,usefulness,selection,controls,resources and release remain open. No architecture/install/build/source-check decision needed.'
+last_check_result: 'Terminald775e93e:15 real grader validation calls passed;5 real task turns have indeterminate invocation failures and no grades. All29operations/313.0355685814284seconds charged,5turns,0cash;owned containers absent and proxy stopped. Constant prompt omitted per-case data. Source78bf89bd targeted39passed/3skipped;ruff/policy/mypy passed;full checks running. Six actual managed-executor recording checks and five trial-grade binding fixtures passed without models/workers.'
+next_action: 'First inspect final source-check session94490 and repository-task-delivery-20261023/validation-final/checks.json;do not restart it. Initial31612 is terminal with a fixture frame-limit failure. Complete required source and coverage gates on frozen4cb0bf74. Current model definitions are inert;actual prompt recording checks pass. Reconcile terminald775e93e and preserve all5 turns. Prepare one concrete review for fresh applicable conformance,correct task delivery and installed current artifact checks after source verification. No execution approval exists for source4cb0bf74. Continue safe preparation;no architecture decision.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Exact correctiond775e93e needs actual approval:the preceding9f0bf880 one-attempt/no-retry review is terminal. It covers the corrected protected fault,normal grader validation and at most6 public development task turns. Same128operations/10000seconds/0cash ceiling,images,public tasks and destination;no new inspection/install/build/docs/package execution.'
+  - 'No new source4cb0bf74 execution authority exists. Completedd775e93e is terminal;all5 actual turns and29 operations remain charged. Finish full source verification and a concrete fresh conformance/model/package review before requesting intervention. Routine first-party source/definition work continues safely.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
@@ -3368,3 +3368,61 @@ rejected faults across57 decisions. No external code,worker,model or canonical
 grant operation was executed. This confirms corrected definition wiring only;
 current runtime validation remains pending exact approval. All195 pending-review
 assets are unchanged. See repository-model-fault-correction-20261023/grader-replay-check.json.
+
+## C13: corrected grader passed; task delivery and stop behavior failed
+
+Approvedd775e93e ran once on source59b9d61c. All15 independent grader validation
+calls passed and their bounded public replies are retained. The model phase
+then made five actual turns with indeterminate invocation failures and no external
+task grades. The coordinator requested supported cancellation after observing
+three failures;five turns were already dispatched/completed before it took effect.
+No sixth turn ran. All29 operations are complete and313.0355685814284 seconds remain
+charged. Grant13059operations,3749turns,118960.73761921376seconds,0cash. Owned grader
+containers and both reviewed worker images are absent from running/stopped
+containers;the existing proxy is stopped. No image,volume or backup was deleted.
+
+The audit proves the prepared instruction was constant across cases and omitted
+actual task text,base hash,editable paths and artifact paths. The archive transfer
+did not supply that missing task contract. This is a preparation defect,not an
+incorrect agent answer. Receipt metadata also filtered out cleanup confirmation
+and artifact hash/size. The exact original failure cause remains sanitized and
+unknown. Five token chains are partial with all five categories and provider_report/
+self_asserted provenance. Two treatment turns positively observed implicit Ponytail
+instruction loading;that supplies no task usefulness or selection evidence.
+
+Source78bf89bd repairs immediate stopping after an indeterminate trial,preserves
+safe cleanup/artifact metadata,and retains bounded artifact/cleanup failure codes.
+The39 targeted regressions passed with3 skips;Ruff,policy and mypy passed. Required
+full source/coverage verification is running in repository-task-delivery-20261023.
+Its product bytes are frozen until that run finishes. Old source59b9 runtime,wheel
+and worker records retain their original meanings;they do not qualify source78bf.
+
+New inert worker definitions append the existing{input} template. Six checks
+through the actual ManagedHostExecutor with a recording stub verify public task,
+base hash,editable paths and artifact paths,exclude archive/oracle bytes,and show
+three distinct case instruction hashes with equal control/treatment text. This
+is preparation evidence,not worker conformance. A separate five-case synthetic
+check reads external grades from bound canonical BenchmarkTrial.case_validation,
+rather than the earlier execution receipt's unknown task_valid. No model or grant
+operation was added by these first-party checks. Full usefulness/selection remains
+open;do not replay terminald775e93e or infer savings from these failures.
+
+### D96 — Keep fixture frame limits separate from production and preserve strict stops
+
+The initial full run on78bf89bd completed1677 passed/21 skipped/1 failed. Read-only
+inspection traced the identity/admission fixture's first stopped invocation to a
+valid1155-byte CSV output exceeding managed_config's1024-byte protocol-fixture
+limit. The fixture now uses16384 bytes;its focused identity test passed in36.66s.
+No production frame limit or campaign threshold changed. The strict first-uncertain-
+trial stop remains. Safe artifact fields now reject nonboolean cleanup flags,
+non-SHA256 strings and noninteger/out-of-range byte counts. Forty focused tests
+passed with3 skips;Ruff and mypy passed. Source4cb0bf74 is frozen for final full
+verification in session94490,validation-final;do not restart that run.
+
+The new source4cb0bf74 inert definitions,requests and six rendered task checks
+replace only unexecuted source78 prototypes,which are retained in draft-source78.
+Actual failed models still bind source59b9. New conformance,models,package and
+untrusted documentation checks remain unauthorized until one concrete review is
+prepared after source verification. Thirty-two dependency wheels and the pinned
+6992530-byte Lychee archive remain present with matching hashes;no download or
+installation was performed. New package/docs preparers are inert.

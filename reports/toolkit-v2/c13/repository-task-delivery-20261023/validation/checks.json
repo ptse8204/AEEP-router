@@ -1,0 +1,47 @@
+[
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "pytest",
+      "integrations/toolkit"
+    ],
+    "returncode": 0,
+    "seconds": 1.6615650421008468,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation/00.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "examples",
+      "tests"
+    ],
+    "returncode": 0,
+    "seconds": 0.08440920896828175,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation/01.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/generate_schemas.py",
+      "--check"
+    ],
+    "returncode": 0,
+    "seconds": 0.8205233332701027,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation/02.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 1,
+    "seconds": 567.60518149985,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation/03.log"
+  }
+]

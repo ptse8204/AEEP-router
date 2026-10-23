@@ -1507,3 +1507,61 @@ rejected faults across57 decisions. No external code,worker,model or canonical
 grant operation was executed. This confirms corrected definition wiring only;
 current runtime validation remains pending exact approval. All195 pending-review
 assets are unchanged. See repository-model-fault-correction-20261023/grader-replay-check.json.
+
+### D95 — Verify rendered case delivery and stop on the first uncertain invocation
+
+Approvedd775e93e ran once on source59b9d61c. All15 independent grader validation
+calls passed and their bounded public replies are retained. The model phase
+then made five actual turns with indeterminate invocation failures and no external
+task grades. The coordinator requested supported cancellation after observing
+three failures;five turns were already dispatched/completed before it took effect.
+No sixth turn ran. All29 operations are complete and313.0355685814284 seconds remain
+charged. Grant13059operations,3749turns,118960.73761921376seconds,0cash. Owned grader
+containers and both reviewed worker images are absent from running/stopped
+containers;the existing proxy is stopped. No image,volume or backup was deleted.
+
+The audit proves the prepared instruction was constant across cases and omitted
+actual task text,base hash,editable paths and artifact paths. The archive transfer
+did not supply that missing task contract. This is a preparation defect,not an
+incorrect agent answer. Receipt metadata also filtered out cleanup confirmation
+and artifact hash/size. The exact original failure cause remains sanitized and
+unknown. Five token chains are partial with all five categories and provider_report/
+self_asserted provenance. Two treatment turns positively observed implicit Ponytail
+instruction loading;that supplies no task usefulness or selection evidence.
+
+Source78bf89bd repairs immediate stopping after an indeterminate trial,preserves
+safe cleanup/artifact metadata,and retains bounded artifact/cleanup failure codes.
+The39 targeted regressions passed with3 skips;Ruff,policy and mypy passed. Required
+full source/coverage verification is running in repository-task-delivery-20261023.
+Its product bytes are frozen until that run finishes. Old source59b9 runtime,wheel
+and worker records retain their original meanings;they do not qualify source78bf.
+
+New inert worker definitions append the existing{input} template. Six checks
+through the actual ManagedHostExecutor with a recording stub verify public task,
+base hash,editable paths and artifact paths,exclude archive/oracle bytes,and show
+three distinct case instruction hashes with equal control/treatment text. This
+is preparation evidence,not worker conformance. A separate five-case synthetic
+check reads external grades from bound canonical BenchmarkTrial.case_validation,
+rather than the earlier execution receipt's unknown task_valid. No model or grant
+operation was added by these first-party checks. Full usefulness/selection remains
+open;do not replay terminald775e93e or infer savings from these failures.
+
+### D96 — Keep fixture frame limits separate from production and preserve strict stops
+
+The initial full run on78bf89bd completed1677 passed/21 skipped/1 failed. Read-only
+inspection traced the identity/admission fixture's first stopped invocation to a
+valid1155-byte CSV output exceeding managed_config's1024-byte protocol-fixture
+limit. The fixture now uses16384 bytes;its focused identity test passed in36.66s.
+No production frame limit or campaign threshold changed. The strict first-uncertain-
+trial stop remains. Safe artifact fields now reject nonboolean cleanup flags,
+non-SHA256 strings and noninteger/out-of-range byte counts. Forty focused tests
+passed with3 skips;Ruff and mypy passed. Source4cb0bf74 is frozen for final full
+verification in session94490,validation-final;do not restart that run.
+
+The new source4cb0bf74 inert definitions,requests and six rendered task checks
+replace only unexecuted source78 prototypes,which are retained in draft-source78.
+Actual failed models still bind source59b9. New conformance,models,package and
+untrusted documentation checks remain unauthorized until one concrete review is
+prepared after source verification. Thirty-two dependency wheels and the pinned
+6992530-byte Lychee archive remain present with matching hashes;no download or
+installation was performed. New package/docs preparers are inert.

@@ -61,3 +61,40 @@ def test_discovery_retention_is_limited_to_boolean_observations(value, expected)
     assert retained == {
         "capability_discovery": {"exposed": expected, "retrieved": None, "invoked": False}
     }
+
+
+@pytest.mark.asyncio
+async def test_artifact_evidence_survives_receipt_storage_without_contents(tmp_path, monkeypatch):
+    from conftest import manifest_with, python_spec
+
+    from aeep.executors.python import PythonExecutor
+    from aeep.models import ActionRequest, RawExecution
+
+    async def execute(self, context):
+        return RawExecution(status='success', output={}, metadata={
+            'worker_cleanup_confirmed': True, 'artifact_sha256': 'a' * 64,
+            'artifact_bytes': 17, 'artifact_contents': 'PRIVATE_ARTIFACT',
+            'artifact_path': '/private/user/file', 'host_failure_code': 'worker_artifact_failed'})
+
+    monkeypatch.setattr(PythonExecutor, 'execute', execute)
+    manifest = manifest_with(python_spec('artifact', 'aeep.builtin.text:stats'))
+    manifest.database = str(tmp_path / 'receipts.sqlite3')
+    router = Router(manifest)
+    try:
+        outcome = await router.execute(ActionRequest(capability='text.stats', input={}))
+        assert outcome.ok
+        retained = router.store.get_receipt(outcome.receipts[0].receipt_id).metadata
+        assert retained['worker_cleanup_confirmed'] is True
+        assert retained['artifact_sha256'] == 'a' * 64 and retained['artifact_bytes'] == 17
+        assert retained['host_failure_code'] == 'worker_artifact_failed'
+        assert 'PRIVATE_ARTIFACT' not in str(retained) and '/private/user/file' not in str(retained)
+    finally:
+        await router.close()
+
+
+def test_artifact_metadata_rejects_contents_and_unbounded_counts():
+    retained = Router._safe_receipt_metadata({
+        'worker_cleanup_confirmed': 'PRIVATE', 'artifact_sha256': 'PRIVATE',
+        'artifact_bytes': 4_000_001, 'artifact_contents': 'PRIVATE'})
+    assert retained == {}
+    assert Router._safe_receipt_metadata({'artifact_bytes': True}) == {}

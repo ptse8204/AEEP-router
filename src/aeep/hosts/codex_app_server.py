@@ -812,6 +812,7 @@ class CodexAppServerAdapter:
                             raw.status = ExecutionStatus.FAILED
                             raw.output = None
                             raw.error_type = "WORKER_ARTIFACT_FAILED"
+                            raw.metadata["host_failure_code"] = "worker_artifact_failed"
                         raw.resources.latency_ms = (time.monotonic() - started) * 1000
                     raw.metadata["worker_digest"] = self._worker.digest()
                 finally:
@@ -831,6 +832,7 @@ class CodexAppServerAdapter:
                 if not cleaned:
                     raw.status = ExecutionStatus.FAILED
                     raw.error_type = 'WORKER_CLEANUP_UNCONFIRMED'
+                    raw.metadata.setdefault('host_failure_code', 'worker_cleanup_unconfirmed')
                 return raw
         if context.config.worker_workspace == "temporary":
             # A fresh directory prevents cross-case state reuse. It is not a

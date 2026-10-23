@@ -1133,8 +1133,8 @@ class AssessmentService:
             )
             if trial.error_type == "ValidationExecutionError":
                 raise ConfigurationError("assessment grader failed; candidate correctness is not evaluated")
-            if trial.failure_category == "environment_failure" or trial.error_type == "ConfigurationError":
-                raise ConfigurationError("assessment environment failed; further trials stopped")
+            if trial.failure_category in {"environment_failure", "indeterminate"} or trial.error_type == "ConfigurationError":
+                raise ConfigurationError("assessment execution unavailable or uncertain; further trials stopped")
 
         environment = AssessmentEnvironment.model_validate(
             self.repository.get("environment", plan.environment_digest)
