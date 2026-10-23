@@ -1020,6 +1020,15 @@ The protected coordinator checks patch scope and raw test observations; a child
 verdict MUST NOT establish correctness. Missing, skipped or errored required tests
 MUST NOT pass. Versions 1–4 retain their existing meanings and serialization.
 
+`assessment.repository-suite-case.v2` adds an explicit reviewed list of pytest
+plugin module names in protected truth. Version-1 cases MUST reject that field
+and retain their serialization and observer. Plugin-enabled definitions MUST
+use a separately fingerprinted observer and recipe identity. They MUST keep
+automatic plugin loading disabled, load declared plugins from the reviewed
+runtime before exposing candidate source paths, and reject an already loaded
+editable source module. Plugin declarations grant no installation, network or
+execution authority; dependency bytes and the effective image still need review.
+
 Assessment definitions, plans, authorizations, reports and scoped admissions use
 `assessment.*.v1` schema identifiers. Ordinary routing MUST NOT start assessments
 or contact a planning model. Model arguments MUST NOT create, expand or revoke

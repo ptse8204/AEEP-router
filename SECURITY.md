@@ -385,6 +385,15 @@ upstream parser and test suite are not proofs against malicious output forgery
 or incomplete tests. Assets and fixture-origin declarations require operator
 review; their hashes do not establish licensing or independence by themselves.
 
+Suite case v2 permits only reviewed dotted pytest plugin module names, with
+automatic plugin loading still disabled. Its observer imports pytest and declared
+plugins before exposing candidate source paths. If those imports have already
+loaded an editable source module, grading stops instead of testing installed code
+as the submitted patch. Version-1 cases reject plugin declarations and keep their
+original observer. Plugins are executable dependencies, not trusted merely by
+name; their wheels or image must be pinned and authorized. This does not extend
+containment, authorize installation or establish resistance to forged test logs.
+
 Installed plugin metadata, declared side effects and model-generated recipes are
 untrusted inputs. Reviews bind exact definitions; standing authorizations bind
 subjects, recipes, environments and finite ceilings. Model-facing tools cannot

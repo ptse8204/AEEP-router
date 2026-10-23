@@ -615,6 +615,13 @@ materialization and published-reference reads use the existing operation ledger;
 test execution stays contained. Dataset and environment conformance remain
 separate from source implementation.
 
+Suite case v2 adds explicit pytest plugin modules in protected truth. It uses
+the same observer executor and containment path with a separate program
+fingerprint; legacy-only recipes retain the original program and identity.
+Plugins load from reviewed wheels or the pinned image before candidate paths are
+added. A source module already loaded by that runtime blocks grading. This adds
+no plugin discovery service, dependency resolver or installer.
+
 `aeep.assessment` owns immutable definitions, operator reviews, authorizations,
 job state and comparative reports. Its service calls `BenchmarkRunner`, which
 executes through isolated `Router` instances. `ReceiptStore.campaign_snapshot`

@@ -10,13 +10,14 @@ import gzip
 import hashlib
 import io
 import json
+import re
 import sysconfig
 import tarfile
 from collections import Counter
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import ConfigDict, Field, TypeAdapter, model_validator
 
 from ..artifact_store import _read_stable_file
 from ..errors import ConfigurationError
@@ -154,6 +155,20 @@ class SuiteTruth(StrictModel):
         return self
 
 
+class SuiteTruthV2(SuiteTruth):
+    """Operator-reviewed plugins; loading stays explicit with autoload disabled."""
+
+    pytest_plugins: list[str] = Field(min_length=1, max_length=8)
+
+    @model_validator(mode='after')
+    def plugins(self) -> SuiteTruthV2:
+        if (len(set(self.pytest_plugins)) != len(self.pytest_plugins)
+                or any(len(name) > 128 or not re.fullmatch(r'[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*', name, flags=re.ASCII)
+                       for name in self.pytest_plugins)):
+            raise ValueError('pytest plugins must be distinct bounded module names')
+        return self
+
+
 class SuiteArtifact(StrictModel):
     patch_b64: str = Field(max_length=700_000)
 
@@ -182,10 +197,22 @@ def decode_patch(value: Any) -> RepositoryPatch:
     return patch
 
 
+def _suite_version_schema(schema: dict[str, Any]) -> None:
+    # Reuse Pydantic's references so definition renaming remains valid.
+    plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    schema['allOf'] = [
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
+         'then': {'properties': {'truth': legacy_truth}}},
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v2'}}, 'required': ['schema_version']},
+         'then': {'properties': {'truth': plugin_truth}}},
+    ]
+
+
 class RepositorySuiteCase(StrictModel):
-    schema_version: Literal['assessment.repository-suite-case.v1'] = 'assessment.repository-suite-case.v1'
+    model_config = ConfigDict(json_schema_extra=_suite_version_schema)
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2'] = 'assessment.repository-suite-case.v1'
     input: SuiteInput
-    truth: SuiteTruth
+    truth: SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -199,6 +226,8 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
+        if self.schema_version.endswith('.v2') != isinstance(self.truth, SuiteTruthV2):
+            raise ValueError('explicit pytest plugins require repository suite case v2')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
@@ -228,7 +257,8 @@ def public_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any
 
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
-    task, oracle = SuiteInput.model_validate(value), SuiteTruth.model_validate(truth)
+    task = SuiteInput.model_validate(value)
+    oracle = (SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
@@ -255,6 +285,12 @@ async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], outpu
             'python': oracle.python, 'pytest': oracle.pytest, 'test_paths': oracle.test_paths,
             'wheels': [{'filename': Path(asset.path).name, 'sha256': asset.sha256,
                         'data': base64.b64encode(asset.read()).decode()} for asset in oracle.wheels]}
+        if isinstance(oracle, SuiteTruthV2):
+            payload['pytest_plugins'] = oracle.pytest_plugins
+            modules = [PurePosixPath(name).parts[1:] if name.startswith('src/') else PurePosixPath(name).parts
+                       for name in task.editable_paths]
+            payload['source_modules'] = sorted({parts[0].removesuffix('.py') for parts in modules
+                                                if parts[0].removesuffix('.py').isidentifier()})
         if len(json.dumps(payload).encode()) > MAX_PAYLOAD - 30_000:
             raise ConfigurationError('repository test payload exceeds reviewed transport bound')
         reply = await probe(payload)
@@ -323,7 +359,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
     if not root.is_dir():
         root = Path(sysconfig.get_path('data')) / 'share/aeep/integrations/assessment-runtime'
     parser = (root / 'swe_rebench_pytest_parser.py').read_text()
-    program = parser + '\n' + (root / 'repository_suite_program.py').read_text()
+    plugins = any(isinstance(case.truth, SuiteTruthV2) for case in cases)
+    program = parser + '\n' + (root / ('repository_suite_plugins_program.py' if plugins else 'repository_suite_program.py')).read_text()
     observer = ExecutorSpec(id='repository.suite.observe', capability='assessment.repository_suite@1', kind=ExecutorKind.COMMAND,
         description='Pinned upstream pytest observations; protected coordinator decides task correctness.',
         config={'argv': ['python3', '-B', '-c', program], 'argv_literal': True, 'stdin_json': True,
@@ -336,8 +373,10 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
     variations = sorted({case.input.family for case in cases})
     # V5 retains the legacy executor slots, but materializes curated data and
     # reads pinned published reference patches instead of dispatching those slots.
-    recipe = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='repository-suite-' + content_digest(
-        {'cases': [case.model_dump(mode='json') for case in cases]})[:16], capability=observer.capability,
+    identity: dict[str, Any] = {'cases': [case.model_dump(mode='json') for case in cases]}
+    if plugins:
+        identity['runtime_program_sha256'] = hashlib.sha256(program.encode()).hexdigest()
+    recipe = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='repository-suite-' + content_digest(identity)[:16], capability=observer.capability,
         description='Curated source-bound Python repository suites; no official benchmark score or arbitrary preservation claim.',
         input_schema=SuiteInput.model_json_schema(), output_schema=SuiteArtifact.model_json_schema(),
         generator='curated_repository:1', grader='contained_json:1', extractor='structural_json:1',
@@ -348,7 +387,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=SuiteTruth.model_json_schema(), independent_fixtures=fixtures[:2], transformed_fixtures=fixtures[2:],
+            grader=observer, truth_schema=TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema() if plugins else SuiteTruth.model_json_schema(),
+            independent_fixtures=fixtures[:2], transformed_fixtures=fixtures[2:],
             fault_outputs=[fault for case in literals for fault in case.fault_outputs], failure_codes=FAILURES,
             feature_rules={'family': RecipeFeatureRule(path='/family', operation='enum', values=[*variations])},
             variation_features={name: {'family': name} for name in variations},

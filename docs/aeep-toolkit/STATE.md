@@ -44,8 +44,8 @@ checkpoint_status:
   C13: BLOCKED
 last_verified_commit: '3557d88e65192e7409679d7654d95681d4aa8903'
 last_check_command: 'repository-screening-curation-20261022/completion-audit.json; exclusion-analysis.json; repository-workload-expansion-20261022/withdrawal.json; source-family-audit.json'
-last_check_result: 'Actual4cfc412d approval used once. Batch completed14 calls/16 operations,24.288069125264883 seconds;14 canonical completed attempts/receipts reopened, all owned containers absent. Six of8 cases reproduced; Files-to-prompt reference failed on Click API incompatibility, Jsonpickle missing2 required Ruff identities. Both negatives skipped, no retry/refund. Grant12855 operations/3744 turns/118225.42372825788 seconds/0.0 cash. Sourcefcd91dde unchanged at completion. Later48fa60c0 proposed bundle WITHDRAWN before install/build: Py3status3-file metadata includes2 docstring-only changes, so cannot fill a multi-file slot. No new execution/architecture approval is pending.'
-next_action: 'Implement explicit reviewed pytest-plugin support in a new repository-suite case version, preserving v1 serialization and observer bytes. Read src/aeep/assessment/repository_suites.py, integrations/assessment-runtime/repository_suite_program.py and tests/test_repository_suites.py. AbsaOSS release-notes has2 substantive source-file changes but needs pytest-mock; current observer disables autoload and cannot declare plugins. Keep legacy behavior frozen; import approved plugins before candidate source paths. Run required source verification after code changes, then prepare one corrected source/runtime-bound execution review. Do not execute withdrawn48fa60c0 even on a late approval. Existing completed4cfc412d is terminal. Curation metadata hints are not verified task complexity; apply source-body AST review before multi-file classification.'
+last_check_result: 'Sourcef694024c591a2b72dcda6887bc8af99cb5a0c88848f9abc9674a430d72b8d942 passes all13 configured checks without drift;1673 tests in each full run,21 skips,82% total coverage,both coverage gates,Ruff,layering,mypy and builds.50 focused tests and exact legacy serialization equivalence pass. Session59080 is terminal. A broader AST audit found Dissect.cstruct/Mockito also have only one executable changed file each; preserve actual reproduction results but correct family counts before cohort freeze. New v2 runtime,wheel/docs execution remains unapproved; withdrawn48fa60c0 remains unused despite its actual late approval.'
+next_action: 'Finish the concrete corrected runtime/package/docs bundle on verified sourcef694024c. Source verification is terminal: do not rerun unchanged code.25 exact runtime wheels are cached as inert data with dependency/ABI/license review. Prepare the corrected balanced provisional8-case batch, genuine multi-file behavior checks and current-wheel/offline-docs reviews; ask only for that exact external-execution bundle. Preserve all earlier drafts and the unused actual48fa60c0 approval. Full independent cohorts, model qualification/value, live selection and human controls remain open.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
@@ -3015,3 +3015,24 @@ engineering change is versioned explicit plugin support on the existing grader,
 with legacy serialization/observer bytes preserved. Follow source verification
 with a corrected finite installation/execution review. The withdrawn bundle is
 not authority for that change, and no new architecture decision is required.
+
+### C13: explicit pytest plugin support under source verification
+
+The source change adds `SuiteTruthV2` and `assessment.repository-suite-case.v2`.
+Version-1 cases, truth schema, serialized definitions, recipe ID/digest and
+legacy observer bytes compare exactly equal to the retained pre-change values.
+A plugin-enabled recipe uses a separate program fingerprint and identity.
+Its protected truth declares dotted plugin names. Automatic loading stays off;
+pytest and plugins load from the reviewed runtime before candidate paths are
+exposed. An editable source module already loaded by that runtime blocks grading.
+
+Fifty focused tests pass, including real-process first-party plugin/parser/pytest
+shims, blocked source shadowing/preloading, schema-version consistency and rejected
+patch-supplied plugin arguments. They are software checks, not external plugin or
+repository conformance. Ruff and mypy pass. Full configured verification completed
+in `repository-plugin-support-20261022/validation` on source `f694024c591a2b72dcda6887bc8af99cb5a0c88848f9abc9674a430d72b8d942`.
+All13 commands passed without source drift:1673 tests in each full run,21 skips,
+the existing Starlette warning,82% total coverage, both branch gates, Ruff, layering,
+mypy and wheel/source builds. Session59080 is terminal; do not repeat this run. No new wheel, external runtime
+image or plugin has been installed/executed. Existing v1 conformance remains
+historical; it does not qualify the new v2 observer.

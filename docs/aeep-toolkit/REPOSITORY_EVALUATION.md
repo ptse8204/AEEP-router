@@ -169,6 +169,35 @@ test suites do not prove resistance to adversarial output forgery or incomplete
 tests. Curate reproducible workloads and retain these limits in the report.
 The existing comparison and selection analysis below remain unchanged.
 
+### Tests that need a pytest plugin
+
+Use `assessment.repository-suite-case.v2` for a suite that needs a specific pytest
+plugin. Its protected truth adds a nonempty `pytest_plugins` list, such as
+`["pytest_mock"]`. Module names must be distinct, bounded dotted identifiers;
+paths, flags and entry-point expressions are rejected. Version-1 cases reject
+the field. Their serialized definitions and legacy-only observer stay unchanged.
+
+The v2 observer keeps automatic plugin loading disabled. It imports pytest and
+declared plugins from the reviewed runtime before adding candidate source paths.
+It then checks that no editable project module was already loaded. A conflict
+blocks grading; it cannot count an installed library as the candidate's patch.
+The public task and model-supplied patch cannot enable plugins. A plugin-enabled
+recipe has a separate observer fingerprint and identity, and needs fresh review
+and applicable conformance. Mixed recipes use that reviewed observer for every
+case. Older conformance is not transferred to it.
+
+The declaration neither installs nor downloads a package. Keep plugin wheels
+within the existing bounds or provision a separately reviewed pinned grader
+image. Review the full dependency closure, license terms and runtime applicability.
+Required test identities stay fixed: missing plugin-generated tests cannot be
+removed merely to make a reference pass. First-party process fixtures verify the
+import order and conflict stop; external plugin execution remains unqualified
+until a separately authorized contained check completes.
+
+Published Python file counts are curation hints. Inspect source-body changes and
+test obligations before calling a task a multi-file repair; documentation-string
+edits in extra Python files do not supply that evidence.
+
 ## Compare capability usefulness
 
 Store/review the exported recipe through the existing assessment interfaces,

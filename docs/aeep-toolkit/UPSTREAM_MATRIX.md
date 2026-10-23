@@ -593,3 +593,20 @@ and observer bytes, then verify changed source and prepare a corrected exact
 runtime review. Full independent cohorts, model qualification, usefulness and
 selection remain unproven. Human controls, resource acceptance and release remain
 separate; no new third-party execution or installation is authorized.
+
+### October22: explicit plugin source verification completed
+
+Current source `f694024c` passes all13 configured checks without drift:1673 tests
+in each full run,21 skips,82% total coverage,both branch gates,Ruff,layering,mypy
+and builds. Fifty focused tests and exact legacy serialization/observer equality
+pass. Evidence is in `repository-plugin-support-20261022/validation`. No further
+broad source test is needed on unchanged code. External plugin/runtime and current
+installed-wheel conformance remain separate and unexecuted.
+
+Late approval48fa60c0 is retained but unused because the review was already
+withdrawn. The wider AST audit also corrects Dissect.cstruct and Mockito from
+nominal multi-file edits to one executable source-file change each. Preserve their
+actual test outcomes; do not use those labels to fill a balanced cohort. Genuine
+replacement preparation and exact offline runtime/wheel/docs review continue.
+No new model usefulness, selection, human-control,resource-acceptance or release
+gate passes from these engineering checks.

@@ -17,6 +17,7 @@ from aeep.assessment.repository_suites import (
     SuiteAsset,
     SuiteInput,
     SuiteTruth,
+    SuiteTruthV2,
     archive_files,
     curated_cases,
     curated_payload,
@@ -448,3 +449,106 @@ async def test_existing_callback_and_grader_validation(suite_cases, monkeypatch)
     plan.suite.cases = [SimpleNamespace(action=SimpleNamespace(input=value), validators=[SimpleNamespace(config={'expected': truth})])]
     result = await callbacks(None, plan, recipe)[grader_name(value, truth)](ValidationContext(input=value, output=json.loads(case.reference.read())))
     assert result.valid
+
+
+def test_explicit_plugins_need_v2_in_models_and_exported_schema(suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    legacy = suite_cases[0].model_dump(mode='json')
+    current = copy.deepcopy(legacy)
+    current['schema_version'] = 'assessment.repository-suite-case.v2'
+    current['truth']['pytest_plugins'] = ['pytest_mock']
+    schema = RepositorySuiteCase.model_json_schema()
+    Draft202012Validator.check_schema(schema)
+    validator = Draft202012Validator(schema)
+    assert not list(validator.iter_errors(legacy)) and not list(validator.iter_errors(current))
+    case = RepositorySuiteCase.model_validate(current)
+    assert isinstance(case.truth, SuiteTruthV2) and case.model_dump(mode='json') == current
+    assert suite_cases[0].model_dump(mode='json') == legacy and 'pytest_plugins' not in legacy['truth']
+    for invalid in ({**legacy, 'truth': current['truth']}, {**current, 'truth': legacy['truth']}):
+        with pytest.raises(ValueError, match='require repository suite case v2'):
+            RepositorySuiteCase.model_validate(invalid)
+        with pytest.raises(ValidationError):
+            validator.validate(invalid)
+    without_version = {key: value for key, value in current.items() if key != 'schema_version'}
+    with pytest.raises(ValidationError):
+        validator.validate(without_version)
+    with pytest.raises(ValueError):
+        SuiteTruth.model_validate(current['truth'])
+
+
+@pytest.mark.parametrize('plugins', [[], ['pytest_mock'] * 2, ['x'] * 9, ['-p'], ['x/y'], ['x:y'],
+                                    ['x;exit'], ['x\ny'], ['x' * 129], ['café'], ['x..y']])
+def test_plugin_names_cannot_supply_paths_flags_or_duplicate_imports(suite_cases, plugins):
+    with pytest.raises(ValueError):
+        SuiteTruthV2.model_validate({**suite_cases[0].truth.model_dump(mode='json'), 'pytest_plugins': plugins})
+
+
+@pytest.mark.asyncio
+async def test_plugins_are_frozen_truth_and_not_patch_or_public_input(suite_cases):
+    case = suite_cases[0]
+    legacy = repository_suite_recipe(suite_cases)
+    truth = {**case.truth.model_dump(mode='json'), 'pytest_plugins': ['pytest_mock']}
+    data = {**case.model_dump(mode='json'), 'schema_version': 'assessment.repository-suite-case.v2', 'truth': truth}
+    current = RepositorySuiteCase.model_validate(data)
+    recipe = repository_suite_recipe([current, *suite_cases[1:]])
+    assert recipe.recipe_id != legacy.recipe_id
+    assert content_digest(recipe.extension.grader) != content_digest(legacy.extension.grader)
+    assert reference_outputs(recipe, [case.input.model_dump(mode='json')]) == [json.loads(case.reference.read())]
+    observed = []
+
+    async def probe(payload):
+        assert payload['pytest_plugins'] == ['pytest_mock'] and payload['source_modules'] == ['library']
+        observed.append(payload)
+        return success(payload, case.truth)
+
+    assert (await grade_suite_output(case.input.model_dump(mode='json'), truth, json.loads(case.reference.read()), probe)).valid
+    assert len(observed) == 1
+    public = public_archive(case.input.model_dump(mode='json'), [str(Path(case.truth.source.path).parent)])
+    assert 'pytest_plugins' not in public and 'source_modules' not in public
+
+    async def forbidden(_payload):
+        pytest.fail('patch-supplied plugin configuration executed')
+
+    forged = {**json.loads(case.reference.read()), 'pytest_plugins': ['unreviewed']}
+    assert not (await grade_suite_output(case.input.model_dump(mode='json'), truth, forged, forbidden)).valid
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('preload_source', [False, True])
+async def test_explicit_plugin_real_process_keeps_trusted_imports_and_source_binding(preload_source):
+    """Only first-party parser/pytest/plugin shims execute; this is not conformance."""
+    import subprocess
+    import sys
+    import zipfile
+
+    wheel = io.BytesIO()
+    with zipfile.ZipFile(wheel, 'w') as archive:
+        archive.writestr('fixture_target.py', 'value = -1\n')
+        archive.writestr('fixture_plugin.py',
+            ('import fixture_target\n' if preload_source else '') + 'marker = "trusted first-party fixture"\n')
+        archive.writestr('pytest.py', '__version__="8.3.5"\ndef main(argv, plugins):\n'
+            '    import os, fixture_target\n'
+            '    assert os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] == "1"\n'
+            '    assert len(plugins) == 1 and plugins[0].marker == "trusted first-party fixture"\n'
+            '    assert fixture_target.value == 42\n'
+            '    print("FIRSTPARTY_PLUGIN_AND_SOURCE_OK")\n    return 0\n')
+    data = wheel.getvalue()
+    source = pack_files({'src/fixture_target/__init__.py': b'value = 42\n',
+        'fixture_plugin.py': b'raise RuntimeError("candidate plugin must not load")\n',
+        'pytest.py': b'raise RuntimeError("candidate pytest must not load")\n',
+        'tests/test_fixture.py': b'# first-party fixture\n'})
+    payload = {'archive': base64.b64encode(source).decode(), 'archive_sha256': hashlib.sha256(source).hexdigest(),
+        'python': '.'.join(map(str, sys.version_info[:2])), 'pytest': '8.3.5', 'test_paths': ['tests/test_fixture.py'],
+        'pytest_plugins': ['fixture_plugin'], 'source_modules': ['fixture_target'],
+        'wheels': [{'filename': 'firstparty-fixture-py3-none-any.whl', 'sha256': hashlib.sha256(data).hexdigest(),
+                    'data': base64.b64encode(data).decode()}]}
+    observer = (ROOT / 'integrations/assessment-runtime/repository_suite_plugins_program.py').read_text()
+    program = ('def parse_log_pytest(text, unused):\n'
+        '    return {"tests/test_fixture.py::test_source": "PASSED"} if "FIRSTPARTY_PLUGIN_AND_SOURCE_OK" in text else {}\n'
+        + observer)
+    result = await asyncio.to_thread(subprocess.run, [sys.executable, '-B', '-c', program],
+        input=json.dumps(payload).encode(), capture_output=True, timeout=10, check=True)
+    observation = json.loads(result.stdout)
+    assert (observation['exit_code'] == 0) is not preload_source
+    assert bool(observation['statuses']) is not preload_source

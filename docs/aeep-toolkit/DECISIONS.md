@@ -1193,3 +1193,23 @@ and observer bytes, then verify changed source and prepare a corrected exact
 runtime review. Full independent cohorts, model qualification, usefulness and
 selection remain unproven. Human controls, resource acceptance and release remain
 separate; no new third-party execution or installation is authorized.
+
+### D84 — Explicit plugins verified; correct family evidence before freezing
+
+Source `f694024c` adds version2 explicit pytest plugin declarations on the existing
+grader. Legacy case, recipe, truth-schema and observer digests remain identical.
+All13 configured source checks pass on unchanged bytes:1673 tests in each full
+run,21 skips,82% total coverage and both branch gates. Fifty focused contract
+tests pass. This proves the software contract, not external plugin conformance.
+
+The late actual approval of48fa60c0 is recorded but unused: its bundle was already
+withdrawn and binds old source and an invalid multi-file premise. No image,
+installation or contained call ran under it. The broader source-body AST audit
+also found that Dissect.cstruct and Mockito each change only one executable file.
+Their real test results remain valid; their earlier multi-file labels do not.
+
+Prepare one corrected finite runtime, wheel and docs review. Use genuine
+multi-file source changes and check the second behavior where upstream selected
+tests alone omit it. Retain authored-test provenance and unchanged upstream
+assertions. Do not adopt a balanced cohort until source and runtime checks support
+it. No model, value label, resource acceptance or release follows from this work.
