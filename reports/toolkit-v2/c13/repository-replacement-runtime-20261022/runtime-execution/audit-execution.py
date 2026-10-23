@@ -74,7 +74,7 @@ def main():
             failures = discrepancies(raw_by_name[name], variant['grade'], expected)
             assert variant['discrepancies'] == failures and variant['passed'] == (not failures)
             accepted.append(not failures)
-        complete = len(accepted) == 2 and all(accepted)
+        complete = len(accepted) == len(review['variant_labels'][item['case_id']]) and all(accepted)
         assert item['reproduction_eligible'] == complete
         if complete:
             eligible.append(item['case_id'])

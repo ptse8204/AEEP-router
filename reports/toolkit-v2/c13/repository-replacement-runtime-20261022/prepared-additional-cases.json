@@ -1,0 +1,108 @@
+{
+  "prepared_cases": 2,
+  "cases": [
+    {
+      "id": "gerlero__foamlib-315",
+      "original_issue_id": "gerlero__foamlib-315",
+      "repository": "gerlero/foamlib",
+      "source_revision": "3ca383de60c17cada3b91a5673d14b41096e470b",
+      "origin_kind": "upstream_issue",
+      "family": "multi-file-repair",
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "source_sha256": "a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef",
+      "source_bytes": 99738,
+      "editable_paths": 15,
+      "reference_changes": [
+        "foamlib/_files/_files.py",
+        "foamlib/_files/_parsing.py"
+      ],
+      "omitted_non_source_edits": [],
+      "required_bug_tests": 2,
+      "preservation_tests": 1,
+      "wheels": 4,
+      "license": "GPL-3.0-only",
+      "license_records": [
+        {
+          "file": "LICENSE.txt",
+          "bytes": 35131,
+          "sha256": "e43b5ef535272d9ccf46ce0d43397e25cdbe2e377eb7fbf4651e4d839af452c6"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "oOo0oOo__leanclient-24",
+      "original_issue_id": "oOo0oOo__leanclient-24",
+      "repository": "oOo0oOo/leanclient",
+      "source_revision": "2343b4ef41e8cf82676c2a999b61981e2b57c244",
+      "origin_kind": "upstream_issue",
+      "family": "multi-file-repair",
+      "declared_python": "3.12",
+      "adapted_python": "3.13",
+      "source_sha256": "c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c",
+      "source_bytes": 59186,
+      "editable_paths": 8,
+      "reference_changes": [
+        "leanclient/file_manager.py",
+        "leanclient/utils.py"
+      ],
+      "omitted_non_source_edits": [],
+      "required_bug_tests": 2,
+      "preservation_tests": 12,
+      "wheels": 4,
+      "license": "MIT",
+      "license_records": [
+        {
+          "file": "LICENSE",
+          "bytes": 1072,
+          "sha256": "7833d0590bf5fd25f1b18a0ba6b34ca7b83ca7f317b84930a6278441b1bb743b"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "gerlero__foamlib-315",
+      "variant": "reference",
+      "payload": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/gerlero__foamlib-315-reference-payload.json",
+      "sha256": "126453d24d77ce609d23d0a73c44093ba218597ebd688857e2c1f80191e16982",
+      "bytes": 716372
+    },
+    {
+      "case": "gerlero__foamlib-315",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/gerlero__foamlib-315-counterexample-payload.json",
+      "sha256": "12b9a6a0f9aaeb61fb9be206c8490b685b1a44fa4e9cfc44a1d5934fdd32f889",
+      "bytes": 716280
+    },
+    {
+      "case": "oOo0oOo__leanclient-24",
+      "variant": "reference",
+      "payload": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/oOo0oOo__leanclient-24-reference-payload.json",
+      "sha256": "59a4a7dbbafb58e3024ced0cf4b8602ef0ab18f5d87c3368166b27dcb25446c5",
+      "bytes": 662748
+    },
+    {
+      "case": "oOo0oOo__leanclient-24",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/oOo0oOo__leanclient-24-counterexample-payload.json",
+      "sha256": "60c1e44f22fb5a563e399f0f71976f442f6ce4486d0f98eabc9c05d059324664",
+      "bytes": 662380
+    }
+  ],
+  "cases_file": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/cases.json",
+  "cases_file_sha256": "f22bcb9504957d1793adb3f4c9c3158e8527f5736c0265f5578c0530b5f56147",
+  "variants_file": ".aeep/repository-replacement-runtime-20261022-additional-cases/protected/variants.json",
+  "cases_adopted": 0,
+  "frozen_holdouts": 0,
+  "external_code_executed": false,
+  "model_turns": 0,
+  "containers_started": 0,
+  "candidate_grades_returned": 0,
+  "independence": "Two statically reviewed genuine multi-file candidates; independent source-only adaptations, not adopted/frozen. No model outcome selection."
+}

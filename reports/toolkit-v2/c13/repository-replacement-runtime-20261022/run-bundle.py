@@ -37,7 +37,7 @@ def inspect(reference):
 def run_script(path, *arguments):
     with (HERE / (path.parent.name + '-' + path.name + '.log')).open('x') as log:
         result = subprocess.run([sys.executable, str(path), *arguments], cwd=ROOT,
-            stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=550)
+            stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=1100)
     assert result.returncode == 0, 'Dependent reviewed script failed; do not retry.'
 
 
@@ -68,8 +68,8 @@ async def main():
         build['grant_before'] = list(router.store._connection.execute(
             "SELECT operations,model_turns,elapsed_seconds,cash_usd FROM assessment_grants WHERE id='onboarding'").fetchone())
         grant = repo.current_grant('onboarding')
-        assert build['grant_before'][0] + 10 <= grant.limits.max_operations
-        assert build['grant_before'][2] + 575 <= grant.limits.max_elapsed_seconds
+        assert build['grant_before'][0] + bundle['maximum_operations'] <= grant.limits.max_operations
+        assert build['grant_before'][2] + bundle['maximum_reserved_seconds'] <= grant.limits.max_elapsed_seconds
         models = {'subject': AssessmentSubject, 'recipe': RecipeDefinition, 'environment': AssessmentEnvironment,
             'recipe_runtime': RecipeRuntimeBinding, 'recipe_materialization_request': RecipeMaterializationRequest}
         for digest, item in bundle['build_documents'].items():

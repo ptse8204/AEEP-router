@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case_id": "matthewwithanm__python-markdownify-200",
+      "family": "single-file-repair",
+      "source_body_changed_files": 1,
+      "reference_changes": [
+        {
+          "path": "markdownify/__init__.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 49
+    },
+    {
+      "case_id": "python-markdown__markdown-1587",
+      "family": "single-file-repair",
+      "source_body_changed_files": 1,
+      "reference_changes": [
+        {
+          "path": "markdown/htmlparser.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 118
+    },
+    {
+      "case_id": "MahjongRepository__mahjong-62-aeep-contract-audit",
+      "family": "contract-audit",
+      "source_body_changed_files": 0,
+      "reference_changes": [],
+      "required_test_identities": 6
+    },
+    {
+      "case_id": "spulec__freezegun-582",
+      "family": "single-file-repair",
+      "source_body_changed_files": 1,
+      "reference_changes": [
+        {
+          "path": "freezegun/api.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 10
+    },
+    {
+      "case_id": "AbsaOSS__generate-release-notes-207",
+      "family": "multi-file-repair",
+      "source_body_changed_files": 2,
+      "reference_changes": [
+        {
+          "path": "release_notes_generator/record/factory/default_record_factory.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "release_notes_generator/utils/pull_request_utils.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 24
+    },
+    {
+      "case_id": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "family": "contract-audit",
+      "source_body_changed_files": 0,
+      "reference_changes": [],
+      "required_test_identities": 10
+    },
+    {
+      "case_id": "gerlero__foamlib-315",
+      "family": "multi-file-repair",
+      "source_body_changed_files": 2,
+      "reference_changes": [
+        {
+          "path": "foamlib/_files/_files.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "foamlib/_files/_parsing.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 3
+    },
+    {
+      "case_id": "oOo0oOo__leanclient-24",
+      "family": "multi-file-repair",
+      "source_body_changed_files": 2,
+      "reference_changes": [
+        {
+          "path": "leanclient/utils.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "leanclient/file_manager.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "required_test_identities": 14
+    }
+  ],
+  "family_counts": {
+    "single-file-repair": 3,
+    "contract-audit": 2,
+    "multi-file-repair": 3
+  },
+  "method": "Remove docstrings before comparing Python ASTs. Reject documentation/format-only file-count inflation; does not prove semantic difficulty, preservation or runtime correctness.",
+  "external_code_executed": false,
+  "supersedes_incorrect_count": "eight-case-family-audit.json retained as failed historical draft"
+}

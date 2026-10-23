@@ -33,7 +33,7 @@ def main():
     before = RecipeMaterializationRequest.model_validate(parent['request'])
     old_environment = next(item['document'] for item in parent['documents'].values() if item['kind'] == 'environment')
     environment = AssessmentEnvironment.model_validate({**old_environment,
-        'environment_id': 'repository-screening-runtime-20261022', 'container_image': build['image_id']})
+        'environment_id': 'repository-explicit-plugin-runtime-20261022', 'container_image': build['image_id']})
     env_digest = content_digest(environment)
     parent['documents'] = {key: item for key, item in parent['documents'].items() if item['kind'] != 'environment'}
     parent['documents'][env_digest] = {'kind': 'environment', 'id': environment.environment_id,
@@ -44,7 +44,7 @@ def main():
                                               for key in before.definition_digests]
     save(OUT / 'parent-runtime-review.json', parent)
     subject = AssessmentSubject(kind='command', location=str((ROOT / bundle['cases_file']).parent),
-        dependency_digests=bundle['assets'], description='Two frozen replacement workloads and three fresh runtime probes; no campaign or models.')
+        dependency_digests=bundle['assets'], description='Eight provisional workloads and three fresh runtime probes; no campaign or models.')
     request = RecipeMaterializationRequest(schema_version=before.schema_version, subject_digest=content_digest(subject),
         recipe_digest=before.recipe_digest, mapping_digest=before.mapping_digest, environment_digest=env_digest,
         authorization_id=before.authorization_id, seed=47, definition_digests=parent['request']['definition_digests'],
@@ -59,20 +59,20 @@ def main():
         subject_digests=[content_digest(subject)], recipe_digests=[before.recipe_digest], environment_digests=[env_digest],
         reviewed_digests=list(documents))
     derived = {key: bundle[key] for key in ('source_digest', 'authorization_digest', 'assets', 'cases_file',
-        'variants_file', 'active_case_ids', 'expectations')}
+        'variants_file', 'active_case_ids', 'expectations', 'variant_labels')}
     derived.update(parent_review=str((OUT / 'parent-runtime-review.json').relative_to(ROOT)),
         parent_review_sha256=sha(OUT / 'parent-runtime-review.json'),
         driver_files={name: sha(OUT / name) for name in ('run.py', 'classify.py')}, request=request.model_dump(mode='json'),
         new_documents=new_docs, reviewed_document_digests=list(documents), amendment=amendment.model_dump(mode='json'),
-        maximum_operations=9, maximum_reserved_seconds=395, maximum_contained_calls=7,
+        maximum_operations=27, maximum_reserved_seconds=1025, maximum_contained_calls=25,
         probes=parent['probes'], derived_from_approved_bundle=approved['review_sha256'],
         build_result_sha256=sha(HERE / 'build-result.json'))
     save(OUT / 'operation-review.json', derived)
     save(OUT / 'operator-approval.json', {**approved, 'review_sha256': sha(OUT / 'operation-review.json'),
         'parent_review_sha256': approved['review_sha256'],
-        'authority': 'Parent bundle approval explicitly covers this deterministic image/environment derivation and at most seven offline calls. This is not a separate human response or general execution authority.'})
+        'authority': 'Parent bundle approval explicitly covers this deterministic image/environment derivation and at most twenty-five offline calls. This is not a separate human response or general execution authority.'})
     print(json.dumps({'derived_review_sha256': sha(OUT / 'operation-review.json'), 'image_id': build['image_id'],
-                      'environment_digest': env_digest, 'maximum_calls': 7}))
+                      'environment_digest': env_digest, 'maximum_calls': 25}))
 
 
 if __name__ == '__main__':

@@ -1,0 +1,85 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_digest": "f694024c591a2b72dcda6887bc8af99cb5a0c88848f9abc9674a430d72b8d942",
+  "runner_sha256": "cd4f8c61450b641aba798041526ff28a75cbae4b9eb73ef2f796a357b52af729",
+  "actions": [
+    {
+      "name": "runtime",
+      "review": "reports/toolkit-v2/c13/repository-replacement-runtime-20261022/approval-bundle.json",
+      "review_sha256": "2e5f43ce9ba4308e64a6c88c7a444dfc45cd8ddf859fc6b5e6c187dc38579f7d",
+      "runner": "reports/toolkit-v2/c13/repository-replacement-runtime-20261022/run-bundle.py",
+      "runner_sha256": "386262c5847911dcb153c23497b247be321bd320c9ba2cdef19c82a9a69c0a41",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-replacement-runtime-20261022/run-bundle.py",
+        "2e5f43ce9ba4308e64a6c88c7a444dfc45cd8ddf859fc6b5e6c187dc38579f7d"
+      ],
+      "approval_record": "reports/toolkit-v2/c13/repository-replacement-runtime-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/c13/repository-replacement-runtime-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/c13/repository-replacement-runtime-20261022/execution-result.json",
+      "maximum_seconds": 1500,
+      "pass_conditions": {
+        "batch_completed": true,
+        "build_passed": true,
+        "receipt_integrity_passed": true,
+        "source_unchanged": true
+      }
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/operation-review.json",
+      "review_sha256": "bf38b66ef29d4c705d43973b1b0fe27313e8816b141c173474c06a2d3607d04a",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/run_review.py",
+      "runner_sha256": "e5ab9a49dbfaa0f1c35d1fc8e46e4f9e4ca8a89a0421f13e79dc7dde7045d264",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/run_review.py",
+        "--execute-reviewed-digest",
+        "515260f84f5cab15fe87312239ff2dd642f059bf9e667e3f1c3b16f339b5c726"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-repository-plugins-20261022/execution/summary.json",
+      "maximum_seconds": 1800,
+      "pass_conditions": {
+        "installed_cli_checks": 18,
+        "installed_capture_checks": 1,
+        "runtime_removed": true,
+        "private_scratch_removed": true
+      }
+    },
+    {
+      "name": "documentation",
+      "review": "reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/operation-review.json",
+      "review_sha256": "8cccd40e2d76e22e59a0fcc88c3eaeaef94ef8068bc40cbe093e8c563b29b28e",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/run-review.py",
+      "runner_sha256": "c85b7c2369ef32a8153910e69b27be2ca0717f25fa9ecb8801499a9a0d103f63",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/run-review.py",
+        "8cccd40e2d76e22e59a0fcc88c3eaeaef94ef8068bc40cbe093e8c563b29b28e"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-repository-plugins-review-20261022/execution-result.json",
+      "maximum_seconds": 240,
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      }
+    }
+  ],
+  "purpose": "Verify the explicit-plugin grader and25 pinned runtime dependencies on8 provisional real repository tasks, including6 partial-repair rejections, then check the current installed wheel and offline docs. No model comparison or release.",
+  "permissions": "One local offline image build from the existing pinned image, installing exactly25 cached pinned wheels. Bind its actual image digest, then at most25 fresh contained calls (3 runtime/containment/state probes,16 reference/counterexample calls and6 partial repairs); maximum28 existing-grant operations and1205 reserved seconds total. Current AEEP wheel plus32 unchanged cached dependencies and19 sandboxed installed checks; cached Lychee0.24.2 offline docs check. Zero models, downloads, pulls, credentials, new destinations, cash, activation or release. Keep the new image for remaining work; no old-image deletion or host installation.",
+  "cleanup": "Remove only new attempt-owned containers, unchanged synthetic canary, private installed runtime/scratch and unchanged Lychee runtime. Retain the new runtime image for remaining work. Retain inert caches, historical evidence, current/rollback images, volumes, backups, unrelated work and all accounting.",
+  "approval_reason": "The pasted continuation excludes untrusted software execution, and CONTINUATION.md requires applicable container-provisioning authority. Approved48fa60c0 remains unused because it was withdrawn for an invalid multi-file premise and binds superseded source/dependencies; completed4cfc412d binds the prior observer/image and different sources. Earlier wheel/docs approvals also bind older artifacts. Routine finite definitions and scope amendments remain delegated.",
+  "approval_rule": "One explicit human approval covers these three raw component digests, one attempt each. No replay of a started component. Independent unstarted package/docs components may continue if grader execution fails, after all source/artifact checks.",
+  "evidence_limits": [
+    "Eight provisional tasks have a verified static3/3/2 family mix and234 required reference test identities, but no current-runtime result or model qualification. Full independent8/28/105 stages remain incomplete.",
+    "Original upstream assertions remain, with two explicitly authored behavior checks. Leanclient is a documented source-only snapshot omitting unrelated docs/examples/CI; adapted Python3.13/pytest8.3.5 is not official benchmark-runtime equivalence. Source and wheel licenses remain private and retained.",
+    "No comparative usefulness, token saving, monetary saving, automatic admission, production resource acceptance or selection improvement is inferred from these checks."
+  ],
+  "approved": false,
+  "execution_started": false
+}

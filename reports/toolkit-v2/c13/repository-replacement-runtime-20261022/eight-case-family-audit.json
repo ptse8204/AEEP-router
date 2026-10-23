@@ -1,0 +1,133 @@
+{
+  "passed": false,
+  "method": "AST comparison after removing docstrings. Rejects docstring/format-only file inflation; does not measure semantic difficulty or prove arbitrary preservation.",
+  "cases": [
+    {
+      "id": "matthewwithanm__python-markdownify-200",
+      "declared_family": "single-file-repair",
+      "reference_changes": [
+        {
+          "path": "markdownify/__init__.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "source_body_changed_files": 1,
+      "family_count_supported": true,
+      "source_compressed_bytes": 19698,
+      "required_test_identities": 49,
+      "explicit_plugins": []
+    },
+    {
+      "id": "python-markdown__markdown-1587",
+      "declared_family": "single-file-repair",
+      "reference_changes": [
+        {
+          "path": "markdown/htmlparser.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "source_body_changed_files": 1,
+      "family_count_supported": true,
+      "source_compressed_bytes": 365671,
+      "required_test_identities": 118,
+      "explicit_plugins": []
+    },
+    {
+      "id": "MahjongRepository__mahjong-62-aeep-contract-audit",
+      "declared_family": "contract-audit",
+      "reference_changes": [],
+      "source_body_changed_files": 0,
+      "family_count_supported": true,
+      "source_compressed_bytes": 44547,
+      "required_test_identities": 6,
+      "explicit_plugins": []
+    },
+    {
+      "id": "fox-it__dissect.cstruct-120",
+      "declared_family": "multi-file-repair",
+      "reference_changes": [
+        {
+          "path": "dissect/cstruct/types/structure.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "dissect/cstruct/types/enum.py",
+          "source_body_ast_changed": false
+        }
+      ],
+      "source_body_changed_files": 1,
+      "family_count_supported": false,
+      "source_compressed_bytes": 75741,
+      "required_test_identities": 67,
+      "explicit_plugins": []
+    },
+    {
+      "id": "kaste__mockito-python-93",
+      "declared_family": "multi-file-repair",
+      "reference_changes": [
+        {
+          "path": "mockito/invocation.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "mockito/mockito.py",
+          "source_body_ast_changed": false
+        }
+      ],
+      "source_body_changed_files": 1,
+      "family_count_supported": false,
+      "source_compressed_bytes": 61164,
+      "required_test_identities": 17,
+      "explicit_plugins": []
+    },
+    {
+      "id": "spulec__freezegun-582",
+      "declared_family": "single-file-repair",
+      "reference_changes": [
+        {
+          "path": "freezegun/api.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "source_body_changed_files": 1,
+      "family_count_supported": true,
+      "source_compressed_bytes": 32476,
+      "required_test_identities": 10,
+      "explicit_plugins": []
+    },
+    {
+      "id": "AbsaOSS__generate-release-notes-207",
+      "declared_family": "multi-file-repair",
+      "reference_changes": [
+        {
+          "path": "release_notes_generator/record/factory/default_record_factory.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "release_notes_generator/utils/pull_request_utils.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "source_body_changed_files": 2,
+      "family_count_supported": true,
+      "source_compressed_bytes": 161320,
+      "required_test_identities": 24,
+      "explicit_plugins": [
+        "pytest_mock"
+      ]
+    },
+    {
+      "id": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "declared_family": "contract-audit",
+      "reference_changes": [],
+      "source_body_changed_files": 0,
+      "family_count_supported": true,
+      "source_compressed_bytes": 183410,
+      "required_test_identities": 10,
+      "explicit_plugins": []
+    }
+  ],
+  "external_source_executed": false,
+  "model_turns": 0,
+  "failed_strict_assertion_retained": "Initial strict static check failed on Dissect.cstruct source_body_changed_files=1; no external execution occurred."
+}

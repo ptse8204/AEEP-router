@@ -610,3 +610,42 @@ actual test outcomes; do not use those labels to fill a balanced cohort. Genuine
 replacement preparation and exact offline runtime/wheel/docs review continue.
 No new model usefulness, selection, human-control,resource-acceptance or release
 gate passes from these engineering checks.
+
+### October22: approved plugin runtime and wheel/docs completed; one task scope remains
+
+Actual review038b2af9 executed once on unchanged sourcef694024c. The25-wheel
+local offline image build passed; exact image
+`sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e`
+is retained at `aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022`.
+Parent layers/configuration match and recorded image-size growth is44342164 bytes;
+this is not whole-host footprint or production resource acceptance. No old image
+was deleted. Three fresh boundary/state/runtime probes passed. All22 physical
+attempts/receipts were reopened, bounded replies retained and containers absent.
+
+Seven cases reproduced. AbsaOSS and Foamlib each also reject both single-file
+regressions of their genuine multi-file repair. Leanclient passed all14 declared
+identities, but its module ran three additional real-Lean fixture tests that
+returned ERROR. Its exit1 reference remains failed. Their detailed tracebacks
+were not retained; static fixture requirements do not establish the exact exception.
+The complete bundle remains failed rather than hiding this exclusion.
+
+The build and calls charged25 operations/47.86661691684276 seconds. Grant counters
+are12880 operations,3744 turns,118273.29034517473 seconds and0.0 cash. No model/cash
+delta,refund or reusable terminal allowance. Installed wheel19 checks and cached
+offline docs69 passed; both private runtimes were removed. Documentation evidence
+binds its retained input hashes; later progress-only journal additions are separate.
+
+A separately scoped Leanclient task now selects exactly the existing14 identities
+through an appended protected collection hook. Public scope excludes unrelated
+Lean-server tasks. All required assertions and zero-exit/missing/error/preservation
+guards remain. Four inert payloads,18 assets,19 classifier regressions and four
+synthetic guard cases pass preparation checks. Two inert preparation mistakes
+(empty fault list/empty fault patch) are recorded; existing validators rejected
+both. No product code changed or new upstream test executed during preparation.
+
+Exact review7bbc9678 awaits actual execution approval: four offline observations,
+six operations and290 reserved seconds on the same image,source,observer and
+containment evidence. No builds,installations,package/docs reruns,models,cash or
+release. This new task cannot retroactively pass the old whole-module result.
+Full independent8/28/105 stages,capability qualification,usefulness,live selection,
+human controls and workload-derived resource acceptance remain open separately.

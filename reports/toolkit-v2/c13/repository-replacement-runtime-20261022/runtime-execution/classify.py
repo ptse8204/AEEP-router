@@ -11,6 +11,11 @@ def discrepancies(raw, grade, expected):
         failures.append('unexpected_grade')
     if any(raw['statuses'].get(key) != status for key, status in expected['statuses'].items()):
         failures.append('required_test_status_mismatch')
+    if 'at_least_one_failed' in expected:
+        bug=expected['at_least_one_failed']
+        if (not bug or not any(raw['statuses'].get(key)=='FAILED' for key in bug)
+                or any(raw['statuses'].get(key) not in ('PASSED','FAILED') for key in bug)):
+            failures.append('partial_repair_not_detected_with_complete_bug_observations')
     return failures
 
 
@@ -29,4 +34,10 @@ def self_check():
     no = {'valid': False, 'detail': 'test_failure'}
     assert not discrepancies(negative, no, {**negative, **no})
     assert discrepancies(good, yes, {**negative, **no})
-    return 12
+    partial={'exit_code':1,'valid':False,'detail':'test_failure','statuses':{'preserve':'PASSED'},'at_least_one_failed':['bug','other']}
+    assert not discrepancies({'exit_code':1,'statuses':{'bug':'FAILED','other':'PASSED','preserve':'PASSED'}},no,partial)
+    for status in (None,'ERROR','SKIPPED','XFAIL'):
+        assert discrepancies({'exit_code':1,'statuses':{'bug':'FAILED','other':status,'preserve':'PASSED'}},no,partial)
+    assert discrepancies({'exit_code':1,'statuses':{'bug':'PASSED','other':'PASSED','preserve':'PASSED'}},no,partial)
+    assert discrepancies({'exit_code':1,'statuses':{'bug':'FAILED','other':'PASSED','preserve':'FAILED'}},no,partial)
+    return 19

@@ -1213,3 +1213,19 @@ multi-file source changes and check the second behavior where upstream selected
 tests alone omit it. Retain authored-test provenance and unchanged upstream
 assertions. Do not adopt a balanced cohort until source and runtime checks support
 it. No model, value label, resource acceptance or release follows from this work.
+
+### D85 — Keep whole-module failure; declare the intended test subset explicitly
+
+Review038b2af9 built the optional25-wheel image and passed its three fresh probes.
+Seven cases reproduced. Leanclient's14 required identities passed, while three
+additional Lean-server fixture tests errored. Its whole-module exit1 remains
+failed; the exact tracebacks remain unknown. Do not relax global exit,missing,
+error or preservation guards to call that observation passed.
+
+Prepare a new publicly scoped diagnostic-range task with all14 existing required
+identities/assertions. An appended protected conftest hook selects those exact
+nodes. Source,observer,image,permissions and product code stay unchanged. First-party
+collection fixtures and synthetic guard checks pass; actual execution remains
+separate. Review7bbc9678 covers four fresh observations only. No reinstall,docs
+rerun or image build is needed. This is an unfrozen task adaptation,not a change
+to a frozen holdout or utility threshold. Keep the old failed task and all charges.

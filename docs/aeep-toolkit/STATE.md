@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: three-case repository development conformance, current installed wheel and docs passed; six of eight new repository workloads reproduced; two excluded; replacement review withdrawn before execution.**
+**Status as of 2026-10-22: explicit-plugin source, installed-wheel and docs checks passed; three runtime probes passed; seven repository cases reproduced. Leanclient whole-module reference remains failed; a separate declared-node check awaits approval.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -42,16 +42,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: BLOCKED
-last_verified_commit: '3557d88e65192e7409679d7654d95681d4aa8903'
-last_check_command: 'repository-screening-curation-20261022/completion-audit.json; exclusion-analysis.json; repository-workload-expansion-20261022/withdrawal.json; source-family-audit.json'
-last_check_result: 'Sourcef694024c591a2b72dcda6887bc8af99cb5a0c88848f9abc9674a430d72b8d942 passes all13 configured checks without drift;1673 tests in each full run,21 skips,82% total coverage,both coverage gates,Ruff,layering,mypy and builds.50 focused tests and exact legacy serialization equivalence pass. Session59080 is terminal. A broader AST audit found Dissect.cstruct/Mockito also have only one executable changed file each; preserve actual reproduction results but correct family counts before cohort freeze. New v2 runtime,wheel/docs execution remains unapproved; withdrawn48fa60c0 remains unused despite its actual late approval.'
-next_action: 'Finish the concrete corrected runtime/package/docs bundle on verified sourcef694024c. Source verification is terminal: do not rerun unchanged code.25 exact runtime wheels are cached as inert data with dependency/ABI/license review. Prepare the corrected balanced provisional8-case batch, genuine multi-file behavior checks and current-wheel/offline-docs reviews; ask only for that exact external-execution bundle. Preserve all earlier drafts and the unused actual48fa60c0 approval. Full independent cohorts, model qualification/value, live selection and human controls remain open.'
+last_verified_commit: 'a6ed14a'
+last_check_command: 'repository-plugin-support-20261022/validation/source-stability.json; bundle-execution-result.json; repository-replacement-runtime-20261022/runtime-execution/completion-audit.json; repository-declared-tests-20261022/static-audit.json'
+last_check_result: 'Verified sourcef694024c (commit a6ed14a) passes all13 checks,1673 tests in each full run,21 skips,82% coverage and both gates. Actual038b2af9 execution built the pinned25-wheel image and passed3 fresh probes;22 physical receipts/attempts reopened,7 cases reproduced,4 partial repairs rejected. Leanclient whole-module remains failed at exit1 despite14 required PASSED because3 unlisted Lean tests ERROR. Source unchanged. Build+calls charged25operations/47.86661691684276seconds;grant12880ops/3744turns/118273.29034517473seconds/0.0cash. Currentwheel19 checks and offline docs69 passed;runtimes removed. Exact new4call scoped review7bbc9678 is prepared/unstarted and awaiting approval; no reinstall or broad source rerun needed.'
+next_action: 'Review038b2af9 is TERMINAL: build passed,22 physical calls/25 canonical operations charged47.86661691684276 seconds; seven cases reproduced, Leanclient whole-module reference failed because14 required tests passed but3 unlisted Lean integration tests errored. All22 canonical attempts/receipts reopened and containers absent. Current wheel19 checks and offline docs69 passed; both runtimes removed. No repeats on unchanged sourcef694024c. Exact new declared-node Leanclient review7bbc9678f0eade21615a324d325c89b51f7ca931e3202c17a31a46ad0725304a is prepared, unstarted and awaits actual approval:4calls,6operations,290seconds,sameimage/source/observer; all14 identities/assertions retained, protected selection excludes only other tests. No builds/install/package/docs/models/cash. After actual approval run its run.py once with the review SHA, then audit-execution.py. Full independent cohorts, model qualification/usefulness/selection, human controls,resource acceptance and release remain open.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'New exact review7bbc9678f0eade21615a324d325c89b51f7ca931e3202c17a31a46ad0725304a is unstarted pending actual human approval. Four declared-node Leanclient observations,6 operations,290 reserved seconds; same source/observer/image. All14 required assertions retained; protected oracle excludes only other test identities. No builds,installations,docs/package reruns,models,cash or release. Terminal038b2af9 cannot cover changed oracle bytes.'
   - 'None for completed4cfc412d: actual approval exercised once; six cases reproduced, two excluded, all14 physical attempts/receipts reopened and owned containers absent. Its two unstarted negative slots cannot be reused. No model/install/future-source authority transfers.'
   - 'Review48fa60c0 is WITHDRAWN before execution because the proposed multi-file case is actually one source-body change plus two docstring edits. No installation, build or contained call occurred. Do not execute it even if a late response approves it. A correctly scoped future runtime/plugin review remains to be prepared.'
   - 'None for completed89245763: actual exact approval exercised once and the semantic-fault check passed;3 operations charged. The grant is now12839 operations,3744 turns,118201.13565913262 seconds and0.0 cash. All three preceding reviews are terminal; no new source/runtime/model execution is authorized by them.'
@@ -3036,3 +3037,42 @@ the existing Starlette warning,82% total coverage, both branch gates, Ruff, laye
 mypy and wheel/source builds. Session59080 is terminal; do not repeat this run. No new wheel, external runtime
 image or plugin has been installed/executed. Existing v1 conformance remains
 historical; it does not qualify the new v2 observer.
+
+### C13: approved plugin runtime and wheel/docs completed; one task scope remains
+
+Actual review038b2af9 executed once on unchanged sourcef694024c. The25-wheel
+local offline image build passed; exact image
+`sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e`
+is retained at `aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022`.
+Parent layers/configuration match and recorded image-size growth is44342164 bytes;
+this is not whole-host footprint or production resource acceptance. No old image
+was deleted. Three fresh boundary/state/runtime probes passed. All22 physical
+attempts/receipts were reopened, bounded replies retained and containers absent.
+
+Seven cases reproduced. AbsaOSS and Foamlib each also reject both single-file
+regressions of their genuine multi-file repair. Leanclient passed all14 declared
+identities, but its module ran three additional real-Lean fixture tests that
+returned ERROR. Its exit1 reference remains failed. Their detailed tracebacks
+were not retained; static fixture requirements do not establish the exact exception.
+The complete bundle remains failed rather than hiding this exclusion.
+
+The build and calls charged25 operations/47.86661691684276 seconds. Grant counters
+are12880 operations,3744 turns,118273.29034517473 seconds and0.0 cash. No model/cash
+delta,refund or reusable terminal allowance. Installed wheel19 checks and cached
+offline docs69 passed; both private runtimes were removed. Documentation evidence
+binds its retained input hashes; later progress-only journal additions are separate.
+
+A separately scoped Leanclient task now selects exactly the existing14 identities
+through an appended protected collection hook. Public scope excludes unrelated
+Lean-server tasks. All required assertions and zero-exit/missing/error/preservation
+guards remain. Four inert payloads,18 assets,19 classifier regressions and four
+synthetic guard cases pass preparation checks. Two inert preparation mistakes
+(empty fault list/empty fault patch) are recorded; existing validators rejected
+both. No product code changed or new upstream test executed during preparation.
+
+Exact review7bbc9678 awaits actual execution approval: four offline observations,
+six operations and290 reserved seconds on the same image,source,observer and
+containment evidence. No builds,installations,package/docs reruns,models,cash or
+release. This new task cannot retroactively pass the old whole-module result.
+Full independent8/28/105 stages,capability qualification,usefulness,live selection,
+human controls and workload-derived resource acceptance remain open separately.

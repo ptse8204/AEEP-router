@@ -175,7 +175,8 @@ async def main():
         for case in cases:
             result = {'case_id': case.input.task_id, 'reproduction_eligible': False, 'variants': []}
             results.append(result)
-            for label in ('reference', 'counterexample'):
+            labels=review['variant_labels'][case.input.task_id]
+            for label in labels:
                 staged = next(item for item in variants if item['case'] == case.input.task_id and item['variant'] == label)
                 raw = None
 
@@ -198,7 +199,7 @@ async def main():
                 record['passed'] = not record['discrepancies']
                 if not record['passed']:
                     break
-            result['reproduction_eligible'] = len(result['variants']) == 2 and all(item['passed'] for item in result['variants'])
+            result['reproduction_eligible'] = len(result['variants']) == len(labels) and all(item['passed'] for item in result['variants'])
         summary['batch_completed'] = True
     except BaseException as exc:
         summary['error_type'] = type(exc).__name__
