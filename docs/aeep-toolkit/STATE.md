@@ -46,9 +46,9 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'e319e2d'
-last_check_command: 'repository-model-journey-20261022/terminal-audit.json; repository-model-fault-correction-20261023/preparation-checks.json'
-last_check_result: 'Terminald775e93e:15 real grader validation calls passed;5 real task turns have indeterminate invocation failures and no grades. All29operations/313.0355685814284seconds charged,5turns,0cash;owned containers absent and proxy stopped. Constant prompt omitted per-case data. Source78bf89bd targeted39passed/3skipped;ruff/policy/mypy passed;full checks running. Six actual managed-executor recording checks and five trial-grade binding fixtures passed without models/workers.'
+last_verified_commit: '24611b9'
+last_check_command: 'repository-task-delivery-20261023/validation-final/checks.json; task-delivery-check.json; grade-binding-check.json; source-regressions-final.log; identity-fixture-frame-audit.json'
+last_check_result: 'Source4cb0bf74 final ordinary full suite1679passed/21skipped;branch coverage and remaining gates continue in session94490. Forty focused tests passed/3skipped;identity fixture passed after its1KiB cap was corrected to16KiB for maximum1155-byte outputs(4of141 cases). Six rendered managed-executor checks and five synthetic grade-binding checks passed. No source4cb worker/model/install/docs-check execution has occurred. Prior sourced775 attempt5 turns and29 operations remain charged.'
 next_action: 'First inspect final source-check session94490 and repository-task-delivery-20261023/validation-final/checks.json;do not restart it. Initial31612 is terminal with a fixture frame-limit failure. Complete required source and coverage gates on frozen4cb0bf74. Current model definitions are inert;actual prompt recording checks pass. Reconcile terminald775e93e and preserve all5 turns. Prepare one concrete review for fresh applicable conformance,correct task delivery and installed current artifact checks after source verification. No execution approval exists for source4cb0bf74. Continue safe preparation;no architecture decision.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
@@ -3426,3 +3426,13 @@ untrusted documentation checks remain unauthorized until one concrete review is
 prepared after source verification. Thirty-two dependency wheels and the pinned
 6992530-byte Lychee archive remain present with matching hashes;no download or
 installation was performed. New package/docs preparers are inert.
+
+Final full pytest on4cb0bf74 passed1679 tests with21 skips. Branch coverage and
+remaining checks continue in session94490. An audit of the actual identity-fixture
+plan found4of141 outputs exceed1024 bytes;maximum1155 bytes. The fixture's16384-
+byte bound covers that workload;no live/production threshold changed. Source4cb
+models,worker conformance,package installation and untrusted docs execution remain
+unapproved. Preparers and the pending combined driver are inert. All32 cached
+wheel pins and the6992530-byte docs archive are available. The six-observation
+first-party docs sandbox probe passed and removed its own scratch;it did not run
+Lychee. Offline documentation lint passed69 active files. Do not restart94490.

@@ -34,12 +34,14 @@ async def main():
     canary=Path(definition['canary']);assert not canary.exists()
     router=Router.from_manifest(BASE/'aeep.json');repo=AssessmentService(router,BASE/'.aeep/assessments').repository;service=AssessmentService(router,BASE/'.aeep/assessments')
     spec=importlib.util.spec_from_file_location('grader_review_budget',HERE/'review-budget.py');budget=importlib.util.module_from_spec(spec);spec.loader.exec_module(budget);original=budget.install(repo,router.store._connection,json.loads((HERE/'execution-started.json').read_text())['grant_before'],review);service.repository=repo
-    save('grader-probes-started.json',{'request_id':request.plan_id,'automatic_retry':False});result={'passed':False,'records':[],'model_turns':0};analysis_reserved=False;started=time.perf_counter();child=[]
+    save('grader-probes-started.json',{'request_id':request.plan_id,'automatic_retry':False});result={'passed':False,'records':[],'model_turns':0};analysis_reserved=False;created_canary=False;started=time.perf_counter();child=[]
     try:
         repo.approve_bundle(AssessmentScopeAmendment.model_validate(definition['amendment']),{k:v['document'] for k,v in definition['documents'].items()})
         repo.reserve(request,request.plan_id+':setup',AssessmentLimits(max_operations=1,max_elapsed_seconds=30),stage='grader_boundary_setup')
-        with canary.open('x') as f:f.write(definition['canary_text'])
-        repo.finish_operation(request.plan_id+':setup',elapsed_seconds=time.perf_counter()-started)
+        try:
+            with canary.open('x') as f:
+                created_canary=True;f.write(definition['canary_text'])
+        finally:repo.finish_operation(request.plan_id+':setup',elapsed_seconds=time.perf_counter()-started)
         repo.reserve(request,request.plan_id+':analysis',AssessmentLimits(max_operations=1,max_elapsed_seconds=30),stage='grader_boundary_analysis');analysis_reserved=True;started=time.perf_counter()
         for index,item in enumerate(probes):
             assert hashlib.sha256(json.dumps(item['payload'],separators=(',',':')).encode()).hexdigest()==item['payload_sha256']
@@ -56,7 +58,7 @@ async def main():
     except BaseException as exc:result.update(error_type=type(exc).__name__,error_message=str(exc)[:300])
     finally:
         if analysis_reserved:repo.finish_operation(request.plan_id+':analysis',elapsed_seconds=max(0,time.perf_counter()-started-sum(child)))
-        if canary.exists() and canary.read_text()==definition['canary_text']:canary.unlink()
+        if created_canary and canary.exists() and canary.read_text()==definition['canary_text']:canary.unlink()
         result['canary_removed']=not canary.exists();result['source_unchanged']=verification_source_digest(ROOT)==review['source_digest'];result['operation_ledger']=repo.operation_ledger(request.plan_id).model_dump(mode='json');repo.reserve=original;save('grader-probes-result.json',result);await router.close()
     print(json.dumps({k:v for k,v in result.items() if k!='operation_ledger'}))
 
