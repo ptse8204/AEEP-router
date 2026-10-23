@@ -1,0 +1,60 @@
+[
+    {
+        "Id": "sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e",
+        "RepoTags": [
+            "aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022"
+        ],
+        "RepoDigests": [
+            "aeep-toolkit-v2/repository-grader@sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-23T01:08:41.601269843Z",
+        "Config": {
+            "User": "65534:65534",
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.13.15",
+                "PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76"
+            ],
+            "Cmd": [
+                "python3"
+            ],
+            "WorkingDir": "/tmp"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 106872479,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+                "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+                "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+                "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+                "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596",
+                "sha256:3ac63b0e5a483aa9eb2f5093f67cc1b140693775c3132538bbad38e7f2f62adb",
+                "sha256:5b6a9a2ce21e9f55c78abe6b52b334b013d9b79bb750dc7f143d94783d901220"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-23T01:08:42.918912385Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e",
+            "size": 1634,
+            "annotations": {
+                "config.digest": "sha256:22d52b7f00f4d2197125e5babee23963deb882be90999f18c0d7d87fe4d1b611"
+            }
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "u40b06twge4o6mobo9l92vu7q",
+                    "CreatedAt": "2026-10-23T01:08:43.340745427Z"
+                }
+            ]
+        }
+    }
+]

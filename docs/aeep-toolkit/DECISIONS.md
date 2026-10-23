@@ -1347,3 +1347,38 @@ No full8/28/105 stages are frozen or adopted. Qualification, optional-use value,
 independent selection, human controls, resource acceptance and release remain open.
 Next work expands the corpus with one finite runtime review; it needs no architecture
 choice or package/docs repeat. Evidence: reports/toolkit-v2/c13/repository-compact-patches-20261022/.
+
+### D90 — Review one finite runtime expansion for a larger task batch
+
+The approved compact bundle is committed as159958c. Current source59b9d61c,
+installed wheel19 checks and offline docs are verified; do not repeat them.
+The new review38f87c22d21c564aa35dd9b9a05efec6657dd658bfddfe6ee3e74fcfbb35d3de
+prepares22 distinct snapshots from six repositories:3 single-file repairs,
+17 multi-file repairs and2 authored audits,1572 required identities and94 variants.
+SQLglot supplies15 snapshots and remains one repository group across stages.
+No case has run on the proposed image and no stage is frozen or adopted.
+
+One private image would install14 exact official wheels over retained image027b7b37.
+The static closure,110 first-party grader guards,22 classifier checks,280 asset
+bindings and JSON-only deterministic derivation fixture pass. No new core service
+or mandatory dependency was added. The proposed maximum is one offline build,
+97 calls including three fresh probes,100 existing-grant operations and3240 reserved
+seconds. No models,downloads,pulls,credentials,cash,package/docs reruns,activation,
+release or old-image deletion. Actual user approval is required for this new
+untrusted installation/execution; no architecture choice is needed.
+
+The unapproved0976c301 draft is withdrawn before execution: static review caught
+DjangoBird's automatic xdist workers. Its new pytest.ini keeps original Python
+source,assertions and other settings while selecting serial execution. SVCS now
+retains its base CHANGELOG for inert patch application. SQL5253 source collection
+failed DNS and is excluded. Smaller initial preparation failures and all drafts
+remain. The old SQL7479 collection failure is unchanged; pytz is a static missing
+runtime import to test,not a recovered exception. No grant charge occurred here.
+
+Capacity remains explicit:18 reproduced candidates plus22 unexecuted proposals.
+Even if all22 pass,101 more distinct cases are needed for the balanced8/28/105 stages.
+Do not infer completeness,usefulness,selection quality or savings from reference
+reproduction. The current grant remains12928 operations,3744 model turns,
+118371.52375846636 seconds and0.0 cash. Human control discovery,optional DSH dependency
+conformance,resource acceptance and release remain separate.
+Evidence: reports/toolkit-v2/c13/repository-workload-batch-20261022/.

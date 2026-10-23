@@ -1,0 +1,19 @@
+{
+  "scope": "Private optional repository-grader image, not AEEP core dependencies or normal routing requirements.",
+  "wheel_bytes": 14907588,
+  "core_runtime_changed": false,
+  "host_installations": 0,
+  "models": 0,
+  "approval_needed": "One exact offline image build, new source/test execution and deterministic image-bound environment. No architecture choice needed.",
+  "deferred_tasks": {
+    "MAIF__arta-50": "OmegaConf and its transitive runtime closure have not been reviewed for this image. No dependency resolver or source build was run.",
+    "asottile__dead-204": "Selected upstream tests invoke git repeatedly. Current grader image has no recorded git executable conformance; do not assume availability or install an OS package.",
+    "stuartmaxwell__djpress-117": "Needs the project example settings path and plugin setup; the current truth contract does not declare that environment. Do not guess host setup or edit assertions.",
+    "scientific-python__docstub-123": "Black/libcst/numpydoc and further execution supports need separate closure review.",
+    "optional_dsh_runtime": "@deepseek-ai/dsh-llm missing. No npm install; this is unrelated to the repository-grader qualification path."
+  },
+  "static_warnings": "Optional/TYPE_CHECKING imports are overinclusive. Actual runtime outcomes still control reproduction; no dependency guess is reported as a proved past exception.",
+  "cached_wheels": 22,
+  "proposed_install_wheels": 14,
+  "proposed_install_wheel_bytes": 11845399
+}

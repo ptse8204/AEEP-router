@@ -1,0 +1,13 @@
+{
+  "path": "pytest.ini",
+  "sha256": "b3a6c6afca989d57960142b76066e6694543207279f0751ca1cf0a89e6435a8a",
+  "original_pyproject_preserved": true,
+  "removed_args": [
+    "-n",
+    "auto",
+    "--dist",
+    "loadfile"
+  ],
+  "all_other_pytest_options_retained": true,
+  "reason": "Existing grader is serial; unrestricted n-auto would introduce unreviewed processes and resource concurrency."
+}

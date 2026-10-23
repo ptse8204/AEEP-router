@@ -1,0 +1,1315 @@
+{
+  "sources": [
+    {
+      "instance_id": "MAIF__arta-50",
+      "repository": "MAIF/arta",
+      "source_revision": "4554f44729b2c23fc1ac91c1701451666b5d5c4b",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/MAIF__arta-50",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/arta/condition.py",
+        "src/arta/rule.py"
+      ],
+      "changed_python_source_files": [
+        "src/arta/condition.py",
+        "src/arta/rule.py"
+      ],
+      "omitted_non_source_candidates": [
+        ".pre-commit-config.yaml",
+        "CHANGELOG.md",
+        "docs/pages/a_simple_example.md",
+        "docs/pages/home.md",
+        "docs/pages/how_to.md",
+        "docs/pages/value_sharing.md",
+        "pyproject.toml"
+      ],
+      "protected_overlay_paths": [
+        "tests/examples/code/actions.py",
+        "tests/examples/code/conditions.py",
+        "tests/examples/good_conf/conditions.yaml",
+        "tests/examples/good_conf/rules_bis.yaml",
+        "tests/unit/test_engine_with_conf.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 130677,
+      "required_bug_tests": 2,
+      "preservation_tests": 14,
+      "selected_test_modules": [
+        "tests/unit/test_engine_with_conf.py"
+      ],
+      "source_roots": [
+        "arta"
+      ],
+      "external_static_import_roots": [
+        "omegaconf",
+        "pydantic",
+        "pytest"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "bytes": 10174
+        },
+        {
+          "file": "NOTICE",
+          "sha256": "3cee948f4f330e7c2e7aa22b846a8b302b4beaf168b107a9b37398f242d2b38a",
+          "bytes": 633
+        },
+        {
+          "file": "licenses.md",
+          "sha256": "05756df4b424e4a5a24b51b2590e9f1b9bc99db515ecdf841cb4db80c139a8ce",
+          "bytes": 203
+        }
+      ],
+      "problem_characters": 1295,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "a2aproject__a2a-python-472",
+      "repository": "a2aproject/a2a-python",
+      "source_revision": "5ec078830eccf2a72c4a467e520de70c3cbca68e",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/a2aproject__a2a-python-472",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/a2a/client/transports/rest.py",
+        "src/a2a/server/events/event_queue.py",
+        "src/a2a/server/request_handlers/default_request_handler.py"
+      ],
+      "changed_python_source_files": [
+        "src/a2a/client/transports/rest.py",
+        "src/a2a/server/events/event_queue.py",
+        "src/a2a/server/request_handlers/default_request_handler.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/server/events/test_event_queue.py",
+        "tests/server/request_handlers/test_default_request_handler.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 311064,
+      "required_bug_tests": 4,
+      "preservation_tests": 77,
+      "selected_test_modules": [
+        "tests/server/events/test_event_queue.py",
+        "tests/server/request_handlers/test_default_request_handler.py"
+      ],
+      "source_roots": [
+        "a2a"
+      ],
+      "external_static_import_roots": [
+        "cryptography",
+        "fastapi",
+        "google",
+        "grpc",
+        "httpx",
+        "httpx_sse",
+        "opentelemetry",
+        "pydantic",
+        "pytest",
+        "sqlalchemy",
+        "sse_starlette",
+        "starlette",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        }
+      ],
+      "problem_characters": 3035,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "a2aproject__a2a-python-576",
+      "repository": "a2aproject/a2a-python",
+      "source_revision": "3bfbea9ec8d7982fa73eb12d8352a581307355dc",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/a2aproject__a2a-python-576",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/a2a/client/transports/jsonrpc.py",
+        "src/a2a/client/transports/rest.py"
+      ],
+      "changed_python_source_files": [
+        "src/a2a/client/transports/jsonrpc.py",
+        "src/a2a/client/transports/rest.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/client/transports/test_jsonrpc_client.py",
+        "tests/client/transports/test_rest_client.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 325899,
+      "required_bug_tests": 2,
+      "preservation_tests": 37,
+      "selected_test_modules": [
+        "tests/client/transports/test_jsonrpc_client.py",
+        "tests/client/transports/test_rest_client.py"
+      ],
+      "source_roots": [
+        "a2a"
+      ],
+      "external_static_import_roots": [
+        "cryptography",
+        "fastapi",
+        "google",
+        "grpc",
+        "httpx",
+        "httpx_sse",
+        "opentelemetry",
+        "pydantic",
+        "pytest",
+        "sqlalchemy",
+        "sse_starlette",
+        "starlette",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        }
+      ],
+      "problem_characters": 3658,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "a2aproject__a2a-python-682_interface",
+      "repository": "a2aproject/a2a-python",
+      "source_revision": "c91d4fba517190d8f7c76b42ea26914a4275f1d5",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/a2aproject__a2a-python-682_interface",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/a2a/client/transports/base.py"
+      ],
+      "changed_python_source_files": [
+        "src/a2a/client/transports/base.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/client/test_base_client.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 359855,
+      "required_bug_tests": 2,
+      "preservation_tests": 5,
+      "selected_test_modules": [
+        "tests/client/test_base_client.py"
+      ],
+      "source_roots": [
+        "a2a"
+      ],
+      "external_static_import_roots": [
+        "cryptography",
+        "fastapi",
+        "google",
+        "grpc",
+        "httpx",
+        "httpx_sse",
+        "jwt",
+        "opentelemetry",
+        "pydantic",
+        "pytest",
+        "sqlalchemy",
+        "sse_starlette",
+        "starlette",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        }
+      ],
+      "problem_characters": 2964,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "agronholm__anyio-935",
+      "repository": "agronholm/anyio",
+      "source_revision": "89874ca47cbb3fb3d56f91b043a09b5ec81959a8",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/agronholm__anyio-935",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/anyio/lowlevel.py"
+      ],
+      "changed_python_source_files": [
+        "src/anyio/lowlevel.py"
+      ],
+      "omitted_non_source_candidates": [
+        "docs/versionhistory.rst"
+      ],
+      "protected_overlay_paths": [
+        "tests/test_lowlevel.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 194480,
+      "required_bug_tests": 3,
+      "preservation_tests": 27,
+      "selected_test_modules": [
+        "tests/test_lowlevel.py"
+      ],
+      "source_roots": [
+        "anyio"
+      ],
+      "external_static_import_roots": [
+        "_pytest",
+        "_typeshed",
+        "blockbuster",
+        "exceptiongroup",
+        "idna",
+        "outcome",
+        "pytest",
+        "sniffio",
+        "trio",
+        "trustme",
+        "typing_extensions",
+        "uvloop"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0",
+          "bytes": 1081
+        }
+      ],
+      "problem_characters": 3086,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "agronholm__anyio-975",
+      "repository": "agronholm/anyio",
+      "source_revision": "47a559ab1e1b03e51b769becdf6c76b732fdf127",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/agronholm__anyio-975",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/anyio/_backends/_asyncio.py",
+        "src/anyio/_backends/_trio.py",
+        "src/anyio/_core/_tasks.py",
+        "src/anyio/from_thread.py"
+      ],
+      "changed_python_source_files": [
+        "src/anyio/_backends/_asyncio.py",
+        "src/anyio/_backends/_trio.py",
+        "src/anyio/_core/_tasks.py",
+        "src/anyio/from_thread.py"
+      ],
+      "omitted_non_source_candidates": [
+        "docs/cancellation.rst",
+        "docs/versionhistory.rst",
+        "pyproject.toml"
+      ],
+      "protected_overlay_paths": [
+        "tests/test_taskgroups.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 207843,
+      "required_bug_tests": 10,
+      "preservation_tests": 375,
+      "selected_test_modules": [
+        "tests/test_taskgroups.py"
+      ],
+      "source_roots": [
+        "anyio"
+      ],
+      "external_static_import_roots": [
+        "_pytest",
+        "_typeshed",
+        "blockbuster",
+        "exceptiongroup",
+        "idna",
+        "outcome",
+        "pytest",
+        "sniffio",
+        "trio",
+        "trustme",
+        "typing_extensions",
+        "uvloop"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0",
+          "bytes": 1081
+        }
+      ],
+      "problem_characters": 1208,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "asottile__dead-204",
+      "repository": "asottile/dead",
+      "source_revision": "d2d94828cfe205d294b5e551dfe187d77a1fe026",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/asottile__dead-204",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "dead.py"
+      ],
+      "changed_python_source_files": [
+        "dead.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/dead_test.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 8184,
+      "required_bug_tests": 1,
+      "preservation_tests": 31,
+      "selected_test_modules": [
+        "tests/dead_test.py"
+      ],
+      "source_roots": [
+        "dead.py"
+      ],
+      "external_static_import_roots": [
+        "identify",
+        "pytest"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "ec23c4aef7ee6ef24530669b023a9ba700cadaa1cf5f5ae167cd16be467b66f5",
+          "bytes": 1059
+        }
+      ],
+      "problem_characters": 266,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "boxed__mutmut-403",
+      "repository": "boxed/mutmut",
+      "source_revision": "1a0cd0656c6a31e3a7d7f47eaadf29ee13cfa4f4",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/boxed__mutmut-403",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "mutmut/node_mutation.py"
+      ],
+      "changed_python_source_files": [
+        "mutmut/node_mutation.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_mutation.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 586251,
+      "required_bug_tests": 2,
+      "preservation_tests": 132,
+      "selected_test_modules": [
+        "tests/test_mutation.py"
+      ],
+      "source_roots": [
+        "mutmut"
+      ],
+      "external_static_import_roots": [
+        "click",
+        "hammett",
+        "libcst",
+        "pytest",
+        "rich",
+        "setproctitle",
+        "textual",
+        "toml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "bb2efac8fedf0c74ed237ed589ae172df148904a5781a7ec9999092dcaf6f439",
+          "bytes": 1471
+        }
+      ],
+      "problem_characters": 1105,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "elementsinteractive__twyn-317",
+      "repository": "elementsinteractive/twyn",
+      "source_revision": "640e122012020a269f3793743c2a812ff89af259",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/elementsinteractive__twyn-317",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/twyn/trusted_packages/references/base.py",
+        "src/twyn/trusted_packages/references/top_npm_reference.py",
+        "src/twyn/trusted_packages/references/top_pypi_reference.py"
+      ],
+      "changed_python_source_files": [
+        "src/twyn/trusted_packages/references/base.py",
+        "src/twyn/trusted_packages/references/top_npm_reference.py",
+        "src/twyn/trusted_packages/references/top_pypi_reference.py"
+      ],
+      "omitted_non_source_candidates": [
+        "README.md"
+      ],
+      "protected_overlay_paths": [
+        "tests/conftest.py",
+        "tests/main/test_main.py",
+        "tests/trusted_packages/test_references.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 445174,
+      "required_bug_tests": 13,
+      "preservation_tests": 30,
+      "selected_test_modules": [
+        "tests/main/test_main.py",
+        "tests/trusted_packages/test_references.py"
+      ],
+      "source_roots": [
+        "twyn"
+      ],
+      "external_static_import_roots": [
+        "click",
+        "freezegun",
+        "pydantic",
+        "pytest",
+        "rapidfuzz",
+        "requests",
+        "rich",
+        "tomli",
+        "tomlkit",
+        "typing_extensions",
+        "yaml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "4ce402a84ee51e9d8c523cb5b597d8712406cb5760a56a24504999d92716981e",
+          "bytes": 1081
+        }
+      ],
+      "problem_characters": 274,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "joshuadavidthomas__django-bird-239",
+      "repository": "joshuadavidthomas/django-bird",
+      "source_revision": "337ab6d4341e04ac3f048eabbd295546519ccef0",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/joshuadavidthomas__django-bird-239",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/django_bird/components.py",
+        "src/django_bird/templatetags/tags/bird.py"
+      ],
+      "changed_python_source_files": [
+        "src/django_bird/components.py",
+        "src/django_bird/templatetags/tags/bird.py"
+      ],
+      "omitted_non_source_candidates": [
+        "CHANGELOG.md"
+      ],
+      "protected_overlay_paths": [
+        "tests/templatetags/test_bird.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 80792,
+      "required_bug_tests": 1,
+      "preservation_tests": 58,
+      "selected_test_modules": [
+        "tests/templatetags/test_bird.py"
+      ],
+      "source_roots": [
+        "django_bird"
+      ],
+      "external_static_import_roots": [
+        "django",
+        "pluggy",
+        "pytest",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "15d64ccfabdb841f840f6195958470add04c56548c5d836159adaaeca2bfe486",
+          "bytes": 1068
+        }
+      ],
+      "problem_characters": 1493,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "lincolnloop__goodconf-51",
+      "repository": "lincolnloop/goodconf",
+      "source_revision": "501ee693ab92816e6718c54a4026f4e82350cd52",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/lincolnloop__goodconf-51",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "goodconf/__init__.py"
+      ],
+      "changed_python_source_files": [
+        "goodconf/__init__.py"
+      ],
+      "omitted_non_source_candidates": [
+        ".gitignore",
+        "pyproject.toml"
+      ],
+      "protected_overlay_paths": [
+        ".github/workflows/test.yml",
+        "tests/test_django.py",
+        "tests/test_goodconf.py",
+        "tests/test_initial.py"
+      ],
+      "overlay_outside_tests": [
+        ".github/workflows/test.yml"
+      ],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 13944,
+      "required_bug_tests": 1,
+      "preservation_tests": 20,
+      "selected_test_modules": [
+        "tests/test_goodconf.py",
+        "tests/test_initial.py"
+      ],
+      "source_roots": [
+        "goodconf"
+      ],
+      "external_static_import_roots": [
+        "django",
+        "pydantic",
+        "pydantic_settings",
+        "pytest",
+        "ruamel",
+        "tomlkit"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "842fec354f6f75314dd38535fd8d3319cdde67796fe4aa5d7f1d828cad1a4808",
+          "bytes": 1056
+        }
+      ],
+      "problem_characters": 463,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "lmstudio-ai__venvstacks-197",
+      "repository": "lmstudio-ai/venvstacks",
+      "source_revision": "8e8d8267567f87ebcb1c2252fe3728e3c45ed052",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/lmstudio-ai__venvstacks-197",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "marcosschroh__dataclasses-avroschema-835",
+      "repository": "marcosschroh/dataclasses-avroschema",
+      "source_revision": "2bec52e49a789dfa90d5f4f0448498632cba33a6",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/marcosschroh__dataclasses-avroschema-835",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "dataclasses_avroschema/model_generator/lang/python/base.py"
+      ],
+      "changed_python_source_files": [
+        "dataclasses_avroschema/model_generator/lang/python/base.py",
+        "dataclasses_avroschema/utils.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/model_generator/conftest.py",
+        "tests/model_generator/test_model_generator.py",
+        "tests/model_generator/test_model_pydantic_generator.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 212441,
+      "required_bug_tests": 1,
+      "preservation_tests": 43,
+      "selected_test_modules": [
+        "tests/model_generator/test_model_generator.py",
+        "tests/model_generator/test_model_pydantic_generator.py"
+      ],
+      "source_roots": [
+        "dataclasses_avroschema"
+      ],
+      "external_static_import_roots": [
+        "casefy",
+        "dacite",
+        "dateutil",
+        "faker",
+        "fastavro",
+        "faust",
+        "inflection",
+        "pydantic",
+        "pytest",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "115fa68514b8d7755266abbd054eab7d6ee4b3f8c7b94148304c1358ab5533b9",
+          "bytes": 1081
+        }
+      ],
+      "problem_characters": 1526,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "marcosschroh__dataclasses-avroschema-870",
+      "repository": "marcosschroh/dataclasses-avroschema",
+      "source_revision": "c2d2cefe4b7e54df9defd05f28aade188abfd08f",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/marcosschroh__dataclasses-avroschema-870",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "dataclasses_avroschema/model_generator/lang/python/base.py"
+      ],
+      "changed_python_source_files": [
+        "dataclasses_avroschema/model_generator/lang/python/base.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/model_generator/conftest.py",
+        "tests/model_generator/test_model_pydantic_generator.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 210325,
+      "required_bug_tests": 1,
+      "preservation_tests": 13,
+      "selected_test_modules": [
+        "tests/model_generator/test_model_pydantic_generator.py"
+      ],
+      "source_roots": [
+        "dataclasses_avroschema"
+      ],
+      "external_static_import_roots": [
+        "casefy",
+        "dacite",
+        "dateutil",
+        "faker",
+        "fastavro",
+        "faust",
+        "inflection",
+        "pydantic",
+        "pytest",
+        "typing_extensions"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "115fa68514b8d7755266abbd054eab7d6ee4b3f8c7b94148304c1358ab5533b9",
+          "bytes": 1081
+        }
+      ],
+      "problem_characters": 1433,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "microsoft__fabric-cicd-394",
+      "repository": "microsoft/fabric-cicd",
+      "source_revision": "b19fd6f51356985c99682a8783b42234188156fc",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/microsoft__fabric-cicd-394",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/fabric_cicd/fabric_workspace.py"
+      ],
+      "changed_python_source_files": [
+        "src/fabric_cicd/fabric_workspace.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_fabric_workspace.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 283932,
+      "required_bug_tests": 5,
+      "preservation_tests": 14,
+      "selected_test_modules": [
+        "tests/test_fabric_workspace.py"
+      ],
+      "source_roots": [
+        "fabric_cicd"
+      ],
+      "external_static_import_roots": [
+        "azure",
+        "dpath",
+        "filetype",
+        "jsonpath_ng",
+        "packaging",
+        "pytest",
+        "requests",
+        "yaml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "bytes": 1141
+        }
+      ],
+      "problem_characters": 459,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "microsoft__fabric-cicd-465",
+      "repository": "microsoft/fabric-cicd",
+      "source_revision": "74f59b95e0203e0c7dda5418d461a1f2723a8b4b",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/microsoft__fabric-cicd-465",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/fabric_cicd/_common/_validate_input.py",
+        "src/fabric_cicd/fabric_workspace.py",
+        "src/fabric_cicd/publish.py"
+      ],
+      "changed_python_source_files": [
+        "src/fabric_cicd/_common/_validate_input.py",
+        "src/fabric_cicd/fabric_workspace.py",
+        "src/fabric_cicd/publish.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_fabric_workspace.py",
+        "tests/test_publish.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 306349,
+      "required_bug_tests": 3,
+      "preservation_tests": 23,
+      "selected_test_modules": [
+        "tests/test_fabric_workspace.py",
+        "tests/test_publish.py"
+      ],
+      "source_roots": [
+        "fabric_cicd"
+      ],
+      "external_static_import_roots": [
+        "azure",
+        "dpath",
+        "filetype",
+        "jsonpath_ng",
+        "packaging",
+        "pytest",
+        "requests",
+        "yaml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "bytes": 1141
+        }
+      ],
+      "problem_characters": 1296,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "microsoft__fabric-cicd-670",
+      "repository": "microsoft/fabric-cicd",
+      "source_revision": "f0e1c5042cfe0601c979f4aa49197ccbb6eef104",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/microsoft__fabric-cicd-670",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/fabric_cicd/_common/_validate_input.py",
+        "src/fabric_cicd/_parameter/_parameter.py",
+        "src/fabric_cicd/_parameter/_utils.py",
+        "src/fabric_cicd/fabric_workspace.py"
+      ],
+      "changed_python_source_files": [
+        "src/fabric_cicd/_common/_validate_input.py",
+        "src/fabric_cicd/_parameter/_parameter.py",
+        "src/fabric_cicd/_parameter/_utils.py",
+        "src/fabric_cicd/fabric_workspace.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_parameter_utils.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 370789,
+      "required_bug_tests": 2,
+      "preservation_tests": 63,
+      "selected_test_modules": [
+        "tests/test_parameter_utils.py"
+      ],
+      "source_roots": [
+        "fabric_cicd"
+      ],
+      "external_static_import_roots": [
+        "azure",
+        "dpath",
+        "filetype",
+        "jsonpath_ng",
+        "packaging",
+        "pytest",
+        "requests",
+        "yaml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "bytes": 1141
+        }
+      ],
+      "problem_characters": 1454,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "modelcontextprotocol__python-sdk-1864",
+      "repository": "modelcontextprotocol/python-sdk",
+      "source_revision": "edf0950a6a8afa48ae2dd99f02d56d383c5904bb",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/modelcontextprotocol__python-sdk-1864",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/mcp/server/fastmcp/resources/templates.py"
+      ],
+      "changed_python_source_files": [
+        "src/mcp/server/fastmcp/resources/templates.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/issues/test_973_url_decoding.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 599365,
+      "required_bug_tests": 3,
+      "preservation_tests": 9,
+      "selected_test_modules": [
+        "tests/issues/test_973_url_decoding.py",
+        "tests/server/test_stateless_mode.py"
+      ],
+      "source_roots": [
+        "mcp"
+      ],
+      "external_static_import_roots": [
+        "anyio",
+        "dotenv",
+        "httpx",
+        "httpx_sse",
+        "jsonschema",
+        "jwt",
+        "pydantic",
+        "pydantic_core",
+        "pydantic_settings",
+        "pytest",
+        "pywintypes",
+        "rich",
+        "sse_starlette",
+        "starlette",
+        "typer",
+        "typing_extensions",
+        "typing_inspection",
+        "uvicorn",
+        "websockets",
+        "win32api",
+        "win32con",
+        "win32job"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
+          "bytes": 1071
+        }
+      ],
+      "problem_characters": 1664,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "modelcontextprotocol__python-sdk-222",
+      "repository": "modelcontextprotocol/python-sdk",
+      "source_revision": "2628e01f4b892b9c59f3bdd2abbad718c121c87a",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/modelcontextprotocol__python-sdk-222",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/mcp/server/fastmcp/server.py",
+        "src/mcp/server/lowlevel/server.py"
+      ],
+      "changed_python_source_files": [
+        "src/mcp/server/fastmcp/server.py",
+        "src/mcp/server/lowlevel/server.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/issues/test_141_resource_templates.py",
+        "tests/issues/test_152_resource_mime_type.py",
+        "tests/server/fastmcp/servers/test_file_server.py",
+        "tests/server/fastmcp/test_server.py",
+        "tests/server/test_read_resource.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 147160,
+      "required_bug_tests": 9,
+      "preservation_tests": 46,
+      "selected_test_modules": [
+        "tests/issues/test_141_resource_templates.py",
+        "tests/issues/test_152_resource_mime_type.py",
+        "tests/server/fastmcp/servers/test_file_server.py",
+        "tests/server/fastmcp/test_server.py",
+        "tests/server/test_read_resource.py"
+      ],
+      "source_roots": [
+        "mcp"
+      ],
+      "external_static_import_roots": [
+        "anyio",
+        "dotenv",
+        "httpx",
+        "httpx_sse",
+        "pydantic",
+        "pydantic_core",
+        "pydantic_settings",
+        "pytest",
+        "rich",
+        "sse_starlette",
+        "starlette",
+        "typer",
+        "uvicorn"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
+          "bytes": 1071
+        }
+      ],
+      "problem_characters": 194,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "modelcontextprotocol__python-sdk-384",
+      "repository": "modelcontextprotocol/python-sdk",
+      "source_revision": "689c54c5915dda3ba484e55a59c126cb46dfc739",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/modelcontextprotocol__python-sdk-384",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/mcp/server/fastmcp/utilities/func_metadata.py"
+      ],
+      "changed_python_source_files": [
+        "src/mcp/server/fastmcp/utilities/func_metadata.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/server/fastmcp/test_func_metadata.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 148879,
+      "required_bug_tests": 1,
+      "preservation_tests": 3,
+      "selected_test_modules": [
+        "tests/server/fastmcp/test_func_metadata.py"
+      ],
+      "source_roots": [
+        "mcp"
+      ],
+      "external_static_import_roots": [
+        "annotated_types",
+        "anyio",
+        "dotenv",
+        "httpx",
+        "httpx_sse",
+        "pydantic",
+        "pydantic_core",
+        "pydantic_settings",
+        "pytest",
+        "rich",
+        "sse_starlette",
+        "starlette",
+        "typer",
+        "uvicorn"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
+          "bytes": 1071
+        }
+      ],
+      "problem_characters": 2107,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "reagento__dishka-512",
+      "repository": "reagento/dishka",
+      "source_revision": "e11de4e1e2f18621943df2084e683459d9445c18",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/reagento__dishka-512",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/dishka/dependency_source/decorator.py"
+      ],
+      "changed_python_source_files": [
+        "src/dishka/dependency_source/decorator.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/unit/container/test_decorator.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 226176,
+      "required_bug_tests": 1,
+      "preservation_tests": 14,
+      "selected_test_modules": [
+        "tests/unit/container/test_decorator.py"
+      ],
+      "source_roots": [
+        "dishka"
+      ],
+      "external_static_import_roots": [
+        "aiogram",
+        "aiohttp",
+        "arq",
+        "celery",
+        "click",
+        "exceptiongroup",
+        "fastapi",
+        "faststream",
+        "flask",
+        "google",
+        "grpc",
+        "litestar",
+        "pydantic",
+        "pytest",
+        "sanic",
+        "sanic_routing",
+        "starlette",
+        "taskiq",
+        "telebot"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357
+        }
+      ],
+      "problem_characters": 1512,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "scientific-python__docstub-123",
+      "repository": "scientific-python/docstub",
+      "source_revision": "aa075d9d0cf208ae6658a4c16955ac3c1436f30f",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/scientific-python__docstub-123",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/docstub/_concurrency.py",
+        "src/docstub/_docstrings.py"
+      ],
+      "changed_python_source_files": [
+        "src/docstub/_concurrency.py",
+        "src/docstub/_docstrings.py",
+        "src/docstub/_utils.py"
+      ],
+      "omitted_non_source_candidates": [
+        "docs/typing_syntax.md",
+        "src/docstub-stubs/_concurrency.pyi",
+        "src/docstub-stubs/_docstrings.pyi",
+        "src/docstub-stubs/_utils.pyi",
+        "src/docstub/doctype.lark"
+      ],
+      "protected_overlay_paths": [
+        "tests/test_docstrings.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 88993,
+      "required_bug_tests": 6,
+      "preservation_tests": 141,
+      "selected_test_modules": [
+        "tests/test_docstrings.py",
+        "tests/test_report.py"
+      ],
+      "source_roots": [
+        "docstub"
+      ],
+      "external_static_import_roots": [
+        "black",
+        "click",
+        "isort",
+        "lark",
+        "libcst",
+        "numpydoc",
+        "pytest"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE.txt",
+          "sha256": "544c6e5982ed7586aa203466331de0433ede308367445e11421ca99be54dc602",
+          "bytes": 4371
+        }
+      ],
+      "problem_characters": 274,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "stuartmaxwell__djpress-117",
+      "repository": "stuartmaxwell/djpress",
+      "source_revision": "62898afc246da3e96a0b8f753cf5e9853d75b40e",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/stuartmaxwell__djpress-117",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "src/djpress/models/category.py",
+        "src/djpress/url_utils.py"
+      ],
+      "changed_python_source_files": [
+        "src/djpress/models/category.py",
+        "src/djpress/url_utils.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_models_category.py",
+        "tests/test_models_tag.py",
+        "tests/test_url_utils.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "multi-file-repair",
+      "normalized_source_bytes": 132648,
+      "required_bug_tests": 3,
+      "preservation_tests": 65,
+      "selected_test_modules": [
+        "tests/test_models_category.py",
+        "tests/test_models_tag.py",
+        "tests/test_url_utils.py"
+      ],
+      "source_roots": [
+        "djpress"
+      ],
+      "external_static_import_roots": [
+        "django",
+        "markdown",
+        "pytest"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "a9fdc59a4f85047fc6e6f91c7dbe8a88eac91e1b0edd23b4b461c3db8a6ce6ca",
+          "bytes": 1071
+        }
+      ],
+      "problem_characters": 180,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "tox-dev__tox-3683",
+      "repository": "tox-dev/tox",
+      "source_revision": "60e4c851a2f86e113372baf08f014700d097821c",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/tox-dev__tox-3683",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "tox-dev__tox-3759",
+      "repository": "tox-dev/tox",
+      "source_revision": "a4d8dabb3ed3736c00e2de14f8ed0dd419b2cc99",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/tox-dev__tox-3759",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "tox-dev__tox-3810",
+      "repository": "tox-dev/tox",
+      "source_revision": "02e9ed73da6a0f97f9167e957e1168d6116942ce",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/tox-dev__tox-3810",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "tox-dev__tox-3846",
+      "repository": "tox-dev/tox",
+      "source_revision": "ae05f2a33ccfe52ff22ac578ec6c8eb9f750ce4a",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/tox-dev__tox-3846",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "tox-dev__tox-3931",
+      "repository": "tox-dev/tox",
+      "source_revision": "dd305fe8f347c49fcd3bd63d5e56c912e4c428f2",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/tox-dev__tox-3931",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    },
+    {
+      "instance_id": "yukinarit__pyserde-657",
+      "repository": "yukinarit/pyserde",
+      "source_revision": "eccc151f944330d8bacd156904a56a094a7820d8",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/yukinarit__pyserde-657",
+      "status": "STATIC_AUDIT_COMPLETE",
+      "executable_source_files": [
+        "serde/se.py"
+      ],
+      "changed_python_source_files": [
+        "serde/se.py"
+      ],
+      "omitted_non_source_candidates": [],
+      "protected_overlay_paths": [
+        "tests/test_json.py",
+        "tests/test_se.py"
+      ],
+      "overlay_outside_tests": [],
+      "family": "single-file-repair",
+      "normalized_source_bytes": 297153,
+      "required_bug_tests": 5,
+      "preservation_tests": 7,
+      "selected_test_modules": [
+        "tests/test_json.py",
+        "tests/test_se.py"
+      ],
+      "source_roots": [
+        "serde"
+      ],
+      "external_static_import_roots": [
+        "beartype",
+        "black",
+        "casefy",
+        "jinja2",
+        "msgpack",
+        "numpy",
+        "orjson",
+        "sqlalchemy",
+        "tomli",
+        "tomli_w",
+        "typing_extensions",
+        "typing_inspect",
+        "yaml"
+      ],
+      "licenses": [
+        {
+          "file": "LICENSE",
+          "sha256": "77734597432d38fa59a0e82573188cb0ff7d03eb646425ebc131d95b2698c8df",
+          "bytes": 1066
+        }
+      ],
+      "problem_characters": 608,
+      "dependency_note": "Static imports include optional/TYPE_CHECKING branches and are incomplete for dynamic imports; not a verified runtime closure."
+    },
+    {
+      "instance_id": "yukinarit__pyserde-682",
+      "repository": "yukinarit/pyserde",
+      "source_revision": "59af51ef2292821900629ec8a3f5b898e20f8078",
+      "private_cache": ".aeep/repository-workload-batch-20261022-sources/yukinarit__pyserde-682",
+      "status": "UNRESOLVED",
+      "error_type": "AssertionError",
+      "error": ""
+    }
+  ],
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "external_code_executed": false,
+  "family_review": "AST bodies with docstrings removed reject file-count inflation; not proof of semantic difficulty or behavior coverage."
+}

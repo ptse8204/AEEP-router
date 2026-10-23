@@ -42,16 +42,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '2e64701'
-last_check_command: 'repository-compact-patches-20261022/bundle-execution-result.json; completion-audit.json; provisional-pool.json; package-review-compact-patches-20261022/execution/summary.json; lychee-compact-patches-review-20261022/execution-result.json'
-last_check_result: 'Approved31c5138d bundle completed once: runtime4of5 cases reproduced,19 canonical attempts/receipts reopened,21operations and47.338871458079666seconds charged,all owned containers absent. SQL7479 reference exit2,collection ERROR,required identities missing; no detailed exception retained. Installed wheel19 checks and offline docs passed;private runtimes/scratch removed. Consolidated18 unique snapshots:8single,6multi,4audit,975required identities;4 current-source records,14 old bindings retained. Grant12928operations,3744turns,118371.52375846636seconds,0cash. Source59b9 unchanged;all13 checks remain passed. No model/release evidence.'
-next_action: 'Do not replay terminal bundle31c5138d or source session5348. Read repository-compact-patches-20261022/provisional-pool.json. Continue larger independent source/license/dependency curation and prepare one finite external-runtime review. No package/docs repeat needed on unchanged source. Freeze full8/28/105 grouped cohorts before model qualification/value/selection. DSH optional npm gap,human controls,resource acceptance and release remain separate.'
+last_verified_commit: '159958c'
+last_check_command: 'repository-compact-patches-20261022/completion-audit.json; repository-workload-batch-20261022/preparation-checks.json; static-bundle-audit.json; cohort-capacity.json'
+last_check_result: 'Completed31c5138d:4 cases reproduced,19 receipts/attempts reconciled,21operations/47.338871458079666seconds charged; installed19 checks and docs passed. Current pool18. New38f87c22 review unexecuted:22cases/94variants/six repos,14 exact wheels,closure/110grader guards/22classifier checks/280assets/JSON-only derivation pass. One prior unapproved draft withdrawn for automatic xdist; serial profile now bound. Product source59b9 unchanged and all13 source checks remain passed. Grant12928operations,3744turns,118371.52375846636seconds,0cash.'
+next_action: 'Read repository-workload-batch-20261022/README.md and actual approval response. Review38f87c22d21c564aa35dd9b9a05efec6657dd658bfddfe6ee3e74fcfbb35d3de needs exact new untrusted installation/container execution approval. If approved,first check no execution markers/target image,record actual response,then run run-bundle.py once with that digest under PYTHONPATH=src and configured Python3.13. No package/docs or broad source rerun. Audit/commit results,then continue independent corpus curation. Never execute withdrawn0976c301; full cohorts,value/selection,human/resource/release gates remain open.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Pending38f87c22: one private14-wheel offline image build and at most97 contained calls/100operations/3240reservedseconds. New artifacts are outside terminal31c5138d. Actual approval not yet present; no build/install/container/model call occurred. No architecture decision needed.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
   - 'None for completed7bbc9678: actual approval exercised once; all4 observations passed,6operations charged and all owned containers absent. No future source/model execution, build, install or replay is authorized by this terminal review.'
@@ -3198,3 +3199,38 @@ No full8/28/105 stages are frozen or adopted. Qualification, optional-use value,
 independent selection, human controls, resource acceptance and release remain open.
 Next work expands the corpus with one finite runtime review; it needs no architecture
 choice or package/docs repeat. Evidence: reports/toolkit-v2/c13/repository-compact-patches-20261022/.
+
+## C13 larger repository runtime review prepared
+
+The approved compact bundle is committed as159958c. Current source59b9d61c,
+installed wheel19 checks and offline docs are verified; do not repeat them.
+The new review38f87c22d21c564aa35dd9b9a05efec6657dd658bfddfe6ee3e74fcfbb35d3de
+prepares22 distinct snapshots from six repositories:3 single-file repairs,
+17 multi-file repairs and2 authored audits,1572 required identities and94 variants.
+SQLglot supplies15 snapshots and remains one repository group across stages.
+No case has run on the proposed image and no stage is frozen or adopted.
+
+One private image would install14 exact official wheels over retained image027b7b37.
+The static closure,110 first-party grader guards,22 classifier checks,280 asset
+bindings and JSON-only deterministic derivation fixture pass. No new core service
+or mandatory dependency was added. The proposed maximum is one offline build,
+97 calls including three fresh probes,100 existing-grant operations and3240 reserved
+seconds. No models,downloads,pulls,credentials,cash,package/docs reruns,activation,
+release or old-image deletion. Actual user approval is required for this new
+untrusted installation/execution; no architecture choice is needed.
+
+The unapproved0976c301 draft is withdrawn before execution: static review caught
+DjangoBird's automatic xdist workers. Its new pytest.ini keeps original Python
+source,assertions and other settings while selecting serial execution. SVCS now
+retains its base CHANGELOG for inert patch application. SQL5253 source collection
+failed DNS and is excluded. Smaller initial preparation failures and all drafts
+remain. The old SQL7479 collection failure is unchanged; pytz is a static missing
+runtime import to test,not a recovered exception. No grant charge occurred here.
+
+Capacity remains explicit:18 reproduced candidates plus22 unexecuted proposals.
+Even if all22 pass,101 more distinct cases are needed for the balanced8/28/105 stages.
+Do not infer completeness,usefulness,selection quality or savings from reference
+reproduction. The current grant remains12928 operations,3744 model turns,
+118371.52375846636 seconds and0.0 cash. Human control discovery,optional DSH dependency
+conformance,resource acceptance and release remain separate.
+Evidence: reports/toolkit-v2/c13/repository-workload-batch-20261022/.
