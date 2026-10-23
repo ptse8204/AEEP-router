@@ -13,6 +13,7 @@ import json
 import re
 import sysconfig
 import tarfile
+import zlib
 from collections import Counter
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
@@ -169,12 +170,28 @@ class SuiteTruthV2(SuiteTruth):
         return self
 
 
+class SuiteTruthV3(SuiteTruthV2):
+    """Bounded compressed patch transport; source and test limits stay unchanged."""
+
+    patch_encoding: Literal['gzip-json']
+    pytest_plugins: list[str] = Field(default_factory=list, max_length=8)
+
+
 class SuiteArtifact(StrictModel):
     patch_b64: str = Field(max_length=700_000)
 
 
+class SuiteCompressedArtifact(StrictModel):
+    patch_gzip_b64: str = Field(max_length=700_000)
+
+
 def patch_artifact(patch: RepositoryPatch) -> dict[str, str]:
     return {'patch_b64': base64.b64encode(patch.model_dump_json().encode()).decode()}
+
+
+def compressed_patch_artifact(patch: RepositoryPatch) -> dict[str, str]:
+    data = gzip.compress(patch.model_dump_json().encode(), mtime=0)
+    return {'patch_gzip_b64': base64.b64encode(data).decode()}
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -197,22 +214,44 @@ def decode_patch(value: Any) -> RepositoryPatch:
     return patch
 
 
+def _decode_suite_patch(oracle: SuiteTruth, value: Any) -> RepositoryPatch:
+    if not isinstance(oracle, SuiteTruthV3):
+        return decode_patch(value)
+    artifact = SuiteCompressedArtifact.model_validate(value)
+    data = base64.b64decode(artifact.patch_gzip_b64, validate=True)
+    if len(data) > 500_000:
+        raise ValueError('compressed patch byte bound')
+    try:
+        with gzip.GzipFile(fileobj=io.BytesIO(data)) as stream:
+            raw = stream.read(MAX_EXPANDED + 1)
+    except (OSError, EOFError, zlib.error) as exc:
+        raise ValueError('compressed patch stream') from exc
+    if len(raw) > MAX_EXPANDED:
+        raise ValueError('expanded patch byte bound')
+    patch = RepositoryPatch.model_validate(json.loads(raw, object_pairs_hook=_unique_object))
+    if patch.files:
+        checked_files(patch.files, max_bytes=MAX_EXPANDED)
+    return patch
+
+
 def _suite_version_schema(schema: dict[str, Any]) -> None:
     # Reuse Pydantic's references so definition renaming remains valid.
-    plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
     schema['allOf'] = [
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
          'then': {'properties': {'truth': legacy_truth}}},
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v2'}}, 'required': ['schema_version']},
          'then': {'properties': {'truth': plugin_truth}}},
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v3'}}, 'required': ['schema_version']},
+         'then': {'properties': {'truth': compact_truth}}},
     ]
 
 
 class RepositorySuiteCase(StrictModel):
     model_config = ConfigDict(json_schema_extra=_suite_version_schema)
-    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2'] = 'assessment.repository-suite-case.v1'
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3'] = 'assessment.repository-suite-case.v1'
     input: SuiteInput
-    truth: SuiteTruthV2 | SuiteTruth
+    truth: SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -226,14 +265,15 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
-        if self.schema_version.endswith('.v2') != isinstance(self.truth, SuiteTruthV2):
-            raise ValueError('explicit pytest plugins require repository suite case v2')
+        version = 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
+        if self.schema_version != 'assessment.repository-suite-case.' + version:
+            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
             raise ValueError('suite task/source/oracle binding mismatch')
         for output in self.fault_outputs:
-            patch = decode_patch(output)
+            patch = _decode_suite_patch(self.truth, output)
             if (patch.base_sha256 != self.truth.input_sha256 or not patch.files
                     or not set(patch.files) <= set(self.input.editable_paths)):
                 raise ValueError('suite faults require correctly bound, scoped nonempty patches')
@@ -258,12 +298,12 @@ def public_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
     task = SuiteInput.model_validate(value)
-    oracle = (SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    oracle = (SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
     try:
-        patch = decode_patch(output)
+        patch = _decode_suite_patch(oracle, output)
         if patch.base_sha256 != oracle.input_sha256:
             failure = 'input_binding'
         elif not set(patch.files) <= set(task.editable_paths):
@@ -345,7 +385,7 @@ def reference_outputs(recipe: RecipeDefinition, inputs: list[dict[str, Any]]) ->
         if case is None:
             raise ConfigurationError('repository reference input absent from reviewed cohort')
         output = json.loads(case.reference.read(), object_pairs_hook=_unique_object)
-        patch = decode_patch(output)
+        patch = _decode_suite_patch(case.truth, output)
         if patch.base_sha256 != content_digest(value) or not set(patch.files) <= set(case.input.editable_paths):
             raise ConfigurationError('published reference patch has changed binding or scope')
         outputs.append(output)
@@ -378,7 +418,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         identity['runtime_program_sha256'] = hashlib.sha256(program.encode()).hexdigest()
     recipe = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='repository-suite-' + content_digest(identity)[:16], capability=observer.capability,
         description='Curated source-bound Python repository suites; no official benchmark score or arbitrary preservation claim.',
-        input_schema=SuiteInput.model_json_schema(), output_schema=SuiteArtifact.model_json_schema(),
+        input_schema=SuiteInput.model_json_schema(), output_schema=(TypeAdapter(SuiteArtifact | SuiteCompressedArtifact).json_schema()
+            if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else SuiteArtifact.model_json_schema()),
         generator='curated_repository:1', grader='contained_json:1', extractor='structural_json:1',
         generator_config={'cases': [case.model_dump(mode='json') for case in cases], 'assessment': assessment,
             'declared_origin_counts': dict(Counter(case.origin_kind for case in cases)),
@@ -387,7 +428,9 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema() if plugins else SuiteTruth.model_json_schema(),
+            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+                if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema()
+                if plugins else SuiteTruth.model_json_schema()),
             independent_fixtures=fixtures[:2], transformed_fixtures=fixtures[2:],
             fault_outputs=[fault for case in literals for fault in case.fault_outputs], failure_codes=FAILURES,
             feature_rules={'family': RecipeFeatureRule(path='/family', operation='enum', values=[*variations])},

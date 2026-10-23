@@ -22,8 +22,8 @@ if TYPE_CHECKING:
     from .models import RecipeDefinition
 
 
-def checked_files(files: dict[str, str]) -> dict[str, str]:
-    if not 1 <= len(files) <= 64 or len(json.dumps(files).encode()) > 500_000:
+def checked_files(files: dict[str, str], *, max_bytes: int = 500_000) -> dict[str, str]:
+    if not 1 <= len(files) <= 64 or len(json.dumps(files).encode()) > max_bytes:
         raise ValueError('repository snapshot exceeds its reviewed transport bound')
     for name, value in files.items():
         path = PurePosixPath(name)

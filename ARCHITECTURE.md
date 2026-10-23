@@ -685,3 +685,11 @@ The canonical discovery adapter factory lives in `discovery_service.py`.
 compatibility re-exports. Ordinary routing does not enter stack search.
 [ADR-011](docs/adr/ADR-011-stack-synthesis-preflight.md) records the boundary and
 [STACK_PLANNING.md](docs/STACK_PLANNING.md) describes current support and gaps.
+
+Version3 repository suite cases reuse Python's standard-library gzip transport
+for larger replacement-file artifacts. The coordinator decompresses bounded JSON,
+checks source-only scope and produces the same bounded archive for the existing
+reviewed observer. No new patch parser, executable, dependency or service is
+needed. Legacy definitions retain their original encoding, schema and observer.
+The artifact bridge can deliver `patch.json.gz` as `patch_gzip_b64`; all arms in
+a campaign need the same reviewed mapping and output instructions.

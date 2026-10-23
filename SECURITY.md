@@ -489,3 +489,11 @@ bytes and store only readiness states. Local runtime checks pin an executable ha
 and argv. Sign-in stays with the provider/host; Codex authentication is never read.
 Provider setup is not qualification or permission to spend. Unsupported installers
 remain explicit blockers. See [STACK_PLANNING.md](docs/STACK_PLANNING.md).
+
+Version3 suite patches require an explicit protected `gzip-json` encoding and a
+separate `patch_gzip_b64` field. The decoder reads at most 4000001 expanded bytes,
+rejects oversized/truncated/corrupt streams and duplicate JSON keys, then checks
+canonical paths and editable-source scope. Expanded patch JSON is capped at the
+existing 4000000-byte source-tree bound. Source/archive/member/payload limits and
+protected-test guards stay unchanged. Earlier encodings reject compressed output;
+no compressed artifact can enlarge its own permissions or select a pytest plugin.

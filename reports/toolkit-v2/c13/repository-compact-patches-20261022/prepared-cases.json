@@ -1,0 +1,514 @@
+{
+  "prepared_cases": 5,
+  "cases_file": ".aeep/repository-compact-patches-20261022-cases-v2/cases.json",
+  "cases_file_sha256": "cd877fe7a0feb2e2dd1bc125bd1f26d24724b0ea1b40ad4635aaf45802f9cb80",
+  "variants_file": ".aeep/repository-compact-patches-20261022-cases-v2/variants.json",
+  "cases": [
+    {
+      "id": "tobymao__sqlglot-4643-declared-tests",
+      "original_issue_id": "tobymao__sqlglot-4643",
+      "repository": "tobymao/sqlglot",
+      "revision": "761e835e39fa819ef478b8086bfd814dbecc7927",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-corpus-tree-scopes-20261022/tobymao__sqlglot-4643",
+      "source_sha256": "7ea8b590e5135d34ac61816adb8047ec9da66eb6f4efbdc93f94fcafa24eb456",
+      "source_bytes": 427133,
+      "executable_changed_files": [
+        "sqlglot/expressions.py",
+        "sqlglot/generator.py",
+        "sqlglot/parser.py"
+      ],
+      "reference_changed_files": [
+        "sqlglot/expressions.py",
+        "sqlglot/generator.py",
+        "sqlglot/parser.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 27,
+      "upstream_required_identities": [
+        "tests/dialects/test_oracle.py::TestOracle::test_xml_table",
+        "tests/dialects/test_postgres.py::TestPostgres::test_postgres",
+        "tests/dialects/test_oracle.py::TestOracle::test_analyze",
+        "tests/dialects/test_oracle.py::TestOracle::test_connect_by",
+        "tests/dialects/test_oracle.py::TestOracle::test_datetrunc",
+        "tests/dialects/test_oracle.py::TestOracle::test_grant",
+        "tests/dialects/test_oracle.py::TestOracle::test_hints",
+        "tests/dialects/test_oracle.py::TestOracle::test_join_marker",
+        "tests/dialects/test_oracle.py::TestOracle::test_json_functions",
+        "tests/dialects/test_oracle.py::TestOracle::test_json_table",
+        "tests/dialects/test_oracle.py::TestOracle::test_match_recognize",
+        "tests/dialects/test_oracle.py::TestOracle::test_multitable_inserts",
+        "tests/dialects/test_oracle.py::TestOracle::test_oracle",
+        "tests/dialects/test_oracle.py::TestOracle::test_query_restrictions",
+        "tests/dialects/test_postgres.py::TestPostgres::test_analyze",
+        "tests/dialects/test_postgres.py::TestPostgres::test_array_length",
+        "tests/dialects/test_postgres.py::TestPostgres::test_array_offset",
+        "tests/dialects/test_postgres.py::TestPostgres::test_bool_or",
+        "tests/dialects/test_postgres.py::TestPostgres::test_ddl",
+        "tests/dialects/test_postgres.py::TestPostgres::test_operator",
+        "tests/dialects/test_postgres.py::TestPostgres::test_regexp_binary",
+        "tests/dialects/test_postgres.py::TestPostgres::test_rows_from",
+        "tests/dialects/test_postgres.py::TestPostgres::test_string_concat",
+        "tests/dialects/test_postgres.py::TestPostgres::test_unnest",
+        "tests/dialects/test_postgres.py::TestPostgres::test_unnest_json_array",
+        "tests/dialects/test_postgres.py::TestPostgres::test_variance",
+        "tests/dialects/test_postgres.py::TestPostgres::test_xmlelement"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-compact-patches-20261022/licenses/tobymao__sqlglot-4643/LICENSE",
+          "sha256": "008dfffe61d97ceb73637125b91fe9218066dffa44ed36d5c7ba9a1f1a19d75e",
+          "bytes": 1065
+        }
+      ],
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false,
+      "patch_encoding": "gzip-json"
+    },
+    {
+      "id": "tobymao__sqlglot-5256-declared-tests",
+      "original_issue_id": "tobymao__sqlglot-5256",
+      "repository": "tobymao/sqlglot",
+      "revision": "f5b5b9338eb92b7aa2c9b4c92c6138c2c05e1c40",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-corpus-tree-scopes-20261022/tobymao__sqlglot-5256",
+      "source_sha256": "3b0ed5ae14c3b3e7db7ebd95a48840b3c2b3ba92eb94ca73355ae7432651f6a8",
+      "source_bytes": 447100,
+      "executable_changed_files": [
+        "sqlglot/dialects/spark.py",
+        "sqlglot/expressions.py"
+      ],
+      "reference_changed_files": [
+        "sqlglot/dialects/spark.py",
+        "sqlglot/expressions.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 15,
+      "upstream_required_identities": [
+        "tests/dialects/test_spark.py::TestSpark::test_spark",
+        "tests/dialects/test_spark.py::TestSpark::test_analyze",
+        "tests/dialects/test_spark.py::TestSpark::test_bool_or",
+        "tests/dialects/test_spark.py::TestSpark::test_current_user",
+        "tests/dialects/test_spark.py::TestSpark::test_ddl",
+        "tests/dialects/test_spark.py::TestSpark::test_explode_projection_to_unnest",
+        "tests/dialects/test_spark.py::TestSpark::test_hint",
+        "tests/dialects/test_spark.py::TestSpark::test_insert_cte",
+        "tests/dialects/test_spark.py::TestSpark::test_minus",
+        "tests/dialects/test_spark.py::TestSpark::test_schema_binding_options",
+        "tests/dialects/test_spark.py::TestSpark::test_string",
+        "tests/dialects/test_spark.py::TestSpark::test_strip_modifiers",
+        "tests/dialects/test_spark.py::TestSpark::test_to_date",
+        "tests/dialects/test_spark.py::TestSpark::test_transform_query",
+        "tests/dialects/test_spark.py::TestSpark::test_transpile_annotated_exploded_column"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-compact-patches-20261022/licenses/tobymao__sqlglot-5256/LICENSE",
+          "sha256": "008dfffe61d97ceb73637125b91fe9218066dffa44ed36d5c7ba9a1f1a19d75e",
+          "bytes": 1065
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false,
+      "patch_encoding": "gzip-json"
+    },
+    {
+      "id": "fabfuel__circuitbreaker-67-declared-tests",
+      "original_issue_id": "fabfuel__circuitbreaker-67",
+      "repository": "fabfuel/circuitbreaker",
+      "revision": "646651337a3034062b2cf4889e2090c1ba19b61c",
+      "family": "single-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-corpus-expansion-20261022-sources/fabfuel__circuitbreaker-67",
+      "source_sha256": "2f47d460c2681bc31202961420bb39f2dcf594274d10b26530f718d37c22c0b9",
+      "source_bytes": 10161,
+      "executable_changed_files": [
+        "circuitbreaker.py"
+      ],
+      "reference_changed_files": [
+        "circuitbreaker.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 43,
+      "upstream_required_identities": [
+        "tests/test_unit.py::test_circuitbreaker_unnamed__str__",
+        "tests/test_unit.py::test_circuitbreaker__str__",
+        "tests/test_unit.py::test_circuitbreaker_error__str__",
+        "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[async-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[async-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[async-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[async-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[async-generator]",
+        "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[sync-function]",
+        "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[sync-generator]",
+        "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[async-function]",
+        "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[async-generator]",
+        "tests/test_unit.py::test_circuit_decorator_without_args[sync-function]",
+        "tests/test_unit.py::test_circuit_decorator_without_args[sync-generator]",
+        "tests/test_unit.py::test_circuit_decorator_without_args[async-function]",
+        "tests/test_unit.py::test_circuit_decorator_without_args[async-generator]",
+        "tests/test_unit.py::test_circuit_decorator_with_args",
+        "tests/test_unit.py::test_breaker_expected_exception_is_predicate",
+        "tests/test_unit.py::test_breaker_default_constructor_traps_Exception",
+        "tests/test_unit.py::test_breaker_expected_exception_is_custom_exception",
+        "tests/test_unit.py::test_breaker_constructor_expected_exception_is_exception_list",
+        "tests/test_unit.py::test_constructor_mistake_name_bytes",
+        "tests/test_unit.py::test_constructor_mistake_name_unicode",
+        "tests/test_unit.py::test_constructor_mistake_expected_exception",
+        "tests/test_unit.py::test_advanced_usage_circuitbreaker_subclass",
+        "tests/test_unit.py::test_advanced_usage_circuitbreaker_subclass_with_list",
+        "tests/test_unit.py::test_advanced_usage_circuitbreaker_subclass_with_predicate",
+        "tests/test_unit.py::test_advanced_usage_circuitbreaker_default_expected_exception"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-compact-patches-20261022/licenses/fabfuel__circuitbreaker-67/LICENSE.rst",
+          "sha256": "9500df8630df8b12e67d8fc24f913ac988aa37cda57897190edeae930b0efefe",
+          "bytes": 1537
+        }
+      ],
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "portable_wheels": [
+        "pytest-asyncio"
+      ],
+      "explicit_plugins": [
+        "pytest_mock",
+        "pytest_asyncio.plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false,
+      "patch_encoding": "gzip-json"
+    },
+    {
+      "id": "tobymao__sqlglot-6374-declared-tests",
+      "original_issue_id": "tobymao__sqlglot-6374",
+      "repository": "tobymao/sqlglot",
+      "revision": "c94d0ebb383c7d7ab7f38b96586c19f09b921a52",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-corpus-tree-scopes-batch2-20261022/tobymao__sqlglot-6374",
+      "source_sha256": "8def734192661f206a2a9faa0a200dbfd90ef2573a6a4a565288db704624f8b2",
+      "source_bytes": 512588,
+      "executable_changed_files": [
+        "sqlglot/dialects/oracle.py",
+        "sqlglot/parser.py"
+      ],
+      "reference_changed_files": [
+        "sqlglot/dialects/oracle.py",
+        "sqlglot/parser.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 18,
+      "upstream_required_identities": [
+        "tests/dialects/test_oracle.py::TestOracle::test_hints",
+        "tests/dialects/test_oracle.py::TestOracle::test_analyze",
+        "tests/dialects/test_oracle.py::TestOracle::test_connect_by",
+        "tests/dialects/test_oracle.py::TestOracle::test_datetrunc",
+        "tests/dialects/test_oracle.py::TestOracle::test_grant",
+        "tests/dialects/test_oracle.py::TestOracle::test_join_marker",
+        "tests/dialects/test_oracle.py::TestOracle::test_json_functions",
+        "tests/dialects/test_oracle.py::TestOracle::test_json_table",
+        "tests/dialects/test_oracle.py::TestOracle::test_match_recognize",
+        "tests/dialects/test_oracle.py::TestOracle::test_merge_builder_alias",
+        "tests/dialects/test_oracle.py::TestOracle::test_multitable_inserts",
+        "tests/dialects/test_oracle.py::TestOracle::test_oracle",
+        "tests/dialects/test_oracle.py::TestOracle::test_prior",
+        "tests/dialects/test_oracle.py::TestOracle::test_pseudocolumns",
+        "tests/dialects/test_oracle.py::TestOracle::test_query_restrictions",
+        "tests/dialects/test_oracle.py::TestOracle::test_revoke",
+        "tests/dialects/test_oracle.py::TestOracle::test_utc_time",
+        "tests/dialects/test_oracle.py::TestOracle::test_xml_table"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-compact-patches-20261022/licenses/tobymao__sqlglot-6374/LICENSE",
+          "sha256": "a75624d01e286b497c461fbf758cb2ef977cb298cf77fbd39685dfcf8156c72b",
+          "bytes": 1065
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false,
+      "patch_encoding": "gzip-json"
+    },
+    {
+      "id": "tobymao__sqlglot-7479-declared-tests",
+      "original_issue_id": "tobymao__sqlglot-7479",
+      "repository": "tobymao/sqlglot",
+      "revision": "38357253ee1f2847bd14e0a7b68baf5a2c0a2228",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-corpus-tree-scopes-batch2-20261022/tobymao__sqlglot-7479",
+      "source_sha256": "bf29a3c9c2deef698af2a417543667a0da18be19c9a8960769d66a49376aa855",
+      "source_bytes": 621881,
+      "executable_changed_files": [
+        "sqlglot/expressions/functions.py",
+        "sqlglot/parsers/bigquery.py"
+      ],
+      "reference_changed_files": [
+        "sqlglot/expressions/functions.py",
+        "sqlglot/parsers/bigquery.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 58,
+      "upstream_required_identities": [
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_ml_functions",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_annotate_timestamps",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_approx_quantiles",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_approx_quantiles_to_duckdb",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_approx_qunatiles",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_array_agg",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_array_concat",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_avoid_generating_nested_comment",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_bignumeric",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_bigquery",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_bit_aggs",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_bitwise_and",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_bitwise_not",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_cast_format_with_parentheses",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_concat",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_convert",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_declare",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_errors",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_format_temporal",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_gap_fill",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_generate_date_array",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_identifier_meta",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_inline_constructor",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_json_array",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_json_extract",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_json_extract_array",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_json_lax",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_json_object",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_md5",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_merge",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_mod",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_models",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_null_ordering",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_null_ordering_in_analytic_functions",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_override_normalization_strategy",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_pseudocolumns",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_pushdown_cte_column_names",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_quoted_identifier_meta",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_range_type",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_regexp_extract",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_remove_precision_parameterized_types",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_rename_table",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_round",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_safe_math_funcs",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_select_as_struct",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_set_operations",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_string_agg",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_to_hex",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_to_json_string",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_unix_micros",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_unix_millis",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_unix_seconds",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_unnest",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_unnest_with_offset",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_user_defined_functions",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_warnings",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_week",
+        "tests/dialects/test_bigquery.py::TestBigQuery::test_with_offset"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-compact-patches-20261022/licenses/tobymao__sqlglot-7479/LICENSE",
+          "sha256": "b0bf909b472ddf9bd4eab30f6e6fd8b33bf3997ce038b882fe0663f291958d2d",
+          "bytes": 1065
+        }
+      ],
+      "declared_python": "3.13",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false,
+      "patch_encoding": "gzip-json"
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-4643-declared-tests/reference-payload.json",
+      "sha256": "dd5b6eb2f0e3bfb8aaf8550ec1173f81bdabfe4ea3a9b1356e5f23c2d8f5f8df",
+      "bytes": 1153789
+    },
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-4643-declared-tests/counterexample-payload.json",
+      "sha256": "f864f6e08cc0d8a2482e8a31169e6bf867dacb985481581ff7a639783712113b",
+      "bytes": 1153557
+    },
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-4643-declared-tests/partial-1-payload.json",
+      "sha256": "aacead2b7a3bbbb282031b0c5ebf94889471a45f1e0a5abfae8b363aa7efb117",
+      "bytes": 1153773
+    },
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-4643-declared-tests/partial-2-payload.json",
+      "sha256": "d2573572e67d05fe346963906ae97895b19f42afbe9465a25798f2a02129bc89",
+      "bytes": 1153705
+    },
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "variant": "partial-3",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-4643-declared-tests/partial-3-payload.json",
+      "sha256": "d5b75ccd564c0357477dc8cfb8ff7530d82d8721577bd3e9513e8cf84425013d",
+      "bytes": 1153653
+    },
+    {
+      "case": "tobymao__sqlglot-5256-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-5256-declared-tests/reference-payload.json",
+      "sha256": "2d4edb82f25681f809b7ce7a904f42883c186344eed6af0153a1146a71ebabf7",
+      "bytes": 1179970
+    },
+    {
+      "case": "tobymao__sqlglot-5256-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-5256-declared-tests/counterexample-payload.json",
+      "sha256": "e6a6e53732a666680d7e974da2310cb3ea1b27553da9b374d19d9913bcc22ec0",
+      "bytes": 1179746
+    },
+    {
+      "case": "tobymao__sqlglot-5256-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-5256-declared-tests/partial-1-payload.json",
+      "sha256": "dca4c1f4b28b16181f3cb2c9bcdc36236a2e8f9498861d51a8dc2e67f41439d8",
+      "bytes": 1179762
+    },
+    {
+      "case": "tobymao__sqlglot-5256-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-5256-declared-tests/partial-2-payload.json",
+      "sha256": "52f306d2a837d2bf43ad0f97625d184833c39363ec6bc34bad2746c9424590b0",
+      "bytes": 1179958
+    },
+    {
+      "case": "fabfuel__circuitbreaker-67-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/fabfuel__circuitbreaker-67-declared-tests/reference-payload.json",
+      "sha256": "7f919b65fe3f7a66c52ad055a4c54a9b6530942181021f94d9842ab4ed28ba1f",
+      "bytes": 617519
+    },
+    {
+      "case": "fabfuel__circuitbreaker-67-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/fabfuel__circuitbreaker-67-declared-tests/counterexample-payload.json",
+      "sha256": "9b7fece708bc019b3ed2986e50b6f5fdee29fe3ec017a1a0cf10a58fb5c8929d",
+      "bytes": 617507
+    },
+    {
+      "case": "tobymao__sqlglot-6374-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-6374-declared-tests/reference-payload.json",
+      "sha256": "0f1b50c60e06c67c29b1b31ac084332bbeba7a51c618e545ac30fc59017d34f0",
+      "bytes": 1267455
+    },
+    {
+      "case": "tobymao__sqlglot-6374-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-6374-declared-tests/counterexample-payload.json",
+      "sha256": "6b46052d1fbd793305de13fce973b2ae8bae7925a23125acb00a4bfbe0591d39",
+      "bytes": 1267067
+    },
+    {
+      "case": "tobymao__sqlglot-6374-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-6374-declared-tests/partial-1-payload.json",
+      "sha256": "4e2797f4217825dd44f43a4661404e72b878971ea68ded0883ab48d2d05988fa",
+      "bytes": 1267099
+    },
+    {
+      "case": "tobymao__sqlglot-6374-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-6374-declared-tests/partial-2-payload.json",
+      "sha256": "fbe7fcee8fee3e2df838fa6ddca10911c8a1ca1553a1b7534f938bad919e0ece",
+      "bytes": 1267419
+    },
+    {
+      "case": "tobymao__sqlglot-7479-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-7479-declared-tests/reference-payload.json",
+      "sha256": "e773b706fe8add1f372f9757a5592f30ce15fc7d490886e5f6d31074df46b7c8",
+      "bytes": 1413477
+    },
+    {
+      "case": "tobymao__sqlglot-7479-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-7479-declared-tests/counterexample-payload.json",
+      "sha256": "fe69582c66fb3b363e03ad41927692d4af2e0186ce92db51152931c2f2652463",
+      "bytes": 1413281
+    },
+    {
+      "case": "tobymao__sqlglot-7479-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-7479-declared-tests/partial-1-payload.json",
+      "sha256": "ed847b304dee571593f084cfe0d841f08f35252eee1a6a4184d6d58a63588462",
+      "bytes": 1413417
+    },
+    {
+      "case": "tobymao__sqlglot-7479-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-compact-patches-20261022-cases-v2/tobymao__sqlglot-7479-declared-tests/partial-2-payload.json",
+      "sha256": "def86bc207215b36a753c5848898661d7e1d868cabd86e990af879c2285ef61c",
+      "bytes": 1413341
+    }
+  ],
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false,
+  "preparation_reuse": {
+    "first_party_preparer": "reports/toolkit-v2/c13/repository-corpus-expansion-20261022/prepare-cases.py",
+    "changes": [
+      "new explicit gzip-json v3 metadata and artifacts",
+      "existing pytest_mock declared alongside existing asyncio plugin for Circuitbreaker"
+    ],
+    "subject_code_executed": false,
+    "old_results_or_assets_modified": false
+  }
+}

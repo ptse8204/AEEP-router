@@ -1088,3 +1088,12 @@ preserves existing profile serialization and tool exposure.
 subset, bounded search, command flow and incomplete release gates. Ordinary
 workflow callers keep the existing routing behavior; the internal
 `require_prepared` option lets stacks request input-bound free preparation.
+
+`assessment.repository-suite-case.v3` adds explicit `patch_encoding: gzip-json`
+for bounded compressed replacement-file artifacts. Its output field is
+`patch_gzip_b64`; v1/v2 retain `patch_b64` and their existing limits. V3 MUST
+bound compressed bytes at 500000 and expanded patch JSON at 4000000 before parsing.
+It MUST retain canonical existing-source paths, input binding, protected tests,
+archive/payload bounds and all correctness guards. Compression grants no execution
+or installation authority. V3 MAY declare the same reviewed pytest plugins as
+v2, including an empty list. Only v3 may use the expanded patch-file byte limit.

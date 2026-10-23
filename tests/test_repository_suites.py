@@ -552,3 +552,101 @@ async def test_explicit_plugin_real_process_keeps_trusted_imports_and_source_bin
     observation = json.loads(result.stdout)
     assert (observation['exit_code'] == 0) is not preload_source
     assert bool(observation['statuses']) is not preload_source
+
+
+def compact_case(case):
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    data = case.model_dump(mode='json')
+    data['schema_version'] = 'assessment.repository-suite-case.v3'
+    data['truth'].update(patch_encoding='gzip-json', pytest_plugins=[])
+    reference = compressed_patch_artifact(decode_patch(json.loads(case.reference.read())))
+    path = Path(case.reference.path).with_name('compact-' + Path(case.reference.path).name)
+    path.write_text(json.dumps(reference))
+    data['reference'] = SuiteAsset(path=str(path), sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+        size_bytes=path.stat().st_size).model_dump(mode='json')
+    data['fault_outputs'] = [compressed_patch_artifact(decode_patch(output)) for output in case.fault_outputs]
+    return RepositorySuiteCase.model_validate(data)
+
+
+def test_compact_transport_is_versioned_and_legacy_recipes_remain_identical(suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.repository_suites import SuiteTruthV3
+
+    before = repository_suite_recipe(suite_cases)
+    case = compact_case(suite_cases[0])
+    schema = RepositorySuiteCase.model_json_schema()
+    validator = Draft202012Validator(schema)
+    validator.validate(case.model_dump(mode='json'))
+    assert isinstance(case.truth, SuiteTruthV3) and not case.truth.pytest_plugins
+    for version in ('v1', 'v2'):
+        wrong = {**case.model_dump(mode='json'), 'schema_version': 'assessment.repository-suite-case.' + version}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    with pytest.raises(ValueError):
+        SuiteTruthV2.model_validate(case.truth.model_dump(mode='json'))
+    recipe = repository_suite_recipe([case, *suite_cases[1:]])
+    assert recipe.recipe_id != before.recipe_id
+    assert reference_outputs(recipe, [case.input.model_dump(mode='json')]) == [json.loads(case.reference.read())]
+    assert content_digest(repository_suite_recipe(suite_cases)) == content_digest(before)
+    assert 'patch_gzip_b64' not in json.dumps(before.output_schema)
+    assert 'patch_gzip_b64' in json.dumps(recipe.output_schema)
+
+
+@pytest.mark.asyncio
+async def test_compact_patch_accepts_large_realistic_files_with_unchanged_archive_bounds(suite_cases):
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    case = compact_case(suite_cases[0])
+    # Over the old JSON limit, within the existing source tree limit.
+    text = '# ordinary Python source comment\n' * 20_000
+    patch = RepositoryPatch(base_sha256=content_digest(case.input), files={'library/core.py': text})
+    artifact = compressed_patch_artifact(patch)
+    observed = []
+
+    async def probe(payload):
+        files = archive_files(base64.b64decode(payload['archive']))
+        assert files['library/core.py'] == text.encode()
+        assert files['tests/test_core.py'] == b'protected oracle; never imported in these tests'
+        assert payload['pytest_plugins'] == [] and payload['source_modules'] == ['library']
+        observed.append(payload)
+        return success(payload, case.truth)
+
+    grade = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'), artifact, probe)
+    assert grade.valid and len(observed) == 1
+    with pytest.raises(ValueError):
+        decode_patch(patch_artifact(patch))
+    with pytest.raises(ValueError):
+        decode_patch(artifact)
+    async def no_probe(payload):
+        raise AssertionError('Wrong encoding must fail before execution')
+    for truth, output in [(suite_cases[0].truth, artifact), (case.truth, patch_artifact(patch))]:
+        grade = await grade_suite_output(case.input.model_dump(mode='json'), truth.model_dump(mode='json'), output, no_probe)
+        assert not grade.valid and grade.detail == 'patch_contract'
+
+
+@pytest.mark.asyncio
+async def test_compact_patch_errors_fail_before_dispatch(suite_cases):
+    import gzip
+
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    case = compact_case(suite_cases[0])
+    binding = content_digest(case.input)
+    correct = base64.b64decode(json.loads(case.reference.read())['patch_gzip_b64'])
+    def artifact(data):
+        return {'patch_gzip_b64': base64.b64encode(data).decode()}
+    invalid = [artifact(b'not gzip'), artifact(correct[:-1]), artifact(gzip.compress(b'{"files":{},"files":{}}')),
+        artifact(gzip.compress(b' ' * 4_000_001)), artifact(b'x' * 500_001), {'patch_gzip_b64': '!'},
+        compressed_patch_artifact(RepositoryPatch(base_sha256=binding, files={'tests/test_core.py': 'forged'})),
+        compressed_patch_artifact(RepositoryPatch(base_sha256=binding, files={'../escape.py': 'forged'})),
+        compressed_patch_artifact(RepositoryPatch(base_sha256='0' * 64, files={})),
+        {**json.loads(case.reference.read()), 'patch_b64': 'ambiguous'}]
+    async def no_probe(payload):
+        raise AssertionError('Malformed patch must fail before execution')
+    for value in invalid:
+        result = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'), value, no_probe)
+        assert not result.valid and result.detail in ('patch_contract', 'input_binding')

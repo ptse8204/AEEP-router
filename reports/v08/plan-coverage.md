@@ -5286,3 +5286,36 @@ licenses and assertions with exact omissions. A real SQL repair's whole-file JSO
 reference exceeds current artifact bounds despite a3700-byte published diff;
 transport-limit-finding.json records a proposed compact-patch direction,not savings.
 Evidence: reports/toolkit-v2/c13/repository-corpus-expansion-20261022/.
+
+### C13: compact patch transport verified; current execution bundle in preparation
+
+Version3 adds explicit bounded gzip-JSON replacement-file artifacts. Standard-library
+gzip handles the transport; no new parser,executable,dependency or service. Legacy
+v1/v2 case records,truth schemas,recipe IDs/digests and observers compare identically.
+The real three-file SQL reference is774091 raw JSON bytes and147888 compressed
+bytes. This is an artifact measurement,not token,time,memory or monetary savings.
+V3 decoded JSON uses the existing4000000-byte source-tree bound. Existing archive,
+member,payload,edit-scope and correctness guards remain; old patch limits stay fixed.
+
+Source59b9d61c passed all13 configured commands without drift:1676 tests in each
+full run,21 skips,the existing Starlette warning,82% total coverage,both branch
+gates,Ruff,layering,mypy and builds. Fifty-three focused tests and exact legacy
+serialization proofs pass. Full session5348 is terminal; do not repeat it.
+Offline docs lint passed69 files. Source/wheel/runtime proofs for f694024c remain
+historical; current installed/runtime checks have not executed.
+
+An extra CI proof exposed a pre-existing stale test-file index binding from C07.
+All executable checks passed. Refreshing that one offline binding passed the
+current proof; the old lock and failed report are retained. No live or release
+gate follows. DSH's optional Node runtime check cannot import
+@deepseek-ai/dsh-llm;12 other Node tests pass. No npm installation occurred.
+
+Five compact cases and19 inert observations are prepared. Reviewae4ab2f0 requires
+three fresh source-bound probes before subject calls:at most22 offline calls,
+24 existing-grant operations and920 reserved seconds on the same pinned image.
+Sixty-two assets,22 classifier checks and25 first-party grader guards pass.
+No external source execution,install,image change,model turn or cash occurred
+in this source work. Exact combined runtime/current-wheel/docs authority is being
+prepared. Full8/28/105 stages,value,selection,human controls,resource acceptance
+and release remain separate. Latest canonical grant remains12907 operations,
+3744 turns,118324.18488700828 seconds and0.0 cash.

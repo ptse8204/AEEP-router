@@ -257,3 +257,28 @@ frequency, concurrency and operator tolerance. Proposed absolute budgets are
 workload hypotheses until supported and accepted; they do not replace comparative
 usefulness. Existing safety guards, finite grants and the 50 GiB host reserve
 remain binding.
+
+## Larger replacement-file artifacts
+
+Use `assessment.repository-suite-case.v3` when a small repair touches enough
+source text to exceed the legacy 500000-byte patch JSON limit. Its protected truth
+requires `patch_encoding: gzip-json`. Write the same base hash and replacement
+file mapping as gzip-compressed UTF-8 JSON. Configure the existing artifact bridge
+with `output_name: patch.json.gz` and `output_field: patch_gzip_b64`; keep the
+current public-archive input mapping. `compressed_patch_artifact` provides the
+operator-side encoding helper. Both agent arms need identical output instructions.
+A campaign can convert its new cases to v3 before freezing the common mapping;
+old cases and evidence retain their original definitions.
+
+The compressed patch may contain at most 500000 bytes; expanded JSON and its file
+mapping may contain at most 4000000 bytes. The source tree, protected overlay and
+complete grader payload must still fit their existing bounds. Invalid compression,
+changed base hashes, duplicate keys, unsafe paths and test/configuration edits
+fail before dispatch. The optional `pytest_plugins` list follows the existing v2
+review and import-order rules; an empty list is allowed. V3 reuses that observer.
+
+This uses standard-library gzip, already used for source archives. It avoids a new
+parser or host executable. It remains whole-file replacement, with no unified-diff
+syntax or claim of token/time/cash savings. V1/v2 encodings, schemas, recipe digests
+and limits remain unchanged. New definitions still need applicable source-bound
+runtime checks and execution authority; fixtures cannot qualify the new transport.

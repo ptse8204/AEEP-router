@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: explicit-plugin source, installed-wheel and docs checks passed; three runtime probes passed; eight provisional screening cases now reproduced. The older whole-module Leanclient failure remains unchanged; the new declared-node scope passed.**
+**Status as of 2026-10-22: compact repository patch transport passed source verification. Current-source contained, installed-wheel and offline docs checks are prepared for exact execution review; earlier15-case runtime evidence keeps its old source binding.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -43,9 +43,9 @@ checkpoint_status:
   C12: PASS
   C13: IN_PROGRESS
 last_verified_commit: 'a6ed14a'
-last_check_command: 'repository-corpus-expansion-20261022/completion-audit.json; beniget-truth-adaptation.json; reproduced-candidate-pool.json; earlier unchanged-source/wheel/docs evidence'
-last_check_result: 'Approvedab120327 completed once:19 physical calls/21 operations/42.763097875751555seconds;all canonical attempts/receipts reopened and containers absent. Six cases passed frozen expectations; a separate Python3.13 Beniget truth adaptation retains all422 assertions and reuses identical physical payloads,with no replay. Seven new candidate tasks;15 including provisional screening. Original failures remain unchanged. Latest grant12907operations,3744turns,118324.18488700828seconds,0.0cash. Sourcef694024c,all13 source checks,wheel19 checks and docs69 remain unchanged/passed; no repeats. No model qualification,value,selection or resource acceptance implied.'
-next_action: 'Continue independent28training/105holdout curation; stages are not frozen. Read repository-corpus-expansion-20261022/README.md,case-exclusions.json,source-data-audit-v2.json and transport-limit-finding.json. Prepare exact closed runtime support and additional genuine multi-file tasks; do not replay terminalab120327 or repeat source/package/docs on unchanged code. Compact diff transport is a documented engineering direction,not implemented; full-file references currently exclude some real repairs. No current execution approval pending. New untrusted execution/installation needs a concrete applicable review. Human controls,workload-derived resource acceptance and release stay separate.'
+last_check_command: 'repository-compact-patches-20261022/validation/source-stability.json; legacy-stability.json; static-audit.json; ci-router-proof-current-summary.json; docs-lint.log; node-integration.log'
+last_check_result: 'Source59b9d61c8af596b9c8e1ce63b842754e76152811f74f4b1fb0a13e5753a52269 passes all13 configured checks without drift:1676 tests per full run,21 skips,82% coverage,both gates,Ruff,layering,mypy,builds. Legacy v1/v2 case/truth/recipe digests equal.53 focused tests pass. Offline CI proof passes after one audited stale index binding refresh; old proof/lock retained. Node12 independent tests pass;runtime.test.mjs cannot load @deepseek-ai/dsh-llm. No npm install. Five compact cases/19 variants are static only;fresh3 probes mandatory. Current-source runtime/wheel/docs execution unstarted;exact combined review being prepared. No code change or broad rerun needed. Grant unchanged12907operations,3744turns,118324.18488700828seconds,0.0cash.'
+next_action: 'Session5348 completed all13 source commands; do not replay. Read repository-compact-patches-20261022/README.md and static-audit.json. Finish/commit exact combined runtime/current-wheel/docs review,then request only that concrete untrusted execution/installation approval. Runtime componentae4ab2f0 is unstarted:3 fresh probes plus19 variants,max24operations/920reservedseconds,on unchanged image. Full independent cohorts remain unfrozen;continue curation after current-source runtime proof. DSH Node dependency gap,human controls,resource acceptance and release remain separately open.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
@@ -3139,3 +3139,36 @@ licenses and assertions with exact omissions. A real SQL repair's whole-file JSO
 reference exceeds current artifact bounds despite a3700-byte published diff;
 transport-limit-finding.json records a proposed compact-patch direction,not savings.
 Evidence: reports/toolkit-v2/c13/repository-corpus-expansion-20261022/.
+
+### C13: compact patch transport verified; current execution bundle in preparation
+
+Version3 adds explicit bounded gzip-JSON replacement-file artifacts. Standard-library
+gzip handles the transport; no new parser,executable,dependency or service. Legacy
+v1/v2 case records,truth schemas,recipe IDs/digests and observers compare identically.
+The real three-file SQL reference is774091 raw JSON bytes and147888 compressed
+bytes. This is an artifact measurement,not token,time,memory or monetary savings.
+V3 decoded JSON uses the existing4000000-byte source-tree bound. Existing archive,
+member,payload,edit-scope and correctness guards remain; old patch limits stay fixed.
+
+Source59b9d61c passed all13 configured commands without drift:1676 tests in each
+full run,21 skips,the existing Starlette warning,82% total coverage,both branch
+gates,Ruff,layering,mypy and builds. Fifty-three focused tests and exact legacy
+serialization proofs pass. Full session5348 is terminal; do not repeat it.
+Offline docs lint passed69 files. Source/wheel/runtime proofs for f694024c remain
+historical; current installed/runtime checks have not executed.
+
+An extra CI proof exposed a pre-existing stale test-file index binding from C07.
+All executable checks passed. Refreshing that one offline binding passed the
+current proof; the old lock and failed report are retained. No live or release
+gate follows. DSH's optional Node runtime check cannot import
+@deepseek-ai/dsh-llm;12 other Node tests pass. No npm installation occurred.
+
+Five compact cases and19 inert observations are prepared. Reviewae4ab2f0 requires
+three fresh source-bound probes before subject calls:at most22 offline calls,
+24 existing-grant operations and920 reserved seconds on the same pinned image.
+Sixty-two assets,22 classifier checks and25 first-party grader guards pass.
+No external source execution,install,image change,model turn or cash occurred
+in this source work. Exact combined runtime/current-wheel/docs authority is being
+prepared. Full8/28/105 stages,value,selection,human controls,resource acceptance
+and release remain separate. Latest canonical grant remains12907 operations,
+3744 turns,118324.18488700828 seconds and0.0 cash.
