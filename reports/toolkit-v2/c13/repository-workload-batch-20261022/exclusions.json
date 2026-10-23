@@ -1,0 +1,367 @@
+{
+  "frozen_review_result_preserved": true,
+  "records": [
+    {
+      "case_id": "joshuadavidthomas__django-bird-239-declared-tests",
+      "reason": "UPSTREAM_TEST_ID_FORMAT_UNSUPPORTED",
+      "explanation": "Reference exits0 with21/59 required identities. Thirty-eight metadata parameter IDs are truncated at whitespace (some lack a closing ]). Exact-node collection cannot match the full source parameter labels. The pinned upstream parser uses split(), and the current truth contract forbids whitespace. Do not drop those38 assertions or claim59 tests passed. Full node-ID curation/parser adaptation needs a new task definition.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 21
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "reagento__dishka-512-declared-tests",
+      "reason": "UNPROVIDED_TEST_CONFIG_PLUGIN",
+      "explanation": "The source .pytest.ini requests --cov=dishka --cov-append --cov-report=term-missing, but pytest-cov is neither provisioned in this review nor explicitly loaded. The observed result is pytest exit4 with a usage marker. The raw exception text was not retained; this is a static configuration explanation,not a recovered stderr quote. Review all recognized config paths next,including .pytest.ini.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": false,
+          "grade": null,
+          "discrepancies": null,
+          "exit_code": 4,
+          "observed_status_counts": {
+            "ERROR:": 1
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "prometheus__client_python-1134-aeep-contract-audit",
+      "reason": "UNPROVIDED_BENCHMARK_FIXTURE",
+      "explanation": "The reference reports29 PASSED and ERROR for test_benchmark_text_string_to_metric_families. Its source requests the benchmark fixture; pytest-benchmark is not provisioned/loaded in this review. The authored byte-preservation guard passed. Exact fixture error text is unavailable. A new portable dependency/plugin review may repair this task without changing its assertions.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 29,
+            "ERROR": 1
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "tobymao__sqlglot-5352-declared-tests",
+      "reason": "INSUFFICIENT_PER_FILE_REGRESSION_COVERAGE",
+      "explanation": "Reference and original observations match all119 identities. The second per-file regression still passes all119. The frozen criterion requires every executable-file regression to fail; retain exclusion instead of counting an unverified multi-file repair.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 119
+          }
+        },
+        {
+          "variant": "counterexample",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 116,
+            "FAILED": 3
+          }
+        },
+        {
+          "variant": "partial-1",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 116,
+            "FAILED": 3
+          }
+        },
+        {
+          "variant": "partial-2",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 119
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "tobymao__sqlglot-6314-declared-tests",
+      "reason": "PARTIAL_IMPORT_FAILURE_NOT_COMPLETE_BEHAVIOR_EVIDENCE",
+      "explanation": "Reference/original/first partial observations match the reviewed outcomes. The second partial exits2 with a test_clickhouse.py collection ERROR and missing required identities. Core validation rejects it, but it does not satisfy this review's complete-identity semantic-failure criterion. No criterion was relaxed.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 25
+          }
+        },
+        {
+          "variant": "counterexample",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 24,
+            "FAILED": 1
+          }
+        },
+        {
+          "variant": "partial-1",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 24,
+            "FAILED": 1
+          }
+        },
+        {
+          "variant": "partial-2",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ],
+          "exit_code": 2,
+          "observed_status_counts": {
+            "ERROR": 1
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "tobymao__sqlglot-6573-declared-tests",
+      "reason": "RUNTIME_EXPECTED_STATUS_MISMATCH",
+      "explanation": "Reference passes all68 identities. The original exits1 with66 PASSED and2 FAILED,which differs from the metadata status map. Actual grader rejection is retained. No partial slots were dispatched after that mismatch. A pre-freeze runtime truth adaptation could preserve all assertions,but would still need its unstarted per-file checks under new authority.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 68
+          }
+        },
+        {
+          "variant": "counterexample",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "required_test_status_mismatch"
+          ],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 66,
+            "FAILED": 2
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    },
+    {
+      "case_id": "tobymao__sqlglot-7479-declared-tests",
+      "reason": "INSUFFICIENT_PER_FILE_REGRESSION_COVERAGE",
+      "explanation": "Adding the reviewed pytz support resolves the earlier reference collection failure: all58 reference identities pass now. Original and first partial fail correctly. The second per-file regression still passes all58,so the task remains excluded. The old runtime failure stays failed.",
+      "observations": [
+        {
+          "variant": "reference",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 58
+          }
+        },
+        {
+          "variant": "counterexample",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 57,
+            "FAILED": 1
+          }
+        },
+        {
+          "variant": "partial-1",
+          "matched_frozen_expectation": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": [],
+          "exit_code": 1,
+          "observed_status_counts": {
+            "PASSED": 57,
+            "FAILED": 1
+          }
+        },
+        {
+          "variant": "partial-2",
+          "matched_frozen_expectation": false,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ],
+          "exit_code": 0,
+          "observed_status_counts": {
+            "PASSED": 58
+          }
+        }
+      ],
+      "excluded_from_pool": true,
+      "old_record_unchanged": true
+    }
+  ],
+  "no_extra_calls_or_threshold_relaxation": true,
+  "diagnostic_log_limit": "Raw bounded replies retain statuses/exit only. Detailed pytest text was ephemeral and is unknown; static explanations are labeled separately."
+}

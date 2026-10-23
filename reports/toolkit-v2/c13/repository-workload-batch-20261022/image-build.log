@@ -1,0 +1,79 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 916B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022@sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-explicit-plugins-20261022@sha256:027b7b37d305b4904efb5a63059797818521df07b537cd403d145a362b61267e done
+#5 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 11.85MB 0.1s done
+#4 DONE 0.1s
+
+#6 [2/3] COPY pydantic-2.12.3-py3-none-any.whl pydantic_core-2.41.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl annotated_types-0.7.0-py3-none-any.whl typing_inspection-0.4.2-py3-none-any.whl email_validator-2.3.0-py3-none-any.whl dnspython-2.8.0-py3-none-any.whl django-5.2.7-py3-none-any.whl asgiref-3.10.0-py3-none-any.whl sqlparse-0.5.3-py3-none-any.whl pytest_django-4.11.1-py3-none-any.whl attrs-25.4.0-py3-none-any.whl sybil-9.2.0-py3-none-any.whl pytest_asyncio-1.2.0-py3-none-any.whl pytz-2025.2-py2.py3-none-any.whl requirements.txt /opt/aeep-runtime/
+#6 DONE 0.1s
+
+#7 [3/3] RUN ["python3", "-m", "pip", "--isolated", "install", "--no-index", "--no-deps", "--no-compile", "--no-cache-dir", "--disable-pip-version-check", "--require-hashes", "-r", "/opt/aeep-runtime/requirements.txt"]
+#7 0.404 Processing /opt/aeep-runtime/pydantic-2.12.3-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 1))
+#7 0.408 Processing /opt/aeep-runtime/pydantic_core-2.41.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (from -r /opt/aeep-runtime/requirements.txt (line 2))
+#7 0.412 Processing /opt/aeep-runtime/annotated_types-0.7.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 3))
+#7 0.413 Processing /opt/aeep-runtime/typing_inspection-0.4.2-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 4))
+#7 0.413 Processing /opt/aeep-runtime/email_validator-2.3.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 5))
+#7 0.414 Processing /opt/aeep-runtime/dnspython-2.8.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 6))
+#7 0.416 Processing /opt/aeep-runtime/django-5.2.7-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 7))
+#7 0.431 Processing /opt/aeep-runtime/asgiref-3.10.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 8))
+#7 0.432 Processing /opt/aeep-runtime/sqlparse-0.5.3-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 9))
+#7 0.433 Processing /opt/aeep-runtime/pytest_django-4.11.1-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 10))
+#7 0.434 Processing /opt/aeep-runtime/attrs-25.4.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 11))
+#7 0.434 Processing /opt/aeep-runtime/sybil-9.2.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 12))
+#7 0.435 Processing /opt/aeep-runtime/pytest_asyncio-1.2.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 13))
+#7 0.436 Processing /opt/aeep-runtime/pytz-2025.2-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 14))
+#7 0.457 Installing collected packages: pytz, typing-inspection, sybil, sqlparse, pytest-django, pytest-asyncio, pydantic-core, pydantic, email-validator, dnspython, django, attrs, asgiref, annotated-types
+#7 0.516   Attempting uninstall: typing-inspection
+#7 0.519     Found existing installation: typing-inspection 0.4.4
+#7 0.520     Uninstalling typing-inspection-0.4.4:
+#7 0.527       Successfully uninstalled typing-inspection-0.4.4
+#7 0.561   Attempting uninstall: pydantic-core
+#7 0.565     Found existing installation: pydantic_core 2.46.5
+#7 0.567     Uninstalling pydantic_core-2.46.5:
+#7 0.580       Successfully uninstalled pydantic_core-2.46.5
+#7 0.604   Attempting uninstall: pydantic
+#7 0.607     Found existing installation: pydantic 2.13.5
+#7 0.618     Uninstalling pydantic-2.13.5:
+#7 0.672       Successfully uninstalled pydantic-2.13.5
+#7 1.566   Attempting uninstall: attrs
+#7 1.568     Found existing installation: attrs 26.1.0
+#7 1.571     Uninstalling attrs-26.1.0:
+#7 1.581       Successfully uninstalled attrs-26.1.0
+#7 1.594   Attempting uninstall: annotated-types
+#7 1.596     Found existing installation: annotated-types 0.8.0
+#7 1.597     Uninstalling annotated-types-0.8.0:
+#7 1.601       Successfully uninstalled annotated-types-0.8.0
+#7 1.605 
+#7 1.607 Successfully installed annotated-types-0.7.0 asgiref-3.10.0 attrs-25.4.0 django-5.2.7 dnspython-2.8.0 email-validator-2.3.0 pydantic-2.12.3 pydantic-core-2.41.4 pytest-asyncio-1.2.0 pytest-django-4.11.1 pytz-2025.2 sqlparse-0.5.3 sybil-9.2.0 typing-inspection-0.4.2
+#7 1.607 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#7 DONE 1.7s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.8s done
+#8 exporting manifest sha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b done
+#8 exporting config sha256:d0a8d40d3ab17917b45abb32791a56547f8437e96c2735a4c06bc94280ac32f6 done
+#8 naming to docker.io/aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022 done
+#8 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022
+#8 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022 0.9s done
+#8 DONE 1.8s
+
+View build details: docker-desktop://dashboard/build/default/default/scd7k2irgtjz9gd9ye32qscm8

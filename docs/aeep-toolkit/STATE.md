@@ -1,6 +1,9 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: the approved compact-patch bundle completed. Four repository cases reproduced; SQLglot7479 is excluded. Current-source containment, installed-wheel19 checks and offline docs passed. The consolidated18-case provisional pool preserves each source binding; full8/28/105 stages are not frozen.**
+**Status as of 2026-10-22: approved repository batch completed on source59b9d61c.
+Fifteen new tasks reproduced; seven are excluded. Two historical tasks were
+recovered without replay. The provisional pool has35 cases from20 repositories;
+full8/28/105 stages,usefulness and selection remain unproven.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -42,17 +45,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '159958c'
-last_check_command: 'repository-compact-patches-20261022/completion-audit.json; repository-workload-batch-20261022/preparation-checks.json; static-bundle-audit.json; cohort-capacity.json'
-last_check_result: 'Completed31c5138d:4 cases reproduced,19 receipts/attempts reconciled,21operations/47.338871458079666seconds charged; installed19 checks and docs passed. Current pool18. New38f87c22 review unexecuted:22cases/94variants/six repos,14 exact wheels,closure/110grader guards/22classifier checks/280assets/JSON-only derivation pass. One prior unapproved draft withdrawn for automatic xdist; serial profile now bound. Product source59b9 unchanged and all13 source checks remain passed. Grant12928operations,3744turns,118371.52375846636seconds,0cash.'
-next_action: 'Read repository-workload-batch-20261022/README.md and actual approval response. Review38f87c22d21c564aa35dd9b9a05efec6657dd658bfddfe6ee3e74fcfbb35d3de needs exact new untrusted installation/container execution approval. If approved,first check no execution markers/target image,record actual response,then run run-bundle.py once with that digest under PYTHONPATH=src and configured Python3.13. No package/docs or broad source rerun. Audit/commit results,then continue independent corpus curation. Never execute withdrawn0976c301; full cohorts,value/selection,human/resource/release gates remain open.'
+last_verified_commit: '518b003'
+last_check_command: 'repository-workload-batch-20261022/execution-result.json; runtime-execution/completion-audit.json; recovered-single-file-cases.json; exclusions.json; provisional-pool.json'
+last_check_result: 'Approved38f87c22 completed once:14-wheel image324a1fee built offline;fresh3probes passed;15of22tasks reproduced;84 receipts/attempts reopened,owned containers absent.87operations/211.08177674980834seconds charged. Seven exclusions preserved. Two historical single-file cases regraded on identical payloads without replay. Pool35cases/20repos,12single18multi5audit,2257required identities. Grant13015operations,3744turns,118582.60553521616seconds,0cash. Product source59b9 unchanged;full source/wheel/docs checks remain passed.'
+next_action: 'Do not replay terminal38f87c22 or source session5348. Read repository-workload-batch-20261022/README.md,exclusions.json and provisional-pool.json. Prepare a small exact real-model repository development journey on Loguru/Click/Marshmallow,with optional Ponytail and fresh current-source worker/artifact/capture conformance,using existing engine and images. This is engineering development evidence only,not formal qualification/admission or a substitute for full8/28/105 cohorts. Actual model/untrusted execution needs specific authority. Meanwhile continue independent corpus/source preparation; no broad package/docs rerun or architecture decision needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Pending38f87c22: one private14-wheel offline image build and at most97 contained calls/100operations/3240reservedseconds. New artifacts are outside terminal31c5138d. Actual approval not yet present; no build/install/container/model call occurred. No architecture decision needed.'
+  - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
   - 'None for completed7bbc9678: actual approval exercised once; all4 observations passed,6operations charged and all owned containers absent. No future source/model execution, build, install or replay is authorized by this terminal review.'
@@ -3234,3 +3237,45 @@ reproduction. The current grant remains12928 operations,3744 model turns,
 118371.52375846636 seconds and0.0 cash. Human control discovery,optional DSH dependency
 conformance,resource acceptance and release remain separate.
 Evidence: reports/toolkit-v2/c13/repository-workload-batch-20261022/.
+
+## C13 repository runtime batch completed;35 candidate cases retained
+
+Actual approval38f87c22 ran once. The offline14-wheel image build passed and is
+retained as aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022,
+IDsha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b.
+Inherited execution configuration/parent layers are unchanged; growth19695260 bytes
+passed the operation cap. All three fresh containment/state/runtime probes passed.
+Fifteen of22 tasks reproduced under the frozen expectations. Eighty-four physical
+attempts/receipts were reopened and all owned containers are absent; the owned
+nonsecret canary was removed. Build/setup/analysis/calls charged87 operations and
+211.08177674980834 seconds. Grant counters are13015 operations,3744 turns,
+118582.60553521616 seconds and0.0 cash. No model or cash delta; no automatic replay.
+
+Seven exclusions are explicit in exclusions.json. DjangoBird has truncated upstream
+parameter IDs:21/59 required identities were observed,not59 passes. Dishka requests
+an unprovided coverage plugin in .pytest.ini. Prometheus's benchmark-fixture test
+errors while its authored preservation guard passes. Two SQL cases accept an
+incomplete repair; one partial fails at import with missing tests; another original
+status map differs from metadata. SQL7479's reference now passes with pytz,but its
+per-file regression still fails the acceptance criterion. Detailed pytest exception
+text is unavailable; static configuration explanations are labeled as inferences.
+No assertion,count or criterion was weakened to retain a task.
+
+Two earlier Dissect.cstruct/Mockito cases were recovered as single-file repairs
+under standing definition authority. AST inspection confirms one executable body
+change in each; both original replacement files remain. All four physical payload
+hashes equal completed historical observations. Four canonical receipts/attempts
+were reopened and containers absent. Local first-party regrading passes without
+external calls,models or new canonical operations. Old labels and runtime bindings
+remain; no current conformance transfers to those old records.
+
+The pool now has35 distinct snapshots from20 repositories:12 single-file repairs,
+18 multi-file repairs and5 authored audits,2257 required reference identities.
+Full balanced8/28/105 stages still need106 additional cases and are not frozen or
+adopted. Source59b9d61c,its13-command verification,the installed wheel19 checks and
+offline docs remain unchanged; do not repeat them. The next integration check should
+exercise the repository artifact journey with the real model on the three already
+excluded development repositories,using optional candidate access and protected
+independent grading. Prepare a small exact execution review with fresh worker
+conformance. It cannot replace100-holdout qualification or the full usefulness/
+selection gates. Continue independent corpus work; no architecture change is needed.

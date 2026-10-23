@@ -1382,3 +1382,45 @@ reproduction. The current grant remains12928 operations,3744 model turns,
 118371.52375846636 seconds and0.0 cash. Human control discovery,optional DSH dependency
 conformance,resource acceptance and release remain separate.
 Evidence: reports/toolkit-v2/c13/repository-workload-batch-20261022/.
+
+### D91 — Preserve seven exclusions and recover two historical single-file cases
+
+Actual approval38f87c22 ran once. The offline14-wheel image build passed and is
+retained as aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022,
+IDsha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b.
+Inherited execution configuration/parent layers are unchanged; growth19695260 bytes
+passed the operation cap. All three fresh containment/state/runtime probes passed.
+Fifteen of22 tasks reproduced under the frozen expectations. Eighty-four physical
+attempts/receipts were reopened and all owned containers are absent; the owned
+nonsecret canary was removed. Build/setup/analysis/calls charged87 operations and
+211.08177674980834 seconds. Grant counters are13015 operations,3744 turns,
+118582.60553521616 seconds and0.0 cash. No model or cash delta; no automatic replay.
+
+Seven exclusions are explicit in exclusions.json. DjangoBird has truncated upstream
+parameter IDs:21/59 required identities were observed,not59 passes. Dishka requests
+an unprovided coverage plugin in .pytest.ini. Prometheus's benchmark-fixture test
+errors while its authored preservation guard passes. Two SQL cases accept an
+incomplete repair; one partial fails at import with missing tests; another original
+status map differs from metadata. SQL7479's reference now passes with pytz,but its
+per-file regression still fails the acceptance criterion. Detailed pytest exception
+text is unavailable; static configuration explanations are labeled as inferences.
+No assertion,count or criterion was weakened to retain a task.
+
+Two earlier Dissect.cstruct/Mockito cases were recovered as single-file repairs
+under standing definition authority. AST inspection confirms one executable body
+change in each; both original replacement files remain. All four physical payload
+hashes equal completed historical observations. Four canonical receipts/attempts
+were reopened and containers absent. Local first-party regrading passes without
+external calls,models or new canonical operations. Old labels and runtime bindings
+remain; no current conformance transfers to those old records.
+
+The pool now has35 distinct snapshots from20 repositories:12 single-file repairs,
+18 multi-file repairs and5 authored audits,2257 required reference identities.
+Full balanced8/28/105 stages still need106 additional cases and are not frozen or
+adopted. Source59b9d61c,its13-command verification,the installed wheel19 checks and
+offline docs remain unchanged; do not repeat them. The next integration check should
+exercise the repository artifact journey with the real model on the three already
+excluded development repositories,using optional candidate access and protected
+independent grading. Prepare a small exact execution review with fresh worker
+conformance. It cannot replace100-holdout qualification or the full usefulness/
+selection gates. Continue independent corpus work; no architecture change is needed.
