@@ -5509,3 +5509,10 @@ The remaining intervention is this exact execution approval because9f0bf880
 explicitly forbids automatic retry and the pasted continuation withholds general
 untrusted execution authority. No architecture decision is needed. See
 reports/toolkit-v2/c13/repository-model-fault-correction-20261023/README.md.
+
+The completed first-party full validation replay exercised validate_grader with
+retained historical observer replies:3 literal fixtures,15 replayed calls and48
+rejected faults across57 decisions. No external code,worker,model or canonical
+grant operation was executed. This confirms corrected definition wiring only;
+current runtime validation remains pending exact approval. All195 pending-review
+assets are unchanged. See repository-model-fault-correction-20261023/grader-replay-check.json.

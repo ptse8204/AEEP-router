@@ -46,7 +46,7 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '43ef602'
+last_verified_commit: '9b950b2'
 last_check_command: 'repository-model-journey-20261022/terminal-audit.json; repository-model-fault-correction-20261023/preparation-checks.json'
 last_check_result: 'Terminal9f0bf880:11groups per worker and collector denial passed;nine grader receipts/attempts match reconstructed payload digests;last call used old Marshmallow import fault. All15 operations complete,65.09651541616768seconds charged,zero model/cash,owned graders absent and proxy stopped. Grant13030operations/3744turns/118647.70205063233seconds/0cash. Correctiond775e93e prepared:195assets,seven budget/two observer guards,exact prior certified fault archive,unchanged worker fingerprints and source59b9.'
 next_action: 'Do not replay terminal9f0bf880. Read repository-model-fault-correction-20261023/README.md and exact reviewd775e93e. Record actual approval and run run-corrected.py once only if approved. It reuses unchanged fresh worker conformance and normally validates the corrected recipe before up to6 development task turns. Keep prior15 charges and retain bounded grader replies. Continue independent corpus work; full8/28/105,usefulness,selection,controls,resources and release remain open. No architecture/install/build/source-check decision needed.'
@@ -3361,3 +3361,10 @@ The remaining intervention is this exact execution approval because9f0bf880
 explicitly forbids automatic retry and the pasted continuation withholds general
 untrusted execution authority. No architecture decision is needed. See
 reports/toolkit-v2/c13/repository-model-fault-correction-20261023/README.md.
+
+The completed first-party full validation replay exercised validate_grader with
+retained historical observer replies:3 literal fixtures,15 replayed calls and48
+rejected faults across57 decisions. No external code,worker,model or canonical
+grant operation was executed. This confirms corrected definition wiring only;
+current runtime validation remains pending exact approval. All195 pending-review
+assets are unchanged. See repository-model-fault-correction-20261023/grader-replay-check.json.

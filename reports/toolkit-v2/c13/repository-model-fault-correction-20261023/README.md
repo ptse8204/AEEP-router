@@ -39,6 +39,13 @@ authority, with grant counters unchanged. Seven budget guards, two observer-filt
 checks, driver syntax and195 asset hashes passed. Product source59b9d61c and the
 completed source, wheel and offline docs checks are unchanged.
 
+A separate [full validation replay](grader-replay-check.json) passed the current
+grader-validation function with retained historical observer replies: three
+literal fixtures,15 replayed calls and48 rejected faults across57 decisions.
+This checks the compiled recipe wiring without repository execution or new grant
+operations. It remains a replay fixture, not current runtime conformance. All195
+assets in the pending exact review remain unchanged.
+
 ## Execution and evidence limits
 
 Reuse the reviewed development runner. It compares the ordinary agent with
