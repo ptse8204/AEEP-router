@@ -50,22 +50,28 @@ No new engine, dependency, image, service or destination is introduced.
 
 Product source digest is
 `4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919`.
-The final full pytest run passed1679 tests with21 skips. Branch coverage and
-remaining source gates are running in session94490. Read
-`validation-final/checks.json` and `source-stability.json` before resuming; do not
-restart a running or terminal attempt. The earlier `validation/` directory retains
+All13 final source checks passed on unchanged bytes. Both full runs passed1679
+tests with21 skips;total coverage is82% and both branch gates passed. Ruff,policy,
+mypy,schemas,compile and wheel/sdist builds passed. Session94490 is terminal. Read
+`validation-final/checks.json` and `source-stability.json` before resuming;do not
+repeat this completed verification. The earlier `validation/` directory retains
 the failed identity fixture run on source78bf89bd.
 
 Forty focused regressions passed with three skips. The rendered-task check covers
 six case/role bindings;five synthetic grade-binding checks distinguish protected
 trial grades from earlier receipt fields. None supplies real task outcomes.
 
-The next exact review is being prepared for fresh worker/collector conformance,
+The [combined exact review](approval-bundle.json),SHA-256
+`51c43d2c44eb24c3b4a8d2c355989243fa6f4dec96e924d3e50dc30c370da29c`,
+binds251 assets. It is prepared,not approved or executed. It covers fresh worker/collector conformance,
 three offline grader boundary/state probes, normal grader validation and at most
 six real development turns. It will also bind the current wheel with32 unchanged
 cached dependencies for19 private offline checks and the cached Lychee0.24.2
 documentation checker. Those components remain unapproved and unexecuted.
-Finish source verification and bind the actual artifacts before requesting approval.
+The new wheel SHA-256 is56a86fc3c2850cf1ad17edf9fc2f05038df154c6e599ec7f4c53583475d5f015.
+Package dry-run verified33 cached wheel bindings without installation. The pinned
+6992530-byte docs archive is present;its six first-party sandbox checks passed.
+No new source worker,model,installation or untrusted checker has run.
 
 Review bounds remain six turns,128 existing-grant operations,10000 reserved
 seconds and zero cash. The model-phase reservation components total at most9600
@@ -87,3 +93,18 @@ selection, savings or admission. These repositories remain excluded from future
 holdouts. The35-case provisional pool still needs106 additional cases for the
 balanced8/28/105 stages. Human control discovery, workload-derived resource
 acceptance and release remain separate gates.
+
+## Resume the exact approved bundle
+
+First inspect the actual user response and execution markers. Only an actual
+approval of51c43d2c permits this bundle. Record it once as bundle-operator-approval.json,
+then run once from the repository root:
+
+```bash
+PYTHONPATH=src /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 reports/toolkit-v2/c13/repository-task-delivery-20261023/run-integration-bundle.py 51c43d2c44eb24c3b4a8d2c355989243fa6f4dec96e924d3e50dc30c370da29c
+```
+
+Child approval records are derived mechanically from the actual parent response.
+They are not new human answers. Each component has its own marker and terminal
+result. Inspect all of them and canonical accounting before any further dispatch.
+Never replay terminald775e93e or treat unused allowances as retry authority.

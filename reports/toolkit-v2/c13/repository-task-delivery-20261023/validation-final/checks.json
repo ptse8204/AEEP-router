@@ -43,5 +43,109 @@
     "returncode": 0,
     "seconds": 578.4201118750498,
     "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/03.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "run",
+      "--branch",
+      "-m",
+      "pytest"
+    ],
+    "returncode": 0,
+    "seconds": 869.463594541885,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/04.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "report",
+      "-m"
+    ],
+    "returncode": 0,
+    "seconds": 1.360174125060439,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/05.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "coverage",
+      "json",
+      "-o",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-task-delivery-20261023/coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 1.7325264578685164,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/06.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_critical_coverage.py",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-task-delivery-20261023/coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.04831550037488341,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/07.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_assessment_coverage.py",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-task-delivery-20261023/coverage.json"
+    ],
+    "returncode": 0,
+    "seconds": 0.0416315421462059,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/08.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "ruff",
+      "check",
+      "."
+    ],
+    "returncode": 0,
+    "seconds": 0.08922304073348641,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/09.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "scripts/check_assessment_policy.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.19964337488636374,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/10.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "mypy",
+      "src"
+    ],
+    "returncode": 0,
+    "seconds": 0.3209497909992933,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/11.log"
+  },
+  {
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "-m",
+      "build",
+      "--no-isolation",
+      "--outdir",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/artifacts"
+    ],
+    "returncode": 0,
+    "seconds": 2.0307114170864224,
+    "log": "reports/toolkit-v2/c13/repository-task-delivery-20261023/validation-final/12.log"
   }
 ]

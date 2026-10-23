@@ -1,9 +1,9 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-23: reviewd775e93e is terminal. Grader validation passed;
-five real task turns lacked the task contract and remain ungraded. All29 operations/
-313.0355685814284 seconds and5 turns remain charged;cash0. Source4cb0bf74 repairs
-stopping and metadata. Final full checks are running;new definitions are inert.
+**Status as of 2026-10-23: source4cb0bf74 passed all13 checks,1679 tests in each
+full run,21 skips,82% coverage and both branch gates. Combined review51c43d2c is
+prepared with251 assets for corrected task delivery and independent package/docs
+checks;it is unapproved and unexecuted. Prior5 model turns stay ungraded/charged.
 The35-case pool and C13 usefulness/selection gates remain incomplete.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -46,17 +46,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '24611b9'
+last_verified_commit: '36a93ff'
 last_check_command: 'repository-task-delivery-20261023/validation-final/checks.json; task-delivery-check.json; grade-binding-check.json; source-regressions-final.log; identity-fixture-frame-audit.json'
-last_check_result: 'Source4cb0bf74 final ordinary full suite1679passed/21skipped;branch coverage and remaining gates continue in session94490. Forty focused tests passed/3skipped;identity fixture passed after its1KiB cap was corrected to16KiB for maximum1155-byte outputs(4of141 cases). Six rendered managed-executor checks and five synthetic grade-binding checks passed. No source4cb worker/model/install/docs-check execution has occurred. Prior sourced775 attempt5 turns and29 operations remain charged.'
-next_action: 'First inspect final source-check session94490 and repository-task-delivery-20261023/validation-final/checks.json;do not restart it. Initial31612 is terminal with a fixture frame-limit failure. Complete required source and coverage gates on frozen4cb0bf74. Current model definitions are inert;actual prompt recording checks pass. Reconcile terminald775e93e and preserve all5 turns. Prepare one concrete review for fresh applicable conformance,correct task delivery and installed current artifact checks after source verification. No execution approval exists for source4cb0bf74. Continue safe preparation;no architecture decision.'
+last_check_result: 'Source4cb0bf74 all13 checks passed on unchanged bytes;1679passed/21skipped on both full runs,82percent coverage,both branch gates,Ruff/policy/mypy/builds passed. Six rendered task checks,five grade-binding fixtures and33-wheel no-execution dry-run passed. Combined51c43d2c binds251 assets;no execution/approval yet. Source59b prior5 ungraded turns and29 operations remain charged.'
+next_action: 'Do not rerun terminal source session94490 or modeld775e93e. Read repository-task-delivery-20261023/README.md and approval-bundle.json SHA51c43d2c. All13 source checks passed. Exact combined execution approval is the next intervention;record actual response once as bundle-operator-approval.json and run run-integration-bundle.py once only if approved. Preserve all prior charges. New source has no worker/model/install/docs-check execution yet;no architecture decision needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'No new source4cb0bf74 execution authority exists. Completedd775e93e is terminal;all5 actual turns and29 operations remain charged. Finish full source verification and a concrete fresh conformance/model/package review before requesting intervention. Routine first-party source/definition work continues safely.'
+  - 'Exact combined execution review51c43d2c needs actual approval. Source4cb full checks and concrete251-asset bundle are ready. It includes fresh worker/collector and grader conformance,up to6 public development task turns,new wheel plus32 cached dependencies/19 offline checks,and pinned offline docs checker. No architecture decision. Prior terminal approvals do not cover these changed artifacts.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
@@ -3436,3 +3436,39 @@ unapproved. Preparers and the pending combined driver are inert. All32 cached
 wheel pins and the6992530-byte docs archive are available. The six-observation
 first-party docs sandbox probe passed and removed its own scratch;it did not run
 Lychee. Offline documentation lint passed69 active files. Do not restart94490.
+
+## C13: final source verification passed; exact execution bundle prepared
+
+All13 source checks passed on unchanged4cb0bf74. Both full runs passed1679 tests
+with21 skips,total coverage82%,both coverage gates passed;compile,schemas,Ruff,
+policy,mypy and wheel/sdist builds passed. Session94490 is terminal. Do not rerun.
+The initial78bf fixture failure and later full passing evidence remain separate.
+
+Combined review51c43d2c44eb24c3b4a8d2c355989243fa6f4dec96e924d3e50dc30c370da29c
+is prepared with251 verified assets,not approved or executed. It covers fresh
+source4cb worker/collector conformance,three offline grader boundary/state probes,
+normal grader validation and up to6 development task turns. Same128 existing-grant
+operations/10000 reserved seconds/0cash ceiling;explicit component caps sum9600
+seconds and117 operations including wrapper margins. No threshold was relaxed.
+
+The independent package componentb88eddf3 binds the new wheel56a86fc3 with32 unchanged
+cached dependencies and19 private offline checks. Preparation's no-execution dry
+run passed. The docs component62cd8dbb binds the cached6992530-byte Lychee0.24.2
+archive and passed six first-party sandbox probes without running the checker.
+No downloads,builds/pulls of images,new dependencies,credentials,destinations,
+activation,release or old-image/volume cleanup are included. Independent package/
+docs execution continues only after model worker/proxy cleanup is verified.
+
+Actual new execution requires approval of this exact combined bundle because
+terminald775e93e binds prior source/instructions and forbids retry;the pasted
+continuation reserves untrusted execution/installation. Routine definitions and
+first-party verification are complete under standing authority. No architecture
+decision or further broad source check is needed. Preserve all prior5 actual turns,
+29 operations and313.0355685814284 seconds. Grant remains13059operations/3749turns/
+118960.73761921376seconds/0cash. Full usefulness,selection,corpus,controls,resource
+acceptance and release remain open.
+
+Next:read repository-task-delivery-20261023/README.md and approval-bundle.json;
+inspect actual response and markers;record actual parent approval once and execute
+run-integration-bundle.py with51c43d2c once if approved. Never run a draft,repeat94490,
+or replay terminald775e93e. Continue from actual component results after execution.

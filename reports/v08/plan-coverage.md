@@ -5584,3 +5584,39 @@ unapproved. Preparers and the pending combined driver are inert. All32 cached
 wheel pins and the6992530-byte docs archive are available. The six-observation
 first-party docs sandbox probe passed and removed its own scratch;it did not run
 Lychee. Offline documentation lint passed69 active files. Do not restart94490.
+
+## C13: final source verification passed; exact execution bundle prepared
+
+All13 source checks passed on unchanged4cb0bf74. Both full runs passed1679 tests
+with21 skips,total coverage82%,both coverage gates passed;compile,schemas,Ruff,
+policy,mypy and wheel/sdist builds passed. Session94490 is terminal. Do not rerun.
+The initial78bf fixture failure and later full passing evidence remain separate.
+
+Combined review51c43d2c44eb24c3b4a8d2c355989243fa6f4dec96e924d3e50dc30c370da29c
+is prepared with251 verified assets,not approved or executed. It covers fresh
+source4cb worker/collector conformance,three offline grader boundary/state probes,
+normal grader validation and up to6 development task turns. Same128 existing-grant
+operations/10000 reserved seconds/0cash ceiling;explicit component caps sum9600
+seconds and117 operations including wrapper margins. No threshold was relaxed.
+
+The independent package componentb88eddf3 binds the new wheel56a86fc3 with32 unchanged
+cached dependencies and19 private offline checks. Preparation's no-execution dry
+run passed. The docs component62cd8dbb binds the cached6992530-byte Lychee0.24.2
+archive and passed six first-party sandbox probes without running the checker.
+No downloads,builds/pulls of images,new dependencies,credentials,destinations,
+activation,release or old-image/volume cleanup are included. Independent package/
+docs execution continues only after model worker/proxy cleanup is verified.
+
+Actual new execution requires approval of this exact combined bundle because
+terminald775e93e binds prior source/instructions and forbids retry;the pasted
+continuation reserves untrusted execution/installation. Routine definitions and
+first-party verification are complete under standing authority. No architecture
+decision or further broad source check is needed. Preserve all prior5 actual turns,
+29 operations and313.0355685814284 seconds. Grant remains13059operations/3749turns/
+118960.73761921376seconds/0cash. Full usefulness,selection,corpus,controls,resource
+acceptance and release remain open.
+
+Next:read repository-task-delivery-20261023/README.md and approval-bundle.json;
+inspect actual response and markers;record actual parent approval once and execute
+run-integration-bundle.py with51c43d2c once if approved. Never run a draft,repeat94490,
+or replay terminald775e93e. Continue from actual component results after execution.
