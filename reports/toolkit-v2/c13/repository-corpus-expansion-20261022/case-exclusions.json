@@ -1,0 +1,1203 @@
+{
+  "original_review_result_preserved": true,
+  "cases": [
+    {
+      "case": "fabfuel__circuitbreaker-67-declared-tests",
+      "variant": "reference",
+      "raw_observation": {
+        "name": "fabfuel__circuitbreaker-67-declared-tests-reference",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-1",
+        "raw_file": "raw-observation-1.json",
+        "raw_sha256": "423da2d6d1180871f872c70f76867ca3b657ec0884360fc3991af1ccb804ab26",
+        "execution_error_type": null
+      },
+      "exit_code": 1,
+      "status_counts": {
+        "PASSED": 15,
+        "ERROR": 28
+      },
+      "mismatches": [
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_wrapper_matches_function_type[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_save_last_exception_on_failure_call[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_clear_last_exception_on_success_call[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_call_fallback_function_if_open[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_should_not_call_function_if_open[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuitbreaker_call_fallback_function_with_parameters[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuit_decorator_without_args[sync-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuit_decorator_without_args[sync-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuit_decorator_without_args[async-function]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        },
+        {
+          "test": "tests/test_unit.py::test_circuit_decorator_without_args[async-generator]",
+          "expected": "PASSED",
+          "actual": "ERROR"
+        }
+      ],
+      "detailed_exception": "Not retained by this observer. Static dependency findings do not establish the exact exception."
+    },
+    {
+      "case": "serge-sans-paille__beniget-121-declared-tests",
+      "variant": "counterexample",
+      "raw_observation": {
+        "name": "serge-sans-paille__beniget-121-declared-tests-counterexample",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-5",
+        "raw_file": "raw-observation-5.json",
+        "raw_sha256": "f9b9e63486ec46206b93f632dfbc1c677d7330b51915ffbe82c2885094261442",
+        "execution_error_type": null
+      },
+      "exit_code": 1,
+      "status_counts": {
+        "PASSED": 419,
+        "FAILED": 3
+      },
+      "mismatches": [
+        {
+          "test": "tests/test_chains.py::TestDefUseChains::test_newer_Python_version_builtin_name",
+          "expected": "FAILED",
+          "actual": "PASSED"
+        },
+        {
+          "test": "tests/test_chains.py::TestDefUseChainsStdlib::test_newer_Python_version_builtin_name",
+          "expected": "FAILED",
+          "actual": "PASSED"
+        },
+        {
+          "test": "tests/test_chains.py::TestUseDefChainsStdlib::test_newer_Python_version_builtin_name",
+          "expected": "FAILED",
+          "actual": "PASSED"
+        }
+      ],
+      "detailed_exception": "Not retained by this observer. Static dependency findings do not establish the exact exception."
+    },
+    {
+      "case": "holoviz__param-1073-aeep-contract-audit",
+      "variant": "reference",
+      "raw_observation": {
+        "name": "holoviz__param-1073-aeep-contract-audit-reference",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-10",
+        "raw_file": "raw-observation-10.json",
+        "raw_sha256": "78ace5817b5f5ae29a27ff63b72d0e174b5e056f92819a9d9a9333cda3127a82",
+        "execution_error_type": null
+      },
+      "exit_code": 3,
+      "status_counts": {},
+      "mismatches": [
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_watch_values_keyword_what",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameter::test_deprecate_posargs_Parameter",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameter::test_deprecate_List_class_",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameter::test_deprecate_Number_set_hook",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_as_unicode",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_is_ordered_dict",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_produce_value",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_hasbable",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_named_objs",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_normalize_path",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateInitModule::test_deprecate_abbreviate_path",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_overridable_property",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_batch_watch",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_add_metaclass",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_recursive_repr",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_all_equal",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameterizedModule::test_deprecate_setting_parameter_before_init",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_print_param_defaults",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_set_default",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate__add_parameter",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_params",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_set_param",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_get_param_values",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_params_depended_on",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_defaults",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_print_param_values",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_message",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_verbose",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/testdeprecations.py::TestDeprecateParameters::test_deprecate_debug",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_aeep_preservation.py::test_snapshot_preserved",
+          "expected": "PASSED",
+          "actual": null
+        }
+      ],
+      "detailed_exception": "Not retained by this observer. Static dependency findings do not establish the exact exception."
+    },
+    {
+      "case": "nhairs__python-json-logger-39-aeep-contract-audit",
+      "variant": "reference",
+      "raw_observation": {
+        "name": "nhairs__python-json-logger-39-aeep-contract-audit-reference",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-15",
+        "raw_file": "raw-observation-15.json",
+        "raw_sha256": "cdb8d53893aea6951f9d7b783db057c99701ddbd722b2377a1aaa079005626d6",
+        "execution_error_type": null
+      },
+      "exit_code": 2,
+      "status_counts": {
+        "ERROR": 1
+      },
+      "mismatches": [
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array_no_exc_info[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array_no_exc_info[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_as_array_no_exc_info[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array_no_stack_info[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array_no_stack_info[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_stack_info_as_array_no_stack_info[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_merge_record_extra",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_format[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_format[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_format[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_percentage_format[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_percentage_format[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_percentage_format[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_defaults_field[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_defaults_field[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_defaults_field[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_base_field[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_base_field[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_base_field[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_with_defaults[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_with_defaults[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_with_defaults[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_missing[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_missing[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_missing[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_keep_missing[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_keep_missing[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_keep_missing[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_preserve_order[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_preserve_order[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_preserve_order[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_once[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_once[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_once[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_add_static_fields[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_add_static_fields[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_add_static_fields[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_format_keys[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_format_keys[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_format_keys[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_unknown_format_key[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_unknown_format_key[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_unknown_format_key[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict_defaults[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict_defaults[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_dict_defaults[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_extra[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_extra[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_log_extra[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_logic_adds_field[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_logic_adds_field[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_logic_adds_field[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_not_required[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_not_required[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_not_required[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_no_error[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_no_error[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_exc_info_renamed_no_error[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_object_serialization[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_object_serialization[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_object_serialization[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_reserved_attrs[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_reserved_attrs[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_rename_reserved_attrs[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_encoder_with_timestamp[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_encoder_with_timestamp[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_default_encoder_with_timestamp[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[somestring-str-somestring-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[somestring-str-somestring-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[somestring-str-somestring-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[some",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234-int-1234-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234-int-1234-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234-int-1234-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234.5-float-1234.5-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234.5-float-1234.5-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[1234.5-float-1234.5-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[False-bool-False-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[False-bool-False-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[False-bool-False-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[None-NoneType-None-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[None-NoneType-None-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[None-NoneType-None-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[some-bytes-str-c29tZS1ieXRlcw==-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[some-bytes-str-c29tZS1ieXRlcw==-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[some-bytes-str-c29tZS1ieXRlcw==-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj7-str-16:45:30.000100-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj7-str-16:45:30.000100-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj7-str-16:45:30.000100-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj8-str-2024-05-05-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj8-str-2024-05-05-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj8-str-2024-05-05-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj9-str-2024-05-05T16:45:30.000100-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj9-str-2024-05-05T16:45:30.000100-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj9-str-2024-05-05T16:45:30.000100-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj10-str-2024-05-05T16:45:30.000100+10:00-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj10-str-2024-05-05T16:45:30.000100+10:00-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj10-str-2024-05-05T16:45:30.000100+10:00-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj11-str-12345678-1234-5678-1234-567812345678-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj11-str-12345678-1234-5678-1234-567812345678-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj11-str-12345678-1234-5678-1234-567812345678-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[Exception-str-Exception-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[Exception-str-Exception-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[Exception-str-Exception-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj13-str-Exception:",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[BaseException-str-BaseException-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[BaseException-str-BaseException-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[BaseException-str-BaseException-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj15-str-BaseException:",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj16-str-File",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj17-dict-expected17-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj17-dict-expected17-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj17-dict-expected17-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeDataclass-str-SomeDataclass-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeDataclass-str-SomeDataclass-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeDataclass-str-SomeDataclass-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeClass-str-SomeClass-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeClass-str-SomeClass-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[SomeClass-str-SomeClass-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj20-str-expected20-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj20-str-expected20-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj20-str-expected20-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj21-str-__could_not_encode__-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj21-str-__could_not_encode__-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[obj21-str-__could_not_encode__-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.NONE-NoneType-None-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.NONE-NoneType-None-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.NONE-NoneType-None-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BOOL-bool-False-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BOOL-bool-False-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BOOL-bool-False-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.STR-str-somestring-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.STR-str-somestring-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.STR-str-somestring-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.INT-int-99-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.INT-int-99-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.INT-int-99-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BYTES-str-c29tZS1ieXRlcw==-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BYTES-str-c29tZS1ieXRlcw==-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum.BYTES-str-c29tZS1ieXRlcw==-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum-list-expected27-JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum-list-expected27-OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_common_types_encoded[MultiEnum-list-expected27-MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_default[JsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_default[OrjsonFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_custom_default[MsgspecFormatter]",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_json_ensure_ascii_true",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_formatters.py::test_json_ensure_ascii_false",
+          "expected": "PASSED",
+          "actual": null
+        },
+        {
+          "test": "tests/test_aeep_preservation.py::test_snapshot_preserved",
+          "expected": "PASSED",
+          "actual": null
+        }
+      ],
+      "detailed_exception": "Not retained by this observer. Static dependency findings do not establish the exact exception."
+    }
+  ],
+  "beniget_followup": "beniget-truth-adaptation.json; no replay or discarded assertion"
+}

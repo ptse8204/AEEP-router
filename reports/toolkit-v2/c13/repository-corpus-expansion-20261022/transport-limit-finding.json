@@ -1,0 +1,20 @@
+{
+  "issue": "Current source-only suite output serializes whole replacement files. A valid real upstream patch exceeds the fixed artifact bound before any execution.",
+  "instance_id": "tobymao__sqlglot-4643",
+  "reference_json_bytes": 1032140,
+  "decoded_patch_json_bytes": 774091,
+  "replacement_file_bytes": {
+    "sqlglot/expressions.py": 236306,
+    "sqlglot/generator.py": 201622,
+    "sqlglot/parser.py": 302103
+  },
+  "published_unified_diff_bytes": 3700,
+  "reference_asset_limit": 650000,
+  "decoded_patch_limit": 500000,
+  "case_excluded": true,
+  "runtime_limits_changed": false,
+  "scientific_thresholds_changed": false,
+  "recommended_direction": "Add separately versioned compact diff artifact support using an existing reviewed parser/apply tool; preserve legacy whole-file contracts, strict existing-file edit scope, context validation, archive/output bounds and protected tests. Verify source before new runtime or model work. No new evaluation framework or service.",
+  "status": "Inert design finding only; not implemented or approved for third-party installation/execution.",
+  "caveat": "Byte sizes describe artifacts only; no token, time, memory, monetary savings or model usefulness inferred."
+}

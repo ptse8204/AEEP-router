@@ -41,17 +41,18 @@ checkpoint_status:
   C10: PASS
   C11: PASS
   C12: PASS
-  C13: BLOCKED
+  C13: IN_PROGRESS
 last_verified_commit: 'a6ed14a'
-last_check_command: 'repository-plugin-support-20261022/validation/source-stability.json; bundle-execution-result.json; repository-declared-tests-20261022/completion-audit.json; composed-screening-reproduction.json'
-last_check_result: 'Unchanged sourcef694024c passes all13 checks,1673 tests per full run,21 skips,82% coverage and both gates. Wheel19 checks and offline docs69 passed. Actual approvals038b2af9 and7bbc9678 completed once:26 physical receipts/attempts reopened,all owned containers absent,8 provisional screening cases reproduced with3/3/2 families and6 per-file partial-repair rejections. Combined build/calls charged31operations/55.99806087464094seconds; latest grant12886operations,3744turns,118281.42178913252seconds,0.0cash. Old Leanclient whole-module failure remains failed. Full cohorts not frozen; no new model qualification,value or selection evidence. No current execution approval pending; no source/package/docs repeat needed.'
-next_action: 'Completed7bbc9678 once:4calls,6operations,8.131443957798183 charged seconds; reference/original/two partial repairs all checked, all14 identities observed each time, receipts/attempts reopened and containers absent. Eight provisional screening tasks now reproduce on current image/source, with3/3/2 families and6 partial repairs rejected. Composed record repository-declared-tests-20261022/composed-screening-reproduction.json points to exact private cases. No campaign stages frozen. Next safe work: curate independent28training/105holdout origins with verified executable-body families, licenses, protected tests and runtime closures, preserving repository grouping and all development/screening exclusions. Sourcef694024c, wheel19checks and docs69 remain passed; no repeats on unchanged code. No current execution approval remains pending or reusable; prepare fresh exact source execution/model review only after concrete data/definitions are ready. Grant12886operations,3744turns,118281.42178913252seconds,0.0cash. Human controls, resource acceptance and release remain separate.'
+last_check_command: 'repository-corpus-expansion-20261022/completion-audit.json; beniget-truth-adaptation.json; reproduced-candidate-pool.json; earlier unchanged-source/wheel/docs evidence'
+last_check_result: 'Approvedab120327 completed once:19 physical calls/21 operations/42.763097875751555seconds;all canonical attempts/receipts reopened and containers absent. Six cases passed frozen expectations; a separate Python3.13 Beniget truth adaptation retains all422 assertions and reuses identical physical payloads,with no replay. Seven new candidate tasks;15 including provisional screening. Original failures remain unchanged. Latest grant12907operations,3744turns,118324.18488700828seconds,0.0cash. Sourcef694024c,all13 source checks,wheel19 checks and docs69 remain unchanged/passed; no repeats. No model qualification,value,selection or resource acceptance implied.'
+next_action: 'Continue independent28training/105holdout curation; stages are not frozen. Read repository-corpus-expansion-20261022/README.md,case-exclusions.json,source-data-audit-v2.json and transport-limit-finding.json. Prepare exact closed runtime support and additional genuine multi-file tasks; do not replay terminalab120327 or repeat source/package/docs on unchanged code. Compact diff transport is a documented engineering direction,not implemented; full-file references currently exclude some real repairs. No current execution approval pending. New untrusted execution/installation needs a concrete applicable review. Human controls,workload-derived resource acceptance and release stay separate.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
   - 'None for completed7bbc9678: actual approval exercised once; all4 observations passed,6operations charged and all owned containers absent. No future source/model execution, build, install or replay is authorized by this terminal review.'
   - 'None for completed4cfc412d: actual approval exercised once; six cases reproduced, two excluded, all14 physical attempts/receipts reopened and owned containers absent. Its two unstarted negative slots cannot be reused. No model/install/future-source authority transfers.'
   - 'Review48fa60c0 is WITHDRAWN before execution because the proposed multi-file case is actually one source-body change plus two docstring edits. No installation, build or contained call occurred. Do not execute it even if a late response approves it. A correctly scoped future runtime/plugin review remains to be prepared.'
@@ -3106,3 +3107,35 @@ checks. Current source,wheel19checks and docs69 need no repeat on unchanged code
 Fresh external source or model execution needs a concrete applicable review.
 No human-control, resource-acceptance, comparative-value,selection or release gate
 is closed by the screening reference/counterexample checks.
+
+### C13: ten-repository batch completed; seven new candidates retained
+
+Actual approvalab120327 ran once on sourcef694024c and the existing image. Six
+cases reproduced under its frozen expectations. Nineteen physical calls completed;
+all canonical attempts/receipts were reopened and containers absent. Twenty-one
+operations charged42.763097875751555 seconds. Counters are12907 operations,3744
+turns,118324.18488700828 seconds and0.0 cash. Skipped slots remain unused and the
+review cannot replay. No model or cash delta; source/package/docs need no rerun.
+
+A separate standing-authority Python3.13 truth adaptation retains all422 Beniget
+assertions. Three newer-builtin tests already pass on original source and become
+preservation checks; three WindowsError tests remain fail-to-pass. Both physical
+payload hashes equal the completed reference/original calls. Local first-party
+regrading passes without external execution. The old exact classifier outcome
+remains failed. Circuitbreaker,Param and Python-json-logger remain excluded;
+raw replies retain statuses but no detailed exceptions, so exact causes are unknown.
+
+The current provisional pool is15 cases,including the earlier eight screening
+candidates. The seven new tasks contribute4 single-file repairs,1 genuine multi-file
+repair and2 authored audits,653 required reference identities and2 new per-file
+regression rejections. No full8/28/105 stages are frozen or adopted. Independent
+cohort curation, fresh applicable model-worker qualification, optional-use value
+and independent selection remain the critical path; resource acceptance is separate.
+
+Static source review covered49 issues from31 repositories and identified a second
+false multi-file label from attribute documentation strings. Original audits and
+failed inert drafts remain retained. Git-blob source scopes preserve selected code,
+licenses and assertions with exact omissions. A real SQL repair's whole-file JSON
+reference exceeds current artifact bounds despite a3700-byte published diff;
+transport-limit-finding.json records a proposed compact-patch direction,not savings.
+Evidence: reports/toolkit-v2/c13/repository-corpus-expansion-20261022/.

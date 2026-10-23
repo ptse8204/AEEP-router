@@ -1,0 +1,3874 @@
+{
+  "sources": [
+    {
+      "instance_id": "tobymao__sqlglot-4643",
+      "repository": "tobymao/sqlglot",
+      "revision": "761e835e39fa819ef478b8086bfd814dbecc7927",
+      "private_cache": ".aeep/repository-corpus-tree-scopes-20261022/tobymao__sqlglot-4643",
+      "external_code_executed": false,
+      "status": "STATIC_SCOPE_REVIEW_REQUIRED",
+      "tree_url": "https://api.github.com/repos/tobymao/sqlglot/git/trees/761e835e39fa819ef478b8086bfd814dbecc7927?recursive=1",
+      "tree_sha": "761e835e39fa819ef478b8086bfd814dbecc7927",
+      "tree_json_sha256": "5e45ade662f4a56b76e1a787056fd4840028fc786446c274f47686a9728d5acb",
+      "retained": [
+        {
+          "path": "LICENSE",
+          "git_blob": "1218e4a600a698d61b1bdc4f697a357f0c7535e3",
+          "sha256": "008dfffe61d97ceb73637125b91fe9218066dffa44ed36d5c7ba9a1f1a19d75e",
+          "bytes": 1065
+        },
+        {
+          "path": "README.md",
+          "git_blob": "1bccf107151222ee43753e175dba59bcca9c1b95",
+          "sha256": "a5f2dd7176e035bb83a5b14e06ba77b3406fae80b214fc86e75f21f419c72b83",
+          "bytes": 18141
+        },
+        {
+          "path": "setup.cfg",
+          "git_blob": "9b492ee3b7b69f4ddfb4a1e0afee05c6880eb5ff",
+          "sha256": "399372875088fb648f820f409d715aa28219d1886fba957dfc2848ecc5631942",
+          "bytes": 241
+        },
+        {
+          "path": "setup.py",
+          "git_blob": "5db07cb55b67fa4f1e35ccb999f7efc6d7289338",
+          "sha256": "ceb58acd3d960b8d48729a961a6cdfb79872c1c72bebffc3caedf97dbd179602",
+          "bytes": 1797
+        },
+        {
+          "path": "sqlglot/__init__.py",
+          "git_blob": "33d347469ffbb56b89d13eebedb45d97e505a45e",
+          "sha256": "cdad3caed74f876bfb74ea4674da26b6d948546813aca8daeeb3ddeac4306938",
+          "bytes": 5391
+        },
+        {
+          "path": "sqlglot/__main__.py",
+          "git_blob": "5a77409ed9ebb0efb6e5bcde43fda37554800882",
+          "sha256": "d36d9cd7bdcaab1b22001593129508abfb49531b8d896edaec006cc415eabeef",
+          "bytes": 2069
+        },
+        {
+          "path": "sqlglot/_typing.py",
+          "git_blob": "0415aa41fbb9296bc19cabf6235f898c143c1c25",
+          "sha256": "fb51cfcabdf0e423a54895aa960b7c8e1164d9dc8cbc1baf541a885f5c325423",
+          "bytes": 642
+        },
+        {
+          "path": "sqlglot/dialects/__init__.py",
+          "git_blob": "9228ee5d9ad2c0fda397b0bd154c1110d2684682",
+          "sha256": "b37305d3fdfae7c2abfa5b9d3fb17a27b9ea3a277190b98de823b84ca8b12398",
+          "bytes": 3669
+        },
+        {
+          "path": "sqlglot/dialects/athena.py",
+          "git_blob": "108c7643f33cc0747e52f847d4f5409f73b6ae85",
+          "sha256": "070bc676d5c526615cbd8c27a5a732b5cf86372147669da1158a5cd53f13f03a",
+          "bytes": 5789
+        },
+        {
+          "path": "sqlglot/dialects/bigquery.py",
+          "git_blob": "922539e0fa7b4c1911edf49b2c1d6eb1e5146163",
+          "sha256": "98ba9ebb5e321d53f65ef67b7294b7b87232a0a0ea80f53aaf2353c5ad4b2ed4",
+          "bytes": 48095
+        },
+        {
+          "path": "sqlglot/dialects/clickhouse.py",
+          "git_blob": "59c4bee1c62ff7172230b9fe755398dbea82d24b",
+          "sha256": "52fbb2b6b6d40fd3f98cd9b623c3a082cca60231bc0aef6c1edfb009cce4680d",
+          "bytes": 51424
+        },
+        {
+          "path": "sqlglot/dialects/databricks.py",
+          "git_blob": "ed5e64235e9186c4229e324f65dda9b43659a822",
+          "sha256": "f3ab966481044c80e8902538b85514a7fd6d7e8f77eb3395ed0bdb2e3f8b293e",
+          "bytes": 3893
+        },
+        {
+          "path": "sqlglot/dialects/dialect.py",
+          "git_blob": "2c23d71921b1793415763bf446a2ed6335c9d1a9",
+          "sha256": "776e29d26bf83aab995f281d9a481438c701e1b921e0f18de3d1dbd6ef0d4af2",
+          "bytes": 63463
+        },
+        {
+          "path": "sqlglot/dialects/doris.py",
+          "git_blob": "05fb32ade876d8cac7c1c7e1040c7fd6bd62a9f9",
+          "sha256": "36400a8c8311b677c7c66128c4157aa545fb8e968e185f004ecfa3f5b1c3c430",
+          "bytes": 14339
+        },
+        {
+          "path": "sqlglot/dialects/drill.py",
+          "git_blob": "8a87c7c93c60b430b3cbc9942f9d79ad9b9871fd",
+          "sha256": "69d347b4a282f76504167f3e1f02e0fe8400626f0a114fab8a4b95d637716267",
+          "bytes": 5827
+        },
+        {
+          "path": "sqlglot/dialects/druid.py",
+          "git_blob": "e2a67a283d2fdeaa91a4f5276da18727b1226028",
+          "sha256": "52a8ea56f1a3e8e0dce7a8baad0af5d1b1fd32c5f1dd8fa06ec1b906adb5b182",
+          "bytes": 490
+        },
+        {
+          "path": "sqlglot/dialects/duckdb.py",
+          "git_blob": "9c9b25f4e2413886e8ba6349695fb80af6166377",
+          "sha256": "7865aae8f4f783525789c5f3f50ba2ad1dd9d55f444dbdfae5c750ab4c7cf61b",
+          "bytes": 42145
+        },
+        {
+          "path": "sqlglot/dialects/hive.py",
+          "git_blob": "f1883a95d5f36045489bfbc6b2144d626b8bc3bf",
+          "sha256": "3aff22072897510d9fd3cd8afb14f9142aa0600ac3105d0613087e849c74ec36",
+          "bytes": 29544
+        },
+        {
+          "path": "sqlglot/dialects/materialize.py",
+          "git_blob": "4534c21ba251297c3fe4f05fe3a8e3e9a57bb34d",
+          "sha256": "fc33cb3edf18add40821736b189c3520c7063a800427d34ef57f690dfcb8871b",
+          "bytes": 3494
+        },
+        {
+          "path": "sqlglot/dialects/mysql.py",
+          "git_blob": "f462ca20a1f8cb8dc8e85b8ef22d9d0f0a73e532",
+          "sha256": "0478b3dc102f6fa809b998b7c40d71fab9346008fa88e8187020adaf38a2c41f",
+          "bytes": 46937
+        },
+        {
+          "path": "sqlglot/dialects/oracle.py",
+          "git_blob": "24adc437aec78f8032bb5e5cf80ae971c0564b3d",
+          "sha256": "b22878707a4a3e173c3662d4760b2825ee4e44bdfd1ac5168a234f3f89be3952",
+          "bytes": 15095
+        },
+        {
+          "path": "sqlglot/dialects/postgres.py",
+          "git_blob": "0c2079d8e4553e489cc321d97983bf913f43be85",
+          "sha256": "f4fc9a4c6633ad690c8faa873395712a6ff02c139ad9c591adda369e663a5372",
+          "bytes": 28849
+        },
+        {
+          "path": "sqlglot/dialects/presto.py",
+          "git_blob": "539ca95bb6e0b8db95301722411d20bb02142847",
+          "sha256": "ea2f399fd580fbab6b636cae24091654cedf8470f1220f0fd4842e0c349aea1a",
+          "bytes": 29230
+        },
+        {
+          "path": "sqlglot/dialects/prql.py",
+          "git_blob": "2fc25945ed76eed68bd25d4d942de0c4c5323d35",
+          "sha256": "d555228de2721388786e5b29902a58f65a3a1ff964c5196fbc1bc437f7ec4777",
+          "bytes": 7802
+        },
+        {
+          "path": "sqlglot/dialects/redshift.py",
+          "git_blob": "1430f1e63aecb7b47d4d45d8830c70bd82da88be",
+          "sha256": "46c89905db35cbeba2bc59e43e8ae491345dabf85441120fee8376d7f85382f3",
+          "bytes": 15362
+        },
+        {
+          "path": "sqlglot/dialects/risingwave.py",
+          "git_blob": "97a68a59a68ac3e423937d4a4527da7fee0c078b",
+          "sha256": "03b5c086dba2a40e6e9a69c335f28127c38b0fd262b3698e2bd8572925b925fd",
+          "bytes": 2684
+        },
+        {
+          "path": "sqlglot/dialects/snowflake.py",
+          "git_blob": "b62e70ae57ced08ba4fa95aae76eeb7ef0cd5062",
+          "sha256": "5b86e34c1b39e1a0685fdd60e8b8d9458dfc70574c521d538aeb6f4abe56f0d4",
+          "bytes": 51360
+        },
+        {
+          "path": "sqlglot/dialects/spark.py",
+          "git_blob": "08d99e4e51c544ef54f836b625c6e3a939ba8dc5",
+          "sha256": "2321fecb6f8be48ca7e98138abe355b12dc71e7aa3e70d730c58d309ee08891d",
+          "bytes": 7606
+        },
+        {
+          "path": "sqlglot/dialects/spark2.py",
+          "git_blob": "ad5af48d9a90908d420a44962b80b03d8dc5c83d",
+          "sha256": "0b6fa5a5dc7c3cc65ca3741cbd5172f6203e05007ec4d376555b114c9096f82c",
+          "bytes": 14333
+        },
+        {
+          "path": "sqlglot/dialects/sqlite.py",
+          "git_blob": "ac6fc4d7b512c03071f57f6fedb95c6435de6267",
+          "sha256": "e62045f1d63ffbbab535dde9c431ffe5bf8fb35a9fc496b08854edd583defb79",
+          "bytes": 11818
+        },
+        {
+          "path": "sqlglot/dialects/starrocks.py",
+          "git_blob": "9a9fd503746725eed27468258cb2987cf41256c6",
+          "sha256": "d6ffd5110c16fda61d3ed79d2fa588081817d8e8b72534a1521ad1991b33fa3e",
+          "bytes": 10598
+        },
+        {
+          "path": "sqlglot/dialects/tableau.py",
+          "git_blob": "40feb679c797a1f34c7796ae14823f7ff7dc1a54",
+          "sha256": "d1ec5d2fe450ba805b7e036ad8d804730731f67374c6afc9b5dbc4a5d177d7e6",
+          "bytes": 1554
+        },
+        {
+          "path": "sqlglot/dialects/teradata.py",
+          "git_blob": "c04915dfc0981a673dd7af2a0c79aaf4e07c69cb",
+          "sha256": "5ba969835768e99a0a31d2adfdf2895603f10cf81da434b6b0fab95eebe8edd8",
+          "bytes": 14013
+        },
+        {
+          "path": "sqlglot/dialects/trino.py",
+          "git_blob": "b8c3201b78b4e02ea6cd47b6ac5a58e1df397164",
+          "sha256": "9c1bbbe9191121d7d8d3bbab34deea109ed0ca7edd72c0aa023adeb9f59e66cd",
+          "bytes": 3956
+        },
+        {
+          "path": "sqlglot/dialects/tsql.py",
+          "git_blob": "e499a9fabd195aedfd644b400b443c48f42ac720",
+          "sha256": "46fb24102da8b891f745edc7afe9ee443dee37a3650737476b7d767bafec82d2",
+          "bytes": 48881
+        },
+        {
+          "path": "sqlglot/diff.py",
+          "git_blob": "ec1e31e6a7d6746203a0cec48ec3e3dff8553115",
+          "sha256": "efe035c1a2261c6cc2d821f6e840bb454150983db5b047f375f81548d2de5570",
+          "bytes": 17182
+        },
+        {
+          "path": "sqlglot/errors.py",
+          "git_blob": "300c2157430b08d8183b91e56ef2905fabe66492",
+          "sha256": "40d28cafea732d40d1fadb8c9a7fc62ba88c1d421575bfd8489fc184612fbaca",
+          "bytes": 2126
+        },
+        {
+          "path": "sqlglot/executor/__init__.py",
+          "git_blob": "cf4efc320286ae0ce5680f615a84c4a10940e960",
+          "sha256": "b44ff9d6774005ec1a6f508364994990f76786f68aec5f51cdbde80b23dda28b",
+          "bytes": 2904
+        },
+        {
+          "path": "sqlglot/executor/context.py",
+          "git_blob": "a411c18f020c1d19288c286f1d74b7eba0f16665",
+          "sha256": "5891c975840239e557c0bc34b924ab592736e5e04c9f9231d74f110af76c2914",
+          "bytes": 3386
+        },
+        {
+          "path": "sqlglot/executor/env.py",
+          "git_blob": "c6c8ee07eafb096ddc00b3609c1fc7cc64d1b454",
+          "sha256": "b50854e4fa5304c73181920575d16ac5630d3ed1cdd2f38ecfbdafa27718dca6",
+          "bytes": 8276
+        },
+        {
+          "path": "sqlglot/executor/python.py",
+          "git_blob": "5988c4d94b8e6525aa1000bf46c4a9dee702334d",
+          "sha256": "22247dc9c1c2871de7eece38cc9239f7ef21b84497320249af6163c3557223ef",
+          "bytes": 16627
+        },
+        {
+          "path": "sqlglot/executor/table.py",
+          "git_blob": "87699f8ef2864c8dc44732d1250c40a8cd7a80c3",
+          "sha256": "7cbd7d2d873afe5531538950185f6a25f3b89b0f211ecf37cb8ed31b9300747a",
+          "bytes": 4070
+        },
+        {
+          "path": "sqlglot/expressions.py",
+          "git_blob": "476be1b9bb8e16cfeb0bcd49fde0ce5aeb28f9d5",
+          "sha256": "db075bfe523d6334f77c6c4b064dec83e713acb370788a7dae0662732a0cb710",
+          "bytes": 236195
+        },
+        {
+          "path": "sqlglot/generator.py",
+          "git_blob": "37842cc055f7ccd3d0529129175650ab780d89c7",
+          "sha256": "6c9b549ce4d605297204b65987ff1d1c1c36fd4ad70c6c7d0b4fbbeef46bdad7",
+          "bytes": 201266
+        },
+        {
+          "path": "sqlglot/helper.py",
+          "git_blob": "c45de0f113eebbee166c5ad4cce373763391765e",
+          "sha256": "c5892628228c016afb610792d72d30321443ce3feddc09afcd20244c68bbe405",
+          "bytes": 14031
+        },
+        {
+          "path": "sqlglot/jsonpath.py",
+          "git_blob": "115bd159413f4ca3d345c2396123957684097f25",
+          "sha256": "74a748dcf34834d1a29a64ac7b6208bfe19b3cdff79579dc5e1ffbd101fb2ecb",
+          "bytes": 7664
+        },
+        {
+          "path": "sqlglot/lineage.py",
+          "git_blob": "c8566c360d11b0b4b0fdcb87c035c170000d3b35",
+          "sha256": "733f68ea710d9085dbce756a8c323410b29a1a59edeba81d5a4826fc5ecf59b2",
+          "bytes": 15303
+        },
+        {
+          "path": "sqlglot/optimizer/__init__.py",
+          "git_blob": "050f246c9171b6e23ca5c86ee4c9ac4e63c0f797",
+          "sha256": "15d02f573eab40b2e48a21f6d7e483e11c41e734b7583794facd373d9909f85e",
+          "bytes": 343
+        },
+        {
+          "path": "sqlglot/optimizer/annotate_types.py",
+          "git_blob": "c75d48ac328cd7cb0118c832c4d19af4253cc6a5",
+          "sha256": "f42595e1a4b14807ad61a25f91d648db4063a072e3f7476ff0d679e04375c2c4",
+          "bytes": 21732
+        },
+        {
+          "path": "sqlglot/optimizer/canonicalize.py",
+          "git_blob": "b8a399505b688a022a54a7615f4a2c0ad512cc0c",
+          "sha256": "2fb53ceeea15d5ca78337b656c2dba68c2ac9b7d728836fdc9831ec1d2649d75",
+          "bytes": 7622
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_ctes.py",
+          "git_blob": "d2e876cd0bfdd903f16d6d48835334973d292502",
+          "sha256": "7d404cd115273eb9b6b18a6d11606ec7df01edf731ed6f81335cd5a9f803cfd7",
+          "bytes": 1448
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_joins.py",
+          "git_blob": "3134e65986a3d82e44d68fa34aa31746e1d17f82",
+          "sha256": "e5686589e81ced4f019d2ead96b97dc247808323f53698020803f10a11f315fc",
+          "bytes": 5874
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_subqueries.py",
+          "git_blob": "b6610036901ef07dc200f25f1db97f0a5caf5e89",
+          "sha256": "b0007f3e4f78fe7da7d4f21a67631cdccfa7d9357e2668e36a899a635e2ed0e8",
+          "bytes": 6292
+        },
+        {
+          "path": "sqlglot/optimizer/isolate_table_selects.py",
+          "git_blob": "a6524b8f981f336e838fd7895624c2e41ffd5aa2",
+          "sha256": "026e802a6164c9daefb957e0f8ed0ad4109d231fd24245e2c748a6ca877f66df",
+          "bytes": 1128
+        },
+        {
+          "path": "sqlglot/optimizer/merge_subqueries.py",
+          "git_blob": "f02c6b0b6a41cc06399a407bfa69fe015ff6dbc8",
+          "sha256": "da3ae5ba92617d51afbe00a8e023515f9003e29d5527d69f42cffbf7a7bd1d86",
+          "bytes": 15167
+        },
+        {
+          "path": "sqlglot/optimizer/normalize.py",
+          "git_blob": "610833d4afdadb6644b1dc25b18fbe67a8397a62",
+          "sha256": "c2edc678a637e8f2f201bf5fe77e230c37f30f0bd926967c83f1f9407e9a7194",
+          "bytes": 6667
+        },
+        {
+          "path": "sqlglot/optimizer/normalize_identifiers.py",
+          "git_blob": "dd421d9bb03b617c1619069ac6bf125c8c19769c",
+          "sha256": "b83e31202240823d17ec415cd8b61c0d6c405b66931c034edb0cbb91f9fd81f6",
+          "bytes": 2098
+        },
+        {
+          "path": "sqlglot/optimizer/optimize_joins.py",
+          "git_blob": "15304561a676fbbe0c2ede9f8bf5c04e751c8f6e",
+          "sha256": "2cb047e9993451e82c7dfe3cb2826026a869197910c7956cb4612de34bec8eb8",
+          "bytes": 2991
+        },
+        {
+          "path": "sqlglot/optimizer/optimizer.py",
+          "git_blob": "0a0e13df27d4d031bbcd14b605ac620d22e412ac",
+          "sha256": "bd71170d61ef6cefaf266488ed4a89bb274cd96ac3d71928eeb113ab612d549a",
+          "bytes": 3533
+        },
+        {
+          "path": "sqlglot/optimizer/pushdown_predicates.py",
+          "git_blob": "18c9e836213eae27e7bf686aa282a048827d425f",
+          "sha256": "0fd9c82b3fb8b34dd75beb1abc5145c25965635ddbfb9c5980731ddb27130a88",
+          "bytes": 7780
+        },
+        {
+          "path": "sqlglot/optimizer/pushdown_projections.py",
+          "git_blob": "5fa413936ce5711d97d65c561e49274696c031f2",
+          "sha256": "4905ec268bfee03fcb732347a84e86a6173f81da676225baf6773fc8a3ec3cf3",
+          "bytes": 5362
+        },
+        {
+          "path": "sqlglot/optimizer/qualify.py",
+          "git_blob": "a35699d219d46c39f817026cac9f23397acf4759",
+          "sha256": "a003dfc2e6fb74492b942aeca6d7095a92f26b80602a137a3394b022cffce8b6",
+          "bytes": 4002
+        },
+        {
+          "path": "sqlglot/optimizer/qualify_columns.py",
+          "git_blob": "0ebabac44bf5e436cf268fa280158e6127258804",
+          "sha256": "ba5fee49b3795874f752b2e3c4980cbd3d190715e27fbb0fbd23ad8d333ea183",
+          "bytes": 37585
+        },
+        {
+          "path": "sqlglot/optimizer/qualify_tables.py",
+          "git_blob": "edf78e989d6b7788668e9b5f6c3d8126b75547ab",
+          "sha256": "9481b56a234b728efa885004af3902d0706dedfcff5104db92e55f809b0fc8fa",
+          "bytes": 6078
+        },
+        {
+          "path": "sqlglot/optimizer/scope.py",
+          "git_blob": "bce229a56eb3db8968f84e75f28e5accf9974ff2",
+          "sha256": "ce61234775adb37be6a3b4e3e3086e8ee264f99c68914f97506ca847d93e7134",
+          "bytes": 29873
+        },
+        {
+          "path": "sqlglot/optimizer/simplify.py",
+          "git_blob": "6e60233025b9e01039d647f12a8cab1cf06a3b63",
+          "sha256": "86a4d69f566c57125e1259490490ee73f18b43db924a5990fe17ac749b203993",
+          "bytes": 50121
+        },
+        {
+          "path": "sqlglot/optimizer/unnest_subqueries.py",
+          "git_blob": "dcb2f59f51a0b49e244503e592de10dda6a7fff5",
+          "sha256": "c4a35b6ae7911c89609d279db75600e585f2969efed430716a16bb82a0fdd489",
+          "bytes": 10865
+        },
+        {
+          "path": "sqlglot/parser.py",
+          "git_blob": "7c79f886dcaa1b711ae9fa36990bc41c967fee12",
+          "sha256": "fbcddb7c31b6761cddacb7e9323d189c0d3a552f51a02a03b668ee1269b41ce5",
+          "bytes": 301387
+        },
+        {
+          "path": "sqlglot/planner.py",
+          "git_blob": "687bffb9fa0a255910b86cdafd1a0b951677ab45",
+          "sha256": "aa5ecb8be6d62517325f335a672fe7e9b43a07665fba710807c66dbf6c5ac6ae",
+          "bytes": 14634
+        },
+        {
+          "path": "sqlglot/py.typed",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "sqlglot/schema.py",
+          "git_blob": "c8362e081151449d94f991742efeeeb29a09f3b9",
+          "sha256": "d771f6a8a42cdbb10a753a432cebdc3674930c051b60d2a35ad26ce1a40248e0",
+          "bytes": 20509
+        },
+        {
+          "path": "sqlglot/serde.py",
+          "git_blob": "b019035619f3a5ba920d715e54f4a7f46e8b65fd",
+          "sha256": "0d0549f795ab22f8587ded3662d6f8350ba0d9a3300c2130a4c056d4b283ab31",
+          "bytes": 2031
+        },
+        {
+          "path": "sqlglot/time.py",
+          "git_blob": "66daf1684b8c92159115a425d08fe65b444e7940",
+          "sha256": "43ada0bfa90be343a244117a04c112c4a25c3159fb64b370eecbfc1f7e33e452",
+          "bytes": 18400
+        },
+        {
+          "path": "sqlglot/tokens.py",
+          "git_blob": "0d2704bfaf49b7388ebbc898c57c1a0c3ff5178e",
+          "sha256": "5985a3b1fd4b593236683f2acfdbd71e64a83011baae50261723aaeb3a4b124f",
+          "bytes": 48098
+        },
+        {
+          "path": "sqlglot/transforms.py",
+          "git_blob": "2ac8cf99bf2104783258aaebb551d8c8357e021b",
+          "sha256": "55a065bddcaa03fc29cec2545c7bbe6a21c8039efef834fd4314a965de5340e4",
+          "bytes": 38116
+        },
+        {
+          "path": "sqlglot/trie.py",
+          "git_blob": "59601ee356a704990b5baab460695873fad22257",
+          "sha256": "bf6eee5ccac77eaad7949e8699e4d2328bec07fde8d1cb6794a85d36ded6e9f2",
+          "bytes": 2245
+        },
+        {
+          "path": "tests/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "tests/dialects/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "tests/dialects/test_dialect.py",
+          "git_blob": "d9b8a09e58d14e0ddf32fab6d63a3a09071ac2d8",
+          "sha256": "4e9c4dfc755f0fab955e4e0e267b7314618eb4a26b52b35eaa59d32db5c1a919",
+          "bytes": 142628
+        },
+        {
+          "path": "tests/dialects/test_oracle.py",
+          "git_blob": "cb968ee04f8d6a7022db11922cd8deaecf98b7f0",
+          "sha256": "67b6c52c37030fda78314e8fc21e36b883e28af22e2e64808a9fd97876d0a793",
+          "bytes": 29782
+        },
+        {
+          "path": "tests/dialects/test_postgres.py",
+          "git_blob": "6a52ea22e70a2ceeee9c088ca24a529ef43b30cc",
+          "sha256": "7207736dd540266ebcdd8c2b47617cfd3306ac15503c4aa68577d1214886b55e",
+          "bytes": 61805
+        }
+      ],
+      "omitted": [
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+          "git_blob": "38bb2803a52e16c659cf987b6c4f618d73b69684",
+          "bytes": 565,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+          "git_blob": "bbcbbe7d61558adde3cbfd0c7a63a67c27ed6d30",
+          "bytes": 595,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/python-package.yml",
+          "git_blob": "afccb9c85f1b1e7ac04cc30dc887d68c50639ec6",
+          "bytes": 924,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/python-publish.yml",
+          "git_blob": "8a8493c4d7a02fa708ca535d500ad8ee69d4fb22",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/rust-bench.yml",
+          "git_blob": "6f57eea47b14e5f72ad8a36c21575084b54d7166",
+          "bytes": 339,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/should_deploy_sqlglotrs.sh",
+          "git_blob": "b62589bfa1f6e77aeba2e4d18532c8593444efa0",
+          "bytes": 463,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "git_blob": "b5c105b0b70b442ebd1b6ddf3b2bf09f2abc355a",
+          "bytes": 1940,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitpod.yml",
+          "git_blob": "202868338361b23807a42887bd16f9dc111049c0",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": ".pre-commit-config.yaml",
+          "git_blob": "52425a1b5b137c21e81ecdaf17102b10022c27fc",
+          "bytes": 889,
+          "mode": "100644"
+        },
+        {
+          "path": "CHANGELOG.md",
+          "git_blob": "8e3d9983b1aa9d66a147a81976a2e4e379fa59cb",
+          "bytes": 672586,
+          "mode": "100644"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "git_blob": "6f0a76ec2048566557c2246ee220676977d626c6",
+          "bytes": 3446,
+          "mode": "100644"
+        },
+        {
+          "path": "Makefile",
+          "git_blob": "a5beb6b78053c25868245aa638d8e022f7044891",
+          "bytes": 835,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "bytes": 0,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/bench.py",
+          "git_blob": "b9fb176fcb45c8450d0cc3d2baba7156c37c1218",
+          "bytes": 6853,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/helpers.py",
+          "git_blob": "bfb9821ef14cb6f5f3722764a89781db3d8548e5",
+          "bytes": 722,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/optimize.py",
+          "git_blob": "9ac00db05dfa13608e397f4ee0887d7d5b1d6678",
+          "bytes": 1762,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/CNAME",
+          "git_blob": "bd9a7c81c36a97fdb170279b6779482e61b032f9",
+          "bytes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/index.html",
+          "git_blob": "ef64b90ebb16e078306d566c553e1d540a9ddca1",
+          "bytes": 138,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/search.js",
+          "git_blob": "d000e466a4702e309ec0330c1375eec072d173d3",
+          "bytes": 22100131,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot.html",
+          "git_blob": "469b129a3b01ece1284bcd7842182da7122c5720",
+          "bytes": 171010,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot.png",
+          "git_blob": "63b11bfe0dc088ef89c2b72c3d4fec78cf53eca0",
+          "bytes": 7358,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/_typing.html",
+          "git_blob": "ccc7fdea960b4ce8213510c9de8d3c838bd065ed",
+          "bytes": 39506,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/_version.html",
+          "git_blob": "8a29957cd3302f46fc69d32d04eece63e28b1643",
+          "bytes": 39763,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dataframe.html",
+          "git_blob": "8d11b686a33b448b527b1893242f15ed874b41be",
+          "bytes": 67507,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dataframe/sql.html",
+          "git_blob": "cac32484723f1f3234fcd4e6d1e4f8306050e2ad",
+          "bytes": 1048856,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects.html",
+          "git_blob": "34ad006a07a421ac9a9c27aaf376ed72ab565050",
+          "bytes": 60561,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/athena.html",
+          "git_blob": "108d8861eb9e5f29c38638907d25342e43aeca4b",
+          "bytes": 339726,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/bigquery.html",
+          "git_blob": "301a6dfb6b93d2b3334369a50332c57b2016da4f",
+          "bytes": 1246764,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/clickhouse.html",
+          "git_blob": "bdf690ada85805258c8368aeeec9e5341a333d25",
+          "bytes": 1593987,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/databricks.html",
+          "git_blob": "faae3d25669600946916a14dd0299e43d531dc2c",
+          "bytes": 374944,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/dialect.html",
+          "git_blob": "d039127bfd7799949e63e7073353ef24cb26bfd6",
+          "bytes": 1205162,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/doris.html",
+          "git_blob": "35411ced2dcd1b38d235451f41b5a3f54aa13a2a",
+          "bytes": 582465,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/drill.html",
+          "git_blob": "bd9703dc230104ec13a0e3eb33fa7b6143753031",
+          "bytes": 430367,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/druid.html",
+          "git_blob": "ba8a9df1a9acd393111033eecd5d3785ab40129b",
+          "bytes": 150563,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/duckdb.html",
+          "git_blob": "e9ec9dd9e5542eab96747e0e22a389588944125f",
+          "bytes": 1179569,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/hive.html",
+          "git_blob": "550ad5017f51228971a2fec967d096edd41ce929",
+          "bytes": 902312,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/materialize.html",
+          "git_blob": "6fca7d29d7a2ecd64ad0eb8286d5172872b521e0",
+          "bytes": 314259,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/mysql.html",
+          "git_blob": "e79b39d7cf68fe9cfb81da3f46fb453718dace15",
+          "bytes": 1345151,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/oracle.html",
+          "git_blob": "f691b487a5fc1abf6e2dfc45ee19d432956f8a61",
+          "bytes": 650081,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/postgres.html",
+          "git_blob": "43c89fcc349a7cf37a6fc61f11b3c6ee3b019169",
+          "bytes": 875593,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/presto.html",
+          "git_blob": "81e8f13b0378c37ff40c790ffc82a6f3442977a9",
+          "bytes": 927903,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/prql.html",
+          "git_blob": "821a8bede6b9bc95c0bed8389f5f1493488e8df0",
+          "bytes": 357267,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/redshift.html",
+          "git_blob": "bbc760c1b54cbb2da2b4e0bc994f704ce04b303a",
+          "bytes": 658564,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/risingwave.html",
+          "git_blob": "cf05470530c7c0b4cca860e51d857457e69e0f4a",
+          "bytes": 327649,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/snowflake.html",
+          "git_blob": "aee31ae8efce63b1b7bf47b9654811fd5c13ae9f",
+          "bytes": 1371163,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/spark.html",
+          "git_blob": "e2f81f669f75c5dbd6024450232ea5742d111dc5",
+          "bytes": 408904,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/spark2.html",
+          "git_blob": "59f9673f3da8974f6e1bb06b6b91b539842a5dfd",
+          "bytes": 588480,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/sqlite.html",
+          "git_blob": "16578e0059f1520b4c5d6713edce8655935f1083",
+          "bytes": 546423,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/starrocks.html",
+          "git_blob": "c0111321986199637d929402d2e2b2b60cb3e44b",
+          "bytes": 556159,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/tableau.html",
+          "git_blob": "402c5d7b8a28499f2232a5dec8c6979589e74c12",
+          "bytes": 321239,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/teradata.html",
+          "git_blob": "5dcea5090d0b9cdedfd6d1f2a8a61a2d9e1bba05",
+          "bytes": 648950,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/trino.html",
+          "git_blob": "26ff709667d58db55f73cc0d374dc47559ce40ff",
+          "bytes": 304525,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/tsql.html",
+          "git_blob": "24a91c352993e61f3762a4f1a1afbe42bc8eddc8",
+          "bytes": 1352758,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/diff.html",
+          "git_blob": "a70184d8c184df7e0209cae39287cbb10fe65135",
+          "bytes": 3043954,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/errors.html",
+          "git_blob": "5b4fccbca803d809c90599de6341df3da1256212",
+          "bytes": 96513,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor.html",
+          "git_blob": "c85ac53efe5d66039fee8cb46f7279b746b08a81",
+          "bytes": 1080734,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/context.html",
+          "git_blob": "cb4a4a47064ca35554a58c92844fb3e2c7de7384",
+          "bytes": 125044,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/env.html",
+          "git_blob": "823127589e543d8561a6be422cca0d9ecac5b6f8",
+          "bytes": 155606,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/python.html",
+          "git_blob": "610ef16ad48b8f6717ef855519df03b01464ba87",
+          "bytes": 574241,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/table.html",
+          "git_blob": "7c77c653a63bc2d3643b6b79f3981c26eb59072b",
+          "bytes": 125436,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/expressions.html",
+          "git_blob": "6bcc55fb5fd784ada1bd6119b333eb69eb44b5bf",
+          "bytes": 11142969,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/generator.html",
+          "git_blob": "9f2fa79fe168df23928dd5f2e061fc74900da781",
+          "bytes": 5061710,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/helper.html",
+          "git_blob": "d6415197e1cd976c5b90a948b896a140afc586eb",
+          "bytes": 290246,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/jsonpath.html",
+          "git_blob": "f2d7067d7b159804da9b1b71dcb956fbec9cfb50",
+          "bytes": 154559,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/lineage.html",
+          "git_blob": "f2f04b82ed204cffe4020bc4faf54d7f4c5127ad",
+          "bytes": 265767,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer.html",
+          "git_blob": "66e9b3146787190e0e95e5205cd7adeda2b8ee41",
+          "bytes": 39250,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/annotate_types.html",
+          "git_blob": "58bca446f6101547884dd570f6b753cb37d0eaea",
+          "bytes": 430936,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/canonicalize.html",
+          "git_blob": "36bbda6e7dc52154a4323959d51fdc00f9849b02",
+          "bytes": 131792,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_ctes.html",
+          "git_blob": "7f484e6fcc7e744c8595c79c8f996df6bb6457e7",
+          "bytes": 53985,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_joins.html",
+          "git_blob": "1c30eae027218c7035263a7038512231de6329b8",
+          "bytes": 99766,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_subqueries.html",
+          "git_blob": "ae1003029e300b1bf1e298c02e7e9ff57b251cec",
+          "bytes": 99957,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/expand_laterals.html",
+          "git_blob": "8fcc1a19473779759c4c0fc2288b3a914bb30fff",
+          "bytes": 51199,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/expand_multi_table_selects.html",
+          "git_blob": "ae09d2e35d02a840871442db1047e3714dfba710",
+          "bytes": 45966,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/isolate_table_selects.html",
+          "git_blob": "885bad399a483fbd5da50de6b67c589ac616581b",
+          "bytes": 51947,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/lower_identities.html",
+          "git_blob": "bee886e04fb3ea6740f141d1c81fa22f0268a53f",
+          "bytes": 63180,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/merge_subqueries.html",
+          "git_blob": "7df62c0b4c62b8873fdaaf87c247136b5a0b0bb3",
+          "bytes": 158830,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/normalize.html",
+          "git_blob": "8ecf0f09d75fbb89a8c630b4de6629fcb5fe6a32",
+          "bytes": 121390,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/normalize_identifiers.html",
+          "git_blob": "9c6ca3e1861823c0c1cb2b0ec972188a8fecd635",
+          "bytes": 59881,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/optimize_joins.html",
+          "git_blob": "7fd93ea3313d5e5225abdf6c027e8e1d9be18da4",
+          "bytes": 83214,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/optimizer.html",
+          "git_blob": "b7914c432ec91fbaa46b5ecbd8a59fc0fb637eaf",
+          "bytes": 74002,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/pushdown_predicates.html",
+          "git_blob": "be785266c766586811ce2f0415ca8660b1efa5aa",
+          "bytes": 142935,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/pushdown_projections.html",
+          "git_blob": "b06e30b4928a524be428e852e795e717ace18382",
+          "bytes": 92545,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify.html",
+          "git_blob": "75d9dec37a98bc671b2c6729e8093fc473bddfc4",
+          "bytes": 80912,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify_columns.html",
+          "git_blob": "842514070d0a64219fe88a0eca8feb3f50ebedbc",
+          "bytes": 409615,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify_tables.html",
+          "git_blob": "a28c28df8d3285dd3a147c44a064be7fc12e08f4",
+          "bytes": 119461,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/scope.html",
+          "git_blob": "d4ae37191fb8ed0f76be114479272591e0dacb95",
+          "bytes": 484254,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/simplify.html",
+          "git_blob": "18481104098510b78ce18551e93fe9ab60146ac2",
+          "bytes": 872032,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/unnest_subqueries.html",
+          "git_blob": "54fb27ff072b7c88fce572bfa65fddef68f00482",
+          "bytes": 187173,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/parser.html",
+          "git_blob": "ce1f4f57b5bf60cc6934006e891ce7525aee09d5",
+          "bytes": 4630898,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/planner.html",
+          "git_blob": "06403953d15b8f0564ad8d1ab7faa1d1b2e734d6",
+          "bytes": 399827,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/schema.html",
+          "git_blob": "6386c702f36f9669d2fa35153d0e078d67e1760d",
+          "bytes": 461955,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/serde.html",
+          "git_blob": "21f3b42dd64f5f21919aba00f64a9bc45b483e68",
+          "bytes": 71939,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/time.html",
+          "git_blob": "a2f02e35155dd5aa79fbd8a4e3370a81d28d8dcc",
+          "bytes": 184786,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/token_type.html",
+          "git_blob": "98e4f33b7409ab3e9d6eff918b9d76f856e434d0",
+          "bytes": 355645,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/tokens.html",
+          "git_blob": "3eaf8d3bfa5b7fddcf46e4c438296fd5632929d1",
+          "bytes": 1041891,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/transforms.html",
+          "git_blob": "4769e23f359821b5300fd1e9273f0872e266cdd6",
+          "bytes": 579463,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/trie.html",
+          "git_blob": "b27e9f84d5f40b8948272601e0049c6deccb911c",
+          "bytes": 71833,
+          "mode": "100644"
+        },
+        {
+          "path": "pdoc/cli.py",
+          "git_blob": "376048a17a5e940459f5751106f89641abb92f15",
+          "bytes": 1122,
+          "mode": "100755"
+        },
+        {
+          "path": "pdoc/templates/module.html.jinja2",
+          "git_blob": "e37ae01c32c78d6bc040ce7161edfc54915faf7f",
+          "bytes": 131,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/ast_primer.md",
+          "git_blob": "8b495432f753b0e5e4516dbc75b4f1a597eb94f3",
+          "bytes": 13569,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/onboarding.md",
+          "git_blob": "814560b7e710044380287343716bd6889f27b2b0",
+          "bytes": 29820,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/onboarding_images/lineage_img.png",
+          "git_blob": "01e62ba5a10a57135dc5f0b2bd4ec1049bae8f30",
+          "bytes": 192924,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine.md",
+          "git_blob": "addc412c2644bd4107b93301a3adb424a04e2ca8",
+          "bytes": 12086,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/executor.png",
+          "git_blob": "e6e2c9c8661902412ccf02593e48919379c0ae51",
+          "bytes": 32441,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/optimizer.png",
+          "git_blob": "879d7b1ceada3339be7700181546a3ee8ac2feef",
+          "bytes": 82195,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/parser.png",
+          "git_blob": "15e3c3a24961aabeefbc67c5a85999e2397390f5",
+          "bytes": 157268,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/planner.png",
+          "git_blob": "c4a44b74b54d1a2573b8d78b94eb1a6f4ec5d406",
+          "bytes": 123866,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/tokenizer.png",
+          "git_blob": "b1147df2e86ad74097d1384112d757c2346d427b",
+          "bytes": 341375,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff.md",
+          "git_blob": "4d07d7fed77fc8d321b355e9b7a5325b0e74f37c",
+          "bytes": 26210,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/dice_coef.png",
+          "git_blob": "e0a91f6cdf5753795e531c2d22aee7c4af429551",
+          "bytes": 22582,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_1.png",
+          "git_blob": "578109b195e79bad5d04fe98dd9e47ae29e2364d",
+          "bytes": 57550,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_2.gif",
+          "git_blob": "9a3f3c08625ddeb146e0b6ce9a56372ef2bde9f7",
+          "bytes": 1511115,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_3.gif",
+          "git_blob": "41161547478b96e3ec59cc985072b27f7cdcfdde",
+          "bytes": 327145,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/git_diff_output.png",
+          "git_blob": "8ba155c8cf91a55e2def09360b9dcaf77f51c91f",
+          "bytes": 41567,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/matching_criteria_1.png",
+          "git_blob": "9a321f2eae9e5315dedf1bd7cd207039ea2eb78c",
+          "bytes": 35159,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/matching_criteria_2.png",
+          "git_blob": "2a1c7f2bd58f6ca8c181dd7cbd0727aaba4f880b",
+          "bytes": 48555,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglot.png",
+          "git_blob": "63b11bfe0dc088ef89c2b72c3d4fec78cf53eca0",
+          "bytes": 7358,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/Cargo.lock",
+          "git_blob": "6a7e85252687891d138c6e3c0db38b58fc62f05a",
+          "bytes": 18866,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/Cargo.toml",
+          "git_blob": "d806905991a2f1940078c4e08ad0bd0ddbc50a19",
+          "bytes": 778,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/dialect_settings.json",
+          "git_blob": "04c3f9950bf6e41fbae249b76416aa5c97a87975",
+          "bytes": 111,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/long.rs",
+          "git_blob": "347c1199bf85e3588d7632b0d3fb402495af1fc7",
+          "bytes": 3444,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/token_type_settings.json",
+          "git_blob": "580df9613a7bc9bdc819a30e83b583c3b9c98f25",
+          "bytes": 215,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/tokenizer_dialect_settings.json",
+          "git_blob": "04c3f9950bf6e41fbae249b76416aa5c97a87975",
+          "bytes": 111,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/tokenizer_settings.json",
+          "git_blob": "47f04c7a48c9f1987cc9561d0f52e8486d4f24d0",
+          "bytes": 690,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/pyproject.toml",
+          "git_blob": "d84ee91e7fc92bbf4ca55a8ae2f04ca32efedce8",
+          "bytes": 683,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/lib.rs",
+          "git_blob": "bb6caf641043b57275dc81230db291b33b27f0e8",
+          "bytes": 543,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/settings.rs",
+          "git_blob": "c7e3b41408fc939662d40a252b90e9a1c5ab084e",
+          "bytes": 7623,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/token.rs",
+          "git_blob": "48698fc85952803745e97c32bcf208687a28e286",
+          "bytes": 1536,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/tokenizer.rs",
+          "git_blob": "41d6c14ac4724e7526a0c7eaa8c364e834be0070",
+          "bytes": 25775,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/trie.rs",
+          "git_blob": "25f9fb5ce678429d05f574ff8e8af36753e91170",
+          "bytes": 1320,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_athena.py",
+          "git_blob": "ef96938b10c9810e6453fcbbc76bf04c4c63716a",
+          "bytes": 10925,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_bigquery.py",
+          "git_blob": "0ce2a52133a9f24ba2e51d59c5e264bf44a51a51",
+          "bytes": 108596,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_clickhouse.py",
+          "git_blob": "58c9466e3b6662581504d1e2f17e3b94d6e8d3b8",
+          "bytes": 52372,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_databricks.py",
+          "git_blob": "86b5636072f65e1ea0783940d17953f1098ffb26",
+          "bytes": 14777,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_doris.py",
+          "git_blob": "7cb0f092b146235e7ee0a646b449749ce5b61edb",
+          "bytes": 3727,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_drill.py",
+          "git_blob": "f1c3a88482d3523e5472ffa5bc012a0938830393",
+          "bytes": 857,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_druid.py",
+          "git_blob": "a64462d2d6c7b7651cbb8765ef94deba279430ad",
+          "bytes": 812,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_duckdb.py",
+          "git_blob": "959a1b3fefd1de2d5a6ea3df661ceb6bd48bfa75",
+          "bytes": 65014,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_hive.py",
+          "git_blob": "d6f9625915774261faa5e064f67e0b2953cee07f",
+          "bytes": 32130,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_materialize.py",
+          "git_blob": "617a9b58f5b9b805cacefe3205ca9be39cdc0084",
+          "bytes": 3529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_mysql.py",
+          "git_blob": "34ee063364e8ea7e846d742881eefcdbf36c1927",
+          "bytes": 61144,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_presto.py",
+          "git_blob": "fa5c8c138f2d108164246edafb35e88d27de9fce",
+          "bytes": 52250,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_prql.py",
+          "git_blob": "2e35bb2e2a3e8fb4874864ec1c2989a34f1543e2",
+          "bytes": 5149,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_redshift.py",
+          "git_blob": "db87e7dc1c76378fced1f5ee9d6162f0692d3d63",
+          "bytes": 32232,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_risingwave.py",
+          "git_blob": "80c5265cb6ae9b53849cb25b58ef2ab98dc7e196",
+          "bytes": 1068,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_snowflake.py",
+          "git_blob": "cb38af753d1efe54b278c99ddb675f0c07a98828",
+          "bytes": 112490,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_spark.py",
+          "git_blob": "0c82018befe2036c65b12aade3a9d908d70817c5",
+          "bytes": 47248,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_sqlite.py",
+          "git_blob": "1a4f5c3341016559e582896e2204c086c432747c",
+          "bytes": 10095,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_starrocks.py",
+          "git_blob": "e716e9c67058a6ea68fdb69fb0f182638d7e297c",
+          "bytes": 7660,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_tableau.py",
+          "git_blob": "fe605b127a81b2f62dacefaa87e002a9fe96eb0c",
+          "bytes": 2028,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_teradata.py",
+          "git_blob": "8951ebe9296f2858c3bce7c0fce19cd4739e2ed0",
+          "bytes": 13797,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_trino.py",
+          "git_blob": "44ff1ea0a1aaeb97f276115825969536cb1a64ca",
+          "bytes": 4324,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_tsql.py",
+          "git_blob": "dc35610b7a9126c742dede5f45f3bd95ca5d45a2",
+          "bytes": 88469,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/identity.sql",
+          "git_blob": "d9b809b41963ef223edc063a61409dce29403076",
+          "bytes": 35879,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/jsonpath/LICENSE",
+          "git_blob": "212459f68f565a759bee3bd3e90132533fdbeb64",
+          "bytes": 1478,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/jsonpath/cts.json",
+          "git_blob": "11af641ad0b17a5ff4554336e470256c623381f6",
+          "bytes": 137995,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/annotate_functions.sql",
+          "git_blob": "1dd7c2db9e02e5c778717aa3c956e0d85f6c769e",
+          "bytes": 4637,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/annotate_types.sql",
+          "git_blob": "f6088519c46836f992a5a36d28ce5a97f976f053",
+          "bytes": 1116,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/canonicalize.sql",
+          "git_blob": "3610f1628d99023325abc88677a8108cb4ff124d",
+          "bytes": 5055,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_ctes.sql",
+          "git_blob": "f1f78f47c92cf9cb14383402c3cb909b67544703",
+          "bytes": 1063,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_joins.sql",
+          "git_blob": "ac3d92d0683556b5415511ddc16fcabb34ab326f",
+          "bytes": 3414,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_subqueries.sql",
+          "git_blob": "f2b117bd657210bb86169a359b2dadabe05ce787",
+          "bytes": 4590,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/isolate_table_selects.sql",
+          "git_blob": "36f2d8e5871a9609f0f2628807a96c431e7503f2",
+          "bytes": 978,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/merge_subqueries.sql",
+          "git_blob": "e39e7d17095140b0718efe9bbce782149b49ae78",
+          "bytes": 15949,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/normalize.sql",
+          "git_blob": "8e94c192cabc4b916a8767580274f6f9f8728ed3",
+          "bytes": 1484,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/normalize_identifiers.sql",
+          "git_blob": "b210fa7cafb16be7f9ddef704a728ed758d5aca8",
+          "bytes": 1674,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/optimize_joins.sql",
+          "git_blob": "6d5bed21b887a01d4bf5ee1a76f2f08517f586fe",
+          "bytes": 1170,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/optimizer.sql",
+          "git_blob": "ed9c06f5d34a9ad2908a0f4fc011ead206b77892",
+          "bytes": 33004,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_cte_alias_columns.sql",
+          "git_blob": "e25ab19a6b2c87bf906af30ee71f1ddb292f9bf1",
+          "bytes": 1187,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_predicates.sql",
+          "git_blob": "81b9acda74b95a31b523a96fbc5657a55b038d98",
+          "bytes": 3603,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_projections.sql",
+          "git_blob": "47972acbf9f83e606175944f62885dc1fdf63c95",
+          "bytes": 6144,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns.sql",
+          "git_blob": "b9a6fc123c1cd082b58baf51ebb1f60d361b4022",
+          "bytes": 36161,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns__invalid.sql",
+          "git_blob": "a8e646cc79549d3eb9976792557a7b5aa736dfc4",
+          "bytes": 615,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns__with_invisible.sql",
+          "git_blob": "1e070158e2b971d67a9b94c37d38746e0b59f066",
+          "bytes": 1109,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns_ddl.sql",
+          "git_blob": "75d84ca2ff82e9d6a4876c31983786bd76d7ac0b",
+          "bytes": 2343,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_tables.sql",
+          "git_blob": "03e8dbee75aaf91430ffaac1ec22cfa64ab92de0",
+          "bytes": 9116,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/quote_identifiers.sql",
+          "git_blob": "34500c4250c642999fb56be01da8e184d7fb5ef9",
+          "bytes": 606,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/simplify.sql",
+          "git_blob": "0597c7b7c8301f3ae4485190424cb0f70656d9eb",
+          "bytes": 22492,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/call_center.csv.gz",
+          "git_blob": "6f51952baa6a4d3036b5e87c8b8722f8e75fc69b",
+          "bytes": 427,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_page.csv.gz",
+          "git_blob": "9a736ff9878415051424707bb8b8853680cb3837",
+          "bytes": 393991,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_returns.csv.gz",
+          "git_blob": "9092c1fb1455fa85225d3b834f6dfca754bb8a2a",
+          "bytes": 167258,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_sales.csv.gz",
+          "git_blob": "ac9058b687289ebd8497882a77cd66b60cd9054a",
+          "bytes": 639482,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer.csv.gz",
+          "git_blob": "55459232d614dbdb8b09d12838796d6a6f686a29",
+          "bytes": 109529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer_address.csv.gz",
+          "git_blob": "7c24e8cb36cba73e1e8a90842877c3c4894e7fb0",
+          "bytes": 28542,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer_demographics.csv.gz",
+          "git_blob": "582d4e52e101babade096dd0fb0ad99a1d3a2ceb",
+          "bytes": 33320,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/date_dim.csv.gz",
+          "git_blob": "996066356e95ffa0cbf9b6898b615e685493564c",
+          "bytes": 208646,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/household_demographics.csv.gz",
+          "git_blob": "84efa064f5a473bc32ebec45bc1ada6e41dbfd3b",
+          "bytes": 23432,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/income_band.csv.gz",
+          "git_blob": "8c60109474859f6ab084ec9058ccc5204c836717",
+          "bytes": 194,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/inventory.csv.gz",
+          "git_blob": "d171ae058d1820eacabf5aac69922999ee605d35",
+          "bytes": 43193,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/item.csv.gz",
+          "git_blob": "effacb3a0fcbdd655beba8be45966744e60108ca",
+          "bytes": 31259,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/promotion.csv.gz",
+          "git_blob": "918e9c149c2bdf7438cafbd6a3defaf192862260",
+          "bytes": 501,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/reason.csv.gz",
+          "git_blob": "2ad5473c8174278eea42f54d364936f3fe6e0ff3",
+          "bytes": 87,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/ship_mode.csv.gz",
+          "git_blob": "e193902812022eae9501a933b783fd4acb1a0f26",
+          "bytes": 623,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store.csv.gz",
+          "git_blob": "77868fc5d435bbf47fd69f0bf8054b7940f9a601",
+          "bytes": 398,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store_returns.csv.gz",
+          "git_blob": "d3426ab1dc7f9301c5e5f0e70bd2b640b8f7f52f",
+          "bytes": 266354,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store_sales.csv.gz",
+          "git_blob": "21e83df97c87eefd5e64a2f43e9a4807c7f0f217",
+          "bytes": 421923,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/time_dim.csv.gz",
+          "git_blob": "fae30e9cf412c0e6ba96b775b74b60d32edf2301",
+          "bytes": 77216,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/tpc-ds.sql",
+          "git_blob": "59bc432fdd72eaa3355c80788a5351c1ae553c49",
+          "bytes": 467419,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/warehouse.csv.gz",
+          "git_blob": "f2f07a3042ac94db6586bee242f99c9412982181",
+          "bytes": 224,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_page.csv.gz",
+          "git_blob": "62ddd8ce75831bb349c7ffb6d2500ca064223c8f",
+          "bytes": 215,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_returns.csv.gz",
+          "git_blob": "af05d52053530762ac13e22c7403233c86e78e1b",
+          "bytes": 71921,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_sales.csv.gz",
+          "git_blob": "26b09b886952a2cd769531791fe60a482543f906",
+          "bytes": 615903,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_site.csv.gz",
+          "git_blob": "a8cabdbcbff456f7d66a46f30cd0bde717ce368d",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/customer.csv.gz",
+          "git_blob": "e0d149cc65c81bc3816df881c5c77e3037226fff",
+          "bytes": 125178,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/lineitem.csv.gz",
+          "git_blob": "08e40d81e7e1b028c7888f431df2150ba42a0432",
+          "bytes": 304069,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/nation.csv.gz",
+          "git_blob": "d5bf6e3e165697aaff883a9435f7b29b5c9cda14",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/orders.csv.gz",
+          "git_blob": "9b572bc34fe848c255681a115222c6b1eb3aa7c6",
+          "bytes": 66113,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/part.csv.gz",
+          "git_blob": "2dfdaa5fe4b42e283994b8bc88b536ec4b2b02d4",
+          "bytes": 251365,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/partsupp.csv.gz",
+          "git_blob": "de9a2ce0388defa93ad5fa0d5a6093c7f7d26f4b",
+          "bytes": 303483,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/region.csv.gz",
+          "git_blob": "3dbd31a3ea19320dc1e8b9117a1a820cd9123741",
+          "bytes": 284,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/supplier.csv.gz",
+          "git_blob": "8dad82a6781d7752136934c74e0a47651e0d45b4",
+          "bytes": 317596,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/tpc-h.sql",
+          "git_blob": "ed7a689be46b60050cd6a0add6fc1219f3e5d070",
+          "bytes": 42529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/unnest_subqueries.sql",
+          "git_blob": "a5a35b1bbb665894be8bfa78307c9166fd172071",
+          "bytes": 4399,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/partial.sql",
+          "git_blob": "6c578abf4acf4a0a65c327bd6f10b3327099ed42",
+          "bytes": 145,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/pretty.sql",
+          "git_blob": "ca5e4a99c3b0ee46355d0661c52e98a5ec4f77e6",
+          "bytes": 8140,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/gen_fixtures.py",
+          "git_blob": "7538b8797d04c53f77aa8122a92dd40d2d95b914",
+          "bytes": 19356,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/helpers.py",
+          "git_blob": "cc085b3effbbd4aa8a06750b25a8cd71b7d34902",
+          "bytes": 19626,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_build.py",
+          "git_blob": "64d1e96152776545520a501f88eeb6afd22dbd4c",
+          "bytes": 36428,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_diff.py",
+          "git_blob": "440502eaa35989b24b90a48166c28dd37af87b0e",
+          "bytes": 12006,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_docs.py",
+          "git_blob": "95aa81450ca9059c6b93d6e80bafd7423b485674",
+          "bytes": 563,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_executor.py",
+          "git_blob": "3205243114850fcf47f04330ba8e1433c7d2f0a3",
+          "bytes": 29999,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_expressions.py",
+          "git_blob": "60049c103e766e183b3e5d3952b15ffc98ef8017",
+          "bytes": 52451,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_generator.py",
+          "git_blob": "7609831b0c18517fd5e2ce0eedbbf44192b4ee5a",
+          "bytes": 1913,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_helper.py",
+          "git_blob": "e17b281b8153eca24a4ecdbca6eb74ad44cf2227",
+          "bytes": 1517,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_jsonpath.py",
+          "git_blob": "c939c52321f7de21f5f31b6c8b381c3d3b858337",
+          "bytes": 5774,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_lineage.py",
+          "git_blob": "095ee80e4794484e77cba5937a6cb8683e875e7e",
+          "bytes": 20698,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_optimizer.py",
+          "git_blob": "fe4130e30188e933fed7393967cebbb086125f9d",
+          "bytes": 61501,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_parser.py",
+          "git_blob": "20967b9de00d80b4e8004fd587eb2be69ec85b9c",
+          "bytes": 34742,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_schema.py",
+          "git_blob": "83cbbd8396c8dd3ddc5d7b37d7d7ea05154ffe4a",
+          "bytes": 10698,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_serde.py",
+          "git_blob": "40d6134cfc492e961a5d4489a8a8ea7e3c37d815",
+          "bytes": 1230,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_time.py",
+          "git_blob": "62d436161a79a58f39d8cd52f1839dd2ad6cfca2",
+          "bytes": 1653,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_tokens.py",
+          "git_blob": "29ef5b61ad3e7eab99222b70411d6213bd4c1d89",
+          "bytes": 6018,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_transforms.py",
+          "git_blob": "b54cc012b8da88ac4ebe59fdc13f92ddc3355663",
+          "bytes": 13105,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_transpile.py",
+          "git_blob": "bb8d032f6d488c75dd1a2fc56b05e9054aa4e318",
+          "bytes": 34421,
+          "mode": "100644"
+        }
+      ],
+      "normalized_archive_bytes": 427133,
+      "normalized_archive_sha256": "7ea8b590e5135d34ac61816adb8047ec9da66eb6f4efbdc93f94fcafa24eb456",
+      "selected_test_modules": [
+        "tests/dialects/test_oracle.py",
+        "tests/dialects/test_postgres.py"
+      ],
+      "selected_module_fixture_calls": [],
+      "scope": "Full sqlglot package, root license/configuration and selected test modules plus their static tests.* helper imports. Other upstream test suites/fixtures/docs/CI are outside this declared task scope. Git blob hashes verified for every retained byte. No official full-checkout/runtime equivalence claimed."
+    },
+    {
+      "instance_id": "tobymao__sqlglot-5256",
+      "repository": "tobymao/sqlglot",
+      "revision": "f5b5b9338eb92b7aa2c9b4c92c6138c2c05e1c40",
+      "private_cache": ".aeep/repository-corpus-tree-scopes-20261022/tobymao__sqlglot-5256",
+      "external_code_executed": false,
+      "status": "STATIC_SCOPE_REVIEW_REQUIRED",
+      "tree_url": "https://api.github.com/repos/tobymao/sqlglot/git/trees/f5b5b9338eb92b7aa2c9b4c92c6138c2c05e1c40?recursive=1",
+      "tree_sha": "f5b5b9338eb92b7aa2c9b4c92c6138c2c05e1c40",
+      "tree_json_sha256": "f83854aecc74d2d517f424526aff83014bcfbf942c884761f97e06867cd177b5",
+      "retained": [
+        {
+          "path": "LICENSE",
+          "git_blob": "1218e4a600a698d61b1bdc4f697a357f0c7535e3",
+          "sha256": "008dfffe61d97ceb73637125b91fe9218066dffa44ed36d5c7ba9a1f1a19d75e",
+          "bytes": 1065
+        },
+        {
+          "path": "README.md",
+          "git_blob": "a8c230470ce2b29310787d9cef380e9e3b7ca086",
+          "sha256": "a83b028caa58db7e72559e4f62c22c6aede5da858d8d305a7e7f1f58859f6695",
+          "bytes": 17948
+        },
+        {
+          "path": "pyproject.toml",
+          "git_blob": "8c1166fdb037ec0da3bcf4162aed24b0c09d4a60",
+          "sha256": "1b94da3daef4027d2d15783e883f4b0a6fa7f006afb01c0f2e567e540b659d9b",
+          "bytes": 1204
+        },
+        {
+          "path": "setup.cfg",
+          "git_blob": "9b492ee3b7b69f4ddfb4a1e0afee05c6880eb5ff",
+          "sha256": "399372875088fb648f820f409d715aa28219d1886fba957dfc2848ecc5631942",
+          "bytes": 241
+        },
+        {
+          "path": "setup.py",
+          "git_blob": "6e601223433ba2070d3064e6744810fd310c12e1",
+          "sha256": "c2cd7fbdb14c7cb23fb11658c37d68e0fca00fc682548846839c16a8b6650f46",
+          "bytes": 1219
+        },
+        {
+          "path": "sqlglot/__init__.py",
+          "git_blob": "33d347469ffbb56b89d13eebedb45d97e505a45e",
+          "sha256": "cdad3caed74f876bfb74ea4674da26b6d948546813aca8daeeb3ddeac4306938",
+          "bytes": 5391
+        },
+        {
+          "path": "sqlglot/__main__.py",
+          "git_blob": "5a77409ed9ebb0efb6e5bcde43fda37554800882",
+          "sha256": "d36d9cd7bdcaab1b22001593129508abfb49531b8d896edaec006cc415eabeef",
+          "bytes": 2069
+        },
+        {
+          "path": "sqlglot/_typing.py",
+          "git_blob": "0415aa41fbb9296bc19cabf6235f898c143c1c25",
+          "sha256": "fb51cfcabdf0e423a54895aa960b7c8e1164d9dc8cbc1baf541a885f5c325423",
+          "bytes": 642
+        },
+        {
+          "path": "sqlglot/dialects/__init__.py",
+          "git_blob": "334c58601de03c1c8ae82d47814a5617c8d4e7bf",
+          "sha256": "45c9a7bff0fcc630ab10f39b8b8476fdcb37ba96df7393ab0ca308261413b789",
+          "bytes": 3513
+        },
+        {
+          "path": "sqlglot/dialects/athena.py",
+          "git_blob": "df600eac7a2370a0fba19974c783a5204c3b7b2e",
+          "sha256": "80f13dc9b45c6dde9d55ad66ad3141fde563b23406dfa844aeae44a47c90997a",
+          "bytes": 6344
+        },
+        {
+          "path": "sqlglot/dialects/bigquery.py",
+          "git_blob": "370085ec44c473ffee747145950a3e39eddf4905",
+          "sha256": "0f0fd9382bffac20e252a30125b9a46fa6ff476b7d65e9a2466beabbd60b0666",
+          "bytes": 52756
+        },
+        {
+          "path": "sqlglot/dialects/clickhouse.py",
+          "git_blob": "e8b5172d79e44f91382d6c603213edcd74fda7d1",
+          "sha256": "0dcd1a5f012037c6fa7285ca33a3fcce1dc8b32ad78c16a334607e715867bb56",
+          "bytes": 56603
+        },
+        {
+          "path": "sqlglot/dialects/databricks.py",
+          "git_blob": "f13b4ca4472789a97b0a115b2e4fa5193ffa0748",
+          "sha256": "f0fa1a88ff0f7e2063a617918ae6beacefc7cd7d934545ea7370e7950f3362b8",
+          "bytes": 4481
+        },
+        {
+          "path": "sqlglot/dialects/dialect.py",
+          "git_blob": "32064f427c7f2db8e6d01b2b3c2629f59c83356d",
+          "sha256": "76f1f8fbe5b3236a0b7a93b020a67e6d107e9240ae8a03d2781f34d7ade6b86c",
+          "bytes": 68551
+        },
+        {
+          "path": "sqlglot/dialects/doris.py",
+          "git_blob": "fabd85040b68019b61a7eace9ec25f5987da6dbc",
+          "sha256": "782ec2b7e8b3ee9e14b33eb9f4d91e9541619be1a6568948672e6e681be08da0",
+          "bytes": 14397
+        },
+        {
+          "path": "sqlglot/dialects/drill.py",
+          "git_blob": "8a80c2f5f28ac7b224829f44fabcdb3fe8e073ee",
+          "sha256": "14e87bfca8cfc7fefba6fd03887299a20d02726cea785f7f3c49869c9d444923",
+          "bytes": 5825
+        },
+        {
+          "path": "sqlglot/dialects/druid.py",
+          "git_blob": "8b95abb572b42e4dbb7ec61d03063f37328eaeff",
+          "sha256": "921dec9d9b6779e84d396aacdd770f8ecae135a45b90243c1388476d62757c73",
+          "bytes": 690
+        },
+        {
+          "path": "sqlglot/dialects/duckdb.py",
+          "git_blob": "721d72ae6f13e302218883e3debbfb481bfac240",
+          "sha256": "a060a02b42a3c097022b2f983997a2427128e2fed9735af900ad2d0973b65487",
+          "bytes": 48005
+        },
+        {
+          "path": "sqlglot/dialects/dune.py",
+          "git_blob": "be870e2e0651b7f07159481926c6827a4f531c23",
+          "sha256": "8002eeb7e7c57cddaa32cafc2ef6753502b71775bdcf67f83f032f4cc5d55558",
+          "bytes": 375
+        },
+        {
+          "path": "sqlglot/dialects/fabric.py",
+          "git_blob": "05be091d818f539f7e1a3d95e4391208a3a9cb51",
+          "sha256": "9ec27ccff19e8a842276769f6f8a769068c2caa76deae31e4d1d20c82a3cd4f2",
+          "bytes": 2655
+        },
+        {
+          "path": "sqlglot/dialects/hive.py",
+          "git_blob": "5300b0148bbc48df8513e40fcbe4728182a95a7e",
+          "sha256": "c8a0ac54de11f29201d8b9b1d581a2491f5bf0c7b7962eabb06b99aca8c74e8e",
+          "bytes": 31771
+        },
+        {
+          "path": "sqlglot/dialects/materialize.py",
+          "git_blob": "4534c21ba251297c3fe4f05fe3a8e3e9a57bb34d",
+          "sha256": "fc33cb3edf18add40821736b189c3520c7063a800427d34ef57f690dfcb8871b",
+          "bytes": 3494
+        },
+        {
+          "path": "sqlglot/dialects/mysql.py",
+          "git_blob": "a54456fde37e1a688f172abb1e6b6ae014ce859c",
+          "sha256": "a6b65e727df37a889f657ee5e7852e2c6eb86abec8fa8affcfd945fab4fc6ddb",
+          "bytes": 49233
+        },
+        {
+          "path": "sqlglot/dialects/oracle.py",
+          "git_blob": "6e11893f864575fb16513a19e432487fa0a21353",
+          "sha256": "a3a3a7d5c61616de93a5060abb3a38902cf9bca6fc8d0afc592c1ceb5f61dcb8",
+          "bytes": 15967
+        },
+        {
+          "path": "sqlglot/dialects/postgres.py",
+          "git_blob": "037916162ced190d261fd0ee1e47e9a42024e480",
+          "sha256": "294c8ca0b926d7fb192946dd8e7e9b8d7c7dc73eec6c430a6be7e5e4ccdfaec9",
+          "bytes": 31025
+        },
+        {
+          "path": "sqlglot/dialects/presto.py",
+          "git_blob": "543bf2d6c3b78be166821826b9b125f6f79fe2b7",
+          "sha256": "96d29b438e1e7deab51ccd13f10ab4aec052c7a07a6c5f51a0ab540557a8cfbd",
+          "bytes": 33155
+        },
+        {
+          "path": "sqlglot/dialects/prql.py",
+          "git_blob": "50a54dbc7fed5b5fe204bc1a5a5f54e5c327b402",
+          "sha256": "7f037e48f106c7e76bc1fd4ad14d8c07237e3e45b70bface810df17897b27218",
+          "bytes": 7908
+        },
+        {
+          "path": "sqlglot/dialects/redshift.py",
+          "git_blob": "014706128fafdb959c179b0c2ec782b27506aa11",
+          "sha256": "5307e7b4a09f3e95fadc6ea8c38be369d1697e67da2ab9853862e83ae58df188",
+          "bytes": 15406
+        },
+        {
+          "path": "sqlglot/dialects/risingwave.py",
+          "git_blob": "7a1775d38d06ff2263e0fb616a5a058a63d9e620",
+          "sha256": "87010e3e3330d1933fddf8d0701504d34a32e88f15ea6cd838e626730c12f26c",
+          "bytes": 2898
+        },
+        {
+          "path": "sqlglot/dialects/snowflake.py",
+          "git_blob": "5ee520a46f6d263c97231f1dfc70af4303cb9851",
+          "sha256": "929a1643fc37489c9beb4e50592bebf81c41477a4ff6d9a50db4f88b1f29e3ce",
+          "bytes": 63438
+        },
+        {
+          "path": "sqlglot/dialects/spark.py",
+          "git_blob": "d7055534d3302ddd66642a15d9737281864bcbf3",
+          "sha256": "7db9a24ca01088aa86f7213f1c0c581a04223a377107db49ca33ad81da85d74d",
+          "bytes": 7645
+        },
+        {
+          "path": "sqlglot/dialects/spark2.py",
+          "git_blob": "0c9088758d53a7052e88b2567ca892281cf1448d",
+          "sha256": "f1eafb9c70e6e56739ee6f403b128dd2c77f0d5cdb8402f8e07fee765161f4ef",
+          "bytes": 14258
+        },
+        {
+          "path": "sqlglot/dialects/sqlite.py",
+          "git_blob": "21cb4c9bfec900976a39992baf6c1be5aea7d123",
+          "sha256": "7f0aa6a297aea2ea43ff6761daaeab4f7505c56b451e4b246753970189cf4fd4",
+          "bytes": 12483
+        },
+        {
+          "path": "sqlglot/dialects/starrocks.py",
+          "git_blob": "2079eea0a2f8b1401f79d1705d76e1184fad89fa",
+          "sha256": "7c7360beae4dcfb748e1051609338ee550ce6236ac07145195c83d4db6345191",
+          "bytes": 11235
+        },
+        {
+          "path": "sqlglot/dialects/tableau.py",
+          "git_blob": "61b2e2c14b236155123ea89accd33ded922faa3b",
+          "sha256": "a086b00f35084f118259a10c07c39a34c3d685b0b753edb2d3da583e6e1e6b37",
+          "bytes": 2190
+        },
+        {
+          "path": "sqlglot/dialects/teradata.py",
+          "git_blob": "d69a2aa1a92c70eeeb3dec2087fb5065a9370a36",
+          "sha256": "c566bef64493b13f9e33535e3e2fe820cd5d3c79975bcf462d4e5475adffe80a",
+          "bytes": 14036
+        },
+        {
+          "path": "sqlglot/dialects/trino.py",
+          "git_blob": "42cfb04f48777cd51d1db2bc3f48c5a958917266",
+          "sha256": "c202ec897d4d42f8c69f2feb82b5357b6afa90ad4b0f42a06927480eb6268c3d",
+          "bytes": 4285
+        },
+        {
+          "path": "sqlglot/dialects/tsql.py",
+          "git_blob": "3278d390460b96df72a492fda57e171ea7f3089c",
+          "sha256": "90c6bc858017a770f6fa0e07ce4bb31c3b167975355a06f2666dac365d9af2b1",
+          "bytes": 54397
+        },
+        {
+          "path": "sqlglot/diff.py",
+          "git_blob": "f7cdebd82c747d0af60cec0ccf444314bdd5ae46",
+          "sha256": "3ed3a59503106b54b0d7e57663c7b2a660ea1ae8d760f6933a9fd62ec5a40169",
+          "bytes": 17314
+        },
+        {
+          "path": "sqlglot/errors.py",
+          "git_blob": "300c2157430b08d8183b91e56ef2905fabe66492",
+          "sha256": "40d28cafea732d40d1fadb8c9a7fc62ba88c1d421575bfd8489fc184612fbaca",
+          "bytes": 2126
+        },
+        {
+          "path": "sqlglot/executor/__init__.py",
+          "git_blob": "432fe3f00241022172fc2fdb9f3cc4a270887718",
+          "sha256": "16c95ec33610b50743360ff426ed946a23f8be8e083148247e4985b1852170dd",
+          "bytes": 2958
+        },
+        {
+          "path": "sqlglot/executor/context.py",
+          "git_blob": "a411c18f020c1d19288c286f1d74b7eba0f16665",
+          "sha256": "5891c975840239e557c0bc34b924ab592736e5e04c9f9231d74f110af76c2914",
+          "bytes": 3386
+        },
+        {
+          "path": "sqlglot/executor/env.py",
+          "git_blob": "c6c8ee07eafb096ddc00b3609c1fc7cc64d1b454",
+          "sha256": "b50854e4fa5304c73181920575d16ac5630d3ed1cdd2f38ecfbdafa27718dca6",
+          "bytes": 8276
+        },
+        {
+          "path": "sqlglot/executor/python.py",
+          "git_blob": "ce7a2a872727f20a7db2ff871fc22526c03bb00b",
+          "sha256": "d3d198473acf9f795919f0c963da5b38d3af998c6c4727925a3522aa44911c6a",
+          "bytes": 16661
+        },
+        {
+          "path": "sqlglot/executor/table.py",
+          "git_blob": "1613ea30d305db87acfa29e3ff09fa5df08ebd91",
+          "sha256": "c64b899602d5358517b1251a5f4cd372715e9257572cb53c2ea0f28d1e4af706",
+          "bytes": 4419
+        },
+        {
+          "path": "sqlglot/expressions.py",
+          "git_blob": "0b685a64a688e9f75696e6ad973a79e88deaff4b",
+          "sha256": "af75a436e7c32274aa22831ab2bc98e16fd7515ec3c88154d86dbd8e09453ea4",
+          "bytes": 243249
+        },
+        {
+          "path": "sqlglot/generator.py",
+          "git_blob": "de3353b4fc9143a169ca95032979ea836bd1d0e3",
+          "sha256": "1352e3c8de3d9d7f577cafa1cac1d6be9c3bfaab70b38c5e6fce6c662e71dccd",
+          "bytes": 213345
+        },
+        {
+          "path": "sqlglot/helper.py",
+          "git_blob": "63944f954f22cb211588ef11df0872891c1f4920",
+          "sha256": "f67663155441b4c2850b711dce90d0ea391acc53b5f69a3a045f311e2346648a",
+          "bytes": 15111
+        },
+        {
+          "path": "sqlglot/jsonpath.py",
+          "git_blob": "115bd159413f4ca3d345c2396123957684097f25",
+          "sha256": "74a748dcf34834d1a29a64ac7b6208bfe19b3cdff79579dc5e1ffbd101fb2ecb",
+          "bytes": 7664
+        },
+        {
+          "path": "sqlglot/lineage.py",
+          "git_blob": "fd5e75ad36e06204b46feb33230ec8642e4751bb",
+          "sha256": "917043484ae665996e671fe492b323e0c3c43806e4bdc6d7d6d6ce5bb06997e5",
+          "bytes": 15303
+        },
+        {
+          "path": "sqlglot/optimizer/__init__.py",
+          "git_blob": "050f246c9171b6e23ca5c86ee4c9ac4e63c0f797",
+          "sha256": "15d02f573eab40b2e48a21f6d7e483e11c41e734b7583794facd373d9909f85e",
+          "bytes": 343
+        },
+        {
+          "path": "sqlglot/optimizer/annotate_types.py",
+          "git_blob": "67a7e2d0616c3f62c48ded2e8ee669e9a20dd230",
+          "sha256": "f8990d81ce51d63621d77d03f251afe6761298f75dbf835a7f7059883e59b93b",
+          "bytes": 24137
+        },
+        {
+          "path": "sqlglot/optimizer/canonicalize.py",
+          "git_blob": "d654867d935c9a158b42a4f110fb5bb50488f037",
+          "sha256": "449a546d60ee76392744cb4efca7fc3066791efd6dc293d669cdaee64a55e15c",
+          "bytes": 7719
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_ctes.py",
+          "git_blob": "d2e876cd0bfdd903f16d6d48835334973d292502",
+          "sha256": "7d404cd115273eb9b6b18a6d11606ec7df01edf731ed6f81335cd5a9f803cfd7",
+          "bytes": 1448
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_joins.py",
+          "git_blob": "3134e65986a3d82e44d68fa34aa31746e1d17f82",
+          "sha256": "e5686589e81ced4f019d2ead96b97dc247808323f53698020803f10a11f315fc",
+          "bytes": 5874
+        },
+        {
+          "path": "sqlglot/optimizer/eliminate_subqueries.py",
+          "git_blob": "b6610036901ef07dc200f25f1db97f0a5caf5e89",
+          "sha256": "b0007f3e4f78fe7da7d4f21a67631cdccfa7d9357e2668e36a899a635e2ed0e8",
+          "bytes": 6292
+        },
+        {
+          "path": "sqlglot/optimizer/isolate_table_selects.py",
+          "git_blob": "e0c1d9c1d2122278a0e173591282f5a9ce254b13",
+          "sha256": "ffcac82953282fb798debac9b2680875346f7e60522d4c5e1e0e36ab5256f7dd",
+          "bytes": 1464
+        },
+        {
+          "path": "sqlglot/optimizer/merge_subqueries.py",
+          "git_blob": "358a218578b4379030ded47b792211e940f91cfa",
+          "sha256": "960e88b3bf2750cd8c6ea6d18c4eb16a9804ac83bee69b5e044ef8421df3e199",
+          "bytes": 15211
+        },
+        {
+          "path": "sqlglot/optimizer/normalize.py",
+          "git_blob": "610833d4afdadb6644b1dc25b18fbe67a8397a62",
+          "sha256": "c2edc678a637e8f2f201bf5fe77e230c37f30f0bd926967c83f1f9407e9a7194",
+          "bytes": 6667
+        },
+        {
+          "path": "sqlglot/optimizer/normalize_identifiers.py",
+          "git_blob": "dd421d9bb03b617c1619069ac6bf125c8c19769c",
+          "sha256": "b83e31202240823d17ec415cd8b61c0d6c405b66931c034edb0cbb91f9fd81f6",
+          "bytes": 2098
+        },
+        {
+          "path": "sqlglot/optimizer/optimize_joins.py",
+          "git_blob": "15304561a676fbbe0c2ede9f8bf5c04e751c8f6e",
+          "sha256": "2cb047e9993451e82c7dfe3cb2826026a869197910c7956cb4612de34bec8eb8",
+          "bytes": 2991
+        },
+        {
+          "path": "sqlglot/optimizer/optimizer.py",
+          "git_blob": "0a0e13df27d4d031bbcd14b605ac620d22e412ac",
+          "sha256": "bd71170d61ef6cefaf266488ed4a89bb274cd96ac3d71928eeb113ab612d549a",
+          "bytes": 3533
+        },
+        {
+          "path": "sqlglot/optimizer/pushdown_predicates.py",
+          "git_blob": "6efb63df9d7135b23fba8e65547ec75977726b5d",
+          "sha256": "1f894573d0ec76cf16ec53ac138c1b2ba3c7241bba4a381053b995b65e256a9b",
+          "bytes": 8357
+        },
+        {
+          "path": "sqlglot/optimizer/pushdown_projections.py",
+          "git_blob": "ed22ce1b378ac50b755713a85772d561f35be8b2",
+          "sha256": "ecda0ae4d014558561b34627632a3a5ae5df68ef814a14b04ba940f18f804d0e",
+          "bytes": 6668
+        },
+        {
+          "path": "sqlglot/optimizer/qualify.py",
+          "git_blob": "a35699d219d46c39f817026cac9f23397acf4759",
+          "sha256": "a003dfc2e6fb74492b942aeca6d7095a92f26b80602a137a3394b022cffce8b6",
+          "bytes": 4002
+        },
+        {
+          "path": "sqlglot/optimizer/qualify_columns.py",
+          "git_blob": "45174ff04497fdde80318a9998b33ca59a9b790e",
+          "sha256": "efb69270f6a45d86a26a09e8096936ab033194ab911ac15300af6c390b91daf6",
+          "bytes": 40872
+        },
+        {
+          "path": "sqlglot/optimizer/qualify_tables.py",
+          "git_blob": "47cedd708167714c05ca3c0c7446ce90386e5ca1",
+          "sha256": "e5fe5e9c1021f9ba4d07d7b017ded6f5fc7d8754c65e3d488797e772f1f8dac6",
+          "bytes": 6486
+        },
+        {
+          "path": "sqlglot/optimizer/scope.py",
+          "git_blob": "4077964ee5c74682dc61e02751465957f21d653b",
+          "sha256": "afed8f68eefec2868859a5ab282f3c27d79381d41aadd358435ac85d768faf5c",
+          "bytes": 30501
+        },
+        {
+          "path": "sqlglot/optimizer/simplify.py",
+          "git_blob": "90bbe2bb6d3b0fc166911f2d4adad5dcf5af71e4",
+          "sha256": "4b4065aa0e4cab6291456856cfe122bdc87db018c1860f5f44903a11d0738f68",
+          "bytes": 50704
+        },
+        {
+          "path": "sqlglot/optimizer/unnest_subqueries.py",
+          "git_blob": "eef97f1c01fdd34c2a2753251ae91c021e2d00e3",
+          "sha256": "933594543971b3ccfd9e6471fbc53ea475cfb55661108c242aa98a86bd902ef7",
+          "bytes": 10908
+        },
+        {
+          "path": "sqlglot/parser.py",
+          "git_blob": "3bcf1ac112b676e984f82cfcde436a9e20a2f500",
+          "sha256": "8ac2724d139ebd90d05edda85f533d45e9a6b584a4e643ba8b7874cdae2002a1",
+          "bytes": 323944
+        },
+        {
+          "path": "sqlglot/planner.py",
+          "git_blob": "687bffb9fa0a255910b86cdafd1a0b951677ab45",
+          "sha256": "aa5ecb8be6d62517325f335a672fe7e9b43a07665fba710807c66dbf6c5ac6ae",
+          "bytes": 14634
+        },
+        {
+          "path": "sqlglot/py.typed",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "sqlglot/schema.py",
+          "git_blob": "c8362e081151449d94f991742efeeeb29a09f3b9",
+          "sha256": "d771f6a8a42cdbb10a753a432cebdc3674930c051b60d2a35ad26ce1a40248e0",
+          "bytes": 20509
+        },
+        {
+          "path": "sqlglot/serde.py",
+          "git_blob": "b019035619f3a5ba920d715e54f4a7f46e8b65fd",
+          "sha256": "0d0549f795ab22f8587ded3662d6f8350ba0d9a3300c2130a4c056d4b283ab31",
+          "bytes": 2031
+        },
+        {
+          "path": "sqlglot/time.py",
+          "git_blob": "66daf1684b8c92159115a425d08fe65b444e7940",
+          "sha256": "43ada0bfa90be343a244117a04c112c4a25c3159fb64b370eecbfc1f7e33e452",
+          "bytes": 18400
+        },
+        {
+          "path": "sqlglot/tokens.py",
+          "git_blob": "0a5667551f500446b8c740ced97693faa467a44a",
+          "sha256": "47407c19049b43d1a80dcd0d95a4f94dcf118e010ec76218224614e6b63c460f",
+          "bytes": 48742
+        },
+        {
+          "path": "sqlglot/transforms.py",
+          "git_blob": "815139d2ca84e7e14bbc3347765eb2a3f2dcc15b",
+          "sha256": "de3a5b1de5532caf619908b97f7fef98afb98d9077dbf8adb4290eee9a310ace",
+          "bytes": 40631
+        },
+        {
+          "path": "sqlglot/trie.py",
+          "git_blob": "59601ee356a704990b5baab460695873fad22257",
+          "sha256": "bf6eee5ccac77eaad7949e8699e4d2328bec07fde8d1cb6794a85d36ded6e9f2",
+          "bytes": 2245
+        },
+        {
+          "path": "tests/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "tests/dialects/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "tests/dialects/test_dialect.py",
+          "git_blob": "2235baa837af9c14bb3e3ce45690a69161aea18a",
+          "sha256": "e6ea99f486861122950c237c1b89378dc7197c99585e4211e30fa31570eb6a12",
+          "bytes": 160664
+        },
+        {
+          "path": "tests/dialects/test_spark.py",
+          "git_blob": "1b5c7e3bd537b54c182d5eb777adbdf150595937",
+          "sha256": "158c090d7086b1d87c01c80972dec1bafac3fa7874537d84b831929521c96519",
+          "bytes": 51648
+        }
+      ],
+      "omitted": [
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+          "git_blob": "38bb2803a52e16c659cf987b6c4f618d73b69684",
+          "bytes": 565,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+          "git_blob": "bbcbbe7d61558adde3cbfd0c7a63a67c27ed6d30",
+          "bytes": 595,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/scripts/format_benchmark.py",
+          "git_blob": "6d9215dbc96212992967b1127d0d90a38588742a",
+          "bytes": 2871,
+          "mode": "100755"
+        },
+        {
+          "path": ".github/workflows/benchmark-sqlglot.yml",
+          "git_blob": "f6591634456048e975b5e0d5bca0c2063c29c3e0",
+          "bytes": 3919,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/benchmark-sqlglotrs.yml",
+          "git_blob": "ba39e965ab6872daeb4a564c0ec2c39c42b5cd9f",
+          "bytes": 350,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/package-publish.yml",
+          "git_blob": "8a2a274493b81a39c3c10b9986d8653f7a46dd32",
+          "bytes": 4131,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/package-test.yml",
+          "git_blob": "257cb263bfa2b959210de8fa7499fecbeb60c92f",
+          "bytes": 815,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/should_deploy_sqlglotrs.sh",
+          "git_blob": "b62589bfa1f6e77aeba2e4d18532c8593444efa0",
+          "bytes": 463,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "git_blob": "26a4c8796a23420c120870bfa73092ad45dd8cf7",
+          "bytes": 1947,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitpod.yml",
+          "git_blob": "202868338361b23807a42887bd16f9dc111049c0",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": ".pre-commit-config.yaml",
+          "git_blob": "52425a1b5b137c21e81ecdaf17102b10022c27fc",
+          "bytes": 889,
+          "mode": "100644"
+        },
+        {
+          "path": "CHANGELOG.md",
+          "git_blob": "a11e5e3fb40446652e7712e46382e03e26a8c120",
+          "bytes": 595323,
+          "mode": "100644"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "git_blob": "02b604908aae7e53d3baab8f2c145c3354ab56b3",
+          "bytes": 3446,
+          "mode": "100644"
+        },
+        {
+          "path": "MANIFEST.in",
+          "git_blob": "ed9bfe1aa46400ac6186fd4c57d97029722462a7",
+          "bytes": 70,
+          "mode": "100644"
+        },
+        {
+          "path": "Makefile",
+          "git_blob": "a8cf0147ce9c464ddf13c9faa3b3581e26913a5e",
+          "bytes": 906,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/__init__.py",
+          "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "bytes": 0,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/optimize.py",
+          "git_blob": "fa84654b8ea59f81d9936f5447617cbb4f2b64de",
+          "bytes": 1910,
+          "mode": "100644"
+        },
+        {
+          "path": "benchmarks/parse.py",
+          "git_blob": "47e7962a97c32866156d4f5b5a34d564c67f7ccf",
+          "bytes": 6365,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/CNAME",
+          "git_blob": "bd9a7c81c36a97fdb170279b6779482e61b032f9",
+          "bytes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/index.html",
+          "git_blob": "ef64b90ebb16e078306d566c553e1d540a9ddca1",
+          "bytes": 138,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/search.js",
+          "git_blob": "9072404fb8bfdbabf725f7e1ab116d4eaf194e2b",
+          "bytes": 22808932,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot.html",
+          "git_blob": "e0cc6594c52345359172f08bc7164fd074ae5dc0",
+          "bytes": 172753,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot.png",
+          "git_blob": "63b11bfe0dc088ef89c2b72c3d4fec78cf53eca0",
+          "bytes": 7358,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/_typing.html",
+          "git_blob": "1632d7be1afc906c16e3002706b62c9ea8be5048",
+          "bytes": 41731,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/_version.html",
+          "git_blob": "14918b7782f9ede755f4502e5ca15f83607a8611",
+          "bytes": 43381,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects.html",
+          "git_blob": "064090fd3a148197aca1231b8ab05986567457ff",
+          "bytes": 77760,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/athena.html",
+          "git_blob": "0f4b85a83342655b40b14702446539cfc1dc9dff",
+          "bytes": 346293,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/bigquery.html",
+          "git_blob": "daf27c0767e1cca667fd5a3c58358b63c5c13672",
+          "bytes": 1384266,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/clickhouse.html",
+          "git_blob": "62e1bb918ba1abdd1131ab1d696e959a5fe87a49",
+          "bytes": 1708743,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/databricks.html",
+          "git_blob": "3887c0fab39c538705d41d91a7411f1c00dd0fbf",
+          "bytes": 440630,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/dialect.html",
+          "git_blob": "7eee57b71b078e852e3c16adfa7a0cfbd303d984",
+          "bytes": 1198915,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/doris.html",
+          "git_blob": "703abc10a358694755997d638534c67cabb6fdeb",
+          "bytes": 589547,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/drill.html",
+          "git_blob": "43847dd9f27ab0d36cff05dc28477393a9dafa47",
+          "bytes": 436454,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/druid.html",
+          "git_blob": "5023893b3ff447ebb8145aeb23f7bb19e9e1179c",
+          "bytes": 169086,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/duckdb.html",
+          "git_blob": "7a2834bc22cbdb336d40150ef22d5d019c6c9379",
+          "bytes": 1317137,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/dune.html",
+          "git_blob": "a13b4e1484fa3872616c92f5ee466a93979f5cd1",
+          "bytes": 186701,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/hive.html",
+          "git_blob": "7aa6f2e530ef746dcb9e75eb80251fb014bc45b2",
+          "bytes": 1002989,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/materialize.html",
+          "git_blob": "615ac330edc6124f17de158bffbdab1d760b44f0",
+          "bytes": 316397,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/mysql.html",
+          "git_blob": "d8cf46ed4f56d55cb987118ec34999620d1547ad",
+          "bytes": 1406255,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/oracle.html",
+          "git_blob": "1c6c3576241bb537cc5424d3e297379ef69b96cd",
+          "bytes": 661080,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/postgres.html",
+          "git_blob": "8261056c2ba749db81d943bbf66481b8a18e35c4",
+          "bytes": 934324,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/presto.html",
+          "git_blob": "9fc1167d8e70e8087f4543f6912d7aef8e0a0ff9",
+          "bytes": 992271,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/prql.html",
+          "git_blob": "2f947b3c10a38c2c2eef19b665aa8a9ceeb71d8a",
+          "bytes": 355570,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/redshift.html",
+          "git_blob": "6a08e600d148515cebc5eaef8c22bf7ed164d040",
+          "bytes": 667224,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/risingwave.html",
+          "git_blob": "bbd4d4c95cfebd0e295cbb8e233a66b108567f9e",
+          "bytes": 336576,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/snowflake.html",
+          "git_blob": "071bbee297caac44a74769038a6406f59b134f34",
+          "bytes": 1634440,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/spark.html",
+          "git_blob": "1001f9832236cabb72c3b53aee641c579f62c3c8",
+          "bytes": 416150,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/spark2.html",
+          "git_blob": "cb8da4d2f958c1b6f7af069afb077da2e31f5e34",
+          "bytes": 589451,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/sqlite.html",
+          "git_blob": "d99f7fa554367f50defac17dcc66402295686fa8",
+          "bytes": 590106,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/starrocks.html",
+          "git_blob": "90bf4b7fbadc3cb6e4e641189703b3203f9bc61d",
+          "bytes": 574235,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/tableau.html",
+          "git_blob": "56ed14d22e087cdcdf5cb709d6e364b597d9618f",
+          "bytes": 340702,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/teradata.html",
+          "git_blob": "e274be9b32b1bff86b1f975a702047e5100cec7f",
+          "bytes": 654670,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/trino.html",
+          "git_blob": "0139f7ce1e3a58ffdd5776211b3a804b76b112e8",
+          "bytes": 332318,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/dialects/tsql.html",
+          "git_blob": "24e49420c47be187e0edf5291288dee06ee18f28",
+          "bytes": 1508577,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/diff.html",
+          "git_blob": "fc00c5fe0fe71087fb97c8221cc4447affeed571",
+          "bytes": 3047415,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/errors.html",
+          "git_blob": "e34bad8ca77b3017cae48e28a929a64c7191bc61",
+          "bytes": 98738,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor.html",
+          "git_blob": "b3a7acaa04b25d766eac763a7915ca64ed2bdc7d",
+          "bytes": 1083599,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/context.html",
+          "git_blob": "e3f4ecca4b0df52198bf53aa929d7c87f2a71701",
+          "bytes": 127269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/env.html",
+          "git_blob": "68034a08237c8888a5c39ebaba581795da0d3bd9",
+          "bytes": 157831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/python.html",
+          "git_blob": "908bbae8bd9b991bde0df44523699c1792071ec9",
+          "bytes": 572055,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/executor/table.html",
+          "git_blob": "ee1e6709cea01305f1c0afc1cd5bb278b09299e6",
+          "bytes": 138829,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/expressions.html",
+          "git_blob": "bd0ab38c501b114661e70aa6e736c79d4935929e",
+          "bytes": 11677127,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/generator.html",
+          "git_blob": "c85ffc109fe74eee90aba7d1e46ca4d8eed2c5ac",
+          "bytes": 5359959,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/helper.html",
+          "git_blob": "bea3b0a0d09cf50c3b2c98dc2177d329a111d665",
+          "bytes": 309258,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/jsonpath.html",
+          "git_blob": "ddecffafbe32b120bfec94147edb63e418f828d6",
+          "bytes": 156752,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/lineage.html",
+          "git_blob": "ec91d9200bde041c359d062dea2042365274dabc",
+          "bytes": 267896,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer.html",
+          "git_blob": "c2ea4a6499b42f43ea23717ccae07ac576b2ed4d",
+          "bytes": 41475,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/annotate_types.html",
+          "git_blob": "391db217b2d725ceb05c6c118fa8dbceaf9095f4",
+          "bytes": 478731,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/canonicalize.html",
+          "git_blob": "70a2f1eb5255c07e72afff6ab1db2b9782fab405",
+          "bytes": 136071,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_ctes.html",
+          "git_blob": "e09bdc20f6d5caa7f8661fc1c17728585ef51690",
+          "bytes": 56210,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_joins.html",
+          "git_blob": "714f74a9351b85f1f8e44ebd833320c46cf7a1ce",
+          "bytes": 101991,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/eliminate_subqueries.html",
+          "git_blob": "c6cd3af7732d5e8cfe4e63661823eca85efae4e0",
+          "bytes": 102182,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/expand_laterals.html",
+          "git_blob": "8fcc1a19473779759c4c0fc2288b3a914bb30fff",
+          "bytes": 51199,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/expand_multi_table_selects.html",
+          "git_blob": "ae09d2e35d02a840871442db1047e3714dfba710",
+          "bytes": 45966,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/isolate_table_selects.html",
+          "git_blob": "b3ad7339aec4b3556be4e053589b0b22d19bdd5e",
+          "bytes": 59705,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/lower_identities.html",
+          "git_blob": "bee886e04fb3ea6740f141d1c81fa22f0268a53f",
+          "bytes": 63180,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/merge_subqueries.html",
+          "git_blob": "a42257122aa2cead7700376e89e531cef85147f0",
+          "bytes": 161563,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/normalize.html",
+          "git_blob": "ecb511210170a5d3a5f1ff4d6b41bb3766c55019",
+          "bytes": 123615,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/normalize_identifiers.html",
+          "git_blob": "1c5f5f789ab2031eb1606bf4256e65bb2f42cfe9",
+          "bytes": 62106,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/optimize_joins.html",
+          "git_blob": "136da4fbaeef6ff71f065cf98dbd7762c7e07590",
+          "bytes": 85439,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/optimizer.html",
+          "git_blob": "ea20840e9ab3369f2ca91054652ff772b4b3261e",
+          "bytes": 76195,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/pushdown_predicates.html",
+          "git_blob": "f3099b2100a60f970e300ace8d3dfde48b486a73",
+          "bytes": 150870,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/pushdown_projections.html",
+          "git_blob": "f70f87bc0960e4c40854393c0fcb43581788c807",
+          "bytes": 110622,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify.html",
+          "git_blob": "2dd3738648894b10c600cebe2292d1e8eb3d0d4e",
+          "bytes": 83105,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify_columns.html",
+          "git_blob": "990702b42c42046cdb8c6f1b2b7799164710e6d3",
+          "bytes": 450840,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/qualify_tables.html",
+          "git_blob": "5610f147b3e719c2d50e3fd572ef8ed818d1d7ed",
+          "bytes": 125261,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/scope.html",
+          "git_blob": "6840a85852d8106add156c025ee714a9ecfa63d9",
+          "bytes": 509864,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/simplify.html",
+          "git_blob": "ac1d63beedeed3fbf290d82c84f7de72f11f3ffa",
+          "bytes": 872588,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/optimizer/unnest_subqueries.html",
+          "git_blob": "c89fa9a89957fede2bb11c3e3c9ffe6d51fcabc2",
+          "bytes": 189946,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/parser.html",
+          "git_blob": "cd4bff0b4d4adc7e456abd4230dfd975ecac33ca",
+          "bytes": 4982354,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/planner.html",
+          "git_blob": "40581c2edd562df928237f9321a72f2a5a60efe8",
+          "bytes": 402052,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/schema.html",
+          "git_blob": "d6648e757d4c06a36a355b10029e0d2e348a46af",
+          "bytes": 463828,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/serde.html",
+          "git_blob": "79663fccc805c6ba475538cc5eaf360aab48f775",
+          "bytes": 74164,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/time.html",
+          "git_blob": "644cce0bc73934f56db9c7909dc9a5bed1408e1e",
+          "bytes": 187011,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/token_type.html",
+          "git_blob": "98e4f33b7409ab3e9d6eff918b9d76f856e434d0",
+          "bytes": 355645,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/tokens.html",
+          "git_blob": "c9401b470fb82ab34b67b5e75f65e3bd5b54307e",
+          "bytes": 1065381,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/transforms.html",
+          "git_blob": "a8cc9cf1fa23e8caa46dc91f8515f814436005b5",
+          "bytes": 614533,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/sqlglot/trie.html",
+          "git_blob": "ed57ea34e52a87e63797d44b1d254f0a6058bc2d",
+          "bytes": 74058,
+          "mode": "100644"
+        },
+        {
+          "path": "pdoc/cli.py",
+          "git_blob": "7b5ca9f153cce98bd69436f2fb92aea47937335d",
+          "bytes": 1328,
+          "mode": "100755"
+        },
+        {
+          "path": "pdoc/templates/module.html.jinja2",
+          "git_blob": "e37ae01c32c78d6bc040ce7161edfc54915faf7f",
+          "bytes": 131,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/ast_primer.md",
+          "git_blob": "8b495432f753b0e5e4516dbc75b4f1a597eb94f3",
+          "bytes": 13569,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/onboarding.md",
+          "git_blob": "b526c29cc1758071b96c829157226745d66851fa",
+          "bytes": 29716,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/onboarding_images/lineage_img.png",
+          "git_blob": "01e62ba5a10a57135dc5f0b2bd4ec1049bae8f30",
+          "bytes": 192924,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine.md",
+          "git_blob": "addc412c2644bd4107b93301a3adb424a04e2ca8",
+          "bytes": 12086,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/executor.png",
+          "git_blob": "e6e2c9c8661902412ccf02593e48919379c0ae51",
+          "bytes": 32441,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/optimizer.png",
+          "git_blob": "879d7b1ceada3339be7700181546a3ee8ac2feef",
+          "bytes": 82195,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/parser.png",
+          "git_blob": "15e3c3a24961aabeefbc67c5a85999e2397390f5",
+          "bytes": 157268,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/planner.png",
+          "git_blob": "c4a44b74b54d1a2573b8d78b94eb1a6f4ec5d406",
+          "bytes": 123866,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/python_sql_engine_images/tokenizer.png",
+          "git_blob": "b1147df2e86ad74097d1384112d757c2346d427b",
+          "bytes": 341375,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff.md",
+          "git_blob": "4d07d7fed77fc8d321b355e9b7a5325b0e74f37c",
+          "bytes": 26210,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/dice_coef.png",
+          "git_blob": "e0a91f6cdf5753795e531c2d22aee7c4af429551",
+          "bytes": 22582,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_1.png",
+          "git_blob": "578109b195e79bad5d04fe98dd9e47ae29e2364d",
+          "bytes": 57550,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_2.gif",
+          "git_blob": "9a3f3c08625ddeb146e0b6ce9a56372ef2bde9f7",
+          "bytes": 1511115,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/figure_3.gif",
+          "git_blob": "41161547478b96e3ec59cc985072b27f7cdcfdde",
+          "bytes": 327145,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/git_diff_output.png",
+          "git_blob": "8ba155c8cf91a55e2def09360b9dcaf77f51c91f",
+          "bytes": 41567,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/matching_criteria_1.png",
+          "git_blob": "9a321f2eae9e5315dedf1bd7cd207039ea2eb78c",
+          "bytes": 35159,
+          "mode": "100644"
+        },
+        {
+          "path": "posts/sql_diff_images/matching_criteria_2.png",
+          "git_blob": "2a1c7f2bd58f6ca8c181dd7cbd0727aaba4f880b",
+          "bytes": 48555,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglot.png",
+          "git_blob": "63b11bfe0dc088ef89c2b72c3d4fec78cf53eca0",
+          "bytes": 7358,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/Cargo.lock",
+          "git_blob": "1f0195e23a432303ac29eaa91c3e401d90854472",
+          "bytes": 18854,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/Cargo.toml",
+          "git_blob": "c88fe7ff1611565385f23a4b5218cbdbf77b907d",
+          "bytes": 804,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/dialect_settings.json",
+          "git_blob": "04c3f9950bf6e41fbae249b76416aa5c97a87975",
+          "bytes": 111,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/long.rs",
+          "git_blob": "347c1199bf85e3588d7632b0d3fb402495af1fc7",
+          "bytes": 3444,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/token_type_settings.json",
+          "git_blob": "580df9613a7bc9bdc819a30e83b583c3b9c98f25",
+          "bytes": 215,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/tokenizer_dialect_settings.json",
+          "git_blob": "04c3f9950bf6e41fbae249b76416aa5c97a87975",
+          "bytes": 111,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/benches/tokenizer_settings.json",
+          "git_blob": "47f04c7a48c9f1987cc9561d0f52e8486d4f24d0",
+          "bytes": 690,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/pyproject.toml",
+          "git_blob": "cdb6c5be354ed693f52f60cfe68df931b7b9a84a",
+          "bytes": 683,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/lib.rs",
+          "git_blob": "bb6caf641043b57275dc81230db291b33b27f0e8",
+          "bytes": 543,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/settings.rs",
+          "git_blob": "c7e3b41408fc939662d40a252b90e9a1c5ab084e",
+          "bytes": 7623,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/token.rs",
+          "git_blob": "0532283f54b5d9c4aa41261bc14e7d43f9c62cbc",
+          "bytes": 2137,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/tokenizer.rs",
+          "git_blob": "6ca02a142135478ec0e23da6016fc8b70d99041c",
+          "bytes": 25950,
+          "mode": "100644"
+        },
+        {
+          "path": "sqlglotrs/src/trie.rs",
+          "git_blob": "25f9fb5ce678429d05f574ff8e8af36753e91170",
+          "bytes": 1320,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_athena.py",
+          "git_blob": "4f8a5743056384b5242dc8705e5f776bb172bc64",
+          "bytes": 16930,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_bigquery.py",
+          "git_blob": "5f0e2808a05a1e32b605646f94aaf517306ef8a9",
+          "bytes": 124549,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_clickhouse.py",
+          "git_blob": "c5d0df1b16e646ce977d2812b6b21e7d92fa2817",
+          "bytes": 58067,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_databricks.py",
+          "git_blob": "d99c518beb184c8168c950b5ea1861201f5c1d80",
+          "bytes": 16908,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_doris.py",
+          "git_blob": "7cb0f092b146235e7ee0a646b449749ce5b61edb",
+          "bytes": 3727,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_drill.py",
+          "git_blob": "f1c3a88482d3523e5472ffa5bc012a0938830393",
+          "bytes": 857,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_druid.py",
+          "git_blob": "8e04c6997e34faf76dccb625c6eb93fe35921b9e",
+          "bytes": 926,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_duckdb.py",
+          "git_blob": "69fadce5f42043b04ac9ddf16b00dd4199b4ef70",
+          "bytes": 74010,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_dune.py",
+          "git_blob": "79356d23ece0fb146dd6d8dbd49b22adc4f5a748",
+          "bytes": 1258,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_fabric.py",
+          "git_blob": "b45c53799a5ef70e63dcaaecc48de5d96239ae28",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_hive.py",
+          "git_blob": "de084e363b1c57a83e012850ef3768be4287bd8d",
+          "bytes": 34839,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_materialize.py",
+          "git_blob": "617a9b58f5b9b805cacefe3205ca9be39cdc0084",
+          "bytes": 3529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_mysql.py",
+          "git_blob": "3fe14e56c492fb3f9c3e5c99900a98d8e87b4920",
+          "bytes": 63364,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_oracle.py",
+          "git_blob": "168e2d507f7f703b49fdb97b7ab2d5eb2326302c",
+          "bytes": 32327,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_pipe_syntax.py",
+          "git_blob": "057171d67b9eb5a6f95c1b3117dd1c3dcd145a9b",
+          "bytes": 18391,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_postgres.py",
+          "git_blob": "54e65dd62f39b2b8aed9c66e1576ec7258200f82",
+          "bytes": 68292,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_presto.py",
+          "git_blob": "619f00dac64f621bf41478a16a5f6f796f98aa30",
+          "bytes": 52625,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_prql.py",
+          "git_blob": "2e35bb2e2a3e8fb4874864ec1c2989a34f1543e2",
+          "bytes": 5149,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_redshift.py",
+          "git_blob": "47be0f71ea2abbf4b7ed47366f7b9fbbe95ccba8",
+          "bytes": 32323,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_risingwave.py",
+          "git_blob": "80c5265cb6ae9b53849cb25b58ef2ab98dc7e196",
+          "bytes": 1068,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_snowflake.py",
+          "git_blob": "323196bc7378fd3e5675bf216a106a76b6d3c7b6",
+          "bytes": 130621,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_sqlite.py",
+          "git_blob": "2c73d5868fc6bf08d2044addb44cb2e3824de5fb",
+          "bytes": 10783,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_starrocks.py",
+          "git_blob": "2ef6143d1f525da168229c986db6aeaba2af5d40",
+          "bytes": 8144,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_tableau.py",
+          "git_blob": "fe605b127a81b2f62dacefaa87e002a9fe96eb0c",
+          "bytes": 2028,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_teradata.py",
+          "git_blob": "34bb9b922d46256e7f2a4d0c2bb85d69096f194c",
+          "bytes": 13684,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_trino.py",
+          "git_blob": "a971eacf2d5ce97fcfb04c92de443bdf98fb8168",
+          "bytes": 5647,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/dialects/test_tsql.py",
+          "git_blob": "f21dcc9e94334380e7bf7b4ab5da8df829e2c81a",
+          "bytes": 97806,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/identity.sql",
+          "git_blob": "b73ec1f0ecae23f6a6061731235f0a1e785c2948",
+          "bytes": 36101,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/jsonpath/LICENSE",
+          "git_blob": "212459f68f565a759bee3bd3e90132533fdbeb64",
+          "bytes": 1478,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/jsonpath/cts.json",
+          "git_blob": "11af641ad0b17a5ff4554336e470256c623381f6",
+          "bytes": 137995,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/annotate_functions.sql",
+          "git_blob": "9e53c678ea6b780db80b292074c78831173acb9a",
+          "bytes": 7522,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/annotate_types.sql",
+          "git_blob": "1401a19aad985284dfc3c5cde591a25b06840cfd",
+          "bytes": 1264,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/canonicalize.sql",
+          "git_blob": "63c248922b2f1cf2be1ec81b06f07a2ffacfa03e",
+          "bytes": 5274,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_ctes.sql",
+          "git_blob": "f1f78f47c92cf9cb14383402c3cb909b67544703",
+          "bytes": 1063,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_joins.sql",
+          "git_blob": "ac3d92d0683556b5415511ddc16fcabb34ab326f",
+          "bytes": 3414,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/eliminate_subqueries.sql",
+          "git_blob": "f2b117bd657210bb86169a359b2dadabe05ce787",
+          "bytes": 4590,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/isolate_table_selects.sql",
+          "git_blob": "36f2d8e5871a9609f0f2628807a96c431e7503f2",
+          "bytes": 978,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/merge_subqueries.sql",
+          "git_blob": "8b61068017df62b9dcfeaca03f62ab4b1dc4668d",
+          "bytes": 17184,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/normalize.sql",
+          "git_blob": "8e94c192cabc4b916a8767580274f6f9f8728ed3",
+          "bytes": 1484,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/normalize_identifiers.sql",
+          "git_blob": "b210fa7cafb16be7f9ddef704a728ed758d5aca8",
+          "bytes": 1674,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/optimize_joins.sql",
+          "git_blob": "6d5bed21b887a01d4bf5ee1a76f2f08517f586fe",
+          "bytes": 1170,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/optimizer.sql",
+          "git_blob": "375285150539cb4ff29e87dfae13788c149361a5",
+          "bytes": 33887,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_cte_alias_columns.sql",
+          "git_blob": "e25ab19a6b2c87bf906af30ee71f1ddb292f9bf1",
+          "bytes": 1187,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_predicates.sql",
+          "git_blob": "2374e586285c678dd2da2f84706aab372cb0aa21",
+          "bytes": 5012,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/pushdown_projections.sql",
+          "git_blob": "47972acbf9f83e606175944f62885dc1fdf63c95",
+          "bytes": 6144,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns.sql",
+          "git_blob": "8939db3b9ed93492e7d86c562654989e0ade936d",
+          "bytes": 43377,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns__invalid.sql",
+          "git_blob": "a8e646cc79549d3eb9976792557a7b5aa736dfc4",
+          "bytes": 615,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns__with_invisible.sql",
+          "git_blob": "1e070158e2b971d67a9b94c37d38746e0b59f066",
+          "bytes": 1109,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_columns_ddl.sql",
+          "git_blob": "75d84ca2ff82e9d6a4876c31983786bd76d7ac0b",
+          "bytes": 2343,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/qualify_tables.sql",
+          "git_blob": "339f44639245f636b891902aabe1576c57f28c83",
+          "bytes": 9146,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/quote_identifiers.sql",
+          "git_blob": "34500c4250c642999fb56be01da8e184d7fb5ef9",
+          "bytes": 606,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/simplify.sql",
+          "git_blob": "2f8d31c07525423916aab33d0240556028782c76",
+          "bytes": 22553,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/call_center.csv.gz",
+          "git_blob": "6f51952baa6a4d3036b5e87c8b8722f8e75fc69b",
+          "bytes": 427,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_page.csv.gz",
+          "git_blob": "9a736ff9878415051424707bb8b8853680cb3837",
+          "bytes": 393991,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_returns.csv.gz",
+          "git_blob": "9092c1fb1455fa85225d3b834f6dfca754bb8a2a",
+          "bytes": 167258,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/catalog_sales.csv.gz",
+          "git_blob": "ac9058b687289ebd8497882a77cd66b60cd9054a",
+          "bytes": 639482,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer.csv.gz",
+          "git_blob": "55459232d614dbdb8b09d12838796d6a6f686a29",
+          "bytes": 109529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer_address.csv.gz",
+          "git_blob": "7c24e8cb36cba73e1e8a90842877c3c4894e7fb0",
+          "bytes": 28542,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/customer_demographics.csv.gz",
+          "git_blob": "582d4e52e101babade096dd0fb0ad99a1d3a2ceb",
+          "bytes": 33320,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/date_dim.csv.gz",
+          "git_blob": "996066356e95ffa0cbf9b6898b615e685493564c",
+          "bytes": 208646,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/household_demographics.csv.gz",
+          "git_blob": "84efa064f5a473bc32ebec45bc1ada6e41dbfd3b",
+          "bytes": 23432,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/income_band.csv.gz",
+          "git_blob": "8c60109474859f6ab084ec9058ccc5204c836717",
+          "bytes": 194,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/inventory.csv.gz",
+          "git_blob": "d171ae058d1820eacabf5aac69922999ee605d35",
+          "bytes": 43193,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/item.csv.gz",
+          "git_blob": "effacb3a0fcbdd655beba8be45966744e60108ca",
+          "bytes": 31259,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/promotion.csv.gz",
+          "git_blob": "918e9c149c2bdf7438cafbd6a3defaf192862260",
+          "bytes": 501,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/reason.csv.gz",
+          "git_blob": "2ad5473c8174278eea42f54d364936f3fe6e0ff3",
+          "bytes": 87,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/ship_mode.csv.gz",
+          "git_blob": "e193902812022eae9501a933b783fd4acb1a0f26",
+          "bytes": 623,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store.csv.gz",
+          "git_blob": "77868fc5d435bbf47fd69f0bf8054b7940f9a601",
+          "bytes": 398,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store_returns.csv.gz",
+          "git_blob": "d3426ab1dc7f9301c5e5f0e70bd2b640b8f7f52f",
+          "bytes": 266354,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/store_sales.csv.gz",
+          "git_blob": "21e83df97c87eefd5e64a2f43e9a4807c7f0f217",
+          "bytes": 421923,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/time_dim.csv.gz",
+          "git_blob": "fae30e9cf412c0e6ba96b775b74b60d32edf2301",
+          "bytes": 77216,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/tpc-ds.sql",
+          "git_blob": "c5c7c1bc816cff9ef8a1bcfeb6d743bdd5b40c76",
+          "bytes": 470379,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/warehouse.csv.gz",
+          "git_blob": "f2f07a3042ac94db6586bee242f99c9412982181",
+          "bytes": 224,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_page.csv.gz",
+          "git_blob": "62ddd8ce75831bb349c7ffb6d2500ca064223c8f",
+          "bytes": 215,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_returns.csv.gz",
+          "git_blob": "af05d52053530762ac13e22c7403233c86e78e1b",
+          "bytes": 71921,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_sales.csv.gz",
+          "git_blob": "26b09b886952a2cd769531791fe60a482543f906",
+          "bytes": 615903,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-ds/web_site.csv.gz",
+          "git_blob": "a8cabdbcbff456f7d66a46f30cd0bde717ce368d",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/customer.csv.gz",
+          "git_blob": "e0d149cc65c81bc3816df881c5c77e3037226fff",
+          "bytes": 125178,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/lineitem.csv.gz",
+          "git_blob": "08e40d81e7e1b028c7888f431df2150ba42a0432",
+          "bytes": 304069,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/nation.csv.gz",
+          "git_blob": "d5bf6e3e165697aaff883a9435f7b29b5c9cda14",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/orders.csv.gz",
+          "git_blob": "9b572bc34fe848c255681a115222c6b1eb3aa7c6",
+          "bytes": 66113,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/part.csv.gz",
+          "git_blob": "2dfdaa5fe4b42e283994b8bc88b536ec4b2b02d4",
+          "bytes": 251365,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/partsupp.csv.gz",
+          "git_blob": "de9a2ce0388defa93ad5fa0d5a6093c7f7d26f4b",
+          "bytes": 303483,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/region.csv.gz",
+          "git_blob": "3dbd31a3ea19320dc1e8b9117a1a820cd9123741",
+          "bytes": 284,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/supplier.csv.gz",
+          "git_blob": "8dad82a6781d7752136934c74e0a47651e0d45b4",
+          "bytes": 317596,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/tpc-h/tpc-h.sql",
+          "git_blob": "ed7a689be46b60050cd6a0add6fc1219f3e5d070",
+          "bytes": 42529,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/optimizer/unnest_subqueries.sql",
+          "git_blob": "73a140049b7917272233a9a0f613485c2f364fd5",
+          "bytes": 5077,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/partial.sql",
+          "git_blob": "a86a662be04f6d7546ff6d6cf8f2e1b336301eaf",
+          "bytes": 128,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/pretty.sql",
+          "git_blob": "d1ce0d8219aa4905343586303cd2e2edac303c87",
+          "bytes": 8566,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/gen_fixtures.py",
+          "git_blob": "19e784e472a6c1582ff2b8a3861779e5e3488a2d",
+          "bytes": 19356,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/helpers.py",
+          "git_blob": "cc085b3effbbd4aa8a06750b25a8cd71b7d34902",
+          "bytes": 19626,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_build.py",
+          "git_blob": "64d1e96152776545520a501f88eeb6afd22dbd4c",
+          "bytes": 36428,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_diff.py",
+          "git_blob": "71f01154039039fd9b2f7b9bb44efbd5a00ce1fe",
+          "bytes": 12601,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_docs.py",
+          "git_blob": "95aa81450ca9059c6b93d6e80bafd7423b485674",
+          "bytes": 563,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_executor.py",
+          "git_blob": "a339d950e2a0db5a6162e60f90a0fde8f95065a9",
+          "bytes": 30584,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_expressions.py",
+          "git_blob": "485bf6e0b6b0facfd288b50e3f32bb8d7526b10b",
+          "bytes": 54013,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_generator.py",
+          "git_blob": "7609831b0c18517fd5e2ce0eedbbf44192b4ee5a",
+          "bytes": 1913,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_helper.py",
+          "git_blob": "e17b281b8153eca24a4ecdbca6eb74ad44cf2227",
+          "bytes": 1517,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_jsonpath.py",
+          "git_blob": "e3b8d8f2a8173de7b8a73c061322603355666aa0",
+          "bytes": 5792,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_lineage.py",
+          "git_blob": "36380dd66533cc737a4a2b841894af1ff231c878",
+          "bytes": 22395,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_optimizer.py",
+          "git_blob": "212869a4ff0117a717c908c2e05748ba5369f804",
+          "bytes": 66321,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_parser.py",
+          "git_blob": "130209ae71e159b27adc891c1fad64e8d85f2d6f",
+          "bytes": 39010,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_schema.py",
+          "git_blob": "83cbbd8396c8dd3ddc5d7b37d7d7ea05154ffe4a",
+          "bytes": 10698,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_serde.py",
+          "git_blob": "40d6134cfc492e961a5d4489a8a8ea7e3c37d815",
+          "bytes": 1230,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_time.py",
+          "git_blob": "62d436161a79a58f39d8cd52f1839dd2ad6cfca2",
+          "bytes": 1653,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_tokens.py",
+          "git_blob": "8b78fdf4d430910777fa3e41369f07fc4237aa79",
+          "bytes": 7266,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_transforms.py",
+          "git_blob": "b2fe495505b9b9504528645ee0b3d78a574f8bc0",
+          "bytes": 17150,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_transpile.py",
+          "git_blob": "5bd052a53477ba931b5199358e41b3913edb8e3a",
+          "bytes": 34617,
+          "mode": "100644"
+        }
+      ],
+      "normalized_archive_bytes": 447100,
+      "normalized_archive_sha256": "3b0ed5ae14c3b3e7db7ebd95a48840b3c2b3ba92eb94ca73355ae7432651f6a8",
+      "selected_test_modules": [
+        "tests/dialects/test_spark.py"
+      ],
+      "selected_module_fixture_calls": [],
+      "scope": "Full sqlglot package, root license/configuration and selected test modules plus their static tests.* helper imports. Other upstream test suites/fixtures/docs/CI are outside this declared task scope. Git blob hashes verified for every retained byte. No official full-checkout/runtime equivalence claimed."
+    }
+  ],
+  "external_code_executed": false,
+  "cases_adopted": 0,
+  "stages_frozen": false
+}

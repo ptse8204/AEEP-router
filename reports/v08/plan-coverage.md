@@ -5254,3 +5254,35 @@ Next work is independent training/holdout curation and runtime reproduction,
 followed by fresh applicable worker qualification and optional-use comparisons.
 Current source,installed wheel19 checks and offline docs69 need no repeat.
 Human controls, resource acceptance, selection outcomes and release remain open.
+
+### C13: ten-repository batch completed; seven new candidates retained
+
+Actual approvalab120327 ran once on sourcef694024c and the existing image. Six
+cases reproduced under its frozen expectations. Nineteen physical calls completed;
+all canonical attempts/receipts were reopened and containers absent. Twenty-one
+operations charged42.763097875751555 seconds. Counters are12907 operations,3744
+turns,118324.18488700828 seconds and0.0 cash. Skipped slots remain unused and the
+review cannot replay. No model or cash delta; source/package/docs need no rerun.
+
+A separate standing-authority Python3.13 truth adaptation retains all422 Beniget
+assertions. Three newer-builtin tests already pass on original source and become
+preservation checks; three WindowsError tests remain fail-to-pass. Both physical
+payload hashes equal the completed reference/original calls. Local first-party
+regrading passes without external execution. The old exact classifier outcome
+remains failed. Circuitbreaker,Param and Python-json-logger remain excluded;
+raw replies retain statuses but no detailed exceptions, so exact causes are unknown.
+
+The current provisional pool is15 cases,including the earlier eight screening
+candidates. The seven new tasks contribute4 single-file repairs,1 genuine multi-file
+repair and2 authored audits,653 required reference identities and2 new per-file
+regression rejections. No full8/28/105 stages are frozen or adopted. Independent
+cohort curation, fresh applicable model-worker qualification, optional-use value
+and independent selection remain the critical path; resource acceptance is separate.
+
+Static source review covered49 issues from31 repositories and identified a second
+false multi-file label from attribute documentation strings. Original audits and
+failed inert drafts remain retained. Git-blob source scopes preserve selected code,
+licenses and assertions with exact omissions. A real SQL repair's whole-file JSON
+reference exceeds current artifact bounds despite a3700-byte published diff;
+transport-limit-finding.json records a proposed compact-patch direction,not savings.
+Evidence: reports/toolkit-v2/c13/repository-corpus-expansion-20261022/.

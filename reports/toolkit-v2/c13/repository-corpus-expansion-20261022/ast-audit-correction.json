@@ -1,0 +1,17 @@
+{
+  "reason": "The first AST pass removed leading module/class/function docstrings but not attribute documentation strings. V2 removes every side-effect-free standalone string expression. This corrects false multi-file counts; no subject execution or frozen stage changed.",
+  "changes": [
+    {
+      "case": "python-scim__scim2-models-120",
+      "v1_files": [
+        "scim2_models/attributes.py",
+        "scim2_models/messages/patch_op.py"
+      ],
+      "v2_files": [
+        "scim2_models/messages/patch_op.py"
+      ]
+    }
+  ],
+  "original_retained": "source-data-audit.json",
+  "current": "source-data-audit-v2.json"
+}

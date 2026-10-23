@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "authority": "September25/27 standing finite test-definition delegation; no new untrusted execution.",
+  "old_case_id": "serge-sans-paille__beniget-121-declared-tests",
+  "new_case_id": "serge-sans-paille__beniget-121-declared-tests-py313-truth",
+  "old_batch_result_changed": false,
+  "cases_file": ".aeep/repository-beniget-py313-truth-20261022/cases.json",
+  "cases_file_sha256": "44e913f20aa7debf5ce81decdb011b9453151910c8a89ad68211024ccac29f07",
+  "old_expected_bug_failures": 6,
+  "current_fail_to_pass": [
+    "tests/test_chains.py::TestDefUseChains::test_WindowsError_builtin_name",
+    "tests/test_chains.py::TestDefUseChainsStdlib::test_WindowsError_builtin_name",
+    "tests/test_chains.py::TestUseDefChainsStdlib::test_WindowsError_builtin_name"
+  ],
+  "moved_to_preservation": [
+    "tests/test_chains.py::TestDefUseChains::test_newer_Python_version_builtin_name",
+    "tests/test_chains.py::TestDefUseChainsStdlib::test_newer_Python_version_builtin_name",
+    "tests/test_chains.py::TestUseDefChainsStdlib::test_newer_Python_version_builtin_name"
+  ],
+  "required_identities_before": 422,
+  "required_identities_after": 422,
+  "assertions_source_image_observer_and_wheels_unchanged": true,
+  "physical_payload_proofs": [
+    {
+      "variant": "reference",
+      "unchanged_physical_payload_sha256": "7c2d4d4900de90dd908169d659a7cd918e866e02109262c1df72efc3581d5265",
+      "raw_observation": {
+        "name": "serge-sans-paille__beniget-121-declared-tests-reference",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-4",
+        "raw_file": "raw-observation-4.json",
+        "raw_sha256": "ebf62f87dfde84b3063e4d1b80fe6f5a4babcaf9c138e5d25f3ab5394f3a3b1c",
+        "execution_error_type": null
+      }
+    },
+    {
+      "variant": "counterexample",
+      "unchanged_physical_payload_sha256": "c478e28bd617532e9cd719a42222c6c377d33193e690a68ef42411093051b907",
+      "raw_observation": {
+        "name": "serge-sans-paille__beniget-121-declared-tests-counterexample",
+        "operation_id": "recipe_generation_20f7aff0eefd454f9f2f4a43fc353cc9-call-5",
+        "raw_file": "raw-observation-5.json",
+        "raw_sha256": "f9b9e63486ec46206b93f632dfbc1c677d7330b51915ffbe82c2885094261442",
+        "execution_error_type": null
+      }
+    }
+  ],
+  "grades": {
+    "reference": {
+      "kind": "callback",
+      "valid": true,
+      "quality_score": 1.0,
+      "detail": "",
+      "trust": "verified"
+    },
+    "counterexample": {
+      "kind": "callback",
+      "valid": false,
+      "quality_score": 0.0,
+      "detail": "test_failure",
+      "trust": "verified"
+    }
+  },
+  "new_external_calls": 0,
+  "new_model_turns": 0,
+  "new_canonical_execution_operations": 0,
+  "analysis_elapsed_seconds": 0.04846104187890887,
+  "analysis_scope": "Local first-party retained-data engineering check; no external source execution.",
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "qualification": false,
+  "comparative_usefulness": false,
+  "limitation": "Adapted task metadata/runtime reproduction only. No official benchmark result, frozen model holdout, admission, cost/savings or whole-project resource claim."
+}
