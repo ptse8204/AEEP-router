@@ -5421,3 +5421,45 @@ excluded development repositories,using optional candidate access and protected
 independent grading. Prepare a small exact execution review with fresh worker
 conformance. It cannot replace100-holdout qualification or the full usefulness/
 selection gates. Continue independent corpus work; no architecture change is needed.
+
+### C13: reservation preview underestimated wrapper margins
+
+A post-execution budget audit found a preview defect in38f87c22: the full bound
+used30 seconds per grader call instead of invoke's35-second reservation including
+its wrapper margin. The correct full97-call cap sum is3725 seconds; the review says
+3240. The87 executed operations' individual caps sum to3270. Preserve this mismatch
+and the immutable review. Actual charged time is211.08177674980834 seconds,with every
+operation completed within its individual cap. Counting all four maximum stage
+reservations simultaneously plus every final charge gives a conservative upper
+bound below3240,so no observed outstanding/charged balance exceeded that budget.
+This does not make the prospective preview correct. No usage counter or historical
+record was changed. Before further execution,compute timeout+5 bounds and enforce
+the exact review ceilings on every reservation. The evidence is
+repository-workload-batch-20261022/reservation-preview-correction.json.
+
+### D93 — Exercise the real repository path before further corpus expansion
+
+Prepare a six-turn development comparison on Loguru,Click and Marshmallow,using
+ordinary capable workers and optional Ponytail4.10.0. Reuse AssessmentService,
+BenchmarkRunner,the existing artifact transport,protected graders,collector and
+images. New core services and repeated unchanged package/source checks are not
+needed. All three repositories remain excluded from future holdouts.
+
+Review9f0bf880 binds184 assets and limits execution to6 turns,128 operations,
+10000 reserved seconds and0 cash. Fresh current-source worker/collector checks
+and independent grader validation precede tasks. The driver checks the exact
+review ceiling before every reservation,including timeout+5 margins. Preparation
+checked six archive bindings and seven guard cases without external execution.
+Actual exact approval remains necessary for untrusted execution and disclosure
+of these pinned public tasks to the existing destination. Routine deterministic
+definition compilation remains delegated. No architecture decision is needed.
+
+This is development engineering evidence,not a timing pilot,formal qualification,
+full usefulness study,selection validation or admission. Task errors remain errors;
+optional loading and missing metrics remain explicit. Three pairs cannot establish
+a material benefit. Keep the35-case provisional corpus and all historical failed
+observations independent. See repository-model-journey-20261022/README.md.
+
+Preparation documentation lint passed on69 active files with0 issues. Full offline
+link checking is not repeated under a terminal older execution approval; prior
+completed source/wheel/docs results retain their original artifact bindings.

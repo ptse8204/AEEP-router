@@ -1,0 +1,22 @@
+{
+  "problem": "The prospective ceiling incorrectly used30 seconds per grader call,omitting invoke's5-second reservation wrapper. The immutable review and actual ledgers are preserved.",
+  "review_sha256": "38f87c22d21c564aa35dd9b9a05efec6657dd658bfddfe6ee3e74fcfbb35d3de",
+  "stated_maximum_reserved_seconds": 3240,
+  "correct_full_97_call_reservation_cap_sum": 3725,
+  "sum_of_87_actual_operation_reservation_caps": 3270.0,
+  "actual_charged_elapsed_seconds": 211.08177674980834,
+  "per_stage_maximum_reservation_seconds": {
+    "repository_curated_reproduction_setup": 30.0,
+    "repository_curated_reproduction_analysis": 120.0,
+    "repository_runtime_image_build": 180.0,
+    "repository_curated_reproduction": 35.0
+  },
+  "conservative_outstanding_plus_actual_upper_bound_seconds": 576.0817767498083,
+  "outstanding_upper_bound_basis": "Drivers await one build,one setup,one analysis and one contained call at a time. Counting all four stage maxima simultaneously plus every final charge overestimates any possible point-in-time balance.",
+  "observed_usage_and_outstanding_reservations_within_approved_seconds": true,
+  "each_operation_completed_within_its_own_reservation": true,
+  "maximum_operations_not_exceeded": true,
+  "no_extra_models_or_cash": true,
+  "not_a_retroactive_review_amendment": true,
+  "future_fix": "Compute full bounds using timeout+5 and wrap all future reserve calls with the exact operation/turn/time ceilings before any dispatch. No retries or counter changes."
+}

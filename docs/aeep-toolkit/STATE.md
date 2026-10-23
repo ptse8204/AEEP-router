@@ -45,10 +45,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '518b003'
+last_verified_commit: 'f5dbf19'
 last_check_command: 'repository-workload-batch-20261022/execution-result.json; runtime-execution/completion-audit.json; recovered-single-file-cases.json; exclusions.json; provisional-pool.json'
 last_check_result: 'Approved38f87c22 completed once:14-wheel image324a1fee built offline;fresh3probes passed;15of22tasks reproduced;84 receipts/attempts reopened,owned containers absent.87operations/211.08177674980834seconds charged. Seven exclusions preserved. Two historical single-file cases regraded on identical payloads without replay. Pool35cases/20repos,12single18multi5audit,2257required identities. Grant13015operations,3744turns,118582.60553521616seconds,0cash. Product source59b9 unchanged;full source/wheel/docs checks remain passed.'
-next_action: 'Do not replay terminal38f87c22 or source session5348. Read repository-workload-batch-20261022/README.md,exclusions.json and provisional-pool.json. Prepare a small exact real-model repository development journey on Loguru/Click/Marshmallow,with optional Ponytail and fresh current-source worker/artifact/capture conformance,using existing engine and images. This is engineering development evidence only,not formal qualification/admission or a substitute for full8/28/105 cohorts. Actual model/untrusted execution needs specific authority. Meanwhile continue independent corpus/source preparation; no broad package/docs rerun or architecture decision needed.'
+next_action: 'Read repository-model-journey-20261022/README.md and operation-review.json SHA9f0bf880. Fresh two-worker conformance and at most6 public development-task turns need actual exact approval; preparation passed without workers/models. Record the actual response once,inspect execution markers,and run run-review.py once only if approved. Preserve every charge and stop on common uncertainty. Do not replay terminal38f87c22 or source session5348. Continue independent corpus/source preparation; no broad package/docs rerun or architecture decision needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
@@ -3279,3 +3279,37 @@ excluded development repositories,using optional candidate access and protected
 independent grading. Prepare a small exact execution review with fresh worker
 conformance. It cannot replace100-holdout qualification or the full usefulness/
 selection gates. Continue independent corpus work; no architecture change is needed.
+
+## C13 prospective reservation preview correction
+
+A post-execution budget audit found a preview defect in38f87c22: the full bound
+used30 seconds per grader call instead of invoke's35-second reservation including
+its wrapper margin. The correct full97-call cap sum is3725 seconds; the review says
+3240. The87 executed operations' individual caps sum to3270. Preserve this mismatch
+and the immutable review. Actual charged time is211.08177674980834 seconds,with every
+operation completed within its individual cap. Counting all four maximum stage
+reservations simultaneously plus every final charge gives a conservative upper
+bound below3240,so no observed outstanding/charged balance exceeded that budget.
+This does not make the prospective preview correct. No usage counter or historical
+record was changed. Before further execution,compute timeout+5 bounds and enforce
+the exact review ceilings on every reservation. The evidence is
+repository-workload-batch-20261022/reservation-preview-correction.json.
+
+## C13: prepared real-agent repository development journey
+
+Review9f0bf880 is prepared, not approved or executed. It binds184 assets on source
+59b9d61c and reuses the two existing model images, collector, proxy and retained
+324a1fee grader image. Three already excluded development repositories each run
+once with the ordinary agent and once with optional Ponytail4.10.0. Fresh11-group
+worker conformance and actual collector denial must pass before the normal grader
+validation and at most6 task turns. Exact ceilings are128 operations,10000 reserved
+seconds and0 cash; every reservation includes wrapper margins and is checked
+against the review's persisted initial counters. Seven guard cases and six inert
+archive/route bindings passed. Synthetic boundary fixtures are not conformance.
+No worker, model, service or new external execution was started in preparation.
+
+The next intervention is approval of this exact public-data execution envelope,
+not an architecture decision. Full8/28/105 stages,usefulness,selection,concrete
+human controls,resource acceptance and release remain open. Source verification,
+wheel and offline docs evidence remain applicable to unchanged product bytes.
+See reports/toolkit-v2/c13/repository-model-journey-20261022/README.md.
