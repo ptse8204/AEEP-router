@@ -1,0 +1,96 @@
+{
+  "schema_version": "aeep.operator-review-bundle.v1",
+  "source_commit": "2e64701b5cf4680fee52f66aaa8d851e140e2c67",
+  "source_digest": "59b9d61c8af596b9c8e1ce63b842754e76152811f74f4b1fb0a13e5753a52269",
+  "runner_sha256": "cd4f8c61450b641aba798041526ff28a75cbae4b9eb73ef2f796a357b52af729",
+  "actions": [
+    {
+      "name": "runtime",
+      "review": "reports/toolkit-v2/c13/repository-compact-patches-20261022/operation-review.json",
+      "review_sha256": "ae4ab2f0f8daec816a23490c4f05f80b179abdc0c7875c5be1dbf4ef8895cc37",
+      "runner": "reports/toolkit-v2/c13/repository-compact-patches-20261022/run-reviewed-runtime.py",
+      "runner_sha256": "28b4443193f561b6a014d949aa07680547faa89020eed6af3a7100004da0b320",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-compact-patches-20261022/run-reviewed-runtime.py",
+        "ae4ab2f0f8daec816a23490c4f05f80b179abdc0c7875c5be1dbf4ef8895cc37"
+      ],
+      "approval_record": "reports/toolkit-v2/c13/repository-compact-patches-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/c13/repository-compact-patches-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/c13/repository-compact-patches-20261022/completion-audit.json",
+      "maximum_seconds": 1100,
+      "pass_conditions": {
+        "batch_completed": true,
+        "physical_receipt_integrity_passed": true,
+        "all_owned_containers_absent": true,
+        "source_unchanged": true,
+        "eligible_cases": [
+          "tobymao__sqlglot-4643-declared-tests",
+          "tobymao__sqlglot-5256-declared-tests",
+          "fabfuel__circuitbreaker-67-declared-tests",
+          "tobymao__sqlglot-6374-declared-tests",
+          "tobymao__sqlglot-7479-declared-tests"
+        ]
+      }
+    },
+    {
+      "name": "package",
+      "review": "reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/operation-review.json",
+      "review_sha256": "f63e74cb8f7104bde0e2c8aff98a50cf12dcbace82ec926056fb5b3fc97ac639",
+      "runner": "reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/run_review.py",
+      "runner_sha256": "c3e5032bb0065d1edec96002f360818b43598fec3afd370a5600c3af7e6ee3fb",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/run_review.py",
+        "--execute-reviewed-digest",
+        "4f688f4acc168b18c09ad650857da0d6a0a80f942e58d73fc603fb6fc2ce0cca"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/package-review-compact-patches-20261022/execution/summary.json",
+      "maximum_seconds": 1500,
+      "pass_conditions": {
+        "installed_cli_checks": 18,
+        "installed_capture_checks": 1,
+        "dependency_downloaded_bytes": 0,
+        "runtime_removed": true,
+        "private_scratch_removed": true,
+        "model_calls": 0
+      }
+    },
+    {
+      "name": "docs",
+      "review": "reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/operation-review.json",
+      "review_sha256": "1a049b5dd779989536aeed9b14fe9f0fe8a4940c7c91f36b77e32351432f9b09",
+      "runner": "reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/run-review.py",
+      "runner_sha256": "c85b7c2369ef32a8153910e69b27be2ca0717f25fa9ecb8801499a9a0d103f63",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/run-review.py",
+        "1a049b5dd779989536aeed9b14fe9f0fe8a4940c7c91f36b77e32351432f9b09"
+      ],
+      "approval_record": "reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/operator-approval.json",
+      "started_marker": "reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/execution-started.json",
+      "terminal_result": "reports/toolkit-v2/integration-completion/lychee-compact-patches-review-20261022/execution-result.json",
+      "maximum_seconds": 240,
+      "pass_conditions": {
+        "passed": true,
+        "immutable_runtime_unchanged": true,
+        "runtime_removed": true
+      }
+    }
+  ],
+  "purpose": "Verify compact repository patch transport on real source, then the changed installed wheel and offline docs. No model or capability-value claim.",
+  "permissions": "At most22 offline calls on the existing pinned image:3 fresh boundary/state/runtime probes,4 SQL reference/original pairs,9 per-file regressions,and1 Circuitbreaker reference/original pair with explicit existing mocker/asyncio plugins. At most24 existing-grant operations/920 reserved grader seconds. Separately install the new exact AEEP wheel with32 unchanged cached dependencies in a private runtime for19 installed checks,including compact-output CLI export and a large first-party codec fixture. Run cached Lychee0.24.2 offline docs verification. No downloads,image changes/builds/pulls,new dependencies,models,credentials,cash,activation or release.",
+  "cleanup": "Remove only new attempt-owned containers and unchanged new installed/runtime/scratch resources. Preserve caches,failures,receipts,grant counters,all images/volumes,backups and unrelated work.",
+  "approval_rule": "One exact human approval covers these three raw component digests,one attempt each. No replay of a started component. Independent package/docs actions continue after an isolated grader failure,with all source/artifact checks intact.",
+  "approval_reason": "The user continuation excludes untrusted software execution and CONTINUATION.md requires applicable container-provisioning authority. Terminalab120327 and038b2af9 bind older software/artifacts,so they do not cover this changed source/wheel. Definition and scope preparation use standing finite delegation. No architecture decision is needed.",
+  "evidence_limits": [
+    "All13 configured Python checks pass on source59b9d61c:1676 tests per full run,21 skips,82% coverage,both gates.53 focused tests,exact legacy definition proofs,current offline CI proof and69-document lint pass.",
+    "The optional DSH Node runtime check remains blocked by missing @deepseek-ai/dsh-llm;12 independent Node tests passed. This bundle installs no npm packages and does not qualify that runtime.",
+    "The earlier15-case pool retains sourcef694024c evidence. Five prepared v3 tasks do not freeze8/28/105 or prove model qualification,usefulness,selection quality,resource acceptance or release.",
+    "Standard-library gzip is already used for source archives. Artifact bytes do not establish token,time,memory or cash savings. No scientific threshold changes."
+  ],
+  "approved": false,
+  "execution_started": false
+}

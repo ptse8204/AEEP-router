@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: compact repository patch transport passed source verification. Current-source contained, installed-wheel and offline docs checks are prepared for exact execution review; earlier15-case runtime evidence keeps its old source binding.**
+**Status as of 2026-10-22: the approved compact-patch bundle completed. Four repository cases reproduced; SQLglot7479 is excluded. Current-source containment, installed-wheel19 checks and offline docs passed. The consolidated18-case provisional pool preserves each source binding; full8/28/105 stages are not frozen.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -42,16 +42,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'a6ed14a'
-last_check_command: 'repository-compact-patches-20261022/validation/source-stability.json; legacy-stability.json; static-audit.json; ci-router-proof-current-summary.json; docs-lint.log; node-integration.log'
-last_check_result: 'Source59b9d61c8af596b9c8e1ce63b842754e76152811f74f4b1fb0a13e5753a52269 passes all13 configured checks without drift:1676 tests per full run,21 skips,82% coverage,both gates,Ruff,layering,mypy,builds. Legacy v1/v2 case/truth/recipe digests equal.53 focused tests pass. Offline CI proof passes after one audited stale index binding refresh; old proof/lock retained. Node12 independent tests pass;runtime.test.mjs cannot load @deepseek-ai/dsh-llm. No npm install. Five compact cases/19 variants are static only;fresh3 probes mandatory. Current-source runtime/wheel/docs execution unstarted;exact combined review being prepared. No code change or broad rerun needed. Grant unchanged12907operations,3744turns,118324.18488700828seconds,0.0cash.'
-next_action: 'Session5348 completed all13 source commands; do not replay. Read repository-compact-patches-20261022/README.md and static-audit.json. Finish/commit exact combined runtime/current-wheel/docs review,then request only that concrete untrusted execution/installation approval. Runtime componentae4ab2f0 is unstarted:3 fresh probes plus19 variants,max24operations/920reservedseconds,on unchanged image. Full independent cohorts remain unfrozen;continue curation after current-source runtime proof. DSH Node dependency gap,human controls,resource acceptance and release remain separately open.'
+last_verified_commit: '2e64701'
+last_check_command: 'repository-compact-patches-20261022/bundle-execution-result.json; completion-audit.json; provisional-pool.json; package-review-compact-patches-20261022/execution/summary.json; lychee-compact-patches-review-20261022/execution-result.json'
+last_check_result: 'Approved31c5138d bundle completed once: runtime4of5 cases reproduced,19 canonical attempts/receipts reopened,21operations and47.338871458079666seconds charged,all owned containers absent. SQL7479 reference exit2,collection ERROR,required identities missing; no detailed exception retained. Installed wheel19 checks and offline docs passed;private runtimes/scratch removed. Consolidated18 unique snapshots:8single,6multi,4audit,975required identities;4 current-source records,14 old bindings retained. Grant12928operations,3744turns,118371.52375846636seconds,0cash. Source59b9 unchanged;all13 checks remain passed. No model/release evidence.'
+next_action: 'Do not replay terminal bundle31c5138d or source session5348. Read repository-compact-patches-20261022/provisional-pool.json. Continue larger independent source/license/dependency curation and prepare one finite external-runtime review. No package/docs repeat needed on unchanged source. Freeze full8/28/105 grouped cohorts before model qualification/value/selection. DSH optional npm gap,human controls,resource acceptance and release remain separate.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
   - 'None for completed7bbc9678: actual approval exercised once; all4 observations passed,6operations charged and all owned containers absent. No future source/model execution, build, install or replay is authorized by this terminal review.'
   - 'None for completed4cfc412d: actual approval exercised once; six cases reproduced, two excluded, all14 physical attempts/receipts reopened and owned containers absent. Its two unstarted negative slots cannot be reused. No model/install/future-source authority transfers.'
@@ -3172,3 +3173,28 @@ in this source work. Exact combined runtime/current-wheel/docs authority is bein
 prepared. Full8/28/105 stages,value,selection,human controls,resource acceptance
 and release remain separate. Latest canonical grant remains12907 operations,
 3744 turns,118324.18488700828 seconds and0.0 cash.
+
+## C13 compact-patch bundle completed
+
+Actual approval31c5138d executed the compact bundle once on source59b9d61c.
+Four cases reproduced: SQLglot4643,5256,6374 and Circuitbreaker67. Seven SQL
+per-file regressions were rejected. SQLglot7479 reference exited2 with a collection
+ERROR and missing required identities; detailed exceptions were not retained.
+It stays excluded and its three later variants were not dispatched. This isolated
+failure did not prevent the installed wheel19 checks and offline docs from passing.
+Both private runtimes and package scratch were removed after unchanged checks.
+
+Nineteen physical attempts/receipts were reopened and all owned containers were
+absent. Twenty-one operations charged47.338871458079666 seconds. Grant counters
+are12928 operations,3744 turns,118371.52375846636 seconds and0.0 cash. Three fresh
+source-bound containment/state/runtime probes passed. No model or cash delta;
+no broad source,package or docs rerun is needed on unchanged artifacts.
+
+The consolidated pool has18 distinct snapshots from16 repositories:8 single-file,
+6 multi-file and4 authored audits,975 required reference identities. SQL5256 is
+counted once using its newly reproduced v3 record. Four records carry current
+source59b9d61c;14 retain earlier bindings. No conformance transfers to those records.
+No full8/28/105 stages are frozen or adopted. Qualification, optional-use value,
+independent selection, human controls, resource acceptance and release remain open.
+Next work expands the corpus with one finite runtime review; it needs no architecture
+choice or package/docs repeat. Evidence: reports/toolkit-v2/c13/repository-compact-patches-20261022/.

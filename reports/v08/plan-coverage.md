@@ -5319,3 +5319,28 @@ in this source work. Exact combined runtime/current-wheel/docs authority is bein
 prepared. Full8/28/105 stages,value,selection,human controls,resource acceptance
 and release remain separate. Latest canonical grant remains12907 operations,
 3744 turns,118324.18488700828 seconds and0.0 cash.
+
+### C13: compact bundle completed; corpus expansion is the critical path
+
+Actual approval31c5138d executed the compact bundle once on source59b9d61c.
+Four cases reproduced: SQLglot4643,5256,6374 and Circuitbreaker67. Seven SQL
+per-file regressions were rejected. SQLglot7479 reference exited2 with a collection
+ERROR and missing required identities; detailed exceptions were not retained.
+It stays excluded and its three later variants were not dispatched. This isolated
+failure did not prevent the installed wheel19 checks and offline docs from passing.
+Both private runtimes and package scratch were removed after unchanged checks.
+
+Nineteen physical attempts/receipts were reopened and all owned containers were
+absent. Twenty-one operations charged47.338871458079666 seconds. Grant counters
+are12928 operations,3744 turns,118371.52375846636 seconds and0.0 cash. Three fresh
+source-bound containment/state/runtime probes passed. No model or cash delta;
+no broad source,package or docs rerun is needed on unchanged artifacts.
+
+The consolidated pool has18 distinct snapshots from16 repositories:8 single-file,
+6 multi-file and4 authored audits,975 required reference identities. SQL5256 is
+counted once using its newly reproduced v3 record. Four records carry current
+source59b9d61c;14 retain earlier bindings. No conformance transfers to those records.
+No full8/28/105 stages are frozen or adopted. Qualification, optional-use value,
+independent selection, human controls, resource acceptance and release remain open.
+Next work expands the corpus with one finite runtime review; it needs no architecture
+choice or package/docs repeat. Evidence: reports/toolkit-v2/c13/repository-compact-patches-20261022/.
