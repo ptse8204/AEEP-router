@@ -1,0 +1,65 @@
+{
+  "source_cases_file": ".aeep/repository-provisional-pool-after-batch-20261022/cases.json",
+  "source_cases_sha256": "93b52723d3965fd604c6a2ad2fd1f14d4bc6b598d82a8483cf28878e22a89676",
+  "case_count": 35,
+  "repository_count": 20,
+  "family_counts": {
+    "single-file-repair": 12,
+    "contract-audit": 5,
+    "multi-file-repair": 18
+  },
+  "origin_counts": {
+    "upstream_issue": 30,
+    "authored_control": 5
+  },
+  "distinct_repository_revision_issue_keys": 35,
+  "repository_case_counts": {
+    "https://github.com/tobymao/sqlglot": 14,
+    "https://github.com/python-scim/scim2-models": 3,
+    "https://github.com/matthewwithanm/python-markdownify": 1,
+    "https://github.com/Python-Markdown/markdown": 1,
+    "https://github.com/MahjongRepository/mahjong": 1,
+    "https://github.com/spulec/freezegun": 1,
+    "https://github.com/AbsaOSS/generate-release-notes": 1,
+    "https://github.com/iluvcapra/pycmx": 1,
+    "https://github.com/gerlero/foamlib": 1,
+    "https://github.com/oOo0oOo/leanclient": 1,
+    "https://github.com/jpadilla/pyjwt": 1,
+    "https://github.com/sciunto-org/python-bibtexparser": 1,
+    "https://github.com/joke2k/django-environ": 1,
+    "https://github.com/scitokens/scitokens": 1,
+    "https://github.com/gidgethub/gidgethub": 1,
+    "https://github.com/serge-sans-paille/beniget": 1,
+    "https://github.com/fabfuel/circuitbreaker": 1,
+    "https://github.com/fox-it/dissect.cstruct": 1,
+    "https://github.com/kaste/mockito-python": 1,
+    "https://github.com/hynek/svcs": 1
+  },
+  "largest_repository_case_fraction": 0.4,
+  "largest_repository_case_count": 14,
+  "case_targets_total": {
+    "single-file-repair": 47,
+    "contract-audit": 47,
+    "multi-file-repair": 47
+  },
+  "missing_cases_by_family": {
+    "single-file-repair": 35,
+    "contract-audit": 42,
+    "multi-file-repair": 29
+  },
+  "missing_total": 106,
+  "actual_stage_assignment": null,
+  "stages_frozen": false,
+  "cases_newly_adopted": 0,
+  "models_or_workers_started": 0,
+  "qualification_or_value_claim": false,
+  "selection_usefulness_labels_inferred_from_reproduction": false,
+  "findings": [
+    "Fourteen of35 candidates share SQLglot:40 percent of the current pool. Different snapshots are not independent repositories.",
+    "Keep each repository group within one stage; do not allocate issues from the same repository to screening,training and holdout.",
+    "Future additions should prioritize independent single-file and audit workloads. More SQLglot issues alone cannot address missing task families or establish broad usefulness.",
+    "Reproduced reference repairs validate graders,not candidate usefulness. Known useful and non-useful selection labels must come from independent applicable comparisons,never from the selection task outcome itself.",
+    "These are Python repository tasks. Other languages,arbitrary repositories and production resource acceptance remain unproven."
+  ],
+  "next_safe_work": "Inspect pinned metadata/source/dependency and license scope for new repository groups before any further untrusted execution. Do not curate using model outcomes or duplicate tasks under new names."
+}

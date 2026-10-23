@@ -72,6 +72,12 @@ independent. Full balanced8/28/105 stages still need106 additional cases and are
 not frozen. Human control discovery, workload-derived resource acceptance and
 release remain open.
 
+The read-only [pool audit](pool-representativeness.json) found30 upstream issues
+and five authored controls. Fourteen cases are SQLglot issues:40% of this pool.
+Repository groups must stay within a single stage. Prioritize other repositories,
+single-file repairs and audits; adding more SQLglot cases alone cannot establish
+broad usefulness. Independent comparative evidence must supply selection labels.
+
 After checking for existing execution markers and recording the actual exact
 human approval, run once from the repository root:
 

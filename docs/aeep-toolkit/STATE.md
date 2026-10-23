@@ -45,7 +45,7 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'f5dbf19'
+last_verified_commit: '350737f'
 last_check_command: 'repository-workload-batch-20261022/execution-result.json; runtime-execution/completion-audit.json; recovered-single-file-cases.json; exclusions.json; provisional-pool.json'
 last_check_result: 'Approved38f87c22 completed once:14-wheel image324a1fee built offline;fresh3probes passed;15of22tasks reproduced;84 receipts/attempts reopened,owned containers absent.87operations/211.08177674980834seconds charged. Seven exclusions preserved. Two historical single-file cases regraded on identical payloads without replay. Pool35cases/20repos,12single18multi5audit,2257required identities. Grant13015operations,3744turns,118582.60553521616seconds,0cash. Product source59b9 unchanged;full source/wheel/docs checks remain passed.'
 next_action: 'Read repository-model-journey-20261022/README.md and operation-review.json SHA9f0bf880. Fresh two-worker conformance and at most6 public development-task turns need actual exact approval; preparation passed without workers/models. Record the actual response once,inspect execution markers,and run run-review.py once only if approved. Preserve every charge and stop on common uncertainty. Do not replay terminal38f87c22 or source session5348. Continue independent corpus/source preparation; no broad package/docs rerun or architecture decision needed.'
@@ -3313,3 +3313,11 @@ not an architecture decision. Full8/28/105 stages,usefulness,selection,concrete
 human controls,resource acceptance and release remain open. Source verification,
 wheel and offline docs evidence remain applicable to unchanged product bytes.
 See reports/toolkit-v2/c13/repository-model-journey-20261022/README.md.
+
+The subsequent read-only pool audit found30 upstream issues and5 authored controls.
+Fourteen of35 cases are SQLglot issues(40%). All35 repository/revision/issue keys
+are distinct,but repository groups are not independent cases across stages.
+Prioritize other repositories and the missing35 single-file,29 multi-file and42
+audit cases; do not duplicate tasks or curate using model outcomes. No stages were
+assigned,no cases adopted,and no usefulness/selection label was inferred.
+See repository-model-journey-20261022/pool-representativeness.json.

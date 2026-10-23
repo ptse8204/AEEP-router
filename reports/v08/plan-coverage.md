@@ -5463,3 +5463,11 @@ observations independent. See repository-model-journey-20261022/README.md.
 Preparation documentation lint passed on69 active files with0 issues. Full offline
 link checking is not repeated under a terminal older execution approval; prior
 completed source/wheel/docs results retain their original artifact bindings.
+
+The subsequent read-only pool audit found30 upstream issues and5 authored controls.
+Fourteen of35 cases are SQLglot issues(40%). All35 repository/revision/issue keys
+are distinct,but repository groups are not independent cases across stages.
+Prioritize other repositories and the missing35 single-file,29 multi-file and42
+audit cases; do not duplicate tasks or curate using model outcomes. No stages were
+assigned,no cases adopted,and no usefulness/selection label was inferred.
+See repository-model-journey-20261022/pool-representativeness.json.
