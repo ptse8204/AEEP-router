@@ -1170,3 +1170,26 @@ continue after verified accounting and cleanup. Common authority, identity or
 lifecycle uncertainty stops dispatch. New third-party execution awaits its exact
 approval. No model, corpus adoption, value label, selection claim or resource
 acceptance follows from static preparation or reference reproduction.
+
+### D83 : preserve workload exclusions; fix explicit plugin support
+
+Approved batch4cfc412d completed fourteen calls and sixteen canonical operations.
+Six cases reproduced, two references failed and their negatives were skipped.
+All fourteen completed attempts/receipts were reopened and containers absent.
+Charges are24.288069125264883 seconds, zero models and cash; sourcefcd91dde was
+unchanged. Exact results are in the screening-curation completion audit.
+
+Files-to-prompt has an incompatible Click test option; Jsonpickle requires absent
+Ruff plugin identities. Preserve both exclusions and frozen test sets. No retry
+or positive value/selection claim follows. Later review48fa60c0 is withdrawn
+before execution: Py3status's three changed Python files include two docstring-only
+changes. Metadata file counts do not verify multi-file complexity. The source-body
+AST audit and withdrawal are retained in repository-workload-expansion-20261022.
+
+The next genuine multi-file candidate needs pytest-mock, while the current
+observer disables autoload and cannot declare a reviewed plugin. Add explicit,
+versioned plugin support to the existing protected grader, preserve v1 meanings
+and observer bytes, then verify changed source and prepare a corrected exact
+runtime review. Full independent cohorts, model qualification, usefulness and
+selection remain unproven. Human controls, resource acceptance and release remain
+separate; no new third-party execution or installation is authorized.

@@ -1,0 +1,111 @@
+{
+  "prepared_cases": 2,
+  "cases": [
+    {
+      "id": "AbsaOSS__generate-release-notes-207",
+      "original_issue_id": "AbsaOSS__generate-release-notes-207",
+      "repository": "AbsaOSS/generate-release-notes",
+      "source_revision": "dcf920a9f86605820ee5304dccb9ace9bf7b26e9",
+      "origin_kind": "upstream_issue",
+      "family": "multi-file-repair",
+      "declared_python": "3.12",
+      "adapted_python": "3.13",
+      "source_sha256": "38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d",
+      "source_bytes": 161320,
+      "editable_paths": 38,
+      "reference_changes": [
+        "release_notes_generator/record/factory/default_record_factory.py",
+        "release_notes_generator/utils/pull_request_utils.py"
+      ],
+      "omitted_non_source_edits": [
+        "DEVELOPER.md"
+      ],
+      "required_bug_tests": 14,
+      "preservation_tests": 10,
+      "wheels": 4,
+      "license": "Apache-2.0",
+      "license_records": [
+        {
+          "file": "LICENSE",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "original_issue_id": "iluvcapra__pycmx-12",
+      "repository": "iluvcapra/pycmx",
+      "source_revision": "b6379ec1fe7c300ec1c18a3ef0c2c680e65007c8",
+      "origin_kind": "authored_control",
+      "family": "contract-audit",
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "source_sha256": "314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975",
+      "source_bytes": 183410,
+      "editable_paths": 9,
+      "reference_changes": [
+        "pycmx/parse_cmx_statements.py"
+      ],
+      "omitted_non_source_edits": [
+        "README.md"
+      ],
+      "required_bug_tests": 0,
+      "preservation_tests": 10,
+      "wheels": 4,
+      "license": "MIT",
+      "license_records": [
+        {
+          "file": "LICENSE",
+          "bytes": 1056,
+          "sha256": "252d3ced9165a06695ecb1f281e51a5e64fe7c62f1d15177d16eb6c034cb4427"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "AbsaOSS__generate-release-notes-207",
+      "variant": "reference",
+      "payload": ".aeep/repository-replacement-runtime-20261022-cases/protected/AbsaOSS__generate-release-notes-207-reference-payload.json",
+      "sha256": "d04e3631224d51a1b5d6fd11be1ee1071753a3222a4687171e7cc14b2befdd00",
+      "bytes": 798403
+    },
+    {
+      "case": "AbsaOSS__generate-release-notes-207",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-replacement-runtime-20261022-cases/protected/AbsaOSS__generate-release-notes-207-counterexample-payload.json",
+      "sha256": "2a6c9e5950083c467d53d87f35c30f0f1b942453065e184223f56dc69360e511",
+      "bytes": 798231
+    },
+    {
+      "case": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-replacement-runtime-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-reference-payload.json",
+      "sha256": "1992a3d7b42b0183c1b6053f48a8a3b16fc320916a21816195e03c2379ba66cd",
+      "bytes": 828598
+    },
+    {
+      "case": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-replacement-runtime-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-counterexample-payload.json",
+      "sha256": "fa8a50362e12adbb8afe6170dbab5e42d4b7089d82706eee88572914067b78b7",
+      "bytes": 828534
+    }
+  ],
+  "cases_file": ".aeep/repository-replacement-runtime-20261022-cases/protected/cases.json",
+  "cases_file_sha256": "a153048928daa11168ef8a30ae2f559803debb40b07d7b7ffb32fc8d87267efc",
+  "variants_file": ".aeep/repository-replacement-runtime-20261022-cases/protected/variants.json",
+  "cases_adopted": 0,
+  "frozen_holdouts": 0,
+  "external_code_executed": false,
+  "model_turns": 0,
+  "containers_started": 0,
+  "candidate_grades_returned": 0,
+  "independence": "Two replacement candidates from different repositories. All four earlier development repositories and all eight earlier screening repositories excluded. No final stage freeze or model outcome selection."
+}

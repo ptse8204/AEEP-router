@@ -1,0 +1,25 @@
+{
+  "files_to_prompt": {
+    "observed": "Reference invalid/test_failure; test_binary_file_warning FAILED,18 other required tests PASSED. Negative not dispatched.",
+    "static_incompatibility": "The upstream test passes mix_stderr=False to CliRunner; the exact Click8.3.2 constructor accepts no such keyword or **kwargs.",
+    "wheel_sha256": "1924d2c27c5653561cd2cae4548d1406039cb79b858b747cfea24924bbc1616d",
+    "constructor_parameters": [
+      "self",
+      "charset",
+      "env",
+      "echo_stdin",
+      "catch_exceptions"
+    ],
+    "test_source_sha256": "ba616f103ef4546ad53df526f6e4e1ddbe52ca07493968081e583374cd5fde2d",
+    "diagnosis_kind": "Static incompatible signature plus observed test failure; no traceback retained and no new execution.",
+    "action": "Exclude this adaptation. Do not change the test, install another runtime or retry under the terminal approval."
+  },
+  "jsonpickle": {
+    "observed": "Reference pytest exit0 and80 PASSED statuses, but two required pseudo-test identities absent: tests/handler_test.py::ruff and tests/object_test.py::ruff. AEEP invalid/missing_test. Negative not dispatched.",
+    "static_cause": "The upstream required set includes Ruff plugin checks. The reviewed observer disables automatic plugin loading; its runtime contains no pytest-ruff or pytest-enabler. pyproject config declares tool.pytest-enabler.ruff, but that cannot supply the absent plugin.",
+    "action": "Exclude this adaptation. Keep all required identities frozen; do not remove lint identities or silently enable/install plugins to turn this result into PASS."
+  },
+  "authority": "No new external execution. Read-only static source/config/wheel inspection only.",
+  "original_attempt_preserved": true,
+  "remaining_unused_call_slots_are_not_reusable": true
+}

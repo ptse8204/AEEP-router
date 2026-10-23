@@ -1,0 +1,110 @@
+{
+  "prepared_cases": 2,
+  "cases": [
+    {
+      "id": "ultrabug__py3status-2286",
+      "original_issue_id": "ultrabug__py3status-2286",
+      "repository": "ultrabug/py3status",
+      "source_revision": "51eb2dfe4fba47ebe2f754beb051fbdb194c5d3a",
+      "origin_kind": "upstream_issue",
+      "family": "multi-file-repair",
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "source_sha256": "4c061727113b59e381e0397770e6492e57100e3ea31e3d077700403dcbf5011b",
+      "source_bytes": 447512,
+      "editable_paths": 139,
+      "reference_changes": [
+        "py3status/core.py",
+        "py3status/modules/kdeconnector.py",
+        "py3status/modules/mail.py"
+      ],
+      "omitted_non_source_edits": [],
+      "required_bug_tests": 1,
+      "preservation_tests": 1,
+      "wheels": 4,
+      "license": "BSD-3-Clause",
+      "license_records": [
+        {
+          "file": "LICENSE",
+          "bytes": 1523,
+          "sha256": "2cc7ac762d0bf2c5d022701fe257e0d8d4fa789ea8a760d2ee303070a43b014e"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "original_issue_id": "iluvcapra__pycmx-12",
+      "repository": "iluvcapra/pycmx",
+      "source_revision": "b6379ec1fe7c300ec1c18a3ef0c2c680e65007c8",
+      "origin_kind": "authored_control",
+      "family": "contract-audit",
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "source_sha256": "314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975",
+      "source_bytes": 183410,
+      "editable_paths": 9,
+      "reference_changes": [
+        "pycmx/parse_cmx_statements.py"
+      ],
+      "omitted_non_source_edits": [
+        "README.md"
+      ],
+      "required_bug_tests": 0,
+      "preservation_tests": 10,
+      "wheels": 4,
+      "license": "MIT",
+      "license_records": [
+        {
+          "file": "LICENSE",
+          "bytes": 1056,
+          "sha256": "252d3ced9165a06695ecb1f281e51a5e64fe7c62f1d15177d16eb6c034cb4427"
+        }
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "ultrabug__py3status-2286",
+      "variant": "reference",
+      "payload": ".aeep/repository-workload-expansion-20261022-cases/protected/ultrabug__py3status-2286-reference-payload.json",
+      "sha256": "08e1b6a9f75c4263b9c45018e0a6a69ca9d5ac49928aa4a25b419bcb85808427",
+      "bytes": 1179859
+    },
+    {
+      "case": "ultrabug__py3status-2286",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-workload-expansion-20261022-cases/protected/ultrabug__py3status-2286-counterexample-payload.json",
+      "sha256": "c1944363a8b92c3618fcda5386af2552b198ec12df504de90bd93cff905d0c5a",
+      "bytes": 1179747
+    },
+    {
+      "case": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-workload-expansion-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-reference-payload.json",
+      "sha256": "1992a3d7b42b0183c1b6053f48a8a3b16fc320916a21816195e03c2379ba66cd",
+      "bytes": 828598
+    },
+    {
+      "case": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-workload-expansion-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-counterexample-payload.json",
+      "sha256": "fa8a50362e12adbb8afe6170dbab5e42d4b7089d82706eee88572914067b78b7",
+      "bytes": 828534
+    }
+  ],
+  "cases_file": ".aeep/repository-workload-expansion-20261022-cases/protected/cases.json",
+  "cases_file_sha256": "cf76149abe58976c9628e15755f44b3e9db82048c041243818bd9741ec599c61",
+  "variants_file": ".aeep/repository-workload-expansion-20261022-cases/protected/variants.json",
+  "cases_adopted": 0,
+  "frozen_holdouts": 0,
+  "external_code_executed": false,
+  "model_turns": 0,
+  "containers_started": 0,
+  "candidate_grades_returned": 0,
+  "independence": "Two replacement candidates from different repositories. All four earlier development repositories and all eight earlier screening repositories excluded. No final stage freeze or model outcome selection."
+}

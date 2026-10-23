@@ -1,6 +1,6 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: three-case repository development conformance, current installed wheel and docs passed; eight provisional screening candidates are prepared for reproduction.**
+**Status as of 2026-10-22: three-case repository development conformance, current installed wheel and docs passed; six of eight new repository workloads reproduced; two excluded; replacement review withdrawn before execution.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -43,16 +43,17 @@ checkpoint_status:
   C12: PASS
   C13: BLOCKED
 last_verified_commit: '3557d88e65192e7409679d7654d95681d4aa8903'
-last_check_command: 'repository-suite-semantic-fault-20261022/composed-conformance.json; completion-audit.json; repository-screening-curation-20261022/prepared-cases.json'
-last_check_result: 'Actual89245763 approval used once; final fault observed190 identities, five bug tests passed and68 preservation tests failed; AEEP invalid/test_failure as required. Composed development conformance now covers3 real adapted cases and3 fault rejections. All13 physical attempts/receipts reopened;19 canonical operations across3 approved attempts charged28.10147966630757 seconds; all owned containers absent. Wheel19 checks and offline docs passed; private runtimes removed. Two terminal failures and old unretained reply UNKNOWN remain. Sourcefcd91dde unchanged; no models or cash. Eight provisional source-grounded screening cases prepared as inert data, not adopted or executed.'
-next_action: 'Review4cfc412d is concrete and awaiting actual user approval: repository-screening-curation-20261022/operation-review.json. Once approved, record the direct response in operator-approval.json, verify its SHA256 and execute run.py exactly once using Python3.13/PYTHONPATH=src. At most16 offline calls,18 operations,710 reserved seconds; no models/install/download/image/docs rerun. Skip an ineligible case and continue independent cases only after canonical accounting and cleanup verify. Reopen all receipts/attempts and reconcile counters afterward. Do not adopt/freeze this4/2/2 curation batch as the final balanced8-case screening stage. Reuse current source/wheel/docs checks. Continue independent141-case curation, qualification, usefulness and selection work under applicable authority.'
+last_check_command: 'repository-screening-curation-20261022/completion-audit.json; exclusion-analysis.json; repository-workload-expansion-20261022/withdrawal.json; source-family-audit.json'
+last_check_result: 'Actual4cfc412d approval used once. Batch completed14 calls/16 operations,24.288069125264883 seconds;14 canonical completed attempts/receipts reopened, all owned containers absent. Six of8 cases reproduced; Files-to-prompt reference failed on Click API incompatibility, Jsonpickle missing2 required Ruff identities. Both negatives skipped, no retry/refund. Grant12855 operations/3744 turns/118225.42372825788 seconds/0.0 cash. Sourcefcd91dde unchanged at completion. Later48fa60c0 proposed bundle WITHDRAWN before install/build: Py3status3-file metadata includes2 docstring-only changes, so cannot fill a multi-file slot. No new execution/architecture approval is pending.'
+next_action: 'Implement explicit reviewed pytest-plugin support in a new repository-suite case version, preserving v1 serialization and observer bytes. Read src/aeep/assessment/repository_suites.py, integrations/assessment-runtime/repository_suite_program.py and tests/test_repository_suites.py. AbsaOSS release-notes has2 substantive source-file changes but needs pytest-mock; current observer disables autoload and cannot declare plugins. Keep legacy behavior frozen; import approved plugins before candidate source paths. Run required source verification after code changes, then prepare one corrected source/runtime-bound execution review. Do not execute withdrawn48fa60c0 even on a late approval. Existing completed4cfc412d is terminal. Curation metadata hints are not verified task complexity; apply source-body AST review before multi-file classification.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Pending exact new eight-repository reproduction review4cfc412d5a08b93220bc318e55b85167c870d049f2350c983eda68a1cf18bb0b: at most16 contained calls/18 operations/710 reserved seconds; fresh untrusted source/test/pure-wheel execution and attempt-owned containers only. Actual approval has been requested but not received. No architecture choice, models, installs, downloads or cash.'
+  - 'None for completed4cfc412d: actual approval exercised once; six cases reproduced, two excluded, all14 physical attempts/receipts reopened and owned containers absent. Its two unstarted negative slots cannot be reused. No model/install/future-source authority transfers.'
+  - 'Review48fa60c0 is WITHDRAWN before execution because the proposed multi-file case is actually one source-body change plus two docstring edits. No installation, build or contained call occurred. Do not execute it even if a late response approves it. A correctly scoped future runtime/plugin review remains to be prepared.'
   - 'None for completed89245763: actual exact approval exercised once and the semantic-fault check passed;3 operations charged. The grant is now12839 operations,3744 turns,118201.13565913262 seconds and0.0 cash. All three preceding reviews are terminal; no new source/runtime/model execution is authorized by them.'
   - 'None for terminal six-call review6174f3e4: approved and all6 calls executed. Click3 variants and Marshmallow reference/original checked; last Marshmallow import-fault probe blocked at protocol validation with its raw reply unretained. Eight operations remain charged; no automatic retry.'
   - 'None for terminal bundlea2787cd8: actual approval exercised; installed wheel19 checks and offline docs passed. Grader stopped after6 calls on a report-script exit-code defect; all8 operations and failed terminal result remain. No retry or future authority follows.'
@@ -2976,3 +2977,41 @@ subject code executed in either static check. Raw historical logs keep their
 original traceback whitespace. The completed offline link check applies to its
 retained pre-journal document snapshot; these progress-only additions do not
 repeat the checker binary or imply a fresh link-check result.
+
+### C13: eight-repository batch complete; runtime/plugin gap identified
+
+Actual approval `4cfc412d` was exercised once. Fourteen physical calls completed
+and sixteen operations charged 24.288069125264883 seconds. All fourteen canonical
+completed attempts and receipts were reopened, raw bounded replies retained and
+owned containers absent. Six cases reproduced: Markdownify, Python-Markdown,
+Mahjong's authored audit, Dissect.cstruct, Mockito and Freezegun. Their references
+passed 267 required identities and counterexamples had the frozen expected
+failures/preservation results. No models, cash, admission or value evidence.
+
+Files-to-prompt's reference had eighteen passes and one failure. Static review
+found its test calls `CliRunner(mix_stderr=False)`, unsupported by exact Click8.3.2.
+Jsonpickle's reference exited zero with eighty passes but lacked the required
+`tests/handler_test.py::ruff` and `tests/object_test.py::ruff` identities. The
+reviewed runtime has no Ruff plugin and disables autoload. AEEP correctly rejected
+both references, and both negative calls were skipped. No truth set was relaxed.
+The grant now records12855 operations,3744 turns,118225.42372825788 seconds and0.0
+cash. The terminal batch has no reusable call allowance.
+
+Read-only expansion cached eight additional pinned source archives and one
+PyCMX archive, plus the official Setuptools75.8.2 wheel as inert data. Three of the
+eight sources exceeded current archive limits. No source or wheel was installed
+or executed. Prepared Py3status/PyCMX review `48fa60c0` is withdrawn before any
+image build because Py3status's three-file published patch changes two docstrings
+and one executable source body. Counting `.py` changes inflated task complexity.
+`source-family-audit.json` records the AST review; this rejects docstring-only
+file inflation without claiming proof of semantic difficulty. The misleading
+metadata family hint must not supply a multi-file case or qualified corpus count.
+
+A genuine two-source-body repair from AbsaOSS release-notes and the PyCMX audit
+are prepared as inert alternatives. Release-notes tests require `mocker` from
+pytest-mock. The current observer suppresses plugin autoload and has no reviewed
+plugin declaration. Installing packages alone would not fix it. The next safe
+engineering change is versioned explicit plugin support on the existing grader,
+with legacy serialization/observer bytes preserved. Follow source verification
+with a corrected finite installation/execution review. The withdrawn bundle is
+not authority for that change, and no new architecture decision is required.

@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "method": "Compare Python ASTs after removing docstrings; this rejects documentation/format-only file-count inflation but does not prove semantic difficulty or preservation.",
+  "reviews": [
+    {
+      "case_id": "ultrabug__py3status-2286",
+      "published_python_changes": [
+        {
+          "path": "py3status/core.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "py3status/modules/kdeconnector.py",
+          "source_body_ast_changed": false
+        },
+        {
+          "path": "py3status/modules/mail.py",
+          "source_body_ast_changed": false
+        }
+      ],
+      "source_body_changed_files": 1
+    },
+    {
+      "case_id": "AbsaOSS__generate-release-notes-207",
+      "published_python_changes": [
+        {
+          "path": "release_notes_generator/record/factory/default_record_factory.py",
+          "source_body_ast_changed": true
+        },
+        {
+          "path": "release_notes_generator/utils/pull_request_utils.py",
+          "source_body_ast_changed": true
+        }
+      ],
+      "source_body_changed_files": 2
+    }
+  ],
+  "untrusted_code_executed": false
+}

@@ -3,7 +3,7 @@
 These cases prepare AEEP to compare capabilities on real source changes and on
 audits where correct behavior means leaving working code alone. They reuse
 published issue contracts, tests and repairs through the existing AEEP grader.
-They have not been executed, adopted or frozen into an assessment cohort.
+Actual approval `4cfc412d` completed fourteen calls. Six cases reproduced, two references failed and their negative calls were skipped. No case has been admitted or frozen into a complete assessment cohort.
 
 | Repository | Bounded task | Type |
 |---|---|---|
@@ -51,3 +51,10 @@ repositories, including 184 repositories with single-file repairs and 101 with
 multi-file repairs. Those counts satisfy necessary pool-size checks only. The
 source licenses, runtime reproduction and joint independent stage assignment
 remain unverified. No extra case was adopted by this read-only audit.
+
+The completion audit reopens all fourteen completed attempts/receipts and confirms
+owned-container cleanup. Sixteen operations charged 24.288069125264883 seconds;
+model/cash counters did not change. `exclusion-analysis.json` records the Click
+API incompatibility and missing required Ruff identities. The original frozen
+expectations remain intact. Earlier preparation-only statements describe what
+was known before execution; `completion-audit.json` is the terminal outcome.

@@ -3230,7 +3230,6 @@ evidence and managed scoped use remain unfinished. The completed bootstrap
 streams are stored as snapshots, but individual pre-completion events are not
 persisted there; crash-time stream retention remains an implementation gap.
 
-
 ### Bootstrap event retention correction
 
 The approved combined worker checks passed on their recorded source. Follow-up
@@ -3661,7 +3660,6 @@ Two attempted pairs stopped before the AEEP arm, preserving results in `native-r
 
 The actual pair remains inert pending the successor source freeze and required checks. Its sampler must include shutdown-grace CPU/RSS observations, not infer them from the earlier command-only monitor. Source-bound exact reviews and each failed or diagnostic operation remain in the existing main ledger; no allowances were reset.
 
-
 ### September 30: reviewed three-way contract applied; renewed validation active
 
 The [exact applied inventory](original-three-way-staged-files.json) binds each prior
@@ -3670,7 +3668,6 @@ root file and reviewed staged replacement. Root source is now b2d436cb7ee44fcdca
 ### September 30: code-mode filter follow-up closed
 
 The pinned [0.159.2 MCP exposure policy](https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/spec_plan.rs) maps omission of both deferred and code-mode surfaces to `DirectModelOnly`. The [exposure implementation](https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/tools/src/tool_executor.rs) makes that exposure direct and unavailable in code mode, so the subsequent `CodeModeOnly` hide predicate does not hide it. The [mode resolver](https://raw.githubusercontent.com/openai/codex/rust-v0.159.2/codex-rs/core/src/tools/mod.rs) gives explicit model metadata precedence over feature flags; disabling those flags cannot override an explicit model mode. Host-unavailable fallback applies to `CodeMode`, not `CodeModeOnly`. This closes that source-level filter concern without proving the stalled desktop request's actual tool declarations. No new local feature intervention or model call follows from it. Exact evidence and limits are retained in the existing local issue reproduction record.
-
 
 ### September 30: final three-way and scoped-storage source validation
 
@@ -3688,7 +3685,6 @@ The corrected one-pair run on final `46803ee2814c77977c4408b60768c6581fc0189f0c8
 The baseline ran first, followed by AEEP. Startup cache/order and sample variability prevent a causal wall-time or savings claim from this n1. AEEP peak RSS exceeds the frozen 768MiB check; both memory integrals exceed 1,500MiB·s. No limits were changed. AEEP retained a 15,202-byte schema, 489-byte project configuration and 168-byte service instructions. Its database has one attempt and one verified receipt; the mandatory validator and independent grader passed in both arms, with equal input/output hashes. The receipt's 1,853 context-token dimension describes its command resource record, not model usage. Global Codex cache/log retention and network telemetry remain unknown. Measurement report bytes remain separate from production retention.
 
 Whole-owned-process sampling continued through bounded shutdown grace in both arms; all final survivor lists were empty. The 10ms common sampler and 50ms inner host sampler have different scopes/cadences, so their peaks are not subtracted to infer a process's memory. The final sampler retained aggregate observations but no per-process role names, limiting CPU/RSS attribution to individual inherited services. Both arms loaded the same eight inherited servers and 22 common tools; AEEP added one server/tool. Source inspection confirms the AEEP command path starts a separate service-owned App Server per call. Host reuse is a possible future reviewed architecture experiment, with authority and cleanup invariants preserved; these measurements do not prove its savings or authorize a runtime change. See `native-resource-full-path-summary.json` for source, ledger, retention and unknowns.
-
 
 ### September 30: real third-profile integration map
 
@@ -3714,7 +3710,6 @@ September 30 static diagnosis confirmed two configuration issues in pinned Codex
 
 September 30 immutable diagnostic profile preparation preserves the installed control image and all prior requirements. A 4,236-byte offline context adds only the fixed synthetic stdio server and separately reviewed requirements allowing its exact Python executable/file argument. The protected requirements now also deny the canary, matching the complete inline filesystem table used by the parent profile. The base uses the locally verified repository digest rather than bare `sha256`. `linux-image-review.json` (SHA256 `480744b4a14b6c7504a76c8db5a9cf8c20f88ffe8eed7a9650577450777eb3c5`) binds one 90-second zero-turn/$0 setup operation; each command reserves 13 seconds for timeout termination, exact named-container cleanup and final accounting. The separate 60-second diagnostic remains unbound until an actual image and canonical public-file inspection exist. Its prepared driver checks effective requirements, exact tool inventory and protected-file command denials, plus independent canary integrity. No build or diagnostic has run; final source validation retains its exclusive execution window. This is a synthetic diagnostic profile, not the original three-way intervention or qualified Linux TaskScope backend.
 
-
 ### September 30: immutable Linux MCP diagnostic terminal sequence
 
 All following diagnostics retain the main grant, exact reviewed requests and canonical observations; none executed a model turn or qualified a route. Root source remains `94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb`. Prior failed operations and opaque error records remain unchanged.
@@ -3731,7 +3726,6 @@ The read-only `dynamic-tool-existing-seam-review.json` records a smaller potenti
 September 30 final no-auth synthetic boundary successor used the same immutable image, corrected arguments and fixed original zero-argument tool, with bounded own-server readiness polling. Review SHA256 `b2281d241141b715b2bf690990d9fa05da3a273d40ea790adb3eae3718b19c36` reserves one operation/60 seconds/zero turns/$0 under the parent’s exact finite amendment. It completed in 2.684001 seconds (`linux-noauth-boundary-result.json`, canonical `2c9aadc142a68492deaa2f91288fe17fdbcb95dd747bb01f405acf7b9877254e`). The actual sandbox child returned exit zero and the marker with both canary reads and writes denied. The independent canary witness and server’s own integrity check passed. Direct command/exec denied both read and write for canary, server and worker configuration; requirements reads succeeded, while writes were denied. The predeclared aggregate required every named file read to be denied, so its `probe_supported:false` result remains unchanged. This is a partial success with demonstrated child support, not a pass of all requirements or a missing Linux runtime. No replay or threshold relaxation occurred.
 
 `linux-terminal-readback-audit.json` verifies both latest canonical documents against their report results, confirmed cleanup and unchanged source. Final main counters are 8,630 operations, 2,535 turns, 74,751.979912112 seconds and $0. CPU and RSS remain unknown for these diagnostic operations. Actual model-command execution was not tested; command/exec exercises the same configured command path without a model turn. A private real task store and exact task-scope backend are still absent.
-
 
 ### September 30: dedicated Linux child lifecycle prerequisite
 
@@ -3760,13 +3754,11 @@ The frozen [fixed-helper review](original-three-way-profile/fixed-helper-staged-
 
 The final focused run passed 31 tests and skipped the two actual-native opt-in cases; compile/Ruff/mypy checks passed. These tests establish plumbing and authority behavior, not composed worker conformance or model qualification. Root source remained `94f3fad31d2811368a2955a63b0531b5147f0d132551000f674292b7a5a280bb`; application and required full validation follow independent review.
 
-
 ### September 30 staged composed inspection checks (not applied)
 
 The isolated `.aeep/native-composed-conformance-stage` increment adds v4 finite composed inspection authority, additive v3 callback/native boundary bindings, canonical child scope/spec/attempt/receipt evidence, and adapter-side native callback provenance validation. Historical request and boundary serialization remains covered. The combined focused run passed 100 tests, including the actual Mac guarded CSV child and cancellation after an observed synthetic write through a scripted JSONL callback. Compile, schema, Ruff, mypy and policy checks passed. The final affected 24-test subset passed after the adapter type narrowing and pinned native binary revalidation. Exact final commands, log hashes and the 15-file preimage inventory are retained in `reports/v08/original-three-way-profile/composed-staged-review.json`; the staged source is `17efa3c1cf9ad82e4b702f2eb096abbeba8cd36a399c51e8f1bdcf05e355233a`. Independent review passed; root application and required full checks remain separate. The scripted peer is not an actual App Server-issued callback and does not establish full composed conformance or qualification. Root source remains unchanged.
 
 The initial four failures and later cancellation fixture failures remain in `reports/v08/original-three-way-profile/composed-first-failures.log`, `composed-focused-second.log` and `composed-cancel-detail.log`. The corrected fixture explicitly grants WRITE through the existing balanced policy; the prior default policy entry did not apply to the request. No timing ceiling was increased. `composed-cancel-policy-corrected.log` and `composed-focused-final.log` retain the resulting passes. The initial compile/policy staging checks lacked copied public examples/docs; those inputs were copied from the root before the successful checks.
-
 
 ### September 30 production binding tests and inert composed runner review
 
@@ -3805,7 +3797,6 @@ The first registration reached full prepare-only and was refused before reservat
 
 `native-two-task-human-comprehension-ade3-participant.md` presents the fixed five questions and links sanitized ordinary result displays reconstructed with the unchanged production `Router.task_outcome` from actual durable decisions/receipts. Reconstruction is explicit: original transient output/display and full installed executor configuration were not retained, so the generic renderer summary is used. The private facilitator key is separate and must not be shown before responses. Existing CLI inspect/pause/rollback/uninstall controls are documented, but this completed disposable project was removed after uninstall; hands-on controls are unavailable and must not be redirected to another manifest. Omitted task-total caps, independent grader result and workbook-specific changes are recorded as presentation findings. Preparation record `native-two-task-human-comprehension-ade3-preparation.json`; no participant responses, task calls, models or capacity probes were run. The human gate remains not yet measured.
 
-
 ### September 30: actual callback linkage audited; conformance collectors held
 
 The actual ade3 callback completed in 17.5620 seconds with one experimental GPT-6.1 Sol medium turn and one protected native READ invocation. The [canonical independent audit](original-three-way-profile/current-composed-canonical-independent-audit.json) passed all 11 linkage checks, including the completed outer operation, exact callback claim and action, child attempt/receipt, reviewed scope, executor fingerprint, native enforcement backend and required workbook verification. Child resource observations overlap the inclusive outer operation; they are not charged as another elapsed operation. No qualification or full composed boundary claim follows.
@@ -3813,7 +3804,6 @@ The actual ade3 callback completed in 17.5620 seconds with one experimental GPT-
 The original published probe journal had a duplicated adapter prefix. The [metadata-only successor](original-three-way-profile/current-composed-callback-evidence-successor.json) preserves the raw host journal and original records without another host, task attempt or experimental turn. The [existing adapter verifier audit](original-three-way-profile/current-composed-adapter-independent-verifier.json) passed against that successor and the actual canonical callback evidence. Its transient record projection was not published as full conformance.
 
 The [11-worker component assembly](original-three-way-profile/current-composed-worker-component-assembly.json) and [collector review correction](original-three-way-profile/current-composed-worker-collector-review-fix.json) are prepared and inert. They retain the physical v3 candidate-path checks and separately inspect dynamic declaration acknowledgement; acknowledgement does not establish model exposure. The historical image/skill difference remains explicit. The finite proposed allowance is two zero-model worker operations of at most 240 seconds each, with a 120-second shared body and bounded owned cleanup. No component request has been registered or reserved. Execution is held while the presentation successor source undergoes full validation; fresh successor definitions and executable pins must bind the terminal source before any probe. The separately prepared native component calls remain distinct from these worker observations.
-
 
 ### September 30: SkillsBench adapter gap checked against code
 
@@ -3936,7 +3926,6 @@ source pins, C00/C02 evidence and all historical v0.8 gates remain unchanged.
 The architecture-index description also incorrectly referenced the withdrawn
 shared-service proposal and is corrected. Unfinished V2 integrations, setup,
 comparison, developer support and release gates remain explicit in the audit.
-
 
 ### Toolkit V2: ZIP correction and upstream receipt bridge (October 8)
 
@@ -5066,7 +5055,6 @@ wheel, concrete case assets and current document hashes. Human control, actual
 usefulness, live selection quality, workload-derived resource acceptance and
 release remain separate open gates.
 
-
 ### October22: corrected v5 source checks passed; exact execution review pending
 
 Current source `fcd91dde` in `3557d88` passes all thirteen configured checks:
@@ -5100,7 +5088,6 @@ records; those formatting defects are corrected. Fresh offline link checking
 awaits the exact binary execution approval. Human control-use response, reproducible
 independent workloads, actual capability value, live selection outcomes,
 workload-derived resource acceptance and release remain separate open gates.
-
 
 ### October22 execution: package/docs complete; one development fault uncertified
 
@@ -5160,3 +5147,26 @@ aborting unrelated cases; common accounting/authority/cleanup uncertainty stops
 dispatch. Full independent cohorts, capability qualification and comparative
 usefulness, live selection outcomes, actual human control use and separate
 workload-derived resource acceptance remain open.
+
+### October22 completed reproduction : preserve workload exclusions; fix explicit plugin support
+
+Approved batch4cfc412d completed fourteen calls and sixteen canonical operations.
+Six cases reproduced, two references failed and their negatives were skipped.
+All fourteen completed attempts/receipts were reopened and containers absent.
+Charges are24.288069125264883 seconds, zero models and cash; sourcefcd91dde was
+unchanged. Exact results are in the screening-curation completion audit.
+
+Files-to-prompt has an incompatible Click test option; Jsonpickle requires absent
+Ruff plugin identities. Preserve both exclusions and frozen test sets. No retry
+or positive value/selection claim follows. Later review48fa60c0 is withdrawn
+before execution: Py3status's three changed Python files include two docstring-only
+changes. Metadata file counts do not verify multi-file complexity. The source-body
+AST audit and withdrawal are retained in repository-workload-expansion-20261022.
+
+The next genuine multi-file candidate needs pytest-mock, while the current
+observer disables autoload and cannot declare a reviewed plugin. Add explicit,
+versioned plugin support to the existing protected grader, preserve v1 meanings
+and observer bytes, then verify changed source and prepare a corrected exact
+runtime review. Full independent cohorts, model qualification, usefulness and
+selection remain unproven. Human controls, resource acceptance and release remain
+separate; no new third-party execution or installation is authorized.
