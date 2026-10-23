@@ -13,15 +13,18 @@ upstream conftest. It keeps all14 required identities and their assertions. The
 public task states its bounded scope. The original source, published repair,
 model-edit guard and global zero-exit/missing/error/preservation checks are unchanged.
 First-party fake collection items and synthetic grader replies verify the selector
-and fail-closed behavior; no new upstream code has executed during preparation.
+and fail-closed behavior; no upstream code executed during preparation. The separately approved execution is recorded below.
 
 Review7bbc9678 permits at most four fresh offline calls: reference, original source
 and two independently regressed source files. At most six existing-grant operations
 and290 reserved seconds. It reuses the just-verified image,observer and containment
 profile. No source change, build, installation, package/docs rerun, download, model,
 credential,cash,activation,release or retained-image deletion. One attempt only.
-A new exact approval is needed because the protected oracle bytes and declared
-task scope differ from terminal review038b2af9.
+The user approved this exact review and it ran once. All four observations passed
+their expected classifications, with exactly14 required identities each. Six
+operations charged8.131443957798183 seconds. Attempts and receipts were reopened;
+all owned containers were absent. The review is terminal and cannot replay.
+See completion-audit.json and composed-screening-reproduction.json.
 
 Even a passing result supplies only one bounded workload reproduction. The full
 independent cohort, model qualification, optional-use comparisons and independent

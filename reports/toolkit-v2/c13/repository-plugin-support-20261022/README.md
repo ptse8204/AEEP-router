@@ -32,12 +32,15 @@ The image build and grader calls charged25 canonical operations and
 turns,118273.29034517473 seconds and0.0 cash. No model or cash delta occurred.
 Unused call slots remain unused; the completed review cannot replay.
 
-A new declared-node Leanclient adaptation is prepared separately under
+A new declared-node Leanclient adaptation completed separately under
 ../repository-declared-tests-20261022/. It keeps all14 required identities and
 assertions, declares the task scope publicly, and appends a protected collection
 hook that excludes only other identities. The old failed observation remains.
 Source, observer, image, zero-exit and missing/error guards are unchanged. Exact
-execution approval is still required for its changed oracle bytes.
+approval7bbc9678 ran once: the reference passed and original/two partial repairs
+were rejected, each observing exactly14 required identities. All receipts and
+cleanup were verified. Eight provisional screening cases now reproduce; no
+full campaign stages have been frozen.
 
 No full8/28/105 cohort is frozen. No new model qualification, comparative
 usefulness, selection quality, resource acceptance, human-control or release gate

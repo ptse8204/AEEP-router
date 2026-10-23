@@ -649,3 +649,31 @@ containment evidence. No builds,installations,package/docs reruns,models,cash or
 release. This new task cannot retroactively pass the old whole-module result.
 Full independent8/28/105 stages,capability qualification,usefulness,live selection,
 human controls and workload-derived resource acceptance remain open separately.
+
+### C13: declared-test approval completed; eight provisional screening cases reproduced
+
+Actual approval7bbc9678 ran once on unchanged sourcef694024c. Each of four
+observations contained exactly the14 required identities. The reference passed;
+original source and both per-file partial repairs were rejected. All four
+canonical attempts/receipts were reopened and owned containers were absent.
+Six operations charged8.131443957798183 seconds. Current grant counters are12886
+operations,3744 turns,118281.42178913252 seconds and0.0 cash. No model turn or
+cash was used. The old whole-module failure remains failed; its exact exception
+remains unknown.
+
+The copied launcher and auditor had a stale parent-directory index. Before any
+reservation, a recorded amendment under standing finite-definition authority
+bound their ROOT global to the already authorized repository. Reviewed module
+bytes, checks, source, image and ceilings stayed unchanged. There was no erroneous
+dispatch and no second execution attempt. The completed review cannot replay.
+
+The composed record is
+`reports/toolkit-v2/c13/repository-declared-tests-20261022/composed-screening-reproduction.json`.
+Eight provisional screening cases now reproduce, with3/3/2 families,234 required
+reference identities and six per-file partial-repair rejections. Across both
+reviews,26 physical receipts were reopened; build and calls charged31 operations
+and55.99806087464094 seconds. No full8/28/105 stages are frozen or adopted.
+Next work is independent training/holdout curation and runtime reproduction,
+followed by fresh applicable worker qualification and optional-use comparisons.
+Current source,installed wheel19 checks and offline docs69 need no repeat.
+Human controls, resource acceptance, selection outcomes and release remain open.
