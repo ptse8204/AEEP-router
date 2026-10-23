@@ -5471,3 +5471,41 @@ Prioritize other repositories and the missing35 single-file,29 multi-file and42
 audit cases; do not duplicate tasks or curate using model outcomes. No stages were
 assigned,no cases adopted,and no usefulness/selection label was inferred.
 See repository-model-journey-20261022/pool-representativeness.json.
+
+## C13: stale development fault diagnosed and corrected before new execution
+
+The actual approval9f0bf880 ran once. Both workers passed11 observed conformance
+checks and collector denial. Normal grader validation stopped after nine contained
+calls,before models. I carried the obsolete Marshmallow import-time fault into the
+compiled recipe instead of its earlier accepted semantic replacement. All nine
+payload action digests match first-party reconstruction in order; the last call
+is that old fault. Its exact malformed reply field is unknown because the reply
+was not retained. This failure is not model performance or a valid task grade.
+
+The terminal audit reopened nine canonical receipts/COMPLETED attempts,verified
+owned grader absence and the stopped proxy,and reconciled all15 complete canonical
+operations with65.09651541616768 charged seconds. Grant counters are13030operations,
+3744turns,118647.70205063233seconds and0cash. Source59b9d61c is unchanged. No model,
+image,installer,credential or cash effect occurred. Preserve the failed result and
+all charges;unused model slots do not authorize replay.
+
+Correction reviewd775e93e binds195 assets and the same6-turn/128-operation/10000-
+reserved-second/0cash ceiling. It substitutes the exact URL-validator fault source
+already certified in89245763,through the existing gzip encoding. Patched archive,
+public inputs,protected tests and reference files match the certified record.
+A first-party historical-status replay confirms invalid/test_failure,all190 test
+identities,five passed bug tests and preservation failures;it is not new runtime
+conformance. Both worker fingerprints and actual fresh boundaries are unchanged,
+so reuse them. Normal independent grader validation still precedes all models.
+
+The corrected typed recipe was stored under standing definition authority without
+counter changes. Seven reservation guards,two bounded observer filters,driver
+syntax and195 asset hashes passed. The corrected driver reuses the existing runner
+and retains declared bounded public observer fields before validation,excluding
+raw model/source/artifact/authentication data. No product source changed;do not
+repeat full source,wheel,docs or worker checks merely for this protected-fault fix.
+
+The remaining intervention is this exact execution approval because9f0bf880
+explicitly forbids automatic retry and the pasted continuation withholds general
+untrusted execution authority. No architecture decision is needed. See
+reports/toolkit-v2/c13/repository-model-fault-correction-20261023/README.md.

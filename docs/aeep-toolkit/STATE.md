@@ -1,9 +1,10 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-22: approved repository batch completed on source59b9d61c.
-Fifteen new tasks reproduced; seven are excluded. Two historical tasks were
-recovered without replay. The provisional pool has35 cases from20 repositories;
-full8/28/105 stages,usefulness and selection remain unproven.**
+**Status as of 2026-10-23: six-turn review9f0bf880 ended before models.
+Fresh worker isolation passed; grader validation used an obsolete Marshmallow
+fault. All15 operations/65.09651541616768 seconds remain charged,zero turns/cash.
+Correction reviewd775e93e is prepared with195 pinned assets and no execution.
+The provisional pool remains35 cases/20 repositories; C13 stays IN_PROGRESS.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -45,16 +46,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '350737f'
-last_check_command: 'repository-workload-batch-20261022/execution-result.json; runtime-execution/completion-audit.json; recovered-single-file-cases.json; exclusions.json; provisional-pool.json'
-last_check_result: 'Approved38f87c22 completed once:14-wheel image324a1fee built offline;fresh3probes passed;15of22tasks reproduced;84 receipts/attempts reopened,owned containers absent.87operations/211.08177674980834seconds charged. Seven exclusions preserved. Two historical single-file cases regraded on identical payloads without replay. Pool35cases/20repos,12single18multi5audit,2257required identities. Grant13015operations,3744turns,118582.60553521616seconds,0cash. Product source59b9 unchanged;full source/wheel/docs checks remain passed.'
-next_action: 'Read repository-model-journey-20261022/README.md and operation-review.json SHA9f0bf880. Fresh two-worker conformance and at most6 public development-task turns need actual exact approval; preparation passed without workers/models. Record the actual response once,inspect execution markers,and run run-review.py once only if approved. Preserve every charge and stop on common uncertainty. Do not replay terminal38f87c22 or source session5348. Continue independent corpus/source preparation; no broad package/docs rerun or architecture decision needed.'
+last_verified_commit: '43ef602'
+last_check_command: 'repository-model-journey-20261022/terminal-audit.json; repository-model-fault-correction-20261023/preparation-checks.json'
+last_check_result: 'Terminal9f0bf880:11groups per worker and collector denial passed;nine grader receipts/attempts match reconstructed payload digests;last call used old Marshmallow import fault. All15 operations complete,65.09651541616768seconds charged,zero model/cash,owned graders absent and proxy stopped. Grant13030operations/3744turns/118647.70205063233seconds/0cash. Correctiond775e93e prepared:195assets,seven budget/two observer guards,exact prior certified fault archive,unchanged worker fingerprints and source59b9.'
+next_action: 'Do not replay terminal9f0bf880. Read repository-model-fault-correction-20261023/README.md and exact reviewd775e93e. Record actual approval and run run-corrected.py once only if approved. It reuses unchanged fresh worker conformance and normally validates the corrected recipe before up to6 development task turns. Keep prior15 charges and retain bounded grader replies. Continue independent corpus work; full8/28/105,usefulness,selection,controls,resources and release remain open. No architecture/install/build/source-check decision needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Exact correctiond775e93e needs actual approval:the preceding9f0bf880 one-attempt/no-retry review is terminal. It covers the corrected protected fault,normal grader validation and at most6 public development task turns. Same128operations/10000seconds/0cash ceiling,images,public tasks and destination;no new inspection/install/build/docs/package execution.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
@@ -3321,3 +3323,41 @@ Prioritize other repositories and the missing35 single-file,29 multi-file and42
 audit cases; do not duplicate tasks or curate using model outcomes. No stages were
 assigned,no cases adopted,and no usefulness/selection label was inferred.
 See repository-model-journey-20261022/pool-representativeness.json.
+
+## C13: stale development fault diagnosed and corrected before new execution
+
+The actual approval9f0bf880 ran once. Both workers passed11 observed conformance
+checks and collector denial. Normal grader validation stopped after nine contained
+calls,before models. I carried the obsolete Marshmallow import-time fault into the
+compiled recipe instead of its earlier accepted semantic replacement. All nine
+payload action digests match first-party reconstruction in order; the last call
+is that old fault. Its exact malformed reply field is unknown because the reply
+was not retained. This failure is not model performance or a valid task grade.
+
+The terminal audit reopened nine canonical receipts/COMPLETED attempts,verified
+owned grader absence and the stopped proxy,and reconciled all15 complete canonical
+operations with65.09651541616768 charged seconds. Grant counters are13030operations,
+3744turns,118647.70205063233seconds and0cash. Source59b9d61c is unchanged. No model,
+image,installer,credential or cash effect occurred. Preserve the failed result and
+all charges;unused model slots do not authorize replay.
+
+Correction reviewd775e93e binds195 assets and the same6-turn/128-operation/10000-
+reserved-second/0cash ceiling. It substitutes the exact URL-validator fault source
+already certified in89245763,through the existing gzip encoding. Patched archive,
+public inputs,protected tests and reference files match the certified record.
+A first-party historical-status replay confirms invalid/test_failure,all190 test
+identities,five passed bug tests and preservation failures;it is not new runtime
+conformance. Both worker fingerprints and actual fresh boundaries are unchanged,
+so reuse them. Normal independent grader validation still precedes all models.
+
+The corrected typed recipe was stored under standing definition authority without
+counter changes. Seven reservation guards,two bounded observer filters,driver
+syntax and195 asset hashes passed. The corrected driver reuses the existing runner
+and retains declared bounded public observer fields before validation,excluding
+raw model/source/artifact/authentication data. No product source changed;do not
+repeat full source,wheel,docs or worker checks merely for this protected-fault fix.
+
+The remaining intervention is this exact execution approval because9f0bf880
+explicitly forbids automatic retry and the pasted continuation withholds general
+untrusted execution authority. No architecture decision is needed. See
+reports/toolkit-v2/c13/repository-model-fault-correction-20261023/README.md.

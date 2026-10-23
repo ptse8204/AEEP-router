@@ -1,5 +1,15 @@
 # Real repository development comparison
 
+The approved attempt ended before models on October23. Both workers passed all11
+conformance groups and collector denial. Grader validation then stopped on the
+obsolete Marshmallow import-time fault retained in the compiled recipe. All15
+operations and65.09651541616768 seconds remain charged; model turns and cash are
+zero. The [terminal audit](terminal-audit.json) reopened all nine receipts/attempts,
+matched their payload action digests, and verified owned grader removal and the
+stopped proxy. The malformed reply field remains unknown. Do not replay this
+terminal review. A [corrected review](../repository-model-fault-correction-20261023/README.md)
+is prepared separately. The original plan below records the approved scope.
+
 This check will exercise the complete repository repair path before further
 corpus expansion: deliver a public source archive to a real agent, collect its
 compressed patch, run protected upstream tests, and reconcile the grade, token
@@ -14,7 +24,7 @@ excluded from future holdouts.
 
 ## Exact execution review
 
-The unexecuted [operation review](operation-review.json) has SHA-256
+The approved terminal [operation review](operation-review.json) has SHA-256
 `9f0bf880f1606b13954515ef96e5f82713fa7f0a1f3dc8da52ba73d7d4de5c81`.
 It binds 184 assets, the current source digest59b9d61c, two existing model images,
 the retained grader image324a1fee, the unchanged collector and the existing
