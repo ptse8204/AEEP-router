@@ -994,3 +994,12 @@ qualification, usefulness, selection or admission gate closes. See
 [the completed development report](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/comparison.md)
 and its linked canonical audit. The 35-case pool and remaining 106 cases stay on
 the scientific critical path; infrastructure resource acceptance remains separate.
+
+## Pending independent repository supports, October 24
+
+[Five prepared task contracts](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/README.md)
+cover MSAL, SQLacodegen, LM Studio Python, Model Bakery and CanvasAPI. Their source
+revisions, licenses and 16 optional support wheels are hash-bound in review
+`be8b0e5f`. Static closure and 108 assets verified; no new runtime or upstream test
+execution occurred. Do not label them qualified, adopted or installed. The existing
+AEEP engine and container grader remain the execution stack.

@@ -1616,3 +1616,15 @@ qualification, usefulness, selection or admission gate closes. See
 [the completed development report](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/comparison.md)
 and its linked canonical audit. The 35-case pool and remaining 106 cases stay on
 the scientific critical path; infrastructure resource acceptance remains separate.
+
+### D99 — Expand the workload pool through the existing optional grader
+
+The next review adds five repositories to curation using the current protected
+suite adapter and completed reproduction drivers. The 16 new runtime supports
+stay inside one private optional grader image; they are not toolkit dependencies.
+MSAL supplies an explicitly authored audit; four other tasks retain upstream
+repairs. No core service, new evaluator, live selection claim or threshold change
+is needed. The exact review is `be8b0e5f`, with zero models, 13 offline calls,
+16 operations and 785 reserved seconds. Static preparation passed; installation
+and subject execution remain unapproved. See
+[the reviewed scope](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/README.md).

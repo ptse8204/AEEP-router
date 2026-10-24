@@ -48,16 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '4798b88'
+last_verified_commit: '19b68f4'
 last_check_command: 'repository-task-delivery-20261023/audit-completion.py; bundle-execution-result.json; validation-final/checks.json'
 last_check_result: 'All three approved components passed. Six independently graded successes, six verified capture chains, six prompt bindings, three treatment instruction loads. Reopened 24 grader receipts/attempts and six model receipts/trials/journals. All 45 operations complete, six turns and 689.980447711423 operation-seconds charged. All reviewed workers absent and proxy stopped. Wheel19 checks and offline docs passed. Product source4cb unchanged.'
-next_action: 'Do not replay terminal51c43d2c, d775e93e or source session94490. Read the corrected comparison and completion-audit, then continue static curation of independent repository cases and freeze a concrete next reproduction review. No further broad source, package or docs rerun is justified on unchanged product bytes. Preserve all prior charges. Qualification, four-arm usefulness and selection await independent cohorts and exact execution authority.'
+next_action: 'Read repository-independent-sources-20261024/README.md and approval-bundle.json SHAbe8b0e5f. The five-case/16-wheel review is prepared, unapproved and unexecuted; record an actual exact response before one run-bundle.py attempt. It permits zero models,13 offline calls,16 operations and785 reserved seconds. Do not repeat completed51c43d2c, d775e93e or source94490. Preserve counters; consolidate only actual accepted reproduction results. Full qualification/usefulness/selection still need independent cohorts.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Preparedbe8b0e5f needs actual exact approval for one private offline16-wheel grader image and13 source/probe calls across five repositories. Existing source4cb and all software checks are unchanged. Zero models/cash,16 operations,785 reserved seconds; no architecture decision, download during execution, host install, package/docs rerun, activation or release. Earlier completed51c43d2c binds different software.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
@@ -3508,3 +3509,24 @@ formal qualification, selection validation or admission. Keep these development
 repositories outside future holdouts. C13 remains IN_PROGRESS. Continue independent
 corpus curation and prepare the next exact reproduction review; do not repeat
 completed engineering checks merely to fill the remaining scientific gates.
+
+## C13: next independent workload review prepared
+
+After committing the completed journey as `19b68f4`, read-only curation reviewed
+19 new public source snapshots and prepared five cases from five repositories.
+Four are upstream single-file repairs; MSAL is an explicitly authored corrected-
+snapshot audit. They retain 351 required identities. All are unadopted and no stage
+is frozen. The existing pool remains 35; five more are only projected until actual
+reproduction succeeds. Other candidates with missing services, dependencies,
+protected paths or transport bounds remain excluded or unresolved.
+
+[Exact review be8b0e5f](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/approval-bundle.json)
+binds 108 assets and one proposed private offline image from existing parent
+`324a1fee`, with 16 exact cached wheels (3,373,581 bytes). Preparation passed 25
+grader guards, 22 classifier cases and pure image-bound review derivation. No build,
+installation, new container, upstream test or model has run under this review.
+The hard budget guard applies before every reservation: 13 calls at most, 16
+operations, 785 reserved seconds, zero models and cash. Actual exact authorization
+is required for these new packages/subjects; no architecture decision is missing.
+Read the linked README before recording approval or dispatching. Current grant
+remains 13104 operations / 3755 turns / 119650.71806692518 seconds / 0.0 cash.
