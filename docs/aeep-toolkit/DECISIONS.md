@@ -1601,3 +1601,18 @@ Next:read repository-task-delivery-20261023/README.md and approval-bundle.json;
 inspect actual response and markers;record actual parent approval once and execute
 run-integration-bundle.py with51c43d2c once if approved. Never run a draft,repeat94490,
 or replay terminald775e93e. Continue from actual component results after execution.
+
+### D98 — Accept the repaired journey without upgrading development evidence
+
+The October 24 approved bundle `51c43d2c` completed all three components on source
+`4cb0bf74`: six real repairs passed independent upstream grading, all six capture
+chains and task-instruction bindings verified, and all three treatment turns
+observed optional Ponytail instruction loading. The installed wheel passed 19
+checks and cached offline docs verification passed. The canonical audit reconciled
+45 completed operations / six turns / 689.980447711423 operation-seconds and
+confirmed owned worker removal and the stopped proxy. Provider-internal metering,
+semantic contribution and actual provider cash remain unknown. No formal
+qualification, usefulness, selection or admission gate closes. See
+[the completed development report](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/comparison.md)
+and its linked canonical audit. The 35-case pool and remaining 106 cases stay on
+the scientific critical path; infrastructure resource acceptance remains separate.

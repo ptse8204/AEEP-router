@@ -12,6 +12,23 @@ The [completion audit](../repository-model-fault-correction-20261023/completion-
 verified owned container removal and the stopped proxy. Two treatment turns
 observed implicit Ponytail loading;that establishes no task benefit.
 
+## Completed result — October 24
+
+Actual approval of `51c43d2c` was exercised once; all three components passed.
+All six repairs passed protected upstream grading. All six token capture chains
+and task-instruction bindings verified, and all three treatment turns recorded
+optional Ponytail instruction loading. The [three-pair report](comparison.md)
+retains raw token categories and separate task/grading time. The
+[canonical audit](completion-audit.json) reopened receipts, trials, journals,
+attempts and all 45 completed ledger operations, then checked worker removal and
+the stopped proxy. Six turns and 689.980447711423 operation-seconds stay charged.
+The wheel passed 19 installed checks, and the cached offline docs checker passed.
+Both owned private runtimes were removed. No new image or download was needed.
+
+These are development observations. No candidate was admitted or activated;
+qualification, usefulness and selection still need independent cohorts. The
+preparation text below is historical, not permission to replay this terminal run.
+
 ## What changed
 
 The reviewed instruction now includes the existing `{input}` template. The managed

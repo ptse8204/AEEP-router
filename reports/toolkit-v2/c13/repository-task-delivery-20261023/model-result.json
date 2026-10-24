@@ -1,0 +1,2972 @@
+{
+  "review_sha256": "0da9037d6300f92f962d9c2c90ff4077763ae5b2ac46f01d01fbfd434e9be9e2",
+  "source_digest": "4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919",
+  "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+  "development_only": true,
+  "formal_qualification": false,
+  "admission": false,
+  "efficacy_claim": false,
+  "records": {
+    "trial_repository-task-delivery-4cb0bf7419eb_development-marshmallow-code__marshmallow-2800_toolkit-repository-delivery-20261023.control_fresh-worker_0": {
+      "receipt_ref": "8a83403e25ebb03899d1e11dd387cc8221cccc6c624e7e1b7f4de8f0601cd992",
+      "receipt": {
+        "receipt_id": "rcpt_2035e67db1464479b2040d5833412aea",
+        "decision_id": "dec_0228984500734827816b0b5da45db090",
+        "action_id": "act_39b9aaffd88549e2a1f1fb2d1ee55d8d",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.control",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:39:45.576069Z",
+        "ended_at": "2026-10-24T17:40:38.357907Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:ab113779c5f8534139732a410d638239eaf5b5ca83094fbe1e6ea0af8354fe85",
+        "cohort_digest": "sha256:7629aaddaf3924bc9c154c969c887906f8a89eac08c19866ec2e40a3f0f1e895",
+        "action_features": {
+          "input_bytes": 2097,
+          "input_items": 18,
+          "text_characters": 1895,
+          "max_depth": 2,
+          "size_bucket": "2^11"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 51550.592000130564,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 123074,
+          "cached_input_tokens": 106112,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2305,
+          "reasoning_output_tokens": 121,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 123074,
+              "cached_input_tokens": 106112,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 2305,
+              "reasoning_output_tokens": 121,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:40:38.025339Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":51.234194125048816,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":51.23367229197174,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "db9f55125b0a428323f98b6424c90176ee1e6ff5393bc30e98cf8888da3e6772",
+          "boundary_digest": "9007b65b75b03734c943324f98ee350031871518915656504b8fa651892e71f4",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 11,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:36db95bdccd5a5937e73024755003f04736f89a8b694d6217291d4221c4e720b",
+          "turn_identity_digest": "sha256:a3c4531715f16e80b95a03c00e729114db4a5bec6aea76ae908f53b85566a3f1",
+          "artifact_sha256": "c7646bc54390fa792d1977db9f7f4cac17eebc29f5b60d818ae1c163014b5878",
+          "artifact_bytes": 5907,
+          "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+          "catalog_metrics_scope": "aeep-metrics-31761c93b58dc5d350a138a44805b702",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "b07adb10dbc8c4bd1fad12f40f84a9c9709b7f62df2bef1fa98ab1950e34bf90",
+          "task_instruction_sha256": "320e531143a0e3c2aecf0b27749c81aeaeb0bbad6a3304340799bf03c514c398",
+          "adapter_id": "codex-app-server:text-phase-final-control",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 7898,
+          "invocation_guard_ms": 80.0929581746459,
+          "exit_code": null,
+          "attempt_id": "attempt_4ace20b45444412592d729f77579ec4a",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-31761c93b58dc5d350a138a44805b702",
+            "batches": 48,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "8a83403e25ebb03899d1e11dd387cc8221cccc6c624e7e1b7f4de8f0601cd992",
+        "journal_ref": "b07adb10dbc8c4bd1fad12f40f84a9c9709b7f62df2bef1fa98ab1950e34bf90",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "8a5b4c2572463fd763b8386c9f157914c78b82ddfe10d6d9df5391a5b494871c",
+        "skill_sha256": null
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "d79c3cd8b2fe9fc480f612682c9405fef9963ca044ae45c3dcc0578d861c3679",
+      "task_grade": true
+    },
+    "trial_repository-task-delivery-4cb0bf7419eb_development-marshmallow-code__marshmallow-2800_toolkit-repository-delivery-20261023.treatment_fresh-worker_0": {
+      "receipt_ref": "1587cd00675429e4313fc6eccf014e4e7bfcb6499fac48201e6490859d6df47b",
+      "receipt": {
+        "receipt_id": "rcpt_8f8f43a14be046c6b4eed60d1c18e11b",
+        "decision_id": "dec_8f3f9575f9ed416d908982a62addb3ab",
+        "action_id": "act_39b9aaffd88549e2a1f1fb2d1ee55d8d",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.treatment",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:40:42.470175Z",
+        "ended_at": "2026-10-24T17:41:46.667297Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:a7cd29ccba4ecc4551f4ee7b3ecd40ec4ce32bbc798f5892d495af1e4be9c044",
+        "cohort_digest": "sha256:a0b5d13663cbe12833c172408b42f6ee37fac79ff2763b71cea310a5992fc8da",
+        "action_features": {
+          "input_bytes": 2097,
+          "input_items": 18,
+          "text_characters": 1895,
+          "max_depth": 2,
+          "size_bucket": "2^11"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 63045.75604200363,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 172041,
+          "cached_input_tokens": 142720,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2289,
+          "reasoning_output_tokens": 117,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 172041,
+              "cached_input_tokens": 142720,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 2289,
+              "reasoning_output_tokens": 117,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:41:46.272876Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":62.66700804233551,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":62.66657708398998,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "0c2b75b0da51edd1aaaca0dfb09ea2123b8c0f6f303a47169242ad9f15dc252f",
+          "boundary_digest": "1b6d232d68f3de20d3b61672240783c88c3c9f5180f6b7bc009bc2772436f2dd",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 12,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+          "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+          "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:25d4a11673df33d495ffdd38967134cec68fbbf93e0bdd20b3b74bdae40b6686",
+          "turn_identity_digest": "sha256:f4a3f8baf71c7bda31ecab1f25b9ae914454caf59b3bb5fdc33ab27908255159",
+          "artifact_sha256": "56fae0b6eedf44884d27f666f65e07202dd06beb622d7c4f9c54a09ea0f1b714",
+          "artifact_bytes": 5908,
+          "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+          "catalog_metrics_scope": "aeep-metrics-d812ce342b2f5f9dcc80e4b3464f1344",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "6cde019328a657aba927c649cc6296b351289eb99d323a44053fef5c28d4cbb2",
+          "task_instruction_sha256": "320e531143a0e3c2aecf0b27749c81aeaeb0bbad6a3304340799bf03c514c398",
+          "adapter_id": "codex-app-server:text-phase-final-treatment",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 7902,
+          "invocation_guard_ms": 98.1681258417666,
+          "exit_code": null,
+          "attempt_id": "attempt_446038053b8c429daf1d711ddfb02970",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-d812ce342b2f5f9dcc80e4b3464f1344",
+            "batches": 42,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.skill.injected",
+                "value": 1,
+                "count": 1,
+                "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+                "status": "ok",
+                "invoke_type": "implicit"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "1587cd00675429e4313fc6eccf014e4e7bfcb6499fac48201e6490859d6df47b",
+        "journal_ref": "6cde019328a657aba927c649cc6296b351289eb99d323a44053fef5c28d4cbb2",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "6d30953537fa0c6897a2eb7676f411daeca50cda3f5822dea98fb1452a3dedc9",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+        "invoke_types": [
+          "implicit"
+        ]
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "943c71f9d32438066c724639133bde06e05ca412fbc51445e72cc5dac621017a",
+      "task_grade": true
+    },
+    "trial_repository-task-delivery-4cb0bf7419eb_development-pallets__click-3239_toolkit-repository-delivery-20261023.treatment_fresh-worker_0": {
+      "receipt_ref": "71df24b4515409f33b1bb483cd798db63150abfb87bff8578281fc14b5f01579",
+      "receipt": {
+        "receipt_id": "rcpt_8c0be8fb070c4162b87e3346d9ed45ee",
+        "decision_id": "dec_9410996980fd4087b8258238838efcb8",
+        "action_id": "act_ac93b1400376490ebf8f631a573dd082",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.treatment",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:41:50.595957Z",
+        "ended_at": "2026-10-24T17:42:25.642872Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:a7cd29ccba4ecc4551f4ee7b3ecd40ec4ce32bbc798f5892d495af1e4be9c044",
+        "cohort_digest": "sha256:680efd276728c6d643888c90bce6766f51c53ab33017f80466abd2855cece524",
+        "action_features": {
+          "input_bytes": 4111,
+          "input_items": 22,
+          "text_characters": 3923,
+          "max_depth": 2,
+          "size_bucket": "2^12"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 34144.94541566819,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 150026,
+          "cached_input_tokens": 129024,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1469,
+          "reasoning_output_tokens": 24,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 150026,
+              "cached_input_tokens": 129024,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1469,
+              "reasoning_output_tokens": 24,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:42:25.318371Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":33.834904042072594,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":33.834169417154044,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "0c2b75b0da51edd1aaaca0dfb09ea2123b8c0f6f303a47169242ad9f15dc252f",
+          "boundary_digest": "1b6d232d68f3de20d3b61672240783c88c3c9f5180f6b7bc009bc2772436f2dd",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 13,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+          "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+          "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:35479a57ff34fb9ec79bf55cf9ea9db52a9098b990e4d47f2541c2fa7ba081c5",
+          "turn_identity_digest": "sha256:7205115ce513403e5f4aa137a2ea0643c382186f5ed9efd43e1a46f5eb94f97b",
+          "artifact_sha256": "882287672380b71dc85afb7889b368879b076e3090136ad70dd71d83c7a60ac0",
+          "artifact_bytes": 32368,
+          "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+          "catalog_metrics_scope": "aeep-metrics-175e48d531a2d60ccece46471fe1077e",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "d45d089588737e01d3de164c95c94548288e4516e03f43e950f4a1812b92a519",
+          "task_instruction_sha256": "1ead6915f14b8de60a37526611d99ce4b00539c3154306f16fbe166d33ded572",
+          "adapter_id": "codex-app-server:text-phase-final-treatment",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 43182,
+          "invocation_guard_ms": 87.976582814008,
+          "exit_code": null,
+          "attempt_id": "attempt_4e9999d570654b03924dd6b312dce5c7",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-175e48d531a2d60ccece46471fe1077e",
+            "batches": 31,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.skill.injected",
+                "value": 1,
+                "count": 1,
+                "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+                "status": "ok",
+                "invoke_type": "implicit"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "71df24b4515409f33b1bb483cd798db63150abfb87bff8578281fc14b5f01579",
+        "journal_ref": "d45d089588737e01d3de164c95c94548288e4516e03f43e950f4a1812b92a519",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "11dd225d308ac8e4aa0fd3435fcad845277da58235eaafc0ca44890a19d62153",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+        "invoke_types": [
+          "implicit"
+        ]
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "260db904091772ba14f5316d2cfefbb654a5370d3c51a655a95f6980b7dee12d",
+      "task_grade": true
+    },
+    "trial_repository-task-delivery-4cb0bf7419eb_development-pallets__click-3239_toolkit-repository-delivery-20261023.control_fresh-worker_0": {
+      "receipt_ref": "79f06e1cd3c7550df59a69c0df217df40561a50eaf2224d3f08fe69fb62bc0db",
+      "receipt": {
+        "receipt_id": "rcpt_97d8bacf733344cfac38e002b7d2311c",
+        "decision_id": "dec_51ff1e38b0f0472da23d3ed5447efa0c",
+        "action_id": "act_ac93b1400376490ebf8f631a573dd082",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.control",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:42:29.817080Z",
+        "ended_at": "2026-10-24T17:43:10.126735Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:ab113779c5f8534139732a410d638239eaf5b5ca83094fbe1e6ea0af8354fe85",
+        "cohort_digest": "sha256:33683f49e2dabbe0ec1df87249ff7e320f6ff496cc4db7732f8f76d9c3cc6f37",
+        "action_features": {
+          "input_bytes": 4111,
+          "input_items": 22,
+          "text_characters": 3923,
+          "max_depth": 2,
+          "size_bucket": "2^12"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 39396.54591679573,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 109371,
+          "cached_input_tokens": 94976,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1400,
+          "reasoning_output_tokens": 20,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 109371,
+              "cached_input_tokens": 94976,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1400,
+              "reasoning_output_tokens": 20,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:43:09.777983Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":39.06408329214901,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":39.06383437477052,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "db9f55125b0a428323f98b6424c90176ee1e6ff5393bc30e98cf8888da3e6772",
+          "boundary_digest": "9007b65b75b03734c943324f98ee350031871518915656504b8fa651892e71f4",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 12,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:d33d9ba039f91cd11d967b9c02c4d80a4f99fb6d9e3416b73f9898c26f944608",
+          "turn_identity_digest": "sha256:6e26b38f3f22664925240f894e479880d39522ef8c3e161f2654b6b566ea3881",
+          "artifact_sha256": "acfcfaba78d26dfabec8171952d858f66b989698e3b8f58f2b48dd82f3f92e64",
+          "artifact_bytes": 32344,
+          "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+          "catalog_metrics_scope": "aeep-metrics-6295c27c4d7cfc5ea76df38ea0208592",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "05d0e04d0f9c7bea3fb27cb0e73b6a093743dd3232fbfbb1e24aba9a4fd0a8c2",
+          "task_instruction_sha256": "1ead6915f14b8de60a37526611d99ce4b00539c3154306f16fbe166d33ded572",
+          "adapter_id": "codex-app-server:text-phase-final-control",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 43150,
+          "invocation_guard_ms": 96.9635839574039,
+          "exit_code": null,
+          "attempt_id": "attempt_d98987c13f7a4365a6986dced250b6d0",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-6295c27c4d7cfc5ea76df38ea0208592",
+            "batches": 42,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "79f06e1cd3c7550df59a69c0df217df40561a50eaf2224d3f08fe69fb62bc0db",
+        "journal_ref": "05d0e04d0f9c7bea3fb27cb0e73b6a093743dd3232fbfbb1e24aba9a4fd0a8c2",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "b7b933dc8f9a9ee7c737273aa1a9da484c9c13ff1689563b490c66145e205956",
+        "skill_sha256": null
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "1400e18a6da232f758f40d1814c7bb61f8666599a6da9513e0d229bf59837bc7",
+      "task_grade": true
+    },
+    "trial_repository-task-delivery-4cb0bf7419eb_development-delgan__loguru-1451_toolkit-repository-delivery-20261023.control_fresh-worker_0": {
+      "receipt_ref": "551f2030e6ee2fec3307bf8e2fd85deebb954597dca2cbddc80f97fd5c21e36e",
+      "receipt": {
+        "receipt_id": "rcpt_eece906789004967863b4ccb2de4b6ed",
+        "decision_id": "dec_abe6af0adeb345289eac99e7ca9e6967",
+        "action_id": "act_13236cdf2cfe40f6a8d13fbf1acc09b8",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.control",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:43:14.325919Z",
+        "ended_at": "2026-10-24T17:43:52.173087Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:ab113779c5f8534139732a410d638239eaf5b5ca83094fbe1e6ea0af8354fe85",
+        "cohort_digest": "sha256:33683f49e2dabbe0ec1df87249ff7e320f6ff496cc4db7732f8f76d9c3cc6f37",
+        "action_features": {
+          "input_bytes": 4327,
+          "input_items": 24,
+          "text_characters": 4123,
+          "max_depth": 2,
+          "size_bucket": "2^12"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 36478.548207785934,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 100445,
+          "cached_input_tokens": 84608,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1583,
+          "reasoning_output_tokens": 31,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 100445,
+              "cached_input_tokens": 84608,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1583,
+              "reasoning_output_tokens": 31,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:43:51.830253Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":36.14920904207975,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":36.14794445922598,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "db9f55125b0a428323f98b6424c90176ee1e6ff5393bc30e98cf8888da3e6772",
+          "boundary_digest": "9007b65b75b03734c943324f98ee350031871518915656504b8fa651892e71f4",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 9,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:18ebfa8c36ec12cb0a40415add22c970c30d5be848f9a3a8a3c6b3278c5f1ea2",
+          "turn_identity_digest": "sha256:117d57f49f85fffe924a958b9f1d0dc5001a56de01b822818fabff90b6a77a6d",
+          "artifact_sha256": "33a97e0dbe633e0d53c79376f751c3829a70a2bcd602f3c6a4222a576125cec3",
+          "artifact_bytes": 2926,
+          "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+          "catalog_metrics_scope": "aeep-metrics-525780b8bc93c6b6ac931e9734b2b6d7",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "52feac2f2a231fe7ab5c3cfa68ae85aa1e83310fa30185ea06c807abb86f9d30",
+          "task_instruction_sha256": "4d36855f49085cc80dc399588fbc28fa7cd961067221dde0bddda6d5a159afac",
+          "adapter_id": "codex-app-server:text-phase-final-control",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 3926,
+          "invocation_guard_ms": 84.51220951974392,
+          "exit_code": null,
+          "attempt_id": "attempt_39c724fb7a2c4115b9fc2b6b57ab4a5a",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-525780b8bc93c6b6ac931e9734b2b6d7",
+            "batches": 39,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 5.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "551f2030e6ee2fec3307bf8e2fd85deebb954597dca2cbddc80f97fd5c21e36e",
+        "journal_ref": "52feac2f2a231fe7ab5c3cfa68ae85aa1e83310fa30185ea06c807abb86f9d30",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "8f86d882afc138237e87c392da5fd1315021ccb7a4aba0f2234f842fd5def089",
+        "skill_sha256": null
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "f8c1a7ba41ae217171d62ef31610e24bb2551923006c47ee854d2a2c278c86f0",
+      "task_grade": true
+    },
+    "trial_repository-task-delivery-4cb0bf7419eb_development-delgan__loguru-1451_toolkit-repository-delivery-20261023.treatment_fresh-worker_0": {
+      "receipt_ref": "28c4d32c7b71545978c4477fb325ee7ad7de0f5cf0a9eed8961e67bf5bcb36fc",
+      "receipt": {
+        "receipt_id": "rcpt_8beb77da7f5045f4802f4c11ab1ac729",
+        "decision_id": "dec_c986018a614d4932a4c8d3d9d2a4b515",
+        "action_id": "act_13236cdf2cfe40f6a8d13fbf1acc09b8",
+        "capability": "assessment.repository_suite@1",
+        "executor_id": "toolkit-repository-delivery-20261023.treatment",
+        "executor_kind": "host_managed",
+        "status": "success",
+        "attempt": 1,
+        "started_at": "2026-10-24T17:43:55.912283Z",
+        "ended_at": "2026-10-24T17:44:42.207667Z",
+        "estimated": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": "0.0",
+            "upper_bound_usd": "0.0",
+            "evidence": {
+              "status": "complete",
+              "source": "static_estimate",
+              "trust": "self_asserted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "executor_fingerprint": "sha256:a7cd29ccba4ecc4551f4ee7b3ecd40ec4ce32bbc798f5892d495af1e4be9c044",
+        "cohort_digest": "sha256:680efd276728c6d643888c90bce6766f51c53ab33017f80466abd2855cece524",
+        "action_features": {
+          "input_bytes": 4327,
+          "input_items": 24,
+          "text_characters": 4123,
+          "max_depth": 2,
+          "size_bucket": "2^12"
+        },
+        "actual_resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 44826.525375247,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 162248,
+          "cached_input_tokens": 142464,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1831,
+          "reasoning_output_tokens": 31,
+          "subscription_units": 0.0
+        },
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 162248,
+              "cached_input_tokens": 142464,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1831,
+              "reasoning_output_tokens": 31,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:44:41.530695Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "cache_affinity": null,
+        "approval_id": null,
+        "transport_success": true,
+        "execution_success": true,
+        "schema_valid": true,
+        "task_valid": true,
+        "quality_score": 1.0,
+        "validation_results": [
+          {
+            "kind": "schema",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "schema validation passed",
+            "trust": "observed"
+          }
+        ],
+        "output_valid": true,
+        "error_type": null,
+        "error_message": null,
+        "trace_id": null,
+        "metadata": {
+          "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":44.16932541690767,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":44.16871670912951,\"final_message_received\":true,\"turn_completion_received\":true}",
+          "actual_model": "gpt-6-astra",
+          "host_runtime_digest": "0c2b75b0da51edd1aaaca0dfb09ea2123b8c0f6f303a47169242ad9f15dc252f",
+          "boundary_digest": "1b6d232d68f3de20d3b61672240783c88c3c9f5180f6b7bc009bc2772436f2dd",
+          "model_turn_count": 1,
+          "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+          "tool_selection_rounds": null,
+          "implementation_schema_bytes": null,
+          "output_schema_bytes": 117,
+          "result_bytes": 18,
+          "tool_call_count": 13,
+          "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+          "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+          "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+          "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+          "host_available_tools": "unknown",
+          "approval_evidence_digest": null,
+          "thread_identity_digest": "sha256:a17db941c70ebe7b08c74c671c396749f884fccce819a7a92ffb8ce9f16a17b9",
+          "turn_identity_digest": "sha256:fb086b32a2d9d5f1b1e075eeede9606370abe1e2898a0ba5316db837a8606615",
+          "artifact_sha256": "7f6a90e2543feedc9b163cdfeeaca7e44d450cf5143a27da4bde85ce06383e65",
+          "artifact_bytes": 2926,
+          "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+          "catalog_metrics_scope": "aeep-metrics-c1081e19ae1a719ed6ca07497bfb8c7d",
+          "worker_cleanup_confirmed": true,
+          "execution_evidence_digest": "38fb3bdc9ccf467c8a5512625d8665f6b3611ed37c8e833f97e1129879528ed3",
+          "task_instruction_sha256": "4d36855f49085cc80dc399588fbc28fa7cd961067221dde0bddda6d5a159afac",
+          "adapter_id": "codex-app-server:text-phase-final-treatment",
+          "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+          "response_bytes": 3926,
+          "invocation_guard_ms": 101.08691593632102,
+          "exit_code": null,
+          "attempt_id": "attempt_de8ff6c6409f4fafb4fcf4f5f83feca8",
+          "capability_discovery": {
+            "exposed": null,
+            "retrieved": null,
+            "invoked": null
+          },
+          "catalog_metrics": {
+            "schema_version": "codex.catalog-metrics.v1",
+            "scope": "aeep-metrics-c1081e19ae1a719ed6ca07497bfb8c7d",
+            "batches": 41,
+            "rejected_batches": 0,
+            "overflow": false,
+            "collector_closed": true,
+            "delivery_complete": false,
+            "observations": [
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.enabled_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 6.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.kept_total",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "host_world_state"
+              },
+              {
+                "name": "codex.thread.skills.truncated",
+                "value": 0.0,
+                "count": 1,
+                "catalog_surface": "thread_context"
+              },
+              {
+                "name": "codex.skill.injected",
+                "value": 1,
+                "count": 1,
+                "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+                "status": "ok",
+                "invoke_type": "implicit"
+              }
+            ]
+          }
+        }
+      },
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "28c4d32c7b71545978c4477fb325ee7ad7de0f5cf0a9eed8961e67bf5bcb36fc",
+        "journal_ref": "38fb3bdc9ccf467c8a5512625d8665f6b3611ed37c8e833f97e1129879528ed3",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "68ee492ec20ca54274dfddcb07e81d7f89dd4b377457c82bf7d35bce4da30eea",
+        "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+        "invoke_types": [
+          "implicit"
+        ]
+      },
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "canonical_trial_ref": "32cf494f9d7fb42ef46c9f6eaa09e671f47e0424bea249cb9f18e82bc343a205",
+      "task_grade": true
+    }
+  },
+  "model_turn_ceiling": 6,
+  "assessment_id": "assessment_e66d4e3fb8e644e9b6f8f7cd9318ee36",
+  "report_id": "fit_a39e9a1739794f2fab8f3f389bf65200",
+  "canonical_report": {
+    "schema_version": "assessment.report.v1",
+    "report_id": "fit_a39e9a1739794f2fab8f3f389bf65200",
+    "plan_digest": "2085db61e0c600f7d704a6fd3ba1c69151886676613e0673c1fe92ba171884e6",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "tested_variations": [],
+    "measured_usage": {
+      "campaign_wall_time_ms": 285696.10933586955,
+      "known_campaign_wall_time_ms": 285696.10933586955,
+      "known_overhead_wall_time_ms": 124175.13050092384,
+      "assessment_wall_time_ms": null,
+      "included_routing_overhead_ms": 45.35474954172969,
+      "included_invocation_guard_ms": 548.8003762438893,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 16911.007,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": null,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "campaign_total.subscription.openai.codex.self.provider_unit": null,
+      "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "assessment_total.subscription.openai.codex.self.provider_unit": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/6",
+      "local.gpu_ms": "0/6",
+      "local.memory_mb_seconds": "0/6",
+      "local.network_bytes": "0/6",
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/6",
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/6",
+      "model.openai.gpt-6-astra.subscription.input_tokens": "0/6",
+      "model.openai.gpt-6-astra.subscription.output_tokens": "0/6",
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/6",
+      "subscription.openai.codex.self.provider_unit": "0/6"
+    },
+    "paired_measurement_cases": {
+      "wall_time_ms": 0,
+      "local.cpu_ms": 0,
+      "local.gpu_ms": 0,
+      "local.memory_mb_seconds": 0,
+      "local.network_bytes": 0,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+      "subscription.openai.codex.self.provider_unit": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "savings_interval": {},
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "estimated_production_savings": {},
+    "campaign_digest": "9f15c60db321e7b9fd4f411db44fd3235b708911f92b133aacd58a32db375e65",
+    "operation_ledger_digest": "35379cc88cd2f03ea5b51101dad9ef745409244f165ad316a1109ceeee5d801a",
+    "grader_validation_digest": "58b279594af3c084e85d847fa4a7b2e258cd4d2186f5730ec751ac10b618cd4f",
+    "host_runtime_digests": {
+      "toolkit-repository-delivery-20261023.control": "db9f55125b0a428323f98b6424c90176ee1e6ff5393bc30e98cf8888da3e6772",
+      "toolkit-repository-delivery-20261023.treatment": "0c2b75b0da51edd1aaaca0dfb09ea2123b8c0f6f303a47169242ad9f15dc252f"
+    },
+    "deterministic_reference_comparison": {},
+    "explanations": [
+      "Correctness counts distinct held-out cases; repetitions measure variability.",
+      "Latency includes routing and grading. The interval resamples template families and cases.",
+      "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+      "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown."
+    ],
+    "created_at": "2026-10-24T17:44:44.232090Z"
+  },
+  "all_worker_cleanup_confirmed": true,
+  "independent_grade_coverage": 6,
+  "verified_capture_coverage": 6,
+  "task_prompt_binding_coverage": 6,
+  "completed": true,
+  "proxy_restored_stopped": true,
+  "operation_ledger": {
+    "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+    "operations": [
+      {
+        "operation_id": "assessment_e66d4e3fb8e644e9b6f8f7cd9318ee36:grader-validation",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "grader_validation",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:13.114751Z",
+        "elapsed_seconds": 1.6989147085696459,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 15293.207,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "assessment_e66d4e3fb8e644e9b6f8f7cd9318ee36:report",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "report_generation",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:13.104695Z",
+        "elapsed_seconds": 0.002144083846360445,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 2.143000000000228,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01:repository-development-proxy",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_development_proxy_lifecycle",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 3000.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:12.865634Z",
+        "elapsed_seconds": 334.09059041691944,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_0389f67ed7d94f7c824e9be34ed5bb5d",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:39.344192Z",
+        "elapsed_seconds": 1.877543959300965,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_07456988247445b391c5d5903bee9d3c",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:52.295653Z",
+        "elapsed_seconds": 1.8758761673234403,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_080676ccb8a544568edb9c8c398bb6c1",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:44:42.340954Z",
+        "elapsed_seconds": 1.7911784169264138,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_0eab82f5789d46d6b5a43c1b234195db",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:13.347602Z",
+        "elapsed_seconds": 1.7431026250123978,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_14b9670d2b644ad28a12089eb1f615d2",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:10.249813Z",
+        "elapsed_seconds": 2.3779123327694833,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_1f796360f22640219be00e6fd66f9294",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:40:38.450924Z",
+        "elapsed_seconds": 2.1338935419917107,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_2b17bc4fbce7440084c0ac1067783331",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:19.412797Z",
+        "elapsed_seconds": 1.8779993751086295,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_4cc780cd86374ceba09cce08aa4294c8",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:29.331808Z",
+        "elapsed_seconds": 1.9347271253354847,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_565f40b329524240bb0fe90fd3f52765",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:37.655652Z",
+        "elapsed_seconds": 1.6045585828833282,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_5ae39e84a8094102a0c11c9e6d8e7dbf",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:31.385852Z",
+        "elapsed_seconds": 1.970232916995883,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_64e6bb01925940949b46fec613d92ca5",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:41.319145Z",
+        "elapsed_seconds": 1.9664249578490853,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_8a3a301c942b46439aa66491acbc8b8a",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:35.296864Z",
+        "elapsed_seconds": 2.2369242082349956,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_9673c0eb25ed4552b9e391089dec5641",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:41:46.756512Z",
+        "elapsed_seconds": 1.9078555409796536,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_9be00dfac7d14808a2f85aca94865fa2",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:27.583253Z",
+        "elapsed_seconds": 1.6611087918281555,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_a2fbca1f90764ce893bb99a1b7f2a87d",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:23.220314Z",
+        "elapsed_seconds": 2.3440261660143733,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_a5419bdb632948f1953ce24f9bc69e29",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:21.404721Z",
+        "elapsed_seconds": 1.7100286670029163,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_a54d65dce93e4a80ba6b6f18d25c6fee",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:42:25.757657Z",
+        "elapsed_seconds": 2.199244416784495,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_acc8a28f516e4d33abe4c47e10d763b1",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:17.323432Z",
+        "elapsed_seconds": 1.9787413328886032,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_c9b9fa70a76748ec8c8146ca03246c37",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:15.205615Z",
+        "elapsed_seconds": 2.036434874869883,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_f34569ddcd584f81a497d212da34079d",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:33.472084Z",
+        "elapsed_seconds": 1.714797249995172,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "recipe_call_fc4e94fe9c164e84ba8e4bd334f941ee",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "repository_suite_probe",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 35.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:25.683921Z",
+        "elapsed_seconds": 1.8186360830441117,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": null
+      },
+      {
+        "operation_id": "router_setup_2cf4a0a1954c47e7ab36c24c8212bd40",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:43.304157Z",
+        "elapsed_seconds": 0.39212116692215204,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 331.01399999999967,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_6428e60dc0034718a9a5831ffa760b38",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:12.688418Z",
+        "elapsed_seconds": 0.286574250087142,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 265.784,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_7bddb2d7159f4955bc656d3ac3410676",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:40:40.645199Z",
+        "elapsed_seconds": 0.20600779075175524,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 173.6530000000016,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_7f5460d547754e04b9e2423da83182d2",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:42:28.033063Z",
+        "elapsed_seconds": 0.17855491675436497,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 165.83200000000176,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_ba2dfd3ad7274ba2be939b7b4c2f1801",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:41:48.723139Z",
+        "elapsed_seconds": 0.3705373341217637,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 341.2010000000016,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_bd1a7ab72c7744ffbc32db76df1cdd8b",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:43.799011Z",
+        "elapsed_seconds": 0.17158679058775306,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 167.56499999999974,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "router_setup_da2c7e642dad4e8e9975291b1499fdc2",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "router_setup",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:54.230687Z",
+        "elapsed_seconds": 0.1874238746240735,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 170.60799999999787,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-delgan__loguru-1451_toolkit-repository-delivery-20261023.control_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:13.040365Z",
+        "elapsed_seconds": 39.20127695892006,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 100445,
+              "cached_input_tokens": 84608,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1583,
+              "reasoning_output_tokens": 31,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:43:51.830253Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 39201.27695892006,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 100445,
+          "cached_input_tokens": 84608,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1583,
+          "reasoning_output_tokens": 31,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-delgan__loguru-1451_toolkit-repository-delivery-20261023.treatment_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:43:54.484706Z",
+        "elapsed_seconds": 47.80285629071295,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 162248,
+              "cached_input_tokens": 142464,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1831,
+              "reasoning_output_tokens": 31,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:44:41.530695Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 47802.85629071295,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 162248,
+          "cached_input_tokens": 142464,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1831,
+          "reasoning_output_tokens": 31,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-marshmallow-code__marshmallow-2800_toolkit-repository-delivery-20261023.control_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:39:44.036144Z",
+        "elapsed_seconds": 54.39184412593022,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 123074,
+              "cached_input_tokens": 106112,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 2305,
+              "reasoning_output_tokens": 121,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:40:38.025339Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 54391.84412593022,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 123074,
+          "cached_input_tokens": 106112,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2305,
+          "reasoning_output_tokens": 121,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-marshmallow-code__marshmallow-2800_toolkit-repository-delivery-20261023.treatment_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:40:40.913267Z",
+        "elapsed_seconds": 65.82022933429107,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 172041,
+              "cached_input_tokens": 142720,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 2289,
+              "reasoning_output_tokens": 117,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:41:46.272876Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 65820.22933429107,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 172041,
+          "cached_input_tokens": 142720,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2289,
+          "reasoning_output_tokens": 117,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-pallets__click-3239_toolkit-repository-delivery-20261023.control_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:42:28.275361Z",
+        "elapsed_seconds": 41.927397792227566,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 109371,
+              "cached_input_tokens": 94976,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1400,
+              "reasoning_output_tokens": 20,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:43:09.777983Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 41927.397792227566,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 109371,
+          "cached_input_tokens": 94976,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1400,
+          "reasoning_output_tokens": 20,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "trial_repository-task-delivery-4cb0bf7419eb_development-pallets__click-3239_toolkit-repository-delivery-20261023.treatment_fresh-worker_0",
+        "plan_id": "plan_cb74a0a2fde644acb8954d3b7bbefe01",
+        "stage": "trial",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 305.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-10-24T17:41:49.157153Z",
+        "elapsed_seconds": 36.55250483378768,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 150026,
+              "cached_input_tokens": 129024,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1469,
+              "reasoning_output_tokens": 24,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-10-24T17:42:25.318371Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 36552.50483378768,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 150026,
+          "cached_input_tokens": 129024,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1469,
+          "reasoning_output_tokens": 24,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "source_unchanged": true,
+  "observer_replies_retained": 21,
+  "grant_after": [
+    13104,
+    3755,
+    119650.71806692518,
+    "0.0"
+  ]
+}

@@ -1,16 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-23: source4cb0bf74 passed all13 checks,1679 tests in each
-full run,21 skips,82% coverage and both branch gates. Combined review51c43d2c is
-prepared with251 assets for corrected task delivery and independent package/docs
-checks;it is unapproved and unexecuted. Prior5 model turns stay ungraded/charged.
-The35-case pool and C13 usefulness/selection gates remain incomplete.**
+**Status as of 2026-10-24: approved bundle 51c43d2c completed once. All six
+repository repairs passed independent upstream grading, with six verified capture
+chains, six task-instruction bindings and three observed optional Ponytail loads.
+The installed wheel passed 19 checks; cached offline docs verification passed.
+Canonical accounting and cleanup passed. C13 remains IN_PROGRESS: these three
+development pairs do not establish usefulness or selection. The 35-case pool
+still needs 106 additional cases for the planned balanced stages.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
 All five reservations remain charged, including one preflight skip. The completed capture repair needs no further model turn, installation, rebuild,
 credential or architecture decision. The new repository-pack review is separate.
-The capture-repair profiles retain their source 7707756 scope. The current repository grader has three-case offline development conformance on source `fcd91dde`. Independent runtime reproduction and model qualification remain separate.
+The capture-repair profiles retain their source 7707756 scope. The earlier repository-grader records retain source `fcd91dde`; the completed source `4cb0bf74` journey below has fresh worker/collector and grader conformance. Model qualification remains separate.
 The original 564-task comparison remains INCONCLUSIVE, with no automatic admission.
 The actual human response and helped follow-up are recorded. Report scope and
 limits are understood after clarification; concrete control discovery is partial.
@@ -46,17 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '36a93ff'
-last_check_command: 'repository-task-delivery-20261023/validation-final/checks.json; task-delivery-check.json; grade-binding-check.json; source-regressions-final.log; identity-fixture-frame-audit.json'
-last_check_result: 'Source4cb0bf74 all13 checks passed on unchanged bytes;1679passed/21skipped on both full runs,82percent coverage,both branch gates,Ruff/policy/mypy/builds passed. Six rendered task checks,five grade-binding fixtures and33-wheel no-execution dry-run passed. Combined51c43d2c binds251 assets;no execution/approval yet. Source59b prior5 ungraded turns and29 operations remain charged.'
-next_action: 'Do not rerun terminal source session94490 or modeld775e93e. Read repository-task-delivery-20261023/README.md and approval-bundle.json SHA51c43d2c. All13 source checks passed. Exact combined execution approval is the next intervention;record actual response once as bundle-operator-approval.json and run run-integration-bundle.py once only if approved. Preserve all prior charges. New source has no worker/model/install/docs-check execution yet;no architecture decision needed.'
+last_verified_commit: '4798b88'
+last_check_command: 'repository-task-delivery-20261023/audit-completion.py; bundle-execution-result.json; validation-final/checks.json'
+last_check_result: 'All three approved components passed. Six independently graded successes, six verified capture chains, six prompt bindings, three treatment instruction loads. Reopened 24 grader receipts/attempts and six model receipts/trials/journals. All 45 operations complete, six turns and 689.980447711423 operation-seconds charged. All reviewed workers absent and proxy stopped. Wheel19 checks and offline docs passed. Product source4cb unchanged.'
+next_action: 'Do not replay terminal51c43d2c, d775e93e or source session94490. Read the corrected comparison and completion-audit, then continue static curation of independent repository cases and freeze a concrete next reproduction review. No further broad source, package or docs rerun is justified on unchanged product bytes. Preserve all prior charges. Qualification, four-arm usefulness and selection await independent cohorts and exact execution authority.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Exact combined execution review51c43d2c needs actual approval. Source4cb full checks and concrete251-asset bundle are ready. It includes fresh worker/collector and grader conformance,up to6 public development task turns,new wheel plus32 cached dependencies/19 offline checks,and pinned offline docs checker. No architecture decision. Prior terminal approvals do not cover these changed artifacts.'
+  - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
   - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
@@ -3472,3 +3474,37 @@ Next:read repository-task-delivery-20261023/README.md and approval-bundle.json;
 inspect actual response and markers;record actual parent approval once and execute
 run-integration-bundle.py with51c43d2c once if approved. Never run a draft,repeat94490,
 or replay terminald775e93e. Continue from actual component results after execution.
+
+## C13: real repository task delivery and capture completed
+
+The actual October 24 approval of bundle `51c43d2c` was recorded once and executed
+once on source `4cb0bf74`. All components passed. Both roles passed 11 containment
+groups and private collector denial; all three offline grader probes passed.
+Fifteen normal grader checks and six model outputs were observed independently.
+Loguru 1451, Click 3239 and Marshmallow 2800 each passed once per arm. All six
+canonical token chains and task-instruction hashes verified; all three treatment
+turns observed optional Ponytail 4.10.0 instruction loading. Semantic contribution
+and the provider's internal meter remain unverified.
+
+The [completion audit](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/completion-audit.json)
+reopened 24 grader receipts and completed attempts, six model receipts, trials and
+journals, and all 45 completed ledger operations. It confirmed owned worker removal
+and the stopped proxy. The run charged six turns and 689.980447711423 operation-
+seconds, with no cash added. This sum includes overlapping assessment wrappers;
+it is not unique host elapsed time. Grant: 13104 operations, 3755 turns,
+119650.71806692518 seconds and 0.0 cash. Earlier failed attempts stay charged.
+
+Wheel `56a86fc3` plus the same 32 cached dependencies passed 18 installed CLI
+checks and one retained-capture check. Its unchanged private runtime and scratch
+were removed. Cached Lychee 0.24.2 and `make docs-check` passed on the recorded 69
+document hashes, then its private runtime was removed. No download, image change,
+credential access, activation or release occurred. Later evidence/state prose is
+outside that earlier docs hash snapshot; do not claim the terminal checker reran.
+
+The [three-pair report](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/comparison.md)
+shows raw provider token categories and separate task/grading times. Both arms
+passed every task; this is working development plumbing, not demonstrated benefit,
+formal qualification, selection validation or admission. Keep these development
+repositories outside future holdouts. C13 remains IN_PROGRESS. Continue independent
+corpus curation and prepare the next exact reproduction review; do not repeat
+completed engineering checks merely to fill the remaining scientific gates.

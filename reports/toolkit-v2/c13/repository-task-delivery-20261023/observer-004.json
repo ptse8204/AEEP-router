@@ -1,0 +1,51 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 1.8779993751086295,
+  "reply_type": "dict",
+  "reply_digest": "0f1c94f4865b9ae94361882db790f1f7fbc07b5776f9d61f98d445452643d228",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 0,
+  "archive_sha256": "ac9a036384bd2795766446694410ddce2b5e76b0d8149b37b4e791aa2164b486",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 24,
+  "statuses": {
+    "tests/test_add_option_format.py::test_format[a-Message:": "PASSED",
+    "tests/test_add_option_format.py::test_format[b-Nope-Nope\\n]": "PASSED",
+    "tests/test_add_option_format.py::test_format[c-{level}": "PASSED",
+    "tests/test_add_option_format.py::test_format[d-{message}": "PASSED",
+    "tests/test_add_option_format.py::test_format[e-<lambda>-e]": "PASSED",
+    "tests/test_add_option_format.py::test_format[f-<lambda>-f": "PASSED",
+    "tests/test_add_option_format.py::test_progressive_format": "PASSED",
+    "tests/test_add_option_format.py::test_function_format_without_exception": "PASSED",
+    "tests/test_add_option_format.py::test_function_format_with_exception": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format[-1]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format[3.4]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format[format2]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_markups[<red>]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_markups[</red>]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_markups[</level><level>]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_markups[</>]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_markups[<foobar>]": "PASSED",
+    "tests/test_add_option_format.py::test_markup_in_field[True]": "PASSED",
+    "tests/test_add_option_format.py::test_markup_in_field[False]": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format_builtin": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format_key_emits_helpful_error_with_catch": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format_key_raises_enhanced_error_without_catch": "PASSED",
+    "tests/test_add_option_format.py::test_invalid_format_key_error_message_content": "PASSED",
+    "tests/test_add_option_format.py::test_patcher_added_keys_work_in_format": "PASSED"
+  }
+}
