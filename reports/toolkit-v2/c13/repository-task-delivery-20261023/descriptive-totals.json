@@ -1,0 +1,33 @@
+{
+  "scope": "Three development task pairs only; descriptive, no confidence-supported value or selection conclusion.",
+  "source_audit_sha256": "c5e2bcc4356b49b62613000771cca31646508514904abb5a1c81d2cd60da1d9b",
+  "arms": {
+    "control": {
+      "runs": 3,
+      "verified_successes": 3,
+      "provider_reported_input_plus_output_tokens": 338178,
+      "agent_wall_seconds": 135.52051887707785,
+      "verification_wall_seconds": 6.710246165283024
+    },
+    "treatment": {
+      "runs": 3,
+      "verified_successes": 3,
+      "provider_reported_input_plus_output_tokens": 489904,
+      "agent_wall_seconds": 150.1755904587917,
+      "verification_wall_seconds": 6.219696291256696
+    }
+  },
+  "treatment_minus_control": {
+    "verified_successes": 0,
+    "provider_reported_input_plus_output_tokens": 151726,
+    "agent_wall_seconds": 14.655071581713855,
+    "verification_wall_seconds": -0.4905498740263283
+  },
+  "relative_treatment_minus_control": {
+    "provider_reported_input_plus_output_tokens": 0.44865721602233144,
+    "agent_wall_seconds": 0.10813913422960364
+  },
+  "provider_internal_meter_verified": false,
+  "actual_provider_cash": null,
+  "formal_verdict": null
+}

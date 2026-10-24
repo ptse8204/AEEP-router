@@ -45,8 +45,9 @@ def main():
         'Capture verification checks the canonical journal, receipt and model usage '
         'agree; it does not independently verify the provider’s meter.', '',
         'Agent wall time is the canonical trial’s execution time, with protected '
-        'grading reported separately. Worker setup and inspection are assessment '
-        'overhead. Positive native skill-loading events establish instruction '
+        'grading reported separately. This includes startup/setup within the timed '
+        'dispatch; pre-study inspection and reference validation are separate '
+        'assessment overhead. Positive native skill-loading events establish instruction '
         'delivery, not semantic contribution. Missing events never prove non-use.', '',
         '## Interpretation', '',
         'The completed repairs establish that actual task delivery, returned patches, '

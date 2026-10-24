@@ -15,9 +15,11 @@ The ordinary Codex agent and the same agent with optional Ponytail 4.10.0 used g
 
 Input includes cached input; output includes reasoning output. Do not add those subsets again. Counts remain provider reports with self-asserted trust. Capture verification checks the canonical journal, receipt and model usage agree; it does not independently verify the provider’s meter.
 
-Agent wall time is the canonical trial’s execution time, with protected grading reported separately. Worker setup and inspection are assessment overhead. Positive native skill-loading events establish instruction delivery, not semantic contribution. Missing events never prove non-use.
+Agent wall time is the canonical trial’s execution time, with protected grading reported separately. It includes worker startup or setup within that timed dispatch. Pre-study inspection and reference validation are separate assessment overhead. Positive native skill-loading events establish instruction delivery, not semantic contribution. Missing events never prove non-use.
 
 ## Interpretation
+
+Across these three pairs, treatment used 489904 provider-reported input-plus-output tokens versus 338178 for control (44.87% more). Its summed agent wall time was 150.18 seconds versus 135.52 seconds (10.81% more). Both arms passed 3/3 tasks. These are descriptive differences from development tasks, with no confidence-supported benefit or regression verdict. [Audited totals](descriptive-totals.json) preserve the calculation.
 
 The completed repairs establish that actual task delivery, returned patches, independent upstream grading, token capture and cleanup can work together on these three public repository tasks. A failed task, if present, remains a failed grade rather than an infrastructure pass.
 

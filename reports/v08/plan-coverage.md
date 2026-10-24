@@ -5657,3 +5657,11 @@ cases and pure derivation checks passed. Product source4cb and its completed
 source/package checks are unchanged. New untrusted installation/execution needs
 exact approval of `be8b0e5f`; no architecture decision is pending. No case or
 scientific gate is promoted by this preparation.
+
+The three corrected development pairs were also summarized without new execution:
+control/treatment both passed3/3; treatment reported44.87% more input-plus-output
+tokens and10.81% more summed task wall time. These are descriptive points only;
+no value/selection admission follows. Canonical task time includes startup/setup
+inside dispatch, while grading remains separate. Completed251 and pending108
+asset bindings still match. Reviewbe8b0e5f is requested, with no actual response
+recorded. All grant counters and historical failures remain unchanged.

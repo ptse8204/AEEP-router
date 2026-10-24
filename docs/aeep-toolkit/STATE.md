@@ -54,7 +54,7 @@ last_check_result: 'All three approved components passed. Six independently grad
 next_action: 'Read repository-independent-sources-20261024/README.md and approval-bundle.json SHAbe8b0e5f. The five-case/16-wheel review is prepared, unapproved and unexecuted; record an actual exact response before one run-bundle.py attempt. It permits zero models,13 offline calls,16 operations and785 reserved seconds. Do not repeat completed51c43d2c, d775e93e or source94490. Preserve counters; consolidate only actual accepted reproduction results. Full qualification/usefulness/selection still need independent cohorts.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
-  - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading/mapping and three pinned development snapshots are implemented; independent real-task holdouts, current contained conformance and new frozen live comparisons remain incomplete.'
+  - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
@@ -3530,3 +3530,18 @@ operations, 785 reserved seconds, zero models and cash. Actual exact authorizati
 is required for these new packages/subjects; no architecture decision is missing.
 Read the linked README before recording approval or dispatching. Current grant
 remains 13104 operations / 3755 turns / 119650.71806692518 seconds / 0.0 cash.
+
+The descriptive three-pair totals are retained separately in
+[descriptive-totals.json](../../reports/toolkit-v2/c13/repository-task-delivery-20261023/descriptive-totals.json).
+Both arms passed 3/3. Treatment reported 489904 input-plus-output tokens versus
+338178 for control (+44.87%) and 150.1755904587917 task wall seconds versus
+135.52051887707785 (+10.81%). These are development point differences, with no
+confidence-supported benefit or regression verdict. Timing includes worker
+startup/setup inside the measured dispatch; grading is separate. Earlier raw
+receipts, trials and journals remain unchanged.
+
+Review `be8b0e5f` was requested after preparation commit `d64be4b`; no actual
+response has been recorded yet. It replaces unapproved draft `7d053ee3` after a
+report-only plugin-summary correction. Read `approval-requested.json` and actual
+user replies before proceeding. All 251 completed-bundle assets and all 108
+pending-bundle assets still match; source `4cb0bf74` and grant counters are unchanged.
