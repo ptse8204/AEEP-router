@@ -1,0 +1,275 @@
+{
+  "schema_version": "aeep.toolkit.selection-summary.v1",
+  "evidence_kind": "synthetic",
+  "outcome": "NOT_ASSESSED",
+  "policies": {
+    "static": {
+      "counts": {
+        "total": 4,
+        "useful_selections": 1,
+        "ungraded_tasks": 4,
+        "unnecessary_selections": 1,
+        "ineligible_selections": 2,
+        "unknown_value_cases": 1
+      },
+      "families": {
+        "repair": {
+          "total": 1,
+          "useful_selections": 1,
+          "ungraded_tasks": 1
+        },
+        "tiny": {
+          "total": 1,
+          "unnecessary_selections": 1,
+          "ungraded_tasks": 1
+        },
+        "drifted": {
+          "total": 1,
+          "ineligible_selections": 1,
+          "ungraded_tasks": 1
+        },
+        "unknown": {
+          "total": 1,
+          "ineligible_selections": 1,
+          "unknown_value_cases": 1,
+          "ungraded_tasks": 1
+        }
+      },
+      "decision_time": {
+        "measured": 0,
+        "missing": 4,
+        "observed_total_seconds": null
+      }
+    },
+    "always-abstain": {
+      "counts": {
+        "total": 4,
+        "abstentions": 4,
+        "missed_applicable_value": 1,
+        "ungraded_tasks": 4,
+        "correct_abstentions": 2,
+        "unknown_value_cases": 1
+      },
+      "families": {
+        "repair": {
+          "total": 1,
+          "abstentions": 1,
+          "missed_applicable_value": 1,
+          "ungraded_tasks": 1
+        },
+        "tiny": {
+          "total": 1,
+          "abstentions": 1,
+          "correct_abstentions": 1,
+          "ungraded_tasks": 1
+        },
+        "drifted": {
+          "total": 1,
+          "abstentions": 1,
+          "correct_abstentions": 1,
+          "ungraded_tasks": 1
+        },
+        "unknown": {
+          "total": 1,
+          "abstentions": 1,
+          "unknown_value_cases": 1,
+          "ungraded_tasks": 1
+        }
+      },
+      "decision_time": {
+        "measured": 0,
+        "missing": 4,
+        "observed_total_seconds": null
+      }
+    },
+    "fixture-ideal": {
+      "counts": {
+        "total": 4,
+        "useful_selections": 1,
+        "ungraded_tasks": 4,
+        "abstentions": 3,
+        "correct_abstentions": 2,
+        "unknown_value_cases": 1
+      },
+      "families": {
+        "repair": {
+          "total": 1,
+          "useful_selections": 1,
+          "ungraded_tasks": 1
+        },
+        "tiny": {
+          "total": 1,
+          "abstentions": 1,
+          "correct_abstentions": 1,
+          "ungraded_tasks": 1
+        },
+        "drifted": {
+          "total": 1,
+          "abstentions": 1,
+          "correct_abstentions": 1,
+          "ungraded_tasks": 1
+        },
+        "unknown": {
+          "total": 1,
+          "abstentions": 1,
+          "unknown_value_cases": 1,
+          "ungraded_tasks": 1
+        }
+      },
+      "decision_time": {
+        "measured": 0,
+        "missing": 4,
+        "observed_total_seconds": null
+      }
+    }
+  },
+  "admission_changed": false,
+  "comparisons": [
+    {
+      "left": "static",
+      "right": "always-abstain",
+      "expected_pairs": 4,
+      "graded_pairs": 0,
+      "success_rate_left_minus_right": null,
+      "decision_time_pairs": 0,
+      "mean_decision_seconds_left_minus_right": null,
+      "confidence_interval": null
+    },
+    {
+      "left": "static",
+      "right": "fixture-ideal",
+      "expected_pairs": 4,
+      "graded_pairs": 0,
+      "success_rate_left_minus_right": null,
+      "decision_time_pairs": 0,
+      "mean_decision_seconds_left_minus_right": null,
+      "confidence_interval": null
+    },
+    {
+      "left": "always-abstain",
+      "right": "fixture-ideal",
+      "expected_pairs": 4,
+      "graded_pairs": 0,
+      "success_rate_left_minus_right": null,
+      "decision_time_pairs": 0,
+      "mean_decision_seconds_left_minus_right": null,
+      "confidence_interval": null
+    }
+  ],
+  "inspection_references": [
+    {
+      "policy": "static",
+      "case_id": "repair",
+      "selected": "editing",
+      "decision_ref": "39fc134f7ed74d12f48885f93bb2e9898d2cddfb472ec2c2596e3d6985c4f393",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "tiny",
+      "selected": "editing",
+      "decision_ref": "0d9bc46fcaa770f7c1783bd19e05c3c3649a657f5f73fde0c5e259d909337621",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "drifted",
+      "selected": "editing",
+      "decision_ref": "86bd700a3f26dbfe5b35990581fe585ee44d414be3885a9f048f5d4f230f35e9",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "static",
+      "case_id": "unknown",
+      "selected": "editing",
+      "decision_ref": "6a85b2035f80e097197cf924ac03d0d9e8f75611af86aab02f7770f2ad36c8b4",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "repair",
+      "selected": "editing",
+      "decision_ref": "c8818d19d6c13cc984b40e9b89ce295a508448ec64f8fdaff4ae0768882da198",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "tiny",
+      "selected": null,
+      "decision_ref": "0e7c5be02216bc56f6ed33f157f9708ae08a0e56a4d12fa1cd6d0461468aede4",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "drifted",
+      "selected": null,
+      "decision_ref": "c835ee64e7e27ddab57e08ec92bc7169b4a4086eff9b76759476debf3313a330",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "fixture-ideal",
+      "case_id": "unknown",
+      "selected": null,
+      "decision_ref": "020253bc516fdb20ef59d6a98df6ffa15fbd947a57819704ffab160c9f8f9439",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "repair",
+      "selected": null,
+      "decision_ref": "27f78528f9ed25d47500cc7ca2cdafb5f0845a66061ea134987aa83aa46e86fb",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "tiny",
+      "selected": null,
+      "decision_ref": "1247a658911e3c613843d4487bf4af16966a03a7a972d63538a8013f3cbcaf85",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "drifted",
+      "selected": null,
+      "decision_ref": "b2ac6cfb738ef936b24588d2b98a311ca2bde5e590c7e510bb02a5331438ac68",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    },
+    {
+      "policy": "always-abstain",
+      "case_id": "unknown",
+      "selected": null,
+      "decision_ref": "3529141e2d73562fef5d374d490f26a1f1fd74d5a999ec283a86af8328e8160e",
+      "decision_wall_seconds": null,
+      "task_verified": null,
+      "verification_ref": null
+    }
+  ],
+  "limitations": [
+    "Describes supplied decisions; references and equal-environment assertions are not authenticated by this command.",
+    "Usefulness labels must come from independent evidence frozen before these task outcomes; unknown value is not zero.",
+    "Decision correctness and independently graded task success are separate results. No significance or savings claim is made.",
+    "Infrastructure acceptance and resource budgets are separate from this evaluation."
+  ]
+}

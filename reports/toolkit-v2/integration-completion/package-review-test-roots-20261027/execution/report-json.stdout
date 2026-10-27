@@ -1,0 +1,586 @@
+{
+  "schema": "aeep.toolkit.descriptive-summary.v1",
+  "evidence_sha256": "7cff3ea0954bcd1a500119c3d8f2a3c5ba2c6b862d06d0f6969b575c4f8c119d",
+  "outcome": "NOT_ASSESSED",
+  "cohorts": [
+    {
+      "binding": {
+        "plan_ref": "381cb8fb11fdfabf9b48e88503e534042de763009dba532208e7f2396a4d4664",
+        "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+        "adapter_sha256": "5372241cd6072fd8a69c8e59473219ae60f859190546a6e8d827fc7fea40f3b7",
+        "host": "fake",
+        "host_version": "agent-skill-eval-0.7.0",
+        "model": "synthetic-no-model",
+        "effort": "none",
+        "shared_environment_sha256": "01c67c1c6c61417e5f11ae00bd27f0857a9a3097adcc9d0b1a3e11d0c3e6e2d3",
+        "verifier_sha256": "90262d2272f080359853f1caf099a1ff52f4b382536503c8e58af29eee7c67b7",
+        "mode": "optional",
+        "evidence_kind": "synthetic"
+      },
+      "families": [
+        {
+          "task_family": "adjacent",
+          "observed_tasks": 1,
+          "observed_pairs": 1,
+          "graded_pairs": 1,
+          "rejected_tasks": [],
+          "arms": {
+            "control": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": 0.0,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          }
+        },
+        {
+          "task_family": "complex-edit",
+          "observed_tasks": 1,
+          "observed_pairs": 1,
+          "graded_pairs": 1,
+          "rejected_tasks": [],
+          "arms": {
+            "control": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": 0.0,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          }
+        },
+        {
+          "task_family": "trivial-edit",
+          "observed_tasks": 1,
+          "observed_pairs": 1,
+          "graded_pairs": 1,
+          "rejected_tasks": [],
+          "arms": {
+            "control": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": 0.0,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 1,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "aed44be8219243c854401dd38de0953a279743d0",
+    "artifact_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored synthetic fixture; local commit, not a published dataset."
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "agent-skill-eval.controlled-fixture",
+    "implementation_sha256": "5372241cd6072fd8a69c8e59473219ae60f859190546a6e8d827fc7fea40f3b7",
+    "hosts": [
+      "fake"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": true,
+    "telemetry": [],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "inspection_references": [
+    {
+      "task_sha256": "b39d0d43a3cbb628e3843ea2ac2c2bdf721acf1176efdb5777877b10848ac6a3",
+      "arm": "treatment",
+      "receipt_refs": [
+        "549ec39d3d45724ad635c303fb0426a089308e63bbe0a8e11b67e0d525476c3c"
+      ],
+      "verification_ref": "21033669e50a84311dacda5817b8e9cba3c3ba4c992c72b57277b07dd2e6f68d"
+    },
+    {
+      "task_sha256": "b39d0d43a3cbb628e3843ea2ac2c2bdf721acf1176efdb5777877b10848ac6a3",
+      "arm": "control",
+      "receipt_refs": [
+        "cf2e360f06ecfd57884709bd0ad9b420e302c8da4aaf4cb64585628d788acfe3"
+      ],
+      "verification_ref": "2364ae39d6446a10024a232a2573e8a2dad1056008d854045db698cb92807ec9"
+    },
+    {
+      "task_sha256": "85e543471b8f16cac80a08c553205b8f1431076ea9083f1cde76f516f1cfc898",
+      "arm": "treatment",
+      "receipt_refs": [
+        "510b427ebf18840b2882c3b9bcf50d8bc288021cd1f1f8d8d2b05f85d9b02f68"
+      ],
+      "verification_ref": "d6fd8d0429d593dfffcecb5b1121e69f20187e466ab0f3f6e828659512fb1a8f"
+    },
+    {
+      "task_sha256": "85e543471b8f16cac80a08c553205b8f1431076ea9083f1cde76f516f1cfc898",
+      "arm": "control",
+      "receipt_refs": [
+        "1fb320b1cda81c5601a7b5b8bf52ff6c99a25853b1e4d91605bb6b2321a56d4a"
+      ],
+      "verification_ref": "befbd0cf12fca29ca4f749e99e6ca0590efcc9d1f87b1b386f291693297d2ddb"
+    },
+    {
+      "task_sha256": "8e77f4c1c9c3428b5bcad320ba5ae730abbe40e4f68a85e122122984b9b6060d",
+      "arm": "treatment",
+      "receipt_refs": [
+        "d7a7cf7bf869e86e80206f879a6ec3ac1a2f14b50c48279a278fa1300ff4a007"
+      ],
+      "verification_ref": "5b97ff205292b297975e7e145cb5ac8989d0b2aefb881455ce862329ce4bd686"
+    },
+    {
+      "task_sha256": "8e77f4c1c9c3428b5bcad320ba5ae730abbe40e4f68a85e122122984b9b6060d",
+      "arm": "control",
+      "receipt_refs": [
+        "77a99ea99458addb1e291c0c06703ada1fc7fef939720088c8e603c43cbcbbde"
+      ],
+      "verification_ref": "f8a1df99b4a3c3188d7a4d4464d8831d7043e46239799b70047c1c298e0fa7e0"
+    }
+  ],
+  "limitations": [
+    "Artifact contents and file changes are not included in these normalized records. Resolve receipt and verification references in the originating run; grades alone do not describe edits.",
+    "Access ceilings, spending permission, pending approvals and activation state are not established by this summary. Consult the exact reviewed plan and installation record before further execution.",
+    "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
+    "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
+    "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
+    "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+    "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
+    "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit."
+  ]
+}

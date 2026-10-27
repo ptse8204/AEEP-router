@@ -1,0 +1,56 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 928B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 1.79MB 0.0s done
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027@sha256:f60342e9c6a50933353ebea047b89935c75579541cf628f4fe4d15a1c0515e93
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027@sha256:f60342e9c6a50933353ebea047b89935c75579541cf628f4fe4d15a1c0515e93 done
+#5 DONE 0.1s
+
+#6 [2/4] COPY pbr-7.0.1-py2.py3-none-any.whl jsonpath_rw_ext-1.2.2-py2.py3-none-any.whl ply-3.11-py2.py3-none-any.whl colorama-0.4.6-py2.py3-none-any.whl arcp-0.2.1-py2.py3-none-any.whl jinja2-3.1.6-py3-none-any.whl markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl h2-4.3.0-py3-none-any.whl hpack-4.1.0-py3-none-any.whl hyperframe-6.1.0-py3-none-any.whl decorator-5.2.1-py3-none-any.whl setuptools-75.8.2-py3-none-any.whl requirements.txt /opt/aeep-runtime/
+#6 DONE 0.1s
+
+#7 [3/4] RUN ["python3", "-m", "pip", "--isolated", "install", "--no-index", "--no-deps", "--no-compile", "--no-cache-dir", "--disable-pip-version-check", "--require-hashes", "-r", "/opt/aeep-runtime/requirements.txt"]
+#7 0.237 Processing /opt/aeep-runtime/pbr-7.0.1-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 1))
+#7 0.239 Processing /opt/aeep-runtime/jsonpath_rw_ext-1.2.2-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 2))
+#7 0.239 Processing /opt/aeep-runtime/ply-3.11-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 3))
+#7 0.240 Processing /opt/aeep-runtime/colorama-0.4.6-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 4))
+#7 0.242 Processing /opt/aeep-runtime/arcp-0.2.1-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 5))
+#7 0.243 Processing /opt/aeep-runtime/jinja2-3.1.6-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 6))
+#7 0.244 Processing /opt/aeep-runtime/markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (from -r /opt/aeep-runtime/requirements.txt (line 7))
+#7 0.245 Processing /opt/aeep-runtime/h2-4.3.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 8))
+#7 0.245 Processing /opt/aeep-runtime/hpack-4.1.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 9))
+#7 0.246 Processing /opt/aeep-runtime/hyperframe-6.1.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 10))
+#7 0.247 Processing /opt/aeep-runtime/decorator-5.2.1-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 11))
+#7 0.247 Processing /opt/aeep-runtime/setuptools-75.8.2-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 12))
+#7 0.260 Installing collected packages: ply, jsonpath-rw-ext, arcp, setuptools, pbr, markupsafe, jinja2, hyperframe, hpack, h2, decorator, colorama
+#7 0.385 
+#7 0.388 Successfully installed arcp-0.2.1 colorama-0.4.6 decorator-5.2.1 h2-4.3.0 hpack-4.1.0 hyperframe-6.1.0 jinja2-3.1.6 jsonpath-rw-ext-1.2.2 markupsafe-3.0.3 pbr-7.0.1 ply-3.11 setuptools-75.8.2
+#7 0.388 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#7 DONE 0.5s
+
+#8 [4/4] COPY --chmod=0555 jsonpath_rw/ /usr/local/lib/python3.13/site-packages/jsonpath_rw/
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.2s done
+#9 exporting manifest sha256:2a057881ffe70b7a83639d24612b3c579b5892615542452e52324f1389c4abb9 done
+#9 exporting config sha256:aa1f9a5b981e36e2a6bec30051359e459eeee76733baffefbb01c7244ad7c819 done
+#9 naming to docker.io/aeep-toolkit-v2/repository-grader:py313-test-roots-20261027 done
+#9 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-test-roots-20261027 0.1s done
+#9 DONE 0.4s
+
+View build details: docker-desktop://dashboard/build/default/default/t8kgvy4rk3b7vzmu0r1jfsjad

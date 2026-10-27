@@ -3781,3 +3781,31 @@ resource acceptance, selection labels and human controls as separate gates.
 Routine finite definitions and budget/expiry amendments remain delegated. No
 architecture or infrastructure decision is needed. Never reuse terminalf026,
 replay failed cases, infer model benefit or transfer old conformance to86012.
+
+## Approved protected-root bundle completed October27
+
+Approved81cce633 ran once; [actual results](../../reports/toolkit-v2/c13/repository-test-roots-20261027/RESULTS.md)
+retain two reproduced cases and six exclusions. SQL-Metadata553/583 pass reference
+and counterexample checks. Gabbi lacks six; three iCalendar cases and RO-Crate
+lack dateutil. The preparation incorrectly treated portable probe dependencies
+as inherited image installations. The probes supplied those wheels; the cases
+did not. Static closure cannot qualify that different effective runtime.
+SQL-Metadata552 exits0 with eleven required passes, but malformed application-log
+entries cause correct protocol rejection. No result is backfilled or retried.
+
+The private image2a057881 is retained with3,161,998bytes growth and unchanged
+parent/config. Thirteen physical attempts/receipts and all16 operations reconcile,
+charging29.907604666426778seconds,zero models/cash. Current grant13162operations/
+3755turns/119767.50089859497seconds/0.0cash. All owned containers/canary are removed;
+all images remain. Package19 checks and the approved69-document offline docs
+snapshot pass, with their unchanged private runtimes removed. Source86012 stays
+unchanged; do not repeat its13 passing source gates without a new reason.
+
+[The provisional pool](../../reports/toolkit-v2/c13/repository-test-roots-20261027/provisional-pool.json)
+is46 snapshots/30 repositories/2712 identities:18single,18multi,10audit;95cases
+remain. Bindings remain exact; no stage or scientific/resource gate closes.
+Next safe work: distinguish image-installed from portable dependencies, prepare
+an image-bound correction from retained cached wheels, and test parser framing
+against first-party logs without dispatch. Finish a concrete new review before
+any further untrusted execution. Terminal81cce633 cannot be retried or reused;
+no package rerun is needed for the unchanged wheel. No architecture choice exists.

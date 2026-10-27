@@ -5838,3 +5838,19 @@ historical text; this file is outside the Makefile documentation scope. The four
 other changed documents passed their targeted lint. A local digest inspection
 initially passed a string where the helper requires a Path; the corrected read
 confirmed unchanged source86012. Neither command ran upstream code.
+
+### Toolkit protected-root bundle completed — October27
+
+Approved81cce633 completed once. [The result](../toolkit-v2/c13/repository-test-roots-20261027/RESULTS.md)
+adds two reproduced SQL-Metadata cases; five cases lack portable dependencies
+incorrectly assumed installed, and one is rejected for malformed parser statuses.
+Package19 checks and the approved69-document docs snapshot pass. All16 operations/
+13 physical attempts reconcile;29.907604666426778seconds,zero models/cash. Current
+13162operations/3755turns/119767.50089859497seconds/0.0cash. Owned containers/canary
+are absent; image2a057881 and all prior images remain. The pool is46 cases;95remain.
+
+Do not replay this terminal approval, repeat unchanged source/package checks,
+transfer probe runtime evidence across portable-wheel profiles or infer usefulness.
+Prepare effective-runtime and parser-framing corrections under a new exact review.
+Later state/evidence additions are outside the completed docs snapshot's content
+binding; no claim of a fresh checker run is made for those additions. C13 stays open.

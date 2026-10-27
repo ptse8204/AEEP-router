@@ -1795,3 +1795,23 @@ no stage or threshold is changed to accommodate the new batch. Common uncertaint
 stops external dispatch; isolated workload rejection continues only after known
 canonical completion and cleanup. Routine finite definitions are delegated, while
 new untrusted installation/execution still needs the user's exact approval.
+
+## D109 — Correct effective runtime and test-status framing before more calls
+
+Approved81cce633 reproduced two cases; six remain excluded. Its metadata closure
+mixed image-installed and probe-supplied portable wheels. Future preparation must
+track those separately and verify the exact task profile. A probe that loads
+cached dateutil/six privately cannot establish their image installation.
+
+Retained observations also show application error logs being parsed as test
+statuses. Keep the pinned upstream parser body and protected grader unchanged;
+first test an explicit operator adapter that frames genuine pytest status rows,
+preserving module collection errors, required identities, exits and unexpected
+test checks. This is an adapter-fit question, not justification for a new grader
+framework or relaxed acceptance. Full original passing output was not retained;
+synthetic parser fixtures must be labelled accordingly. See [actual results](../../reports/toolkit-v2/c13/repository-test-roots-20261027/RESULTS.md).
+
+No old failure becomes a pass. A changed optional runtime/observer needs a new
+exact review and fresh calls. The unchanged installed wheel already passed19
+checks; do not reinstall it merely because corpus preparation continues. Keep
+qualification, usefulness, selection and resource acceptance independent.

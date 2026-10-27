@@ -1163,3 +1163,19 @@ combined approval. Source86012 passed13 gates; the installed wheel and current
 docs require their own exact checks. The operator failure envelope does not alter
 the stock evaluation or qualify a campaign. The44 reproduced historical cases
 retain their original bindings; no live usefulness or selection claim follows.
+
+## Protected-root execution observations, October27
+
+Approved81cce633 completed; [two of eight cases reproduced](../../reports/toolkit-v2/c13/repository-test-roots-20261027/RESULTS.md).
+The AEEP protected grader rejected missing imports and malformed upstream-parser
+statuses. No assertions or thresholds were relaxed. New source tests were not
+needed: product86012 is unchanged, the installed wheel's19 checks pass, and the
+approved69-document docs snapshot passes.
+
+The optional image support inventory was overstated: portable dateutil/six in
+probe payloads were mistaken for inherited installations. Correct that distinction
+before new runtime work. The upstream parser's broad status-prefix match also
+needs explicit adapter framing for application logging; its pinned body remains
+unchanged. Do not publish a bug report or contribution without operator authority.
+The46-case pool retains exact image, source and operator-profile bindings; this
+is neither benchmark qualification nor proof of capability usefulness.
