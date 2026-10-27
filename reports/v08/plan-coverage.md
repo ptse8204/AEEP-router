@@ -5930,3 +5930,18 @@ prior envelope excluded changed product source/wheel. Runtime maximum20calls/
 24operations/1000reserved seconds includes bounded report controls,zero models/cash.
 The old8charges,pool51/gap90,all images and open scientific/resource/human gates
 remain. New exact docs-check execution is pending;raw logs/licenses stay verbatim.
+
+
+### Corrected framing bundle completed — October27
+
+Approved4661ce49 [completed all components](../toolkit-v2/c13/repository-worker-input-20261027/RESULTS.md).
+Four fresh probes pass;five source snapshots reproduce. Isort collection fails
+for missing installed distribution metadata and remains excluded. All15receipts/
+17operations reconcile,46.957869624719024seconds,zero models/cash. Counters13206/
+3755/119881.14341000933/0.0. Package19checks and the exact69-document offline docs
+snapshot pass. No new build,download or image deletion;all images remain. Later
+state additions are outside that completed docs snapshot. Source374579f1/wheel9b00
+are unchanged and their broad checks will not be repeated for data-only curation.
+Pool56/35repos/3059IDs;85cases remain. Next multi-file triage is inert data only.
+Two version-bookkeeping patches are excluded from the family rather than inflating
+its count. No qualification,usefulness,selection,resource,human or release gate closes.

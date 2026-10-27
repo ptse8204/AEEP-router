@@ -1237,3 +1237,18 @@ The same six subjects and protected oracle bytes still require fresh corrected-
 source execution. The actual frozen legacy recipe remains unchanged. Installed
 worker framing and exact offline docs checks are prepared separately. None of
 these source/fixture results establishes capability value or selector quality.
+
+## Corrected worker observed,October27
+
+[Bundle4661ce49](../../reports/toolkit-v2/c13/repository-worker-input-20261027/RESULTS.md)
+passes framing and reproduces five Cyclopts/NetworkX snapshots on retained2386.
+Isort stays excluded for missing source-project distribution metadata. The same
+AEEP container/accounting and upstream pytest/parser are used. Source374579f1,
+wheel9b00 and exact offline docs passed;no new core dependency was added. The
+56-case pool remains provisional and supplies no model-value/selection claim.
+
+The next multi-file audit retains source/licenses and reviews only dependencies
+actually reached by the selected tests. Pymdown's version-only second file does
+not satisfy the family. Pyinfra's project setup/SSH runtime is deferred. Any
+optional native/XML/cryptographic grader supports stay private,version-pinned
+and unexecuted until the exact finite review is approved.

@@ -1,23 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved bundle e6b1fb2c built the private grader
-image and passed three probes, then found the inner worker's unchanged 2 MB input
-cap. The large-input probe has a known terminal FAILED receipt; no repository
-variant ran. All eight operations reconcile and all owned containers are absent.
-The independent 19 installed checks and exact offline docs snapshot passed.**
-The provisional pool remains 51 snapshots across 33 repositories, with 90 cases
-missing from the balanced stages. C13, qualification, comparative usefulness,
-selection, human controls, resource acceptance and release remain open.
-Current source `374579f1` corrects the inner reader through an operator-owned launch
-argument. Default argv and 2 MB limits remain; task data cannot raise the bound.
-Focused framing regressions pass, including a 2.7 MB round trip through both real
-protocol readers. [All 13 source checks](../../reports/toolkit-v2/c13/repository-worker-input-20261027/validation/checks.json)
-passed: 1,735 tests in each full run, 21 skips, 82% coverage and both branch gates.
-The corrected wheel is built; its installation and fresh container profile remain
-pending the exact new execution approval.
-The prior source1fde's 13 gates and installed wheel60466 checks retain their exact
-bindings. They do not qualify the correction. The existing image2386 and all older
-images remain; no new dependency, download, image build or architecture is needed.
+**Status as of 2026-10-27: approved worker bundle4661ce49 completed all components.
+All four fresh probes passed,including large-input framing. Five of six repository
+cases reproduced; Isort remains excluded for missing installed project metadata.
+The corrected wheel's19 installed checks and exact offline docs snapshot passed.
+All15 attempts/receipts and17 operations reconcile;zero models/cash were added.**
+The provisional pool is56 snapshots across35 repositories,with85 cases missing
+from the balanced stages. C13,qualification,comparative usefulness,selection,
+human controls,resource acceptance and release remain open.
+Current source374579f1/commit1f7d27d passed all13 source gates:1,735 tests in each
+full run,21 skips,82%coverage and both branch gates. Its fresh container profile
+and wheel9b00 now have actual execution evidence. No unchanged source/package
+verification needs repetition. [Actual results](../../reports/toolkit-v2/c13/repository-worker-input-20261027/RESULTS.md)
+retain the earlier failed probe and every charge. Image2386 and all older images
+remain;all new owned containers/canary and unchanged private runtimes are removed.
+Independent multi-file source curation is continuing as inert data. Fourteen
+bounded public archive reads retained9,379,970bytes. Seven initial cases were
+prepared;two include a version bump plus one functional file and cannot be counted
+as multi-file behavior repairs. Pyinfra needs a separate project/runtime profile.
+New subject/dependency execution still requires a concrete exact review.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -59,17 +60,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '1f7d27d'
-last_check_command: 'repository-worker-input-20261027/run-source-checks.py; check-legacy-recipe.py; check-terminal-controls.py; exact runtime/package/docs preparation'
-last_check_result: 'All13 source gates passed on374579f1:both full runs1735passed/21skipped,82%coverage,both branch gates. Frozen d02 recipe remains identical. Five actual collector fixtures preserve terminal-failure/uncertainty distinctions. Prior e6b runtime failure and8charged operations remain;old-source package19checks/docs passed. No corrected-source external execution or model turn.'
-next_action: 'Read repository-worker-input-20261027/README.md and approval-bundle.json. Obtain one exact executable approval for corrected-source4fresh probes/12unchanged variants on retained2386 plus changed-wheel19installed checks and cached offline docs. Runtime maximum20calls/24operations/1000reserved seconds includes bounded report controls. No new download,dependency or image build. Record actual approval and run the combined driver once;preserve prior failed probe,8charges and51-case pool. Source session38330 is terminal;do not rerun it.'
+last_verified_commit: 'fe58c7c'
+last_check_command: 'repository-worker-input-20261027/run-integration-bundle.py 4661ce49fe9cdfd6911d70f4877fcfc30cae16afdb268376861395963c3ec43c; consolidate-results.py'
+last_check_result: 'All3components passed:4fresh probes/5of6cases reproduced,15COMPLETED receipts,17operations,46.957869624719024seconds,zero models/cash. Isort reference rejected at collection for missing distribution metadata;no replay or dropped identities. Corrected wheel19installed checks and exact69-document offline docs passed. Pool56/35repos/3059IDs;85cases remain.'
+next_action: 'Read repository-worker-input-20261027/RESULTS.md and its provisional-pool.json. Continue the metadata-declared multi-file source/runtime audit in repository-multifile-sources-20261027. Preserve initial misclassification/exclusions and prepare one exact finite runtime review for genuinely multi-file subjects with closed dependencies. No current source,package or old trial rerun;no new model authority. All prior25operations across the two framing bundles stay charged.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Bundlee6b1fb2c is approved and its initial runtime phase is terminal;package/docs independently passed.8operations/15.73691733321175seconds remain charged. Product worker correction changes source/wheel and is explicitly outside that control-repair allowance. Prepare its exact executable review after full checks;no architecture,budget,new dependency,image build or download decision is needed.'
+  - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
@@ -4005,3 +4006,29 @@ It preserves prior queue/exclusion flags and still needs semantic/runtime review
 Its initial reader confused an integer row count with row records;that local
 schema handling was corrected before the final queue. No new source archive,
 untrusted code,installation or model was involved in this preparation.
+
+## Corrected worker bundle completed — October27
+
+[Approved4661ce49](../../reports/toolkit-v2/c13/repository-worker-input-20261027/RESULTS.md)
+passed four fresh probes and reproduced five repository cases. Isort2491 stays
+excluded:its source calls importlib metadata for an uninstalled distribution;
+pytest exits2 before required tests are observable. No identities or assertions
+were removed and its unstarted negative slot was not reused. All15 attempts are
+COMPLETED with complete canonical evidence;17operations charge46.957869624719024
+seconds,zero models/cash. Current13206/3755/119881.14341000933/0.0. All owned
+containers/canary and unchanged package/docs runtimes are absent;all images remain.
+No build,download or extra diagnostic call occurred in this approved bundle.
+
+Wheel9b00 passed19installed checks including both installed-reader framing paths.
+The exact69-document offline snapshot passed;later state additions retain their
+own unverified snapshot status. Source374579f1 and its all13gates are unchanged.
+The pool is56snapshots/35repos/3059requiredIDs:22single,19multi,15audit. Missing
+25single/28multi/32audit=85cases. No scientific,resource,human or release gate closes.
+
+Next multi-file source triage read14public archives as data,9,379,970bytes total:
+11need static review,two have prohibited members/paths,and one exceeds the explicit
+source cap and remains partial. Seven inert cases were initially prepared,with
+four other authoring exclusions retained. Two Pymdown references change only a
+version constant outside one functional module;do not inflate the multi-file
+count with them. Pyinfra needs its own source-project/runtime setup. Candidate
+supports are being read/pinned as data;no new installer,subject or model has run.

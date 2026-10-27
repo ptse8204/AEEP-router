@@ -1,4 +1,4 @@
-# Correct the inner worker input limit
+# Corrected inner worker input limit — execution completed
 
 The larger repository path needs both protocol readers to accept the same
 reviewed frame. The host wrapper had been updated,but the inner worker still
@@ -28,12 +28,14 @@ stays failed,and nonterminal/uncertain cleanup stops the batch.
 Compilation,schemas,integration checks,Ruff,mypy and wheel/sdist builds passed.
 Session38330 is terminal and was not repeated. [The built artifacts](build-artifacts.json)
 retain exact hashes. The corrected wheel's SHA-256 is `9b00add749cf7b8c5486bc878838fcdc28c517dc02a3b6d662ed477dd579ef1d`.
-No corrected-wheel installation or new container invocation has run.
+Approved4661ce49 completed the fresh container profile and corrected-wheel
+installation. [Actual results and exclusions](RESULTS.md) are authoritative.
 
 ## Next execution scope
 
-[The prepared combined review](approval-bundle.json) binds the exact source,wheel,
-runtime and documentation. It is not yet approved or executed. Reuse image
+[The completed combined review](approval-bundle.json) binds the exact source,wheel,
+runtime and documentation. All three components ran once under actual approval;
+its unused slots authorize no new subjects or historical replay. Reuse image
 `sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f`.
 No dependency,download,image build or service is needed. The same four fresh
 probes and twelve unchanged variants cover Cyclopts609/633/701,NetworkX7804/8055
@@ -49,9 +51,8 @@ installed-worker positive/default-denial framing exercise. Cached offline docs
 verification is separate. Zero models,cash,credentials,activation or release.
 
 The preceding approval explicitly excludes changed product source/wheel from its
-control-repair allowance. The exact corrected executable therefore needs approval;
-no architecture or budget decision is open. The historical51-case pool and90-case
-gap remain. Grader reproduction will not establish comparative usefulness or
+control-repair allowance. The actual approval for that corrected executable has now been exercised.
+No architecture or budget decision is open. The pool now has56cases and85remain. Grader reproduction will not establish comparative usefulness or
 selection quality. Qualification,value,selection,resource acceptance,unaided human
 controls and release remain open.
 

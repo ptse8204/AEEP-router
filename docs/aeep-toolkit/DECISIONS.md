@@ -1896,3 +1896,21 @@ incomplete-journal denial. Journal identifiers and canonical repository content
 digests stay distinct. The retained image and task bytes are unchanged;fresh
 worker/wheel execution requires the exact new review,with no new software build
 or architecture. No scientific/resource threshold or prior cost is changed.
+
+### D111 actual execution completed
+
+Approved4661ce49 passes the corrected reader's fresh probes and installed check.
+Reuse the source/package evidence;do not repeat broad verification for subsequent
+data-only task curation. Isort's missing distribution metadata is a separate
+source-project setup exclusion,not another framing failure. Preserve it without
+inventing an installed version. All receipts,costs and the earlier failure remain.
+
+## D112 — Count functional multi-file changes,not version bookkeeping
+
+The metadata-selected Pymdown patches each change one functional module and a
+version constant in `__meta__.py`. The initial AST body-count heuristic counted
+both;that does not establish a multi-file behavior repair. Keep the inert records
+and exclude them from the multi-file batch. No model outcome informed this change.
+Use published source/reference semantics before freezing task families. No new
+core service or classifier framework is needed;record this operator curation
+check alongside the existing grader and source pins.
