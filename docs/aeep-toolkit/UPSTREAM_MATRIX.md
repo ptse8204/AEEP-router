@@ -1068,3 +1068,18 @@ or cash. No build, install, download, new probe, host canary or package/docs rer
 is requested. Product source4cb and the42-case pool are unchanged;99 cases remain.
 Actual execution needs one specific approval; routine finite definitions and
 expiry amendments remain delegated. No architecture decision is pending.
+
+## Collection diagnostics completed without a cause
+
+Approved `faa10772` completed once; [the result](../../reports/toolkit-v2/c13/repository-collection-diagnostics-20261027/RESULTS.md)
+retains the collector's limit. MCP errors were unrecognized, while Twyn and
+CanvasAPI reported `ModuleNotFoundError` with names filtered out. Exact causes
+remain unknown. No speculative dependency fix or automatic replay follows;
+these cases stay excluded while curation moves to other sources.
+
+Four physical receipts/attempts and six operations reconciled, charging
+11.11573583446443 seconds,zero models/cash. All owned workers are absent; images
+are retained and no host canary was created. Grant13140operations/3755turns/
+119727.43407934532seconds/0.0cash. Product source4cb and the42-case pool are unchanged.
+No scientific or resource gate closes. New source execution still needs a concrete
+exact review; static source/license/workload preparation continues safely.

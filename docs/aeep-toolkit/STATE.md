@@ -48,17 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'ba26d35'
-last_check_command: 'repository-supported-suites-20261027/run-bundle.py c81557a2...; runtime-execution/audit-execution.py; consolidate-results.py'
-last_check_result: 'Approved c81557a2 executed once. Imagef60342e9 built offline fromb0eb4add with22 exact wheels; three probes passed. Goodconf/Prometheus audits and Dishka repair reproduced; MCP222/MCP384/Twyn reference collection ERROR/exit2, causes unretained. All12 attempts/receipts reopened,15 operations complete,35.61532362597063 operation-seconds charged,zero models/cash. Owned containers/canary absent; both images retained. Pool42/27repos/2613 identities:16single,18multi,8audit;99 cases still needed. Product source4cb unchanged.'
-next_action: 'Read repository-collection-diagnostics-20261027/README.md and operation-review SHA faa10772. Four exact failed-reference diagnostics on retainedf603/b0 are prepared, not approved or executed;37 assets,13 sanitizer guards,three whole-collector synthetic checks,seven budget guards and exact driver persistence/authority checks passed. At most4 offline calls/6 existing-grant operations/290 reserved seconds,zero models/cash;reuse applicable containment evidence,no builds/installs/downloads or redundant probes. Record actual exact approval once before run.py. Keep42-case pool,all failures/counters/images and frozen thresholds;no architecture or budget choice is needed.'
+last_verified_commit: '660672d'
+last_check_command: 'repository-collection-diagnostics-20261027/run.py faa10772...; audit-execution.py'
+last_check_result: 'Approved faa10772 completed4 calls once;4 canonical receipts/attempts and6 operations reconciled,11.11573583446443 seconds charged,zero models/cash. MCP errors unrecognized; Twyn/CanvasAPI ModuleNotFoundError names filtered out. Exact causes remain unknown and all4 stay excluded. Owned workers absent,images retained,no host canary. Source4cb and42-case pool unchanged.'
+next_action: 'Continue bounded static curation of other pinned public repository sources, prioritizing new repository groups and missing audits/multi-file cases. Do not spend more calls on the four unresolved collections or guess dependency fixes. Prepare a concrete exact review only after new source/license/test/runtime bindings pass first-party checks. No architecture or broad source/package rerun is needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Prepared faa10772 needs exact execution approval for4 offline collection diagnostics on the same two retained images:6 existing-grant operations/290 reserved seconds,zero models/cash. Terminalc81557a2/be8b0e5f bind older observers and forbid retries. No build/install/download,host canary,package/docs rerun,architecture or infrastructure decision is requested.'
+  - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
@@ -3670,3 +3670,18 @@ or cash. No build, install, download, new probe, host canary or package/docs rer
 is requested. Product source4cb and the42-case pool are unchanged;99 cases remain.
 Actual execution needs one specific approval; routine finite definitions and
 expiry amendments remain delegated. No architecture decision is pending.
+
+## Four diagnostic calls completed October 27
+
+Approved `faa10772` completed once; [the result](../../reports/toolkit-v2/c13/repository-collection-diagnostics-20261027/RESULTS.md)
+retains the collector's limit. MCP errors were unrecognized, while Twyn and
+CanvasAPI reported `ModuleNotFoundError` with names filtered out. Exact causes
+remain unknown. No speculative dependency fix or automatic replay follows;
+these cases stay excluded while curation moves to other sources.
+
+Four physical receipts/attempts and six operations reconciled, charging
+11.11573583446443 seconds,zero models/cash. All owned workers are absent; images
+are retained and no host canary was created. Grant13140operations/3755turns/
+119727.43407934532seconds/0.0cash. Product source4cb and the42-case pool are unchanged.
+No scientific or resource gate closes. New source execution still needs a concrete
+exact review; static source/license/workload preparation continues safely.
