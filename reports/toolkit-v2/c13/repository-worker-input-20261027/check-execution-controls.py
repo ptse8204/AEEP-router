@@ -46,7 +46,7 @@ def main():
             else:raise AssertionError('Actual bound guard allowed operation25')
         finally:store.close()
     assert not Path(temp).exists()
-    unwrap=load('operator_output_fixture',HERE/'runtime-execution/operator_output.py').evaluation
+    unwrap=load('operator_output_fixture',HERE/'operator_output.py').evaluation
     evaluation={'exit_code':1,'statuses':{'test::id':'FAILED'},'archive_sha256':'a'*64,'python':'3.13','pytest':'8.3.5'}
     good={'evaluation':evaluation,'failure_log_tail_b64':base64.b64encode(b'public failure').decode()}
     assert unwrap(good) is evaluation

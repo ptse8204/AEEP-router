@@ -1218,7 +1218,6 @@ and a small sparse calculation. Expanded footprint and subject compatibility
 remain unknown. Smart-open's AWS stack stays deferred. No benchmark qualification,
 value, selector or resource claim follows from preparation or synthetic controls.
 
-
 ## Larger image observed; worker correction separate, October27
 
 [Bundlee6b1fb2c](../../reports/toolkit-v2/c13/repository-large-archives-20261027/RESULTS.md)
@@ -1229,3 +1228,12 @@ ran. Keep the existing pytest/parser and image. Correct the two-reader protocol
 instead of adding an evaluator or dependency. Source374579f1 is under full checks;
 old source1fde installation/docs passes do not qualify it. No benefit,selection,
 resource acceptance or new model evidence is implied.
+
+## Corrected reader source verified, October27
+
+Source374579f1 passed all13 gates. Reuse the already verified seven-wheel optional
+grader image2386;there is no new core dependency,artifact download or image build.
+The same six subjects and protected oracle bytes still require fresh corrected-
+source execution. The actual frozen legacy recipe remains unchanged. Installed
+worker framing and exact offline docs checks are prepared separately. None of
+these source/fixture results establishes capability value or selector quality.

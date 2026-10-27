@@ -18,6 +18,7 @@ from aeep.assessment.repository_suites import RepositorySuiteCase, grade_suite_o
 from aeep.assessment.service import AssessmentService
 from aeep.assessment.verification import verification_source_digest
 from aeep.attempts import ExecutionAttempt, ExecutionAttemptState
+from aeep.execution import ExecutionEvidence
 from aeep.errors import ConfigurationError
 from aeep.models import ExecutionReceipt, ResourceVector
 from aeep.router import Router
@@ -157,6 +158,11 @@ async def main():
                     assert receipt.receipt_id in attempt.terminal_receipt_ids
                     assert receipt.executor_id == attempt.executor_id == recipe.extension.grader.id
                     assert receipt.executor_fingerprint == attempt.executor_fingerprint
+                evidence_ref = receipt.metadata['execution_evidence_digest']
+                row = connection.execute("SELECT payload_json FROM assessment_records WHERE kind='execution_evidence' AND digest=?", (evidence_ref,)).fetchone()
+                assert row is not None
+                evidence = ExecutionEvidence.model_validate_json(row[0])
+                assert evidence.complete and evidence.attempt_id == identity and content_digest(evidence) == evidence_ref
                 charged = next(item for item in repo.operation_ledger(request.plan_id).operations if item.operation_id == operation)
                 assert charged.elapsed_seconds is not None and 0 <= charged.elapsed_seconds < float('inf')
                 owned = container_name(identity)

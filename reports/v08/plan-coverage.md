@@ -5915,3 +5915,18 @@ Focused tests pass;full13-gate session38330 is running with frozen source. Do no
 repeat it or claim completion before its evidence. The old control allowance
 explicitly excludes this product-source/wheel change;prepare the exact remaining
 execution review after checks. No dependency,download,build or architecture choice.
+
+
+### Inner worker source gates complete; exact execution remains — October27
+
+Source374579f1/commit1f7d27d passed all13 gates:1,735tests in both full runs,
+21skips,82%coverage,both branch gates. Compilation,schemas,integration,Ruff,mypy,
+wheel/sdist builds and frozen legacy recipe reconstruction passed. Session38330
+is terminal. Five report-control fixtures exercise actual collector code with
+complete canonical evidence;they preserve failed/uncertain distinctions. The
+corrected wheel and same6case/4probe runtime use retained2386 without downloads,
+new dependencies or builds. Exact execution approval is required because the
+prior envelope excluded changed product source/wheel. Runtime maximum20calls/
+24operations/1000reserved seconds includes bounded report controls,zero models/cash.
+The old8charges,pool51/gap90,all images and open scientific/resource/human gates
+remain. New exact docs-check execution is pending;raw logs/licenses stay verbatim.

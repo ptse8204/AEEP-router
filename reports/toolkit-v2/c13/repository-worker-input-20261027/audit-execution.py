@@ -10,6 +10,7 @@ from aeep.assessment.containment import container_name
 from aeep.assessment.models import content_digest
 from aeep.assessment.verification import verification_source_digest
 from aeep.attempts import ExecutionAttempt, ExecutionAttemptState
+from aeep.execution import ExecutionEvidence
 from aeep.models import ExecutionReceipt
 from classify import discrepancies
 from operator_output import evaluation
@@ -49,6 +50,11 @@ def main():
             assert receipt.receipt_id in attempt.terminal_receipt_ids
             assert receipt.executor_id == attempt.executor_id == parent['recipe']['extension']['grader']['id']
             assert receipt.executor_fingerprint == attempt.executor_fingerprint
+            evidence_ref = receipt.metadata['execution_evidence_digest']
+            row = connection.execute("SELECT payload_json FROM assessment_records WHERE kind='execution_evidence' AND digest=?", (evidence_ref,)).fetchone()
+            assert row is not None
+            evidence = ExecutionEvidence.model_validate_json(row[0])
+            assert evidence.complete and evidence.attempt_id == identity and content_digest(evidence) == evidence_ref
         owned = container_name(identity)
         assert owned == item['container_name']
         assert not subprocess.check_output([parent['docker'], '--host', parent['socket'], 'ps', '-a',
@@ -95,7 +101,7 @@ def main():
     assert after[0] - before[0] == len(operations) and before[1] == after[1] and before[3] == after[3]
     audit = {'batch_completed': True, 'physical_receipt_integrity_passed': True, 'case_results_recomputed': True,
         'review_sha256': result['review_sha256'], 'canonical_receipts_reopened': len(reopened),
-        'completed_attempts_reopened': len(reopened), 'all_owned_containers_absent': True,
+        'terminal_attempts_reopened': len(reopened), 'completed_attempts_reopened': sum(x['attempt_state']=='COMPLETED' for x in reopened), 'failed_attempts_reopened': sum(x['attempt_state']=='FAILED' for x in reopened), 'all_owned_containers_absent': True,
         'bounded_raw_observations_retained': len(raw_by_name), 'source_unchanged': True,
         'eligible_cases': eligible, 'case_results': cases, 'canonical_operations': len(operations),
         'charged_elapsed_seconds': delta, 'grant_before': before, 'grant_after': after,

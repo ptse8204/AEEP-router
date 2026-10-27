@@ -55,7 +55,7 @@ def main():
                 passed=not (mode=='runtime_uncertain' and name=='runtime' or mode=='package_failure' and name=='package')
                 target.write_text(json.dumps({component['passed_field']:passed}))
                 if name=='runtime' and passed:
-                    (fixture/'completion-audit.json').write_text(json.dumps({'all_owned_containers_absent':True,'physical_receipt_integrity_passed':True}))
+                    (fixture/'completion-audit.json').write_text(json.dumps({'batch_completed':True,'all_owned_containers_absent':True,'physical_receipt_integrity_passed':True}))
                     (fixture/'canary-cleanup.json').write_text(json.dumps({'unchanged_owned_canary_removed':True}))
                 return SimpleNamespace(returncode=0 if passed else 1)
             module.subprocess=SimpleNamespace(run=fake,DEVNULL=subprocess.DEVNULL,STDOUT=subprocess.STDOUT)

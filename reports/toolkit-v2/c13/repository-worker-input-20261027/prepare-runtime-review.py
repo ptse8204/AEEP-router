@@ -10,7 +10,7 @@ import shutil
 import subprocess
 
 from aeep.assessment.identity import runtime_dependencies
-from aeep.assessment.models import AssessmentEnvironment,AssessmentScopeAmendment,AssessmentSubject,RecipeMaterializationRequest,content_digest
+from aeep.assessment.models import AssessmentEnvironment,AssessmentScopeAmendment,AssessmentSubject,RecipeMaterializationRequest,RecipeRuntimeBinding,content_digest
 from aeep.assessment.repository_suites import RepositorySuiteCase,grade_suite_output
 from aeep.assessment.verification import verification_source_digest
 
@@ -27,15 +27,20 @@ async def main():
     prior=json.loads((OLD/'runtime-review.json').read_text());old_parent=json.loads((OLD/'runtime-execution/parent-runtime-review.json').read_text());parent=copy.deepcopy(old_parent)
     assert json.loads((OLD/'initial-failure-reconciliation.json').read_text())['uncertain_attempts']==0
     assert json.loads((OLD/'independent-execution-result.json').read_text())['all_components_passed']
-    before=RecipeMaterializationRequest.model_validate(parent['request']);assert runtime_dependencies()==before.runtime_dependencies
+    before=RecipeMaterializationRequest.model_validate(parent['request']);current_runtime=runtime_dependencies()
+    changed={p for p in set(current_runtime)|set(before.runtime_dependencies) if current_runtime.get(p)!=before.runtime_dependencies.get(p)}
+    assert changed=={str(ROOT/'src/aeep/assessment/container_worker.py'),str(ROOT/'src/aeep/assessment/containment.py')}
+    old_runtime_digest=next(k for k,v in parent['documents'].items() if v['kind']=='recipe_runtime')
+    runtime=RecipeRuntimeBinding(dependencies=current_runtime);runtime_digest=content_digest(runtime)
     env=AssessmentEnvironment.model_validate(next(x['document'] for x in parent['documents'].values() if x['kind']=='environment'))
     assert env.container_image=='sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f'
     env.environment_id='repository-worker-input-20261027';env.identity={'source_digest':source,'purpose':'Fresh inner-worker input-limit correction;earlier3 probes do not qualify this source.'}
-    digest=content_digest(env);parent['documents']={k:v for k,v in parent['documents'].items() if v['kind'] in ('recipe','recipe_runtime')}
+    digest=content_digest(env);parent['documents']={k:v for k,v in parent['documents'].items() if v['kind']=='recipe'}
+    parent['documents'][runtime_digest]={'kind':'recipe_runtime','id':runtime_digest,'document':runtime.model_dump(mode='json')}
     parent['documents'][digest]={'kind':'environment','id':env.environment_id,'document':env.model_dump(mode='json')}
     parent['request']['environment_digest']=digest
-    parent['request']['definition_digests']=[digest if d==before.environment_digest else d for d in before.definition_digests]
-    parent['source_digest']=source;parent['external_execution']=False
+    parent['request']['definition_digests']=[digest if d==before.environment_digest else runtime_digest if d==old_runtime_digest else d for d in before.definition_digests]
+    parent['source_digest']=source;parent['external_execution']=False;parent['request']['runtime_dependencies']=current_runtime
     # Same immutable probe payloads,including the formerly failed2.7MB fixture.
     # Their old canary location is reused only after verified removal.
     assert len(parent['probes'])==4
@@ -57,7 +62,7 @@ async def main():
     for path,expected in assets.items():assert Path(path).is_file() and not Path(path).is_symlink() and sha(Path(path))==expected
     for name in ('run-runtime.py','run.py','audit-execution.py','classify.py','operator_output.py','review-budget.py'):ast.parse((HERE/name).read_text())
     subject=AssessmentSubject(kind='command',location=str((ROOT/prior['cases_file']).parent),dependency_digests=assets,description='Six unchanged repository subjects on corrected worker framing;four fresh exact probes. No build,install,download or model.')
-    request=RecipeMaterializationRequest(schema_version=before.schema_version,subject_digest=content_digest(subject),recipe_digest=before.recipe_digest,mapping_digest=before.mapping_digest,environment_digest=digest,authorization_id='onboarding',seed=94,definition_digests=parent['request']['definition_digests'],runtime_dependencies=before.runtime_dependencies)
+    request=RecipeMaterializationRequest(schema_version=before.schema_version,subject_digest=content_digest(subject),recipe_digest=before.recipe_digest,mapping_digest=before.mapping_digest,environment_digest=digest,authorization_id='onboarding',seed=94,definition_digests=parent['request']['definition_digests'],runtime_dependencies=current_runtime)
     new={content_digest(v):{'kind':kind,'id':identity,'document':v.model_dump(mode='json')} for kind,identity,v in [('subject',subject.subject_id,subject),('recipe_materialization_request',request.plan_id,request)]}
     documents={**parent['documents'],**new}
     amendment=AssessmentScopeAmendment(authorization_id='onboarding',authorization_digest=prior['authorization_digest'],subject_digests=[content_digest(subject)],recipe_digests=[before.recipe_digest],environment_digests=[digest],reviewed_digests=list(documents))

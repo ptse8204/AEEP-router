@@ -11,8 +11,10 @@ selection, human controls, resource acceptance and release remain open.
 Current source `374579f1` corrects the inner reader through an operator-owned launch
 argument. Default argv and 2 MB limits remain; task data cannot raise the bound.
 Focused framing regressions pass, including a 2.7 MB round trip through both real
-protocol readers. [Full source verification](../../reports/toolkit-v2/c13/repository-worker-input-20261027/source-in-progress.json)
-is running in session38330; inspect its actual status before resuming.
+protocol readers. [All 13 source checks](../../reports/toolkit-v2/c13/repository-worker-input-20261027/validation/checks.json)
+passed: 1,735 tests in each full run, 21 skips, 82% coverage and both branch gates.
+The corrected wheel is built; its installation and fresh container profile remain
+pending the exact new execution approval.
 The prior source1fde's 13 gates and installed wheel60466 checks retain their exact
 bindings. They do not qualify the correction. The existing image2386 and all older
 images remain; no new dependency, download, image build or architecture is needed.
@@ -57,10 +59,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'a43a7b6'
-last_check_command: 'repository-large-archives-20261027/initial-failure-reconciliation.json; continue-independent-components.py; repository-worker-input-20261027/run-source-checks.py'
-last_check_result: 'Bundlee6b1fb2c:verified SciPy fetch/private image2386 build,3passing probes,1known terminal failed2.7MB probe.8operations/15.73691733321175seconds charged;zero models/cash.19installed checks and exact69-document docs snapshot passed independently. Worker cap correction374579f1 has focused regressions;full13-gate session38330 is running,not yet passed.'
-next_action: 'Inspect repository-worker-input-20261027/validation/checks.json, source-stability.json and actual session38330 without duplicating it. Finish source gates,build/pin corrected wheel and prepare one specific review for corrected-source4fresh probes/12unchanged variants on retained2386 plus installed-wheel/docs checks. No fetch/build is needed. Prior e6b control-repair authority excludes product-source changes;fresh executable approval is necessary. Keep all8prior charges and terminal failed probe;no automatic replay or conformance transfer.'
+last_verified_commit: '1f7d27d'
+last_check_command: 'repository-worker-input-20261027/run-source-checks.py; check-legacy-recipe.py; check-terminal-controls.py; exact runtime/package/docs preparation'
+last_check_result: 'All13 source gates passed on374579f1:both full runs1735passed/21skipped,82%coverage,both branch gates. Frozen d02 recipe remains identical. Five actual collector fixtures preserve terminal-failure/uncertainty distinctions. Prior e6b runtime failure and8charged operations remain;old-source package19checks/docs passed. No corrected-source external execution or model turn.'
+next_action: 'Read repository-worker-input-20261027/README.md and approval-bundle.json. Obtain one exact executable approval for corrected-source4fresh probes/12unchanged variants on retained2386 plus changed-wheel19installed checks and cached offline docs. Runtime maximum20calls/24operations/1000reserved seconds includes bounded report controls. No new download,dependency or image build. Record actual approval and run the combined driver once;preserve prior failed probe,8charges and51-case pool. Source session38330 is terminal;do not rerun it.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -3976,3 +3978,30 @@ being corrected. This is separate from the actual2MB product defect. Full source
 session38330 is running with source frozen. No new source execution, install,
 image or model has been attempted. The existing image will be reused after the
 new source/wheel approval; the old envelope explicitly excludes source changes.
+
+## Inner-worker correction source verification completed — October27
+
+[All13 source gates](../../reports/toolkit-v2/c13/repository-worker-input-20261027/validation/checks.json)
+passed on374579f1/commit1f7d27d. Both full runs passed1,735 tests with21 skips and
+one existing warning;coverage82%,both branch gates passed. Compilation,schemas,
+integration tests,Ruff,mypy and wheel/sdist builds passed. Frozen d02 recipe
+reconstruction is unchanged. Session38330 is terminal and was not repeated.
+The first-party collector checks now also bind complete execution evidence by
+its canonical repository digest,keeping its separate journal identifier distinct.
+Five fixtures accept known terminal failure only as failure and stop on nonterminal,
+incomplete-journal or cleanup uncertainty. No live/container call supplied them.
+
+The new wheel and exact remaining runtime/package/docs scope are prepared. Source
+and wheel changes require approval because the preceding explicit control-repair
+room excluded product changes. Reuse image2386 and all unchanged case/probe/test
+bytes;no dependency,download,image build,service,model,cash,architecture or budget
+decision is needed. Maximum20calls/24operations/1000reserved seconds includes four
+bounded same-software report diagnostics. Current13189/3755/119834.18554038461/0.0
+counters,all images,the51-case pool and90-case gap remain. No qualification,
+usefulness,selection,resource,human-control or release gate closes.
+
+The next metadata-only multi-file queue contains14 potential tasks across11repos.
+It preserves prior queue/exclusion flags and still needs semantic/runtime review.
+Its initial reader confused an integer row count with row records;that local
+schema handling was corrected before the final queue. No new source archive,
+untrusted code,installation or model was involved in this preparation.

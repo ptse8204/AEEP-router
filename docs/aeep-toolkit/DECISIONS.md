@@ -1871,7 +1871,6 @@ change fits that authority. All usage stays cumulative. The finite bounds are
 20 calls/27 operations/1420 reserved seconds, including two fetch attempts and one
 build. These limits govern this check; they do not establish product resource SLOs.
 
-
 ## D111 — Pass reviewed framing bounds into the worker entrypoint
 
 The approved2.7MB probe exposed an incomplete D110 change: the outer command
@@ -1887,3 +1886,13 @@ it and all costs; do not call it a pass or replay it. A report collector may
 recognize a canonical FAILED attempt as known completion without accepting its
 task result. The prior approval's control-repair room excludes product-source
 changes,so the new worker/wheel needs an exact executable review after full gates.
+
+### D111 source verification completed
+
+All13 gates passed on374579f1,with1,735 tests in both full runs and82%coverage.
+Frozen legacy recipe serialization remains identical. Five collector fixtures
+exercise actual code against private copies of terminal evidence,including
+incomplete-journal denial. Journal identifiers and canonical repository content
+digests stay distinct. The retained image and task bytes are unchanged;fresh
+worker/wheel execution requires the exact new review,with no new software build
+or architecture. No scientific/resource threshold or prior cost is changed.

@@ -34,7 +34,7 @@ def main():
         directory=Path(value['directory']);review=directory/value['review_file'];value['review_sha256']=sha(review);assets[str(review)]=sha(review)
     for path in list(HERE.glob('*.py'))+list((HERE/'runtime-execution').glob('*.py')):
         ast.parse(path.read_text());assets[str(path)]=sha(path)
-    for name in ('execution-control-check.json','static-bundle-audit.json','preparation-checks.json','runtime-operation-resource-bound.json','integration-dispatch-check.json','grant-pre-review.json','preparation-notes.json','validation/source-stability.json','validation/checks.json','build-artifacts.json'):
+    for name in ('execution-control-check.json','static-bundle-audit.json','terminal-control-check.json','driver-syntax-check.json','legacy-compatibility.json','old-reader-reproduction.json','preparation-checks.json','runtime-operation-resource-bound.json','integration-dispatch-check.json','grant-pre-review.json','preparation-notes.json','validation/source-stability.json','validation/checks.json','build-artifacts.json'):
         assets[str(HERE/name)]=sha(HERE/name)
     pkg=Path(components['package']['directory']);docs=Path(components['docs']['directory'])
     for name in ('installation.json','registry.json','policy.json','review.json','dependency-cache.json','capture-fixture.json','run_review.py','prepare-review.py'):assets[str(pkg/name)]=sha(pkg/name)
