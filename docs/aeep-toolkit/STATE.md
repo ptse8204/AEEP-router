@@ -3754,3 +3754,30 @@ checks preserve the stock evaluation. This repairs the diagnostic information ga
 without a replay or a default product-retention change. No upstream code, image,
 installation or model turn ran. Finish the concrete combined runtime/package/docs
 review before requesting its one necessary execution approval.
+
+## Combined protected-root execution review prepared October27
+
+[The concrete bundle](../../reports/toolkit-v2/c13/repository-test-roots-20261027/README.md)
+is prepared, unapproved and unexecuted on source86012b45, parent commit5ff7ffa.
+It covers one offline private12-wheel image plus unchanged JSONPath modules/license
+COPY, three fresh probes and20 variants across eight v4 cases. At most26 existing-
+grant operations/1135 reserved seconds, zero models/cash. Operator-only failure
+logs are explicitly bounded to8192bytes per failed public test; stock evaluations
+and default retention stay unchanged. No model disclosure or campaign is included.
+
+The same bundle checks the changed wheel with32 unchanged cached dependencies and
+19 private installed checks, plus cached offline docs verification. All13 source
+checks remain passed; the unchanged source suite was not repeated. Static guards,
+asset derivation and first-party sandbox checks are engineering evidence only.
+All images and historical charges remain. Current grant13146operations/3755turns/
+119737.59329392854seconds/0.0cash; the44-case pool remains unchanged,97 cases short.
+
+Next: obtain this exact untrusted build/execution approval, record the actual
+response in `bundle-operator-approval.json`, then invoke the reviewed
+`run-integration-bundle.py` once with the bundle's file SHA-256. Reopen canonical
+receipts and reconcile all charges before counting new reproduced cases. Continue
+corpus, source-bound qualification and optional-use comparison preparation; keep
+resource acceptance, selection labels and human controls as separate gates.
+Routine finite definitions and budget/expiry amendments remain delegated. No
+architecture or infrastructure decision is needed. Never reuse terminalf026,
+replay failed cases, infer model benefit or transfer old conformance to86012.

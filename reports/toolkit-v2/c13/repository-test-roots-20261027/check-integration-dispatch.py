@@ -1,0 +1,71 @@
+"""Exercise actual bundle dispatch/stop logic with child execution fully replaced."""
+import copy
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+from types import SimpleNamespace
+
+ROOT=Path(__file__).resolve().parents[4]
+HERE=Path(__file__).resolve().parent
+
+
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    original=json.loads((HERE/'approval-bundle.json').read_text())
+    checks=[]
+    for mode in ('pass','runtime_uncertain','package_failure','timeout'):
+        with tempfile.TemporaryDirectory(prefix='aeep-SYNTHETIC-dispatch-only-',dir=ROOT/'.aeep') as temp:
+            fixture=Path(temp);bundle=copy.deepcopy(original)
+            for name,component in bundle['components'].items():
+                directory=fixture if name=='runtime' else fixture/name;directory.mkdir(exist_ok=True)
+                source=Path(component['directory'])/component['review_file']
+                (directory/component['review_file']).write_bytes(source.read_bytes())
+                component['directory']=str(directory)
+            path=fixture/'approval-bundle.json';path.write_text(json.dumps(bundle))
+            (fixture/'bundle-operator-approval.json').write_text(json.dumps({'approved':True,'review_sha256':sha(path),'operator_text':'SYNTHETIC FIXTURE ONLY; no user approval or execution authority'}))
+            spec=importlib.util.spec_from_file_location('synthetic_dispatch_'+mode,HERE/'run-integration-bundle.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+            module.HERE=fixture
+            calls=[]
+            def fake(argv,**kwargs):
+                name=('runtime','package','docs')[len(calls)];calls.append(name)
+                component=bundle['components'][name]
+                assert argv[:2]==[sys.executable,component['argv'][0]]
+                assert kwargs['cwd']==ROOT and kwargs['stdin']==subprocess.DEVNULL
+                assert kwargs['timeout']==component['maximum_driver_seconds']
+                assert sha(Path(component['directory'])/component['review_file'])==component['review_sha256']
+                if name=='package':assert argv[-2]=='--execute-reviewed-digest'
+                else:assert argv[-1]==component['review_sha256']
+                if mode=='timeout':raise subprocess.TimeoutExpired(argv,1)
+                target=Path(component['directory'])/component['result_file'];target.parent.mkdir(parents=True,exist_ok=True)
+                passed=not (mode=='runtime_uncertain' and name=='runtime' or mode=='package_failure' and name=='package')
+                target.write_text(json.dumps({component['passed_field']:passed}))
+                if name=='runtime' and passed:
+                    (fixture/'runtime-execution').mkdir()
+                    (fixture/'runtime-execution/completion-audit.json').write_text(json.dumps({'all_owned_containers_absent':True,'physical_receipt_integrity_passed':True}))
+                    (fixture/'canary-cleanup.json').write_text(json.dumps({'unchanged_owned_canary_removed':True}))
+                return SimpleNamespace(returncode=0 if passed else 1)
+            module.subprocess=SimpleNamespace(run=fake,DEVNULL=subprocess.DEVNULL,STDOUT=subprocess.STDOUT)
+            previous=sys.argv;sys.argv=['SYNTHETIC-no-authority',sha(path)]
+            try:
+                try:module.main()
+                except (AssertionError,subprocess.TimeoutExpired):
+                    assert mode in ('runtime_uncertain','timeout')
+                else:assert mode in ('pass','package_failure')
+            finally:sys.argv=previous
+            result=json.loads((fixture/'bundle-execution-result.json').read_text())
+            assert calls==(['runtime'] if mode in ('runtime_uncertain','timeout') else ['runtime','package','docs'])
+            assert result['all_components_passed']==(mode=='pass')
+            assert result['source_unchanged'] and result['models']==0 and result['automatic_retry'] is False
+            checks.append({'mode':mode,'observed_dispatch':calls,'passed':True})
+        assert not fixture.exists()
+    value={'passed':True,'actual_driver_fixture_checks':checks,'subprocess_dispatch_replaced_before_main':True,'new_containers_installs_or_third_party_execution':0,'synthetic_resources_removed':True,'fixture_is_not_authority_or_benchmark':True}
+    (HERE/'integration-dispatch-check.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps(value))
+
+
+if __name__=='__main__':main()

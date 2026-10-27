@@ -1148,3 +1148,18 @@ checks preserve the stock evaluation. This repairs the diagnostic information ga
 without a replay or a default product-retention change. No upstream code, image,
 installation or model turn ran. Finish the concrete combined runtime/package/docs
 review before requesting its one necessary execution approval.
+
+## Protected-root runtime review, October27
+
+[The next review](../../reports/toolkit-v2/c13/repository-test-roots-20261027/README.md)
+keeps upstream pytest/SWE-rebench parsing and the AEEP container/accounting path.
+Eight inert cases cover Gabbi, iCalendar, SQL-Metadata and RO-Crate. Twelve cached
+optional support wheels and the six unchanged JSONPath modules/license have exact
+pins and static closure. JSONPath distribution1.4.0 embeds module1.3.0; both facts
+remain distinct. No setup.py, new core dependency or external service is needed.
+
+Runtime compatibility and all twenty variants remain unexecuted pending the
+combined approval. Source86012 passed13 gates; the installed wheel and current
+docs require their own exact checks. The operator failure envelope does not alter
+the stock evaluation or qualify a campaign. The44 reproduced historical cases
+retain their original bindings; no live usefulness or selection claim follows.

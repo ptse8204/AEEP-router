@@ -69,3 +69,44 @@ and wrapped evaluations, bounded tails and no child/third-party execution. These
 fixtures are not benchmark evidence. Actual build, install, source execution,
 updated-wheel checks and offline docs checking still need one concrete exact
 approval after the combined review is prepared. No architecture decision is needed.
+
+## Exact execution review
+
+[The combined review](approval-bundle.json) binds three offline components. It is
+prepared for approval; none has executed. [The runtime component](runtime-review.json)
+permits one private build from retained `f60342e9`, twelve cached wheels and a COPY
+of the unchanged JSONPath modules and license. It then permits three fresh probes
+and twenty exact repair/regression variants for the eight cases above. The bound
+is26 existing-grant operations and1135 reserved seconds, zero models or cash.
+All images remain. Only new owned containers and the unchanged canary are removed.
+
+[The package component](../../integration-completion/package-review-test-roots-20261027/operation-review.json)
+checks wheel `ce0a1290c30190cf56d87de6e058faa3837269cf2f47c0c97c67a5c55b3b00bb`
+with32 unchanged cached dependencies through19 private offline checks. V4 recipe
+export and exact test roots are checked as inert data; no repository code executes
+in this component. [The docs component](../../integration-completion/lychee-test-roots-review-20261027/operation-review.json)
+uses the cached pinned Lychee0.24.2 executable in its tested offline sandbox.
+Unchanged private package/checker runtimes are removed; receipts and caches remain.
+
+Approval also opts into the bounded public failure tails described above. There
+is one terminal attempt, with no automatic retry or reassignment of unused calls.
+A rejected workload does not stop independent cases or package/docs checks after
+verified cleanup. Common authority, accounting, binding or cleanup uncertainty
+stops external dispatch. No downloads, pulls, model calls, credentials, new
+services, activation, release or old-resource deletion are covered.
+
+## Direction after execution
+
+The current reproduced pool remains44 snapshots across29 repository groups:
+16 single-file repairs,18 multi-file repairs and10 audits. Ninety-seven cases
+remain before the unchanged141-case balanced design can be frozen. If all eight
+new cases reproduce, the pool becomes52; that outcome is not assumed. Repository
+groups stay in one stage, and prior observations retain their source/runtime pins.
+The new operator profile cannot silently qualify a default-observer campaign.
+
+Continue independent corpus preparation, then freeze source-bound stages and
+qualify the actual worker/grader composition before a formal optional-use
+comparison. Evaluate selection against independently established, applicable
+usefulness labels. A rejection or abstention is useful evidence but cannot stand
+in for positive task-specific value. Keep whole-host resource acceptance and the
+remaining human control exercise separate. No scientific gate closes here.

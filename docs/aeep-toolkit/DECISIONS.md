@@ -1773,3 +1773,25 @@ checks preserve the stock evaluation. This repairs the diagnostic information ga
 without a replay or a default product-retention change. No upstream code, image,
 installation or model turn ran. Finish the concrete combined runtime/package/docs
 review before requesting its one necessary execution approval.
+
+## D108 — One offline v4 reproduction/package/docs review
+
+Reuse the completed finite container driver and protected pytest grader for the
+new test-root contract. Eight public snapshots need twelve optional runtime
+wheels and unchanged JSONPath library bytes; the source-only package is copied
+with its recovered same-commit license instead of running setup.py. Existing
+image configuration and parent layers remain, and all images are retained.
+
+The next exact approval also covers bounded operator-only public failure tails,
+the current installed wheel and cached offline docs verification. Earlier
+collectors discarded useful collection causes; retaining a bounded tail during
+the original call avoids diagnostic replays. The five-field grade and default
+product retention do not change. No new framework, core dependency, service,
+model authority or architecture choice is introduced. See [the exact review](../../reports/toolkit-v2/c13/repository-test-roots-20261027/README.md).
+
+Static preparation is not reproduction, qualification, comparative usefulness or
+selection validation. The44-case pool keeps historical source/runtime bindings;
+no stage or threshold is changed to accommodate the new batch. Common uncertainty
+stops external dispatch; isolated workload rejection continues only after known
+canonical completion and cleanup. Routine finite definitions are delegated, while
+new untrusted installation/execution still needs the user's exact approval.

@@ -5817,3 +5817,24 @@ checks preserve the stock evaluation. This repairs the diagnostic information ga
 without a replay or a default product-retention change. No upstream code, image,
 installation or model turn ran. Finish the concrete combined runtime/package/docs
 review before requesting its one necessary execution approval.
+
+### Toolkit v4 protected-root execution preparation — October27
+
+[The combined review](../toolkit-v2/c13/repository-test-roots-20261027/README.md)
+is prepared for one offline runtime/package/docs attempt. Source86012 passed all
+13 source checks:1703 tests in each full run,82% coverage and both branch gates.
+Those checks were not repeated. Actual new image/repository execution, installed
+wheel verification and `make docs-check` remain pending exact approval. The
+first-party docs sandbox check passes; it does not run the cached link checker.
+
+Current44-case pool and all old source/runtime evidence remain. No qualification,
+usefulness, selection, resource acceptance or human-control gate closes. C13
+remains IN_PROGRESS. New untrusted installation/execution approval is required;
+there is no architecture decision. Images, backups and unrelated work remain.
+
+The optional broader lint of this historical plan record reports34 existing
+formatting findings outside the new section. They are retained without rewriting
+historical text; this file is outside the Makefile documentation scope. The four
+other changed documents passed their targeted lint. A local digest inspection
+initially passed a string where the helper requires a Path; the corrected read
+confirmed unchanged source86012. Neither command ran upstream code.
