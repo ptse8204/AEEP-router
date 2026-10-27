@@ -1191,3 +1191,13 @@ module errors/unexpected tests and reproduce the observed malformed map without
 claiming to recover the original successful log. No subject ran. The46-case pool,
 source86012,installed wheel and existing checks are unchanged. No new core service
 or benchmark/value/selection/resource claim is made.
+
+## Effective-runtime observations, October27
+
+[Approved27efdd79](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/RESULTS.md)
+reproduced five subjects;the image-location probes and pytest-row adapter work for
+their exact profiles. iCalendar880 remains excluded for16 missing parameterized
+metadata identities,despite899 reported passes. No metadata ID or threshold was
+changed. The51-case pool retains source/recipe/image bindings. Image df79d0f3 and
+all prior images remain;there is no new core dependency or installed-host change.
+No package/docs run,model trial,usefulness or selection evidence is implied.

@@ -1,0 +1,36 @@
+{
+  "name": "collective__icalendar-921-aeep-contract-audit-counterexample",
+  "operation_id": "recipe_generation_3cdefbcd68e041d4ba77c4a03bc380a6-call-10",
+  "output": {
+    "evaluation": {
+      "statuses": {
+        "src/icalendar/tests/test_conference.py::test_from_empty_uri": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_from_example_uri": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_to_uri": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_no_conferences[Event]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_no_conferences[Todo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_add_conference[Event]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_add_conference[Todo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_add_multiple_conferences[Event]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_add_multiple_conferences[Todo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_new_component_with_conferences[Event]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_new_component_with_conferences[Todo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_uri_in_ical_[Event]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_uri_in_ical_[Todo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_conferences_from_file[get_event-pytz]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_conferences_from_file[get_serialized_event-pytz]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_conferences_from_file[get_event-zoneinfo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_conferences_from_file[get_serialized_event-zoneinfo]": "PASSED",
+        "src/icalendar/tests/test_conference.py::test_conference_from_string": "PASSED",
+        "src/icalendar/tests/test_aeep_preservation.py::test_snapshot_preserved": "FAILED",
+        "src/icalendar/tests/test_conference.py::test_conference_list_params_serialization": "FAILED"
+      },
+      "exit_code": 1,
+      "archive_sha256": "3d06ec93644b5329a74e0370ab0776ac699142b63f1c997321d06a832f60ccdc",
+      "python": "3.13",
+      "pytest": "8.3.5"
+    },
+    "failure_log_tail_b64": "PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0gdGVzdCBzZXNzaW9uIHN0YXJ0cyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KY29sbGVjdGVkIDIwIGl0ZW1zCgpzcmMvaWNhbGVuZGFyL3Rlc3RzL3Rlc3RfYWVlcF9wcmVzZXJ2YXRpb24ucHkgRiAgICAgICAgICAgICAgICAgICAgICAgICAgWyAgNSVdCnNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5IC4uLkYuLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICBbMTAwJV0KCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09IEZBSUxVUkVTID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci90bXAvcmVwb3NpdG9yeS1zdWl0ZS1senU2cndzZi9yZXBvc2l0b3J5L3NyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9hZWVwX3ByZXNlcnZhdGlvbi5weTo3OiBhc3NlcnQgRmFsc2UKL3RtcC9yZXBvc2l0b3J5LXN1aXRlLWx6dTZyd3NmL3JlcG9zaXRvcnkvc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6NTc6IEFzc2VydGlvbkVycm9yOiBhc3NlcnQgRmFsc2UKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09IFBBU1NFUyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KPT09PT09PT09PT09PT09PT09PT09PT09PT09IHNob3J0IHRlc3Qgc3VtbWFyeSBpbmZvID09PT09PT09PT09PT09PT09PT09PT09PT09PT0KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2Zyb21fZW1wdHlfdXJpClBBU1NFRCBzcmMvaWNhbGVuZGFyL3Rlc3RzL3Rlc3RfY29uZmVyZW5jZS5weTo6dGVzdF9mcm9tX2V4YW1wbGVfdXJpClBBU1NFRCBzcmMvaWNhbGVuZGFyL3Rlc3RzL3Rlc3RfY29uZmVyZW5jZS5weTo6dGVzdF90b191cmkKUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X25vX2NvbmZlcmVuY2VzW0V2ZW50XQpQQVNTRUQgc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6OnRlc3Rfbm9fY29uZmVyZW5jZXNbVG9kb10KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2FkZF9jb25mZXJlbmNlW0V2ZW50XQpQQVNTRUQgc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6OnRlc3RfYWRkX2NvbmZlcmVuY2VbVG9kb10KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2FkZF9tdWx0aXBsZV9jb25mZXJlbmNlc1tFdmVudF0KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2FkZF9tdWx0aXBsZV9jb25mZXJlbmNlc1tUb2RvXQpQQVNTRUQgc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6OnRlc3RfbmV3X2NvbXBvbmVudF93aXRoX2NvbmZlcmVuY2VzW0V2ZW50XQpQQVNTRUQgc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6OnRlc3RfbmV3X2NvbXBvbmVudF93aXRoX2NvbmZlcmVuY2VzW1RvZG9dClBBU1NFRCBzcmMvaWNhbGVuZGFyL3Rlc3RzL3Rlc3RfY29uZmVyZW5jZS5weTo6dGVzdF91cmlfaW5faWNhbF9bRXZlbnRdClBBU1NFRCBzcmMvaWNhbGVuZGFyL3Rlc3RzL3Rlc3RfY29uZmVyZW5jZS5weTo6dGVzdF91cmlfaW5faWNhbF9bVG9kb10KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2NvbmZlcmVuY2VzX2Zyb21fZmlsZVtnZXRfZXZlbnQtcHl0el0KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2NvbmZlcmVuY2VzX2Zyb21fZmlsZVtnZXRfc2VyaWFsaXplZF9ldmVudC1weXR6XQpQQVNTRUQgc3JjL2ljYWxlbmRhci90ZXN0cy90ZXN0X2NvbmZlcmVuY2UucHk6OnRlc3RfY29uZmVyZW5jZXNfZnJvbV9maWxlW2dldF9ldmVudC16b25laW5mb10KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2NvbmZlcmVuY2VzX2Zyb21fZmlsZVtnZXRfc2VyaWFsaXplZF9ldmVudC16b25laW5mb10KUEFTU0VEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2NvbmZlcmVuY2VfZnJvbV9zdHJpbmcKRkFJTEVEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9hZWVwX3ByZXNlcnZhdGlvbi5weTo6dGVzdF9zbmFwc2hvdF9wcmVzZXJ2ZWQKRkFJTEVEIHNyYy9pY2FsZW5kYXIvdGVzdHMvdGVzdF9jb25mZXJlbmNlLnB5Ojp0ZXN0X2NvbmZlcmVuY2VfbGlzdF9wYXJhbXNfc2VyaWFsaXphdGlvbgo9PT09PT09PT09PT09PT09PT09PT09PT09IDIgZmFpbGVkLCAxOCBwYXNzZWQgaW4gMC4wM3MgPT09PT09PT09PT09PT09PT09PT09PT09PQo="
+  },
+  "execution_error_type": null
+}

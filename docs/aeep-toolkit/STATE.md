@@ -3843,3 +3843,30 @@ canonical observations and charges. The old81cce633 approval cannot authorize
 this correction or reuse unused slots. No architecture or budget decision is
 needed. Continue corpus/qualification/value/selection preparation safely; no
 scientific,resource,human-control or release gate closes from static fixtures.
+
+## Effective-runtime correction completed October27
+
+Approved27efdd79 ran once; [actual results](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/RESULTS.md)
+reproduce five cases:Gabbi342,iCalendar878/921,SQL-Metadata552 andRO-Crate248.
+References pass;counterexamples and both RO-Crate partials fail as required.
+Three fresh probes verify image-resolved date supports without portable shadows.
+iCalendar880 remains excluded:exit0/899reported passes,16required metadata IDs
+missing with incomplete parameter fragments. Do not rename/drop those IDs or
+reuse its skipped slots. Move to independent workloads rather than replay it.
+
+All19 operations/16 physical attempts reconcile,charging50.94772445643321seconds,
+zero models/cash. Current13181operations/3755turns/119818.4486230514seconds/0.0cash.
+Image df79d0f3 is retained at `aeep-toolkit-v2/repository-grader:py313-effective-runtime-20261027`,
+with896382bytes measured growth and unchanged parent/config. All owned containers
+and unchanged canary are removed;all older images remain. No package/docs rerun,
+download or new service occurred. Source86012/wheelce0a and passing checks remain.
+
+[The pool](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/provisional-pool.json)
+is51 snapshots/33repositories/2804IDs:19single,19multi,13audit;90cases remain.
+No stage,qualification,usefulness,selection,resource,human-control or release gate
+closes. Next safe work:predeclare a broader independent source-read queue,review
+compact public repository/license/runtime fit as inert data,and prepare one finite
+reproduction batch against retaineddf79. Keep current excluded metadata and source-
+layout constraints explicit. New untrusted subject execution needs its own exact
+review;routine definitions/expiry amendments remain delegated. Terminal27efdd79
+cannot be retried. No architecture or infrastructure choice is pending.

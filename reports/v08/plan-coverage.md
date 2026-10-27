@@ -5867,3 +5867,14 @@ The pool remains46,with95cases missing. C13 remains open pending exact execution
 and later qualification,usefulness,selection,resource and human-control evidence.
 Raw image-build.log trailing space and docs-check.log final blank line from81cce633
 remain verbatim;they are evidence formatting findings,not first-party source errors.
+
+### Effective repository runtime correction completed — October27
+
+Approved27efdd79 [reproduced five subjects](../toolkit-v2/c13/repository-effective-runtime-20261027/RESULTS.md).
+iCalendar880 remains excluded for16 missing IDs from915required,with899reported
+passes. All19 operations/16 physical attempts reconcile,50.94772445643321seconds,
+zero models/cash. Current13181/3755/119818.4486230514/0.0. Image df79d0f3 and older
+images remain;owned containers/canary are absent. Source86012/wheelce0a unchanged;
+no source,package or docs rerun. The pool is51cases/33repos;90cases remain. C13 and
+scientific/resource/human gates stay open. New source curation is next;do not
+replay the terminal review or replace missing parameter IDs with passes.

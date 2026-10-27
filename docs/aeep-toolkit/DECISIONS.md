@@ -1828,3 +1828,14 @@ The review covers six excluded subjects and zero model turns. Source and wheel
 checks remain applicable without reinstalling unchanged artifacts. Execution needs
 one new exact approval; terminal81cce633 remains intact. No new core dependency,
 framework,service or architecture choice is introduced.
+
+### D109 correction completed
+
+Approved27efdd79 reproduced five cases under the explicit image/observer profile.
+iCalendar880 remains excluded for16 missing parameterized metadata identities;
+899 reported passes do not replace the915-ID contract. Keep that result and move
+to independent sources instead of repeatedly repairing metadata through execution.
+Image df79d0f3 and all older images remain. All19 operations and16 physical attempts
+reconcile with zero models/cash. Source/package bytes and prior checks are unchanged.
+See [the result](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/RESULTS.md).
+The51-case pool is provisional;no scientific or resource gate closes.
