@@ -784,3 +784,169 @@ def test_declared_roots_retain_required_identity_guards(suite_cases, kind):
         truth['test_roots'] = ['other/tests']
     with pytest.raises(ValueError):
         SuiteTruthV4.model_validate(truth)
+
+
+@pytest.fixture
+def large_case(suite_cases):
+    import random
+
+    from aeep.assessment.repository_suites import SuiteAssetV5, compressed_patch_artifact
+
+    data = rooted_case(suite_cases[0]).model_dump(mode='json')
+    files = archive_files(suite_cases[0].truth.source.read())
+    files['library/public_fixture.bin'] = random.Random(317).randbytes(700_000)
+    source = pack_files(files, large=True)
+    digest = hashlib.sha256(source).hexdigest()
+    path = Path(suite_cases[0].truth.source.path).with_name(digest + '.tar.gz')
+    path.write_bytes(source)
+    data['schema_version'] = 'assessment.repository-suite-case.v5'
+    data['input']['source_sha256'] = digest
+    binding = content_digest(data['input'])
+    data['truth'].update(archive_profile='repository-v1', input_sha256=binding,
+        source=SuiteAssetV5(path=str(path), sha256=digest, size_bytes=len(source)).model_dump(mode='json'))
+    reference = compressed_patch_artifact(RepositoryPatch(base_sha256=binding,
+        files={'library/core.py': 'def value():\n    return 42\n'}))
+    ref = Path(data['reference']['path']).with_name('large-reference.json')
+    ref.write_text(json.dumps(reference))
+    data['reference'] = SuiteAsset(path=str(ref), sha256=hashlib.sha256(ref.read_bytes()).hexdigest(),
+        size_bytes=ref.stat().st_size).model_dump(mode='json')
+    data['fault_outputs'] = [compressed_patch_artifact(RepositoryPatch(base_sha256=binding,
+        files={'library/core.py': 'def value():\n    return -1\n'}))]
+    return RepositorySuiteCase.model_validate(data)
+
+
+def test_large_source_profile_requires_explicit_case_and_mapper_versions(large_case, suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.adapters import prepare_context
+    from aeep.assessment.repository_suites import SuiteTruthV4, SuiteTruthV5
+    from aeep.executors.base import ExecutionContext
+    from aeep.models import ActionRequest, ExecutorKind, ExecutorSpec
+
+    assert isinstance(large_case.truth, SuiteTruthV5)
+    value = large_case.model_dump(mode='json')
+    validator = Draft202012Validator(RepositorySuiteCase.model_json_schema())
+    validator.validate(value)
+    for version in ('v1', 'v2', 'v3', 'v4'):
+        wrong = {**value, 'schema_version': 'assessment.repository-suite-case.' + version}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    with pytest.raises(ValueError):
+        SuiteTruthV4.model_validate(value['truth'])
+    for profile in (None, 'compact', 'unbounded'):
+        wrong = copy.deepcopy(value)
+        if profile is None:
+            del wrong['truth']['archive_profile']
+        else:
+            wrong['truth']['archive_profile'] = profile
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    root = str(Path(large_case.truth.source.path).parent)
+    arguments = large_case.input.model_dump(mode='json')
+    for transform in ('repository_archive:1', 'repository_archive:2'):
+        spec = ExecutorSpec(id='fixture', capability='fixture', kind=ExecutorKind.COMMAND,
+            description='Inert mapping fixture', config={'assessment_adapter': {
+                'input_transform': transform, 'read_only_roots': [root]}})
+        context = ExecutionContext(request=ActionRequest(capability='fixture', input=arguments),
+            spec=spec, estimate=spec.estimate, attempt=1)
+        if transform.endswith(':1'):
+            with pytest.raises(ConfigurationError):
+                prepare_context(context)
+        else:
+            projected, _ = prepare_context(context)
+            assert base64.b64decode(projected.request.input['source_b64']) == large_case.truth.source.read()
+    # Caller input cannot request a larger transform or alter operator truth.
+    with pytest.raises(ValueError):
+        public_archive({**arguments, 'archive_profile': 'repository-v1'}, [root])
+    before = repository_suite_recipe(suite_cases)
+    current = repository_suite_recipe([large_case, *suite_cases[1:]])
+    assert current.extension.grader.config['max_stdin_bytes'] == 7_000_000
+    assert before.extension.grader.config['max_stdin_bytes'] == 1_800_000
+    assert 'SuiteTruthV5' not in before.extension.truth_schema.get('$defs', {})
+    assert 'SuiteTruthV5' in current.extension.truth_schema['$defs']
+    assert content_digest(repository_suite_recipe(suite_cases)) == content_digest(before)
+
+
+@pytest.mark.asyncio
+async def test_large_profile_preserves_protected_grading_and_payload_cap(large_case, monkeypatch):
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    seen = []
+    async def probe(payload):
+        files = archive_files(base64.b64decode(payload['archive']), large=True)
+        assert files['library/core.py'] == b'def value():\n    return 42\n'
+        assert len(files['library/public_fixture.bin']) == 700_000
+        assert files['package/tests/test_core.py'].startswith(b'protected oracle')
+        seen.append(payload)
+        return success(payload, large_case.truth)
+    reference = json.loads(large_case.reference.read())
+    assert (await grade_suite_output(large_case.input.model_dump(mode='json'),
+        large_case.truth.model_dump(mode='json'), reference, probe)).valid
+    forged = compressed_patch_artifact(RepositoryPatch(base_sha256=content_digest(large_case.input),
+        files={'package/tests/test_core.py': 'forged'}))
+    assert not (await grade_suite_output(large_case.input.model_dump(mode='json'),
+        large_case.truth.model_dump(mode='json'), forged, probe)).valid
+    assert len(seen) == 1
+    monkeypatch.setattr('aeep.assessment.repository_suites.LARGE_PAYLOAD', 100)
+    with pytest.raises(ConfigurationError, match='transport bound'):
+        await grade_suite_output(large_case.input.model_dump(mode='json'),
+            large_case.truth.model_dump(mode='json'), reference, probe)
+    assert len(seen) == 1
+
+
+@pytest.mark.parametrize('files', [
+    {'data.bin': b'x' * 4_000_001},
+    {f'library/fixture_{i}.py': b'# fixture' for i in range(1001)},
+])
+def test_large_profile_accepts_bounded_sources_that_compact_profiles_reject(files):
+    with pytest.raises(ConfigurationError):
+        pack_files(files)
+    data = pack_files(files, large=True)
+    assert archive_files(data, large=True) == files
+    with pytest.raises(ConfigurationError):
+        archive_files(data)
+
+
+@pytest.mark.parametrize('kind', ['raw_tar', 'expanded_files', 'members', 'prefix', 'traversal', 'symlink'])
+def test_large_profile_still_rejects_bombs_counts_and_unsafe_archives(kind):
+    import gzip
+
+    if kind == 'raw_tar':
+        data = gzip.compress(b'\0' * 24_000_001)
+    else:
+        files = {'safe.py': b'# fixture'}
+        if kind == 'expanded_files':
+            files = {'large.bin': b'x' * 20_000_001}
+        if kind == 'members':
+            files = {f'file_{i}.py': b'' for i in range(5001)}
+        if kind == 'prefix':
+            files = {'a': b'', 'a.py': b'', 'a/b.py': b''}
+        if kind == 'traversal':
+            files = {'../outside.py': b''}
+        stream = io.BytesIO()
+        with tarfile.open(fileobj=stream, mode='w:gz') as archive:
+            for name, body in files.items():
+                info = tarfile.TarInfo(name)
+                info.size = len(body)
+                if kind == 'symlink':
+                    info.type = tarfile.SYMTYPE
+                    info.linkname = '/outside'
+                archive.addfile(info, io.BytesIO(body))
+        data = stream.getvalue()
+    with pytest.raises(ConfigurationError):
+        archive_files(data, large=True)
+
+
+def test_large_assets_and_compressed_transport_remain_bounded(large_case, monkeypatch):
+    from aeep.assessment.repository_suites import SuiteAssetV5
+
+    value = large_case.truth.source.model_dump(mode='json')
+    with pytest.raises(ValueError):
+        SuiteAssetV5.model_validate({**value, 'size_bytes': 3_500_001})
+    monkeypatch.setattr('aeep.assessment.repository_suites.LARGE_ARCHIVE', 10)
+    with pytest.raises(ConfigurationError, match='transport bound'):
+        pack_files({'library/core.py': b'# fixture'}, large=True)

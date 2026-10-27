@@ -150,3 +150,39 @@ async def test_command_timeout_covers_blocked_stdin_and_cancellation():
     task.cancel()
     result = await asyncio.wait_for(task, timeout=3)
     assert result.status == ExecutionStatus.TIMEOUT and result.exit_code is not None
+
+
+@pytest.mark.parametrize('limit,expected', [(None, 2_000_000), (1_800_000, 2_000_000),
+    (7_000_000, 8_000_000), (16_000_000, 17_000_000)])
+async def test_contained_input_allowance_is_operator_bound_and_legacy_default_is_stable(tmp_path, monkeypatch, limit, expected):
+    from aeep.models import RawExecution
+
+    context = controlled_context()
+    if limit is not None:
+        context.spec.config['max_stdin_bytes'] = limit
+    context.request.input['max_stdin_bytes'] = 16_000_000
+    seen = []
+    async def capture(self, wrapper):
+        assert wrapper.spec.config['max_stdin_bytes'] == expected
+        assert wrapper.request.input['spec']['config'].get('max_stdin_bytes') == limit
+        seen.append(wrapper)
+        return RawExecution(status=ExecutionStatus.SUCCESS,
+            output=RawExecution(status=ExecutionStatus.SUCCESS, output={'fixture': True}).model_dump(mode='json'))
+    async def cleanup(self, identity):
+        assert identity == 'attempt'
+        return True
+    monkeypatch.setattr(CommandExecutor, 'execute', capture)
+    monkeypatch.setattr(ContainerExecutor, 'cleanup', cleanup)
+    result = await ContainerExecutor(environment(tmp_path, tmp_path / 'not-executed')).execute(context)
+    assert result.status is ExecutionStatus.SUCCESS and result.output == {'fixture': True} and len(seen) == 1
+
+
+@pytest.mark.parametrize('limit', [0, -1, 16_000_001, True, '7000000', None])
+async def test_invalid_contained_input_limits_never_reach_a_process(tmp_path, monkeypatch, limit):
+    context = controlled_context()
+    context.spec.config['max_stdin_bytes'] = limit
+    async def forbidden(*args, **kwargs):
+        pytest.fail('Invalid operator input allowance reached process execution')
+    monkeypatch.setattr(CommandExecutor, 'execute', forbidden)
+    with pytest.raises(ConfigurationError, match='input exceeds'):
+        await ContainerExecutor(environment(tmp_path, tmp_path / 'not-executed')).execute(context)

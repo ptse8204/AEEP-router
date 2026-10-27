@@ -1108,3 +1108,21 @@ retain their `tests/` root and reject the new field. Required identities, assert
 checks, archive/payload bounds, runtime pins, qualification thresholds and execution
 authority are unchanged. New source/runtime bindings require applicable evidence;
 existing receipts do not qualify a changed grader.
+
+`assessment.repository-suite-case.v5` requires protected truth to declare
+`archive_profile: repository-v1` and inherits v4's exact test roots. Its source
+and test assets MUST be at most3500000 compressed bytes,20000000 expanded file
+bytes,24000000 raw tar bytes and5000 regular members. Its merged grader payload
+MUST be below7000000bytes,including the existing30000byte margin. Existing patch,
+identity,editable-path and correctness rules remain. V1-v4 MUST retain their
+compact limits and reject the new field. A larger public source requires the
+operator-selected `repository_archive:2` transform; `repository_archive:1` keeps
+its650000byte cap. Model input and patch arguments MUST NOT select a profile.
+
+The contained executor MAY use an explicit operator-owned `max_stdin_bytes`
+above1800000,up to16000000; its outer JSON envelope then allows that amount plus
+1000000bytes. The prior2000000byte outer allowance stays for smaller/default
+profiles. Invalid limits MUST fail before process dispatch. These finite transport
+caps authorize no filesystem,network,installation or spending expansion. They are
+not production resource SLOs. New profiles require applicable execution/conformance;
+old receipts cannot qualify them automatically.

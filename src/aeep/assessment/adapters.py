@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 
 
 class DeclarativeAdapter(StrictModel):
-    input_transform: Literal["local_search_tree:1", "local_search_tree:2", "repository_archive:1"] | None = None
+    input_transform: Literal["local_search_tree:1", "local_search_tree:2", "repository_archive:1", "repository_archive:2"] | None = None
     read_only_roots: list[str] = Field(default_factory=list)
     input_template: dict[str, Any] | None = None
     target_input_schema: dict[str, Any] | None = None
@@ -92,14 +92,14 @@ def prepare_context(context: ExecutionContext) -> tuple[ExecutionContext, Declar
         return context, None
     adapter = DeclarativeAdapter.model_validate(value)
     arguments = render(adapter.input_template, {"input": context.request.input}) if adapter.input_template is not None else context.request.input
-    if adapter.read_only_roots and adapter.input_transform != 'repository_archive:1':
+    if adapter.read_only_roots and adapter.input_transform not in {'repository_archive:1', 'repository_archive:2'}:
         from ..errors import ConfigurationError
         root = Path(arguments["root"]).resolve(strict=True)
         if not any(root.is_relative_to(Path(allowed).resolve(strict=True)) for allowed in adapter.read_only_roots):
             raise ConfigurationError("search input lies outside reviewed read roots")
-    if adapter.input_transform == 'repository_archive:1':
+    if adapter.input_transform in {'repository_archive:1', 'repository_archive:2'}:
         from .repository_suites import public_archive
-        arguments = public_archive(arguments, adapter.read_only_roots)
+        arguments = public_archive(arguments, adapter.read_only_roots, large=adapter.input_transform == 'repository_archive:2')
     elif adapter.input_transform == "local_search_tree:1":
         from .recipes import search_files
         try:

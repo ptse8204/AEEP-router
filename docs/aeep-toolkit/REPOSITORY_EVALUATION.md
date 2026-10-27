@@ -323,3 +323,29 @@ pins, archive limits, required identities and acceptance thresholds still apply.
 Existing reproduction receipts retain their original grader bindings. Synthetic
 checks of this contract do not establish upstream compatibility, qualification
 or usefulness; those require fresh applicable evidence and execution authority.
+
+## Larger repository archives
+
+Use suite case `assessment.repository-suite-case.v5` when a reviewed repository
+cannot fit the compact source profile. Protected truth must include
+`archive_profile: repository-v1` and the v4 `test_roots`. Source and test archives
+can contain at most3500000 compressed bytes,20000000 expanded file bytes and5000
+regular members,with a separate24000000byte raw tar ceiling. The merged grader
+payload stays below7000000bytes with the existing30000byte margin. These are
+finite engineering bounds,not production resource requirements or evidence of
+capability value. A repository may still be incompatible.
+
+Select `input_transform: repository_archive:2` in the reviewed host adapter and
+set its source artifact `max_bytes` to3500000. Confirm the actual host frame and
+artifact settings can carry that input before execution; every arm needs the
+same reviewed delivery. The v5 recipe requests7000000 grader stdin bytes. The
+container's explicit larger outer envelope adds1000000bytes for protocol metadata.
+Actual containment and worker conformance remain required; schema acceptance is
+not proof of a working large-input path.
+
+V1-v4 cases and `repository_archive:1` retain their existing compact limits and
+reject the larger truth field. The operator selects the adapter and truth; model
+arguments and candidate patches cannot enlarge them. Patch limits,protected tests,
+missing/error/skip rejection,budgets and scientific thresholds are unchanged.
+Old source/runtime evidence remains bound to its original profile. The first
+larger-profile checks use synthetic archives and cannot qualify a public workload.

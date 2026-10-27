@@ -3870,3 +3870,40 @@ reproduction batch against retaineddf79. Keep current excluded metadata and sour
 layout constraints explicit. New untrusted subject execution needs its own exact
 review;routine definitions/expiry amendments remain delegated. Terminal27efdd79
 cannot be retried. No architecture or infrastructure choice is pending.
+
+## Larger repository profile under verification October27
+
+D110 and [the bounded plan](../../reports/toolkit-v2/c13/repository-large-archives-20261027/PLAN.md)
+address an operational source cap,not a scientific gate. An explicit suite-case
+v5/`repository_archive:2` path permits3500000 compressed/20000000 expanded bytes,
+24000000 raw tar bytes,5000 members and7000000 grader payload bytes. V1-v4 and the
+old mapper retain compact limits. The outer container input wrapper remains2M
+for old/default profiles; an explicit reviewed larger stdin bound permits a
+bounded extra1M envelope. Candidate/model arguments cannot select that allowance.
+Path/decompression/edit/oracle/exit/budget/qualification thresholds remain.
+
+Focused101 tests,Ruff and mypy pass;source13-gate session9879 is active. The first
+full run passed1724tests/21skips/one existing warning;branch coverage and remaining
+checks are still running. Inspect `validation/checks.json`,logs and the actual
+session before resuming;do not duplicate an active or terminal check. Product
+source is frozen during that run;report-only inert preparation may continue.
+[The progress record](../../reports/toolkit-v2/c13/repository-large-archives-20261027/source-in-progress.json)
+contains its exact digest. No new source profile is qualified or installed.
+
+Twelve bounded public source reads retained13362568bytes;ten need static review,
+two stay excluded for protected paths. Six snapshots exceeded compact bounds
+but fit the proposed larger caps;largest measured archive2608738bytes/9805413
+expanded bytes. Two additional metadata rows were excluded before downloading
+for incomplete identities/root mismatch. No bound is a production SLO.
+Six initial inert cases plus two separately scoped NetworkX cases are prepared;
+the latter preserve full source/tests while restricting editable directories to
+stay under256 paths. Initial failures and the local authoring syntax error remain.
+Anyio source-plugin cases remain deferred pending namespace/plugin review.
+
+No new upstream code,installer,model or image ran. Source/version compatibility
+and any new wheel/runtime execution need fresh exact evidence after source gates
+finish. The51-case pool and13181/3755/119818.4486230514/0.0 grant counters stay;
+90cases remain. No architecture decision is needed. Next:finish source gates,
+check actual old recipe reconstruction,complete effective dependency/observer
+reviews,then prepare one combined exact runtime/package/docs approval. Preserve
+all images,old source bindings,charges and scientific/resource/human gate statuses.

@@ -137,6 +137,9 @@ class ContainerExecutor(BaseExecutor):
         output_limit = int(context.spec.config.get('max_output_bytes', 1_000_000))
         if not 0 < output_limit <= 16_000_000:
             raise ConfigurationError('contained output exceeds the reviewed transport ceiling')
+        input_limit = context.spec.config.get('max_stdin_bytes', 1_000_000)
+        if type(input_limit) is not int or not 0 < input_limit <= 16_000_000:
+            raise ConfigurationError('contained input exceeds the reviewed transport ceiling')
         wrapper = ExecutorSpec(
             id=context.spec.id,
             capability=context.spec.capability,
@@ -145,7 +148,7 @@ class ContainerExecutor(BaseExecutor):
             config={
                 "argv": argv,
                 "stdin_json": True,
-                "max_stdin_bytes": 2_000_000,
+                "max_stdin_bytes": 2_000_000 if input_limit <= 1_800_000 else input_limit + 1_000_000,
                 "max_output_bytes": 2 * output_limit + 65536 if output_limit > 1_000_000 else 1_000_000,
                 "timeout_seconds": float(context.spec.config.get("timeout_seconds", 60)) + 1,
                 "output": {"type": "json"},

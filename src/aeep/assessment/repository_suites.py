@@ -37,6 +37,9 @@ from .repository_tasks import Probe, RepositoryPatch, checked_files
 MAX_ARCHIVE = 650_000
 MAX_EXPANDED = 4_000_000
 MAX_PAYLOAD = 1_800_000
+LARGE_ARCHIVE = 3_500_000
+LARGE_EXPANDED = 20_000_000
+LARGE_PAYLOAD = 7_000_000
 FAILURES = ['input_binding', 'patch_contract', 'test_failure', 'missing_test']
 
 
@@ -60,12 +63,18 @@ class SuiteAsset(StrictModel):
         return data
 
 
-def archive_files(data: bytes) -> dict[str, bytes]:
+class SuiteAssetV5(SuiteAsset):
+    """Only an explicitly versioned case may use a larger reviewed archive."""
+
+    size_bytes: int = Field(gt=0, le=LARGE_ARCHIVE)
+
+
+def archive_files(data: bytes, *, large: bool = False) -> dict[str, bytes]:
     """Bound decompression before tar parsing; accept regular canonical files only."""
     try:
         with gzip.GzipFile(fileobj=io.BytesIO(data)) as compressed:
-            raw = compressed.read(6_000_001)
-        if len(raw) > 6_000_000:
+            raw = compressed.read(24_000_001 if large else 6_000_001)
+        if len(raw) > (24_000_000 if large else 6_000_000):
             raise ValueError('archive expanded size')
         result: dict[str, bytes] = {}
         total = 0
@@ -79,20 +88,19 @@ def archive_files(data: bytes) -> dict[str, bytes]:
                         or name.name in {'AGENTS.md', 'auth.json', '.env', 'credentials.json'}):
                     raise ValueError('archive member')
                 total += member.size
-                if total > MAX_EXPANDED or len(result) >= 1000:
+                if total > (LARGE_EXPANDED if large else MAX_EXPANDED) or len(result) >= (5000 if large else 1000):
                     raise ValueError('archive bound')
                 stream = archive.extractfile(member)
                 assert stream is not None
                 result[member.name] = stream.read()
-        names = sorted(result)
-        if not result or any(other.startswith(name + '/') for name in names for other in names):
+        if not result or any(str(parent) in result for name in result for parent in PurePosixPath(name).parents):
             raise ValueError('archive file/directory conflict')
         return result
     except (OSError, EOFError, tarfile.TarError, ValueError) as exc:
         raise ConfigurationError('repository suite archive is invalid or exceeds its bound') from exc
 
 
-def pack_files(files: dict[str, bytes]) -> bytes:
+def pack_files(files: dict[str, bytes], *, large: bool = False) -> bytes:
     stream = io.BytesIO()
     with tarfile.open(fileobj=stream, mode='w') as archive:
         for name, data in sorted(files.items()):
@@ -100,9 +108,9 @@ def pack_files(files: dict[str, bytes]) -> bytes:
             member.size, member.mode = len(data), 0o444
             archive.addfile(member, io.BytesIO(data))
     data = gzip.compress(stream.getvalue(), mtime=0)
-    if len(data) > MAX_ARCHIVE:
+    if len(data) > (LARGE_ARCHIVE if large else MAX_ARCHIVE):
         raise ConfigurationError('patched repository archive exceeds transport bound')
-    archive_files(data)
+    archive_files(data, large=large)
     return data
 
 
@@ -198,6 +206,14 @@ class SuiteTruthV4(SuiteTruthV3):
         return self
 
 
+class SuiteTruthV5(SuiteTruthV4):
+    """Larger source transport is operator-reviewed truth, never patch input."""
+
+    archive_profile: Literal['repository-v1']
+    source: SuiteAssetV5
+    tests: SuiteAssetV5
+
+
 class SuiteArtifact(StrictModel):
     patch_b64: str = Field(max_length=700_000)
 
@@ -257,7 +273,7 @@ def _decode_suite_patch(oracle: SuiteTruth, value: Any) -> RepositoryPatch:
 
 def _suite_version_schema(schema: dict[str, Any]) -> None:
     # Reuse Pydantic's references so definition renaming remains valid.
-    rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    large_truth, rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
     schema['allOf'] = [
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
          'then': {'properties': {'truth': legacy_truth}}},
@@ -267,14 +283,16 @@ def _suite_version_schema(schema: dict[str, Any]) -> None:
          'then': {'properties': {'truth': compact_truth}}},
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v4'}}, 'required': ['schema_version']},
          'then': {'properties': {'truth': rooted_truth}}},
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v5'}}, 'required': ['schema_version']},
+         'then': {'properties': {'truth': large_truth}}},
     ]
 
 
 class RepositorySuiteCase(StrictModel):
     model_config = ConfigDict(json_schema_extra=_suite_version_schema)
-    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4'] = 'assessment.repository-suite-case.v1'
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4', 'assessment.repository-suite-case.v5'] = 'assessment.repository-suite-case.v1'
     input: SuiteInput
-    truth: SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
+    truth: SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -288,9 +306,9 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
-        version = 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
+        version = 'v5' if isinstance(self.truth, SuiteTruthV5) else 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
         if self.schema_version != 'assessment.repository-suite-case.' + version:
-            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4')
+            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4; larger archives require v5')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
@@ -303,7 +321,7 @@ class RepositorySuiteCase(StrictModel):
         return self
 
 
-def public_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any]:
+def public_archive(arguments: dict[str, Any], roots: list[str], *, large: bool = False) -> dict[str, Any]:
     """Existing declarative adapter projects one hash-named public asset only."""
     task = SuiteInput.model_validate(arguments)
     if len(roots) != 1:
@@ -311,17 +329,17 @@ def public_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any
     root = Path(roots[0])
     if root.is_symlink() or root.resolve() != root or protected_directory(root):
         raise ConfigurationError('repository archive root is invalid')
-    data = _read_stable_file(root / (task.source_sha256 + '.tar.gz'), MAX_ARCHIVE)
+    data = _read_stable_file(root / (task.source_sha256 + '.tar.gz'), LARGE_ARCHIVE if large else MAX_ARCHIVE)
     if hashlib.sha256(data).hexdigest() != task.source_sha256:
         raise ConfigurationError('public repository source changed')
-    archive_files(data)
+    archive_files(data, large=large)
     return {**arguments, 'base_sha256': content_digest(arguments), 'source_b64': base64.b64encode(data).decode()}
 
 
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
     task = SuiteInput.model_validate(value)
-    oracle = (SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    oracle = (SuiteTruthV5 if 'archive_profile' in truth else SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
@@ -334,17 +352,18 @@ async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], outpu
     except ValueError:
         failure = 'patch_contract'
     if failure is None:
-        files = archive_files(oracle.source.read())
+        large = isinstance(oracle, SuiteTruthV5)
+        files = archive_files(oracle.source.read(), large=large)
         if not set(task.editable_paths) <= files.keys():
             raise ConfigurationError('editable source absent from reviewed archive')
-        tests = archive_files(oracle.tests.read())
+        tests = archive_files(oracle.tests.read(), large=large)
         test_roots = oracle.test_roots if isinstance(oracle, SuiteTruthV4) else ['tests']
         if (any(not any(name.startswith(root + '/') for root in test_roots) for name in tests)
                 or set(tests) & set(task.editable_paths) or not set(oracle.test_paths) <= files.keys() | tests.keys()):
             raise ConfigurationError('protected test overlay conflicts with source scope')
         files.update({name: text.encode('utf-8') for name, text in patch.files.items()})
         files.update(tests)
-        archive = pack_files(files)
+        archive = pack_files(files, large=large)
         payload = {'archive': base64.b64encode(archive).decode(), 'archive_sha256': hashlib.sha256(archive).hexdigest(),
             'python': oracle.python, 'pytest': oracle.pytest, 'test_paths': oracle.test_paths,
             'wheels': [{'filename': Path(asset.path).name, 'sha256': asset.sha256,
@@ -355,7 +374,7 @@ async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], outpu
                        for name in task.editable_paths]
             payload['source_modules'] = sorted({parts[0].removesuffix('.py') for parts in modules
                                                 if parts[0].removesuffix('.py').isidentifier()})
-        if len(json.dumps(payload).encode()) > MAX_PAYLOAD - 30_000:
+        if len(json.dumps(payload).encode()) > (LARGE_PAYLOAD if large else MAX_PAYLOAD) - 30_000:
             raise ConfigurationError('repository test payload exceeds reviewed transport bound')
         reply = await probe(payload)
         if (not isinstance(reply, dict) or set(reply) != {'exit_code', 'statuses', 'archive_sha256', 'python', 'pytest'}
@@ -428,7 +447,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
     observer = ExecutorSpec(id='repository.suite.observe', capability='assessment.repository_suite@1', kind=ExecutorKind.COMMAND,
         description='Pinned upstream pytest observations; protected coordinator decides task correctness.',
         config={'argv': ['python3', '-B', '-c', program], 'argv_literal': True, 'stdin_json': True,
-            'timeout_seconds': 30, 'max_stdin_bytes': MAX_PAYLOAD, 'max_output_bytes': 500_000, 'output': {'type': 'json'}})
+            'timeout_seconds': 30, 'max_stdin_bytes': LARGE_PAYLOAD if any(isinstance(case.truth, SuiteTruthV5) for case in cases) else MAX_PAYLOAD,
+            'max_output_bytes': 500_000, 'output': {'type': 'json'}})
     literals = [case for case in cases if case.split == 'development']
     if len(literals) < 3:
         raise ConfigurationError('repository suite needs three reviewed development cases')
@@ -452,7 +472,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+                if any(isinstance(case.truth, SuiteTruthV5) for case in cases) else TypeAdapter(SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV4) for case in cases) else TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema()
                 if plugins else SuiteTruth.model_json_schema()),

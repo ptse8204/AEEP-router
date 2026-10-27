@@ -1839,3 +1839,16 @@ Image df79d0f3 and all older images remain. All19 operations and16 physical atte
 reconcile with zero models/cash. Source/package bytes and prior checks are unchanged.
 See [the result](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/RESULTS.md).
 The51-case pool is provisional;no scientific or resource gate closes.
+
+## D110 — Version larger repository transport before holdout freeze
+
+Two source samples excluded16of20 and19of30 archives at the prototype650KB cap.
+That cap is an implementation limit,not a scientific or product requirement.
+The operator's resource steering asks for workload-grounded limits. Add an explicit
+suite-case v5/mapper profile while retaining v1-v4 limits and serialized recipes.
+Reuse AEEP's current container/accounting path and upstream pytest/parser; changing
+harnesses would leave the same local byte boundary and add another execution path.
+No new core service,installer,framework or database is needed. [The finite plan](../../reports/toolkit-v2/c13/repository-large-archives-20261027/PLAN.md)
+records proposed bounds and required checks. They are hypotheses pending actual
+source/worker evidence,not production SLOs. Model arguments cannot raise them.
+Scientific thresholds,permissions,all old failures and the51-case pool stay intact.

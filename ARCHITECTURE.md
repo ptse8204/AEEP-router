@@ -701,3 +701,13 @@ reviewed observer. No new patch parser, executable, dependency or service is
 needed. Legacy definitions retain their original encoding, schema and observer.
 The artifact bridge can deliver `patch.json.gz` as `patch_gzip_b64`; all arms in
 a campaign need the same reviewed mapping and output instructions.
+
+Suite case v5 adds a separately reviewed larger archive profile without changing
+the existing compact case/mapper meanings. The coordinator retains canonical-path,
+regular-file,decompression,member-count and editable-source checks. Prefix conflict
+checking walks ancestors rather than comparing every pair of files. The larger
+mapper is an explicit operator adapter version; trial input cannot choose it.
+The current command/container transports carry a larger bounded stdin envelope
+only when the reviewed executor declares it. No runner,installer,database or core
+dependency is added. Worker applicability and resource acceptance need actual
+workload evidence; larger source bounds alone establish neither.
