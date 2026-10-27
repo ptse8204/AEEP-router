@@ -49,7 +49,7 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '1e52c12'
+last_verified_commit: '07dbcac'
 last_check_command: 'repository-independent-sources-20261024/run-bundle.py be8b0e5f...; runtime-execution/audit-execution.py; consolidate-results.py'
 last_check_result: 'Approved be8b0e5f executed once. Imageb0eb4add built offline from324a1fee with16 exact wheels; three probes passed. MSAL audit and SQLacodegen/LMStudio/ModelBakery repairs reproduced. CanvasAPI reference collection ERROR/exit2;62 required identities absent, exact traceback unretained. All12 attempts/receipts reopened,15 operations complete,29.984952959697694 operation-seconds charged,zero models/cash. Owned containers/canary removed; both images retained. Pool39/24repos/2546 identities:15single,18multi,6audit;102 cases still needed. Product source4cb unchanged.'
 next_action: 'Read repository-supported-suites-20261027/README.md and exact approval-bundle SHA c81557a2. Six cached suites/22 optional grader wheels are prepared, unapproved and unexecuted.140 pins,30 grader guards,22 classifier checks and pure derivation passed. Actual exact approval is required for one new image and at most20 offline calls/23 operations/1030 reserved seconds/zero models or cash. No architecture decision or broad source/package rerun is needed. Preserve terminalbe8b0e5f,39-case pool,all counters and expiry amendment. Consolidate only actual future accepted evidence.'
@@ -3623,3 +3623,13 @@ untrusted packages/subjects. No architecture decision is needed. Current pool
 remains39 cases across24 repositories, with102 cases missing from balanced stages.
 If all six reproduce it would reach45/29repos, still96 cases short. Resource
 acceptance, usefulness, selection, human controls and release remain separate.
+
+The exact `c81557a2` execution request was presented after commit `07dbcac`.
+No actual response is recorded yet; inspect `approval-requested.json` and actual
+user replies before creating `operator-approval.json` or starting anything.
+All140 assets still match. The four changed active documents passed cached
+Markdownlint; new relative links passed the first-party check. The original
+69-document Lychee result remains historical and was not replayed. Verbatim
+third-party license text has an RST equals-sign heading and trailing space flagged
+by Git's diff checker; they were verified against the pinned artifacts and kept
+unchanged. This is not an unresolved product merge or a new source failure.
