@@ -1708,3 +1708,24 @@ are retained and no host canary was created. Grant13140operations/3755turns/
 119727.43407934532seconds/0.0cash. Product source4cb and the42-case pool are unchanged.
 No scientific or resource gate closes. New source execution still needs a concrete
 exact review; static source/license/workload preparation continues safely.
+
+### D105 — Review actual library tests instead of inferring runtime from metadata
+
+[The next exact review](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/README.md)
+`f0261e6d` is prepared, unapproved and unexecuted: CrossGL257 and Marshmallow-
+SQLAlchemy640 authored audits,73 required identities,four reference/regression
+payloads. It reuses retainedf603,existing observer and applicable containment;
+Marshmallow3.25.1 loads from its already-cached pure wheel. No install/build/download,
+new probe,host canary,package/docs rerun or model is needed. Maximum6 existing-grant
+operations/290 reserved seconds/zero cash.32 pins,10 grader guards,22 classifier
+checks,seven budget guards and synthetic definition/authority persistence passed.
+
+Thirty bounded new source reads produced19 truncated/unparsed archives,10 static-
+reviewable sources and one safety exclusion. The index now has163 records; no new
+case is counted. Metadata package lists are not a size/runtime guarantee. The named
+queue's scope/origin preflight failures are preserved and its final sample excludes
+those origins. C++ hooks142 is excluded because required tests can invoke real pip;
+no assertion or guard was relaxed to make it fit. The four unresolved diagnostics
+remain excluded. Product source4cb,42-case pool and all live counters are unchanged.
+No scientific or resource gate closes. Exact new execution is the only pending
+intervention; no architecture, infrastructure or budget choice is requested.

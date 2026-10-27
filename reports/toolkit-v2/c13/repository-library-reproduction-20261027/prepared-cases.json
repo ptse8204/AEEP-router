@@ -1,0 +1,189 @@
+{
+  "prepared_cases": 2,
+  "cases_file": ".aeep/repository-library-audits-20261027/cases.json",
+  "cases_file_sha256": "d4dc5aaeff158daea6449145c0366b6d422829eaebb02435073d3db7fb7c4eaf",
+  "variants_file": ".aeep/repository-library-audits-20261027/variants.json",
+  "cases": [
+    {
+      "id": "CrossGL__crosstl-257-aeep-contract-audit",
+      "original_issue_id": "CrossGL__crosstl-257",
+      "repository": "CrossGL/crosstl",
+      "revision": "bf894dbc90466d1ed9ae942f44396fbd04f18298",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-library-sources-20261027-v2/CrossGL__crosstl-257",
+      "source_sha256": "d880d0162079873a2db1420cf36b8c7547dd23666b5e45a348236d3fb06142b0",
+      "source_bytes": 82277,
+      "executable_changed_files": [
+        "crosstl/translator/lexer.py"
+      ],
+      "reference_changed_files": [
+        "crosstl/translator/lexer.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 16,
+      "upstream_required_identities": [
+        "tests/test_translator/test_lexer.py::test_data_types_tokenization",
+        "tests/test_translator/test_lexer.py::test_struct_tokenization",
+        "tests/test_translator/test_lexer.py::test_if_statement_tokenization",
+        "tests/test_translator/test_lexer.py::test_for_statement_tokenization",
+        "tests/test_translator/test_lexer.py::test_else_statement_tokenization",
+        "tests/test_translator/test_lexer.py::test_else_if_statement_tokenization",
+        "tests/test_translator/test_lexer.py::test_function_call_tokenization",
+        "tests/test_translator/test_lexer.py::test_bitwise_operator_tokenization",
+        "tests/test_translator/test_lexer.py::test_operators_tokenization",
+        "tests/test_translator/test_lexer.py::test_logical_operators_tokenization",
+        "tests/test_translator/test_lexer.py::test_assignment_shift_operators",
+        "tests/test_translator/test_lexer.py::test_assignment_operators_tokenization",
+        "tests/test_translator/test_lexer.py::test_const_tokenization",
+        "tests/test_translator/test_lexer.py::test_illegal_character",
+        "tests/test_translator/test_lexer.py::test_bitwise_not_tokenization"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-library-reproduction-20261027/licenses/CrossGL__crosstl-257/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357
+        }
+      ],
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit",
+      "original_issue_id": "marshmallow-code__marshmallow-sqlalchemy-640",
+      "repository": "marshmallow-code/marshmallow-sqlalchemy",
+      "revision": "11971438fe15f1110136c59df68a8be30fb1d526",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-library-sources-20261027-v2/marshmallow-code__marshmallow-sqlalchemy-640",
+      "source_sha256": "6bf067f8e222439e7e85d07f6bfbeb8770cd07c379e292ed8dc8b36edaabdbc6",
+      "source_bytes": 48130,
+      "executable_changed_files": [
+        "src/marshmallow_sqlalchemy/convert.py"
+      ],
+      "reference_changed_files": [
+        "src/marshmallow_sqlalchemy/convert.py"
+      ],
+      "omitted_non_source_reference_changes": [
+        "CHANGELOG.rst"
+      ],
+      "required_tests": 57,
+      "upstream_required_identities": [
+        "tests/test_conversion.py::TestModelFieldConversion::test_enum_with_class_converted_to_enum_field",
+        "tests/test_conversion.py::TestModelFieldConversion::test_fields_for_model_types",
+        "tests/test_conversion.py::TestModelFieldConversion::test_fields_for_model_handles_exclude",
+        "tests/test_conversion.py::TestModelFieldConversion::test_fields_for_model_handles_custom_types",
+        "tests/test_conversion.py::TestModelFieldConversion::test_fields_for_model_saves_doc",
+        "tests/test_conversion.py::TestModelFieldConversion::test_length_validator_set",
+        "tests/test_conversion.py::TestModelFieldConversion::test_none_length_validator_not_set",
+        "tests/test_conversion.py::TestModelFieldConversion::test_sets_allow_none_for_nullable_fields",
+        "tests/test_conversion.py::TestModelFieldConversion::test_enum_with_choices_converted_to_field_with_validator",
+        "tests/test_conversion.py::TestModelFieldConversion::test_many_to_many_relationship",
+        "tests/test_conversion.py::TestModelFieldConversion::test_many_to_one_relationship",
+        "tests/test_conversion.py::TestModelFieldConversion::test_include_fk",
+        "tests/test_conversion.py::TestModelFieldConversion::test_overridden_with_fk",
+        "tests/test_conversion.py::TestModelFieldConversion::test_rename_key",
+        "tests/test_conversion.py::TestModelFieldConversion::test_subquery_proxies",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_custom_type_mapping_on_schema",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[String-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Unicode-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[LargeBinary-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Text-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Date-Date]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[DateTime-DateTime]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Boolean-Boolean0]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Boolean-Boolean1]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Float-Float]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[SmallInteger-Integer]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[Interval-TimeDelta]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[UUID-UUID]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[MACADDR-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[INET-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[BIT-Integer]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[OID-Integer]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[CIDR-String]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[DATE-Date]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[TIME-Time]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[INTEGER-Integer]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_types[DATETIME-DateTime]",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_Numeric",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_ARRAY_String",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_ARRAY_Integer",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_TSVECTOR",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_default",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_server_default",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_convert_autoincrement",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_handle_expression_based_column_property",
+        "tests/test_conversion.py::TestPropertyFieldConversion::test_handle_simple_column_property",
+        "tests/test_conversion.py::TestPropToFieldClass::test_property2field",
+        "tests/test_conversion.py::TestPropToFieldClass::test_can_pass_extra_kwargs",
+        "tests/test_conversion.py::TestColumnToFieldClass::test_column2field",
+        "tests/test_conversion.py::TestColumnToFieldClass::test_can_pass_extra_kwargs",
+        "tests/test_conversion.py::TestColumnToFieldClass::test_uuid_column2field",
+        "tests/test_conversion.py::TestFieldFor::test_field_for",
+        "tests/test_conversion.py::TestFieldFor::test_related_initialization_warning",
+        "tests/test_conversion.py::TestFieldFor::test_related_initialization_with_columns",
+        "tests/test_conversion.py::TestFieldFor::test_field_for_can_override_validators",
+        "tests/test_conversion.py::TestFieldFor::tests_postgresql_array_with_args"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-library-reproduction-20261027/licenses/marshmallow-code__marshmallow-sqlalchemy-640/LICENSE",
+          "sha256": "906b5d9051e426144cb173ad911667b8ebd05a9c584c2c26c135b32a3ed12001",
+          "bytes": 1064
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [
+        "marshmallow"
+      ],
+      "explicit_plugins": [],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "CrossGL__crosstl-257-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-library-audits-20261027/CrossGL__crosstl-257-aeep-contract-audit/reference-payload.json",
+      "sha256": "3e2f1f16ef0c6d70fa491b49d6af5279d9a5308919f9fb726ce853909ae72bee",
+      "bytes": 696679
+    },
+    {
+      "case": "CrossGL__crosstl-257-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-library-audits-20261027/CrossGL__crosstl-257-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "f99e42403b597c7edf155de4b76ee2a6dfd241ac084b2773ca6ee167f1ae6e7e",
+      "bytes": 696651
+    },
+    {
+      "case": "marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-library-audits-20261027/marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit/reference-payload.json",
+      "sha256": "218e1263e65dac5474b25ea797f7086c059a0d03bb74113da75f6aa9306763b7",
+      "bytes": 715276
+    },
+    {
+      "case": "marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-library-audits-20261027/marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "82aa9630babe724ced22c71d6c7da0aa52d6b2762c0dded98e1868d3d20345ad",
+      "bytes": 715284
+    }
+  ],
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false
+}

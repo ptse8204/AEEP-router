@@ -48,16 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '660672d'
-last_check_command: 'repository-collection-diagnostics-20261027/run.py faa10772...; audit-execution.py'
-last_check_result: 'Approved faa10772 completed4 calls once;4 canonical receipts/attempts and6 operations reconciled,11.11573583446443 seconds charged,zero models/cash. MCP errors unrecognized; Twyn/CanvasAPI ModuleNotFoundError names filtered out. Exact causes remain unknown and all4 stay excluded. Owned workers absent,images retained,no host canary. Source4cb and42-case pool unchanged.'
-next_action: 'Continue bounded static curation of other pinned public repository sources, prioritizing new repository groups and missing audits/multi-file cases. Do not spend more calls on the four unresolved collections or guess dependency fixes. Prepare a concrete exact review only after new source/license/test/runtime bindings pass first-party checks. No architecture or broad source/package rerun is needed.'
+last_verified_commit: '9892a7e'
+last_check_command: 'Bounded source collection; repository-library-reproduction-20261027/prepare-cases.py; prepare-review.py; synthetic definition/authority audit'
+last_check_result: '30 new public sources retained as inert data (163 combined):19 truncated/unparsed,10 static-reviewable,1 archive-safety exclusion. Two authored library audits prepared with73 required identities/4 frozen payloads.32 pins,10 grader guards,22 classifier guards,7 budget guards and synthetic persistence/operation7 rejection passed. Zero new containers/installations/models/cash after terminalfaa10772. Source4cb and42-case pool unchanged.'
+next_action: 'Read repository-library-reproduction-20261027/README.md and exact runtime-execution/operation-review SHA f0261e6d. Two authored audits/4 offline calls are prepared, not approved or executed;6 existing-grant operations/290 reserved seconds/zero models or cash. Reuse retainedf603,existing observer and containment evidence;private cached Marshmallow3.25.1 ZIP only,no installs/builds/downloads/probes/package/docs reruns. After actual approval record it once,check markers/grant/space,run runtime-execution/run.py once and audit canonical evidence before consolidation. Preserve all failures; no architecture or budget decision.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Prepared f0261e6d needs exact execution approval for2 authored library audits/4 offline calls on retainedf603 with an already-cached pure wheel:6 existing-grant operations/290 reserved seconds,zero models/cash. No build/install/download,probe/canary,package/docs rerun or architecture choice. Terminalfaa10772 covers different diagnostic bytes and subjects.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
@@ -3685,3 +3686,24 @@ are retained and no host canary was created. Grant13140operations/3755turns/
 119727.43407934532seconds/0.0cash. Product source4cb and the42-case pool are unchanged.
 No scientific or resource gate closes. New source execution still needs a concrete
 exact review; static source/license/workload preparation continues safely.
+
+## New library workload preparation October 27
+
+[The next exact review](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/README.md)
+`f0261e6d` is prepared, unapproved and unexecuted: CrossGL257 and Marshmallow-
+SQLAlchemy640 authored audits,73 required identities,four reference/regression
+payloads. It reuses retainedf603,existing observer and applicable containment;
+Marshmallow3.25.1 loads from its already-cached pure wheel. No install/build/download,
+new probe,host canary,package/docs rerun or model is needed. Maximum6 existing-grant
+operations/290 reserved seconds/zero cash.32 pins,10 grader guards,22 classifier
+checks,seven budget guards and synthetic definition/authority persistence passed.
+
+Thirty bounded new source reads produced19 truncated/unparsed archives,10 static-
+reviewable sources and one safety exclusion. The index now has163 records; no new
+case is counted. Metadata package lists are not a size/runtime guarantee. The named
+queue's scope/origin preflight failures are preserved and its final sample excludes
+those origins. C++ hooks142 is excluded because required tests can invoke real pip;
+no assertion or guard was relaxed to make it fit. The four unresolved diagnostics
+remain excluded. Product source4cb,42-case pool and all live counters are unchanged.
+No scientific or resource gate closes. Exact new execution is the only pending
+intervention; no architecture, infrastructure or budget choice is requested.
