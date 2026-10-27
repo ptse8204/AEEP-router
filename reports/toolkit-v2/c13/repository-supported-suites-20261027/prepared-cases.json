@@ -1,0 +1,548 @@
+{
+  "prepared_cases": 6,
+  "cases_file": ".aeep/repository-supported-suite-cases-20261027-v2/cases.json",
+  "cases_file_sha256": "d4e99286f5e415d4f3461788855ba814df3e30775d5476ec0c0086583476e404",
+  "variants_file": ".aeep/repository-supported-suite-cases-20261027-v2/variants.json",
+  "cases": [
+    {
+      "id": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "original_issue_id": "modelcontextprotocol__python-sdk-222",
+      "repository": "modelcontextprotocol/python-sdk",
+      "revision": "2628e01f4b892b9c59f3bdd2abbad718c121c87a",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-workload-batch-20261022-sources/modelcontextprotocol__python-sdk-222",
+      "source_sha256": "7b571db4758c4dc956af5abfac46b2463ac7b125d1d1f9423d5cd71b9edb63f7",
+      "source_bytes": 147160,
+      "executable_changed_files": [
+        "src/mcp/server/fastmcp/server.py",
+        "src/mcp/server/lowlevel/server.py"
+      ],
+      "reference_changed_files": [
+        "src/mcp/server/fastmcp/server.py",
+        "src/mcp/server/lowlevel/server.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 55,
+      "upstream_required_identities": [
+        "tests/issues/test_141_resource_templates.py::test_resource_template_edge_cases",
+        "tests/issues/test_152_resource_mime_type.py::test_lowlevel_resource_mime_type",
+        "tests/server/fastmcp/servers/test_file_server.py::test_read_resource_dir",
+        "tests/server/fastmcp/servers/test_file_server.py::test_read_resource_file",
+        "tests/server/fastmcp/servers/test_file_server.py::test_delete_file_and_check_resources",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_context_resource_access",
+        "tests/server/test_read_resource.py::test_read_resource_text",
+        "tests/server/test_read_resource.py::test_read_resource_binary",
+        "tests/server/test_read_resource.py::test_read_resource_default_mime",
+        "tests/issues/test_141_resource_templates.py::test_resource_template_client_interaction",
+        "tests/issues/test_152_resource_mime_type.py::test_fastmcp_resource_mime_type",
+        "tests/server/fastmcp/servers/test_file_server.py::test_list_resources",
+        "tests/server/fastmcp/servers/test_file_server.py::test_delete_file",
+        "tests/server/fastmcp/test_server.py::TestServer::test_create_server",
+        "tests/server/fastmcp/test_server.py::TestServer::test_non_ascii_description",
+        "tests/server/fastmcp/test_server.py::TestServer::test_add_tool_decorator",
+        "tests/server/fastmcp/test_server.py::TestServer::test_add_tool_decorator_incorrect_usage",
+        "tests/server/fastmcp/test_server.py::TestServer::test_add_resource_decorator",
+        "tests/server/fastmcp/test_server.py::TestServer::test_add_resource_decorator_incorrect_usage",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_add_tool",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_list_tools",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_call_tool",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_exception_handling",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_error_handling",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_error_details",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_return_value_conversion",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_image_helper",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_mixed_content",
+        "tests/server/fastmcp/test_server.py::TestServerTools::test_tool_mixed_list_with_image",
+        "tests/server/fastmcp/test_server.py::TestServerResources::test_text_resource",
+        "tests/server/fastmcp/test_server.py::TestServerResources::test_binary_resource",
+        "tests/server/fastmcp/test_server.py::TestServerResources::test_file_resource_text",
+        "tests/server/fastmcp/test_server.py::TestServerResources::test_file_resource_binary",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_with_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_with_uri_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_with_untyped_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_matching_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_mismatched_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_multiple_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_resource_multiple_mismatched_params",
+        "tests/server/fastmcp/test_server.py::TestServerResourceTemplates::test_template_to_resource_conversion",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_context_detection",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_context_injection",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_async_context",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_context_logging",
+        "tests/server/fastmcp/test_server.py::TestContextInjection::test_optional_context",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_prompt_decorator",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_prompt_decorator_with_name",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_prompt_decorator_with_description",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_prompt_decorator_error",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_list_prompts",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_get_prompt",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_get_prompt_with_resource",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_get_unknown_prompt",
+        "tests/server/fastmcp/test_server.py::TestServerPrompts::test_get_prompt_missing_args"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/modelcontextprotocol__python-sdk-222/LICENSE",
+          "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
+          "bytes": 1071
+        }
+      ],
+      "declared_python": "3.10",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "anyio.pytest_plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "modelcontextprotocol__python-sdk-384-aeep-contract-audit",
+      "original_issue_id": "modelcontextprotocol__python-sdk-384",
+      "repository": "modelcontextprotocol/python-sdk",
+      "revision": "689c54c5915dda3ba484e55a59c126cb46dfc739",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-workload-batch-20261022-sources/modelcontextprotocol__python-sdk-384",
+      "source_sha256": "a76759c01add6faf3e136a831523380d735a3b86c1f221ebe434156f45e69811",
+      "source_bytes": 148888,
+      "executable_changed_files": [
+        "src/mcp/server/fastmcp/utilities/func_metadata.py"
+      ],
+      "reference_changed_files": [
+        "src/mcp/server/fastmcp/utilities/func_metadata.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 5,
+      "upstream_required_identities": [
+        "tests/server/fastmcp/test_func_metadata.py::test_str_vs_int",
+        "tests/server/fastmcp/test_func_metadata.py::test_str_vs_list_str",
+        "tests/server/fastmcp/test_func_metadata.py::test_skip_names",
+        "tests/server/fastmcp/test_func_metadata.py::test_lambda_function"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/modelcontextprotocol__python-sdk-384/LICENSE",
+          "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
+          "bytes": 1071
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "anyio.pytest_plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "original_issue_id": "lincolnloop__goodconf-51",
+      "repository": "lincolnloop/goodconf",
+      "revision": "501ee693ab92816e6718c54a4026f4e82350cd52",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-supported-goodconf-profile-20261027",
+      "source_sha256": "dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694",
+      "source_bytes": 14033,
+      "executable_changed_files": [
+        "goodconf/__init__.py"
+      ],
+      "reference_changed_files": [
+        "goodconf/__init__.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 22,
+      "upstream_required_identities": [
+        "tests/test_initial.py::test_initial_converts_to_callable",
+        "tests/test_goodconf.py::test_initial",
+        "tests/test_goodconf.py::test_dump_json",
+        "tests/test_goodconf.py::test_dump_toml",
+        "tests/test_goodconf.py::test_dump_yaml",
+        "tests/test_goodconf.py::test_dump_yaml_no_docstring",
+        "tests/test_goodconf.py::test_dump_yaml_none",
+        "tests/test_goodconf.py::test_generate_markdown",
+        "tests/test_goodconf.py::test_generate_markdown_no_docstring",
+        "tests/test_goodconf.py::test_generate_markdown_default_false",
+        "tests/test_goodconf.py::test_generate_markdown_types",
+        "tests/test_goodconf.py::test_generate_markdown_required",
+        "tests/test_goodconf.py::test_undefined",
+        "tests/test_goodconf.py::test_fileconfigsettingssource_repr",
+        "tests/test_goodconf.py::test_fileconfigsettingssource_get_field_value",
+        "tests/test_initial.py::test_initial",
+        "tests/test_initial.py::test_initial_default",
+        "tests/test_initial.py::test_initial_default_factory",
+        "tests/test_initial.py::test_no_initial",
+        "tests/test_initial.py::test_default_initial",
+        "tests/test_initial.py::test_optional_initial"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/lincolnloop__goodconf-51/LICENSE",
+          "sha256": "842fec354f6f75314dd38535fd8d3319cdde67796fe4aa5d7f1d828cad1a4808",
+          "bytes": 1056
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "pytest_cov.plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "elementsinteractive__twyn-317-declared-tests",
+      "original_issue_id": "elementsinteractive__twyn-317",
+      "repository": "elementsinteractive/twyn",
+      "revision": "640e122012020a269f3793743c2a812ff89af259",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-workload-batch-20261022-sources/elementsinteractive__twyn-317",
+      "source_sha256": "4838cd7cf0f3e6c51162daeeada78991310d1daf62f4ef6bc133c2e4ce5e099a",
+      "source_bytes": 445174,
+      "executable_changed_files": [
+        "src/twyn/trusted_packages/references/base.py",
+        "src/twyn/trusted_packages/references/top_npm_reference.py",
+        "src/twyn/trusted_packages/references/top_pypi_reference.py"
+      ],
+      "reference_changed_files": [
+        "src/twyn/trusted_packages/references/base.py",
+        "src/twyn/trusted_packages/references/top_npm_reference.py",
+        "src/twyn/trusted_packages/references/top_pypi_reference.py"
+      ],
+      "omitted_non_source_reference_changes": [
+        "README.md"
+      ],
+      "required_tests": 43,
+      "upstream_required_identities": [
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_npm_v3",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_yarn",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_get_packages_no_cache",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_get_packages_downloads_when_cache_has_invalid_package_names",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_cache_is_saved_when_not_existing",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_get_packages_no_packages_key",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_empty_packages_list_exception",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_get_trusted_packages",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_downloaded[my.package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_downloaded[my-package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_downloaded[my_package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_downloaded[My.Package]",
+        "tests/trusted_packages/test_references.py::TestTopNpmReference::test_get_trusted_packages",
+        "tests/main/test_main.py::TestCheckDependencies::test_options_priorities_assignation[cli_config0-file_config0-expected_resolved_config0]",
+        "tests/main/test_main.py::TestCheckDependencies::test_options_priorities_assignation[cli_config1-file_config1-expected_resolved_config1]",
+        "tests/main/test_main.py::TestCheckDependencies::test_options_priorities_assignation[cli_config2-file_config2-expected_resolved_config2]",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_detects_typosquats_from_file",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_detects_typosquats_from_file_and_language_is_set",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_detects_typosquats_and_autodetects_file",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_detects_typosquats_and_autodetects_file_and_language_is_set",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_with_input_from_cli_detects_typosquats",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_with_input_loads_file_from_different_location",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_with_input_from_cli_accepts_multiple_dependencies",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_ignores_package_in_allowlist",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_does_not_error_on_same_package",
+        "tests/main/test_main.py::TestCheckDependencies::test_track_is_disabled_by_default_when_used_as_package",
+        "tests/main/test_main.py::TestCheckDependencies::test_track_is_shown_when_enabled",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_invalid_arguments_error",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_invalid_language_error",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependency_file_invalid_language_error",
+        "tests/main/test_main.py::TestCheckDependencies::test_check_dependencies_invalid_selector_method_error",
+        "tests/main/test_main.py::TestCheckDependencies::test_get_top_reference_from_file_no_matching_parser_error",
+        "tests/main/test_main.py::TestCheckDependencies::test_get_top_reference_from_name_no_matching_parser_error",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_get_packages",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_get_trusted_packages_uses_valid_cache",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test_cache_valid_for_fractional_days",
+        "tests/trusted_packages/test_references.py::TestAbstractPackageReference::test__download_json_exception",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_loaded_from_cache[my.package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_loaded_from_cache[my-package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_loaded_from_cache[my_package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_when_loaded_from_cache[My.Package]",
+        "tests/trusted_packages/test_references.py::TestTopPyPiReference::test_normalize_package_invalid_name_raises",
+        "tests/trusted_packages/test_references.py::TestTopNpmReference::test_normalize_package_invalid_name_raises"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/elementsinteractive__twyn-317/LICENSE",
+          "sha256": "4ce402a84ee51e9d8c523cb5b597d8712406cb5760a56a24504999d92716981e",
+          "bytes": 1081
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "pytest_cov.plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "reagento__dishka-512-declared-tests",
+      "original_issue_id": "reagento__dishka-512",
+      "repository": "reagento/dishka",
+      "revision": "e11de4e1e2f18621943df2084e683459d9445c18",
+      "family": "single-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-workload-batch-20261022-sources/reagento__dishka-512",
+      "source_sha256": "d1c94f8b0cfd1cf81e635441ff88c95decf090851835856cdca2ab3e26d05095",
+      "source_bytes": 226176,
+      "executable_changed_files": [
+        "src/dishka/dependency_source/decorator.py"
+      ],
+      "reference_changed_files": [
+        "src/dishka/dependency_source/decorator.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 15,
+      "upstream_required_identities": [
+        "tests/unit/container/test_decorator.py::test_generic_multiple_args",
+        "tests/unit/container/test_decorator.py::test_simple",
+        "tests/unit/container/test_decorator.py::test_with_hint",
+        "tests/unit/container/test_decorator.py::test_decorator",
+        "tests/unit/container/test_decorator.py::test_kwargs",
+        "tests/unit/container/test_decorator.py::test_decorator_with_provides",
+        "tests/unit/container/test_decorator.py::test_alias",
+        "tests/unit/container/test_decorator.py::test_double",
+        "tests/unit/container/test_decorator.py::test_double_ok",
+        "tests/unit/container/test_decorator.py::test_missing_factory",
+        "tests/unit/container/test_decorator.py::test_expected_decorator",
+        "tests/unit/container/test_decorator.py::test_generic_decorator",
+        "tests/unit/container/test_decorator.py::test_generic_double_decorator",
+        "tests/unit/container/test_decorator.py::test_generic_decorator_generic_factory",
+        "tests/unit/container/test_decorator.py::test_decorate_alias"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/reagento__dishka-512/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357
+        }
+      ],
+      "declared_python": "3.12",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "pytest_cov.plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "prometheus__client_python-1134-aeep-contract-audit",
+      "original_issue_id": "prometheus__client_python-1134",
+      "repository": "prometheus/client_python",
+      "revision": "47d2b416d75f5569863e2bb08a15b58218563814",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-workload-batch-20261022-prometheus-scope/prometheus__client_python-1134",
+      "source_sha256": "983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651",
+      "source_bytes": 52249,
+      "executable_changed_files": [
+        "prometheus_client/parser.py"
+      ],
+      "reference_changed_files": [
+        "prometheus_client/parser.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 30,
+      "upstream_required_identities": [
+        "tests/test_parser.py::TestParse::test_extra_whitespace",
+        "tests/test_parser.py::TestParse::test_blank_lines_and_comments",
+        "tests/test_parser.py::TestParse::test_commas",
+        "tests/test_parser.py::TestParse::test_comments_parts_are_not_validated_against_legacy_metric_name",
+        "tests/test_parser.py::TestParse::test_complex_name_counter",
+        "tests/test_parser.py::TestParse::test_empty_brackets",
+        "tests/test_parser.py::TestParse::test_empty_help",
+        "tests/test_parser.py::TestParse::test_empty_label",
+        "tests/test_parser.py::TestParse::test_escaping",
+        "tests/test_parser.py::TestParse::test_help_escaping",
+        "tests/test_parser.py::TestParse::test_label_escaping",
+        "tests/test_parser.py::TestParse::test_labels_and_infinite",
+        "tests/test_parser.py::TestParse::test_labels_with_curly_braces",
+        "tests/test_parser.py::TestParse::test_multiple_trailing_commas",
+        "tests/test_parser.py::TestParse::test_nan",
+        "tests/test_parser.py::TestParse::test_no_metadata",
+        "tests/test_parser.py::TestParse::test_roundtrip",
+        "tests/test_parser.py::TestParse::test_simple_counter",
+        "tests/test_parser.py::TestParse::test_simple_gauge",
+        "tests/test_parser.py::TestParse::test_simple_histogram",
+        "tests/test_parser.py::TestParse::test_simple_summary",
+        "tests/test_parser.py::TestParse::test_spaces",
+        "tests/test_parser.py::TestParse::test_summary_quantiles",
+        "tests/test_parser.py::TestParse::test_tabs",
+        "tests/test_parser.py::TestParse::test_timestamps",
+        "tests/test_parser.py::TestParse::test_type_help_switched",
+        "tests/test_parser.py::TestParse::test_untyped",
+        "tests/test_parser.py::TestParse::test_utf8_counter",
+        "tests/test_parser.py::test_benchmark_text_string_to_metric_families"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/prometheus__client_python-1134/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357
+        },
+        {
+          "path": "reports/toolkit-v2/c13/repository-supported-suites-20261027/licenses/prometheus__client_python-1134/NOTICE",
+          "sha256": "4efa1874aeaa60f365f5797e617f1ff933e15e508eaf751e9848ed4413d7a7ae",
+          "bytes": 236
+        }
+      ],
+      "declared_python": "3.12",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_asyncio.plugin",
+        "pytest_benchmark.plugin"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-222-declared-tests/reference-payload.json",
+      "sha256": "956086da0797227ac09eb7938fcbe7b2171ef76aa263a6e19d9c0d660ef381a4",
+      "bytes": 780718
+    },
+    {
+      "case": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-222-declared-tests/counterexample-payload.json",
+      "sha256": "ffacc81780b054d25532dfa6d639dad46d6b9d1a6bc980f078061caa7008de8b",
+      "bytes": 780610
+    },
+    {
+      "case": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-222-declared-tests/partial-1-payload.json",
+      "sha256": "c64c60e0f88299b252d79d7950c8865e71ccf03bc38112fac34e0f69173ce741",
+      "bytes": 780702
+    },
+    {
+      "case": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-222-declared-tests/partial-2-payload.json",
+      "sha256": "d384b8251b66029e71faf7da5f4f777cc007b71031fe1f4e5a99441cd0fa16da",
+      "bytes": 780626
+    },
+    {
+      "case": "modelcontextprotocol__python-sdk-384-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-384-aeep-contract-audit/reference-payload.json",
+      "sha256": "a6edf156389d0dd0c8349b533b977e2f026b49bf58c02e8f8fade0af570b1a2e",
+      "bytes": 785207
+    },
+    {
+      "case": "modelcontextprotocol__python-sdk-384-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/modelcontextprotocol__python-sdk-384-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "44d0f1871adb55a9078f033449817ff34c3c4b1a19db0302a6dbd58ffcddb712",
+      "bytes": 785195
+    },
+    {
+      "case": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/lincolnloop__goodconf-51-aeep-contract-audit/reference-payload.json",
+      "sha256": "908c0b0162a9796a6f239ab26e1b221380dc2980226ebf5f752b7ad1cadbc210",
+      "bytes": 602882
+    },
+    {
+      "case": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/lincolnloop__goodconf-51-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "ed492b8be93664bb468f404aee498bb6b0096ed067fb59c65efa4b1e37d4c08d",
+      "bytes": 602758
+    },
+    {
+      "case": "elementsinteractive__twyn-317-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/elementsinteractive__twyn-317-declared-tests/reference-payload.json",
+      "sha256": "dda4fcfa8bbb1ad95bf42d38b9621797ff7b1fc0f264a6f231f5924d015c3938",
+      "bytes": 1177429
+    },
+    {
+      "case": "elementsinteractive__twyn-317-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/elementsinteractive__twyn-317-declared-tests/counterexample-payload.json",
+      "sha256": "2c3231a70f8930f33283a90061dd389f1cdd84060b87fc8d3d4c4a1614fe187c",
+      "bytes": 1177621
+    },
+    {
+      "case": "elementsinteractive__twyn-317-declared-tests",
+      "variant": "partial-1",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/elementsinteractive__twyn-317-declared-tests/partial-1-payload.json",
+      "sha256": "54172151d2c7ec6958aab3657e6324097004d35c257c7e640de8046eb1177893",
+      "bytes": 1177465
+    },
+    {
+      "case": "elementsinteractive__twyn-317-declared-tests",
+      "variant": "partial-2",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/elementsinteractive__twyn-317-declared-tests/partial-2-payload.json",
+      "sha256": "ef7748e13a62b7c4cfce014ed111559a4d1c637d27e6eb76cd36e54309d84b27",
+      "bytes": 1177589
+    },
+    {
+      "case": "elementsinteractive__twyn-317-declared-tests",
+      "variant": "partial-3",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/elementsinteractive__twyn-317-declared-tests/partial-3-payload.json",
+      "sha256": "1c9f49cc22f71afe45ed4b4aafec23ffdef310a13a8b7896e06eac24f0e1a9dd",
+      "bytes": 1177593
+    },
+    {
+      "case": "reagento__dishka-512-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/reagento__dishka-512-declared-tests/reference-payload.json",
+      "sha256": "c6dd83852083c2bb75763aadba36010b213e3e1463a968e4601439ba8aa176b4",
+      "bytes": 885438
+    },
+    {
+      "case": "reagento__dishka-512-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/reagento__dishka-512-declared-tests/counterexample-payload.json",
+      "sha256": "66b20164f6b6ea457d9dea209cc2d697637bfa60f81925f8888027715f4592e5",
+      "bytes": 885414
+    },
+    {
+      "case": "prometheus__client_python-1134-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/prometheus__client_python-1134-aeep-contract-audit/reference-payload.json",
+      "sha256": "2f8d5b5bf4d3559803c5b196e5703ed530e43d807799f888ff5c8724d453b91c",
+      "bytes": 655619
+    },
+    {
+      "case": "prometheus__client_python-1134-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-supported-suite-cases-20261027-v2/prometheus__client_python-1134-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "61cba8983e604b8d03255d1081665ccf0fe07c3d0acd6740c2581915fed26e73",
+      "bytes": 655527
+    }
+  ],
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false,
+  "runtime_support_manifest": "reports/toolkit-v2/c13/repository-supported-suites-20261027/runtime-support-review.json",
+  "runtime_supports_installed": false,
+  "external_subject_execution": false,
+  "first_party_preparer_reused": "repository-corpus-expansion-20261022/prepare-cases.py",
+  "selection": "Cached source-body and dependency review, not model outcomes. Three explicitly authored audits; remaining tasks retain upstream repair references. No stage assignments frozen."
+}

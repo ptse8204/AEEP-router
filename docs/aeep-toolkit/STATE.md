@@ -49,16 +49,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'ad14b39'
+last_verified_commit: '1e52c12'
 last_check_command: 'repository-independent-sources-20261024/run-bundle.py be8b0e5f...; runtime-execution/audit-execution.py; consolidate-results.py'
 last_check_result: 'Approved be8b0e5f executed once. Imageb0eb4add built offline from324a1fee with16 exact wheels; three probes passed. MSAL audit and SQLacodegen/LMStudio/ModelBakery repairs reproduced. CanvasAPI reference collection ERROR/exit2;62 required identities absent, exact traceback unretained. All12 attempts/receipts reopened,15 operations complete,29.984952959697694 operation-seconds charged,zero models/cash. Owned containers/canary removed; both images retained. Pool39/24repos/2546 identities:15single,18multi,6audit;102 cases still needed. Product source4cb unchanged.'
-next_action: 'Do not replay terminalbe8b0e5f or use its unstarted CanvasAPI counterexample slot. Read provisional-pool.json and runtime-execution/raw-observation-12.json. Continue safe source curation and compile the next exact reproduction/diagnostic review using retained imageb0eb4add; no broad source/package/docs rerun on unchanged code. The existing grant expiry was extended only to2026-10-28T17:52:35.978639Z under standing finite-amendment authority, with every ceiling/counter preserved. No model execution or release authority follows.'
+next_action: 'Read repository-supported-suites-20261027/README.md and exact approval-bundle SHA c81557a2. Six cached suites/22 optional grader wheels are prepared, unapproved and unexecuted.140 pins,30 grader guards,22 classifier checks and pure derivation passed. Actual exact approval is required for one new image and at most20 offline calls/23 operations/1030 reserved seconds/zero models or cash. No architecture decision or broad source/package rerun is needed. Preserve terminalbe8b0e5f,39-case pool,all counters and expiry amendment. Consolidate only actual future accepted evidence.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Prepared c81557a2 needs actual exact approval for22 cached optional grader supports and six cached suites:one offline image,three fresh probes/17 reference-counterexample-partial variants,maximum20 calls/23 operations/1030 reserved seconds,zero models/cash. Terminalbe8b0e5f covers different artifacts. No architecture decision, new destination, host install, release or old-image cleanup is requested.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
@@ -3589,3 +3590,36 @@ The balanced stages still lack 32 single-file, 29 multi-file and 41 audit cases
 (102 total). No stages are frozen or adopted. Model qualification, comparative
 usefulness and correct selection remain separate unmet gates. Continue static
 curation and prepare a concrete next review before requesting more execution.
+
+## C13: cached-suite runtime review prepared
+
+After completed batch commit `1e52c12`, safe preparation reused cached MCP222/384,
+Goodconf51, Twyn317, Dishka512 and Prometheus1134 sources. The proposed six cases
+span five repository groups and170 required identities (including three authored
+preservation guards). Two are multi-file repairs, one is a single-file repair,
+and three are explicitly authored corrected-snapshot audits. No case is adopted,
+no stage frozen and no model outcome used to select them.
+
+[Review c81557a2](../../reports/toolkit-v2/c13/repository-supported-suites-20261027/approval-bundle.json)
+binds140 assets and one proposed private image based on retained `b0eb4add`,
+with22 exact cached wheels totaling4,451,951 bytes. They are optional grader
+supports, not toolkit core dependencies. Preparation passed30 grader guards,
+22 classifier cases,seven budget guards and deterministic image-bound derivation.
+No new image, installation, subject execution or model turn occurred.
+
+Goodconf uses its published capture flag while preserving coverage flags and all
+test assertions. Non-task CI/ignored-lockfile sections are omitted and hash-bound;
+original rows remain. AnyIO, asyncio, coverage and benchmark plugins are explicit.
+The initial unexecuted draft and its scope/plugin gaps remain retained. PyGLS's
+collection hook/fixture profile and MCP1864's serial profile remain deferred.
+CanvasAPI is excluded, with no replay in this proposal.
+
+The new review allows at most20 offline calls (three probes +17 variants),23
+operations and1030 reserved seconds,zero models/cash. The cap includes build/setup/
+analysis and35-second call reservations with margins, checked before every
+reservation. The actual user's next exact execution approval is the missing
+intervention; standing finite-definition/budget authority does not authorize new
+untrusted packages/subjects. No architecture decision is needed. Current pool
+remains39 cases across24 repositories, with102 cases missing from balanced stages.
+If all six reproduce it would reach45/29repos, still96 cases short. Resource
+acceptance, usefulness, selection, human controls and release remain separate.

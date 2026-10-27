@@ -1018,3 +1018,16 @@ all ceilings and counters were preserved. No permission was inferred from expiry
 [The pool](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/provisional-pool.json) is now39 cases across24 repositories, with102 more needed for
 balanced stages. No qualification, usefulness, selection, resource acceptance or
 release gate closes. Source/package checks are unchanged and were not repeated.
+
+## Proposed cached-suite support, October 27
+
+[The next review](../../reports/toolkit-v2/c13/repository-supported-suites-20261027/README.md), `c81557a2`, groups six cached suites and22 optional
+grader support wheels in one proposed private image from retained `b0eb4add`.
+AEEP's existing service, executor, grader, accounting and reproduction drivers
+remain the stack. No new core module or project installer is introduced.
+All170 required identities/assertions are retained; authored audits and Goodconf's
+capture profile are explicit. PyGLS/MCP1864 remain deferred and CanvasAPI excluded.
+Preparation passed140 pins,30 grader guards,22 classifier cases,seven budget guards
+and pure derivation; no new untrusted execution occurred. At most20 offline calls,
+23 operations,1030 reserved seconds and zero models/cash need exact approval.
+No architecture decision or repeated source/package/docs execution is required.
