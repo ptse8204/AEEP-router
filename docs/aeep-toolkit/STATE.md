@@ -1,17 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved review 27efdd79 completed once and added five
-reproduced cases. The provisional pool is 51 snapshots across 33 repositories,
-with 90 cases missing from the balanced stages. C13 remains IN_PROGRESS.
-Qualification, comparative usefulness, selection, human controls, resource
-acceptance and release remain open.**
-Current source `1fde9517` adds an explicit larger repository profile. All 13 source
-gates passed: both full runs passed 1,724 tests with 21 skips, coverage is 82%, and
-both branch gates passed. The actual frozen legacy recipe reconstructs identically.
-This verifies engineering behavior; historical cases retain their old bindings.
-[The combined runtime/package/docs review](../../reports/toolkit-v2/c13/repository-large-archives-20261027/README.md)
-prepares six larger snapshots, an exact SciPy artifact fetch and private runtime,
-the current wheel check and cached offline docs. It has not been approved or run.
+**Status as of 2026-10-27: approved bundle e6b1fb2c built the private grader
+image and passed three probes, then found the inner worker's unchanged 2 MB input
+cap. The large-input probe has a known terminal FAILED receipt; no repository
+variant ran. All eight operations reconcile and all owned containers are absent.
+The independent 19 installed checks and exact offline docs snapshot passed.**
+The provisional pool remains 51 snapshots across 33 repositories, with 90 cases
+missing from the balanced stages. C13, qualification, comparative usefulness,
+selection, human controls, resource acceptance and release remain open.
+Current source `374579f1` corrects the inner reader through an operator-owned launch
+argument. Default argv and 2 MB limits remain; task data cannot raise the bound.
+Focused framing regressions pass, including a 2.7 MB round trip through both real
+protocol readers. [Full source verification](../../reports/toolkit-v2/c13/repository-worker-input-20261027/source-in-progress.json)
+is running in session38330; inspect its actual status before resuming.
+The prior source1fde's 13 gates and installed wheel60466 checks retain their exact
+bindings. They do not qualify the correction. The existing image2386 and all older
+images remain; no new dependency, download, image build or architecture is needed.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -53,17 +57,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '6c5fae8'
-last_check_command: 'repository-large-archives-20261027/validation/checks.json; check-legacy-recipe.py; check-runtime-review.py; check-execution-controls.py; check-fetch-controls.py'
-last_check_result: 'All13 source gates passed on1fde9517; both full runs1724passed/21skipped,82%coverage,both branch gates. Frozen d02 recipe is identical. Six larger inert cases/twelve payloads are prepared;30 grader guards,22 classifier checks,seven observer fixtures,11 fetch/ledger controls and image-bound derivation pass. No new upstream execution,installation,build or model turn.'
-next_action: 'Read repository-large-archives-20261027/README.md and approval-bundle.json. Obtain one exact combined approval before the pinned SciPy download/private7-wheel build,4 fresh probes/12 variants, current-wheel19 installed checks and cached offline docs. Maximum20 calls/27 operations/1420 reserved seconds includes bounded same-software control diagnostics. Preserve51 historical bindings; no conformance transfer or model authority. Do not replay terminal27efdd79.'
+last_verified_commit: 'a43a7b6'
+last_check_command: 'repository-large-archives-20261027/initial-failure-reconciliation.json; continue-independent-components.py; repository-worker-input-20261027/run-source-checks.py'
+last_check_result: 'Bundlee6b1fb2c:verified SciPy fetch/private image2386 build,3passing probes,1known terminal failed2.7MB probe.8operations/15.73691733321175seconds charged;zero models/cash.19installed checks and exact69-document docs snapshot passed independently. Worker cap correction374579f1 has focused regressions;full13-gate session38330 is running,not yet passed.'
+next_action: 'Inspect repository-worker-input-20261027/validation/checks.json, source-stability.json and actual session38330 without duplicating it. Finish source gates,build/pin corrected wheel and prepare one specific review for corrected-source4fresh probes/12unchanged variants on retained2386 plus installed-wheel/docs checks. No fetch/build is needed. Prior e6b control-repair authority excludes product-source changes;fresh executable approval is necessary. Keep all8prior charges and terminal failed probe;no automatic replay or conformance transfer.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'New larger-repository combined bundle: exact SciPy35MB fetch, private7-wheel image, fixed upstream subjects, current wheel and cached docs need specific execution approval. No architecture or budget decision. Terminal27efdd79 completed once:19operations/16physical attempts/50.94772445643321seconds,zero models/cash;all charges and images remain.'
+  - 'Bundlee6b1fb2c is approved and its initial runtime phase is terminal;package/docs independently passed.8operations/15.73691733321175seconds remain charged. Product worker correction changes source/wheel and is explicitly outside that control-repair allowance. Prepare its exact executable review after full checks;no architecture,budget,new dependency,image build or download decision is needed.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
@@ -3944,3 +3948,31 @@ subject or model has run in this preparation. Current package installation and
 After approval, run the combined driver once, reopen canonical receipts/attempts
 and reconcile charges before curation or any later model comparison. No C13
 scientific, resource, human-control or release gate closes from these fixtures.
+
+## Larger bundle reconciliation and worker correction — October27
+
+[Approved e6b1fb2c results](../../reports/toolkit-v2/c13/repository-large-archives-20261027/RESULTS.md)
+retain image2386ef22, one verified35MB SciPy fetch and72,906,965bytes measured
+image growth. Three fresh probes passed. The fourth2.7MB probe failed because the
+inner worker still had a2MB reader; the earlier host-wrapper change missed it.
+All four receipts are terminal: three COMPLETED and one FAILED with complete
+execution evidence. All owned containers and the unchanged canary are absent.
+No repository task ran; the51-case pool and90-case gap remain.
+
+Eight operations charged15.73691733321175seconds. Current counters are13189/
+3755/119834.18554038461/0.0,with no model/cash use. The report driver initially
+required COMPLETED even for a known failed observation; read-only reconciliation
+establishes no uncertain attempt. It does not turn failure into success or refund
+usage. The independently approved package19 checks and cached offline docs passed
+on source1fde/wheel60466. Their unchanged owned runtimes were removed. Later state
+and guide edits are outside the completed docs snapshot's content binding.
+
+Source374579f1 now passes the exact enlarged bound to the inner worker via launch
+argv. The worker validates it before reading. Default argv/2MB framing remain,
+with17MB maximum outer transport and no task-controlled allowance. Focused checks
+exercise both actual readers; the first new protocol stand-in omitted the Docker
+PYTHONPATH and retained a Python adapter kind,so that local fixture failed before
+being corrected. This is separate from the actual2MB product defect. Full source
+session38330 is running with source frozen. No new source execution, install,
+image or model has been attempted. The existing image will be reused after the
+new source/wheel approval; the old envelope explicitly excludes source changes.

@@ -164,6 +164,12 @@ async def test_contained_input_allowance_is_operator_bound_and_legacy_default_is
     seen = []
     async def capture(self, wrapper):
         assert wrapper.spec.config['max_stdin_bytes'] == expected
+        argv = wrapper.spec.config['argv']
+        if expected > 2_000_000:
+            assert argv[-2:] == ['--input-limit', str(expected)]
+        else:
+            assert argv[-1] == 'aeep.assessment.container_worker'
+            assert '--input-limit' not in argv
         assert wrapper.request.input['spec']['config'].get('max_stdin_bytes') == limit
         seen.append(wrapper)
         return RawExecution(status=ExecutionStatus.SUCCESS,
@@ -186,3 +192,70 @@ async def test_invalid_contained_input_limits_never_reach_a_process(tmp_path, mo
     monkeypatch.setattr(CommandExecutor, 'execute', forbidden)
     with pytest.raises(ConfigurationError, match='input exceeds'):
         await ContainerExecutor(environment(tmp_path, tmp_path / 'not-executed')).execute(context)
+
+
+@pytest.mark.parametrize('arguments', [[], ['--input-limit', '2000000'], ['--input-limit', '8000000']])
+def test_worker_entrypoint_enforces_launch_bound_before_dispatch(monkeypatch, capsys, arguments):
+    import io
+    import json
+    from types import SimpleNamespace
+
+    from aeep.assessment import container_worker
+
+    limit = 8_000_000 if arguments[-1:] == ['8000000'] else 2_000_000
+    # A model-supplied field cannot raise the default framing limit. Exercise the
+    # real main reader, with a synthetic adapter replacing external execution.
+    payload = {'input_limit': 17_000_000, 'data': 'x' * (limit - 100)}
+    data = json.dumps(payload).encode()
+    seen = []
+    async def synthetic_run(value):
+        seen.append(value)
+        return {'fixture_only': True}
+    monkeypatch.setattr(container_worker, 'run', synthetic_run)
+    monkeypatch.setattr(sys, 'argv', ['container_worker', *arguments])
+    monkeypatch.setattr(sys, 'stdin', SimpleNamespace(buffer=io.BytesIO(data)))
+    container_worker.main()
+    assert seen == [payload] and json.loads(capsys.readouterr().out) == {'fixture_only': True}
+    seen.clear()
+    monkeypatch.setattr(sys, 'stdin', SimpleNamespace(buffer=io.BytesIO(data + b' ' * (limit + 1 - len(data)))))
+    with pytest.raises(ConfigurationError, match='input exceeds its limit'):
+        container_worker.main()
+    assert not seen
+
+
+@pytest.mark.parametrize('arguments', [['--unknown', '8000000'], ['--input-limit'],
+    ['--input-limit', '1999999'], ['--input-limit', '17000001'],
+    ['--input-limit', 'NaN'], ['--input-limit', '\uff18\uff10\uff10\uff10\uff10\uff10\uff10'],
+    ['--input-limit', '8000000', 'extra']])
+def test_worker_rejects_invalid_launch_limits_before_reading(monkeypatch, arguments):
+    from aeep.assessment import container_worker
+    monkeypatch.setattr(sys, 'argv', ['container_worker', *arguments])
+    # Accessing buffer would fail: arguments must be validated before any input.
+    monkeypatch.setattr(sys, 'stdin', object())
+    with pytest.raises(ConfigurationError, match='input'):
+        container_worker.main()
+
+
+@pytest.mark.skipif(sys.platform == 'win32', reason='local executable protocol fixture')
+async def test_large_input_crosses_both_actual_container_protocol_readers(tmp_path):
+    # A local stand-in for Docker forwards into the actual worker entrypoint.
+    # It proves framing across both processes, not OS container isolation.
+    runtime = tmp_path / 'docker-worker-fixture'
+    runtime.write_text(f"#!{sys.executable}\n" + """import os,subprocess,sys
+if 'run' in sys.argv:
+    i=sys.argv.index('aeep.assessment.container_worker')
+    env=dict(os.environ,PYTHONPATH=sys.argv[sys.argv.index('--env')+1].split('=',1)[1])
+    p=subprocess.run([sys.executable,'-m',*sys.argv[i:]],input=sys.stdin.buffer.read(),capture_output=True,env=env)
+    sys.stdout.buffer.write(p.stdout)
+    sys.stderr.buffer.write(p.stderr)
+    raise SystemExit(p.returncode)
+""")
+    runtime.chmod(0o755)
+    context = controlled_context()
+    context.spec.kind = ExecutorKind.COMMAND
+    context.spec.config.update(argv=[sys.executable, '-c',
+        'import json,sys;value=json.load(sys.stdin);print(json.dumps({"length":len(value["data"])}))'],
+        max_stdin_bytes=7_000_000, stdin_json=True, output={'type': 'json'})
+    context.request.input = {'data': 'x' * 2_700_000}
+    result = await ContainerExecutor(environment(tmp_path, runtime)).execute(context)
+    assert result.status is ExecutionStatus.SUCCESS and result.output == {'length': 2_700_000}

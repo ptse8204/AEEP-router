@@ -708,6 +708,8 @@ regular-file,decompression,member-count and editable-source checks. Prefix confl
 checking walks ancestors rather than comparing every pair of files. The larger
 mapper is an explicit operator adapter version; trial input cannot choose it.
 The current command/container transports carry a larger bounded stdin envelope
-only when the reviewed executor declares it. No runner,installer,database or core
+only when the reviewed executor declares it. The parent passes that allowance
+as a bounded worker launch argument; the worker validates it before reading the
+JSON frame. Default launches retain the original2M limit and argv. No runner,installer,database or core
 dependency is added. Worker applicability and resource acceptance need actual
 workload evidence; larger source bounds alone establish neither.

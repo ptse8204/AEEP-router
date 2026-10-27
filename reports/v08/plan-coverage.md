@@ -5900,3 +5900,18 @@ No uncertain retry or counter reset is permitted. Current13181/3755/
 `make docs-check` for the new document snapshot needs its exact untrusted-checker
 approval. The historical34 lint findings and raw upstream/license/log whitespace
 remain preserved; they do not justify rewriting evidence. No architecture decision.
+
+
+### Larger repository bundle reconciled; inner reader correction — October27
+
+Approved e6b1fb2c [built image2386 and passed three probes](../toolkit-v2/c13/repository-large-archives-20261027/RESULTS.md).
+The fourth2.7MB probe failed at the unchanged inner2MB reader; no subject variant
+ran. All4receipts/8operations reconcile;15.73691733321175seconds,zero models/cash.
+Owned containers/canary are absent;all images remain. Independent package19 checks
+and exact69-document offline docs passed on1fde/wheel60466. Later additions are
+outside that docs snapshot. Pool51/gap90 remain;no scientific gate closes.
+Source374579f1 adds operator-owned worker argv and a real two-reader regression.
+Focused tests pass;full13-gate session38330 is running with frozen source. Do not
+repeat it or claim completion before its evidence. The old control allowance
+explicitly excludes this product-source/wheel change;prepare the exact remaining
+execution review after checks. No dependency,download,build or architecture choice.

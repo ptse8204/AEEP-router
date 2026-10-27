@@ -1122,7 +1122,10 @@ its650000byte cap. Model input and patch arguments MUST NOT select a profile.
 The contained executor MAY use an explicit operator-owned `max_stdin_bytes`
 above1800000,up to16000000; its outer JSON envelope then allows that amount plus
 1000000bytes. The prior2000000byte outer allowance stays for smaller/default
-profiles. Invalid limits MUST fail before process dispatch. These finite transport
+profiles. The parent MUST pass an enlarged bound as an explicit worker launch
+argument; the worker MUST validate it before reading stdin and reject excess
+bytes. Request data MUST NOT choose that bound. Invalid limits MUST fail before
+process dispatch. These finite transport
 caps authorize no filesystem,network,installation or spending expansion. They are
 not production resource SLOs. New profiles require applicable execution/conformance;
 old receipts cannot qualify them automatically.

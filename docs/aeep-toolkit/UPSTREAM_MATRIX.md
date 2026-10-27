@@ -1217,3 +1217,15 @@ NumPy range includes the image's2.2.6. Fresh probes must verify actual image pat
 and a small sparse calculation. Expanded footprint and subject compatibility
 remain unknown. Smart-open's AWS stack stays deferred. No benchmark qualification,
 value, selector or resource claim follows from preparation or synthetic controls.
+
+
+## Larger image observed; worker correction separate, October27
+
+[Bundlee6b1fb2c](../../reports/toolkit-v2/c13/repository-large-archives-20261027/RESULTS.md)
+verified the exact SciPy wheel and built retained image2386 with seven optional
+wheels. Fresh probes verify their actual image imports and the sparse calculation.
+The2.7MB probe then exposed AEEP's unchanged inner input limit; no upstream task
+ran. Keep the existing pytest/parser and image. Correct the two-reader protocol
+instead of adding an evaluator or dependency. Source374579f1 is under full checks;
+old source1fde installation/docs passes do not qualify it. No benefit,selection,
+resource acceptance or new model evidence is implied.

@@ -44,9 +44,22 @@ async def run(payload: dict[str, Any]) -> dict[str, Any]:
         await adapter.close()
 
 
+def _input_limit(argv: list[str]) -> int:
+    if not argv:
+        return 2_000_000
+    if (len(argv) != 2 or argv[0] != '--input-limit'
+            or not argv[1].isascii() or not argv[1].isdecimal()):
+        raise ConfigurationError('invalid container input limit argument')
+    limit = int(argv[1])
+    if not 2_000_000 <= limit <= 17_000_000:
+        raise ConfigurationError('container input exceeds the reviewed transport ceiling')
+    return limit
+
+
 def main() -> None:
-    data = sys.stdin.buffer.read(2_000_001)
-    if len(data) > 2_000_000:
+    limit = _input_limit(sys.argv[1:])
+    data = sys.stdin.buffer.read(limit + 1)
+    if len(data) > limit:
         raise ConfigurationError("container input exceeds its limit")
     with contextlib.redirect_stdout(sys.stderr):
         result = asyncio.run(run(json.loads(data)))

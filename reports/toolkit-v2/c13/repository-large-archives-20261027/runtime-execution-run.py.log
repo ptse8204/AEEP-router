@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-large-archives-20261027/runtime-execution/run.py", line 156, in observe
+    assert attempt.state is ExecutionAttemptState.COMPLETED
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-large-archives-20261027/runtime-execution/run.py", line 238, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-large-archives-20261027/runtime-execution/run.py", line 176, in main
+    raw = await observe('probe-' + item['name'], item['payload'], item['payload_sha256'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-large-archives-20261027/runtime-execution/run.py", line 169, in observe
+    raise StopDispatch('Canonical completion or cleanup could not be verified') from exc
+StopDispatch: Canonical completion or cleanup could not be verified

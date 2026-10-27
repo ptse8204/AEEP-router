@@ -1870,3 +1870,20 @@ No uncertain retry, new software/task bytes, permission change or product-source
 change fits that authority. All usage stays cumulative. The finite bounds are
 20 calls/27 operations/1420 reserved seconds, including two fetch attempts and one
 build. These limits govern this check; they do not establish product resource SLOs.
+
+
+## D111 — Pass reviewed framing bounds into the worker entrypoint
+
+The approved2.7MB probe exposed an incomplete D110 change: the outer command
+accepted its explicit larger bound,but the worker still rejected input above2MB.
+Keep the existing ContainerExecutor and worker. Pass the reviewed bound in argv
+only for larger profiles,validate it before the worker reads,and retain legacy
+argv/default limits. Do not read that authority from an untrusted JSON payload.
+A protocol regression must cross both actual readers; an outer-wrapper mock alone
+missed this defect. No new module,framework,dependency,image or service is needed.
+
+The failed probe has complete terminal evidence and absent containers. Preserve
+it and all costs; do not call it a pass or replay it. A report collector may
+recognize a canonical FAILED attempt as known completion without accepting its
+task result. The prior approval's control-repair room excludes product-source
+changes,so the new worker/wheel needs an exact executable review after full gates.

@@ -1,0 +1,86 @@
+{
+  "schema_version": "aeep.toolkit.otlp-preview.v1",
+  "receipt_sha256": "745eabb683d99387c476328ca68a754088fda625980ea4501e0bfc48a53e8252",
+  "trust": "supplied_unverified",
+  "destination": null,
+  "export_performed": false,
+  "notice": "Private preview. Digests and timings can identify an operation. No payload, model trace, billing inference or export authority.",
+  "payload": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "aeep"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "aeep.receipt",
+              "version": "0.8.2"
+            },
+            "spans": [
+              {
+                "traceId": "745eabb683d99387c476328ca68a7540",
+                "spanId": "88fda625980ea450",
+                "name": "aeep.execution",
+                "kind": 1,
+                "startTimeUnixNano": "1791590878483746000",
+                "endTimeUnixNano": "1791590878536899000",
+                "attributes": [
+                  {
+                    "key": "aeep.receipt.sha256",
+                    "value": {
+                      "stringValue": "745eabb683d99387c476328ca68a754088fda625980ea4501e0bfc48a53e8252"
+                    }
+                  },
+                  {
+                    "key": "aeep.evidence.trust",
+                    "value": {
+                      "stringValue": "supplied_unverified"
+                    }
+                  },
+                  {
+                    "key": "aeep.execution.status",
+                    "value": {
+                      "stringValue": "failed"
+                    }
+                  },
+                  {
+                    "key": "aeep.resource.local.cpu_ms",
+                    "value": {
+                      "doubleValue": 20.62975
+                    }
+                  },
+                  {
+                    "key": "aeep.resource.local.memory_mb_seconds",
+                    "value": {
+                      "doubleValue": 0.42437793802673696
+                    }
+                  },
+                  {
+                    "key": "aeep.resource.local.latency_ms",
+                    "value": {
+                      "doubleValue": 44.07529206946492
+                    }
+                  },
+                  {
+                    "key": "aeep.resource.local.peak_memory_mb",
+                    "value": {
+                      "doubleValue": 26.9375
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -340,6 +340,8 @@ set its source artifact `max_bytes` to3500000. Confirm the actual host frame and
 artifact settings can carry that input before execution; every arm needs the
 same reviewed delivery. The v5 recipe requests7000000 grader stdin bytes. The
 container's explicit larger outer envelope adds1000000bytes for protocol metadata.
+Both parent and worker readers must use that same reviewed bound. The parent
+supplies the worker limit through launch argv; task fields cannot raise it.
 Actual containment and worker conformance remain required; schema acceptance is
 not proof of a working large-input path.
 

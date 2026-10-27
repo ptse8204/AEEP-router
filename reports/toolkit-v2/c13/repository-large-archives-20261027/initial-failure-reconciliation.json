@@ -1,0 +1,61 @@
+{
+  "reconciled": true,
+  "batch_passed": false,
+  "known_terminal_attempts": [
+    {
+      "operation_id": "recipe_generation_8942952d75504937a3c77167e847d14f-call-1",
+      "receipt_ref": "7bcead8599a41d678682601db9a30aa31ce219201c695f29341ec4cf29cb5f1a",
+      "receipt_id": "rcpt_213e4bf006994d8a95ba36bd1929c107",
+      "attempt_state": "COMPLETED",
+      "container_absent": true,
+      "execution_evidence_complete": true
+    },
+    {
+      "operation_id": "recipe_generation_8942952d75504937a3c77167e847d14f-call-2",
+      "receipt_ref": "059cc3a5bbe7db0e76fcf1b8e15ad7be745ad55809b521d5ce2f2cfe198b37cc",
+      "receipt_id": "rcpt_db332c6b42fc46f5ad9212ca22809d98",
+      "attempt_state": "COMPLETED",
+      "container_absent": true,
+      "execution_evidence_complete": true
+    },
+    {
+      "operation_id": "recipe_generation_8942952d75504937a3c77167e847d14f-call-3",
+      "receipt_ref": "d766fa30dd527a59b57b4357f9863bc8944bc2fdcd4f231da8a914f62fcf4e58",
+      "receipt_id": "rcpt_63973ad9ae6e4136825cab19ad998850",
+      "attempt_state": "COMPLETED",
+      "container_absent": true,
+      "execution_evidence_complete": true
+    },
+    {
+      "operation_id": "recipe_generation_8942952d75504937a3c77167e847d14f-call-4",
+      "receipt_ref": "54ca6b42827b62e6079ca714685e311f7a4be5c16fa4a1566389d9081a3ca5da",
+      "receipt_id": "rcpt_c447a0a9d1a446eab92e0b90ab3750c4",
+      "attempt_state": "FAILED",
+      "container_absent": true,
+      "execution_evidence_complete": true
+    }
+  ],
+  "operations": 8,
+  "contained_calls": 4,
+  "model_turns": 0,
+  "cash_delta": 0,
+  "grant_before": [
+    13181,
+    3755,
+    119818.4486230514,
+    "0.0"
+  ],
+  "grant_after": [
+    13189,
+    3755,
+    119834.18554038461,
+    "0.0"
+  ],
+  "charged_seconds": 15.73691733321175,
+  "all_owned_containers_absent": true,
+  "canary_removed": true,
+  "uncertain_attempts": 0,
+  "cause": "src/aeep/assessment/container_worker.py main still reads2000001bytes and rejects over2000000. The larger-profile host wrapper was changed without this worker entrypoint. Product correction is needed;no subject variants ran.",
+  "failed_probe_replayed": false,
+  "independent_approved_package_docs_may_continue": true
+}

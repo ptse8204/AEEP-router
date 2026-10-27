@@ -26,6 +26,13 @@ def container_name(attempt_id: str) -> str:
     return "aeep-" + hashlib.sha256(attempt_id.encode()).hexdigest()[:32]
 
 
+def _input_envelope_limit(spec: ExecutorSpec) -> int:
+    limit = spec.config.get('max_stdin_bytes', 1_000_000)
+    if type(limit) is not int or not 0 < limit <= 16_000_000:
+        raise ConfigurationError('contained input exceeds the reviewed transport ceiling')
+    return 2_000_000 if limit <= 1_800_000 else limit + 1_000_000
+
+
 class ContainerExecutor(BaseExecutor):
     def capabilities(self) -> ExecutorCapabilities:
         return ExecutorCapabilities(adapter=type(self).__name__, features={"fresh_worker":"supported", "reused_worker":"unsupported"})
@@ -39,6 +46,7 @@ class ContainerExecutor(BaseExecutor):
 
     def command(self, context: ExecutionContext) -> tuple[list[str], str]:
         environment = self.environment
+        input_envelope_limit = _input_envelope_limit(context.spec)
         runtime, socket = environment.container_runtime, environment.container_socket
         if environment.kind != "container" or runtime is None or socket is None:
             raise ConfigurationError("an explicit local container runtime and socket are required")
@@ -123,6 +131,10 @@ class ContainerExecutor(BaseExecutor):
                 "aeep.assessment.container_worker",
             ]
         )
+        if input_envelope_limit > 2_000_000:
+            # This launch argument comes only from the reviewed executor spec.
+            # The worker cannot obtain its framing allowance from request data.
+            argv.extend(['--input-limit', str(input_envelope_limit)])
         return argv, name
 
     async def execute(self, context: ExecutionContext) -> RawExecution:
@@ -137,9 +149,6 @@ class ContainerExecutor(BaseExecutor):
         output_limit = int(context.spec.config.get('max_output_bytes', 1_000_000))
         if not 0 < output_limit <= 16_000_000:
             raise ConfigurationError('contained output exceeds the reviewed transport ceiling')
-        input_limit = context.spec.config.get('max_stdin_bytes', 1_000_000)
-        if type(input_limit) is not int or not 0 < input_limit <= 16_000_000:
-            raise ConfigurationError('contained input exceeds the reviewed transport ceiling')
         wrapper = ExecutorSpec(
             id=context.spec.id,
             capability=context.spec.capability,
@@ -148,7 +157,7 @@ class ContainerExecutor(BaseExecutor):
             config={
                 "argv": argv,
                 "stdin_json": True,
-                "max_stdin_bytes": 2_000_000 if input_limit <= 1_800_000 else input_limit + 1_000_000,
+                "max_stdin_bytes": _input_envelope_limit(context.spec),
                 "max_output_bytes": 2 * output_limit + 65536 if output_limit > 1_000_000 else 1_000_000,
                 "timeout_seconds": float(context.spec.config.get("timeout_seconds", 60)) + 1,
                 "output": {"type": "json"},
