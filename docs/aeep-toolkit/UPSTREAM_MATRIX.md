@@ -1104,3 +1104,22 @@ no assertion or guard was relaxed to make it fit. The four unresolved diagnostic
 remain excluded. Product source4cb,42-case pool and all live counters are unchanged.
 No scientific or resource gate closes. Exact new execution is the only pending
 intervention; no architecture, infrastructure or budget choice is requested.
+
+## Library audits reproduced; nested test layout remains unsupported
+
+Approved `f0261e6d` completed once; both audits reproduced. [The result](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/RESULTS.md)
+retains all73 required identities and rejected regressions. Four canonical receipts/
+attempts and six operations reconciled, charging10.159214583225548 seconds,zero
+models/cash. Owned containers are absent and all images remain. No install, build,
+download, probe, host canary or package/docs run occurred. Grant13146operations/
+3755turns/119737.59329392854seconds/0.0cash.
+
+[The pool](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/provisional-pool.json)
+is44 snapshots/29 repositories/2686 identities:16single,18multi,10audit.97 more cases
+are needed; old bindings/failures stay intact. Product source4cb is unchanged.
+A verified layout constraint blocks ordinary nested test directories: Gabbi342's
+published identities begin `gabbi/tests/`, but the current contract only accepts
+`tests/`. An explicit versioned extension may reuse current test/source separation
+without changing v1-v3 meanings, assertions, identities, thresholds or size bounds.
+It is engineering preparation, not authority for new subject execution or a passed
+scientific gate. No architecture decision is pending.

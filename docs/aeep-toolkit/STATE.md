@@ -1,12 +1,11 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved review c81557a2 completed once. The offline
-22-wheel image build and three fresh probes passed; Goodconf, Dishka and Prometheus
-reproduced. Both MCP cases and Twyn had collection errors and remain excluded.
-All12 physical receipts/attempts and15 completed operations reconciled; zero model
-turns/cash were added. The provisional pool is42 cases across27 repositories,
-with99 cases still missing from the planned balanced stages. C13 remains IN_PROGRESS.
-Usefulness, selection, human controls, resource acceptance and release stay open.**
+**Status as of 2026-10-27: approved review f0261e6d completed once. Both library
+audits reproduced, retaining73 required identities. Four canonical receipts and
+six operations reconciled; zero models/cash were added. The pool now has44 cases
+across29 repositories, with97 cases missing from the balanced stages. C13 remains
+IN_PROGRESS. Qualification, usefulness, selection, human controls, resource
+acceptance and release stay open.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -48,17 +47,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '9892a7e'
-last_check_command: 'Bounded source collection; repository-library-reproduction-20261027/prepare-cases.py; prepare-review.py; synthetic definition/authority audit'
-last_check_result: '30 new public sources retained as inert data (163 combined):19 truncated/unparsed,10 static-reviewable,1 archive-safety exclusion. Two authored library audits prepared with73 required identities/4 frozen payloads.32 pins,10 grader guards,22 classifier guards,7 budget guards and synthetic persistence/operation7 rejection passed. Zero new containers/installations/models/cash after terminalfaa10772. Source4cb and42-case pool unchanged.'
-next_action: 'Read repository-library-reproduction-20261027/README.md and exact runtime-execution/operation-review SHA f0261e6d. Two authored audits/4 offline calls are prepared, not approved or executed;6 existing-grant operations/290 reserved seconds/zero models or cash. Reuse retainedf603,existing observer and containment evidence;private cached Marshmallow3.25.1 ZIP only,no installs/builds/downloads/probes/package/docs reruns. After actual approval record it once,check markers/grant/space,run runtime-execution/run.py once and audit canonical evidence before consolidation. Preserve all failures; no architecture or budget decision.'
+last_verified_commit: '9977945'
+last_check_command: 'repository-library-reproduction-20261027/runtime-execution/run.py f0261e6d...; audit-execution.py; consolidate-results.py'
+last_check_result: 'Approved f0261e6d completed4 calls once. Both audits reproduced;4 canonical receipts/attempts,6 completed operations and10.159214583225548 seconds reconciled;zero models/cash. Owned containers absent,all images retained,no installs/builds/downloads/probes. Pool44/29repos/2686 identities:16single,18multi,10audit;97 missing. Source4cb unchanged.'
+next_action: 'Review the verified grader layout limit: legitimate package-local test identities such as gabbi/tests are rejected by the tests/-only v1-v3 contract. Prepare an explicit versioned protected-test-root extension under routine engineering authority, retaining old semantics, assertion/identity rules, budgets and archive bounds. Do not move tests, alter frozen cohorts or execute new upstream software. Source/runtime changes require fresh applicable evidence before any live trial.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Prepared f0261e6d needs exact execution approval for2 authored library audits/4 offline calls on retainedf603 with an already-cached pure wheel:6 existing-grant operations/290 reserved seconds,zero models/cash. No build/install/download,probe/canary,package/docs rerun or architecture choice. Terminalfaa10772 covers different diagnostic bytes and subjects.'
+  - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
@@ -3707,3 +3706,22 @@ no assertion or guard was relaxed to make it fit. The four unresolved diagnostic
 remain excluded. Product source4cb,42-case pool and all live counters are unchanged.
 No scientific or resource gate closes. Exact new execution is the only pending
 intervention; no architecture, infrastructure or budget choice is requested.
+
+## Library audits completed October 27
+
+Approved `f0261e6d` completed once; both audits reproduced. [The result](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/RESULTS.md)
+retains all73 required identities and rejected regressions. Four canonical receipts/
+attempts and six operations reconciled, charging10.159214583225548 seconds,zero
+models/cash. Owned containers are absent and all images remain. No install, build,
+download, probe, host canary or package/docs run occurred. Grant13146operations/
+3755turns/119737.59329392854seconds/0.0cash.
+
+[The pool](../../reports/toolkit-v2/c13/repository-library-reproduction-20261027/provisional-pool.json)
+is44 snapshots/29 repositories/2686 identities:16single,18multi,10audit.97 more cases
+are needed; old bindings/failures stay intact. Product source4cb is unchanged.
+A verified layout constraint blocks ordinary nested test directories: Gabbi342's
+published identities begin `gabbi/tests/`, but the current contract only accepts
+`tests/`. An explicit versioned extension may reuse current test/source separation
+without changing v1-v3 meanings, assertions, identities, thresholds or size bounds.
+It is engineering preparation, not authority for new subject execution or a passed
+scientific gate. No architecture decision is pending.
