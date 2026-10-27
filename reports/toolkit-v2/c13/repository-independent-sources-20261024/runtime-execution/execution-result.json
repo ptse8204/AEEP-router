@@ -1,0 +1,370 @@
+{
+  "batch_completed": true,
+  "review_sha256": "2f3788bbc30899e9532ee87ec8339f7e88598ee8717ab2dfb174175af0ac4ee2",
+  "source_digest": "4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "case_id": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "agronholm__sqlacodegen-370-declared-tests",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "lmstudio-ai__lmstudio-python-110-declared-tests",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "model-bakers__model_bakery-520-declared-tests",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "ucfopen__canvasapi-716-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-1",
+      "receipt_id": "rcpt_9fd2b5c25c834d468c2309b39cc45d85",
+      "receipt_ref": "1d4b550e6b735e8a28b44896610ea4a814c319b3eff75ef104a8aa320ce5114d",
+      "container_name": "aeep-9961098b05d25a3f9aff1ff078faebfe",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-2",
+      "receipt_id": "rcpt_0103c272797a413a80298b9c3208aa51",
+      "receipt_ref": "2d9d5f27dec2f54429c468ead2378e3a966e3ba885c5f531ab82803dd8be3a5f",
+      "container_name": "aeep-6dbed1b98edc7dcd9d34e5c22ba42fc9",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-3",
+      "receipt_id": "rcpt_806a0e9451e940fa93bc63a0ff02a943",
+      "receipt_ref": "7f46d43b43a455d46e4746b08ce02c0fc5c55bbc231d2c722c7ef9e60ac621e8",
+      "container_name": "aeep-900392321ac1acce61f0101b3b2aa5f3",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-4",
+      "receipt_id": "rcpt_9a027c8743cc4f26a58bedbf5287a9ad",
+      "receipt_ref": "25f5621db0deae00bbdb38c82d8dcc9e47f979eb3a44809a406bff5edecb9916",
+      "container_name": "aeep-3ddff6683ed51675fcb8c4cdee5070ab",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-5",
+      "receipt_id": "rcpt_1d19a4c3f8514bc9a062807f77082ea9",
+      "receipt_ref": "a75a382c89bf20b0ff8c31ded118224392047fda04e7ed37e7ab02331149be57",
+      "container_name": "aeep-c7449032c9383585f6ccf1955977cc2c",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "agronholm__sqlacodegen-370-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-6",
+      "receipt_id": "rcpt_7770b5e90b904ddda0d3bc23f838eb55",
+      "receipt_ref": "affd815918ede6526f3b302b971d7f788ec99e6dd20087fbe5af702015d144eb",
+      "container_name": "aeep-4489dca29bddd8ed17f9d104efcba200",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "agronholm__sqlacodegen-370-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-7",
+      "receipt_id": "rcpt_1be1da9c5318473bb403a443a4d667a1",
+      "receipt_ref": "98e4eca7c263803f1979e801d2029eac510ff2ec026791df41b198b10f5d3100",
+      "container_name": "aeep-16499783f3f4b726019559148bf60d3a",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "lmstudio-ai__lmstudio-python-110-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-8",
+      "receipt_id": "rcpt_3da5c5f7132b47ee84e87f4533fa41e1",
+      "receipt_ref": "0d958a3b397ae914a98b5aba0a17cd74e56798f7b0922e250fb395a1ffe55e72",
+      "container_name": "aeep-b81a8584f2449b79f3f1d97ef1cfc7cb",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "lmstudio-ai__lmstudio-python-110-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-9",
+      "receipt_id": "rcpt_84099d81d7394b9eab4ed08c631bb893",
+      "receipt_ref": "7ac0f06a772a07c7a0bc8502f11bd5b69e15733917e06b839199184973d647d6",
+      "container_name": "aeep-0b0838c775ce9a80b3ab0d160a733955",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "model-bakers__model_bakery-520-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-10",
+      "receipt_id": "rcpt_ec56acacf25847a6921d940e3398fe51",
+      "receipt_ref": "e07de97bc59c455eda8714150c6845ae8b98b94a51360573509aff362a867200",
+      "container_name": "aeep-49a7d01d7d012e23ce9b23f13b477a16",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "model-bakers__model_bakery-520-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-11",
+      "receipt_id": "rcpt_926684e54b1249948eda2cbfde597b2d",
+      "receipt_ref": "87810dc891f541bba8d1e667ba7ea8e7aaa15be34255cf94699be6e2c34fb56c",
+      "container_name": "aeep-1a5c9543cde43ba0b3bf69814924b2c3",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    },
+    {
+      "name": "ucfopen__canvasapi-716-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-12",
+      "receipt_id": "rcpt_8073f06786b34628afe7815e3b23bbd6",
+      "receipt_ref": "c7245906c4a63cd174d40b1cd1bb562a59d817e0ff480a10eb94021b482c900c",
+      "container_name": "aeep-35d3cc165b3be5496728cde1635a7dd1",
+      "container_removed": true,
+      "environment_digest": "0209929cc00ca09780e8b350ed0d0d97a895011778fdc94af6449c4070239952"
+    }
+  ],
+  "observations": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-1",
+      "raw_file": "raw-observation-1.json",
+      "raw_sha256": "be596014f464838c7de94d88268353f364329f1c1f0859da088d0da479c63e1c",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-2",
+      "raw_file": "raw-observation-2.json",
+      "raw_sha256": "e893a4a5c3072afab40fa9e8264c605ee6c6d221f3b200e5db580babe3037daa",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-3",
+      "raw_file": "raw-observation-3.json",
+      "raw_sha256": "258c2ccc01887246181261b3ede9573cf5af9f074cc8e950c899afa9d62c9fd2",
+      "execution_error_type": null
+    },
+    {
+      "name": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-4",
+      "raw_file": "raw-observation-4.json",
+      "raw_sha256": "3901c873eda63265111fe9a0f5e7be4f0225a5ca8744a1d88817e752bd086f09",
+      "execution_error_type": null
+    },
+    {
+      "name": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-5",
+      "raw_file": "raw-observation-5.json",
+      "raw_sha256": "8b80a8a26bc7162c08554738a2402459f0ffbd7254008908b7b61b436d4f681f",
+      "execution_error_type": null
+    },
+    {
+      "name": "agronholm__sqlacodegen-370-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-6",
+      "raw_file": "raw-observation-6.json",
+      "raw_sha256": "1e0d1d900ddfbf7657bf980e15088ac727f6d85f4214c0179cefcd4cf5d771c5",
+      "execution_error_type": null
+    },
+    {
+      "name": "agronholm__sqlacodegen-370-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-7",
+      "raw_file": "raw-observation-7.json",
+      "raw_sha256": "faf1c747045dc6715b83438d204c677b59e8c453def89b61fe4eb8595b425e60",
+      "execution_error_type": null
+    },
+    {
+      "name": "lmstudio-ai__lmstudio-python-110-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-8",
+      "raw_file": "raw-observation-8.json",
+      "raw_sha256": "526472775aed66775bec38326c7f79d2551e6ff7e289412e979452dc26990fcd",
+      "execution_error_type": null
+    },
+    {
+      "name": "lmstudio-ai__lmstudio-python-110-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-9",
+      "raw_file": "raw-observation-9.json",
+      "raw_sha256": "e00268d2725f78aeee796592071f1b0e92e4bad0affb43f2c01a79a831918f0c",
+      "execution_error_type": null
+    },
+    {
+      "name": "model-bakers__model_bakery-520-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-10",
+      "raw_file": "raw-observation-10.json",
+      "raw_sha256": "d8ec5b1e119ce06ba7d38993ef7241e7ef7f60f3b40c9195cb92b3471445fd09",
+      "execution_error_type": null
+    },
+    {
+      "name": "model-bakers__model_bakery-520-declared-tests-counterexample",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-11",
+      "raw_file": "raw-observation-11.json",
+      "raw_sha256": "ae8d58aeac7d319e174fd725d4febd1d003ba0fca7c96ced0e522de82cd157be",
+      "execution_error_type": null
+    },
+    {
+      "name": "ucfopen__canvasapi-716-declared-tests-reference",
+      "operation_id": "recipe_generation_a2ae8558b3414ef3affaeea2c5946fec-call-12",
+      "raw_file": "raw-observation-12.json",
+      "raw_sha256": "b8fe81fc20e22334031cb423aa251d88a48da5bd5191fd2df072d34295af93e9",
+      "execution_error_type": null
+    }
+  ],
+  "grant_before": [
+    13105,
+    3755,
+    119652.74341342552,
+    "0.0"
+  ],
+  "ledger_operations": 14,
+  "contained_calls_started": 12,
+  "elapsed_complete": true,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "eligible_cases": 4,
+  "grant_after": [
+    13119,
+    3755,
+    119680.70301988488,
+    "0.0"
+  ],
+  "elapsed_seconds": 28.01136941742152,
+  "cases_adopted": 0
+}

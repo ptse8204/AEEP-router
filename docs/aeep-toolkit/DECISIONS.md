@@ -1628,3 +1628,18 @@ is needed. The exact review is `be8b0e5f`, with zero models, 13 offline calls,
 16 operations and 785 reserved seconds. Static preparation passed; installation
 and subject execution remain unapproved. See
 [the reviewed scope](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/README.md).
+
+### D100 — Renew expiry without resetting usage, then retain only reproduced cases
+
+Approved `be8b0e5f` ran once on unchanged source `4cb0bf74`. The retained offline
+image `b0eb4add` passed three fresh probes; four tasks reproduced and CanvasAPI
+remains excluded after an exit-2 collection error, with the exact exception
+unknown. Twelve physical receipts/attempts and all 15 operations reconciled;
+29.984952959697694 operation-seconds, zero models/cash were added. Owned workers
+and canary are absent; both new and parent images remain. The standing finite
+budget delegation covered an expiry-only amendment to October28 17:52:35.978639 UTC;
+all ceilings and counters were preserved. No permission was inferred from expiry.
+
+[The pool](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/provisional-pool.json) is now39 cases across24 repositories, with102 more needed for
+balanced stages. No qualification, usefulness, selection, resource acceptance or
+release gate closes. Source/package checks are unchanged and were not repeated.

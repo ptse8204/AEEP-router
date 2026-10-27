@@ -21,6 +21,28 @@ or assigned to a frozen stage. If all five reproduce, the provisional pool would
 reach 40 cases; the planned balanced stages would still need 101 more. Repository
 groups must stay within one stage, and development repositories remain excluded.
 
+## Completed October 27
+
+Actual approval of `be8b0e5f` was exercised once. The build and all three fresh
+probes passed. MSAL, SQLacodegen, LM Studio Python and Model Bakery reproduced;
+CanvasAPI's reference had a collection error (exit2,62 required identities absent)
+and remains excluded. Its exact exception is unknown because no traceback was
+retained. Its counterexample was not started. Do not replay this terminal review.
+
+[The canonical audit](runtime-execution/completion-audit.json) reopened all12
+physical receipts/completed attempts. [Consolidation](provisional-pool.json)
+reconciled all15 operations and29.984952959697694 operation-seconds, with zero
+models/cash. The unchanged owned canary and attempt containers were removed.
+The retained image is `b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661`;
+its measured growth is6,373,104 bytes and the parent remains retained.
+
+The original grant was expired. Its [expiry-only amendment](expiry-only-amendment-review.json)
+used the standing finite amendment delegation and existing operator API, preserving
+all counters and ceilings. No expired authorization was used. It now expires
+October28 at17:52:35.978639 UTC. No new model or future source execution follows.
+The pool is39 cases/24 repositories/2,546 required identities;102 cases are still
+missing. The original preparation below remains historical.
+
 ## Exact next execution review
 
 [Approval bundle](approval-bundle.json), SHA-256:

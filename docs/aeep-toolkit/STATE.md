@@ -1,12 +1,13 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-24: approved bundle 51c43d2c completed once. All six
-repository repairs passed independent upstream grading, with six verified capture
-chains, six task-instruction bindings and three observed optional Ponytail loads.
-The installed wheel passed 19 checks; cached offline docs verification passed.
-Canonical accounting and cleanup passed. C13 remains IN_PROGRESS: these three
-development pairs do not establish usefulness or selection. The 35-case pool
-still needs 106 additional cases for the planned balanced stages.**
+**Status as of 2026-10-27: approved review be8b0e5f ran once. The offline
+16-wheel image build and three fresh probes passed; four of five repository tasks
+reproduced. CanvasAPI had a collection error and remains excluded. All 12 physical
+receipts/attempts and 15 completed operations reconciled; zero model turns/cash
+were added. The provisional pool is now 39 cases across 24 repositories, with
+102 cases still missing from the planned balanced stages. C13 remains IN_PROGRESS.
+The preceding six real development repairs and package/docs checks remain passed;
+usefulness, selection, human controls, resource acceptance and release stay open.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -48,17 +49,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '19b68f4'
-last_check_command: 'repository-task-delivery-20261023/audit-completion.py; bundle-execution-result.json; validation-final/checks.json'
-last_check_result: 'All three approved components passed. Six independently graded successes, six verified capture chains, six prompt bindings, three treatment instruction loads. Reopened 24 grader receipts/attempts and six model receipts/trials/journals. All 45 operations complete, six turns and 689.980447711423 operation-seconds charged. All reviewed workers absent and proxy stopped. Wheel19 checks and offline docs passed. Product source4cb unchanged.'
-next_action: 'Read repository-independent-sources-20261024/README.md and approval-bundle.json SHAbe8b0e5f. The five-case/16-wheel review is prepared, unapproved and unexecuted; record an actual exact response before one run-bundle.py attempt. It permits zero models,13 offline calls,16 operations and785 reserved seconds. Do not repeat completed51c43d2c, d775e93e or source94490. Preserve counters; consolidate only actual accepted reproduction results. Full qualification/usefulness/selection still need independent cohorts.'
+last_verified_commit: 'ad14b39'
+last_check_command: 'repository-independent-sources-20261024/run-bundle.py be8b0e5f...; runtime-execution/audit-execution.py; consolidate-results.py'
+last_check_result: 'Approved be8b0e5f executed once. Imageb0eb4add built offline from324a1fee with16 exact wheels; three probes passed. MSAL audit and SQLacodegen/LMStudio/ModelBakery repairs reproduced. CanvasAPI reference collection ERROR/exit2;62 required identities absent, exact traceback unretained. All12 attempts/receipts reopened,15 operations complete,29.984952959697694 operation-seconds charged,zero models/cash. Owned containers/canary removed; both images retained. Pool39/24repos/2546 identities:15single,18multi,6audit;102 cases still needed. Product source4cb unchanged.'
+next_action: 'Do not replay terminalbe8b0e5f or use its unstarted CanvasAPI counterexample slot. Read provisional-pool.json and runtime-execution/raw-observation-12.json. Continue safe source curation and compile the next exact reproduction/diagnostic review using retained imageb0eb4add; no broad source/package/docs rerun on unchanged code. The existing grant expiry was extended only to2026-10-28T17:52:35.978639Z under standing finite-amendment authority, with every ceiling/counter preserved. No model execution or release authority follows.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Preparedbe8b0e5f needs actual exact approval for one private offline16-wheel grader image and13 source/probe calls across five repositories. Existing source4cb and all software checks are unchanged. Zero models/cash,16 operations,785 reserved seconds; no architecture decision, download during execution, host install, package/docs rerun, activation or release. Earlier completed51c43d2c binds different software.'
+  - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
   - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
@@ -3545,3 +3546,46 @@ response has been recorded yet. It replaces unapproved draft `7d053ee3` after a
 report-only plugin-summary correction. Read `approval-requested.json` and actual
 user replies before proceeding. All 251 completed-bundle assets and all 108
 pending-bundle assets still match; source `4cb0bf74` and grant counters are unchanged.
+
+## C13: approved five-repository batch completed October 27
+
+The actual operator instruction approved `be8b0e5f`. Its 108 assets and current
+source `4cb0bf74` matched. The original grant had expired October 25; the standing
+September 27 delegation explicitly permits finite expiry amendments. The existing
+operator-only amendment API extended expiry to October 28 at 17:52:35.978639 UTC,
+with checked predecessor `6e1737ea...`, unchanged absolute ceilings and identical
+usage counters. Amendment `e4f65aeb...` and its exact review are retained beside
+the execution. No expired grant was used and no fresh allowance was created.
+
+The offline image build installed the exact 16 cached wheels and passed inherited
+configuration/layer checks. Retained image:
+`sha256:b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661`,
+tag `aeep-toolkit-v2/repository-grader:py313-repository-supports-20261024`.
+Measured image growth was 6,373,104 bytes; parent `324a1fee` remains retained.
+All three fresh boundary/state/version probes passed. MSAL's authored audit and
+SQLacodegen 370, LM Studio Python 110 and Model Bakery 520 repairs reproduced:
+references passed and the original/regression counterexamples failed as required.
+
+CanvasAPI 716 remains excluded. Its reference returned only
+`tests/test_util.py: ERROR`, exit 2, with all 62 required identities absent. This
+is a collection failure, not a wrong candidate answer. No traceback was retained,
+so the exact exception remains unknown. Static source/import review alone cannot
+establish that cause. The counterexample was never dispatched; that unused slot
+is not retry authority. No assertion, criterion or historical outcome was changed.
+
+The canonical audit reopened 12 receipts/completed attempts and recomputed all
+five case classifications. Consolidation reopened all 15 completed operations,
+reconciled 29.984952959697694 charged operation-seconds, and verified image and
+canary ownership. All attempt-owned containers and the unchanged canary were
+removed. No model turn, cash, download, pull, host install, credential access,
+activation, old-image deletion or release occurred. Current grant counters:
+13119 operations / 3755 turns / 119680.70301988488 seconds / 0.0 cash.
+
+[The consolidated pool](../../reports/toolkit-v2/c13/repository-independent-sources-20261024/provisional-pool.json)
+contains 39 snapshots across 24 repositories and 2,546 required reference
+identities: 15 single-file repairs, 18 multi-file repairs and six authored audits.
+Each earlier runtime binding remains intact; conformance is not transferred.
+The balanced stages still lack 32 single-file, 29 multi-file and 41 audit cases
+(102 total). No stages are frozen or adopted. Model qualification, comparative
+usefulness and correct selection remain separate unmet gates. Continue static
+curation and prepare a concrete next review before requesting more execution.
