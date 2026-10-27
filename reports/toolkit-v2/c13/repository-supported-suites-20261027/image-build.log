@@ -1,0 +1,85 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.22kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/repository-grader:py313-repository-supports-20261024
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/aeep-toolkit-v2/repository-grader:py313-repository-supports-20261024@sha256:b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-repository-supports-20261024@sha256:b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-repository-supports-20261024@sha256:b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661 done
+#5 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 4.46MB 0.0s done
+#4 DONE 0.1s
+
+#6 [2/3] COPY pydantic_settings-2.11.0-py3-none-any.whl python_dotenv-1.1.1-py3-none-any.whl httpx_sse-0.4.3-py3-none-any.whl starlette-0.48.0-py3-none-any.whl sse_starlette-2.4.1-py3-none-any.whl uvicorn-0.37.0-py3-none-any.whl click-8.3.0-py3-none-any.whl rich-14.2.0-py3-none-any.whl markdown_it_py-4.0.0-py3-none-any.whl pygments-2.19.2-py3-none-any.whl mdurl-0.1.2-py3-none-any.whl typer-0.20.0-py3-none-any.whl shellingham-1.5.4-py2.py3-none-any.whl ruamel.yaml-0.18.16-py3-none-any.whl ruamel.yaml.clib-0.2.14-cp313-cp313-manylinux2014_aarch64.whl tomlkit-0.13.3-py3-none-any.whl rapidfuzz-3.14.1-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl freezegun-1.5.0-py3-none-any.whl pytest_cov-7.0.0-py3-none-any.whl coverage-7.11.0-py3-none-any.whl pytest_benchmark-5.1.0-py3-none-any.whl py_cpuinfo-9.0.0-py3-none-any.whl requirements.txt /opt/aeep-runtime/
+#6 DONE 0.1s
+
+#7 [3/3] RUN ["python3", "-m", "pip", "--isolated", "install", "--no-index", "--no-deps", "--no-compile", "--no-cache-dir", "--disable-pip-version-check", "--require-hashes", "-r", "/opt/aeep-runtime/requirements.txt"]
+#7 0.261 Processing /opt/aeep-runtime/pydantic_settings-2.11.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 1))
+#7 0.263 Processing /opt/aeep-runtime/python_dotenv-1.1.1-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 2))
+#7 0.265 Processing /opt/aeep-runtime/httpx_sse-0.4.3-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 3))
+#7 0.266 Processing /opt/aeep-runtime/starlette-0.48.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 4))
+#7 0.267 Processing /opt/aeep-runtime/sse_starlette-2.4.1-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 5))
+#7 0.268 Processing /opt/aeep-runtime/uvicorn-0.37.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 6))
+#7 0.269 Processing /opt/aeep-runtime/click-8.3.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 7))
+#7 0.270 Processing /opt/aeep-runtime/rich-14.2.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 8))
+#7 0.271 Processing /opt/aeep-runtime/markdown_it_py-4.0.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 9))
+#7 0.274 Processing /opt/aeep-runtime/pygments-2.19.2-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 10))
+#7 0.279 Processing /opt/aeep-runtime/mdurl-0.1.2-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 11))
+#7 0.279 Processing /opt/aeep-runtime/typer-0.20.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 12))
+#7 0.280 Processing /opt/aeep-runtime/shellingham-1.5.4-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 13))
+#7 0.281 Processing /opt/aeep-runtime/ruamel.yaml-0.18.16-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 14))
+#7 0.282 Processing /opt/aeep-runtime/ruamel.yaml.clib-0.2.14-cp313-cp313-manylinux2014_aarch64.whl (from -r /opt/aeep-runtime/requirements.txt (line 15))
+#7 0.284 Processing /opt/aeep-runtime/tomlkit-0.13.3-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 16))
+#7 0.284 Processing /opt/aeep-runtime/rapidfuzz-3.14.1-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl (from -r /opt/aeep-runtime/requirements.txt (line 17))
+#7 0.287 Processing /opt/aeep-runtime/freezegun-1.5.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 18))
+#7 0.288 Processing /opt/aeep-runtime/pytest_cov-7.0.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 19))
+#7 0.289 Processing /opt/aeep-runtime/coverage-7.11.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 20))
+#7 0.290 Processing /opt/aeep-runtime/pytest_benchmark-5.1.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 21))
+#7 0.292 Processing /opt/aeep-runtime/py_cpuinfo-9.0.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 22))
+#7 0.300 mdurl is already installed with the same version as the provided wheel. Use --force-reinstall to force an installation of the wheel.
+#7 0.302 shellingham is already installed with the same version as the provided wheel. Use --force-reinstall to force an installation of the wheel.
+#7 0.310 Installing collected packages: py-cpuinfo, uvicorn, typer, tomlkit, starlette, sse-starlette, ruamel-yaml-clib, ruamel-yaml, rich, rapidfuzz, python-dotenv, pytest-cov, pytest-benchmark, pygments, pydantic-settings, markdown-it-py, httpx-sse, freezegun, coverage, click
+#7 0.328   Attempting uninstall: typer
+#7 0.332     Found existing installation: typer 0.27.2
+#7 0.340     Uninstalling typer-0.27.2:
+#7 0.367       Successfully uninstalled typer-0.27.2
+#7 0.413   Attempting uninstall: rich
+#7 0.417     Found existing installation: rich 15.0.0
+#7 0.429     Uninstalling rich-15.0.0:
+#7 0.475       Successfully uninstalled rich-15.0.0
+#7 0.539   Attempting uninstall: pygments
+#7 0.544     Found existing installation: Pygments 2.21.0
+#7 0.592     Uninstalling Pygments-2.21.0:
+#7 0.769       Successfully uninstalled Pygments-2.21.0
+#7 0.832   Attempting uninstall: markdown-it-py
+#7 0.835     Found existing installation: markdown-it-py 4.2.0
+#7 0.843     Uninstalling markdown-it-py-4.2.0:
+#7 0.875       Successfully uninstalled markdown-it-py-4.2.0
+#7 0.915 
+#7 0.918 Successfully installed click-8.3.0 coverage-7.11.0 freezegun-1.5.0 httpx-sse-0.4.3 markdown-it-py-4.0.0 py-cpuinfo-9.0.0 pydantic-settings-2.11.0 pygments-2.19.2 pytest-benchmark-5.1.0 pytest-cov-7.0.0 python-dotenv-1.1.1 rapidfuzz-3.14.1 rich-14.2.0 ruamel-yaml-0.18.16 ruamel-yaml-clib-0.2.14 sse-starlette-2.4.1 starlette-0.48.0 tomlkit-0.13.3 typer-0.20.0 uvicorn-0.37.0
+#7 0.918 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#7 DONE 1.0s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.5s done
+#8 exporting manifest sha256:f60342e9c6a50933353ebea047b89935c75579541cf628f4fe4d15a1c0515e93 done
+#8 exporting config sha256:7fd5cc3aab31103a10ad6a8d4d2e4d7da770294669da724dea7a368b3bb0ec61 done
+#8 naming to docker.io/aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027 done
+#8 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027 0.1s done
+#8 DONE 0.6s
+
+View build details: docker-desktop://dashboard/build/default/default/7qlzl3e8or5mz9aviznpyjmbp

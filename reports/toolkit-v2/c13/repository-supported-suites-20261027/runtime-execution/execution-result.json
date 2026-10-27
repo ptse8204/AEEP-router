@@ -1,0 +1,386 @@
+{
+  "batch_completed": true,
+  "review_sha256": "558a4985a3661854feec76f2f5b459a5a5a8ef65d177fec2eae65407e750095a",
+  "source_digest": "4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "case_id": "modelcontextprotocol__python-sdk-222-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "modelcontextprotocol__python-sdk-384-aeep-contract-audit",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "elementsinteractive__twyn-317-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "reagento__dishka-512-declared-tests",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "prometheus__client_python-1134-aeep-contract-audit",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-1",
+      "receipt_id": "rcpt_4fe5c5f2913d4b2fb3b6a14f76177b41",
+      "receipt_ref": "5b1c85870f7cdca351be01356f2a0bceef7ff7360771896dbe0339e88254ecec",
+      "container_name": "aeep-5306e6875ae4c0dc56d0774dcb7cadd4",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-2",
+      "receipt_id": "rcpt_ef65a43074eb4f07bf378606e7bd9c89",
+      "receipt_ref": "b68fdb1be9ebf856b36f1a0374b5c39ca18f107d6947c810d04f346b948ddf0c",
+      "container_name": "aeep-db4e233319bc7ba6475803df6b6c29f0",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-3",
+      "receipt_id": "rcpt_3ca7aaaac9794856aa8490627c429e71",
+      "receipt_ref": "2dd15441393744481af38859434e1f252515b39422b08aae08b5ca57e2dae1a3",
+      "container_name": "aeep-8c0008dc33af3404fbb37dddf06440d9",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "modelcontextprotocol__python-sdk-222-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-4",
+      "receipt_id": "rcpt_9eadde86457a479ca6cd29b2f91f9a53",
+      "receipt_ref": "a4ae3e1bd6cd493cb04f68475a2f186c4ebc4b36f897ef91c7b2b557c4f0d096",
+      "container_name": "aeep-5460b13b49248243c5582f65b833a28f",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "modelcontextprotocol__python-sdk-384-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-5",
+      "receipt_id": "rcpt_32d5a3980ef047bd9cea142aeb9376f2",
+      "receipt_ref": "a1b2f8199cf2d069c7e1d89a525b5d055ed62d619e00c9c9cd8f5a49b71c053b",
+      "container_name": "aeep-5c38b1e19e3a8bfadc85692c6edd1868",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "lincolnloop__goodconf-51-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-6",
+      "receipt_id": "rcpt_d14fe6409db64266977b121e245f47dd",
+      "receipt_ref": "d40f8c538fce9335228f722b588ea272ae672ef485e1f5d20b8bf1f42f1c7872",
+      "container_name": "aeep-49de1f30648171cf0aac911c98a1d535",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "lincolnloop__goodconf-51-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-7",
+      "receipt_id": "rcpt_be6ab0c373c447c1ac61453e8d51c17c",
+      "receipt_ref": "245c5d519a4d754c8c574d574d2413540bcb63a3a3d955f76b50522167c0d373",
+      "container_name": "aeep-b0289cc473f89c95f0b87eee4fa8acc1",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "elementsinteractive__twyn-317-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-8",
+      "receipt_id": "rcpt_8dc2f30048f741d2be8170afcd0fc408",
+      "receipt_ref": "f7200002f69f7ac6578a2b836f22d99a90242544a0bfddda9bf48a7d833ffd24",
+      "container_name": "aeep-a0c5729bbe8bd70b476c4bc93c0a4c73",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "reagento__dishka-512-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-9",
+      "receipt_id": "rcpt_1ddf56d286874a82a4cbd742a5c7da29",
+      "receipt_ref": "d204bd41324c15443ace04b09e9075afdcf78afa43d200f5468b04c2dced621e",
+      "container_name": "aeep-7392de20bb84fbdc1e5e27f4432df9ba",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "reagento__dishka-512-declared-tests-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-10",
+      "receipt_id": "rcpt_394f2487370f48c5adfee332c73d52bf",
+      "receipt_ref": "e486e4d494e81737b0da997f5912748aa396daf8ebdaf15169717f144fb7e8a7",
+      "container_name": "aeep-9c33ee9bde36ef8ddf48236f0f43bac6",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "prometheus__client_python-1134-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-11",
+      "receipt_id": "rcpt_9728d562e55f400a99d8c7eed4da709b",
+      "receipt_ref": "a50eab0b82cff4ac9165240e37c46d4308abacce66220e559d84328b35fb78de",
+      "container_name": "aeep-4f3fc3b0f0e95efd5653abfe17729793",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    },
+    {
+      "name": "prometheus__client_python-1134-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-12",
+      "receipt_id": "rcpt_5c3b5e22606e4849a8ced59ed6be706d",
+      "receipt_ref": "bfb97ba065a3eb09fbe2f99a270d62d14483f33463b37550fee700fccb09b963",
+      "container_name": "aeep-179c4a8c3117c107cbef0c7b1cccf106",
+      "container_removed": true,
+      "environment_digest": "f6d3ac09b400aea35673a39fbe4bfd399485981a676deb5772af0b1dc9f8ad76"
+    }
+  ],
+  "observations": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-1",
+      "raw_file": "raw-observation-1.json",
+      "raw_sha256": "e049fafc5fc3c722ec7a34f48df7b442a1a151dd529ce8b8088edb12aa45e71d",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-2",
+      "raw_file": "raw-observation-2.json",
+      "raw_sha256": "e20365bc867c979f4903d83c63932305050c7df2b212c34646130e079a529b47",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-3",
+      "raw_file": "raw-observation-3.json",
+      "raw_sha256": "8286e68157802d7166976d21c0def974ec69f96a4af8ea2063c6b6ad3ac6bba9",
+      "execution_error_type": null
+    },
+    {
+      "name": "modelcontextprotocol__python-sdk-222-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-4",
+      "raw_file": "raw-observation-4.json",
+      "raw_sha256": "be42d3fa190945db95821b1c741408ced32d7e3cdf16e220e29683af3287e65c",
+      "execution_error_type": null
+    },
+    {
+      "name": "modelcontextprotocol__python-sdk-384-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-5",
+      "raw_file": "raw-observation-5.json",
+      "raw_sha256": "99af1c7af589d2c9a38d5fa7de2e52ac9af9df2d5567858e846d096287281e95",
+      "execution_error_type": null
+    },
+    {
+      "name": "lincolnloop__goodconf-51-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-6",
+      "raw_file": "raw-observation-6.json",
+      "raw_sha256": "eb911115c4bc0ef727f2dcd785835f2b1da6912e7fce0af550c55474b9b6f4ae",
+      "execution_error_type": null
+    },
+    {
+      "name": "lincolnloop__goodconf-51-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-7",
+      "raw_file": "raw-observation-7.json",
+      "raw_sha256": "742d8605fa580b449590804787d7c07383588762d9d91d067969a92191702c4a",
+      "execution_error_type": null
+    },
+    {
+      "name": "elementsinteractive__twyn-317-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-8",
+      "raw_file": "raw-observation-8.json",
+      "raw_sha256": "f8dfcc3db669a7df52f1686a17c6621b6d79e10ff466edf1168109d97aa198e4",
+      "execution_error_type": null
+    },
+    {
+      "name": "reagento__dishka-512-declared-tests-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-9",
+      "raw_file": "raw-observation-9.json",
+      "raw_sha256": "8783d5629b93eb6a44819332e9d47c090223c9f414bffc294e7d1440a1b1f277",
+      "execution_error_type": null
+    },
+    {
+      "name": "reagento__dishka-512-declared-tests-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-10",
+      "raw_file": "raw-observation-10.json",
+      "raw_sha256": "7673676c616f49fa09790de6cc510adbb7cf88cd3dfcf8af4b542e3b4f9787ac",
+      "execution_error_type": null
+    },
+    {
+      "name": "prometheus__client_python-1134-aeep-contract-audit-reference",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-11",
+      "raw_file": "raw-observation-11.json",
+      "raw_sha256": "e9aebf5539be4d800d1a0cfa62346511b76eb63903b5bd8da9655bf9f8bf4720",
+      "execution_error_type": null
+    },
+    {
+      "name": "prometheus__client_python-1134-aeep-contract-audit-counterexample",
+      "operation_id": "recipe_generation_69efd261559f4906a4007b0861118911-call-12",
+      "raw_file": "raw-observation-12.json",
+      "raw_sha256": "aa152dad9a18003a61fbd60b7061856293cad91893be48eb81ca624ebc170c30",
+      "execution_error_type": null
+    }
+  ],
+  "grant_before": [
+    13120,
+    3755,
+    119683.36628471874,
+    "0.0"
+  ],
+  "ledger_operations": 14,
+  "contained_calls_started": 12,
+  "elapsed_complete": true,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "eligible_cases": 3,
+  "grant_after": [
+    13134,
+    3755,
+    119716.31834351085,
+    "0.0"
+  ],
+  "elapsed_seconds": 33.00554029177874,
+  "cases_adopted": 0
+}

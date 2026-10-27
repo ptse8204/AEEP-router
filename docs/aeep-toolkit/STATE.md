@@ -1,13 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved review be8b0e5f ran once. The offline
-16-wheel image build and three fresh probes passed; four of five repository tasks
-reproduced. CanvasAPI had a collection error and remains excluded. All 12 physical
-receipts/attempts and 15 completed operations reconciled; zero model turns/cash
-were added. The provisional pool is now 39 cases across 24 repositories, with
-102 cases still missing from the planned balanced stages. C13 remains IN_PROGRESS.
-The preceding six real development repairs and package/docs checks remain passed;
-usefulness, selection, human controls, resource acceptance and release stay open.**
+**Status as of 2026-10-27: approved review c81557a2 completed once. The offline
+22-wheel image build and three fresh probes passed; Goodconf, Dishka and Prometheus
+reproduced. Both MCP cases and Twyn had collection errors and remain excluded.
+All12 physical receipts/attempts and15 completed operations reconciled; zero model
+turns/cash were added. The provisional pool is42 cases across27 repositories,
+with99 cases still missing from the planned balanced stages. C13 remains IN_PROGRESS.
+Usefulness, selection, human controls, resource acceptance and release stay open.**
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -49,17 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '07dbcac'
-last_check_command: 'repository-independent-sources-20261024/run-bundle.py be8b0e5f...; runtime-execution/audit-execution.py; consolidate-results.py'
-last_check_result: 'Approved be8b0e5f executed once. Imageb0eb4add built offline from324a1fee with16 exact wheels; three probes passed. MSAL audit and SQLacodegen/LMStudio/ModelBakery repairs reproduced. CanvasAPI reference collection ERROR/exit2;62 required identities absent, exact traceback unretained. All12 attempts/receipts reopened,15 operations complete,29.984952959697694 operation-seconds charged,zero models/cash. Owned containers/canary removed; both images retained. Pool39/24repos/2546 identities:15single,18multi,6audit;102 cases still needed. Product source4cb unchanged.'
-next_action: 'Read repository-supported-suites-20261027/README.md and exact approval-bundle SHA c81557a2. Six cached suites/22 optional grader wheels are prepared, unapproved and unexecuted.140 pins,30 grader guards,22 classifier checks and pure derivation passed. Actual exact approval is required for one new image and at most20 offline calls/23 operations/1030 reserved seconds/zero models or cash. No architecture decision or broad source/package rerun is needed. Preserve terminalbe8b0e5f,39-case pool,all counters and expiry amendment. Consolidate only actual future accepted evidence.'
+last_verified_commit: '213f526'
+last_check_command: 'repository-supported-suites-20261027/run-bundle.py c81557a2...; runtime-execution/audit-execution.py; consolidate-results.py'
+last_check_result: 'Approved c81557a2 executed once. Imagef60342e9 built offline fromb0eb4add with22 exact wheels; three probes passed. Goodconf/Prometheus audits and Dishka repair reproduced; MCP222/MCP384/Twyn reference collection ERROR/exit2, causes unretained. All12 attempts/receipts reopened,15 operations complete,35.61532362597063 operation-seconds charged,zero models/cash. Owned containers/canary absent; both images retained. Pool42/27repos/2613 identities:16single,18multi,8audit;99 cases still needed. Product source4cb unchanged.'
+next_action: 'Read repository-supported-suites-20261027/RESULTS.md. Prepare a separate bounded operator diagnostic for MCP222/MCP384/Twyn on retainedf603 and CanvasAPI on retainedb0: sanitized exception categories/module identifiers only, no raw logs or grade promotion. New exact execution authority is required; do not retry terminal reviews or install guessed fixes. Continue static corpus work independently. No architecture or broad source/package/docs rerun is needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Prepared c81557a2 needs actual exact approval for22 cached optional grader supports and six cached suites:one offline image,three fresh probes/17 reference-counterexample-partial variants,maximum20 calls/23 operations/1030 reserved seconds,zero models/cash. Terminalbe8b0e5f covers different artifacts. No architecture decision, new destination, host install, release or old-image cleanup is requested.'
+  - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
   - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
@@ -3633,3 +3632,21 @@ Markdownlint; new relative links passed the first-party check. The original
 third-party license text has an RST equals-sign heading and trailing space flagged
 by Git's diff checker; they were verified against the pinned artifacts and kept
 unchanged. This is not an unresolved product merge or a new source failure.
+
+## Six-suite reproduction completed October 27
+
+Approved `c81557a2` completed once. Goodconf, Dishka and Prometheus reproduced;
+both MCP snapshots and Twyn remain excluded after collection errors. Exact
+exception causes were not retained. All12 physical receipts/attempts and15
+operations reconciled, charging35.61532362597063 seconds and zero models/cash.
+The unchanged canary and owned containers are absent; retained image `f60342e9`
+grew8,527,902 bytes from retained `b0eb4add`. No old image or volume was removed.
+
+[Results](../../reports/toolkit-v2/c13/repository-supported-suites-20261027/RESULTS.md)
+and [the pool](../../reports/toolkit-v2/c13/repository-supported-suites-20261027/provisional-pool.json)
+retain42 snapshots/27 repositories/2613 required identities. Counts are16 single,
+18 multi,8 audit;99 additional cases are needed. Old source/runtime bindings and
+all charges remain. Source4cb and completed source/package checks are unchanged.
+No qualification, usefulness, selection, resource acceptance or release gate closes.
+A bounded diagnostic must establish collection causes before proposing fixes;
+terminal execution authority cannot be reused.

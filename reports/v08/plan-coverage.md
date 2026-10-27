@@ -5700,3 +5700,21 @@ and new local-link checks passed. Git diff-check warnings come from verbatim
 upstream AUTHORS text (RST heading/trailing space) and a raw build log; exact
 licensed/evidence bytes remain preserved. No product source changed and the
 completed source/package checks were not repeated.
+
+## Toolkit cached-suite execution completed October 27
+
+Approved `c81557a2` completed once. Goodconf, Dishka and Prometheus reproduced;
+both MCP snapshots and Twyn remain excluded after collection errors. Exact
+exception causes were not retained. All12 physical receipts/attempts and15
+operations reconciled, charging35.61532362597063 seconds and zero models/cash.
+The unchanged canary and owned containers are absent; retained image `f60342e9`
+grew8,527,902 bytes from retained `b0eb4add`. No old image or volume was removed.
+
+[Results](../toolkit-v2/c13/repository-supported-suites-20261027/RESULTS.md)
+and [the pool](../toolkit-v2/c13/repository-supported-suites-20261027/provisional-pool.json)
+retain42 snapshots/27 repositories/2613 required identities. Counts are16 single,
+18 multi,8 audit;99 additional cases are needed. Old source/runtime bindings and
+all charges remain. Source4cb and completed source/package checks are unchanged.
+No qualification, usefulness, selection, resource acceptance or release gate closes.
+A bounded diagnostic must establish collection causes before proposing fixes;
+terminal execution authority cannot be reused.
