@@ -1179,3 +1179,15 @@ needs explicit adapter framing for application logging; its pinned body remains
 unchanged. Do not publish a bug report or contribution without operator authority.
 The46-case pool retains exact image, source and operator-profile bindings; this
 is neither benchmark qualification nor proof of capability usefulness.
+
+## Effective image/pytest adapter preparation, October27
+
+[Review27efdd79](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/README.md)
+is unapproved/unexecuted. Cached dateutil2.9.0.post0,six1.17.0 andtzdata2025.2 have
+existing official wheel/license pins. Future probes verify image locations rather
+than loading them privately. The pinned SWE-rebench parser body remains unchanged;
+an explicit operator adapter frames status rows. Seven synthetic checks preserve
+module errors/unexpected tests and reproduce the observed malformed map without
+claiming to recover the original successful log. No subject ran. The46-case pool,
+source86012,installed wheel and existing checks are unchanged. No new core service
+or benchmark/value/selection/resource claim is made.

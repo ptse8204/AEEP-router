@@ -5854,3 +5854,16 @@ transfer probe runtime evidence across portable-wheel profiles or infer usefulne
 Prepare effective-runtime and parser-framing corrections under a new exact review.
 Later state/evidence additions are outside the completed docs snapshot's content
 binding; no claim of a fresh checker run is made for those additions. C13 stays open.
+
+### Effective repository runtime correction prepared — October27
+
+[Review27efdd79](../toolkit-v2/c13/repository-effective-runtime-20261027/README.md)
+is prepared/unapproved/unexecuted:three cached support wheels,bootstrap-only image
+probes and explicit pytest-row framing,then16 variants across the six exclusions.
+At most19 calls/22 operations/995 reserved seconds,zero models/cash.79 bindings,
+30 grader guards,22 classifier checks,seven observer fixtures and accounting/
+derivation controls pass. No source/package rerun is needed for unchanged bytes.
+The pool remains46,with95cases missing. C13 remains open pending exact execution
+and later qualification,usefulness,selection,resource and human-control evidence.
+Raw image-build.log trailing space and docs-check.log final blank line from81cce633
+remain verbatim;they are evidence formatting findings,not first-party source errors.

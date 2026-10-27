@@ -1815,3 +1815,16 @@ No old failure becomes a pass. A changed optional runtime/observer needs a new
 exact review and fresh calls. The unchanged installed wheel already passed19
 checks; do not reinstall it merely because corpus preparation continues. Keep
 qualification, usefulness, selection and resource acceptance independent.
+
+### D109 correction prepared
+
+[Review27efdd79](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/README.md)
+adds only three cached support wheels to the retained image and tests their
+actual image locations with bootstrap-only probe payloads. An explicit operator
+adapter frames pytest result rows before the unchanged upstream parser. Seven
+synthetic cases preserve collection errors,unexpected IDs and failure behavior;
+no real subject result is inferred. Default product behavior stays unchanged.
+The review covers six excluded subjects and zero model turns. Source and wheel
+checks remain applicable without reinstalling unchanged artifacts. Execution needs
+one new exact approval; terminal81cce633 remains intact. No new core dependency,
+framework,service or architecture choice is introduced.

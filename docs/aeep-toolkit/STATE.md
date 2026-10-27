@@ -3809,3 +3809,37 @@ an image-bound correction from retained cached wheels, and test parser framing
 against first-party logs without dispatch. Finish a concrete new review before
 any further untrusted execution. Terminal81cce633 cannot be retried or reused;
 no package rerun is needed for the unchanged wheel. No architecture choice exists.
+
+## Effective-runtime correction prepared October27
+
+[The new exact review](../../reports/toolkit-v2/c13/repository-effective-runtime-20261027/README.md)
+27efdd79 is prepared, unapproved and unexecuted. It uses retained2a057881 plus
+three cached wheels:python-dateutil2.9.0.post0,six1.17.0,tzdata2025.2. Fresh probes
+supply only four pytest bootstrap wheels and require date-support module and
+distribution locations inside image site-packages. This corrects the prior
+portable/image confusion without claiming complete inherited inventory.
+
+The explicit operator adapter frames pytest status rows before the unchanged
+pinned parser; stock product observer and protected grading remain. Seven
+whole-observer fixtures preserve real test/error rows, unexpected IDs, nonzero
+exits and missing-result rejection. The old malformed map is reproduced only
+from constructed first-party log data; the actual passing stream is unavailable.
+Thirty grader guards,22 classifier checks,seven budget guards,seven envelope
+guards,persisted definitions,shadow checks and pure image derivation pass.
+No subject,build or install ran in preparation.
+
+Scope:one private offline3-wheel image build,three fresh probes and16 fixed
+variants across six previously excluded cases;at most19 calls/22 existing-grant
+operations/995 reserved seconds,zero models/cash. All images remain;only new
+owned containers/unchanged canary are removed. No downloads,pulls,credentials,
+new services,package/docs reruns,activation or release. Source86012 and wheelce0a
+are unchanged,so their passing checks were not repeated. Historical raw-log
+whitespace stays verbatim. The46-case pool and current13162/3755/
+119767.50089859497/0.0grant counters are unchanged;95cases remain.
+
+Next:record actual exact approval in the new directory's `operator-approval.json`,
+run `run-bundle.py` once with `runtime-review.json` SHA-256,then reconcile all
+canonical observations and charges. The old81cce633 approval cannot authorize
+this correction or reuse unused slots. No architecture or budget decision is
+needed. Continue corpus/qualification/value/selection preparation safely; no
+scientific,resource,human-control or release gate closes from static fixtures.
