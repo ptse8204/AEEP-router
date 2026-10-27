@@ -6,6 +6,10 @@ six operations reconciled; zero models/cash were added. The pool now has44 cases
 across29 repositories, with97 cases missing from the balanced stages. C13 remains
 IN_PROGRESS. Qualification, usefulness, selection, human controls, resource
 acceptance and release stay open.**
+Current source86012b45 adds explicit v4 protected test roots. All13 source gates
+passed, including both1703-test runs and both coverage gates. This is engineering
+verification; the44-case pool keeps its prior source/runtime bindings. The next
+runtime/package/docs execution review is being prepared and is not authorized.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -47,10 +51,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '9977945'
-last_check_command: 'repository-library-reproduction-20261027/runtime-execution/run.py f0261e6d...; audit-execution.py; consolidate-results.py'
-last_check_result: 'Approved f0261e6d completed4 calls once. Both audits reproduced;4 canonical receipts/attempts,6 completed operations and10.159214583225548 seconds reconciled;zero models/cash. Owned containers absent,all images retained,no installs/builds/downloads/probes. Pool44/29repos/2686 identities:16single,18multi,10audit;97 missing. Source4cb unchanged.'
-next_action: 'Review the verified grader layout limit: legitimate package-local test identities such as gabbi/tests are rejected by the tests/-only v1-v3 contract. Prepare an explicit versioned protected-test-root extension under routine engineering authority, retaining old semantics, assertion/identity rules, budgets and archive bounds. Do not move tests, alter frozen cohorts or execute new upstream software. Source/runtime changes require fresh applicable evidence before any live trial.'
+last_verified_commit: '91c7d21'
+last_check_command: 'repository-test-roots-20261027/run-source-checks.py; legacy compatibility and operator-observer synthetic checks'
+last_check_result: 'All13 source checks passed on86012b45;both full runs1703passed/21skipped,82%coverage,both branch gates. Actual retainedd02cb953 v3 recipe reconstructs identically.24 new root-contract tests included.18 bounded source reads produced9 inert v4 cases;8 are proposed for runtime review,Sopel excluded.12 support wheels/1743060bytes and unchanged JSONPath modules have verified source/license pins. No new upstream execution/models/installations after terminalf0261e6d.'
+next_action: 'Read repository-test-roots-20261027/README.md. Finish one exact combined review for8 v4 source tasks,one private12-wheel image with data-only JSONPath source copy, fresh containment checks, updated-wheel installation verification and cached offline docs. Preserve44 historical bindings;no conformance transfer. Actual untrusted execution needs specific approval after artifacts and static checks are frozen. Do not repeat terminalsource42772 or execute old terminal reviews.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -3725,3 +3729,28 @@ published identities begin `gabbi/tests/`, but the current contract only accepts
 without changing v1-v3 meanings, assertions, identities, thresholds or size bounds.
 It is engineering preparation, not authority for new subject execution or a passed
 scientific gate. No architecture decision is pending.
+
+## Explicit protected test roots implemented October 27
+
+[The v4 increment](../../reports/toolkit-v2/c13/repository-test-roots-20261027/README.md)
+preserves published package-local test paths through exact operator-owned roots.
+Legacy v1–v3 meanings, archive bounds, assertions and acceptance thresholds remain;
+the actual retainedd02cb953 recipe rebuilds identically. Same observer, grader,
+container and accounting; no new core dependency or service.
+
+All13 source gates passed on86012b45. Both full runs passed1703 tests/21 skips,
+coverage82%,both branch gates passed;compile,schemas,Ruff,policy,mypy and builds
+passed. Source session42772 is terminal. The44-case pool keeps old source/runtime
+bindings; no qualification or conformance transfers. New metadata spans213
+candidate rows/97 repositories, not213 reproducible tasks. Eighteen bounded source
+reads produced9 inert cases;Sopel is deferred for its runtime/install requirements.
+
+Eight proposed v4 cases retain1033 required identities. Static closure pins12
+optional grader wheels/1743060bytes. The source-only JSONPath library is unchanged,
+its license commit matches all six files, and its embedded1.3.0 version is recorded
+separately from distribution1.4.0. No setup.py runs. The proposed operator observer
+can retain bounded public failure tails under exact future approval;four synthetic
+checks preserve the stock evaluation. This repairs the diagnostic information gap
+without a replay or a default product-retention change. No upstream code, image,
+installation or model turn ran. Finish the concrete combined runtime/package/docs
+review before requesting its one necessary execution approval.

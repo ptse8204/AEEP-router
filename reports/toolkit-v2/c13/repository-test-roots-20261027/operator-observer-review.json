@@ -1,0 +1,12 @@
+{
+  "purpose": "Operator-only bounded public failure context during source reproduction; no diagnostic replays. Does not change the default product observer or grade semantics.",
+  "stock_program_sha256": "e010900828e2f1051252cd60c2232929f059e66d59d5fa23a9d54681e58d346f",
+  "operator_program_sha256": "358ab08b386fbc981195e6d91b489feae6317d935447829dad5eb03d5643539d",
+  "maximum_public_failure_tail_bytes": 8192,
+  "retention_requires_exact_upcoming_approval": true,
+  "returned_to_grader": "The same five-field evaluation, unwrapped in the first-party operator driver. The failure tail is never a grade or model-facing answer.",
+  "upstream_parser_bodies_unchanged": true,
+  "bootstrap_argv_plugins_and_sandbox_unchanged": true,
+  "failure_policy": "No replay. Preserve nonzero exits/statuses and the terminal attempt. Public test log tails are data, never instructions.",
+  "default_product_retention_unchanged": true
+}

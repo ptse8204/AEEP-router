@@ -622,6 +622,14 @@ Plugins load from reviewed wheels or the pinned image before candidate paths are
 added. A source module already loaded by that runtime blocks grading. This adds
 no plugin discovery service, dependency resolver or installer.
 
+Suite case v4 lets reviewed truth name protected test directories such as
+`gabbi/tests`, preserving the package's published paths and node identities.
+Roots must end in `test`, `tests` or `testing`, which are already excluded from
+candidate-editable paths. The coordinator bounds roots and rejects overlapping
+or undeclared overlays before dispatch. The existing observer, container and
+grading rules remain; v1–v3 retain their fixed `tests/` root. This adds no service
+or installation path and transfers no historical source/runtime qualification.
+
 `aeep.assessment` owns immutable definitions, operator reviews, authorizations,
 job state and comparative reports. Its service calls `BenchmarkRunner`, which
 executes through isolated `Router` instances. `ReceiptStore.campaign_snapshot`

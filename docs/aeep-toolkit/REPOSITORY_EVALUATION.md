@@ -302,3 +302,24 @@ parser or host executable. It remains whole-file replacement, with no unified-di
 syntax or claim of token/time/cash savings. V1/v2 encodings, schemas, recipe digests
 and limits remain unchanged. New definitions still need applicable source-bound
 runtime checks and execution authority; fixtures cannot qualify the new transport.
+
+## Package-local protected test directories
+
+Use `assessment.repository-suite-case.v4` when published test identities use a
+package-local directory such as `gabbi/tests`. Keep the original paths and all
+assertions. Protected truth adds `test_roots: ["gabbi/tests"]`; v4 otherwise uses
+v3's compressed patch format and optional explicit plugins. Selectors, conftest
+overlays and fixture files must remain below those exact reviewed roots.
+
+Declare one to eight canonical relative roots ending in `test`, `tests` or
+`testing`. Roots cannot overlap. Every selected module must lie below a root;
+overlays outside them fail before dispatch. Candidate source edits still cannot
+touch a test directory or configuration. Roots are coordinator-owned truth, so
+an agent cannot supply or enlarge them. V1–v3 keep their fixed `tests/` root and
+reject `test_roots`.
+
+Export and review the new definition before execution. Source hashes, runtime
+pins, archive limits, required identities and acceptance thresholds still apply.
+Existing reproduction receipts retain their original grader bindings. Synthetic
+checks of this contract do not establish upstream compatibility, qualification
+or usefulness; those require fresh applicable evidence and execution authority.

@@ -1123,3 +1123,28 @@ published identities begin `gabbi/tests/`, but the current contract only accepts
 without changing v1-v3 meanings, assertions, identities, thresholds or size bounds.
 It is engineering preparation, not authority for new subject execution or a passed
 scientific gate. No architecture decision is pending.
+
+## Package-local source layouts and exact optional supports
+
+[The v4 increment](../../reports/toolkit-v2/c13/repository-test-roots-20261027/README.md)
+preserves published package-local test paths through exact operator-owned roots.
+Legacy v1–v3 meanings, archive bounds, assertions and acceptance thresholds remain;
+the actual retainedd02cb953 recipe rebuilds identically. Same observer, grader,
+container and accounting; no new core dependency or service.
+
+All13 source gates passed on86012b45. Both full runs passed1703 tests/21 skips,
+coverage82%,both branch gates passed;compile,schemas,Ruff,policy,mypy and builds
+passed. Source session42772 is terminal. The44-case pool keeps old source/runtime
+bindings; no qualification or conformance transfers. New metadata spans213
+candidate rows/97 repositories, not213 reproducible tasks. Eighteen bounded source
+reads produced9 inert cases;Sopel is deferred for its runtime/install requirements.
+
+Eight proposed v4 cases retain1033 required identities. Static closure pins12
+optional grader wheels/1743060bytes. The source-only JSONPath library is unchanged,
+its license commit matches all six files, and its embedded1.3.0 version is recorded
+separately from distribution1.4.0. No setup.py runs. The proposed operator observer
+can retain bounded public failure tails under exact future approval;four synthetic
+checks preserve the stock evaluation. This repairs the diagnostic information gap
+without a replay or a default product-retention change. No upstream code, image,
+installation or model turn ran. Finish the concrete combined runtime/package/docs
+review before requesting its one necessary execution approval.

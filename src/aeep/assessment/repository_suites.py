@@ -138,6 +138,10 @@ class SuiteTruth(StrictModel):
 
     @model_validator(mode='after')
     def oracle(self) -> SuiteTruth:
+        self._check_oracle(['tests'])
+        return self
+
+    def _check_oracle(self, test_roots: list[str]) -> None:
         names = self.fail_to_pass + self.pass_to_pass
         if (len(set(names)) != len(names) or len(json.dumps(names)) > 300_000
                 or any(not name or any(char.isspace() for char in name) for name in names)):
@@ -146,14 +150,13 @@ class SuiteTruth(StrictModel):
             raise ValueError('duplicate test module')
         for path in self.test_paths:
             checked_files({path: ''})
-            if not path.endswith('.py') or not path.startswith('tests/'):
+            if not path.endswith('.py') or not any(path.startswith(root + '/') for root in test_roots):
                 raise ValueError('suite test modules must be reviewed Python tests')
         if any(name.split('::')[0] not in self.test_paths or '::' not in name for name in names):
             raise ValueError('oracle identity lies outside selected test modules')
         filenames = [Path(asset.path).name for asset in self.wheels]
         if len(set(filenames)) != len(filenames) or any(not name.endswith('-none-any.whl') for name in filenames):
             raise ValueError('suite runtime requires distinct reviewed pure-Python wheels')
-        return self
 
 
 class SuiteTruthV2(SuiteTruth):
@@ -175,6 +178,24 @@ class SuiteTruthV3(SuiteTruthV2):
 
     patch_encoding: Literal['gzip-json']
     pytest_plugins: list[str] = Field(default_factory=list, max_length=8)
+
+
+class SuiteTruthV4(SuiteTruthV3):
+    """Exact operator-declared test directories; legacy roots stay unchanged."""
+
+    test_roots: list[str] = Field(min_length=1, max_length=8)
+
+    @model_validator(mode='after')
+    def oracle(self) -> SuiteTruthV4:
+        if len(set(self.test_roots)) != len(self.test_roots):
+            raise ValueError('duplicate protected test root')
+        for root in self.test_roots:
+            checked_files({root + '/__aeep_test_root__.py': ''})
+            if (str(PurePosixPath(root)) != root or PurePosixPath(root).name not in {'test', 'tests', 'testing'}
+                    or any(root.startswith(other + '/') for other in self.test_roots if other != root)):
+                raise ValueError('test roots require distinct canonical protected test directories')
+        self._check_oracle(self.test_roots)
+        return self
 
 
 class SuiteArtifact(StrictModel):
@@ -236,7 +257,7 @@ def _decode_suite_patch(oracle: SuiteTruth, value: Any) -> RepositoryPatch:
 
 def _suite_version_schema(schema: dict[str, Any]) -> None:
     # Reuse Pydantic's references so definition renaming remains valid.
-    compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
     schema['allOf'] = [
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
          'then': {'properties': {'truth': legacy_truth}}},
@@ -244,14 +265,16 @@ def _suite_version_schema(schema: dict[str, Any]) -> None:
          'then': {'properties': {'truth': plugin_truth}}},
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v3'}}, 'required': ['schema_version']},
          'then': {'properties': {'truth': compact_truth}}},
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v4'}}, 'required': ['schema_version']},
+         'then': {'properties': {'truth': rooted_truth}}},
     ]
 
 
 class RepositorySuiteCase(StrictModel):
     model_config = ConfigDict(json_schema_extra=_suite_version_schema)
-    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3'] = 'assessment.repository-suite-case.v1'
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4'] = 'assessment.repository-suite-case.v1'
     input: SuiteInput
-    truth: SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
+    truth: SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -265,9 +288,9 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
-        version = 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
+        version = 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
         if self.schema_version != 'assessment.repository-suite-case.' + version:
-            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3')
+            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
@@ -298,7 +321,7 @@ def public_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
     task = SuiteInput.model_validate(value)
-    oracle = (SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    oracle = (SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
@@ -315,7 +338,8 @@ async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], outpu
         if not set(task.editable_paths) <= files.keys():
             raise ConfigurationError('editable source absent from reviewed archive')
         tests = archive_files(oracle.tests.read())
-        if (any(not name.startswith('tests/') for name in tests)
+        test_roots = oracle.test_roots if isinstance(oracle, SuiteTruthV4) else ['tests']
+        if (any(not any(name.startswith(root + '/') for root in test_roots) for name in tests)
                 or set(tests) & set(task.editable_paths) or not set(oracle.test_paths) <= files.keys() | tests.keys()):
             raise ConfigurationError('protected test overlay conflicts with source scope')
         files.update({name: text.encode('utf-8') for name, text in patch.files.items()})
@@ -428,7 +452,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+                if any(isinstance(case.truth, SuiteTruthV4) for case in cases) else TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema()
                 if plugins else SuiteTruth.model_json_schema()),
             independent_fixtures=fixtures[:2], transformed_fixtures=fixtures[2:],

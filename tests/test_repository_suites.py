@@ -650,3 +650,137 @@ async def test_compact_patch_errors_fail_before_dispatch(suite_cases):
     for value in invalid:
         result = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'), value, no_probe)
         assert not result.valid and result.detail in ('patch_contract', 'input_binding')
+
+
+def rooted_case(case, roots=('package/tests',)):
+    current = compact_case(case)
+    data = current.model_dump(mode='json')
+    data['schema_version'] = 'assessment.repository-suite-case.v4'
+    truth = data['truth']
+    truth['test_roots'] = list(roots)
+    truth['test_paths'] = [n.replace('tests/', roots[0] + '/', 1) for n in truth['test_paths']]
+    for key in ('fail_to_pass', 'pass_to_pass'):
+        truth[key] = [n.replace('tests/', roots[0] + '/', 1) for n in truth[key]]
+    files = {n.replace('tests/', roots[0] + '/', 1): value for n, value in archive_files(current.truth.tests.read()).items()}
+    if len(roots) > 1:
+        extra = roots[1] + '/test_extra.py'
+        files[extra] = b'protected second-root fixture; never imported'
+        truth['test_paths'].append(extra)
+        truth['pass_to_pass'].append(extra + '::test_preserved')
+    path = Path(current.truth.tests.path).with_name('rooted-' + Path(current.truth.tests.path).name)
+    path.write_bytes(pack_files(files))
+    truth['tests'] = SuiteAsset(path=str(path), sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+        size_bytes=path.stat().st_size).model_dump(mode='json')
+    return RepositorySuiteCase.model_validate(data)
+
+
+def test_declared_test_roots_require_v4_and_preserve_legacy_recipes(suite_cases, tmp_path, capsys):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.repository_suites import SuiteTruthV3, SuiteTruthV4
+
+    before = repository_suite_recipe(suite_cases)
+    case = rooted_case(suite_cases[0])
+    assert isinstance(case.truth, SuiteTruthV4)
+    validator = Draft202012Validator(RepositorySuiteCase.model_json_schema())
+    validator.validate(case.model_dump(mode='json'))
+    for version in ('v1', 'v2', 'v3'):
+        wrong = {**case.model_dump(mode='json'), 'schema_version': 'assessment.repository-suite-case.' + version}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    without_roots = case.model_dump(mode='json')
+    del without_roots['truth']['test_roots']
+    with pytest.raises(ValueError):
+        RepositorySuiteCase.model_validate(without_roots)
+    with pytest.raises(ValidationError):
+        validator.validate(without_roots)
+    with pytest.raises(ValueError):
+        SuiteTruthV3.model_validate(case.truth.model_dump(mode='json'))
+    recipe = repository_suite_recipe([case, *suite_cases[1:]])
+    assert recipe.recipe_id != before.recipe_id
+    assert content_digest(repository_suite_recipe(suite_cases)) == content_digest(before)
+    assert 'SuiteTruthV4' not in before.extension.truth_schema.get('$defs', {})
+    assert 'SuiteTruthV4' in recipe.extension.truth_schema['$defs']
+    assert reference_outputs(recipe, [case.input.model_dump(mode='json')]) == [json.loads(case.reference.read())]
+    from aeep_toolkit.cli import main
+
+    path = tmp_path / 'rooted-cases.json'
+    path.write_text(json.dumps([c.model_dump(mode='json') for c in [case, *suite_cases[1:]]]))
+    assert main(['repository-suite-recipe', '--cases', str(path)]) == 0
+    exported = json.loads(capsys.readouterr().out)
+    assert exported['generator_config']['cases'][0]['truth']['test_roots'] == ['package/tests']
+
+
+@pytest.mark.parametrize('roots', [[], ['tests'] * 2, ['a' + str(n) + '/tests' for n in range(9)],
+    [''], ['.'], ['/tests'], ['../tests'], ['pkg/../tests'], ['pkg//tests'], ['pkg/tests/'],
+    ['pkg\\tests'], ['pkg/Tests'], ['library'], ['.git/tests'], ['pkg/.codex/tests'],
+    ['pkg/tests\n'], ['tests', 'tests/inner/testing']])
+def test_declared_roots_reject_escapes_ambiguity_and_source_directories(suite_cases, roots):
+    from aeep.assessment.repository_suites import SuiteTruthV4
+
+    truth = {**rooted_case(suite_cases[0]).truth.model_dump(mode='json'), 'test_roots': roots}
+    with pytest.raises(ValueError):
+        SuiteTruthV4.model_validate(truth)
+
+
+@pytest.mark.asyncio
+async def test_declared_roots_preserve_exact_ids_in_multiple_protected_directories(suite_cases):
+    case = rooted_case(suite_cases[0], roots=('package/tests', 'test'))
+    seen = []
+
+    async def probe(payload):
+        assert payload['test_paths'] == ['package/tests/test_core.py', 'test/test_extra.py']
+        files = archive_files(base64.b64decode(payload['archive']))
+        assert files['package/tests/test_core.py'].startswith(b'protected oracle')
+        assert files['test/test_extra.py'].startswith(b'protected second-root')
+        assert files['library/core.py'] == b'def value():\n    return 42\n'
+        seen.append(payload)
+        return success(payload, case.truth)
+
+    grade = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'),
+        json.loads(case.reference.read()), probe)
+    assert grade.valid and len(seen) == 1
+
+
+@pytest.mark.asyncio
+async def test_declared_roots_cannot_change_tests_or_inject_undeclared_overlays(suite_cases):
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    case = rooted_case(suite_cases[0])
+    async def forbidden(payload):
+        raise AssertionError('A forbidden edit or overlay reached dispatch')
+
+    output = compressed_patch_artifact(RepositoryPatch(base_sha256=content_digest(case.input),
+        files={'package/tests/test_core.py': 'forged'}))
+    grade = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'), output, forbidden)
+    assert not grade.valid and grade.detail == 'patch_contract'
+    with pytest.raises(ValueError, match='tests or configuration'):
+        SuiteInput.model_validate({**case.input.model_dump(mode='json'), 'editable_paths': ['package/tests/test_core.py']})
+    tests = archive_files(case.truth.tests.read())
+    for outside in ('tests/test_undeclared.py', 'package/tests_other/test_undeclared.py', 'library/core.py'):
+        path = Path(case.truth.tests.path)
+        encoded = pack_files({**tests, outside: b'forged'})
+        await asyncio.to_thread(path.write_bytes, encoded)
+        truth = {**case.truth.model_dump(mode='json'), 'tests': SuiteAsset(path=str(path),
+            sha256=hashlib.sha256(encoded).hexdigest(), size_bytes=len(encoded)).model_dump(mode='json')}
+        with pytest.raises(ConfigurationError, match='protected test overlay'):
+            await grade_suite_output(case.input.model_dump(mode='json'), truth, json.loads(case.reference.read()), forbidden)
+
+
+@pytest.mark.parametrize('kind', ['duplicate', 'whitespace', 'outside_module', 'wrong_root'])
+def test_declared_roots_retain_required_identity_guards(suite_cases, kind):
+    from aeep.assessment.repository_suites import SuiteTruthV4
+
+    truth = rooted_case(suite_cases[0]).truth.model_dump(mode='json')
+    if kind == 'duplicate':
+        truth['pass_to_pass'] = truth['fail_to_pass']
+    if kind == 'whitespace':
+        truth['pass_to_pass'] = ['package/tests/test_core.py::test with space']
+    if kind == 'outside_module':
+        truth['pass_to_pass'] = ['package/tests/absent.py::test_preserved']
+    if kind == 'wrong_root':
+        truth['test_roots'] = ['other/tests']
+    with pytest.raises(ValueError):
+        SuiteTruthV4.model_validate(truth)

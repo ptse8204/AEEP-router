@@ -1096,4 +1096,15 @@ bound compressed bytes at 500000 and expanded patch JSON at 4000000 before parsi
 It MUST retain canonical existing-source paths, input binding, protected tests,
 archive/payload bounds and all correctness guards. Compression grants no execution
 or installation authority. V3 MAY declare the same reviewed pytest plugins as
-v2, including an empty list. Only v3 may use the expanded patch-file byte limit.
+v2, including an empty list. The expanded patch-file limit MUST NOT apply to v1/v2.
+
+`assessment.repository-suite-case.v4` inherits v3 and requires protected truth to
+declare `test_roots`: one to eight distinct canonical relative directories ending
+in `test`, `tests` or `testing`. Roots MUST NOT overlap. Every selected test module
+and protected overlay member MUST lie below a declared root. Candidate-editable
+paths MUST remain outside test directories and configuration. Roots belong to
+operator-reviewed truth, never model arguments or patch artifacts. V1–v3 MUST
+retain their `tests/` root and reject the new field. Required identities, assertion
+checks, archive/payload bounds, runtime pins, qualification thresholds and execution
+authority are unchanged. New source/runtime bindings require applicable evidence;
+existing receipts do not qualify a changed grader.
