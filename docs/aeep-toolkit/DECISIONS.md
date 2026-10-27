@@ -1674,3 +1674,22 @@ all charges remain. Source4cb and completed source/package checks are unchanged.
 No qualification, usefulness, selection, resource acceptance or release gate closes.
 A bounded diagnostic must establish collection causes before proposing fixes;
 terminal execution authority cannot be reused.
+
+### D103 — Diagnose exact failed collections without speculative installs
+
+[The exact review](../../reports/toolkit-v2/c13/repository-collection-diagnostics-20261027/README.md)
+`faa10772` is prepared, unapproved and unexecuted. It covers only the four unresolved
+collections on their original retained images: MCP222, MCP384, Twyn and CanvasAPI.
+The public payloads, tests, bootstrap and plugins are unchanged; a separate
+operator collector returns only sanitized exception categories and reviewed public
+identifiers. Completed containment evidence is reused. No grade or task eligibility
+can be inferred, even if a diagnostic exits successfully.
+
+Static preparation passed37 pins,13 sanitizer guards,three whole-collector synthetic
+error/timeout/oversized checks,seven budget guards and actual driver definition/
+authority persistence in a removed synthetic database. No subject code ran.
+The four-call bound is6 existing-grant operations/290 reserved seconds,zero models
+or cash. No build, install, download, new probe, host canary or package/docs rerun
+is requested. Product source4cb and the42-case pool are unchanged;99 cases remain.
+Actual execution needs one specific approval; routine finite definitions and
+expiry amendments remain delegated. No architecture decision is pending.

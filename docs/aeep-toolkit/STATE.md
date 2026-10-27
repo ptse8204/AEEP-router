@@ -48,16 +48,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '213f526'
+last_verified_commit: 'ba26d35'
 last_check_command: 'repository-supported-suites-20261027/run-bundle.py c81557a2...; runtime-execution/audit-execution.py; consolidate-results.py'
 last_check_result: 'Approved c81557a2 executed once. Imagef60342e9 built offline fromb0eb4add with22 exact wheels; three probes passed. Goodconf/Prometheus audits and Dishka repair reproduced; MCP222/MCP384/Twyn reference collection ERROR/exit2, causes unretained. All12 attempts/receipts reopened,15 operations complete,35.61532362597063 operation-seconds charged,zero models/cash. Owned containers/canary absent; both images retained. Pool42/27repos/2613 identities:16single,18multi,8audit;99 cases still needed. Product source4cb unchanged.'
-next_action: 'Read repository-supported-suites-20261027/RESULTS.md. Prepare a separate bounded operator diagnostic for MCP222/MCP384/Twyn on retainedf603 and CanvasAPI on retainedb0: sanitized exception categories/module identifiers only, no raw logs or grade promotion. New exact execution authority is required; do not retry terminal reviews or install guessed fixes. Continue static corpus work independently. No architecture or broad source/package/docs rerun is needed.'
+next_action: 'Read repository-collection-diagnostics-20261027/README.md and operation-review SHA faa10772. Four exact failed-reference diagnostics on retainedf603/b0 are prepared, not approved or executed;37 assets,13 sanitizer guards,three whole-collector synthetic checks,seven budget guards and exact driver persistence/authority checks passed. At most4 offline calls/6 existing-grant operations/290 reserved seconds,zero models/cash;reuse applicable containment evidence,no builds/installs/downloads or redundant probes. Record actual exact approval once before run.py. Keep42-case pool,all failures/counters/images and frozen thresholds;no architecture or budget choice is needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Prepared faa10772 needs exact execution approval for4 offline collection diagnostics on the same two retained images:6 existing-grant operations/290 reserved seconds,zero models/cash. Terminalc81557a2/be8b0e5f bind older observers and forbid retries. No build/install/download,host canary,package/docs rerun,architecture or infrastructure decision is requested.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
   - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
   - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
@@ -3650,3 +3651,22 @@ all charges remain. Source4cb and completed source/package checks are unchanged.
 No qualification, usefulness, selection, resource acceptance or release gate closes.
 A bounded diagnostic must establish collection causes before proposing fixes;
 terminal execution authority cannot be reused.
+
+## Bounded collection diagnostic prepared October 27
+
+[The exact review](../../reports/toolkit-v2/c13/repository-collection-diagnostics-20261027/README.md)
+`faa10772` is prepared, unapproved and unexecuted. It covers only the four unresolved
+collections on their original retained images: MCP222, MCP384, Twyn and CanvasAPI.
+The public payloads, tests, bootstrap and plugins are unchanged; a separate
+operator collector returns only sanitized exception categories and reviewed public
+identifiers. Completed containment evidence is reused. No grade or task eligibility
+can be inferred, even if a diagnostic exits successfully.
+
+Static preparation passed37 pins,13 sanitizer guards,three whole-collector synthetic
+error/timeout/oversized checks,seven budget guards and actual driver definition/
+authority persistence in a removed synthetic database. No subject code ran.
+The four-call bound is6 existing-grant operations/290 reserved seconds,zero models
+or cash. No build, install, download, new probe, host canary or package/docs rerun
+is requested. Product source4cb and the42-case pool are unchanged;99 cases remain.
+Actual execution needs one specific approval; routine finite definitions and
+expiry amendments remain delegated. No architecture decision is pending.
