@@ -1,8 +1,7 @@
 # Preserve compact profiles and support larger real repositories
 
-The completed pool has51 cases and90 remain. The diverse-source sample retained
-sixteen of twenty archives only partially because they exceeded650000 compressed
-bytes. Another sample had nineteen of thirty over that cap. Those are operational
+The completed pool has51 cases and90 remain. The diverse-source sample excluded
+sixteen of twenty archives because they exceeded650000 compressed bytes. Another sample had nineteen of thirty over that cap. Those are operational
 transport exclusions, not evidence that the tasks or capabilities lack value.
 
 Before any holdout freeze, add a separately reviewed suite-case v5 archive profile.

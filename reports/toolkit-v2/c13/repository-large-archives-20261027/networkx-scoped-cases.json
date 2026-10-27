@@ -1,0 +1,174 @@
+{
+  "prepared_cases": 2,
+  "cases_file": ".aeep/repository-large-networkx-cases-20261027/cases.json",
+  "cases_file_sha256": "f184dc8b390b92b7e3cd059da5947f4f6be53bd194dd99f596fc450f7702987b",
+  "variants_file": ".aeep/repository-large-networkx-cases-20261027/variants.json",
+  "cases": [
+    {
+      "id": "networkx__networkx-7804-declared-tests",
+      "original_issue_id": "networkx__networkx-7804",
+      "repository": "networkx/networkx",
+      "revision": "b369de6e892c1f0932f6118d322aed55cb0618f6",
+      "family": "single-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-large-source-review-20261027/networkx__networkx-7804",
+      "source_sha256": "a33dacd4a71eff180fdf5cd5f61457d0cd31b3338128537b94b3bd3f0d790c64",
+      "source_bytes": 2272481,
+      "executable_changed_files": [
+        "networkx/generators/expanders.py"
+      ],
+      "reference_changed_files": [
+        "networkx/generators/expanders.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "edit_scope_adaptation": "Only existing Python files under published changed-source parent directories; avoids a package-wide editable list over256. Full source/tests and every assertion/identity remain unchanged.",
+      "required_tests": 41,
+      "upstream_required_identities": [
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander[4-2000]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_properties[2]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_properties[3]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_properties[5]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_properties[6]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_properties[10]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_eigvals[2]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_eigvals[3]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_eigvals[5]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_eigvals[6]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_eigvals[10]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph[3]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph[5]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph[7]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph[11]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph[3]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph[5]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph[7]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph[11]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph[13]",
+        "networkx/generators/tests/test_expanders.py::test_maybe_regular_expander[2-7]",
+        "networkx/generators/tests/test_expanders.py::test_maybe_regular_expander[4-10]",
+        "networkx/generators/tests/test_expanders.py::test_maybe_regular_expander[4-16]",
+        "networkx/generators/tests/test_expanders.py::test_is_regular_expander[3]",
+        "networkx/generators/tests/test_expanders.py::test_is_regular_expander[5]",
+        "networkx/generators/tests/test_expanders.py::test_is_regular_expander[6]",
+        "networkx/generators/tests/test_expanders.py::test_is_regular_expander[10]",
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander[2-7]",
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander[4-10]",
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander[4-16]",
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander_explicit_construction",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_badinput[Graph]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_badinput[DiGraph]",
+        "networkx/generators/tests/test_expanders.py::test_margulis_gabber_galil_graph_badinput[MultiDiGraph]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph_badinput[Graph]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph_badinput[DiGraph]",
+        "networkx/generators/tests/test_expanders.py::test_chordal_cycle_graph_badinput[MultiDiGraph]",
+        "networkx/generators/tests/test_expanders.py::test_paley_graph_badinput",
+        "networkx/generators/tests/test_expanders.py::test_maybe_regular_expander_badinput",
+        "networkx/generators/tests/test_expanders.py::test_is_regular_expander_badinput",
+        "networkx/generators/tests/test_expanders.py::test_random_regular_expander_badinput"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-large-archives-20261027/licenses/networkx__networkx-7804/LICENSE.txt",
+          "sha256": "5b433b90f755eb9bbd06feff1d1a4f5f232c5208a185694199e45fa95d762792",
+          "bytes": 1763
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "test_roots": [
+        "networkx/generators/tests"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "networkx__networkx-8055-aeep-contract-audit",
+      "original_issue_id": "networkx__networkx-8055",
+      "repository": "networkx/networkx",
+      "revision": "679191810fc962e282b606622c90355f2e6f58ad",
+      "family": "contract-audit",
+      "origin_kind": "authored_control",
+      "source_record": ".aeep/repository-large-source-review-20261027/networkx__networkx-8055",
+      "source_sha256": "f4eae90e78abac6e86f139d571609b49a9e5468491ff21961be49a121fe6fac3",
+      "source_bytes": 2577546,
+      "executable_changed_files": [
+        "networkx/algorithms/isomorphism/ismags.py"
+      ],
+      "reference_changed_files": [
+        "networkx/algorithms/flow/maxflow.py",
+        "networkx/algorithms/isomorphism/ismags.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "edit_scope_adaptation": "Only existing Python files under published changed-source parent directories; avoids a package-wide editable list over256. Full source/tests and every assertion/identity remain unchanged.",
+      "required_tests": 11,
+      "upstream_required_identities": [
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSelfIsomorphism::test_self_isomorphism",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSelfIsomorphism::test_directed_self_isomorphism",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSelfIsomorphism::test_edgecase_self_isomorphism",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSubgraphIsomorphism::test_isomorphism",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSubgraphIsomorphism::test_isomorphism2",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSubgraphIsomorphism::test_labeled_nodes",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestSubgraphIsomorphism::test_labeled_edges",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestWikipediaExample::test_graph",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestLargestCommonSubgraph::test_mcis",
+        "networkx/algorithms/isomorphism/tests/test_ismags.py::TestLargestCommonSubgraph::test_symmetry_mcis"
+      ],
+      "authored_preservation_guard": true,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-large-archives-20261027/licenses/networkx__networkx-8055/LICENSE.txt",
+          "sha256": "3cf7c3a179d817b23b8b8568211769fefdf93797d207d984b8b2fa24d0220b33",
+          "bytes": 1763
+        }
+      ],
+      "declared_python": "3.11",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [],
+      "test_roots": [
+        "networkx/algorithms/isomorphism/tests"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": [
+    {
+      "case": "networkx__networkx-7804-declared-tests",
+      "variant": "reference",
+      "payload": ".aeep/repository-large-networkx-cases-20261027/networkx__networkx-7804-declared-tests/reference-payload.json",
+      "sha256": "9220363ba2419798ee1d015b7bbe000778e885f1977c6c720fd8e86cdb35e8df",
+      "bytes": 3613838
+    },
+    {
+      "case": "networkx__networkx-7804-declared-tests",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-large-networkx-cases-20261027/networkx__networkx-7804-declared-tests/counterexample-payload.json",
+      "sha256": "d1e9c05738514be93da40cc496c9dcdce4daedb10cbb0d978fe1f0f9bd969480",
+      "bytes": 3613838
+    },
+    {
+      "case": "networkx__networkx-8055-aeep-contract-audit",
+      "variant": "reference",
+      "payload": ".aeep/repository-large-networkx-cases-20261027/networkx__networkx-8055-aeep-contract-audit/reference-payload.json",
+      "sha256": "80c3e4fa7b7519409bdf007219a9b74915dbc8ec40dca9a8cf509df71cf20100",
+      "bytes": 4022533
+    },
+    {
+      "case": "networkx__networkx-8055-aeep-contract-audit",
+      "variant": "counterexample",
+      "payload": ".aeep/repository-large-networkx-cases-20261027/networkx__networkx-8055-aeep-contract-audit/counterexample-payload.json",
+      "sha256": "d29f185cf5a0e81251041b8f0715a166666b0843a03425c2d19e1b8aee8440d5",
+      "bytes": 4022133
+    }
+  ],
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false
+}

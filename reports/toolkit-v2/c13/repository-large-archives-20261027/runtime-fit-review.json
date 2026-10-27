@@ -1,0 +1,13 @@
+{
+  "active_cases": 6,
+  "active_variants": 12,
+  "active_repositories": 3,
+  "cloud_cases_deferred": [
+    "piskvorky__smart_open-889-declared-tests",
+    "piskvorky__smart_open-892-aeep-contract-audit"
+  ],
+  "cloud_reason": "Selected tests/test_s3.py directly imports boto3,botocore,moto. Their mocked AWS runtime is outside this image review;assertions are not removed.",
+  "graph_dependency": "NetworkX7804 source imports scipy.sparse.linalg.eigsh for the declared spectral tests;exact SciPy wheel fetch/installation is proposed,not performed.",
+  "pexpect_not_added": "It occurs only in an unrelated Cyclopts completion conftest,not the selected test modules/ancestor conftest. No extra install is justified.",
+  "new_subject_or_install_execution": false
+}

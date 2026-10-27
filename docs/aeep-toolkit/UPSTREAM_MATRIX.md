@@ -1201,3 +1201,19 @@ metadata identities,despite899 reported passes. No metadata ID or threshold was
 changed. The51-case pool retains source/recipe/image bindings. Image df79d0f3 and
 all prior images remain;there is no new core dependency or installed-host change.
 No package/docs run,model trial,usefulness or selection evidence is implied.
+
+## Larger repository runtime preparation, October27
+
+[The prepared review](../../reports/toolkit-v2/c13/repository-large-archives-20261027/README.md)
+keeps AEEP's existing runner/container/accounting and the pinned upstream pytest
+parser. Source1fde passed all13 engineering gates. No external evaluator was
+replaced with a new core service. Suite-case v5 expands explicit source transport;
+earlier profiles and the actual frozen d02 recipe remain unchanged.
+
+Six inert snapshots from Cyclopts, NetworkX and Isort need six cached optional
+wheels plus SciPy1.15.3. Official artifact metadata and licenses are pinned; SciPy's
+35MB wheel has not been downloaded, installed or imported. Its required base
+NumPy range includes the image's2.2.6. Fresh probes must verify actual image paths
+and a small sparse calculation. Expanded footprint and subject compatibility
+remain unknown. Smart-open's AWS stack stays deferred. No benchmark qualification,
+value, selector or resource claim follows from preparation or synthetic controls.

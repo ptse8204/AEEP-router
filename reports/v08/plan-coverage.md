@@ -5878,3 +5878,25 @@ images remain;owned containers/canary are absent. Source86012/wheelce0a unchange
 no source,package or docs rerun. The pool is51cases/33repos;90cases remain. C13 and
 scientific/resource/human gates stay open. New source curation is next;do not
 replay the terminal review or replace missing parameter IDs with passes.
+
+
+### Larger repository transport verified; execution prepared — October27
+
+Source1fde passed [all13 checks](../toolkit-v2/c13/repository-large-archives-20261027/validation/checks.json):
+1724tests in both full runs,21skips,82%coverage,both branch gates. The actual frozen
+d02 recipe reconstructs identically. Do not repeat the unchanged terminal run.
+[The next combined review](../toolkit-v2/c13/repository-large-archives-20261027/README.md)
+is prepared, not approved or executed: six larger Cyclopts/NetworkX/Isort subjects,
+seven optional image wheels including one exact35MB SciPy fetch, four fresh probes
+and twelve variants, current-wheel19 installed checks and cached offline docs.
+Smart-open S3 cases are deferred for their separate AWS stack. All images remain.
+
+The finite runtime maximum is20calls/27operations/1420reserved seconds,zero models
+or cash. It includes two data-fetch attempts,one build and bounded first-party
+control repairs with unchanged software/tasks/assertions/source and known cleanup.
+No uncertain retry or counter reset is permitted. Current13181/3755/
+119818.4486230514/0.0 counters and the51-case provisional pool remain unchanged;
+90cases are missing. No scientific/resource/human-control/release gate closes.
+`make docs-check` for the new document snapshot needs its exact untrusted-checker
+approval. The historical34 lint findings and raw upstream/license/log whitespace
+remain preserved; they do not justify rewriting evidence. No architecture decision.

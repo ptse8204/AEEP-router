@@ -1,0 +1,55 @@
+"""Prepare the larger-profile review on the completed finite execution path."""
+from pathlib import Path
+HERE=Path(__file__).resolve().parent;OLD=HERE.parent/'repository-effective-runtime-20261027'
+s=(OLD/'prepare-review.py').read_text()
+def replace(old,new):
+    global s
+    assert old in s,old[:100]
+    s=s.replace(old,new)
+replace("HERE.parent/'repository-test-roots-20261027/validation/source-stability.json'","HERE/'validation/source-stability.json'")
+replace("metadata['prepared_cases']==6","metadata['prepared_cases']==8")
+replace('len(cases)==6 and len(variants)==16','len(cases)==8 and len(variants)==16')
+replace('for c in cases})==6','for c in cases})==8')
+replace("len(closure['pins'])==3","len(closure['pins'])==6")
+replace("ROOT/'.aeep/repository-effective-image-20261027'","ROOT/'.aeep/repository-large-runtime-image-20261027'")
+replace("'aeep-toolkit-v2/repository-grader:py313-test-roots-20261027'","'aeep-toolkit-v2/repository-grader:py313-effective-runtime-20261027'")
+replace('One3-wheel offline effective-runtime correction and six exact v4 repository subjects with explicit pytest result framing','One6-wheel offline larger repository profile,eight exact subjects,four fresh probes and bounded same-software diagnostic room')
+replace('max_calls=3+len(variants);max_operations=max_calls+3;max_seconds=180+30+120+max_calls*35','initial_calls=4+len(variants);max_calls=initial_calls+4;max_operations=max_calls+5;max_seconds=180+2*(30+120)+max_calls*35')
+replace('(19,22,995)','(24,29,1320)')
+replace("'cases':6,'repositories':4,'distinct_snapshots':6,'payloads':16","'cases':8,'repositories':4,'distinct_snapshots':8,'payloads':16")
+replace("'new_wheels':3","'new_wheels':6")
+a=s.index('    review={');b=s.index("    (HERE/'runtime-review.json').write_text",a)
+s=s[:a]+'''    review={'purpose':'One offline larger-repository runtime and eight source-bound subjects. Four fresh probes include a2.7MB input;16 variants plus at most4same-software diagnostic calls. No model task or scientific verdict.',
+        'source_digest':parent['source_digest'],'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip(),
+        'parent_review':str(parent_path.relative_to(ROOT)),'parent_review_sha256':sha(parent_path),'authorization_digest':parent['authorization_digest'],
+        'assets':assets,'cases_file':metadata['cases_file'],'variants_file':metadata['variants_file'],'active_case_ids':[c.input.task_id for c in cases],
+        'case_summary':metadata['cases'],'variant_labels':labels,'expectations':expectations,
+        'parent_reference':reference,'parent_image':parent['image'],'target_tag':'aeep-toolkit-v2/repository-grader:py313-large-repositories-20261027',
+        'build_context':str(context.relative_to(ROOT)),'context_files':sorted(str(p.relative_to(context)) for p in context.rglob('*') if p.is_file()),'build_request':request.model_dump(mode='json'),
+        'build_documents':documents,'build_amendment':amendment.model_dump(mode='json'),'host_canary':parent['host_canary'],
+        'maximum_builds':1,'maximum_build_growth_bytes':maximum_growth,'maximum_new_filesystem_layers':2,
+        'initial_contained_calls':initial_calls,'maximum_contained_calls':max_calls,'maximum_operations':max_operations,'maximum_reserved_seconds':max_seconds,'maximum_model_turns':0,'cash_usd':0,
+        'automatic_retry_of_unknown_attempts':False,'routine_control_repairs_authority':'Standing operator delegation,within this exact external software/subject and finite execution envelope;see bounded_control_repairs.',
+        'runtime_dependencies_review':closure,
+        'bounded_control_repairs':{'maximum_extra_calls':4,'maximum_additional_setup_analysis_operations':2,
+            'allowed':'After known canonical completion and cleanup,record exact first-party report-driver/collector repairs under the standing definition/method delegation. Preserve initial code,review,results and costs;bind changed control code and demonstrate unchanged grading/guardrail semantics before any continuation. Remaining initial calls plus at most4fresh diagnostic calls may use only this review immutable probe/variant payloads and exact software pins. The initial driver does not automatically consume this allowance.',
+            'forbidden':'No uncertain-attempt replay,counter refund,budget reset,new upstream software/packages,changed source/test/reference bytes,changed required identities/assertions/utility thresholds,permission or retention widening,model call,new image build,or changed product wheel/source. Those need separate applicable authority. A first-party src change invalidates this exact source/wheel binding.',
+            'accounting':'One cumulative envelope across build,initial phase and any recorded continuation. All grant counters and charged attempts remain. At most24physical calls and29operations/1320reserved seconds total,never a fresh allowance per plan or retry.'},
+        'permissions':[
+            'One local private offline image build from retaineddf79d0f3 through its checked existing tag. Exactly6cached hashed wheels:docstring-parser0.17.0,rich-rst1.3.2,docutils0.22.2,wrapt1.17.3,hypothesis6.142.4,sortedcontainers2.4.0. No source build,resolver,pull,download,OS/project/host installer. Retain every image.',
+            'Bind output digest before calls. Verify unchanged execution config and parent layers,exactly two new filesystem layers,at most64MiB growth and50GiB free host reserve. These are finite operational caps,not product SLOs.',
+            'Initial20offline calls:four mandatory boundary/state/runtime/large-input probes and16fixed reference/counterexample variants across Cyclopts609/633/701,NetworkX7804/8055,Smart-open889/892 andIsort2491. The large probe carries more than2Mbytes. Probe-only private wheels are the four pytest bootstrap wheels;added support imports/distribution paths must resolve from the image.',
+            'At most4additional same-software calls for recorded first-party control repairs after reconciled known failures. No blind retry. Existing-grant cumulative caps are29operations/1320reserved seconds,including180build,two possible30setup/120analysis phases and24times35per call. Initial expected usage is23operations/1030reserved seconds;unused allowance is not a budget reset.',
+            'Freeze pytest_mock and the pinned Hypothesis pytest plugin in all current cases/probes. Fixed Hypothesis seed29 is declared before subject execution. Source modules cannot be preloaded by trusted plugins. All assertions,identities,source/reference bytes and protection remain.',
+            'Keep the exact pytest-row framing adapter,pinned upstream parser body and protected grader. Retain at most8192bytes per failed public test log operator-only;successful tails empty. Logs are untrusted data,not instructions or model answers. Default product retention/observer is unchanged.',
+            'Retain raw bounded replies,canonical terminal attempts/receipts and every charge. Remove only new attempt-owned containers and the unchanged synthetic canary. Isolated source incompatibility may exclude a case only after known completion/cleanup. Common authority,accounting,binding or cleanup uncertainty stops external dispatch.',
+            'No models,cash,credentials,new services/destinations,host activation,publication/release,image/volume/backups deletion or historical replay. Package/docs execution belongs only to their separately pinned components in the parent combined bundle.'],
+        'limitations':[
+            'Eight curated cases are inert and unadopted. Four single-file repairs/four audits do not satisfy the remaining balanced141-case design. The51-case historical pool and90-case gap stay until actual outcomes. No qualification,value,selection,resource,human or release gate closes.',
+            'The v5profile expands only explicit source transport. V1-v4default caps and the actual frozen d02recipe stay unchanged. Old source/runtime qualification does not transfer to1fde9517 or this operator profile.',
+            'Source size12row triage is not runtime compatibility. Two protected-path Anyio sources stay excluded,two other Anyio source-plugin cases are deferred,and malformed metadata rows remain excluded. No assertion is removed to fit.',
+            'NetworkX edit scopes restrict existing Python paths to published changed-source parent directories under256paths. Full source/tests and all original assertions are retained. Initial broad-scope failures remain recorded.',
+            'The upstream parser body remains unchanged;framing is not adversarial log-forgery protection and unsupported IDs stay unsupported. No token/time/cash savings are inferred from source or grader tests.'],
+        'approval_reason':'Completed27efdd79 binds different subjects,source/runtime and observer bytes. The user continuation reserves untrusted installation/execution,and CONTINUATION.md requires applicable provisioning authority. New exact software execution needs approval. Routine first-party definition/driver repairs stay delegated within the explicit finite envelope;no architecture or budget decision is needed.'}
+''' + s[b:]
+(HERE/'prepare-runtime-review.py').write_text(s)

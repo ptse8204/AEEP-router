@@ -1852,3 +1852,21 @@ No new core service,installer,framework or database is needed. [The finite plan]
 records proposed bounds and required checks. They are hypotheses pending actual
 source/worker evidence,not production SLOs. Model arguments cannot raise them.
 Scientific thresholds,permissions,all old failures and the51-case pool stay intact.
+
+### D110 verification and execution scope
+
+Source1fde passed all13 gates and preserves the actual frozen d02 recipe. Reuse
+upstream pytest and the SWE-rebench parser; the optional grader runtime adds only
+packages required by the selected test closure. Six larger subjects are proposed.
+Smart-open S3 cases are deferred for their separate AWS mocking dependencies.
+NetworkX's spectral test requires one pinned SciPy1.15.3 binary, so the next review
+explicitly includes its bounded data download, metadata/license verification and
+private offline installation. No host/core dependency or service is added.
+
+The review reserves four same-software diagnostic calls and a second setup/analysis
+phase for first-party report controls. Repairs require exact recorded digests,
+unchanged scientific/protected semantics, known canonical completion and cleanup.
+No uncertain retry, new software/task bytes, permission change or product-source
+change fits that authority. All usage stays cumulative. The finite bounds are
+20 calls/27 operations/1420 reserved seconds, including two fetch attempts and one
+build. These limits govern this check; they do not establish product resource SLOs.

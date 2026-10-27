@@ -1,15 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved review f0261e6d completed once. Both library
-audits reproduced, retaining73 required identities. Four canonical receipts and
-six operations reconciled; zero models/cash were added. The pool now has44 cases
-across29 repositories, with97 cases missing from the balanced stages. C13 remains
-IN_PROGRESS. Qualification, usefulness, selection, human controls, resource
-acceptance and release stay open.**
-Current source86012b45 adds explicit v4 protected test roots. All13 source gates
-passed, including both1703-test runs and both coverage gates. This is engineering
-verification; the44-case pool keeps its prior source/runtime bindings. The next
-runtime/package/docs execution review is being prepared and is not authorized.
+**Status as of 2026-10-27: approved review 27efdd79 completed once and added five
+reproduced cases. The provisional pool is 51 snapshots across 33 repositories,
+with 90 cases missing from the balanced stages. C13 remains IN_PROGRESS.
+Qualification, comparative usefulness, selection, human controls, resource
+acceptance and release remain open.**
+Current source `1fde9517` adds an explicit larger repository profile. All 13 source
+gates passed: both full runs passed 1,724 tests with 21 skips, coverage is 82%, and
+both branch gates passed. The actual frozen legacy recipe reconstructs identically.
+This verifies engineering behavior; historical cases retain their old bindings.
+[The combined runtime/package/docs review](../../reports/toolkit-v2/c13/repository-large-archives-20261027/README.md)
+prepares six larger snapshots, an exact SciPy artifact fetch and private runtime,
+the current wheel check and cached offline docs. It has not been approved or run.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -51,16 +53,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '91c7d21'
-last_check_command: 'repository-test-roots-20261027/run-source-checks.py; legacy compatibility and operator-observer synthetic checks'
-last_check_result: 'All13 source checks passed on86012b45;both full runs1703passed/21skipped,82%coverage,both branch gates. Actual retainedd02cb953 v3 recipe reconstructs identically.24 new root-contract tests included.18 bounded source reads produced9 inert v4 cases;8 are proposed for runtime review,Sopel excluded.12 support wheels/1743060bytes and unchanged JSONPath modules have verified source/license pins. No new upstream execution/models/installations after terminalf0261e6d.'
-next_action: 'Read repository-test-roots-20261027/README.md. Finish one exact combined review for8 v4 source tasks,one private12-wheel image with data-only JSONPath source copy, fresh containment checks, updated-wheel installation verification and cached offline docs. Preserve44 historical bindings;no conformance transfer. Actual untrusted execution needs specific approval after artifacts and static checks are frozen. Do not repeat terminalsource42772 or execute old terminal reviews.'
+last_verified_commit: '6c5fae8'
+last_check_command: 'repository-large-archives-20261027/validation/checks.json; check-legacy-recipe.py; check-runtime-review.py; check-execution-controls.py; check-fetch-controls.py'
+last_check_result: 'All13 source gates passed on1fde9517; both full runs1724passed/21skipped,82%coverage,both branch gates. Frozen d02 recipe is identical. Six larger inert cases/twelve payloads are prepared;30 grader guards,22 classifier checks,seven observer fixtures,11 fetch/ledger controls and image-bound derivation pass. No new upstream execution,installation,build or model turn.'
+next_action: 'Read repository-large-archives-20261027/README.md and approval-bundle.json. Obtain one exact combined approval before the pinned SciPy download/private7-wheel build,4 fresh probes/12 variants, current-wheel19 installed checks and cached offline docs. Maximum20 calls/27 operations/1420 reserved seconds includes bounded same-software control diagnostics. Preserve51 historical bindings; no conformance transfer or model authority. Do not replay terminal27efdd79.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'New larger-repository combined bundle: exact SciPy35MB fetch, private7-wheel image, fixed upstream subjects, current wheel and cached docs need specific execution approval. No architecture or budget decision. Terminal27efdd79 completed once:19operations/16physical attempts/50.94772445643321seconds,zero models/cash;all charges and images remain.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
   - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
@@ -3907,3 +3910,37 @@ finish. The51-case pool and13181/3755/119818.4486230514/0.0 grant counters stay;
 check actual old recipe reconstruction,complete effective dependency/observer
 reviews,then prepare one combined exact runtime/package/docs approval. Preserve
 all images,old source bindings,charges and scientific/resource/human gate statuses.
+
+## Larger repository profile verification and prepared execution — October27
+
+[All 13 source checks](../../reports/toolkit-v2/c13/repository-large-archives-20261027/validation/checks.json)
+passed on `1fde9517`: 1,724 tests in each full run, 21 skips, 82% coverage and both
+branch gates. The actual frozen d02 recipe is unchanged. A mutable later cache
+initially supplied different historical fault bytes; its failed comparison remains
+recorded and the frozen evidence was not rewritten. Source checks are complete;
+do not repeat unchanged terminal session9879. Wheel60466 is built, not installed.
+
+Six larger cases across Cyclopts, NetworkX and Isort are prepared, with twelve
+reference/counterexample variants. Four mandatory probes include actual image
+imports and a 2.7 MB input. Smart-open S3 tests need an AWS mocking stack and stay
+deferred; unrelated Cyclopts completion dependencies are not installed. SciPy
+1.15.3 needs one exact35MB binary fetch; metadata/license pins are retained, but
+the binary has not been downloaded or executed. The proposed private image adds
+seven exact wheels and keeps its df79 parent and every older image.
+
+The combined review permits at most two exact artifact fetch attempts, one build,
+20 contained calls, 27 operations and 1,420 reserved seconds on the existing grant,
+zero models/cash. Sixteen calls form the initial phase. Up to four extra calls and
+one extra setup/analysis phase cover only recorded first-party report controls
+with unchanged external software, task bytes, assertions, permissions and source.
+Known completion and cleanup are required; uncertain attempts cannot be replayed.
+This explicit finite room avoids a new approval for each routine driver repair.
+Image-growth256MiB and free-host50GiB are execution bounds, not product SLOs.
+
+Current counters remain13181operations/3755turns/119818.4486230514seconds/0.0cash.
+The51-case historical pool and90-case gap are unchanged. No new software, build,
+subject or model has run in this preparation. Current package installation and
+`make docs-check` remain pending exact approval. No architecture decision is open.
+After approval, run the combined driver once, reopen canonical receipts/attempts
+and reconcile charges before curation or any later model comparison. No C13
+scientific, resource, human-control or release gate closes from these fixtures.
