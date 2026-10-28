@@ -1,0 +1,53 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 761B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/repository-grader:py313-large-repositories-20261027
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 5.86MB 0.1s done
+#4 DONE 0.1s
+
+#5 [1/4] FROM docker.io/aeep-toolkit-v2/repository-grader:py313-large-repositories-20261027@sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-large-repositories-20261027@sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f 0.0s done
+#5 DONE 0.3s
+
+#6 [2/4] COPY python_can-4.6.1-py3-none-any.whl canmatrix-1.2-py3-none-any.whl asn1crypto-1.5.1-py2.py3-none-any.whl cbor2-5.6.5-py3-none-any.whl pyopenssl-25.3.0-py3-none-any.whl lxml-6.0.2-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl docformatter-1.7.5-py3-none-any.whl toposort-1.10-py3-none-any.whl requirements.txt /opt/aeep-runtime/
+#6 DONE 0.1s
+
+#7 [3/4] RUN ["python3", "-m", "pip", "--isolated", "install", "--no-index", "--no-deps", "--no-compile", "--no-cache-dir", "--disable-pip-version-check", "--require-hashes", "-r", "/opt/aeep-runtime/requirements.txt"]
+#7 0.286 Processing /opt/aeep-runtime/python_can-4.6.1-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 1))
+#7 0.291 Processing /opt/aeep-runtime/canmatrix-1.2-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 2))
+#7 0.294 Processing /opt/aeep-runtime/asn1crypto-1.5.1-py2.py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 3))
+#7 0.295 Processing /opt/aeep-runtime/cbor2-5.6.5-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 4))
+#7 0.297 Processing /opt/aeep-runtime/pyopenssl-25.3.0-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 5))
+#7 0.299 Processing /opt/aeep-runtime/lxml-6.0.2-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl (from -r /opt/aeep-runtime/requirements.txt (line 6))
+#7 0.308 Processing /opt/aeep-runtime/docformatter-1.7.5-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 7))
+#7 0.309 Processing /opt/aeep-runtime/toposort-1.10-py3-none-any.whl (from -r /opt/aeep-runtime/requirements.txt (line 8))
+#7 0.321 Installing collected packages: toposort, canmatrix, asn1crypto, python-can, pyopenssl, lxml, docformatter, cbor2
+#7 0.521 
+#7 0.525 Successfully installed asn1crypto-1.5.1 canmatrix-1.2 cbor2-5.6.5 docformatter-1.7.5 lxml-6.0.2 pyopenssl-25.3.0 python-can-4.6.1 toposort-1.10
+#7 0.525 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#7 DONE 0.6s
+
+#8 [4/4] COPY untokenize-support/ /usr/local/lib/python3.13/site-packages/
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.4s done
+#9 exporting manifest sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85 done
+#9 exporting config sha256:35e939baef98fd774028d1626741d7df351ccf560d78e9674a406b709ca92ae8 done
+#9 naming to docker.io/aeep-toolkit-v2/repository-grader:py313-multifile-20261027 done
+#9 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-multifile-20261027 0.1s done
+#9 DONE 0.6s
+
+View build details: docker-desktop://dashboard/build/default/default/mbyh6qrg2inh3ypsrjaxrhbw2

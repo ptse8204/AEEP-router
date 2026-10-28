@@ -1,0 +1,402 @@
+{
+  "batch_completed": true,
+  "review_sha256": "0a97e257a293defe041a505bae4472f4b31e58435a18fee79704bd37e984318d",
+  "source_digest": "374579f1121ee62964613f5b5a392fa2063939feba9393c65086da8052f2ac13",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "case_id": "canopen-python__canopen-613-declared-tests",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "partial-1",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "partial-2",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "duo-labs__py_webauthn-241-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "partial-1",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tefra__xsdata-1126-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tefra__xsdata-1132-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "missing_test",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_or_missing_test_identity",
+            "unexpected_exit",
+            "unexpected_grade",
+            "required_test_status_mismatch"
+          ]
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-1",
+      "receipt_id": "rcpt_53548f16fbca4e5eb01434141700808f",
+      "receipt_ref": "33d16245f0284d155e3ed81553b2e9cb1fa1b737873b4e3188c80d376b94fc23",
+      "container_name": "aeep-003c8cdc8816f4cc5a3d2ce4fbb2fe44",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-2",
+      "receipt_id": "rcpt_a509f575a0174ea2b7b61045f0a993c4",
+      "receipt_ref": "9ff291c5709f431e6040856108d92c4a3c33abe3996dbdb9fa82fdf12627a5ee",
+      "container_name": "aeep-71f4c49dbca1ca56e62e68d3f36b5cc8",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-3",
+      "receipt_id": "rcpt_4789dfb322af4a20ba2a764227657682",
+      "receipt_ref": "3ca7d951500813e4f8bb3538cdc2c56b549e61c3b89f60f0c325a27dc06989d0",
+      "container_name": "aeep-31106475f66c49c3f53d399c88933649",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "probe-large_transport",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-4",
+      "receipt_id": "rcpt_0caad31770194bdbada942202aa81468",
+      "receipt_ref": "b0eff6f8a35cc624ed1ccabc6dd672b66d1d3ec23e0def5bebb7eab2d6a59577",
+      "container_name": "aeep-94a8d427d2717e5d1cf874996f93c3bf",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-5",
+      "receipt_id": "rcpt_a97afff8185b4101b4d4f8e006b13a2d",
+      "receipt_ref": "f8383eb90673f18aae6a365b5b81c22a2f42df607b8abdce7a22ae67651c91d3",
+      "container_name": "aeep-809050d8e31c61ad854e7984f7d6a60f",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-counterexample",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-6",
+      "receipt_id": "rcpt_55a0795a5cff425d9dae283e547c5fcd",
+      "receipt_ref": "720b473c16bfd4cdaff9dd1a40302a7b57dd0da1527c5f3e29b04a0ede597883",
+      "container_name": "aeep-8017bae601c3b10514264c36ecc72d04",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-partial-1",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-7",
+      "receipt_id": "rcpt_206144cbfb92462b9971dcbe4f2123f8",
+      "receipt_ref": "00c71cc8f3adbaad8d99f28a2bfd6345bad8ccd86c9bcfcf1ee483772b5c6279",
+      "container_name": "aeep-893b4fe68c7ba9abfa20a9ebcede9e39",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-partial-2",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-8",
+      "receipt_id": "rcpt_d8f5160baaf1449390d244b06bbeecf6",
+      "receipt_ref": "ff43abaae0e635e8aa974b1a9024dc79f22912fa9c337b4890cfa04146751ab9",
+      "container_name": "aeep-89b24a14264552e9e809b8a0d5dc5efa",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-9",
+      "receipt_id": "rcpt_e585b0bef7a54410b94213ed69b27a0d",
+      "receipt_ref": "56a2b7f00cc76e70459866bf42819904ac7a9e7f734556d3d4fcfd9d485a5c16",
+      "container_name": "aeep-dd90ee39240c2d44d1becdf4fa187205",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-counterexample",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-10",
+      "receipt_id": "rcpt_b16ed2bb6e48456791dad70cb696a7d9",
+      "receipt_ref": "928868463f82e782250e28e21102c20b6f358ffe616d5d71712ce9a7f75df383",
+      "container_name": "aeep-d3dea8cee9a105beab17e3a87deea96a",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-partial-1",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-11",
+      "receipt_id": "rcpt_ff74f4bb66e7473b991b476ea7829f45",
+      "receipt_ref": "7d3311761aa2911a52f4bd4515dc19db1beb69d6e0f2b2716204de21de3dab71",
+      "container_name": "aeep-4c4ec646ed813bea8538acc93fbe1fcc",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-12",
+      "receipt_id": "rcpt_89d66982901c4ce0b64f3ff44577af06",
+      "receipt_ref": "0196717a731958244175147325c4c85352acf1e69b30d67386bf8e3188408887",
+      "container_name": "aeep-1aefc110e12612fbdfd5d67efd61ca5b",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-13",
+      "receipt_id": "rcpt_b3b6c9203a734daf81f95084b65c994f",
+      "receipt_ref": "a2c7c5d0f16edcd451c430553efd533ef60e1d7c403ca13aa325473fb5f2521f",
+      "container_name": "aeep-5f49093d8f31cc484f6bf92a9c47a324",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    }
+  ],
+  "observations": [
+    {
+      "name": "probe-boundary",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-1",
+      "raw_file": "raw-observation-1.json",
+      "raw_sha256": "1b6582210782da870fdcc0749073436651363f61d4948cd13a1a3ccf059d2048",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_write",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-2",
+      "raw_file": "raw-observation-2.json",
+      "raw_sha256": "db6211105153a04bdf33eeee252b8ea4e66f35d023489a829f3b085646bd4ff4",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-state_read",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-3",
+      "raw_file": "raw-observation-3.json",
+      "raw_sha256": "18de64aae4344a7bbdb326bb7093c5c85dc379f3a2518beb7db8c838aad73cf3",
+      "execution_error_type": null
+    },
+    {
+      "name": "probe-large_transport",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-4",
+      "raw_file": "raw-observation-4.json",
+      "raw_sha256": "1d28c3ede75b9f5cc3a8d558b7f27a92f8577d2d52537f39f08c67a3874fea57",
+      "execution_error_type": null
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-5",
+      "raw_file": "raw-observation-5.json",
+      "raw_sha256": "ce93eec6fd52ff408699a7acd9012213ff89df71baaa55ade41a9edb299b9a8b",
+      "execution_error_type": null
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-counterexample",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-6",
+      "raw_file": "raw-observation-6.json",
+      "raw_sha256": "046f7f793a77470168d2a3f1da52beea68c0a23743ff4647395e2bf48af79983",
+      "execution_error_type": null
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-partial-1",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-7",
+      "raw_file": "raw-observation-7.json",
+      "raw_sha256": "685afe4ded9b4c6f1bd9d52ecdb6473be9fa219f107511adedd7c9fc156dcbfc",
+      "execution_error_type": null
+    },
+    {
+      "name": "canopen-python__canopen-613-declared-tests-partial-2",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-8",
+      "raw_file": "raw-observation-8.json",
+      "raw_sha256": "8b2dbf572a17320ddff15d9ae201dd5a9c48c7a6d23a5c7823c10ebbe97cd86a",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-9",
+      "raw_file": "raw-observation-9.json",
+      "raw_sha256": "b72a8f998bebefcfebc15328560e1478fa3c0fe23800179c29dc94488b605012",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-counterexample",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-10",
+      "raw_file": "raw-observation-10.json",
+      "raw_sha256": "4c21f70c4681d89f767b751e8a470e4b5d8d882070e82f0af10641a5d58254eb",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-declared-tests-partial-1",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-11",
+      "raw_file": "raw-observation-11.json",
+      "raw_sha256": "3f5a39dc16061b925647a64f8695ee30ae7ce5586b3686b5812d754bbd20b784",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-12",
+      "raw_file": "raw-observation-12.json",
+      "raw_sha256": "3bc469ec98ea287340552f7125ee089dd61e91a59242c4acb1cf7f1b61a48806",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-reference",
+      "operation_id": "recipe_generation_f359c0662e6d45f9945ce48c707198ea-call-13",
+      "raw_file": "raw-observation-13.json",
+      "raw_sha256": "05d562dbbcabb54b9d8c47b55065762f9dcead5d41fa8a9b3ddc2d7a2d976777",
+      "execution_error_type": null
+    }
+  ],
+  "grant_before": [
+    13207,
+    3755,
+    119883.73145455169,
+    "0.0"
+  ],
+  "ledger_operations": 15,
+  "contained_calls_started": 13,
+  "elapsed_complete": true,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "eligible_cases": 1,
+  "grant_after": [
+    13222,
+    3755,
+    119916.5088296351,
+    "0.0"
+  ],
+  "elapsed_seconds": 32.830158583354205,
+  "cases_adopted": 0
+}

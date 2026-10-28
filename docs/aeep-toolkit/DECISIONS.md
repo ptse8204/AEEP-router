@@ -1925,3 +1925,20 @@ pattern. Do not execute setup.py,reimplement tokenization or invent a version.
 Fresh probes must bind actual image paths,metadata and module hashes. The new
 software/subjects need exact authorization;no source/package regression is repeated
 for unchanged core bytes. Keep all initial exclusions and prior costs visible.
+
+## D113 — Let the issue contract determine the required repair
+
+WebAuthn241 asks for SafetyNet basicIntegrity checking. Its full published patch
+also removes an unrelated authentication-response field. A smaller repair that
+preserves that API satisfies the issue; do not force unrelated cleanup through a
+new assertion or count it as a necessary second file. Keep the original failed
+multi-file definition. Prepare a new SafetyNet-only task, restore both original
+auth assertions and retain all11 required identities. Reference, original and an
+integrity-bypass preservation fault must be checked under a new exact review.
+
+Xsdata requires its existing --benchmark-skip config option. Enable the already
+installed pytest_benchmark.plugin explicitly; preserve the option, source,
+reference, tests and identities. Reuse the four completed source374579f1/image9f47
+boundary/state probes and add one exact plugin/config probe. No new dependency,
+image, package regression or product source change is needed. Changed protected
+payloads require execution approval; routine finite definition work is delegated.

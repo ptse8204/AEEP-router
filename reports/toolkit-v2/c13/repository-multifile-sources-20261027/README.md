@@ -1,10 +1,10 @@
-# Four multi-file repository repairs — prepared,not executed
+# Four multi-file repository repairs — execution complete
 
 These tasks test whether a repair preserves behavior across two functional source
 files. Static review selected Canopen613,WebAuthn241 andXsdata1126/1132,with125
 required test identities and16 reference/counterexample/partial-repair variants.
-Each partial restores one changed source file;it must be rejected before a case
-can enter the provisional pool. No model,candidate or new subject has run here.
+Each partial restores one changed source file. [Actual results](RESULTS.md) admit
+only Canopen to the provisional pool. No model or candidate ran here.
 
 ## Curation and exclusions
 
@@ -64,11 +64,9 @@ selection,resource,human and release gates stay open.
 
 ## Resume
 
-Record actual approval for this bundle,then run `run-integration-bundle.py` once
-with its file SHA-256. No approval or execution marker is present. The completed
-4661ce49 review covers different subjects and no new dependencies. The user
-continuation reserves untrusted installation/execution,and CONTINUATION.md
-requires applicable image/container provisioning authority. Routine finite
-reviews/budget amendments remain delegated. No architecture or budget choice is
-needed. After execution,reopen receipts/attempts,verify cleanup and reconcile
-charges before adding any case. Keep rejected and unstarted outcomes explicit.
+The approved bundle completed once. Read [actual results](RESULTS.md) and
+[canonical accounting](final-accounting-audit.json). Do not rerun this driver.
+The new task-contract/plugin review is prepared separately; no unused slot or
+changed-payload authority transfers. Source verification and package checks remain
+current. The earlier preparation sections describe the frozen scope, not four
+successful reproductions.

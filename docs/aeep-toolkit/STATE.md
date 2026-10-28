@@ -1,24 +1,25 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-27: approved worker bundle4661ce49 completed all components.
-All four fresh probes passed,including large-input framing. Five of six repository
-cases reproduced; Isort remains excluded for missing installed project metadata.
-The corrected wheel's19 installed checks and exact offline docs snapshot passed.
-All15 attempts/receipts and17 operations reconcile;zero models/cash were added.**
-The provisional pool is56 snapshots across35 repositories,with85 cases missing
-from the balanced stages. C13,qualification,comparative usefulness,selection,
-human controls,resource acceptance and release remain open.
+**Status as of 2026-10-28: approved four-workload bundle ad0adfcf completed once.
+Canopen 613 reproduced; the old WebAuthn multi-file definition and both Xsdata
+configurations remain excluded. All four fresh probes and the exact offline docs
+snapshot passed. Thirteen completed receipts and 16 operations reconcile, charging
+35.3654196257703 seconds, zero models and zero cash.**
+The provisional pool is 57 snapshots across 36 repositories, with 3,067 required
+identities and 84 cases missing from the balanced stages (25 single/27 multi/32
+audit). C13, qualification, comparative usefulness, selection, human controls,
+resource acceptance and release remain open.
 Current source374579f1/commit1f7d27d passed all13 source gates:1,735 tests in each
-full run,21 skips,82%coverage and both branch gates. Its fresh container profile
-and wheel9b00 now have actual execution evidence. No unchanged source/package
-verification needs repetition. [Actual results](../../reports/toolkit-v2/c13/repository-worker-input-20261027/RESULTS.md)
-retain the earlier failed probe and every charge. Image2386 and all older images
-remain;all new owned containers/canary and unchanged private runtimes are removed.
-Independent multi-file source curation is continuing as inert data. Fourteen
-bounded public archive reads retained9,379,970bytes. Seven initial cases were
-prepared;two include a version bump plus one functional file and cannot be counted
-as multi-file behavior repairs. Pyinfra needs a separate project/runtime profile.
-New subject/dependency execution still requires a concrete exact review.
+full run,21 skips,82%coverage and both branch gates. Wheel9b00 passed19 installed
+checks. No unchanged source/package verification needs repetition.
+[Actual four-workload results](../../reports/toolkit-v2/c13/repository-multifile-sources-20261027/RESULTS.md)
+retain every failure and charge. New image9f473c49 and all older images remain;
+all new owned containers/canary and the unchanged docs runtime are removed.
+The WebAuthn issue asks only for SafetyNet; its published authentication API
+cleanup is unrelated. Prepare a single-file scope preserving the original auth
+assertions. Xsdata needs the installed benchmark plugin explicitly enabled for
+its existing project option. Safe preparation continues; changed payload execution
+needs one concrete exact review, with no architecture or budget decision.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -60,17 +61,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'f5e934c'
-last_check_command: 'repository-worker-input-20261027/run-integration-bundle.py 4661ce49fe9cdfd6911d70f4877fcfc30cae16afdb268376861395963c3ec43c; consolidate-results.py'
-last_check_result: 'All3components passed:4fresh probes/5of6cases reproduced,15COMPLETED receipts,17operations,46.957869624719024seconds,zero models/cash. Isort reference rejected at collection for missing distribution metadata;no replay or dropped identities. Corrected wheel19installed checks and exact69-document offline docs passed. Pool56/35repos/3059IDs;85cases remain.'
-next_action: 'Read repository-multifile-sources-20261027/README.md and approval-bundle.json. Obtain one exact approval before the private8-wheel image plus unchanged untokenize source/publisher metadata copy and4fresh probes/16variants,with cached offline docs. Maximum24calls/29operations/1320reserved seconds includes bounded report controls. No models,downloads,unchanged source/package rerun,credentials or release. Completed4661ce49 is terminal;all17charges and56historical bindings stay.'
+last_verified_commit: '2ed5695'
+last_check_command: 'repository-multifile-sources-20261027/run-integration-bundle.py ad0adfcffc2a490954cd2f0d2c697e2e91f6e69f1d30993fe90e531f3059541f; consolidate-results.py'
+last_check_result: 'Runtime/docs complete;4probes passed,1of4cases eligible,13COMPLETED receipts,16operations,35.3654196257703seconds,zero models/cash. Pool57/36repos/3067IDs;84cases missing. WebAuthn issue scope and Xsdata explicit-plugin corrections remain unexecuted.'
+next_action: 'Complete repository-contract-scope-20261028 exact retained-image review:SafetyNet-only task preserving original auth assertions,existing benchmark plugin for both Xsdata cases,one new plugin probe. No source/package/build/download rerun. Obtain exact untrusted-execution approval before dispatch;all old results and charges remain.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'New four-subject multi-file runtime/docs bundle is prepared but unapproved:one private offline8-wheel image and unchanged upstream untokenize source/publisher metadata copy,four fresh probes/16variants,maximum24calls/29operations/1320reserved seconds. It changes subjects/software beyond terminal4661ce49. No architecture or budget decision is needed.'
+  - 'The new contract-scope/plugin execution needs a concrete exact review;completedad0adfcf binds older protected payloads and forbids replay. Preparation is safe and delegated. No model,architecture,budget,install or image decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
@@ -4061,3 +4062,15 @@ The56-case pool,85-case gap and13206/3755/119881.14341000933/0.0counters remain.
 New untrusted installation/execution requires this concrete approval;no architecture
 or budget decision is open. Next:record actual approval,execute once and reconcile
 all canonical attempts/receipts/charges before any adoption or model comparison.
+
+## D113 completed four-workload batch and issue-aligned follow-up
+
+The actual approval for ad0adfcf ran once. See the linked actual results and
+accounting audit above. Current counters are13222/3755/119916.5088296351/0.0.
+Canopen adds one multi-file case; the pool is57/36repos/3067IDs. Both Xsdata
+references failed collection at exit4 because the explicit plugin list omitted
+installed pytest-benchmark. The old WebAuthn accepted partial correctly satisfies
+the issue; unrelated API cleanup cannot justify a multi-file label. Preserve that
+failure, narrow the new task to SafetyNet and restore both original auth assertions.
+New preparation is inert, including one fresh plugin/config probe. No new subject
+execution is authorized by unused slots in the terminal batch. All images remain.
