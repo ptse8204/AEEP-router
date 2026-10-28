@@ -6179,3 +6179,26 @@ execution. The next exact combined review covers pinned Git download/component,
 one COPY-only image,finite fresh checks/all38Dead obligations and current cached
 offline docs. No source/package repeat,model,cash,credentials,release or old-image
 deletion. All actual Git/Dead checks await approval;these fixtures prove no value.
+
+## Shared v6 observer promotion in progress
+
+D121 moves the two actually verified path-creation lines into the packaged
+observer,so the normal CLI exporter no longer generates the older random path.
+Sourceb09911a0 compiles raw program1f099dfb equal to the actual171-test profile;
+legacy programs/parsers are unchanged. Focused regressions passed;the required
+13source checks are running and corrected-wheel installation remains unverified.
+Historical dbf9be31/3791d8f7 gates do not qualify the changed source.
+
+Git/docs draft765e28e7 is withdrawn before approval or execution. Preserve its
+preparation at84e7072 and prepare one new source-bound runtime/wheel/docs bundle
+after verification. No new Git software,download,image build,model or grant charge
+occurred. Pool64and77-case gap remain;no scientific/resource/human/release gate.
+
+Shared sourceb09911a0 passed all13checks:1775passed/21skipped in both full runs,
+82%coverage,both branch gates,schema,ruff,policy,mypy and build. Existing warning
+retained. Corrected wheelb3d9c5d0 is1982941bytes and still needs its private
+installation check. The normal exporter produces raw program1f099dfb;old source
+conformance does not transfer. Two171-test canonical-default controls and all38
+Dead obligations are being bound with the one-image Git review,corrected wheel
+and current offline docs. No new untrusted execution,model,grant charge,scope
+relaxation or release. Old765e28e7 stays withdrawn;pool64/77gap remains.

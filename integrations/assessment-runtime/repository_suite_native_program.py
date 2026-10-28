@@ -29,8 +29,8 @@ def main():
     assert isinstance(source_modules, list) and all(isinstance(n, str) and n.isidentifier() for n in source_modules)
     with tempfile.TemporaryDirectory(prefix='repository-native-pytest-') as directory:
         root = Path(directory)
-        repo = root / 'repository'
-        repo.mkdir()
+        repo = Path('/tmp/aeep-repository-native-v6')
+        repo.mkdir(mode=0o700)
         archive_bytes = base64.b64decode(request['archive'], validate=True)
         assert hashlib.sha256(archive_bytes).hexdigest() == request['archive_sha256']
         expanded = 0

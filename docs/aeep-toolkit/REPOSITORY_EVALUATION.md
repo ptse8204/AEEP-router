@@ -169,6 +169,34 @@ test suites do not prove resistance to adversarial output forgery or incomplete
 tests. Curate reproducible workloads and retain these limits in the report.
 The existing comparison and selection analysis below remain unchanged.
 
+### Full native pytest identities
+
+Explicit version-6 cases retain complete pytest identities through public
+collection and runtime hooks. This includes parameter names containing spaces
+or traceback text. Missing events, skipped tests, errors and incomplete phases
+cannot satisfy a required pass. Legacy version-1 through version-5 schemas and
+observer programs keep their existing meanings.
+
+The v6 observer uses `/tmp/aeep-repository-native-v6` inside each fresh contained
+worker so path-bearing names agree between collection and execution. Creation
+is exclusive with mode `0700`: an existing directory or symlink stops execution
+without removing its contents. The worker's private filesystem and removal own
+that directory's lifecycle. There is no caller-supplied repository path or host
+mount. Logs and bootstrap wheels retain separate private temporary storage.
+
+The normal CLI recipe exporter now compiles this shared program. Earlier
+serialized recipes keep their original bytes and fingerprints; changing the
+program requires a new reviewed recipe and applicable conformance. The completed
+171-test JSON-logger check established the fixed-path profile's behavior on its
+recorded source/image. It does not automatically qualify a rebuilt package,
+another corpus case, a host backend or a model comparison.
+
+Collection is a separate operator-reviewed preparation operation. Freeze the
+complete required-name mapping and protected selector before any body trial;
+retain every matched obligation. The default observer rejects collection flags
+and does not retain diagnostic logs. Full names and fixed paths do not establish
+resistance to hostile source code that tampers with hooks in the same process.
+
 ### Tests that need a pytest plugin
 
 Use `assessment.repository-suite-case.v2` for a suite that needs a specific pytest

@@ -2092,3 +2092,26 @@ reproducing all38 obligations. Old reference failures remain. Current source
 and wheel checks are reused;no model or scientific/resource/human/release claim.
 Isort's actual missing distribution metadata,Sopel's incompatible closure and
 SQLglot7479's undetected partial repair remain independent exclusions.
+
+## D121: Promote the verified workspace behavior into the shared v6 observer
+
+The171-test actual check used an explicit operator profile,while the normal CLI
+exporter still compiled a random repository path. Keeping that difference would
+make future path-bearing workloads depend on a separate custom program. Promote
+the same two verified creation lines into the packaged v6 template:one fixed
+private path and exclusive mode0700creation inside each fresh contained worker.
+No caller path or host mount is added. Existing directories/symlinks fail closed.
+
+The compiled raw program must match the actually checked profile byte-for-byte.
+Host tests replace only its fixed literal with exclusively owned scratch and
+exercise traceback identity across fresh processes plus directory/symlink
+preservation. Legacy v1–v5 schemas and programs remain unchanged. Old v6 recipes
+keep their fingerprints and evidence;new source/package/runtime bindings need
+fresh checks. Historical171-test source-M1 evidence is not new-source conformance.
+
+The unapproved Git/docs draft765e28e7 is withdrawn before execution because its
+source and package assumptions are now stale. Preserve its preparation and the
+actual completed ae6a0f9f results. Complete all13source gates,build the corrected
+wheel,and prepare one new exact Git/runtime/wheel/docs review. Keep resource
+qualification separate from comparative usefulness and live selection;no model,
+threshold,permission or architecture change is authorized by this promotion.

@@ -18,22 +18,29 @@ comparative usefulness,live selection,resource,human-control and release remain
 open. The fixed-path observer is an explicit reviewed container profile;older
 corpus bindings and the packaged default retain their original applicability.
 
-Source dbf9be31 and wheel3791d8f7 are unchanged. Their13source gates/20installed
-checks are current and reused:1772tests/21skips in both full runs,82%coverage,
-both branch gates. The completed docs scan aacf34a8 remains separate;no source,
-package or docs component repeated in ae6a0f9f. Grant totals are13304/3755/
-120080.87940059323/0.0. A delegated expiry-only amendment renewed the same grant
-to2026-10-29T20:04:36.625328Z,with all counters and absolute ceilings preserved.
+The verified source-M1 result remains bound to dbf9be31 and wheel3791d8f7.
+Their13source gates and20installed checks do not qualify the new source. D121
+promotes the same two path-creation lines into the shared packaged v6 observer,
+so normal CLI exports use the verified behavior. Current source b09911a0 compiles
+raw program1f099dfb byte-for-byte equal to that actual profile. Legacy observer/
+parser files are unchanged. All13integrated source checks passed:1775tests/21skips in both full runs,82%
+coverage,both branch gates,schema,lint,policy,mypy and build. Both runs retain the
+existing Starlette/httpx warning. The corrected wheel still needs its exact installed check.
 
-Dead stays excluded for missing Git. A read-only inventory verified the retained
-image's OCI manifest/config/layers and87 Debian packages without starting a
-container;the unchanged230109184-byte owned export was removed. The exact real
-Git local-command component and one COPY-only image are prepared for a
-new exact execution review. All38 Dead obligations remain. No Git archive download,
-installation,build or binary execution has occurred. Isort actually fails on
-missing genuine distribution metadata;Sopel also needs a compatible closure.
-These cases do not become qualified through a path fix. No architecture or
-budget decision is needed. Host free space is above72GiB;all images remain.
+The unapproved Git/docs draft765e28e7 is WITHDRAWN before execution. Do not run
+it after a late approval. Preserve its preparation under commit84e7072;new source,
+wheel and runtime bindings will be reviewed together after source checks. No Git
+archive download/build/execution happened. Dead still needs real Git. Read-only
+inventory found87Debian packages and removed only the verified230109184-byte owned
+export. Isort actually needs genuine distribution metadata;Sopel also needs a
+compatible closure. SQLglot7479has an undetected partial repair. These are distinct
+blockers;none is silently repaired by changing test names or reducing obligations.
+
+Grant totals remain13304/3755/120080.87940059323/0.0. Expiry-only amendment5d9e7d9a
+renews to2026-10-29T20:04:36.625328Z with counters/absolute ceilings preserved.
+The completed docs scan aacf34a8 retains its old input hashes;current docs changes
+need the newly reviewed offline scan. No models,cash,credentials,host activation
+or release. Source-M2 safe implementation continues;no architecture decision.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -79,7 +86,7 @@ checkpoint_status:
 last_verified_commit: '1acdbd0'
 last_check_command: 'repository-stable-workspace-20261028/run-runtime.py ae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e;consolidate-runtime.py'
 last_check_result: '17COMPLETED receipts/19operations/35.85609079245478seconds. Both profiles passed fresh checks and171-test reference;original12FAILED/159PASSED as frozen. Pool64/40repos/5037IDs;77cases missing. Zero models/cash;owned containers/canary absent;all images retained. Core source/wheel unchanged.'
-next_action: 'Obtain exact approval for repository-git-runtime-20261028/approval-bundle.json:runtime component4d303758 plus exact cached offline docs. It supplies pinned realGit local commands and one COPY-only image,then fresh checks and all38Dead obligations. Do not execute the inert template or replay terminalae6a0f9f. Preserve all old bindings/counters;reuse completed13source and20installed checks. Continue cohort preparation and comparative/selection work without lowering frozen requirements.'
+next_action: 'Sourceb09911a0 passed all13gates;build wheelb3d9c5d0 is ready. Prepare one exact shared-native runtime/wheel/docs bundle with pinnedGit/oneCOPY-onlyimage,all38Dead obligations,two171-test shared-default controls,and20private installed checks. Old765e28e7 is WITHDRAWN. Obtain its actual exact untrusted download/build/installation/execution authority only after all artifacts/control tests are ready. Preserve64case pool/77gap and all old counters/source bindings;no architecture or budget decision.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4342,3 +4349,39 @@ executing or importing it. The old29941bc9 preparation draft was withdrawn
 before approval/execution for explicit directory modes. No binary download or
 image build occurred. Next exact combined review also binds current cached
 offline docs;unchanged source/wheel checks stay reused. No architecture decision.
+
+### Shared-source integration is in progress; Git draft withdrawn
+
+Commit84e7072 preserves actual ae6a0f9f evidence and the unexecuted Git preparation.
+D121 fixes the normal exporter itself using the exact verified two-line change,
+with three meaningful regression cases for path-bearing names and existing
+paths/symlinks. The packaged raw program is byte-equal to actual profile1f099dfb;
+legacy observer/parser bytes matchHEAD. Sourceb09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf
+is frozen for13source checks. Existing dbf9be31/3791d8f7 evidence remains historical
+and is not reused as new-source package/conformance proof. No shared budget charge
+or untrusted execution follows from this local source work.
+
+Draft765e28e7/runtime4d303758 is withdrawn BEFORE APPROVAL OR EXECUTION. Its exact
+component/download design is retained but must be rebound with the new source,
+corrected wheel and offline docs after source verification. No Git download,
+image build or trial occurred;no unused-slot authority transfer. Source/workflow
+implementation and resource measurements remain separate from model usefulness.
+
+### Shared packaged observer source verification passed
+
+Sourceb09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf
+passed all13gates. Ordinary pytest1775passed/21skipped in589.37seconds;coverage
+pytest1775passed/21skipped in902.66seconds,82%coverage,both branch gates. Existing
+Starlette/httpx warning retained. Schema,ruff,policy,mypy and no-isolation build
+passed. New wheelb3d9c5d0e036631f96694fc2f31d20fa83682e6cd770ed55f48fb5d2c556d0a5
+is1982941bytes. No source changed during checks;no further broad rerun is needed.
+No installed-package or new-source runtime gate is yet passed.
+
+Normalexport now produces the exact1f099dfb fixed-path raw program used by the
+actual171-test profile;all three legacy observer/parser files matchHEAD. New
+source still needs fresh runtime/package bindings. The new review will use the
+canonical shared-default executor for two frozen JSON-logger controls plus all38
+Dead obligations. Current host materialization matches both frozen control
+payload hashes without executing external code. Source M1 results remain valid
+only within their recorded scope. Currentgrant13304/3755/120080.87940059323/0.0,
+pool64/40repos/5037IDs and77-case gap remain unchanged;zero new model turns/cash.
