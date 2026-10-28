@@ -1975,3 +1975,22 @@ Record exact control changes and preserve the original cumulative grant anchor;
 never use this allowance to change source/tests/reference/software/permissions,
 refund an attempt or replay an uncertain call. The XS continuation follows this
 rule and is not a new human approval or a successful original markup probe.
+
+## D116 — Use pytest's native identity and result events
+
+The old iCalendar880 reference observed899of915 declared identities. Sixteen
+published strings end mid-parameter at whitespace;the protected selector cannot
+match them literally. The legacy log parser also splits status rows at spaces.
+Keep that case excluded and retain all old costs/results. Do not infer the missing
+assertions ran or rename the old observation into a pass.
+
+Reuse [pytest8.3's public hooks](https://docs.pytest.org/en/8.3.x/reference/reference.html#pytest.hookspec.pytest_itemcollected)
+for native collection and setup/call/teardown reports in a separate optional
+operator adapter. No new core service or mandatory dependency is needed. Keep
+legacy SWE-rebench observer bytes and contracts unchanged. Collection returns
+identities only,never test success. Preserve stdout as bounded diagnostic data,
+not authoritative status rows. Require one-to-one identity provenance,with missing
+or ambiguous matches rejected,before any new authored task is frozen. Preserve
+all assertions and scientific thresholds. Fresh contained observer conformance,
+legacy-equivalence controls and reference/original/partial checks are separate
+from model qualification,value,selection and resource acceptance.

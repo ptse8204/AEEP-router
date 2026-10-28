@@ -1,24 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of2026-10-28: both authored Xsdata issue-behavior tasks reproduced.
-The f18daa4a run first stopped on missing Markdown distribution metadata;no task
-variant ran then. Its three charges remain. The approved finite report-control
-continuation executed eight unstarted immutable Xsdata variants,then exact offline
-docs. Nine completed receipts and13 operations reconcile,24.90588324982673seconds,
-zero models/cash. PyMdown remains unstarted.**
-Pool60snapshots/38repositories/3186required identities;81cases remain for the
-balanced stages (24single/25multi/32audit). C13,qualification,comparative usefulness,
+**Status as of2026-10-28: portable Markdown bundle22b0cf03 completed once. Its
+ZIP-origin/hash/rendering probe and both PyMdown reference/original comparisons
+passed. Five completed receipts/seven operations reconcile,18.11404641577974
+seconds,zero models/cash. Exact offline docs passed;all owned resources were
+removed and all images retained. No build,install or download occurred.**
+Pool62snapshots/39repositories/3951required identities;79cases remain for the
+balanced stages (22single/25multi/32audit). C13,qualification,comparative usefulness,
 selection,human controls,resource acceptance and release remain open.
 Current source374579f1/commit1f7d27d passed all13 source gates:1,735tests in each
 full run,21skips,82%coverage and both branch gates. Wheel9b00 passed19installed
 checks. No unchanged source/package verification needs repetition.
-[Actual issue-behavior results](../../reports/toolkit-v2/c13/repository-issue-behavior-20261028/RESULTS.md)
-retain all failures/charges. Image9f473c49 and all older images remain;all owned
-containers/canaries and the unchanged docs runtime are removed. Current counters
-13247/3755/119967.44845863385/0.0. Cached support pins are not installed inventory:
-Markdown was excluded from the selected14-wheel image manifest. Prepare a narrow
-exact review to ZIP-load its107441-byte cached pure wheel in the pending PyMdown
-probe/cases. No build,install,download,source/package rerun or model is needed.
+[Actual portable-wheel results](../../reports/toolkit-v2/c13/repository-pymdown-portable-20261028/RESULTS.md)
+retain prior failures/charges. Current13254/3755/119985.56250504963/0.0. Cached support
+pins are not installed inventory;actual Markdown ZIP import is now verified only
+for this reviewed per-payload path. Image9f473c49 and all older images remain.
+A cached-case audit found16 malformed/truncated iCalendar880 required identities;
+its old899of915 observation stays excluded. Prepare an optional native-pytest
+report/collection adapter and explicit one-to-one native-identity provenance,
+preserving old observers/results and every assertion. Collection is not grading.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -60,17 +60,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '40a5150'
-last_check_command: 'repository-issue-behavior-20261028/run-integration-bundle.py f18daa4a...;initial-failure reconciliation;execute-control-continuation.py 6b8a6b66...;consolidate-results.py'
-last_check_result: 'Initial markup probe failed with known completion;approved report-control continuation reproduced both XS cases on8unchanged payloads and completed docs. NineCOMPLETED receipts/13operations/24.90588324982673seconds,zero models/cash. Pool60/38repos/3186IDs;81cases missing. PyMdown unstarted;Markdown cached but excluded from selected image installs.'
-next_action: 'Read repository-pymdown-portable-20261028/README.md and approval-bundle.json. Obtain exact approval before ZIP-loading one cached Markdown3.9 wheel in one probe/four unchanged PyMdown variants plus cached offline docs. Maximum7calls/11operations/545reservedseconds includes bounded immutable-payload controls. No build,install,download,model or source/package rerun. Reconcile all outcomes/charges before extending pool60.'
+last_verified_commit: '118f922'
+last_check_command: 'repository-pymdown-portable-20261028/run-integration-bundle.py 22b0cf03e1d42b716ac44a6fe32543cd27af2071af38bec353416f476a2afa94;consolidate-results.py'
+last_check_result: 'Both components passed:one actual ZIP-origin/hash/rendering probe and both PyMdown reference/original comparisons,5COMPLETED receipts/7operations/18.11404641577974seconds,zero models/cash. Pool62/39repos/3951IDs;79cases missing. No build/install/download or unchanged source/package rerun.'
+next_action: 'Prepare repository-native-identity-20261028:use pytest native hooks for complete identities/statuses,keep legacy observers immutable,and verify first-party whitespace/phase fixtures. iCalendar880 published aliases are incomplete;collect native IDs under a future exact execution review,require unambiguous one-to-one mapping and preserve all assertions. Continue cached-source readiness audit without rerunning known unrelated failures.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Pending portable-wheel review needs one exact execution approval:load cached pure Markdown3.9 through existing private ZIP payloads;one fresh probe/four PyMdown variants,maximum7calls/11operations/545reservedseconds plus cached docs. Software/payload addition is outside terminalf18daa4a. No architecture,budget,image or installation decision is needed.'
+  - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'
   - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
@@ -4160,3 +4160,23 @@ and one extra setup/analysis phase. No build,install,download,model,source/packa
 rerun or release. Exact cached offline docs is separate. Pool60,81-case gap and
 13247/3755/119967.44845863385/0.0counters remain. Obtain exact execution approval,
 run once,then reconcile actual evidence. Prior failed probe and all charges stay.
+
+## D116 portable-wheel results and native-identity data-quality work
+
+Actual22b0cf03 executed once. Both PyMdown cases reproduced with all765 original
+identities/assertions. Actual private Markdown ZIP origin/version/hash/rendering
+passed;no image installation is inferred. Reopened5completed receipts/7operations,
+18.11404641577974charged seconds;current13254/3755/119985.56250504963/0.0. All
+owned containers/canary/checker runtime removed,all images retained. Pool62/39repos/
+3951IDs,79-case gap. Old failure and all earlier charges remain. Source13-gate and
+installed-wheel19-check evidence stays current without repetition.
+
+The cached unused-case audit found16 iCalendar880 required strings ending mid-
+parameter name at a space;its prior899of915 reference remains excluded. Native
+pytest collection/reporting avoids relying on tokenized log rows. Prepare a new
+optional operator adapter via upstream hooks,not a core service. Preserve legacy
+observer bytes and historical results;collection never counts as a passing test.
+Require exact,unique native-identity resolution with explicit mapping/provenance
+before freezing a new authored task scope. No dropped assertions or favorable
+outcome-based mapping. Fresh contained conformance/equivalence and reference/
+negative checks require a future exact execution review;preparation is safe.

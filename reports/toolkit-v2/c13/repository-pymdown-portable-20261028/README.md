@@ -1,4 +1,4 @@
-# PyMdown portable-wheel correction — prepared, not executed
+# PyMdown portable-wheel correction — execution complete
 
 This review supplies the missing runtime dependency to the two pending single-file
 PyMdown tasks without building another image or installing software. The existing
@@ -49,15 +49,12 @@ reused with matching control-file hashes.
 ## Resume
 
 Pool 60/38 repositories/3,186 identities and its 81-case gap remain unchanged.
-No task under this review has run. Qualification, comparative usefulness, selection,
+[Actual results](RESULTS.md) reproduce both tasks. No model ran. Qualification, comparative usefulness, selection,
 resource, human-control and release gates remain open. Current grant counters:
 13,247 operations, 3,755 turns, 119,967.44845863385 seconds and 0.0 cash.
 
-Obtain one exact execution approval, record the actual response, then run
-`PYTHONPATH=src python3 reports/toolkit-v2/c13/repository-pymdown-portable-20261028/run-integration-bundle.py <approval-bundle-file-sha256>`
-once from this checkout. Reopen canonical evidence and reconcile cleanup/accounting
-before consolidating only actual eligible cases. All earlier thirteen operations
-and 24.90588324982673 seconds stay charged. The f18daa4a software/payloads were
-immutable; unused slots do not cover this added wheel. The user continuation
-reserves untrusted execution and CONTINUATION.md requires applicable container
-authority. No architecture, budget, image or installation decision is needed.
+The actual22b0cf03 approval executed once. Read [actual results](RESULTS.md) and
+canonical accounting;do not rerun the terminal driver. The original cached-wheel
+and failed-image-probe records remain. No unused slot transfers to new software,
+subjects or observer behavior. Independent data-quality and corpus preparation
+continues under the standing finite-definition authority.

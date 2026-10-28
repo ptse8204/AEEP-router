@@ -1340,3 +1340,15 @@ or unchanged source/package rerun. Static preparation passed;actual execution is
 unstarted and requires exact software/payload authority. Pool60 and all open
 scientific/resource/human/release gates remain unchanged. Reuse unchanged collector
 terminal fixtures explicitly;no duplicate broad verification is needed.
+
+## Portable Markdown tasks reproduced,October28
+
+[Actual results](../../reports/toolkit-v2/c13/repository-pymdown-portable-20261028/RESULTS.md)
+retain22b0cf03:actual private ZIP origin/hash/rendering passed,both PyMdown tasks
+reproduced,all765 original identities/assertions retained. Five completed receipts/
+seven operations/18.11404641577974seconds,zero models/cash. Exact docs passed;
+all owned resources removed,all images retained. Pool62/39repos/3951IDs;79cases
+remain. No build/install/download or unchanged source/package rerun. A separate
+cached-case identity audit will preserve16 malformed iCalendar880 aliases and the
+old899of915 failure while preparing a new native-pytest reporting adapter. No
+qualification,value,selection,resource,human or release gate closes.
