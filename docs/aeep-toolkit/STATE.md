@@ -1,25 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-28: approved issue-scope/plugin bundle123ff4ee completed
-once. SafetyNet-only WebAuthn reproduced with all11 required identities. Both
-Xsdata references now pass, but upstream tests accept a partial repair; both
-multi-file tasks remain excluded. Ten completed receipts and12 operations reconcile,
-charging26.03374574892223 seconds, zero models and zero cash. Exact offline docs
-passed.**
-The provisional pool is58snapshots/37repositories/3078required identities, with83
-cases missing from the balanced stages (24single/27multi/32audit). C13,
-qualification, comparative usefulness, selection, human controls, resource
-acceptance and release remain open.
-Current source374579f1/commit1f7d27d passed all13 source gates:1,735 tests in each
-full run,21 skips,82%coverage and both branch gates. Wheel9b00 passed19 installed
+**Status as of2026-10-28: both authored Xsdata issue-behavior tasks reproduced.
+The f18daa4a run first stopped on missing Markdown distribution metadata;no task
+variant ran then. Its three charges remain. The approved finite report-control
+continuation executed eight unstarted immutable Xsdata variants,then exact offline
+docs. Nine completed receipts and13 operations reconcile,24.90588324982673seconds,
+zero models/cash. PyMdown remains unstarted.**
+Pool60snapshots/38repositories/3186required identities;81cases remain for the
+balanced stages (24single/25multi/32audit). C13,qualification,comparative usefulness,
+selection,human controls,resource acceptance and release remain open.
+Current source374579f1/commit1f7d27d passed all13 source gates:1,735tests in each
+full run,21skips,82%coverage and both branch gates. Wheel9b00 passed19installed
 checks. No unchanged source/package verification needs repetition.
-[Actual issue-scope results](../../reports/toolkit-v2/c13/repository-contract-scope-20261028/RESULTS.md)
-retain every failure and charge. Image9f473c49 and all older images remain;
-all new owned containers/canary and the unchanged docs runtime are removed.
-Current counters are13234/3755/119942.54257538402/0.0. The original Xsdata tests do
-not cover enum-name collisions or contrasting decorator parent paths adequately.
-Prepare explicitly authored issue-derived checks, preserve original assertions
-and label their provenance; no new source, install or image is needed.
+[Actual issue-behavior results](../../reports/toolkit-v2/c13/repository-issue-behavior-20261028/RESULTS.md)
+retain all failures/charges. Image9f473c49 and all older images remain;all owned
+containers/canaries and the unchanged docs runtime are removed. Current counters
+13247/3755/119967.44845863385/0.0. Cached support pins are not installed inventory:
+Markdown was excluded from the selected14-wheel image manifest. Prepare a narrow
+exact review to ZIP-load its107441-byte cached pure wheel in the pending PyMdown
+probe/cases. No build,install,download,source/package rerun or model is needed.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -61,17 +60,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '7c711a4'
-last_check_command: 'repository-contract-scope-20261028/run-integration-bundle.py 123ff4ee34017c974fe59b03d3d823c24c33610ece283dca6f51ff2578f5578a; consolidate-results.py'
-last_check_result: 'Runtime/docs complete;fresh plugin probe passed,1of3cases eligible,10COMPLETED receipts,12operations,26.03374574892223seconds,zero models/cash. Both Xsdata references pass but partials also pass upstream tests;definitions remain excluded. Pool58/37repos/3078IDs;83cases missing.'
-next_action: 'Read repository-issue-behavior-20261028/README.md and approval-bundle.json. Obtain exact execution approval before one markup-runtime probe/12variants on retained9f47 plus cached offline docs. Maximum17calls/21operations/895reservedseconds includes immutable-payload report controls. No models,builds,installs,downloads or source/package rerun. Reconcile actual outcomes before extending pool58;do not replay terminal123ff4ee.'
+last_verified_commit: 'df7bb89'
+last_check_command: 'repository-issue-behavior-20261028/run-integration-bundle.py f18daa4a...;initial-failure reconciliation;execute-control-continuation.py 6b8a6b66...;consolidate-results.py'
+last_check_result: 'Initial markup probe failed with known completion;approved report-control continuation reproduced both XS cases on8unchanged payloads and completed docs. NineCOMPLETED receipts/13operations/24.90588324982673seconds,zero models/cash. Pool60/38repos/3186IDs;81cases missing. PyMdown unstarted;Markdown cached but excluded from selected image installs.'
+next_action: 'Prepare exact cached Markdown3.9 ZIP-wheel payload review for the two pending PyMdown tasks,with fresh location/behavior probe. Preserve765original identities,source/reference/tests,input and all f18daa4a charges. No image build,installation,download,source/package rerun or model. Obtain exact software/payload execution approval only after concrete review is ready.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'New issue-behavior review is prepared but unapproved:two authored Xsdata guards preserving106original tests and two cached single-file PyMdown subjects preserving765tests. Maximum17calls/21operations/895reservedseconds plus cached docs,zero models/cash. Terminal123ff4ee binds older protected payloads. No architecture,budget,dependency or image decision is needed.'
+  - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
@@ -4122,3 +4121,25 @@ The inert schema/filename-collision errors and drafts remain recorded;no externa
 execution or grant debit occurred during preparation. Read README,obtain exact
 approval and execute once,then reopen canonical records and consolidate only
 actual eligible cases. Pool58,83-case gap and current counters remain unchanged.
+
+## D115 completed XS continuation and runtime-origin correction
+
+Actual f18daa4a approval initially stopped at a markup dependency probe. Its
+canonical attempt is COMPLETED with a failing test,not uncertain;all3operations
+and3.6952117918990552seconds remain. Exact reconciliation proved cleanup and
+accounting. The explicit first-party report-control allowance narrowed dispatch
+to the unaffected XS subjects and enforced the original cumulative anchor. All
+8unstarted immutable variants passed their expected reference/original/partial
+outcomes,adding2cases to pool60. Exact unstarted offline docs passed. Total9receipts/
+13operations/24.90588324982673seconds;current13247/3755/119967.44845863385/0.0.
+All images remain. No new software,payload,core source or threshold changed in
+that continuation;no model,build,install or download occurred.
+
+The missing Markdown distribution was cached in a broad support review but absent
+from the selected14-wheel image-install manifest. Current9f47 DOES inherit the old
+image;the initial different-lineage inference was wrong and is explicitly withdrawn.
+Do not infer installed inventory from a cache or broad support list. The next
+narrow fix uses the existing per-payload ZIP-wheel mechanism with exact cached
+Markdown3.9;it requires new software/payload execution authority. Preserve all765
+pending PyMdown identities/assertions and old charges. No image or architecture
+change is needed. Source13-gate and installed-wheel19-check evidence stays current.

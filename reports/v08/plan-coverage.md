@@ -6013,3 +6013,16 @@ reproduction is untested and requires one exact execution approval. Pool58 and
 all scientific/resource/human/release gates remain open. Raw completed checker-log
 whitespace is retained;the historical34 coverage-file Markdown findings remain
 outside the active Makefile list.
+
+## XS issue-behavior tasks reproduced,October28
+
+[Actual results](../toolkit-v2/c13/repository-issue-behavior-20261028/RESULTS.md)
+retain the failed markup prerequisite and the approved finite report-control
+continuation. Both XS reference/original/two-partial comparisons reproduced with
+all106 original identities/assertions plus2authored behavior checks. Exact docs
+passed. Total9completed receipts/13operations/24.90588324982673seconds,zero models/
+cash;all owned containers/canaries removed and all images retained. Pool60/38repos/
+3186IDs,81-case gap. PyMdown is unstarted:cached Markdown was excluded from the
+actual selected14-wheel install manifest. Prepare a new exact portable-wheel
+payload review;no image,install,download,core-source or package rerun is needed.
+No qualification,value,selection,resource,human-control or release claim follows.

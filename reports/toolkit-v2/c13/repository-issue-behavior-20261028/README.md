@@ -1,9 +1,9 @@
-# Repository issue-behavior checks — prepared, not executed
+# Repository issue-behavior checks — completed with optional-runtime blocker
 
 This batch checks whether the grader distinguishes complete repairs from
 incomplete ones on two Xsdata issues, and whether two cached PyMdown issues can
-serve as single-file tasks. It reuses retained image9f473c49. No new subject or
-authored guard has run. [Completed predecessor results](../repository-contract-scope-20261028/RESULTS.md)
+serve as single-file tasks. It reuses retained image9f473c49. [Actual results](RESULTS.md) certify both authored Xsdata tasks;PyMdown did not
+start because its Markdown distribution metadata was missing. [Completed predecessor results](../repository-contract-scope-20261028/RESULTS.md)
 remain unchanged, including the passing partials that exposed missing coverage.
 
 | Task | Required identities | Protected behavior |
@@ -61,11 +61,8 @@ Pool58/37repositories/3078IDs and the83-case gap remain unchanged. Scientific
 stages,qualification,usefulness,selection,resource,human controls and release
 remain open. Current counters13234/3755/119942.54257538402/0.0.
 
-Obtain one exact approval,record the actual response,then run
-`PYTHONPATH=src python3 reports/toolkit-v2/c13/repository-issue-behavior-20261028/run-integration-bundle.py <approval-bundle-file-sha256>`
-once from this checkout. Reopen canonical receipts/attempts and reconcile cleanup
-and charges before consolidating only actual eligible cases. The terminal123ff4ee
-review forbids changed protected payloads;its unused slots cannot authorize these
-new guards/subjects. The user continuation reserves untrusted execution and
-CONTINUATION.md requires applicable container authority. No architecture,budget,
-dependency or image decision is needed.
+The actual f18daa4a approval executed once. Do not rerun either terminal driver.
+The approved finite report-control continuation used only the eight unstarted
+immutable Xsdata payloads and retained all initial charges. Read actual results
+and accounting. PyMdown needs a new exact portable-wheel payload review;unused
+slots do not cover a software addition. No architecture or image decision is needed.

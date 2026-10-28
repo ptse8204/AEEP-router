@@ -1955,3 +1955,23 @@ label authored guards and check reference/original/both partials in a new review
 This is finite pre-campaign grader development, not model qualification or value.
 The frozen scientific design and thresholds do not change. No new product module,
 image,dependency or package check is justified by these gaps.
+
+## D115 — Distinguish selected installations from cached runtime support
+
+The Markdown pin in a broad support review was not selected for the image's
+14-wheel install. A current failing probe established missing distribution metadata.
+Current9f47 inherits the historical image;lineage was not the cause. Prefer the
+actual selected-install manifest and current source/image-bound observations when
+planning a dependency probe. A cached version pin is not installed inventory.
+For pending PyMdown tasks,use the existing contained per-payload ZIP-wheel path
+with exact pure Markdown3.9 bytes and a fresh import/location/behavior probe.
+No new image,installer,core service or source/package regression is justified.
+Changed software payloads require an exact review;cached availability grants no
+execution authority. Preserve the failed probe and all charges.
+
+After known canonical completion/cleanup,the approved finite first-party report
+control allowance can dispatch already-approved unstarted independent payloads.
+Record exact control changes and preserve the original cumulative grant anchor;
+never use this allowance to change source/tests/reference/software/permissions,
+refund an attempt or replay an uncertain call. The XS continuation follows this
+rule and is not a new human approval or a successful original markup probe.
