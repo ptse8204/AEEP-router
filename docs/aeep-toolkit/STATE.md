@@ -60,16 +60,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'df7bb89'
+last_verified_commit: '40a5150'
 last_check_command: 'repository-issue-behavior-20261028/run-integration-bundle.py f18daa4a...;initial-failure reconciliation;execute-control-continuation.py 6b8a6b66...;consolidate-results.py'
 last_check_result: 'Initial markup probe failed with known completion;approved report-control continuation reproduced both XS cases on8unchanged payloads and completed docs. NineCOMPLETED receipts/13operations/24.90588324982673seconds,zero models/cash. Pool60/38repos/3186IDs;81cases missing. PyMdown unstarted;Markdown cached but excluded from selected image installs.'
-next_action: 'Prepare exact cached Markdown3.9 ZIP-wheel payload review for the two pending PyMdown tasks,with fresh location/behavior probe. Preserve765original identities,source/reference/tests,input and all f18daa4a charges. No image build,installation,download,source/package rerun or model. Obtain exact software/payload execution approval only after concrete review is ready.'
+next_action: 'Read repository-pymdown-portable-20261028/README.md and approval-bundle.json. Obtain exact approval before ZIP-loading one cached Markdown3.9 wheel in one probe/four unchanged PyMdown variants plus cached offline docs. Maximum7calls/11operations/545reservedseconds includes bounded immutable-payload controls. No build,install,download,model or source/package rerun. Reconcile all outcomes/charges before extending pool60.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Pending portable-wheel review needs one exact execution approval:load cached pure Markdown3.9 through existing private ZIP payloads;one fresh probe/four PyMdown variants,maximum7calls/11operations/545reservedseconds plus cached docs. Software/payload addition is outside terminalf18daa4a. No architecture,budget,image or installation decision is needed.'
   - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
@@ -4143,3 +4144,19 @@ narrow fix uses the existing per-payload ZIP-wheel mechanism with exact cached
 Markdown3.9;it requires new software/payload execution authority. Preserve all765
 pending PyMdown identities/assertions and old charges. No image or architecture
 change is needed. Source13-gate and installed-wheel19-check evidence stays current.
+
+### D115 portable-wheel review prepared
+
+`reports/toolkit-v2/c13/repository-pymdown-portable-20261028/approval-bundle.json`
+binds one cached107441-byte pure Markdown3.9 wheel,one actual origin/version/hash/
+rendering probe and four pending PyMdown variants. All765 original required
+identities/assertions,input/source/test/reference/fault bytes and plugins remain
+unchanged. Static checks prove only the wheel list changes in each payload and
+no active extra runtime dependency applies to Python3.13. No software was imported
+or executed during preparation. The unchanged collector/terminal fixtures are
+explicitly reused with matching hashes;budget guard rejects operation12. Maximum
+7calls/11operations/545reservedseconds includes two same-software report controls
+and one extra setup/analysis phase. No build,install,download,model,source/package
+rerun or release. Exact cached offline docs is separate. Pool60,81-case gap and
+13247/3755/119967.44845863385/0.0counters remain. Obtain exact execution approval,
+run once,then reconcile actual evidence. Prior failed probe and all charges stay.

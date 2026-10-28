@@ -6026,3 +6026,16 @@ cash;all owned containers/canaries removed and all images retained. Pool60/38rep
 actual selected14-wheel install manifest. Prepare a new exact portable-wheel
 payload review;no image,install,download,core-source or package rerun is needed.
 No qualification,value,selection,resource,human-control or release claim follows.
+
+## Portable Markdown payload correction prepared,October28
+
+[The narrow review](../toolkit-v2/c13/repository-pymdown-portable-20261028/README.md)
+adds the exact107441-byte cached pure Markdown3.9 ZIP-wheel to one fresh probe and
+two pending PyMdown tasks. All765original identities/assertions and source/test/
+reference/input/fault bytes remain;four payloads change only by the wheel list.
+Existing image9f47,source374579f1,observer/plugins and boundary remain. Maximum
+7calls/11operations/545reservedseconds,zero models/cash,no build/install/download
+or unchanged source/package rerun. Static preparation passed;actual execution is
+unstarted and requires exact software/payload authority. Pool60 and all open
+scientific/resource/human/release gates remain unchanged. Reuse unchanged collector
+terminal fixtures explicitly;no duplicate broad verification is needed.
