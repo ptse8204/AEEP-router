@@ -1,0 +1,339 @@
+{
+  "batch_completed": true,
+  "review_sha256": "fef83a18346c64c8de747e340d6d6bc5ac2b859f79fa728461ebafb9a916421e",
+  "source_digest": "374579f1121ee62964613f5b5a392fa2063939feba9393c65086da8052f2ac13",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "case_id": "duo-labs__py_webauthn-241-safetynet-scope",
+      "reproduction_eligible": true,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "preservation-fault",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        }
+      ]
+    },
+    {
+      "case_id": "tefra__xsdata-1126-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "partial-1",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tefra__xsdata-1132-declared-tests",
+      "reproduction_eligible": false,
+      "variants": [
+        {
+          "variant": "reference",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "counterexample",
+          "passed": true,
+          "grade": {
+            "kind": "callback",
+            "valid": false,
+            "quality_score": 0.0,
+            "detail": "test_failure",
+            "trust": "verified"
+          },
+          "discrepancies": []
+        },
+        {
+          "variant": "partial-1",
+          "passed": false,
+          "grade": {
+            "kind": "callback",
+            "valid": true,
+            "quality_score": 1.0,
+            "detail": "",
+            "trust": "verified"
+          },
+          "discrepancies": [
+            "unexpected_exit",
+            "unexpected_grade",
+            "partial_repair_not_detected_with_complete_bug_observations"
+          ]
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "name": "probe-benchmark_plugin",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-1",
+      "receipt_id": "rcpt_2c8ade65449044aaa30cc4340e3ae3a9",
+      "receipt_ref": "736b5ec82b6f58e553ff78ad8299a46c9c09e094b308a4b23f623546eeb725f9",
+      "container_name": "aeep-4fecd96c31b62b2c8a37cec2efdff186",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-2",
+      "receipt_id": "rcpt_c6a81c746172490fb031d7f470c061b2",
+      "receipt_ref": "36a3aeb0c8d2b9553c6cc0bce3b5a3f1d472d6b303b6add96f11aacf9638b5cb",
+      "container_name": "aeep-0521d27757e07e3eefa159c4c0363fc2",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-3",
+      "receipt_id": "rcpt_497f2d48db37486392230d25660ba61b",
+      "receipt_ref": "ef45cd0ebd9da93c0cec9c6ceac70d9e6d28eec1f30c1dbb2d66168859d856a2",
+      "container_name": "aeep-333795b7546439eebef262c5023f770a",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-preservation-fault",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-4",
+      "receipt_id": "rcpt_f2b250551e9041d79b4ca4c42ad1f034",
+      "receipt_ref": "6daeb563839fcd276e99744d801c0d0edb9ef60308e9a7ea56a779f382b48d2b",
+      "container_name": "aeep-472b3a4d9d40d1e6f480887b2d54461e",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-5",
+      "receipt_id": "rcpt_b5293fc7327548459e7105abff4f04b6",
+      "receipt_ref": "de6ffe6166f72cb8ef5ddfe50a079aad823f06db0829185da640516f9c9a62d9",
+      "container_name": "aeep-018daccf0cdaa98d9176c4d418f86a09",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-6",
+      "receipt_id": "rcpt_5c978b4bd57845ecac60b434f8234da8",
+      "receipt_ref": "7de7d8542aa7b8cc3629f3b3e0ed99dd318e93461a5ed3917a273f13de662f7d",
+      "container_name": "aeep-62f3667dc72204f774c191df3e2d45c8",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-partial-1",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-7",
+      "receipt_id": "rcpt_1f157abd2a864ae38b54fc44868c06c8",
+      "receipt_ref": "1ae16a6349620e82f4be737c1ee568e45c5880809996e9bff69196abb404b666",
+      "container_name": "aeep-23af06b97d39a05f2f6bb9a1916b7aca",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-8",
+      "receipt_id": "rcpt_e156ee0873c9409c9c332209375f7b29",
+      "receipt_ref": "1cc3cf7e85f71fc4cb09a50088aece2178e135075825495009a8cf533f2b27a2",
+      "container_name": "aeep-7a3b8fa860075421c9a0bc2cf2672ab7",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-9",
+      "receipt_id": "rcpt_6675fe9e5a884cdb82749a7eb695a03d",
+      "receipt_ref": "a5ba04eca25d3f701fa70fe5946185e2f76643c6e26986cfe25941ad23c1c3ed",
+      "container_name": "aeep-72b6510d372542e4dce70853d11037cb",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-partial-1",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-10",
+      "receipt_id": "rcpt_7ecfc4b92bd4428fb78fb86c920b0e08",
+      "receipt_ref": "7a16f3e2e1e49b86832adc9b81638157450a4332ab4cf4d50e62c7dfdf4d59fe",
+      "container_name": "aeep-e851409a335c262eabce6b9063c54c05",
+      "container_removed": true,
+      "environment_digest": "a6618849169f4b7c7a7f1e6ff3366c59bfca03a191f8488c4bd2a57c36892884",
+      "attempt_state": "COMPLETED"
+    }
+  ],
+  "observations": [
+    {
+      "name": "probe-benchmark_plugin",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-1",
+      "raw_file": "raw-observation-1.json",
+      "raw_sha256": "60d748f28361ce757086eb49436b814e29c07ed23c3c437492233eadc54e9561",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-2",
+      "raw_file": "raw-observation-2.json",
+      "raw_sha256": "a7e8b875cb1d7c9c2bf83fa9cdbc41750a0cbfe66e8b0a01e34fd66df281bd36",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-3",
+      "raw_file": "raw-observation-3.json",
+      "raw_sha256": "d7489562b3367ca5b318ec505df9cadaedfe43cdcaf80261be19c3e9339f0e56",
+      "execution_error_type": null
+    },
+    {
+      "name": "duo-labs__py_webauthn-241-safetynet-scope-preservation-fault",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-4",
+      "raw_file": "raw-observation-4.json",
+      "raw_sha256": "69e75a23ce1fa893042d0c8876408c3390d23d8e493bf566c68131121b22aeab",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-5",
+      "raw_file": "raw-observation-5.json",
+      "raw_sha256": "c79c4a9685b8bcc3e5597660d6addb8e66839371ada59cad761324154932797b",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-6",
+      "raw_file": "raw-observation-6.json",
+      "raw_sha256": "ac265795b3f9e1263822067a5834b667662cbb9b3b8b8ee53444f5e8496ea26c",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1126-declared-tests-partial-1",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-7",
+      "raw_file": "raw-observation-7.json",
+      "raw_sha256": "d5f5365f1b072680d6f61f7f477ea53b2a9e847da34e02a332cc2441954325f5",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-reference",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-8",
+      "raw_file": "raw-observation-8.json",
+      "raw_sha256": "ed356cbc5c8228025df2a8cacb8f3fdc508acf4c7a83fb474e4353c3e0d8ef85",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-counterexample",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-9",
+      "raw_file": "raw-observation-9.json",
+      "raw_sha256": "cf58f2a81209f6095dde3335007c84dc0fed016f4c6ccb611835d1cf898a1ce2",
+      "execution_error_type": null
+    },
+    {
+      "name": "tefra__xsdata-1132-declared-tests-partial-1",
+      "operation_id": "recipe_generation_224fd7c062c7465cb99ed224b28b3225-call-10",
+      "raw_file": "raw-observation-10.json",
+      "raw_sha256": "419582ae5321ba444d08405282b4ba97786350b7717a2623f7c98d44fcee1bda",
+      "execution_error_type": null
+    }
+  ],
+  "grant_before": [
+    13222,
+    3755,
+    119916.5088296351,
+    "0.0"
+  ],
+  "ledger_operations": 12,
+  "contained_calls_started": 10,
+  "elapsed_complete": true,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "eligible_cases": 1,
+  "grant_after": [
+    13234,
+    3755,
+    119942.54257538402,
+    "0.0"
+  ],
+  "elapsed_seconds": 26.089001124724746,
+  "cases_adopted": 0
+}

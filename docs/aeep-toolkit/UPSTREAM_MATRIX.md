@@ -1289,3 +1289,14 @@ no build/install/download or unchanged source/package rerun. New protected paylo
 need exact execution approval; no architecture or budget decision. Pool57 remains
 provisional and comparative usefulness/selection remain unproven. Updated active
 status files require a new exact cached offline docs snapshot.
+
+## Issue-scope/plugin execution completed, October28
+
+[Actual results](../../reports/toolkit-v2/c13/repository-contract-scope-20261028/RESULTS.md)
+retain terminal123ff4ee:SafetyNet-only WebAuthn reproduced, both Xsdata references
+pass but partials expose insufficient upstream coverage. One fresh plugin probe,
+10completed receipts/12operations/26.03374574892223seconds,zero models/cash;all
+owned containers/canary removed and all images retained. Exact offline docs passed.
+Pool58/37repos/3078IDs,83-case gap. New issue-derived behavior checks will be
+explicitly authored, preserve original tests and need exact execution review.
+No source/package rerun,install,download,build,qualification,value or selection claim.

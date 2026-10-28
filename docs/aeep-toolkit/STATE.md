@@ -1,25 +1,25 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of 2026-10-28: approved four-workload bundle ad0adfcf completed once.
-Canopen 613 reproduced; the old WebAuthn multi-file definition and both Xsdata
-configurations remain excluded. All four fresh probes and the exact offline docs
-snapshot passed. Thirteen completed receipts and 16 operations reconcile, charging
-35.3654196257703 seconds, zero models and zero cash.**
-The provisional pool is 57 snapshots across 36 repositories, with 3,067 required
-identities and 84 cases missing from the balanced stages (25 single/27 multi/32
-audit). C13, qualification, comparative usefulness, selection, human controls,
-resource acceptance and release remain open.
+**Status as of 2026-10-28: approved issue-scope/plugin bundle123ff4ee completed
+once. SafetyNet-only WebAuthn reproduced with all11 required identities. Both
+Xsdata references now pass, but upstream tests accept a partial repair; both
+multi-file tasks remain excluded. Ten completed receipts and12 operations reconcile,
+charging26.03374574892223 seconds, zero models and zero cash. Exact offline docs
+passed.**
+The provisional pool is58snapshots/37repositories/3078required identities, with83
+cases missing from the balanced stages (24single/27multi/32audit). C13,
+qualification, comparative usefulness, selection, human controls, resource
+acceptance and release remain open.
 Current source374579f1/commit1f7d27d passed all13 source gates:1,735 tests in each
 full run,21 skips,82%coverage and both branch gates. Wheel9b00 passed19 installed
 checks. No unchanged source/package verification needs repetition.
-[Actual four-workload results](../../reports/toolkit-v2/c13/repository-multifile-sources-20261027/RESULTS.md)
-retain every failure and charge. New image9f473c49 and all older images remain;
+[Actual issue-scope results](../../reports/toolkit-v2/c13/repository-contract-scope-20261028/RESULTS.md)
+retain every failure and charge. Image9f473c49 and all older images remain;
 all new owned containers/canary and the unchanged docs runtime are removed.
-The WebAuthn issue asks only for SafetyNet; its published authentication API
-cleanup is unrelated. Prepare a single-file scope preserving the original auth
-assertions. Xsdata needs the installed benchmark plugin explicitly enabled for
-its existing project option. Safe preparation continues; changed payload execution
-needs one concrete exact review, with no architecture or budget decision.
+Current counters are13234/3755/119942.54257538402/0.0. The original Xsdata tests do
+not cover enum-name collisions or contrasting decorator parent paths adequately.
+Prepare explicitly authored issue-derived checks, preserve original assertions
+and label their provenance; no new source, install or image is needed.
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -61,17 +61,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'b749bdb'
-last_check_command: 'repository-multifile-sources-20261027/run-integration-bundle.py ad0adfcffc2a490954cd2f0d2c697e2e91f6e69f1d30993fe90e531f3059541f; consolidate-results.py'
-last_check_result: 'Runtime/docs complete;4probes passed,1of4cases eligible,13COMPLETED receipts,16operations,35.3654196257703seconds,zero models/cash. Pool57/36repos/3067IDs;84cases missing. WebAuthn issue scope and Xsdata explicit-plugin corrections remain unexecuted.'
-next_action: 'Read repository-contract-scope-20261028/README.md and approval-bundle.json. Obtain exact execution approval before one plugin probe/11variants on retained9f47 and cached offline docs. Maximum16calls/20operations/860reservedseconds includes bounded immutable-payload controls. No models,installs,downloads,builds,source/package rerun or release. Reconcile and consolidate actual eligible cases afterward;no terminal replay.'
+last_verified_commit: 'dab4d8a'
+last_check_command: 'repository-contract-scope-20261028/run-integration-bundle.py 123ff4ee34017c974fe59b03d3d823c24c33610ece283dca6f51ff2578f5578a; consolidate-results.py'
+last_check_result: 'Runtime/docs complete;fresh plugin probe passed,1of3cases eligible,10COMPLETED receipts,12operations,26.03374574892223seconds,zero models/cash. Both Xsdata references pass but partials also pass upstream tests;definitions remain excluded. Pool58/37repos/3078IDs;83cases missing.'
+next_action: 'Prepare issue-derived enum-collision and parent-decorator behavior checks for the two excluded Xsdata tasks on retained9f47. Preserve all old assertions/identities,mark authored guards and certify reference/original/both partials under a new exact execution review. Continue cached-source single-file curation independently;no source/package regression,build,install,download or model is needed for preparation.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'The new contract-scope/plugin execution needs a concrete exact review;completedad0adfcf binds older protected payloads and forbids replay. Preparation is safe and delegated. No model,architecture,budget,install or image decision is needed.'
+  - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
@@ -4091,3 +4091,17 @@ excluded cases remain. The local inert-preparation legacy patch decoder error wa
 corrected with the version-aware decoder; no subject execution or grant debit
 occurred. Exact new payload execution requires approval; finite definitions remain
 delegated. Read the README first, record actual approval if granted, then run once.
+
+## D114 completed issue-scope checks and grader coverage limits
+
+The actual123ff4ee approval executed once. Reopened canonical records show10
+completed attempts,12 complete operations and26.03374574892223charged seconds.
+The fresh installed-plugin/config probe passed. SafetyNet-only WebAuthn joins the
+pool, now58/37repos/3078IDs;83 cases remain. Both Xsdata references and originals
+behave as expected, but first partials also pass all declared tests. Exclude both;
+do not call upstream test success adequate coverage of the issue. Prepare authored
+behavior checks for same-named enums and parent-qualified decorators, preserving
+every original test/assertion and labeling new provenance. Retain all initial
+configuration failures and legitimate smaller repairs. No model,source/package
+rerun,install,download or image change occurred. All images remain. Exact docs
+passed before these status updates; new active prose needs its own snapshot.

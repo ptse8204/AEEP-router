@@ -1,8 +1,9 @@
-# Issue-aligned repository follow-up — prepared, not executed
+# Issue-aligned repository follow-up — execution complete
 
 This review checks three repository tasks on the retained grader image. It keeps
 legitimate smaller repairs acceptable and preserves the projects' required test
-configuration. No model or third-party subject has run under these definitions.
+configuration. [Actual results](RESULTS.md) retain one reproduced task and two excluded definitions.
+No model ran under these definitions.
 The completed predecessor and every failure remain in the
 [four-workload results](../repository-multifile-sources-20261027/RESULTS.md).
 
@@ -47,10 +48,7 @@ remain13222/3755/119916.5088296351/0.0. Pool57/36repos/3067IDs and the84-case ga
 remain; qualification, comparative usefulness, selection, human, resource and
 release gates stay open.
 
-The new protected test overlay and explicit-plugin payloads are outside terminal
-ad0adfcf's immutable scope. The user continuation reserves untrusted execution;
-CONTINUATION.md requires applicable provisioning authority. Obtain one exact
-approval before running `run-integration-bundle.py` with its file SHA-256.
-No architecture or budget decision is needed. After execution, reopen canonical
-attempts/receipts, reconcile all charges and cleanup, then consolidate only actual
-eligible cases. Never rerun a terminal driver. Keep historical source/image bindings.
+The actual approval ran once. Read [results](RESULTS.md) and canonical accounting;
+do not rerun this terminal driver. Changed oracle checks need a new exact review.
+All old failures, source/image bindings and charges remain. Preparation details
+above describe the approved scope, not three successful reproductions.

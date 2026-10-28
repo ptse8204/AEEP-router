@@ -1942,3 +1942,16 @@ reference, tests and identities. Reuse the four completed source374579f1/image9f
 boundary/state probes and add one exact plugin/config probe. No new dependency,
 image, package regression or product source change is needed. Changed protected
 payloads require execution approval; routine finite definition work is delegated.
+
+## D114 — Check issue behavior rather than golden patch shape
+
+The completed plugin repair made both Xsdata references pass. Each first partial
+also passed, exposing weak issue coverage in the published tests. Keep those task
+definitions excluded. For1126, add a distinct-enum lookup check after same-named
+nested classes are promoted. For1132, contrast matching and nonmatching decorator
+parent paths from the issue. Assert resulting behavior, not exact reference IDs,
+source text or a new internal API. Preserve all original assertions and identities,
+label authored guards and check reference/original/both partials in a new review.
+This is finite pre-campaign grader development, not model qualification or value.
+The frozen scientific design and thresholds do not change. No new product module,
+image,dependency or package check is justified by these gaps.
