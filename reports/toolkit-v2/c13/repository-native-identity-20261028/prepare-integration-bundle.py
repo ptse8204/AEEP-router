@@ -22,7 +22,7 @@ def main():
         'docs':{'directory':str(docs),'review_file':'operation-review.json','argv':[str(docs/'run-review.py')],'maximum_driver_seconds':600,'result_file':'execution-result.json','passed_field':'passed'}}
     reviews={k:json.loads((Path(v['directory'])/v['review_file']).read_text()) for k,v in components.items()}
     source=verification_source_digest(ROOT);assert all(r['source_digest']==source for r in reviews.values())
-    static=('preparation-checks.json','scope-check.json','static-bundle-audit.json','execution-control-check.json','terminal-control-check.json','integration-dispatch-check.json','legacy-compatibility-check.json')
+    static=('preparation-checks.json','scope-check.json','static-bundle-audit.json','execution-control-check.json','terminal-control-check.json','integration-dispatch-check.json','legacy-compatibility-check.json','inert-cli-check.json')
     for n in static:assert json.loads((HERE/n).read_text())['passed']
     spec=importlib.util.spec_from_file_location('classification_fixture',HERE/'classify.py');mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);assert mod.self_check()==22
     documents=shlex.split(subprocess.check_output(['make','-n','docs-links'],cwd=ROOT,text=True).splitlines()[-1])[3:]
