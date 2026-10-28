@@ -5976,3 +5976,15 @@ remain unexecuted. Qualification,value,selection,resource,human and release stay
 The exact69-document offline docs snapshot passed before these status updates.
 The historical34 Markdown findings in this versioned coverage file remain outside
 the active Makefile input list. Unchanged source/package checks are not repeated.
+
+## Issue-scoped follow-up prepared, October28
+
+[The retained-image review](../toolkit-v2/c13/repository-contract-scope-20261028/README.md)
+binds SafetyNet-only WebAuthn241 and both Xsdata cases with installed benchmark
+plugin5.1.0 explicitly enabled. All117 identities remain; original authentication
+assertions are restored. One fresh plugin probe supplements four current-image
+completed probes. Maximum16calls/20operations/860reservedseconds,zero models/cash,
+no build/install/download or unchanged source/package rerun. New protected payloads
+need exact execution approval; no architecture or budget decision. Pool57 remains
+provisional and comparative usefulness/selection remain unproven. Updated active
+status files require a new exact cached offline docs snapshot.

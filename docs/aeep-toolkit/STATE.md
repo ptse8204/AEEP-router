@@ -61,10 +61,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '2ed5695'
+last_verified_commit: 'b749bdb'
 last_check_command: 'repository-multifile-sources-20261027/run-integration-bundle.py ad0adfcffc2a490954cd2f0d2c697e2e91f6e69f1d30993fe90e531f3059541f; consolidate-results.py'
 last_check_result: 'Runtime/docs complete;4probes passed,1of4cases eligible,13COMPLETED receipts,16operations,35.3654196257703seconds,zero models/cash. Pool57/36repos/3067IDs;84cases missing. WebAuthn issue scope and Xsdata explicit-plugin corrections remain unexecuted.'
-next_action: 'Complete repository-contract-scope-20261028 exact retained-image review:SafetyNet-only task preserving original auth assertions,existing benchmark plugin for both Xsdata cases,one new plugin probe. No source/package/build/download rerun. Obtain exact untrusted-execution approval before dispatch;all old results and charges remain.'
+next_action: 'Read repository-contract-scope-20261028/README.md and approval-bundle.json. Obtain exact execution approval before one plugin probe/11variants on retained9f47 and cached offline docs. Maximum16calls/20operations/860reservedseconds includes bounded immutable-payload controls. No models,installs,downloads,builds,source/package rerun or release. Reconcile and consolidate actual eligible cases afterward;no terminal replay.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4074,3 +4074,20 @@ the issue; unrelated API cleanup cannot justify a multi-file label. Preserve tha
 failure, narrow the new task to SafetyNet and restore both original auth assertions.
 New preparation is inert, including one fresh plugin/config probe. No new subject
 execution is authorized by unused slots in the terminal batch. All images remain.
+
+### D113 concrete retained-image review
+
+The issue-scoped follow-up is prepared at
+`reports/toolkit-v2/c13/repository-contract-scope-20261028/approval-bundle.json`.
+It binds three cases,117 required identities,one fresh plugin probe and11 variants
+on retained9f473c49. The four completed probes on that same image/source/observer
+remain applicable and are bound by exact receipts. Maximum16calls/20operations/
+860reservedseconds includes at most4same-software report controls after known
+completion/cleanup. No model,install,download,build,core-source change or package
+rerun. Cached offline docs checks the updated active status files. Static scope,
+grader,budget and terminal-control checks pass; they are not runtime results.
+No new task is adopted or stage assigned. The original14-source curation and its
+excluded cases remain. The local inert-preparation legacy patch decoder error was
+corrected with the version-aware decoder; no subject execution or grant debit
+occurred. Exact new payload execution requires approval; finite definitions remain
+delegated. Read the README first, record actual approval if granted, then run once.
