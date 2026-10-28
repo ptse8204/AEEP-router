@@ -61,16 +61,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'dab4d8a'
+last_verified_commit: '7c711a4'
 last_check_command: 'repository-contract-scope-20261028/run-integration-bundle.py 123ff4ee34017c974fe59b03d3d823c24c33610ece283dca6f51ff2578f5578a; consolidate-results.py'
 last_check_result: 'Runtime/docs complete;fresh plugin probe passed,1of3cases eligible,10COMPLETED receipts,12operations,26.03374574892223seconds,zero models/cash. Both Xsdata references pass but partials also pass upstream tests;definitions remain excluded. Pool58/37repos/3078IDs;83cases missing.'
-next_action: 'Prepare issue-derived enum-collision and parent-decorator behavior checks for the two excluded Xsdata tasks on retained9f47. Preserve all old assertions/identities,mark authored guards and certify reference/original/both partials under a new exact execution review. Continue cached-source single-file curation independently;no source/package regression,build,install,download or model is needed for preparation.'
+next_action: 'Read repository-issue-behavior-20261028/README.md and approval-bundle.json. Obtain exact execution approval before one markup-runtime probe/12variants on retained9f47 plus cached offline docs. Maximum17calls/21operations/895reservedseconds includes immutable-payload report controls. No models,builds,installs,downloads or source/package rerun. Reconcile actual outcomes before extending pool58;do not replay terminal123ff4ee.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'New issue-behavior review is prepared but unapproved:two authored Xsdata guards preserving106original tests and two cached single-file PyMdown subjects preserving765tests. Maximum17calls/21operations/895reservedseconds plus cached docs,zero models/cash. Terminal123ff4ee binds older protected payloads. No architecture,budget,dependency or image decision is needed.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
@@ -4105,3 +4106,19 @@ every original test/assertion and labeling new provenance. Retain all initial
 configuration failures and legitimate smaller repairs. No model,source/package
 rerun,install,download or image change occurred. All images remain. Exact docs
 passed before these status updates; new active prose needs its own snapshot.
+
+### D114 concrete next review
+
+`reports/toolkit-v2/c13/repository-issue-behavior-20261028/approval-bundle.json`
+binds four unexecuted tasks:two authored Xsdata issue-behavior guards and two cached
+single-file PyMdown repairs. All871 original identities/assertions remain;the two
+new tests make873. Static selector/grader guards pass;reference/original/both XS
+partials remain untested under the new oracle. One fresh cached markup-runtime
+probe supplements the exact current-image boundary and benchmark-plugin evidence.
+Maximum17calls/21operations/895reservedseconds includes at most4immutable-payload
+report controls after known completion/cleanup. No builds,installs,downloads,
+models,source/package rerun or release. Exact cached offline docs is separate.
+The inert schema/filename-collision errors and drafts remain recorded;no external
+execution or grant debit occurred during preparation. Read README,obtain exact
+approval and execute once,then reopen canonical records and consolidate only
+actual eligible cases. Pool58,83-case gap and current counters remain unchanged.

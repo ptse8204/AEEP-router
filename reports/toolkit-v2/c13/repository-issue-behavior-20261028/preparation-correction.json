@@ -1,0 +1,18 @@
+{
+  "inert_validation_errors": [
+    "RepositorySuiteCase requires at least one fault_output.",
+    "Fault artifacts require a nonempty correctly bound/scoped patch;an empty patch is allowed for direct grading but not as a case fault.",
+    "A static checker initially chose the older pre-plugin XS definition;comparison order corrected.",
+    "The same reference.json path was used for artifact and payload;stable artifact read rejected the overwrite before execution."
+  ],
+  "correction": "Case faults contain a nonempty original-source patch. Reference-artifact.json and payload-*.json are distinct;use current predecessor definitions in static comparisons.",
+  "earlier_owned_caches_retained": [
+    ".aeep/repository-issue-behavior-20261028",
+    ".aeep/repository-issue-behavior-20261028-v2",
+    ".aeep/repository-issue-behavior-20261028-v3",
+    ".aeep/repository-issue-behavior-20261028-v4"
+  ],
+  "corrected_cache": ".aeep/repository-issue-behavior-20261028-v5",
+  "third_party_execution_models_installs_or_grant_changes": 0,
+  "pre_approval_guard_refinement": "Compare each resolved enum allowed-value set,not object identity or order,to permit equivalent renaming/cloning implementations. No task/source/model outcome informed this preapproval refinement."
+}

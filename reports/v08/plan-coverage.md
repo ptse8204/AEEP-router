@@ -5999,3 +5999,17 @@ owned containers/canary removed and all images retained. Exact offline docs pass
 Pool58/37repos/3078IDs,83-case gap. New issue-derived behavior checks will be
 explicitly authored, preserve original tests and need exact execution review.
 No source/package rerun,install,download,build,qualification,value or selection claim.
+
+## Issue-behavior review prepared, October28
+
+[The next review](../toolkit-v2/c13/repository-issue-behavior-20261028/README.md)
+retains Xsdata source/reference and all106 original identities/assertions,adding
+two explicitly authored behavior checks. Two cached PyMdown issues use single-file
+scopes with765 unchanged test identities and preserved package-version metadata.
+Total873identities,one fresh markup-runtime probe and12variants on retained9f47.
+Maximum17calls/21operations/895reservedseconds,zero models/cash;no build,install,
+download or unchanged source/package rerun. Preparation checks pass;actual task
+reproduction is untested and requires one exact execution approval. Pool58 and
+all scientific/resource/human/release gates remain open. Raw completed checker-log
+whitespace is retained;the historical34 coverage-file Markdown findings remain
+outside the active Makefile list.
