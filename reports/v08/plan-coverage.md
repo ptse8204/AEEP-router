@@ -6079,3 +6079,29 @@ Fresh container execution, installed-wheel checks and exact offline docs remain
 pending. The grant is unchanged at13254 operations/3755 turns/119985.56250504963
 seconds/0.0 cash. These source checks do not change the62-case provisional pool
 or any scientific, resource, human-control or release gate.
+
+## Native identity runtime and installed wheel checked,October28
+
+[Actual results](../toolkit-v2/c13/repository-native-identity-20261028/RESULTS.md)
+retain approved bundle d9352568 and its initial docs formatting failure. All15
+container calls completed:four fresh boundary/state/transport probes,two native
+fixtures,one crosswalk collection and eight body variants. All915 native names
+were confirmed;the old selector899 observation stays historical. Reference passed;
+original and both partial repairs failed correctly. Both compatibility controls
+passed. Canonical15 receipts/17operations/34.73624304169789seconds reconcile,zero
+models/cash;all owned containers/canary absent and all images retained. The changed
+wheel passed20 installed checks and private removal. Source dbf9be31/commit0688f63
+passed all13 gates,1772tests/21skips in each full run,82%coverage,both branch gates.
+
+Pool63/39repositories/4866IDs remains provisional,with78cases missing. Old runtime
+bindings stay;the new operator program is not automatic default-observer or
+corpus-wide qualification. The initial docs scan never started after one blank-line
+lint failure. The same approved checker may finish the remaining commands after
+an exact first-party formatting amendment;the actual result record keeps both
+outcomes. No scientific,resource,human-control or release gate closes.
+
+Remaining offline docs under9241a2b2 passed after the first-party formatting/status
+amendment;same approved checker,boundary and69document scope,no replay of the
+standalone version/runtime/package checks. All owned resources were removed. The
+initial failed docs record stays. Active status text was then updated without
+changing heading anchors or link targets;local lint rechecks those metadata edits.

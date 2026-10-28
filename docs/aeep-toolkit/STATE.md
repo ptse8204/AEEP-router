@@ -1,33 +1,32 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Native-identity implementation passed all 13 source gates.** The explicit v6
-contract and packaged pytest-hook observer preserve complete names with spaces.
-All 915 iCalendar obligations are statically mapped before execution; the old
-899/915 observation remains excluded. Both full runs passed 1,772 tests with
-21 skips, 82% coverage and both branch gates. The changed wheel is built. The
-fresh exact runtime/package/docs review is being finalized; no new contained
-execution, installation, model call or grant debit occurred. Previous source
-374579f1 and wheel9b00 evidence below retain their original applicability.
+**Status as of October 28: native-identity runtime and updated-wheel checks
+passed under approved bundle d9352568.** All 15 container calls completed and
+canonical receipts reconcile: 17 operations, 34.73624304169789 charged seconds,
+zero model turns or cash. All 915 frozen iCalendar names were confirmed before
+body trials; its repair passed and original/both partial repairs failed as
+expected. Both compatibility controls passed. All 20 installed-wheel checks
+passed and the unchanged private runtime was removed. All images remain.
 
-**Status as of2026-10-28: portable Markdown bundle22b0cf03 completed once. Its
-ZIP-origin/hash/rendering probe and both PyMdown reference/original comparisons
-passed. Five completed receipts/seven operations reconcile,18.11404641577974
-seconds,zero models/cash. Exact offline docs passed;all owned resources were
-removed and all images retained. No build,install or download occurred.**
-Pool62snapshots/39repositories/3951required identities;79cases remain for the
-balanced stages (22single/25multi/32audit). C13,qualification,comparative usefulness,
-selection,human controls,resource acceptance and release remain open.
-Current source374579f1/commit1f7d27d passed all13 source gates:1,735tests in each
-full run,21skips,82%coverage and both branch gates. Wheel9b00 passed19installed
-checks. No unchanged source/package verification needs repetition.
-[Actual portable-wheel results](../../reports/toolkit-v2/c13/repository-pymdown-portable-20261028/RESULTS.md)
-retain prior failures/charges. Current13254/3755/119985.56250504963/0.0. Cached support
-pins are not installed inventory;actual Markdown ZIP import is now verified only
-for this reviewed per-payload path. Image9f473c49 and all older images remain.
-A cached-case audit found16 malformed/truncated iCalendar880 required identities;
-its old899of915 observation stays excluded. Prepare an optional native-pytest
-report/collection adapter and explicit one-to-one native-identity provenance,
-preserving old observers/results and every assertion. Collection is not grading.
+Source dbf9be31 (implementation commit 0688f63) passed all 13 source gates:
+1,772 tests and 21 skips in each full run, 82% coverage and both branch gates.
+Wheel3791d8f7 was tested. Pool63 snapshots/39 repositories/4866 required identities
+is provisional; 78 cases remain (22 single-file/24 multi-file/32 audit). Existing
+source/runtime bindings are preserved; the new operator observer is not universal
+qualification of the older corpus or the default observer. No model qualification,
+usefulness, selection, resource, human-control or release gate closes.
+
+The initial docs component failed on one extra STATE.md blank line; the link
+scan was unstarted. Preserve that terminal result. The remaining
+scan passed with the same approved checker after the first-party formatting correction;
+[the actual result record](../../reports/toolkit-v2/c13/repository-native-identity-20261028/RESULTS.md)
+keeps both outcomes. Current grant13271/3755/120020.29874809133/0.0. No source suite,
+package install, container call, image build or model rerun is needed for this
+formatting correction. Original portable Markdown22b0cf03 remains completed:
+five receipts/seven operations/18.11404641577974seconds,zero models/cash, exact
+private Markdown3.9 ZIP-origin/hash/rendering and both PyMdown tasks passed.
+Its old source374579f1/wheel9b00 evidence retains the original applicability.
+
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -69,10 +68,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '118f922'
-last_check_command: 'repository-pymdown-portable-20261028/run-integration-bundle.py 22b0cf03e1d42b716ac44a6fe32543cd27af2071af38bec353416f476a2afa94;consolidate-results.py'
-last_check_result: 'Both components passed:one actual ZIP-origin/hash/rendering probe and both PyMdown reference/original comparisons,5COMPLETED receipts/7operations/18.11404641577974seconds,zero models/cash. Pool62/39repos/3951IDs;79cases missing. No build/install/download or unchanged source/package rerun.'
-next_action: 'Prepare repository-native-identity-20261028:use pytest native hooks for complete identities/statuses,keep legacy observers immutable,and verify first-party whitespace/phase fixtures. iCalendar880 published aliases are incomplete;collect native IDs under a future exact execution review,require unambiguous one-to-one mapping and preserve all assertions. Continue cached-source readiness audit without rerunning known unrelated failures.'
+last_verified_commit: 'd167dff'
+last_check_command: 'repository-native-identity-20261028/run-integration-bundle.py d9352568af11a63fe3adf31de11bf0c9fdbe244aa7c47bc5fd5183a98e7d268f;consolidate-runtime.py'
+last_check_result: 'Runtime15COMPLETED receipts/17operations/34.73624304169789seconds and20installed checks passed. Initial docs formatting failure retained;remaining approved scan passed under9241a2b2 with same binary/boundary/69documents. Pool63/39repos/4866IDs;78cases missing. Zero models/cash;all images retained.'
+next_action: 'Native runtime, updated wheel and remaining offline docs are complete;do not replay them. Read repository-native-identity-20261028/RESULTS.md and remaining-execution-result.json,then continue cached-source mapping and dependency/scope curation. Prepare one exact new-source/default-observer review before execution. Pool63 still lacks78cases;do not rerun unchanged source or package checks.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4190,7 +4189,6 @@ before freezing a new authored task scope. No dropped assertions or favorable
 outcome-based mapping. Fresh contained conformance/equivalence and reference/
 negative checks require a future exact execution review;preparation is safe.
 
-
 ### C13: native-identity source checks passed, exact execution review in preparation
 
 The explicit case v6 truth keeps full pytest identities through public hooks.
@@ -4217,3 +4215,33 @@ nonterminal state,cleanup uncertainty and incomplete evidence. The docs sandbox
 fixture passed without running Lychee. Full runtime/package/docs execution remains
 unapproved. Metadata-only census:153 unpooled rows/97 repositories with malformed
 aliases;all still unverified. Pool62/39repositories/3951IDs and79-case gap remain.
+
+### C13: native identity runtime completed; initial docs formatting failure retained
+
+Actual direct user approval authorized the uniquely named runtime/wheel/docs
+scope. Combined bundle d9352568 binds unchanged component reviews46aacf04,
+dc450353 and4681161c. The human did not type the mechanically combined digest;
+exact reply and scope resolution are preserved in bundle-operator-approval.json.
+The15 completed calls comprise four fresh boundary/state/transport probes,two
+native-event fixtures,one collect-only crosswalk gate and eight body variants.
+All915 required native names were present;the unchanged old selector selected899.
+The reference passed915/915;original and both partial repairs were rejected.
+Both unchanged PyMdown/XS compatibility controls reproduced correctly.
+
+All15 canonical receipt/attempt/evidence chains reopened,all17 ledger operations
+are complete,and all owned containers/canary are absent. New grant counters are
+13271/3755/120020.29874809133/0.0. The20 installed checks passed with no downloads;
+private runtime/scratch removal passed. No model,build,pull,new dependency,
+credential,service,activation,release or image deletion occurred. The two extra
+runtime control slots are unused and cannot authorize new subjects or programs.
+Pool63 adds only iCalendar;controls are not duplicated. New data remain provisional
+with39 repositories/4866IDs and78 missing cases. All historical bindings/results
+remain;no corpus-wide observer or scientific qualification transfers.
+
+Docs initially stopped at a single newly introduced blank line,not a link error.
+The initial Lychee version command passed;Makefile version/link scan were
+unstarted. Preserve the failed component and remove only the redundant blank.
+A finite first-party documentation control amendment can finish those unstarted
+commands with identical approved binary,configuration,permissions and69-document
+scope. It supplies no new software authority or automatic retry. The separate remaining-result records the successful scan under9241a2b2. No
+other component reran;the initial failed docs result remains unchanged.

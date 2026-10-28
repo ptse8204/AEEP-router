@@ -1,0 +1,764 @@
+{
+  "schema_version": "assessment.recipe.v2",
+  "recipe_id": "repository-patch-v1-3494dd1c0df7a5ad",
+  "implementation_digest": "5e73be3c2dde7f5256679d408c5efe1bd6236bd23f2f11cfdba56c4172c20cf3",
+  "capability": "assessment.repository_patch@1",
+  "description": "Curated bounded repository behavior repairs; no arbitrary repository correctness claim.",
+  "input_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "task_id": {
+        "maxLength": 128,
+        "minLength": 1,
+        "title": "Task Id",
+        "type": "string"
+      },
+      "task": {
+        "maxLength": 4000,
+        "minLength": 1,
+        "title": "Task",
+        "type": "string"
+      },
+      "family": {
+        "maxLength": 128,
+        "minLength": 1,
+        "title": "Family",
+        "type": "string"
+      },
+      "files": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Files",
+        "type": "object"
+      },
+      "editable_paths": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 32,
+        "minItems": 1,
+        "title": "Editable Paths",
+        "type": "array"
+      }
+    },
+    "required": [
+      "task_id",
+      "task",
+      "family",
+      "files",
+      "editable_paths"
+    ],
+    "title": "RepositoryInput",
+    "type": "object"
+  },
+  "output_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "base_sha256": {
+        "pattern": "^[a-f0-9]{64}$",
+        "title": "Base Sha256",
+        "type": "string"
+      },
+      "files": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "maxProperties": 32,
+        "title": "Files",
+        "type": "object"
+      }
+    },
+    "required": [
+      "base_sha256",
+      "files"
+    ],
+    "title": "RepositoryPatch",
+    "type": "object"
+  },
+  "generator": "contained_json:1",
+  "generator_config": {
+    "purpose": "development",
+    "case_set_sha256": "3494dd1c0df7a5adf1c38888a5464fec72c11a17f86afdac2fd44fc900ab96aa",
+    "provenance": [
+      {
+        "schema_version": "assessment.repository-case.v1",
+        "source_repository": "https://github.com/ptse8204/AEEP-router",
+        "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+        "source_path": "src/aeep/hosts/codex_metrics.py",
+        "source_sha256": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+        "license": "Apache-2.0",
+        "provenance": "Known October 21 incident. Narrow function extraction/adaptation of the command expression before 7707756 and its repair; public development example, never independent holdout. Full pre-repair source pin: 44bdad98c1a6b2d845c4e084afe07bbf96a0073e; source SHA-256 d551e2f4e70ce875df945b1b3ec7e582463a53508753844ef1b34b45228c90e1",
+        "split": "development",
+        "independent_case_id": "aeep-cli-override-placement",
+        "template_family": "aeep-cli-override-placement",
+        "used_for_development": true
+      },
+      {
+        "schema_version": "assessment.repository-case.v1",
+        "source_repository": "https://github.com/ptse8204/AEEP-router",
+        "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+        "source_path": "src/aeep_toolkit/reporting.py",
+        "source_sha256": "59d5d72323581c315d605620f4d7125b7d7db6b7880dbfc6fd8d3bf714d44a22",
+        "license": "Apache-2.0",
+        "provenance": "Actual pinned token_total source with a newly authored faulty cross-file caller. Seeded development reproduction of the repository accounting contract, not a historical bug claim or independently sourced benchmark.",
+        "split": "development",
+        "independent_case_id": "aeep-token-unknown-propagation",
+        "template_family": "aeep-token-unknown-propagation",
+        "used_for_development": true
+      },
+      {
+        "schema_version": "assessment.repository-case.v1",
+        "source_repository": "https://github.com/ptse8204/AEEP-router",
+        "source_revision": "77077562e1a63d45791c478066affba35dd8d10d",
+        "source_path": "src/aeep/assessment/extensions.py",
+        "source_sha256": "dbd50a08ef0fcd5596a55a7ad047006f9402a08ab8ef6f3d4a7c4619b5a25ef0",
+        "license": "Apache-2.0",
+        "provenance": "Actual pinned grader_name with an equivalent stdlib digest helper. Known contract audit/negative control; no repair needed. Development example, not a fresh holdout.",
+        "split": "development",
+        "independent_case_id": "aeep-callback-binding-audit",
+        "template_family": "aeep-callback-binding-audit",
+        "used_for_development": true
+      }
+    ],
+    "maximum_behavior_probes_per_output": 32,
+    "independence": "Curator assertions require source/rights review; distinct hashes alone do not establish independence."
+  },
+  "grader": "contained_json:1",
+  "extractor": "structural_json:1",
+  "variations": [
+    "adjacent-no-change",
+    "contract-propagation",
+    "regression-repair"
+  ],
+  "exclusions": [
+    "arbitrary builds or dependency installation",
+    "new/deleted/binary files or symlinks",
+    "general repository preservation",
+    "development cases as independent holdout evidence",
+    "in-process candidate execution"
+  ],
+  "dependencies": {},
+  "screening_cases": 8,
+  "minimum_holdout_cases": 100,
+  "minimum_paired_cases": 20,
+  "maximum_correctness_failures": 0,
+  "extension": {
+    "schema_version": "assessment.recipe-extension.v4",
+    "generator": {
+      "id": "repository.patch.generate",
+      "capability": "assessment.repository_patch@1",
+      "kind": "command",
+      "description": "Reviewed repository task generate",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "read",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "python3",
+          "-I",
+          "-c",
+          "import base64, json, sys, zlib\nCASES = json.loads(zlib.decompress(base64.b64decode('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')))\nrequest=json.load(sys.stdin)\nraise ValueError(\"development cases are not campaign holdouts\")\n"
+        ],
+        "argv_literal": true,
+        "stdin_json": true,
+        "timeout_seconds": 30,
+        "max_output_bytes": 1000000,
+        "output": {
+          "type": "json"
+        }
+      }
+    },
+    "grader": {
+      "id": "repository.patch.observe",
+      "capability": "assessment.repository_patch@1",
+      "kind": "command",
+      "description": "Reviewed repository task observe",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "read",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "python3",
+          "-I",
+          "-c",
+          "import json, pathlib, runpy, sys, tempfile\nrequest = json.load(sys.stdin)\nwith tempfile.TemporaryDirectory(prefix=\"repository-probe-\") as directory:\n    root = pathlib.Path(directory)\n    for name, text in request[\"files\"].items():\n        path = root / name\n        path.parent.mkdir(parents=True, exist_ok=True)\n        path.write_text(text, encoding=\"utf-8\")\n    probe = request[\"probe\"]\n    sys.path.insert(0, str(root))\n    try:\n        namespace = runpy.run_path(str(root / probe[\"module\"]))\n        result = namespace[probe[\"call\"]](*probe.get(\"args\", []), **probe.get(\"kwargs\", {}))\n        wire = json.dumps({\"status\": \"ok\", \"result\": result}, allow_nan=False)\n    except Exception:\n        wire = json.dumps({\"status\": \"candidate_error\", \"result\": None})\n    sys.stdout.write(wire)\n"
+        ],
+        "argv_literal": true,
+        "stdin_json": true,
+        "timeout_seconds": 30,
+        "max_output_bytes": 1000000,
+        "output": {
+          "type": "json"
+        }
+      }
+    },
+    "reference": {
+      "id": "repository.patch.reference",
+      "capability": "assessment.repository_patch@1",
+      "kind": "command",
+      "description": "Reviewed repository task reference",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "read",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "python3",
+          "-I",
+          "-c",
+          "import base64, json, sys, zlib\nCASES = json.loads(zlib.decompress(base64.b64decode('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')))\nrequest=json.load(sys.stdin)\noutputs=[]\nfor value in request[\"inputs\"]:\n    matches=[c for c in CASES if c[\"input\"] == value]\n    assert len(matches) == 1\n    outputs.append(matches[0][\"reference_patch\"])\nprint(json.dumps({\"outputs\": outputs}))\n"
+        ],
+        "argv_literal": true,
+        "stdin_json": true,
+        "timeout_seconds": 30,
+        "max_output_bytes": 1000000,
+        "output": {
+          "type": "json"
+        }
+      }
+    },
+    "independent_fixtures": [
+      {
+        "input": {
+          "task_id": "aeep-cli-override-placement",
+          "task": "Repair global configuration option placement: append telemetry -c overrides after existing global options, before app-server when present. Preserve all argv elements and override order. Support commands with no app-server.",
+          "family": "regression-repair",
+          "files": {
+            "launch.py": "def command(argv, options):\n    return [*argv, *(part for option in options for part in ('-c', option))]\n",
+            "README.txt": "Extracted CLI argv construction; no process launching or network.\n"
+          },
+          "editable_paths": [
+            "launch.py"
+          ]
+        },
+        "output": {
+          "input_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+          "checks": [
+            {
+              "name": "policy_and_telemetry",
+              "probe": {
+                "module": "launch.py",
+                "call": "command",
+                "args": [
+                  [
+                    "codex",
+                    "-c",
+                    "policy=locked",
+                    "app-server",
+                    "--listen",
+                    "stdio://"
+                  ],
+                  [
+                    "metrics=local"
+                  ]
+                ]
+              },
+              "expected": [
+                "codex",
+                "-c",
+                "policy=locked",
+                "-c",
+                "metrics=local",
+                "app-server",
+                "--listen",
+                "stdio://"
+              ]
+            },
+            {
+              "name": "no_subcommand",
+              "probe": {
+                "module": "launch.py",
+                "call": "command",
+                "args": [
+                  [
+                    "codex"
+                  ],
+                  [
+                    "a=1",
+                    "b=2"
+                  ]
+                ]
+              },
+              "expected": [
+                "codex",
+                "-c",
+                "a=1",
+                "-c",
+                "b=2"
+              ]
+            },
+            {
+              "name": "no_overrides",
+              "probe": {
+                "module": "launch.py",
+                "call": "command",
+                "args": [
+                  [
+                    "codex",
+                    "app-server"
+                  ],
+                  []
+                ]
+              },
+              "expected": [
+                "codex",
+                "app-server"
+              ]
+            }
+          ]
+        },
+        "grader_output": {
+          "base_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+          "files": {
+            "launch.py": "def command(argv, options):\n    boundary = argv.index('app-server') if 'app-server' in argv else len(argv)\n    return [*argv[:boundary], *(part for option in options for part in ('-c', option)), *argv[boundary:]]\n"
+          }
+        }
+      },
+      {
+        "input": {
+          "task_id": "aeep-token-unknown-propagation",
+          "task": "Preserve the token_total contract through the public total API: unavailable counts must remain None; measured zero must remain zero. Do not double count included token categories. Preserve the core accounting implementation.",
+          "family": "contract-propagation",
+          "files": {
+            "counts.py": "from __future__ import annotations\ndef token_total(tokens: TokenObservation | None) -> int | None:\n    if tokens is None or tokens.input_tokens is None or tokens.output_tokens is None:\n        return None\n    total = tokens.input_tokens + tokens.output_tokens\n    for count, semantics in ((tokens.cached_input_tokens, tokens.cached_semantics),\n                             (tokens.reasoning_output_tokens, tokens.reasoning_semantics)):\n        if semantics == \"unknown\" or (semantics == \"separate\" and count is None):\n            return None\n        if semantics == \"separate\" and count is not None:\n            total += count\n    return total\n",
+            "api.py": "from types import SimpleNamespace\nimport counts\ndef total(value):\n    return counts.token_total(None if value is None else SimpleNamespace(**value)) or 0\n"
+          },
+          "editable_paths": [
+            "api.py"
+          ]
+        },
+        "output": {
+          "input_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+          "checks": [
+            {
+              "name": "unknown_input",
+              "probe": {
+                "module": "api.py",
+                "call": "total",
+                "args": [
+                  null
+                ]
+              },
+              "expected": null
+            },
+            {
+              "name": "included_categories",
+              "probe": {
+                "module": "api.py",
+                "call": "total",
+                "args": [
+                  {
+                    "input_tokens": 10,
+                    "output_tokens": 4,
+                    "cached_input_tokens": 5,
+                    "reasoning_output_tokens": 2,
+                    "cached_semantics": "included_in_input",
+                    "reasoning_semantics": "included_in_output"
+                  }
+                ]
+              },
+              "expected": 14
+            },
+            {
+              "name": "unknown_semantics",
+              "probe": {
+                "module": "api.py",
+                "call": "total",
+                "args": [
+                  {
+                    "input_tokens": 10,
+                    "output_tokens": 4,
+                    "cached_input_tokens": 5,
+                    "reasoning_output_tokens": 2,
+                    "cached_semantics": "unknown",
+                    "reasoning_semantics": "included_in_output"
+                  }
+                ]
+              },
+              "expected": null
+            },
+            {
+              "name": "measured_zero",
+              "probe": {
+                "module": "api.py",
+                "call": "total",
+                "args": [
+                  {
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "cached_input_tokens": 0,
+                    "reasoning_output_tokens": 0,
+                    "cached_semantics": "included_in_input",
+                    "reasoning_semantics": "included_in_output"
+                  }
+                ]
+              },
+              "expected": 0
+            },
+            {
+              "name": "separate_categories",
+              "probe": {
+                "module": "api.py",
+                "call": "total",
+                "args": [
+                  {
+                    "input_tokens": 10,
+                    "output_tokens": 4,
+                    "cached_input_tokens": 5,
+                    "reasoning_output_tokens": 2,
+                    "cached_semantics": "separate",
+                    "reasoning_semantics": "separate"
+                  }
+                ]
+              },
+              "expected": 21
+            }
+          ]
+        },
+        "grader_output": {
+          "base_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+          "files": {
+            "api.py": "from types import SimpleNamespace\nimport counts\ndef total(value):\n    return counts.token_total(None if value is None else SimpleNamespace(**value))\n"
+          }
+        }
+      }
+    ],
+    "transformed_fixtures": [
+      {
+        "input": {
+          "task_id": "aeep-callback-binding-audit",
+          "task": "Audit grader_name: it must bind both the input and expected result with the canonical content digest. Preserve working behavior; make no change if this contract is already met.",
+          "family": "adjacent-no-change",
+          "files": {
+            "callbacks.py": "from __future__ import annotations\nfrom digest import content_digest\ndef grader_name(value: dict[str, Any], expected: dict[str, Any]) -> str:\n    return \"contained_recipe_\" + content_digest({\"input\": value, \"expected\": expected})\n",
+            "digest.py": "import hashlib, json\ndef content_digest(value):\n    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(\",\", \":\"), allow_nan=False).encode()).hexdigest()\n"
+          },
+          "editable_paths": [
+            "callbacks.py"
+          ]
+        },
+        "output": {
+          "input_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+          "checks": [
+            {
+              "name": "literal",
+              "probe": {
+                "module": "callbacks.py",
+                "call": "grader_name",
+                "args": [
+                  {
+                    "text": "one"
+                  },
+                  {
+                    "answer": 1
+                  }
+                ]
+              },
+              "expected": "contained_recipe_548d0c5647c47434438eba9b9b2bb71c40275ad1f2a958fe482a8823ba7da369"
+            },
+            {
+              "name": "changed_input",
+              "probe": {
+                "module": "callbacks.py",
+                "call": "grader_name",
+                "args": [
+                  {
+                    "text": "two"
+                  },
+                  {
+                    "answer": 1
+                  }
+                ]
+              },
+              "expected": "contained_recipe_a5b58abbd8ce5b19af5c85281c2bcbbf6fa0c781c9009cccfeb35b969b4c5f5e"
+            },
+            {
+              "name": "changed_expected",
+              "probe": {
+                "module": "callbacks.py",
+                "call": "grader_name",
+                "args": [
+                  {
+                    "text": "one"
+                  },
+                  {
+                    "answer": 2
+                  }
+                ]
+              },
+              "expected": "contained_recipe_6281b9cf406735235ab210ddd5d34b378be517129db39f43f8b7b86f9b7c39c7"
+            }
+          ]
+        },
+        "grader_output": {
+          "base_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+          "files": {}
+        }
+      }
+    ],
+    "fault_outputs": [
+      {
+        "base_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "files": {}
+      },
+      {
+        "base_sha256": "f4c5669774db21fad9cd4491e584c8bd8a29d521d788fd19ec4bb04b11f3967f",
+        "files": {
+          "launch.py": "def command(*args, **kwargs):\n    return None\n"
+        }
+      },
+      {
+        "base_sha256": "dec5ff7543628d9c0d968b954f8c8f6eedead7869af70fa4dc719bc76dd85919",
+        "files": {
+          "api.py": "def total(*args, **kwargs):\n    return None\n"
+        }
+      },
+      {
+        "base_sha256": "571e2986922248023cbac9ea3009fa10e5dd0d86a402239ad8c8b510da8049ee",
+        "files": {
+          "callbacks.py": "def grader_name(*args, **kwargs):\n    return None\n"
+        }
+      }
+    ],
+    "feature_rules": {
+      "family": {
+        "path": "/family",
+        "operation": "enum",
+        "values": [
+          "adjacent-no-change",
+          "contract-propagation",
+          "regression-repair"
+        ]
+      }
+    },
+    "variation_features": {
+      "adjacent-no-change": {
+        "family": "adjacent-no-change"
+      },
+      "contract-propagation": {
+        "family": "contract-propagation"
+      },
+      "regression-repair": {
+        "family": "regression-repair"
+      }
+    },
+    "template_families": [
+      "aeep-callback-binding-audit",
+      "aeep-cli-override-placement",
+      "aeep-token-unknown-propagation"
+    ],
+    "truth_schema": {
+      "$defs": {
+        "RepositoryCheck": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "pattern": "^[a-z][a-z0-9_]{0,63}$",
+              "title": "Name",
+              "type": "string"
+            },
+            "probe": {
+              "additionalProperties": true,
+              "title": "Probe",
+              "type": "object"
+            },
+            "expected": {
+              "title": "Expected"
+            }
+          },
+          "required": [
+            "name",
+            "probe",
+            "expected"
+          ],
+          "title": "RepositoryCheck",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "input_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/RepositoryCheck"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "checks"
+      ],
+      "title": "RepositoryTruth",
+      "type": "object"
+    },
+    "failure_codes": [
+      "input_binding",
+      "patch_contract",
+      "behavior_mismatch"
+    ]
+  }
+}
