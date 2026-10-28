@@ -1,0 +1,475 @@
+{
+  "read_only_inventory": true,
+  "image_id": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+  "architecture": "arm64",
+  "image_size": 230083840,
+  "layers": [
+    "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+    "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+    "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+    "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+    "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596",
+    "sha256:3ac63b0e5a483aa9eb2f5093f67cc1b140693775c3132538bbad38e7f2f62adb",
+    "sha256:5b6a9a2ce21e9f55c78abe6b52b334b013d9b79bb750dc7f143d94783d901220",
+    "sha256:884a45862117b6a9f36427cfe87f5ef13e7f2d1db583a1469c203e65ba188a4b",
+    "sha256:17f0c023b016a426790021a9c60d3e6ddc58937e4346d15f7d0b612d4039f181",
+    "sha256:58f3ff85194c86a164c0ccaf474bafa4b9f711ec0fab2ebf3b16f2cb0593d1c3",
+    "sha256:d1b10e9a14fd0459b1d8d8aef8798ae448334d6ea4584e81f7ce1a67adbff6eb",
+    "sha256:198b487115d64e2b3ac0f42cc2e19a21afc16830c0146841a6f23bd4dcafc6f3",
+    "sha256:4ddad47a9d95be639d8799e26d6e63ac226162d7d4c8fbfc1f30fde89c4dcf79",
+    "sha256:625582697d4bddb457ecf3ac668593f9dec439ca1f831b8640a1ec5d3d3ed10d",
+    "sha256:ba660f65e8cb1b3505aa79b6406c3521c7247728e63f8180b7bd9a3f73d79497",
+    "sha256:5118eff5e04a7f4e4db7d580581f3012042af26e4f708744babe65b6b4df072b",
+    "sha256:a226260228468268b8cd575c7542141d48f523046c0c6fb71616cfa9cd6446f7",
+    "sha256:aec680b8310f38deadc9c2861cb60287ba223277665d28e68f6c15052da5f2b6",
+    "sha256:df0316449c41dec102ced98786c3390498d9be5001e223f74403fc6cc71fbb9b",
+    "sha256:8009c85a58c95e1293f53c0483bc556135b0612d8abdff36e2c7be4999621e74",
+    "sha256:82e01fdc1bf028a6ead8cfe9c6b62cf39bede15b6957dfea45dee6307e9e2521",
+    "sha256:45a04280559cc4d5637c32a67c6c7c4bbd85b5555eec491e19a0889acc504f2e",
+    "sha256:ce4ecba747caafeb0e6f9e6bf925e26a7df1a9bc2d7d1ba144907723898c703b"
+  ],
+  "dpkg_status_last_layer": "blobs/sha256/4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62",
+  "dpkg_status_sha256": "96f75d858b8f3b542b345f9fb2c37f489c0db226f4e03c084ff63ca4b74ecb8b",
+  "packages": {
+    "adduser": {
+      "Version": "3.152",
+      "Architecture": "all",
+      "Depends": "passwd (>= 1:4.17.2-5)"
+    },
+    "apt": {
+      "Version": "3.0.3",
+      "Architecture": "arm64",
+      "Depends": "base-passwd (>= 3.6.1) | adduser, sqv (>= 1.3.0), libapt-pkg7.0 (>= 3.0.3), debian-archive-keyring, libc6 (>= 2.38), libgcc-s1 (>= 3.0), libseccomp2 (>= 2.4.2), libssl3t64 (>= 3.0.0), libstdc++6 (>= 13.1), libsystemd0"
+    },
+    "base-files": {
+      "Version": "13.8+deb13u7",
+      "Architecture": "arm64",
+      "Pre-Depends": "awk"
+    },
+    "base-passwd": {
+      "Version": "3.6.7",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34), libdebconfclient0 (>= 0.145), libselinux1 (>= 3.1~)"
+    },
+    "bash": {
+      "Version": "5.2.37-2+b10",
+      "Architecture": "arm64",
+      "Depends": "base-files (>= 2.1.12), debianutils (>= 5.6-0.1)",
+      "Pre-Depends": "libc6 (>= 2.38), libtinfo6 (>= 6)"
+    },
+    "bsdutils": {
+      "Version": "1:2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38), libsystemd0 (>= 254)"
+    },
+    "ca-certificates": {
+      "Version": "20250419",
+      "Architecture": "all",
+      "Depends": "openssl (>= 1.1.1), debconf (>= 0.5) | debconf-2.0"
+    },
+    "coreutils": {
+      "Version": "9.7-3",
+      "Architecture": "arm64",
+      "Pre-Depends": "libacl1 (>= 2.2.23), libattr1 (>= 1:2.4.48), libc6 (>= 2.38), libcap2 (>= 1:2.10), libgmp10 (>= 2:6.3.0+dfsg), libselinux1 (>= 3.1~), libssl3t64 (>= 3.0.0), libsystemd0 (>= 254)"
+    },
+    "dash": {
+      "Version": "0.5.12-12",
+      "Architecture": "arm64",
+      "Depends": "debianutils (>= 5.6-0.1)",
+      "Pre-Depends": "libc6 (>= 2.38)"
+    },
+    "debconf": {
+      "Version": "1.5.91",
+      "Architecture": "all"
+    },
+    "debian-archive-keyring": {
+      "Version": "2025.1",
+      "Architecture": "all"
+    },
+    "debianutils": {
+      "Version": "5.23.2",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38)"
+    },
+    "diffutils": {
+      "Version": "1:3.10-4",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38)"
+    },
+    "dpkg": {
+      "Version": "1.22.22",
+      "Architecture": "arm64",
+      "Depends": "tar (>= 1.28-1)",
+      "Pre-Depends": "libbz2-1.0, libc6 (>= 2.38), liblzma5 (>= 5.4.0), libmd0 (>= 0.0.0), libselinux1 (>= 3.1~), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+    },
+    "findutils": {
+      "Version": "4.10.0-3",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38), libselinux1 (>= 3.1~)"
+    },
+    "gcc-14-base": {
+      "Version": "14.2.0-19",
+      "Architecture": "arm64"
+    },
+    "grep": {
+      "Version": "3.11-4+b1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38), libpcre2-8-0 (>= 10.32)"
+    },
+    "gzip": {
+      "Version": "1.13-1+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38)"
+    },
+    "hostname": {
+      "Version": "3.25",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.34)"
+    },
+    "init-system-helpers": {
+      "Version": "1.69~deb13u1",
+      "Architecture": "all"
+    },
+    "libacl1": {
+      "Version": "2.3.2-2+b1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libapt-pkg7.0": {
+      "Version": "3.0.3",
+      "Architecture": "arm64",
+      "Depends": "libbz2-1.0, libc6 (>= 2.38), libgcc-s1 (>= 3.0), liblz4-1 (>= 0.0~r127), liblzma5 (>= 5.1.1alpha+20120614), libssl3t64 (>= 3.0.0), libstdc++6 (>= 14), libsystemd0 (>= 221), libudev1 (>= 183), libxxhash0 (>= 0.8), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.2.3)"
+    },
+    "libattr1": {
+      "Version": "1:2.5.2-3",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    },
+    "libaudit-common": {
+      "Version": "1:4.0.2-2+deb13u1",
+      "Architecture": "all"
+    },
+    "libaudit1": {
+      "Version": "1:4.0.2-2+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libaudit-common (>= 1:4.0.2-2+deb13u1), libc6 (>= 2.38), libcap-ng0 (>= 0.7.9)"
+    },
+    "libblkid1": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libbsd0": {
+      "Version": "0.12.2-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38), libmd0 (>= 1.0.3-2)"
+    },
+    "libbz2-1.0": {
+      "Version": "1.0.8-6",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    },
+    "libc-bin": {
+      "Version": "2.41-12+deb13u4",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>> 2.41), libc6 (<< 2.42)"
+    },
+    "libc6": {
+      "Version": "2.41-12+deb13u4",
+      "Architecture": "arm64",
+      "Depends": "libgcc-s1"
+    },
+    "libcap-ng0": {
+      "Version": "0.8.5-4+b1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libcap2": {
+      "Version": "1:2.75-10+deb13u1+b3",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libcrypt1": {
+      "Version": "1:4.4.38-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libdb5.3t64": {
+      "Version": "5.3.28+dfsg2-9",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libdebconfclient0": {
+      "Version": "0.280",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libffi8": {
+      "Version": "3.4.8-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "libgcc-s1": {
+      "Version": "14.2.0-19",
+      "Architecture": "arm64",
+      "Depends": "gcc-14-base (= 14.2.0-19), libc6 (>= 2.35)"
+    },
+    "libgdbm6t64": {
+      "Version": "1.24-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "libgmp10": {
+      "Version": "2:6.3.0+dfsg-3",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libhogweed6t64": {
+      "Version": "3.10.1-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17), libgmp10 (>= 2:6.3.0+dfsg), libnettle8t64"
+    },
+    "liblastlog2-2": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38), libsqlite3-0 (>= 3.5.9)"
+    },
+    "liblz4-1": {
+      "Version": "1.10.0-4",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17), libxxhash0 (>= 0.6.5)"
+    },
+    "liblzma5": {
+      "Version": "5.8.1-1+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "libmd0": {
+      "Version": "1.1.0-2+b1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.33)"
+    },
+    "libmount1": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libblkid1 (= 2.41.5-0+deb13u1), libc6 (>= 2.38), libselinux1 (>= 3.1~)"
+    },
+    "libncursesw6": {
+      "Version": "6.5+20250216-2",
+      "Architecture": "arm64",
+      "Depends": "libtinfo6 (= 6.5+20250216-2), libc6 (>= 2.34)"
+    },
+    "libnettle8t64": {
+      "Version": "3.10.1-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    },
+    "libpam-modules": {
+      "Version": "1.7.0-5",
+      "Architecture": "arm64",
+      "Pre-Depends": "libaudit1 (>= 1:2.2.1), libc6 (>= 2.38), libcrypt1 (>= 1:4.3.0), libdb5.3t64, libpam0g (>= 1.4.1), libselinux1 (>= 3.1~), libsystemd0 (>= 254), debconf (>= 0.5) | debconf-2.0, libpam-modules-bin (= 1.7.0-5)"
+    },
+    "libpam-modules-bin": {
+      "Version": "1.7.0-5",
+      "Architecture": "arm64",
+      "Depends": "libaudit1 (>= 1:2.2.1), libc6 (>= 2.38), libcrypt1 (>= 1:4.3.0), libpam0g (>= 0.99.7.1), libselinux1 (>= 3.1~), libsystemd0 (>= 254)"
+    },
+    "libpam-runtime": {
+      "Version": "1.7.0-5",
+      "Architecture": "all",
+      "Depends": "debconf (>= 0.5) | debconf-2.0, debconf (>= 1.5.19) | cdebconf, libpam-modules (>= 1.0.1-6)"
+    },
+    "libpam0g": {
+      "Version": "1.7.0-5",
+      "Architecture": "arm64",
+      "Depends": "libaudit1 (>= 1:2.2.1), libc6 (>= 2.34), debconf (>= 0.5) | debconf-2.0"
+    },
+    "libpcre2-8-0": {
+      "Version": "10.46-1~deb13u2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "libreadline8t64": {
+      "Version": "8.2-6",
+      "Architecture": "arm64",
+      "Depends": "readline-common, libc6 (>= 2.38), libtinfo6 (>= 6)"
+    },
+    "libseccomp2": {
+      "Version": "2.6.0-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    },
+    "libselinux1": {
+      "Version": "3.8.1-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38), libpcre2-8-0 (>= 10.22)"
+    },
+    "libsemanage-common": {
+      "Version": "3.8.1-1",
+      "Architecture": "all"
+    },
+    "libsemanage2": {
+      "Version": "3.8.1-1",
+      "Architecture": "arm64",
+      "Depends": "libsemanage-common (>= 3.8.1-1), libaudit1 (>= 1:2.2.1), libbz2-1.0, libc6 (>= 2.38), libselinux1 (>= 3.8.1), libsepol2 (>= 3.8.1)"
+    },
+    "libsepol2": {
+      "Version": "3.8.1-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libsmartcols1": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libsqlite3-0": {
+      "Version": "3.46.1-7+deb13u2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libssl3t64": {
+      "Version": "3.5.7-1~deb13u2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4), openssl-provider-legacy"
+    },
+    "libstdc++6": {
+      "Version": "14.2.0-19",
+      "Architecture": "arm64",
+      "Depends": "gcc-14-base (= 14.2.0-19), libc6 (>= 2.38), libgcc-s1 (>= 4.5)"
+    },
+    "libsystemd0": {
+      "Version": "257.13-1~deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.39), libcap2 (>= 1:2.10)"
+    },
+    "libtinfo6": {
+      "Version": "6.5+20250216-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "libudev1": {
+      "Version": "257.13-1~deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38), libcap2 (>= 1:2.10)"
+    },
+    "libuuid1": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "libxxhash0": {
+      "Version": "0.8.3-2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    },
+    "libzstd1": {
+      "Version": "1.5.7+dfsg-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34)"
+    },
+    "login": {
+      "Version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Depends": "libpam-modules, libpam-runtime, libaudit1 (>= 1:2.2.1), libc6 (>= 2.38), libcrypt1 (>= 1:4.1.0), libpam0g (>= 0.99.7.1)",
+      "Pre-Depends": "login.defs (>= 1:4.16.0-1~)"
+    },
+    "login.defs": {
+      "Version": "1:4.17.4-2",
+      "Architecture": "all"
+    },
+    "mawk": {
+      "Version": "1.3.4.20250131-1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "mount": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libblkid1 (= 2.41.5-0+deb13u1), libc6 (>= 2.38), libmount1 (= 2.41.5-0+deb13u1), libselinux1 (>= 3.1~), libsmartcols1 (= 2.41.5-0+deb13u1)"
+    },
+    "ncurses-base": {
+      "Version": "6.5+20250216-2",
+      "Architecture": "all"
+    },
+    "ncurses-bin": {
+      "Version": "6.5+20250216-2",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.34), libtinfo6 (>= 6.4+20230603)"
+    },
+    "netbase": {
+      "Version": "6.5",
+      "Architecture": "all"
+    },
+    "openssl": {
+      "Version": "3.5.7-1~deb13u2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34), libssl3t64 (>= 3.5.0)"
+    },
+    "openssl-provider-legacy": {
+      "Version": "3.5.7-1~deb13u2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17), libssl3t64 (>= 3.0.3)"
+    },
+    "passwd": {
+      "Version": "1:4.17.4-2",
+      "Architecture": "arm64",
+      "Depends": "base-passwd (>= 3.6.4), libpam-modules, login.defs, libacl1 (>= 2.2.23), libattr1 (>= 1:2.4.44), libaudit1 (>= 1:2.2.1), libbsd0 (>= 0.11.0), libc6 (>= 2.38), libcrypt1 (>= 1:4.1.0), libpam0g (>= 0.99.7.1), libselinux1 (>= 3.1~), libsemanage2 (>= 2.0.32)"
+    },
+    "perl-base": {
+      "Version": "5.40.1-6+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libc6 (>= 2.38), libcrypt1 (>= 1:4.1.0)"
+    },
+    "readline-common": {
+      "Version": "8.2-6",
+      "Architecture": "all"
+    },
+    "sed": {
+      "Version": "4.9-2+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libacl1 (>= 2.2.23), libc6 (>= 2.38), libselinux1 (>= 3.1~)"
+    },
+    "sqv": {
+      "Version": "1.3.0-3+b2",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.34), libgcc-s1 (>= 4.2), libgmp10 (>= 2:6.3.0+dfsg), libhogweed6t64, libnettle8t64 (>= 3.9~)"
+    },
+    "sysvinit-utils": {
+      "Version": "3.14-4",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.38)"
+    },
+    "tar": {
+      "Version": "1.35+dfsg-3.1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libacl1 (>= 2.2.23), libc6 (>= 2.38), libselinux1 (>= 3.1~)"
+    },
+    "tzdata": {
+      "Version": "2026c-0+deb13u1",
+      "Architecture": "all",
+      "Depends": "debconf (>= 0.5) | debconf-2.0"
+    },
+    "util-linux": {
+      "Version": "2.41.5-0+deb13u1",
+      "Architecture": "arm64",
+      "Pre-Depends": "libpam-modules, libpam-runtime, libblkid1 (= 2.41.5-0+deb13u1), libc6 (>= 2.41), libcap-ng0 (>= 0.7.9), libcrypt1 (>= 1:4.1.0), liblastlog2-2 (= 2.41.5-0+deb13u1), libmount1 (= 2.41.5-0+deb13u1), libpam0g (>= 0.99.7.1), libselinux1 (>= 3.1~), libsmartcols1 (= 2.41.5-0+deb13u1), libsystemd0, libtinfo6 (>= 6), libudev1 (>= 183), libuuid1 (= 2.41.5-0+deb13u1)"
+    },
+    "zlib1g": {
+      "Version": "1:1.3.dfsg+really1.3.1-1+b1",
+      "Architecture": "arm64",
+      "Depends": "libc6 (>= 2.17)"
+    }
+  },
+  "package_count": 87,
+  "git_absent": true,
+  "owned_export_bytes": 230109184,
+  "owned_export_sha256": "dd256bac3188dfc28d3d183365e1fda81652aaf07484ab21bece68e1d9cd082e",
+  "read_existing_owned_export_without_second_export": true,
+  "oci_manifest_config_and_all_layer_digests_verified": true,
+  "unchanged_owned_export_removed": true,
+  "containers_started_builds_installs_downloads_models": 0,
+  "all_images_and_existing_containers_untouched": true,
+  "free_before_bytes": 77428211712,
+  "free_after_bytes": 77669572608
+}

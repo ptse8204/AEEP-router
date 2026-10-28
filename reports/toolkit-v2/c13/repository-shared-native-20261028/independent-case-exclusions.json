@@ -1,0 +1,22 @@
+{
+  "isort": {
+    "subject": "pycqa__isort-2491-aeep-contract-audit",
+    "evidence": "reports/toolkit-v2/c13/repository-worker-input-20261027/raw-observation-11.json",
+    "observed_exit_code": 2,
+    "actual_error": "importlib.metadata.PackageNotFoundError: No package metadata was found for isort",
+    "required_original_obligations": 75,
+    "conclusion": "Source imports metadata.version(\"isort\");a stable test path or adding Git does not provide genuine distribution metadata. No new source/test invocation proposed.",
+    "metadata_or_version_fabricated": false
+  },
+  "sopel": {
+    "subject": "sopel-irc__sopel-2653",
+    "conclusion": "Requires SQLAlchemy>=1.4,<1.5 rather than selected2.0.44,and genuine installed Sopel metadata;still excluded."
+  },
+  "sqlglot7479": {
+    "subject": "tobymao__sqlglot-7479-declared-tests",
+    "evidence": "reports/toolkit-v2/c13/repository-workload-batch-20261022/runtime-execution/execution-result.json",
+    "conclusion": "Earlier partial-2repair passed the required tests. Native identity or Git cannot strengthen those semantic assertions. Keep excluded;do not replay it as a path fix."
+  },
+  "read_only_audit": true,
+  "new_source_execution_or_grant_charge": false
+}

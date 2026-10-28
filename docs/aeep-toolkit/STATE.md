@@ -83,10 +83,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '1acdbd0'
-last_check_command: 'repository-stable-workspace-20261028/run-runtime.py ae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e;consolidate-runtime.py'
-last_check_result: '17COMPLETED receipts/19operations/35.85609079245478seconds. Both profiles passed fresh checks and171-test reference;original12FAILED/159PASSED as frozen. Pool64/40repos/5037IDs;77cases missing. Zero models/cash;owned containers/canary absent;all images retained. Core source/wheel unchanged.'
-next_action: 'Sourceb09911a0 passed all13gates;build wheelb3d9c5d0 is ready. Prepare one exact shared-native runtime/wheel/docs bundle with pinnedGit/oneCOPY-onlyimage,all38Dead obligations,two171-test shared-default controls,and20private installed checks. Old765e28e7 is WITHDRAWN. Obtain its actual exact untrusted download/build/installation/execution authority only after all artifacts/control tests are ready. Preserve64case pool/77gap and all old counters/source bindings;no architecture or budget decision.'
+last_verified_commit: '42f5977'
+last_check_command: 'repository-shared-native-20261028/run-source-checks.py:all13checks;prepare-template.py;prepare-review.py;package-review-shared-native-20261028/prepare-review.py'
+last_check_result: 'Sourceb09911a0 passed13gates,1775tests/21skips both runs,82%coverage,both branch gates;wheelb3d9c5d0 built. Runtime1b9ff4bc and package74c1c82d are prepared,not executed. All prior ae6a0f9f receipts/counters remain;pool64/77gap.'
+next_action: 'Obtain exact approval for repository-shared-native-20261028/approval-bundle.json. It binds realGit download/oneCOPY-onlyimage,21maxoffline calls/26ops/1335reservedseconds including all38Dead obligations and two171-test shared-default controls;new wheelb3d9c5d0 plus32cached dependencies for20private checks;current cached offline docs. Run once,retain canonical charges/receipts,and continue safe cohort/selection work. Old765e28e7 is WITHDRAWN;no source-suite replay or architecture/budget decision needed.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4385,3 +4385,24 @@ Dead obligations. Current host materialization matches both frozen control
 payload hashes without executing external code. Source M1 results remain valid
 only within their recorded scope. Currentgrant13304/3755/120080.87940059323/0.0,
 pool64/40repos/5037IDs and77-case gap remain unchanged;zero new model turns/cash.
+
+### Shared-source execution bundle preparation is complete
+
+Commit42f5977 contains the shared observer fix and verified source. Runtime
+component1b9ff4bca66e2f4bea50544fdb64881a8aaf2a0fc0e1a13259c85a0b11472030
+binds72assets,new source/image conditions,canonical shared-default executor and
+two frozen171-test JSON-logger controls. Guard rejects operation27 under the
+cumulative26operation envelope;actual derivation fixture passed. Eight component
+selection/permission checks and frozen payload binding checks passed without
+untrusted execution. Maximum21calls/26ops/1335reservedseconds includes one
+300-second build and the finite optional report controls.
+
+Package component74c1c82d17ac37e175ad33347ba1900a08c52742ae43b4e4f959fd7668cf3eca
+binds wheelb3d9c5d0 and exactly32retained cached dependencies. Its20private checks
+include exact shared-default program identity from the installed normal CLI
+export;no external source/test execution occurs in that export. The private
+wheel cache is inert and retained. All runtime/installation/current-docs checks
+need the next actual exact approval. Source13gates are complete;do not rerun.
+No Git download,image build,package installation,model,shared grant charge or
+release occurred during this preparation. Pool64/77gap and current13304/3755/
+120080.87940059323/0.0 remain. No architecture or budget decision is needed.
