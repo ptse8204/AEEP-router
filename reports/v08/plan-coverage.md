@@ -6148,3 +6148,34 @@ The separate stable-workspace reviewae6a0f9f is prepared,not executed. Its53pins
 passed. All171JSON-logger obligations remain;maximum19calls/23operations/965seconds,
 zero models/cash,installs,downloads,image changes or release. Core source and
 package remain unchanged. Exact changed-program execution approval is needed.
+
+## Stable workspace actual result, October28
+
+[Actual evidence](../toolkit-v2/c13/repository-stable-workspace-20261028/RESULTS.md) confirms171/171 JSON-logger reference tests
+in both raw/diagnostic profiles;original12FAILED/159PASSED. Both profiles passed
+fresh boundary/state/transport/event checks. All17receipts/19operations reconcile,
+35.85609079245478seconds,zero models/cash. Owned containers/canary removed,all
+images retained. Pool64/40repos/5037IDs leaves77cases missing;no formal model,
+usefulness,selection,resource,human-control or release gate closes. The existing
+13source/20installed checks apply unchanged. Expiry-only amendment5d9e7d9a
+renews to2026-10-29T20:04:36.625328Z without resetting counters or ceilings;current
+13304/3755/120080.87940059323/0.0. Old168/171 failure remains excluded.
+
+Read-only OCI image inventory verified87Debian packages without a container.
+The230109184-byte owned export was removed;all images stayed. A concrete exact
+Git local-command component review is prepared with one COPY-only image
+and all38Dead obligations;no archive download/build/execution has happened.
+Isort's actual collection error is missing distribution metadata,and SQLglot7479
+has an undetected partial repair. Neither is rescheduled as an identity fix.
+Fresh offline docs checking for the updated records awaits the next exact
+untrusted-checker approval;current local lint is safe. The completed aacf34a8
+scan and its input hashes remain unchanged.
+
+The prepared D120 runtime component4d303758 binds69assets and actual parent
+inventory. Eight authored component checks,seven budget guards,operation25
+rejection and the actual image-binding derivation fixture passed. Restrictive
+umask traversal is handled before copying;old draft29941bc9 is withdrawn before
+execution. The next exact combined review covers pinned Git download/component,
+one COPY-only image,finite fresh checks/all38Dead obligations and current cached
+offline docs. No source/package repeat,model,cash,credentials,release or old-image
+deletion. All actual Git/Dead checks await approval;these fixtures prove no value.

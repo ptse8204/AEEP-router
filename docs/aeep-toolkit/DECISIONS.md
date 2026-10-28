@@ -2067,3 +2067,28 @@ container or public task. New execution requires its exact review; unused slots
 in the terminalca2a06cc review cannot cover different observer bytes. Dead's
 missing Git remains an independent real runtime prerequisite, not a reason to
 mock fixtures or change the task. No architecture or scientific threshold changes.
+
+## D120: Real upstream local Git component for repository fixtures
+
+Dead204's actual reference produced33 fixture errors because `git` is absent.
+Its protected fixtures require real `git init`, `git add` and `git ls-files`.
+Do not mock Git or drop the fixtures. A read-only export of retained image9f47
+verified its OCI manifest/config/layers and87 installed Debian packages,without
+starting a container. The unchanged230109184-byte owned export was removed.
+Git is absent;libc,PCRE2,zlib and the linker tooling are present.
+
+Prepare the exact official Debian arm64 Git2.47.3 archive,8665568bytes,for review.
+Select only its unmodified main binary,templates and copyright. This is a narrow
+local-command component,not a complete Debian Git package installation. Static
+Apple LLVM inspection must confirm the exact predeclared three-library closure;
+unknown dependencies stop before build. One local COPY-only image inherits the
+unchanged parent configuration and layers. No package scripts,resolver,Perl/Curl
+helper stack or host installation runs. Keep both images and the private cache.
+
+The parent review must explicitly authorize the exact download,new component,
+image build and deterministic output-image binding. Fresh probes must establish
+containment,events,Git version/linking/local behavior and Identify origin before
+reproducing all38 obligations. Old reference failures remain. Current source
+and wheel checks are reused;no model or scientific/resource/human/release claim.
+Isort's actual missing distribution metadata,Sopel's incompatible closure and
+SQLglot7479's undetected partial repair remain independent exclusions.

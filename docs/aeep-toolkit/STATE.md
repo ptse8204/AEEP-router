@@ -1,38 +1,39 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of October 28: approved two-repository bundle ca2a06cc completed;
-neither reference qualified.** All 12 receipts and 14 operations reconcile,
-charging 24.72456170944497 seconds and zero model turns/cash. Dead's reference
-has 33 fixture errors because the retained grader image lacks Git. JSON-logger
-passes 168 tests but misses three required traceback parameter identities because
-collection and body workers use different temporary paths. Both stay excluded;
-counterexamples were unstarted. Six default-observer checks and the support probe
-passed. All owned containers/canary/checker runtime were removed; all images remain.
-[Actual batch results](../../reports/toolkit-v2/c13/repository-native-batch-ready-20261028/RESULTS.md)
-preserve the failures, receipts and scope. Do not replay the terminal bundle.
+**Status as of October 28: approved stable-workspace review ae6a0f9f passed.**
+Both diagnostic and raw references passed all171 JSON-logger obligations. The
+original source failed exactly12 bug tests while159 preservation tests passed.
+Both profiles passed four fresh boundary/state/transport probes and two native
+fixtures;backend support passed. All17 completed receipts and19 operations
+reconcile,charging35.85609079245478seconds with zero model turns/cash. All owned
+containers/canary are absent;all images remain.
+[Actual results](../../reports/toolkit-v2/c13/repository-stable-workspace-20261028/RESULTS.md)
+preserve the earlier168/171 failure and the new exact scope. Do not replay either
+terminal review. No names were normalized or assertions/obligations dropped.
 
-Source dbf9be31 (implementation commit 0688f63) and wheel3791d8f7 are unchanged.
-All 13 source gates and 20 installed checks remain current: 1,772 tests/21 skips
-in each full run, 82% coverage and both branch gates. No broad rerun is needed.
-Pool63 snapshots/39 repositories/4866 required identities remains provisional;
-78 cases are missing (22 single-file/24 multi-file/32 audit). No model qualification,
-usefulness, selection, resource, human-control or release gate closes.
+Pool64 snapshots/40 repositories/5037 required identities is provisional.
+Families are26 single-file,23 multi-file and15 audits;77 cases are still missing
+(21/24/32) from the frozen141-case cohort. Stage assignment,model qualification,
+comparative usefulness,live selection,resource,human-control and release remain
+open. The fixed-path observer is an explicit reviewed container profile;older
+corpus bindings and the packaged default retain their original applicability.
 
-The docs component stopped at lint on unquoted `__init__` in this file. The
-standalone Lychee version passed; Makefile version and link scan were unstarted.
-The remaining Makefile version and link scan passed under aacf34a8 with the
-same approved checker, boundary and69-document scope after a recorded finite
-first-party documentation-data amendment. The initial failed component remains.
-Grant totals:13285/3755/120045.02330980077/0.0. Earlier d9352568 and22b0cf03 results
-remain unchanged and must not be replayed.
+Source dbf9be31 and wheel3791d8f7 are unchanged. Their13source gates/20installed
+checks are current and reused:1772tests/21skips in both full runs,82%coverage,
+both branch gates. The completed docs scan aacf34a8 remains separate;no source,
+package or docs component repeated in ae6a0f9f. Grant totals are13304/3755/
+120080.87940059323/0.0. A delegated expiry-only amendment renewed the same grant
+to2026-10-29T20:04:36.625328Z,with all counters and absolute ceilings preserved.
 
-A separate stable-workspace profile ae6a0f9f is prepared for JSON-logger. Its only
-program changes are a fixed private repository path inside a fresh container and
-exclusive mode-0700 creation. Authored host fixtures passed10 checks, including
-stable traceback identities across fresh processes and preservation of existing
-paths/symlinks. They are not container or public-source qualification. Keep all
-171 required tests. New observer/source execution requires its exact review;
-Dead separately needs real Git. No architecture or budget decision is needed.
+Dead stays excluded for missing Git. A read-only inventory verified the retained
+image's OCI manifest/config/layers and87 Debian packages without starting a
+container;the unchanged230109184-byte owned export was removed. The exact real
+Git local-command component and one COPY-only image are prepared for a
+new exact execution review. All38 Dead obligations remain. No Git archive download,
+installation,build or binary execution has occurred. Isort actually fails on
+missing genuine distribution metadata;Sopel also needs a compatible closure.
+These cases do not become qualified through a path fix. No architecture or
+budget decision is needed. Host free space is above72GiB;all images remain.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -75,17 +76,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'b95d09c'
-last_check_command: 'repository-native-batch-ready-20261028/run-integration-bundle.py ca2a06cc7269d22dc3be35c2c33fb7e6b7a1195e883e94c40eb61da1c7f1656e'
-last_check_result: '12COMPLETED receipts/14operations/24.72456170944497seconds. Six default-profile checks/support passed;Dead lacksGit,logger168of171duevolatilepath,both excluded. Initial docs MD050 failure retained;unstarted remainder passed underaacf34a8. Pool63 unchanged;zero models/cash;all images retained.'
-next_action: 'Exact stable-workspace runtime review ae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e is prepared for all171JSON-logger obligations. Obtain actual execution approval,then run once and reconcile. Reuse current13source gates/20installed checks/completed docs. Dead separately needs a verified upstreamGit runtime closure;Sopel stays excluded. Continue representative corpus preparation without lowering frozen counts or claiming comparative value.'
+last_verified_commit: '1acdbd0'
+last_check_command: 'repository-stable-workspace-20261028/run-runtime.py ae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e;consolidate-runtime.py'
+last_check_result: '17COMPLETED receipts/19operations/35.85609079245478seconds. Both profiles passed fresh checks and171-test reference;original12FAILED/159PASSED as frozen. Pool64/40repos/5037IDs;77cases missing. Zero models/cash;owned containers/canary absent;all images retained. Core source/wheel unchanged.'
+next_action: 'Obtain exact approval for repository-git-runtime-20261028/approval-bundle.json:runtime component4d303758 plus exact cached offline docs. It supplies pinned realGit local commands and one COPY-only image,then fresh checks and all38Dead obligations. Do not execute the inert template or replay terminalae6a0f9f. Preserve all old bindings/counters;reuse completed13source and20installed checks. Continue cohort preparation and comparative/selection work without lowering frozen requirements.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'New stable-workspace runtime review ae6a0f9f needs exact execution approval:observer bytes differ from terminalca2a06cc. Maximum19offline calls/23operations/965reservedseconds,zero models/cash;no installs,downloads,image changes,credentials,services or release. No architecture/budget decision.'
+  - 'None for terminalae6a0f9f:actual direct approval ran once and all17receipts/19operations reconcile. New pinnedGit download/component/image and fresh untrusted source execution require their concrete exact review. No architecture/budget decision;routine finite definitions/expiry amendments remain delegated.'
   - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'
   - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
@@ -4299,3 +4300,45 @@ Exact reviewae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e
 is pending actual execution approval. Core source,wheel and all scientific
 thresholds are unchanged. Host free57.37GiB;all images remain. No architecture
 or budget decision is needed. Resume from the new review,not terminalca2a06cc.
+
+### C13: stable workspace reproduced; actual runtime prerequisites audited
+
+Actual ae6a0f9f ran once. JSON-logger reference passed171/171 in both profiles;
+original12FAILED/159PASSED matches frozen roles. Collection and fresh body names
+match without normalization. Canonical17completed receipts/19operations charge
+35.85609079245478seconds;current13304/3755/120080.87940059323/0.0. All owned
+containers/canary removed;all images retained. Only expiry renewed under delegated
+authority,digest5d9e7d9a0d1b59e71c63643e1442edc627685eff2ec6c95b093030c0213e78de,
+to2026-10-29T20:04:36.625328Z;all counters/absolute ceilings preserved. Pool64/
+40repos/5037IDs leaves77cases missing. No scientific/resource/human/release gate.
+
+D120 prepares the real upstream Git local-command component,not fabricated Git
+or weakened Dead fixtures. Verified read-only OCI export showed87Debian packages
+and the inherited libc/PCRE2/zlib closure. First-party reader initially compared
+the manifest identity to the different config digest;the correction verified
+manifest/config/all layer digests against the canonical image and read the same
+owned export. No second export/container,untrusted execution or grant charge.
+The unchanged230109184-byte export was removed. No binary package was downloaded.
+
+Independent old logs establish Isort's missing genuine distribution metadata and
+SQLglot7479's undetected partial repair;neither is scheduled as a path fix. Sopel
+still needs compatible SQLAlchemy/metadata. Source/wheel checks stay current.
+Next concrete review is under repository-git-runtime-20261028;finish source-free
+preparation and docs binding,then obtain its exact download/build/execution
+authority. Do not treat the inert template as approval or spend old unused slots.
+
+### D120 exact runtime preparation complete; external execution awaits approval
+
+Runtime component4d303758d2876931efaa7479ea96ce9b62d6aff19d4d764190e8dbc6fcb941bb
+binds69assets,pinned Git8665568bytes and one COPY-only image from9f47. Require
+exact ELF three-library closure before build,unchanged inherited config/layers,
+then both profiles' fresh checks and all38Dead obligations. Maximum19calls/
+24existing-grant operations/1265reservedseconds,zero models/cash. Eight authored
+component checks cover selection/path/type/modes and restrictive host umask;
+seven budget guards and actual operation25rejection passed. Actual deterministic
+image binding was exercised in removed synthetic fixture data with no real
+image/approval/charge. Trusted Apple LLVM read cached Linux ELF data without
+executing or importing it. The old29941bc9 preparation draft was withdrawn
+before approval/execution for explicit directory modes. No binary download or
+image build occurred. Next exact combined review also binds current cached
+offline docs;unchanged source/wheel checks stay reused. No architecture decision.
