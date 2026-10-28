@@ -6120,3 +6120,31 @@ Sopel was removed before execution:source requires SQLAlchemy1.4,the retained
 runtime selects2.0.44,and installed distribution metadata is missing. The old
 three-source draft0a5307d7 is withdrawn;never execute it after a late reply.
 All preparation was data-only and the grant stayed13271/3755/120020.29874809133/0.0.
+
+## C13 two-source runtime results, October 28
+
+[Actual evidence](../toolkit-v2/c13/repository-native-batch-ready-20261028/RESULTS.md) retains12 completed receipts/14operations and
+24.72456170944497 charged seconds,zero models/cash. Six default-profile checks
+and support imports passed. Dead204 has33fixture errors because Git is absent.
+JSON-logger39 passed168of171 required tests;three traceback parameter names
+contain a volatile collection path and do not match a fresh worker. Both cases
+remain excluded;counterexamples were unstarted. Pool63/39repos/4866IDs and78-case
+gap remain. All owned resources removed;all images retained. Grant totals are
+13285/3755/120045.02330980077/0.0. Source13gates and wheel20checks stay current.
+
+The docs component stopped at unquoted `__init__` in STATE. Initial standalone
+version passed;Makefile version/link scan were unstarted. Correct formatting and
+finish only that approved remainder with unchanged software/boundary/scope.
+A new optional stable-container-path profile preserves all171 logger obligations;
+authored host fixtures passed10checks without public-source execution. It needs
+exact runtime approval. Dead separately needs real Git;Sopel stays excluded.
+No scientific,resource,human-control or release gate closes.
+
+Remaining approved docs commands passed underaacf34a8 after the finite
+first-party document-data amendment;same binary/configuration/boundary/69documents,
+no standalone version/runtime/package replay. Initial failed component remains.
+The separate stable-workspace reviewae6a0f9f is prepared,not executed. Its53pins,
+10authored workspace checks,7terminal fixtures and actual operation24 rejection
+passed. All171JSON-logger obligations remain;maximum19calls/23operations/965seconds,
+zero models/cash,installs,downloads,image changes or release. Core source and
+package remain unchanged. Exact changed-program execution approval is needed.

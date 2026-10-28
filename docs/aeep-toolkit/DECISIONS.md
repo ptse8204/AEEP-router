@@ -2043,3 +2043,27 @@ This is a bounded operator data-authoring method, not another core runner or
 mandatory dependency. Its exact derivation code and immutable seed assets need
 execution review before new untrusted sources run. The existing standing authority
 covers finite first-party definitions, not broader software, disclosure or cash.
+
+## D119: Stable contained workspace for path-bearing native identities
+
+JSON-logger's actual reference passed168 tests but could not match three required
+traceback parameter names collected in another random directory. Preserve that
+failed result and all171 obligations. Do not normalize names, drop assertions,
+or accept a smaller denominator. A fixed repository path in each fresh private
+container lets collection and body processes generate the same native identity.
+
+Compile an explicit optional operator profile from the existing v6 program. Only
+the repository assignment and its mkdir change: `/tmp/aeep-repository-native-v6`,
+mode0700, exclusive creation. An existing directory or symlink fails closed;
+no caller-supplied path or host mount is added. The container's tmpfs and removal
+own the repository lifecycle. Random private logs/wheels remain unchanged. Both
+raw and diagnostic output contracts retain their existing meanings. Legacy
+programs, packaged core, historical fingerprints and results stay unchanged.
+
+Require fresh containment/native-event checks for both changed profiles, exact
+collection followed by a frozen exhaustive crosswalk, and reference/original
+checks with all171 obligations. Authored host fixtures alone cannot certify the
+container or public task. New execution requires its exact review; unused slots
+in the terminalca2a06cc review cannot cover different observer bytes. Dead's
+missing Git remains an independent real runtime prerequisite, not a reason to
+mock fixtures or change the task. No architecture or scientific threshold changes.

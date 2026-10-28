@@ -1,31 +1,38 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of October 28: native-identity runtime and updated-wheel checks
-passed under approved bundle d9352568.** All 15 container calls completed and
-canonical receipts reconcile: 17 operations, 34.73624304169789 charged seconds,
-zero model turns or cash. All 915 frozen iCalendar names were confirmed before
-body trials; its repair passed and original/both partial repairs failed as
-expected. Both compatibility controls passed. All 20 installed-wheel checks
-passed and the unchanged private runtime was removed. All images remain.
+**Status as of October 28: approved two-repository bundle ca2a06cc completed;
+neither reference qualified.** All 12 receipts and 14 operations reconcile,
+charging 24.72456170944497 seconds and zero model turns/cash. Dead's reference
+has 33 fixture errors because the retained grader image lacks Git. JSON-logger
+passes 168 tests but misses three required traceback parameter identities because
+collection and body workers use different temporary paths. Both stay excluded;
+counterexamples were unstarted. Six default-observer checks and the support probe
+passed. All owned containers/canary/checker runtime were removed; all images remain.
+[Actual batch results](../../reports/toolkit-v2/c13/repository-native-batch-ready-20261028/RESULTS.md)
+preserve the failures, receipts and scope. Do not replay the terminal bundle.
 
-Source dbf9be31 (implementation commit 0688f63) passed all 13 source gates:
-1,772 tests and 21 skips in each full run, 82% coverage and both branch gates.
-Wheel3791d8f7 was tested. Pool63 snapshots/39 repositories/4866 required identities
-is provisional; 78 cases remain (22 single-file/24 multi-file/32 audit). Existing
-source/runtime bindings are preserved; the new operator observer is not universal
-qualification of the older corpus or the default observer. No model qualification,
+Source dbf9be31 (implementation commit 0688f63) and wheel3791d8f7 are unchanged.
+All 13 source gates and 20 installed checks remain current: 1,772 tests/21 skips
+in each full run, 82% coverage and both branch gates. No broad rerun is needed.
+Pool63 snapshots/39 repositories/4866 required identities remains provisional;
+78 cases are missing (22 single-file/24 multi-file/32 audit). No model qualification,
 usefulness, selection, resource, human-control or release gate closes.
 
-The initial docs component failed on one extra STATE.md blank line; the link
-scan was unstarted. Preserve that terminal result. The remaining
-scan passed with the same approved checker after the first-party formatting correction;
-[the actual result record](../../reports/toolkit-v2/c13/repository-native-identity-20261028/RESULTS.md)
-keeps both outcomes. Current grant13271/3755/120020.29874809133/0.0. No source suite,
-package install, container call, image build or model rerun is needed for this
-formatting correction. Original portable Markdown22b0cf03 remains completed:
-five receipts/seven operations/18.11404641577974seconds,zero models/cash, exact
-private Markdown3.9 ZIP-origin/hash/rendering and both PyMdown tasks passed.
-Its old source374579f1/wheel9b00 evidence retains the original applicability.
+The docs component stopped at lint on unquoted `__init__` in this file. The
+standalone Lychee version passed; Makefile version and link scan were unstarted.
+The remaining Makefile version and link scan passed under aacf34a8 with the
+same approved checker, boundary and69-document scope after a recorded finite
+first-party documentation-data amendment. The initial failed component remains.
+Grant totals:13285/3755/120045.02330980077/0.0. Earlier d9352568 and22b0cf03 results
+remain unchanged and must not be replayed.
+
+A separate stable-workspace profile ae6a0f9f is prepared for JSON-logger. Its only
+program changes are a fixed private repository path inside a fresh container and
+exclusive mode-0700 creation. Authored host fixtures passed10 checks, including
+stable traceback identities across fresh processes and preservation of existing
+paths/symlinks. They are not container or public-source qualification. Keep all
+171 required tests. New observer/source execution requires its exact review;
+Dead separately needs real Git. No architecture or budget decision is needed.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -68,16 +75,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '3a1a969'
-last_check_command: 'repository-native-identity-20261028/run-integration-bundle.py d9352568af11a63fe3adf31de11bf0c9fdbe244aa7c47bc5fd5183a98e7d268f;consolidate-runtime.py'
-last_check_result: 'Runtime15COMPLETED receipts/17operations/34.73624304169789seconds and20installed checks passed. Initial docs formatting failure retained;remaining approved scan passed under9241a2b2 with same binary/boundary/69documents. Pool63/39repos/4866IDs;78cases missing. Zero models/cash;all images retained.'
-next_action: 'Completed native identity runtime/wheel/remaining docs are terminal;do not replay. Review repository-native-batch-ready-20261028 for two cached sources,exhaustive native scope derivation,default-observer checks and offline docs. Run only after actual exact execution approval. The three-source draft0a5307d7 is WITHDRAWN;Sopel needs SQLAlchemy1.4 and installed metadata. Source13gates/package20checks stay current;no repeat.'
+last_verified_commit: 'b95d09c'
+last_check_command: 'repository-native-batch-ready-20261028/run-integration-bundle.py ca2a06cc7269d22dc3be35c2c33fb7e6b7a1195e883e94c40eb61da1c7f1656e'
+last_check_result: '12COMPLETED receipts/14operations/24.72456170944497seconds. Six default-profile checks/support passed;Dead lacksGit,logger168of171duevolatilepath,both excluded. Initial docs MD050 failure retained;unstarted remainder passed underaacf34a8. Pool63 unchanged;zero models/cash;all images retained.'
+next_action: 'Exact stable-workspace runtime review ae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e is prepared for all171JSON-logger obligations. Obtain actual execution approval,then run once and reconcile. Reuse current13source gates/20installed checks/completed docs. Dead separately needs a verified upstreamGit runtime closure;Sopel stays excluded. Continue representative corpus preparation without lowering frozen counts or claiming comparative value.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'New stable-workspace runtime review ae6a0f9f needs exact execution approval:observer bytes differ from terminalca2a06cc. Maximum19offline calls/23operations/965reservedseconds,zero models/cash;no installs,downloads,image changes,credentials,services or release. No architecture/budget decision.'
   - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'
   - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
   - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
@@ -4265,8 +4273,29 @@ plus current cached offline docs. Pool63 and78-case gap stay unchanged.
 
 The older three-source review0a5307d7 is WITHDRAWN before approval/execution.
 Static source inspection established that Sopel requires SQLAlchemy>=1.4,<1.5,
-while the retained selected runtime has2.0.44,and its __init__ requires installed
+while the retained selected runtime has2.0.44,and its `__init__` requires installed
 Sopel distribution metadata. No call was spent discovering these known blockers.
 Do not execute that draft after a late approval. The ready batch excludes Sopel;
 its future private compatible closure is independent work,not an architecture
 choice. All source caches,failed inert preparation and historical records remain.
+
+### C13: two-source batch reconciled; stable-workspace review awaits execution approval
+
+Exactca2a06cc completed12calls/14operations/24.72456170944497seconds. Canonical
+receipts/attempts/evidence and cleanup reconcile;no models/cash or image changes.
+Dead5PASS/33fixtureERROR requires Git. JSON-logger168PASS/3missing requires stable
+path-bearing identities;neither is admitted to the pool. Both original failures
+and all charges remain. The unstarted docs remainder passed underaacf34a8 with
+identical approved checker/boundary and69documents;its private runtime was removed.
+No package,source,runtime or standalone version component replayed.
+
+D119 profile preparation passed10authored workspace checks,7terminal collector
+fixtures,7budget guards and canonical definition/envelope checks. All53execution
+asset hashes match;the actual guard rejects operation24. Programs and compiled
+recipe use fixed private container repository creation,not identity rewriting.
+Only JSON-logger runs:all171required native obligations remain. Maximum19calls/
+23operations/965reservedseconds includes two immutable-payload report controls.
+Exact reviewae6a0f9f475e3fa1a9d37a7f3ba69bde12413a6ea289cf2659420e6c96fed97e
+is pending actual execution approval. Core source,wheel and all scientific
+thresholds are unchanged. Host free57.37GiB;all images remain. No architecture
+or budget decision is needed. Resume from the new review,not terminalca2a06cc.
