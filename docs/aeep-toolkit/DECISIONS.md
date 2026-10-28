@@ -1914,3 +1914,14 @@ and exclude them from the multi-file batch. No model outcome informed this chang
 Use published source/reference semantics before freezing task families. No new
 core service or classifier framework is needed;record this operator curation
 check alongside the existing grader and source pins.
+
+### D112 optional source support and execution scope
+
+Use the existing image/pytest/AEEP path for four genuine multi-file cases. Install
+only eight pinned runtime wheels needed by selected tests. Untokenize publishes
+only an old source distribution for0.1.1:reuse its unchanged module and exact
+publisher metadata/permission notice through the existing reviewed source-copy
+pattern. Do not execute setup.py,reimplement tokenization or invent a version.
+Fresh probes must bind actual image paths,metadata and module hashes. The new
+software/subjects need exact authorization;no source/package regression is repeated
+for unchanged core bytes. Keep all initial exclusions and prior costs visible.

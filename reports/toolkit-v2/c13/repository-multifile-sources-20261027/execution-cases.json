@@ -1,0 +1,315 @@
+{
+  "prepared_cases": 4,
+  "cases_file": ".aeep/repository-multifile-execution-cases-20261027/cases.json",
+  "cases_file_sha256": "bddf95f684a63f80603e24003cd08a65c9ece2d4a1ec525e93bd6b80c5a6c7b0",
+  "variants_file": ".aeep/repository-multifile-execution-cases-20261027/variants.json",
+  "cases": [
+    {
+      "id": "canopen-python__canopen-613-declared-tests",
+      "original_issue_id": "canopen-python__canopen-613",
+      "repository": "canopen-python/canopen",
+      "revision": "593f0621f41ce3f94c09322ca8414c7e649b128e",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-multifile-source-review-20261027/canopen-python__canopen-613",
+      "source_sha256": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+      "source_bytes": 104376,
+      "executable_changed_files": [
+        "canopen/pdo/__init__.py",
+        "canopen/pdo/base.py"
+      ],
+      "reference_changed_files": [
+        "canopen/pdo/__init__.py",
+        "canopen/pdo/base.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 8,
+      "upstream_required_identities": [
+        "test/test_pdo.py::TestPDO::test_pdo_getitem",
+        "test/test_pdo.py::TestPDO::test_pdo_iterate",
+        "test/test_pdo.py::TestPDO::test_pdo_export",
+        "test/test_pdo.py::TestPDO::test_pdo_map_bit_mapping",
+        "test/test_pdo.py::TestPDO::test_pdo_map_getitem",
+        "test/test_pdo.py::TestPDO::test_pdo_maps_iterate",
+        "test/test_pdo.py::TestPDO::test_pdo_save",
+        "test/test_pdo.py::TestPDO::test_pdo_save_skip_readonly"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-multifile-sources-20261027/licenses/canopen-python__canopen-613/LICENSE.txt",
+          "sha256": "0740d30978affcd91c0fc817b7cf942a332381bf0380fe17e60c6a0b377c6e0d",
+          "bytes": 1075
+        }
+      ],
+      "declared_python": "3.12",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_mock",
+        "_hypothesis_pytestplugin"
+      ],
+      "test_roots": [
+        "test"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "duo-labs__py_webauthn-241-declared-tests",
+      "original_issue_id": "duo-labs__py_webauthn-241",
+      "repository": "duo-labs/py_webauthn",
+      "revision": "aa365d75e58bb5c506226449a9b859897f024811",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-multifile-source-review-20261027/duo-labs__py_webauthn-241",
+      "source_sha256": "2a97f4b22fa85d957622b7fbe1a83a43ae6ce50c3d42510cfd731b2cc9569c2a",
+      "source_bytes": 116440,
+      "executable_changed_files": [
+        "webauthn/authentication/verify_authentication_response.py",
+        "webauthn/registration/formats/android_safetynet.py"
+      ],
+      "reference_changed_files": [
+        "webauthn/authentication/verify_authentication_response.py",
+        "webauthn/registration/formats/android_safetynet.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 11,
+      "upstream_required_identities": [
+        "tests/test_verify_registration_response_android_safetynet.py::TestVerifyRegistrationResponseAndroidSafetyNet::test_verify_attestation_android_safetynet_basic_integrity_true_cts_profile_match_false",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_raises_exception_on_incorrect_public_key",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_raises_exception_on_uv_required_but_false",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_supports_already_parsed_credential",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_supports_dict_credential",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_supports_multiple_expected_origins",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_verify_authentication_response_with_EC2_public_key",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_verify_authentication_response_with_OKP_public_key",
+        "tests/test_verify_authentication_response.py::TestVerifyAuthenticationResponse::test_verify_authentication_response_with_RSA_public_key",
+        "tests/test_verify_registration_response_android_safetynet.py::TestVerifyRegistrationResponseAndroidSafetyNet::test_raise_attestation_android_safetynet_basic_integrity_false_cts_profile_match_false",
+        "tests/test_verify_registration_response_android_safetynet.py::TestVerifyRegistrationResponseAndroidSafetyNet::test_verify_attestation_android_safetynet"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-multifile-sources-20261027/licenses/duo-labs__py_webauthn-241/LICENSE",
+          "sha256": "5922ad23a214080d72535c733f69aa36de0f0135f7e5859239758a550042de81",
+          "bytes": 1506
+        }
+      ],
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_mock",
+        "_hypothesis_pytestplugin"
+      ],
+      "test_roots": [
+        "tests"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "tefra__xsdata-1126-declared-tests",
+      "original_issue_id": "tefra__xsdata-1126",
+      "repository": "tefra/xsdata",
+      "revision": "b6bd7e912ee346a0f5471543db31e2d6aa8a9809",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-multifile-source-review-20261027/tefra__xsdata-1126",
+      "source_sha256": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+      "source_bytes": 328513,
+      "executable_changed_files": [
+        "xsdata/codegen/handlers/process_attributes_types.py",
+        "xsdata/codegen/handlers/unnest_inner_classes.py"
+      ],
+      "reference_changed_files": [
+        "xsdata/codegen/handlers/process_attributes_types.py",
+        "xsdata/codegen/handlers/unnest_inner_classes.py"
+      ],
+      "omitted_non_source_reference_changes": [],
+      "required_tests": 28,
+      "upstream_required_identities": [
+        "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_types",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_cascade_properties",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_empty_source",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_nillable_source",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_set_default_value_if_none",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_detect_lazy_namespace",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_find_dependency",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_absent_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_abstract_type_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_complex_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_enumeration_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_simple_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_circular_reference",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_complex_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_simple_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_native_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_dependency_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_forward_reference",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_native_type",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types_with_ignore_patterns",
+        "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_update_restrictions",
+        "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_disabled_promotes_only_enumerations",
+        "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_enabled",
+        "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_orphan_nested_class",
+        "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_inner_class"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-multifile-sources-20261027/licenses/tefra__xsdata-1126/LICENSE",
+          "sha256": "b5d91ed480d2f5e61bc3a32cb731aaf5641b83226055cdbc3b9d764a9dce4525",
+          "bytes": 1087
+        }
+      ],
+      "declared_python": "3.10",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_mock",
+        "_hypothesis_pytestplugin"
+      ],
+      "test_roots": [
+        "tests"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    },
+    {
+      "id": "tefra__xsdata-1132-declared-tests",
+      "original_issue_id": "tefra__xsdata-1132",
+      "repository": "tefra/xsdata",
+      "revision": "2b96e1d6c02684e8a866708b36635c44b2944a61",
+      "family": "multi-file-repair",
+      "origin_kind": "upstream_issue",
+      "source_record": ".aeep/repository-multifile-source-review-20261027/tefra__xsdata-1132",
+      "source_sha256": "9f9c57c571d2fd901cdcb69f74cc2cbf281bed64f8d027d7ff21f4b64f078c10",
+      "source_bytes": 329004,
+      "executable_changed_files": [
+        "xsdata/formats/dataclass/filters.py",
+        "xsdata/models/config.py"
+      ],
+      "reference_changed_files": [
+        "xsdata/formats/dataclass/filters.py",
+        "xsdata/models/config.py"
+      ],
+      "omitted_non_source_reference_changes": [
+        "docs/codegen/config.md"
+      ],
+      "required_tests": 78,
+      "upstream_required_identities": [
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_class_annotations",
+        "tests/models/test_config.py::GeneratorConfigTests::test_extension_with_invalid_parent_path",
+        "tests/models/test_config.py::GeneratorConfigTests::test_extension_with_parent_path",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test__init",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_apply_substitutions_with_regexes",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_build_class_annotation",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type_with_circular_reference",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type_with_forward_reference",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type_with_list_types_are_ignored",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type_with_multiple_types",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_choice_type_with_restrictions_tokens_true",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_class_bases",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_class_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_constant_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_constant_value",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_combo",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_annotations",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_builtin_datatype",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_dataclasses",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_decimal",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_enum",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_module",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_qname",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_default_imports_with_typing",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_choices",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_any_attribute",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_array_type",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_multiple_types",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_bool",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_decimal",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_enum",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_float",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_int",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_qname",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_str",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_type_tokens",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_value_none",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_default_value_with_xml_duration",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_definition",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_definition_with_prohibited_attr",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_definition_with_restriction_pattern",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_definition_without_metadata",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_choices",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_mixed",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_namespace",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_restrictions",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_metadata_wrapper",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_alias",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_any_attribute",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_array_type",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_circular_reference",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_compound_attr",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_default_value",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_forward_reference",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_multiple_types",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_native_type",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_optional_value",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_prohibited_attr",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_field_type_with_token_attr",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_format_metadata",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_import_module",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_module_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_package_name",
+        "tests/formats/dataclass/test_filters.py::FiltersTests::test_type_name",
+        "tests/models/test_config.py::GeneratorConfigTests::test_create",
+        "tests/models/test_config.py::GeneratorConfigTests::test_extension_with_invalid_class_name_pattern",
+        "tests/models/test_config.py::GeneratorConfigTests::test_extension_with_invalid_import_string",
+        "tests/models/test_config.py::GeneratorConfigTests::test_format_kw_only_requires_310",
+        "tests/models/test_config.py::GeneratorConfigTests::test_format_slots_requires_310",
+        "tests/models/test_config.py::GeneratorConfigTests::test_format_with_invalid_eq_config",
+        "tests/models/test_config.py::GeneratorConfigTests::test_generic_collections_requires_frozen_false",
+        "tests/models/test_config.py::GeneratorConfigTests::test_read",
+        "tests/models/test_config.py::GeneratorConfigTests::test_read_with_wrong_value",
+        "tests/models/test_config.py::GeneratorConfigTests::test_use_union_type_requires_310_and_postponed_annotations"
+      ],
+      "authored_preservation_guard": false,
+      "license_records": [
+        {
+          "path": "reports/toolkit-v2/c13/repository-multifile-sources-20261027/licenses/tefra__xsdata-1132/LICENSE",
+          "sha256": "b5d91ed480d2f5e61bc3a32cb731aaf5641b83226055cdbc3b9d764a9dce4525",
+          "bytes": 1087
+        }
+      ],
+      "declared_python": "3.9",
+      "adapted_python": "3.13",
+      "portable_wheels": [],
+      "explicit_plugins": [
+        "pytest_mock",
+        "_hypothesis_pytestplugin"
+      ],
+      "test_roots": [
+        "tests"
+      ],
+      "adopted": false,
+      "stage_assignment_frozen": false
+    }
+  ],
+  "errors": [],
+  "payloads": 16,
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false,
+  "unselected_preparation_errors_retained_in": "prepared-cases.json"
+}

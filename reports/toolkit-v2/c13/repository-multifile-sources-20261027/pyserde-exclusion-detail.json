@@ -1,0 +1,29 @@
+{
+  "prepared_cases": 0,
+  "cases_file": ".aeep/repository-pyserde-static-review-20261027/cases.json",
+  "cases_file_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "variants_file": ".aeep/repository-pyserde-static-review-20261027/variants.json",
+  "cases": [],
+  "errors": [
+    {
+      "id": "yukinarit__pyserde-682",
+      "error_type": "AssertionError",
+      "error": "",
+      "first_party_preparation_traceback": "Traceback (most recent call last):\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-multifile-sources-20261027/inspect-pyserde-exclusion.py\", line 147, in main\n    assert identity == 'nhairs__python-json-logger-39' and name == 'docs/changelog.md'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "external_code_executed": false
+    }
+  ],
+  "payloads": [],
+  "external_code_executed": false,
+  "models": 0,
+  "cases_adopted": 0,
+  "stages_frozen": false,
+  "infrastructure_acceptance": false,
+  "precise_exclusion": {
+    "reason": "Reference adds new files;the current task profile permits edits to existing reviewed Python paths only.",
+    "new_reference_paths": [
+      "examples/type_statement.py"
+    ],
+    "action": "Keep excluded;do not remove the new-file requirement to fit the grader."
+  }
+}

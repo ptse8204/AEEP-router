@@ -5945,3 +5945,17 @@ are unchanged and their broad checks will not be repeated for data-only curation
 Pool56/35repos/3059IDs;85cases remain. Next multi-file triage is inert data only.
 Two version-bookkeeping patches are excluded from the family rather than inflating
 its count. No qualification,usefulness,selection,resource,human or release gate closes.
+
+
+### Four semantic multi-file subjects prepared — October27
+
+[The exact next batch](../toolkit-v2/c13/repository-multifile-sources-20261027/README.md)
+contains4snapshots/125requiredIDs/16fixed variants. Source review retained9,379,970
+bytes without execution. Two version-bookkeeping patches do not count asmulti;
+Pyinfra and other source/profile exclusions remain. Eight official cached wheels
+and unchanged untokenize source/publisher metadata total about6MBof inert data.
+One private offline image build/four fresh probes are pending approval;all images
+remain. Maximum24calls/29operations/1320reserved seconds includes bounded report
+controls,zero models/cash. No unchanged source/package rerun. Pool56/gap85 and
+counters13206/3755/119881.14341000933/0.0remain. New exact docs checking is included;
+source/data preparation cannot close scientific/resource/human/release gates.

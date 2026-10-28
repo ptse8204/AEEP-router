@@ -1,0 +1,45 @@
+{
+  "selected_ids": [
+    "canopen-python__canopen-613-declared-tests",
+    "duo-labs__py_webauthn-241-declared-tests",
+    "tefra__xsdata-1126-declared-tests",
+    "tefra__xsdata-1132-declared-tests"
+  ],
+  "selected_cases": 4,
+  "selected_family": "multi-file-repair",
+  "required_identities": 125,
+  "pymdown_excluded_from_multifile": [
+    "2576",
+    "2807"
+  ],
+  "pymdown_reason": "The second changed file is only a version constant in __meta__.py;one functional file is insufficient for this family. Initial inert records remain.",
+  "pyinfra_deferred": "src-layout project entrypoints/dynamic metadata plus gevent/paramiko runtime need a separate reviewed project profile;not included in this minimal dependency image.",
+  "other_preparation_exclusions": [
+    {
+      "id": "MindscapeHQ__raygun4py-119",
+      "error_type": "AssertionError",
+      "error": "Non-source reference edit needs separate review",
+      "external_code_executed": false
+    },
+    {
+      "id": "marcosschroh__dataclasses-avroschema-835",
+      "error_type": "AssertionError",
+      "error": "Published metadata is not an actual multi-file source-body repair",
+      "external_code_executed": false
+    },
+    {
+      "id": "python-wheel-build__fromager-653",
+      "error_type": "AssertionError",
+      "error": "Non-source reference edit needs separate review",
+      "external_code_executed": false
+    },
+    {
+      "id": "yukinarit__pyserde-682",
+      "error_type": "AssertionError",
+      "error": "",
+      "external_code_executed": false
+    }
+  ],
+  "source_guard_exclusions": "See source-size-review.json:two prohibited member/path trees and one partial over-cap archive.",
+  "new_subject_execution": false
+}

@@ -60,16 +60,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'fe58c7c'
+last_verified_commit: 'f5e934c'
 last_check_command: 'repository-worker-input-20261027/run-integration-bundle.py 4661ce49fe9cdfd6911d70f4877fcfc30cae16afdb268376861395963c3ec43c; consolidate-results.py'
 last_check_result: 'All3components passed:4fresh probes/5of6cases reproduced,15COMPLETED receipts,17operations,46.957869624719024seconds,zero models/cash. Isort reference rejected at collection for missing distribution metadata;no replay or dropped identities. Corrected wheel19installed checks and exact69-document offline docs passed. Pool56/35repos/3059IDs;85cases remain.'
-next_action: 'Read repository-worker-input-20261027/RESULTS.md and its provisional-pool.json. Continue the metadata-declared multi-file source/runtime audit in repository-multifile-sources-20261027. Preserve initial misclassification/exclusions and prepare one exact finite runtime review for genuinely multi-file subjects with closed dependencies. No current source,package or old trial rerun;no new model authority. All prior25operations across the two framing bundles stay charged.'
+next_action: 'Read repository-multifile-sources-20261027/README.md and approval-bundle.json. Obtain one exact approval before the private8-wheel image plus unchanged untokenize source/publisher metadata copy and4fresh probes/16variants,with cached offline docs. Maximum24calls/29operations/1320reserved seconds includes bounded report controls. No models,downloads,unchanged source/package rerun,credentials or release. Completed4661ce49 is terminal;all17charges and56historical bindings stay.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'New four-subject multi-file runtime/docs bundle is prepared but unapproved:one private offline8-wheel image and unchanged upstream untokenize source/publisher metadata copy,four fresh probes/16variants,maximum24calls/29operations/1320reserved seconds. It changes subjects/software beyond terminal4661ce49. No architecture or budget decision is needed.'
   - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
   - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
   - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
@@ -4032,3 +4033,31 @@ four other authoring exclusions retained. Two Pymdown references change only a
 version constant outside one functional module;do not inflate the multi-file
 count with them. Pyinfra needs its own source-project/runtime setup. Candidate
 supports are being read/pinned as data;no new installer,subject or model has run.
+
+## Multi-file batch prepared as inert data — October27
+
+[The next exact review](../../reports/toolkit-v2/c13/repository-multifile-sources-20261027/README.md)
+selects four actual multi-file repairs:Canopen613,WebAuthn241,Xsdata1126/1132.
+All125 required identities and16 reference/counterexample/partial variants are
+retained. Pymdown's version-only second files are not counted;Pyinfra's project
+setup/runtime is deferred. Other initial exclusions remain:packaging edits,
+non-multi-file change,and Pyserde's new example file outside existing-file scope.
+No model outcome informed the family correction and no test was executed.
+
+Eight exact official wheels total5,852,012bytes,with17,492,117expanded member bytes.
+Only lxml is native. Untokenize0.1.1 has no compatible wheel;its exact2,634byte
+upstream module,embedded permission notice and publisher PKG-INFO are copied as
+source/metadata,without setup.py or invented version data. The planned private
+image derives from retained2386 with three new layers and96MiB growth ceiling.
+All additions are optional grader supports;there is no core dependency/service.
+
+Four fresh probes precede16 fixed variants. Maximum24calls/29operations/1320reserved
+seconds includes four same-software report diagnostics and a second setup/analysis
+phase. No unknown replay,extra build,source/test/reference change or guard
+relaxation. Cached offline docs is a separate exact component. No models,cash,
+downloads,host/project install,credentials,activation,release or image deletion.
+Source374579f1/wheel9b00 are unchanged;their full/installed checks are not repeated.
+The56-case pool,85-case gap and13206/3755/119881.14341000933/0.0counters remain.
+New untrusted installation/execution requires this concrete approval;no architecture
+or budget decision is open. Next:record actual approval,execute once and reconcile
+all canonical attempts/receipts/charges before any adoption or model comparison.
