@@ -2017,3 +2017,29 @@ small first-party serialization glue avoids adding another reporting plugin and
 dependency closure. This is an optional adapter for upstream events, not a new
 evaluation engine. No general third-party reporting package is claimed to have
 failed qualification;none is needed for this bounded interface.
+
+## D118 — Expand collapsed aliases conservatively during new corpus authoring
+
+Some published log aliases collapse several parameterized tests. Preserve those
+old records; do not select one matching test or call that an unambiguous repair.
+For a new explicitly authored source scope, freeze an exhaustive expansion rule
+before collection: a parameterized alias covers every exact native name whose
+first whitespace token equals that alias, plus an exact-name match. Bare function
+names require an exact match. Missing groups, overlap between
+aliases, conflicting roles, invalid modules and bounds overflow reject the case.
+Every added identity becomes required; none is silently removed. This changes no
+past result or frozen campaign and is not an official upstream benchmark score.
+
+Freeze and retain the full native crosswalk, F2P/P2P roles, selector archive,
+variant payload hashes and expected outcomes after collection and before any body
+trial. Collection never proves success. Only the first-party selector literal may
+change; preserve upstream source/assertions, patch bytes, permissions and grader
+thresholds. A reference must pass every expanded obligation; counterexamples must
+show the declared bug while preservation tests remain passing. Cases that fail
+these checks stay excluded. No model outcome may influence the expansion.
+
+Reuse the existing optional v6 hooks, AEEP invocation/ledger and reviewed image.
+This is a bounded operator data-authoring method, not another core runner or
+mandatory dependency. Its exact derivation code and immutable seed assets need
+execution review before new untrusted sources run. The existing standing authority
+covers finite first-party definitions, not broader software, disclosure or cash.

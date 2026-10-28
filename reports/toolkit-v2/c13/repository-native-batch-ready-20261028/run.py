@@ -1,0 +1,336 @@
+"""One finite pre-adoption reproduction batch. No campaign or model dispatch."""
+import asyncio
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import sqlite3
+import subprocess
+import sys
+import time
+
+from aeep.assessment.containment import container_name
+from aeep.assessment.extensions import invoke
+from aeep.assessment.identity import runtime_dependencies
+from aeep.assessment.models import (AssessmentEnvironment, AssessmentLimits, AssessmentScopeAmendment,
+    AssessmentSubject, RecipeDefinition, RecipeMaterializationRequest, RecipeRuntimeBinding, content_digest)
+from aeep.assessment.repository_suites import RepositorySuiteCase, grade_suite_output
+from aeep.assessment.service import AssessmentService
+from aeep.assessment.verification import verification_source_digest
+from aeep.attempts import ExecutionAttempt, ExecutionAttemptState
+from aeep.execution import ExecutionEvidence
+from aeep.errors import ConfigurationError
+from aeep.models import ExecutionReceipt, ResourceVector
+from aeep.router import Router
+from classify import discrepancies
+from operator_output import observation
+from native_scope import derive
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[3]
+BASE = Path('/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3')
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+class StopDispatch(RuntimeError):
+    """A common binding, accounting or cleanup failure is never a case exclusion."""
+
+
+class CaseExecutionFailure(RuntimeError):
+    """An isolated observer failed after canonical completion and confirmed cleanup."""
+
+
+async def main():
+    began = time.perf_counter()
+    assert len(sys.argv) == 2 and sha(HERE / 'operation-review.json') == sys.argv[1]
+    review = json.loads((HERE / 'operation-review.json').read_text())
+    approval = json.loads((HERE / 'operator-approval.json').read_text())
+    assert approval['approved'] and approval['review_sha256'] == sys.argv[1]
+    for relative, expected in review['driver_files'].items():
+        assert sha(HERE / relative) == expected
+    parent_path = ROOT / review['parent_review']
+    assert sha(parent_path) == review['parent_review_sha256']
+    parent = json.loads(parent_path.read_text())
+    recipe = RecipeDefinition.model_validate(parent['recipe'])
+    request = RecipeMaterializationRequest.model_validate(review['request'])
+    documents = {key: item for key, item in parent['documents'].items()
+                 if item['kind'] in ('recipe', 'environment', 'recipe_runtime')}
+    documents.update(review['new_documents'])
+    assert set(documents) == set(review['reviewed_document_digests'])
+    assert request.environment_digest == parent['request']['environment_digest']
+    assert runtime_dependencies() == request.runtime_dependencies
+    assert verification_source_digest(ROOT) == review['source_digest']
+    assert shutil.disk_usage(ROOT).free > 50 * 1024**3
+    assert subprocess.check_output([parent['docker'], '--host', parent['socket'], 'image', 'inspect',
+        parent['image'], '--format', '{{.Id}}'], timeout=20).decode().strip() == parent['image']
+
+    derived_assets = {}
+
+    def verify_assets():
+        if verification_source_digest(ROOT) != review['source_digest']:
+            raise StopDispatch('Common source binding changed')
+        for name, expected in {**review['assets'], **derived_assets}.items():
+            path = Path(name)
+            if path.is_symlink() or not path.is_file() or sha(path) != expected:
+                raise StopDispatch('Reviewed asset binding changed')
+        if shutil.disk_usage(ROOT).free <= 50 * 1024**3:
+            raise StopDispatch('Host storage reserve reached')
+
+    verify_assets()
+    cases = [RepositorySuiteCase.model_validate(item)
+             for item in json.loads((ROOT / review['cases_file']).read_text())]
+    seed_records = json.loads((ROOT / review['records_file']).read_text())
+    assert [case.input.task_id for case in cases] == review['active_case_ids']
+    with (HERE / 'execution-started.json').open('x') as stream:
+        json.dump({'review_sha256': sys.argv[1], 'automatic_retry': False}, stream)
+    router = Router.from_manifest(BASE / 'aeep.json')
+    service = AssessmentService(router, BASE / '.aeep/assessments')
+    repo = service.repository
+    child_seconds, results, receipts, observations = [], [], [], []
+    calls = 0
+    validation_started = validation_cpu = None
+    summary = {'batch_completed': False, 'review_sha256': sys.argv[1], 'source_digest': review['source_digest'],
+        'model_turns': 0, 'qualification': False, 'admission': False, 'comparative_usefulness': False,
+        'results': results, 'receipts': receipts, 'observations': observations}
+    try:
+        summary['grant_before'] = list(router.store._connection.execute(
+            "SELECT operations,model_turns,elapsed_seconds,cash_usd FROM assessment_grants WHERE id='onboarding'").fetchone())
+        assert content_digest(repo.get('authorization', 'onboarding')) == review['authorization_digest']
+        import importlib.util
+        budget_spec = importlib.util.spec_from_file_location('exact_review_budget', HERE / 'review-budget.py')
+        budget = importlib.util.module_from_spec(budget_spec); budget_spec.loader.exec_module(budget)
+        envelope = review
+        initial = json.loads((HERE / 'review-budget-anchor.json').read_text())['grant_before']
+        budget.install(repo, router.store._connection, initial, envelope)
+        grant = repo.current_grant('onboarding')
+        assert summary['grant_before'][0] + review['maximum_operations'] <= grant.limits.max_operations
+        assert summary['grant_before'][2] + review['maximum_reserved_seconds'] <= grant.limits.max_elapsed_seconds
+        models = {'subject': AssessmentSubject, 'recipe': RecipeDefinition, 'environment': AssessmentEnvironment,
+            'recipe_runtime': RecipeRuntimeBinding, 'recipe_materialization_request': RecipeMaterializationRequest}
+        for digest, item in documents.items():
+            value = models[item['kind']].model_validate(item['document'])
+            assert repo.put(item['kind'], item['id'], value) == digest
+        repo.approve_bundle(AssessmentScopeAmendment.model_validate(review['amendment']),
+                            {digest: item['document'] for digest, item in documents.items()})
+        repo.reserve(request, request.plan_id + '-setup', AssessmentLimits(max_operations=1, max_elapsed_seconds=30),
+                     stage='repository_curated_reproduction_setup')
+        repo.finish_operation(request.plan_id + '-setup', elapsed_seconds=time.perf_counter() - began)
+        repo.reserve(request, request.plan_id + '-analysis', AssessmentLimits(max_operations=1, max_elapsed_seconds=120),
+                     stage='repository_curated_reproduction_analysis')
+        validation_started, validation_cpu = time.perf_counter(), time.process_time()
+
+        async def observe(name, payload, expected_sha, profile='operator'):
+            if profile not in ('default', 'operator'):
+                raise StopDispatch('Observer profile is not in the exact review')
+            spec = recipe.extension.reference if profile == 'default' else recipe.extension.grader
+            nonlocal calls
+            verify_assets()
+            repo.authorize(request)
+            if calls >= review['maximum_contained_calls']:
+                raise StopDispatch('Reviewed call ceiling reached')
+            if hashlib.sha256(json.dumps(payload, separators=(',', ':')).encode()).hexdigest() != expected_sha:
+                raise StopDispatch('Staged payload changed')
+            calls += 1
+            operation = request.plan_id + '-call-' + str(calls)
+            output, execution_error = None, None
+            try:
+                output, _ = await invoke(service, request, spec, payload,
+                    stage='repository_curated_reproduction', operation_id=operation, elapsed_times=child_seconds)
+            except ConfigurationError as exc:
+                execution_error = type(exc).__name__
+            # Keep the bounded public-test reply before any grader protocol validation.
+            raw_path = HERE / ('raw-observation-' + str(calls) + '.json')
+            with raw_path.open('x') as stream:
+                json.dump({'name': name, 'operation_id': operation, 'output': output,
+                           'execution_error_type': execution_error, 'profile': profile}, stream, indent=2)
+                stream.write('\n')
+            observations.append({'name': name, 'operation_id': operation, 'raw_file': raw_path.name,
+                                 'raw_sha256': sha(raw_path), 'execution_error_type': execution_error, 'profile': profile})
+            # No next case after uncertain accounting, identity or container lifecycle.
+            try:
+                database = service.directory / request.plan_id / 'recipe-operations' / (operation + '.sqlite3')
+                with sqlite3.connect('file:' + str(database) + '?mode=ro', uri=True) as connection:
+                    rows = connection.execute('SELECT payload_json FROM receipts').fetchall()
+                    assert len(rows) == 1
+                    receipt = ExecutionReceipt.model_validate_json(rows[0][0])
+                    identity = receipt.metadata['attempt_id']
+                    row = connection.execute('SELECT payload_json FROM execution_attempts WHERE attempt_id=?', (identity,)).fetchone()
+                    assert row is not None
+                    attempt = ExecutionAttempt.model_validate_json(row[0])
+                    assert attempt.state in (ExecutionAttemptState.COMPLETED, ExecutionAttemptState.FAILED)
+                    assert receipt.receipt_id in attempt.terminal_receipt_ids
+                    assert receipt.executor_id == attempt.executor_id == spec.id
+                    assert receipt.executor_fingerprint == attempt.executor_fingerprint
+                evidence_ref = receipt.metadata['execution_evidence_digest']
+                row = connection.execute("SELECT payload_json FROM assessment_records WHERE kind='execution_evidence' AND digest=?", (evidence_ref,)).fetchone()
+                assert row is not None
+                evidence = ExecutionEvidence.model_validate_json(row[0])
+                assert evidence.complete and evidence.attempt_id == identity and content_digest(evidence) == evidence_ref
+                charged = next(item for item in repo.operation_ledger(request.plan_id).operations if item.operation_id == operation)
+                assert charged.elapsed_seconds is not None and 0 <= charged.elapsed_seconds < float('inf')
+                owned = container_name(identity)
+                assert not subprocess.check_output([parent['docker'], '--host', parent['socket'], 'ps', '-a',
+                    '--filter', 'name=^/' + owned + '$', '--format', '{{.ID}}'], timeout=15).decode().strip()
+                receipts.append({'name': name, 'operation_id': operation, 'receipt_id': receipt.receipt_id,
+                    'receipt_ref': content_digest(receipt), 'container_name': owned, 'container_removed': True,
+                    'environment_digest': request.environment_digest, 'attempt_state': attempt.state.value, 'profile': profile})
+            except Exception as exc:
+                raise StopDispatch('Canonical completion or cleanup could not be verified') from exc
+            verify_assets()
+            if execution_error is not None:
+                raise CaseExecutionFailure('Contained observer failed; no test grade inferred')
+            return observation(output, profile)
+
+        for item in review['probes']:
+            raw = await observe('default-probe-' + item['name'], item['payload'], item['payload_sha256'], 'default')
+            if (raw.get('exit_code') != 0 or raw.get('archive_sha256') != item['archive_sha256']
+                    or raw.get('statuses', {}).get(item['expected_node']) != 'PASSED'):
+                raise StopDispatch('Fresh default-observer boundary/state/transport probe failed')
+        for item in review['native_fixtures']:
+            raw = await observe('default-fixture-' + item['name'], item['payload'], item['payload_sha256'], 'default')
+            if (raw.get('exit_code') != item['exit_code'] or raw.get('statuses') != item['statuses']
+                    or raw.get('archive_sha256') != item['archive_sha256']):
+                raise StopDispatch('Fresh default native event fixture failed')
+        summary['default_observer_probes_passed'] = True
+        support = review['support_probe']
+        raw = await observe('runtime-support', support['payload'], support['payload_sha256'])
+        if (raw.get('archive_sha256') != support['archive_sha256'] or raw.get('exit_code') not in (0,1)
+                or set(raw.get('statuses', {})) != set(support['nodes'])
+                or any(s not in ('PASSED','FAILED') for s in raw['statuses'].values())):
+            raise StopDispatch('Runtime support probe protocol failed')
+        support_states = raw['statuses']
+        summary['runtime_support_statuses'] = support_states
+        derived = ROOT / review['derived_directory']
+        derived.mkdir(exist_ok=False)
+        cases_after, variants, expected_all, derivations = [], [], {}, []
+        for seed in cases:
+            identity = seed.input.task_id
+            if support_states[review['case_support_nodes'][identity]] != 'PASSED':
+                results.append({'case_id': identity, 'reproduction_eligible': False, 'variants': [], 'exclusion': 'runtime_support_not_observed'})
+                continue
+            item = next(c for c in review['collections'] if c['case_id'] == identity)
+            payload = json.loads((ROOT/item['payload']).read_text())
+            try:
+                collected = await observe('collection-' + identity, payload, item['sha256'])
+                if (collected.get('archive_sha256') != item['archive_sha256']
+                        or 'statuses' in collected):
+                    raise StopDispatch('Collection reply role/archive binding failed')
+                case, mapping = derive(seed, collected, derived/(identity+'-tests.tar.gz'))
+            except (ValueError, CaseExecutionFailure) as exc:
+                results.append({'case_id': identity, 'reproduction_eligible': False, 'variants': [],
+                                'exclusion': 'collection_or_exhaustive_scope_failed', 'error_type': type(exc).__name__, 'reason': str(exc)[:200]})
+                continue
+            source = next(r for r in seed_records if r['case_id'] == identity)
+            required = case.truth.fail_to_pass + case.truth.pass_to_pass
+            expected_all[identity] = {}
+            for label in ('reference', 'counterexample'):
+                artifact = source[label]
+                seen = []
+                class Captured(Exception): pass
+                async def capture(value): seen.append(value); raise Captured()
+                try:
+                    await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'), artifact, capture)
+                except Captured: pass
+                else: raise StopDispatch('Derivation unexpectedly returned a grade')
+                if len(seen) != 1: raise StopDispatch('Derived payload count changed')
+                path = derived/(identity+'-'+label+'-payload.json')
+                with path.open('x') as stream: json.dump(seen[0],stream,separators=(',',':'))
+                variants.append({'case': identity, 'variant': label, 'artifact': artifact,
+                                 'payload': str(path.relative_to(ROOT)), 'sha256': sha(path)})
+                statuses = {n:'PASSED' for n in required}
+                if label == 'counterexample':
+                    failures = [n for alias in source['upstream_bug_aliases'] for n in mapping['alias_groups'][alias]]
+                    if source['audit']: failures.append(source['snapshot_guard'])
+                    for node in failures: statuses[node] = 'FAILED'
+                expected_all[identity][label] = {'exit_code':0 if label=='reference' else 1,
+                    'valid':label=='reference','detail':'' if label=='reference' else 'test_failure',
+                    'statuses':statuses,'required_identities':required}
+            mapping.update({'case_id':identity,'collection_observation':next(o for o in observations if o['name']=='collection-'+identity)})
+            derivations.append(mapping);cases_after.append(case)
+        case_path = derived/'cases.json';variant_path = derived/'variants.json'
+        with case_path.open('x') as stream: json.dump([c.model_dump(mode='json') for c in cases_after],stream,indent=2)
+        with variant_path.open('x') as stream: json.dump(variants,stream,indent=2)
+        derived_assets = {str(p.resolve()):sha(p) for p in derived.iterdir() if p.is_file()}
+        frozen = {'method_sha256':review['method_sha256'],'parent_operation_review_sha256':sys.argv[1],
+            'source_digest':review['source_digest'],'cases_file':str(case_path.relative_to(ROOT)),
+            'variants_file':str(variant_path.relative_to(ROOT)),'assets':derived_assets,'mappings':derivations,
+            'expectations':expected_all,'frozen_before_any_body_trial':True,
+            'policy':'Exhaustive disjoint native alias groups; every matched identity required;no outcome tuning or source/assertion/patch edits.'}
+        with (HERE/'derived-review.json').open('x') as stream: json.dump(frozen,stream,indent=2)
+        summary['derived_review_sha256'] = sha(HERE/'derived-review.json')
+        derived_assets[str((HERE/'derived-review.json').resolve())] = summary['derived_review_sha256']
+        cases = cases_after
+        for case in cases:
+            result = {'case_id': case.input.task_id, 'reproduction_eligible': False, 'variants': []}
+            results.append(result)
+            labels=['reference','counterexample']
+            for label in labels:
+                staged = next(item for item in variants if item['case'] == case.input.task_id and item['variant'] == label)
+                raw = None
+
+                async def probe(payload):
+                    nonlocal raw
+                    raw = await observe(case.input.task_id + '-' + label, payload, staged['sha256'])
+                    return raw
+
+                record = {'variant': label, 'passed': False}
+                result['variants'].append(record)
+                try:
+                    grade = await grade_suite_output(case.input.model_dump(mode='json'), case.truth.model_dump(mode='json'),
+                                                     staged['artifact'], probe)
+                except (ConfigurationError, CaseExecutionFailure) as exc:
+                    record.update({'error_type': type(exc).__name__, 'reason': 'execution_or_protocol_failure'})
+                    break
+                record['grade'] = grade.model_dump(mode='json')
+                expected = expected_all[case.input.task_id][label]
+                record['discrepancies'] = discrepancies(raw, record['grade'], expected)
+                record['passed'] = not record['discrepancies']
+                if not record['passed']:
+                    break
+            result['reproduction_eligible'] = len(result['variants']) == len(labels) and all(item['passed'] for item in result['variants'])
+        if cases:
+            case = sorted(cases,key=lambda c:c.input.task_id)[0]
+            staged = next(v for v in variants if v['case']==case.input.task_id and v['variant']=='reference')
+            raw_default = None
+            async def default_probe(payload):
+                nonlocal raw_default
+                raw_default = await observe('default-reference-'+case.input.task_id,payload,staged['sha256'],'default')
+                return raw_default
+            try:
+                grade = await grade_suite_output(case.input.model_dump(mode='json'),case.truth.model_dump(mode='json'),staged['artifact'],default_probe)
+                errors = discrepancies(raw_default,grade.model_dump(mode='json'),expected_all[case.input.task_id]['reference'])
+                summary['default_reference']={'case_id':case.input.task_id,'passed':not errors,'discrepancies':errors,'grade':grade.model_dump(mode='json')}
+            except (ConfigurationError,CaseExecutionFailure) as exc:
+                summary['default_reference']={'case_id':case.input.task_id,'passed':False,'error_type':type(exc).__name__}
+        summary['batch_completed'] = True
+    except BaseException as exc:
+        summary['error_type'] = type(exc).__name__
+        raise
+    finally:
+        try:
+            if validation_started is not None:
+                repo.finish_operation(request.plan_id + '-analysis',
+                    elapsed_seconds=max(0, time.perf_counter() - validation_started - sum(child_seconds)),
+                    resources=ResourceVector(cpu_ms=max(0, time.process_time() - validation_cpu) * 1000))
+            ledger = repo.operation_ledger(request.plan_id)
+            (HERE / 'operation-ledger.json').write_text(ledger.model_dump_json(indent=2) + '\n')
+            summary.update({'ledger_operations': len(ledger.operations), 'contained_calls_started': calls,
+                'elapsed_complete': all(item.elapsed_seconds is not None for item in ledger.operations),
+                'containers_removed': len(receipts) == calls and all(item['container_removed'] for item in receipts),
+                'source_unchanged': verification_source_digest(ROOT) == review['source_digest'],
+                'eligible_cases': sum(item['reproduction_eligible'] for item in results),
+                'grant_after': list(router.store._connection.execute(
+                    "SELECT operations,model_turns,elapsed_seconds,cash_usd FROM assessment_grants WHERE id='onboarding'").fetchone()),
+                'elapsed_seconds': time.perf_counter() - began, 'cases_adopted': 0})
+        finally:
+            await router.close()
+            with (HERE / 'execution-result.json').open('x') as stream:
+                json.dump(summary, stream, indent=2)
+                stream.write('\n')
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

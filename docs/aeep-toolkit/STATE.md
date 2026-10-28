@@ -68,10 +68,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'd167dff'
+last_verified_commit: '3a1a969'
 last_check_command: 'repository-native-identity-20261028/run-integration-bundle.py d9352568af11a63fe3adf31de11bf0c9fdbe244aa7c47bc5fd5183a98e7d268f;consolidate-runtime.py'
 last_check_result: 'Runtime15COMPLETED receipts/17operations/34.73624304169789seconds and20installed checks passed. Initial docs formatting failure retained;remaining approved scan passed under9241a2b2 with same binary/boundary/69documents. Pool63/39repos/4866IDs;78cases missing. Zero models/cash;all images retained.'
-next_action: 'Native runtime, updated wheel and remaining offline docs are complete;do not replay them. Read repository-native-identity-20261028/RESULTS.md and remaining-execution-result.json,then continue cached-source mapping and dependency/scope curation. Prepare one exact new-source/default-observer review before execution. Pool63 still lacks78cases;do not rerun unchanged source or package checks.'
+next_action: 'Completed native identity runtime/wheel/remaining docs are terminal;do not replay. Review repository-native-batch-ready-20261028 for two cached sources,exhaustive native scope derivation,default-observer checks and offline docs. Run only after actual exact execution approval. The three-source draft0a5307d7 is WITHDRAWN;Sopel needs SQLAlchemy1.4 and installed metadata. Source13gates/package20checks stay current;no repeat.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4245,3 +4245,28 @@ A finite first-party documentation control amendment can finish those unstarted
 commands with identical approved binary,configuration,permissions and69-document
 scope. It supplies no new software authority or automatic retry. The separate remaining-result records the successful scan under9241a2b2. No
 other component reran;the initial failed docs result remains unchanged.
+
+### C13: two-source native batch prepared; Sopel excluded before execution
+
+D118 freezes conservative expansion before collection and exact derived scope
+before any body trial. All matched native identities are required. Missing,
+overlapping,conflicting,invalid or oversized scopes reject the case;no single
+match is chosen to make a reference pass. The source/test/repair bytes and
+scientific thresholds stay. These are new authored scopes,not old-score repairs.
+
+Prepared cached Dead204 and Python-json-logger39 snapshots have195 published
+aliases. The exact Identify2.6.15 private ZIP is reviewed;no installer or new
+image is proposed. Fresh actual default-profile checks are still required;the
+already completed diagnostic-operator/source/wheel evidence is reused. Sixteen
+first-party scope checks and collector/authority/provenance checks passed with
+no untrusted execution or new grant charges. The next exact batch permits at
+most16calls/20existing-grant operations/860reservedseconds,zero models/cash,
+plus current cached offline docs. Pool63 and78-case gap stay unchanged.
+
+The older three-source review0a5307d7 is WITHDRAWN before approval/execution.
+Static source inspection established that Sopel requires SQLAlchemy>=1.4,<1.5,
+while the retained selected runtime has2.0.44,and its __init__ requires installed
+Sopel distribution metadata. No call was spent discovering these known blockers.
+Do not execute that draft after a late approval. The ready batch excludes Sopel;
+its future private compatible closure is independent work,not an architecture
+choice. All source caches,failed inert preparation and historical records remain.

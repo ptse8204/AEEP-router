@@ -6105,3 +6105,18 @@ amendment;same approved checker,boundary and69document scope,no replay of the
 standalone version/runtime/package checks. All owned resources were removed. The
 initial failed docs record stays. Active status text was then updated without
 changing heading anchors or link targets;local lint rechecks those metadata edits.
+
+## Two cached source subjects staged; no new execution,October28
+
+[The ready review](../toolkit-v2/c13/repository-native-batch-ready-20261028/README.md)
+stages Dead204 and Python-json-logger39 with195 old aliases and an exhaustive
+native-name derivation rule. All matched identities become required before body
+trials;no assertions or scientific thresholds weaken. Source13gates and wheel20
+checks remain current and are reused. New default-profile tests and these sources
+need their exact execution approval. Maximum16calls/20operations/860reservedseconds,
+zero models/cash;no downloads,builds,installs or image deletion. Pool63 stays.
+
+Sopel was removed before execution:source requires SQLAlchemy1.4,the retained
+runtime selects2.0.44,and installed distribution metadata is missing. The old
+three-source draft0a5307d7 is withdrawn;never execute it after a late reply.
+All preparation was data-only and the grant stayed13271/3755/120020.29874809133/0.0.
