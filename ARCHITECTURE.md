@@ -618,6 +618,14 @@ separate from source implementation.
 Suite case v2 adds explicit pytest plugin modules in protected truth. It uses
 the same observer executor and containment path with a separate program
 fingerprint; legacy-only recipes retain the original program and identity.
+
+Suite case v6 records complete native pytest identities, including spaces, in
+explicitly versioned protected truth. Its optional observer uses pytest hooks
+for collection and all three runtime phases, then returns observations through
+the same contained executor and coordinator grading contract. Default replies
+retain no raw test logs and cannot substitute collection for grading. Selecting
+v6 changes the recipe's observer fingerprint; legacy cases, programs and evidence
+keep their original meanings. Fresh runtime and grader checks remain necessary.
 Plugins load from reviewed wheels or the pinned image before candidate paths are
 added. A source module already loaded by that runtime blocks grading. This adds
 no plugin discovery service, dependency resolver or installer.

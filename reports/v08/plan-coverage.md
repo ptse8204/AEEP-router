@@ -6051,3 +6051,31 @@ remain. No build/install/download or unchanged source/package rerun. A separate
 cached-case identity audit will preserve16 malformed iCalendar880 aliases and the
 old899of915 failure while preparing a new native-pytest reporting adapter. No
 qualification,value,selection,resource,human or release gate closes.
+
+## Native pytest identities implemented; contained qualification pending,October28
+
+[The implementation and review scope](../toolkit-v2/c13/repository-native-identity-20261028/README.md)
+reuse pytest public collection/runtime hooks through the existing AEEP contained
+executor. Pinned container target remains pytest8.3.5; actual host first-party
+fixtures use pytest9.0.3 and do not qualify that target. No new dependency,
+installer, image, runner or service is added. The optional v6 contract accepts
+full printable test names; legacy v1–v5 truth schemas and observer/parser bytes
+remain identical. Sampled v1/v3/v4/v5 recipe digests are unchanged.
+
+A separate authored iCalendar task retains915 obligations and expands16 malformed
+published aliases from source literals before execution. Collection must confirm
+that frozen map before any body trial;the old899/915 result remains excluded.
+Two unchanged controls and all reference/original/partial variants are prepared.
+Contained observer, installed-wheel and current docs checks require the exact
+new bundle. Pool62 and every open scientific/resource/human/release gate remain.
+The metadata-only census found153 additional unpooled alias-affected rows across
+97 repositories;none is adopted or runtime-qualified.
+
+The integrated native-identity source `dbf9be31433ea56731170b7c1ad1119c8accc8909b40a9964ce734a64ef09cdf`
+passed all 13 source gates: 1,772 tests and 21 skips in each full run, 82% coverage,
+both branch gates, schema, lint, policy and type checks. The built wheel SHA-256
+is `3791d8f7f38c0584f8414351f108bc416581e9174fd5ab31e22ddc3a6a07f999`.
+Fresh container execution, installed-wheel checks and exact offline docs remain
+pending. The grant is unchanged at13254 operations/3755 turns/119985.56250504963
+seconds/0.0 cash. These source checks do not change the62-case provisional pool
+or any scientific, resource, human-control or release gate.

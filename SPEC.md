@@ -1119,6 +1119,21 @@ compact limits and reject the new field. A larger public source requires the
 operator-selected `repository_archive:2` transform; `repository_archive:1` keeps
 its650000byte cap. Model input and patch arguments MUST NOT select a profile.
 
+`assessment.repository-suite-case.v6` inherits v5 and requires protected truth
+to declare `identity_format: pytest-native-v1`. Required identities MAY contain
+printable spaces; each MUST be nonempty, printable, at most8192 UTF-8 bytes,
+distinct and below a selected test module. The existing total identity bound
+remains. V1–v5 MUST retain their whitespace rules and reject the new field.
+V6 recipes MUST observe complete native pytest identities through collection
+and runtime-report hooks. A required PASS needs passed setup, call and teardown
+reports; missing, skipped, failed, errored, expected-failure or unexpected-pass
+observations MUST NOT satisfy it. The existing complete zero-exit and protected
+identity checks remain. Selecting v6 MUST bind a separate observer fingerprint;
+legacy-only recipes retain their previous program and serialized meaning.
+Default replies MUST NOT include raw logs or support collection-only grading.
+This version changes neither assertions nor execution authority and does not
+establish resistance to hostile in-process pytest/plugin tampering.
+
 The contained executor MAY use an explicit operator-owned `max_stdin_bytes`
 above1800000,up to16000000; its outer JSON envelope then allows that amount plus
 1000000bytes. The prior2000000byte outer allowance stays for smaller/default

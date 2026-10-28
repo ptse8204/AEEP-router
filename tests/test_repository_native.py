@@ -1,0 +1,152 @@
+"""Native pytest hook checks use only authored local fixtures, never benchmarks."""
+import base64
+import hashlib
+import importlib.metadata
+import json
+import os
+import runpy
+import subprocess
+import sys
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from aeep.assessment.repository_suites import pack_files
+
+pytestmark = pytest.mark.assessment_contract
+RUNTIME = Path(__file__).resolve().parents[1] / 'integrations/assessment-runtime'
+NODE = 'tests/test_native.py::test_native[white space café]'
+
+
+@pytest.fixture
+def capture():
+    cls = runpy.run_path(str(RUNTIME / 'repository_suite_native_capture.py'))['NativeCapture']
+    result = cls()
+    result.pytest_collection_finish(SimpleNamespace(items=[SimpleNamespace(nodeid=NODE)]))
+    return result
+
+
+def report(capture, when, outcome, xfail=False):
+    fields = {'nodeid': NODE, 'when': when, 'outcome': outcome}
+    if xfail:
+        fields['wasxfail'] = 'authored fixture'
+    capture.pytest_runtest_logreport(SimpleNamespace(**fields))
+
+
+@pytest.mark.parametrize(('phases', 'expected'), [
+    ([('setup', 'passed'), ('call', 'passed'), ('teardown', 'passed')], 'PASSED'),
+    ([('setup', 'passed'), ('call', 'failed'), ('teardown', 'passed')], 'FAILED'),
+    ([('setup', 'failed'), ('teardown', 'passed')], 'ERROR'),
+    ([('setup', 'passed'), ('call', 'passed'), ('teardown', 'failed')], 'ERROR'),
+    ([('setup', 'skipped'), ('teardown', 'passed')], 'SKIPPED'),
+])
+def test_native_event_phases(capture, phases, expected):
+    for when, outcome in phases:
+        report(capture, when, outcome)
+    assert capture.export() == {'statuses': {NODE: expected}}
+
+
+@pytest.mark.parametrize('outcome', ['passed', 'skipped'])
+def test_native_xpass_and_xfail_cannot_satisfy_pass(capture, outcome):
+    report(capture, 'setup', 'passed')
+    report(capture, 'call', outcome, True)
+    report(capture, 'teardown', 'passed')
+    assert capture.export() == {'statuses': {NODE: 'XFAIL'}}
+
+
+@pytest.mark.parametrize('problem', ['duplicate', 'missing_teardown', 'bad_phase', 'bad_outcome',
+    'duplicate_selected', 'unselected', 'invalid_identity'])
+def test_native_invalid_events_fail_closed(capture, problem):
+    report(capture, 'setup', 'passed')
+    report(capture, 'call', 'passed')
+    if problem == 'duplicate':
+        report(capture, 'call', 'passed')
+    elif problem == 'bad_phase':
+        report(capture, 'unknown', 'passed')
+    elif problem == 'bad_outcome':
+        report(capture, 'teardown', 'unknown')
+    elif problem == 'duplicate_selected':
+        capture.selected_ids *= 2
+    elif problem == 'unselected':
+        capture.selected_ids = []
+    elif problem == 'invalid_identity':
+        capture.pytest_runtest_logreport(SimpleNamespace(nodeid='bad\nname', when='call', outcome='passed'))
+    with pytest.raises(ValueError):
+        capture.export()
+
+
+def test_native_missing_events_stay_missing(capture):
+    assert capture.export() == {'statuses': {}}
+
+
+@pytest.mark.parametrize('problem', ['duplicate', 'uncollected', 'body', 'invalid', 'limit'])
+def test_native_collection_does_not_grade_or_ignore_protocol_problems(capture, problem):
+    capture.collect_only = True
+    capture.pytest_itemcollected(SimpleNamespace(nodeid=NODE))
+    assert capture.export() == {'native_ids': [NODE], 'selected_ids': [NODE]}
+    if problem == 'duplicate':
+        capture.pytest_itemcollected(SimpleNamespace(nodeid=NODE))
+    elif problem == 'uncollected':
+        capture.native_ids = []
+    elif problem == 'body':
+        report(capture, 'call', 'passed')
+    elif problem == 'invalid':
+        capture.pytest_itemcollected(SimpleNamespace(nodeid='x' * 8193))
+    else:
+        capture.native_ids *= 10000
+        capture.pytest_itemcollected(SimpleNamespace(nodeid='excess'))
+    with pytest.raises(ValueError):
+        capture.export()
+
+
+@pytest.mark.parametrize('fixture', ['spaced', 'phases', 'collection_denied', 'early_exit', 'runtime_shadow'])
+def test_packaged_native_observer_first_party_subprocess(tmp_path, fixture):
+    source = {
+        'spaced': '''import pytest
+@pytest.mark.parametrize('value',[1,2],ids=['white space','café'])
+def test_native(value):
+    print('PASSED tests/test_native.py::forged')
+    assert value in (1,2)
+''',
+        'phases': '''import pytest
+@pytest.fixture
+def teardown():
+    yield
+    raise RuntimeError('authored teardown')
+def test_native(teardown):
+    pass
+''',
+        'early_exit': 'import os\ndef test_native():\n    os._exit(0)\n',
+    }.get(fixture, 'def test_native():\n    assert True\n')
+    files = {'tests/test_native.py': source.encode(), 'pytest.ini':
+        b'[pytest]\ndisable_test_id_escaping_and_forfeit_all_rights_to_community_support = True\n'}
+    if fixture == 'runtime_shadow':
+        files['pytest.py'] = b'raise RuntimeError("candidate runtime")\n'
+        files['sitecustomize.py'] = b'raise RuntimeError("candidate startup")\n'
+    archive = pack_files(files)
+    payload = {'archive': base64.b64encode(archive).decode(),
+        'archive_sha256': hashlib.sha256(archive).hexdigest(), 'python': '.'.join(map(str, sys.version_info[:2])),
+        'pytest': importlib.metadata.version('pytest'), 'test_paths': ['tests/test_native.py'], 'wheels': []}
+    if fixture == 'collection_denied':
+        payload['collect_only'] = True
+    program = (RUNTIME / 'repository_suite_native_program.py').read_text().replace(
+        "'__AEEP_NATIVE_CAPTURE_SOURCE__'", repr((RUNTIME / 'repository_suite_native_capture.py').read_text()))
+    child = subprocess.run([sys.executable, '-B', '-c', program], input=json.dumps(payload),
+        text=True, capture_output=True, cwd=tmp_path, timeout=30,
+        env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1'})
+    if fixture in ('collection_denied', 'early_exit'):
+        assert child.returncode != 0 and not child.stdout.strip()
+        return
+    assert child.returncode == 0, child.stderr
+    result = json.loads(child.stdout)
+    assert set(result) == {'archive_sha256', 'python', 'pytest', 'exit_code', 'statuses'}
+    assert result['archive_sha256'] == payload['archive_sha256']
+    if fixture == 'spaced':
+        assert result['exit_code'] == 0
+        assert result['statuses'] == {'tests/test_native.py::test_native[' + name + ']': 'PASSED'
+            for name in ('white space', 'café')}
+    elif fixture == 'phases':
+        assert result['exit_code'] == 1 and result['statuses'] == {'tests/test_native.py::test_native': 'ERROR'}
+    else:
+        assert result['exit_code'] == 0 and result['statuses'] == {'tests/test_native.py::test_native': 'PASSED'}

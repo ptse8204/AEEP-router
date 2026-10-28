@@ -152,7 +152,7 @@ class SuiteTruth(StrictModel):
     def _check_oracle(self, test_roots: list[str]) -> None:
         names = self.fail_to_pass + self.pass_to_pass
         if (len(set(names)) != len(names) or len(json.dumps(names)) > 300_000
-                or any(not name or any(char.isspace() for char in name) for name in names)):
+                or any(not self._valid_identity(name) for name in names)):
             raise ValueError('suite oracle needs distinct bounded upstream test identities')
         if len(set(self.test_paths)) != len(self.test_paths):
             raise ValueError('duplicate test module')
@@ -165,6 +165,9 @@ class SuiteTruth(StrictModel):
         filenames = [Path(asset.path).name for asset in self.wheels]
         if len(set(filenames)) != len(filenames) or any(not name.endswith('-none-any.whl') for name in filenames):
             raise ValueError('suite runtime requires distinct reviewed pure-Python wheels')
+
+    def _valid_identity(self, name: str) -> bool:
+        return bool(name) and not any(char.isspace() for char in name)
 
 
 class SuiteTruthV2(SuiteTruth):
@@ -212,6 +215,15 @@ class SuiteTruthV5(SuiteTruthV4):
     archive_profile: Literal['repository-v1']
     source: SuiteAssetV5
     tests: SuiteAssetV5
+
+
+class SuiteTruthV6(SuiteTruthV5):
+    """Full native pytest identities; no log tokenization or name rewriting."""
+
+    identity_format: Literal['pytest-native-v1']
+
+    def _valid_identity(self, name: str) -> bool:
+        return bool(name) and name.isprintable() and len(name.encode('utf-8')) <= 8192
 
 
 class SuiteArtifact(StrictModel):
@@ -273,7 +285,7 @@ def _decode_suite_patch(oracle: SuiteTruth, value: Any) -> RepositoryPatch:
 
 def _suite_version_schema(schema: dict[str, Any]) -> None:
     # Reuse Pydantic's references so definition renaming remains valid.
-    large_truth, rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    native_truth, large_truth, rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
     schema['allOf'] = [
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
          'then': {'properties': {'truth': legacy_truth}}},
@@ -285,14 +297,16 @@ def _suite_version_schema(schema: dict[str, Any]) -> None:
          'then': {'properties': {'truth': rooted_truth}}},
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v5'}}, 'required': ['schema_version']},
          'then': {'properties': {'truth': large_truth}}},
+        {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v6'}}, 'required': ['schema_version']},
+         'then': {'properties': {'truth': native_truth}}},
     ]
 
 
 class RepositorySuiteCase(StrictModel):
     model_config = ConfigDict(json_schema_extra=_suite_version_schema)
-    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4', 'assessment.repository-suite-case.v5'] = 'assessment.repository-suite-case.v1'
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4', 'assessment.repository-suite-case.v5', 'assessment.repository-suite-case.v6'] = 'assessment.repository-suite-case.v1'
     input: SuiteInput
-    truth: SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
+    truth: SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -306,9 +320,9 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
-        version = 'v5' if isinstance(self.truth, SuiteTruthV5) else 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
+        version = 'v6' if isinstance(self.truth, SuiteTruthV6) else 'v5' if isinstance(self.truth, SuiteTruthV5) else 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
         if self.schema_version != 'assessment.repository-suite-case.' + version:
-            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4; larger archives require v5')
+            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4; larger archives require v5; native identities require v6')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
@@ -339,7 +353,7 @@ def public_archive(arguments: dict[str, Any], roots: list[str], *, large: bool =
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
     task = SuiteInput.model_validate(value)
-    oracle = (SuiteTruthV5 if 'archive_profile' in truth else SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    oracle = (SuiteTruthV6 if 'identity_format' in truth else SuiteTruthV5 if 'archive_profile' in truth else SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
@@ -443,7 +457,12 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         root = Path(sysconfig.get_path('data')) / 'share/aeep/integrations/assessment-runtime'
     parser = (root / 'swe_rebench_pytest_parser.py').read_text()
     plugins = any(isinstance(case.truth, SuiteTruthV2) for case in cases)
-    program = parser + '\n' + (root / ('repository_suite_plugins_program.py' if plugins else 'repository_suite_program.py')).read_text()
+    native = any(isinstance(case.truth, SuiteTruthV6) for case in cases)
+    if native:
+        program = (root / 'repository_suite_native_program.py').read_text().replace(
+            "'__AEEP_NATIVE_CAPTURE_SOURCE__'", repr((root / 'repository_suite_native_capture.py').read_text()))
+    else:
+        program = parser + '\n' + (root / ('repository_suite_plugins_program.py' if plugins else 'repository_suite_program.py')).read_text()
     observer = ExecutorSpec(id='repository.suite.observe', capability='assessment.repository_suite@1', kind=ExecutorKind.COMMAND,
         description='Pinned upstream pytest observations; protected coordinator decides task correctness.',
         config={'argv': ['python3', '-B', '-c', program], 'argv_literal': True, 'stdin_json': True,
@@ -472,7 +491,8 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+                if native else TypeAdapter(SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV5) for case in cases) else TypeAdapter(SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV4) for case in cases) else TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else TypeAdapter(SuiteTruthV2 | SuiteTruth).json_schema()

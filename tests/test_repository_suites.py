@@ -871,6 +871,102 @@ def test_large_source_profile_requires_explicit_case_and_mapper_versions(large_c
     assert content_digest(repository_suite_recipe(suite_cases)) == content_digest(before)
 
 
+def native_case(case):
+    value = case.model_dump(mode='json')
+    value['schema_version'] = 'assessment.repository-suite-case.v6'
+    value['truth']['identity_format'] = 'pytest-native-v1'
+    value['truth']['fail_to_pass'] = ['package/tests/test_core.py::test_repair[white space café]']
+    return RepositorySuiteCase.model_validate(value)
+
+
+def test_native_identities_require_explicit_contract_without_changing_legacy(large_case, suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.repository_suites import (
+        SuiteTruthV3,
+        SuiteTruthV4,
+        SuiteTruthV5,
+        SuiteTruthV6,
+    )
+
+    case = native_case(large_case)
+    value = case.model_dump(mode='json')
+    validator = Draft202012Validator(RepositorySuiteCase.model_json_schema())
+    validator.validate(value)
+    assert isinstance(case.truth, SuiteTruthV6)
+    assert RepositorySuiteCase.model_validate_json(case.model_dump_json()) == case
+    for version in range(1, 6):
+        wrong = {**value, 'schema_version': 'assessment.repository-suite-case.v' + str(version)}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    for original in (suite_cases[0].truth, rooted_case(suite_cases[0]).truth, large_case.truth):
+        types = [type(original)]
+        if type(original) is SuiteTruth:
+            types += [SuiteTruthV2, SuiteTruthV3]
+        for cls in types:
+            old = original.model_dump(mode='json')
+            if cls is SuiteTruthV2:
+                old['pytest_plugins'] = ['reviewed_plugin']
+            elif cls is SuiteTruthV3:
+                old.update(patch_encoding='gzip-json', pytest_plugins=[])
+            cls.model_validate(old)
+            with pytest.raises(ValueError):
+                cls.model_validate({**old, 'fail_to_pass': ['tests/test_core.py::white space']})
+            with pytest.raises(ValueError):
+                cls.model_validate({**old, 'identity_format': 'pytest-native-v1'})
+    assert isinstance(rooted_case(suite_cases[0]).truth, SuiteTruthV4)
+    assert isinstance(large_case.truth, SuiteTruthV5)
+    old_recipe = repository_suite_recipe([large_case, *suite_cases[1:]])
+    recipe = repository_suite_recipe([case, *suite_cases[1:]])
+    assert 'SuiteTruthV6' not in old_recipe.extension.truth_schema['$defs']
+    assert 'SuiteTruthV6' in recipe.extension.truth_schema['$defs']
+    program = recipe.extension.grader.config['argv'][-1]
+    assert 'class NativeCapture' in program and 'OPERATOR_REVIEW = False' in program
+    assert '__AEEP_NATIVE_CAPTURE_SOURCE__' not in program
+    assert content_digest(recipe) != content_digest(old_recipe)
+
+
+@pytest.mark.parametrize('bad', ['', 'package/tests/test_core.py::line\nfeed',
+    'package/tests/test_core.py::tab\tname', 'package/tests/test_core.py::null\0name',
+    'package/tests/test_core.py::' + 'é' * 4097, 'package/tests/absent.py::name'])
+def test_native_identity_bounds_and_module_scope(large_case, bad):
+    from aeep.assessment.repository_suites import SuiteTruthV6
+
+    value = native_case(large_case).truth.model_dump(mode='json')
+    with pytest.raises(ValueError):
+        SuiteTruthV6.model_validate({**value, 'fail_to_pass': [bad]})
+    with pytest.raises(ValueError):
+        SuiteTruthV6.model_validate({**value, 'pass_to_pass': value['fail_to_pass']})
+    with pytest.raises(ValueError):
+        SuiteTruthV6.model_validate({**value, 'identity_format': 'log-split'})
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('outcome', ['pass', 'truncated', 'failed', 'skip', 'nonzero'])
+async def test_native_grading_never_infers_missing_or_nonpassing_results(large_case, outcome):
+    case = native_case(large_case)
+
+    async def probe(payload):
+        reply = success(payload, case.truth)
+        node = case.truth.fail_to_pass[0]
+        if outcome == 'truncated':
+            reply['statuses'][node.split()[0]] = reply['statuses'].pop(node)
+        elif outcome == 'failed':
+            reply['statuses'][node] = 'FAILED'
+        elif outcome == 'skip':
+            reply['statuses'][node] = 'SKIPPED'
+        elif outcome == 'nonzero':
+            reply['exit_code'] = 1
+        return reply
+
+    result = await grade_suite_output(case.input.model_dump(mode='json'),
+        case.truth.model_dump(mode='json'), json.loads(case.reference.read()), probe)
+    assert result.valid == (outcome == 'pass')
+    assert result.detail == ('' if outcome == 'pass' else 'missing_test' if outcome == 'truncated' else 'test_failure')
+
+
 @pytest.mark.asyncio
 async def test_large_profile_preserves_protected_grading_and_payload_cap(large_case, monkeypatch):
     from aeep.assessment.repository_suites import compressed_patch_artifact

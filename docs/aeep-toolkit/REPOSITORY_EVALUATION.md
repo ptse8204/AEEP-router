@@ -198,6 +198,34 @@ Published Python file counts are curation hints. Inspect source-body changes and
 test obligations before calling a task a multi-file repair; documentation-string
 edits in extra Python files do not supply that evidence.
 
+### Test names containing spaces
+
+Use `assessment.repository-suite-case.v6` when required pytest identities contain
+spaces. Protected truth declares `identity_format: pytest-native-v1` and inherits
+v5's archive profile and test roots. Each identity must be printable, at most
+8,192 UTF-8 bytes and below a selected test module. Duplicate identities and the
+existing total metadata bound remain enforced. V1–v5 reject the new field and
+retain their original whitespace rules and observer fingerprints.
+
+The v6 observer uses pytest's collection and runtime-report hooks. It preserves
+complete identities without splitting log lines. A passing observation requires
+passed setup, call and teardown phases; failures, skips, expected failures,
+unexpected passes and missing reports cannot satisfy a required pass. A zero exit
+code alone does not establish correctness. The coordinator still checks every
+required identity and the full exit status. Ordinary replies retain only these
+observations and runtime/archive bindings; collection-only replies and failure
+log retention require a separate exact operator-reviewed diagnostic program.
+
+Selecting any v6 case changes the complete recipe's observer fingerprint and
+requires fresh runtime conformance and reference/counterexample checks. It adds
+no dependency or runner. The initial local fixtures exercise authored test code
+on the host; they do not qualify the pinned container runtime or prove capability
+benefit. Hooks avoid ordinary log ambiguity, but tests and their plugins still
+execute in the same process; this is not a proof against adversarial tampering.
+Preserve published aliases and old failures. Any corrected identity mapping must
+be frozen before execution, confirmed by native collection and recorded as a
+separate task without removing assertions or required identities.
+
 ## Compare capability usefulness
 
 Store/review the exported recipe through the existing assessment interfaces,

@@ -552,6 +552,117 @@
       ],
       "title": "SuiteTruthV5",
       "type": "object"
+    },
+    "SuiteTruthV6": {
+      "additionalProperties": false,
+      "description": "Full native pytest identities; no log tokenization or name rewriting.",
+      "properties": {
+        "input_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/SuiteAssetV5"
+        },
+        "tests": {
+          "$ref": "#/$defs/SuiteAssetV5"
+        },
+        "wheels": {
+          "items": {
+            "$ref": "#/$defs/SuiteAsset"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Wheels",
+          "type": "array"
+        },
+        "python": {
+          "pattern": "^3\\.(?:1[1-9]|[2-9][0-9])$",
+          "title": "Python",
+          "type": "string"
+        },
+        "pytest": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "title": "Pytest",
+          "type": "string"
+        },
+        "test_paths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Test Paths",
+          "type": "array"
+        },
+        "fail_to_pass": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5000,
+          "title": "Fail To Pass",
+          "type": "array"
+        },
+        "pass_to_pass": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5000,
+          "minItems": 1,
+          "title": "Pass To Pass",
+          "type": "array"
+        },
+        "pytest_plugins": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Pytest Plugins",
+          "type": "array"
+        },
+        "patch_encoding": {
+          "const": "gzip-json",
+          "title": "Patch Encoding",
+          "type": "string"
+        },
+        "test_roots": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Test Roots",
+          "type": "array"
+        },
+        "archive_profile": {
+          "const": "repository-v1",
+          "title": "Archive Profile",
+          "type": "string"
+        },
+        "identity_format": {
+          "const": "pytest-native-v1",
+          "title": "Identity Format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "source",
+        "tests",
+        "wheels",
+        "python",
+        "pytest",
+        "test_paths",
+        "fail_to_pass",
+        "pass_to_pass",
+        "patch_encoding",
+        "test_roots",
+        "archive_profile",
+        "identity_format"
+      ],
+      "title": "SuiteTruthV6",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -647,6 +758,25 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "assessment.repository-suite-case.v6"
+          }
+        },
+        "required": [
+          "schema_version"
+        ]
+      },
+      "then": {
+        "properties": {
+          "truth": {
+            "$ref": "#/$defs/SuiteTruthV6"
+          }
+        }
+      }
     }
   ],
   "properties": {
@@ -657,7 +787,8 @@
         "assessment.repository-suite-case.v2",
         "assessment.repository-suite-case.v3",
         "assessment.repository-suite-case.v4",
-        "assessment.repository-suite-case.v5"
+        "assessment.repository-suite-case.v5",
+        "assessment.repository-suite-case.v6"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -667,6 +798,9 @@
     },
     "truth": {
       "anyOf": [
+        {
+          "$ref": "#/$defs/SuiteTruthV6"
+        },
         {
           "$ref": "#/$defs/SuiteTruthV5"
         },

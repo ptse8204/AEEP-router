@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**Native-identity implementation passed all 13 source gates.** The explicit v6
+contract and packaged pytest-hook observer preserve complete names with spaces.
+All 915 iCalendar obligations are statically mapped before execution; the old
+899/915 observation remains excluded. Both full runs passed 1,772 tests with
+21 skips, 82% coverage and both branch gates. The changed wheel is built. The
+fresh exact runtime/package/docs review is being finalized; no new contained
+execution, installation, model call or grant debit occurred. Previous source
+374579f1 and wheel9b00 evidence below retain their original applicability.
+
 **Status as of2026-10-28: portable Markdown bundle22b0cf03 completed once. Its
 ZIP-origin/hash/rendering probe and both PyMdown reference/original comparisons
 passed. Five completed receipts/seven operations reconcile,18.11404641577974
@@ -4180,3 +4189,31 @@ Require exact,unique native-identity resolution with explicit mapping/provenance
 before freezing a new authored task scope. No dropped assertions or favorable
 outcome-based mapping. Fresh contained conformance/equivalence and reference/
 negative checks require a future exact execution review;preparation is safe.
+
+
+### C13: native-identity source checks passed, exact execution review in preparation
+
+The explicit case v6 truth keeps full pytest identities through public hooks.
+Legacy v1–v5 truth schemas, all three observer/parser files and sampled v1/v3/v4/v5
+recipe digests are unchanged. Scope verification confirms unchanged source,
+upstream assertions and reference/fault replacement text. Only the first-party
+selector literal and16 source-derived names change for the authored iCalendar
+native audit. Two compatibility case records are identical to the current pool.
+The old899/915 result remains excluded; no collection or body trial ran here.
+
+Source dbf9be31433ea56731170b7c1ad1119c8accc8909b40a9964ce734a64ef09cdf
+passed all13 integrated checks. Ordinary pytest:1772passed/21skipped,575.76seconds;
+coverage pytest:same counts,877.39seconds,82%coverage,both branch gates. Schema,
+lint,policy,mypy and build passed. Both retain the existing Starlette/httpx
+warning. New wheel3791d8f7f38c0584f8414351f108bc416581e9174fd5ab31e22ddc3a6a07f999
+is1972818bytes. Source/package evidence for older374579f1/9b00 stays historical.
+Do not rerun this unchanged source suite; finalize the exact execution bundle.
+
+Read-only grant counters13254/3755/119985.56250504963/0.0 are unchanged. Current
+expiry2026-10-28T17:52:35.978639Z and absolute ceilings50000/6000/604800/0 remain.
+Host free59.27GiB after source checks;50GiB reserve holds. All images retained.
+The first-party terminal collector fixtures passed for known completion/failure,
+nonterminal state,cleanup uncertainty and incomplete evidence. The docs sandbox
+fixture passed without running Lychee. Full runtime/package/docs execution remains
+unapproved. Metadata-only census:153 unpooled rows/97 repositories with malformed
+aliases;all still unverified. Pool62/39repositories/3951IDs and79-case gap remain.

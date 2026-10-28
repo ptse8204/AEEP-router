@@ -1994,3 +1994,26 @@ or ambiguous matches rejected,before any new authored task is frozen. Preserve
 all assertions and scientific thresholds. Fresh contained observer conformance,
 legacy-equivalence controls and reference/original/partial checks are separate
 from model qualification,value,selection and resource acceptance.
+
+## D117 — Version complete pytest identities without reinterpreting old contracts
+
+Legacy SuiteTruth v1–v5 rejects whitespace in required identities. The optional
+native adapter alone cannot honestly represent full pytest names under those
+contracts. Add case v6 with explicit `identity_format: pytest-native-v1`, inherit
+v5 bounds and test roots, and bind a separate hook-based observer. Keep all five
+legacy schemas, all three observer/parser files and sampled v1/v3/v4/v5 recipe
+digests identical. Preserve every required assertion, missing-result guard,
+nonzero-exit guard, frozen threshold and execution boundary. Default replies
+retain no logs and reject collection-only requests; only the exact operator
+program enables separate collection diagnostics and bounded public failure logs.
+No new dependency, runner, image or architecture choice is involved. Fresh source,
+installed-wheel and contained observer checks remain necessary. Host fixtures are
+engineering evidence; no pool, qualification or usefulness result follows yet.
+
+The adapter choice reuses the existing pinned pytest implementation. The legacy
+SWE-rebench log parser splits at whitespace and stays available for old recipes.
+Pytest already supplies the native collection and runtime-report interfaces;
+small first-party serialization glue avoids adding another reporting plugin and
+dependency closure. This is an optional adapter for upstream events, not a new
+evaluation engine. No general third-party reporting package is claimed to have
+failed qualification;none is needed for this bounded interface.
