@@ -6231,3 +6231,21 @@ The terminal one-attempt approval forbids a runtime retry;new exact approval is
 needed. Completed package/docs and13source gates are not repeated. Pool64and
 77-case gap remain. Cached133rows/98repositories are metadata candidates only;
 comparative usefulness,live selection,resource,human-control and release stay open.
+
+### October 29: inherited-loader guard and cached-only runtime preparation
+
+Actuala11807f2downloaded the exact8665568-byte Git archive and prepared19files,
+then stopped before Docker because the expected ELF names omitted inherited
+`ld-linux-aarch64.so.1`. One completed operation/2.9479576251469553seconds remains
+charged;grant13305/3755/120083.82735821838/0.0. No image,worker,model or cash.
+Actual network-attempt count remains unknown within the reviewed maximum2.
+
+Read-only parent export verified OCI configuration/layers and the actual loader,
+libc,PCRE2,zlib files/aliases;unchanged owned export/static scratch were removed.
+Cache/context hashes and modes pass. Newcached-onlyd1caf28bpermits zero downloads
+or extraction,no new library/software bytes,one COPY-only image and the same
+21call/26operation/1335second maximum. All149assets/305nested bindings and actual
+cached-verifier,driver,definition/budget and image-derivation fixtures passed.
+Fresh exact approval is needed because the terminal review forbids retries.
+Completed source13/package20/docs69are not repeated;pool64/77gap and all central
+scientific,resource,human-control and release gates remain open.

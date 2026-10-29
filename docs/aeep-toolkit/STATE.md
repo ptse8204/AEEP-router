@@ -1,58 +1,61 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of October 29: shared-native bundle 17defe159 is terminal.**
-Its runtime component stopped at preflight, before any download, build, worker,
-canary or grant charge. Three first-party script hashes in the nested runtime
-review were stale. The outer bundle bound the current files, but its preparation
-audit flattened the mappings and missed the conflict. The failed attempt and
-original PASS record are retained with the
-[reconciliation](../../reports/toolkit-v2/c13/repository-shared-native-20261028/preflight-failure-reconciliation.json).
+**Status as of October 29: runtime review a11807f2 is terminal.**
+The operator approved it and the one attempt downloaded the pinned Git archive,
+verified its bytes and copyright, and prepared the context. The dependency guard
+then stopped before Docker: its expected names omitted the inherited system ELF
+loader, `ld-linux-aarch64.so.1`. One canonical operation completed and remains
+charged: 2.9479576251469553 seconds. No image build, worker, canary, model or cash
+operation occurred. All existing images and containers remain untouched.
+[Terminal reconciliation](../../reports/toolkit-v2/c13/repository-review-bindings-20261029/terminal-reconciliation.json)
+preserves the failed result and exact counters. The network-attempt count is
+unknown; the bounded code permitted at most two requests. Do not infer a count
+from the elapsed time.
 
-The independently approved, previously unstarted package and docs components
-then passed. Corrected wheel b3d9c5d0 and its 32 cached dependencies passed all
-20 private installed checks, including the normal CLI's exact shared-default
-program identity. The private runtime and scratch were removed. Cached Lychee
-passed the 69-document offline check against its recorded input hashes; its
-unchanged private runtime was removed. These completed checks are not repeated.
-No models, cash, downloads, image builds or grant charges occurred.
-[Component results](../../reports/toolkit-v2/c13/repository-shared-native-20261028/independent-component-results.json)
-preserve the exact approved scopes.
+A read-only export of the same retained parent verified its configuration,
+layers, loader path and aliases, and actual libc, PCRE2 and zlib files. The
+unchanged 230,109,184-byte owned export and static ELF scratch were removed.
+The loader is already present; no library or package is being added. All 19
+prepared context files, their modes, the archive and actual ELF dependencies
+were rechecked without starting a container or executing Linux code.
+[Parent ELF audit](../../reports/toolkit-v2/c13/repository-cached-git-20261029/parent-ELF-audit.json)
+and [cached context audit](../../reports/toolkit-v2/c13/repository-cached-git-20261029/cached-context-audit.json)
+retain the actual evidence.
 
-The new runtime-only review is
-[a11807f2](../../reports/toolkit-v2/c13/repository-review-bindings-20261029/runtime-review.json),
-SHA-256 a11807f2aaf8880661a7cf248d2d0738c26e672ed61a9b3e2d5cb184a1f4b40b.
-It corrects the three pins and checks every nested execution review before a
-runtime marker. Seven authored checks detect the original conflict; the actual
-driver rejects a stale pin before Docker. Image-binding fixtures passed. The
-same Git bytes, tasks, programs, assertions, permissions and finite allowances
-remain: one exact download, one COPY-only image, at most 21 offline calls,
-26 existing-grant operations and 1,335 reserved seconds. A fresh actual approval
-is required because 17defe159 permits one attempt and forbids automatic retries.
-No package, docs or full source-suite replay is needed. No architecture decision.
+The new cached-only review is
+[d1caf28b](../../reports/toolkit-v2/c13/repository-cached-git-20261029/runtime-review.json),
+SHA-256 d1caf28bf7a888cd02acbc7fc56986bfc147028e68818a505410557bc521a677.
+It reuses the unchanged archive and context, allows zero further downloads or
+extraction, and checks the four actual inherited ELF dependency names. Same
+software bytes, task programs, source, assertions, payloads and permissions;
+one COPY-only image and at most 21 offline calls / 26 existing-grant operations /
+1,335 reserved seconds. Actual cached-verifier checks, seven authored context
+guards, driver preflight, definition/budget and image derivation fixtures passed.
+No actual approval has been received for this fresh runtime. The terminal exact
+review forbids automatic retries. No architecture or budget decision is needed.
 
-The prior ae6a0f9f check remains successful: both profiles passed all 171
-JSON-logger obligations, and the original failed the expected 12 tests while
-159 preservation tests passed. Its 17 receipts and 19 operations reconcile.
-Current shared source b09911a0 compiles the same raw program 1f099dfb. All 13
-source gates passed: 1,775 tests and 21 skips in each full run, 82% coverage and
-both branch gates. Legacy observer/parser contracts are unchanged. The new
-installed-wheel evidence does not establish new-image conformance or task value.
+The earlier shared-native bundle17defe159remains terminal at its known nested-pin
+preflight failure. Its independently approved package and docs components passed:
+corrected wheelb3d9c5d0 plus32cached dependencies,20private installed checks,
+and69documents checked offline against retained hashes. Owned runtimes/scratch
+were removed. Those completed checks and the13source gates are not repeated.
+Current sourceb09911a0 retains1775tests/21skips in both full runs,82%coverage and
+both branch gates. Normal CLI export has the exact shared-default program1f099dfb.
+The previous actual ae6a0f9f171-test references and12negative failures remain
+valid within their original scope;no new-image conformance transfers from them.
 
-The provisional pool remains 64 snapshots / 40 repositories / 5,037 identities:
-26 single-file, 23 multi-file and 15 audit cases. The frozen cohort still needs
-77 cases (21 / 24 / 32). Read-only cache triage found 133 unused rows across
-98 repositories, all with a cached archive; 87 have one Python body path and 46
-have several. Those are preliminary path counts, not verified task families,
-rights, runtime compatibility or reproduced cases. No stages are assigned.
-Comparative usefulness, correct live selection, resource acceptance, human
-control and release remain separate open gates.
+The provisional pool remains64snapshots/40repositories/5037identities,with77cases
+missing (21single-file,24multi-file,32audit). Cached133unused rows/98repositories
+remain metadata candidates,not reproduced tasks. No stage is assigned. Candidate
+usefulness,correct live selection,resource acceptance,human control and release
+remain open. Isort's metadata,Sopel's compatible closure and SQLglot7479's weak
+partial-repair guard remain separate exclusions.
 
-Grant counters remain 13304 / 3755 / 120080.87940059323 / 0.0. Existing expiry-only
-amendment 5d9e7d9a ends at 2026-10-29T20:04:36.625328Z. Preserve all counters and
-check the current ledger before execution. About 97 GiB was free before these
-checks; the 50 GiB reserve holds. All images remain. Isort needs genuine package
-metadata; Sopel needs its compatible dependency closure; SQLglot7479 has an
-undetected partial repair. The Git review does not resolve those exclusions.
+Current grant counters are13305/3755/120083.82735821838/0.0. Existing expiry-only
+amendment5d9e7d9aends2026-10-29T20:04:36.625328Z. Check the current ledger/expiry
+before any future execution;never refund the completed failed operation or reset
+counters. The50GiB host reserve holds. All images,cache,context and prior evidence
+remain. No new download,dependency,model,package/docs run or release is requested.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -95,16 +98,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '2bc86b1'
-last_check_command: 'run-integration-bundle.py 17defe159:terminal preflight failure;independent package20/docs69 passed;new recursive binding audit and driver/derivation fixtures passed'
-last_check_result: 'No runtime dispatch or grant charge;three stale nested pins identified. Corrected wheel20checks and exact offline docs passed,private runtimes removed. Sourceb099 unchanged;pool64/77gap. New runtimea11807f2 prepared with100assets and256unique nested file bindings;not approved or executed.'
-next_action: 'Obtain exact runtime-only approvala11807f2aaf8880661a7cf248d2d0738c26e672ed61a9b3e2d5cb184a1f4b40b. Then check current grant/expiry and run repository-review-bindings-20261029/run-bundle.py once. Same pinnedGit/component/tasks/allowances;do not repeat completed package/docs/source checks. Continue safe independent corpus and selection work;preserve all attempts and images.'
+last_verified_commit: '87397fb'
+last_check_command: 'run-bundle.py a11807f2:terminal ELF guard failure;inspect_parent.py;cached-context audit;actual cached verifier plus driver/definition/budget/derivation fixtures'
+last_check_result: '1canonical operation/2.9479576251469553seconds retained;no image build or worker. Exact cached19files and inherited loader/three libraries verified without Linux execution. Newd1caf28breview binds149assets/305nested file bindings;not approved/executed. Source/package/docs checks reused;pool64/77gap.'
+next_action: 'Obtain exact cached-only runtimed1caf28bf7a888cd02acbc7fc56986bfc147028e68818a505410557bc521a677. Check grant/expiry,record actual approval,and run repository-cached-git-20261029/run-bundle.py once. Reuse unchanged context/cache;zero downloads/new libraries;one image and same21call/26operation/1335second envelope. Do not replay source/package/docs checks. Reconcile actual receipts before adopting any provisional case.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Actuala11807f2approval was exercised once and ended at the missing-loader expectation guard. One completed operation stays charged. Fresh cached-onlyd1caf28bneeds exact approval:the old review forbids automatic retry/guard changes. No new download,dependency,model,architecture or budget decision.'
   - 'Actual17defe159approval was exercised once:runtime terminal before external work,independent package20/docs passed. Fresh runtime-onlya11807f2 needs exact approval because the one-attempt review forbids retries. No new model,architecture,package/docs or budget decision.'
   - 'None for terminalae6a0f9f:actual direct approval ran once and all17receipts/19operations reconcile. New pinnedGit download/component/image and fresh untrusted source execution require their concrete exact review. No architecture/budget decision;routine finite definitions/expiry amendments remain delegated.'
   - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'

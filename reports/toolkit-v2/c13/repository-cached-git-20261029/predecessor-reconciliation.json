@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "terminal_review_sha256": "a11807f2aaf8880661a7cf248d2d0738c26e672ed61a9b3e2d5cb184a1f4b40b",
+  "actual_human_approval_file": "reports/toolkit-v2/c13/repository-review-bindings-20261029/operator-approval.json",
+  "failure": "Expected NEEDEDset omitted inherited ld-linux-aarch64.so.1;the guard stopped before Docker build. The loader is verified in the same parent,not new software.",
+  "expected_names": [
+    "libc.so.6",
+    "libpcre2-8.so.0",
+    "libz.so.1"
+  ],
+  "actual_names": [
+    "ld-linux-aarch64.so.1",
+    "libc.so.6",
+    "libpcre2-8.so.0",
+    "libz.so.1"
+  ],
+  "canonical_operations": 1,
+  "operation_id": "recipe_generation_749bb83fb3dc43e6b94cacfd62861b84-runtime-build",
+  "operation_state": "complete",
+  "charged_seconds": 2.9479576251469553,
+  "grant_before": [
+    13304,
+    3755,
+    120080.87940059323,
+    "0.0"
+  ],
+  "grant_after": [
+    13305,
+    3755,
+    120083.82735821838,
+    "0.0"
+  ],
+  "no_refund_reset_or_retry": true,
+  "exact_downloaded_archive_and_context_retained": true,
+  "network_attempt_count_exact": "UNKNOWN;at least1 and at most2 from approved bounded code. Local attempts list was not persisted before guard failure.",
+  "image_build_started": false,
+  "output_image_absent": true,
+  "worker_started": false,
+  "host_canary_absent": true,
+  "source_unchanged": true,
+  "model_turns": 0,
+  "cash_usd": "0",
+  "all_images_and_existing_containers_untouched": true
+}

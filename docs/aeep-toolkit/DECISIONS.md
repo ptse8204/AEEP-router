@@ -2135,3 +2135,25 @@ common-source,identity,accounting and no-side-effect reconciliation. They passed
 and are not rerun. The failed runtime has a one-attempt boundary;prepare a new
 exact runtime-only review instead of silently replaying it. No scope expansion,
 budget reset,refund,new model call or scientific gate follows from this repair.
+
+## D123: Reuse the verified Git context and account for its inherited ELF loader
+
+The actual a11807f2attempt downloaded and verified the reviewed Git archive,then
+stopped before Docker because the expected dependency set omitted
+`ld-linux-aarch64.so.1`. Keep its completed operation and 2.9479576251469553seconds
+charged. The archive/context remain unchanged;the exact network-attempt count is
+unknown because the local list was lost at the guard failure. The bounded code
+allowed at most two attempts. Do not infer a precise count from elapsed time.
+
+A read-only export of the same retained parent verified its OCI configuration,
+all layers,the loader path/aliases,and the actual libc,PCRE2 and zlib files. The
+unchanged owned export and static ELF scratch were removed;no container started.
+The loader is inherited existing software. No library or package is added.
+
+Prepare a new exact cached-context review. Verify all19prepared files,modes,the
+archive and actual ELF names before the single COPY-only build. Allow no further
+download or extraction. Retain fresh contained Git/linker/local-command probes
+and every frozen task obligation. Keep all images and prior evidence. A new
+actual approval is required because the terminal review permits one attempt and
+forbids automatic retries. Package/docs/source checks remain complete;no model,
+architecture,threshold,spending or release decision follows from this repair.
